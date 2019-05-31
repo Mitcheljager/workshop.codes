@@ -44,45 +44,39 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     arel (9.0.0)
+    autoprefixer-rails (9.5.1.1)
+      execjs
+    bcrypt (3.1.12-x86-mingw32)
     bindex (0.7.0)
-    bootsnap (1.4.1)
-      msgpack (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
-    capybara (3.13.2)
+    capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
-      nokogiri (~> 1.8)
-      rack (>= 1.6.0)
-      rack-test (>= 0.6.3)
-      regexp_parser (~> 1.2)
-      xpath (~> 3.2)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (>= 2.0, < 4.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
-    duktape (2.0.1.0)
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.10.0-x86-mingw32)
+    ffi-win32-extensions (1.0.3)
+      ffi
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    heroku-deflater (0.6.3)
+      rack (>= 1.4.5)
+    high_voltage (3.0.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    io-like (0.3.0)
+    inline_svg (1.4.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -98,11 +92,11 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    msgpack (1.2.10-x86-mingw32)
     multi_json (1.13.1)
     nio4r (2.3.1)
     nokogiri (1.10.3-x86-mingw32)
       mini_portile2 (~> 2.4.0)
+    pg (1.1.4-x86-mingw32)
     public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
@@ -136,7 +130,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    regexp_parser (1.4.0)
     rubyzip (1.2.2)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -180,6 +173,9 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    win32-security (0.5.0)
+      ffi
+      ffi-win32-extensions
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -187,22 +183,25 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  bootsnap (>= 1.1.0)
+  autoprefixer-rails
+  bcrypt
   byebug
-  capybara (>= 2.15)
-  chromedriver-helper
-  coffee-rails (~> 4.2)
-  duktape
+  capybara (~> 2.13)
+  heroku-deflater
+  high_voltage (~> 3.0.0)
+  inline_svg
   jbuilder (~> 2.5)
-  puma (~> 3.11)
+  pg
+  puma (~> 3.7)
   rails (~> 5.2.3)
   sass-rails (~> 5.0)
   selenium-webdriver
-  sqlite3
+  sqlite3 (= 1.3.13)
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  win32-security
 
 RUBY VERSION
    ruby 2.3.3p222

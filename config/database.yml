@@ -23,7 +23,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: apexdata_production_database
+  database: workshop_codes_production_database
   pool: 5
-  username: apexdata
-  password: <%= ENV['APEXDATA_DATABASE_PASSWORD'] %>
+  username: workshop_codes
+  password: <%= ENV['WORKSHOP_CODES_DATABASE_PASSWORD'] %>

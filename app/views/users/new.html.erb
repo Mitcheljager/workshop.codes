@@ -1,0 +1,11 @@
+<% content_for :page_title, "Create an account" %>
+
+<div class="wrapper wrapper--tiny top-offset">
+  <div class="item item--full-width">
+    <h2 class="form-title">Create an account</h2>
+
+    <%= render "form", user: @user, url: users_path %>
+  </div>
+
+  <center><small>Already have an account? <%= link_to "Log in", login_path %></small></center>
+</div>

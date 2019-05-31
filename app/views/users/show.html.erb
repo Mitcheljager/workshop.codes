@@ -1,0 +1,12 @@
+<% content_for :page_title, "Your account" %>
+
+<div class="wrapper wrapper--tiny top-offset">
+  <div class="item item--full-width">
+    <div class="notice"><%= notice %></div>
+
+    <div>Logged in as <strong><%= current_user.username %></strong></div>
+
+    <%= link_to "Edit your account", edit_user_path %>
+    <%= link_to "Logout", logout_path %>
+  </div>
+</div>
