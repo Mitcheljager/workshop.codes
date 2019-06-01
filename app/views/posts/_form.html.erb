@@ -1,0 +1,73 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <h2>Categories</h2>
+
+    <%= form.select :categories, options_for_select(categories.collect { |c| [ c["name"], c["id"] ] }, (JSON.parse(@post.categories) if @post.heroes)), {}, { multiple: true, size: 5 } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tags %>
+    <%= form.text_field :tags %>
+  </div>
+
+  <div class="field">
+    <h2>Heroes</h2>
+
+    <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
+      <h3><%= hero_category %></h3>
+
+      <% heroes.each do |hero| %>
+        <div>
+          <%= form.check_box :heroes, { multiple: true, checked: (JSON.parse(@post.heroes).include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
+          <%= form.label "heroes_#{ hero["name"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }", hero["name"] %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>Maps</h2>
+
+    <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
+      <h3><%= map_type %></h3>
+
+      <% maps.each do |map| %>
+        <div>
+          <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps).include?(map["name"]) if @post.heroes) }, map["name"], false %>
+          <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "") }", map["name"] %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

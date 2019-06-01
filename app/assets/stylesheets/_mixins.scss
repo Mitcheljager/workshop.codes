@@ -1,0 +1,20 @@
+@mixin responsive-font-width($max-value, $max-width, $min-value: 10px) {
+  font-size: $min-value;
+
+  $percentage-of: ($min-value / $max-value) * 100;
+  $min-width: ($max-width / ($max-width * 0 + 1)) / 100 * $percentage-of;
+
+  @media (min-width: #{$min-width}px) {
+    font-size: ($max-value / ($max-value * 0 + 1)) / (($max-width / ($max-width * 0 + 1)) / 100) + vw;
+  }
+
+  @include media-min(max-width) {
+    font-size: $max-value;
+  }
+}
+
+@mixin media-min($media) {
+  @media (min-width: #{ map-get($media-min-widths, $media) }) {
+    @content;
+  }
+}

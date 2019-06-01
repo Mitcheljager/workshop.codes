@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_112006) do
+ActiveRecord::Schema.define(version: 2019_05_31_155619) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "code"
+    t.string "title"
+    t.text "description"
+    t.string "categories"
+    t.string "tags"
+    t.string "heroes"
+    t.string "maps"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "remember_tokens", force: :cascade do |t|
     t.integer "user_id"

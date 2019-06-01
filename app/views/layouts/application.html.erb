@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OverwatchWorkshop</title>
+    <title><% yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Workshop.codes">
+    <meta name="keywords" content="Workshop.codes">
+    <meta name="theme-color" content="#fa9901">
+
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="wrapper">
+      <%= render "navigation" %>
+
+      <%= yield %>
+
+      <%= render "footer" %>
+    </div>
   </body>
 </html>

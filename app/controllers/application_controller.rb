@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+  
   protect_from_forgery with: :exception
   before_action :login_from_cookie
 

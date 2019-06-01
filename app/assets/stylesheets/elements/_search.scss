@@ -1,0 +1,30 @@
+.search {
+  position: relative;
+
+  input {
+    &:placeholder-shown {
+      + label {
+        display: block;
+      }
+    }
+  }
+
+  label {
+    display: none;
+    position: absolute;
+    left: calc(#{ $search-height / 2} + .5em);
+    top: 50%;
+    transform: translateY(-50%);
+    font-style: italic;
+    font-size: 18px;
+    font-weight: lighter;
+    color: $text-color;
+    cursor: text;
+
+    strong {
+      color: $white;
+      font-size: 24px;
+      font-weight: lighter;
+    }
+  }
+}

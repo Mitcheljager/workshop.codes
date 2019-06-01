@@ -1,0 +1,28 @@
+.form-input {
+  display: inline-block;
+  background: $bg-dark;
+  padding: .5em 1em;
+  border: 0;
+  font-size: 16px;
+  color: $white;
+
+  &:focus {
+    outline: none;
+  }
+
+  &--large {
+    width: 100%;
+    height: $search-height;
+    padding: calc(#{ $search-height } - (1.5em * 2)) calc(#{ $search-height / 2} + .5em);
+    border-radius: $search-height / 2;
+    font-size: 24px;
+    font-weight: lighter;
+    line-height: 1.5em;
+    box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
+    transition: box-shadow 200ms;
+
+    &:focus {
+      box-shadow: 0 10px 40px 5px rgba($black, .2), 0 3px 12px 5px rgba($black, .2);
+    }
+  }
+}

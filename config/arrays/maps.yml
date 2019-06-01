@@ -1,0 +1,84 @@
+-
+  name: Hanamura
+  type: Assault
+-
+  name: Horizon Lunar Colony
+  type: Assault
+-
+  name: Paris
+  type: Assault
+-
+  name: Temple of Anubis
+  type: Assault
+-
+  name: Volskaya Industries
+  type: Assault
+-
+  name: Dorado
+  type: Escort
+-
+  name: Havana
+  type: Escort
+-
+  name: Junkertown
+  type: Escort
+-
+  name: Rialto
+  type: Escort
+-
+  name: Route 66
+  type: Escort
+-
+  name: "Watchpoint: Gibraltar"
+  type: Escort
+-
+  name: Blizzard World
+  type: Hybrid
+-
+  name: Eichenwalde
+  type: Hybrid
+-
+  name: Hollywood
+  type: Hybrid
+-
+  name: King's Row
+  type: Hybrid
+-
+  name: Numbani
+  type: Hybrid
+-
+  name: Busan
+  type: Control
+-
+  name: Ilios
+  type: Control
+-
+  name: Lijiang Tower
+  type: Control
+-
+  name: Nepal
+  type: Control
+-
+  name: Oasis
+  type: Control
+-
+  name: Black Forest
+  type: Arcade
+-
+  name: Castillo
+  type: Arcade
+-
+  name: "Ecopoint: Antarctica"
+  type: Arcade
+-
+  name: Necropolis
+  type: Arcade
+-
+  name: Château Guillard
+  type: Deathmatch
+-
+  name: Petra
+  type: Deathmatch
+-
+  name: Ayutthaya
+  type: Capture the Flag

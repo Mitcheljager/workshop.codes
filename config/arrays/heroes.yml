@@ -1,0 +1,90 @@
+-
+  name: D.va
+  category: Tank
+-
+  name: Orisa
+  category: Tank
+-
+  name: Reinhardt
+  category: Tank
+-
+  name: Roadhog
+  category: Tank
+-
+  name: Winston
+  category: Tank
+-
+  name: Wrecking Ball
+  category: Tank
+-
+  name: Zarya
+  category: Tank
+-
+  name: Ashe
+  category: Damage
+-
+  name: Bastion
+  category: Damage
+-
+  name: Doomfist
+  category: Damage
+-
+  name: Genji
+  category: Damage
+-
+  name: Hanzo
+  category: Damage
+-
+  name: Junkrat
+  category: Damage
+-
+  name: McCree
+  category: Damage
+-
+  name: Mei
+  category: Damage
+-
+  name: Pharah
+  category: Damage
+-
+  name: Reaper
+  category: Damage
+-
+  name: "Soldier: 76"
+  category: Damage
+-
+  name: Sombra
+  category: Damage
+-
+  name: Symmetra
+  category: Damage
+-
+  name: Torbjorn
+  category: Damage
+-
+  name: Tracer
+  category: Damage
+-
+  name: Widowmaker
+  category: Damage
+-
+  name: Ana
+  category: Support
+-
+  name: Baptiste
+  category: Support
+-
+  name: Brigitte
+  category: Support
+-
+  name: Lúcio
+  category: Support
+-
+  name: Mercy
+  category: Support
+-
+  name: Moira
+  category: Support
+-
+  name: Zenyatta
+  category: Support
