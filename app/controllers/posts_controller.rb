@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
-      redirect_to @post, notice: "Post was successfully created."
+      redirect_to post_path(@post.code), notice: "Post was successfully created."
     else
       render :new
     end
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: "Post was successfully updated."
+      redirect_to post_path(@post.code), notice: "Post was successfully updated."
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by_code(params[:code])
   end
 
   def post_params

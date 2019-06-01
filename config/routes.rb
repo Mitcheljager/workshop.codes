@@ -15,5 +15,8 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new", as: "login"
   get "logout", to: "sessions#destroy", as: "logout"
 
-  resources :posts, except: [:index]
+  resources :favorites, only: [:create]
+  delete "favorites", to: "favorites#destroy"
+
+  resources :posts, param: :code, path: "", except: [:index]
 end

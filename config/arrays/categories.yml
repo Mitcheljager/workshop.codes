@@ -1,48 +1,16 @@
--
-  id: 1
-  name: Free for all
--
-  id: 2
-  name: Team Deathmatch
--
-  id: 3
-  name: Solo
--
-  id: 4
-  name: Elimination
--
-  id: 5
-  name: 1vs1
--
-  id: 6
-  name: King of the Hill
--
-  id: 7
-  name: Boss Mode
--
-  id: 8
-  name: Minigames
--
-  id: 9
-  name: Parkour
--
-  id: 10
-  name: Survival
--
-  id: 11
-  name: Protect
--
-  id: 12
-  name: Hide and Seek
--
-  id: 13
-  name: PvE
--
-  id: 14
-  name: Hero Adjustments
--
-  id: 15
-  name: New Heroes
--
-  id: 16
-  name: Miscellaneous
+- Free for all
+- Team Deathmatch
+- Solo
+- Elimination
+- 1vs1
+- King of the Hill
+- Boss Mode
+- Minigames
+- Parkour
+- Survival
+- Protect
+- Hide and Seek
+- PvE
+- Hero Adjustments
+- New Heroes
+- Miscellaneous

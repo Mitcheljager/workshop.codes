@@ -1,44 +1,60 @@
-<p id="notice"><%= notice %></p>
+<article class="item item--single">
+  <div class="item__title">
+    <%= @post.title %>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
+    <%= render "favorites/form", post: @post %>
+  </div>
 
-<p>
-  <strong>Code:</strong>
-  <%= @post.code %>
-</p>
+  <div class="item__code">
+    <%= inline_svg "icons/icon-copy.svg", class: "favorite", data: { action: "copy-to-clipboard", target: @post.code } %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+    <span class="copy">
+      <span data-copy="<%= @post.code %>"><%= @post.code %></span>
+    </span>
+  </div>
+</article>
 
-<p>
-  <strong>Description:</strong>
+<article class="item item--bottom">
+  <div class="item__details">
+    <div class="item__details-item">
+      Categories |
+
+      <% JSON.parse(@post.categories).each do |category| %>
+        <%= link_to category, "#" %><%= "," unless category == JSON.parse(@post.categories).last %>
+      <% end %>
+    </div>
+
+    <% if @post.tags.present? %>
+      <div class="item__details-item">
+        Tags |
+
+        <% @post.tags.tr("[]", "").split(", ").each do |tag| %>
+          <%= link_to tag, "#", class: "tag" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="item__details-item">
+      Heroes |
+
+      <% JSON.parse(@post.heroes).each do |hero| %>
+        <%= link_to hero, "#" %><%= "," unless hero == JSON.parse(@post.heroes).last %>
+      <% end %>
+    </div>
+
+    <div class="item__details-item">
+      Maps |
+
+      <% JSON.parse(@post.maps).each do |map| %>
+        <%= link_to map, "#" %><%= "," unless map == JSON.parse(@post.maps).last %>
+      <% end %>
+    </div>
+  </div>
+</article>
+
+<div class="item__description">
   <%= markdown(@post.description) %>
-</p>
+</div>
 
-<p>
-  <strong>Categories:</strong>
-  <%= @post.categories %>
-</p>
-
-<p>
-  <strong>Tags:</strong>
-  <%= @post.tags %>
-</p>
-
-<p>
-  <strong>Heroes:</strong>
-  <%= @post.heroes %>
-</p>
-
-<p>
-  <strong>Maps:</strong>
-  <%= @post.maps %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Edit', edit_post_path(@post.code) %> |
 <%= link_to 'Back', posts_path %>

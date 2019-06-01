@@ -1,0 +1,2 @@
+ document.querySelector("[data-favorite='<%= @post.id %>']").innerHTML = `<%= render 'form', post: @post %>`
+document.querySelector("[data-favorite='<%= @post.id %>']").querySelector(".favorite").classList.add("favorite--animating")

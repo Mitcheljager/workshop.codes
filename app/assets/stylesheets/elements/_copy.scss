@@ -1,0 +1,25 @@
+.copy {
+  display: block;
+  position: relative;
+}
+
+@keyframes fade-out-notification {
+  to {
+    opacity: 0;
+  }
+}
+
+.copy__notification {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 110%;
+  padding: 0 .5em;
+  background: $primary;
+  font-weight: $font-stack;
+  font-size: 18px;
+  text-align: center;
+  animation: fade-out-notification 500ms forwards;
+  animation-delay: 500ms;
+}

@@ -1,4 +1,4 @@
-<%= form_with(model: post, local: true) do |form| %>
+<%= form_with url: path, model: post, local: true do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -11,60 +11,66 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
+  <div class="form-group-uneven">
+    <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
+    <%= form.text_field :code, class: "form-input form-input--large", placeholder: "Code" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-input form-textarea" %>
+  </div>
+
+  <h2 class="heading">Settings</h2>
+
+  <div class="form-group-columns">
+    <div class="field">
+      <%= form.label :categories, class: "form-label" %>
+      <%= form.select :categories, options_for_select(categories, (JSON.parse(@post.categories) if @post.heroes)), { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
+    </div>
+
+    <div class="field">
+      <%= form.label :tags, class: "form-label" %>
+      <%= form.text_field :tags, class: "form-input" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+    <h2 class="heading">Heroes</h2>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <h2>Categories</h2>
-
-    <%= form.select :categories, options_for_select(categories.collect { |c| [ c["name"], c["id"] ] }, (JSON.parse(@post.categories) if @post.heroes)), {}, { multiple: true, size: 5 } %>
-  </div>
-
-  <div class="field">
-    <%= form.label :tags %>
-    <%= form.text_field :tags %>
-  </div>
-
-  <div class="field">
-    <h2>Heroes</h2>
-
-    <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
-      <h3><%= hero_category %></h3>
-
-      <% heroes.each do |hero| %>
+    <div class="form-group-triple">
+      <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
         <div>
-          <%= form.check_box :heroes, { multiple: true, checked: (JSON.parse(@post.heroes).include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
-          <%= form.label "heroes_#{ hero["name"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }", hero["name"] %>
+          <h3><%= hero_category %></h3>
+
+          <% heroes.each do |hero| %>
+            <div>
+              <%= form.check_box :heroes, { multiple: true, checked: (JSON.parse(@post.heroes).include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
+              <%= form.label "heroes_#{ hero["name"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }", hero["name"] %>
+            </div>
+          <% end %>
         </div>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
   <div class="field">
-    <h2>Maps</h2>
+    <h2 class="heading">Maps</h2>
 
-    <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
-      <h3><%= map_type %></h3>
-
-      <% maps.each do |map| %>
+    <div class="form-group-triple">
+      <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
         <div>
-          <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps).include?(map["name"]) if @post.heroes) }, map["name"], false %>
-          <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "") }", map["name"] %>
+          <h3><%= map_type %></h3>
+
+          <% maps.each do |map| %>
+            <div>
+              <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps).include?(map["name"]) if @post.heroes) }, map["name"], false %>
+              <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "") }", map["name"] %>
+            </div>
+          <% end %>
         </div>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
   <div class="actions">

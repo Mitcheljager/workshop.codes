@@ -1,0 +1,126 @@
+.items {
+
+}
+
+.item {
+  display: grid;
+  grid-template:
+    "title code"
+    "details action";
+  grid-template-columns: calc(100% - 150px) 150px;
+  border-top: 1px solid $border-color;
+
+  &--single {
+    margin-top: $margin * 2;
+    border-top: 0;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &--bottom {
+    grid-template: "details";
+    border-top: 0;
+    margin-bottom: $margin;
+  }
+}
+
+.item__title {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $margin / 3;
+  padding-left: 0;
+  font-size: 21px;
+  font-weight: lighter;
+  color: $white;
+
+  .item--single & {
+    @include responsive-font-width(32px, map-get($media-min-widths, lg), 24px);
+    padding: ($margin / 6) ($margin / 3) ($margin / 6) 0;
+    line-height: 1.5em;
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.item__code {
+  grid-area: code;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-dark image-url("layout/pattern-bg-light.webp");
+  font-family: "bignoodletitlingregular";
+  font-style: italic;
+  font-size: 36px;
+  line-height: 1em;
+  color: $white;
+
+  svg {
+    height: 24px;
+    width: 24px;
+    margin-right: .25em;
+
+    path {
+      fill: $text-color-dark;
+    }
+  }
+}
+
+.item__details {
+  grid-area: details;
+  display: flex;
+  flex-wrap: wrap;
+  padding: $margin / 6 0 0;
+  color: $text-color-dark;
+  font-size: 14px;
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: $white;
+    }
+  }
+}
+
+.item__details-item {
+  margin-right: $margin / 2;
+  margin-bottom: $margin / 6;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.item__action {
+  grid-area: action;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $margin / 6 0;
+  font-family: "bignoodletitlingregular";
+  font-style: italic;
+  font-size: 24px;
+  color: $white;
+  text-decoration: none;
+  transition: padding 100ms;
+
+  &:hover,
+  &:active {
+    padding: $margin / 6;
+    background: $bg-dark;
+  }
+
+  svg {
+    height: 16px;
+
+    path {
+      fill: $primary;
+    }
+  }
+}

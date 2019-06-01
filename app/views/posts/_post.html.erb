@@ -1,0 +1,41 @@
+<article class="item">
+  <div class="item__title">
+    <%= link_to post.title, post_path(post.code) %>
+
+    <%= render "favorites/form", post: post %>
+  </div>
+
+  <div class="item__code">
+    <%= inline_svg "icons/icon-copy.svg", class: "favorite", data: { action: "copy-to-clipboard", target: post.code } %>
+
+    <span class="copy">
+      <span data-copy="<%= post.code %>"><%= post.code %></span>
+    </span>
+  </div>
+
+  <div class="item__details">
+    <div class="item__details-item">
+      Categories |
+
+      <% JSON.parse(post.categories).each do |category| %>
+        <%= link_to category, "#" %><%= "," unless category == JSON.parse(post.categories).last %>
+      <% end %>
+    </div>
+
+    <% if post.tags.present? %>
+      <div class="item__details-item">
+        Tags |
+
+        <% post.tags.tr("[]", "").split(", ").each do |tag| %>
+          <%= link_to tag, "#", class: "tag" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to post_path(post.code), class: "item__action" do %>
+    View more
+
+    <%= inline_svg "icons/icon-right-arrow.svg" %>
+  <% end %>
+</article>

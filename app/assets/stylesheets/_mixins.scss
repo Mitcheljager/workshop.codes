@@ -8,7 +8,7 @@
     font-size: ($max-value / ($max-value * 0 + 1)) / (($max-width / ($max-width * 0 + 1)) / 100) + vw;
   }
 
-  @include media-min(max-width) {
+  @include media-min(lg) {
     font-size: $max-value;
   }
 }

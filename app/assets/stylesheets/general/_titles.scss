@@ -1,0 +1,21 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: lighter;
+  color: $white;
+}
+
+.heading {
+  margin-top: $margin * 2;
+  margin-bottom: $margin;
+}
+
+h1 {
+  @include responsive-font-width(32px, map-get($media-min-widths, lg), 24px);
+}
+
+h2 {
+  @include responsive-font-width(28px, map-get($media-min-widths, lg), 21px);
+}

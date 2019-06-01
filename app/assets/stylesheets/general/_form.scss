@@ -1,8 +1,10 @@
 .form-input {
   display: inline-block;
   background: $bg-dark;
+  width: 100%;
   padding: .5em 1em;
   border: 0;
+  font-family: $font-stack;
   font-size: 16px;
   color: $white;
 
@@ -13,8 +15,7 @@
   &--large {
     width: 100%;
     height: $search-height;
-    padding: calc(#{ $search-height } - (1.5em * 2)) calc(#{ $search-height / 2} + .5em);
-    border-radius: $search-height / 2;
+    padding: calc(#{ $search-height } - (1.5em * 2)) $margin / 2;
     font-size: 24px;
     font-weight: lighter;
     line-height: 1.5em;
@@ -24,5 +25,78 @@
     &:focus {
       box-shadow: 0 10px 40px 5px rgba($black, .2), 0 3px 12px 5px rgba($black, .2);
     }
+  }
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 600px;
+  padding: $margin / 2;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: $margin / 6;
+  font-size: 18px;
+}
+
+.form-group {
+  margin-top: $margin;
+}
+
+.form-group-uneven {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: $margin / 2;
+}
+
+.form-group-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: $margin / 2;
+}
+
+.form-group-triple {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: $margin / 2;
+}
+
+.form-select {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: ($margin / 3) 2.5em ($margin / 3) ($margin / 3);
+  border: 0;
+  background: $bg-dark;
+  font-size: 16px;
+  color: $text-color;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $text-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  option {
+    color: $text-color;
+    background: $bg-dark;
+
+    &[disabled] {
+      color: darken($text-color, 20%);
+    }
+
+    &:checked {
+      background: linear-gradient($text-color, $text-color);
+    }
+  }
+}
+
+input[type="checkbox"] {
+  &:checked + label {
+    color: $white;
   }
 }

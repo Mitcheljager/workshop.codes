@@ -2,6 +2,9 @@
   position: relative;
 
   input {
+    padding: calc(#{ $search-height } - (1.5em * 2)) calc(#{ $search-height / 2} + .5em);
+    border-radius: $search-height / 2;
+
     &:placeholder-shown {
       + label {
         display: block;
@@ -12,7 +15,7 @@
   label {
     display: none;
     position: absolute;
-    left: calc(#{ $search-height / 2} + .5em);
+    left: calc(#{ $search-height / 2} + .75em);
     top: 50%;
     transform: translateY(-50%);
     font-style: italic;
