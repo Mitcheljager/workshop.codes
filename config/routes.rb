@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   delete "favorites", to: "favorites#destroy"
 
   resources :posts, param: :code, path: "", except: [:index]
+  get "search/:query", to: "posts#search", as: "search"
 end

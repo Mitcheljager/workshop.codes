@@ -5,6 +5,14 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def search
+    if params[:query]
+      @posts = Post.search_posts(params[:query])
+    else
+      @posts = []
+    end
+  end
+
   def show
   end
 

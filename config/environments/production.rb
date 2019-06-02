@@ -1,5 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV["SEARCHBOX_URL"]
 
   # Code is not reloaded between requests.
   config.cache_classes = true
