@@ -12,6 +12,11 @@
     outline: none;
   }
 
+  &::placeholder {
+    font-style: italic;
+    color: $text-color-dark;
+  }
+
   &--large {
     width: 100%;
     height: $search-height;
@@ -41,25 +46,31 @@
 }
 
 .form-group {
-  margin-top: $margin;
+  margin-top: $margin / 6;
 }
 
 .form-group-uneven {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-gap: $margin / 2;
+  @include media-min(sm) {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: $margin / 2;
+  }
 }
 
 .form-group-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: $margin / 2;
+  @include media-min(sm) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: $margin / 2;
+  }
 }
 
 .form-group-triple {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: $margin / 2;
+  @include media-min(sm) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: $margin / 2;
+  }
 }
 
 .form-select {
@@ -98,5 +109,17 @@
 input[type="checkbox"] {
   &:checked + label {
     color: $white;
+  }
+}
+
+.form-hint {
+  margin: $margin / 3 0;
+  font-size: 14px;
+  line-height: 1.25em;
+  font-style: italic;
+  color: $text-color-dark;
+
+  label + & {
+    margin-top: $margin / 3 - $margin / 6;
   }
 }

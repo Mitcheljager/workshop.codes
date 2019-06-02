@@ -17,3 +17,4 @@
 //= require dropdown
 //= require copy
 //= require favicon
+//= require checkbox-select-all

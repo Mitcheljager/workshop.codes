@@ -1,0 +1,26 @@
+.button {
+  display: inline-block;
+  padding: .5em 1em;
+  border: 0;
+  background: $primary;
+  color: $white;
+  font-size: 21px;
+  font-family: "bignoodletitlingregular";
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover:not([disabled]),
+  &:active:not([disabled]) {
+    background: $primary;
+    color: $white;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  &[disabled] {
+    opacity: .75;
+  }
+}

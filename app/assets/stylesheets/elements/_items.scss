@@ -86,6 +86,10 @@
       color: $white;
     }
   }
+
+  .item--bottom & {
+    display: block;
+  }
 }
 
 .item__details-item {
