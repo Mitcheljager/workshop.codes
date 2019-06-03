@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
+  concern :paginatable do
+    get "(page/:page)", action: :index, on: :collection, as: ""
+  end
+
   resources :users, param: :username, except: [:new, :index]
+  get "account", to: "users#account", as: "account", concerns: :paginatable
 
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -13,10 +18,6 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:create]
   delete "favorites", to: "favorites#destroy"
-
-  concern :paginatable do
-    get "(page/:page)", action: :index, on: :collection, as: ""
-  end
 
   get "on-fire", to: "posts#on_fire", as: "on_fire", concerns: :paginatable
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]

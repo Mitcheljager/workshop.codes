@@ -1,14 +1,22 @@
 .profile-block {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: flex-end;
   align-items: center;
   font-size: 14px;
+  white-space: nowrap;
+
+  @include media-min(md) {
+    flex-direction: row;
+  }
 }
 
 .profile-block__action {
   color: $white;
 
   &:last-of-type {
-    margin-right: $margin / 2;
+    @include media-min(md) {
+      margin-right: $margin / 2;
+    }
   }
 }

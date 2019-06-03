@@ -1,1 +1,13 @@
-<% content_for :page_title, "User" %>
+<% content_for :page_title, @user.username %>
+
+<div class="heading items-heading">
+  <h1>Workshop Codes by <strong><%= @user.username %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
+
+  <%= render "profile_block" %>
+</div>
+
+<main class="items">
+  <%= render "posts/posts" %>
+
+  <%= paginate @posts %>
+</main>

@@ -1,0 +1,66 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: $margin 0 0;
+
+  a,
+  .current {
+    display: block;
+    padding: .25em .5em;
+    margin: 0 .25em;
+    border: 0;
+    color: $white;
+    font-size: 21px;
+    font-family: "bignoodletitlingregular";
+    text-decoration: none;
+    text-align: center;
+  }
+
+  a {
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: $white;
+      box-shadow: inset 0 0 0 2px $white;
+    }
+  }
+}
+
+.page a {
+  display: none;
+  background: $bg-dark;
+  color: $text-color;
+
+  @include media-min(lg) {
+    display: block;
+  }
+}
+
+.gap {
+  display: none;
+  padding: .25em .5em;
+  margin: 0 .25em;
+
+  @include media-min(lg) {
+    display: block;
+  }
+}
+
+.first,
+.last {
+  display: none;
+
+  @include media-min(lg) {
+    display: block;
+  }
+}
+
+.prev a,
+.next a {
+  background: $primary;
+
+  @include media-min(lg) {
+    background: transparent;
+  }
+}

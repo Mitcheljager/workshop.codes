@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action only: [:show] do
+  before_action only: [:show, :account, :edit, :update, :destroy] do
     redirect_to login_path unless current_user
   end
 
@@ -12,8 +12,14 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find_by_username(params[:username])
+    @posts = @user.posts.order(updated_at: :desc).page(params[:page]).per(10)
+  end
+
+  def account
     @user = current_user
-    redirect_to root_path unless @user
+    @posts = @user.posts.order(updated_at: :desc)
+    @favorites = @user.favorites.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def new

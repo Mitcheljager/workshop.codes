@@ -3,17 +3,32 @@
 }
 
 .items-heading {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column-reverse;
+
+  @include media-min(md) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+  }
 
   h1 {
-    margin: 0;
+    margin-top: $margin / 2;
+    margin-bottom: 0;
+
+    @include media-min(md) {
+      margin: 0;
+    }
   }
 }
 
 .items-heading__action {
   width: $code-width;
+  margin-right: $margin / 2;
+
+  @include media-min(md) {
+    margin-right: 0;
+  }
 }
 
 .item {
@@ -21,15 +36,30 @@
   grid-template:
     "title"
     "details"
-    "code"
-    "action";
+    "action"
+    "code";
   border-top: 1px solid $border-color;
+  margin-bottom: $margin / 3;
 
   @include media-min(sm) {
     grid-template:
       "title code"
       "details action";
     grid-template-columns: calc(100% - #{ $code-width }) $code-width;
+    margin-bottom: 0;
+  }
+
+  &--small {
+    display: block;
+    padding-bottom: $margin / 3;
+    margin-bottom: 0;
+
+    @include media-min(lg) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0;
+    }
   }
 
   &--single {
@@ -50,11 +80,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $margin / 3;
-  padding-left: 0;
+  padding: $margin / 3 0;
   font-size: 21px;
   font-weight: lighter;
   color: $white;
+
+  @include media-min(sm) {
+    padding-right: $margin / 3;
+  }
 
   .item--single & {
     @include responsive-font-width(32px, map-get($media-min-widths, lg), 24px);
@@ -151,4 +184,13 @@
       fill: $primary;
     }
   }
+}
+
+.item__actions {
+  display: flex;
+  align-items: center;
+}
+
+.item__description {
+  line-height: 1.5em;
 }

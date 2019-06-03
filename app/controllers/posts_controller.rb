@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   before_action only: [:edit, :update, :destroy] do
-    redirect_to root_path unless current_user && current_user.id == @post.user_id
+    redirect_to root_path unless current_user && current_user == @post.user
   end
 
   before_action only: [:create, :new] do

@@ -43,6 +43,8 @@
 .favorite {
   -webkit-appearance: none;
   appearance: none;
+  display: flex;
+  align-items: center;
   border: 0;
   padding: 0;
   background: transparent;
@@ -108,4 +110,10 @@
       animation: grow-heart 500ms;
     }
   }
+}
+
+.favorite__label {
+  display: block;
+  font-weight: bold;
+  margin: 0 $margin / 3 0 $margin / 6;
 }

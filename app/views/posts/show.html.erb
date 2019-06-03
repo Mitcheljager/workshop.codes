@@ -17,6 +17,12 @@
 <article class="item item--bottom">
   <div class="item__details">
     <div class="item__details-item">
+      Made by |
+
+      <%= link_to @post.user.username, user_path(@post.user.username) %>
+    </div>
+
+    <div class="item__details-item">
       Categories |
 
       <% JSON.parse(@post.categories).each do |category| %>
@@ -56,11 +62,15 @@
       <%= @post.updated_at.to_formatted_s(:long_ordinal) %>
     </div>
   </div>
+
+  <div>
+    <% if current_user == @post.user %>
+      <br>
+      <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
+    <% end %>
+  </div>
 </article>
 
 <div class="item__description">
   <%= markdown(@post.description) %>
 </div>
-
-<%= link_to 'Edit', edit_post_path(@post.code) %> |
-<%= link_to 'Back', posts_path %>
