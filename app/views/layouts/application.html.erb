@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes - Overwatch Workshop Codes" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Workshop.codes">
-    <meta name="keywords" content="Workshop.codes">
-    <meta name="theme-color" content="#fa9901">
+    <meta name="description" content="Overwatch Workshop Codes, Games, and Items. Find fun Overwatch Game Modes to play with friends, randoms, or solo!">
+    <meta name="keywords" content="Overwatch, Workshop, Codes, Workshop Codes, Overwatch Workshop Codes">
+    <meta name="theme-color" content="#1f2326">
+
+    <link rel="manifest" href="/manifest.json">
 
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-32x32.png" %>" sizes="32x32" />
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-16x16.png" %>" sizes="16x16" />
