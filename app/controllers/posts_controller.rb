@@ -23,12 +23,12 @@ class PostsController < ApplicationController
   end
 
   def category
-    @posts = Post.order(updated_at: :desc).page(params[:page]).select { |post| to_slug(post.categories).include?(to_slug(params[:category])) }
+    @posts = Post.order(updated_at: :desc).select { |post| to_slug(post.categories).include?(to_slug(params[:category])) }
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
   end
 
   def hero
-    @posts = Post.order(updated_at: :desc).page(params[:page]).select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) }
+    @posts = Post.order(updated_at: :desc).select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) }
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
   end
 
