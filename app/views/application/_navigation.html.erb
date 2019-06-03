@@ -6,8 +6,8 @@
   </picture>
 <% end %>
 
-<%= form_tag "", class: "search" do %>
-  <%= text_field_tag :search, "", class: "form-input form-input--large", placeholder: " ", autocomplete: "off" %>
+<%= form_tag "", class: "search", data: { search: "" } do %>
+  <%= text_field_tag :search, params[:search], class: "form-input form-input--large", placeholder: " ", autocomplete: "off", data: { search_input: "" } %>
 
   <%= label_tag :search do %>
     <strong>Search</strong> by Titles, Categories, Tags, Codes, Maps, and Heroes
@@ -16,31 +16,31 @@
 
 <nav class="navigation">
   <div class="navigation__item">
-    <span class="navigation__label">Categories&nbsp;|&nbsp;</span>
+    <span class="navigation__label">Categories</span>
 
     <div class="navigation__dropdown" data-dropdown>
-      <%= link_to "Select...", "#", class: "navigation__dropdown-toggle", data: { action: "toggle-dropdown" } %>
+      <%= link_to params[:category] ? params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "navigation__dropdown-toggle", data: { action: "toggle-dropdown" } %>
 
       <div class="navigation__dropdown-content" data-dropdown-content>
         <% categories.each do |category| %>
-          <%= link_to category, "#", class: "navigation__dropdown-item" %>
+          <%= link_to category, category_path(to_slug(category)), class: "navigation__dropdown-item" %>
         <% end %>
       </div>
     </div>
   </div>
 
   <div class="navigation__item">
-    <span class="navigation__label">Heroes&nbsp;|&nbsp;</span>
+    <span class="navigation__label">Heroes</span>
 
     <div class="navigation__dropdown" data-dropdown>
-      <%= link_to "Select...", "#", class: "navigation__dropdown-toggle", data: { action: "toggle-dropdown" } %>
+      <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "navigation__dropdown-toggle", data: { action: "toggle-dropdown" } %>
 
       <div class="navigation__dropdown-content" data-dropdown-content>
         <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
           <span class="navigation__dropdown-label"><%= hero_category %></span>
 
           <% heroes.each do |hero| %>
-            <%= link_to hero["name"], "#", class: "navigation__dropdown-item" %>
+            <%= link_to hero["name"], hero_path(to_slug(hero["name"])), class: "navigation__dropdown-item" %>
           <% end %>
         <% end %>
 
@@ -49,17 +49,17 @@
   </div>
 
   <div class="navigation__item">
-    <span class="navigation__label">Maps&nbsp;|&nbsp;</span>
+    <span class="navigation__label">Maps</span>
 
     <div class="navigation__dropdown" data-dropdown>
-      <%= link_to "Select...", "#", class: "navigation__dropdown-toggle", data: { action: "toggle-dropdown" } %>
+    <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "navigation__dropdown-toggle", data: { action: "toggle-dropdown" } %>
 
       <div class="navigation__dropdown-content" data-dropdown-content>
         <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
           <span class="navigation__dropdown-label"><%= map_type %></span>
 
           <% maps.each do |map| %>
-            <%= link_to map["name"], "#", class: "navigation__dropdown-item" %>
+            <%= link_to map["name"], map_path(to_slug(map["name"])), class: "navigation__dropdown-item" %>
           <% end %>
         <% end %>
 

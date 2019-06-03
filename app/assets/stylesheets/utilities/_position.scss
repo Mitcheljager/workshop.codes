@@ -1,3 +1,11 @@
 .top-offset {
-  margin-top: $margin;
+  margin-top: $margin * 2;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-half {
+  margin-bottom: $margin / 2;
 }

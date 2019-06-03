@@ -13,10 +13,12 @@ $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica N
 $margin: 60px;
 $logo-height: 70px;
 $search-height: 80px;
+$code-width: 150px;
 
 $media-min-widths: (
   xs: 400px,
   sm: 640px,
   md: 768px,
-  lg: 900px
+  lg: 900px,
+  xl: 1100px
 )

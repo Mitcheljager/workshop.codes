@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       generate_remember_token if params[:remember_me]
       session[:user_id] = @user.id
-      redirect_to account_path
+      
+      redirect_to user_path(@user.id)
     else
       flash.now[:alert] = "Username or password is invalid"
       render "new"

@@ -13,6 +13,10 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
+  def to_slug(string)
+    string.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
+  end
+
   def maps
     YAML.load(File.read(Rails.root.join("config/arrays", "maps.yml")))
   end
@@ -23,5 +27,9 @@ module ApplicationHelper
 
   def categories
     YAML.load(File.read(Rails.root.join("config/arrays", "categories.yml")))
+  end
+
+  def quotes
+    YAML.load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
   end
 end

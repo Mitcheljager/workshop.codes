@@ -30,7 +30,8 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to account_path, notice: "User was successfully created."
+
+      redirect_to user_path(@user.username), notice: "User was successfully created."
     else
       render :new
     end
@@ -38,9 +39,10 @@ class UsersController < ApplicationController
 
   def update
     params[:user].delete(:password).delete(:password_confirmation) if params[:user][:password].blank?
+
     @user = current_user
     if @user.update(user_params)
-      redirect_to edit_user_path, notice: "User was successfully updated."
+      redirect_to user_path(@user.username), notice: "User was successfully updated."
     else
       render :edit
     end

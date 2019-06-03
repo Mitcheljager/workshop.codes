@@ -6,16 +6,20 @@ html,
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vw;
+  min-height: 100vh;
   font-family: $font-stack;
   font-size: 16px;
 }
 
 body {
   position: relative;
-  padding: $margin 10vw;
+  padding: $margin / 2 10vw;
   background: $body-bg image-url("layout/pattern-bg.webp");
   color: $text-color;
+
+  @include media-min(sm) {
+    padding: $margin 10vw;
+  }
 }
 
 a {
@@ -27,6 +31,42 @@ hr {
   margin: $margin 0;
   border: 0;
   background: $border-color;
+
+  &.small {
+    margin: $margin / 2 0;
+  }
+}
+
+code {
+  font-family: monospace;
+  font-size: 1em;
+  padding: 2px 4px;
+  color: $text-color;
+  background-color: $bg-dark;
+  border-radius: 2px;
+}
+
+pre {
+  background: $bg-dark;
+  border: 1px solid $border-color;
+  padding: .5rem;
+  line-height: 2rem;
+
+  code {
+    padding: 0;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+blockquote {
+  display: inline-block;
+  margin: $margin / 2 0;
+  padding: 1em 2em 1em 2em;
+  border-left: 3px solid $border-color;
+  background: rgba($black, .1);
+  line-height: 1.5em;
 }
 
 .body-bg {
@@ -34,11 +74,15 @@ hr {
   position: absolute;
   top: 0;
   left: 0;
-  height: 400px;
+  height: 210px;
   width: 100%;
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 100% 70px, 0% 100%);
   z-index: -1;
+
+  @include media-min(sm) {
+    height: 400px;
+  }
 
   img {
     width: 100%;

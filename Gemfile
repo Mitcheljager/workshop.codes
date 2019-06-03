@@ -10,12 +10,10 @@ gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.5"
 gem "inline_svg"
 gem "redcarpet"
+gem "kaminari"
 
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"
-
-gem "elasticsearch-model"
-gem "elasticsearch-rails"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
@@ -27,6 +25,7 @@ end
 group :development do
   gem "win32-security"
   gem "web-console", ">= 3.3.0"
+  gem "faker"
 end
 
 group :production do

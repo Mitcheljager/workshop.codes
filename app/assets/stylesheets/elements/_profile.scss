@@ -1,0 +1,14 @@
+.profile-block {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 14px;
+}
+
+.profile-block__action {
+  color: $white;
+
+  &:last-of-type {
+    margin-right: $margin / 2;
+  }
+}

@@ -1,0 +1,13 @@
+<main class="items">
+  <% if @posts.any? %>
+    <%= render @posts %>
+  <% else %>
+    <p>There doesn't seem to be anything here</p>
+
+    <blockquote>
+      <% quote = quotes.sample %>
+      <em><%= quote["quote"] %></em>
+      -&nbsp;<%= quote["by"] %>
+    </blockquote>
+  <% end %>
+</main>

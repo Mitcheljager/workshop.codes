@@ -2,13 +2,35 @@
 
 }
 
+.items-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.items-heading__action {
+  width: $code-width;
+}
+
 .item {
   display: grid;
   grid-template:
-    "title code"
-    "details action";
-  grid-template-columns: calc(100% - 150px) 150px;
+    "title"
+    "details"
+    "code"
+    "action";
   border-top: 1px solid $border-color;
+
+  @include media-min(sm) {
+    grid-template:
+      "title code"
+      "details action";
+    grid-template-columns: calc(100% - #{ $code-width }) $code-width;
+  }
 
   &--single {
     margin-top: $margin * 2;
@@ -51,6 +73,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: $margin / 6 0;
   background: $bg-dark image-url("layout/pattern-bg-light.webp");
   font-family: "bignoodletitlingregular";
   font-style: italic;
@@ -110,7 +133,7 @@
   font-family: "bignoodletitlingregular";
   font-style: italic;
   font-size: 24px;
-  color: $white;
+  color: $text-color-dark;
   text-decoration: none;
   transition: padding 100ms;
 
@@ -118,6 +141,7 @@
   &:active {
     padding: $margin / 6;
     background: $bg-dark;
+    color: $white;
   }
 
   svg {

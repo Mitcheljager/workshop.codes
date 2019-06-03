@@ -3,21 +3,25 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  resources :users, only: [:new, :create, :destroy]
-  get "user/edit", to: "users#edit", as: "edit_user"
-  get "user", to: "users#show", as: "account"
-  patch "user", to: "users#update", as: "update_user"
-  delete "user", to: "users#destroy", as: "destroy_user"
+  resources :users, param: :username, except: [:new, :index]
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  get "register", to: "users#new", as: "register"
+  get "register", to: "users#new", as: "new_user"
   get "login", to: "sessions#new", as: "login"
   get "logout", to: "sessions#destroy", as: "logout"
 
   resources :favorites, only: [:create]
   delete "favorites", to: "favorites#destroy"
 
-  resources :posts, param: :code, path: "", except: [:index]
-  get "search/:query", to: "posts#search", as: "search"
+  concern :paginatable do
+    get "(page/:page)", action: :index, on: :collection, as: ""
+  end
+
+  get "on-fire", to: "posts#on_fire", as: "on_fire", concerns: :paginatable
+  resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]
+  get "categories/:category", to: "posts#category", as: "category", concerns: :paginatable
+  get "heroes/:hero", to: "posts#hero", as: "hero", concerns: :paginatable
+  get "maps/:map", to: "posts#map", as: "map", concerns: :paginatable
+  get "search/:search", to: "posts#search", as: "search", concerns: :paginatable
 end

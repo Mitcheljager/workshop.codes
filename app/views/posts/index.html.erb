@@ -1,5 +1,23 @@
-<h1 class="heading">Posts</h1>
+<div class="heading items-heading">
+  <h1>Workshop Codes</h1>
+
+  <%= render "profile_block" %>
+</div>
 
 <main class="items">
-  <%= render @posts %>
+  <% unless params[:page] %>
+    <h2 class="top-offset">On Fire Items</h2>
+
+    <%= render @hot_posts %>
+
+    <hr class="mt-0 mb-half">
+
+    <%= link_to "View all On Fire Items", on_fire_path, class: "button" %>
+  <% end %>
+
+  <h2 class="top-offset">Recent Items <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h2>
+
+  <%= render "posts" %>
+
+  <%= paginate @posts %>
 </main>

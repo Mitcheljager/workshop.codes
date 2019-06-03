@@ -20,7 +20,7 @@
       Categories |
 
       <% JSON.parse(@post.categories).each do |category| %>
-        <%= link_to category, "#" %><%= "," unless category == JSON.parse(@post.categories).last %>
+        <%= link_to category, category_path(to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
       <% end %>
     </div>
 
@@ -29,7 +29,7 @@
         Tags |
 
         <% @post.tags.tr("[]", "").split(", ").each do |tag| %>
-          <%= link_to tag, "#", class: "tag" %>
+          <%= link_to tag, search_path(tag), class: "tag" %>
         <% end %>
       </div>
     <% end %>
@@ -38,7 +38,7 @@
       Heroes |
 
       <% JSON.parse(@post.heroes).each do |hero| %>
-        <%= link_to hero, "#" %><%= "," unless hero == JSON.parse(@post.heroes).last %>
+        <%= link_to hero, hero_path(to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
       <% end %>
     </div>
 
@@ -46,8 +46,14 @@
       Maps |
 
       <% JSON.parse(@post.maps).each do |map| %>
-        <%= link_to map, "#" %><%= "," unless map == JSON.parse(@post.maps).last %>
+        <%= link_to map, map_path(to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
       <% end %>
+    </div>
+
+    <div class="item__details-item">
+      Last updated |
+
+      <%= @post.updated_at.to_formatted_s(:long_ordinal) %>
     </div>
   </div>
 </article>

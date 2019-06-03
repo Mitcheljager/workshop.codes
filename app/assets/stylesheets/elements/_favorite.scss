@@ -68,6 +68,10 @@
     box-shadow: none;
   }
 
+  &[disabled] {
+    opacity: .5;
+  }
+
   &--is-active {
     &:hover,
     &:active {

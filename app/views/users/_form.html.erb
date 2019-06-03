@@ -1,34 +1,36 @@
-<%= form_for @user, url: url do |f| %>
-  <% if user.errors.any? %>
-    <div class="form-alert">
-      <div><strong><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</strong></div>
+<div class="form-group-columns">
+  <%= form_for @user, url: url do |f| %>
+    <% if user.errors.any? %>
+      <div class="form-alert">
+        <div><strong><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</strong></div>
 
-      <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><small><%= message %></small></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><small><%= message %></small></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-field">
+      <%= f.label :username, class: "form-label" %>
+      <%= f.text_field :username, placeholder: "Username", class: "form-input" %>
     </div>
+
+    <hr class="small">
+
+    <div class="form-field">
+      <%= f.label :password, class: "form-label" %>
+      <%= f.password_field :password, placeholder: "Password", class: "form-input" %>
+
+      <div class="form-hint">Please use a unique password that is different from the one you use for Overwatch. Passwords are encrypted and securely stored.</div>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :password_confirmation, class: "form-label" %>
+      <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-input" %>
+    </div>
+
+    <%= submit_tag "Submit", class: "button top-offset" %>
   <% end %>
-
-  <div class="form-field">
-    <%= f.label :username, class: "form-label" %>
-    <%= f.text_field :username, placeholder: "Username", class: "form-control" %>
-  </div>
-
-  <hr>
-
-  <div class="form-field">
-    <%= f.label :password, class: "form-label" %>
-    <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
-
-    <div class="form-hint">Please use a unique password that is different from the one you use for Overwatch. Passwords are encrypted and securely stored.</div>
-  </div>
-
-  <div class="form-field">
-    <%= f.label :password_confirmation, class: "form-label" %>
-    <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-control" %>
-  </div>
-
-  <%= submit_tag "Submit", class: "button" %>
-<% end %>
+</div>

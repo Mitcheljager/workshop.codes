@@ -61,7 +61,7 @@
   @include media-min(sm) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: $margin / 2;
+    grid-gap: $margin;
   }
 }
 
@@ -69,7 +69,7 @@
   @include media-min(sm) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: $margin / 2;
+    grid-gap: $margin;
   }
 }
 

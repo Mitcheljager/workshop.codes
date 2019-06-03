@@ -18,7 +18,7 @@
       Categories |
 
       <% JSON.parse(post.categories).each do |category| %>
-        <%= link_to category, "#" %><%= "," unless category == JSON.parse(post.categories).last %>
+        <%= link_to category, category_path(to_slug(category)) %><%= "," unless category == JSON.parse(post.categories).last %>
       <% end %>
     </div>
 
@@ -27,7 +27,7 @@
         Tags |
 
         <% post.tags.tr("[]", "").split(", ").each do |tag| %>
-          <%= link_to tag, "#", class: "tag" %>
+          <%= link_to tag, search_path(tag), class: "tag" %>
         <% end %>
       </div>
     <% end %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes" %></title>
+    <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes - Overwatch Workshop Codes" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,10 +10,8 @@
     <meta name="keywords" content="Workshop.codes">
     <meta name="theme-color" content="#fa9901">
 
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-dark-scheme-32x32.png" %>" sizes="32x32" id="favicon-dark-scheme" />
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-dark-scheme-16x16.png" %>" sizes="16x16" id="favicon-dark-scheme" />
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-32x32.png" %>" sizes="32x32" id="favicon-light-scheme" />
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-16x16.png" %>" sizes="16x16" id="favicon-light-scheme" />
+    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-32x32.png" %>" sizes="32x32" />
+    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-16x16.png" %>" sizes="16x16" />
 
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>

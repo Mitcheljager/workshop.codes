@@ -1,0 +1,12 @@
+<div class="heading items-heading">
+  <h1>Workshop Codes on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
+
+  <%= render "profile_block" %>
+</div>
+
+
+<main class="items">
+  <%= render "posts" %>
+
+  <%= paginate @posts %>
+</main>

@@ -1,0 +1,13 @@
+<div class="profile-block">
+  <div>
+    <% if current_user %>
+      Logged in as&nbsp;<%= link_to current_user.username, user_path(current_user.username), class: "profile-block__action" %>
+    <% else %>
+      <%= link_to "Login", login_path, class: "profile-block__action" %>
+      &nbsp;or&nbsp;
+      <%= link_to "Create an account", new_user_path, class: "profile-block__action" %>
+    <% end %>
+  </div>
+
+  <%= link_to "Create Item", new_post_path, class: "items-heading__action button" %>
+</div>

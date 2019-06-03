@@ -1,42 +1,42 @@
 <% content_for :page_title, "Login" %>
 
-<div class="wrapper wrapper--tiny top-offset">
-  <div class="item item--full-width">
-    <h2 class="form-title">Login</h2>
+<div class="top-offset">
+  <div class="form-group-columns">
+    <div>
+      <h1 class="mt-0">Login</h1>
 
-    <div class="form-alert"><%= alert %></div>
+      <div class="form-alert"><%= alert %></div>
 
-    <%= form_tag sessions_path do |form| %>
-      <div class="form-field">
-        <%= label_tag :username, "Username", class: "form-label" %>
-        <%= text_field_tag :username, "", placeholder: "Username", class: "form-control" %>
-      </div>
+      <%= form_tag sessions_path do |form| %>
+        <div class="form-group">
+          <%= label_tag :username, "Username", class: "form-label" %>
+          <%= text_field_tag :username, "", placeholder: "Username", class: "form-input" %>
+        </div>
 
-      <div class="form-field">
-        <%= label_tag :password, "Password", class: "form-label" %>
-        <%= password_field_tag :password, "", placeholder: "Password", class: "form-control" %>
-      </div>
+        <div class="form-group">
+          <%= label_tag :password, "Password", class: "form-label" %>
+          <%= password_field_tag :password, "", placeholder: "Password", class: "form-input" %>
+        </div>
 
-      <div class="form-field checkbox">
-        <%= check_box_tag :remember_me %>
-        <%= label_tag :remember_me, "Remember me (uses cookies)" %>
-      </div>
+        <div class="form-group checkbox">
+          <%= check_box_tag :remember_me %>
+          <%= label_tag :remember_me, "Remember me (uses cookies)" %>
+        </div>
 
-      <%= submit_tag "Submit", class: "button" %>
-    <% end %>
+        <hr class="small" />
 
-    <br>
+        <%= submit_tag "Submit", class: "button" %>
+      <% end %>
+    </div>
 
-    <small>Forgot your account? Please send an email to <a href="mailto:info@apexdata.gg">info@apexdata.gg</a></small>
+    <div>
+      <h1 class="mt-0">Create an account</h1>
 
-    <br>
+      <label class="form-label">
+        Don't have an account?
+      </label>
 
-    <hr>
-
-    <p>
-      Don't have an account?
-    </p>
-
-    <div><%= link_to "Create an account", new_user_path, class: "button button--small" %></div>
+      <div><%= link_to "Create an account", new_user_path, class: "button button--small" %></div>
+    </div>
   </div>
 </div>

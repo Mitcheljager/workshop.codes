@@ -18,3 +18,4 @@
 //= require copy
 //= require favicon
 //= require checkbox-select-all
+//= require search

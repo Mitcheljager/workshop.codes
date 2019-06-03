@@ -8,8 +8,13 @@ h5 {
 }
 
 .heading {
-  margin-top: $margin * 2;
-  margin-bottom: $margin;
+  margin-top: $margin;
+  margin-bottom: $margin / 2;
+
+  @include media-min(sm) {
+    margin-top: $margin * 2;
+    margin-bottom: $margin;
+  }
 }
 
 h1 {

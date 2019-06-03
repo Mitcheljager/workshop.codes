@@ -1,16 +1,44 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  before_action only: [:edit, :update, :destroy] do
+    redirect_to root_path unless current_user && current_user.id == @post.user_id
+  end
+
+  before_action only: [:create, :new] do
+    redirect_to root_path unless current_user
+  end
+
   def index
-    @posts = Post.all
+    @hot_posts = Post.where("updated_at >= ?", 1.week.ago).order(favorites_count: :desc).limit(3)
+    @posts = Post.order(updated_at: :desc).page params[:page]
   end
 
   def search
-    if params[:query]
-      @posts = Post.search_posts(params[:query])
-    else
-      @posts = []
-    end
+    query = params[:search].downcase
+
+    @posts = Post.where("title LIKE :search OR categories LIKE :search OR tags LIKE :search OR maps LIKE :search OR heroes LIKE :search", search: "%#{ query }%")
+    @posts.sort { |x, y| (x =~ query) <=> (y =~ query) }
+    @posts = @posts.page params[:page]
+  end
+
+  def category
+    @posts = Post.order(updated_at: :desc).page(params[:page]).select { |post| to_slug(post.categories).include?(to_slug(params[:category])) }
+    @posts = Kaminari.paginate_array(@posts).page(params[:page])
+  end
+
+  def hero
+    @posts = Post.order(updated_at: :desc).page(params[:page]).select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) }
+    @posts = Kaminari.paginate_array(@posts).page(params[:page])
+  end
+
+  def map
+    @posts = Post.order(updated_at: :desc).select { |post| to_slug(post.maps).include?(to_slug(params[:map])) }
+    @posts = Kaminari.paginate_array(@posts).page(params[:page])
+  end
+
+  def on_fire
+    @posts = Post.where("updated_at >= ?", 1.week.ago).order(favorites_count: :desc).page params[:page]
   end
 
   def show
@@ -28,7 +56,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
-      redirect_to post_path(@post.code), notice: "Post was successfully created."
+      redirect_to post_path(@post.code)
     else
       render :new
     end
@@ -36,7 +64,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to post_path(@post.code), notice: "Post was successfully updated."
+      redirect_to post_path(@post.code)
     else
       render :edit
     end
@@ -44,7 +72,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: "Post was successfully destroyed."
+    redirect_to posts_url
   end
 
   private

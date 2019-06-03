@@ -1,2 +1,2 @@
- document.querySelector("[data-favorite='<%= @post.id %>']").innerHTML = `<%= render 'form', post: @post %>`
-document.querySelector("[data-favorite='<%= @post.id %>']").querySelector(".favorite").classList.add("favorite--animating")
+document.querySelectorAll("[data-favorite='<%= @post.id %>']").forEach(element => element.innerHTML = `<%= render 'form', post: @post %>`)
+document.querySelectorAll("[data-favorite='<%= @post.id %>']").forEach(element => element.querySelector(".favorite").classList.add("favorite--animating"))

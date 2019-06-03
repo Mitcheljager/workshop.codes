@@ -12,7 +12,7 @@
 
   &:hover:not([disabled]),
   &:active:not([disabled]) {
-    background: $primary;
+    box-shadow: inset 0 0 0 2px $white;
     color: $white;
   }
 
