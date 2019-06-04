@@ -12,6 +12,7 @@
 
   @include media-min(md) {
     flex-direction: row;
+    justify-content: flex-end;
   }
 }
 
