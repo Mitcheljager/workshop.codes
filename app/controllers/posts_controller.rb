@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @hot_posts = Post.where("updated_at >= ?", 1.week.ago).order(favorites_count: :desc).limit(3)
+    @hot_posts = Post.where("updated_at >= ?", 1.week.ago).where("favorites_count > 0").order(favorites_count: :desc).limit(3)
     @posts = Post.order(updated_at: :desc).page params[:page]
   end
 
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.where("updated_at >= ?", 1.week.ago).order(favorites_count: :desc).page params[:page]
+    @posts = Post.where("updated_at >= ?", 1.week.ago).where("favorites_count > 0").order(favorites_count: :desc).page params[:page]
   end
 
   def show
