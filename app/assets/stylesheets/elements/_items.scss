@@ -193,4 +193,9 @@
 
 .item__description {
   line-height: 1.5em;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
