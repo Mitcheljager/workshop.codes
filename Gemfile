@@ -31,6 +31,7 @@ end
 group :production do
   gem "autoprefixer-rails"
   gem "heroku-deflater"
+  gem "scout_apm"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
