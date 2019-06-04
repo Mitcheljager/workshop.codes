@@ -1,8 +1,8 @@
 <div class="form-group-columns">
   <%= form_for @user, url: url do |f| %>
     <% if user.errors.any? %>
-      <div class="form-alert">
-        <div><strong><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</strong></div>
+      <div class="error-block">
+        <h2 class="error-block__title"><strong><%= pluralize(user.errors.count, "error") %></strong> prohibited this user from being saved:</h2>
 
         <ul>
           <% user.errors.full_messages.each do |message| %>

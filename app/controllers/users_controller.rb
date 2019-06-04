@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
 
-      redirect_to user_path(@user.username), notice: "User was successfully created."
+      redirect_to user_path(@user.username)
     else
       render :new
     end
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
     @user = current_user
     if @user.update(user_params)
-      redirect_to user_path(@user.username), notice: "User was successfully updated."
+      redirect_to account_path
     else
       render :edit
     end
@@ -56,6 +56,8 @@ class UsersController < ApplicationController
 
   def destroy
     current_user.destroy
+    current_user.posts.destroy_all
+    current_user.favorites.destroy_all
 
     session[:user_id] = nil
     redirect_to login_path

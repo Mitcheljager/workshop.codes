@@ -3,8 +3,11 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  resources :users, param: :username, except: [:new, :index]
+  resources :users, param: :username, except: [:new, :index, :edit, :update]
   get "account(/page/:page)", to: "users#account", as: "account"
+  get "edit", to: "users#edit", as: "edit_user"
+  patch "user", to: "users#update", as: "update_user"
+  delete "user", to: "users#destroy", as: "destroy_user"
 
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -25,4 +28,5 @@ Rails.application.routes.draw do
   get "heroes/:hero(/page/:page)", to: "posts#hero", as: "hero"
   get "maps/:map(/page/:page)", to: "posts#map", as: "map"
   get "search/:search(/page/:page)", to: "posts#search", as: "search"
+  post "search", to: "search#index", as: "search_post"
 end

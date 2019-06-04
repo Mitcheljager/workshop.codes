@@ -1,15 +1,33 @@
 <% content_for :page_title, "Your account" %>
 
-<main class="items">
-  <div class="heading items-heading">
-    <h1>Items you've liked</h1>
+<div class="heading items-heading">
+  <h1>Your account</h1>
 
-    <%= render "profile_block" %>
+  <%= render "profile_block" %>
+</div>
+
+<div class="profile">
+  You are logged in as <strong><%= current_user.username %></strong>
+
+  <p>
+    <%= link_to "Edit your account", edit_user_path, class: "button" %>
+  </p>
+
+  <p>
+    <%= link_to "Logout", logout_path, class: "button button--secondary" %>
+  </p>
+</div>
+
+<main class="items">
+  <div class="heading">
+    <h1>Items you've liked</h1>
   </div>
 
   <% @favorites.each do |favorite| %>
     <%= render "posts/post", post: favorite.post %>
   <% end %>
+
+  <%= tag.em "You've not yet Liked any items" if @favorites.blank? %>
 
   <%= paginate @favorites %>
 
