@@ -8,8 +8,6 @@ document.addEventListener("turbolinks:load", function() {
 function toggleCheckboxes(event) {
   const parent = this.closest("[data-checkbox-group]")
 
-  console.log(this)
-
   const checkboxes = parent.querySelectorAll("input[type='checkbox']")
   const state = this.checked
 

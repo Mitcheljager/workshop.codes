@@ -39,7 +39,7 @@
       <%= form.label :categories, class: "form-label" %>
 
       <div class="form-hint">
-        Select categories that fit your item. You can select as many categories as you see fit, but selecting a large amount of categories might result in your item being more difficult to find.
+        Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
       </div>
 
       <%= form.select :categories, options_for_select(categories, (JSON.parse(@post.categories) if @post.heroes)), { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
@@ -49,7 +49,7 @@
       <%= form.label :tags, class: "form-label" %>
 
       <div class="form-hint">
-        Choose tags that people might search for to find your item. A large amount of irrelevant tags might result in your item being more difficult to find. <strong>Separate tags with a comma and a space ",&nbsp;".</strong>
+        Choose tags that people might search for to find your item. You can choose up to 5 tags. A large amount of irrelevant tags might result in your item being more difficult to find. <strong>Separate tags with a comma and a space ",&nbsp;".</strong>
       </div>
 
       <%= form.text_field :tags, class: "form-input", placeholder: "These, are, separate, tags" %>
@@ -69,7 +69,7 @@
   <div data-checkbox-group>
     <h2 class="heading">Heroes</h2>
 
-    <div class="form-group">
+    <div class="form-group checkbox">
       <%= form.check_box :checkbox_group_heroes, data: { action: "checkbox-select-all" } %>
       <%= form.label :checkbox_group_heroes, "Check all Heroes" %>
     </div>
@@ -79,7 +79,7 @@
         <div class="form-group" data-checkbox-group>
           <h3><%= hero_category %></h3>
 
-          <div>
+          <div class="checkbox">
             <%= form.check_box "checkbox_group_#{ hero_category }", data: { action: "checkbox-select-all" } %>
             <%= form.label "checkbox_group_#{ hero_category }", "Check all #{ hero_category } Heroes" %>
           </div>
@@ -87,7 +87,7 @@
           <br>
 
           <% heroes.each do |hero| %>
-            <div>
+            <div class="checkbox">
               <%= form.check_box :heroes, { multiple: true, checked: (JSON.parse(@post.heroes).include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
               <%= form.label "heroes_#{ hero["name"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }", hero["name"] %>
             </div>
@@ -100,7 +100,7 @@
   <div data-checkbox-group>
     <h2 class="heading">Maps</h2>
 
-    <div class="form-group">
+    <div class="form-group checkbox">
       <%= form.check_box :checkbox_group_maps, data: { action: "checkbox-select-all" } %>
       <%= form.label :checkbox_group_maps, "Check all maps" %>
     </div>
@@ -110,7 +110,7 @@
         <div class="form-group" data-checkbox-group>
           <h3><%= map_type %></h3>
 
-          <div>
+          <div class="checkbox">
             <%= form.check_box "checkbox_group_#{ map_type }", data: { action: "checkbox-select-all" } %>
             <%= form.label "checkbox_group_#{ map_type }", "Check all #{ map_type } maps" %>
           </div>
@@ -118,7 +118,7 @@
           <br>
 
           <% maps.each do |map| %>
-            <div>
+            <div class="checkbox">
               <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps).include?(map["name"]) if @post.heroes) }, map["name"], false %>
               <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "") }", map["name"] %>
             </div>
