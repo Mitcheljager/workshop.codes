@@ -76,7 +76,11 @@
   &--bottom {
     grid-template: "details";
     border-top: 0;
-    margin-bottom: $margin;
+    margin-top: $margin;
+
+    @include media-min(md) {
+      margin-top: $margin * 2;
+    }
   }
 }
 
@@ -197,6 +201,7 @@
 }
 
 .item__description {
+  margin-top: $margin;
   line-height: 1.5em;
 
   img {
