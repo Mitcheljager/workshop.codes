@@ -1,4 +1,4 @@
-<% content_for :page_title, "#{ params[:map].humanize } #{ "| Page #{ params[:page] }" if params[:page] }" %>
+<% content_for :page_title, "#{ params[:map].gsub("-", " ").humanize } #{ "| Page #{ params[:page] }" if params[:page] }" %>
 
 <div class="heading items-heading">
   <h1>Workshop Codes on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
