@@ -1,10 +1,14 @@
 .profile-block {
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: column;
   font-size: 14px;
   white-space: nowrap;
+
+  @include media-min(sm) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   @include media-min(md) {
     flex-direction: row;
