@@ -1,3 +1,5 @@
+<% content_for :page_title, "Editing..." %>
+
 <h1 class="heading">Editing "<%= @post.title %>"</h1>
 
 <%= render "form", post: @post, path: post_path(@post.code) %>
