@@ -54,7 +54,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.tags = @post.tags.tr("[]", "").split(", ")
 
     if @post.save
       redirect_to post_path(@post.code)
