@@ -8,7 +8,7 @@
   </div>
 
   <div class="item__code">
-    <%= inline_svg "icons/icon-copy.svg", class: "copy", data: { action: "copy-to-clipboard", target: @post.code } %>
+    <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: @post.code } %>
 
     <span class="copy">
       <span data-copy="<%= @post.code %>"><%= @post.code %></span>
@@ -72,7 +72,7 @@
     <div class="item__details-item">
       Last updated |
 
-      <%= @post.updated_at.to_formatted_s(:long_ordinal) %>
+      <%= time_ago_in_words(@post.updated_at).humanize %> ago
     </div>
   </div>
 </article>

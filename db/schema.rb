@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_112758) do
+ActiveRecord::Schema.define(version: 2019_06_04_185531) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2019_06_03_112758) do
   create_table "remember_tokens", force: :cascade do |t|
     t.integer "user_id"
     t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "revisions", force: :cascade do |t|
+    t.integer "post_id"
+    t.string "code"
+    t.string "version"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
