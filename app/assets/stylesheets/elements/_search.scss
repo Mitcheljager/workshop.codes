@@ -23,6 +23,7 @@
     font-weight: lighter;
     color: $text-color;
     cursor: text;
+    pointer-events: none;
 
     @include media-min(sm) {
       font-size: 16px;
