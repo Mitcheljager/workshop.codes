@@ -47,6 +47,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    raise ActionController::RoutingError.new("Not Found") if @post.nil?
   end
 
   def new

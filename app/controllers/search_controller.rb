@@ -1,5 +1,9 @@
 class SearchController < ApplicationController
   def index
-    redirect_to search_path(params[:query].gsub(".", ""))
+    unless params[:query].empty?
+      redirect_to search_path(params[:query].gsub(".", ""))
+    else
+      redirect_back fallback_location: root_path
+    end
   end
 end
