@@ -17,3 +17,4 @@
 //= require dropdown
 //= require copy
 //= require checkbox-select-all
+//= require reveal-by-checkbox
