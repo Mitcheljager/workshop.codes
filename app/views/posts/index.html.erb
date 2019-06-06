@@ -8,7 +8,7 @@
 
 <main class="items">
   <% unless params[:page] %>
-    <h2 class="top-offset">On Fire Items</h2>
+    <h2 class="top-offset"><strong>On Fire</strong> Items</h2>
 
     <%= render @hot_posts %>
 
@@ -17,7 +17,7 @@
     <%= link_to "View all On Fire Items", on_fire_path, class: "button" %>
   <% end %>
 
-  <h2 class="top-offset">Recent Items <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h2>
+  <h2 class="top-offset"><strong>Recent</strong> Items <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h2>
 
   <%= render "posts" %>
 
