@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The change you wanted was rejected (422)</title>
+  <title>The change you wanted was rejected (422) | Workshop.codes</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
+    background-color: #1f2326;
+    color: #7e878d;
     text-align: center;
     font-family: arial, sans-serif;
     margin: 0;
@@ -19,21 +19,52 @@
   }
 
   .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
+    border: 1px solid #434355;
+    border-right-color: #434355;
+    border-left-color: #434355;
+    border-bottom-color: #434355;
+    border-top: #fa9901 solid 4px;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
+    background-color: #353b3f;
+    padding: 10px 40px 0;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
 
+  @media (min-width: 640px) {
+    .rails-default-error-page div.dialog > div {
+      padding: 10px 80px 0;
+    }
+  }
+
+  .rails-default-error-page div.dialog a {
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    padding: 0 20px 0 20px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 40px;
+    text-decoration: none;
+    background: #fa9901;
+    border: 0;
+    border-bottom: 1px solid #fa9901;
+    color: #FFF;
+    transition: padding 100ms;
+    cursor: pointer;
+    will-change: padding;
+  }
+
   .rails-default-error-page h1 {
+    font-size: 64px;
+    color: #FFF;
+    line-height: 1.5em;
+  }
+
+  .rails-default-error-page h2 {
     font-size: 100%;
-    color: #730E15;
+    color: #FFF;
     line-height: 1.5em;
   }
 
@@ -55,13 +86,13 @@
 </head>
 
 <body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
   <div class="dialog">
+    <h1>422</h1>
     <div>
-      <h1>The change you wanted was rejected.</h1>
+      <h2>The change you wanted was rejected.</h2>
       <p>Maybe you tried to change something you didn't have access to.</p>
+      <a href="/">Go back</a>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
 </html>
