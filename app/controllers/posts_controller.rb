@@ -18,9 +18,9 @@ class PostsController < ApplicationController
     query = params[:search].downcase
 
     if ActiveRecord::Base.connection.instance_values["config"][:adapter] == "sqlite3"
-      @posts = Post.where("title LIKE :search OR categories LIKE :search OR tags LIKE :search OR maps LIKE :search OR heroes LIKE :search", search: "%#{ query }%")
+      @posts = Post.where("title LIKE :search OR categories LIKE :search OR tags LIKE :search OR maps LIKE :search OR heroes LIKE :search OR code LIKE :search", search: "%#{ query }%")
     else
-      @posts = Post.where("title ILIKE :search OR categories ILIKE :search OR tags ILIKE :search OR maps ILIKE :search OR heroes ILIKE :search", search: "%#{ query }%")
+      @posts = Post.where("title ILIKE :search OR categories ILIKE :search OR tags ILIKE :search OR maps ILIKE :search OR heroes ILIKE :search OR code ILIKE :search", search: "%#{ query }%")
     end
 
     @posts.sort { |x, y| (x =~ query) <=> (y =~ query) }
