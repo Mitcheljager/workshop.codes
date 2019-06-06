@@ -13,8 +13,8 @@ namespace :db do
         description: Faker::Markdown.sandwich(10, 4),
         version: Faker::App.version,
         categories: ["Team Deathmatch", "Solo"],
-        heroes: ["#{ Faker::Games::Overwatch.hero }"],
-        maps: ["#{ Faker::Games::Overwatch.location }"],
+        heroes: ["Mei"],
+        maps: ["Havana"],
         tags: Faker::Lorem.word
       )
     end
