@@ -128,6 +128,34 @@
     </div>
   </div>
 
+  <% if @post.persisted? %>
+    <hr>
+
+    <h2>Update log</h2>
+
+    <div class="checkbox">
+      <%= form.check_box :revision, data: { action: "reveal-by-checkbox" } %>
+      <%= form.label :revision, "This is a revision" %>
+    </div>
+
+    <span class="form-hint">
+      Check this if this is an update and you'd like to keep the old code around. This will help your players keep if with what you've been updating and make sure they can always play the version of their liking.
+    </span>
+
+    <div data-role="hidden-by-checkbox">
+      <div class="form-group mt-half">
+        <%= form.label :revision_description, "Update Notes", class: "form-label" %>
+
+        <div class="form-hint">
+          Write a short summary of what has changed in this version in relation to the previous.
+          <strong>This description is full Markdown enabled.</strong>
+        </div>
+
+        <%= form.text_area :revision_description, class: "form-input form-textarea form-textarea--small" %>
+      </div>
+    </div>
+  <% end %>
+
   <hr>
 
   <div>

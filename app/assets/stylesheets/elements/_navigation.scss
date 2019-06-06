@@ -57,6 +57,11 @@
   color: $white;
   text-decoration: none;
   white-space: nowrap;
+
+  &:hover,
+  &:active {
+    color: lighten($white, 50%);
+  }
 }
 
 .navigation__dropdown-content {

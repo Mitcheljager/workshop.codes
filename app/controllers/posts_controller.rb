@@ -61,6 +61,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
+      @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version).save
       redirect_to post_path(@post.code)
     else
       render :new
@@ -68,6 +69,10 @@ class PostsController < ApplicationController
   end
 
   def update
+    if post_params[:revision].present? && post_params[:revision] != "0"
+      @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description]).save
+    end
+
     if @post.update(post_params)
       redirect_to post_path(@post.code)
     else
@@ -87,6 +92,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:code, :title, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] })
+    params.require(:post).permit(:code, :title, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :revision, :revision_description)
   end
 end

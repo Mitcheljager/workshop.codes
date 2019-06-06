@@ -24,6 +24,11 @@ body {
 
 a {
   color: $text-color;
+
+  &:hover,
+  &:active {
+    color: $white;
+  }
 }
 
 hr {

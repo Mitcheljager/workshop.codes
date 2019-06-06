@@ -1,5 +1,5 @@
 .profile {
-  
+
 }
 
 .profile-block {
@@ -22,6 +22,11 @@
 
 .profile-block__action {
   color: $white;
+
+  &:hover,
+  &:active {
+    color: lighten($white, 50%);
+  }
 
   &:last-of-type {
     @include media-min(md) {

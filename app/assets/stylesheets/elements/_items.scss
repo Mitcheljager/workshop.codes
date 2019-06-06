@@ -71,6 +71,10 @@
     margin-top: $margin * 2;
     border-top: 0;
     border-bottom: 1px solid $border-color;
+
+    + .item--bottom {
+      margin-top: 0;
+    }
   }
 
   &--bottom {
@@ -90,6 +94,7 @@
   align-items: center;
   justify-content: space-between;
   padding: $margin / 3 0;
+  margin: 0;
   font-size: 21px;
   font-weight: lighter;
   color: $white;
@@ -104,14 +109,34 @@
     line-height: 1.5em;
   }
 
+  &--small {
+    font-size: 18px;
+
+    .item--single & {
+      font-size: 18px;
+
+      @include media-min(sm) {
+        font-size: 24px;
+      }
+    }
+  }
+
   a {
     color: $white;
     text-decoration: none;
 
     &:hover,
     &:active {
-      box-shadow: 0 1px 0 $border-color;
       color: lighten($white, 50%);
+    }
+  }
+
+  small {
+    font-size: 12px;
+    color: $text-color;
+
+    @include media-min(sm) {
+      font-size: 18px;
     }
   }
 }

@@ -46,6 +46,10 @@ end
 class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :revisions, dependent: :destroy
+
+  attr_accessor :revision
+  attr_accessor :revision_description
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }

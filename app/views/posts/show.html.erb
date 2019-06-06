@@ -1,11 +1,11 @@
 <% content_for :page_title, @post.title %>
 
 <article class="item item--single">
-  <div class="item__title">
+  <h1 class="item__title">
     <%= @post.title %>
 
     <%= render "favorites/form", post: @post %>
-  </div>
+  </h1>
 
   <div class="item__code">
     <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: @post.code } %>
@@ -74,5 +74,15 @@
 
       <%= time_ago_in_words(@post.updated_at).humanize %> ago
     </div>
+
+    <% if @post.version %>
+      <div class="item__details-item">
+        Current version |
+
+        <%= @post.version %>
+      </div>
+    <% end %>
   </div>
 </article>
+
+<%= render "revisions" if @post.revisions.count > 1 %>
