@@ -124,4 +124,8 @@
   display: block;
   color: $text-color;
   padding: 1rem 1rem .5rem;
+
+  &:first-child {
+    padding-top: .5rem;
+  }
 }
