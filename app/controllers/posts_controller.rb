@@ -5,6 +5,8 @@ class PostsController < ApplicationController
     redirect_to root_path unless current_user && current_user == @post.user
   end
 
+  before_action :set_order, only: [:category, :hero, :map]
+
   before_action only: [:create, :new] do
     redirect_to root_path unless current_user
   end
@@ -28,17 +30,17 @@ class PostsController < ApplicationController
   end
 
   def category
-    @posts = Post.order(updated_at: :desc).select { |post| to_slug(post.categories).include?(to_slug(params[:category])) }
+    @posts = Post.order(@order).select { |post| to_slug(post.categories).include?(to_slug(params[:category])) }
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
   end
 
   def hero
-    @posts = Post.order(updated_at: :desc).select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) }
+    @posts = Post.order(@order).select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) }
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
   end
 
   def map
-    @posts = Post.order(updated_at: :desc).select { |post| to_slug(post.maps).include?(to_slug(params[:map])) }
+    @posts = Post.order(@order).select { |post| to_slug(post.maps).include?(to_slug(params[:map])) }
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
   end
 
@@ -90,6 +92,10 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by_code(params[:code])
+  end
+
+  def set_order
+    @order = params[:sort] ? "favorites_count DESC" : "updated_at DESC"
   end
 
   def post_params

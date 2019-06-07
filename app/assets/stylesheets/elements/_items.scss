@@ -8,7 +8,8 @@
 
   @include media-min(md) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: $margin / 2;
     justify-content: space-between;
   }
 

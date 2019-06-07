@@ -1,11 +1,20 @@
 <% content_for :page_title, "#{ params[:map].gsub("-", " ").humanize } #{ "| Page #{ params[:page] }" if params[:page] }" %>
 
-<div class="heading items-heading">
+<div class="heading items-heading mb-0">
   <h1>Workshop Codes on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
 
   <%= render "profile_block" %>
 </div>
 
+<div class="item item--bottom mt-0 mb-full">
+  <div class="item__details">
+    <div class="item__details-item">
+      Sort by |
+      <%= link_to "Recent", map_path(params[:map]), class: "#{ "text-white" if params[:sort].blank? }" %> |
+      <%= link_to "On fire", map_path(params[:map], "on-fire"), class: "#{ "text-white" unless params[:sort].blank? }" %>
+    </div>
+  </div>
+</div>
 
 <main class="items">
   <%= render "posts" %>

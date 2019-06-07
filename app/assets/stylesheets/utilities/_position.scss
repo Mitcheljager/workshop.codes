@@ -10,12 +10,20 @@
   margin-top: 0;
 }
 
+.mb-0 {
+  margin-bottom: 0;
+}
+
 .mt-half {
   margin-top: $margin / 2;
 }
 
 .mb-half {
   margin-bottom: $margin / 2;
+}
+
+.mb-full {
+  margin-bottom: $margin;
 }
 
 .ml-auto {
