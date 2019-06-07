@@ -2,21 +2,55 @@
 
 }
 
+@keyframes fade-in-navigation {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
 .profile-block {
-  display: flex;
-  flex-direction: column;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: $margin / 3;
+  background: $bg-dark;
   font-size: 14px;
   white-space: nowrap;
+  box-shadow: 0 6px 12px rgba($black, .25);
+  z-index: 10;
+
+  @media (max-width: #{ map-get($media-min-widths, sm) - 1 }) {
+    animation: fade-in-navigation 200ms;
+  }
 
   @include media-min(sm) {
+    position: relative;
+    display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   @include media-min(md) {
     flex-direction: row;
     justify-content: flex-end;
+  }
+
+  &--is-active {
+    display: block;
+
+    @include media-min(sm) {
+      display: flex;
+    }
   }
 }
 
@@ -32,5 +66,20 @@
     @include media-min(md) {
       margin-right: $margin / 2;
     }
+  }
+}
+
+.profile-block-mobile-trigger {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 28px;
+  line-height: 1em;
+  padding: .25rem;
+  z-index: 15;
+
+  @include media-min(sm) {
+    display: none;
   }
 }
