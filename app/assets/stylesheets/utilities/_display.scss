@@ -1,0 +1,27 @@
+.hidden {
+  display: none;
+}
+
+.hidden-sm {
+  @include media-min(sm) {
+    display: none;
+  }
+}
+
+.hidden-md {
+  @include media-min(md) {
+    display: none;
+  }
+}
+
+.visible-sm {
+  @include media-min(sm) {
+    display: initial;
+  }
+}
+
+.visible-md {
+  @include media-min(md) {
+    display: initial;
+  }
+}

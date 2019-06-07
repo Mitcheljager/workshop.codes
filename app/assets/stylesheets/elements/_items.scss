@@ -24,16 +24,8 @@
 }
 
 .items-heading__action {
-  width: $code-width;
-  margin-top: $margin / 2;
-
   @include media-min(sm) {
-    margin-right: $margin / 2;
-    margin-top: 0;
-  }
-
-  @include media-min(md) {
-    margin-right: 0;
+    width: $code-width;
   }
 }
 

@@ -4,18 +4,13 @@
 
 .profile-block {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   font-size: 14px;
   white-space: nowrap;
 
-  @include media-min(sm) {
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   @include media-min(md) {
-    flex-direction: row;
     justify-content: flex-end;
   }
 }
