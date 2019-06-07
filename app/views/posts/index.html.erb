@@ -1,7 +1,7 @@
 <% content_for :page_title, "All items | Page #{ params[:page] }" if params[:page] %>
 
 <div class="heading items-heading">
-  <h1>Overwatch Workshop Codes</h1>
+  <h1 class="hidden visible-sm">Overwatch Workshop Codes</h1>
 
   <%= render "profile_block" %>
 </div>
@@ -14,7 +14,7 @@
 
     <hr class="mt-0 mb-half">
 
-    <%= link_to "View all On Fire Items", on_fire_path, class: "button" %>
+    <%= link_to "View all On Fire Items", on_fire_path, class: "button button--secondary" %>
   <% end %>
 
   <h2 class="top-offset"><strong>Recent</strong> Items <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h2>
