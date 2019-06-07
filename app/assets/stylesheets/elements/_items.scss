@@ -14,11 +14,8 @@
   }
 
   h1 {
-    margin: 0;
-
-    @include media-min(sm) {
-      margin-top: $margin / 2;
-    }
+    margin-top: $margin / 2;
+    margin-bottom: 0;
 
     @include media-min(md) {
       margin: 0;
