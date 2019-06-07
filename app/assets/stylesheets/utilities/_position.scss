@@ -1,5 +1,9 @@
 .top-offset {
-  margin-top: $margin * 2;
+  margin-top: $margin;
+
+  @include media-min(sm) {
+    margin-top: $margin * 2;
+  }
 }
 
 .mt-0 {

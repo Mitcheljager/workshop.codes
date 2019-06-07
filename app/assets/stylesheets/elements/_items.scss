@@ -40,9 +40,8 @@
   display: grid;
   grid-template:
     "title"
-    "details"
-    "action"
-    "code";
+    "code"
+    "details";
   border-top: 1px solid $border-color;
   margin-bottom: $margin / 3;
 
@@ -68,9 +67,13 @@
   }
 
   &--single {
-    margin-top: $margin * 2;
+    margin-top: $margin;
     border-top: 0;
     border-bottom: 1px solid $border-color;
+
+    @include media-min(sm) {
+      margin-top: $margin * 2;
+    }
 
     + .item--bottom {
       margin-top: 0;
@@ -167,11 +170,15 @@
 
 .item__details {
   grid-area: details;
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
   padding: $margin / 6 0 0;
   color: $text-color-dark;
   font-size: 14px;
+
+  @include media-min(sm) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
   a {
     color: $text-color;
@@ -194,12 +201,16 @@
 
   &:last-child {
     margin-right: 0;
+
+    @media (max-width: #{map-get($media-min-widths, sm) - 1px}) {
+      margin-bottom: 0;
+    }
   }
 }
 
 .item__action {
   grid-area: action;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   padding: $margin / 6 0;
@@ -215,6 +226,10 @@
     padding: $margin / 6;
     background: $bg-dark;
     color: $white;
+  }
+
+  @include media-min(sm) {
+    display: flex;
   }
 
   svg {

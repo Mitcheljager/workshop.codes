@@ -58,9 +58,17 @@
   text-decoration: none;
   white-space: nowrap;
 
+  @supports not (clip-path: polygon(0 0)) {
+    color: $text-color-dark;
+  }
+
   &:hover,
   &:active {
     color: lighten($white, 50%);
+
+    @supports not (clip-path: polygon(0 0)) {
+      color: $black;
+    }
   }
 }
 
