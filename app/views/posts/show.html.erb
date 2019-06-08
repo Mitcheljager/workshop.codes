@@ -48,7 +48,7 @@
         Tags |
 
         <% @post.tags.tr("[]", "").split(", ").each do |tag| %>
-          <%= link_to tag, search_path(tag), class: "tag" %>
+          <%= link_to tag.downcase, search_path(tag.downcase), class: "tag" %>
         <% end %>
       </div>
     <% end %>
