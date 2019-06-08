@@ -8,7 +8,9 @@
   font-family: "bignoodletitlingregular";
   text-decoration: none;
   text-align: center;
+  box-shadow: inset 0 0 0 1px lighten($primary, 15%);
   cursor: pointer;
+  transition: box-shadow 100ms;
 
   &:hover:not([disabled]),
   &:active:not([disabled]) {
@@ -27,6 +29,7 @@
   &--secondary {
     color: $white;
     background: $bg-dark;
+    box-shadow: inset 0 0 0 1px lighten($bg-dark, 10%);
   }
 
   &--danger {
