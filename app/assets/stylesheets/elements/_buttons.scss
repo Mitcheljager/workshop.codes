@@ -34,5 +34,6 @@
 
   &--danger {
     background: $red;
+    box-shadow: inset 0 0 0 1px lighten($red, 15%);
   }
 }
