@@ -2,7 +2,7 @@
   <h2>Update Log</h2>
 </div>
 
-<% @post.revisions.order(created_at: :desc)[0...-1].each do |revision| %>
+<% @post.revisions.order(created_at: :desc).each do |revision| %>
   <div class="item item--single mt-half">
     <div class="item__title item__title--small">
       <%= "Version: " + revision.version unless revision.version.empty? %>
