@@ -74,6 +74,10 @@ blockquote {
   line-height: 1.5em;
 }
 
+[contenteditable]:focus {
+  outline: none;
+}
+
 .body-bg {
   display: block;
   position: absolute;
