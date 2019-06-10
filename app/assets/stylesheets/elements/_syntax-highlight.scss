@@ -7,7 +7,6 @@ $highlight-types: (
   purple: #C678DD
 );
 
-
 :root {
   @each $type, $value in $highlight-types {
     --color-#{ $type }: #{ $value };

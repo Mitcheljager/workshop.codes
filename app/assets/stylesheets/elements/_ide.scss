@@ -1,0 +1,53 @@
+.ide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.ide__content {
+  display: grid;
+  grid-template: "line-counter code";
+  grid-template-columns: 3em calc(100% - 3em);
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: auto;
+  tab-size: 2;
+}
+
+.ide__code {
+  position: relative;
+  grid-area: code;
+  display: block;
+  width: 500%;
+  height: 100%;
+  z-index: 1;
+
+  &::selection,
+  span::selection {
+    background: rgba($white, .1);
+  }
+}
+
+.ide__line-counter {
+  grid-area: line-counter;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid lighten($border-color, 5%);
+  color: lighten($border-color, 10%);
+  z-index: 1;
+}
+
+.ide__active-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2em;
+  width: 100%;
+  background: rgba($white, .05);
+  transform: translateY(-50%);
+  z-index: 0;
+}
