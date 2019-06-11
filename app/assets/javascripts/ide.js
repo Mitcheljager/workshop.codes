@@ -11,6 +11,9 @@ document.addEventListener("turbolinks:load", function() {
   element.removeEventListener("click", () => { setLineHighlight(element) })
   element.addEventListener("click", () => { setLineHighlight(element) })
 
+  element.removeEventListener("keyup", () => { setLineHighlight(element); keyPress(element) })
+  element.addEventListener("keyup", () => { setLineHighlight(element); keyPress(element) })
+
   synxtaxHighlight(element)
 })
 
@@ -125,7 +128,7 @@ function getCursorPosition(element) {
   let sel = document.getSelection()
   sel.modify("extend", "backward", "documentboundary")
   let pos = sel.toString().length
-  console.log("pos: " + pos)
+
   if (sel.anchorNode != undefined) sel.collapseToEnd()
 
   return pos
@@ -207,7 +210,19 @@ function setLineHighlight(element) {
   const currentActiveLine = element.closest("pre").querySelector(".ide__active-line")
   if (currentActiveLine) currentActiveLine.remove()
 
-  element.append(activeLine)
+  element.closest(".ide__code-wrapper").append(activeLine)
 
   currentLinePosition = lineOffset
+}
+
+function keyPress(element) {
+  if (event.which == 13 || event.keyCode == 13) {
+    const currentCursorPosition = getCursorPosition()
+    const range = selection.getRangeAt(0)
+    const linebreak = document.createTextNode("\n")
+
+    range.insertNode(linebreak)
+
+    setCurrentCursorPosition(element, currentCursorPosition)
+  }
 }

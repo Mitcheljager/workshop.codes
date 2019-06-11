@@ -17,13 +17,18 @@
   tab-size: 2;
 }
 
-.ide__code {
+.ide__code-wrapper {
   position: relative;
   grid-area: code;
-  display: block;
   width: 500%;
   height: 100%;
   z-index: 1;
+}
+
+.ide__code {
+  display: block;
+  width: 100%;
+  height: 100%;
 
   &::selection,
   span::selection {
@@ -44,10 +49,11 @@
 .ide__active-line {
   position: absolute;
   top: 0;
-  left: 0;
+  left: -5em;
   height: 2em;
   width: 100%;
   background: rgba($white, .05);
   transform: translateY(-50%);
   z-index: 0;
+  pointer-events: none;
 }
