@@ -6,15 +6,7 @@
   </picture>
 <% end %>
 
-<%= form_tag search_post_path, class: "search" do %>
-  <%= text_field_tag :query, params[:search], class: "form-input form-input--large", placeholder: " " %>
-
-  <%= label_tag :query do %>
-    <strong>Search</strong> by Titles, Categories, Tags, Codes, Maps, and Heroes
-  <% end %>
-
-  <%= submit_tag "", class: "search__submit" %>
-<% end %>
+<%= render "search" %>
 
 <nav class="navigation">
   <div class="navigation__item">
