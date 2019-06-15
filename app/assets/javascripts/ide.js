@@ -118,6 +118,8 @@ function createRules() {
   let index = 0
   array.forEach((rule, index) => {
     const item = document.createElement("div")
+    if (index == currentContent) item.classList.add("active")
+
     item.innerHTML = rule
     item.dataset.contentIndex = index
     item.addEventListener("click", changeCurrentContent)
@@ -131,10 +133,15 @@ function createRules() {
 
 function changeCurrentContent(event) {
   const element = document.querySelector("[data-role='ide-content']")
+  const activeElement = element.closest(".ide").querySelector(".active")
+
+  if (activeElement) activeElement.classList.remove("active")
+  this.classList.add("active")
 
   currentContent = this.dataset.contentIndex
   element.innerHTML = content[currentContent]
 
+  microlight.reset()
   createLineCount(element)
 }
 

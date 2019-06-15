@@ -2,7 +2,10 @@ $color-base: #cbf6fb;
 
 $highlight-types: (
   string: #98C379,
-  punctuation: rgba($color-base, .3)
+  punctuation: rgba($color-base, .3),
+  keyword: #E06C75,
+  number: #D19A66,
+  comment: rgba($color-base, .2)
 );
 
 .syntax-highlight {
