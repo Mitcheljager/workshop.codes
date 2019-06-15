@@ -105,6 +105,7 @@
     &:active,
     &.active {
       color: $white;
+      background: linear-gradient(to right, rgba($white, 0) 0%,rgba($white, 0.05) 50%,rgba($white, 0) 100%);
     }
   }
 }
