@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require microlight
 
 //= require dropdown
 //= require copy

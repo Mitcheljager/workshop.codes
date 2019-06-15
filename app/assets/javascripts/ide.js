@@ -1,12 +1,14 @@
-let content = ""
+let content = []
+let currentContent = 0
+let rulesList = []
 let currentLineCount = 0
 let currentLinePosition = 0
 
 document.addEventListener("turbolinks:load", function() {
-  const element = document.querySelector("[data-role='ide']")
+  const element = document.querySelector("[data-role='ide-content']")
 
-  element.removeEventListener("input", () => { synxtaxHighlight(element) })
-  element.addEventListener("input", () => { synxtaxHighlight(element) })
+  element.removeEventListener("input", () => { syntaxHighlight(element) })
+  element.addEventListener("input", () => { syntaxHighlight(element) })
 
   element.removeEventListener("click", () => { setLineHighlight(element) })
   element.addEventListener("click", () => { setLineHighlight(element) })
@@ -14,114 +16,126 @@ document.addEventListener("turbolinks:load", function() {
   element.removeEventListener("keyup", () => { setLineHighlight(element); keyPress(element) })
   element.addEventListener("keyup", () => { setLineHighlight(element); keyPress(element) })
 
-  synxtaxHighlight(element)
+  initiateIde(element)
 })
 
-function synxtaxHighlight(element) {
-  content = element.textContent
+function initiateIde(element) {
+  setAllContent(element)
+  createRules()
+}
 
-  const simples = {
-    "Event Player": "cyan",
-    "All Players": "cyan",
-    "Each Player": "cyan",
-    "All Teams": "cyan",
-    "Players In Slot": "red",
-    "event": "red",
-    "Global": "red",
-    "Variable": "red",
-    "Position Of": "red",
-    "Destroy": "red",
-    "HUD Text": "red",
-    "Effect": "red",
-    "In-World Text": "red",
-    "Has Spawned": "red",
-    "Player Died": "red",
-    "Visible To": "red",
-    "Ongoing": "red",
-    "rule": "red",
-    "actions": "red",
-    "conditions": "red",
-    "Match Time": "red",
-    "Built-In Game Mode Completion": "red",
-    "Ignore Condition": "red",
-    "Team": "red",
-    "Slot": "red",
-    "True": "orange",
-    "False": "orange",
-    "Null": "orange",
-    "String": "orange",
-    "Create": "purple",
-    "Set": "purple",
-    "Divide": "purple",
-    "Multiply": "purple",
-    "Add": "purple",
-    "Subtract": "purple",
-    "Disable": "purple",
-    "Pause": "purple",
-    "Teleport": "purple",
-    "Wait": "purple",
-    "Loop": "purple",
-    "Vector": "blue",
-    "Facing Direction Of": "blue",
-    "Horizontal Angle From Direction": "blue",
-    "Vertical Angle From Direction": "blue",
-    "Resurrect": "blue",
-    "Hero Of": "blue",
-    "Hero": "blue",
-    "Facing": "blue",
-    "Respawn": "blue",
-    "Respawn Max Time": "blue"
-  }
-
+function syntaxHighlight(element) {
   const currentCursorPosition = getCursorPosition()
 
-  createStrings(element)
-
-  for (let key in simples) {
-    createSimple(element, key, simples[key])
-  }
-
-  element.innerHTML = content
-  removeChilds(element)
-  createLineCount(element)
+  microlight.reset()
 
   setCurrentCursorPosition(element, currentCursorPosition)
 }
 
-function createStrings(element) {
-  let matches = content.match(/\".*?\"/g)
-  matches = Array.from(new Set(matches))
-  const cssClass = "syntax-highlight syntax-highlight--green"
+function setAllContent(element) {
+  content = element.textContent
+  content = content.split("rule(")
+  content.shift()
+  content.forEach((rule, index) => { content[index] = "rule(" + content[index]; index++; })
 
-  if (!matches) return
+  element.innerHTML = content[currentContent]
+}
 
-  matches.forEach(match => {
-    content = content.replace(match, `<span class="${ cssClass }">${ match }</span>`)
+function createLineCount(element) {
+  const pre = element.closest("pre")
+
+  const lineCount = content[currentContent].split("\n").length
+
+  if (lineCount == currentLineCount) return
+
+  const lineCountElement = pre.querySelector(".ide__line-counter")
+  lineCountElement.innerHTML = ""
+
+  for (let i = 0; i < lineCount; i++) {
+    const element = document.createElement("div")
+    element.textContent = currentLineCount + i + 1
+
+    lineCountElement.append(element)
+  }
+
+  currentLineCount = lineCount
+}
+
+function setLineHighlight(element) {
+  selection = window.getSelection()
+  let range = selection.getRangeAt(0)
+
+  const lineFinder = document.createElement("span")
+
+  range.insertNode(lineFinder)
+
+  const offsetTop = lineFinder.getBoundingClientRect().top
+  const scrollTop = element.closest("pre").scrollTop
+  const lineOffset = offsetTop + scrollTop
+
+  if (lineOffset == currentLinePosition) return
+
+  const activeLine = document.createElement("span")
+  activeLine.classList.add("ide__active-line")
+  activeLine.style.top = lineOffset + "px"
+
+  const currentActiveLine = element.closest("pre").querySelector(".ide__active-line")
+  if (currentActiveLine) currentActiveLine.remove()
+
+  element.closest(".ide__code-wrapper").append(activeLine)
+
+  currentLinePosition = lineOffset
+}
+
+function keyPress(element) {
+  if (event.which == 13 || event.keyCode == 13) {
+    const currentCursorPosition = getCursorPosition()
+    const range = selection.getRangeAt(0)
+    const linebreak = document.createTextNode("\n")
+
+    range.insertNode(linebreak)
+
+    setCurrentCursorPosition(element, currentCursorPosition)
+  }
+}
+
+function createRules() {
+  const element = document.querySelector("[data-role='ide-rules']")
+  element.innerHTML = ""
+
+  let array = []
+
+  content.forEach(item => {
+    const matches = item.match(/rule\("(.*)"\)/g)
+
+    if (!matches) return
+
+    array.push(matches.map(rule => rule.replace('rule("', "").replace('")', "")))
   })
-}
 
-function createSimple(element, string, color) {
-  const cssClass = `syntax-highlight syntax-highlight--${ color }`
-  content = content.replace(new RegExp(string, "g"), `<span class="${ cssClass }">${ string }</span>`)
-}
+  if (array.length == rulesList.length) return
 
-function createNumbers(element) {
-  let matches = content.match(/\d+\.?\d*/g)
+  let index = 0
+  array.forEach((rule, index) => {
+    const item = document.createElement("div")
+    item.innerHTML = rule
+    item.dataset.contentIndex = index
+    item.addEventListener("click", changeCurrentContent)
 
-  matches = Array.from(new Set(matches))
-  const cssClass = "syntax-highlight syntax-highlight--orange"
-
-  if (!matches) return
-
-  matches.forEach(match => {
-    content = content.replace(new RegExp(match, "g"), `<span class="${ cssClass }">${ match }</span>`)
+    element.append(item)
+    index++
   })
+
+  rulesList = array
 }
 
-function removeChilds(element) {
-  const elements = element.querySelectorAll("span.syntax-highlight span.syntax-highlight")
+function changeCurrentContent(event) {
+  const element = document.querySelector("[data-role='ide-content']")
 
-  elements.forEach(element => element.className = "")
+  currentContent = this.dataset.contentIndex
+  element.innerHTML = content[currentContent]
+
+  createLineCount(element)
 }
 
 function getCursorPosition(element) {
@@ -173,56 +187,5 @@ function setCurrentCursorPosition(element, position) {
     range.collapse(false)
     selection.removeAllRanges()
     selection.addRange(range)
-  }
-}
-
-function createLineCount(element) {
-  const pre = element.closest("pre")
-
-  const newLineCount = element.innerHTML.split("\n").length
-
-  for (var i = 0; i < newLineCount - currentLineCount; i++) {
-    var line_num = pre.querySelector(".ide__line-counter")
-    line_num.innerHTML += "<span>" + (currentLineCount + i + 1) + "</span>"
-  }
-
-  currentLineCount = newLineCount
-}
-
-function setLineHighlight(element) {
-  selection = window.getSelection()
-  let range = selection.getRangeAt(0)
-
-  const lineFinder = document.createElement("span")
-
-  range.insertNode(lineFinder)
-
-  const offsetTop = lineFinder.getBoundingClientRect().top
-  const scrollTop = element.closest("pre").scrollTop
-  const lineOffset = offsetTop + scrollTop
-
-  if (lineOffset == currentLinePosition) return
-
-  const activeLine = document.createElement("span")
-  activeLine.classList.add("ide__active-line")
-  activeLine.style.top = lineOffset + "px"
-
-  const currentActiveLine = element.closest("pre").querySelector(".ide__active-line")
-  if (currentActiveLine) currentActiveLine.remove()
-
-  element.closest(".ide__code-wrapper").append(activeLine)
-
-  currentLinePosition = lineOffset
-}
-
-function keyPress(element) {
-  if (event.which == 13 || event.keyCode == 13) {
-    const currentCursorPosition = getCursorPosition()
-    const range = selection.getRangeAt(0)
-    const linebreak = document.createTextNode("\n")
-
-    range.insertNode(linebreak)
-
-    setCurrentCursorPosition(element, currentCursorPosition)
   }
 }

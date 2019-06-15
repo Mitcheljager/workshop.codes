@@ -1,11 +1,13 @@
+$color-base: #cbf6fb;
+
 $highlight-types: (
-  green: #98C379,
-  red: #E06C75,
-  blue: #61AFEF,
-  cyan: #56B6C2,
-  orange: #D19A66,
-  purple: #C678DD
+  string: #98C379,
+  punctuation: rgba($color-base, .3)
 );
+
+.syntax-highlight {
+  color: $color-base;
+}
 
 :root {
   @each $type, $value in $highlight-types {
@@ -13,10 +15,8 @@ $highlight-types: (
   }
 }
 
-.syntax-highlight {
-  @each $type, $value in $highlight-types {
-    &--#{ $type } {
-      color: var(--color-#{ $type });
-    }
+@each $type, $value in $highlight-types {
+  .#{ $type } {
+    color: var(--color-#{ $type });
   }
 }
