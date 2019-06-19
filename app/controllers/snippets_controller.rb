@@ -1,6 +1,14 @@
 class SnippetsController < ApplicationController
   before_action :set_snippet, only: [:show, :edit, :update, :destroy]
 
+  before_action only: [:edit, :update, :destroy] do
+    redirect_to root_path unless current_user && current_user == @snippet.user
+  end
+
+  before_action only: [:create, :new] do
+    redirect_to root_path unless current_user
+  end
+
   def index
     @snippets = Snippet.order(created_at: :desc).page params[:page]
   end

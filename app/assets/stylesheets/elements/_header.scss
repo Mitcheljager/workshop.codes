@@ -16,12 +16,16 @@
 
 .header__item {
   display: block;
-  margin-right: $margin / 3;
+  margin-right: $margin / 6;
   color: lighten($white, 50%);
   text-decoration: none;
   font-family: "bignoodletitlingregular";
   font-style: italic;
   font-size: 36px;
+
+  @include media-min(sm) {
+    margin-right: $margin / 3;
+  }
 
   &:hover,
   &:active {
@@ -47,6 +51,14 @@
       height: 5px;
       border-radius: 10px;
       background: $bg-dark;
+    }
+  }
+
+  img {
+    height: 28px;
+
+    @include media-min(sm) {
+      height: 34px;
     }
   }
 }
