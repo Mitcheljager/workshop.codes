@@ -34,4 +34,8 @@
     border: 4px solid $background;
     background-color: $text-color;
   }
+
+  &::-webkit-scrollbar-corner {
+    background: $bg-dark;
+  }
 }

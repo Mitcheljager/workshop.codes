@@ -1,0 +1,19 @@
+<% content_for :page_title, "Snippets" %>
+
+<div class="heading items-heading mb-half">
+  <h1 class="hidden visible-sm">Overwatch Workshop Snippets</h1>
+
+  <%= render "profile_block", path: new_snippet_path, text: "Create Snippet" %>
+</div>
+
+<div class="w-md-75">
+  Find Snippets made by other creators to use in your own projects. Learn how others build their projects by reading their code and description.
+</div>
+
+<main class="items">
+  <h2 class="top-offset"><strong>All</strong> Snippets <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h2>
+
+  <%= render @snippets %>
+
+  <%= paginate @snippets %>
+</main>

@@ -72,7 +72,6 @@ class PostsController < ApplicationController
   end
 
   def update
-
     if @post.update(post_params)
       if post_params[:revision].present? && post_params[:revision] != "0"
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description]).save

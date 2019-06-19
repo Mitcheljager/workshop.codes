@@ -2,6 +2,7 @@
   display: grid;
   grid-template: "sidebar content";
   grid-template-columns: 250px calc(100% - 250px);
+  min-height: 300px;
   margin-top: $margin * 2;
   box-shadow: 0 5px 15px rgba($black, .5);
 
@@ -12,6 +13,11 @@
     height: 100vh;
     width: 100vw;
     margin-top: 0;
+  }
+
+  &--input {
+    grid-template: "content";
+    grid-template-columns: 100%;
   }
 }
 
@@ -31,9 +37,6 @@
 
 .ide__content {
   grid-area: content;
-  display: grid;
-  grid-template: "line-counter code";
-  grid-template-columns: 3em calc(100% - 3em);
   height: 100%;
   width: 100%;
   max-height: 75vh;
@@ -49,27 +52,29 @@
 }
 
 .ide__code-wrapper {
-  position: relative;
   grid-area: code;
+  display: grid;
+  grid-template: "line-counter code";
+  grid-template-columns: 3em calc(100% - 3em);
+  position: relative;
   width: 500%;
   height: 100%;
   z-index: 1;
-  padding: 0 .5rem;
 }
 
 .ide__code {
   display: block;
   width: 100%;
   height: 100%;
-  color: #B5F7FF;
+  padding: 0 .5rem;
 
   &::selection,
   span::selection {
     background: rgba($white, .1);
   }
 
-  span {
-    text-shadow: none !important;
+  .ide--input & {
+    padding: 1rem;
   }
 }
 
@@ -96,9 +101,13 @@
 }
 
 .ide__rules {
+  font-style: italic;
+  font-size: 14px;
+
   > div {
     padding: .5em 0;
     border-bottom: 1px solid $border-color;
+    font-style: normal;
     cursor: pointer;
 
     &:hover,
@@ -107,5 +116,13 @@
       color: $white;
       background: linear-gradient(to right, rgba($white, 0) 0%,rgba($white, 0.05) 50%,rgba($white, 0) 100%);
     }
+
+    &:first-child {
+      border-top: 1px solid $border-color;
+    }
   }
+}
+
+.ide__title {
+  margin: 0 0 $margin / 3;
 }

@@ -50,14 +50,13 @@
                 //  1: operator or brace
                 //  2: closing braces (after which '/' is division not regex)
                 //  3: (key)word
-                //  4: regex
+                //  4: numbers
                 //  5: string starting with "
                 //  6: string starting with '
                 //  7: xml comment  <!-- -->
                 //  8: multiline comment /* */
                 //  9: single-line comment starting with two slashes //
                 // 10: single-line comment starting with hash #
-                // 11: numbers
                 tokenType = 0,
 
                 // kept to determine between regex and division
@@ -152,7 +151,7 @@
                     // determining the new token type (going up the
                     // list until matching a token type start
                     // condition)
-                    tokenType = 11;
+                    tokenType = 10;
                     while (![
                         1,                   //  0: whitespace
                                              //  1: operator or braces
@@ -167,7 +166,6 @@
                         chr+next1 == '/*',   //  8: multiline comment
                         chr+next1 == '//',   //  9: single-line comment
                         chr == '#',          // 10: hash-style comment
-                        /[$\w]/[test](chr),  // 11: special
                     ][--tokenType]);
                 }
 

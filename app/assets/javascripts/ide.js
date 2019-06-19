@@ -5,23 +5,37 @@ let currentLineCount = 0
 let currentLinePosition = 0
 
 document.addEventListener("turbolinks:load", function() {
+  resetValues()
+
   const element = document.querySelector("[data-role='ide-content']")
+  const inputs = document.querySelectorAll("[data-role='ide-input']")
 
-  element.removeEventListener("input", () => { syntaxHighlight(element) })
-  element.addEventListener("input", () => { syntaxHighlight(element) })
+  inputs.forEach(input => input.removeEventListener("input", setIdeViaInput))
+  inputs.forEach(input => input.addEventListener("input", setIdeViaInput))
 
-  element.removeEventListener("click", () => { setLineHighlight(element) })
-  element.addEventListener("click", () => { setLineHighlight(element) })
-
-  element.removeEventListener("keyup", () => { setLineHighlight(element); keyPress(element) })
-  element.addEventListener("keyup", () => { setLineHighlight(element); keyPress(element) })
-
-  initiateIde(element)
+  if (element) initiateIde(element)
 })
 
 function initiateIde(element) {
-  setAllContent(element)
+  const valueElement = document.querySelector("[data-role='ide-input']")
+  const value = valueElement ? valueElement.value : element.textContent
+
+  setAllContent(element, value)
   createRules()
+  createLineCount(element)
+
+  microlight.reset()
+}
+
+function setIdeViaInput(event) {
+  const element = document.querySelector("[data-role='ide-content']")
+  const value = this.value
+
+  setAllContent(element, value)
+  createRules(element)
+  createLineCount(element)
+
+  microlight.reset()
 }
 
 function syntaxHighlight(element) {
@@ -30,18 +44,26 @@ function syntaxHighlight(element) {
   microlight.reset()
 
   setCurrentCursorPosition(element, currentCursorPosition)
+
+  content[currentContent] = element.innerText
 }
 
-function setAllContent(element) {
-  content = element.textContent
-  content = content.split("rule(")
-  content.shift()
-  content.forEach((rule, index) => { content[index] = "rule(" + content[index]; index++; })
+function setAllContent(element, value) {
+  if (content) {
+    content = value
+    content = content.split("rule(")
+    content.shift()
+    content.forEach((rule, index) => { content[index] = "rule(" + content[index]; index++; })
+  }
+
+  if (!content.length) content = [value]
 
   element.innerHTML = content[currentContent]
 }
 
 function createLineCount(element) {
+  if (!content.length) return
+
   const pre = element.closest("pre")
 
   const lineCount = content[currentContent].split("\n").length
@@ -53,7 +75,7 @@ function createLineCount(element) {
 
   for (let i = 0; i < lineCount; i++) {
     const element = document.createElement("div")
-    element.textContent = currentLineCount + i + 1
+    element.textContent = i + 1
 
     lineCountElement.append(element)
   }
@@ -100,12 +122,18 @@ function keyPress(element) {
 }
 
 function createRules() {
+  if (!content.length) return
+
   const element = document.querySelector("[data-role='ide-rules']")
-  element.innerHTML = ""
 
   let array = []
+  let flattenedContent = content.join()
 
-  content.forEach(item => {
+  let contentArray = flattenedContent.split("rule(")
+  element.innerHTML = contentArray.length ? "" : "No Rules are declared."
+
+  contentArray.forEach(item => {
+    item = item.replace(/^/, "rule(")
     const matches = item.match(/rule\("(.*)"\)/g)
 
     if (!matches) return
@@ -113,11 +141,12 @@ function createRules() {
     array.push(matches.map(rule => rule.replace('rule("', "").replace('")', "")))
   })
 
-  if (array.length == rulesList.length) return
+  contentArray.shift()
 
   let index = 0
   array.forEach((rule, index) => {
     const item = document.createElement("div")
+
     if (index == currentContent) item.classList.add("active")
 
     item.innerHTML = rule
@@ -128,7 +157,11 @@ function createRules() {
     index++
   })
 
-  rulesList = array
+  rulesList = contentArray
+}
+
+function moveContent(array, from, to) {
+  return array.splice(to, 0, this.splice(from, 1)[0])
 }
 
 function changeCurrentContent(event) {
@@ -195,4 +228,29 @@ function setCurrentCursorPosition(element, position) {
     selection.removeAllRanges()
     selection.addRange(range)
   }
+}
+
+function createGlobalVariables(element) {
+  const matches = new Set(content[currentContent].match(/(Global Variable\()[A-Z]{1}/g))
+  const cssClass = "syntax-highlight syntax-highlight--white"
+  const contentPlaceholder = content[currentContent]
+
+  matches.forEach(match => {
+    element.textContent.replace(match, "Hey")
+    console.log(match)
+  })
+
+  element.innerHTML = contentPlaceholder
+}
+
+function replaceAt(string, index, replace) {
+  return string.substring(0, index) + replace + string.substring(index + 1);
+}
+
+function resetValues() {
+  content = []
+  currentContent = 0
+  rulesList = []
+  currentLineCount = 0
+  currentLinePosition = 0
 }

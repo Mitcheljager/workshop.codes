@@ -1,0 +1,53 @@
+<article class="item item--single">
+  <h1 class="item__title">
+    <%= @snippet.title %>
+  </h1>
+
+  <small class="align-self-center text-sm-right mb-half mb-sm-0">
+    Made by |
+
+    <%= link_to @snippet.user.username, user_path(@snippet.user.username) %>
+  </small>
+</article>
+
+<div>
+  <% if current_user == @snippet.user %>
+    <br>
+    <%= link_to "Edit your item", edit_snippet_path(@snippet.unique_id), class: "button" %>
+  <% end %>
+</div>
+
+<div class="ide mt-half">
+  <div class="ide__sidebar">
+    <h3 class="ide__title">Rules</h3>
+
+    <div class="ide__rules" data-role="ide-rules">
+      No Rules are declared.
+    </div>
+  </div>
+
+  <%= tag.pre(
+    tag.div(
+      tag.div(class: "ide__line-counter") +
+      tag.code(@snippet.content,
+        class: "ide__code microlight syntax-highlight",
+        spellcheck: "false",
+        data: { role: "ide-content" }),
+      class: "ide__code-wrapper"),
+    class: "ide__content")
+  %>
+</div>
+
+<article class="item__description">
+  <%= markdown(@snippet.description) %>
+</article>
+
+<article class="item item--bottom">
+  <div class="item__details">
+    <div class="item__details-item">
+      Last updated |
+
+      <%= time_ago_in_words(@snippet.updated_at).humanize %> ago
+    </div>
+  </div>
+</article>

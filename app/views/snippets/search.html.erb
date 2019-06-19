@@ -1,0 +1,13 @@
+<% content_for :page_title, "Search Snippets | #{ params[:search] }" %>
+
+<div class="heading items-heading">
+  <h1>Snippets for <strong><%= params[:search] %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
+
+  <%= render "profile_block", path: new_snippet_path, text: "Create Snippet" %>
+</div>
+
+<main class="items">
+  <%= render "snippets" %>
+
+  <%= paginate @snippets %>
+</main>

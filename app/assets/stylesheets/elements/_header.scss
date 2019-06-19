@@ -1,0 +1,52 @@
+.header {
+  position: relative;
+  width: 100%;
+  margin-bottom: $margin / 2;
+
+  @include media-min(lg) {
+    margin-bottom: $margin;
+  }
+}
+
+.header__navigation {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: $margin / 3;
+}
+
+.header__item {
+  display: block;
+  margin-right: $margin / 3;
+  color: lighten($white, 50%);
+  text-decoration: none;
+  font-family: "bignoodletitlingregular";
+  font-style: italic;
+  font-size: 36px;
+
+  &:hover,
+  &:active {
+    img {
+      filter: drop-shadow(1px 1px 0 $primary);
+    }
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &--active {
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 90%;
+      height: 5px;
+      border-radius: 10px;
+      background: $bg-dark;
+    }
+  }
+}

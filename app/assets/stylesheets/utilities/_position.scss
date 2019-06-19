@@ -18,6 +18,10 @@
   margin-top: $margin / 2;
 }
 
+.mt-full {
+  margin-top: $margin;
+}
+
 .mb-half {
   margin-bottom: $margin / 2;
 }
@@ -28,4 +32,20 @@
 
 .ml-auto {
   margin-left: auto;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.mb-sm-0 {
+  @include media-min(sm) {
+    margin-bottom: 0;
+  }
+}
+
+.w-md-75 {
+  @include media-min(md) {
+    width: 75%;
+  }
 }

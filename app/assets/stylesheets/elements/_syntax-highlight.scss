@@ -2,14 +2,15 @@ $color-base: #cbf6fb;
 
 $highlight-types: (
   string: #98C379,
-  punctuation: rgba($color-base, .3),
+  punctuation: darken($text-color, 10%),
   keyword: #E06C75,
   number: #D19A66,
-  comment: rgba($color-base, .2)
+  comment: $text-color-dark,
+  variable: #56B6C2
 );
 
 .syntax-highlight {
-  color: $color-base;
+  color: lighten($text-color, 10%);
 }
 
 :root {
