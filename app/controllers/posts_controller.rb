@@ -49,6 +49,11 @@ class PostsController < ApplicationController
   end
 
   def show
+    if @post.nil?
+      revision = Revision.find_by_code(params[:code])
+      @post = revision.post if revision
+    end
+
     raise ActionController::RoutingError.new("Not Found") if @post.nil?
   end
 
