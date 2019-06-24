@@ -68,6 +68,6 @@ class SnippetsController < ApplicationController
   end
 
   def snippet_params
-    params.require(:snippet).permit(:title, :content, :description)
+    params.require(:snippet).permit(:title, :content, :description, :proficiency)
   end
 end

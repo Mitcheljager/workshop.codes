@@ -5,16 +5,18 @@ document.addEventListener("turbolinks:load", function() {
   elements.forEach((element) => element.addEventListener("click", copyToClipboard))
 })
 
-function copyToClipboard(event) {
+function copyToClipboard(event, optionalContent = undefined) {
   event.preventDefault()
 
-  const target = this.dataset.target
+  const element = this.length == undefined ? this : event.srcElement
+
+  const target = element.dataset.target
   const targetElement = document.querySelector(`[data-copy="${ target }"]`)
 
   if (!targetElement) return
 
   const input = document.createElement("textarea")
-  input.value = targetElement.innerHTML
+  input.value = optionalContent || targetElement.textContent
   document.body.appendChild(input)
 
   input.select()
@@ -25,7 +27,9 @@ function copyToClipboard(event) {
   notificationElement.classList.add("copy__notification")
   notificationElement.innerHTML = "Copied"
 
-  targetElement.closest(".copy").append(notificationElement)
+  let copyParent = targetElement.closest(".copy")
+  if (!copyParent) copyParent = element
+  copyParent.append(notificationElement)
 
-  setTimeout(() => { targetElement.closest(".copy").querySelector(".copy__notification").remove() }, 1000)
+  setTimeout(() => { copyParent.querySelector(".copy__notification").remove() }, 1000)
 }

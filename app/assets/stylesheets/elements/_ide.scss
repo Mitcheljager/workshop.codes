@@ -1,17 +1,23 @@
 .ide {
+  position: relative;
   display: grid;
-  grid-template: "sidebar content";
-  grid-template-columns: 250px calc(100% - 250px);
+  grid-template: "sidebar"
+                 "content";
   min-height: 300px;
-  margin-top: $margin * 2;
+  margin-top: $margin / 2;
   box-shadow: 0 5px 15px rgba($black, .5);
+
+  @include media-min("lg") {
+    grid-template: "sidebar content";
+    grid-template-columns: 250px calc(100% - 250px);
+  }
 
   &--fullscreen {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     margin-top: 0;
   }
 
@@ -41,8 +47,15 @@
   width: 100%;
   max-height: 75vh;
   margin: 0;
+  font-size: 12px;
+  line-height: 2em;
   overflow: auto;
   tab-size: 2;
+
+  @include media-min("lg") {
+    font-size: 14px;
+    line-height: 2em;
+  }
 
   @include styled-scrollbar();
 
@@ -56,7 +69,6 @@
   display: grid;
   grid-template: "line-counter code";
   grid-template-columns: 3em calc(100% - 3em);
-  position: relative;
   width: 500%;
   height: 100%;
   z-index: 1;
@@ -125,4 +137,37 @@
 
 .ide__title {
   margin: 0 0 $margin / 3;
+}
+
+.ide__tray {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: $body-bg;
+  border-top: 1px solid lighten($border-color, 5%);
+}
+
+.ide__tray-item {
+  position: relative;
+  padding: .5em;
+  border-left: 1px solid lighten($border-color, 5%);
+  font-size: 10px;
+  line-height: 1em;
+  cursor: pointer;
+
+  @include media-min("sm") {
+    font-size: 12px;
+  }
+
+  &:hover,
+  &:active {
+    color: $white;
+  }
+
+  .copy__notification {
+    font-size: 12px;
+    padding: .5em;
+    width: 100%;
+  }
 }

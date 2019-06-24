@@ -57,6 +57,18 @@
     <%= form.text_area :description, class: "form-input form-textarea" %>
   </div>
 
+  <div class="form-group-columns mt-full">
+    <div class="form-group">
+      <%= form.label :proficiency, class: "form-label" %>
+
+      <div class="form-hint">
+        Make an estimate of what kind of proficiency a user might need to understand and implement the code.
+      </div>
+
+      <%= form.select :proficiency, options_for_select(Snippet.proficiencies.map { |key, value| [key.humanize, key] }), {}, class: "form-select" %>
+    </div>
+  </div>
+
 	<hr>
 
   <div>

@@ -1,3 +1,5 @@
+<% content_for :page_title, @snippet.title %>
+
 <article class="item item--single">
   <h1 class="item__title">
     <%= @snippet.title %>
@@ -17,7 +19,7 @@
   <% end %>
 </div>
 
-<div class="ide mt-half">
+<div class="ide">
   <div class="ide__sidebar">
     <h3 class="ide__title">Rules</h3>
 
@@ -26,13 +28,20 @@
     </div>
   </div>
 
-  <%= tag.pre(
-    tag.div(
-      tag.div(class: "ide__line-counter") +
-      tag.code(@snippet.content,
-        class: "ide__code microlight syntax-highlight",
-        spellcheck: "false",
-        data: { role: "ide-content" }),
+  <%=
+    tag.pre(
+      tag.div(
+        tag.div(class: "ide__line-counter") +
+        tag.code(@snippet.content,
+          class: "ide__code microlight syntax-highlight",
+          spellcheck: "false",
+          data: { role: "ide-content", copy: "current-content" }) +
+        tag.div(
+          tag.div("View Fullscreen", class: "ide__tray-item", data: { action: "toggle-ide-fullscreen" }) +
+          tag.div("Copy current Rule", class: "ide__tray-item", data: { action: "copy-to-clipboard", target: "current-content" }) +
+          tag.div("Copy all Rules", class: "ide__tray-item", data: { action: "copy-ide-content", target: "current-content" }),
+          class: "ide__tray"
+        ),
       class: "ide__code-wrapper"),
     class: "ide__content")
   %>
@@ -48,6 +57,12 @@
       Last updated |
 
       <%= time_ago_in_words(@snippet.updated_at).humanize %> ago
+    </div>
+
+    <div class="item__details-item">
+      Proficiency |
+
+      <%= @snippet.proficiency.humanize %>
     </div>
   </div>
 </article>
