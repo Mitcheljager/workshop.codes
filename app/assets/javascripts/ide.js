@@ -8,10 +8,18 @@ document.addEventListener("turbolinks:load", function() {
   resetValues()
 
   const element = document.querySelector("[data-role='ide-content']")
+  const copyElements = document.querySelectorAll("[data-action='copy-ide-content']")
   const inputs = document.querySelectorAll("[data-role='ide-input']")
+  const fullscreenElements = document.querySelectorAll("[data-action='toggle-ide-fullscreen']")
 
   inputs.forEach(input => input.removeEventListener("input", setIdeViaInput))
   inputs.forEach(input => input.addEventListener("input", setIdeViaInput))
+
+  copyElements.forEach(element => element.removeEventListener("click", copyFullContent))
+  copyElements.forEach(element => element.addEventListener("click", copyFullContent))
+
+  fullscreenElements.forEach(element => element.removeEventListener("click", toggleIdeFullscreen))
+  fullscreenElements.forEach(element => element.addEventListener("click", toggleIdeFullscreen))
 
   if (element) initiateIde(element)
 })
@@ -36,16 +44,6 @@ function setIdeViaInput(event) {
   createLineCount(element)
 
   microlight.reset()
-}
-
-function syntaxHighlight(element) {
-  const currentCursorPosition = getCursorPosition()
-
-  microlight.reset()
-
-  setCurrentCursorPosition(element, currentCursorPosition)
-
-  content[currentContent] = element.innerText
 }
 
 function setAllContent(element, value) {
@@ -109,18 +107,6 @@ function setLineHighlight(element) {
   currentLinePosition = lineOffset
 }
 
-function keyPress(element) {
-  if (event.which == 13 || event.keyCode == 13) {
-    const currentCursorPosition = getCursorPosition()
-    const range = selection.getRangeAt(0)
-    const linebreak = document.createTextNode("\n")
-
-    range.insertNode(linebreak)
-
-    setCurrentCursorPosition(element, currentCursorPosition)
-  }
-}
-
 function createRules() {
   if (!content.length) return
 
@@ -158,10 +144,6 @@ function createRules() {
   })
 
   rulesList = contentArray
-}
-
-function moveContent(array, from, to) {
-  return array.splice(to, 0, this.splice(from, 1)[0])
 }
 
 function changeCurrentContent(event) {
@@ -230,27 +212,23 @@ function setCurrentCursorPosition(element, position) {
   }
 }
 
-function createGlobalVariables(element) {
-  const matches = new Set(content[currentContent].match(/(Global Variable\()[A-Z]{1}/g))
-  const cssClass = "syntax-highlight syntax-highlight--white"
-  const contentPlaceholder = content[currentContent]
-
-  matches.forEach(match => {
-    element.textContent.replace(match, "Hey")
-    console.log(match)
-  })
-
-  element.innerHTML = contentPlaceholder
-}
-
-function replaceAt(string, index, replace) {
-  return string.substring(0, index) + replace + string.substring(index + 1);
-}
-
 function resetValues() {
   content = []
   currentContent = 0
   rulesList = []
   currentLineCount = 0
   currentLinePosition = 0
+}
+
+function copyFullContent(event) {
+  const fullContent = content.join("")
+
+  copyToClipboard(event, fullContent)
+}
+
+function toggleIdeFullscreen(event) {
+  console.log("a")
+  const element = event.target.closest(".ide")
+
+  element.classList.toggle("ide--fullscreen")
 }
