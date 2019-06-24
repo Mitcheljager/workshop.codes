@@ -1,5 +1,7 @@
 {
   "name": "overwatch-workshop",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "microlight": "^0.0.7"
+  }
 }

@@ -1,0 +1,26 @@
+$color-base: #cbf6fb;
+
+$highlight-types: (
+  string: #98C379,
+  punctuation: darken($text-color, 10%),
+  keyword: #E06C75,
+  number: #D19A66,
+  comment: $text-color-dark,
+  variable: #56B6C2
+);
+
+.syntax-highlight {
+  color: lighten($text-color, 10%);
+}
+
+:root {
+  @each $type, $value in $highlight-types {
+    --color-#{ $type }: #{ $value };
+  }
+}
+
+@each $type, $value in $highlight-types {
+  .#{ $type } {
+    color: var(--color-#{ $type });
+  }
+}

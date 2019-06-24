@@ -1,13 +1,13 @@
 <div itemscope itemtype="https://schema.org/WebSite">
   <meta itemprop="url" content="https://www.workshop.codes/"/>
 
-  <%= form_tag search_post_path, class: "search", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction" do %>
+  <%= form_tag (controller_name == "snippets" ? search_post_path("snippets") : search_post_path), class: "search", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction" do %>
     <meta itemprop="target" content="https://www.workshop.codes/search/{query}"/>
 
     <%= text_field_tag :query, params[:search], class: "form-input form-input--large", placeholder: " ", itemprop: "query-input", required: "true" %>
 
     <%= label_tag :query do %>
-      <strong>Search</strong> by Titles, Categories, Tags, Codes, Maps, and Heroes
+      <strong>Search</strong> by Titles<%= ", Categories, Tags, Codes, Maps, and Heroes" unless controller_name == "snippets" %>
     <% end %>
 
     <%= submit_tag "", class: "search__submit" %>

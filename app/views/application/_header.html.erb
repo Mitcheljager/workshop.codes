@@ -1,0 +1,27 @@
+<header class="header">
+  <%= link_to root_path do %>
+    <picture>
+      <source srcset="<%= image_url "logo.webp" %> 2x, <%= image_url "logo.webp" %> 1x" type="image/webp">
+      <source srcset="<%= image_url "logo_x2.png" %> 2x, <%= image_url "logo.png" %> 1x" type="image/png">
+      <%= image_tag "logo.png", class: "logo", alt: "Workshop.codes Logo" %>
+    </picture>
+  <% end %>
+
+  <nav class="header__navigation">
+    <%= link_to posts_path, class: "header__item #{ "header__item--active" if controller_name == "posts" }" do %>
+      <picture>
+        <source srcset="<%= image_url "layout/navigation_item_codes.webp" %>" type="image/webp">
+        <source srcset="<%= image_url "layout/navigation_item_codes.png" %>" type="image/png">
+        <%= image_tag "layout/navigation_item_codes.png", alt: "Codes" %>
+      </picture>
+    <% end %>
+
+    <%= link_to snippets_path, class: "header__item #{ "header__item--active"if controller_name == "snippets" }" do %>
+      <picture>
+        <source srcset="<%= image_url "layout/navigation_item_snippets.webp" %>" type="image/webp">
+        <source srcset="<%= image_url "layout/navigation_item_snippets.png" %>" type="image/png">
+        <%= image_tag "layout/navigation_item_snippets.png", alt: "Snippets" %>
+      </picture>
+    <% end %>
+  </nav>
+</header>

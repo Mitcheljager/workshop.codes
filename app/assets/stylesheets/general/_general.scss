@@ -79,14 +79,19 @@ blockquote {
   position: absolute;
   top: 0;
   left: 0;
-  height: 210px;
+  height: 300px;
   width: 100%;
   background-size: cover;
-  clip-path: polygon(0 0, 100% 0, 100% 70px, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100px, 0% 100%);
   z-index: -1;
 
   @include media-min(sm) {
     height: 400px;
+  }
+
+  @include media-min(lg) {
+    height: 460px;
+    clip-path: polygon(0 0, 100% 0, 100% 120px, 0% 100%);
   }
 
   img {

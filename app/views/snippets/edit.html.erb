@@ -1,0 +1,5 @@
+<% content_for :page_title, "Editing..." %>
+
+<h1 class="heading"><strong>Editing</strong> "<%= @snippet.title %>"</h1>
+
+<%= render "form", snippet: @snippet, path: snippet_path(@snippet.unique_id) %>

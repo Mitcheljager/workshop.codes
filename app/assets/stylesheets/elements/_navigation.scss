@@ -88,19 +88,7 @@
   overflow-y: auto;
   z-index: 100;
 
-  &::-webkit-scrollbar {
-    width: 10px;
-    left: -10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $bg-dark;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border: 4px solid $bg-dark;
-    background-color: $text-color;
-  }
+  @include styled-scrollbar();
 
   &.active {
     display: block;

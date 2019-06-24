@@ -13,8 +13,10 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require microlight
 
 //= require dropdown
 //= require copy
 //= require checkbox-select-all
 //= require reveal-by-checkbox
+//= require ide
