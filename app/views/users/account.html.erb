@@ -27,7 +27,7 @@
     <%= render "posts/post", post: favorite.post %>
   <% end %>
 
-  <%= tag.em "You've not yet Liked any items" if @favorites.blank? %>
+  <%= tag.em "You've not yet liked any Items" if @favorites.blank? %>
 
   <%= paginate @favorites %>
 
@@ -51,7 +51,13 @@
     </div>
   <% end %>
 
-  <h1 class="heading">Your Snnippets</h1>
+  <%= tag.em "You've not yet posted any Items" if @posts.blank? %>
+
+  <div class="mt-half">
+    <%= link_to "Create new Item", new_post_path, class: "button" %>
+  </div>
+
+  <h1 class="heading">Your Snippets</h1>
 
   <% current_user.snippets.each do |snippet| %>
     <div class="item item--small">
@@ -65,4 +71,10 @@
       </div>
     </div>
   <% end %>
+
+  <%= tag.em "You've not yet posted any Snippets" if current_user.snippets.blank? %>
+
+  <div class="mt-half">
+    <%= link_to "Create new Snippet", new_snippet_path, class: "button" %>
+  </div>
 </main>
