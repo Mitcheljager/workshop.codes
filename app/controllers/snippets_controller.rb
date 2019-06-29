@@ -14,16 +14,10 @@ class SnippetsController < ApplicationController
   end
 
   def search
-    query = params[:search].downcase
+    query = Snippet.ransack(title_cont_any: params[:search])
 
-    if ActiveRecord::Base.connection.instance_values["config"][:adapter] == "sqlite3"
-      @snippets = Snippet.where("title LIKE :search", search: "%#{ query }%")
-    else
-      @snippets = Snippet.where("title ILIKE :search", search: "%#{ query }%")
-    end
-
-    @snippets.sort { |x, y| (x =~ query) <=> (y =~ query) }
-    @snippets = @snippets.page params[:page]
+    @snippets = query.result
+    @snippets = query.result.page params[:page]
   end
 
   def show

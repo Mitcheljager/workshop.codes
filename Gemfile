@@ -11,6 +11,7 @@ gem "jbuilder", "~> 2.5"
 gem "inline_svg"
 gem "redcarpet"
 gem "kaminari"
+gem "ransack"
 
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"
@@ -19,7 +20,7 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", "~> 2.13"
   gem "selenium-webdriver"
-  gem "sqlite3", "1.3.13"
+  gem "sqlite3", "1.4.1"
 end
 
 group :development do
