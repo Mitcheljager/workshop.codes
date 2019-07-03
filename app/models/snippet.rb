@@ -16,7 +16,8 @@ class Snippet < ApplicationRecord
       query: {
         multi_match: {
           query: query,
-          fields: ["title^5"]
+          fields: ["title^5"],
+          fuzziness: "AUTO"
         }
       }
     })
