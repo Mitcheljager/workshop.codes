@@ -14,10 +14,7 @@ class SnippetsController < ApplicationController
   end
 
   def search
-    query = Snippet.ransack(title_cont_any: params[:search])
-
-    @snippets = query.result
-    @snippets = query.result.page params[:page]
+    @snippets = Snippet.search(params[:search]).records.page params[:page]
   end
 
   def show

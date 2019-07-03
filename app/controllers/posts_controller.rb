@@ -17,10 +17,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    query = Post.ransack(title_or_categories_or_tags_or_heroes_or_maps_or_code_cont_any: params[:search])
-
-    @posts = query.result
-    @posts = query.result.page params[:page]
+    @posts = Post.search(params[:search]).records.page params[:page]
   end
 
   def category

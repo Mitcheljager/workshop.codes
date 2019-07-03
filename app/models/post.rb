@@ -44,6 +44,9 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
 end
 
 class Post < ApplicationRecord
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :revisions, dependent: :destroy
@@ -59,4 +62,18 @@ class Post < ApplicationRecord
   validates :heroes, presence: true, array_name_part_of: { array: heroes }
   validates :maps, presence: true, array_name_part_of: { array: maps }
   validates :version, length: { maximum: 20 }
+
+  def self.search(query)
+    __elasticsearch__.search({
+      query: {
+        multi_match: {
+          query: query,
+          fields: ["code^10", "title^5", "categories^2", "maps^2", "heroes^2", "tags"]
+        }
+      }
+    })
+  end
 end
+
+Post.__elasticsearch__.create_index!
+Post.import

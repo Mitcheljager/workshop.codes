@@ -11,7 +11,9 @@ gem "jbuilder", "~> 2.5"
 gem "inline_svg"
 gem "redcarpet"
 gem "kaminari"
-gem "ransack"
+
+gem "elasticsearch-model", "7.0.0.pre"
+gem "elasticsearch-rails"
 
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"
