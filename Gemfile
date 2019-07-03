@@ -12,7 +12,8 @@ gem "inline_svg"
 gem "redcarpet"
 gem "kaminari"
 
-gem "bonsai-elasticsearch-rails"
+gem "elasticsearch-model", "~> 6"
+gem "elasticsearch-rails", "~> 6"
 
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"

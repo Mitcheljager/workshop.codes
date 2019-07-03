@@ -49,9 +49,6 @@ GEM
       execjs
     bcrypt (3.1.13)
     bindex (0.7.0)
-    bonsai-elasticsearch-rails (7.0.1)
-      elasticsearch-model (< 8)
-      elasticsearch-rails (< 8)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (2.18.0)
@@ -244,9 +241,10 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bcrypt
-  bonsai-elasticsearch-rails
   byebug
   capybara (~> 2.13)
+  elasticsearch-model (~> 6)
+  elasticsearch-rails (~> 6)
   faker
   heroku-deflater
   high_voltage (~> 3.0.0)
