@@ -1,7 +1,7 @@
 class Snippet < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
-  
+
   belongs_to :user
 
   enum proficiency: { basic: 0, intermediate: 1, advanced: 2, expert: 3 }
@@ -23,5 +23,5 @@ class Snippet < ApplicationRecord
   end
 end
 
-Snippet.__elasticsearch__.create_index!
+Snippet.__elasticsearch__.create_index! force: true
 Snippet.import
