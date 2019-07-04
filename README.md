@@ -1,24 +1,11 @@
-# README
+# Workshop.codes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the repository for the Overwatch Fan Website [workshop.codes](https://www.workshop.codes). Anyone is free to contribute or submit issues or requests regarding the website.
 
-Things you may want to cover:
+The main goal is performance. The website should always be quick to load and function. Desktop load times should always be below 1 second, on mobile no more than 2 seconds. Server response time should be below 50ms. 
+Images should be losslessly compressed. WebP should be used wherever possible.
 
-* Ruby version
+This website uses Ruby on Rails 5.2 and Elasticsearch. It's hosted on Heroku, using Bonsai for Elasticsearch.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The HTML and SCSS are structured according to [BEM](http://getbem.com/naming/).
+JS does not follow any direct guidelines. Functions should be concise and limited. Files should be separated by their intent. No frameworks are libraries are used.
