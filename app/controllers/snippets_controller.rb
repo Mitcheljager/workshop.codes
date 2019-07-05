@@ -18,6 +18,7 @@ class SnippetsController < ApplicationController
   end
 
   def show
+    impressionist(@snippet)
   end
 
   def new

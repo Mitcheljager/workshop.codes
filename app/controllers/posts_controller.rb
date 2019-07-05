@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @hot_posts = Post.where("favorites_count > 0").order(favorites_count: :desc).limit(3)
+    @hot_posts = Post.where("favorites_count > 0").order("favorites_count * 5 + impressions_count DESC").limit(3)
     @posts = Post.order(updated_at: :desc).page params[:page]
   end
 
@@ -36,16 +36,14 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.where("favorites_count > 0").order(favorites_count: :desc).page params[:page]
+    @posts = Post.where("favorites_count > 0").order("favorites_count * 5 + impressions_count DESC").page params[:page]
   end
 
   def show
-    if @post.nil?
-      revision = Revision.find_by_code(params[:code])
-      @post = revision.post if revision
-    end
+    revision = Revision.find_by_code(params[:code])
+    @post = revision.post if revision
 
-    raise ActionController::RoutingError.new("Not Found") if @post.nil?
+    impressionist(@post)
   end
 
   def new
@@ -87,7 +85,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find_by_code(params[:code])
+    @post = Post.find_by_code!(params[:code])
   end
 
   def set_order

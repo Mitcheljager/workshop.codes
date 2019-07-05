@@ -12,12 +12,15 @@
   </small>
 </article>
 
-<div>
-  <% if current_user == @snippet.user %>
-    <br>
-    <%= link_to "Edit your item", edit_snippet_path(@snippet.unique_id), class: "button" %>
-  <% end %>
-</div>
+<% if current_user == @snippet.user %>
+  <div class="well mt-half">
+    <%= link_to "Edit your Snippet", edit_snippet_path(@snippet.unique_id), class: "button" %>
+
+    <div class="well__content">
+      <em>Views</em>: <strong><%= @snippet.impressions_count %></strong>
+    </div>
+  </div>
+<% end %>
 
 <div class="ide">
   <div class="ide__sidebar">

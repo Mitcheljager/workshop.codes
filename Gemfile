@@ -11,6 +11,7 @@ gem "jbuilder", "~> 2.5"
 gem "inline_svg"
 gem "redcarpet"
 gem "kaminari"
+gem "impressionist"
 
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"

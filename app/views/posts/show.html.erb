@@ -16,12 +16,16 @@
   </div>
 </article>
 
-<div>
-  <% if current_user == @post.user %>
-    <br>
+<% if current_user == @post.user %>
+  <div class="well mt-half">
     <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
-  <% end %>
-</div>
+
+    <div class="well__content">
+      <em>Views</em>: <strong><%= @post.impressions_count %></strong><br>
+      <em>Likes</em>: <strong><%= @post.favorites_count %></strong>
+    </div>
+  </div>
+<% end %>
 
 <article class="item__description">
   <%= markdown(@post.description) %>

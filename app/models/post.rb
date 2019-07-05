@@ -47,12 +47,15 @@ class Post < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
+  is_impressionable counter_cache: true, unique: true
+
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :revisions, dependent: :destroy
 
   attr_accessor :revision
   attr_accessor :revision_description
+  attribute :hotness, default: 0
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }

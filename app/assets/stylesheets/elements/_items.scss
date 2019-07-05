@@ -237,6 +237,8 @@
 .item__actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  text-align: right;
 }
 
 .item__description {
