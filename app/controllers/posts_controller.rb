@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
   def index
     @hot_posts = Post.where("favorites_count > 0").order("favorites_count * 5 + impressions_count DESC").limit(3)
-    @posts = Post.order(updated_at: :desc).page params[:page]
+    @posts = Post.order(created_at: :desc).page params[:page]
   end
 
   def search
