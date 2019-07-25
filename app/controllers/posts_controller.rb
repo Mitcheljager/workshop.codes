@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @hot_posts = Post.where("favorites_count > 0").order("favorites_count * 5 + impressions_count DESC").limit(3)
+    @hot_posts = Post.where("favorites_count > 0").order("favorites_count DESC").limit(3)
     @posts = Post.order(created_at: :desc).page params[:page]
   end
 
@@ -42,8 +42,6 @@ class PostsController < ApplicationController
   def show
     revision = Revision.find_by_code(params[:code])
     @post = revision.post if revision
-
-    impressionist(@post)
   end
 
   def new
