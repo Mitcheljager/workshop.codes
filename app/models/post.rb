@@ -78,6 +78,3 @@ class Post < ApplicationRecord
     })
   end
 end
-
-Post.__elasticsearch__.create_index! force: true
-Post.import

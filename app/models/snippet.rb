@@ -25,6 +25,3 @@ class Snippet < ApplicationRecord
     })
   end
 end
-
-Snippet.__elasticsearch__.create_index! force: true
-Snippet.import
