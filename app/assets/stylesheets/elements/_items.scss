@@ -46,6 +46,10 @@
     margin-bottom: 0;
   }
 
+  @supports (-ms-ime-align:auto) {
+    display: block;
+  }
+
   &--small {
     display: block;
     padding-bottom: $margin / 3;
@@ -223,6 +227,10 @@
 
   @include media-min(sm) {
     display: flex;
+  }
+
+  @supports (-ms-ime-align:auto) {
+    display: none;
   }
 
   svg {
