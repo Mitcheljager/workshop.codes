@@ -1,6 +1,8 @@
 document.addEventListener("turbolinks:load", function() {
   if (typeof ga === "function") {
-    ga("set", "location", event.data.url)
-    ga("send", "pageview")
+    gtag("config", "UA-46852314-10", {
+      "anonymize_ip": true,
+      "page_location": event.data.url
+    });
   }
 })
