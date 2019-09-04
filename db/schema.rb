@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_210441) do
+ActiveRecord::Schema.define(version: 2019_09_04_121834) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -59,7 +59,13 @@ ActiveRecord::Schema.define(version: 2019_07_04_210441) do
     t.string "version"
     t.integer "favorites_count", default: 0
     t.integer "impressions_count", default: 0
+    t.index ["categories"], name: "index_posts_on_categories"
+    t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"
+    t.index ["heroes"], name: "index_posts_on_heroes"
+    t.index ["maps"], name: "index_posts_on_maps"
+    t.index ["tags"], name: "index_posts_on_tags"
+    t.index ["title"], name: "index_posts_on_title"
   end
 
   create_table "remember_tokens", force: :cascade do |t|

@@ -55,7 +55,6 @@ class Post < ApplicationRecord
 
   attr_accessor :revision
   attr_accessor :revision_description
-  attribute :hotness, default: 0
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }
