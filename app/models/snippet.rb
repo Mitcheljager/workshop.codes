@@ -2,8 +2,6 @@ class Snippet < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  is_impressionable counter_cache: true, unique: true
-
   belongs_to :user
 
   enum proficiency: { basic: 0, intermediate: 1, advanced: 2, expert: 3 }

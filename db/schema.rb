@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_121834) do
+ActiveRecord::Schema.define(version: 2019_09_04_125338) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 2019_09_04_121834) do
     t.datetime "updated_at", null: false
     t.integer "proficiency", default: 0
     t.integer "impressions_count", default: 0
+    t.index ["title"], name: "index_snippets_on_title"
+    t.index ["unique_id"], name: "index_snippets_on_unique_id"
   end
 
   create_table "users", force: :cascade do |t|
