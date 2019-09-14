@@ -11,6 +11,9 @@
   name: Roadhog
   category: Tank
 -
+  name: Sigma
+  category: Tank
+-
   name: Winston
   category: Tank
 -
