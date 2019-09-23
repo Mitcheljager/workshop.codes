@@ -1,5 +1,5 @@
 <% if current_user %>
-  <% has_been_favorited = Favorite.find_by_post_id_and_user_id(post.id, current_user.id).present? %>
+  <% has_been_favorited = current_user.favorites.find_by_post_id(post.id).present? %>
 
   <div data-favorite="<%= post.id %>">
     <%= button_to favorites_path,
@@ -11,7 +11,7 @@
     <% end %>
   </div>
 <% else %>
-  <%= link_to login_path, class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
-    <%= inline_svg "icons/icon-heart#{ "-border" unless has_been_favorited }.svg" %>
+  <%= link_to login_path, class: "favorite" do %>
+    <%= inline_svg "icons/icon-heart-border.svg" %>
   <% end %>
 <% end %>
