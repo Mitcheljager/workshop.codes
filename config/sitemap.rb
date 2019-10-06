@@ -1,6 +1,5 @@
 SitemapGenerator::Sitemap.default_host = "https://www.workshop.codes"
 SitemapGenerator::Sitemap.create do
-  add "/", changefreq: "daily", priority: 0.9
   add "/snippets", priority: 0.8
   add "/login", priority: 0.8
   add "/register", priority: 0.8
