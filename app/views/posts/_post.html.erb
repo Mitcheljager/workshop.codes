@@ -38,7 +38,7 @@
         <% post_length = post.tags.tr("[]", "").split(", ").length %>
 
         <% if post_length > 3 %>
-          <small>(+<%= post_length - 3 %>)</small>
+          <small>+<%= post_length - 3 %></small>
         <% end %>
       </div>
     <% end %>
