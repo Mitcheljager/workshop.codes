@@ -60,7 +60,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }
   validates :code, presence: true, uniqueness: true, length: { minimum: 5, maximum: 5 }
   validates :categories, presence: true, array_length: { maximum: 3 }, array_part_of: { array: categories }
-  validates :tags, length: { maximum: 50 }
+  validates :tags, length: { maximum: 100 }
   validates :heroes, presence: true, array_name_part_of: { array: heroes }
   validates :maps, presence: true, array_name_part_of: { array: maps }
   validates :version, length: { maximum: 20 }
