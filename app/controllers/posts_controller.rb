@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.where("favorites_count > 0").order("favorites_count * 5 + impressions_count DESC").page params[:page]
+    @posts = Post.where("favorites_count > 0").order("favorites_count DESC").page params[:page]
   end
 
   def show
