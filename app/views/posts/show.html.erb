@@ -78,7 +78,7 @@
       <%= time_ago_in_words(@post.updated_at).humanize %> ago
     </div>
 
-    <% if @post.version %>
+    <% if @post.version.present? %>
       <div class="item__details-item">
         Current version |
 
