@@ -120,7 +120,7 @@
           <% maps.each do |map| %>
             <div class="checkbox">
               <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps).include?(map["name"]) if @post.heroes) }, map["name"], false %>
-              <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "") }", map["name"] %>
+              <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "") }", map["name"] %>
             </div>
           <% end %>
         </div>

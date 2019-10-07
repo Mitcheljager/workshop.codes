@@ -1,4 +1,6 @@
 SitemapGenerator::Sitemap.default_host = "https://www.workshop.codes"
+SitemapGenerator::Sitemap.public_path = "tmp/"
+
 SitemapGenerator::Sitemap.create do
   add "/snippets", priority: 0.8
   add "/login", priority: 0.8

@@ -79,7 +79,7 @@
 .form-group-triple {
   @include media-min(sm) {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: $margin;
   }
 }
@@ -131,6 +131,10 @@
     border: 2px solid $text-color;
     cursor: pointer;
 
+    &:hover {
+      border-color: lighten($text-color, 20%);
+    }
+
     &:checked {
       background: $primary;
       border: 0;
@@ -144,6 +148,10 @@
   label {
     padding-left: 1rem;
     cursor: pointer;
+
+    &:hover {
+      color: lighten($text-color, 20%);
+    }
   }
 }
 
