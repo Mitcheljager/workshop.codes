@@ -13,7 +13,7 @@
     const parentElement = document.querySelector("[data-comment='<%= @comment.parent_id %>']")
     const formElement = parentElement.querySelector("form")
 
-    parentElement.querySelector(".comment__actions").insertAdjacentHTML("afterEnd", `<%= j render "comment", comment: @comment %>`)
+    parentElement.querySelector(".post-comment__actions").insertAdjacentHTML("afterEnd", `<%= j render "comment", comment: @comment %>`)
     formElement.remove()
   <% end %>
 
@@ -21,9 +21,9 @@
 
   const element = document.querySelector("[data-comment='<%= @comment.id %>']")
 
-  element.classList.add("comment--has-been-added")
+  element.classList.add("post-comment--has-been-added")
 
   setTimeout(() => {
-    element.classList.remove("comment--has-been-added")
+    element.classList.remove("post-comment--has-been-added")
   }, 2500)
 })()

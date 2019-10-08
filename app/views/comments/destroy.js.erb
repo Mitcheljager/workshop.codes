@@ -1,7 +1,7 @@
 (() => {
   const element = document.querySelector("[data-comment='<%= @comment.id %>']")
 
-  element.classList.add("comment--is-being-removed")
+  element.classList.add("post-comment--is-being-removed")
 
   setTimeout(() => {
     element.remove()
