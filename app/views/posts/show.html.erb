@@ -89,3 +89,13 @@
 </article>
 
 <%= render "revisions" if @post.revisions.count > 1 %>
+
+<div class="comments">
+  <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>
+
+  <%= render "comments/form", post: @post %>
+
+  <div class="comments__wrapper" data-role="comments">
+    <%= render @post.comments.where(parent_id: nil).order(created_at: :desc) %>
+  </div>
+</div>

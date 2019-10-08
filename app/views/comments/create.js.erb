@@ -1,0 +1,29 @@
+<% return if @comment.content.empty? %>
+
+(() => {
+  const totalElement = document.querySelector("[data-role='comment-total']")
+
+  <% if @comment.parent_id.nil? %>
+    const parentElement = document.querySelector("[data-role='comments']")
+    const inputElement = document.querySelector("[data-role='comment-input']")
+
+    parentElement.insertAdjacentHTML("afterBegin", `<%= j render "comment", comment: @comment %>`)
+    inputElement.value = ""
+  <% else %>
+    const parentElement = document.querySelector("[data-comment='<%= @comment.parent_id %>']")
+    const formElement = parentElement.querySelector("form")
+
+    parentElement.querySelector(".comment__actions").insertAdjacentHTML("afterEnd", `<%= j render "comment", comment: @comment %>`)
+    formElement.remove()
+  <% end %>
+
+  totalElement.innerHTML = parseInt(totalElement.innerText) + 1
+
+  const element = document.querySelector("[data-comment='<%= @comment.id %>']")
+
+  element.classList.add("comment--has-been-added")
+
+  setTimeout(() => {
+    element.classList.remove("comment--has-been-added")
+  }, 2500)
+})()

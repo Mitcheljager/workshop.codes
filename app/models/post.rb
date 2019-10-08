@@ -52,6 +52,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :revisions, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   attr_accessor :revision
   attr_accessor :revision_description

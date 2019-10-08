@@ -1,0 +1,9 @@
+(() => {
+  const element = document.querySelector("[data-comment='<%= @comment.id %>']")
+
+  element.classList.add("comment--is-being-removed")
+
+  setTimeout(() => {
+    element.remove()
+  }, 1000)
+})()

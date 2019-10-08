@@ -1,0 +1,18 @@
+<% if current_user %>
+  <%= form_for :comment, url: comments_path, remote: true, html: { class: "comment-form" } do |form| %>
+    <%= form.hidden_field :post_id, value: post.id %>
+    <%= form.hidden_field :parent_id, value: parent_id if defined?(parent_id) %>
+
+    <div class="form-group">
+      <%= form.text_area :content, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Comment...", data: { role: "comment-input" } %>
+    </div>
+
+    <%= button_tag "Comment", class: "button mt-half" %>
+
+    <small class="button-label">&nbsp; Max 2000 characters</small>
+  <% end %>
+<% else %>
+  <div class="mb-full">
+    <%= link_to "Log in", login_path %> or <%= link_to "Sign up", new_user_path %> to place a comment.
+  </div>
+<% end %>

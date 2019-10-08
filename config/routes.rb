@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create]
   delete "favorites", to: "favorites#destroy"
 
+  resources :comments, only: [:create, :destroy]
+  get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
+
   concern :paginatable do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end

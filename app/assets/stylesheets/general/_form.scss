@@ -48,6 +48,11 @@
   &--small {
     min-height: 300px;
   }
+
+  &--extra-small {
+    min-height: 150px;
+    max-width: map-get($media-min-widths, sm);
+  }
 }
 
 .form-label {
