@@ -36,8 +36,9 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
+      generate_remember_token if params[:remember_me]
 
-      redirect_to user_path(@user.username)
+      redirect_to account_path
     else
       render :new
     end
@@ -71,5 +72,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation)
+  end
+
+  def generate_remember_token
+    token = SecureRandom.base64
+    RememberToken.create(user_id: @user.id, token: token)
+    cookies.encrypted.permanent[:remember_token] = token
   end
 end

@@ -33,6 +33,13 @@
 
     <hr class="small">
 
+    <div class="form-group checkbox">
+      <%= check_box_tag :remember_me %>
+      <%= label_tag :remember_me, "Remember me (uses cookies)" %>
+    </div>
+
+    <hr class="small">
+
     <%= submit_tag "Submit", class: "button" %>
   <% end %>
 </div>
