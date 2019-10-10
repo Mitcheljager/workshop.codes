@@ -35,7 +35,7 @@
     <url>
       <loc><%= hero_url(to_slug(hero["name"])) %></loc>
       <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
-      <priority>0.90</priority>
+      <priority>0.80</priority>
     </url>
   <% end %>
 
@@ -43,7 +43,7 @@
     <url>
       <loc><%= map_url(to_slug(map["name"])) %></loc>
       <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
-      <priority>0.90</priority>
+      <priority>0.80</priority>
     </url>
   <% end %>
 
@@ -51,7 +51,7 @@
     <url>
       <loc><%= category_url(to_slug(category)) %></loc>
       <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
-      <priority>0.90</priority>
+      <priority>0.80</priority>
     </url>
   <% end %>
 
@@ -59,7 +59,7 @@
     <url>
       <loc><%= post_url(post.code) %></loc>
       <lastmod><%= post.updated_at.iso8601 %></lastmod>
-      <priority>0.80</priority>
+      <priority>0.90</priority>
     </url>
   <% end %>
 
