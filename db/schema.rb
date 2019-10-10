@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_181613) do
+ActiveRecord::Schema.define(version: 2019_10_09_105721) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 2019_10_07_181613) do
     t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
     t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
     t.index ["user_id"], name: "index_impressions_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "has_been_read", default: 0
+    t.string "content"
+    t.string "go_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|

@@ -1,0 +1,14 @@
+<% if @notifications.any? %>
+  <% @notifications.each do |notification| %>
+    <div class="notifications__item">
+      <%= notification.content %>
+      <%= link_to "View", notification.go_to, class: "notifications__item-action" if notification.go_to.present? %>
+    </div>
+
+    <% notification.update!(has_been_read: 1) %>
+  <% end %>
+<% else %>
+  <div class="notifications__item">
+    You have no new notifications.
+  </div>
+<% end %>

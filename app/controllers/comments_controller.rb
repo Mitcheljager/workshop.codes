@@ -1,9 +1,15 @@
 class CommentsController < ApplicationController
+  include NotificationsHelper
+
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
 
     if @comment.save
+      if @comment.user != @comment.post.user
+        create_notification("Someone has left a comment on \"#{ @comment.post.title }\"", post_path(@comment.post.code), @comment.post.user.id)
+      end
+
       respond_to do |format|
         format.js
       end
