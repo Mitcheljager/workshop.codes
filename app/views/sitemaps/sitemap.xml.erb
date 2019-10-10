@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <url>
+    <loc><%= root_url %></loc>
+    <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc><%= login_url %></loc>
+    <lastmod>2019-10-07T16:36:16Z</lastmod>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc><%= new_user_url %></loc>
+    <lastmod>2019-10-07T16:36:16Z</lastmod>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc><%= on_fire_url %></loc>
+    <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <% heroes.each do |hero| %>
+    <url>
+      <loc><%= hero_url(to_slug(hero["name"])) %></loc>
+      <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
+      <priority>0.90</priority>
+    </url>
+  <% end %>
+
+  <% maps.each do |map| %>
+    <url>
+      <loc><%= map_url(to_slug(map["name"])) %></loc>
+      <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
+      <priority>0.90</priority>
+    </url>
+  <% end %>
+
+  <% categories.each do |category| %>
+    <url>
+      <loc><%= category_url(to_slug(category)) %></loc>
+      <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
+      <priority>0.90</priority>
+    </url>
+  <% end %>
+
+  <% @posts.each do |post| %>
+    <url>
+      <loc><%= post_url(post.code) %></loc>
+      <lastmod><%= post.updated_at.iso8601 %></lastmod>
+      <priority>0.80</priority>
+    </url>
+  <% end %>
+
+</urlset>

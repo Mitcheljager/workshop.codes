@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
+  get "sitemap", to: "sitemaps#sitemap"
+
   resources :users, param: :username, except: [:new, :index, :edit, :update]
   get "account(/page/:page)", to: "users#account", as: "account"
   get "edit", to: "users#edit", as: "edit_user"
