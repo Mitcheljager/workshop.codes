@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  
+
   protect_from_forgery with: :exception
   before_action :login_from_cookie
 
@@ -25,5 +25,11 @@ class ApplicationController < ActionController::Base
     else
       @current_user = nil
     end
+  end
+
+  helper_method :unread_notifications
+
+  def unread_notifications
+    @notifications = current_user.notifications.where(has_been_read: 0)
   end
 end

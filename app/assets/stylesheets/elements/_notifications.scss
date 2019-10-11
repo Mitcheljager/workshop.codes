@@ -1,0 +1,27 @@
+.notifications__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .75em 0;
+  font-size: 14px;
+  border-bottom: 1px solid $border-color;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    color: $white;
+  }
+}
+
+.notifications__action {
+  display: block;
+  padding: .25em .5em;
+  border: 1px solid $border-color;
+  background: $body-bg;
+  color: $white;
+
+  &:hover,
+  &:active {
+    background: $bg-dark;
+  }
+}

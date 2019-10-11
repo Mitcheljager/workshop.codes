@@ -1,0 +1,4 @@
+<%= link_to notification.go_to, class: "notifications__item" do %>
+  <%= notification.content %>
+  <%= tag.div "View", class: "notifications__action" if notification.go_to.present? %>
+<% end %>

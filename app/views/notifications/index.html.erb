@@ -1,14 +1,33 @@
-<% if @notifications.any? %>
-  <% @notifications.each do |notification| %>
-    <div class="notifications__item">
-      <%= notification.content %>
-      <%= link_to "View", notification.go_to, class: "notifications__item-action" if notification.go_to.present? %>
-    </div>
+<div class="heading items-heading">
+  <h1>Your account</h1>
 
-    <% notification.update!(has_been_read: 1) %>
+  <%= render "profile_block" %>
+</div>
+
+<h3>Unread Notifications</h3>
+
+<div class="notifications">
+  <% if @notifications.where(has_been_read: 0).any? %>
+    <% @notifications.where(has_been_read: 0).each do |notification| %>
+      <%= render @notifications.where(has_been_read: 0) %>
+
+      <% notification.update!(has_been_read: 1) %>
+    <% end %>
+  <% else %>
+    <div class="notifications__item">
+      <em>You have no unread notifications.</em>
+    </div>
   <% end %>
-<% else %>
-  <div class="notifications__item">
-    You have no new notifications.
-  </div>
-<% end %>
+</div>
+
+<h3 class="top-offset">Read Notifications</h3>
+
+<div class="notifications">
+  <% if @notifications.where(has_been_read: 1).any? %>
+    <%= render @notifications.where(has_been_read: 1) %>
+  <% else %>
+    <div class="notifications__item">
+      <em>You have no read notifications.</em>
+    </div>
+  <% end %>
+</div>

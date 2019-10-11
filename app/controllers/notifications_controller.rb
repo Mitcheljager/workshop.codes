@@ -1,11 +1,9 @@
 class NotificationsController < ApplicationController
+  before_action do
+    redirect_to login_path unless current_user
+  end
+
   def index
-    @notifcations = current_user.notifications.where(has_been_read: 0)
-  end
-
-  def create
-  end
-
-  def update
+    @notifications = current_user.notifications
   end
 end

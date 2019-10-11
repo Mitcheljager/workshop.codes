@@ -22,6 +22,8 @@
   </head>
 
   <body>
+    <%= render "notifications/alert" if current_user && unread_notifications.any? %>
+
     <div class="wrapper">
       <%= render "navigation" %>
 
