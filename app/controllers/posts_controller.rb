@@ -42,6 +42,8 @@ class PostsController < ApplicationController
   def show
     revision = Revision.find_by_code(params[:code])
     @post = revision.post if revision
+
+    not_found unless @post.present?
   end
 
   def new
@@ -83,11 +85,15 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find_by_code!(params[:code])
+    @post = Post.find_by_code(params[:code])
   end
 
   def set_order
     @order = params[:sort] ? "favorites_count DESC" : "updated_at DESC"
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new("Not Found")
   end
 
   def post_params
