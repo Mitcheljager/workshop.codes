@@ -168,6 +168,8 @@ input[type="checkbox"] {
 }
 
 .form-hint {
+  display: block;
+  max-width: map-get($media-min-widths, sm);
   margin: $margin / 3 0;
   font-size: 14px;
   line-height: 1.25em;
