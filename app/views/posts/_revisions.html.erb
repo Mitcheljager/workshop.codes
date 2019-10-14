@@ -1,26 +1,28 @@
-<div class="heading items-heading">
-  <h2>Update Log</h2>
-</div>
-
-<% @post.revisions.order(created_at: :desc).each do |revision| %>
-  <div class="item item--single mt-half">
-    <div class="item__title item__title--small">
-      <%= "Version: " + revision.version unless revision.version.empty? %>
-      <small class="ml-auto"><%= time_ago_in_words(revision.created_at).humanize %> ago</small>
-    </div>
-
-    <div class="item__code">
-      <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
-
-      <span class="copy">
-        <span data-copy="<%= revision.code %>"><%= revision.code %></span>
-      </span>
-    </div>
+<section class="revisions">
+  <div class="heading items-heading">
+    <h2>Update Log</h2>
   </div>
 
-  <% unless revision.description.blank? %>
-    <div class="item__description mt-0">
-      <%= markdown(revision.description) %>
+  <% @post.revisions.order(created_at: :desc).each do |revision| %>
+    <div class="item item--single mt-half">
+      <div class="item__title item__title--small">
+        <%= "Version: " + revision.version unless revision.version.empty? %>
+        <small class="ml-auto"><%= time_ago_in_words(revision.created_at).humanize %> ago</small>
+      </div>
+
+      <div class="item__code">
+        <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
+
+        <span class="copy">
+          <span data-copy="<%= revision.code %>"><%= revision.code %></span>
+        </span>
+      </div>
     </div>
+
+    <% unless revision.description.blank? %>
+      <div class="item__description mt-0">
+        <%= markdown(revision.description) %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</section>

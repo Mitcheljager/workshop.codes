@@ -1,8 +1,11 @@
-
 .comments {
   margin-top: $margin;
   padding-top: $margin;
   border-top: 1px solid $border-color;
+
+  .revisions + & {
+    border: 0;
+  }
 }
 
 .comments__wrapper {
