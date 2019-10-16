@@ -1,52 +1,54 @@
-<article class="item">
-  <div class="item__title">
-    <%= link_to post.title, post_path(post.code) %>
+<% cache "#{ post }_#{ current_user.present? }_#{ current_user && current_user.favorites.find_by_post_id(post.id).present?  }" do %>
+  <article class="item">
+    <div class="item__title">
+      <%= link_to post.title, post_path(post.code) %>
 
-    <%= render "favorites/form", post: post %>
-  </div>
-
-  <div class="item__code">
-    <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
-
-    <span class="copy">
-      <span data-copy="<%= post.code %>"><%= post.code %></span>
-    </span>
-  </div>
-
-  <div class="item__details">
-    <div class="item__details-item">
-      By |
-      <%= link_to post.user.username, user_path(post.user.username) %>
+      <%= render "favorites/form", post: post %>
     </div>
 
-    <div class="item__details-item">
-      Categories |
+    <div class="item__code">
+      <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
 
-      <% JSON.parse(post.categories).each do |category| %>
-        <%= link_to category, category_path(to_slug(category)) %><%= "," unless category == JSON.parse(post.categories).last %>
+      <span class="copy">
+        <span data-copy="<%= post.code %>"><%= post.code %></span>
+      </span>
+    </div>
+
+    <div class="item__details">
+      <div class="item__details-item">
+        By |
+        <%= link_to post.user.username, user_path(post.user.username) %>
+      </div>
+
+      <div class="item__details-item">
+        Categories |
+
+        <% JSON.parse(post.categories).each do |category| %>
+          <%= link_to category, category_path(to_slug(category)) %><%= "," unless category == JSON.parse(post.categories).last %>
+        <% end %>
+      </div>
+
+      <% if post.tags.present? %>
+        <div class="item__details-item">
+          Tags |
+
+          <% post.tags.tr("[]", "").split(", ").take(5).each do |tag| %>
+            <%= link_to tag.downcase, search_path(tag.downcase), class: "tag" %>
+          <% end %>
+
+          <% post_length = post.tags.tr("[]", "").split(", ").length %>
+
+          <% if post_length > 5 %>
+            <small>+<%= post_length - 5 %></small>
+          <% end %>
+        </div>
       <% end %>
     </div>
 
-    <% if post.tags.present? %>
-      <div class="item__details-item">
-        Tags |
+    <%= link_to post_path(post.code), class: "item__action" do %>
+      View Item
 
-        <% post.tags.tr("[]", "").split(", ").take(5).each do |tag| %>
-          <%= link_to tag.downcase, search_path(tag.downcase), class: "tag" %>
-        <% end %>
-
-        <% post_length = post.tags.tr("[]", "").split(", ").length %>
-
-        <% if post_length > 5 %>
-          <small>+<%= post_length - 5 %></small>
-        <% end %>
-      </div>
+      <%= inline_svg "icons/icon-right-arrow.svg" %>
     <% end %>
-  </div>
-
-  <%= link_to post_path(post.code), class: "item__action" do %>
-    View Item
-
-    <%= inline_svg "icons/icon-right-arrow.svg" %>
-  <% end %>
-</article>
+  </article>
+<% end %>
