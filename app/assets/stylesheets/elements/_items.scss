@@ -266,14 +266,20 @@
 
   ul {
     list-style: none;
-    padding-left: 2rem;
+    padding-left: 2.5rem;
 
     li {
+      position: relative;
+
       &::before {
         display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 0;
         content: "•";
         color: $primary;
         padding-right: .5rem;
+        transform: translateX(-100%);
       }
     }
   }
@@ -281,16 +287,21 @@
   ol {
     counter-reset: ordered-list;
     list-style: none;
-    padding-left: 2rem;
+    padding-left: 2.5rem;
 
     li {
       counter-increment: ordered-list;
+      position: relative;
 
       &::before {
         display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 0;
         content: counter(ordered-list) ".";
         color: $primary;
         padding-right: .5rem;
+        transform: translateX(-100%);
       }
     }
   }
