@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]
+  post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   get "categories/:category(/:sort)(/page/:page)", to: "posts#category", as: "category"
   get "heroes/:hero(/:sort)(/page/:page)", to: "posts#hero", as: "hero"
   get "maps/:map(/:sort)(/page/:page)", to: "posts#map", as: "map"

@@ -29,7 +29,11 @@
       <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to "and everything else", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", target: "_blank" %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>
     </div>
 
+    <%= link_to "Show Preview", "#", class: "button button--secondary mb-half", data: { action: "markdown-preview" } %>
+
     <%= form.text_area :description, class: "form-input form-textarea" %>
+
+    <div data-role="markdown-preview"></div>
   </div>
 
   <h2 class="heading">Settings</h2>

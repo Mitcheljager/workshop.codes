@@ -21,3 +21,4 @@
 //= require checkbox-select-all
 //= require reveal-by-checkbox
 //= require ide
+//= require markdown-preview

@@ -53,6 +53,12 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def parse_markdown
+    parsed_markdown = markdown(post_params[:description].html_safe)
+
+    render json: parsed_markdown, layout: false
+  end
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
