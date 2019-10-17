@@ -1,6 +1,8 @@
 document.addEventListener("turbolinks:load", function() {
   const element = document.querySelector("[data-action='markdown-preview']")
 
+  if (!element) return
+
   element.removeEventListener("click", toggleMarkdownPreview)
   element.addEventListener("click", toggleMarkdownPreview)
 })
