@@ -263,4 +263,38 @@
   h3 {
     margin: $margin 0 $margin / 2;
   }
+
+  ul {
+    list-style: none;
+    padding-left: 2rem;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+        display: inline-block;
+        content: "•";
+        color: $primary;
+        padding-right: .5rem;
+      }
+    }
+  }
+
+  ol {
+    counter-reset: ordered-list;
+    list-style: none;
+    padding-left: 2rem;
+
+    li {
+      counter-increment: ordered-list;
+
+      &::before {
+        display: inline-block;
+        content: counter(ordered-list) ".";
+        color: $primary;
+        padding-right: .5rem;
+      }
+    }
+  }
 }
