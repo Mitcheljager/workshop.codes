@@ -269,9 +269,6 @@
     padding-left: 2rem;
 
     li {
-      display: flex;
-      align-items: flex-start;
-
       &::before {
         display: inline-block;
         content: "•";
@@ -287,8 +284,6 @@
     padding-left: 2rem;
 
     li {
-      display: flex;
-      align-items: flex-start;
       counter-increment: ordered-list;
 
       &::before {
