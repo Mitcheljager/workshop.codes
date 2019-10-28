@@ -63,4 +63,12 @@
     </url>
   <% end %>
 
+  <% @snippets.each do |snippet| %>
+    <url>
+      <loc><%= snippet_url(snippet.unique_id) %></loc>
+      <lastmod><%= snippet.updated_at.iso8601 %></lastmod>
+      <priority>0.85</priority>
+    </url>
+  <% end %>
+
 </urlset>
