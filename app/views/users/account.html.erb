@@ -68,7 +68,7 @@
 
   <h1 class="heading">Your Snippets</h1>
 
-  <% current_user.snippets.each do |snippet| %>
+  <% current_user.snippets.order(updated_at: :desc).each do |snippet| %>
     <div class="item item--small">
       <div class="item__title">
         <%= link_to snippet.title, snippet_path(snippet.unique_id) %>

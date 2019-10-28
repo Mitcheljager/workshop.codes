@@ -15,6 +15,8 @@
 <% if current_user == @snippet.user %>
   <div class="well mt-half">
     <%= link_to "Edit your Snippet", edit_snippet_path(@snippet.unique_id), class: "button" %>
+
+    <%= "Only you can see this post" if @snippet.private? %>
   </div>
 <% end %>
 

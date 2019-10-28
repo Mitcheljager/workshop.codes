@@ -10,14 +10,17 @@ class SnippetsController < ApplicationController
   end
 
   def index
-    @snippets = Snippet.order(created_at: :desc).page params[:page]
+    @snippets = Snippet.where(private: 0).order(created_at: :desc).page params[:page]
   end
 
   def search
-    @snippets = Snippet.search(params[:search]).records.page params[:page]
+    @snippets = Snippet.where(private: 0).search(params[:search]).records.page params[:page]
   end
 
   def show
+    if @snippet.user != current_user && @snippet.private?
+      not_found
+    end
   end
 
   def new
@@ -59,6 +62,10 @@ class SnippetsController < ApplicationController
   end
 
   def snippet_params
-    params.require(:snippet).permit(:title, :content, :description, :proficiency)
+    params.require(:snippet).permit(:title, :content, :description, :proficiency, :private)
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new("Not Found")
   end
 end
