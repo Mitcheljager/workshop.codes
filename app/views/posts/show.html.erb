@@ -50,7 +50,7 @@
       <div class="item__details-item">
         Tags |
 
-        <% @post.tags.tr("[]", "").split(/\s|, |,/).each do |tag| %>
+        <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
           <%= link_to tag.downcase, search_path(tag.downcase), class: "tag" %>
         <% end %>
       </div>

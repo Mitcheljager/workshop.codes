@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @hot_posts = Post.where("favorites_count > 0").order("favorites_count DESC").limit(3)
+    @hot_posts = Post.where("hotness > 0").order("hotness DESC").limit(3)
     @posts = Post.order(created_at: :desc).page params[:page]
   end
 
@@ -36,14 +36,16 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.where("favorites_count > 0").order("favorites_count DESC").page params[:page]
+    @posts = Post.where("hotness > 0").order("hotness DESC").page params[:page]
   end
 
   def show
     revision = Revision.find_by_code(params[:code])
     @post = revision.post if revision
 
-    not_found unless @post.present?
+    not_found and return unless @post.present?
+
+    impressionist(@post)
   end
 
   def new
@@ -95,7 +97,7 @@ class PostsController < ApplicationController
   end
 
   def set_order
-    @order = params[:sort] ? "favorites_count DESC" : "updated_at DESC"
+    @order = params[:sort] ? "hotness DESC" : "updated_at DESC"
   end
 
   def not_found

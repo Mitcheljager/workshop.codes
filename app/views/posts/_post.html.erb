@@ -32,11 +32,11 @@
         <div class="item__details-item">
           Tags |
 
-          <% post.tags.tr("[]", "").split(/\s|, |,/).take(5).each do |tag| %>
+          <% post.tags.tr("[]", "").split(/,\s*/).take(5).each do |tag| %>
             <%= link_to tag.downcase, search_path(tag.downcase), class: "tag" %>
           <% end %>
 
-          <% post_length = post.tags.tr("[]", "").split(/\s|, |,/).length %>
+          <% post_length = post.tags.tr("[]", "").split(/,\s*/).length %>
 
           <% if post_length > 5 %>
             <small>+<%= post_length - 5 %></small>
