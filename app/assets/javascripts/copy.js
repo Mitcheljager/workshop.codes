@@ -32,4 +32,14 @@ function copyToClipboard(event, optionalContent = undefined) {
   copyParent.append(notificationElement)
 
   setTimeout(() => { copyParent.querySelector(".copy__notification").remove() }, 1000)
+
+  if (!optionalContent) trackCopyGA(targetElement.textContent)
+}
+
+function trackCopyGA(label) {
+  if (typeof gtag !== "function") return
+
+  gtag("event", "Copy", {
+    "event_category" : label
+  })
 }
