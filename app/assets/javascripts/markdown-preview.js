@@ -11,7 +11,7 @@ function toggleMarkdownPreview(event) {
   event.preventDefault()
 
   const markdownElement = document.querySelector("[data-role='markdown-preview']")
-  const descriptionElement = document.querySelector("textarea[name*='description']")
+  const descriptionElement = document.querySelector("[data-role='markdown-preview-wrapper']")
 
   if (this.innerText == "Show Preview") {
     this.innerText = "Back to editing"
@@ -27,7 +27,7 @@ function toggleMarkdownPreview(event) {
 }
 
 function sendParseRequest(descriptionElement, markdownElement) {
-  const descriptionValue = descriptionElement.value
+  const descriptionValue = descriptionElement.querySelector("textarea").value
 
   markdownElement.innerHTML = "Loading preview..."
 

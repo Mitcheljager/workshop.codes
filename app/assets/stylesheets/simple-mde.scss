@@ -1,0 +1,115 @@
+@import "simplemde/dist/simplemde.min.css";
+@import "variables";
+
+.CodeMirror {
+  padding: $margin / 2;
+  border: 0;
+  background: $bg-dark;
+  color: $white;
+  height: 600px;
+
+  .CodeMirror-selectedtext,
+  .CodeMirror-selected {
+    background: lighten($bg-dark, 20%);
+  }
+
+  .CodeMirror-code {
+    .cm-url {
+      color: $text-color;
+    }
+  }
+}
+
+.CodeMirror-scroll {
+  padding-right: #{ $margin / 2 };
+  padding-bottom: #{ $margin };
+  margin-right: -#{ $margin };
+  margin-bottom: -#{ $margin };
+}
+
+.CodeMirror-cursor {
+  border-color: $white;
+}
+
+.editor-toolbar {
+  border: 0;
+  padding: 0;
+  opacity: 1;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  a {
+    border: 0;
+    margin-right: .25rem;
+    background-color: $bg-dark;
+    color: $text-color !important;
+    font-size: 1rem;
+
+    &.active,
+    &:hover {
+      background-color: lighten($bg-dark, 10%);
+      color: lighten($text-color, 10%) !important;
+      border: 0;
+    }
+  }
+
+  i.separator {
+    border: 0;
+    margin: 0 $margin / 8;
+  }
+}
+
+.fa-bold::before {
+  content: "B";
+  font-weight: bold;
+}
+
+.fa-italic::before {
+  content: "i";
+  font-style: italic;
+}
+
+.fa-header::before {
+  content: "H";
+  font-weight: bold;
+}
+
+.fa-quote-left::before {
+  content: "❞";
+  font-weight: bold;
+}
+
+.fa-list-ul::before {
+  content: "•";
+}
+
+.fa-list-ol::before {
+  content: "❶";
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.fa-link::before {
+  content: "🔗";
+}
+
+.fa-picture-o::before {
+  content: "🖼️";
+}
+
+.fa-minus::before {
+  content: "⚊";
+}
+
+.fa-highlight::before {
+  content: "h";
+  color: $primary;
+}
+
+.fa-code::before {
+  content: "<>";
+  font-weight: bold;
+  font-size: 14px;
+}

@@ -54,7 +54,9 @@
       <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to "and everything else", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", target: "_blank" %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>
     </div>
 
-    <%= form.text_area :description, class: "form-input form-textarea" %>
+    <div data-role="markdown-preview-wrapper">
+      <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde" } %>
+    </div>
   </div>
 
   <div class="form-group-columns mt-full">
@@ -88,3 +90,6 @@
     <center><%= form.submit class: "button" %></center>
   </div>
 <% end %>
+
+<%= stylesheet_link_tag    "simple-mde", media: "all" %>
+<%= javascript_include_tag "simple-mde" %>
