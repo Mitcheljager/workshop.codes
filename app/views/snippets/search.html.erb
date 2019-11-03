@@ -3,7 +3,9 @@
 <div class="heading items-heading">
   <h1>Snippets for <strong><%= params[:search] %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
 
-  <%= render "profile_block", path: new_snippet_path, text: "Create Snippet" %>
+  <div class="ml-auto">
+    <%= link_to "Create Snippet", new_snippet_path, class: "button" %>
+  </div>
 </div>
 
 <main class="items">

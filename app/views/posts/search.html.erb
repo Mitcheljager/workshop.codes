@@ -1,9 +1,7 @@
 <% content_for :page_title, "Search | #{ params[:search] }" %>
 
-<div class="heading items-heading">
+<div class="heading">
   <h1>Workshop Codes for <strong><%= params[:search] %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
-
-  <%= render "profile_block" %>
 </div>
 
 <main class="items">
