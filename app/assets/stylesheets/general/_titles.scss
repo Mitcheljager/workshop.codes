@@ -18,7 +18,7 @@ h5 {
 }
 
 h1 {
-  @include responsive-font-width(32px, map-get($media-min-widths, lg), 28px);
+  @include responsive-font-width(36px, map-get($media-min-widths, lg), 32px);
 }
 
 h2 {

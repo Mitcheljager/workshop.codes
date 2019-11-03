@@ -13,13 +13,9 @@ body {
 
 body {
   position: relative;
-  padding: $margin / 2 10vw;
+  padding: $margin / 3;
   background: $body-bg image-url("layout/pattern-bg.webp");
   color: $text-color;
-
-  @include media-min(sm) {
-    padding: $margin 10vw;
-  }
 }
 
 a {
@@ -84,18 +80,19 @@ blockquote {
   position: absolute;
   top: 0;
   left: 0;
-  height: 300px;
+  height: 200px;
   width: 100%;
   background-size: cover;
-  clip-path: polygon(0 0, 100% 0, 100% 100px, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 80px, 0% 100%);
   z-index: -1;
 
   @include media-min(sm) {
-    height: 400px;
+    height: 210px;
+    clip-path: polygon(0 0, 100% 0, 100% 100px, 0% 100%);
   }
 
   @include media-min(lg) {
-    height: 460px;
+    height: 300px;
     clip-path: polygon(0 0, 100% 0, 100% 120px, 0% 100%);
   }
 
@@ -109,6 +106,7 @@ blockquote {
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: map-get($media-min-widths, lg);
+  max-width: calc(#{ map-get($media-min-widths, lg) - $margin } + 20vw);
   margin: 0 auto;
+  padding: 0 calc(10vw - #{ $margin / 2 });
 }

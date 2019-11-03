@@ -1,5 +1,5 @@
 <% path = path || new_post_path %>
-<% text = text || "Create Item" %>
+<% text = text || "Create" %>
 
 <div class="profile-block">
   <div>
@@ -12,8 +12,5 @@
     <% end %>
   </div>
 
-  <%= link_to current_user.present? ? path : login_path, class: "items-heading__action button" do %>
-    <span class="hidden-sm">Create</span>
-    <span class="hidden visible-sm"><%= text %></span>
-  <% end %>
+  <%= link_to text, current_user.present? ? path : login_path, class: "button" %>
 </div>

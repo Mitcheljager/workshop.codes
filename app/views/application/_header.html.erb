@@ -7,21 +7,16 @@
     </picture>
   <% end %>
 
-  <nav class="header__navigation">
-    <%= link_to posts_path, class: "header__item #{ "header__item--active" if controller_name == "posts" }" do %>
-      <picture>
-        <source srcset="<%= image_url "layout/navigation_item_codes.webp" %>" type="image/webp">
-        <source srcset="<%= image_url "layout/navigation_item_codes.png" %>" type="image/png">
-        <%= image_tag "layout/navigation_item_codes.png", alt: "Codes" %>
-      </picture>
-    <% end %>
+  <%= link_to "☰", "#", class: "header__navigation-trigger", data: { action: "toggle-navigation" } %>
 
-    <%= link_to snippets_path, class: "header__item #{ "header__item--active"if controller_name == "snippets" }" do %>
-      <picture>
-        <source srcset="<%= image_url "layout/navigation_item_snippets.webp" %>" type="image/webp">
-        <source srcset="<%= image_url "layout/navigation_item_snippets.png" %>" type="image/png">
-        <%= image_tag "layout/navigation_item_snippets.png", alt: "Snippets" %>
-      </picture>
-    <% end %>
-  </nav>
+  <div class="header__content" data-role="navigation">
+    <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
+
+    <nav class="header__navigation">
+      <%= link_to "Codes", posts_path, class: "header__item #{ "header__item--active" if controller_name == "posts" }" %>
+      <%= link_to "Snippets", snippets_path, class: "header__item #{ "header__item--active"if controller_name == "snippets" }" %>
+    </nav>
+
+    <%= render "profile_block" %>
+  </div>
 </header>

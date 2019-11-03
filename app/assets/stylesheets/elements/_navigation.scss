@@ -9,7 +9,7 @@
     font-size: 18px;
   }
 
-  @include media-min(xl) {
+  @include media-min(lg) {
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-end;
@@ -22,7 +22,7 @@
   text-align: right;
   margin-bottom: $margin / 12;
 
-  @include media-min(xl) {
+  @include media-min(lg) {
     flex-direction: row;
     margin-left: $margin / 2;
     margin-bottom: 0;
@@ -36,7 +36,7 @@
   &::before {
     content: "\00a0|\00a0";
 
-    @include media-min(xl) {
+    @include media-min(lg) {
       content: ""
     }
   }

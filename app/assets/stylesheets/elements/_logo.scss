@@ -1,12 +1,13 @@
 .logo {
   display: block;
-  height: $logo-height / 1.75;
+  height: $logo-height / 1.5;
+  margin: 0 auto;
 
   @include media-min(sm) {
     height: $logo-height / 1.25;
   }
 
-  @include media-min(lg) {
+  @include media-min(xl) {
     height: $logo-height;
   }
 }

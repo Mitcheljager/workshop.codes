@@ -4,27 +4,42 @@
 
 .profile-block {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin-top: $margin;
   font-size: 14px;
+  color: rgba(white, .75);
   white-space: nowrap;
 
-  @include media-min(md) {
+  @include media-min(lg) {
+    flex-direction: row;
     justify-content: flex-end;
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+  .button {
+    margin-top: $margin / 2;
+
+    @include media-min(lg) {
+      margin-top: 0;
+    }
   }
 }
 
 .profile-block__action {
-  color: $white;
+  color: white;
+  text-decoration: none;
 
   &:hover,
   &:active {
-    color: lighten($white, 50%);
+    color: white;
+    text-decoration: underline;
   }
 
   &:last-of-type {
-    @include media-min(md) {
+    @include media-min(lg) {
       margin-right: $margin / 2;
     }
   }

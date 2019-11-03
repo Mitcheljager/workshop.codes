@@ -1,9 +1,7 @@
 <% content_for :page_title, "#{ params[:category].gsub("-", " ").humanize } #{ "| Page #{ params[:page] }" if params[:page] }" %>
 
-<div class="heading items-heading mb-0">
+<div class="heading mb-0">
   <h1>Workshop Codes in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
-
-  <%= render "profile_block" %>
 </div>
 
 <div class="item item--bottom mt-0 mb-full">

@@ -24,9 +24,11 @@
   <body>
     <%= render "notifications/alert" if current_user && unread_notifications.any? %>
 
+    <%= render "header" %>
+
     <div class="wrapper">
       <%= render "navigation" %>
-
+      
       <%= yield %>
 
       <%= render "footer" %>

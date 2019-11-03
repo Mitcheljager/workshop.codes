@@ -22,3 +22,4 @@
 //= require reveal-by-checkbox
 //= require ide
 //= require markdown-preview
+//= require navigation
