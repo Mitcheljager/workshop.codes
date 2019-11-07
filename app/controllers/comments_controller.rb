@@ -6,14 +6,18 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
-      if @comment.user != @comment.post.user
-        if @comment.parent_id
+      if @comment.parent_id
+        parent_comment_user = Comment.find(@comment.parent_id).user
+
+        if @comment.user != parent_comment_user
           create_notification(
             "Someone has replied to your comment on \"#{ @comment.post.title }\"",
             "#{ post_path(@comment.post.code) }##{@comment.id}",
-            Comment.find(@comment.parent_id).user.id
+            parent_comment_user.id
           )
-        else
+        end
+      else
+        if @comment.user != @comment.post.user
           create_notification(
             "Someone has left a comment on \"#{ @comment.post.title }\"",
             "#{ post_path(@comment.post.code) }##{@comment.id}",
