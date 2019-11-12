@@ -3,7 +3,7 @@
   padding: .25em .35em;
   margin: 0 .1em;
   border-radius: 5px;
-  background: $bg-dark;
+  background: lighten($body-bg, 5%);
   color: $text-color;
   line-height: 1em;
   text-decoration: none;

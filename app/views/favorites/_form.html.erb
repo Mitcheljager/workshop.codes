@@ -6,6 +6,7 @@
         remote: true,
         method: has_been_favorited ? :delete : :post,
         params: { favorite: { post_id: post.id } },
+        aria: { label: "favorite" },
         class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
       <%= inline_svg "icons/icon-heart#{ "-border" unless has_been_favorited }.svg" %>
     <% end %>
