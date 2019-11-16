@@ -133,7 +133,7 @@
                             tokenType >= 5 ? 3 :
                             // otherwise tokenType == 3, (key)word
                             // (1 if regexp matches, 0 otherwise)
-                            + /^(rule|event|actions|conditions)$/[test](token)
+                            + /^(variables|rule|event|actions|conditions|global|player)$/[test](token)
                         ]);
 
                         node[appendChild](_document.createTextNode(token));

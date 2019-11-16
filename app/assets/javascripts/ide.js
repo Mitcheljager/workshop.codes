@@ -3,6 +3,7 @@ let currentContent = 0
 let rulesList = []
 let currentLineCount = 0
 let currentLinePosition = 0
+let fullContent = ""
 
 document.addEventListener("turbolinks:load", function() {
   resetValues()
@@ -11,6 +12,7 @@ document.addEventListener("turbolinks:load", function() {
   const copyElements = document.querySelectorAll("[data-action='copy-ide-content']")
   const inputs = document.querySelectorAll("[data-role='ide-input']")
   const fullscreenElements = document.querySelectorAll("[data-action='toggle-ide-fullscreen']")
+  const viewVariables = document.querySelector("[data-action='view-ide-variables']")
 
   inputs.forEach(input => input.removeEventListener("input", setIdeViaInput))
   inputs.forEach(input => input.addEventListener("input", setIdeViaInput))
@@ -21,12 +23,18 @@ document.addEventListener("turbolinks:load", function() {
   fullscreenElements.forEach(element => element.removeEventListener("click", toggleIdeFullscreen))
   fullscreenElements.forEach(element => element.addEventListener("click", toggleIdeFullscreen))
 
+  if (viewVariables) {
+    viewVariables.removeEventListener("click", showVariables)
+    viewVariables.addEventListener("click", showVariables)
+  }
+
   if (element) initiateIde(element)
 })
 
 function initiateIde(element) {
   const valueElement = document.querySelector("[data-role='ide-input']")
   const value = valueElement ? valueElement.value : element.textContent
+  fullContent = value
 
   setAllContent(element, value)
   createRules()
@@ -105,6 +113,21 @@ function setLineHighlight(element) {
   element.closest(".ide__code-wrapper").append(activeLine)
 
   currentLinePosition = lineOffset
+}
+
+function showVariables(event) {
+  event.preventDefault()
+
+  const element = document.querySelector("[data-role='ide-content']")
+  const valueElement = document.querySelector("[data-role='ide-input']")
+  const value = valueElement ? valueElement.value : fullContent
+
+  let variablesArray = value.split(/variables\n\{([\s\S]*?)\}/)
+
+  element.innerHTML = variablesArray[1] || "No custom variables have been defined."
+
+  microlight.reset()
+  createLineCount(element)
 }
 
 function createRules() {

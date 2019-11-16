@@ -171,3 +171,16 @@
     width: 100%;
   }
 }
+
+.ide__action {
+  display: block;
+  width: 100%;
+  padding: .35rem;
+  margin-bottom: 2rem;
+  background: $bg-dark;
+  text-align: center;
+  text-decoration: none;
+  color: $text-color;
+  font-size: 14px;
+  cursor: pointer;
+}
