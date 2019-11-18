@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-16x16.png" %>" sizes="16x16" />
 
     <%= inline_css "application.css" %>
-    <%= javascript_include_tag "application", async: true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
     <%= render "analytics_code" %>
   </head>

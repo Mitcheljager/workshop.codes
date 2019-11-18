@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action='copy-to-clipboard']")
 
+  elements.forEach((element) => element.removeEventListener("click", copyToClipboard))
   elements.forEach((element) => element.addEventListener("click", copyToClipboard))
 })
 

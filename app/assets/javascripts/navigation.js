@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action='toggle-navigation']")
 
+  elements.forEach((element) => element.removeEventListener("click", toggleNavigation))
   elements.forEach((element) => element.addEventListener("click", toggleNavigation))
 })
 

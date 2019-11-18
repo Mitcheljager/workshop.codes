@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action='reveal-by-checkbox']")
 
+  elements.forEach((element) => element.removeEventListener("click", toggleRevealByCheckbox))
   elements.forEach((element) => element.addEventListener("click", toggleRevealByCheckbox))
 })
 

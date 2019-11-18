@@ -1,12 +1,16 @@
 let dropdownOpen = false
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action='toggle-dropdown']")
   const dropdowns = document.querySelectorAll("[data-dropdown]")
 
+  elements.forEach((element) => element.removeEventListener("click", toggleDropdown))
   elements.forEach((element) => element.addEventListener("click", toggleDropdown))
+
+  dropdowns.forEach((dropdown) => dropdown.removeEventListener("click", stopPropagation))
   dropdowns.forEach((dropdown) => dropdown.addEventListener("click", stopPropagation))
 
+  document.body.removeEventListener("click", clickBody)
   document.body.addEventListener("click", clickBody)
 })
 

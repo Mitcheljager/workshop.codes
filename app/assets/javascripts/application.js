@@ -11,8 +11,10 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require turbolinks
 //= require microlight
 
+//= require analytics
 //= require dropdown
 //= require copy
 //= require checkbox-select-all
