@@ -10,10 +10,10 @@ module AssetsHelper
   end
 
   def inline_js(path)
-    raw "<script>#{ inline_file path }</script>".gsub(/[\u0080-\u00ff]/, "")
+    "<script>#{ inline_file path }</script>".gsub(/[^[:print:]]/i, "").html_safe
   end
 
   def inline_css(path)
-    raw "<style>#{ inline_file path }</style>".gsub(/[\u0080-\u00ff]/, "")
+    "<style>#{ inline_file path }</style>".gsub(/[^[:print:]]/i, "").html_safe
   end
 end
