@@ -87,7 +87,7 @@
   margin-bottom: $margin / 4;
   color: lighten($white, 50%);
   text-decoration: none;
-  font-family: "bignoodletitlingregular";
+  font-family: "bignoodletitlingregular", $font-stack;
   font-size: 36px;
 
   @include media-min(lg) {

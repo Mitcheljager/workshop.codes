@@ -148,7 +148,7 @@
   justify-content: center;
   padding: $margin / 6 0;
   background: $bg-dark image-url("layout/pattern-bg-light.webp");
-  font-family: "bignoodletitlingregular";
+  font-family: "bignoodletitlingregular", $font-stack;
   font-style: italic;
   font-size: 36px;
   line-height: 1em;
@@ -211,7 +211,7 @@
   align-items: center;
   justify-content: space-between;
   padding: $margin / 6 0;
-  font-family: "bignoodletitlingregular";
+  font-family: "bignoodletitlingregular", $font-stack;
   font-style: italic;
   font-size: 24px;
   color: $text-color-dark;

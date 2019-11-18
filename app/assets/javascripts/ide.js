@@ -5,7 +5,7 @@ let currentLineCount = 0
 let currentLinePosition = 0
 let fullContent = ""
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("DOMContentLoaded", function() {
   resetValues()
 
   const element = document.querySelector("[data-role='ide-content']")
@@ -14,19 +14,11 @@ document.addEventListener("turbolinks:load", function() {
   const fullscreenElements = document.querySelectorAll("[data-action='toggle-ide-fullscreen']")
   const viewVariables = document.querySelector("[data-action='view-ide-variables']")
 
-  inputs.forEach(input => input.removeEventListener("input", setIdeViaInput))
   inputs.forEach(input => input.addEventListener("input", setIdeViaInput))
-
-  copyElements.forEach(element => element.removeEventListener("click", copyFullContent))
   copyElements.forEach(element => element.addEventListener("click", copyFullContent))
-
-  fullscreenElements.forEach(element => element.removeEventListener("click", toggleIdeFullscreen))
   fullscreenElements.forEach(element => element.addEventListener("click", toggleIdeFullscreen))
 
-  if (viewVariables) {
-    viewVariables.removeEventListener("click", showVariables)
-    viewVariables.addEventListener("click", showVariables)
-  }
+  if (viewVariables) viewVariables.addEventListener("click", showVariables)
 
   if (element) initiateIde(element)
 })

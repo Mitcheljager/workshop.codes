@@ -1,17 +1,15 @@
 @font-face {
   font-family: "bignoodletitlingregular";
-  src: font-url("big_noodle_titling-webfont.woff2") format("woff2"),
-       font-url("big_noodle_titling-webfont.woff") format("woff");
+  src: font-url("big_noodle_titling-webfont.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: auto;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "bignoodletitlingoblique";
-  src: font-url("big_noodle_titling_oblique-webfont.woff2") format("woff2"),
-       font-url("big_noodle_titling_oblique-webfont.woff") format("woff");
+  src: font-url("big_noodle_titling_oblique-webfont.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: auto;
+  font-display: swap;
 }

@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("DOMContentLoaded", function() {
   if (typeof ga === "function") {
     gtag("config", "UA-46852314-10", {
       "anonymize_ip": true,

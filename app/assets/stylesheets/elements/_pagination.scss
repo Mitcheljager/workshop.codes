@@ -11,7 +11,7 @@
     border: 0;
     color: lighten($white, 50%);
     font-size: 21px;
-    font-family: "bignoodletitlingregular";
+    font-family: "bignoodletitlingregular", $font-stack;
     text-decoration: none;
     text-align: center;
   }
