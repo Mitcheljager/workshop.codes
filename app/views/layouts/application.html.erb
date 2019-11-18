@@ -15,10 +15,7 @@
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-32x32.png" %>" sizes="32x32" />
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-16x16.png" %>" sizes="16x16" />
 
-    <style type="text/css">
-      <%= Rails.application.assets["application.scss"].to_s.html_safe %>
-    </style>
-
+    <%= inline_css "application.css" %>
     <%= javascript_include_tag "application", async: true %>
 
     <%= render "analytics_code" %>
