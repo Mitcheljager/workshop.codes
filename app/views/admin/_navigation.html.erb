@@ -1,0 +1,15 @@
+<div class="heading pt-full">
+  <h1><center>Admin Dashboard</center></h1>
+</div>
+
+<center>
+  <%= link_to "dashboard", admin_path, class: "button #{ "button--secondary" unless current_page?(admin_path) }" %>
+  <%= link_to "posts", admin_posts_path, class: "button #{ "button--secondary" unless current_page?(admin_posts_path) }" %>
+  <%= link_to "snippets", admin_snippets_path, class: "button #{ "button--secondary" unless current_page?(admin_snippets_path) }" %>
+  <%= link_to "users", admin_users_path, class: "button #{ "button--secondary" unless current_page?(admin_users_path) }" %>
+  <%= link_to "comments", admin_comments_path, class: "button #{ "button--secondary" unless current_page?(admin_comments_path) }" %>
+  <%= link_to "favorites", admin_favorites_path, class: "button #{ "button--secondary" unless current_page?(admin_favorites_path) }" %>
+  <%= link_to "notifications", admin_notifications_path, class: "button #{ "button--secondary" unless current_page?(admin_notifications_path) }" %>
+</center>
+
+<hr>

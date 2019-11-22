@@ -1,0 +1,29 @@
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+td {
+  padding: .5rem;
+
+  tr:nth-child(odd) & {
+    background: rgba($white, .05);
+  }
+}
+
+th {
+  padding: .5rem;
+  background: rgba($white, .05);
+  text-align: left;
+  font-weight: bolder;
+  color: $white;
+}
+
+tr {
+  &:hover,
+  &:active {
+    td {
+      background: rgba($white, .1);
+    }
+  }
+}

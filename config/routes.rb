@@ -5,6 +5,16 @@ Rails.application.routes.draw do
 
   get "sitemap", to: "sitemaps#sitemap"
 
+  get "admin", to: "admin#index", as: "admin"
+  namespace :admin do
+    get "posts"
+    get "comments"
+    get "favorites"
+    get "users"
+    get "notifications"
+    get "snippets"
+  end
+
   resources :users, param: :username, except: [:new, :index, :edit, :update]
   get "account(/page/:page)", to: "users#account", as: "account"
   get "edit", to: "users#edit", as: "edit_user"

@@ -1,0 +1,23 @@
+<p>Total snippets: <strong><%= @snippets.count %></strong></p>
+<p>Last snippet: <strong><%= time_ago_in_words(@snippets.first.created_at).humanize %></strong></p>
+<p>Snippets in last 7 days: <strong><%= @snippets.where("created_at > ?", 1.week.ago).count %></strong></p>
+
+<hr>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>User</th>
+    <th>Created at</th>
+  </tr>
+
+  <% @snippets.each do |snippet| %>
+    <tr>
+      <td><%= snippet.id %></td>
+      <td><%= truncate(snippet.title, length: 30) %></td>
+      <td><%= snippet.user.username %></td>
+      <td><%= time_ago_in_words(snippet.created_at).humanize %></td>
+    </tr>
+  <% end %>
+</table>

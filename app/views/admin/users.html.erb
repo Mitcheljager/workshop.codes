@@ -1,0 +1,21 @@
+<p>Total users: <strong><%= @users.count %></strong></p>
+<p>Last user: <strong><%= time_ago_in_words(@users.first.created_at).humanize %></strong></p>
+<p>Users in last 7 days: <strong><%= @users.where("created_at > ?", 1.week.ago).count %></strong></p>
+
+<hr>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Created at</th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.username %></td>
+      <td><%= time_ago_in_words(user.created_at).humanize %></td>
+    </tr>
+  <% end %>
+</table>

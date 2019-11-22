@@ -1,0 +1,23 @@
+<p>Total notifications: <strong><%= @notifications.count %></strong></p>
+<p>Last notification: <strong><%= time_ago_in_words(@notifications.first.created_at).humanize %></strong></p>
+<p>Notifications in last 7 days: <strong><%= @notifications.where("created_at > ?", 1.week.ago).count %></strong></p>
+
+<hr>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Content</th>
+    <th>User</th>
+    <th>Created at</th>
+  </tr>
+
+  <% @notifications.each do |notification| %>
+    <tr>
+      <td><%= notification.id %></td>
+      <td><%= truncate(notification.content, length: 30) %></td>
+      <td><%= notification.user.username %></td>
+      <td><%= time_ago_in_words(notification.created_at).humanize %></td>
+    </tr>
+  <% end %>
+</table>
