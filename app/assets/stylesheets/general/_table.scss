@@ -9,6 +9,16 @@ td {
   tr:nth-child(odd) & {
     background: rgba($white, .05);
   }
+
+  a {
+    color: $white;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+  }
 }
 
 th {

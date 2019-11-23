@@ -20,8 +20,8 @@
     <tr>
       <td><%= post.id %></td>
       <td><%= truncate(post.title, length: 30) %></td>
-      <td><%= post.code %></td>
-      <td><%= post.user.username %></td>
+      <td><%= link_to post.code, post_path(post.code) %></td>
+      <td><%= link_to post.user.username, user_path(post.user.username) %></td>
       <td><%= post.favorites_count %></td>
       <td><%= post.impressions_count %></td>
       <td><%= post.hotness %></td>

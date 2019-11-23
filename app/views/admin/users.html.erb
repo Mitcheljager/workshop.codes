@@ -14,7 +14,7 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.id %></td>
-      <td><%= user.username %></td>
+      <td><%= link_to user.username, user_path(user.username) %></td>
       <td><%= time_ago_in_words(user.created_at).humanize %></td>
     </tr>
   <% end %>
