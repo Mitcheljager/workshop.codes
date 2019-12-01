@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_115930) do
+ActiveRecord::Schema.define(version: 2019_12_01_232158) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_115930) do
     t.integer "favorites_count", default: 0
     t.integer "impressions_count", default: 0
     t.integer "hotness"
+    t.text "snippet"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

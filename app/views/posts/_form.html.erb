@@ -38,6 +38,31 @@
     <div class="item__description" data-role="markdown-preview"></div>
   </div>
 
+  <div data-reveal-by-checkbox>
+    <h2 class="heading">Code Snippet</h2>
+
+    <div class="checkbox">
+      <%= form.check_box :include_snippet, data: { action: "reveal-by-checkbox" }, checked: @post.snippet.present? %>
+      <%= form.label :include_snippet, "Include code snippet" %>
+    </div>
+
+    <span class="form-hint">
+      <strong>Workshop Codes expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. Saving the code snippet allows you to copy paste it at any point.
+    </span>
+
+    <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.snippet.present? %>">
+      <div class="form-group mt-half">
+        <%= form.label :snippet, "Code Snippet", class: "form-label" %>
+
+        <div class="form-hint">
+          To get the code snippet select all your rules and copy them. Simply paste it here and you're good to go.
+        </div>
+
+        <%= form.text_area :snippet, class: "form-input form-textarea form-textarea--small" %>
+      </div>
+    </div>
+  </div>
+
   <h2 class="heading">Settings</h2>
 
   <div class="form-group-columns">

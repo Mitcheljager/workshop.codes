@@ -22,3 +22,4 @@
 //= require ide
 //= require markdown-preview
 //= require navigation
+//= require toggle-content
