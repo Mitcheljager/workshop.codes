@@ -1,7 +1,7 @@
 <% content_for :page_title, "On Fire Items #{ "| Page #{ params[:page] }" if params[:page] }" %>
 
 <div class="heading">
-  <h1><strong>On Fire</strong> Workshop Codes <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
+  <h1><%= inline_svg "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Workshop Codes <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
 </div>
 
 <main class="items">
