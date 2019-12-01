@@ -31,13 +31,6 @@
     <priority>0.95</priority>
   </url>
 
-  <url>
-    <loc><%= snippets_url %></loc>
-    <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
   <% heroes.each do |hero| %>
     <url>
       <loc><%= hero_url(to_slug(hero["name"])) %></loc>
@@ -69,13 +62,4 @@
       <priority>0.90</priority>
     </url>
   <% end %>
-
-  <% @snippets.each do |snippet| %>
-    <url>
-      <loc><%= snippet_url(snippet.unique_id) %></loc>
-      <lastmod><%= snippet.updated_at.iso8601 %></lastmod>
-      <priority>0.85</priority>
-    </url>
-  <% end %>
-
 </urlset>

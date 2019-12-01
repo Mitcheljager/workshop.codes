@@ -39,9 +39,6 @@ Rails.application.routes.draw do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end
 
-  resources :snippets, param: :unique_id, concerns: :paginatable
-  get "snippets/search/:search(/page/:page)", to: "snippets#search", as: "search_snippets"
-
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"

@@ -63,27 +63,4 @@
   <div class="mt-half">
     <%= link_to "Create new Item", new_post_path, class: "button" %>
   </div>
-
-  <h1 class="heading">Your Snippets</h1>
-
-  <% current_user.snippets.order(updated_at: :desc).each do |snippet| %>
-    <div class="item item--small">
-      <div class="item__title">
-        <%= link_to snippet.title, snippet_path(snippet.unique_id) %>
-      </div>
-
-      <div class="item__actions">
-        <div>
-          <%= link_to "Edit", edit_snippet_path(snippet.unique_id), class: "button button--secondary" %>
-          <%= link_to "Delete", snippet_path(snippet.unique_id), class: "button button--danger", method: :delete, data: { confirm: "Are you sure you want to delete this snippet? This cannot be undone." } %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-  <%= tag.em "You've not yet posted any Snippets" if current_user.snippets.blank? %>
-
-  <div class="mt-half">
-    <%= link_to "Create new Snippet", new_snippet_path, class: "button" %>
-  </div>
 </main>

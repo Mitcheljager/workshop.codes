@@ -42,7 +42,7 @@
   }
 
   &::after {
-    @include media-min(xl) {
+    @include media-min(lg) {
       content: "\00a0|\00a0";
     }
   }

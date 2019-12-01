@@ -13,8 +13,8 @@
     <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
 
     <nav class="header__navigation">
-      <%= link_to "Codes", posts_path, class: "header__item #{ "header__item--active" if controller_name == "posts" }" %>
-      <%= link_to "Snippets", snippets_path, class: "header__item #{ "header__item--active"if controller_name == "snippets" }" %>
+      <%= link_to "Recent", posts_path(1), class: "header__item" %>
+      <%= link_to "On Fire", on_fire_path, class: "header__item" %>
     </nav>
 
     <%= render "profile_block" %>
