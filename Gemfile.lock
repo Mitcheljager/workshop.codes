@@ -143,7 +143,7 @@ GEM
     pg (1.1.4)
     pg (1.1.4-x64-mingw32)
     public_suffix (3.1.1)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -260,7 +260,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   kaminari
   pg
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.2.3)
   redcarpet
   sass-rails (~> 5.0)
