@@ -7,7 +7,20 @@
     <div class="item item--single mt-half">
       <div class="item__title item__title--small">
         <%= "Version: " + revision.version unless revision.version.empty? %>
-        <small class="ml-auto"><%= time_ago_in_words(revision.created_at).humanize %> ago</small>
+
+        <small class="ml-auto">
+          <%= time_ago_in_words(revision.created_at).humanize %> ago
+
+          <% if revision.created_at < 6.months.ago %>
+            <small class="tooltip">
+              ⚠
+
+              <div class="tooltip__content">
+                <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+              </div>
+            </small>
+          <% end %>
+        </small>
       </div>
 
       <div class="item__code">
