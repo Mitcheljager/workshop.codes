@@ -116,7 +116,7 @@
       <% end %>
     </div>
 
-    <div class="item__details-item">
+    <div class="item__details-item" title="Updated at: <%= @post.updated_at %> - Created at: <%= @post.updated_at %>">
       Last updated |
 
       <%= time_ago_in_words(@post.updated_at).humanize %> ago
