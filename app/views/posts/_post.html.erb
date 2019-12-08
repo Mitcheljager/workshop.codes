@@ -44,8 +44,6 @@
         </div>
       <% end %>
 
-      <%= post.created_at < 6.months.ago %>
-
       <% if (post.revisions.any? && post.revisions.last.created_at < 6.months.ago) || post.updated_at < 6.months.ago %>
         <div class="item__details-item">
           <div class="tooltip">
