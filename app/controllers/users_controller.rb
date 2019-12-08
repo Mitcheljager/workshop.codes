@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_username(params[:username])
+    @user = User.find_by_username!(params[:username])
     @posts = @user.posts.order(updated_at: :desc).page(params[:page]).per(10)
   end
 
