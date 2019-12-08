@@ -43,6 +43,20 @@
           <% end %>
         </div>
       <% end %>
+
+      <%= post.created_at < 6.months.ago %>
+
+      <% if (post.revisions.any? && post.revisions.last.created_at < 6.months.ago) || post.updated_at < 6.months.ago %>
+        <div class="item__details-item">
+          <div class="tooltip">
+            ⚠ Possibly expired
+
+            <div class="tooltip__content">
+              <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <%= link_to post_path(post.code), class: "item__action" do %>

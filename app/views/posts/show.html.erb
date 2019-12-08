@@ -1,5 +1,9 @@
 <% content_for :page_title, "#{ @post.title }" %>
 
+<% if (@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || @post.updated_at < 6.months.ago %>
+  <div class="warning">⚠ <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.</div>
+<% end %>
+
 <article class="item item--single">
   <h1 class="item__title">
     <%= @post.title %>
