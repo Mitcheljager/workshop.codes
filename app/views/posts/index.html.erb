@@ -13,15 +13,16 @@
     <hr class="mt-0 mb-half">
 
     <%= link_to "View all On Fire Items", on_fire_path, class: "button button--secondary" %>
+    
+    <div class="banner top-offset">
+      <h3 class="mt-0 mb-0"><strong>While You Wait</strong> - Codes to play while in queue</h3>
+
+      <p><small><em>Check out a curated list of codes to play <strong>While You Wait</strong> in queue.</em></small></p>
+
+      <%= link_to "Take me there!", while_you_wait_path, class: "button" %>
+    </div>
   <% end %>
 
-  <div class="banner top-offset">
-    <h3 class="mt-0 mb-0"><strong>While You Wait</strong> - Codes to play while in queue</h3>
-
-    <p><small><em>Check out a curated list of codes to play <strong>While You Wait</strong> in queue.</em></small></p>
-
-    <%= link_to "Take me there!", while_you_wait_path, class: "button" %>
-  </div>
 
   <h2 class="top-offset"><strong>Recent</strong> Items <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h2>
 
