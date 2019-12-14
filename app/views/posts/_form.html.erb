@@ -141,12 +141,14 @@
         <div class="form-group" data-checkbox-group>
           <h3><%= map_type %></h3>
 
-          <div class="checkbox">
-            <%= form.check_box "checkbox_group_#{ map_type }", data: { action: "checkbox-select-all" } %>
-            <%= form.label "checkbox_group_#{ map_type }", "Check all #{ map_type } maps" %>
-          </div>
+          <% if maps.count > 1 %>
+            <div class="checkbox">
+              <%= form.check_box "checkbox_group_#{ map_type }", data: { action: "checkbox-select-all" } %>
+              <%= form.label "checkbox_group_#{ map_type }", "Check all #{ map_type } maps" %>
+            </div>
 
-          <br>
+            <br>
+          <% end %>
 
           <% maps.each do |map| %>
             <div class="checkbox">

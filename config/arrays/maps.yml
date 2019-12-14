@@ -82,3 +82,5 @@
 -
   name: Ayutthaya
   type: Capture the Flag
+- name: Practice Range
+  type: Practice
