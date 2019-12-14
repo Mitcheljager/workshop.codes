@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   root "posts#index"
 
   get "sitemap", to: "sitemaps#sitemap"
@@ -40,6 +38,8 @@ Rails.application.routes.draw do
   end
 
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
+  get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"
+
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   get "categories/:category(/:sort)(/page/:page)", to: "posts#category", as: "category"

@@ -1,0 +1,11 @@
+<div class="item while-you-wait__item">
+  <%= link_to post.title, post_path(post.code) %>
+
+  <div class="item__code while-you-wait__code">
+    <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
+
+    <span class="copy">
+      <span data-copy="<%= post.code %>"><%= post.code %></span>
+    </span>
+  </div>
+</div>

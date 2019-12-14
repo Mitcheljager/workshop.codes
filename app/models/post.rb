@@ -53,6 +53,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :revisions, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :while_you_waits, dependent: :destroy
 
   attr_accessor :revision
   attr_accessor :revision_description
