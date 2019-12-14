@@ -8,7 +8,7 @@
   padding: 0 calc(10vw - #{ $margin / 2 });
   color: lighten($white, 50%);
 
-  @include media-min(lg) {
+  @media (min-width: 1000px) {
     margin-bottom: $margin * 1.16;
     padding: 0 $margin / 3 0 0;
   }
@@ -20,7 +20,7 @@
   align-items: center;
   width: 100%;
 
-  @include media-min(lg) {
+  @media (min-width: 1000px) {
     display: flex;
   }
 
@@ -49,7 +49,7 @@
   font-weight: bolder;
   text-decoration: none;
 
-  @include media-min(lg) {
+  @media (min-width: 1000px) {
     display: none;
   }
 }
@@ -67,7 +67,7 @@
   justify-content: center;
   align-items: center;
 
-  @include media-min(lg) {
+  @media (min-width: 1000px) {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -90,8 +90,8 @@
   font-family: "bignoodletitlingregular", $font-stack;
   font-size: 36px;
 
-  @include media-min(lg) {
-    font-size: 28px;
+  @media (min-width: 1000px) {
+    font-size: 26px;
     margin-bottom: 0;
     margin-right: $margin / 2;
   }
