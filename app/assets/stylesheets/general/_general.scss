@@ -16,6 +16,7 @@ body {
   padding: $margin / 3;
   background: $body-bg image-url("layout/pattern-bg.webp");
   color: $text-color;
+  overflow-x: hidden;
 }
 
 a {
@@ -109,4 +110,30 @@ blockquote {
   max-width: calc(#{ map-get($media-min-widths, lg) - $margin } + 20vw);
   margin: 0 auto;
   padding: 0 calc(10vw - #{ $margin / 2 });
+}
+
+.logo-background {
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 120vw;
+    max-height: 800px;
+    max-width: 800px;
+    background: image-url("layout/overwatch-logo.svg");
+    background-size: 120vw;
+    background-position: center;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -5;
+    opacity: .15;
+
+    @media (min-width: 800px) {
+      background-size: contain;
+    }
+  }
 }
