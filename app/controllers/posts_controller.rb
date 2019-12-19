@@ -45,7 +45,7 @@ class PostsController < ApplicationController
 
     not_found and return unless @post.present?
 
-    # impressionist(@post)
+    impressionist(@post)
   end
 
   def new
