@@ -47,7 +47,7 @@ class Post < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  is_impressionable counter_cache: true, unique: true
+  visitable
 
   belongs_to :user
   has_many :favorites, dependent: :destroy

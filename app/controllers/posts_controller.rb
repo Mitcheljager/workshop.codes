@@ -11,6 +11,8 @@ class PostsController < ApplicationController
     redirect_to root_path unless current_user
   end
 
+  after_action :track_action, only: [:show]
+
   def index
     @hot_posts = Post.where("hotness > 0").order("hotness DESC").limit(3)
     @posts = Post.order(created_at: :desc).page params[:page]
@@ -44,8 +46,6 @@ class PostsController < ApplicationController
     @post = revision.post if revision
 
     not_found and return unless @post.present?
-
-    # impressionist(@post)
   end
 
   def new
@@ -102,6 +102,15 @@ class PostsController < ApplicationController
 
   def not_found
     raise ActionController::RoutingError.new("Not Found")
+  end
+
+  def track_action
+    current_visit_event = Ahoy::Event.where(name: "Post Visit").where(visit_id: current_visit.id, properties: { post_id: @post.id })
+
+    unless current_visit_event.any?
+      ahoy.track "Post Visit", post_id: @post.id
+      @post.increment!(:impressions_count)
+    end
   end
 
   def post_params
