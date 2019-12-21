@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  skip_before_action :track_ahoy_visit, only: [:create, :update, :destroy]
 
   before_action only: [:edit, :update, :destroy] do
     redirect_to root_path unless current_user && current_user == @post.user
