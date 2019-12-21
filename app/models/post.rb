@@ -47,8 +47,6 @@ class Post < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  visitable
-
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :revisions, dependent: :destroy
