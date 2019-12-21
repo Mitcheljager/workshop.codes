@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  skip_before_action :track_ahoy_visit, only: [:create, :update, :destroy]
 
   before_action only: [:edit, :update, :destroy] do
     redirect_to root_path unless current_user && current_user == @post.user
@@ -10,6 +11,8 @@ class PostsController < ApplicationController
   before_action only: [:create, :new] do
     redirect_to root_path unless current_user
   end
+
+  after_action :track_action, only: [:show]
 
   def index
     @hot_posts = Post.where("hotness > 0").order("hotness DESC").limit(3)
