@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     @posts = @posts.where("created_at >= ?", params[:from]) if params[:from]
     @posts = @posts.where("created_at <= ?", params[:to]) if params[:to]
     @posts = @posts.where("updated_at > ?", 6.months.ago) if params[:expired]
-    
+
     @posts = @posts.order("#{ sort_switch } DESC") if params[:sort] && params[:sort] != "relevancy"
 
     @posts = @posts.select { |post| to_slug(post.categories).include?(to_slug(params[:category])) } if params[:category]
@@ -103,11 +103,13 @@ class PostsController < ApplicationController
   end
 
   def track_action
-    current_visit_event = Ahoy::Event.where(name: "Post Visit").where(visit_id: current_visit.id, properties: { post_id: @post.id })
+    if current_visit && @post
+      current_visit_event = Ahoy::Event.where(name: "Post Visit").where(visit_id: current_visit.id, properties: { post_id: @post.id })
 
-    unless current_visit_event.any?
-      ahoy.track "Post Visit", post_id: @post.id
-      @post.increment!(:impressions_count)
+      unless current_visit_event.any?
+        ahoy.track "Post Visit", post_id: @post.id
+        @post.increment!(:impressions_count)
+      end
     end
   end
 
