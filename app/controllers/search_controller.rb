@@ -1,11 +1,7 @@
 class SearchController < ApplicationController
   def index
     unless params[:query].empty?
-      if params[:type] == "snippets"
-        redirect_to search_snippets_path(params[:query].gsub(".", ""))
-      else
-        redirect_to search_path(params[:query].gsub(".", ""))
-      end
+      redirect_to build_filter_path(:search, params[:query].gsub(".", ""))
     else
       redirect_back fallback_location: root_path
     end

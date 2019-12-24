@@ -1,7 +1,8 @@
-.navigation {
+.filter {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  flex-wrap: wrap;
   margin-top: 1rem;
   font-size: 16px;
 
@@ -14,9 +15,14 @@
     align-items: flex-start;
     justify-content: flex-end;
   }
+
+  hr {
+    margin: $margin / 6 0;
+    background: $text-color-dark;
+  }
 }
 
-.navigation__item {
+.filter__item {
   display: flex;
   flex-direction: row-reverse;
   text-align: right;
@@ -30,7 +36,7 @@
   }
 }
 
-.navigation__label {
+.filter__label {
   color: $text-color-dark;
 
   &::before {
@@ -48,12 +54,12 @@
   }
 }
 
-.navigation__dropdown {
+.filter__dropdown {
   position: relative;
   color: $white;
 }
 
-.navigation__dropdown-toggle {
+.filter__dropdown-toggle {
   color: $white;
   text-decoration: none;
   white-space: nowrap;
@@ -72,7 +78,7 @@
   }
 }
 
-.navigation__dropdown-content {
+.filter__dropdown-content {
   display: none;
   position: absolute;
   bottom: -.5rem;
@@ -95,7 +101,7 @@
   }
 }
 
-.navigation__dropdown-item {
+.filter__dropdown-item {
   display: block;
   padding: .5rem 1rem;
   color: $white;
@@ -108,12 +114,48 @@
   }
 }
 
-.navigation__dropdown-label {
+.filter__dropdown-label {
   display: block;
   color: $text-color;
   padding: 1rem 1rem .5rem;
 
   &:first-child {
     padding-top: .5rem;
+  }
+}
+
+.filter__tray {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  color: $text-color-dark;
+}
+
+.filter__actions {
+  margin-left: auto;
+}
+
+.filter__link {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin-top: 1rem;
+  margin-left: auto;
+  color: $text-color-dark;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: $white;
+  }
+
+  &:focus {
+    outline: none;
   }
 }

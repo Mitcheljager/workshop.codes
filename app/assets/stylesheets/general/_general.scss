@@ -92,7 +92,12 @@ blockquote {
     clip-path: polygon(0 0, 100% 0, 100% 100px, 0% 100%);
   }
 
-  @include media-min(lg) {
+  @media (min-width: 1000px) {
+    height: 240px;
+    clip-path: polygon(0 0, 100% 0, 100% 150px, 0% 100%);
+  }
+
+  @include media-min(xl) {
     height: 300px;
     clip-path: polygon(0 0, 100% 0, 100% 120px, 0% 100%);
   }

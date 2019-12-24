@@ -1,0 +1,18 @@
+<div class="heading">
+  <h2>
+    Workshop Codes
+    <% if params[:search] %> for <strong><%= params[:search] %></strong> <% end %>
+    <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+    <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+    <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+    <% if params[:from] %> from <strong><%= time_ago_in_words(params[:from]).gsub("about", "") %> ago</strong> <% end %>
+    <% if params[:to] %> to <strong><%= time_ago_in_words(params[:to]).gsub("about", "") %> ago</strong> <% end %>
+    <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
+    <% if params[:expired] %> excluding <strong>expired</strong> <% end %>
+    <%= tag.em "- Page #{ params[:page] }" if params[:page] %>
+  </h2>
+</div>
+
+<%= render "posts", posts: @posts %>
+
+<%= paginate @posts %>

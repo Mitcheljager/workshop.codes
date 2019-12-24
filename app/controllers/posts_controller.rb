@@ -19,22 +19,19 @@ class PostsController < ApplicationController
     @posts = Post.order(created_at: :desc).page params[:page]
   end
 
-  def search
-    @posts = Post.search(params[:search]).records.page params[:page]
-  end
+  def filter
+    @posts = params[:search] ? Post.search(params[:search]).records.page(params[:page]) : Post.all
 
-  def category
-    @posts = Post.order(@order).select { |post| to_slug(post.categories).include?(to_slug(params[:category])) }
-    @posts = Kaminari.paginate_array(@posts).page(params[:page])
-  end
+    @posts = @posts.where("created_at >= ?", params[:from]) if params[:from]
+    @posts = @posts.where("created_at <= ?", params[:to]) if params[:to]
+    @posts = @posts.where("updated_at > ?", 6.months.ago) if params[:expired]
+    
+    @posts = @posts.order("#{ sort_switch } DESC") if params[:sort] && params[:sort] != "relevancy"
 
-  def hero
-    @posts = Post.order(@order).select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) }
-    @posts = Kaminari.paginate_array(@posts).page(params[:page])
-  end
+    @posts = @posts.select { |post| to_slug(post.categories).include?(to_slug(params[:category])) } if params[:category]
+    @posts = @posts.select { |post| to_slug(post.maps).include?(to_slug(params[:map])) } if params[:map]
+    @posts = @posts.select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) } if params[:hero]
 
-  def map
-    @posts = Post.order(@order).select { |post| to_slug(post.maps).include?(to_slug(params[:map])) }
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
   end
 
@@ -111,6 +108,21 @@ class PostsController < ApplicationController
     unless current_visit_event.any?
       ahoy.track "Post Visit", post_id: @post.id
       @post.increment!(:impressions_count)
+    end
+  end
+
+  def sort_switch
+    case params[:sort]
+    when "views"
+      "impressions_count"
+    when "favorites"
+      "favorites_count"
+    when "time"
+      "created_at"
+    when "on-fire"
+      "hotness"
+    else
+      "created_at"
     end
   end
 

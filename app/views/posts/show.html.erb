@@ -1,6 +1,6 @@
 <% content_for :page_title, "#{ @post.title }" %>
 
-<% if (@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || @post.updated_at < 6.months.ago %>
+<% if @post.updated_at < 6.months.ago %>
   <div class="warning">⚠ <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.</div>
 <% end %>
 
@@ -86,7 +86,7 @@
       Categories |
 
       <% JSON.parse(@post.categories).each do |category| %>
-        <%= link_to category, category_path(to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
+        <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
       <% end %>
     </div>
 
@@ -95,7 +95,7 @@
         Tags |
 
         <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-          <%= link_to tag.downcase, search_path(tag.downcase), class: "tag" %>
+          <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
         <% end %>
       </div>
     <% end %>
@@ -104,7 +104,7 @@
       Heroes |
 
       <% JSON.parse(@post.heroes).each do |hero| %>
-        <%= link_to hero, hero_path(to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
+        <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
       <% end %>
     </div>
 
@@ -112,7 +112,7 @@
       Maps |
 
       <% JSON.parse(@post.maps).each do |map| %>
-        <%= link_to map, map_path(to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
+        <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
       <% end %>
     </div>
 

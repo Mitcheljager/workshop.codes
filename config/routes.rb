@@ -42,9 +42,6 @@ Rails.application.routes.draw do
 
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
-  get "categories/:category(/:sort)(/page/:page)", to: "posts#category", as: "category"
-  get "heroes/:hero(/:sort)(/page/:page)", to: "posts#hero", as: "hero"
-  get "maps/:map(/:sort)(/page/:page)", to: "posts#map", as: "map"
-  get "search/:search(/page/:page)", to: "posts#search", as: "search"
-  post "search(/:type)", to: "search#index", as: "search_post"
+  get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter"
+  post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
 end

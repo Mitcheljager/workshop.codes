@@ -24,7 +24,7 @@
         Categories |
 
         <% JSON.parse(post.categories).each do |category| %>
-          <%= link_to category, category_path(to_slug(category)) %><%= "," unless category == JSON.parse(post.categories).last %>
+          <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(post.categories).last %>
         <% end %>
       </div>
 
@@ -33,7 +33,7 @@
           Tags |
 
           <% post.tags.tr("[]", "").split(/,\s*/).take(5).each do |tag| %>
-            <%= link_to tag.downcase, search_path(tag.downcase), class: "tag" %>
+            <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
           <% end %>
 
           <% post_length = post.tags.tr("[]", "").split(/,\s*/).length %>
@@ -44,7 +44,7 @@
         </div>
       <% end %>
 
-      <% if (post.revisions.any? && post.revisions.last.created_at < 6.months.ago) || post.updated_at < 6.months.ago %>
+      <% if post.updated_at < 6.months.ago %>
         <div class="item__details-item">
           <div class="tooltip">
             ⚠ Possibly expired

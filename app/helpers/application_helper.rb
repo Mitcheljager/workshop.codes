@@ -16,6 +16,28 @@ module ApplicationHelper
     content.gsub(/\[youtube\s+(.*?)\]/, iframe).html_safe
   end
 
+  def build_filter_path(key, value)
+    parameters = {
+      category: params[:category],
+      hero: params[:hero],
+      map: params[:map],
+      from: params[:from],
+      to: params[:to],
+      sort: params[:sort],
+      expired: params[:expired],
+      search: params[:search],
+      page: params[:page]
+    }
+
+    parameters[key] = value
+
+    if parameters.values.all? { |v| v.nil? }
+      return root_path
+    else
+      return filter_path(parameters)
+    end
+  end
+
   def to_slug(string)
     string.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
   end
