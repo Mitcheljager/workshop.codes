@@ -1,3 +1,5 @@
+<%= render "navigation" %>
+
 <p>Total favorites: <strong><%= @favorites.count %></strong></p>
 <p>Last favorite: <strong><%= time_ago_in_words(@favorites.first.created_at).humanize %></strong></p>
 <p>Favorites in last 7 days: <strong><%= @favorites.where("created_at > ?", 1.week.ago).count %></strong></p>
