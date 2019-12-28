@@ -1,7 +1,7 @@
 <% content_for :page_title, @user.username %>
 
 <div class="heading">
-  <h1>Workshop Codes by <strong><%= @user.username %></strong> <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h1>
+  <h1>Workshop Codes by <strong><%= @user.username %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
 </div>
 
 <main class="items">
