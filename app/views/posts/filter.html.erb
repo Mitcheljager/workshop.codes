@@ -9,7 +9,7 @@
     <% if params[:to] %> to <strong><%= time_ago_in_words(params[:to]).gsub("about", "") %> ago</strong> <% end %>
     <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
     <% if params[:expired] %> excluding <strong>expired</strong> <% end %>
-    <%= tag.em "- Page #{ params[:page] }" if params[:page] %>
+    <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
   </h2>
 </div>
 
