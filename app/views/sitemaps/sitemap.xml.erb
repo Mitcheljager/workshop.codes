@@ -40,7 +40,7 @@
 
   <% heroes.each do |hero| %>
     <url>
-      <loc><%= hero_url(to_slug(hero["name"])) %></loc>
+      <loc><%= filter_path(hero: to_slug(hero["name"])) %></loc>
       <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
       <priority>0.80</priority>
     </url>
@@ -48,7 +48,7 @@
 
   <% maps.each do |map| %>
     <url>
-      <loc><%= map_url(to_slug(map["name"])) %></loc>
+      <loc><%= filter_path(map: to_slug(map["name"])) %></loc>
       <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
       <priority>0.80</priority>
     </url>
@@ -56,7 +56,7 @@
 
   <% categories.each do |category| %>
     <url>
-      <loc><%= category_url(to_slug(category)) %></loc>
+      <loc><%= filter_path(category: to_slug(category)) %></loc>
       <lastmod><%= @posts.last.created_at.iso8601 %></lastmod>
       <priority>0.80</priority>
     </url>
@@ -64,7 +64,7 @@
 
   <% @posts.each do |post| %>
     <url>
-      <loc><%= post_url(post.code) %></loc>
+      <loc><%= post_path(post.code) %></loc>
       <lastmod><%= post.updated_at.iso8601 %></lastmod>
       <priority>0.90</priority>
     </url>
