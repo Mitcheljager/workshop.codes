@@ -1,12 +1,14 @@
 <% content_for :page_title, "All items | Page #{ params[:page] }" if params[:page] %>
 
-<div class="heading">
-  <h1><center>Overwatch Workshop Codes</center></h1>
-</div>
+<% unless params[:page] %>
+  <div class="heading mt-full">
+    <h1><center>Overwatch Workshop Codes</center></h1>
+  </div>
+<% end %>
 
 <main class="items">
   <% unless params[:page] %>
-    <h2 class="top-offset"><%= inline_svg "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
+    <h2 class="mt-half"><%= inline_svg "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
 
     <%= render @hot_posts %>
 
@@ -23,9 +25,13 @@
         <%= link_to "Take me there!", while_you_wait_path, class: "button" %>
       </div>
     </div>
-  <% end %>
 
-  <h2 class="top-offset"><strong>Recent</strong> Items <%= tag.em "- Page #{ params[:page] }" if params[:page] %></h2>
+    <h2 class="top-offset"><strong>Recent</strong> Items</h2>
+  <% else %>
+    <div class="heading">
+      <h1><strong>Recent</strong> Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %></h1>
+    </div>
+  <% end %>
 
   <%= render "posts" %>
 

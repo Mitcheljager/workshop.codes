@@ -15,6 +15,10 @@ h5 {
     margin-top: $margin * 2;
     margin-bottom: $margin;
   }
+
+  small {
+    color: $text-color;
+  }
 }
 
 h1 {
