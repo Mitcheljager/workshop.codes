@@ -15,6 +15,10 @@
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-32x32.png" %>" sizes="32x32" />
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-colored-16x16.png" %>" sizes="16x16" />
 
+    <% if @post && params[:code] && @post.code != params[:code] %>
+      <link rel="canonical" href="<%= post_url(@post.code) %>" />
+    <% end %>
+
     <%= inline_css "application.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>
 

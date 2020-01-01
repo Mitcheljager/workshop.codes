@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_145617) do
+ActiveRecord::Schema.define(version: 2020_01_01_140639) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_12_19_145617) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "visible", default: true
   end
 
   create_table "snippets", force: :cascade do |t|
