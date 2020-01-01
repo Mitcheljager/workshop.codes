@@ -40,8 +40,11 @@ class PostsController < ApplicationController
   end
 
   def show
-    revision = Revision.find_by_code(params[:code])
-    @post = revision.post if revision
+    unless @post.present?
+      revision = Revision.find_by_code(params[:code])
+      @post = revision.post if revision
+      redirect_to post_path(revision.post.code) if revision
+    end
 
     not_found and return unless @post.present?
   end
