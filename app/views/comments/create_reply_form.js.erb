@@ -1,5 +1,8 @@
 (() => {
   const element = document.querySelector("[data-comment='<%= @parent_id %>']")
 
+  const form = element.querySelector("form")
+  if (form) form.remove()  
+
   element.querySelector(".post-comment__actions").insertAdjacentHTML("afterEnd", `<%= j render "form", parent_id: @parent_id, post: @post %>`)
 })()

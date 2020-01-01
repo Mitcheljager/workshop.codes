@@ -1,0 +1,13 @@
+<% return if @comment.content.empty? %>
+
+(() => {
+  const element = document.querySelector("[data-comment='<%= @comment.id %>']")
+  element.outerHTML = `<%= j render "comment", comment: @comment %>`
+
+  const newElement = document.querySelector("[data-comment='<%= @comment.id %>']")
+  newElement.classList.add("post-comment--has-been-added")
+
+  setTimeout(() => {
+    newElement.classList.remove("post-comment--has-been-added")
+  }, 2500)
+})()

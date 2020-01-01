@@ -32,6 +32,16 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find_by_id_and_user_id(params[:id], current_user.id)
+
+    if @comment.update(comment_params)
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
   def destroy
     @comment = Comment.find_by_id_and_user_id(params[:id], current_user.id)
 
@@ -45,6 +55,16 @@ class CommentsController < ApplicationController
   def create_reply_form
     @parent_id = params[:comment_id]
     @post = Comment.find(@parent_id).post
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_edit_form
+    @comment = Comment.find(params[:comment_id])
+    @comment_id = @comment.id
+    @post = @comment.post
 
     respond_to do |format|
       format.js
