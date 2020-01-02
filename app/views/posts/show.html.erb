@@ -116,7 +116,13 @@
       <% end %>
     </div>
 
-    <div class="item__details-item" title="Updated at: <%= @post.updated_at %> - Created at: <%= @post.updated_at %>">
+    <div class="item__details-item" title="Created at: <%= @post.created_at %>">
+      Created at |
+
+      <%= time_ago_in_words(@post.created_at).humanize %> ago
+    </div>
+
+    <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
       Last updated |
 
       <%= time_ago_in_words(@post.updated_at).humanize %> ago
@@ -132,7 +138,7 @@
   </div>
 </article>
 
-<%= render "revisions" if @post.revisions.count > 1 %>
+<%= render "revisions/revisions" if @post.revisions.count > 1 %>
 
 <div class="comments">
   <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>

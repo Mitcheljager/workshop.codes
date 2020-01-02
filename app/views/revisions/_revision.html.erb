@@ -1,0 +1,33 @@
+<div class="item item--single mt-half">
+  <div class="item__title item__title--small">
+    <%= revision.version unless revision.version.empty? %>
+
+    <small class="ml-auto">
+      <span title="Created at: <%= revision.created_at %>"><%= time_ago_in_words(revision.created_at).humanize %> ago</span>
+
+      <% if revision.created_at < 6.months.ago %>
+        <small class="tooltip">
+          ⚠
+
+          <div class="tooltip__content">
+            <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+          </div>
+        </small>
+      <% end %>
+    </small>
+  </div>
+
+  <div class="item__code">
+    <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
+
+    <span class="copy">
+      <span data-copy="<%= revision.code %>"><%= revision.code %></span>
+    </span>
+  </div>
+</div>
+
+<% unless revision.description.blank? %>
+  <div class="item__description mt-0">
+    <%= markdown(revision.description) %>
+  </div>
+<% end %>

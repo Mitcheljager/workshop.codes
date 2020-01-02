@@ -1,0 +1,9 @@
+<section class="revisions">
+  <div class="heading items-heading">
+    <h2>Update Log</h2>
+  </div>
+
+  <% @post.revisions.where(visible: true).order(created_at: :desc).each do |revision| %>
+    <%= render "revisions/revision", revision: revision %>
+  <% end %>
+</section>

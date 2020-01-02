@@ -2,7 +2,7 @@
   <div class="post-comment__information">
     <%= link_to comment.user.username, user_path(comment.user.username), class: "post-comment__author" %>
 
-    <span class="post-comment__date">
+    <span class="post-comment__date" title="Created at: <%= comment.created_at %>">
       <%= time_ago_in_words(comment.created_at).humanize %> ago
 
       <% if comment.created_at != comment.updated_at %>
