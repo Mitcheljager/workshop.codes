@@ -1,7 +1,7 @@
 <div itemscope itemtype="https://schema.org/WebSite">
   <meta itemprop="url" content="https://www.workshop.codes/"/>
 
-  <%= form_tag search_post_path(category: params[:category], hero: params[:hero], map: params[:map], from: params[:from], to: params[:to], sort: params[:sort], expired: params[:expired]), class: "search", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction" do %>
+  <%= form_tag search_post_path(request.path_parameters), remote: true, class: "search", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction" do %>
     <meta itemprop="target" content="https://www.workshop.codes/search/{query}"/>
 
     <%= text_field_tag :query, params[:search], class: "form-input form-input--large", placeholder: " ", itemprop: "query-input", required: "true" %>
