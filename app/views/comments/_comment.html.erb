@@ -6,7 +6,7 @@
       <%= time_ago_in_words(comment.created_at).humanize %> ago
 
       <% if comment.created_at != comment.updated_at %>
-        <span title="This post was edited <%= time_ago_in_words(comment.updated_at).humanize %> ago">*</span>
+        <span title="This comment was edited <%= time_ago_in_words(comment.updated_at) %> ago">*</span>
       <% end %>
     </span>
   </div>
