@@ -26,6 +26,12 @@
   </div>
 </div>
 
+<% if revision.post.user == current_user %>
+  <div class="mt-quarter">
+    <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "post-comment__action" %>
+  </div>
+<% end %>
+
 <% unless revision.description.blank? %>
   <div class="item__description mt-0">
     <%= markdown(revision.description) %>

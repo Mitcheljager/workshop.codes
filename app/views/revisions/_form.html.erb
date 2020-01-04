@@ -1,0 +1,45 @@
+<%= form_with url: revision_path(@revision.id), model: @revision, local: true do |form| %>
+  <% if @revision.errors.any? %>
+    <div class="error-block">
+      <h2 class="error-block__title"><strong><%= pluralize(@revision.errors.count, "error") %></strong> prohibited this Item from being saved:</h2>
+
+      <ul>
+      <% @revision.errors.full_messages.each do |message| %>
+        <li><small><%= message %></small></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group-columns">
+    <div class="form-group">
+      <%= form.label :version, class: "form-label" %>
+
+      <div class="form-hint">
+        The version number of this revision.
+      </div>
+
+      <%= form.text_field :version, class: "form-input", placeholder: "E.g. 1.0.5" %>
+    </div>
+  </div>
+
+  <div class="form-group mt-full">
+    <%= form.label :description, "Update Notes", class: "form-label" %>
+
+    <div class="form-hint">
+      Write a short summary of what has changed in this version in relation to the previous.
+      <strong>This description is full Markdown enabled.</strong>
+    </div>
+
+    <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde" } %>
+  </div>
+
+  <hr>
+
+  <div>
+    <center><%= form.submit class: "button" %></center>
+  </div>
+<% end %>
+
+<%= inline_css "simple-mde.css" %>
+<%= inline_js "simple-mde.js" %>

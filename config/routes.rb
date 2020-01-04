@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
   get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"
 
+  resources :revisions, only: [:edit, :update]
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter"

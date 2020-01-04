@@ -1,0 +1,5 @@
+<% content_for :page_title, "Editing Revision..." %>
+
+<h1 class="heading"><strong>Editing Revision</strong> <% if @revision.version.present? %>version "<%= @revision.version %>"<% end %> for "<%= @revision.post.title %>"</h1>
+
+<%= render "form" %>
