@@ -6,7 +6,6 @@ class AdminController < ApplicationController
   def index
     @posts = Post.order(created_at: :desc)
     @users = User.order(created_at: :desc)
-    @snippets = Snippet.order(created_at: :desc)
     @comments = Comment.order(created_at: :desc)
     @favorites = Favorite.order(created_at: :desc)
     @notifications = Notification.order(created_at: :desc)
@@ -18,10 +17,6 @@ class AdminController < ApplicationController
 
   def users
     @users = User.order(created_at: :desc)
-  end
-
-  def snippets
-    @snippets = Snippet.order(created_at: :desc)
   end
 
   def comments

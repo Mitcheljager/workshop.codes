@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_01_140639) do
+ActiveRecord::Schema.define(version: 2020_01_04_014116) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -120,21 +120,6 @@ ActiveRecord::Schema.define(version: 2020_01_01_140639) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "visible", default: true
-  end
-
-  create_table "snippets", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "unique_id"
-    t.string "title"
-    t.text "content"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "proficiency", default: 0
-    t.integer "impressions_count", default: 0
-    t.boolean "private", default: false
-    t.index ["title"], name: "index_snippets_on_title"
-    t.index ["unique_id"], name: "index_snippets_on_unique_id"
   end
 
   create_table "users", force: :cascade do |t|
