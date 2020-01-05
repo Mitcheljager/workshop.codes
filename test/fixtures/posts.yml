@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 1
-  code: MyString
-  title: MyString
-  description: MyText
-  categories: MyString
-  tags: MyString
-  heroes: MyString
-  maps: MyString
+post_one:
+  user: user_one
+  code: ABCDE
+  title: Test Title
+  description: This is a test
+  categories: "[\"Solo\"]"
+  tags: test
+  heroes: "[\"McCree\"]"
+  maps: "[\"Castillo\"]"
 
-two:
-  user_id: 1
-  code: MyString
-  title: MyString
-  description: MyText
-  categories: MyString
-  tags: MyString
-  heroes: MyString
-  maps: MyString
+post_two:
+  user: user_one
+  code: ABCDE
+  title: Test Title
+  description: This is a test
+  categories: "[\"Solo\"]"
+  tags: test
+  heroes: "[\"McCree\"]"
+  maps: "[\"Castillo\"]"

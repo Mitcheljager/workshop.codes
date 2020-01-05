@@ -2,8 +2,7 @@ require 'test_helper'
 
 class WhileYouWaitsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get while_you_waits_index_url
+    get while_you_wait_url
     assert_response :success
   end
-
 end

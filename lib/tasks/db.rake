@@ -19,16 +19,4 @@ namespace :db do
       )
     end
   end
-
-  task fakeit_snippets: :environment do
-    200.times do
-      Snippet.create!(
-        user_id: 1,
-        unique_id: Faker::Alphanumeric.alpha(8),
-        title: Faker::Lorem.sentence,
-        content: Faker::Alphanumeric.alpha(5),
-        description: Faker::Markdown.sandwich(10, 4)
-      )
-    end
-  end
 end

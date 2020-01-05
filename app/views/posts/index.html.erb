@@ -8,7 +8,7 @@
 
 <main class="items">
   <% unless params[:page] %>
-    <h2 class="mt-half"><%= inline_svg "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
+    <h2 class="mt-half"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
 
     <%= render @hot_posts %>
 

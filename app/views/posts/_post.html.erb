@@ -7,7 +7,7 @@
     </div>
 
     <div class="item__code">
-      <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
+      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
 
       <span class="copy">
         <span data-copy="<%= post.code %>"><%= post.code %></span>
@@ -60,7 +60,7 @@
     <%= link_to post_path(post.code), class: "item__action" do %>
       View Item
 
-      <%= inline_svg "icons/icon-right-arrow.svg" %>
+      <%= inline_svg_tag "icons/icon-right-arrow.svg" %>
     <% end %>
   </article>
 <% end %>

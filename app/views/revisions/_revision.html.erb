@@ -18,7 +18,7 @@
   </div>
 
   <div class="item__code">
-    <%= inline_svg "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
+    <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
 
     <span class="copy">
       <span data-copy="<%= revision.code %>"><%= revision.code %></span>
