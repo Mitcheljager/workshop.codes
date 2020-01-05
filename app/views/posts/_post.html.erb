@@ -33,7 +33,7 @@
           Tags |
 
           <% post.tags.tr("[]", "").split(/,\s*/).take(5).each do |tag| %>
-            <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
+            <%= link_to tag.downcase, root_path + "search/#{ tag.downcase }", class: "tag" %>
           <% end %>
 
           <% post_length = post.tags.tr("[]", "").split(/,\s*/).length %>
