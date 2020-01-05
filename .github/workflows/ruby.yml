@@ -15,7 +15,7 @@ jobs:
         run: |
           gem uninstall -aIx bundler
           gem install bundler
-          bundle install --jobs 4 --retry 3
+          bundle install --without production development --jobs 4 --retry 3
       - name: Test
         run: |
          bundle exec rails db:prepare
