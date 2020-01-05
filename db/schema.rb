@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_04_014116) do
+ActiveRecord::Schema.define(version: 2020_01_05_162536) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -77,6 +77,9 @@ ActiveRecord::Schema.define(version: 2020_01_04_014116) do
     t.string "go_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "content_type", default: 0
+    t.string "concerns_model", default: "post"
+    t.integer "concerns_id", default: 0
   end
 
   create_table "posts", force: :cascade do |t|

@@ -9,7 +9,9 @@
 <table>
   <tr>
     <th>ID</th>
-    <th>Content</th>
+    <th>Content Type</th>
+    <th>Con. Model</th>
+    <th>Con. ID</th>
     <th>User</th>
     <th>Created at</th>
   </tr>
@@ -17,7 +19,9 @@
   <% @notifications.each do |notification| %>
     <tr>
       <td><%= notification.id %></td>
-      <td><%= truncate(notification.content, length: 30) %></td>
+      <td><%= notification.content_type %></td>
+      <td><%= notification.concerns_model %></td>
+      <td><%= notification.concerns_id %></td>
       <td><%= notification.user.username %></td>
       <td><%= time_ago_in_words(notification.created_at).humanize %></td>
     </tr>

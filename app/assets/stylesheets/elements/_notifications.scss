@@ -11,11 +11,16 @@
   &:active {
     color: $white;
   }
+
+  p {
+    margin: 0;
+  }
 }
 
 .notifications__action {
   display: block;
   padding: .25em .5em;
+  margin-left: 1rem;
   border: 1px solid $border-color;
   background: $body-bg;
   color: $white;

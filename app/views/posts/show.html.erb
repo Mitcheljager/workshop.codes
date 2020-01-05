@@ -1,7 +1,10 @@
 <% content_for :page_title, "#{ @post.title }" %>
 
 <% if @post.updated_at < 6.months.ago %>
-  <div class="warning">⚠ <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.</div>
+  <div class="warning">
+    <p class="mb-0">⚠ <mark>This code is over 6 months old.</mark></p>
+    <p class="mt-0"><small>This might mean the code has expired and will no longer function.</small></p>
+  </div>
 <% end %>
 
 <article class="item item--single">
@@ -28,6 +31,15 @@
       <em>Likes</em>: <strong><%= @post.favorites_count %></strong>
     </div>
   </div>
+
+  <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
+    <div class="warning mt-quarter">
+      <p><mark>⚠ Your Code will soon expire.</mark></p>
+      <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
+      <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
+      <p><small><em>This code will expire in roughly <%= time_ago_in_words(@post.updated_at + 6.months) %>.</em></small></p>
+    </div>
+  <% end %>
 <% end %>
 
 <article class="item__description">

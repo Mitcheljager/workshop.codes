@@ -11,17 +11,23 @@ class CommentsController < ApplicationController
 
         if @comment.user != parent_comment_user
           create_notification(
-            "Someone has replied to your comment on \"#{ @comment.post.title }\"",
+            "Someone **has replied** to your comment on **\"==#{ @comment.post.title }==\"**",
             "#{ post_path(@comment.post.code) }##{@comment.id}",
-            parent_comment_user.id
+            parent_comment_user.id,
+            :comment_reply,
+            "post",
+            @comment.post.id
           )
         end
       else
         if @comment.user != @comment.post.user
           create_notification(
-            "Someone has left a comment on \"#{ @comment.post.title }\"",
+            "Someone **has left a comment** on **\"==#{ @comment.post.title }==\"**",
             "#{ post_path(@comment.post.code) }##{@comment.id}",
-            @comment.post.user.id
+            @comment.post.user.id,
+            :comment,
+            "post",
+            @comment.post.id
           )
         end
       end
