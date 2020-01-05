@@ -8,18 +8,20 @@ task :notify_expiry => :environment do
     if post.updated_at < 6.months.ago
       has_notification_been_send = Notification.find_by_content_type_and_concerns_model_and_concerns_id(:has_expired, "post", post.id).present?
 
-      Notification.create(
-        content:
-          "==⚠ The Code for **\"#{ post.title }\"** has expired.==
-          **Workshop Codes in Overwatch expire after 6 months**. After this the code will no longer function and **your code will be lost**.
-          Your code is now most likely lost. If you saved a Code Snippet (Either on Workshop.codes or somewhere else) you can generate a new code by copy and pasting the snippet in Overwatch.",
-        go_to: "#{ post_path(post.code) }",
-        user_id: post.user.id,
-        content_type: :has_expired,
-        concerns_model: "post",
-        concerns_id: post.id,
-        has_been_read: 0
-      )
+      unless has_notification_been_send
+        Notification.create(
+          content:
+            "==⚠ The Code for **\"#{ post.title }\"** has expired.==
+            **Workshop Codes in Overwatch expire after 6 months**. After this the code will no longer function and **your code will be lost**.
+            Your code is now most likely lost. If you saved a Code Snippet (Either on Workshop.codes or somewhere else) you can generate a new code by copy and pasting the snippet in Overwatch.",
+          go_to: "#{ post_path(post.code) }",
+          user_id: post.user.id,
+          content_type: :has_expired,
+          concerns_model: "post",
+          concerns_id: post.id,
+          has_been_read: 0
+        )
+      end
     else
       has_notification_been_send = Notification.find_by_content_type_and_concerns_model_and_concerns_id(:will_expire, "post", post.id).present?
 
