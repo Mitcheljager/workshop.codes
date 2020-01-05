@@ -11,20 +11,6 @@
 <div class="while-you-wait">
   <div class="while-you-wait__column">
     <picture>
-      <source srcset="<%= image_url "while_you_wait/header-parkour.webp" %>" type="image/webp">
-      <source srcset="<%= image_url "while_you_wait/header-parkour.jpg" %>" type="image/jpg">
-      <%= image_tag "while_you_wait/header-parkour.jpg", alt: "Parkour" %>
-    </picture>
-
-    <p class="mb-half"><small><em>Test your skills in navigating the maps with multiple heroes. In doing so you might learn a thing or two about mobility.</em></small></p>
-
-    <% @while_you_waits.where(category: "Parkour").each do |while_you_wait| %>
-      <%= render "post", post: while_you_wait.post %>
-    <% end %>
-  </div>
-
-  <div class="while-you-wait__column">
-    <picture>
       <source srcset="<%= image_url "while_you_wait/header-aim-practice.webp" %>" type="image/webp">
       <source srcset="<%= image_url "while_you_wait/header-aim-practice.jpg" %>" type="image/jpg">
       <%= image_tag "while_you_wait/header-aim-practice.jpg", alt: "Aim Practice" %>
@@ -47,6 +33,20 @@
     <p class="mb-half"><small><em>Take on friends (or strangers) in some special Deathmatch modes that can be completed in minutes.</em></small></p>
 
     <% @while_you_waits.where(category: "Deathmatch").each do |while_you_wait| %>
+      <%= render "post", post: while_you_wait.post %>
+    <% end %>
+  </div>
+
+  <div class="while-you-wait__column">
+    <picture>
+      <source srcset="<%= image_url "while_you_wait/header-parkour.webp" %>" type="image/webp">
+      <source srcset="<%= image_url "while_you_wait/header-parkour.jpg" %>" type="image/jpg">
+      <%= image_tag "while_you_wait/header-parkour.jpg", alt: "Parkour" %>
+    </picture>
+
+    <p class="mb-half"><small><em>Test your skills in navigating the maps with multiple heroes. In doing so you might learn a thing or two about mobility.</em></small></p>
+
+    <% @while_you_waits.where(category: "Parkour").each do |while_you_wait| %>
       <%= render "post", post: while_you_wait.post %>
     <% end %>
   </div>
