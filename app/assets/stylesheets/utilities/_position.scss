@@ -52,6 +52,12 @@
   }
 }
 
+.mt-sm-0 {
+  @include media-min(sm) {
+    margin-top: 0;
+  }
+}
+
 .w-md-75 {
   @include media-min(md) {
     width: 75%;
