@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "rails", "~> 5.2.3"
-gem "pg"
 gem "puma", "~> 4.3"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
@@ -36,6 +35,7 @@ group :production do
   gem "autoprefixer-rails"
   gem "heroku-deflater"
   gem "scout_apm"
+  gem "pg"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
