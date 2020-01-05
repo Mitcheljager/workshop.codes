@@ -11,6 +11,10 @@ jobs:
           sudo apt-get install libsqlite3-dev
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
+      - name: Yarn
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
       - name: Bundle
         run: |
           gem uninstall -aIx bundler
