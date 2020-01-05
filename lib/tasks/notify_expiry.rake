@@ -15,7 +15,7 @@ task :notify_expiry => :environment do
           Your code is now most likely lost. If you saved a Code Snippet (Either on Workshop.codes or somewhere else) you can generate a new code by copy and pasting the snippet in Overwatch.",
         go_to: "#{ post_path(post.code) }",
         user_id: post.user.id,
-        content_type: :will_expire,
+        content_type: :has_expired,
         concerns_model: "post",
         concerns_id: post.id,
         has_been_read: 0
