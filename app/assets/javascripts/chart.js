@@ -38,7 +38,8 @@
             }
           }],
           xAxes: [{
-            barThickness: 1,
+            barThickness: "flex",
+            barMaxThickness: 2,
             gridLines: {
               drawBorder: false,
               color: "#353b3f",
