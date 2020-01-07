@@ -4,11 +4,11 @@ class AdminController < ApplicationController
   end
 
   def index
-    @posts = Post.select(:created_at).all
-    @users = User.select(:created_at).all
-    @comments = Comment.select(:created_at).all
-    @favorites = Favorite.select(:created_at).all
-    @notifications = Notification.select(:created_at).all
+    @posts = Post.select(:created_at).all.order(created_at: :asc)
+    @users = User.select(:created_at).all.order(created_at: :asc)
+    @comments = Comment.select(:created_at).all.order(created_at: :asc)
+    @favorites = Favorite.select(:created_at).all.order(created_at: :asc)
+    @notifications = Notification.select(:created_at).all.order(created_at: :asc)
   end
 
   def posts

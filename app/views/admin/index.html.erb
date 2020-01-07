@@ -10,7 +10,7 @@
 
 <% dates = [] %>
 <% counts = [] %>
-<% @posts.group("DATE(created_at)").order(created_at: :asc).count.each do |date, count| %>
+<% @posts.group("DATE(created_at)").count.each do |date, count| %>
   <% dates.push(date.to_date.strftime("%d-%m-%Y")) %>
   <% counts.push(count) %>
 <% end %>
@@ -20,7 +20,7 @@
 
 <% dates = [] %>
 <% counts = [] %>
-<% @users.group("DATE(created_at)").order(created_at: :asc).count.each do |date, count| %>
+<% @users.group("DATE(created_at)").count.each do |date, count| %>
   <% dates.push(date.to_date.strftime("%d-%m-%Y")) %>
   <% counts.push(count) %>
 <% end %>
@@ -31,7 +31,7 @@
 
 <% dates = [] %>
 <% counts = [] %>
-<% @favorites.group("DATE(created_at)").order(created_at: :asc).count.each do |date, count| %>
+<% @favorites.group("DATE(created_at)").count.each do |date, count| %>
   <% dates.push(date.to_date.strftime("%d-%m-%Y")) %>
   <% counts.push(count) %>
 <% end %>
