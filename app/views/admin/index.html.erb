@@ -10,9 +10,9 @@
 
 <% dates = [] %>
 <% counts = [] %>
-<% @posts.group("DATE(created_at)").count.each do |date, count| %>
-  <% dates.push(date.to_date.strftime("%d-%m-%Y")) %>
-  <% counts.push(count) %>
+<% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
+  <% dates.push(group[0]) %>
+  <% counts.push(group[1].count) %>
 <% end %>
 
 <h3 class="mt-full">Posts per day</h3>
@@ -20,20 +20,19 @@
 
 <% dates = [] %>
 <% counts = [] %>
-<% @users.group("DATE(created_at)").count.each do |date, count| %>
-  <% dates.push(date.to_date.strftime("%d-%m-%Y")) %>
-  <% counts.push(count) %>
+<% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
+  <% dates.push(group[0]) %>
+  <% counts.push(group[1].count) %>
 <% end %>
-
 
 <h3 class="mt-full">Users per day</h3>
 <canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= dates %>" data-values="<%= counts %>"></canvas>
 
 <% dates = [] %>
 <% counts = [] %>
-<% @favorites.group("DATE(created_at)").count.each do |date, count| %>
-  <% dates.push(date.to_date.strftime("%d-%m-%Y")) %>
-  <% counts.push(count) %>
+<% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
+  <% dates.push(group[0]) %>
+  <% counts.push(group[1].count) %>
 <% end %>
 
 
