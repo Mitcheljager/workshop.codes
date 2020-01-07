@@ -38,6 +38,7 @@
             }
           }],
           xAxes: [{
+            barThickness: 1,
             gridLines: {
               drawBorder: false,
               color: "#353b3f",

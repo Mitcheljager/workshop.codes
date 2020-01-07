@@ -8,35 +8,40 @@
 
 <hr>
 
-<% dates = [] %>
-<% counts = [] %>
+<% date_counts = {} %>
+<% (Date.parse("June 1 2019").strftime("%Y-%m-%d")...DateTime.now.strftime("%Y-%m-%d")).each do |date| %>
+  <% date_counts[date] = 0 %>
+<% end %>
+
 <% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% dates.push(group[0]) %>
-  <% counts.push(group[1].count) %>
+  <% date_counts[group[0]] = group[1].count %>
 <% end %>
 
 <h3 class="mt-full">Posts per day</h3>
-<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= dates %>" data-values="<%= counts %>"></canvas>
+<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas>
 
-<% dates = [] %>
-<% counts = [] %>
+<% date_counts = {} %>
+<% (Date.parse("June 1 2019").strftime("%Y-%m-%d")...DateTime.now.strftime("%Y-%m-%d")).each do |date| %>
+  <% date_counts[date] = 0 %>
+<% end %>
+
 <% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% dates.push(group[0]) %>
-  <% counts.push(group[1].count) %>
+  <% date_counts[group[0]] = group[1].count %>
 <% end %>
 
 <h3 class="mt-full">Users per day</h3>
-<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= dates %>" data-values="<%= counts %>"></canvas>
+<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas>
 
-<% dates = [] %>
-<% counts = [] %>
-<% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% dates.push(group[0]) %>
-  <% counts.push(group[1].count) %>
+<% date_counts = {} %>
+<% (Date.parse("June 1 2019").strftime("%Y-%m-%d")...DateTime.now.strftime("%Y-%m-%d")).each do |date| %>
+  <% date_counts[date] = 0 %>
 <% end %>
 
+<% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
+  <% date_counts[group[0]] = group[1].count %>
+<% end %>
 
 <h3 class="mt-full">Favorites per day</h3>
-<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= dates %>" data-values="<%= counts %>"></canvas>
+<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas>
 
 <%= inline_js "chart.js" %>
