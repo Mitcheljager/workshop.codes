@@ -1,8 +1,10 @@
+.notifications {
+  border-top: 1px solid $border-color;
+}
+
 .notifications__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: .75em 0;
+  display: block;
+  padding: 1rem 0;
   font-size: 14px;
   border-bottom: 1px solid $border-color;
   text-decoration: none;
@@ -17,13 +19,33 @@
   }
 }
 
+.notifications__item-content {
+  @include media-min(sm) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.notifications__item-tray {
+  font-size: 12px;
+  margin-top: .5rem;
+  font-style: italic;
+  color: $text-color-dark;
+}
+
 .notifications__action {
   display: block;
   padding: .25em .5em;
-  margin-left: 1rem;
+  margin: 1rem 0;
   border: 1px solid $border-color;
   background: $body-bg;
   color: $white;
+  text-align: center;
+
+  @include media-min(sm) {
+    margin: 0 0 0 1rem;
+  }
 
   &:hover,
   &:active {
