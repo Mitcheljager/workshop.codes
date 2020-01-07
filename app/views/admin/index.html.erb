@@ -1,10 +1,10 @@
 <%= render "navigation" %>
 
-<p>Total posts: <strong><%= @posts.count %></strong></p>
-<p>Total users: <strong><%= @users.count %></strong></p>
-<p>Total comments: <strong><%= @comments.count %></strong></p>
-<p>Total favorites: <strong><%= @favorites.count %></strong></p>
-<p>Total notifications: <strong><%= @notifications.count %></strong></p>
+<p>Total posts: <strong><%= @posts.size %></strong></p>
+<p>Total users: <strong><%= @users.size %></strong></p>
+<p>Total comments: <strong><%= @comments.size %></strong></p>
+<p>Total favorites: <strong><%= @favorites.size %></strong></p>
+<p>Total notifications: <strong><%= @notifications.size %></strong></p>
 
 <hr>
 
@@ -14,7 +14,7 @@
 <% end %>
 
 <% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].count %>
+  <% date_counts[group[0]] = group[1].length %>
 <% end %>
 
 <h3 class="mt-full">Posts per day</h3>
@@ -26,7 +26,7 @@
 <% end %>
 
 <% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].count %>
+  <% date_counts[group[0]] = group[1].length %>
 <% end %>
 
 <h3 class="mt-full">Users per day</h3>
@@ -38,7 +38,7 @@
 <% end %>
 
 <% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].count %>
+  <% date_counts[group[0]] = group[1].length %>
 <% end %>
 
 <h3 class="mt-full">Favorites per day</h3>

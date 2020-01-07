@@ -1,8 +1,8 @@
 <%= render "navigation" %>
 
-<p>Total notifications: <strong><%= @notifications.count %></strong></p>
+<p>Total notifications: <strong><%= @notifications.size %></strong></p>
 <p>Last notification: <strong><%= time_ago_in_words(@notifications.first.created_at).humanize %></strong></p>
-<p>Notifications in last 7 days: <strong><%= @notifications.where("created_at > ?", 1.week.ago).count %></strong></p>
+<p>Notifications in last 7 days: <strong><%= @notifications.where("created_at > ?", 1.week.ago).size %></strong></p>
 
 <hr>
 
