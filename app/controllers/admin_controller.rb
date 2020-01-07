@@ -24,7 +24,7 @@ class AdminController < ApplicationController
   end
 
   def favorites
-    @favorites = Favorite.order(created_at: :desc).limit(200)
+    @favorites = Favorite.order(created_at: :desc)
   end
 
   def notifications

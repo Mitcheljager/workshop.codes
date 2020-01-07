@@ -14,7 +14,7 @@
     <th>Created at</th>
   </tr>
 
-  <% @favorites.each do |favorite| %>
+  <% @favorites.limit(200).each do |favorite| %>
     <tr>
       <td><%= favorite.id %></td>
       <td><%= favorite.post.code if favorite.post %></td>
