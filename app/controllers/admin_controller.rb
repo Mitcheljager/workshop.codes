@@ -4,11 +4,11 @@ class AdminController < ApplicationController
   end
 
   def index
-    @posts = Post.order(created_at: :desc)
-    @users = User.order(created_at: :desc)
-    @comments = Comment.order(created_at: :desc)
-    @favorites = Favorite.order(created_at: :desc)
-    @notifications = Notification.order(created_at: :desc)
+    @posts = Post.all
+    @users = User.all
+    @comments = Comment.all
+    @favorites = Favorite.all
+    @notifications = Notification.all
   end
 
   def posts
@@ -24,7 +24,7 @@ class AdminController < ApplicationController
   end
 
   def favorites
-    @favorites = Favorite.order(created_at: :desc)
+    @favorites = Favorite.order(created_at: :desc).limit(200)
   end
 
   def notifications

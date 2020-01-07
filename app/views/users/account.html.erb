@@ -11,6 +11,10 @@
     <%= link_to "Notifications", notifications_path, class: "button button--secondary" %>
   </p>
 
+  <p>
+    <%= link_to "Admin Dashboard", admin_path, class: "button button--secondary" if current_user.username == "admin" %>
+  </p>
+
   <hr>
 
   <p>

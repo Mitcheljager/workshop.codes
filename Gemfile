@@ -11,6 +11,7 @@ gem "inline_svg"
 gem "redcarpet"
 gem "kaminari"
 gem "ahoy_matey"
+gem "chart-js-rails"
 
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"

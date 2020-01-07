@@ -1,7 +1,7 @@
 .well {
   padding: $margin / 4;
-  border: 1px solid lighten($border-color, 10%);
-  background: $bg-dark;
+  border: 1px solid $border-color;
+  background: $body-bg;
   box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
 
   @include media-min(sm) {
