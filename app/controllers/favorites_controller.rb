@@ -8,6 +8,7 @@ class FavoritesController < ApplicationController
     if @favorite.save
       respond_to do |format|
         format.js
+        format.html { redirect_to root_path }
       end
     end
   end
@@ -20,6 +21,7 @@ class FavoritesController < ApplicationController
     if @favorite.destroy
       respond_to do |format|
         format.js
+        format.html { redirect_to root_path }
       end
     end
   end

@@ -44,8 +44,10 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
 end
 
 class Post < ApplicationRecord
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  if Rails.env.production?
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
+  end
 
   belongs_to :user
   has_many :favorites, dependent: :destroy

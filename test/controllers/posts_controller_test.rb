@@ -37,6 +37,10 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     find("#post_categories").find("option[value='Team Deathmatch']").select_option
     find("#post_heroes_reinhardt").set(true)
     find("#post_maps_hanamura").set(true)
+
+    assert_difference "Post.count", 1 do
+      click_button "Create Post"
+    end
   end
 
   test "User can visit post" do
@@ -52,19 +56,23 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as users(:user_one)
 
     visit post_url(@post.code)
-
     assert page.has_content? @post.title
-
     click_link "Edit your item"
 
     assert page.has_content? "Editing"
+    fill_in "post_title", with: "Edited post title"
+
+    click_button "Update Post"
   end
 
   test "User can destroy their post" do
     sign_in_as users(:user_one)
 
     visit account_path
-
     assert page.has_content? "Delete"
+
+    assert_difference "Post.count", -1 do
+      first(".item--small").click_link "Delete"
+    end
   end
 end
