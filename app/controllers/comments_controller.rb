@@ -15,8 +15,8 @@ class CommentsController < ApplicationController
             "#{ post_path(@comment.post.code) }##{@comment.id}",
             parent_comment_user.id,
             :comment_reply,
-            "post",
-            @comment.post.id
+            "comment",
+            @comment.id
           )
         end
       else
@@ -26,8 +26,8 @@ class CommentsController < ApplicationController
             "#{ post_path(@comment.post.code) }##{@comment.id}",
             @comment.post.user.id,
             :comment,
-            "post",
-            @comment.post.id
+            "comment",
+            @comment.id
           )
         end
       end
