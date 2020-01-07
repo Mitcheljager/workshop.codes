@@ -7,8 +7,6 @@ class FavoritesControllerTest < ActionDispatch::IntegrationTest
     visit posts_url
 
     first(".item").find(".favorite").click
-
-    assert page.has_content? "Login"
   end
 
   test "a logged in user should be able to press favorite and unfavorite" do
