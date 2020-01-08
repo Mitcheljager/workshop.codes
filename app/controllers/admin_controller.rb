@@ -12,22 +12,22 @@ class AdminController < ApplicationController
   end
 
   def posts
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.order(created_at: :desc).page(params[:page])
   end
 
   def users
-    @users = User.order(created_at: :desc)
+    @users = User.order(created_at: :desc).page(params[:page])
   end
 
   def comments
-    @comments = Comment.order(created_at: :desc)
+    @comments = Comment.order(created_at: :desc).page(params[:page])
   end
 
   def favorites
-    @favorites = Favorite.order(created_at: :desc)
+    @favorites = Favorite.order(created_at: :desc).page(params[:page])
   end
 
   def notifications
-    @notifications = Notification.order(created_at: :desc)
+    @notifications = Notification.order(created_at: :desc).page(params[:page])
   end
 end
