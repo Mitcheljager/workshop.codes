@@ -10,6 +10,8 @@ class RevisionsController < ApplicationController
 
   def update
     if @revision.update(revision_params)
+      create_activity(:update_revision, revision_activity_params)
+
       redirect_to post_path(@revision.post.code)
     else
       render :edit
@@ -20,6 +22,10 @@ class RevisionsController < ApplicationController
 
   def set_revision
     @revision = Revision.find(params[:id])
+  end
+
+  def revision_activity_params
+    { ip_address: last_4_digits_of_request_ip, id: @revision.id }
   end
 
   def revision_params

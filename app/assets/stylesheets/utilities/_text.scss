@@ -1,3 +1,7 @@
+.text-right {
+  text-align: right;
+}
+
 .text-sm-right {
   @include media-min(sm) {
     text-align: right;

@@ -1,0 +1,13 @@
+<div class="activities__item">
+  <div>
+    <%= render "activities/content_type/#{ activity.content_type }", activity: activity %>
+  </div>
+
+  <div class="activities__timestamp" title="<%= activity.created_at %>">
+    <%= time_ago_in_words(activity.created_at).humanize %> ago <br>
+
+    <% if activity.properties[:ip_address] %>
+      IP ending in <em><%= activity.properties[:ip_address] %></em>
+    <% end %>
+  </div>
+</div>

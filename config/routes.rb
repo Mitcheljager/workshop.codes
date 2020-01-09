@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end
 
+  resources :activities, only: [:index], concerns: :paginatable
+
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
   get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"
 

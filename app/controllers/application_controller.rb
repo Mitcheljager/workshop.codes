@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  include ActivitiesHelper
 
   protect_from_forgery with: :exception
   before_action :login_from_cookie
@@ -13,6 +14,7 @@ class ApplicationController < ActionController::Base
 
       if user
         session[:user_id] = user.id
+        create_activity(:login_from_cookie, { ip_address: last_4_digits_of_request_ip })
       end
     end
   end

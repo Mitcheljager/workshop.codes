@@ -6,6 +6,8 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
+      create_activity(:create_comment, comment_activity_params)
+
       if @comment.parent_id
         parent_comment_user = Comment.find(@comment.parent_id).user
 
@@ -42,6 +44,8 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by_id_and_user_id(params[:id], current_user.id)
 
     if @comment.update(comment_params)
+      create_activity(:update_comment, comment_activity_params)
+
       respond_to do |format|
         format.js
       end
@@ -52,6 +56,8 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by_id_and_user_id(params[:id], current_user.id)
 
     if @comment.destroy
+      create_activity(:destroy_comment, comment_activity_params)
+
       respond_to do |format|
         format.js
       end
@@ -78,6 +84,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def comment_activity_params
+    { ip_address: last_4_digits_of_request_ip, id: @comment.id }
+  end
 
   def comment_params
     params.require(:comment).permit(:post_id, :content, :parent_id)

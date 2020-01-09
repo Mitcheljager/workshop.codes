@@ -17,9 +17,9 @@ class UsersController < ApplicationController
   end
 
   def account
-    @user = current_user
-    @posts = @user.posts.order(updated_at: :desc)
-    @favorites = @user.favorites.page(params[:page]).per(5).order(created_at: :desc)
+    @posts = current_user.posts.order(updated_at: :desc)
+    @favorites = current_user.favorites.page(params[:page]).per(5).order(created_at: :desc)
+    @activities = current_user.activities.order(created_at: :desc).limit(5)
   end
 
   def new
@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
     @user = current_user
     if @user.update(user_params)
+      create_activity(:edit_user, { ip_address: last_4_digits_of_request_ip })
       redirect_to account_path
     else
       render :edit

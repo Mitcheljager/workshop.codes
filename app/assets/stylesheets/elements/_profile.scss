@@ -1,5 +1,20 @@
 .profile {
+  @include media-min(sm) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: $margin / 2;
+  }
+}
 
+.profile__action {
+  display: block;
+  color: $white;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
 }
 
 .profile-block {

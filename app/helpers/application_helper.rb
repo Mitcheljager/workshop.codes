@@ -57,4 +57,8 @@ module ApplicationHelper
   def quotes
     YAML.load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
   end
+
+  def last_4_digits_of_request_ip
+    request.remote_ip.to_s.chars.last(4).join
+  end
 end

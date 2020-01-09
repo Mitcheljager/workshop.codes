@@ -68,6 +68,8 @@ class PostsController < ApplicationController
 
     if @post.save
       @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version).save
+      create_activity(:create_post, post_activity_params)
+
       redirect_to post_path(@post.code)
     else
       render :new
@@ -76,9 +78,13 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      create_activity(:update_post, post_activity_params)
+
       if (post_params[:revision].present? && post_params[:revision] != "0") || (params[:code] != post_params[:code])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], visible: invisible).save
+        create_activity(:update_post, post_activity_params)
+
         redirect_to post_path(@post.code)
       else
         redirect_to post_path(@post.code)
@@ -90,6 +96,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
+    create_activity(:destroy_post, post_activity_params)
+
     redirect_to posts_url
   end
 
@@ -131,6 +139,10 @@ class PostsController < ApplicationController
     else
       "created_at"
     end
+  end
+
+  def post_activity_params
+    { ip_address: last_4_digits_of_request_ip, id: @post.id }
   end
 
   def post_params

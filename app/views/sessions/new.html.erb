@@ -5,7 +5,9 @@
     <div>
       <h1 class="mt-0">Login</h1>
 
-      <div><strong><%= alert %></strong></div>
+      <% if flash[:alert] %>
+        <div class="warning mt-0"><mark><%= flash[:alert] %></mark></div>
+      <% end %>
 
       <%= form_with url: sessions_path do |form| %>
         <div class="form-group">
