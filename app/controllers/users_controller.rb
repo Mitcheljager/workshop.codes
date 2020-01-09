@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
     @user = current_user
     if @user.update(user_params)
-      create_activity(:edit_user, { ip_address: last_4_digits_of_request_ip })
+      create_activity(:update_user, { ip_address: last_4_digits_of_request_ip })
       redirect_to account_path
     else
       render :edit
