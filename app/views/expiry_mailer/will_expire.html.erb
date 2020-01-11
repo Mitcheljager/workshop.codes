@@ -1,0 +1,26 @@
+<h3>Hi <%= @user.username %>,</h3>
+
+<p>
+  You've requested to be notified when your Overwatch Workshop Code on <a style="color: #f06414;" href="https://www.workshop.codes/">Workshop.codes</a> will expire.
+</p>
+
+<p>
+  In roughly <strong>1 month</strong> your Code will expire and it will no longer function. If at this point you no longer have the original snippet it will be lost forever.
+</p>
+
+<p>
+  To update the code simply import the current Code in Overwatch and generate a new Code.<br>
+  Update your code on <a style="color: #f06414;" href="https://www.workshop.codes/">Workshop.codes</a> and you're all set.
+</p>
+
+<p style="color: #dfdfdf">
+  The code this concerns is:
+</p>
+
+<h3 style="margin-bottom: 0;"><%= @post.title %></h3>
+
+<h2 style="margin-top: 0;"><strong><%= @post.code %></strong></h2>
+
+<p>
+  <a style="color: #f06414;" href="<%= post_url(@post.code) %>">View your post here</a> or by vising this url: <%= post_url(@post.code) %>
+</p>

@@ -12,10 +12,9 @@ gem "redcarpet"
 gem "kaminari"
 gem "ahoy_matey"
 gem "chart-js-rails"
-
+gem "sendgrid-ruby"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"
-
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"
 
