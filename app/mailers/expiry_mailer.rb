@@ -1,6 +1,7 @@
-include Rails.application.routes.url_helpers
 
 class ExpiryMailer < ApplicationMailer
+  include Rails.application.routes.url_helpers
+  
   default from: "notifications@workshop.codes"
 
   def will_expire
