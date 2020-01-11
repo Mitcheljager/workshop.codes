@@ -67,6 +67,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "overwatch-workshop_#{Rails.env}"
 
+  Rails.application.routes.default_url_options[:host] = "https://www.workshop.codes/"
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
