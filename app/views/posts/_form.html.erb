@@ -161,6 +161,33 @@
     </div>
   </div>
 
+  <hr>
+
+  <div data-reveal-by-checkbox>
+    <h2>Expiry Notifications</h2>
+    <p class="form-hint"><strong>Workshop Codes expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. <mark>We will send you a notification on Workshop.codes if your code has not been updated in 5 months</mark>, giving you 1 month to update the code. We will also send you a notification when your code has expired.</p>
+
+    <br>
+
+    <div class="checkbox">
+      <%= form.check_box :email_notification, checked: @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?), data: { action: "reveal-by-checkbox" } %>
+      <%= form.label :email_notification, "Also notify me by email" %>
+    </div>
+
+    <span class="form-hint">
+      Check this if you would like to receive a notification by email when your code has not been updated for 5 months. <strong>Your emailaddress is encrypted on our server</strong> and will be removed right after the notification has been send. We will not use it for any other purposes.
+    </span>
+
+    <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?) %>">
+      <div class="form-group-columns">
+        <div class="form-group mt-0">
+          <%= form.label :email, "Email address", class: "form-label" %>
+          <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <% if @post.persisted? %>
     <hr>
 
@@ -191,11 +218,6 @@
       </div>
     </div>
   <% end %>
-
-  <hr>
-
-    <h3>Expiry Notifications</h3>
-    <p class="form-hint"><strong>Workshop Codes expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. <mark>We will send you a notification on Workshop.codes if your code has not been updated in 5 months</mark>, giving you 1 month to update the code. We will also send you a notification when your code has expired.</p>
 
   <hr>
 

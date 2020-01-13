@@ -1,0 +1,27 @@
+<%= render "navigation" %>
+
+<p>Total activities: <strong><%= Activity.all.size %></strong></p>
+<p>Last activities: <strong><%= time_ago_in_words(@activities.first.created_at).humanize %></strong></p>
+<p>Activities in last 7 days: <strong><%= Activity.where("created_at > ?", 1.week.ago).size %></strong></p>
+
+<hr>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Content Type</th>
+    <th>User</th>
+    <th>Created at</th>
+  </tr>
+
+  <% @activities.each do |activity| %>
+    <tr>
+      <td><%= activity.id %></td>
+      <td><%= activity.content_type %></td>
+      <td><%= activity.user.username %></td>
+      <td><%= time_ago_in_words(activity.created_at).humanize %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate @activities %>

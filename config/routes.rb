@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     get "favorites"
     get "users"
     get "notifications"
+    get "email_notifications"
+    get "activities"
   end
 
   resources :users, param: :username, except: [:new, :index, :edit, :update]

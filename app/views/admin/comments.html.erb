@@ -19,7 +19,7 @@
     <tr>
       <td><%= comment.id %></td>
       <td><%= truncate(comment.content, length: 30) %></td>
-      <td><%= comment.post.code %></td>
+      <td><%= link_to comment.post.code, post_path(comment.post.code) %></td>
       <td><%= comment.user.username %></td>
       <td><%= time_ago_in_words(comment.created_at).humanize %></td>
     </tr>

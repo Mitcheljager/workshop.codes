@@ -54,9 +54,12 @@ class Post < ApplicationRecord
   has_many :revisions, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :while_you_waits, dependent: :destroy
+  has_many :email_notifications, dependent: :destroy
 
   attr_accessor :revision
   attr_accessor :revision_description
+  attr_accessor :email_notification
+  attr_accessor :email
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }

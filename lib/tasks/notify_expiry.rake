@@ -5,7 +5,7 @@ task :notify_expiry => :environment do
   posts = Post.where("updated_at < ?", 5.months.ago)
 
   posts.each do |post|
-    if post.updated_at < 6.months.ago
+    if (post.revisions.any? && post.revisions.last.created_at < 6.months.ago) || (post.revisions.none? && post.updated_at < 6.months.ago)
       has_notification_been_send = Notification.find_by_content_type_and_concerns_model_and_concerns_id(:has_expired, "post", post.id).present?
 
       unless has_notification_been_send
@@ -38,6 +38,11 @@ task :notify_expiry => :environment do
           concerns_id: post.id,
           has_been_read: 0
         )
+
+        if post.email_notifications.any?
+          ExpiryMailer.with(id: post.id, to: post.email_notifications.last.email).will_expire.deliver_now
+          post.email_notifications.destroy_all
+        end
       end
     end
   end

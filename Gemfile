@@ -15,6 +15,7 @@ gem "chart-js-rails"
 gem "sendgrid-ruby"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"
+gem "lockbox"
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"
 

@@ -30,4 +30,12 @@ class AdminController < ApplicationController
   def notifications
     @notifications = Notification.order(created_at: :desc).page(params[:page])
   end
+
+  def email_notifications
+    @email_notifications = EmailNotification.order(created_at: :desc).page(params[:page])
+  end
+
+  def activities
+    @activities = Activity.order(created_at: :desc).page(params[:page])
+  end
 end

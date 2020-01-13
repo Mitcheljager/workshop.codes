@@ -120,6 +120,7 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    lockbox (0.3.1)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -253,6 +254,7 @@ DEPENDENCIES
   inline_svg
   jbuilder (~> 2.5)
   kaminari
+  lockbox
   pg
   puma (~> 4.3)
   rails (~> 5.2.3)

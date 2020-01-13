@@ -1,0 +1,29 @@
+<%= render "navigation" %>
+
+<p>Total notifications: <strong><%= EmailNotification.all.size %></strong></p>
+<p>Last notification: <strong><%= time_ago_in_words(@email_notifications.first.created_at).humanize %></strong></p>
+<p>Notifications in last 7 days: <strong><%= EmailNotification.where("created_at > ?", 1.week.ago).size %></strong></p>
+
+<hr>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Content Type</th>
+    <th>Post</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+  </tr>
+
+  <% @email_notifications.each do |email_notification| %>
+    <tr>
+      <td><%= email_notification.id %></td>
+      <td><%= email_notification.content_type %></td>
+      <td><%= link_to email_notification.post.code, post_path(email_notification.post.code) %></td>
+      <td><%= time_ago_in_words(email_notification.created_at).humanize %></td>
+      <td><%= time_ago_in_words(email_notification.updated_at).humanize %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate @email_notifications %>

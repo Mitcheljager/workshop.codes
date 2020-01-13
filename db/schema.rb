@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_08_205338) do
+ActiveRecord::Schema.define(version: 2020_01_12_030535) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "user_id"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 2020_01_08_205338) do
     t.integer "post_id"
     t.integer "parent_id"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "email_notifications", force: :cascade do |t|
+    t.text "email_ciphertext"
+    t.integer "post_id"
+    t.integer "content_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
