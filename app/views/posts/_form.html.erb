@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-      <%= form.text_field :code, class: "form-input form-input--large", placeholder: "Code" %>
+      <%= form.text_field :code, class: "form-input form-input--large", placeholder: "Code", autocomplete: "off" %>
     </div>
   </div>
 
@@ -183,6 +183,8 @@
         <div class="form-group mt-0">
           <%= form.label :email, "Email address", class: "form-label" %>
           <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
+
+          <p class="form-hint">To make sure we don't end up in your spam folder, add <strong>notifications@workshop.codes</strong> to your approved senders list.</p>
         </div>
       </div>
     </div>
