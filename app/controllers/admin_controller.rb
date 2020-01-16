@@ -9,6 +9,7 @@ class AdminController < ApplicationController
     @comments = Comment.select(:created_at).all.order(created_at: :asc)
     @favorites = Favorite.select(:created_at).all.order(created_at: :asc)
     @notifications = Notification.select(:created_at).all.order(created_at: :asc)
+    @post_views = Statistic.where(concerns_model: "post").all.order(created_at: :asc)
   end
 
   def posts

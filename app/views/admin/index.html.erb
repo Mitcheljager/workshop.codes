@@ -13,6 +13,18 @@
   <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
 <% end %>
 
+<% @post_views.group_by { |x| x.on_date.strftime("%Y-%m-%d") }.each do |group| %>
+  <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
+<% end %>
+
+<h3 class="mt-full">Post views per day</h3>
+<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas>
+
+<% date_counts = {} %>
+<% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
+  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
+<% end %>
+
 <% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
   <% date_counts[group[0]] = group[1].length %>
 <% end %>
