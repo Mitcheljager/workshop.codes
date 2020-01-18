@@ -1,4 +1,4 @@
-<% cache "#{ post.id }_#{ post.updated_at }_#{ current_user.present? }_#{ current_user && current_user.favorites.find_by_post_id(post.id).present?  }" do %>
+<% cache [post, current_user] do %>
   <article class="item">
     <div class="item__title">
       <%= link_to post.title, post_path(post.code) %>

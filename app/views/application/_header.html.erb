@@ -1,23 +1,25 @@
-<header class="header">
-  <%= link_to root_path do %>
-    <picture>
-      <source srcset="<%= image_url "logo.webp" %> 2x, <%= image_url "logo.webp" %> 1x" type="image/webp">
-      <source srcset="<%= image_url "logo_x2.png" %> 2x, <%= image_url "logo.png" %> 1x" type="image/png">
-      <%= image_tag "logo.png", class: "logo", alt: "Workshop.codes Logo" %>
-    </picture>
-  <% end %>
+<%= cache ["header", current_user] do %>
+  <header class="header">
+    <%= link_to root_path do %>
+      <picture>
+        <source srcset="<%= image_url "logo.webp" %> 2x, <%= image_url "logo.webp" %> 1x" type="image/webp">
+        <source srcset="<%= image_url "logo_x2.png" %> 2x, <%= image_url "logo.png" %> 1x" type="image/png">
+        <%= image_tag "logo.png", class: "logo", alt: "Workshop.codes Logo" %>
+      </picture>
+    <% end %>
 
-  <%= link_to "☰", "#", class: "header__navigation-trigger", data: { action: "toggle-navigation" } %>
+    <%= link_to "☰", "#", class: "header__navigation-trigger", data: { action: "toggle-navigation" } %>
 
-  <div class="header__content" data-role="navigation">
-    <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
+    <div class="header__content" data-role="navigation">
+      <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
 
-    <nav class="header__navigation">
-      <%= link_to "Recent", posts_path(1), class: "header__item" %>
-      <%= link_to "On Fire", on_fire_path, class: "header__item" %>
-      <%= link_to "While you wait", while_you_wait_path, class: "header__item" %>
-    </nav>
+      <nav class="header__navigation">
+        <%= link_to "Recent", posts_path(1), class: "header__item" %>
+        <%= link_to "On Fire", on_fire_path, class: "header__item" %>
+        <%= link_to "While you wait", while_you_wait_path, class: "header__item" %>
+      </nav>
 
-    <%= render "profile_block" %>
-  </div>
-</header>
+      <%= render "profile_block" %>
+    </div>
+  </header>
+<% end %>

@@ -1,29 +1,31 @@
 <div class="post-comment" data-comment="<%= comment.id %>" id="<%= comment.id %>">
-  <div class="post-comment__information">
-    <%= link_to comment.user.username, user_path(comment.user.username), class: "post-comment__author" %>
+  <% cache [comment, current_user] do %>
+    <div class="post-comment__information">
+      <%= link_to comment.user.username, user_path(comment.user.username), class: "post-comment__author" %>
 
-    <span class="post-comment__date" title="Created at: <%= comment.created_at %>">
-      <%= time_ago_in_words(comment.created_at).humanize %> ago
+      <span class="post-comment__date" title="Created at: <%= comment.created_at %>">
+        <%= time_ago_in_words(comment.created_at).humanize %> ago
 
-      <% if comment.created_at != comment.updated_at %>
-        <span title="This comment was edited <%= time_ago_in_words(comment.updated_at) %> ago">*</span>
-      <% end %>
-    </span>
-  </div>
-
-  <div class="post-comment__content">
-    <%= markdown(comment.content) %>
-  </div>
-
-  <% if current_user %>
-    <div class="post-comment__actions">
-      <%= link_to "Reply", create_reply_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
-
-      <% if comment.user == current_user %>
-        <%= link_to "Edit", create_edit_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
-        <%= link_to "Delete", comment_path(comment.id), class: "post-comment__action", remote: true, method: :delete, data: { confirm: "Are you sure?", disable_with: "Deleting..." } %>
-      <% end %>
+        <% if comment.created_at != comment.updated_at %>
+          <span title="This comment was edited <%= time_ago_in_words(comment.updated_at) %> ago">*</span>
+        <% end %>
+      </span>
     </div>
+
+    <div class="post-comment__content">
+      <%= markdown(comment.content) %>
+    </div>
+
+    <% if current_user %>
+      <div class="post-comment__actions">
+        <%= link_to "Reply", create_reply_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
+
+        <% if comment.user == current_user %>
+          <%= link_to "Edit", create_edit_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
+          <%= link_to "Delete", comment_path(comment.id), class: "post-comment__action", remote: true, method: :delete, data: { confirm: "Are you sure?", disable_with: "Deleting..." } %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 
   <%= render comment.post.comments.where(parent_id: comment.id) %>
