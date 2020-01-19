@@ -152,9 +152,8 @@
   </article>
 <% end %>
 
-<% cache @post.revisions do %>
-  <%= render "revisions/revisions" if @post.revisions.size > 1 %>
-<% end %>
+
+<%= render "revisions/revisions" if @post.revisions.size > 1 %>
 
 <div class="comments">
   <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.size %></span> Comments</h2>

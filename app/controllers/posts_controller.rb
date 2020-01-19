@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   end
 
   def filter
-    @posts = params[:search] ? Post.search(params[:search]).records.page(params[:page]) : Post.all
+    @posts = params[:search] ? Post.search(params[:search]).records : Post.all
 
     @posts = @posts.where("created_at >= ?", params[:from]) if params[:from]
     @posts = @posts.where("created_at <= ?", params[:to]) if params[:to]
