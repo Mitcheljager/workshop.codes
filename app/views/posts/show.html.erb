@@ -152,8 +152,9 @@
   </article>
 <% end %>
 
-
-<%= render "revisions/revisions" if @post.revisions.size > 1 %>
+<% cache [@post.revisions, current_user] do %>
+  <%= render "revisions/revisions" if @post.revisions.size > 1 %>
+<% end %>
 
 <div class="comments">
   <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.size %></span> Comments</h2>
@@ -161,6 +162,8 @@
   <%= render "comments/form", post: @post %>
 
   <div class="comments__wrapper" data-role="comments">
-    <%= render @post.comments.where(parent_id: nil).order(created_at: :desc) %>
+    <% cache [@post.comments, current_user] do %>
+      <%= render @post.comments.where(parent_id: nil).order(created_at: :desc) %>
+    <% end %>
   </div>
 </div>
