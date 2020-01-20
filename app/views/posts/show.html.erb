@@ -1,6 +1,6 @@
 <% content_for :page_title, "#{ @post.title }" %>
 
-<%= cache [@post, current_user == @post.user, (@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || (@post.revisions.none? && @post.updated_at < 6.months.ago)] do %>
+<%= cache [@post, current_user, (@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || (@post.revisions.none? && @post.updated_at < 6.months.ago)] do %>
   <% if (@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || (@post.revisions.none? && @post.updated_at < 6.months.ago) %>
     <div class="warning">
       <p class="mb-0">⚠ <mark>This code is over 6 months old.</mark></p>
