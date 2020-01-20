@@ -10,17 +10,25 @@ document.addEventListener("turbolinks:load", function() {
   dropdowns.forEach((dropdown) => dropdown.removeEventListener("click", stopPropagation))
   dropdowns.forEach((dropdown) => dropdown.addEventListener("click", stopPropagation))
 
-  document.body.removeEventListener("click", clickBody)
-  document.body.addEventListener("click", clickBody)
+  document.body.removeEventListener("click", closeDropdown)
+  document.body.addEventListener("click", closeDropdown)
+
+  document.body.removeEventListener("keydown", closeOnKeyDown)
+  document.body.addEventListener("keydown", closeOnKeyDown)
 })
 
-function clickBody(event) {
+function closeDropdown(event) {
   if (!dropdownOpen) return
 
   const activeDropdown = document.querySelector("[data-dropdown-content].active")
   if (activeDropdown) activeDropdown.classList.remove("active")
 
   dropdownOpen = false
+}
+
+function closeOnKeyDown(event) {
+  if (!dropdownOpen && event.key !== "Escape") return
+  closeDropdown()
 }
 
 function toggleDropdown(event) {
@@ -33,7 +41,7 @@ function toggleDropdown(event) {
   if (activeDropdown && activeDropdown != target) activeDropdown.classList.remove("active")
 
   target.classList.toggle("active")
-  dropdownOpen = !dropdownOpen
+  dropdownOpen = target.classList.contains("active")
 }
 
 function stopPropagation(event) {
