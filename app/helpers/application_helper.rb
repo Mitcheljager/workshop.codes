@@ -25,8 +25,7 @@ module ApplicationHelper
       to: params[:to],
       sort: params[:sort],
       expired: params[:expired],
-      search: params[:search],
-      page: params[:page]
+      search: params[:search]
     }
 
     parameters[key] = value
