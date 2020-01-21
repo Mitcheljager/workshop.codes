@@ -55,6 +55,8 @@ GEM
       execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
+    bugsnag (6.12.2)
+      concurrent-ruby (~> 1.0)
     builder (3.2.4)
     byebug (11.0.1)
     capybara (2.18.0)
@@ -243,6 +245,7 @@ DEPENDENCIES
   ahoy_matey
   autoprefixer-rails
   bcrypt
+  bugsnag
   byebug
   capybara (~> 2.13)
   chart-js-rails
