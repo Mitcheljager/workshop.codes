@@ -13,22 +13,9 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background: image-url("layout/banner-bg.jpg") no-repeat;
-    background-size: cover;
+    background: $bg-dark image-url("layout/pattern-bg-light.webp");
     z-index: -1;
-    opacity: .065;
-  }
-
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background: $body-bg;
-    z-index: -2;
+    opacity: .65;
   }
 
   p {
