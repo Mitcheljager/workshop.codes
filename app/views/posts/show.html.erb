@@ -24,8 +24,6 @@
     </div>
   </article>
 
-  <div class="logo-background"></div>
-
   <% if current_user == @post.user %>
     <div class="well mt-half">
       <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
