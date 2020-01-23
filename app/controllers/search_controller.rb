@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  
   def index
     unless params[:query].empty?
       respond_to do |format|
