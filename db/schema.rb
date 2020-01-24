@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_200509) do
+ActiveRecord::Schema.define(version: 2020_01_23_213601) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "user_id"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(version: 2020_01_21_200509) do
     t.index ["user_id", "post_id"], name: "index_favorites_on_user_id_and_post_id"
   end
 
+  create_table "forgot_password_tokens", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer "user_id"
     t.integer "has_been_read", default: 0
@@ -156,6 +163,9 @@ ActiveRecord::Schema.define(version: 2020_01_21_200509) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "email_ciphertext"
+    t.string "email_bidx"
+    t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

@@ -16,6 +16,8 @@ gem "sendgrid-ruby"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"
 gem "lockbox"
+gem "blind_index"
+gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: true
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"
 gem "bugsnag"

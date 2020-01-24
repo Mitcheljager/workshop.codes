@@ -38,6 +38,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       generate_remember_token if params[:remember_me]
 
+      create_activity(:create_user, { ip_address: last_4_digits_of_request_ip })
       redirect_to account_path
     else
       render :new
@@ -72,7 +73,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:username, :password, :password_confirmation, :email)
   end
 
   def generate_remember_token

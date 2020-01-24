@@ -1,0 +1,35 @@
+<h1 class="top-offset">Reset your password</h1>
+
+<div class="form-group-columns mt-full">
+  <%= form_for :forgot_password, url: reset_password_path do |f| %>
+    <% if @user && @user.errors.any? %>
+      <div class="error-block">
+        <h2 class="error-block__title"><strong><%= pluralize(@user.errors.count, "error") %></strong> prohibited this user from being saved:</h2>
+
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><small><%= message %></small></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.hidden_field :token, value: @forgot_password_token.token %>
+
+    <div class="form-field">
+      <%= f.label :password, class: "form-label" %>
+      <%= f.password_field :password, placeholder: "Password", class: "form-input" %>
+
+      <div class="form-hint">Please use a unique password that is different from the one you use for Overwatch. Passwords are encrypted and securely stored.</div>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :password_confirmation, class: "form-label" %>
+      <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-input" %>
+    </div>
+
+    <hr class="small">
+
+    <%= submit_tag "Submit", class: "button" %>
+  <% end %>
+</div>
