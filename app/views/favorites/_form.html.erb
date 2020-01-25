@@ -14,7 +14,9 @@
     </div>
   <% end %>
 <% else %>
-  <%= link_to login_path, class: "favorite" do %>
-    <%= inline_svg_tag "icons/icon-heart-border.svg" %>
+  <% cache "favorite_login_form" do %>
+    <%= link_to login_path, class: "favorite" do %>
+      <%= inline_svg_tag "icons/icon-heart-border.svg" %>
+    <% end %>
   <% end %>
 <% end %>
