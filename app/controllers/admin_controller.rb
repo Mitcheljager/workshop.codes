@@ -34,6 +34,7 @@ class AdminController < ApplicationController
 
   def email_notifications
     @email_notifications = EmailNotification.order(created_at: :desc).page(params[:page])
+    @forgot_password_tokens = ForgotPasswordToken.order(created_at: :desc).page(params[:page])
   end
 
   def activities
