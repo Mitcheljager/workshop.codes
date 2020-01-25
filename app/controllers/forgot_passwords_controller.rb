@@ -24,7 +24,7 @@ class ForgotPasswordsController < ApplicationController
 
       if @forgot_password_token.save
         create_activity(:forgot_password, { ip_address: last_4_digits_of_request_ip }, @user.id)
-        ForgotPasswordsMailer.with(token: @forgot_password_token.token).send_token.deliver_now
+        ForgotPasswordsMailer.with(token: @forgot_password_token.token).send_token.deliver_later
       end
     end
 
