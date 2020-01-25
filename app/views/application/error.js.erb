@@ -1,0 +1,12 @@
+(() => {
+  const element = document.createElement("div")
+  element.classList.add("alert")
+  element.classList.add("alert--error")
+  element.innerText = "Something went wrong when performing that action."
+
+  document.body.prepend(element)
+
+  setTimeout(() => {
+    element.remove()
+  }, 5000)
+})()

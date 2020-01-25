@@ -10,6 +10,10 @@ class FavoritesController < ApplicationController
         format.js
         format.html { redirect_to root_path }
       end
+    else
+      respond_to do |format|
+        format.js { render file: "application/error.js.erb" }
+      end
     end
   end
 
@@ -22,6 +26,10 @@ class FavoritesController < ApplicationController
       respond_to do |format|
         format.js
         format.html { redirect_to root_path }
+      end
+    else
+      respond_to do |format|
+        format.js { render file: "application/error.js.erb" }
       end
     end
   end
