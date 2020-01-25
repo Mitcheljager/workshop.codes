@@ -1,11 +1,11 @@
-<% cache [post, current_user] do %>
-  <article class="item">
-    <div class="item__title">
-      <%= link_to post.title, post_path(post.code) %>
+<article class="item">
+  <div class="item__title">
+    <%= link_to post.title, post_path(post.code) %>
 
-      <%= render "favorites/form", post: post %>
-    </div>
+    <%= render "favorites/form", post: post %>
+  </div>
 
+  <% cache [post, current_user] do %>
     <div class="item__code">
       <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
 
@@ -62,5 +62,5 @@
 
       <%= inline_svg_tag "icons/icon-right-arrow.svg" %>
     <% end %>
-  </article>
-<% end %>
+  <% end %>
+</article>

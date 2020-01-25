@@ -5,13 +5,11 @@ class FavoritesController < ApplicationController
 
     @post = Post.find(favorite_params[:post_id])
 
-    if @favorite.save
-      respond_to do |format|
+    respond_to do |format|
+      if @favorite.save
         format.js
         format.html { redirect_to root_path }
-      end
-    else
-      respond_to do |format|
+      else
         format.js { render file: "application/error.js.erb" }
       end
     end
@@ -22,13 +20,11 @@ class FavoritesController < ApplicationController
 
     @post = Post.find(favorite_params[:post_id])
 
-    if @favorite.destroy
-      respond_to do |format|
+    respond_to do |format|
+      if @favorite.destroy
         format.js
         format.html { redirect_to root_path }
-      end
-    else
-      respond_to do |format|
+      else
         format.js { render file: "application/error.js.erb" }
       end
     end
