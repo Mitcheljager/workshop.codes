@@ -11,6 +11,7 @@
     <p>You are logged in as <strong><%= current_user.username %></strong></p>
 
     <%= link_to "Admin Dashboard", admin_path, class: "profile__action" if current_user.username == "admin" %>
+    <%= link_to "View your profile", user_path(current_user.username), class: "profile__action" %>
     <%= link_to "View your notifications", notifications_path, class: "profile__action" %>
 
     <br>
