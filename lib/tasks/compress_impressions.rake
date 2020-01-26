@@ -6,8 +6,8 @@ task :compress_impressions => :environment do
     Statistic.create(timeframe: :daily, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
   end
 
-  visits = Ahoy::Visit.where("started_at < ?", 1.week.ago)
-  events = Ahoy::Event.where("time < ?", 1.week.ago)
+  visits = Ahoy::Visit.where("started_at < ?", 1.month.ago)
+  events = Ahoy::Event.where("time < ?", 1.month.ago)
 
   events.destroy_all
   visits.destroy_all
