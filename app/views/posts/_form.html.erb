@@ -119,7 +119,7 @@
 
           <% heroes.each do |hero| %>
             <div class="checkbox">
-              <%= form.check_box :heroes, { multiple: true, checked: (JSON.parse(@post.heroes).include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
+              <%= form.check_box :heroes, { multiple: true, checked: (JSON.parse(@post.heroes || "[]").include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
               <%= form.label "heroes_#{ hero["name"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }", hero["name"] %>
             </div>
           <% end %>
@@ -152,7 +152,7 @@
 
           <% maps.each do |map| %>
             <div class="checkbox">
-              <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps).include?(map["name"]) if @post.heroes) }, map["name"], false %>
+              <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps || "[]").include?(map["name"]) if @post.maps) }, map["name"], false %>
               <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "") }", map["name"] %>
             </div>
           <% end %>
