@@ -4,12 +4,8 @@ one:
   timeframe: 1
   value: 1
   on_date: 2020-01-14 18:46:20
-  concerns_model: MyString
-  concerns_id: 1
 
 two:
   timeframe: 1
   value: 1
   on_date: 2020-01-14 18:46:20
-  concerns_model: MyString
-  concerns_id: 1
