@@ -1,0 +1,24 @@
+<%= render "navigation" %>
+
+<h3 class="mt-0">Post: <strong><%= @post.title %></strong></h3>
+<p>Code: <strong><%= link_to @post.code, post_path(@post.code) %></strong>
+<br><br>
+<p>Total revisions: <strong><%= @post.revisions.size %></strong></p>
+<p>Total comments: <strong><%= @post.comments.size %></strong></p>
+<p>Total views: <strong><%= @views.sum(&:value) %></strong></p>
+
+<hr>
+
+<% date_counts = {} %>
+<% (Date.parse("January 1 2020")...DateTime.now).each do |date| %>
+  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
+<% end %>
+
+<% @views.group_by { |x| x.on_date.strftime("%Y-%m-%d") }.each do |group| %>
+  <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
+<% end %>
+
+<h3 class="mt-full">Total views per day</h3>
+<canvas width="400" height="100" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas>
+
+<%= inline_js "chart.js" %>

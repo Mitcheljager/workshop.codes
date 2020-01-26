@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_213601) do
+ActiveRecord::Schema.define(version: 2020_01_26_001837) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "user_id"
@@ -152,10 +152,9 @@ ActiveRecord::Schema.define(version: 2020_01_23_213601) do
     t.integer "timeframe"
     t.integer "value"
     t.datetime "on_date"
-    t.string "concerns_model", default: "post"
-    t.integer "concerns_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "properties", default: "{}"
   end
 
   create_table "users", force: :cascade do |t|

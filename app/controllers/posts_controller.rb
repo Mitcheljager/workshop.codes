@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     redirect_to root_path unless current_user
   end
 
-  after_action :track_action, only: [:show]
+  after_action :track_action, only: [:show, :index, :filter, :on_fire]
 
   def index
     @hot_posts = Post.where("hotness > 0").order("hotness DESC").limit(3)
@@ -123,14 +123,9 @@ class PostsController < ApplicationController
   end
 
   def track_action
-    if current_visit && @post
-      current_visit_event = Ahoy::Event.where(name: "Post Visit").where(visit_id: current_visit.id, properties: { post_id: @post.id })
-
-      unless current_visit_event.any?
-        ahoy.track "Post Visit", post_id: @post.id
-        @post.increment!(:impressions_count)
-      end
-    end
+    parameters = request.path_parameters
+    parameters["id"] = @post.id if @post
+    ahoy.track "Posts Visit", request.path_parameters
   end
 
   def sort_switch
