@@ -38,7 +38,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.where("hotness > 0").order("hotness DESC").page params[:page]
+    @posts = Post.where("hotness > 1").order("hotness DESC").page params[:page]
   end
 
   def show
