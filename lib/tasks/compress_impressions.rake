@@ -4,6 +4,10 @@ task :compress_impressions => :environment do
 
   events.each do |event|
     Statistic.create(timeframe: :daily, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
+
+    if event[1].first[1]["id"]
+      Post.find(event[1].first[1]["id"]).increment!(:impressions_count, event[1].size)
+    end
   end
 
   visits = Ahoy::Visit.where("started_at < ?", 1.month.ago)
