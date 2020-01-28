@@ -43,6 +43,8 @@
     <% end %>
   <% end %>
 
+  <%= render "carousel" if @post.images.any? %>
+
   <article class="item__description">
     <%= markdown(@post.description) %>
   </article>

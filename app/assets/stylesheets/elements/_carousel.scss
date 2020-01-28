@@ -1,0 +1,82 @@
+.carousel {
+  width: 100%;
+  max-width: 900px;
+  margin-top: $margin;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: $body-bg;
+    text-indent: 1000 * 1000px;
+  }
+
+  [data-role="carousel"]:not([style]) {
+    height: 500px;
+    overflow: hidden;
+  }
+}
+
+.carousel__wrapper {
+  background: var(--background);
+  box-shadow: 0 0 0 $margin / 4 var(--background);
+
+  &--is-inactive {
+    display: none;
+  }
+
+  img:not([src]) {
+    height: 0;
+  }
+}
+
+.carousel__item {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel__actions {
+  display: flex;
+  position: absolute;
+  top: $margin / 4;
+  right: $margin / 4;
+
+  a {
+    margin-right: $margin / 8;
+  }
+}
+
+.carousel__navigation {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: $margin / 4;
+  margin-top: $margin / 4;
+
+  @include media-min(sm) {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.carousel__navigation-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    opacity: 0.75;
+  }
+
+  &--is-active {
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 0 2px $primary;
+    }
+  }
+}

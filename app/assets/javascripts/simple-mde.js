@@ -1,6 +1,5 @@
 //= require simplemde/dist/simplemde.min.js
 
-
 (() => {
   const elements = document.querySelectorAll("[data-role='simple-mde']")
 

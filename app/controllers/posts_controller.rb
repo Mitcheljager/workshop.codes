@@ -151,7 +151,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :code, :title, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
       :revision, :revision_description,
-      :email_notification, :email)
+      :email_notification, :email,
+      :image_order, images: [])
   end
 
   def email_notification_enabled

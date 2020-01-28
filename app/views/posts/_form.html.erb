@@ -1,4 +1,4 @@
-<%= form_with url: path, model: post, local: true do |form| %>
+<%= form_with url: path, model: post, local: true, data: { role: "post-form" } do |form| %>
   <% if post.errors.any? %>
     <div class="error-block">
       <h2 class="error-block__title"><strong><%= pluralize(post.errors.count, "error") %></strong> prohibited this Item from being saved:</h2>
@@ -19,6 +19,35 @@
     <div class="form-group">
       <%= form.text_field :code, class: "form-input form-input--large", placeholder: "Code", autocomplete: "off" %>
     </div>
+  </div>
+
+  <div class="form-group top-offset">
+    <label class="form-label">Images</label>
+
+    <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field" %>
+    <%= form.hidden_field :image_order %>
+
+    <div class="dropzone mt-half" data-role="dropzone">
+      <span>Drop images here to add them to your post</span>
+
+      <small>Images will be processed to a 900x500 format</small>
+    </div>
+
+    <% begin %>
+      <div class="images-preview top-offset" data-role="form-image-thumbnails sortable">
+        <% image_ids = @post.image_order || "[]" %>
+        <% ordered_images = JSON.parse(image_ids).collect { |i| @post.images.find_by_blob_id(i) } %>
+
+        <% ordered_images.each do |image| %>
+          <div class="images-preview__item" data-id="<%= image.blob_id %>">
+            <%= image_tag image.variant(convert: "jpg", quality: 85, resize_to_fill: [200, 200]).processed %>
+          </div>
+        <% end %>
+      </div>
+    <% rescue %>
+    <% end %>
+
+    <div class="images-preview" data-role="form-image-thumbnails sortable"></div>
   </div>
 
   <div class="form-group top-offset">
@@ -228,5 +257,5 @@
   </div>
 <% end %>
 
-<%= inline_css "simple-mde.css" %>
-<%= inline_js "simple-mde.js" %>
+<%= inline_css "form.css" %>
+<%= inline_js "form.js" %>

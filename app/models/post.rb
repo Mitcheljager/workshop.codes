@@ -50,16 +50,21 @@ class Post < ApplicationRecord
   end
 
   belongs_to :user
+
   has_many :favorites, dependent: :destroy
   has_many :revisions, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :while_you_waits, dependent: :destroy
   has_many :email_notifications, dependent: :destroy
 
+  has_many_attached :images, dependent: :destroy
+
   attr_accessor :revision
   attr_accessor :revision_description
   attr_accessor :email_notification
   attr_accessor :email
+
+  serialize :image_order
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }

@@ -23,3 +23,4 @@
 //= require markdown-preview
 //= require navigation
 //= require toggle-content
+//= require carousel

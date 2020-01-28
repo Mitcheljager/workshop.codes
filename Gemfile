@@ -21,6 +21,10 @@ gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: tr
 gem "bcrypt", :require => "bcrypt"
 gem "high_voltage", "~> 3.0.0"
 gem "bugsnag"
+gem "aws-sdk-s3", require: false
+gem "mini_magick", ">= 4.9.5"
+gem "image_processing", "~> 1.2"
+gem "active_storage_validations"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
