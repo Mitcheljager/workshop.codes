@@ -14,8 +14,7 @@ class AdminController < ApplicationController
 
   def post
     @post = Post.find(params[:id])
-    @views = Statistic.order(created_at: :asc).as_json
-    @views = @views.select { |s| s["properties"]["controller"] == "posts" && s["properties"]["action"] == "show" && s["properties"]["id"] == @post.id }
+    @views = Statistic.order(created_at: :asc).select { |s| s.properties["controller"] == "posts" && s.properties["id"] == @post.id }
   end
 
   def posts
