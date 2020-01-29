@@ -9,13 +9,13 @@ class AdminController < ApplicationController
     @comments = Comment.select(:created_at).all.order(created_at: :asc)
     @favorites = Favorite.select(:created_at).all.order(created_at: :asc)
     @notifications = Notification.select(:created_at).all.order(created_at: :asc)
-    @post_views = Statistic.all.order(created_at: :asc).select { |s| s.properties["controller"] == "posts" && s.properties["action"] == "show" }
+    @post_views = Statistic.order(created_at: :asc).select { |s| s.properties["controller"] == "posts" && s.properties["action"] == "show" }
     @all_views = Statistic.order(created_at: :asc)
   end
 
   def post
     @post = Post.find(params[:id])
-    @views = Statistic.all.order(created_at: :asc).select { |s| s.properties["controller"] == "posts" && s.properties["action"] == "show" && s.properties["id"] == @post.id }
+    @views = Statistic.order(created_at: :asc).select { |s| s.properties["controller"] == "posts" && s.properties["action"] == "show" && s.properties["id"] == @post.id }
   end
 
   def posts
