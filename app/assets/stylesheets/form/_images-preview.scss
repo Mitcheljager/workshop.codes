@@ -21,7 +21,6 @@
 .images-preview__item {
   position: relative;
   background: $body-bg;
-  overflow: hidden;
   animation: fade-in-image-preview-item 200ms;
   cursor: grab;
 
@@ -33,5 +32,18 @@
     display: block;
     width: 100%;
     height: auto;
+  }
+}
+
+.images-preview__action {
+  position: absolute;
+  bottom: -.25rem;
+  transform: translateY(100%);
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: $white;
   }
 }

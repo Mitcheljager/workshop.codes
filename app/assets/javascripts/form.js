@@ -21,6 +21,13 @@ function bindDropzone() {
 
   element.removeEventListener("drop", dropzoneDrop)
   element.addEventListener("drop", dropzoneDrop)
+
+  const removeElements = document.querySelectorAll("[data-action='remove-image']")
+
+  if (!removeElements.length) return
+
+  removeElements.forEach(element => element.removeEventListener("click", removeImage))
+  removeElements.forEach(element => element.addEventListener("click", removeImage))
 }
 
 function dropzoneEnter(event) {
@@ -125,11 +132,20 @@ function drawAndRenderThumbnail(image, imageId) {
   ctx.drawImage(image, (canvas.width / 2) - (image.width / 2), (canvas.height / 2) - (image.height / 2), image.width, image.height)
 
   const thumbnail = new Image()
-  thumbnail.src = canvas.toDataURL("image/png")
+  thumbnail.src = canvas.toDataURL("image/jpeg")
+
   const thumbnailItem = document.createElement("div")
   thumbnailItem.classList.add("images-preview__item")
   thumbnailItem.dataset.id = imageId
+
+  const removeElement = document.createElement("div")
+  removeElement.classList.add("images-preview__action")
+  thumbnailItem.dataset.action = "remove-image"
+  removeElement.textContent = "Remove"
+  removeElement.addEventListener("click", removeImage)
+
   thumbnailItem.append(thumbnail)
+  thumbnailItem.append(removeElement)
 
   thumbnailsElement.append(thumbnailItem)
 
@@ -167,4 +183,12 @@ function updateSortable() {
 
   const input = document.querySelector("input[name*='image_order']")
   input.value = JSON.stringify(array)
+}
+
+function removeImage(event) {
+  console.log("aa")
+  const element = event.target.closest(".images-preview__item")
+  element.remove()
+
+  updateSortable()
 }

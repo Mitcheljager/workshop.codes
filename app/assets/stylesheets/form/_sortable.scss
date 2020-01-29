@@ -1,10 +1,10 @@
 .sortable-ghost {
   background: repeating-linear-gradient(
-    45deg,
+    -45deg,
     $body-bg,
-    $body-bg $margin / 4,
-    $bg-dark $margin / 4,
-    $bg-dark $margin / 2
+    $body-bg 10px,
+    $bg-dark 10px,
+    $bg-dark 20px
   );
 
   img {

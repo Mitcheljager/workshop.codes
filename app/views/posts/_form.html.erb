@@ -40,6 +40,7 @@
 
         <% ordered_images.each do |image| %>
           <div class="images-preview__item" data-id="<%= image.blob_id %>">
+            <div class="images-preview__action" data-action="remove-image">Remove</div>
             <%= image_tag image.variant(convert: "jpg", quality: 85, resize_to_fill: [200, 200]).processed %>
           </div>
         <% end %>
