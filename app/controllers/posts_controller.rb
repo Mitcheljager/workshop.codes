@@ -112,6 +112,9 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by_code(params[:code])
+
+    @image_ids = @post.image_order || "[]"
+    @ordered_images = JSON.parse(@image_ids).collect {|i| @post.images.find_by_blob_id(i) }
   end
 
   def set_order

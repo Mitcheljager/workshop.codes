@@ -47,3 +47,19 @@
     color: $white;
   }
 }
+
+.images-preview__progress {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: $margin / 4;
+}
+
+.images-preview__progress-bar {
+  position: relative;
+  height: 1rem;
+  width: 0;
+  border-radius: 99px;
+  background: $primary;
+  transition: width 50ms;
+}

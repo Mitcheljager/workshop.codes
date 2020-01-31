@@ -250,7 +250,6 @@ function copyFullContent(event) {
 }
 
 function toggleIdeFullscreen(event) {
-  console.log("a")
   const element = event.target.closest(".ide")
 
   element.classList.toggle("ide--fullscreen")

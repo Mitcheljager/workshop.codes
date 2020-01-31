@@ -21,37 +21,43 @@
     </div>
   </div>
 
-  <div class="form-group top-offset">
+  <div class="form-group mt-full" data-reveal-by-checkbox>
     <label class="form-label">Images</label>
 
-    <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field" %>
-    <%= form.hidden_field :image_order %>
-
-    <div class="dropzone mt-half" data-role="dropzone">
-      <span>Drop images here to add them to your post</span>
-
-      <small>Images will be processed to a 900x500 format</small>
+    <div class="checkbox mt-half">
+      <%= form.check_box :include_images, checked: @post.image_order.present?, data: { action: "reveal-by-checkbox" } %>
+      <%= form.label :include_images, "Include image banner" %>
     </div>
 
-    <% begin %>
-      <div class="images-preview top-offset" data-role="form-image-thumbnails sortable">
-        <% image_ids = @post.image_order || "[]" %>
-        <% ordered_images = JSON.parse(image_ids).collect { |i| @post.images.find_by_blob_id(i) } %>
+    <p class="form-hint">
+      <strong>Include an image at the top of your post.</strong> If you add more than 1 image it turns in to an image slider. All images are resized to a 900x500 format. <br>
+      Alternatively you can use a 3rd party (Imgur) to add images to your description in the next step.
+    </p>
 
-        <% ordered_images.each do |image| %>
+    <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.image_order.present? %>">
+      <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
+      <%= form.hidden_field :image_order %>
+
+      <div class="dropzone mt-half" data-role="dropzone">
+        <span>Drop images here to add them to your post</span>
+
+        <small>Images will be processed to a 900x500 format, regardless of their original size</small>
+      </div>
+
+      <div class="images-preview top-offset" data-role="form-image-thumbnails sortable">
+        <% @ordered_images.each do |image| %>
           <div class="images-preview__item" data-id="<%= image.blob_id %>">
             <div class="images-preview__action" data-action="remove-image">Remove</div>
             <%= image_tag image.variant(convert: "jpg", quality: 85, resize_to_fill: [200, 200]).processed %>
           </div>
         <% end %>
       </div>
-    <% rescue %>
-    <% end %>
 
-    <div class="images-preview" data-role="form-image-thumbnails sortable"></div>
+      <div class="images-preview" data-role="form-image-thumbnails sortable"></div>
+    </div>
   </div>
 
-  <div class="form-group top-offset">
+  <div class="form-group mt-full">
     <%= form.label :description, class: "form-label" %>
 
     <div class="form-hint">
@@ -59,7 +65,7 @@
       <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to "and everything else", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", target: "_blank" %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
     </div>
 
-    <%= link_to "Show Preview", "#", class: "button button--secondary mt-half", data: { action: "markdown-preview" } %>
+    <%= link_to "Show Preview", "#", class: "button button--secondary mt-quarter mb-quarter", data: { action: "markdown-preview" } %>
 
     <div data-role="markdown-preview-wrapper">
       <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde" } %>
@@ -259,4 +265,5 @@
 <% end %>
 
 <%= inline_css "form.css" %>
-<%= inline_js "form.js" %>
+<%= inline_js "uploader.js" %>
+<%= javascript_include_tag "form.js", "data-turbolinks-track": "reload" %>
