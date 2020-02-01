@@ -1,10 +1,33 @@
 .images-preview {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: $margin / 2;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: $margin / 2.5;
+
+  @include media-min(sm) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: $margin / 2;
+  }
+
+  &::before {
+    display: none;
+  }
 
   &:not(:empty) {
     margin-top: $margin / 2;
+
+    &::before {
+      content: "Drag images to change their order";
+      display: block;
+      grid-column: span 3;
+      font-size: 14px;
+      line-height: 1.25em;
+      font-style: italic;
+      color: $text-color-dark;
+
+      @include media-min(sm) {
+        grid-column: span 6;
+      }
+    }
   }
 }
 
@@ -37,14 +60,22 @@
 
 .images-preview__action {
   position: absolute;
-  bottom: -.25rem;
-  transform: translateY(100%);
+  bottom: 0;
+  right: 0;
+  padding: .25em .5em;
+  background: $red;
   font-size: 12px;
+  color: $white;
   cursor: pointer;
 
   &:hover,
   &:active {
     color: $white;
+    background: darken($red, 5%);
+  }
+
+  .sortable-ghost & {
+    display: none;
   }
 }
 

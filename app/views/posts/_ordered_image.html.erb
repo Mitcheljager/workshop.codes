@@ -1,0 +1,4 @@
+<div class="images-preview__item" data-id="<%= ordered_image.blob_id %>">
+  <div class="images-preview__action" data-action="remove-image">Remove</div>
+  <%= image_tag ordered_image.variant(quality: 95, resize_to_fill: [120, 120]).processed .processed %>
+</div>

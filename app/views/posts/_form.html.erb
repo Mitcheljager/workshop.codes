@@ -44,16 +44,7 @@
         <small>Images will be processed to a 900x500 format, regardless of their original size</small>
       </div>
 
-      <div class="images-preview top-offset" data-role="form-image-thumbnails sortable">
-        <% @ordered_images.each do |image| %>
-          <div class="images-preview__item" data-id="<%= image.blob_id %>">
-            <div class="images-preview__action" data-action="remove-image">Remove</div>
-            <%= image_tag image.variant(convert: "jpg", quality: 85, resize_to_fill: [200, 200]).processed %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="images-preview" data-role="form-image-thumbnails sortable"></div>
+      <div class="images-preview" data-role="form-image-thumbnails sortable"><%= render partial: "ordered_image", collection: @ordered_images if @ordered_images.present? %></div>
     </div>
   </div>
 

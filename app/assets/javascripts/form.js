@@ -123,8 +123,8 @@ function drawAndRenderThumbnail(image, imageId) {
   const canvas = document.createElement("canvas")
   const ctx = canvas.getContext("2d")
 
-  canvas.width = 200
-  canvas.height = 200
+  canvas.width = 120
+  canvas.height = 120
 
   if (image.height > image.width) {
     const scaleFactor = canvas.width / image.width
