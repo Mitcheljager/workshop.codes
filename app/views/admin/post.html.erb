@@ -5,16 +5,16 @@
 <br><br>
 <p>Total revisions: <strong><%= @post.revisions.size %></strong></p>
 <p>Total comments: <strong><%= @post.comments.size %></strong></p>
-<p>Total views: <strong><%= @views.sum(&:value) %></strong></p>
+<p>Total views: <strong><%= @post.impressions_count %></strong></p>
 
 <hr>
 
 <% date_counts = {} %>
-<% (Date.parse("January 1 2020")...DateTime.now).each do |date| %>
+<% (Date.parse(@post.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date| %>
   <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
 <% end %>
 
-<% @views.group_by { |x| x.on_date.strftime("%Y-%m-%d") }.each do |group| %>
+<% @views.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group| %>
   <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
 <% end %>
 

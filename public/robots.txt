@@ -3,3 +3,6 @@ User-agent:*
 Disallow: */search/
 Disallow: */to/
 Disallow: */from/
+Disallow: */sort/
+Disallow: */exclude-expired/
+Disallow: */*/*/*/
