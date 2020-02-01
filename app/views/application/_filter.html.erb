@@ -1,6 +1,6 @@
 <%= render "search" %>
 
-<% cache "filter_#{ params[:category] }_#{ params[:hero] }_#{ params[:map] }_#{ params[:from] }_#{ params[:to] }_#{ params[:sort] }_#{ params[:expired] }" do %>
+<% cache "filter_#{ params[:category] }_#{ params[:hero] }_#{ params[:map] }_#{ params[:from] }_#{ params[:to] }_#{ params[:sort] }_#{ params[:expired] }_#{ params[:search] }" do %>
   <nav class="filter">
     <div class="filter__item">
       <span class="filter__label">Categories</span>
