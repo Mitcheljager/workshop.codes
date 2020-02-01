@@ -6,8 +6,6 @@
 document.addEventListener("turbolinks:load", function() {
   bindDropzone()
   buildSortable()
-
-  console.log("a")
 })
 
 function bindDropzone() {
@@ -163,8 +161,6 @@ function drawAndRenderThumbnail(image, imageId) {
 
 function buildSortable() {
   const element = document.querySelector("[data-role~='sortable']")
-
-  console.log(element)
 
   if (!element) return
 
