@@ -26,6 +26,11 @@
     opacity: .75;
   }
 
+  &--small {
+    font-size: 12px;
+    font-family: $font-stack;
+  }
+
   &--secondary {
     color: $white;
     background: $bg-dark;

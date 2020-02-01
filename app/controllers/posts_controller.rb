@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   include EmailNotificationsHelper
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post_images, only: [:show, :edit]
   skip_before_action :track_ahoy_visit, only: [:create, :update, :destroy]
 
   before_action only: [:edit, :update, :destroy] do
@@ -114,6 +115,13 @@ class PostsController < ApplicationController
     @post = Post.find_by_code(params[:code])
   end
 
+  def set_post_images
+    return unless @post.images.any?
+    
+    @image_ids = @post.image_order || "[]"
+    @ordered_images = JSON.parse(@image_ids).collect { |i| @post.images.find_by_blob_id(i) }
+  end
+
   def set_order
     @order = params[:sort] ? "hotness DESC" : "updated_at DESC"
   end
@@ -151,7 +159,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :code, :title, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
       :revision, :revision_description,
-      :email_notification, :email)
+      :email_notification, :email,
+      :image_order, images: [])
   end
 
   def email_notification_enabled

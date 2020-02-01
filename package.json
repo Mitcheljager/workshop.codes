@@ -2,7 +2,10 @@
   "name": "overwatch-workshop",
   "private": true,
   "dependencies": {
+    "@agilie/canvas-image-cover-position": "^1.1.1",
     "microlight": "^0.0.7",
-    "simplemde": "^1.11.2"
+    "siema": "^1.5.1",
+    "simplemde": "^1.11.2",
+    "sortablejs": "^1.10.2"
   }
 }

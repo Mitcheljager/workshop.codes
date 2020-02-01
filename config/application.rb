@@ -10,6 +10,7 @@ module OverwatchWorkshop
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.active_storage.replace_on_assign_to_many = false
 
     config.before_configuration do
       env_file = File.join(Rails.root, "config", "local_env.yml")

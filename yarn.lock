@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@agilie/canvas-image-cover-position@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@agilie/canvas-image-cover-position/-/canvas-image-cover-position-1.1.1.tgz#e986a2607dc164d87d11dc452799169f1b1ad06d"
+
 codemirror-spell-checker@*:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/codemirror-spell-checker/-/codemirror-spell-checker-1.1.2.tgz#1c660f9089483ccb5113b9ba9ca19c3f4993371e"
@@ -20,6 +24,10 @@ microlight@^0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/microlight/-/microlight-0.0.7.tgz#f3d7eb460acc11317bb32388b29930d54ba47890"
 
+siema@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/siema/-/siema-1.5.1.tgz#eff312b77e8340fa4d81d5d053ebbeb9113ff888"
+
 simplemde@^1.11.2:
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/simplemde/-/simplemde-1.11.2.tgz#a23a35d978d2c40ef07dec008c92f070d8e080e3"
@@ -27,6 +35,10 @@ simplemde@^1.11.2:
     codemirror "*"
     codemirror-spell-checker "*"
     marked "*"
+
+sortablejs@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.10.2.tgz#6e40364d913f98b85a14f6678f92b5c1221f5290"
 
 typo-js@*:
   version "1.1.0"

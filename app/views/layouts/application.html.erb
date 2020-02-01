@@ -24,6 +24,12 @@
     <%= inline_css "application.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
+    <% if current_user %>
+      <%= inline_css "form.css" %>
+      <%= inline_js "uploader.js" %>
+      <%= javascript_include_tag "form.js", "data-turbolinks-track": "reload" %>
+    <% end %>
+
     <%= render "analytics_code" %>
   </head>
 
