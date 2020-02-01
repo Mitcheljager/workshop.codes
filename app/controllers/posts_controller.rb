@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   include EmailNotificationsHelper
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post_images, only: [:show, :edit]
   skip_before_action :track_ahoy_visit, only: [:create, :update, :destroy]
 
   before_action only: [:edit, :update, :destroy] do
@@ -112,9 +113,13 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by_code(params[:code])
+  end
 
+  def set_post_images
+    return unless @post.images.any?
+    
     @image_ids = @post.image_order || "[]"
-    @ordered_images = JSON.parse(@image_ids).collect {|i| @post.images.find_by_blob_id(i) }
+    @ordered_images = JSON.parse(@image_ids).collect { |i| @post.images.find_by_blob_id(i) }
   end
 
   def set_order

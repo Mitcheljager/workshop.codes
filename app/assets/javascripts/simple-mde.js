@@ -1,6 +1,6 @@
 //= require simplemde/dist/simplemde.min.js
 
-(() => {
+document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-role='simple-mde']")
 
   elements.forEach((element) => {
@@ -44,4 +44,4 @@
       ]
     })
   })
-})()
+})
