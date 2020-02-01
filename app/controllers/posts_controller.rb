@@ -116,8 +116,8 @@ class PostsController < ApplicationController
   end
 
   def set_post_images
-    return unless @post.images.any?
-    
+    return unless @post.present? && @post.images.any?
+
     @image_ids = @post.image_order || "[]"
     @ordered_images = JSON.parse(@image_ids).collect { |i| @post.images.find_by_blob_id(i) }
   end
