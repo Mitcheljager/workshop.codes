@@ -22,6 +22,9 @@ function bindDropzone() {
   element.removeEventListener("drop", dropzoneDrop)
   element.addEventListener("drop", dropzoneDrop)
 
+  document.removeEventListener("paste", pasteImage)
+  document.addEventListener("paste", pasteImage)
+
   const removeElements = document.querySelectorAll("[data-action='remove-image']")
 
   if (removeElements.length) {
@@ -44,6 +47,11 @@ async function dropzoneDrop(event) {
 
   this.classList.remove("dropzone--is-active")
   if (event.dataTransfer.items) readFiles(event.dataTransfer.items)
+}
+
+function pasteImage(event) {
+  const items = (event.clipboardData || event.originalEvent.clipboardData).items
+  readFiles(items)
 }
 
 function readFiles(files) {
