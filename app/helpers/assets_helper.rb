@@ -10,7 +10,7 @@ module AssetsHelper
   end
 
   def inline_js(path)
-    "<script data-turbolinks-eval='false'>#{ inline_file path }</script>".html_safe
+    "<script>#{ inline_file path }</script>".html_safe
   end
 
   def inline_css(path)
