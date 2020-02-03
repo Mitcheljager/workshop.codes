@@ -42,7 +42,7 @@
   <% end %>
 <% end %>
 
-<%= cache @post do %>
+<% cache @post do %>
   <% if @ordered_images.present? && @ordered_images.one? %>
     <picture>
       <source media="(min-width: 560px)" srcset="<%= url_for @post.images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed %>" type="image/jpeg">
