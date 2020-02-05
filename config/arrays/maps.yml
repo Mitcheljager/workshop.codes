@@ -82,5 +82,15 @@
 -
   name: Ayutthaya
   type: Capture the Flag
-- name: Practice Range
+-
+  name: Practice Range
   type: Practice
+-
+  name: Workshop Chamber
+  type: Workshop
+-
+  name: Workshop Island
+  type: Workshop
+-
+  name: Workshop Expanse
+  type: Workshop
