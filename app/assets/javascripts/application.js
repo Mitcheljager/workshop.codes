@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require microlight
+//= require timeago.js/dist/timeago.min
 
 //= require analytics
 //= require dropdown
@@ -24,3 +25,4 @@
 //= require navigation
 //= require toggle-content
 //= require carousel
+//= require timeago

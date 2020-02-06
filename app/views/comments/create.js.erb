@@ -22,6 +22,7 @@
   const element = document.querySelector("[data-comment='<%= @comment.id %>']")
 
   element.classList.add("post-comment--has-been-added")
+  timeago.render(element.querySelector("[data-role='timeago']"))
 
   setTimeout(() => {
     element.classList.remove("post-comment--has-been-added")

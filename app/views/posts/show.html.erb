@@ -96,71 +96,71 @@
       </div>
     </div>
   <% end %>
-<% end %>
 
-<article class="item item--bottom">
-  <div class="item__details">
-    <div class="item__details-item">
-      Made by |
-
-      <%= link_to @post.user.username, user_path(@post.user.username) %>
-    </div>
-
-    <div class="item__details-item">
-      Categories |
-
-      <% JSON.parse(@post.categories).each do |category| %>
-        <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
-      <% end %>
-    </div>
-
-    <% if @post.tags.present? %>
+  <article class="item item--bottom">
+    <div class="item__details">
       <div class="item__details-item">
-        Tags |
+        Made by |
 
-        <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-          <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
+        <%= link_to @post.user.username, user_path(@post.user.username) %>
+      </div>
+
+      <div class="item__details-item">
+        Categories |
+
+        <% JSON.parse(@post.categories).each do |category| %>
+          <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
         <% end %>
       </div>
-    <% end %>
 
-    <div class="item__details-item">
-      Heroes |
+      <% if @post.tags.present? %>
+        <div class="item__details-item">
+          Tags |
 
-      <% JSON.parse(@post.heroes).each do |hero| %>
-        <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
+          <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
+            <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
+          <% end %>
+        </div>
       <% end %>
-    </div>
 
-    <div class="item__details-item">
-      Maps |
-
-      <% JSON.parse(@post.maps).each do |map| %>
-        <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
-      <% end %>
-    </div>
-
-    <div class="item__details-item" title="Created at: <%= @post.created_at %>">
-      Created at |
-
-      <%= time_ago_in_words(@post.created_at).humanize %> ago
-    </div>
-
-    <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
-      Last updated |
-
-      <%= time_ago_in_words(@post.updated_at).humanize %> ago
-    </div>
-
-    <% if @post.version.present? %>
       <div class="item__details-item">
-        Current version |
+        Heroes |
 
-        <%= @post.version %>
+        <% JSON.parse(@post.heroes).each do |hero| %>
+          <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-</article>
+
+      <div class="item__details-item">
+        Maps |
+
+        <% JSON.parse(@post.maps).each do |map| %>
+          <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
+        <% end %>
+      </div>
+
+      <div class="item__details-item" title="Created at: <%= @post.created_at %>">
+        Created at |
+
+        <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
+      </div>
+
+      <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
+        Last updated |
+
+        <span data-role="timeago" datetime="<%= @post.updated_at %>"></span>
+      </div>
+
+      <% if @post.version.present? %>
+        <div class="item__details-item">
+          Current version |
+
+          <%= @post.version %>
+        </div>
+      <% end %>
+    </div>
+  </article>
+<% end %>
 
 <% cache [@post.revisions, current_user] do %>
   <%= render "revisions/revisions" if @post.revisions.size > 1 %>

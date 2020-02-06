@@ -3,7 +3,7 @@
     <%= revision.version unless revision.version.empty? %>
 
     <small class="ml-auto">
-      <span title="Created at: <%= revision.created_at %>"><%= time_ago_in_words(revision.created_at).humanize %> ago</span>
+      <span title="Created at: <%= revision.created_at %>" data-role="timeago" datetime="<%= revision.created_at %>"></span>
 
       <% if revision.created_at < 6.months.ago %>
         <small class="tooltip">
