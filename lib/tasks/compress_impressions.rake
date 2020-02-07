@@ -11,8 +11,8 @@ task :compress_impressions => :environment do
     end
   end
 
-  visits = Ahoy::Visit.where("started_at < ?", 1.month.ago)
-  events = Ahoy::Event.where("time < ?", 1.month.ago)
+  visits = Ahoy::Visit.where("started_at < ?", 1.week.ago)
+  events = Ahoy::Event.where("time < ?", 1.week.ago)
 
   events.destroy_all
   visits.destroy_all
