@@ -37,6 +37,7 @@ group :development do
   gem "win32-security"
   gem "web-console", ">= 3.3.0"
   gem "faker"
+  gem "active_record_doctor"
 end
 
 group :production do

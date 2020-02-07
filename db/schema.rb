@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_28_201843) do
+ActiveRecord::Schema.define(version: 2020_02_07_211240) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.text "properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "ahoy_events", force: :cascade do |t|
@@ -89,6 +90,9 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "email_notifications", force: :cascade do |t|
@@ -97,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.integer "content_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_email_notifications_on_post_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -104,6 +109,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_favorites_on_post_id"
     t.index ["user_id", "post_id"], name: "index_favorites_on_user_id_and_post_id"
   end
 
@@ -112,6 +118,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_forgot_password_tokens_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -124,6 +131,8 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.integer "content_type", default: 0
     t.string "concerns_model", default: "post"
     t.integer "concerns_id", default: 0
+    t.index ["concerns_id"], name: "index_notifications_on_concerns_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -151,6 +160,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.index ["maps"], name: "index_posts_on_maps"
     t.index ["tags"], name: "index_posts_on_tags"
     t.index ["title"], name: "index_posts_on_title"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "remember_tokens", force: :cascade do |t|
@@ -158,6 +168,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_remember_tokens_on_user_id"
   end
 
   create_table "revisions", force: :cascade do |t|
@@ -168,6 +179,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "visible", default: true
+    t.index ["post_id"], name: "index_revisions_on_post_id"
   end
 
   create_table "statistics", force: :cascade do |t|
@@ -195,6 +207,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_201843) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_while_you_waits_on_post_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

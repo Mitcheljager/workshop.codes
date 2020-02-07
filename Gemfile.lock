@@ -46,6 +46,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_record_doctor (1.7.1)
+      activerecord (>= 4.2)
+      railties (>= 4.2)
     active_storage_validations (0.8.7)
       rails (>= 5.2.0)
     activejob (6.0.2.1)
@@ -298,6 +301,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  active_record_doctor
   active_storage_validations
   ahoy_matey
   argon2!
