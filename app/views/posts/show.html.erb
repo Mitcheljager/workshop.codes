@@ -45,9 +45,9 @@
 <% cache @post do %>
   <% if @ordered_images.present? && @ordered_images.one? %>
     <picture>
-      <source media="(min-width: 560px)" srcset="<%= url_for @post.images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed %>" type="image/jpeg">
+      <source media="(min-width: 560px)" srcset="<%= url_for @post.images.first.variant(quality: 95).processed %>" type="image/jpeg">
       <source media="(min-width: 0px)" srcset="<%= url_for @post.images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed %>" type="image/jpeg">
-      <img class="img-fluid mt-half" src="<%= url_for @post.images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed %>" />
+      <img class="img-fluid mt-half" src="<%= url_for @post.images.first.variant(quality: 95).processed %>" />
     </picture>
   <% elsif @ordered_images.present? && @ordered_images.many? %>
     <%= render "carousel" if @post.images.any? %>

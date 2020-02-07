@@ -4,9 +4,9 @@
       <% @ordered_images.each_with_index do |image, index| %>
         <div class="carousel__item">
           <picture>
-            <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= url_for image.variant(quality: 95, resize_to_fill: [900, 500]).processed %>" type="image/jpeg">
+            <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= url_for image.variant(quality: 95).processed %>" type="image/jpeg">
             <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= url_for image.variant(quality: 95, resize_to_fill: [450, 250]).processed %>" type="image/jpeg">
-            <img <%= "data-" if index >= 2 %>src="<%= url_for image.variant(quality: 95, resize_to_fill: [900, 500]).processed %>" />
+            <img <%= "data-" if index >= 2 %>src="<%= url_for image.variant(quality: 95).processed %>" />
           </picture>
         </div>
       <% end %>
