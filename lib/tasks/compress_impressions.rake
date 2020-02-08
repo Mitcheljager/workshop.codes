@@ -6,7 +6,7 @@ task :compress_impressions => :environment do
     Statistic.create(timeframe: :daily, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
 
     if event[1].first[1]["id"]
-      post = Post.find(event[1].first[1]["id"])
+      post = Post.find_by_id(event[1].first[1]["id"])
       post.increment!(:impressions_count, event[1].size) if post.present?
     end
   end
