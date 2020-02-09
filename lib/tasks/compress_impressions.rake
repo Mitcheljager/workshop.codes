@@ -3,12 +3,16 @@ task :compress_impressions => :environment do
   events = Ahoy::Event.where("time > ?", 1.day.ago).distinct.pluck(:visit_id, :properties).group_by { |v| v[1] }
 
   events.each do |event|
-    Statistic.create(timeframe: :daily, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
+    @statistic = Statistic.new(timeframe: :daily, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
 
     if event[1].first[1]["id"]
+      @statistic.model_id = event[1].first[1]["id"]
+      
       post = Post.find_by_id(event[1].first[1]["id"])
       post.increment!(:impressions_count, event[1].size) if post.present?
     end
+
+    @statistic.save
   end
 
   visits = Ahoy::Visit.where("started_at < ?", 1.week.ago)

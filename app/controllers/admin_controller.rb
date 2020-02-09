@@ -14,7 +14,7 @@ class AdminController < ApplicationController
 
   def post
     @post = Post.find(params[:id])
-    @views = Statistic.order(created_at: :asc).select { |s| s.properties["controller"] == "posts" && s.properties["id"] == @post.id }
+    @views = Statistic.where(model_id: @post.id)
   end
 
   def posts
