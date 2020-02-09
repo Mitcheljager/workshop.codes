@@ -9,12 +9,15 @@ class AdminController < ApplicationController
     @comments = Comment.select(:created_at).all.order(created_at: :asc)
     @favorites = Favorite.select(:created_at).all.order(created_at: :asc)
     @notifications = Notification.select(:created_at).all.order(created_at: :asc)
-    @all_views = Statistic.order(created_at: :asc)
+    @unique_users = Statistic.where(content_type: :unique_visit).order(created_at: :asc)
+    @all_views = Statistic.where(content_type: :visit).order(created_at: :asc)
+    @copies = Statistic.where(content_type: :copy).order(created_at: :asc)
   end
 
   def post
     @post = Post.find(params[:id])
-    @views = Statistic.where(model_id: @post.id)
+    @views = Statistic.where(model_id: @post.id).where(content_type: :visit).order(created_at: :asc)
+    @copies = Statistic.where(model_id: @post.id).where(content_type: :copy).order(created_at: :asc)
   end
 
   def posts

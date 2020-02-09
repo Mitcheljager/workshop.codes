@@ -109,6 +109,13 @@ class PostsController < ApplicationController
     redirect_to posts_url
   end
 
+  def copy_code
+    @post = Post.find_by_code(post_params[:code])
+    @post = Revision.find_by_code(post_params[:code]).post unless @post.present?
+
+    track_action("Copy Code")
+  end
+
   private
 
   def set_post
@@ -130,10 +137,10 @@ class PostsController < ApplicationController
     raise ActionController::RoutingError.new("Not Found")
   end
 
-  def track_action
+  def track_action(event = "Posts Visit")
     parameters = request.path_parameters
-    parameters["id"] = @post.id if @post
-    ahoy.track "Posts Visit", request.path_parameters
+    parameters["id"] = @post.id if @post.present?
+    ahoy.track event, parameters
   end
 
   def sort_switch

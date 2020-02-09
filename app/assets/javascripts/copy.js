@@ -39,6 +39,16 @@ function copyToClipboard(event, optionalContent = undefined) {
 function trackCopyGA(label) {
   if (typeof gtag !== "function") return
 
+  fetch("/copy-code", {
+    method: "post",
+    body: JSON.stringify({ code: label }),
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": Rails.csrfToken()
+    },
+    credentials: "same-origin"
+  })
+
   gtag("event", "Copy", {
     "event_category" : label
   })
