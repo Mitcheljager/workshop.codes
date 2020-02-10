@@ -39,7 +39,7 @@ function copyToClipboard(event, optionalContent = undefined) {
 function trackCopyGA(label) {
   if (typeof gtag !== "function") return
 
-  fetch("/copy-code", {
+  fetch("/copy/post/code", {
     method: "post",
     body: JSON.stringify({ code: label }),
     headers: {
