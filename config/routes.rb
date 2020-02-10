@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
   get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"
 
-  post "copy/post/code", to: "posts#copy_code", as: "copy_code"
+  post "copy-code", to: "posts#copy_code", as: "copy_code"
   resources :revisions, only: [:edit, :update]
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index]
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"

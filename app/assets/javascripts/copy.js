@@ -33,13 +33,13 @@ function copyToClipboard(event, optionalContent = undefined) {
 
   setTimeout(() => { copyParent.querySelector(".copy__notification").remove() }, 1000)
 
-  if (!optionalContent) trackCopyGA(targetElement.textContent)
+  if (targetElement.dataset.trackCopy != undefined) trackCopyGA(targetElement.textContent)
 }
 
 function trackCopyGA(label) {
   if (typeof gtag !== "function") return
 
-  fetch("/copy/post/code", {
+  fetch("/copy-code", {
     method: "post",
     body: JSON.stringify({ code: label }),
     headers: {
