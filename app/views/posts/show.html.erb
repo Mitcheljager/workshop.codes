@@ -162,18 +162,18 @@
   </article>
 <% end %>
 
-<% cache [@post.revisions, current_user] do %>
+<% cache_unless current_user == @post.user, @post.revisions do %>
   <%= render "revisions/revisions" if @post.revisions.size > 1 %>
 <% end %>
 
-<div class="comments">
-  <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.size %></span> Comments</h2>
+<% cache_unless current_user, @post.comments do %>
+  <div class="comments">
+    <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.size %></span> Comments</h2>
 
-  <%= render "comments/form", post: @post %>
+    <%= render "comments/form", post: @post %>
 
-  <div class="comments__wrapper" data-role="comments">
-    <% cache [@post.comments, current_user] do %>
-      <%= render @post.comments.where(parent_id: nil).order(created_at: :desc) %>
-    <% end %>
+    <div class="comments__wrapper" data-role="comments">
+        <%= render @post.comments.where(parent_id: nil).order(created_at: :desc) %>
+    </div>
   </div>
-</div>
+<% end %>

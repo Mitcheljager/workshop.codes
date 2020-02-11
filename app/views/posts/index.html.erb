@@ -8,32 +8,36 @@
 
 <main class="items">
   <% unless params[:page] %>
-    <h2 class="mt-half"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
+    <% cache_unless current_user, @hot_posts do %>
+      <h2 class="mt-half"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
 
-    <%= render @hot_posts %>
+      <%= render @hot_posts %>
 
-    <hr class="mt-0 mb-half">
+      <hr class="mt-0 mb-half">
 
-    <%= link_to "View all On Fire Items", on_fire_path, class: "button button--secondary" %>
+      <%= link_to "View all On Fire Items", on_fire_path, class: "button button--secondary" %>
 
-    <div class="logo-background">
-      <div class="banner top-offset">
-        <h3 class="mt-0 mb-0"><strong>While You Wait</strong> - Codes to play while in queue</h3>
+      <div class="logo-background">
+        <div class="banner top-offset">
+          <h3 class="mt-0 mb-0"><strong>While You Wait</strong> - Codes to play while in queue</h3>
 
-        <p><small><em>Check out a curated list of codes to play <strong>While You Wait</strong> in queue.</em></small></p>
+          <p><small><em>Check out a curated list of codes to play <strong>While You Wait</strong> in queue.</em></small></p>
 
-        <%= link_to "Take me there!", while_you_wait_path, class: "button" %>
+          <%= link_to "Take me there!", while_you_wait_path, class: "button" %>
+        </div>
       </div>
-    </div>
 
-    <h2 class="top-offset"><strong>Recent</strong> Items</h2>
+      <h2 class="top-offset"><strong>Recent</strong> Items</h2>
+    <% end %>
   <% else %>
     <div class="heading">
       <h1><strong>Recent</strong> Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %></h1>
     </div>
   <% end %>
 
-  <%= render "posts" %>
+  <% cache_unless current_user, [@posts, params[:page]] do %>
+    <%= render "posts" %>
 
-  <%= paginate @posts %>
+    <%= paginate @posts %>
+  <% end %>
 </main>
