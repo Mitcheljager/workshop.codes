@@ -12,8 +12,8 @@ module ApplicationHelper
 
     iframe = '<div class="video"><iframe class="video__iframe" width="560" height="315" src="https://www.youtube.com/embed/\\1" frameborder="0" allowfullscreen></iframe></div>'
 
-    content = markdown.render(text)
-    content.gsub(/\[youtube\s+(.*?)\]/, iframe).html_safe
+    text = text.gsub(/\[youtube\s+(.*?)\]/, iframe)
+    content = markdown.render(text).html_safe
   end
 
   def build_filter_path(key, value)
