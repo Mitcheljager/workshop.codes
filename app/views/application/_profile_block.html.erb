@@ -1,6 +1,3 @@
-<% path = path || new_post_path %>
-<% text = text || "Create" %>
-
 <div class="profile-block">
   <div>
     <% if current_user %>
@@ -12,5 +9,5 @@
     <% end %>
   </div>
 
-  <%= link_to text, current_user.present? ? path : login_path, class: "button" %>
+  <%= link_to "Create", current_user.present? ? new_post_path : login_path, class: "button" %>
 </div>

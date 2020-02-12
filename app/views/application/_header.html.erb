@@ -1,4 +1,4 @@
-<%= cache ["header", current_user] do %>
+<%= cache_unless current_user, "header" do %>
   <header class="header">
     <%= link_to root_path do %>
       <picture>

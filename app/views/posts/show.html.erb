@@ -7,38 +7,40 @@
   </div>
 <% end %>
 
-<article class="item item--single">
-  <h1 class="item__title">
-    <%= @post.title %>
+<% cache_unless current_user, [@post, "title"] do %>
+  <article class="item item--single">
+    <h1 class="item__title">
+      <%= @post.title %>
 
-    <%= render "favorites/form", post: @post %>
-  </h1>
+      <%= render "favorites/form", post: @post %>
+    </h1>
 
-  <div class="item__code">
-    <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: @post.code } %>
+    <div class="item__code">
+      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: @post.code } %>
 
-    <span class="copy">
-      <span data-copy="<%= @post.code %>" data-track-copy><%= @post.code %></span>
-    </span>
-  </div>
-</article>
-
-<% if current_user == @post.user %>
-  <div class="well mt-half">
-    <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
-
-    <div class="well__content">
-      <em>Likes</em>: <strong><%= @post.favorites_count %></strong>
+      <span class="copy">
+        <span data-copy="<%= @post.code %>" data-track-copy><%= @post.code %></span>
+      </span>
     </div>
-  </div>
+  </article>
 
-  <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
-    <div class="warning mt-quarter">
-      <p><mark>⚠ Your Code will soon expire.</mark></p>
-      <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
-      <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
-      <p><small><em>This code will expire in roughly <%= time_ago_in_words(@post.updated_at + 6.months) %>.</em></small></p>
+  <% if current_user == @post.user %>
+    <div class="well mt-half">
+      <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
+
+      <div class="well__content">
+        <em>Likes</em>: <strong><%= @post.favorites_count %></strong>
+      </div>
     </div>
+
+    <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
+      <div class="warning mt-quarter">
+        <p><mark>⚠ Your Code will soon expire.</mark></p>
+        <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
+        <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
+        <p><small><em>This code will expire in roughly <%= time_ago_in_words(@post.updated_at + 6.months) %>.</em></small></p>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
 

@@ -35,7 +35,7 @@
     </div>
   <% end %>
 
-  <% cache_unless current_user, [@posts, params[:page]] do %>
+  <% cache_unless current_user, @posts do %>
     <%= render "posts" %>
 
     <%= paginate @posts %>
