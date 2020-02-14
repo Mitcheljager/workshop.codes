@@ -158,7 +158,7 @@
 
       <div class="filter__actions">
         <% if params[:from] || params[:to] || params[:sort] || params[:expired] || params[:map] || params[:hero] || params[:category] %>
-          <%= link_to "Remove filters", params[:search] ? "/search/#{ params[:search] }" : root_path, class: "filter__link" %> |
+          <%= link_to "Remove filters", params[:search] ? "/search/#{ params[:search] }" : root_path, class: "filter__link filter__link--remove" %>
         <% end %>
 
         <%= button_tag "+ More filters", class: "filter__link", data: { action: "toggle-content" } %>
