@@ -88,4 +88,8 @@ class Post < ApplicationRecord
       }
     })
   end
+
+  def as_indexed_json(options={})
+    self.as_json(include: { user: { only: :username } } )
+  end
 end
