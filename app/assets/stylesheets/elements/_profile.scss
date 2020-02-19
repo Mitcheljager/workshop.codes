@@ -1,19 +1,38 @@
 .profile {
   @include media-min(sm) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 150px auto;
     grid-gap: $margin / 2;
+  }
+
+  aside {
+    margin-bottom: $margin;
+
+    @include media-min(sm) {
+      margin-bottom: 0;
+    }
   }
 }
 
 .profile__action {
   display: block;
-  color: $white;
+  margin: .5rem 0;
+  font-size: 24px;
+  color: $text-color;
   text-decoration: none;
+  font-family: "bignoodletitlingregular", $font-stack;
 
   &:hover,
   &:active {
     text-decoration: underline;
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &--active {
+    color: $white;
   }
 }
 

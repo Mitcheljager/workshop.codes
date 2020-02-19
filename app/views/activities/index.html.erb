@@ -1,11 +1,9 @@
 <% content_for :page_title, "Activity Log" %>
 
-<div class="activities">
-  <div class="heading">
-    <h1>Activity log</h1>
+<%= render "layouts/account", title: "Activity" do %>
+  <div class="activities">
+    <%= render @activities %>
+
+    <%= paginate @activities %>
   </div>
-
-  <%= render @activities %>
-
-  <%= paginate @activities %>
-</div>
+<% end %>

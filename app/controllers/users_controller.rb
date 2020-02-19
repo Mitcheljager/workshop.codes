@@ -17,9 +17,10 @@ class UsersController < ApplicationController
   end
 
   def account
-    @posts = current_user.posts.order(updated_at: :desc)
-    @favorites = current_user.favorites.page(params[:page]).per(5).order(created_at: :desc)
-    @activities = current_user.activities.order(created_at: :desc).limit(5)
+    @posts = current_user.posts
+    @favorites_given = Favorite.where(user_id: current_user.id)
+    @favorites_received = Favorite.where(post_id: @posts.pluck(:id)).order(created_at: :asc)
+    @copies_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :copy).order(created_at: :asc)
   end
 
   def new
@@ -64,6 +65,14 @@ class UsersController < ApplicationController
 
     session[:user_id] = nil
     redirect_to login_path
+  end
+
+  def favorites
+    @favorites = current_user.favorites.order(created_at: :desc).page(params[:page])
+  end
+
+  def posts
+    @posts = current_user.posts.order(updated_at: :desc).page(params[:page])
   end
 
   private

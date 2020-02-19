@@ -7,3 +7,9 @@
     text-align: right;
   }
 }
+
+.text-md-center {
+  @include media-min(md) {
+    text-align: center;
+  }
+}

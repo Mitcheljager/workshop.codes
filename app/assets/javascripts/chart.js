@@ -15,11 +15,13 @@
           backgroundColor: "rgba(240, 100, 20, 1)",
           borderColor: "rgba(240, 100, 20, 1)",
           borderWidth: 1,
-          lineTension: 0,
-          pointBackgroundColor: "rgba(240, 100, 20, 1)"
+          pointBackgroundColor: "rgba(240, 100, 20, 1)",
         }]
       },
       options: {
+        height: 200,
+        responsive: true,
+        maintainAspectRatio: false,
         legend: {
           display: false
         },
@@ -34,7 +36,7 @@
               userCallback: (label, index, labels) => { if (Math.floor(label) === label) return label },
               userCallback: (label, index, labels) => { return label.toLocaleString()},
               fontColor: "#8f94a5",
-              fontSize: 8
+              fontSize: 12
             }
           }],
           xAxes: [{
@@ -46,10 +48,7 @@
               color: "rgba(255, 255, 255, .0)"
             },
             ticks: {
-              maxTicksLimit: 12,
-              autoSkip: true,
-              fontColor: "#90989c",
-              fontSize: 8
+              display: false
             }
           }]
         }

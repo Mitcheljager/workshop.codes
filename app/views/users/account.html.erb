@@ -1,70 +1,48 @@
 <% content_for :page_title, "Your account" %>
 
-<div class="heading mt-full">
-  <h1><center>Your account</center></h1>
-</div>
-
-<div class="profile">
-  <div>
-    <h3>Details</h3>
-
-    <p>You are logged in as <strong><%= current_user.username %></strong></p>
-
-    <%= link_to "Admin Dashboard", admin_path, class: "profile__action" if current_user.username == "admin" %>
-    <%= link_to "View your profile", user_path(current_user.username), class: "profile__action" %>
-    <%= link_to "View your notifications", notifications_path, class: "profile__action" %>
-
-    <br>
-
-    <%= link_to "Edit your account", edit_user_path, class: "profile__action" %>
-    <%= link_to "Logout", logout_path, class: "profile__action" %>
-  </div>
-
-  <div class="activities">
-    <h3>Activity log</h3>
-    <%= render @activities %>
-
-    <p class="text-right"><%= link_to "View all activity", activities_path, class: "profile__action" %></p>
-  </div>
-</div>
-
-<main class="items top-offset">
-  <h2>Items you've liked</h2>
-
-  <% @favorites.each do |favorite| %>
-    <%= render "posts/post", post: favorite.post %>
-  <% end %>
-
-  <%= tag.em "You've not yet liked any Items" if @favorites.blank? %>
-
-  <%= paginate @favorites %>
-
-  <h2 class="top-offset">Your Items</h2>
-
-  <% @posts.each do |post| %>
-    <div class="item item--small">
-      <div class="item__title">
-        <%= link_to post.title, post_path(post.code) %>
-      </div>
-
-      <div class="item__actions">
-
-        <div class="favorite favorite--is-active">
-          <%= inline_svg_tag "icons/icon-heart.svg", style: "height: 16px" %>
-          <span class="favorite__label"><%= post.favorites_count %></span>
-        </div>
-
-        <div>
-          <%= link_to "Edit", edit_post_path(post.code), class: "button button--secondary" %>
-          <%= link_to "Delete", post_path(post.code), class: "button button--danger", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
-        </div>
-      </div>
+<%= render "layouts/account", title: "Hello there, <strong>#{ current_user.username }</strong>" do %>
+  <div class="cards">
+    <div class="card">
+      <span class="card__title">Favorites given</span>
+      <%= @favorites_given.size %>
     </div>
+
+    <div class="card">
+      <span class="card__title">Favorites received</span>
+      <%= @favorites_received.size %>
+    </div>
+
+    <div class="card">
+      <span class="card__title">Copies received</span>
+      <%= @copies_received.size %>
+    </div>
+  </div>
+
+  <% date_counts = {} %>
+  <% if @posts.any? %>
+    <% (Date.parse(@posts.first.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date| %>
+      <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
+    <% end %>
+  <% else %>
+    <% date_counts[DateTime.now.strftime("%Y-%m-%d")] = 0 %>
   <% end %>
 
-  <%= tag.em "You've not yet posted any Items" if @posts.blank? %>
+  <% @copies_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group| %>
+    <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
+  <% end %>
 
-  <div class="mt-half">
-    <%= link_to "Create new Item", new_post_path, class: "button" %>
-  </div>
-</main>
+  <h3 class="mt-full">Copies received per day</h3>
+  <p class="form-hint mt-quarter">
+    This is the total amount of times people clicked on the "copy" button for your items. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+  </p>
+
+  <div style="position: relative"><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+
+  <% if @posts.first.created_at < Statistic.where(content_type: :copy).first.created_at %>
+    <p class="form-hint">
+      Note: This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
+    </p>
+  <% end %>
+<% end %>
+
+<%= inline_js "chart.js" %>

@@ -1,33 +1,35 @@
 <% content_for :page_title, "Notifications" %>
 
-<div class="heading">
-  <h1>Notifications</h1>
-</div>
+<%= render "layouts/account", title: "Notifications" do %>
+  <% unless params[:page].present? %>
+    <h3 class="mt-0">Unread Notifications <small>(<%= @notifications.where(has_been_read: 0).size %>)</small></h3>
 
-<h3>Unread Notifications <small>(<%= @notifications.where(has_been_read: 0).size %>)</small></h3>
+    <div class="notifications">
+      <% if @notifications.where(has_been_read: 0).any? %>
+        <% @notifications.where(has_been_read: 0).each do |notification| %>
+          <%= render @notifications.where(has_been_read: 0) %>
 
-<div class="notifications">
-  <% if @notifications.where(has_been_read: 0).any? %>
-    <% @notifications.where(has_been_read: 0).each do |notification| %>
-      <%= render @notifications.where(has_been_read: 0) %>
+          <% notification.update!(has_been_read: 1) %>
+        <% end %>
+      <% else %>
+        <div class="notifications__item">
+          <em>You have no unread notifications.</em>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-      <% notification.update!(has_been_read: 1) %>
+  <h3 class="<%= params[:page].present? ? "mt-0" : "top-offset" %>">Read Notifications</h3>
+
+  <div class="notifications">
+    <% if @notifications.where(has_been_read: 1).any? %>
+      <%= render @notifications.where(has_been_read: 1) %>
+    <% else %>
+      <div class="notifications__item">
+        <em>You have no read notifications.</em>
+      </div>
     <% end %>
-  <% else %>
-    <div class="notifications__item">
-      <em>You have no unread notifications.</em>
-    </div>
-  <% end %>
-</div>
+  </div>
 
-<h3 class="top-offset">Read Notifications <small>(<%= @notifications.where(has_been_read: 1).size %>)</small></h3>
-
-<div class="notifications">
-  <% if @notifications.where(has_been_read: 1).any? %>
-    <%= render @notifications.where(has_been_read: 1) %>
-  <% else %>
-    <div class="notifications__item">
-      <em>You have no read notifications.</em>
-    </div>
-  <% end %>
-</div>
+  <%= paginate @notifications %>
+<% end %>

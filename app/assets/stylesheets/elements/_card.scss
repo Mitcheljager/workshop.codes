@@ -1,0 +1,22 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: $margin / 2;
+}
+
+.card {
+  @extend .banner;
+  padding: $margin / 4;
+  text-align: left;
+  font-size: 28px;
+  color: $white;
+  font-family: "bignoodletitlingregular", $font-stack;
+}
+
+.card__title {
+  display: block;
+  margin-bottom: .5rem;
+  font-family: $font-stack;
+  font-size: 14px;
+  color: $text-color;
+}

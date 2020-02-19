@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   resources :users, param: :username, except: [:new, :index, :edit, :update]
   get "account(/page/:page)", to: "users#account", as: "account"
-  get "edit", to: "users#edit", as: "edit_user"
+  get "account/edit", to: "users#edit", as: "edit_user"
+  get "account/posts", to: "users#posts", as: "account_posts"
+  get "favorites", to: "users#favorites", as: "account_favorites"
   patch "user", to: "users#update", as: "update_user"
   delete "user", to: "users#destroy", as: "destroy_user"
 
@@ -39,11 +41,11 @@ Rails.application.routes.draw do
   get "create_edit_form/:comment_id", to: "comments#create_edit_form", as: "create_edit_form"
   get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
 
-  resources :notifications, only: [:index]
-
   concern :paginatable do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end
+
+  resources :notifications, only: [:index], concerns: :paginatable
 
   resources :activities, only: [:index], concerns: :paginatable
 

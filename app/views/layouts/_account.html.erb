@@ -1,0 +1,24 @@
+<div class="heading mt-full">
+  <h1 class="text-md-center"><%= title.html_safe %></h1>
+</div>
+
+<div class="profile">
+  <aside>
+    <%= link_to "Overview", account_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_path) }" %>
+    <%= link_to "Notifications", notifications_path, class: "profile__action #{ 'profile__action--active' if current_page?(notifications_path) }" %>
+    <%= link_to "Activity", activities_path, class: "profile__action #{ 'profile__action--active' if current_page?(activities_path) }" %>
+    <%= link_to "Favorites", account_favorites_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_favorites_path) }" %>
+    <%= link_to "Codes", account_posts_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_posts_path) }" %>
+    <%= link_to "Profile", user_path(current_user.username), class: "profile__action" %>
+
+    <hr class="mt-half mb-half">
+
+    <%= link_to "Admin", admin_path, class: "profile__action" if current_user.username == "admin" %>
+    <%= link_to "Settings", edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>
+    <%= link_to "Logout", logout_path, class: "profile__action" %>
+  </aside>
+
+  <main>
+    <%= yield %>
+  </main>
+</div>

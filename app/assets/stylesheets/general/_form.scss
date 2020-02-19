@@ -90,6 +90,13 @@
   }
 }
 
+.form-group-max-width {
+  @include media-min(sm) {
+    max-width: map-get($media-min-widths, xs);
+  }
+}
+
+
 .form-select {
   -webkit-appearance: none;
   appearance: none;
