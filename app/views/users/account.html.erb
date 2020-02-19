@@ -38,7 +38,7 @@
 
   <div style="position: relative"><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
-  <% if @posts.first.created_at < Statistic.where(content_type: :copy).first.created_at %>
+  <% if @posts.any? && @posts.first.created_at < Statistic.where(content_type: :copy).first.created_at %>
     <p class="form-hint">
       Note: This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
     </p>
