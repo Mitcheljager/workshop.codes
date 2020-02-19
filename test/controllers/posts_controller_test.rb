@@ -68,7 +68,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "User can destroy their post" do
     sign_in_as users(:user_one)
 
-    visit account_path
+    visit account_posts_path
     assert page.has_content? "Delete"
 
     assert_difference "Post.count", -1 do
