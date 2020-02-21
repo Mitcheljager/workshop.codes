@@ -18,12 +18,12 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show, :index, :filter, :on_fire]
 
   def index
-    @hot_posts = Post.where("hotness > 0").order("hotness DESC").limit(3)
-    @posts = Post.order(created_at: :desc).page params[:page]
+    @hot_posts = Post.includes(:user, :revisions).where("hotness > 0").order("hotness DESC").limit(3)
+    @posts = Post.includes(:user, :revisions).order(created_at: :desc).page params[:page]
   end
 
   def filter
-    @posts = params[:search] ? Post.search(params[:search]).records : Post.all
+    @posts = params[:search] ? Post.includes(:user, :revisions).search(params[:search]).records : Post.all
 
     @posts = @posts.where("created_at >= ?", params[:from]) if params[:from]
     @posts = @posts.where("created_at <= ?", params[:to]) if params[:to]
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.where("hotness > 1").order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user, :revisions).where("hotness > 1").order("hotness DESC").page params[:page]
   end
 
   def show
@@ -119,7 +119,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find_by_code(params[:code])
+    @post = Post.includes(:user, :revisions, :comments).find_by_code(params[:code])
   end
 
   def set_post_images
