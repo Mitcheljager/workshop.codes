@@ -4,11 +4,17 @@ module ApplicationHelper
       link_attributes: { target: "_blank" },
       space_after_headers: true,
       fenced_code_blocks: true,
-      hard_wrap: true
+      hard_wrap: true,
+      link_attributes: { rel: "noreferrer noopener", target: "_blank" }
     }
 
     renderer = Redcarpet::Render::HTML.new(options)
-    markdown = Redcarpet::Markdown.new(renderer, highlight: true, autolink: true, lax_spacing: true, tables: true)
+    markdown = Redcarpet::Markdown.new(renderer,
+      highlight: true,
+      autolink: true,
+      lax_spacing: true,
+      tables: true
+    )
 
     iframe = '<div class="video"><iframe class="video__iframe" width="560" height="315" src="https://www.youtube.com/embed/\\1" frameborder="0" allowfullscreen></iframe></div>'
 
