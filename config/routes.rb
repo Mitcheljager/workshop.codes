@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root "posts#index"
 
+  get "/404", to: "errors#not_found"
+  get "/422", to: "errors#unacceptable"
+
   get "sitemap", to: "sitemaps#sitemap"
 
   get "admin", to: "admin#index", as: "admin"
