@@ -3,8 +3,6 @@ Rails.application.configure do
 
   Elasticsearch::Model.client = Elasticsearch::Client.new url: ENV['BONSAI_URL']
 
-  config.encoding = "utf-8"
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
