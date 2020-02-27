@@ -173,6 +173,14 @@ input[type="checkbox"] {
   &:checked + label {
     color: $white;
   }
+
+  &[disabled],
+  &[disabled] + label {
+    cursor: not-allowed;
+    opacity: .25;
+    color: $text-color;
+    border-color: $text-color;
+  }
 }
 
 .form-hint {
