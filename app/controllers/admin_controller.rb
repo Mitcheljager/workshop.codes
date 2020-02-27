@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   before_action do
     redirect_to root_path unless current_user && current_user.username == "admin"
+    cookies.permanent[:test] = "test"
   end
 
   def index
