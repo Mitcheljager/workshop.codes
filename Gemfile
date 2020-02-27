@@ -45,7 +45,6 @@ group :production do
   gem "heroku-deflater"
   gem "scout_apm"
   gem "pg"
-  gem "redis-rails"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
