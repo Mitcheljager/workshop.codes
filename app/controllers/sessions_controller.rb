@@ -11,11 +11,16 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_username(params[:username])
 
+    puts "aaaaaaaaaa"
+
     if @user && @user.authenticate(params[:password])
-      generate_remember_token if params[:remember_me]
+      puts "bbbbbbbbbbb"
+      generate_remember_token if params[:remember_me].present? && params[:remember_me] == "1"
       session[:user_id] = @user.id
 
       create_activity(:login, { ip_address: last_4_digits_of_request_ip })
+
+      puts @user.id
 
       redirect_to root_path
     else
