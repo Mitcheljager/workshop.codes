@@ -1,5 +1,7 @@
 <%= render "navigation" %>
 
+cache store: <%= ENV["FLY_REDIS_CACHE_URL"] %>
+
 <p>Total posts: <strong><%= @posts.size %></strong></p>
 <p>Total users: <strong><%= @users.size %></strong></p>
 <p>Total comments: <strong><%= @comments.size %></strong></p>
