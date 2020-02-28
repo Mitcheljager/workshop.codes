@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_username(params[:username])
 
     if @user && @user.authenticate(params[:password])
-      generate_remember_token if params[:remember_me]
+      generate_remember_token if params[:remember_me].present? && params[:remember_me] != "0"
       session[:user_id] = @user.id
 
       create_activity(:login, { ip_address: last_4_digits_of_request_ip })

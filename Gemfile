@@ -25,6 +25,7 @@ gem "aws-sdk-s3", require: false
 gem "mini_magick", ">= 4.9.5"
 gem "image_processing", "~> 1.2"
 gem "active_storage_validations"
+gem "rails_same_site_cookie"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
