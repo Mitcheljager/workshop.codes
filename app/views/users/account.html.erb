@@ -14,7 +14,7 @@
 
     <div class="card">
       <span class="card__title">Copies received</span>
-      <%= @copies_received.size %>
+      <%= @copies_received.pluck(:value).sum %>
     </div>
   </div>
 
