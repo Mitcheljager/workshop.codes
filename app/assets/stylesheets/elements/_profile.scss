@@ -46,7 +46,7 @@
   color: rgba(white, .75);
   white-space: nowrap;
 
-  @media (min-width: 1000px) {
+  @include media-min(lg) {
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 0;
@@ -56,7 +56,7 @@
   .button {
     margin-top: $margin / 2;
 
-    @media (min-width: 1000px) {
+    @include media-min(lg) {
       margin-top: 0;
     }
   }
@@ -73,7 +73,7 @@
   }
 
   &:last-of-type {
-    @media (min-width: 1000px) {
+    @include media-min(lg) {
       margin-right: $margin / 2;
     }
   }

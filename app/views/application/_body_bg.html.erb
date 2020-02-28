@@ -3,16 +3,16 @@
     <picture>
       <source
         srcset="
-          <%= image_path "layout/header-bg_sm.webp" %> 640w,
-          <%= image_path "layout/header-bg_md.webp" %> 960w,
-          <%= image_path "layout/header-bg_lg.webp" %> 1920w"
+          <%= image_url "layout/header-bg_sm.webp" %> 640w,
+          <%= image_url "layout/header-bg_md.webp" %> 960w,
+          <%= image_url "layout/header-bg_lg.webp" %> 1920w"
         type="image/webp">
 
       <source
         srcset="
-          <%= image_path "layout/header-bg_sm.jpg" %> 640w,
-          <%= image_path "layout/header-bg_md.jpg" %> 960w,
-          <%= image_path "layout/header-bg_lg.jpg" %> 1920w"
+          <%= image_url "layout/header-bg_sm.jpg" %> 640w,
+          <%= image_url "layout/header-bg_md.jpg" %> 960w,
+          <%= image_url "layout/header-bg_lg.jpg" %> 1920w"
         type="image/webp">
 
       <%= image_tag "layout/header-bg_lg.jpg", alt: "Workshop.codes - Background image" %>
