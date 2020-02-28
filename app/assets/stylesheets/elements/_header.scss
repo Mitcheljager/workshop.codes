@@ -25,6 +25,7 @@
   }
 
   &--is-active {
+    @media (max-width: 999px) {
       display: flex;
       flex-direction: column;
       align-items: center;

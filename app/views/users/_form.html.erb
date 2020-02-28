@@ -39,7 +39,14 @@
 
       <div class="form-hint">Your emailaddress is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your emailaddress is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.</div>
     </div>
-    
+
+    <hr class="small">
+
+    <div class="form-group checkbox">
+      <%= check_box_tag :remember_me, disabled: true %>
+      <%= label_tag :remember_me, "Remember me (uses cookies)" %>
+    </div>
+
     <hr class="small">
 
     <%= submit_tag "Submit", class: "button" %>

@@ -1,8 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  Rails.application.config.session_store :cookie_store, key: "_workshop_codes", domain: "workshop.codes"
-  
   Elasticsearch::Model.client = Elasticsearch::Client.new url: ENV['BONSAI_URL']
 
   # Code is not reloaded between requests.
@@ -69,7 +67,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "overwatch-workshop_#{Rails.env}"
 
-  Rails.application.routes.default_url_options[:host] = "https://workshop.codes/"
+  Rails.application.routes.default_url_options[:host] = "https://www.workshop.codes/"
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp

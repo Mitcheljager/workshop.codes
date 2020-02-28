@@ -1,4 +1,4 @@
-Sitemap: https://workshop.codes/sitemap.xml
+Sitemap: https://www.workshop.codes/sitemap.xml
 User-agent:*
 Disallow: */search/
 Disallow: */to/

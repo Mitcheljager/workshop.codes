@@ -46,11 +46,6 @@ module ApplicationHelper
     string.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
   end
 
-  def non_www_url
-    url = request.original_url
-    url.gsub("www.", "")
-  end
-
   def maps
     YAML.load(File.read(Rails.root.join("config/arrays", "maps.yml")))
   end
