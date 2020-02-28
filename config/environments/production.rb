@@ -1,6 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  Rails.application.config.session_store :cookie_store, key: "_workshop_codes", domain: "workshop.codes"
+  
   Elasticsearch::Model.client = Elasticsearch::Client.new url: ENV['BONSAI_URL']
 
   # Code is not reloaded between requests.
