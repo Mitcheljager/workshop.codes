@@ -1,7 +1,6 @@
 module ApplicationHelper
   def markdown(text)
     options = {
-      link_attributes: { target: "_blank" },
       space_after_headers: true,
       fenced_code_blocks: true,
       hard_wrap: true,
@@ -41,6 +40,11 @@ module ApplicationHelper
     else
       return filter_path(parameters)
     end
+  end
+  
+  def non_www_url
+    url = request.original_url
+    url.gsub("www.", "")
   end
 
   def to_slug(string)

@@ -2,8 +2,8 @@
   <header class="header">
     <%= link_to root_path do %>
       <picture>
-        <source srcset="<%= image_url "logo.webp" %> 2x, <%= image_url "logo.webp" %> 1x" type="image/webp">
-        <source srcset="<%= image_url "logo_x2.png" %> 2x, <%= image_url "logo.png" %> 1x" type="image/png">
+        <source srcset="<%= image_path "logo.webp" %> 2x, <%= image_path "logo.webp" %> 1x" type="image/webp">
+        <source srcset="<%= image_path "logo_x2.png" %> 2x, <%= image_path "logo.png" %> 1x" type="image/png">
         <%= image_tag "logo.png", class: "logo", alt: "Workshop.codes Logo" %>
       </picture>
     <% end %>
