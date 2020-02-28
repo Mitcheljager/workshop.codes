@@ -12,6 +12,8 @@ module OverwatchWorkshop
     config.load_defaults 5.2
     config.active_storage.replace_on_assign_to_many = false
 
+    Rails.application.config.session_store :cookie_store, key: "_workshop_codes"
+
     config.before_configuration do
       env_file = File.join(Rails.root, "config", "local_env.yml")
 
