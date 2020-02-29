@@ -67,14 +67,14 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "overwatch-workshop_#{Rails.env}"
 
-  Rails.application.routes.default_url_options[:host] = "https://www.workshop.codes/"
+  Rails.application.routes.default_url_options[:host] = "https://workshop.codes/"
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :user_name => ENV["SENDGRID_USERNAME"],
     :password => ENV["SENDGRID_PASSWORD"],
-    :domain => "www.workshop.codes",
+    :domain => "workshop.codes",
     :address => "smtp.sendgrid.net",
     :port => 587,
     :authentication => :plain,

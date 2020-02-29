@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :login_from_cookie
+  before_action :redirect_non_www
 
   def login_from_cookie
     return unless cookies.encrypted[:remember_token] && !current_user
@@ -33,5 +34,13 @@ class ApplicationController < ActionController::Base
 
   def unread_notifications
     @notifications = current_user.notifications.where(has_been_read: 0)
+  end
+
+  private
+
+  def redirect_non_www
+    if /^www/.match(request.host)
+      redirect_to("#{ request.url }".gsub("www.", ""), status: 301)
+    end
   end
 end
