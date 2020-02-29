@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :login_from_cookie
-  before_action :redirect_non_www
+  before_action :redirect_non_www, if: -> { Rails.env.production? }
 
   def login_from_cookie
     return unless cookies.encrypted[:remember_token] && !current_user
