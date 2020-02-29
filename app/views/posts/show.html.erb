@@ -1,5 +1,5 @@
 <% content_for :page_title, "#{ @post.title }" %>
-<% content_for :og_image, "#{ polymorphic_url(@ordered_images.first.variant(quality: 95).processed) if @ordered_images.present? && @ordered_images.any? }" %>
+<% begin %><% content_for :og_image, "#{ polymorphic_url(@ordered_images.first.variant(quality: 95).processed) if @ordered_images.present? && @ordered_images.any? }" %><% rescue %><% end %>
 
 <% if (@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || (@post.revisions.none? && @post.updated_at < 6.months.ago) %>
   <div class="warning">
@@ -46,14 +46,18 @@
 <% end %>
 
 <% cache @post do %>
-  <% if @ordered_images.present? && @ordered_images.one? %>
-    <picture>
-      <source media="(min-width: 560px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" type="image/jpeg">
-      <source media="(min-width: 0px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed %>" type="image/jpeg">
-      <img class="img-fluid mt-half" src="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" />
-    </picture>
-  <% elsif @ordered_images.present? && @ordered_images.many? %>
-    <%= render "carousel" if @post.images.any? %>
+  <% begin %>
+    <% if @ordered_images.present? && @ordered_images.one? %>
+      <picture>
+        <source media="(min-width: 560px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" type="image/jpeg">
+        <source media="(min-width: 0px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed %>" type="image/jpeg">
+        <img class="img-fluid mt-half" src="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" />
+      </picture>
+    <% elsif @ordered_images.present? && @ordered_images.many? %>
+      <%= render "carousel" if @post.images.any? %>
+    <% end %>
+  <% rescue %>
+    <p><small><em>Images are temporarily unavailable.</em></small></p>
   <% end %>
 
   <article class="item__description">
