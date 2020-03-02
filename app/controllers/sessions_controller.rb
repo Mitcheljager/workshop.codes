@@ -28,8 +28,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
-    cookies.delete :remember_token
+    current_user.remember_tokens.destroy_all if current_user && current_user.remember_tokens.any?
+
+    reset_session
 
     redirect_to login_path
   end
@@ -39,6 +40,5 @@ class SessionsController < ApplicationController
   def generate_remember_token
     token = SecureRandom.base64
     RememberToken.create(user_id: @user.id, token: token)
-    cookies.encrypted.permanent[:remember_token] = token
   end
 end

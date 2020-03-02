@@ -88,6 +88,5 @@ class UsersController < ApplicationController
   def generate_remember_token
     token = SecureRandom.base64
     RememberToken.create(user_id: @user.id, token: token)
-    cookies.encrypted.permanent[:remember_token] = token
   end
 end

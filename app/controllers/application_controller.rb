@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   before_action :redirect_non_www, if: -> { Rails.env.production? }
 
   def login_from_cookie
-    return unless cookies.encrypted[:remember_token] && !current_user
-    token = RememberToken.find_by_token(cookies.encrypted[:remember_token])
+    return unless cookies[:remember_token] && !current_user
+    token = RememberToken.find_by_token(cookies[:remember_token])
 
     if token
       user = token.user

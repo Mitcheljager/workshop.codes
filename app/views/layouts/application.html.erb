@@ -29,7 +29,10 @@
       <%= inline_css "form.css" %>
       <%= inline_js "uploader.js" %>
       <%= javascript_include_tag "form.js", "data-turbolinks-track": "reload" %>
+      <%= render "remember_me_cookie" if current_user.remember_tokens.any? %>
     <% end %>
+
+    <%= render "destroy_remember_me_cookie" if !current_user && cookies[:remember_token] %>
 
     <%= render "analytics_code" %>
   </head>

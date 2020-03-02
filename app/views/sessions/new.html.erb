@@ -5,10 +5,6 @@
     <div>
       <h1 class="mt-0">Login</h1>
 
-      <div class="warning mt-0 mb-half">
-        Login with cookies is broken, for now the "Remember&nbsp;me" feature is disabled. Sorry!
-      </div>
-
       <% if flash[:alert] %>
         <div class="warning mt-0"><mark><%= flash[:alert] %></mark></div>
       <% end %>
@@ -25,7 +21,7 @@
         </div>
 
         <div class="form-group checkbox">
-          <%= form.check_box :remember_me, disabled: true %>
+          <%= form.check_box :remember_me %>
           <%= form.label :remember_me, "Remember me (uses cookies)" %>
         </div>
 
