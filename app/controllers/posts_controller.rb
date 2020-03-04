@@ -124,7 +124,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.includes(:user, :revisions, :comments).find_by_code(params[:code])
+    @post = Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
   end
 
   def set_post_images
