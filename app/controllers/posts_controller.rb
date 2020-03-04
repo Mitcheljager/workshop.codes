@@ -49,7 +49,10 @@ class PostsController < ApplicationController
       redirect_to post_path(revision.post.code) if revision
     end
 
-    not_found and return unless @post.present?
+    respond_to do |format|
+      format.html { not_found and return unless @post.present? }
+      format.json { render json: @post, except: [:id, :user_id, :image_order, :favorites_count, :impressions_count, :hotness] }
+    end
   end
 
   def new
