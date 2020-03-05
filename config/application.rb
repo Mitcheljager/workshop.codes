@@ -12,6 +12,7 @@ module OverwatchWorkshop
     config.load_defaults 5.2
     config.active_storage.replace_on_assign_to_many = false
     config.exceptions_app = self.routes
+    config.active_job.queue_adapter = :sucker_punch
 
     config.before_configuration do
       env_file = File.join(Rails.root, "config", "local_env.yml")

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_post_images, only: [:show, :edit]
-  skip_before_action :track_ahoy_visit, only: [:create, :update, :destroy]
+  skip_before_action :track_ahoy_visit
 
   before_action only: [:edit, :update, :destroy] do
     redirect_to root_path unless current_user && current_user == @post.user
@@ -145,7 +145,9 @@ class PostsController < ApplicationController
   def track_action(event = "Posts Visit")
     parameters = request.path_parameters
     parameters["id"] = @post.id if @post.present?
-    ahoy.track event, parameters
+
+
+    TrackingJob.perform_async(ahoy, event, parameters)
   end
 
   def sort_switch
