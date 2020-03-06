@@ -20,9 +20,6 @@ class PostsController < ApplicationController
   def index
     @hot_posts = Post.includes(:user, :revisions).where("hotness > 0").order("hotness DESC").limit(3)
     @posts = Post.includes(:user, :revisions).order(created_at: :desc).page params[:page]
-
-    maximum = [@hot_posts.maximum(:updated_at), @posts.maximum(:updated_at)].max
-    fresh_when last_modified: maximum unless current_user
   end
 
   def filter
