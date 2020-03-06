@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   include EmailNotificationsHelper
 
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_images, only: [:show, :edit]
   skip_before_action :track_ahoy_visit
 
@@ -20,6 +20,9 @@ class PostsController < ApplicationController
   def index
     @hot_posts = Post.includes(:user, :revisions).where("hotness > 0").order("hotness DESC").limit(3)
     @posts = Post.includes(:user, :revisions).order(created_at: :desc).page params[:page]
+
+    maximum = [@hot_posts.maximum(:updated_at), @posts.maximum(:updated_at)].max
+    fresh_when last_modified: maximum unless current_user
   end
 
   def filter
@@ -40,9 +43,15 @@ class PostsController < ApplicationController
 
   def on_fire
     @posts = Post.includes(:user, :revisions).where("hotness > 1").order("hotness DESC").page params[:page]
+
+    fresh_when last_modified: @posts.maximum(:updated_at) unless current_user
   end
 
   def show
+    @post = Rails.cache.fetch(["Post", params[:code].upcase]) do
+      Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
+    end
+
     unless @post.present?
       revision = Revision.find_by_code(params[:code])
       @post = revision.post if revision
@@ -79,6 +88,7 @@ class PostsController < ApplicationController
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
+      Rails.cache.write(["Post", params[:code].upcase], @post)
 
       redirect_to post_path(@post.code)
     else
@@ -89,14 +99,13 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
+      Rails.cache.write(["Post", params[:code].upcase], @post)
 
       update_email_notifications
 
       if (post_params[:revision].present? && post_params[:revision] != "0") || (params[:code] != post_params[:code])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], visible: invisible).save
-
-        create_activity(:update_post, post_activity_params)
 
         redirect_to post_path(@post.code)
       else
@@ -124,7 +133,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
+    @post = Post.find_by_code(params[:code])
   end
 
   def set_post_images
