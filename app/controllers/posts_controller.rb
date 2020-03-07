@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   include EmailNotificationsHelper
 
   before_action :set_post, only: [:edit, :update, :destroy]
-  before_action :set_post_images, only: [:show, :edit]
+  before_action :set_post_images, only: [:edit]
   skip_before_action :track_ahoy_visit
 
   before_action only: [:edit, :update, :destroy] do
@@ -49,6 +49,8 @@ class PostsController < ApplicationController
       Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
     end
 
+    set_post_images
+
     unless @post.present?
       revision = Revision.find_by_code(params[:code])
       @post = revision.post if revision
@@ -85,7 +87,7 @@ class PostsController < ApplicationController
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
-      Rails.cache.write(["Post", @post.code.upcase], @post)
+      Rails.cache.write(["Post", @post.code.upcase], @post.includes(:user, :revisions, :comments))
 
       redirect_to post_path(@post.code)
     else
@@ -96,7 +98,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
-      Rails.cache.write(["Post", params[:code].upcase], @post)
+      Rails.cache.write(["Post", params[:code].upcase], @post.includes(:user, :revisions, :comments))
 
       update_email_notifications
 
