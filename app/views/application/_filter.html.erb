@@ -1,6 +1,6 @@
 <%= render "search" %>
 
-<% cache_unless request.path_parameters.without(:controller, :action, :page, :search).any?  do %>
+<% cache_unless request.path_parameters.without(:controller, :action, :page, :search, :code).any?, "filter" do %>
   <nav class="filter">
     <div class="filter__item">
       <span class="filter__label">Categories</span>
