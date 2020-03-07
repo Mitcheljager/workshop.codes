@@ -87,7 +87,7 @@ class PostsController < ApplicationController
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
-      Rails.cache.write(["Post", @post.code.upcase], @post.includes(:user, :revisions, :comments))
+      Rails.cache.delete(["Post", @post.code)
 
       redirect_to post_path(@post.code)
     else
@@ -98,7 +98,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
-      Rails.cache.write(["Post", params[:code].upcase], @post.includes(:user, :revisions, :comments))
+      Rails.cache.delete(["Post", @post.code])
 
       update_email_notifications
 
