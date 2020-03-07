@@ -87,7 +87,7 @@ class PostsController < ApplicationController
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
-      Rails.cache.delete(["Post", @post.code)
+      Rails.cache.delete(["Post", @post.code])
 
       redirect_to post_path(@post.code)
     else
