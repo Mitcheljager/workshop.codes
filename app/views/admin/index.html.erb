@@ -1,12 +1,31 @@
 <%= render "navigation" %>
 
-<p>Total posts: <strong><%= @posts.size %></strong></p>
-<p>Total users: <strong><%= @users.size %></strong></p>
-<p>Total comments: <strong><%= @comments.size %></strong></p>
-<p>Total favorites: <strong><%= @favorites.size %></strong></p>
-<p>Total notifications: <strong><%= @notifications.size %></strong></p>
+<div class="cards">
+  <div class="card">
+    <span class="card__title">Posts</span>
+    <%= @posts.size %>
+  </div>
 
-<hr>
+  <div class="card">
+    <span class="card__title">Users</span>
+    <%= @users.size %>
+  </div>
+
+  <div class="card">
+    <span class="card__title">Comments</span>
+    <%= @comments.size %>
+  </div>
+
+  <div class="card">
+    <span class="card__title">Favorites</span>
+    <%= @favorites.size %>
+  </div>
+
+  <div class="card">
+    <span class="card__title">Notifications</span>
+    <%= @notifications.size %>
+  </div>
+</div>
 
 <% date_counts = {} %>
 <% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>

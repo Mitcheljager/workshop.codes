@@ -16,6 +16,7 @@
     <th>Impr.</th>
     <th>Hotn.</th>
     <th>Img?</th>
+    <th>Email?</th>
     <th>Created at</th>
   </tr>
 
@@ -28,7 +29,8 @@
       <td><%= post.favorites_count %></td>
       <td><%= post.impressions_count %></td>
       <td><%= post.hotness %></td>
-      <td><%= "✔" if post.images.any? %>
+      <td><%= "✔" if post.images.any? %></td>
+      <td><%= "✔" if post.email_notifications.any? %></td>
       <td><%= time_ago_in_words(post.created_at).humanize %></td>
     </tr>
   <% end %>
