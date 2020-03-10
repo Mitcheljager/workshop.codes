@@ -25,22 +25,18 @@
           <%= form.label :remember_me, "Remember me (uses cookies)" %>
         </div>
 
-        <hr class="small" />
+        <%= submit_tag "Submit", class: "button mt-half" %>
 
-        <%= submit_tag "Submit", class: "button" %>
-
-        <hr class="small" />
-
-        <%= link_to "Forgot your password?", new_forgot_password_path %>
+        <div class="mt-half">
+          <small><%= link_to "Forgot your password?", new_forgot_password_path %></small>
+        </div>
       <% end %>
     </div>
 
     <div>
       <h1 class="mt-full mt-sm-0">Create an account</h1>
 
-      <label class="form-label">
-        Don't have an account?
-      </label>
+      <p>Don't have an account?</p>
 
       <div><%= link_to "Create an account", new_user_path, class: "button button--small" %></div>
     </div>
