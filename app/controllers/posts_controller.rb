@@ -40,8 +40,6 @@ class PostsController < ApplicationController
 
   def on_fire
     @posts = Post.includes(:user, :revisions).where("hotness > 1").order("hotness DESC").page params[:page]
-
-    fresh_when last_modified: @posts.maximum(:updated_at) unless current_user
   end
 
   def show

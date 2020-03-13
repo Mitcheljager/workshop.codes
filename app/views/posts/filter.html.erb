@@ -1,18 +1,20 @@
-<div class="heading">
-  <h2>
-    Workshop Codes
-    <% if params[:search] %> for <strong><%= params[:search] %></strong> <% end %>
-    <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-    <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-    <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-    <% if params[:from] %> from <strong><%= time_ago_in_words(params[:from]).gsub("about", "") %> ago</strong> <% end %>
-    <% if params[:to] %> to <strong><%= time_ago_in_words(params[:to]).gsub("about", "") %> ago</strong> <% end %>
-    <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
-    <% if params[:expired] %> excluding <strong>expired</strong> <% end %>
-    <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
-  </h2>
-</div>
+<% cache_if request.path_parameters.without(:controller, :action, :search).length == 1 && !current_user && !params[:search].present?, ["filter", request.path_parameters.without(:controller, :action, :search), @posts] do %>
+  <div class="heading">
+    <h2>
+      Workshop Codes
+      <% if params[:search] %> for <strong><%= params[:search] %></strong> <% end %>
+      <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+      <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+      <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+      <% if params[:from] %> from <strong><%= time_ago_in_words(params[:from]).gsub("about", "") %> ago</strong> <% end %>
+      <% if params[:to] %> to <strong><%= time_ago_in_words(params[:to]).gsub("about", "") %> ago</strong> <% end %>
+      <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
+      <% if params[:expired] %> excluding <strong>expired</strong> <% end %>
+      <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
+    </h2>
+  </div>
 
-<%= render "posts", posts: @posts %>
+  <%= render "posts", posts: @posts %>
 
-<%= paginate @posts %>
+  <%= paginate @posts %>
+<% end %>
