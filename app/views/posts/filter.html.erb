@@ -1,4 +1,4 @@
-<% cache_if request.path_parameters.without(:controller, :action, :search).length == 1 && !current_user && !params[:search].present?, ["filter", request.path_parameters.without(:controller, :action, :search), @posts] do %>
+<% cache_if request.path_parameters.without(:controller, :action, :search, :from, :to).length == 1 && !current_user && !params[:search].present?, ["filter", request.path_parameters.without(:controller, :action, :search, :from, :to), @posts] do %>
   <div class="heading">
     <h2>
       Workshop Codes
