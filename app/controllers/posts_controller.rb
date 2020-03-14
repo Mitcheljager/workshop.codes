@@ -63,6 +63,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def redirect_nice_url
+    @post = Post.find_by_nice_url!(params[:nice_url])
+    redirect_to post_path(@post.code)
+  end
+
   def new
     @post = Post.new
   end
@@ -85,7 +90,7 @@ class PostsController < ApplicationController
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
-      Rails.cache.delete(["Post", @post.code])
+      Rails.cache.delete(["Post", @post.code.upcase])
 
       redirect_to post_path(@post.code)
     else
@@ -94,9 +99,12 @@ class PostsController < ApplicationController
   end
 
   def update
+    params[:post][:nice_url] = "" if post_params[:include_nice_url] == "0"
+    params[:post][:email] = "" if post_params[:email_notification] == "0"
+
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
-      Rails.cache.delete(["Post", @post.code])
+      Rails.cache.delete(["Post", @post.code.upcase])
 
       update_email_notifications
 
@@ -177,7 +185,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :code, :title, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
+      :code, :title, :include_nice_url, :nice_url, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
       :revision, :revision_description,
       :email_notification, :email,
       :image_order, images: [])

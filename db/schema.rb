@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_09_170842) do
+ActiveRecord::Schema.define(version: 2020_03_14_133751) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 2020_02_09_170842) do
     t.integer "hotness"
     t.text "snippet"
     t.text "image_order"
+    t.string "nice_url"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

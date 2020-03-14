@@ -21,10 +21,40 @@
     </div>
   </div>
 
+  <div class="form-group mt-half" data-reveal-by-checkbox>
+    <div class="checkbox">
+      <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" } %>
+      <%= form.label :include_nice_url, "Include Pretty URL" %>
+    </div>
+
+    <p class="form-hint">
+      Include a pretty URL that is easier to remember and will always link to your most recent code. Keep in mind that if you change the code, all previous codes will continue to link to your newest code.
+    </p>
+
+    <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.nice_url.present? %>">
+      <div class="form-group-uneven">
+        <div class="form-group">
+          <label class="form-input url-input">
+            <%= request.base_url %>/
+            <%= form.text_field :nice_url, class: "inline-input" %>
+          </label>
+        </div>
+      </div>
+
+      <ul class="form-hint">
+        <li><strong>Keep the URL relevant to your game.</strong></li>
+        <li>Misused URLs will be removed. "havana-parkour" is fine, "privacy-policy" is not.</li>
+        <li>You can use letters, numbers, and dashes "-".</li>
+        <li>All letter must be lowercase.</li>
+        <li>Minimum of 7 characters, maximum of 20.</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="form-group mt-full" data-reveal-by-checkbox>
     <label class="form-label">Images</label>
 
-    <div class="checkbox mt-half">
+    <div class="checkbox mt-quarter">
       <%= form.check_box :include_images, checked: @post.image_order.present?, data: { action: "reveal-by-checkbox" } %>
       <%= form.label :include_images, "Include image banner" %>
     </div>

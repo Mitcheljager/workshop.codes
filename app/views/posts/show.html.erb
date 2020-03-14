@@ -10,174 +10,146 @@
   <% end %>
 <% end %>
 
-<% cache_unless current_user, [@post, "title"] do %>
-  <article class="item item--single">
-    <h1 class="item__title">
-      <%= @post.title %>
+<article>
+  <% cache_unless current_user, [@post, "title"] do %>
+    <div class="item item--single">
+      <h1 class="item__title">
+        <%= @post.title %>
 
-      <%= render "favorites/form", post: @post %>
-    </h1>
+        <%= render "favorites/form", post: @post %>
+      </h1>
 
-    <div class="item__code">
-      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: @post.code } %>
+      <div class="item__code">
+        <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: @post.code } %>
 
-      <span class="copy">
-        <span data-copy="<%= @post.code %>" data-track-copy><%= @post.code %></span>
-      </span>
-    </div>
-  </article>
-
-  <% if current_user == @post.user %>
-    <div class="well mt-half">
-      <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
-
-      <div class="well__content">
-        <em>Likes</em>: <strong><%= @post.favorites_count %></strong>
+        <span class="copy">
+          <span data-copy="<%= @post.code %>" data-track-copy><%= @post.code %></span>
+        </span>
       </div>
     </div>
 
-    <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
-      <div class="warning mt-quarter">
-        <p><mark>⚠ Your Code will soon expire.</mark></p>
-        <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
-        <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
-        <p><small><em>This code will expire in roughly <%= time_ago_in_words(@post.updated_at + 6.months) %>.</em></small></p>
+    <% if current_user == @post.user %>
+      <div class="well mt-half">
+        <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
+
+        <div class="well__content">
+          <em>Likes</em>: <strong><%= @post.favorites_count %></strong>
+        </div>
       </div>
+
+      <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
+        <div class="warning mt-quarter">
+          <p><mark>⚠ Your Code will soon expire.</mark></p>
+          <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
+          <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
+          <p><small><em>This code will expire in roughly <%= time_ago_in_words(@post.updated_at + 6.months) %>.</em></small></p>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
 
-<% cache @post do %>
-  <% begin %>
-    <% if @ordered_images.present? && @ordered_images.one? %>
-      <picture>
-        <source media="(min-width: 560px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" type="image/jpeg">
-        <source media="(min-width: 0px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed %>" type="image/jpeg">
-        <img class="img-fluid mt-half" src="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" />
-      </picture>
-    <% elsif @ordered_images.present? && @ordered_images.many? %>
-      <%= render "carousel" if @post.images.any? %>
+  <% cache @post do %>
+    <% begin %>
+      <% if @ordered_images.present? && @ordered_images.one? %>
+        <picture>
+          <source media="(min-width: 560px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" type="image/jpeg">
+          <source media="(min-width: 0px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed %>" type="image/jpeg">
+          <img class="img-fluid mt-half" src="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" />
+        </picture>
+      <% elsif @ordered_images.present? && @ordered_images.many? %>
+        <%= render "carousel" if @post.images.any? %>
+      <% end %>
+    <% rescue %>
+      <p><small><em>Images are temporarily unavailable.</em></small></p>
     <% end %>
-  <% rescue %>
-    <p><small><em>Images are temporarily unavailable.</em></small></p>
-  <% end %>
 
-  <article class="item__description">
-    <%= markdown(@post.description) %>
-  </article>
+    <div class="item__description">
+      <%= markdown(@post.description) %>
+    </div>
 
-  <% if @post.snippet.present? %>
-    <div data-toggle-content>
-      <h2 class="heading mb-half">Code Snippet</h2>
+    <%= render "posts/snippet" if @post.snippet.present? %>
 
-      <%= button_tag "Toggle code snippet", class: "button button--secondary", data: { action: "toggle-content" } %>
+    <div class="item item--bottom">
+      <div class="item__details">
+        <div class="item__details-item">
+          Made by |
 
-      <div data-role="content-to-toggle" style="display: none">
-        <div class="ide">
-          <div class="ide__sidebar">
-            <%= link_to "View variables", "#", class: "ide__action", data: { action: "view-ide-variables" } %>
+          <%= link_to @post.user.username, user_path(@post.user.username), rel: "author" %>
+        </div>
 
-            <h3 class="ide__title">Rules</h3>
+        <div class="item__details-item">
+          Categories |
 
-            <div class="ide__rules" data-role="ide-rules">
-              No Rules are declared.
-            </div>
+          <% JSON.parse(@post.categories).each do |category| %>
+            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
+          <% end %>
+        </div>
+
+        <% if @post.tags.present? %>
+          <div class="item__details-item">
+            Tags |
+
+            <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
+              <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
+            <% end %>
           </div>
+        <% end %>
 
-          <%=
-            tag.pre(
-              tag.div(
-                tag.div(class: "ide__line-counter") +
-                tag.code(@post.snippet,
-                  class: "ide__code microlight syntax-highlight",
-                  spellcheck: "false",
-                  data: { role: "ide-content", copy: "current-content" }) +
-                tag.div(
-                  tag.div("View Fullscreen", class: "ide__tray-item", data: { action: "toggle-ide-fullscreen" }) +
-                  tag.div("Copy current Rule", class: "ide__tray-item", data: { action: "copy-to-clipboard", target: "current-content" }) +
-                  tag.div("Copy all Rules", class: "ide__tray-item", data: { action: "copy-ide-content", target: "current-content" }),
-                  class: "ide__tray"
-                ),
-              class: "ide__code-wrapper"),
-            class: "ide__content")
-          %>
+        <div class="item__details-item">
+          Heroes |
+
+          <% if JSON.parse(@post.heroes).length == heroes.length %>
+            All
+          <% else %>
+            <% JSON.parse(@post.heroes).each do |hero| %>
+              <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
+            <% end %>
+          <% end %>
         </div>
+
+        <div class="item__details-item">
+          Maps |
+
+          <% if JSON.parse(@post.maps).length == maps.length %>
+            All
+          <% else %>
+            <% JSON.parse(@post.maps).each do |map| %>
+              <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="item__details-item" title="Created at: <%= @post.created_at %>">
+          Created at |
+
+          <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
+        </div>
+
+        <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
+          Last updated |
+
+          <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
+        </div>
+
+        <% if @post.version.present? %>
+          <div class="item__details-item">
+            Current version |
+
+            <%= @post.version %>
+          </div>
+        <% end %>
+
+        <% if @post.nice_url.present? %>
+          <div class="item__details-item">
+            Share URL |
+
+            <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
-
-  <article class="item item--bottom">
-    <div class="item__details">
-      <div class="item__details-item">
-        Made by |
-
-        <%= link_to @post.user.username, user_path(@post.user.username) %>
-      </div>
-
-      <div class="item__details-item">
-        Categories |
-
-        <% JSON.parse(@post.categories).each do |category| %>
-          <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
-        <% end %>
-      </div>
-
-      <% if @post.tags.present? %>
-        <div class="item__details-item">
-          Tags |
-
-          <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-            <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
-          <% end %>
-        </div>
-      <% end %>
-
-      <div class="item__details-item">
-        Heroes |
-
-        <% if JSON.parse(@post.heroes).length == heroes.length %>
-          All
-        <% else %>
-          <% JSON.parse(@post.heroes).each do |hero| %>
-            <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div class="item__details-item">
-        Maps |
-
-        <% if JSON.parse(@post.maps).length == maps.length %>
-          All
-        <% else %>
-          <% JSON.parse(@post.maps).each do |map| %>
-            <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div class="item__details-item" title="Created at: <%= @post.created_at %>">
-        Created at |
-
-        <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
-      </div>
-
-      <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
-        Last updated |
-
-        <span data-role="timeago" datetime="<%= @post.updated_at %>"></span>
-      </div>
-
-      <% if @post.version.present? %>
-        <div class="item__details-item">
-          Current version |
-
-          <%= @post.version %>
-        </div>
-      <% end %>
-    </div>
-  </article>
-<% end %>
+</article>
 
 <% cache_unless current_user == @post.user, @post.revisions do %>
   <%= render "revisions/revisions" if @post.revisions.size > 1 %>
