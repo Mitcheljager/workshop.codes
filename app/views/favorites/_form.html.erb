@@ -1,22 +1,18 @@
 <% if current_user %>
   <% has_been_favorited = current_user.favorites.find_by_post_id(post.id).present? %>
 
-  <% cache [current_user, post, "post_favorite_form_#{ has_been_favorited }"] do %>
-    <div data-favorite="<%= post.id %>">
-      <%= button_to favorites_path,
-          remote: true,
-          method: has_been_favorited ? :delete : :post,
-          params: { favorite: { post_id: post.id } },
-          aria: { label: "favorite" },
-          class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
-        <%= inline_svg_tag "icons/icon-heart#{ "-border" unless has_been_favorited }.svg" %>
-      <% end %>
-    </div>
-  <% end %>
-<% else %>
-  <% cache "favorite_login_form" do %>
-    <%= link_to login_path, class: "favorite" do %>
-      <%= inline_svg_tag "icons/icon-heart-border.svg" %>
+  <div data-favorite="<%= post.id %>">
+    <%= button_to favorites_path,
+        remote: true,
+        method: has_been_favorited ? :delete : :post,
+        params: { favorite: { post_id: post.id } },
+        aria: { label: "favorite" },
+        class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
+      <%= inline_svg_tag "icons/icon-heart#{ "-border" unless has_been_favorited }.svg" %>
     <% end %>
+  </div>
+<% else %>
+  <%= link_to login_path, class: "favorite" do %>
+    <%= inline_svg_tag "icons/icon-heart-border.svg" %>
   <% end %>
 <% end %>
