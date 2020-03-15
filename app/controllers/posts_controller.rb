@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     redirect_to root_path unless current_user
   end
 
-  after_action :track_action, only: [:show, :index, :filter, :on_fire]
+  after_action :track_action, only: [:show]
 
   def index
     @hot_posts = Post.includes(:user, :revisions).where("hotness > 0").order("hotness DESC").limit(3)
