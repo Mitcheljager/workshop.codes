@@ -13,7 +13,7 @@
 <p class="form-hint">
   Note: Updates daily.
 
-  <% if post.created_at < Statistic.where(content_type: :copy).first.created_at %>
+  <% if Statistic.where(content_type: :copy).first && post.created_at < Statistic.where(content_type: :copy).first.created_at %>
       This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
   <% end %>
 </p>

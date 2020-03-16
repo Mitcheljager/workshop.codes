@@ -57,7 +57,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     visit post_url(@post.code)
     assert page.has_content? @post.title
-    click_link "Edit your item"
+    click_link "Edit"
 
     assert page.has_content? "Editing"
     fill_in "post_title", with: "Edited post title"
