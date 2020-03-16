@@ -6,8 +6,13 @@
 
   @include media-min(sm) {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 
@@ -19,4 +24,8 @@
     margin-top: 0;
     text-align: right;
   }
+}
+
+.well__tray {
+  flex: 0 0 100%;
 }

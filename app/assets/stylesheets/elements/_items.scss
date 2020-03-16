@@ -245,9 +245,24 @@
 
 .item__actions {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
   text-align: right;
+
+  a {
+    display: block;
+    margin-left: .5em;
+    text-decoration: none;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.item__tray {
+  flex: 0 0 100%;
+  padding-bottom: $margin / 3;
 }
 
 .item__description {

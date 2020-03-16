@@ -26,3 +26,4 @@
 //= require toggle-content
 //= require carousel
 //= require timeago
+//= require load-analytics

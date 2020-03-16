@@ -111,14 +111,6 @@
       animation: grow-heart 300ms;
     }
   }
-
-  .item--small & {
-    margin-left: 0;
-
-    @include media-min(lg) {
-      margin-left: $margin / 4;
-    }
-  }
 }
 
 .favorite__label {

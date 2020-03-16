@@ -1,0 +1,19 @@
+<div class="favorite favorite--is-active ml-0 mt-half">
+  <%= inline_svg_tag "icons/icon-heart.svg", style: "height: 16px" %>
+  <span class="favorite__label"><%= post.favorites_count %></span>
+</div>
+
+<h4 class="mt-half">Total copies received per day</h4>
+<p class="form-hint mt-quarter">
+  This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+</p>
+
+<div><canvas height="200" class="chart" data-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
+
+<p class="form-hint">
+  Note: Updates daily.
+
+  <% if post.created_at < Statistic.where(content_type: :copy).first.created_at %>
+      This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
+  <% end %>
+</p>

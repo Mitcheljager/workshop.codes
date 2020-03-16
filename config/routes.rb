@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get "favorites", to: "users#favorites", as: "account_favorites"
   patch "user", to: "users#update", as: "update_user"
   delete "user", to: "users#destroy", as: "destroy_user"
+  post "get-analytics", to: "users#get_analytics", as: "get_analytics"
 
   resources :sessions, only: [:new, :create, :destroy]
 

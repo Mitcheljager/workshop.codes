@@ -29,11 +29,15 @@
     </div>
 
     <% if current_user == @post.user %>
-      <div class="well mt-half">
-        <%= link_to "Edit your item", edit_post_path(@post.code), class: "button" %>
+      <div class="well mt-half" data-toggle-content>
+        <div>
+          <%= link_to "Edit", edit_post_path(@post.code), class: "mr-quarter" %>
+          <%= link_to "Delete", post_path(@post.code), class: "text-red mr-half", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
+          <%= link_to "Analytics", "#", class: "text-white", data: { action: "toggle-content load-analytics", id: @post.id } %>
+        </div>
 
-        <div class="well__content">
-          <em>Likes</em>: <strong><%= @post.favorites_count %></strong>
+        <div class="well__tray" data-role="content-to-toggle" style="display: none">
+          <%= render "posts/analytics", post: @post %>
         </div>
       </div>
 

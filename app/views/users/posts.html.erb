@@ -2,21 +2,21 @@
 
 <%= render "layouts/account", title: "Your codes" do %>
   <% @posts.each do |post| %>
-    <div class="item item--small">
-      <div class="item__title">
-        <%= link_to post.title, post_path(post.code) %>
+    <div data-toggle-content>
+      <div class="item item--small">
+        <div class="item__title">
+          <%= link_to post.title, post_path(post.code) %>
+        </div>
+
+        <div class="item__actions">
+          <%= link_to "Analytics", "#", class: "text-white mr-quarter", data: { action: "toggle-content load-analytics", id: post.id } %>
+          <%= link_to "Edit", edit_post_path(post.code), class: "" %>
+          <%= link_to "Delete", post_path(post.code), class: "text-red", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
+        </div>
       </div>
 
-      <div class="item__actions">
-        <div class="favorite favorite--is-active">
-          <%= inline_svg_tag "icons/icon-heart.svg", style: "height: 16px" %>
-          <span class="favorite__label"><%= post.favorites_count %></span>
-        </div>
-
-        <div>
-          <%= link_to "Edit", edit_post_path(post.code), class: "button button--secondary" %>
-          <%= link_to "Delete", post_path(post.code), class: "button button--danger", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
-        </div>
+      <div class="item__tray" data-role="content-to-toggle" style="display: none">
+        <%= render "posts/analytics", post: post %>
       </div>
     </div>
   <% end %>

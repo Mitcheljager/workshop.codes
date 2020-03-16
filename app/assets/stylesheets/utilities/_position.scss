@@ -26,6 +26,18 @@
   margin-top: $margin;
 }
 
+.mr-quarter {
+  margin-right: $margin / 4;
+}
+
+.mr-half {
+  margin-right: $margin / 2;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
 .mb-half {
   margin-bottom: $margin / 2;
 }
@@ -36,6 +48,10 @@
 
 .ml-auto {
   margin-left: auto;
+}
+
+.ml-0 {
+  margin-left: 0;
 }
 
 .pt-full {

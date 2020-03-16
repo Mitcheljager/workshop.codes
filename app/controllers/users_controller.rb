@@ -75,6 +75,22 @@ class UsersController < ApplicationController
     @posts = current_user.posts.order(updated_at: :desc).page(params[:page])
   end
 
+  def get_analytics
+    @post = Post.find(params[:id])
+    @copies = Statistic.where(model_id: @post.id).where(content_type: :copy).order(created_at: :asc)
+
+    @date_counts = {}
+    (Date.parse(@post.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date|
+      @date_counts[date.strftime("%Y-%m-%d")] = 0
+    end
+
+    @copies.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group|
+      @date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
+    end
+
+    render json: @date_counts, layout: false
+  end
+
   private
 
   def set_user

@@ -54,5 +54,9 @@
     </div>
 
     <%= render "body_bg" %>
+
+    <% if current_user %>
+      <%= inline_js "chart.js" %>
+    <% end %>
   </body>
 </html>
