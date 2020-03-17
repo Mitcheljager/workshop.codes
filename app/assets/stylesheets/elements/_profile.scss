@@ -55,9 +55,20 @@
 
   .button {
     margin-top: $margin / 2;
+    margin-bottom: $margin / 2;
 
     @media (min-width: 1000px) {
       margin-top: 0;
+      margin-bottom: 0;
+      margin-right: 1rem;
+    }
+  }
+
+  img {
+    height: 48px;
+
+    @media (min-width: 1000px) {
+      height: 34px;
     }
   }
 }

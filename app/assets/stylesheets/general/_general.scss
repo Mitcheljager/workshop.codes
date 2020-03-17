@@ -13,7 +13,7 @@ body {
 
 body {
   position: relative;
-  padding: $margin / 3;
+  padding: $margin / 3 $margin / 3 0;
   background: $body-bg image-url("layout/pattern-bg.webp");
   color: $text-color;
   overflow-x: hidden;

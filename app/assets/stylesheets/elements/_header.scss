@@ -91,13 +91,18 @@
   font-size: 36px;
 
   @media (min-width: 1000px) {
-    font-size: 26px;
+    font-size: 24px;
     margin-bottom: 0;
-    margin-right: $margin / 2;
+    margin-right: $margin / 4;
   }
 
-  @include media-min(xl) {
+  @media (min-width: 1100px) {
+    font-size: 30px;
+  }
+
+  @media (min-width: 1300px) {
     font-size: 32px;
+    margin-right: $margin / 2;
   }
 
   &:last-child {
