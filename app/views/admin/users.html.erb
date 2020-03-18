@@ -10,7 +10,10 @@
   <tr>
     <th>ID</th>
     <th>Username</th>
-    <th>Email</th>
+    <th>Email?</th>
+    <th>Img?</th>
+    <th>Link?</th>
+    <th>Desc?</th>
     <th>Posts</th>
     <th>Comments</th>
     <th>Created at</th>
@@ -21,6 +24,9 @@
       <td><%= user.id %></td>
       <td><%= link_to user.username, user_path(user.username) %></td>
       <td><%= "✔" if user.email.present? %>
+      <td><%= "✔" if user.profile_image.attached? %>
+      <td><%= "✔" if user.link.present? %>
+      <td><%= "✔" if user.description.present? %>
       <td><%= user.posts.count %></td>
       <td><%= user.comments.count %></td>
       <td><%= time_ago_in_words(user.created_at).humanize %></td>
