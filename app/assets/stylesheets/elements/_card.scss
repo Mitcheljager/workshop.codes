@@ -1,11 +1,17 @@
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-gap: $margin / 2;
+  grid-gap: $margin / 4;
+
+  @include media-min(xs) {
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+    grid-gap: $margin / 2;
+  }
 }
 
 .card {
   @extend .banner;
+  display: flex;
+  flex-direction: column;
   padding: $margin / 4;
   text-align: left;
   font-size: 28px;
@@ -15,8 +21,10 @@
 
 .card__title {
   display: block;
-  margin-bottom: .5rem;
+  padding-bottom: .5rem;
+  margin-bottom: auto;
   font-family: $font-stack;
   font-size: 14px;
   color: $text-color;
+  text-decoration: none;
 }

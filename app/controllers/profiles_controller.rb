@@ -25,6 +25,6 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:user).permit(:profile_image, :link, :description)
+    params.require(:user).permit(:profile_image, :link, :description, { featured_posts: [] })
   end
 end

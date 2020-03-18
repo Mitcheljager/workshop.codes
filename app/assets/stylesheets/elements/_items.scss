@@ -153,16 +153,6 @@
   font-size: 36px;
   line-height: 1em;
   color: $white;
-
-  svg {
-    height: 24px;
-    width: 24px;
-    margin-right: .25em;
-
-    path {
-      fill: $text-color-dark;
-    }
-  }
 }
 
 .item__details {

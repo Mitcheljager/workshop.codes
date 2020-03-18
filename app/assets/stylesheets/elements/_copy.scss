@@ -1,5 +1,12 @@
 .copy-trigger {
+  height: 24px;
+  width: 24px;
+  margin-right: .25em;
   cursor: pointer;
+
+  path {
+    fill: $text-color-dark;
+  }
 
   &:hover,
   &:active {
@@ -8,7 +15,7 @@
 }
 
 .copy {
-  display: block;
+  display: inline-block;
   position: relative;
 }
 

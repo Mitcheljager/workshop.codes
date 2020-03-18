@@ -1,6 +1,12 @@
 <% content_for :page_title, "Your account" %>
 
 <%= render "layouts/account", title: "Hello there, <strong>#{ current_user.username }</strong>" do %>
+  <% if current_user.link.blank? && current_user.profile_image.blank? && current_user.description.blank? %>
+    <div class="well mt-0 mb-half">
+      <%= link_to "← Customise your profile", edit_profile_path %>
+    </div>
+  <% end %>
+
   <div class="cards">
     <div class="card">
       <span class="card__title">Favorites given</span>

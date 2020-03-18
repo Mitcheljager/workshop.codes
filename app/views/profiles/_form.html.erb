@@ -21,6 +21,16 @@
     </p>
   </div>
 
+  <div class="form-group-max-width mt-full">
+    <%= f.label :featured_posts, "Featured Codes", class: "form-label" %>
+
+    <div class="form-hint">
+      Show up to 3 Featured Codes on your Profile page.
+    </div>
+
+    <%= f.select :featured_posts, @user.posts.collect {|p| [ p.title, p.id ] }, { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
+  </div>
+
   <div class="form-group mt-full">
     <%= f.label :description, "About you", class: "form-label" %>
 
