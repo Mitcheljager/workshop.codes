@@ -1,3 +1,7 @@
+.text-right {
+  text-align: right;
+}
+
 .text-md-right {
   @include media-min(md) {
     text-align: right;

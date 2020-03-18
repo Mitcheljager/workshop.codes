@@ -1,0 +1,47 @@
+<%= form_for @user, url: profile_path(@user.username) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error-block">
+      <h2 class="error-block__title"><strong><%= pluralize(@user.errors.count, "error") %></strong> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><small><%= message %></small></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group-max-width mt-full">
+    <%= f.label :profile_image, "Profile image", class: "form-label" %>
+    <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
+    <%= f.file_field :profile_image %>
+
+    <p class="form-hint mt-quarter">
+      The image will be processed to a 140x140 format. Max 1MB.
+    </p>
+  </div>
+
+  <div class="form-group mt-full">
+    <%= f.label :description, "About you", class: "form-label" %>
+
+    <div class="form-hint">
+      Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you.<br>
+      Full markdown enabled. Limited to 255 characters.
+    </div>
+
+    <%= f.text_area :description, class: "form-input form-textarea form-textarea--extra-small" %>
+  </div>
+
+  <div class="form-group-max-width mt-full">
+    <%= f.label :link, class: "form-label" %>
+    <p class="form-hint">
+      Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
+    </p>
+
+    <%= f.text_field :link, placeholder: "Link", class: "form-input" %>
+  </div>
+
+  <hr class="small mt-full">
+
+  <%= submit_tag "Submit", class: "button" %>
+<% end %>

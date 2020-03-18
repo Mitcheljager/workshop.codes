@@ -183,6 +183,13 @@ input[type="checkbox"] {
   }
 }
 
+input[type="file"] {
+  width: 100%;
+  padding: .5rem;
+  border: 1px solid $border-color;
+  margin-top: $margin / 4;
+}
+
 .form-hint {
   display: block;
   max-width: map-get($media-min-widths, sm);

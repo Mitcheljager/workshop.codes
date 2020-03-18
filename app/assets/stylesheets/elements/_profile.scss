@@ -89,3 +89,74 @@
     }
   }
 }
+
+.profile-image {
+  position: relative;
+  display: block;
+  flex: 0 0 140px;
+  height: 140px;
+  width: 140px;
+  margin-right: $margin;
+  border-radius: 50%;
+  background: $bg-dark;
+  overflow: hidden;
+  box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
+  z-index: 1;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABFCAMAAAArU9sbAAAAe1BMVEUAAAB8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIpNki3+AAAAKHRSTlMABLL3KunTXE3i2O+eVqWZlHoWCcrCvLasdW9jMB6JhGhSEEY/NoF/HOa9KAAAAohJREFUWMPtlnt3sjAMxqlcKhcFRKdM8O72fP9P+Ma0BaTgnH++83fOzmganyZpgjpv3rz5PxGifXiMaB5siUKmIQB3UspxKTYfv0MQfub1heQKXSZSqk+1KDc5QZfNncwHbFwXH9vjTCF3sUsG22na5reFwvf9mP7wENdX6NWpUeFDPg7GsPgsY7gYIs6lozntQ07eiCQgtk6Potx/7UJ94ibff0mnTwriqFVuVanEc7dry6z1HgW/cl6DVJYOcwYCOuwl5iSzMAl5nX6kCnyfxkTF4mu3zx3ReEfAjp9WQOs11W030ru66Y6NTEUp8SKmhAxTaOZiSGQOzbRTmdXNtQayZky6zW2zQUNHJeYeAy7m4B1aEmFH0rJu68vlPQBWKIx1b+hy1rs54N0XN+f9pe5Yea8irmwNs0wVzlwaRU3/Ik6MWZqCsF/ZUzmYgkgeijbCQDgiQGqmEETUVCDoleWzqVYAtD1GH2GVXHR6ZdZe+JDK0THBlM69yrdW5YQLNRTE0lYxjRLfGrOnsuq88cK2+XIxpsKecU/FhH5w3VjFVYH4HFc5R647V9aam1dERoWei8JRZGmanHoqpyTLErMqyJutJb/gxJIOEENvJWHZCMtzDdSqd0PafJGLucsAWHov6QhnFnLTETVPV/3jV6ud4IWbXaqlGp9gS6V9ToqdrqkLwjdFFdJ8Yawn6ZXWP8VwzTYRiP6YeGkMQ1A/lNmjwT/Y21vWV1M/zhqaaCtGYl1UiauGaYzZLfFwVi8e5y14SMZ8Cv1z4wlAJAOugtNZP9kInirdsaq8DtcEjPMsK4xTPt+bAca4/GrIQgzhV+J3QzLdTHok55v9d4gh05s3b/4G/wDSXXZB30j/zAAAAABJRU5ErkJggg==');
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .profile-banner--small & {
+    flex: 0 0 80px;
+    height: 80px;
+    width: 80px;
+    margin-right: $margin / 2;
+    background-size: 40px 40px;
+  }
+
+  img {
+    display: block;
+  }
+}
+
+.profile-banner {
+  align-items: center;
+  margin: $margin * 2 0;
+
+  @include media-min(sm) {
+    display: flex;
+  }
+
+  &--small {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 $margin;
+  }
+}
+
+.profile-banner__content {
+  max-width: map-get($media-min-widths, xs);
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.profile-banner__title {
+  display: block;
+  margin: $margin / 4 0 .1em;
+  color: $white;
+  font-weight: bold;
+  font-size: 32px;
+  text-decoration: none;
+  line-height: 1em;
+
+  @include media-min(sm) {
+    margin-top: 0;
+  }
+
+  .profile-banner--small & {
+    margin-top: 0;
+    font-size: 24px;
+  }
+}

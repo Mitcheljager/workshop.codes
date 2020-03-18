@@ -177,16 +177,6 @@
     flex-wrap: wrap;
   }
 
-  a {
-    color: $text-color;
-    text-decoration: none;
-
-    &:hover,
-    &:active {
-      color: $white;
-    }
-  }
-
   .item--bottom & {
     display: block;
   }
@@ -202,6 +192,16 @@
 
     @media (max-width: #{map-get($media-min-widths, sm) - 1px}) {
       margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: $white;
     }
   }
 }

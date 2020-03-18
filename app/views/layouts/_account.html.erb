@@ -9,12 +9,12 @@
     <%= link_to "Activity", activities_path, class: "profile__action #{ 'profile__action--active' if current_page?(activities_path) }" %>
     <%= link_to "Favorites", account_favorites_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_favorites_path) }" %>
     <%= link_to "Codes", account_posts_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_posts_path) }" %>
-    <%= link_to "Profile", user_path(current_user.username), class: "profile__action" %>
+    <%= link_to "Profile", edit_profile_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_profile_path) }" %>
 
     <hr class="mt-half mb-half">
 
     <%= link_to "Admin", admin_path, class: "profile__action" if current_user.username == "admin" %>
-    <%= link_to "Settings", edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>
+    <%= link_to "Account", edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>
     <%= link_to "Logout", logout_path, class: "profile__action" %>
   </aside>
 

@@ -12,11 +12,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_username!(params[:username])
-    @posts = @user.posts.order(updated_at: :desc).page(params[:page]).per(10)
-  end
-
-  def account
     @posts = current_user.posts
     @favorites_given = Favorite.where(user_id: current_user.id)
     @favorites_received = Favorite.where(post_id: @posts.pluck(:id)).order(created_at: :asc)

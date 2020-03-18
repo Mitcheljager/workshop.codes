@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_133751) do
+ActiveRecord::Schema.define(version: 2020_03_18_175820) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,9 @@ ActiveRecord::Schema.define(version: 2020_03_14_133751) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "email_notifications", force: :cascade do |t|
@@ -198,6 +201,8 @@ ActiveRecord::Schema.define(version: 2020_03_14_133751) do
     t.datetime "updated_at", null: false
     t.text "email_ciphertext"
     t.string "email_bidx"
+    t.string "link"
+    t.string "description"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

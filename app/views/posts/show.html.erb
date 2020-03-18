@@ -75,11 +75,7 @@
 
     <div class="item item--bottom">
       <div class="item__details">
-        <div class="item__details-item">
-          Made by |
-
-          <%= link_to @post.user.username, user_path(@post.user.username), rel: "author" %>
-        </div>
+        <%= render "profiles/profile", user: @post.user, small: true %>
 
         <div class="item__details-item">
           Categories |

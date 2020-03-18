@@ -1,11 +1,46 @@
-<% content_for :page_title, @user.username %>
+<% content_for :page_title, "Your account" %>
 
-<div class="heading">
-  <h1>Workshop Codes by <strong><%= @user.username %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
-</div>
+<%= render "layouts/account", title: "Hello there, <strong>#{ current_user.username }</strong>" do %>
+  <div class="cards">
+    <div class="card">
+      <span class="card__title">Favorites given</span>
+      <%= @favorites_given.size %>
+    </div>
 
-<main class="items">
-  <%= render "posts/posts" %>
+    <div class="card">
+      <span class="card__title">Favorites received</span>
+      <%= @favorites_received.size %>
+    </div>
 
-  <%= paginate @posts %>
-</main>
+    <div class="card">
+      <span class="card__title">Copies received</span>
+      <%= @copies_received.pluck(:value).sum %>
+    </div>
+  </div>
+
+  <% date_counts = {} %>
+  <% if @posts.any? %>
+    <% (Date.parse(@posts.first.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date| %>
+      <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
+    <% end %>
+  <% else %>
+    <% date_counts[DateTime.now.strftime("%Y-%m-%d")] = 0 %>
+  <% end %>
+
+  <% @copies_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group| %>
+    <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
+  <% end %>
+
+  <h3 class="mt-full">Copies received per day</h3>
+  <p class="form-hint mt-quarter">
+    This is the total amount of times people clicked on the "copy" button for your items. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+  </p>
+
+  <div style="position: relative"><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+
+  <% if @posts.any? && @copies_received.any? && @posts.first.created_at < @copies_received.first.created_at %>
+    <p class="form-hint">
+      Note: This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
+    </p>
+  <% end %>
+<% end %>

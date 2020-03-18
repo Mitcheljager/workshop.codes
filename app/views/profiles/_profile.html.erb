@@ -1,0 +1,19 @@
+<% small ||= false %>
+<% size = small ? 80 : 140 %>
+
+<div class="profile-banner <%= "profile-banner--small" if small %>">
+  <%= link_to user_path(user.username), class: "profile-image" do %>
+    <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed if user.profile_image.attached? %>
+  <% end %>
+
+  <div class="profile-banner__content">
+    <%= link_to user.username, user_path(user.username), class: "profile-banner__title", rel: "author" %>
+    <%= link_to user.link, user.link, class: "profile-banner__action", target: "_blank", rel: "noreferrer noopener" if user.link.present? %>
+
+    <% if !small && user.description.present? %>
+      <div class="mt-quarter">
+        <small><%= user.description %></small>
+      </div>
+    <% end %>
+  </div>
+</div>

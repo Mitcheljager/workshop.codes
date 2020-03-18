@@ -11,6 +11,11 @@
     align-items: center;
   }
 
+  &--simple {
+    box-shadow: none;
+    background: transparent
+  }
+
   a {
     text-decoration: none;
   }

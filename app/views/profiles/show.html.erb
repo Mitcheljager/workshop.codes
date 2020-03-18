@@ -1,0 +1,19 @@
+<% content_for :page_title, @user.username %>
+
+<% if @user == current_user %>
+  <div class="well mt-full">
+    <%= link_to "← Customise your profile", edit_profile_path %>
+  </div>
+<% end %>
+
+<%= render "profile", user: @user %>
+
+<div class="heading top-offset mb-0">
+  <h2>Workshop Codes made by <strong><%= @user.username %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h2>
+</div>
+
+<main class="items">
+  <%= render "posts/posts" %>
+
+  <%= paginate @posts %>
+</main>

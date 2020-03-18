@@ -1,0 +1,7 @@
+<%= render "layouts/account", title: "<strong>Customise</strong> your profile" do %>
+  <div class="well well--simple mb-half">
+    <%= link_to "Go to your profile →", profile_show_path(current_user.username) %>
+  </div>
+
+  <%= render "form" %>
+<% end %>
