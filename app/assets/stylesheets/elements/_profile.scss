@@ -121,7 +121,7 @@
 
 .profile-banner {
   align-items: center;
-  margin: $margin * 2 0;
+  margin: $margin 0;
 
   @include media-min(sm) {
     display: flex;
