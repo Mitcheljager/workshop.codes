@@ -258,6 +258,7 @@
 .item__description {
   margin-top: $margin;
   line-height: 1.5em;
+  overflow-wrap: break-word;
 
   details {
     margin-bottom: $margin / 6;
