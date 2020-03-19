@@ -13,11 +13,14 @@
 
   <div class="form-group-max-width mt-full">
     <%= f.label :profile_image, "Profile image", class: "form-label" %>
-    <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
-    <%= f.file_field :profile_image %>
+    <% begin %>
+      <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
+    <% rescue%>
+    <% end %>
+    <%= f.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
 
     <p class="form-hint mt-quarter">
-      The image will be processed to a 140x140 format. Max 1MB.
+      The image will be processed to a 140x140 format. Max 2MB.
     </p>
   </div>
 

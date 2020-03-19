@@ -35,5 +35,5 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 255 }
   validates :featured_posts, allow_blank: true, serialized_array_length: { maximum: 3 }
   validates :profile_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
-                            size: { less_than: 1.megabytes }
+                            size: { less_than: 2.megabytes }
 end
