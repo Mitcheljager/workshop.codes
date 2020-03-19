@@ -96,7 +96,7 @@
   flex: 0 0 140px;
   height: 140px;
   width: 140px;
-  margin-right: $margin;
+  margin: 0 auto;
   border-radius: 50%;
   background: $bg-dark;
   overflow: hidden;
@@ -106,11 +106,15 @@
   background-repeat: no-repeat;
   background-position: center;
 
+  @include media-min(sm) {
+    margin: 0 $margin 0 0;
+  }
+
   .profile-banner--small & {
     flex: 0 0 80px;
     height: 80px;
     width: 80px;
-    margin-right: $margin / 2;
+    margin: 0 $margin / 2 0 0;
     background-size: 40px 40px;
   }
 
@@ -122,20 +126,25 @@
 .profile-banner {
   align-items: center;
   margin: $margin 0;
+  text-align: center;
 
   @include media-min(sm) {
     display: flex;
+    text-align: left;
   }
 
   &--small {
     display: flex;
     flex-direction: row;
     margin: 0 0 $margin;
+    text-align: left;
   }
 }
 
 .profile-banner__content {
-  max-width: map-get($media-min-widths, xs);
+  @include media-min(sm) {
+    max-width: map-get($media-min-widths, xs);
+  }
 
   a {
     text-decoration: none;
