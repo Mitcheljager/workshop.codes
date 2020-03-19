@@ -3,8 +3,12 @@
   grid-gap: $margin / 4;
 
   @include media-min(xs) {
-    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: $margin / 2;
+  }
+
+  @include media-min(md) {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
