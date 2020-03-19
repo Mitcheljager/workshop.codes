@@ -1,4 +1,7 @@
-<% cache_if request.path_parameters.without(:controller, :action, :search, :from, :to).length == 1 && !current_user && !params[:search].present?, ["filter", request.path_parameters.without(:controller, :action, :search, :from, :to), @posts] do %>
+<% cache_if request.path_parameters.without(:controller, :action, :from, :to).length == 1 && !current_user,
+            ["filter", request.path_parameters.without(:controller, :action, :from, :to), @posts],
+            expires_in: 12.hours do %>
+            
   <div class="heading">
     <h2>
       Workshop Codes
