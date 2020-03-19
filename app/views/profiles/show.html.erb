@@ -8,7 +8,7 @@
 
 <%= render "profile", user: @user %>
 
-<% if @user.featured_posts.any? %>
+<% if @user.featured_posts.present? %>
   <div class="cards">
     <% @user.featured_posts.each do |post| %>
       <% post = Post.find(post) %>
