@@ -139,6 +139,14 @@
     margin: 0 0 $margin;
     text-align: left;
   }
+
+  p {
+    margin: 0;
+
+    + p {
+      margin-top: 1em;
+    }
+  }
 }
 
 .profile-banner__content {
