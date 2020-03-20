@@ -12,7 +12,7 @@
 
     <% if !small && user.description.present? %>
       <div class="mt-quarter">
-        <small><%= user.description %></small>
+        <small><%= markdown(user.description) %></small>
       </div>
     <% end %>
   </div>
