@@ -66,6 +66,11 @@
   align-self: center;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 .mb-sm-0 {
   @include media-min(sm) {
     margin-bottom: 0;
