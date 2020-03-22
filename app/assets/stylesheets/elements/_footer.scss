@@ -7,5 +7,6 @@
   @include media-min(md) {
     display: flex;
     justify-content: space-between;
+    margin-top: $margin * 2;
   }
 }
