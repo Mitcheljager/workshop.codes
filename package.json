@@ -3,9 +3,9 @@
   "private": true,
   "dependencies": {
     "@agilie/canvas-image-cover-position": "^1.1.1",
+    "easymde": "^2.9.0",
     "microlight": "^0.0.7",
     "siema": "^1.5.1",
-    "simplemde": "^1.11.2",
     "sortablejs": "^1.10.2",
     "timeago.js": "^4.0.2"
   }

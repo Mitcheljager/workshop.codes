@@ -1,4 +1,4 @@
-//= require simple-mde
+//= require easy-mde
 //= require activestorage
 //= require sortablejs/Sortable
 //= require @agilie/canvas-image-cover-position/index
