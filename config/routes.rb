@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"
 
   post "copy-code", to: "posts#copy_code", as: "copy_code"
-  resources :revisions, only: [:edit, :update]
+  resources :revisions, only: [:show, :edit, :update]
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index], constraints: { code: /.{5,6}/ }
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter"

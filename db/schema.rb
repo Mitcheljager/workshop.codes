@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_210102) do
+ActiveRecord::Schema.define(version: 2020_03_29_135319) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_210102) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "visible", default: true
+    t.text "snippet"
     t.index ["post_id"], name: "index_revisions_on_post_id"
   end
 

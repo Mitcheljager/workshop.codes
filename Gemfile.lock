@@ -119,6 +119,7 @@ GEM
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     device_detector (1.0.3)
+    diffy (3.3.0)
     elasticsearch (7.5.0)
       elasticsearch-api (= 7.5.0)
       elasticsearch-transport (= 7.5.0)
@@ -320,6 +321,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   chart-js-rails
+  diffy
   elasticsearch-model (~> 6)
   elasticsearch-rails (~> 6)
   faker

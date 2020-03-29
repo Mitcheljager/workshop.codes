@@ -1,8 +1,12 @@
 class RevisionsController < ApplicationController
   before_action :set_revision
 
-  before_action do
+  before_action except: [:show] do
     redirect_to root_path unless current_user && current_user == @revision.post.user && @revision.visible
+  end
+
+  def show
+    @difference = Diffy::Diff.new(@revision.snippet, @revision.post.snippet).to_s(:html_simple)
   end
 
   def edit
@@ -21,7 +25,7 @@ class RevisionsController < ApplicationController
   private
 
   def set_revision
-    @revision = Revision.find(params[:id])
+    @revision = Revision.includes(:post).find(params[:id])
   end
 
   def revision_activity_params

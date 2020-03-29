@@ -1,0 +1,7 @@
+<% content_for :page_title, "Viewing difference between #{ @revision.code } and #{ @revision.post.code }" %>
+
+<h2 class="heading mb-quarter">Comparing difference between <strong><%= @revision.code %></strong> and <strong><%= @revision.post.code %></strong></h2>
+
+<%= link_to "Return to post", post_path(@revision.post.code) %>
+
+<div class="well mt-half"><%= @difference.html_safe %></div>

@@ -1,6 +1,6 @@
 <div class="item item--single mt-half">
   <div class="item__title item__title--small">
-    <%= revision.version unless revision.version.empty? %>
+    <div><%= revision.version unless revision.version.empty? %><%= tag.small " (latest)" if revision == revision.post.revisions.last %></div>
 
     <small class="ml-auto">
       <span title="Created at: <%= revision.created_at %>" data-role="timeago" datetime="<%= revision.created_at %>"></span>
@@ -30,6 +30,10 @@
   <div class="mt-quarter">
     <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "post-comment__action" %>
   </div>
+<% end %>
+
+<% if revision.snippet.present? && revision != revision.post.revisions.last %>
+  <%= link_to "Compare snippet to latest", revision_path(revision.id), class: "post-comment__action mt-quarter" %>
 <% end %>
 
 <% unless revision.description.blank? %>

@@ -76,7 +76,7 @@ class PostsController < ApplicationController
   end
 
   def parse_markdown
-    parsed_markdown = markdown(post_params[:description].html_safe)
+    parsed_markdown = markdown(post_params[:description])
 
     render json: parsed_markdown, layout: false
   end
@@ -86,7 +86,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
-      @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version).save
+      @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
@@ -110,7 +110,7 @@ class PostsController < ApplicationController
 
       if (post_params[:revision].present? && post_params[:revision] != "0") || (params[:code] != post_params[:code])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
-        @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], visible: invisible).save
+        @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible).save
 
         redirect_to post_path(@post.code)
       else
