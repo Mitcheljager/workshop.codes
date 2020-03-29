@@ -32,12 +32,12 @@
   </div>
 <% end %>
 
-<% if revision.snippet.present? && revision != revision.post.revisions.last %>
-  <%= link_to "Compare snippet to latest", revision_path(revision.id), class: "post-comment__action mt-quarter" %>
-<% end %>
-
 <% unless revision.description.blank? %>
   <div class="item__description mt-0">
     <%= markdown(revision.description) %>
   </div>
+<% end %>
+
+<% if revision.snippet.present? && revision != revision.post.revisions.last %>
+<%= link_to "Compare snippet to latest", revision_path(revision.id), class: "post-comment__action mt-quarter" %>
 <% end %>

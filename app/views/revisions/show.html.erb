@@ -4,4 +4,11 @@
 
 <%= link_to "Return to post", post_path(@revision.post.code) %>
 
-<div class="well mt-half"><%= @difference.html_safe %></div>
+<p>
+  Green = What has been added since this version. <br>
+  Red = What has been removed since this version.
+</p>
+
+<div class="well mt-half">
+  <%= @difference.html_safe %>
+</div>
