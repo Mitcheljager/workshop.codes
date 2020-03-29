@@ -4,9 +4,11 @@
 
 <%= link_to "Return to post", post_path(@revision.post.code) %>
 
-<p>
-  Green = What has been added since this version. <br>
-  Red = What has been removed since this version.
+<p class="mt-half">
+  <small>
+    <strong>Green</strong> = What has been added since this version. <br>
+    <strong>Red</strong> = What has been removed since this version.
+  </small>
 </p>
 
 <div class="well mt-half">
