@@ -17,6 +17,8 @@ module ApplicationHelper
 
     iframe = '<div class="video"><iframe class="video__iframe" width="560" height="315" src="https://www.youtube.com/embed/\\1" frameborder="0" allowfullscreen></iframe></div>'
 
+    text = sanitize(text, tags: %w[a div strong em span p h1 h2 h3 h4 h5 h6 style])
+    text = text.gsub(/script/i, "scrıpt")
     text = text.gsub(/\[youtube\s+(.*?)\]/, iframe)
     content = markdown.render(text).html_safe
   end
@@ -41,7 +43,7 @@ module ApplicationHelper
       return filter_path(parameters)
     end
   end
-  
+
   def non_www_url
     url = request.original_url
     url.gsub("www.", "")
