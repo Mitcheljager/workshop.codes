@@ -1,10 +1,10 @@
-//= require easymde/dist/easymde.min.js
+//= require simplemde/dist/simplemde.min.js
 
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-role='simple-mde']")
 
   elements.forEach((element) => {
-    const mde = new EasyMDE({
+    const mde = new SimpleMDE({
       element: element,
       autoDownloadFontAwesome: false,
       autofocus: false,

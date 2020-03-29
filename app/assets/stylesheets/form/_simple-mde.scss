@@ -37,8 +37,7 @@
     opacity: 1;
   }
 
-  a,
-  button {
+  a {
     border: 0;
     margin-right: .25rem;
     background-color: $bg-dark;
@@ -57,10 +56,6 @@
     border: 0;
     margin: 0 $margin / 8;
   }
-}
-
-.fa {
-  font-style: normal;
 }
 
 .fa-bold::before {
@@ -88,7 +83,8 @@
 }
 
 .fa-list-ol::before {
-  content: "1";
+  content: "❶";
+  font-weight: bold;
   font-size: 12px;
 }
 
@@ -96,7 +92,7 @@
   content: "🔗";
 }
 
-.fa-image::before {
+.fa-picture-o::before {
   content: "🖼️";
 }
 
