@@ -17,7 +17,7 @@ module ApplicationHelper
 
     iframe = '<div class="video"><iframe class="video__iframe" width="560" height="315" src="https://www.youtube.com/embed/\\1" frameborder="0" allowfullscreen></iframe></div>'
 
-    text = text.gsub(/script/i, "scrıpt")
+    text = text.gsub(/<script.*?>[\s\S]*<\/script>/i, "")
     text = text.gsub(/\[youtube\s+(.*?)\]/, iframe)
     content = markdown.render(text).html_safe
   end
