@@ -9,13 +9,13 @@
 
   <div class="cards">
     <div class="card">
-      <span class="card__title">Favorites given</span>
-      <%= @favorites_given.size %>
+      <span class="card__title">Favorites received</span>
+      <%= @favorites_received.size %>
     </div>
 
     <div class="card">
-      <span class="card__title">Favorites received</span>
-      <%= @favorites_received.size %>
+      <span class="card__title">Views received</span>
+      <%= @views_received.pluck(:value).sum %>
     </div>
 
     <div class="card">
@@ -45,6 +45,23 @@
   <div style="position: relative"><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
   <% if @posts.any? && @copies_received.any? && @posts.first.created_at < @copies_received.first.created_at %>
+    <p class="form-hint">
+      Note: This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
+    </p>
+  <% end %>
+
+  <% @views_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group| %>
+    <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
+  <% end %>
+
+  <h3 class="mt-full">Views received per day</h3>
+  <p class="form-hint mt-quarter">
+    This is the total amount of times people views all of your posts. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
+  </p>
+
+  <div style="position: relative"><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+
+  <% if @posts.any? && @views_received.any? && @posts.first.created_at < @views_received.first.created_at %>
     <p class="form-hint">
       Note: This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
     </p>
