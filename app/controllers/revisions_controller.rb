@@ -1,4 +1,5 @@
 class RevisionsController < ApplicationController
+  layout false, only: [:raw_snippet]
   before_action :set_revision
 
   before_action except: [:show] do
@@ -7,6 +8,12 @@ class RevisionsController < ApplicationController
 
   def show
     @difference = Diffy::Diff.new(@revision.snippet, @revision.post.snippet).to_s(:html_simple)
+  end
+
+  def raw_snippet
+    respond_to do |format|
+      format.json
+    end
   end
 
   def edit
