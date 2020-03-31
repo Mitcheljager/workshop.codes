@@ -63,7 +63,7 @@
 
   <% if @posts.any? && @views_received.any? && @posts.first.created_at < @views_received.first.created_at %>
     <p class="form-hint">
-      Note: This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
+      Note: This data was not recorded before <%= Statistic.where(content_type: :visit).first.created_at.strftime("%Y-%m-%d") %>
     </p>
   <% end %>
 <% end %>
