@@ -22,7 +22,7 @@ module SignInHelper
     fill_in "password", with: "password"
     click_button "Submit"
 
-    assert page.has_content? "Overwatch Workshop Codes"
+    assert page.has_content? "Hello there,"
   end
 end
 
