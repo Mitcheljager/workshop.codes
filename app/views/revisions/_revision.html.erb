@@ -39,9 +39,6 @@
 <% end %>
 
 <% if revision.snippet.present? %>
+  <%= link_to "View changes in snippet", revision_path(revision.id), class: "post-comment__action mt-quarter" %>
   <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "post-comment__action mt-quarter" %>
-
-  <% if revision.code != revision.post.code %>
-    <%= link_to "Compare snippet to latest", revision_path(revision.id), class: "post-comment__action mt-quarter" %>
-  <% end %>
 <% end %>

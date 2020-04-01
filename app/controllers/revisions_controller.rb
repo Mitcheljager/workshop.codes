@@ -7,7 +7,10 @@ class RevisionsController < ApplicationController
   end
 
   def show
-    @difference = Diffy::Diff.new(@revision.snippet, @revision.post.snippet).to_s(:html_simple)
+    @revision = Revision.includes(:post).find(params[:id])
+    @post = @revision.post
+    @previous_revision = @post.revisions.where("id < ?", @revision.id).last
+    @difference = Diffy::Diff.new(@previous_revision.snippet, @revision.snippet).to_s(:html_simple)
   end
 
   def raw_snippet

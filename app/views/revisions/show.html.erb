@@ -1,13 +1,13 @@
-<% content_for :page_title, "Viewing difference between #{ @revision.code } and #{ @revision.post.code }" %>
+<% content_for :page_title, "Viewing difference between #{ @revision.code } and #{ @previous_revision.code }" %>
 
-<h2 class="heading mb-quarter">Comparing difference between <strong><%= @revision.code %></strong> and <strong><%= @revision.post.code %></strong></h2>
+<h2 class="heading mb-quarter">Comparing difference between <strong><%= @revision.code %></strong> and <strong><%= @previous_revision.code %></strong></h2>
 
-<%= link_to "Return to post", post_path(@revision.post.code) %>
+<%= link_to "Return to post", post_path(@post.code) %>
 
 <p class="mt-half">
   <small>
-    <strong>Green</strong> = What has been added since this version. <br>
-    <strong>Red</strong> = What has been removed since this version.
+    <strong>Green</strong> = What has been added in this version. <br>
+    <strong>Red</strong> = What has been removed in this version.
   </small>
 </p>
 
