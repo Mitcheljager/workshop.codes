@@ -105,8 +105,12 @@
 
   .item--single & {
     @include responsive-font-width(32px, map-get($media-min-widths, lg), 24px);
-    padding: ($margin / 6) ($margin / 3) ($margin / 6) 0;
+    padding: ($margin / 6) 0;
     line-height: 1.5em;
+
+    @include media-min(sm) {
+      margin-right: $margin / 3;
+    }
   }
 
   &--small {

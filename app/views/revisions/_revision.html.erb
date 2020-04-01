@@ -1,6 +1,26 @@
 <div class="item item--single mt-half">
   <div class="item__title item__title--small">
-    <div><%= revision.version unless revision.version.empty? %><%= tag.small " (latest)" if revision.code == revision.post.code %></div>
+    <div>
+      <div class="dropdown mr-quarter" data-dropdown>
+        <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
+          <%= inline_svg "icons/icon-menu.svg", height: 16 %>
+        <% end %>
+
+        <div class="dropdown__content dropdown__content--left" data-dropdown-content>
+          <% if revision.post.user == current_user %>
+            <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "dropdown__item" %>
+          <% end %>
+
+          <% if revision.snippet.present? %>
+            <%= link_to "View changes in snippet", revision_path(revision.id), class: "dropdown__item" %>
+            <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "dropdown__item" %>
+          <% end %>
+        </div>
+      </div>
+
+      <%= revision.version unless revision.version.empty? %>
+      <%= tag.small " (latest)" if revision.code == revision.post.code %>
+    </div>
 
     <small class="ml-auto">
       <span title="Created at: <%= revision.created_at %>" data-role="timeago" datetime="<%= revision.created_at %>"></span>
@@ -26,19 +46,8 @@
   </div>
 </div>
 
-<% if revision.post.user == current_user %>
-  <div class="mt-quarter">
-    <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "post-comment__action" %>
-  </div>
-<% end %>
-
 <% unless revision.description.blank? %>
   <div class="item__description mt-0">
     <%= markdown(revision.description) %>
   </div>
-<% end %>
-
-<% if revision.snippet.present? %>
-  <%= link_to "View changes in snippet", revision_path(revision.id), class: "post-comment__action mt-quarter" %>
-  <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "post-comment__action mt-quarter" %>
 <% end %>
