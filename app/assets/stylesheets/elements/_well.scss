@@ -16,6 +16,11 @@
     background: transparent
   }
 
+  &--block {
+    align-items: stretch;
+    justify-content: stretch;
+  }
+
   a {
     text-decoration: none;
   }

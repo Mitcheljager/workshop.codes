@@ -11,18 +11,27 @@
     </div>
   <% end %>
 
-  <div class="form-group-max-width mt-full">
+  <% if !@user.provider.present? %>
+    <div class="form-group-max-width mt-full">
+      <%= f.label :profile_image, "Profile image", class: "form-label" %>
+      <% begin %>
+        <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
+      <% rescue%>
+      <% end %>
+      <%= f.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
+
+      <p class="form-hint mt-quarter">
+        The image will be processed to a 140x140 format. Max 2MB.
+      </p>
+    </div>
+  <% elsif @user.provider_profile_image.present? %>
     <%= f.label :profile_image, "Profile image", class: "form-label" %>
-    <% begin %>
-      <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
-    <% rescue%>
-    <% end %>
-    <%= f.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
+    <%= image_tag @user.provider_profile_image, class: "profile-image" %>
 
     <p class="form-hint mt-quarter">
-      The image will be processed to a 140x140 format. Max 2MB.
+      This image is directly from Discord. Adjusting your profile picture on Discord will also change it here.
     </p>
-  </div>
+  <% end %>
 
   <div class="form-group-max-width mt-full">
     <%= f.label :featured_posts, "Featured Codes", class: "form-label" %>

@@ -19,6 +19,7 @@ gem "lockbox"
 gem "blind_index"
 gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: true
 gem "bcrypt", :require => "bcrypt"
+gem "omniauth-discord"
 gem "high_voltage", "~> 3.0.0"
 gem "bugsnag"
 gem "aws-sdk-s3", require: false

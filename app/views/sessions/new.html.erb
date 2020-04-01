@@ -1,44 +1,59 @@
 <% content_for :page_title, "Login" %>
 
-<div class="top-offset">
-  <div class="form-group-columns">
-    <div>
-      <h1 class="mt-0">Login</h1>
+<div class="form-group-columns mt-full">
+  <div>
+    <h2 class="mt-0"><center>Login</center></h2>
 
-      <% if flash[:alert] %>
-        <div class="warning mt-0"><mark><%= flash[:alert] %></mark></div>
-      <% end %>
+    <% if flash[:alert] %>
+      <div class="warning mt-0 mb-quarter"><mark><%= flash[:alert] %></mark></div>
+    <% end %>
 
-      <%= form_with url: sessions_path do |form| %>
-        <div class="form-group">
-          <%= form.label :username, "Username", class: "form-label" %>
-          <%= form.text_field :username, placeholder: "Username", class: "form-input" %>
-        </div>
+    <div class="well">
+      <div class="w-100">
+        <%= form_with url: sessions_path do |form| %>
+          <div class="form-group">
+            <%= form.label :username, "Username", class: "form-label" %>
+            <%= form.text_field :username, placeholder: "Username", class: "form-input" %>
+          </div>
 
-        <div class="form-group">
-          <%= form.label :password, "Password", class: "form-label" %>
-          <%= form.password_field :password, placeholder: "Password", class: "form-input" %>
-        </div>
+          <div class="form-group mt-quarter">
+            <%= form.label :password, "Password", class: "form-label" %>
+            <%= form.password_field :password, placeholder: "Password", class: "form-input" %>
+          </div>
 
-        <div class="form-group checkbox">
-          <%= form.check_box :remember_me %>
-          <%= form.label :remember_me, "Remember me (uses cookies)" %>
-        </div>
+          <div class="form-group checkbox">
+            <%= form.check_box :remember_me %>
+            <%= form.label :remember_me, "Remember me (uses cookies)" %>
+          </div>
 
-        <%= submit_tag "Submit", class: "button mt-half" %>
+          <%= submit_tag "Submit", class: "button button--secondary mt-half w-100" %>
 
-        <div class="mt-half">
-          <small><%= link_to "Forgot your password?", new_forgot_password_path %></small>
-        </div>
-      <% end %>
+          <div class="mt-quarter">
+            <small><%= link_to "Forgot your password?", new_forgot_password_path %></small>
+          </div>
+        <% end %>
+
+        <hr class="mt-half mb-half">
+
+        <%= link_to ENV["DISCORD_REQUEST_URI"], class: "button button--discord mt-half" do %>
+          <%= inline_svg "discord.svg", height: 24 %>
+          Login with Discord
+        <% end %>
+      </div>
     </div>
+  </div>
 
-    <div>
-      <h1 class="mt-full mt-sm-0">Create an account</h1>
+  <div>
+    <h2 class="mt-half mt-sm-0"><center>Create an account</center></h2>
 
-      <p>Don't have an account?</p>
+    <div class="well">
+      <div class="w-100">
+        <center>
+          <p class="mt-0">Don't have an account?</p>
+        </center>
 
-      <div><%= link_to "Create an account", new_user_path, class: "button button--small" %></div>
+        <div><%= link_to "Create an account", new_user_path, class: "button w-100" %></div>
+      </div>
     </div>
   </div>
 </div>

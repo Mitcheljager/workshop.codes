@@ -115,6 +115,11 @@ blockquote {
   max-width: calc(#{ map-get($media-min-widths, lg) - $margin } + 20vw);
   margin: 0 auto;
   padding: 0 calc(10vw - #{ $margin / 2 });
+
+  &--small {
+    max-width: map-get($media-min-widths, xs);
+    margin: 0 auto;
+  }
 }
 
 .logo-background {

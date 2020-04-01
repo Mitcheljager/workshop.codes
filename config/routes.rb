@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get "users/:username", to: "profiles#show", as: "profile_show", concerns: :paginatable
 
   resources :sessions, only: [:new, :create, :destroy]
+  get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
 
   get "register", to: "users#new", as: "new_user"
   get "login", to: "sessions#new", as: "login"

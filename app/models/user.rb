@@ -36,4 +36,17 @@ class User < ApplicationRecord
   validates :featured_posts, allow_blank: true, serialized_array_length: { maximum: 3 }
   validates :profile_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
                             size: { less_than: 2.megabytes }
+
+  def self.find_or_create_from_auth_hash(auth_hash)
+    uid = auth_hash["uid"]
+    provider = auth_hash["provider"]
+
+    user = find_or_create_by(uid: uid, provider: provider)
+
+    user.username = auth_hash["info"]["name"]
+    user.provider_profile_image = auth_hash["info"]["image"]
+    user.password = "no_password"
+
+    user if user.save
+  end
 end

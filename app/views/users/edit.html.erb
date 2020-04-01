@@ -1,7 +1,14 @@
 <% content_for :page_title, "Edit your account" %>
 
 <%= render "layouts/account", title: "<strong>Edit</strong> your account" do %>
-  <%= render "form", user: @user, url: update_user_path %>
+  <% if @user.provider.present? %>
+    <p class="mt-0">
+      You are logged in with <%= @user.provider.humanize %> and cannot edit your account directly from Workshop.codes. <br>
+      Editing your account on <%= @user.provider.humanize %> will automatically adjust it here.
+    </p>
+  <% else %>
+    <%= render "form", user: @user, url: update_user_path %>
+  <% end %>
 
   <div class="form-group-max-width">
     <div class="form-danger-zone">

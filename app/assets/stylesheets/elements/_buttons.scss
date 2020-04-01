@@ -41,4 +41,22 @@
     background: $red;
     box-shadow: inset 0 0 0 1px lighten($red, 15%);
   }
+
+  &--discord {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5em 1em;
+    border: 0;
+    border-radius: 3px;
+    background: $discord;
+    box-shadow: none;
+    font-family: $font-stack;
+    font-size: 14px;
+    font-weight: medium;
+  }
+
+  svg {
+    margin-right: .5em;
+  }
 }
