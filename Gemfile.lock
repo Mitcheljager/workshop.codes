@@ -209,6 +209,9 @@ GEM
     omniauth (1.9.1)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
+    omniauth-bnet (2.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-discord (1.0.0)
       omniauth
       omniauth-oauth2
@@ -350,6 +353,7 @@ DEPENDENCIES
   kaminari
   lockbox
   mini_magick (>= 4.9.5)
+  omniauth-bnet
   omniauth-discord
   pg
   puma (~> 4.3)

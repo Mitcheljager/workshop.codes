@@ -35,9 +35,14 @@
 
         <hr class="mt-half mb-half">
 
-        <%= link_to ENV["DISCORD_REQUEST_URI"], class: "button button--discord mt-half" do %>
+        <%= link_to "/auth/discord", class: "button button--discord mt-half" do %>
           <%= inline_svg "discord.svg", height: 24 %>
           Login with Discord
+        <% end %>
+
+        <%= link_to "/auth/bnet", class: "button button--bnet mt-eigth" do %>
+          <%= inline_svg "bnet.svg", height: 24 %>
+          Login with Battle.net
         <% end %>
       </div>
     </div>

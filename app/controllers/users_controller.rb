@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action only: [:account, :edit, :update, :destroy] do
+  before_action only: [:show, :edit, :update, :destroy] do
     redirect_to login_path unless current_user
   end
 

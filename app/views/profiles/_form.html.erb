@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% if !@user.provider.present? %>
+  <% if !@user.provider_profile_image.present? %>
     <div class="form-group-max-width mt-full">
       <%= f.label :profile_image, "Profile image", class: "form-label" %>
       <% begin %>
@@ -24,7 +24,7 @@
         The image will be processed to a 140x140 format. Max 2MB.
       </p>
     </div>
-  <% elsif @user.provider_profile_image.present? %>
+  <% else %>
     <%= f.label :profile_image, "Profile image", class: "form-label" %>
     <%= image_tag @user.provider_profile_image, class: "profile-image" %>
 

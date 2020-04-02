@@ -28,7 +28,7 @@ class User < ApplicationRecord
   encrypts :email
   blind_index :email
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z\d][a-z\d-]*[a-z\d]\z/i }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z\d][a-z\d-]*[a-z\d#]*[a-z\d]\z/i }
   validates :password, presence: true, length: { minimum: 8 }, if: :password
   validates :email, uniqueness: true, allow_blank: true
   validates :link, allow_blank: true, format: URI::regexp(%w[http https])
@@ -43,7 +43,8 @@ class User < ApplicationRecord
 
     user = find_or_create_by(uid: uid, provider: provider)
 
-    user.username = auth_hash["info"]["name"]
+    user.username = auth_hash["info"]["name"] || auth_hash["info"]["battletag"]
+    user.username.gsub!(" ", "-")
     user.provider_profile_image = auth_hash["info"]["image"]
     user.password = "no_password"
 
