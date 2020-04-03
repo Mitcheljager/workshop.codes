@@ -29,7 +29,7 @@
 <% end %>
 
 <div class="heading top-offset mb-0">
-  <h2>Workshop Codes made by <strong><%= @user.username %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h2>
+  <h2>Workshop Codes made by <strong><%= @user.username.split("#")[0] %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h2>
 </div>
 
 <main class="items">

@@ -1,7 +1,7 @@
 <div class="profile-block">
   <div>
     <% if current_user %>
-      Logged in as&nbsp;<%= link_to current_user.username, account_path, class: "profile-block__action" %>
+      Logged in as&nbsp;<%= link_to current_user.username.split("#")[0], account_path, class: "profile-block__action" %>
     <% else %>
       <%= link_to "Login", login_path, class: "profile-block__action" %>
       &nbsp;or&nbsp;

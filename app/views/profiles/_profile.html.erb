@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="profile-banner__content">
-    <%= link_to user.username, user_path(user.username), class: "profile-banner__title", rel: "author" %>
+    <%= link_to user.username.split("#")[0], user_path(user.username), class: "profile-banner__title", rel: "author" %>
     <%= link_to user.link, user.link, class: "profile-banner__action", target: "_blank", rel: "noreferrer noopener" if user.link.present? %>
 
     <% if !small && user.description.present? %>
