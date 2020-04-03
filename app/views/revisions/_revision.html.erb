@@ -1,7 +1,7 @@
 <div class="item item--single mt-half">
   <div class="item__title item__title--small">
     <div>
-      <% if revision != @post.revisions.first && (revision.post.user == current_user || revision.snippet.present?) %>
+      <% if revision != revision.post.revisions.first && (revision.post.user == current_user || revision.snippet.present?) %>
         <div class="dropdown mr-quarter" data-dropdown>
           <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
             <%= inline_svg "icons/icon-menu.svg", height: 16 %>
