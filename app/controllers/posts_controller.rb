@@ -20,7 +20,6 @@ class PostsController < ApplicationController
   def index
     @hot_posts = Post.includes(:user, :revisions).where("hotness > 0").order("hotness DESC").limit(3)
     @posts = Post.includes(:user, :revisions).order(created_at: :desc).page params[:page]
-    @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(15)
   end
 
   def filter

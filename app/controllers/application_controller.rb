@@ -36,6 +36,12 @@ class ApplicationController < ActionController::Base
     @notifications = current_user.notifications.where(has_been_read: 0)
   end
 
+  helper_method :search_terms
+
+  def search_terms
+    @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(15)
+  end
+
   private
 
   def redirect_non_www
