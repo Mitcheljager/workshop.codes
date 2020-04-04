@@ -22,7 +22,6 @@ gem "bcrypt", :require => "bcrypt"
 gem "omniauth-discord"
 gem "omniauth-bnet"
 gem "high_voltage", "~> 3.0.0"
-gem "bugsnag"
 gem "aws-sdk-s3", require: false
 gem "mini_magick", ">= 4.9.5"
 gem "image_processing", "~> 1.2"
@@ -50,6 +49,7 @@ group :production do
   gem "heroku-deflater"
   gem "scout_apm"
   gem "pg"
+  gem "bugsnag"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

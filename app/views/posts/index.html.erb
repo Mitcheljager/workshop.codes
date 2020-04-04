@@ -1,5 +1,9 @@
 <% content_for :page_title, "All items | Page #{ params[:page] }" if params[:page] %>
 
+<% cache @search_terms do %>
+  <%= render "search_terms" if @search_terms.any? %>
+<% end %>
+
 <% unless params[:page] %>
   <div class="heading mt-full">
     <h1><center>Overwatch Workshop Codes</center></h1>

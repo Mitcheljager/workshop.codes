@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   def index
     @hot_posts = Post.includes(:user, :revisions).where("hotness > 0").order("hotness DESC").limit(3)
     @posts = Post.includes(:user, :revisions).order(created_at: :desc).page params[:page]
+    @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(15)
   end
 
   def filter
@@ -36,6 +37,8 @@ class PostsController < ApplicationController
     @posts = @posts.select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) } if params[:hero]
 
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
+
+    track_action("Search", { search: params[:search] }) if params[:search]
   end
 
   def on_fire
@@ -156,10 +159,8 @@ class PostsController < ApplicationController
     raise ActionController::RoutingError.new("Not Found")
   end
 
-  def track_action(event = "Posts Visit")
-    parameters = request.path_parameters
+  def track_action(event = "Posts Visit", parameters = request.path_parameters)
     parameters["id"] = @post.id if @post.present?
-
 
     TrackingJob.perform_async(ahoy, event, parameters)
   end
