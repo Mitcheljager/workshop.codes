@@ -23,7 +23,7 @@
     &:focus {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      transition: none
+      transition-delay: 0ms;
     }
   }
 
@@ -107,14 +107,15 @@
   background: darken($bg-dark, 5%);
   z-index: 1;
   overflow: hidden;
-  transition-property: max-height, box-shadow;
-  transition-duration: 200ms;
+  transition: max-height 200ms, box-shadow 50ms;
 
   @include styled-scrollbar;
 
   input:focus + label + & {
     display: block;
     max-height: 400px;
-    box-shadow: 0 20px 20px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25), 0 -1px 0 $text-color-dark;
+    box-shadow: 0 20px 20px 0 rgba($black, .25), 0 6px 6px 0 rgba($black, .25);
+    transition-timing-function: linear;
+    transition-delay: 50ms;
   }
 }
