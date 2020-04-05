@@ -15,7 +15,7 @@ function createChart(element) {
   gradient.addColorStop(1, "rgba(240, 100, 20, 0)")
 
   const chart = new Chart(ctx, {
-    type: "line",
+    type: "bar",
     data: {
       labels: JSON.parse(element.dataset.labels),
       datasets: [{
