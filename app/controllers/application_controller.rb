@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   helper_method :search_terms
 
   def search_terms
-    @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(20)
+    @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(18)
   end
 
   private
