@@ -37,7 +37,7 @@
 <% end %>
 
 <h3 class="mt-full">Total copies per day</h3>
-<div><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
 <% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
@@ -49,7 +49,7 @@
 <% end %>
 
 <h3 class="mt-full">Posts created per day</h3>
-<div><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
 <% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
@@ -61,7 +61,7 @@
 <% end %>
 
 <h3 class="mt-full">Users created per day</h3>
-<div><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
 <% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
@@ -73,7 +73,7 @@
 <% end %>
 
 <h3 class="mt-full">Favorites created per day</h3>
-<div><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
 <% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
@@ -85,4 +85,4 @@
 <% end %>
 
 <h3 class="mt-full">Comments created per day</h3>
-<div><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>

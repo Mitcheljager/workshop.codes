@@ -10,21 +10,27 @@
 
 function createChart(element) {
   const ctx = element.getContext("2d")
+  const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+  gradient.addColorStop(0, "rgba(240, 100, 20, 0.25)")
+  gradient.addColorStop(1, "rgba(240, 100, 20, 0)")
+
   const chart = new Chart(ctx, {
-    type: "bar",
+    type: "line",
     data: {
       labels: JSON.parse(element.dataset.labels),
       datasets: [{
+        fillColor: gradient,
         label: "",
         data: JSON.parse(element.dataset.values),
-        backgroundColor: "rgba(240, 100, 20, 1)",
+        backgroundColor: gradient,
         borderColor: "rgba(240, 100, 20, 1)",
         borderWidth: 1,
         pointBackgroundColor: "rgba(240, 100, 20, 1)",
+        pointRadius: JSON.parse(element.dataset.values).map(p => p == 0 ? 0 : 3)
       }]
     },
     options: {
-      height: 200,
+      height: 250,
       responsive: true,
       maintainAspectRatio: false,
       legend: {
@@ -39,7 +45,7 @@ function createChart(element) {
           ticks: {
             maxTicksLimit: 4,
             userCallback: (label, index, labels) => { if (Math.floor(label) === label) return label },
-            userCallback: (label, index, labels) => { return label.toLocaleString()},
+            userCallback: (label, index, labels) => { return label.toLocaleString() },
             fontColor: "#8f94a5",
             fontSize: 12
           }
@@ -49,11 +55,14 @@ function createChart(element) {
           barMaxThickness: 2,
           gridLines: {
             drawBorder: false,
-            color: "#353b3f",
-            color: "rgba(255, 255, 255, .0)"
+            color: "rgba(255, 255, 255, 0)"
           },
           ticks: {
-            display: false
+            maxRotation: 0,
+            drawBorder: false,
+            maxTicksLimit: 4,
+            fontColor: "#8f94a5",
+            fontSize: 12
           }
         }]
       }

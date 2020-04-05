@@ -42,7 +42,7 @@
     This is the total amount of times people clicked on the "copy" button for your items. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
   </p>
 
-  <div style="position: relative"><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+  <div style="position: relative"><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
   <% if @posts.any? && @copies_received.any? && @posts.first.created_at < @copies_received.first.created_at %>
     <p class="form-hint">
@@ -59,7 +59,7 @@
     This is the total amount of times people views all of your posts. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
   </p>
 
-  <div style="position: relative"><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+  <div style="position: relative"><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
   <% if @posts.any? && @views_received.any? && @posts.first.created_at < @views_received.first.created_at %>
     <p class="form-hint">

@@ -19,7 +19,7 @@
 <% end %>
 
 <h3 class="mt-full">Total views per day</h3>
-<div><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
 <% (Date.parse(@post.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date| %>
@@ -31,4 +31,4 @@
 <% end %>
 
 <h3 class="mt-full">Total copies per day</h3>
-<div><canvas height="200" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
