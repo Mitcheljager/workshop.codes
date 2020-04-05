@@ -10,19 +10,15 @@
 
 function createChart(element) {
   const ctx = element.getContext("2d")
-  const gradient = ctx.createLinearGradient(0, 0, 0, 400)
-  gradient.addColorStop(0, "rgba(240, 100, 20, 0.25)")
-  gradient.addColorStop(1, "rgba(240, 100, 20, 0)")
 
   const chart = new Chart(ctx, {
     type: "bar",
     data: {
       labels: JSON.parse(element.dataset.labels),
       datasets: [{
-        fillColor: gradient,
         label: "",
         data: JSON.parse(element.dataset.values),
-        backgroundColor: gradient,
+        backgroundColor: "rgba(240, 100, 20, 1)",
         borderColor: "rgba(240, 100, 20, 1)",
         borderWidth: 1,
         pointBackgroundColor: "rgba(240, 100, 20, 1)",
