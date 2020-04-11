@@ -49,7 +49,7 @@ class PostsController < ApplicationController
       Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
     end
 
-    not_found and return if @post.private? && @post.user != current_user
+    not_found and return if @post && @post.private? && @post.user != current_user
 
     set_post_images
 
