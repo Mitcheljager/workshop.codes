@@ -6,3 +6,6 @@ Disallow: */from/
 Disallow: */sort/
 Disallow: */exclude-expired/
 Disallow: */*/*/*/
+
+User-agent: SemrushBot
+Disallow: /
