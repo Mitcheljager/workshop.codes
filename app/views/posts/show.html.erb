@@ -10,8 +10,16 @@
   <% end %>
 <% end %>
 
+
 <article>
   <% cache_unless current_user, [@post, "title"] do %>
+    <% if @post.private? %>
+      <div class="warning warning--mild mt-full">
+        <p class="mb-0 text-white">🔐 This code is set to private.</p>
+        <p class="mt-0"><small>Only you can see it.</small></p>
+      </div>
+    <% end %>
+
     <div class="item item--single">
       <h1 class="item__title">
         <%= @post.title %>

@@ -18,12 +18,12 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user, :revisions).where("hotness > 0").order("hotness DESC").limit(3)
-    @posts = Post.includes(:user, :revisions).order(created_at: :desc).page params[:page]
+    @hot_posts = Post.includes(:user, :revisions).where(private: 0).where("hotness > 0").order("hotness DESC").limit(3)
+    @posts = Post.includes(:user, :revisions).where(private: 0).order(created_at: :desc).page params[:page]
   end
 
   def filter
-    @posts = params[:search] ? Post.includes(:user, :revisions).search(params[:search]).records : Post.all
+    @posts = params[:search] ? Post.includes(:user, :revisions).where(private: 0).search(params[:search]).records : Post.where(private: 0)
 
     @posts = @posts.where("created_at >= ?", params[:from]) if params[:from]
     @posts = @posts.where("created_at <= ?", params[:to]) if params[:to]
@@ -41,13 +41,15 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.includes(:user, :revisions).where("hotness > 1").order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user, :revisions).where(private: 0).where("hotness > 1").order("hotness DESC").page params[:page]
   end
 
   def show
     @post = Rails.cache.fetch(["Post", params[:code].upcase]) do
       Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
     end
+
+    not_found and return if @post.private? && @post.user != current_user
 
     set_post_images
 
@@ -185,7 +187,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :code, :title, :include_nice_url, :nice_url, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
+      :code, :title, :include_nice_url, :nice_url, :private, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
       :revision, :revision_description,
       :email_notification, :email,
       :image_order, images: [])

@@ -3,4 +3,8 @@
   margin-top: $margin * 2;
   padding: 1rem;
   text-align: center;
+
+  &--mild {
+    border-color: $border-color;
+  }
 }

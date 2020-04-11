@@ -12,6 +12,7 @@
     <th>User</th>
     <th>Title</th>
     <th>Code</th>
+    <th>Prv?</th>
     <th>URL</th>
     <th>Fv</th>
     <th>Imp</th>
@@ -24,11 +25,12 @@
 
   <% @posts.each do |post| %>
     <tr>
-      <td><%= link_to post.id, admin_post_path(post.id) %></td>
-      <td><%= link_to post.user.username, user_path(post.user.username) %></td>
-      <td><%= truncate(post.title, length: 20) %></td>
+      <td><small><%= link_to post.id, admin_post_path(post.id) %></small></td>
+      <td><small><%= link_to post.user.username, user_path(post.user.username) %></small></td>
+      <td><small><%= truncate(post.title, length: 20) %></small></td>
       <td><%= link_to post.code, post_path(post.code) %></td>
-      <td><%= link_to nice_url_path(post.nice_url) if post.nice_url.present? %></td>
+      <td><%= "✔" if post.private? %></td>
+      <td><small><%= link_to nice_url_path(post.nice_url) if post.nice_url.present? %></small></td>
       <td><%= post.favorites_count %></td>
       <td><%= post.impressions_count %></td>
       <td><%= post.hotness %></td>

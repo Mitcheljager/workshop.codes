@@ -21,6 +21,18 @@
     </div>
   </div>
 
+  <div class="form-group mt-half">
+    <div class="checkbox">
+      <%= form.check_box :private, checked: @post.private? %>
+      <%= form.label :private, "Set to private" %>
+    </div>
+
+    <p class="form-hint">
+      This will prevent your code from being found. It will not appear in search results, or in direct visits. <br>
+      Only you can visit it via your account page.
+    </p>
+  </div>
+
   <div class="form-group mt-half" data-reveal-by-checkbox>
     <div class="checkbox">
       <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" } %>

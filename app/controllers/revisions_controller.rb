@@ -9,6 +9,9 @@ class RevisionsController < ApplicationController
   def show
     @revision = Revision.includes(:post).find(params[:id])
     @post = @revision.post
+
+    not_found and return if @post.private? && @post.user != current_user
+
     @previous_revision = @post.revisions.where("id < ?", @revision.id).last
     @difference = Diffy::Diff.new(@previous_revision.present? ? @previous_revision.snippet : "", @revision.snippet).to_s(:html_simple)
   end
@@ -44,5 +47,9 @@ class RevisionsController < ApplicationController
 
   def revision_params
     params.require(:revision).permit(:version, :description)
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new("Not Found")
   end
 end
