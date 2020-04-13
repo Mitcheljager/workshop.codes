@@ -27,8 +27,8 @@ function closeDropdown(event) {
 }
 
 function closeOnKeyDown(event) {
-  if (!dropdownOpen && event.key !== "Escape") return
-  closeDropdown()
+  if (!dropdownOpen) return
+  if (event.key === "Escape") closeDropdown()
 }
 
 function toggleDropdown(event) {
