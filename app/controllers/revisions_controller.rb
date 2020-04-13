@@ -2,7 +2,7 @@ class RevisionsController < ApplicationController
   layout false, only: [:raw_snippet]
   before_action :set_revision
 
-  before_action except: [:show] do
+  before_action except: [:show, :raw_snippet] do
     redirect_to root_path unless current_user && current_user == @revision.post.user && @revision.visible
   end
 
