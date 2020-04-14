@@ -32,6 +32,9 @@
   name: Doomfist
   category: Damage
 -
+  name: Echo
+  category: Damage
+-
   name: Genji
   category: Damage
 -
