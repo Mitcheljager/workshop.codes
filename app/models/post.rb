@@ -81,6 +81,8 @@ class Post < ApplicationRecord
 
   def self.search(query)
     __elasticsearch__.search({
+      from: 0,
+      size: 100,
       query: {
         multi_match: {
           query: query,
