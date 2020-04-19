@@ -1,4 +1,11 @@
 Sitemap: https://workshop.codes/sitemap.xml
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
 User-agent:*
 Disallow: */search/
 Disallow: */to/
@@ -6,6 +13,3 @@ Disallow: */from/
 Disallow: */sort/
 Disallow: */exclude-expired/
 Disallow: */*/*/*/
-
-User-agent: SemrushBot
-Disallow: /
