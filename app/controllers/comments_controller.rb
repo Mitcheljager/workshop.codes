@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
+    @post = @comment.post
 
     if @comment.save
       create_activity(:create_comment, comment_activity_params)
@@ -42,6 +43,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find_by_id_and_user_id(params[:id], current_user.id)
+    @post = @comment.post
 
     if @comment.update(comment_params)
       create_activity(:update_comment, comment_activity_params)

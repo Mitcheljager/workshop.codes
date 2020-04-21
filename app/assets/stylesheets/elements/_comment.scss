@@ -108,6 +108,13 @@
   margin-right: $margin / 2;
   text-decoration: none;
   color: lighten($text-color, 20%);
+
+  small {
+    display: inline-block;
+    color: $text-color-dark;
+    font-size: 14px;
+    margin-left: .25em;
+  }
 }
 
 .post-comment__date {
