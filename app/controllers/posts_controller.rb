@@ -172,8 +172,10 @@ class PostsController < ApplicationController
       "impressions_count"
     when "favorites"
       "favorites_count"
-    when "time"
+    when "created"
       "created_at"
+    when "updated"
+      "updated_at"
     when "on-fire"
       "hotness"
     else

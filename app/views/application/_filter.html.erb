@@ -133,7 +133,8 @@
                 <% end %>
 
                 <%= link_to "Relevancy", build_filter_path(:sort, "relevancy"), class: "dropdown__item" %>
-                <%= link_to "Time", build_filter_path(:sort, "time"), class: "dropdown__item" %>
+                <%= link_to "Created", build_filter_path(:sort, "created"), class: "dropdown__item" %>
+                <%= link_to "Updated", build_filter_path(:sort, "updated"), class: "dropdown__item" %>
                 <%= link_to "On Fire", build_filter_path(:sort, "on-fire"), class: "dropdown__item" %>
                 <%= link_to "Favorites", build_filter_path(:sort, "favorites"), class: "dropdown__item" %>
                 <%= link_to "Views", build_filter_path(:sort, "views"), class: "dropdown__item" %>
