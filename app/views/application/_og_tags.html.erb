@@ -8,3 +8,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 <% end %>
+<% if yield(:og_description) != "" %>
+  <meta name="description" content="<%= yield(:og_description) %>">
+  <meta property="og:description" content="<%= yield(:og_description) %>">
+<% end %>
