@@ -106,13 +106,16 @@ class PostsController < ApplicationController
     params[:post][:nice_url] = "" if post_params[:include_nice_url] == "0"
     params[:post][:email] = "" if post_params[:email_notification] == "0"
 
+    current_version = @post.version
+    current_code = @post.code
+
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
       Rails.cache.delete(["Post", @post.code.upcase])
 
       update_email_notifications
 
-      if (post_params[:revision].present? && post_params[:revision] != "0") || (params[:code] != post_params[:code])
+      if (post_params[:revision].present? && post_params[:revision] != "0") || (current_code != post_params[:code]) || (current_version != post_params[:version])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible).save
 
