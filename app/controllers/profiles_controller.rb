@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 
   def show
     @user = User.find_by_username!(params[:username])
-    @posts = @user.posts.where(private: 0).order(updated_at: :desc).page(params[:page]).per(10)
+    @posts = @user.posts.where(private: 0).order(updated_at: :desc).page(params[:page])
   end
 
   def edit
