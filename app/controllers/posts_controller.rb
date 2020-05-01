@@ -45,9 +45,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Rails.cache.fetch(["Post", params[:code].upcase]) do
-      Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
-    end
+    @post = Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 

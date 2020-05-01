@@ -166,7 +166,7 @@
 
 <% cache_unless current_user, @post.comments do %>
   <div class="comments">
-    <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.size %></span> Comments</h2>
+    <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>
 
     <%= render "comments/form", post: @post %>
 
