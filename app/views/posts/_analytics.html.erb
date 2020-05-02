@@ -3,17 +3,80 @@
   <span class="favorite__label"><%= post.favorites_count %></span>
 </div>
 
-<h4 class="mt-half">Total copies received per day</h4>
-<p class="form-hint mt-quarter">
-  This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
-</p>
+<% if post.hotness %>
+  <div class="tooltip align-center ml-0">
+    <%= inline_svg_tag "icons/icon-onfire.svg", height: 16, width: 16 %>
+    <span class="favorite__label"><%= post.hotness %></span>
 
-<div><canvas height="300" class="chart" data-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
+    <div class="tooltip__content">
+      <strong>On Fire score</strong> This value is an indicator of how popular a code is at the moment. Higher = better.
+    </div>
+  </div>
+<% end %>
 
-<p class="form-hint">
-  Note: Updates daily.
+<div data-reveal-by-select-parent class="mt-half">
+  <label class="form-label">Analytics type</label>
 
-  <% if Statistic.where(content_type: :copy).first && post.created_at < Statistic.where(content_type: :copy).first.created_at %>
-      This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
-  <% end %>
-</p>
+  <select class="form-select" data-action="reveal-by-select">
+    <option value="daily-copies">Copies per day</option>
+    <option value="daily-views">Views per day</option>
+    <option value="hourly-copies">Copies per hour in the last 7 days</option>
+    <option value="hourly-views">Views per hour in the last 7 days</option>
+  </select>
+
+  <div data-reveal-by-select-target="daily-copies">
+    <p class="form-hint mt-quarter">
+      This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+    </p>
+
+    <div><canvas height="300" class="chart" data-daily-copies-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
+
+    <p class="form-hint">
+      Note: Updates daily.
+
+      <% if Statistic.where(content_type: :copy).first && post.created_at < Statistic.where(content_type: :copy).first.created_at %>
+          This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
+      <% end %>
+    </p>
+  </div>
+
+  <div data-reveal-by-select-target="daily-views" class="visibility-hidden">
+    <p class="form-hint mt-quarter">
+      This is the total amount of times people viewed this post. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
+    </p>
+
+    <div><canvas height="300" class="chart" data-daily-views-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
+
+    <p class="form-hint">
+      Note: Updates daily.
+
+      <% if Statistic.where(content_type: :visit).first && post.created_at < Statistic.where(content_type: :visit).first.created_at %>
+          This data was not recorded before <%= Statistic.where(content_type: :visit).first.created_at.strftime("%Y-%m-%d") %>
+      <% end %>
+    </p>
+  </div>
+
+  <div data-reveal-by-select-target="hourly-copies" class="visibility-hidden">
+    <p class="form-hint mt-quarter">
+      This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+    </p>
+
+    <div><canvas height="300" class="chart" data-hourly-copies-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
+
+    <p class="form-hint">
+      Note: Times are displayed in <%= Time.zone.to_s %>.
+    </p>
+  </div>
+
+  <div data-reveal-by-select-target="hourly-views" class="visibility-hidden">
+    <p class="form-hint mt-quarter">
+      This is the total amount of times people viewed this post. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
+    </p>
+
+    <div><canvas height="300" class="chart" data-hourly-views-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
+
+    <p class="form-hint">
+      Note: Times are displayed in <%= Time.zone.to_s %>.
+    </p>
+  </div>
+</div>

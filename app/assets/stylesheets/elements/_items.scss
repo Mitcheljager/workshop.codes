@@ -182,7 +182,7 @@
   margin-bottom: $margin / 6;
 
   &:last-child {
-    margin-right: $margin / 6;
+    margin-right: $margin / 3;
 
     @media (max-width: #{map-get($media-min-widths, sm) - 1px}) {
       margin-bottom: 0;

@@ -20,6 +20,7 @@
 //= require copy
 //= require checkbox-select-all
 //= require reveal-by-checkbox
+//= require reveal-by-select
 //= require ide
 //= require markdown-preview
 //= require navigation

@@ -3,6 +3,13 @@
   display: flex;
 }
 
+.visibility-hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  top: -999px;
+}
+
 .hidden {
   display: none;
 }

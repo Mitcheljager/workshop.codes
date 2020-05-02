@@ -26,11 +26,20 @@ function loadAnalytics(event) {
   .then(response => response.text())
   .then(data => {
     const parsedData = JSON.parse(data)
-    const target = document.querySelector(`[data-analytics="${ id }"]`)
+    const analyticsTypes = [
+      "daily-copies",
+      "daily-views",
+      "hourly-copies",
+      "hourly-views"
+    ]
 
-    target.dataset.labels = JSON.stringify(Object.keys(parsedData))
-    target.dataset.values = JSON.stringify(Object.values(parsedData))
+    analyticsTypes.forEach(type => {
+      const target = document.querySelector(`[data-${ type }-analytics="${ id }"]`)
 
-    createChart(target)
+      target.dataset.labels = JSON.stringify(Object.keys(parsedData[type]))
+      target.dataset.values = JSON.stringify(Object.values(parsedData[type]))
+
+      createChart(target)
+    })
   })
 }

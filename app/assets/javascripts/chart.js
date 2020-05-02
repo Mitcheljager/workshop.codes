@@ -54,6 +54,7 @@ function createChart(element) {
             color: "rgba(255, 255, 255, 0)"
           },
           ticks: {
+            userCallback: (label, index, labels) => { return label.split(/-(.+)/)[1] },
             maxRotation: 0,
             drawBorder: false,
             maxTicksLimit: 4,
