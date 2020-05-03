@@ -1,6 +1,6 @@
 class SitemapsController < ApplicationController
   def sitemap
-    @posts = Post.all
+    @posts = Post.where(private: false)
 
     respond_to do |format|
       format.xml
