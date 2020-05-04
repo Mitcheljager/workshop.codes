@@ -27,6 +27,7 @@ h1 {
 
 h2 {
   @include responsive-font-width(28px, map-get($media-min-widths, lg), 24px);
+  margin-bottom: $margin / 3;
 }
 
 h3 {

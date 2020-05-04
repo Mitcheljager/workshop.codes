@@ -27,11 +27,27 @@
         </div>
       </div>
 
-      <h2 class="top-offset"><strong>Recent</strong> Items</h2>
+      <div class="action-header">
+        <h2 class="top-offset"><strong>Recent</strong> Items</h2>
+
+        <div class="action-header__actions">
+          <span>Sort by</span>
+          <div>
+            <%= link_to "Created", posts_path(1), class: "text-white" %> | <%= link_to "Last Updated", filter_path(sort: "updated") %>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% else %>
-    <div class="heading">
-      <h1><strong>Recent</strong> Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %></h1>
+    <div class="heading action-header">
+      <h1 class=""><strong>Recent</strong> Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %></h1>
+
+      <div class="action-header__actions">
+        <span>Sort by</span>
+        <div>
+          <%= link_to "Created", posts_path(1), class: "text-white" %> | <%= link_to "Last Updated", filter_path(sort: "updated") %>
+        </div>
+      </div>
     </div>
   <% end %>
 
