@@ -122,6 +122,7 @@ class PostsController < ApplicationController
         redirect_to post_path(@post.code)
       end
     else
+      @post.code = current_code
       render :edit
     end
   end
