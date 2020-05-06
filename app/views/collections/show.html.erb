@@ -1,0 +1,13 @@
+<% content_for :page_title, "#{ @collection.title } #{ "| Page #{ params[:page] }" if params[:page] }" %>
+
+<% cache_unless current_user, [@posts, @collection] do %>
+  <div class="heading">
+    <h1>Codes in <strong><%= @collection.title %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
+  </div>
+
+  <main class="items">
+    <%= render "posts/posts" %>
+
+    <%= paginate @posts %>
+  </main>
+<% end %>

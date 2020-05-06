@@ -1,0 +1,31 @@
+<section class="collections">
+  <div class="heading items-heading mb-half">
+    <h2>Other Codes part of <strong><%= @post.collection.title %></strong></h2>
+  </div>
+
+  <% @post.collection.posts.limit(5).each do |post| %>
+    <% next if @post == post %>
+
+    <div class="item item--single mt-quarter">
+      <div class="item__title item__title--small">
+        <div>
+          <%= link_to post.title, post_path(post.code) %>
+        </div>
+      </div>
+
+      <div class="item__code">
+        <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
+
+        <span class="copy">
+          <span data-copy="<%= post.code %>"><%= post.code %></span>
+        </span>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @post.collection.posts.size > 5 %>
+    <small class="mt-quarter"><%= "And #{ @post.collection.posts.size - 5 } more..." %></small>
+  <% end %>
+
+  <%= link_to "View collection", collection_path(@post.collection.nice_url), class: "button button--secondary button--small mt-quarter" %>
+</section>

@@ -3,7 +3,8 @@
   padding-top: $margin;
   border-top: 1px solid $border-color;
 
-  .revisions + & {
+  .revisions + &,
+  .collections + & {
     border: 0;
   }
 }

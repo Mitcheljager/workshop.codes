@@ -69,4 +69,20 @@
       <priority>0.90</priority>
     </url>
   <% end %>
+
+  <% @collections.each do |collection| %>
+    <url>
+      <loc><%= collection_url(collection.nice_url) %></loc>
+      <lastmod><%= collection.updated_at.iso8601 %></lastmod>
+      <priority>0.85</priority>
+    </url>
+  <% end %>
+
+  <% @users.each do |user| %>
+    <url>
+      <loc><%= user_url(user.username) %></loc>
+      <lastmod><%= user.updated_at.iso8601 %></lastmod>
+      <priority>0.85</priority>
+    </url>
+  <% end %>
 </urlset>

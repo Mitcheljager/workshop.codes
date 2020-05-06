@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_002036) do
+ActiveRecord::Schema.define(version: 2020_05_06_211429) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -81,6 +81,14 @@ ActiveRecord::Schema.define(version: 2020_04_11_002036) do
     t.datetime "started_at"
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "nice_url"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -154,6 +162,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_002036) do
     t.text "image_order"
     t.string "nice_url"
     t.boolean "private", default: false
+    t.integer "collection_id"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

@@ -70,4 +70,6 @@ Rails.application.routes.draw do
   get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter"
   post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
   get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
+
+  resources :collections, param: :nice_url, path: "/c", concerns: :paginatable, only: [:show]
 end

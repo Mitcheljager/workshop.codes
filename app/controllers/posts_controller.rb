@@ -92,7 +92,7 @@ class PostsController < ApplicationController
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
-      Rails.cache.delete(["Post", @post.code.upcase])
+      create_collection if post_params[:new_collection] != ""
 
       redirect_to post_path(@post.code)
     else
@@ -109,7 +109,7 @@ class PostsController < ApplicationController
 
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
-      Rails.cache.delete(["Post", @post.code.upcase])
+      create_collection if post_params[:new_collection] != ""
 
       update_email_notifications
 
@@ -154,6 +154,13 @@ class PostsController < ApplicationController
     @ordered_images = JSON.parse(@image_ids).collect { |i| @post.images.find_by_blob_id(i) }
   end
 
+  def create_collection
+    nice_url = SecureRandom.alphanumeric(6).downcase
+    @collection = Collection.create(user_id: current_user.id, title: post_params[:new_collection], nice_url: nice_url)
+
+    @post.update(collection_id: @collection.id)
+  end
+
   def set_order
     @order = params[:sort] ? "hotness DESC" : "updated_at DESC"
   end
@@ -192,6 +199,7 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(
       :code, :title, :include_nice_url, :nice_url, :private, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
+      :collection_id, :new_collection,
       :revision, :revision_description,
       :email_notification, :email,
       :image_order, images: [])

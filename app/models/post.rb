@@ -50,6 +50,7 @@ class Post < ApplicationRecord
   end
 
   belongs_to :user
+  belongs_to :collection, optional: true
 
   has_many :favorites, dependent: :destroy
   has_many :revisions, dependent: :destroy
@@ -64,6 +65,7 @@ class Post < ApplicationRecord
   attr_accessor :revision_description
   attr_accessor :email_notification
   attr_accessor :email
+  attr_accessor :new_collection
 
   serialize :image_order
 

@@ -159,6 +159,10 @@
   <% end %>
 </article>
 
+<% cache_unless current_user == @post.user, [@post, @collection] do %>
+  <%= render "collections/collections" if @post.collection && @post.collection.posts.many? %>
+<% end %>
+
 <% cache_unless current_user == @post.user, @post.revisions do %>
   <%= render "revisions/revisions" if @post.revisions.size > 1 %>
 <% end %>
