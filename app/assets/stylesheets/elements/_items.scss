@@ -113,6 +113,11 @@
     }
   }
 
+  .item--extra-small & {
+    padding: ($margin / 6) 0;
+    font-size: 21px;
+  }
+
   &--small {
     font-size: 18px;
 
@@ -157,6 +162,16 @@
   font-size: 36px;
   line-height: 1em;
   color: $white;
+
+  .item--extra-small & {
+    padding: $margin / 8 0;
+    font-size: 28px;
+
+    .copy-trigger {
+      height: 21px;
+      width: 21px;
+    }
+  }
 }
 
 .item__details {
