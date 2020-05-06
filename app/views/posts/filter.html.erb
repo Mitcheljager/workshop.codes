@@ -1,7 +1,17 @@
+<% if params[:search] %>
+  <% content_for :page_title, "#{ params[:search] }" %>
+<% elsif params[:category] %>
+  <% content_for :page_title, "#{ params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
+<% elsif params[:hero] %>
+  <% content_for :page_title, "#{ params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
+<% elsif params[:map] %>
+  <% content_for :page_title, "#{ params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
+<% end %>
+
 <% cache_if request.path_parameters.without(:controller, :action, :from, :to).length == 1 && !current_user,
             ["filter", request.path_parameters.without(:controller, :action, :from, :to), @posts],
             expires_in: 12.hours do %>
-            
+
   <div class="heading">
     <h2>
       Workshop Codes
