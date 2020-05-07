@@ -5,16 +5,6 @@
 
   <div data-role="content-to-toggle" style="display: none">
     <div class="ide">
-      <div class="ide__sidebar">
-        <%= link_to "View variables", "#", class: "ide__action", data: { action: "view-ide-variables" } %>
-
-        <h3 class="ide__title">Rules</h3>
-
-        <div class="ide__rules" data-role="ide-rules">
-          No Rules are declared.
-        </div>
-      </div>
-
       <%=
         tag.pre(
           tag.div(
@@ -25,8 +15,7 @@
               data: { role: "ide-content", copy: "current-content" }) +
             tag.div(
               tag.div("View Fullscreen", class: "ide__tray-item", data: { action: "toggle-ide-fullscreen" }) +
-              tag.div("Copy current Rule", class: "ide__tray-item", data: { action: "copy-to-clipboard", target: "current-content" }) +
-              tag.div("Copy all Rules", class: "ide__tray-item", data: { action: "copy-ide-content", target: "current-content" }),
+              tag.div("Copy to clipboard", class: "ide__tray-item", data: { action: "copy-ide-content", target: "current-content" }),
               class: "ide__tray"
             ),
           class: "ide__code-wrapper"),

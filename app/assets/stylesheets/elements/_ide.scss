@@ -1,16 +1,8 @@
 .ide {
   position: relative;
-  display: grid;
-  grid-template: "sidebar"
-                 "content";
   min-height: 300px;
   margin-top: $margin / 2;
   box-shadow: 0 5px 15px rgba($black, .5);
-
-  @include media-min("lg") {
-    grid-template: "sidebar content";
-    grid-template-columns: 250px calc(100% - 250px);
-  }
 
   &--fullscreen {
     position: fixed;
@@ -19,26 +11,7 @@
     height: 100%;
     width: 100%;
     margin-top: 0;
-    z-index: 100;
-  }
-
-  &--input {
-    grid-template: "content";
-    grid-template-columns: 100%;
-  }
-}
-
-.ide__sidebar {
-  grid-area: sidebar;
-  background: $body-bg;
-  max-height: 75vh;
-  padding: $margin / 3;
-  overflow-y: auto;
-
-  @include styled-scrollbar($body-bg);
-
-  .ide--fullscreen & {
-    max-height: 100%;
+    z-index: 10;
   }
 }
 
@@ -99,45 +72,6 @@
   border-right: 1px solid lighten($border-color, 5%);
   color: lighten($border-color, 10%);
   z-index: 1;
-}
-
-.ide__active-line {
-  position: absolute;
-  top: 0;
-  left: -5em;
-  height: 2em;
-  width: 100%;
-  background: rgba($white, .05);
-  transform: translateY(-50%);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.ide__rules {
-  font-style: italic;
-  font-size: 14px;
-
-  > div {
-    padding: .5em 0;
-    border-bottom: 1px solid $border-color;
-    font-style: normal;
-    cursor: pointer;
-
-    &:hover,
-    &:active,
-    &.active {
-      color: $white;
-      background: linear-gradient(to right, rgba($white, 0) 0%,rgba($white, 0.05) 50%,rgba($white, 0) 100%);
-    }
-
-    &:first-child {
-      border-top: 1px solid $border-color;
-    }
-  }
-}
-
-.ide__title {
-  margin: 0 0 $margin / 3;
 }
 
 .ide__tray {
