@@ -29,15 +29,19 @@
 }
 
 .editor-toolbar {
+  display: flex;
   border: 0;
   padding: 0;
   opacity: 1;
+  margin-bottom: .25rem;
 
   &:hover {
     opacity: 1;
   }
 
-  a {
+  a,
+  button {
+    display: block;
     border: 0;
     margin-right: .25rem;
     background-color: $bg-dark;
@@ -49,6 +53,10 @@
       background-color: lighten($bg-dark, 10%);
       color: lighten($text-color, 10%) !important;
       border: 0;
+    }
+
+    i {
+      font-style: normal;
     }
   }
 
@@ -83,16 +91,14 @@
 }
 
 .fa-list-ol::before {
-  content: "❶";
-  font-weight: bold;
-  font-size: 12px;
+  content: "1";
 }
 
 .fa-link::before {
   content: "🔗";
 }
 
-.fa-picture-o::before {
+.fa-image::before {
   content: "🖼️";
 }
 

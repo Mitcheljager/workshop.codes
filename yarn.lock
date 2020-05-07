@@ -6,19 +6,27 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@agilie/canvas-image-cover-position/-/canvas-image-cover-position-1.1.1.tgz#e986a2607dc164d87d11dc452799169f1b1ad06d"
 
-codemirror-spell-checker@*:
+codemirror-spell-checker@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/codemirror-spell-checker/-/codemirror-spell-checker-1.1.2.tgz#1c660f9089483ccb5113b9ba9ca19c3f4993371e"
   dependencies:
     typo-js "*"
 
-codemirror@*:
-  version "5.50.2"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.50.2.tgz#32ddfe2b50193fcf573d8141c4a31d267c92b4a3"
+codemirror@^5.33.0:
+  version "5.53.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.53.2.tgz#9799121cf8c50809cca487304e9de3a74d33f428"
 
-marked@*:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-0.8.0.tgz#ec5c0c9b93878dc52dd54be8d0e524097bd81a99"
+inscrybmde@^1.11.6:
+  version "1.11.6"
+  resolved "https://registry.yarnpkg.com/inscrybmde/-/inscrybmde-1.11.6.tgz#4c27a99edb05cce486e6816d8ff771f9a5b95950"
+  dependencies:
+    codemirror "^5.33.0"
+    codemirror-spell-checker "^1.1.2"
+    marked "^0.5.1"
+
+marked@^0.5.1:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.5.2.tgz#3efdb27b1fd0ecec4f5aba362bddcd18120e5ba9"
 
 microlight@^0.0.7:
   version "0.0.7"
@@ -27,14 +35,6 @@ microlight@^0.0.7:
 siema@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/siema/-/siema-1.5.1.tgz#eff312b77e8340fa4d81d5d053ebbeb9113ff888"
-
-simplemde@^1.11.2:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/simplemde/-/simplemde-1.11.2.tgz#a23a35d978d2c40ef07dec008c92f070d8e080e3"
-  dependencies:
-    codemirror "*"
-    codemirror-spell-checker "*"
-    marked "*"
 
 sortablejs@^1.10.2:
   version "1.10.2"

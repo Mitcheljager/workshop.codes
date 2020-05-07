@@ -1,10 +1,10 @@
-//= require simplemde/dist/simplemde.min.js
+//= require inscrybmde/dist/inscrybmde.min.js
 
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-role='simple-mde']")
 
   elements.forEach((element) => {
-    const mde = new SimpleMDE({
+    const mde = new InscrybMDE({
       element: element,
       autoDownloadFontAwesome: false,
       autofocus: false,
