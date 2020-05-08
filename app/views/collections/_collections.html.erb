@@ -19,8 +19,8 @@
     <% end %>
   </div>
 
-  <% if @post.collection.posts.size > 9 %>
-    <small class="mt-half mr-quarter"><em><%= "And #{ @post.collection.posts.size - 9 } more..." %></em></small>
+  <% if @post.collection.posts.where.not(id: @post.id).size > 9 %>
+    <small class="mt-half mr-quarter"><em><%= "And #{ @post.collection.posts.where.not(id: @post.id).size - 9 } more..." %></em></small>
   <% end %>
 
   <%= link_to "View collection", collection_path(@post.collection.nice_url), class: "button button--secondary button--small mt-half" %>
