@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes to Discover and Share" %></title>
+    <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes Resource" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Overwatch Workshop Codes, Games, Modes, and more. Find Overwatch Game Modes to play with friends, randoms, or solo! | Submit your Workshop Codes for others to share and enjoy.">
     <meta name="keywords" content="Overwatch, Workshop, Codes, Workshop Codes, Overwatch Workshop Codes, Overwatch Custom Games, Overwatch Gamnes, Workshop Games">
     <meta name="theme-color" content="#1f2326">
+
+    <% unless yield(:og_description) != "" %>
+      <meta name="description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
+      <meta property="og:description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
+    <% end %>
 
     <%= render "og_tags" %>
 
