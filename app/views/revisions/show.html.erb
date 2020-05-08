@@ -8,13 +8,6 @@
 
 <%= link_to "Return to post", post_path(@post.code) %>
 
-<p class="mt-half">
-  <small>
-    <strong>Green</strong> = What has been added in this version. <br>
-    <strong>Red</strong> = What has been removed in this version.
-  </small>
-</p>
-
 <div class="well mt-half">
   <%= @difference.html_safe %>
 </div>
