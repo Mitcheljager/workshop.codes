@@ -4,9 +4,7 @@
   </div>
 
   <div class="cards">
-    <% @post.collection.posts.limit(9).each do |post| %>
-      <% next if @post == post %>
-
+    <% @post.collection.posts.where.not(id: @post.id).limit(9).each do |post| %>
       <div class="card">
         <%= link_to post.title, post_path(post.code), class: "card__title" %>
 
