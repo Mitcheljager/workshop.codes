@@ -21,6 +21,35 @@
   font-size: 28px;
   color: $white;
   font-family: "bignoodletitlingregular", $font-stack;
+
+  &[style*="background-image"] {
+    background-size: cover;
+    background-position: center;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba($body-bg, .5);
+      z-index: 0;
+    }
+
+    > div,
+    a {
+      position: relative;
+      z-index: 1;
+      color: $white;
+    }
+
+    svg path {
+      fill: $white;
+      opacity: .5;
+    }
+  }
 }
 
 .card__title {
