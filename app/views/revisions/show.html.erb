@@ -18,3 +18,12 @@
 <div class="well mt-half">
   <%= @difference.html_safe %>
 </div>
+
+<script>
+  document.addEventListener("turbolinks:load", function() {
+    const elements = document.querySelectorAll(".diff li")
+    elements.forEach(element => {
+      element.classList.add("microlight")
+    })
+  })
+</script>
