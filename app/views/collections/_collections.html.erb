@@ -7,7 +7,7 @@
     <% @post.collection.posts.limit(9).each do |post| %>
       <% next if @post == post %>
 
-      <div class="card" style="<%= "background-image: url(#{ polymorphic_url(post.images.find_by_blob_id(JSON.parse(post.image_order).first).variant(quality: 95, resize_to_fill: [450, 250]).processed) }" if post.images.any? && JSON.parse(post.image_order).any? %>">
+      <div class="card">
         <%= link_to post.title, post_path(post.code), class: "card__title" %>
 
         <div>
