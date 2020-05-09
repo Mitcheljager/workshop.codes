@@ -65,10 +65,12 @@ Rails.application.routes.draw do
   resources :revisions, only: [:show, :edit, :update]
   get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
-  resources :collections, param: :nice_url, path: "/c", concerns: :paginatable, only: [:show]
-  resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index], constraints: { code: /.{5,6}/ }
-  post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter"
   post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
+  get "/search", to: "search#show"
+
+  post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
+  resources :collections, param: :nice_url, path: "/c", concerns: :paginatable, only: [:show]
+  resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index], constraints: { code: /.{5,6}/ }
   get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
 end

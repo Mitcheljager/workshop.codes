@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   def index
     unless params[:query].empty?
       respond_to do |format|
@@ -10,5 +10,9 @@ class SearchController < ApplicationController
     else
       redirect_back fallback_location: root_path
     end
+  end
+
+  def show
+    redirect_to root_path
   end
 end
