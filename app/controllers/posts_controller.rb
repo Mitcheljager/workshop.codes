@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   end
 
   def filter
-    @posts = params[:search] ? Post.includes(:user, :revisions).where(private: 0).search(params[:search]).records : Post.where(private: 0)
+    @posts = params[:search] ? Post.includes(:user, :revisions).search(params[:search]).records.where(private: 0) : Post.where(private: 0)
 
     @posts = @posts.where("created_at >= ?", params[:from]) if params[:from]
     @posts = @posts.where("created_at <= ?", params[:to]) if params[:to]
