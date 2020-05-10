@@ -28,3 +28,4 @@
 //= require carousel
 //= require timeago
 //= require load-analytics
+//= require difference-viewer

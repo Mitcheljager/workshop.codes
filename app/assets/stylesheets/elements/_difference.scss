@@ -1,3 +1,20 @@
+.difference-header {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 1rem;
+  width: 100%;
+  border: 1px solid lighten($border-color, 10%);
+  border-bottom: 0;
+  background: $bg-dark;
+  font-size: 14px;
+}
+
+.difference-header__item {
+  padding: .5rem .75rem;
+  border-left: 1px solid lighten($border-color, 10%);
+  text-decoration: none;
+}
+
 .diff{overflow:auto; counter-reset: diff; color: lighten($text-color, 10%)}
 .diff ul{overflow:auto;font-size:14px;list-style:none;margin:0;padding:0;display:table;width:100%;}
 .diff del, .diff ins{display:block;text-decoration:none;}
@@ -10,6 +27,7 @@
 .diff ins strong{font-weight:normal;background:#9f9;}
 .diff li.diff-comment { display: none; }
 .diff li.diff-block-info { background: none repeat scroll 0 0 gray; }
+.diff.hide-unchanged li.unchanged { opacity: 0; height: 0; min-height: 0; padding: 0; overflow: hidden; }
 .diff li:not(.del) {
   counter-increment: diff;
 

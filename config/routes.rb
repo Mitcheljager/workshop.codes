@@ -1,3 +1,9 @@
+class FilterContraints
+  def self.matches?(request)
+    request.path_parameters.without(:controller, :action, :page).length > 0
+  end
+end
+
 Rails.application.routes.draw do
   concern :paginatable do
     get "(page/:page)", action: :index, on: :collection, as: ""
@@ -65,7 +71,7 @@ Rails.application.routes.draw do
   resources :revisions, only: [:show, :edit, :update]
   get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
-  get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter"
+  get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter", constraints: FilterContraints
   post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
   get "/search", to: "search#show"
 

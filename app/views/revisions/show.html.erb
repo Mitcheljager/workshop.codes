@@ -6,17 +6,17 @@
   <h2 class="heading mb-quarter">Viewing initial snippet for <strong><%= @revision.code %></strong></h2>
 <% end %>
 
-<%= link_to "Return to post", post_path(@post.code) %>
+<%= link_to "Return to post", post_path(@post.code), class: "button button--secondary button--small mb-half" %>
 
-<div class="well mt-half">
-  <%= @difference.html_safe %>
+<div class="difference-header">
+  <%= link_to "View raw", raw_snippet_path(@revision.id, "json"), class: "difference-header__item" %>
+
+  <div class="difference-header__item checkbox">
+    <%= check_box_tag :hide_unchanged, "", false, data: { action: "toggle-unchanged-difference" } %>
+    <%= label_tag :hide_unchanged, "Hide unchanged lines" %>
+  </div>
 </div>
 
-<script>
-  document.addEventListener("turbolinks:load", function() {
-    const elements = document.querySelectorAll(".diff li")
-    elements.forEach(element => {
-      element.classList.add("microlight")
-    })
-  })
-</script>
+<div class="well">
+  <%= @difference.html_safe %>
+</div>

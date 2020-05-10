@@ -25,10 +25,6 @@
     <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-16x16.png" %>" sizes="16x16" />
     <link rel="apple-touch-icon" href="<%= image_path "favicon/apple-touch-icon.png" %>" sizes="180x180" />
 
-    <% if @post && params[:code] && @post.code != params[:code] %>
-      <link rel="canonical" href="<%= post_url(@post.code) %>" />
-    <% end %>
-
     <%= inline_css "application.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
