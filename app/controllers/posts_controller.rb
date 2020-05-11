@@ -46,11 +46,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
-    @is_expired = @post.updated_at < 6.months.ago && ((@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || @post.revisions.none?)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
-    set_post_images
 
     unless @post.present?
       revision = Revision.find_by_code(params[:code])
@@ -59,6 +57,9 @@ class PostsController < ApplicationController
     end
 
     not_found and return unless @post.present?
+
+    set_post_images
+    @is_expired = @post.updated_at < 6.months.ago && ((@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || @post.revisions.none?)
 
     respond_to do |format|
       format.html
