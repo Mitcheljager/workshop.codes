@@ -46,6 +46,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
+    @is_expired = @post.updated_at < 6.months.ago && ((@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || @post.revisions.none?)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
