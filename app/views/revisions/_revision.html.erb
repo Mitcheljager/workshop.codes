@@ -13,7 +13,7 @@
             <% end %>
 
             <% if revision.snippet.present? %>
-              <%= link_to "View changes in snippet", revision_path(revision.id), class: "dropdown__item" %>
+              <%= link_to "View changes in snippet", difference_path(revision.id), class: "dropdown__item" %>
               <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "dropdown__item" %>
             <% end %>
           </div>

@@ -1,14 +1,50 @@
-<% if @previous_revision.present? %>
-  <% content_for :page_title, "Viewing difference between #{ @revision.code } and #{ @previous_revision.code }" %>
-  <h2 class="heading mb-quarter">Comparing difference between <strong><%= @revision.code %></strong> and <strong><%= @previous_revision.code %></strong></h2>
-<% else %>
-  <% content_for :page_title, "Viewing initial snippet for #{ @revision.code }" %>
-  <h2 class="heading mb-quarter">Viewing initial snippet for <strong><%= @revision.code %></strong></h2>
-<% end %>
+<% content_for :page_title, "Viewing snippet of #{ @revision.code }" %>
 
-<%= link_to "Return to post", post_path(@post.code), class: "button button--secondary button--small mb-half" %>
+<%= link_to "Return to post", post_path(@post.code), class: "button button--secondary button--small mb-quarter mt-full" %>
 
-<div class="difference-header">
+<h2 class="mt-0 mb-quarter">
+  <% if @compare_revision.present? %>
+    Comparing difference between
+  <% else %>
+    Viewing snippet of
+  <% end %>
+  <div class="dropdown" data-dropdown>
+    <strong><%= link_to @revision.code, "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %></strong>
+
+    <div class="dropdown__content" data-dropdown-content>
+      <% @post.revisions.order(created_at: :desc).each do |revision| %>
+        <%= link_to difference_path(revision.id, @compare_revision.present? ? @compare_revision.id : ""), class: "dropdown__item" do %>
+          <strong><%= revision.code %></strong>
+          <em>- <%= revision.version %></em>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @compare_revision.present? %>
+    and
+    <div class="dropdown" data-dropdown>
+      <strong><%= link_to @compare_revision.code, "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %></strong>
+
+      <div class="dropdown__content" data-dropdown-content>
+        <% @post.revisions.order(created_at: :desc).each do |revision| %>
+          <%= link_to difference_path(@revision.id, revision.id), class: "dropdown__item" do %>
+            <strong><%= revision.code %></strong>
+            <em>- <%= revision.version %></em>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</h2>
+
+<div class="difference-header" data-role="difference-header">
+  <div class="difference-header__item p-0">
+    <select class="form-select form-select--small w-auto" data-action="jump-to-rule">
+      <option>Jump to rule...</option>
+    </select>
+  </div>
+
   <%= link_to "View raw", raw_snippet_path(@revision.id, "json"), class: "difference-header__item" %>
 
   <div class="difference-header__item checkbox">

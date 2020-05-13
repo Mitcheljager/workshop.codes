@@ -68,7 +68,8 @@ Rails.application.routes.draw do
   get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"
 
   post "copy-code", to: "posts#copy_code", as: "copy_code"
-  resources :revisions, only: [:show, :edit, :update]
+  resources :revisions, only: [:edit, :update]
+  get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
   get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
   get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter", constraints: FilterContraints

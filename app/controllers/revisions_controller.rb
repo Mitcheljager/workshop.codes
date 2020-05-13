@@ -12,8 +12,13 @@ class RevisionsController < ApplicationController
 
     not_found and return if @post.private? && @post.user != current_user
 
-    @previous_revision = @post.revisions.where("id < ?", @revision.id).last
-    @difference = Diffy::Diff.new(@previous_revision.present? ? @previous_revision.snippet : "", @revision.snippet).to_s(:html_simple)
+    if params[:compare_id].present?
+      @compare_revision = @post.revisions.find(params[:compare_id])
+    else
+      @compare_revision = @post.revisions.where("id < ?", @revision.id).last
+    end
+
+    @difference = Diffy::Diff.new(@compare_revision.present? ? @compare_revision.snippet : "", @revision.snippet).to_s(:html_simple)
   end
 
   def raw_snippet
