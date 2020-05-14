@@ -16,7 +16,8 @@
     <th>Link?</th>
     <th>Desc?</th>
     <th>Posts</th>
-    <th>Comments</th>
+    <th>Comts</th>
+    <th>Favs</th>
     <th>Date</th>
   </tr>
 
@@ -31,6 +32,7 @@
       <td><%= "✔" if user.description.present? %>
       <td><%= user.posts.count %></td>
       <td><%= user.comments.count %></td>
+      <td><%= user.favorites.count %></td>
       <td><small><%= time_ago_in_words(user.created_at).humanize %></small></td>
     </tr>
   <% end %>

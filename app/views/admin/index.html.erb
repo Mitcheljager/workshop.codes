@@ -25,19 +25,12 @@
     <span class="card__title">Notifications</span>
     <%= @notifications.size %>
   </div>
+
+  <div class="card">
+    <span class="card__title">Copies</span>
+    <%= @copies.size %>
+  </div>
 </div>
-
-<% date_counts = {} %>
-<% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
-  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
-<% end %>
-
-<% @copies.group_by { |x| x.on_date.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
-<% end %>
-
-<h3 class="mt-full">Total copies per day</h3>
-<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
 <% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>

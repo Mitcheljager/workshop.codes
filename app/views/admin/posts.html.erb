@@ -17,10 +17,12 @@
     <th>Fv</th>
     <th>Imp</th>
     <th>Hot</th>
+    <th>Rev</th>
+    <th>Com</th>
     <th>Img?</th>
     <th>Email?</th>
     <th>Snip?</th>
-    <th>Created at</th>
+    <th>Created</th>
   </tr>
 
   <% @posts.each do |post| %>
@@ -28,12 +30,14 @@
       <td><small><%= link_to post.id, admin_post_path(post.id) %></small></td>
       <td><small><%= link_to post.user.username, user_path(post.user.username) %></small></td>
       <td><small><%= truncate(post.title, length: 20) %></small></td>
-      <td><%= link_to post.code, post_path(post.code) %></td>
+      <td><small><%= link_to post.code, post_path(post.code) %></small></td>
       <td><%= "✔" if post.private? %></td>
       <td><small><%= link_to nice_url_path(post.nice_url) if post.nice_url.present? %></small></td>
       <td><%= post.favorites_count %></td>
       <td><%= post.impressions_count %></td>
       <td><%= post.hotness %></td>
+      <td><%= post.revisions.count %></td>
+      <td><%= post.comments.count %></td>
       <td><%= "✔" if post.images.any? %></td>
       <td><%= "✔" if post.email_notifications.any? %></td>
       <td><%= "✔" if post.snippet.present? %></td>
