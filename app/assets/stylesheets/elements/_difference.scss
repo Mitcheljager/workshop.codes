@@ -8,6 +8,13 @@
   background: $bg-dark;
   font-size: 14px;
 
+  &--fixed {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    max-width: map-get($media-min-widths,  lg);
+  }
+
   select {
     max-width: 200px;
     font-size: 14px;

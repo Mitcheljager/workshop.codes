@@ -38,18 +38,20 @@
   <% end %>
 </h2>
 
-<div class="difference-header" data-role="difference-header">
-  <div class="difference-header__item p-0">
-    <select class="form-select form-select--small w-auto" data-action="jump-to-rule">
-      <option>Jump to rule...</option>
-    </select>
-  </div>
+<div data-role="difference-header">
+  <div class="difference-header">
+    <div class="difference-header__item p-0">
+      <select class="form-select form-select--small w-auto" data-action="jump-to-rule">
+        <option>Jump to rule...</option>
+      </select>
+    </div>
 
-  <%= link_to "View raw", raw_snippet_path(@revision.id, "json"), class: "difference-header__item" %>
+    <%= link_to "View raw", raw_snippet_path(@revision.id, "json"), class: "difference-header__item" %>
 
-  <div class="difference-header__item checkbox">
-    <%= check_box_tag :hide_unchanged, "", false, data: { action: "toggle-unchanged-difference" } %>
-    <%= label_tag :hide_unchanged, "Hide unchanged lines" %>
+    <div class="difference-header__item checkbox">
+      <%= check_box_tag :hide_unchanged, "", false, data: { action: "toggle-unchanged-difference" } %>
+      <%= label_tag :hide_unchanged, "Hide unchanged lines" %>
+    </div>
   </div>
 </div>
 

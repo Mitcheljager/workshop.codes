@@ -10,7 +10,11 @@ document.addEventListener("turbolinks:load", function() {
     element.classList.add("microlight")
   })
 
+  document.removeEventListener("scroll", scrollAlong)
+  document.addEventListener("scroll", scrollAlong)
+
   createRules()
+  scrollAlong()
 })
 
 function toggleUnchangedFiles(event) {
@@ -48,7 +52,16 @@ function createRules() {
 
 function goToRule(event) {
   const target = document.querySelector(`.diff li:nth-child(${ event.target.value })`)
+  const differenceHeaderElement = document.querySelector("[data-role='difference-header']")
 
-  const offset = target.getBoundingClientRect().top + window.scrollY
+  const offset = target.getBoundingClientRect().top + window.scrollY - differenceHeaderElement.offsetHeight
   window.scroll(0, offset)
+}
+
+function scrollAlong(event) {
+  const element = document.querySelector("[data-role='difference-header']")
+  const elementOffset = element.getBoundingClientRect().top
+
+  element.style.height = element.querySelector(".difference-header").offsetHeight + "px"
+  element.querySelector(".difference-header").classList.toggle("difference-header--fixed", elementOffset < 1)
 }
