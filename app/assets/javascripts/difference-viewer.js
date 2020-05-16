@@ -1,4 +1,6 @@
 document.addEventListener("turbolinks:load", function() {
+  document.removeEventListener("scroll", scrollAlong)
+
   if (!document.querySelector(".diff")) return
 
   const toggleUnchangedFilesElement = document.querySelector("[data-action='toggle-unchanged-difference']")
@@ -10,7 +12,6 @@ document.addEventListener("turbolinks:load", function() {
     element.classList.add("microlight")
   })
 
-  document.removeEventListener("scroll", scrollAlong)
   document.addEventListener("scroll", scrollAlong)
 
   createRules()
