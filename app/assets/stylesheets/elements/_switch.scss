@@ -8,7 +8,7 @@
     content: "";
     position: absolute;
     top: 6px;
-    left: calc(2rem + 6px);
+    left: 6px;
     height: calc(2rem - 8px);
     width: calc(2rem - 8px);
     border-radius: 99px;
@@ -33,7 +33,7 @@
 
   &--active {
     &::before {
-      right: 6px;
+      left: calc(2rem + 6px);
       background: $white;
     }
 
