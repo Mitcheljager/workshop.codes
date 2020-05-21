@@ -1,11 +1,13 @@
-$white: #dfdfdf;
+$white: var(--white);
+$pure-white: #fff;
 $black: #000;
 $red: #b33834;
 $body-bg: #1f2326;
 $primary: #f06414;
 $bg-dark: #353b3f;
-$text-color: #90989c;
-$text-color-dark: #6a7277;
+$text-color: var(--text-color);
+$text-color-light: var(--text-color-light);
+$text-color-dark: var(--text-color-dark);
 $border-color: #353b3f;
 $discord: #7289DA;
 $bnet: #0288d1;
@@ -19,10 +21,36 @@ $search-height: 80px;
 $header-height: $margin;
 $code-width: 150px;
 
+$font-size-base: var(--font-size-base);
+$font-size-small: var(--font-size-small);
+
 $media-min-widths: (
   xs: 400px,
   sm: 640px,
   md: 768px,
   lg: 900px,
   xl: 1200px
-)
+);
+
+$gray: #90989c;
+$gray-dark: #6a7277;
+
+:root {
+  --white: #dfdfdf;
+  --text-color: #{ $gray };
+  --text-color-dark: #{ $gray-dark };
+  --font-size-base: $font-size-base;
+  --font-size-small: 14px;
+}
+
+.high-contrast {
+  --white: #fff;
+  --text-color: #{ lighten($gray, 15%) };
+  --text-color-light: #{ lighten($gray, 10%) };
+  --text-color-dark: #{ $gray };
+}
+
+.large-fonts {
+  --font-size-base: 19px;
+  --font-size-small: 16px;
+}

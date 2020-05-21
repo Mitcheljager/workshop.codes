@@ -84,7 +84,7 @@
   h3,
   h4,
   h5 {
-    font-size: 16px;
+    font-size: $font-size-base;
   }
 }
 
@@ -99,27 +99,27 @@
 .post-comment__action {
   display: inline-block;
   margin-right: $margin / 2;
-  font-size: 14px;
+  font-size: $font-size-small;
   text-transform: lowercase;
   text-decoration: none;
-  color: lighten($text-color, 20%);
+  color: lighten($gray, 20%);
 }
 
 .post-comment__author {
   margin-right: $margin / 2;
   text-decoration: none;
-  color: lighten($text-color, 20%);
+  color: lighten($gray, 20%);
 
   small {
     display: inline-block;
     color: $text-color-dark;
-    font-size: 14px;
+    font-size: $font-size-small;
     margin-left: .25em;
   }
 }
 
 .post-comment__date {
-  font-size: 14px;
+  font-size: $font-size-small;
   font-style: italic;
   text-transform: lowercase;
   color: $text-color-dark;

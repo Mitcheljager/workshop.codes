@@ -8,7 +8,7 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: $font-stack;
-  font-size: 16px;
+  font-size: $font-size-base;
 }
 
 body {
@@ -17,6 +17,14 @@ body {
   background: $body-bg image-url("layout/pattern-bg.webp");
   color: $text-color;
   overflow-x: hidden;
+
+  &.simple-view {
+    background: $body-bg;
+  }
+
+  &.high-contrast {
+    background: darken($body-bg, 5%);
+  }
 }
 
 a {
@@ -41,6 +49,10 @@ hr {
 
   &.small {
     margin: $margin / 2 0;
+  }
+
+  .simple-view & {
+    height: 2px;
   }
 }
 
@@ -107,6 +119,28 @@ blockquote {
     height: 100%;
     object-fit: cover;
   }
+
+  .simple-view & {
+    clip-path: none;
+    background: $border-color;
+    height: 132px;
+
+    @include media-min(sm) {
+      height: 152px;
+    }
+
+    @media (min-width: 1000px) {
+      height: 192px;
+    }
+
+    @include media-min(xl) {
+      height: 212px;
+    }
+
+    img {
+      display: none;
+    }
+  }
 }
 
 .wrapper {
@@ -159,6 +193,13 @@ blockquote {
 
     @media (min-width: 800px) {
       background-size: contain;
+    }
+  }
+
+  .simple-view & {
+    &::before,
+    &::after {
+      display: none;
     }
   }
 }

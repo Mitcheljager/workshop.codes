@@ -35,7 +35,7 @@
   background: $primary;
   font-weight: $font-stack;
   font-size: 18px;
-  color: lighten($white, 50%);
+  color: $pure-white;
   text-align: center;
   animation: fade-out-notification 500ms forwards;
   animation-delay: 500ms;

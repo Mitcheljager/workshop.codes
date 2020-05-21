@@ -1,5 +1,9 @@
 .items {
-
+  .simple-view & {
+    hr {
+      display: none;
+    }
+  }
 }
 
 .items-heading {
@@ -86,6 +90,11 @@
       margin-top: $margin * 2;
     }
   }
+
+  .simple-view & {
+    border: 3px solid $border-color;
+    margin-bottom: 1rem;
+  }
 }
 
 .item__title {
@@ -95,7 +104,7 @@
   justify-content: space-between;
   padding: $margin / 3 0;
   margin: 0;
-  font-size: 21px;
+  font-size: 131%;
   font-weight: lighter;
   color: $white;
 
@@ -136,7 +145,7 @@
 
     &:hover,
     &:active {
-      color: lighten($white, 50%);
+      color: $pure-white;
     }
   }
 
@@ -147,6 +156,10 @@
     @include media-min(sm) {
       font-size: 18px;
     }
+  }
+
+  .simple-view & {
+    padding-left: 1rem;
   }
 }
 
@@ -172,6 +185,10 @@
       width: 21px;
     }
   }
+
+  .simple-view & {
+    background: $bg-dark;
+  }
 }
 
 .item__details {
@@ -179,7 +196,7 @@
   display: block;
   padding: $margin / 6 0 0;
   color: $text-color-dark;
-  font-size: 14px;
+  font-size: $font-size-small;
 
   @include media-min(sm) {
     display: flex;
@@ -188,6 +205,10 @@
 
   .item--bottom & {
     display: block;
+  }
+
+  .simple-view & {
+    display: none;
   }
 }
 
@@ -250,6 +271,10 @@
       fill: $primary;
     }
   }
+
+  .simple-view & {
+    display: none;
+  }
 }
 
 .item__actions {
@@ -266,6 +291,10 @@
     &:first-child {
       margin-left: 0;
     }
+  }
+
+  .simple-view & {
+    padding: 0 1rem;
   }
 }
 

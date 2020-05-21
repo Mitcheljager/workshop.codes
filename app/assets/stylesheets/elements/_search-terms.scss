@@ -28,9 +28,9 @@
   background: lighten($bg-dark, 5%);
   margin: .1em;
   padding: .5em .75em;
-  font-size: 14px;
+  font-size: $font-size-small;
   line-height: 1em;
-  color: lighten($text-color, 10%);
+  color: $text-color-light;
   text-decoration: none;
   text-transform: capitalize;
 

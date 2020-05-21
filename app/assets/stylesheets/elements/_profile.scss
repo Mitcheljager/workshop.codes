@@ -42,7 +42,7 @@
   justify-content: center;
   align-items: center;
   margin-top: $margin;
-  font-size: 14px;
+  font-size: $font-size-small;
   color: rgba(white, .75);
   white-space: nowrap;
 
@@ -51,6 +51,10 @@
     justify-content: flex-end;
     margin-top: 0;
     margin-left: auto;
+  }
+
+  .simple-view & {
+    color: $text-color;
   }
 
   .button {
@@ -125,6 +129,10 @@
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .simple-view & {
+    box-shadow: none;
   }
 }
 

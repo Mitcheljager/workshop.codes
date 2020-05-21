@@ -51,7 +51,7 @@
     &.active,
     &:hover {
       background-color: lighten($bg-dark, 10%);
-      color: lighten($text-color, 10%) !important;
+      color: $text-color-light !important;
       border: 0;
     }
 
@@ -114,5 +114,5 @@
 .fa-code::before {
   content: "<>";
   font-weight: bold;
-  font-size: 14px;
+  font-size: $font-size-small;
 }

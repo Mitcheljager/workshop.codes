@@ -40,7 +40,7 @@
     <%= render "analytics_code" %>
   </head>
 
-  <body>
+  <body class="<%= accessibility_settings if current_user.present? %>">
     <%= render "notifications/alert" if current_user && unread_notifications.any? %>
 
     <%= render "header" %>

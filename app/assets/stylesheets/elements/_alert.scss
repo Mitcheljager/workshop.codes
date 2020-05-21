@@ -15,7 +15,7 @@
   padding: .5em 1em;
   background: $primary;
   box-shadow: inset 0 0 0 1px lighten($primary, 15%), 0 10px 10px rgba($black, .5);
-  color: lighten($white, 20%);
+  color: $pure-white;
   font-size: 12px;
   text-decoration: none;
   z-index: 100;

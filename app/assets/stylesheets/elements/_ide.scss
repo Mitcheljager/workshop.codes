@@ -27,7 +27,7 @@
   tab-size: 2;
 
   @include media-min("lg") {
-    font-size: 14px;
+    font-size: $font-size-small;
     line-height: 2em;
   }
 
@@ -116,6 +116,6 @@
   text-align: center;
   text-decoration: none;
   color: $text-color;
-  font-size: 14px;
+  font-size: $font-size-small;
   cursor: pointer;
 }

@@ -15,7 +15,7 @@
 
   &:hover,
   &:active {
-    color: lighten($white, 50%);
+    color: $pure-white;
 
     @supports not (clip-path: polygon(0 0)) {
       color: $black;
@@ -49,6 +49,11 @@
   &.active {
     display: block;
   }
+
+  .simple-view & {
+    box-shadow: none;
+    border: 3px solid lighten($border-color, 10%);
+  }
 }
 
 .dropdown__item {
@@ -56,7 +61,7 @@
   padding: .5rem 1rem;
   color: $white;
   text-decoration: none;
-  font-size: 16px;
+  font-size: $font-size-base;
   line-height: 1.35em;
 
   &:hover,

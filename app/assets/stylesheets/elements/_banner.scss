@@ -18,6 +18,14 @@
     opacity: .65;
   }
 
+  .simple-view & {
+    box-shadow: inset 0 0 0 3px $border-color;
+
+    &::before {
+      background: lighten($body-bg, 5%);
+    }
+  }
+
   p {
     margin: .5rem 0 2rem;
   }

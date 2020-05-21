@@ -6,7 +6,7 @@
   width: 100%;
   margin-bottom: $margin / 2;
   padding: 0 calc(10vw - #{ $margin / 2 });
-  color: lighten($white, 50%);
+  color: $pure-white;
 
   @media (min-width: 1000px) {
     margin-bottom: $margin * 1.16;
@@ -73,7 +73,7 @@
     align-items: center;
     margin-left: $margin / 2;
     padding-left: $margin / 2;
-    border-left: 1px solid rgba(lighten($white, 50%), .5);
+    border-left: 1px solid rgba($pure-white, .5);
   }
 
   @include media-min(xl) {
@@ -85,7 +85,7 @@
 .header__item {
   display: block;
   margin-bottom: $margin / 4;
-  color: lighten($white, 50%);
+  color: $pure-white;
   text-decoration: none;
   font-family: "bignoodletitlingregular", $font-stack;
   font-size: 36px;
@@ -112,7 +112,7 @@
   &:hover,
   &:active,
   &--active {
-    color: lighten($white, 50%);
+    color: $pure-white;
     position: relative;
 
     &::before {
@@ -124,7 +124,7 @@
       width: 100%;
       height: 3px;
       border-radius: 10px;
-      background: lighten($white, 50%);
+      background: $pure-white;
       opacity: .5;
     }
   }
@@ -168,7 +168,7 @@
 .action-header__actions {
   display: flex;
   color: $text-color-dark;
-  font-size: 14px;
+  font-size: $font-size-small;
   margin-bottom: $margin / 4;
 
   @include media-min(md) {

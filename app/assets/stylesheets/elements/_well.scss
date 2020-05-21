@@ -16,19 +16,18 @@
     background: transparent
   }
 
-  &--block {
-    align-items: stretch;
-    justify-content: stretch;
-  }
-
   a {
     text-decoration: none;
+  }
+
+  .simple-view & {
+    box-shadow: inset 0 0 0 2px $border-color;
   }
 }
 
 .well__content {
   margin-top: $margin / 4;
-  font-size: 14px;
+  font-size: $font-size-small;
 
   @include media-min(sm) {
     margin-top: 0;

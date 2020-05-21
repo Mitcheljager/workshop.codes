@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get "account(/page/:page)", to: "users#show", as: "account"
   get "account/edit", to: "users#edit", as: "edit_user"
   get "account/posts", to: "users#posts", as: "account_posts"
+  get "account/accessibility", to: "users#accessibility", as: "account_accessibility"
   get "favorites", to: "users#favorites", as: "account_favorites"
   patch "user", to: "users#update", as: "update_user"
   delete "user", to: "users#destroy", as: "destroy_user"

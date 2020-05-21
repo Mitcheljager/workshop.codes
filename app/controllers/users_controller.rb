@@ -42,12 +42,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:user].delete(:password).delete(:password_confirmation) if params[:user][:password].blank?
+    params[:user].delete(:password).delete(:password_confirmation) if params[:user][:password].blank? && params[:user][:password].present?
 
     @user = current_user
     if @user.update(user_params)
       create_activity(:update_user, { ip_address: last_4_digits_of_request_ip })
-      redirect_to account_path
+      redirect_back fallback_location: account_path
     else
       render :edit
     end
@@ -69,6 +69,8 @@ class UsersController < ApplicationController
   def posts
     @posts = current_user.posts.order(updated_at: :desc).page(params[:page])
   end
+
+  def accessibility; end
 
   def get_analytics
     @post = Post.find(params[:id])
@@ -115,7 +117,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :email)
+    params.require(:user).permit(:username, :password, :password_confirmation, :email, :high_contrast, :large_fonts, :simple_view)
   end
 
   def create_date_count

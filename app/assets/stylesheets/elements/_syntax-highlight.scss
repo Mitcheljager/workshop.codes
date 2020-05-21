@@ -2,7 +2,7 @@ $color-base: #cbf6fb;
 
 $highlight-types: (
   string: #98C379,
-  punctuation: darken($text-color, 10%),
+  punctuation: darken($gray, 10%),
   keyword: #E06C75,
   number: #D19A66,
   comment: $text-color-dark,
@@ -10,7 +10,7 @@ $highlight-types: (
 );
 
 .syntax-highlight {
-  color: lighten($text-color, 10%);
+  color: $text-color-light;
 }
 
 :root {

@@ -19,7 +19,7 @@
       content: "Drag images to change their order";
       display: block;
       grid-column: span 3;
-      font-size: 14px;
+      font-size: $font-size-small;
       line-height: 1.25em;
       font-style: italic;
       color: $text-color-dark;

@@ -46,7 +46,7 @@
     }
 
     @include media-min(md) {
-      font-size: 16px;
+      font-size: $font-size-base;
     }
 
     @include media-min(lg) {
@@ -61,6 +61,10 @@
       @include media-min(md) {
         font-size: 24px;
       }
+    }
+
+    .high-contrast & {
+      font-weight: normal;
     }
   }
 }
@@ -117,5 +121,9 @@
     box-shadow: 0 20px 20px 0 rgba($black, .25), 0 6px 6px 0 rgba($black, .25);
     transition-timing-function: linear;
     transition-delay: 50ms;
+
+    .simple-view & {
+      box-shadow: 0 0 5px $body-bg;
+    }
   }
 }

@@ -4,7 +4,7 @@
   align-items: flex-end;
   flex-wrap: wrap;
   margin-top: 1rem;
-  font-size: 16px;
+  font-size: $font-size-base;
 
   @include media-min(sm) {
     font-size: 18px;

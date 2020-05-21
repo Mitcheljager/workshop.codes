@@ -3,7 +3,7 @@
   padding: .5em 1em;
   border: 0;
   background: $primary;
-  color: lighten($white, 50%);
+  color: $pure-white;
   font-size: 21px;
   font-family: "bignoodletitlingregular", $font-stack;
   text-decoration: none;
@@ -14,8 +14,8 @@
 
   &:hover:not([disabled]),
   &:active:not([disabled]) {
-    color: lighten($white, 50%);
-    box-shadow: inset 0 0 0 2px lighten($white, 50%);
+    color: $pure-white;
+    box-shadow: inset 0 0 0 2px $pure-white;
   }
 
   &[disabled] {
@@ -52,7 +52,7 @@
     background: $discord;
     box-shadow: none;
     font-family: $font-stack;
-    font-size: 14px;
+    font-size: $font-size-small;
     font-weight: medium;
   }
 
@@ -63,5 +63,10 @@
 
   svg {
     margin-right: .5em;
+  }
+
+  .simple-view & {
+    border: 0;
+    box-shadow: none;
   }
 }
