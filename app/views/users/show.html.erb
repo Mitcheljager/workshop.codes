@@ -10,17 +10,17 @@
   <div class="cards">
     <div class="card">
       <span class="card__title">Favorites received</span>
-      <%= @favorites_received.size %>
+      <%= number_with_delimiter(@favorites_received.size) %>
     </div>
 
     <div class="card">
       <span class="card__title">Views received</span>
-      <%= @views_received.pluck(:value).sum %>
+      <%= number_with_delimiter(@views_received.pluck(:value).sum) %>
     </div>
 
     <div class="card">
       <span class="card__title">Copies received</span>
-      <%= @copies_received.pluck(:value).sum %>
+      <%= number_with_delimiter(@copies_received.pluck(:value).sum) %>
     </div>
   </div>
 

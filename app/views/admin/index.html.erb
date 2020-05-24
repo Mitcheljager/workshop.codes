@@ -3,32 +3,32 @@
 <div class="cards">
   <div class="card">
     <span class="card__title">Posts</span>
-    <%= @posts.size %>
+    <%= number_with_delimiter(@posts.size) %>
   </div>
 
   <div class="card">
     <span class="card__title">Users</span>
-    <%= @users.size %>
+    <%= number_with_delimiter(@users.size) %>
   </div>
 
   <div class="card">
     <span class="card__title">Comments</span>
-    <%= @comments.size %>
+    <%= number_with_delimiter(@comments.size) %>
   </div>
 
   <div class="card">
     <span class="card__title">Favorites</span>
-    <%= @favorites.size %>
+    <%= number_with_delimiter(@favorites.size) %>
   </div>
 
   <div class="card">
     <span class="card__title">Notifications</span>
-    <%= @notifications.size %>
+    <%= number_with_delimiter(@notifications.size) %>
   </div>
 
   <div class="card">
     <span class="card__title">Copies</span>
-    <%= @copies.sum(:value) %>
+    <%= number_with_delimiter(@copies.sum(:value)) %>
   </div>
 </div>
 
