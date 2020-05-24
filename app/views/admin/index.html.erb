@@ -28,7 +28,7 @@
 
   <div class="card">
     <span class="card__title">Copies</span>
-    <%= @copies.size %>
+    <%= @copies.sum(:value) %>
   </div>
 </div>
 
