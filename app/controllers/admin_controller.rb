@@ -20,11 +20,12 @@ class AdminController < ApplicationController
   end
 
   def posts
-    @posts = Post.order(created_at: :desc).page(params[:page])
+    @posts = Post.order((params[:order].present? ? params[:order] : "created_at") + " DESC").page(params[:page])
   end
 
   def users
     @users = User.order(created_at: :desc).page(params[:page])
+    @users = @users.where("#{ params[:where] } != 'nil' AND #{ params[:where] } != '' AND #{ params[:where] } != false") if params[:where].present?
   end
 
   def comments

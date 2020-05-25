@@ -1,35 +1,40 @@
 <%= render "navigation" %>
 
 <p>Total users: <strong><%= User.all.size %></strong></p>
-<p>Last user: <strong><%= time_ago_in_words(@users.first.created_at).humanize %></strong></p>
 <p>Users in last 7 days: <strong><%= User.where("created_at > ?", 1.week.ago).size %></strong></p>
 
 <hr>
 
 <table>
   <tr>
-    <th>ID</th>
+    <th><%= link_to "ID", admin_users_path %></th>
     <th>Username</th>
-    <th>Provider</th>
-    <th>Email?</th>
+    <th><%= link_to "Provider", admin_users_path(where: "provider") %></th>
+    <th><%= link_to "Email?", admin_users_path(where: "email_ciphertext") %></th>
     <th>Img?</th>
-    <th>Link?</th>
-    <th>Desc?</th>
+    <th><%= link_to "Link?", admin_users_path(where: "link") %></th>
+    <th><%= link_to "Desc?", admin_users_path(where: "description") %></th>
+    <th><%= link_to "HC?", admin_users_path(where: "high_contrast") %></th>
+    <th><%= link_to "Lg?", admin_users_path(where: "large_fonts") %></th>
+    <th><%= link_to "Spl?", admin_users_path(where: "simple_view") %></th>
     <th>Posts</th>
-    <th>Comts</th>
-    <th>Favs</th>
+    <th>Cmts</th>
+    <th>Fvs</th>
     <th>Date</th>
   </tr>
 
   <% @users.each do |user| %>
     <tr>
       <td><%= user.id %></td>
-      <td><%= link_to user.username, user_path(user.username) %></td>
-      <td><%= user.provider %></td>
-      <td><%= "✔" if user.email.present? %>
-      <td><%= "✔" if user.profile_image.attached? %>
-      <td><%= "✔" if user.link.present? %>
-      <td><%= "✔" if user.description.present? %>
+      <td><small><%= link_to user.username, user_path(user.username) %></small></td>
+      <td><small><%= user.provider %></small></td>
+      <td><%= "✔" if user.email.present? %></td>
+      <td><%= "✔" if user.profile_image.attached? %></td>
+      <td><%= "✔" if user.link.present? %></td>
+      <td><%= "✔" if user.description.present? %></td>
+      <td><%= "✔" if user.high_contrast? %></td>
+      <td><%= "✔" if user.large_fonts? %></td>
+      <td><%= "✔" if user.simple_view? %></td>
       <td><%= user.posts.count %></td>
       <td><%= user.comments.count %></td>
       <td><%= user.favorites.count %></td>

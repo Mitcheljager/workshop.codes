@@ -8,15 +8,15 @@
 
 <table>
   <tr>
-    <th>ID</th>
+    <th><%= link_to "ID", admin_posts_path %></th>
     <th>User</th>
     <th>Title</th>
     <th>Code</th>
     <th>Prv?</th>
     <th>URL</th>
-    <th>Fv</th>
-    <th>Imp</th>
-    <th>Hot</th>
+    <th><%= link_to "Fv", admin_posts_path(order: "favorites_count") %></th>
+    <th><%= link_to "Imp", admin_posts_path(order: "impressions_count") %></th>
+    <th><%= link_to "Hot", admin_posts_path(order: "hotness") %></th>
     <th>Rev</th>
     <th>Com</th>
     <th>Img?</th>
