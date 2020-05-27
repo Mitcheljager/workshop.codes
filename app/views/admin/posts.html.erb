@@ -29,7 +29,7 @@
     <tr>
       <td><small><%= link_to post.id, admin_post_path(post.id) %></small></td>
       <td><small><%= link_to post.user.username, user_path(post.user.username) %></small></td>
-      <td><small><%= truncate(post.title, length: 20) %></small></td>
+      <td><small><%= truncate(post.title, length: 50) %></small></td>
       <td><small><%= link_to post.code, post_path(post.code) %></small></td>
       <td><%= "✔" if post.private? %></td>
       <td><small><%= link_to nice_url_path(post.nice_url) if post.nice_url.present? %></small></td>

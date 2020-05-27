@@ -25,7 +25,7 @@ class AdminController < ApplicationController
 
   def users
     @users = User.order(created_at: :desc).page(params[:page])
-    @users = @users.where("#{ params[:where] } != 'nil' AND #{ params[:where] } != '' AND #{ params[:where] } != false") if params[:where].present?
+    @users = @users.where(params[:where], true).or(@users.where.not(params[:where] => ["", false, nil])) if params[:where].present?
   end
 
   def comments
