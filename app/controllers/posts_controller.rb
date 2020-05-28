@@ -88,6 +88,12 @@ class PostsController < ApplicationController
     render json: parsed_markdown, layout: false
   end
 
+  def get_snippet
+    @snippet = Post.where(private: 0).find(params[:id]).snippet
+
+    render layout: false
+  end
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id

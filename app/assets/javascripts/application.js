@@ -28,4 +28,5 @@
 //= require carousel
 //= require timeago
 //= require load-analytics
+//= require load-snippet
 //= require difference-viewer

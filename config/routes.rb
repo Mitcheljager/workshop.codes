@@ -78,6 +78,7 @@ Rails.application.routes.draw do
   get "/search", to: "search#show"
 
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
+  post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
   resources :collections, param: :nice_url, path: "/c", concerns: :paginatable, only: [:show]
   resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index], constraints: { code: /.{5,6}/ }
   get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
