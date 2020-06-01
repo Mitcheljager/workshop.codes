@@ -1,54 +1,56 @@
-<div class="item item--single mt-half">
-  <div class="item__title item__title--small">
-    <div>
-      <% if revision.post.user == current_user || revision.snippet.present? %>
-        <div class="dropdown mr-quarter" data-dropdown>
-          <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
-            <%= inline_svg "icons/icon-menu.svg", height: 16 %>
-          <% end %>
-
-          <div class="dropdown__content dropdown__content--left" data-dropdown-content>
-            <% if revision.post.user == current_user %>
-              <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "dropdown__item" %>
+<div class="revision">
+  <div class="item item--single mt-half">
+    <div class="item__title item__title--small">
+      <div>
+        <% if revision.post.user == current_user || revision.snippet.present? %>
+          <div class="dropdown mr-quarter" data-dropdown>
+            <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
+              <%= inline_svg "icons/icon-menu.svg", height: 16 %>
             <% end %>
 
-            <% if revision.snippet.present? %>
-              <%= link_to "View changes in snippet", difference_path(revision.id), class: "dropdown__item" %>
-              <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "dropdown__item" %>
-            <% end %>
+            <div class="dropdown__content dropdown__content--left" data-dropdown-content>
+              <% if revision.post.user == current_user %>
+                <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "dropdown__item" %>
+              <% end %>
+
+              <% if revision.snippet.present? %>
+                <%= link_to "View changes in snippet", difference_path(revision.id), class: "dropdown__item" %>
+                <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "dropdown__item" %>
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
 
-      <%= revision.version unless revision.version.empty? %>
+        <%= revision.version unless revision.version.empty? %>
+      </div>
+
+      <small class="ml-auto">
+        <span title="Created at: <%= revision.created_at %> <%= "| Last updated at: " + revision.updated_at.to_s if revision.updated_at != revision.created_at %>" data-role="timeago" datetime="<%= revision.created_at %>"></span>
+
+        <% if revision.created_at < 6.months.ago %>
+          <small class="tooltip">
+            ⚠
+
+            <div class="tooltip__content">
+              <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+            </div>
+          </small>
+        <% end %>
+      </small>
     </div>
 
-    <small class="ml-auto">
-      <span title="Created at: <%= revision.created_at %>" data-role="timeago" datetime="<%= revision.created_at %>"></span>
+    <div class="item__code">
+      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
 
-      <% if revision.created_at < 6.months.ago %>
-        <small class="tooltip">
-          ⚠
-
-          <div class="tooltip__content">
-            <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
-          </div>
-        </small>
-      <% end %>
-    </small>
+      <span class="copy">
+        <span data-copy="<%= revision.code %>" data-track-copy><%= revision.code %></span>
+      </span>
+    </div>
   </div>
 
-  <div class="item__code">
-    <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
-
-    <span class="copy">
-      <span data-copy="<%= revision.code %>" data-track-copy><%= revision.code %></span>
-    </span>
-  </div>
+  <% unless revision.description.blank? %>
+    <div class="item__description revision__description mt-0">
+      <%= markdown(revision.description) %>
+    </div>
+  <% end %>
 </div>
-
-<% unless revision.description.blank? %>
-  <div class="item__description mt-0">
-    <%= markdown(revision.description) %>
-  </div>
-<% end %>

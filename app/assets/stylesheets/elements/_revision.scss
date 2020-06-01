@@ -1,0 +1,21 @@
+.revision .item {
+  margin-bottom: 0;
+}
+
+.revision__description {
+  border: 1px solid $border-color;
+  border-top: 0;
+  padding: $margin / 4;
+
+  @include media-min(lg) {
+    padding: $margin / 2;
+  }
+
+  *:first-child {
+    margin-top: 0;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -2,7 +2,7 @@ table {
   width: 100%;
   border-spacing: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     display: block;
     overflow-x: auto;
   }
