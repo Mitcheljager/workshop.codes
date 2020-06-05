@@ -316,7 +316,7 @@ GEM
       railties (>= 6.0.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     win32-security (0.5.0)
       ffi
       ffi-win32-extensions
