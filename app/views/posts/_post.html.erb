@@ -1,4 +1,4 @@
-<% cache_unless current_user, post, expires_in: 1.week do %>
+<% cache_unless current_user, post do %>
   <article class="item">
     <div class="item__title">
       <%= link_to post.title, post_path(post.code) %>

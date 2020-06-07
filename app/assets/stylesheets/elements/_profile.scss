@@ -140,6 +140,7 @@
   align-items: center;
   margin: $margin 0;
   text-align: center;
+  overflow-wrap: break-word;
 
   @include media-min(sm) {
     display: flex;
