@@ -49,7 +49,6 @@ class PostsController < ApplicationController
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
-
     unless @post.present?
       revision = Revision.find_by_code(params[:code])
       @post = revision.post if revision
@@ -59,7 +58,7 @@ class PostsController < ApplicationController
     not_found and return unless @post.present?
 
     set_post_images
-    @is_expired = @post.updated_at < 6.months.ago && ((@post.revisions.any? && @post.revisions.last.created_at < 6.months.ago) || @post.revisions.none?)
+    @is_expired = @post.revisions.where("created_at > ?", 6.months.ago).none?
 
     respond_to do |format|
       format.html
