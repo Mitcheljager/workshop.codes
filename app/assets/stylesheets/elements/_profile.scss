@@ -68,11 +68,13 @@
     }
   }
 
-  img {
-    height: 48px;
+  img,
+  svg {
+    height: 36px;
 
     @media (min-width: 1000px) {
-      height: 34px;
+      height: 24px;
+      margin-top: 4px;
     }
   }
 }
