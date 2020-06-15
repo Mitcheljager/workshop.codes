@@ -1,0 +1,45 @@
+<%= render "navigation" %>
+
+<div class="heading mt-half mb-0">
+  <h2><strong><%= @user.username %></strong> <small>(#<%= @user.id %>)</small></h2>
+</div>
+
+<div class="well">
+  <%= form_for @user, url: admin_update_user_path do |form| %>
+    <% if flash[:alert] %>
+      <div class="warning mt-0 mb-quarter"><mark><%= flash[:alert] %></mark></div>
+    <% end %>
+
+    <%= form.label :level, class: "form-label" %>
+    <%= form.select :level, User.levels.keys.to_a, {}, class: "form-select width-auto" %>
+
+    <div class="mt-quarter">
+      <%= form.submit class: "button button--small button--secondary" %>
+    </div>
+  <% end %>
+</div>
+
+<table class="width-auto mt-full">
+  <tr><td>Posts</td> <td><%= @user.posts.size %></td></tr>
+  <tr><td>Favorites</td> <td><%= @user.favorites.size %></td></tr>
+  <tr><td>Comments</td> <td><%= @user.comments.size %></td></tr>
+  <tr><td>Collections</td> <td><%= @user.collections.size %></td></tr>
+  <tr><td>Notifications</td> <td><%= @user.notifications.size %></td></tr>
+  <tr><td>Activities</td> <td><%= @user.activities.size %></td></tr>
+  <tr><td>Remember tokens</td> <td><%= @user.remember_tokens.size %></td></tr>
+  <tr><td>Forgot password tokens</td> <td><%= @user.forgot_password_tokens.size %></td></tr>
+</table>
+
+
+<h3 class="mt-full">Posts by <%= @user.username %></h3>
+
+<table class="width-auto">
+  <% @user.posts.each do |post| %>
+    <tr>
+      <td><strong><%= link_to post.code, post_path(post.code) %></strong></td>
+      <td><%= link_to post.title, admin_post_path(post.id) %><td>
+    </tr>
+  <% end %>
+
+  <tr><td><%= "No posts" if @user.posts.none? %></td></tr>
+</table>

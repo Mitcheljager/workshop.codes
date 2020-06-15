@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_002839) do
+ActiveRecord::Schema.define(version: 2020_06_15_183423) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -221,6 +221,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_002839) do
     t.boolean "high_contrast", default: false
     t.boolean "large_fonts", default: false
     t.boolean "simple_view", default: false
+    t.integer "level", default: 0
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

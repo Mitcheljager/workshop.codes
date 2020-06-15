@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   include ActivitiesHelper
+  include UsersHelper
 
   before_action only: [:new, :create] do
     redirect_to root_path if current_user
@@ -16,6 +17,8 @@ class SessionsController < ApplicationController
     end
 
     if (@user && @user.provider.nil? && @user.authenticate(params[:password])) || (auth_hash.present? && @user)
+      reject_banned_user and return if is_banned?(@user)
+
       generate_remember_token if params[:remember_me].present? && params[:remember_me] != "0"
       session[:user_id] = @user.id
 
@@ -48,6 +51,11 @@ class SessionsController < ApplicationController
   def generate_remember_token
     token = SecureRandom.base64
     RememberToken.create(user_id: @user.id, token: token)
+  end
+
+  def reject_banned_user
+    flash[:alert] = "Your account has been banned"
+    redirect_to login_path
   end
 
   def auth_hash

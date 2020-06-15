@@ -2,6 +2,9 @@
 
 <h3 class="mt-0">Post: <strong><%= @post.title %></strong></h3>
 <p>Code: <strong><%= link_to @post.code, post_path(@post.code) %></strong>
+<p>Created at: <strong><%= @post.created_at %></strong>
+<p>Updated at: <strong><%= @post.created_at %></strong>
+
 <br><br>
 <p>Total revisions: <strong><%= @post.revisions.size %></strong></p>
 <p>Total comments: <strong><%= @post.comments.size %></strong></p>

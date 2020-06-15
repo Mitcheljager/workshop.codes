@@ -18,7 +18,6 @@ Rails.application.routes.draw do
 
   get "admin", to: "admin#index", as: "admin"
   namespace :admin do
-    get "post/:id", action: "post", as: "post"
     get "posts"
     get "comments"
     get "favorites"
@@ -26,6 +25,11 @@ Rails.application.routes.draw do
     get "notifications"
     get "email_notifications"
     get "activities"
+    get "post/:id", action: "post", as: "post"
+    get "user/:id", action: "user", as: "user"
+    patch "user/:id", action: "update_user", as: "update_user"
+    post "users", action: "find_user", as: "find_user"
+    post "posts", action: "find_post", as: "find_post"
   end
 
   resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
