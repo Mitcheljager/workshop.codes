@@ -17,10 +17,11 @@
 .profile__action {
   display: block;
   margin: .5rem 0;
-  font-size: 24px;
+  font-size: 21px;
   color: $text-color;
   text-decoration: none;
-  font-family: "bignoodletitlingregular", $font-stack;
+  font-family: "Barlow Condensed", $font-stack;
+  text-transform: uppercase;
 
   &:hover,
   &:active {

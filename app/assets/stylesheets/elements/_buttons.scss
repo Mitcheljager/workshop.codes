@@ -4,8 +4,9 @@
   border: 0;
   background: $primary;
   color: $pure-white;
-  font-size: 21px;
-  font-family: "bignoodletitlingregular", $font-stack;
+  font-size: 19px;
+  font-family: "Barlow Condensed", $font-stack;
+  text-transform: uppercase;
   text-decoration: none;
   text-align: center;
   box-shadow: inset 0 0 0 1px lighten($primary, 15%);
