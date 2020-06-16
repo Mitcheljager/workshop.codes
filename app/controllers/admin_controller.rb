@@ -1,6 +1,8 @@
 class AdminController < ApplicationController
+  include UsersHelper
+
   before_action do
-    redirect_to root_path unless current_user && current_user.username == "admin"
+    redirect_to root_path unless is_admin?(current_user)
   end
 
   def index
@@ -13,19 +15,45 @@ class AdminController < ApplicationController
     @copies = Statistic.where(content_type: :copy).order(created_at: :asc)
   end
 
+  def posts
+    @posts = Post.order((params[:order].present? ? params[:order] : "created_at") + " DESC").page(params[:page])
+  end
+
   def post
     @post = Post.find(params[:id])
     @views = Statistic.where(model_id: @post.id).where(content_type: :visit).order(created_at: :asc)
     @copies = Statistic.where(model_id: @post.id).where(content_type: :copy).order(created_at: :asc)
   end
 
-  def posts
-    @posts = Post.order((params[:order].present? ? params[:order] : "created_at") + " DESC").page(params[:page])
+  def find_post
+    @post = Post.find_by_title!(params[:title])
+    redirect_to admin_post_path(@post.id)
   end
 
   def users
     @users = User.order(created_at: :desc).page(params[:page])
     @users = @users.where(params[:where], true).or(@users.where.not(params[:where] => ["", false, nil])) if params[:where].present?
+  end
+
+  def user
+    @user = User.find(params[:id])
+  end
+
+  def find_user
+    @user = User.find_by_username!(params[:username])
+    redirect_to admin_user_path(@user.id)
+  end
+
+  def update_user
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      flash[:alert] = "User saved"
+    else
+      flash[:alert] = "Something went wrong when saving"
+    end
+
+    redirect_to admin_user_path(@user.id)
   end
 
   def comments
@@ -47,5 +75,11 @@ class AdminController < ApplicationController
 
   def activities
     @activities = Activity.order(created_at: :desc).page(params[:page])
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:level)
   end
 end

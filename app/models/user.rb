@@ -26,6 +26,8 @@ class User < ApplicationRecord
 
   serialize :featured_posts
 
+  enum level: { regular: 0, admin: 1, banned: 2 }
+
   encrypts :email
   blind_index :email
 

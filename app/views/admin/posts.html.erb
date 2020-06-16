@@ -4,7 +4,14 @@
 <p>Last post: <strong><%= time_ago_in_words(@posts.first.created_at).humanize %></strong></p>
 <p>Posts in last 7 days: <strong><%= Post.where("created_at > ?", 1.week.ago).size %></strong></p>
 
-<hr>
+<%= form_tag url: admin_find_post_path do %>
+  <div class="flex mb-quarter">
+    <%= label_tag :title, "", class: "form-label" %>
+    <%= text_field_tag :title, "", class: "form-input width-auto mr-quarter", placeholder: "Find by exact title" %>
+
+    <%= submit_tag "Search", class: "button button--small button--secondary" %>
+  </div>
+<% end %>
 
 <table>
   <tr>

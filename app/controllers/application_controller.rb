@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include ActivitiesHelper
+  include UsersHelper
 
   protect_from_forgery with: :exception
   before_action :login_from_cookie
+  before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
 
   def login_from_cookie
@@ -18,6 +20,10 @@ class ApplicationController < ActionController::Base
         create_activity(:login_from_cookie, { ip_address: last_4_digits_of_request_ip })
       end
     end
+  end
+
+  def reject_if_banned
+    reset_session if current_user.present? && current_user.level == "banned"
   end
 
   helper_method :current_user

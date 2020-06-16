@@ -15,30 +15,17 @@
     <% end %>
 
     <%= render "og_tags" %>
+    <%= render "favicons" %>
 
     <link rel="canonical" href="<%= non_www_url %>" />
     <link rel="manifest" href="/manifest.json">
-
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-512x512.png" %>" sizes="512x512" />
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-192x192.png" %>" sizes="192x192" />
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-32x32.png" %>" sizes="32x32" />
-    <link rel="icon" type="image/png" href="<%= image_path "favicon/favicon-16x16.png" %>" sizes="16x16" />
-    <link rel="apple-touch-icon" href="<%= image_path "favicon/apple-touch-icon.png" %>" sizes="180x180" />
-
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
     <%= inline_css "application.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
-    <% if current_user %>
-      <%= inline_css "form.css" %>
-      <%= inline_js "uploader.js" %>
-      <%= javascript_include_tag "form.js", "data-turbolinks-track": "reload" %>
-      <%= render "remember_me_cookie" if current_user.remember_tokens.any? %>
-    <% end %>
-
+    <%= render "logged_in_user_assets" if current_user %>
     <%= render "destroy_remember_me_cookie" if !current_user && cookies[:remember_token] %>
-
     <%= render "analytics_code" %>
   </head>
 
@@ -47,7 +34,7 @@
 
     <%= render "header" %>
 
-    <div class="wrapper<%= " wrapper--large" if controller_name == "admin" %>">
+    <div class="wrapper <%= "wrapper--large" if controller_name == "admin" %>">
       <%= render "filter" %>
 
       <%= yield %>

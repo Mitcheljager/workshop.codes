@@ -3,12 +3,20 @@
 <p>Total users: <strong><%= User.all.size %></strong></p>
 <p>Users in last 7 days: <strong><%= User.where("created_at > ?", 1.week.ago).size %></strong></p>
 
-<hr>
+<%= form_tag url: admin_find_user_path do %>
+  <div class="flex mb-quarter">
+    <%= label_tag :username, "", class: "form-label" %>
+    <%= text_field_tag :username, "", class: "form-input width-auto mr-quarter", placeholder: "Find by exact username" %>
+
+    <%= submit_tag "Search", class: "button button--small button--secondary" %>
+  </div>
+<% end %>
 
 <table>
   <tr>
     <th><%= link_to "ID", admin_users_path %></th>
     <th>Username</th>
+    <th>Level</th>
     <th><%= link_to "Provider", admin_users_path(where: "provider") %></th>
     <th><%= link_to "Email?", admin_users_path(where: "email_ciphertext") %></th>
     <th>Img?</th>
@@ -25,8 +33,9 @@
 
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.id %></td>
+      <td><%= link_to user.id, admin_user_path(user.id) %></td>
       <td><small><%= link_to user.username, user_path(user.username) %></small></td>
+      <td><%= user.level %></td>
       <td><small><%= user.provider %></small></td>
       <td><%= "✔" if user.email.present? %></td>
       <td><%= "✔" if user.profile_image.attached? %></td>
