@@ -11,6 +11,8 @@
     <div class="well">
       <div class="w-100">
         <%= form_with url: sessions_path do |form| %>
+          <%= form.hidden_field :elohell, value: params[:elohell] if params[:elohell].present? %>
+
           <div class="form-group">
             <%= form.label :username, "Username", class: "form-label" %>
             <%= form.text_field :username, placeholder: "Username", class: "form-input" %>
@@ -35,12 +37,12 @@
 
         <hr class="mt-half mb-quarter">
 
-        <%= link_to "/auth/discord", class: "button button--discord mt-quarter" do %>
+        <%= link_to "/auth/discord#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--discord mt-quarter" do %>
           <%= inline_svg "discord.svg", height: 24 %>
           Login with Discord
         <% end %>
 
-        <%= link_to "/auth/bnet", class: "button button--bnet mt-eigth" do %>
+        <%= link_to "/auth/bnet#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--bnet mt-eigth" do %>
           <%= inline_svg "bnet.svg", height: 24 %>
           Login with Battle.net
         <% end %>

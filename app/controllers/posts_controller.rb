@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  require "httparty"
+
   include EmailNotificationsHelper
 
   before_action :set_post, only: [:edit, :update, :destroy]
@@ -6,13 +8,13 @@ class PostsController < ApplicationController
   skip_before_action :track_ahoy_visit
 
   before_action only: [:edit, :update, :destroy] do
-    redirect_to root_path unless current_user && current_user == @post.user
+    redirect_to login_path unless current_user && current_user == @post.user
   end
 
   before_action :set_order, only: [:category, :hero, :map]
 
   before_action only: [:create, :new] do
-    redirect_to root_path unless current_user
+    redirect_to login_path(elohell: params[:elohell]) unless current_user
   end
 
   after_action :track_action, only: [:show]
@@ -76,6 +78,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+
+    set_elohell_data if params[:elohell].present?
   end
 
   def edit
@@ -226,6 +230,20 @@ class PostsController < ApplicationController
       @post.email_notifications.destroy_all
     elsif email_notification_enabled
       create_email_notification(:will_expire, @post.id, post_params[:email])
+    end
+  end
+
+  def set_elohell_data
+    url = "https://workshop.elohell.dev/#{ params[:elohell] }/.json"
+    response = HTTParty.get(url, timeout: 5, verify: false)
+
+    if response
+      @post.code = response.parsed_response["code"]
+      @post.title = response.parsed_response["title"]
+      @post.description = response.parsed_response["description"]
+      @post.snippet = response.parsed_response["snippet"]
+      @post.version = response.parsed_response["version"]
+      @post.tags = response.parsed_response["tags"]
     end
   end
 end
