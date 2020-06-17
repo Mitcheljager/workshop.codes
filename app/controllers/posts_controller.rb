@@ -62,7 +62,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @post, except: [:id, :user_id, :image_order, :favorites_count, :impressions_count, :hotness] }
+      format.json {
+        set_request_headers
+        render json: @post, except: [:id, :user_id, :image_order, :favorites_count, :impressions_count, :hotness]
+      }
     end
   end
 
@@ -227,5 +230,9 @@ class PostsController < ApplicationController
     elsif email_notification_enabled
       create_email_notification(:will_expire, @post.id, post_params[:email])
     end
+  end
+
+  def set_request_headers
+    headers["Access-Control-Allow-Origin"] = "*"
   end
 end
