@@ -2,6 +2,6 @@
 
 <h1 class="heading">Create an account</h1>
 
-<%= render "form", user: @user, url: users_path %>
+<%= render "form", user: @user, url: users_path(elohell: params[:elohell]) %>
 
 <p><small>Already have an account? <%= link_to "Log in", login_path %></small></p>

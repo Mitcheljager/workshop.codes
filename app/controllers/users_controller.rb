@@ -35,7 +35,12 @@ class UsersController < ApplicationController
       generate_remember_token if params[:remember_me]
 
       create_activity(:create_user, { ip_address: last_4_digits_of_request_ip })
-      redirect_to account_path
+      
+      if params[:elohell].present?
+        redirect_to new_post_path(elohell: params[:elohell])
+      else
+        redirect_to account_path
+      end
     else
       render :new
     end
