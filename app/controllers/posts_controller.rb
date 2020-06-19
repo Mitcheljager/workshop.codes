@@ -237,7 +237,7 @@ class PostsController < ApplicationController
   end
 
   def set_elohell_data
-    url = "https://workshop.elohell.dev/#{ params[:elohell] }/.json"
+    url = "https://workshop.elohell.gg/#{ params[:elohell] }/.json"
     response = HTTParty.get(url, timeout: 5, verify: false)
 
     if response
