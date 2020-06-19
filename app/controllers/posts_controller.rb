@@ -8,7 +8,11 @@ class PostsController < ApplicationController
   skip_before_action :track_ahoy_visit
 
   before_action only: [:edit, :update, :destroy] do
-    redirect_to login_path unless current_user && current_user == @post.user
+    if @post.present?
+      redirect_to login_path unless current_user && current_user == @post.user
+    else
+      redirect_to root_path
+    end
   end
 
   before_action :set_order, only: [:category, :hero, :map]
