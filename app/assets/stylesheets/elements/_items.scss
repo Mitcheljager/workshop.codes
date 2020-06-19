@@ -170,10 +170,10 @@
   justify-content: center;
   padding: $margin / 6 0;
   background: $bg-dark image-url("layout/pattern-bg-light.webp");
-  font-family: "bignoodletitlingregular", $font-stack;
-  font-style: italic;
-  font-size: 36px;
-  line-height: 1em;
+  font-family: "Barlow Condensed", $font-stack;
+  text-transform: uppercase;
+  font-size: 32px;
+  line-height: 1.25em;
   color: $white;
 
   .item--extra-small & {
@@ -242,9 +242,10 @@
   align-items: center;
   justify-content: space-between;
   padding: $margin / 6 0;
-  font-family: "bignoodletitlingregular", $font-stack;
+  font-family: "Barlow Condensed", $font-stack;
+  text-transform: uppercase;
   font-style: italic;
-  font-size: 24px;
+  font-size: 20px;
   color: $text-color-dark;
   text-decoration: none;
   transition: padding 100ms;

@@ -2,4 +2,6 @@
 
 <h1 class="heading"><strong>Create new</strong> Workshop Code</h1>
 
+<%= render "elohell_alert" if params[:elohell].present? %>
+
 <%= render "form", post: @post, path: posts_path %>

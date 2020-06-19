@@ -12,12 +12,14 @@ function toggleMarkdownPreview(event) {
   const markdownElement = document.querySelector("[data-role='markdown-preview']")
   const descriptionElement = document.querySelector("[data-role='markdown-preview-wrapper']")
 
-  if (this.innerText == "Show Preview") {
+  if (this.dataset.active != "false") {
+    this.dataset.active = "false"
     this.innerText = "Back to editing"
     descriptionElement.style.display = "none"
 
     sendParseRequest(descriptionElement, markdownElement)
   } else {
+    this.dataset.active = "true"
     descriptionElement.style.display = "block"
     markdownElement.innerHTML = ""
 

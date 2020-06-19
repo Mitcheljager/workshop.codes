@@ -18,10 +18,10 @@ function createChart(element) {
       datasets: [{
         label: "",
         data: JSON.parse(element.dataset.values),
-        backgroundColor: "rgba(240, 100, 20, 1)",
-        borderColor: "rgba(240, 100, 20, 1)",
+        backgroundColor: "rgba(63, 191, 116, 1)",
+        borderColor: "rgba(63, 191, 116, 1)",
         borderWidth: 1,
-        pointBackgroundColor: "rgba(240, 100, 20, 1)",
+        pointBackgroundColor: "rgba(63, 191, 116, 1)",
         pointRadius: JSON.parse(element.dataset.values).map(p => p == 0 ? 0 : 3)
       }]
     },

@@ -50,16 +50,16 @@
     }
 
     @include media-min(lg) {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     strong {
       color: $white;
-      font-size: 21px;
+      font-size: 20px;
       font-weight: lighter;
 
       @include media-min(md) {
-        font-size: 24px;
+        font-size: 22px;
       }
     }
 

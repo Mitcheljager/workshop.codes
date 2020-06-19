@@ -3,7 +3,7 @@ $pure-white: #fff;
 $black: #000;
 $red: #b33834;
 $body-bg: #1f2326;
-$primary: #f06414;
+$primary: #3fbf74;
 $bg-dark: #353b3f;
 $text-color: var(--text-color);
 $text-color-light: var(--text-color-light);
@@ -13,7 +13,7 @@ $discord: #7289DA;
 $bnet: #0288d1;
 $ko-fi: #ff5e5b;
 
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-stack: var(--font-stack);
 
 $margin: 60px;
 $logo-height: 80px;
@@ -41,6 +41,7 @@ $gray-dark: #6a7277;
   --text-color-dark: #{ $gray-dark };
   --font-size-base: 16px;
   --font-size-small: 14px;
+  --font-stack: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 }
 
 .high-contrast {
@@ -48,6 +49,7 @@ $gray-dark: #6a7277;
   --text-color: #{ lighten($gray, 15%) };
   --text-color-light: #{ lighten($gray, 10%) };
   --text-color-dark: #{ $gray };
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 }
 
 .large-fonts {
