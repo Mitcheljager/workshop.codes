@@ -48,6 +48,10 @@ module ApplicationHelper
     url.gsub("www.", "")
   end
 
+  def is_wiki?
+    controller_path.split('/').first == "wiki" ? true : false
+  end
+
   def to_slug(string)
     string.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
   end

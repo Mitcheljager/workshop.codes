@@ -1,0 +1,23 @@
+<header class="wiki-header">
+  <div class="wrapper">
+    <h1 class="wiki-header__title">Overwatch Workshop <strong>Wiki</strong></h1>
+
+    <div itemscope itemtype="https://schema.org/WebSite">
+      <meta itemprop="url" content="https://workshop.codes/wiki"/>
+
+      <%= form_tag search_post_path(request.path_parameters), remote: true, class: "search", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction" do %>
+        <meta itemprop="target" content="https://workshop.codes/wiki/search/{query}"/>
+
+        <%= text_field_tag :query, params[:search], class: "form-input form-input--large", placeholder: " ", itemprop: "query-input", required: "true", autocomplete: "off" %>
+
+        <%= label_tag :query do %>
+          <strong>Search </strong> wiki articles by Titles, Tags, and Categories
+        <% end %>
+
+        <%= render "search_terms" if search_terms.any? %>
+
+        <%= submit_tag "", class: "search__submit" %>
+      <% end %>
+    </div>
+  </div>
+</header>

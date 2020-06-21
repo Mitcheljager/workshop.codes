@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_183423) do
+ActiveRecord::Schema.define(version: 2020_06_21_133825) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -232,6 +232,34 @@ ActiveRecord::Schema.define(version: 2020_06_15_183423) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_while_you_waits_on_post_id"
+  end
+
+  create_table "wiki_articles", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "version"
+    t.boolean "approved"
+    t.string "tags"
+    t.integer "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "wiki_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "wiki_edits", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "from_version"
+    t.string "to_version"
+    t.string "concerns_model"
+    t.integer "concerns_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

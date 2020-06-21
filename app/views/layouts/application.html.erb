@@ -14,7 +14,7 @@
       <meta property="og:description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
     <% end %>
 
-    <%= render "og_tags" %>
+    <%= render "application/og_tags" %>
     <%= render "favicons" %>
 
     <link rel="canonical" href="<%= non_www_url %>" />
@@ -33,16 +33,17 @@
     <%= render "notifications/alert" if current_user && unread_notifications.any? %>
 
     <%= render "header" %>
+    <%= render "wiki/header" if is_wiki? %>
 
     <div class="wrapper <%= "wrapper--large" if controller_name == "admin" %>">
-      <%= render "filter" %>
+      <%= render "filter" unless is_wiki? %>
 
       <%= yield %>
 
       <%= render "footer" %>
     </div>
 
-    <%= render "body_bg" %>
+    <%= render "body_bg" unless is_wiki? %>
 
     <% if current_user %>
       <%= inline_js "chart.js" %>

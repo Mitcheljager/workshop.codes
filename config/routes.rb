@@ -32,6 +32,13 @@ Rails.application.routes.draw do
     post "posts", action: "find_post", as: "find_post"
   end
 
+  namespace :wiki do
+    root to: "base#index"
+    resources :categories
+    resources :articles
+    resources :edits
+  end
+
   resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
   get "account(/page/:page)", to: "users#show", as: "account"
   get "account/edit", to: "users#edit", as: "edit_user"
