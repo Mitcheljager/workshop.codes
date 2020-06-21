@@ -130,6 +130,18 @@
     }
   }
 
+  &--active {
+    &::before {
+      background: $pure-white;
+      opacity: 1;
+    }
+
+    &:hover::before {
+      background: $pure-white;
+      opacity: 1;
+    }
+  }
+
   img {
     height: 28px;
 
