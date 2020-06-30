@@ -102,6 +102,8 @@ GEM
     blind_index (2.0.1)
       activesupport (>= 5)
       argon2-kdf (>= 0.1.1)
+    breadcrumbs_on_rails (4.0.0)
+      rails (>= 5.0)
     bugsnag (6.13.0)
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
@@ -343,6 +345,7 @@ DEPENDENCIES
   aws-sdk-s3
   bcrypt
   blind_index
+  breadcrumbs_on_rails
   bugsnag
   byebug
   capybara (~> 2.13)

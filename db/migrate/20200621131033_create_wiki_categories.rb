@@ -1,8 +1,9 @@
 class CreateWikiCategories < ActiveRecord::Migration[6.0]
   def change
     create_table :wiki_categories do |t|
-      t.string :name
+      t.string :title
       t.string :slug
+      t.string :description
 
       t.timestamps
     end

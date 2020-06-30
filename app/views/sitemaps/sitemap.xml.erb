@@ -85,4 +85,26 @@
       <priority>0.85</priority>
     </url>
   <% end %>
+
+  <url>
+    <loc><%= wiki_root_url %></loc>
+    <lastmod>2020-07-01T16:36:16Z</lastmod>
+    <priority>0.95</priority>
+  </url>
+
+  <% @wiki_articles.each do |article| %>
+    <url>
+      <loc><%= wiki_article_url(article.slug) %></loc>
+      <lastmod><%= article.created_at.iso8601 %></lastmod>
+      <priority>0.85</priority>
+    </url>
+  <% end %>
+
+  <% @wiki_categories.each do |category| %>
+    <url>
+      <loc><%= wiki_category_url(category.slug) %></loc>
+      <lastmod><%= category.created_at.iso8601 %></lastmod>
+      <priority>0.85</priority>
+    </url>
+  <% end %>
 </urlset>

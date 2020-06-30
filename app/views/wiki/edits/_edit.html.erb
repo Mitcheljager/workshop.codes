@@ -1,0 +1,11 @@
+<div class="wiki-item">
+  <%= link_to edit.user.username, user_path(edit.user.username) %> <%= edit.content_type %> <%= link_to edit.article.title, wiki_article_path(edit.article.slug) %>
+
+  <div class="wiki-item__tray">
+    <%= time_ago_in_words(edit.created_at).humanize %> ago
+    <% if edit.content_type == "edited" %>
+      |
+      <%= link_to "View difference", wiki_edit_path(edit.id) %>
+    <% end %>
+  </div>
+</div>

@@ -30,6 +30,7 @@ gem "rails_same_site_cookie"
 gem "sucker_punch"
 gem "diffy"
 gem "httparty"
+gem "breadcrumbs_on_rails"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

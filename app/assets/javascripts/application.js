@@ -15,6 +15,7 @@
 //= require microlight
 //= require timeago.js/dist/timeago.min
 
+//= require debounce
 //= require analytics
 //= require dropdown
 //= require copy
@@ -30,3 +31,5 @@
 //= require load-analytics
 //= require load-snippet
 //= require difference-viewer
+//= require modal
+//= require wiki/search

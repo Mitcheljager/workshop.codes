@@ -1,0 +1,41 @@
+.wiki-item {
+  display: block;
+  padding: $margin / 3 0;
+  margin: 0;
+  border-bottom: 1px solid $border-color;
+  font-size: 18px;
+  font-weight: lighter;
+  color: $text-color;
+
+  @include media-min(md) {
+    font-size: 21px;
+  }
+
+  &[href],
+  a {
+    color: $white;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: $pure-white;
+    }
+  }
+
+  &--small {
+    font-size: $font-size-base;
+  }
+
+  small {
+    margin-left: .5em;
+    color: $text-color;
+    font-size: $font-size-base;
+  }
+}
+
+.wiki-item__tray {
+  margin-top: $margin / 8;
+  font-size: 14px;
+  color: $text-color;
+  font-weight: normal;
+}

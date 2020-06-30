@@ -6,11 +6,37 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 285px;
+    height: 190px;
     background: image-url("wiki/bg.jpg");
     background-size: cover;
     z-index: -1;
     box-shadow: 5px 0 25px rgba($black, .25);
+
+    @include media-min(sm) {
+      height: 230px;
+    }
+
+    @media (min-width: 1100px) {
+      height: 285px;
+    }
+  }
+
+  &--small {
+    &::before {
+      height: 135px;
+
+      @include media-min(sm) {
+        height: 155px;
+      }
+
+      @media (min-width: 1100px) {
+        height: 195px;
+      }
+
+      @media (min-width: 1200px) {
+        height: 210px;
+      }
+    }
   }
 }
 
@@ -18,4 +44,9 @@
   color: $pure-white;
   text-align: center;
   margin: 0 0 $margin / 2;
+  font-size: 21px;
+
+  @include media-min(sm) {
+    font-size: 36px;
+  }
 }

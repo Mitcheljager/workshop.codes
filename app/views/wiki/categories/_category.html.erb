@@ -1,0 +1,6 @@
+<%= link_to wiki_category_path(category.slug), class: "card" do %>
+  <h4 class="mt-0 mb-0">
+    <%= category.title %>
+    <small class="text-base">(<%= category.articles.approved.group(:group_id).length %>)</small>
+  </h4>
+<% end %>

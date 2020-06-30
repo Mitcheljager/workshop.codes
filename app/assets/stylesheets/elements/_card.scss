@@ -20,7 +20,15 @@
   text-align: left;
   font-size: 26px;
   color: $white;
-  font-family: "bignoodletitlingregular", $font-stack;
+  text-decoration: none;
+
+  &[href]:hover {
+    border: 1px solid lighten($border-color, 5%);
+
+    &::before {
+      opacity: 1;
+    }
+  }
 }
 
 .card__title {
@@ -31,4 +39,11 @@
   font-size: $font-size-small;
   color: $text-color;
   text-decoration: none;
+}
+
+.card__content {
+  margin-top: 1em;
+  font-size: 14px;
+  font-style: italic;
+  color: $text-color;
 }

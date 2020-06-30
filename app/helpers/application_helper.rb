@@ -2,6 +2,7 @@ module ApplicationHelper
   def markdown(text)
     options = {
       space_after_headers: true,
+      disable_indented_code_blocks: true,
       fenced_code_blocks: true,
       hard_wrap: true,
       link_attributes: { rel: "noreferrer noopener", target: "_blank" }
@@ -9,6 +10,7 @@ module ApplicationHelper
 
     renderer = Redcarpet::Render::HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer,
+      disable_indented_code_blocks: true,
       highlight: true,
       autolink: true,
       lax_spacing: true,

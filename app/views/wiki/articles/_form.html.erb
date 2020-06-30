@@ -1,0 +1,54 @@
+<%= form_for @article do |form| %>
+  <div class="form-group">
+    <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.text_field :subtitle, class: "form-input w-100", placeholder: "Extra title arguments" %>
+
+    <span class="form-hint">
+      Extra title arguments are not taken in to account when searching. Used to provide extra context to the title.
+    </span>
+  </div>
+
+
+  <div class="form-group mt-full">
+    <%= form.label :content, class: "form-label" %>
+
+    <%= link_to "Show Preview", "#", class: "button button--secondary mt-quarter mb-quarter", data: { action: "markdown-preview" } %>
+
+    <div data-role="markdown-preview-wrapper">
+      <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde" } %>
+    </div>
+
+    <div class="item__description" data-role="markdown-preview"></div>
+  </div>
+
+  <div class="form-group-columns mt-full">
+    <div class="form-group">
+      <%= form.label :category_id, class: "form-label" %>
+      <%= form.collection_select :category_id, Wiki::Category.all, :id, :title, { include_hidden: false }, { class: "form-select" } %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :tags, class: "form-label" %>
+      <%= form.text_area :tags, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Separate with ', '" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <% if @article.persisted? %>
+    <div class="form-group">
+      <%= form.label :edit_notes, "Edit notes (Optional)", class: "form-label" %>
+
+      <span class="form-hint">
+        Write a little something on why you are making this change.
+      </span>
+
+      <%= form.text_area :edit_notes, class: "form-input form-textarea form-textarea--extra-small" %>
+    </div>
+  <% end %>
+
+  <%= submit_tag "Submit", class: "button mt-half" %>
+<% end %>

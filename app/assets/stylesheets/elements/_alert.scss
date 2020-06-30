@@ -18,7 +18,7 @@
   color: $pure-white;
   font-size: 12px;
   text-decoration: none;
-  z-index: 100;
+  z-index: 2000;
   animation: move-in-alert 100ms;
 
   &--error {

@@ -1,0 +1,5 @@
+.article-difference {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: $margin / 2;
+}

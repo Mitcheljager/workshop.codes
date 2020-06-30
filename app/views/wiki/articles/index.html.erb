@@ -1,1 +1,17 @@
-<h1>Articles</h1>
+<% content_for :page_title, "Wiki Articles" %>
+
+<div class="action-header top-offset">
+  <h1 class="mt-0"><strong>Wiki</strong> Articles</h1>
+
+  <% if is_arbiter?(current_user) %>
+    <div class="action-header__actions">
+      <%= link_to "New article", new_wiki_article_path, class: "button" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-full">
+  <%= render(@articles) || render("no_results") %>
+</div>
+
+<%= paginate @articles %>

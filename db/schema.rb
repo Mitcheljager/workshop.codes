@@ -236,28 +236,30 @@ ActiveRecord::Schema.define(version: 2020_06_21_133825) do
 
   create_table "wiki_articles", force: :cascade do |t|
     t.string "title"
+    t.string "subtitle"
     t.text "content"
-    t.string "version"
-    t.boolean "approved"
-    t.string "tags"
+    t.string "slug"
+    t.text "tags"
     t.integer "category_id"
+    t.string "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "wiki_categories", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.string "slug"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "wiki_edits", force: :cascade do |t|
     t.integer "user_id"
-    t.string "from_version"
-    t.string "to_version"
-    t.string "concerns_model"
-    t.integer "concerns_id"
+    t.string "article_id"
+    t.integer "content_type"
+    t.text "notes"
+    t.boolean "approved"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

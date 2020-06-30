@@ -34,9 +34,13 @@ Rails.application.routes.draw do
 
   namespace :wiki do
     root to: "base#index"
-    resources :categories
-    resources :articles
-    resources :edits
+    resources :categories, param: :slug, concerns: :paginatable
+    resources :articles, param: :slug, concerns: :paginatable
+    resources :edits, concerns: :paginatable
+    get "edits/article/:group_id", to: "edits#article", as: "article_edits"
+
+    post "search", to: "search#query", as: "search"
+    get "search/:query", to: "search#index", as: "search_results"
   end
 
   resources :users, param: :username, except: [:new, :index, :edit, :update, :show]

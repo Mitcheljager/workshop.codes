@@ -63,6 +63,23 @@
     background: $bnet;
   }
 
+  &--link {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+    color: $white;
+
+    &:hover:not([disabled]),
+    &:active:not([disabled]),
+    &:focus:not([disabled]) {
+      color: $pure-white;
+      box-shadow: none;
+    }
+  }
+
   svg {
     margin-right: .5em;
   }

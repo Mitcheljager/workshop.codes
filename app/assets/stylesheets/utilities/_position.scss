@@ -85,8 +85,20 @@
   }
 }
 
+.mb-lg-0 {
+  @include media-min(lg) {
+    margin-bottom: 0;
+  }
+}
+
 .mt-sm-0 {
   @include media-min(sm) {
+    margin-top: 0;
+  }
+}
+
+.mt-lg-0 {
+  @include media-min(lg) {
     margin-top: 0;
   }
 }

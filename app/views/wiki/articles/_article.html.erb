@@ -1,0 +1,8 @@
+<%= link_to wiki_article_path(article.slug), class: "wiki-item" do %>
+  <%= article.title %>
+
+  <div class="wiki-item__tray">
+    Last edited <%= time_ago_in_words(article.created_at) %> ago |
+    <%= Wiki::Article.where(group_id: article.group_id).size %> edits
+  </div>
+<% end %>

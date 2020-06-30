@@ -44,7 +44,7 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
 end
 
 class Post < ApplicationRecord
-  if Rails.env.production?
+  if true
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
   end
