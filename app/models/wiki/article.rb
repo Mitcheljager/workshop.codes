@@ -1,5 +1,5 @@
 class Wiki::Article < ApplicationRecord
-  if true #Rails.env.production?
+  if Rails.env.production?
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
   end
@@ -31,7 +31,4 @@ class Wiki::Article < ApplicationRecord
   def as_indexed_json(options={})
     self.as_json(include: { category: { only: :title } } )
   end
-
-  Wiki::Article.__elasticsearch__.create_index! force: true
-  Wiki::Article.import(force: true)
 end
