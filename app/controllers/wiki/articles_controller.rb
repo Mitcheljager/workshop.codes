@@ -14,8 +14,8 @@ class Wiki::ArticlesController < Wiki::BaseController
     @article = Wiki::Article.approved.where(slug: params[:slug]).last
 
     not_found and return unless @article
+    redirect_to_latest_article
 
-    @article = Wiki::Article.approved.where(group_id: @article.group_id).last
     @initial_article = Wiki::Article.approved.where(group_id: @article.group_id).first
 
     @edit_ids = Wiki::Article.joins(:edit).approved.where(group_id: @article.group_id).pluck(:"wiki_edits.id")
@@ -92,6 +92,14 @@ class Wiki::ArticlesController < Wiki::BaseController
       return "#{ slug }-#{ random_string }"
     else
       return slug
+    end
+  end
+
+  def redirect_to_latest_article
+    @latest_article = Wiki::Article.approved.where(group_id: @article.group_id).last
+
+    if @latest_article != @article
+      redirect_to wiki_article_path(@latest_article.slug)
     end
   end
 
