@@ -1,20 +1,25 @@
 module ApplicationHelper
+  class HTML < Redcarpet::Render::HTML
+    def block_code(code, language)
+      "<pre><code class='microlight'>#{ code }</code></pre>"
+    end
+  end
+
   def markdown(text)
     options = {
       space_after_headers: true,
-      disable_indented_code_blocks: true,
-      fenced_code_blocks: true,
       hard_wrap: true,
       link_attributes: { rel: "noreferrer noopener", target: "_blank" }
     }
 
-    renderer = Redcarpet::Render::HTML.new(options)
+    renderer = HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer,
       disable_indented_code_blocks: true,
       highlight: true,
       autolink: true,
       lax_spacing: true,
-      tables: true
+      tables: true,
+      fenced_code_blocks: true
     )
 
     iframe = '<div class="video"><iframe class="video__iframe" width="560" height="315" src="https://www.youtube.com/embed/\\1" frameborder="0" allowfullscreen></iframe></div>'
