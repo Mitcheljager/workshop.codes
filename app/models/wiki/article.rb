@@ -6,7 +6,7 @@ class Wiki::Article < ApplicationRecord
 
   belongs_to :category
 
-  has_one :edit
+  has_one :edit, dependent: :destroy
 
   attr_accessor :edit_notes
 

@@ -70,6 +70,14 @@ class Wiki::ArticlesController < Wiki::BaseController
     end
   end
 
+  def destroy
+    @article = Wiki::Article.find(params[:slug])
+
+    @article.destroy
+
+    redirect_to wiki_articles_url
+  end
+
   private
 
   def create_new_article(group_id)

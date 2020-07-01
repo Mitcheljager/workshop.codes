@@ -10,7 +10,7 @@
   <% end %>
 </div>
 
-<% if @category.description %>
+<% if @category.description.present? %>
   <blockquote class="mt-0 mb-0">
     <%= @category.description %>
   </blockquote>

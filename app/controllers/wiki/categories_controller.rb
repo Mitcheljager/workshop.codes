@@ -2,6 +2,10 @@ class Wiki::CategoriesController < Wiki::BaseController
   add_breadcrumb "Articles", :wiki_articles_path
   add_breadcrumb "Categories", :wiki_categories_path
 
+  before_action only: [:new, :create, :edit, :update, :destroy] do
+    redirect_to wiki_root_path unless is_arbiter?(current_user)
+  end
+
   def index
     @categories = Wiki::Category.all
   end
@@ -43,6 +47,16 @@ class Wiki::CategoriesController < Wiki::BaseController
     else
       render file: "application/error.js.erb"
     end
+  end
+
+  def destroy
+    @category = Wiki::Category.find(params[:slug])
+
+    return if @category.articles.count > 0
+
+    @category.destroy
+
+    redirect_to wiki_categories_url
   end
 
   private
