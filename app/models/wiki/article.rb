@@ -1,5 +1,5 @@
 class Wiki::Article < ApplicationRecord
-  if Rails.env.production?
+  if ENV["BONSAI_URL"]
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
   end
