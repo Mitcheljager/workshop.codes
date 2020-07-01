@@ -36,6 +36,16 @@ function setWikiSearchResults(data) {
     itemElement.innerText = item.title
     itemElement.href = `/wiki/articles/${ item.slug }`
 
+    const categoryElement = document.createElement("span")
+    categoryElement.classList.add("search__item-category")
+    categoryElement.innerText = "in " + item.category.title
+
+    itemElement.append(categoryElement)
+
     resultsElement.append(itemElement)
   })
+
+  if (!data.length) {
+    resultsElement.innerText = "No results found"
+  }
 }

@@ -20,7 +20,7 @@ class Wiki::SearchController < Wiki::BaseController
 
     respond_to do |format|
       format.html
-      format.json { render json: @articles }
+      format.json { render json: @articles.to_json(include: :category) }
     end
   end
 end
