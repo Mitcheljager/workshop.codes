@@ -415,4 +415,15 @@
       margin-bottom: 0;
     }
   }
+
+  pre {
+    @include styled-scrollbar;
+    width: 100%;
+    overflow-x: auto;
+    tab-size: 2;
+
+    code {
+      white-space: pre;
+    }
+  }
 }
