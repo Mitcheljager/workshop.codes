@@ -55,19 +55,19 @@ class PostsController < ApplicationController
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
-    unless @post.present?
-      revision = Revision.find_by_code(params[:code])
-      @post = revision.post if revision
-      redirect_to post_path(revision.post.code) if revision
-    end
-
-    not_found and return unless @post.present?
-
-    set_post_images
-    @is_expired = @post.revisions.where("created_at > ?", 6.months.ago).none?
-
     respond_to do |format|
-      format.html
+      format.html {
+        unless @post.present?
+          revision = Revision.find_by_code(params[:code])
+          @post = revision.post if revision
+          redirect_to post_path(revision.post.code) if revision
+        end
+
+        not_found and return unless @post.present?
+
+        set_post_images
+        @is_expired = @post.revisions.where("created_at > ?", 6.months.ago).none?
+      }
       format.json {
         set_request_headers
         render json: @post, except: [:id, :user_id, :image_order, :favorites_count, :impressions_count, :hotness]
