@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.1 512">
+  <defs/>
+  <defs>
+    <clipPath id="clip-path">
+      <path d="M0 1.1h512v512H0z"/>
+    </clipPath>
+    <style>
+      .cls-1{fill:#19994e}.cls-1,.cls-2,.cls-3{fill-rule:evenodd}.cls-2{fill:#23a358}.cls-3{fill:#000}@media (prefers-color-scheme:dark){.cls-3{fill:#fff}}
+    </style>
+  </defs>
+  <g clip-path="url(#clip-path)">
+    <g id="favicon">
+      <path id="Color_Fill_2" d="M381.7 253.9L210.3 462h131l170.8-208.1" class="cls-1" data-name="Color Fill 2" transform="translate(0 1.1)"/>
+      <path id="Color_Fill_2_copy" d="M512 254.9L341.5 47.7h-131L381.6 255" class="cls-2" data-name="Color Fill 2 copy" transform="translate(0 1.1)"/>
+      <path id="Color_Fill_3" d="M92 247.8l-16 18.6 142.6 74.1 12.8-15.3-54.3-101 98.4 51.8 13.5-14.7-79.3-146.4L193 134l55 101-98.5-51-12.8 14 55 100.3z" class="cls-3" data-name="Color Fill 3" transform="translate(0 1.1)"/>
+      <path id="Color_Fill_4" d="M0 253.6L121.5 118l-108 135.5L115 380.8z" class="cls-2" data-name="Color Fill 4" transform="translate(0 1.1)"/>
+    </g>
+  </g>
+</svg>
