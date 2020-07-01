@@ -1,17 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+article_one:
   title: MyString
+  subtitle: string
+  slug: slug
   content: MyText
-  version: 1
-  approved: false
   tags: MyString
-  category_id: 1
+  category: category_one
+  group_id: abc
 
-two:
-  title: MyString
+article_two:
+  title: MyString2
+  slug: slug-2
   content: MyText
-  version: 1
-  approved: false
   tags: MyString
-  category_id: 1
+  category: category_one
+  group_id: dfg
