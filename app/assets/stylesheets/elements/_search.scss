@@ -113,10 +113,12 @@
   z-index: 1;
   overflow: hidden;
   transition: max-height 200ms, box-shadow 50ms;
+  transition-delay: 50ms;
 
   @include styled-scrollbar;
 
-  input:focus + label + & {
+  input:focus + label + &,
+  &:active {
     display: block;
     max-height: 400px;
     box-shadow: 0 20px 20px 0 rgba($black, .25), 0 6px 6px 0 rgba($black, .25);
