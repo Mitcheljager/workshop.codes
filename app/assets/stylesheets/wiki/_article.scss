@@ -65,5 +65,10 @@
   a {
     color: $white;
     text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: $pure-white;
+    }
   }
 }
