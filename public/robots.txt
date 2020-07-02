@@ -19,6 +19,7 @@ User-agent: SemrushBot-BM
 Disallow: /
 
 User-agent:*
+Disallow: wiki
 Disallow: */to/
 Disallow: */from/
 Disallow: */sort/

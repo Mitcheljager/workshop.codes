@@ -13,7 +13,7 @@
         <%= link_to "Recent", posts_path(1), class: "header__item #{ "header__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
         <%= link_to "On Fire", on_fire_path, class: "header__item #{ "header__item--active" if action_name == "on_fire" }" %>
         <%= link_to "While you wait", while_you_wait_path, class: "header__item #{ "header__item--active" if controller_name == "while_you_waits" }" %>
-        <%= link_to "Wiki", wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" %>
+        <%= link_to "Wiki", wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" if false %>
       </nav>
 
       <%= render "profile_block" %>
