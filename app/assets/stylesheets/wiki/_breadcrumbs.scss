@@ -1,6 +1,7 @@
 .breadcrumbs {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin-top: $margin / 4;
   font-size: 14px;
   line-height: 1.5em;
