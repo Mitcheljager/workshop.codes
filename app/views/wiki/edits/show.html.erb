@@ -10,11 +10,6 @@
   </div>
 <% end %>
 
-<%= @edit.article.id %>
-<%= @previous_article.id %>
-
-<%= Wiki::Article.approved.where(group_id: @edit.article.group_id).where("id < ?", @edit.id).count %>
-
 <article class="article-difference">
   <div class="article-difference__column">
     <h3>Title</h3>
