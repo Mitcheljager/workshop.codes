@@ -1,0 +1,32 @@
+.wiki-cards {
+  display: grid;
+  grid-gap: $margin / 4;
+
+  @include media-min(md) {
+    grid-gap: $margin / 2;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wiki-card {
+  display: flex;
+  flex-direction: column;
+  font-size: $font-size-base;
+}
+
+.wiki-card__item {
+  display: block;
+  padding: $margin / 4 0;
+  border-bottom: 1px solid $border-color;
+  font-size: $font-size-small;
+  color: $text-color;
+
+  &:last-of-type {
+    margin-bottom: $margin / 3;
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+}

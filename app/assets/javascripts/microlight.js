@@ -8,7 +8,6 @@
  * Code structure aims at minimizing the compressed library size
  */
 
-
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['exports'], factory);
@@ -176,9 +175,7 @@
 
     exports.reset = reset;
 
-    if (_document.readyState == 'complete') {
-        reset();
-    } else {
-        _window.addEventListener('load', function(){reset()}, 0);
-    }
+    document.addEventListener("turbolinks:load", function() {
+      reset();
+    })
 }));

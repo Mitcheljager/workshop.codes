@@ -20,13 +20,14 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :forgot_password_tokens, dependent: :destroy
   has_many :collections, dependent: :destroy
+  has_many :wiki_edits, dependent: :destroy
 
   has_one_attached :profile_image, dependent: :destroy
   has_one_attached :banner_image, dependent: :destroy
 
   serialize :featured_posts
 
-  enum level: { regular: 0, admin: 1, banned: 2 }
+  enum level: { regular: 0, admin: 1, banned: 2, arbiter: 3 }
 
   encrypts :email
   blind_index :email

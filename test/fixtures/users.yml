@@ -1,5 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 user_one:
-  username: "test"
+  username: test
   password_digest: <%= BCrypt::Password.create("password") %>
+  level: arbiter

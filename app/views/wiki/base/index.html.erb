@@ -1,0 +1,38 @@
+<% content_for :page_title, "Wiki" %>
+
+<%= render "arbiter_banner" if is_arbiter?(current_user) %>
+
+<blockquote class="mt-full mb-0">
+  <strong>Welcome to the Overwatch Workshop Wiki.</strong> Here you will find in-depth information about the various aspects of the Overwatch Workshop. From events, conditions and actions, to effects and other details.
+  We're still in the process of filling out the Wiki. In the future anyone will be able to contribute.
+</blockquote>
+
+<div class="cards mt-full">
+  <%= render @categories %>
+</div>
+
+<div class="wiki-cards mt-full">
+  <div class="wiki-card">
+    <h3 class="mt-0">Latest Articles</h3>
+
+    <% @articles.each do |article| %>
+      <div class="wiki-card__item">
+        <%= link_to article.title, wiki_article_path(article.slug) %> in <%= link_to article.category.title, wiki_category_path(article.category.slug) %>
+      </div>
+    <% end %>
+
+    <%= link_to "View all articles", wiki_articles_path, class: "button button--link" %>
+  </div>
+
+  <div class="wiki-card">
+    <h3 class="mt-0">Latest Changes</h3>
+
+    <% @edits.each do |edit| %>
+      <div class="wiki-card__item">
+        <%= link_to edit.user.username, user_path(edit.user.username) %> <%= edit.content_type %> <%= link_to edit.article.title, wiki_article_path(edit.article.slug) %>
+      </div>
+    <% end %>
+
+    <%= link_to "View all changes", wiki_edits_path, class: "button button--link" %>
+  </div>
+</div>

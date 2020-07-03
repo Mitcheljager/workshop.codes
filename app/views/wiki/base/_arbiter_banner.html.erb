@@ -1,0 +1,7 @@
+<div class="mt-full well">
+  <div class="mb-quarter mb-lg-0">
+    Hello there, <strong><%= current_user.username %></strong>. Your role allows you to create and edit all articles.
+  </div>
+
+  <%= link_to "Create new article", new_wiki_article_path, class: "button" %>
+</div>

@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+article_one:
+  title: MyString
+  subtitle: string
+  slug: slug
+  content: MyText
+  tags: MyString
+  category: category_one
+  group_id: abc
+
+article_two:
+  title: MyString2
+  slug: slug-2
+  content: MyText
+  tags: MyString
+  category: category_one
+  group_id: dfg

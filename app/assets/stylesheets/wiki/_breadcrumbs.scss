@@ -1,0 +1,28 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: $margin / 4;
+  font-size: 14px;
+  line-height: 1.5em;
+
+  a,
+  span {
+    @include media-min(sm) {
+      font-size: 18px;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+
+  span {
+    margin: 0 $margin / 8;
+  }
+}

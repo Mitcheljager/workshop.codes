@@ -30,7 +30,7 @@
 .diff{overflow:auto; counter-reset: diff; color: $text-color-light}
 .diff ul{overflow:auto;font-size:$font-size-small;list-style:none;margin:0;padding:0;display:table;width:100%;}
 .diff del, .diff ins{display:block;text-decoration:none;}
-.diff li{padding: .1em .1em .1em 4em; display:block;margin: 0; position: relative; min-height: 1.4em; line-height: 1.2em}
+.diff li{padding: .1em; display:block;margin: 0; position: relative; min-height: 1.4em; line-height: 1.2em}
 .diff li.ins{background:#dfd; color:#080}
 .diff li.del{background:lighten($red, 45%); color:$red}
 .diff li.unchanged:hover{background: $bg-dark}
@@ -40,7 +40,9 @@
 .diff li.diff-comment { display: none; }
 .diff li.diff-block-info { background: none repeat scroll 0 0 gray; }
 .diff.hide-unchanged li.unchanged { opacity: 0; height: 0; min-height: 0; padding: 0; overflow: hidden; }
-.diff li:not(.del) {
+
+.line-count .diff li { padding-left: 4em; }
+.line-count .diff li:not(.del) {
   counter-increment: diff;
 
   &::before {

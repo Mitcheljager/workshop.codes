@@ -5,7 +5,7 @@
         <% if revision.post.user == current_user || revision.snippet.present? %>
           <div class="dropdown mr-quarter" data-dropdown>
             <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
-              <%= inline_svg "icons/icon-menu.svg", height: 16 %>
+              <%= inline_svg_tag "icons/icon-menu.svg", height: 16 %>
             <% end %>
 
             <div class="dropdown__content dropdown__content--left" data-dropdown-content>

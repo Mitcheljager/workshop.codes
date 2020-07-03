@@ -374,6 +374,10 @@
           content: "◦";
         }
       }
+
+      p:last-of-type {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -401,5 +405,25 @@
 
   iframe {
     max-width: 100%;
+  }
+
+  blockquote {
+    width: 100%;
+    margin: 0;
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  pre {
+    @include styled-scrollbar;
+    width: 100%;
+    overflow-x: auto;
+    tab-size: 2;
+
+    code {
+      white-space: pre;
+    }
   }
 }

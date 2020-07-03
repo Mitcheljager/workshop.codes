@@ -1,0 +1,9 @@
+<% content_for :page_title, "Wiki Edits" %>
+
+<h1 class="heading"><strong>Wiki</strong> Edits</h1>
+
+<div class="mt-full">
+  <%= render @edits %>
+</div>
+
+<%= paginate @edits %>

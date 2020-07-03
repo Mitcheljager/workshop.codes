@@ -3,6 +3,9 @@ class SitemapsController < ApplicationController
     @posts = Post.where(private: false)
     @collections = Collection.all
     @users = User.all
+    @wiki_articles = Wiki::Article.approved.group(:group_id).maximum(:id).values
+    @wiki_articles = Wiki::Article.approved.where(id: @wiki_articles)
+    @wiki_categories = Wiki::Category.all
 
     respond_to do |format|
       format.xml

@@ -1,9 +1,10 @@
 document.addEventListener("turbolinks:load", function() {
   document.removeEventListener("scroll", scrollAlong)
 
-  if (!document.querySelector(".diff")) return
-
   const toggleUnchangedFilesElement = document.querySelector("[data-action='toggle-unchanged-difference']")
+
+  if (!toggleUnchangedFilesElement) return
+
   toggleUnchangedFilesElement.removeEventListener("input", toggleUnchangedFiles)
   toggleUnchangedFilesElement.addEventListener("input", toggleUnchangedFiles)
 

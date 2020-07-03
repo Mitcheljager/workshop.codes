@@ -1,0 +1,41 @@
+<h1 class="top-offset">Viewing difference of <strong><%= @edit.article.group_id %></strong></h1>
+
+<% if @edit.notes.present? %>
+  <div class="well">
+    <div>
+      <div><strong>Notes:</strong></div>
+
+      <p class="mb-0"><%= @edit.notes %></p>
+    </div>
+  </div>
+<% end %>
+
+<article class="article-difference">
+  <div class="article-difference__column">
+    <h3>Title</h3>
+    <%= @title_difference.left.html_safe %>
+
+    <h3>Content</h3>
+    <%= @content_difference.left.html_safe %>
+
+    <h3>Category</h3>
+    <%= @category_difference.left.html_safe %>
+
+    <h3>Tags</h3>
+    <%= @tags_difference.left.html_safe %>
+  </div>
+
+  <div class="article-difference__column">
+    <h3>Title</h3>
+    <%= @title_difference.right.html_safe %>
+
+    <h3>Content</h3>
+    <%= @content_difference.right.html_safe %>
+
+    <h3>Category</h3>
+    <%= @category_difference.right.html_safe %>
+
+    <h3>Tags</h3>
+    <%= @tags_difference.right.html_safe %>
+  </div>
+</article>

@@ -93,7 +93,7 @@ class PostsController < ApplicationController
   end
 
   def parse_markdown
-    parsed_markdown = markdown(post_params[:description])
+    parsed_markdown = markdown(post_params[:description] || post_params[:content])
 
     render json: parsed_markdown, layout: false
   end

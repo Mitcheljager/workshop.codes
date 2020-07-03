@@ -1,0 +1,47 @@
+<% content_for :page_title, @article.title + " | Wiki" %>
+
+<article class="article top-offset">
+  <h1 class="article__title">
+    <%= @article.title %>
+    <span class="article__category"> in <%= link_to @article.category.title, @article.category.slug %></span>
+    <small class="article__subtitle"><%= @article.subtitle %></small>
+  </h1>
+
+  <main class="article__main">
+    <div class="article__content">
+      <%= markdown(@article.content || "_This article does not yet have a description_") %>
+    </div>
+  </main>
+
+  <aside class="article__aside">
+    <div class="article__aside-content">
+      <h3 class="mt-0">Article details</h3>
+
+      Created at: <%= @initial_article.created_at.strftime("%d/%m/%Y %R") %> <br>
+      Last updated at: <%= @article.created_at.strftime("%d/%m/%Y %R") %> <br>
+      <%= link_to wiki_article_edits_path(@article.group_id) do %>
+        <%= @edit_count %> Edit<%= "s" if @edit_count > 1 %>
+      <% end %>
+
+      <hr>
+
+      Category: <%= link_to @article.category.title, wiki_category_path(@article.category.slug) %> <br>
+
+      <% if @article.tags.present? %>
+        Tags:
+
+        <% @article.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
+          <%= link_to tag + ", ", wiki_search_results_path(query: tag) %>
+        <% end %>
+      <% end %>
+
+
+      <% if is_arbiter?(current_user) %>
+        <hr>
+
+        <%= link_to "Edit article", edit_wiki_article_path(@article.slug), class: "button button--secondary button--small" %>
+        <%= link_to "Destroy", wiki_article_path(@article.id), class: "button button--danger button--small", method: :delete, data: { confirm: "Are you sure you want to destroy this article? This cannot be undone." } %>
+      <% end %>
+    </div>
+  </aside>
+</article>

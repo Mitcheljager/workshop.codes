@@ -1,0 +1,15 @@
+<% content_for :page_title, "Wiki Categories" %>
+
+<div class="action-header top-offset">
+  <h1 class="mt-0"><strong>Wiki</strong> Categories</h1>
+
+  <% if is_arbiter?(current_user) %>
+    <div class="action-header__actions">
+      <%= link_to "New category", new_wiki_category_path, remote: true, class: "button" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="cards mt-full">
+  <%= render @categories %>
+</div>
