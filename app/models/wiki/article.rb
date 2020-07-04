@@ -2,6 +2,11 @@ class Wiki::Article < ApplicationRecord
   if ENV["BONSAI_URL"]
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
+
+    settings index: {
+      number_of_shards: 1,
+      number_of_replicas: 1
+    }
   end
 
   belongs_to :category
