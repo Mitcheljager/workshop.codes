@@ -163,13 +163,11 @@
   <%= render "collections/collections" if @post.collection && @post.collection.posts.many? %>
 <% end %>
 
-<% cache_unless current_user == @post.user, @post.revisions do %>
-  <%= render "revisions/revisions" if @post.revisions.size > 1 %>
-<% end %>
-
 <% cache_unless current_user, @post.comments do %>
   <div class="comments">
-    <h2 class="mt-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>
+    <div class="heading items-heading mb-half">
+      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>
+    </div>
 
     <%= render "comments/form", post: @post %>
 
@@ -177,4 +175,8 @@
         <%= render @post.comments.where(parent_id: nil).order(created_at: :desc) %>
     </div>
   </div>
+<% end %>
+
+<% cache_unless current_user == @post.user, @post.revisions do %>
+  <%= render "revisions/revisions" if @post.revisions.size > 1 %>
 <% end %>
