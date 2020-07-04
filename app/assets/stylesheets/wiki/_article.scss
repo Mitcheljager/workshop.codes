@@ -3,8 +3,7 @@
 
   @include media-min(lg) {
     display: grid;
-    grid-template: "title title"
-                   "main aside";
+    grid-template: "main aside";
     grid-template-columns: auto 250px;
     grid-gap: $margin / 2;
   }
@@ -12,24 +11,22 @@
 
 .article__title {
   grid-area: title;
-  margin: 0 0 $margin / 2;
+  margin: 0 0 $margin;
   line-height: 1.1em;
 }
 
 .article__category {
-  font-size: $font-size-base;
-  color: $text-color;
-
-  a {
-    color: $white;
-    text-decoration: none;
-  }
+  display: inline-block;
+  margin: 0 0 $margin / 4;
+  font-size: 18px;
+  color: $primary;
+  text-decoration: none;
 }
 
 .article__subtitle {
   display: block;
   color: $text-color;
-  font-size: $font-size-base;
+  font-size: $font-size-small;
 }
 
 .article__main {
@@ -54,7 +51,7 @@
 .article__aside-content {
   margin-top: $margin * 2;
   font-size: $font-size-small;
-  line-height: 1.5em;
+  line-height: 1.75em;
 
   @include media-min(lg) {
     margin-top: 0;

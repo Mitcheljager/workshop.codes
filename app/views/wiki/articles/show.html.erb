@@ -1,13 +1,14 @@
 <% content_for :page_title, @article.title + " | Wiki" %>
 
 <article class="article top-offset">
-  <h1 class="article__title">
-    <%= @article.title %>
-    <span class="article__category"> in <%= link_to @article.category.title, @article.category.slug %></span>
-    <small class="article__subtitle"><%= @article.subtitle %></small>
-  </h1>
-
   <main class="article__main">
+    <%= link_to @article.category.title, @article.category.slug, class: "article__category" %>
+
+    <h1 class="article__title">
+      <%= @article.title %>
+      <small class="article__subtitle" title="<%= @article.updated_at %>">Last updated <%= @article.updated_at.strftime("%B %d, %Y") %></small>
+    </h1>
+
     <div class="article__content">
       <%= markdown(@article.content || "_This article does not yet have a description_") %>
     </div>
@@ -17,8 +18,8 @@
     <div class="article__aside-content">
       <h3 class="mt-0">Article details</h3>
 
-      Created at: <%= @initial_article.created_at.strftime("%d/%m/%Y %R") %> <br>
-      Last updated at: <%= @article.created_at.strftime("%d/%m/%Y %R") %> <br>
+      Created at: <%= @initial_article.created_at.strftime("%d %b %Y %R") %> <br>
+      Last updated at: <%= @article.created_at.strftime("%d %b %Y %R") %> <br>
       <%= link_to wiki_article_edits_path(@article.group_id) do %>
         <%= @edit_count %> Edit<%= "s" if @edit_count > 1 %>
       <% end %>
@@ -30,9 +31,11 @@
       <% if @article.tags.present? %>
         Tags:
 
-        <% @article.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-          <%= link_to tag + ", ", wiki_search_results_path(query: tag) %>
-        <% end %>
+        <small>
+          <% @article.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
+            <%= link_to tag + ", ", wiki_search_results_path(query: tag) %>
+          <% end %>
+        </small>
       <% end %>
 
 
