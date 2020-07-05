@@ -1,6 +1,6 @@
 class Wiki::Edit < ApplicationRecord
   belongs_to :user
-  belongs_to :article
+  belongs_to :article, dependent: :destroy
 
   enum content_type: {
     created: 0,

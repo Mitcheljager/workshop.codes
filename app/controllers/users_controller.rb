@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       generate_remember_token if params[:remember_me]
 
       create_activity(:create_user, { ip_address: last_4_digits_of_request_ip })
-      
+
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])
       else
@@ -60,8 +60,6 @@ class UsersController < ApplicationController
 
   def destroy
     current_user.destroy
-    current_user.posts.destroy_all
-    current_user.favorites.destroy_all
 
     session[:user_id] = nil
     redirect_to login_path
