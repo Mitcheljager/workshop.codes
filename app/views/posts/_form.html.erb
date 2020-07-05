@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="form-group mt-half">
+  <div class="form-group mt-1/2">
     <div class="checkbox">
       <%= form.check_box :private, checked: @post.private? %>
       <%= form.label :private, "Set to private" %>
@@ -33,7 +33,7 @@
     </p>
   </div>
 
-  <div class="form-group mt-half" data-reveal-by-checkbox>
+  <div class="form-group mt-1/2" data-reveal-by-checkbox>
     <div class="checkbox">
       <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" } %>
       <%= form.label :include_nice_url, "Include Pretty URL" %>
@@ -80,7 +80,7 @@
       <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
       <%= form.hidden_field :image_order %>
 
-      <div class="dropzone mt-half" data-role="dropzone">
+      <div class="dropzone mt-1/2" data-role="dropzone">
         <span>Drop (or paste) images here to add them to your post</span>
 
         <small>Images will be processed to a 900x500 format, regardless of their original size</small>
@@ -120,7 +120,7 @@
     </span>
 
     <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.snippet.present? %>">
-      <div class="form-group mt-half">
+      <div class="form-group mt-1/2">
         <%= form.label :snippet, "Code Snippet", class: "form-label" %>
 
         <div class="form-hint">
@@ -294,7 +294,7 @@
       </span>
 
       <div data-role="hidden-by-checkbox" style="display: none">
-        <div class="form-group mt-half">
+        <div class="form-group mt-1/2">
           <%= form.label :revision_description, "Update Notes", class: "form-label" %>
 
           <div class="form-hint">

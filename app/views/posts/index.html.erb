@@ -9,7 +9,7 @@
 <main class="items">
   <% unless params[:page] %>
     <% cache_unless current_user, @hot_posts do %>
-      <h2 class="mt-half"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
+      <h2 class="mt-1/2"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
 
       <%= render @hot_posts %>
 
