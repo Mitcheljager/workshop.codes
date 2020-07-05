@@ -3,6 +3,7 @@ task :generate_wiki_articles => :environment do
   actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
   events = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
   values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
+  constants = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
 
   @user = User.find_by_username("mitsiee")
   @user = User.find_by_username("admin") unless @user.present?
@@ -27,7 +28,7 @@ task :generate_wiki_articles => :environment do
     @article = Wiki::Article.create(
       title: content["en-US"],
       subtitle: "#{ subtitle if subtitle }",
-      slug: CGI.escape(content["en-US"]).downcase,
+      slug: CGI.escape(content["en-US"]).downcase.downcase,
       group_id: SecureRandom.urlsafe_base64,
       content: "### Description
       #{ content["description"] }
@@ -55,7 +56,7 @@ task :generate_wiki_articles => :environment do
 
     @article = Wiki::Article.create(
       title: content["en-US"],
-      slug: CGI.escape(content["en-US"]),
+      slug: CGI.escape(content["en-US"]).downcase,
       group_id: SecureRandom.urlsafe_base64,
       category_id: @category.id,
       tags: "#{ content["en-US"] }#{ ", " + content["es-MX"] if content["es-MX"] }#{ ", " + content["fr-FR"] if content["fr-FR"] }#{ ", " + content["ja-JP"] if content["ja-JP"] }#{ ", " + content["pt-BR"] if content["pt-BR"] }#{ ", " + content["zh-CN"] if content["zh-CN"] }"
@@ -89,13 +90,13 @@ task :generate_wiki_articles => :environment do
     if content["return"]
       content_return = "
 ### Return
-> #{ content["return"].to_yaml(options = {line_width: -1}).gsub("---", "") }"
+> #{ content["return"].to_yaml(options = {line_width: -1}).gsub("---", "").gsub("...", "").humanize }"
     end
 
     @article = Wiki::Article.create(
       title: content["en-US"],
       subtitle: "#{ subtitle if subtitle }",
-      slug: CGI.escape(content["en-US"]),
+      slug: CGI.escape(content["en-US"]).downcase,
       group_id: SecureRandom.urlsafe_base64,
       content: "### Description
       #{ content["description"] }
@@ -103,6 +104,37 @@ task :generate_wiki_articles => :environment do
       #{ content_args if content_args }",
       category_id: @category.id,
       tags: "#{ content["en-US"] }#{ ", " + content["es-MX"] if content["es-MX"] }#{ ", " + content["fr-FR"] if content["fr-FR"] }#{ ", " + content["ja-JP"] if content["ja-JP"] }#{ ", " + content["pt-BR"] if content["pt-BR"] }#{ ", " + content["zh-CN"] if content["zh-CN"] }"
+    )
+
+    @edit = Wiki::Edit.create(
+      user_id: @user.id,
+      article_id: @article.id,
+      content_type: "created",
+      approved: true
+    )
+  end
+
+  # Constants
+
+  @category = Wiki::Category.find_by_title("Constants")
+  @category = Wiki::Category.create(title: "Constants", slug: "constants") unless @category.present?
+
+  constants.each do |name, content|
+    @article = Wiki::Article.find_by_title(name.gsub("__", ""))
+    next if @article.present?
+
+    article_content = "## Options"
+    content.each do |item, args|
+      article_content << "
+- **#{ args["en-US"] }** #{ "\n  - " + args["description"] if args["description"] }"
+    end
+
+    @article = Wiki::Article.create(
+      title: name.gsub("__", ""),
+      slug: name.gsub("__", "").downcase,
+      group_id: SecureRandom.urlsafe_base64,
+      category_id: @category.id,
+      content: article_content
     )
 
     @edit = Wiki::Edit.create(

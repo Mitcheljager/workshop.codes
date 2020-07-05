@@ -25,7 +25,7 @@ class Wiki::CategoriesController < Wiki::BaseController
 
   def create
     @category = Wiki::Category.new(category_params)
-    @category.slug = category_params[:title].downcase.gsub(" ", "-")
+    @category.slug = category_params[:title].downcase.gsub(" ", "-").gsub(".", "-")
 
     if @category.save
       redirect_to wiki_categories_path
@@ -40,7 +40,7 @@ class Wiki::CategoriesController < Wiki::BaseController
 
   def update
     @category = Wiki::Category.find(params[:slug])
-    params[:wiki_category][:slug] = category_params[:title].downcase.gsub(" ", "-")
+    params[:wiki_category][:slug] = category_params[:title].downcase.gsub(" ", "-").gsub(".", "-")
 
     if @category.update(category_params)
       redirect_to wiki_category_path(@category.slug)
