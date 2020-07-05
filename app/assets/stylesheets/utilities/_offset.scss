@@ -1,0 +1,48 @@
+$offset-values: (
+  'auto': auto,
+  0: 0,
+  1\/1: $margin,
+  1\/2: $margin / 2,
+  1\/4: $margin / 4,
+  1\/8: $margin / 8
+);
+
+$properties: (
+  padding: p,
+  margin: m
+);
+
+$directions: (
+  "": "",
+  "-left": l,
+  "-right": r,
+  "-top": t,
+  "-bottom": b
+);
+
+@each $property, $property-abr in $properties {
+  @each $direction, $direction-abr in $directions {
+    @each $name, $value in $offset-values {
+      $classname: #{ $property-abr }#{ $direction-abr }-#{ $name };
+      .#{ $classname } {
+        #{ $property }#{ $direction }: $value;
+      }
+
+      @each $breakpoint, $breakpoint-value in map-remove(map-remove($media-min-widths, xs), xl) {
+        .#{ $breakpoint }\:#{ $classname } {
+          @media (min-width: $breakpoint-value) {
+            #{ $property }#{ $direction }: $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+.top-offset {
+  margin-top: $margin;
+
+  @include media-min(sm) {
+    margin-top: $margin * 2;
+  }
+}

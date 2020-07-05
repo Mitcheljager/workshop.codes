@@ -4,9 +4,9 @@
 <p>Users in last 7 days: <strong><%= User.where("created_at > ?", 1.week.ago).size %></strong></p>
 
 <%= form_tag url: admin_find_user_path do %>
-  <div class="flex mb-quarter">
+  <div class="flex mb-1/4">
     <%= label_tag :username, "", class: "form-label" %>
-    <%= text_field_tag :username, "", class: "form-input width-auto mr-quarter", placeholder: "Find by exact username" %>
+    <%= text_field_tag :username, "", class: "form-input w-auto mr-1/4", placeholder: "Find by exact username" %>
 
     <%= submit_tag "Search", class: "button button--small button--secondary" %>
   </div>

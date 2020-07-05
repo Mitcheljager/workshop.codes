@@ -22,7 +22,7 @@
   <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
 <% end %>
 
-<h3 class="mt-full">Total views per day</h3>
+<h3 class="mt-1/1">Total views per day</h3>
 <div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
@@ -34,5 +34,5 @@
   <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
 <% end %>
 
-<h3 class="mt-full">Total copies per day</h3>
+<h3 class="mt-1/1">Total copies per day</h3>
 <div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>

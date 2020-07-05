@@ -3,7 +3,7 @@
     <div class="item__title item__title--small">
       <div>
         <% if revision.post.user == current_user || revision.snippet.present? %>
-          <div class="dropdown mr-quarter" data-dropdown>
+          <div class="dropdown mr-1/4" data-dropdown>
             <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
               <%= inline_svg_tag "icons/icon-menu.svg", height: 16 %>
             <% end %>

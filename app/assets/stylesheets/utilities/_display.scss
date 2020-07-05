@@ -1,8 +1,3 @@
-.flex {
-  width: 100%;
-  display: flex;
-}
-
 .visibility-hidden {
   position: absolute;
   opacity: 0;
@@ -36,8 +31,4 @@
   @include media-min(md) {
     display: initial;
   }
-}
-
-.width-auto {
-  width: auto;
 }

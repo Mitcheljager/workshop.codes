@@ -1,8 +1,8 @@
 <% content_for :page_title, "Viewing snippet of #{ @revision.code }" %>
 
-<%= link_to "Return to post", post_path(@post.code), class: "button button--secondary button--small mb-quarter mt-full" %>
+<%= link_to "Return to post", post_path(@post.code), class: "button button--secondary button--small mb-1/4 mt-1/1" %>
 
-<h2 class="mt-0 mb-quarter">
+<h2 class="mt-0 mb-1/4">
   <% if @compare_revision.present? %>
     Comparing difference between
   <% else %>

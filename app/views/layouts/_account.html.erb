@@ -1,4 +1,4 @@
-<div class="heading mt-full">
+<div class="heading mt-1/1">
   <h1 class="text-md-center"><%= title.html_safe %></h1>
 </div>
 
@@ -11,7 +11,7 @@
     <%= link_to "Codes", account_posts_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_posts_path) }" %>
     <%= link_to "Profile", edit_profile_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_profile_path) }" %>
 
-    <hr class="mt-half mb-half">
+    <hr class="mt-1/2 mb-1/2">
 
     <%= link_to "Admin", admin_path, class: "profile__action" if current_user.level == "admin" %>
     <%= link_to "Account", edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>

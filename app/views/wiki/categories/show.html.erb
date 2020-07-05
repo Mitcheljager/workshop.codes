@@ -1,6 +1,6 @@
 <% content_for :page_title, @category.title + " | Wiki" %>
 
-<div class="action-header top-offset mb-half">
+<div class="action-header top-offset mb-1/2">
   <h1 class="mt-0">Category <strong><%= @category.title %></strong></h1>
 
   <% if is_arbiter?(current_user) %>
@@ -16,7 +16,7 @@
   </blockquote>
 <% end %>
 
-<div class="mt-full">
+<div class="mt-1/1">
   <%= render(@articles) || render("no_results") %>
 </div>
 

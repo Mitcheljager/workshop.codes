@@ -1,11 +1,11 @@
 <% content_for :page_title, "Login" %>
 
-<div class="form-group-columns mt-full">
+<div class="form-group-columns mt-1/1">
   <div>
     <h2 class="mt-0"><center>Login</center></h2>
 
     <% if flash[:alert] %>
-      <div class="warning mt-0 mb-quarter"><mark><%= flash[:alert] %></mark></div>
+      <div class="warning mt-0 mb-1/4"><mark><%= flash[:alert] %></mark></div>
     <% end %>
 
     <div class="well">
@@ -18,7 +18,7 @@
             <%= form.text_field :username, placeholder: "Username", class: "form-input" %>
           </div>
 
-          <div class="form-group mt-quarter">
+          <div class="form-group mt-1/4">
             <%= form.label :password, "Password", class: "form-label" %>
             <%= form.password_field :password, placeholder: "Password", class: "form-input" %>
           </div>
@@ -28,21 +28,21 @@
             <%= form.label :remember_me, "Remember me (uses cookies)" %>
           </div>
 
-          <%= submit_tag "Submit", class: "button button--secondary mt-half w-100" %>
+          <%= submit_tag "Submit", class: "button button--secondary mt-1/2 w-100" %>
 
-          <div class="mt-quarter">
+          <div class="mt-1/4">
             <small><%= link_to "Forgot your password?", new_forgot_password_path %></small>
           </div>
         <% end %>
 
-        <hr class="mt-half mb-quarter">
+        <hr class="mt-1/2 mb-1/4">
 
-        <%= link_to "/auth/discord#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--discord mt-quarter" do %>
+        <%= link_to "/auth/discord#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--discord mt-1/4" do %>
           <%= inline_svg_tag "discord.svg", height: 24 %>
           Login with Discord
         <% end %>
 
-        <%= link_to "/auth/bnet#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--bnet mt-eigth" do %>
+        <%= link_to "/auth/bnet#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--bnet mt-1/8" do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
           Login with Battle.net
         <% end %>
@@ -51,7 +51,7 @@
   </div>
 
   <div>
-    <h2 class="mt-half mt-sm-0"><center>Create an account</center></h2>
+    <h2 class="mt-1/2 sm:mt-0"><center>Create an account</center></h2>
 
     <div class="well">
       <div class="w-100">

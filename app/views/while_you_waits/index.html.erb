@@ -1,7 +1,7 @@
 <% content_for :page_title, "While You Wait" %>
 
 <% cache @while_you_waits do %>
-  <div class="heading mb-half">
+  <div class="heading mb-1/2">
     <h1><strong>While You Wait</strong> <small> - Codes to play while in queue</small></h1>
   </div>
 
@@ -17,7 +17,7 @@
         <%= image_tag "while_you_wait/header-aim-practice.jpg", alt: "Aim Practice" %>
       </picture>
 
-      <p class="mb-half"><small><em>Get ready for your games by practicing your aim. Is your sensitivity correct? Can you take down that Pharah? Find out!</em></small></p>
+      <p class="mb-1/2"><small><em>Get ready for your games by practicing your aim. Is your sensitivity correct? Can you take down that Pharah? Find out!</em></small></p>
 
       <% @while_you_waits.where(category: "Aim Practice").each do |while_you_wait| %>
         <%= render "post", post: while_you_wait.post %>
@@ -31,7 +31,7 @@
         <%= image_tag "while_you_wait/header-deathmatch.jpg", alt: "Deathmatch" %>
       </picture>
 
-      <p class="mb-half"><small><em>Take on friends (or strangers) in some special Deathmatch modes that can be completed in minutes.</em></small></p>
+      <p class="mb-1/2"><small><em>Take on friends (or strangers) in some special Deathmatch modes that can be completed in minutes.</em></small></p>
 
       <% @while_you_waits.where(category: "Deathmatch").each do |while_you_wait| %>
         <%= render "post", post: while_you_wait.post %>
@@ -45,7 +45,7 @@
         <%= image_tag "while_you_wait/header-parkour.jpg", alt: "Parkour" %>
       </picture>
 
-      <p class="mb-half"><small><em>Test your skills in navigating the maps with multiple heroes. In doing so you might learn a thing or two about mobility.</em></small></p>
+      <p class="mb-1/2"><small><em>Test your skills in navigating the maps with multiple heroes. In doing so you might learn a thing or two about mobility.</em></small></p>
 
       <% @while_you_waits.where(category: "Parkour").each do |while_you_wait| %>
         <%= render "post", post: while_you_wait.post %>
@@ -59,7 +59,7 @@
         <%= image_tag "while_you_wait/header-minigames.jpg", alt: "Minigames" %>
       </picture>
 
-      <p class="mb-half"><small><em>Looking for something fun and different? Try some of these minigames and see what else Overwatch has to offer.</em></small></p>
+      <p class="mb-1/2"><small><em>Looking for something fun and different? Try some of these minigames and see what else Overwatch has to offer.</em></small></p>
 
       <% @while_you_waits.where(category: "Minigames").each do |while_you_wait| %>
         <%= render "post", post: while_you_wait.post %>

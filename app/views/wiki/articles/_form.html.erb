@@ -3,10 +3,10 @@
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
   </div>
 
-  <div class="form-group mt-full">
+  <div class="form-group mt-1/1">
     <%= form.label :content, class: "form-label" %>
 
-    <%= link_to "Show Preview", "#", class: "button button--secondary mt-quarter mb-quarter", data: { action: "markdown-preview" } %>
+    <%= link_to "Show Preview", "#", class: "button button--secondary mt-1/4 mb-1/4", data: { action: "markdown-preview" } %>
 
     <div data-role="markdown-preview-wrapper">
       <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde" } %>
@@ -15,7 +15,7 @@
     <div class="item__description" data-role="markdown-preview"></div>
   </div>
 
-  <div class="form-group-columns mt-full">
+  <div class="form-group-columns mt-1/1">
     <div class="form-group">
       <%= form.label :category_id, class: "form-label" %>
       <%= form.collection_select :category_id, Wiki::Category.all, :id, :title, { include_hidden: false }, { class: "form-select" } %>

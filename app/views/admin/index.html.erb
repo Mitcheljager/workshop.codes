@@ -41,7 +41,7 @@
   <% date_counts[group[0]] = group[1].length %>
 <% end %>
 
-<h3 class="mt-full">Posts created per day</h3>
+<h3 class="mt-1/1">Posts created per day</h3>
 <div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
@@ -53,7 +53,7 @@
   <% date_counts[group[0]] = group[1].length %>
 <% end %>
 
-<h3 class="mt-full">Users created per day</h3>
+<h3 class="mt-1/1">Users created per day</h3>
 <div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
@@ -65,7 +65,7 @@
   <% date_counts[group[0]] = group[1].length %>
 <% end %>
 
-<h3 class="mt-full">Favorites created per day</h3>
+<h3 class="mt-1/1">Favorites created per day</h3>
 <div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
 
 <% date_counts = {} %>
@@ -77,5 +77,5 @@
   <% date_counts[group[0]] = group[1].length %>
 <% end %>
 
-<h3 class="mt-full">Comments created per day</h3>
+<h3 class="mt-1/1">Comments created per day</h3>
 <div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>

@@ -1,0 +1,13 @@
+.w-md-75 {
+  @include media-min(md) {
+    width: 75%;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}

@@ -15,7 +15,7 @@
     <%= link_to user.link, user.link, class: "profile-banner__action", target: "_blank", rel: "noreferrer noopener" if user.link.present? %>
 
     <% if !small && user.description.present? %>
-      <div class="mt-quarter">
+      <div class="mt-1/4">
         <small><%= markdown(user.description) %></small>
       </div>
     <% end %>

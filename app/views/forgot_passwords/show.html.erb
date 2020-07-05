@@ -1,6 +1,6 @@
 <h1 class="top-offset">Reset your password</h1>
 
-<div class="form-group-columns mt-full">
+<div class="form-group-columns mt-1/1">
   <%= form_for :forgot_password, url: reset_password_path do |f| %>
     <% if @user && @user.errors.any? %>
       <div class="error-block">

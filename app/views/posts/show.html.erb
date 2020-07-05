@@ -14,7 +14,7 @@
 <article>
   <% cache_unless current_user, [@post, "title"] do %>
     <% if @post.private? %>
-      <div class="warning warning--mild mt-full">
+      <div class="warning warning--mild mt-1/1">
         <p class="mb-0 text-white">🔐 This code is set to private.</p>
         <p class="mt-0"><small>Only you can see it.</small></p>
       </div>
@@ -39,8 +39,8 @@
     <% if current_user == @post.user %>
       <div class="well mt-half" data-toggle-content>
         <div>
-          <%= link_to "Edit", edit_post_path(@post.code), class: "mr-quarter" %>
-          <%= link_to "Delete", post_path(@post.code), class: "text-red mr-half", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
+          <%= link_to "Edit", edit_post_path(@post.code), class: "mr-1/4" %>
+          <%= link_to "Delete", post_path(@post.code), class: "text-red mr-1/2", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
           <%= link_to "Analytics", "#", class: "text-white", data: { action: "toggle-content load-analytics", id: @post.id } %>
         </div>
 
@@ -50,7 +50,7 @@
       </div>
 
       <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
-        <div class="warning mt-quarter">
+        <div class="warning mt-1/4">
           <p><mark>⚠ Your Code will soon expire.</mark></p>
           <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
           <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
@@ -165,7 +165,7 @@
 
 <% cache_unless current_user, @post.comments do %>
   <div class="comments">
-    <div class="heading items-heading mb-half">
+    <div class="heading items-heading mb-1/2">
       <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>
     </div>
 

@@ -7,7 +7,7 @@
     <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Short description" %>
   </div>
 
-  <%= submit_tag "Submit", class: "button mt-quarter" %>
+  <%= submit_tag "Submit", class: "button mt-1/4" %>
 
   <% if @category.persisted? && @category.articles.count == 0 %>
     <div>

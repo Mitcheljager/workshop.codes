@@ -63,10 +63,10 @@
     </div>
   </div>
 
-  <div class="form-group mt-full" data-reveal-by-checkbox>
+  <div class="form-group mt-1/1" data-reveal-by-checkbox>
     <label class="form-label">Images</label>
 
-    <div class="checkbox mt-quarter">
+    <div class="checkbox mt-1/4">
       <%= form.check_box :include_images, checked: @post.image_order.present?, data: { action: "reveal-by-checkbox" } %>
       <%= form.label :include_images, "Include image banner" %>
     </div>
@@ -90,7 +90,7 @@
     </div>
   </div>
 
-  <div class="form-group mt-full">
+  <div class="form-group mt-1/1">
     <%= form.label :description, class: "form-label" %>
 
     <div class="form-hint">
@@ -98,7 +98,7 @@
       <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to "and everything else", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", target: "_blank" %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
     </div>
 
-    <%= link_to "Show Preview", "#", class: "button button--secondary mt-quarter mb-quarter", data: { action: "markdown-preview" } %>
+    <%= link_to "Show Preview", "#", class: "button button--secondary mt-1/4 mb-1/4", data: { action: "markdown-preview" } %>
 
     <div data-role="markdown-preview-wrapper">
       <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde" } %>
@@ -173,9 +173,9 @@
       </div>
 
       <%= form.select :collection_id, options_from_collection_for_select(current_user.collections, "id", "title", @post.collection_id), { include_blank: current_user.collections.any? ? "Select..." : "You have not yet create a collection." }, { class: "form-select form-select--small" } %>
-      <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-quarter", placeholder: "Create new collection" %>
+      <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-1/4", placeholder: "Create new collection" %>
 
-      <div class="form-hint mt-quarter mb-0">
+      <div class="form-hint mt-1/4 mb-0">
         <small>Min 3, max 50 characters.</small>
       </div>
     </div>

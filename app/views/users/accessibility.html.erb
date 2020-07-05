@@ -1,11 +1,11 @@
 <% content_for :page_title, "Accessibility" %>
 
 <%= render "layouts/account", title: "Accessibility" do %>
-  <p class="mt-0 mb-half">
+  <p class="mt-0 mb-1/2">
     Accessibility options help you better navigate the website in case you have difficulty.
   </p>
 
-  <div class="well mb-quarter">
+  <div class="well mb-1/4">
     <%= button_to "High contrast", update_user_path, controller: :user, method: :patch, params: { user: { high_contrast: !current_user.high_contrast } },
                   class: "switch__input",
                   form_class: "switch #{ 'switch--active' if current_user.high_contrast }" %>
@@ -15,7 +15,7 @@
     </p>
   </div>
 
-  <div class="well mb-quarter">
+  <div class="well mb-1/4">
     <%= button_to "Large fonts", update_user_path, controller: :user, method: :patch, params: { user: { large_fonts: !current_user.large_fonts } },
                   class: "switch__input",
                   form_class: "switch #{ 'switch--active' if current_user.large_fonts }" %>
