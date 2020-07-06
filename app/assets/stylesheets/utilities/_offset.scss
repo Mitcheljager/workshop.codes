@@ -23,14 +23,19 @@ $directions: (
 @each $property, $property-abr in $properties {
   @each $direction, $direction-abr in $directions {
     @each $name, $value in $offset-values {
-      $classname: #{ $property-abr }#{ $direction-abr }-#{ $name };
-      .#{ $classname } {
+      .#{ $property-abr }#{ $direction-abr }-#{ $name } {
         #{ $property }#{ $direction }: $value;
       }
+    }
+  }
+}
 
-      @each $breakpoint, $breakpoint-value in map-remove(map-remove($media-min-widths, xs), xl) {
-        .#{ $breakpoint }\:#{ $classname } {
-          @media (min-width: $breakpoint-value) {
+@each $breakpoint, $breakpoint-value in map-remove(map-remove($media-min-widths, xs), xl) {
+  @media (min-width: $breakpoint-value) {
+    @each $property, $property-abr in $properties {
+      @each $direction, $direction-abr in $directions {
+        @each $name, $value in $offset-values {
+          .#{ $breakpoint }\:#{ $property-abr }#{ $direction-abr }-#{ $name } {
             #{ $property }#{ $direction }: $value;
           }
         }
