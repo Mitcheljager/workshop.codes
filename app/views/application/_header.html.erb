@@ -1,22 +1,20 @@
-<%= cache_unless current_user, "header" do %>
-  <header class="header">
-    <%= link_to root_path do %>
-      <%= inline_svg "logo.svg", class: "logo", alt: "Workshop.codes Logo" %>
-    <% end %>
+<header class="header">
+  <%= link_to root_path do %>
+    <%= inline_svg "logo.svg", class: "logo", alt: "Workshop.codes Logo" %>
+  <% end %>
 
-    <%= link_to "☰", "#", class: "header__navigation-trigger", data: { action: "toggle-navigation" } %>
+  <%= link_to "☰", "#", class: "header__navigation-trigger", data: { action: "toggle-navigation" } %>
 
-    <div class="header__content" data-role="navigation">
-      <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
+  <div class="header__content" data-role="navigation">
+    <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
 
-      <nav class="header__navigation">
-        <%= link_to "Recent", posts_path(1), class: "header__item #{ "header__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
-        <%= link_to "On Fire", on_fire_path, class: "header__item #{ "header__item--active" if action_name == "on_fire" }" %>
-        <%= link_to "While you wait", while_you_wait_path, class: "header__item #{ "header__item--active" if controller_name == "while_you_waits" }" %>
-        <%= link_to "Wiki", wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" %>
-      </nav>
+    <nav class="header__navigation">
+      <%= link_to "Recent", posts_path(1), class: "header__item #{ "header__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
+      <%= link_to "On Fire", on_fire_path, class: "header__item #{ "header__item--active" if action_name == "on_fire" }" %>
+      <%= link_to "While you wait", while_you_wait_path, class: "header__item #{ "header__item--active" if controller_name == "while_you_waits" }" %>
+      <%= link_to "Wiki", wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" %>
+    </nav>
 
-      <%= render "profile_block" %>
-    </div>
-  </header>
-<% end %>
+    <%= render "profile_block" %>
+  </div>
+</header>
