@@ -2,7 +2,7 @@
 
 <article class="article top-offset">
   <main class="article__main">
-    <%= link_to @article.category.title, @article.category.slug, class: "article__category" %>
+    <%= link_to @article.category.title, wiki_category_path(@article.category.slug), class: "article__category" %>
 
     <h1 class="article__title">
       <%= @article.title %>
