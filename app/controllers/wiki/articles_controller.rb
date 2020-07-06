@@ -95,7 +95,7 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def title_to_slug
-    slug = CGI.escape(@article.title).downcase
+    slug = CGI.escape(@article.title).gsub(".", "-").downcase
     if Wiki::Article.where.not(group_id: @article.group_id).where(slug: slug).any?
       return "#{ slug }-#{ random_string }"
     else

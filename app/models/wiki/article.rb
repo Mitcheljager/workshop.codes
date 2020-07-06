@@ -15,6 +15,9 @@ class Wiki::Article < ApplicationRecord
 
   attr_accessor :edit_notes
 
+  validates :title, presence: true, length: { minimum: 2, maximum: 120 }
+  validates :slug, presence: true
+
   def self.approved
     where(edit: Wiki::Edit.where(approved: true))
   end

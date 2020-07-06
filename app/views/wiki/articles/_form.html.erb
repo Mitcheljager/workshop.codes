@@ -1,4 +1,16 @@
 <%= form_for @article do |form| %>
+  <% if @article.errors.any? %>
+    <div class="error-block">
+      <h2 class="error-block__title"><strong><%= pluralize(@article.errors.count, "error") %></strong> prohibited this Item from being saved:</h2>
+
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><small><%= message %></small></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
   </div>
