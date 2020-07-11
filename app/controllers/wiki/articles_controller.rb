@@ -72,8 +72,9 @@ class Wiki::ArticlesController < Wiki::BaseController
 
   def destroy
     @article = Wiki::Article.find(params[:slug])
+    @articles = Wiki::Article.where(group_id: @article.group_id)
 
-    @article.destroy
+    @articles.destroy_all
 
     redirect_to wiki_articles_url
   end
