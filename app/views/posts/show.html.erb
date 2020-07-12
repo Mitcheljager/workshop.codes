@@ -1,6 +1,6 @@
 <% content_for :page_title, "#{ @post.title }" %>
 <% begin %><% content_for :og_image, "#{ polymorphic_url(@ordered_images.first.variant(quality: 95).processed) if @ordered_images.present? && @ordered_images.any? }" %><% rescue %><% end %>
-<% content_for :og_description, strip_tags(markdown(@post.description)).truncate(200).gsub("\n"," ") %>
+<% content_for :og_description, strip_tags(markdown(@post.description || "")).truncate(200).gsub("\n"," ") %>
 
 <% cache [@post, "expiration_notification"] do %>
   <% if @is_expired %>

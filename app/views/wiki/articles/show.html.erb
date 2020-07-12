@@ -1,4 +1,5 @@
 <% content_for :page_title, @article.title + " | Wiki" %>
+<% content_for :og_description, strip_tags(markdown(@article.content || "")).truncate(200).gsub("\n"," ") %>
 
 <article class="article top-offset">
   <main class="article__main">
