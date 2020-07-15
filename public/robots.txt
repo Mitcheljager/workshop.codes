@@ -25,3 +25,4 @@ Disallow: */sort/
 Disallow: */exclude-expired/
 Disallow: */*/*/*/
 Disallow: /wiki/search/*
+Disallow: /wiki/edits
