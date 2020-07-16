@@ -58,7 +58,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html {
         unless @post.present?
-          revision = Revision.find_by_code(params[:code])
+          revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
           @post = revision.post if revision
           redirect_to post_path(revision.post.code) if revision
         end
