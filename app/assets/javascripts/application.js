@@ -29,6 +29,7 @@
 //= require carousel
 //= require timeago
 //= require load-analytics
+//= require get-user-analytics
 //= require load-snippet
 //= require difference-viewer
 //= require modal

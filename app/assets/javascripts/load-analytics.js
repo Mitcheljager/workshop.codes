@@ -14,7 +14,7 @@ function loadAnalytics(event) {
 
   const id = this.dataset.id
 
-  fetch("/get-analytics", {
+  fetch("/analytics/post", {
     method: "post",
     body: JSON.stringify({ id: id }),
     headers: {

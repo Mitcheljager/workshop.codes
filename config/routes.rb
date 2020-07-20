@@ -51,7 +51,9 @@ Rails.application.routes.draw do
   get "favorites", to: "users#favorites", as: "account_favorites"
   patch "user", to: "users#update", as: "update_user"
   delete "user", to: "users#destroy", as: "destroy_user"
-  post "get-analytics", to: "users#get_analytics", as: "get_analytics"
+
+  post "analytics/post", to: "analytics#post", as: "post_analytics"
+  post "analytics/user", to: "analytics#user", as: "user_analytics"
 
   resources :profiles, param: :username, only: [:update]
   get "profile/edit", to: "profiles#edit", as: "edit_profile"
