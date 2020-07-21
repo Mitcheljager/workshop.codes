@@ -28,7 +28,7 @@ task :generate_wiki_articles => :environment do
     @article = Wiki::Article.create(
       title: content["en-US"],
       subtitle: "#{ subtitle if subtitle }",
-      slug: CGI.escape(content["en-US"]).downcase.downcase,
+      slug: CGI.escape(content["en-US"]).downcase,
       group_id: SecureRandom.urlsafe_base64,
       content: "### Description
       #{ content["description"] }
