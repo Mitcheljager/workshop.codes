@@ -3758,3 +3758,118 @@ __zComponentOf__:
   ja-JP: 'Z成分: '
   pt-BR: Componente Z de
   zh-CN: Z方向分量
+_&getAbilityCharge:
+  description: The ability charge count for a player associated by button.
+  args:
+  - name: PLAYER
+    description: The player whose ability to check.
+    type: Player
+    default: EVENT PLAYER
+  - name: BUTTON
+    description: The ability to check associated by button.
+    type: Button
+    default: BUTTON
+  return: unsigned int
+  en-US: Ability Charge
+_&getAbilityResource:
+  description: The ability resource percent for a player associated by button.
+  args:
+  - name: PLAYER
+    description: The player whose ability to check.
+    type: Player
+    default: EVENT PLAYER
+  - name: BUTTON
+    description: The ability to check associated by button.
+    type: Button
+    default: BUTTON
+  return: unsigned float
+  en-US: Ability Resource
+_&getAmmo:
+  description: The current ammo of a player.
+  args:
+  - name: PLAYER
+    description: The player whose ammo to acquire.
+    type: Player
+    default: EVENT PLAYER
+  return: unsigned float
+  en-US: Ammo
+eventWasEnvironment:
+  description: Whether the elimination was due to the environment for the event currently
+    being processed by this rule.
+  args:
+  return: bool
+  en-US: Event Was Environment
+_&getHealthOfType:
+  guid: 0000000081C2
+  description: The current health of the specified player, filtered by the given health
+    type.
+  args:
+  - name: PLAYER
+    description: The player whose health to acquire.
+    type: Player
+    default: EVENT PLAYER
+  - name: HEALTH
+    description: The type of health to acquire.
+    type: Health
+    default: HEALTH
+  return: unsigned float
+  en-US: Health of Type
+buttonString:
+  description: Converts a button parameter into a string that shows up based on the
+    player's input bindings. This value cannot be stored in variables.
+  args:
+  - name: BUTTON
+    description: The button for the input binding that will be converted to a string.
+    type: Button
+    default: Button
+  return: String
+  en-US: Input Binding String
+_&isReloading:
+  description: Whether the specified player is reloading.
+  args:
+  - name: PLAYER
+    description: The player whose reload usage to check.
+    type: Player
+    default: EVENT PLAYER
+  return: bool
+  en-US: Is Reloading
+getLastCreatedHealthPool:
+  description: An ID representing the most recent Add Health Pool action that was
+    executed by the event player (or executed at the global level).
+  args: []
+  return: HealthPoolId
+  en-US: Last Created Health Pool
+_&getMaxAmmo:
+  description: The current max ammo of a player.
+  args:
+  - name: PLAYER
+    description: The player whose max ammo to acquire.
+    type: Player
+    default: EVENT PLAYER
+  return: unsigned float
+  en-US: Max Ammo
+_&getMaxHealthOfType:
+  guid: 0000000081C2
+  description: The max health of the specified player, filtered by the given health
+    type.
+  args:
+  - name: PLAYER
+    description: The player whose max health to acquire.
+    type: Player
+    default: EVENT PLAYER
+  - name: HEALTH
+    description: The type of max health to acquire.
+    type: Health
+    default: HEALTH
+  return: unsigned float
+  en-US: Max Health of Type
+_&getCurrentWeapon:
+  description: The currently held weapon of a player. Returns 2 for Baby Dva's gun,
+    Torbjorn's hammer, and Mercy's pistol; 1 otherwise.
+  args:
+  - name: PLAYER
+    description: The player whose weapon to acquire.
+    type: Player
+    default: EVENT PLAYER
+  return: unsigned int
+  en-US: Weapon

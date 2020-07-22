@@ -3365,3 +3365,496 @@ __while__:
   es-MX: Mientras
   fr-FR: Tant que
   ja-JP: WHILE
+setAmmo:
+  description: Set the ammo of one or more Players.
+  args:
+  - name: PLAYER
+    description: The player or players whose ammo will be set.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: CLIP
+    description: The index of the clip whose ammo will be set. 0 Is the first clip, and 1 is the second. If the specified type does not exist, this will do nothing.
+    type: Integer
+    default: 0
+  - name: Ammo
+    description: The ammo that will be set.
+    type: Integer
+    default: 0
+  en-US: Set Ammo
+setMaxAmmo:
+  description: Set the max ammo of one or more Players.
+  args:
+  - name: PLAYER
+    description: The player or players whose max ammo will be set.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: CLIP
+    description: The index of the clip whose ammo will be set. 0 Is the first clip, and 1 is the second. If the specified type does not exist, this will do nothing.
+    type: Integer
+    default: 0
+  - name: Ammo
+    description: The max ammo that will be set.
+    type: Unsigned integer
+    default: 0
+  en-US: Set Max Ammo
+setWeapon:
+  description: Sets the weapon of one or more Players.
+  args:
+  - name: PLAYER
+    description: The player or players whose weapon will be set.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Weapon
+    description: The number of the weapon to be equipped. 1 Is the first weapon, and 2 is the second. If the specified weapon does not exist, players will use the default weapon.
+    type: Unsigned integer
+    default: 0
+  en-US: Set Weapon
+setReloadEnabled:
+  description: Enables or disables Reload for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose access to reload is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Enabled
+    description: Specifies whether the Player or Players are able to use reload. Expects a boolean value such as True, False, or Compare.
+    type: Boolean
+    default: True
+  en-US: Set Reload Enabled
+disableGameModeHUD:
+  description: Disables the Game Mode HUD for one or more Players until reenabled.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Game Mode HUD disabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Disable Game Mode HUD
+enableGameModeHUD:
+  description: Undoes the effect of the Disable Game Mode HUD Action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Game Mode HUD enabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enabled Game Mode HUD
+disableGameModeInWorldUI:
+  description: Disables the Game Mode In-World UI for one or more Players until reenabled.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Game Mode In-World UI disabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Disable Game Mode In-World UI
+enableGameModeInWorldUI:
+  description: Undoes the effect of the Disable Game Mode In-World UI Action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Game Mode In-World UI enabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enable Game Mode In-World UI
+disableHeroHUD:
+  description: Disables the Hero HUD for one or more Players until reenabled.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Hero HUD disabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Disable Hero HUD
+enableHeroHUD:
+  description: Undoes the effect of the Disable Hero HUD Action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Hero HUD enabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enable Hero HUD
+disableKillFeed:
+  description: Disables the Kill Feed for one or more Players until reenabled.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Kill Feed disabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Disable Kill Feed
+enableKillFeed:
+  description: Undoes the effect of the Disable Kill Feed Action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Kill Feed enabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enable Kill Feed
+disableMessages:
+  description: Disables Messages for one or more Players until reenabled.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Messages disabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Disable Messages
+enableMessages:
+  description: Undoes the effect of the Disable Messages Action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Messages enabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enable Messages
+disableScoreboard:
+  description: Disables the Scoreboard for one or more Players until reenabled.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Scoreboard disabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Disable Scoreboard
+enableScoreboard:
+  description: Undoes the effect of the Disable Scoreboard Action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players who will have their Scoreboard enabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enable Scoreboard
+setAbilityCharge:
+  description: Set the Ability Charge Count for one or more Players if supported.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose ability charge count will be modified.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Button
+    description: The logical button associated with the Ability to be modified.
+    type: Button
+    default: PRIMARY FIRE
+  - name: Charge Count
+    description: The Charge count that will be set.
+    type: Integer
+    default: 0
+  en-US: Set Ability Charge
+setAbilityResource:
+  description: Set the Ability Resource Percentage for one or more Players if supported.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose Ability Resource Percentage will be modified.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Button
+    description: The logical button associated with the Ability to be modified.
+    type: Button
+    default: PRIMARY FIRE
+  - name: Resource Percent
+    description: The Percentage of Resource that will be set with respect to each Player's Ability Resource capacity.
+    type: Unsigned Float
+    default: 0
+  en-US: Set Ability Resource
+setJumpVerticalSpeed:
+  description: Sets the jump vertical speed of one or more Players to a percentage of their raw jump vertical speed.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose jump vertical speed will be set.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Jump Vertical Speed Percent
+    description: The Percentage of Resource that will be set with respect to each Player's Ability Resource capacity.
+    type: Unsigned Float
+    default: 100
+  en-US: Set Jump Vertical Speed
+disableNameplates:
+  description: Disables the nameplate on one or more Viewed Players from the perspective of one or more Viewing Players.
+  args:
+  - name: Viewed Players
+    description: The Player or Players who will have their Nameplates disabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Viewing Players
+    description: The Viewing Player or Players for whom the viewed Player's nameplate will be disabled.
+    type:
+    - Player
+    - Array: Player
+    default: All Players
+  en-US: Disable Nameplates
+enableNameplates:
+  description: Undoes the effect of Disable Nameplates for one or more Viewed Players from the perspective of one or more Viewing Players.
+  args:
+  - name: Viewed Players
+    description: The Player or Players who will have their Nameplates enabled.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Viewing Players
+    description: The Viewing Player or Players for whom the viewed Player's nameplate will be enabled.
+    type:
+    - Player
+    - Array: Player
+    default: All Players
+  en-US: Enable Nameplates
+startForcingPlayerOutlines:
+  description: Starts forcing the visibility and color of Player Outlines for the specified Viewed Player or Players from the perspective of one or more Viewing Players.
+  args:
+  - name: Viewed Players
+    description: The Player or Players who will have their outlines modified.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Viewing Players
+    description: The Viewing Player or Players for whom the viewed Player's outlines will be modified.
+    type:
+    - Player
+    - Array: Player
+    default: All Players
+  - name: Visible
+    description: Whether or not the specified Player Outlines should be visible.
+    type: Boolean
+    default: True
+  - name: Color
+    description: The color of the specified Player Outlines if they are visible. If a particular team is chosen, the color will either be Red or Blue, depending on whether the team is hostile to the viewer.
+    type: Color
+    default: White
+  en-US: Start Forcing Player Outlines
+stopForcingPlayerOutlines:
+  description: Cancels the behavior of Start Forcing Player Outlines for the spciefied Viewed Player or Players from the perspective of one or more Viewing Players.
+  args:
+  - name: Viewed Players
+    description: The Player or Players who will have their outlines reset.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Viewing Players
+    description: The Viewing Player or Players for whom the viewed Player's outlines will be reset.
+    type:
+    - Player
+    - Array: Player
+    default: All Players
+  en-US: Stop Forcing Player Outlines
+startScalingPlayer:
+  description: Start modifying the size of a Player or Players (including mode, movement collision, hit detection, and certain abilities). Note that large players placed into complex environments will severely impact server load, so consider also applying the Disable Movement Collision With Enviroment action.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose size will be modified.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Scale
+    description: The multiplier applied to the size of the player or players (So 0.5 halves the size, 2.0 doubles the size, etc.).
+    type: Unsigned Float
+    default: 1
+  - name: REEVALUATION
+    description: If this value is True, then scale will be Reevaluated and applied to the Player or Players every frame. If this value is False, then the scale is only avaluated once when the action begins.
+    type: Boolean
+    default: True
+  en-US: Start Scaling Player
+stopScalingPlayer:
+  description: Stops overring the size of a Player or Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose size will stop being overridden.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Stop Scaling Player
+startScalingBarriers:
+  description: Start modifying the size of barriers for a Player or Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose barriers will have their size modified.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Scale
+    description: The multiplier applied to the size of the barriers (So 0.5 halves the size, 2.0 doubles the size, etc.).
+    type: Unsigned Float
+    default: 1
+  - name: REEVALUATION
+    description: If this value is True, then scale will be Reevaluated and applied to the Player or Players every frame. If this value is False, then the scale is only avaluated once when the action begins.
+    type: Boolean
+    default: True
+  en-US: Start Scaling Barriers
+stopScalingBarriers:
+  description: Stops overring the size of barriers of a Player or Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose barriers will stop having their size being overridden.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Stop Scaling Barriers
+disableMovementCollisionWithEnvironment:
+  description: Causes a Player or Players to stop colliding with the environment (walls, ceilings, certain objects, etc.)
+  args:
+  - name: PLAYER
+    description: The Player or Players whose movement collision is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Include Floors
+    description: If True, collision with the floors is also disabled.
+    type: Boolean
+    default: False
+  en-US: Disable Movement Collision With Enviroment
+enableMovementCollisionWithEnvironment:
+  description: Undoes the effect of the Disable Movement Collision With Enviroment action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose movement collision is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enable Movement Collision With Environment
+disableMovementCollisionWithPlayers:
+  description: Causes a Player or Players to stop colliding with other Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose movement collision is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Disable Movement Collision With Players
+enableMovementCollisionWithPlayers:
+  description: Undoes the effect of the Disable Movement Collision With Players action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose movement collision is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Enable Movement Collision With Players
+startModifyingHeroVoiceLines:
+  description: Modifies the way hero voice lines sound for a Player or Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose movement collision is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Pitch Scalar
+    description: The amount that the pitch of the voice will be raised. (Up to 1.5) or lowered (Down to 0.5).
+    type: Unsigned float
+  - name: REEVALUATION
+    description: If True, Pitch Scalar is evaluated and updated every frame. If False, Pitch Scalar is evaluated once when the actions executes.
+    type: Boolean
+    default: True
+  en-US: Start Modifying Voice Lines
+stopModifyingHeroVoiceLines:
+  description: Undoes the effect of the Starting Modifying Hero Voice Lines action for one or more Players.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose movement collision is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Stop Modifying Voice Lines
+addHealthPoolToPlayer:
+  description: Adds a temporary health pool to a Player or Players. This health pool can be referenced using the Last Created Health Pool value. Up to 16 health pools of a given health type (Health, Armor, or Shields) may exist on a player (including base pools and pools generated by abilities).
+  args:
+  - name: PLAYER
+    description: The Player or Players whose movement collision is affected.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Health Type
+    description: Specifies the type of health (Armor or shields) contained in the Health Pool.
+    type:
+    - Health Type
+    - Array: Health of Type
+    default: Armor
+  - name: Max Health
+    description: The size of the Health Pool
+    type: Unsigned Float
+    default: 100
+  - name: Recoverable
+    description: Whether health in this pool can be healed once it is lost. If this is value is False, then the Health Pool will shrink and disappear as it is damaged.
+    type: Boolean
+    default: True
+  - name: REEVALUATION
+    description: If True and Recoverable is also True, then Max Health will be reevaluated every frame, if False or Recoverable is False, then Max Health is only evaluated once when this action executes.
+    type: Boolean
+    default: True
+  en-US: Add Health Pool To Player
+removeHealthPoolFromPlayer:
+  description: Removes a health pool that was added via the Add Health Pool action.
+  args:
+  - name: Health Pool ID
+    description: Specifies a Health Pool created by the Add Health Pool action. (Health pool IDs may be obtained using the Last Created Health Pool Value.)
+    type: Integer
+    default: Last Created Health Pool
+  en-US: Remove Health Pool From Player
+removeAllHealthPoolsFromPlayer:
+  description: Removes all health pools that were added to a Player or Players via the Add Health Pool action.
+  args:
+  - name: PLAYER
+    description: The Player or Players whose added Health Pools will be removed.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  en-US: Remove All Health Pools From Player
+setPlayerHealth:
+  description: Sets the health of a Player or Players without affecting stats or granting damage/healing credit. This action only has an effect on living players. (For dead players, use the Resurrect Player action instead.)
+  args:
+  - name: PLAYER
+    description: The Player or Players whose Health will be set.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Amount
+    description: How much health the Player or Players will have.
+    type: Unsigned float
+    default: 1
+  en-US: Set Player Health
