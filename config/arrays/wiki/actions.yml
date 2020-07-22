@@ -3398,7 +3398,7 @@ setMaxAmmo:
     default: 0
   - name: Ammo
     description: The max ammo that will be set.
-    type: Integer
+    type: Unsigned integer
     default: 0
   en-US: Set Max Ammo
 setWeapon:
@@ -3411,8 +3411,8 @@ setWeapon:
     - Array: Player
     default: EVENT PLAYER
   - name: Weapon
-    description: The number of the weapon to be equipped. 1 is the first weapon, and 2 is the second. If the specified weapon does not exist, players will use the default weapon.
-    type: Integer
+    description: The number of the weapon to be equipped. 1 Is the first weapon, and 2 is the second. If the specified weapon does not exist, players will use the default weapon.
+    type: Unsigned integer
     default: 0
   en-US: Set Weapon
 setReloadEnabled:
@@ -3508,7 +3508,7 @@ enableKillFeed:
     - Player
     - Array: Player
     default: EVENT PLAYER
-  en-US: Eanble Kill Feed
+  en-US: Enable Kill Feed
 disableMessages:
   description: Disables Messages for one or more Players until reenabled.
   args:
@@ -3528,7 +3528,7 @@ enableMessages:
     - Player
     - Array: Player
     default: EVENT PLAYER
-  en-US: Eanble Messages
+  en-US: Enable Messages
 disableScoreboard:
   description: Disables the Scoreboard for one or more Players until reenabled.
   args:
@@ -3560,7 +3560,7 @@ setAbilityCharge:
     default: EVENT PLAYER
   - name: Button
     description: The logical button associated with the Ability to be modified.
-    type: ButtonLiteral
+    type: Button
     default: PRIMARY FIRE
   - name: Charge Count
     description: The Charge count that will be set.
@@ -3571,14 +3571,14 @@ setAbilityResource:
   description: Set the Ability Resource Percentage for one or more Players if supported.
   args:
   - name: PLAYER
-    description: The Player or Players whose ability Ability Resource Percentage will be modified.
+    description: The Player or Players whose Ability Resource Percentage will be modified.
     type:
     - Player
     - Array: Player
     default: EVENT PLAYER
   - name: Button
     description: The logical button associated with the Ability to be modified.
-    type: ButtonLiteral
+    type: Button
     default: PRIMARY FIRE
   - name: Resource Percent
     description: The Percentage of Resource that will be set with respect to each Player's Ability Resource capacity.
@@ -3616,7 +3616,7 @@ disableNameplates:
     default: All Players
   en-US: Disable Nameplates
 enableNameplates:
-  description: Undoes the effect of Disable Nameplates for one or more Viewed Plaers from the perspective of one or more Viewing Players.
+  description: Undoes the effect of Disable Nameplates for one or more Viewed Players from the perspective of one or more Viewing Players.
   args:
   - name: Viewed Players
     description: The Player or Players who will have their Nameplates enabled.
@@ -3632,7 +3632,7 @@ enableNameplates:
     default: All Players
   en-US: Enable Nameplates
 startForcingPlayerOutlines:
-  description: Starts forcing the visibility and color of Player Outlines for the specified Viewed Player or Players from the perfective of one or more Viewing Players.
+  description: Starts forcing the visibility and color of Player Outlines for the specified Viewed Player or Players from the perspective of one or more Viewing Players.
   args:
   - name: Viewed Players
     description: The Player or Players who will have their outlines modified.
