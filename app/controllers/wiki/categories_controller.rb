@@ -62,6 +62,6 @@ class Wiki::CategoriesController < Wiki::BaseController
   private
 
   def category_params
-    params.require(:wiki_category).permit(:title, :slug, :description)
+    params.require(:wiki_category).permit(:title, :slug, :description, :is_documentation)
   end
 end

@@ -7,11 +7,17 @@
   We're still in the process of filling out the Wiki. In the future anyone will be able to contribute. If you wish to contribute now please contact someone on the Discord.
 </blockquote>
 
-<div class="cards mt-1/1">
-  <%= render @categories %>
+<h3 class="mt-1/1">Workshop Documentation</h3>
+<div class="cards">
+  <%= render @categories.where(is_documentation: true) %>
 </div>
 
-<div class="wiki-cards mt-1/1">
+<h3 class="mt-1/1">Other categories</h3>
+<div class="cards">
+  <%= render @categories.where(is_documentation: false) %>
+</div>
+
+<div class="wiki-cards top-offset">
   <div class="wiki-card">
     <h3 class="mt-0">Latest Articles</h3>
 

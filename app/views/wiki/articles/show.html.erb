@@ -7,8 +7,12 @@
 
     <h1 class="article__title">
       <%= @article.title %>
-      <small class="article__subtitle" title="<%= @article.updated_at %>">Last updated <%= @article.updated_at.strftime("%B %d, %Y") %></small>
+
+      <small class="article__subtitle mb-0" title="<%= @article.updated_at %>">
+        Last updated <%= @article.updated_at.strftime("%B %d, %Y") %>
+      </small>
     </h1>
+
 
     <div class="article__content">
       <%= markdown(@article.content || "_This article does not yet have a description_") %>
@@ -18,7 +22,6 @@
   <aside class="article__aside">
     <div class="article__aside-content">
       <h3 class="mt-0">Article details</h3>
-
       Created at: <%= @initial_article.created_at.strftime("%d %b %Y %R") %> <br>
       Last updated at: <%= @article.created_at.strftime("%d %b %Y %R") %> <br>
       <%= link_to wiki_article_edits_path(@article.group_id) do %>
@@ -26,6 +29,10 @@
       <% end %>
 
       <hr>
+
+      <% if @article.category.is_documentation? %>
+        <div><em>Workshop documentation</em></div>
+      <% end %>
 
       Category: <%= link_to @article.category.title, wiki_category_path(@article.category.slug) %> <br>
 

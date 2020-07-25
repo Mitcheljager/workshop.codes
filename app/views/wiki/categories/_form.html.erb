@@ -7,6 +7,11 @@
     <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Short description" %>
   </div>
 
+  <div class="form-group checkbox">
+    <%= form.check_box :is_documentation %>
+    <small><%= form.label :is_documentation, "This category is meant for documentation" %></small>
+  </div>
+
   <%= submit_tag "Submit", class: "button mt-1/4" %>
 
   <% if @category.persisted? && @category.articles.count == 0 %>

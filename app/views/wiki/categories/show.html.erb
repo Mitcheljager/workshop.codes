@@ -1,7 +1,15 @@
 <% content_for :page_title, @category.title + " | Wiki" %>
 
 <div class="action-header top-offset mb-1/2">
-  <h1 class="mt-0">Category <strong><%= @category.title %></strong></h1>
+  <h1 class="mt-0">
+    Category <strong><%= @category.title %></strong>
+
+    <% if @category.is_documentation? %>
+      <div>
+        <small>Workshop documentation</small>
+      </div>
+    <% end %>
+  </h1>
 
   <% if is_arbiter?(current_user) %>
     <div class="action-header__actions">

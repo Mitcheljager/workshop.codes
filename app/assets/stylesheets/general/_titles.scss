@@ -9,6 +9,11 @@ h5 {
   .high-contrast & {
     font-weight: normal;
   }
+
+  small {
+    font-size: 60%;
+    color: $text-color;
+  }
 }
 
 .heading {
