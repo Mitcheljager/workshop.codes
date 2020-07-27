@@ -1,9 +1,9 @@
 .wiki-cards {
   display: grid;
-  grid-gap: $margin / 4;
+  grid-gap: $margin / 2;
 
   @include media-min(md) {
-    grid-gap: $margin / 2;
+    grid-gap: $margin;
     grid-template-columns: repeat(2, 1fr);
   }
 }

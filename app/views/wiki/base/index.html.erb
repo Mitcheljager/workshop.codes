@@ -7,31 +7,19 @@
   We're still in the process of filling out the Wiki. In the future anyone will be able to contribute. If you wish to contribute now please contact someone on the Discord.
 </blockquote>
 
-<h3 class="mt-1/1">Workshop Documentation</h3>
-<div class="cards">
-  <%= render @categories.where(is_documentation: true) %>
-</div>
+<div class="logo-background"></div>
 
-<h3 class="mt-1/1">Other categories</h3>
-<div class="cards">
-  <%= render @categories.where(is_documentation: false) %>
-</div>
-
-<div class="wiki-cards top-offset">
+<div class="wiki-cards mt-1/1">
   <div class="wiki-card">
-    <h3 class="mt-0">Latest Articles</h3>
+    <h3 class="mt-0">Wiki categories</h3>
+    <%= render @categories.where(is_documentation: false) %>
 
-    <% @articles.each do |article| %>
-      <div class="wiki-card__item">
-        <%= link_to article.title, wiki_article_path(article.slug) %> in <%= link_to article.category.title, wiki_category_path(article.category.slug) %>
-      </div>
-    <% end %>
-
-    <%= link_to "View all articles", wiki_articles_path, class: "button button--link" %>
+    <h3 class="mt-1/2">Workshop documentation</h3>
+    <%= render @categories.where(is_documentation: true) %>
   </div>
 
   <div class="wiki-card">
-    <h3 class="mt-0">Latest Changes</h3>
+    <h3 class="mt-1/2 md:mt-0">Latest changes</h3>
 
     <% @edits.each do |edit| %>
       <div class="wiki-card__item">

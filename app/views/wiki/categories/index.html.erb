@@ -10,6 +10,10 @@
   <% end %>
 </div>
 
-<div class="cards mt-1/1">
-  <%= render @categories %>
+<div class="mt-1/1">
+  <h3 class="mt-0">Wiki categories</h3>
+  <%= render @categories.where(is_documentation: false) %>
+
+  <h3 class="mt-1/2">Workshop documentation</h3>
+  <%= render @categories.where(is_documentation: true) %>
 </div>

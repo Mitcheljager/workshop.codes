@@ -3,9 +3,7 @@ class Wiki::BaseController < ApplicationController
 
   def index
     @categories = Wiki::Category.all
-    @edits = Wiki::Edit.order(created_at: :desc).limit(5)
-    @articles = Wiki::Article.approved.group(:group_id).maximum(:id).values
-    @articles = Wiki::Article.approved.where(id: @articles).order(created_at: :desc).limit(5)
+    @edits = Wiki::Edit.order(created_at: :desc).limit(10)
     @unapproved_edits_count = Wiki::Edit.where(approved: false).size
   end
 
