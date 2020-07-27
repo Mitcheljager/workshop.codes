@@ -7,7 +7,7 @@ class Wiki::CategoriesController < Wiki::BaseController
   end
 
   def index
-    @categories = Wiki::Category.all
+    @categories = Wiki::Category.order(title: :asc)
   end
 
   def show
