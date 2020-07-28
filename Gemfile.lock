@@ -122,6 +122,7 @@ GEM
     crass (1.0.6)
     device_detector (1.0.3)
     diffy (3.3.0)
+    discord-notifier (1.0.3)
     elasticsearch (7.5.0)
       elasticsearch-api (= 7.5.0)
       elasticsearch-transport (= 7.5.0)
@@ -351,6 +352,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   chart-js-rails
   diffy
+  discord-notifier
   elasticsearch-model (~> 6)
   elasticsearch-rails (~> 6)
   faker

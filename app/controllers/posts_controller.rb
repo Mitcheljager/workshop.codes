@@ -60,6 +60,7 @@ class PostsController < ApplicationController
         unless @post.present?
           revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
           @post = revision.post if revision
+
           redirect_to post_path(revision.post.code) if revision
         end
 
@@ -115,6 +116,8 @@ class PostsController < ApplicationController
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
       create_collection if post_params[:new_collection] != ""
 
+      notify_discord("New")
+
       redirect_to post_path(@post.code)
     else
       render :new
@@ -137,11 +140,10 @@ class PostsController < ApplicationController
       if (post_params[:revision].present? && post_params[:revision] != "0") || (current_code != post_params[:code]) || (current_version != post_params[:version])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible).save
-
-        redirect_to post_path(@post.code)
-      else
-        redirect_to post_path(@post.code)
       end
+
+      notify_discord("Update")
+      redirect_to post_path(@post.code)
     else
       @post.code = current_code
       render :edit
@@ -256,5 +258,35 @@ class PostsController < ApplicationController
 
   def set_request_headers
     headers["Access-Control-Allow-Origin"] = "*"
+  end
+
+  def notify_discord(type)
+    return unless ENV["DISCORD_NOTIFICATIONS_WEBHOOK_URL"].present?
+    return if @post.private?
+
+    set_post_images
+
+    post = @post
+    revision = @revision
+    path = post_url(post.code.upcase)
+    user_path = user_url(post.user.username)
+    image = @ordered_images.present? ? url_for(@ordered_images.first.variant(quality: 95).processed) : ""
+    avatar = @post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed
+
+    embed = Discord::Embed.new do
+      color "#3fbf74"
+      thumbnail url: image
+      author name: post.user.username, avatar_url: avatar, url: user_path
+      title "(#{ type }) #{ post.title }"
+      url path
+      description post.description.truncate(500)
+      add_field name: "\u200B", value: "\u200B"
+      add_field name: "Code", value: post.code.upcase
+      add_field name: "\u200B", value: "\u200B" if revision && post.revisions.last.description.present?
+      add_field name: "Update notes", value: post.revisions.last.description.truncate(500) if revision && post.revisions.last.description.present?
+      footer text: "Elo Hell Esports", icon_url: "https://elohell.gg/media/img/logos/Elo-Hell-Logo_I-C-Dark.png"
+    end
+
+    Discord::Notifier.message(embed)
   end
 end
