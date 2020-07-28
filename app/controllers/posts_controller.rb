@@ -270,7 +270,7 @@ class PostsController < ApplicationController
     revision = @revision
     path = post_url(post.code.upcase)
     user_path = user_url(post.user.username)
-    image = @ordered_images.present? ? url_for(@ordered_images.first.variant(quality: 95).processed) : ""
+    image = @ordered_images.present? && @ordered_images.first.present? ? url_for(@ordered_images.first.variant(quality: 95).processed) : ""
     avatar = @post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed
 
     embed = Discord::Embed.new do
