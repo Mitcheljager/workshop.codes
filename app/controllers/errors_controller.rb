@@ -8,6 +8,6 @@ class ErrorsController < ApplicationController
   end
 
   def internal_error
-    render "internal_error", status: 500
+    render "internal_error", status: 500, layout: false
   end
 end
