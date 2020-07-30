@@ -15,7 +15,7 @@
   </div>
 
   <div class="post-comment__content">
-    <%= markdown(sanitize(@post.description)) %>
+    <%= markdown(sanitize(comment.content)) %>
   </div>
 
   <% if current_user %>
