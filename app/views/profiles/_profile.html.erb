@@ -16,7 +16,7 @@
 
     <% if !small && user.description.present? %>
       <div class="mt-1/4">
-        <small><%= markdown(sanitize(@post.description, tags: %w(div span style), attributes: %w(style))) %></small>
+        <small><%= markdown(sanitize(user.description, tags: %w(div span style), attributes: %w(style))) %></small>
       </div>
     <% end %>
   </div>
