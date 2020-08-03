@@ -27,6 +27,7 @@
     <%= render "logged_in_user_assets" if current_user %>
     <%= render "destroy_remember_me_cookie" if !current_user && cookies[:remember_token] %>
     <%= render "analytics_code" %>
+    <%= render "ads_head" %>
   </head>
 
   <body class="<%= accessibility_settings if current_user.present? %>">
