@@ -74,6 +74,15 @@
   name: Necropolis
   type: Arcade
 -
+  name: Estádio das Rãs
+  type: Lúcioball
+-
+  name: Sydney Harbour Arena
+  type: Lúcioball
+-
+  name: Busan Stadium
+  type: Lúcioball
+-
   name: Château Guillard
   type: Deathmatch
 -
@@ -94,12 +103,3 @@
 -
   name: Workshop Expanse
   type: Workshop
--
-  name: Estádio das Rãs
-  type: Lúcioball
--
-  name: Sydney Harbour Arena
-  type: Lúcioball
--
-  name: Busan Stadium
-  type: Lúcioball
