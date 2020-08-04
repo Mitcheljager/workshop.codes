@@ -201,6 +201,7 @@
   @include media-min(sm) {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   .item--bottom & {
