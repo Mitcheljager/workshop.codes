@@ -65,4 +65,4 @@
   </article>
 <% end %>
 
-<%= render "ad_inline" if post_counter == 9 %>
+<%= render "ad_inline" if local_assigns[:post_counter] && post_counter == 9 %>
