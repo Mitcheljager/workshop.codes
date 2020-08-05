@@ -17,10 +17,8 @@
 
       <%= link_to "View all On Fire Items", on_fire_path, class: "button button--secondary" %>
 
-      <%= render "ad_banner" %>
-
       <div class="logo-background">
-        <div class="banner mt-1/1">
+        <div class="banner top-offset">
           <h3 class="mt-0 mb-0"><strong>Elo Hell Workshop Discord</strong></h3>
 
           <p><small><em>Looking for help? Looking for a place to discuss the Workshop with other?<br><strong>Join the largest Overwatch Workshop community on Discord!</strong></em></small></p>
@@ -28,6 +26,8 @@
           <%= link_to "Join Discord", "https://discord.gg/DdxsQRD", class: "button", target: "_blank", rel: "noreferrer noopener" %>
         </div>
       </div>
+
+      <%= render "ad_banner" %>
 
       <div class="action-header">
         <h2 class="top-offset"><strong>Recent</strong> Items</h2>
@@ -41,6 +41,7 @@
       </div>
     <% end %>
   <% else %>
+
     <div class="heading action-header">
       <h1><strong>Recent</strong> Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %></h1>
 

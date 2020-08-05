@@ -76,7 +76,7 @@
     border-left: 1px solid rgba($pure-white, .5);
   }
 
-  @include media-min(xl) {
+  @media (min-width: 1400px) {
     margin-left: $margin;
     padding-left: $margin;
   }
