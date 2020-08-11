@@ -274,6 +274,7 @@ class PostsController < ApplicationController
     user_path = user_url(post.user.username)
     image = @ordered_images.present? && @ordered_images.first.present? ? url_for(@ordered_images.first.variant(quality: 95).processed) : ""
     avatar = @post.user.profile_image.present? ? url_for(@post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed) : ""
+    content = ActionController::Base.helpers.strip_tags(post.description).truncate(500)
 
     embed = Discord::Embed.new do
       color "#3fbf74"
@@ -281,7 +282,7 @@ class PostsController < ApplicationController
       author name: post.user.username, avatar_url: avatar, url: user_path
       title "(#{ type }) #{ post.title }"
       url path
-      description post.description.truncate(500)
+      description content
       add_field name: "\u200B", value: "\u200B"
       add_field name: "Code", value: post.code.upcase
       add_field name: "\u200B", value: "\u200B" if revision && post.revisions.last.description.present?
