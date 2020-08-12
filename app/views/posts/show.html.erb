@@ -76,7 +76,7 @@
     <% end %>
 
     <div class="item__description">
-      <%= markdown(sanitize(@post.description, tags: %w(div span style dl dd img details summary a b), attributes: %w(style href id class src title))) %>
+      <%= markdown(sanitize(@post.description, tags: %w(div span style dl dd img details summary a b iframe), attributes: %w(style href id class src title width height frameborder allow allowfullscreen))) %>
     </div>
 
     <%= render "posts/snippet" if @post.snippet.present? %>

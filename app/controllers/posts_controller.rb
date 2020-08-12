@@ -95,7 +95,7 @@ class PostsController < ApplicationController
 
   def parse_markdown
     content = post_params[:description] || post_params[:content]
-    parsed_markdown = markdown(ActionController::Base.helpers.sanitize(content.to_s, tags: %w(div span style dl dd img details summary a b), attributes: %w(style href id class src title)))
+    parsed_markdown = markdown(ActionController::Base.helpers.sanitize(content.to_s, tags: %w(div span style dl dd img details summary a b iframe), attributes: %w(style href id class src title width height frameborder allow allowfullscreen)))
 
     render json: parsed_markdown, layout: false
   end
