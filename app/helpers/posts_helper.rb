@@ -6,7 +6,7 @@ module PostsHelper
       image = post.images.find_by_blob_id(JSON.parse(post.image_order).first)
 
       if image
-        url = url_for image.variant(quality: 85, resize_to_fill: [120, 68]).processed
+        url = url_for image.variant(quality: 90, resize_to_fill: [120, 68]).processed
       end
     end
 
