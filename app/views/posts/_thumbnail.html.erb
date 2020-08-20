@@ -1,14 +1,5 @@
 <% cache [post, "thumbnail"] do %>
   <%= link_to post_path(post.code), class: "item__thumbnail" do %>
-    <% if post.image_order.present? && post.image_order != "[]" %>
-      <% image = post.images.find_by_blob_id(JSON.parse(post.image_order).first) %>
-
-      <%= image_tag url_for(image.variant(quality: 85, resize_to_fill: [120, 68]).processed), width: 120, height: 68, loading: "lazy" %>
-    <% else %>
-      <% random_with_seed = Random.new(post.id).rand(JSON.parse(post.maps).length) %>
-      <% map = maps.find { |m| m["name"] == JSON.parse(post.maps)[random_with_seed - 1] } %>
-
-      <%= image_tag "maps/small/#{ map["slug"] }.jpg", width: 120, height: 68, loading: "lazy" if map.present? %>
-    <% end %>
+    <%= image_tag url_for_post_thumbnail(post), width: 120, height: 68, loading: "lazy" %>
   <% end %>
 <% end %>
