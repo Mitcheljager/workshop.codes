@@ -1,111 +1,148 @@
 -
   name: Hanamura
   type: Assault
+  slug: hanamura
 -
   name: Horizon Lunar Colony
   type: Assault
+  slug: horizon-lunar-colony
 -
   name: Paris
   type: Assault
+  slug: paris
 -
   name: Temple of Anubis
   type: Assault
+  slug: temple-of-anubis
 -
   name: Volskaya Industries
   type: Assault
+  slug: volskaya-industries
 -
   name: Dorado
   type: Escort
+  slug: dorado
 -
   name: Havana
   type: Escort
+  slug: havana
 -
   name: Junkertown
   type: Escort
+  slug: junkertown
 -
   name: Rialto
   type: Escort
+  slug: rialto
 -
   name: Route 66
   type: Escort
+  slug: route-66
 -
   name: "Watchpoint: Gibraltar"
-  type: Escort
+  type: Escorts
+  slug: watchpoint-gibraltar
 -
   name: Blizzard World
   type: Hybrid
+  slug: blizzard-world
 -
   name: Eichenwalde
   type: Hybrid
+  slug: eichenwalde
 -
   name: Hollywood
   type: Hybrid
+  slug: hollywood
 -
   name: King's Row
   type: Hybrid
+  slug: kings-row
 -
   name: Numbani
   type: Hybrid
+  slug: numbani
 -
   name: Busan
   type: Control
+  slug: busan
 -
   name: Ilios
   type: Control
+  slug: ilios
 -
   name: Lijiang Tower
   type: Control
+  slug: lijiang-tower
 -
   name: Nepal
   type: Control
+  slug: nepal
 -
   name: Oasis
   type: Control
+  slug: oasis
 -
   name: Black Forest
   type: Arcade
+  slug: black-forest
 -
   name: Castillo
   type: Arcade
+  slug: castillo
 -
   name: "Ecopoint: Antarctica"
   type: Arcade
+  slug: ecopoint-antarctica
 -
   name: Necropolis
   type: Arcade
+  slug: necropolis
 -
   name: Estádio das Rãs
   type: Lúcioball
+  slug: estadio-das-ras
 -
   name: Sydney Harbour Arena
   type: Lúcioball
+  slug: sydney-harbour-arena
 -
   name: Sydney Harbour Arena Classic
   type: Lúcioball
+  slug: sydney-harbour-arena-classic
 -
   name: Busan Stadium
   type: Lúcioball
+  slug: busan-stadium
 -
   name: Busan Stadium Classic
   type: Lúcioball
+  slug: busan-stadium-classic
 -
   name: Château Guillard
   type: Deathmatch
+  slug: chateau-guillard
 -
   name: Petra
   type: Deathmatch
+  slug: petra
 -
   name: Ayutthaya
   type: Capture the Flag
+  slug: ayutthaya
 -
   name: Practice Range
   type: Practice
+  slug: practice-range
 -
   name: Workshop Chamber
   type: Workshop
+  slug: workshop-chamber
 -
   name: Workshop Island
   type: Workshop
+  slug: workshop-island
 -
   name: Workshop Expanse
   type: Workshop
+  slug: workshop-expanse

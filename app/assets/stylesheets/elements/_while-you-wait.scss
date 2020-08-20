@@ -35,12 +35,13 @@
   grid-template-areas: "title code";
   grid-gap: 1rem;
   margin-bottom: 2px;
+  padding-top: 0;
 
   a {
     display: block;
     align-self: center;
     margin-top: 1px;
-    padding: .25rem 0 .25rem 1rem;
+    padding: .25rem 0;
     text-decoration: none;
   }
 }

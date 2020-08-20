@@ -36,18 +36,21 @@
 .item {
   display: grid;
   grid-template:
-    "title"
-    "code"
-    "details";
+    "thumbnail code"
+    "title title"
+    "details details";
+  grid-template-columns: 50% 50%;
   border-top: 1px solid $border-color;
   margin-bottom: $margin / 3;
+  padding-top: $margin / 3;
 
   @include media-min(sm) {
     grid-template:
-      "title code"
-      "details action";
-    grid-template-columns: calc(100% - #{ $code-width }) $code-width;
+      "thumbnail title code"
+      "thumbnail details action";
+    grid-template-columns: $thumbnail-width calc(100% - #{ $thumbnail-width } - #{ $code-width }) $code-width;
     margin-bottom: 0;
+    padding-top: 0;
   }
 
   @supports (-ms-ime-align:auto) {
@@ -71,8 +74,15 @@
     margin-top: $margin;
     border-top: 0;
     border-bottom: 1px solid $border-color;
+    grid-template:
+      "title"
+      "code";
 
     @include media-min(sm) {
+      grid-template:
+        "title code"
+        "details action";
+      grid-template-columns: calc(100% - #{ $code-width }) $code-width;
       margin-top: $margin * 2;
     }
 
@@ -92,8 +102,58 @@
   }
 
   .simple-view & {
+    display: block;
     border: 3px solid $border-color;
     margin-bottom: 1rem;
+    padding-top: 0;
+
+    @include media-min(sm) {
+      display: grid;
+      grid-template: "title code";
+      grid-template-columns: calc(100% - #{ $code-width }) $code-width;
+    }
+  }
+}
+
+.item__thumbnail {
+  grid-area: thumbnail;
+  position: relative;
+  width: 120px;
+  height: 120px / 16 * 9;
+  background: $bg-dark;
+  box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
+
+  @include media-min(sm) {
+    display: block;
+    margin: $margin / 3 0;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url($snowball-icon);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40%;
+  }
+
+  &:hover,
+  &:active {
+    filter: brightness(1.15);
+  }
+
+  .simple-view & {
+    display: none;
+  }
+
+  img {
+    display: block;
+    position: relative;
   }
 }
 
@@ -109,7 +169,7 @@
   color: $white;
 
   @include media-min(sm) {
-    padding-right: $margin / 3;
+    padding: $margin / 6 $margin / 3 0 $margin / 3;
   }
 
   .item--single & {
@@ -159,7 +219,7 @@
   }
 
   .simple-view & {
-    padding-left: 1rem;
+    padding: $margin / 3;
   }
 }
 
@@ -194,7 +254,6 @@
 .item__details {
   grid-area: details;
   display: block;
-  padding: $margin / 6 0 0;
   color: $text-color-dark;
   font-size: $font-size-small;
 
@@ -202,6 +261,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    padding: 0 0 $margin / 6 $margin / 3;
   }
 
   .item--bottom & {
