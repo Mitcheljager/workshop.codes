@@ -8,9 +8,7 @@
       <% random_with_seed = Random.new(post.id).rand(JSON.parse(post.maps).length) %>
       <% map = maps.find { |m| m["name"] == JSON.parse(post.maps)[random_with_seed - 1] } %>
 
-      <% if map.present? && Rails.application.assets.find_asset("maps/small/#{ map["slug"] }.jpg") != nil %>
-        <%= image_tag "maps/small/#{ map["slug"] }.jpg", width: 120, height: 68, loading: "lazy" %>
-      <% end %>
+      <%= image_tag "maps/small/#{ map["slug"] }.jpg", width: 120, height: 68, loading: "lazy" if map.present? %>
     <% end %>
   <% end %>
 <% end %>
