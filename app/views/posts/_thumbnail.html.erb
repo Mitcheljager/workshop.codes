@@ -1,8 +1,5 @@
 <% cache [post, "thumbnail"] do %>
   <%= link_to post_path(post.code), class: "item__thumbnail" do %>
-    <% begin %>
-      <%= image_tag url_for_post_thumbnail(post), width: 120, height: 68, loading: "lazy" %>
-    <% rescue %>
-    <% end %>
+    <%= image_tag url_for_post_thumbnail(post), width: 120, height: 68, loading: "lazy" %>
   <% end %>
 <% end %>
