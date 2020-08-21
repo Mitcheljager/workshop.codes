@@ -47,7 +47,7 @@
   color: rgba(white, .75);
   white-space: nowrap;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1100px) {
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 0;
@@ -62,7 +62,7 @@
     margin-top: $margin / 2;
     margin-bottom: $margin / 2;
 
-    @media (min-width: 1000px) {
+    @media (min-width: 1100px) {
       margin-top: 0;
       margin-bottom: 0;
       margin-right: 1rem;
@@ -73,7 +73,7 @@
   svg {
     height: 36px;
 
-    @media (min-width: 1000px) {
+    @media (min-width: 1100px) {
       height: 24px;
       margin-top: 4px;
     }
@@ -91,7 +91,7 @@
   }
 
   &:last-of-type {
-    @media (min-width: 1000px) {
+    @media (min-width: 1100px) {
       margin-right: $margin / 2;
     }
   }

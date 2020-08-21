@@ -58,16 +58,10 @@
   }
 
   &--small {
-    display: block;
-    padding-bottom: $margin / 3;
+    display: flex;
+    align-items: center;
+    padding: $margin / 6 0;
     margin-bottom: 0;
-
-    @include media-min(lg) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 0;
-    }
   }
 
   &--single {
@@ -180,6 +174,10 @@
     @include media-min(sm) {
       margin-right: $margin / 3;
     }
+  }
+
+  .item--small & {
+    padding: 0 0 $margin / 6 $margin / 3
   }
 
   .item--extra-small & {
@@ -344,6 +342,7 @@
   flex-wrap: nowrap;
   align-items: center;
   text-align: right;
+  padding-left: $margin / 3;
 
   a {
     display: block;

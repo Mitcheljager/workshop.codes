@@ -4,14 +4,18 @@
   <% @posts.each do |post| %>
     <div data-toggle-content>
       <div class="item item--small">
-        <div class="item__title">
-          <%= link_to post.title, post_path(post.code) %>
-        </div>
+        <%= render "posts/thumbnail", post: post %>
 
-        <div class="item__actions">
-          <%= link_to "Analytics", "#", class: "text-white mr-1/4", data: { action: "toggle-content load-analytics", id: post.id } %>
-          <%= link_to "Edit", edit_post_path(post.code), class: "" %>
-          <%= link_to "Delete", post_path(post.code), class: "text-red", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
+        <div>
+          <div class="item__title">
+            <%= link_to post.title, post_path(post.code) %>
+          </div>
+
+          <div class="item__actions">
+            <%= link_to "Analytics", "#", class: "text-white mr-1/4", data: { action: "toggle-content load-analytics", id: post.id } %>
+            <%= link_to "Edit", edit_post_path(post.code), class: "" %>
+            <%= link_to "Delete", post_path(post.code), class: "text-red", method: :delete, data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
+          </div>
         </div>
       </div>
 
