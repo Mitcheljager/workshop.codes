@@ -8,13 +8,11 @@
   <% content_for :page_title, "#{ params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
 <% end %>
 
-<%= render "ad_banner" %>
-
 <% cache_if request.path_parameters.without(:controller, :action, :from, :to).length == 1 && !current_user,
             ["filter", request.path_parameters.without(:controller, :action, :from, :to), @posts],
             expires_in: 12.hours do %>
 
-  <div class="mt-1/1 mb-1/2">
+  <div class="top-offset mb-1/2">
     <h2>
       Workshop Codes
       <% if params[:search] %> for <strong><%= params[:search] %></strong> <% end %>

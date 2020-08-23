@@ -18,7 +18,7 @@
 
     <div class="item__details">
       <div class="item__details-item">
-        By | 
+        By |
         <%= link_to post.user.username.split("#")[0], user_path(post.user.username) %>
       </div>
 
@@ -50,5 +50,3 @@
     <% end %>
   </article>
 <% end %>
-
-<%= render "ad_inline" if local_assigns[:post_counter] && post_counter == 9 %>
