@@ -19,7 +19,7 @@ User-agent: SemrushBot-BM
 Disallow: /
 
 User-agent:*
-Allow: /*/*.jpeg
+Allow: /rails/active_storage/*
 
 Disallow: */to/
 Disallow: */from/
