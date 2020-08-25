@@ -18,6 +18,9 @@ Disallow: /
 User-agent: SemrushBot-BM
 Disallow: /
 
+User-agent: Twitterbot
+Allow: /
+
 User-agent:*
 Allow: /rails/active_storage/*
 
