@@ -19,6 +19,8 @@ User-agent: SemrushBot-BM
 Disallow: /
 
 User-agent:*
+Allow: /*/*.jpeg
+
 Disallow: */to/
 Disallow: */from/
 Disallow: */sort/
