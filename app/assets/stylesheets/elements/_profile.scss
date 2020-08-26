@@ -20,7 +20,8 @@
   font-size: 21px;
   color: $text-color;
   text-decoration: none;
-  font-family: "Barlow Condensed", $font-stack;
+  font-family: "Barlow Condensed", "Impact";
+  font-size-adjust: 0.52;
   text-transform: uppercase;
 
   &:hover,
