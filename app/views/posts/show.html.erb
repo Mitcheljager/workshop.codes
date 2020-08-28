@@ -27,8 +27,8 @@
         <%= render "favorites/form", post: @post %>
       </h1>
 
-      <div class="item__code">
-        <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: @post.code } %>
+      <div class="item__code" data-action="copy-to-clipboard" data-target="<%= @post.code %>">
+        <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
 
         <span class="copy">
           <span data-copy="<%= @post.code %>" data-track-copy><%= @post.code %></span>
