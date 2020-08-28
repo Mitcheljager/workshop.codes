@@ -234,6 +234,7 @@
   line-height: 1.25em;
   font-size-adjust: 0.51;
   color: $white;
+  cursor: copy;
 
   .item--extra-small & {
     padding: $margin / 8 0;

@@ -39,8 +39,8 @@
       </small>
     </div>
 
-    <div class="item__code">
-      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: revision.code } %>
+    <div class="item__code" data-action="copy-to-clipboard" data-target="<%= revision.code %>">
+      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
 
       <span class="copy">
         <span data-copy="<%= revision.code %>" data-track-copy><%= revision.code %></span>
