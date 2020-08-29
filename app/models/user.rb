@@ -9,6 +9,16 @@ class SerializedArrayLengthValidator < ActiveModel::EachValidator
   end
 end
 
+class UniquenessAgainstNiceUrlValidator < ActiveModel::Validator
+  def validate(record)
+    user_with_nice_url = User.find_by("upper(nice_url) = ?", record.username.upcase)
+
+    if user_with_nice_url.present?
+      record.errors[:username] << "is not available."
+    end
+  end
+end
+
 class User < ApplicationRecord
   has_secure_password
 
@@ -32,7 +42,7 @@ class User < ApplicationRecord
   encrypts :email
   blind_index :email
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z\d][a-z\d-]*[a-z\d#]*[a-z\d]\z/i }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, uniqueness_against_nice_url: true, format: { with: /\A[a-z\d][a-z\d-]*[a-z\d#]*[a-z\d]\z/i }
   validates :password, presence: true, length: { minimum: 8 }, if: :password
   validates :email, uniqueness: true, allow_blank: true
   validates :link, allow_blank: true, format: URI::regexp(%w[http https])
