@@ -13,6 +13,17 @@
     <%= form.label :level, class: "form-label" %>
     <%= form.select :level, User.levels.keys.to_a, {}, class: "form-select w-auto" %>
 
+    <div class="checkbox mt-1/2">
+      <%= form.check_box :verified %>
+      <%= form.label :verified, "Verified" %>
+    </div>
+
+    <% if @user.verified? %>
+      <div class="mt-1/8">
+        Verified nice url: <%= @user.nice_url %>
+      </div>
+    <% end %>
+
     <div class="mt-1/4">
       <%= form.submit class: "button button--small button--secondary" %>
     </div>

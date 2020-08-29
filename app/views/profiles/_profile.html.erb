@@ -2,7 +2,7 @@
 <% size = small ? 80 : 140 %>
 
 <div class="profile-banner <%= "profile-banner--small" if small %>">
-  <%= link_to user_path(user.username), class: "profile-image #{ user.profile_image.attached? || user.provider_profile_image.present? ? '' : 'profile-image--empty' }" do %>
+  <%= link_to user_profile_path(user), class: "profile-image #{ user.profile_image.attached? || user.provider_profile_image.present? ? '' : 'profile-image--empty' }" do %>
     <% if user.profile_image.attached? %>
       <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed %>
     <% elsif user.provider_profile_image.present? %>
@@ -11,7 +11,20 @@
   <% end %>
 
   <div class="profile-banner__content">
-    <%= link_to user.username.split("#")[0], user_path(user.username), class: "profile-banner__title", rel: "author" %>
+    <%= link_to user_profile_path(user), class: "profile-banner__title", rel: "author" do %>
+      <%= user.username.split("#")[0] %>
+
+      <% if user.verified? %>
+        <div class="profile-banner__verified">
+          <div class="tooltip">
+            <%= inline_svg_tag "icons/verified.svg", class: "profile-banner__verified" %>
+
+            <div class="tooltip__content">This user is verified.</div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= link_to user.link, user.link, class: "profile-banner__action", target: "_blank", rel: "noreferrer noopener" if user.link.present? %>
 
     <% if !small && user.description.present? %>

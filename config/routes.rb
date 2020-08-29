@@ -58,7 +58,8 @@ Rails.application.routes.draw do
 
   resources :profiles, param: :username, only: [:update]
   get "profile/edit", to: "profiles#edit", as: "edit_profile"
-  get "users/:username", to: "profiles#show", as: "profile_show", concerns: :paginatable
+  get "u/:username", to: "profiles#show", as: "profile_show", concerns: :paginatable
+  get "users/:username", to: redirect { |params| "u/#{ params[:username] }" }
 
   resources :sessions, only: [:new, :create, :destroy]
   get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
@@ -66,6 +67,7 @@ Rails.application.routes.draw do
   get "register", to: "users#new", as: "new_user"
   get "login", to: "sessions#new", as: "login"
   get "logout", to: "sessions#destroy", as: "logout"
+
 
   resources :forgot_passwords, param: :token, only: [:index, :create]
   get "forgot-password", to: "forgot_passwords#new", as: "new_forgot_password"
@@ -98,6 +100,17 @@ Rails.application.routes.draw do
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
   resources :collections, param: :nice_url, path: "/c", concerns: :paginatable, only: [:show]
-  resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index], constraints: { code: /.{5,6}/ }
-  get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
+
+  constraints code: /.{5,6}/ do
+    resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show]
+    get ":code", to: "posts#show", constraints: lambda { |request|
+      request.params[:code].present? && Post.find_by("upper(code) = ?", request.params[:code].upcase).present?
+    }
+  end
+
+  constraints nice_url: /[a-zA-Z0-9-]+/ do
+    get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: lambda { |request|
+      request.params[:nice_url].present? && Post.find_by_nice_url(request.params[:nice_url].downcase).present?
+    }
+  end
 end

@@ -1,4 +1,4 @@
-<% content_for :page_title, @user.username %>
+<% content_for :page_title, @user.username.split("#")[0] %>
 
 <% if @user == current_user %>
   <div class="well mt-1/1">

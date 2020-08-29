@@ -1,4 +1,8 @@
-<%= form_for @user, url: profile_path(@user.username) do |f| %>
+<% if flash[:alert] %>
+  <div class="warning mt-0 mb-1/2"><mark><%= flash[:alert] %></mark></div>
+<% end %>
+
+<%= form_for @user, url: profile_path(@user.username) do |form| %>
   <% if @user.errors.any? %>
     <div class="error-block">
       <h2 class="error-block__title"><strong><%= pluralize(@user.errors.count, "error") %></strong> prohibited this user from being saved:</h2>
@@ -11,21 +15,39 @@
     </div>
   <% end %>
 
+  <% if @user.verified? %>
+    <div class="well align-center justify-start">
+      <%= inline_svg_tag "icons/verified.svg", height: 30, width: 30, class: "fill-current-color" %>
+      <div class="pl-1/4">You're verified!</div>
+    </div>
+  <% else %>
+    <em data-toggle-content>
+      <small>
+        <%= tag.strong "You are not verified (?)", class: "cursor-pointer", data: { action: "toggle-content" } %>
+        <div data-role="content-to-toggle snippet-container" style="display: none">
+          <p>User names are not unique. A battletag can be the same for multiple users. Being verified helps users indentify that you are indeed you. Furthermore if you are logged in with battle.net you will claim the url without the id. For example <%= profile_show_path("username#12345") %> will become <%= profile_show_path("username") %>. The old url will also remain functional.</p>
+          <p>If you wish to be verified, please contact Mitsiee#9370 on Discord or @ me wherever you want on the Elo Hell Workshop Discord.</p>
+          <p>Please note: To be eligible for verification you need to have made a good number of contributions to the Workshop community. When contacting me please note why you wish to be verified.</p>
+        </div>
+      </small>
+    </em>
+  <% end %>
+
   <% if !@user.provider_profile_image.present? %>
     <div class="form-group-max-width mt-1/1">
-      <%= f.label :profile_image, "Profile image", class: "form-label" %>
+      <%= form.label :profile_image, "Profile image", class: "form-label" %>
       <% begin %>
         <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
       <% rescue%>
       <% end %>
-      <%= f.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
+      <%= form.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
 
       <p class="form-hint mt-1/4">
         The image will be processed to a 140x140 format. Max 2MB.
       </p>
     </div>
   <% else %>
-    <%= f.label :profile_image, "Profile image", class: "form-label" %>
+    <%= form.label :profile_image, "Profile image", class: "form-label" %>
     <%= image_tag @user.provider_profile_image, class: "profile-image" %>
 
     <p class="form-hint mt-1/4">
@@ -34,37 +56,37 @@
   <% end %>
 
   <div class="form-group-max-width mt-1/1">
-    <%= f.label :featured_posts, "Featured Codes", class: "form-label" %>
+    <%= form.label :featured_posts, "Featured Codes", class: "form-label" %>
 
     <div class="form-hint">
       Show up to 3 Featured Codes on your Profile page.
     </div>
 
     <% if @user.posts.any? %>
-      <%= f.select :featured_posts, @user.posts.collect {|p| [ p.title, p.id ] }, { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
+      <%= form.select :featured_posts, @user.posts.collect {|p| [ p.title, p.id ] }, { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
     <% else %>
       <p>You've not yet posted anything.</p>
     <% end %>
   </div>
 
   <div class="form-group mt-1/1">
-    <%= f.label :description, "About you", class: "form-label" %>
+    <%= form.label :description, "About you", class: "form-label" %>
 
     <div class="form-hint">
-      Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you.<br>
+      Write a little bit about yourselform. Share your Battle tag, platform, or other places people can find you.<br>
       Full markdown enabled. Limited to 255 characters.
     </div>
 
-    <%= f.text_area :description, class: "form-input form-textarea form-textarea--extra-small" %>
+    <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small" %>
   </div>
 
   <div class="form-group-max-width mt-1/1">
-    <%= f.label :link, class: "form-label" %>
+    <%= form.label :link, class: "form-label" %>
     <p class="form-hint">
       Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
     </p>
 
-    <%= f.text_field :link, placeholder: "Link", class: "form-input" %>
+    <%= form.text_field :link, placeholder: "Link", class: "form-input" %>
   </div>
 
   <hr class="small mt-1/1">

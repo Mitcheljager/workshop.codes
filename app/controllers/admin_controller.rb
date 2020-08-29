@@ -46,6 +46,7 @@ class AdminController < ApplicationController
 
   def update_user
     @user = User.find(params[:id])
+    @user.nice_url = @user.username.gsub(" ", "-").split("#")[0]
 
     if @user.update(user_params)
       flash[:alert] = "User saved"
@@ -80,6 +81,6 @@ class AdminController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:level)
+    params.require(:user).permit(:level, :verified)
   end
 end

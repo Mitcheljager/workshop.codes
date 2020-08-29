@@ -37,6 +37,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, allow_blank: true
   validates :link, allow_blank: true, format: URI::regexp(%w[http https])
   validates :description, length: { maximum: 255 }
+  validates :nice_url, uniqueness: true, allow_blank: true
   validates :featured_posts, allow_blank: true, serialized_array_length: { maximum: 3 }
   validates :profile_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
                             size: { less_than: 2.megabytes }

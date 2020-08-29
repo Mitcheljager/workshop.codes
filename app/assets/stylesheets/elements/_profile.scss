@@ -194,6 +194,25 @@
     margin-top: 0;
     font-size: 24px;
   }
+
+  &:hover,
+  &:active {
+    color: white;
+
+    svg path {
+      fill: $text-color-dark;
+    }
+  }
+}
+
+.profile-banner__verified {
+  display: inline-block;
+  height: .7em;
+  width: .7em;
+
+  path {
+    fill: lighten($bg-dark, 15%);
+  }
 }
 
 .profile-banner__action {

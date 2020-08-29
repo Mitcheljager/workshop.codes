@@ -13,3 +13,9 @@
 .text-red {
   color: $red !important;
 }
+
+.fill-current-color {
+  path {
+    fill: currentColor;
+  }
+}

@@ -17,11 +17,12 @@
     <th><%= link_to "ID", admin_users_path %></th>
     <th>Username</th>
     <th>Level</th>
-    <th><%= link_to "Provider", admin_users_path(where: "provider") %></th>
-    <th><%= link_to "Email?", admin_users_path(where: "email_ciphertext") %></th>
+    <th>Prov</th>
+    <th>Email</th>
     <th>Img?</th>
-    <th><%= link_to "Link?", admin_users_path(where: "link") %></th>
-    <th><%= link_to "Desc?", admin_users_path(where: "description") %></th>
+    <th>Link?</th>
+    <th>Desc?</th>
+    <th><%= link_to "Veri?", admin_users_path(where: "verified") %></th>
     <th><%= link_to "HC?", admin_users_path(where: "high_contrast") %></th>
     <th><%= link_to "Lg?", admin_users_path(where: "large_fonts") %></th>
     <th><%= link_to "Spl?", admin_users_path(where: "simple_view") %></th>
@@ -34,13 +35,14 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= link_to user.id, admin_user_path(user.id) %></td>
-      <td><small><%= link_to user.username, user_path(user.username) %></small></td>
+      <td><small><%= link_to user.username, user_profile_path(user) %></small></td>
       <td><%= user.level %></td>
       <td><small><%= user.provider %></small></td>
       <td><%= "✔" if user.email.present? %></td>
       <td><%= "✔" if user.profile_image.attached? %></td>
       <td><%= "✔" if user.link.present? %></td>
       <td><%= "✔" if user.description.present? %></td>
+      <td><%= "✔" if user.verified? %></td>
       <td><%= "✔" if user.high_contrast? %></td>
       <td><%= "✔" if user.large_fonts? %></td>
       <td><%= "✔" if user.simple_view? %></td>

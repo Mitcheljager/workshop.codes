@@ -4,7 +4,16 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.find_by_username!(params[:username])
+    @user = User.find_by("upper(username) = ?", params[:username].upcase)
+
+    if @user.present?
+      if @user.verified? && @user.nice_url.present? && @user.nice_url != @user.username
+        redirect_to profile_show_path(@user.nice_url)
+      end
+    else
+      @user = User.where(verified: true).find_by_nice_url(params[:username].downcase)
+    end
+
     @posts = @user.posts.where(private: 0).order(updated_at: :desc).page(params[:page])
     @featured_posts = @user.posts.where(id: @user.featured_posts)
   end
@@ -16,7 +25,9 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
+
     if @user.update(profile_params)
+      flash[:alert] = "Successfully saved"
       redirect_to edit_profile_path
     else
       render :edit
