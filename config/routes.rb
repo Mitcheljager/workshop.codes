@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   resources :profiles, param: :username, only: [:update]
   get "profile/edit", to: "profiles#edit", as: "edit_profile"
   get "u/:username", to: "profiles#show", as: "profile_show", concerns: :paginatable
-  get "users/:username", to: redirect { |params| "u/#{ params[:username] }" }
+  get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
 
   resources :sessions, only: [:new, :create, :destroy]
   get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
