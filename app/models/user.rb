@@ -11,10 +11,12 @@ end
 
 class UniquenessAgainstNiceUrlValidator < ActiveModel::Validator
   def validate(record)
-    user_with_nice_url = User.find_by("upper(nice_url) = ?", record.username.upcase)
+    if record.username.present?
+      user_with_nice_url = User.find_by("upper(nice_url) = ?", record.username.upcase)
 
-    if user_with_nice_url.present?
-      record.errors[:username] << "is not available."
+      if user_with_nice_url.present?
+        record.errors[:username] << "is not available."
+      end
     end
   end
 end
