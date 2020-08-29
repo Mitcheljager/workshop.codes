@@ -14,6 +14,8 @@ class ProfilesController < ApplicationController
       @user = User.where(verified: true).find_by_nice_url(params[:username].downcase)
     end
 
+    not_found unless @user.present?
+
     @posts = @user.posts.where(private: 0).order(updated_at: :desc).page(params[:page])
     @featured_posts = @user.posts.where(id: @user.featured_posts)
   end
@@ -38,5 +40,9 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:user).permit(:profile_image, :link, :description, { featured_posts: [] })
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new("Not Found")
   end
 end
