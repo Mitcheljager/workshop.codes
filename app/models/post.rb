@@ -93,7 +93,7 @@ class Post < ApplicationRecord
       query: {
         multi_match: {
           query: query,
-          fields: ["code^10", "title^5", "tags^2", "categories", "maps", "heroes", "user.username"],
+          fields: ["code^10", "title^5", "tags^3", "categories", "maps", "heroes", "user.username^2"],
           fuzziness: "AUTO"
         }
       }
