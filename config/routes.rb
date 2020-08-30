@@ -103,9 +103,7 @@ Rails.application.routes.draw do
 
   constraints code: /.{5,6}/ do
     resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show]
-    get ":code", to: "posts#show", constraints: lambda { |request|
-      request.params[:code].present? && Post.find_by("upper(code) = ?", request.params[:code].upcase).present?
-    }
+    get ":code", to: "posts#show"
   end
 
   constraints nice_url: /[a-zA-Z0-9-]+/ do
