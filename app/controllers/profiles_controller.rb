@@ -28,6 +28,10 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
 
+    if profile_params[:featured_posts] == nil
+      @user.featured_posts = ""
+    end
+
     if @user.update(profile_params)
       flash[:alert] = "Successfully saved"
       redirect_to edit_profile_path

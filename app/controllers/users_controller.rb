@@ -51,8 +51,9 @@ class UsersController < ApplicationController
 
     @user = current_user
     if @user.update(user_params)
+      flash[:alert] = "Successfully saved"
       create_activity(:update_user, { ip_address: last_4_digits_of_request_ip })
-      redirect_back fallback_location: account_path
+      redirect_to edit_user_path
     else
       render :edit
     end

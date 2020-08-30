@@ -1,3 +1,7 @@
+module Current
+  thread_mattr_accessor :user
+end
+
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include ActivitiesHelper
@@ -7,6 +11,7 @@ class ApplicationController < ActionController::Base
   before_action :login_from_cookie
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
+  around_action :set_current_user
 
   def login_from_cookie
     return unless cookies[:remember_token] && !current_user
@@ -34,6 +39,13 @@ class ApplicationController < ActionController::Base
     else
       @current_user = nil
     end
+  end
+
+  def set_current_user
+    Current.user = current_user
+    yield
+  ensure
+    Current.user = nil
   end
 
   helper_method :unread_notifications

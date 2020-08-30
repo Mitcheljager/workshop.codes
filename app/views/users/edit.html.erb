@@ -7,6 +7,10 @@
       Editing your account on <%= @user.provider.humanize %> will automatically adjust it here.
     </p>
   <% else %>
+    <% if flash[:alert] %>
+      <div class="warning mt-0 mb-1/2"><mark><%= flash[:alert] %></mark></div>
+    <% end %>
+
     <%= render "form", user: @user, url: update_user_path %>
   <% end %>
 
