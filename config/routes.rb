@@ -68,7 +68,6 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new", as: "login"
   get "logout", to: "sessions#destroy", as: "logout"
 
-
   resources :forgot_passwords, param: :token, only: [:index, :create]
   get "forgot-password", to: "forgot_passwords#new", as: "new_forgot_password"
   get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"

@@ -234,7 +234,12 @@
   line-height: 1.25em;
   font-size-adjust: 0.51;
   color: $white;
-  cursor: copy;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    filter: brightness(1.15);
+  }
 
   .item--extra-small & {
     padding: $margin / 8 0;
