@@ -50,7 +50,7 @@
 
   <% unless revision.description.blank? %>
     <div class="item__description revision__description mt-0">
-      <%= markdown(sanitize(revision.description, tags: %w(div span style dl dd img details summary a b), attributes: %w(style href id class src title))) %>
+      <%= sanitize(markdown(revision.description), tags: %w(div span hr style mark dl dd dt img details summary a b iframe blockquote pre code br p table td tr thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong), attributes: %w(style href id class src title width height frameborder allow allowfullscreen)) %>
     </div>
   <% end %>
 </div>
