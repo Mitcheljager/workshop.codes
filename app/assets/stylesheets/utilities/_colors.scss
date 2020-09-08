@@ -12,6 +12,17 @@
 
 .text-red {
   color: $red !important;
+
+  &[href] {
+    &:hover,
+    &:active {
+      color: lighten($red, 15%) !important;
+    }
+  }
+}
+
+.text-ko-fi {
+  color: $ko-fi;
 }
 
 .fill-current-color {
