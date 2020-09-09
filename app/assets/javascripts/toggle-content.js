@@ -14,4 +14,10 @@ function toggleContent(event) {
   const state = window.getComputedStyle(element).display === "none"
 
   element.style.display = state ? "initial" : "none"
+
+  if (!state && this.dataset.hideWith) {
+    this.textContent = this.dataset.hideWith
+  } else if (state && this.dataset.showWith) {
+    this.textContent = this.dataset.showWith
+  }
 }
