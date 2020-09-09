@@ -162,7 +162,8 @@
           <%= link_to "Remove filters", params[:search] ? "/search/#{ params[:search] }" : root_path, class: "filter__link filter__link--remove" %>
         <% end %>
 
-        <%= button_tag "+ More filters", class: "filter__link", data: { action: "toggle-content", hide_with: "+ More filters", show_with: "- Less filters" } %>
+        <%= button_tag "#{ params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? ? "+ More filters" : "- Less filters" }", class: "filter__link",
+                       data: { action: "toggle-content", hide_with: "+ More filters", show_with: "- Less filters" } %>
       </div>
     </div>
   </nav>
