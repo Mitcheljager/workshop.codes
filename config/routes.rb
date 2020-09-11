@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "/500", to: "errors#internal_error"
 
   get "sitemap", to: "sitemaps#sitemap"
+  get "privacy-policy", to: "pages#privacy_policy"
 
   get "admin", to: "admin#index", as: "admin"
   namespace :admin do
