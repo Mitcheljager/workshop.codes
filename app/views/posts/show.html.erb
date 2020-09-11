@@ -154,6 +154,10 @@
             <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
           </div>
         <% end %>
+
+        <div class="item__details-item">
+          <%= link_to "Report code", new_report_path(id: @post.id), class: "text-red", remote: true, data: { disable_with: "Loading..." } %>
+        </div>
       </div>
     </div>
   <% end %>

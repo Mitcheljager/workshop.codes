@@ -30,6 +30,20 @@
   <% end %>
 </div>
 
+<h4 class="mt-1/1">Send this user a notifcation</h4>
+
+<%= form_tag :admin_send_user_notification do %>
+  <div class="form-group mb-1/4">
+    <%= hidden_field :user_id, "", value: @user.id %>
+    <%= label_tag "Notification content (supports markdown)" %>
+    <%= text_area_tag :notification_content, "", class: "form-input mt-1/8" %>
+  </div>
+
+  <%= submit_tag "Send notification", class: "button button--secondary" %>
+<% end %>
+
+<hr>
+
 <table class="w-auto mt-1/1">
   <tr><td>Posts</td> <td><%= @user.posts.size %></td></tr>
   <tr><td>Favorites</td> <td><%= @user.favorites.size %></td></tr>

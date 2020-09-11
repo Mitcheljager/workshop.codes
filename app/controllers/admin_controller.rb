@@ -30,6 +30,16 @@ class AdminController < ApplicationController
     redirect_to admin_post_path(@post.id)
   end
 
+  def destroy_post
+    @post = Post.find(params[:id])
+    @user = @post.user
+
+    if @post.destroy
+      Notification.create(user_id: @user.id, content: params[:notification_content]) if params[:notification_content].present?
+      redirect_to admin_posts_path
+    end
+  end
+
   def users
     @users = User.order(created_at: :desc).page(params[:page])
     @users = @users.where(params[:where], true).or(@users.where.not(params[:where] => ["", false, nil])) if params[:where].present?
@@ -37,6 +47,23 @@ class AdminController < ApplicationController
 
   def user
     @user = User.find(params[:id])
+  end
+
+  def send_user_notification
+    @user = User.find(params[:user_id]).first
+
+    if Notification.create(user_id: @user.id, content: params[:notification_content])
+      redirect_to admin_user_path(@user.id)
+    end
+  end
+
+  def reports
+    @reports = Report.order(created_at: :desc).page(params[:page])
+  end
+
+  def report
+    @report = Report.find(params[:id])
+    @post = Post.find(@report.concerns_id) if @report.concerns_model == "post"
   end
 
   def find_user

@@ -26,8 +26,12 @@ Rails.application.routes.draw do
     get "notifications"
     get "email_notifications"
     get "activities"
+    get "reports"
+    get "report/:id", action: "report", as: "report"
     get "post/:id", action: "post", as: "post"
+    post "post/:id", action: "destroy_post", as: "destroy_post"
     get "user/:id", action: "user", as: "user"
+    post "send_user_notification", action: "send_user_notification", as: "send_user_notification"
     patch "user/:id", action: "update_user", as: "update_user"
     post "users", action: "find_user", as: "find_user"
     post "posts", action: "find_post", as: "find_post"
@@ -81,8 +85,8 @@ Rails.application.routes.draw do
   get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
 
   resources :notifications, only: [:index], concerns: :paginatable
-
   resources :activities, only: [:index], concerns: :paginatable
+  resources :reports, only: [:create, :new, :destroy, :update]
 
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
   get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"

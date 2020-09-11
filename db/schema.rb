@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_183546) do
+ActiveRecord::Schema.define(version: 2020_09_04_162208) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -180,6 +180,17 @@ ActiveRecord::Schema.define(version: 2020_08_28_183546) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_remember_tokens_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "concerns_model"
+    t.integer "concerns_id"
+    t.text "content"
+    t.string "category"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "revisions", force: :cascade do |t|

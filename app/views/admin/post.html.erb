@@ -13,6 +13,19 @@
 
 <hr>
 
+<h4>Destroy post</h4>
+
+<%= form_tag :admin_post, url: admin_destroy_post_path(@post.id) do %>
+  <div class="form-group mb-1/4">
+    <%= label_tag "Notify user of why their post will been deleted (supports markdown)" %>
+    <%= text_area_tag :notification_content, "", class: "form-input mt-1/8", placeholder: "Leave empty to not send a notification" %>
+  </div>
+
+  <%= submit_tag "Destroy post", class: "button button--danger", data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
+<% end %>
+
+<hr>
+
 <% date_counts = {} %>
 <% (Date.parse(@post.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date| %>
   <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
