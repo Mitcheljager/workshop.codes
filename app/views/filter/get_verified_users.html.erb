@@ -1,0 +1,17 @@
+<% @verified_users.each do |user| %>
+  <% next if user.posts.count == 0 %>
+
+  <%= link_to build_filter_path(:author, user.username), class: "dropdown__item" do %>
+    <% if user.profile_image.attached? %>
+      <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [30, 30]).processed, width: 30, height: 30 %>
+    <% elsif user.provider_profile_image.present? %>
+      <%= image_tag user.provider_profile_image, width: 30, height: 30 %>
+    <% else %>
+      <span class="empty-image"></span>
+    <% end %>
+
+    <div>
+      <%= user.username.split("#")[0] %> <small class="text-base">(<%= user.posts.count %>)</small>
+    </div>
+  <% end %>
+<% end %>

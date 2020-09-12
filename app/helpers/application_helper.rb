@@ -38,6 +38,7 @@ module ApplicationHelper
       to: params[:to],
       sort: params[:sort],
       expired: params[:expired],
+      author: params[:author],
       search: params[:search]
     }
 

@@ -57,7 +57,9 @@
 }
 
 .dropdown__item {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   padding: .5rem 1rem;
   color: $white;
   text-decoration: none;
@@ -67,6 +69,34 @@
   &:hover,
   &:active {
     background: darken($bg-dark, 5%);
+  }
+
+  img {
+    display: block;
+    margin-right: .75em;
+    border-radius: 50%;
+    background-color: $body-bg;
+
+    .simple-view & {
+      display: none;
+    }
+  }
+
+  .empty-image {
+    display: block;
+    margin-right: 1em;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: $body-bg;
+    background-image: url($snowball-icon);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+
+    .simple-view & {
+      display: none;
+    }
   }
 }
 

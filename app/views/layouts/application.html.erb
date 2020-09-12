@@ -36,7 +36,10 @@
     <%= render "wiki/header" if is_wiki? %>
 
     <div class="wrapper <%= "wrapper--large" if controller_name == "admin" %>">
-      <%= render "filter" unless is_wiki? %>
+      <% unless is_wiki? %>
+        <%= render "search" %>
+        <%= render "filter/filter" %>
+      <% end %>
 
       <%= yield %>
 

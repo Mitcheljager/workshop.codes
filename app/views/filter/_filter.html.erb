@@ -1,5 +1,3 @@
-<%= render "search" %>
-
 <% cache_unless request.path_parameters.without(:controller, :action, :page, :code).any?, "filter" do %>
   <nav class="filter">
     <div class="filter__item">
@@ -68,7 +66,7 @@
     </div>
 
     <div class="filter__tray" data-toggle-content>
-      <div data-role="content-to-toggle" style="<%= "display: none" if params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? %>">
+      <div data-role="content-to-toggle" style="<%= "display: none" if params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? && params[:author].nil? %>">
         <div class="filter">
           <div class="filter__item">
             <span class="filter__label">From</span>
@@ -132,7 +130,6 @@
                   <hr>
                 <% end %>
 
-                <%= link_to "Relevancy", build_filter_path(:sort, "relevancy"), class: "dropdown__item" %>
                 <%= link_to "Created", build_filter_path(:sort, "created"), class: "dropdown__item" %>
                 <%= link_to "Updated", build_filter_path(:sort, "updated"), class: "dropdown__item" %>
                 <%= link_to "On Fire", build_filter_path(:sort, "on-fire"), class: "dropdown__item" %>
@@ -155,14 +152,37 @@
             </div>
           </div>
         </div>
+
+        <div class="filter">
+          <div class="filter__item">
+            <span class="filter__label">Author</span>
+
+            <div class="dropdown" data-dropdown>
+              <%= link_to params[:author] ? params[:author].split("#")[0] : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown get-verified-users" } %>
+
+              <div class="dropdown__content" data-dropdown-content>
+                <% if params[:author] %>
+                  <%= link_to "✕ Remove Filter", build_filter_path(:author, nil), class: "dropdown__item" %>
+                  <hr>
+                <% end %>
+
+                <span class="dropdown__label"><small>This is a list of verified creators</small></span>
+
+                <div data-role="filter-authors">
+                  <span class="dropdown__item text-base"><em>Loading...</em></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="filter__actions">
-        <% if params[:from] || params[:to] || params[:sort] || params[:expired] || params[:map] || params[:hero] || params[:category] %>
-          <%= link_to "Remove filters", params[:search] ? "/search/#{ params[:search] }" : root_path, class: "filter__link filter__link--remove" %>
+        <% if params[:from] || params[:to] || params[:sort] || params[:expired] || params[:map] || params[:hero] || params[:category] || params[:author] %>
+          <%= link_to "Remove filters", params[:search] ? "/search/#{ params[:search] }" : posts_path(1), class: "filter__link filter__link--remove" %>
         <% end %>
 
-        <%= button_tag "#{ params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? ? "+ More filters" : "- Less filters" }", class: "filter__link",
+        <%= button_tag "#{ params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? && params[:author].nil?  ? "+ More filters" : "- Less filters" }", class: "filter__link",
                        data: { action: "toggle-content", hide_with: "+ More filters", show_with: "- Less filters" } %>
       </div>
     </div>

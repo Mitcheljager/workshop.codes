@@ -30,6 +30,7 @@
 //= require timeago
 //= require load-analytics
 //= require get-user-analytics
+//= require get-verified-users
 //= require load-snippet
 //= require difference-viewer
 //= require modal

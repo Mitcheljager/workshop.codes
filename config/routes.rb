@@ -97,9 +97,10 @@ Rails.application.routes.draw do
   get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
   get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
-  get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/(page/:page)", to: "posts#filter", as: "filter", constraints: FilterContraints
-  post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
+  get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
+  post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
   get "/search", to: "search#show"
+  get "get-verified-users", to: "filter#get_verified_users"
 
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
