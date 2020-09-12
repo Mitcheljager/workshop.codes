@@ -46,6 +46,6 @@ class FilterController < ApplicationController
   end
 
   def track_action(parameters = request.path_parameters)
-    TrackingJob.perform_async(ahoy, event, parameters)
+    TrackingJob.perform_async(ahoy, parameters)
   end
 end
