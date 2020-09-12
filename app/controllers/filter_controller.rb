@@ -17,7 +17,7 @@ class FilterController < ApplicationController
 
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
 
-    track_action("Search", { search: params[:search] }) if params[:search]
+    track_action({ search: params[:search] }) if params[:search]
   end
 
   def get_verified_users
@@ -43,5 +43,9 @@ class FilterController < ApplicationController
     else
       "created_at"
     end
+  end
+
+  def track_action(parameters = request.path_parameters)
+    TrackingJob.perform_async(ahoy, event, parameters)
   end
 end
