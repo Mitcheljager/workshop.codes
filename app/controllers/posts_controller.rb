@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_images, only: [:edit]
+  skip_before_action :verify_authenticity_token, only: [:copy_code]
   skip_before_action :track_ahoy_visit
 
   before_action only: [:edit, :update, :destroy] do
