@@ -11,8 +11,8 @@ module PostsHelper
     end
 
     unless url.present?
-      random_with_seed = Random.new(post.id).rand(JSON.parse(post.maps).length)
-      map = maps.find { |m| m["name"] == JSON.parse(post.maps)[random_with_seed - 1] }
+      random_with_seed = Random.new(post.id).rand(post.maps.length)
+      map = maps.find { |m| m["name"] == post.maps[random_with_seed - 1] }
 
       url = image_path "maps/small/#{ map["slug"] }.jpg"
     end

@@ -88,8 +88,8 @@
         <div class="item__details-item">
           Categories |
 
-          <% JSON.parse(@post.categories).each do |category| %>
-            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(@post.categories).last %>
+          <% @post.categories.each do |category| %>
+            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
           <% end %>
         </div>
 
@@ -106,11 +106,11 @@
         <div class="item__details-item">
           Heroes |
 
-          <% if JSON.parse(@post.heroes).length == heroes.length %>
+          <% if @post.heroes.length == heroes.length %>
             All
           <% else %>
-            <% JSON.parse(@post.heroes).each do |hero| %>
-              <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == JSON.parse(@post.heroes).last %>
+            <% @post.heroes.each do |hero| %>
+              <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
             <% end %>
           <% end %>
         </div>
@@ -118,11 +118,11 @@
         <div class="item__details-item">
           Maps |
 
-          <% if JSON.parse(@post.maps).length == maps.length %>
+          <% if @post.maps.length == maps.length %>
             All
           <% else %>
-            <% JSON.parse(@post.maps).each do |map| %>
-              <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == JSON.parse(@post.maps).last %>
+            <% @post.maps.each do |map| %>
+              <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
             <% end %>
           <% end %>
         </div>

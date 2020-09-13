@@ -5,8 +5,7 @@ class ArrayLengthValidator < ActiveModel::EachValidator
     return unless options.key?(:maximum)
     return unless value
     maximum = options[:maximum]
-    array = JSON.parse value
-    return unless array.count > maximum
+    return unless value.count > maximum
 
     record.errors.add(attribute, :too_long_array, count: maximum)
   end
@@ -16,9 +15,8 @@ class ArrayPartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
     return unless value
-    value_array = JSON.parse value
 
-    value_array.each do |item|
+    value.each do |item|
       unless options[:array].include? item
         record.errors.add(attribute, :not_part_of_array)
         return
@@ -32,9 +30,8 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
     return unless options.key?(:array)
     return unless value
     array = options[:array].pluck("name")
-    value_array = JSON.parse value
 
-    value_array.each do |item|
+    value.each do |item|
       unless array.include? item
         record.errors.add(attribute, :not_part_of_array)
         return
@@ -73,6 +70,9 @@ class Post < ApplicationRecord
   attr_accessor :new_collection
 
   serialize :image_order
+  serialize :categories, JSON
+  serialize :heroes, JSON
+  serialize :maps, JSON
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }

@@ -25,8 +25,8 @@
       <div class="item__details-item">
         Categories |
 
-        <% JSON.parse(post.categories).each do |category| %>
-          <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == JSON.parse(post.categories).last %>
+        <% post.categories.each do |category| %>
+          <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
         <% end %>
       </div>
 

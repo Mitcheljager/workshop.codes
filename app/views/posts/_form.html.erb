@@ -142,7 +142,7 @@
         Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
       </div>
 
-      <%= form.select :categories, options_for_select(categories, (JSON.parse(@post.categories) if @post.categories)), { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
+      <%= form.select :categories, options_for_select(categories, (@post.categories if @post.categories)), { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
     </div>
 
     <div class="form-group">
@@ -203,7 +203,7 @@
 
           <% heroes.each do |hero| %>
             <div class="checkbox">
-              <%= form.check_box :heroes, { multiple: true, checked: (JSON.parse(@post.heroes || "[]").include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
+              <%= form.check_box :heroes, { multiple: true, checked: (@post.heroes.include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
               <%= form.label "heroes_#{ hero["name"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }", hero["name"] %>
             </div>
           <% end %>
@@ -236,7 +236,7 @@
 
           <% maps.each do |map| %>
             <div class="checkbox">
-              <%= form.check_box :maps, { multiple: true, checked: (JSON.parse(@post.maps || "[]").include?(map["name"]) if @post.maps) }, map["name"], false %>
+              <%= form.check_box :maps, { multiple: true, checked: (@post.maps.include?(map["name"]) if @post.maps) }, map["name"], false %>
               <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "") }", map["name"] %>
             </div>
           <% end %>
