@@ -61,7 +61,7 @@ module ApplicationHelper
   end
 
   def to_slug(string)
-    string.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
+    string.to_s.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
   end
 
   def maps
