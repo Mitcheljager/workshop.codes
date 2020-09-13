@@ -8,6 +8,11 @@
     Created at: <%= @report.created_at %>
   </div>
 
+  <div class="mb-1/2">
+    <strong>Report Category</strong>:<br>
+    <%= @report.category %>
+  </div>
+
   <% if @post.present? %>
     <div class="mt-1/2 mb-1/2">
       <strong>Post info:</strong> <br>

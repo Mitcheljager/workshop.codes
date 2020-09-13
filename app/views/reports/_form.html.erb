@@ -1,10 +1,14 @@
 <%= form_for @report, remote: true do |form| %>
+  <div class="form-hint mb-1/2">
+    <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. This form is not meant to report bugs to the creator of this code.
+  </div>
+
   <%= form.hidden_field :concerns_id, value: @post.id %>
   <%= form.hidden_field :concerns_model, value: "post" %>
 
   <div class="form-group">
     <%= form.label :category, class: "form-label" %>
-    <%= form.select :category, options_for_select(report_options), {}, class: "form-select" %>
+    <%= form.select :category, options_for_select(report_options), { include_blank: "Select..." }, class: "form-select", required: true %>
   </div>
 
   <div class="form-group mt-1/4">

@@ -51,7 +51,7 @@ class ReportsController < ApplicationController
       title "A post has been reported."
       url path
       description content
-      add_field name: "Reason given", value: report.category
+      add_field name: "Report category", value: report.category
       add_field name: "Post title", value: post.title
       add_field name: "Post code", value: post.code.upcase
     end
