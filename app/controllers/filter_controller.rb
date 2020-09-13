@@ -17,7 +17,17 @@ class FilterController < ApplicationController
 
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
 
-    track_action({ search: params[:search] }) if params[:search]
+    respond_to do |format|
+      format.html {
+        track_action({ search: params[:search] }) if params[:search]
+      }
+      format.json {
+        set_request_headers
+        render json: @posts,
+               only: [ :code, :nice_url, :title, :categories, :maps, :heroes, :created_at, :tags, :updated_at ],
+               include: { user: { only: [:username, :verified, :nice_url] }}
+      }
+    end
   end
 
   def get_verified_users
@@ -47,5 +57,9 @@ class FilterController < ApplicationController
 
   def track_action(parameters = request.path_parameters)
     TrackingJob.perform_async(ahoy, parameters)
+  end
+
+  def set_request_headers
+    headers["Access-Control-Allow-Origin"] = "*"
   end
 end
