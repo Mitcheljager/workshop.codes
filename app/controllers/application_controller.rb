@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
       if user
         session[:user_id] = user.id
-        create_activity(:login_from_cookie, { ip_address: last_4_digits_of_request_ip })
+        create_activity(:login_from_cookie)
       end
     end
   end

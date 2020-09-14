@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
       generate_remember_token if params[:remember_me].present? && params[:remember_me] != "0"
       session[:user_id] = @user.id
 
-      create_activity(:login, { ip_address: last_4_digits_of_request_ip })
+      create_activity(:login)
 
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])
@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
         flash[:alert] = "Username or password is invalid"
       end
 
-      create_activity(:login_failed, { ip_address: last_4_digits_of_request_ip }, @user.id) if @user
+      create_activity(:login_failed, @user.id) if @user
 
       redirect_to login_path
     end

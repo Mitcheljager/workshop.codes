@@ -15,7 +15,7 @@
 
 
     <div class="article__content">
-      <%= markdown(@article.content || "_This article does not yet have a description_") %>
+      <%= sanitized_markdown(@article.content || "_This article does not yet have a description_") %>
     </div>
   </main>
 
@@ -47,10 +47,11 @@
       <% end %>
 
 
-      <% if is_arbiter?(current_user) %>
-        <hr>
+      <hr>
 
-        <%= link_to "Edit article", edit_wiki_article_path(@article.slug), class: "button button--secondary button--small" %>
+      <%= link_to "Edit article", edit_wiki_article_path(@article.slug), class: "button button--secondary button--small" %>
+      
+      <% if is_arbiter?(current_user) %>
         <%= link_to "Destroy", wiki_article_path(@article.id), class: "button button--danger button--small", method: :delete, data: { confirm: "Are you sure you want to destroy this article? This cannot be undone." } %>
       <% end %>
     </div>

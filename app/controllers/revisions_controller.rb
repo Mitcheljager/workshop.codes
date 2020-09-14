@@ -47,7 +47,7 @@ class RevisionsController < ApplicationController
   end
 
   def revision_activity_params
-    { ip_address: last_4_digits_of_request_ip, id: @revision.id }
+    { id: @revision.id }
   end
 
   def revision_params

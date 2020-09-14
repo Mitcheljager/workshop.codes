@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       generate_remember_token if params[:remember_me]
 
-      create_activity(:create_user, { ip_address: last_4_digits_of_request_ip })
+      create_activity(:create_user)
 
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:alert] = "Successfully saved"
-      create_activity(:update_user, { ip_address: last_4_digits_of_request_ip })
+      create_activity(:update_user)
       redirect_to edit_user_path
     else
       render :edit

@@ -88,7 +88,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_activity_params
-    { ip_address: last_4_digits_of_request_ip, id: @comment.id }
+    { id: @comment.id }
   end
 
   def comment_params

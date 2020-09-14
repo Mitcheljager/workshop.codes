@@ -9,6 +9,7 @@ class Activity < ApplicationRecord
     create_post: 4, update_post: 5, destroy_post: 6,
     create_comment: 7, update_comment: 8, destroy_comment: 9,
     update_revision: 10,
-    forgot_password: 12, password_reset: 13
+    forgot_password: 12, password_reset: 13,
+    create_wiki_article: 14, update_wiki_article: 15
   }
 end

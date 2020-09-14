@@ -23,7 +23,7 @@ class ForgotPasswordsController < ApplicationController
       @forgot_password_token = ForgotPasswordToken.new(user_id: @user.id, token: SecureRandom.base64)
 
       if @forgot_password_token.save
-        create_activity(:forgot_password, { ip_address: last_4_digits_of_request_ip }, @user.id)
+        create_activity(:forgot_password, @user.id)
         ForgotPasswordsMailer.with(token: @forgot_password_token.token).send_token.deliver_later
       end
     end
@@ -38,7 +38,7 @@ class ForgotPasswordsController < ApplicationController
       @user = User.find_by_email(@forgot_password_token.user.email)
 
       if @user.update(forgot_password_params.except(:token, :email))
-        create_activity(:password_reset, { ip_address: last_4_digits_of_request_ip }, @user.id)
+        create_activity(:password_reset, @user.id)
         redirect_to login_path
       else
         render :show

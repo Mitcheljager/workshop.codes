@@ -1,7 +1,11 @@
 class Wiki::ArticlesController < Wiki::BaseController
   add_breadcrumb "Articles", :wiki_articles_path
 
-  before_action only: [:new, :create, :edit, :update, :destroy] do
+  before_action only: [:new, :create, :edit, :update] do
+    redirect_to login_path unless current_user.present?
+  end
+
+  before_action only: [:destroy] do
     redirect_to wiki_root_path unless is_arbiter?(current_user)
   end
 
@@ -37,6 +41,7 @@ class Wiki::ArticlesController < Wiki::BaseController
 
     if @article.save
       create_wiki_edit(:created, @article.id)
+      create_activity(:create_wiki_article, { id: @article.id })
 
       if @article.edit.approved?
         redirect_to wiki_article_path(@article.slug)
@@ -61,6 +66,7 @@ class Wiki::ArticlesController < Wiki::BaseController
     @current_article = Wiki::Article.find(params[:slug])
 
     create_new_article(@current_article.group_id)
+    create_activity(:update_wiki_article, { id: @article.id })
 
     if @article.save
       create_wiki_edit(:edited, @article.id, article_params[:edit_notes])
@@ -118,7 +124,7 @@ class Wiki::ArticlesController < Wiki::BaseController
       content_type: content_type,
       article_id: article_id,
       notes: notes,
-      approved: is_arbiter?(current_user)
+      approved: true
     )
   end
 end

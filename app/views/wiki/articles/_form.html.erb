@@ -1,3 +1,17 @@
+<blockquote class="mt-0 mb-1/1">
+  Anyone can create and edit articles. Misuse of this feature will result in your account getting banned without warning. Be mindful of what your contributions to the wiki.
+
+  <p class="mb-0"><strong>The wiki not not the place to...</strong></p>
+  <ul class="mt-0">
+    <li>advertise your own gamemodes.</li>
+    <li>advertise your stream/youtube/other content.</li>
+    <li>share your opinion.</li>
+    <li>report bugs.</li>
+  </ul>
+
+  <p>Content should be in English. Content should be factual, clear, and concise.<p>
+</blockquote>
+
 <%= form_for @article do |form| %>
   <% if @article.errors.any? %>
     <div class="error-block">
@@ -12,11 +26,17 @@
   <% end %>
 
   <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
   </div>
 
   <div class="form-group mt-1/1">
     <%= form.label :content, class: "form-label" %>
+
+    <div class="form-hint">
+      <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to "and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank" %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
+      This includes HTML and CSS, which can be used for markup of more advanced layouts.
+    </div>
 
     <%= link_to "Show Preview", "#", class: "button button--secondary mt-1/4 mb-1/4", data: { action: "markdown-preview" } %>
 

@@ -29,6 +29,10 @@ module ApplicationHelper
     content = markdown.render(text).html_safe
   end
 
+  def sanitized_markdown(text)
+    ActionController::Base.helpers.sanitize(markdown(text), tags: %w(div span hr style mark dl dd dt img details summary a b iframe blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong), attributes: %w(style href id class src title width height frameborder allow allowfullscreen))
+  end
+
   def build_filter_path(key, value)
     parameters = {
       category: params[:category],
@@ -78,9 +82,5 @@ module ApplicationHelper
 
   def quotes
     YAML.load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
-  end
-
-  def last_4_digits_of_request_ip
-    request.remote_ip.to_s.chars.last(4).join
   end
 end
