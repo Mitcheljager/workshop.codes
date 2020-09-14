@@ -35,4 +35,8 @@ class PostSerializer < ActiveModel::Serializer
   def heroes
     object.heroes
   end
+
+  def categories
+    object.categories
+  end
 end
