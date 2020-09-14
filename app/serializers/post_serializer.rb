@@ -12,7 +12,7 @@ class PostSerializer < ActiveModel::Serializer
       image = object.images.find_by_blob_id(JSON.parse(object.image_order).first)
 
       if image
-        url = url_for image.variant(quality: 90, resize_to_fill: [120, 68]).processed
+        url = url_for image.variant(quality: 95, resize_to_fill: [690, 394]).processed
       end
     end
 
@@ -22,7 +22,7 @@ class PostSerializer < ActiveModel::Serializer
 
       map = maps_array.find { |m| m["name"] == object.maps[random_with_seed - 1] }
 
-      url = root_url + ActionController::Base.helpers.image_url("maps/small/#{ map["slug"] }.jpg")
+      url = root_url + ActionController::Base.helpers.image_url("maps/large/#{ map["slug"] }.jpg")
     end
 
     return url
