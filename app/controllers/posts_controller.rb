@@ -54,12 +54,7 @@ class PostsController < ApplicationController
       }
       format.json {
         set_request_headers
-        render json: @post,
-               only: [ :code, :nice_url, :title, :description, :snippet, :categories, :maps, :heroes, :created_at, :tags, :updated_at ],
-               include: {
-                 user: { only: [:username, :verified, :nice_url] },
-                 revisions: { only: [:created_at, :updated_at, :title, :description] }
-               }
+        render json: @post
       }
     end
   end

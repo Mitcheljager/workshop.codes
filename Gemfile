@@ -32,6 +32,7 @@ gem "diffy"
 gem "httparty"
 gem "breadcrumbs_on_rails"
 gem "discord-notifier"
+gem "active_model_serializers"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

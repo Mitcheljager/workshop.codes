@@ -23,9 +23,7 @@ class FilterController < ApplicationController
       }
       format.json {
         set_request_headers
-        render json: @posts,
-               only: [ :code, :nice_url, :title, :categories, :maps, :heroes, :created_at, :tags, :updated_at ],
-               include: { user: { only: [:username, :verified, :nice_url] }}
+        render json: @posts
       }
     end
   end
