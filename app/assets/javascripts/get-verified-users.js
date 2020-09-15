@@ -1,6 +1,8 @@
 document.addEventListener("turbolinks:load", function() {
   const element = document.querySelector("[data-action~='get-verified-users']")
 
+  if (!element) return
+  
   element.removeEventListener("click", getVerifiedUsers)
   element.addEventListener("click", getVerifiedUsers)
 })
