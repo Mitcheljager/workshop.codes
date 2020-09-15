@@ -16,6 +16,10 @@
     background: transparent
   }
 
+  &--dark {
+    background: darken($body-bg, 5%);
+  }
+
   a {
     text-decoration: none;
   }

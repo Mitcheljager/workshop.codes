@@ -8,7 +8,7 @@
       <div class="warning mt-0 mb-1/4"><mark><%= flash[:alert] %></mark></div>
     <% end %>
 
-    <div class="well">
+    <div class="well well--dark">
       <div class="w-100">
         <%= form_with url: sessions_path do |form| %>
           <%= form.hidden_field :elohell, value: params[:elohell] if params[:elohell].present? %>
@@ -53,7 +53,7 @@
   <div>
     <h2 class="mt-1/2 sm:mt-0"><center>Create an account</center></h2>
 
-    <div class="well">
+    <div class="well well--dark">
       <div class="w-100">
         <center>
           <p class="mt-0">Don't have an account?</p>

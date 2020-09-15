@@ -21,6 +21,10 @@
       left: 6rem;
       width: calc(100% - 12rem);
     }
+
+    .simple-view & {
+      display: none;
+    }
   }
 
   input:not([type="submit"]) {
@@ -46,6 +50,10 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       transition-delay: 0ms;
+    }
+
+    .simple-view & {
+      box-shadow: 0 0 0 5px $body-bg;
     }
   }
 

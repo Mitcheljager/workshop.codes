@@ -5,7 +5,7 @@
     Accessibility options help you better navigate the website in case you have difficulty.
   </p>
 
-  <div class="well mb-1/4">
+  <div class="well well--dark mb-1/4">
     <%= button_to "High contrast", update_user_path, controller: :user, method: :patch, params: { user: { high_contrast: !current_user.high_contrast } },
                   class: "switch__input",
                   form_class: "switch #{ 'switch--active' if current_user.high_contrast }" %>
@@ -15,7 +15,7 @@
     </p>
   </div>
 
-  <div class="well mb-1/4">
+  <div class="well well--dark mb-1/4">
     <%= button_to "Large fonts", update_user_path, controller: :user, method: :patch, params: { user: { large_fonts: !current_user.large_fonts } },
                   class: "switch__input",
                   form_class: "switch #{ 'switch--active' if current_user.large_fonts }" %>
@@ -25,7 +25,7 @@
     </p>
   </div>
 
-  <div class="well">
+  <div class="well well--dark">
     <%= button_to "Simple view", update_user_path, controller: :user, method: :patch, params: { user: { simple_view: !current_user.simple_view } },
                   class: "switch__input",
                   form_class: "switch #{ 'switch--active' if current_user.simple_view }" %>
