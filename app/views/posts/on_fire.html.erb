@@ -1,13 +1,11 @@
 <% content_for :page_title, "On Fire Items #{ "| Page #{ params[:page] }" if params[:page] }" %>
 
-<% cache_unless current_user, @posts do %>
-  <div class="heading">
-    <h1><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
-  </div>
+<div class="heading">
+  <h1><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
+</div>
 
-  <main class="items">
-    <%= render "posts" %>
+<main class="items">
+  <%= render "posts" %>
 
-    <%= paginate @posts %>
-  </main>
-<% end %>
+  <%= paginate @posts %>
+</main>

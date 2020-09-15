@@ -46,3 +46,10 @@
     </div>
   </article>
 <% end %>
+
+<% if local_assigns[:post_counter] && post_counter == 9 && controller_name != "profiles" %>
+  <div class="adv-ad">
+    <hr class="mt-0 mb-0">
+    <%= render "application/banners/affiliate_ad" %>
+  </div>
+<% end %>

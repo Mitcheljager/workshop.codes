@@ -1,0 +1,35 @@
+<div class="banner pt-1/8 pb-1/8 pl-1/8 pr-1/8 mt-1/2 mb-1/2 adv-ad">
+  <small class="block mb-1/8">Purchases made through this link support Workshop.codes</small>
+
+  <% ads = YAML.load(File.read(Rails.root.join("config/arrays", "affiliate_ads.yml"))) %>
+  <% ad = ads.without(ads[$ad_id]).sample %>
+  <% $ad_id = ads.index(ad) %>
+
+  <div class="hidden visible-xl">
+    <%= link_to ad["lg"]["url"], id: ad["lg"]["id"], target: "_blank" do %>
+      <%= image_tag ad["lg"]["img"], alt: ad["alt"], border: 0, width: 728, height: 90, loading: "lazy" %>
+    <% end %>
+    <%= image_tag ad["lg"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" %>
+  </div>
+
+  <div class="hidden visible-sm hidden-xl">
+    <%= link_to ad["md"]["url"], id: ad["md"]["id"], target: "_blank" do %>
+      <%= image_tag ad["md"]["img"], alt: ad["alt"], border: 0, width: 468, height: 60, loading: "lazy" %>
+    <% end %>
+    <%= image_tag ad["md"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" %>
+  </div>
+
+  <div class="hidden visible-xs hidden-sm">
+    <%= link_to ad["sm"]["url"], id: ad["sm"]["id"], target: "_blank" do %>
+      <%= image_tag ad["sm"]["img"], alt: ad["alt"], border: 0, width: 320, height: 100, loading: "lazy" %>
+    <% end %>
+    <%= image_tag ad["sm"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" %>
+  </div>
+
+  <div class="hidden-xs">
+    <%= link_to ad["xs"]["url"], id: ad["xs"]["id"], target: "_blank" do %>
+      <%= image_tag ad["xs"]["img"], alt: ad["alt"], border: 0, width: 250, height: 250, loading: "lazy" %>
+    <% end %>
+    <%= image_tag ad["xs"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" %>
+  </div>
+</div>

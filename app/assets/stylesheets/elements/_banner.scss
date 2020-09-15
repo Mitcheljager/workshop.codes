@@ -36,4 +36,10 @@
   p {
     margin: .5rem 0 2rem;
   }
+
+  a[id] img {
+    background: darken($bg-dark, 10%);
+    color: $text-color-dark;
+    font-size: 12px;
+  }
 }

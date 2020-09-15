@@ -9,28 +9,20 @@
   display: none;
 }
 
-.hidden-sm {
-  @include media-min(sm) {
-    display: none;
+@each $identifier, $breakpoint in $media-min-widths {
+  @include media-min(#{$identifier}) {
+    .hidden-#{$identifier} {
+      display: none;
+    }
+
+    .visible-#{$identifier} {
+      display: initial;
+    }
   }
 }
 
-.hidden-md {
-  @include media-min(md) {
-    display: none;
-  }
-}
-
-.visible-sm {
-  @include media-min(sm) {
-    display: initial;
-  }
-}
-
-.visible-md {
-  @include media-min(md) {
-    display: initial;
-  }
+.block {
+  display: block;
 }
 
 .faded {
