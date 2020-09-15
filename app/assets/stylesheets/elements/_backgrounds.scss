@@ -5,6 +5,7 @@
   left: 0;
   height: 200px;
   width: 100%;
+  background: lighten($body-bg, 5%);
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 100% 80px, 0% 100%);
   z-index: -1;

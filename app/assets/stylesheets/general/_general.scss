@@ -87,6 +87,8 @@ blockquote {
   border-left: 3px solid $border-color;
   background: rgba($black, .1);
   line-height: 1.5em;
+  border-top-right-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
 }
 
 strong {

@@ -2,12 +2,34 @@
   position: relative;
   z-index: 10;
 
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 4rem;
+    bottom: .65rem;
+    height: 30%;
+    width: calc(100% - 8rem);
+    z-index: -1;
+    opacity: .45;
+    background: $black;
+    box-shadow: 0 0 2rem 2rem $black;
+    border-radius: 99px;
+    pointer-events: none;
+
+    @include media-min(sm) {
+      left: 6rem;
+      width: calc(100% - 12rem);
+    }
+  }
+
   input:not([type="submit"]) {
     padding: calc(#{ $search-height / 1.25 } - (1.5em * 2)) calc(#{ $search-height / 2.5});
     padding-right: 4rem;
     border-radius: $search-height / 2;
     transition: border-radius 100ms;
     transition-delay: 180ms;
+    box-shadow: none;
 
     @include media-min(sm) {
       padding: calc(#{ $search-height } - (1.5em * 2)) calc(#{ $search-height / 2} + .5em);

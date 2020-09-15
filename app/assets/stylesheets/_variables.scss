@@ -16,11 +16,13 @@ $ko-fi: #ff5e5b;
 $font-stack: var(--font-stack);
 
 $margin: 60px;
+$border-radius: 5px;
 $logo-height: 80px;
 $search-height: 80px;
 $header-height: $margin;
 $code-width: 150px;
 $thumbnail-width: 120px;
+$favorite-width: 22px + $margin / 2;
 
 $font-size-base: var(--font-size-base);
 $font-size-small: var(--font-size-small);

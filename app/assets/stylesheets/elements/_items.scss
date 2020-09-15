@@ -36,21 +36,21 @@
 .item {
   display: grid;
   grid-template:
-    "thumbnail code"
-    "title title"
-    "details details";
-  grid-template-columns: 50% 50%;
+    "thumbnail code code"
+    "title title favorite"
+    "details details details";
+  grid-template-columns: 50% calc(50% - #{ $favorite-width }) $favorite-width;
   border-top: 1px solid $border-color;
   margin-bottom: $margin / 3;
   padding-top: $margin / 3;
 
   @include media-min(sm) {
     grid-template:
-      "thumbnail title code"
-      "thumbnail details action";
-    grid-template-columns: $thumbnail-width calc(100% - #{ $thumbnail-width } - #{ $code-width }) $code-width;
-    margin-bottom: 0;
-    padding-top: 0;
+      "thumbnail title favorite code"
+      "thumbnail details favorite code";
+    grid-template-columns: $thumbnail-width calc(100% - #{ $thumbnail-width } - #{ $favorite-width  } - #{ $code-width }) $favorite-width $code-width;
+    padding: $margin / 3 0;
+    margin: 0;
   }
 
   @supports (-ms-ime-align:auto) {
@@ -60,7 +60,6 @@
   &--small {
     display: flex;
     align-items: center;
-    padding: $margin / 6 0;
     margin-bottom: 0;
   }
 
@@ -109,6 +108,15 @@
   }
 }
 
+.item__favorite {
+  grid-area: favorite;
+  margin: $margin / 3 0 0 auto;
+
+  @include media-min(sm) {
+    margin: auto $margin / 4;
+  }
+}
+
 .item__thumbnail {
   grid-area: thumbnail;
   position: relative;
@@ -119,7 +127,6 @@
 
   @include media-min(sm) {
     display: block;
-    margin: $margin / 3 0;
   }
 
   &::before {
@@ -157,13 +164,13 @@
   align-items: center;
   justify-content: space-between;
   padding: $margin / 3 0;
-  margin: 0;
+  margin-top: auto;
   font-size: 131%;
   font-weight: lighter;
   color: $white;
 
   @include media-min(sm) {
-    padding: $margin / 6 $margin / 3 0 $margin / 3;
+    padding: 0 0 $margin / 6 $margin / 3;
   }
 
   .item--single & {
@@ -227,7 +234,8 @@
   align-items: center;
   justify-content: center;
   padding: $margin / 6 0;
-  background: $bg-dark image-url("layout/pattern-bg-light.webp");
+  background: $bg-dark;
+  border-radius: $border-radius;
   font-family: "Barlow Condensed", "Impact";
   text-transform: uppercase;
   font-size: 32px;
@@ -266,7 +274,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: 0 0 $margin / 6 $margin / 3;
+    margin-bottom: auto;
   }
 
   .item--bottom & {
@@ -281,8 +289,11 @@
 
 .item__details-item {
   display: block;
-  margin-right: $margin / 2;
-  margin-bottom: $margin / 6;
+  margin: $margin / 12 0;
+
+  @include media-min(sm) {
+    margin: $margin / 12 $margin / 3;
+  }
 
   &:last-child {
     margin-right: $margin / 3;
