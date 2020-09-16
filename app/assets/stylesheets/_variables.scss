@@ -22,6 +22,7 @@ $search-height: 80px;
 $header-height: $margin;
 $code-width: 150px;
 $thumbnail-width: 120px;
+$thumbnail-height: $thumbnail-width / 16 * 9;
 $favorite-width: 22px + $margin / 2;
 
 $font-size-base: var(--font-size-base);

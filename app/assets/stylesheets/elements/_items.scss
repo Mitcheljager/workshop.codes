@@ -116,7 +116,7 @@
   margin: $margin / 3 0 0 auto;
 
   @include media-min(sm) {
-    margin: auto $margin / 4;
+    margin: 23px $margin / 4 auto;
   }
 
   .simple-view & {
@@ -177,7 +177,7 @@
   color: $white;
 
   @include media-min(sm) {
-    padding: 0 0 $margin / 6 $margin / 3;
+    padding: $margin / 12 0 $margin / 6 $margin / 3;
   }
 
   .item--single & {
@@ -241,7 +241,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: $thumbnail-height;
   padding: $margin / 6 0;
+  margin-bottom: auto;
   background: $bg-dark;
   border-radius: $border-radius;
   font-family: "Barlow Condensed", "Impact";
