@@ -34,7 +34,7 @@ function setWikiSearchResults(data) {
     const itemElement = document.createElement("a")
     itemElement.classList.add("search__item")
     itemElement.innerText = item.title
-    itemElement.href = `/wiki/articles/${ item.slug }`
+    itemElement.href = `/wiki/articles/${ encodeURIComponent(item.slug) }`
 
     const categoryElement = document.createElement("span")
     categoryElement.classList.add("search__item-category")
