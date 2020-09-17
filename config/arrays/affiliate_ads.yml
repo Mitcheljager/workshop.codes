@@ -108,3 +108,21 @@
     url: https://blizzardgearstore.l49yho.net/c/2456162/804544/10799
     img: //a.impactradius-go.com/display-ad/10799-804544
     px: https://imp.pxf.io/i/2456162/804544/10799
+-
+  alt: Summer ends, NordVPN sale begins
+  lg:
+    id: 0
+    url: https://nordvpn.sjv.io/eVLLO
+    img: https://workshop-codes.fra1.digitaloceanspaces.com/summer_ends_728x90.jpg
+  md:
+    id: 0
+    url: https://nordvpn.sjv.io/eVLLO
+    img: https://workshop-codes.fra1.digitaloceanspaces.com/summer_ends_468x60.jpg
+  sm:
+    id: 0
+    url: https://nordvpn.sjv.io/eVLLO
+    img: https://workshop-codes.fra1.digitaloceanspaces.com/summer_ends_320x100.jpg
+  xs:
+    id: 0
+    url: https://nordvpn.sjv.io/eVLLO
+    img: https://workshop-codes.fra1.digitaloceanspaces.com/summer_ends_250x250.jpg
