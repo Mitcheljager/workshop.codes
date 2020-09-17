@@ -54,6 +54,11 @@
     box-shadow: none;
     border: 3px solid lighten($border-color, 10%);
   }
+
+  hr {
+    margin: $margin / 6 0;
+    background: lighten($bg-dark, 10%);
+  }
 }
 
 .dropdown__item {

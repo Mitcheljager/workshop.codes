@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
 
     not_found unless @user.present?
 
-    @posts = @user.posts.where(private: 0).order(updated_at: :desc).page(params[:page])
+    @posts = @user.posts.where(private: 0).order("#{ allowed_sort_params.include?(params[:user_sort]) ? params[:user_sort] : "created_at" } DESC").page(params[:page])
     @featured_posts = @user.posts.where(id: @user.featured_posts)
   end
 
@@ -48,5 +48,9 @@ class ProfilesController < ApplicationController
 
   def not_found
     raise ActionController::RoutingError.new("Not Found")
+  end
+
+  def allowed_sort_params
+    %w[updated_at created_at hotness favorites_count]
   end
 end
