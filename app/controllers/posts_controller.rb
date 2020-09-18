@@ -193,7 +193,7 @@ class PostsController < ApplicationController
       :collection_id, :new_collection,
       :revision, :revision_description,
       :email_notification, :email,
-      :image_order, images: [])
+      :carousel_video, :image_order, images: [])
   end
 
   def email_notification_enabled

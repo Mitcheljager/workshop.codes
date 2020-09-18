@@ -32,6 +32,8 @@ function setActiveItem() {
   if (navigationElements.length) navigationElements[this.currentSlide].classList.add("carousel__navigation-item--is-active")
 
   setLazyImage(this)
+
+  stopVideo()
 }
 
 function setLazyImage(element) {
@@ -54,4 +56,13 @@ function setLazyImage(element) {
       }
     })
   })
+}
+
+function stopVideo() {
+  const carousel = document.querySelector("[data-role='carousel']")
+  const iframe = carousel.querySelector("iframe")
+
+  if (!iframe) return
+
+  iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*")
 }

@@ -62,14 +62,18 @@
 
   <% cache @post do %>
     <% begin %>
-      <% if @ordered_images.present? && @ordered_images.one? %>
+      <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
         <picture>
           <source media="(min-width: 560px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" type="image/jpeg">
           <source media="(min-width: 0px)" srcset="<%= url_for @ordered_images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed %>" type="image/jpeg">
           <img class="img-fluid mt-1/2" src="<%= url_for @ordered_images.first.variant(quality: 95).processed %>" />
         </picture>
-      <% elsif @ordered_images.present? && @ordered_images.many? %>
+      <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
         <%= render "carousel" if @post.images.any? %>
+      <% elsif !@ordered_images.present? && @post.carousel_video.present? %>
+        <div class="mt-1/2">
+          <%= render "carousel_video" %>
+        </div>
       <% end %>
     <% rescue %>
       <p><small><em>Images are temporarily unavailable.</em></small></p>
