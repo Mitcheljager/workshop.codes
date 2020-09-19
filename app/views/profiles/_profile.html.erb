@@ -4,7 +4,10 @@
 <div class="profile-banner <%= "profile-banner--small" if small %>">
   <%= link_to user_profile_path(user), class: "profile-image #{ user.profile_image.attached? || user.provider_profile_image.present? ? '' : 'profile-image--empty' }" do %>
     <% if user.profile_image.attached? %>
-      <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed %>
+      <% begin %>
+        <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed %>
+      <% rescue %>
+      <% end %>
     <% elsif user.provider_profile_image.present? %>
       <%= image_tag user.provider_profile_image %>
     <% end %>
