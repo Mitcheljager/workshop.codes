@@ -3,10 +3,13 @@ module PostsHelper
     url = ""
 
     if post.image_order.present? && JSON.parse(post.image_order).length
-      image = post.images.find_by_blob_id(JSON.parse(post.image_order).first)
+      begin
+        image = post.images.find_by_blob_id(JSON.parse(post.image_order).first)
 
-      if image
-        url = url_for image.variant(quality: 90, resize_to_fill: [120, 68]).processed
+        if image
+          url = url_for image.variant(quality: 90, resize_to_fill: [120, 68]).processed
+        end
+      rescue
       end
     end
 
