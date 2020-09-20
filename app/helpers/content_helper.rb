@@ -38,7 +38,7 @@ module ContentHelper
   def markdown_youtube(text)
     text.gsub /\[youtube\s+(.*?)\]/ do
       "<div class='video'>
-        <iframe class='video__iframe' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{$1}' frameborder='0' allowfullscreen></iframe>
+        <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{$1}' frameborder='0' allowfullscreen></iframe>
       </div>"
     end
   end
