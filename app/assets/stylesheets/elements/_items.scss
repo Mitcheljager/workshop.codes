@@ -500,6 +500,11 @@
 
   iframe {
     max-width: 100%;
+    margin: 2rem 0;
+
+    &[src*="gfycat"] {
+      height: clamp(0px, calc((80vw - #{ $margin }) / 16 * 9), map-get($media-min-widths, lg) / 16 * 9);
+    }
   }
 
   blockquote {

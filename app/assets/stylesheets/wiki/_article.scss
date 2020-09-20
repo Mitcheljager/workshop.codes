@@ -36,6 +36,14 @@
 .article__content {
   @extend .item__description;
   margin: 0;
+
+  @include media-min(lg) {
+    iframe {
+      &[src*="gfycat"] {
+        height: clamp(0px, calc((80vw - #{ $margin } - 250px) / 16 * 9), calc((#{ map-get($media-min-widths, lg) } - 250px) / 16 * 9));
+      }
+    }
+  }
 }
 
 .article__aside {
