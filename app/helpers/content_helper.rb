@@ -60,6 +60,6 @@ module ContentHelper
   end
 
   def sanitized_markdown(text)
-    ActionController::Base.helpers.sanitize(markdown(text), tags: %w(div span hr style mark dl dd dt img details summary a b iframe blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong), attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-hide-on-close data-modal data-role data-url data-gallery))
+    ActionController::Base.helpers.sanitize(markdown(text), tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong), attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-hide-on-close data-modal data-role data-url data-gallery controls))
   end
 end
