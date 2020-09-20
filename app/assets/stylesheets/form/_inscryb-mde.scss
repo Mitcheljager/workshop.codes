@@ -30,6 +30,7 @@
 
 .editor-toolbar {
   display: flex;
+  flex-wrap: wrap;
   border: 0;
   padding: 0;
   opacity: 1;
@@ -39,10 +40,22 @@
     opacity: 1;
   }
 
+  &.fullscreen {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: darken($body-bg, 5%);
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
   a,
   button {
     display: block;
     border: 0;
+    margin-top: .25rem;
     margin-right: .25rem;
     background-color: $bg-dark;
     color: $text-color !important;
@@ -115,4 +128,24 @@
   content: "<>";
   font-weight: bold;
   font-size: $font-size-small;
+}
+
+.editor-toolbar button[title="Gallery"],
+.editor-toolbar button[title="Insert Table"] {
+  width: auto;
+  padding: 0 .5rem;
+}
+
+.fa-table::before {
+  content: "Table";
+  font-size: 12px;
+}
+
+.fa-gallery::before {
+  content: "Gallery";
+  font-size: 12px;
+}
+
+.fa-arrows-alt::before {
+  content: "⛶";
 }

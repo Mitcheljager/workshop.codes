@@ -14,22 +14,25 @@ document.addEventListener("turbolinks:load", function() {
       },
       status: false,
       spellChecker: false,
+      insertTexts: {
+        table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n"]
+      },
       toolbar: [
         "bold",
         "italic",
         {
-          name: "custom",
+          name: "highlight",
           action: function customFunction(editor) {
-            var cm = editor.codemirror;
-            var output = '';
-            var selectedText = cm.getSelection();
-            var text = selectedText || 'placeholder';
+            let output = ""
+            const cm = editor.codemirror
+            const selectedText = cm.getSelection()
+            const text = selectedText || "placeholder"
 
-            output = '==' + text + '==';
-            cm.replaceSelection(output);
+            output = "==" + text + "=="
+            cm.replaceSelection(output)
           },
           className: "fa fa-highlight",
-          title: "Highlight",
+          title: "Highlight"
         },
         "heading",
         "|",
@@ -40,7 +43,22 @@ document.addEventListener("turbolinks:load", function() {
         "quote",
         "code",
         "link",
-        "image"
+        "image",
+        "|",
+        "table",
+        {
+          name: "Gallery",
+          action: function customFunction(editor) {
+            const cm = editor.codemirror
+
+            output = '[gallery {\n  "Gallery Item 1": "https://",\n  "Gallery Item 2": "https://"\n}]'
+            cm.replaceSelection(output)
+          },
+          className: "fa fa-gallery",
+          title: "Gallery"
+        },
+        "|",
+        "fullscreen"
       ]
     })
   })

@@ -27,6 +27,7 @@
 //= require navigation
 //= require toggle-content
 //= require carousel
+//= require gallery
 //= require timeago
 //= require load-analytics
 //= require get-user-analytics

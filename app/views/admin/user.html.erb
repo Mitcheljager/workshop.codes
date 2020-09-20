@@ -4,7 +4,7 @@
   <h2><strong><%= @user.username %></strong> <small>(#<%= @user.id %>)</small></h2>
 </div>
 
-<div class="well">
+<div class="well well--dark">
   <%= form_for @user, url: admin_update_user_path do |form| %>
     <% if flash[:alert] %>
       <div class="warning mt-0 mb-1/4"><mark><%= flash[:alert] %></mark></div>
