@@ -1,7 +1,13 @@
 module ContentHelper
   class HTML < Redcarpet::Render::HTML
+    include ActionView::Helpers::AssetTagHelper
+
     def block_code(code, language)
       "<pre><code class='microlight'>#{ code }</code></pre>"
+    end
+
+    def image(link, title, alt_text)
+      image_tag(link, title: title, alt: alt_text, loading: "lazy")
     end
   end
 
