@@ -431,6 +431,7 @@
   h1,
   h2 {
     margin: $margin 0 $margin / 2;
+    line-height: 1.1em;
   }
 
   h3,
@@ -438,6 +439,7 @@
   h5,
   h6 {
     margin: $margin / 1.5 0 $margin / 4;
+    line-height: 1.1em;
   }
 
   ul {
