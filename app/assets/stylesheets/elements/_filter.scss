@@ -6,7 +6,6 @@
   flex-wrap: wrap;
   margin-top: 1rem;
   font-size: $font-size-base;
-  z-index: 10;
 
   @include media-min(sm) {
     font-size: 18px;
