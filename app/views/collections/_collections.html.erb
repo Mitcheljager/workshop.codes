@@ -23,5 +23,5 @@
     <small class="mt-1/2 mr-1/4"><em><%= "And #{ @post.collection.posts.where.not(id: @post.id).size - 9 } more..." %></em></small>
   <% end %>
 
-  <%= link_to "View collection", collection_path(@post.collection.nice_url), class: "button button--secondary button--small mt-1/2" %>
+  <%= link_to "View collection", collection_nice_path(@post.collection.nice_url), class: "button button--secondary button--small mt-1/2" %>
 </section>

@@ -1,0 +1,29 @@
+<div class="modal">
+  <div class="modal__backdrop" data-role="modal-backdrop"></div>
+
+  <div class="modal__content">
+    <h2 class="modal__title">Edit collection</h2>
+
+    <%= form_for @collection, remote: true do |form| %>
+      <div class="form-group">
+        <%= form.label :title, value: "Collection title", class: "form-label" %>
+        <%= form.text_field :title, class: "form-input", placeholder: "Collection title" %>
+      </div>
+
+      <%= submit_tag "Submit", class: "button mt-1/4" %>
+
+      <% if @collection.posts.count == 0 %>
+        <div class="mt-1/2">
+          <%= link_to "Destroy", collection_path(@collection),
+                      class: "text-red",
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to destroy this collection? This cannot be undone." } %>
+        </div>
+      <% else %>
+        <p class="mb-0 text-red">
+          <small>To delete this collection please remove all posts in it.</small>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

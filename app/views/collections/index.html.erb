@@ -1,0 +1,5 @@
+<% content_for :page_title, "Collections" %>
+
+<%= render "layouts/account", title: "Collections" do %>
+  <%= render(@collections) || "You have not yet created any collections." %>
+<% end %>

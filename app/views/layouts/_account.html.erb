@@ -9,6 +9,7 @@
     <%= link_to "Activity", activities_path, class: "profile__action #{ 'profile__action--active' if current_page?(activities_path) }" %>
     <%= link_to "Favorites", account_favorites_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_favorites_path) }" %>
     <%= link_to "Codes", account_posts_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_posts_path) }" %>
+    <%= link_to "Collections", collections_path, class: "profile__action #{ 'profile__action--active' if current_page?(collections_path) }" %>
     <%= link_to "Profile", edit_profile_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_profile_path) }" %>
 
     <hr class="mt-1/2 mb-1/2">

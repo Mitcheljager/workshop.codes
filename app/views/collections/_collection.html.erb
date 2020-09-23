@@ -1,0 +1,10 @@
+<div class="well well--dark mb-1/4">
+  <div>
+    <%= collection.title %> <small class="text-dark">(<%= collection.posts.size %>)</small>
+  </div>
+
+  <div>
+    <%= link_to "View", collection_nice_path(collection.nice_url), class: "button button--link mr-1/4" %>
+    <%= link_to "Edit", edit_collection_path(collection), class: "button button--secondary", remote: true %>
+  </div>
+</div>
