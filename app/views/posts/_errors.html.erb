@@ -1,0 +1,9 @@
+<div class="error-block">
+  <h2 class="error-block__title"><strong><%= pluralize(errors.count, "error") %></strong> prohibited this Item from being saved:</h2>
+
+  <ul>
+    <% errors.full_messages.each do |message| %>
+      <li><small><%= message %></small></li>
+    <% end %>
+  </ul>
+</div>

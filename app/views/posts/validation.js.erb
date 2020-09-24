@@ -1,0 +1,18 @@
+(() => {
+  <% if @post.errors.any? %>
+    const errorBlock = document.querySelector(".error-block")
+    if (errorBlock) errorBlock.remove()
+    document.querySelectorAll(".field_with_errors").forEach(element => element.classList.remove("field_with_errors"))
+
+    window.scrollTo(0, 0)
+    document.querySelector("[data-role~='post-form']").insertAdjacentHTML("afterBegin", "<%= j render "errors", errors: @post.errors %>")
+
+    let elements;
+    <% @post.errors.each do |error| %>
+      elements = document.querySelectorAll("[name*='post[<%= error %>]']")
+      elements.forEach(element => element.closest(".form-group").classList.add("field_with_errors"))
+    <% end %>
+  <% else %>
+    alert("Something went wrong when saving, but we aren't sure what. Please try again.")
+  <% end %>
+})()

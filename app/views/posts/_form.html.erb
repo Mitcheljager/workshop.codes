@@ -1,15 +1,5 @@
-<%= form_with url: path, model: post, local: true, data: { role: "post-form" } do |form| %>
-  <% if post.errors.any? %>
-    <div class="error-block">
-      <h2 class="error-block__title"><strong><%= pluralize(post.errors.count, "error") %></strong> prohibited this Item from being saved:</h2>
-
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><small><%= message %></small></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with url: path, model: post, data: { role: "post-form" }, remote: true do |form| %>
+  <%= render "errors", errors: post.errors if post.errors.any? %>
 
   <div class="form-group-uneven">
     <div class="form-group">
@@ -326,6 +316,6 @@
   <hr>
 
   <div>
-    <center><%= form.submit class: "button" %></center>
+    <center><%= form.submit class: "button", data: { disable_with: "Submitting..." } %></center>
   </div>
 <% end %>

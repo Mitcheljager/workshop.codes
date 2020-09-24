@@ -104,7 +104,10 @@ class PostsController < ApplicationController
 
       redirect_to post_path(@post.code)
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render "validation" }
+      end
     end
   end
 
@@ -131,7 +134,11 @@ class PostsController < ApplicationController
       redirect_to post_path(@post.code)
     else
       @post.code = current_code
-      render :edit
+
+      respond_to do |format|
+        format.html { render :edit }
+        format.js { render "validation" }
+      end
     end
   end
 
