@@ -42,7 +42,6 @@ function setLazyImage(element) {
   slides.push(element.innerElements[element.currentSlide])
   slides.push(element.innerElements[element.currentSlide + 1])
 
-
   slides.forEach(slide => {
     if (!slide) return
 
