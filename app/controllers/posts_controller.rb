@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_images, only: [:edit]
   skip_before_action :verify_authenticity_token, only: [:copy_code]
-  skip_before_action :track_ahoy_visit
 
   before_action only: [:edit, :update, :destroy] do
     if @post.present?
@@ -25,7 +24,7 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user, :revisions).where(private: 0).where("hotness > 0").order("hotness DESC").limit(3)
+    @hot_posts = Post.includes(:user, :revisions).where(private: 0).where("hotness > 0").order("hotness DESC").limit(3) unless params[:page].present?
     @posts = Post.includes(:user, :revisions).where(private: 0).order(created_at: :desc).page params[:page]
   end
 

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @favorites_received = Favorite.where(post_id: @posts.pluck(:id)).order(created_at: :asc)
     @copies_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :copy).order(created_at: :asc)
     @views_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
+    @listings_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
   end
 
   def new

@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   around_action :set_current_user
   before_action :set_affiliate_ad
+  after_action :track_listing
 
   def login_from_cookie
     return unless cookies[:remember_token] && !current_user
@@ -64,6 +65,16 @@ class ApplicationController < ActionController::Base
 
   def search_terms
     @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(18)
+  end
+
+  def track_listing
+    if @hot_posts.present?
+      @posts = @posts + @hot_posts
+    end
+
+    parameters = request.path_parameters
+
+    ListingTrackingJob.perform_async(ahoy, @posts, parameters) if @posts.present?
   end
 
   private

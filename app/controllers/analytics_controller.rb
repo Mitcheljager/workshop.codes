@@ -42,7 +42,9 @@ class AnalyticsController < ApplicationController
   def user
     date_counts = {}
     if current_user.posts.any?
-      (Date.parse(current_user.posts.first.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date|
+      latest_date = [current_user.posts.first.created_at.strftime("%Y-%m-%d"), Statistic.first.created_at.strftime("%Y-%m-%d")].max
+
+      (Date.parse(latest_date)...DateTime.now).each do |date|
         date_counts[date.strftime("%Y-%m-%d")] = 0
       end
     else
@@ -57,6 +59,11 @@ class AnalyticsController < ApplicationController
     elsif params[:type] == "views"
       @views_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
       @views_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
+        date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
+      end
+    elsif params[:type] == "listings"
+      @listings_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
+      @listings_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
         date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
       end
     end

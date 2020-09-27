@@ -2,6 +2,7 @@ desc "Compress 1 day old impressions in to Statistic"
 task :compress_impressions => :environment do
   compress_events("Posts Visit", :visit)
   compress_events("Copy Code", :copy)
+  compress_events("Listing", :listing)
   compress_search_terms
   compress_visits
 
@@ -22,7 +23,8 @@ def compress_events(event_name, content_type)
       @statistic.model_id = event[1].first[1]["id"]
 
       post = Post.find_by_id(event[1].first[1]["id"])
-      post.increment!(:impressions_count, event[1].size) if post.present?
+      post.increment!(:impressions_count, event[1].size) if post.present? && content_type == :visit
+      post.increment!(:listings_count, event[1].size) if post.present? && content_type == :listing
     end
 
     @statistic.save

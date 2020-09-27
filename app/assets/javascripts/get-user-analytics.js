@@ -30,6 +30,10 @@ function getUserAnalytics(element) {
     target.dataset.labels = JSON.stringify(Object.keys(parsedData))
     target.dataset.values = JSON.stringify(Object.values(parsedData))
 
+    Chart.helpers.each(Chart.instances, chart => {
+      chart.destroy()
+    })
+
     createChart(target)
   })
 }

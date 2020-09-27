@@ -10,6 +10,10 @@
   @include media-min(md) {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  &--auto {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }
 
 .card {
