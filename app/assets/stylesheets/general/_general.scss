@@ -29,6 +29,7 @@ body {
 
 a {
   color: $text-color;
+  outline: none;
 
   &:hover,
   &:active {

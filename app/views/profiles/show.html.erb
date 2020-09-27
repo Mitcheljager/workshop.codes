@@ -33,18 +33,13 @@
     <span>Sorted by</span>
 
     <div class="dropdown" data-dropdown>
-      <%= link_to params[:user_sort] ? params[:user_sort].humanize : "Created at", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+      <%= link_to params[:sort_posts] ? params[:sort_posts].humanize : "Created at", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
       <div class="dropdown__content" data-dropdown-content>
-        <% if params[:user_sort] %>
-          <%= link_to "✕ Remove Sort", user_profile_path(@user), class: "dropdown__item" %>
-          <hr>
-        <% end %>
-
-        <%= link_to "Created at", user_profile_path(@user), class: "dropdown__item #{ "text-white" unless params[:user_sort] }" %>
-        <%= link_to "Updated at", user_profile_path(@user, "updated_at"), class: "dropdown__item #{ "text-white" if params[:user_sort == "updated_at"] }" %>
-        <%= link_to "Hotness", user_profile_path(@user, "hotness"), class: "dropdown__item #{ "text-white" if params[:user_sort == "hotness"] }" %>
-        <%= link_to "Favorites", user_profile_path(@user, "favorites_count"), class: "dropdown__item #{ "text-white" if params[:user_sort == "favorites_count"] }" %>
+        <%= link_to "Created at", user_profile_path(@user), class: "dropdown__item #{ "text-white" unless params[:sort_posts].present? }" %>
+        <%= link_to "Updated at", user_profile_path(@user, "updated_at"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "updated_at" }" %>
+        <%= link_to "Hotness", user_profile_path(@user, "hotness"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "hotness" }" %>
+        <%= link_to "Favorites", user_profile_path(@user, "favorites_count"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "favorites_count" }" %>
       </div>
     </div>
   </div>

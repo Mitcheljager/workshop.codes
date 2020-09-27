@@ -13,7 +13,6 @@ class UsersController < ApplicationController
 
   def show
     @posts = current_user.posts
-    @favorites_received = Favorite.where(post_id: @posts.pluck(:id)).order(created_at: :asc)
     @copies_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :copy).order(created_at: :asc)
     @views_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
     @listings_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
@@ -72,7 +71,7 @@ class UsersController < ApplicationController
   end
 
   def posts
-    @posts = current_user.posts.order(updated_at: :desc).page(params[:page])
+    @posts = current_user.posts.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
   end
 
   def accessibility; end
@@ -90,5 +89,9 @@ class UsersController < ApplicationController
   def generate_remember_token
     token = SecureRandom.base64
     RememberToken.create(user_id: @user.id, token: token)
+  end
+
+  def allowed_sort_params
+    %w[updated_at created_at hotness favorites_count]
   end
 end
