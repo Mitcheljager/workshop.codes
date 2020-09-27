@@ -31,11 +31,11 @@
           <small class="text-dark">(new)</small>
 
           <div class="tooltip__content">
-            Started recording this value since <%= Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") %>
+            Started recording this value since <%= Statistic.where(content_type: :listing).any? ? Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") : "today" %>
           </div>
         </div>
-
       </span>
+
       <%= number_with_delimiter(@posts.pluck(:listings_count).sum) %>
     </div>
   </div>
