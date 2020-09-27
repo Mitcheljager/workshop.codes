@@ -76,7 +76,6 @@
         "title code"
         "details action";
       grid-template-columns: calc(100% - #{ $code-width }) $code-width;
-      margin-top: $margin * 2;
     }
 
     + .item--bottom {
