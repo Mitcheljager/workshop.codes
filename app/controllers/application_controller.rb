@@ -68,13 +68,15 @@ class ApplicationController < ActionController::Base
   end
 
   def track_listing
+    return unless @posts.present?
+
     if @hot_posts.present?
       @posts = @posts + @hot_posts
     end
 
     parameters = request.path_parameters
 
-    ListingTrackingJob.perform_async(ahoy, @posts, parameters) if @posts.present?
+    ListingTrackingJob.perform_async(ahoy, @posts, parameters)
   end
 
   private
