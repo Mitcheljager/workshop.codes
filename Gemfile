@@ -55,6 +55,7 @@ group :production do
   gem "scout_apm"
   gem "pg"
   gem "bugsnag"
+  gem "tunemygc"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
