@@ -61,11 +61,6 @@ class AnalyticsController < ApplicationController
       @views_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
         date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
       end
-    elsif params[:type] == "listings"
-      @listings_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
-      @listings_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
-        date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
-      end
     end
 
     render json: date_counts, layout: false
