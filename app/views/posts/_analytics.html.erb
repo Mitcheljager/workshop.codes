@@ -62,8 +62,8 @@
     <p class="form-hint">
       Note: Updates daily.
 
-      <% if Statistic.where(content_type: :listings).first && post.created_at < Statistic.where(content_type: :listings).first.created_at %>
-        This data was not recorded before <%= Statistic.where(content_type: :listings).first.created_at.strftime("%Y-%m-%d") %>
+      <% if Statistic.where(content_type: :listing).first && post.created_at < Statistic.where(content_type: :listing).first.created_at %>
+        This data was not recorded before <%= Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") %>
       <% end %>
     </p>
   </div>
