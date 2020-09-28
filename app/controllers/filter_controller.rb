@@ -54,7 +54,7 @@ class FilterController < ApplicationController
   end
 
   def track_action(parameters = request.path_parameters)
-    TrackingJob.perform_async(ahoy, parameters)
+    TrackingJob.perform_async(ahoy, "Search", parameters)
   end
 
   def set_request_headers
