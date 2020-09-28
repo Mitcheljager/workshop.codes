@@ -18,9 +18,7 @@ class FilterController < ApplicationController
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
 
     respond_to do |format|
-      format.html {
-        track_action({ search: params[:search] }) if params[:search]
-      }
+      format.html
       format.json {
         set_request_headers
         render json: @posts
@@ -51,10 +49,6 @@ class FilterController < ApplicationController
     else
       "created_at"
     end
-  end
-
-  def track_action(parameters = request.path_parameters)
-    TrackingJob.perform_async(ahoy, "Search", parameters)
   end
 
   def set_request_headers
