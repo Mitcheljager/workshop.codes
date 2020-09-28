@@ -29,8 +29,8 @@
 //= require carousel
 //= require gallery
 //= require timeago
-//= require load-analytics
 //= require get-user-analytics
+//= require get-post-analytics
 //= require get-verified-users
 //= require load-snippet
 //= require difference-viewer

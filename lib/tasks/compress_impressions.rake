@@ -2,6 +2,7 @@ desc "Compress 1 day old impressions in to Statistic"
 task :compress_impressions => :environment do
   compress_events("Posts Visit", :visit)
   compress_events("Copy Code", :copy)
+  compress_events("Listing", :listing)
   compress_search_terms
   compress_visits
 
@@ -13,7 +14,7 @@ task :compress_impressions => :environment do
 end
 
 def compress_events(event_name, content_type)
-  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: event_name).distinct.pluck(:visit_id, :properties).group_by { |v| v[1] }
+  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: event_name).distinct.pluck(:visit_id, :properties).group_by { |v| v[1]["id"] }
 
   events.each do |event|
     @statistic = Statistic.new(timeframe: :daily, content_type: content_type, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
@@ -23,6 +24,7 @@ def compress_events(event_name, content_type)
 
       post = Post.find_by_id(event[1].first[1]["id"])
       post.increment!(:impressions_count, event[1].size) if post.present? && content_type == :visit
+      post.increment!(:listings_count, event[1].size) if post.present? && content_type == :listing
     end
 
     @statistic.save
@@ -39,7 +41,6 @@ def compress_search_terms
 
     @statistic = Statistic.find_by_properties(search_term)
     if @statistic.present?
-      puts @statistic.properties
       @statistic.value = @statistic.value + event[1].size
     else
       @statistic = Statistic.new(timeframe: :forever, content_type: :search, value: event[1].size, properties: search_term)

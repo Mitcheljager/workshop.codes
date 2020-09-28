@@ -4,39 +4,23 @@ class AnalyticsController < ApplicationController
 
     return if @post.user != current_user
 
-    @daily_copies_date_counts = create_date_count
-    @daily_views_date_counts = create_date_count
-    @hourly_copies_counts = create_hour_count
-    @hourly_views_counts = create_hour_count
+    counts = {}
 
-    @daily_copies = Statistic.where(model_id: @post.id).where(content_type: :copy).order(created_at: :asc)
-    @daily_copies.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group|
-      @daily_copies_date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
+    if params[:type] == "daily-copies"
+      counts = create_daily_counts(:copy)
+    elsif params[:type] == "daily-views"
+      counts = create_daily_counts(:visit)
+    elsif params[:type] == "daily-listings"
+      counts = create_daily_counts(:listing)
+    elsif params[:type] == "hourly-copies"
+      counts = create_hourly_counts("Copy Code")
+    elsif params[:type] == "hourly-views"
+      counts = create_hourly_counts("Posts Visit")
+    elsif params[:type] == "hourly-listings"
+      counts = create_hourly_counts("Listing")
     end
 
-    @daily_views = Statistic.where(model_id: @post.id).where(content_type: :visit).order(created_at: :asc)
-    @daily_views.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group|
-      @daily_views_date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
-    end
-
-    @hourly_copies = Rails.env.development? ? Ahoy::Event.where(name: "Copy Code").distinct.last(10) : Ahoy::Event.where_event("Copy Code", id: @post.id).distinct
-    @hourly_copies.group_by { |x| x["time"].strftime("%Y-%m-%d %H:00") }.each do |group|
-      @hourly_copies_counts[group[0]] = group[1].map(&:visit_id).uniq.count
-    end
-
-    @hourly_views = Rails.env.development? ? Ahoy::Event.where(name: "Posts Visit").distinct.last(10) : Ahoy::Event.where_event("Posts Visit", id: @post.id).distinct
-    @hourly_views.group_by { |x| x["time"].strftime("%Y-%m-%d %H:00") }.each do |group|
-      @hourly_views_counts[group[0]] = group[1].map(&:visit_id).uniq.count
-    end
-
-    @merged_arrays = {
-      "daily-copies": @daily_copies_date_counts,
-      "daily-views": @daily_views_date_counts,
-      "hourly-copies": @hourly_copies_counts,
-      "hourly-views": @hourly_views_counts
-    }
-
-    render json: @merged_arrays, layout: false
+    render json: counts, layout: false
   end
 
   def user
@@ -59,6 +43,11 @@ class AnalyticsController < ApplicationController
     elsif params[:type] == "views"
       @views_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
       @views_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
+        date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
+      end
+    elsif params[:type] == "listings"
+      @listings_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
+      @listings_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
         date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
       end
     end
@@ -84,5 +73,25 @@ class AnalyticsController < ApplicationController
     end
 
     return hour_counts
+  end
+
+  def create_daily_counts(type)
+    counts = create_date_count
+    daily = Statistic.where(model_id: @post.id).where(content_type: type).order(created_at: :asc)
+    daily.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group|
+      counts[group[0]] = group[1].map { |h| h[:value] }.sum
+    end
+
+    return counts
+  end
+
+  def create_hourly_counts(type)
+    counts = create_hour_count
+    hourly = Rails.env.development? ? Ahoy::Event.where(name: type).distinct.last(10) : Ahoy::Event.where_event(type, id: @post.id).distinct
+    hourly.group_by { |x| x["time"].strftime("%Y-%m-%d %H:00") }.each do |group|
+      counts[group[0]] = group[1].map(&:visit_id).uniq.count
+    end
+
+    return counts
   end
 end

@@ -14,22 +14,21 @@
   </div>
 <% end %>
 
-<div data-reveal-by-select-parent class="mt-1/2">
+<div data-post-analytics data-reveal-by-select-parent class="mt-1/2">
   <label class="form-label">Analytics type</label>
 
-  <select class="form-select" data-action="reveal-by-select">
+  <select class="form-select" data-action="get-post-analytics reveal-by-select" data-post-id="<%= post.id %>" autocomplete="off">
     <option value="daily-copies">Copies per day</option>
     <option value="daily-views">Views per day</option>
     <option value="hourly-copies">Copies per hour in the last 7 days</option>
     <option value="hourly-views">Views per hour in the last 7 days</option>
+    <option value="hourly-listings">Listings per hour in the last 7 days</option>
   </select>
 
   <div data-reveal-by-select-target="daily-copies">
     <p class="form-hint mt-1/4">
       This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
     </p>
-
-    <div class="chart-wrapper"><canvas height="300" class="chart" data-daily-copies-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
 
     <p class="form-hint">
       Note: Updates daily.
@@ -45,8 +44,6 @@
       This is the total amount of times people viewed this post. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
     </p>
 
-    <div class="chart-wrapper"><canvas height="300" class="chart" data-daily-views-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
-
     <p class="form-hint">
       Note: Updates daily.
 
@@ -61,8 +58,6 @@
       This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
     </p>
 
-    <div class="chart-wrapper"><canvas height="300" class="chart" data-hourly-copies-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
-
     <p class="form-hint">
       Note: Times are displayed in <%= Time.zone.to_s %>.
     </p>
@@ -73,10 +68,20 @@
       This is the total amount of times people viewed this post. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
     </p>
 
-    <div class="chart-wrapper"><canvas height="300" class="chart" data-hourly-views-analytics="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
+    <p class="form-hint">
+      Note: Times are displayed in <%= Time.zone.to_s %>.
+    </p>
+  </div>
+
+  <div data-reveal-by-select-target="hourly-listings" class="visibility-hidden">
+    <p class="form-hint mt-1/4">
+      This is the total amount of times people viewed this post. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
+    </p>
 
     <p class="form-hint">
       Note: Times are displayed in <%= Time.zone.to_s %>.
     </p>
   </div>
+
+  <div class="chart-wrapper mb-1/1"><canvas height="300" class="chart" data-role="chart" data-post-id="<%= post.id %>" data-labels="[]" data-values="[]"></canvas></div>
 </div>
