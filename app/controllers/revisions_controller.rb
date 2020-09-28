@@ -1,9 +1,14 @@
 class RevisionsController < ApplicationController
   layout false, only: [:raw_snippet]
-  before_action :set_revision
+  before_action :set_revision, except: [:index]
 
-  before_action except: [:show, :raw_snippet] do
+  before_action except: [:show, :raw_snippet, :index] do
     redirect_to root_path unless current_user && current_user == @revision.post.user && @revision.visible
+  end
+
+  def index
+    @post = Post.find_by_code(params[:code])
+    @revisions = Revision.where(post_id: @post).order(created_at: :desc)
   end
 
   def show

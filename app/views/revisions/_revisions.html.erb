@@ -1,9 +1,11 @@
 <section class="revisions">
   <div class="heading items-heading mb-1/2">
-    <h2 class="mt-0">Update Log</h2>
+    <h2 class="mt-0">Update Log <small>(<%= @post.revisions.size %>)</small></h2>
   </div>
 
-  <% @post.revisions.where(visible: true).order(created_at: :desc).each do |revision| %>
+  <% @post.revisions.where(visible: true).order(created_at: :desc).limit(3).each do |revision| %>
     <%= render "revisions/revision", revision: revision %>
   <% end %>
+
+  <%= link_to "View all updates", revisions_path(@post.code), class: "button button--secondary mt-1/2" if @post.revisions.size > 3 %>
 </section>

@@ -94,6 +94,7 @@ Rails.application.routes.draw do
 
   post "copy-code", to: "posts#copy_code", as: "copy_code"
   resources :revisions, only: [:edit, :update]
+  get ":code/revisions", to: "revisions#index", as: "revisions"
   get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
   get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
