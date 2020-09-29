@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @copies_received = @statistics_for_user.where(content_type: :copy).order(created_at: :asc)
     @views_received = @statistics_for_user.where(content_type: :visit).order(created_at: :asc)
     @listings_received = @statistics_for_user.where(content_type: :listing).order(created_at: :asc)
-    @recent_listings = Rails.env.production? ? Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").where_props(id: @posts.pluck(:id)) : Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing")
+    @recent_listings = Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").pluck(:properties).select { |l| @posts.pluck(:id).include?(l["id"]) }
   end
 
   def new

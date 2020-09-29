@@ -52,7 +52,7 @@
       </div>
 
       <% if @recent_listings.size > 0 %>
-        <% @recent_listings.group_by { |l| l.properties.except("id", "concerns") }.each do |group, items| %>
+        <% @recent_listings.group_by { |l| l.except("id", "concerns") }.each do |group, items| %>
           <div class="profile-analytics__item">
             <%= link_to url_for(group), group, title: url_for(group) %>
             <span><%= items.size %></span>
