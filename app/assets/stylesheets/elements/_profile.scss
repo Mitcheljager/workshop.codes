@@ -225,6 +225,14 @@
     grid-template-columns: 200px auto;
     grid-gap: $margin / 2;
   }
+
+  .card {
+    margin-bottom: $margin / 2;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .profile-analytics__listings {

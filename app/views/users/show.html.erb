@@ -8,7 +8,7 @@
   <% end %>
 
   <div class="profile-analytics">
-    <div class="cards cards--auto">
+    <div>
       <div class="card">
         <span class="card__title">Favorites received</span>
         <%= number_with_delimiter(@posts.pluck(:favorites_count).sum) %>
