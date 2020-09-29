@@ -33,27 +33,29 @@
     </em>
   <% end %>
 
-  <% if !@user.provider_profile_image.present? %>
-    <div class="form-group-max-width mt-1/1">
+  <div class="well well--dark block mt-1/1">
+    <% if !@user.provider_profile_image.present? %>
+      <div class="form-group-max-width">
+        <%= form.label :profile_image, "Profile image", class: "form-label" %>
+        <% begin %>
+          <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
+        <% rescue%>
+        <% end %>
+        <%= form.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
+
+        <p class="form-hint mt-1/4 mb-0">
+          The image will be processed to a 140x140 format. Max 2MB.
+        </p>
+      </div>
+    <% else %>
       <%= form.label :profile_image, "Profile image", class: "form-label" %>
-      <% begin %>
-        <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
-      <% rescue%>
-      <% end %>
-      <%= form.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
+      <%= image_tag @user.provider_profile_image, class: "profile-image" %>
 
       <p class="form-hint mt-1/4">
-        The image will be processed to a 140x140 format. Max 2MB.
+        This image is directly from Discord. Adjusting your profile picture on Discord will also change it here.
       </p>
-    </div>
-  <% else %>
-    <%= form.label :profile_image, "Profile image", class: "form-label" %>
-    <%= image_tag @user.provider_profile_image, class: "profile-image" %>
-
-    <p class="form-hint mt-1/4">
-      This image is directly from Discord. Adjusting your profile picture on Discord will also change it here.
-    </p>
-  <% end %>
+    <% end %>
+  </div>
 
   <div class="form-group-max-width mt-1/1">
     <%= form.label :featured_posts, "Featured Codes", class: "form-label" %>
@@ -74,7 +76,7 @@
 
     <div class="form-hint">
       Write a little bit about yourselform. Share your Battle tag, platform, or other places people can find you.<br>
-      Full markdown enabled. Limited to 255 characters.
+      Basic markdown enabled. Limited to 255 characters.
     </div>
 
     <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small" %>
@@ -88,6 +90,21 @@
 
     <%= form.text_field :link, placeholder: "Link", class: "form-input" %>
   </div>
+
+  <% if @user.verified? %>
+    <div class="form-group mt-1/1">
+      <%= form.label :custom_css, class: "form-label" do %>
+        Custom CSS
+        <%= inline_svg_tag "icons/verified.svg", class: "profile-banner__verified" %>
+      <% end %>
+
+      <div class="form-hint">
+        You're verified, which means you get to add some extra styling to your profile. Be respectful with your styling. Don't hide anything that isn't yours. Don't alter text that isn't yours. Don't go overboard. Misuse may result in your verified status being removed.
+      </div>
+
+      <%= form.text_area :custom_css, class: "form-input form-textarea form-textarea--extra-small" %>
+    </div>
+  <% end %>
 
   <hr class="small mt-1/1">
 

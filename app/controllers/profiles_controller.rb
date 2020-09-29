@@ -43,7 +43,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:user).permit(:profile_image, :link, :description, { featured_posts: [] })
+    params.require(:user).permit(:profile_image, :link, :description, :custom_css, { featured_posts: [] })
   end
 
   def not_found

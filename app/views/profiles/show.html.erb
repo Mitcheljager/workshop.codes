@@ -1,7 +1,11 @@
 <% content_for :page_title, @user.username.split("#")[0] %>
 
+<% if @user.verified? && @user.custom_css.present? %>
+  <style><%= sanitize(@user.custom_css) %></style>
+<% end %>
+
 <% if @user == current_user %>
-  <div class="well mt-1/1">
+  <div class="well well--dark mt-1/1">
     <%= link_to "← Customise your profile", edit_profile_path %>
   </div>
 <% end %>
@@ -12,7 +16,10 @@
   <div class="cards">
     <% @featured_posts.each do |post| %>
       <div class="card">
-        <%= link_to post.title, post_path(post.code), class: "card__title" %>
+        <%= link_to post_path(post.code), class: "card__title" do %>
+          <%= image_tag url_for_post_thumbnail(post, 250, 143, "large"), width: 250, height: 143, loading: "lazy", class: "mb-1/4" %>
+          <%= post.title %>
+        <% end %>
 
         <div>
           <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
@@ -26,7 +33,7 @@
   </div>
 <% end %>
 
-<div class="action-header top-offset">
+<div class="action-header mt-1/1">
   <h2>Workshop Codes made by <strong><%= @user.username.split("#")[0] %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h2>
 
   <div class="action-header__actions">
