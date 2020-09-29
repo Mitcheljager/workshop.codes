@@ -220,6 +220,8 @@
 }
 
 .profile-analytics {
+  width: 100%;
+  
   @include media-min(md) {
     display: grid;
     grid-template-columns: 200px auto;
@@ -260,7 +262,8 @@
 
   a {
     display: block;
-    max-width: 75%;
+    width: 75%;
+    max-width: 20em;
     overflow: hidden;
     text-decoration: none;
     color: $white;
