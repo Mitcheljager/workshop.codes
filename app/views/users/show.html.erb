@@ -8,7 +8,7 @@
   <% end %>
 
   <div class="profile-analytics">
-    <div>
+    <div class="profile-analytics__cards">
       <div class="card">
         <span class="card__title">Favorites received</span>
         <%= number_with_delimiter(@posts.pluck(:favorites_count).sum) %>
@@ -41,29 +41,7 @@
       </div>
     </div>
 
-    <div class="profile-analytics__listings">
-      <span class="text-dark">Listings in the last 60 minutes</span>
-
-      <h2 class="mt-1/8"><%= @recent_listings.size %></h2>
-
-      <div class="profile-analytics__item text-dark">
-        Path
-        <span>Number of users</span>
-      </div>
-
-      <% if @recent_listings.size > 0 %>
-        <% @recent_listings.group_by { |l| l.except("id", "concerns") }.each do |group, items| %>
-          <div class="profile-analytics__item">
-            <%= link_to url_for(group), group, title: url_for(group) %>
-            <span><%= items.size %></span>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="mt-1/4 text-dark">
-          <em>Your codes have not been listed recently.</em>
-        </div>
-      <% end %>
-    </div>
+    <%= render "listings" %>
   </div>
 
   <div data-user-analytics data-reveal-by-select-parent>

@@ -1,0 +1,41 @@
+<div class="profile-analytics__listings">
+  <span class="text-dark">Listings in the last 60 minutes</span>
+
+  <h2 class="mt-1/8"><%= @recent_listings.size %></h2>
+
+  <div class="profile-analytics__item-title text-dark mb-1/8">
+    Path
+    <span>Number of users</span>
+  </div>
+
+  <% if @recent_listings.size > 0 %>
+    <% @recent_listings.group_by { |l| l.except("id", "concerns") }
+                       .sort_by{ |group, items| items.size }.reverse
+                       .each do |group, items| %>
+      <div data-toggle-content class="profile-analytics__item">
+        <div data-action="toggle-content" class="profile-analytics__item-title">
+          <%= link_to url_for(group), group, title: url_for(group) %>
+          <span><%= items.size %></span>
+        </div>
+
+        <div data-role="content-to-toggle snippet-container" style="display: none">
+          <div class="mt-1/8 mb-1/8">
+            <span class="text-dark">Results per post</span>
+            <% items.group_by { |i| i["id"] }.each do |grouped_id, posts| %>
+              <% post = @posts.find(grouped_id) %>
+
+              <div data-toggle-content class="profile-analytics__item-title">
+                <%= post.code %>
+                <span><%= posts.size %></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="mt-1/4 text-dark">
+      <em>Your codes have not been listed recently.</em>
+    </div>
+  <% end %>
+</div>
