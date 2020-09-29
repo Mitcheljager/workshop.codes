@@ -1,6 +1,6 @@
 <h1 class="top-offset">Viewing difference of <strong><%= @edit.article.group_id %></strong></h1>
 
-<p>Edit made by <%= link_to @edit.user.username, profile_show_path(@edit.user.username) %></p>
+<p>Edit made by <%= link_to @edit.user.username, profile_path(@edit.user.username) %></p>
 
 <% if @edit.notes.present? %>
   <div class="well">

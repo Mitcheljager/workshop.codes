@@ -12,6 +12,10 @@ document.addEventListener("turbolinks:load", function() {
 function getUserAnalytics(element) {
   if (event) event.preventDefault()
 
+  const progressBar = new Turbolinks.ProgressBar()
+  progressBar.setValue(0)
+  progressBar.show()
+
   fetch("/analytics/user", {
     method: "post",
     body: JSON.stringify({ type: element.value }),
@@ -35,5 +39,8 @@ function getUserAnalytics(element) {
     })
 
     createChart(target)
+  }).finally(() => {
+    progressBar.setValue(1)
+    progressBar.hide()
   })
 }

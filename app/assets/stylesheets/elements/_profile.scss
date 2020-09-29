@@ -218,3 +218,45 @@
 .profile-banner__action {
   word-break: break-all;
 }
+
+.profile-analytics {
+  @include media-min(md) {
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-gap: $margin / 2;
+  }
+}
+
+.profile-analytics__listings {
+  @extend .card;
+  display: block;
+  margin-top: $margin / 2;
+  border-radius: $border-radius * 2;
+  background: darken($body-bg, 5%);
+  font-size: $font-size-small;
+
+  @include media-min(md) {
+    margin-top: 0;
+  }
+}
+
+.profile-analytics__item {
+  display: flex;
+  justify-content: space-between;
+  padding: .5em 0;
+  border-bottom: 1px solid rgba($pure-white, .1);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  a {
+    display: block;
+    max-width: 75%;
+    overflow: hidden;
+    text-decoration: none;
+    color: $white;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

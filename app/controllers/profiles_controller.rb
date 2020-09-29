@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
 
     if @user.present?
       if @user.verified? && @user.nice_url.present? && @user.nice_url != @user.username
-        redirect_to profile_show_path(@user.nice_url)
+        redirect_to profile_path(@user.nice_url)
       end
     else
       @user = User.where(verified: true).find_by("upper(nice_url) = ?", params[:username].upcase)

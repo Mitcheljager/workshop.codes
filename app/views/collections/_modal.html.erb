@@ -4,7 +4,7 @@
   <div class="modal__content">
     <h2 class="modal__title">Edit collection</h2>
 
-    <%= form_for @collection, remote: true do |form| %>
+    <%= form_for @collection, url: collection_path(@collection.nice_url), remote: true do |form| %>
       <div class="form-group">
         <%= form.label :title, value: "Collection title", class: "form-label" %>
         <%= form.text_field :title, class: "form-input", placeholder: "Collection title" %>
@@ -14,7 +14,7 @@
 
       <% if @collection.posts.count == 0 %>
         <div class="mt-1/2">
-          <%= link_to "Destroy", collection_path(@collection),
+          <%= link_to "Destroy", collection_path(@collection.nice_url),
                       class: "text-red",
                       method: :delete,
                       data: { confirm: "Are you sure you want to destroy this collection? This cannot be undone." } %>

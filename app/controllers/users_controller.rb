@@ -7,15 +7,19 @@ class UsersController < ApplicationController
     redirect_to account_path if current_user
   end
 
+  skip_after_action :track_listing
+
   def index
     @users = User.all.order(created_at: :asc)
   end
 
   def show
     @posts = current_user.posts
-    @copies_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :copy).order(created_at: :asc)
-    @views_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
-    @listings_received = Statistic.where(model_id: @posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
+    @statistics_for_user = Statistic.where.not(content_type: :listing).where(model_id: @posts.pluck(:id))
+    @copies_received = @statistics_for_user.where(content_type: :copy).order(created_at: :asc)
+    @views_received = @statistics_for_user.where(content_type: :visit).order(created_at: :asc)
+    @listings_received = @statistics_for_user.where(content_type: :listing).order(created_at: :asc)
+    @recent_listings = Rails.env.development? ? Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing") : Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").where_props(id: @posts.pluck(:id))
   end
 
   def new

@@ -13,11 +13,11 @@ class CollectionsController < ApplicationController
   end
 
   def edit
-    @collection = Collection.where(user_id: current_user.id).find(params[:id])
+    @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
   end
 
   def update
-    @collection = Collection.where(user_id: current_user.id).find(params[:id])
+    @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
 
     if @collection.update(collection_params)
       redirect_to collections_path
@@ -27,7 +27,7 @@ class CollectionsController < ApplicationController
   end
 
   def destroy
-    @collection = Collection.where(user_id: current_user.id).find(params[:id])
+    @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
 
     if @collection.posts.count == 0 && @collection.destroy
       redirect_to collections_path

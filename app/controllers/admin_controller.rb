@@ -5,6 +5,8 @@ class AdminController < ApplicationController
     redirect_to root_path unless is_admin?(current_user)
   end
 
+  skip_after_action :track_listing
+
   def index
     @posts = Post.select(:created_at).all.order(created_at: :asc)
     @users = User.select(:created_at).all.order(created_at: :asc)

@@ -7,36 +7,62 @@
     </div>
   <% end %>
 
-  <div class="cards cards--auto">
-    <div class="card">
-      <span class="card__title">Favorites received</span>
-      <%= number_with_delimiter(@posts.pluck(:favorites_count).sum) %>
-    </div>
+  <div class="profile-analytics">
+    <div class="cards cards--auto">
+      <div class="card">
+        <span class="card__title">Favorites received</span>
+        <%= number_with_delimiter(@posts.pluck(:favorites_count).sum) %>
+      </div>
 
-    <div class="card">
-      <span class="card__title">Views received</span>
-      <%= number_with_delimiter(@views_received.pluck(:value).sum) %>
-    </div>
+      <div class="card">
+        <span class="card__title">Views received</span>
+        <%= number_with_delimiter(@views_received.pluck(:value).sum) %>
+      </div>
 
-    <div class="card">
-      <span class="card__title">Copies received</span>
-      <%= number_with_delimiter(@copies_received.pluck(:value).sum) %>
-    </div>
+      <div class="card">
+        <span class="card__title">Copies received</span>
+        <%= number_with_delimiter(@copies_received.pluck(:value).sum) %>
+      </div>
 
-    <div class="card">
-      <span class="card__title flex">
-        Listings
+      <div class="card">
+        <span class="card__title flex">
+          Listings
 
-        <div class="tooltip align align-center ml-1/8">
-          <small class="text-dark">(new)</small>
+          <div class="tooltip align align-center ml-1/8">
+            <small class="text-dark">(new)</small>
 
-          <div class="tooltip__content">
-            Started recording this value since <%= Statistic.where(content_type: :listing).any? ? Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") : "today" %>
+            <div class="tooltip__content">
+              Started recording this value since <%= Statistic.where(content_type: :listing).any? ? Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") : "today" %>
+            </div>
           </div>
-        </div>
-      </span>
+        </span>
 
-      <%= number_with_delimiter(@posts.pluck(:listings_count).sum) %>
+        <%= number_with_delimiter(@posts.pluck(:listings_count).sum) %>
+      </div>
+    </div>
+
+    <div class="profile-analytics__listings">
+      <span class="text-dark">Listings in the last 60 minutes</span>
+
+      <h2 class="mt-1/8"><%= @recent_listings.size %></h2>
+
+      <div class="profile-analytics__item text-dark">
+        Path
+        <span>Number of users</span>
+      </div>
+
+      <% if @recent_listings.size > 0 %>
+        <% @recent_listings.group_by { |l| l.properties.except("id", "concerns") }.each do |group| %>
+          <div class="profile-analytics__item">
+            <%= link_to url_for(group[0]), group[0] %>
+            <span><%= group[1].size %></span>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="mt-1/4 text-dark">
+          <em>Your codes have not been listed recently.</em>
+        </div>
+      <% end %>
     </div>
   </div>
 

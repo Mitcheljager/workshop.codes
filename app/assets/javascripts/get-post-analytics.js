@@ -11,6 +11,10 @@ document.addEventListener("turbolinks:load", function() {
 function getPostAnalytics(element) {
   if (event) event.preventDefault()
 
+  const progressBar = new Turbolinks.ProgressBar()
+  progressBar.setValue(0)
+  progressBar.show()
+
   fetch("/analytics/post", {
     method: "post",
     body: JSON.stringify({ type: element.value, id: element.dataset.postId }),
@@ -35,6 +39,9 @@ function getPostAnalytics(element) {
     })
 
     createChart(target)
+  }).finally(() => {
+    progressBar.setValue(1)
+    progressBar.hide()
   })
 }
 

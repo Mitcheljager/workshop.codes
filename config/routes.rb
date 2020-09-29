@@ -61,9 +61,9 @@ Rails.application.routes.draw do
   post "analytics/post", to: "analytics#post", as: "post_analytics"
   post "analytics/user", to: "analytics#user", as: "user_analytics"
 
+  resources :profiles, param: :username, path: "u", concerns: :paginatable, only: [:show]
   patch "profile/edit", to: "profiles#update", as: "update_profile"
   get "profile/edit", to: "profiles#edit", as: "edit_profile"
-  get "u/:username", to: "profiles#show", as: "profile_show", concerns: :paginatable
   get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -105,8 +105,7 @@ Rails.application.routes.draw do
 
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
-  get "c/:nice_url", to: "collections#show", concerns: :paginatable, as: "collection_nice"
-  resources :collections, only: [:index, :edit, :update, :destroy]
+  resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :show, :edit, :update, :destroy]
 
   constraints code: /.{5,6}/ do
     resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show]
