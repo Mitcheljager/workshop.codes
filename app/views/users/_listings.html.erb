@@ -19,14 +19,14 @@
         </div>
 
         <div data-role="content-to-toggle snippet-container" style="display: none">
-          <div class="mt-1/8 mb-1/8">
-            <span class="text-dark">Results per post</span>
+          <div class="mb-1/8">
+            <small class="text-dark">Results per post</small>
             <% items.group_by { |i| i["id"] }.each do |grouped_id, posts| %>
               <% post = @posts.find(grouped_id) %>
 
               <div data-toggle-content class="profile-analytics__item-title">
-                <%= post.code %>
-                <span><%= posts.size %></span>
+                <small><%= post.code %></small>
+                <small><%= posts.size %></small>
               </div>
             <% end %>
           </div>

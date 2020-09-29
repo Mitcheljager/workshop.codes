@@ -261,9 +261,7 @@
 }
 
 .profile-analytics__item {
-  padding: .35em 0;
   border-top: 1px solid rgba($pure-white, .1);
-  cursor: pointer;
 
   &:hover,
   &:active {
@@ -275,12 +273,17 @@
   &:last-child {
     margin-bottom: .5rem;
   }
+
+  > .profile-analytics__item-title {
+    padding: .5em 0;
+    cursor: pointer;
+  }
 }
 
 .profile-analytics__item-title {
   display: flex;
   justify-content: space-between;
-  padding: .15em 0;
+  padding: .15em;
 
   a {
     display: block;
