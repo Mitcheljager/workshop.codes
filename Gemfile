@@ -34,6 +34,7 @@ gem "httparty"
 gem "breadcrumbs_on_rails"
 gem "discord-notifier"
 gem "active_model_serializers"
+gem "render_async"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

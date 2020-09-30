@@ -41,7 +41,9 @@
       </div>
     </div>
 
-    <%= render "listings" %>
+    <%= render_async listings_path, container_class: "listings listings--loading" do %>
+      <em class="spinner"></em>
+    <% end %>
   </div>
 
   <div data-user-analytics data-reveal-by-select-parent>

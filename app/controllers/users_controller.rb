@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action only: [:show, :edit, :update, :destroy, :favorites, :posts] do
+  before_action except: [:new] do
     redirect_to login_path unless current_user
   end
 
@@ -19,7 +19,13 @@ class UsersController < ApplicationController
     @copies_received = @statistics_for_user.where(content_type: :copy).order(created_at: :asc)
     @views_received = @statistics_for_user.where(content_type: :visit).order(created_at: :asc)
     @listings_received = @statistics_for_user.where(content_type: :listing).order(created_at: :asc)
+  end
+
+  def listings
+    @posts = current_user.posts
     @recent_listings = Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").pluck(:properties).select { |l| @posts.pluck(:id).include?(l["id"]) }
+
+    render partial: "listings"
   end
 
   def new

@@ -1,9 +1,9 @@
-<div class="profile-analytics__listings">
+<div class="listings">
   <span class="text-dark">Listings in the last 60 minutes</span>
 
   <h2 class="mt-1/8"><%= @recent_listings.size %></h2>
 
-  <div class="profile-analytics__item-title text-dark mb-1/8">
+  <div class="listings__item-title text-dark mb-1/8">
     Path
     <span>Unique listings</span>
   </div>
@@ -12,9 +12,9 @@
     <% @recent_listings.group_by { |l| l.except("id", "concerns") }
                        .sort_by{ |group, items| items.size }.reverse
                        .each do |group, items| %>
-      <div data-toggle-content class="profile-analytics__item">
-        <div data-action="toggle-content" class="profile-analytics__item-title">
-          <%= link_to url_for(group), group, title: url_for(group) %>
+      <div data-toggle-content class="listings__item">
+        <div data-action="toggle-content" class="listings__item-title">
+          <%= tag.span url_for(group), title: url_for(group) %>
           <span><%= items.size %></span>
         </div>
 
@@ -24,7 +24,7 @@
             <% items.group_by { |i| i["id"] }.each do |grouped_id, posts| %>
               <% post = @posts.find(grouped_id) %>
 
-              <div data-toggle-content class="profile-analytics__item-title">
+              <div data-toggle-content class="listings__item-title">
                 <small><%= post.code %></small>
                 <small><%= posts.size %></small>
               </div>

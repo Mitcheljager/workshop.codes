@@ -1,23 +1,29 @@
 document.addEventListener("turbolinks:load", function() {
-  const elements = document.querySelectorAll("[data-action~='toggle-content']")
-
-  elements.forEach((element) => element.removeEventListener("click", toggleContent))
-  elements.forEach((element) => element.addEventListener("click", toggleContent))
+  document.removeEventListener("click", toggleContent)
+  document.addEventListener("click", toggleContent)
 })
 
 function toggleContent(event) {
-  event.preventDefault()
+  let eventElement = event.target
 
-  const parent = this.closest("[data-toggle-content]")
+  if (eventElement.dataset.action == null || !eventElement.dataset.action.includes("toggle-content")) {
+    eventElement = eventElement.closest("[data-action~='toggle-content']")
+  }
 
-  const element = parent.querySelector("[data-role~='content-to-toggle']")
-  const state = window.getComputedStyle(element).display === "none"
+  if (eventElement && eventElement.dataset.action != null && eventElement.dataset.action.includes("toggle-content")) {
+    event.preventDefault()
 
-  element.style.display = state ? "initial" : "none"
+    const parent = eventElement.closest("[data-toggle-content]")
 
-  if (!state && this.dataset.hideWith) {
-    this.textContent = this.dataset.hideWith
-  } else if (state && this.dataset.showWith) {
-    this.textContent = this.dataset.showWith
+    const element = parent.querySelector("[data-role~='content-to-toggle']")
+    const state = window.getComputedStyle(element).display === "none"
+
+    element.style.display = state ? "initial" : "none"
+
+    if (!state && eventElement.dataset.hideWith) {
+      eventElement.textContent = eventElement.dataset.hideWith
+    } else if (state && eventElement.dataset.showWith) {
+      eventElement.textContent = eventElement.dataset.showWith
+    }
   }
 }
