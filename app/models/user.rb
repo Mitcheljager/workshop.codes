@@ -36,7 +36,6 @@ class User < ApplicationRecord
   has_many :wiki_edits, class_name: "Wiki::Edit", dependent: :destroy
 
   has_one_attached :profile_image, dependent: :destroy
-  has_one_attached :banner_image, dependent: :destroy
 
   serialize :featured_posts
 

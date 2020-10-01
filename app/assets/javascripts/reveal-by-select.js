@@ -11,5 +11,5 @@ function toggleRevealBySelect(event) {
   const elements = parent.querySelectorAll("[data-reveal-by-select-target]")
 
   elements.forEach(element => element.classList.add("visibility-hidden"))
-  target.classList.remove("visibility-hidden")
+  if (target) target.classList.remove("visibility-hidden")
 }

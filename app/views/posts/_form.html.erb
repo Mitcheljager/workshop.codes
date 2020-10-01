@@ -11,19 +11,38 @@
     </div>
   </div>
 
-  <div class="form-group mt-1/2">
-    <div class="checkbox">
-      <%= form.check_box :private, checked: @post.private? %>
-      <%= form.label :private, "Set to private" %>
-    </div>
+  <div class="form-group-uneven mt-1/2" data-reveal-by-select-parent>
+    <div>
+      <div class="checkbox">
+        <%= form.radio_button :status, "public", checked: !@post.unlisted && !@post.private %>
+        <%= form.label :status, "Public", value: "public" %>
+      </div>
 
-    <p class="form-hint">
-      This will prevent your code from being found. It will not appear in search results, or in direct visits. <br>
-      Only you can visit it via your account page.
-    </p>
+      <div class="form-hint mt-1/8">
+        Your code will appear anywhere as normal.
+      </div>
+
+      <div class="checkbox">
+        <%= form.radio_button :status, "unlisted", checked: @post.unlisted %>
+        <%= form.label :status, "Unlisted", value: "unlisted" %>
+      </div>
+
+      <div class="form-hint mt-1/8">
+        Your code can only be found through a direct link. Your code will not appear in any lists.
+      </div>
+
+      <div class="checkbox">
+        <%= form.radio_button :status, "private", checked: @post.private %>
+        <%= form.label :status, "Private", value: "private" %>
+      </div>
+
+      <div class="form-hint mt-1/8">
+        Your code can only be accessed by you. Setting your code to public at a later date will <strong>not</strong> "publish" the code as if it was new.
+      </div>
+    </div>
   </div>
 
-  <div class="form-group mt-1/2" data-reveal-by-checkbox>
+  <div class="form-group mt-1/1" data-reveal-by-checkbox>
     <div class="checkbox">
       <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" } %>
       <%= form.label :include_nice_url, "Include Pretty URL" %>

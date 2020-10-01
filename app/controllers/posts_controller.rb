@@ -24,12 +24,12 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user, :revisions).where(private: 0).where("hotness > 0").order("hotness DESC").limit(3) unless params[:page].present?
-    @posts = Post.includes(:user, :revisions).where(private: 0).order(created_at: :desc).page params[:page]
+    @hot_posts = Post.includes(:user, :revisions).public?.where("hotness > 0").order("hotness DESC").limit(3) unless params[:page].present?
+    @posts = Post.includes(:user, :revisions).public?.order(created_at: :desc).page params[:page]
   end
 
   def on_fire
-    @posts = Post.includes(:user, :revisions).where(private: 0).where("hotness > 1").order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user, :revisions).public?.where("hotness > 1").order("hotness DESC").page params[:page]
   end
 
   def show
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
   end
 
   def redirect_nice_url
-    @post = Post.find_by_nice_url!(params[:nice_url].downcase)
+    @post = Post.visible?.find_by_nice_url!(params[:nice_url].downcase)
 
     track_action("Redirect Post Nice URL")
 
@@ -83,7 +83,7 @@ class PostsController < ApplicationController
   end
 
   def get_snippet
-    @snippet = Post.where(private: 0).find(params[:id]).snippet
+    @snippet = Post.visible?.find(params[:id]).snippet
 
     render layout: false
   end
@@ -91,6 +91,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+
+    set_post_status
 
     if @post.save
       @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
@@ -116,6 +118,8 @@ class PostsController < ApplicationController
 
     current_version = @post.version
     current_code = @post.code
+
+    set_post_status
 
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
@@ -179,6 +183,19 @@ class PostsController < ApplicationController
     @order = params[:sort] ? "hotness DESC" : "updated_at DESC"
   end
 
+  def set_post_status
+    if post_params[:status] == "unlisted"
+      @post.unlisted = true
+      @post.private = false
+    elsif post_params[:status] == "private"
+      @post.private = true
+      @post.unlisted = false
+    else
+      @post.private = false
+      @post.unlisted = false
+    end
+  end
+
   def not_found
     raise ActionController::RoutingError.new("Not Found")
   end
@@ -195,7 +212,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :code, :title, :include_nice_url, :nice_url, :private, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
+      :code, :title, :include_nice_url, :nice_url, :status, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet,
       :collection_id, :new_collection,
       :revision, :revision_description,
       :email_notification, :email,

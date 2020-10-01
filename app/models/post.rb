@@ -62,6 +62,7 @@ class Post < ApplicationRecord
 
   has_many_attached :images, dependent: :destroy
 
+  attr_accessor :status
   attr_accessor :include_nice_url
   attr_accessor :revision
   attr_accessor :revision_description
@@ -102,5 +103,13 @@ class Post < ApplicationRecord
 
   def as_indexed_json(options={})
     self.as_json(include: { user: { only: :username } } )
+  end
+
+  def self.visible?
+    self.where(private: false)
+  end
+
+  def self.public?
+    self.where(private: false, unlisted: false)
   end
 end

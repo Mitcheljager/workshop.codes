@@ -16,8 +16,8 @@ class ProfilesController < ApplicationController
 
     not_found unless @user.present?
 
-    @posts = @user.posts.where(private: 0).order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
-    @featured_posts = @user.posts.where(id: @user.featured_posts)
+    @posts = @user.posts.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
+    @featured_posts = @posts.where(id: @user.featured_posts)
   end
 
   def edit

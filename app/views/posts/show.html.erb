@@ -42,8 +42,14 @@
 
       <% if @post.private? %>
         <div class="warning warning--mild mt-1/2">
-          <p class="mb-0 text-white">🔐 This code is set to private.</p>
-          <p class="mt-0"><small>Only you can see it.</small></p>
+          <p class="mb-0 mt-0 text-white">🔐 This code is set to private.</p>
+          <p class="mt-0 mb-0"><small>Only you can see it.</small></p>
+        </div>
+      <% end %>
+
+      <% if @post.unlisted? %>
+        <div class="warning warning--mild mt-1/2">
+          <p class="mb-0 text-white mt-0">📃 This code is unlisted.</p>
         </div>
       <% end %>
 

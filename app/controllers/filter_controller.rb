@@ -1,6 +1,6 @@
 class FilterController < ApplicationController
   def index
-    @posts = params[:search] ? Post.includes(:user, :revisions).search(params[:search]).records.where(private: 0) : Post.where(private: 0)
+    @posts = params[:search] ? Post.public?.includes(:user, :revisions).search(params[:search]).records : Post.public?
 
     @user = User.find_by_username(params[:author]) if params[:author]
     @posts = @posts.where(user_id: @user.present? ? @user.id : -1) if params[:author]

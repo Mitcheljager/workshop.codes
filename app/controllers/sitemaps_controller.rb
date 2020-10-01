@@ -1,6 +1,6 @@
 class SitemapsController < ApplicationController
   def sitemap
-    @posts = Post.where(private: false)
+    @posts = Post.visible?
     @collections = Collection.all
     @users = User.all
     @wiki_articles = Wiki::Article.approved.group(:group_id).maximum(:id).values
