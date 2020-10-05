@@ -1,6 +1,6 @@
 class FilterController < ApplicationController
   def index
-    @posts = params[:search] ? Post.public?.includes(:user, :revisions).search(params[:search]).records : Post.public?
+    @posts = params[:search] ? Post.includes(:user, :revisions).search(params[:search]).records.public? : Post.public?
 
     @user = User.find_by_username(params[:author]) if params[:author]
     @posts = @posts.where(user_id: @user.present? ? @user.id : -1) if params[:author]
@@ -19,6 +19,7 @@ class FilterController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.js
       format.json {
         set_request_headers
         render json: @posts
