@@ -14,7 +14,7 @@
                        .each do |group, items| %>
       <div data-toggle-content class="listings__item">
         <div data-action="toggle-content" class="listings__item-title">
-          <%= tag.span url_for(group), title: url_for(group) %>
+          <%= tag.span url_for(group).gsub(".js", ""), title: url_for(group) %>
           <span class="text-right"><%= items.size %></span>
         </div>
 
@@ -25,7 +25,13 @@
               <% post = @posts.find(grouped_id) %>
 
               <div data-toggle-content class="listings__item-title">
-                <small><%= post.code %></small>
+                <small class="tooltip tooltip--top-left">
+                  <%= post.code %>
+
+                  <div class="tooltip__content">
+                    <%= post.title %>
+                  </div>
+                </small>
                 <small class="text-right"><%= posts.size %></small>
               </div>
             <% end %>

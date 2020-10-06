@@ -1,0 +1,9 @@
+.infinite-scroll:not(:empty) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: $margin / 2 0;
+  padding: $margin / 2 0;
+  background: darken($body-bg, 5%);
+  border-radius: $border-radius;
+}

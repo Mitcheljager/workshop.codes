@@ -35,9 +35,7 @@ class CommentsController < ApplicationController
         end
       end
 
-      respond_to do |format|
-        format.js
-      end
+      respond_to :js
     end
   end
 
@@ -48,9 +46,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       create_activity(:update_comment, comment_activity_params)
 
-      respond_to do |format|
-        format.js
-      end
+      respond_to :js
     end
   end
 
@@ -60,9 +56,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       create_activity(:destroy_comment, comment_activity_params)
 
-      respond_to do |format|
-        format.js
-      end
+      respond_to :js
     end
   end
 
@@ -70,9 +64,7 @@ class CommentsController < ApplicationController
     @parent_id = params[:comment_id]
     @post = Comment.find(@parent_id).post
 
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def create_edit_form
@@ -80,9 +72,7 @@ class CommentsController < ApplicationController
     @comment_id = @comment.id
     @post = @comment.post
 
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   private

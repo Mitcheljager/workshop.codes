@@ -16,7 +16,7 @@
 
     <%= link_to "Admin", admin_path, class: "profile__action" if current_user.level == "admin" %>
     <%= link_to "Account", edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>
-    <%= link_to "Accessibility", account_accessibility_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_accessibility_path) }" %>
+    <%= link_to "Accessibility", accessibility_path, class: "profile__action #{ 'profile__action--active' if current_page?(accessibility_path) }" %>
     <%= link_to "Logout", logout_path, class: "profile__action" %>
   </aside>
 

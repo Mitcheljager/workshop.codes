@@ -26,10 +26,20 @@ class PostsController < ApplicationController
   def index
     @hot_posts = Post.includes(:user, :revisions).public?.where("hotness > 0").order("hotness DESC").limit(3) unless params[:page].present?
     @posts = Post.includes(:user, :revisions).public?.order(created_at: :desc).page params[:page]
+
+    respond_to do |format|
+      format.html
+      format.js { render "posts/infinite_scroll_posts" }
+    end
   end
 
   def on_fire
     @posts = Post.includes(:user, :revisions).public?.where("hotness > 1").order("hotness DESC").page params[:page]
+
+    respond_to do |format|
+      format.html
+      format.js { render "posts/infinite_scroll_posts" }
+    end
   end
 
   def show

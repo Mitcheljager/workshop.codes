@@ -18,6 +18,11 @@ class ProfilesController < ApplicationController
 
     @posts = @user.posts.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
     @featured_posts = @posts.where(id: @user.featured_posts)
+
+    respond_to do |format|
+      format.html
+      format.js { render "posts/infinite_scroll_posts" }
+    end
   end
 
   def edit

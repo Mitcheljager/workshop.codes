@@ -1,7 +1,16 @@
 <main class="items">
   <% if @posts.any? %>
     <%= render @posts %>
-    <hr class="mt-0 mb-0">
+
+    <% if @posts.count == 20 %>
+      <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
+        <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>"></div>
+      <% end %>
+
+      <% unless current_user && current_user.pagination_type != "load_more" %>
+        <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-url="<%= request.original_url %>">Load more</div>
+      <% end %>
+    <% end %>
   <% else %>
     <p>There doesn't seem to be anything here</p>
 
@@ -12,3 +21,5 @@
     </blockquote>
   <% end %>
 </main>
+
+<%= paginate @posts unless current_user && current_user.pagination_type != "pagination" %>

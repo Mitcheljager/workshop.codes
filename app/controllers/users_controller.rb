@@ -93,7 +93,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :email, :high_contrast, :large_fonts, :simple_view)
+    params.require(:user).permit(:username, :password, :password_confirmation, :email)
   end
 
   def generate_remember_token

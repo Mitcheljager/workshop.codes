@@ -54,15 +54,17 @@ Rails.application.routes.draw do
   get "account(/page/:page)", to: "users#show", as: "account"
   get "account/edit", to: "users#edit", as: "edit_user"
   get "account/posts", to: "users#posts", as: "account_posts"
-  get "account/accessibility", to: "users#accessibility", as: "account_accessibility"
   get "favorites", to: "users#favorites", as: "account_favorites"
   patch "user", to: "users#update", as: "update_user"
   delete "user", to: "users#destroy", as: "destroy_user"
 
+  get "account/accessibility", to: "accessibility#edit", as: "accessibility"
+  patch "account/accessibility", to: "accessibility#update", as: "update_accessibility"
+
   post "analytics/post", to: "analytics#post", as: "post_analytics"
   post "analytics/user", to: "analytics#user", as: "user_analytics"
 
-  resources :profiles, param: :username, path: "u", concerns: :paginatable, only: [:show]
+  get "u/:username(/page/:page)", to: "profiles#show", as: "profile"
   patch "profile/edit", to: "profiles#update", as: "update_profile"
   get "profile/edit", to: "profiles#edit", as: "edit_profile"
   get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }

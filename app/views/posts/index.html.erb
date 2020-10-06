@@ -12,9 +12,7 @@
 
     <%= render @hot_posts %>
 
-    <hr class="mt-0 mb-1/2">
-
-    <%= link_to "View all On Fire Items", on_fire_path, class: "button button--secondary" %>
+    <%= link_to "View all On Fire Items", on_fire_path, class: "button button--secondary mt-1/2" %>
 
     <%= render "application/banners/ko_fi" %>
 
@@ -42,6 +40,4 @@
   <% end %>
 
   <%= render "posts" %>
-
-  <%= paginate @posts %>
 </main>

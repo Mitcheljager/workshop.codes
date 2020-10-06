@@ -4,6 +4,10 @@
       display: none;
     }
   }
+
+  .item:last-of-type {
+    border-bottom: 1px solid $border-color;
+  }
 }
 
 .items-heading {

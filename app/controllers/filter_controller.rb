@@ -19,7 +19,7 @@ class FilterController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js
+      format.js { render "posts/infinite_scroll_posts" }
       format.json {
         set_request_headers
         render json: @posts
