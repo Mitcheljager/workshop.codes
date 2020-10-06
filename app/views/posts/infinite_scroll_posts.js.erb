@@ -1,7 +1,7 @@
 (() => {
   <% if @posts.any? %>
 
-    <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
+    <% if current_user && current_user.pagination_type == "infinite_scroll" %>
       const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
 
       elements[elements.length - 1].insertAdjacentHTML("afterEnd", `
@@ -14,7 +14,7 @@
       `)
     <% end %>
 
-    <% unless current_user && current_user.pagination_type != "load_more" %>
+    <% if current_user && current_user.pagination_type == "load_more" %>
       const button = document.querySelector("[data-role='load-more-posts']")
 
       button.insertAdjacentHTML("beforeBegin", `
