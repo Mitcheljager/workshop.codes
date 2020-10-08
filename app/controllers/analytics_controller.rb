@@ -74,7 +74,7 @@ class AnalyticsController < ApplicationController
   def create_daily_counts(type)
     counts = create_date_count
     daily = Statistic.where(model_id: @post.id).where(content_type: type).order(created_at: :asc)
-    daily.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |date, values|
+    daily.group_by { |x| (x.on_date).to_date.strftime("%Y-%m-%d %H:00") }.each do |date, values|
       this = counts.detect { |d| d[:date] == date }
       this[:value] = values.map { |h| h[:value] }.sum if this.present?
     end
