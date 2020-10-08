@@ -4,6 +4,7 @@
   "dependencies": {
     "@agilie/canvas-image-cover-position": "^1.1.1",
     "inscrybmde": "^1.11.6",
+    "metrics-graphics": "^2.15.6",
     "microlight": "^0.0.7",
     "siema": "^1.5.1",
     "sortablejs": "^1.10.2",

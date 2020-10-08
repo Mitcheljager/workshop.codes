@@ -1,68 +1,32 @@
-//= require Chart.min
+//= require d3/build/d3.min.js
+//= require metrics-graphics/dist/metricsgraphics.min.js
 
-(() => {
-  const charts = document.querySelectorAll("[data-role='chart']")
-
-  charts.forEach(element => {
-    createChart(element)
-  })
-})()
-
-function createChart(element) {
-  const ctx = element.getContext("2d")
-
-  const chart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: JSON.parse(element.dataset.labels),
-      datasets: [{
-        label: "",
-        data: JSON.parse(element.dataset.values),
-        backgroundColor: "rgba(63, 191, 116, 1)",
-        borderColor: "rgba(63, 191, 116, 1)",
-        borderWidth: 1,
-        pointBackgroundColor: "rgba(63, 191, 116, 1)",
-        pointRadius: JSON.parse(element.dataset.values).map(p => p == 0 ? 0 : 3)
-      }]
-    },
-    options: {
-      height: 250,
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255, 255, 255, .075)"
-          },
-          ticks: {
-            maxTicksLimit: 4,
-            userCallback: (label, index, labels) => { if (Math.floor(label) === label) return label },
-            userCallback: (label, index, labels) => { return label.toLocaleString() },
-            fontColor: "#8f94a5",
-            fontSize: 12
-          }
-        }],
-        xAxes: [{
-          barThickness: "flex",
-          barMaxThickness: 2,
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255, 255, 255, 0)"
-          },
-          ticks: {
-            userCallback: (label, index, labels) => { return label.split(/-(.+)/)[1] },
-            maxRotation: 0,
-            drawBorder: false,
-            maxTicksLimit: 4,
-            fontColor: "#8f94a5",
-            fontSize: 12
-          }
-        }]
+function createChart(element, data, dateformat = "%Y-%m-%d") {
+  let processedMarkers = []
+  if (element.dataset.markers != null) {
+    const markers = JSON.parse(element.dataset.markers)
+    processedMarkers = markers.map(marker => {
+      return {
+        "date": new Date(marker[2]),
+        "label": marker[1]
       }
-    }
+    })
+  }
+
+  MG.data_graphic({
+    data: MG.convert.date(data, "date", dateformat),
+    markers: processedMarkers,
+    full_width: true,
+    height: 300,
+    target: element,
+    area: true,
+    x_accessor: "date",
+    y_accessor: "value",
+    brush: "x",
+    top: 15,
+    right: 0,
+    bottom: 40,
+    left: 40,
+    interpolate: d3.curveStep
   })
 }

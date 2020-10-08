@@ -24,32 +24,28 @@ class AnalyticsController < ApplicationController
   end
 
   def user
-    date_counts = {}
+    date_counts = []
     if current_user.posts.any?
       latest_date = [current_user.posts.first.created_at.strftime("%Y-%m-%d"), Statistic.first.created_at.strftime("%Y-%m-%d")].max
 
       (Date.parse(latest_date)...DateTime.now).each do |date|
-        date_counts[date.strftime("%Y-%m-%d")] = 0
+        date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 }
       end
     else
-      date_counts[DateTime.now.strftime("%Y-%m-%d")] = 0
+      date_counts << { date: DateTime.now.strftime("%Y-%m-%d"), value: 0 }
     end
 
     if params[:type] == "copies"
-      @copies_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :copy).order(created_at: :asc)
-      @copies_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
-        date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
-      end
+      @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :copy).order(created_at: :asc)
     elsif params[:type] == "views"
-      @views_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
-      @views_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
-        date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
-      end
+      @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
     elsif params[:type] == "listings"
-      @listings_received = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
-      @listings_received.group_by { |x| (x.on_date - 1.day).strftime("%Y-%m-%d") }.each do |group|
-        date_counts[group[0]] = group[1].map { |h| h[:value] }.sum
-      end
+      @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
+    end
+
+    @items.group_by { |x| (x.on_date).strftime("%Y-%m-%d") }.each do |date, values|
+      this = date_counts.detect { |d| d[:date] == date }
+      this[:value] = values.map { |h| h[:value] }.sum if this.present?
     end
 
     render json: date_counts, layout: false
@@ -58,18 +54,18 @@ class AnalyticsController < ApplicationController
   private
 
   def create_date_count
-    date_counts = {}
-    (Date.parse(@post.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date|
-      date_counts[date.strftime("%Y-%m-%d")] = 0
+    date_counts = []
+    (Date.parse(@post.created_at.strftime("%Y-%m-%d %H:00"))...DateTime.now).each do |date|
+      date_counts << { date: date.strftime("%Y-%m-%d %H:00"), value: 0 }
     end
 
     return date_counts
   end
 
   def create_hour_count
-    hour_counts = {}
+    hour_counts = []
     (1.week.ago.to_i .. DateTime.now.to_i).step(1.hour) do |date|
-      hour_counts[Time.at(date).strftime("%Y-%m-%d %H:00")] = 0
+      hour_counts << { date: Time.at(date).strftime("%Y-%m-%d %H:00"), value: 0 }
     end
 
     return hour_counts
@@ -78,8 +74,9 @@ class AnalyticsController < ApplicationController
   def create_daily_counts(type)
     counts = create_date_count
     daily = Statistic.where(model_id: @post.id).where(content_type: type).order(created_at: :asc)
-    daily.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group|
-      counts[group[0]] = group[1].map { |h| h[:value] }.sum
+    daily.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |date, values|
+      this = counts.detect { |d| d[:date] == date }
+      this[:value] = values.map { |h| h[:value] }.sum if this.present?
     end
 
     return counts
@@ -88,8 +85,9 @@ class AnalyticsController < ApplicationController
   def create_hourly_counts(type)
     counts = create_hour_count
     hourly = Rails.env.development? ? Ahoy::Event.where(name: type).distinct.last(10) : Ahoy::Event.where_event(type, id: @post.id).distinct
-    hourly.group_by { |x| x["time"].strftime("%Y-%m-%d %H:00") }.each do |group|
-      counts[group[0]] = group[1].map(&:visit_id).uniq.count
+    hourly.group_by { |x| x["time"].strftime("%Y-%m-%d %H:00") }.each do |date, values|
+      this = counts.detect { |d| d[:date] == date }
+      this[:value] = values.map(&:visit_id).uniq.count if this.present?
     end
 
     return counts

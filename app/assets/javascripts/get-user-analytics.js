@@ -16,6 +16,9 @@ function getUserAnalytics(element) {
   progressBar.setValue(0)
   progressBar.show()
 
+  const target = document.querySelector("[data-role~='chart']")
+  target.insertAdjacentHTML("afterBegin", `<div class="chart__placeholder"><div class="spinner"></div></div>`)
+
   fetch("/analytics/user", {
     method: "post",
     body: JSON.stringify({ type: element.value }),
@@ -28,17 +31,9 @@ function getUserAnalytics(element) {
   .then(response => response.text())
   .then(data => {
     const parsedData = JSON.parse(data)
+    target.querySelector(".chart__placeholder").remove()
 
-    const target = document.querySelector("[data-role~='chart']")
-
-    target.dataset.labels = JSON.stringify(Object.keys(parsedData))
-    target.dataset.values = JSON.stringify(Object.values(parsedData))
-
-    Chart.helpers.each(Chart.instances, chart => {
-      chart.destroy()
-    })
-
-    createChart(target)
+    createChart(target, parsedData)
   }).finally(() => {
     progressBar.setValue(1)
     progressBar.hide()

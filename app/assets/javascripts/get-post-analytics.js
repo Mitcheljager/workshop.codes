@@ -15,6 +15,10 @@ function getPostAnalytics(element) {
   progressBar.setValue(0)
   progressBar.show()
 
+  const parent = element.closest("[data-post-analytics]")
+  const target = parent.querySelector("[data-role~='chart']")
+  target.insertAdjacentHTML("afterBegin", `<div class="chart__placeholder"><div class="spinner"></div></div>`)
+
   fetch("/analytics/post", {
     method: "post",
     body: JSON.stringify({ type: element.value, id: element.dataset.postId }),
@@ -27,18 +31,9 @@ function getPostAnalytics(element) {
   .then(response => response.text())
   .then(data => {
     const parsedData = JSON.parse(data)
+    target.querySelector(".chart__placeholder").remove()
 
-    const parent = element.closest("[data-post-analytics]")
-    const target = parent.querySelector("[data-role~='chart']")
-
-    target.dataset.labels = JSON.stringify(Object.keys(parsedData))
-    target.dataset.values = JSON.stringify(Object.values(parsedData))
-
-    Chart.helpers.each(Chart.instances, chart => {
-      if (chart.canvas == target) chart.destroy()
-    })
-
-    createChart(target)
+    createChart(target, parsedData, "%Y-%m-%d %H:00", [], "bar")
   }).finally(() => {
     progressBar.setValue(1)
     progressBar.hide()
