@@ -1,6 +1,14 @@
 //= require d3/build/d3.min.js
 //= require metrics-graphics/dist/metricsgraphics.min.js
 
+document.addEventListener("turbolinks:load", function() {
+  const charts = document.querySelectorAll("[data-role='chart']")
+
+  charts.forEach(element => {
+    if (element.dataset.data != null) createChart(element, JSON.parse(element.dataset.data))
+  })
+})
+
 function createChart(element, data, dateformat = "%Y-%m-%d") {
   let processedMarkers = []
   if (element.dataset.markers != null) {
@@ -17,7 +25,7 @@ function createChart(element, data, dateformat = "%Y-%m-%d") {
     data: MG.convert.date(data, "date", dateformat),
     markers: processedMarkers,
     full_width: true,
-    height: 300,
+    height: element.dataset.height == null ? 300 : parseInt(element.dataset.height),
     target: element,
     area: true,
     x_accessor: "date",

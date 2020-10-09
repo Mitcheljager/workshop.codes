@@ -32,50 +32,54 @@
   </div>
 </div>
 
-<% date_counts = {} %>
+<% clean_date_counts = [] %>
 <% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
-  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
+  <% clean_date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 } %>
 <% end %>
 
-<% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].length %>
+<% date_counts = clean_date_counts %>
+<% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+  <% this = date_counts.detect { |d| d[:date] == date } %>
+  <% this[:value] = values.count if this.present? %>
 <% end %>
 
-<h3 class="mt-1/1">Posts created per day</h3>
-<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div class="well well--dark block mt-1/1 p-0 pr-1/4">
+  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Posts created per day</h3>
+  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+  </div>
+</div>
 
-<% date_counts = {} %>
-<% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
-  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
+<% date_counts = clean_date_counts %>
+<% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+  <% this = date_counts.detect { |d| d[:date] == date } %>
+  <% this[:value] = values.count if this.present? %>
 <% end %>
 
-<% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].length %>
+<div class="well well--dark block mt-1/4 p-0 pr-1/4">
+  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Users created per day</h3>
+  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+  </div>
+</div>
+
+<% date_counts = clean_date_counts %>
+<% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+  <% this = date_counts.detect { |d| d[:date] == date } %>
+  <% this[:value] = values.count if this.present? %>
 <% end %>
 
-<h3 class="mt-1/1">Users created per day</h3>
-<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div class="well well--dark block mt-1/4 p-0 pr-1/4">
+  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Favorites created per day</h3>
+  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+  </div>
+</div>
 
-<% date_counts = {} %>
-<% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
-  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
+<% date_counts = clean_date_counts %>
+<% @comments.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+  <% this = date_counts.detect { |d| d[:date] == date } %>
+  <% this[:value] = values.count if this.present? %>
 <% end %>
 
-<% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].length %>
-<% end %>
-
-<h3 class="mt-1/1">Favorites created per day</h3>
-<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
-
-<% date_counts = {} %>
-<% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
-  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
-<% end %>
-
-<% @comments.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].length %>
-<% end %>
-
-<h3 class="mt-1/1">Comments created per day</h3>
-<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div class="well well--dark block mt-1/4 p-0 pr-1/4">
+  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Comments created per day</h3>
+  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0"></div>
+</div>
