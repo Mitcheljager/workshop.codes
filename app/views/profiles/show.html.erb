@@ -21,7 +21,7 @@
           <%= post.title %>
         <% end %>
 
-        <div>
+        <div class="card__code mt-1/4" data-action="copy-to-clipboard" data-target="<%= post.code %>">
           <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
 
           <span class="copy">

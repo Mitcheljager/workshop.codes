@@ -48,6 +48,13 @@
     background: $body-bg;
     border-radius: $border-radius;
   }
+
+  a[href]:hover,
+  a[href]:active {
+    img {
+      filter: brightness(1.15);
+    }
+  }
 }
 
 .card__title {
@@ -65,4 +72,25 @@
   font-size: 14px;
   font-style: italic;
   color: $text-color;
+}
+
+.card__code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $margin / 8 0;
+  background: $bg-dark;
+  border-radius: $border-radius;
+  font-family: "Barlow Condensed", "Impact";
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 1.25em;
+  font-size-adjust: 0.51;
+  color: $white;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    filter: brightness(1.15);
+  }
 }

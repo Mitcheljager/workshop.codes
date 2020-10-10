@@ -93,7 +93,7 @@ Rails.application.routes.draw do
   resources :reports, only: [:create, :new, :destroy, :update]
 
   get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
-  get "while-you-wait", to: "while_you_waits#index", as: "while_you_wait"
+  get "while-you-wait(/:filter)", to: "while_you_waits#index", as: "while_you_wait"
 
   post "copy-code", to: "posts#copy_code", as: "copy_code"
   resources :revisions, only: [:edit, :update]
