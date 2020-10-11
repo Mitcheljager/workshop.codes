@@ -13,7 +13,7 @@ task :set_hotness_for_posts => :environment do
     end
     days_old = [[days_old, 1].max, 10].min
 
-    post.hotness = (([impressions_count + copy_count + statistics_count, 1].max) / ([days_old / 2, 1].max)) + (favorites_count * 20 / [days_old / 4, 1].max)
+    post.hotness = [(([impressions_count + copy_count + statistics_count, 1].max) / ([days_old / 2, 1].max)) + (favorites_count * 20 / [days_old / 4, 1].max), 1].max
 
     post.save(touch: false)
   end

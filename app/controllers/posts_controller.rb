@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user, :revisions).public?.where("hotness > 0").order("hotness DESC").limit(3) unless params[:page].present?
+    @hot_posts = Post.includes(:user, :revisions).public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
     @posts = Post.includes(:user, :revisions).public?.order(created_at: :desc).page params[:page]
 
     respond_to do |format|

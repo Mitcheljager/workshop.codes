@@ -51,6 +51,9 @@ class Post < ApplicationRecord
     }
   end
 
+  Post.__elasticsearch__.create_index! force: true
+  Post.import(force: true)
+
   belongs_to :user
   belongs_to :collection, optional: true
 
@@ -92,10 +95,21 @@ class Post < ApplicationRecord
       from: 0,
       size: 100,
       query: {
-        multi_match: {
-          query: query,
-          fields: ["code^10", "title^5", "tags^3", "categories", "maps", "heroes", "user.username^2"],
-          fuzziness: "AUTO"
+        function_score: {
+          query: {
+            multi_match: {
+              query: query,
+              fields: ["code^2.5", "title^2", "tags^1.5", "categories", "maps", "heroes", "user.username^1.5"],
+              fuzziness: "AUTO"
+            }
+          },
+          field_value_factor: {
+            field: "hotness",
+            modifier: "log1p",
+            factor: 0.1
+          },
+          boost_mode: "sum",
+          max_boost: 2
         }
       }
     })

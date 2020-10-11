@@ -13,6 +13,9 @@ document.addEventListener("turbolinks:load", function() {
 function isInfiniteScrollInView() {
   const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
   const element = elements[elements.length - 1]
+
+  if (!element) return
+
   const position = element.getBoundingClientRect()
 
   if (element.dataset.reached == "true") return
