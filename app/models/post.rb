@@ -51,9 +51,6 @@ class Post < ApplicationRecord
     }
   end
 
-  Post.__elasticsearch__.create_index! force: true
-  Post.import(force: true)
-
   belongs_to :user
   belongs_to :collection, optional: true
 
