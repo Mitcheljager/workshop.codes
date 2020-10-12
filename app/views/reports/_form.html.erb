@@ -6,13 +6,33 @@
   <%= form.hidden_field :concerns_id, value: @post.id %>
   <%= form.hidden_field :concerns_model, value: "post" %>
 
-  <div class="form-group">
+  <div class="form-group" data-reveal-by-select-parent>
     <%= form.label :category, class: "form-label" %>
-    <%= form.select :category, options_for_select(report_options), { include_blank: "Select..." }, class: "form-select", required: true %>
+    <%= form.select :category, options_for_select(report_options), { include_blank: "Select one..." }, class: "form-select", data: { action: "reveal-by-select" }, required: true %>
+
+    <div data-reveal-by-select-target="This code does not work" class="visibility-hidden">
+      <div class="block mt-1/4 text-small text-dark">
+        Do not report if:
+
+        <ul class="mt-1/8 pl-1/2">
+          <li>This code has expired.</li>
+          <li>This code has a snippet.</li>
+          <li>This code is for PTR.</li>
+          <li>This code is for a different region.</li>
+          <li>The code can be imported, but the game does not function.</li>
+        <ul>
+      </div>
+    </div>
+
+    <div data-reveal-by-select-target="This code is inappropriate/offensive" class="visibility-hidden">
+      <small class="block mt-1/4 text-dark">
+        Please note why you feel this code is offensive or inappropriate and should be removed. Gamemodes need to adhere to the Blizzard code of conduct. If you feel a gamemode breaks this use their report channels instead.
+      </small>
+    </div>
   </div>
 
   <div class="form-group mt-1/4">
-    <%= form.label :content, "Description", class: "form-label" %>
+    <%= form.label :content, class: "form-label", required: true do %>Description <small class="text-dark">(Required)</small><% end %>
     <%= form.text_area :content, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Write a short description to explain your report" %>
 
     <div class="form-hint mt-1/8 mb-0">Max 1000 characters.</div>
