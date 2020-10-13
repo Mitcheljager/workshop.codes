@@ -21,36 +21,35 @@
 
   <aside class="article__aside">
     <div class="article__aside-content">
-      <h3 class="mt-0">Article details</h3>
-      Created at: <%= @initial_article.created_at.strftime("%d %b %Y %R") %> <br>
-      Last updated at: <%= @article.created_at.strftime("%d %b %Y %R") %> <br>
+      <h3 class="mt-0 mb-1/4">Article details</h3>
+      <span class="text-dark">Created at:</span> <%= @initial_article.created_at.strftime("%d %b %Y %R") %> <br>
+      <span class="text-dark">Updated at:</span> <%= @article.created_at.strftime("%d %b %Y %R") %> <br>
       <%= link_to wiki_article_edits_path(@article.group_id) do %>
         <%= @edit_count %> Edit<%= "s" if @edit_count > 1 %>
       <% end %>
-
-      <hr>
 
       <% if @article.category.is_documentation? %>
         <div><em>Workshop documentation</em></div>
       <% end %>
 
-      Category: <%= link_to @article.category.title, wiki_category_path(@article.category.slug) %> <br>
+      <div class="mt-1/4">
+        <span class="text-dark">Category:</span> <%= link_to @article.category.title, wiki_category_path(@article.category.slug) %> <br>
+      </div>
 
       <% if @article.tags.present? %>
-        Tags:
+        <div class="mb-1/2">
+          <span class="text-dark">Tags:</span>
 
-        <small>
-          <% @article.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-            <%= link_to tag + ", ", wiki_search_results_path(query: tag) %>
-          <% end %>
-        </small>
+          <small>
+            <% @article.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
+              <%= link_to tag + ", ", wiki_search_results_path(query: tag) %>
+            <% end %>
+          </small>
+        </div>
       <% end %>
 
-
-      <hr>
-
       <%= link_to "Edit article", edit_wiki_article_path(@article.slug), class: "button button--secondary button--small" %>
-      
+
       <% if is_arbiter?(current_user) %>
         <%= link_to "Destroy", wiki_article_path(@article.id), class: "button button--danger button--small", method: :delete, data: { confirm: "Are you sure you want to destroy this article? This cannot be undone." } %>
       <% end %>

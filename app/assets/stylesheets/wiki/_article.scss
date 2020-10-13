@@ -53,14 +53,15 @@
 }
 
 .article__aside-content {
-  margin-top: $margin * 2;
+  margin-top: $margin;
+  background: darken($body-bg, 5%);
+  padding: $margin / 4;
+  border-radius: $border-radius;
   font-size: $font-size-small;
   line-height: 1.75em;
 
   @include media-min(lg) {
     margin-top: 0;
-    border-left: 1px solid $border-color;
-    padding-left: $margin / 4;
   }
 
   a {
