@@ -20,7 +20,16 @@ class Wiki::SearchController < Wiki::BaseController
 
     respond_to do |format|
       format.html
-      format.json { render json: @articles.to_json(include: :category) }
+      format.json {
+        set_request_headers
+        render json: @articles.to_json(include: :category)
+      }
     end
+  end
+
+  private
+
+  def set_request_headers
+    headers["Access-Control-Allow-Origin"] = "*"
   end
 end
