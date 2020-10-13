@@ -21,6 +21,10 @@ class Wiki::SearchController < Wiki::BaseController
     respond_to do |format|
       format.html
       format.json {
+        @articles.each do |article|
+          article.content = ReverseMarkdown.convert(ActionController::Base.helpers.sanitize(markdown(article.content), tags: %w(style p br strong em b blockquote h1 h2 h3 h4 h5 h6 code pre)).gsub(/h\d/, "strong"))
+        end
+
         set_request_headers
         render json: @articles.to_json(include: :category)
       }

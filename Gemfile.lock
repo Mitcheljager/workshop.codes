@@ -280,6 +280,8 @@ GEM
       ffi (~> 1.0)
     redcarpet (3.5.0)
     render_async (2.1.7)
+    reverse_markdown (2.0.0)
+      nokogiri
     ruby-vips (2.0.17)
       ffi (~> 1.9)
     ruby_http_client (3.5.1)
@@ -384,6 +386,7 @@ DEPENDENCIES
   rails_same_site_cookie
   redcarpet
   render_async
+  reverse_markdown
   sass-rails (~> 5.0)
   scout_apm
   selenium-webdriver
