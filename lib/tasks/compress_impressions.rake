@@ -6,11 +6,11 @@ task :compress_impressions => :environment do
   compress_search_terms
   compress_visits
 
-  visits = Ahoy::Visit.where("started_at < ?", 1.week.ago)
-  events = Ahoy::Event.where("time < ?", 1.week.ago)
-
-  events.destroy_all
-  visits.destroy_all
+  Ahoy::Visit.where("started_at < ?", 2.weeks.ago).find_in_batches do |visits|
+    visit_ids = visits.map(&:id)
+    Ahoy::Event.where(visit_id: visit_ids).delete_all
+    Ahoy::Visit.where(id: visit_ids).delete_all
+  end
 end
 
 def compress_events(event_name, content_type)

@@ -14,7 +14,7 @@
                        .each do |group, items| %>
       <div data-toggle-content class="listings__item">
         <div data-action="toggle-content" class="listings__item-title">
-          <%= tag.span url_for(group).gsub(".js", ""), title: url_for(group) %>
+          <%= tag.span url_for(group).gsub(".js", "").gsub("%20", " "), title: url_for(group) %>
           <span class="text-right"><%= items.size %></span>
         </div>
 
