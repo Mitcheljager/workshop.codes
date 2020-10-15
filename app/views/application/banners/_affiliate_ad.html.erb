@@ -2,8 +2,7 @@
   <small class="block mb-1/8">Purchases made through this link support Workshop.codes</small>
 
   <% ads = YAML.load(File.read(Rails.root.join("config/arrays", "affiliate_ads.yml"))) %>
-  <% ad = $ad_id >= 0 ? ads.without(ads[$ad_id]).sample : ads.sample %>
-  <% $ad_id = ads.index(ad) %>
+  <% ad = ads.sample %>
 
   <div class="hidden visible-xl">
     <%= link_to ad["lg"]["url"], id: ad["lg"]["id"], target: "_blank" do %>
