@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   around_action :set_current_user
-  before_action :set_affiliate_ad
   after_action :track_listing
 
   def login_from_cookie
@@ -32,10 +31,6 @@ class ApplicationController < ActionController::Base
 
   def reject_if_banned
     reset_session if current_user.present? && current_user.level == "banned"
-  end
-
-  def set_affiliate_ad
-    $ad_id = -1
   end
 
   helper_method :current_user

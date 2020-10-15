@@ -9,27 +9,23 @@
     <%= link_to ad["lg"]["url"], id: ad["lg"]["id"], target: "_blank" do %>
       <%= image_tag ad["lg"]["img"], alt: ad["alt"], border: 0, width: 728, height: 90, loading: "lazy" %>
     <% end %>
-    <%= image_tag ad["lg"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" if ad["lg"]["px"].present? %>
   </div>
 
   <div class="hidden visible-sm hidden-xl">
     <%= link_to ad["md"]["url"], id: ad["md"]["id"], target: "_blank" do %>
       <%= image_tag ad["md"]["img"], alt: ad["alt"], border: 0, width: 468, height: 60, loading: "lazy" %>
     <% end %>
-    <%= image_tag ad["md"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" if ad["md"]["px"].present? %>
   </div>
 
   <div class="hidden visible-xs hidden-sm">
     <%= link_to ad["sm"]["url"], id: ad["sm"]["id"], target: "_blank" do %>
       <%= image_tag ad["sm"]["img"], alt: ad["alt"], border: 0, width: 320, height: 100, loading: "lazy" %>
     <% end %>
-    <%= image_tag ad["sm"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" if ad["sm"]["px"].present? %>
   </div>
 
   <div class="hidden-xs">
     <%= link_to ad["xs"]["url"], id: ad["xs"]["id"], target: "_blank" do %>
       <%= image_tag ad["xs"]["img"], alt: ad["alt"], border: 0, width: 250, height: 250, loading: "lazy" %>
     <% end %>
-    <%= image_tag ad["xs"]["px"], border: 0, width: 0, height: 0, loading: "lazy", style: "position:absolute;visibility:hidden;" if ad["xs"]["px"].present? %>
   </div>
 </div>
