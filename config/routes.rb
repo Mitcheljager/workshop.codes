@@ -101,6 +101,7 @@ Rails.application.routes.draw do
   get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
   get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
+  get "/(page/:page)", to: "posts#index"
   get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
   post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
   get "/search", to: "search#show"
