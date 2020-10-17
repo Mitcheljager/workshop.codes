@@ -25,9 +25,9 @@ function loadSnippet(event) {
   })
   .then(response => response.text())
   .then(data => {
-    const element = document.querySelector("[data-role~='snippet-container']")
+    const element = document.querySelector("[data-role~='ide-content']")
     element.innerHTML = data
 
-    initiateIde(element.querySelector("[data-role~='ide-content']"))
+    initiateIde(element)
   })
 }

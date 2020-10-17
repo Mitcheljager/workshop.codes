@@ -69,8 +69,8 @@ code {
 
 pre {
   background: $bg-dark;
-  border: 1px solid $border-color;
   padding: .5rem;
+  border-radius: $border-radius;
   line-height: 2rem;
 
   code {
@@ -78,6 +78,8 @@ pre {
     white-space: pre-wrap;
     background-color: transparent;
     border-radius: 0;
+    font-size: $font-size-small;
+    line-height: 1.5em;
   }
 }
 

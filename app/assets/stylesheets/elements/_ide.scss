@@ -1,8 +1,6 @@
 .ide {
   position: relative;
-  min-height: 300px;
   margin-top: $margin / 2;
-  box-shadow: 0 5px 15px rgba($black, .5);
 
   &--fullscreen {
     position: fixed;
@@ -13,6 +11,26 @@
     margin-top: 0;
     z-index: 10;
   }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 4rem;
+    bottom: 0;
+    height: 50%;
+    width: calc(100% - 8rem);
+    border-radius: $border-radius * 2;
+    z-index: -1;
+    opacity: .45;
+    background: $black;
+    box-shadow: 0 0 2rem 2rem $black;
+
+    @include media-min(sm) {
+      left: 6rem;
+      width: calc(100% - 12rem);
+    }
+  }
 }
 
 .ide__content {
@@ -21,10 +39,10 @@
   width: 100%;
   max-height: 75vh;
   margin: 0;
-  font-size: 12px;
   line-height: 2em;
   overflow: auto;
   tab-size: 2;
+  -moz-tab-size: 2;
 
   @include media-min("lg") {
     font-size: $font-size-small;
@@ -72,21 +90,23 @@
   border-right: 1px solid lighten($border-color, 5%);
   color: lighten($border-color, 10%);
   z-index: 1;
+  font-size: $font-size-small;
+  line-height: 1.5em;
 }
 
 .ide__tray {
   display: flex;
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background: $body-bg;
-  border-top: 1px solid lighten($border-color, 5%);
+  bottom: 1.5rem;
+  right: 1.5rem;
 }
 
 .ide__tray-item {
   position: relative;
   padding: .5em;
-  border-left: 1px solid lighten($border-color, 5%);
+  margin-left: .5rem;
+  border-radius: $border-radius;
+  background: $body-bg;
   font-size: 10px;
   line-height: 1em;
   cursor: pointer;

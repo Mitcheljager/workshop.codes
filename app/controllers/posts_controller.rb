@@ -95,7 +95,7 @@ class PostsController < ApplicationController
   def get_snippet
     @snippet = Post.visible?.find(params[:id]).snippet
 
-    render layout: false
+    render plain: @snippet
   end
 
   def create
