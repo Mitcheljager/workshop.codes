@@ -12,7 +12,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: darken($body-bg, 5%);
+  background: var(--bg-darker);
   border-radius: $border-radius;
   overflow: hidden;
   cursor: pointer;

@@ -17,7 +17,7 @@
   }
 
   &--dark {
-    background: darken($body-bg, 5%);
+    background: var(--bg-darker);
   }
 
   a {

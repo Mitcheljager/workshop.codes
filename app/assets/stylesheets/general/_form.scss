@@ -47,7 +47,7 @@
     }
 
     .high-contrast.simple-view & {
-      box-shadow: 0 0 0 5px darken($body-bg, 5%);
+      box-shadow: 0 0 0 5px var(--bg-darker);
     }
   }
 }

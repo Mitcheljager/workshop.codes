@@ -54,7 +54,7 @@
 
 .article__aside-content {
   margin-top: $margin;
-  background: darken($body-bg, 5%);
+  background: var(--bg-darker);
   padding: $margin / 4;
   border-radius: $border-radius;
   font-size: $font-size-small;

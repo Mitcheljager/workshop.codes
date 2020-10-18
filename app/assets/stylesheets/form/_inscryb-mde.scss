@@ -43,7 +43,7 @@
   &.fullscreen {
     padding-left: 10px;
     padding-right: 10px;
-    background: darken($body-bg, 5%);
+    background: var(--bg-darker);
 
     &::before,
     &::after {

@@ -4,6 +4,6 @@
   justify-content: center;
   margin: $margin / 2 0;
   padding: $margin / 2 0;
-  background: darken($body-bg, 5%);
+  background: var(--bg-darker);
   border-radius: $border-radius;
 }
