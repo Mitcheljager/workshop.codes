@@ -1,17 +1,33 @@
 <div class="post-comment" data-comment="<%= comment.id %>" id="<%= comment.id %>">
   <div class="post-comment__information">
-    <%= link_to user_path(comment.user.username), class: "post-comment__author" do %>
-      <%= comment.user.username %>
-      <%= tag.small "creator" if comment.user == @post.user %>
+    <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
+      <div class="profile-image <%= "profile-image--empty" unless comment.user.profile_image.attached? || comment.user.provider_profile_image.present? %>">
+        <% if comment.user.profile_image.attached? %>
+          <% begin %>
+            <%= image_tag comment.user.profile_image.variant(quality: 95, resize_to_fill: [40, 40]).processed %>
+          <% rescue %>
+          <% end %>
+        <% elsif comment.user.provider_profile_image.present? %>
+          <%= image_tag comment.user.provider_profile_image %>
+        <% end %>
+      </div>
+
+      <span>
+        <%= comment.user.username %>
+        <%= tag.small "creator" if comment.user == @post.user %>
+      </span>
     <% end %>
 
-    <span class="post-comment__date" title="Created at: <%= comment.created_at %>">
-      <span data-role="timeago" datetime="<%= comment.created_at %>"></span>
+    <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
+      <span class="post-comment__date" title="Created at: <%= comment.created_at %>">
+        <span data-role="timeago" datetime="<%= comment.created_at %>"></span>
 
-      <% if comment.created_at != comment.updated_at %>
-        <span title="This comment was edited at <%= comment.updated_at %>">*</span>
-      <% end %>
-    </span>
+        <% if comment.created_at != comment.updated_at %>
+          <span title="This comment was edited at <%= comment.updated_at %>">*</span>
+        <% end %>
+      </span>
+    <% end %>
+
   </div>
 
   <div class="post-comment__content">
@@ -29,5 +45,5 @@
     </div>
   <% end %>
 
-  <%= render comment.post.comments.where(parent_id: comment.id) %>
+  <%= render comment.post.comments.where(parent_id: comment.id).order(created_at: :desc) %>
 </div>

@@ -56,6 +56,15 @@
 
   @include media-min(sm) {
     display: flex;
+    align-items: center;
+  }
+
+  .profile-image {
+    height: 30px;
+    width: 30px;
+    flex: 0 0 30px;
+    margin: 0 1rem 0 0;
+    background-size: 80%;
   }
 }
 
@@ -87,17 +96,23 @@
 
 .post-comment__action {
   display: inline-block;
-  margin-right: $margin / 2;
+  margin-right: $margin / 4;
   font-size: $font-size-small;
   text-transform: lowercase;
   text-decoration: none;
   color: lighten($gray, 20%);
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .post-comment__author {
-  margin-right: $margin / 2;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: lighten($gray, 20%);
+  margin-right: 2rem;
 
   small {
     display: inline-block;
@@ -108,10 +123,15 @@
 }
 
 .post-comment__date {
+  margin-top: .5rem;
   font-size: $font-size-small;
   font-style: italic;
   text-transform: lowercase;
   color: $text-color-dark;
+
+  @include media-min(sm) {
+    margin-top: 0;
+  }
 }
 
 .post-comment-form {
