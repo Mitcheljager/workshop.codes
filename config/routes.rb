@@ -40,7 +40,9 @@ Rails.application.routes.draw do
 
   namespace :wiki do
     root to: "base#index"
-    resources :categories, param: :slug, concerns: :paginatable
+    resources :categories, param: :slug, concerns: :paginatable, except: [:show]
+    get "categories/:slug(/page/:page)", to: "categories#show"
+
     resources :articles, param: :slug, concerns: :paginatable
     resources :edits, concerns: :paginatable
     get "edits/article/:group_id", to: "edits#article", as: "article_edits"

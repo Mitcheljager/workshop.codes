@@ -1,5 +1,6 @@
 <%= link_to wiki_article_path(article.slug), class: "wiki-item" do %>
   <%= article.title %>
+  <%= tag.small "in #{ article.category.title }" unless params[:slug] %>
 
   <div class="wiki-item__tray">
     Last edited <%= time_ago_in_words(article.created_at) %> ago |

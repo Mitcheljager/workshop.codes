@@ -12,6 +12,11 @@ class Wiki::ArticlesController < Wiki::BaseController
   def index
     @articles = Wiki::Article.approved.group(:group_id).maximum(:id).values
     @articles = Wiki::Article.approved.where(id: @articles).order(created_at: :desc).page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js { render "wiki/articles/infinite_scroll_articles" }
+    end
   end
 
   def show

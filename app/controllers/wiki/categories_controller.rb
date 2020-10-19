@@ -17,6 +17,11 @@ class Wiki::CategoriesController < Wiki::BaseController
     @articles = Wiki::Article.approved.where(id: @articles).order(title: :asc).page(params[:page])
 
     add_breadcrumb @category.title, Proc.new{ wiki_category_path(@category.slug) }
+
+    respond_to do |format|
+      format.html
+      format.js { render "wiki/articles/infinite_scroll_articles" }
+    end
   end
 
   def new
