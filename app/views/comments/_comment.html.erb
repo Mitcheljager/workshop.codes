@@ -2,14 +2,7 @@
   <div class="post-comment__information">
     <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
       <div class="profile-image <%= "profile-image--empty" unless comment.user.profile_image.attached? || comment.user.provider_profile_image.present? %>">
-        <% if comment.user.profile_image.attached? %>
-          <% begin %>
-            <%= image_tag comment.user.profile_image.variant(quality: 95, resize_to_fill: [40, 40]).processed %>
-          <% rescue %>
-          <% end %>
-        <% elsif comment.user.provider_profile_image.present? %>
-          <%= image_tag comment.user.provider_profile_image %>
-        <% end %>
+        <%= render "profiles/image", user: comment.user, size: 40 %>
       </div>
 
       <span>
