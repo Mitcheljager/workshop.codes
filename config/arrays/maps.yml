@@ -146,3 +146,7 @@
   name: Workshop Expanse
   type: Workshop
   slug: workshop-expanse
+-
+  name: Workshop Green Screen
+  type: Workshop
+  slug: workshop-green-screen
