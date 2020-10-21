@@ -3873,3 +3873,203 @@ _&getCurrentWeapon:
     default: EVENT PLAYER
   return: unsigned int
   en-US: Weapon
+Color:
+  description: A Color Constant
+  return: Color
+  args:
+  - name: Color
+    description: A Color Constant
+    type: Color
+    default: White
+  en-US: Color
+CustomColor:
+  description: Custom color with specified rgb and alpha values.
+  args:
+  - name: Red
+    description: The red component of a color
+    type: Integer
+    default: 255
+  - name: Green
+    description: The green component of a color
+    type: Integer
+    default: 255
+  - name: Blue
+    description: The blue component of a color
+    type: Integer
+    default: 255
+  - name: Alpha
+    description: The alpha component of a color
+    type: Integer
+    default: 255
+  return: Color
+  en-US: Custom Color
+WorkshopSettingCombo:
+  description: Provides the value (a choice of Custom Strings) of a new option setting that will appear in the Workshop Settings card as a combo box. This value returns the index of the selected choice.
+  args:
+  - name: Category
+    description: The name of the category in which this setting will be found.
+    type: Object
+    default: Custom String
+  - name: Name
+    description: The name of this setting.
+    type: Object
+    default: Custom String
+  - name: Default
+    description: The default value for this setting.
+    type: Integer
+    default: 0
+  - name: Options
+    description: The options for this setting.
+    type: Array
+    default: Array
+  - name: Sort Order
+    description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
+    type: Integer
+    default: 0
+  return: Object
+  en-US: Workshop Setting Combo
+WorkshopSettingHero:
+  description: Provides the value of a new hero setting that will appear in the Workshop Settings card as a combo box.
+  args:
+  - name: Category
+    description: The name of the category in which this setting will be found.
+    type: Object
+    default: Custom String
+  - name: Name
+    description: The name of this setting.
+    type: Object
+    default: Custom String
+  - name: Default
+    description: The default value for this setting.
+    type: Hero
+    default: Ana
+  - name: Sort Order
+    description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
+    type: Integer
+    default: 0
+  return: Hero
+  en-US: Workshop Setting Hero
+EvaluateOnce:
+  description: Results in the first value that was provided to the Input Value parameter for the given action or condition (usefor for selectively not reevaluating certain parts of a value when used in conjunction with an action that is capable of reevaluation).
+  args:
+  - name: Input Value
+    description: This value is only evaluated once per action or condition.
+    default: 0
+  return: Value
+  en-US: Evaluate Once
+UpdateEveryFrame:
+  description: Results in the value that is provided to the Input Value parameter and increases the update frequency of the value to once per frame. Useful for smoothing the appearance of certain Values - such as Position Of - that normally only update every few frames. Applies to Conditions as well as Action Parameters that reevaluate. May increase server load and/or lower framerate.
+  args:
+  - name: Input Value
+    description: This value's update rate will be increased from once every few frame to every frame.
+    default: Position Of
+  return: Value
+  en-US: Update Every Frame
+MagnitudeOf:
+  description: The magnitude of the spcified Value
+  args:
+  - name: Value
+    description: The Vector operand of the magnitude operation.
+    default: Vector
+  return: unsigned float
+  en-US: Magnitude Of
+NumberofSlots:
+  description: The number of Slots on a Team or in the match.
+  args:
+  - name: Team
+    description: The Team or Teams on which to count Slots.
+    type: Team
+    default: Team
+  return: Integer
+  en-US: Number of Slots
+SpawnPoints:
+  description: The active spawn points for a Team or for the match, provided as an array of position vectors.
+  args:
+  - name: Team
+    description: The Team whose spawn points to acquire.
+    type: Team
+    default: Team
+  return: Array
+  en-US: Spawn Points
+StringContains:
+  description: Whether the specified String contains the specified Value.
+  args:
+  - name: String
+    description: The String in which to search for the specified Value.
+    type: String
+    default: Custom String
+  - name: Value
+    description: The Value for which to search.
+    type: String
+    default: Custom String
+  return: Boolean
+  en-US: String Contains
+StringLength:
+  description: Results in the number of characters in the String value (or 0 if the value is not a string).
+  args:
+  - name: String
+    description: The string value whose characters to count.
+    type: String
+    default: Global Variable
+  return: Integer
+  en-US: String Length
+StringSlice:
+  description: Results in the specified substring of the String value.
+  args:
+  - name: String
+    description: The string value from which to build the substring.
+    type: String
+    default: Global Variable
+  - name: Start Character Index
+    description: Specifies the character that will start the substring (with 0 as the first character, 1 as the second character, etc.).
+    type: Integer
+    default: 0
+  - name: Character Count
+    description: Specifies the number of characters in the substring.
+    type: Integer
+    default: 0
+  return: String
+  en-US: String Slice
+LastAssistID:
+  description: An ID representing the most recent Start Assist Action that was executed by the Event Player (or executed at the Global level).
+  return: AssistId
+  en-US: Last Assist ID
+IsCommunicatingAnySpray:
+  description: Whether a Player is using a spray.
+  args:
+  - name: Player
+    description: The Player whose spray status to check.
+    type: Player
+    default: Event Player
+  return: Boolean
+  en-US: Is Communicating Any Spray
+PlayerStat:
+  description: Provides a statistic of the specified Player (limited to the current match). Statistics are only gathered when the game is in progress. Dummy bots do not gather statistics.
+  args:
+  - name: Player
+    description: The Player whose Statistic to acquire.
+    type: Player
+    default: Event Player
+  - name: Stat
+    description: The statistic to acquire.
+    type: Statistic
+    default: All Damage Dealt
+  return: Integer
+  en-US: Player Stat
+PlayerHeroStat:
+  description: Provides a statistic of the specified Player's time playing a specific Hero (limited to the current match). Statistics are only gathered when the game is in progress. Dummy bots do not gather statistics.
+  args:
+  - name: Player
+    description: The Player whose Statistic to acquire.
+    type: Player
+    default: Event Player
+  - name: Hero
+    description: The hero whose statistic to acquire
+    type: Hero
+    default: Hero
+  - name: Stat
+    description: The statistic to acquire.
+    type: Statistic
+    default: All Damage Dealt
+  return: Integer
+  en-US: Player Hero Stat

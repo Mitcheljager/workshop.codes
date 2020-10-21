@@ -3858,3 +3858,204 @@ setPlayerHealth:
     type: Unsigned float
     default: 1
   en-US: Set Player Health
+LogToInspector:
+  description: Causes the Workshop Inspector to record a log entry.
+  args:
+  - name: Text
+    description: The String to be logged to the Workshop Inspector.
+    type: Object
+    default: 'NULL'
+  en-US: Log To Inspector
+WaitUntil:
+  description: Waits ultil the Continue Condition is true or Timeout seconds elapse. (The Rule's Condition is ignored during this wait.)
+  args:
+  - name: Timeout
+    description: If this many seconds elapse, the wait concludes, and the next action in the action list begins executing.
+    type: Integer
+    default: 0
+  en-US: Wait Until
+SetKnockbackDealt:
+  description: Sets the knockback dealt of one or more Players to a percentage of their raw knockback dealt.
+  args:
+  - name: Player
+    description: The Player or Players whose knockback dealt will be set.
+    type:
+      - Player
+      - Array: Player
+    default: EVENT PLAYER
+  - name: Knockback Dealt Percentage
+    description: The percentage of raw knockback dealt to which the Player or Players will set their knockback dealt.
+    type: Integer
+    default: 100
+  en-US: Set Knockback Dealt
+SetKnockbackReceived:
+  description: Sets the knockback received of one or more Players to a percentage of their raw knockback received.
+  args:
+  - name: Player
+    description: The Player or Players whose knockback received will be set.
+    type:
+      - Player
+      - Array: Player
+    default: EVENT PLAYER
+  - name: Knockback Dealt Percentage
+    description: The percentage of raw knockback received to which the Player or Players will set their knockback dealt.
+    type: Integer
+    default: 100
+  en-US: Set Knockback Received
+SetEnvironmentCreditPlayer:
+  description: Sets the Player who will received credit if the specified target Player or Players die to the environment before landing on the ground.
+  args:
+  - name: Target
+    description: The target Player or Players whose death is being considered.
+    type:
+    - Player
+    - Array: Player
+    default: EVENT PLAYER
+  - name: Environment Credit Player
+    description: The Player who will received credit if the target Player or Players die to the environment before landing on the ground. An Environment Credit Player of Null indicates no Player will receive credit.
+    type:
+    - Player
+    - Array: Player
+    default: 'NULL'
+  en-US: Set Environment Credit Player
+StartAssist:
+  description: Starts granting assist credit toward to one or more Assisters when one or more Targets are eliminated. A reference to this damage modification can be obtained from the Last Assist ID Value. This Action will fail if too many assists have been started.
+  args:
+  - name: Assisters
+    description: The target Player or Players who will receive assist credit.
+    type:
+      - Player
+      - Array: Player
+    default: EVENT PLAYER
+  - name: Targets
+    description: The Player or Players whose eliminations will grant assist credit to the Assisters. If the Target or Targets are allied to the Assister, this will be a defensive assist. Otherwise, this will be an offensive assist.
+    type:
+    - Player
+    - Array: Player
+    default: ALL PLAYERS
+  - name: Reevaluation
+    description: Specifies which of this Action's Inputs will be continously reevaluated. This Action will keep asking for and using new Values from reevaluated Inputs.
+    type: __ChaseRateReeval__
+    default: Assisters and Targets
+  en-US: Start Assist
+StopAssist:
+  description: Stops an assist that was started by the Start Assist Action.
+  args:
+  - name: Assist ID
+    description: Specifies which assist instance to stop. This ID may be Last Assist ID or a Variable into which Last Assist ID was earlier stored.
+    type: AssistId
+    default: Last Assist ID
+  en-US: Stop Assist
+StopAllAssists:
+  description: Stops all assists that were started using the Start Assist Action.
+  en-US: Stop All Assists
+CreateProgressBarHUDText:
+  description: Creates Progress Bar HUD text visible to specified Players at a specific location on the screen. This text will persist until destroyed. To obtain a reference to this text, use the Last Text ID Value. This action will fail if too many text elements have been created.
+  args:
+  - name: Visible To
+    description: One or more Players who will see the Progress Bar HUD text.
+    type:
+    - Player
+    - Array: Player
+    default: ALL PLAYERS
+  - name: Value
+    description: The value of the progress bar to be displayed as a percentage from 0 to 100.
+    type: Unsigned float
+    default: 0
+  - name: Text
+    description: The text to be displayed (can be blank)
+    type: Object
+    default: Custom String
+  - name: Location
+    description: The location on the screen where the text will appear.
+    type: HudPosition
+    default: Left
+  - name: Sort Order
+    description: The sort order of the text relative to other text in the same location. Text with a higher sort order will come after the text with a lower sort order.
+    type: float
+    default: 0
+  - name: Progress Bar Color
+    description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
+    type: Color
+    default: White
+  - name: Text Color
+    description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
+    type: Color
+    default: White
+  - name: Reevaluation
+    description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
+    type: HudReeval
+    default: Visible To, Values, and Color
+  - name: Non-Team Spectators
+    description: Whether non-team spectators can see the text or not.
+    type: SpecVisibility
+    default: Default Visibility
+  en-US: Create Progress Bar HUD Text
+DestroyProgressBarHUDText:
+  description: Destroys Progress Bar HUD text that was created by Create Progress Bar HUD Text.
+  args:
+  - name: Text ID
+    description: Specifies which Progress Bar HUD text to destroy. This ID may be Last Text ID or a Variable into which Last Text ID was earlier stored.
+    type: TextId
+    default: Last Text ID
+  en-US: Destroy Progress Bar HUD Text
+DestroyAllProgressBarHUDText:
+  description: Destroys all Progress Bar HUD text that were created by the Create Progress Bar HUD Text Action.
+  en-US: Destroy All Progress Bar HUD Text
+CreateProgressBarIn-WorldText:
+  description: Creates Progress Bar HUD text visible to the specific Players at a specific position in the world. This text will persist until destroyed. To obtain a reference to this text, use the Last Text ID Value. This Action will fail if too many text elements have been created.
+  args:
+  - name: Visible To
+    description: One or more Players who will see the Progress Bar HUD text.
+    type:
+    - Player
+    - Array: Player
+    default: ALL PLAYERS
+  - name: Value
+    description: The value of the progress bar to be displayed as a percentage from 0 to 100.
+    type: Unsigned float
+    default: 0
+  - name: Text
+    description: The text to be displayed (can be blank)
+    type: Object
+    default: Custom String
+  - name: Position
+    description: The text's position. If this value is a player, then the text will appear above the player's head. Otherwise, the value is interpreted as a position in the world.
+    type: Position
+    default: Event Player
+  - name: Scale
+    description: The text's scale.
+    type: float
+    default: NUMBER
+  - name: Clipping
+    description: Specifies whether the text can be seen through walls or is instead clipped.
+    type: Clip
+    default: CLIP AGAINST SURFACES
+  - name: Progress Bar Color
+    description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
+    type: Color
+    default: White
+  - name: Text Color
+    description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
+    type: Color
+    default: White
+  - name: Reevaluation
+    description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
+    type: HudReeval
+    default: Visible To, Values, and Color
+  - name: Non-Team Spectators
+    description: Whether non-team spectators can see the text or not.
+    type: SpecVisibility
+    default: Default Visibility
+  en-US: Create Progress Bar In-World Text
+DestroyProgressBarIn-WorldText:
+  description: Destroys Progress Bar In-World text that was created by Create Progress Bar In-World Text.
+  args:
+  - name: Text ID
+    description: Specifies which Progress Bar In-World text to destroy. This ID may be Last Text ID or a Variable into which Last Text ID was earlier stored.
+    type: TextId
+    default: Last Text ID
+  en-US: Destroy Progress Bar In-World Text
+DestroyAllProgressBarIn-WorldText:
+  description: Destroys all Progress Bar In-World text that were created by the Create Progress Bar In-World Text Action.
+  en-US: Destroy All Progress Bar In-World Text
