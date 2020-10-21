@@ -1,26 +1,28 @@
 <% content_for :page_title, "While You Wait" %>
 
-<div class="heading mb-1/2">
-  <h1><strong>While You Wait</strong> <small> - Codes to play while in queue</small></h1>
-</div>
-
-<div class="w-md-75">
-  A curated list of games that are fun to play while you wait. Most of these are games that require no other players so you can get started right away.
-</div>
-
-<div class="while-you-wait mt-1/1">
-  <div class="while-you-wait__navigation">
-    <h4 class="mr-1/4">Categories</h4>
-    <%= link_to "All", while_you_wait_path, class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" if params[:filter].present? }" %>
-    <%= link_to "Aim Practice", while_you_wait_path(filter: "aim-practice"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "aim-practice" }" %>
-    <%= link_to "Deathmatch", while_you_wait_path(filter: "deathmatch"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "deathmatch" }" %>
-    <%= link_to "Parkour", while_you_wait_path(filter: "parkour"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "parkour" }" %>
-    <%= link_to "Minigames", while_you_wait_path(filter: "minigames"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "minigames" }" %>
+<% cache_if @while_you_waits.any?, ["while_you_wait", params[:filter]] do %>
+  <div class="heading mb-1/2">
+    <h1><strong>While You Wait</strong> <small> - Codes to play while in queue</small></h1>
   </div>
 
-  <div class="cards mt-1/4">
-    <% @while_you_waits.each do |while_you_wait| %>
-      <%= render "post", post: while_you_wait.post %>
-    <% end %>
+  <div class="w-md-75">
+    A curated list of games that are fun to play while you wait. Most of these are games that require no other players so you can get started right away.
   </div>
-</div>
+
+  <div class="while-you-wait mt-1/1">
+    <div class="while-you-wait__navigation">
+      <h4 class="mr-1/4">Categories</h4>
+      <%= link_to "All", while_you_wait_path, class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" if params[:filter].present? }" %>
+      <%= link_to "Aim Practice", while_you_wait_path(filter: "aim-practice"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "aim-practice" }" %>
+      <%= link_to "Deathmatch", while_you_wait_path(filter: "deathmatch"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "deathmatch" }" %>
+      <%= link_to "Parkour", while_you_wait_path(filter: "parkour"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "parkour" }" %>
+      <%= link_to "Minigames", while_you_wait_path(filter: "minigames"), class: "mt-1/8 mb-1/8 mr-1/8 button #{ "button--secondary" unless params[:filter] == "minigames" }" %>
+    </div>
+
+    <div class="cards mt-1/4">
+      <% @while_you_waits.each do |while_you_wait| %>
+        <%= render "post", post: while_you_wait.post %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
