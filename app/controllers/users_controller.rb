@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action except: [:new] do
+  before_action except: [:new, :create] do
     redirect_to login_path unless current_user
   end
 
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       generate_remember_token if params[:remember_me]
 
-      create_activity(:create_user)
+      create_activity(:create_user, @user.id)
 
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])

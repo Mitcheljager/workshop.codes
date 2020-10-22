@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
       generate_remember_token if params[:remember_me].present? && params[:remember_me] != "0"
       session[:user_id] = @user.id
 
-      create_activity(:login)
+      create_activity(:login, @user.id)
 
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])
