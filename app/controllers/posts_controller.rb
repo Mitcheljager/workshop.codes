@@ -264,6 +264,7 @@ class PostsController < ApplicationController
   def notify_discord(type)
     return unless ENV["DISCORD_NOTIFICATIONS_WEBHOOK_URL"].present?
     return if @post.private?
+    return if @post.unlisted?
 
     set_post_images
 
