@@ -1,0 +1,68 @@
+.profile-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: $margin;
+  font-size: $font-size-small;
+  color: rgba(white, .75);
+  white-space: nowrap;
+
+  @media (min-width: 1100px) {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+  .simple-view & {
+    color: $text-color;
+  }
+
+  img,
+  svg {
+    height: 36px;
+
+    @media (min-width: 1100px) {
+      height: 24px;
+      margin-top: 4px;
+    }
+  }
+}
+
+.profile-block__action {
+  display: inline-block;
+  padding: .25em 0;
+  line-height: 1em;
+  color: white;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    color: white;
+    text-decoration: underline;
+  }
+
+  &--dark {
+    padding: .25em .35em;
+    border-radius: $border-radius;
+    background: $border-color;
+
+    &:hover,
+    &:active {
+      background: $bg-darker;
+      text-decoration: none;
+      box-shadow: 0 0 0 2px white;
+    }
+  }
+}
+
+.profile-block__create {
+  margin-top: $margin / 2;
+  margin-bottom: $margin / 2;
+
+  @media (min-width: 1100px) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

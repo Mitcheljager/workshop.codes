@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_011612) do
+ActiveRecord::Schema.define(version: 2020_10_23_135343) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 2020_10_12_011612) do
     t.string "carousel_video"
     t.integer "listings_count", default: 0
     t.boolean "unlisted", default: false
+    t.string "locale", default: "en"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end
 
-  root "posts#index"
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/, default: "en" do
+    root "posts#index"
+  end
 
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#unacceptable"

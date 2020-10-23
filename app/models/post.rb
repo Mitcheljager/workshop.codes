@@ -116,6 +116,14 @@ class Post < ApplicationRecord
     self.as_json(include: { user: { only: :username } } )
   end
 
+  def self.locale
+    if I18n.locale && I18n.locale != :mixed
+      self.where(locale: I18n.locale)
+    else
+      self
+    end
+  end
+
   def self.visible?
     self.where(private: false)
   end

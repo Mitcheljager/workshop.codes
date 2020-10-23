@@ -30,6 +30,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  navigation:
+    recent: Recent
+    on_fire: On Fire
+    while_you_wait: While you wait
+    wiki: Wiki
+  kofi:
+    title: Support Workshop.codes on
+    tagline: Turns out websites are expensive and ads suck.
+    content: Support Workshop.codes for just
+    button: Support Workshop.codes
+  posts:
+    index:
+      title: Overwatch Workshop Codes
+      on_fire_button: View all On Fire items
   views:
     pagination:
       first: "First"
