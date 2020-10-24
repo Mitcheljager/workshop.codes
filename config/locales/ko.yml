@@ -4,9 +4,30 @@ ko:
     on_fire: 불에
     while_you_wait: 기다리는 동안
     wiki: 위키
+    create: 창조하다
+  banner:
+    kofi:
+      title: Workshop.codes 지원
+      tagline: 웹 사이트가 비싸고 광고가 형편 없다는 것이 밝혀졌습니다.
+      content: 지원 Workshop.codes
+      button: Workshop.codes 지원
+    affiliate_ad:
+      disclaimer: 이 링크를 통한 구매는 Workshop.codes를 지원합니다.
   posts:
     index:
       title: 오버 워치 워크샵 코드
+      on_fire:
+        title_html: <strong>불에</strong> 항목
+        button: 모든 화재 항목보기
+      recent:
+        title_html: <strong>충적세</strong> 항목
+      sort:
+        title: 정렬 기준
+        created: 만들어진
+        updated: 마지막 업데이트
+  post:
+    author: 으로
+    categories: 카테고리
   activerecord:
     errors:
       messages:

@@ -1,14 +1,14 @@
 <% cache_unless request.path_parameters.without(:controller, :action, :page, :code).any?, "filter" do %>
   <nav class="filter">
     <div class="filter__item">
-      <span class="filter__label">Categories</span>
+      <span class="filter__label"><%= t "filter.categories" %></span>
 
       <div class="dropdown" data-dropdown>
         <%= link_to params[:category] ? params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <% if params[:category] %>
-            <%= link_to "✕ Remove Filter", build_filter_path(:category, nil), class: "dropdown__item" %>
+            <%= link_to t("filter.remove"), build_filter_path(:category, nil), class: "dropdown__item" %>
             <hr>
           <% end %>
 
@@ -20,14 +20,14 @@
     </div>
 
     <div class="filter__item">
-      <span class="filter__label">Heroes</span>
+      <span class="filter__label"><%= t "filter.heroes" %></span>
 
       <div class="dropdown" data-dropdown>
         <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <% if params[:hero] %>
-            <%= link_to "✕ Remove Filter", build_filter_path(:hero, nil), class: "dropdown__item" %>
+            <%= link_to t("filter.remove"), build_filter_path(:hero, nil), class: "dropdown__item" %>
             <hr>
           <% end %>
 
@@ -43,14 +43,14 @@
     </div>
 
     <div class="filter__item">
-      <span class="filter__label">Maps</span>
+      <span class="filter__label"><%= t "filter.maps" %></span>
 
       <div class="dropdown" data-dropdown>
         <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <% if params[:map] %>
-            <%= link_to "✕ Remove Filter", build_filter_path(:map, nil), class: "dropdown__item" %>
+            <%= link_to t("filter.remove"), build_filter_path(:map, nil), class: "dropdown__item" %>
             <hr>
           <% end %>
 
@@ -69,14 +69,14 @@
       <div data-role="content-to-toggle" style="<%= "display: none" if params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? && params[:author].nil? %>">
         <div class="filter">
           <div class="filter__item">
-            <span class="filter__label">From</span>
+            <span class="filter__label"><%= t "filter.from" %></span>
 
             <div class="dropdown" data-dropdown>
               <%= link_to params[:from] ? time_ago_in_words(params[:from]).gsub("about", "") + " ago" : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
               <div class="dropdown__content" data-dropdown-content>
                 <% if params[:from] %>
-                  <%= link_to "✕ Remove Filter", build_filter_path(:from, nil), class: "dropdown__item" %>
+                  <%= link_to t("filter.remove"), build_filter_path(:from, nil), class: "dropdown__item" %>
                   <hr>
                 <% end %>
 
@@ -92,14 +92,14 @@
           </div>
 
           <div class="filter__item">
-            <span class="filter__label">To</span>
+            <span class="filter__label"><%= t "filter.to" %></span>
 
             <div class="dropdown" data-dropdown>
               <%= link_to params[:to] ? time_ago_in_words(params[:to]).gsub("about", "") + " ago" : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
               <div class="dropdown__content" data-dropdown-content>
                 <% if params[:to] %>
-                  <%= link_to "✕ Remove Filter", build_filter_path(:to, nil), class: "dropdown__item" %>
+                  <%= link_to t("filter.remove"), build_filter_path(:to, nil), class: "dropdown__item" %>
                   <hr>
                 <% end %>
 
@@ -115,7 +115,7 @@
           </div>
 
           <div class="filter__item">
-            <span class="filter__label">Sort</span>
+            <span class="filter__label"><%= t "filter.sort" %></span>
 
             <div class="dropdown" data-dropdown>
               <% if params[:search] && !params[:sort] %>
@@ -126,7 +126,7 @@
 
               <div class="dropdown__content" data-dropdown-content>
                 <% if params[:sort] %>
-                  <%= link_to "✕ Remove Filter", build_filter_path(:sort, nil), class: "dropdown__item" %>
+                  <%= link_to t("filter.remove"), build_filter_path(:sort, nil), class: "dropdown__item" %>
                   <hr>
                 <% end %>
 
@@ -140,7 +140,7 @@
           </div>
 
           <div class="filter__item">
-            <span class="filter__label">Exclude expired</span>
+            <span class="filter__label"><%= t "filter.exclude_expired" %></span>
 
             <div class="dropdown" data-dropdown>
               <%= link_to params[:expired] ? params[:expired].humanize : "False", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
@@ -155,21 +155,21 @@
 
         <div class="filter">
           <div class="filter__item">
-            <span class="filter__label">Author</span>
+            <span class="filter__label"><%= t "filter.author" %></span>
 
             <div class="dropdown" data-dropdown>
               <%= link_to params[:author] ? params[:author].split("#")[0] : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown get-verified-users" } %>
 
               <div class="dropdown__content" data-dropdown-content>
                 <% if params[:author] %>
-                  <%= link_to "✕ Remove Filter", build_filter_path(:author, nil), class: "dropdown__item" %>
+                  <%= link_to t("filter.remove"), build_filter_path(:author, nil), class: "dropdown__item" %>
                   <hr>
                 <% end %>
 
-                <span class="dropdown__label"><small>This is a list of verified creators</small></span>
+                <span class="dropdown__label"><small><%= t "filter.verified_authors" %></small></span>
 
                 <div data-role="filter-authors">
-                  <span class="dropdown__item text-base"><em>Loading...</em></span>
+                  <span class="dropdown__item text-base"><div class="spinner spinner--small"></div></span>
                 </div>
               </div>
             </div>
@@ -179,7 +179,7 @@
 
       <div class="filter__actions">
         <% if params[:from] || params[:to] || params[:sort] || params[:expired] || params[:map] || params[:hero] || params[:category] || params[:author] %>
-          <%= link_to "Remove filters", params[:search] ? "/search/#{ params[:search] }" : posts_path(1), class: "filter__link filter__link--remove" %>
+          <%= link_to t("filter.remove_all"), params[:search] ? "/search/#{ params[:search] }" : posts_path(1), class: "filter__link filter__link--remove" %>
         <% end %>
 
         <%= button_tag "#{ params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? && params[:author].nil?  ? "+ More filters" : "- Less filters" }", class: "filter__link",

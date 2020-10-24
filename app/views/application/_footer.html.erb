@@ -10,10 +10,14 @@
 
 <footer class="footer">
   <p>
-    <%= link_to "Privacy Policy", privacy_policy_path %> | Copyright &copy; <%= Date.current.year %> | All images and icons belong to their respective owner.
+    <%= link_to t("footer.privacy_policy"), privacy_policy_path %> |
+    <%= t "footer.copyright" %> &copy; <%= Date.current.year %> |
+    <%= t "footer.disclaimer" %>
   </p>
 
   <p class="text-md-right">
-    Contact me on Discord: Mitsiee#9370 | Contribute on <%= link_to "GitHub", "https://github.com/Mitcheljager/workshop.codes", target: "_blank", rel: "noreferrer noopener" %>
+    Contact me on Discord: Mitsiee#9370 |
+    Contribute on
+    <%= link_to "GitHub", "https://github.com/Mitcheljager/workshop.codes", target: "_blank", rel: "noreferrer noopener" %>
   </p>
 </footer>

@@ -8,21 +8,21 @@
 
 <main class="items">
   <% unless params[:page] %>
-    <h2 class="mt-1/2"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><strong>On Fire</strong> Items</h2>
+    <h2 class="mt-1/2"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t ".on_fire.title_html" %></h2>
 
     <%= render @hot_posts %>
 
-    <%= link_to t(".on_fire_button"), on_fire_path, class: "button button--secondary mt-1/2" %>
+    <%= link_to t(".on_fire.button"), on_fire_path, class: "button button--secondary mt-1/2" %>
 
     <%= render "application/banners/ko_fi" %>
 
     <div class="action-header">
-      <h2 class="mt-1/1"><strong>Recent</strong> Items</h2>
+      <h2 class="mt-1/1"><%= t ".recent.title_html" %></h2>
 
       <div class="action-header__actions">
-        <span>Sort by</span>
+        <span><%= t ".sort.title" %></span>
         <div>
-          <%= link_to "Created", posts_path(1), class: "text-white" %> | <%= link_to "Last Updated", filter_path(sort: "updated") %>
+          <%= link_to t(".sort.created"), posts_path(1), class: "text-white" %> | <%= link_to t(".sort.updated"), filter_path(sort: "updated") %>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
       <div class="action-header__actions">
         <span>Sort by</span>
         <div>
-          <%= link_to "Created", posts_path(1), class: "text-white" %> | <%= link_to "Last Updated", filter_path(sort: "updated") %>
+          <%= link_to t(".sort.created"), posts_path(1), class: "text-white" %> | <%= link_to t(".sort.updated"), filter_path(sort: "updated") %>
         </div>
       </div>
     </div>

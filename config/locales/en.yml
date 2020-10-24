@@ -1,49 +1,49 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   navigation:
     recent: Recent
     on_fire: On Fire
     while_you_wait: While you wait
     wiki: Wiki
-  kofi:
-    title: Support Workshop.codes on
-    tagline: Turns out websites are expensive and ads suck.
-    content: Support Workshop.codes for just
-    button: Support Workshop.codes
+    create: Create
+  filter:
+    categories: Categories
+    heroes: Heroes
+    maps: Maps
+    from: From
+    to: To
+    sort: Sort
+    exclude_expired: Exclude expired
+    author: Author
+    verified_authors: This is a list of verified creators
+    remove: ✕ Remove Filter
+    remove_all: Remove filters
+  footer:
+    privacy_policy: Privacy Policy
+    copyright: Copyright
+    disclaimer: All images and icons belong to their respective owner.
+  banner:
+    kofi:
+      title: Support Workshop.codes on
+      tagline: Turns out websites are expensive and ads suck.
+      content: Support Workshop.codes for just
+      button: Support Workshop.codes
+    affiliate_ad:
+      disclaimer: Purchases made through this link support Workshop.codes
   posts:
     index:
       title: Overwatch Workshop Codes
-      on_fire_button: View all On Fire items
+      on_fire:
+        title_html: <strong>On Fire</strong> Items
+        button: View all On Fire items
+      recent:
+        title_html: <strong>Recent</strong> Items
+      sort:
+        title: Sort by
+        created: Created
+        updated: Last Updated
+  post:
+    author: By
+    categories: Categories
   views:
     pagination:
       first: "First"

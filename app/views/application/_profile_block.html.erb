@@ -7,7 +7,7 @@
     <% end %>
   </div>
 
-  <%= link_to "Create", current_user.present? ? new_post_path : login_path, class: "button profile-block__create mr-1/4" %>
+  <%= link_to t("navigation.create"), current_user.present? ? new_post_path : login_path, class: "button profile-block__create mr-1/4" %>
 
   <div class="dropdown" data-dropdown>
     <%= link_to I18n.locale, "", class: "dropdown__toggle button button--secondary button--thin button--small", data: { action: "toggle-dropdown" } %>

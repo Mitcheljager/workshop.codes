@@ -1,5 +1,5 @@
 <div class="banner pt-1/8 pb-1/8 pl-1/8 pr-1/8 mt-1/2 mb-1/2 adv-ad">
-  <small class="block mb-1/8">Purchases made through this link support Workshop.codes</small>
+  <small class="block mb-1/8"><%= t "banner.affiliate_ad.disclaimer" %></small>
 
   <% ads = YAML.load(File.read(Rails.root.join("config/arrays", "affiliate_ads.yml"))) %>
   <% ad = ads.sample %>
