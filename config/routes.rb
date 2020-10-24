@@ -9,10 +9,6 @@ Rails.application.routes.draw do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/, default: "en" do
-    root "posts#index"
-  end
-
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#unacceptable"
   get "/500", to: "errors#internal_error"
@@ -53,37 +49,10 @@ Rails.application.routes.draw do
     get "search/:query", to: "search#index", as: "search_results"
   end
 
-  resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
-  get :listings, controller: :users
-  get "account(/page/:page)", to: "users#show", as: "account"
-  get "account/edit", to: "users#edit", as: "edit_user"
-  get "account/posts", to: "users#posts", as: "account_posts"
-  get "favorites", to: "users#favorites", as: "account_favorites"
-  patch "user", to: "users#update", as: "update_user"
-  delete "user", to: "users#destroy", as: "destroy_user"
-
-  get "account/accessibility", to: "accessibility#edit", as: "accessibility"
-  patch "account/accessibility", to: "accessibility#update", as: "update_accessibility"
+  get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
 
   post "analytics/post", to: "analytics#post", as: "post_analytics"
   post "analytics/user", to: "analytics#user", as: "user_analytics"
-
-  get "u/:username(/page/:page)", to: "profiles#show", as: "profile"
-  patch "profile/edit", to: "profiles#update", as: "update_profile"
-  get "profile/edit", to: "profiles#edit", as: "edit_profile"
-  get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
-
-  resources :sessions, only: [:new, :create, :destroy]
-  get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
-
-  get "register", to: "users#new", as: "new_user"
-  get "login", to: "sessions#new", as: "login"
-  get "logout", to: "sessions#destroy", as: "logout"
-
-  resources :forgot_passwords, param: :token, only: [:index, :create]
-  get "forgot-password", to: "forgot_passwords#new", as: "new_forgot_password"
-  get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"
-  post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
 
   resources :favorites, only: [:create]
   delete "favorites", to: "favorites#destroy"
@@ -92,32 +61,66 @@ Rails.application.routes.draw do
   get "create_edit_form/:comment_id", to: "comments#create_edit_form", as: "create_edit_form"
   get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
 
-  resources :notifications, only: [:index], concerns: :paginatable
-  resources :activities, only: [:index], concerns: :paginatable
-  resources :reports, only: [:create, :new, :destroy, :update]
-
-  get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
-  get "while-you-wait(/:filter)", to: "while_you_waits#index", as: "while_you_wait"
-
   post "copy-code", to: "posts#copy_code", as: "copy_code"
-  resources :revisions, only: [:edit, :update]
-  get ":code/revisions", to: "revisions#index", as: "revisions"
-  get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
-  get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
-
-  get "/(page/:page)", to: "posts#index"
-  get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
-  post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
-  get "/search", to: "search#show"
-  get "get-verified-users", to: "filter#get_verified_users"
 
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
-  resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :show, :edit, :update, :destroy]
 
-  constraints code: /.{5,6}/ do
-    resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show]
-    get ":code", to: "posts#show"
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/, default: "en" do
+    root "posts#index"
+
+    resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
+    get :listings, controller: :users
+    get "account(/page/:page)", to: "users#show", as: "account"
+    get "account/edit", to: "users#edit", as: "edit_user"
+    get "account/posts", to: "users#posts", as: "account_posts"
+    get "favorites", to: "users#favorites", as: "account_favorites"
+    patch "user", to: "users#update", as: "update_user"
+    delete "user", to: "users#destroy", as: "destroy_user"
+
+    get "account/accessibility", to: "accessibility#edit", as: "accessibility"
+    patch "account/accessibility", to: "accessibility#update", as: "update_accessibility"
+
+    resources :sessions, only: [:new, :create, :destroy]
+
+    get "u/:username(/page/:page)", to: "profiles#show", as: "profile"
+    patch "profile/edit", to: "profiles#update", as: "update_profile"
+    get "profile/edit", to: "profiles#edit", as: "edit_profile"
+    get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
+
+    get "register", to: "users#new", as: "new_user"
+    get "login", to: "sessions#new", as: "login"
+    get "logout", to: "sessions#destroy", as: "logout"
+
+    resources :forgot_passwords, param: :token, only: [:index, :create]
+    get "forgot-password", to: "forgot_passwords#new", as: "new_forgot_password"
+    get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"
+    post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
+
+    resources :notifications, only: [:index], concerns: :paginatable
+    resources :activities, only: [:index], concerns: :paginatable
+    resources :reports, only: [:create, :new, :destroy, :update]
+
+    get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
+    get "while-you-wait(/:filter)", to: "while_you_waits#index", as: "while_you_wait"
+
+    resources :revisions, only: [:edit, :update]
+    get ":code/revisions", to: "revisions#index", as: "revisions"
+    get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
+    get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
+
+    get "/(page/:page)", to: "posts#index"
+    get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
+    post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
+    get "/search", to: "search#show"
+    get "get-verified-users", to: "filter#get_verified_users"
+
+    resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :show, :edit, :update, :destroy]
+
+    constraints code: /.{5,6}/ do
+      resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show]
+      get ":code", to: "posts#show"
+    end
   end
 
   constraints nice_url: /[a-zA-Z0-9-]+/ do
