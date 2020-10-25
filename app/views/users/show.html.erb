@@ -41,8 +41,10 @@
       </div>
     </div>
 
-    <%= render_async listings_path, container_class: "listings listings--loading" do %>
-      <em class="spinner"></em>
+    <%= render_async listings_path do %>
+      <div class="listings listings--loading">
+        <em class="spinner"></em>
+      </div>
     <% end %>
   </div>
 
