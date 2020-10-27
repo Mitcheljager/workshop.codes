@@ -38,10 +38,10 @@
         <% if post.revisions.where("created_at > ?", 6.months.ago).none? %>
           <div class="item__details-item">
             <div class="tooltip">
-              ⚠ Possibly expired
+              ⚠ <%= t "post.expired.title" %>
 
               <div class="tooltip__content">
-                <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+                <%= t "post.expired.tooltip_html" %>
               </div>
             </div>
           </div>

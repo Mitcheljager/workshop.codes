@@ -39,6 +39,7 @@
       <% unless is_wiki? %>
         <%= render "search" %>
         <%= render "filter/filter" %>
+        <%= render "application/banners/localisation_disclaimer" if I18n.locale != :en && I18n.locale != :mixed %>
       <% end %>
 
       <%= yield %>

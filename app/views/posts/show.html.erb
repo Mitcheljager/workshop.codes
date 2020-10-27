@@ -4,8 +4,8 @@
 
 <% if @is_expired %>
   <div class="warning">
-    <p class="mb-0">⚠ <mark>This code is over 6 months old.</mark></p>
-    <p class="mt-0"><small>This means the code may have expired and might no longer function.</small></p>
+    <p class="mb-0">⚠ <mark><%= t ".expired.title" %></mark></p>
+    <p class="mt-0"><small><%= t ".expired.content" %></small></p>
   </div>
 <% end %>
 
@@ -42,23 +42,21 @@
 
       <% if @post.private? %>
         <div class="warning warning--mild mt-1/2">
-          <p class="mb-0 mt-0 text-white">🔐 This code is set to private.</p>
-          <p class="mt-0 mb-0"><small>Only you can see it.</small></p>
+          <p class="mb-0 mt-0 text-white">🔐 <%= t ".private.title" %></p>
+          <p class="mt-0 mb-0"><small><%= t ".private.content" %></small></p>
         </div>
       <% end %>
 
       <% if @post.unlisted? %>
         <div class="warning warning--mild mt-1/2">
-          <p class="mb-0 text-white mt-0">📃 This code is unlisted.</p>
+          <p class="mb-0 text-white mt-0">📃 <%= t ".unlisted" %></p>
         </div>
       <% end %>
 
       <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
         <div class="warning mt-1/4">
-          <p><mark>⚠ Your Code will soon expire.</mark></p>
-          <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
-          <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
-          <p><small><em>This code will expire in roughly <%= time_ago_in_words(@post.updated_at + 6.months) %>.</em></small></p>
+          <p><mark>⚠ <%= t ".expire_soon.title" %></mark></p>
+          <%= t ".expire_soon.content_html", time: time_ago_in_words(@post.updated_at + 6.months) %>
         </div>
       <% end %>
     <% end %>
@@ -92,7 +90,7 @@
         <%= render "profiles/profile", user: @post.user, small: true %>
 
         <div class="item__details-item">
-          Categories |
+          <%= t ".categories" %> |
 
           <% @post.categories.each do |category| %>
             <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
@@ -101,7 +99,7 @@
 
         <% if @post.tags.present? %>
           <div class="item__details-item">
-            Tags |
+            <%= t ".tags" %> |
 
             <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
               <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
@@ -110,10 +108,10 @@
         <% end %>
 
         <div class="item__details-item">
-          Heroes |
+          <%= t ".heroes" %> |
 
           <% if @post.heroes.length == heroes.length %>
-            All
+            <%= t ".all" %>
           <% else %>
             <% @post.heroes.each do |hero| %>
               <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
@@ -122,10 +120,10 @@
         </div>
 
         <div class="item__details-item">
-          Maps |
+          <%= t ".maps" %> |
 
           <% if @post.maps.length == maps.length %>
-            All
+            <%= t ".all" %>
           <% else %>
             <% @post.maps.each do |map| %>
               <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
@@ -134,20 +132,20 @@
         </div>
 
         <div class="item__details-item" title="Created at: <%= @post.created_at %>">
-          Created at |
+          <%= t ".created_at" %> |
 
           <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
         </div>
 
         <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
-          Last updated |
+          <%= t ".updated_at" %> |
 
           <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
         </div>
 
         <% if @post.version.present? %>
           <div class="item__details-item">
-            Current version |
+            <%= t ".version" %> |
 
             <%= @post.version %>
           </div>
@@ -155,14 +153,14 @@
 
         <% if @post.nice_url.present? %>
           <div class="item__details-item">
-            Share URL |
+            <%= t ".nice_url" %> |
 
             <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
           </div>
         <% end %>
 
         <div class="item__details-item">
-          <%= link_to "Report code", new_report_path(id: @post.id), class: "text-red", remote: true, data: { disable_with: "Loading..." } %>
+          <%= link_to t("report.action"), new_report_path(id: @post.id), class: "text-red", remote: true, data: { disable_with: t("report.loading") } %>
         </div>
       </div>
     </div>
@@ -174,7 +172,7 @@
 
   <div class="comments">
     <div class="heading items-heading mb-1/2">
-      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>
+      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> <%= t "comments.title" %></h2>
     </div>
 
     <%= render "comments/form", post: @post %>

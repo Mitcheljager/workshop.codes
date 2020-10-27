@@ -1,6 +1,6 @@
 <%= form_for @report, remote: true do |form| %>
   <div class="form-hint mb-1/2">
-    <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. This form is not meant to report bugs to the creator of this code.
+    <%= t "report.modal.disclaimer_html" %>
   </div>
 
   <%= form.hidden_field :concerns_id, value: @post.id %>

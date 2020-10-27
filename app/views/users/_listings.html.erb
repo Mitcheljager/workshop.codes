@@ -1,11 +1,11 @@
 <div class="listings">
-  <span class="text-dark">Listings in the last 60 minutes</span>
+  <span class="text-dark"><%= t "account.listings.title" %></span>
 
   <h2 class="mt-1/8"><%= @recent_listings.size %></h2>
 
   <div class="listings__item-title text-dark mb-1/8">
-    Path
-    <span class="text-right">Unique listings</span>
+    <%= t "account.listings.path" %>
+    <span class="text-right"><%= t "account.listings.unique" %></span>
   </div>
 
   <% if @recent_listings.size > 0 %>
@@ -20,7 +20,7 @@
 
         <div data-role="content-to-toggle snippet-container" style="display: none">
           <div class="mb-1/8">
-            <small class="text-dark">Results per post</small>
+            <small class="text-dark"><%= t "account.listings.results_per_post" %></small>
             <% items.group_by { |i| i["id"] }.each do |grouped_id, posts| %>
               <% post = @posts.find(grouped_id) %>
 
@@ -41,7 +41,7 @@
     <% end %>
   <% else %>
     <div class="mt-1/4 text-dark">
-      <em>Your codes have not been listed recently.</em>
+      <em><%= t "account.listings.empty" %></em>
     </div>
   <% end %>
 </div>

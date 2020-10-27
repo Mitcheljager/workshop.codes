@@ -29,6 +29,7 @@ en:
       button: Support Workshop.codes
     affiliate_ad:
       disclaimer: Purchases made through this link support Workshop.codes
+    localisation_disclaimer_html: <strong>Translations are a work in progress.</strong> Not everything is translated yet, more translations will follow soon.
   posts:
     index:
       title: Overwatch Workshop Codes
@@ -41,9 +42,91 @@ en:
         title: Sort by
         created: Created
         updated: Last Updated
+    show:
+      expired:
+        title: This code is over 6 months old.
+        content: This means the code may have expired and might no longer function.
+      private:
+        title: This code is set to private.
+        content: Only you can see it.
+      unlisted: This code is unlisted.
+      expire_soon:
+        title: Your Code will soon expire.
+        content_html: |
+          <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
+          <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
+          <p><small><em>This code will expire in roughly %{time}.</em></small></p>
+      categories: Categories
+      tags: Tags
+      heroes: Heroes
+      created_at: Created at
+      updated_at: Last updated
+      version: Current version
+      nice_url: Share URL
+      all: All
   post:
     author: By
     categories: Categories
+    expired:
+      title: Possibly expired
+      tooltip_html: <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+  comments:
+    title: Comments
+  comment:
+    reply: Reply
+    edit: Edit
+    delete: Delete
+    max_characters: Max %{count} characters
+    log_in: Log in
+    sign_up: Sign up
+    submit: Comment
+    creator: creator
+  report:
+    action: Report code
+    loading: Loading...
+    modal:
+      disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. This form is not meant to report bugs to the creator of this code.
+  users:
+    show:
+      welcome_html: Hello there, <strong>%{name}</strong>
+      favorites_received: Favorites received
+      views_received: Views received
+      copies_received: Copies received
+      listings_received: Listings
+  account:
+    navigation:
+      overview: Overview
+      notifications: Notifications
+      activity: Activity
+      favorites: Favorites
+      codes: Codes
+      collections: Collections
+      profile: Profile
+      admin: Admin
+      account: Account
+      accessibility: Accessibility
+      logout: Logout
+    listings:
+      title: Listings in the last 60 minutes
+      path: Path
+      unique: Unique listings
+      empty: Your codes have not been listed recently.
+      results_per_post: Results per post
+    analytics:
+      label: Analytics type
+      copies:
+        label: Copies received per day
+        description: This is the total amount of times people clicked on the "copy" button for your items. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+      views:
+        label: Views received per day
+        description: This is the total amount of times people viewed all of your posts. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
+      listings:
+        label: Listings per day (experimental)
+        description: This is the total amount of times your post appear in a list. This can be on the homepage, search results, your profile, or anywhere else posts appear. This value is unique per page. If someone sees your mode twice on the homepage, it counts as one. If someones sees your mode on the homepage and then again in a search result, both are counted.
+      date_note: This data was not recorded before %{date}
+    favorites:
+      title: Favorites
+      empty: You've not yet liked any Codes
   views:
     pagination:
       first: "First"

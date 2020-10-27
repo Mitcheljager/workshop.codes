@@ -1,6 +1,6 @@
 <% content_for :page_title, "Your account" %>
 
-<%= render "layouts/account", title: "Hello there, <strong>#{ current_user.username }</strong>" do %>
+<%= render "layouts/account", title: t(".welcome_html", name: current_user.username) do %>
   <% if current_user.link.blank? && current_user.profile_image.blank? && current_user.description.blank? && current_user.featured_posts.blank? %>
     <div class="well mt-0 mb-1/2">
       <%= link_to "← Customise your profile", edit_profile_path %>
@@ -10,23 +10,23 @@
   <div class="profile-analytics">
     <div class="profile-analytics__cards">
       <div class="card">
-        <span class="card__title">Favorites received</span>
+        <span class="card__title"><%= t "users.show.favorites_received" %></span>
         <%= number_with_delimiter(@posts.pluck(:favorites_count).sum) %>
       </div>
 
       <div class="card">
-        <span class="card__title">Views received</span>
+        <span class="card__title"><%= t "users.show.views_received" %></span>
         <%= number_with_delimiter(@views_received.pluck(:value).sum) %>
       </div>
 
       <div class="card">
-        <span class="card__title">Copies received</span>
+        <span class="card__title"><%= t "users.show.copies_received" %></span>
         <%= number_with_delimiter(@copies_received.pluck(:value).sum) %>
       </div>
 
       <div class="card">
         <span class="card__title flex">
-          Listings
+          <%= t "users.show.listings_received" %>
 
           <div class="tooltip align align-center ml-1/8">
             <small class="text-dark">(new)</small>
@@ -47,46 +47,46 @@
   </div>
 
   <div data-user-analytics data-reveal-by-select-parent>
-    <label class="form-label mt-1/1">Analytics type</label>
+    <label class="form-label mt-1/1"><%= t "account.analytics.label" %></label>
 
     <select class="form-select" data-action="get-user-analytics reveal-by-select" autocomplete="off">
-      <option value="copies" selected>Copies received per day</option>
-      <option value="views">Views received per day</option>
-      <option value="listings">Listings per day (experimental)</option>
+      <option value="copies" selected><%= t "account.analytics.copies.label" %></option>
+      <option value="views"><%= t "account.analytics.views.label" %></option>
+      <option value="listings"><%= t "account.analytics.listings.label" %></option>
     </select>
 
     <div data-reveal-by-select-target="copies">
       <p class="form-hint mt-1/4">
-        This is the total amount of times people clicked on the "copy" button for your items. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+        <%= t "account.analytics.copies.description" %>
       </p>
 
       <% if @posts.any? && @copies_received.any? && @posts.first.created_at < @copies_received.first.created_at %>
         <p class="form-hint">
-          Note: This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
+          <%= t "account.analytics.date_note", date: Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
         </p>
       <% end %>
     </div>
 
     <div data-reveal-by-select-target="views" class="visibility-hidden">
       <p class="form-hint mt-1/4">
-        This is the total amount of times people viewed all of your posts. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
+        <%= t "account.analytics.views.description" %>
       </p>
 
       <% if @posts.any? && @views_received.any? && @posts.first.created_at < @views_received.first.created_at %>
         <p class="form-hint">
-          Note: This data was not recorded before <%= Statistic.where(content_type: :visit).first.created_at.strftime("%Y-%m-%d") %>
+          <%= t "account.analytics.date_note", date: Statistic.where(content_type: :visit).first.created_at.strftime("%Y-%m-%d") %>
         </p>
       <% end %>
     </div>
 
     <div data-reveal-by-select-target="listings" class="visibility-hidden">
       <p class="form-hint mt-1/4">
-        This is the total amount of times your post appear in a list. This can be on the homepage, search results, your profile, or anywhere else posts appear. This value is unique per page. If someone sees your mode twice on the homepage, it counts as one. If someones sees your mode on the homepage and then again in a search result, both are counted.
+        <%= t "account.analytics.listings.description" %>
       </p>
 
       <% if @posts.any? && @listings_received.any? && @posts.first.created_at < @listings_received.first.created_at %>
         <p class="form-hint">
-          Note: This data was not recorded before <%= Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") %>
+          <%= t "account.analytics.date_note", date: Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") %>
         </p>
       <% end %>
     </div>
