@@ -12,42 +12,40 @@
       <%= render "favorites/form", post: post %>
     </div>
 
-    <% cache [post, "information"] do %>
-      <div class="item__code" data-action="copy-to-clipboard" data-target="<%= post.code %>">
-        <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
+    <div class="item__code" data-action="copy-to-clipboard" data-target="<%= post.code %>">
+      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
 
-        <span class="copy">
-          <span data-copy="<%= post.code %>" data-track-copy><%= post.code %></span>
-        </span>
+      <span class="copy">
+        <span data-copy="<%= post.code %>" data-track-copy><%= post.code %></span>
+      </span>
+    </div>
+
+    <div class="item__details">
+      <div class="item__details-item">
+        By |
+        <%= link_to post.user.username.split("#")[0], user_profile_path(post.user) %>
       </div>
 
-      <div class="item__details">
-        <div class="item__details-item">
-          By |
-          <%= link_to post.user.username.split("#")[0], user_profile_path(post.user) %>
-        </div>
+      <div class="item__details-item">
+        Categories |
 
-        <div class="item__details-item">
-          Categories |
-
-          <% post.categories.each do |category| %>
-            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
-          <% end %>
-        </div>
-
-        <% if post.revisions.where("created_at > ?", 6.months.ago).none? %>
-          <div class="item__details-item">
-            <div class="tooltip">
-              ⚠ Possibly expired
-
-              <div class="tooltip__content">
-                <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
-              </div>
-            </div>
-          </div>
+        <% post.categories.each do |category| %>
+          <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
         <% end %>
       </div>
-    <% end %>
+
+      <% if post.revisions.where("created_at > ?", 6.months.ago).none? %>
+        <div class="item__details-item">
+          <div class="tooltip">
+            ⚠ Possibly expired
+
+            <div class="tooltip__content">
+              <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </article>
 <% end %>
 

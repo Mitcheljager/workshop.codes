@@ -1,6 +1,6 @@
 <% content_for :page_title, "While You Wait" %>
 
-<% cache_if @while_you_waits.any?, ["while_you_wait", params[:filter]] do %>
+<% cache_unless params[:filter].present?, "while_you_wait" do %>
   <div class="heading mb-1/2">
     <h1><strong>While You Wait</strong> <small> - Codes to play while in queue</small></h1>
   </div>
