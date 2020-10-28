@@ -155,6 +155,25 @@ en:
       custom_css:
         label: Custom CSS
         help: You're verified, which means you get to add some extra styling to your profile. Be respectful with your styling. Don't hide anything that isn't yours. Don't alter text that isn't yours. Don't go overboard. Misuse may result in your verified status being removed.
+      submit: Save
+  accessibility:
+    edit:
+      title: Accessibility
+      content: Accessibility options help you better navigate the website in case you have difficulty.
+      high_contrast:
+        label: High Contrast
+        description: All contrast on text will be increased. Thin fonts will appear thicker, making it easier to read.
+      large_fonts:
+        label: Large fonts
+        description: All regular and small fonts will appear larger. Fonts that were already large remain unchanged.
+      simple_view:
+        label: Simple view
+        description: The overall layout will appear more simple with less distractions. All non-essential images are removed.
+      pagination_type:
+        title: Pagination type
+        pagination: Pagination
+        infinite_scroll: Infinite scrol
+        load_more_button: Load more button
   views:
     pagination:
       first: "First"
