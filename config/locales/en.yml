@@ -127,6 +127,34 @@ en:
     favorites:
       title: Favorites
       empty: You've not yet liked any Codes
+  profile:
+    edit:
+      title_html: <strong>Customise</strong> your profile
+      go_to_profile: Go to your profile
+    form:
+      verified: You're verified!
+      not_verified: You are not verified (?)
+      verified_description_html: |
+        <p>User names are not unique. A battletag can be the same for multiple users. Being verified helps users indentify that you are indeed you. Furthermore if you are logged in with battle.net you will claim the url without the id. For example path/username#12345 will become path/username. The old url will also remain functional.</p>
+        <p>If you wish to be verified, please contact Mitsiee#9370 on Discord or @ me wherever you want on the Elo Hell Workshop Discord.</p>
+        <p>Please note: To be eligible for verification you need to have made a good number of contributions to the Workshop community. When contacting me please note why you wish to be verified.</p>
+      image:
+        label: Profile image
+        help: The image will be processed to a 140x140 format. Max 2MB.
+        discord: This image is directly from Discord. Adjusting your profile picture on Discord will also change it here.
+      featured_posts:
+        label: Featured codes
+        help: Show up to 3 Featured Codes on your Profile page.
+        empty: You've not yet posted anything.
+      description:
+        label: About you
+        help: Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you. Basic Markdown enabled. Limited to 255 characters.
+      link:
+        label: Link
+        help_html: Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
+      custom_css:
+        label: Custom CSS
+        help: You're verified, which means you get to add some extra styling to your profile. Be respectful with your styling. Don't hide anything that isn't yours. Don't alter text that isn't yours. Don't go overboard. Misuse may result in your verified status being removed.
   views:
     pagination:
       first: "First"
