@@ -93,6 +93,20 @@ en:
       views_received: Views received
       copies_received: Copies received
       listings_received: Listings
+  sessions:
+    login:
+      title: Login
+      username: Username
+      password: Password
+      remember_me: Remember me (uses cookies)
+      submit: Submit
+      forgot_password: Forgot your password?
+      discord: Login with Discord
+      battle_net: Login with Battle.net
+    create_user:
+      title: Create an account
+      content: Don't have an account?
+      button: Create an account
   account:
     navigation:
       overview: Overview
