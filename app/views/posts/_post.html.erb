@@ -1,12 +1,10 @@
 <% cache_unless current_user, post do %>
   <article class="item">
-    <% cache [post, "title_thumbnail"] do %>
-      <%= render "posts/thumbnail", post: post %>
+    <%= render "posts/thumbnail", post: post %>
 
-      <div class="item__title">
-        <%= link_to post.title, post_path(post.code) %>
-      </div>
-    <% end %>
+    <div class="item__title">
+      <%= link_to post.title, post_path(post.code) %>
+    </div>
 
     <div class="item__favorite">
       <%= render "favorites/form", post: post %>
