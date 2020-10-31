@@ -7,7 +7,7 @@
     <%= text_field_tag :query, params[:search], class: "form-input form-input--large", placeholder: " ", itemprop: "query-input", required: "true", autocomplete: "off" %>
 
     <%= label_tag :query do %>
-      <strong>Search </strong> by Titles, Categories, Tags, Codes, Maps, Heroes, or Usernames
+      <%= t("search.label_html") %>
     <% end %>
 
     <%= render "search_terms" if search_terms.any? %>
