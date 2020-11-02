@@ -2,13 +2,13 @@
 
 <% unless params[:page] %>
   <div class="heading mt-1/1">
-    <h1><center><%= t ".title" %></center></h1>
+    <h1><center><%= t(".title") %></center></h1>
   </div>
 <% end %>
 
 <main class="items">
   <% unless params[:page] %>
-    <h2 class="mt-1/2"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t ".on_fire.title_html" %></h2>
+    <h2 class="mt-1/2"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t(".on_fire.title_html") %></h2>
 
     <%= render @hot_posts %>
 
@@ -17,10 +17,10 @@
     <%= render "application/banners/ko_fi" %>
 
     <div class="action-header">
-      <h2 class="mt-1/1"><%= t ".recent.title_html" %></h2>
+      <h2 class="mt-1/1"><%= t(".recent.title_html") %></h2>
 
       <div class="action-header__actions">
-        <span><%= t ".sort.title" %></span>
+        <span><%= t(".sort.title") %></span>
         <div>
           <%= link_to t(".sort.created"), posts_path(1), class: "text-white" %> | <%= link_to t(".sort.updated"), filter_path(sort: "updated") %>
         </div>

@@ -23,12 +23,12 @@
 
       <div class="item__details">
         <div class="item__details-item">
-          <%= t "post.author" %> |
+          <%= t("post.author") %> |
           <%= link_to post.user.username.split("#")[0], user_profile_path(post.user) %>
         </div>
 
         <div class="item__details-item">
-          <%= t "post.categories" %> |
+          <%= t("post.categories") %> |
 
           <% post.categories.each do |category| %>
             <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
@@ -38,10 +38,10 @@
         <% if post.revisions.where("created_at > ?", 6.months.ago).none? %>
           <div class="item__details-item">
             <div class="tooltip">
-              ⚠ <%= t "post.expired.title" %>
+              ⚠ <%= t("post.expired.title") %>
 
               <div class="tooltip__content">
-                <%= t "post.expired.tooltip_html" %>
+                <%= t("post.expired.tooltip_html") %>
               </div>
             </div>
           </div>

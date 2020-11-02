@@ -1,5 +1,5 @@
 <% content_for :page_title, "Editing..." %>
 
-<h1 class="heading"><strong>Editing</strong> "<%= @post.title %>"</h1>
+<h1 class="heading"><%= t(".title_html", title: @post.title) %></h1>
 
 <%= render "form", post: @post, path: post_path(@post.code) %>

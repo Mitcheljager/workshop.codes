@@ -4,8 +4,8 @@
 
 <% if @is_expired %>
   <div class="warning">
-    <p class="mb-0">⚠ <mark><%= t ".expired.title" %></mark></p>
-    <p class="mt-0"><small><%= t ".expired.content" %></small></p>
+    <p class="mb-0">⚠ <mark><%= t(".expired.title") %></mark></p>
+    <p class="mt-0"><small><%= t(".expired.content") %></small></p>
   </div>
 <% end %>
 
@@ -42,21 +42,21 @@
 
       <% if @post.private? %>
         <div class="warning warning--mild mt-1/2">
-          <p class="mb-0 mt-0 text-white">🔐 <%= t ".private.title" %></p>
-          <p class="mt-0 mb-0"><small><%= t ".private.content" %></small></p>
+          <p class="mb-0 mt-0 text-white">🔐 <%= t(".private.title") %></p>
+          <p class="mt-0 mb-0"><small><%= t(".private.content") %></small></p>
         </div>
       <% end %>
 
       <% if @post.unlisted? %>
         <div class="warning warning--mild mt-1/2">
-          <p class="mb-0 text-white mt-0">📃 <%= t ".unlisted" %></p>
+          <p class="mb-0 text-white mt-0">📃 <%= t(".unlisted") %></p>
         </div>
       <% end %>
 
       <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
         <div class="warning mt-1/4">
-          <p><mark>⚠ <%= t ".expire_soon.title" %></mark></p>
-          <%= t ".expire_soon.content_html", time: time_ago_in_words(@post.updated_at + 6.months) %>
+          <p><mark>⚠ <%= t(".expire_soon.title") %></mark></p>
+          <%= t(".expire_soon.content_html", time: time_ago_in_words(@post.updated_at + 6.months)) %>
         </div>
       <% end %>
     <% end %>
@@ -90,7 +90,7 @@
         <%= render "profiles/profile", user: @post.user, small: true %>
 
         <div class="item__details-item">
-          <%= t ".categories" %> |
+          <%= t(".categories") %> |
 
           <% @post.categories.each do |category| %>
             <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
@@ -99,7 +99,7 @@
 
         <% if @post.tags.present? %>
           <div class="item__details-item">
-            <%= t ".tags" %> |
+            <%= t(".tags") %> |
 
             <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
               <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
@@ -108,10 +108,10 @@
         <% end %>
 
         <div class="item__details-item">
-          <%= t ".heroes" %> |
+          <%= t(".heroes") %> |
 
           <% if @post.heroes.length == heroes.length %>
-            <%= t ".all" %>
+            <%= t(".all") %>
           <% else %>
             <% @post.heroes.each do |hero| %>
               <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
@@ -120,10 +120,10 @@
         </div>
 
         <div class="item__details-item">
-          <%= t ".maps" %> |
+          <%= t(".maps") %> |
 
           <% if @post.maps.length == maps.length %>
-            <%= t ".all" %>
+            <%= t(".all") %>
           <% else %>
             <% @post.maps.each do |map| %>
               <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
@@ -132,20 +132,20 @@
         </div>
 
         <div class="item__details-item" title="Created at: <%= @post.created_at %>">
-          <%= t ".created_at" %> |
+          <%= t(".created_at") %> |
 
           <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
         </div>
 
         <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
-          <%= t ".updated_at" %> |
+          <%= t(".updated_at") %> |
 
           <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
         </div>
 
         <% if @post.version.present? %>
           <div class="item__details-item">
-            <%= t ".version" %> |
+            <%= t(".version") %> |
 
             <%= @post.version %>
           </div>
@@ -153,7 +153,7 @@
 
         <% if @post.nice_url.present? %>
           <div class="item__details-item">
-            <%= t ".nice_url" %> |
+            <%= t(".nice_url") %> |
 
             <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
           </div>
@@ -172,7 +172,7 @@
 
   <div class="comments">
     <div class="heading items-heading mb-1/2">
-      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> <%= t "comments.title" %></h2>
+      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> <%= t("comments.title") %></h2>
     </div>
 
     <%= render "comments/form", post: @post %>

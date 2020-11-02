@@ -4,7 +4,7 @@
       <span class="filter__label"><%= t "filter.categories" %></span>
 
       <div class="dropdown" data-dropdown>
-        <%= link_to params[:category] ? params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+        <%= link_to params[:category] ? params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <% if params[:category] %>
@@ -23,7 +23,7 @@
       <span class="filter__label"><%= t "filter.heroes" %></span>
 
       <div class="dropdown" data-dropdown>
-        <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+        <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <% if params[:hero] %>
@@ -46,7 +46,7 @@
       <span class="filter__label"><%= t "filter.maps" %></span>
 
       <div class="dropdown" data-dropdown>
-        <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+        <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <% if params[:map] %>
@@ -72,7 +72,7 @@
             <span class="filter__label"><%= t "filter.from" %></span>
 
             <div class="dropdown" data-dropdown>
-              <%= link_to params[:from] ? time_ago_in_words(params[:from]).gsub("about", "") + " ago" : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+              <%= link_to params[:from] ? time_ago_in_words(params[:from]).gsub("about", "") + " ago" : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
               <div class="dropdown__content" data-dropdown-content>
                 <% if params[:from] %>
@@ -95,7 +95,7 @@
             <span class="filter__label"><%= t "filter.to" %></span>
 
             <div class="dropdown" data-dropdown>
-              <%= link_to params[:to] ? time_ago_in_words(params[:to]).gsub("about", "") + " ago" : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+              <%= link_to params[:to] ? time_ago_in_words(params[:to]).gsub("about", "") + " ago" : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
               <div class="dropdown__content" data-dropdown-content>
                 <% if params[:to] %>
@@ -121,7 +121,7 @@
               <% if params[:search] && !params[:sort] %>
                 <%= link_to "Relevancy", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
               <% else %>
-                <%= link_to params[:sort] ? params[:sort].gsub("-", " ").humanize : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+                <%= link_to params[:sort] ? params[:sort].gsub("-", " ").humanize : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
               <% end %>
 
               <div class="dropdown__content" data-dropdown-content>
@@ -158,7 +158,7 @@
             <span class="filter__label"><%= t "filter.author" %></span>
 
             <div class="dropdown" data-dropdown>
-              <%= link_to params[:author] ? params[:author].split("#")[0] : "Select...", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown get-verified-users" } %>
+              <%= link_to params[:author] ? params[:author].split("#")[0] : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown get-verified-users" } %>
 
               <div class="dropdown__content" data-dropdown-content>
                 <% if params[:author] %>
