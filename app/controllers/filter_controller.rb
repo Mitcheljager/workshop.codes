@@ -22,7 +22,7 @@ class FilterController < ApplicationController
       format.js { render "posts/infinite_scroll_posts" }
       format.json {
         set_request_headers
-        render json: @posts
+        render json: @posts.as_json(except: [:description, :snippet])
       }
     end
   end
