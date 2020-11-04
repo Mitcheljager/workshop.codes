@@ -272,6 +272,10 @@
     }
   }
 
+  .item--single & {
+    height: 100%;
+  }
+
   .simple-view & {
     background: $bg-dark;
     border-radius: 0;

@@ -1,6 +1,6 @@
 class AnalyticsController < ApplicationController
   def post
-    @post = Post.find(params[:id])
+    @post = Post.select_overview_columns.find(params[:id])
 
     return if @post.user != current_user
 

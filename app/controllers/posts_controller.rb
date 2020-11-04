@@ -24,8 +24,8 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user, :revisions).public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
-    @posts = Post.includes(:user, :revisions).public?.order(created_at: :desc).page params[:page]
+    @hot_posts = Post.includes(:user, :revisions).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
+    @posts = Post.includes(:user, :revisions).select_overview_columns.public?.order(created_at: :desc).page params[:page]
 
     respond_to do |format|
       format.html
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.includes(:user, :revisions).public?.where("hotness > 1").order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user, :revisions).select_overview_columns.public?.where("hotness > 1").select_overview_columns.order("hotness DESC").page params[:page]
 
     respond_to do |format|
       format.html
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
+    @post = Post.includes(:user, :revisions, :comments).find_by("upper(posts.code) = ?", params[:code].upcase)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
@@ -93,7 +93,7 @@ class PostsController < ApplicationController
   end
 
   def get_snippet
-    @snippet = Post.visible?.find(params[:id]).snippet
+    @snippet = Post.visible?.select(:snippet).find(params[:id]).snippet
 
     render plain: @snippet
   end

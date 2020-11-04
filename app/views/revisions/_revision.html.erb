@@ -2,24 +2,20 @@
   <div class="item item--single mt-1/2">
     <div class="item__title item__title--small">
       <div>
-        <% if revision.post.user == current_user || revision.snippet.present? %>
-          <div class="dropdown mr-1/4" data-dropdown>
-            <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
-              <%= inline_svg_tag "icons/icon-menu.svg", height: 16 %>
+        <div class="dropdown mr-1/4" data-dropdown>
+          <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
+            <%= inline_svg_tag "icons/icon-menu.svg", height: 16 %>
+          <% end %>
+
+          <div class="dropdown__content dropdown__content--left" data-dropdown-content>
+            <% if revision.post.user == current_user %>
+              <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "dropdown__item" %>
             <% end %>
 
-            <div class="dropdown__content dropdown__content--left" data-dropdown-content>
-              <% if revision.post.user == current_user %>
-                <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "dropdown__item" %>
-              <% end %>
-
-              <% if revision.snippet.present? %>
-                <%= link_to "View changes in snippet", difference_path(revision.id), class: "dropdown__item" %>
-                <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "dropdown__item" %>
-              <% end %>
-            </div>
+            <%= link_to "View changes in snippet", difference_path(revision.id), class: "dropdown__item" %>
+            <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "dropdown__item" %>
           </div>
-        <% end %>
+        </div>
 
         <%= revision.version unless revision.version.empty? %>
       </div>
