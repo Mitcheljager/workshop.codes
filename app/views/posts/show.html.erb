@@ -169,7 +169,7 @@
   <% end %>
 </article>
 
-<% cache_unless current_user, [@post.collection, @post.comments, @post.revisions] do %>
+<% cache_unless current_user, [@post.collection, @post.comments, @revisions] do %>
   <%= render "collections/collections" if @post.collection && @post.collection.posts.many? %>
 
   <div class="comments">
@@ -184,5 +184,5 @@
     </div>
   </div>
 
-  <%= render "revisions/revisions" if @post.revisions.size > 1 %>
+  <%= render "revisions/revisions" if @revisions.size > 1 %>
 <% end %>
