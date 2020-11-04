@@ -44,7 +44,6 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(:user, :revisions, :comments).find_by("upper(posts.code) = ?", params[:code].upcase)
-    @revisions = @post.revisions.where(visible: true).order(created_at: :desc)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
@@ -60,6 +59,8 @@ class PostsController < ApplicationController
         not_found and return unless @post.present?
 
         set_post_images
+        
+        @revisions = @post.revisions.where(visible: true).order(created_at: :desc)
         @is_expired = @revisions.where("created_at > ?", 6.months.ago).none?
       }
       format.json {
