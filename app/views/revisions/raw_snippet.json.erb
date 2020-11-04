@@ -1,1 +1,1 @@
-<%= raw(@revision.snippet) %>
+<%= raw(@revision.snippet.present? ? @revision.snippet : "No snippet is present") %>
