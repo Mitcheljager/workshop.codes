@@ -37,8 +37,6 @@ class SessionsController < ApplicationController
         flash[:alert] = "Username or password is invalid"
       end
 
-      create_activity(:login_failed, @user.id) if @user
-
       redirect_to login_path
     end
   end
