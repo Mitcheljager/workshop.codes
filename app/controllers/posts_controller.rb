@@ -59,7 +59,7 @@ class PostsController < ApplicationController
         not_found and return unless @post.present?
 
         set_post_images
-        @is_expired = @post.revisions.where("created_at > ?", 6.months.ago).none?
+        @is_expired = @post.revisions.last && @post.revisions.last.created_at < 6.months.ago
       }
       format.json {
         set_request_headers

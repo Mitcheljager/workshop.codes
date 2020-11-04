@@ -32,7 +32,7 @@
         <% end %>
       </div>
 
-      <% if post.revisions.where("created_at > ?", 6.months.ago).none? %>
+      <% if post.revisions.last && post.revisions.last.created_at < 6.months.ago %>
         <div class="item__details-item">
           <div class="tooltip">
             ⚠ Possibly expired
