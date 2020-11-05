@@ -172,7 +172,7 @@
 <% cache_unless current_user, [@post.collection, @post.comments, @revisions] do %>
   <%= render "collections/collections" if @post.collection && @post.collection.posts.many? %>
 
-  <div class="comments">
+  <div class="comments" id="comments">
     <div class="heading items-heading mb-1/2">
       <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> Comments</h2>
     </div>
