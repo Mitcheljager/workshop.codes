@@ -14,7 +14,7 @@ module OverwatchWorkshop
     config.exceptions_app = self.routes
     config.active_job.queue_adapter = :sucker_punch
 
-    config.i18n.available_locales = [:en, :ko, :ja, :mixed]
+    config.i18n.available_locales = [:en, :ko, :mixed]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
     config.i18n.fallbacks = [:en]
