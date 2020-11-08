@@ -50,6 +50,15 @@
     display: block;
   }
 
+  &.lg-down\:dropup {
+    @media (max-width: 1099px) {
+      bottom: auto;
+      top: -.5rem;
+      right: 50%;
+      transform: translateY(-100%) translateX(50%);
+    }
+  }
+
   .simple-view & {
     box-shadow: none;
     border: 3px solid lighten($border-color, 10%);
@@ -58,6 +67,11 @@
   hr {
     margin: $margin / 6 0;
     background: lighten($bg-dark, 10%);
+  }
+
+  small {
+    font-size: 12px;
+    line-height: 1.25em;
   }
 }
 
@@ -112,5 +126,9 @@
 
   &:first-child {
     padding-top: .5rem;
+  }
+
+  small {
+    font-size: $font-size-small;
   }
 }
