@@ -38,7 +38,7 @@ class ForgotPasswordsController < ApplicationController
       @user = User.find_by_email(@forgot_password_token.user.email)
 
       if @user.update(forgot_password_params.except(:token, :email))
-        create_activity(:password_reset, @user.id)
+        create_activity(:password_reset, {}, @user.id)
         redirect_to login_path
       else
         render :show
