@@ -55,6 +55,6 @@
   </div>
 </div>
 
-<div class="well line-count">
-  <%= @difference.html_safe %>
+<div class="difference-content line-count">
+  <%= @compare_revision.present? && @compare_revision.snippet.present? ? @difference.html_safe : tag.em("No changes are present") %>
 </div>

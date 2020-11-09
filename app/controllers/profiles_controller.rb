@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
 
     not_found unless @user.present?
 
-    @posts = @user.posts.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
+    @posts = @user.posts.select_overview_columns.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
     @featured_posts = @posts.where(id: @user.featured_posts)
 
     respond_to do |format|
@@ -27,6 +27,8 @@ class ProfilesController < ApplicationController
 
   def edit
     @user = current_user
+    @posts = current_user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc)
+
     redirect_to root_path unless @user
   end
 

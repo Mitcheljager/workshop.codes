@@ -9,8 +9,8 @@ namespace :db do
       Post.create!(
         user_id: 1,
         title: Faker::Lorem.sentence,
-        code: Faker::Alphanumeric.alpha(5),
-        description: Faker::Markdown.sandwich(10, 4),
+        code: Faker::Alphanumeric.alpha(number: 5),
+        description: Faker::Markdown.sandwich(sentences: 10, repeat: 4),
         version: Faker::App.version,
         categories: ["Team Deathmatch", "Solo"],
         heroes: ["Mei"],

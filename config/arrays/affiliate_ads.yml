@@ -17,23 +17,23 @@
     url: https://overwatch-league-shop.sjv.io/c/2456162/803073/11110
     img: //a.impactradius-go.com/display-ad/11110-803073
 -
-  alt: Shop Blizzard Small World of Warcraft Board Game
+  alt: Check out Exclusives at Blizzard Gear Fest!
   lg:
-    id: 845145
-    url: https://blizzardgearstore.l49yho.net/c/2456162/845145/10799
-    img: //a.impactradius-go.com/display-ad/10799-845145
+    id: 921762
+    url: https://blizzardgearstore.l49yho.net/c/2456162/921762/10799
+    img: //a.impactradius-go.com/display-ad/10799-921762
   md:
-    id: 845144
-    url: https://blizzardgearstore.l49yho.net/c/2456162/845144/10799
-    img: //a.impactradius-go.com/display-ad/10799-845144
+    id: 921759
+    url: https://blizzardgearstore.l49yho.net/c/2456162/921759/10799
+    img: //a.impactradius-go.com/display-ad/10799-921759
   sm:
-    id: 845142
-    url: https://blizzardgearstore.l49yho.net/c/2456162/845142/10799
-    img: //a.impactradius-go.com/display-ad/10799-845142
+    id: 921753
+    url: https://blizzardgearstore.l49yho.net/c/2456162/921753/10799
+    img: //a.impactradius-go.com/display-ad/10799-921753
   xs:
-    id: 845138
-    url: https://blizzardgearstore.l49yho.net/c/2456162/845138/10799
-    img: //a.impactradius-go.com/display-ad/10799-845138
+    id: 921746
+    url: https://blizzardgearstore.l49yho.net/c/2456162/921746/10799
+    img: //a.impactradius-go.com/display-ad/10799-921746
 -
   alt: Shop Overwatch Hotwheels Cars
   lg:
@@ -52,3 +52,21 @@
     id: 894892
     url: https://blizzardgearstore.l49yho.net/c/2456162/894892/10799
     img: //a.impactradius-go.com/display-ad/10799-894892
+-
+  alt: Shadowlands Thrall Statue at Blizzard Gear Store
+  lg:
+    id: 915762
+    url: https://blizzardgearstore.l49yho.net/c/2456162/915762/10799
+    img: //a.impactradius-go.com/display-ad/10799-915762
+  md:
+    id: 915761
+    url: https://blizzardgearstore.l49yho.net/c/2456162/915761/10799
+    img: //a.impactradius-go.com/display-ad/10799-915761
+  sm:
+    id: 915758
+    url: https://blizzardgearstore.l49yho.net/c/2456162/915758/10799
+    img: //a.impactradius-go.com/display-ad/10799-915758
+  xs:
+    id: 915755
+    url: https://blizzardgearstore.l49yho.net/c/2456162/915755/10799
+    img: //a.impactradius-go.com/display-ad/10799-915755

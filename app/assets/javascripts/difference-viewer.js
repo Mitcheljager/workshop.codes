@@ -28,6 +28,9 @@ function toggleUnchangedFiles(event) {
 
 function createRules() {
   const element = document.querySelector(".diff")
+
+  if (!element) return
+
   const selectElement = document.querySelector("[data-action='jump-to-rule']")
   const items = element.querySelectorAll("li")
 

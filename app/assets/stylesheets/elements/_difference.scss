@@ -3,8 +3,6 @@
   justify-content: flex-end;
   min-height: 1rem;
   width: 100%;
-  border: 1px solid lighten($border-color, 10%);
-  border-bottom: 0;
   background: $bg-dark;
   font-size: $font-size-small;
 
@@ -25,6 +23,13 @@
   padding: .5rem .75rem;
   border-left: 1px solid lighten($border-color, 10%);
   text-decoration: none;
+}
+
+.difference-content {
+  padding: 1rem;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  background: $bg-darker;
 }
 
 .diff{overflow:auto; counter-reset: diff; color: $text-color-light}

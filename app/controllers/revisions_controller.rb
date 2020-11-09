@@ -8,7 +8,7 @@ class RevisionsController < ApplicationController
 
   def index
     @post = Post.find_by_code(params[:code])
-    @revisions = Revision.where(post_id: @post).order(created_at: :desc)
+    @revisions = Revision.where(post_id: @post).select(:id, :post_id, :version, :code, :description, :created_at, :updated_at).order(created_at: :desc)
   end
 
   def show
@@ -18,9 +18,9 @@ class RevisionsController < ApplicationController
     not_found and return if @post.private? && @post.user != current_user
 
     if params[:compare_id].present?
-      @compare_revision = @post.revisions.find(params[:compare_id])
+      @compare_revision = Revision.where(post_id: @post.id).find(params[:compare_id])
     else
-      @compare_revision = @post.revisions.where("id < ?", @revision.id).last
+      @compare_revision = Revision.where(post_id: @post.id).where("id < ?", @revision.id).last
     end
 
     @difference = Diffy::Diff.new(@compare_revision.present? ? @compare_revision.snippet : "", @revision.snippet).to_s(:html_simple)

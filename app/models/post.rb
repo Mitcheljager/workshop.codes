@@ -55,7 +55,7 @@ class Post < ApplicationRecord
   belongs_to :collection, optional: true
 
   has_many :favorites, dependent: :destroy
-  has_many :revisions, dependent: :destroy
+  has_many :revisions, -> { select("created_at", "updated_at", "post_id", "id", "version", "code", "description") }, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :while_you_waits, dependent: :destroy
   has_many :email_notifications, dependent: :destroy
@@ -122,6 +122,10 @@ class Post < ApplicationRecord
     else
       self
     end
+  end
+
+  def self.select_overview_columns
+    self.select(Post.attribute_names - ["snippet", "description"])
   end
 
   def self.visible?

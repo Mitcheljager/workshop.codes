@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = current_user.posts
+    @posts = current_user.posts.select(:id, :created_at)
     @statistics_for_user = Statistic.where.not(content_type: :listing).where(model_id: @posts.pluck(:id))
     @copies_received = @statistics_for_user.where(content_type: :copy).order(created_at: :asc)
     @views_received = @statistics_for_user.where(content_type: :visit).order(created_at: :asc)
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def listings
-    @posts = current_user.posts
+    @posts = current_user.posts.select(:id, :created_at, :code, :title)
     @recent_listings = Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").pluck(:properties).select { |l| @posts.pluck(:id).include?(l["id"]) }
 
     render partial: "listings"
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   end
 
   def posts
-    @posts = current_user.posts.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
+    @posts = current_user.posts.select_overview_columns.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
   end
 
   def accessibility; end

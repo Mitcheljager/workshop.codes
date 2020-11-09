@@ -47,8 +47,8 @@
       <td><%= post.impressions_count %></td>
       <td><%= post.listings_count %></td>
       <td><%= post.hotness %></td>
-      <td><%= post.revisions.count %></td>
-      <td><%= post.comments.count %></td>
+      <td><%= post.revisions.size %></td>
+      <td><%= post.comments.size %></td>
       <td><%= "✔" if post.images.any? %></td>
       <td><%= "✔" if post.email_notifications.any? %></td>
       <td><%= "✔" if post.snippet.present? %></td>

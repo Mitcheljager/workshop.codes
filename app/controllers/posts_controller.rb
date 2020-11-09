@@ -24,8 +24,8 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user, :revisions).locale.public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
-    @posts = Post.includes(:user, :revisions).locale.public?.order(created_at: :desc).page params[:page]
+    @hot_posts = Post.includes(:user, :revisions).locale.select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
+    @posts = Post.includes(:user, :revisions).locale.select_overview_columns.public?.order(created_at: :desc).page params[:page]
 
     respond_to do |format|
       format.html
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.includes(:user, :revisions).locale.public?.where("hotness > 1").order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user, :revisions).locale.select_overview_columns.public?.where("hotness > 1").locale.select_overview_columns.order("hotness DESC").page params[:page]
 
     respond_to do |format|
       format.html
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :revisions, :comments).find_by("upper(code) = ?", params[:code].upcase)
+    @post = Post.includes(:user, :revisions, :comments).find_by("upper(posts.code) = ?", params[:code].upcase)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
@@ -59,7 +59,9 @@ class PostsController < ApplicationController
         not_found and return unless @post.present?
 
         set_post_images
-        @is_expired = @post.revisions.where("created_at > ?", 6.months.ago).none?
+
+        @revisions = @post.revisions.where(visible: true).order(created_at: :desc)
+        @is_expired = @revisions.where("created_at > ?", 6.months.ago).none?
       }
       format.json {
         set_request_headers
@@ -93,7 +95,7 @@ class PostsController < ApplicationController
   end
 
   def get_snippet
-    @snippet = Post.visible?.find(params[:id]).snippet
+    @snippet = Post.visible?.select(:snippet).find(params[:id]).snippet
 
     render plain: @snippet
   end
