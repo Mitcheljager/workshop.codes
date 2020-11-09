@@ -101,6 +101,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.locale = params[:locale]
 
     set_post_status
 

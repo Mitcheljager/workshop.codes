@@ -68,6 +68,7 @@ ko:
       nice_url: URL 공유
       all: 전체
     new:
+      page_title: 새로 만들기
       title_html: <strong>새로 만들기</strong> 워크샵 코드
     edit:
       title_html: <strong>편집</strong> "%{title}"
@@ -110,7 +111,7 @@ ko:
         label: 설명
         help_html: |
           사람들이 게임을 플레이하는데 도움이 될 간단한 설명을 작성하세요. 제어 및 규칙에 대한 간단한 설명은 진행 상황을 설명하는데 도움이됩니다. <br>
-          <strong>이 설명은 전체 마크 다운이 활성화되어 있습니다.</strong> **굵은 활자체**, _이탤릭체_, %{link}. <code> [youtube VIDEO_ID] </code>를 사용하여 YouTube 동영상을 추가하십시오. (동영상 ID는 굵게 표시됨 : youtube.com/watch?v= <strong> FqnKB22pOC0 </strong>)
+          <strong>이 설명은 전체 마크 다운이 활성화되어 있습니다.</strong> **굵은 활자체**, _이탤릭체_, %{link}. <code>[youtube VIDEO_ID]</code>를 사용하여 YouTube 동영상을 추가하십시오. (동영상 ID는 굵게 표시됨 : youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
         show_preview: 미리보기 표시
       snippet:
         title: 코드 스니펫

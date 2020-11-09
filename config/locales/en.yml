@@ -68,6 +68,7 @@ en:
       nice_url: Share URL
       all: All
     new:
+      page_title: Create new
       title_html: <strong>Create new</strong> Workshop Code
     edit:
       title_html: <strong>Editing</strong> "%{title}"

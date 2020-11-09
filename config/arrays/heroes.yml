@@ -1,96 +1,128 @@
 -
   name: D.va
+  ko: D.va
   category: Tank
 -
   name: Orisa
+  ko: 오리사
   category: Tank
 -
   name: Reinhardt
+  ko: 라인하르트
   category: Tank
 -
   name: Roadhog
+  ko: 로드호그
   category: Tank
 -
   name: Sigma
+  ko: 시그마
   category: Tank
 -
   name: Winston
+  ko: 윈스턴
   category: Tank
 -
   name: Wrecking Ball
+  ko: 레킹볼
   category: Tank
 -
   name: Zarya
+  ko: 자리야
   category: Tank
 -
   name: Ashe
+  ko: 애쉬
   category: Damage
 -
   name: Bastion
+  ko: 바스티온
   category: Damage
 -
   name: Doomfist
+  ko: 둠피스트
   category: Damage
 -
   name: Echo
+  ko: 에코
   category: Damage
 -
   name: Genji
+  ko: 겐지
   category: Damage
 -
   name: Hanzo
+  ko: 한조
   category: Damage
 -
   name: Junkrat
+  ko: 정크랫
   category: Damage
 -
   name: McCree
+  ko: 맥크리
   category: Damage
 -
   name: Mei
+  ko: 메이
   category: Damage
 -
   name: Pharah
+  ko: 파라
   category: Damage
 -
   name: Reaper
+  ko: 리퍼
   category: Damage
 -
   name: "Soldier: 76"
+  ko: "솔저: 76"
   category: Damage
 -
   name: Sombra
+  ko: 솜브라
   category: Damage
 -
   name: Symmetra
+  ko: 시메트라
   category: Damage
 -
   name: Torbjörn
+  ko: 토르비욘
   category: Damage
 -
   name: Tracer
+  ko: 트레이서
   category: Damage
 -
   name: Widowmaker
+  ko: 위도우메이커
   category: Damage
 -
   name: Ana
+  ko: 아나
   category: Support
 -
   name: Baptiste
+  ko: 바티스트
   category: Support
 -
   name: Brigitte
+  ko: 브리기테
   category: Support
 -
   name: Lúcio
+  ko: 루시우
   category: Support
 -
   name: Mercy
+  ko: 메르시
   category: Support
 -
   name: Moira
+  ko: 모이라
   category: Support
 -
   name: Zenyatta
+  ko: 젠야타
   category: Support

@@ -35,7 +35,8 @@
             <span class="dropdown__label"><%= hero_category %></span>
 
             <% heroes.each do |hero| %>
-              <%= link_to hero["name"], build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item" %>
+              <% name = I18n.locale == I18n.default_locale ? hero["name"] : hero[I18n.locale.to_s] %>
+              <%= link_to name, build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item" %>
             <% end %>
           <% end %>
         </div>
@@ -58,7 +59,8 @@
             <span class="dropdown__label"><%= map_type %></span>
 
             <% maps.each do |map| %>
-              <%= link_to map["name"], build_filter_path(:map, to_slug(map["name"])), class: "dropdown__item" %>
+              <% name = I18n.locale == I18n.default_locale ? map["name"] : map[I18n.locale.to_s] %>
+              <%= link_to name, build_filter_path(:map, to_slug(map["name"])), class: "dropdown__item" %>
             <% end %>
           <% end %>
         </div>
