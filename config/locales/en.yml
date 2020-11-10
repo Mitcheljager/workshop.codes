@@ -18,6 +18,8 @@ en:
     select: Select...
     remove: ✕ Remove Filter
     remove_all: Remove filters
+    more: More filters
+    less: Less filters
   search:
     label_html: <strong>Search </strong> by Titles, Categories, Tags, Codes, Maps, Heroes, or Usernames
   footer:

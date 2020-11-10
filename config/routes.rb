@@ -36,19 +36,6 @@ Rails.application.routes.draw do
     post "posts", action: "find_post", as: "find_post"
   end
 
-  namespace :wiki do
-    root to: "base#index"
-    resources :categories, param: :slug, concerns: :paginatable, except: [:show]
-    get "categories/:slug(/page/:page)", to: "categories#show"
-
-    resources :articles, param: :slug, concerns: :paginatable
-    resources :edits, concerns: :paginatable
-    get "edits/article/:group_id", to: "edits#article", as: "article_edits"
-
-    post "search", to: "search#query", as: "search"
-    get "search/:query", to: "search#index", as: "search_results"
-  end
-
   get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
 
   post "analytics/post", to: "analytics#post", as: "post_analytics"
@@ -109,10 +96,10 @@ Rails.application.routes.draw do
     get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
-    get "/(page/:page)", to: "posts#index"
-    get "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
-    post "/(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
-    get "/search", to: "search#show"
+    get "(page/:page)", to: "posts#index"
+    get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
+    post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/search", to: "search#index", as: "search_post"
+    get "search", to: "search#show"
     get "get-verified-users", to: "filter#get_verified_users"
 
     resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :show, :edit, :update, :destroy]
@@ -120,6 +107,19 @@ Rails.application.routes.draw do
     constraints code: /.{5,6}/ do
       resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show]
       get ":code", to: "posts#show"
+    end
+
+    namespace :wiki do
+      root to: "base#index"
+      resources :categories, param: :slug, concerns: :paginatable, except: [:show]
+      get "categories/:slug(/page/:page)", to: "categories#show"
+
+      resources :articles, param: :slug, concerns: :paginatable
+      resources :edits, concerns: :paginatable
+      get "edits/article/:group_id", to: "edits#article", as: "article_edits"
+
+      post "search", to: "search#query", as: "search"
+      get "search/:query", to: "search#index", as: "search_results"
     end
   end
 

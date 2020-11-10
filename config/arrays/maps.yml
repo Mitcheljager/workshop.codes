@@ -1,190 +1,190 @@
 -
-  name: Hanamura
+  en: Hanamura
   ko: 하나무라
   type: Assault
   slug: hanamura
 -
-  name: Horizon Lunar Colony
+  en: Horizon Lunar Colony
   ko: 호라이즌 달 기지
   type: Assault
   slug: horizon-lunar-colony
 -
-  name: Paris
+  en: Paris
   ko: 파리
   type: Assault
   slug: paris
 -
-  name: Temple of Anubis
+  en: Temple of Anubis
   ko:  아누비스 신전
   type: Assault
   slug: temple-of-anubis
 -
-  name: Volskaya Industries
+  en: Volskaya Industries
   ko: 볼스카야 인더스트리
   type: Assault
   slug: volskaya-industries
 -
-  name: Dorado
+  en: Dorado
   ko: 도라도
   type: Escort
   slug: dorado
 -
-  name: Havana
+  en: Havana
   ko: 하바나
   type: Escort
   slug: havana
 -
-  name: Junkertown
+  en: Junkertown
   ko: 쓰레기촌
   type: Escort
   slug: junkertown
 -
-  name: Rialto
+  en: Rialto
   ko: 리알토
   type: Escort
   slug: rialto
 -
-  name: Route 66
+  en: Route 66
   ko: 66번 국도
   type: Escort
   slug: route-66
 -
-  name: "Watchpoint: Gibraltar"
+  en: "Watchpoint: Gibraltar"
   ko: "감시 기지: 지브롤터"
   type: Escort
   slug: watchpoint-gibraltar
 -
-  name: Blizzard World
+  en: Blizzard World
   ko: 블리자드 월드
   type: Hybrid
   slug: blizzard-world
 -
-  name: Eichenwalde
+  en: Eichenwalde
   ko: 아이헨발데
   type: Hybrid
   slug: eichenwalde
 -
-  name: Hollywood
+  en: Hollywood
   ko: 할리우드
   type: Hybrid
   slug: hollywood
 -
-  name: King's Row
+  en: King's Row
   ko:  왕의 길
   type: Hybrid
   slug: kings-row
 -
-  name: Numbani
+  en: Numbani
   ko: 눔바니
   type: Hybrid
   slug: numbani
 -
-  name: Busan
+  en: Busan
   ko: 부산
   type: Control
   slug: busan
 -
-  name: Ilios
+  en: Ilios
   ko: 일리오스
   type: Control
   slug: ilios
 -
-  name: Lijiang Tower
+  en: Lijiang Tower
   ko: 리장 타워
   type: Control
   slug: lijiang-tower
 -
-  name: Nepal
+  en: Nepal
   ko: 네팔
   type: Control
   slug: nepal
 -
-  name: Oasis
+  en: Oasis
   ko: 오아시스
   type: Control
   slug: oasis
 -
-  name: Black Forest
+  en: Black Forest
   ko: 검은 숲
   type: Arcade
   slug: black-forest
 -
-  name: Castillo
+  en: Castillo
   ko: 카스티요
   type: Arcade
   slug: castillo
 -
-  name: "Ecopoint: Antarctica"
+  en: "Ecopoint: Antarctica"
   ko: "탐사 기지: 남극"
   type: Arcade
   slug: ecopoint-antarctica
 -
-  name: Necropolis
+  en: Necropolis
   ko: 네크로폴리스
   type: Arcade
   slug: necropolis
 -
-  name: Estádio das Rãs
+  en: Estádio das Rãs
   ko: 이스타지우 다스 하스
   type: Lúcioball
   slug: estadio-das-ras
 -
-  name: Sydney Harbour Arena
+  en: Sydney Harbour Arena
   ko: 시드니 하버 아레나
   type: Lúcioball
   slug: sydney-harbour-arena
 -
-  name: Sydney Harbour Arena Classic
+  en: Sydney Harbour Arena Classic
   ko: 시드니 하버 아레나 권위 있는
   type: Lúcioball
   slug: sydney-harbour-arena-classic
 -
-  name: Busan Stadium
+  en: Busan Stadium
   ko: 부산 스타디움
   type: Lúcioball
   slug: busan-stadium
 -
-  name: Busan Stadium Classic
+  en: Busan Stadium Classic
   ko: 부산 스타디움 권위 있는
   type: Lúcioball
   slug: busan-stadium-classic
 -
-  name: Château Guillard
+  en: Château Guillard
   ko: 샤토 기야르
   type: Deathmatch
   slug: chateau-guillard
 -
-  name: Petra
+  en: Petra
   ko: 페트라
   type: Deathmatch
   slug: petra
 -
-  name: Ayutthaya
+  en: Ayutthaya
   ko: 아유타야
   type: Capture the Flag
   slug: ayutthaya
 -
-  name: Practice Range
+  en: Practice Range
   ko: 훈련장
   type: Practice
   slug: practice-range
 -
-  name: Workshop Chamber
+  en: Workshop Chamber
   ko: 워크샵 방
   type: Workshop
   slug: workshop-chamber
 -
-  name: Workshop Island
+  en: Workshop Island
   ko: 워크샵 섬
   type: Workshop
   slug: workshop-island
 -
-  name: Workshop Expanse
+  en: Workshop Expanse
   ko: 워크샵 개활지
   type: Workshop
   slug: workshop-expanse
 -
-  name: Workshop Green Screen
+  en: Workshop Green Screen
   ko: 워크샵 초록색 화면
   type: Workshop
   slug: workshop-green-screen

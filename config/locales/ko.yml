@@ -18,6 +18,8 @@ ko:
     select: 선택하기...
     remove: ✕ 필터 제거
     remove_all: 필터 제거
+    more: 추가 필터
+    less: 적은 필터
   search:
     label_html: <strong>서치 </strong> 제목, 카테고리, 태그, 코드,맵, 영웅 또는 유저네임 별
   footer:
@@ -26,10 +28,10 @@ ko:
     disclaimer: 모든 이미지와 아이콘은 각 소유자의 것입니다.
   banner:
     kofi:
-      title: 워크샵.코드 지원 중
+      title: Workshop.codes 지원 중
       tagline: 알고보니 웹사이트는 비싸고 광고는 형편없습니다.
-      content: 워크샵.코드만 지원
-      button: 워크샵.코드 지원
+      content: Workshop.codes  지원
+      button: Workshop.codes 지원
     affiliate_ad:
       disclaimer: 이 링크를 통한 구매는 워크샵.코드를 지원합니다.
     localisation_disclaimer_html: <strong>번역이 진행중입니다.</strong> 아직 모든 것이 번역된 것은 아니며 곧 더 많이 번역될 것입니다.

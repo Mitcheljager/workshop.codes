@@ -21,12 +21,11 @@
 
       <hr>
 
-      <%= link_to "en - English", url_for(locale: nil), class: "dropdown__item" %>
-      <%= link_to "ko - 한국어", url_for(locale: :ko), class: "dropdown__item" %>
-
-      <%= link_to url_for(locale: :mixed), class: "dropdown__item block" do %>
+      <%= link_to "en - English", url_for(params.clone.permit!.merge(locale: nil)), class: "dropdown__item" %>
+      <%= link_to "ko - 한국어", url_for(params.clone.permit!.merge(locale: :ko)), class: "dropdown__item" %>
+      <%= link_to url_for(params.clone.permit!.merge(locale: :mixed)), class: "dropdown__item block" do %>
         Mixed
-        <small class="block mt-1/8 text-base">Mixed shows all codes for all languages, with the website displayed in English.</small>
+        <small class="block mt-1/8 text-base">Show all codes for all languages, with the website displayed in English.</small>
       <% end %>
     </div>
   </div>

@@ -1,20 +1,60 @@
-- Free for all
-- Team Deathmatch
-- Solo
-- Elimination
-- 1vs1
-- King of the Hill
-- Boss Mode
-- Minigames
-- Parkour
-- Race
-- Survival
-- Protect
-- Hide and Seek
-- PvE
-- Practice Mode
-- Hero Adjustments
-- New Heroes
-- Scrims
-- Tools
-- Miscellaneous
+-
+  en: Free for all
+  ko: 개인전
+-
+  en: Team Deathmatch
+  ko: 팀 데스매치
+-
+  en: Solo
+  ko: 솔로
+-
+  en: Elimination
+  ko: 섬멸전
+-
+  en: 1vs1
+  ko: "1대1"
+-
+  en: King of the Hill
+  ko: 쟁탈
+-
+  en: Boss Mode
+  ko: 보스전
+-
+  en: Minigames
+  ko: 미니게임
+-
+  en: Parkour
+  ko: 파쿠르
+-
+  en: Race
+  ko: 경주
+-
+  en: Survival
+  ko: 서바이벌
+-
+  en: Protect
+  ko: 호위
+-
+  en: Hide and Seek
+  ko: 숨바꼭질
+-
+  en: PvE
+  ko: 협동전
+-
+  en: Practice Mode
+  ko: 연습 모드
+-
+  en: Hero Adjustments
+  ko: 영웅 리메이크
+-
+  en: New Heroes
+  ko: 창작 영웅
+-
+  en: Scrims
+  ko: 스크림
+-
+  en: Tools
+  ko: 도구
+-
+  en: Miscellaneous
+  ko: 기타

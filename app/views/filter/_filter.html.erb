@@ -4,7 +4,9 @@
       <span class="filter__label"><%= t "filter.categories" %></span>
 
       <div class="dropdown" data-dropdown>
-        <%= link_to params[:category] ? params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+        <% current_category = params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") if params[:category] %>
+        <% i18n_category = i18n_value_in_array(categories, current_category) if current_category.present? %>
+        <%= link_to current_category.present? ? i18n_category : t("filter.select"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <% if params[:category] %>
@@ -13,7 +15,7 @@
           <% end %>
 
           <% categories.each do |category| %>
-            <%= link_to category, build_filter_path(:category, to_slug(category)), class: "dropdown__item" %>
+            <%= link_to category[current_locale], build_filter_path(:category, to_slug(category["en"])), class: "dropdown__item" %>
           <% end %>
         </div>
       </div>
@@ -35,8 +37,8 @@
             <span class="dropdown__label"><%= hero_category %></span>
 
             <% heroes.each do |hero| %>
-              <% name = I18n.locale == I18n.default_locale ? hero["name"] : hero[I18n.locale.to_s] %>
-              <%= link_to name, build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item" %>
+              <% name = i18n_value_in_array(heroes, hero["en"]) %>
+              <%= link_to name, build_filter_path(:hero, to_slug(hero["en"])), class: "dropdown__item" %>
             <% end %>
           <% end %>
         </div>
@@ -59,8 +61,8 @@
             <span class="dropdown__label"><%= map_type %></span>
 
             <% maps.each do |map| %>
-              <% name = I18n.locale == I18n.default_locale ? map["name"] : map[I18n.locale.to_s] %>
-              <%= link_to name, build_filter_path(:map, to_slug(map["name"])), class: "dropdown__item" %>
+              <% name = i18n_value_in_array(maps, map["en"]) %>
+              <%= link_to name, build_filter_path(:map, to_slug(map["en"])), class: "dropdown__item" %>
             <% end %>
           <% end %>
         </div>
@@ -184,8 +186,8 @@
           <%= link_to t("filter.remove_all"), params[:search] ? "/search/#{ params[:search] }" : posts_path(1), class: "filter__link filter__link--remove" %>
         <% end %>
 
-        <%= button_tag "#{ params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? && params[:author].nil?  ? "+ More filters" : "- Less filters" }", class: "filter__link",
-                       data: { action: "toggle-content", hide_with: "+ More filters", show_with: "- Less filters" } %>
+        <%= button_tag "#{ params[:from].nil? && params[:to].nil? && params[:sort].nil? && params[:expired].nil? && params[:author].nil?  ? "+ #{ t("filter.more") }" : "- #{ t("filter.less") }" }", class: "filter__link",
+                       data: { action: "toggle-content", hide_with: "+ #{ t("filter.more") }", show_with: "- #{ t("filter.less") }" } %>
       </div>
     </div>
   </nav>

@@ -1,6 +1,6 @@
-<% cache_unless current_user, post do %>
+<% cache_unless current_user, [current_locale, post] do %>
   <article class="item">
-    <% cache [post, "title_thumbnail"] do %>
+    <% cache [current_locale, post, "title_thumbnail"] do %>
       <%= render "posts/thumbnail", post: post %>
 
       <div class="item__title">
@@ -12,7 +12,7 @@
       <%= render "favorites/form", post: post %>
     </div>
 
-    <% cache [post, "information"] do %>
+    <% cache [current_locale, post, "information"] do %>
       <div class="item__code" data-action="copy-to-clipboard" data-target="<%= post.code %>">
         <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
 
@@ -31,7 +31,7 @@
           <%= t("post.categories") %> |
 
           <% post.categories.each do |category| %>
-            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
+            <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
           <% end %>
         </div>
 

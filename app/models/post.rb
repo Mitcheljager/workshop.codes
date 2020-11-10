@@ -29,7 +29,7 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
     return unless value
-    array = options[:array].pluck("name")
+    array = options[:array].pluck("en")
 
     value.each do |item|
       unless array.include? item
