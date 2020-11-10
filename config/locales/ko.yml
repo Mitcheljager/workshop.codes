@@ -2,7 +2,7 @@ ko:
   navigation:
     recent: 최신
     on_fire: 온 파이어
-    while_you_wait: 대기중
+    while_you_wait: 기다리는 동안
     wiki: 위키
     create: 만들기
   filter:
@@ -21,7 +21,7 @@ ko:
     more: 추가 필터
     less: 적은 필터
   search:
-    label_html: <strong>서치 </strong> 제목, 카테고리, 태그, 코드,맵, 영웅 또는 유저네임 별
+    label_html: <strong>검색 </strong> 제목, 카테고리, 태그, 코드,맵, 영웅 또는 유저네임 별
   footer:
     privacy_policy: 개인정보 보호정책
     copyright: 저작권
@@ -64,6 +64,7 @@ ko:
       categories: 카테고리
       tags: 태그
       heroes: 영웅
+      maps: 맵
       created_at: 만들어짐
       updated_at: 마지막 업데이트
       version: 현재 버전

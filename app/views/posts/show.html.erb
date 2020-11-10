@@ -93,7 +93,7 @@
           <%= t(".categories") %> |
 
           <% @post.categories.each do |category| %>
-            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
+            <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
           <% end %>
         </div>
 
@@ -114,7 +114,7 @@
             <%= t(".all") %>
           <% else %>
             <% @post.heroes.each do |hero| %>
-              <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
+              <%= link_to i18n_value_in_array(heroes, hero), filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
             <% end %>
           <% end %>
         </div>
@@ -126,7 +126,7 @@
             <%= t(".all") %>
           <% else %>
             <% @post.maps.each do |map| %>
-              <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
+              <%= link_to i18n_value_in_array(maps, map), filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
             <% end %>
           <% end %>
         </div>

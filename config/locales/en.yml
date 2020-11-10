@@ -64,6 +64,7 @@ en:
       categories: Categories
       tags: Tags
       heroes: Heroes
+      maps: Maps
       created_at: Created at
       updated_at: Last updated
       version: Current version
