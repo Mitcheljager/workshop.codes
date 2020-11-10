@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   before_action :login_from_cookie
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
+  before_action :redirect_default_locale
   around_action :set_current_user
   after_action :track_listing
 
@@ -80,6 +81,12 @@ class ApplicationController < ActionController::Base
   def redirect_non_www
     if /^www/.match(request.host)
       redirect_to("#{ request.url }".gsub("www.", ""), status: 301)
+    end
+  end
+
+  def redirect_default_locale
+    if params[:locale] == "en"
+      redirect_to(request.original_url.gsub("/en", ""), status: 301)
     end
   end
 

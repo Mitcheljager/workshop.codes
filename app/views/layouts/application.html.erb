@@ -19,7 +19,10 @@
     <%= render "application/og_tags" %>
     <%= render "favicons" %>
 
-    <link rel="canonical" href="<%= non_www_url %>" />
+    <% if I18n.locale == :mixed %>
+      <link rel="canonical" href="<%= request.original_url.gsub("/mixed", "") %>" />
+    <% end %>
+
     <link rel="manifest" href="/manifest.json">
 
     <%= inline_css "application.css" %>
