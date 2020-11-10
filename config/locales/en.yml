@@ -2,7 +2,7 @@ en:
   navigation:
     recent: Recent
     on_fire: On Fire
-    while_you_wait: While you wait
+    while_you_wait: While You Wait
     wiki: Wiki
     create: Create
   filter:
@@ -313,19 +313,19 @@ en:
       last: Last
       previous: Prev
       next: Next
-    activerecord:
-      errors:
-        models:
-          post:
-            attributes:
-              categories:
-                too_long_array: can be a maximum of %{count} items
-                not_part_of_array: ": You have selected a category that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
-              heroes:
-                not_part_of_array: ": You have selected a Hero that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
-              maps:
-                not_part_of_array: ": You have selected a Map that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
-          user:
-            attributes:
-              featured_posts:
-                too_long_array: can be maximum of %{count} codes
+  activerecord:
+    errors:
+      models:
+        post:
+          attributes:
+            categories:
+              too_long_array: can be a maximum of %{count} items
+              not_part_of_array: ": You have selected a category that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
+            heroes:
+              not_part_of_array: ": You have selected a Hero that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
+            maps:
+              not_part_of_array: ": You have selected a Map that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
+        user:
+          attributes:
+            featured_posts:
+              too_long_array: can be maximum of %{count} codes

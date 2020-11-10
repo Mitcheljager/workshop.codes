@@ -105,7 +105,7 @@ Rails.application.routes.draw do
     resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :show, :edit, :update, :destroy]
 
     constraints code: /.{5,6}/ do
-      resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show]
+      resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]
       get ":code", to: "posts#show"
     end
 
@@ -122,6 +122,8 @@ Rails.application.routes.draw do
       get "search/:query", to: "search#index", as: "search_results"
     end
   end
+
+  post "/new", to: "posts#create", as: "create_post"
 
   constraints nice_url: /[a-zA-Z0-9-]+/ do
     get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: lambda { |request|
