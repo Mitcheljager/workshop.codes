@@ -29,7 +29,7 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
     return unless value
-    array = options[:array].pluck("name")
+    array = options[:array].pluck("en")
 
     value.each do |item|
       unless array.include? item
@@ -76,10 +76,11 @@ class Post < ApplicationRecord
   serialize :maps, JSON
 
   validates :user_id, presence: true
+  validates :locale, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }
   validates :code, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 5, maximum: 6 }, format: { with: /\A[A-Za-z0-9]+\z/, message: "is invalid. Only letters and numbers are allowed." }
   validates :nice_url, uniqueness: true, allow_blank: true, length: { minimum: 7, maximum: 20 }, format: { with: /\A[a-z0-9-]+\z/, message: "is invalid. Only lowercase letter, numbers, and dashes are allowed." }
-  validates :categories, presence: true, array_length: { maximum: 3 }, array_part_of: { array: categories }
+  validates :categories, presence: true, array_length: { maximum: 3 }, array_name_part_of: { array: categories }
   validates :tags, length: { maximum: 100 }
   validates :heroes, presence: true, array_name_part_of: { array: heroes }
   validates :maps, presence: true, array_name_part_of: { array: maps }
@@ -114,6 +115,14 @@ class Post < ApplicationRecord
 
   def as_indexed_json(options={})
     self.as_json(include: { user: { only: :username } } )
+  end
+
+  def self.locale
+    if I18n.locale && I18n.locale != :mixed
+      self.where(locale: I18n.locale)
+    else
+      self
+    end
   end
 
   def self.select_overview_columns

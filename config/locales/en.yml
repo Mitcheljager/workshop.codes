@@ -1,41 +1,319 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
+  navigation:
+    recent: Recent
+    on_fire: On Fire
+    while_you_wait: While You Wait
+    wiki: Wiki
+    create: Create
+  filter:
+    categories: Categories
+    heroes: Heroes
+    maps: Maps
+    from: From
+    to: To
+    sort: Sort
+    exclude_expired: Exclude expired
+    author: Author
+    verified_authors: This is a list of verified creators
+    select: Select...
+    remove: ✕ Remove Filter
+    remove_all: Remove filters
+    more: More filters
+    less: Less filters
+  search:
+    label_html: <strong>Search </strong> by Titles, Categories, Tags, Codes, Maps, Heroes, or Usernames
+  footer:
+    privacy_policy: Privacy Policy
+    copyright: Copyright
+    disclaimer: All images and icons belong to their respective owner.
+  banner:
+    kofi:
+      title: Support Workshop.codes on
+      tagline: Turns out websites are expensive and ads suck.
+      content: Support Workshop.codes for just
+      button: Support Workshop.codes
+    affiliate_ad:
+      disclaimer: Purchases made through this link support Workshop.codes
+    localisation_disclaimer_html: <strong>Translations are a work in progress.</strong> Not everything is translated yet, more translations will follow soon.
+  posts:
+    index:
+      title: Overwatch Workshop Codes
+      on_fire:
+        title_html: <strong>On Fire</strong> Items
+        button: View all On Fire items
+      recent:
+        title_html: <strong>Recent</strong> Items
+      sort:
+        title: Sort by
+        created: Created
+        updated: Last Updated
+    show:
+      expired:
+        title: This code is over 6 months old.
+        content: This means the code may have expired and might no longer function.
+      private:
+        title: This code is set to private.
+        content: Only you can see it.
+      unlisted: This code is unlisted.
+      expire_soon:
+        title: Your Code will soon expire.
+        content_html: |
+          <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
+          <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
+          <p><small><em>This code will expire in roughly %{time}.</em></small></p>
+      categories: Categories
+      tags: Tags
+      heroes: Heroes
+      maps: Maps
+      created_at: Created at
+      updated_at: Last updated
+      version: Current version
+      nice_url: Share URL
+      all: All
+    new:
+      page_title: Create new
+      title_html: <strong>Create new</strong> Workshop Code
+    edit:
+      title_html: <strong>Editing</strong> "%{title}"
+    form:
+      title: Title
+      code: Code
+      public:
+        label: Public
+        help: Your code will appear anywhere as normal.
+      unlisted:
+        label: Unlisted
+        help: Your code can only be found through a direct link. Your code will not appear in any lists.
+      private:
+        label: Private
+        help: Your code can only be accessed by you. Setting your code to public at a later date will not "publish" the code as if it was new.
+      nice_url:
+        label: Include Pretty URL
+        help: Include a pretty URL that is easier to remember and will always link to your most recent code. Keep in mind that if you change the code, all previous codes will continue to link to your newest code.
+        list_html: |
+          <li><strong>Keep the URL relevant to your code.</strong></li>
+          <li>Misused URLs will be removed. "havana-parkour" is fine, "privacy-policy" is not.</li>
+          <li>You can use letters, numbers, and dashes "-".</li>
+          <li>All letter must be lowercase. <small>(The URL itself is not case sensitive.)</small></li>
+          <li>Minimum of 7 characters, maximum of 20.</li>
+      images:
+        title: Images
+        label: Include image (or video) banner
+        help_html: |
+          <strong>Include an image (or video) at the top of your post.</strong> If you add more than 1 image it turns in to an image slider. All images are resized to a 900x500 format. <br>
+          Alternatively you can use a 3rd party (Imgur) to add images to your description in the next step.<br>
+          <strong>The first image will be your Thumbnail.</strong>
+        dropzone:
+          label: Drop (or paste) images here to add them to your post
+          help: Images will be processed to a 900x500 format, regardless of their original size
+        video:
+          label: Youtube video
+          help_html: "Include a video as the first item in the carousel. Enter only the YouTube video ID, not the full url. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)"
+          placeholder: "A video ID looks like this: FqnKB22pOC0"
+      description:
+        label: Description
+        help_html: |
+          Write a short description that will help people play your game. A quick description of the controls and rules will help explain what's going on. <br>
+          <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, %{link}. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
+        show_preview: Show preview
+      snippet:
+        title: Code Snippet
+        label: Include code snippet
+        help_html: <strong>Workshop Codes expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. Saving the code snippet allows you to copy paste it at any point.
+        hint: To get the code snippet select all your rules and copy them. Simply paste it here and you're good to go.
+      settings: Settings
+      categories:
+        label: Categories
+        help: Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
+      tags:
+        label: Tags
+        help_html: Choose tags that people might search for to find your item. You can choose up to 5 tags. A large amount of irrelevant tags might result in your item being more difficult to find. <strong>Separate tags with a comma and a space ",&nbsp;".</strong>
+        placeholder: These, are, separate, tags
+      version:
+        label: Version
+        help: Add a version number if you plan on making revisions in the future. This will help people find the most up to date version of your item.
+        placeholder: E.g. 1.0.5
+      collection:
+        label: Collection
+        help: Collections allow you to group multiple Codes together to help users more quickly find the others. This can for example be used when you have a gamemode with different codes for different maps.
+        placeholder: Create new collection
+        limit: Min 3, max 50 characters.
+        none: None
+        empty: You have not yet created a collection
+      heroes: Heroes
+      maps: Maps
+      expiry_notifications:
+        title: Expiry Notifications
+        label: Also notify me by email
+        help_html: |
+          <strong>Workshop Codes may expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. <mark>We will send you a notification on Workshop.codes if your code has not been updated in 5 months</mark>, giving you 1 month to update the code. We will also send you a notification when your code has expired.<br>
+          <small>Popular codes may be marked as "immortal" and do not expire. It is not known when this happens.</small>
+        content_html: Check this if you would like to receive a notification by email when your code has not been updated for 5 months. <strong>Your emailaddress is encrypted on our server</strong> and will be removed right after the notification has been send. We will not use it for any other purposes.
+        email:
+          label: Email address
+          help_html: To make sure we don't end up in your spam folder, add <strong>notifications@workshop.codes</strong> to your approved senders list.
+      revision:
+        title: Update log
+        label: This is a revision
+        help_html: |
+          Checking this tells our system you've updated your Workshop code. This will allow you to write a summary of what has changed. This should only be used if you've made changes to your gamemode, not if you've only made changes to your post on this website.<br>
+          If your share code has changed the URL to your old code will continue to function, even if you do not check this box.
+        input:
+          label: Update Notes
+          help_html: |
+            Write a short summary of what has changed in this version in relation to the previous.
+            <strong>This description is full Markdown enabled.</strong>
+      submitting: Submitting...
+  post:
+    author: By
+    categories: Categories
+    expired:
+      title: Possibly expired
+      tooltip_html: <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+  comments:
+    title: Comments
+  comment:
+    reply: Reply
+    edit: Edit
+    delete: Delete
+    max_characters: Max %{count} characters
+    log_in: Log in
+    sign_up: Sign up
+    submit: Comment
+    creator: creator
+  report:
+    action: Report code
+    loading: Loading...
+    modal:
+      disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. This form is not meant to report bugs to the creator of this code.
+  users:
+    show:
+      welcome_html: Hello there, <strong>%{name}</strong>
+      favorites_received: Favorites received
+      views_received: Views received
+      copies_received: Copies received
+      listings_received: Listings
+    new:
+      title: Create an account
+      login: Already have an account? Log in
+    edit:
+      provider: You are logged in with %{provider} and cannot edit your account directly from Workshop.codes. Editing your account on %{provider} will automatically adjust it here.
+      destroy:
+        title: Danger zone!
+        action: "Delete your account"
+        confirm: Are you sure you wish to delete your account? This cannot be undone.
+        help: Deleting your account is a permanent action and cannot be undone. Your account will be completely wiped from our database, along with any associations to it.
+    form:
+      optional: (Optional)
+      username:
+        label: Username
+      password:
+        label: Password
+        help: Please use a unique password that is different from the one you use for Overwatch. Passwords are encrypted and securely stored.
+      password_confirmation:
+        label: Password confirmation
+      email:
+        label: Emailaddress
+        help_html: Your emailaddress is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your emailaddress is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.
+      remember_me: Remember me (uses cookies)
+      submit: Submit
+  sessions:
+    login:
+      title: Login
+      username: Username
+      password: Password
+      remember_me: Remember me (uses cookies)
+      submit: Submit
+      forgot_password: Forgot your password?
+      discord: Login with Discord
+      battle_net: Login with Battle.net
+    create_user:
+      title: Create an account
+      content: Don't have an account?
+      button: Create an account
+  account:
+    navigation:
+      overview: Overview
+      notifications: Notifications
+      activity: Activity
+      favorites: Favorites
+      codes: Codes
+      collections: Collections
+      profile: Profile
+      admin: Admin
+      account: Account
+      accessibility: Accessibility
+      logout: Logout
+    listings:
+      title: Listings in the last 60 minutes
+      path: Path
+      unique: Unique listings
+      empty: Your codes have not been listed recently.
+      results_per_post: Results per post
+    analytics:
+      label: Analytics type
+      copies:
+        label: Copies received per day
+        description: This is the total amount of times people clicked on the "copy" button for your items. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
+      views:
+        label: Views received per day
+        description: This is the total amount of times people viewed all of your posts. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
+      listings:
+        label: Listings per day (experimental)
+        description: This is the total amount of times your post appear in a list. This can be on the homepage, search results, your profile, or anywhere else posts appear. This value is unique per page. If someone sees your mode twice on the homepage, it counts as one. If someones sees your mode on the homepage and then again in a search result, both are counted.
+      date_note: This data was not recorded before %{date}
+    favorites:
+      title: Favorites
+      empty: You've not yet liked any Codes
+  profile:
+    edit:
+      title_html: <strong>Customise</strong> your profile
+      go_to_profile: Go to your profile
+    form:
+      verified: You're verified!
+      not_verified: You are not verified (?)
+      image:
+        label: Profile image
+        help: The image will be processed to a 140x140 format. Max 2MB.
+        discord: This image is directly from Discord. Adjusting your profile picture on Discord will also change it here.
+      featured_posts:
+        label: Featured codes
+        help: Show up to 3 Featured Codes on your Profile page.
+        empty: You've not yet posted anything.
+      description:
+        label: About you
+        help: Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you. Basic Markdown enabled. Limited to 255 characters.
+      link:
+        label: Link
+        help_html: Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
+      custom_css:
+        label: Custom CSS
+        help: You're verified, which means you get to add some extra styling to your profile. Be respectful with your styling. Don't hide anything that isn't yours. Don't alter text that isn't yours. Don't go overboard. Misuse may result in your verified status being removed.
+      submit: Save
+  accessibility:
+    edit:
+      title: Accessibility
+      content: Accessibility options help you better navigate the website in case you have difficulty.
+      high_contrast:
+        label: High Contrast
+        description: All contrast on text will be increased. Thin fonts will appear thicker, making it easier to read.
+      large_fonts:
+        label: Large fonts
+        description: All regular and small fonts will appear larger. Fonts that were already large remain unchanged.
+      simple_view:
+        label: Simple view
+        description: The overall layout will appear more simple with less distractions. All non-essential images are removed.
+      pagination_type:
+        title: Pagination type
+        pagination: Pagination
+        infinite_scroll: Infinite scrol
+        load_more_button: Load more button
   views:
     pagination:
-      first: "First"
-      last: "Last"
-      previous: "Prev"
-      next: "Next"
+      first: First
+      last: Last
+      previous: Prev
+      next: Next
   activerecord:
     errors:
       models:

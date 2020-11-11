@@ -18,14 +18,14 @@
   <% if @user.verified? %>
     <div class="well align-center justify-start">
       <%= inline_svg_tag "icons/verified.svg", height: 30, width: 30, class: "fill-current-color" %>
-      <div class="pl-1/4">You're verified!</div>
+      <div class="pl-1/4"><%= t "profile.form.verified" %></div>
     </div>
   <% else %>
     <em data-toggle-content>
       <small>
-        <%= tag.strong "You are not verified (?)", class: "cursor-pointer", data: { action: "toggle-content" } %>
+        <%= tag.strong t("profile.form.not_verified"), class: "cursor-pointer", data: { action: "toggle-content" } %>
         <div data-role="content-to-toggle snippet-container" style="display: none">
-          <p>User names are not unique. A battletag can be the same for multiple users. Being verified helps users indentify that you are indeed you. Furthermore if you are logged in with battle.net you will claim the url without the id. For example <%= profile_path("username#12345") %> will become <%= profile_path("username") %>. The old url will also remain functional.</p>
+          <p>User names are not unique. A battletag can be the same for multiple users. Being verified helps users identify that you are indeed you. Furthermore if you are logged in with battle.net you will claim the url without the id. For example path/username#12345 will become path/username. The old url will also remain functional.</p>
           <p>If you wish to be verified, please contact Mitsiee#9370 on Discord or @ me wherever you want on the Elo Hell Workshop Discord.</p>
           <p>Please note: To be eligible for verification you need to have made a good number of contributions to the Workshop community. When contacting me please note why you wish to be verified.</p>
         </div>
@@ -36,7 +36,7 @@
   <div class="well well--dark block mt-1/1">
     <% if !@user.provider_profile_image.present? %>
       <div class="form-group-max-width">
-        <%= form.label :profile_image, "Profile image", class: "form-label" %>
+        <%= form.label :profile_image, t("profile.form.image.label"), class: "form-label" %>
         <% begin %>
           <%= image_tag @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed, class: "profile-image" if @user.profile_image.attached? %>
         <% rescue%>
@@ -44,7 +44,7 @@
         <%= form.file_field :profile_image, accept: "image/png, image/jpeg, image/jpg" %>
 
         <p class="form-hint mt-1/4 mb-0">
-          The image will be processed to a 140x140 format. Max 2MB.
+          <%= t "profile.form.image.help" %>
         </p>
       </div>
     <% else %>
@@ -52,40 +52,39 @@
       <%= image_tag @user.provider_profile_image, class: "profile-image" %>
 
       <p class="form-hint mt-1/4">
-        This image is directly from Discord. Adjusting your profile picture on Discord will also change it here.
+        <%= t "profile.form.image.discord" %>
       </p>
     <% end %>
   </div>
 
   <div class="form-group-max-width mt-1/1">
-    <%= form.label :featured_posts, "Featured Codes", class: "form-label" %>
+    <%= form.label :featured_posts, t("profile.form.featured_posts.label"), class: "form-label" %>
 
     <div class="form-hint">
-      Show up to 3 Featured Codes on your Profile page.
+      <%= t "profile.form.featured_posts.help" %>
     </div>
 
     <% if @user.posts.any? %>
       <%= form.select :featured_posts, @posts.collect {|p| [ p.title, p.id ] }, { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
     <% else %>
-      <p>You've not yet posted anything.</p>
+      <p><%= t "profile.form.featured_posts.empty" %></p>
     <% end %>
   </div>
 
   <div class="form-group mt-1/1">
-    <%= form.label :description, "About you", class: "form-label" %>
+    <%= form.label :description, t("profile.form.description.label"), class: "form-label" %>
 
     <div class="form-hint">
-      Write a little bit about yourselform. Share your Battle tag, platform, or other places people can find you.<br>
-      Basic markdown enabled. Limited to 255 characters.
+      <%= t "profile.form.description.help" %>
     </div>
 
     <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small" %>
   </div>
 
   <div class="form-group-max-width mt-1/1">
-    <%= form.label :link, class: "form-label" %>
+    <%= form.label :link, t("profile.form.link.label"), class: "form-label" %>
     <p class="form-hint">
-      Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
+      <%= t "profile.form.link.help_html" %>
     </p>
 
     <%= form.text_field :link, placeholder: "Link", class: "form-input" %>
@@ -94,12 +93,12 @@
   <% if @user.verified? %>
     <div class="form-group mt-1/1">
       <%= form.label :custom_css, class: "form-label" do %>
-        Custom CSS
+        <%= t "profile.form.custom_css.label" %>
         <%= inline_svg_tag "icons/verified.svg", class: "profile-banner__verified" %>
       <% end %>
 
       <div class="form-hint">
-        You're verified, which means you get to add some extra styling to your profile. Be respectful with your styling. Don't hide anything that isn't yours. Don't alter text that isn't yours. Don't go overboard. Misuse may result in your verified status being removed.
+        <%= t("profile.form.custom_css.help") %>
       </div>
 
       <%= form.text_area :custom_css, class: "form-input form-textarea form-textarea--extra-small" %>
@@ -108,5 +107,5 @@
 
   <hr class="small mt-1/1">
 
-  <%= submit_tag "Submit", class: "button" %>
+  <%= submit_tag t("profile.form.submit"), class: "button pr-1/1 pl-1/1" %>
 <% end %>

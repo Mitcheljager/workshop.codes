@@ -22,7 +22,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "User should be able to navigate to new post path and create a new post" do
     sign_in_as users(:user_one)
 
-    visit new_post_url
+    visit new_post_url(nil)
 
     assert page.has_content? "Create new"
 

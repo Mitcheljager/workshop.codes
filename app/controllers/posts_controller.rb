@@ -24,8 +24,8 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user, :revisions).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
-    @posts = Post.includes(:user, :revisions).select_overview_columns.public?.order(created_at: :desc).page params[:page]
+    @hot_posts = Post.includes(:user, :revisions).locale.select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
+    @posts = Post.includes(:user, :revisions).locale.select_overview_columns.public?.order(created_at: :desc).page params[:page]
 
     respond_to do |format|
       format.html
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.includes(:user, :revisions).select_overview_columns.public?.where("hotness > 1").select_overview_columns.order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user, :revisions).locale.select_overview_columns.public?.where("hotness > 1").locale.select_overview_columns.order("hotness DESC").page params[:page]
 
     respond_to do |format|
       format.html
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
         not_found and return unless @post.present?
 
         set_post_images
-        
+
         @revisions = @post.revisions.where(visible: true).order(created_at: :desc)
         @is_expired = @revisions.where("created_at > ?", 6.months.ago).none?
       }
@@ -103,6 +103,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.locale = current_locale
 
     set_post_status
 

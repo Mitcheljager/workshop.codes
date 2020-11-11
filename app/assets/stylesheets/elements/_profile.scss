@@ -38,66 +38,6 @@
   }
 }
 
-.profile-block {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: $margin;
-  font-size: $font-size-small;
-  color: rgba(white, .75);
-  white-space: nowrap;
-
-  @media (min-width: 1100px) {
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-top: 0;
-    margin-left: auto;
-  }
-
-  .simple-view & {
-    color: $text-color;
-  }
-
-  .button {
-    margin-top: $margin / 2;
-    margin-bottom: $margin / 2;
-
-    @media (min-width: 1100px) {
-      margin-top: 0;
-      margin-bottom: 0;
-      margin-right: 1rem;
-    }
-  }
-
-  img,
-  svg {
-    height: 36px;
-
-    @media (min-width: 1100px) {
-      height: 24px;
-      margin-top: 4px;
-    }
-  }
-}
-
-.profile-block__action {
-  color: white;
-  text-decoration: none;
-
-  &:hover,
-  &:active {
-    color: white;
-    text-decoration: underline;
-  }
-
-  &:last-of-type {
-    @media (min-width: 1100px) {
-      margin-right: $margin / 2;
-    }
-  }
-}
-
 .profile-image {
   position: relative;
   display: block;

@@ -1,11 +1,11 @@
-<% content_for :page_title, "Favorites" %>
+<% content_for :page_title, t("account.favorites.title") %>
 
-<%= render "layouts/account", title: "Favorites" do %>
+<%= render "layouts/account", title: t("account.favorites.title") do %>
   <% @favorites.each do |favorite| %>
     <%= render "posts/post", post: favorite.post %>
   <% end %>
 
-  <%= tag.em "You've not yet liked any Items" if @favorites.blank? %>
+  <%= tag.em t("account.favorites.empty") if @favorites.blank? %>
 
   <%= paginate @favorites %>
 <% end %>

@@ -13,42 +13,42 @@
     <% end %>
 
     <div class="form-field">
-      <%= f.label :username, class: "form-label" %>
-      <%= f.text_field :username, placeholder: "Username", class: "form-input" %>
+      <%= f.label :username, t("users.form.username.label"), class: "form-label" %>
+      <%= f.text_field :username, placeholder: t("users.form.username.label"), class: "form-input" %>
     </div>
 
     <hr class="small">
 
     <div class="form-field">
-      <%= f.label :password, class: "form-label" %>
-      <%= f.password_field :password, placeholder: "Password", class: "form-input" %>
+      <%= f.label :password, t("users.form.password.label"), class: "form-label" %>
+      <%= f.password_field :password, placeholder: t("users.form.password.label"), class: "form-input" %>
 
-      <div class="form-hint">Please use a unique password that is different from the one you use for Overwatch. Passwords are encrypted and securely stored.</div>
+      <div class="form-hint"><%= t("users.form.password.help") %></div>
     </div>
 
     <div class="form-field">
-      <%= f.label :password_confirmation, class: "form-label" %>
-      <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-input" %>
+      <%= f.label :password_confirmation, t("users.form.password_confirmation.label"), class: "form-label" %>
+      <%= f.password_field :password_confirmation, placeholder: t("users.form.password_confirmation.label"), class: "form-input" %>
     </div>
 
     <hr class="small">
 
     <div class="form-field">
-      <%= f.label :email, "Emailaddress (Optional)", class: "form-label" %>
+      <%= f.label :email, "#{ t("users.form.email.label") } #{ t("users.form.optional") }", class: "form-label" %>
       <%= f.email_field :email, placeholder: "Emailaddress", class: "form-input" %>
 
-      <div class="form-hint">Your emailaddress is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your emailaddress is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.</div>
+      <div class="form-hint"><%= t("users.form.email.help_html") %></div>
     </div>
 
     <hr class="small">
 
     <div class="form-group checkbox">
       <%= check_box_tag :remember_me %>
-      <%= label_tag :remember_me, "Remember me (uses cookies)" %>
+      <%= label_tag :remember_me, t("users.form.remember_me") %>
     </div>
 
     <hr class="small">
 
-    <%= submit_tag "Submit", class: "button" %>
+    <%= submit_tag t("users.form.submit"), class: "button w-100" %>
   <% end %>
 </div>

@@ -1,7 +1,13 @@
-<% content_for :page_title, "Create an account" %>
+<% content_for :page_title, t("users.new.title") %>
 
-<h1 class="heading">Create an account</h1>
+<center>
+  <h1 class="mb-1/2 mt-1/1"><%= t("users.new.title") %></h1>
+</center>
 
-<%= render "form", user: @user, url: users_path(elohell: params[:elohell]) %>
+<div class="wrapper--small">
+  <div class="well well--dark">
+    <%= render "form", user: @user, url: users_path(elohell: params[:elohell]) %>
+  </div>
 
-<p><small>Already have an account? <%= link_to "Log in", login_path %></small></p>
+  <p><center><small><%= link_to t("users.new.login"), login_path %></small></center></p>
+</div>

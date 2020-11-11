@@ -19,4 +19,14 @@
     border-color:  $text-color rgba($pure-white, .1) rgba($pure-white, .1);
     animation: spinner 750ms linear infinite;
   }
+
+  &--small {
+    width: 1rem;
+    height: 1rem;
+
+    &::after {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 }

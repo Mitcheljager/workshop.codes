@@ -49,4 +49,12 @@ module ApplicationHelper
   def quotes
     YAML.load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
   end
+
+  def current_locale
+    I18n.locale == :mixed ? "en" : I18n.locale.to_s
+  end
+
+  def i18n_value_in_array(array, value)
+    array.select { |item| item["en"].downcase == value.downcase }[0][current_locale]
+  end
 end

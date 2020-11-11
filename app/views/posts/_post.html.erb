@@ -1,6 +1,6 @@
-<% cache_unless current_user, post do %>
+<% cache_unless current_user, [current_locale, post] do %>
   <article class="item">
-    <% cache [post, "title_thumbnail"] do %>
+    <% cache [current_locale, post, "title_thumbnail"] do %>
       <%= render "posts/thumbnail", post: post %>
 
       <div class="item__title">
@@ -12,7 +12,7 @@
       <%= render "favorites/form", post: post %>
     </div>
 
-    <% cache [post, "information"] do %>
+    <% cache [current_locale, post, "information"] do %>
       <div class="item__code" data-action="copy-to-clipboard" data-target="<%= post.code %>">
         <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
 
@@ -23,25 +23,25 @@
 
       <div class="item__details">
         <div class="item__details-item">
-          By |
+          <%= t("post.author") %> |
           <%= link_to post.user.username.split("#")[0], user_profile_path(post.user) %>
         </div>
 
         <div class="item__details-item">
-          Categories |
+          <%= t("post.categories") %> |
 
           <% post.categories.each do |category| %>
-            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
+            <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
           <% end %>
         </div>
 
         <% if post.revisions.last && post.revisions.last.created_at < 6.months.ago %>
           <div class="item__details-item">
             <div class="tooltip">
-              ⚠ Possibly expired
+              ⚠ <%= t("post.expired.title") %>
 
               <div class="tooltip__content">
-                <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+                <%= t("post.expired.tooltip_html") %>
               </div>
             </div>
           </div>

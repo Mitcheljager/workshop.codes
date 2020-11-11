@@ -1,27 +1,30 @@
 <% content_for :page_title, "Edit your account" %>
 
 <%= render "layouts/account", title: "<strong>Edit</strong> your account" do %>
-  <% if @user.provider.present? %>
-    <p class="mt-0">
-      You are logged in with <%= @user.provider.humanize %> and cannot edit your account directly from Workshop.codes. <br>
-      Editing your account on <%= @user.provider.humanize %> will automatically adjust it here.
-    </p>
-  <% else %>
-    <% if flash[:alert] %>
-      <div class="warning mt-0 mb-1/2"><mark><%= flash[:alert] %></mark></div>
-    <% end %>
+  <div class="wrapper--small ml-0">
+    <div class="well well--dark">
+      <% if @user.provider.present? %>
+        <p class="mt-0">
+          <%= t("users.edit.provider", provider: @user.provider.humanize) %>
+        </p>
+      <% else %>
+        <% if flash[:alert] %>
+          <div class="warning mt-0 mb-1/2"><mark><%= flash[:alert] %></mark></div>
+        <% end %>
 
-    <%= render "form", user: @user, url: update_user_path %>
-  <% end %>
+        <%= render "form", user: @user, url: update_user_path %>
+      <% end %>
 
-  <div class="form-group-max-width">
-    <div class="form-danger-zone">
-      Danger zone!
+      <div class="form-group-max-width">
+        <div class="form-danger-zone">
+          <%= t("users.edit.destroy.title") %>
 
-      <%= link_to "Delete your account", destroy_user_path, method: :delete, data: { confirm: "Are you sure you wish to delete your account? This cannot be undone." } %>
+          <%= link_to t("users.edit.destroy.action"), destroy_user_path, method: :delete, data: { confirm: t("users.edit.destroy.confirm") } %>
 
-      <div class="form-hint mb-0">
-        Deleting your account is a permanent action and cannot be undone. Your account will be completely wiped from our database, along with any associations to it.
+          <div class="form-hint mb-0">
+            <%= t("users.edit.destroy.help") %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

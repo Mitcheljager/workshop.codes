@@ -1,12 +1,12 @@
 <div class="logo-background logo-background--overwatch">
   <div class="banner banner--compact mt-1/1">
     <div>
-      <h3 class="mt-0 mb-0"><strong>Support Workshop.codes on <span class="text-ko-fi">Ko-fi</span></strong></h3>
+      <h3 class="mt-0 mb-0"><strong> <%= t "banner.kofi.title" %> <span class="text-ko-fi">Ko-fi</span></strong></h3>
 
       <div class="mt-1/8">
         <small>
-          <em>Turns out websites are expensive and ads suck.</em> <br>
-          <strong>Support Workshop.codes for just <span class="text-white">$3</span>.</strong>
+          <em><%= t "banner.kofi.tagline" %></em> <br>
+          <strong><%= t "banner.kofi.content" %> <span class="text-white">$3</span>.</strong>
         </small>
       </div>
     </div>
@@ -14,7 +14,7 @@
     <div>
       <%= link_to "https://ko-fi.com/workshopcodes", class: "button button--ko-fi mt-1/4 md:mt-0 md:ml-1/8 lg:mr-1/4", target: "_blank", rel: "noreferrer noopener" do %>
         <%= image_tag "ko-fi.png", width: 21, height: 21, class: "mr-1/8" %>
-        Support Workshop.codes
+        <%= t "banner.kofi.button" %>
       <% end %>
     </div>
   </div>

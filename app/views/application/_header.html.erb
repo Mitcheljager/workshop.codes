@@ -9,10 +9,11 @@
     <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
 
     <nav class="header__navigation">
-      <%= link_to "Recent", posts_path(1), class: "header__item #{ "header__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
-      <%= link_to "On Fire", on_fire_path, class: "header__item #{ "header__item--active" if action_name == "on_fire" }" %>
-      <%= link_to "While you wait", while_you_wait_path, class: "header__item #{ "header__item--active" if controller_name == "while_you_waits" }" %>
-      <%= link_to "Wiki", wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" %>
+      <%= link_to t("navigation.recent"), posts_path(1), class: "header__item #{ "header__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
+      <%= link_to t("navigation.on_fire"), on_fire_path, class: "header__item #{ "header__item--active" if action_name == "on_fire" }" %>
+      <%= link_to t("navigation.while_you_wait"), while_you_wait_path, class: "header__item #{ "header__item--active" if controller_name == "while_you_waits" }" %>
+      <%= link_to t("navigation.wiki"), wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" %>
+      <%= link_to inline_svg_tag("discord.svg"), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "header__item mt-1/4 lg:mt-1/8" %>
     </nav>
 
     <%= render "profile_block" %>

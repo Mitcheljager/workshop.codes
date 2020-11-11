@@ -1,14 +1,32 @@
 <div class="profile-block">
-  <div>
+  <div class="lg:mr-1/4">
     <% if current_user %>
-      Logged in as&nbsp;<%= link_to current_user.username.split("#")[0], account_path, class: "profile-block__action" %>
+      <%= link_to current_user.username.split("#")[0], account_path, class: "profile-block__action" %>
     <% else %>
       <%= link_to "Login", login_path, class: "profile-block__action" %>
-      &nbsp;or&nbsp;
-      <%= link_to "Create an account", new_user_path, class: "profile-block__action" %>
     <% end %>
   </div>
 
-  <%= link_to "Create", current_user.present? ? new_post_path : login_path, class: "button" %>
-  <%= link_to inline_svg_tag("discord.svg", height: 24), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener" %>
+  <%= link_to t("navigation.create"), current_user.present? ? new_post_path : login_path, class: "button profile-block__create lg:mr-1/4" %>
+
+  <div class="dropdown" data-dropdown>
+    <%= link_to I18n.locale, "", class: "dropdown__toggle button button--secondary button--thin button--small bg-light", data: { action: "toggle-dropdown" } %>
+
+    <div class="dropdown__content lg-down:dropup" data-dropdown-content>
+      <div class="dropdown__label">
+        Locale
+      </div>
+
+      <small class="block mt-1/8 text-base pl-1/4 pr-1/4 mb-1/4">Set the website language. Only codes made in the same language will be displayed.</small>
+
+      <hr>
+
+      <%= link_to "en - English", url_for(params.clone.permit!.merge(locale: nil)), class: "dropdown__item" %>
+      <%= link_to "ko - 한국어", url_for(params.clone.permit!.merge(locale: :ko)), class: "dropdown__item" %>
+      <%= link_to url_for(params.clone.permit!.merge(locale: :mixed)), class: "dropdown__item block" do %>
+        Mixed
+        <small class="block mt-1/8 text-base">Show all codes for all languages, with the website displayed in English.</small>
+      <% end %>
+    </div>
+  </div>
 </div>

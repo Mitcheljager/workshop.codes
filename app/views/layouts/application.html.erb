@@ -9,6 +9,7 @@
     <meta name="keywords" content="Overwatch, Workshop, Codes, Workshop Codes, Overwatch Workshop Codes, Overwatch Custom Games, Overwatch Gamnes, Workshop Games">
     <meta name="theme-color" content="#1f2326">
     <meta name="ir-site-verification-token" value="2456162" />
+    <meta http-equiv=”content-language” content=<%= I18n.locale %> />
 
     <% unless yield(:og_description) != "" %>
       <meta name="description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
@@ -18,7 +19,10 @@
     <%= render "application/og_tags" %>
     <%= render "favicons" %>
 
-    <link rel="canonical" href="<%= non_www_url %>" />
+    <% if I18n.locale == :mixed %>
+      <link rel="canonical" href="<%= request.original_url.gsub("/mixed", "") %>" />
+    <% end %>
+
     <link rel="manifest" href="/manifest.json">
 
     <%= inline_css "application.css" %>
@@ -39,6 +43,7 @@
       <% unless is_wiki? %>
         <%= render "search" %>
         <%= render "filter/filter" %>
+        <%= render "application/banners/localisation_disclaimer" if I18n.locale != :en && I18n.locale != :mixed %>
       <% end %>
 
       <%= yield %>

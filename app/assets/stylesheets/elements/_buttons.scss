@@ -33,6 +33,11 @@
   &--small {
     font-size: 12px;
     font-family: $font-stack;
+    font-weight: 600;
+  }
+
+  &--thin {
+    padding: .5em .75em;
   }
 
   &--secondary {
