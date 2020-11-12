@@ -47,7 +47,6 @@ class SessionsController < ApplicationController
     current_user.remember_tokens.destroy_all if current_user && current_user.remember_tokens.any?
 
     reset_session
-
     redirect_to login_path
   end
 
