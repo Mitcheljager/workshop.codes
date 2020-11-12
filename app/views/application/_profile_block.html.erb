@@ -3,7 +3,7 @@
     <% if current_user %>
       <%= link_to current_user.username.split("#")[0], account_path, class: "profile-block__action" %>
     <% else %>
-      <%= link_to "Login", login_path, class: "profile-block__action" %>
+      <%= link_to t("navigation.login"), login_path, class: "profile-block__action" %>
     <% end %>
   </div>
 

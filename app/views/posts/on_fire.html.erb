@@ -3,8 +3,7 @@
 <div class="heading">
   <h1>
     <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %>
-    <strong><%= t("navigation.on_fire") %></strong>
-    Workshop Codes <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
+    <%= t(".title_html") %> <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
   </h1>
 </div>
 

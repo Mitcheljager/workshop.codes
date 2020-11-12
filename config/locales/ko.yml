@@ -1,10 +1,11 @@
 ko:
   navigation:
     recent: 최신
-    on_fire: 온 파이어
+    on_fire: 인기 코드
     while_you_wait: 기다리는 동안
     wiki: 위키
     create: 만들기
+    login: 로그인
   filter:
     categories: 카테고리
     heroes: 영웅
@@ -21,7 +22,8 @@ ko:
     more: 추가 필터
     less: 적은 필터
   search:
-    label_html: <strong>검색 </strong> 제목, 카테고리, 태그, 코드,맵, 영웅 또는 유저네임 별
+    label_html: <strong>검색 </strong> 제목, 카테고리, 태그, 코드,맵, 영웅 또는 유저네임
+    popular_search_terms_html: <strong>인기</strong> 검색어
   footer:
     privacy_policy: 개인정보 보호정책
     copyright: 저작권
@@ -39,14 +41,17 @@ ko:
     index:
       title: 오버워치 워크샵 코드
       on_fire:
-        title_html: <strong>온 파이어</strong> 아이템
+        title_html: <strong>인기 코드</strong> 아이템
         button: 모든 온 파어 아이템 보기
       recent:
         title_html: <strong>최신</strong> 아이템
+        page_title_html: <strong>최신</strong> 워크샵 코드
       sort:
         title: 정렬 기준
         created: 만들어짐
         updated: 마지막 업데이트
+    on_fire:
+      title_html: <strong>인기 코드</strong> 워크샵 코드
     show:
       expired:
         title: 이 코드는 6 개월이 넘었습니다.
@@ -165,7 +170,7 @@ ko:
             <strong>이 설명은 전체 마크 다운이 활성화되어 있습니다.</strong>
       submitting: 제출하는 중...
   post:
-    author: 의해
+    author: 작성자
     categories: 카테고리
     expired:
       title: 만료되었을 수 있음
@@ -206,17 +211,17 @@ ko:
     form:
       optional: (선택 항목)
       username:
-        label: 유저네임
+        label: 아이디
       password:
-        label: 패스워드
+        label: 비밀번호
         help: 오버워치에 사용하는 것과 다른 고유한 패스워드를 사용하십시오. 패스워드는 암호화되어 안전하게 저장됩니다.
       password_confirmation:
         label: 패스워드 확인
       email:
         label: 이메일주소
         help_html: 이메일 주소는 패스워드를 잊어 버린 경우 계정을 복구하는 데 사용됩니다.<strong>이것은 완전히 선택 사항입니다.</strong> 귀하의 이메일 주소는 암호화되어 안전하게 저장됩니다. 귀하가 명시적으로 허용하지 않는 한 어떤 용도로도 사용되지 않습니다.
-      remember_me: 나를 기억하십시오 (쿠키 사용)
-      submit: 제출
+      remember_me: 로그인 상태 유지 (쿠키 사용)
+      submit: 로그인
   sessions:
     login:
       title: 로그인
@@ -224,13 +229,13 @@ ko:
       password: 패스워드
       remember_me: 나를 기억하십시오 (쿠키 사용)
       submit: 제출
-      forgot_password: 패스워드를 잊으셨나요?
+      forgot_password: 비밀번호 찾기
       discord: 디스코드로 로그인
-      battle_net: 베틀.넷으로 로그인
+      battle_net: 베틀넷으로 로그인
     create_user:
-      title: 계정 만들기
-      content: 계정이 없나요?
-      button: 계정 만들기
+      title: 회원가입
+      content: 계정이 없으신가요?
+      button: 회원가입
   account:
     navigation:
       overview: 개요

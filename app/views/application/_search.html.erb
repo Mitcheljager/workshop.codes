@@ -10,7 +10,7 @@
       <%= t("search.label_html") %>
     <% end %>
 
-    <%= render "search_terms" if search_terms.any? %>
+    <%= render "search_terms" %>
 
     <%= submit_tag "", class: "search__submit" %>
   <% end %>

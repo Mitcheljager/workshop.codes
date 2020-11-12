@@ -1,7 +1,7 @@
 <% cache "search_terms" do %>
   <div class="search__tray">
     <div class="search-terms">
-      <h3 class="search-terms__title"><strong>Popular</strong> Search&nbsp;terms</h3>
+      <h3 class="search-terms__title"><%= t("search.popular_search_terms_html") %></h3>
 
       <div class="search-terms__content">
         <% search_terms.each do |search_term| %>

@@ -22,6 +22,7 @@ en:
     less: Less filters
   search:
     label_html: <strong>Search </strong> by Titles, Categories, Tags, Codes, Maps, Heroes, or Usernames
+    popular_search_terms_html: <strong>Popular</strong> Search&nbsp;terms
   footer:
     privacy_policy: Privacy Policy
     copyright: Copyright
@@ -43,10 +44,13 @@ en:
         button: View all On Fire items
       recent:
         title_html: <strong>Recent</strong> Items
+        page_title_html: <strong>Recent</strong> Workshop Codes
       sort:
         title: Sort by
         created: Created
         updated: Last Updated
+    on_fire:
+      title_html: <strong>On Fire</strong> Workshop Codes
     show:
       expired:
         title: This code is over 6 months old.
