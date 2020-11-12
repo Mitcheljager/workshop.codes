@@ -23,6 +23,9 @@
       <link rel="canonical" href="<%= request.original_url.gsub("/mixed", "") %>" />
     <% end %>
 
+    <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: nil)) %>" hreflang="en" />
+    <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: :ko)) %>" hreflang="ko" />
+
     <link rel="manifest" href="/manifest.json">
 
     <%= inline_css "application.css" %>
