@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
     redirect_to root_path if current_user
   end
 
+  after_action :set_return_path, only: [:new]
+
   def new
   end
 
@@ -28,7 +30,7 @@ class SessionsController < ApplicationController
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])
       else
-        redirect_to account_path
+        redirect_to(session[:return_to] || account_path, fallback_location: account_path)
       end
     else
       if auth_hash.present?
@@ -63,5 +65,9 @@ class SessionsController < ApplicationController
 
   def auth_hash
     request.env["omniauth.auth"]
+  end
+
+  def set_return_path
+    session[:return_to] = request.referrer
   end
 end
