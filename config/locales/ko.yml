@@ -59,9 +59,9 @@ ko:
       title: 오버워치 워크샵 코드
       on_fire:
         title_html: <strong>인기</strong> 코드
-        button: 모든 온 파어 아이템 보기
+        button: 모든 인기 코드 보기
       recent:
-        title_html: <strong>최신</strong> 아이템
+        title_html: <strong>최신</strong> 코드 
         page_title_html: <strong>최신</strong> 워크샵 코드
       sort:
         title: 기준
