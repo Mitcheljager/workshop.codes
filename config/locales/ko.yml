@@ -47,10 +47,10 @@ ko:
     disclaimer: 모든 이미지와 아이콘은 각 소유자의 것입니다.
   banner:
     kofi:
-      title: Workshop.codes 지원 중
+      title: Ko-fi로 Workshop.codes 지원하기
       tagline: 알고보니 웹사이트는 비싸고 광고는 형편없습니다.
-      content: Workshop.codes 지원
-      button: Workshop.codes 지원
+      content_html: 단 <span class="text-white">$3</strong>만으로도 Workshop.codes를 지원할 수 있습니다
+      button: Workshop.codes 지원하기
     affiliate_ad:
       disclaimer: 이 링크를 통한 구매는 워크샵.코드를 지원합니다.
     localisation_disclaimer_html: <strong>번역이 진행중입니다.</strong> 아직 모든 것이 번역된 것은 아니며 곧 더 많이 번역될 것입니다.
@@ -61,14 +61,14 @@ ko:
         title_html: <strong>인기</strong> 코드
         button: 모든 인기 코드 보기
       recent:
-        title_html: <strong>최신</strong> 코드 
+        title_html: <strong>최신</strong> 코드
         page_title_html: <strong>최신</strong> 워크샵 코드
       sort:
         title: 기준
-        created: 만들어짐
+        created: 등록일
         updated: 마지막 업데이트
     on_fire:
-      title_html: <strong>인기 코드</strong> 워크샵 코드
+      title_html: <strong>인기</strong> 워크샵 코드
     show:
       expired:
         title: 이 코드는 6 개월이 넘었습니다.
@@ -163,7 +163,7 @@ ko:
         none: 없음
         empty: 아직 컬렉션을 만들지 않았습니다.
       heroes: 영웅
-      maps: 맵
+      maps: 전장
       expiry_notifications:
         title: 만료 알림
         label: 이메일로도 알림
@@ -208,6 +208,11 @@ ko:
     loading: 로딩 ...
     modal:
       disclaimer_html: <strong>주의하십시오;</strong> 이 양식은 이 코드를 워크샵.코드 관리자에게 보고하기 위한 것입니다. 이 양식은 이 코드의 작성자에게 버그를 보고하기 위한 것이 아닙니다.
+  while_you_waits:
+    index:
+      title: 기다리는 동안
+      tagline: 큐 잡는 동안 즐기실 수 있는 코드 모음집
+      content: 큐를 기다리시는 동안 즐기실 수 있는 코드 모음집입니다. 대부분 혼자서도 즐기실 수 있는 코드이기 때문에 다른 플레이어들을 기다리지 않아도 바로 시작하실 수 있습니다.
   users:
     show:
       welcome_html: 안녕하세요, <strong>%{name}</strong>

@@ -48,7 +48,7 @@ en:
     kofi:
       title: Support Workshop.codes on
       tagline: Turns out websites are expensive and ads suck.
-      content: Support Workshop.codes for just
+      content_html: Support Workshop.codes for just <span class="text-white">$3</span>
       button: Support Workshop.codes
     affiliate_ad:
       disclaimer: Purchases made through this link support Workshop.codes
@@ -207,6 +207,11 @@ en:
     loading: Loading...
     modal:
       disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. This form is not meant to report bugs to the creator of this code.
+  while_you_waits:
+    index:
+      title: While you wait
+      tagline: Codes to play while in queue
+      content: A curated list of games that are fun to play while you wait. Most of these are games that require no other players so you can get started right away.
   users:
     show:
       welcome_html: Hello there, <strong>%{name}</strong>

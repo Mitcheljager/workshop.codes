@@ -2,11 +2,11 @@
 
 <% cache_if @while_you_waits.any?, ["while_you_wait", params[:filter]] do %>
   <div class="heading mt-1/1 mb-1/2">
-    <h1><strong><%= t("navigation.while_you_wait") %></strong> <small> - Codes to play while in queue</small></h1>
+    <h1><strong><%= t(".title") %></strong> <small> - <%= t(".tagline") %></small></h1>
   </div>
 
   <div class="w-md-75">
-    A curated list of games that are fun to play while you wait. Most of these are games that require no other players so you can get started right away.
+    <%= t(".content") %>
   </div>
 
   <div class="while-you-wait mt-1/1">
