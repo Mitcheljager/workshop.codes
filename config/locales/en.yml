@@ -11,8 +11,25 @@ en:
     maps: Maps
     from: From
     to: To
-    sort: Sort
-    exclude_expired: Exclude expired
+    time:
+      one_day: 1 day ago
+      three_days: 3 days ago
+      seven_days: 7 days ago
+      one_month: 1 month ago
+      three_months: 3 months ago
+      six_months: 6 months ago
+      one_year: 1 year ago
+    sort:
+      label: Sort
+      created: Created
+      updated: Updated
+      on_fire: On Fire
+      favorites: Favorites
+      views: Views
+    exclude_expired:
+      label: Exclude expired
+      true: "True"
+      false: "False"
     author: Author
     verified_authors: This is a list of verified creators
     select: Select...

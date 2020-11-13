@@ -1,128 +1,192 @@
 -
   en: D.va
   ko: D.va
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Orisa
   ko: 오리사
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Reinhardt
   ko: 라인하르트
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Roadhog
   ko: 로드호그
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Sigma
   ko: 시그마
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Winston
   ko: 윈스턴
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Wrecking Ball
   ko: 레킹볼
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Zarya
   ko: 자리야
-  category: Tank
+  category:
+    en: Tank
+    ko: 탱커
 -
   en: Ashe
   ko: 애쉬
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Bastion
   ko: 바스티온
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Doomfist
   ko: 둠피스트
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Echo
   ko: 에코
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Genji
   ko: 겐지
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Hanzo
   ko: 한조
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Junkrat
   ko: 정크랫
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: McCree
   ko: 맥크리
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Mei
   ko: 메이
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Pharah
   ko: 파라
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Reaper
   ko: 리퍼
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: "Soldier: 76"
   ko: "솔저: 76"
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Sombra
   ko: 솜브라
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Symmetra
   ko: 시메트라
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Torbjörn
   ko: 토르비욘
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Tracer
   ko: 트레이서
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Widowmaker
   ko: 위도우메이커
-  category: Damage
+  category:
+    en: Damage
+    ko: 딜러
 -
   en: Ana
   ko: 아나
-  category: Support
+  category:
+    en: Support
+    ko: 지원
 -
   en: Baptiste
   ko: 바티스트
-  category: Support
+  category:
+    en: Support
+    ko: 지원
 -
   en: Brigitte
   ko: 브리기테
-  category: Support
+  category:
+    en: Support
+    ko: 지원
 -
   en: Lúcio
   ko: 루시우
-  category: Support
+  category:
+    en: Support
+    ko: 지원
 -
   en: Mercy
   ko: 메르시
-  category: Support
+  category:
+    en: Support
+    ko: 지원
 -
   en: Moira
   ko: 모이라
-  category: Support
+  category:
+    en: Support
+    ko: 지원
 -
   en: Zenyatta
   ko: 젠야타
-  category: Support
+  category:
+    en: Support
+    ko: 지원

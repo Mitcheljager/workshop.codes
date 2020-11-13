@@ -1,190 +1,266 @@
 -
   en: Hanamura
   ko: 하나무라
-  type: Assault
+  type:
+    en: Assault
+    ko: 점령
   slug: hanamura
 -
   en: Horizon Lunar Colony
   ko: 호라이즌 달 기지
-  type: Assault
+  type:
+    en: Assault
+    ko: 점령
   slug: horizon-lunar-colony
 -
   en: Paris
   ko: 파리
-  type: Assault
+  type:
+    en: Assault
+    ko: 점령
   slug: paris
 -
   en: Temple of Anubis
   ko:  아누비스 신전
-  type: Assault
+  type:
+    en: Assault
+    ko: 점령
   slug: temple-of-anubis
 -
   en: Volskaya Industries
   ko: 볼스카야 인더스트리
-  type: Assault
+  type:
+    en: Assault
+    ko: 점령
   slug: volskaya-industries
 -
   en: Dorado
   ko: 도라도
-  type: Escort
+  type:
+    en: Escort
+    ko: 호위
   slug: dorado
 -
   en: Havana
   ko: 하바나
-  type: Escort
+  type:
+    en: Escort
+    ko: 호위
   slug: havana
 -
   en: Junkertown
   ko: 쓰레기촌
-  type: Escort
+  type:
+    en: Escort
+    ko: 호위
   slug: junkertown
 -
   en: Rialto
   ko: 리알토
-  type: Escort
+  type:
+    en: Escort
+    ko: 호위
   slug: rialto
 -
   en: Route 66
   ko: 66번 국도
-  type: Escort
+  type:
+    en: Escort
+    ko: 호위
   slug: route-66
 -
   en: "Watchpoint: Gibraltar"
   ko: "감시 기지: 지브롤터"
-  type: Escort
+  type:
+    en: Escort
+    ko: 호위
   slug: watchpoint-gibraltar
 -
   en: Blizzard World
   ko: 블리자드 월드
-  type: Hybrid
+  type:
+    en: Hybrid
+    ko: 혼합
   slug: blizzard-world
 -
   en: Eichenwalde
   ko: 아이헨발데
-  type: Hybrid
+  type:
+    en: Hybrid
+    ko: 혼합
   slug: eichenwalde
 -
   en: Hollywood
   ko: 할리우드
-  type: Hybrid
+  type:
+    en: Hybrid
+    ko: 혼합
   slug: hollywood
 -
   en: King's Row
   ko:  왕의 길
-  type: Hybrid
+  type:
+    en: Hybrid
+    ko: 혼합
   slug: kings-row
 -
   en: Numbani
   ko: 눔바니
-  type: Hybrid
+  type:
+    en: Hybrid
+    ko: 혼합
   slug: numbani
 -
   en: Busan
   ko: 부산
-  type: Control
+  type:
+    en: Control
+    ko: 쟁탈
   slug: busan
 -
   en: Ilios
   ko: 일리오스
-  type: Control
+  type:
+    en: Control
+    ko: 쟁탈
   slug: ilios
 -
   en: Lijiang Tower
   ko: 리장 타워
-  type: Control
+  type:
+    en: Control
+    ko: 쟁탈
   slug: lijiang-tower
 -
   en: Nepal
   ko: 네팔
-  type: Control
+  type:
+    en: Control
+    ko: 쟁탈
   slug: nepal
 -
   en: Oasis
   ko: 오아시스
-  type: Control
+  type:
+    en: Control
+    ko: 쟁탈
   slug: oasis
 -
   en: Black Forest
   ko: 검은 숲
-  type: Arcade
+  type:
+    en: Arcade
+    ko: 아케이드
   slug: black-forest
 -
   en: Castillo
   ko: 카스티요
-  type: Arcade
+  type:
+    en: Arcade
+    ko: 아케이드
   slug: castillo
 -
   en: "Ecopoint: Antarctica"
   ko: "탐사 기지: 남극"
-  type: Arcade
+  type:
+    en: Arcade
+    ko: 아케이드
   slug: ecopoint-antarctica
 -
   en: Necropolis
   ko: 네크로폴리스
-  type: Arcade
+  type:
+    en: Arcade
+    ko: 아케이드
   slug: necropolis
 -
   en: Estádio das Rãs
   ko: 이스타지우 다스 하스
-  type: Lúcioball
+  type:
+    en: Lúcioball
+    ko: 루시우볼
   slug: estadio-das-ras
 -
   en: Sydney Harbour Arena
   ko: 시드니 하버 아레나
-  type: Lúcioball
+  type:
+    en: Lúcioball
+    ko: 루시우볼
   slug: sydney-harbour-arena
 -
   en: Sydney Harbour Arena Classic
   ko: 시드니 하버 아레나 클래식
-  type: Lúcioball
+  type:
+    en: Lúcioball
+    ko: 루시우볼
   slug: sydney-harbour-arena-classic
 -
   en: Busan Stadium
   ko: 부산 스타디움
-  type: Lúcioball
+  type:
+    en: Lúcioball
+    ko: 루시우볼
   slug: busan-stadium
 -
   en: Busan Stadium Classic
   ko: 부산 스타디움 클래식
-  type: Lúcioball
+  type:
+    en: Lúcioball
+    ko: 루시우볼
   slug: busan-stadium-classic
 -
   en: Château Guillard
   ko: 샤토 기야르
-  type: Deathmatch
+  type:
+    en: Deathmatch
+    ko: 데스매치
   slug: chateau-guillard
 -
   en: Petra
   ko: 페트라
-  type: Deathmatch
+  type:
+    en: Deathmatch
+    ko: 데스매치
   slug: petra
 -
   en: Ayutthaya
   ko: 아유타야
-  type: Capture the Flag
+  type:
+    en: Capture the Flag
+    ko: 깃발 뺏기
   slug: ayutthaya
 -
   en: Practice Range
   ko: 훈련장
-  type: Practice
+  type:
+    en: Practice
+    ko: 연습
   slug: practice-range
 -
   en: Workshop Chamber
   ko: 워크샵 방
-  type: Workshop
+  type:
+    en: Workshop
+    ko: 위크샵
   slug: workshop-chamber
 -
   en: Workshop Island
   ko: 워크샵 섬
-  type: Workshop
+  type:
+    en: Workshop
+    ko: 위크샵
   slug: workshop-island
 -
   en: Workshop Expanse
   ko: 워크샵 개활지
-  type: Workshop
+  type:
+    en: Workshop
+    ko: 위크샵
   slug: workshop-expanse
 -
   en: Workshop Green Screen
   ko: 워크샵 초록색 화면
-  type: Workshop
+  type:
+    en: Workshop
+    ko: 위크샵
   slug: workshop-green-screen

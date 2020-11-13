@@ -1,7 +1,7 @@
 ko:
   navigation:
     recent: 최신
-    on_fire: 인기 코드
+    on_fire: 인기
     while_you_wait: 기다리는 동안
     wiki: 위키
     create: 만들기
@@ -9,13 +9,30 @@ ko:
   filter:
     categories: 카테고리
     heroes: 영웅
-    maps: 맵
+    maps: 전장
     from: 에서
     to: 까지
-    sort: 분류
-    exclude_expired: 만료차단
-    author: 저자
-    verified_authors: 이것은 검증된 작성자들의 목록입니다.
+    time:
+      one_day: 1일 전
+      three_days: 3일 전
+      seven_days: 7일 전
+      one_month: 1달 전
+      three_months: 3달 전
+      six_months: 6달 전
+      one_year: 1년 전
+    sort:
+      label: 기준
+      created: 등록일
+      updated: 수정일
+      on_fire: 인기순
+      favorites: 추천수
+      views: 조회수
+    exclude_expired:
+      label: 만료 차단
+      true: 예
+      false: 아니요
+    author: 작성자
+    verified_authors: 인증된 작성자들의 목록입니다
     select: 선택하기...
     remove: ✕ 필터 제거
     remove_all: 필터 제거
@@ -32,7 +49,7 @@ ko:
     kofi:
       title: Workshop.codes 지원 중
       tagline: 알고보니 웹사이트는 비싸고 광고는 형편없습니다.
-      content: Workshop.codes  지원
+      content: Workshop.codes 지원
       button: Workshop.codes 지원
     affiliate_ad:
       disclaimer: 이 링크를 통한 구매는 워크샵.코드를 지원합니다.
@@ -41,13 +58,13 @@ ko:
     index:
       title: 오버워치 워크샵 코드
       on_fire:
-        title_html: <strong>인기 코드</strong> 아이템
+        title_html: <strong>인기</strong> 코드
         button: 모든 온 파어 아이템 보기
       recent:
         title_html: <strong>최신</strong> 아이템
         page_title_html: <strong>최신</strong> 워크샵 코드
       sort:
-        title: 정렬 기준
+        title: 기준
         created: 만들어짐
         updated: 마지막 업데이트
     on_fire:

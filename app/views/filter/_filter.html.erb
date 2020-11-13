@@ -34,7 +34,7 @@
           <% end %>
 
           <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
-            <span class="dropdown__label"><%= hero_category %></span>
+            <span class="dropdown__label"><%= hero_category[current_locale] %></span>
 
             <% heroes.each do |hero| %>
               <% name = i18n_value_in_array(heroes, hero["en"]) %>
@@ -58,7 +58,7 @@
           <% end %>
 
           <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
-            <span class="dropdown__label"><%= map_type %></span>
+            <span class="dropdown__label"><%= map_type[current_locale]  %></span>
 
             <% maps.each do |map| %>
               <% name = i18n_value_in_array(maps, map["en"]) %>
@@ -84,13 +84,13 @@
                   <hr>
                 <% end %>
 
-                <%= link_to "1 day ago", build_filter_path(:from, 1.day.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "3 days ago", build_filter_path(:from, 3.days.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "7 days ago", build_filter_path(:from, 1.week.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "1 month ago", build_filter_path(:from, 1.month.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "3 months ago", build_filter_path(:from, 3.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "6 months ago", build_filter_path(:from, 6.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "1 year ago", build_filter_path(:from, 1.year.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.one_day"), build_filter_path(:from, 1.day.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.three_days"), build_filter_path(:from, 3.days.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.seven_days"), build_filter_path(:from, 1.week.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.one_month"), build_filter_path(:from, 1.month.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.three_months"), build_filter_path(:from, 3.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.six_months"), build_filter_path(:from, 6.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.one_year"), build_filter_path(:from, 1.year.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
               </div>
             </div>
           </div>
@@ -107,19 +107,19 @@
                   <hr>
                 <% end %>
 
-                <%= link_to "1 day ago", build_filter_path(:to, 1.day.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "3 days ago", build_filter_path(:to, 3.days.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "7 days ago", build_filter_path(:to, 1.week.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "1 month ago", build_filter_path(:to, 1.month.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "3 months ago", build_filter_path(:to, 3.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "6 months ago", build_filter_path(:to, 6.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
-                <%= link_to "1 year ago", build_filter_path(:to, 1.year.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.one_day"), build_filter_path(:to, 1.day.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.three_days"), build_filter_path(:to, 3.days.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.seven_days"), build_filter_path(:to, 1.week.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.one_month"), build_filter_path(:to, 1.month.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.three_months"), build_filter_path(:to, 3.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.six_months"), build_filter_path(:to, 6.months.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
+                <%= link_to t("filter.time.one_year"), build_filter_path(:to, 1.year.ago.strftime("%Y-%m-%d")), class: "dropdown__item" %>
               </div>
             </div>
           </div>
 
           <div class="filter__item">
-            <span class="filter__label"><%= t "filter.sort" %></span>
+            <span class="filter__label"><%= t "filter.sort.label" %></span>
 
             <div class="dropdown" data-dropdown>
               <% if params[:search] && !params[:sort] %>
@@ -134,24 +134,24 @@
                   <hr>
                 <% end %>
 
-                <%= link_to "Created", build_filter_path(:sort, "created"), class: "dropdown__item" %>
-                <%= link_to "Updated", build_filter_path(:sort, "updated"), class: "dropdown__item" %>
-                <%= link_to "On Fire", build_filter_path(:sort, "on-fire"), class: "dropdown__item" %>
-                <%= link_to "Favorites", build_filter_path(:sort, "favorites"), class: "dropdown__item" %>
-                <%= link_to "Views", build_filter_path(:sort, "views"), class: "dropdown__item" %>
+                <%= link_to t("filter.sort.created"), build_filter_path(:sort, "created"), class: "dropdown__item" %>
+                <%= link_to t("filter.sort.updated"), build_filter_path(:sort, "updated"), class: "dropdown__item" %>
+                <%= link_to t("filter.sort.on_fire"), build_filter_path(:sort, "on-fire"), class: "dropdown__item" %>
+                <%= link_to t("filter.sort.favorites"), build_filter_path(:sort, "favorites"), class: "dropdown__item" %>
+                <%= link_to t("filter.sort.views"), build_filter_path(:sort, "views"), class: "dropdown__item" %>
               </div>
             </div>
           </div>
 
           <div class="filter__item">
-            <span class="filter__label"><%= t "filter.exclude_expired" %></span>
+            <span class="filter__label"><%= t "filter.exclude_expired.label" %></span>
 
             <div class="dropdown" data-dropdown>
-              <%= link_to params[:expired] ? params[:expired].humanize : "False", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+              <%= link_to params[:expired] ? params[:expired].humanize : t("filter.exclude_expired.false"), "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
               <div class="dropdown__content" data-dropdown-content>
-                <%= link_to "True", build_filter_path(:expired, "true"), class: "dropdown__item" %>
-                <%= link_to "False", build_filter_path(:expired, nil), class: "dropdown__item" %>
+                <%= link_to t("filter.exclude_expired.true"), build_filter_path(:expired, "true"), class: "dropdown__item" %>
+                <%= link_to t("filter.exclude_expired.false"), build_filter_path(:expired, nil), class: "dropdown__item" %>
               </div>
             </div>
           </div>
