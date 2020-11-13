@@ -35,7 +35,7 @@
           <% end %>
         </div>
 
-        <% if post.revisions.last && post.revisions.last.created_at < 6.months.ago %>
+        <% if post.revisions.where("created_at > ?", 6.months.ago).none? %>
           <div class="item__details-item">
             <div class="tooltip">
               ⚠ <%= t("post.expired.title") %>
