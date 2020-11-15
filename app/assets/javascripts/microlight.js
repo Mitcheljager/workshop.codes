@@ -69,7 +69,7 @@
                    // escaping if needed (with except for comments)
                    // pervious character will not be therefore
                    // recognized as a token finalize condition
-                   prev1 = tokenType < 7 && prev1 == '\\' ? 1 : chr
+                   prev1 = tokenType < 6 && prev1 == '\\' ? 1 : chr
             ) {
                 chr = next1;
                 next1=text[++pos];
@@ -93,8 +93,6 @@
                         !/[$\w]/[test](chr),
                         // 5: string with "
                         prev1 == '"' && multichar,
-                        // 6: string with '
-                        prev1 == "'" && multichar,
                         // 7: xml comment
                         text[pos-4]+prev2+prev1 == '-->',
                         // 8: multiline comment
@@ -127,7 +125,7 @@
                             // punctuation
                             tokenType <= 2 ? 2 :
                             // comments
-                            tokenType >= 7 ? 4 :
+                            tokenType >= 6 ? 4 :
                             // regex and strings
                             tokenType >= 5 ? 3 :
                             // otherwise tokenType == 3, (key)word
@@ -141,7 +139,7 @@
                     // saving the previous token type
                     // (skipping whitespaces and comments)
                     lastTokenType =
-                        (tokenType && tokenType < 7) ?
+                        (tokenType && tokenType < 6) ?
                         tokenType : lastTokenType;
 
                     // initializing a new token
@@ -150,7 +148,7 @@
                     // determining the new token type (going up the
                     // list until matching a token type start
                     // condition)
-                    tokenType = 10;
+                    tokenType = 9;
                     while (![
                         1,                   //  0: whitespace
                                              //  1: operator or braces
@@ -159,12 +157,11 @@
                         /[$\w]/[test](chr),  //  3: (key)word
                         /^\d+$/[test](chr),  //  4: number
                         chr == '"',          //  5: string with "
-                        chr == "'",          //  6: string with '
-                                             //  7: xml comment
+                                             //  6: xml comment
                         chr+next1+text[pos+1]+text[pos+2] == '<!--',
-                        chr+next1 == '/*',   //  8: multiline comment
-                        chr+next1 == '//',   //  9: single-line comment
-                        chr == '#',          // 10: hash-style comment
+                        chr+next1 == '/*',   //  7: multiline comment
+                        chr+next1 == '//',   //  8: single-line comment
+                        chr == '#',          // 9: hash-style comment
                     ][--tokenType]);
                 }
 
