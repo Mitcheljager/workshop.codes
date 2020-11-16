@@ -1,10 +1,57 @@
+@keyframes fade-in-filter-content {
+  from { max-height: 0; padding-top: 0 }
+  to { max-height: 10rem; padding-top: 1rem }
+}
+
+@keyframes fade-out-filter-content {
+  from { max-height: 10rem; padding-top: 1rem }
+  to { max-height: 0; padding-top: 0 }
+}
+
 .filter {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 5;
+}
+
+.filter__content {
+  width: 100%;
+  padding-top: 1rem;
+  border-bottom-left-radius: $search-height / 2;
+  border-bottom-right-radius: $search-height / 2;
+  background: $bg-darker;
+  height: 100%;
+  animation: fade-in-filter-content 150ms;
+
+  .fading-in & {
+    overflow: hidden;
+  }
+
+  .fading-out & {
+    overflow: hidden;
+    animation: fade-out-filter-content 150ms;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -#{ $search-height / 2 };
+    left: 0;
+    height: $search-height / 2;
+    width: 100%;
+    background: $bg-darker;
+  }
+}
+
+.filter__group {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  padding: .75rem 1.5rem;
   font-size: $font-size-base;
 
   @include media-min(sm) {
@@ -53,33 +100,42 @@
 .filter__tray {
   flex: 0 0 100%;
   display: flex;
-  flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  color: $text-color-dark;
+  padding: .5rem $search-height / 2;
+  margin-top: 1rem;
+  border-bottom-left-radius: $search-height / 2;
+  border-bottom-right-radius: $search-height / 2;
+  background: darken($body-bg, 8%);
 }
 
 .filter__actions {
+  display: flex;
   margin-left: auto;
+  margin-right: $search-height / 2;
+  border-bottom-left-radius: $border-radius * 2;
+  border-bottom-right-radius: $border-radius * 2;
+  background: darken($body-bg, 8%);
+  overflow: hidden;
 }
 
 .filter__link {
+  display: inline-block;
   appearance: none;
   -webkit-appearance: none;
   background: transparent;
   border: 0;
-  padding: 0;
-  margin-top: 1rem;
+  padding: .75rem;
   margin-left: auto;
+  color: $white;
   font-family: $font-stack;
-  color: $text-color-dark;
-  font-size: 1rem;
+  font-size: $font-size-small;
   text-decoration: none;
   cursor: pointer;
 
   &:hover,
   &:active {
-    color: $white;
+    color: $pure-white;
   }
 
   &:focus {
@@ -87,7 +143,18 @@
   }
 
   &--remove {
-    color: $red;
-    margin-right: 1rem;
+    background: $red;
+    color: $pure-white;
+  }
+
+  &--active {
+    background: $primary;
+    color: $pure-white;
+
+    &:hover,
+    &:active {
+      background: lighten($primary, 5%);
+      color: $pure-white;
+    }
   }
 }

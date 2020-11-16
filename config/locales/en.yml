@@ -35,8 +35,9 @@ en:
     select: Select...
     remove: ✕ Remove Filter
     remove_all: Remove filters
-    more: More filters
-    less: Less filters
+    active: Filter active
+    more: View filters
+    less: Collapse filters
   search:
     label_html: <strong>Search </strong> by Titles, Categories, Tags, Codes, Maps, Heroes, or Usernames
     popular_search_terms_html: <strong>Popular</strong> Search&nbsp;terms

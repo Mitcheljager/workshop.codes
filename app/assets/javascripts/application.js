@@ -19,6 +19,7 @@
 //= require carousel
 //= require checkbox-select-all
 //= require copy
+//= require date-range
 //= require debounce
 //= require difference-viewer
 //= require dropdown

@@ -17,13 +17,20 @@ function toggleContent(event) {
 
     const element = parent.querySelector("[data-role~='content-to-toggle']")
     const state = window.getComputedStyle(element).display === "none"
+    const animationTiming = (!state && parseInt(eventElement.dataset.animationTiming) > 0) ? parseInt(eventElement.dataset.animationTiming) : 0
 
-    element.style.display = state ? "initial" : "none"
-
-    if (!state && eventElement.dataset.hideWith) {
-      eventElement.textContent = eventElement.dataset.hideWith
-    } else if (state && eventElement.dataset.showWith) {
-      eventElement.textContent = eventElement.dataset.showWith
+    if (!state) {
+      parent.classList.add("fading-out")
+      if (eventElement.dataset.hideWith) eventElement.textContent = eventElement.dataset.hideWith
+    } else {
+      parent.classList.add("fading-in")
+      if (eventElement.dataset.showWith) eventElement.textContent = eventElement.dataset.showWith
     }
+
+    setTimeout(() => {
+      element.style.display = state ? "initial" : "none"
+      parent.classList.remove("fading-out")
+      parent.classList.remove("fading-in")
+    }, animationTiming)
   }
 }
