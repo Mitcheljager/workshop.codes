@@ -2,13 +2,6 @@
 <% begin %><% content_for :og_image, "#{ polymorphic_url(@ordered_images.first.variant(quality: 95).processed) if @ordered_images.present? && @ordered_images.any? }" %><% rescue %><% end %>
 <% content_for :og_description, strip_tags(markdown(@post.description || "")).truncate(200).gsub("\n"," ") %>
 
-<% if @is_expired %>
-  <div class="warning">
-    <p class="mb-0">⚠ <mark><%= t(".expired.title") %></mark></p>
-    <p class="mt-0"><small><%= t(".expired.content") %></small></p>
-  </div>
-<% end %>
-
 <article>
   <div class="item item--single">
     <h1 class="item__title">
@@ -26,7 +19,14 @@
     </div>
   </div>
 
-  <% cache_unless current_user && current_user == @post.user, [@post, "show"] do %>
+  <% if @is_expired %>
+    <div class="warning mt-1/2 mb-1/2 pt-1/8 pb-1/8">
+      <p class="mb-0">⚠ <mark><%= t(".expired.title") %></mark></p>
+      <p class="mt-0"><small><%= t(".expired.content") %></small></p>
+    </div>
+  <% end %>
+
+  <% cache_unless current_user && current_user == @post.user, [current_locale, @post, "show"] do %>
     <% if current_user == @post.user %>
       <div class="well well--dark mt-1/2" data-toggle-content>
         <div>
@@ -167,7 +167,7 @@
   <% end %>
 </article>
 
-<% cache_unless current_user, [@post.collection, @post.comments, @revisions] do %>
+<% cache_unless current_user, [current_locale, @post.collection, @post.comments, @revisions] do %>
   <%= render "collections/collections" if @post.collection && @post.collection.posts.many? %>
 
   <div class="comments" id="comments">

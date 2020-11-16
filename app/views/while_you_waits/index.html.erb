@@ -1,6 +1,6 @@
 <% content_for :page_title, t("navigation.while_you_wait") %>
 
-<% cache_if @while_you_waits.any?, ["while_you_wait", params[:filter]] do %>
+<% cache_if @while_you_waits.any?, [current_locale, "while_you_wait", params[:filter]] do %>
   <div class="heading mt-1/1 mb-1/2">
     <h1><strong><%= t(".title") %></strong> <small> - <%= t(".tagline") %></small></h1>
   </div>
