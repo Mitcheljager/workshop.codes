@@ -130,4 +130,8 @@ Rails.application.routes.draw do
       request.params[:nice_url].present? && Post.find_by_nice_url(request.params[:nice_url].downcase).present?
     }
   end
+
+  scope "/webhooks", controller: :webhooks do
+    post :bugsnag_error_reporting
+  end
 end

@@ -203,11 +203,11 @@
   </div>
 
   <div data-checkbox-group>
-    <h2 class="heading mb-1/2"><%= t("posts.form.heroes") %></h2>
+    <h2 class="heading mb-1/2"><%= t("posts.form.heroes.title") %></h2>
 
     <div class="form-group checkbox">
       <%= form.check_box :checkbox_group_heroes, data: { action: "checkbox-select-all" } %>
-      <%= form.label :checkbox_group_heroes, "Check all Heroes" %>
+      <%= form.label :checkbox_group_heroes, t("posts.form.heroes.check_all") %>
     </div>
 
     <div class="form-group-triple">
@@ -217,7 +217,7 @@
 
           <div class="checkbox">
             <%= form.check_box "checkbox_group_#{ hero_category }", data: { action: "checkbox-select-all" } %>
-            <%= form.label "checkbox_group_#{ hero_category }", "Check all #{ hero_category[current_locale] } Heroes" %>
+            <%= form.label "checkbox_group_#{ hero_category }", t("posts.form.heroes.check_all_type", type: hero_category[current_locale]) %>
           </div>
 
           <br>
@@ -234,11 +234,11 @@
   </div>
 
   <div data-checkbox-group>
-    <h2 class="heading mb-1/2"><%= t("posts.form.maps") %></h2>
+    <h2 class="heading mb-1/2"><%= t("posts.form.maps.title") %></h2>
 
     <div class="form-group checkbox">
       <%= form.check_box :checkbox_group_maps, data: { action: "checkbox-select-all" } %>
-      <%= form.label :checkbox_group_maps, "Check all maps" %>
+      <%= form.label :checkbox_group_maps, t("posts.form.maps.check_all") %>
     </div>
 
     <div class="form-group-triple">
@@ -249,7 +249,7 @@
           <% if maps.count > 1 %>
             <div class="checkbox">
               <%= form.check_box "checkbox_group_#{ map_type }", data: { action: "checkbox-select-all" } %>
-              <%= form.label "checkbox_group_#{ map_type }", "Check all #{ map_type[current_locale] } maps" %>
+              <%= form.label "checkbox_group_#{ map_type }", t("posts.form.heroes.check_all_type", type: map_type[current_locale]) %>
             </div>
 
             <br>
