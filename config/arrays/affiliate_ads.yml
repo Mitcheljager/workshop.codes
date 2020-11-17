@@ -35,24 +35,6 @@
     url: https://blizzardgearstore.l49yho.net/c/2456162/921746/10799
     img: //a.impactradius-go.com/display-ad/10799-921746
 -
-  alt: Shop Overwatch Hotwheels Cars
-  lg:
-    id: 894901
-    url: https://blizzardgearstore.l49yho.net/c/2456162/894901/10799
-    img: //a.impactradius-go.com/display-ad/10799-894901
-  md:
-    id: 894900
-    url: https://blizzardgearstore.l49yho.net/c/2456162/894900/10799
-    img: //a.impactradius-go.com/display-ad/10799-894900
-  sm:
-    id: 894898
-    url: https://blizzardgearstore.l49yho.net/c/2456162/894898/10799
-    img: //a.impactradius-go.com/display-ad/10799-894898
-  xs:
-    id: 894892
-    url: https://blizzardgearstore.l49yho.net/c/2456162/894892/10799
-    img: //a.impactradius-go.com/display-ad/10799-894892
--
   alt: Shadowlands Thrall Statue at Blizzard Gear Store
   lg:
     id: 915762
@@ -70,3 +52,39 @@
     id: 915755
     url: https://blizzardgearstore.l49yho.net/c/2456162/915755/10799
     img: //a.impactradius-go.com/display-ad/10799-915755
+-
+  alt: Check out Exclusives at Blizzard Gear Fest!
+  lg:
+    id: 932978
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932978/10799
+    img: //a.impactradius-go.com/display-ad/10799-932978
+  md:
+    id: 932977
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932977/10799
+    img: //a.impactradius-go.com/display-ad/10799-932977
+  sm:
+    id: 932970
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932970/10799
+    img: //a.impactradius-go.com/display-ad/10799-932970
+  xs:
+    id: 932958
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932958/10799
+    img: //a.impactradius-go.com/display-ad/10799-932958
+-
+  alt: Check out Exclusives at Blizzard Gear Fest!
+  lg:
+    id: 932919
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932919/10799
+    img: //a.impactradius-go.com/display-ad/10799-932919
+  md:
+    id: 932906
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932906/10799
+    img: //a.impactradius-go.com/display-ad/10799-932906
+  sm:
+    id: 932898
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932898/10799
+    img: //a.impactradius-go.com/display-ad/10799-932898
+  xs:
+    id: 932883
+    url: https://blizzardgearstore.l49yho.net/c/2456162/932883/10799
+    img: //a.impactradius-go.com/display-ad/10799-932883
