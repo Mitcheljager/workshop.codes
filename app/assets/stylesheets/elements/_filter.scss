@@ -17,7 +17,7 @@
 
 .filter__content {
   width: 100%;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
   background: $bg-darker;
@@ -51,7 +51,7 @@
   flex-direction: column;
   align-items: flex-end;
   flex-wrap: wrap;
-  padding: .75rem 1.5rem;
+  padding: 0 1.5rem;
 
   @include media-min(lg) {
     flex-direction: row;
@@ -71,13 +71,13 @@
 .filter__item {
   display: flex;
   flex-direction: row-reverse;
-  margin-bottom: $margin / 12;
+  align-items: center;
+  margin: .25rem 0;
   font-size: $font-size-base;
 
   @include media-min(lg) {
     flex-direction: row;
-    margin-left: $margin / 2;
-    margin-bottom: 0;
+    margin: .5rem 0 .5rem $margin / 2;
     text-align: left;
   }
 }
@@ -100,16 +100,26 @@
   }
 }
 
+.filter__button {
+  padding: .5em .75em;
+  border-radius: $border-radius;
+  background: $bg-dark;
+}
+
 .filter__tray {
   flex: 0 0 100%;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
   padding: .5rem $search-height / 2;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
   background: darken($body-bg, 8%);
+
+  .button {
+    text-transform: none;
+  }
 }
 
 .filter__actions {
