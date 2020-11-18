@@ -1,10 +1,10 @@
 @keyframes fade-in-filter-content {
   from { max-height: 0; padding-top: 0 }
-  to { max-height: 10rem; padding-top: 1rem }
+  to { max-height: 20rem; padding-top: 1rem }
 }
 
 @keyframes fade-out-filter-content {
-  from { max-height: 10rem; padding-top: 1rem }
+  from { max-height: 20rem; padding-top: 1rem }
   to { max-height: 0; padding-top: 0 }
 }
 
@@ -52,24 +52,27 @@
   align-items: flex-end;
   flex-wrap: wrap;
   padding: .75rem 1.5rem;
-  font-size: $font-size-base;
-
-  @include media-min(sm) {
-    font-size: 18px;
-  }
 
   @include media-min(lg) {
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-end;
   }
+
+  &--mobile-reverse {
+    flex-direction: column-reverse;
+
+    @include media-min(lg) {
+      flex-direction: row;
+    }
+  }
 }
 
 .filter__item {
   display: flex;
   flex-direction: row-reverse;
-  text-align: right;
   margin-bottom: $margin / 12;
+  font-size: $font-size-base;
 
   @include media-min(lg) {
     flex-direction: row;

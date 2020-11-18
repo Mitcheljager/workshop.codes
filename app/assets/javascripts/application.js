@@ -23,6 +23,7 @@
 //= require debounce
 //= require difference-viewer
 //= require dropdown
+//= require filter
 //= require gallery
 //= require get-post-analytics
 //= require get-user-analytics

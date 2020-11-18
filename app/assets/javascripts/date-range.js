@@ -26,6 +26,7 @@ function setDateRange(event) {
     const difference = currentMouseX - startMouseX
 
     value = Math.max(Math.min(parseInt(element.dataset.currentValue || 0) + difference, max), min)
+
     const step = Math.ceil(value / stepSize)
     value = step * stepSize
     element.style.transform = `translateX(${ value }px)`
