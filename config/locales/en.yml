@@ -164,11 +164,11 @@ en:
       heroes:
         title: Heroes
         check_all: Check all heroes
-        check_all_type: Checl all %{type} heroes
+        check_all_type: Check all %{type} heroes
       maps:
         title: Maps
         check_all: Check all maps
-        check_all_type: Checl all %{type} maps
+        check_all_type: Check all %{type} maps
       expiry_notifications:
         title: Expiry Notifications
         label: Also notify me by email
