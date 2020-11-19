@@ -9,8 +9,6 @@ en:
     categories: Categories
     heroes: Heroes
     maps: Maps
-    from: From
-    to: To
     time:
       one_day: 1 day ago
       three_days: 3 days ago
@@ -36,8 +34,9 @@ en:
     remove: ✕ Remove Filter
     remove_all: Remove filters
     active: Filter active
-    more: View filters
-    less: Collapse filters
+    apply: Apply filter
+    view: View filter
+    collapse: Collapse filter
   search:
     label_html: <strong>Search </strong> by Titles, Categories, Tags, Codes, Maps, Heroes, or Usernames
     popular_search_terms_html: <strong>Popular</strong> Search&nbsp;terms

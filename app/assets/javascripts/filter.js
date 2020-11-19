@@ -13,9 +13,7 @@ function addFilter(event) {
 
   const filterElement = this.closest("[data-filter]").querySelector("[data-filter-type]")
   filterElement.dataset.value = this.dataset.value
-  filterElement.innerText = this.innerText
-
-  console.log(filterElement.dataset.value)
+  filterElement.innerHTML = this.dataset.value == "" ? "Select..." : this.innerHTML
 
   closeDropdown()
 }
@@ -24,6 +22,7 @@ function buildFilterPath(event) {
   event.preventDefault()
 
   const linkElement = document.querySelector("[data-role='filter-link']")
+  linkElement.innerHTML = "<div class='spinner spinner--small'></div>"
 
   let buildPath = {
     "categories": filterValue("categories"),
@@ -31,17 +30,16 @@ function buildFilterPath(event) {
     "maps": filterValue("maps"),
     "from": filterValue("from"),
     "to": filterValue("to"),
-    "exclude-expired": filterValue("exclude-expired"),
+    "exclude-expired": document.querySelector("[data-filter-type='exclude-expired']").checked ? "true" : "",
     "author": filterValue("author"),
-    "search": filterValue("search"),
+    "search": document.querySelector("input[name='query']").value,
     "sort": filterValue("sort"),
   }
 
   buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
   buildPath = Object.entries(buildPath).map(([k, v]) => `${ k }/${ v }`).join("/")
-  console.log(buildPath)
 
-  linkElement.href = "/" + buildPath
+  window.location = "/" + buildPath
 }
 
 function filterValue(type) {
