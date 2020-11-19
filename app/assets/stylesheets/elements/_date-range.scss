@@ -1,0 +1,75 @@
+.date-range {
+  position: relative;
+  height: 1.5rem;
+  width: 160px;
+  user-select: none;
+}
+
+.date-range__knob {
+  position: absolute;
+  top: .25rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background: $white;
+  box-shadow: 0 0 0 3px $bg-dark;
+  z-index: 5;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    background: $pure-white;
+  }
+
+  &:last-of-type {
+    transform: translateX(160px - 16px);
+
+    .date-range__label {
+      left: -.25rem;
+      right: auto;
+
+      &::before {
+        right: auto;
+        left: .25rem;
+      }
+    }
+  }
+}
+
+.date-range__label {
+  position: absolute;
+  background: $bg-dark;
+  padding: .25rem .5rem;
+  top: 1.25rem;
+  right: -.25rem;
+  border-radius: $border-radius;
+  font-size: $font-size-small;
+  white-space: nowrap;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -.5rem;
+    right: .25rem;
+    border-left: .5rem solid transparent;
+    border-right: .5rem solid transparent;
+    border-bottom: .5rem solid $bg-dark;
+  }
+}
+
+.date-range__track {
+  position: absolute;
+  top: .6rem;
+  height: .3rem;
+  width: 100%;
+  border-radius: $border-radius;
+  background: $border-color;
+  z-index: 0;
+}
+
+.date-range__active {
+  width: 100%;
+  height: 100%;
+  background: $primary;
+}
