@@ -11,7 +11,7 @@
     <% end %>
 
     <div>
-      <%= user.username.split("#")[0] %> <small class="text-base">(<%= user.posts.count %>)</small>
+      <%= user.username.split("#")[0] %> <small class="text-base">(<%= user.posts.visible?.count %>)</small>
     </div>
   <% end %>
 <% end %>

@@ -13,7 +13,7 @@ function addFilter(event) {
 
   const filterElement = this.closest("[data-filter]").querySelector("[data-filter-type]")
   filterElement.dataset.value = this.dataset.value
-  filterElement.innerHTML = this.dataset.value == "" ? "Select..." : this.innerHTML
+  filterElement.innerText = this.dataset.value == "" ? "Select..." : this.innerText
 
   closeDropdown()
 }
