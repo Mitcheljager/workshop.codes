@@ -36,8 +36,10 @@ ko:
     select: 선택하기...
     remove: ✕ 필터 제거
     remove_all: 필터 제거
-    more: 추가 필터
-    less: 적은 필터
+    active: 필터 활성화
+    apply: 필터 적용
+    view: 필터보기
+    collapse: 필터 접기
   search:
     label_html: <strong>검색 </strong> 제목, 카테고리, 태그, 코드,맵, 영웅 또는 유저네임
     popular_search_terms_html: <strong>인기</strong> 검색어
