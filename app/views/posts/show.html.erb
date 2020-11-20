@@ -5,7 +5,7 @@
 
 <article>
   <div class="item item--single <%= "top-offset" unless @ordered_images.present? || @post.carousel_video.present? %>">
-    <h1 class="item__title text-pure-white">
+    <h1 class="item__title <%= @ordered_images.present? || @post.carousel_video.present? ? "text-black" : "text-pure-white" %>">
       <%= @post.title %>
 
       <%= render "favorites/form", post: @post %>

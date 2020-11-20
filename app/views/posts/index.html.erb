@@ -1,13 +1,7 @@
 <% content_for :page_title, "#{ t("navigation.recent") } | Page #{ params[:page] }" if params[:page] %>
 <% content_for :bg_large, "true" unless params[:page] %>
 
-<% unless params[:page] %>
-  <div class="heading mt-1/1">
-    <h1 class="text-pure-white"><center><%= t(".title") %></center></h1>
-  </div>
-<% end %>
-
-<main>
+<main class="top-offset">
   <% unless params[:page] %>
     <h2 class="mt-1/2 text-black"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t(".on_fire.title_html") %></h2>
 

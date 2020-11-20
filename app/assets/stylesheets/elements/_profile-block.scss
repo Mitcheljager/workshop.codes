@@ -31,28 +31,21 @@
 
 .profile-block__action {
   display: inline-block;
-  padding: .25em 0;
+  padding: .425em .5em;
+  border-radius: $border-radius;
+  background: $bg-dark;
   line-height: 1em;
-  color: white;
+  font-weight: bold;
+  color: $white;
   text-decoration: none;
+  transition: box-shadow 100ms;
 
   &:hover,
   &:active {
+    background: $bg-darker;
+    box-shadow: 0 0 0 2px white;
+    text-decoration: none;
     color: white;
-    text-decoration: underline;
-  }
-
-  &--dark {
-    padding: .25em .35em;
-    border-radius: $border-radius;
-    background: $border-color;
-
-    &:hover,
-    &:active {
-      background: $bg-darker;
-      text-decoration: none;
-      box-shadow: 0 0 0 2px white;
-    }
   }
 }
 

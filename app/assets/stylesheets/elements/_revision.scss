@@ -4,7 +4,6 @@
 
 .revision__description {
   border: 1px solid $border-color;
-  border-top: 0;
   padding: $margin / 4;
 
   @include media-min(lg) {

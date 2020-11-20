@@ -2,7 +2,7 @@
   <% if current_user %>
     <%= link_to current_user.username.split("#")[0], account_path, class: "profile-block__action lg:mr-1/4 mb-1/4 lg:mb-0" %>
   <% else %>
-    <%= link_to t("navigation.login"), login_path, class: "profile-block__action lg:mr-1/4 mb-1/4 lg:mb-0" %>
+    <%= link_to t("navigation.login"), login_path, class: "profile-block__action lg:mr-1/8 mb-1/4 lg:mb-0" %>
   <% end %>
 
   <%= render "locale_picker" %>
