@@ -17,13 +17,8 @@ h5 {
 }
 
 .heading {
-  margin-top: $margin;
-  margin-bottom: $margin / 2;
-
-  @include media-min(sm) {
-    margin-top: $margin * 2;
-    margin-bottom: $margin;
-  }
+  margin-top: $margin * 2.5;
+  margin-bottom: $margin;
 
   small {
     color: $text-color;

@@ -1,13 +1,23 @@
 .logo {
+  display: none;
+
+  @include media-min(xl) {
+    display: block;
+    height: $logo-height / 1.25;
+    margin: 0;
+  }
+
+  @media (min-width: 1300px) {
+    height: $logo-height;
+  }
+}
+
+.logo-mobile {
   display: block;
   height: $logo-height / 1.5;
   margin: 0;
 
-  @include media-min(sm) {
-    height: $logo-height / 1.25;
-  }
-
   @include media-min(xl) {
-    height: $logo-height;
+    display: none;
   }
 }

@@ -14,6 +14,18 @@
   &--auto {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
+
+  &--on-fire {
+    .card:last-child {
+      @include media-min(xs) {
+        display: none;
+      }
+
+      @include media-min(md) {
+        display: flex;
+      }
+    }
+  }
 }
 
 .card {
@@ -22,7 +34,6 @@
   flex-direction: column;
   padding: $margin / 4;
   text-align: left;
-  font-size: 26px;
   color: $white;
   text-decoration: none;
 
@@ -62,8 +73,8 @@
   padding-bottom: .5rem;
   margin-bottom: auto;
   font-family: $font-stack;
-  font-size: $font-size-small;
-  color: $text-color;
+  font-size: 16px;
+  color: $white;
   text-decoration: none;
 }
 

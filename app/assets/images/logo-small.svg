@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 801 648">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Color_Fill_2" data-name="Color Fill 2" d="M329,0L597,324,329,648H534L801,324,534,0H329Z"/>
+  <path id="Color_Fill_3" data-name="Color Fill 3" d="M144,313l-25,29L342,458l20-24L277,276l154,81,21-23L328,105l-26,30,86,158L234,213l-20,22,86,157Z"/>
+  <path id="Color_Fill_4" data-name="Color Fill 4" d="M0,322L190,110,21,322,180,521Z"/>
+</svg>

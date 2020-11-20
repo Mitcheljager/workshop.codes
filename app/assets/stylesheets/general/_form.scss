@@ -19,8 +19,8 @@
 
   &--large {
     width: 100%;
-    height: $search-height / 1.25;
-    padding: calc(#{ $search-height / 1.25 } - (1.5em * 2)) $margin / 3;
+    height: 80px / 1.25;
+    padding: calc(80px / 1.25 - (1.5em * 2)) $margin / 3;
     font-size: 21px;
     font-weight: lighter;
     line-height: 1.5em;
@@ -28,8 +28,8 @@
     transition: box-shadow 200ms;
 
     @include media-min(sm) {
-      height: $search-height;
-      padding: calc(#{ $search-height } - (1.5em * 2)) $margin / 2;
+      height: 80px;
+      padding: calc(80px - (1.5em * 2)) $margin / 2;
       font-size: 24px;
       line-height: 1.5em;
     }

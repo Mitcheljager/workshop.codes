@@ -50,7 +50,7 @@ ko:
   banner:
     kofi:
       title: Ko-fi로 Workshop.codes 지원하기
-      tagline: 알고보니 웹사이트는 비싸고 광고는 형편없습니다.
+      tagline: 알고보니 웹사이트는 비싸고 광고는 형편없습니다
       content_html: 단 <span class="text-white">$3</strong>만으로도 Workshop.codes를 지원할 수 있습니다
       button: Workshop.codes 지원하기
     affiliate_ad:

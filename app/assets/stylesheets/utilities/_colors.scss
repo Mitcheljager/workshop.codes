@@ -2,12 +2,20 @@
   color: $white !important;
 }
 
+.text-pure-white {
+  color: $pure-white;
+}
+
 .text-dark {
   color: $text-color-dark;
 }
 
 .text-base {
   color: $text-color;
+}
+
+.text-black {
+  color: $black;
 }
 
 .text-red {
@@ -19,6 +27,10 @@
       color: lighten($red, 15%) !important;
     }
   }
+}
+
+.bg-red {
+  background: $red;
 }
 
 .text-primary {

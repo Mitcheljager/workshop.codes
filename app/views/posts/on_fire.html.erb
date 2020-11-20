@@ -1,12 +1,10 @@
 <% content_for :page_title, "#{ t("navigation.on_fire") } #{ "| Page #{ params[:page] }" if params[:page] }" %>
 
-<div class="heading mt-1/1">
+<div class="heading">
   <h1>
     <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %>
     <%= t(".title_html") %> <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
   </h1>
 </div>
 
-<main class="items">
-  <%= render "posts" %>
-</main>
+<%= render "posts" %>

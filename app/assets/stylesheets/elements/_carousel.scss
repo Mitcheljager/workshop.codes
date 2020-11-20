@@ -1,7 +1,6 @@
 .carousel {
   width: 100%;
   max-width: 900px;
-  margin-top: $margin;
 
   img {
     display: block;
@@ -33,6 +32,7 @@
 .carousel__item {
   position: relative;
   overflow: hidden;
+  background: $body-bg;
 }
 
 .carousel__actions {

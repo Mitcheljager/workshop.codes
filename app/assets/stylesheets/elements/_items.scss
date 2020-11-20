@@ -1,4 +1,6 @@
 .items {
+  position: relative;
+
   .simple-view & {
     hr {
       display: none;
@@ -70,7 +72,6 @@
   &--single {
     margin-top: $margin;
     border-top: 0;
-    border-bottom: 1px solid $border-color;
     grid-template:
       "title"
       "code";
@@ -84,6 +85,10 @@
 
     + .item--bottom {
       margin-top: 0;
+    }
+
+    .item__title {
+      font-weight: normal;
     }
   }
 
@@ -332,7 +337,11 @@
   }
 
   .item--bottom & {
-    margin: $margin / 6 0;
+    margin: 0 0 $margin / 6;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -2,7 +2,7 @@
   <defs>
     <style>
       .onfire-icon {
-        fill: currentColor;
+        fill: #b33834;
         fill-rule: evenodd;
       }
     </style>

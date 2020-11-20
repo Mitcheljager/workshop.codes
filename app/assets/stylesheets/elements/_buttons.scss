@@ -40,6 +40,10 @@
     padding: .5em .75em;
   }
 
+  &--pill {
+    border-radius: 99px;
+  }
+
   &--secondary {
     color: $white;
     background: $bg-dark;

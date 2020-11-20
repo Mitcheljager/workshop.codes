@@ -1,28 +1,54 @@
 @keyframes fade-in-filter-content {
   from { max-height: 0; padding-top: 0 }
-  to { max-height: 20rem; padding-top: 1rem }
+  to { max-height: 20rem; padding-top: calc(1.5rem + #{ $search-height / 2 }) }
 }
 
 @keyframes fade-out-filter-content {
-  from { max-height: 20rem; padding-top: 1rem }
+  from { max-height: 20rem; padding-top: calc(1.5rem + #{ $search-height / 2 }) }
   to { max-height: 0; padding-top: 0 }
 }
 
 .filter {
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  top: $search-height;
   z-index: 5;
 }
 
 .filter__content {
+  position: relative;
   width: 100%;
-  padding-top: 1.5rem;
+  margin-top: $search-height / -2;
+  padding-top: calc(1.5rem + #{ $search-height / 2 });
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
-  background: $bg-darker;
+  background: $body-bg;
   height: 100%;
   animation: fade-in-filter-content 150ms;
+  z-index: 20;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 3rem;
+    bottom: .65rem;
+    height: 10px;
+    width: calc(100% - 6rem);
+    z-index: -1;
+    opacity: .45;
+    background: $black;
+    box-shadow: 0 0 1.5rem 1.5rem $black;
+    border-radius: 99px;
+    pointer-events: none;
+
+    .simple-view & {
+      display: none;
+    }
+  }
 
   .fading-in & {
     overflow: hidden;
@@ -31,17 +57,6 @@
   .fading-out & {
     overflow: hidden;
     animation: fade-out-filter-content 150ms;
-  }
-
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: -#{ $search-height / 2 };
-    left: 0;
-    height: $search-height / 2;
-    width: 100%;
-    background: $bg-darker;
   }
 }
 
@@ -53,18 +68,8 @@
   flex-wrap: wrap;
   padding: 0 1.5rem;
 
-  @include media-min(lg) {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-end;
-  }
-
   &--mobile-reverse {
     flex-direction: column-reverse;
-
-    @include media-min(lg) {
-      flex-direction: row;
-    }
   }
 }
 
@@ -78,7 +83,7 @@
 
   @include media-min(lg) {
     flex-direction: row;
-    margin: .5rem 0 .5rem $margin / 2;
+    margin: .25rem 0;
     text-align: left;
   }
 }
@@ -110,53 +115,37 @@
 .filter__tray {
   flex: 0 0 100%;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding: 1.5rem 1.5rem .5rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem $search-height / 2;
   margin-top: 1.5rem;
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
-  background: darken($body-bg, 8%);
-
-  @include media-min(sm) {
-    flex-direction: row;
-    align-items: center;
-    padding: .5rem $search-height / 2;
-  }
-
-  .button {
-    text-transform: none;
-  }
-}
-
-.filter__actions {
-  display: flex;
-  margin-left: auto;
-  margin-right: $search-height / 2;
-  border-bottom-left-radius: $border-radius * 2;
-  border-bottom-right-radius: $border-radius * 2;
-  background: darken($body-bg, 8%);
-  overflow: hidden;
+  background: $bg-dark;
 }
 
 .filter__link {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   appearance: none;
   -webkit-appearance: none;
   background: transparent;
   border: 0;
-  padding: .75rem;
-  margin-left: auto;
+  padding: .65rem .5rem;
   color: $white;
   font-family: $font-stack;
-  font-size: $font-size-small;
+  font-size: $font-size-base;
   text-decoration: none;
   cursor: pointer;
 
   &:hover,
   &:active {
     color: $pure-white;
+
+    path {
+      fill: $white;
+    }
   }
 
   &:focus {
@@ -171,6 +160,7 @@
   &--active {
     background: $primary;
     color: $pure-white;
+    font-size: 12px;
 
     &:hover,
     &:active {
@@ -178,4 +168,12 @@
       color: $pure-white;
     }
   }
+}
+
+.filter-actions {
+  position: absolute;
+  right: 2.5rem;
+  top: 0;
+  display: flex;
+  z-index: 15;
 }

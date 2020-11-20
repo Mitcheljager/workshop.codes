@@ -2,33 +2,9 @@
   position: relative;
   z-index: 10;
 
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 4rem;
-    bottom: .65rem;
-    height: 20%;
-    width: calc(100% - 8rem);
-    z-index: -1;
-    opacity: .45;
-    background: $black;
-    box-shadow: 0 0 2rem 2rem $black;
-    border-radius: 99px;
-    pointer-events: none;
-
-    @include media-min(sm) {
-      left: 6rem;
-      width: calc(100% - 12rem);
-    }
-
-    .simple-view & {
-      display: none;
-    }
-  }
-
   input:not([type="submit"]) {
-    padding: calc(#{ $search-height / 1.25 } - (1.5em * 2)) calc(#{ $search-height / 2.5});
+    height: $search-height;
+    padding: 0 $search-height / 2;
     padding-right: 4rem;
     border-radius: $search-height / 2;
     transition: border-radius 100ms;
@@ -36,20 +12,14 @@
     box-shadow: none;
 
     @include media-min(sm) {
-      padding: calc(#{ $search-height } - (1.5em * 2)) calc(#{ $search-height / 2} + .5em);
       padding-right: 6rem;
+      min-width: 320px;
     }
 
     &:placeholder-shown {
       + label {
         display: block;
       }
-    }
-
-    &:focus {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      transition-delay: 0ms;
     }
 
     .simple-view & {
@@ -60,38 +30,16 @@
   label {
     display: none;
     position: absolute;
-    left: calc(#{ $search-height / 2.5 });
+    left: $search-height / 2;
     top: 50%;
     transform: translateY(-50%);
     font-style: italic;
-    font-size: 0;
+    font-size: $font-size-base;
     font-weight: lighter;
-    color: $text-color;
+    color: $white;
     cursor: text;
     pointer-events: none;
     z-index: 2;
-
-    @include media-min(sm) {
-      left: calc(#{ $search-height / 2} + .75em);
-    }
-
-    @include media-min(md) {
-      font-size: $font-size-base;
-    }
-
-    @include media-min(lg) {
-      font-size: 16px;
-    }
-
-    strong {
-      color: $white;
-      font-size: 20px;
-      font-weight: lighter;
-
-      @include media-min(md) {
-        font-size: 22px;
-      }
-    }
 
     .high-contrast & {
       font-weight: normal;
@@ -103,19 +51,14 @@
   position: absolute;
   top: 0;
   right: 0;
-  padding: 0 2.5rem;
+  padding: 0 1.75rem;
   height: 100%;
   background: transparent image-url("icons/icon-search.svg") no-repeat;
-  background-size: 24px 24px;
+  background-size: 20px 20px;
   background-position: center;
   border: 0;
   cursor: pointer;
   z-index: 2;
-
-  @include media-min(sm) {
-    padding: 0 3rem;
-    background-size: 28px 28px;
-  }
 
   &:hover,
   &:active {

@@ -8,7 +8,7 @@
   <% content_for :page_title, "#{ params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
 <% end %>
 
-<div class="top-offset mb-1/2">
+<div class="heading mb-1/2">
   <h2>
     Workshop Codes
     <% if params[:search] %> for <strong><%= params[:search] %></strong> <% end %>

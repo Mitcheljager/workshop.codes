@@ -1,18 +1,24 @@
 <% content_for :page_title, "#{ t("navigation.recent") } | Page #{ params[:page] }" if params[:page] %>
+<% content_for :bg_large, "true" unless params[:page] %>
 
 <% unless params[:page] %>
   <div class="heading mt-1/1">
-    <h1><center><%= t(".title") %></center></h1>
+    <h1 class="text-pure-white"><center><%= t(".title") %></center></h1>
   </div>
 <% end %>
 
-<main class="items">
+<main>
   <% unless params[:page] %>
-    <h2 class="mt-1/2"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t(".on_fire.title_html") %></h2>
+    <h2 class="mt-1/2 text-black"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t(".on_fire.title_html") %></h2>
 
-    <%= render @hot_posts %>
+    <div class="cards cards--on-fire">
+      <%= render collection: @hot_posts, partial: "card", as: :post %>
+    </div>
 
-    <%= link_to t(".on_fire.button"), on_fire_path, class: "button button--secondary mt-1/2" %>
+    <%= link_to on_fire_path, class: "button button--secondary mt-1/2" do %>
+      <%= inline_svg_tag "icons/icon-onfire.svg", class: "mr-1/8", height: 16, width: 16 %>
+      <%= t(".on_fire.button") %>
+    <% end %>
 
     <%= render "application/banners/ko_fi" %>
 
@@ -27,7 +33,7 @@
       </div>
     </div>
   <% else %>
-    <div class="heading action-header mt-1/1 mb-1/2">
+    <div class="heading action-header">
       <h1><%= t(".recent.page_title_html") %> <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %></h1>
 
       <div class="action-header__actions">

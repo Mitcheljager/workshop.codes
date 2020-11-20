@@ -3,26 +3,36 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 200px;
+  height: 160px;
   width: 100%;
   background: lighten($body-bg, 5%);
   background-size: cover;
-  clip-path: polygon(0 0, 100% 0, 100% 80px, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 90px, 0% 100%);
   z-index: -1;
 
-  @include media-min(sm) {
-    height: 210px;
-    clip-path: polygon(0 0, 100% 0, 100% 100px, 0% 100%);
-  }
-
-  @media (min-width: 1100px) {
-    height: 240px;
-    clip-path: polygon(0 0, 100% 0, 100% 150px, 0% 100%);
-  }
-
   @include media-min(xl) {
-    height: 300px;
+    height: 200px;
     clip-path: polygon(0 0, 100% 0, 100% 120px, 0% 100%);
+  }
+
+  &--large {
+    height: 400px;
+    clip-path: polygon(0 0, 100% 0, 100% 280px, 0% 100%);
+
+    @include media-min(sm) {
+      height: 410px;
+      clip-path: polygon(0 0, 100% 0, 100% 300px, 0% 100%);
+    }
+
+    @media (min-width: 1100px) {
+      height: 440px;
+      clip-path: polygon(0 0, 100% 0, 100% 350px, 0% 100%);
+    }
+
+    @include media-min(xl) {
+      height: 500px;
+      clip-path: polygon(0 0, 100% 0, 100% 320px, 0% 100%);
+    }
   }
 
   img {
@@ -34,22 +44,20 @@
   .simple-view & {
     clip-path: none;
     background: $border-color;
-    height: 132px;
-
-    @include media-min(sm) {
-      height: 152px;
-    }
-
-    @media (min-width: 1100px) {
-      height: 192px;
-    }
+    height: 90px;
 
     @include media-min(xl) {
-      height: 212px;
+      height: 120px;
     }
 
     img {
       display: none;
+    }
+  }
+
+  &--large {
+    .simple-view & {
+      height: 400px;
     }
   }
 }

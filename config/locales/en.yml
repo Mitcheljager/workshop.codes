@@ -1,6 +1,6 @@
 en:
   navigation:
-    recent: Recent
+    recent: Latest
     on_fire: On Fire
     while_you_wait: While You Wait
     wiki: Wiki
@@ -38,7 +38,7 @@ en:
     view: View filter
     collapse: Collapse filter
   search:
-    label_html: <strong>Search </strong> by Titles, Categories, Tags, Codes, Maps, Heroes, or Usernames
+    label: Search
     popular_search_terms_html: <strong>Popular</strong> Search&nbsp;terms
   footer:
     privacy_policy: Privacy Policy
@@ -47,7 +47,7 @@ en:
   banner:
     kofi:
       title: Support Workshop.codes on
-      tagline: Turns out websites are expensive and ads suck.
+      tagline: Turns out websites are expensive and ads suck
       content_html: Support Workshop.codes for just <span class="text-white">$3</span>
       button: Support Workshop.codes
     affiliate_ad:
@@ -57,11 +57,11 @@ en:
     index:
       title: Overwatch Workshop Codes
       on_fire:
-        title_html: <strong>On Fire</strong> Items
-        button: View all On Fire items
+        title_html: <strong>On Fire</strong> Codes
+        button: View all On Fire codes
       recent:
-        title_html: <strong>Recent</strong> Items
-        page_title_html: <strong>Recent</strong> Workshop Codes
+        title_html: <strong>Latest</strong> Codes
+        page_title_html: <strong>Latest</strong> Workshop Codes
       sort:
         title: Sort by
         created: Created

@@ -23,13 +23,13 @@
 
   30% {
     background: transparent;
-    box-shadow: inset 0 0 0 20px $border-color;
+    box-shadow: inset 0 0 0 20px rgba($pure-white, .15);
     transform: scale(2.5);
   }
 
   80% {
     background: transparent;
-    box-shadow: inset 0 0 0 2px $border-color;
+    box-shadow: inset 0 0 0 2px rgba($pure-white, .15);
     transform: scale(2.5);
   }
 
@@ -41,6 +41,7 @@
 }
 
 .favorite {
+  position: relative;
   -webkit-appearance: none;
   appearance: none;
   display: flex;
@@ -49,12 +50,13 @@
   padding: 0;
   background: transparent;
   cursor: pointer;
+  z-index: 2;
 
   svg {
     height: 22px;
 
     path {
-      fill: $text-color;
+      fill: rgba($pure-white, .75);
     }
   }
 
