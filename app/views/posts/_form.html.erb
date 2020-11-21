@@ -12,7 +12,7 @@
   </div>
 
   <div class="form-group-uneven mt-1/2" data-reveal-by-select-parent>
-    <div>
+    <div class="well well--dark block">
       <div class="checkbox">
         <%= form.radio_button :status, "public", checked: !@post.unlisted && !@post.private %>
         <%= form.label :status, t("posts.form.public.label"), value: "public" %>
@@ -36,7 +36,7 @@
         <%= form.label :status, t("posts.form.private.label"), value: "private" %>
       </div>
 
-      <div class="form-hint mt-1/8">
+      <div class="form-hint mt-1/8 mb-0">
         <%= t("posts.form.private.help") %>
       </div>
     </div>
@@ -44,7 +44,7 @@
 
   <div class="form-group mt-1/1" data-reveal-by-checkbox>
     <div class="checkbox">
-      <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" } %>
+      <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
       <%= form.label :include_nice_url, t("posts.form.nice_url.label") %>
     </div>
 
@@ -54,17 +54,19 @@
 
     <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.nice_url.present? %>">
       <div class="form-group-uneven">
-        <div class="form-group">
-          <label class="form-input url-input">
-            <%= request.base_url %>/
-            <%= form.text_field :nice_url, class: "inline-input" %>
-          </label>
+        <div class="well well--dark block">
+          <div class="form-group mt-0">
+            <label class="form-input url-input">
+              <%= request.base_url %>/
+              <%= form.text_field :nice_url, class: "inline-input" %>
+            </label>
+          </div>
+
+          <ul class="form-hint mb-0">
+            <%= t("posts.form.nice_url.list_html") %>
+          </ul>
         </div>
       </div>
-
-      <ul class="form-hint">
-        <%= t("posts.form.nice_url.list_html") %>
-      </ul>
     </div>
   </div>
 
@@ -274,10 +276,8 @@
       <%= t("posts.form.expiry_notifications.help_html") %>
     </p>
 
-    <br>
-
     <div class="checkbox">
-      <%= form.check_box :email_notification, checked: @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?), data: { action: "reveal-by-checkbox" } %>
+      <%= form.check_box :email_notification, checked: @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?), data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
       <%= form.label :email_notification, t("posts.form.expiry_notifications.label") %>
     </div>
 
@@ -287,11 +287,13 @@
 
     <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?) %>">
       <div class="form-group-columns">
-        <div class="form-group mt-0">
-          <%= form.label :email, t("posts.form.expiry_notifications.email.label"), class: "form-label" %>
-          <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
+        <div class="well well--dark block">
+          <div class="form-group mt-0">
+            <%= form.label :email, t("posts.form.expiry_notifications.email.label"), class: "form-label" %>
+            <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
 
-          <p class="form-hint"><%= t("posts.form.expiry_notifications.email.help_html") %></p>
+            <p class="form-hint mb-0"><%= t("posts.form.expiry_notifications.email.help_html") %></p>
+          </div>
         </div>
       </div>
     </div>
