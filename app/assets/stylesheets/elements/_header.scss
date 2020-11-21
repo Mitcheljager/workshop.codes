@@ -79,6 +79,7 @@
 
 .header__create {
   margin-left: auto;
+  white-space: nowrap;
 
   @include media-min(sm) {
     margin-left: 0;

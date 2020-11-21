@@ -118,11 +118,7 @@ class Post < ApplicationRecord
   end
 
   def self.locale
-    if I18n.locale && I18n.locale != :mixed
-      self.where(locale: I18n.locale)
-    else
-      self
-    end
+    self.where(locale: current_locale)
   end
 
   def self.select_overview_columns
