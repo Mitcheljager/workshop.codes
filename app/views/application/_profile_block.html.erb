@@ -1,6 +1,25 @@
 <div class="profile-block">
   <% if current_user %>
-    <%= link_to current_user.username.split("#")[0], account_path, class: "profile-block__action lg:mr-1/4 mb-1/4 lg:mb-0" %>
+    <div class="dropdown" data-dropdown>
+      <%= link_to current_user.username.split("#")[0], account_path, class: "profile-block__action lg:mr-1/4 mb-1/4 lg:mb-0", data: { action: "toggle-dropdown" } %>
+
+      <div class="dropdown__content lg-down:dropup" data-dropdown-content>
+        <%= link_to t("account.navigation.overview"), account_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.notifications"), notifications_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.activity"), activities_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.favorites"), account_favorites_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.codes"), account_posts_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.collections"), collections_path, class: "dropdown__item text-small" %>
+
+        <hr>
+
+        <%= link_to t("account.navigation.admin"), admin_path, class: "dropdown__item text-small" if current_user.level == "admin" %>
+        <%= link_to t("account.navigation.profile"), edit_profile_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.account"), edit_user_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.accessibility"), accessibility_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.logout"), logout_path, class: "dropdown__item text-small" %>
+      </div>
+    </div>
   <% else %>
     <%= link_to t("navigation.login"), login_path, class: "profile-block__action lg:mr-1/8 mb-1/4 lg:mb-0" %>
   <% end %>

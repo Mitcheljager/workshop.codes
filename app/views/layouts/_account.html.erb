@@ -10,11 +10,11 @@
     <%= link_to t("account.navigation.favorites"), account_favorites_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_favorites_path) }" %>
     <%= link_to t("account.navigation.codes"), account_posts_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_posts_path) }" %>
     <%= link_to t("account.navigation.collections"), collections_path, class: "profile__action #{ 'profile__action--active' if current_page?(collections_path) }" %>
-    <%= link_to t("account.navigation.profile"), edit_profile_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_profile_path) }" %>
 
     <hr class="mt-1/2 mb-1/2">
 
     <%= link_to t("account.navigation.admin"), admin_path, class: "profile__action" if current_user.level == "admin" %>
+    <%= link_to t("account.navigation.profile"), edit_profile_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_profile_path) }" %>
     <%= link_to t("account.navigation.account"), edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>
     <%= link_to t("account.navigation.accessibility"), accessibility_path, class: "profile__action #{ 'profile__action--active' if current_page?(accessibility_path) }" %>
     <%= link_to t("account.navigation.logout"), logout_path, class: "profile__action" %>
