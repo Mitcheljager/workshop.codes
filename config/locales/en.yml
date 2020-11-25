@@ -66,7 +66,7 @@ en:
       sort:
         title: Sort by
         created: Created
-        updated: Last Updated
+        updated: Updated
     on_fire:
       title_html: <strong>On Fire</strong> Workshop Codes
     show:

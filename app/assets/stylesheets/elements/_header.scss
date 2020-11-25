@@ -227,7 +227,6 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: $margin / 3;
   }
 
   h1,
@@ -235,7 +234,7 @@
     margin-bottom: $margin / 6;
 
     @include media-min(md) {
-      margin-bottom: 0;
+      margin-bottom: $margin / 3;
       line-height: 1em;
     }
   }
@@ -252,22 +251,9 @@
 .action-header__actions {
   display: flex;
   color: $text-color-dark;
-  font-size: $font-size-small;
-  margin-bottom: $margin / 4;
 
   @include media-min(md) {
-    display: block;
     text-align: right;
-    margin-bottom: 0;
-  }
-
-  a:not(.button) {
-    text-decoration: none;
-    color: $text-color;
-
-    &:hover {
-      color: $white;
-    }
   }
 
   span {
@@ -276,5 +262,23 @@
     @include media-min(md) {
       margin-right: 0;
     }
+  }
+}
+
+.action-header__action {
+  box-shadow: inset 0 -3px 0 $border-color;
+  padding: $margin / 3 .5rem;
+  margin-left: .25rem;
+  font-size: 1rem;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    color: $white;
+  }
+
+  &--active {
+    box-shadow: inset 0 -3px 0 $primary;
+    color: $white;
   }
 }
