@@ -1,7 +1,9 @@
 .warning {
-  border: 1px solid $primary;
+  border: 2px solid $primary;
+  border-radius: $border-radius;
   margin-top: $margin * 2;
   padding: 1rem;
+  background: $bg-dark;
   text-align: center;
 
   &--mild {
