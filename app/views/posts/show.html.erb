@@ -3,9 +3,9 @@
 <% content_for :og_description, strip_tags(markdown(@post.description || "")).truncate(200).gsub("\n"," ") %>
 <% content_for :bg_large, "true" if @ordered_images.present? || @post.carousel_video.present? %>
 
-<article>
-  <div class="item item--single <%= "top-offset" unless @ordered_images.present? || @post.carousel_video.present? %>">
-    <h1 class="item__title <%= @ordered_images.present? || @post.carousel_video.present? ? "text-black" : "text-pure-white mt-1/2" %>">
+<article class="<%= "pt-1/8 sm:pt-1/2" unless @ordered_images.present? || @post.carousel_video.present? %>">
+  <div class="item item--single <%= "mt-1/1" unless @ordered_images.present? || @post.carousel_video.present? %>">
+    <h1 class="item__title <%= @ordered_images.present? || @post.carousel_video.present? ? "text-black" : "text-pure-white" %>">
       <%= @post.title %>
 
       <%= render "favorites/form", post: @post %>
