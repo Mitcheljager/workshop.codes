@@ -6,7 +6,7 @@
   <div class="flex mb-auto">
     <div class="mr-1/8">
       <%= link_to post.title, post_path(post.code), class: "card__title pb-0" %>
-      <small class="block text-dark mt-1/8">By <%= post.user.username %></small>
+      <small class="block text-dark mt-1/8">By <%= post.user.username.split("#")[0] %></small>
     </div>
 
     <div class="item__favorite mt-0 mr-0 ml-auto">
