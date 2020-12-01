@@ -6,11 +6,17 @@ en:
     while_you_wait: While You Wait
     wiki: Wiki
     create: Create
+  locale_picker:
+    title: Language
+    help: Set the website language
   filter:
     categories: Categories
     heroes: Heroes
     maps: Maps
+    language: Language
+    date_range: Date range
     time:
+      now: Now
       one_day: 1 day ago
       three_days: 3 days ago
       seven_days: 7 days ago

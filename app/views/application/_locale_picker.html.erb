@@ -3,18 +3,14 @@
 
   <div class="dropdown__content lg-down:dropup" data-dropdown-content>
     <div class="dropdown__label">
-      Locale
+      <%= t("locale_picker.title") %>
     </div>
 
-    <small class="block mt-1/8 text-base pl-1/4 pr-1/4 mb-1/4">Set the website language. Only codes made in the same language will be displayed.</small>
+    <small class="block text-base pl-1/4 pr-1/4 mb-1/4"><%= t("locale_picker.help") %></small>
 
     <hr>
 
     <%= link_to "en - English", url_for(params.clone.permit!.merge(locale: nil)), class: "dropdown__item" %>
     <%= link_to "ko - 한국어", url_for(params.clone.permit!.merge(locale: :ko)), class: "dropdown__item" %>
-    <%= link_to url_for(params.clone.permit!.merge(locale: :mixed)), class: "dropdown__item block" do %>
-      Mixed
-      <small class="block mt-1/8 text-base">Show all codes for all languages, with the website displayed in English.</small>
-    <% end %>
   </div>
 </div>

@@ -9,6 +9,7 @@ module ApplicationHelper
       sort: params[:sort],
       expired: params[:expired],
       author: params[:author],
+      language: params[:language],
       search: params[:search]
     }
 

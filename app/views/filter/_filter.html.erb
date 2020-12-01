@@ -1,6 +1,6 @@
 <% cache_unless request.path_parameters.without(:controller, :action, :page, :code).any?, "filter" do %>
   <div data-toggle-content>
-    <nav class="filter">
+    <nav class="filter" data-filter-locale="<%= current_locale %>">
       <div class="filter__content" data-role="content-to-toggle" style="display: none">
         <div class="filter__group">
           <div class="filter__item">
@@ -95,6 +95,25 @@
               </div>
             </div>
           </div>
+
+          <div class="filter__item">
+            <span class="filter__label"><%= t "filter.language" %></span>
+
+            <div class="dropdown" data-dropdown data-filter>
+              <%= link_to params[:language].present? ? params[:language] : t("filter.select"), "#", class: "dropdown__toggle",
+                          data: { action: "toggle-dropdown", filter_type: "language", value: params[:language] } %>
+
+              <div class="dropdown__content" data-dropdown-content>
+                <% if params[:language] %>
+                  <%= link_to t("filter.remove"), build_filter_path(:language, nil), class: "dropdown__item", data: { action: "add-filter", value: "" } %>
+                  <hr>
+                <% end %>
+
+                <%= link_to "en - English", build_filter_path(:language, :en), class: "dropdown__item", data: { action: "add-filter", value: "en" } %>
+                <%= link_to "ko - 한국어", build_filter_path(:language, :ko), class: "dropdown__item", data: { action: "add-filter", value: "ko" } %>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="filter__group mt-1/4">
@@ -134,7 +153,7 @@
           </div>
 
           <div class="filter__item">
-            <span class="filter__label">Date range</span>
+            <span class="filter__label"><%= t("filter.date_range") %></span>
 
             <div class="date-range" data-role="date-range" data-max="144"
               data-values='{
@@ -146,13 +165,13 @@
                 "<%= t("filter.time.seven_days") %>": "<%= 1.week.ago.strftime("%Y-%m-%d") %>",
                 "<%= t("filter.time.three_days") %>": "<%= 3.days.ago.strftime("%Y-%m-%d") %>",
                 "<%= t("filter.time.one_day") %>": "<%= 1.day.ago.strftime("%Y-%m-%d") %>",
-                "Now": ""}'>
+                "<%= t("filter.time.now") %>": ""}'>
               <div>
                 <div class="date-range__knob" data-action="set-date-range" data-target="from" data-drag-value="0" data-current-value="0" data-default="0" data-filter-type="from" data-value="<%= params[:from] %>">
-                  <div class="date-range__label" data-role="date-range-label">Label</div>
+                  <div class="date-range__label" data-role="date-range-label"></div>
                 </div>
                 <div class="date-range__knob" data-action="set-date-range" data-target="to" data-drag-value="144" data-current-value="144" data-default="8" data-filter-type="to" data-value="<%= params[:to] %>">
-                  <div class="date-range__label" data-role="date-range-label">Label</div>
+                  <div class="date-range__label" data-role="date-range-label"></div>
                 </div>
               </div>
 

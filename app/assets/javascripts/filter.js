@@ -36,12 +36,14 @@ function buildFilterPath(event) {
     "author": filterValue("author"),
     "search": document.querySelector("input[name='query']").value,
     "sort": filterValue("sort"),
+    "language": filterValue("language")
   }
 
   buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
   buildPath = Object.entries(buildPath).map(([k, v]) => `${ k }/${ v }`).join("/")
+  const currentLocale = document.querySelector("[data-filter-locale]").dataset.filterLocale
 
-  window.location = "/" + buildPath
+  window.location = "/" + (currentLocale == "en" ? "" : currentLocale + "/") + buildPath
 }
 
 function filterValue(type) {

@@ -7,13 +7,19 @@ ko:
     wiki: 위키
     create: 만들기
     login: 로그인
+  locale_picker:
+    title: 언어
+    help: 웹 사이트 언어를 설정합니다
   filter:
     categories: 카테고리
     heroes: 영웅
     maps: 전장
     from: 에서
     to: 까지
+    language: 언어
+    date_range: 날짜 기준
     time:
+      now: 현재
       one_day: 1일 전
       three_days: 3일 전
       seven_days: 7일 전
@@ -42,7 +48,7 @@ ko:
     view: 필터보기
     collapse: 필터 접기
   search:
-    label_html: <strong>검색 </strong> 제목, 카테고리, 태그, 코드,맵, 영웅 또는 유저네임
+    label: 검색
     popular_search_terms_html: <strong>인기</strong> 검색어
   footer:
     privacy_policy: 개인정보 보호정책
