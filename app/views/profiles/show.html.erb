@@ -41,7 +41,7 @@
   <div class="action-header__actions md:mb-1/4">
     <span>Sorted by</span>
 
-    <div class="dropdown" data-dropdown>
+    <div class="dropdown ml-1/8 mb-1/4 md:mb-0" data-dropdown>
       <%= link_to params[:sort_posts] ? params[:sort_posts].humanize : "Created at", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
 
       <div class="dropdown__content" data-dropdown-content>
