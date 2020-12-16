@@ -216,6 +216,13 @@
     ko: 데스매치
   slug: chateau-guillard
 -
+  en: Kanezaka
+  ko: 카네자카
+  type:
+    en: Deathmatch
+    ko: 데스매치
+  slug: kanezaka
+-
   en: Petra
   ko: 페트라
   type:
