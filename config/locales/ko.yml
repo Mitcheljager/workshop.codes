@@ -109,6 +109,8 @@ ko:
     form:
       title: 제목
       code: 코드
+      ptr:
+        label: 공개 테스트 서버
       public:
         label: 공개
         help: 누구나 내 코드를 볼 수 있습니다.

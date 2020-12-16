@@ -40,6 +40,13 @@
         <%= t("posts.form.private.help") %>
       </div>
     </div>
+
+    <div class="form-group mt-1/2 sm:mt-0">
+      <div class="checkbox">
+        <%= form.check_box :ptr, checked: @post.ptr?, autocomplete: "off" %>
+        <%= form.label :ptr, t("posts.form.ptr.label") %>
+      </div>
+    </div>
   </div>
 
   <div class="form-group mt-1/1" data-reveal-by-checkbox>

@@ -6,6 +6,7 @@ en:
     while_you_wait: While You Wait
     wiki: Wiki
     create: Create
+    login: Login
   locale_picker:
     title: Language
     help: Set the website language
@@ -106,6 +107,8 @@ en:
     form:
       title: Title
       code: Code
+      ptr:
+        label: PTR Only?
       public:
         label: Public
         help: Your code will appear anywhere as normal.

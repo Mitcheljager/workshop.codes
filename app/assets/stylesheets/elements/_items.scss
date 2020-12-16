@@ -241,6 +241,7 @@
 }
 
 .item__code {
+  position: relative;
   grid-area: code;
   display: flex;
   align-items: center;
@@ -257,6 +258,7 @@
   font-size-adjust: 0.51;
   color: $white;
   cursor: pointer;
+  overflow: hidden;
 
   &:hover,
   &:active {
@@ -281,6 +283,20 @@
     background: $bg-dark;
     border-radius: 0;
   }
+}
+
+.item__code-flag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: $border-radius;
+  background: $orange;
+  padding: .20rem .35rem;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1em;
+  font-family: $font-stack;
+  color: $pure-white;
 }
 
 .item__details {
