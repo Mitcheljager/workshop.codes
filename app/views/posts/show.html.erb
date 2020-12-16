@@ -17,6 +17,10 @@
       <span class="copy">
         <span data-copy="<%= @post.code %>" data-track-copy><%= @post.code %></span>
       </span>
+
+      <% if @post.ptr? %>
+        <div class="item__code-flag">PTR</div>
+      <% end %>
     </div>
   </div>
 
