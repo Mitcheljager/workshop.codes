@@ -41,10 +41,16 @@
       </div>
     </div>
 
-    <div class="form-group mt-1/2 sm:mt-0">
+    <div class="form-group mt-1/2 sm:mt-0" data-reveal-by-checkbox>
       <div class="checkbox">
-        <%= form.check_box :ptr, checked: @post.ptr?, autocomplete: "off" %>
+        <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
         <%= form.label :ptr, t("posts.form.ptr.label") %>
+      </div>
+
+      <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
+        <p class="form-hint">
+          <%= t("posts.form.ptr.help") %>
+        </p>
       </div>
     </div>
   </div>

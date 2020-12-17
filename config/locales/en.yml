@@ -109,6 +109,7 @@ en:
       code: Code
       ptr:
         label: PTR Only?
+        help: Beware! Once PTR goes down you might lose access to your code. Make sure to copy paste the snippet to easily copy it to Live once the time is there.
       public:
         label: Public
         help: Your code will appear anywhere as normal.
