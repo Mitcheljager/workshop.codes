@@ -1,4 +1,5 @@
 //= require inscryb-mde
+//= require get-notifications
 //= require activestorage
 //= require sortablejs/Sortable
 //= require @agilie/canvas-image-cover-position/index

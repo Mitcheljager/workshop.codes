@@ -84,9 +84,10 @@ Rails.application.routes.draw do
     get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"
     post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
 
-    resources :notifications, only: [:index], concerns: :paginatable
     resources :activities, only: [:index], concerns: :paginatable
     resources :reports, only: [:create, :new, :destroy, :update]
+    resources :notifications, only: [:index], concerns: :paginatable
+    get "unread-notifications", to: "notifications#get_unread_notifications"
 
     get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
     get "while-you-wait(/:filter)", to: "while_you_waits#index", as: "while_you_wait"

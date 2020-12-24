@@ -20,7 +20,8 @@
   font-size: 12px;
   text-decoration: none;
   z-index: 2000;
-  animation: move-in-alert 100ms;
+  transform: translateY(200%);
+  animation: move-in-alert 200ms 500ms forwards;
 
   &--error {
     background: $red;

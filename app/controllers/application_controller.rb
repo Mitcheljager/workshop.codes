@@ -52,12 +52,6 @@ class ApplicationController < ActionController::Base
     Current.user = nil
   end
 
-  helper_method :unread_notifications
-
-  def unread_notifications
-    @notifications = current_user.notifications.where(has_been_read: 0)
-  end
-
   helper_method :search_terms
 
   def search_terms

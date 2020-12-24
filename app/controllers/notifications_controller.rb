@@ -8,8 +8,8 @@ class NotificationsController < ApplicationController
   end
 
   def get_unread_notifications
-    respond_to do |format|
-      format.js
-    end
+    @notifications = current_user.notifications.where(has_been_read: false)
+
+    render json: @notifications, layout: false
   end
 end
