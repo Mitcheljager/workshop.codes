@@ -48,6 +48,7 @@ end
 
 group :development do
   gem "active_record_doctor"
+  gem "bullet"
   gem "faker"
   gem "web-console", ">= 3.3.0"
   gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]

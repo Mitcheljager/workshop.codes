@@ -8,7 +8,7 @@
           <% end %>
 
           <div class="dropdown__content dropdown__content--left" data-dropdown-content>
-            <% if revision.post.user == current_user %>
+            <% if @post.user == current_user %>
               <%= link_to "Edit Revision", edit_revision_path(revision.id), class: "dropdown__item" %>
             <% end %>
 

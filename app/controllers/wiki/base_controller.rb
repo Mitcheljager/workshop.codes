@@ -3,8 +3,7 @@ class Wiki::BaseController < ApplicationController
 
   def index
     @categories = Wiki::Category.order(title: :asc)
-    @edits = Wiki::Edit.order(created_at: :desc).limit(10)
-    @unapproved_edits_count = Wiki::Edit.where(approved: false).size
+    @edits = Wiki::Edit.includes(:user, :article).order(created_at: :desc).limit(10)
   end
 
   private

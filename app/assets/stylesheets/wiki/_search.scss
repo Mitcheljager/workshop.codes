@@ -1,4 +1,6 @@
 .search--wiki {
+  z-index: 1;
+
   &::before {
     content: "";
     display: block;

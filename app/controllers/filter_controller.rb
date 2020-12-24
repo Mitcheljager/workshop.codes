@@ -29,7 +29,7 @@ class FilterController < ApplicationController
   end
 
   def get_verified_users
-    @verified_users = User.where(verified: true).order(username: :asc).includes(:posts)
+    @verified_users = User.where(verified: true).order(username: :asc).includes(:posts).with_attached_profile_image
 
     render layout: false
   end

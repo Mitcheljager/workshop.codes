@@ -1,5 +1,5 @@
 <% @verified_users.each do |user| %>
-  <% next if user.posts.count == 0 %>
+  <% next if user.posts.size == 0 %>
 
   <%= link_to build_filter_path(:author, user.username), class: "dropdown__item", data: { action: "add-filter", value: CGI.escape(user.username) } do %>
     <% if user.profile_image.attached? %>
@@ -11,7 +11,7 @@
     <% end %>
 
     <div>
-      <%= user.username.split("#")[0] %> <small class="text-base">(<%= user.posts.visible?.count %>)</small>
+      <%= user.username.split("#")[0] %> <small class="text-base">(<%= user.posts.visible?.size %>)</small>
     </div>
   <% end %>
 <% end %>
