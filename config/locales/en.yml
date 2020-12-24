@@ -349,8 +349,8 @@ en:
       pagination_type:
         title: Pagination type
         pagination: Pagination
-        infinite_scroll: Infinite scrol
-        load_more_button: Load more button
+        infinite_scroll: Infinite scroll
+        load_more_button: "'Load more' button"
   views:
     pagination:
       first: First
