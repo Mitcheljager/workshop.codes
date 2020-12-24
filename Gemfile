@@ -40,6 +40,7 @@ gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 
 group :development, :test do
+  gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", "~> 2.13"
   gem "selenium-webdriver"
@@ -48,7 +49,6 @@ end
 
 group :development do
   gem "active_record_doctor"
-  gem "bullet"
   gem "faker"
   gem "web-console", ">= 3.3.0"
   gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]

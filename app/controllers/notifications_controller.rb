@@ -6,4 +6,10 @@ class NotificationsController < ApplicationController
   def index
     @notifications = current_user.notifications.order(created_at: :desc).page(params[:page])
   end
+
+  def get_unread_notifications
+    respond_to do |format|
+      format.js
+    end
+  end
 end
