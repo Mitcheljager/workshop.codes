@@ -58,9 +58,6 @@ en:
       tagline: Turns out websites are expensive and ads suck
       content_html: Support Workshop.codes for just <span class="text-white">$3</span>
       button: Support Workshop.codes
-    affiliate_ad:
-      disclaimer: Purchases made through this link support Workshop.codes
-    localisation_disclaimer_html: <strong>Translations are a work in progress.</strong> Not everything is translated yet, more translations will follow soon.
   posts:
     index:
       title: Overwatch Workshop Codes

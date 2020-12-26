@@ -60,9 +60,6 @@ ko:
       tagline: 알고보니 웹사이트는 비싸고 광고는 형편없습니다
       content_html: 단 <span class="text-white">$3</strong>만으로도 Workshop.codes를 지원할 수 있습니다
       button: Workshop.codes 지원하기
-    affiliate_ad:
-      disclaimer: 이 링크를 통한 구매는 워크샵.코드를 지원합니다.
-    localisation_disclaimer_html: <strong>번역이 진행중입니다.</strong> 아직 모든 것이 번역된 것은 아니며 곧 더 많이 번역될 것입니다.
   posts:
     index:
       title: 오버워치 워크샵 코드

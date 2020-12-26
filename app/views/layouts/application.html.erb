@@ -19,10 +19,6 @@
     <%= render "application/og_tags" %>
     <%= render "favicons" %>
 
-    <% if I18n.locale == :mixed %>
-      <link rel="canonical" href="<%= request.original_url.gsub("/mixed", "") %>" />
-    <% end %>
-
     <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: nil)) %>" hreflang="en" />
     <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: :ko)) %>" hreflang="ko" />
 
@@ -41,10 +37,6 @@
     <%= render "wiki/header" if is_wiki? %>
 
     <div class="wrapper <%= "wrapper--large" if controller_name == "admin" %>">
-      <% unless is_wiki? %>
-        <%= render "application/banners/localisation_disclaimer" if I18n.locale != :en && I18n.locale != :mixed %>
-      <% end %>
-
       <%= yield %>
 
       <%= render "footer" %>
