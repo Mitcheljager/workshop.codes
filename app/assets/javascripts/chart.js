@@ -35,6 +35,7 @@ function createChart(element, data, dateformat = "%Y-%m-%d") {
     right: 0,
     bottom: 40,
     left: 40,
-    interpolate: d3.curveStep
+    interpolate: d3.curveStep,
+    linked: true
   })
 }

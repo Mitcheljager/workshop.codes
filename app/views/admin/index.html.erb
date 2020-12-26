@@ -37,49 +37,87 @@
   <% clean_date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 } %>
 <% end %>
 
-<% date_counts = clean_date_counts %>
-<% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
-  <% this = date_counts.detect { |d| d[:date] == date } %>
-  <% this[:value] = values.count if this.present? %>
-<% end %>
+<div class="cards mt-1/1">
+  <% date_counts = clean_date_counts %>
+  <% Statistic.where(content_type: :unique_post_visits).each do |item| %>
+    <% this = date_counts.detect { |d| d[:date] == item.on_date.strftime("%Y-%m-%d") } %>
+    <% this[:value] = item.value if this.present? %>
+  <% end %>
 
-<div class="well well--dark block mt-1/1 p-0 pr-1/4">
-  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Posts created per day</h3>
-  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+  <div class="well well--dark block p-0 pr-1/4">
+    <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Post visits per day</h3>
+    <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+    </div>
   </div>
-</div>
 
-<% date_counts = clean_date_counts %>
-<% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
-  <% this = date_counts.detect { |d| d[:date] == date } %>
-  <% this[:value] = values.count if this.present? %>
-<% end %>
+  <% date_counts = clean_date_counts %>
+  <% Statistic.where(content_type: :unique_listings).each do |item| %>
+    <% this = date_counts.detect { |d| d[:date] == item.on_date.strftime("%Y-%m-%d") } %>
+    <% this[:value] = item.value if this.present? %>
+  <% end %>
 
-<div class="well well--dark block mt-1/4 p-0 pr-1/4">
-  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Users created per day</h3>
-  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+  <div class="well well--dark block p-0 pr-1/4">
+    <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Listings per day</h3>
+    <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+    </div>
   </div>
-</div>
 
-<% date_counts = clean_date_counts %>
-<% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
-  <% this = date_counts.detect { |d| d[:date] == date } %>
-  <% this[:value] = values.count if this.present? %>
-<% end %>
+  <% date_counts = clean_date_counts %>
+  <% Statistic.where(content_type: :unique_copies).each do |item| %>
+    <% this = date_counts.detect { |d| d[:date] == item.on_date.strftime("%Y-%m-%d") } %>
+    <% this[:value] = item.value if this.present? %>
+  <% end %>
 
-<div class="well well--dark block mt-1/4 p-0 pr-1/4">
-  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Favorites created per day</h3>
-  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+  <div class="well well--dark block p-0 pr-1/4">
+    <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Unique copies per day</h3>
+    <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+    </div>
   </div>
-</div>
 
-<% date_counts = clean_date_counts %>
-<% @comments.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
-  <% this = date_counts.detect { |d| d[:date] == date } %>
-  <% this[:value] = values.count if this.present? %>
-<% end %>
+  <% date_counts = clean_date_counts %>
+  <% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+    <% this = date_counts.detect { |d| d[:date] == date } %>
+    <% this[:value] = values.count if this.present? %>
+  <% end %>
 
-<div class="well well--dark block mt-1/4 p-0 pr-1/4">
-  <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Comments created per day</h3>
-  <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0"></div>
+  <div class="well well--dark block p-0 pr-1/4">
+    <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Posts created per day</h3>
+    <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+    </div>
+  </div>
+
+  <% date_counts = clean_date_counts %>
+  <% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+    <% this = date_counts.detect { |d| d[:date] == date } %>
+    <% this[:value] = values.count if this.present? %>
+  <% end %>
+
+  <div class="well well--dark block p-0 pr-1/4">
+    <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Users created per day</h3>
+    <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+    </div>
+  </div>
+
+  <% date_counts = clean_date_counts %>
+  <% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+    <% this = date_counts.detect { |d| d[:date] == date } %>
+    <% this[:value] = values.count if this.present? %>
+  <% end %>
+
+  <div class="well well--dark block p-0 pr-1/4">
+    <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Favorites created per day</h3>
+    <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0">
+    </div>
+  </div>
+
+  <% date_counts = clean_date_counts %>
+  <% @comments.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
+    <% this = date_counts.detect { |d| d[:date] == date } %>
+    <% this[:value] = values.count if this.present? %>
+  <% end %>
+
+  <div class="well well--dark block p-0 pr-1/4">
+    <h3 class="pl-1/4 pt-1/4 mb-0 mt-0">Comments created per day</h3>
+    <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0"></div>
+  </div>
 </div>

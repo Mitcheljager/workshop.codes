@@ -13,7 +13,6 @@ class AdminController < ApplicationController
     @comments = Comment.select(:created_at).all.order(created_at: :asc)
     @favorites = Favorite.select(:created_at).all.order(created_at: :asc)
     @notifications = Notification.select(:created_at).all.order(created_at: :asc)
-    @unique_users = Statistic.where(content_type: :unique_visit).order(created_at: :asc)
     @copies = Statistic.where(content_type: :copy).order(created_at: :asc)
   end
 

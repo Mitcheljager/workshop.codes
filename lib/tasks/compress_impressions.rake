@@ -51,8 +51,19 @@ def compress_search_terms
 end
 
 def compress_visits
-  visits = Ahoy::Visit.where("started_at > ?", 1.day.ago)
+  visits = Ahoy::Visit.where("started_at > ?", 1.day.ago).count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_visit, on_date: Date.today, value: visits)
+  @statistic.save
 
-  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_visit, on_date: Date.today, value: visits.size)
+  copy_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Copy Code").distinct.pluck(:visit_id, :properties).count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_copies, on_date: Date.today, value: copy_count)
+  @statistic.save
+
+  visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Posts Visit").distinct.pluck(:visit_id, :properties).count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_post_visits, on_date: Date.today, value: visit_count)
+  @statistic.save
+
+  listing_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Listing").distinct.pluck(:visit_id, :properties).count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_listings, on_date: Date.today, value: visit_count)
   @statistic.save
 end
