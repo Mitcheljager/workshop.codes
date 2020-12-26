@@ -1,5 +1,5 @@
 <% cache_unless current_user, [current_locale, post] do %>
-  <article class="item">
+  <article class="item" data-code="<%= post.code %>">
     <% cache [current_locale, post, "title_thumbnail"] do %>
       <%= render "posts/thumbnail", post: post %>
 

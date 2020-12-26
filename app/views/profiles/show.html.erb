@@ -17,7 +17,7 @@
 <% if @user.featured_posts.present? %>
   <div class="cards">
     <% @featured_posts.each do |post| %>
-      <div class="card">
+      <div class="card" data-code="<%= post.code %>">
         <%= link_to post_path(post.code), class: "card__title" do %>
           <%= image_tag url_for_post_thumbnail(post, 250, 143, "large"), width: 250, height: 143, loading: "lazy", class: "mb-1/4" %>
           <%= post.title %>
