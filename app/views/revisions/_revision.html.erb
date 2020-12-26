@@ -13,7 +13,7 @@
             <% end %>
 
             <%= link_to "View changes in snippet", difference_path(revision.id), class: "dropdown__item" %>
-            <%= link_to "View raw snippet", raw_snippet_path(revision.id, "json"), class: "dropdown__item" %>
+            <%= link_to "View raw snippet", raw_snippet_path(id: revision.id, format: "json"), class: "dropdown__item" %>
           </div>
         </div>
 
