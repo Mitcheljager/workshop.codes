@@ -43,13 +43,17 @@ group :development, :test do
   gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", "~> 2.13"
+  gem "database_cleaner"
+  gem "factory_bot_rails", "~> 4.0"
+  gem "faker"
+  gem "rspec-rails", "~> 4.0.1"
   gem "selenium-webdriver"
+  gem "shoulda-matchers", "~> 3.1"
   gem "sqlite3", "1.4.1"
 end
 
 group :development do
   gem "active_record_doctor"
-  gem "faker"
   gem "web-console", ">= 3.3.0"
   gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]
 end

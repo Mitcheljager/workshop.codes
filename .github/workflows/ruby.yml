@@ -23,5 +23,8 @@ jobs:
           bundle install --without production development --jobs 4 --retry 3
       - name: Test
         run: |
-         rake db:test:prepare
-         rails test
+          rake db:test:prepare
+          rails test
+      - name: RSpec
+        run: |
+          bundle exec rspec
