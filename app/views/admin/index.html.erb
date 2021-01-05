@@ -32,13 +32,8 @@
   </div>
 </div>
 
-<% clean_date_counts = [] %>
-<% (Date.parse("June 1 2019")...DateTime.now).each do |date| %>
-  <% clean_date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 } %>
-<% end %>
-
 <div class="cards mt-1/1">
-  <% date_counts = clean_date_counts %>
+  <% date_counts = create_date_count %>
   <% Statistic.where(content_type: :unique_post_visits).each do |item| %>
     <% this = date_counts.detect { |d| d[:date] == item.on_date.strftime("%Y-%m-%d") } %>
     <% this[:value] = item.value if this.present? %>
@@ -50,7 +45,7 @@
     </div>
   </div>
 
-  <% date_counts = clean_date_counts %>
+  <% date_counts = create_date_count %>
   <% Statistic.where(content_type: :unique_listings).each do |item| %>
     <% this = date_counts.detect { |d| d[:date] == item.on_date.strftime("%Y-%m-%d") } %>
     <% this[:value] = item.value if this.present? %>
@@ -62,7 +57,7 @@
     </div>
   </div>
 
-  <% date_counts = clean_date_counts %>
+  <% date_counts = create_date_count %>
   <% Statistic.where(content_type: :unique_copies).each do |item| %>
     <% this = date_counts.detect { |d| d[:date] == item.on_date.strftime("%Y-%m-%d") } %>
     <% this[:value] = item.value if this.present? %>
@@ -74,7 +69,7 @@
     </div>
   </div>
 
-  <% date_counts = clean_date_counts %>
+  <% date_counts = create_date_count %>
   <% @posts.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
     <% this = date_counts.detect { |d| d[:date] == date } %>
     <% this[:value] = values.count if this.present? %>
@@ -86,7 +81,7 @@
     </div>
   </div>
 
-  <% date_counts = clean_date_counts %>
+  <% date_counts = create_date_count %>
   <% @users.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
     <% this = date_counts.detect { |d| d[:date] == date } %>
     <% this[:value] = values.count if this.present? %>
@@ -98,7 +93,7 @@
     </div>
   </div>
 
-  <% date_counts = clean_date_counts %>
+  <% date_counts = create_date_count %>
   <% @favorites.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
     <% this = date_counts.detect { |d| d[:date] == date } %>
     <% this[:value] = values.count if this.present? %>
@@ -110,7 +105,7 @@
     </div>
   </div>
 
-  <% date_counts = clean_date_counts %>
+  <% date_counts = create_date_count %>
   <% @comments.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values| %>
     <% this = date_counts.detect { |d| d[:date] == date } %>
     <% this[:value] = values.count if this.present? %>
