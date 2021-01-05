@@ -38,12 +38,11 @@
               </span>
             </div>
 
-            <%= tag.span "Analytics", class: "text-white mr-1/4 ml-auto cursor-pointer", data: { action: "toggle-content reveal-post-analytics", id: post.id } %>
+            <%= tag.span "Analytics", class: "text-white mr-1/4 cursor-pointer", data: { action: "toggle-content reveal-post-analytics", id: post.id } %>
             <%= link_to "Edit", edit_post_path(post.code), class: "mr-1/4" %>
             <%= link_to "Delete", post_path(post.code), class: "text-red", method: :delete, data: { confirm: "Are you sure you want to delete this code? This cannot be undone. \n\n This will delete code: \n #{ post.code } \n\n With title: \n #{ post.title }" } %>
           </div>
         </div>
-
       </div>
 
       <div class="item__tray" data-role="content-to-toggle" style="display: none">
