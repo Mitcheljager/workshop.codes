@@ -121,3 +121,23 @@
     <div class="chart" data-role="chart" data-height="150" data-data="<%= date_counts.to_json %>" style="min-height: 0"></div>
   </div>
 </div>
+
+<hr />
+
+<h3>Admin activity log</h3>
+
+<% Activity.where(content_type: [:admin_destroy_post, :admin_update_user])
+           .order(created_at: :desc)
+           .limit(50)
+           .each do |activity| %>
+  <div class="well mb-1/8">
+    <div class="mr-1/2">
+      <small><%= time_ago_in_words(activity.created_at) %> ago &nbsp;</small>
+      <strong><%= activity.user.username %></strong> - <%= activity.content_type %>
+    </div>
+
+    <div>
+      <strong>Relevant data:</strong> <%= activity.properties %>
+    </div>
+  </div>
+<% end %>

@@ -36,7 +36,8 @@ class AdminController < ApplicationController
     @user = @post.user
 
     if @post.destroy
-      Notification.create(user_id: @user.id, content: params[:notification_content]) if params[:notification_content].present?
+      @notification = Notification.create(user_id: @user.id, content: params[:notification_content]) if params[:notification_content].present?
+      create_activity(:admin_destroy_post, { post_id: @post.id, code: @post.code, post_user_id: @post.user_id, notification_content: params[:notification_content] || "" })
       redirect_to admin_posts_path
     end
   end
@@ -77,6 +78,7 @@ class AdminController < ApplicationController
     @user.nice_url = @user.username.gsub(" ", "-").split("#")[0]
 
     if @user.update(user_params)
+      create_activity(:admin_update_user, { user_id: @user.id, level: @user.level, verified: @user.verified })
       flash[:alert] = "User saved"
     else
       flash[:alert] = "Something went wrong when saving"
