@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_200108) do
+ActiveRecord::Schema.define(version: 2021_01_03_142829) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +83,13 @@ ActiveRecord::Schema.define(version: 2020_12_16_200108) do
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.integer "badge_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "collections", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
@@ -98,6 +105,9 @@ ActiveRecord::Schema.define(version: 2020_12_16_200108) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "email_notifications", force: :cascade do |t|
@@ -252,6 +262,16 @@ ActiveRecord::Schema.define(version: 2020_12_16_200108) do
     t.index ["post_id"], name: "index_while_you_waits_on_post_id"
   end
 
+  create_table "wiki_answers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.integer "parent_id"
+    t.text "content"
+    t.boolean "accepted", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "wiki_articles", force: :cascade do |t|
     t.string "title"
     t.string "subtitle"
@@ -279,6 +299,23 @@ ActiveRecord::Schema.define(version: 2020_12_16_200108) do
     t.integer "content_type"
     t.text "notes"
     t.boolean "approved"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "wiki_question_favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "wiki_questions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "content"
+    t.integer "favorites_count"
+    t.integer "answers_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -19,6 +19,10 @@
           </div>
         </div>
       <% end %>
+
+      <% user.badges.each do |badge| %>
+        <%= render "badges/badge", badge: badge %>
+      <% end %>
     <% end %>
 
     <%= link_to user.link, user.link, class: "profile-banner__action", target: "_blank", rel: "noreferrer noopener" if user.link.present? %>

@@ -30,17 +30,46 @@
   <% end %>
 </div>
 
-<h4 class="mt-1/1">Send this user a notifcation</h4>
+<div class="well well--dark block mt-1/1">
+  <h4 class="mt-0">Send this user a notifcation</h4>
 
-<%= form_tag :admin_send_user_notification do %>
-  <div class="form-group mb-1/4">
-    <%= hidden_field :user_id, "", value: @user.id %>
-    <%= label_tag "Notification content (supports markdown)" %>
-    <%= text_area_tag :notification_content, "", class: "form-input mt-1/8" %>
+  <%= form_tag :admin_send_user_notification do %>
+    <div class="form-group mb-1/4">
+      <%= hidden_field :user_id, "", value: @user.id %>
+      <%= label_tag "Notification content (supports markdown)" %>
+      <%= text_area_tag :notification_content, "", class: "form-input mt-1/8" %>
+    </div>
+
+    <%= submit_tag "Send notification", class: "button button--secondary" %>
+  <% end %>
+</div>
+
+<div class="well well--dark block mt-1/1">
+  <h4 class="mt-0">Badges</h4>
+
+  <div class="well block mb-1/2">
+    <div>
+      <% if @user.badges.any? %>
+        <% @user.badges.each do |badge| %>
+          <%= render "badges/badge", badge: badge, large: true %>
+        <% end %>
+      <% else %>
+        <em>No badges</em>
+      <% end %>
+    </div>
   </div>
 
-  <%= submit_tag "Send notification", class: "button button--secondary" %>
-<% end %>
+  <%= form_for :badge, url: badges_path do |form| %>
+    <%= form.hidden_field :user_id, value: @user.id %>
+
+    <%= form.label :badge_id, class: "form-label" %>
+    <%= form.select :badge_id, badges.map { |b| ["#{ b["en"]["label"] } - #{ b["en"]["description"] }", b["id"]] }, {}, class: "form-select w-auto" %>
+
+    <br />
+
+    <%= submit_tag "Give badge", class: "button button--secondary mt-1/8" %>
+  <% end %>
+</div>
 
 <hr>
 

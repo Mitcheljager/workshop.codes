@@ -14,11 +14,11 @@
   position: absolute;
   bottom: -.5rem;
   left: 50%;
-  padding: .35rem;
+  padding: .5rem;
   width: 200px;
-  border: 1px solid $border-color;
+  border-radius: $border-radius;
   transform: translateY(100%) translateX(-50%);
-  background: $body-bg;
+  background: $bg-dark;
   font-size: 12px;
   font-weight: normal;
   color: $text-color;

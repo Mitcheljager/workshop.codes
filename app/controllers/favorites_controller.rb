@@ -7,6 +7,8 @@ class FavoritesController < ApplicationController
 
     respond_to do |format|
       if @favorite.save
+        BadgesFavoritesJob.perform_async(@post, current_user)
+
         format.js
         format.html { redirect_to root_path }
       else

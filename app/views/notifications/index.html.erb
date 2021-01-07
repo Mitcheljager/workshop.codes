@@ -7,7 +7,7 @@
     <div class="notifications">
       <% if @notifications.where(has_been_read: 0).any? %>
         <% @notifications.where(has_been_read: 0).each do |notification| %>
-          <%= render @notifications.where(has_been_read: 0) %>
+          <%= render notification %>
 
           <% notification.update!(has_been_read: 1) %>
         <% end %>

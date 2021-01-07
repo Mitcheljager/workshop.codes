@@ -3,5 +3,19 @@
     <%= link_to t("profile.edit.go_to_profile"), user_profile_path(current_user) %>
   </div>
 
+  <div class="well block mb-1/2">
+    <h4 class="mt-0">Badges you've earned</h4>
+
+    <div>
+      <% if @user.badges.any? %>
+        <% @user.badges.each do |badge| %>
+          <%= render "badges/badge", badge: badge, large: true %>
+        <% end %>
+      <% else %>
+        <em>You've not yet earned any badges</em>
+      <% end %>
+    </div>
+  </div>
+
   <%= render "form" %>
 <% end %>

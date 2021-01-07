@@ -51,6 +51,10 @@ module ApplicationHelper
     YAML.load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
   end
 
+  def badges
+    YAML.load(File.read(Rails.root.join("config/arrays", "badges.yml")))
+  end
+
   def current_locale
     I18n.locale == :mixed ? "en" : I18n.locale.to_s
   end

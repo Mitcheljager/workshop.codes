@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :forgot_password_tokens, dependent: :destroy
   has_many :collections, dependent: :destroy
   has_many :reports, dependent: :destroy
+  has_many :badges, dependent: :destroy
   has_many :wiki_edits, class_name: "Wiki::Edit", dependent: :destroy
 
   has_one_attached :profile_image, dependent: :destroy

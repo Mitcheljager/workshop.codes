@@ -139,7 +139,7 @@
   &:active {
     color: white;
 
-    svg path {
+    .profile-banner__verified path {
       fill: $text-color-dark;
     }
   }
