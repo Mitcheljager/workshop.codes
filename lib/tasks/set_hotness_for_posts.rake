@@ -19,7 +19,7 @@ namespace :hotness do
 
       post.hotness = [(([impressions_count + copy_count + statistics_count, 1].max) / ([days_old / 2, 1].max)) + (favorites_count * 20 / [days_old / 4, 1].max), 1].max
 
-      if post.hotness >= 2
+      if post.hotness >= 1000
         create_badge(badge_id: 3, user: post.user)
       end
 
