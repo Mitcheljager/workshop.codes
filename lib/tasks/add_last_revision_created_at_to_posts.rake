@@ -1,6 +1,8 @@
 desc "Add last_revision_created_at to posts"
 task :add_last_revision_created_at_to_posts => :environment do
-  Post.all.each do |post|
+  @posts = Post.all
+
+  @posts.each do |post|
     revision = post.revisions.last
 
     if revision.present?
