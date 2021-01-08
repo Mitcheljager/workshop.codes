@@ -36,13 +36,13 @@ class AnalyticsController < ApplicationController
     end
 
     if params[:type] == "copies"
-      @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :copy).order(created_at: :asc)
+      @items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :copy).order(created_at: :asc)
     elsif params[:type] == "views"
-      @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
+      @items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :visit).order(created_at: :asc)
     elsif params[:type] == "listings"
-      @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
+      @items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :listing).order(created_at: :asc)
     elsif params[:type] == "favorites"
-      @items = Favorite.where(post_id: current_user.posts.pluck(:id)).order(created_at: :asc)
+      @items = Favorite.where(post_id: current_user.posts.select(:id).pluck(:id)).order(created_at: :asc)
     end
 
     if params[:type] == "favorites"

@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <% if @is_expired %>
+  <% if @post.last_revision_created_at < 6.months.ago %>
     <div class="well well--dark block warning mt-1/4 mb-1/4 pt-1/8 pb-1/8">
       <p class="mb-0">⚠ <mark><%= t(".expired.title") %></mark></p>
       <p class="mt-0"><small><%= t(".expired.content") %></small></p>
@@ -58,7 +58,7 @@
         </div>
       <% end %>
 
-      <% if @post.updated_at > 6.months.ago && @post.updated_at < 5.months.ago %>
+      <% if @post.last_revision_created_at > 6.months.ago && @post.last_revision_created_at < 5.months.ago %>
         <div class="warning mt-1/4">
           <p><mark>⚠ <%= t(".expire_soon.title") %></mark></p>
           <%= t(".expire_soon.content_html", time: time_ago_in_words(@post.updated_at + 6.months)) %>
@@ -174,7 +174,7 @@
   <% end %>
 </article>
 
-<% cache_unless current_user, [current_locale, @post.collection, @post.comments, @revisions] do %>
+<% cache_unless current_user, [current_locale, @post.collection, @post.comments, @post.revisions] do %>
   <%= render "collections/collections" if @post.collection && @post.collection.posts.public?.many? %>
 
   <div class="comments" id="comments">
@@ -189,5 +189,5 @@
     </div>
   </div>
 
-  <%= render "revisions/revisions" if @revisions.size > 1 %>
+  <%= render "revisions/revisions" if @post.revisions.size > 1 %>
 <% end %>

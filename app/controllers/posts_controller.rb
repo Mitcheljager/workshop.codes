@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.includes(:user, :revisions).select_overview_columns.public?.where("hotness > 1").select_overview_columns.order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").select_overview_columns.order("hotness DESC").page params[:page]
 
     respond_to do |format|
       format.html
@@ -43,14 +43,14 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user).find_by("upper(posts.code) = ?", params[:code].upcase)
+    @post = Post.includes(:user, :revisions, :comments, :collection).find_by("upper(posts.code) = ?", params[:code].upcase)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
     respond_to do |format|
       format.html {
         unless @post.present?
-          revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
+          revision = Revision.find_by("upper(code) = ?", params[:code].upcase).select(:post_id)
           @post = revision.post if revision
 
           redirect_to post_path(revision.post.code) if revision
@@ -59,9 +59,6 @@ class PostsController < ApplicationController
         not_found and return unless @post.present?
 
         set_post_images
-
-        @revisions = @post.revisions.where(visible: true).order(created_at: :desc)
-        @is_expired = @revisions.where("created_at > ?", 6.months.ago).none?
       }
       format.json {
         set_request_headers
@@ -104,6 +101,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.locale = current_locale
+    @post.last_revision_created_at = Time.now
 
     set_post_status
 
@@ -142,7 +140,8 @@ class PostsController < ApplicationController
 
       if (post_params[:revision].present? && post_params[:revision] != "0") || (current_code != post_params[:code]) || (current_version != post_params[:version])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
-        @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible).save
+        @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
+        @post.update(last_revision_created_at: @revision.created_at) if @revision.save
 
         notify_discord("Update")
       end
