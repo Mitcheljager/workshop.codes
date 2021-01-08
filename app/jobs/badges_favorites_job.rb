@@ -4,6 +4,7 @@ class BadgesFavoritesJob
 
   def perform(post, user)
     return unless post.present?
+    return unless user.present?
 
     post_user = post.user
     post_ids = post_user.posts.pluck(:id)

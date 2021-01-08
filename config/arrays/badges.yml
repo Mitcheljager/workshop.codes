@@ -35,3 +35,13 @@
   en:
     label: Jam Winner
     description: Winner of an Elo Hell Workshop Jam
+- id: 7
+  name: ko-fi-supporter
+  en:
+    label: Ko-fi Supporter
+    description: Donated on Ko-fi. Thank you!
+- id: 8
+  name: wiki-contributor
+  en:
+    label: Sukuma Wiki
+    description: Contributed to the Workshop.codes Wiki.
