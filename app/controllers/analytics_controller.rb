@@ -41,11 +41,20 @@ class AnalyticsController < ApplicationController
       @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :visit).order(created_at: :asc)
     elsif params[:type] == "listings"
       @items = Statistic.where(model_id: current_user.posts.pluck(:id)).where(content_type: :listing).order(created_at: :asc)
+    elsif params[:type] == "favorites"
+      @items = Favorite.where(post_id: current_user.posts.pluck(:id)).order(created_at: :asc)
     end
 
-    @items.group_by { |x| (x.on_date).strftime("%Y-%m-%d") }.each do |date, values|
-      this = date_counts.detect { |d| d[:date] == date }
-      this[:value] = values.map { |h| h[:value] }.sum if this.present?
+    if params[:type] == "favorites"
+      @items.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values|
+        this = date_counts.detect { |d| d[:date] == date }
+        this[:value] = values.count if this.present?
+      end
+    else
+      @items.group_by { |x| (x.on_date).strftime("%Y-%m-%d") }.each do |date, values|
+        this = date_counts.detect { |d| d[:date] == date }
+        this[:value] = values.map { |h| h[:value] }.sum if this.present?
+      end
     end
 
     render json: date_counts, layout: false

@@ -29,7 +29,7 @@
             <%= form.label :remember_me, t("sessions.login.remember_me") %>
           </div>
 
-          <%= submit_tag t("sessions.login.submit"), class: "button button--secondary mt-1/2 w-100" %>
+          <%= submit_tag t("sessions.login.submit"), class: "button button--secondary mt-1/2 w-100", data: { disable_with: "Submitting..." } %>
 
           <div class="mt-1/4">
             <small><%= link_to t("sessions.login.forgot_password"), new_forgot_password_path %></small>

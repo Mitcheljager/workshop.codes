@@ -55,6 +55,7 @@
       <option value="copies" selected><%= t("account.analytics.copies.label") %></option>
       <option value="views"><%= t("account.analytics.views.label") %></option>
       <option value="listings"><%= t("account.analytics.listings.label") %></option>
+      <option value="favorites"><%= t("account.analytics.favorites.label") %></option>
     </select>
 
     <div data-reveal-by-select-target="copies">
@@ -91,6 +92,10 @@
           <%= t("account.analytics.date_note", date: Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d")) %>
         </p>
       <% end %>
+    </div>
+
+    <div data-reveal-by-select-target="favorites" class="visibility-hidden">
+      <p class="form-hint mt-1/4"></p>
     </div>
 
     <div class="chart-wrapper pb-0">
