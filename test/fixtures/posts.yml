@@ -9,6 +9,7 @@ post_one:
   tags: test
   heroes: "[\"McCree\"]"
   maps: "[\"Castillo\"]"
+  last_revision_created_at: <%= 5.day.ago.to_s(:db) %>
 
 post_two:
   user: user_one
@@ -19,3 +20,4 @@ post_two:
   tags: test
   heroes: "[\"McCree\"]"
   maps: "[\"Castillo\"]"
+  last_revision_created_at: <%= 5.day.ago.to_s(:db) %>

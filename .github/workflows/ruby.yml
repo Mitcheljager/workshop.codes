@@ -23,7 +23,7 @@ jobs:
           bundle install --without production development --jobs 4 --retry 3
       - name: Test
         run: |
-          rails db:migrate RAILS_ENV=test
+          rake db:test:prepare
           rails test
       - name: RSpec
         run: |
