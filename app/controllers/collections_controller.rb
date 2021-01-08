@@ -29,7 +29,7 @@ class CollectionsController < ApplicationController
   def destroy
     @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
 
-    if @collection.posts.count == 0 && @collection.destroy
+    if @collection.posts.none? && @collection.destroy
       redirect_to collections_path
     else
       render file: "application/error.js.erb"

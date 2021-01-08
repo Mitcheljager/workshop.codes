@@ -12,11 +12,12 @@
 
       <%= submit_tag "Submit", class: "button mt-1/4" %>
 
-      <% if @collection.posts.size == 0 %>
+      <% if @collection.posts.none? %>
         <div class="mt-1/2">
           <%= link_to "Destroy", collection_path(@collection.nice_url),
                       class: "text-red",
                       method: :delete,
+                      remote: true,
                       data: { confirm: "Are you sure you want to destroy this collection? This cannot be undone." } %>
         </div>
       <% else %>
