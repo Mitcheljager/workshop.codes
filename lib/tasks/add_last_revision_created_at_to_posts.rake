@@ -3,12 +3,7 @@ task :add_last_revision_created_at_to_posts => :environment do
   @posts = Post.all
 
   @posts.each do |post|
-    revision = post.revisions.last
-
-    if revision.present?
-      post.update_column(:last_revision_created_at, revision.created_at)
-    else
-      post.update_column(:last_revision_created_at, post.created_at)
-    end
+    post.last_revision_created_at = post.revisions.any? ? post.revisions.last.created_at : post.updated_at
+    post.save(touch: false)
   end
 end
