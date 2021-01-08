@@ -7,6 +7,7 @@ FactoryBot.define do
     categories { ApplicationHelper.categories.collect{ |a| a["en"] }.sample(2) }
     heroes { ApplicationHelper.heroes.collect{ |a| a["en"] }.sample(3) }
     maps { ApplicationHelper.maps.collect{ |a| a["en"] }.sample(3) }
+    last_revision_created_at { Time.now }
     user
   end
 end
