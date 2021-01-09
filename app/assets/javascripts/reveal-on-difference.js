@@ -8,7 +8,7 @@ document.addEventListener("turbolinks:load", function() {
 function toggleRevealOnDifference(event) {
     const value = this.value
     const original = this.dataset.original
-    const different = value !== original
+    const different = value !== original && original !== undefined
 
     const elements = document.querySelectorAll("[data-role='reveal-on-difference']")
 
