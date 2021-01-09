@@ -106,6 +106,10 @@ ko:
     form:
       title: 제목
       code: 코드
+      code_change:
+        attention: 잠깐!
+        explanation_html: 각각의 버전마다 공유 코드를 따로 생성하지 않으신다면, 아마도 당신은 새 공유 코드를 만들기보다 기존의 공유 코드로 계속 업데이트하기를 원하시는 것 같습니다. 어떻게 하는지 잘 모르시겠다면, 이 <a href="%{article_url}" target="_blank"><mark>위키 문서</mark></a>를 참고해주세요.
+        current_code_html: 혹시 잊어버리셨다면, 당신의 기존 공유 코드는 <code>%{current_code}</code>입니다.
       ptr:
         label: 공개 테스트 서버
       public:
