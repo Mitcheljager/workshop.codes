@@ -36,6 +36,7 @@
 //= require navigation
 //= require reveal-by-checkbox
 //= require reveal-by-select
+//= require reveal-on-difference
 //= require timeago
 //= require toggle-content
 //= require wiki/search
