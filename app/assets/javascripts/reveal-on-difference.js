@@ -1,8 +1,8 @@
 document.addEventListener("turbolinks:load", function() {
     const elements = document.querySelectorAll("[data-action='reveal-on-difference']")
 
-    elements.forEach((element) => element.removeEventListener("change", toggleRevealOnDifference))
-    elements.forEach((element) => element.addEventListener("change", toggleRevealOnDifference))
+    elements.forEach((element) => element.removeEventListener("input", toggleRevealOnDifference))
+    elements.forEach((element) => element.addEventListener("input", toggleRevealOnDifference))
 })
 
 function toggleRevealOnDifference(event) {
