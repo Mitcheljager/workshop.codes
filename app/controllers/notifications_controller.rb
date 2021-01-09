@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   end
 
   def get_unread_notifications
-    @notifications = current_user.notifications.where(has_been_read: false)
+    @notifications = current_user.notifications.where(has_been_read: false).limit(5)
 
     render json: @notifications, layout: false
   end
