@@ -1,6 +1,5 @@
 <%= inline_css "form.css" %>
-<%= inline_js "uploader.js" %>
-<%= inline_js "chart.js" %>
-<%= javascript_include_tag "form.js", "data-turbolinks-track": "reload" %>
+<%= javascript_include_tag "chart.js", "data-turbolinks-track": "reload", async: true %>
+<%= javascript_include_tag "form.js", "data-turbolinks-track": "reload", async: true %>
 <%= render "remember_me_cookie" if current_user.remember_tokens.any? %>
 <%= content_for :render_async %>

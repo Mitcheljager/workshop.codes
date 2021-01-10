@@ -1,3 +1,4 @@
+//= require uploader
 //= require inscryb-mde
 //= require get-notifications
 //= require activestorage
