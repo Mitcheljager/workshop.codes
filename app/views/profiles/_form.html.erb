@@ -90,21 +90,6 @@
     <%= form.text_field :link, placeholder: "Link", class: "form-input" %>
   </div>
 
-  <% if @user.verified? %>
-    <div class="form-group mt-1/1">
-      <%= form.label :custom_css, class: "form-label" do %>
-        <%= t "profile.form.custom_css.label" %>
-        <%= inline_svg_tag "icons/verified.svg", class: "profile-banner__verified" %>
-      <% end %>
-
-      <div class="form-hint">
-        <%= t("profile.form.custom_css.help") %>
-      </div>
-
-      <%= form.text_area :custom_css, class: "form-input form-textarea form-textarea--extra-small" %>
-    </div>
-  <% end %>
-
   <hr class="small mt-1/1">
 
   <%= submit_tag t("profile.form.submit"), class: "button pr-1/1 pl-1/1" %>

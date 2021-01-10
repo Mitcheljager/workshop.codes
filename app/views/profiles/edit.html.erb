@@ -1,9 +1,7 @@
 <%= render "layouts/account", title: t("profile.edit.title_html") do %>
-  <div class="well well--dark mb-1/2">
-    <%= link_to t("profile.edit.go_to_profile"), user_profile_path(current_user) %>
-  </div>
+  <%= link_to t("profile.edit.go_to_profile"), user_profile_path(current_user), class: "button button--secondary" %>
 
-  <div class="well block mb-1/2">
+  <div class="well block mb-1/2 mt-1/2">
     <h4 class="mt-0">Badges you've earned</h4>
 
     <div>

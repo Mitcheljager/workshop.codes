@@ -1,14 +1,10 @@
 <% content_for :page_title, @user.username.split("#")[0] %>
 
-<% if @user.verified? && @user.custom_css.present? %>
-  <style><%= sanitize(@user.custom_css) %></style>
+<% if @user.verified? %>
+  <style id="custom-css"><%= sanitize(@user.custom_css) if @user.custom_css.present? %></style>
 <% end %>
 
-<% if @user == current_user %>
-  <div class="well well--dark mt-1/1">
-    <%= link_to "← Customise your profile", edit_profile_path %>
-  </div>
-<% end %>
+<%= render "customise_profile" if @user == current_user %>
 
 <div class="top-offset">
   <%= render "profile", user: @user %>

@@ -1,0 +1,38 @@
+<div class="fixed-box">
+  <%= link_to "← Customise your profile", edit_profile_path, class: "button button--secondary w-100" %>
+
+  <% if current_user.verified? %>
+    <hr>
+
+    <%= form_for current_user, url: update_profile_path, remote: true do |form| %>
+      <div class="form-group">
+        <%= form.label :custom_css, class: "form-label" do %>
+          <%= t "profile.form.custom_css.label" %>
+          <%= inline_svg_tag "icons/verified.svg", class: "profile-banner__verified" %>
+        <% end %>
+
+        <div data-toggle-content>
+          <small>
+            <a href="#"
+              class="text-white"
+              data-action="toggle-content"
+              data-show-with="Hide CSS editor"
+              data-hide-with="Show CSS editor">Show CSS editor</a>
+          </small>
+
+          <div data-role="content-to-toggle" style="display: none">
+            <div class="form-hint">
+              <%= t("profile.form.custom_css.help") %>
+            </div>
+
+            <%= form.text_area :custom_css, class: "form-input form-textarea form-textarea--extra-small", data: { action: "apply-custom-css" }, autocomplete: "off" %>
+
+            <%= submit_tag t("profile.form.submit"), class: "button button--small mt-1/4", data: { disable_with: "Saving..." } %>
+          </div>
+
+        </div>
+      </div>
+
+    <% end %>
+  <% end %>
+</div>

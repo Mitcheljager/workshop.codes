@@ -1,3 +1,4 @@
+//= require apply-custom-css
 //= require uploader
 //= require inscryb-mde
 //= require get-notifications

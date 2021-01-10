@@ -40,8 +40,13 @@ class ProfilesController < ApplicationController
     end
 
     if @user.update(profile_params)
-      flash[:alert] = "Successfully saved"
-      redirect_to edit_profile_path
+      respond_to do |format|
+        format.html {
+          flash[:alert] = "Successfully saved"
+          redirect_to edit_profile_path
+        }
+        format.js
+      end
     else
       render :edit
     end
