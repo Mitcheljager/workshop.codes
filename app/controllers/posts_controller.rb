@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html {
         unless @post.present?
-          revision = Revision.find_by("upper(code) = ?", params[:code].upcase).select(:post_id, :code)
+          revision = Revision.select(:post_id, :code).find_by("upper(code) = ?", params[:code].upcase)
 
           if revision
             @post = revision.post
