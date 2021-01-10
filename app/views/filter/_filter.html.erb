@@ -194,13 +194,17 @@
 
     <div class="filter-actions">
       <% if is_filter_active? %>
-        <%= button_tag t("filter.active"), class: "filter__link filter__link--active", data: { action: "toggle-content", animation_timing: 150 } %>
+        <%= button_tag t("filter.active"), name: "Filter is active", class: "filter__link filter__link--active", data: { action: "toggle-content", animation_timing: 150 }, aria: { label: "Filter is active" } %>
       <% end %>
 
-      <%= button_tag inline_svg_tag("icons/icon-filter.svg", height: 21, width: 21), class: "filter__link",
+      <%= button_tag inline_svg_tag("icons/icon-filter.svg", height: 21, width: 21), name: "Toggle filter", class: "filter__link",
                      data: {
                        action: "toggle-content",
-                       animation_timing: 150 } %>
+                       animation_timing: 150
+                     },
+                     aria: {
+                       label: "Toggle filter"
+                     } %>
     </div>
   </div>
 <% end %>

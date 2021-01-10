@@ -1,6 +1,6 @@
 <div class="card">
   <%= link_to post_path(post.code) do %>
-    <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), width: 300, height: 171, loading: "lazy", class: "mb-1/4" %>
+    <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: "Image for #{ post.title }", width: 300, height: 171, loading: "lazy", class: "mb-1/4" %>
   <% end %>
 
   <div class="flex mb-auto">

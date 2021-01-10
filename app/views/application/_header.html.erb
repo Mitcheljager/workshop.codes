@@ -1,5 +1,5 @@
 <header class="header">
-  <%= link_to root_path do %>
+  <%= link_to root_path, aria: { label: "Return to homepage" } do %>
     <%= inline_svg_tag "logo.svg", class: "logo", alt: "Workshop.codes Logo" %>
     <%= inline_svg_tag "logo-small.svg", class: "logo-mobile", alt: "Workshop.codes Logo" %>
   <% end %>
@@ -9,7 +9,7 @@
       <%= link_to t("navigation.recent"), posts_path(1), class: "header__item #{ "header__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
       <%= link_to t("navigation.on_fire"), on_fire_path, class: "header__item #{ "header__item--active" if action_name == "on_fire" }" %>
       <%= link_to t("navigation.wiki"), wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" %>
-      <%= link_to inline_svg_tag("discord.svg"), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "header__item mt-1/4 lg:mt-1/8" %>
+      <%= link_to inline_svg_tag("discord.svg"), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "header__item mt-1/4 lg:mt-1/8", aria: { label: "Join the Workhsop.codes Discord" } %>
     </nav>
 
     <%= render "profile_block" %>

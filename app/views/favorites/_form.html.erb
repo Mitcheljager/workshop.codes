@@ -6,13 +6,13 @@
         remote: true,
         method: has_been_favorited ? :delete : :post,
         params: { favorite: { post_id: post.id } },
-        aria: { label: "favorite" },
+        aria: { label: "Favorite code #{ post.code }" },
         class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
       <%= inline_svg_tag "icons/icon-heart#{ "-border" unless has_been_favorited }.svg" %>
     <% end %>
   </div>
 <% else %>
-  <%= link_to login_path, class: "favorite" do %>
+  <%= link_to login_path, class: "favorite", aria: { label: "Favorite code '#{ post.code }'" } do %>
     <%= inline_svg_tag "icons/icon-heart-border.svg" %>
   <% end %>
 <% end %>

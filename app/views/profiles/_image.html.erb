@@ -1,8 +1,8 @@
 <% if user.profile_image.attached? %>
   <% begin %>
-    <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed, loading: "lazy" %>
+    <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed, loading: "lazy", aria: { label: "Profile image of '#{ user.username }'" } %>
   <% rescue %>
   <% end %>
 <% elsif user.provider_profile_image.present? %>
-  <%= image_tag user.provider_profile_image, loading: "lazy" %>
+  <%= image_tag user.provider_profile_image, loading: "lazy", aria: { label: "Profile image of '#{ user.username }'" } %>
 <% end %>
