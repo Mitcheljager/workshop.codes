@@ -50,10 +50,12 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html {
         unless @post.present?
-          revision = Revision.find_by("upper(code) = ?", params[:code].upcase).select(:post_id)
-          @post = revision.post if revision
+          revision = Revision.find_by("upper(code) = ?", params[:code].upcase).select(:post_id, :code)
 
-          redirect_to post_path(revision.post.code) if revision
+          if revision
+            @post = revision.post
+            redirect_to post_path(revision.post.code)
+          end
         end
 
         not_found and return unless @post.present?
