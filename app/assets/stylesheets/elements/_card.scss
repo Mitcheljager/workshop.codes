@@ -68,6 +68,22 @@
   }
 }
 
+.card__author {
+  display: inline-block;
+  margin-top: $margin / 8;
+  color: var(--text-color-dark);
+
+  a {
+    color: var(--text-color-dark);
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: var(--white);
+    }
+  }
+}
+
 .card__title {
   display: block;
   padding-bottom: .5rem;
