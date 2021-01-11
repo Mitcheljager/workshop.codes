@@ -167,10 +167,13 @@ class PostsController < ApplicationController
   end
 
   def copy_code
-    @post = Post.find_by_code(post_params[:code])
-    @post = Revision.find_by_code(post_params[:code]).post unless @post.present?
+    @post = Post.find_by("upper(code) = ?", params[:code].upcase)
+    unless @post.present?
+      @revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
+      @post = Revision.post if @revision.present?
+    end
 
-    track_action("Copy Code")
+    track_action("Copy Code") if @post.present?
   end
 
   private
