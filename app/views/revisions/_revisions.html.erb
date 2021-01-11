@@ -3,7 +3,7 @@
     <h2 class="mt-0">Update Log <small>(<%= @post.revisions.size %>)</small></h2>
   </div>
 
-  <% @post.revisions.limit(3).each do |revision| %>
+  <% @post.revisions.order(created_at: :desc).limit(3).each do |revision| %>
     <%= render "revisions/revision", revision: revision %>
   <% end %>
 

@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <%= revision.version unless revision.version.empty? %>
+        <%= revision.version if revision.version.present? %>
       </div>
 
       <small class="ml-auto">
