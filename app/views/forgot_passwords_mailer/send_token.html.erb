@@ -7,8 +7,8 @@
 </p>
 
 <p>
-  <a style="color: #3fbf74;" href="<%= forgot_password_url(@forgot_password_token.token) %>">Click here to reset your password</a><br>
-  Or by visiting this url: <%= forgot_password_url(@forgot_password_token.token) %>
+  <a style="color: #3fbf74;" href="<%= forgot_password_url(nil, @forgot_password_token.token) %>">Click here to reset your password</a><br>
+  Or by visiting this url: <%= forgot_password_url(nil, @forgot_password_token.token) %>
 </p>
 
 <p>
