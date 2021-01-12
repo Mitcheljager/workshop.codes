@@ -62,41 +62,27 @@
       <p class="form-hint mt-1/4">
         <%= t("account.analytics.copies.description") %>
       </p>
-
-      <% if @posts.any? && @copies_received.any? && @posts.first.created_at < @copies_received.first.created_at %>
-        <p class="form-hint">
-          <%= t("account.analytics.date_note", date: Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d")) %>
-        </p>
-      <% end %>
     </div>
 
     <div data-reveal-by-select-target="views" class="visibility-hidden">
       <p class="form-hint mt-1/4">
         <%= t("account.analytics.views.description") %>
       </p>
-
-      <% if @posts.any? && @views_received.any? && @posts.first.created_at < @views_received.first.created_at %>
-        <p class="form-hint">
-          <%= t("account.analytics.date_note", date: Statistic.where(content_type: :visit).first.created_at.strftime("%Y-%m-%d")) %>
-        </p>
-      <% end %>
     </div>
 
     <div data-reveal-by-select-target="listings" class="visibility-hidden">
       <p class="form-hint mt-1/4">
         <%= t("account.analytics.listings.description") %>
       </p>
-
-      <% if @posts.any? && @listings_received.any? && @posts.first.created_at < @listings_received.first.created_at %>
-        <p class="form-hint">
-          <%= t("account.analytics.date_note", date: Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d")) %>
-        </p>
-      <% end %>
     </div>
 
     <div data-reveal-by-select-target="favorites" class="visibility-hidden">
       <p class="form-hint mt-1/4"></p>
     </div>
+
+    <p class="form-hint">
+      <%= t("account.analytics.date_note") %>
+    </p>
 
     <div class="chart-wrapper pb-0">
       <div class="chart" data-role="chart" data-markers="<%= current_user.posts.pluck(:title, :code, :created_at).to_json %>"></div>

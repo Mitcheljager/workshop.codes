@@ -20,23 +20,12 @@
   <select class="form-select" data-action="get-post-analytics reveal-by-select" data-post-id="<%= post.id %>" autocomplete="off">
     <option value="daily-copies">Copies per day</option>
     <option value="daily-views">Views per day</option>
-    <option value="daily-listings">Listings per day (experimental)</option>
-    <option value="hourly-copies">Copies per hour in the last 7 days</option>
-    <option value="hourly-views">Views per hour in the last 7 days</option>
-    <option value="hourly-listings">Listings per hour in the last 7 days (experimental)</option>
+    <option value="daily-listings">Listings per day</option>
   </select>
 
   <div data-reveal-by-select-target="daily-copies">
     <p class="form-hint mt-1/4">
       This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
-    </p>
-
-    <p class="form-hint">
-      Note: Updates daily.
-
-      <% if Statistic.where(content_type: :copy).first && post.created_at < Statistic.where(content_type: :copy).first.created_at %>
-          This data was not recorded before <%= Statistic.where(content_type: :copy).first.created_at.strftime("%Y-%m-%d") %>
-      <% end %>
     </p>
   </div>
 
@@ -44,59 +33,17 @@
     <p class="form-hint mt-1/4">
       This is the total amount of times people viewed this post. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
     </p>
-
-    <p class="form-hint">
-      Note: Updates daily.
-
-      <% if Statistic.where(content_type: :visit).first && post.created_at < Statistic.where(content_type: :visit).first.created_at %>
-          This data was not recorded before <%= Statistic.where(content_type: :visit).first.created_at.strftime("%Y-%m-%d") %>
-      <% end %>
-    </p>
   </div>
 
   <div data-reveal-by-select-target="daily-listings" class="visibility-hidden">
     <p class="form-hint mt-1/4">
       This is the total amount of times your post appear in a list. This can be on the homepage, search results, your profile, or anywhere else posts appear. This value is unique per page. If someone sees your mode twice on the homepage, it counts as one. If someones sees your mode on the homepage and then again in a search result, both are counted.
     </p>
-
-    <p class="form-hint">
-      Note: Updates daily.
-
-      <% if Statistic.where(content_type: :listing).first && post.created_at < Statistic.where(content_type: :listing).first.created_at %>
-        This data was not recorded before <%= Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") %>
-      <% end %>
-    </p>
   </div>
 
-  <div data-reveal-by-select-target="hourly-copies" class="visibility-hidden">
-    <p class="form-hint mt-1/4">
-      This is the total amount of times people clicked on the "copy" button for this. Keep in mind that not all users will press this button to use your code. Anyone using the Workshop on Console, or anyone using this website on their phone will not be using this button. The same goes for those who select and copy the code manually.
-    </p>
-
-    <p class="form-hint">
-      Note: Times are displayed in <%= Time.zone.to_s %>.
-    </p>
-  </div>
-
-  <div data-reveal-by-select-target="hourly-views" class="visibility-hidden">
-    <p class="form-hint mt-1/4">
-      This is the total amount of times people viewed this post. A view is counted when someone visits the page, not when it shows up in a list. Views are unique, multiple visits by the same person do not count.
-    </p>
-
-    <p class="form-hint">
-      Note: Times are displayed in <%= Time.zone.to_s %>.
-    </p>
-  </div>
-
-  <div data-reveal-by-select-target="hourly-listings" class="visibility-hidden">
-    <p class="form-hint mt-1/4">
-      This is the total amount of times your post appear in a list. This can be on the homepage, search results, your profile, or anywhere else posts appear. This value is unique per page. If someone sees your mode twice on the homepage, it counts as one. If someones sees your mode on the homepage and then again in a search result, both are counted.
-    </p>
-
-    <p class="form-hint">
-      Note: Times are displayed in <%= Time.zone.to_s %>.
-    </p>
-  </div>
+  <p class="form-hint">
+    Note: Updates daily. Shows up to 6 months.
+  </p>
 
   <div class="chart-wrapper pb-0 mb-1/1">
     <div class="chart" data-role="chart" data-post-id="<%= post.id %>"></div>
