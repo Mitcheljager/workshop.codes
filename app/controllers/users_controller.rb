@@ -22,8 +22,8 @@ class UsersController < ApplicationController
   end
 
   def listings
-    @posts = current_user.posts.select(:id, :created_at, :code, :title)
-    @recent_listings = Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").pluck(:properties).select { |l| @posts.pluck(:id).include?(l["id"]) }
+    # @posts = current_user.posts.select(:id, :created_at, :code, :title)
+    # @recent_listings = Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").pluck(:properties).select { |l| @posts.pluck(:id).include?(l["id"]) }
 
     render partial: "listings"
   end
