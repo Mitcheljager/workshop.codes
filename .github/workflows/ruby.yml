@@ -12,6 +12,8 @@ jobs:
           sudo apt-get install libsqlite3-dev
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.7.2"
       - name: Yarn
         uses: borales/actions-yarn@v2.0.0
         with:
