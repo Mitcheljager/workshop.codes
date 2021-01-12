@@ -1,5 +1,6 @@
 en:
   default_page_title: Overwatch Workshop Codes Resource
+
   navigation:
     recent: Latest
     on_fire: On Fire
@@ -7,9 +8,11 @@ en:
     wiki: Wiki
     create: Create
     login: Login
+
   locale_picker:
     title: Language
     help: Set the website language
+
   filter:
     categories: Categories
     heroes: Heroes
@@ -45,19 +48,23 @@ en:
     apply: Apply filter
     view: View filter
     collapse: Collapse filter
+
   search:
     label: Search
     popular_search_terms_html: <strong>Popular</strong> Search&nbsp;terms
+
   footer:
     privacy_policy: Privacy Policy
     copyright: Copyright
     disclaimer: All images and icons belong to their respective owner.
+
   banner:
     kofi:
       title: Support Workshop.codes on
       tagline: Turns out websites are expensive and ads suck
       content_html: Support Workshop.codes for just <span class="text-white">$3</span>
       button: Support Workshop.codes
+
   posts:
     index:
       title: Overwatch Workshop Codes
@@ -203,14 +210,17 @@ en:
             Write a short summary of what has changed in this version in relation to the previous.
             <strong>This description is full Markdown enabled.</strong>
       submitting: Submitting...
+
   post:
     author: By
     categories: Categories
     expired:
       title: Possibly expired
       tooltip_html: <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+
   comments:
     title: Comments
+
   comment:
     reply: Reply
     edit: Edit
@@ -220,16 +230,19 @@ en:
     sign_up: Sign up
     submit: Comment
     creator: creator
+
   report:
     action: Report code
     loading: Loading...
     modal:
       disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. This form is not meant to report bugs to the creator of this code.
+
   while_you_waits:
     index:
       title: While you wait
       tagline: Codes to play while in queue
       content: A curated list of games that are fun to play while you wait. Most of these are games that require no other players so you can get started right away.
+
   users:
     show:
       welcome_html: Hello there, <strong>%{name}</strong>
@@ -261,6 +274,7 @@ en:
         help_html: Your emailaddress is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your emailaddress is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.
       remember_me: Remember me (uses cookies)
       submit: Submit
+
   sessions:
     login:
       title: Login
@@ -275,6 +289,7 @@ en:
       title: Create an account
       content: Don't have an account?
       button: Create an account
+
   account:
     navigation:
       overview: Overview
@@ -311,6 +326,7 @@ en:
     favorites:
       title: Favorites
       empty: You've not yet liked any Codes
+
   profile:
     edit:
       title_html: <strong>Customise</strong> your profile
@@ -336,6 +352,7 @@ en:
         label: Custom CSS
         help: You're verified, which means you get to add some extra styling to your profile. Be respectful with your styling. Don't hide anything that isn't yours. Don't alter text that isn't yours. Don't go overboard. Misuse may result in your verified status being removed.
       submit: Save
+
   accessibility:
     edit:
       title: Accessibility
@@ -354,12 +371,14 @@ en:
         pagination: Pagination
         infinite_scroll: Infinite scroll
         load_more_button: "'Load more' button"
+
   views:
     pagination:
       first: First
       last: Last
       previous: Prev
       next: Next
+
   activerecord:
     errors:
       models:

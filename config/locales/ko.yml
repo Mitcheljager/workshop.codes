@@ -7,9 +7,11 @@ ko:
     wiki: 위키
     create: 만들기
     login: 로그인
+
   locale_picker:
     title: 언어
     help: 웹 사이트 언어를 설정합니다
+
   filter:
     categories: 카테고리
     heroes: 영웅
@@ -47,19 +49,23 @@ ko:
     apply: 필터 적용
     view: 필터보기
     collapse: 필터 접기
+
   search:
     label: 검색
     popular_search_terms_html: <strong>인기</strong> 검색어
+
   footer:
     privacy_policy: 개인정보 보호정책
     copyright: 저작권
     disclaimer: 모든 이미지와 아이콘은 각 소유자의 것입니다.
+
   banner:
     kofi:
       title: Ko-fi로 Workshop.codes 지원하기
       tagline: 알고보니 웹사이트는 비싸고 광고는 형편없습니다
       content_html: 단 <span class="text-white">$3</strong>만으로도 Workshop.codes를 지원할 수 있습니다
       button: Workshop.codes 지원하기
+
   posts:
     index:
       title: 오버워치 워크샵 코드
@@ -205,14 +211,17 @@ ko:
            이전 버전과 관련하여 이 버전에서 변경된 사항에 대한 간략한 요약을 작성하십시오.
             <strong>이 설명은 전체 마크 다운이 활성화되어 있습니다.</strong>
       submitting: 제출하는 중...
+
   post:
     author: 작성자
     categories: 카테고리
     expired:
       title: 만료되었을 수 있음
       tooltip_html: <strong>이 코드는 6 개월이 넘었습니다.</strong> 이는 코드가 만료되어 더 이상 작동하지 않음을 의미 할 수 있습니다.
+
   comments:
     title: 코멘트
+
   comment:
     reply: 댓글
     edit: 편집
@@ -222,16 +231,19 @@ ko:
     sign_up: 가입하기
     submit: 코멘트
     creator: 작성자
+
   report:
     action: 코드 신고
     loading: 로딩 ...
     modal:
       disclaimer_html: <strong>주의하십시오;</strong> 이 양식은 이 코드를 워크샵.코드 관리자에게 보고하기 위한 것입니다. 이 양식은 이 코드의 작성자에게 버그를 보고하기 위한 것이 아닙니다.
+
   while_you_waits:
     index:
       title: 기다리는 동안
       tagline: 큐 잡는 동안 즐기실 수 있는 코드 모음집
       content: 큐를 기다리시는 동안 즐기실 수 있는 코드 모음집입니다. 대부분 혼자서도 즐기실 수 있는 코드이기 때문에 다른 플레이어들을 기다리지 않아도 바로 시작하실 수 있습니다.
+
   users:
     show:
       welcome_html: 안녕하세요, <strong>%{name}</strong>
@@ -263,6 +275,7 @@ ko:
         help_html: 이메일 주소는 패스워드를 잊어 버린 경우 계정을 복구하는 데 사용됩니다.<strong>이것은 완전히 선택 사항입니다.</strong> 귀하의 이메일 주소는 암호화되어 안전하게 저장됩니다. 귀하가 명시적으로 허용하지 않는 한 어떤 용도로도 사용되지 않습니다.
       remember_me: 로그인 상태 유지 (쿠키 사용)
       submit: 로그인
+
   sessions:
     login:
       title: 로그인
@@ -277,6 +290,7 @@ ko:
       title: 회원가입
       content: 계정이 없으신가요?
       button: 회원가입
+
   account:
     navigation:
       overview: 개요
@@ -312,6 +326,7 @@ ko:
     favorites:
       title: 즐겨찾기
       empty: 아직 좋아하는 코드가 없습니다.
+
   profile:
     edit:
       title_html: <strong>맞춤설정</strong> 프로필
@@ -337,6 +352,7 @@ ko:
         label: 맞춤 CSS
         help: 인증되었으므로 프로필에 추가 스타일을 추가해야합니다. 스타일링을 존중하십시오. 당신의 것이 아닌 것을 숨기지 마십시오. 귀하의 것이 아닌 텍스트를 변경하지 마십시오. 너무 지나치지는 마십시오. 잘못 사용하면 검증된 당신의 지위가 제거될 수 있습니다.
       submit: 저장
+
   accessibility:
     edit:
       title: 접근성
@@ -355,12 +371,14 @@ ko:
         pagination: 페이지 매기기
         infinite_scroll: 무한 스크롤
         load_more_button: 추가 로드 버튼
+
   views:
     pagination:
       first: 처음
       last: 마지막
       previous: 이전
       next: 다음
+
   activerecord:
     errors:
       models:
@@ -382,6 +400,7 @@ ko:
         restrict_dependent_destroy:
           has_one: "%{record}가 존재하기 때문에 삭제할 수 없습니다"
           has_many: "%{record}가 존재하기 때문에 삭제할 수 없습니다"
+
   date:
     abbr_day_names:
     - 일
@@ -435,6 +454,7 @@ ko:
     - :year
     - :month
     - :day
+
   datetime:
     distance_in_words:
       about_x_hours:
@@ -481,6 +501,7 @@ ko:
       day: 일
       month: 월
       year: 년
+
   errors:
     format: "%{message}"
     messages:
@@ -513,6 +534,7 @@ ko:
       header:
         one: 한 개의 오류로 인해 %{model}을(를) 저장할 수 없습니다
         other: "%{count}개의 오류로 인해 %{model}을(를) 저장할 수 없습니다"
+
   helpers:
     select:
       prompt: 선택해주세요
@@ -520,6 +542,7 @@ ko:
       create: 등록
       submit: 제출
       update: 수정
+
   number:
     currency:
       format:
@@ -566,11 +589,13 @@ ko:
     precision:
       format:
         delimiter: ''
+
   support:
     array:
       last_word_connector: ", "
       two_words_connector: '와(과) '
       words_connector: ", "
+
   time:
     am: 오전
     formats:
