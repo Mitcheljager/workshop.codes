@@ -18,7 +18,7 @@ class ReportsController < ApplicationController
         notify_discord
         format.js
       else
-        format.js { render file: "application/error.js.erb" }
+        format.js { render file: "app/views/application/error.js.erb" }
       end
     end
   end

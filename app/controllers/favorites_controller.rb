@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
         format.js
         format.html { redirect_to root_path }
       else
-        format.js { render file: "application/error.js.erb" }
+        format.js { render file: "app/views/application/error.js.erb" }
       end
     end
   end
@@ -27,7 +27,7 @@ class FavoritesController < ApplicationController
         format.js
         format.html { redirect_to root_path }
       else
-        format.js { render file: "application/error.js.erb" }
+        format.js { render file: "app/views/application/error.js.erb" }
       end
     end
   end
