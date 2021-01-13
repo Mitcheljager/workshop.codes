@@ -13,6 +13,7 @@ module OverwatchWorkshop
     config.active_storage.replace_on_assign_to_many = false
     config.exceptions_app = self.routes
     config.active_job.queue_adapter = :sucker_punch
+    config.middleware.use Rack::Deflater
 
     config.i18n.available_locales = [:en, :ko]
     config.i18n.default_locale = :en
