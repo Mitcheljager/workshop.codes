@@ -63,7 +63,7 @@ end
 group :production do
   gem "autoprefixer-rails"
   gem "bugsnag"
-  gem "heroku-deflater"
+  # gem "heroku-deflater"
   gem "pg"
   gem "scout_apm"
 end
