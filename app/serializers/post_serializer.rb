@@ -12,7 +12,7 @@ class PostSerializer < ActiveModel::Serializer
       image = object.images.find_by_blob_id(JSON.parse(object.image_order).first)
 
       if image
-        url = url_for image.variant(quality: 95, resize_to_fill: [690, 394]).processed.url
+        url = ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [690, 394]).processed.key
       end
     end
 

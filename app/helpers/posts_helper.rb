@@ -7,7 +7,7 @@ module PostsHelper
         image = post.images.find_by_blob_id(JSON.parse(post.image_order).first)
 
         if image
-          url = url_for image.variant(quality: 90, resize_to_fill: [width, height]).processed.url
+          url = ENV["CDN"] + image.variant(quality: 90, resize_to_fill: [width, height]).processed.key
         end
       rescue
       end

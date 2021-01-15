@@ -1,6 +1,6 @@
 <% if user.profile_image.attached? %>
   <% begin %>
-    <%= image_tag user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed.url, loading: "lazy", aria: { label: "Profile image of '#{ user.username }'" } %>
+    <%= image_tag ENV["CDN"] + user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed.key, loading: "lazy", aria: { label: "Profile image of '#{ user.username }'" } %>
   <% rescue %>
   <% end %>
 <% elsif user.provider_profile_image.present? %>
