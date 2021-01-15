@@ -12,3 +12,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w( form.js uploader.js chart.js form.scss fonts.scss )
+
+Rails.application.config.public_file_server.headers = {
+  "Cache-Control" => "public, max-age=#{ 30.days.to_i }"
+}
