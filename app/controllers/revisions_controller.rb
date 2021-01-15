@@ -7,8 +7,8 @@ class RevisionsController < ApplicationController
   end
 
   def index
-    @post = Post.find_by_code!(params[:code])
-    @revisions = Revision.where(post_id: @post).select(:id, :post_id, :version, :code, :description, :created_at, :updated_at, :last_revision_created_at).order(created_at: :desc)
+    @post = Post.select(:title, :id, :user_id).includes(:user).find_by_code!(params[:code])
+    @revisions = Revision.where(post_id: @post).select(:id, :post_id, :version, :code, :description, :created_at, :updated_at).order(created_at: :desc)
   end
 
   def show
