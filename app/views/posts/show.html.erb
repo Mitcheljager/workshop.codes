@@ -175,7 +175,7 @@
 </article>
 
 <% cache_unless current_user, [current_locale, @post.collection, @post.comments, @post.revisions] do %>
-  <%= render "collections/collections" if @post.collection && @post.collection.posts.public?.many? %>
+  <%= render "collections/collections" if @post.collection && @post.collection.posts.visible?.many? %>
 
   <div class="comments" id="comments">
     <div class="heading items-heading mb-1/2">
