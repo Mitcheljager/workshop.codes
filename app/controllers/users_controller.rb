@@ -7,8 +7,6 @@ class UsersController < ApplicationController
     redirect_to account_path if current_user
   end
 
-  skip_after_action :track_listing
-
   def index
     @users = User.all.order(created_at: :asc)
   end
