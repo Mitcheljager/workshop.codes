@@ -105,7 +105,8 @@ Rails.application.routes.draw do
     get "search", to: "search#show"
     get "get-verified-users", to: "filter#get_verified_users"
 
-    resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :show, :edit, :update, :destroy]
+    resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :edit, :update, :destroy]
+    get "c/:nice_url(/page/:page)", to: "collections#show"
 
     constraints code: /.{5,6}/ do
       resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]

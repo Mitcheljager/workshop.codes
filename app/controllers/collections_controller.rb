@@ -10,6 +10,11 @@ class CollectionsController < ApplicationController
   def show
     @collection = Collection.find_by_nice_url!(params[:nice_url].downcase)
     @posts = @collection.posts.visible?.order(created_at: :desc).page params[:page]
+
+    respond_to do |format|
+      format.html
+      format.js { render "posts/infinite_scroll_posts" }
+    end
   end
 
   def edit
