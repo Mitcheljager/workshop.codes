@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "form", media: "all", "data-turbolinks-track": "reload" %>
+<%= inline_css "form.css" %>
 <%= javascript_include_tag "chart.js", "data-turbolinks-track": "reload", defer: true %>
 <%= javascript_include_tag "form.js", "data-turbolinks-track": "reload", defer: true %>
 <%= render "remember_me_cookie" if current_user.remember_tokens.any? %>
