@@ -43,7 +43,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :revisions, :comments, :collection).find_by("upper(posts.code) = ?", params[:code].upcase)
+    @post = Post.includes(:user, :revisions, :collection).find_by("upper(posts.code) = ?", params[:code].upcase)
+    @comments_count = @post.comments.count
 
     not_found and return if @post && @post.private? && @post.user != current_user
 

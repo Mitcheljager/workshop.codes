@@ -25,6 +25,7 @@
 //= require dropdown
 //= require filter
 //= require gallery
+//= require get-comments
 //= require get-post-analytics
 //= require get-user-analytics
 //= require get-verified-users

@@ -174,18 +174,18 @@
   <% end %>
 </article>
 
-<% cache_unless current_user, [current_locale, @post.collection, @post.comments, @post.revisions] do %>
+<% cache_unless current_user, [current_locale, @post.collection, @comments_count, @post.revisions] do %>
   <%= render "collections/collections" if @post.collection && @post.collection.posts.visible?.many? %>
 
   <div class="comments" id="comments">
     <div class="heading items-heading mb-1/2">
-      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @post.comments.count %></span> <%= t("comments.title") %></h2>
+      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @comments_count %></span> <%= t("comments.title") %></h2>
     </div>
 
     <%= render "comments/form", post: @post %>
 
-    <div class="comments__wrapper" data-role="comments">
-        <%= render @post.comments.where(parent_id: nil).order(created_at: :desc) %>
+    <div class="comments__wrapper" data-role="comments" data-id="<%= @post.id %>" data-comments-count="<%= @comments_count %>">
+      <div class="infinite-scroll"><div class="spinner"></div></div>
     </div>
   </div>
 

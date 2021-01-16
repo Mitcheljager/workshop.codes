@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   resources :badges, only: [:create]
 
-  resources :comments, only: [:create, :update, :destroy]
+  resources :comments, only: [:create, :update, :destroy, :show]
   get "create_edit_form/:comment_id", to: "comments#create_edit_form", as: "create_edit_form"
   get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
 

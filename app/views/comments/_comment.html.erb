@@ -13,7 +13,7 @@
 
     <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
       <span class="post-comment__date" title="Created at: <%= l comment.created_at %>">
-        <span data-role="timeago" datetime="<%= comment.created_at %>"></span>
+        <span><%= time_ago_in_words(comment.created_at) %> ago</span>
 
         <% if comment.created_at != comment.updated_at %>
           <span title="This comment was edited at <%= l comment.updated_at %>">*</span>

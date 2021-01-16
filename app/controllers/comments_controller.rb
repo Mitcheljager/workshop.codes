@@ -39,6 +39,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find_by_id(params[:id])
+    @comments = @post.comments.includes(:user).where(parent_id: nil).order(created_at: :desc)
+
+    render layout: false
+  end
+
   def update
     @comment = Comment.find_by_id_and_user_id(params[:id], current_user.id)
     @post = @comment.post
