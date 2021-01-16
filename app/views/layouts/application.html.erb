@@ -24,7 +24,7 @@
 
     <link rel="manifest" href="/manifest.json">
 
-    <%= inline_css "application.css" %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
     <%= render "logged_in_user_assets" if current_user %>
