@@ -3,8 +3,11 @@ class BadgesWikiJob
   include BadgesHelper
 
   def perform(user)
-    return unless user.present?
+    begin
+      return unless user.present?
 
-    create_badge(badge_id: 8, user: user)
+      create_badge(badge_id: 8, user: user)
+    rescue
+    end
   end
 end

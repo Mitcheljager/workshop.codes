@@ -2,8 +2,11 @@ class TrackingJob
   include SuckerPunch::Job
 
   def perform(ahoy, event, parameters)
-    return unless ahoy.present?
+    begin
+      return unless ahoy.present?
 
-    ahoy.track event, parameters
+      ahoy.track event, parameters
+    rescue
+    end
   end
 end

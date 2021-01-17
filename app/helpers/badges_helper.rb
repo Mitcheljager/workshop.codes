@@ -9,7 +9,7 @@ module BadgesHelper
 
     if @badge.save
       create_notification(
-        "**You've earned the badge '#{ badges[@badge.badge_id]["en"]["label"] }'!** You can find it displayed on your profile.",
+        "==You've earned the badge '**#{ badges[@badge.badge_id]["en"]["label"] }**'!== You can find it displayed on your profile.",
         nil,
         user.id,
         :earned_badge,
