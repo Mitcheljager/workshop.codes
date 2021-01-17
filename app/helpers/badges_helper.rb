@@ -1,5 +1,6 @@
 module BadgesHelper
   include NotificationsHelper
+  include ApplicationHelper
 
   def create_badge(badge_id: nil, user: nil)
     return if user.badges.where(badge_id: badge_id).any?
