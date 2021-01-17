@@ -44,7 +44,6 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(:user, :revisions, :collection).find_by("upper(posts.code) = ?", params[:code].upcase)
-    @comments_count = @post.comments.count
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
@@ -61,6 +60,7 @@ class PostsController < ApplicationController
 
         not_found and return unless @post.present?
 
+        @comments_count = @post.comments.count
         set_post_images
       }
       format.json {
