@@ -22,7 +22,6 @@ def compress_events(event_name, content_type)
 
       post = Post.find_by_id(event[1].first[1]["id"])
       post.increment!(:impressions_count, event[1].size) if post.present? && content_type == :visit
-      post.increment!(:listings_count, event[1].size) if post.present? && content_type == :listing
     end
 
     @statistic.save

@@ -24,7 +24,6 @@
     <th>URL</th>
     <th><%= link_to "Fv", admin_posts_path(order: "favorites_count") %></th>
     <th><%= link_to "Imp", admin_posts_path(order: "impressions_count") %></th>
-    <th><%= link_to "Lst", admin_posts_path(order: "listings_count") %></th>
     <th><%= link_to "Hot", admin_posts_path(order: "hotness") %></th>
     <th>Rev</th>
     <th>Com</th>
@@ -45,7 +44,6 @@
       <td><small><%= link_to nice_url_path(post.nice_url) if post.nice_url.present? %></small></td>
       <td><%= post.favorites_count %></td>
       <td><%= post.impressions_count %></td>
-      <td><%= post.listings_count %></td>
       <td><%= post.hotness %></td>
       <td><%= post.revisions.size %></td>
       <td><%= post.comments.size %></td>

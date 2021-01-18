@@ -12,18 +12,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = current_user.posts.select(:id, :created_at)
-    @statistics_for_user = Statistic.where.not(content_type: :listing).where(model_id: @posts.pluck(:id))
-    @copies_received = @statistics_for_user.where(content_type: :copy).order(created_at: :asc)
-    @views_received = @statistics_for_user.where(content_type: :visit).order(created_at: :asc)
-    @listings_received = @statistics_for_user.where(content_type: :listing).order(created_at: :asc)
-  end
-
-  def listings
-    # @posts = current_user.posts.select(:id, :created_at, :code, :title)
-    # @recent_listings = Ahoy::Event.where("time > ?", 60.minutes.ago).where(name: "Listing").pluck(:properties).select { |l| @posts.pluck(:id).include?(l["id"]) }
-
-    render partial: "listings"
+    @posts = current_user.posts.select(:id)
+    @favorites_count = @posts.pluck(:favorites_count).sum
+    @statistics_for_user = Statistic.where(content_type: [:copy, :visit]).where(model_id: @posts.pluck(:id)).select(:content_type, :value)
+    @copies_count = @statistics_for_user.where(content_type: :copy).pluck(:value).sum
+    @views_count = @statistics_for_user.where(content_type: :visit).pluck(:value).sum
   end
 
   def new

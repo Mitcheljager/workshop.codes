@@ -59,7 +59,6 @@ Rails.application.routes.draw do
     root "posts#index"
 
     resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
-    get :listings, controller: :users
     get "account(/page/:page)", to: "users#show", as: "account"
     get "account/edit", to: "users#edit", as: "edit_user"
     get "account/posts", to: "users#posts", as: "account_posts"

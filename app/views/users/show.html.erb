@@ -7,45 +7,21 @@
     </div>
   <% end %>
 
-  <div class="profile-analytics">
-    <div class="profile-analytics__cards">
-      <div class="card">
-        <span class="card__title"><%= t("users.show.favorites_received") %></span>
-        <%= number_with_delimiter(@posts.pluck(:favorites_count).sum) %>
-      </div>
-
-      <div class="card">
-        <span class="card__title"><%= t("users.show.views_received") %></span>
-        <%= number_with_delimiter(@views_received.pluck(:value).sum) %>
-      </div>
-
-      <div class="card">
-        <span class="card__title"><%= t("users.show.copies_received") %></span>
-        <%= number_with_delimiter(@copies_received.pluck(:value).sum) %>
-      </div>
-
-      <div class="card">
-        <span class="card__title flex">
-          <%= t("users.show.listings_received") %>
-
-          <div class="tooltip align align-center ml-1/8">
-            <small class="text-dark">(new)</small>
-
-            <div class="tooltip__content">
-              Started recording this value since <%= Statistic.where(content_type: :listing).any? ? Statistic.where(content_type: :listing).first.created_at.strftime("%Y-%m-%d") : "today" %>
-            </div>
-          </div>
-        </span>
-
-        <%= number_with_delimiter(@posts.pluck(:listings_count).sum) %>
-      </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card__title"><%= t("users.show.favorites_received") %></span>
+      <big><%= number_with_delimiter(@favorites_count) %></big>
     </div>
 
-    <%= render_async listings_path do %>
-      <div class="listings listings--loading">
-        <em class="spinner"></em>
-      </div>
-    <% end %>
+    <div class="card">
+      <span class="card__title"><%= t("users.show.views_received") %></span>
+      <big><%= number_with_delimiter(@views_count) %></big>
+    </div>
+
+    <div class="card">
+      <span class="card__title"><%= t("users.show.copies_received") %></span>
+      <big><%= number_with_delimiter(@copies_count) %></big>
+    </div>
   </div>
 
   <div data-user-analytics data-reveal-by-select-parent>
@@ -54,7 +30,6 @@
     <select class="form-select" data-action="get-user-analytics reveal-by-select" autocomplete="off">
       <option value="copies" selected><%= t("account.analytics.copies.label") %></option>
       <option value="views"><%= t("account.analytics.views.label") %></option>
-      <option value="listings"><%= t("account.analytics.listings.label") %></option>
       <option value="favorites"><%= t("account.analytics.favorites.label") %></option>
     </select>
 
@@ -67,12 +42,6 @@
     <div data-reveal-by-select-target="views" class="visibility-hidden">
       <p class="form-hint mt-1/4">
         <%= t("account.analytics.views.description") %>
-      </p>
-    </div>
-
-    <div data-reveal-by-select-target="listings" class="visibility-hidden">
-      <p class="form-hint mt-1/4">
-        <%= t("account.analytics.listings.description") %>
       </p>
     </div>
 
