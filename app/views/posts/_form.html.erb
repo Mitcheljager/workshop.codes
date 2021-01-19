@@ -246,7 +246,10 @@
           <% heroes.each do |hero| %>
             <div class="checkbox">
               <%= form.check_box :heroes, { multiple: true, checked: (@post.heroes.include?(hero["en"]) if @post.heroes) }, hero["en"], false %>
-              <%= form.label "heroes_#{ hero["en"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }", i18n_value_in_array(heroes, hero["en"]) %>
+              <%= form.label "heroes_#{ hero["en"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "") }" do %>
+                <%= image_tag hero_name_to_icon_url(hero["en"]), height: 20, loading: "lazy" %>
+                <%= i18n_value_in_array(heroes, hero["en"]) %>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -349,7 +352,5 @@
 
   <hr>
 
-  <div>
-    <center><%= form.submit class: "button", data: { disable_with: t("posts.form.submitting") } %></center>
-  </div>
+  <center><%= form.submit class: "button pl-1/1 pr-1/1", data: { disable_with: t("posts.form.submitting") } %></center>
 <% end %>
