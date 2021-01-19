@@ -29,7 +29,7 @@ class Wiki::Article < ApplicationRecord
       query: {
         multi_match: {
           query: query,
-          fields: ["title^2", "tags^1.5", "category.title^1"],
+          fields: ["title^3", "tags^1.5", "category.title^1"],
           fuzziness: "AUTO"
         }
       }
