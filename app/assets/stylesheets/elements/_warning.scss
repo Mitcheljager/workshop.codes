@@ -1,12 +1,14 @@
 .warning {
-  border: 2px solid $primary;
   border-radius: $border-radius;
   margin-top: $margin * 2;
   padding: 1rem;
-  background: $bg-dark;
+  background: $primary;
   text-align: center;
+  color: white;
 
   &--mild {
-    border-color: $border-color;
+    border: 3px solid $border-color;
+    background: $bg-darker;
+    color: $text-color;
   }
 }

@@ -2,7 +2,7 @@
 
 <%= render "layouts/account", title: t("accessibility.edit.title") do %>
   <% if flash[:alert] %>
-    <div class="warning mt-0 mb-1/2"><mark><%= flash[:alert] %></mark></div>
+    <div class="warning mt-0 mb-1/2"><%= flash[:alert] %></div>
   <% end %>
 
   <p class="mt-0 mb-1/2">

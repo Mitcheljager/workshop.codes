@@ -1,7 +1,3 @@
-<% if flash[:alert] %>
-  <div class="warning mt-0 mb-1/2"><mark><%= flash[:alert] %></mark></div>
-<% end %>
-
 <%= form_for @user, url: update_profile_path do |form| %>
   <% if @user.errors.any? %>
     <div class="error-block">

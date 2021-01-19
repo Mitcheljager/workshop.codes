@@ -2,16 +2,16 @@
 
 <%= render "layouts/account", title: "<strong>Edit</strong> your account" do %>
   <div class="wrapper--small ml-0">
+    <% if flash[:alert] %>
+      <div class="warning mt-0 mb-1/2 w-100"><%= flash[:alert] %></div>
+    <% end %>
+    
     <div class="well well--dark">
       <% if @user.provider.present? %>
         <p class="mt-0">
           <%= t("users.edit.provider", provider: @user.provider.humanize) %>
         </p>
       <% else %>
-        <% if flash[:alert] %>
-          <div class="warning mt-0 mb-1/2"><mark><%= flash[:alert] %></mark></div>
-        <% end %>
-
         <%= render "form", user: @user, url: update_user_path %>
       <% end %>
 

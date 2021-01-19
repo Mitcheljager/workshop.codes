@@ -1,6 +1,10 @@
 <%= render "layouts/account", title: t("profile.edit.title_html") do %>
   <%= link_to t("profile.edit.go_to_profile"), user_profile_path(current_user), class: "button button--secondary" %>
 
+  <% if flash[:alert] %>
+    <div class="warning mt-0 mt-1/2"><%= flash[:alert] %></div>
+  <% end %>
+
   <div class="well block mb-1/2 mt-1/2">
     <h4 class="mt-0">Badges you've earned</h4>
 
