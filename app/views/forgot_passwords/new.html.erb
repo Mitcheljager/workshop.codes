@@ -1,16 +1,16 @@
-<h1 class="top-offset">Forgot password</h1>
+<h1 class="top-offset pt-1/1 sm:pt-1/2">Reset your password</h1>
 
-<div class="form-group-columns mt-1/1">
-  <%= form_for :forgot_password, url: forgot_passwords_path do |f| %>
-    <div class="form-field">
-      <%= f.label :email, "Emailaddress", class: "form-label" %>
-      <%= f.email_field :email, placeholder: "Emailaddress", class: "form-input", required: true %>
+<div class="form-group-columns mt-1/2 sm:mt-1/1">
+  <div class="well well--dark">
+    <%= form_for :forgot_password, url: forgot_passwords_path do |f| %>
+      <div class="form-field">
+        <%= f.label :email, "Emailaddress", class: "form-label" %>
+        <%= f.email_field :email, placeholder: "Emailaddress", class: "form-input", required: true %>
 
-      <div class="form-hint">If you have added an emailaddress to your account we will send you and email with instructions on how to reset your password.</div>
-    </div>
+        <div class="form-hint">If you have added an emailaddress to your account we will send you and email with instructions on how to reset your password.</div>
+      </div>
 
-    <hr class="small">
-
-    <%= submit_tag "Submit", class: "button" %>
-  <% end %>
+      <%= submit_tag "Submit", class: "button" %>
+    <% end %>
+  </div>
 </div>
