@@ -78,14 +78,6 @@
     </url>
   <% end %>
 
-  <% @users.each do |user| %>
-    <url>
-      <loc><%= user_url(user.username) %></loc>
-      <lastmod><%= user.updated_at.iso8601 %></lastmod>
-      <priority>0.85</priority>
-    </url>
-  <% end %>
-
   <url>
     <loc><%= wiki_root_url %></loc>
     <lastmod>2020-07-01T16:36:16Z</lastmod>
