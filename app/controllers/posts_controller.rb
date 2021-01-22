@@ -30,6 +30,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html
       format.js { render "posts/infinite_scroll_posts" }
+      format.json {
+        set_request_headers
+        render json: @posts
+      }
     end
   end
 
@@ -39,7 +43,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html
       format.js { render "posts/infinite_scroll_posts" }
-      format.json { render json: @posts, layout: false }
+      format.json {
+        set_request_headers
+        render json: @posts
+      }
     end
   end
 

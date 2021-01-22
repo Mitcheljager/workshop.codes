@@ -22,6 +22,10 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       format.html
       format.js { render "posts/infinite_scroll_posts" }
+      format.json {
+        set_request_headers
+        render json: @posts
+      }
     end
   end
 
@@ -64,5 +68,9 @@ class ProfilesController < ApplicationController
 
   def allowed_sort_params
     %w[updated_at created_at hotness favorites_count]
+  end
+
+  def set_request_headers
+    headers["Access-Control-Allow-Origin"] = "*"
   end
 end
