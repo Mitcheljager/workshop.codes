@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @hot_posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(3) unless params[:page].present?
+    @hot_posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(10) unless params[:page].present?
     @posts = Post.includes(:user).select_overview_columns.public?.order(created_at: :desc).page params[:page]
 
     respond_to do |format|
@@ -34,11 +34,12 @@ class PostsController < ApplicationController
   end
 
   def on_fire
-    @posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").select_overview_columns.order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").page params[:page]
 
     respond_to do |format|
       format.html
       format.js { render "posts/infinite_scroll_posts" }
+      format.json { render json: @posts, layout: false }
     end
   end
 

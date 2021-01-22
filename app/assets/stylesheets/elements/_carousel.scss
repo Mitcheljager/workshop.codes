@@ -109,3 +109,64 @@
     background: rgba($black, .5);
   }
 }
+
+.card-carousel {
+  position: relative;
+
+  .cards {
+    -webkit-mask-image: linear-gradient(90deg, rgba($black, 0) 0%, rgba($black, 1) $margin / 4, rgba($black, 1) calc(100% - #{ $margin / 4 }), rgba($black, 0) 100%);
+  }
+}
+
+.card-carousel__control {
+  position: absolute;
+  top: calc(50% - #{ $margin / 4 });
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  z-index: 20;
+  cursor: pointer;
+
+  @include media-min(md) {
+    width: 30px;
+    height: 30px;
+  }
+
+  &:not(.card-carousel__control--disabled):hover,
+  &:not(.card-carousel__control--disabled):active {
+    svg path {
+      fill: white;
+    }
+  }
+
+  svg {
+    height: 100%;
+    width: 100%;
+    filter: drop-shadow(0 3px 2px rgba($black, .25));
+
+    path {
+      fill: $white;
+    }
+  }
+
+  &--next {
+    right: -6vw;
+
+    @include media-min(md) {
+      right: -45px;
+    }
+  }
+
+  &--previous {
+    left: -6vw;
+
+    @include media-min(md) {
+      left: -45px;
+    }
+  }
+
+  &--disabled {
+    opacity: .25;
+    cursor: not-allowed;
+  }
+}

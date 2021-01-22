@@ -17,6 +17,7 @@
 
 //= require analytics
 //= require carousel
+//= require carousel-cards
 //= require checkbox-select-all
 //= require copy
 //= require date-range

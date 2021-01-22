@@ -1,27 +1,29 @@
-<div class="card">
-  <%= link_to post_path(post.code) do %>
-    <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: "Image for #{ post.title }", width: 300, height: 171, loading: "lazy", class: "mb-1/4" %>
-  <% end %>
+<% cache_unless current_user, [current_locale, post, "card"] do %>
+  <div class="card">
+    <%= link_to post_path(post.code) do %>
+      <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: post.title, width: 300, height: 171, loading: "lazy", class: "mb-1/4" %>
+    <% end %>
 
-  <div class="flex mb-auto">
-    <div class="mr-1/8">
-      <%= link_to post.title, post_path(post.code), class: "card__title pb-0" %>
-      <small class="card__author">
-        <%= t("post.author") %>
-        <%= link_to post.user.username.split("#")[0], user_profile_path(post.user), rel: "author" %>
-      </small>
+    <div class="flex mb-auto">
+      <div class="mr-1/8">
+        <%= link_to post.title, post_path(post.code), class: "card__title pb-0" %>
+        <small class="card__author">
+          <%= t("post.author") %>
+          <%= link_to post.user.username.split("#")[0], user_profile_path(post.user), rel: "author" %>
+        </small>
+      </div>
+
+      <div class="item__favorite mt-0 mr-0 ml-auto">
+        <%= render "favorites/form", post: post %>
+      </div>
     </div>
 
-    <div class="item__favorite mt-0 mr-0 ml-auto">
-      <%= render "favorites/form", post: post %>
+    <div class="card__code mt-1/4" data-action="copy-to-clipboard" data-target="<%= post.code %>">
+      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
+
+      <span class="copy">
+        <span data-copy="<%= post.code %>" data-track-copy><%= post.code %></span>
+      </span>
     </div>
   </div>
-
-  <div class="card__code mt-1/4" data-action="copy-to-clipboard" data-target="<%= post.code %>">
-    <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
-
-    <span class="copy">
-      <span data-copy="<%= post.code %>" data-track-copy><%= post.code %></span>
-    </span>
-  </div>
-</div>
+<% end %>
