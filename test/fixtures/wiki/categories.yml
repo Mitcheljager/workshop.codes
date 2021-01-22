@@ -2,8 +2,8 @@
 
 category_one:
   title: MyString
-  slug: MyString
+  slug: my-string
 
 category_two:
-  title: MyString
-  slug: MyString
+  title: MyString2
+  slug: my-string-2

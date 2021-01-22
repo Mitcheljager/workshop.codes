@@ -32,6 +32,8 @@ class Wiki::ArticleControllerTest < ActionDispatch::IntegrationTest
     fill_in "wiki_article_content", with: @article.content
     fill_in "wiki_article_tags", with: @article.tags
 
+    find("#wiki_article_category_id option:nth-child(2)").select_option
+
     assert_difference "Wiki::Article.count", 1 do
       click_button "Submit"
     end
