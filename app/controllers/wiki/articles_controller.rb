@@ -49,6 +49,7 @@ class Wiki::ArticlesController < Wiki::BaseController
       create_activity(:create_wiki_article, { id: @article.id })
 
       if @article.edit.approved?
+        BadgesWikiJob.perform_async(current_user)
         redirect_to wiki_article_path(@article.slug)
       else
         redirect_to wiki_articles_path
@@ -74,6 +75,7 @@ class Wiki::ArticlesController < Wiki::BaseController
     create_activity(:update_wiki_article, { id: @article.id })
 
     if @article.save
+      BadgesWikiJob.perform_async(current_user)
       create_wiki_edit(:edited, @article.id, article_params[:edit_notes])
       redirect_to wiki_article_path(@article.slug)
     else
@@ -96,8 +98,6 @@ class Wiki::ArticlesController < Wiki::BaseController
     @article = Wiki::Article.new(article_params)
     @article.group_id = group_id
     @article.slug = title_to_slug
-
-    BadgesWikiJob.perform_async(current_user)
   end
 
   def article_params

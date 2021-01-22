@@ -50,7 +50,7 @@
   <div class="form-group-columns mt-1/1">
     <div class="form-group">
       <%= form.label :category_id, class: "form-label" %>
-      <%= form.collection_select :category_id, Wiki::Category.all, :id, :title, { include_hidden: false }, { class: "form-select" } %>
+      <%= form.collection_select :category_id, Wiki::Category.all, :id, :title, { include_hidden: false, include_blank: "Select..." }, { class: "form-select" } %>
 
       <span class="form-hint">
         Only 1 category can be chosen. If you believe an article belongs in multiple categories, make 1 article in each. Each containing content within that category.
@@ -81,5 +81,5 @@
     </div>
   <% end %>
 
-  <%= submit_tag "Submit", class: "button mt-1/2" %>
+  <%= submit_tag "Submit", class: "button mt-1/2", data: { disable_with: "Submitting..." } %>
 <% end %>
