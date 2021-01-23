@@ -39,7 +39,7 @@
         <picture>
           <source media="(min-width: 560px)" srcset="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95).processed.key %>" type="image/jpeg">
           <source media="(min-width: 0px)" srcset="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed.key %>" type="image/jpeg">
-          <img class="item__image img-fluid" src="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95).processed.key %>" height="900" width="500" />
+          <img class="item__image img-fluid" src="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95).processed.key %>" width="900" height="500" />
         </picture>
       <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
         <%= render "carousel" if @post.images.any? %>
