@@ -32,46 +32,14 @@
   <% end %>
 
   <% cache_unless current_user && current_user == @post.user, [current_locale, @post, "show"] do %>
-    <% if current_user == @post.user %>
-      <div class="fixed-box fixed-box--large" data-toggle-content>
-        <div class="flex">
-          <%= link_to "Edit", edit_post_path(@post.code), class: "mr-1/4" %>
-          <%= link_to "Delete", post_path(@post.code), class: "text-red", method: :delete, data: { confirm: "Are you sure you want to delete this code? This cannot be undone. \n\n This will delete code: \n #{ @post.code } \n\n With title: \n #{ @post.title }" } %>
-          <%= tag.span "Show analytics", class: "ml-auto text-white cursor-pointer", data: { action: "toggle-content reveal-post-analytics", hide_with: "Show analytics", show_with: "Hide analytics", id: @post.id } %>
-        </div>
-
-        <div class="well__tray" data-role="content-to-toggle" style="display: none">
-          <%= render "posts/analytics", post: @post %>
-        </div>
-      </div>
-
-      <% if @post.private? %>
-        <div class="warning warning--mild mt-0 mb-1/2">
-          <p class="mb-0 mt-0 text-white">🔐 <%= t(".private.title") %></p>
-          <p class="mt-0 mb-0"><small><%= t(".private.content") %></small></p>
-        </div>
-      <% end %>
-
-      <% if @post.unlisted? %>
-        <div class="warning warning--mild mt-0 mb-1/2">
-          <p class="mb-0 text-white mt-0">📃 <%= t(".unlisted") %></p>
-        </div>
-      <% end %>
-
-      <% if @post.last_revision_created_at > 6.months.ago && @post.last_revision_created_at < 5.months.ago %>
-        <div class="warning warning--mild mt-1/4 mb-1/2">
-          <p><mark>⚠ <%= t(".expire_soon.title") %></mark></p>
-          <%= t(".expire_soon.content_html", time: time_ago_in_words(@post.last_revision_created_at + 6.months)) %>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render "current_user_blocks" if current_user == @post.user %>
 
     <% begin %>
       <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
         <picture>
           <source media="(min-width: 560px)" srcset="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95).processed.key %>" type="image/jpeg">
           <source media="(min-width: 0px)" srcset="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95, resize_to_fill: [450, 250]).processed.key %>" type="image/jpeg">
-          <img class="img-fluid" src="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95).processed.key %>" />
+          <img class="item__image img-fluid" src="<%= ENV["CDN"] + @ordered_images.first.variant(quality: 95).processed.key %>" height="900" width="500" />
         </picture>
       <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
         <%= render "carousel" if @post.images.any? %>

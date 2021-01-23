@@ -6,8 +6,9 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: $body-bg;
+    background: $bg-darker;
     text-indent: 1000 * 1000px;
+    aspect-ratio: 16/9;
   }
 
   [data-role="carousel"]:not([style]) {
@@ -87,6 +88,7 @@
   img {
     width: 100%;
     height: auto;
+    aspect-ratio: 1/1;
   }
 }
 

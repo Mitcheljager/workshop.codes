@@ -12,7 +12,7 @@
           <picture>
             <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= ENV["CDN"] + image.variant(quality: 95).processed.key %>" type="image/jpeg">
             <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [450, 250]).processed.key %>" type="image/jpeg">
-            <img <%= "data-" if index >= 2 %>src="<%= ENV["CDN"] + image.variant(quality: 95).processed.key %>" aria-label="Image for '<%= @post.title %>'" />
+            <img <%= "data-" if index >= 2 %>src="<%= ENV["CDN"] + image.variant(quality: 95).processed.key %>" aria-label="Image for '<%= @post.title %>'" width="900" height="500" />
           </picture>
         </div>
       <% end %>
@@ -29,7 +29,7 @@
 
     <% @ordered_images.each_with_index do |image, index| %>
       <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>">
-        <%= image_tag ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [120, 120]).processed.key, aria: { label: "Thumbnail image for '#{ @post.title }'" } %>
+        <%= image_tag ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [120, 120]).processed.key, aria: { label: "Thumbnail image for '#{ @post.title }'" }, height: 120, width: 120 %>
       </div>
     <% end %>
   </div>

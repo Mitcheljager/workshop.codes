@@ -429,6 +429,13 @@
   padding-bottom: $margin / 3;
 }
 
+.item__image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  background: $bg-darker;
+}
+
 .item__description {
   margin-top: $margin;
   line-height: 1.5em;
