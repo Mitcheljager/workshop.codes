@@ -123,8 +123,11 @@
 .card-carousel__control {
   position: absolute;
   top: calc(50% - #{ $margin / 4 });
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  background: rgba($black, .5);
   transform: translateY(-50%);
   z-index: 20;
   cursor: pointer;
@@ -132,6 +135,9 @@
   @include media-min(md) {
     width: 30px;
     height: 30px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
   }
 
   &:not(.card-carousel__control--disabled):hover,

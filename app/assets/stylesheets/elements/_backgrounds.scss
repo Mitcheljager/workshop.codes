@@ -8,7 +8,7 @@
   background: lighten($body-bg, 5%);
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 100% 90px, 0% 100%);
-  z-index: -1;
+  z-index: -5;
 
   @include media-min(xl) {
     height: 200px;

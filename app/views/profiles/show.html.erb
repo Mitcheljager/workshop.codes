@@ -1,9 +1,6 @@
 <% content_for :page_title, @user.username.split("#")[0] %>
 
-<% if @user.verified? %>
-  <style id="custom-css"><%= sanitize(@user.custom_css) if @user.custom_css.present? %></style>
-<% end %>
-
+<%= render "custom_css" if @user.verified? %>
 <%= render "customise_profile" if @user == current_user %>
 
 <div class="pt-1/1">
