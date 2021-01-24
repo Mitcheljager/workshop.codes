@@ -2,6 +2,16 @@
 
 let carouselCards;
 
+document.addEventListener("turbolinks:before-cache", function() {
+  if (!carouselCards) return
+
+  const element = document.querySelector("[data-role='carousel-cards']")
+  element.classList.remove("initialised")
+
+  carouselCards.destroy(true)
+  carouselCards = null
+})
+
 document.addEventListener("turbolinks:load", function() {
   const element = document.querySelector("[data-role='carousel-cards']")
 
