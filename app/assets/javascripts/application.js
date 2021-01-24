@@ -27,13 +27,13 @@
 //= require filter
 //= require gallery
 //= require get-comments
+//= require get-markdown-preview
 //= require get-post-analytics
+//= require get-snippet
 //= require get-user-analytics
 //= require get-verified-users
 //= require ide
 //= require infinite-scroll
-//= require load-snippet
-//= require markdown-preview
 //= require modal
 //= require navigation
 //= require reveal-by-checkbox
