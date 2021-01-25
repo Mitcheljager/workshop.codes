@@ -1,4 +1,4 @@
-<% cache_unless request.path_parameters.without(:controller, :action, :page, :code).any?, "filter" do %>
+<% cache_unless request.path_parameters.without(:controller, :action, :page, :code, :default, :locale).any?, ["filter", current_locale] do %>
   <div data-toggle-content>
     <nav class="filter" data-filter-locale="<%= current_locale %>">
       <div class="filter__content" data-role="content-to-toggle" style="display: none">

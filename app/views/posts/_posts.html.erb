@@ -1,28 +1,30 @@
-<main class="items">
-  <% if @posts.any? %>
-    <%= render @posts %>
+<% cache_unless current_user, @posts do %>
+  <main class="items">
+    <% if @posts.any? %>
+      <%= render @posts %>
 
-    <% if @posts.count == 20 %>
-      <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
-        <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>"></div>
-      <% end %>
+      <% if @posts.count == 20 %>
+        <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
+          <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>"></div>
+        <% end %>
 
-      <% if current_user && current_user.pagination_type == "load_more" %>
-        <div data-role="load-more-posts-marker"></div>
-        <div class="flex justify-center">
-          <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-url="<%= request.original_url %>">Load more</div>
-        </div>
+        <% if current_user && current_user.pagination_type == "load_more" %>
+          <div data-role="load-more-posts-marker"></div>
+          <div class="flex justify-center">
+            <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-url="<%= request.original_url %>">Load more</div>
+          </div>
+        <% end %>
       <% end %>
+    <% else %>
+      <p>There doesn't seem to be anything here</p>
+
+      <blockquote>
+        <% quote = quotes.sample %>
+        <em><%= quote["quote"] %></em>
+        -&nbsp;<%= quote["by"] %>
+      </blockquote>
     <% end %>
-  <% else %>
-    <p>There doesn't seem to be anything here</p>
+  </main>
 
-    <blockquote>
-      <% quote = quotes.sample %>
-      <em><%= quote["quote"] %></em>
-      -&nbsp;<%= quote["by"] %>
-    </blockquote>
-  <% end %>
-</main>
-
-<%= paginate @posts if current_user && current_user.pagination_type == "pagination" %>
+  <%= paginate @posts if current_user && current_user.pagination_type == "pagination" %>
+<% end %>

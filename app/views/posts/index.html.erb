@@ -4,21 +4,8 @@
 <main class="top-offset">
   <% unless params[:page] %>
     <h2 class="mt-1/2 text-black"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t(".on_fire.title_html") %></h2>
-
-    <div class="card-carousel">
-      <div data-role="carousel-cards" data-max="10" data-url="" class="cards cards--on-fire">
-        <%= render collection: @hot_posts, partial: "card", as: :post %>
-      </div>
-
-      <div class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" data-action="carousel-previous"><%= inline_svg_tag "layout/carousel-left.svg" %></div>
-      <div class="card-carousel__control card-carousel__control--next" data-action="carousel-next"><%= inline_svg_tag "layout/carousel-right.svg" %></div>
-    </div>
-
-    <%= link_to on_fire_path, class: "button button--secondary" do %>
-      <%= inline_svg_tag "icons/icon-onfire.svg", class: "mr-1/8", height: 16, width: 16 %>
-      <%= t(".on_fire.button") %>
-    <% end %>
-
+    
+    <%= render "on_fire_carousel" %>
     <%= render "application/banners/ko_fi" %>
   <% end %>
 
