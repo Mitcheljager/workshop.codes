@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=<%= I18n.locale %>>
   <head>
     <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | #{ t("default_page_title") }" %></title>
     <%= csrf_meta_tags %>
