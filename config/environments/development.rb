@@ -34,7 +34,11 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :digitalocean
+  if ENV["DIGITALOCEAN_SPACES_BUCKET"]
+    config.active_storage.service = :digitalocean
+  else
+    config.active_storage.service = :local
+  end
 
   # Don't care if the mailer can't send.
   Rails.application.routes.default_url_options[:host] = "localhost:3000"

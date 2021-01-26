@@ -7,7 +7,7 @@ gem "active_storage_validations"
 gem "ahoy_matey"
 gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: true
 gem "aws-sdk-s3", require: false
-gem "bcrypt", :require => "bcrypt"
+gem "bcrypt", require: "bcrypt"
 gem "blind_index"
 gem "breadcrumbs_on_rails"
 gem "chart-js-rails"
