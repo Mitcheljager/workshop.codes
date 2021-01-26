@@ -129,7 +129,7 @@
   border-radius: 50%;
   background: rgba($black, .5);
   transform: translateY(-50%);
-  z-index: 20;
+  z-index: 3;
   cursor: pointer;
 
   @include media-min(md) {
