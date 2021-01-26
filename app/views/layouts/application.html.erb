@@ -36,7 +36,7 @@
     <%= render "header" %>
     <%= render "wiki/header" if is_wiki? %>
 
-    <div class="wrapper <%= "wrapper--large" if controller_name == "admin" %>">
+    <div class="wrapper <%= "wrapper--large" if is_admin_controller? %>">
       <%= yield %>
 
       <%= render "footer" %>

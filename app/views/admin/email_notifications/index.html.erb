@@ -1,9 +1,11 @@
-<%= render "navigation" %>
+<%= render "admin/navigation"  %>
 
 <h3>Email notifications</h3>
 
 <p>Total notifications: <strong><%= EmailNotification.all.size %></strong></p>
-<p>Last notification: <strong><%= time_ago_in_words(@email_notifications.first.created_at).humanize %></strong></p>
+<% if @email_notifications.any? %>
+  <p>Last notification: <strong><%= time_ago_in_words(@email_notifications.first.created_at).humanize %></strong></p>
+<% end %>
 <p>Notifications in last 7 days: <strong><%= EmailNotification.where("created_at > ?", 1.week.ago).size %></strong></p>
 
 <hr>
@@ -33,7 +35,9 @@
 <h3>Forgot password tokens</h3>
 
 <p>Total Forgot Password Tokens: <strong><%= ForgotPasswordToken.all.size %></strong></p>
-<p>Last Forgot Password Tokens: <strong><%= time_ago_in_words(@forgot_password_tokens.first.created_at).humanize %></strong></p>
+<% if @forgot_password_tokens.any? %>
+  <p>Last Forgot Password Tokens: <strong><%= time_ago_in_words(@forgot_password_tokens.first.created_at).humanize %></strong></p>
+<% end %>
 <p>Forgot Password Tokens in last 7 days: <strong><%= ForgotPasswordToken.where("created_at > ?", 1.week.ago).size %></strong></p>
 
 <hr>

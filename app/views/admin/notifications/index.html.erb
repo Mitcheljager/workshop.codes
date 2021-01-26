@@ -1,4 +1,4 @@
-<%= render "navigation" %>
+<%= render "admin/navigation"  %>
 
 <p>Total notifications: <strong><%= Notification.all.size %></strong></p>
 <p>Last notification: <strong><%= time_ago_in_words(@notifications.first.created_at).humanize %></strong></p>

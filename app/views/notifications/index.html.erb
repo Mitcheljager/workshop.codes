@@ -19,7 +19,7 @@
     </div>
   <% end %>
 
-  <h3 class="<%= params[:page].present? ? "mt-0" : "top-offset" %>">Read Notifications</h3>
+  <h3 class="<%= params[:page].present? ? "mt-0" : "top-offset" %>">All Notifications</h3>
 
   <div class="notifications">
     <% if @notifications.where(has_been_read: 1).any? %>

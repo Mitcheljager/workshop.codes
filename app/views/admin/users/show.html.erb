@@ -1,11 +1,11 @@
-<%= render "navigation" %>
+<%= render "admin/navigation" %>
 
 <div class="heading mt-1/2 mb-0">
   <h2><strong><%= @user.username %></strong> <small>(#<%= @user.id %>)</small></h2>
 </div>
 
 <div class="well well--dark">
-  <%= form_for @user, url: admin_update_user_path do |form| %>
+  <%= form_for @user, url: admin_user_path, method: :patch do |form| %>
     <% if flash[:alert] %>
       <div class="warning mt-0 mb-1/4"><%= flash[:alert] %></div>
     <% end %>
@@ -33,7 +33,7 @@
 <div class="well well--dark block mt-1/1">
   <h4 class="mt-0">Send this user a notifcation</h4>
 
-  <%= form_tag :admin_send_user_notification do %>
+  <%= form_tag :admin_users_send_notification do %>
     <div class="form-group mb-1/4">
       <%= hidden_field :user_id, "", value: @user.id %>
       <%= label_tag "Notification content (supports markdown)" %>

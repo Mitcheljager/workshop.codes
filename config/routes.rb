@@ -16,24 +16,22 @@ Rails.application.routes.draw do
   get "sitemap", to: "sitemaps#sitemap"
   get "privacy-policy", to: "pages#privacy_policy"
 
-  get "admin", to: "admin#index", as: "admin"
   namespace :admin do
-    get "posts"
-    get "comments"
-    get "favorites"
-    get "users"
-    get "notifications"
-    get "email_notifications"
-    get "activities"
-    get "reports"
-    get "report/:id", action: "report", as: "report"
-    get "post/:id", action: "post", as: "post"
-    post "post/:id", action: "destroy_post", as: "destroy_post"
-    get "user/:id", action: "user", as: "user"
-    post "send_user_notification", action: "send_user_notification", as: "send_user_notification"
-    patch "user/:id", action: "update_user", as: "update_user"
-    post "users", action: "find_user", as: "find_user"
-    post "posts", action: "find_post", as: "find_post"
+    root to: "base#index"
+    
+    resources :posts, only: [:index, :show, :update, :destroy]
+    post "posts/find", to: "posts#find", as: "find_post"
+
+    resources :users, only: [:index, :show, :update]
+    post "users/find", to: "users#find", as: "find_user"
+    post "users/send_notification", to: "users#send_notification"
+
+    resources :comments, only: [:index]
+    resources :favorites, only: [:index]
+    resources :notifications, only: [:index]
+    resources :email_notifications, only: [:index]
+    resources :activities, only: [:index]
+    resources :reports, only: [:index, :show]
   end
 
   get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
@@ -123,6 +121,7 @@ Rails.application.routes.draw do
 
       post "search", to: "search#query", as: "search"
       get "search/:query", to: "search#index", as: "search_results"
+      get "dictionary", to: "dictionary#index"
     end
   end
 

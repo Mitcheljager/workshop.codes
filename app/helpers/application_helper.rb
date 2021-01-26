@@ -31,6 +31,10 @@ module ApplicationHelper
     controller_path.split('/').first == "wiki" ? true : false
   end
 
+  def is_admin_controller?
+    controller_path.split('/').first == "admin" ? true : false
+  end
+
   def to_slug(string)
     string.to_s.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
   end

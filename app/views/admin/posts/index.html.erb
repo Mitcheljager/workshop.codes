@@ -1,10 +1,10 @@
-<%= render "navigation" %>
+<%= render "admin/navigation" %>
 
 <p>Total posts: <strong><%= Post.all.size %></strong></p>
 <p>Last post: <strong><%= time_ago_in_words(@posts.first.created_at).humanize %></strong></p>
 <p>Posts in last 7 days: <strong><%= Post.where("created_at > ?", 1.week.ago).size %></strong></p>
 
-<%= form_tag url: admin_find_post_path do %>
+<%= form_tag admin_find_post_path do %>
   <div class="flex mb-1/4">
     <%= label_tag :title, "", class: "form-label" %>
     <%= text_field_tag :title, "", class: "form-input w-auto mr-1/4", placeholder: "Find by exact title" %>

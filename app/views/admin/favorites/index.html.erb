@@ -1,4 +1,4 @@
-<%= render "navigation" %>
+<%= render "admin/navigation"  %>
 
 <p>Total favorites: <strong><%= Favorite.all.size %></strong></p>
 <p>Last favorite: <strong><%= time_ago_in_words(@favorites.first.created_at).humanize %></strong></p>

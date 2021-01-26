@@ -13,7 +13,7 @@
 
         <hr>
 
-        <%= link_to t("account.navigation.admin"), admin_path, class: "dropdown__item text-small" if current_user.level == "admin" %>
+        <%= link_to t("account.navigation.admin"), admin_root_path, class: "dropdown__item text-small" if is_admin?(current_user) %>
         <%= link_to t("account.navigation.profile"), edit_profile_path, class: "dropdown__item text-small" %>
         <%= link_to t("account.navigation.account"), edit_user_path, class: "dropdown__item text-small" %>
         <%= link_to t("account.navigation.accessibility"), accessibility_path, class: "dropdown__item text-small" %>
