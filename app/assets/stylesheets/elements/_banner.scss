@@ -43,6 +43,11 @@
     font-size: 12px;
   }
 
+  ins {
+    min-height: 90px;
+    width: 100%;
+  }
+
   &--compact {
     @include media-min(md) {
       display: flex;

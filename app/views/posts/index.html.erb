@@ -6,13 +6,21 @@
     <h2 class="mt-1/2 text-black"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t(".on_fire.title_html") %></h2>
 
     <%= render "on_fire_carousel" %>
-    
+
     <%= link_to on_fire_path, class: "button button--secondary" do %>
       <%= inline_svg_tag "icons/icon-onfire.svg", class: "mr-1/8", height: 16, width: 16 %>
       <%= t(".on_fire.button") %>
     <% end %>
 
-    <%= render "application/banners/ko_fi" %>
+    <div class="logo-background logo-background--overwatch">
+      <% if current_user.present? %>
+        <%= render "application/banners/ko_fi" %>
+      <% else %>
+        <div class="adv-ad mt-1/1">
+          <%= render "application/banners/ad" %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
   <div class="action-header">
