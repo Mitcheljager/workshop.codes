@@ -23,6 +23,8 @@
     <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: :ko)) %>" hreflang="ko" />
 
     <link rel="manifest" href="/manifest.json">
+    
+    <%= render "adsense" %>
 
     <%= inline_css "application.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>
@@ -30,7 +32,6 @@
     <%= render "logged_in_user_assets" if current_user %>
     <%= render "destroy_remember_me_cookie" if !current_user && cookies[:remember_token] %>
     <%= render "analytics_code" %>
-    <%= render "adsense" %>
   </head>
 
   <body class="<%= accessibility_settings if current_user.present? %>">
