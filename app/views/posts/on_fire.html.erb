@@ -7,4 +7,10 @@
   </h1>
 </div>
 
+<% unless current_user.present? %>
+  <div class="adv-ad mt-1/1 mb-1/1">
+    <%= render "application/banners/ad" %>
+  </div>
+<% end %>
+
 <%= render "posts" %>
