@@ -1,50 +1,24 @@
 <% content_for :page_title, @user.username.split("#")[0] %>
+<% content_for :bg_large, "true" %>
+<% content_for :replace_body_bg, "true" if @user.banner_image.attached? %>
 
 <%= render "custom_css" if @user.verified? %>
 <%= render "customise_profile" if @user == current_user %>
 
-<div class="pt-1/1">
-  <%= render "profile", user: @user %>
+<div class="pt-1/1 mb-1/1">
+  <div class="banner">
+    <%= render "profile", user: @user %>
+  </div>
 </div>
 
-<% if @user.featured_posts.present? %>
-  <div class="cards">
-    <% @featured_posts.each do |post| %>
-      <div class="card" data-code="<%= post.code %>">
-        <%= link_to post_path(post.code), class: "card__title" do %>
-          <%= image_tag url_for_post_thumbnail(post, 250, 143, "large"), width: 250, height: 143, loading: "lazy", class: "mb-1/4" %>
-          <%= post.title %>
-        <% end %>
-
-        <div class="card__code mt-1/4" data-action="copy-to-clipboard" data-target="<%= post.code %>">
-          <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", data: { action: "copy-to-clipboard", target: post.code } %>
-
-          <span class="copy">
-            <span data-copy="<%= post.code %>" data-track-copy><%= post.code %></span>
-          </span>
-        </div>
-      </div>
-    <% end %>
+<% [].each do |block| %>
+  <div class="mt-1/1 mb-1/1">
+    <%= render "profile_blocks/#{ block }" %>
   </div>
 <% end %>
 
-<div class="action-header mt-1/1">
-  <h2 class="mt-0">Workshop Codes made by <strong><%= @user.username.split("#")[0] %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h2>
+<% if @user.featured_posts.present? %>
+  <%= render "profile_blocks/cards" %>
+<% end %>
 
-  <div class="action-header__actions md:mb-1/4">
-    <span>Sorted by</span>
-
-    <div class="dropdown ml-1/8 mb-1/4 md:mb-0" data-dropdown>
-      <%= link_to params[:sort_posts] ? params[:sort_posts].humanize : "Created at", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
-
-      <div class="dropdown__content" data-dropdown-content>
-        <%= link_to "Created at", user_profile_path(@user), class: "dropdown__item #{ "text-white" unless params[:sort_posts].present? }" %>
-        <%= link_to "Updated at", user_profile_path(@user, "updated_at"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "updated_at" }" %>
-        <%= link_to "Hotness", user_profile_path(@user, "hotness"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "hotness" }" %>
-        <%= link_to "Favorites", user_profile_path(@user, "favorites_count"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "favorites_count" }" %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<%= render "posts/posts" %>
+<%= render "profile_blocks/list" %>

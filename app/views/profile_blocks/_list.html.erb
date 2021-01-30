@@ -1,0 +1,20 @@
+<div class="action-header pt-1/1">
+  <h2 class="mt-0">Workshop Codes made by <strong><%= @user.username.split("#")[0] %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h2>
+
+  <div class="action-header__actions md:mb-1/4">
+    <span>Sorted by</span>
+
+    <div class="dropdown ml-1/8 mb-1/4 md:mb-0" data-dropdown>
+      <%= link_to params[:sort_posts] ? params[:sort_posts].humanize : "Created at", "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %>
+
+      <div class="dropdown__content" data-dropdown-content>
+        <%= link_to "Created at", user_profile_path(@user), class: "dropdown__item #{ "text-white" unless params[:sort_posts].present? }" %>
+        <%= link_to "Updated at", user_profile_path(@user, "updated_at"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "updated_at" }" %>
+        <%= link_to "Hotness", user_profile_path(@user, "hotness"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "hotness" }" %>
+        <%= link_to "Favorites", user_profile_path(@user, "favorites_count"), class: "dropdown__item #{ "text-white" if params[:sort_posts] == "favorites_count" }" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "posts/posts" %>

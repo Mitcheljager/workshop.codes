@@ -37,6 +37,7 @@ class User < ApplicationRecord
   has_many :wiki_edits, class_name: "Wiki::Edit", dependent: :destroy
 
   has_one_attached :profile_image, dependent: :destroy
+  has_one_attached :banner_image, dependent: :destroy
 
   serialize :featured_posts
 
@@ -54,6 +55,8 @@ class User < ApplicationRecord
   validates :nice_url, uniqueness: true, allow_blank: true
   validates :featured_posts, allow_blank: true, serialized_array_length: { maximum: 3 }
   validates :profile_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
+                            size: { less_than: 2.megabytes }
+  validates :banner_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
                             size: { less_than: 2.megabytes }
 
   def self.find_or_create_from_auth_hash(auth_hash)

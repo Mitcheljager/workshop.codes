@@ -338,6 +338,10 @@ en:
         label: Profile image
         help: The image will be processed to a 140x140 format. Max 2MB.
         discord: This image is directly from Discord. Adjusting your profile picture on Discord will also change it here.
+      banner_image:
+        label: Banner image
+        description: This image is displayed at the top of your profile.
+        help: This image will be processed to a 1920x400 format. Max 2MB.
       featured_posts:
         label: Featured codes
         help: Show up to 3 Featured Codes on your Profile page.

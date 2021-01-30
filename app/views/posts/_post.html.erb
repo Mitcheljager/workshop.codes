@@ -13,17 +13,7 @@
     </div>
 
     <% cache [current_locale, post, "information"] do %>
-      <div class="item__code" data-action="copy-to-clipboard" data-target="<%= post.code %>">
-        <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
-
-        <span class="copy">
-          <span data-copy="<%= post.code %>" data-track-copy><%= post.code %></span>
-        </span>
-
-        <% if post.ptr? %>
-          <div class="item__code-flag">PTR</div>
-        <% end %>
-      </div>
+      <%= render "posts/code", post: post %>
 
       <div class="item__details">
         <div class="item__details-item">
