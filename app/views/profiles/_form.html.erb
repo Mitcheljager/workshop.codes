@@ -81,7 +81,7 @@
     </div>
 
     <% if @user.posts.any? %>
-      <%= form.select :featured_posts, @user.posts.collect {|p| [ p.title, p.id ] }, { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
+      <%= form.select :featured_posts, @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] }, { include_hidden: false }, { multiple: true, size: 5, class: "form-select" } %>
     <% else %>
       <p><%= t "profile.form.featured_posts.empty" %></p>
     <% end %>

@@ -31,7 +31,6 @@ class ProfilesController < ApplicationController
 
   def edit
     @user = current_user
-    @posts = current_user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc)
 
     redirect_to root_path unless @user
   end
