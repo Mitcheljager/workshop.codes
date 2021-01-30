@@ -62,8 +62,6 @@ function getInfiniteScrollContent(element) {
         element.innerHTML = "Load more"
         element.setAttribute("data-url", nextUrl)
       }
-
-      renderAds()
     }
   })
 }
