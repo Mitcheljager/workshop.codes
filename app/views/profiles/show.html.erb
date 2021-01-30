@@ -1,5 +1,5 @@
 <% content_for :page_title, @user.username.split("#")[0] %>
-<% content_for :bg_large, "true" %>
+<% content_for :bg_large, "true" if @user.banner_image.attached? %>
 <% content_for :replace_body_bg, "true" if @user.banner_image.attached? %>
 
 <%= render "custom_css" if @user.verified? %>
