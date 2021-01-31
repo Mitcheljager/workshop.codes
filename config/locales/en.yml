@@ -347,7 +347,7 @@ en:
         help: Show up to 3 Featured Codes on your Profile page.
         empty: You've not yet posted anything.
       description:
-        label: About you
+        label: Description
         help: Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you. Basic Markdown enabled. Limited to 255 characters.
       link:
         label: Link

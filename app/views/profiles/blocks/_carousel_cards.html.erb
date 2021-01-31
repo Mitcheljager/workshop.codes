@@ -1,0 +1,16 @@
+<% return unless block_property(block, "posts").present? %>
+
+<% if block_property(block, "title").present? %>
+  <h2><%= block_property(block, "title") %></h2>
+<% end %>
+
+<div class="card-carousel">
+  <% posts = @posts.where(id: block_property(block, "posts")).limit(6) %>
+
+  <div data-role="carousel-cards" data-max="<%= posts.size %>" class="cards cards--on-fire">
+    <%= render collection: posts, partial: "posts/card", as: :post %>
+  </div>
+
+  <div class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" data-action="carousel-previous"><%= inline_svg_tag "layout/carousel-left.svg" %></div>
+  <div class="card-carousel__control card-carousel__control--next" data-action="carousel-next"><%= inline_svg_tag "layout/carousel-right.svg" %></div>
+</div>

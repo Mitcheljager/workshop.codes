@@ -1,0 +1,36 @@
+<div class="content-block">
+  <% if block_property(block, "battlenet").present? %>
+    <div class="content-block__social">
+      <%= inline_svg_tag "icons/icon-battlenet.svg", height: 21, width: 21 %>
+      <%= block_property(block, "battlenet") %>
+    </div>
+  <% end %>
+
+  <% if block_property(block, "discord").present? %>
+    <div class="content-block__social">
+      <%= inline_svg_tag "icons/icon-discord.svg", height: 21, width: 21 %>
+      <%= block_property(block, "discord") %>
+    </div>
+  <% end %>
+
+  <% if block_property(block, "twitter").present? %>
+    <%= link_to block_property(block, "twitter_url"), target: "_blank", rel: "noreferrer noopener", class: "content-block__social" do %>
+      <%= inline_svg_tag "icons/icon-twitter.svg", height: 21, width: 21 %>
+      <%= block_property(block, "twitter") %>
+    <% end %>
+  <% end %>
+
+  <% if block_property(block, "youtube").present? %>
+    <%= link_to block_property(block, "youtube_url"), target: "_blank", rel: "noreferrer noopener", class: "content-block__social" do %>
+      <%= inline_svg_tag "icons/icon-youtube.svg", height: 21, width: 21 %>
+      <%= block_property(block, "youtube") %>
+    <% end %>
+  <% end %>
+
+  <% if block_property(block, "website").present? %>
+    <%= link_to block_property(block, "website_url"), target: "_blank", rel: "noreferrer noopener", class: "content-block__social" do %>
+      <%= inline_svg_tag "icons/icon-website.svg", height: 21, width: 21 %>
+      <%= block_property(block, "website") %>
+    <% end %>
+  <% end %>
+</div>

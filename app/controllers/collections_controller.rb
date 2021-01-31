@@ -27,7 +27,7 @@ class CollectionsController < ApplicationController
     if @collection.update(collection_params)
       redirect_to collections_path
     else
-      render file: "app/views/application/error.js.erb"
+      render "application/error"
     end
   end
 
@@ -37,7 +37,7 @@ class CollectionsController < ApplicationController
     if @collection.posts.none? && @collection.destroy
       redirect_to collections_path
     else
-      render file: "app/views/application/error.js.erb"
+      render "application/error"
     end
   end
 

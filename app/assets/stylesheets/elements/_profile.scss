@@ -48,7 +48,6 @@
   border-radius: 50%;
   background: $bg-dark;
   overflow: hidden;
-  box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
   z-index: 1;
 
   @include media-min(sm) {
@@ -67,6 +66,7 @@
     width: 80px;
     margin: 0 $margin / 2 0 0;
     background-size: 40px 40px;
+    box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
   }
 
   img {

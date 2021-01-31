@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "base#index"
-    
+
     resources :posts, only: [:index, :show, :update, :destroy]
     post "posts/find", to: "posts#find", as: "find_post"
 
@@ -73,6 +73,8 @@ Rails.application.routes.draw do
     patch "profile/edit", to: "profiles#update", as: "update_profile"
     get "profile/edit", to: "profiles#edit", as: "edit_profile"
     get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
+
+    resources :blocks, only: [:create, :update, :destroy]
 
     get "register", to: "users#new", as: "new_user"
     get "login", to: "sessions#new", as: "login"

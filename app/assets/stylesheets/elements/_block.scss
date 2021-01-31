@@ -1,0 +1,41 @@
+.content-block {
+  @extend .banner;
+  display: block;
+  padding: $margin / 2;
+  text-align: left;
+  color: $text-color;
+}
+
+.content-block__social {
+  display: flex;
+  align-items: center;
+  margin-bottom: $margin / 8;
+  font-size: 112.5%;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &[href] {
+    color: $white;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+
+  svg {
+    margin-right: $margin / 4;
+  }
+}
+
+.empty-blocks-marker {
+  display: none;
+
+  &:last-child {
+    display: block;
+  }
+}

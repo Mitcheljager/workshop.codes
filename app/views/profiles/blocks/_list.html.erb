@@ -1,0 +1,3 @@
+<h2>Workshop Codes made by <%= tag.strong @user.username.split("#")[0] %> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h2>
+
+<%= render "posts/posts" %>

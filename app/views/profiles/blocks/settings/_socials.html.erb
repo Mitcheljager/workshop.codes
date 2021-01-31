@@ -1,0 +1,33 @@
+<h3 class="mt-0">Socials</h3>
+
+<p class="form-hint">
+  Fill in the socials you wish displayed on your profile. When asked for the URL provide the full URL (including https://).
+</p>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Battlenet", class: "form-label" %>
+  <%= form.text_field "properties[battlenet]", value: block_property(block, "battlenet"), class: "form-input", autocomplete: "off", placeholder: "Battletag" %>
+</div>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Discord", class: "form-label" %>
+  <%= form.text_field "properties[discord]", value: block_property(block, "discord"), class: "form-input", autocomplete: "off", placeholder: "Username" %>
+</div>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Youtube", class: "form-label" %>
+  <%= form.text_field "properties[youtube]", value: block_property(block, "youtube"), class: "form-input", autocomplete: "off", placeholder: "Username" %>
+  <%= form.text_field "properties[youtube_url]", value: block_property(block, "youtube_url"), class: "form-input mt-1/8", autocomplete: "off", placeholder: "URL" %>
+</div>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Twitter", class: "form-label" %>
+  <%= form.text_field "properties[twitter]", value: block_property(block, "twitter"), class: "form-input", autocomplete: "off", placeholder: "Username" %>
+  <%= form.text_field "properties[twitter_url]", value: block_property(block, "twitter_url"), class: "form-input mt-1/8", autocomplete: "off", placeholder: "URL" %>
+</div>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Website", class: "form-label" %>
+  <%= form.text_field "properties[website]", value: block_property(block, "website"), class: "form-input", autocomplete: "off", placeholder: "Website name" %>
+  <%= form.text_field "properties[website_url]", value: block_property(block, "website_url"), class: "form-input mt-1/8", autocomplete: "off", placeholder: "Website URL" %>
+</div>

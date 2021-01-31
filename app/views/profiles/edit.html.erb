@@ -2,22 +2,49 @@
   <%= link_to t("profile.edit.go_to_profile"), user_profile_path(current_user), class: "button button--secondary" %>
 
   <% if flash[:alert] %>
-    <div class="warning mt-0 mt-1/2"><%= flash[:alert] %></div>
+    <div class="warning mt-1/2"><%= flash[:alert] %></div>
   <% end %>
 
-  <div class="well block mb-1/2 mt-1/2">
-    <h4 class="mt-0">Badges you've earned</h4>
+  <div data-role="tabs">
+    <% if @user.errors.any? %>
+      <div class="error-block">
+        <h2 class="error-block__title"><strong><%= pluralize(@user.errors.count, "error") %></strong> prohibited this user from being saved:</h2>
 
-    <div>
-      <% if @user.badges.any? %>
-        <% @user.badges.each do |badge| %>
-          <%= render "badges/badge", badge: badge, large: true %>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><small><%= message %></small></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <nav class="tabs mt-1/2">
+      <%= link_to "About you", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "about-you" } %>
+      <%= link_to "Images", "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
+      <%= link_to "Badges", "#", class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
+      <%= link_to "Blocks", "#", class: "tabs__item", data: { action: "set-tab", target: "blocks" } %>
+    </nav>
+
+    <%= render "form" %>
+
+    <div class="tabs-content" data-tab="blocks">
+      <h2 class="mt-1/1 mb-0">Blocks</h2>
+
+      <div data-role="blocks">
+        <em class="empty-blocks-marker mt-1/2">You have not yet created any blocks</em>
+
+        <% @blocks.each do |block| %>
+          <%= render "blocks/block_settings", block: block %>
         <% end %>
-      <% else %>
-        <em>You've not yet earned any badges</em>
-      <% end %>
+      </div>
+
+      <h2 class="mt-1/1">Create blocks</h2>
+
+      <p class="form-hint">
+        <mark>Blocks allow you to customise the landingpage of your profile.</mark> Add blocks to your profile to highlight particular codes or other aspects you want to show off. <strong>You can add a maximum of 3 blocks.</strong>
+      </p>
+
+      <%= render "blocks/add_blocks" %>
     </div>
   </div>
-
-  <%= render "form" %>
 <% end %>

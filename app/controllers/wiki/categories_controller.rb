@@ -35,7 +35,7 @@ class Wiki::CategoriesController < Wiki::BaseController
     if @category.save
       redirect_to wiki_categories_path
     else
-      render file: "app/views/application/error.js.erb"
+      render "application/error"
     end
   end
 
@@ -50,7 +50,7 @@ class Wiki::CategoriesController < Wiki::BaseController
     if @category.update(category_params)
       redirect_to wiki_category_path(@category.slug)
     else
-      render file: "app/views/application/error.js.erb"
+      render "application/error"
     end
   end
 

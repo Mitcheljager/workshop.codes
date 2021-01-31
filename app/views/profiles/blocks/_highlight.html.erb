@@ -1,0 +1,25 @@
+<% post = @posts.find(block_property(block, "post")) %>
+
+<div class="item item--large">
+  <div>
+    <%= link_to post_path(post.code), class: "item__thumbnail" do %>
+      <%= image_tag url_for_post_thumbnail(post, 692, 394, "large"), alt: post.title, width: 692, height: 394, loading: "lazy", class: "mb-1/4" %>
+    <% end %>
+
+    <%= render "posts/code", post: post %>
+  </div>
+
+  <div>
+    <div class="item__title">
+      <%= link_to post.title, post_path(post.code) %>
+    </div>
+
+    <div class="item__description mt-0">
+      <%= sanitize(markdown(truncate(block_property(block, "description"), length: 500))) %>
+    </div>
+
+    <%= link_to "View more", post_path(post.code), class: "button button--secondary mt-1/4 pl-1/1 pr-1/1" %>
+  </div>
+
+  <div class="item__full-page-background"></div>
+</div>

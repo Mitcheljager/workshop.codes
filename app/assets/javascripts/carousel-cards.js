@@ -1,28 +1,34 @@
 //= require "siema/dist/siema.min"
 
-let carouselCards;
+let carouselCards = []
 
 document.addEventListener("turbolinks:before-cache", function() {
-  if (!carouselCards) return
+  if (carouselCards.length == 0) return
 
-  const element = document.querySelector("[data-role='carousel-cards']")
-  element.classList.remove("initialised")
+  const elements = document.querySelectorAll("[data-role='carousel-cards']")
 
-  carouselCards.destroy(true)
-  carouselCards = null
+  elements.forEach(element => { element.classList.remove("initialised") })
+  carouselCards.forEach(carousel => { carousel.destroy(true) })
+
+  carouselCards = []
 })
 
 document.addEventListener("turbolinks:load", function() {
-  const element = document.querySelector("[data-role='carousel-cards']")
+  const elements = document.querySelectorAll("[data-role='carousel-cards']")
 
-  if (!element) return
+  if (elements.length == 0) return
 
-  carouselCards = new Siema({
-    selector: element,
-    onInit: (() => element.classList.add("initialised")),
-    onChange: carouselCardsChanged,
-    perPage: { 400: 2, 768: 3 }
+  elements.forEach(element => {
+    carouselCards = [...carouselCards, new Siema({
+      selector: element,
+      onInit: (() => element.classList.add("initialised")),
+      onChange: carouselCardsChanged,
+      perPage: { 400: 2, 768: 3 }
+    })]
+
+    element.dataset.carouselId = carouselCards.length - 1
   })
+
 
   const previousElements = document.querySelectorAll("[data-action='carousel-previous']")
   previousElements.forEach((element) => element.removeEventListener("click", carouselPrevious))
@@ -42,9 +48,16 @@ function carouselCardsChanged() {
 }
 
 function carouselNext() {
-  carouselCards.next()
+  const carouselId = getCarouselId(this)
+  carouselCards[carouselId].next()
 }
 
 function carouselPrevious() {
-  carouselCards.prev()
+  const carouselId = getCarouselId(this)
+  carouselCards[carouselId].prev()
+}
+
+function getCarouselId(element) {
+  const carouselElement = element.closest(".card-carousel").querySelector("[data-role='carousel-cards']")
+  return carouselElement.dataset.carouselId
 }

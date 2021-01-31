@@ -5,20 +5,36 @@
 <%= render "custom_css" if @user.verified? %>
 <%= render "customise_profile" if @user == current_user %>
 
-<div class="pt-1/1 mb-1/1">
-  <div class="banner">
-    <%= render "profile", user: @user %>
+<div data-role="tabs">
+  <div class="pt-1/1 mb-1/1">
+    <div class="banner p-0">
+      <div class="p-1/4 md:p-1/2">
+        <%= render "profile", user: @user %>
+      </div>
+
+      <nav class="tabs">
+        <%= link_to "Highlights", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "highlights" } if @blocks.any? %>
+        <%= link_to "Codes", "#", class: "tabs__item #{ "tabs__item--active" unless @blocks.any? }", data: { action: "set-tab", target: "codes" } %>
+        <%= link_to "Collections", "#", class: "tabs__item", data: { action: "set-tab", target: "collections" } %>
+      </nav>
+    </div>
+  </div>
+
+  <% if @blocks.any? %>
+    <div class="tabs-content tabs-content--active" data-tab="highlights">
+      <% @blocks.each do |block| %>
+        <div class="mt-1/1 mb-1/1" data-block-id="<%= block.id %>">
+          <%= render "profiles/blocks/#{ block.name }", block: block %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="tabs-content <%= "tabs-content--active" unless @blocks.any? %>" data-tab="codes">
+    <%= render "profiles/blocks/list" %>
+  </div>
+
+  <div class="tabs-content" data-tab="collections">
+    <%= render "profiles/blocks/all_collections" %>
   </div>
 </div>
-
-<% [].each do |block| %>
-  <div class="mt-1/1 mb-1/1">
-    <%= render "profile_blocks/#{ block }" %>
-  </div>
-<% end %>
-
-<% if @user.featured_posts.present? %>
-  <%= render "profile_blocks/cards" %>
-<% end %>
-
-<%= render "profile_blocks/list" %>

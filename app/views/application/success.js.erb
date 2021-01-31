@@ -1,8 +1,7 @@
 (() => {
   const element = document.createElement("div")
   element.classList.add("alert")
-  element.classList.add("alert--error")
-  element.innerText = "<%= @message || "Something went wrong when performing that action." %>"
+  element.innerText = "Successfully saved"
 
   document.body.prepend(element)
 

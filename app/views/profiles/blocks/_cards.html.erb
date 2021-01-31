@@ -1,0 +1,8 @@
+<% if block_property(block, "title").present? %>
+  <h2><%= block_property(block, "title") %></h2>
+<% end %>
+
+<div class="cards">
+  <% posts = @posts.where(id: block_property(block, "posts")).limit(6) %>
+  <%= render collection: posts, partial: "posts/card", as: :post %>
+</div>

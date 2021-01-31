@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.find_by("upper(username) = ?", params[:username].upcase)
+    @user = User.includes(:collections).find_by("upper(username) = ?", params[:username].upcase)
 
     if @user.present?
       if @user.verified? && @user.nice_url.present? && @user.nice_url != @user.username
@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
     not_found unless @user.present?
 
     @posts = @user.posts.select_overview_columns.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
-    @featured_posts = @posts.where(id: @user.featured_posts)
+    @blocks = Block.where(user_id: @user.id, content_type: :profile)
 
     respond_to do |format|
       format.html
@@ -31,6 +31,7 @@ class ProfilesController < ApplicationController
 
   def edit
     @user = current_user
+    @blocks = Block.where(user_id: @user.id, content_type: :profile)
 
     redirect_to root_path unless @user
   end
@@ -48,7 +49,7 @@ class ProfilesController < ApplicationController
           flash[:alert] = "Successfully saved"
           redirect_to edit_profile_path
         }
-        format.js
+        format.js { render "application/success" }
       end
     else
       render :edit

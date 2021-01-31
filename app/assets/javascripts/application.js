@@ -40,6 +40,7 @@
 //= require reveal-by-checkbox
 //= require reveal-by-select
 //= require reveal-on-difference
+//= require tabs
 //= require timeago
 //= require toggle-content
 //= require wiki/search

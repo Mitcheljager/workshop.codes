@@ -1,0 +1,83 @@
+.tabs {
+  display: flex;
+  background: $bg-darker;
+  border-radius: $border-radius;
+  padding: 0 $margin / 4;
+  margin: 0;
+  overflow-x: auto;
+
+  .banner & {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+.tabs__item {
+  position: relative;
+  display: block;
+  padding: $margin / 4 $margin / 8;
+  margin: 0 $margin / 8;
+  color: $text-color;
+  text-decoration: none;
+  font-family: "Barlow Condensed", "Impact";
+  text-transform: uppercase;
+  font-size: 19px;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 2px;
+    width: 0%;
+    background: transparent;
+    transform: translateX(-50%);
+    transition: width 100ms, background-color 0ms 100ms;
+  }
+
+  &:hover,
+  &:active {
+    color: $white;
+
+    &::after {
+      background: $white;
+      width: 100%;
+      transition: width 100ms, background-color 100ms;
+    }
+  }
+
+  &--active,
+  &--active:hover,
+  &--active:active {
+    color: $white;
+
+    &::after {
+      background: $primary;
+      width: 100%;
+      transition: width 100ms, background-color 100ms;
+    }
+  }
+}
+
+@keyframes transition-tab-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tabs-content {
+  display: none;
+  transition: opacity 150ms;
+
+  &--active {
+    display: block;
+  }
+
+  &--transitioning-out {
+    opacity: 0;
+  }
+
+  &--transitioning-in {
+    animation: transition-tab-in 150ms;
+  }
+}

@@ -1,0 +1,19 @@
+<h3 class="mt-0">Highlight</h3>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Code", class: "form-label" %>
+  <% if @user.posts.any? %>
+    <%= form.select "properties[post]",
+          @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] },
+          { include_blank: "Select...", selected: block_property(block, "post") },
+          { class: "form-select", autocomplete: "off" } %>
+  <% else %>
+    <p><%= t "profile.form.featured_posts.empty" %></p>
+  <% end %>
+</div>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Description (max 500 characters)", class: "form-label" %>
+  <p class="form-hint">Write a short description to describe what this mode is about.</p>
+  <%= form.text_area "properties[description]", value: block_property(block, "description"), class: "form-input form-textarea form-textarea--extra-small", autocomplete: "off", maxlength: 500 %>
+</div>

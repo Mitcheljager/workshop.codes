@@ -71,6 +71,7 @@
   text-align: left;
   color: $white;
   text-decoration: none;
+  border: 0;
 
   &::before {
     left: 2rem;
@@ -79,8 +80,10 @@
     box-shadow: 0 0 1.25rem 1.25rem $black;
   }
 
-  &[href]:hover {
+  &[href]:hover,
+  &[type]:hover {
     background: darken($bg-dark, 2%);
+    cursor: pointer;
 
     &::before {
       opacity: 1;
