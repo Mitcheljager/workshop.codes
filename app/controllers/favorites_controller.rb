@@ -24,10 +24,10 @@ class FavoritesController < ApplicationController
 
     respond_to do |format|
       if @favorite.destroy
-        format.js { render "application/error" }
-      else
         format.js
         format.html { redirect_to root_path }
+      else
+        format.js { render "application/error" }
       end
     end
   end
