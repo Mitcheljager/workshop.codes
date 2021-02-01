@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
     not_found unless @user.present?
 
     @posts = @user.posts.select_overview_columns.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
-    @blocks = Block.where(user_id: @user.id, content_type: :profile).order(position: :asc)
+    @blocks = Block.where(user_id: @user.id, content_type: :profile).order(position: :asc, created_at: :asc)
 
     respond_to do |format|
       format.html
@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
 
   def edit
     @user = current_user
-    @blocks = Block.where(user_id: @user.id, content_type: :profile).order(position: :asc)
+    @blocks = Block.where(user_id: @user.id, content_type: :profile).order(position: :asc, created_at: :asc)
 
     redirect_to root_path unless @user
   end
