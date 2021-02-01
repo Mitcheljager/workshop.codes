@@ -1,0 +1,13 @@
+<h3 class="mt-0">YouTube</h3>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Title (optional)", class: "form-label" %>
+  <%= form.text_field "properties[title]", value: block_property(block, "title"), class: "form-input", autocomplete: "off" %>
+</div>
+
+<div class="form-group mt-1/2">
+  <%= form.label "Video ID", class: "form-label" %>
+  <p class="form-hint">Enter the video ID of your YouTube video, not the full URL. Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong></p>
+
+  <%= form.text_field "properties[video_id]", value: block_property(block, "video_id"), class: "form-input", autocomplete: "off", placeholder: "A video ID looks like this: FqnKB22pOC0" %>
+</div>

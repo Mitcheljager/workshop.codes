@@ -5,8 +5,8 @@
       params: { block: { name: "cards" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
-      class: "card" do %>
-    <h3 class="card__title mt-0">Cards</h3>
+      class: "card w-100 h-100" do %>
+    <h3 class="card__title mt-0 mb-0">Cards</h3>
 
     <span class="text-base">Display your codes in a grid made out of "cards"</span>
   <% end %>
@@ -17,8 +17,8 @@
       params: { block: { name: "carousel_cards" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
-      class: "card" do %>
-    <h3 class="card__title mt-0">Cards carousel</h3>
+      class: "card w-100 h-100" do %>
+    <h3 class="card__title mt-0 mb-0">Cards carousel</h3>
 
     <span class="text-base">Display your codes in a carousel made out of "cards". Similar to the "On fire" carousel on the homepage.</span>
   <% end %>
@@ -29,8 +29,8 @@
       params: { block: { name: "highlight" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
-      class: "card" do %>
-    <h3 class="card__title mt-0">Highlight</h3>
+      class: "card w-100 h-100" do %>
+    <h3 class="card__title mt-0 mb-0">Highlight</h3>
 
     <span class="text-base">Highlight one code which will be displayed with a large image and a custom description.</span>
   <% end %>
@@ -41,8 +41,8 @@
       params: { block: { name: "collections" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
-      class: "card" do %>
-    <h3 class="card__title mt-0">Collections</h3>
+      class: "card w-100 h-100" do %>
+    <h3 class="card__title mt-0 mb-0">Collections</h3>
 
     <span class="text-base">Select some of your collections to highlight. These will be links to the full collection. Codes in the collection are not shown.</span>
   <% end %>
@@ -53,9 +53,21 @@
       params: { block: { name: "socials" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
-      class: "card" do %>
-    <h3 class="card__title mt-0">Socials</h3>
+      class: "card w-100 h-100" do %>
+    <h3 class="card__title mt-0 mb-0">Socials</h3>
 
     <span class="text-base">List all of the links you can be found at.</span>
+  <% end %>
+
+  <%= button_to blocks_path,
+      method: :post,
+      remote: true,
+      params: { block: { name: "youtube" } },
+      form: { autocomplete: "off" },
+      data: { disable_with: "Loading..." },
+      class: "card w-100 h-100" do %>
+    <h3 class="card__title mt-0 mb-0">YouTube</h3>
+
+    <span class="text-base">Display a YouTube video.</span>
   <% end %>
 </div>

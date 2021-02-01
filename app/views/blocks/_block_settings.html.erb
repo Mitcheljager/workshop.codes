@@ -1,13 +1,13 @@
-<div class="content-block mt-1/2" data-id="<%= block.id %>">
+<div class="well well--dark block mt-1/2" data-id="<%= block.id %>">
   <%= form_for :block, url: block_path(block.id), method: :patch, remote: true do |form| %>
     <%= render "profiles/blocks/settings/#{ block.name }", block: block, form: form %>
 
-    <%= submit_tag "Save", class: "button mt-1/4", data: { disable_with: "Submitting..." } %>
+    <%= submit_tag "Save", class: "button button--small mt-1/4", data: { disable_with: "Submitting..." } %>
 
     <%= link_to "Destroy", block_path(block.id),
         method: :delete,
         remote: true,
         data: { disable_with: "Loading...", confirm: "Are you sure? This cannot be undone." },
-        class: "button button--danger" %>
+        class: "button button--small button--danger" %>
   <% end %>
 </div>
