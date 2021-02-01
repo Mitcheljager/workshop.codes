@@ -25,10 +25,25 @@
     }
   }
 
+  &--compact {
+    @include media-min(md) {
+      display: flex;
+      justify-content: space-between;
+      padding: $margin / 3;
+      align-items: center;
+      text-align: left;
+    }
+  }
+
   .simple-view & {
     box-shadow: inset 0 0 0 3px $border-color;
 
     &::before {
+      display: none;
+    }
+
+    img,
+    svg {
       display: none;
     }
   }
@@ -41,15 +56,5 @@
     background: darken($bg-dark, 10%);
     color: $text-color-dark;
     font-size: 12px;
-  }
-
-  &--compact {
-    @include media-min(md) {
-      display: flex;
-      justify-content: space-between;
-      padding: $margin / 3;
-      align-items: center;
-      text-align: left;
-    }
   }
 }

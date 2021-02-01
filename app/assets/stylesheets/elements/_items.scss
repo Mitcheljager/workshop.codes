@@ -63,6 +63,22 @@
     display: block;
   }
 
+  .simple-view & {
+    display: grid;
+    grid-template: "title favorite"
+                   "code code";
+    grid-template-columns: calc(100% - #{ $favorite-width * 2 }) $favorite-width * 2;
+    border: 3px solid $border-color;
+    margin-bottom: 1rem;
+    padding: 0;
+
+    @include media-min(sm) {
+      display: grid;
+      grid-template: "title favorite code";
+      grid-template-columns: calc(100% - #{ $code-width + $favorite-width }) $favorite-width $code-width;
+    }
+  }
+
   &--small {
     display: flex;
     align-items: center;
@@ -111,21 +127,6 @@
     }
   }
 
-  .simple-view & {
-    display: grid;
-    grid-template: "title favorite"
-                   "code code";
-    grid-template-columns: calc(100% - #{ $favorite-width * 2 }) $favorite-width * 2;
-    border: 3px solid $border-color;
-    margin-bottom: 1rem;
-    padding: 0;
-
-    @include media-min(sm) {
-      display: grid;
-      grid-template: "title favorite code";
-      grid-template-columns: calc(100% - #{ $code-width + $favorite-width }) $favorite-width $code-width;
-    }
-  }
 }
 
 .item__favorite {
