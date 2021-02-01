@@ -33,8 +33,10 @@
       <div data-role="blocks">
         <em class="empty-blocks-marker mt-1/2">You have not yet created any blocks</em>
 
-        <% @blocks.each do |block| %>
-          <%= render "blocks/block_settings", block: block %>
+        <% if @blocks.present? %>
+          <% @blocks.each do |block| %>
+            <%= render "blocks/block_settings", block: block %>
+          <% end %>
         <% end %>
       </div>
 

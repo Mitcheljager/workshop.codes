@@ -43,16 +43,16 @@ class ProfilesController < ApplicationController
       @user.featured_posts = ""
     end
 
-    if @user.update(profile_params)
-      respond_to do |format|
+    respond_to do |format|
+      if @user.update(profile_params)
         format.html {
           flash[:alert] = "Successfully saved"
           redirect_to edit_profile_path
         }
         format.js { render "application/success" }
+      else
+        format.js { render "application/error" }
       end
-    else
-      render :edit
     end
   end
 
