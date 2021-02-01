@@ -40,8 +40,9 @@ document.addEventListener("turbolinks:load", function() {
 })
 
 function carouselCardsChanged() {
-  const nextElement = document.querySelector("[data-action='carousel-next']")
-  const previousElement = document.querySelector("[data-action='carousel-previous']")
+  const parent = this.selector.closest(".card-carousel")
+  const nextElement = parent.querySelector("[data-action='carousel-next']")
+  const previousElement = parent.querySelector("[data-action='carousel-previous']")
 
   previousElement.classList.toggle("card-carousel__control--disabled", this.currentSlide == 0)
   nextElement.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(this.selector.dataset.max))
