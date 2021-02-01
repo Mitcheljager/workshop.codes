@@ -75,6 +75,7 @@ Rails.application.routes.draw do
     get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
 
     resources :blocks, only: [:create, :update, :destroy]
+    post "blocks/set_positions", to: "blocks#set_positions"
 
     get "register", to: "users#new", as: "new_user"
     get "login", to: "sessions#new", as: "login"

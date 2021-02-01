@@ -7,7 +7,6 @@ class BlocksController < ApplicationController
     @block = Block.new(name: block_params[:name], user_id: current_user.id, content_type: :profile)
     @user = current_user
 
-
     respond_to do |format|
       if @user.blocks.where(content_type: :profile).size >= 3
         @message = "You have already added 3 blocks."
@@ -45,6 +44,14 @@ class BlocksController < ApplicationController
       else
         render "application/error"
       end
+    end
+  end
+
+  def set_positions
+    params[:blocks].each do |block|
+      @block = current_user.blocks.where(id: block[:id]).first
+
+      @block.update_attribute(:position, block[:position])
     end
   end
 

@@ -5,6 +5,7 @@
 //= require activestorage
 //= require sortablejs/Sortable
 //= require @agilie/canvas-image-cover-position/index
+//= require sort-blocks
 
 document.addEventListener("turbolinks:load", function() {
   bindDropzone()

@@ -1,1 +1,2 @@
-document.querySelector("[data-role='blocks']").insertAdjacentHTML("beforeEnd", "<%= j render "block_settings", block: @block %>")
+document.querySelector("[data-role~='blocks']").insertAdjacentHTML("beforeEnd", "<%= j render "block_settings", block: @block %>")
+updateBlockSortable()

@@ -1,9 +1,26 @@
 .content-block {
-  @extend .banner;
   display: block;
   padding: $margin / 2;
+  background: $bg-darker;
+  border-radius: $border-radius * 2;
   text-align: left;
   color: $text-color;
+}
+
+.content-block__title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  a {
+    text-decoration: none;
+    margin-left: $margin / 8;
+
+    &:hover,
+    &:active {
+      filter: brightness(1.1);
+    }
+  }
 }
 
 .content-block__social {
