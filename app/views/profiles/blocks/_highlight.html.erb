@@ -1,6 +1,8 @@
+<% return unless block_property(block, "post").present? %>
+
 <% post = @posts.find(block_property(block, "post")) %>
 
-<div class="item item--large">
+<div class="item item--large" data-code="<%= post.code %>">
   <div>
     <%= link_to post_path(post.code), class: "item__thumbnail" do %>
       <%= image_tag url_for_post_thumbnail(post, 692, 394, "large"), alt: post.title, width: 692, height: 394, loading: "lazy", class: "mb-1/4" %>

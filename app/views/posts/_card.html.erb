@@ -1,5 +1,5 @@
 <% cache_unless current_user, [current_locale, post, "card"] do %>
-  <div class="card">
+  <div class="card" data-code="<%= post.code %>">
     <%= link_to post_path(post.code) do %>
       <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: post.title, width: 300, height: 171, loading: "lazy", class: "mb-1/4" %>
     <% end %>
