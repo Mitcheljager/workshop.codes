@@ -10,15 +10,20 @@
   </div>
 
   <div>
-    <div class="item__title">
+    <div class="item__title pb-0">
       <%= link_to post.title, post_path(post.code) %>
+
+      <div class="item__favorite mt-0 mr-0 ml-auto pl-1/4">
+        <%= render "favorites/form", post: post %>
+      </div>
     </div>
+
 
     <div class="item__description mt-0">
       <%= sanitize(markdown(truncate(block_property(block, "description"), length: 500))) %>
     </div>
 
-    <%= link_to "View more", post_path(post.code), class: "button button--secondary mt-1/4 pl-1/1 pr-1/1" %>
+    <%= link_to "View more", post_path(post.code), class: "button button--secondary mt-1/8 pl-1/1 pr-1/1" %>
   </div>
 
   <div class="item__full-page-background"></div>

@@ -72,13 +72,13 @@
     position: relative;
     grid-template: "thumbnail"
                     "details";
-    grid-gap: $margin / 2;
     border: 0;
     padding: $margin / 2 0;
 
     @include media-min(sm) {
       grid-template: "thumbnail details";
       grid-template-columns: 33.33% auto;
+      grid-gap: $margin / 2;
     }
   }
 
@@ -181,6 +181,10 @@
     height: auto;
     max-width: 280px;
     max-height: 280px / 16 * 9;
+
+    @include media-min(sm) {
+
+    }
 
     &::before {
       display: none;
@@ -307,9 +311,15 @@
   }
 
   .item--large & {
-    max-width: 280px;
-    margin-top: $margin / 4;
+    width: 100%;
     height: auto;
+    margin-top: $margin / 4;
+    font-size: 28px;
+    padding: $margin / 8 0;
+
+    @include media-min(md) {
+      max-width: 280px;
+    }
   }
 
   .item--single & {
