@@ -36,6 +36,8 @@ class CommentsController < ApplicationController
       end
 
       respond_to :js
+    else
+      format.js { render "application/error" }
     end
   end
 
@@ -54,6 +56,8 @@ class CommentsController < ApplicationController
       create_activity(:update_comment, comment_activity_params)
 
       respond_to :js
+    else
+      format.js { render "application/error" }
     end
   end
 
@@ -64,6 +68,8 @@ class CommentsController < ApplicationController
       create_activity(:destroy_comment, comment_activity_params)
 
       respond_to :js
+    else
+      format.js { render "application/error" }
     end
   end
 
@@ -80,6 +86,10 @@ class CommentsController < ApplicationController
     @post = @comment.post
 
     respond_to :js
+  end
+
+  def failed_authenticity_token
+    format.js { render "application/error" }
   end
 
   private

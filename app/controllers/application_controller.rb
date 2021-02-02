@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   before_action :redirect_default_locale
   around_action :set_current_user
+  rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
 
   def login_from_cookie
     return unless cookies[:remember_token] && !current_user
@@ -78,5 +79,10 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     { locale: ((I18n.locale == I18n.default_locale) ? nil : I18n.locale) }
+  end
+
+  def handle_failed_authenticity_token
+    @message = "Authentication failed. Please refresh the page and try again."
+    render "application/error"
   end
 end

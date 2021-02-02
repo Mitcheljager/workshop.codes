@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])
       else
-        redirect_to(session[:return_to] || account_path, fallback_location: account_path)
+        redirect_to(session[:return_to] || root_path, fallback_location: root_path)
       end
     else
       if auth_hash.present?
