@@ -22,7 +22,7 @@ module SignInHelper
     fill_in "password", with: "password"
     click_button "Submit"
 
-    assert page.has_content? "Hello there,"
+    assert page.has_content? "Latest Codes"
   end
 end
 

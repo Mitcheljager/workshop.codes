@@ -3,7 +3,10 @@
 
 <main class="top-offset">
   <% unless params[:page] %>
-    <h2 class="mt-1/2 <%= "text-black" unless current_user.simple_view? %>"><%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %><%= t(".on_fire.title_html") %></h2>
+    <h2 class="mt-1/2 <%= "text-black" unless current_user.present? && current_user.simple_view? %>">
+      <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %>
+      <%= t(".on_fire.title_html") %>
+    </h2>
 
     <%= render "on_fire_carousel" %>
 
