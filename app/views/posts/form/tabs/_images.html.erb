@@ -1,0 +1,16 @@
+<h2 class="mt-1/1"><%= t("posts.form.images.title") %></h2>
+
+<div class="form-group" data-reveal-by-checkbox>
+  <div class="checkbox mt-1/4">
+    <%= form.check_box :include_images, checked: @ordered_images.present? || @post.carousel_video.present?, data: { action: "reveal-by-checkbox" } %>
+    <%= form.label :include_images, t("posts.form.images.label") %>
+  </div>
+
+  <p class="form-hint">
+    <%= t("posts.form.images.help_html") %>
+  </p>
+
+  <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @ordered_images.present? || @post.carousel_video.present? %>">
+    <%= render "posts/form/image_upload", form: form %>
+  </div>
+</div>

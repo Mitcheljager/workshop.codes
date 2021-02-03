@@ -151,7 +151,7 @@ en:
           help_html: "Include a video as the first item in the carousel. Enter only the YouTube video ID, not the full url. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)"
           placeholder: "A video ID looks like this: FqnKB22pOC0"
       description:
-        label: Description
+        title: Description
         help_html: |
           Write a short description that will help people play your game. A quick description of the controls and rules will help explain what's going on. <br>
           <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, %{link}. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)

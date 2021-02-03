@@ -58,6 +58,12 @@
       transition: width 100ms, background-color 100ms;
     }
   }
+
+  .tabs--stepper & {
+    font-family: $font-stack;
+    font-size: $font-size-small;
+    text-transform: none;
+  }
 }
 
 @keyframes transition-tab-in {

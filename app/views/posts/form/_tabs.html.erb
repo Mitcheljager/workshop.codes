@@ -1,0 +1,12 @@
+<nav class="tabs tabs--stepper pr-0 pl-0">
+  <%= link_to "Description", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "description" } %>
+  <%= link_to "Images", "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
+  <%= link_to "Snippet", "#", class: "tabs__item", data: { action: "set-tab", target: "snippet" } %>
+  <%= link_to "Settings", "#", class: "tabs__item", data: { action: "set-tab", target: "settings" } %>
+  <%= link_to "Heroes", "#", class: "tabs__item", data: { action: "set-tab", target: "heroes" } %>
+  <%= link_to "Maps", "#", class: "tabs__item", data: { action: "set-tab", target: "maps" } %>
+  <%= link_to "Expiry", "#", class: "tabs__item", data: { action: "set-tab", target: "expiry" } %>
+  <%= link_to "Revision", "#", class: "tabs__item", data: { action: "set-tab", target: "revision" } if @post.persisted? %>
+
+  <%= form.submit "Save", class: "button ml-auto", data: { disable_with: t("posts.form.submitting") } %>
+</nav>

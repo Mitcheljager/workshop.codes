@@ -1,0 +1,125 @@
+<h2 class="mt-1/1"><%= t("posts.form.settings") %></h2>
+
+<div class="form-group-uneven mt-1/2" data-reveal-by-select-parent>
+  <div class="well well--dark block">
+    <div class="checkbox">
+      <%= form.radio_button :status, "public", checked: !@post.unlisted && !@post.private %>
+      <%= form.label :status, t("posts.form.public.label"), value: "public" %>
+    </div>
+
+    <div class="form-hint mt-1/8">
+      <%= t("posts.form.public.help") %>
+    </div>
+
+    <div class="checkbox">
+      <%= form.radio_button :status, "unlisted", checked: @post.unlisted %>
+      <%= form.label :status, t("posts.form.unlisted.label"), value: "unlisted" %>
+    </div>
+
+    <div class="form-hint mt-1/8">
+      <%= t("posts.form.unlisted.help") %>
+    </div>
+
+    <div class="checkbox">
+      <%= form.radio_button :status, "private", checked: @post.private %>
+      <%= form.label :status, t("posts.form.private.label"), value: "private" %>
+    </div>
+
+    <div class="form-hint mt-1/8 mb-0">
+      <%= t("posts.form.private.help") %>
+    </div>
+  </div>
+
+  <div class="form-group mt-1/2 sm:mt-0" data-reveal-by-checkbox>
+    <div class="checkbox">
+      <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+      <%= form.label :ptr, t("posts.form.ptr.label") %>
+    </div>
+
+    <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
+      <p class="form-hint">
+        <%= t("posts.form.ptr.help") %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="form-group mt-1/1" data-reveal-by-checkbox>
+  <div class="checkbox">
+    <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+    <%= form.label :include_nice_url, t("posts.form.nice_url.label") %>
+  </div>
+
+  <p class="form-hint">
+    <%= t("posts.form.nice_url.help") %>
+  </p>
+
+  <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.nice_url.present? %>">
+    <div class="form-group-uneven">
+      <div class="well well--dark block">
+        <div class="form-group mt-0">
+          <label class="form-input url-input">
+            <%= request.base_url %>/
+            <%= form.text_field :nice_url, class: "inline-input" %>
+          </label>
+        </div>
+
+        <ul class="form-hint mb-0">
+          <%= t("posts.form.nice_url.list_html") %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group-columns mt-1/1">
+  <div class="form-group">
+    <%= form.label :categories, t("posts.form.categories.label"), class: "form-label" %>
+
+    <div class="form-hint">
+      <%= t("posts.form.categories.help") %>
+    </div>
+
+    <%= form.select :categories, options_for_select(
+                                  categories.map { |category| [category[current_locale], category["en"]] },
+                                  (@post.categories if @post.categories)),
+                                { include_hidden: false },
+                                { multiple: true, size: 5, class: "form-select" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :tags, t("posts.form.tags.label"), class: "form-label" %>
+
+    <div class="form-hint">
+      <%= t("posts.form.tags.help_html") %>
+    </div>
+
+    <%= form.text_field :tags, class: "form-input", placeholder: t("posts.form.tags.placeholder") %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :version, t("posts.form.version.label"), class: "form-label" %>
+
+    <div class="form-hint">
+      <%= t("posts.form.version.help") %>
+    </div>
+
+    <%= form.text_field :version, class: "form-input", placeholder: t("posts.form.version.placeholder") %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :collection, t("posts.form.collection.label"), class: "form-label" %>
+
+    <div class="form-hint">
+      <%= t("posts.form.collection.help") %>
+    </div>
+
+    <%= form.select :collection_id, options_from_collection_for_select(current_user.collections, "id", "title", @post.collection_id), { include_blank: current_user.collections.any? ? t("posts.form.collection.none") : t("posts.form.collection.empty") }, { class: "form-select form-select--small" } %>
+    <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-1/4", placeholder: t("posts.form.collection.placeholder") %>
+
+    <div class="form-hint mt-1/8 mb-0">
+      <small><%= t("posts.form.collection.limit") %></small>
+    </div>
+  </div>
+</div>

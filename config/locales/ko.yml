@@ -152,7 +152,7 @@ ko:
           help_html: "캐러셀의 첫 번째 항목으로 동영상을 포함하세요. 전체 URL이 아닌 YouTube 동영상 ID 만 입력하세요. (동영상 ID는 굵게 표시됨 : youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)"
           placeholder: "동영상 ID는 다음과 같이 보입니다. FqnKB22pOC0"
       description:
-        label: 설명
+        title: 설명
         help_html: |
           사람들이 게임을 플레이하는데 도움이 될 간단한 설명을 작성하세요. 제어 및 규칙에 대한 간단한 설명은 진행 상황을 설명하는데 도움이됩니다. <br>
           <strong>이 설명은 전체 마크 다운이 활성화되어 있습니다.</strong> **굵은 활자체**, _이탤릭체_, %{link}. <code>[youtube VIDEO_ID]</code>를 사용하여 YouTube 동영상을 추가하십시오. (동영상 ID는 굵게 표시됨 : youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)

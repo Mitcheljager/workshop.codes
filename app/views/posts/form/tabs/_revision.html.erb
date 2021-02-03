@@ -1,0 +1,26 @@
+<% return unless @post.persisted? %>
+
+<h2 class="mt-1/1"><%= t("posts.form.revision.title") %></h2>
+
+<div data-reveal-by-checkbox>
+  <div class="checkbox">
+    <%= form.check_box :revision, data: { action: "reveal-by-checkbox" } %>
+    <%= form.label :revision, t("posts.form.revision.label") %>
+  </div>
+
+  <span class="form-hint">
+    <%= t("posts.form.revision.help_html") %>
+  </span>
+
+  <div data-role="hidden-by-checkbox" style="display: none">
+    <div class="form-group mt-1/2">
+      <%= form.label :revision_description, t("posts.form.revision.input.label"), class: "form-label" %>
+
+      <div class="form-hint">
+        <%= t("posts.form.revision.input.help_html") %>
+      </div>
+
+      <%= form.text_area :revision_description, class: "form-input form-textarea", data: { role: "simple-mde" } %>
+    </div>
+  </div>
+</div>
