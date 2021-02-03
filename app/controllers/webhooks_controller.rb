@@ -31,7 +31,11 @@ class WebhooksController < ApplicationController
   def get_ko_fi_value
     @values = WebhookValue.where(name: "ko_fi").where(created_at: Time.now.beginning_of_month..Time.now.end_of_month)
 
-    @value = @values.sum(:value)
+    if @values.any?
+      @value = @values.sum(:value)
+    else
+      @value = 0
+    end
 
     render json: @value, layout: false
   end
