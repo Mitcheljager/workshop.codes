@@ -27,6 +27,7 @@
 //= require filter
 //= require gallery
 //= require get-comments
+//= require get-ko-fi-value
 //= require get-markdown-preview
 //= require get-post-analytics
 //= require get-snippet

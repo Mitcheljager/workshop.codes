@@ -138,5 +138,7 @@ Rails.application.routes.draw do
 
   scope "/webhooks", controller: :webhooks do
     post :bugsnag_error_reporting
+    post :ko_fi
+    get :get_ko_fi_value
   end
 end
