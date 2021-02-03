@@ -16,13 +16,7 @@
     <% end %>
 
     <div class="logo-background logo-background--overwatch">
-      <% if current_user.present? %>
-        <%= render "application/banners/ko_fi" %>
-      <% else %>
-        <div class="adv-ad mt-1/1">
-          <%= render "application/banners/ad" %>
-        </div>
-      <% end %>
+      <%= render "application/banners/ko_fi" %>
     </div>
   <% end %>
 

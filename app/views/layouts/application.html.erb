@@ -23,8 +23,6 @@
     <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: :ko)) %>" hreflang="ko" />
 
     <link rel="manifest" href="/manifest.json">
-    
-    <%= render "adsense" %>
 
     <%= inline_css "application.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload", defer: true %>

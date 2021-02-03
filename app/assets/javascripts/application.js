@@ -15,7 +15,6 @@
 //= require microlight
 //= require timeago.js/dist/timeago.min
 
-//= require ads
 //= require analytics
 //= require carousel
 //= require carousel-cards
