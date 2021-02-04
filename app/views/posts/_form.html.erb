@@ -61,6 +61,18 @@
     </div>
   </div>
 
+  <div class="form-group-uneven mt-1/2">
+    <div class="form-group">
+      <%= form.label :locale, "Locale", class: "form-label" %>
+
+      <div class="form-hint">
+        <p class="mt-0"><small>What language is your post in?</small></p>
+      </div>
+
+      <%= form.select :locale, [["en - English", "en"], ["ko - 한국어", "ko"]], {}, { class: "form-select form-select--small" } %>
+    </div>
+  </div>
+
   <div class="form-group mt-1/1" data-reveal-by-checkbox>
     <div class="checkbox">
       <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
