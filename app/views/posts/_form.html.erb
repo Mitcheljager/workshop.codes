@@ -63,10 +63,10 @@
 
   <div class="form-group-uneven mt-1/2">
     <div class="form-group">
-      <%= form.label :locale, "Locale", class: "form-label" %>
+      <%= form.label :locale, t("posts.form.locale.label"), class: "form-label" %>
 
       <div class="form-hint">
-        <p class="mt-0"><small>What language is your post in?</small></p>
+        <p class="mt-0"><small><%= t("posts.form.locale.help") %></small></p>
       </div>
 
       <%= form.select :locale, [["en - English", "en"], ["ko - 한국어", "ko"]], {}, { class: "form-select form-select--small" } %>
