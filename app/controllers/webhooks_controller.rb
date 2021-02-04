@@ -32,7 +32,7 @@ class WebhooksController < ApplicationController
     @values = WebhookValue.where(name: "ko_fi").where(created_at: Time.now.beginning_of_month..Time.now.end_of_month)
 
     if @values.any?
-      @value = @values.sum(:value)
+      @value = @values.pluck(:value).sum(&:to_f)
     else
       @value = 0
     end
