@@ -132,4 +132,7 @@ class Post < ApplicationRecord
   def self.public?
     self.where(private: false, unlisted: false)
   end
+
+  # Ensure reports about this post are removed
+  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ?", 'post', post.id).destroy_all }
 end
