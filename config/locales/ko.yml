@@ -116,6 +116,9 @@ ko:
         attention: 잠깐!
         explanation_html: 각각의 버전마다 공유 코드를 따로 생성하지 않으신다면, 아마도 당신은 새 공유 코드를 만들기보다 기존의 공유 코드로 계속 업데이트하기를 원하시는 것 같습니다. 어떻게 하는지 잘 모르시겠다면, 이 <a href="%{article_url}" target="_blank"><mark>위키 문서</mark></a>를 참고해주세요.
         current_code_html: 혹시 잊어버리셨다면, 당신의 기존 공유 코드는 <code>%{current_code}</code>입니다.
+      locale:
+        label: 언어
+        help: 어느 언어로 된 코드인가요?
       ptr:
         label: 공개 테스트 서버
         help: 조심하세요! PTR 서버가 닫히면 당신의 코드는 접근이 불가능해질 수도 있습니다. 업데이트가 이루어지면 라이브 서버로 쉽게 옮길 수 있도록 미리 스크립트를 복사 붙여넣기 해두시기 바랍니다.
