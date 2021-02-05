@@ -8,8 +8,9 @@ document.addEventListener("turbolinks:load", function() {
 function toggleRevealByCheckbox(event) {
   const state = this.checked
   const parent = this.closest("[data-reveal-by-checkbox]")
+  const target = parent.dataset.revealByCheckbox
 
-  const elements = parent.querySelectorAll("[data-role='hidden-by-checkbox']")
+  const elements = parent.querySelectorAll(target == "" ? "[data-role='hidden-by-checkbox']" : `[data-role="hidden-by-checkbox"][data-target="${ target }"]`)
 
   elements.forEach(element => element.style.display = state ? "initial" : "none")
 }

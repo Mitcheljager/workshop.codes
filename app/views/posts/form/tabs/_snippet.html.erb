@@ -1,24 +1,17 @@
 <h2 class="mt-1/1"><%= t("posts.form.snippet.title") %></h2>
 
-<div data-reveal-by-checkbox>
-  <div class="checkbox">
-    <%= form.check_box :include_snippet, data: { action: "reveal-by-checkbox" }, checked: @post.snippet.present? %>
-    <%= form.label :include_snippet, t("posts.form.snippet.label") %>
-  </div>
-
+<div class="form-group">
   <span class="form-hint">
-    <%= t("posts.form.snippet.help_html") %>
+    <p><%= t("posts.form.snippet.help_html") %></p>
+    <p><%= t("posts.form.snippet.hint") %></p>
   </span>
 
-  <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.snippet.present? %>">
-    <div class="form-group mt-1/2">
-      <%= form.label :snippet, t("posts.form.snippet.label"), class: "form-label" %>
+  <%= form.text_area :snippet, class: "form-input form-textarea form-textarea--small" %>
+</div>
 
-      <div class="form-hint">
-        <%= t("posts.form.snippet.hint") %>
-      </div>
+<hr class="mt-1/2 mb-1/2" />
 
-      <%= form.text_area :snippet, class: "form-input form-textarea form-textarea--small" %>
-    </div>
-  </div>
+<div class="flex justify-between">
+  <%= link_to "🠨 Images", "#", class: "button button--secondary", data: { action: "set-tab", target: "images" } %>
+  <%= link_to "Settings 🠦", "#", class: "button button--secondary", data: { action: "set-tab", target: "settings" } %>
 </div>

@@ -1,4 +1,4 @@
-<%= form_with url: path, model: post, data: { role: "post-form tabs" }, remote: true do |form| %>
+<%= form_with url: path, model: post, data: { role: "post-form tabs", reveal_by_checkbox: "advanced-settings" }, remote: true do |form| %>
   <%= render "errors", errors: post.errors if post.errors.any? %>
 
   <div class="banner p-0">
@@ -8,7 +8,7 @@
           <%= form.text_field :title, class: "form-input form-input--large", placeholder: t("posts.form.title") %>
         </div>
 
-        <div class="form-group mt-0">
+        <div class="form-group sm:mt-0">
           <%= form.text_field :code, class: "form-input form-input--large", placeholder: t("posts.form.code"), data: { action: "reveal-on-difference", original: @post.code }, autocomplete: "off" %>
         </div>
       </div>
@@ -19,21 +19,10 @@
         <p class="mt-0"><small><%= t("posts.form.code_change.current_code_html", current_code: @post.code) %></small></p>
       </div>
 
-      <div class="form-group-uneven mt-1/4" data-reveal-by-select-parent>
-        <div class="">
-        </div>
-
-        <div class="form-group mt-1/2 sm:mt-0" data-reveal-by-checkbox>
-          <div class="checkbox">
-            <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-            <%= form.label :ptr, t("posts.form.ptr.label") %>
-          </div>
-
-          <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
-            <p class="form-hint">
-              <%= t("posts.form.ptr.help") %>
-            </p>
-          </div>
+      <div class="form-group mt-1/4">
+        <div class="checkbox">
+          <%= form.check_box :advanced_settings, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+          <%= form.label :advanced_settings, "Show advanced settings" %>
         </div>
       </div>
     </div>

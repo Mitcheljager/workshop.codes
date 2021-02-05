@@ -11,7 +11,9 @@ function setTab(event) {
   const target = this.dataset.target
   const parentElement = this.closest("[data-role~='tabs']")
 
-  setActiveTab(this, parentElement)
+  const tabElement = this.classList.contains("tabs__item") ? this : document.querySelector(`.tabs__item[data-target~='${ target }']`)
+
+  setActiveTab(tabElement, parentElement)
   revealTab(target, parentElement)
 }
 

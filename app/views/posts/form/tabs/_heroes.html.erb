@@ -1,4 +1,7 @@
-<h2 class="mt-1/1"><%= t("posts.form.heroes.title") %></h2>
+<h2 class="mt-1/1">
+  <%= t("posts.form.heroes.title") %>
+  <span class="form-required">(<%= t("global.required") %>)</span>
+</h2>
 
 <div data-checkbox-group>
   <div class="form-group checkbox">
@@ -30,4 +33,11 @@
       </div>
     <% end %>
   </div>
+</div>
+
+<hr class="mt-1/2 mb-1/2" />
+
+<div class="flex justify-between">
+  <%= link_to "🠨 Settings", "#", class: "button button--secondary", data: { action: "set-tab", target: "settings" } %>
+  <%= link_to "Maps 🠦", "#", class: "button button--secondary", data: { action: "set-tab", target: "maps" } %>
 </div>

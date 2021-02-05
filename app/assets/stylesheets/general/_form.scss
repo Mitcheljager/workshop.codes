@@ -306,3 +306,8 @@ input[type="file"] {
     outline: none;
   }
 }
+
+.form-required {
+  font-size: $font-size-small;
+  color: $text-color-dark;
+}

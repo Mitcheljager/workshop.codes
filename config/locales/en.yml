@@ -1,6 +1,9 @@
 en:
   default_page_title: Overwatch Workshop Codes Resource
 
+  global:
+    required: Required
+
   navigation:
     recent: Latest
     on_fire: On Fire
