@@ -118,6 +118,9 @@ en:
         attention: Heads up!
         explanation_html: If you aren't trying to have an import code for each version, you probably want to update your existing import code instead of making a new one. If you're not sure how to do that, read this <a href="%{article_url}" target="_blank"><mark>Wiki article</mark></a>.
         current_code_html: In case you forgot, your original import code is <code>%{current_code}</code>.
+      locale:
+        label: Language
+        help: What language is your code in?
       ptr:
         label: PTR Only?
         help: Beware! Once PTR goes down you might lose access to your code. Make sure to copy paste the snippet to easily copy it to Live once the time is there.

@@ -1,0 +1,2 @@
+class WebhookValue < ApplicationRecord
+end

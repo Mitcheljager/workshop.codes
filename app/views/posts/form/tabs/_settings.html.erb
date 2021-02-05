@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <div class="form-group mt-1/2" data-reveal-by-checkbox>
+    <div class="form-group mt-1/1" data-reveal-by-checkbox>
       <div class="checkbox">
         <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
         <%= form.label :include_nice_url, t("posts.form.nice_url.label") %>
@@ -71,6 +71,18 @@
             </ul>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="form-group-columns mt-1/1 mb-1/1">
+      <div>
+        <%= form.label :locale, t("posts.form.locale.label"), class: "form-label" %>
+
+        <div class="form-hint">
+          <p class="mt-0"><small><%= t("posts.form.locale.help") %></small></p>
+        </div>
+
+        <%= form.select :locale, [["en - English", "en"], ["ko - 한국어", "ko"]], {}, { class: "form-select form-select--small" } %>
       </div>
     </div>
   </div>
@@ -114,7 +126,7 @@
     <%= form.text_field :version, class: "form-input", placeholder: t("posts.form.version.placeholder") %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" data-role="hidden-by-checkbox" data-target="advanced-settings" style="display: none">
     <%= form.label :collection, t("posts.form.collection.label"), class: "form-label" %>
 
     <div class="form-hint">

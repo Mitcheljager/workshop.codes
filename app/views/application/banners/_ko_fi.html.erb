@@ -1,11 +1,17 @@
 <div class="banner banner--compact mt-1/1">
-  <%= image_tag "ko-fi.png", alt: "Ko-fi logo", width: 64, height: 64, class: "ml-1/4 mr-1/2 hidden visible-md" %>
+  <%= inline_svg_tag "badges/ko-fi-supporter.svg", alt: "Ko-fi logo", width: 64, height: 64, class: "ml-1/4 mr-1/2 hidden visible-md" %>
 
   <div class="mr-1/4">
     <h3 class="mt-0 mb-0"><strong> <%= t("banner.kofi.title") %> <span class="text-ko-fi">Ko-fi</span></strong></h3>
 
-    <div class="mt-1/8">
-      <em><%= t("banner.kofi.tagline") %></em>
+    <div class="flex justify-between mt-1/8">
+      <small class="text-dark">Monthly goal</small>
+
+      <small data-ko-fi-progress-label></small>
+    </div>
+
+    <div class="progress mt-1/8">
+      <div class="progress__bar" data-role="ko-fi-progress" data-max="25"></div>
     </div>
   </div>
 
