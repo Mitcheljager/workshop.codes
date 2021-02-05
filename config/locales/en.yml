@@ -238,7 +238,7 @@ en:
     action: Report code
     loading: Loading...
     modal:
-      disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. This form is not meant to report bugs to the creator of this code.
+      disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. <u>This form is not meant to report bugs to the creator of this code.</u>
 
   while_you_waits:
     index:
