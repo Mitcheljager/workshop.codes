@@ -3903,6 +3903,108 @@ CustomColor:
     default: 255
   return: Color
   en-US: Custom Color
+workshopSettingReal:
+  description: Provides the value of a new real number setting that will appear in
+    the workshop settings card as a slider.
+  args:
+  - name: Category
+    description: The name of the category in which this setting will be found.
+    type: CustomStringLiteral
+    default: CUSTOM STRING
+  - name: Name
+    description: The name of this setting.
+    type: CustomStringLiteral
+    default: CUSTOM STRING
+  - name: Default
+    description: The default value for this setting.
+    type: FloatLiteral
+    default: 0
+  - name: Min
+    description: The lowest allowed value for this setting.
+    type: FloatLiteral
+    default: 0
+  - name: Max
+    description: The highest allowed value for this setting.
+    type: FloatLiteral
+    default: 100
+  - name: Sort Order
+    description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
+    type: IntLiteral
+    default: 0
+  isConstant: true
+  return: float
+  guid: 00000001137B
+  en-US: Workshop Setting Real
+  es-MX: Configuración del Workshop real
+  fr-FR: Paramètre réel de la Forge
+  ja-JP: ワークショップの設定（実数）
+  pt-BR: Real de Configuração do Workshop
+  zh-CN: 地图工坊设置实数
+workshopSettingInteger:
+  description: Provides the value of a new integer setting that will appear in the
+    workshop settings card as a slider.
+  args:
+  - name: Category
+    description: The name of the category in which this setting will be found.
+    type: CustomStringLiteral
+    default: CUSTOM STRING
+  - name: Name
+    description: The name of this setting.
+    type: CustomStringLiteral
+    default: CUSTOM STRING
+  - name: Default
+    description: The default value for this setting.
+    type: FloatLiteral
+    default: 0
+  - name: Min
+    description: The lowest allowed value for this setting.
+    type: FloatLiteral
+    default: 0
+  - name: Max
+    description: The highest allowed value for this setting.
+    type: FloatLiteral
+    default: 100
+  - name: Sort Order
+    description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
+    type: IntLiteral
+    default: 0
+  isConstant: true
+  return: int
+  guid: '000000011375'
+  en-US: Workshop Setting Integer
+  es-MX: Número entero de la configuración del Workshop
+  fr-FR: Paramètre entier de la Forge
+  ja-JP: ワークショップの設定（整数）
+  pt-BR: Inteiro de Configuração do Workshop
+  zh-CN: 地图工坊设置整数
+workshopSettingToggle:
+  description: Provides the value (true or false) of a new toggle setting that will
+    appear in the workshop settings card as a checkbox.
+  args:
+  - name: Category
+    description: The name of the category in which this setting will be found.
+    type: CustomStringLiteral
+    default: CUSTOM STRING
+  - name: Name
+    description: The name of this setting.
+    type: CustomStringLiteral
+    default: CUSTOM STRING
+  - name: Default
+    description: The default value for this setting.
+    type: BoolLiteral
+    default: 0
+  - name: Sort Order
+    description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
+    type: IntLiteral
+    default: 0
+  return: bool
+  guid: 00000001136B
+  en-US: Workshop Setting Toggle
+  es-MX: Alternado de configuración del Workshop
+  fr-FR: Activerdésactiver le paramètre de la Forge
+  ja-JP: ワークショップの設定の切り替え
+  pt-BR: Alternar Configuração do Workshop
+  zh-CN: 地图工坊设置开关
 WorkshopSettingCombo:
   description: Provides the value (a choice of Custom Strings) of a new option setting that will appear in the Workshop Settings card as a combo box. This value returns the index of the selected choice.
   args:
