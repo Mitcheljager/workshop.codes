@@ -198,7 +198,7 @@ en:
         title: Expiry Notifications
         label: Also notify me by email
         help_html: |
-          <strong>Workshop Codes may expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. <mark>We will send you a notification on Workshop.codes if your code has not been updated in 5 months</mark>, giving you 1 month to update the code. We will also send you a notification when your code has expired.<br>
+          <mark>We will send you a notification on Workshop.codes if your code has not been updated in 5 months</mark>, giving you 1 month to update the code. We will also send you a notification when your code has expired.<br>
           <small>Popular codes may be marked as "immortal" and do not expire. It is not known when this happens.</small>
         content_html: Check this if you would like to receive a notification by email when your code has not been updated for 5 months. <strong>Your email address is encrypted on our server</strong> and will be removed right after the notification has been send. We will not use it for any other purposes.
         email:

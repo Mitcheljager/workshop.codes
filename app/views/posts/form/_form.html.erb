@@ -30,9 +30,19 @@
     <%= render "posts/form/tabs", form: form %>
   </div>
 
-  <% ["description", "images", "snippet", "settings", "heroes", "maps", "expiry", "revision"].each_with_index do |tab, index| %>
+  <% tabs = ["description", "images", "snippet", "settings", "heroes", "maps"] %>
+  <% tabs << "revisions" if @post.persisted? %>
+
+  <% tabs.each_with_index do |tab, index| %>
     <div class="tabs-content <%= "tabs-content--active" if index == 0 %>" data-tab="<%= tab %>">
       <%= render "posts/form/tabs/#{ tab }", form: form %>
+
+      <hr class="mt-1/2 mb-1/2" />
+
+      <div class="flex">
+        <%= link_to "🠨 #{ tabs[index - 1] }", "#", class: "button button--secondary", data: { action: "set-tab", target: tabs[index - 1] } if index > 0 %>
+        <%= link_to "#{ tabs[index + 1] } 🠦", "#", class: "button button--secondary ml-auto", data: { action: "set-tab", target: tabs[index + 1] } if index + 1 < tabs.size %>
+      </div>
     </div>
   <% end %>
 <% end %>
