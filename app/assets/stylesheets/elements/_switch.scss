@@ -64,3 +64,59 @@
     color: $white;
   }
 }
+
+.switch-checkbox {
+  position: relative;
+  margin-right: auto;
+}
+
+.switch-checkbox__input {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-checkbox__label {
+  display: block;
+  padding-left: 3rem;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    &::before {
+      background: $text-color;
+    }
+
+    &::after {
+      border-color: $text-color;
+    }
+  }
+  
+  &::before {
+    @extend .switch::before;
+    height: calc(1rem - 8px);
+    width: calc(1rem - 8px);
+    pointer-events: all;
+    transition: left 100ms;
+
+    .switch-checkbox__input:checked + & {
+      left: calc(1rem + 6px);
+      background: $white;
+    }
+  }
+
+  &::after {
+    @extend .switch::after;
+    height: 1rem;
+    width: 2rem;
+    pointer-events: all;
+
+    .switch-checkbox__input:checked + & {
+      border-color: $white;
+    }
+  }
+}

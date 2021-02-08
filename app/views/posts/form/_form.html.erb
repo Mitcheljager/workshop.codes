@@ -20,9 +20,9 @@
       </div>
 
       <div class="form-group mt-1/4">
-        <div class="checkbox">
-          <%= form.check_box :advanced_settings, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-          <%= form.label :advanced_settings, "Show advanced settings" %>
+        <div class="switch-checkbox">
+          <%= form.check_box :advanced_settings, class: "switch-checkbox__input", data: { action: "reveal-by-checkbox" }, autocomplete: "off", checked: advanced_settings_active? %>
+          <%= form.label :advanced_settings, "Show advanced settings", class: "switch-checkbox__label" %>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
   </div>
 
   <% tabs = ["description", "images", "snippet", "settings", "heroes", "maps"] %>
-  <% tabs << "revisions" if @post.persisted? %>
+  <% tabs << "revision" if @post.persisted? %>
 
   <% tabs.each_with_index do |tab, index| %>
     <div class="tabs-content <%= "tabs-content--active" if index == 0 %>" data-tab="<%= tab %>">
@@ -42,6 +42,8 @@
       <div class="flex">
         <%= link_to "🠨 #{ tabs[index - 1] }", "#", class: "button button--secondary", data: { action: "set-tab", target: tabs[index - 1] } if index > 0 %>
         <%= link_to "#{ tabs[index + 1] } 🠦", "#", class: "button button--secondary ml-auto", data: { action: "set-tab", target: tabs[index + 1] } if index + 1 < tabs.size %>
+
+        <%= form.submit "Save", class: "button ml-auto", data: { disable_with: "..." } if index + 1 == tabs.size  %>
       </div>
     </div>
   <% end %>

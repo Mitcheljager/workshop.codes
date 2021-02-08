@@ -9,7 +9,7 @@
   <%= form.text_area :snippet, class: "form-input form-textarea form-textarea--small" %>
 </div>
 
-<div data-role="hidden-by-checkbox" data-target="advanced-settings" style="display: none">
+<div data-role="hidden-by-checkbox" data-target="advanced-settings" style="<%= "display: none" unless advanced_settings_active? %>">
   <h3 class="mt-1/1"><%= t("posts.form.expiry_notifications.title") %></h3>
 
   <div data-reveal-by-checkbox>

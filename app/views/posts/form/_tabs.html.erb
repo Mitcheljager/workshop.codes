@@ -1,11 +1,42 @@
 <nav class="tabs tabs--stepper pr-0 pl-0">
-  <%= link_to "Description", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "description" } %>
-  <%= link_to "Images", "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
-  <%= link_to "Snippet", "#", class: "tabs__item", data: { action: "set-tab", target: "snippet" } %>
-  <%= link_to "Settings", "#", class: "tabs__item", data: { action: "set-tab", target: "settings" } %>
-  <%= link_to "Heroes", "#", class: "tabs__item", data: { action: "set-tab", target: "heroes" } %>
-  <%= link_to "Maps", "#", class: "tabs__item", data: { action: "set-tab", target: "maps" } %>
-  <%= link_to "Revision", "#", class: "tabs__item", data: { action: "set-tab", target: "revision" } if @post.persisted? %>
+  <div class="tabs--stepper__content">
+    <%= link_to "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "description" } do %>
+      <small class="tabs__label"><%= t("global.optional") %></small>
+      <%= t("posts.form.description.title") %>
+    <% end %>
 
-  <%= form.submit "Save", class: "button ml-auto", data: { disable_with: t("posts.form.submitting") } %>
+    <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "images" } do %>
+      <small class="tabs__label"><%= t("global.optional") %></small>
+      <%= t("posts.form.images.title") %>
+    <% end %>
+
+    <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "snippet" } do %>
+      <small class="tabs__label"><%= t("global.optional") %></small>
+      <%= t("posts.form.snippet.tab") %>
+    <% end %>
+
+    <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "settings" } do %>
+      <small class="tabs__label"><%= t("global.required") %></small>
+      <%= t("posts.form.settings.title") %>
+    <% end %>
+
+    <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "heroes" } do %>
+      <small class="tabs__label"><%= t("global.required") %></small>
+      <%= t("posts.form.heroes.title") %>
+    <% end %>
+
+    <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "maps" } do %>
+      <small class="tabs__label"><%= t("global.required") %></small>
+      <%= t("posts.form.maps.title") %>
+    <% end %>
+
+    <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "revision" } do %>
+      <small class="tabs__label"><%= t("global.optional") %></small>
+      <%= t("posts.form.revision.title") %>
+    <% end if @post.persisted? %>
+
+    <div class="tabs--stepper__spacer"></div>
+  </div>
+
+  <%= form.submit "Save", class: "tabs__floating button ml-auto", data: { disable_with: "..." } %>
 </nav>
