@@ -5,5 +5,5 @@ class Report < ApplicationRecord
   validates :content, presence: true
   validates :content, length: { maximum: 1000 }
 
-  enum status: { unresolved: 0, accepted: 1, rejected: 2 }
+  enum status: { unresolved: 0, accepted: 1, rejected: 2, archived: 3 }
 end

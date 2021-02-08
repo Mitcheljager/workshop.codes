@@ -5,6 +5,12 @@ class Admin::ReportsController < Admin::BaseController
 
   def show
     @report = Report.find(params[:id])
-    @post = Post.find(@report.concerns_id) if @report.concerns_model == "post"
+    begin
+      @post = Post.find(@report.concerns_id) if @report.concerns_model == "post"
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The post that this report is about cannot be found. As a result, the report has been automatically archived."
+      @report.archived!
+      @post = nil
+    end
   end
 end

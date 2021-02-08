@@ -133,6 +133,6 @@ class Post < ApplicationRecord
     self.where(private: false, unlisted: false)
   end
 
-  # Ensure reports about this post are removed
-  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ?", 'post', post.id).destroy_all }
+  # Ensure unresolved reports about this post are archived
+  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 end
