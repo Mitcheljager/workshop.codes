@@ -9,28 +9,18 @@ document.addEventListener("turbolinks:load", function() {
 function toggleMarkdownPreview(event) {
   event.preventDefault()
 
-  const markdownElement = document.querySelector("[data-role='markdown-preview']")
-  const descriptionElement = document.querySelector("[data-role='markdown-preview-wrapper']")
+  const modalElement = document.querySelector("[data-modal~='markdown-preview']")
+  const textareaElement = document.querySelector("[data-role~='markdown-textarea']")
+  const descriptionElement = document.querySelector("[data-role~='markdown-preview']")
 
-  if (this.dataset.active != "false") {
-    this.dataset.active = "false"
-    this.innerText = "Back to editing"
-    descriptionElement.style.display = "none"
-
-    sendParseRequest(descriptionElement, markdownElement)
-  } else {
-    this.dataset.active = "true"
-    descriptionElement.style.display = "block"
-    markdownElement.innerHTML = ""
-
-    this.innerText = "Show Preview"
-  }
+  modalElement.style.display = "flex"
+  sendParseRequest(descriptionElement, textareaElement)
 }
 
-function sendParseRequest(descriptionElement, markdownElement) {
-  const descriptionValue = descriptionElement.querySelector("textarea").value
+function sendParseRequest(descriptionElement, textareaElement) {
+  const descriptionValue = textareaElement.value
 
-  markdownElement.innerHTML = "Loading preview..."
+  descriptionElement.innerHTML = "Loading preview..."
 
   fetch("/parse-markdown", {
     method: "post",
@@ -43,6 +33,6 @@ function sendParseRequest(descriptionElement, markdownElement) {
   })
   .then(response => response.text())
   .then(data => {
-    markdownElement.innerHTML = data
+    descriptionElement.innerHTML = data
   })
 }

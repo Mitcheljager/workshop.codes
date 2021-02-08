@@ -40,11 +40,7 @@
 
     <%= link_to "Show Preview", "#", class: "button button--secondary mt-1/4 mb-1/4", data: { action: "markdown-preview" } %>
 
-    <div data-role="markdown-preview-wrapper">
-      <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde" } %>
-    </div>
-
-    <div class="item__description" data-role="markdown-preview"></div>
+    <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea" } %>
   </div>
 
   <div class="form-group-columns mt-1/1">
@@ -83,3 +79,11 @@
 
   <%= submit_tag "Submit", class: "button mt-1/2", data: { disable_with: "Submitting..." } %>
 <% end %>
+
+<div class="modal modal--content-width" data-modal="markdown-preview" data-hide-on-close style="display: none">
+  <div class="modal__backdrop" data-role="modal-backdrop"></div>
+
+  <div class="modal__content">
+    <div class="item__description" data-role="markdown-preview"></div>
+  </div>
+</div>

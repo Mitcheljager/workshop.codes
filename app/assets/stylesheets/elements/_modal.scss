@@ -13,6 +13,10 @@
   @include media-min(sm) {
     align-items: center;
   }
+
+  &--content-width {
+    align-items: flex-start;
+  }
 }
 
 .modal__backdrop {
@@ -64,6 +68,13 @@
     img {
       display: block;
     }
+  }
+
+  .modal--content-width & {
+    max-width: map-get($media-min-widths, lg) + $margin;
+    max-height: 90vh;
+    margin-top: 5vh;
+    overflow: auto;
   }
 }
 
