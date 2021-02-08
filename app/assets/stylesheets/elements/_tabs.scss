@@ -10,6 +10,14 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+  &--stepper {
+    display: grid;
+    grid-template-columns: auto 5rem;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 .tabs__item {
@@ -22,6 +30,7 @@
   font-family: "Barlow Condensed", "Impact";
   text-transform: uppercase;
   font-size: 19px;
+  text-align: left;
 
   &::after {
     content: "";
@@ -33,7 +42,7 @@
     width: 0%;
     background: transparent;
     transform: translateX(-50%);
-    transition: width 100ms, background-color 0ms 100ms;
+    transition: width 50ms, background-color 0ms 50ms;
   }
 
   &:hover,
@@ -43,7 +52,7 @@
     &::after {
       background: $white;
       width: 100%;
-      transition: width 100ms, background-color 100ms;
+      transition: width 50ms, background-color 50ms;
     }
   }
 
@@ -55,9 +64,21 @@
     &::after {
       background: $primary;
       width: 100%;
-      transition: width 100ms, background-color 100ms;
+      transition: width 50ms, background-color 50ms;
     }
   }
+
+  .tabs--stepper & {
+    padding: $margin / 4 $margin / 8;
+    font-family: $font-stack;
+    font-size: $font-size-small;
+    text-transform: none;
+  }
+}
+
+.tabs__label {
+  display: block;
+  color: $text-color-dark;
 }
 
 @keyframes transition-tab-in {
@@ -80,4 +101,21 @@
   &--transitioning-in {
     animation: transition-tab-in 150ms;
   }
+}
+
+.tabs--stepper__content {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+}
+
+.tabs--stepper__spacer {
+  width: 2.5rem;
+  flex-shrink: 0;
+}
+
+.tabs__floating {
+  border-radius: 0;
+  box-shadow: 0 0 2.5rem 2.5rem $bg-darker;
+  z-index: 2;
 }

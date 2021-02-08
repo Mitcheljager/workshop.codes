@@ -1,5 +1,5 @@
 document.addEventListener("turbolinks:load", function() {
-  const elements = document.querySelectorAll("[data-action='set-tab']")
+  const elements = document.querySelectorAll("[data-action~='set-tab']")
 
   elements.forEach((element) => element.removeEventListener("click", setTab))
   elements.forEach((element) => element.addEventListener("click", setTab))
@@ -9,14 +9,16 @@ function setTab(event) {
   event.preventDefault()
 
   const target = this.dataset.target
-  const parentElement = this.closest("[data-role='tabs']")
+  const parentElement = this.closest("[data-role~='tabs']")
 
-  setActiveTab(this, parentElement)
+  const tabElement = this.classList.contains("tabs__item") ? this : document.querySelector(`.tabs__item[data-target~='${ target }']`)
+
+  setActiveTab(tabElement, parentElement)
   revealTab(target, parentElement)
 }
 
 function revealTab(target, parentElement) {
-  const targetElement = document.querySelector(`[data-tab='${ target }']`)
+  const targetElement = document.querySelector(`[data-tab~='${ target }']`)
   const activeElement = parentElement.querySelector(".tabs-content--active")
 
   activeElement.classList.add("tabs-content--transitioning-out")

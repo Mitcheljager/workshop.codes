@@ -1,0 +1,35 @@
+<h2 class="mt-1/1">
+  <%= t("posts.form.maps.title") %>
+  <span class="form-required">(<%= t("global.required") %>)</span>
+</h2>
+
+<div data-checkbox-group>
+  <div class="form-group checkbox">
+    <%= form.check_box :checkbox_group_maps, data: { action: "checkbox-select-all" } %>
+    <%= form.label :checkbox_group_maps, t("posts.form.maps.check_all") %>
+  </div>
+
+  <div class="form-group-triple">
+    <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
+      <div class="form-group" data-checkbox-group>
+        <h3><%= map_type[current_locale] %></h3>
+
+        <% if maps.count > 1 %>
+          <div class="checkbox">
+            <%= form.check_box "checkbox_group_#{ map_type }", data: { action: "checkbox-select-all" } %>
+            <%= form.label "checkbox_group_#{ map_type }", t("posts.form.maps.check_all_type", type: map_type[current_locale]) %>
+          </div>
+
+          <br>
+        <% end %>
+
+        <% maps.each do |map| %>
+          <div class="checkbox">
+            <%= form.check_box :maps, { multiple: true, checked: (@post.maps.include?(map["en"]) if @post.maps) }, map["en"], false %>
+            <%= form.label "maps_#{ map["en"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "") }", i18n_value_in_array(maps, map["en"]) %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

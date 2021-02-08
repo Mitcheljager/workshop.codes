@@ -1,0 +1,50 @@
+<%= form_with url: path, model: post, data: { role: "post-form tabs", reveal_by_checkbox: "advanced-settings" }, remote: true do |form| %>
+  <%= render "errors", errors: post.errors if post.errors.any? %>
+
+  <div class="banner p-0">
+    <div class="p-1/4">
+      <div class="form-group-uneven">
+        <div class="form-group mt-0">
+          <%= form.text_field :title, class: "form-input form-input--large", placeholder: t("posts.form.title") %>
+        </div>
+
+        <div class="form-group sm:mt-0">
+          <%= form.text_field :code, class: "form-input form-input--large", placeholder: t("posts.form.code"), data: { action: "reveal-on-difference", original: @post.code }, autocomplete: "off" %>
+        </div>
+      </div>
+
+      <div class="warning warning--mild mt-1/4 pt-1/8 pb-1/8" data-role="reveal-on-difference" style="display: none">
+        <p class="mb-0"><mark><%= t("posts.form.code_change.attention") %></mark></p>
+        <p class="mt-0"><small><%= t("posts.form.code_change.explanation_html", article_url: "https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code") %></small></p>
+        <p class="mt-0"><small><%= t("posts.form.code_change.current_code_html", current_code: @post.code) %></small></p>
+      </div>
+
+      <div class="form-group mt-1/4">
+        <div class="switch-checkbox">
+          <%= form.check_box :advanced_settings, class: "switch-checkbox__input", data: { action: "reveal-by-checkbox" }, autocomplete: "off", checked: advanced_settings_active? %>
+          <%= form.label :advanced_settings, "Show advanced settings", class: "switch-checkbox__label" %>
+        </div>
+      </div>
+    </div>
+
+    <%= render "posts/form/tabs", form: form %>
+  </div>
+
+  <% tabs = ["description", "images", "snippet", "settings", "heroes", "maps"] %>
+  <% tabs << "revision" if @post.persisted? %>
+
+  <% tabs.each_with_index do |tab, index| %>
+    <div class="tabs-content <%= "tabs-content--active" if index == 0 %>" data-tab="<%= tab %>">
+      <%= render "posts/form/tabs/#{ tab }", form: form %>
+
+      <hr class="mt-1/2 mb-1/2" />
+
+      <div class="flex">
+        <%= link_to "🠨 #{ tabs[index - 1] }", "#", class: "button button--secondary", data: { action: "set-tab", target: tabs[index - 1] } if index > 0 %>
+        <%= link_to "#{ tabs[index + 1] } 🠦", "#", class: "button button--secondary ml-auto", data: { action: "set-tab", target: tabs[index + 1] } if index + 1 < tabs.size %>
+
+        <%= form.submit class: "button ml-auto", data: { disable_with: "..." } if index + 1 == tabs.size  %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

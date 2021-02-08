@@ -23,7 +23,7 @@ class Uploader {
         hiddenField.setAttribute("value", blob.signed_id)
         hiddenField.name = element.name
 
-        document.querySelector("[data-role='post-form']").appendChild(hiddenField)
+        document.querySelector("[data-role~='post-form']").appendChild(hiddenField)
       }
     })
   }

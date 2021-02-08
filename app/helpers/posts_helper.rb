@@ -22,4 +22,12 @@ module PostsHelper
 
     return url
   end
+
+  def advanced_settings_active?
+    if @post.private? || @post.unlisted? || @post.email_notification.present? || @post.ptr? || @post.nice_url.present? || @post.collection_id.present?
+      return true
+    else
+      return false
+    end
+  end
 end

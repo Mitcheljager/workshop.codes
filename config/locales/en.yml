@@ -1,6 +1,10 @@
 en:
   default_page_title: Overwatch Workshop Codes Resource
 
+  global:
+    required: Required
+    optional: Optional
+
   navigation:
     recent: Latest
     on_fire: On Fire
@@ -154,17 +158,19 @@ en:
           help_html: "Include a video as the first item in the carousel. Enter only the YouTube video ID, not the full url. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)"
           placeholder: "A video ID looks like this: FqnKB22pOC0"
       description:
-        label: Description
+        title: Description
         help_html: |
           Write a short description that will help people play your game. A quick description of the controls and rules will help explain what's going on. <br>
           <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, %{link}. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
         show_preview: Show preview
       snippet:
+        tab: Snippet
         title: Code Snippet
         label: Include code snippet
         help_html: <strong>Workshop Codes expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. Saving the code snippet allows you to copy paste it at any point.
         hint: To get the code snippet select all your rules and copy them. Simply paste it here and you're good to go.
-      settings: Settings
+      settings:
+        title: Settings
       categories:
         label: Categories
         help: Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
@@ -195,7 +201,7 @@ en:
         title: Expiry Notifications
         label: Also notify me by email
         help_html: |
-          <strong>Workshop Codes may expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. <mark>We will send you a notification on Workshop.codes if your code has not been updated in 5 months</mark>, giving you 1 month to update the code. We will also send you a notification when your code has expired.<br>
+          <mark>We will send you a notification on Workshop.codes if your code has not been updated in 5 months</mark>, giving you 1 month to update the code. We will also send you a notification when your code has expired.<br>
           <small>Popular codes may be marked as "immortal" and do not expire. It is not known when this happens.</small>
         content_html: Check this if you would like to receive a notification by email when your code has not been updated for 5 months. <strong>Your email address is encrypted on our server</strong> and will be removed right after the notification has been send. We will not use it for any other purposes.
         email:
