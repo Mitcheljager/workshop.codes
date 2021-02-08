@@ -1,13 +1,15 @@
 desc "Compress 1 day old impressions in to Statistic"
 task :compress_impressions => :environment do
-  compress_events("Posts Visit", :visit)
-  compress_events("Copy Code", :copy)
-  compress_visits
+  ActiveRecord::Base.connection_pool.with_connection do
+    compress_events("Posts Visit", :visit)
+    compress_events("Copy Code", :copy)
+    compress_visits
 
-  Ahoy::Visit.where("started_at < ?", 2.weeks.ago).find_in_batches do |visits|
-    visit_ids = visits.map(&:id)
-    Ahoy::Event.where(visit_id: visit_ids).delete_all
-    Ahoy::Visit.where(id: visit_ids).delete_all
+    Ahoy::Visit.where("started_at < ?", 2.weeks.ago).find_in_batches do |visits|
+      visit_ids = visits.map(&:id)
+      Ahoy::Event.where(visit_id: visit_ids).delete_all
+      Ahoy::Visit.where(id: visit_ids).delete_all
+    end
   end
 end
 

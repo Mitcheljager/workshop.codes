@@ -6,7 +6,9 @@ class BadgesWikiJob
     begin
       return unless user.present?
 
-      create_badge(badge_id: 8, user: user)
+      ActiveRecord::Base.connection_pool.with_connection do
+        create_badge(badge_id: 8, user: user)
+      end
     rescue
     end
   end

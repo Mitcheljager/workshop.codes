@@ -5,7 +5,9 @@ class TrackingJob
     begin
       return unless ahoy.present?
 
-      ahoy.track event, parameters
+      ActiveRecord::Base.connection_pool.with_connection do
+        ahoy.track event, parameters
+      end
     rescue
     end
   end
