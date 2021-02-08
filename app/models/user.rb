@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :forgot_password_tokens, dependent: :destroy
   has_many :collections, dependent: :destroy
   has_many :reports, dependent: :destroy
+  has_many :reports_of_user, class_name: "Report", foreign_key: :reported_user_id, dependent: :destroy
   has_many :badges, dependent: :destroy
   has_many :wiki_edits, class_name: "Wiki::Edit", dependent: :destroy
   has_many :blocks

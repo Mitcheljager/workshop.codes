@@ -13,15 +13,28 @@
     <%= @report.category %>
   </div>
 
-  <% if @post.present? %>
-    <div class="mt-1/2 mb-1/2">
-      <strong>Post info:</strong> <br>
-      Title: <%= @post.title %> <br>
-      Author: <%= @post.user.username %> <br>
-      Number of reports received: <%= Report.where(concerns_id: @report.concerns_id, concerns_model: "post").count %> <br>
-      <%= link_to "view post in admin", admin_post_path(@post.id), class: "button button--link" %> <br>
-      <%= link_to "view post", post_path(@post.code), class: "button pt-0 button--link" %>
+  <% if @report.reported_user.present? %>
+    <div class="mb-1/2">
+      <strong>Reported Content Author</strong>:<br>
+      <%= @report.user.username %>
+      <small>(<%= @report.user.id %>)</small> -
+      <em><%= link_to "view user", admin_user_path(@report.user_id) %></em>
     </div>
+  <% end %>
+
+  <%# TODO: Refactor into partial %>
+  <% if @report.concerns_model == "post" %>
+    <div class="mt-1/2 mb-1/2">
+    <strong>Post Info:</strong> <br>
+    Title at time of report: <%= report_model_property(@report, "post", "title") %> <br>
+    Code at time of report: <%= report_model_property(@report, "post", "code") %> <br>
+    <% if @post.present? %>
+        Current Title: <%= @post.title %> <br>
+        Number of received reports for post: <%= Report.where(concerns_id: @report.concerns_id, concerns_model: "post").count %> <br>
+        <%= link_to "view post in admin", admin_post_path(@post.id), class: "button button--link" %> <br>
+        <%= link_to "view post", post_path(@post.code), class: "button pt-0 button--link" %>
+      </div>
+    <% end %>
   <% end %>
 
   <div class="mt-1/2 mb-1/2">
