@@ -12,10 +12,19 @@ module ReportsHelper
   end
 
   def report_model_property(report, model, property)
-    if report.respond_to? :properties && report.properties.respond_to? :[] && report.properties[model] && report.properties[model].respond_to? :[] && report.properties[model][property]
+    if report_has_model_property?(report, model, property)
       return report.properties[model][property]
     else
       return ""
     end
+  end
+
+  private
+  def report_has_model_property?(report, model, property)
+    return false unless report.respond_to? :properties
+    return false unless report.properties.respond_to?(:[])
+    return false unless report.properties[model]
+    return false unless report.properties[model].respond_to?(:[])
+    report.properties[model][property]
   end
 end
