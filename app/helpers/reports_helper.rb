@@ -21,8 +21,6 @@ module ReportsHelper
 
   private
   def report_has_model_property?(report, model, property)
-    return false unless report.respond_to? :properties
-    return false unless report.properties.respond_to?(:[])
     return false unless report.properties[model]
     return false unless report.properties[model].respond_to?(:[])
     report.properties[model][property]

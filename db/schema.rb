@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 2021_02_08_054502) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "visit_token"
-    t.text "properties"
+    t.text "properties", default: "[]"
     t.integer "reported_user_id"
   end
 

@@ -23,7 +23,7 @@ RSpec.describe ReportsHelper, type: :helper do
     context "passed a legacy report with no properties" do
 
       before(:each) do
-        @report = instance_double("Report", :properties => nil)
+        @report = instance_double("Report", :properties => {})
       end
 
       it "does not error when asked to access a model's properties" do
