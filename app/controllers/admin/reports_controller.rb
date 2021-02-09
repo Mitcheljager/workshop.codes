@@ -5,11 +5,9 @@ class Admin::ReportsController < Admin::BaseController
 
   def show
     @report = Report.find(params[:id])
-    begin
-      @post = Post.find(@report.concerns_id) if @report.concerns_model == "post"
-    rescue ActiveRecord::RecordNotFound
-      @post = nil
-      if @report.unresolved?
+    if @report.concerns_model == "post" then
+      @post = Post.find_by(id: @report.concerns_id)
+      if !@post.present? && @report.unresolved?
         flash[:notice] = "The post that this unresolved report is about cannot be found. As a result, it has been automatically archived."
         @report.archived!
       end
