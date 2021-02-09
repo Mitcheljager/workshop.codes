@@ -8,9 +8,11 @@ class Admin::ReportsController < Admin::BaseController
     begin
       @post = Post.find(@report.concerns_id) if @report.concerns_model == "post"
     rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The post that this report is about cannot be found. As a result, the report has been automatically archived."
-      @report.archived!
       @post = nil
+      if @report.unresolved?
+        flash[:notice] = "The post that this unresolved report is about cannot be found. As a result, it has been automatically archived."
+        @report.archived!
+      end
     end
   end
 end
