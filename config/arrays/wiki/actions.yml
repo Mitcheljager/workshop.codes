@@ -4103,10 +4103,10 @@ EnableVoiceChat:
   en-US: Enable Voice Chat
 
 DisableVoiceChat:
-  description: Disables Text Chat for one or more Players until reenabled
+  description: Disables Voice Chat for one or more Players until reenabled
   args:
   - name: Player
-    description: The Player or Players who will have their Text Chat disabled.
+    description: The Player or Players who will have their Voice Chat disabled.
     type: Player
     default: Event Player
   - name: Team Voice Chat
@@ -4139,7 +4139,7 @@ MovePlayertoTeam:
   description: Move one or more Players to the specified Team and Slot. This action can fail if the specified slot is not available. This action doesn't work on Dummy Bots.
   args:
   - name: Player
-    description: The Player or Players who will have their Text Chat disabled.
+    description: The Player or Players to move.
     type: Player
     default: Event Player
   - name: Team
