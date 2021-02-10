@@ -4080,9 +4080,7 @@ EnableTextChat:
   args:
   - name: Player
     description: The Player or Players who will have their Text Chat enabled.
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   en-US: Enable Text Chat
 
@@ -4091,9 +4089,7 @@ DisableTextChat:
   args:
   - name: Player
     description: The Player or Players who will have their Text Chat disabled.
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   en-US: Disable Text Chat
 
@@ -4102,9 +4098,7 @@ EnableVoiceChat:
   args:
   - name: Player
     description: The Player or Players who will have their Voice Chat enabled.
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   en-US: Enable Voice Chat
 
@@ -4113,9 +4107,7 @@ DisableVoiceChat:
   args:
   - name: Player
     description: The Player or Players who will have their Text Chat disabled.
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   - name: Team Voice Chat
     description: Whether or not Team Voice Chat will be disabled.
@@ -4148,9 +4140,7 @@ MovePlayertoTeam:
   args:
   - name: Player
     description: The Player or Players who will have their Text Chat disabled.
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   - name: Team
     description: The team on which to move the Player. The "all" option only works in free-for-all game modes, while the "team" options only work in team-based game modes.
@@ -4167,9 +4157,7 @@ RemovePlayer:
   args:
   - name: Player
     description: The Player or Players to remove.
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   en-US: Remove Player
 
@@ -4178,9 +4166,7 @@ StartForcingDummyBotName:
   args:
   - name: Player
     description: The Player whose name will be forced.
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   - name: Name
     description: The name to be forced.
@@ -4193,9 +4179,7 @@ StopForcingDummyBotName:
   args:
   - name: Player
     description: The Player or Players whose names will stop being forced
-    type:
-    - Player
-    - Array: Player
+    type: Player
     default: Event Player
   en-US: Stop Forcing Dummy Bot Name
 
