@@ -3,7 +3,7 @@
   Title at time of report: <%= report_model_property(report, "post", "title") %> <br>
   Code at time of report: <%= report_model_property(report, "post", "code") %> <br>
 
-  <% unless post.present? %>
+  <% if post.present? %>
     Current Title: <%= post.title %> <br>
     Number of received reports for post: <%= Report.where(concerns_id: report.concerns_id, concerns_model: "post").count %> <br>
     <%= link_to "view post in admin", admin_post_path(post.id), class: "button button--link" %> <br>
