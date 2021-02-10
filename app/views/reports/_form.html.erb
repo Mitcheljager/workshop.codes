@@ -5,6 +5,9 @@
 
   <%= form.hidden_field :concerns_id, value: @post.id %>
   <%= form.hidden_field :concerns_model, value: "post" %>
+  <%= form.hidden_field "properties[post][title]", value: @post.title %>
+  <%= form.hidden_field "properties[post][code]", value: @post.code %>
+  <%= form.hidden_field :reported_user_id, value: @post.user_id %>
 
   <div class="form-group" data-reveal-by-select-parent>
     <%= form.label :category, class: "form-label" %>

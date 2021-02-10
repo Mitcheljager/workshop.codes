@@ -132,4 +132,7 @@ class Post < ApplicationRecord
   def self.public?
     self.where(private: false, unlisted: false)
   end
+
+  # Ensure unresolved reports about this post are archived
+  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 end

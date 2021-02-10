@@ -37,7 +37,7 @@ class ReportsController < ApplicationController
   private
 
   def report_params
-    params.require(:report).permit(:concerns_id, :concerns_model, :category, :content)
+    params.require(:report).permit(:concerns_id, :concerns_model, :category, :content, :reported_user_id, properties: {})
   end
 
   def notify_discord

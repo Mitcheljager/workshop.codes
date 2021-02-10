@@ -12,4 +12,19 @@ module ReportsHelper
       "Other"
     ]
   end
+
+  def report_model_property(report, model, property)
+    if report_has_model_property?(report, model, property)
+      return report.properties[model][property]
+    else
+      return ""
+    end
+  end
+
+  private
+  def report_has_model_property?(report, model, property)
+    return false unless report.properties[model]
+    return false unless report.properties[model].respond_to?(:[])
+    report.properties[model][property]
+  end
 end

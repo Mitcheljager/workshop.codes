@@ -14,4 +14,8 @@
   <%= link_to "reports", admin_reports_path, class: "button #{ "button--secondary" unless current_page?(admin_reports_path) }" %>
 </center>
 
+<% if flash[:notice] %>
+  <div class="warning warning--red mt-1/2 mb-1/4"><%= flash[:notice] %></div>
+<% end %>
+
 <hr>
