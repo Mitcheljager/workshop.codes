@@ -3844,6 +3844,7 @@ removeAllHealthPoolsFromPlayer:
     - Array: Player
     default: EVENT PLAYER
   en-US: Remove All Health Pools From Player
+
 setPlayerHealth:
   description: Sets the health of a Player or Players without affecting stats or granting damage/healing credit. This action only has an effect on living players. (For dead players, use the Resurrect Player action instead.)
   args:
@@ -3858,6 +3859,7 @@ setPlayerHealth:
     type: Unsigned float
     default: 1
   en-US: Set Player Health
+
 LogToInspector:
   description: Causes the Workshop Inspector to record a log entry.
   args:
@@ -3866,6 +3868,7 @@ LogToInspector:
     type: Object
     default: 'NULL'
   en-US: Log To Inspector
+
 WaitUntil:
   description: Waits ultil the Continue Condition is true or Timeout seconds elapse. (The Rule's Condition is ignored during this wait.)
   args:
@@ -3874,6 +3877,7 @@ WaitUntil:
     type: Integer
     default: 0
   en-US: Wait Until
+
 SetKnockbackDealt:
   description: Sets the knockback dealt of one or more Players to a percentage of their raw knockback dealt.
   args:
@@ -3888,6 +3892,7 @@ SetKnockbackDealt:
     type: Integer
     default: 100
   en-US: Set Knockback Dealt
+
 SetKnockbackReceived:
   description: Sets the knockback received of one or more Players to a percentage of their raw knockback received.
   args:
@@ -3902,6 +3907,7 @@ SetKnockbackReceived:
     type: Integer
     default: 100
   en-US: Set Knockback Received
+
 SetEnvironmentCreditPlayer:
   description: Sets the Player who will received credit if the specified target Player or Players die to the environment before landing on the ground.
   args:
@@ -3918,6 +3924,7 @@ SetEnvironmentCreditPlayer:
     - Array: Player
     default: 'NULL'
   en-US: Set Environment Credit Player
+
 StartAssist:
   description: Starts granting assist credit toward to one or more Assisters when one or more Targets are eliminated. A reference to this damage modification can be obtained from the Last Assist ID Value. This Action will fail if too many assists have been started.
   args:
@@ -3938,6 +3945,7 @@ StartAssist:
     type: __ChaseRateReeval__
     default: Assisters and Targets
   en-US: Start Assist
+
 StopAssist:
   description: Stops an assist that was started by the Start Assist Action.
   args:
@@ -3946,9 +3954,11 @@ StopAssist:
     type: AssistId
     default: Last Assist ID
   en-US: Stop Assist
+
 StopAllAssists:
   description: Stops all assists that were started using the Start Assist Action.
   en-US: Stop All Assists
+
 CreateProgressBarHUDText:
   description: Creates Progress Bar HUD text visible to specified Players at a specific location on the screen. This text will persist until destroyed. To obtain a reference to this text, use the Last Text ID Value. This action will fail if too many text elements have been created.
   args:
@@ -3991,6 +4001,7 @@ CreateProgressBarHUDText:
     type: SpecVisibility
     default: Default Visibility
   en-US: Create Progress Bar HUD Text
+
 DestroyProgressBarHUDText:
   description: Destroys Progress Bar HUD text that was created by Create Progress Bar HUD Text.
   args:
@@ -3999,9 +4010,11 @@ DestroyProgressBarHUDText:
     type: TextId
     default: Last Text ID
   en-US: Destroy Progress Bar HUD Text
+
 DestroyAllProgressBarHUDText:
   description: Destroys all Progress Bar HUD text that were created by the Create Progress Bar HUD Text Action.
   en-US: Destroy All Progress Bar HUD Text
+
 CreateProgressBarIn-WorldText:
   description: Creates Progress Bar HUD text visible to the specific Players at a specific position in the world. This text will persist until destroyed. To obtain a reference to this text, use the Last Text ID Value. This Action will fail if too many text elements have been created.
   args:
@@ -4048,6 +4061,7 @@ CreateProgressBarIn-WorldText:
     type: SpecVisibility
     default: Default Visibility
   en-US: Create Progress Bar In-World Text
+
 DestroyProgressBarIn-WorldText:
   description: Destroys Progress Bar In-World text that was created by Create Progress Bar In-World Text.
   args:
@@ -4056,6 +4070,132 @@ DestroyProgressBarIn-WorldText:
     type: TextId
     default: Last Text ID
   en-US: Destroy Progress Bar In-World Text
+
 DestroyAllProgressBarIn-WorldText:
   description: Destroys all Progress Bar In-World text that were created by the Create Progress Bar In-World Text Action.
   en-US: Destroy All Progress Bar In-World Text
+
+EnableTextChat:
+  description: Undoes the effect of the Disable Text Chat Action for one or more Players.
+  args:
+  - name: Player
+    description: The Player or Players who will have their Text Chat enabled.
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  en-US: Enable Text Chat
+
+DisableTextChat:
+  description: Disables Text Chat for one or more Players until reenabled
+  args:
+  - name: Player
+    description: The Player or Players who will have their Text Chat disabled.
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  en-US: Disable Text Chat
+
+EnableVoiceChat:
+  description: Undoes the effect of the Disable Voice Chat Action for one or more Players.
+  args:
+  - name: Player
+    description: The Player or Players who will have their Voice Chat enabled.
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  en-US: Enable Voice Chat
+
+DisableVoiceChat:
+  description: Disables Text Chat for one or more Players until reenabled
+  args:
+  - name: Player
+    description: The Player or Players who will have their Text Chat disabled.
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  - name: Team Voice Chat
+    description: Whether or not Team Voice Chat will be disabled.
+    type: Boolean
+    default: True
+  - name: Match Voice Chat
+    description: Whether or not Match Voice Chat will be disabled.
+    type: Boolean
+    default: True
+  - name: Group Voice Chat
+    description: Whether or not Group Voice Chat will be disabled.
+    type: Boolean
+    default: True
+  en-US: Disable Voice Chat
+
+StartGameMode:
+  description: Starts the Game Mode. This action doesn't have an effect if the game is already in progress.
+  en-US: Start Game Mode
+
+ReturntoLobby:
+  description: Returns the Game Mode back to the Custom Game Lobby.
+  en-US: Return To Lobby
+
+RestartMatch:
+  description: Restarts the Match. This action only has an effect after the match has existed for 30 seconds.
+  en-US: Restart Match
+
+MovePlayertoTeam:
+  description: Move one or more Players to the specified Team and Slot. This action can fail if the specified slot is not available. This action doesn't work on Dummy Bots.
+  args:
+  - name: Player
+    description: The Player or Players who will have their Text Chat disabled.
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  - name: Team
+    description: The team on which to move the Player. The "all" option only works in free-for-all game modes, while the "team" options only work in team-based game modes.
+    type: Team
+    default: All
+  - name: SLOT
+    description: The player slot which will receive the Player (-1 for first available slot).
+    type: int
+    default: -1
+  en-US: Move Player To Team
+
+RemovePlayer:
+  description: Removes one or more Players from the Custom Game. This action doesn't work on Dummy Bots.
+  args:
+  - name: Player
+    description: The Player or Players to remove.
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  en-US: Remove Player
+
+StartForcingDummyBotName:
+  description: Starts forcing the name for the specified Player or Players
+  args:
+  - name: Player
+    description: The Player whose name will be forced.
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  - name: Name
+    description: The name to be forced.
+    type: String
+    default: Custom String
+  en-US: Start Forcing Dummy Bot Name
+
+StopForcingDummyBotName:
+  description: 
+  args:
+  - name: Player
+    description: The Player or Players whose names will stop being forced
+    type:
+    - Player
+    - Array: Player
+    default: Event Player
+  en-US: Stop Forcing Dummy Bot Name
+
