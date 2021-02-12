@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     resources :reports, only: [:create, :new, :destroy, :update]
     resources :notifications, only: [:index], concerns: :paginatable
     get "unread-notifications", to: "notifications#get_unread_notifications"
+    get "unread-notifications-count", to: "notifications#get_unread_notifications_count"
 
     get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
     get "while-you-wait(/:filter)", to: "while_you_waits#index", as: "while_you_wait"

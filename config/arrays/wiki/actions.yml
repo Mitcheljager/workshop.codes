@@ -4085,7 +4085,7 @@ EnableTextChat:
   en-US: Enable Text Chat
 
 DisableTextChat:
-  description: Disables Text Chat for one or more Players until reenabled
+  description: Disables Text Chat for one or more Players until reenabled.
   args:
   - name: Player
     description: The Player or Players who will have their Text Chat disabled.
@@ -4103,7 +4103,7 @@ EnableVoiceChat:
   en-US: Enable Voice Chat
 
 DisableVoiceChat:
-  description: Disables Voice Chat for one or more Players until reenabled
+  description: Disables Voice Chat for one or more Players until reenabled.
   args:
   - name: Player
     description: The Player or Players who will have their Voice Chat disabled.
@@ -4162,7 +4162,7 @@ RemovePlayer:
   en-US: Remove Player
 
 StartForcingDummyBotName:
-  description: Starts forcing the name for the specified Player or Players
+  description: Starts forcing the name for the specified Player or Players.
   args:
   - name: Player
     description: The Player whose name will be forced.

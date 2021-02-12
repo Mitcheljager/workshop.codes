@@ -49,6 +49,11 @@
     background: $bg-dark;
   }
 
+  &--dark {
+    color: $white;
+    background: $bg-darker;
+  }
+
   &--danger {
     background: $red;
   }

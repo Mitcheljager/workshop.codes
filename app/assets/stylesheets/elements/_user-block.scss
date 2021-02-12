@@ -1,4 +1,4 @@
-.profile-block {
+.user-block {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,19 +17,9 @@
   .simple-view & {
     color: $text-color;
   }
-
-  img,
-  svg {
-    height: 36px;
-
-    @media (min-width: 1000px) {
-      height: 24px;
-      margin-top: 4px;
-    }
-  }
 }
 
-.profile-block__action {
+.user-block__action {
   display: inline-block;
   padding: .425em .5em;
   border-radius: $border-radius;
@@ -49,7 +39,7 @@
   }
 }
 
-.profile-block__create {
+.user-block__create {
   margin-top: $margin / 2;
   margin-bottom: $margin / 2;
 

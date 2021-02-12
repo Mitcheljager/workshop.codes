@@ -1,7 +1,7 @@
 .date-range {
   position: relative;
   height: 1.5rem;
-  width: 160px;
+  width: 140px;
   user-select: none;
 }
 
@@ -22,7 +22,7 @@
   }
 
   &:last-of-type {
-    transform: translateX(160px - 16px);
+    transform: translateX(140px - 16px);
 
     .date-range__label {
       left: -.25rem;

@@ -155,18 +155,9 @@
   font-size-adjust: 0.52;
 
   @media (min-width: 1000px) {
-    font-size: 22px;
+    font-size: clamp(22px, 2vw, 28px);
+    margin-right: clamp($margin / 8, 1.25vw, $margin / 2);
     margin-bottom: 0;
-    margin-right: $margin / 4;
-  }
-
-  @media (min-width: 1300px) {
-    font-size: 24px;
-  }
-
-  @media (min-width: 1400px) {
-    font-size: 28px;
-    margin-right: $margin / 2;
   }
 
   &:last-child {

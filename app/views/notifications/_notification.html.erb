@@ -1,10 +1,6 @@
-<%= link_to notification.go_to, class: "notifications__item" do %>
-  <div class="notifications__item-content">
-    <%= markdown(notification.content) %>
-    <%= tag.div "View", class: "notifications__action" if notification.go_to.present? %>
-  </div>
+<div class="notifications__item">
+  <small class="text-dark" title="<%= notification.created_at %>"><%= time_ago_in_words(notification.created_at) %> ago</small>
 
-  <div class="notifications__item-tray">
-    <span title="<%= notification.created_at %>">Received <%= time_ago_in_words(notification.created_at) %> ago</span>
-  </div>
-<% end %>
+  <%= markdown(notification.content) %>
+  <%= link_to "View", notification.go_to, class: "button button--small button--thin button--dark mt-1/8" if notification.go_to.present? %>
+</div>
