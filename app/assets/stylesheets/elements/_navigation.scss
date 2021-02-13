@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
 
-  @media (min-width: 1000px) {
+  @include media-min(mbl) {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -26,7 +26,7 @@
   font-size: 21px;
   font-size-adjust: 0.52;
 
-  @media (min-width: 1000px) {
+  @include media-min(mbl) {
     font-size: clamp(22px, 2vw, 28px);
     margin-right: clamp($margin / 8, 1.25vw, $margin / 2);
     margin-bottom: 0;
@@ -91,7 +91,7 @@
     margin-left: 1rem;
   }
 
-  @media (min-width: 1000px) {
+  @include media-min(mbl) {
     display: none;
   }
 }

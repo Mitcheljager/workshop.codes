@@ -7,7 +7,7 @@
   font-size: $font-size-small;
   color: rgba(white, .75);
 
-  @media (min-width: 1000px) {
+  @include media-min(mbl) {
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 0;
@@ -43,7 +43,7 @@
   margin-top: $margin / 2;
   margin-bottom: $margin / 2;
 
-  @media (min-width: 1000px) {
+  @include media-min(mbl) {
     margin-top: 0;
     margin-bottom: 0;
   }
