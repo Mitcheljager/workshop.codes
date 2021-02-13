@@ -5,16 +5,16 @@
   <% end %>
 
   <div class="header__content" data-role="navigation">
-    <nav class="header__navigation">
-      <%= link_to t("navigation.recent"), posts_path(1), class: "header__item #{ "header__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
-      <%= link_to t("navigation.on_fire"), on_fire_path, class: "header__item #{ "header__item--active" if action_name == "on_fire" }" %>
-      <%= link_to t("navigation.wiki"), wiki_root_path, class: "header__item #{ "header__item--active" if is_wiki? }" %>
-      <%= link_to inline_svg_tag("discord.svg"), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "header__item mt-1/4 lg:mt-1/8", aria: { label: "Join the Workhsop.codes Discord" } %>
+    <nav class="navigation">
+      <%= link_to t("navigation.recent"), posts_path(1), class: "navigation__item #{ "navigation__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
+      <%= link_to t("navigation.on_fire"), on_fire_path, class: "navigation__item #{ "navigation__item--active" if action_name == "on_fire" }" %>
+      <%= link_to t("navigation.wiki"), wiki_root_path, class: "navigation__item #{ "navigation__item--active" if is_wiki? }" %>
+      <%= link_to inline_svg_tag("discord.svg"), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "navigation__item mt-1/4 mbl:mt-1/8", aria: { label: "Join the Workhsop.codes Discord" } %>
     </nav>
 
     <%= render "user_block" %>
 
-    <%= link_to "✕", "#", class: "header__navigation-close", data: { action: "toggle-navigation" } %>
+    <%= link_to "✕", "#", class: "navigation-close", data: { action: "toggle-navigation" } %>
   </div>
 
   <div class="header__search" data-role="search">
@@ -25,5 +25,5 @@
   <%= link_to t("navigation.create"), current_user.present? ? new_post_path : login_path, class: "header__create button button--pill" %>
 
   <%= link_to inline_svg_tag("icons/icon-search.svg", height: 24), "#", class: "header__search-trigger", data: { action: "toggle-search" } %>
-  <%= link_to "☰", "#", class: "header__navigation-trigger", data: { action: "toggle-navigation" } %>
+  <%= link_to "☰", "#", class: "navigation-trigger", data: { action: "toggle-navigation" } %>
 </header>

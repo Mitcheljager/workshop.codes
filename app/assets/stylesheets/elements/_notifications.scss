@@ -89,7 +89,7 @@
     path {
       fill: $pure-white;
 
-      @media (min-width: 1000px) {
+      @include media-min(mbl) {
         fill: $bg-darker;
       }
     }
@@ -108,7 +108,7 @@
   path {
     fill: $white;
     
-    @media (min-width: 1000px) {
+    @include media-min(mbl) {
       fill: $bg-dark;
     }
   }
