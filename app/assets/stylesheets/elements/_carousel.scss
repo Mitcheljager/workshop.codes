@@ -37,10 +37,14 @@
 }
 
 .carousel__actions {
-  display: flex;
+  display: none;
   position: absolute;
   top: $margin / 4;
   right: $margin / 4;
+
+  .carousel__item:hover & {
+    display: flex;
+  }
 
   a {
     margin-right: $margin / 8;

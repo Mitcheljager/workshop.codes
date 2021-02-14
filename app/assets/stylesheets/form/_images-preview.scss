@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: $margin / 2.5;
+  width: 100%;
 
   @include media-min(sm) {
     grid-template-columns: repeat(6, 1fr);
@@ -14,6 +15,7 @@
 
   &:not(:empty) {
     margin-top: $margin / 2;
+    min-height: $margin * 2;
 
     &::before {
       content: "Drag images to change their order";
@@ -82,8 +84,11 @@
 .images-preview__progress {
   display: flex;
   justify-content: flex-start;
+  width: 100%;
   align-items: center;
   padding: $margin / 4;
+  border: 1px solid $border-color;
+  aspect-ratio: 1/1;
 }
 
 .images-preview__progress-bar {

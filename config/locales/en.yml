@@ -147,12 +147,12 @@ en:
         title: Images
         label: Include image (or video) banner
         help_html: |
-          <strong>Include an image (or video) at the top of your post.</strong> If you add more than 1 image it turns in to an image slider. All images are resized to a 900x500 format. <br>
+          <strong>Include an image (or video) at the top of your post.</strong> If you add more than 1 image it turns in to an image slider. All images are displayed in a 900x500 format. <br>
           Alternatively you can use a 3rd party (Imgur) to add images to your description in the next step.<br>
           <strong>The first image will be your Thumbnail.</strong>
         dropzone:
           label: Drop (or paste) images here to add them to your post
-          help: Images will be processed to a 900x500 format, regardless of their original size
+          help: Images will be displayed in a 900x500 format (max 2MB per image, jpeg/png only)
         video:
           label: Youtube video
           help_html: "Include a video as the first item in the carousel. Enter only the YouTube video ID, not the full url. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)"

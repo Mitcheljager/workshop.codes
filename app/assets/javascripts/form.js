@@ -79,55 +79,18 @@ function readImage(file) {
     image.src = event.target.result
 
     image.onload = () => {
-      drawImageOnCanvas(image)
+      const uploader = new Uploader(file, "images")
+
+      uploader.upload().then(() => {
+        const interval = setInterval(() => {
+          if (uploader.blob == "") return
+          clearInterval(interval)
+
+          drawAndRenderThumbnail(image, uploader.blob.id)
+        }, 100)
+      })
     }
   }
-}
-
-function drawImageOnCanvas(image) {
-  const canvas = document.createElement("canvas")
-  const ctx = canvas.getContext("2d")
-
-  canvas.width = 900
-  canvas.height = 500
-
-  const imageSize = getCoverSize(
-    image.naturalWidth,
-    image.naturalHeight,
-    canvas.width,
-    canvas.height,
-    0.5,
-    0.5
-  )
-
-  ctx.drawImage(
-    image,
-    imageSize.offsetLeft,
-    imageSize.offsetTop,
-    imageSize.width,
-    imageSize.height
-  )
-
-  ctx.canvas.toBlob(blob => {
-    const filename =  Math.random().toString(36).substring(2, 15) + ".jpeg"
-    const file = new File([blob], filename, {
-      type: "image/jpeg",
-      quality: 0.95,
-      lastModified: Date.now()
-    })
-
-    const uploader = new Uploader(file, "images")
-
-    uploader.upload().then(() => {
-      const interval = setInterval(() => {
-        if (uploader.blob == "") return
-        clearInterval(interval)
-
-        drawAndRenderThumbnail(image, uploader.blob.id)
-      }, 100)
-    })
-
-  }, "image/jpeg", 0.95)
 }
 
 function drawAndRenderThumbnail(image, imageId) {

@@ -1,36 +1,50 @@
-<div class="carousel">
-  <div class="carousel__wrapper">
-    <div data-role="carousel">
-      <% if @post.carousel_video.present? %>
-        <div class="carousel__item">
-          <%= render "carousel_video" %>
-        </div>
-      <% end %>
+<% begin %>
+  <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
+    <%= render "carousel_item", image: @ordered_images.first, index: 0 %>
+  <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
+    <div class="carousel">
+      <div class="carousel__wrapper">
+        <div data-role="carousel">
+          <% if @post.carousel_video.present? %>
+            <div class="carousel__item">
+              <%= render "carousel_video" %>
+            </div>
+          <% end %>
 
-      <% @ordered_images.each_with_index do |image, index| %>
-        <div class="carousel__item">
-          <picture>
-            <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= ENV["CDN"] + image.variant(quality: 95).processed.key %>" type="image/jpeg">
-            <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [450, 250]).processed.key %>" type="image/jpeg">
-            <img <%= "data-" if index >= 2 %>src="<%= ENV["CDN"] + image.variant(quality: 95).processed.key %>" aria-label="Image for '<%= @post.title %>'" width="900" height="500" />
-          </picture>
+          <% @ordered_images.each_with_index do |image, index| %>
+            <%= render "carousel_item", image: image, index: index %>
+          <% end %>
         </div>
-      <% end %>
+      </div>
+
+      <div class="carousel__navigation">
+        <% if @post.carousel_video.present? %>
+          <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="0">
+            <div class="carousel__navigation-item-video-overlay"></div>
+            <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg" %>
+          </div>
+        <% end %>
+
+        <% @ordered_images.each_with_index do |image, index| %>
+          <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>">
+            <%= image_tag ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [120, 120]).processed.key, aria: { label: "Thumbnail image for '#{ @post.title }'" }, height: 120, width: 120 %>
+          </div>
+        <% end %>
+      </div>
     </div>
+  <% elsif !@ordered_images.present? && @post.carousel_video.present? %>
+    <div>
+      <%= render "carousel_video" %>
+    </div>
+  <% end %>
+<% rescue %>
+  <p><small><em>Images are temporarily unavailable.</em></small></p>
+<% end %>
+
+<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="carousel-modal">
+  <div class="modal__content p-0">
+    <%= image_tag "//:0", data: { gallery: "carousel-modal" }, class: "img-fluid" %>
   </div>
 
-  <div class="carousel__navigation">
-    <% if @post.carousel_video.present? %>
-      <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="0">
-        <div class="carousel__navigation-item-video-overlay"></div>
-        <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg" %>
-      </div>
-    <% end %>
-
-    <% @ordered_images.each_with_index do |image, index| %>
-      <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>">
-        <%= image_tag ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [120, 120]).processed.key, aria: { label: "Thumbnail image for '#{ @post.title }'" }, height: 120, width: 120 %>
-      </div>
-    <% end %>
-  </div>
+  <div class="modal__backdrop" data-role="modal-backdrop"></div>
 </div>

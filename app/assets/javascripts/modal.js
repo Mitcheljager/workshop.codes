@@ -18,7 +18,12 @@ document.addEventListener("turbolinks:load", function() {
 function showModal(event) {
   const modal = document.querySelector(`[data-modal="${ this.dataset.target }"]`)
 
-  if (modal) modal.style.display = "flex"
+  if (modal) {
+    modal.style.display = "flex"
+
+    document.body.style.borderRight = `${ getScrollbarWidth() }px solid transparent`
+    document.body.style.overflowY = "hidden"
+  }
 }
 
 function closeModal(event) {
@@ -28,6 +33,9 @@ function closeModal(event) {
 
   if (activeModal.dataset.hideOnClose != undefined) {
     activeModal.style.display = "none"
+
+    document.body.style.borderRight = 0
+    document.body.style.overflowY = "auto"
   } else {
     activeModal.remove()
   }
@@ -35,4 +43,8 @@ function closeModal(event) {
 
 function closeModalOnKeyDown(event) {
   if (event.key === "Escape") closeModal()
+}
+
+function getScrollbarWidth() {
+  return window.innerWidth - document.body.offsetWidth
 }

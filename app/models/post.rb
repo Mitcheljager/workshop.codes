@@ -85,8 +85,8 @@ class Post < ApplicationRecord
   validates :heroes, presence: true, array_name_part_of: { array: heroes }
   validates :maps, presence: true, array_name_part_of: { array: maps }
   validates :version, length: { maximum: 20 }
-  validates :images, content_type: ["image/jpeg"],
-                     size: { less_than: 0.5.megabytes }
+  validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
+                     size: { less_than: 2.megabytes }
 
   def self.search(query)
     __elasticsearch__.search({

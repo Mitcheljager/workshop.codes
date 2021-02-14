@@ -1,0 +1,17 @@
+<div class="carousel__item">
+  <picture>
+    <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [900, 500]).processed.key %>" type="image/jpeg">
+    <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [450, 250]).processed.key %>" type="image/jpeg">
+    <img <%= "data-" if index >= 2 %>src="<%= ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [900, 500]).processed.key %>" aria-label="Image for '<%= @post.title %>'" width="900" height="500" />
+  </picture>
+
+  <div class="carousel__actions">            
+    <div
+      class="button button--small button--secondary"
+      data-action="show-modal set-gallery"
+      data-target="carousel-modal"
+      data-url="<%= ENV["CDN"] + image.variant(quality: 95).processed.key %>">
+      View original size
+    </div>
+  </div>
+</div>
