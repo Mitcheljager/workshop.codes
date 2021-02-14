@@ -1,99 +1,147 @@
 <%= render "admin/navigation" %>
 
-<div class="heading mt-1/2 mb-0">
-  <h2><strong><%= @user.username %></strong> <small>(#<%= @user.id %>)</small></h2>
-</div>
+<div class="wrapper" data-role="tabs">
+  <div class="heading mt-1/2 mb-1/2">
+    <h2><strong><%= @user.username %></strong> <small>(#<%= @user.id %>)</small></h2>
+  </div>
 
-<div class="well well--dark">
-  <%= form_for @user, url: admin_user_path, method: :patch do |form| %>
-    <% if flash[:alert] %>
-      <div class="warning mt-0 mb-1/4"><%= flash[:alert] %></div>
-    <% end %>
+  <% if flash[:alert] %>
+    <div class="warning mt-0 mb-1/4"><%= flash[:alert] %></div>
+  <% end %>
 
-    <%= form.label :level, class: "form-label" %>
-    <%= form.select :level, User.levels.keys.to_a, {}, class: "form-select w-auto" %>
+  <nav class="tabs mb-1/2">
+    <%= link_to "Status", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
+    <%= link_to "Notifications <small>#{ @user.notifications.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "notifications" } %>
+    <%= link_to "Badges <small>#{ @user.badges.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
+    <%= link_to "Posts <small>#{ @user.posts.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "posts" } %>
+    <%= link_to "Comments <small>#{ @user.comments.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "comments" } %>
+    <%= link_to "Activity <small>#{ @user.activities.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "activity" } %>
+  </nav>
 
-    <div class="checkbox mt-1/2">
-      <%= form.check_box :verified %>
-      <%= form.label :verified, "Verified" %>
+  <div class="tabs-content tabs-content--active" data-tab="status">
+    <div class="well well--dark">
+      <%= form_for @user, url: admin_user_path, method: :patch do |form| %>
+        <%= form.label :level, class: "form-label" %>
+        <%= form.select :level, User.levels.keys.to_a, {}, class: "form-select w-auto" %>
+
+        <div class="checkbox mt-1/2">
+          <%= form.check_box :verified %>
+          <%= form.label :verified, "Verified" %>
+        </div>
+
+        <% if @user.verified? %>
+          <div class="mt-1/8">
+            Verified nice url: <%= @user.nice_url %>
+          </div>
+        <% end %>
+
+        <div class="mt-1/4">
+          <%= form.submit class: "button button--small button--secondary" %>
+        </div>
+      <% end %>
     </div>
 
-    <% if @user.verified? %>
-      <div class="mt-1/8">
-        Verified nice url: <%= @user.nice_url %>
+    <table class="w-auto mt-1/2">
+      <tr><td>Posts</td> <td><%= @user.posts.size %></td></tr>
+      <tr><td>Favorites</td> <td><%= @user.favorites.size %></td></tr>
+      <tr><td>Comments</td> <td><%= @user.comments.size %></td></tr>
+      <tr><td>Collections</td> <td><%= @user.collections.size %></td></tr>
+      <tr><td>Notifications</td> <td><%= @user.notifications.size %></td></tr>
+      <tr><td>Activities</td> <td><%= @user.activities.size %></td></tr>
+      <tr><td>Remember tokens</td> <td><%= @user.remember_tokens.size %></td></tr>
+      <tr><td>Forgot password tokens</td> <td><%= @user.forgot_password_tokens.size %></td></tr>
+    </table>
+  </div>
+
+  <div class="tabs-content" data-tab="notifications">
+    <div class="well well--dark block">
+      <h4 class="mt-0">Send this user a notifcation</h4>
+
+      <%= form_tag :admin_users_send_notification do %>
+        <div class="form-group mb-1/4">
+          <%= hidden_field :user_id, "", value: @user.id %>
+          <%= label_tag "Notification content (supports markdown)" %>
+          <%= text_area_tag :notification_content, "", class: "form-input mt-1/8" %>
+        </div>
+
+        <%= submit_tag "Send notification", class: "button button--secondary" %>
+      <% end %>
+    </div>
+
+    <h3 class="mt-1/2">Latest 10 notifications</h3>
+
+    <% @user.notifications.order(created_at: :desc).limit(10).each do |notification| %>
+      <div class="well well--dark block mb-1/8 p-1/4">
+        <em><%= time_ago_in_words(notification.created_at) %></em> -
+        <span class="text-white"><%= notification.content %></span>
       </div>
     <% end %>
+  </div>
 
-    <div class="mt-1/4">
-      <%= form.submit class: "button button--small button--secondary" %>
-    </div>
-  <% end %>
-</div>
+  <div class="tabs-content" data-tab="badges">
+    <div class="well well--dark block">
+      <h4 class="mt-0">Badges</h4>
 
-<div class="well well--dark block mt-1/1">
-  <h4 class="mt-0">Send this user a notifcation</h4>
+      <div class="well block mb-1/2">
+        <div>
+          <% if @user.badges.any? %>
+            <% @user.badges.each do |badge| %>
+              <%= render "badges/badge", badge: badge, large: true %>
+            <% end %>
+          <% else %>
+            <em>No badges</em>
+          <% end %>
+        </div>
+      </div>
 
-  <%= form_tag :admin_users_send_notification do %>
-    <div class="form-group mb-1/4">
-      <%= hidden_field :user_id, "", value: @user.id %>
-      <%= label_tag "Notification content (supports markdown)" %>
-      <%= text_area_tag :notification_content, "", class: "form-input mt-1/8" %>
-    </div>
+      <%= form_for :badge, url: badges_path do |form| %>
+        <%= form.hidden_field :user_id, value: @user.id %>
 
-    <%= submit_tag "Send notification", class: "button button--secondary" %>
-  <% end %>
-</div>
+        <%= form.label :badge_id, class: "form-label" %>
+        <%= form.select :badge_id, badges.map { |b| ["#{ b["en"]["label"] } - #{ b["en"]["description"] }", b["id"]] }, {}, class: "form-select w-auto" %>
 
-<div class="well well--dark block mt-1/1">
-  <h4 class="mt-0">Badges</h4>
+        <br />
 
-  <div class="well block mb-1/2">
-    <div>
-      <% if @user.badges.any? %>
-        <% @user.badges.each do |badge| %>
-          <%= render "badges/badge", badge: badge, large: true %>
-        <% end %>
-      <% else %>
-        <em>No badges</em>
+        <%= submit_tag "Give badge", class: "button button--secondary mt-1/8" %>
       <% end %>
     </div>
   </div>
 
-  <%= form_for :badge, url: badges_path do |form| %>
-    <%= form.hidden_field :user_id, value: @user.id %>
+  <div class="tabs-content" data-tab="posts">
+    <h3 class="mt-0">Posts by <%= @user.username %></h3>
 
-    <%= form.label :badge_id, class: "form-label" %>
-    <%= form.select :badge_id, badges.map { |b| ["#{ b["en"]["label"] } - #{ b["en"]["description"] }", b["id"]] }, {}, class: "form-select w-auto" %>
+    <table class="w-auto">
+      <% @user.posts.each do |post| %>
+        <tr>
+          <td><%= link_to post.id, admin_post_path(post.id) %></td>
+          <td><strong><%= link_to post.code, post_path(post.code) %></strong></td>
+          <td><%= post.title %><td>
+        </tr>
+      <% end %>
 
-    <br />
+      <tr><td><%= "No posts" if @user.posts.none? %></td></tr>
+    </table>
+  </div>
 
-    <%= submit_tag "Give badge", class: "button button--secondary mt-1/8" %>
-  <% end %>
+  <div class="tabs-content" data-tab="comments">
+    <h3 class="mt-0">Latest 20 comments</h3>
+
+    <% @user.comments.order(created_at: :desc).limit(20).each do |comment| %>
+      <div class="well well--dark block mb-1/8 p-1/4">
+        <em><%= time_ago_in_words(comment.created_at) %></em>
+        <div class="text-white"><%= markdown(comment.content) %></div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tabs-content" data-tab="activity">
+    <h3 class="mt-0">Latest 20 activity</h3>
+
+    <% @user.activities.order(created_at: :desc).limit(20).each do |activity| %>
+      <div class="well well--dark block mb-1/8 p-1/4">
+        <em><%= time_ago_in_words(activity.created_at) %></em> -
+        <span class="text-white"><%= activity.content_type %></span>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<hr>
-
-<table class="w-auto mt-1/1">
-  <tr><td>Posts</td> <td><%= @user.posts.size %></td></tr>
-  <tr><td>Favorites</td> <td><%= @user.favorites.size %></td></tr>
-  <tr><td>Comments</td> <td><%= @user.comments.size %></td></tr>
-  <tr><td>Collections</td> <td><%= @user.collections.size %></td></tr>
-  <tr><td>Notifications</td> <td><%= @user.notifications.size %></td></tr>
-  <tr><td>Activities</td> <td><%= @user.activities.size %></td></tr>
-  <tr><td>Remember tokens</td> <td><%= @user.remember_tokens.size %></td></tr>
-  <tr><td>Forgot password tokens</td> <td><%= @user.forgot_password_tokens.size %></td></tr>
-</table>
-
-
-<h3 class="mt-1/1">Posts by <%= @user.username %></h3>
-
-<table class="w-auto">
-  <% @user.posts.each do |post| %>
-    <tr>
-      <td><strong><%= link_to post.code, post_path(post.code) %></strong></td>
-      <td><%= link_to post.title, admin_post_path(post.id) %><td>
-    </tr>
-  <% end %>
-
-  <tr><td><%= "No posts" if @user.posts.none? %></td></tr>
-</table>

@@ -30,7 +30,12 @@ class Admin::UsersController < Admin::BaseController
   def send_notification
     @user = User.find(params[:user_id]).first
 
-    if Notification.create(user_id: @user.id, content: params[:notification_content])
+    @notification = Notification.new(user_id: @user.id, content: params[:notification_content])
+
+    if @notification.save
+      create_activity(:admin_send_notification, { user_id: @notification.user_id, content: @notification.content })
+
+      flash[:alert] = "Notification created"
       redirect_to admin_user_path(@user.id)
     end
   end

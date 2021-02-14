@@ -80,18 +80,18 @@
 
 <h3>Admin activity log</h3>
 
-<% Activity.where(content_type: [:admin_destroy_post, :admin_update_user])
+<% Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification])
            .order(created_at: :desc)
            .limit(50)
            .each do |activity| %>
-  <div class="well mb-1/8">
-    <div class="mr-1/2">
+  <div class="well block mb-1/8">
+    <div class="mb-1/4 text-white">
       <small><%= time_ago_in_words(activity.created_at) %> ago &nbsp;</small>
       <strong><%= activity.user.username %></strong> - <%= activity.content_type %>
     </div>
 
     <div>
-      <strong>Relevant data:</strong> <%= activity.properties %>
+      <strong>Relevant data:</strong> <%= activity.properties.to_json %>
     </div>
   </div>
 <% end %>

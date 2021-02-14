@@ -9,8 +9,10 @@ class BadgesController < ApplicationController
     @user = User.find(badge_params[:user_id])
 
     if create_badge(badge_id: badge_params[:badge_id], user: @user)
-      redirect_to admin_user_path(badge_params[:user_id])
+      create_activity(:admin_create_badge, { user_id: @user.id, badge: badge_params[:badge_id] })
+      
       flash[:alert] = "Badge created"
+      redirect_to admin_user_path(badge_params[:user_id])
     end
   end
 

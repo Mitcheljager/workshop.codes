@@ -86,7 +86,6 @@ Rails.application.routes.draw do
     get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"
     post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
 
-    resources :activities, only: [:index], concerns: :paginatable
     resources :reports, only: [:create, :new, :destroy, :update]
     resources :notifications, only: [:index], concerns: :paginatable
     get "unread-notifications", to: "notifications#get_unread_notifications"
