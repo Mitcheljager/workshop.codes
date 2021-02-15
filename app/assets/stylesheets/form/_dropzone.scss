@@ -26,3 +26,28 @@
     color: $white;
   }
 }
+
+.textarea-dropzone--is-active {
+  position: relative;
+
+  &::after {
+    content: "Drop images to upload";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    background: rgba($bg-dark, .75);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px dashed $text-color;
+    z-index: 2;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+}

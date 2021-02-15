@@ -26,9 +26,6 @@ function bindDropzone() {
   element.removeEventListener("drop", dropzoneDrop)
   element.addEventListener("drop", dropzoneDrop)
 
-  document.removeEventListener("paste", pasteImage)
-  document.addEventListener("paste", pasteImage)
-
   const removeElements = document.querySelectorAll("[data-action='remove-image']")
 
   if (removeElements.length) {

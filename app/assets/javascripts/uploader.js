@@ -1,16 +1,19 @@
 class Uploader {
-  constructor(file, name) {
+  constructor(file, name, uploadType = "carousel", randomId = "") {
     this.file = file
     this.name = name
     this.blob = ""
     this.progressElement = document.createElement("div")
+    this.uploadType = uploadType
+    this.randomId = randomId
+    this.progress = 0
   }
 
   async upload() {
     const element = document.querySelector("input[type='file'][name*='" + this.name + "']")
     const upload = new ActiveStorage.DirectUpload(this.file, element.dataset.directUploadUrl, this)
 
-    this.createProgressElement()
+    if (this.uploadType == "carousel") this.createProgressElement()
 
     upload.create((error, blob) => {
       if (error) {
@@ -23,7 +26,7 @@ class Uploader {
         hiddenField.setAttribute("value", blob.signed_id)
         hiddenField.name = element.name
 
-        document.querySelector("[data-role~='post-form']").appendChild(hiddenField)
+        element.closest("form").appendChild(hiddenField)
       }
     })
   }
@@ -44,10 +47,13 @@ class Uploader {
   }
 
   directUploadDidProgress(event) {
-    const progressPercentage = Math.round((100 / event.total) * event.loaded)
-    const progressBarElement = this.progressElement.querySelector(".images-preview__progress-bar")
-    progressBarElement.style.width = progressPercentage + "%"
+    this.progress = Math.round((100 / event.total) * event.loaded)
 
-    if (progressPercentage == 100) this.progressElement.remove()
+    if (this.uploadType == "carousel") {
+      const progressBarElement = this.progressElement.querySelector(".images-preview__progress-bar")
+      progressBarElement.style.width = this.progress + "%"
+  
+      if (this.progress == 100) this.progressElement.remove()
+    }
   }
 }

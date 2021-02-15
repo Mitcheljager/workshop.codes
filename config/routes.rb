@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "sitemap", to: "sitemaps#sitemap"
   get "privacy-policy", to: "pages#privacy_policy"
 
+  get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
+
   namespace :admin do
     root to: "base#index"
 

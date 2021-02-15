@@ -25,6 +25,8 @@
     </div>
   <% end %>
 
+  <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
+
   <div class="form-group">
     <%= form.label :title, class: "form-label" %>
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>

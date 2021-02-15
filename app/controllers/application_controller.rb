@@ -58,6 +58,18 @@ class ApplicationController < ActionController::Base
     @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(18)
   end
 
+  def active_storage_blob_variant_url
+    image = ActiveStorage::Blob.find_by_key(params[:key])
+
+    if image.present?
+      url = ENV["CDN"] + image.variant(quality: 95, resize_to_limit: [900, 500]).processed.key
+
+      render json: url, layout: false
+    else
+      render json: "Something went wrong", status: "500", layout: false
+    end
+  end
+
   private
 
   def redirect_non_www

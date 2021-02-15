@@ -24,7 +24,7 @@ function sendParseRequest(descriptionElement, textareaElement) {
 
   fetch("/parse-markdown", {
     method: "post",
-    body: JSON.stringify({ description: descriptionValue }),
+    body: JSON.stringify({ post: { description: descriptionValue } }),
     headers: {
       "Content-Type": "application/json",
       "X-CSRF-Token": Rails.csrfToken()

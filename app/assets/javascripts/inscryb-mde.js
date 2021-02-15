@@ -1,4 +1,5 @@
 //= require inscrybmde/dist/inscrybmde.min.js
+//= require inscrybe-mde-paste-image
 
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-role~='simple-mde']")
@@ -60,32 +61,7 @@ document.addEventListener("turbolinks:load", function() {
         {
           name: "hero-icon",
           action: function customFunction(editor) {
-            const cm = editor.codemirror
-            const button = editor.gui.toolbar.querySelector(".fa-hero-icon").closest("button")
-
-            button.classList.toggle("dropdown-open")
-
-            if (button.classList.contains("dropdown-open")) {
-              const dropdownElement = document.createElement("div")
-              dropdownElement.classList.add("editor-dropdown")
-
-              const heroes =  ["Ana", "Ashe", "Baptiste", "Bastion", "Brigitte", "D.Va", "Doomfist", "Echo", "Genji", "Hanzo", "Junkrat", "Lúcio", "McCree", "Mei", "Mercy", "Moira", "Orisa", "Pharah", "Reaper", "Reinhardt", "Roadhog", "Sigma", "Soldier: 76", "Sombra", "Symmetra", "Torbjörn", "Tracer", "Widowmaker", "Winston", "Wrecking Ball", "Zarya", "Zenyatta"]
-              heroes.forEach(hero => {
-                const heroElement = document.createElement("div")
-                heroElement.classList.add("editor-dropdown__item")
-                heroElement.innerText = hero
-
-                heroElement.addEventListener("click", () => {
-                  cm.replaceSelection(`[hero ${ hero }]`)
-                })
-
-                dropdownElement.append(heroElement)
-              })
-
-              button.append(dropdownElement)
-            } else {
-              button.querySelector(".editor-dropdown").remove()
-            }
+            renderHeroIconSelect(editor)
           },
           className: "fa fa-hero-icon",
           title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
@@ -94,5 +70,38 @@ document.addEventListener("turbolinks:load", function() {
         "fullscreen"
       ]
     })
+
+    mde.codemirror.on("paste", (editor, event) => {
+      textareaPasteImage(event, editor)
+    })
   })
 })
+
+function renderHeroIconSelect(editor) {
+  const cm = editor.codemirror
+  const button = editor.gui.toolbar.querySelector(".fa-hero-icon").closest("button")
+
+  button.classList.toggle("dropdown-open")
+
+  if (button.classList.contains("dropdown-open")) {
+    const dropdownElement = document.createElement("div")
+    dropdownElement.classList.add("editor-dropdown")
+
+    const heroes =  ["Ana", "Ashe", "Baptiste", "Bastion", "Brigitte", "D.Va", "Doomfist", "Echo", "Genji", "Hanzo", "Junkrat", "Lúcio", "McCree", "Mei", "Mercy", "Moira", "Orisa", "Pharah", "Reaper", "Reinhardt", "Roadhog", "Sigma", "Soldier: 76", "Sombra", "Symmetra", "Torbjörn", "Tracer", "Widowmaker", "Winston", "Wrecking Ball", "Zarya", "Zenyatta"]
+    heroes.forEach(hero => {
+      const heroElement = document.createElement("div")
+      heroElement.classList.add("editor-dropdown__item")
+      heroElement.innerText = hero
+
+      heroElement.addEventListener("click", () => {
+        cm.replaceSelection(`[hero ${ hero }]`)
+      })
+
+      dropdownElement.append(heroElement)
+    })
+
+    button.append(dropdownElement)
+  } else {
+    button.querySelector(".editor-dropdown").remove()
+  }
+}
