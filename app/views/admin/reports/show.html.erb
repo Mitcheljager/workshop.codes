@@ -16,9 +16,9 @@
   <% if @report.reported_user.present? %>
     <div class="mb-1/2">
       <strong>Reported Content Author</strong>:<br>
-      <%= @report.user.username %>
-      <small>(<%= @report.user.id %>)</small> -
-      <em><%= link_to "view user", admin_user_path(@report.user_id) %></em>
+      <%= @report.reported_user.username %>
+      <small>(<%= @report.reported_user.id %>)</small> -
+      <em><%= link_to "view user", admin_user_path(@report.reported_user.id) %></em>
     </div>
   <% end %>
 
