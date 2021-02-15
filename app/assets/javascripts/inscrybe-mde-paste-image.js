@@ -10,7 +10,7 @@ class InscrybeInsertImage {
     this.readFiles(items)
   }
 
-  readFiles(files, editor) {
+  readFiles(files) {
     if (files[0].kind === "file") {
       this.file = files[0].getAsFile()
 
@@ -90,26 +90,14 @@ class InscrybeInsertImage {
         clearInterval(interval)
 
         if (uploader.progress == 100) {
-          this.getBlobVariantUrl(uploader.blob.key)
+          const fetch = new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }`)
+          
+          fetch.get()
           .then(data => this.replaceMarkerWithImage(randomId, data))
           .catch(error => alert(error))
         }
       }, 100)
     })
-  }
-
-  async getBlobVariantUrl(key) {
-    const response = await fetch(`/active_storage_blob_variant_url/${ key }`, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": Rails.csrfToken()
-      },
-      credentials: "same-origin"
-    })
-
-    const data = await response.text()
-    return data
   }
 
   insertPlaceholderText(randomId) {

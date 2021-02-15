@@ -5,16 +5,7 @@ document.addEventListener("turbolinks:load", function() {
 })
 
 function getKoFiValue(element) {
-  fetch("/webhooks/get_ko_fi_value", {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
-  .then(data => {
+  new FetchRails("/webhooks/get_ko_fi_value").get().then(data => {
     const parsedData = parseInt(data)
     const max = parseInt(element.dataset.max)
     const labelElement = document.querySelector("[data-ko-fi-progress-label]")

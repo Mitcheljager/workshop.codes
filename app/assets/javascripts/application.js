@@ -24,6 +24,7 @@
 //= require debounce
 //= require difference-viewer
 //= require dropdown
+//= require fetch-rails
 //= require filter
 //= require gallery
 //= require get-comments

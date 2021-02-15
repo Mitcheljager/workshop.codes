@@ -19,17 +19,8 @@ function getPostAnalytics(element) {
   const target = parent.querySelector("[data-role~='chart']")
   target.insertAdjacentHTML("afterBegin", `<div class="chart__placeholder"><div class="spinner"></div></div>`)
 
-  fetch("/analytics/post", {
-    method: "post",
-    body: JSON.stringify({ type: element.value, id: element.dataset.postId }),
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
-  .then(data => {
+  new FetchRails("/analytics/post", { type: element.value, id: element.dataset.postId })
+  .post().then(data => {
     const parsedData = JSON.parse(data)
     target.querySelector(".chart__placeholder").remove()
 

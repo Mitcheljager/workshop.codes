@@ -17,16 +17,7 @@ function getNotifications(event) {
   if (this.dataset.loaded == "true") return
   this.dataset.loaded = "true"
 
-  fetch("/unread-notifications", {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
-  .then(data => {
+  new FetchRails("/unread-notifications").get().then(data => {
     showNotificationAlert(0)
     buildNotifications(data)
   })

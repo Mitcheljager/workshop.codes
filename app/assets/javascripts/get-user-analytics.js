@@ -19,17 +19,8 @@ function getUserAnalytics(element) {
   const target = document.querySelector("[data-role~='chart']")
   target.insertAdjacentHTML("afterBegin", `<div class="chart__placeholder"><div class="spinner"></div></div>`)
 
-  fetch("/analytics/user", {
-    method: "post",
-    body: JSON.stringify({ type: element.value }),
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
-  .then(data => {
+  new FetchRails("/analytics/user", { type: element.value })
+  .post().then(data => {
     const parsedData = JSON.parse(data)
     target.querySelector(".chart__placeholder").remove()
 

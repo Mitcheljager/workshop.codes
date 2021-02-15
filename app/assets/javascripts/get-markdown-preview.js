@@ -22,17 +22,8 @@ function sendParseRequest(descriptionElement, textareaElement) {
 
   descriptionElement.innerHTML = "Loading preview..."
 
-  fetch("/parse-markdown", {
-    method: "post",
-    body: JSON.stringify({ post: { description: descriptionValue } }),
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
-  .then(data => {
+  new FetchRails("/parse-markdown", { post: { description: descriptionValue } })
+  .post().then(data => {
     descriptionElement.innerHTML = data
   })
 }

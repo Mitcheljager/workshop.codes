@@ -14,17 +14,8 @@ function loadSnippet(event) {
 
   const id = this.dataset.id
 
-  fetch("/get-snippet", {
-    method: "post",
-    body: JSON.stringify({ id: id }),
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
-  .then(data => {
+  new FetchRails("/get-snippet", { id: id })
+  .post().then(data => {
     const element = document.querySelector("[data-role~='ide-content']")
     element.innerHTML = data
 

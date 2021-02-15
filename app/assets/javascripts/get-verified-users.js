@@ -14,16 +14,7 @@ function getVerifiedUsers(event) {
 
   this.dataset.authorsLoaded = true
 
-  fetch("/get-verified-users", {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
-  .then(data => {
+  new FetchRails("/get-verified-users").get().then(data => {
     const element = document.querySelector("[data-role='filter-authors']")
 
     element.innerHTML = data
