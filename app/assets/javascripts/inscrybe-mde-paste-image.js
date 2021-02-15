@@ -1,132 +1,138 @@
-function textareaPasteImage(event, editor) {
-  const items = (event.clipboardData || event.originalEvent.clipboardData).items
-  textareaReadFiles(items, editor)
-}
+class InscrybeInsertImage {
+  constructor(event, editor) {
+    this.event = event,
+    this.editor = editor,
+    this.file = ""
+  }
 
-function textareaReadFiles(files, editor) {
-  for (var i = 0; i < files.length; i++) {
-    if (files[i].kind === "file") {
-      const file = files[i].getAsFile()
+  paste() {
+    const items = (this.event.clipboardData || this.event.originalEvent.clipboardData).items
+    this.readFiles(items)
+  }
 
-      if (file.type == "image/png" || file.type == "image/jpg" || file.type == "image/jpeg") {
-        drawImageOnCanvas(editor, file)
+  readFiles(files, editor) {
+    if (files[0].kind === "file") {
+      this.file = files[0].getAsFile()
+
+      if (this.file.type == "image/png" || this.file.type == "image/jpg" || this.file.type == "image/jpeg") {
+        this.drawImageOnCanvas()
       }
     }
   }
-}
 
-function insertPlaceholderText(editor, randomId) {
-  const position = editor.getCursor()
+  drawImageOnCanvas() {
+    const reader = new FileReader()
+    reader.readAsDataURL(this.file)
 
-  const markerElement = document.createElement("span")
-  markerElement.classList.add("text-dark")
-  markerElement.innerText = "[Uploading image...]"
+    reader.onload = event => {
+      let image = new Image()
+      image.src = event.target.result
 
-  const marker = editor.setBookmark(position, { widget: markerElement })
-  marker.randomId = randomId
-}
+      image.onload = () => {
+        const canvas = document.createElement("canvas")
+        const ctx = canvas.getContext("2d")
 
-function drawImageOnCanvas(editor, file) {
-  const reader = new FileReader()
-  reader.readAsDataURL(file)
+        image = this.resizeImageToFit(image)
 
-  reader.onload = event => {
-    let image = new Image()
-    image.src = event.target.result
+        canvas.width = image.width
+        canvas.height = image.height
 
-    image.onload = () => {
-      const canvas = document.createElement("canvas")
-      const ctx = canvas.getContext("2d")
+        ctx.drawImage(
+          image, 0, 0,
+          image.width,
+          image.height
+        )
 
-      image = resizeImageToFit(image)
+        ctx.canvas.toBlob(blob => {
+          const filename =  Math.random().toString(36).substring(2, 15) + ".jpeg"
+          const renderedImage = new File([blob], filename, {
+            type: "image/jpeg",
+            quality: 0.95,
+            lastModified: Date.now()
+          })
 
-      canvas.width = image.width
-      canvas.height = image.height
-
-      ctx.drawImage(
-        image, 0, 0,
-        image.width,
-        image.height
-      )
-
-      ctx.canvas.toBlob(blob => {
-        const filename =  Math.random().toString(36).substring(2, 15) + ".jpeg"
-        const renderedImage = new File([blob], filename, {
-          type: "image/jpeg",
-          quality: 0.95,
-          lastModified: Date.now()
-        })
-
-        textareaUploadImage(editor, renderedImage)
-      }, "image/jpeg", 0.95)
-    }
-  }
-}
-
-function resizeImageToFit(image) {
-  if (image.width > image.height) {
-    if (image.width > 900) {
-      const ratio = (1 / image.width) * 900
-
-      image.width = 900
-      image.height = image.height * ratio
-    }
-  } else {
-    if (image.height > 500) {
-      const ratio = (1 / image.height) * 500
-
-      image.height = 500
-      image.width = image.width * ratio
-    }
-  }
-
-  return image
-}
-
-function textareaUploadImage(editor, image) {
-  const randomId = Math.random().toString().substr(2, 8)
-  const uploader = new Uploader(image, "images", "textarea", randomId)
-
-  insertPlaceholderText(editor, randomId)
-
-  uploader.upload().then(() => {
-    const interval = setInterval(() => {
-      if (uploader.blob == "") return
-
-      clearInterval(interval)
-
-      if (uploader.progress == 100) {
-        getBlobVariantUrl(uploader.blob.key)
-        .then(data => replaceMarkerWithImage(editor, randomId, data))
-        .catch(error => alert(error))
+          this.upload(renderedImage)
+        }, "image/jpeg", 0.95)
       }
-    }, 100)
-  })
-}
+    }
+  }
 
-async function getBlobVariantUrl(key) {
-  const response = await fetch(`/active_storage_blob_variant_url/${ key }`, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
+  resizeImageToFit(image) {
+    if (image.width > image.height) {
+      if (image.width > 900) {
+        const ratio = (1 / image.width) * 900
 
-  const data = await response.text()
-  return data
-}
+        image.width = 900
+        image.height = image.height * ratio
+      }
+    } else {
+      if (image.height > 500) {
+        const ratio = (1 / image.height) * 500
 
-function replaceMarkerWithImage(editor, randomId, url) {
-  const marker = editor.getAllMarks().find(m => m.randomId == randomId)
-              
-  const cursorPosition = editor.getCursor()
-  const position = marker.find()
-  editor.setSelection(position, position)
-  editor.replaceSelection(`![](${ url })`)
+        image.height = 500
+        image.width = image.width * ratio
+      }
+    }
 
-  editor.setSelection(cursorPosition, cursorPosition)
+    return image
+  }
 
-  marker.clear()
+  upload(image) {
+    const randomId = Math.random().toString().substr(2, 8)
+    const uploader = new Uploader(image, "images", "textarea", randomId)
+
+    this.insertPlaceholderText(randomId)
+
+    uploader.upload().then(() => {
+      const interval = setInterval(() => {
+        if (uploader.blob == "") return
+
+        clearInterval(interval)
+
+        if (uploader.progress == 100) {
+          this.getBlobVariantUrl(uploader.blob.key)
+          .then(data => this.replaceMarkerWithImage(randomId, data))
+          .catch(error => alert(error))
+        }
+      }, 100)
+    })
+  }
+
+  async getBlobVariantUrl(key) {
+    const response = await fetch(`/active_storage_blob_variant_url/${ key }`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": Rails.csrfToken()
+      },
+      credentials: "same-origin"
+    })
+
+    const data = await response.text()
+    return data
+  }
+
+  insertPlaceholderText(randomId) {
+    const position = this.editor.getCursor()
+
+    const markerElement = document.createElement("span")
+    markerElement.classList.add("text-dark")
+    markerElement.innerText = "[Uploading image...]"
+
+    const marker = this.editor.setBookmark(position, { widget: markerElement })
+    marker.randomId = randomId
+  }
+
+  replaceMarkerWithImage(randomId, url) {
+    const marker = this.editor.getAllMarks().find(m => m.randomId == randomId)
+                
+    const cursorPosition = this.editor.getCursor()
+    const position = marker.find()
+    this.editor.setSelection(position, position)
+    this.editor.replaceSelection(`![](${ url })`)
+
+    this.editor.setSelection(cursorPosition, cursorPosition)
+
+    marker.clear()
+  }
 }

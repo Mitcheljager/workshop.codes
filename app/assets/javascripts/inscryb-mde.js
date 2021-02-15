@@ -72,7 +72,8 @@ document.addEventListener("turbolinks:load", function() {
     })
 
     mde.codemirror.on("paste", (editor, event) => {
-      textareaPasteImage(event, editor)
+      const insertImage = new InscrybeInsertImage(event, editor)
+      insertImage.paste()
     })
   })
 })
