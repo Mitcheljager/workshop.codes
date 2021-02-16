@@ -26,6 +26,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
 
       create_activity(:login, @user.id)
+      ahoy.authenticate(@user)
 
       if params[:elohell].present?
         redirect_to new_post_path(elohell: params[:elohell])

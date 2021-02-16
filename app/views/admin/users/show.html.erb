@@ -51,6 +51,17 @@
       <tr><td>Remember tokens</td> <td><%= @user.remember_tokens.size %></td></tr>
       <tr><td>Forgot password tokens</td> <td><%= @user.forgot_password_tokens.size %></td></tr>
     </table>
+
+    <h3 class="mt-1/2">Latest 10 visit tokens</h3>
+    <% @user.visits.order(started_at: :desc).limit(10).each do |visit| %>
+      <div class="well block mb-1/8">
+        Started at: <%= visit.started_at %><br>
+        Visit token: <%= visit.visit_token %><br>
+        Visitor token: <%= visit.visitor_token %><br>
+        Landing page: <%= visit.landing_page %><br>
+        Referrer: <%= visit.referrer %>
+      </div>
+    <% end %>
   </div>
 
   <div class="tabs-content" data-tab="notifications">
