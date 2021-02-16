@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     post "users/find", to: "users#find", as: "find_user"
     post "users/send_notification", to: "users#send_notification"
 
-    resources :comments, only: [:index]
+    resources :comments, only: [:index, :destroy]
     resources :favorites, only: [:index]
     resources :notifications, only: [:index]
     resources :email_notifications, only: [:index]

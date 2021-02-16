@@ -6,6 +6,10 @@
 
 <hr>
 
+<% if flash[:alert] %>
+  <div class="warning mt-0 mb-1/2"><%= flash[:alert] %></div>
+<% end %>
+
 <table>
   <tr>
     <th>ID</th>
@@ -13,15 +17,17 @@
     <th>Post</th>
     <th>User</th>
     <th>Created at</th>
+    <th></th>
   </tr>
 
   <% @comments.each do |comment| %>
     <tr>
       <td><%= comment.id %></td>
-      <td><%= truncate(comment.content, length: 30) %></td>
+      <td style="max-width: 500px"><%= comment.content %></td>
       <td><%= link_to comment.post.code, post_path(comment.post.code) %></td>
       <td><%= comment.user.username %></td>
       <td><%= time_ago_in_words(comment.created_at).humanize %></td>
+      <td><%= link_to "🗑️", admin_comment_path(comment.id), method: :delete, data: { confirm: "Are you sure you wish to delete this comment?" } %></td>
     </tr>
   <% end %>
 </table>

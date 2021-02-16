@@ -130,6 +130,11 @@
       <div class="well well--dark block mb-1/8 p-1/4">
         <em><%= time_ago_in_words(comment.created_at) %></em>
         <div class="text-white"><%= markdown(comment.content) %></div>
+
+        <hr class="mt-1/4 mb-1/4">
+
+        <%= link_to "🗑️", admin_comment_path(comment.id), method: :delete, data: { confirm: "Are you sure you wish to destroy this comment?" } %> | 
+        On post: <%= link_to comment.post.title, post_path(comment.post.code), class: "text-white" %>
       </div>
     <% end %>
   </div>
