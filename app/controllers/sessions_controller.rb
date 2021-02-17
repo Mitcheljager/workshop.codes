@@ -41,6 +41,7 @@ class SessionsController < ApplicationController
 
   def destroy
     current_user.remember_tokens.destroy_all if current_user && current_user.remember_tokens.any?
+    cookies.delete :remember_token
 
     reset_session
     redirect_to login_path
@@ -51,6 +52,8 @@ class SessionsController < ApplicationController
   def generate_remember_token
     token = SecureRandom.base64
     RememberToken.create(user_id: @user.id, token: token)
+
+    cookies.encrypted[:remember_token] = { value: token, expires: 30.days }
   end
 
   def reject_banned_user
