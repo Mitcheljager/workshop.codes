@@ -234,6 +234,7 @@ en:
     reply: Reply
     edit: Edit
     delete: Delete
+    report: Report
     max_characters: Max %{count} characters
     log_in: Log in
     sign_up: Sign up

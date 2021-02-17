@@ -118,7 +118,7 @@
           <% end %>
 
           <div class="item__details-item">
-            <%= link_to t("report.action"), new_report_path(id: @post.id), class: "text-red", remote: true, data: { disable_with: t("report.loading") } %>
+            <%= link_to t("report.action"), new_report_path(id: @post.id, concerns_model: "post"), class: "text-red", remote: true, data: { disable_with: t("report.loading") } %>
           </div>
         </div>
       </div>

@@ -5,7 +5,12 @@ class ReportsController < ApplicationController
 
   def new
     @report = Report.new
-    @post = Post.find(params[:id])
+
+    if params[:concerns_model] == "post"
+      @post = Post.find(params[:id])
+    elsif params[:concerns_model] == "comment"
+      @comment = Comment.find(params[:id])
+    end
   end
 
   def create
@@ -44,20 +49,16 @@ class ReportsController < ApplicationController
     return unless ENV["DISCORD_REPORTS_WEBHOOK_URL"].present?
 
     report = @report
-    post = Post.find(@report.concerns_id)
     path = admin_report_url(@report)
     content = report.content
     visit_token = report.visit_token
-    post_url = post_url(post.code)
 
     embed = Discord::Embed.new do
       title "A post has been reported. (Go to admin)"
       url path
       add_field name: "Visit token", value: report.visit_token
+      add_field name: "Concerns model", value: report.concerns_model
       add_field name: "Report category", value: report.category
-      add_field name: "Post title", value: post.title
-      add_field name: "Post code", value: post.code.upcase
-      add_field name: "Post url", value: post_url
       add_field name: "Description", value: content
     end
 

@@ -1,0 +1,22 @@
+<%= form_for @report, remote: true do |form| %>
+  <%= form.hidden_field :concerns_id, value: @comment.id %>
+  <%= form.hidden_field :concerns_model, value: "comment" %>
+  <%= form.hidden_field "properties[comment][content]", value: @comment.content %>
+  <%= form.hidden_field :reported_user_id, value: @comment.user_id %>
+
+  <div class="form-group" data-reveal-by-select-parent>
+    <%= form.label :category, class: "form-label" %>
+    <%= form.select :category, options_for_select(report_options_comment), { include_blank: "Select one..." }, data: { action: "reveal-by-select" }, class: "form-select", required: true %>
+  </div>
+
+  <div class="form-group mt-1/4">
+    <%= form.label :content, class: "form-label", required: true do %>Description <small class="text-dark">(Required)</small><% end %>
+    <%= form.text_area :content, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Write a short description to explain your report", required: true %>
+
+    <div class="form-hint mt-1/8 mb-0">Max 1000 characters.</div>
+  </div>
+
+  <div data-role="report-alert" class="warning mt-1/2 hidden">Your report has been submitted.</div>
+
+  <%= submit_tag "Submit", class: "button mt-1/2", data: { disable_with: "Submitting...", role: "hide-on-submit" } %>
+<% end %>

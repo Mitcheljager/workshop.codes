@@ -1,5 +1,5 @@
 module ReportsHelper
-  def report_options
+  def report_options_post
     [
       "There's a bug in this code",
       "I can't import this code",
@@ -8,6 +8,14 @@ module ReportsHelper
       "This is an edit of someone else's code, but no credit is given",
       "This code is inappropriate/offensive",
       "The image(s) used in this post are inappropriate/offensive",
+      "This is spam",
+      "Other"
+    ]
+  end
+
+  def report_options_comment
+    [
+      "This comment is inappropriate/offensive",
       "This is spam",
       "Other"
     ]

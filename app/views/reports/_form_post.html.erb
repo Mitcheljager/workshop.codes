@@ -11,7 +11,7 @@
 
   <div class="form-group" data-reveal-by-select-parent>
     <%= form.label :category, class: "form-label" %>
-    <%= form.select :category, options_for_select(report_options), { include_blank: "Select one..." }, class: "form-select", data: { action: "reveal-by-select" }, required: true %>
+    <%= form.select :category, options_for_select(report_options_post), { include_blank: "Select one..." }, class: "form-select", data: { action: "reveal-by-select" }, required: true %>
 
     <div data-reveal-by-select-target="There's a bug in this code" class="visibility-hidden">
       <div class="block mt-1/4 text-small text-dark">
@@ -61,5 +61,5 @@
 
   <div data-role="report-alert" class="warning mt-1/2 hidden">Your report has been submitted.</div>
 
-  <%= submit_tag "Submit", class: "button mt-1/2", data: { disable_with: "Submitting..." } %>
+  <%= submit_tag "Submit", class: "button mt-1/2", data: { disable_with: "Submitting...", role: "hide-on-submit" } %>
 <% end %>
