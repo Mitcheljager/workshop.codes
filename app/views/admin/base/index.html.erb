@@ -80,7 +80,7 @@
 
 <h3>Admin activity log</h3>
 
-<% Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification])
+<% Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment])
            .order(created_at: :desc)
            .limit(50)
            .each do |activity| %>
