@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
   def create
     if auth_hash.present?
       @user = User.find_or_create_from_auth_hash(auth_hash)
-      params[:elohell] = request.env["omniauth.params"]["elohell"] if request.env["omniauth.params"]["elohell"].present?
     else
       @user = User.find_by_username(params[:username])
     end
@@ -28,11 +27,7 @@ class SessionsController < ApplicationController
       create_activity(:login, @user.id)
       ahoy.authenticate(@user)
 
-      if params[:elohell].present?
-        redirect_to new_post_path(elohell: params[:elohell])
-      else
-        redirect_to(session[:return_to] || root_path, fallback_location: root_path)
-      end
+      redirect_to(session[:return_to] || root_path, fallback_location: root_path)
     else
       if auth_hash.present?
         flash[:alert] = "Log in failed. An account with the same Username might already exist."

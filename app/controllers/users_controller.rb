@@ -38,11 +38,7 @@ class UsersController < ApplicationController
 
       create_activity(:create_user, @user.id)
 
-      if params[:elohell].present?
-        redirect_to new_post_path(elohell: params[:elohell])
-      else
-        redirect_to account_path
-      end
+      redirect_to account_path
     else
       render :new
     end

@@ -12,8 +12,6 @@
     <div class="well well--dark">
       <div class="w-100">
         <%= form_with url: sessions_path do |form| %>
-          <%= form.hidden_field :elohell, value: params[:elohell] if params[:elohell].present? %>
-
           <div class="form-group">
             <%= form.label :username, t("sessions.login.username"), class: "form-label" %>
             <%= form.text_field :username, placeholder: t("sessions.login.username"), class: "form-input" %>
@@ -38,12 +36,12 @@
 
         <hr class="mt-1/2 mb-1/4">
 
-        <%= link_to "/auth/discord#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--discord mt-1/4" do %>
+        <%= link_to "/auth/discord", class: "button button--discord mt-1/4" do %>
           <%= inline_svg_tag "discord.svg", height: 24 %>
           <%= t "sessions.login.discord" %>
         <% end %>
 
-        <%= link_to "/auth/bnet#{ "?elohell=#{ params[:elohell] }" if params[:elohell].present? }", class: "button button--bnet mt-1/8" do %>
+        <%= link_to "/auth/bnet", class: "button button--bnet mt-1/8" do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
           <%= t "sessions.login.battle_net" %>
         <% end %>
@@ -60,7 +58,7 @@
           <p class="mt-0"><%= t "sessions.create_user.content" %></p>
         </center>
 
-        <div><%= link_to t("sessions.create_user.button"), new_user_path(elohell: params[:elohell]), class: "button w-100" %></div>
+        <div><%= link_to t("sessions.create_user.button"), new_user_path, class: "button w-100" %></div>
       </div>
     </div>
   </div>

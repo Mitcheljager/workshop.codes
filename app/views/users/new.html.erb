@@ -7,7 +7,7 @@
 
 <div class="wrapper--small">
   <div class="well well--dark">
-    <%= render "form", user: @user, url: users_path(elohell: params[:elohell]) %>
+    <%= render "form", user: @user, url: users_path %>
   </div>
 
   <p><center><small><%= link_to t("users.new.login"), login_path %></small></center></p>

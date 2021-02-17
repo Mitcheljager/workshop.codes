@@ -2,6 +2,4 @@
 
 <h1 class="heading"><%= t(".title_html") %></h1>
 
-<%= render "elohell_alert" if params[:elohell].present? %>
-
 <%= render "posts/form/form", post: @post, path: create_post_path %>
