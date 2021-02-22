@@ -10,13 +10,23 @@ class InscrybeInsertImage {
     this.readFiles(items)
   }
 
+  input() {
+    const items = this.event.target.files
+    this.file = items[0]
+    
+    this.isFileImage()
+  }
+
   readFiles(files) {
     if (files[0].kind === "file") {
       this.file = files[0].getAsFile()
+      this.isFileImage()
+    }
+  }
 
-      if (this.file.type == "image/png" || this.file.type == "image/jpg" || this.file.type == "image/jpeg") {
-        this.drawImageOnCanvas()
-      }
+  isFileImage() {
+    if (this.file.type == "image/png" || this.file.type == "image/jpg" || this.file.type == "image/jpeg") {
+      this.drawImageOnCanvas()
     }
   }
 

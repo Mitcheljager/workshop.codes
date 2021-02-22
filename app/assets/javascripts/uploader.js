@@ -10,6 +10,11 @@ class Uploader {
   }
 
   async upload() {
+    if (this.file.size > (2 * 1048576)) {
+      alert("Filesize is too large. Max 2MB.")
+      return
+    }
+
     const element = document.querySelector("input[type='file'][name*='" + this.name + "']")
     const upload = new ActiveStorage.DirectUpload(this.file, element.dataset.directUploadUrl, this)
 

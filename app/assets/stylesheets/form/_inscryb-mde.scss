@@ -94,7 +94,14 @@
   border: 1px solid $text-color-dark;
   border-radius: $border-radius;
   overflow-y: auto;
+  text-align: left;
+  font-size: $font-size-small;
   z-index: 20;
+
+  small {
+    display: block;
+    padding: .5rem;
+  }
 }
 
 .editor-dropdown__item {
