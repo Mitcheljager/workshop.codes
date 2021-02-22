@@ -14,7 +14,7 @@
     <%= form.select :category, options_for_select(report_options_post), { include_blank: "Select one..." }, class: "form-select", data: { action: "reveal-by-select" }, required: true %>
 
     <div data-reveal-by-select-target="There's a bug in this code" class="visibility-hidden">
-      <div class="block mt-1/4 text-small text-dark">
+      <div class="block mt-1/4 text-small text-red">
         <strong>Do not use this form!</strong>
         <u>Instead, please contact the original creator directly!</u>
       </div>
