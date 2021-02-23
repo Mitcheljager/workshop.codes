@@ -39,7 +39,7 @@ module ContentHelper
   def markdown_youtube(text)
     text.gsub /\[youtube\s+(.*?)\]/ do
       "<div class='video'>
-        <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{$1}' frameborder='0' allowfullscreen></iframe>
+        <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{ youtube_to_video_id($1) }' frameborder='0' allowfullscreen></iframe>
       </div>"
     end
   end
@@ -72,5 +72,18 @@ module ContentHelper
 
   def sanitized_markdown(text)
     ActionController::Base.helpers.sanitize(markdown(text), tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong), attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls))
+  end
+
+  def youtube_to_video_id(url)
+    url_formats = [
+      %r((?:https?://)?youtu\.be/(.+)),
+      %r((?:https?://)?(?:www\.)?youtube\.com/watch\?v=(.*?)(&|#|$)),
+      %r((?:https?://)?(?:www\.)?youtube\.com/embed/(.*?)(\?|$)),
+      %r((?:https?://)?(?:www\.)?youtube\.com/v/(.*?)(#|\?|$)),
+      %r((?:https?://)?(?:www\.)?youtube\.com/user/.*?#\w/\w/\w/\w/(.+)\b)
+    ]
+  
+    url.strip!
+    url_formats.find { |format| url =~ format } and $1
   end
 end

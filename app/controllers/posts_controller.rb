@@ -112,6 +112,7 @@ class PostsController < ApplicationController
     @post.last_revision_created_at = Time.now
 
     set_post_status
+    parse_carousel_video
 
     if @post.save
       @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
@@ -139,6 +140,7 @@ class PostsController < ApplicationController
     current_code = @post.code
 
     set_post_status
+    parse_carousel_video
 
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
@@ -217,6 +219,10 @@ class PostsController < ApplicationController
       @post.private = false
       @post.unlisted = false
     end
+  end
+
+  def parse_carousel_video
+    params[:post][:carousel_video] = youtube_to_video_id(post_params[:carousel_video])
   end
 
   def not_found
