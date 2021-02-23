@@ -4,6 +4,6 @@
   <div class="modal__content">
     <h2 class="modal__title">Report <%= params[:concerns_model] %> <strong><%= @post.code if @post.present? %></strong></h2>
 
-    <%= render "form_#{ params[:concerns_model] }" %>
+    <%= render "form_#{ params[:concerns_model] }" if params[:concerns_model] %>
   </div>
 </div>
