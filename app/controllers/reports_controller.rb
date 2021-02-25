@@ -35,7 +35,8 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
 
     if @report.update(status: params[:status])
-      redirect_to admin_reports_path
+      redirect_to admin_reports_path and return unless @report.accepted?
+      redirect_to admin_report_path @report
     end
   end
 
