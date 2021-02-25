@@ -24,17 +24,17 @@
     <div class="tabs-content tabs-content--active" data-tab="highlights">
       <% @blocks.each do |block| %>
         <div class="mt-1/1 mb-1/1" data-block-id="<%= block.id %>">
-          <%= render "profiles/blocks/#{ block.name }", block: block %>
+          <%= render "blocks/profile/#{ block.name }", block: block %>
         </div>
       <% end %>
     </div>
   <% end %>
 
   <div class="tabs-content <%= "tabs-content--active" unless @blocks.any? %>" data-tab="codes">
-    <%= render "profiles/blocks/list" %>
+    <%= render "blocks/profile/list" %>
   </div>
 
   <div class="tabs-content" data-tab="collections">
-    <%= render "profiles/blocks/all_collections" %>
+    <%= render "blocks/profile/all_collections" %>
   </div>
 </div>

@@ -4,20 +4,13 @@ class BlocksController < ApplicationController
   end
 
   def create
-    @block = Block.new(name: block_params[:name], user_id: current_user.id, content_type: :profile)
+    @block = Block.new(name: block_params[:name], user_id: current_user.id, content_type: block_params[:content_type])
     @user = current_user
 
-    respond_to do |format|
-      if @user.blocks.where(content_type: :profile).size >= 3
-        @message = "You have already added 3 blocks."
-        format.js { render "application/error" }
-      else
-        if @block.save
-          format.js
-        else
-          format.js { render "application/error" }
-        end
-      end
+    if block_params[:content_type] == "profile"
+      create_profile_block
+    elsif params[:content_type] == "post"
+      create_post_block
     end
   end
 
@@ -58,6 +51,31 @@ class BlocksController < ApplicationController
   private
 
   def block_params
-    params.require(:block).permit(:name)
+    params.require(:block).permit(:name, :content_type)
+  end
+
+  def create_profile_block
+    respond_to do |format|
+      format.js {
+        if @user.blocks.where(content_type: :profile).size >= 3
+          @message = "You have already added 3 blocks."
+          render "application/error"
+        else
+          unless @block.save
+            render "application/error"
+          end
+        end
+      }
+    end
+  end
+
+  def create_post_block
+    respond_to do |format|
+      format.js {
+        unless @block.save
+          render "application/error"
+        end
+      }
+    end
   end
 end

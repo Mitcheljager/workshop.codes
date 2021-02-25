@@ -1,8 +1,14 @@
 <div class="cards">
+  <div class="card w-100 h-100" href="#" data-action="create-block" data-content-type="post" data-name="cards">
+    <h3 class="card__title mt-0 mb-0">Cards</h3>
+
+    <small class="text-base">Display your codes in a grid made out of "cards"</small>
+  </div>
+
   <%= button_to blocks_path,
       method: :post,
       remote: true,
-      params: { block: { name: "cards" } },
+      params: { block: { content_type: "post", name: "cards" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
       class: "card w-100 h-100" do %>
@@ -14,7 +20,7 @@
   <%= button_to blocks_path,
       method: :post,
       remote: true,
-      params: { block: { name: "carousel_cards" } },
+      params: { block: { content_type: "post", name: "carousel_cards" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
       class: "card w-100 h-100" do %>
@@ -26,7 +32,7 @@
   <%= button_to blocks_path,
       method: :post,
       remote: true,
-      params: { block: { name: "highlight" } },
+      params: { block: { content_type: "post", name: "highlight" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
       class: "card w-100 h-100" do %>
@@ -38,7 +44,7 @@
   <%= button_to blocks_path,
       method: :post,
       remote: true,
-      params: { block: { name: "collections" } },
+      params: { block: { content_type: "post", name: "collections" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
       class: "card w-100 h-100" do %>
@@ -50,7 +56,7 @@
   <%= button_to blocks_path,
       method: :post,
       remote: true,
-      params: { block: { name: "socials" } },
+      params: { block: { content_type: "post", name: "socials" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
       class: "card w-100 h-100" do %>
@@ -62,7 +68,7 @@
   <%= button_to blocks_path,
       method: :post,
       remote: true,
-      params: { block: { name: "youtube" } },
+      params: { block: { content_type: "post", name: "youtube" } },
       form: { autocomplete: "off" },
       data: { disable_with: "Loading..." },
       class: "card w-100 h-100" do %>

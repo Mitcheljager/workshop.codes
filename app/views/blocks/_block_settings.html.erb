@@ -17,7 +17,7 @@
 
   <div data-role="content-to-toggle" style="display: none">
     <%= form_for :block, url: block_path(block.id), method: :patch, remote: true do |form| %>
-        <%= render "profiles/blocks/settings/#{ block.name }", block: block, form: form %>
+        <%= render "blocks/profile/settings/#{ block.name }", block: block, form: form %>
 
         <%= submit_tag "Save", class: "button mt-1/4", data: { disable_with: "Submitting..." } %>
     <% end %>
