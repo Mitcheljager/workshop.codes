@@ -18,10 +18,10 @@ en:
     help: Set the website language
 
   filter:
-    categories: Categories
-    heroes: Heroes
-    maps: Maps
-    language: Language
+    categories: Categories...
+    heroes: Heroes...
+    maps: Maps...
+    language: Language...
     date_range: Date range
     time:
       now: Now
@@ -33,7 +33,7 @@ en:
       six_months: 6 months ago
       one_year: 1 year ago
     sort:
-      label: Sort
+      label: Sort by...
       created: Created
       updated: Updated
       on_fire: On Fire
@@ -43,7 +43,7 @@ en:
       label: Exclude expired
       true: "True"
       false: "False"
-    author: Author
+    author: Author...
     verified_authors: This is a list of verified creators
     select: Select...
     remove: ✕ Remove Filter
