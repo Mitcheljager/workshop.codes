@@ -21,13 +21,9 @@ class ApplicationController < ActionController::Base
     return unless cookies[:remember_token] && !current_user
     token = RememberToken.find_by_token(cookies.encrypted[:remember_token])
 
-    if token
-      user = token.user
-
-      if user
-        session[:user_id] = user.id
-        create_activity(:login_from_cookie)
-      end
+    if token && token.user
+      session[:user_id] = token.user.id
+      create_activity(:login_from_cookie)
     end
   end
 

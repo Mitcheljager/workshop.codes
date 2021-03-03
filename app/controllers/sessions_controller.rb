@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
     if (@user && @user.provider.nil? && @user.authenticate(params[:password])) || (auth_hash.present? && @user)
       reject_banned_user and return if is_banned?(@user)
 
-      generate_remember_token if params[:remember_me].present? && params[:remember_me] != "0"
+      generate_remember_token if (params[:remember_me].present? && params[:remember_me] != "0") || (@user.provider.present?)
       session[:user_id] = @user.id
 
       create_activity(:login, @user.id)

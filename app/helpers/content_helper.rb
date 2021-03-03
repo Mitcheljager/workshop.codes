@@ -38,8 +38,9 @@ module ContentHelper
 
   def markdown_youtube(text)
     text.gsub /\[youtube\s+(.*?)\]/ do
+      video_id = $1
       "<div class='video'>
-        <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{ youtube_to_video_id($1) }' frameborder='0' allowfullscreen></iframe>
+        <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{ youtube_to_video_id(video_id) }' frameborder='0' allowfullscreen></iframe>
       </div>"
     end
   end
@@ -75,6 +76,8 @@ module ContentHelper
   end
 
   def youtube_to_video_id(url)
+    return unless url.present?
+    
     url_formats = [
       %r((?:https?://)?youtu\.be/(.+)),
       %r((?:https?://)?(?:www\.)?youtube\.com/watch\?v=(.*?)(&|#|$)),
@@ -84,6 +87,12 @@ module ContentHelper
     ]
   
     url.strip!
-    url_formats.find { |format| url =~ format } and $1
+    url_format = url_formats.find { |format| url =~ format }
+    
+    if url_format.present?
+      video_id = url_format and $1
+    else
+      video_id = url
+    end
   end
 end

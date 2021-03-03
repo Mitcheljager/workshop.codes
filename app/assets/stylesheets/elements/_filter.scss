@@ -1,10 +1,10 @@
 @keyframes fade-in-filter-content {
   from { max-height: 0; padding-top: 0 }
-  to { max-height: 20rem; padding-top: calc(1.5rem + #{ $search-height / 2 }) }
+  to { max-height: 20rem; padding-top: calc(1rem + #{ $search-height / 2 }) }
 }
 
 @keyframes fade-out-filter-content {
-  from { max-height: 20rem; padding-top: calc(1.5rem + #{ $search-height / 2 }) }
+  from { max-height: 20rem; padding-top: calc(1rem + #{ $search-height / 2 }) }
   to { max-height: 0; padding-top: 0 }
 }
 
@@ -22,15 +22,15 @@
   position: relative;
   width: 100%;
   margin-top: $search-height / -2;
-  padding-top: calc(1.5rem + #{ $search-height / 2 });
+  padding-top: calc(1rem + #{ $search-height / 2 });
+  padding-bottom: 1.5rem;
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
-  background: $body-bg;
+  background: $bg-dark;
   height: 100%;
   animation: fade-in-filter-content 150ms;
-  z-index: 20;
 
-  &::before {
+  &::after {
     content: "";
     display: block;
     position: absolute;
@@ -62,48 +62,35 @@
 
 .filter__group {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  padding: 0 1.5rem 0 0;
-
-  &--mobile-reverse {
-    flex-direction: column-reverse;
-  }
+  padding: 0 1.5rem;
 }
 
 .filter__item {
-  display: flex;
-  flex-direction: row-reverse;
+  display: inline-flex;
+  flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  margin: .25rem 0;
+  margin: .1rem 0;
+  padding: .5rem .75rem;
+  border-radius: $border-radius;
+  background: $bg-darker;
   font-size: $font-size-base;
 
-  @include media-min(lg) {
-    flex-direction: row;
-    margin: .25rem 0;
-    text-align: left;
+  &--active {
+    background: $body-bg;
+    
+    a {
+      color: $white;
+    }    
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 
 .filter__label {
   color: $text-color-dark;
-
-  &::before {
-    content: "\00a0|\00a0";
-
-    @include media-min(lg) {
-      content: ""
-    }
-  }
-
-  &::after {
-    @include media-min(lg) {
-      content: "\00a0|\00a0";
-    }
-  }
 }
 
 .filter__button {
@@ -122,7 +109,7 @@
   margin-top: 1.5rem;
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
-  background: $bg-dark;
+  background: $bg-darker;
 }
 
 .filter__link {
@@ -167,6 +154,16 @@
       background: lighten($primary, 5%);
       color: $pure-white;
     }
+  }
+}
+
+.filter__remove {
+  display: none;
+  margin-left: .5rem;
+  
+  .filter__item--active & {
+    display: inline-block;
+    color: $red;
   }
 }
 

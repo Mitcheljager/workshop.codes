@@ -1,21 +1,27 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action='add-filter']")
-  if (!elements.length) return
-  elements.forEach((element) => element.removeEventListener("click", addFilter))
-  elements.forEach((element) => element.addEventListener("click", addFilter))
+  elements.forEach((element) => {
+    element.removeEventListener("click", addFilter)
+    element.addEventListener("click", addFilter) 
+  })
 
-  const linkElement = document.querySelector("[data-role='filter-link']")
-  if (!linkElement) return
-  linkElement.removeEventListener("click", buildFilterPath)
-  linkElement.addEventListener("click", buildFilterPath)
+  const linkElements = document.querySelectorAll("[data-role='filter-link']")
+  linkElements.forEach((element) => {
+    element.removeEventListener("click", buildFilterPath)
+    element.addEventListener("click", buildFilterPath) 
+  })
 })
 
 function addFilter(event) {
   event.preventDefault()
 
-  const filterElement = this.closest("[data-filter]").querySelector("[data-filter-type]")
+  const filterToggle = this.closest("[data-filter]")
+  const filterElement = filterToggle.querySelector("[data-filter-type]")
+  const defaultValue = filterToggle.dataset.default
+
+  filterToggle.classList.toggle("filter__item--active", this.dataset.value != "")
   filterElement.dataset.value = this.dataset.value
-  filterElement.innerText = this.dataset.value == "" ? "Select..." : this.innerText
+  filterElement.innerText = this.dataset.value == "" ? defaultValue : this.innerText
 
   closeDropdown()
 }
