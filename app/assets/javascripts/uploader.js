@@ -15,7 +15,7 @@ class Uploader {
       return
     }
 
-    const element = document.querySelector("input[type='file'][name*='" + this.name + "']")
+    const element = document.querySelector("[data-direct-upload-url]")
     const upload = new ActiveStorage.DirectUpload(this.file, element.dataset.directUploadUrl, this)
 
     if (this.uploadType == "carousel") this.createProgressElement()

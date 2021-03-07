@@ -59,6 +59,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :while_you_waits, dependent: :destroy
   has_many :email_notifications, dependent: :destroy
+  has_many :blocks, -> { where(content_type: :post).order(position: :asc) }, foreign_key: :content_id, dependent: :destroy
 
   has_many_attached :images, dependent: :destroy
 

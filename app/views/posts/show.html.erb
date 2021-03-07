@@ -37,6 +37,12 @@
     <%= render "carousel" %>
 
     <div class="item__description">
+      <% @post.blocks.each do |block| %>
+        <div data-block-id="<%= block.id %>">
+          <%= render "blocks/post/#{ block.name }", block: block %>
+        </div>
+      <% end %>
+
       <%= sanitized_markdown(@post.description) %>
     </div>
 

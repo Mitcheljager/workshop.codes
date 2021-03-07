@@ -1,7 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
-  const element = document.querySelector("[data-role='dropzone']")
+  const elements = document.querySelectorAll("[data-role='dropzone']")
 
-  if (element) new Dropzone(element).bind()
+  elements.forEach(element => { new Dropzone(element).bind() })
 })
 
 class Dropzone {
@@ -147,11 +147,11 @@ class Dropzone {
   }
   
   updateSortable() {
-    const element = document.querySelector("[data-role*='form-image-thumbnails']")
+    const element = document.querySelector(`[data-role*="form-image-thumbnails"][data-dropzone-target="${ this.element.dataset.target }"]`)
     const items = [...element.querySelectorAll(".images-preview__item")]
     const array = items.map(item => parseInt(item.dataset.id))
   
-    const input = document.querySelector("input[name*='image_order']")
+    const input = document.querySelector(`[data-dropzone-image-order="${ this.element.dataset.target }"]`)
     input.value = JSON.stringify(array)
   }
   

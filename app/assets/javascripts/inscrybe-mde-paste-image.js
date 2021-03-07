@@ -100,10 +100,8 @@ class InscrybeInsertImage {
         clearInterval(interval)
 
         if (uploader.progress == 100) {
-          const fetch = new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }`)
-          
-          fetch.get()
-          .then(data => this.replaceMarkerWithImage(randomId, data))
+          new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }`)
+          .get().then(data => this.replaceMarkerWithImage(randomId, data))
           .catch(error => alert(error))
         }
       }, 100)

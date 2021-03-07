@@ -1,0 +1,12 @@
+<div class="well well--dark">
+  <%= file_field_tag block_input_name(@block, "block_images"), multiple: true, direct_upload: true, data: { action: "block-images", block_id: @block.id } %>
+  <%= text_field_tag block_input_name(@block, "image_blob_ids"), block_property(@block, "image_blob_ids"), data: { dropzone_image_order: @block.id } %>
+
+  <div class="dropzone" data-role="dropzone" data-target="<%= @block.id %>">
+    <span><%= t("posts.form.images.dropzone.label") %></span>
+
+    <small><%= t("posts.form.images.dropzone.help") %></small>
+  </div>
+
+  <div class="images-preview" data-role="form-image-thumbnails sortable" data-dropzone-target="<%= @block.id %>"><%= render partial: "posts/form/ordered_image", collection: block_images(@block) %></div>
+</div>

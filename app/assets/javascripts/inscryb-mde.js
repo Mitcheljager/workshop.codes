@@ -13,6 +13,7 @@ class InitialiseInscrybeMDE {
   constructor(element) {
     this.element = element
     this.mde = ""
+    this.markers = []
   }
 
   initialise() {
@@ -26,7 +27,8 @@ class InitialiseInscrybeMDE {
       blockStyles: {
         italic: "_"
       },
-      status: false,
+      status: true,
+	    status: ["lines", "words"],
       spellChecker: false,
       insertTexts: {
         table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n"]
@@ -35,7 +37,7 @@ class InitialiseInscrybeMDE {
         "bold",
         "italic",
         {
-          action: function customFunction(editor) { _this.insertHighlight(editor) },
+          action: _this.insertHighlight,
           name: "highlight",
           className: "fa fa-highlight",
           title: "Highlight"
@@ -50,7 +52,7 @@ class InitialiseInscrybeMDE {
         "code",
         "link",
         {
-          action: function customFunction(editor) { _this.toggleImageUploader(editor) },
+          action: _this.toggleImageUploader,
           name: "image",
           className: "fa fa-image",
           title: "Upload an image"
@@ -58,19 +60,26 @@ class InitialiseInscrybeMDE {
         "|",
         "table",
         {
-          action: function customFunction(editor) { _this.insertGallery(editor) },
+          action: _this.insertGallery,
           name: "gallery",
           className: "fa fa-gallery",
           title: "Gallery"
         },
         {
-          action: function customFunction(editor) { _this.insertHeroIconSelect(editor) },
+          action: _this.insertHeroIconSelect,
           name: "hero-icon",
           className: "fa fa-hero-icon",
           title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
         },
         "|",
-        "fullscreen"
+        "fullscreen",
+        "|",
+        {
+          action: function customAction(editor) { _this.insertBlock(editor, _this, ) },
+          name: "Gallery",
+          className: "fa fa-gallery",
+          title: "Gallery"
+        },
       ]
     })
 
@@ -128,6 +137,35 @@ class InitialiseInscrybeMDE {
       button.querySelector(".editor-dropdown").remove()
     }
   }
+
+  insertBlock(editor, _this) {
+    const position = editor.codemirror.getCursor()
+    editor.codemirror.replaceRange("\n\n", position)
+
+    const markerElement = document.createElement("div")
+    markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
+
+    const marker = editor.codemirror.markText({line: position.line + 1, ch: 0 }, { line: position.line + 2, ch: 0 }, {
+      replacedWith: markerElement,
+      addToHistory: true,
+      inclusiveLeft: false,
+      inclusiveRight: false
+    })
+
+    this.markers.push(marker)
+
+    const markerId = this.markers.length - 1
+
+    console.log(this.markers)
+
+    new FetchRails(`/blocks/show_or_create`, { name: "gallery" })
+    .post().then(data => this.markers[markerId].widgetNode.innerHTML = data)
+    .catch(error => alert(error))
+
+    this.markers[markerId].changed()
+
+    console.log(this.markers)
+  }
   
   toggleImageUploader(editor) {
     const button = editor.gui.toolbar.querySelector(".fa-image").closest("button")
@@ -152,7 +190,6 @@ class InitialiseInscrybeMDE {
       inputElement.type = "file"
       inputElement.id = randomId
       inputElement.classList.add("hidden-field")
-      inputElement
       
       inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, editor.codemirror).input() })
       labelElement.addEventListener("click", () => { inputElement.click() })

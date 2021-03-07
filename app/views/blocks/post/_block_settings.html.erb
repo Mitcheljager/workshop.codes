@@ -1,0 +1,13 @@
+<div class="mt-1/4" data-id="<%= block.id %>" data-sortable-block>
+  <div class="well well--dark">
+    <h3 class="mt-0 mb-0"><%= block.name.humanize %></h3>
+    
+    <%= link_to "Destroy", block_path(block.id),
+        method: :delete,
+        remote: true,
+        data: { disable_with: "Loading...", confirm: "Are you sure? This cannot be undone." },
+        class: "block text-red ml-1/4" %>
+  </div>
+
+  <%= render "blocks/post/settings/#{ block.name }", block: block %>
+</div>

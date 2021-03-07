@@ -4,12 +4,13 @@ class BlocksController < ApplicationController
   end
 
   def create
-    @block = Block.new(name: block_params[:name], user_id: current_user.id, content_type: block_params[:content_type])
     @user = current_user
+    @block = Block.new(block_params)
+    @block.user_id = @user.id
 
-    if block_params[:content_type] == "profile"
+    if @block.content_type == "profile"
       create_profile_block
-    elsif params[:content_type] == "post"
+    elsif @block.content_type == "post"
       create_post_block
     end
   end
@@ -45,6 +46,20 @@ class BlocksController < ApplicationController
       @block = current_user.blocks.where(id: block[:id]).first
 
       @block.update_attribute(:position, block[:position])
+    end
+  end
+
+  def show_or_create
+    if params[:id].present?
+      @block = Block.find(id: params[:id], content_type: :post)
+    else
+      @block = Block.create(content_type: :post, name: params[:name])
+    end
+
+    if @block.present?
+      render "blocks/post/settings/_#{ params[:name] }", layout: false
+    else
+      render json: "error"
     end
   end
 

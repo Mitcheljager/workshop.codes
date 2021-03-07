@@ -16,8 +16,8 @@
 
         <% if maps.count > 1 %>
           <div class="checkbox">
-            <%= form.check_box "checkbox_group_#{ map_type }", data: { action: "checkbox-select-all" } %>
-            <%= form.label "checkbox_group_#{ map_type }", t("posts.form.maps.check_all_type", type: map_type[current_locale]) %>
+            <%= form.check_box "checkbox_group_#{ map_type["en"] }", data: { action: "checkbox-select-all" } %>
+            <%= form.label "checkbox_group_#{ map_type["en"] }", t("posts.form.maps.check_all_type", type: map_type[current_locale]) %>
           </div>
 
           <br>
