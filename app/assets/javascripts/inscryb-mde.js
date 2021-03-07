@@ -159,10 +159,16 @@ class InitialiseInscrybeMDE {
     console.log(this.markers)
 
     new FetchRails(`/blocks/show_or_create`, { name: "gallery" })
-    .post().then(data => this.markers[markerId].widgetNode.innerHTML = data)
+    .post().then(data => { 
+      this.markers[markerId].widgetNode.innerHTML = data
+      
+      const blockId = this.markers[markerId].widgetNode.querySelector("[data-id]").dataset.id
+      this.markers[markerId].lines[0].text = `[block ${ blockId }]`
+
+      this.markers[markerId].changed()
+    })
     .catch(error => alert(error))
 
-    this.markers[markerId].changed()
 
     console.log(this.markers)
   }
