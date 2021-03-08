@@ -1,5 +1,5 @@
 .CodeMirror {
-  padding: $margin / 2;
+  padding: 0;
   border: 0;
   background: $bg-dark;
   color: $white;
@@ -26,6 +26,16 @@
 
 .CodeMirror-cursor {
   border-color: $white;
+}
+
+.CodeMirror-lines {
+  padding: $margin / 2;
+}
+
+.editor-preview {
+  margin-top: 0;
+  background: $body-bg;
+  border: 1px solid $border-color;
 }
 
 .editor-toolbar {
@@ -169,26 +179,41 @@
 
 .editor-toolbar button[title="Gallery"],
 .editor-toolbar button[title="Insert Table"],
-.editor-toolbar button[title*="Hero Icon"] {
+.editor-toolbar button[title*="Hero Icon"],
+.editor-toolbar button[title*="Toggle Preview"] {
   width: auto;
   padding: 0 .5rem;
+  font-size: 12px;
 }
 
 .fa-table::before {
   content: "Table";
-  font-size: 12px;
 }
 
 .fa-gallery::before {
   content: "Gallery";
-  font-size: 12px;
 }
 
 .fa-hero-icon::before {
   content: "Hero";
-  font-size: 12px;
 }
 
 .fa-arrows-alt::before {
   content: "⛶";
+}
+
+.fa-eye::before {
+  content: "Preview";
+}
+
+.editor-toolbar button[title*="Toggle Preview"] {
+  background: $primary;
+
+  &.active {
+    background: lighten($primary, 10%);
+  }
+  
+  .fa-eye {
+    color: white;
+  }
 }

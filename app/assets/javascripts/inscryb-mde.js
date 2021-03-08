@@ -30,10 +30,22 @@ class InitialiseInscrybeMDE {
       status: true,
 	    status: ["lines", "words"],
       spellChecker: false,
+      promptURLs: true,
       insertTexts: {
         table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n"]
       },
+      previewRender: (plainText, preview) => {
+        new FetchRails("/parse-markdown", { post: { description: plainText } })
+        .post().then(data => {
+          preview.innerHTML = data
+        })
+    
+        return `<div class="p-1/2"><div class="spinner"></div></div>`
+      },
       toolbar: [
+        "preview",
+        "fullscreen",
+        "|",
         "bold",
         "italic",
         {
@@ -72,10 +84,8 @@ class InitialiseInscrybeMDE {
           title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
         },
         "|",
-        "fullscreen",
-        "|",
         {
-          action: function customAction(editor) { _this.insertBlock(editor, _this, ) },
+          action: function customAction(editor) { _this.insertBlock(editor) },
           name: "Gallery",
           className: "fa fa-gallery",
           title: "Gallery"
@@ -84,6 +94,7 @@ class InitialiseInscrybeMDE {
     })
 
     this.bindPaste()
+    this.parseBlocks()
   }
 
   bindPaste() {
@@ -138,14 +149,41 @@ class InitialiseInscrybeMDE {
     }
   }
 
-  insertBlock(editor, _this) {
-    const position = editor.codemirror.getCursor()
-    editor.codemirror.replaceRange("\n\n", position)
+  parseBlocks() {
+    const linesFound = []
+    let lineNumber = 0
+
+    this.mde.codemirror.eachLine(line => {
+      lineNumber++
+
+      const match = /\[block\s+(.*?)\]/.exec(line.text)
+
+      if (match) {
+        if (linesFound.includes(line.text)) return
+        linesFound.push(match[1])
+
+        line.text = ""
+        this.mde.codemirror.setCursor(lineNumber)
+
+        this.insertBlock(this.mde, false, match[1])
+      } 
+    })
+
+    this.mde.codemirror.setCursor(0)
+  }
+
+  insertBlock(editor, insertNewLine = true, blockId = null) {
+    let position = editor.codemirror.getCursor()
+
+    if (insertNewLine) {
+      editor.codemirror.replaceRange("\n\n", position)
+      position = editor.codemirror.getCursor()
+    }
 
     const markerElement = document.createElement("div")
     markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
 
-    const marker = editor.codemirror.markText({line: position.line + 1, ch: 0 }, { line: position.line + 2, ch: 0 }, {
+    const marker = editor.codemirror.markText({line: position.line, ch: 0 }, { line: position.line + 1, ch: 0 }, {
       replacedWith: markerElement,
       addToHistory: true,
       inclusiveLeft: false,
@@ -153,24 +191,20 @@ class InitialiseInscrybeMDE {
     })
 
     this.markers.push(marker)
-
     const markerId = this.markers.length - 1
 
-    console.log(this.markers)
-
-    new FetchRails(`/blocks/show_or_create`, { name: "gallery" })
+    new FetchRails(`/blocks/show_or_create`, { name: "gallery", id: blockId })
     .post().then(data => { 
       this.markers[markerId].widgetNode.innerHTML = data
       
       const blockId = this.markers[markerId].widgetNode.querySelector("[data-id]").dataset.id
       this.markers[markerId].lines[0].text = `[block ${ blockId }]`
 
-      this.markers[markerId].changed()
+      const dropzone = this.markers[markerId].widgetNode.querySelector("[data-role='dropzone']")
+      if (dropzone) new Dropzone(dropzone).bind()
     })
     .catch(error => alert(error))
-
-
-    console.log(this.markers)
+    .finally(() => this.markers[markerId].changed())
   }
   
   toggleImageUploader(editor) {

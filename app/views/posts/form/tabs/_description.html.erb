@@ -5,8 +5,6 @@
     <%= t("posts.form.description.help_html", link: link_to("and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank")) %>
   </div>
 
-  <%= link_to t("posts.form.description.show_preview"), "#", class: "button button--secondary mt-1/4 mb-1/4", data: { action: "markdown-preview" } %>
-
   <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea" } %>
 </div>
 

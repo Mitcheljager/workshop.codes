@@ -1,6 +1,6 @@
 module BlocksHelper
   def block_property(block, property, default = "")
-    if block.properties && block.properties[property]
+    if block.properties && block.properties[property].present?
       block.properties[property]
     else
       default

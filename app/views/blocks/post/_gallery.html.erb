@@ -1,5 +1,26 @@
 <% return unless block_property(block, "image_blob_ids").present? %>
 
-<% if block_property(block, "image_blob_ids").present? %>
-  <h2><%= block_property(block, "image_blob_ids") %></h2>
-<% end %>
+<% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) } %>
+<% return unless images.any? %>
+
+<% random_id = SecureRandom.alphanumeric(8) %>
+
+<div class="gallery">
+  <% images.each do |image| %>
+    <% url = ENV["CDN"] + image.variant(quality: 95).processed.key %>
+    
+    <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= url %>">
+      <%= image_tag url, alt: "abc", loading: "lazy" %>
+
+      <span class="gallery__title"><%= "abc" %></span>
+    </div>
+  <% end %>
+</div>
+
+<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="gallery-<%= random_id %>">
+  <div class="modal__backdrop" data-role="modal-backdrop"></div>
+
+  <div class="modal__content p-0">
+    <%= image_tag "//:0", data: { gallery: "gallery-#{ random_id }" }, class: "img-fluid" %>
+  </div>
+</div>

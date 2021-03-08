@@ -51,7 +51,7 @@ class BlocksController < ApplicationController
 
   def show_or_create
     if params[:id].present?
-      @block = current_user.blocks.find(id: params[:id], content_type: :post)
+      @block = current_user.blocks.find_by(id: params[:id], content_type: :post)
     else
       @block = Block.create(user_id: current_user.id, content_type: :post, name: params[:name])
     end
@@ -59,7 +59,7 @@ class BlocksController < ApplicationController
     if @block.present?
       render "blocks/post/_block_settings", layout: false
     else
-      render json: "error"
+      render json: "<em>An error occured when loading the block</em>"
     end
   end
 

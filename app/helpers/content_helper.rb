@@ -74,7 +74,11 @@ module ContentHelper
         block = @post.blocks.find_by(id: $1)
 
         if block.present?
-          render "blocks/post/#{ block.name }", block: block
+          if action_name == "parse_markdown"
+            render_to_string "blocks/post/#{ block.name }", block: block
+          else
+            render "blocks/post/#{ block.name }", block: block
+          end
         end
       end
     else
