@@ -10,4 +10,12 @@
 
 .CodeMirror-lines {
   padding-bottom: 2rem;
+
+  .well {
+    white-space: initial;
+  }
+}
+
+.CodeMirror-scroll {
+  min-height: 600px !important;
 }

@@ -1,12 +1,23 @@
-<div class="well well--dark">
-  <%= file_field_tag block_input_name(@block, "images"), multiple: true, direct_upload: true, class: "hidden-field", data: { action: "block-images", block_id: @block.id } %>
-  <%= hidden_field_tag block_input_name(@block, "image_blob_ids"), block_property(@block, "image_blob_ids"), data: { dropzone_image_order: @block.id } %>
+<%= file_field_tag block_input_name(@block, "images"), multiple: true, direct_upload: true, class: "hidden-field", data: { action: "block-images", block_id: @block.id } %>
+<%= text_field_tag block_input_name(@block, "image_blob_ids"), block_property(@block, "image_blob_ids"), data: { dropzone_image_order: @block.id } %>
 
-  <div class="dropzone" data-role="dropzone" data-target="<%= @block.id %>">
-    <span><%= t("posts.form.images.dropzone.label") %></span>
+<% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) } %>
 
-    <small><%= t("posts.form.images.dropzone.help") %></small>
-  </div>
+<div class="dropzone" data-role="dropzone" data-target="<%= @block.id %>">
+  <span>Drop images here to add them to this Gallery</span>
+</div>
 
-  <div class="images-preview" data-role="form-image-thumbnails sortable" data-dropzone-target="<%= @block.id %>"><%= render partial: "posts/form/ordered_image", collection: block_images(@block) %></div>
+<div class="gallery gallery--input mb-0" data-role="form-image-thumbnails sortable" data-dropzone-target="<%= @block.id %>">
+  <% images.each do |image| %>
+    <% next unless image %>
+    <% url = ENV["CDN"] + image.variant(quality: 95).processed.key %>
+    
+    <div class="gallery__item b-dark" data-image-preview-item data-id="<%= image.blob_id %>">
+      <%= image_tag url, alt: "abc", loading: "lazy" %>
+
+      <span class="gallery__title">
+        <%= text_field_tag block_input_name(@block, "gallery_image_label_#{ image.blob_id }"), block_property(@block, "gallery_image_label_#{ image.blob_id }"), class: "form-input", placeholder: "Image label (optional)" %>
+      </span>
+    </div>
+  <% end %>
 </div>

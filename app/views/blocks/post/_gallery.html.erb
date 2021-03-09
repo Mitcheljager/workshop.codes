@@ -7,12 +7,15 @@
 
 <div class="gallery">
   <% images.each do |image| %>
+    <% next unless image %>
     <% url = ENV["CDN"] + image.variant(quality: 95).processed.key %>
     
     <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= url %>">
       <%= image_tag url, alt: "abc", loading: "lazy" %>
 
-      <span class="gallery__title"><%= "abc" %></span>
+      <% if block_property(block, "gallery_image_label_#{ image.blob_id }").present? %>
+        <span class="gallery__title"><%= block_property(block, "gallery_image_label_#{ image.blob_id }") %></span>
+      <% end %>
     </div>
   <% end %>
 </div>

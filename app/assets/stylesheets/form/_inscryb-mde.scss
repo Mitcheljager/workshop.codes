@@ -3,7 +3,7 @@
   border: 0;
   background: $bg-dark;
   color: $white;
-  height: 600px;
+  min-height: 600px;
 
   .CodeMirror-selectedtext,
   .CodeMirror-selected {
@@ -14,6 +14,10 @@
     .cm-url {
       color: $text-color;
     }
+  }
+
+  &.CodeMirror-fullscreen {
+    z-index: 1000;
   }
 }
 
@@ -39,21 +43,25 @@
 }
 
 .editor-toolbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1px;
   display: flex;
   flex-wrap: wrap;
   border: 0;
-  padding: 0;
+  border-radius: 0;
+  padding: 0 .25rem .25rem;
+  background: $bg-darker;
   opacity: 1;
-  margin-bottom: .25rem;
+  z-index: 50;
 
   &:hover {
     opacity: 1;
   }
 
   &.fullscreen {
-    padding-left: 10px;
-    padding-right: 10px;
     background: var(--bg-darker);
+    z-index: 1000;
 
     &::before,
     &::after {
@@ -76,6 +84,10 @@
       background-color: lighten($bg-dark, 10%);
       color: $text-color-light !important;
       border: 0;
+    }
+
+    &:focus {
+      outline: 0;
     }
 
     i {

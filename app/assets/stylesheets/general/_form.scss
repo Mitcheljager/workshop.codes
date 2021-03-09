@@ -284,6 +284,7 @@ input[type="file"] {
   width: 0;
   left: 0;
   top: 0;
+  pointer-events: none;
 }
 
 .url-input {

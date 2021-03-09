@@ -154,41 +154,39 @@ class InitialiseInscrybeMDE {
     let lineNumber = 0
 
     this.mde.codemirror.eachLine(line => {
-      lineNumber++
-
       const match = /\[block\s+(.*?)\]/.exec(line.text)
 
       if (match) {
         if (linesFound.includes(line.text)) return
         linesFound.push(match[1])
 
-        line.text = ""
-        this.mde.codemirror.setCursor(lineNumber)
+        this.insertBlock(this.mde, false, match[1], lineNumber, match[0].length)
+      }
 
-        this.insertBlock(this.mde, false, match[1])
-      } 
+      lineNumber++
     })
-
-    this.mde.codemirror.setCursor(0)
   }
 
-  insertBlock(editor, insertNewLine = true, blockId = null) {
+  insertBlock(editor, existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {
     let position = editor.codemirror.getCursor()
 
-    if (insertNewLine) {
-      editor.codemirror.replaceRange("\n\n", position)
+    if (existingBlock) {
+      editor.codemirror.replaceRange("\n", position)
       position = editor.codemirror.getCursor()
     }
 
     const markerElement = document.createElement("div")
     markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
 
-    const marker = editor.codemirror.markText({line: position.line, ch: 0 }, { line: position.line + 1, ch: 0 }, {
+    const marker = editor.codemirror.markText({ line: lineNumber || position.line, ch: 0 }, { line: lineNumber || position.line + 1, ch: charCount }, {
       replacedWith: markerElement,
-      addToHistory: true,
+      addToHistory: existingBlock,
       inclusiveLeft: false,
-      inclusiveRight: false
+      inclusiveRight: false,
+      readOnly: true
     })
+
+    console.log(marker)
 
     this.markers.push(marker)
     const markerId = this.markers.length - 1
@@ -204,7 +202,7 @@ class InitialiseInscrybeMDE {
       if (dropzone) new Dropzone(dropzone).bind()
     })
     .catch(error => alert(error))
-    .finally(() => this.markers[markerId].changed())
+    .finally(() => this.mde.codemirror.refresh())
   }
   
   toggleImageUploader(editor) {

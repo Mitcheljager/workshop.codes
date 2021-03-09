@@ -123,6 +123,7 @@ class Dropzone {
   
     const removeElement = document.createElement("div")
     removeElement.classList.add("images-preview__action")
+    thumbnailItem.dataset.imagePreviewItem = true
     thumbnailItem.dataset.action = "remove-image"
     removeElement.textContent = "Remove"
     removeElement.addEventListener("click", () => { this.remove(event) })
@@ -147,8 +148,8 @@ class Dropzone {
   }
   
   updateSortable() {
-    const element = document.querySelector(`[data-role*="form-image-thumbnails"][data-dropzone-target="${ this.element.dataset.target }"]`)
-    const items = [...element.querySelectorAll(".images-preview__item")]
+    const element = document.querySelector(`[data-dropzone-target="${ this.element.dataset.target }"]`)
+    const items = [...element.querySelectorAll("[data-image-preview-item]")]
     const array = items.map(item => parseInt(item.dataset.id))
   
     const input = document.querySelector(`[data-dropzone-image-order="${ this.element.dataset.target }"]`)
@@ -156,7 +157,7 @@ class Dropzone {
   }
   
   remove(event) {
-    const element = event.target.closest(".images-preview__item")
+    const element = event.target.closest("[data-image-preview-item]")
     element.remove()
   
     this.updateSortable()
