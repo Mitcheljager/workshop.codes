@@ -1,11 +1,15 @@
 .gallery {
-  --grid-min-width: 250px;
+  --grid-min-width: 230px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--grid-min-width), 1fr));
   grid-gap: 1rem;
   margin: 2rem 0;
   color: var(--white);
   text-align: center;
+
+  &--input {
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--grid-min-width) - 30px), 1fr));
+  }
 }
 
 .gallery__item {
@@ -34,11 +38,19 @@
       color: white;
       font-size: 24px;
     }
+
+    .gallery--input & {
+      &::before {
+        display: none;
+      }
+    }
   }
 
   img {
     display: block;
 	  margin: 0 auto;
+    width: 100%;
+    height: auto;
     color: $text-color-dark;
     font-size: 14px;
   }

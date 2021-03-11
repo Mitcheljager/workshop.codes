@@ -78,6 +78,7 @@ Rails.application.routes.draw do
 
     resources :blocks, only: [:create, :update, :destroy]
     post "blocks/set_positions", to: "blocks#set_positions"
+    post "blocks/show_or_create", to: "blocks#show_or_create"
 
     get "register", to: "users#new", as: "new_user"
     get "login", to: "sessions#new", as: "login"

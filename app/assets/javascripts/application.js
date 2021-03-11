@@ -41,6 +41,7 @@
 //= require reveal-by-checkbox
 //= require reveal-by-select
 //= require reveal-on-difference
+//= require set-css-variable
 //= require tabs
 //= require timeago
 //= require toggle-content

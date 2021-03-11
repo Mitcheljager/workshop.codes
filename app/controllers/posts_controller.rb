@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :revisions, :collection).find_by("upper(posts.code) = ?", params[:code].upcase)
+    @post = Post.includes(:user, :collection, :revisions, :blocks).find_by("upper(posts.code) = ?", params[:code].upcase)
 
     not_found and return if @post && @post.private? && @post.user != current_user
 
@@ -120,6 +120,7 @@ class PostsController < ApplicationController
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
       create_collection if post_params[:new_collection] != ""
+      update_blocks
 
       notify_discord("New")
 
@@ -145,8 +146,8 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
       create_collection if post_params[:new_collection] != ""
-
       update_email_notifications
+      update_blocks
 
       if (post_params[:revision].present? && post_params[:revision] != "0") || (current_code != post_params[:code]) || (current_version != post_params[:version])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
@@ -259,6 +260,24 @@ class PostsController < ApplicationController
       @post.email_notifications.destroy_all
     elsif email_notification_enabled
       create_email_notification(:will_expire, @post.id, post_params[:email])
+    end
+  end
+
+  def update_blocks
+    return unless params[:block].present?
+
+    params[:block].each do |block|
+      @block = Block.find(block[0])
+
+      if @block.present?
+        properties = block[1][:properties]
+
+        if properties[:images].present?
+          @block.images.attach(properties[:images])
+        end
+
+        @block.update(content_id: @post.id, properties: properties)
+      end
     end
   end
 

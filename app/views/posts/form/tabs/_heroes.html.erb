@@ -15,8 +15,8 @@
         <h3><%= hero_category[current_locale] %></h3>
 
         <div class="checkbox">
-          <%= form.check_box "checkbox_group_#{ hero_category }", data: { action: "checkbox-select-all" } %>
-          <%= form.label "checkbox_group_#{ hero_category }", t("posts.form.heroes.check_all_type", type: hero_category[current_locale]) %>
+          <%= form.check_box "checkbox_group_#{ hero_category["en"] }", data: { action: "checkbox-select-all" } %>
+          <%= form.label "checkbox_group_#{ hero_category["en"] }", t("posts.form.heroes.check_all_type", type: hero_category[current_locale]) %>
         </div>
 
         <br>

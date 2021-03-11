@@ -1,49 +1,29 @@
-.CodeMirror {
-  padding: $margin / 2;
-  border: 0;
-  background: $bg-dark;
-  color: $white;
-  height: 600px;
-
-  .CodeMirror-selectedtext,
-  .CodeMirror-selected {
-    background: lighten($bg-dark, 20%);
-  }
-
-  .CodeMirror-code {
-    .cm-url {
-      color: $text-color;
-    }
-  }
-}
-
-.CodeMirror-scroll {
-  padding-right: #{ $margin / 2 };
-  padding-bottom: #{ $margin };
-  margin-right: -#{ $margin };
-  margin-bottom: -#{ $margin };
-}
-
-.CodeMirror-cursor {
-  border-color: $white;
+.editor-preview {
+  margin-top: 0;
+  background: $body-bg;
+  border: 1px solid $border-color;
 }
 
 .editor-toolbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1px;
   display: flex;
   flex-wrap: wrap;
   border: 0;
-  padding: 0;
+  border-radius: 0;
+  padding: 0 .25rem .25rem;
+  background: $bg-darker;
   opacity: 1;
-  margin-bottom: .25rem;
+  z-index: 50;
 
   &:hover {
     opacity: 1;
   }
 
   &.fullscreen {
-    padding-left: 10px;
-    padding-right: 10px;
     background: var(--bg-darker);
+    z-index: 1000;
 
     &::before,
     &::after {
@@ -66,6 +46,10 @@
       background-color: lighten($bg-dark, 10%);
       color: $text-color-light !important;
       border: 0;
+    }
+
+    &:focus {
+      outline: 0;
     }
 
     i {
@@ -169,26 +153,45 @@
 
 .editor-toolbar button[title="Gallery"],
 .editor-toolbar button[title="Insert Table"],
-.editor-toolbar button[title*="Hero Icon"] {
+.editor-toolbar button[title*="Hero Icon"],
+.editor-toolbar button[title*="Toggle Preview"] {
   width: auto;
   padding: 0 .5rem;
+  font-size: 12px;
 }
 
 .fa-table::before {
   content: "Table";
-  font-size: 12px;
 }
 
 .fa-gallery::before {
   content: "Gallery";
-  font-size: 12px;
+}
+
+.fa-block-gallery::before {
+  content: "Block: Gallery";
 }
 
 .fa-hero-icon::before {
   content: "Hero";
-  font-size: 12px;
 }
 
 .fa-arrows-alt::before {
   content: "⛶";
+}
+
+.fa-eye::before {
+  content: "Preview";
+}
+
+.editor-toolbar button[title*="Toggle Preview"] {
+  background: $primary;
+
+  &.active {
+    background: lighten($primary, 10%);
+  }
+  
+  .fa-eye {
+    color: white;
+  }
 }

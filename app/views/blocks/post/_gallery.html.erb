@@ -1,0 +1,31 @@
+<% return unless block_property(block, "image_blob_ids").present? %>
+
+<% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) } %>
+<% return unless images.any? %>
+
+<% random_id = SecureRandom.alphanumeric(8) %>
+
+<style>.gallery--<%= block.id %> { --grid-min-width: <%= block_property(block, "item_size", 230) %>px }</style>
+
+<div class="gallery gallery--<%= block.id %>">
+  <% images.each do |image| %>
+    <% next unless image %>
+    <% url = ENV["CDN"] + image.variant(quality: 95).processed.key %>
+    
+    <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= url %>">
+      <%= image_tag url, alt: "abc", loading: "lazy" %>
+
+      <% if block_property(block, "image_label_#{ image.blob_id }").present? %>
+        <span class="gallery__title"><%= block_property(block, "image_label_#{ image.blob_id }") %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="gallery-<%= random_id %>">
+  <div class="modal__backdrop" data-role="modal-backdrop"></div>
+
+  <div class="modal__content p-0">
+    <%= image_tag "//:0", data: { gallery: "gallery-#{ random_id }" }, class: "img-fluid" %>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<%= form_with url: path, model: post, data: { role: "post-form" }, remote: true do |form| %>
+<%= form_with url: path, model: post, data: { role: "post-form", direct_upload_url: rails_direct_uploads_url }, remote: true do |form| %>
   <%= render "errors", errors: post.errors if post.errors.any? %>
 
   <div class="form-group-uneven">

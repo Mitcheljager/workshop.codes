@@ -484,7 +484,8 @@
   background: $bg-darker;
 }
 
-.item__description {
+.item__description,
+.editor-preview {
   margin-top: $margin / 2;
   line-height: 1.5em;
   overflow-wrap: break-word;

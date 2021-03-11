@@ -13,11 +13,68 @@ class InitialiseInscrybeMDE {
   constructor(element) {
     this.element = element
     this.mde = ""
+    this.enableBlocks = element.dataset.enableBlocks
+    this.toolbar = this.setToolbar()
   }
 
-  initialise() {
-    const _this = this
+  setToolbar() {
+    const toolbar = [
+      "preview",
+      "fullscreen",
+      "|",
+      "bold",
+      "italic",
+      {
+        action: this.insertHighlight,
+        name: "highlight",
+        className: "fa fa-highlight",
+        title: "Highlight"
+      },
+      "heading",
+      "|",
+      "unordered-list",
+      "ordered-list",
+      "|",
+      "horizontal-rule",
+      "quote",
+      "code",
+      "link",
+      {
+        action: this.toggleImageUploader,
+        name: "image",
+        className: "fa fa-image",
+        title: "Upload an image"
+      },
+      "|",
+      "table",
+      {
+        action: this.insertGallery,
+        name: "gallery",
+        className: "fa fa-gallery",
+        title: "Gallery"
+      },
+      {
+        action: this.insertHeroIconSelect,
+        name: "hero-icon",
+        className: "fa fa-hero-icon",
+        title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
+      }
+    ]
+    
+    if (this.enableBlocks) {
+      toolbar.push("|")
+      toolbar.push({
+        action: this.insertBlock,
+        name: "Gallery Block",
+        className: "fa fa-block-gallery",
+        title: "Gallery"
+      })
+    }
 
+    return toolbar
+  }
+  
+  initialise() {
     this.mde = new InscrybMDE({
       element: this.element,
       autoDownloadFontAwesome: false,
@@ -26,55 +83,26 @@ class InitialiseInscrybeMDE {
       blockStyles: {
         italic: "_"
       },
-      status: false,
+      status: true,
+	    status: ["lines", "words"],
       spellChecker: false,
+      promptURLs: true,
       insertTexts: {
         table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n"]
       },
-      toolbar: [
-        "bold",
-        "italic",
-        {
-          action: function customFunction(editor) { _this.insertHighlight(editor) },
-          name: "highlight",
-          className: "fa fa-highlight",
-          title: "Highlight"
-        },
-        "heading",
-        "|",
-        "unordered-list",
-        "ordered-list",
-        "|",
-        "horizontal-rule",
-        "quote",
-        "code",
-        "link",
-        {
-          action: function customFunction(editor) { _this.toggleImageUploader(editor) },
-          name: "image",
-          className: "fa fa-image",
-          title: "Upload an image"
-        },
-        "|",
-        "table",
-        {
-          action: function customFunction(editor) { _this.insertGallery(editor) },
-          name: "gallery",
-          className: "fa fa-gallery",
-          title: "Gallery"
-        },
-        {
-          action: function customFunction(editor) { _this.insertHeroIconSelect(editor) },
-          name: "hero-icon",
-          className: "fa fa-hero-icon",
-          title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
-        },
-        "|",
-        "fullscreen"
-      ]
+      previewRender: (plainText, preview) => {
+        new FetchRails("/parse-markdown", { post: { description: plainText } })
+        .post().then(data => {
+          preview.innerHTML = data
+        })
+    
+        return `<div class="p-1/2"><div class="spinner"></div></div>`
+      },
+      toolbar: this.toolbar
     })
 
     this.bindPaste()
+    this.parseBlocks()
   }
 
   bindPaste() {
@@ -128,6 +156,59 @@ class InitialiseInscrybeMDE {
       button.querySelector(".editor-dropdown").remove()
     }
   }
+
+  insertBlock(editor, existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {
+    let position = editor.codemirror.getCursor()
+
+    if (existingBlock) {
+      editor.codemirror.replaceRange("\n\n\n", position)
+      position = editor.codemirror.getCursor()
+    }
+
+    const markerElement = document.createElement("div")
+    markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
+
+    const marker = editor.codemirror.markText({ line: lineNumber || position.line - 1, ch: 0 }, { line: lineNumber || position.line, ch: charCount }, {
+      replacedWith: markerElement,
+      addToHistory: existingBlock,
+      inclusiveLeft: false,
+      inclusiveRight: false
+    })
+
+    new FetchRails(`/blocks/show_or_create`, { name: "gallery", id: blockId })
+    .post().then(data => { 
+      marker.widgetNode.innerHTML = data
+      
+      const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
+      marker.lines[0].text = `[block ${ blockId }]`
+
+      const dropzone = marker.widgetNode.querySelector("[data-role='dropzone']")
+      const cssVariableElement = marker.widgetNode.querySelector("[data-action~='set-css-variable']")
+
+      if (dropzone) new Dropzone(dropzone).bind()
+      if (cssVariableElement) cssVariableElement.addEventListener("input", setCssVariable)
+    })
+    .catch(error => alert(error))
+    .finally(() => marker.changed())
+  }
+
+  parseBlocks() {
+    const linesFound = []
+    let lineNumber = 0
+
+    this.mde.codemirror.eachLine(line => {
+      const match = /\[block\s+(.*?)\]/.exec(line.text)
+
+      if (match) {
+        if (linesFound.includes(line.text)) return
+        linesFound.push(match[1])
+
+        this.insertBlock(this.mde, false, match[1], lineNumber, match[0].length)
+      }
+
+      lineNumber++
+    })
+  }
   
   toggleImageUploader(editor) {
     const button = editor.gui.toolbar.querySelector(".fa-image").closest("button")
@@ -152,7 +233,6 @@ class InitialiseInscrybeMDE {
       inputElement.type = "file"
       inputElement.id = randomId
       inputElement.classList.add("hidden-field")
-      inputElement
       
       inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, editor.codemirror).input() })
       labelElement.addEventListener("click", () => { inputElement.click() })

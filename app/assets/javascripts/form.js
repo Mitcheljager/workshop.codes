@@ -5,5 +5,5 @@
 //= require activestorage
 //= require sortablejs/Sortable
 //= require @agilie/canvas-image-cover-position/index
-//= require sort-blocks
+//= require blocks
 //= require dropzone

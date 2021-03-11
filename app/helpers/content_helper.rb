@@ -32,6 +32,7 @@ module ContentHelper
     text = markdown_youtube(text)
     text = markdown_gallery(text)
     text = markdown_hero_icon(text)
+    text = markdown_post_block(text)
 
     content = markdown.render(text).html_safe
   end
@@ -64,6 +65,28 @@ module ContentHelper
   def markdown_hero_icon(text)
     text.gsub /\[hero\s+(.*?)\]/ do
       ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 55, height: 50, loading: "lazy")
+    end
+  end
+
+  def markdown_post_block(text)
+    if @post.present? || action_name == "parse_markdown"
+      text.gsub /\[block\s+(.*?)\]/ do
+        if action_name == "parse_markdown"
+          block = Block.find_by(id: $1)
+        else
+          block = @post.blocks.find_by(id: $1)
+        end
+
+        if block.present?
+          if action_name == "parse_markdown"
+            render_to_string partial: "blocks/post/#{ block.name }", locals: { block: block }
+          else
+            render "blocks/post/#{ block.name }", block: block
+          end
+        end
+      end
+    else
+      text
     end
   end
 

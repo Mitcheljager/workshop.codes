@@ -1,4 +1,4 @@
-<div class="content-block mt-1/4" data-id="<%= block.id %>" data-toggle-content>
+<div class="content-block mt-1/4" data-id="<%= block.id %>" data-toggle-content data-sortable-block>
   <div class="content-block__title">
     <h3 class="mt-0 mb-0"><%= block.name.humanize %></h3>
 
@@ -17,7 +17,7 @@
 
   <div data-role="content-to-toggle" style="display: none">
     <%= form_for :block, url: block_path(block.id), method: :patch, remote: true do |form| %>
-        <%= render "profiles/blocks/settings/#{ block.name }", block: block, form: form %>
+        <%= render "blocks/profile/settings/#{ block.name }", block: block, form: form %>
 
         <%= submit_tag "Save", class: "button mt-1/4", data: { disable_with: "Submitting..." } %>
     <% end %>

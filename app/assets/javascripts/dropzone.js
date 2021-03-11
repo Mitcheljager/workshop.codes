@@ -1,7 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
-  const element = document.querySelector("[data-role='dropzone']")
+  const elements = document.querySelectorAll("[data-role='dropzone']")
 
-  if (element) new Dropzone(element).bind()
+  elements.forEach(element => { new Dropzone(element).bind() })
 })
 
 class Dropzone {
@@ -50,9 +50,7 @@ class Dropzone {
     if (event.dataTransfer.items) this.readFiles(event.dataTransfer.items)
   }
   
-  paste(event) {
-    if (!document.querySelector(".tabs__item--active[data-target='images']")) return
-  
+  paste(event) {  
     const items = (event.clipboardData || event.originalEvent.clipboardData).items
     this.readFiles(items)
   }
@@ -80,22 +78,25 @@ class Dropzone {
       image.src = event.target.result
   
       image.onload = () => {
-        const uploader = new Uploader(file, "images")
+        const uploader = new Uploader(file, "images", "dropzone", "",
+                                      document.querySelector(`[data-dropzone-target="${ this.element.dataset.target }"]`),
+                                      document.querySelector(`input[type="file"][name="${ this.element.dataset.input }"]`))
   
         uploader.upload().then(() => {
           const interval = setInterval(() => {
             if (uploader.blob == "") return
             clearInterval(interval)
   
-            this.drawAndRenderThumbnail(image, uploader.blob.id)
+            if (this.element.dataset.dropzoneType == "carousel") this.drawAndRenderThumbnail(image, uploader.blob.id)
+            if (this.element.dataset.dropzoneType == "gallery") this.renderGalleryItem(reader.result, uploader.blob.id)
           }, 100)
         })
       }
     }
   }
   
-  drawAndRenderThumbnail(image, imageId) {
-    const thumbnailsElement = document.querySelector("[data-role~='form-image-thumbnails']")
+  drawAndRenderThumbnail(image, blobId) {
+    const thumbnailsElement = document.querySelector(`[data-dropzone-target="${ this.element.dataset.target }"]`)
     const canvas = document.createElement("canvas")
     const ctx = canvas.getContext("2d")
   
@@ -119,10 +120,11 @@ class Dropzone {
   
     const thumbnailItem = document.createElement("div")
     thumbnailItem.classList.add("images-preview__item")
-    thumbnailItem.dataset.id = imageId
+    thumbnailItem.dataset.id = blobId
   
     const removeElement = document.createElement("div")
     removeElement.classList.add("images-preview__action")
+    thumbnailItem.dataset.imagePreviewItem = true
     thumbnailItem.dataset.action = "remove-image"
     removeElement.textContent = "Remove"
     removeElement.addEventListener("click", () => { this.remove(event) })
@@ -132,6 +134,29 @@ class Dropzone {
   
     thumbnailsElement.append(thumbnailItem)
   
+    this.updateSortable()
+  }
+
+  renderGalleryItem(image, blobId) {
+    const thumbnailsElement = document.querySelector(`[data-dropzone-target="${ this.element.dataset.target }"]`)
+    const template = `<div class="gallery__item b-dark" data-image-preview-item data-id="${ blobId }">
+      <img src="${ image }" />
+
+      <div class="images-preview__action" data-action="remove-image">Remove</div>
+
+      <span class="gallery__title">
+        <input type="text" name="gallery_image_label_${ blobId }" class="form-input" placeholder="Image label (optional)" />
+      </span>
+    </div>`
+
+    let element = document.createElement("div")
+    element.innerHTML = template
+    element = element.firstChild
+  
+    element.querySelector("[data-action='remove-image']").addEventListener("click", () => { this.remove(event) })
+
+    thumbnailsElement.append(element)
+
     this.updateSortable()
   }
   
@@ -147,16 +172,16 @@ class Dropzone {
   }
   
   updateSortable() {
-    const element = document.querySelector("[data-role*='form-image-thumbnails']")
-    const items = [...element.querySelectorAll(".images-preview__item")]
+    const element = document.querySelector(`[data-dropzone-target="${ this.element.dataset.target }"]`)
+    const items = [...element.querySelectorAll("[data-image-preview-item]")]
     const array = items.map(item => parseInt(item.dataset.id))
   
-    const input = document.querySelector("input[name*='image_order']")
+    const input = document.querySelector(`[data-dropzone-image-order="${ this.element.dataset.target }"]`)
     input.value = JSON.stringify(array)
   }
   
   remove(event) {
-    const element = event.target.closest(".images-preview__item")
+    const element = event.target.closest("[data-image-preview-item]")
     element.remove()
   
     this.updateSortable()
