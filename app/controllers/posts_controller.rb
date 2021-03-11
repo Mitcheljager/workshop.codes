@@ -120,6 +120,7 @@ class PostsController < ApplicationController
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
       create_collection if post_params[:new_collection] != ""
+      update_blocks
 
       notify_discord("New")
 
@@ -141,13 +142,12 @@ class PostsController < ApplicationController
 
     set_post_status
     parse_carousel_video
-    update_blocks
 
     if @post.update(post_params)
       create_activity(:update_post, post_activity_params)
       create_collection if post_params[:new_collection] != ""
-
       update_email_notifications
+      update_blocks
 
       if (post_params[:revision].present? && post_params[:revision] != "0") || (current_code != post_params[:code]) || (current_version != post_params[:version])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1

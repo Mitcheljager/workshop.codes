@@ -152,8 +152,6 @@ class Dropzone {
     let element = document.createElement("div")
     element.innerHTML = template
     element = element.firstChild
-
-    console.log(element)
   
     element.querySelector("[data-action='remove-image']").addEventListener("click", () => { this.remove(event) })
 
