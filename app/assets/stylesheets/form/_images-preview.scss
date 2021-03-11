@@ -62,8 +62,10 @@
 
 .images-preview__action {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
+  bottom: auto;
+  border-bottom-left-radius: $border-radius;
   padding: .25em .5em;
   background: $red;
   font-size: 12px;

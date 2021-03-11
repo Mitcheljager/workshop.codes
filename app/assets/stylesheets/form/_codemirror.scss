@@ -1,21 +1,50 @@
-.CodeMirror .CodeMirror-code {
-  .cm-attribute {
-    color: #8e74b5;
+.CodeMirror {
+  padding: 0;
+  border: 0;
+  background: $bg-dark;
+  color: $white;
+  min-height: 600px;
+
+  .CodeMirror-selectedtext,
+  .CodeMirror-selected {
+    background: lighten($bg-dark, 20%);
   }
 
-  .cm-string {
-    color: #5074de;
+  .CodeMirror-code {
+    .cm-url {
+      color: $text-color;
+    }
+
+    .cm-attribute {
+      color: #8e74b5;
+    }
+  
+    .cm-string {
+      color: #5074de;
+    }
   }
-}
 
-.CodeMirror-lines {
-  padding-bottom: 2rem;
-
-  .well {
-    white-space: initial;
+  &.CodeMirror-fullscreen {
+    z-index: 1000;
   }
 }
 
 .CodeMirror-scroll {
   min-height: 600px !important;
+  padding-right: #{ $margin / 2 };
+  padding-bottom: #{ $margin };
+  margin-right: -#{ $margin };
+  margin-bottom: -#{ $margin };
+}
+
+.CodeMirror-cursor {
+  border-color: $white;
+}
+
+.CodeMirror-lines {
+  padding: 2rem;
+
+  .well {
+    white-space: initial;
+  }
 }

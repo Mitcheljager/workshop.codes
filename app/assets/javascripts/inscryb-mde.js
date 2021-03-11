@@ -13,12 +13,68 @@ class InitialiseInscrybeMDE {
   constructor(element) {
     this.element = element
     this.mde = ""
-    this.markers = []
+    this.enableBlocks = element.dataset.enableBlocks
+    this.toolbar = this.setToolbar()
   }
 
-  initialise() {
-    const _this = this
+  setToolbar() {
+    const toolbar = [
+      "preview",
+      "fullscreen",
+      "|",
+      "bold",
+      "italic",
+      {
+        action: this.insertHighlight,
+        name: "highlight",
+        className: "fa fa-highlight",
+        title: "Highlight"
+      },
+      "heading",
+      "|",
+      "unordered-list",
+      "ordered-list",
+      "|",
+      "horizontal-rule",
+      "quote",
+      "code",
+      "link",
+      {
+        action: this.toggleImageUploader,
+        name: "image",
+        className: "fa fa-image",
+        title: "Upload an image"
+      },
+      "|",
+      "table",
+      {
+        action: this.insertGallery,
+        name: "gallery",
+        className: "fa fa-gallery",
+        title: "Gallery"
+      },
+      {
+        action: this.insertHeroIconSelect,
+        name: "hero-icon",
+        className: "fa fa-hero-icon",
+        title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
+      }
+    ]
+    
+    if (this.enableBlocks) {
+      toolbar.push("|")
+      toolbar.push({
+        action: this.insertBlock,
+        name: "Gallery Block",
+        className: "fa fa-block-gallery",
+        title: "Gallery"
+      })
+    }
 
+    return toolbar
+  }
+  
+  initialise() {
     this.mde = new InscrybMDE({
       element: this.element,
       autoDownloadFontAwesome: false,
@@ -42,55 +98,7 @@ class InitialiseInscrybeMDE {
     
         return `<div class="p-1/2"><div class="spinner"></div></div>`
       },
-      toolbar: [
-        "preview",
-        "fullscreen",
-        "|",
-        "bold",
-        "italic",
-        {
-          action: _this.insertHighlight,
-          name: "highlight",
-          className: "fa fa-highlight",
-          title: "Highlight"
-        },
-        "heading",
-        "|",
-        "unordered-list",
-        "ordered-list",
-        "|",
-        "horizontal-rule",
-        "quote",
-        "code",
-        "link",
-        {
-          action: _this.toggleImageUploader,
-          name: "image",
-          className: "fa fa-image",
-          title: "Upload an image"
-        },
-        "|",
-        "table",
-        {
-          action: _this.insertGallery,
-          name: "gallery",
-          className: "fa fa-gallery",
-          title: "Gallery"
-        },
-        {
-          action: _this.insertHeroIconSelect,
-          name: "hero-icon",
-          className: "fa fa-hero-icon",
-          title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
-        },
-        "|",
-        {
-          action: function customAction(editor) { _this.insertBlock(editor) },
-          name: "Gallery",
-          className: "fa fa-gallery",
-          title: "Gallery"
-        },
-      ]
+      toolbar: this.toolbar
     })
 
     this.bindPaste()
@@ -149,6 +157,41 @@ class InitialiseInscrybeMDE {
     }
   }
 
+  insertBlock(editor, existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {
+    let position = editor.codemirror.getCursor()
+
+    if (existingBlock) {
+      editor.codemirror.replaceRange("\n\n\n", position)
+      position = editor.codemirror.getCursor()
+    }
+
+    const markerElement = document.createElement("div")
+    markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
+
+    const marker = editor.codemirror.markText({ line: lineNumber || position.line - 1, ch: 0 }, { line: lineNumber || position.line, ch: charCount }, {
+      replacedWith: markerElement,
+      addToHistory: existingBlock,
+      inclusiveLeft: false,
+      inclusiveRight: false
+    })
+
+    new FetchRails(`/blocks/show_or_create`, { name: "gallery", id: blockId })
+    .post().then(data => { 
+      marker.widgetNode.innerHTML = data
+      
+      const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
+      marker.lines[0].text = `[block ${ blockId }]`
+
+      const dropzone = marker.widgetNode.querySelector("[data-role='dropzone']")
+      const cssVariableElement = marker.widgetNode.querySelector("[data-action~='set-css-variable']")
+
+      if (dropzone) new Dropzone(dropzone).bind()
+      if (cssVariableElement) cssVariableElement.addEventListener("input", setCssVariable)
+    })
+    .catch(error => alert(error))
+    .finally(() => marker.changed())
+  }
+
   parseBlocks() {
     const linesFound = []
     let lineNumber = 0
@@ -165,44 +208,6 @@ class InitialiseInscrybeMDE {
 
       lineNumber++
     })
-  }
-
-  insertBlock(editor, existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {
-    let position = editor.codemirror.getCursor()
-
-    if (existingBlock) {
-      editor.codemirror.replaceRange("\n", position)
-      position = editor.codemirror.getCursor()
-    }
-
-    const markerElement = document.createElement("div")
-    markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
-
-    const marker = editor.codemirror.markText({ line: lineNumber || position.line, ch: 0 }, { line: lineNumber || position.line + 1, ch: charCount }, {
-      replacedWith: markerElement,
-      addToHistory: existingBlock,
-      inclusiveLeft: false,
-      inclusiveRight: false,
-      readOnly: true
-    })
-
-    console.log(marker)
-
-    this.markers.push(marker)
-    const markerId = this.markers.length - 1
-
-    new FetchRails(`/blocks/show_or_create`, { name: "gallery", id: blockId })
-    .post().then(data => { 
-      this.markers[markerId].widgetNode.innerHTML = data
-      
-      const blockId = this.markers[markerId].widgetNode.querySelector("[data-id]").dataset.id
-      this.markers[markerId].lines[0].text = `[block ${ blockId }]`
-
-      const dropzone = this.markers[markerId].widgetNode.querySelector("[data-role='dropzone']")
-      if (dropzone) new Dropzone(dropzone).bind()
-    })
-    .catch(error => alert(error))
-    .finally(() => this.mde.codemirror.refresh())
   }
   
   toggleImageUploader(editor) {

@@ -7,8 +7,8 @@ module BlocksHelper
     end
   end
 
-  def block_input_name(block, name)
-    "[block][#{ block.id }][properties][#{ name }]"
+  def block_input_name(block, name, multiple = false)
+    "[block][#{ block.id }][properties][#{ name }]#{ "[]" if multiple }"
   end
 
   def block_images(block)

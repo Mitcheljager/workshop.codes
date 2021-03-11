@@ -1,12 +1,14 @@
 class Uploader {
-  constructor(file, name, uploadType = "carousel", randomId = "") {
+  constructor(file, name, uploadType = "dropzone", randomId = "", element = null, input = null) {
     this.file = file
     this.name = name
     this.blob = ""
     this.progressElement = document.createElement("div")
     this.uploadType = uploadType
     this.randomId = randomId
-    this.progress = 0
+    this.progress = 0,
+    this.element = element
+    this.input = input
   }
 
   async upload() {
@@ -15,10 +17,9 @@ class Uploader {
       return
     }
 
-    const element = document.querySelector("[data-direct-upload-url]")
-    const upload = new ActiveStorage.DirectUpload(this.file, element.dataset.directUploadUrl, this)
+    const upload = new ActiveStorage.DirectUpload(this.file, this.input.dataset.directUploadUrl, this)
 
-    if (this.uploadType == "carousel") this.createProgressElement()
+    if (this.element) this.createProgressElement()
 
     upload.create((error, blob) => {
       if (error) {
@@ -29,22 +30,20 @@ class Uploader {
         const hiddenField = document.createElement("input")
         hiddenField.setAttribute("type", "hidden")
         hiddenField.setAttribute("value", blob.signed_id)
-        hiddenField.name = element.name
+        hiddenField.name = this.input.name
 
-        element.closest("form").appendChild(hiddenField)
+        this.input.closest("form").appendChild(hiddenField)
       }
     })
   }
 
   createProgressElement() {
-    const imagesPreviewElement = document.querySelector("[data-role~='form-image-thumbnails']")
-
     this.progressElement.classList.add("images-preview__progress")
     const progressBarElement = document.createElement("div")
     progressBarElement.classList.add("images-preview__progress-bar")
 
     this.progressElement.append(progressBarElement)
-    imagesPreviewElement.append(this.progressElement)
+    this.element.append(this.progressElement)
   }
 
   directUploadWillStoreFileWithXHR(request, xhr) {
@@ -54,7 +53,7 @@ class Uploader {
   directUploadDidProgress(event) {
     this.progress = Math.round((100 / event.total) * event.loaded)
 
-    if (this.uploadType == "carousel") {
+    if (this.uploadType == "dropzone") {
       const progressBarElement = this.progressElement.querySelector(".images-preview__progress-bar")
       progressBarElement.style.width = this.progress + "%"
   

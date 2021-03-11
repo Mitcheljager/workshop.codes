@@ -2,7 +2,7 @@
   <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
   <%= form.hidden_field :image_order, data: { dropzone_image_order: "post" } %>
 
-  <div class="dropzone" data-role="dropzone" data-target="post">
+  <div class="dropzone" data-role="dropzone" data-target="post" data-dropzone-type="carousel" data-input="post[images][]">
     <span><%= t("posts.form.images.dropzone.label") %></span>
 
     <small><%= t("posts.form.images.dropzone.help") %></small>
@@ -12,7 +12,7 @@
 
   <div class="form-group-uneven mt-1/4">
     <div class="form-group">
-      <%= form.label :carousel_video, t("posts.form.images.video.label"), class: "form-label" %>
+      <%= form.label :carousel_video, t("posts.form.images.video.label"), class: "form-labinel" %>
 
       <div class="form-hint">
         <%= t("posts.form.images.video.help_html") %>

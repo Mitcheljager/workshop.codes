@@ -89,7 +89,7 @@ class InscrybeInsertImage {
 
   upload(image) {
     const randomId = Math.random().toString().substr(2, 8)
-    const uploader = new Uploader(image, "images", "textarea", randomId)
+    const uploader = new Uploader(image, "images", "textarea", randomId, null, document.querySelector("input[type='file'][name*='[images]']"))
 
     this.insertPlaceholderText(randomId)
 

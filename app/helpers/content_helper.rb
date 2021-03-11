@@ -69,13 +69,17 @@ module ContentHelper
   end
 
   def markdown_post_block(text)
-    if @post.present?
+    if @post.present? || action_name == "parse_markdown"
       text.gsub /\[block\s+(.*?)\]/ do
-        block = @post.blocks.find_by(id: $1)
+        if action_name == "parse_markdown"
+          block = Block.find_by(id: $1)
+        else
+          block = @post.blocks.find_by(id: $1)
+        end
 
         if block.present?
           if action_name == "parse_markdown"
-            render_to_string "blocks/post/#{ block.name }", block: block
+            render_to_string partial: "blocks/post/#{ block.name }", locals: { block: block }
           else
             render "blocks/post/#{ block.name }", block: block
           end

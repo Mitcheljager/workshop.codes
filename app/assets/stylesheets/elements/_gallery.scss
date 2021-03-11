@@ -8,7 +8,7 @@
   text-align: center;
 
   &--input {
-    --grid-min-width: 200px;
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--grid-min-width) - 30px), 1fr));
   }
 }
 

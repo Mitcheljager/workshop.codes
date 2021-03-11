@@ -1,13 +1,32 @@
-<%= file_field_tag block_input_name(@block, "images"), multiple: true, direct_upload: true, class: "hidden-field", data: { action: "block-images", block_id: @block.id } %>
-<%= text_field_tag block_input_name(@block, "image_blob_ids"), block_property(@block, "image_blob_ids"), data: { dropzone_image_order: @block.id } %>
+<%= file_field_tag block_input_name(@block, "images", true), multiple: true, direct_upload: true, class: "hidden-field", data: { action: "block-images", block_id: @block.id } %>
+<%= hidden_field_tag block_input_name(@block, "image_blob_ids"), block_property(@block, "image_blob_ids"), data: { dropzone_image_order: @block.id } %>
 
 <% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) } %>
 
-<div class="dropzone" data-role="dropzone" data-target="<%= @block.id %>">
-  <span>Drop images here to add them to this Gallery</span>
+<div class="dropzone"
+     data-role="dropzone"
+     data-target="<%= @block.id %>"
+     data-dropzone-type="gallery"
+     data-input="<%= block_input_name(@block, "images", true) %>">
+  <span>Drop (or click and paste) images here to add them to this Gallery</span>
 </div>
 
-<div class="gallery gallery--input mb-0" data-role="form-image-thumbnails sortable" data-dropzone-target="<%= @block.id %>">
+<div class="mt-1/4">
+  <label class="form-label">Size of items in gallery</label>
+
+  <%= range_field_tag block_input_name(@block, "item_size"), block_property(@block, "item_size", "230"),
+      min: "150", max: "500", step: "50",
+      data: { action: "set-css-variable", target: "item-size-#{ @block.id }", variable: "grid-min-width" } %>
+
+  <em class="block mt-1/4 text-dark">Drag images to reorder them</em>
+</div>
+
+<div class="gallery gallery--input mt-1/4 mb-0"
+     data-css-variable="item-size-<%= @block.id %>"
+     data-role="form-image-thumbnails sortable"
+     data-dropzone-target="<%= @block.id %>"
+     style="--grid-min-width: <%= block_property(@block, "item_size", 230) %>px">
+
   <% images.each do |image| %>
     <% next unless image %>
     <% url = ENV["CDN"] + image.variant(quality: 95).processed.key %>
@@ -15,8 +34,10 @@
     <div class="gallery__item b-dark" data-image-preview-item data-id="<%= image.blob_id %>">
       <%= image_tag url, alt: "abc", loading: "lazy" %>
 
+      <div class="images-preview__action" data-action="remove-image">Remove</div>
+
       <span class="gallery__title">
-        <%= text_field_tag block_input_name(@block, "gallery_image_label_#{ image.blob_id }"), block_property(@block, "gallery_image_label_#{ image.blob_id }"), class: "form-input", placeholder: "Image label (optional)" %>
+        <%= text_field_tag block_input_name(@block, "image_label_#{ image.blob_id }"), block_property(@block, "image_label_#{ image.blob_id }"), class: "form-input", placeholder: "Image label (optional)" %>
       </span>
     </div>
   <% end %>
