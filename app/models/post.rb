@@ -88,6 +88,9 @@ class Post < ApplicationRecord
   validates :version, length: { maximum: 20 }
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes }
+  
+  # Ensure unresolved reports about this post are archived
+  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 
   def self.search(query)
     __elasticsearch__.search({
@@ -134,6 +137,7 @@ class Post < ApplicationRecord
     self.where(private: false, unlisted: false)
   end
 
-  # Ensure unresolved reports about this post are archived
-  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
+  def expired?
+    !self.immortal? && self.last_revision_created_at < 6.months.ago
+  end
 end

@@ -150,7 +150,7 @@ class PostsController < ApplicationController
       update_email_notifications
       update_blocks
 
-      if (post_params[:revision].present? && post_params[:revision] != "0") || (current_code != post_params[:code]) || (current_version != post_params[:version])
+      if (post_params[:revision].present? && post_params[:revision] != "0") || (post_params[:code].present? && current_code != post_params[:code]) || (post_params[:version].present? && current_version != post_params[:version])
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
         @post.update(last_revision_created_at: @revision.created_at) if @revision.save
@@ -243,7 +243,8 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :code, :title, :include_nice_url, :nice_url, :status, :description, :version, { categories: [] }, :tags, { heroes: [] }, { maps: [] }, :snippet, :ptr, :locale,
+      :code, :title, :include_nice_url, :nice_url, :status, :description, :version, :snippet, :ptr, :locale, :immortal,
+      { categories: [] }, { heroes: [] }, { maps: [] }, :tags,
       :collection_id, :new_collection,
       :revision, :revision_description,
       :email_notification, :email,

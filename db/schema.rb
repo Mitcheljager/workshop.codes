@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_143037) do
+ActiveRecord::Schema.define(version: 2021_03_13_172518) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 2021_03_04_143037) do
     t.string "locale", default: "en"
     t.boolean "ptr", default: false
     t.datetime "last_revision_created_at"
+    t.boolean "immortal", default: false
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

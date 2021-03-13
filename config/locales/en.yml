@@ -4,6 +4,8 @@ en:
   global:
     required: Required
     optional: Optional
+    loading: Loading...
+    processing: Processing...
 
   navigation:
     recent: Latest
@@ -88,6 +90,9 @@ en:
       expired:
         title: This code is over 6 months old.
         content: This means the code may have expired and might no longer function.
+      immortal:
+        button: This code is immortal
+        content: If you are certain your code is immortal and has not expired you can mark it as such. To find out you can import this code in-game. If it is still functional even though you are seeing this message, it's likely immortal.
       private:
         title: This code is set to private.
         content: Only you can see it.
