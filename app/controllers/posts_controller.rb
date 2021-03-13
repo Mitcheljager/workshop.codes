@@ -100,9 +100,10 @@ class PostsController < ApplicationController
   end
 
   def get_snippet
-    @snippet = Post.visible?.select(:snippet).find(params[:id]).snippet
+    @post = Post.select(:snippet, :private, :user_id).find(params[:id])
+    @post = nil if @post.private? && current_user.id != @post.user_id
 
-    render plain: @snippet
+    render plain: @post.snippet
   end
 
   def create
