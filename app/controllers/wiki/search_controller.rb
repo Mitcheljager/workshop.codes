@@ -30,10 +30,4 @@ class Wiki::SearchController < Wiki::BaseController
       }
     end
   end
-
-  private
-
-  def set_request_headers
-    headers["Access-Control-Allow-Origin"] = "*"
-  end
 end

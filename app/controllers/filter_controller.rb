@@ -52,8 +52,4 @@ class FilterController < ApplicationController
       "created_at"
     end
   end
-
-  def set_request_headers
-    headers["Access-Control-Allow-Origin"] = "*"
-  end
 end

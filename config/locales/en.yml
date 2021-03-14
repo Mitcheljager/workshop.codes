@@ -10,7 +10,6 @@ en:
   navigation:
     recent: Latest
     on_fire: On Fire
-    while_you_wait: While You Wait
     wiki: Wiki
     create: Create
     login: Login
@@ -251,12 +250,6 @@ en:
     loading: Loading...
     modal:
       disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. <u>This form is not meant to report bugs to the creator of this code.</u>
-
-  while_you_waits:
-    index:
-      title: While you wait
-      tagline: Codes to play while in queue
-      content: A curated list of games that are fun to play while you wait. Most of these are games that require no other players so you can get started right away.
 
   users:
     show:

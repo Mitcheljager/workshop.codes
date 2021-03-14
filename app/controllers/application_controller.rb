@@ -66,6 +66,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method :set_request_headers
+
+  def set_request_headers
+    headers["Access-Control-Allow-Origin"] = "*"
+  end
+
   private
 
   def redirect_non_www

@@ -7,7 +7,6 @@ RSpec.describe Post, type: :model do
     it { should have_many(:favorites).dependent(:destroy) }
     it { should have_many(:revisions).dependent(:destroy) }
     it { should have_many(:comments).dependent(:destroy) }
-    it { should have_many(:while_you_waits).dependent(:destroy) }
     it { should have_many(:email_notifications).dependent(:destroy) }
   end
 

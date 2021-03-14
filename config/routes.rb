@@ -94,8 +94,7 @@ Rails.application.routes.draw do
     get "unread-notifications", to: "notifications#get_unread_notifications"
     get "unread-notifications-count", to: "notifications#get_unread_notifications_count"
 
-    get "on-fire(/page/:page)", to: "posts#on_fire", as: "on_fire"
-    get "while-you-wait(/:filter)", to: "while_you_waits#index", as: "while_you_wait"
+    get "on-fire(/page/:page)", to: "on_fire#index", as: "on_fire"
 
     resources :revisions, only: [:edit, :update]
     get ":code/revisions", to: "revisions#index", as: "revisions"

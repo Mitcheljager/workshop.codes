@@ -3,8 +3,8 @@
 <div class="heading">
   <h1>
     <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %>
-    <%= t(".title_html") %> <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
+    <%= t("posts.on_fire.title_html") %> <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
   </h1>
 </div>
 
-<%= render "posts" %>
+<%= render "posts/posts" %>
