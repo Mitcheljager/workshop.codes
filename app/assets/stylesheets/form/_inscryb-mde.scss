@@ -152,6 +152,7 @@
 }
 
 .editor-toolbar button[title="Gallery"],
+.editor-toolbar button[title="Controls"],
 .editor-toolbar button[title="Insert Table"],
 .editor-toolbar button[title*="Hero Icon"],
 .editor-toolbar button[title*="Toggle Preview"] {
@@ -170,6 +171,10 @@
 
 .fa-block-gallery::before {
   content: "Block: Gallery";
+}
+
+.fa-block-controls::before {
+  content: "Block: Controls";
 }
 
 .fa-hero-icon::before {

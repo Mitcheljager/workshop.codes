@@ -12,7 +12,8 @@ document.addEventListener("turbolinks:load", function() {
 class InitialiseInscrybeMDE {
   constructor(element) {
     this.element = element
-    this.mde = ""
+    this.mde = null
+    this.codemirror = null
     this.enableBlocks = element.dataset.enableBlocks
     this.toolbar = this.setToolbar()
   }
@@ -25,7 +26,7 @@ class InitialiseInscrybeMDE {
       "bold",
       "italic",
       {
-        action: this.insertHighlight,
+        action: () => { this.insertHighlight() },
         name: "highlight",
         className: "fa fa-highlight",
         title: "Highlight"
@@ -40,7 +41,7 @@ class InitialiseInscrybeMDE {
       "code",
       "link",
       {
-        action: this.toggleImageUploader,
+        action: () => { this.toggleImageUploader() },
         name: "image",
         className: "fa fa-image",
         title: "Upload an image"
@@ -48,13 +49,13 @@ class InitialiseInscrybeMDE {
       "|",
       "table",
       {
-        action: this.insertGallery,
+        action: () => { this.insertGallery() },
         name: "gallery",
         className: "fa fa-gallery",
         title: "Gallery"
       },
       {
-        action: this.insertHeroIconSelect,
+        action: () => { this.insertHeroIconSelect() },
         name: "hero-icon",
         className: "fa fa-hero-icon",
         title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
@@ -63,8 +64,9 @@ class InitialiseInscrybeMDE {
     
     if (this.enableBlocks) {
       toolbar.push("|")
+
       toolbar.push({
-        action: this.insertBlock,
+        action: () => { this.insertBlock("gallery") },
         name: "Gallery Block",
         className: "fa fa-block-gallery",
         title: "Gallery"
@@ -101,36 +103,33 @@ class InitialiseInscrybeMDE {
       toolbar: this.toolbar
     })
 
+    this.codemirror = this.mde.codemirror
     this.bindPaste()
     this.parseBlocks()
   }
 
   bindPaste() {
-    this.mde.codemirror.on("paste", (editor, event) => {
+    this.codemirror.on("paste", (editor, event) => {
       new InscrybeInsertImage(event, editor).paste()
     })
   }
 
-  insertHighlight(editor) {
-    let output = ""
-    const cm = editor.codemirror
-    const selectedText = cm.getSelection()
+  insertHighlight() {
+    const selectedText = this.codemirror.getSelection()
     const text = selectedText || "text"
+    const output = "==" + text + "=="
 
-    output = "==" + text + "=="
-    cm.replaceSelection(output)
+    this.codemirror.replaceSelection(output)
   }
 
-  insertGallery(editor) {
-    const cm = editor.codemirror
+  insertGallery() {
     const output = '[gallery {\n  "Gallery Item 1": "https://",\n  "Gallery Item 2": "https://"\n}]'
 
-    cm.replaceSelection(output)
+    this.codemirror.replaceSelection(output)
   }
 
-  insertHeroIconSelect(editor) {
-    const cm = editor.codemirror
-    const button = editor.gui.toolbar.querySelector(".fa-hero-icon").closest("button")
+  insertHeroIconSelect() {
+    const button = this.mde.gui.toolbar.querySelector(".fa-hero-icon").closest("button")
   
     button.classList.toggle("dropdown-open")
   
@@ -145,7 +144,7 @@ class InitialiseInscrybeMDE {
         heroElement.innerText = hero
   
         heroElement.addEventListener("click", () => {
-          cm.replaceSelection(`[hero ${ hero }]`)
+          this.codemirror.replaceSelection(`[hero ${ hero }]`)
         })
   
         dropdownElement.append(heroElement)
@@ -157,25 +156,25 @@ class InitialiseInscrybeMDE {
     }
   }
 
-  insertBlock(editor, existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {
-    let position = editor.codemirror.getCursor()
+  insertBlock(name = "", existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {
+    let position = this.codemirror.getCursor()
 
     if (existingBlock) {
-      editor.codemirror.replaceRange("\n\n\n", position)
-      position = editor.codemirror.getCursor()
+      this.codemirror.replaceRange("\n\n\n", position)
+      position = this.codemirror.getCursor()
     }
 
     const markerElement = document.createElement("div")
     markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
 
-    const marker = editor.codemirror.markText({ line: lineNumber || position.line - 1, ch: 0 }, { line: lineNumber || position.line, ch: charCount }, {
+    const marker = this.codemirror.markText({ line: lineNumber || position.line - 1, ch: 0 }, { line: lineNumber || position.line, ch: charCount }, {
       replacedWith: markerElement,
       addToHistory: existingBlock,
       inclusiveLeft: false,
       inclusiveRight: false
     })
 
-    new FetchRails(`/blocks/show_or_create`, { name: "gallery", id: blockId })
+    new FetchRails(`/blocks/show_or_create`, { name: name, id: blockId })
     .post().then(data => { 
       marker.widgetNode.innerHTML = data
       
@@ -196,7 +195,7 @@ class InitialiseInscrybeMDE {
     const linesFound = []
     let lineNumber = 0
 
-    this.mde.codemirror.eachLine(line => {
+    this.codemirror.eachLine(line => {
       const match = /\[block\s+(.*?)\]/.exec(line.text)
 
       if (match) {
@@ -210,8 +209,8 @@ class InitialiseInscrybeMDE {
     })
   }
   
-  toggleImageUploader(editor) {
-    const button = editor.gui.toolbar.querySelector(".fa-image").closest("button")
+  toggleImageUploader() {
+    const button = this.mde.gui.toolbar.querySelector(".fa-image").closest("button")
   
     button.classList.toggle("dropdown-open")
   
@@ -234,7 +233,7 @@ class InitialiseInscrybeMDE {
       inputElement.id = randomId
       inputElement.classList.add("hidden-field")
       
-      inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, editor.codemirror).input() })
+      inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, this.codemirror).input() })
       labelElement.addEventListener("click", () => { inputElement.click() })
 
       document.body.append(inputElement)
