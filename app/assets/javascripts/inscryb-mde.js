@@ -1,6 +1,16 @@
 //= require inscrybmde/dist/inscrybmde.min.js
 //= require inscrybe-mde-paste-image
 
+let editors = []
+
+document.addEventListener("turbolinks:before-cache", function() {
+  editors.forEach(editor => {
+    editor.toTextArea()
+  })
+
+  editors = []
+})
+
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-role~='simple-mde']")
 
@@ -106,6 +116,8 @@ class InitialiseInscrybeMDE {
     this.codemirror = this.mde.codemirror
     this.bindPaste()
     this.parseBlocks()
+
+    editors.push(this.mde)
   }
 
   bindPaste() {
