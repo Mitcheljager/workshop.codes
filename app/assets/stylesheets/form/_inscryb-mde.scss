@@ -88,7 +88,10 @@
   }
 }
 
-.editor-dropdown__item {
+.editor-toolbar .editor-dropdown__item {
+  display: block;
+  width: 100%;
+  height: auto;
   padding: .25em .75em;
   text-align: left;
   font-size: $font-size-small;
@@ -155,7 +158,8 @@
 .editor-toolbar button[title="Controls"],
 .editor-toolbar button[title="Insert Table"],
 .editor-toolbar button[title*="Hero Icon"],
-.editor-toolbar button[title*="Toggle Preview"] {
+.editor-toolbar button[title*="Toggle Preview"],
+.editor-toolbar button[title*="Wiki Link"] {
   width: auto;
   padding: 0 .5rem;
   font-size: 12px;
@@ -187,6 +191,10 @@
 
 .fa-eye::before {
   content: "Preview";
+}
+
+.fa-wiki::before {
+  content: "Wiki Link";
 }
 
 .editor-toolbar button[title*="Toggle Preview"] {

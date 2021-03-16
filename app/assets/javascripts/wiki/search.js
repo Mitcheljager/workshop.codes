@@ -16,11 +16,7 @@ const searchWiki = debounce((event) => {
   resultsElement.innerHTML = "Searching..."
   const url = resultsElement.dataset.url.replace("query", element.value) + ".json"
 
-  fetch(url, {
-    method: "get",
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
+  new FetchRails(url).get()
   .then(data => {
     setWikiSearchResults(JSON.parse(data))
   })
@@ -30,11 +26,16 @@ function setWikiSearchResults(data) {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']")
   resultsElement.innerHTML = ""
 
+  if (!data.length) {
+    resultsElement.innerText = "No results found"
+    return
+  }
+
   data.forEach(item => {
     const itemElement = document.createElement("a")
     itemElement.classList.add("search__item")
     itemElement.innerText = item.title
-    itemElement.href = `/wiki/articles/${ encodeURIComponent(item.slug) }`
+    itemElement.href = `/wiki/articles/${ item.slug }`
 
     const categoryElement = document.createElement("span")
     categoryElement.classList.add("search__item-category")
@@ -44,8 +45,4 @@ function setWikiSearchResults(data) {
 
     resultsElement.append(itemElement)
   })
-
-  if (!data.length) {
-    resultsElement.innerText = "No results found"
-  }
 }

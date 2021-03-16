@@ -12,7 +12,7 @@
   <p>Content should be in English. Content should be factual, clear, and concise.<p>
 </blockquote>
 
-<%= form_for @article do |form| %>
+<%= form_for @article, html: { autocomplete: "off" } do |form| %>
   <% if @article.errors.any? %>
     <div class="error-block">
       <h2 class="error-block__title"><strong><%= pluralize(@article.errors.count, "error") %></strong> prohibited this Item from being saved:</h2>
@@ -40,9 +40,7 @@
       This includes HTML and CSS, which can be used for markup of more advanced layouts.
     </div>
 
-    <%= link_to "Show Preview", "#", class: "button button--secondary mt-1/4 mb-1/4", data: { action: "markdown-preview" } %>
-
-    <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea" } %>
+    <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_wiki: "true" } %>
   </div>
 
   <div class="form-group-columns mt-1/1">

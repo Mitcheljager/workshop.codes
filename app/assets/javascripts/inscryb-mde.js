@@ -25,6 +25,7 @@ class InitialiseInscrybeMDE {
     this.mde = null
     this.codemirror = null
     this.enableBlocks = element.dataset.enableBlocks
+    this.enableWiki = element.dataset.enableWiki
     this.toolbar = this.setToolbar()
   }
 
@@ -83,6 +84,17 @@ class InitialiseInscrybeMDE {
       })
     }
 
+    if (this.enableWiki) {
+      toolbar.push("|")
+
+      toolbar.push({
+        action: () => { this.toggleWikiSearch() },
+        name: "wiki",
+        className: "fa fa-wiki",
+        title: "Wiki Link"
+      })
+    }
+
     return toolbar
   }
   
@@ -129,7 +141,7 @@ class InitialiseInscrybeMDE {
   insertHighlight() {
     const selectedText = this.codemirror.getSelection()
     const text = selectedText || "text"
-    const output = "==" + text + "=="
+    const output = `==${ text }==`
 
     this.codemirror.replaceSelection(output)
   }
@@ -256,5 +268,79 @@ class InitialiseInscrybeMDE {
     } else {
       button.querySelector(".editor-dropdown").remove()
     }
+  }
+
+  toggleWikiSearch() {
+    const button = this.mde.gui.toolbar.querySelector(".fa-wiki").closest("button")
+  
+    button.classList.toggle("dropdown-open")
+  
+    if (button.classList.contains("dropdown-open")) {
+      const dropdownElement = document.createElement("div")
+      dropdownElement.classList.add("editor-dropdown")
+
+      dropdownElement.innerHTML = `
+        <small>Search the Wiki and insert a link to an article.</small>
+        <input type="text" class="form-input bg-darker" placeholder="Search the Wiki" />
+        <div data-role="results"></div>
+      `
+      
+      button.append(dropdownElement)
+
+      const input = button.querySelector("input")
+      input.focus()
+
+      input.addEventListener("click", event => {
+        event.stopPropagation()
+        event.preventDefault()
+
+        input.focus()
+      })
+
+      const getSearchResults = debounce(event => {
+        if (!event.target.value) return
+
+        const resultsElement = button.querySelector("[data-role='results']")
+        resultsElement.innerHTML = `<small>Searching...</small>`
+
+        new FetchRails(`/wiki/search/${ event.target.value }.json`).get()
+        .then(data => {
+          data = JSON.parse(data)
+          resultsElement.innerHTML = ""
+
+          if (!data.length) {
+            resultsElement.innerHTML = `<small>No results found</small>`
+            return
+          }
+
+          data.forEach(item => {
+            const itemElement = document.createElement("a")
+            itemElement.classList.add("editor-dropdown__item")
+            itemElement.innerText = item.title
+            itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ item.slug }`) })
+
+            const categoryElement = document.createElement("span")
+            categoryElement.style = "opacity: .5; font-size: .8em"
+            categoryElement.innerText = " " + item.category.title
+
+
+            itemElement.append(categoryElement)
+            resultsElement.append(itemElement)
+          })
+        })
+      }, 500)
+
+      input.addEventListener("input", getSearchResults)
+    } else {
+      button.querySelector(".editor-dropdown").remove()
+    }
+  }
+
+  insertLink(link = "") {
+    const selectedText = this.codemirror.getSelection()
+    const text = selectedText || "text"
+    const output = `[${ text }](${ link })`
+
+    this.codemirror.replaceSelection(output)
   }
 }
