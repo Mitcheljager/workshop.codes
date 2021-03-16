@@ -1,15 +1,16 @@
 (() => {
-  <% if @post.errors.any? %>
+  <% if @article.errors.any? %>
     const errorBlock = document.querySelector(".error-block")
     if (errorBlock) errorBlock.remove()
     document.querySelectorAll(".field_with_errors").forEach(element => element.classList.remove("field_with_errors"))
 
-    window.scrollTo(0, 0)
-    document.querySelector("[data-role~='post-form']").insertAdjacentHTML("afterBegin", "<%= j render "form_errors", errors: @post.errors %>")
+    const formElement = document.querySelector("[data-role~='article-form']")
+    formElement.insertAdjacentHTML("afterBegin", "<%= j render "form_errors", errors: @article.errors %>")
+    window.scrollTo(0, formElement.offsetTop)
 
     let elements;
-    <% @post.errors.each do |error| %>
-      elements = document.querySelectorAll("[name*='post[<%= error.attribute %>']")
+    <% @article.errors.each do |error| %>
+      elements = document.querySelectorAll("[name*='wiki_article[<%= error.attribute %>']")
       elements.forEach(element => element.closest(".form-group").classList.add("field_with_errors"))
     <% end %>
   <% else %>

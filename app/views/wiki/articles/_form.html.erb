@@ -1,7 +1,7 @@
-<blockquote class="mt-0 mb-1/1">
+<blockquote class="mt-0 mb-1/1 text-small">
   Anyone can create and edit articles. Misuse of this feature will result in your account getting banned without warning. Be mindful of what your contributions to the wiki.
 
-  <p class="mb-0"><strong>The wiki not not the place to...</strong></p>
+  <p class="mb-0"><strong>The wiki is not the place to...</strong></p>
   <ul class="mt-0">
     <li>advertise your own gamemodes.</li>
     <li>advertise your stream/youtube/other content.</li>
@@ -9,75 +9,72 @@
     <li>report bugs.</li>
   </ul>
 
-  <p>Content should be in English. Content should be factual, clear, and concise.<p>
+  <p>Content should be in English, factual, clear, and concise.<p>
 </blockquote>
 
-<%= form_for @article, html: { autocomplete: "off" } do |form| %>
-  <% if @article.errors.any? %>
-    <div class="error-block">
-      <h2 class="error-block__title"><strong><%= pluralize(@article.errors.count, "error") %></strong> prohibited this Item from being saved:</h2>
-
-      <ul>
-      <% @article.errors.full_messages.each do |message| %>
-        <li><small><%= message %></small></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for @article, remote: true, data: { role: "article-form" }, html: { autocomplete: "off" } do |form| %>
+  <%= render "form_errors", errors: @article.errors if @article.errors.any? %>
 
   <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
 
-  <div class="form-group">
-    <%= form.label :title, class: "form-label" %>
-    <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
-  </div>
+  <article class="article">
+    <main class="article__main">
+      <div class="form-group">
+        <%= form.label :title, class: "form-label" %>
+        <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
+      </div>
 
-  <div class="form-group mt-1/1">
-    <%= form.label :content, class: "form-label" %>
+      <div class="form-group mt-1/1">
+        <%= form.label :content, class: "form-label" %>
 
-    <div class="form-hint">
-      <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to "and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank" %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
-      This includes HTML and CSS, which can be used for markup of more advanced layouts.
-    </div>
+        <div class="form-hint">
+          <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to "and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank" %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
+          This includes HTML and CSS, which can be used for markup of more advanced layouts.
+        </div>
 
-    <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_wiki: "true" } %>
-  </div>
+        <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_wiki: "true" } %>
+      </div>
 
-  <div class="form-group-columns mt-1/1">
-    <div class="form-group">
-      <%= form.label :category_id, class: "form-label" %>
-      <%= form.collection_select :category_id, Wiki::Category.all, :id, :title, { include_hidden: false, include_blank: "Select..." }, { class: "form-select" } %>
+      <% if @article.persisted? %>
+        <hr>
 
-      <span class="form-hint">
-        Only 1 category can be chosen. If you believe an article belongs in multiple categories, make 1 article in each. Each containing content within that category.
-      </span>
-    </div>
+        <div class="form-group">
+          <%= form.label :edit_notes, "Edit notes (Optional)", class: "form-label" %>
 
-    <div class="form-group">
-      <%= form.label :tags, class: "form-label" %>
-      <%= form.text_area :tags, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Separate with ', '" %>
+          <span class="form-hint">
+            Write a little something on why you are making this change.
+          </span>
 
-      <span class="form-hint">
-        Tags should be used to help a user find something that is not already mentioned in the title. For example an article titled "Start rule" might have a tag "Subroutine", as that's relevant to the article. Another relevant use might be translations of the title. Tags should not be used to make an article appear in as many searches as possible.
-      </span>
-    </div>
-  </div>
+          <%= form.text_area :edit_notes, class: "form-input form-textarea form-textarea--extra-small" %>
+        </div>
+      <% end %>
+    </main>
 
-  <hr>
+    <aside class="article__aside">
+      <div class="article__aside-content">
+        <div class="form-group">
+          <%= form.label :category_id, class: "form-label" %>
+          <%= form.collection_select :category_id, Wiki::Category.all, :id, :title, { include_hidden: false, include_blank: "Select..." }, { class: "form-select" } %>
 
-  <% if @article.persisted? %>
-    <div class="form-group">
-      <%= form.label :edit_notes, "Edit notes (Optional)", class: "form-label" %>
+          <span class="form-hint">
+            <small>Only 1 category can be chosen. If you believe an article belongs in multiple categories, make 1 article in each. Each containing content within that category.</small>
+          </span>
+        </div>
 
-      <span class="form-hint">
-        Write a little something on why you are making this change.
-      </span>
+        <div class="form-group">
+          <%= form.label :tags, class: "form-label" %>
+          <%= form.text_area :tags, class: "form-input form-textarea form-textarea--extra-small", placeholder: "Separate with ', '" %>
 
-      <%= form.text_area :edit_notes, class: "form-input form-textarea form-textarea--extra-small" %>
-    </div>
-  <% end %>
+          <span class="form-hint">
+            <small>Tags should be used to help a user find something that is not already mentioned in the title. For example an article titled "Start rule" might have a tag "Subroutine", as that's relevant to the article. Another relevant use might be translations of the title. Tags should not be used to make an article appear in as many searches as possible.</small>
+          </span>
+        </div>
+      </div>
+    </aside>
 
-  <%= submit_tag "Submit", class: "button mt-1/2", data: { disable_with: "Submitting..." } %>
+    <%= submit_tag :submit, class: "button w-100 mt-1/1 lg:mt-0", data: { disable_with: "Submitting..." } %>
+  </article>
+
 <% end %>
 
 <div class="modal modal--content-width" data-modal="markdown-preview" data-hide-on-close style="display: none">

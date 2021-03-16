@@ -55,7 +55,10 @@ class Wiki::ArticlesController < Wiki::BaseController
         redirect_to wiki_articles_path
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render "validation" }
+      end
     end
   end
 
@@ -79,7 +82,10 @@ class Wiki::ArticlesController < Wiki::BaseController
       create_wiki_edit(:edited, @article.id, article_params[:edit_notes])
       redirect_to wiki_article_path(@article.slug)
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.js { render "validation" }
+      end
     end
   end
 

@@ -1,5 +1,5 @@
 <%= form_with url: path, model: post, data: { role: "post-form tabs", reveal_by_checkbox: "advanced-settings" }, html: { autocomplete: "off" }, remote: true do |form| %>
-  <%= render "errors", errors: post.errors if post.errors.any? %>
+  <%= render "form_errors", errors: post.errors if post.errors.any? %>
 
   <div class="banner p-0">
     <div class="p-1/4">
