@@ -1,4 +1,8 @@
-<meta name="twitter:card" content="summary_large_image" />
+<% if yield(:og_summary_small) == "true" %>
+  <meta name="twitter:card" content="summary" />
+<% else %>
+  <meta name="twitter:card" content="summary_large_image" />
+<% end %>
 <meta property="og:title" content="<%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes to Discover and Share" %>">
 <% if yield(:og_image) != "" %>
   <meta property="og:image" content="<%= yield(:og_image) %>">
