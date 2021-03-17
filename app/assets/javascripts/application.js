@@ -20,7 +20,6 @@
 //= require carousel-cards
 //= require checkbox-select-all
 //= require copy
-//= require date-range
 //= require debounce
 //= require difference-viewer
 //= require dropdown
@@ -35,6 +34,7 @@
 //= require get-user-analytics
 //= require get-verified-users
 //= require ide
+//= require image-preview
 //= require infinite-scroll
 //= require modal
 //= require navigation
