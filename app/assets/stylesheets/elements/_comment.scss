@@ -70,6 +70,7 @@
 
 .post-comment__content {
   margin: $margin / 3 0;
+  overflow-wrap: break-word;
 
   h1 {
     font-size: 21px;
