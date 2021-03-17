@@ -59,9 +59,10 @@
         <div class="form-group-max-width">
           <%= form.label :profile_image, t("profile.form.image.label"), class: "form-label" %>
 
-          <%= image_tag (@user.profile_image.attached? ? ENV["CDN"] + @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed.key : "//:0"),
-                        class: "profile-image",
-                        data: { image_preview: "profile-image" } %>
+          <div class="profile-image">
+            <%= image_tag (@user.profile_image.attached? ? ENV["CDN"] + @user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed.key : "//:0"),
+                          data: { image_preview: "profile-image" } %>
+          </div>
 
 
           <%= form.file_field :profile_image,
