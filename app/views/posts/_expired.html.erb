@@ -9,7 +9,7 @@
         post_path(@post.code),
         method: :patch,
         params: { post: { immortal: true } },
-        data: { disable_with: t("global.processing") },
+        data: { disable_with: t("global.processing"), confirm: "Are you sure? Check your code before clicking this button. This action cannot be undone." },
         form: { autocomplete: "off" },
         class: "button button--secondary mb-1/4" %>
   <% end %>
