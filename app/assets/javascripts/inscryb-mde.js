@@ -226,7 +226,7 @@ class InitialiseInscrybeMDE {
         if (linesFound.includes(line.text)) return
         linesFound.push(match[1])
 
-        this.insertBlock(this.mde, false, match[1], lineNumber, match[0].length)
+        this.insertBlock("", false, match[1], lineNumber, match[0].length)
       }
 
       lineNumber++
