@@ -6,9 +6,9 @@
     <p class="text-dark"><small><%= t("posts.show.immortal.content") %></small></p>
 
     <%= button_to t("posts.show.immortal.button"),
-        post_path(@post.code),
-        method: :patch,
-        params: { post: { immortal: true } },
+        immortalise_post_path,
+        method: :post,
+        params: { code: @post.code },
         data: { disable_with: t("global.processing"), confirm: "Are you sure? Check your code before clicking this button. This action cannot be undone." },
         form: { autocomplete: "off" },
         class: "button button--secondary mb-1/4" %>
