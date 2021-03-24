@@ -24,7 +24,7 @@ function createBlock() {
 }
 
 function buildBlockSortable(element) {
-  const sortable = Sortable.create(element, {
+  Sortable.create(element, {
     draggable: "[data-sortable-block]",
     animation: 50,
     onUpdate: () => { updateBlockSortable() }
@@ -45,5 +45,28 @@ function updateBlockSortable() {
   .post().finally(() => {
     progressBar.setValue(1)
     progressBar.hide()
+  })
+}
+
+function insertBlockTemplate(event) {
+  event.preventDefault()
+
+  const template = document.getElementById(`${ this.dataset.template }`).content.cloneNode(true)
+  const targetElement = document.querySelector(`[data-template-target="${ this.dataset.target }"]`)
+
+  targetElement.append(template)
+}
+
+function removeBlockTemplate(event) {
+  event.preventDefault()
+
+  const target = this.closest("[data-remove-target]")
+  target.remove()
+}
+
+function buildInputSortable(element) {
+  Sortable.create(element, {
+    animation: 50,
+    handle: "[data-role~='sortable-handle']"
   })
 }

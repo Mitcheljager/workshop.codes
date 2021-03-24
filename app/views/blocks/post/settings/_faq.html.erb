@@ -1,0 +1,23 @@
+<div>
+  <p class="mt-0 text-dark">
+    <em>Use this block to create a list of questions and answers your players might have. This might also be a good place to explain Workshop Settings that need elaborating. Basic markdown enabled (bold, italic, spacing, etc.).</em>
+  </p>
+
+  <div class="w-100">
+    <div data-template-target="<%= @block.id %>" data-role="sortable">
+      <% if block_property(@block, "questions").present? && block_property(@block, "questions").any? %>
+        <% block_property(@block, "questions").each_with_index do |question, index| %>
+          <%= render "blocks/post/settings/faq_item", question_value: question, answer_value: block_property(@block, "answers")[index] %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= link_to "Add question", "#",
+                class: "button button--secondary w-100",
+                data: { action: "insert-block-template", template: "#{ @block.id }-faq-create-question", target: @block.id }%>
+  </div>
+
+  <template id="<%= @block.id %>-faq-create-question">
+    <%= render "blocks/post/settings/faq_item", question_value: "", answer_value: "" %>
+  </template>
+</div>

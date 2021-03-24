@@ -32,9 +32,9 @@ module ContentHelper
     text = markdown_youtube(text)
     text = markdown_gallery(text)
     text = markdown_hero_icon(text)
-    text = markdown_post_block(text)
+    text = markdown.render(text)
 
-    content = markdown.render(text).html_safe
+    content = markdown_post_block(text).html_safe
   end
 
   def markdown_youtube(text)

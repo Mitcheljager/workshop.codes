@@ -2,6 +2,10 @@
   color: $white !important;
 }
 
+.hover\:text-white:hover {
+  color: $white;
+}
+
 .text-pure-white {
   color: $pure-white;
 }

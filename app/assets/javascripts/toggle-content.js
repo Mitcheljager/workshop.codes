@@ -20,9 +20,11 @@ function toggleContent(event) {
     const animationTiming = parseInt(eventElement.dataset.animationTiming) > 0 ? parseInt(eventElement.dataset.animationTiming) : 0
 
     if (!state) {
+      eventElement.classList.remove("active")
       parent.classList.add("fading-out")
       if (eventElement.dataset.hideWith) eventElement.textContent = eventElement.dataset.hideWith
     } else {
+      eventElement.classList.add("active")
       if (animationTiming > 0) element.style.display = "initial"
       parent.classList.add("fading-in")
       if (eventElement.dataset.showWith) eventElement.textContent = eventElement.dataset.showWith

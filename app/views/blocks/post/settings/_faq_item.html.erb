@@ -1,0 +1,14 @@
+<div data-remove-target>
+  <div class="form-group-uneven">
+    <%= text_field_tag block_input_name(@block, "questions", true), question_value, class: "form-input", placeholder: "Question" %>
+
+    <div class="flex justify-end">
+      <%= link_to "⇵", "#", class: "button button--secondary mr-1/8", data: { role: "sortable-handle" } %>
+      <%= link_to "Remove", "#", class: "button button--secondary", data: { action: "remove-block-template" } %>
+    </div>
+  </div>
+
+  <%= text_area_tag block_input_name(@block, "answers", true), answer_value, class: "form-input mt-1/8", rows: 3, placeholder: "Answer" %>
+
+  <hr class="mt-1/4 mb-1/4">
+</div>

@@ -1,0 +1,21 @@
+<% return unless block_property(block, "questions").present? && block_property(block, "questions").any? %>
+
+<div class="faq faq--<%= block.id %>">
+  <% block_property(block, "questions").each_with_index do |question, index| %>
+    <% next unless question.present? %>
+
+    <div class="faq__item" data-toggle-content>
+      <div class="faq__question" data-action="toggle-content">
+        <%= tag.div sanitize(question) %>
+        <div class="faq__icon">▼</div>
+      </div>
+
+      <div data-role="content-to-toggle snippet-container" style="display: none">
+        <div class="p-1/4 pt-0">
+          <hr class="mt-0 mb-1/4" />
+          <%= sanitize(markdown(block_property(block, "answers")[index])) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
