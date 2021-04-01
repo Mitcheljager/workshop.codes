@@ -69,17 +69,17 @@ class InscrybeInsertImage {
 
   resizeImageToFit(image) {
     if (image.width > image.height) {
-      if (image.width > 900) {
-        const ratio = (1 / image.width) * 900
+      if (image.width > 1920) {
+        const ratio = (1 / image.width) * 1920
 
-        image.width = 900
+        image.width = 1920
         image.height = image.height * ratio
       }
     } else {
-      if (image.height > 500) {
-        const ratio = (1 / image.height) * 500
+      if (image.height > 1080) {
+        const ratio = (1 / image.height) * 1080
 
-        image.height = 500
+        image.height = 1080
         image.width = image.width * ratio
       }
     }
