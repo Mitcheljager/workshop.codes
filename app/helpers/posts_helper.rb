@@ -7,7 +7,7 @@ module PostsHelper
         image = post.images.find_by_blob_id(JSON.parse(post.image_order).first)
 
         if image
-          url = ENV["CDN"] + image.variant(quality: 90, resize_to_fill: [width, height]).processed.key
+          url = ENV["CDN"] + image.variant(quality: 90, resize_to_fill: [width, height], format: :webp).processed.key
         end
       rescue
       end
@@ -17,7 +17,7 @@ module PostsHelper
       random_with_seed = Random.new(post.id).rand(post.maps.length)
       map = maps.find { |m| m["en"] == post.maps[random_with_seed - 1] }
 
-      url = image_path "maps/#{ size }/#{ map["slug"] }.jpg"
+      url = image_path "maps/#{ size }/webp/#{ map["slug"] }.webp"
     end
 
     return url
