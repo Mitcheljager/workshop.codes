@@ -6,8 +6,7 @@ document.addEventListener("turbolinks:load", function() {
   if (element) window.addEventListener("scroll", isInfiniteScrollInView)
 
   if (!button) return
-  button.removeEventListener("click", loadMorePosts)
-  button.addEventListener("click", loadMorePosts)
+  button.removeAndAddEventListener("click", loadMorePosts)
 })
 
 function isInfiniteScrollInView() {

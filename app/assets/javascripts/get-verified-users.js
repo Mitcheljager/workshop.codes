@@ -3,8 +3,7 @@ document.addEventListener("turbolinks:load", function() {
 
   if (!element) return
 
-  element.removeEventListener("click", getVerifiedUsers)
-  element.addEventListener("click", getVerifiedUsers)
+  element.removeAndAddEventListener("click", getVerifiedUsers)
 })
 
 function getVerifiedUsers(event) {

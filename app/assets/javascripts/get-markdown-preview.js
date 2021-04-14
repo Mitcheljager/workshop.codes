@@ -3,7 +3,7 @@ document.addEventListener("turbolinks:load", function() {
 
   if (!element) return
 
-  element.addEventListener("click", toggleMarkdownPreview)
+  element.removeAndAddEventListener("click", toggleMarkdownPreview)
 })
 
 function toggleMarkdownPreview(event) {

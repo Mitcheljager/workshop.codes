@@ -1,8 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action~='load-snippet']")
 
-  elements.forEach((element) => element.removeEventListener("click", loadSnippet))
-  elements.forEach((element) => element.addEventListener("click", loadSnippet))
+  elements.forEach((element) => element.removeAndAddEventListener("click", loadSnippet))
 })
 
 function loadSnippet(event) {

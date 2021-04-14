@@ -9,15 +9,7 @@ document.addEventListener("turbolinks:load", function() {
 function getComments(element) {
   const id = element.dataset.id
 
-  fetch(`/comments/${ id }`, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": Rails.csrfToken()
-    },
-    credentials: "same-origin"
-  })
-  .then(response => response.text())
+  new FetchRails(`/comments/${ id }`).get()
   .then(data => {
     element.innerHTML = data
   })

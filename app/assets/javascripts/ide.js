@@ -3,11 +3,8 @@ document.addEventListener("turbolinks:load", function() {
   const copyElements = document.querySelectorAll("[data-action='copy-ide-content']")
   const fullscreenElements = document.querySelectorAll("[data-action='toggle-ide-fullscreen']")
 
-  copyElements.forEach(element => element.removeEventListener("click", copyFullContent))
-  copyElements.forEach(element => element.addEventListener("click", copyFullContent))
-
-  fullscreenElements.forEach(element => element.removeEventListener("click", toggleIdeFullscreen))
-  fullscreenElements.forEach(element => element.addEventListener("click", toggleIdeFullscreen))
+  copyElements.forEach(element => element.removeAndAddEventListener("click", copyFullContent))
+  fullscreenElements.forEach(element => element.removeAndAddEventListener("click", toggleIdeFullscreen))
 
   if (element) initiateIde(element)
 })

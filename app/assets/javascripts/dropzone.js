@@ -10,17 +10,10 @@ class Dropzone {
   }
 
   bind() {  
-    this.element.removeEventListener("dragover", () => { this.enter(event) })
-    this.element.addEventListener("dragover", () => { this.enter(event) })
-  
-    this.element.removeEventListener("dragleave", () => { this.leave() })
-    this.element.addEventListener("dragleave", () => { this.leave() })
-  
-    this.element.removeEventListener("drop", () => { this.drop(event) })
-    this.element.addEventListener("drop", () => { this.drop(event) })
-  
-    this.element.removeEventListener("paste", () => { this.paste(event) })
-    this.element.addEventListener("paste", () => { this.paste(event) })
+    this.element.removeAndAddEventListener("dragover", () => { this.enter(event) })
+    this.element.removeAndAddEventListener("dragleave", () => { this.leave() })
+    this.element.removeAndAddEventListener("drop", () => { this.drop(event) })
+    this.element.removeAndAddEventListener("paste", () => { this.paste(event) })
 
     this.buildSortable()
   

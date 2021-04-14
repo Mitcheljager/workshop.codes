@@ -1,8 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action~='set-tab']")
 
-  elements.forEach((element) => element.removeEventListener("click", setTab))
-  elements.forEach((element) => element.addEventListener("click", setTab))
+  elements.forEach((element) => element.removeAndAddEventListener("click", setTab))
 })
 
 function setTab(event) {

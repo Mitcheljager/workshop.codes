@@ -4,17 +4,11 @@ document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action~='toggle-dropdown']")
   const dropdowns = document.querySelectorAll("[data-dropdown]")
 
-  elements.forEach((element) => element.removeEventListener("click", toggleDropdown))
-  elements.forEach((element) => element.addEventListener("click", toggleDropdown))
-
-  dropdowns.forEach((dropdown) => dropdown.removeEventListener("click", stopPropagation))
-  dropdowns.forEach((dropdown) => dropdown.addEventListener("click", stopPropagation))
-
-  document.body.removeEventListener("click", closeDropdown)
-  document.body.addEventListener("click", closeDropdown)
-
-  document.body.removeEventListener("keydown", closeOnKeyDown)
-  document.body.addEventListener("keydown", closeOnKeyDown)
+  elements.forEach((element) => element.removeAndAddEventListener("click", toggleDropdown))
+  dropdowns.forEach((dropdown) => dropdown.removeAndAddEventListener("click", stopPropagation))
+  
+  document.body.removeAndAddEventListener("click", closeDropdown)
+  document.body.removeAndAddEventListener("keydown", closeOnKeyDown)
 })
 
 function closeDropdown(event) {

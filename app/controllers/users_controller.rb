@@ -87,6 +87,8 @@ class UsersController < ApplicationController
   def generate_remember_token
     token = SecureRandom.base64
     RememberToken.create(user_id: @user.id, token: token)
+
+    cookies.encrypted[:remember_token] = { value: token, expires: 30.days }
   end
 
   def allowed_sort_params

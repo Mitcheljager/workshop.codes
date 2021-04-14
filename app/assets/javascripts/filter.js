@@ -1,15 +1,9 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action='add-filter']")
-  elements.forEach((element) => {
-    element.removeEventListener("click", addFilter)
-    element.addEventListener("click", addFilter) 
-  })
+  elements.forEach((element) => element.removeAndAddEventListener("click", addFilter))
 
   const linkElements = document.querySelectorAll("[data-role='filter-link']")
-  linkElements.forEach((element) => {
-    element.removeEventListener("click", buildFilterPath)
-    element.addEventListener("click", buildFilterPath) 
-  })
+  linkElements.forEach((element) => element.removeAndAddEventListener("click", buildFilterPath))
 })
 
 function addFilter(event) {

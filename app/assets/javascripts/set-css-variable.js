@@ -2,8 +2,7 @@ document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action~='set-css-variable']")
 
   elements.forEach(element => {
-    element.removeEventListener("input", setCssVariable)
-    element.addEventListener("input", setCssVariable)
+    element.removeAndAddEventListener("input", setCssVariable)
   })
 })
 

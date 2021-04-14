@@ -1,18 +1,14 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action='toggle-modal']")
-  elements.forEach(element => element.removeEventListener("click", closeModal))
-  elements.forEach(element => element.addEventListener("click", closeModal))
+  elements.forEach(element => element.removeAndAddEventListener("click", closeModal))
 
   const showModalElements = document.querySelectorAll("[data-action~='show-modal']")
-  showModalElements.forEach(element => element.removeEventListener("click", showModal))
-  showModalElements.forEach(element => element.addEventListener("click", showModal))
+  showModalElements.forEach(element => element.removeAndAddEventListener("click", showModal))
 
   const backdropElements = document.querySelectorAll("[data-role='modal-backdrop']")
-  backdropElements.forEach(element => element.removeEventListener("click", closeModal))
-  backdropElements.forEach(element => element.addEventListener("click", closeModal))
+  backdropElements.forEach(element => element.removeAndAddEventListener("click", closeModal))
 
-  document.body.removeEventListener("keydown", closeModalOnKeyDown)
-  document.body.addEventListener("keydown", closeModalOnKeyDown)
+  document.body.removeAndAddEventListener("keydown", closeModalOnKeyDown)
 })
 
 function showModal(event) {

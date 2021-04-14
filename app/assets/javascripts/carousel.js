@@ -14,8 +14,7 @@ document.addEventListener("turbolinks:load", function() {
   })
 
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
-  navigationElements.forEach((element) => element.removeEventListener("click", carouselGoTo))
-  navigationElements.forEach((element) => element.addEventListener("click", carouselGoTo))
+  navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
 })
 
 function carouselGoTo() {

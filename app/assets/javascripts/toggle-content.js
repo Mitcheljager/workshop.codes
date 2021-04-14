@@ -1,6 +1,5 @@
 document.addEventListener("turbolinks:load", function() {
-  document.removeEventListener("click", toggleContent)
-  document.addEventListener("click", toggleContent)
+  document.body.removeAndAddEventListener("click", toggleContent)
 })
 
 function toggleContent(event) {

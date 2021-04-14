@@ -31,12 +31,10 @@ document.addEventListener("turbolinks:load", function() {
 
 
   const previousElements = document.querySelectorAll("[data-action='carousel-previous']")
-  previousElements.forEach((element) => element.removeEventListener("click", carouselPrevious))
-  previousElements.forEach((element) => element.addEventListener("click", carouselPrevious))
+  previousElements.forEach((element) => element.removeAndAddEventListener("click", carouselPrevious))
 
   const nextElements = document.querySelectorAll("[data-action='carousel-next']")
-  nextElements.forEach((element) => element.removeEventListener("click", carouselNext))
-  nextElements.forEach((element) => element.addEventListener("click", carouselNext))
+  nextElements.forEach((element) => element.removeAndAddEventListener("click", carouselNext))
 })
 
 function carouselCardsChanged() {

@@ -5,8 +5,7 @@ document.addEventListener("turbolinks:load", function() {
 
   if (!toggleUnchangedFilesElement) return
 
-  toggleUnchangedFilesElement.removeEventListener("input", toggleUnchangedFiles)
-  toggleUnchangedFilesElement.addEventListener("input", toggleUnchangedFiles)
+  toggleUnchangedFilesElement.removeAndAddEventListener("input", toggleUnchangedFiles)
 
   const elements = document.querySelectorAll(".diff li")
   elements.forEach(element => {
@@ -34,8 +33,7 @@ function createRules() {
   const selectElement = document.querySelector("[data-action='jump-to-rule']")
   const items = element.querySelectorAll("li")
 
-  selectElement.removeEventListener("input", goToRule)
-  selectElement.addEventListener("input", goToRule)
+  selectElement.removeAndAddEventListener("input", goToRule)
 
   let array = []
   items.forEach((item, index) => {

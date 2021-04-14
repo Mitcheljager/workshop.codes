@@ -4,10 +4,7 @@ document.addEventListener("turbolinks:load", function() {
   if (element) buildBlockSortable(element)
 
   const createBlockElements = document.querySelectorAll("[data-action~='create-block']")
-  createBlockElements.forEach(element => {
-    element.removeEventListener("click", createBlock)
-    element.addEventListener("click", createBlock)
-  })
+  createBlockElements.forEach(element => element.removeAndAddEventListener("click", createBlock))
 })
 
 function createBlock() {

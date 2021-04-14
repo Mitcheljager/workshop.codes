@@ -5,8 +5,7 @@ document.addEventListener("turbolinks:load", function() {
 
   if (!element) return
 
-  element.removeEventListener("click", getNotifications)
-  element.addEventListener("click", getNotifications)
+  element.removeAndAddEventListener("click", getNotifications)
 })
 
 function getNotifications(event) {

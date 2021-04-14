@@ -3,8 +3,7 @@ document.addEventListener("turbolinks:load", function() {
 
   if (!element) return
 
-  element.removeEventListener("change", () => { getUserAnalytics(element) })
-  element.addEventListener("change", () => { getUserAnalytics(element) })
+  element.removeAndAddEventListener("change", () => { getUserAnalytics(element) })
 
   getUserAnalytics(element)
 })

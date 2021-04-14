@@ -1,7 +1,6 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action~='image-preview']")
-  elements.forEach(element => element.removeEventListener("change", setImagePreview))
-  elements.forEach(element => element.addEventListener("change", setImagePreview))
+  elements.forEach(element => element.removeAndAddEventListener("change", setImagePreview))
 })
 
 function setImagePreview(event) {

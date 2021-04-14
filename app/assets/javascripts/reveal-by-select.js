@@ -1,8 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action~='reveal-by-select']")
 
-  elements.forEach((element) => element.removeEventListener("input", toggleRevealBySelect))
-  elements.forEach((element) => element.addEventListener("input", toggleRevealBySelect))
+  elements.forEach((element) => element.removeAndAddEventListener("input", toggleRevealBySelect))
 })
 
 function toggleRevealBySelect(event) {
