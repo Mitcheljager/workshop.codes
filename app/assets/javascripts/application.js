@@ -22,6 +22,7 @@
 //= require copy
 //= require debounce
 //= require difference-viewer
+//= require disable-form-by-select
 //= require dropdown
 //= require fetch-rails
 //= require filter
