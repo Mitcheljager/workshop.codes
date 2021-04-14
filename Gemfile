@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "~> 2.7.2-1"
+ruby "~> 3.0.0"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "active_model_serializers"
@@ -49,7 +49,7 @@ group :development, :test do
   gem "rspec-rails", "~> 4.0.1"
   gem "selenium-webdriver"
   gem "shoulda-matchers", "~> 3.1"
-  gem "sqlite3", "1.4.1"
+  gem "sqlite3", "1.4.2"
 end
 
 group :development do

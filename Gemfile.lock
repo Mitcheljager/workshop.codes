@@ -358,7 +358,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.1)
+    sqlite3 (1.4.2)
     sucker_punch (3.0.1)
       concurrent-ruby (~> 1.0)
     thor (1.1.0)
@@ -441,7 +441,7 @@ DEPENDENCIES
   selenium-webdriver
   sendgrid-ruby
   shoulda-matchers (~> 3.1)
-  sqlite3 (= 1.4.1)
+  sqlite3 (= 1.4.2)
   sucker_punch
   turbolinks (~> 5)
   tzinfo-data
@@ -450,7 +450,7 @@ DEPENDENCIES
   win32-security
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.0.0p0
 
 BUNDLED WITH
-   2.1.4
+   2.2.3
