@@ -13,7 +13,6 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          bundler-cache: true
           ruby-version: 3.0.0
       - name: Yarn
         uses: borales/actions-yarn@v2.0.0
