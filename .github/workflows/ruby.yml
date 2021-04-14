@@ -5,15 +5,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Setup System
         run: |
           sudo apt update
           sudo apt-get install libsqlite3-dev
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
+        bundler-cache: true
         with:
-          ruby-version: "2.7.2"
+          ruby-version: "2.7.3"
       - name: Yarn
         uses: borales/actions-yarn@v2.0.0
         with:
