@@ -143,6 +143,7 @@
 
 .item__thumbnail {
   grid-area: thumbnail;
+  flex-shrink: 0;
   position: relative;
   width: 120px;
   height: 120px / 16 * 9;
