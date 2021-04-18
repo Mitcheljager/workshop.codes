@@ -3,7 +3,7 @@ class RevisionsController < ApplicationController
   before_action :set_revision, except: [:index]
 
   before_action except: [:show, :raw_snippet, :index] do
-    redirect_to root_path unless current_user && current_user == @revision.post.user && @revision.visible
+    redirect_to root_path unless revision_is_editable_by_current_user
   end
 
   def index
@@ -61,5 +61,9 @@ class RevisionsController < ApplicationController
 
   def not_found
     raise ActionController::RoutingError.new("Not Found")
+  end
+
+  def revision_is_editable_by_current_user
+    current_user.present? && current_user == @revision.post.user && @revision.visible?
   end
 end
