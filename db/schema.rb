@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_162834) do
+ActiveRecord::Schema.define(version: 2021_04_24_165420) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 2021_03_14_162834) do
     t.boolean "ptr", default: false
     t.datetime "last_revision_created_at"
     t.boolean "immortal", default: false
+    t.boolean "draft", default: false
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"
@@ -316,4 +317,5 @@ ActiveRecord::Schema.define(version: 2021_03_14_162834) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "posts", "users"
 end

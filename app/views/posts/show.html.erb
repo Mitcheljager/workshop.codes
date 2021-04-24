@@ -87,13 +87,21 @@
           <div class="item__details-item" title="Created at: <%= @post.created_at %>">
             <%= t(".created_at") %> |
 
-            <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
+            <% if @post.draft? %>
+              Draft
+            <% else %>
+              <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
+            <% end %>
           </div>
 
           <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
             <%= t(".updated_at") %> |
 
-            <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
+            <% if @post.draft? %>
+              Draft
+            <% else %>
+              <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
+            <% end %>
           </div>
 
           <% if @post.version.present? %>

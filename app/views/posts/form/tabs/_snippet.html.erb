@@ -9,32 +9,30 @@
   <%= form.text_area :snippet, class: "form-input form-textarea form-textarea--small" %>
 </div>
 
-<div data-role="hidden-by-checkbox" data-target="advanced-settings" style="<%= "display: none" unless advanced_settings_active? %>">
-  <h3 class="mt-1/1"><%= t("posts.form.expiry_notifications.title") %></h3>
+<h3 class="mt-1/1"><%= t("posts.form.expiry_notifications.title") %></h3>
 
-  <div data-reveal-by-checkbox>
-    <p class="form-hint">
-      <%= t("posts.form.expiry_notifications.help_html") %>
-    </p>
+<div data-reveal-by-checkbox>
+  <p class="form-hint">
+    <%= t("posts.form.expiry_notifications.help_html") %>
+  </p>
 
-    <div class="checkbox">
-      <%= form.check_box :email_notification, checked: @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?), data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-      <%= form.label :email_notification, t("posts.form.expiry_notifications.label") %>
-    </div>
+  <div class="checkbox">
+    <%= form.check_box :email_notification, checked: @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?), data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+    <%= form.label :email_notification, t("posts.form.expiry_notifications.label") %>
+  </div>
 
-    <span class="form-hint">
-      <%= t("posts.form.expiry_notifications.content_html") %>
-    </span>
+  <span class="form-hint">
+    <%= t("posts.form.expiry_notifications.content_html") %>
+  </span>
 
-    <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?) %>">
-      <div class="form-group-columns">
-        <div class="well well--dark block">
-          <div class="form-group mt-0">
-            <%= form.label :email, t("posts.form.expiry_notifications.email.label"), class: "form-label" %>
-            <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
+  <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?) %>">
+    <div class="form-group-columns">
+      <div class="well well--dark block">
+        <div class="form-group mt-0">
+          <%= form.label :email, t("posts.form.expiry_notifications.email.label"), class: "form-label" %>
+          <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
 
-            <p class="form-hint mb-0"><%= t("posts.form.expiry_notifications.email.help_html") %></p>
-          </div>
+          <p class="form-hint mb-0"><%= t("posts.form.expiry_notifications.email.help_html") %></p>
         </div>
       </div>
     </div>

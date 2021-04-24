@@ -1,4 +1,4 @@
-<%= form_with url: path, model: post, data: { role: "post-form tabs", reveal_by_checkbox: "advanced-settings" }, html: { autocomplete: "off" }, remote: true do |form| %>
+<%= form_with url: path, model: post, data: { role: "post-form tabs" }, html: { autocomplete: "off" }, remote: true do |form| %>
   <%= render "form_errors", errors: post.errors if post.errors.any? %>
 
   <div class="banner p-0">
@@ -17,13 +17,6 @@
         <p class="mb-0"><mark><%= t("posts.form.code_change.attention") %></mark></p>
         <p class="mt-0"><small><%= t("posts.form.code_change.explanation_html", article_url: "https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code") %></small></p>
         <p class="mt-0"><small><%= t("posts.form.code_change.current_code_html", current_code: @post.code) %></small></p>
-      </div>
-
-      <div class="form-group mt-1/4">
-        <div class="switch-checkbox">
-          <%= form.check_box :advanced_settings, class: "switch-checkbox__input", data: { action: "reveal-by-checkbox" }, autocomplete: "off", checked: advanced_settings_active? %>
-          <%= form.label :advanced_settings, "Show advanced settings", class: "switch-checkbox__label" %>
-        </div>
       </div>
     </div>
 

@@ -129,11 +129,11 @@ class Post < ApplicationRecord
   end
 
   def self.visible?
-    self.where(private: false)
+    self.where(private: false, draft: false)
   end
 
   def self.public?
-    self.where(private: false, unlisted: false)
+    self.where(private: false, unlisted: false, draft: false)
   end
 
   def expired?

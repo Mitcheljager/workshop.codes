@@ -1,94 +1,91 @@
 <h2 class="mt-1/1"><%= t("posts.form.settings.title") %></h2>
 
 <div data-reveal-by-select-parent data-reveal-by-checkbox>
-  <div data-role="hidden-by-checkbox" data-target="advanced-settings" style="<%= "display: none" unless advanced_settings_active? %>">
-    <div class="form-group-uneven mt-1/2">
-      <div class="well well--dark block">
-        <div class="checkbox">
-          <%= form.radio_button :status, "public", checked: !@post.unlisted && !@post.private %>
-          <%= form.label :status, t("posts.form.public.label"), value: "public" %>
-        </div>
-
-        <div class="form-hint mt-1/8">
-          <%= t("posts.form.public.help") %>
-        </div>
-
-        <div class="checkbox">
-          <%= form.radio_button :status, "unlisted", checked: @post.unlisted %>
-          <%= form.label :status, t("posts.form.unlisted.label"), value: "unlisted" %>
-        </div>
-
-        <div class="form-hint mt-1/8">
-          <%= t("posts.form.unlisted.help") %>
-        </div>
-
-        <div class="checkbox">
-          <%= form.radio_button :status, "private", checked: @post.private %>
-          <%= form.label :status, t("posts.form.private.label"), value: "private" %>
-        </div>
-
-        <div class="form-hint mt-1/8 mb-0">
-          <%= t("posts.form.private.help") %>
-        </div>
-      </div>
-
-      <div class="form-group mt-1/2 sm:mt-0" data-reveal-by-checkbox>
-        <div class="checkbox">
-          <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-          <%= form.label :ptr, t("posts.form.ptr.label") %>
-        </div>
-
-        <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
-          <p class="form-hint">
-            <%= t("posts.form.ptr.help") %>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group mt-1/1" data-reveal-by-checkbox>
+  <div class="form-group-uneven mt-1/2">
+    <div class="well well--dark block pb-0">
       <div class="checkbox">
-        <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-        <%= form.label :include_nice_url, t("posts.form.nice_url.label") %>
+        <%= form.radio_button :status, "public", checked: !@post.unlisted && !@post.private %>
+        <%= form.label :status, t("posts.form.public.label"), value: "public" %>
       </div>
 
-      <p class="form-hint">
-        <%= t("posts.form.nice_url.help") %>
-      </p>
+      <div class="form-hint mt-1/8">
+        <%= t("posts.form.public.help") %>
+      </div>
 
-      <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.nice_url.present? %>">
-        <div class="form-group-uneven">
-          <div class="well well--dark block">
-            <div class="form-group mt-0">
-              <label class="form-input url-input">
-                <%= request.base_url %>/
-                <%= form.text_field :nice_url, class: "inline-input" %>
-              </label>
-            </div>
+      <div class="checkbox">
+        <%= form.radio_button :status, "unlisted", checked: @post.unlisted %>
+        <%= form.label :status, t("posts.form.unlisted.label"), value: "unlisted" %>
+      </div>
 
-            <ul class="form-hint mb-0">
-              <%= t("posts.form.nice_url.list_html") %>
-            </ul>
-          </div>
+      <div class="form-hint mt-1/8">
+        <%= t("posts.form.unlisted.help") %>
+      </div>
+
+      <div class="checkbox">
+        <%= form.radio_button :status, "private", checked: @post.private %>
+        <%= form.label :status, t("posts.form.private.label"), value: "private" %>
+      </div>
+
+      <div class="form-hint mt-1/8">
+        <%= t("posts.form.private.help") %>
+      </div>
+
+      <% unless @post.persisted? && !@post.draft? %>
+        <div class="checkbox">
+          <%= form.radio_button :status, "draft", checked: @post.draft %>
+          <%= form.label :status, t("posts.form.draft.label"), value: "draft" %>
         </div>
-      </div>
+
+        <div class="form-hint mt-1/8">
+          <%= t("posts.form.draft.help") %>
+        </div>
+      <% end %>
     </div>
 
-    <div class="form-group-columns mt-1/1 mb-1/1">
-      <div>
-        <%= form.label :locale, t("posts.form.locale.label"), class: "form-label" %>
+    <div class="form-group mt-1/2 sm:mt-0" data-reveal-by-checkbox>
+      <div class="checkbox">
+        <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+        <%= form.label :ptr, t("posts.form.ptr.label") %>
+      </div>
 
-        <div class="form-hint">
-          <p class="mt-0"><small><%= t("posts.form.locale.help") %></small></p>
+      <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
+        <p class="form-hint">
+          <%= t("posts.form.ptr.help") %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group mt-1/1" data-reveal-by-checkbox>
+    <div class="checkbox">
+      <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+      <%= form.label :include_nice_url, t("posts.form.nice_url.label") %>
+    </div>
+
+    <p class="form-hint">
+      <%= t("posts.form.nice_url.help") %>
+    </p>
+
+    <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.nice_url.present? %>">
+      <div class="form-group-uneven">
+        <div class="well well--dark block">
+          <div class="form-group mt-0">
+            <label class="form-input url-input">
+              <%= request.base_url %>/
+              <%= form.text_field :nice_url, class: "inline-input" %>
+            </label>
+          </div>
+
+          <ul class="form-hint mb-0">
+            <%= t("posts.form.nice_url.list_html") %>
+          </ul>
         </div>
-
-        <%= form.select :locale, [["en - English", "en"], ["ko - 한국어", "ko"]], {}, { class: "form-select form-select--small" } %>
       </div>
     </div>
   </div>
 </div>
 
-<div class="form-group-columns mt-1/2">
+<div class="form-group-columns mt-1/1">
   <div class="form-group">
     <%= form.label :categories, class: "form-label" do %>
       <%= t("posts.form.categories.label") %>
@@ -126,7 +123,7 @@
     <%= form.text_field :version, class: "form-input", placeholder: t("posts.form.version.placeholder") %>
   </div>
 
-  <div class="form-group" data-role="hidden-by-checkbox" data-target="advanced-settings" style="<%= "display: none" unless advanced_settings_active? %>">
+  <div class="form-group">
     <%= form.label :collection, t("posts.form.collection.label"), class: "form-label" %>
 
     <div class="form-hint">

@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.includes(:user, :collection, :revisions, :blocks).find_by("upper(posts.code) = ?", params[:code].upcase)
 
-    not_found and return if @post && @post.private? && @post.user != current_user
+    not_found and return if @post && (@post.private? || @post.draft?) && @post.user != current_user
 
     respond_to do |format|
       format.html {
@@ -125,6 +125,8 @@ class PostsController < ApplicationController
     params[:post][:nice_url] = "" if post_params[:include_nice_url] == "0"
     params[:post][:email] = "" if post_params[:email_notification] == "0"
 
+    @was_draft = @post.draft?
+
     current_version = @post.version
     current_code = @post.code
 
@@ -136,14 +138,17 @@ class PostsController < ApplicationController
       create_collection if post_params[:new_collection] != ""
       update_email_notifications
       update_blocks
+      update_draft if @was_draft
 
       if (post_params[:revision].present? && post_params[:revision] != "0") || current_code != post_params[:code] || current_version != post_params[:version]
         invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
         @post.update(last_revision_created_at: @revision.created_at) if @revision.save
 
-        notify_discord("Update")
+        notify_discord("Update") unless published_from_draft
       end
+
+      notify_discord("New") if published_from_draft
 
       redirect_to post_path(@post.code)
     else
@@ -209,12 +214,19 @@ class PostsController < ApplicationController
     if post_params[:status] == "unlisted"
       @post.unlisted = true
       @post.private = false
+      @post.draft = false
     elsif post_params[:status] == "private"
       @post.private = true
       @post.unlisted = false
+      @post.draft = false
+    elsif post_params[:status] == "draft" && !@post.persisted?
+      @post.private = false
+      @post.unlisted = false
+      @post.draft = true
     else
       @post.private = false
       @post.unlisted = false
+      @post.draft = false
     end
   end
 
@@ -278,10 +290,25 @@ class PostsController < ApplicationController
     end
   end
 
+  def published_from_draft
+    return @was_draft && !@post.draft?
+  end
+
+  def update_draft
+    return if @post.draft?
+
+    @post.created_at = Time.now
+    @post.updated_at = Time.now
+    @post.last_revision_created_at = Time.now
+
+    @post.save
+  end
+
   def notify_discord(type)
     return unless ENV["DISCORD_NOTIFICATIONS_WEBHOOK_URL"].present?
     return if @post.private?
     return if @post.unlisted?
+    return if @post.draft?
 
     set_post_images
 

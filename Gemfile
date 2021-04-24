@@ -10,6 +10,7 @@ gem "aws-sdk-s3", require: false
 gem "bcrypt", require: "bcrypt"
 gem "blind_index"
 gem "breadcrumbs_on_rails"
+gem "bootsnap", require: false
 gem "chart-js-rails"
 gem "diffy"
 gem "discord-notifier"

@@ -96,6 +96,9 @@ en:
         title: This code is set to private.
         content: Only you can see it.
       unlisted: This code is unlisted.
+      draft:
+        title: This post is a draft.
+        content: Only you can see it. When you are ready to publish this code you can change the status and it will be posted as if it was new.
       expire_soon:
         title: Your Code will soon expire.
         content_html: |
@@ -138,6 +141,9 @@ en:
       private:
         label: Private
         help: Your code can only be accessed by you. Setting your code to public at a later date will not "publish" the code as if it was new.
+      draft:
+        label: Draft
+        help: Your post will not be visible to others. When you switch this to a different visibility your post will be published as if it was new. An already published code can not be set back to this option.
       nice_url:
         label: Include Pretty URL
         help: Include a pretty URL that is easier to remember and will always link to your most recent code. Keep in mind that if you change the code, all previous codes will continue to link to your newest code.

@@ -20,7 +20,7 @@
 
   <% @posts.each do |post| %>
     <div data-toggle-content>
-      <div class="item item--small <%= "faded" if post.private? || post.unlisted? %>">
+      <div class="item item--small <%= "faded" if post.private? || post.unlisted? || post.draft? %>">
         <%= render "posts/thumbnail", post: post %>
 
         <div>
@@ -29,6 +29,7 @@
 
             <%= tag.small "(Private)", class: "ml-1/8" if post.private? %>
             <%= tag.small "(Unlisted)", class: "ml-1/8" if post.unlisted? %>
+            <%= tag.small "(Draft)", class: "ml-1/8" if post.draft? %>
           </div>
 
           <div class="item__actions">
