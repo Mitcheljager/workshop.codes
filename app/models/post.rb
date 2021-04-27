@@ -87,7 +87,10 @@ class Post < ApplicationRecord
   validates :version, length: { maximum: 20 }
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes }
-  
+  validates :min_players, inclusion: 1..12
+  validates :max_players, inclusion: 1..12
+  validates :max_players, greater_than_or_equal_to: :min_players
+
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 
