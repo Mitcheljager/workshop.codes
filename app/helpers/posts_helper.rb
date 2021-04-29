@@ -22,4 +22,24 @@ module PostsHelper
 
     return url
   end
+
+  def controls_button_value(item, index)
+    if item && item["buttons"]
+      if item["buttons"][index] && item["buttons"][index]["Custom"]
+        "Custom"
+      else
+        item["buttons"][index]
+      end
+    else
+      ""
+    end
+  end
+
+  def controls_button_custom_value(item, index)
+    if controls_button_value(item, index) == "Custom"
+      item["buttons"][index]["Custom"]
+    else
+      ""
+    end
+  end
 end

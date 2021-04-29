@@ -250,7 +250,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :code, :title, :include_nice_url, :nice_url, :status, :description, :version, :snippet, :ptr, :locale,
+      :code, :title, :include_nice_url, :nice_url, :status, :description, :version, :snippet, :ptr, :locale, :controls,
       { categories: [] }, { heroes: [] }, { maps: [] }, :tags,
       :collection_id, :new_collection,
       :revision, :revision_description,
