@@ -219,7 +219,7 @@ class PostsController < ApplicationController
       @post.private = true
       @post.unlisted = false
       @post.draft = false
-    elsif post_params[:status] == "draft" && !@post.persisted?
+    elsif post_params[:status] == "draft"
       @post.private = false
       @post.unlisted = false
       @post.draft = true
