@@ -14,6 +14,7 @@
 //= require turbolinks
 //= require microlight
 //= require timeago.js/dist/timeago.min
+//= require nouislider/distribute/nouislider.min
 
 //= require analytics
 //= require carousel
@@ -39,6 +40,7 @@
 //= require infinite-scroll
 //= require modal
 //= require navigation
+//= require num-players-slider
 //= require reveal-by-checkbox
 //= require reveal-by-select
 //= require reveal-on-difference
