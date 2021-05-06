@@ -66,6 +66,11 @@
           </div>
         </div>
 
+        <div class="filter__group mt-1/4 mb-1/1">
+          <p>Players</p>
+          <%= content_tag :div, nil, class: "num-player-slider", data: { type: "filter" } %>
+        </div>
+
         <div class="filter__group">
           <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.sort.label") %>">
             <% if params[:search] && !params[:sort] %>
