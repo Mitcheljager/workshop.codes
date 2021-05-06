@@ -1,3 +1,13 @@
+let sliders = []
+
+document.addEventListener("turbolink:before-cache", function() {
+  if (sliders.length == 0) return;
+
+  sliders.forEach(slider => { slider.noUiSlider.destroy() });
+
+  sliders = []
+})
+
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll(".num-player-slider");
   elements.forEach(function (element) {
@@ -34,6 +44,8 @@ document.addEventListener("turbolinks:load", function() {
         element.noUiSlider.on('set', filterOnSliderUpdate);
         break;
     }
+
+    sliders.push(element);
   });
 });
 
