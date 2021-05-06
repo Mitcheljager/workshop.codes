@@ -4,8 +4,10 @@ document.addEventListener("turbolinks:load", function() {
     if (!element) return;
     let startMin = 1;
     let startMax = 12;
-    if (element.dataset.type == 'post') {
+    if (element.dataset.minPlayers) {
       startMin = element.dataset.minPlayers;
+    }
+    if (element.dataset.maxPlayers) {
       startMax = element.dataset.maxPlayers;
     }
 
@@ -49,5 +51,11 @@ function postOnSliderUpdate(values, handle) {
 }
 
 function filterOnSliderUpdate(values) {
-  // TODO: Update search filters and stuff
+  values = values.map(v => Math.round(v));
+  let element = document.querySelector("[data-filter-type='players']");
+  if (values[0] == 1 && values[1] == 12) {
+    element.dataset.value = "";
+    return;
+  }
+  element.dataset.value = `${values[0]}-${values[1]}`;
 }

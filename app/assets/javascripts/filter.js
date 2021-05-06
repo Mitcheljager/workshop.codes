@@ -34,6 +34,7 @@ function buildFilterPath(event) {
     "to": filterValue("to"),
     "exclude-expired": document.querySelector("[data-filter-type='exclude-expired']").checked ? "true" : "",
     "author": filterValue("author"),
+    "players": filterValue("players"),
     "search": document.querySelector("input[name='query']").value.replace(".", " "),
     "sort": filterValue("sort"),
     "language": filterValue("language")

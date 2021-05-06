@@ -66,11 +66,6 @@
           </div>
         </div>
 
-        <div class="filter__group mt-1/4 mb-1/1">
-          <p>Players</p>
-          <%= content_tag :div, nil, class: "num-player-slider", data: { type: "filter" } %>
-        </div>
-
         <div class="filter__group">
           <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.sort.label") %>">
             <% if params[:search] && !params[:sort] %>
@@ -99,6 +94,15 @@
               <%= check_box_tag :exclude_expired, "", params[:expired] == "true", data: { filter_type: "exclude-expired" }, autocomplete: "off" %>
             </div>
           </div>
+        </div>
+
+        <div class="filter__group mt-1/4 mb-1/1">
+          <p class="filter__label">Players</p>
+          <%= content_tag :div, nil, class: "num-player-slider", data: {
+            type: "filter",
+            min_players: (to_range(CGI.escape(params[:players])).first if params[:players].present?),
+            max_players: (to_range(CGI.escape(params[:players])).last if params[:players].present?) } %>
+          <div style="display: none" data-filter-type="players" <%= "data-value=#{CGI.escape(params[:players])}" if params[:players].present? %>></div>
         </div>
 
         <div class="filter__group flex mt-1/4">
