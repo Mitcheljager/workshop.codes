@@ -50,6 +50,12 @@
             <% end %>
           </div>
 
+          <div class="item__details-item">
+            Players |
+
+            <%= @post.min_players %> - <%= @post.max_players %>
+          </div>
+
           <% if @post.tags.present? %>
             <div class="item__details-item">
               <%= t(".tags") %> |
