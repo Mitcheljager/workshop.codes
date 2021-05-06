@@ -1,5 +1,4 @@
 document.addEventListener("turbolinks:load", function() {
-  debugger
   const elements = document.querySelectorAll(".num-player-slider");
   elements.forEach(function (element) {
     if (!element) return;
