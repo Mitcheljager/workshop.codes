@@ -1,9 +1,15 @@
 document.addEventListener("turbolinks:load", function() {
   const element = document.getElementById("num-player-slider");
   if (!element) return;
+  let startMin = 1;
+  let startMax = 12;
+  if (element.dataset.type == 'post') {
+    startMin = element.dataset.minPlayers;
+    startMax = element.dataset.maxPlayers;
+  }
 
   noUiSlider.create(element, {
-    start: [1, 12],
+    start: [startMin, startMax],
     connect: true,
     orientation: 'horizontal',
     range: {
@@ -17,10 +23,17 @@ document.addEventListener("turbolinks:load", function() {
     behaviour: 'tap-drag'
   });
 
-  element.noUiSlider.on('set', onSliderUpdate);
+  switch (element.dataset.type) {
+    case 'post':
+      element.noUiSlider.on('set', postOnSliderUpdate);
+      break;
+    case 'filter':
+      element.noUiSlider.on('set', filterOnSliderUpdate);
+      break;
+  }
 });
 
-function onSliderUpdate(values, handle) {
+function postOnSliderUpdate(values, handle) {
   let element;
   switch (handle) {
     case 0:
@@ -31,4 +44,8 @@ function onSliderUpdate(values, handle) {
       break;
   }
   element.value = Math.round(values[handle]);
+}
+
+function filterOnSliderUpdate(values) {
+  // TODO: Update search filters and stuff
 }
