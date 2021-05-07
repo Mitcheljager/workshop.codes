@@ -41,14 +41,8 @@ document.addEventListener("turbolinks:load", function() {
       behaviour: 'tap-drag'
     });
 
-    switch (element.dataset.type) {
-      case 'post':
-        element.noUiSlider.on('set', postOnSliderUpdate);
-        break;
-      case 'filter':
-        element.noUiSlider.on('set', filterOnSliderUpdate);
-        break;
-    }
+    if (element.dataset.type == "post") element.noUiSlider.on('set', postOnSliderUpdate);
+    if (element.dataset.type == "filter") element.noUiSlider.on('set', filterOnSliderUpdate);
 
     sliders.push(element);
   });
@@ -56,15 +50,25 @@ document.addEventListener("turbolinks:load", function() {
 
 function postOnSliderUpdate(values, handle) {
   let element;
-  switch (handle) {
-    case 0:
-      element = document.getElementById("post_min_players");
-      break;
-    case 1:
-      element = document.getElementById("post_max_players");
-      break;
+  if (handle == 0) {
+    element = document.getElementById("post_min_players");
+    if (document.getElementById("post_max_players").value == 0) {
+      document.getElementById("post_max_players").value = 1;
+    }
+  }
+  if (handle == 1) {
+    element = document.getElementById("post_max_players");
+    if (document.getElementById("post_min_players").value == 0) {
+      document.getElementById("post_min_players").value = 1;
+    }
   }
   element.value = Math.round(values[handle]);
+
+  let warningElem = document.querySelector("[data-role='vanish-on-slider-update']");
+  if (warningElem && !warningElem.dataset.hidden) {
+    warningElem.style.display = 'none';
+    warningElem.dataset.hidden = true;
+  }
 }
 
 function filterOnSliderUpdate(values) {
