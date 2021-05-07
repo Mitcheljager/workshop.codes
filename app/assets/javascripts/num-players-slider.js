@@ -22,6 +22,9 @@ document.addEventListener("turbolinks:load", function() {
     if (element.dataset.maxPlayers) {
       startMax = element.dataset.maxPlayers;
     }
+    if (element.dataset.type == 'post' && !(element.dataset.minPlayers || element.dataset.maxPlayers)) {
+      startMin, startMax = 0, 0
+    }
 
     noUiSlider.create(element, {
       start: [startMin, startMax],
