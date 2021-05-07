@@ -11,7 +11,7 @@ document.addEventListener("turbolink:before-cache", function() {
 })
 
 document.addEventListener("turbolinks:load", function() {
-  const elements = document.querySelectorAll(".num-player-slider");
+  const elements = document.querySelectorAll("[data-role='num-player-slider']");
   elements.forEach(function (element) {
     if (!element) return;
     let startMin = 1;

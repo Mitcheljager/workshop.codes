@@ -89,7 +89,7 @@
   <%= form.label :num_players, class: "form-label mb-1/4" do %>
     Number of supported players
   <% end %>
-  <%= content_tag :div, nil, class: "num-player-slider", data: { type: 'post', min_players: @post.min_players, max_players: @post.max_players } %>
+  <%= content_tag :div, nil, data: { role: 'num-player-slider', type: 'post', min_players: @post.min_players, max_players: @post.max_players } %>
   <%= form.hidden_field :min_players, value: @post.min_players %>
   <%= form.hidden_field :max_players, value: @post.max_players %>
 </div>
