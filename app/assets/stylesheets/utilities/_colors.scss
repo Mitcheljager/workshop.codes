@@ -45,6 +45,17 @@
   }
 }
 
+.text-orange {
+  color: $orange !important;
+
+  &[href] {
+    &:hover,
+    &:active {
+      color: lighten($orange, 15%) !important;
+    }
+  }
+}
+
 .bg-red {
   background: $red;
 }

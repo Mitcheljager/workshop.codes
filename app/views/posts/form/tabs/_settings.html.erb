@@ -89,6 +89,9 @@
   <%= form.label :num_players, class: "form-label mb-1/4" do %>
     Number of supported players
   <% end %>
+  <% unless @post.min_players.present? && @post.max_players.present? %>
+    <%= tag.p 'Number of supported players has not been set. Use the slider below to specify how many players your mode can support.', class: 'text-orange', data: { role: 'vanish-on-slider-update' } %>
+  <% end %>
   <%= content_tag :div, nil, data: { role: 'num-player-slider', type: 'post', min_players: @post.min_players, max_players: @post.max_players } %>
   <%= form.hidden_field :min_players, value: @post.min_players %>
   <%= form.hidden_field :max_players, value: @post.max_players %>
