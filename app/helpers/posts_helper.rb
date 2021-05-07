@@ -22,4 +22,8 @@ module PostsHelper
 
     return url
   end
+
+  def has_player_range?(post)
+    post.min_players.present? && post.max_players.present?
+  end
 end

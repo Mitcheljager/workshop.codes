@@ -87,8 +87,8 @@ class Post < ApplicationRecord
   validates :version, length: { maximum: 20 }
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes }
-  validates :min_players, inclusion: 1..12
-  validates :max_players, inclusion: 1..12
+  validates :min_players, inclusion: { in: 1..12, message: "must be between 1 and 12." }, allow_nil: true
+  validates :max_players, inclusion: { in: 1..12, message: "must be between 1 and 12." }, allow_nil: true
   validates_numericality_of :max_players, greater_than_or_equal_to: :min_players
 
   # Ensure unresolved reports about this post are archived

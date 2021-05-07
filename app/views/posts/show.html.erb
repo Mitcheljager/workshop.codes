@@ -50,11 +50,13 @@
             <% end %>
           </div>
 
-          <div class="item__details-item">
-            Players |
+          <% if has_player_range?(@post) %>
+            <div class="item__details-item">
+              Players |
 
-            <%= @post.min_players %> - <%= @post.max_players %>
-          </div>
+              <%= @post.min_players %> - <%= @post.max_players %>
+            </div>
+          <% end %>
 
           <% if @post.tags.present? %>
             <div class="item__details-item">

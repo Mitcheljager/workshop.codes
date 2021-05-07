@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(version: 2021_04_27_162657) do
     t.datetime "last_revision_created_at"
     t.boolean "immortal", default: false
     t.boolean "draft", default: false
-    t.integer "min_players", default: 1
-    t.integer "max_players", default: 12
+    t.integer "min_players"
+    t.integer "max_players"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"
