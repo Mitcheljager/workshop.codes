@@ -14,7 +14,6 @@
 //= require turbolinks
 //= require microlight
 //= require timeago.js/dist/timeago.min
-//= require nouislider/distribute/nouislider.min
 
 //= require analytics
 //= require carousel

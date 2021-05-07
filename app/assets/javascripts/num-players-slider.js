@@ -1,3 +1,5 @@
+//= require nouislider/distribute/nouislider.min
+
 let sliders = []
 
 document.addEventListener("turbolink:before-cache", function() {
