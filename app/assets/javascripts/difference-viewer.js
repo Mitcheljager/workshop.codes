@@ -35,12 +35,12 @@ function createRules() {
 
   selectElement.removeAndAddEventListener("input", goToRule)
 
-  let array = []
+  const array = []
   items.forEach((item, index) => {
-    let content = item.textContent
+    const content = item.textContent
     if (!content.match(/rule\("(.*)"\)/g)) return
 
-    array.push([content.replace('rule("', "").replace('")', ""), index])
+    array.push([content.replace("rule(", "").replace(")", ""), index])
   })
 
   array.forEach(rule => {

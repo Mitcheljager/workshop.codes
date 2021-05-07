@@ -16,7 +16,7 @@ function getUserAnalytics(element) {
   progressBar.show()
 
   const target = document.querySelector("[data-role~='chart']")
-  target.insertAdjacentHTML("afterBegin", `<div class="chart__placeholder"><div class="spinner"></div></div>`)
+  target.insertAdjacentHTML("afterBegin", "<div class='chart__placeholder'><div class='spinner'></div></div>")
 
   new FetchRails("/analytics/user", { type: element.value })
   .post().then(data => {

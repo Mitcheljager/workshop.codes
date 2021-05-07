@@ -9,5 +9,8 @@
     "siema": "^1.5.1",
     "sortablejs": "^1.10.2",
     "timeago.js": "^4.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0"
   }
 }

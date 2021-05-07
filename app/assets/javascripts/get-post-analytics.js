@@ -15,7 +15,7 @@ function getPostAnalytics(element) {
 
   const parent = element.closest("[data-post-analytics]")
   const target = parent.querySelector("[data-role~='chart']")
-  target.insertAdjacentHTML("afterBegin", `<div class="chart__placeholder"><div class="spinner"></div></div>`)
+  target.insertAdjacentHTML("afterBegin", "<div class='chart__placeholder'><div class='spinner'></div></div>")
 
   new FetchRails("/analytics/post", { type: element.value, id: element.dataset.postId })
   .post().then(data => {
