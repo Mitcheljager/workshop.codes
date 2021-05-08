@@ -3,6 +3,7 @@
     const errorBlock = document.querySelector(".error-block")
     if (errorBlock) errorBlock.remove()
     document.querySelectorAll(".field_with_errors").forEach(element => element.classList.remove("field_with_errors"))
+    document.querySelectorAll(".tabs__item--with-errors").forEach(element => element.classList.remove("tabs__item--with-errors"))
 
     window.scrollTo(0, 0)
     document.querySelector("[data-role~='post-form']").insertAdjacentHTML("afterBegin", "<%= j render "form_errors", errors: @post.errors %>")
@@ -10,7 +11,17 @@
     let elements;
     <% @post.errors.each do |error| %>
       elements = document.querySelectorAll("[name*='post[<%= error.attribute %>']")
-      elements.forEach(element => element.closest(".form-group").classList.add("field_with_errors"))
+      elements.forEach(element => {
+        const formGroup = element.closest(".form-group")
+        formGroup.classList.add("field_with_errors")
+
+        const tabContent = element.closest("[data-tab]")
+
+        if (!tabContent) return
+
+        const tab = document.querySelector(`[data-action='set-tab'][data-target='${ tabContent.dataset.tab }']`)
+        tab.classList.add("tabs__item--with-errors")
+      })
     <% end %>
   <% else %>
     alert("Something went wrong when saving, but we aren't sure what. Please try again.")

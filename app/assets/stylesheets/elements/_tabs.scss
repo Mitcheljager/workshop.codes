@@ -107,6 +107,10 @@
 .tabs__label {
   display: block;
   color: $text-color-dark;
+
+  .tabs__item--with-errors & {
+    color: $red;
+  }
 }
 
 @keyframes transition-tab-in {
