@@ -55,11 +55,11 @@ class SupportedPlayersValidator < ActiveModel::Validator
       record.errors.add :max_players, "supported is not an integer."
     end
 
-    unless 1..12.includes?(record.min_players)
+    unless (1..12).include? record.min_players
       record.errors.add :min_players, "supported must be between 1 and 12."
     end
 
-    unless 1..12.includes?(record.max_players)
+    unless (1..12).include? record.max_players
       record.errors.add :max_players, "supported must be between 1 and 12."
     end
 
