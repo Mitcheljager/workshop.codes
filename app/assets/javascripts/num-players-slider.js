@@ -1,19 +1,21 @@
 //= require nouislider/distribute/nouislider.min
 
-let sliders = []
-
 document.addEventListener("turbolink:before-cache", function() {
-  if (sliders.length == 0) return;
+  const sliders = document.querySelectorAll("[data-role='num-player-slider']");
 
-  sliders.forEach(slider => { slider.noUiSlider.destroy() });
-
-  sliders = []
+  sliders.forEach(slider => {
+    slider.noUiSlider.destroy();
+    slider.dataset.initialised = false;
+  });
 })
 
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-role='num-player-slider']");
   elements.forEach(function (element) {
     if (!element) return;
+    if (element.dataset.initialised) {
+      destroySlider(element);
+    }
     let startMin = 1;
     let startMax = 12;
     if (element.dataset.minPlayers) {
@@ -44,7 +46,7 @@ document.addEventListener("turbolinks:load", function() {
     if (element.dataset.type == "post") element.noUiSlider.on('set', postOnSliderUpdate);
     if (element.dataset.type == "filter") element.noUiSlider.on('set', filterOnSliderUpdate);
 
-    sliders.push(element);
+    element.dataset.initialised = true;
   });
 });
 
@@ -79,4 +81,10 @@ function filterOnSliderUpdate(values) {
     return;
   }
   element.dataset.value = `${values[0]}-${values[1]}`;
+}
+
+function destroySlider(element) {
+  while (element.firstChild) {
+    element.removeChild(element.lastChild);
+  }
 }
