@@ -87,4 +87,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include ApplicationHelper
+
+  # Persist RSpec results
+  config.example_status_persistence_file_path = "spec/examples.txt"
 end
