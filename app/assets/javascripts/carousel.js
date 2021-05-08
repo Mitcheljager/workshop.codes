@@ -1,6 +1,6 @@
 //= require "siema/dist/siema.min"
 
-let carousel;
+let carousel
 
 document.addEventListener("turbolinks:load", function() {
   const element = document.querySelector("[data-role='carousel']")
@@ -62,5 +62,5 @@ function stopVideo() {
 
   if (!iframe) return
 
-  iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*")
+  iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
 }

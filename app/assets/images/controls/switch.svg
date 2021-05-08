@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<path style="fill:currentColor;" d="M397,0H281v512h116c63.411,0,115-51.589,115-115V115C512,51.589,460.411,0,397,0z M396.5,332
+	c-33.359,0-60.5-27.141-60.5-60.5s27.141-60.5,60.5-60.5s60.5,27.141,60.5,60.5S429.859,332,396.5,332z"/>
+<g>
+	<path style="fill:currentColor;" d="M251,512H115C51.589,512,0,460.411,0,397V115C0,51.589,51.589,0,115,0h136V512z M115,30
+		c-46.869,0-85,38.131-85,85v282c0,46.869,38.131,85,85,85h106V30H115z"/>
+	<path style="fill:currentColor;" d="M125.5,211C92.141,211,65,183.859,65,150.5S92.141,90,125.5,90s60.5,27.141,60.5,60.5
+		S158.859,211,125.5,211z"/>
+</g>
+</svg>

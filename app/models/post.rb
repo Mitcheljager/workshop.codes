@@ -100,6 +100,7 @@ class Post < ApplicationRecord
   attr_accessor :new_collection
 
   serialize :image_order
+  serialize :controls
   serialize :categories, JSON
   serialize :heroes, JSON
   serialize :maps, JSON
@@ -155,7 +156,7 @@ class Post < ApplicationRecord
   end
 
   def self.select_overview_columns
-    self.select(Post.attribute_names - ["snippet", "description"])
+    self.select(Post.attribute_names - ["snippet", "description", "controls"])
   end
 
   def self.visible?
@@ -168,5 +169,9 @@ class Post < ApplicationRecord
 
   def expired?
     !self.immortal? && self.last_revision_created_at < 6.months.ago
+  end
+
+  def parsed_controls
+    JSON.parse(self.controls)
   end
 end

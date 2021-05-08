@@ -1,0 +1,25 @@
+<h2 class="mt-1/2">Controls</h2>
+
+<%= form.hidden_field :controls %>
+
+<div class="form-group">
+  <div class="form-hint">
+    If your gamemode has special controls you can list them here. For example if your gamemode has a certain button combination to change heroes, or activate some sort of action. Please list them here rather than in the description above.
+  </div>
+
+  <div data-role="controls-form">
+    <% if @post.parsed_controls.any? %>
+      <% @post.parsed_controls.each do |item| %>
+        <%= render "posts/form/controls_item", item: item %>
+      <% end %>
+    <% else %>
+      <%= render "posts/form/controls_item" %>
+    <% end %>
+  </div>
+
+  <%= link_to "+ Add line", "#", class: "button button--secondary", data: { action: "add-controls-item" } %>
+</div>
+
+<template id="controls-item">
+  <%= render "posts/form/controls_item" %>
+</template>

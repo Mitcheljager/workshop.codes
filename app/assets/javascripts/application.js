@@ -19,6 +19,7 @@
 //= require carousel
 //= require carousel-cards
 //= require checkbox-select-all
+//= require controls
 //= require copy
 //= require debounce
 //= require difference-viewer

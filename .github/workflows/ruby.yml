@@ -22,6 +22,9 @@ jobs:
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
+      - name: ESLint
+        run: |
+          yarn run eslint app/assets/javascripts
       - name: Test
         run: |
           rake db:test:prepare

@@ -9,7 +9,7 @@ class Dropzone {
     this.element = element
   }
 
-  bind() {  
+  bind() {
     this.element.removeAndAddEventListener("dragover", () => { this.enter(event) })
     this.element.removeAndAddEventListener("dragleave", () => { this.leave() })
     this.element.removeAndAddEventListener("drop", () => { this.drop(event) })
@@ -43,13 +43,13 @@ class Dropzone {
     if (event.dataTransfer.items) this.readFiles(event.dataTransfer.items)
   }
   
-  paste(event) {  
+  paste(event) {
     const items = (event.clipboardData || event.originalEvent.clipboardData).items
     this.readFiles(items)
   }
   
   readFiles(files) {
-    for (var i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       if (files[i].kind === "file") {
         const file = files[i].getAsFile()
   
@@ -72,8 +72,8 @@ class Dropzone {
   
       image.onload = () => {
         const uploader = new Uploader(file, "images", "dropzone", "",
-                                      document.querySelector(`[data-dropzone-target="${ this.element.dataset.target }"]`),
-                                      document.querySelector(`input[type="file"][name="${ this.element.dataset.input }"]`))
+          document.querySelector(`[data-dropzone-target="${ this.element.dataset.target }"]`),
+          document.querySelector(`input[type="file"][name="${ this.element.dataset.input }"]`))
   
         uploader.upload().then(() => {
           const interval = setInterval(() => {

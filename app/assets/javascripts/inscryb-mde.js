@@ -125,7 +125,7 @@ class InitialiseInscrybeMDE {
           preview.innerHTML = data
         })
     
-        return `<div class="p-1/2"><div class="spinner"></div></div>`
+        return "<div class=`p-1/2`><div class=`spinner`></div></div>"
       },
       toolbar: this.toolbar
     })
@@ -152,7 +152,7 @@ class InitialiseInscrybeMDE {
   }
 
   insertGallery() {
-    const output = '[gallery {\n  "Gallery Item 1": "https://",\n  "Gallery Item 2": "https://"\n}]'
+    const output = "[gallery {\n  \"Gallery Item 1\": \"https://\",\n  \"Gallery Item 2\": \"https://\"\n}]"
 
     this.codemirror.replaceSelection(output)
   }
@@ -194,7 +194,7 @@ class InitialiseInscrybeMDE {
     }
 
     const markerElement = document.createElement("div")
-    markerElement.innerHTML = `<div class="well well--dark">Loading block...</div>`
+    markerElement.innerHTML = "<div class='well well--dark'>Loading block...</div>"
 
     const marker = this.codemirror.markText({ line: lineNumber || position.line - 1, ch: 0 }, { line: lineNumber || position.line, ch: charCount }, {
       replacedWith: markerElement,
@@ -203,8 +203,8 @@ class InitialiseInscrybeMDE {
       inclusiveRight: false
     })
 
-    new FetchRails(`/blocks/show_or_create`, { name: name, id: blockId })
-    .post().then(data => { 
+    new FetchRails("/blocks/show_or_create", { name: name, id: blockId })
+    .post().then(data => {
       marker.widgetNode.innerHTML = data
       
       const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
@@ -316,7 +316,7 @@ class InitialiseInscrybeMDE {
         if (!event.target.value) return
 
         const resultsElement = button.querySelector("[data-role='results']")
-        resultsElement.innerHTML = `<small>Searching...</small>`
+        resultsElement.innerHTML = "<small>Searching...</small>"
 
         new FetchRails(`/wiki/search/${ event.target.value }.json`).get()
         .then(data => {
@@ -324,7 +324,7 @@ class InitialiseInscrybeMDE {
           resultsElement.innerHTML = ""
 
           if (!data.length) {
-            resultsElement.innerHTML = `<small>No results found</small>`
+            resultsElement.innerHTML = "<small>No results found</small>"
             return
           }
 

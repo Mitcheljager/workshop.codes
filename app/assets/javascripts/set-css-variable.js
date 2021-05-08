@@ -9,6 +9,6 @@ document.addEventListener("turbolinks:load", function() {
 function setCssVariable(event) {
   event.preventDefault()
   const targetElement = document.querySelector(`[data-css-variable="${ this.dataset.target }"]`)
-  
+
   targetElement.style.setProperty(`--${ this.dataset.variable }`, this.value + "px")
 }

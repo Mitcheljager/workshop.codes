@@ -31,6 +31,8 @@
 
     <%= render "carousel" %>
 
+    <%= render "controls" if @post.parsed_controls.any? %>
+
     <div class="item__description">
       <%= sanitized_markdown(@post.description) %>
     </div>

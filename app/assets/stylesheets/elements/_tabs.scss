@@ -18,6 +18,12 @@
     width: 100%;
     overflow-x: hidden;
   }
+
+  &--buttons {
+    background: initial;
+    padding: 0;
+    border-radius: 0;
+  }
 }
 
 .tabs__item {
@@ -74,11 +80,37 @@
     font-size: $font-size-small;
     text-transform: none;
   }
+
+  .tabs--buttons & {
+    margin: 0 1px;
+    padding: $margin / 8;
+    border-radius: $border-radius;
+    
+    &:hover,
+    &:active,
+    &--active {
+      background: $bg-darker;
+      box-shadow: inset 0 0 0 2px $border-color;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  svg {
+    display: block;
+    height: 1em;
+  }
 }
 
 .tabs__label {
   display: block;
   color: $text-color-dark;
+
+  .tabs__item--with-errors & {
+    color: $red;
+  }
 }
 
 @keyframes transition-tab-in {
