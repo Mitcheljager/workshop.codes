@@ -3,7 +3,7 @@ include ApplicationHelper
 class ArrayLengthValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:maximum)
-    return unless value
+    return unless value.present?
     maximum = options[:maximum]
     return unless value.count > maximum
 
@@ -14,7 +14,7 @@ end
 class ArrayPartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
-    return unless value
+    return unless value.present?
 
     value.each do |item|
       unless options[:array].include? item
@@ -28,7 +28,7 @@ end
 class ArrayNamePartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
-    return unless value
+    return unless value.present?
     array = options[:array].pluck("en")
 
     value.each do |item|
