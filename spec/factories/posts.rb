@@ -10,6 +10,8 @@ FactoryBot.define do
     version { Faker::App.semantic_version }
     last_revision_created_at { Time.now }
     hotness { Faker::Number.between(from: 1, to: 200) }
+    min_players { Faker::Number.between(from: 1, to: 12) }
+    max_players { Faker::Number.between(from: min_players, to: 12) }
     user
   end
 end
