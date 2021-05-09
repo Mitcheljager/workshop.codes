@@ -5,7 +5,7 @@
 
       elements[elements.length - 1].insertAdjacentHTML("afterEnd", `
         <%= j render @posts %>
-        <% if @posts.count == 20 %>
+        <% if @posts.size == 20 %>
           <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>"></div>
         <% else %>
           <h4 class="mt-1/2 mb-0"><center>You've reached the end.</center></h4>
@@ -19,12 +19,12 @@
 
       marker.insertAdjacentHTML("beforeBegin", `
         <%= j render @posts %>
-        <% if @posts.count < 20 %>
+        <% if @posts.size < 20 %>
           <h4 class="mt-1/2 mb-0"><center>You've reached the end.</center></h4>
         <% end %>
       `)
 
-      <% if @posts.count < 20 %>
+      <% if @posts.size < 20 %>
         button.remove()
       <% end %>
     <% end %>
