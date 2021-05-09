@@ -15,6 +15,7 @@ class FilterController < ApplicationController
     @posts = @posts.select { |post| to_slug(post.categories).include?(to_slug(params[:category])) } if params[:category]
     @posts = @posts.select { |post| to_slug(post.maps).include?(to_slug(params[:map])) } if params[:map]
     @posts = @posts.select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) } if params[:hero]
+    @posts = @posts.select { |post| helpers.has_player_range?(post) && to_range(params[:players]).overlaps?((post.min_players)..(post.max_players)) } if params[:players]
 
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
 

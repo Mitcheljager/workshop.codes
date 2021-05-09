@@ -41,6 +41,8 @@ ko:
       false: 아니요
     author: 작성자
     verified_authors: 인증된 작성자들의 목록입니다
+    num_players:
+      label: 플레이어
     select: 선택하기...
     remove: ✕ 필터 제거
     remove_all: 필터 제거
@@ -164,7 +166,11 @@ ko:
         label: 코드 스니펫 포함
         help_html: <strong>워크샵 코드는 6 개월 후에 만료됩니다.</strong> 이 시점에서 더 이상 원래 코드가 없으면 워크샵 아이템이 영원히 손실됩니다. 코드 스니펫을 저장하면 언제든지 복사하여 붙여 넣을 수 있습니다.
         hint: 코드 스니펫을 얻으려면 모든 규칙을 선택하고 복사하십시오. 여기에 붙여 넣기만하면됩니다.
-      settings: 설정
+      settings:
+        title: 설정
+      num_players:
+        title: 최대 인원 수
+        warning: 최대 인원 수가 지정되지 않았습니다. 아래 슬라이더에서 이 모드가 허용하는 최대 인원 수를 지정해주세요.
       categories:
         label: 카테고리
         help: 항목에 맞는 카테고리를 최대 3개까지 선택하십시오. 많은 범주를 선택하면 코드를 찾기가 어려워질 수도 있습니다.

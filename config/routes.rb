@@ -102,8 +102,8 @@ Rails.application.routes.draw do
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
     get "(page/:page)", to: "posts#index"
-    get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
-    post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#index", as: "search_post"
+    get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
+    post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#index", as: "search_post"
     get "search", to: "search#show"
     get "get-verified-users", to: "filter#get_verified_users"
 

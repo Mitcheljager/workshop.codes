@@ -9,6 +9,7 @@ module ApplicationHelper
       sort: params[:sort],
       expired: params[:expired],
       author: params[:author],
+      players: params[:players],
       language: params[:language],
       search: params[:search]
     }
@@ -37,6 +38,10 @@ module ApplicationHelper
 
   def to_slug(string)
     string.to_s.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
+  end
+
+  def to_range(string)
+    Range.new(*string.split("-").map(&:to_i))
   end
 
   def maps

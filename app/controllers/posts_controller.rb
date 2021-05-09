@@ -254,6 +254,7 @@ class PostsController < ApplicationController
       { categories: [] }, { heroes: [] }, { maps: [] }, :tags,
       :collection_id, :new_collection,
       :revision, :revision_description,
+      :min_players, :max_players,
       :email_notification, :email,
       :carousel_video, :image_order, images: [])
   end

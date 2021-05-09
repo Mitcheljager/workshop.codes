@@ -3,7 +3,7 @@ include ApplicationHelper
 class ArrayLengthValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:maximum)
-    return unless value
+    return unless value.present?
     maximum = options[:maximum]
     return unless value.count > maximum
 
@@ -14,7 +14,7 @@ end
 class ArrayPartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
-    return unless value
+    return unless value.present?
 
     value.each do |item|
       unless options[:array].include? item
@@ -28,7 +28,7 @@ end
 class ArrayNamePartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
-    return unless value
+    return unless value.present?
     array = options[:array].pluck("en")
 
     value.each do |item|
@@ -36,6 +36,35 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
         record.errors.add(attribute, :not_part_of_array)
         return
       end
+    end
+  end
+end
+
+class SupportedPlayersValidator < ActiveModel::Validator
+  def validate(record)
+    unless record.min_players.present? && record.max_players.present?
+      record.errors.add :number_of_supported_players, "must be specified."
+      return
+    end
+
+    unless /\A[+-]?\d+\z/.match? record.min_players.to_s
+      record.errors.add :min_players, "supported is not an integer."
+    end
+
+    unless /\A[+-]?\d+\z/.match? record.max_players.to_s
+      record.errors.add :max_players, "supported is not an integer."
+    end
+
+    unless (1..12).include? record.min_players
+      record.errors.add :min_players, "supported must be between 1 and 12."
+    end
+
+    unless (1..12).include? record.max_players
+      record.errors.add :max_players, "supported must be between 1 and 12."
+    end
+
+    unless record.min_players <= record.max_players
+      record.errors.add :max_players, "supported must not be less than min players supported."
     end
   end
 end
@@ -88,7 +117,8 @@ class Post < ApplicationRecord
   validates :version, length: { maximum: 20 }
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes }
-  
+  validates_with SupportedPlayersValidator
+
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 

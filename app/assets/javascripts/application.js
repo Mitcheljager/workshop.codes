@@ -40,6 +40,7 @@
 //= require infinite-scroll
 //= require modal
 //= require navigation
+//= require num-players-slider
 //= require reveal-by-checkbox
 //= require reveal-by-select
 //= require reveal-on-difference

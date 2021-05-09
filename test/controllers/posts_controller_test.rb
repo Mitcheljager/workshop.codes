@@ -38,6 +38,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     find("#post_categories").find("option[value='Team Deathmatch']").select_option
     find("#post_heroes_reinhardt").set(true)
     find("#post_maps_hanamura").set(true)
+    find("#post_min_players", visible: false).set(1)
+    find("#post_max_players", visible: false).set(12)
 
     assert_difference "Post.count", 1 do
       click_button "Create Post"

@@ -96,6 +96,18 @@
           </div>
         </div>
 
+        <div class="filter__group mt-1/4 mb-1/1">
+          <p class="filter__label">
+            <%= t("filter.num_players.label") %>
+          </p>
+          <%= tag.div data: {
+            role: 'num-player-slider',
+            type: "filter",
+            min_players: (to_range(CGI.escape(params[:players])).first if params[:players].present?),
+            max_players: (to_range(CGI.escape(params[:players])).last if params[:players].present?) } %>
+          <%= tag.div class: "hidden", data: { filter_type: "players", value: (CGI.escape(params[:players]) if params[:players].present?) }%>
+        </div>
+
         <div class="filter__group flex mt-1/4">
           <%= link_to t("filter.apply"), build_filter_path(nil, nil), class: "button mr-1/4", data: { role: "filter-link" } %>
 
