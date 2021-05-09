@@ -87,11 +87,11 @@
 
 <div class="form-group mt-1/1 mb-1/1">
   <%= form.label :number_of_supported_players, class: "form-label mb-1/4" do %>
-    Number of supported players
+    <%= t("posts.form.num_players.title") %>
     <span class="form-required">(<%= t("global.required") %>)</span>
   <% end %>
   <% unless @post.min_players.present? && @post.max_players.present? %>
-    <%= tag.p 'Number of supported players has not been set. Use the slider below to specify how many players your mode can support.', class: 'text-red', data: { role: 'vanish-on-slider-update' } %>
+    <%= tag.p t("posts.form.num_players.warning"), class: 'text-red', data: { role: 'vanish-on-slider-update' } %>
   <% end %>
   <%= content_tag :div, nil, data: { role: 'num-player-slider', type: 'post', min_players: @post.min_players, max_players: @post.max_players }, name: 'post[number_of_supported_players]' %>
   <%= form.hidden_field :min_players, value: @post.min_players %>

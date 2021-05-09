@@ -97,7 +97,9 @@
         </div>
 
         <div class="filter__group mt-1/4 mb-1/1">
-          <p class="filter__label">Players</p>
+          <p class="filter__label">
+            <%= t("filter.num_players.label") %>
+          </p>
           <%= tag.div data: {
             role: 'num-player-slider',
             type: "filter",

@@ -46,6 +46,8 @@ en:
       false: "False"
     author: Author...
     verified_authors: This is a list of verified creators
+    num_players:
+      label: Players
     select: Select...
     remove: ✕ Remove Filter
     remove_all: Remove filters
@@ -181,6 +183,9 @@ en:
         hint: To get the code snippet select all your rules and copy them. Simply paste it here and you're good to go.
       settings:
         title: Settings
+      num_players:
+        title: Number of supported players
+        warning:  Number of supported players has not been set. Use the slider below to specify how many players your mode can support.
       categories:
         label: Categories
         help: Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
