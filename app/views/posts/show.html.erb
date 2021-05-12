@@ -48,44 +48,46 @@
       <%= render "current_user_blocks" if current_user == @post.user %>
       <%= render "expired" if @post.expired? %>
 
-      <nav class="tabs">
-        <%= link_to t("posts.show.tabs.description"), post_path(@post.code),
-                    class: "tabs__item #{ "tabs__item--active" if is_active_tab?("") }",
-                    data: { action: "set-tab", target: "description" } %>
+      <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, "tabs"] do %>
+        <nav class="tabs">
+          <%= link_to t("posts.show.tabs.description"), post_path(@post.code),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("") }",
+                      data: { action: "set-tab", target: "description" } %>
 
-        <%= link_to t("posts.show.tabs.controls"), post_tab_path(@post.code, "controls"),
-                    class: "tabs__item #{ "tabs__item--active" if is_active_tab?("controls") }",
-                    data: { action: "set-tab", target: "controls" } if @post.parsed_controls.any? %>
-        
-        <%= link_to t("posts.show.tabs.snippet"), post_tab_path(@post.code, "snippet"),
-                    class: "tabs__item #{ "tabs__item--active" if is_active_tab?("snippet") }",
-                    data: { action: "set-tab load-snippet", target: "snippet", id: @post.id, get_on_load: is_active_tab?("snippet") } if @post.snippet.present? %>
+          <%= link_to t("posts.show.tabs.controls"), post_tab_path(@post.code, "controls"),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("controls") }",
+                      data: { action: "set-tab", target: "controls" } if @post.parsed_controls.any? %>
+          
+          <%= link_to t("posts.show.tabs.snippet"), post_tab_path(@post.code, "snippet"),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("snippet") }",
+                      data: { action: "set-tab load-snippet", target: "snippet", id: @post.id, get_on_load: is_active_tab?("snippet") } if @post.snippet.present? %>
 
-        <%= link_to t("posts.show.tabs.collection"), post_tab_path(@post.code, "collection"),
-                    class: "tabs__item #{ "tabs__item--active" if is_active_tab?("collection") }",
-                    data: { action: "set-tab get-partial", target: "collection", url: collection_partial_path(@post.id), get_on_load: is_active_tab?("collection") } if @post.collection && @post.collection.posts.visible?.many? %>
+          <%= link_to t("posts.show.tabs.collection"), post_tab_path(@post.code, "collection"),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("collection") }",
+                      data: { action: "set-tab get-partial", target: "collection", url: collection_partial_path(@post.id), get_on_load: is_active_tab?("collection") } if @post.collection && @post.collection.posts.visible?.many? %>
 
-        <%= link_to post_tab_path(@post.code, "comments"),
-              class: "tabs__item #{ "tabs__item--active" if is_active_tab?("comments") }",
-              data: { action: "set-tab get-partial", target: "comments", url: comment_path(@post.id), get_on_load: is_active_tab?("comments") } do %>
+          <%= link_to post_tab_path(@post.code, "comments"),
+                class: "tabs__item #{ "tabs__item--active" if is_active_tab?("comments") }",
+                data: { action: "set-tab get-partial", target: "comments", url: comment_path(@post.id), get_on_load: is_active_tab?("comments") } do %>
 
-          <%= t("posts.show.tabs.comments") %>
-          <small data-role="comment-total" class="text-dark"><%= @comments_count %></small>
-        <% end %>
-
-        <% if @revisions_count > 1 %>
-          <%= link_to post_tab_path(@post.code, "update-log"),
-                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("update-log") }",
-                      data: { action: "set-tab", target: "update-log" } do %>
-
-            <%= t("posts.show.tabs.revisions") %>
-            <small class="text-dark"><%= @revisions_count %></small>
+            <%= t("posts.show.tabs.comments") %>
+            <small data-role="comment-total" class="text-dark"><%= @comments_count %></small>
           <% end %>
-        <% end %>
-      </nav>
+
+          <% if @revisions_count > 1 %>
+            <%= link_to post_tab_path(@post.code, "update-log"),
+                        class: "tabs__item #{ "tabs__item--active" if is_active_tab?("update-log") }",
+                        data: { action: "set-tab", target: "update-log" } do %>
+
+              <%= t("posts.show.tabs.revisions") %>
+              <small class="text-dark"><%= @revisions_count %></small>
+            <% end %>
+          <% end %>
+        </nav>
+      <% end %>
     </div>
 
-    <% cache [@post, "description", current_locale] do %>
+    <% cache_unless params[:tab].present?, [@post, "description", current_locale] do %>
       <%= tabs_content_tag("description", "") do %>
         <%= render "carousel" %>
         
@@ -104,7 +106,7 @@
     <% end %>
   </article>
 
-  <% cache [@post, "controls"] do %>
+  <% cache_unless params[:tab].present?, [@post, "controls"] do %>
     <% if @post.parsed_controls.any? %>
       <%= tabs_content_tag("controls") do %>
         <%= render "controls" %>
@@ -128,7 +130,7 @@
     <div class="infinite-scroll"><div class="spinner"></div></div>
   <% end %>
   
-  <% cache [@post, "revisions"] do %>
+  <% cache_unless params[:tab].present?, [@post, "revisions"] do %>
     <% if @revisions_count > 1 %>
       <%= tabs_content_tag("update-log") do %>
         <%= render "revisions/revisions" %>
