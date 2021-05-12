@@ -45,7 +45,7 @@ function revealTab(target, parentElement) {
 function setActiveTab(targetElement, parentElement) {
   const tabs = parentElement.querySelectorAll(".tabs__item")
 
-  tabs.forEach(tab => { 
+  tabs.forEach(tab => {
     if (tab.closest("[data-role~='tabs']").innerHTML != parentElement.innerHTML) return
     tab.classList.remove("tabs__item--active")
   })
