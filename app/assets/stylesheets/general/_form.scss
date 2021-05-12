@@ -63,7 +63,7 @@
   }
 
   &--extra-small {
-    min-height: 150px;
+    min-height: 100px;
     max-width: map-get($media-min-widths, sm);
     padding: $margin / 3;
   }

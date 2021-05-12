@@ -7,15 +7,19 @@ document.addEventListener("turbolinks:load", function() {
 
   if (!element) return
 
+  setCarousel(element)
+
+  const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
+  navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
+})
+
+function setCarousel(element) {
   carousel = new Siema({
     selector: element,
     onInit: setActiveItem,
     onChange: setActiveItem
   })
-
-  const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
-  navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
-})
+}
 
 function carouselGoTo() {
   const target = this.dataset.target

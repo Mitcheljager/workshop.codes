@@ -1,5 +1,5 @@
 <% content_for :page_title, "#{ t("navigation.recent") } | Page #{ params[:page] }" if params[:page] %>
-<% content_for :bg_large, "true" unless params[:page] %>
+<% content_for :bg_size, "large" unless params[:page] %>
 
 <main class="top-offset">
   <% unless params[:page] %>

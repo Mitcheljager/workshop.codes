@@ -1,18 +1,27 @@
 .warning {
-  border-radius: $border-radius;
-  margin-top: $margin * 2;
-  padding: 1rem;
+  padding: $margin / 8 $margin / 4;
   background: $primary;
   text-align: center;
   color: white;
 
   &--mild {
-    border: 3px solid $border-color;
-    background: $bg-darker;
+    background: $bg-dark;
     color: $text-color;
   }
 
   &--red {
+    border-radius: $border-radius;
+    margin-top: $margin * 2;
+    padding: 1rem;
     background: $red;
+  }
+
+  &--orange {
+    background: $orange;
+    font-size: $font-size-small;
+  }
+
+  p {
+    margin: 0;
   }
 }

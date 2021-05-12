@@ -1,158 +1,140 @@
 <% content_for :page_title, "#{ @post.title }" %>
 <% begin %><% content_for :og_image, "#{ ENV["CDN"] + @ordered_images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed.key if @ordered_images.present? && @ordered_images.any? }" %><% rescue %><% end %>
 <% content_for :og_description, strip_tags(markdown(@post.description || "")).truncate(200).gsub("\n"," ") %>
-<% content_for :bg_large, "true" if @ordered_images.present? || @post.carousel_video.present? %>
+<% content_for :bg_size, "medium" %>
 
-<article class="<%= "pt-1/8 sm:pt-1/2" unless @ordered_images.present? || @post.carousel_video.present? %>">
-  <div class="item item--single <%= "mt-1/1" unless @ordered_images.present? || @post.carousel_video.present? %>">
-    <h1 class="item__title <%= @ordered_images.present? || @post.carousel_video.present? ? "text-black" : "text-pure-white" %>">
-      <%= @post.title %>
+<div data-role="tabs" data-tabs-set-url="true">
+  <article>
+    <div class="text-left p-0">
+      <div class="pt-1/2 item item--single">
+        <h1 class="item__title text-black">
+          <%= @post.title %>
 
-      <%= render "favorites/form", post: @post %>
-    </h1>
+          <%= render "favorites/form", post: @post, color: "black" %>
+        </h1>
 
-    <div class="item__code" data-action="copy-to-clipboard" data-target="<%= @post.code %>">
-      <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
-
-      <span class="copy">
-        <span data-copy="<%= @post.code %>" data-track-copy><%= @post.code %></span>
-      </span>
-
-      <% if @post.ptr? %>
-        <div class="item__code-flag">PTR</div>
-      <% end %>
-    </div>
-  </div>
-
-  <%= render "expired" if @post.expired? %>
-
-  <% cache_unless current_user && current_user == @post.user, [current_locale, @post, "show"] do %>
-    <%= render "current_user_blocks" if current_user == @post.user %>
-
-    <%= render "carousel" %>
-
-    <%= render "controls" if @post.parsed_controls.any? %>
-
-    <div class="item__description">
-      <%= sanitized_markdown(@post.description) %>
+        <%= render "code", post: @post %>
+      </div>
     </div>
 
-    <%= render "posts/snippet" if @post.snippet.present? %>
-
-    <div class="item item--bottom">
-      <div class="item__details">
-        <%= render "profiles/profile", user: @post.user, small: true %>
-
-        <div class="well well--dark block">
-          <div class="item__details-item">
-            <%= t(".categories") %> |
-
-            <% @post.categories.each do |category| %>
-              <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
-            <% end %>
+    <div class="banner p-0 mb-1/1">
+      <div class="item__info">
+        <%= link_to user_profile_path(@post.user), class: "item__author mb-1/4 md:mb-0" do %>
+          <div class="item__avatar <%= "profile-image--empty" unless @post.user.profile_image.attached? || @post.user.provider_profile_image.present? %>">
+            <%= render "profiles/image", user: @post.user, size: 32 %>
           </div>
 
+          <%= @post.user.username.split("#")[0] %>
+        <% end %>
+
+        <div>
           <% if has_player_range?(@post) %>
-            <div class="item__details-item">
-              Players |
-
-              <%= @post.min_players %> - <%= @post.max_players %>
-            </div>
-          <% end %>
-
-          <% if @post.tags.present? %>
-            <div class="item__details-item">
-              <%= t(".tags") %> |
-
-              <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-                <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
+            <div class="item__info-item">
+              <% if @post.min_players == @post.max_players %>
+                <strong><%= @post.min_players %></strong>
+              <% else %>
+                <strong><%= @post.min_players %></strong> to <strong><%= @post.max_players %></strong>
               <% end %>
+              Player<%= "s" if @post.max_players > 1 %>
             </div>
           <% end %>
 
-          <div class="item__details-item">
-            <%= t(".heroes") %> |
-
-            <% if @post.heroes.length == heroes.length %>
-              <%= t(".all") %>
-            <% else %>
-              <% @post.heroes.each do |hero| %>
-                <%= link_to i18n_value_in_array(heroes, hero), filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <div class="item__details-item">
-            <%= t(".maps") %> |
-
-            <% if @post.maps.length == maps.length %>
-              <%= t(".all") %>
-            <% else %>
-              <% @post.maps.each do |map| %>
-                <%= link_to i18n_value_in_array(maps, map), filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <div class="item__details-item" title="Created at: <%= @post.created_at %>">
-            <%= t(".created_at") %> |
-
-            <% if @post.draft? %>
-              Draft
-            <% else %>
-              <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
-            <% end %>
-          </div>
-
-          <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
-            <%= t(".updated_at") %> |
-
-            <% if @post.draft? %>
-              Draft
-            <% else %>
-              <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
-            <% end %>
-          </div>
-
-          <% if @post.version.present? %>
-            <div class="item__details-item">
-              <%= t(".version") %> |
-
-              <%= @post.version %>
-            </div>
-          <% end %>
-
-          <% if @post.nice_url.present? %>
-            <div class="item__details-item">
-              <%= t(".nice_url") %> |
-
-              <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
-            </div>
-          <% end %>
-
-          <div class="item__details-item">
-            <%= link_to t("report.action"), new_report_path(id: @post.id, concerns_model: "post"), class: "text-red", remote: true, data: { disable_with: t("report.loading") } %>
+          <div class="item__info-item">
+            <small><em>Last updated <%= time_ago_in_words(@post.last_revision_created_at) %> ago</em></small>
           </div>
         </div>
       </div>
+
+      <%= render "current_user_blocks" if current_user == @post.user %>
+      <%= render "expired" if @post.expired? %>
+
+      <% cache [@post, @comments_count, current_locale] do %>
+        <nav class="tabs">
+          <%= link_to t("posts.show.tabs.description"), post_path(@post.code),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("") }",
+                      data: { action: "set-tab", target: "description" } %>
+
+          <%= link_to t("posts.show.tabs.controls"), post_tab_path(@post.code, "controls"),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("controls") }",
+                      data: { action: "set-tab", target: "controls" } if @post.parsed_controls.any? %>
+          
+          <%= link_to t("posts.show.tabs.snippet"), post_tab_path(@post.code, "snippet"),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("snippet") }",
+                      data: { action: "set-tab load-snippet", target: "snippet", id: @post.id, get_on_load: is_active_tab?("snippet") } if @post.snippet.present? %>
+
+          <%= link_to t("posts.show.tabs.collection"), post_tab_path(@post.code, "collection"),
+                      class: "tabs__item #{ "tabs__item--active" if is_active_tab?("collection") }",
+                      data: { action: "set-tab get-partial", target: "collection", url: collection_partial_path(@post.id), get_on_load: is_active_tab?("collection") } if @post.collection && @post.collection.posts.visible?.many? %>
+
+          <%= link_to post_tab_path(@post.code, "comments"),
+                class: "tabs__item #{ "tabs__item--active" if is_active_tab?("comments") }",
+                data: { action: "set-tab get-partial", target: "comments", url: comment_path(@post.id), get_on_load: is_active_tab?("comments") } do %>
+
+            <%= t("posts.show.tabs.comments") %>
+            <small data-role="comment-total" class="text-dark"><%= @comments_count %></small>
+          <% end %>
+
+          <% if @revisions_count > 1 %>
+            <%= link_to post_tab_path(@post.code, "update-log"),
+                        class: "tabs__item #{ "tabs__item--active" if is_active_tab?("update-log") }",
+                        data: { action: "set-tab", target: "update-log" } do %>
+
+              <%= t("posts.show.tabs.update_log") %>
+              <small class="text-dark"><%= @revisions_count %></small>
+            <% end %>
+          <% end %>
+        </nav>
+      <% end %>
     </div>
+
+    <% cache [@post, "description", current_locale] do %>
+      <%= tabs_content_tag("description", "") do %>
+        <%= render "carousel" %>
+        
+        <div class="item__description">
+          <%= sanitized_markdown(@post.description) %>
+
+          <div class="item item--bottom">
+            <div class="item__details">
+              <%= render "profiles/profile", user: @post.user, small: true %>
+
+              <%= render "details" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </article>
+
+  <% cache [@post, "controls"] do %>
+    <% if @post.parsed_controls.any? %>
+      <%= tabs_content_tag("controls") do %>
+        <%= render "controls" %>
+      <% end %>
+    <% end %>
   <% end %>
-</article>
 
-<% cache_unless current_user, [current_locale, @post.collection, @comments_count, @post.revisions] do %>
-  <%= render "collections/collections" if @post.collection && @post.collection.posts.visible?.many? %>
+  <% if @post.snippet.present? %>
+    <%= tabs_content_tag("snippet") do %>
+      <%= render "snippet" %>
+    <% end %>
+  <% end %>
 
-  <div class="comments" id="comments">
-    <div class="heading items-heading mb-1/2">
-      <h2 class="mt-0 mb-0"><span data-role="comment-total"><%= @comments_count %></span> <%= t("comments.title") %></h2>
-    </div>
-
-    <%= render "comments/form", post: @post %>
-
-    <div class="comments__wrapper" data-role="comments" data-id="<%= @post.id %>" data-comments-count="<%= @comments_count %>">
+  <% if @post.collection && @post.collection.posts.visible?.many? %>
+    <%= tabs_content_tag("collection") do %>
       <div class="infinite-scroll"><div class="spinner"></div></div>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 
-  <%= render "revisions/revisions" if @post.revisions.size > 1 %>
-<% end %>
+  <%= tabs_content_tag("comments") do %>
+    <div class="infinite-scroll"><div class="spinner"></div></div>
+  <% end %>
+  
+  <% cache [@post, "revisions"] do %>
+    <% if @revisions_count > 1 %>
+      <%= tabs_content_tag("update-log") do %>
+        <%= render "revisions/revisions" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

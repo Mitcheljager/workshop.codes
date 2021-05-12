@@ -1,17 +1,23 @@
 document.addEventListener("turbolinks:load", function() {
   const elements = document.querySelectorAll("[data-action~='load-snippet']")
 
-  elements.forEach((element) => element.removeAndAddEventListener("click", loadSnippet))
+  elements.forEach((element) => {
+    element.removeAndAddEventListener("click", loadSnippet)
+
+    if (element.dataset.getOnLoad == "true") loadSnippet(event, element)
+  })
 })
 
-function loadSnippet(event) {
+function loadSnippet(event, element) {
   event.preventDefault()
 
-  if (this.dataset.retrieved == "true") return
+  const _this = element || event.target
 
-  this.dataset.retrieved = true
+  if (_this.dataset.retrieved == "true") return
 
-  const id = this.dataset.id
+  _this.dataset.retrieved = true
+
+  const id = _this.dataset.id
 
   new FetchRails("/get-snippet", { id: id })
   .post().then(data => {

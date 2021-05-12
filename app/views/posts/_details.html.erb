@@ -1,0 +1,91 @@
+<div class="well well--dark block">
+  <div class="item__details-item">
+    <%= t(".categories") %> |
+
+    <% @post.categories.each do |category| %>
+      <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
+    <% end %>
+  </div>
+
+  <% if has_player_range?(@post) %>
+    <div class="item__details-item">
+      Players |
+
+      <%= @post.min_players %> - <%= @post.max_players %>
+    </div>
+  <% end %>
+
+  <% if @post.tags.present? %>
+    <div class="item__details-item">
+      <%= t(".tags") %> |
+
+      <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
+        <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="item__details-item">
+    <%= t(".heroes") %> |
+
+    <% if @post.heroes.length == heroes.length %>
+      <%= t(".all") %>
+    <% else %>
+      <% @post.heroes.each do |hero| %>
+        <%= link_to i18n_value_in_array(heroes, hero), filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="item__details-item">
+    <%= t(".maps") %> |
+
+    <% if @post.maps.length == maps.length %>
+      <%= t(".all") %>
+    <% else %>
+      <% @post.maps.each do |map| %>
+        <%= link_to i18n_value_in_array(maps, map), filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="item__details-item" title="Created at: <%= @post.created_at %>">
+    <%= t(".created_at") %> |
+
+    <% if @post.draft? %>
+      Draft
+    <% else %>
+      <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
+    <% end %>
+  </div>
+
+  <div class="item__details-item" title="Updated at: <%= @post.updated_at %>">
+    <%= t(".updated_at") %> |
+
+    <% if @post.draft? %>
+      Draft
+    <% else %>
+      <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
+    <% end %>
+  </div>
+
+  <% if @post.version.present? %>
+    <div class="item__details-item">
+      <%= t(".version") %> |
+
+      <%= @post.version %>
+    </div>
+  <% end %>
+
+  <% if @post.nice_url.present? %>
+    <div class="item__details-item">
+      <%= t(".nice_url") %> |
+
+      <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
+    </div>
+  <% end %>
+
+  <div class="item__details-item">
+    <%= link_to t("report.action"), new_report_path(id: @post.id, concerns_model: "post"), class: "text-red", remote: true, data: { disable_with: t("report.loading") } %>
+  </div>
+</div>

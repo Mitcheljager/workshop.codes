@@ -46,4 +46,16 @@ module PostsHelper
       ""
     end
   end
+
+  def is_active_tab?(tab)
+    return true if tab == "" && params[:tab].nil? || params[:tab] == tab
+    return false
+  end
+
+  def tabs_content_tag(name, alt_url = nil)
+    tag.div class: "tabs-content #{ "tabs-content--active" if is_active_tab?(alt_url || name) }",
+            data: { tab: name, partial: name } do
+      yield
+    end
+  end
 end

@@ -54,7 +54,8 @@ class PostsController < ApplicationController
 
         not_found and return unless @post.present?
 
-        @comments_count = @post.comments.count
+        @comments_count = @post.comments.size
+        @revisions_count = @post.revisions.where(visible: true).size
         set_post_images
       }
       format.json {
@@ -162,7 +163,7 @@ class PostsController < ApplicationController
   end
 
   def immortalise
-    if @post.update(immortal: true)
+    if @post.update_attribute(:immortal, true)
       redirect_to post_path(@post.code)
     else
       render "application/error"

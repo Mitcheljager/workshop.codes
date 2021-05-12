@@ -1,3 +1,5 @@
+<% color||= "white" %>
+
 <% if current_user %>
   <% has_been_favorited = current_user.favorites.find_by_post_id(post.id).present? %>
 
@@ -8,7 +10,7 @@
         params: { favorite: { post_id: post.id } },
         form: { autocomplete: "off" },
         aria: { label: "Favorite code #{ post.code }" },
-        class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
+        class: "favorite favorite--#{ color } #{ "favorite--is-active" if has_been_favorited }" do %>
       <%= inline_svg_tag "icons/icon-heart#{ "-border" unless has_been_favorited }.svg" %>
     <% end %>
   </div>

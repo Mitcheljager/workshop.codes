@@ -112,6 +112,19 @@
       animation: grow-heart 300ms;
     }
   }
+
+  &--black:not(.favorite--is-active) {
+    svg path {
+      fill: $black;
+    }
+
+    &:hover,
+    &:active {
+      svg path {
+        fill: $black;
+      }
+    }
+  }
 }
 
 .favorite__label {

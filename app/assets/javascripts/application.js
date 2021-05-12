@@ -28,8 +28,8 @@
 //= require fetch-rails
 //= require filter
 //= require gallery
-//= require get-comments
 //= require get-ko-fi-value
+//= require get-partial
 //= require get-markdown-preview
 //= require get-post-analytics
 //= require get-snippet

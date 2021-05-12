@@ -1,9 +1,11 @@
 <% tabs = ["workshop", "pc", "playstation", "xbox", "switch"] %>
 
-<div class="mt-1/2 mb-1/1" data-role="tabs">
-  <div class="controls-header">
-    <h3 class="mt-0 mb-0 mr-1/4">Controls</h3>
+<div class="items-heading mt-0 mb-1/2">
+  <h2 class="mt-0 mb-0">Controls</h2>
+</div>
 
+<div data-role="tabs">
+  <div class="controls-header">
     <div class="tabs tabs--buttons">
       <% tabs.each do |tab| %>
         <%= link_to inline_svg_tag("controls/#{ tab }.svg"), "#", class: "tabs__item #{ "tabs__item--active" if tab == "workshop" }", data: { action: "set-tab", target: tab } %>

@@ -1,6 +1,6 @@
-<div class="body-bg <%= "body-bg--large" if yield(:bg_large) == "true" %>">
+<div class="body-bg body-bg--<%= yield(:bg_size) %>">
   <picture>
-    <% if yield(:replace_body_bg) != "true" %>
+    <% if yield(:replace_body_bg) == "" %>
       <source
         srcset="
           <%= image_path "layout/header-bg_sm.webp" %> 640w,
@@ -9,7 +9,7 @@
         type="image/webp">
     <% end %>
 
-    <% if yield(:replace_body_bg) != "true" %>
+    <% if yield(:replace_body_bg) == "" %>
       <source
         srcset="
           <%= image_path "layout/header-bg_sm.jpg" %> 640w,
@@ -18,7 +18,9 @@
         type="image/jpg">
 
       <%= image_tag "layout/header-bg_lg.jpg", alt: "Workshop.codes - Background image", height: 400, width: 1920 %>
-    <% else %>
+    <% end %>
+
+    <% if yield(:replace_body_bg) == "user" %>
       <source
         srcset="
           <%= ENV["CDN"] + @user.banner_image.variant(quality: 90, resize_to_fill: [640, 400]).processed.key %> 640w,

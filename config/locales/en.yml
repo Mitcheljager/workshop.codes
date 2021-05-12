@@ -90,7 +90,7 @@ en:
     show:
       expired:
         title: This code is over 6 months old.
-        content: This means the code may have expired and might no longer function.
+        content: The code may have expired and might no longer function.
       immortal:
         button: This code is immortal
         content: If you are certain your code is immortal and has not expired you can mark it as such. To find out you can import this code in-game. If it is still functional even though you are seeing this message, it's likely immortal.
@@ -116,6 +116,13 @@ en:
       version: Current version
       nice_url: Share URL
       all: All
+      tabs:
+        description: Description
+        controls: Controls
+        snippet: Snippet
+        collection: Collection
+        comments: Comments
+        revisions: Update log
     new:
       page_title: Create new
       title_html: <strong>Create new</strong> Workshop Code

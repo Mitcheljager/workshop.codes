@@ -1,32 +1,11 @@
-<div data-toggle-content>
-  <h2 class="heading mb-1/2">Code Snippet</h2>
-
-  <%= button_tag "Show code snippet", class: "button button--secondary",
-                 data: {
-                   action: "toggle-content load-snippet",
-                   id: @post.id,
-                   show_with: "Hide code snippet",
-                   hide_with: "Show code snippet"
-                 } %>
-
-  <div data-role="content-to-toggle snippet-container" style="display: none">
-    <div class="ide">
-      <%=
-        tag.pre(
-          tag.div(
-            tag.div(class: "ide__line-counter") +
-            tag.code("Loading...",
-              class: "ide__code microlight",
-              spellcheck: "false",
-              data: { role: "ide-content", copy: "current-content" }) +
-            tag.div(
-              tag.div("Fullscreen", class: "ide__tray-item", data: { action: "toggle-ide-fullscreen" }) +
-              tag.div("Copy to clipboard", class: "ide__tray-item", data: { action: "copy-ide-content", target: "current-content" }),
-              class: "ide__tray"
-            ),
-          class: "ide__code-wrapper"),
-        class: "ide__content")
-      %>
-    </div>
-  </div>
+<div class="items-heading mt-0 mb-1/2">
+  <h2 class="mt-0 mb-0">Snippet</h2>
 </div>
+
+<pre class="ide__content"><div class="ide__code-wrapper"><div class="ide__line-counter"></div>
+  <code class="ide__code microlight" data-role="ide-content" data-copy="current-content">Loading...</code>
+  <div class="ide__tray">
+    <div class="ide__tray-item" data-action="toggle-ide-fullscreen">Fullscreen</div>
+    <div class="ide__tray-item" data-action="copy-ide-content" data-target="current-content">Copy to clipboard</div>
+  </div>
+</div></pre>

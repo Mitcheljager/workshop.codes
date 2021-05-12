@@ -1,7 +1,7 @@
 <% return if @comment.content.empty? %>
 
 (() => {
-  const totalElement = document.querySelector("[data-role='comment-total']")
+  const totalElements = document.querySelectorAll("[data-role='comment-total']")
 
   <% if @comment.parent_id.nil? %>
     const parentElement = document.querySelector("[data-role='comments']")
@@ -17,7 +17,7 @@
     formElement.remove()
   <% end %>
 
-  totalElement.innerHTML = parseInt(totalElement.innerText) + 1
+  totalElements.forEach(element => element.innerHTML = parseInt(element.innerText) + 1)
 
   const element = document.querySelector("[data-comment='<%= @comment.id %>']")
 

@@ -109,10 +109,12 @@ Rails.application.routes.draw do
 
     resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :edit, :update, :destroy]
     get "c/:nice_url(/page/:page)", to: "collections#show"
+    get "c/partial/:id", to: "collections#partial", as: "collection_partial"
 
     constraints code: /.{5,6}/ do
       resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]
       get ":code", to: "posts#show"
+      get ":code/:tab", to: "posts#show", as: "post_tab"
       post "immortalise", to: "posts#immortalise", as: "immortalise_post"
     end
 

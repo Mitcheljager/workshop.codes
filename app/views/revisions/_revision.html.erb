@@ -1,5 +1,5 @@
 <div class="revision">
-  <div class="item item--single mt-1/2">
+  <div class="item item--single p-0 mt-1/2">
     <div class="item__title item__title--small">
       <div>
         <div class="dropdown mr-1/4" data-dropdown>
@@ -45,7 +45,7 @@
   </div>
 
   <% unless revision.description.blank? %>
-    <div class="item__description revision__description mt-0">
+    <div class="item__description revision__description mt-1/8">
       <%= sanitized_markdown(revision.description) %>
     </div>
   <% end %>

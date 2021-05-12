@@ -7,8 +7,10 @@
   overflow-x: auto;
 
   .banner & {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   }
 
   &--stepper {
@@ -37,6 +39,7 @@
   text-transform: uppercase;
   font-size: 19px;
   text-align: left;
+  white-space: nowrap;
 
   &::after {
     content: "";

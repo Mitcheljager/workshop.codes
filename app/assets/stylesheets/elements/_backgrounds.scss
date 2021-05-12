@@ -15,6 +15,15 @@
     clip-path: polygon(0 0, 100% 0, 100% 120px, 0% 100%);
   }
 
+  &--medium {
+    height: 380px;
+    clip-path: polygon(0 0, 100% 0, 100% 230px, 0% 100%);
+
+    @media (min-width: 1300px) {
+      height: 420px;
+    }
+  }
+
   &--large {
     height: 400px;
     clip-path: polygon(0 0, 100% 0, 100% 280px, 0% 100%);

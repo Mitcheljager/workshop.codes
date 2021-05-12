@@ -54,6 +54,18 @@
     background: $bg-darker;
   }
 
+  &--light {
+    background: $pure-white;
+    color: $bg-dark;
+
+    &:hover:not([disabled]),
+    &:active:not([disabled]),
+    &:focus:not([disabled]) {
+      opacity: .75;
+      color: $bg-dark;
+    }
+  }
+
   &--danger {
     background: $red;
   }

@@ -17,6 +17,12 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def partial
+    @post = Post.select(:id, :collection_id).includes(:collection).find(params[:id])
+
+    render partial: "collections"
+  end
+
   def edit
     @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
   end
