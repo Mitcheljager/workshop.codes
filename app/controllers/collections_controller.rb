@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  before_action except: [:show] do
+  before_action except: [:show, :partial] do
     redirect_to login_path unless current_user
   end
 
