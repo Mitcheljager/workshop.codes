@@ -1,8 +1,8 @@
 class RevisionsController < ApplicationController
   layout false, only: [:raw_snippet]
-  before_action :set_revision, except: [:index]
+  before_action :set_revision, except: [:index, :partial]
 
-  before_action except: [:show, :raw_snippet, :index] do
+  before_action except: [:show, :raw_snippet, :index, :partial] do
     redirect_to root_path unless revision_is_editable_by_current_user
   end
 
@@ -24,6 +24,12 @@ class RevisionsController < ApplicationController
     end
 
     @difference = Diffy::Diff.new(@compare_revision.present? ? @compare_revision.snippet : "", @revision.snippet).to_s(:html_simple)
+  end
+
+  def partial
+    @post = Post.select(:id, :user_id).includes(:revisions).find(params[:id])
+
+    render partial: "revisions"
   end
 
   def raw_snippet

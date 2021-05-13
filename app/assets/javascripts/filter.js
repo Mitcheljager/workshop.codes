@@ -17,7 +17,7 @@ function addFilter(event) {
   filterElement.dataset.value = this.dataset.value
   filterElement.innerText = this.dataset.value == "" ? defaultValue : this.innerText
 
-  closeDropdown()
+  closeDropdown(event)
 }
 
 function buildFilterPath(event) {

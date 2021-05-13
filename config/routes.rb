@@ -98,6 +98,7 @@ Rails.application.routes.draw do
 
     resources :revisions, only: [:edit, :update]
     get ":code/revisions", to: "revisions#index", as: "revisions"
+    get "revisions/partial/:id", to: "revisions#partial", as: "revisions_partial"
     get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
