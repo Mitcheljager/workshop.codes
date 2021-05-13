@@ -48,7 +48,7 @@
       <%= render "current_user_blocks" if current_user == @post.user %>
       <%= render "expired" if @post.expired? %>
 
-      <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, "tabs"] do %>
+      <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, "tabs", current_locale] do %>
         <nav class="tabs">
           <%= link_to t("posts.show.tabs.description"), post_path(@post.code),
                       class: "tabs__item #{ "tabs__item--active" if is_active_tab?("") }",
