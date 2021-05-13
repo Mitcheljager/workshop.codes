@@ -18,7 +18,7 @@ function toggleDropdown(event) {
   target.classList.toggle("active")
 }
 
-function closeDropdown(event) {  
+function closeDropdown(event) {
   const activeDropdown = document.querySelector("[data-dropdown-content].active")
   if (activeDropdown) activeDropdown.classList.remove("active")
 }
