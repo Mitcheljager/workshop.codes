@@ -53,7 +53,7 @@ function setActiveTab(targetElement, parentElement) {
   targetElement.classList.add("tabs__item--active")
 
   if (parentElement.dataset.tabsSetUrl) {
-    Turbolinks.visit(targetElement.href, { action: "replace" })
+    window.history.replaceState({ turbolinks: {} }, "", targetElement.href)
   }
 }
 
