@@ -1,4 +1,4 @@
-<% cache_unless current_user, @posts do %>
+<% cache_unless current_user, [current_locale, @posts] do %>
   <main class="items">
     <% if @posts.any? %>
       <%= render @posts %>
