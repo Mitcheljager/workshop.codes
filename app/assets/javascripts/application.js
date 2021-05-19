@@ -46,6 +46,7 @@
 //= require reveal-on-difference
 //= require remove-and-add-event-listener
 //= require set-css-variable
+//= require sticky
 //= require tabs
 //= require timeago
 //= require toggle-content

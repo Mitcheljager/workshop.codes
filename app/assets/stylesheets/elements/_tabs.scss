@@ -5,11 +5,11 @@
   padding: 0 $margin / 4;
   margin: 0;
   overflow-x: auto;
+  position: sticky;
 
   .banner & {
     &:not(:first-child) {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+      border-radius: 0 0 $border-radius * 2 $border-radius * 2;
     }
   }
 

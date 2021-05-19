@@ -49,7 +49,7 @@
       <%= render "expired" if @post.expired? %>
 
       <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, "tabs", current_locale] do %>
-        <nav class="tabs">
+        <nav class="tabs" data-role="sticky">
           <%= link_to t("posts.show.tabs.description"), post_path(@post.code),
                       class: "tabs__item #{ "tabs__item--active" if is_active_tab?("") }",
                       data: { action: "set-tab", target: "description" } %>
