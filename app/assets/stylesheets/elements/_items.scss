@@ -286,6 +286,7 @@
   padding: $margin / 6 $margin / 3;
   font-size: $font-size-base;
   line-height: 1em;
+  text-align: left;
 
   @include media-min(md) {
     display: flex;

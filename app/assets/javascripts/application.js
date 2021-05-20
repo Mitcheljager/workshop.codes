@@ -45,6 +45,7 @@
 //= require reveal-by-select
 //= require reveal-on-difference
 //= require remove-and-add-event-listener
+//= require scroll-indicator
 //= require set-css-variable
 //= require sticky
 //= require tabs

@@ -1,0 +1,33 @@
+.scroll-indicator-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 $border-radius * 2 $border-radius * 2;
+}
+
+.scroll-indicator {
+  display: flex;;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  left: auto;
+  width: 1.5rem;
+  height: 100%;
+  background: rgba(darken($body-bg, 5%), .75);
+  color: $text-color-dark;
+  line-height: 1.5rem;
+  box-shadow: 0 0 1.5rem 1.5rem rgba(darken($body-bg, 5%), .75);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms;
+
+  &--left {
+    left: 0;
+    right: auto;
+  }
+
+  &--active {
+    opacity: 1;
+  }
+}

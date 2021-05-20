@@ -1,11 +1,12 @@
 document.addEventListener("turbolinks:load", function() {
   const element = document.querySelector("[data-role~='sticky']")
 
-  window.removeEventListener("scroll", () => stickyScroll(element))
-  if (element) window.addEventListener("scroll", () => stickyScroll(element))
+  window.removeEventListener("scroll", stickyScroll)
+  if (element) window.addEventListener("scroll", stickyScroll)
 })
 
-function stickyScroll(element) {
+function stickyScroll() {
+  const element = document.querySelector("[data-role~='sticky']")
   const scrollElement = element.dataset.sticky == "true" ? document.querySelector("[data-role='sticky-placeholder']") : element
   const topOffset = scrollElement.getBoundingClientRect().top
   const scrollPosition = window.scrollY

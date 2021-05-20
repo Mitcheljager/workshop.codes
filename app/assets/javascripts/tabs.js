@@ -61,8 +61,6 @@ function resetCarouselInTab(targetElement) {
   const carouselElement = targetElement.querySelector("[data-role='carousel']")
   if (!carouselElement || !carousel) return
 
-  console.log(carousel)
-
   carousel.destroy(true)
   setCarousel(carouselElement)
 }
