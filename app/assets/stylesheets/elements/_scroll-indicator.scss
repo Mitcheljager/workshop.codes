@@ -13,10 +13,8 @@
   left: auto;
   width: 1.5rem;
   height: 100%;
-  background: rgba(darken($body-bg, 5%), .75);
-  color: $text-color-dark;
-  line-height: 1.5rem;
-  box-shadow: 0 0 1.5rem 1.5rem rgba(darken($body-bg, 5%), .75);
+  background: rgba(darken($body-bg, 5%), .85);
+  box-shadow: 0 0 1.5rem 1.5rem rgba(darken($body-bg, 5%), .85);
   z-index: 2;
   pointer-events: none;
   opacity: 0;
@@ -29,5 +27,13 @@
 
   &--active {
     opacity: 1;
+  }
+
+  svg {
+    height: 1rem;
+
+    path {
+      fill: $text-color;
+    }
   }
 }
