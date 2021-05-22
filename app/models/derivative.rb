@@ -2,6 +2,8 @@ class Derivative < ApplicationRecord
   belongs_to :source, foreign_key: "source_id", class_name: "Post"
   belongs_to :derivation, foreign_key: "derivation_id", class_name: "Post"
 
+  validates :source_id, presence: true
+  validates :derivation_id, presence: true
   validate :no_self_derive
 
   private
