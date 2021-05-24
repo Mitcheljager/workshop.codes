@@ -20,7 +20,8 @@ _Please note; This isn't a comprehensive guide on how to install Ruby on Rails. 
 6. `rake db:create db:migrate` to set up the database
 7. `rake db:seed` to seed the database
 8. `rails s` to start the server
-9. Everything should now be running at `localhost:3000`
+9. `ruby bin/webpack-dev-server` or `./bin/webpack-dev-server` to start Webpack.
+10. Everything should now be running at `localhost:3000`
 
 Optionally you can also install ElasticSearch, but the website will run fine without it (Except for search).
 To create indexes for ElasticSearch run `rake create_search_indexes`
