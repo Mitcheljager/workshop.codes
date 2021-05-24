@@ -10,6 +10,8 @@ export function render() {
 }
 
 export default function createChart(element, data, dateformat = "%Y-%m-%d") {
+  element.innerHTML = ""
+  
   let processedMarkers = []
   if (element.dataset.markers != null) {
     const markers = JSON.parse(element.dataset.markers)
