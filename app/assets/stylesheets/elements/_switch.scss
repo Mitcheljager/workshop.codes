@@ -97,7 +97,7 @@
   }
   
   &::before {
-    @extend .switch::before;
+    @extend .switch, ::before;
     height: calc(1rem - 8px);
     width: calc(1rem - 8px);
     pointer-events: all;
@@ -110,7 +110,7 @@
   }
 
   &::after {
-    @extend .switch::after;
+    @extend .switch, ::after;
     height: 1rem;
     width: 2rem;
     pointer-events: all;

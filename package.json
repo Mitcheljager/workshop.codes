@@ -3,15 +3,32 @@
   "private": true,
   "dependencies": {
     "@agilie/canvas-image-cover-position": "^1.1.1",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "5.4.0",
     "inscrybmde": "^1.11.6",
     "metrics-graphics": "^2.15.6",
     "microlight": "^0.0.7",
+    "node-sass-glob-importer": "^5.3.2",
+    "node-sass-magic-importer": "^5.3.2",
     "nouislider": "^14.7.0",
     "siema": "^1.5.1",
     "sortablejs": "^1.10.2",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "turbolinks": "^5.2.0",
+    "webp-loader": "^0.6.0",
+    "webpack": "4.46.0",
+    "webpack-cli": "3.3.12"
   },
   "devDependencies": {
-    "eslint": "^7.25.0"
+    "eslint": "^7.25.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "webpack:analyze": "yarn webpack:build_json && yarn webpack:analyze_json",
+    "webpack:build_json": "ruby bin/webpack --profile --json > tmp/webpack-stats.json",
+    "webpack:analyze_json": "npx webpack-bundle-analyzer tmp/webpack-stats.json public/packs"
   }
 }
