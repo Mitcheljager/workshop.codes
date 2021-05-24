@@ -25,7 +25,7 @@ jobs:
           bundle install --jobs 4 --retry 3
       - name: ESLint
         run: |
-          yarn run eslint app/assets/javascripts
+          yarn run eslint app/javascript
       - name: Test
         run: |
           rake db:test:prepare
