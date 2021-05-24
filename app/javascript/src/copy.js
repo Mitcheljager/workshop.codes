@@ -4,7 +4,7 @@ export function bind() {
   document.body.removeAndAddEventListener("click", copyToClipboard)
 }
 
-export default function copyToClipboard(event, optionalContent = undefined) {  
+export default function copyToClipboard(event, optionalContent = undefined) {
   let eventTarget = event.target
   if (eventTarget.dataset.action != "copy") eventTarget = event.target.closest("[data-action~='copy-to-clipboard']")
   if (!eventTarget) return
