@@ -1,6 +1,9 @@
 {
   "name": "overwatch-workshop",
   "private": true,
+  "engines": {
+    "node": "^14.0.0"
+  },
   "dependencies": {
     "@agilie/canvas-image-cover-position": "^1.1.1",
     "@rails/actioncable": "^6.0.0",
