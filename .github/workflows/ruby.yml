@@ -17,6 +17,7 @@ jobs:
       - name: Yarn
         uses: borales/actions-yarn@v2.0.0
         with:
+          node-version: "14.x"
           cmd: install
       - name: Bundle
         run: |
