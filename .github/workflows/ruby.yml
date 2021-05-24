@@ -26,6 +26,9 @@ jobs:
       - name: ESLint
         run: |
           yarn run eslint app/javascript
+      - name: Precompile assets
+          run: |
+            bundle exec rails webpacker:compile RAILS_ENV=test
       - name: Test
         run: |
           rake db:test:prepare
