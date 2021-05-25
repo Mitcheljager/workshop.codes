@@ -187,7 +187,7 @@ en:
         title: Code Snippet
         label: Include code snippet
         help_html: <strong>Workshop Codes expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. Saving the code snippet allows you to copy paste it at any point.
-        hint: To get the code snippet select all your rules and copy them. Simply paste it here and you're good to go.
+        hint: To get the code snippet open the lobby settings and press the "Copy settings" next to Import, Share, and Report buttons. Simply paste this here and you're good to go!
       settings:
         title: Settings
       num_players:
