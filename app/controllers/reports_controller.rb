@@ -12,10 +12,7 @@ class ReportsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
     
-    respond_to do |format|
-      format.html { render "new" }
-      format.js { render partial: "modal" }
-    end
+    render partial: "modal"
   end
 
   def create
