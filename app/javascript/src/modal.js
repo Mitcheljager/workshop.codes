@@ -14,15 +14,15 @@ export function bind() {
 function showModal(event) {
   const modal = document.querySelector(`[data-modal="${ this.dataset.target }"]`)
 
-  if (modal) {
-    modal.style.display = "flex"
+  if (!modal) return
 
-    document.body.style.borderRight = `${ getScrollbarWidth() }px solid transparent`
-    document.body.style.overflowY = "hidden"
-  }
+  modal.style.display = "flex"
+
+  document.body.style.borderRight = `${ getScrollbarWidth() }px solid transparent`
+  document.body.style.overflowY = "hidden"
 }
 
-function closeModal(event) {
+export function closeModal(event) {
   const activeModal = document.querySelector(".modal:not([style*='none'])")
 
   if (!activeModal) return

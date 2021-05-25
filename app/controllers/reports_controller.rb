@@ -11,6 +11,11 @@ class ReportsController < ApplicationController
     elsif params[:concerns_model] == "comment"
       @comment = Comment.find(params[:id])
     end
+    
+    respond_to do |format|
+      format.html { render "new" }
+      format.js { render partial: "modal" }
+    end
   end
 
   def create

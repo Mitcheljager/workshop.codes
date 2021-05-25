@@ -18,6 +18,7 @@ import * as filter from "../src/filter"
 import * as gallery from "../src/gallery"
 import * as getKoFiValue from "../src/get-ko-fi-value"
 import * as getPartial from "../src/get-partial"
+import * as getReportsForm from "../src/get-reports-form"
 import * as getSnippet from "../src/get-snippet"
 import * as getVerifiedUsers from "../src/get-verified-users"
 import * as imagePreview from "../src/image-preview"
@@ -45,6 +46,7 @@ document.addEventListener("turbolinks:load", function() {
   filter.bind()
   gallery.bind()
   getPartial.bind()
+  getReportsForm.bind()
   getSnippet.bind()
   getVerifiedUsers.bind()
   imagePreview.bind()

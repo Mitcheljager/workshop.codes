@@ -11,6 +11,8 @@ export function bind() {
 }
 
 function getPartial(event, element) {
+  event.preventDefault()
+  
   const _this = element || event.target
   const targetElement = document.querySelector(`[data-partial="${ _this.dataset.target }"]`)
   const url = _this.dataset.url

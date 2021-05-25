@@ -1,6 +1,0 @@
-document.body.insertAdjacentHTML("beforeEnd", "<%= j render "modal" %>")
-document.querySelector("[data-modal='report']").querySelector("[data-role='modal-backdrop']").addEventListener("click", closeModal)
-
-document.querySelector("[data-modal='report']").querySelector("[data-action~='reveal-by-select']").addEventListener("input", toggleRevealBySelect)
-
-document.querySelector("[data-modal='report']").querySelector("[data-action~='disable-by-select']").addEventListener("input", updateFormSubmitButton)

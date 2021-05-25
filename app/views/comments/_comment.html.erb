@@ -30,7 +30,7 @@
   <% if current_user %>
     <div class="post-comment__actions">
       <%= link_to t("comment.reply"), create_reply_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
-      <%= link_to t("comment.report"), new_report_path(id: comment.id, concerns_model: "comment"), class: "post-comment__action text-red", remote: true, data: { disable_with: t("report.loading") } %>
+      <%= link_to t("comment.report"), new_report_path(id: comment.id, concerns_model: "comment"), class: "post-comment__action text-red", data: { action: "get-reports-form" } %>
 
       <% if comment.user == current_user %>
         <%= link_to t("comment.edit"), create_edit_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
