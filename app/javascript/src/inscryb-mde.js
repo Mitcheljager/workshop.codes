@@ -1,7 +1,6 @@
 import InscrybMDE from "inscrybmde"
 import InscrybeInsertImage from "./inscrybe-mde-paste-image"
 import FetchRails from "./fetch-rails"
-import Dropzone from "./dropzone"
 import setCssVariable from "./set-css-variable"
 import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
 
@@ -79,13 +78,6 @@ class InitialiseInscrybeMDE {
     
     if (this.enableBlocks) {
       toolbar.push({
-        name: "Toolbar divider"
-      }, {
-        action: () => { this.insertBlock("gallery") },
-        name: "Gallery Block",
-        className: "fa fa-block-gallery",
-        title: "Gallery Block"
-      }, {
         action: () => { this.insertBlock("faq") },
         name: "FAQ Block",
         className: "fa fa-block-faq",
@@ -239,14 +231,10 @@ class InitialiseInscrybeMDE {
   }
 
   bindBlockEvents(marker) {
-    const dropzone = marker.widgetNode.querySelector("[data-role='dropzone']")
-    const cssVariableElement = marker.widgetNode.querySelector("[data-action~='set-css-variable']")
     const sortableElement = marker.widgetNode.querySelector("[data-role~='sortable']")
     const insertBlockTemplateElement = marker.widgetNode.querySelector("[data-action~='insert-block-template']")
     const removeBlockTemplateElements = marker.widgetNode.querySelectorAll("[data-action~='remove-block-template']")
     
-    if (dropzone) new Dropzone(dropzone).bind()
-    if (cssVariableElement) cssVariableElement.addEventListener("input", setCssVariable)
     if (sortableElement) buildInputSortable(sortableElement)
     if (insertBlockTemplateElement) insertBlockTemplateElement.addEventListener("click", insertBlockTemplate)
     removeBlockTemplateElements.forEach(element => { element.addEventListener("click", removeBlockTemplate) })

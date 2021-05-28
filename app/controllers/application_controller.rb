@@ -58,7 +58,11 @@ class ApplicationController < ActionController::Base
     image = ActiveStorage::Blob.find_by_key(params[:key])
 
     if image.present?
-      url = ENV["CDN"] + image.variant(quality: 95, resize_to_limit: [1920, 1080]).processed.key
+      if params[:type] == "thumbnail"
+        url = ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [120, 120]).processed.key
+      else
+        url = ENV["CDN"] + image.variant(quality: 95, resize_to_limit: [1920, 1080]).processed.key
+      end
 
       render json: url, layout: false
     else

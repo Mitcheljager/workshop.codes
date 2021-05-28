@@ -40,6 +40,7 @@ gem "sucker_punch"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker", "~> 5.0"
+gem "webpacker-svelte", "~> 1.0.0"
 
 group :development, :test do
   gem "bullet"

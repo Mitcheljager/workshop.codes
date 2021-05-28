@@ -2,11 +2,15 @@ import * as ActiveStorage from "@rails/activestorage"
 
 ActiveStorage.start()
 
+import WebpackerSvelte from "webpacker-svelte"
+import Dropzone from "../src/components/Dropzone.svelte"
+
+WebpackerSvelte.setup({ Dropzone })
+
 import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"
 import * as chart from "../src/chart"
 import * as checkboxSelectAll from "../src/checkbox-select-all"
-import * as dropzone from "../src/dropzone"
 import * as getNotifications from "../src/get-notifications"
 import * as getPostAnalytics from "../src/get-post-analytics"
 import * as getUserAnalytics from "../src/get-user-analytics"
@@ -19,7 +23,6 @@ document.addEventListener("turbolinks:load", function() {
   applyCustomCss.bind()
   blocks.bind()
   checkboxSelectAll.bind()
-  dropzone.bind()
   getNotifications.bind()
   getPostAnalytics.bind()
   getUserAnalytics.bind()

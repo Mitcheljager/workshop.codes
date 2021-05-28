@@ -1,71 +1,39 @@
 .images-preview {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: $margin / 2.5;
+  grid-gap: 1rem;
   width: 100%;
 
   @include media-min(sm) {
     grid-template-columns: repeat(6, 1fr);
-    grid-gap: $margin / 2;
-  }
-
-  &::before {
-    display: none;
-  }
-
-  &:not(:empty) {
-    margin-top: $margin / 2;
-    min-height: $margin * 2;
-
-    &::before {
-      content: "Drag images to change their order";
-      display: block;
-      grid-column: span 3;
-      font-size: $font-size-small;
-      line-height: 1.25em;
-      font-style: italic;
-      color: $text-color-dark;
-
-      @include media-min(sm) {
-        grid-column: span 6;
-      }
-    }
-  }
-}
-
-@keyframes fade-in-image-preview-item {
-  from {
-    opacity: 0
-  }
-
-  to {
-    opacity: 1;
   }
 }
 
 .images-preview__item {
   position: relative;
   background: $body-bg;
-  animation: fade-in-image-preview-item 200ms;
   cursor: grab;
+  color: $body-bg;
 
   &:active {
     cursor: grabbing;
   }
 
-  img {
+  img,
+  svg {
     display: block;
     width: 100%;
     height: auto;
   }
 }
 
-.images-preview__action {
+.images-preview__action,
+.images-preview__label {
   position: absolute;
   top: 0;
   right: 0;
   bottom: auto;
-  border-bottom-left-radius: $border-radius;
+  border-radius: 0 0 0 $border-radius;
   padding: .25em .5em;
   background: $red;
   font-size: 12px;
@@ -74,8 +42,7 @@
 
   &:hover,
   &:active {
-    color: $white;
-    background: darken($red, 5%);
+    filter: brightness(1.2);
   }
 
   .sortable-ghost & {
@@ -87,9 +54,9 @@
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  height: 100%;
   align-items: center;
   padding: $margin / 4;
-  border: 1px solid $border-color;
   aspect-ratio: 1/1;
 }
 
