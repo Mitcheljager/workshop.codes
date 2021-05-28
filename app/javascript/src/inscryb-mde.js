@@ -3,6 +3,7 @@ import InscrybeInsertImage from "./inscrybe-mde-paste-image"
 import FetchRails from "./fetch-rails"
 import setCssVariable from "./set-css-variable"
 import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
+import debounce from "./debounce"
 
 let editors = []
 
