@@ -5,6 +5,7 @@ class Derivative < ApplicationRecord
   validates :source_id, presence: true
   validates :derivation_id, presence: true
   validate :no_self_derive
+  validates :derivation_id, uniqueness: { scope: :source_id, message: ' already derives from specified source.' }
 
   private
 

@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_061107) do
     t.integer "derivation_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["source_id", "derivation_id"], name: "index_derivatives_on_source_id_and_derivation_id", unique: true
   end
 
   create_table "email_notifications", force: :cascade do |t|

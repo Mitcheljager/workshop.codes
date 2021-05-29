@@ -6,5 +6,7 @@ class CreateDerivatives < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
+    add_index :derivatives, [:source_id, :derivation_id], unique: true
   end
 end

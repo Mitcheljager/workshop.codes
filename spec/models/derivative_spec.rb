@@ -19,6 +19,16 @@ RSpec.describe Derivative, type: :model do
       it "allows a post to derive from another post" do
         expect(build(:derivative)).to be_valid
       end
+
+      it "doesn't allow multiple derivations to exist for any given pair of posts" do
+        deriv1 = create(:derivative)
+        expect(deriv1).to be_valid
+
+        deriv2 = build(:derivative)
+        deriv2.source = deriv1.source
+        deriv2.derivation = deriv1.derivation
+        expect(deriv2).not_to be_valid
+      end
     end
   end
 end
