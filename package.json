@@ -1,6 +1,9 @@
 {
   "name": "overwatch-workshop",
   "private": true,
+  "resolutions": {
+    "acorn": "^8.1.0"
+  },
   "engines": {
     "node": "^14.0.0"
   },

@@ -9,7 +9,6 @@ Turbolinks.start()
 import * as analytics from "../src/analytics"
 import * as carousel from "../src/carousel"
 import * as carouselCards from "../src/carousel-cards"
-import * as controls from "../src/controls"
 import * as copy from "../src/copy"
 import * as differenceViewer from "../src/difference-viewer"
 import * as disableFormBySelect from "../src/disable-form-by-select"
@@ -39,7 +38,6 @@ import * as wikiSearch from "../src/wiki/search"
 document.addEventListener("turbolinks:load", function() {
   analytics.send()
   
-  controls.bind()
   copy.bind()
   disableFormBySelect.bind()
   dropdown.bind()

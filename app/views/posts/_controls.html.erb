@@ -17,15 +17,19 @@
     <div class="tabs-content <%= "tabs-content--active" if tab == "workshop" %>"data-tab="<%= tab %>">
       <div class="controls">
         <% @post.parsed_controls.each do |item| %>
+          <% next unless item["description"].present? %>
+
           <div class="controls__buttons">
-            <% item["buttons"].each_with_index do |button, index| %>
+            <% without_empty = item["buttons"].reject(&:blank?) %>
+
+            <% without_empty.each_with_index do |button, index| %>
               <% if tab == "workshop" || button["Custom"] %>
                 <kbd><%= button["Custom"] || button %></kbd>
               <% else %>
                 <%= image_tag "controls/#{ tab }/#{ button.downcase.gsub(" ", "-") }.png", loading: "lazy" %></kbd>
               <% end %>
 
-              <%= tag.strong "+" unless index + 1 == item["buttons"].length %>
+              <%= tag.strong "+" unless index + 1 == without_empty.length %>
             <% end %>
           </div>
 

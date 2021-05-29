@@ -4,8 +4,9 @@ ActiveStorage.start()
 
 import WebpackerSvelte from "webpacker-svelte"
 import Dropzone from "../src/components/Dropzone.svelte"
+import ControlsForm from "../src/components/ControlsForm.svelte"
 
-WebpackerSvelte.setup({ Dropzone })
+WebpackerSvelte.setup({ Dropzone, ControlsForm })
 
 import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"

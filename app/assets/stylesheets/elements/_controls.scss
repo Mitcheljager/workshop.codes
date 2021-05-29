@@ -100,11 +100,15 @@
     grid-column: auto;
   }
 
-  a {
+  button {
     display: block;
+    border: 0;
     padding: $margin / 8 0;
     margin-left: $margin / 8;
+    background: transparent;
     text-decoration: none;
+    color: $text-color;
+    cursor: pointer;
   }
 }
 
