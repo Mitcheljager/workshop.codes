@@ -18,6 +18,21 @@
         <p class="mt-0"><small><%= t("posts.form.code_change.explanation_html", article_url: "https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code") %></small></p>
         <p class="mt-0"><small><%= t("posts.form.code_change.current_code_html", current_code: @post.code) %></small></p>
       </div>
+
+      <div class="form-group mt-1/4" data-reveal-by-checkbox>
+        <div class="switch-checkbox">
+          <%= form.check_box :show_derivative, class: "switch-checkbox__input", data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+          <%= form.label :show_derivative, "This code is a fork/uses other codes", class: "switch-checkbox__label" %>
+        </div>
+
+        <div class="form-group mt-1/4" data-role="hidden-by-checkbox" data-initial-display="grid" style="display: none">
+          <div class="form-hint--left">
+            Enter the import code(s) which your mode uses. You can enter up to X codes. <strong>Separate import codes with a command and a space ", ".</strong>
+          </div>
+
+          <%= form.text_field :derives_from, class: "form-input mt-1/4", placeholder: "CODE1, CODE2, CODE3" %>
+        </div>
+      </div>
     </div>
 
     <%= render "posts/form/tabs", form: form %>
