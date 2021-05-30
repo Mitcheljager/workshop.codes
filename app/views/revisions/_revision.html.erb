@@ -20,8 +20,10 @@
         <%= revision.version if revision.version.present? %>
       </div>
 
-      <small class="ml-auto">
-        <span title="Created at: <%= revision.created_at %> <%= "| Last updated at: " + revision.updated_at.to_s if revision.updated_at != revision.created_at %>" data-role="timeago" datetime="<%= revision.created_at %>"></span>
+      <div class="ml-auto">
+        <span title="Created at: <%= revision.created_at %> <%= "| Last updated at: " + revision.updated_at.to_s if revision.updated_at != revision.created_at %>">
+          <small><%= time_ago_in_words(revision.created_at) %> ago</small>
+        </span>
 
         <% if revision.created_at < 6.months.ago %>
           <small class="tooltip">
@@ -32,7 +34,7 @@
             </div>
           </small>
         <% end %>
-      </small>
+      </div>
     </div>
 
     <div class="item__code" data-action="copy-to-clipboard" data-target="<%= revision.code %>">
