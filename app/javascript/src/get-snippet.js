@@ -25,7 +25,7 @@ function loadSnippet(event, element) {
   new FetchRails("/get-snippet", { id: id })
   .post().then(data => {
     const element = document.querySelector("[data-role~='ide-content']")
-    element.innerHTML = data
+    element.innerHTML = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;")
 
     initiateIde(element)
   })

@@ -19,25 +19,29 @@ export function render() {
       startMin, startMax = 0, 0
     }
 
-    noUiSlider.create(element, {
-      start: [startMin, startMax],
-      connect: true,
-      orientation: "horizontal",
-      range: {
-        "min": 1,
-        "max": 12
-      },
-      step: 1,
-      pips: {
-        mode: "steps"
-      },
-      behaviour: "tap-drag"
-    })
+    create(element, startMin, startMax)
 
     if (element.dataset.type == "post") element.noUiSlider.on("set", postOnSliderUpdate)
     if (element.dataset.type == "filter") element.noUiSlider.on("set", filterOnSliderUpdate)
 
     element.dataset.initialised = true
+  })
+}
+
+export function create(element, startMin, startMax) {
+  noUiSlider.create(element, {
+    start: [startMin, startMax],
+    connect: true,
+    orientation: "horizontal",
+    range: {
+      "min": 1,
+      "max": 12
+    },
+    step: 1,
+    pips: {
+      mode: "steps"
+    },
+    behaviour: "tap-drag"
   })
 }
 

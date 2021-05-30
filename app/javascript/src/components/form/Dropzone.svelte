@@ -4,9 +4,9 @@
   import { onMount } from "svelte"
   import Sortable from "sortablejs"
 
-  import Uploader from "../uploader"
-  import FetchRails from "../fetch-rails"
-  import debounce from "../debounce"
+  import Uploader from "../../uploader"
+  import FetchRails from "../../fetch-rails"
+  import debounce from "../../debounce"
 
   export let images
   export let label
