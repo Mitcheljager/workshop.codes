@@ -120,7 +120,7 @@
             placeholder="Description"
             maxlength=15 />
 
-          <button href="#" data-role="controls-item-move-handle">⇅</button>
+          <button href="#" data-role="controls-item-move-handle" on:click|preventDefault>⇅</button>
           <button on:click|preventDefault={ () => remove(index) }>🗑️</button>
         </div>
       </div>
