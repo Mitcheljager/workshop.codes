@@ -12,11 +12,14 @@ class Wiki::Article < ApplicationRecord
   belongs_to :category
 
   has_one :edit, dependent: :destroy
+  has_many_attached :images, dependent: :destroy
 
   attr_accessor :edit_notes
 
   validates :title, presence: true, length: { minimum: 2, maximum: 120 }
   validates :slug, presence: true
+  validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
+                     size: { less_than: 2.megabytes }
 
   def self.approved
     where(edit: Wiki::Edit.where(approved: true))

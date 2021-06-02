@@ -107,7 +107,7 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def article_params
-    params.require(:wiki_article).permit(:title, :subtitle, :content, :tags, :category_id, :edit_notes)
+    params.require(:wiki_article).permit(:title, :subtitle, :content, :tags, :category_id, :edit_notes, images: [])
   end
 
   def random_string
