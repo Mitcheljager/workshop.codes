@@ -212,23 +212,9 @@ class PostsController < ApplicationController
   end
 
   def set_post_status
-    if post_params[:status] == "unlisted"
-      @post.unlisted = true
-      @post.private = false
-      @post.draft = false
-    elsif post_params[:status] == "private"
-      @post.private = true
-      @post.unlisted = false
-      @post.draft = false
-    elsif post_params[:status] == "draft"
-      @post.private = false
-      @post.unlisted = false
-      @post.draft = true
-    else
-      @post.private = false
-      @post.unlisted = false
-      @post.draft = false
-    end
+    @post.unlisted = post_params[:status] == "unlisted"
+    @post.private = post_params[:status] == "private"
+    @post.draft = post_params[:status] == "draft"
   end
 
   def parse_carousel_video
