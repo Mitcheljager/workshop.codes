@@ -49,6 +49,8 @@ export function destroy() {
   const sliders = document.querySelectorAll("[data-role='num-player-slider']")
 
   sliders.forEach(slider => {
+    if (!slider.noUiSlider) return
+    
     slider.noUiSlider.destroy()
     slider.dataset.initialised = false
   })
