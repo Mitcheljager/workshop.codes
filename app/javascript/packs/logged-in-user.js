@@ -6,8 +6,10 @@ import WebpackerSvelte from "webpacker-svelte"
 import Dropzone from "../src/components/form/Dropzone.svelte"
 import ControlsForm from "../src/components/form/Controls.svelte"
 import SnippetForm from "../src/components/form/Snippet.svelte"
+import TagsForm from "../src/components/form/Tags.svelte"
+import DerivativesForm from "../src/components/form/Derivatives.svelte"
 
-WebpackerSvelte.setup({ Dropzone, ControlsForm, SnippetForm })
+WebpackerSvelte.setup({ Dropzone, ControlsForm, SnippetForm, TagsForm, DerivativesForm })
 
 import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"
