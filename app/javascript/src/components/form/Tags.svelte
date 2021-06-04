@@ -11,8 +11,20 @@
     export let delimiter = ',';
     export let hidden = false;
     export let allowDupes = false;
+    export let onlyAlphanumeric = false;
+    export let allowSpace = true;
 
     let outputElem;
+
+    function keydown(event) {
+        if (event.key == delimiter) return; // Allow parseInput to handle it
+        if (!allowSpace && (event.key == " " || event.key == "Spacebar")) {
+            event.preventDefault();
+        }
+        if (onlyAlphanumeric && !(/^[a-zA-Z0-9]$/.test(event.key))) {
+            event.preventDefault();
+        }
+    }
 
     function parseInput(event) {
         const currValues = event.target.value;
@@ -21,7 +33,7 @@
     }
 
     function addTag(value) {
-        value = value.trim();
+        value = cleanTag(value);
         input = "";
 
         if (value == "") return;
@@ -35,7 +47,14 @@
     }
 
     function splitTags(data) {
-        return data.split(delimiter).map(tag => tag.trim());
+        return data.split(delimiter);
+    }
+
+    function cleanTag(tag) {
+        tag = tag.trim();
+        if (!allowSpace) tag = tag.replace(/ +/g, "");
+        if (onlyAlphanumeric) tag = tag.replace(/[^a-zA-Z0-9 ]+/g, "");
+        return tag;
     }
 </script>
 
@@ -50,6 +69,7 @@
         type="text"
         bind:value={input}
         on:input={parseInput}
+        on:keydown={keydown}
         placeholder={placeholder}
         class=""
     >

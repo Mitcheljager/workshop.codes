@@ -26,6 +26,11 @@
       Enter the import code(s) which your mode uses. You can enter up to X codes. <strong>Separate import codes with a comma ",".</strong>
     </div>
 
-    <Tags placeholder="CODE1,CODE2,etc." hidden={!showDerivative}/>
+    <Tags
+      placeholder="CODE1,CODE2,etc."
+      hidden={!showDerivative}
+      allowSpace={false}
+      onlyAlphanumeric={true}
+    />
   </div>
 </div>
