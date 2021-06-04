@@ -54,6 +54,12 @@
     margin: 0 $margin 0 0;
   }
 
+  &:hover,
+  &:active,
+  &:focus {
+    filter: brightness(1.15);
+  }
+
   &--empty {
     background-image: url($snowball-icon);
     background-repeat: no-repeat;
@@ -135,7 +141,8 @@
   }
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     color: white;
 
     .profile-banner__verified path {

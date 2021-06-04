@@ -38,6 +38,7 @@
 
   &:hover,
   &:active,
+  &:focus,
   &--active {
     color: $pure-white;
     position: relative;

@@ -55,7 +55,8 @@
   }
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     color: $white;
 
     &::after {
@@ -67,7 +68,8 @@
 
   &--active,
   &--active:hover,
-  &--active:active {
+  &--active:active,
+  &--active:focus {
     color: $white;
 
     &::after {
@@ -91,6 +93,7 @@
     
     &:hover,
     &:active,
+    &:focus,
     &--active {
       background: $bg-darker;
       box-shadow: inset 0 0 0 2px $border-color;

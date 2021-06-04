@@ -31,7 +31,8 @@
   transition: box-shadow 100ms;
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     background: $bg-darker;
     box-shadow: 0 0 0 2px white;
     text-decoration: none;

@@ -1,12 +1,12 @@
 <% cache_unless current_user, [current_locale, post, "card"] do %>
   <div class="card" data-code="<%= post.code %>">
-    <%= link_to post_path(post.code) do %>
+    <%= link_to post_path(post.code), title: post.title do %>
       <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: post.title, width: 300, height: 171, loading: "lazy", class: "mb-1/4" %>
     <% end %>
 
     <div class="flex mb-auto">
       <div class="mr-1/8">
-        <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title) %>
+        <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title), tabindex: -1 %>
 
         <small class="card__author">
           <%= t("post.author") %>

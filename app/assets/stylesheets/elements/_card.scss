@@ -104,7 +104,8 @@
   }
 
   a[href]:hover,
-  a[href]:active {
+  a[href]:active,
+  a[href]:focus {
     img {
       filter: brightness(1.15);
     }
@@ -121,7 +122,8 @@
     text-decoration: none;
 
     &:hover,
-    &:active {
+    &:active,
+    &:focus {
       color: var(--white);
     }
   }
@@ -135,6 +137,14 @@
   font-size: 16px;
   color: $white;
   text-decoration: none;
+
+  &[href] {
+    &:hover,
+    &:active,
+    &:focus {
+      color: $pure-white;
+    }
+  }
 }
 
 .card__content {
@@ -145,11 +155,13 @@
 }
 
 .card__code {
+  appearance: none;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: $margin / 8 0;
+  border: 0;
   background: $bg-dark;
   border-radius: $border-radius;
   font-family: "Barlow Condensed", "Impact";
@@ -161,7 +173,9 @@
   cursor: pointer;
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
+    outline: none;
     filter: brightness(1.15);
   }
 }

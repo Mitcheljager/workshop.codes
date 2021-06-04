@@ -127,7 +127,8 @@
   cursor: pointer;
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     color: $pure-white;
 
     path {

@@ -91,7 +91,9 @@
   line-height: 1.35em;
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
+    color: $pure-white;
     background: darken($bg-dark, 5%);
   }
 

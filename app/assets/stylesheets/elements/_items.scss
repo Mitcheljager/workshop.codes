@@ -170,7 +170,8 @@
   }
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     filter: brightness(1.15);
   }
 
@@ -259,7 +260,8 @@
     text-decoration: none;
 
     &:hover,
-    &:active {
+    &:active,
+    &:focus {
       color: $pure-white;
     }
   }
@@ -317,7 +319,8 @@
   text-decoration: none;
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     filter: brightness(1.2);
   }
 }
@@ -338,6 +341,7 @@
 }
 
 .item__code {
+  appearance: none;
   position: relative;
   grid-area: code;
   display: flex;
@@ -346,6 +350,7 @@
   height: $thumbnail-height;
   padding: $margin / 6 0;
   margin-bottom: auto;
+  border: 0;
   background: $bg-dark;
   border-radius: $border-radius;
   font-family: "Barlow Condensed", "Impact";
@@ -358,7 +363,9 @@
   overflow: hidden;
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
+    outline: none;
     filter: brightness(1.15);
   }
 
@@ -452,7 +459,8 @@
     text-decoration: none;
 
     &:hover,
-    &:active {
+    &:active,
+    &:focus {
       color: $white;
     }
   }

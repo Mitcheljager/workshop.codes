@@ -56,12 +56,13 @@
     height: 22px;
 
     path {
-      fill: rgba($pure-white, .75);
+      fill: rgba($pure-white, .65);
     }
   }
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     svg path {
       fill: $white;
     }
