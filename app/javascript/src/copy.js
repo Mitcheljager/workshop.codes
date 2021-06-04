@@ -28,7 +28,7 @@ export default function copyToClipboard(event, optionalContent = undefined) {
   notificationElement.classList.add("copy__notification")
   notificationElement.innerHTML = "✓"
 
-  let copyParent = eventTarget.closest("div").querySelector(".copy")
+  let copyParent = eventTarget.closest("button").querySelector(".copy")
   if (!copyParent) copyParent = eventTarget
   copyParent.append(notificationElement)
 
