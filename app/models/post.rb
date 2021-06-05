@@ -116,7 +116,8 @@ class Post < ApplicationRecord
   validates :maps, presence: true, array_name_part_of: { array: maps }
   validates :version, length: { maximum: 20 }
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
-                     size: { less_than: 2.megabytes }
+                     size: { less_than: 2.megabytes },
+                     dimension: { max: 3500..3500 }
   validates_with SupportedPlayersValidator
 
   # Ensure unresolved reports about this post are archived

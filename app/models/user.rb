@@ -58,9 +58,11 @@ class User < ApplicationRecord
   validates :nice_url, uniqueness: true, allow_blank: true
   validates :featured_posts, allow_blank: true, serialized_array_length: { maximum: 3 }
   validates :profile_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
-                            size: { less_than: 2.megabytes }
+                            size: { less_than: 2.megabytes },
+                            dimension: { max: 3500..3500 }
   validates :banner_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
-                            size: { less_than: 2.megabytes }
+                            size: { less_than: 2.megabytes },
+                            dimension: { max: 3500..3500 }
 
   def self.find_or_create_from_auth_hash(auth_hash)
     uid = auth_hash["uid"]
