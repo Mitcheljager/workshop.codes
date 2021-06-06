@@ -10,7 +10,7 @@
     export let placeholder = 'Insert tags here';
     export let delimiter = ',';
     export let hidden = false;
-    export let allowDupes = false;
+    export let allowRepeats = false;
     export let onlyAlphanumeric = false;
     export let allowSpace = true;
     export let tagLimit = 0;
@@ -20,19 +20,19 @@
     let outputElem;
 
     function keydown(event) {
-        if (event.key == delimiter) return; // Allow parseInput to handle it
-        if (!allowSpace && (event.key == " " || event.key == "Spacebar")) {
-            event.preventDefault();
-        }
-        if (onlyAlphanumeric && !(/^[a-zA-Z0-9]$/.test(event.key))) {
-            event.preventDefault();
+        if (event.key == "Backspace" || event.key == "Delete") {
+            if (input == "") removeTag(values.length - 1);
         }
     }
 
+    function cleanInput(value) {
+        return splitTags(value).map(tag => cleanTag(tag)).join(delimiter);
+    }
+
     function parseInput(event) {
-        const currValues = event.target.value;
-        if (!currValues.includes(delimiter)) return;
-        splitTags(currValues).forEach(tag => addTag(tag));
+        input = cleanInput(input);
+        if (!input.includes(delimiter)) return;
+        splitTags(input).forEach(tag => addTag(tag));
     }
 
     function addTag(value) {
@@ -40,7 +40,7 @@
         input = "";
 
         if (value == "") return;
-        if (!allowDupes && values.includes(value)) return;
+        if (!allowRepeats && values.includes(value)) return;
 
         values = [...values, value.trim()];
 
@@ -70,19 +70,20 @@
 </script>
 
 <div class="form-tags-wrapper form-input mt-1/4">
-    {#each values as value, i (value)}
+    {#each values as value, i}
         <span class="form-tags-tag">
             {valueToString(value)}
-            <button class="form-tags-tag-remove" on:click|preventDefault={removeTag(i)}> &#215;</button>
+            <button class="form-tags-tag-remove" on:click|preventDefault={() => removeTag(i)}> &#215;</button>
         </span>
     {/each}
     <input
         type="text"
+        bind:this={inputElem}
         bind:value={input}
         on:input={parseInput}
         on:keydown={keydown}
         placeholder={placeholder}
-        class=""
+        class="form-tags-input"
     >
     <input
         bind:this={outputElem}

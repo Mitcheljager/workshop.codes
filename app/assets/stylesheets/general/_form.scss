@@ -316,3 +316,33 @@ input[type="file"] {
   font-size: $font-size-small;
   color: $text-color-dark;
 }
+
+.form-tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 5px 5px 5px;
+}
+
+.form-tags-input {
+  @extend .inline-input;
+  width: initial;
+  margin-top: 5px;
+}
+
+.form-tags-tag {
+  display: flex;
+  white-space: nowrap;
+  border-radius: 2px;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding: 4px 2px 3px 4px;
+  background: darken($primary, 10%);
+}
+
+.form-tags-tag-remove {
+  padding: 0 3px;
+  background: transparent;
+  border: none;
+  color: $white;
+}
