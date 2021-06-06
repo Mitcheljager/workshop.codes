@@ -13,7 +13,10 @@
     export let allowDupes = false;
     export let onlyAlphanumeric = false;
     export let allowSpace = true;
+    export let tagLimit = 0;
 
+    let storePlaceholder = placeholder;
+    let inputElem;
     let outputElem;
 
     function keydown(event) {
@@ -40,10 +43,18 @@
         if (!allowDupes && values.includes(value)) return;
 
         values = [...values, value.trim()];
+
+        if (tagLimit && values.length == tagLimit) {
+            inputElem.readOnly = true;
+            placeholder = "";
+        }
     }
 
     function removeTag(index) {
         values = [...values.slice(0, index), ...values.slice(index+1)];
+        placeholder = storePlaceholder;
+        inputElem.focus();
+        inputElem.readOnly = false;
     }
 
     function splitTags(data) {

@@ -31,6 +31,7 @@
       hidden={!showDerivative}
       allowSpace={false}
       onlyAlphanumeric={true}
+      tagLimit=5
     />
   </div>
 </div>
