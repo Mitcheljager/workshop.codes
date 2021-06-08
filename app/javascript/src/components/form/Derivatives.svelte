@@ -64,6 +64,7 @@
       hidden={!showDerivative}
       allowSpace={false}
       onlyAlphanumeric={true}
+      onlyCaps={true}
       tagLimit=5
       useAutoComplete={true}
       fetchAutoCompleteValues={handleAutoCompleteRequest}

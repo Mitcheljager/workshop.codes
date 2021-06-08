@@ -12,6 +12,7 @@
     export let allowRepeats = false;
     export let onlyAlphanumeric = false;
     export let allowSpace = true;
+    export let onlyCaps = false;
     export let tagLimit = 0;
     export let useAutoComplete = false;
     export let fetchAutoCompleteValues = (value) => {
@@ -81,6 +82,7 @@
         tag = tag.trim();
         if (!allowSpace) tag = tag.replace(/ +/g, "");
         if (onlyAlphanumeric) tag = tag.replace(/[^a-zA-Z0-9 ]+/g, "");
+        if (onlyCaps) tag = tag.toUpperCase();
         return tag;
     }
 </script>
