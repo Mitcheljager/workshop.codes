@@ -1,10 +1,9 @@
 <!-- Adapted from https://github.com/agustinl/svelte-tags-input -->
 <script>
-
-    import { onMount } from "svelte";
-
     let values = [];
     let input = "";
+    let inputElem;
+    let outputElem;
 
     export let valueToString = ((v) => v);
     export let placeholder = 'Insert tags here';
@@ -14,10 +13,21 @@
     export let onlyAlphanumeric = false;
     export let allowSpace = true;
     export let tagLimit = 0;
-
+    export let useAutoComplete = false;
+    export let fetchAutoCompleteValues = (value) => {
+        return [];
+    };
     let storePlaceholder = placeholder;
-    let inputElem;
-    let outputElem;
+    let autoCompletePromise = fetchAutoCompleteValues(input);
+
+    let timer = null;
+    $: if (useAutoComplete && input.length > 0) {
+        clearTimeout(timer);
+        timer = setTimeout(
+            () => autoCompletePromise = fetchAutoCompleteValues(input),
+            750
+        );
+    }
 
     function keydown(event) {
         if (event.key == "Backspace" || event.key == "Delete") {
@@ -91,3 +101,30 @@
         value={hidden ? null : values}
         type="hidden">
 </div>
+
+{#if useAutoComplete && input.length > 0}
+    <div class="form-tags-autocomplete-results-anchor">
+        <ul class="form-tags-autocomplete-results">
+            {#await autoCompletePromise}
+                <strong>Searching...</strong>
+            {:then autoCompleteValues}
+                {#if autoCompleteValues.length > 0}
+                    {#each autoCompleteValues.slice(0, 5) as result, index}
+                        <li
+                            tabindex="-1"
+                            on:keydown={navAutoComplete(index, result.label)}
+                            on:click={() => addTag(result.label)}>
+                                {@html result.html}
+                        </li>
+                    {/each}
+                {:else}
+                    <p>No results</p>
+                {/if}
+            {:catch error}
+                <strong class="text-red">Something went wrong. Try again later.</strong>
+                <br>
+                <p><small>{error}</small></p>
+            {/await}
+        </ul>
+    </div>
+{/if}

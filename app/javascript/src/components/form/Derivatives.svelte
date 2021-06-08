@@ -2,6 +2,33 @@
   import Tags from './Tags.svelte';
 
   let showDerivative = false;
+
+  async function handleAutoCompleteRequest(value) {
+    if (!value) return [];
+    const res = await fetch(`/code/${value}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    const text = await res.text();
+    console.log(text);
+
+    if (res.ok) {
+      const json = JSON.parse(text);
+      return json.map(post => postToResult(post));
+    } else {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+  }
+
+  function postToResult(post) {
+    return {
+      label: post.code,
+      html: `<strong>${post.code}</strong> - ${post.title} by ${post.user.username}`
+    };
+  }
 </script>
 
 <div class="form-group mt-1/4">
@@ -32,6 +59,8 @@
       allowSpace={false}
       onlyAlphanumeric={true}
       tagLimit=5
+      useAutoComplete={true}
+      fetchAutoCompleteValues={handleAutoCompleteRequest}
     />
   </div>
 </div>
