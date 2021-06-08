@@ -328,7 +328,7 @@ input[type="file"] {
   @extend .inline-input;
   width: initial;
   margin-top: 5px;
-  padding: 4px 0 3px 0;
+  padding: 4px 5px;
 }
 
 .form-tags-tag {
@@ -346,4 +346,45 @@ input[type="file"] {
   background: transparent;
   border: none;
   color: $white;
+  cursor: pointer;
+}
+
+.form-tags-autocomplete-results-anchor {
+  position: relative
+}
+
+.form-tags-autocomplete-results {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 3px 0;
+  padding: 5px;
+  background: $bg-dark;
+  border: solid 1px $border-color;
+  border-radius: 5px;
+  max-height: 310px;
+  overflow: auto;
+  overflow-x: hidden;
+  z-index: 100;
+  text-align: left;
+
+  li {
+    list-style: none;
+    padding: 5px;
+
+    &.tag-item {
+      cursor: pointer;
+
+      &:hover, &:focus {
+        background: lighten($bg-dark, 10%);
+        outline: none;
+        color: $white;
+      }
+    }
+
+    p, strong {
+      margin: 0;
+    }
+  }
 }

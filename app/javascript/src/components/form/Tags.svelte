@@ -17,15 +17,21 @@
     export let fetchAutoCompleteValues = (value) => {
         return [];
     };
+    export let minCharsAutoComplete = 2;
     let storePlaceholder = placeholder;
     let autoCompletePromise = fetchAutoCompleteValues(input);
 
     let timer = null;
-    $: if (useAutoComplete && input.length > 0) {
+    let waiting = false;
+    $: if (useAutoComplete && input.length >= minCharsAutoComplete) {
         clearTimeout(timer);
+        waiting = true;
         timer = setTimeout(
-            () => autoCompletePromise = fetchAutoCompleteValues(input),
-            750
+            () => {
+                autoCompletePromise = fetchAutoCompleteValues(input);
+                waiting = false;
+            },
+            500
         );
     }
 
@@ -39,7 +45,7 @@
         return splitTags(value).map(tag => cleanTag(tag)).join(delimiter);
     }
 
-    function parseInput(event) {
+    function parseInput() {
         input = cleanInput(input);
         if (!input.includes(delimiter)) return;
         splitTags(input).forEach(tag => addTag(tag));
@@ -102,15 +108,16 @@
         type="hidden">
 </div>
 
-{#if useAutoComplete && input.length > 0}
+{#if useAutoComplete && !waiting && input.length >= minCharsAutoComplete}
     <div class="form-tags-autocomplete-results-anchor">
         <ul class="form-tags-autocomplete-results">
             {#await autoCompletePromise}
-                <strong>Searching...</strong>
+                <li><strong>Searching...</strong></li>
             {:then autoCompleteValues}
-                {#if autoCompleteValues.length > 0}
+                {#if autoCompleteValues.length}
                     {#each autoCompleteValues.slice(0, 5) as result, index}
                         <li
+                            class="tag-item"
                             tabindex="-1"
                             on:keydown={navAutoComplete(index, result.label)}
                             on:click={() => addTag(result.label)}>
@@ -118,12 +125,14 @@
                         </li>
                     {/each}
                 {:else}
-                    <p>No results</p>
+                    <li><p>No results on Workshop.codes</p></li>
                 {/if}
             {:catch error}
-                <strong class="text-red">Something went wrong. Try again later.</strong>
-                <br>
-                <p><small>{error}</small></p>
+                <li>
+                    <strong class="text-red">Something went wrong. Try again later.</strong>
+                    <br>
+                    <p><small>{error}</small></p>
+                </li>
             {/await}
         </ul>
     </div>

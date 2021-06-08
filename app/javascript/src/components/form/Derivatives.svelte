@@ -5,21 +5,27 @@
 
   async function handleAutoCompleteRequest(value) {
     if (!value) return [];
-    const res = await fetch(`/code/${value}`, {
+
+    const timeout = 8000;
+    const timeoutController = new AbortController();
+    const timeoutID = setTimeout(() => timeoutController.abort(), timeout);
+
+    const response = await fetch(`/code/${value}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
+      },
+      signal: timeoutController.signal
     });
-    const text = await res.text();
-    console.log(text);
+    const text = await response.text();
+    clearTimeout(timeoutID);
 
-    if (res.ok) {
+    if (response.ok) {
       const json = JSON.parse(text);
       return json.map(post => postToResult(post));
     } else {
-      throw new Error(`${res.status} ${res.statusText}`);
+      throw new Error(`${response.status} ${response.statusText}`);
     }
   }
 
