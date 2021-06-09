@@ -3,7 +3,7 @@
   let values = [];
   let input = "";
   let inputElem;
-  let outputElem;
+  let resultsList;
 
   export let valueToString = (v) => v;
   export let placeholder = "Insert tags here";
@@ -16,7 +16,9 @@
   export let tagLimit = 0;
   export let useAutoComplete = false;
   export let fetchAutoCompleteValues = (value) => {
-    return [];
+    return new Promise(resolve => {
+      resolve([]);
+    });
   };
   export let minCharsAutoComplete = 2;
   let storePlaceholder = placeholder;
@@ -32,10 +34,31 @@
       waiting = false;
     }, 500);
   }
+  $: console.log(resultsList);
 
   function keydown(event) {
     if (event.key == "Backspace" || event.key == "Delete") {
       if (input == "") removeTag(values.length - 1);
+    }
+
+    if (useAutoComplete && !waiting && resultsList && resultsList.querySelectorAll("li.tag-item").length) inputHandleAutoComplete(event);
+  }
+
+  function inputHandleAutoComplete(event) {
+    // TAB: If autocompleting, and a value can be found, add the first value
+    if (event.key == "Tab") {
+        event.preventDefault();
+        resultsList.querySelectorAll("li.tag-item")[0].click();
+    }
+    // ArrowDown: focus first element of results
+    if (event.key == "ArrowDown" || event.key == "Down") {
+      event.preventDefault();
+      resultsList.querySelector("li:first-child").focus();
+    }
+    // ArrowUp: focus last element of results
+    if (event.key == "ArrowUp" || event.key == "Up") {
+      event.preventDefault();
+      resultsList.querySelector("li:last-child").focus();
     }
   }
 
@@ -64,6 +87,8 @@
       inputElem.readOnly = true;
       placeholder = "";
     }
+
+    inputElem.focus();
   }
 
   function removeTag(index) {
@@ -85,10 +110,37 @@
     return tag;
   }
 
-  function navAutoComplete(index, label) {
+  function navAutoComplete(event, index, label, length) {
     if (!useAutoComplete) return;
 
     event.preventDefault();
+
+    if (event.key == "ArrowDown" || event.key == "Down") {
+      if (index + 1 >= length) {
+        resultsList.querySelector("li:first-child").focus();
+        return;
+      }
+      resultsList.querySelectorAll("li.tag-item")[index + 1].focus();
+      return;
+    }
+
+    if (event.key == "ArrowUp" || event.key == "Up") {
+      if (index <= 0) {
+        resultsList.querySelector("li:last-child").focus();
+        return;
+      }
+      resultsList.querySelectorAll("li.tag-item")[index - 1].focus();
+      return;
+    }
+
+    if (event.key == "Enter") {
+      addTag(label);
+      return;
+    }
+
+    if (event.key == "Escape" || event.key == "Esc") {
+      inputElem.focus();
+    }
   }
 </script>
 
@@ -114,8 +166,8 @@
     class="form-tags-input"
   />
   <input
-    bind:this={outputElem}
     id="post_derivatives"
+    name="post[derivatives]"
     value={hidden ? null : values}
     type="hidden"
   />
@@ -123,7 +175,7 @@
 
 {#if useAutoComplete && !waiting && input.length >= minCharsAutoComplete}
   <div class="form-tags-autocomplete-results-anchor">
-    <ul class="form-tags-autocomplete-results">
+    <ul bind:this={resultsList} class="form-tags-autocomplete-results">
       {#await autoCompletePromise}
         <li><strong>Searching...</strong></li>
       {:then autoCompleteValues}
@@ -132,7 +184,7 @@
             <li
               class="tag-item"
               tabindex="-1"
-              on:keydown={navAutoComplete(index, result.label)}
+              on:keydown={(event) => navAutoComplete(event, index, result.label, autoCompleteValues.length)}
               on:click={() => addTag(result.label)}
             >
               {@html result.html}
