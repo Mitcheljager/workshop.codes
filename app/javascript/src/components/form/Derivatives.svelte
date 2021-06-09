@@ -21,22 +21,12 @@
     const text = await response.text();
     clearTimeout(timeoutID);
 
-    await burnTime();
-
     if (response.ok) {
       const json = JSON.parse(text);
       return json.map(post => postToResult(post));
     } else {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-  }
-
-  function burnTime() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve('resolved');
-      }, 1000);
-    })
   }
 
   function postToResult(post) {
