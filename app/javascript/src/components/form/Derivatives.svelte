@@ -2,6 +2,7 @@
   import Tags from './Tags.svelte';
 
   let showDerivative = false;
+  let maxCodes = 5;
 
   async function handleAutoCompleteRequest(value) {
     if (!value) return [];
@@ -56,7 +57,9 @@
 
   <div class="form-group mt-1/4" hidden={!showDerivative}>
     <div class="form-hint--left">
-      Enter the import code(s) which your mode uses. You can enter up to X codes. <strong>Separate import codes with a comma ",".</strong>
+      Enter the import code(s) which your mode uses. You can enter up to {maxCodes} codes.
+      <br />
+      <strong>Separate import codes with a comma (<code>,</code>).</strong>
     </div>
 
     <Tags
@@ -66,7 +69,7 @@
       allowSpace={false}
       onlyAlphanumeric={true}
       onlyCaps={true}
-      tagLimit=5
+      tagLimit={maxCodes}
       useAutoComplete={true}
       fetchAutoCompleteValues={handleAutoCompleteRequest}
     />
