@@ -5,6 +5,7 @@
   let inputElem;
   let resultsList;
 
+  export let name = "tags";
   export let valueToString = (v) => v;
   export let placeholder = "Insert tags here";
   export let delimiter = ",";
@@ -166,8 +167,8 @@
     class="form-tags-input"
   />
   <input
-    id="post_derivatives"
-    name="post[derivatives]"
+    id="post_{name}"
+    name="post[{name}]"
     value={hidden ? null : values}
     type="hidden"
   />

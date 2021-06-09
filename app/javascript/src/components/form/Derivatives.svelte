@@ -60,6 +60,7 @@
     </div>
 
     <Tags
+      name="derivatives"
       placeholder="CODE1,CODE2,etc."
       hidden={!showDerivative}
       allowSpace={false}
