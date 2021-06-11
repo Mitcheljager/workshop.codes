@@ -1,7 +1,8 @@
 name: CI
 on: [push, pull_request]
 jobs:
-  test:
+  linters:
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,6 +27,29 @@ jobs:
       - name: ESLint
         run: |
           yarn run eslint app/javascript
+  test:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup System
+        run: |
+          sudo apt update
+          sudo apt-get install libsqlite3-dev
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          check-latest: true
+      - run: yarn install
+      - name: Bundle
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
       - name: Precompile assets
         run: |
           bundle exec rails webpacker:compile RAILS_ENV=test
