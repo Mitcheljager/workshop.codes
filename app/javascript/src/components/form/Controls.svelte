@@ -60,6 +60,10 @@
     controls = order.map(index => controls[index])
   }
 
+  function setCustom(controlsIndex, buttonIndex) {
+    controls[controlsIndex].buttons[buttonIndex] = { "Custom": event.target.value }
+  }
+
   function add() {
     controls = [...controls, { buttons: [] }]
   }
@@ -95,9 +99,10 @@
                 { /each }
               </select>
 
-              { #if control?.buttons?.[i] == "Custom" }
+              { #if control?.buttons?.[i] == "Custom" || typeof control?.buttons?.[i] === "object" }
                 <input
-                  bind:value={ control.buttons[i]["Custom"] }
+                  value={ control.buttons[i]["Custom"] || "" }
+                  on:change={ () => setCustom(index, i) }
                   type="text"
                   name="controls-item-button-{ i }"
                   class="form-input controls-form-item__custom"
