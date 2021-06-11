@@ -102,13 +102,16 @@
 }
 
 .ide__tray-item {
+  appearance: none;
   position: relative;
   padding: .5em;
   margin-left: .5rem;
+  border: 0;
   border-radius: $border-radius;
   background: $body-bg;
   font-size: 10px;
   line-height: 1em;
+  color: var(--text-color);
   cursor: pointer;
 
   @include media-min("sm") {

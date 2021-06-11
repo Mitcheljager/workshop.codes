@@ -33,11 +33,11 @@
           </div>
 
           <div class="item__actions">
-            <div class="well pt-1/8 pb-1/8 mr-1/4 mb-1/4 md:mb-0" data-action="copy-to-clipboard" data-target="<%= post.code %>">
+            <button class="well button button--secondary button--small pt-1/8 pb-1/8 pl-1/4 pr-1/4 mr-1/8" data-action="copy-to-clipboard" data-target="<%= post.code %>">
               <span class="copy cursor-pointer">
                 <a data-copy="<%= post.code %>"><%= post.code %></a>
               </span>
-            </div>
+            </button>
 
             <%= tag.span "Analytics", class: "text-white mr-1/4 cursor-pointer", data: { action: "toggle-content reveal-post-analytics", id: post.id } %>
             <%= link_to "Edit", edit_post_path(post.code), class: "mr-1/4" %>
