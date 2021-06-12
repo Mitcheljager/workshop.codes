@@ -123,7 +123,7 @@
             name="controls-item-description"
             class="form-input pt-1/4 pb-1/4 md:ml-1/4"
             placeholder="Description"
-            maxlength=15 />
+            maxlength=500 />
 
           <button href="#" data-role="controls-item-move-handle" on:click|preventDefault>⇅</button>
           <button on:click|preventDefault={ () => remove(index) }>🗑️</button>
