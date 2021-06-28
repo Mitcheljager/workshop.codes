@@ -39,7 +39,7 @@
             </div>
           <% end %>
 
-          <div class="item__info-item">
+          <div class="item__info-item" title="<%= @post.last_revision_created_at %>">
             <small><em>Last updated <%= time_ago_in_words(@post.last_revision_created_at) %> ago</em></small>
           </div>
         </div>
