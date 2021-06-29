@@ -72,8 +72,8 @@ class BlocksController < ApplicationController
   def create_profile_block
     respond_to do |format|
       format.js {
-        if @user.blocks.where(content_type: :profile).size >= 3
-          @message = "You have already added 3 blocks."
+        if @user.blocks.where(content_type: :profile).size >= 5
+          @message = "You have already added 5 blocks."
           render "application/error"
         else
           unless @block.save
