@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Derivative, type: :model do
   describe "associations and validations" do
-    it { should belong_to(:source) }
+    it { should belong_to(:source).optional }
     it { should belong_to(:derivation) }
 
-    it { should validate_presence_of(:source_id) }
+    it { should validate_presence_of(:source_code) }
     it { should validate_presence_of(:derivation_id) }
     
     context "validation of derivation" do
