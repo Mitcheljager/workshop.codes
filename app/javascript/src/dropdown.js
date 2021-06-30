@@ -15,12 +15,21 @@ function toggleDropdown(event) {
   const parent = eventTarget.closest("[data-dropdown]")
   const target = parent.querySelector("[data-dropdown-content]")
   
-  target.classList.toggle("active")
+  target.dataset.active = !JSON.parse(target.dataset.active || "false")
+  target.classList.toggle("active", JSON.parse(target.dataset.active))
 }
 
 function closeDropdown(event) {
   const activeDropdown = document.querySelector("[data-dropdown-content].active")
-  if (activeDropdown) activeDropdown.classList.remove("active")
+  if (!activeDropdown) return
+
+  
+  const eventTarget = event.target.closest("[data-dropdown]")
+  if (eventTarget && event.type != "keydown" && eventTarget.querySelector("[data-dropdown-content]") == activeDropdown) return
+  
+  
+  activeDropdown.classList.remove("active")
+  activeDropdown.dataset.active = false
 }
 
 function closeOnKeyDown(event) {
