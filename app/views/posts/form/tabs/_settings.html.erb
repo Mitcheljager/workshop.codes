@@ -85,17 +85,22 @@
   </div>
 </div>
 
-<div class="form-group mt-1/1 mb-1/1">
-  <%= form.label :number_of_supported_players, class: "form-label mb-1/4" do %>
-    <%= t("posts.form.num_players.title") %>
-    <span class="form-required">(<%= t("global.required") %>)</span>
-  <% end %>
-  <% unless @post.min_players.present? && @post.max_players.present? %>
-    <%= tag.p t("posts.form.num_players.warning"), class: 'text-red', data: { role: 'vanish-on-slider-update' } %>
-  <% end %>
-  <%= content_tag :div, nil, data: { role: 'num-player-slider', type: 'post', min_players: @post.min_players, max_players: @post.max_players }, name: 'post[number_of_supported_players]' %>
-  <%= form.hidden_field :min_players, value: @post.min_players %>
-  <%= form.hidden_field :max_players, value: @post.max_players %>
+<div class="form-group-uneven mt-1/1 mb-1/1">
+  <div>
+    <%= form.label :number_of_supported_players, class: "form-label mb-1/4" do %>
+      <%= t("posts.form.num_players.title") %>
+      <span class="form-required">(<%= t("global.required") %>)</span>
+    <% end %>
+
+    <% unless @post.min_players.present? && @post.max_players.present? %>
+      <%= tag.small t("posts.form.num_players.warning"), class: "block mb-1/2 text-red", data: { role: "vanish-on-slider-update" } %>
+    <% end %>
+
+    <%= content_tag :div, nil, class: "noUi--large", data: { role: "num-player-slider", type: "post", min_players: @post.min_players, max_players: @post.max_players }, name: "post[number_of_supported_players]" %>
+
+    <%= form.hidden_field :min_players, value: @post.min_players %>
+    <%= form.hidden_field :max_players, value: @post.max_players %>
+  </div>
 </div>
 
 <div class="form-group-columns mt-1/1">

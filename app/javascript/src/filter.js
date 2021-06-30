@@ -6,7 +6,7 @@ export function bind() {
   linkElements.forEach((element) => element.removeAndAddEventListener("click", buildFilterPath))
 }
 
-function addFilter(event) {
+export function addFilter(event) {
   event.preventDefault()
 
   const filterToggle = this.closest("[data-filter]")

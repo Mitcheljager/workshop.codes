@@ -76,12 +76,13 @@
  /* Slider size and handle placement;
   */
  .noUi-horizontal {
-   height: 8px;
+   height: .25rem;
+   margin-bottom: 1.75rem;
  }
  .noUi-horizontal .noUi-handle {
-   width: 20px;
-   height: 20px;
-   right: -10px;
+   width: 1rem;
+   height: 1rem;
+   right: -.5rem;
    top: -7px;
  }
  .noUi-vertical {
@@ -173,16 +174,20 @@
  }
  .noUi-pips {
    position: absolute;
-   color: #999;
+   color: $text-color-dark;
  }
  /* Values;
   *
   */
  .noUi-value {
-   font-size: $font-size-small;
+   font-size: 12px;
    position: absolute;
    white-space: nowrap;
    text-align: center;
+
+   .noUi--large & {
+     font-size: $font-size-small;
+   }
  }
  /* Markings;
   *
@@ -194,8 +199,8 @@
   *
   */
  .noUi-pips-horizontal {
-   padding: 10px 0;
-   height: 80px;
+   padding: .25rem 0 0;
+   height: 2rem;
    top: 100%;
    left: 0;
    width: 100%;

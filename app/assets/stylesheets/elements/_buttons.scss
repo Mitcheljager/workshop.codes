@@ -67,6 +67,18 @@
     }
   }
 
+  &--ghost {
+    background: transparent;
+    border: 2px solid $text-color;
+
+    &:hover:not([disabled]),
+    &:active:not([disabled]),
+    &:focus:not([disabled]) {
+      box-shadow: none;
+      border-color: $white;
+    }
+  }
+
   &--danger {
     background: $red;
   }

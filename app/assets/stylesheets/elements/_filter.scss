@@ -23,7 +23,7 @@
   width: 100%;
   margin-top: $search-height / -2;
   padding-top: calc(1rem + #{ $search-height / 2 });
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
   background: $bg-dark;
@@ -62,7 +62,7 @@
 
 .filter__group {
   position: relative;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
 }
 
 .filter__item {
@@ -74,7 +74,7 @@
   padding: .5rem .75rem;
   border-radius: $border-radius;
   background: $bg-darker;
-  font-size: $font-size-base;
+  font-size: $font-size-small;
 
   &--active {
     background: $body-bg;
