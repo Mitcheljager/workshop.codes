@@ -62,7 +62,7 @@ class RevisionsController < ApplicationController
   end
 
   def revision_params
-    params.require(:revision).permit(:version, :description)
+    params.require(:revision).permit(:version, :description, :visible)
   end
 
   def not_found

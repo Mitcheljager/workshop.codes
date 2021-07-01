@@ -31,11 +31,13 @@ function revealTab(target, parentElement) {
     return element
   })[0]
 
-  activeElement.classList.add("tabs-content--transitioning-out")
+  if (activeElement) activeElement.classList.add("tabs-content--transitioning-out")
 
   setTimeout(() => {
-    activeElement.classList.remove("tabs-content--active")
-    activeElement.classList.remove("tabs-content--transitioning-out")
+    if (activeElement) {
+      activeElement.classList.remove("tabs-content--active")
+      activeElement.classList.remove("tabs-content--transitioning-out")
+    }
 
     targetElement.classList.add("tabs-content--active")
     targetElement.classList.add("tabs-content--transitioning-in")

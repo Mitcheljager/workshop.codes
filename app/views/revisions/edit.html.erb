@@ -2,4 +2,17 @@
 
 <h1 class="heading"><strong>Editing Revision</strong> <% if @revision.version.present? %>version "<%= @revision.version %>"<% end %> for "<%= @revision.post.title %>"</h1>
 
+<div class="well mb-1/2 pt-1/4 pb-1/4">
+  <p class="mt-1/8 mb-1/8 pr-1/4">You can hide this revision from your revisions list if you want to. This can not be undone.</p>
+  
+  <%= button_to "Hide revision",
+                revision_path(@revision),
+                method: :patch,
+                params: { revision: { visible: false } },
+                data: { disable_with: t("global.processing"), confirm: "Are you sure? Once the Revision is hidden it cannot be made visible again." },
+                form: { autocomplete: "off" },
+                remote: true,
+                class: "button button--dark button--small mt-0" %>
+</div>
+
 <%= render "form" %>
