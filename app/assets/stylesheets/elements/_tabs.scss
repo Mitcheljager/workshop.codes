@@ -54,9 +54,7 @@
     transition: width 50ms, background-color 0ms 50ms;
   }
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     color: $white;
 
     &::after {

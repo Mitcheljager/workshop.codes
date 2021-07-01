@@ -41,8 +41,7 @@
     color: $text-color !important;
     font-size: 1rem;
 
-    &.active,
-    &:hover {
+    @include hover-stack {
       background-color: lighten($bg-dark, 10%);
       color: $text-color-light !important;
       border: 0;

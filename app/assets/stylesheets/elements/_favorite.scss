@@ -60,9 +60,7 @@
     }
   }
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     svg path {
       fill: $white;
     }
@@ -78,8 +76,7 @@
   }
 
   &--is-active {
-    &:hover,
-    &:active {
+    @include hover-stack {
       svg path {
         fill: $red;
       }
@@ -119,8 +116,7 @@
       fill: $black;
     }
 
-    &:hover,
-    &:active {
+    @include hover-stack {
       svg path {
         fill: $black;
       }

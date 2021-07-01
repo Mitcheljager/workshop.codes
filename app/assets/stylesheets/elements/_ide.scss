@@ -118,8 +118,7 @@
     font-size: 12px;
   }
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     color: $white;
   }
 

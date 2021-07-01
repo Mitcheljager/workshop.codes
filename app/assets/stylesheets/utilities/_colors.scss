@@ -38,8 +38,7 @@
   color: $red !important;
 
   &[href] {
-    &:hover,
-    &:active {
+    @include hover-stack {
       color: lighten($red, 15%) !important;
     }
   }

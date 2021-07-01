@@ -68,8 +68,7 @@
     color: $white;
     text-decoration: none;
 
-    &:hover,
-    &:active {
+    @include hover-stack {
       color: $pure-white;
     }
   }

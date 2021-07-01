@@ -21,3 +21,9 @@
     display: none;
   }
 }
+
+.logo-link {
+  @include hover-stack {
+    filter: brightness(1.05);
+  }
+}

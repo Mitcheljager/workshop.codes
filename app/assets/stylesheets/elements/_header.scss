@@ -158,9 +158,7 @@
   font-size: 1rem;
   text-decoration: none;
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     color: $white;
   }
 

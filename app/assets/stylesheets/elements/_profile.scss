@@ -24,8 +24,7 @@
   font-size-adjust: 0.52;
   text-transform: uppercase;
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     text-decoration: underline;
   }
 
@@ -54,9 +53,7 @@
     margin: 0 $margin 0 0;
   }
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     filter: brightness(1.15);
   }
 

@@ -169,9 +169,7 @@
     background-size: 40%;
   }
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     filter: brightness(1.15);
   }
 
@@ -259,9 +257,7 @@
     color: $white;
     text-decoration: none;
 
-    &:hover,
-    &:active,
-    &:focus {
+    @include hover-stack {
       color: $pure-white;
     }
   }
@@ -318,9 +314,7 @@
   color: $white;
   text-decoration: none;
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     filter: brightness(1.2);
   }
 }
@@ -362,9 +356,7 @@
   cursor: pointer;
   overflow: hidden;
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     outline: none;
     filter: brightness(1.15);
   }
@@ -458,9 +450,7 @@
     color: $text-color;
     text-decoration: none;
 
-    &:hover,
-    &:active,
-    &:focus {
+    @include hover-stack {
       color: $white;
     }
   }
@@ -489,8 +479,7 @@
   text-decoration: none;
   transition: padding 100ms;
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     padding: $margin / 6;
     background: $bg-dark;
     color: $white;
@@ -569,8 +558,7 @@
     border: 1px solid $border-color;
     cursor: pointer;
 
-    &:hover,
-    &:active {
+    @include hover-stack {
       border-color: lighten($border-color, 10%);
     }
 

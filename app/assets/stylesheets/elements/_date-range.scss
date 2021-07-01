@@ -16,8 +16,7 @@
   z-index: 5;
   cursor: pointer;
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     background: $pure-white;
   }
 

@@ -126,7 +126,7 @@
   color: $text-color;
   cursor: pointer;
 
-  &:hover {
+  @include hover-stack {
     border-color: $text-color;
   }
 

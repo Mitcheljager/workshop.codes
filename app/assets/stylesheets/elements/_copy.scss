@@ -8,8 +8,7 @@
     fill: $text-color-dark;
   }
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     filter: brightness(2);
   }
 }

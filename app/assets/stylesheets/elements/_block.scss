@@ -16,8 +16,7 @@
     text-decoration: none;
     margin-left: $margin / 8;
 
-    &:hover,
-    &:active {
+    @include hover-stack {
       filter: brightness(1.1);
     }
   }
@@ -37,8 +36,7 @@
     color: $white;
     text-decoration: none;
 
-    &:hover,
-    &:active {
+    @include hover-stack {
       color: white;
       text-decoration: underline;
     }

@@ -31,8 +31,7 @@ a {
   color: $text-color;
   outline: none;
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     color: $white;
     outline: none;
   }

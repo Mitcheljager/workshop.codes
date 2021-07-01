@@ -84,8 +84,7 @@
   transform-origin: top center;
   cursor: pointer;
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     path {
       fill: $pure-white;
 

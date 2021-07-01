@@ -61,8 +61,7 @@
   cursor: pointer;
   z-index: 2;
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     filter: brightness(2);
     box-shadow: none;
     outline: none;

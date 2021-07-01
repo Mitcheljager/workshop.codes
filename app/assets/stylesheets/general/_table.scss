@@ -19,8 +19,7 @@ td {
     color: $white;
     text-decoration: none;
 
-    &:hover,
-    &:active {
+    @include hover-stack {
       text-decoration: underline;
     }
   }
@@ -35,8 +34,7 @@ th {
 }
 
 tr {
-  &:hover,
-  &:active {
+  @include hover-stack {
     td {
       background: rgba($pure-white, .1);
     }

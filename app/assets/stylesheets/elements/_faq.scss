@@ -15,8 +15,7 @@
   padding: 1rem;
   cursor: pointer;
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     color: $white;
   }
 }

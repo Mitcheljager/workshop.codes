@@ -86,7 +86,7 @@
   text-align: left;
   cursor: pointer;
 
-  &:hover {
+  @include hover-stack {
     &::before {
       background: $text-color;
     }

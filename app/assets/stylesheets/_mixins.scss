@@ -39,3 +39,11 @@
     background: $bg-dark;
   }
 }
+
+@mixin hover-stack() {
+  &:hover,
+  &:active,
+  &:focus {
+    @content
+  }
+}

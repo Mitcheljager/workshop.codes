@@ -121,9 +121,7 @@
     color: var(--text-color-dark);
     text-decoration: none;
 
-    &:hover,
-    &:active,
-    &:focus {
+    @include hover-stack {
       color: var(--white);
     }
   }
@@ -139,9 +137,7 @@
   text-decoration: none;
 
   &[href] {
-    &:hover,
-    &:active,
-    &:focus {
+    @include hover-stack {
       color: $pure-white;
     }
   }
@@ -172,9 +168,7 @@
   color: $white;
   cursor: pointer;
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     outline: none;
     filter: brightness(1.15);
   }

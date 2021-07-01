@@ -74,8 +74,7 @@
   border-radius: $border-radius;
   background: var(--bg-darker);
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     opacity: 0.75;
   }
 

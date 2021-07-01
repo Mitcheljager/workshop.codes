@@ -13,8 +13,7 @@
     color: $text-color-dark;
   }
 
-  &:hover,
-  &:active {
+  @include hover-stack {
     color: $pure-white;
 
     @supports not (clip-path: polygon(0 0)) {
@@ -90,9 +89,7 @@
   font-size: $font-size-base;
   line-height: 1.35em;
 
-  &:hover,
-  &:active,
-  &:focus {
+  @include hover-stack {
     color: $pure-white;
     background: darken($bg-dark, 5%);
   }
