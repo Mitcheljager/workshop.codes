@@ -89,6 +89,13 @@ class Post < ApplicationRecord
   has_many :email_notifications, dependent: :destroy
   has_many :blocks, -> { where(content_type: :post).order(position: :asc) }, foreign_key: :content_id, dependent: :destroy
 
+  # Identifies posts which derive from this post
+  has_many :deriver_derivs, foreign_key: :source_id, class_name: "Derivative"
+  has_many :derivations, through: :deriver_derivs, source: :derivation
+  # Identifies posts which this post derives from
+  has_many :source_derivs, foreign_key: :derivation_id, class_name: "Derivative", dependent: :destroy
+  has_many :sources, through: :source_derivs, source: :source
+
   has_many_attached :images, dependent: :destroy
 
   attr_accessor :status
@@ -174,5 +181,9 @@ class Post < ApplicationRecord
 
   def parsed_controls
     JSON.parse(self.controls)
+  end
+
+  def self.find_by_code(code)
+    Post.find_by("upper(code) = ?", code.upcase)
   end
 end

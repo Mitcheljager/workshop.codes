@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :collection, :revisions, :blocks).find_by("upper(posts.code) = ?", params[:code].upcase)
+    @post = Post.includes(:user, :collection, :revisions, :blocks, :derivations, :sources).find_by_code(params[:code])
 
     not_found and return if @post && (@post.private? || @post.draft?) && @post.user != current_user
 
@@ -178,7 +178,7 @@ class PostsController < ApplicationController
   end
 
   def copy_code
-    @post = Post.find_by("upper(code) = ?", params[:code].upcase)
+    @post = Post.find_by_code(params[:code])
     unless @post.present?
       @revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
       @post = @revision.post if @revision.present?
