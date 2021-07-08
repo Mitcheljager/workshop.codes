@@ -19,7 +19,7 @@
         <p class="mt-0"><small><%= t("posts.form.code_change.current_code_html", current_code: @post.code) %></small></p>
       </div>
 
-      <%= svelte_component "DerivativesForm" %>
+      <%= svelte_component "DerivativesForm", { currSources: post.source_derivs.map(&:source_code) } %>
     </div>
 
     <%= render "posts/form/tabs", form: form %>

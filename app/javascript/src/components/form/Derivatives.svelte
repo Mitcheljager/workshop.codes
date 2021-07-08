@@ -1,8 +1,14 @@
 <script>
   import Tags from './Tags.svelte';
+  import { onMount } from 'svelte';
 
   let showDerivative = false;
   let maxCodes = 5;
+  export let currSources = [];
+
+  onMount(() => {
+    if (currSources.length) showDerivative = true;
+  });
 
   async function handleAutoCompleteRequest(value) {
     if (!value) return [];
@@ -65,6 +71,7 @@
     <Tags
       name="derivatives"
       placeholder="CODE1,CODE2,etc."
+      fillValues={currSources}
       hidden={!showDerivative}
       allowSpace={false}
       onlyAlphanumeric={true}

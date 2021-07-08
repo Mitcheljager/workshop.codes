@@ -1,5 +1,7 @@
 <!-- Adapted from https://github.com/agustinl/svelte-tags-input -->
 <script>
+  import { onMount } from 'svelte';
+
   let values = [];
   let input = "";
   let inputElem;
@@ -22,6 +24,7 @@
     });
   };
   export let minCharsAutoComplete = 2;
+  export let fillValues = [];
   let storePlaceholder = placeholder;
   let autoCompletePromise = fetchAutoCompleteValues(input);
 
@@ -35,7 +38,12 @@
       waiting = false;
     }, 500);
   }
-  $: console.log(resultsList);
+
+  onMount(() => {
+    fillValues.forEach((code) => {
+      addTag(code);
+    });
+  });
 
   function keydown(event) {
     if (event.key == "Backspace" || event.key == "Delete") {
