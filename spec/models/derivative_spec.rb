@@ -68,6 +68,26 @@ RSpec.describe Derivative, type: :model do
         expect(deriv2).to be_valid
         deriv2.save!
       end
+
+      it "allows multiple derivations from a valid post" do
+        post1 = create(:post)
+        post2 = create(:post)
+        post3 = create(:post)
+
+        deriv1 = build(:derivative)
+        deriv1.source = post1
+        deriv1.source_code = post1.code
+        deriv1.derivation = post2
+        expect(deriv1).to be_valid
+        deriv1.save!
+
+        deriv2 = build(:derivative)
+        deriv2.source = post1
+        deriv2.source_code = post1.code
+        deriv2.derivation = post3
+        expect(deriv2).to be_valid
+        deriv2.save!
+      end
     end
   end
 end
