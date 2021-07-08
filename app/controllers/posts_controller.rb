@@ -104,6 +104,7 @@ class PostsController < ApplicationController
     parse_carousel_video
 
     if @post.save
+      parse_derivatives
       @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
 
       create_activity(:create_post, post_activity_params)
@@ -135,6 +136,7 @@ class PostsController < ApplicationController
     parse_carousel_video
 
     if @post.update(post_params)
+      parse_derivatives
       create_activity(:update_post, post_activity_params)
       create_collection if post_params[:new_collection] != ""
       update_email_notifications
@@ -230,6 +232,21 @@ class PostsController < ApplicationController
 
   def parse_carousel_video
     params[:post][:carousel_video] = youtube_to_video_id(post_params[:carousel_video])
+  end
+
+  def parse_derivatives
+    return unless params[:post][:derivatives]
+    derivs = params[:post][:derivatives].split(",")
+    existing_derivs = Derivative.where(derivation: @post)
+    derivs.each do |code|
+      deriv = Derivative.find_by(source_code: code, derivation: @post)
+      existing_derivs -= [deriv]
+      unless deriv.present?
+        source_post = Post.find_by_code code
+        Derivative.create!(source_code: code, derivation: @post, source: source_post)
+      end
+    end
+    existing_derivs.each { |d| d.destroy! }
   end
 
   def not_found
