@@ -239,10 +239,6 @@ input[type="file"] {
   label + & {
     margin-top: $margin / 3 - $margin / 6;
   }
-
-  &--left {
-    text-align: left;
-  }
 }
 
 .field_with_errors {
