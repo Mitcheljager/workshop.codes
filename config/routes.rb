@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
+  get "similar_to/:id", to: "posts#similar_to", as: "similar_posts"
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/, default: "en" do
     root "posts#index"

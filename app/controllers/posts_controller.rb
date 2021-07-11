@@ -187,6 +187,17 @@ class PostsController < ApplicationController
     track_action("Copy Code") if @post.present?
   end
 
+  def similar_to
+    @post = Post.find(params[:id])
+    @posts = ENV["BONSAI_URL"] ? Post.includes(:user).search(@post.tags).records.select_overview_columns.public?.where.not(id: @post.id).limit(3) : Post.where.not(id: @post.id).last(3)
+
+    if @posts.any?
+      render collection: @posts, partial: "card", as: :post
+    else
+      render plain: "No similar posts were found"
+    end
+  end
+
   private
 
   def set_post
