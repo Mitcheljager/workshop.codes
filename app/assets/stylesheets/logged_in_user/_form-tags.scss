@@ -39,20 +39,19 @@
   top: 0;
   left: 0;
   right: 0;
-  margin: 3px 0;
-  padding: 5px;
+  margin: .2rem 0;
+  padding: .25rem;
   background: $bg-dark;
   border: solid 1px $border-color;
-  border-radius: 5px;
-  max-height: 310px;
-  overflow: auto;
-  overflow-x: hidden;
+  border-radius: .25rem;
+  max-height: 20rem;
+  overflow-y: auto;
   z-index: 100;
   text-align: left;
 
   li {
     list-style: none;
-    padding: 5px;
+    padding: .25rem;
 
     &.tag-item {
       cursor: pointer;
