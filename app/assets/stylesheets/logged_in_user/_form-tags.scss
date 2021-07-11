@@ -1,0 +1,73 @@
+.form-tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 .25rem .25rem .25rem;
+}
+
+.form-tags-input {
+  @include inline-input;
+  width: initial;
+  margin-top: .25rem;
+  padding: .2rem .25rem;
+}
+
+.form-tags-tag {
+  display: flex;
+  white-space: nowrap;
+  border-radius: .1rem;
+  margin-right: .25rem;
+  margin-top: .25rem;
+  padding: .2rem .13rem .15rem .2rem;
+  background: darken($primary, 10%);
+}
+
+.form-tags-tag-remove {
+  padding: 0 .15rem;
+  background: transparent;
+  border: none;
+  color: $white;
+  cursor: pointer;
+}
+
+.form-tags-autocomplete-results-anchor {
+  position: relative;
+}
+
+.form-tags-autocomplete-results {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 3px 0;
+  padding: 5px;
+  background: $bg-dark;
+  border: solid 1px $border-color;
+  border-radius: 5px;
+  max-height: 310px;
+  overflow: auto;
+  overflow-x: hidden;
+  z-index: 100;
+  text-align: left;
+
+  li {
+    list-style: none;
+    padding: 5px;
+
+    &.tag-item {
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background: lighten($bg-dark, 10%);
+        outline: none;
+        color: $white;
+      }
+    }
+
+    p,
+    strong {
+      margin: 0;
+    }
+  }
+}
