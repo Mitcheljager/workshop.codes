@@ -153,12 +153,12 @@
   }
 </script>
 
-<div class="form-tags-wrapper form-input mt-1/4">
+<div class="form-tags__wrapper form-input mt-1/4">
   {#each values as value, i}
-    <span class="form-tags-tag">
+    <span class="form-tags__tag">
       {valueToString(value)}
       <button
-        class="form-tags-tag-remove"
+        class="form-tags__remove-tag"
         on:click|preventDefault={() => removeTag(i)}
       >
         &#215;
@@ -172,7 +172,7 @@
     on:input={parseInput}
     on:keydown={keydown}
     {placeholder}
-    class="form-tags-input"
+    class="form-tags__input"
   />
   <input
     id="post_{name}"
@@ -183,15 +183,15 @@
 </div>
 
 {#if useAutoComplete && !waiting && input.length >= minCharsAutoComplete}
-  <div class="form-tags-autocomplete-results-anchor">
+  <div class="form-tags-autocomplete-results__anchor">
     <ul bind:this={resultsList} class="form-tags-autocomplete-results">
       {#await autoCompletePromise}
-        <li><strong>Searching...</strong></li>
+        <li class="list-element"><strong class="m-0">Searching...</strong></li>
       {:then autoCompleteValues}
         {#if autoCompleteValues.length}
           {#each autoCompleteValues.slice(0, 5) as result, index}
             <li
-              class="tag-item"
+              class="list-element tag-item"
               tabindex="-1"
               on:keydown={(event) => navAutoComplete(event, index, result.label, autoCompleteValues.length)}
               on:click={() => addTag(result.label)}
@@ -200,15 +200,15 @@
             </li>
           {/each}
         {:else}
-          <li><p>No results on Workshop.codes</p></li>
+          <li class="list-element"><span class="m-0">No results on Workshop.codes</span></li>
         {/if}
       {:catch error}
-        <li>
-          <strong class="text-red">
+        <li class="list-element">
+          <strong class="m-0">
             Something went wrong. Try again later.
           </strong>
           <br />
-          <p><small>{error}</small></p>
+          <span class="m-0"><small>{error}</small></span>
         </li>
       {/await}
     </ul>

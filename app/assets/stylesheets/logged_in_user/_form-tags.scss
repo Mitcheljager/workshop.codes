@@ -1,18 +1,18 @@
-.form-tags-wrapper {
+.form-tags__wrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 0 .25rem .25rem .25rem;
 }
 
-.form-tags-input {
+.form-tags__input {
   @include inline-input;
   width: initial;
   margin-top: .25rem;
   padding: .2rem .25rem;
 }
 
-.form-tags-tag {
+.form-tags__tag {
   display: flex;
   white-space: nowrap;
   border-radius: .1rem;
@@ -22,7 +22,7 @@
   background: darken($primary, 10%);
 }
 
-.form-tags-tag-remove {
+.form-tags__remove-tag {
   padding: 0 .15rem;
   background: transparent;
   border: none;
@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.form-tags-autocomplete-results-anchor {
+.form-tags-autocomplete-results__anchor {
   position: relative;
 }
 
@@ -49,7 +49,7 @@
   z-index: 100;
   text-align: left;
 
-  li {
+  .list-element {
     list-style: none;
     padding: .25rem;
 
@@ -62,11 +62,6 @@
         outline: none;
         color: $white;
       }
-    }
-
-    p,
-    strong {
-      margin: 0;
     }
   }
 }
