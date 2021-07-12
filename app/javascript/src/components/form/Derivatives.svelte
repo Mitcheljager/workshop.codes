@@ -4,10 +4,10 @@
 
   let showDerivative = false;
   let maxCodes = 5;
-  export let currSources = [];
+  export let currentSources = [];
 
   onMount(() => {
-    if (currSources.length) showDerivative = true;
+    if (currentSources.length) showDerivative = true;
   });
 
   async function handleAutoCompleteRequest(value) {
@@ -71,7 +71,7 @@
     <Tags
       name="derivatives"
       placeholder="CODE1,CODE2,etc."
-      fillValues={currSources}
+      fillValues={currentSources}
       hidden={!showDerivative}
       allowSpace={false}
       onlyAlphanumeric={true}
