@@ -6,6 +6,7 @@ namespace :db do
   desc "TODO"
   task fakeit: :environment do
     200.times do
+      min_players = Faker::Number.within(range: 1..12)
       Post.create!(
         user_id: 1,
         title: Faker::Lorem.sentence,
@@ -15,7 +16,9 @@ namespace :db do
         categories: ["Team Deathmatch", "Solo"],
         heroes: ["Mei"],
         maps: ["Havana"],
-        tags: Faker::Lorem.word
+        tags: Faker::Lorem.word,
+        min_players: min_players,
+        max_players: Faker::Number.within(range: min_players..12)
       )
     end
   end
