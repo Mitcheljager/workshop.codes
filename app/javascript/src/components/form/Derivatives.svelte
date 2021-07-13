@@ -32,6 +32,7 @@
   }
 </script>
 
+{#if false}
 <div class="form-group mt-1/4">
   <div class="switch-checkbox">
     <input
@@ -72,3 +73,4 @@
     </div>
   {/if}
 </div>
+{/if}
