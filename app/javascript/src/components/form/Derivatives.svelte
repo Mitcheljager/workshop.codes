@@ -1,4 +1,5 @@
 <script>
+  import FetchRails from "../../fetch-rails";
   import Tags from './Tags.svelte';
   import { onMount } from 'svelte';
 
@@ -13,27 +14,14 @@
   async function handleAutoCompleteRequest(value) {
     if (!value) return [];
 
-    const timeout = 8000;
-    const timeoutController = new AbortController();
-    const timeoutID = setTimeout(() => timeoutController.abort(), timeout);
-
-    const response = await fetch(`/code/${value}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      signal: timeoutController.signal
-    });
-    const text = await response.text();
-    clearTimeout(timeoutID);
-
-    if (response.ok) {
-      const json = JSON.parse(text);
-      return json.map(post => postToResult(post));
-    } else {
-      throw new Error(`${response.status} ${response.statusText}`);
-    }
+    return new FetchRails(`/code/${value}`).get({parameters: {headers: {"Accept": "application/json"}}, returnResponse: true}).then(async response => {
+      if (response.ok) {
+        const json = await response.json();
+        return json.map(post => postToResult(post));
+      } else {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+    })
   }
 
   function postToResult(post) {
