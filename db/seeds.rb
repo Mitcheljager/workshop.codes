@@ -13,6 +13,7 @@ User.create(id: 2, username: "test", password: "password")
 
 Post.destroy_all
 1000.times do |i|
+  min_players = Faker::Number.within(range: 1..12)
   Post.create(
     id: i,
     created_at: 1.year.ago,
@@ -26,7 +27,9 @@ Post.destroy_all
     heroes: ApplicationHelper.heroes.collect{ |a| a["en"] }.sample(3),
     maps: ApplicationHelper.maps.collect{ |a| a["en"] }.sample(3),
     version: Faker::App.semantic_version,
-    hotness: Faker::Number.between(from: 1, to: 200)
+    hotness: Faker::Number.between(from: 1, to: 200),
+    min_players: min_players,
+    max_players: Faker::Number.within(range: min_players..12)
   )
 end
 
