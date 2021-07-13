@@ -236,17 +236,19 @@ class PostsController < ApplicationController
 
   def parse_derivatives
     return unless params[:post][:derivatives]
-    derivs = params[:post][:derivatives].split(",")
-    existing_derivs = Derivative.where(derivation: @post)
-    derivs.each do |code|
+    codes = params[:post][:derivatives].split(",")
+    trimmed_codes = codes[0, Post::MAX_SOURCES]
+    Derivative.where(derivation: @post).where.not(source_code: trimmed_codes).destroy_all
+    trimmed_codes.each do |code|
       deriv = Derivative.find_by(source_code: code, derivation: @post)
-      existing_derivs -= [deriv]
       unless deriv.present?
         source_post = Post.find_by_code code
         Derivative.create!(source_code: code, derivation: @post, source: source_post)
       end
     end
-    existing_derivs.each { |d| d.destroy! }
+    if codes.count > Post::MAX_SOURCES
+      flash[:warning] = "More sources were provided than allowed, so only the first #{Post::MAX_SOURCES} sources were saved."
+    end
   end
 
   def not_found

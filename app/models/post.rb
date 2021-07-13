@@ -80,6 +80,8 @@ class Post < ApplicationRecord
     }
   end
 
+  MAX_SOURCES = 5
+
   belongs_to :user
   belongs_to :collection, optional: true
 

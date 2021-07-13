@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
 
   let showDerivative = false;
-  let maxCodes = 5;
+  export let maxCodes = 5;
   export let currentSources = [];
 
   onMount(() => {
