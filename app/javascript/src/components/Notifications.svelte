@@ -43,7 +43,7 @@
 
 <div class="notifications dropdown mb-1/8 mbl:mb-0 mbl:mr-1/8" data-dropdown>
   <div data-action="toggle-dropdown" on:click={ getNotifications }>
-    <div class="notifications__icon">
+    <div class="notifications__label">
       <Bell animating={ active } />
     </div>
 
@@ -86,13 +86,3 @@
     { /if }
   </div>
 </div>
-
-
-
-<style lang="scss">
-  .notifications {
-    :global(svg) {
-      height: 1.5rem;
-    }
-  }
-</style>

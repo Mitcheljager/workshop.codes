@@ -56,10 +56,39 @@
   }
 }
 
-.notifications__icon {
-  height: 1.5rem;
+@keyframes rotate-bell {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0); }
+}
+
+@keyframes move-knocker {
+  0% { transform: translateX(0); }
+  33% { transform: translateX(-20%); }
+  66% { transform: translateX(20%); }
+  100% { transform: translateX(0); }
+}
+
+.notifications__label {
   margin-top: .25rem;
   cursor: pointer;
+
+  svg {
+    height: 1.5rem;
+    transform-origin: top center;
+
+    &.animating {
+      animation: rotate-bell 600ms;
+
+      path {
+        &.knocker {
+          animation: move-knocker 500ms 200ms;
+        }
+      }
+    }
+  }
 
   @include hover-stack {
     path {
