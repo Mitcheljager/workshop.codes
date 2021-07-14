@@ -36,6 +36,7 @@
   </head>
 
   <body class="<%= accessibility_settings if current_user.present? %> <%= "wiki" if is_wiki? %>">
+    <%= render "flash" %>
     <%= render "header" %>
     <%= render "wiki/header" if is_wiki? %>
 
