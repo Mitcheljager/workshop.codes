@@ -6,7 +6,9 @@ class Derivative < ApplicationRecord
   validates :derivation_id, presence: true
   validate :no_self_derive
   validates :source, uniqueness: { scope: :derivation, message: 'already derived from for this post.' }, if: -> { source.present? }
-  validates :source_code, uniqueness: { scope: :derivation, message: 'already derived from for this post.' }
+  validates :source_code, uniqueness: { scope: :derivation, message: 'already derived from for this post.', case_sensitive: false }
+
+  before_save { source_code&.upcase! }
 
   private
 

@@ -46,7 +46,7 @@ RSpec.describe Derivative, type: :model do
         deriv2 = build(:derivative)
         deriv2.source = nil
         deriv2.derivation = deriv1.derivation
-        deriv2.source_code = deriv1.source_code
+        deriv2.source_code = deriv1.source_code.downcase
         expect(deriv2).not_to be_valid
       end
 
