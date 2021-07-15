@@ -14,7 +14,14 @@ class NotificationsController < ApplicationController
       notification.update(has_been_read: true)
     end
 
-    render @notifications, layout: false
+    render json: @notifications.map { |n|
+      {
+        content: markdown(n.content),
+        created_at: n.created_at,
+        go_to: n.go_to
+      }
+    },
+    layout: false
   end
 
   def get_unread_notifications_count

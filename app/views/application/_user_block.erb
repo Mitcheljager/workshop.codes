@@ -1,6 +1,8 @@
 <div class="user-block">
   <% if current_user %>
-    <%= render "notifications/dropdown" %>
+    <%= svelte_component "Notifications", { viewAllPath: notifications_path } do %>
+      aaa
+    <% end %>
     
     <div class="dropdown" data-dropdown>
       <%= link_to current_user.username.split("#")[0], account_path, class: "user-block__action mbl:mr-1/8 mb-1/4 mbl:mb-0", data: { action: "toggle-dropdown" } %>
