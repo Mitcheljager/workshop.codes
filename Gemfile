@@ -47,11 +47,11 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", "~> 2.13"
   gem "database_cleaner"
-  gem "factory_bot_rails", "~> 4.0"
+  gem "factory_bot_rails", "~> 6.2"
   gem "faker"
-  gem "rspec-rails", "~> 4.0.1"
+  gem "rspec-rails", "~> 4.0.2"
   gem "selenium-webdriver"
-  gem "shoulda-matchers", "~> 3.1"
+  gem "shoulda-matchers", "~> 4.5"
   gem "sqlite3", "1.4.2"
 end
 

@@ -6,9 +6,11 @@ import WebpackerSvelte from "webpacker-svelte"
 import Dropzone from "../src/components/form/Dropzone.svelte"
 import ControlsForm from "../src/components/form/Controls.svelte"
 import SnippetForm from "../src/components/form/Snippet.svelte"
+import TagsForm from "../src/components/form/Tags.svelte"
+import DerivativesForm from "../src/components/form/Derivatives.svelte"
 import Notifications from "../src/components/Notifications.svelte"
 
-WebpackerSvelte.setup({ Dropzone, ControlsForm, SnippetForm, Notifications })
+WebpackerSvelte.setup({ Dropzone, ControlsForm, SnippetForm, TagsForm, DerivativesForm, Notifications })
 
 import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"
@@ -36,6 +38,11 @@ document.addEventListener("turbolinks:load", function() {
 document.addEventListener("turbolinks:before-cache", function() {
   inscrybMde.destroy()
 
+  const svelteComponents = document.querySelectorAll("[data-svelte-component]")
+  svelteComponents.forEach(element => element.innerHTML = null)
+})
+
+document.addEventListener("turbolinks:click", () => {
   const svelteComponents = document.querySelectorAll("[data-svelte-component]")
   svelteComponents.forEach(element => element.innerHTML = null)
 })

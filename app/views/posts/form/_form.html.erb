@@ -18,6 +18,8 @@
         <p class="mt-0"><small><%= t("posts.form.code_change.explanation_html", article_url: "https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code") %></small></p>
         <p class="mt-0"><small><%= t("posts.form.code_change.current_code_html", current_code: @post.code) %></small></p>
       </div>
+
+      <%= svelte_component "DerivativesForm", { currentSources: post.source_derivs.map(&:source_code), maxCodes: Post::MAX_SOURCES } %>
     </div>
 
     <%= render "posts/form/tabs", form: form %>

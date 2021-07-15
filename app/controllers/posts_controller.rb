@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :collection, :revisions, :blocks).find_by("upper(posts.code) = ?", params[:code].upcase)
+    @post = Post.includes(:user, :collection, :revisions, :blocks, :derivations, :sources).find_by_code(params[:code])
 
     not_found and return if @post && (@post.private? || @post.draft?) && @post.user != current_user
 
@@ -104,6 +104,7 @@ class PostsController < ApplicationController
     parse_carousel_video
 
     if @post.save
+      parse_derivatives
       @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
 
       create_activity(:create_post, post_activity_params)
@@ -135,6 +136,7 @@ class PostsController < ApplicationController
     parse_carousel_video
 
     if @post.update(post_params)
+      parse_derivatives
       create_activity(:update_post, post_activity_params)
       create_collection if post_params[:new_collection] != ""
       update_email_notifications
@@ -178,7 +180,7 @@ class PostsController < ApplicationController
   end
 
   def copy_code
-    @post = Post.find_by("upper(code) = ?", params[:code].upcase)
+    @post = Post.find_by_code(params[:code])
     unless @post.present?
       @revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
       @post = @revision.post if @revision.present?
@@ -230,6 +232,23 @@ class PostsController < ApplicationController
 
   def parse_carousel_video
     params[:post][:carousel_video] = youtube_to_video_id(post_params[:carousel_video])
+  end
+
+  def parse_derivatives
+    return unless params[:post][:derivatives]
+    codes = params[:post][:derivatives].split(",")
+    trimmed_codes = codes[0, Post::MAX_SOURCES]
+    Derivative.where(derivation: @post).where.not(source_code: trimmed_codes).destroy_all
+    trimmed_codes.each do |code|
+      deriv = Derivative.find_by(source_code: code, derivation: @post)
+      unless deriv.present?
+        source_post = Post.find_by_code code
+        Derivative.create!(source_code: code, derivation: @post, source: source_post)
+      end
+    end
+    if codes.count > Post::MAX_SOURCES
+      flash[:warning] = "More sources were provided than allowed, so only the first #{Post::MAX_SOURCES} sources were saved."
+    end
   end
 
   def not_found
