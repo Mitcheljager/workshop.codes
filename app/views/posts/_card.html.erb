@@ -1,7 +1,7 @@
 <% cache_unless current_user, [current_locale, post, "card"] do %>
   <div class="card" data-code="<%= post.code %>">
     <%= link_to post_path(post.code), title: post.title do %>
-      <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: post.title, width: 300, height: 171, loading: "lazy", class: "mb-1/4" %>
+      <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: post.title, width: 300, height: 171, loading: "lazy", class: "card__image" %>
     <% end %>
 
     <div class="flex mb-auto">
@@ -10,7 +10,7 @@
 
         <small class="card__author">
           <%= t("post.author") %>
-          <%= link_to post.user.username.split("#")[0], user_profile_path(post.user), rel: "author" %>
+          <%= link_to post.user.clean_username, user_profile_path(post.user), rel: "author" %>
         </small>
       </div>
 

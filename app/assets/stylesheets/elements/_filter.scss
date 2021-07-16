@@ -149,7 +149,7 @@
     font-size: 12px;
 
     @include hover-stack {
-      background: lighten($primary, 5%);
+      filter: brightness(1.15);
       color: $pure-white;
     }
   }

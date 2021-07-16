@@ -52,8 +52,8 @@ module PostsHelper
     return false
   end
 
-  def tabs_content_tag(name, alt_url = nil)
-    tag.div class: "tabs-content #{ "tabs-content--active" if is_active_tab?(alt_url || name) }",
+  def tabs_content_tag(name, alt_url = nil, extra_class = "item__content")
+    tag.div class: "#{ extra_class } tabs-content #{ "tabs-content--active" if is_active_tab?(alt_url || name) }",
             data: { tab: name, partial: name } do
       yield
     end

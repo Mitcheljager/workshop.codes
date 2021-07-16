@@ -67,9 +67,9 @@ code {
 }
 
 pre {
-  background: $bg-dark;
+  background: darken($bg-dark, 5%);
   padding: .5rem;
-  border-radius: $border-radius;
+  border-radius: $border-radius / 2;
   line-height: 2rem;
 
   code {
@@ -100,7 +100,7 @@ strong {
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: calc(#{ map-get($media-min-widths, lg) - $margin } + 20vw);
+  max-width: calc(#{ map-get($media-min-widths, lg) } - #{ $margin } + 20vw);
   margin: 0 auto;
   padding: 0 calc(10vw - #{ $margin / 2 });
 

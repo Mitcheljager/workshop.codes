@@ -8,7 +8,7 @@
 
   <div class="profile-banner__content">
     <%= link_to user_profile_path(user), class: "profile-banner__title", rel: "author" do %>
-      <%= user.username.split("#")[0] %>
+      <%= user.clean_username %>
 
       <% if user.verified? %>
         <div class="profile-banner__verified">

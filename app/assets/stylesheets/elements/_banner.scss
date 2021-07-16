@@ -3,7 +3,7 @@
   padding: $margin / 3 $margin / 4;
   text-align: center;
   background: darken($bg-dark, 5%);
-  border-radius: $border-radius * 2;
+  border-radius: $border-radius;
 
   &::before {
     content: "";

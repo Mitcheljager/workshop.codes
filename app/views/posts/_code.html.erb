@@ -1,4 +1,4 @@
-<% item_class ||= "item__code" %>
+<% item_class ||= "code" %>
 
 <button class="<%= item_class %>" data-action="copy-to-clipboard" data-target="<%= post.code %>">
   <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger" %>
@@ -8,6 +8,6 @@
   </span>
 
   <% if post.ptr? %>
-    <div class="item__code-flag">PTR</div>
+    <div class="code__flag">PTR</div>
   <% end %>
 </button>

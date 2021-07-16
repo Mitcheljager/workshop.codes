@@ -1,9 +1,9 @@
 <% begin %>
-  <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
-    <%= render "carousel_item", image: @ordered_images.first, index: 0 %>
-  <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
-    <div class="carousel">
-      <div class="carousel__wrapper">
+  <div class="carousel">
+    <div class="carousel__wrapper">
+      <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
+        <%= render "carousel_item", image: @ordered_images.first, index: 0 %>
+      <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
         <div data-role="carousel">
           <% if @post.carousel_video.present? %>
             <div class="carousel__item">
@@ -30,13 +30,13 @@
             <%= image_tag ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [120, 120]).processed.key, aria: { label: "Thumbnail image for '#{ @post.title }'" }, height: 120, width: 120 %>
           </div>
         <% end %>
-      </div>
+      <% elsif !@ordered_images.present? && @post.carousel_video.present? %>
+        <div>
+          <%= render "carousel_video" %>
+        </div>
+      <% end %>
     </div>
-  <% elsif !@ordered_images.present? && @post.carousel_video.present? %>
-    <div>
-      <%= render "carousel_video" %>
-    </div>
-  <% end %>
+  </div>
 <% rescue %>
   <p><small><em>Images are temporarily unavailable.</em></small></p>
 <% end %>

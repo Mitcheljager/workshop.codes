@@ -25,7 +25,7 @@
   .post-comment {
     margin-top: $margin / 2;
     padding-left: $margin / 4;
-    border-left: 1px solid $border-color;
+    border-left: 1px solid $body-bg;
 
     @include media-min(sm) {
       padding-left: $margin / 2;

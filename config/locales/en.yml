@@ -243,7 +243,7 @@ en:
       submitting: Submitting...
 
   post:
-    author: By
+    author: by
     categories: Categories
     expired:
       title: Possibly expired

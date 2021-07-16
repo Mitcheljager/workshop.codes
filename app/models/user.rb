@@ -77,4 +77,8 @@ class User < ApplicationRecord
 
     user if user.save
   end
+
+  def clean_username
+    self.username.split("#")[0]
+  end
 end

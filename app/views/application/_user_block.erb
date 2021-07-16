@@ -1,11 +1,9 @@
 <div class="user-block">
   <% if current_user %>
-    <%= svelte_component "Notifications", { viewAllPath: notifications_path } do %>
-      aaa
-    <% end %>
+    <%= svelte_component "Notifications", { viewAllPath: notifications_path } %>
     
     <div class="dropdown" data-dropdown>
-      <%= link_to current_user.username.split("#")[0], account_path, class: "user-block__action mbl:mr-1/8 mb-1/4 mbl:mb-0", data: { action: "toggle-dropdown" } %>
+      <%= link_to current_user.clean_username, account_path, class: "user-block__action mbl:mr-1/16 mb-1/4 mbl:mb-0", data: { action: "toggle-dropdown" } %>
 
       <div class="dropdown__content lg-down:dropup" data-dropdown-content>
         <%= link_to t("account.navigation.overview"), account_path, class: "dropdown__item text-small" %>
@@ -24,7 +22,7 @@
       </div>
     </div>
   <% else %>
-    <%= link_to t("navigation.login"), login_path, class: "user-block__action mbl:mr-1/8 mb-1/4 mbl:mb-0" %>
+    <%= link_to t("navigation.login"), login_path, class: "user-block__action mbl:mr-1/16 mb-1/4 mbl:mb-0" %>
   <% end %>
 
   <%= render "locale_picker" %>

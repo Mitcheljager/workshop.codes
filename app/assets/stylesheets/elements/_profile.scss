@@ -45,7 +45,7 @@
   width: 140px;
   margin: 0 auto;
   border-radius: 50%;
-  background: $bg-dark;
+  background: darken($bg-dark, 5%);
   overflow: hidden;
   z-index: 1;
 

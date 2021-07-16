@@ -1,4 +1,4 @@
-<h2>Collections made by <%= tag.strong @user.username.split("#")[0] %></h2>
+<h2>Collections made by <%= tag.strong @user.clean_username %></h2>
 
 <div class="cards">
   <% @user.collections.each do |collection| %>
@@ -10,4 +10,4 @@
   <% end %>
 </div>
 
-<%= tag.em "#{ @user.username.split("#")[0] } has not yet created any collections" if @user.collections.none? %>
+<%= tag.em "#{ @user.clean_username } has not yet created any collections" if @user.collections.none? %>
