@@ -11,7 +11,7 @@
     <% end %>
 
     <div>
-      <%= user.username.split("#")[0] %> <small class="text-base">(<%= user.posts.public?.size %>)</small>
+      <%= user.clean_username %> <small class="text-base">(<%= user.posts.public?.size %>)</small>
     </div>
   <% end %>
 <% end %>

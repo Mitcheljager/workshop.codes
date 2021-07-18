@@ -65,11 +65,11 @@
 
   @include media-min(sm) {
     display: block;
-    margin: 0 $margin / 4 0 auto;
+    margin: 0 $margin / 8 0 auto;
   }
 
   @include media-min(mbl) {
-    margin: 0 $margin / 4;
+    margin: 0 $margin / 8;
   }
 
   &--is-active {

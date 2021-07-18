@@ -84,7 +84,7 @@
   }
 
   .modal--content-width & {
-    max-width: map-get($media-min-widths, lg) + $margin;
+    max-width: calc(#{ map-get($media-min-widths, lg) } + #{ $margin });
     max-height: 90vh;
     margin-top: 5vh;
     overflow: auto;

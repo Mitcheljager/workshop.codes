@@ -207,7 +207,7 @@
   background: $primary;
 
   &.active {
-    background: lighten($primary, 10%);
+    filter: brightness(1.15);
   }
   
   .fa-eye {

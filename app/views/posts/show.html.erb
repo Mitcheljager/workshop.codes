@@ -4,103 +4,81 @@
 <% content_for :bg_size, "medium" %>
 
 <div data-role="tabs" data-tabs-set-url="true">
-  <article>
-    <div class="text-left p-0">
-      <div class="pt-1/2 item item--single">
-        <h1 class="item__title text-black">
-          <%= @post.title %>
-
-          <%= render "favorites/form", post: @post, color: "black" %>
-        </h1>
-
-        <%= render "code", post: @post %>
-      </div>
-    </div>
-
-    <div class="banner p-0 mb-1/1">
-      <div class="item__info">
-        <%= link_to user_profile_path(@post.user), class: "item__author mb-1/4 md:mb-0" do %>
+  <article class="item item--show">
+    <div class="item__header">
+      <div>
+        <%= link_to user_profile_path(@post.user), class: "item__author" do %>
           <div class="item__avatar <%= "profile-image--empty" unless @post.user.profile_image.attached? || @post.user.provider_profile_image.present? %>">
             <%= render "profiles/image", user: @post.user, size: 32 %>
           </div>
 
-          <%= @post.user.username.split("#")[0] %>
+          <%= @post.user.clean_username %>
         <% end %>
 
-        <div>
-          <% if has_player_range?(@post) %>
-            <div class="item__info-item">
-              <% if @post.min_players == @post.max_players %>
-                <strong><%= @post.min_players %></strong>
-              <% else %>
-                <strong><%= @post.min_players %></strong> to <strong><%= @post.max_players %></strong>
-              <% end %>
-              Player<%= "s" if @post.max_players > 1 %>
-            </div>
-          <% end %>
+        <h1 class="item__title item__title--large">
+          <%= @post.title %>
 
-          <div class="item__info-item" title="<%= @post.last_revision_created_at %>">
-            <small><em>Last updated <%= time_ago_in_words(@post.last_revision_created_at) %> ago</em></small>
-          </div>
-        </div>
+        </h1>
       </div>
 
-      <%= render "current_user_blocks" if current_user == @post.user %>
-      <%= render "expired" if @post.expired? %>
+      <%= render "favorites/form", post: @post %>
 
-      <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, "tabs", current_locale] do %>
-        <%= render "tabs" %>
-      <% end %>
+      <%= render "code", post: @post %>
     </div>
 
-    <% cache_unless params[:tab].present?, [@post, "description", current_locale] do %>
-      <%= tabs_content_tag("description", "") do %>
-        <%= render "carousel" %>
+    <%= render "current_user_blocks" if current_user == @post.user %>
+    <%= render "expired" if @post.expired? %>
+
+    <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, "tabs", current_locale] do %>
+      <%= render "tabs" %>
+    <% end %>
+
+    <% cache_unless params[:tab].present?, [@post, "description"] do %>
+      <%= tabs_content_tag("description", "", "") do %>
+        <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
         
-        <div class="item__description">
-          <%= sanitized_markdown(@post.description) %>
-
-          <div class="item item--bottom">
-            <div class="item__details">
-              <%= render "profiles/profile", user: @post.user, small: true %>
-
-              <%= render "details" %>
-            </div>
+        <% if @post.description.present? %>
+          <div class="item__content item__description">
+            <%= sanitized_markdown(@post.description) %>
           </div>
-        </div>
+        <% end %>
 
-        <%= render "similar_to" %>
+        <div class="item__tray">
+          <%= render "details" %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% cache_unless params[:tab].present?, [@post, "controls"] do %>
+      <% if @post.parsed_controls.any? %>
+        <%= tabs_content_tag("controls") do %>
+          <%= render "controls" %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @post.snippet.present? %>
+      <%= tabs_content_tag("snippet") do %>
+        <%= render "snippet" %>
+      <% end %>
+    <% end %>
+
+    <% if @post.collection && @post.collection.posts.visible?.many? %>
+      <%= tabs_content_tag("collection") do %>
+        <div class="infinite-scroll"><div class="spinner"></div></div>
+      <% end %>
+    <% end %>
+
+    <%= tabs_content_tag("comments") do %>
+      <div class="infinite-scroll"><div class="spinner"></div></div>
+    <% end %>
+    
+    <% if @revisions_count > 1 %>
+      <%= tabs_content_tag("update-log") do %>
+        <div class="infinite-scroll"><div class="spinner"></div></div>
       <% end %>
     <% end %>
   </article>
 
-  <% cache_unless params[:tab].present?, [@post, "controls"] do %>
-    <% if @post.parsed_controls.any? %>
-      <%= tabs_content_tag("controls") do %>
-        <%= render "controls" %>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <% if @post.snippet.present? %>
-    <%= tabs_content_tag("snippet") do %>
-      <%= render "snippet" %>
-    <% end %>
-  <% end %>
-
-  <% if @post.collection && @post.collection.posts.visible?.many? %>
-    <%= tabs_content_tag("collection") do %>
-      <div class="infinite-scroll"><div class="spinner"></div></div>
-    <% end %>
-  <% end %>
-
-  <%= tabs_content_tag("comments") do %>
-    <div class="infinite-scroll"><div class="spinner"></div></div>
-  <% end %>
-  
-  <% if @revisions_count > 1 %>
-    <%= tabs_content_tag("update-log") do %>
-      <div class="infinite-scroll"><div class="spinner"></div></div>
-    <% end %>
-  <% end %>
+  <%= render "similar_to" %>
 </div>

@@ -18,10 +18,9 @@
 }
 
 .carousel__wrapper {
-  background: var(--background);
-  box-shadow: 0 0 0 $margin / 4 var(--background);
-  border-radius: $border-radius;
+  background: $bg-darker;
   overflow: hidden;
+  box-shadow: $shadow;
 
   &--is-inactive {
     display: none;
@@ -57,7 +56,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: $margin / 4;
-  margin-top: $margin / 4;
+  padding: $margin / 4;
 
   @include media-min(sm) {
     grid-template-columns: repeat(7, 1fr);
@@ -72,7 +71,8 @@
   overflow: hidden;
   cursor: pointer;
   border-radius: $border-radius;
-  background: var(--bg-darker);
+  background: $bg-darker;
+  box-shadow: $shadow;
 
   @include hover-stack {
     opacity: 0.75;

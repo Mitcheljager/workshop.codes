@@ -1,4 +1,4 @@
-<% content_for :page_title, @user.username.split("#")[0] %>
+<% content_for :page_title, @user.clean_username %>
 <% content_for :bg_size, "large" if @user.banner_image.attached? %>
 <% content_for :replace_body_bg, "user" if @user.banner_image.attached? %>
 

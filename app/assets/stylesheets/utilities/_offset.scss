@@ -4,7 +4,8 @@ $offset-values: (
   1\/1: $margin,
   1\/2: $margin / 2,
   1\/4: $margin / 4,
-  1\/8: $margin / 8
+  1\/8: $margin / 8,
+  1\/16: $margin / 16
 );
 
 $properties: (
@@ -48,6 +49,6 @@ $directions: (
   margin-top: $margin;
 
   @include media-min(sm) {
-    margin-top: $margin * 2;
+    margin-top: $margin * 1.75;
   }
 }

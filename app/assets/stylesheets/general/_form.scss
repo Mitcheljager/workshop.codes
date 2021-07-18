@@ -4,7 +4,7 @@
   width: 100%;
   padding: .5em 1em;
   border: 0;
-  border-radius: $border-radius;
+  border-radius: $border-radius / 2;
   font-family: $font-stack;
   font-size: $font-size-base;
   color: $white;
@@ -56,7 +56,7 @@
   width: 100%;
   min-height: 600px;
   padding: $margin / 2;
-  border-radius: $border-radius;
+  border-radius: $border-radius / 2;
 
   &--small {
     min-height: 300px;
@@ -120,7 +120,7 @@
   width: 100%;
   padding: ($margin / 3) 2.5em ($margin / 3) ($margin / 3);
   border: 0;
-  border-radius: $border-radius;
+  border-radius: $border-radius / 2;
   background: $bg-dark;
   font-size: $font-size-base;
   color: $text-color;

@@ -21,7 +21,7 @@
     grid-gap: 0;
     margin: 0 $margin / -4;
     overflow-x: hidden;
-    padding-bottom: $margin / 2;
+    padding-bottom: $margin / 1.5;
 
     @include media-min(xs) {
       grid-template-columns: repeat(30, 50%);
@@ -64,14 +64,17 @@
 }
 
 .card {
-  @extend .banner;
   display: flex;
   flex-direction: column;
   padding: $margin / 4;
+  border: 0;
+  border-radius: $border-radius;
+  background: darken($bg-dark, 5%);
   text-align: left;
   color: $white;
   text-decoration: none;
-  border: 0;
+  overflow: hidden;
+  box-shadow: $shadow;
 
   &::before {
     left: 2rem;
@@ -90,25 +93,25 @@
     }
   }
 
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    background: $body-bg;
-    border-radius: $border-radius;
-    font-size: 12px;
-
-    .simple-view & {
-      display: none;
-    }
-  }
-
   a[href]:hover,
   a[href]:active,
   a[href]:focus {
     img {
       filter: brightness(1.15);
     }
+  }
+}
+
+.card__image {
+  display: block;
+  width: calc(100% + #{ $margin / 2 });
+  height: auto;
+  margin: -#{ $margin / 4 } -#{ $margin / 4 } $margin / 4;
+  background: $body-bg;
+  font-size: 12px;
+
+  .simple-view & {
+    display: none;
   }
 }
 

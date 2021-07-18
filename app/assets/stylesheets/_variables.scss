@@ -1,10 +1,12 @@
 $white: var(--white);
 $pure-white: #fff;
 $black: #000;
+$gray: #90989c;
+$gray-dark: #6a7277;
 $red: #b33834;
 $orange: #e89930;
 $body-bg: #1f2326;
-$primary: #3fbf74;
+$primary: var(--primary);
 $bg-dark: #353b3f;
 $bg-darker: var(--bg-darker);
 $text-color: var(--text-color);
@@ -17,8 +19,8 @@ $ko-fi: #ff5e5b;
 
 $font-stack: var(--font-stack);
 
-$margin: 60px;
-$border-radius: 5px;
+$margin: 4rem;
+$border-radius: 1rem;
 $logo-height: 80px;
 $search-height: 42px;
 $wiki-search-height: 80px;
@@ -26,7 +28,13 @@ $header-height: $margin;
 $code-width: 150px;
 $thumbnail-width: 120px;
 $thumbnail-height: $thumbnail-width / 16 * 9;
-$favorite-width: 22px + $margin / 2;
+$favorite-width: 3.5rem;
+
+$shadow: 0 2px 1px rgba(0, 0, 0, .1),
+         0 4px 2px rgba(0, 0, 0, .1),
+         0 8px 4px rgba(0, 0, 0, 0.1),
+         0 16px 8px rgba(0, 0, 0, 0.1),
+         0 32px 16px rgba(0, 0, 0, 0.1);
 
 $font-size-base: var(--font-size-base);
 $font-size-small: var(--font-size-small);
@@ -42,12 +50,11 @@ $media-min-widths: (
   xl: 1200px
 );
 
-$gray: #90989c;
-$gray-dark: #6a7277;
-
 :root {
+  --primary: #3fbf74;
   --white: #dfdfdf;
   --text-color: #{ $gray };
+  --text-color-light: #{ lighten($gray, 10%) };
   --text-color-dark: #{ $gray-dark };
   --bg-darker: #{ darken($body-bg, 5%) };
   --font-size-base: 16px;
@@ -67,4 +74,8 @@ $gray-dark: #6a7277;
 .large-fonts {
   --font-size-base: 19px;
   --font-size-small: 16px;
+}
+
+.wiki {
+  --primary: #00abff;
 }

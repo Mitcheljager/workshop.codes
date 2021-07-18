@@ -35,7 +35,7 @@
     <%= render "analytics_code" %>
   </head>
 
-  <body class="<%= accessibility_settings if current_user.present? %>">
+  <body class="<%= accessibility_settings if current_user.present? %> <%= "wiki" if is_wiki? %>">
     <%= render "header" %>
     <%= render "wiki/header" if is_wiki? %>
 
