@@ -225,14 +225,6 @@
 
   &--small {
     font-size: 18px;
-
-    .item--single & {
-      font-size: 18px;
-
-      @include media-min(sm) {
-        font-size: 24px;
-      }
-    }
   }
 
   &--large {
@@ -585,6 +577,10 @@
     code {
       white-space: pre;
     }
+  }
+
+  hr {
+    background: lighten($bg-dark, 10%);
   }
 }
 

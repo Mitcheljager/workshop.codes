@@ -1,6 +1,6 @@
 <div class="revision">
-  <div class="item item--single p-0 mt-1/2">
-    <div class="item__title item__title--small">
+  <div class="item item--revision p-0 mt-1/2">
+    <div class="item__title item__title--small mt-0">
       <div>
         <div class="dropdown mr-1/4" data-dropdown>
           <%= link_to "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } do %>
@@ -20,7 +20,7 @@
         <%= revision.version if revision.version.present? %>
       </div>
 
-      <div class="ml-auto">
+      <div class="ml-auto mr-1/4">
         <span title="Created at: <%= revision.created_at %> <%= "| Last updated at: " + revision.updated_at.to_s if revision.updated_at != revision.created_at %>">
           <small><%= time_ago_in_words(revision.created_at) %> ago</small>
         </span>

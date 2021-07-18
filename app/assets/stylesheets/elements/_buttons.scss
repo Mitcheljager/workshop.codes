@@ -47,7 +47,7 @@
 
   &--secondary {
     color: $white;
-    background: $bg-dark;
+    background: darken($bg-dark, 5%);
   }
 
   &--dark {
