@@ -2,7 +2,7 @@
   position: relative;
   padding: $margin / 3 $margin / 4;
   text-align: center;
-  background: darken($bg-dark, 5%);
+  background: $bg-dark;
   border-radius: $border-radius;
 
   &::before {
