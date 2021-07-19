@@ -50,6 +50,10 @@
       box-shadow: 0 0 0 5px var(--bg-darker);
     }
   }
+
+  .banner & {
+    background: darken($bg-dark, 5%);
+  }
 }
 
 .form-textarea {
