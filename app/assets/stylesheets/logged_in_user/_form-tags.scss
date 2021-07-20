@@ -2,28 +2,30 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 0 .25rem .25rem .25rem;
+  padding: 0 .35rem .15rem .35rem;
 }
 
 .form-tags__input {
   @include inline-input;
   width: initial;
-  margin-top: .25rem;
-  padding: .2rem .25rem;
+  margin-top: .35rem;
+  padding: .35rem;
 }
 
 .form-tags__tag {
   display: flex;
   white-space: nowrap;
   border-radius: .1rem;
-  margin-right: .25rem;
+  margin-right: .35rem;
   margin-top: .25rem;
-  padding: .2rem .13rem .15rem .2rem;
-  background: $primary;
+  padding: .25rem .15rem .25rem .2rem;
+  border-radius: $border-radius / 4;
+  background: lighten($bg-dark, 5%);
+  line-height: 1em;
 }
 
 .form-tags__remove-tag {
-  padding: 0 .15rem;
+  padding: 0 .25rem;
   background: transparent;
   border: none;
   color: $white;
