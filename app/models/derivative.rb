@@ -1,5 +1,5 @@
 class Derivative < ApplicationRecord
-  belongs_to :source, foreign_key: "source_id", class_name: "Post", optional: true
+  belongs_to :source, -> { select(:id, :title, :code, :ptr) }, foreign_key: "source_id", class_name: "Post", optional: true
   belongs_to :derivation, foreign_key: "derivation_id", class_name: "Post"
 
   validates :source_code, presence: true

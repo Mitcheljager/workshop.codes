@@ -1,0 +1,21 @@
+<hr class="small" id="sources" />
+
+<h3 class="mb-1/4">Sources</h2>
+
+<p><em><small>This code uses parts of or entire other codes. This could be because they built off of them, used parts of them, used them for inspiration, or other reasons.</small></em></p>
+
+<div class="derivatives">
+  <% @post.source_derivs.each do |derivative| %>
+    <% if derivative.source %>
+      <%= link_to post_path(derivative.source.code), class: "derivative" do %>
+        <div class="derivative__title"><%= derivative.source.title.truncate(25) %></div>
+        <div class="derivative__code"><%= derivative.source.code %></div>
+      <% end %>
+    <% else %>
+      <div class="derivative">
+        <div class="derivative__title"><em>Not on Workshop.codes</em></div>
+        <div class="derivative__code"><%= derivative.source_code %></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

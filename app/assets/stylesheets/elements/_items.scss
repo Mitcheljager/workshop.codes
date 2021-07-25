@@ -197,9 +197,6 @@
 
 .item__title {
   grid-area: title;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: $margin / 3 0;
   margin-top: auto;
   font-size: 131%;
@@ -220,6 +217,13 @@
   }
 
   .item--large & {
+    padding-left: 0;
+  }
+
+  .item--revision & {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding-left: 0;
   }
 
@@ -258,6 +262,13 @@
   .simple-view & {
     padding: $margin / 3;
   }
+}
+
+.item__sub-title {
+  display: block;
+  font-family: $font-stack;
+  font-size: 1rem;
+  line-height: 1rem;
 }
 
 .item__details {
