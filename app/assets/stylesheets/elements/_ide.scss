@@ -11,26 +11,6 @@
     margin-top: 0;
     z-index: 10;
   }
-
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 4rem;
-    bottom: 0;
-    height: 50%;
-    width: calc(100% - 8rem);
-    border-radius: $border-radius * 2;
-    z-index: -1;
-    opacity: .45;
-    background: $black;
-    box-shadow: 0 0 2rem 2rem $black;
-
-    @include media-min(sm) {
-      left: 6rem;
-      width: calc(100% - 12rem);
-    }
-  }
 }
 
 .ide__content {
