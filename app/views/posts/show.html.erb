@@ -85,6 +85,12 @@
         <div class="infinite-scroll"><div class="spinner"></div></div>
       <% end %>
     <% end %>
+
+    <% if @derivations_count %>
+      <%= tabs_content_tag("derivations") do %>
+        <div class="infinite-scroll"><div class="spinner"></div></div>
+      <% end %>
+    <% end %>
   </article>
 
   <%= render "similar_to" %>

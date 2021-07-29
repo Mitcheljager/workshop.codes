@@ -56,6 +56,8 @@ class PostsController < ApplicationController
 
         @comments_count = @post.comments.size
         @revisions_count = @post.revisions.where(visible: true).size
+        @derivations_count = @post.derivations.size
+        
         set_post_images
       }
       format.json {
