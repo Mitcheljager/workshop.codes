@@ -40,5 +40,15 @@
         <small class="text-dark"><%= @revisions_count %></small>
       <% end %>
     <% end %>
+
+    <% if @derivations_count > 0 %>
+      <%= link_to post_tab_path(@post.code, "derivations"),
+                  class: "tabs__item #{ "tabs__item--active" if is_active_tab?("derivations") }",
+                  data: { action: "set-tab get-partial", target: "derivations", url: derived_from_path(@post.id), get_on_load: is_active_tab?("derivations") } do %>
+
+        Derivations
+        <small class="text-dark"><%= @derivations_count %></small>
+      <% end %>
+    <% end %>
   </nav>
 </div>

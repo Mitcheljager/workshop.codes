@@ -18,6 +18,11 @@
         <h1 class="item__title item__title--large">
           <%= @post.title %>
 
+          <% if @post.source_derivs.any? %>
+            <a href="#sources" class="item__sub-title" data-turbolinks="false">
+              + <%= @post.source_derivs.count %> sources
+            </a>
+          <% end %>
         </h1>
       </div>
 
@@ -37,9 +42,11 @@
       <%= tabs_content_tag("description", "", "") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
         
-        <% if @post.description.present? %>
+        <% if @post.description.present? || @post.source_derivs.any? %>
           <div class="item__content item__description">
             <%= sanitized_markdown(@post.description) %>
+
+            <%= render "derivatives/derivatives" if @post.source_derivs.any? %>
           </div>
         <% end %>
 
@@ -75,6 +82,12 @@
     
     <% if @revisions_count > 1 %>
       <%= tabs_content_tag("update-log") do %>
+        <div class="infinite-scroll"><div class="spinner"></div></div>
+      <% end %>
+    <% end %>
+
+    <% if @derivations_count > 0 %>
+      <%= tabs_content_tag("derivations") do %>
         <div class="infinite-scroll"><div class="spinner"></div></div>
       <% end %>
     <% end %>

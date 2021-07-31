@@ -113,6 +113,8 @@ Rails.application.routes.draw do
     get "c/:nice_url(/page/:page)", to: "collections#show"
     get "c/partial/:id", to: "collections#partial", as: "collection_partial"
 
+    get "derived_from/:post_id", to: "derivatives#derived_from", as: "derived_from"
+
     constraints code: /.{5,6}/ do
       resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]
       get ":code", to: "posts#show"

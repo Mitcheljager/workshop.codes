@@ -43,13 +43,13 @@
   right: 0;
   margin: .2rem 0;
   padding: .25rem;
-  background: $bg-dark;
-  border: solid 1px $border-color;
-  border-radius: .25rem;
+  background: lighten($bg-dark, 5%);
+  border-radius: $border-radius / 2;
   max-height: 20rem;
   overflow-y: auto;
   z-index: 100;
   text-align: left;
+  box-shadow: $shadow;
 
   .list-element {
     list-style: none;

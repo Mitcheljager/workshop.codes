@@ -17,17 +17,19 @@
   export let minCharsAutoComplete = 2
   export let fillValues = []
   export let fetchAutoCompleteValues = value => {
-    return new Promise(resolve => resolve([])
-  )}
+    return new Promise(resolve => resolve([]))
+  }
+
+  const storePlaceholder = placeholder
 
   let values = []
   let input = ""
   let inputElem
   let resultsList
-  let storePlaceholder = placeholder
   let autoCompletePromise = fetchAutoCompleteValues(input)
   let timer = null
   let waiting = false
+  let readOnly = false
 
   $: if (useAutoComplete && input.length >= minCharsAutoComplete) {
     clearTimeout(timer)
@@ -44,6 +46,11 @@
   function keydown(event) {
     if (event.key == "Backspace" || event.key == "Delete") {
       if (input == "") removeTag(values.length - 1)
+    }
+    
+    if (event.key == "Enter") {
+      event.preventDefault()
+      return false
     }
 
     if (useAutoComplete && !waiting && resultsList && resultsList.querySelectorAll("li.tag-item").length) inputHandleAutoComplete(event)
@@ -69,8 +76,8 @@
 
   function cleanInput(value) {
     return splitTags(value)
-      .map((tag) => cleanTag(tag))
-      .join(delimiter)
+    .map((tag) => cleanTag(tag))
+    .join(delimiter)
   }
 
   function parseInput() {
@@ -90,7 +97,7 @@
     values = [...values, value.trim()]
 
     if (tagLimit && values.length == tagLimit) {
-      inputElem.readOnly = true
+      readOnly = true
       placeholder = ""
     }
 
@@ -101,7 +108,8 @@
     values = [...values.slice(0, index), ...values.slice(index + 1)]
     placeholder = storePlaceholder
     inputElem.focus()
-    inputElem.readOnly = false
+    
+    readOnly = false
   }
 
   function splitTags(data) {
@@ -159,11 +167,11 @@
     <span animate:flip={{ duration: 100 }} class="form-tags__tag">
       { value }
 
-      <button
+      <div
         class="form-tags__remove-tag"
         on:click|preventDefault={ () => removeTag(i) }>
         &#215;
-      </button>
+      </div>
     </span>
   { /each }
 
@@ -173,6 +181,7 @@
     bind:value={ input }
     on:input={ parseInput }
     on:keydown={ keydown }
+    { readOnly }
     { placeholder }
     class="form-tags__input" />
 
@@ -186,23 +195,24 @@
 { #if useAutoComplete && !waiting && input.length >= minCharsAutoComplete }
   <div class="form-tags-autocomplete-results__anchor">
     <ul bind:this={resultsList} class="form-tags-autocomplete-results">
-      {#await autoCompletePromise}
+      { #await autoCompletePromise }
         <li class="list-element"><strong class="m-0">Searching...</strong></li>
-      {:then autoCompleteValues}
-        {#if autoCompleteValues.length}
-          {#each autoCompleteValues.slice(0, 5) as result, index}
+      { :then autoCompleteValues }
+        { #if autoCompleteValues.length }
+          { #each autoCompleteValues.slice(0, 5) as result, index }
             <li
               class="list-element tag-item"
               tabindex="-1"
-              on:keydown={(event) => navAutoComplete(event, index, result.label, autoCompleteValues.length)}
-              on:click={() => addTag(result.label)}>
+              on:keydown={ (event) => navAutoComplete(event, index, result.label, autoCompleteValues.length) }
+              on:click={ () => addTag(result.label) }>
+
               { @html result.html }
             </li>
-          {/each}
-        {:else}
-          <li class="list-element"><span class="m-0">No results on Workshop.codes</span></li>
-        {/if}
-      {:catch error}
+          { /each }
+        { :else }
+          <li class="list-element"><em>No results on Workshop.codes, but you can still add the code.</em></li>
+        { /if }
+      { :catch error }
         <li class="list-element">
           <strong class="m-0">
             Something went wrong. Try again later.
@@ -210,9 +220,9 @@
 
           <br />
 
-          <span class="m-0"><small>{error}</small></span>
+          <span class="m-0"><small>{ error }</small></span>
         </li>
-      {/await}
+      { /await }
     </ul>
   </div>
-{/if}
+{ /if }

@@ -76,13 +76,6 @@
   overflow: hidden;
   box-shadow: $shadow;
 
-  &::before {
-    left: 2rem;
-    width: calc(100% - 4rem);
-    bottom: .5rem;
-    box-shadow: 0 0 1.25rem 1.25rem $black;
-  }
-
   &[href]:hover,
   &[type]:hover {
     background: darken($bg-dark, 2%);
