@@ -86,7 +86,7 @@
       <% end %>
     <% end %>
 
-    <% if @derivations_count %>
+    <% if @derivations_count > 0 %>
       <%= tabs_content_tag("derivations") do %>
         <div class="infinite-scroll"><div class="spinner"></div></div>
       <% end %>

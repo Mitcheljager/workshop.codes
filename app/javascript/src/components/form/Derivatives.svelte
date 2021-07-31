@@ -76,7 +76,7 @@
         onlyCaps={ true }
         tagLimit={ maxCodes }
         useAutoComplete={ true }
-        fetchAutoCompleteValues={handleAutoCompleteRequest } />
+        fetchAutoCompleteValues={ handleAutoCompleteRequest } />
     </div>
   { /if }
 </div>

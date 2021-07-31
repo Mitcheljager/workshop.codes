@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :collection, :revisions, :blocks, :derivations, :sources).find_by_code(params[:code])
+    @post = Post.includes(:user, :collection, :revisions, :blocks, :derivations).find_by_code(params[:code])
 
     not_found and return if @post && (@post.private? || @post.draft?) && @post.user != current_user
 
