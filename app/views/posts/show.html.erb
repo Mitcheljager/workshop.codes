@@ -34,7 +34,7 @@
     <%= render "current_user_blocks" if current_user == @post.user %>
     <%= render "expired" if @post.expired? %>
 
-    <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, "tabs", current_locale] do %>
+    <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, @derivations_count, "tabs", current_locale] do %>
       <%= render "tabs" %>
     <% end %>
 
