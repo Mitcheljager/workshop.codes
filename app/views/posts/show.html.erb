@@ -38,7 +38,7 @@
       <%= render "tabs" %>
     <% end %>
 
-    <% cache_unless params[:tab].present?, [@post, "description", current_locale] do %>
+    <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs, current_locale] do %>
       <%= tabs_content_tag("description", "", "") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
         
