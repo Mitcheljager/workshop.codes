@@ -22,8 +22,13 @@
   z-index: 2000;
   transform: translateY(200%);
   animation: move-in-alert 200ms 500ms forwards;
+  max-width: min(50em, 75%);
 
   &--error {
     background: $red;
+  }
+
+  &--warning {
+    background: darken($orange, 8%);
   }
 }
