@@ -59,9 +59,9 @@ class ApplicationController < ActionController::Base
 
     if image.present?
       if params[:type] == "thumbnail"
-        url = ENV["CDN"] + image.variant(quality: 95, resize_to_fill: [120, 120]).processed.key
+        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [120, 120]).processed)
       else
-        url = ENV["CDN"] + image.variant(quality: 95, resize_to_limit: [1920, 1080]).processed.key
+        url = rails_public_blob_url(image.variant(quality: 95, resize_to_limit: [1920, 1080]).processed)
       end
 
       render json: url, layout: false
