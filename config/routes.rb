@@ -150,4 +150,12 @@ Rails.application.routes.draw do
     post :ko_fi
     get :get_ko_fi_value
   end
+
+  direct :rails_public_blob do |blob|
+    if ENV["CDN"].present?
+      File.join(ENV["CDN"], blob.key)
+    else
+      url_for(blob)
+    end
+  end
 end
