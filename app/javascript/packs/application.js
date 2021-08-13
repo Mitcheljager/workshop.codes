@@ -2,9 +2,11 @@ require("../src/remove-and-add-event-listener")
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
+import TurbolinksPrefetch from "../src/turbolinks-prefetch"
 
 Rails.start()
 Turbolinks.start()
+TurbolinksPrefetch.start()
 
 import * as analytics from "../src/analytics"
 import * as carousel from "../src/carousel"

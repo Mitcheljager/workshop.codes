@@ -10,7 +10,7 @@
 
     <hr>
 
-    <%= link_to "en - English", url_for(params.clone.permit!.merge(locale: nil)), class: "dropdown__item" %>
-    <%= link_to "ko - 한국어", url_for(params.clone.permit!.merge(locale: :ko)), class: "dropdown__item" %>
+    <%= link_to "en - English", url_for(params.clone.permit!.merge(locale: nil)), class: "dropdown__item", data: { prefetch: false } %>
+    <%= link_to "ko - 한국어", url_for(params.clone.permit!.merge(locale: :ko)), class: "dropdown__item", data: { prefetch: false } %>
   </div>
 </div>
