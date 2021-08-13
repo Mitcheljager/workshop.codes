@@ -18,9 +18,7 @@
 }
 
 .carousel__wrapper {
-  background: $bg-darker;
   overflow: hidden;
-  box-shadow: $shadow;
 
   &--is-inactive {
     display: none;
