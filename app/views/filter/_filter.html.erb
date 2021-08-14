@@ -112,7 +112,7 @@
         </div>
 
         <div class="filter__group flex mt-1/4">
-          <%= link_to t("filter.apply"), build_filter_path(nil, nil), class: "button button--ghost mr-1/4", data: { role: "filter-link" } %>
+          <%= link_to t("filter.apply"), build_filter_path(nil, nil), class: "button button--ghost mr-1/4", data: { role: "filter-link", prefetch: false } %>
 
           <% if is_filter_active? %>
             <%= link_to t("filter.remove_all"), params[:search] ? "/search/#{ params[:search] }" : posts_path(1), class: "filter__link text-red text-small" %>
