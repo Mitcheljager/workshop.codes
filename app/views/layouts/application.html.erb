@@ -24,11 +24,11 @@
 
     <link rel="manifest" href="/manifest.json">
 
-    <%= inline_css "application.css" %>
+    <%= stylesheet_link_tag "application.css" %>
     <%= javascript_pack_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
     <% if current_user %>
-      <%= inline_css "logged_in_user.css" %>
+      <%= stylesheet_link_tag "logged_in_user.css" %>
       <%= javascript_pack_tag "logged-in-user.js", "data-turbolinks-track": "reload", defer: true %>
     <% end %>
 
