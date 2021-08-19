@@ -13,6 +13,7 @@ en:
     wiki: Wiki
     create: Create
     login: Login
+    tos: Rules
 
   locale_picker:
     title: Language

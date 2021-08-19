@@ -6,6 +6,7 @@ ko:
     wiki: 위키
     create: 만들기
     login: 로그인
+    tos: 규칙
 
   locale_picker:
     title: 언어
