@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get "sitemap", to: "sitemaps#sitemap"
   get "privacy-policy", to: "pages#privacy_policy"
-  get "tos", to: "pages#tos"
+  get "tos", to: "pages#tos", as: "tos"
 
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
 
