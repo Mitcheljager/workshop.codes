@@ -268,7 +268,7 @@ en:
     action: Report code
     loading: Loading...
     modal:
-      disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. <u>This form is not meant to report bugs to the creator of this code.</u>
+      disclaimer_html: <strong>Please note:</strong> Reports are sent to the Workshop.codes admins. <u>Reports are not sent to post authors. Do not use this form to report bugs or request changes.</u>
 
   users:
     show:

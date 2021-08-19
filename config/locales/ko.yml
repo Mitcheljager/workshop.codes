@@ -245,7 +245,7 @@ ko:
     action: 코드 신고
     loading: 로딩 ...
     modal:
-      disclaimer_html: <strong>주의하십시오;</strong> 이 양식은 이 코드를 워크샵.코드 관리자에게 보고하기 위한 것입니다. 이 양식은 이 코드의 작성자에게 버그를 보고하기 위한 것이 아닙니다.
+      disclaimer_html: <strong>주의하십시오:</strong> 이 양식은 이 코드를 워크샵.코드 관리자에게 보고하기 위한 것입니다. 이 양식은 이 코드의 작성자에게 버그를 보고하기 위한 것이 아닙니다.
 
   users:
     show:
