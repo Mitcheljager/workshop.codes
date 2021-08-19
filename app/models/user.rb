@@ -50,9 +50,9 @@ class User < ApplicationRecord
   encrypts :email
   blind_index :email
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, uniqueness_against_nice_url: true, format: { with: /\A[\d\p{L}_-]*[#\d]*\z/i }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, uniqueness_against_nice_url: true, format: { with: /\A[\d\p{L}_-]*[#\d]*\z/i }, length: { maximum: 32 }
   validates :password, presence: true, length: { minimum: 8 }, if: :password
-  validates :email, uniqueness: true, allow_blank: true
+  validates :email, uniqueness: true, allow_blank: true, length: { minimum: 100 }
   validates :link, allow_blank: true, format: URI::regexp(%w[http https])
   validates :description, length: { maximum: 255 }
   validates :nice_url, uniqueness: true, allow_blank: true
