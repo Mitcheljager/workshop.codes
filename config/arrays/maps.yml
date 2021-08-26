@@ -223,6 +223,13 @@
     ko: 데스매치
   slug: kanezaka
 -
+  en: Malevento
+  ko: 말레벤토
+  type:
+    en: Deathmatch
+    ko: 데스매치
+  slug: malevento
+-
   en: Petra
   ko: 페트라
   type:
