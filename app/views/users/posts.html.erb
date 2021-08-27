@@ -28,7 +28,7 @@
       <div class="item item--small <%= "faded" if post.private? || post.unlisted? || post.draft? %>">
         <%= render "posts/thumbnail", post: post %>
 
-        <div>
+        <div class="lg:mr-1/4">
           <div class="item__title">
             <%= link_to post.title, post_path(post.code) %>
 
