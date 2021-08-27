@@ -27,6 +27,7 @@
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.7.0",
     "svelte-preprocess-sass": "^1.0.0",
+    "svelte-tiny-linked-charts": "^1.0.6",
     "timeago.js": "^4.0.2",
     "turbolinks": "^5.2.0",
     "webp-loader": "^0.6.0",

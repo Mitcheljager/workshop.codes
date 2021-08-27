@@ -7701,6 +7701,10 @@ svelte-preprocess@^4.7.0:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
+svelte-tiny-linked-charts@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/svelte-tiny-linked-charts/-/svelte-tiny-linked-charts-1.0.6.tgz#b01b4dc180872647464febbdaa937e0b14fb3c32"
+
 svelte@^3.35.0:
   version "3.38.2"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.38.2.tgz#55e5c681f793ae349b5cc2fe58e5782af4275ef5"

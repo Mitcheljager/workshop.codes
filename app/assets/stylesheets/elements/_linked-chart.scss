@@ -1,0 +1,10 @@
+.linked-chart {
+  grid-area: chart;
+  position: relative;
+}
+
+.tiny-linked-charts-value {
+  width: 3rem;
+  left: calc(-1.5rem - 2px);
+  text-align: center;
+}

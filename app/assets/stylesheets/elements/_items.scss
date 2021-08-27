@@ -329,18 +329,21 @@
 }
 
 .item__actions {
-  flex-wrap: nowrap;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   flex-wrap: wrap;
   padding-left: $margin / 3;
 
   @include media-min(md) {
-    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 
   a {
     display: block;
     text-decoration: none;
+    margin-top: .25rem;
 
     &:first-child {
       margin-left: 0;
