@@ -52,11 +52,11 @@
 
         <div class="linked-chart ml-auto hidden visible-lg">
           <% data = {} %>
-          <% values = Statistic.where(on_date: 31.days.ago.to_date..Date.yesterday, timeframe: :daily, model_id: post.id, content_type: :visit)
-                             .order(created_at: :asc)
-                             .select(:on_date, :value) %> 
+          <% values = Statistic.where(on_date: 30.days.ago.to_date..Date.today, timeframe: :daily, model_id: post.id, content_type: :visit)
+                               .order(created_at: :asc)
+                               .select(:on_date, :value) %> 
           
-          <% (31.days.ago.to_date..Date.yesterday).map{ |date| data[date.strftime("%B %d")] = 0 } %>
+          <% (30.days.ago.to_date..Date.today).map{ |date| data[date.strftime("%B %d")] = 0 } %>
           <% values.map { |v| data[v.on_date.strftime("%B %d")] = v.value } %>
 
           <%= svelte_component("LinkedChart", {
