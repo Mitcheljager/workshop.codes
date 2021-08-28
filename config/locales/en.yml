@@ -13,6 +13,7 @@ en:
     wiki: Wiki
     create: Create
     login: Login
+    tos: Rules
 
   locale_picker:
     title: Language
@@ -62,6 +63,7 @@ en:
 
   footer:
     privacy_policy: Privacy Policy
+    tos: Terms of Service
     copyright: Copyright
     disclaimer: All images and icons belong to their respective owner.
 
@@ -267,7 +269,7 @@ en:
     action: Report code
     loading: Loading...
     modal:
-      disclaimer_html: <strong>Please note;</strong> This form is meant to report this code to the Workshop.codes admins. <u>This form is not meant to report bugs to the creator of this code.</u>
+      disclaimer_html: <strong>Please note:</strong> Reports are sent to the Workshop.codes admins. <u>Reports are not sent to post authors. Do not use this form to report bugs or request changes.</u>
 
   users:
     show:
@@ -296,9 +298,10 @@ en:
       password_confirmation:
         label: Password confirmation
       email:
-        label: Emailaddress
-        help_html: Your emailaddress is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your emailaddress is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.
+        label: Email address
+        help_html: Your email address is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your email address is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.
       remember_me: Remember me (uses cookies)
+      tos_html: By creating an account, you are agreeing to the Workshop.codes %{terms_of_service}.
       submit: Submit
 
   sessions:
@@ -315,6 +318,8 @@ en:
       title: Create an account
       content: Don't have an account?
       button: Create an account
+    tos:
+      content_html: By creating or using a account, you are agreeing to the Workshop.codes %{terms_of_service}.
 
   account:
     navigation:
@@ -325,6 +330,7 @@ en:
       codes: Codes
       collections: Collections
       profile: Profile
+      tos: Rules
       admin: Admin
       account: Account
       accessibility: Accessibility

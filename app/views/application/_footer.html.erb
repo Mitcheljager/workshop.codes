@@ -11,12 +11,15 @@
 <footer class="footer">
   <p>
     <%= link_to t("footer.privacy_policy"), privacy_policy_path %> |
+    <%= link_to t("footer.tos"), tos_path %>
+    <br>
     <%= t "footer.copyright" %> &copy; <%= Date.current.year %> |
     <%= t "footer.disclaimer" %>
   </p>
 
   <p class="text-md-right">
-    Contact me on Discord: Mitsiee#9370 |
+    Contact me on Discord: Mitsiee#9370
+    <br>
     Contribute on
     <%= link_to "GitHub", "https://github.com/Mitcheljager/workshop.codes", target: "_blank", rel: "noreferrer noopener" %>
   </p>

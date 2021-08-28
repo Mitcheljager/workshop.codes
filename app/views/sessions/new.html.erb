@@ -61,5 +61,13 @@
         <div><%= link_to t("sessions.create_user.button"), new_user_path, class: "button w-100" %></div>
       </div>
     </div>
+
+    <div class="well well--dark mt-1/4">
+      <div class="w-100">
+        <center>
+          <p class="mt-0 mb-0"><%= t("sessions.tos.content_html", terms_of_service: link_to(t("footer.tos"), tos_path, class: "text-white")) %></p>
+        </center>
+      </div>
+    </div>
   </div>
 </div>
