@@ -58,6 +58,7 @@ ko:
 
   footer:
     privacy_policy: 개인정보 보호정책
+    tos: 서비스 약관
     copyright: 저작권
     disclaimer: 모든 이미지와 아이콘은 각 소유자의 것입니다.
 
@@ -303,6 +304,7 @@ ko:
       codes: 코드
       collections: 컬렉션
       profile: 프로필
+      tos: 규칙
       admin: 관리자
       account: 계정
       accessibility: 접근성
