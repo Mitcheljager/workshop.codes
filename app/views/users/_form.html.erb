@@ -35,7 +35,7 @@
 
     <div class="form-field">
       <%= f.label :email, "#{ t("users.form.email.label") } #{ t("users.form.optional") }", class: "form-label" %>
-      <%= f.email_field :email, placeholder: "Emailaddress", class: "form-input" %>
+      <%= f.email_field :email, placeholder: t("users.form.email.label"), class: "form-input" %>
 
       <div class="form-hint"><%= t("users.form.email.help_html") %></div>
     </div>
