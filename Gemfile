@@ -47,6 +47,7 @@ group :development, :test do
   gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", "~> 2.13"
+  gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker"
