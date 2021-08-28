@@ -47,7 +47,7 @@
       <%= label_tag :remember_me, t("users.form.remember_me") %>
     </div>
 
-    <hr class="small">
+    <p class="form-hint"><%= t("users.form.tos_html", terms_of_service: link_to(t("footer.tos"), tos_path, class: "text-white")) %></p>
 
     <%= submit_tag t("users.form.submit"), class: "button w-100" %>
   <% end %>
