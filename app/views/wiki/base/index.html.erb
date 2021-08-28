@@ -1,10 +1,9 @@
 <% content_for :page_title, "Overwatch Workshop Wiki" %>
 
-<%= render "arbiter_banner" if current_user.present? %>
-
-<blockquote class="mt-1/1 mb-0 logo-background logo-background--overwatch">
-  <strong>Welcome to the Overwatch Workshop Wiki.</strong> Here you will find in-depth information about the various aspects of the Overwatch Workshop. From events, conditions and actions, to effects and other details.
-</blockquote>
+<div class="logo-background logo-background--overwatch">
+  <%= render "arbiter_banner" if current_user.present? %>
+  <%= render "application/banners/elo_hell_discord" %>
+</div>
 
 <div class="wiki-cards mt-1/1">
   <div class="wiki-card">
