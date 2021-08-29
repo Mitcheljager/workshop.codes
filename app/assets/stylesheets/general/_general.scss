@@ -123,3 +123,8 @@ strong {
   width: 100%;
   height: auto;
 }
+
+::selection {
+  color:white;
+  background-color: var(--primary);
+}
