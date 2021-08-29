@@ -14,11 +14,6 @@
   cursor: pointer;
   transition: box-shadow 100ms;
 
-  .button::selection {
-	  color: var(--primary);
-	  background-color: white;
-	}
-  
   &:hover:not([disabled]),
   &:active:not([disabled]),
   &:focus:not([disabled]) {
