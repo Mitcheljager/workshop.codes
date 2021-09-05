@@ -10,15 +10,7 @@
  * Code structure aims at minimizing the compressed library size
  */
 
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['exports'], factory);
-  } else if (typeof exports !== 'undefined') {
-    factory(exports);
-  } else {
-    factory((root.microlight = {}));
-  }
-}(this, function (exports) {
+export async function reset(cls) {
   // for better compression
   var _window = window,
     _document = document,
@@ -27,24 +19,36 @@
     brace = ')',
 
     i,
+    j,
     microlighted,
     el;  // current microlighted element to run through
+    
+  // nodes to highlight
+  microlighted = _document.getElementsByClassName(cls || 'microlight');
 
+  for (i = 0; el = microlighted[i++];) {
+    const fullText = el.textContent
+    const splitText = fullText.split(/(\n)/)
+    const batchedArray = []
 
+    // Merge each 100 lines in to a single string
+    while (splitText.length > 0) {
+      batchedArray.push(splitText.splice(0, 100).join(""))
+    }
 
-  var reset = function (cls) {
-    // nodes to highlight
-    microlighted = _document.getElementsByClassName(cls || 'microlight');
+    el.innerHTML = ""
 
-    for (i = 0; el = microlighted[i++];) {
-      var text = el.textContent,
+    for (j = 0; j < batchedArray.length; j++) {
+      // Wait a bit to give the previous line proper time to compute
+      await new Promise(resolve => setTimeout(resolve))
+
+      var text = batchedArray[j],
         pos = 0,       // current position
-        next1 = text[0], // next character
+        next1 = batchedArray[j][0], // next character
         chr = 1,       // current character
         prev1,           // previous character
         prev2,           // the one before the previous
-        token =          // current token content
-          el.innerHTML = '',  // (and cleaning the node)
+        token = '',  // (and cleaning the node)
 
         // current token type:
         //  0: anything else (whitespaces / newlines)
@@ -74,7 +78,7 @@
       prev1 = tokenType < 6 && prev1 == '\\' ? 1 : chr
       ) {
         chr = next1;
-        next1 = text[++pos];
+        next1 = batchedArray[j][++pos];
         multichar = token.length > 1;
 
         // checking if current token should be finalized
@@ -105,6 +109,7 @@
           if (token) {
             // remapping token type into style
             // (some types are highlighted similarly)
+            
             el[appendChild](
               node = _document.createElement('span')
             ).setAttribute('class', [
@@ -160,7 +165,7 @@
             /^\d+$/[test](chr),  //  4: number
             chr == '"',          //  5: string with "
             //  6: xml comment
-            chr + next1 + text[pos + 1] + text[pos + 2] == '<!--',
+            chr + next1 + text[pos + 1] + batchedArray[j][pos + 2] == '<!--',
             chr + next1 == '/*',   //  7: multiline comment
             chr + next1 == '//',   //  8: single-line comment
             chr == '#',          // 9: hash-style comment
@@ -171,10 +176,4 @@
       }
     }
   }
-
-  exports.reset = reset;
-
-  document.addEventListener("turbolinks:load", function () {
-    reset();
-  })
-}));
+}

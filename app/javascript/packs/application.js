@@ -24,6 +24,7 @@ import * as getSnippet from "../src/get-snippet"
 import * as getVerifiedUsers from "../src/get-verified-users"
 import * as imagePreview from "../src/image-preview"
 import * as infiniteScroll from "../src/infinite-scroll"
+import * as microlight from "../src/microlight"
 import * as modal from "../src/modal"
 import * as navigation from "../src/navigation"
 import * as numPlayersSlider from "../src/num-players-slider"
@@ -61,6 +62,8 @@ document.addEventListener("turbolinks:load", function() {
   tabs.bind()
   toggleContent.bind()
   wikiSearch.bind()
+  
+  microlight.reset()
   
   carousel.render()
   carouselCards.render()
