@@ -48,6 +48,7 @@ export async function reset(cls) {
         chr = 1,       // current character
         prev1,           // previous character
         prev2,           // the one before the previous
+        loop = 0,
         token = '',  // (and cleaning the node)
 
         // current token type:
@@ -77,6 +78,9 @@ export async function reset(cls) {
       // recognized as a token finalize condition
       prev1 = tokenType < 6 && prev1 == '\\' ? 1 : chr
       ) {
+        if (loop > batchedArray[j].length) break
+        loop++
+
         chr = next1;
         next1 = batchedArray[j][++pos];
         multichar = token.length > 1;
@@ -98,11 +102,7 @@ export async function reset(cls) {
             // 4: number
             !/[$\w]/[test](chr),
             // 5: string with "
-            prev1 == '"' && multichar,
-            // 7: xml comment
-            text[pos - 4] + prev2 + prev1 == '-->',
-            // 8: multiline comment
-            prev2 + prev1 == '*/'
+            prev1 == '"' && multichar
           ][tokenType]
         ) {
           // appending the token to the result
@@ -164,11 +164,6 @@ export async function reset(cls) {
             /[$\w]/[test](chr),  //  3: (key)word
             /^\d+$/[test](chr),  //  4: number
             chr == '"',          //  5: string with "
-            //  6: xml comment
-            chr + next1 + text[pos + 1] + batchedArray[j][pos + 2] == '<!--',
-            chr + next1 == '/*',   //  7: multiline comment
-            chr + next1 == '//',   //  8: single-line comment
-            chr == '#',          // 9: hash-style comment
           ][--tokenType]);
         }
 
