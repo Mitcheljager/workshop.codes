@@ -182,7 +182,7 @@ class Post < ApplicationRecord
   end
 
   def parsed_controls
-    JSON.parse(self.controls)
+    JSON.parse(self.controls).presence || []
   end
 
   def self.find_by_code(code)
