@@ -9,6 +9,9 @@ module.exports = {
       preprocess: {
         style: sass()
       },
+      compilerOptions: {
+        dev: process.env.NODE_ENV == 'development' ? true : false,
+      },
       emitCss: true
     }
   }],
