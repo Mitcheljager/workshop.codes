@@ -182,7 +182,13 @@ class Post < ApplicationRecord
   end
 
   def parsed_controls
-    JSON.parse(self.controls)
+    begin
+      JSON.parse(self.controls).presence || []
+    rescue JSON::ParserError
+      self.controls = "[]"
+      self.save touch: false
+      retry
+    end
   end
 
   def self.find_by_code(code)
