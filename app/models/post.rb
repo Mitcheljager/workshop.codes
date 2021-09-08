@@ -185,7 +185,8 @@ class Post < ApplicationRecord
     begin
       JSON.parse(self.controls).presence || []
     rescue JSON::ParserError
-      self.update controls: "[]"
+      self.controls = "[]"
+      self.save touch: false
       retry
     end
   end
