@@ -10,7 +10,7 @@ module.exports = {
         style: sass()
       },
       compilerOptions: {
-        dev: process.env.NODE_ENV == 'development' ? true : false,
+        dev: process.env.NODE_ENV == 'development' ? true : false
       },
       emitCss: true
     }
