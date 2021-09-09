@@ -29,17 +29,18 @@ export default class FetchRails {
     const response = await fetch(this.url, finalParams)
     clearTimeout(timeoutID)
     if (returnResponse) return response
+    if (!response.ok) throw new Error(`${ response.status }: ${ response.statusText }`)
 
     const data = await response.text()
     return data
   }
 
   async get({timeout = 10000, returnResponse = false, parameters = {}} = {}) {
-    return this.request("get", {timeout, returnResponse, parameters})
+    return this.request("get", { timeout, returnResponse, parameters })
   }
 
   async post({timeout = 10000, returnResponse = false, parameters = {}} = {}) {
     parameters = {...parameters, body: JSON.stringify(this.body)}
-    return this.request("post", {timeout, returnResponse, parameters})
+    return this.request("post", { timeout, returnResponse, parameters })
   }
 }

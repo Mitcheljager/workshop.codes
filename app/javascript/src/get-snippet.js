@@ -22,11 +22,16 @@ function loadSnippet(event, element) {
 
   const id = _this.dataset.id
 
-  new FetchRails("/get-snippet", { id: id })
-  .post().then(data => {
-    const element = document.querySelector("[data-role~='ide-content']")
-    element.innerHTML = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;")
+  const ideElement = document.querySelector("[data-role~='ide-content']")
 
-    initiateIde(element)
+  new FetchRails("/get-snippet", { id: id })
+  .post()
+  .then(data => {
+    ideElement.innerHTML = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;")
+
+    initiateIde(ideElement)
+  })
+  .catch(error => {
+    ideElement.innerHTML = `Failed to load Snippet <br>${ error }`
   })
 }
