@@ -46,13 +46,13 @@ gem "webpacker-svelte", "~> 1.0.0"
 group :development, :test do
   gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "capybara", "~> 2.13"
+  gem "capybara", "~> 3.35"
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker"
   gem "rspec-rails", "~> 4.0.2"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "~> 3.142.7"
   gem "shoulda-matchers", "~> 4.5"
   gem "sqlite3", "1.4.2"
 end
