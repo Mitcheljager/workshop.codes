@@ -1,7 +1,11 @@
 .quick-filter {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(100px, 40vw, 150px), 1fr));
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: $margin / 4;
+
+  @include media-min(md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .quick-filter__item {
@@ -14,6 +18,7 @@
   background: $bg-dark;
   box-shadow: $shadow;
   text-decoration: none;
+  text-align: center;
   cursor: pointer;
 
   @include hover-stack {
