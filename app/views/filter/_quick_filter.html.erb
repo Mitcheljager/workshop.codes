@@ -1,21 +1,21 @@
 <div class="quick-filter mt-1/2">
   <%= link_to on_fire_path, class: "quick-filter__item" do %>
-    <%= inline_svg_tag "icons/icon-onfire.svg", class: "quick-filter__icon" %>
+    <%= inline_svg_tag "icons/icon-onfire.svg", class: "quick-filter__icon", title: "View On Fire Codes" %>
     On Fire
   <% end %>
 
   <%= link_to filter_path(sort: :favorites), class: "quick-filter__item" do %>
-    <%= inline_svg_tag "icons/icon-heart.svg", class: "quick-filter__icon" %>
+    <%= inline_svg_tag "icons/icon-heart.svg", class: "quick-filter__icon", title: "View Codes with most Favorites" %>
     Most Favorites
   <% end %>
 
   <%= link_to filter_path(sort: :views), class: "quick-filter__item" do %>
-    <%= inline_svg_tag "icons/icon-views.svg", class: "quick-filter__icon" %>
+    <%= inline_svg_tag "icons/icon-views.svg", class: "quick-filter__icon", title: "View Codes with most Views" %>
     Most Views
   <% end %>
 
   <%= link_to filter_path(sort: :updated), class: "quick-filter__item" do %>
-    <%= inline_svg_tag "icons/icon-clock.svg", class: "quick-filter__icon" %>
+    <%= inline_svg_tag "icons/icon-clock.svg", class: "quick-filter__icon", title: "View Codes ordered by Last Updated" %>
     Last Updated
   <% end %>
 </div>
