@@ -9,7 +9,8 @@ class PostsController < ApplicationController
 
   before_action only: [:edit, :update, :destroy, :immortalise] do
     if @post.present?
-      redirect_to login_path unless current_user && current_user == @post.user
+      return redirect_to login_path unless current_user
+      redirect_to post_path(@post.code), flash: { error: "You are not authorized to perform that action" } unless current_user == @post.user
     else
       redirect_to root_path
     end
