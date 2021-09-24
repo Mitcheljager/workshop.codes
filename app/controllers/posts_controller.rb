@@ -347,15 +347,13 @@ class PostsController < ApplicationController
 
     embed = Discord::Embed.new do
       color "#3fbf74"
-      thumbnail url: image
+      image url: image
       author name: post.user.username, avatar_url: avatar, url: user_path
       title "(#{ type }) #{ post.title }"
       url path
-      description content
-      add_field name: "\u200B", value: "\u200B"
-      add_field name: "Code", value: post.code.upcase
-      add_field name: "\u200B", value: "\u200B" if revision && post.revisions.last.description.present?
+      description content if type == "New"
       add_field name: "Update notes", value: post.revisions.last.description.truncate(500) if revision && post.revisions.last.description.present?
+      add_field name: "Code", value: post.code.upcase
       footer text: "Elo Hell Esports", icon_url: "https://elohell.gg/media/img/logos/Elo-Hell-Logo_I-C-Dark.png"
     end
 
