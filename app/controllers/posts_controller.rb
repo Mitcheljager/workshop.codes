@@ -343,7 +343,7 @@ class PostsController < ApplicationController
     user_path = user_url(post.user.username)
     image = @ordered_images.present? && @ordered_images.first.present? ? url_for(@ordered_images.first.variant(quality: 95).processed.url) : ""
     avatar = @post.user.profile_image.present? ? url_for(@post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed.url) : ""
-    content = ActionController::Base.helpers.strip_tags(post.description).truncate(500)
+    content = ActionController::Base.helpers.strip_tags(post.description).truncate(type == "New" ? 500 : 250)
 
     embed = Discord::Embed.new do
       color "#3fbf74"
@@ -351,7 +351,7 @@ class PostsController < ApplicationController
       author name: post.user.username, avatar_url: avatar, url: user_path
       title "(#{ type }) #{ post.title }"
       url path
-      description content if type == "New"
+      description content
       add_field name: "Update notes", value: post.revisions.last.description.truncate(500) if revision && post.revisions.last.description.present?
       add_field name: "Code", value: post.code.upcase
       footer text: "Elo Hell Esports", icon_url: "https://elohell.gg/media/img/logos/Elo-Hell-Logo_I-C-Dark.png"
