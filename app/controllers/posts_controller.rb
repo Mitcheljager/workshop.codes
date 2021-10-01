@@ -124,6 +124,7 @@ class PostsController < ApplicationController
 
       notify_discord("New")
 
+      flash[:notice] = "Post successfully created"
       redirect_to post_path(@post.code)
     else
       respond_to do |format|
@@ -169,6 +170,7 @@ class PostsController < ApplicationController
 
       notify_discord("New") if published_from_draft
 
+      flash[:notice] = "Post successfully edited"
       redirect_to post_path(@post.code)
     else
       @post.code = current_code
@@ -192,6 +194,7 @@ class PostsController < ApplicationController
     @post.destroy
     create_activity(:destroy_post, post_activity_params)
 
+    flash[:notice] = "Post successfully deleted"
     redirect_to posts_url
   end
 
