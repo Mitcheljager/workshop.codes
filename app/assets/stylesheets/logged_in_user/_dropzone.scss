@@ -6,7 +6,7 @@
   width: 100%;
   min-height: 200px;
   border: 2px dashed $border-color;
-  padding: $margin;
+  padding: clamp($margin / 2, 10vw, $margin);
   text-align: center;
   font-size: 18px;
   line-height: 1.5em;
@@ -19,11 +19,23 @@
   }
 
   * {
-    pointer-events: none;
+    // pointer-events: none;
   }
 
   span {
     color: $white;
+  }
+}
+
+.dropzone__button {
+  input {
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    opacity: 0;
   }
 }
 

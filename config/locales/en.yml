@@ -172,7 +172,7 @@ en:
           Alternatively you can use a 3rd party (Imgur) to add images to your description in the next step.<br>
           <strong>The first image will be your Thumbnail.</strong>
         dropzone:
-          label: Drop (or paste) images here to add them to your post
+          label: Drop images here to add them to your post
           help: Images will be displayed in a 900x500 format (max 2MB per image, jpeg/png only)
         video:
           label: Youtube video

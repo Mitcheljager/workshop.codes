@@ -5,7 +5,7 @@
   width: 100%;
 
   @include media-min(sm) {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -33,11 +33,11 @@
   top: 0;
   right: 0;
   bottom: auto;
-  border-radius: 0 0 0 $border-radius;
+  border-radius: 0 0 0 $border-radius / 4;
   padding: .25em .5em;
   background: $red;
   font-size: 12px;
-  color: $white;
+  color: $pure-white;
   cursor: pointer;
 
   &:hover,
@@ -57,7 +57,7 @@
   height: 100%;
   align-items: center;
   padding: $margin / 4;
-  aspect-ratio: 1/1;
+  aspect-ratio: 9/5;
 }
 
 .images-preview__progress-bar {

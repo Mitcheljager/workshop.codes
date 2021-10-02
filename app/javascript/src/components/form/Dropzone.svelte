@@ -11,6 +11,7 @@
   export let images
   export let label
   export let help
+  export let button
   export let input
   export let orderInput
 
@@ -18,6 +19,7 @@
   let sortable
   let active = false
   let alert = ""
+  let imagePreviewWidth = 200
 
   $: if (alert) setTimeout(() => { alert = "" }, 3000)
   $: updateOrder(images)
@@ -52,13 +54,17 @@
     if (files) readFiles(files)
   }
 
+  function changeInput(event) {
+    const files = event.target.files
+    if (files) readFiles(files)
+  }
+
   function readFiles(files) {
     Array.from(files).forEach(file => {
-      if (file.kind !== "file") return
-      
-      file = file.getAsFile()
+      if (file.kind == "file") file = file.getAsFile()
 
       if (file.type == "image/png" || file.type == "image/jpg" || file.type == "image/jpeg") {
+        console.log(file)
         uploadImage(file)
       } else {
         alert = "Wrong file type. Only png and jpeg are accepted."
@@ -107,7 +113,7 @@
   }
 
   function removeImage(id) {
-    images = images.filter(i => i.id != id)
+    if (confirm("Are you sure?")) images = images.filter(i => i.id != id)
   }
 </script>
 
@@ -123,6 +129,12 @@
   <span>{ label }</span>
 
   <small>{ help }</small>
+
+  <label class="dropzone__button button button--secondary mt-1/4">
+    { button }
+
+    <input type="file" multiple="true" on:change={ changeInput } />
+  </label>
 </div>
 
 { #if images.length }
@@ -142,7 +154,7 @@
           <div class="images-preview__progress-bar" style="width: { image.progress }%" />
         </div>
       { :else }
-        <img src={ image.url } height=120 width=120 alt="Dropzone preview" />
+        <img src={ image.url } height={ imagePreviewWidth / 9 * 5 } width={ imagePreviewWidth } alt="Dropzone preview" />
       { /if }
 
       <div class="images-preview__action" on:click={ () => removeImage(image.id) }>X</div>
