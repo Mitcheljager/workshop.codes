@@ -19,7 +19,8 @@
   let sortable
   let active = false
   let alert = ""
-  let imagePreviewWidth = 200
+  
+  const imagePreviewWidth = 200
 
   $: if (alert) setTimeout(() => { alert = "" }, 3000)
   $: updateOrder(images)
