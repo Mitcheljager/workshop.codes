@@ -57,7 +57,7 @@ class PostsController < ApplicationController
         @comments_count = @post.comments.size
         @revisions_count = @post.revisions.where(visible: true).size
         @derivations_count = @post.derivations.size
-        
+
         set_post_images
       }
       format.json {
@@ -138,7 +138,13 @@ class PostsController < ApplicationController
     parse_carousel_video
 
     if @post.update(post_params)
-      parse_derivatives
+      unless parse_derivatives
+        respond_to do |format|
+          format.html { render :new }
+          format.js { render "validation" }
+        end
+        return
+      end
       create_activity(:update_post, post_activity_params)
       create_collection if post_params[:new_collection] != ""
       update_email_notifications
@@ -249,13 +255,21 @@ class PostsController < ApplicationController
 
       unless deriv.present?
         source_post = Post.find_by_code code
-        Derivative.create!(source_code: code, derivation: @post, source: source_post)
+        d = Derivative.create(source_code: code, derivation: @post, source: source_post)
+        if d.errors.any?
+          @post.errors.add :base, :invalid, message: "Error sourcing from #{ code }: #{ d.errors.full_messages.join(", ") }"
+        end
       end
+    end
+
+    if @post.errors.any?
+      return false
     end
 
     if codes.count > Post::MAX_SOURCES
       flash[:warning] = "More sources were provided than allowed, so only the first #{ Post::MAX_SOURCES } sources were saved."
     end
+    return true
   end
 
   def not_found
