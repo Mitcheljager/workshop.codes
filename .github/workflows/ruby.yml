@@ -60,3 +60,32 @@ jobs:
       - name: RSpec
         run: |
           bundle exec rspec
+  features:
+    name: Cucumber Feature Check
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup System
+        run: |
+          sudo apt update
+          sudo apt-get install libsqlite3-dev
+          sudo apt-get install firefox-geckodriver
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          check-latest: true
+      - run: yarn install
+      - name: Bundle
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: Cucumber
+        run: |
+          bundle exec cucumber
