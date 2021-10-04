@@ -106,7 +106,13 @@ class PostsController < ApplicationController
     parse_carousel_video
 
     if @post.save
-      parse_derivatives
+      unless parse_derivatives
+        respond_to do |format|
+          format.html { render :new }
+          format.js { render "validation" }
+        end
+        return
+      end
       @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
 
       create_activity(:create_post, post_activity_params)
@@ -243,7 +249,7 @@ class PostsController < ApplicationController
   end
 
   def parse_derivatives
-    return unless params[:post][:derivatives]
+    return true unless params[:post][:derivatives]
 
     codes = params[:post][:derivatives].split(",")
     trimmed_codes = codes[0, Post::MAX_SOURCES]
