@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   require "httparty"
 
   include EmailNotificationsHelper
+  include NotificationsHelper
 
   before_action :set_post, only: [:edit, :update, :destroy, :immortalise]
   before_action :set_post_images, only: [:edit]
@@ -264,6 +265,15 @@ class PostsController < ApplicationController
         d = Derivative.create(source_code: code, derivation: @post, source: source_post)
         if d.errors.any?
           @post.errors.add :base, :invalid, message: "Error sourcing from #{ code }: #{ d.errors.full_messages.join(", ") }"
+        elsif source_post.present? && source_post.user != @post.user
+          create_notification(
+            "**#{ @post.user.username }** has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
+            post_path(@post.code),
+            source_post.user.id,
+            :post_derived_from,
+            "derivative",
+            d.id
+          )
         end
       end
     end
