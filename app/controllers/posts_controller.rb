@@ -106,7 +106,13 @@ class PostsController < ApplicationController
     parse_carousel_video
 
     if @post.save
-      parse_derivatives
+      unless parse_derivatives
+        respond_to do |format|
+          format.html { render :new }
+          format.js { render "validation" }
+        end
+        return
+      end
       @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
 
       create_activity(:create_post, post_activity_params)
