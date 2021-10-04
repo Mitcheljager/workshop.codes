@@ -243,7 +243,7 @@ class PostsController < ApplicationController
   end
 
   def parse_derivatives
-    return unless params[:post][:derivatives]
+    return true unless params[:post][:derivatives]
 
     codes = params[:post][:derivatives].split(",")
     trimmed_codes = codes[0, Post::MAX_SOURCES]
