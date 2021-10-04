@@ -86,6 +86,10 @@ jobs:
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
+      - name: Precompile assets
+        run: |
+          bundle exec rails webpacker:compile RAILS_ENV=test
       - name: Cucumber
         run: |
+          rake db:test:prepare
           bundle exec cucumber
