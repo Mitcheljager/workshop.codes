@@ -10,7 +10,7 @@ Given /a report for (?:the )?(\w+) "([^"\n]+)"(?: by ([\d\p{L}_-]*[#\d]*))?/ do 
   @current_report = report
 end
 
-When "(I )open the {word} report about the {word} {string}" do |qualifier, model, identifier|
+When "I open the {word} report about the {word} {string}" do |qualifier, model, identifier|
   object = fetch_model(model, identifier)
 
   reports_for = Report.where(concerns_model: model, concerns_id: object.id)
@@ -24,6 +24,18 @@ When "(I )open the {word} report about the {word} {string}" do |qualifier, model
 
   visit admin_report_path(report)
   @current_report = report
+end
+
+Then "I should be able to {word} the report" do |action|
+  click_on action.capitalize
+end
+
+Then "I should be on the page for the report" do
+  expect(current_path).to eq admin_report_path(@current_report)
+end
+
+Then "I should be on the reports queue page" do
+  expect(current_path).to eq admin_reports_path
 end
 
 def fetch_model(model, identifier)
