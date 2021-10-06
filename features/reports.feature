@@ -12,14 +12,14 @@ Feature: Content reports
 
   Scenario: Admin can accept reports
     Given I am logged in as Athena
-    And I go to the page for the latest report about the post "Attack on Busan"
+    And I open the latest report about the post "Attack on Busan"
     Then I should be able to accept the report
     And I should be on the page for the report
     And I should see "accepted"
 
   Scenario: Admin can reject reports
     Given I am logged in as Athena
-    And I go to the page for the latest report about the post "Attack on Busan"
+    And I open the latest report about the post "Attack on Busan"
     Then I should be able to reject the report
     And I should be on the reports queue page
     And I should see "rejected"
