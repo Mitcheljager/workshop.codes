@@ -10,6 +10,22 @@ Given /a report for (?:the )?(\w+) "([^"\n]+)"(?: by ([\d\p{L}_-]*[#\d]*))?/ do 
   @current_report = report
 end
 
+When "(I )open the {word} report about the {word} {string}" do |qualifier, model, identifier|
+  object = fetch_model(model, identifier)
+
+  reports_for = Report.where(concerns_model: model, concerns_id: object.id)
+  case qualifier
+  when "latest"
+    report = reports_for.order(created_at: :desc).first
+  else
+    fail "Don't know how to find the #{ qualifier } report"
+  end
+  fail "No reports found for #{ object }" unless report.present?
+
+  visit admin_report_path(report)
+  @current_report = report
+end
+
 def fetch_model(model, identifier)
   case model
   when "post"
