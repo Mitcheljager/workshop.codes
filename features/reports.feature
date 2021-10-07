@@ -17,6 +17,12 @@ Feature: Content reports
     And I try to report the post titled "Attack on Busan"
     Then I should see "Your report has been submitted"
 
+  @javascript
+  @wip
+  Scenario: User can report comment
+    # TODO: Add a comment (either in Background or in a Given)
+    # TODO: Verify that a user can report a comment
+
   Scenario: Admin can accept reports
     Given I am logged in as Athena
     And I open the latest report about the post "Attack on Busan"
