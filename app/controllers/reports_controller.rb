@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
     elsif params[:concerns_model] == "comment"
       @comment = Comment.find(params[:id])
     end
-    
+
     render partial: "modal"
   end
 
