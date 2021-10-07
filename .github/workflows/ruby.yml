@@ -2,7 +2,6 @@ name: CI
 on: [push, pull_request]
 jobs:
   linters:
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,7 +27,6 @@ jobs:
         run: |
           yarn run eslint app/javascript
   test:
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -63,7 +61,6 @@ jobs:
   features:
     name: Cucumber Feature Check
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
