@@ -6,9 +6,9 @@ Feature: Content reports
 
   Background: Some posts and some reports
     Given a user named "GwishinOmnic"
-    And a user named "HanaSong"
-    And an admin named "Athena"
-    Then a post by GwishinOmnic titled "Attack on Busan"
+    * a user named "HanaSong"
+    * an admin named "Athena"
+    And a post by GwishinOmnic titled "Attack on Busan"
     And a report for the post "Attack on Busan"
 
   @javascript
