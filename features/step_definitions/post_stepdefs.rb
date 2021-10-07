@@ -33,6 +33,7 @@ When 'I try to {word} a/the post titled {string}' do |action, title|
     click_on 'Report code'
     fill_in_report_form
     click_on 'Submit'
+    find('[data-role="report-alert"]') # Force Capybara to wait until report alert appears
   else
     fail "Don't know how to perform #{ action } on posts"
   end
