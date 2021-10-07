@@ -6,9 +6,16 @@ Feature: Content reports
 
   Background: Some posts and some reports
     Given a user named "GwishinOmnic"
+    And a user named "HanaSong"
     And an admin named "Athena"
     Then a post by GwishinOmnic titled "Attack on Busan"
     And a report for the post "Attack on Busan"
+
+  @javascript
+  Scenario: User can report post
+    Given I am logged in as HanaSong
+    And I try to report the post titled "Attack on Busan"
+    Then I should see "Your report has been submitted"
 
   Scenario: Admin can accept reports
     Given I am logged in as Athena

@@ -50,3 +50,9 @@ def fetch_model(model, identifier)
   fail "#{ model.capitalize } for identifier \"#{ identifier }\" not found" unless result.present?
   result
 end
+
+def fill_in_report_form
+  report_attrs = attributes_for(:report)
+  find("#report_category").all('option').sample.select_option
+  fill_in "report_content", with: report_attrs[:content]
+end

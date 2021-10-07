@@ -26,6 +26,13 @@ When 'I try to {word} a/the post titled {string}' do |action, title|
       click_on 'Delete'
     end
 
+  when 'report'
+    post = Post.find_by_title(title)
+    expect(post).to be_present
+    visit post_path(code: post.code)
+    click_on 'Report code'
+    fill_in_report_form
+    click_on 'Submit'
   else
     fail "Don't know how to perform #{ action } on posts"
   end
