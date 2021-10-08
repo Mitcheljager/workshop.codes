@@ -60,9 +60,7 @@ end
 group :development do
   gem "active_record_doctor"
   gem "web-console", ">= 3.3.0"
-  if Gem.win_platform?
-    gem "win32-security"
-  end
+  gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]
 end
 
 group :production do
