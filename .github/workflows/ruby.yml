@@ -47,8 +47,8 @@ jobs:
           bundle exec rails webpacker:compile RAILS_ENV=test
       - name: Test
         run: |
-          rake db:test:prepare
-          rails test
+          bundle exec rake db:test:prepare
+          bundle exec rails test
       - name: RSpec
         run: |
           bundle exec rspec
@@ -79,5 +79,5 @@ jobs:
           bundle exec rails webpacker:compile RAILS_ENV=test
       - name: Cucumber
         run: |
-          rake db:test:prepare
+          bundle exec rake db:test:prepare
           bundle exec cucumber
