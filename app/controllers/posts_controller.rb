@@ -124,7 +124,7 @@ class PostsController < ApplicationController
 
       notify_discord("New")
 
-      flash[:notice] = "Post successfully created"
+      flash[:notice] = "Post successfully created" # FIXME: i18n
       redirect_to post_path(@post.code)
     else
       respond_to do |format|
@@ -170,7 +170,7 @@ class PostsController < ApplicationController
 
       notify_discord("New") if published_from_draft
 
-      flash[:notice] = "Post successfully edited"
+      flash[:notice] = "Post successfully edited" # FIXME: i18n
       redirect_to post_path(@post.code)
     else
       @post.code = current_code
@@ -194,7 +194,7 @@ class PostsController < ApplicationController
     @post.destroy
     create_activity(:destroy_post, post_activity_params)
 
-    flash[:notice] = "Post successfully deleted"
+    flash[:notice] = "Post successfully deleted" # FIXME: i18n
     redirect_to posts_url
   end
 
@@ -215,7 +215,7 @@ class PostsController < ApplicationController
     if @posts.any?
       render collection: @posts, partial: "card", as: :post
     else
-      render plain: "No similar posts were found"
+      render plain: "No similar posts were found" # FIXME: i18n
     end
   end
 
