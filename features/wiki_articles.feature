@@ -21,7 +21,6 @@ Feature: Wiki articles
       | Servo          | Blueprints | Power armor hydraulic actuator. Frequently gets sticky. Needs refinement. |
       | Comms Unit     | Blueprints | Overwatch standard comms device. Powered by Lumerico batteries.           |
 
-  @wip
   Scenario: Any user can create a new Wiki article
     Given I am logged in as Brigitte
     And I try to create a new wiki article:
@@ -30,3 +29,6 @@ Feature: Wiki articles
       | Hard-Light Blowtorch |  Tools   | Specialized Vishkar technology capable of welding every known metal. |
     Then I should be viewing the wiki article titled "Hard-Light Blowtorch"
     And I should see "Article successfully created"
+    And I should see "Specialized Vishkar technology"
+
+  # TODO: Add more Wiki scenarios
