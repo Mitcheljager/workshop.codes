@@ -14,7 +14,8 @@ AfterConfiguration do |config|
   puts "Setting global random seed to #{ $seed }"
 end
 
-# Report the seed after run
+# Report the seed after run, and decouple RNG to maintain test independence
 at_exit do
+  Kernel.srand
   puts "Global random seed was #{ $seed }"
 end
