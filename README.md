@@ -12,7 +12,7 @@ Images should be losslessly compressed. SVG and WebP should be used wherever pos
 
 _Please note; This isn't a comprehensive guide on how to install Ruby on Rails. If you're new to this platform, do your own Googling._
 
-1. Install Ruby (use a version manager to make things easier [http://rvm.io/](http://rvm.io/) or just install it directly from [https://rubyinstaller.org/downloads/](https://rubyinstaller.org/downloads/) using version 2.7.2)
+1. Install Ruby 3.0 (use a version manager to make things easier [https://rvm.io/](https://rvm.io/) or just install it directly from [https://rubyinstaller.org/downloads/](https://rubyinstaller.org/downloads/))
 2. Install Rails
 3. Install NPM/Yarn [https://yarnpkg.com/](https://yarnpkg.com/)
 4. `bundle install` to install dependencies
