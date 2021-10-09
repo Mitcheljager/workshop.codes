@@ -50,6 +50,7 @@ class Wiki::ArticlesController < Wiki::BaseController
 
       if @article.edit.approved?
         BadgesWikiJob.perform_async(current_user)
+        flash[:notice] = "Article successfully created" # FIXME: i18n
         redirect_to wiki_article_path(@article.slug)
       else
         redirect_to wiki_articles_path

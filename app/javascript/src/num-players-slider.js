@@ -50,7 +50,7 @@ export function destroy() {
 
   sliders.forEach(slider => {
     if (!slider.noUiSlider) return
-    
+
     slider.noUiSlider.destroy()
     slider.dataset.initialised = false
   })
