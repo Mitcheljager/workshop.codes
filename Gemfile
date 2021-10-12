@@ -51,6 +51,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker"
+  gem "pry", "~> 0.14.1"
   gem "rspec-rails", "~> 4.0.2"
   gem "selenium-webdriver", "~> 3.142.7"
   gem "shoulda-matchers", "~> 4.5"
