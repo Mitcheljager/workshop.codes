@@ -14,6 +14,12 @@ AfterConfiguration do |config|
   puts "Setting global random seed to #{ $seed }"
 end
 
+# Set the random seed at the beginning of each scenario
+# to avoid any potential interference from systems not under test
+Before do
+  Kernel.srand $seed
+end
+
 # Report the seed after run, and decouple RNG to maintain test independence
 at_exit do
   Kernel.srand
