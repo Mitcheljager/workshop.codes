@@ -53,6 +53,6 @@ end
 
 def fill_in_report_form
   report_attrs = attributes_for(:report)
-  find("#report_category").all('option').filter{ |e| e.value.present? }.sample.select_option
+  find("#report_category").all('option').filter{ |e| e.value.present? }.filter{ |e| e.value != "There's a bug in this code" }.sample.select_option
   fill_in "report_content", with: report_attrs[:content]
 end
