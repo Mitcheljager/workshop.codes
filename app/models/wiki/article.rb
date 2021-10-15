@@ -25,15 +25,23 @@ class Wiki::Article < ApplicationRecord
     where(edit: Wiki::Edit.where(approved: true))
   end
 
-  def self.search(query)
+  def self.search(query, size=20)
     __elasticsearch__.search({
       from: 0,
-      size: 20,
+      size: size,
       query: {
         multi_match: {
           query: query,
           fields: ["title^3", "tags^1.5", "category.title^1"],
           fuzziness: "AUTO"
+        }
+      },
+      aggs: {
+        uniq_groups: {
+          terms: {
+            field: "group_id.keyword",
+            size: size
+          }
         }
       }
     })

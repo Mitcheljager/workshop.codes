@@ -13,16 +13,16 @@ class Wiki::SearchController < Wiki::BaseController
   end
 
   def index
-    @articles = Wiki::Article.search(params[:query]).records
-
-    @articles_ids = @articles.group(:group_id).maximum(:id).values
-    @articles = @articles.approved.where(id: @articles_ids)
+    result = Wiki::Article.search(params[:query])
+    groups = result.aggregations.uniq_groups.buckets.map { |b| b["key"] }
+    latest_articles = Wiki::Article.where(group_id: groups).group(:group_id).maximum(:id).values
+    @articles = result.records.approved.where(id: latest_articles)
 
     respond_to do |format|
       format.html
       format.json {
         @articles.each do |article|
-          article.content = ReverseMarkdown.convert(ActionController::Base.helpers.sanitize(markdown(article.content), tags: %w(style p br strong em b blockquote h1 h2 h3 h4 h5 h6 code pre)).gsub(/h\d/, "strong"))
+          article.content = ReverseMarkdown.convert(ActionController::Base.helpers.sanitize(markdown(article.content || ""), tags: %w(style p br strong em b blockquote h1 h2 h3 h4 h5 h6 code pre)).gsub(/h\d/, "strong"))
         end
 
         set_request_headers
