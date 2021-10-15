@@ -13,10 +13,10 @@ class Wiki::SearchController < Wiki::BaseController
   end
 
   def index
-    @articles = Wiki::Article.search(params[:query]).records
-
-    @articles_ids = @articles.group(:group_id).maximum(:id).values
-    @articles = @articles.approved.where(id: @articles_ids)
+    result = Wiki::Article.search(params[:query])
+    groups = result.aggregations.uniq_groups.buckets.map { |b| b["key"] }
+    latest_arts = Wiki::Article.where(group_id: groups).group(:group_id).maximum(:id).values
+    @articles = result.records.approved.where(id: latest_arts)
 
     respond_to do |format|
       format.html
