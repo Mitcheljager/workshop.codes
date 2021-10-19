@@ -35,14 +35,6 @@ class Wiki::Article < ApplicationRecord
           fields: ["title^3", "tags^1.5", "category.title^1"],
           fuzziness: "AUTO"
         }
-      },
-      aggs: {
-        uniq_groups: {
-          terms: {
-            field: "group_id.keyword",
-            size: size
-          }
-        }
       }
     })
   end
