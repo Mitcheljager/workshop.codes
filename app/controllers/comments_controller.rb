@@ -44,7 +44,6 @@ class CommentsController < ApplicationController
   def show
     @post = Post.find_by_id(params[:id])
     @comments = @post.comments.includes(:user).where(parent_id: nil).order(created_at: :desc)
-    @comments_count = @post.comments.size
 
     render layout: false
   end

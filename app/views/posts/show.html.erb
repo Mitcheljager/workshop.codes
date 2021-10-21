@@ -34,14 +34,14 @@
     <%= render "current_user_blocks" if current_user == @post.user %>
     <%= render "expired" if @post.expired? %>
 
-    <% cache_unless params[:tab].present?, [@post, @comments_count, @revisions_count, @derivations_count, "tabs", current_locale] do %>
+    <% cache_unless params[:tab].present?, [@post, @post.comments_count, @revisions_count, @derivations_count, "tabs", current_locale] do %>
       <%= render "tabs" %>
     <% end %>
 
     <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs, current_locale] do %>
       <%= tabs_content_tag("description", "", "") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
-        
+
         <% if @post.description.present? || @post.source_derivs.any? %>
           <div class="item__content item__description">
             <%= sanitized_markdown(@post.description) %>
@@ -79,7 +79,7 @@
     <%= tabs_content_tag("comments") do %>
       <div class="infinite-scroll"><div class="spinner"></div></div>
     <% end %>
-    
+
     <% if @revisions_count > 1 %>
       <%= tabs_content_tag("update-log") do %>
         <div class="infinite-scroll"><div class="spinner"></div></div>

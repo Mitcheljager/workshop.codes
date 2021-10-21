@@ -1,34 +1,45 @@
 .comments__wrapper {
-  margin-top: $margin;
+  margin-top: $margin / 2;
+
+  &:empty {
+    margin-top: 0;
+  }
 }
 
 @keyframes post-comment-has-been-added {
   from {
-    background: $bg-dark;
-    box-shadow: 0 0 0 $margin / 4 $bg-dark;
-  }
-
-  to {
-    background: transparent;
-    box-shadow: 0 0 0 $margin / 4 transparent;
+    background: lighten($bg-dark, 10%);
   }
 }
 
 .post-comment {
-  max-width: map-get($media-min-widths, sm);
-  margin-bottom: $margin;
+  margin-bottom: $margin / 4;
+  padding: $margin / 4;
+  border-radius: $border-radius / 2;
+  background: lighten($bg-dark, 3.5%);
 
   &:last-child {
     margin-bottom: 0;
   }
 
   .post-comment {
-    margin-top: $margin / 2;
-    padding-left: $margin / 4;
-    border-left: 1px solid lighten($border-color, 5%);
+    margin-top: $margin / 4;
+    background: $bg-dark;
+  }
 
-    @include media-min(sm) {
-      padding-left: $margin / 2;
+  @for $i from 1 through 5 {
+    $classname: "";
+
+    @for $j from 1 through $i {
+      $classname: $classname + ".post-comment ";
+    }
+
+    #{$classname} {
+      @if $i % 2 == 0 {
+        background: lighten($bg-dark, 3.5%);
+      } @else {
+        background: $bg-dark;
+      }
     }
   }
 
@@ -69,7 +80,7 @@
 }
 
 .post-comment__content {
-  margin: $margin / 3 0;
+  margin: $margin / 4 0 0;
   overflow-wrap: break-word;
 
   h1 {
@@ -85,13 +96,17 @@
   h5 {
     font-size: $font-size-base;
   }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .post-comment__actions {
-  margin: $margin / 3 0 0 auto;
+  margin: $margin / 4 0 $margin / 4 auto;
 
-  @include media-min(sm) {
-    margin-top: 0;
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 

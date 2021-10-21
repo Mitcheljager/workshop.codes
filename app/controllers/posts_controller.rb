@@ -60,7 +60,6 @@ class PostsController < ApplicationController
 
         not_found and return unless @post.present?
 
-        @comments_count = @post.comments.size
         @revisions_count = @post.revisions.where(visible: true).size
         @derivations_count = @post.derivations.size
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_174125) do
+ActiveRecord::Schema.define(version: 2021_10_21_100415) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -206,6 +206,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_174125) do
     t.text "controls", default: "[]"
     t.integer "min_players"
     t.integer "max_players"
+    t.integer "comments_count", default: 0
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

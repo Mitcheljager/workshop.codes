@@ -14,7 +14,7 @@
     <%= link_to t("posts.show.tabs.controls"), post_tab_path(@post.code, "controls"),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("controls") }",
                 data: { action: "set-tab", target: "controls" } if @post.parsed_controls.any? %>
-    
+
     <%= link_to t("posts.show.tabs.snippet"), post_tab_path(@post.code, "snippet"),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("snippet") }",
                 data: { action: "set-tab load-snippet", target: "snippet", id: @post.id, get_on_load: is_active_tab?("snippet") } if @post.snippet.present? %>
@@ -28,7 +28,7 @@
                 data: { action: "set-tab get-partial", target: "comments", url: comment_path(@post.id), get_on_load: is_active_tab?("comments") } do %>
 
       <%= t("posts.show.tabs.comments") %>
-      <small data-role="comment-total" class="text-dark"><%= @comments_count %></small>
+      <small data-role="comment-total" class="text-dark"><%= @post.comments_count %></small>
     <% end %>
 
     <% if @revisions_count > 1 %>
