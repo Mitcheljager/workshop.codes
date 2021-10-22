@@ -37,7 +37,11 @@ module ApplicationHelper
   end
 
   def to_slug(string)
-    string.to_s.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "")
+    string.to_s.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "").gsub("/", "")
+  end
+
+  def to_search_query(string)
+    CGI.escape(string.to_s.downcase).gsub(".", "%2E")
   end
 
   def to_range(string)

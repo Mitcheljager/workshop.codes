@@ -7,7 +7,7 @@
 <% end %>
 
 <div class="item__tray-item">
-  <%= t(".categories") %>: 
+  <%= t(".categories") %>:
 
   <% @post.categories.each do |category| %>
     <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
@@ -16,16 +16,16 @@
 
 <% if @post.tags.present? %>
   <div class="item__tray-item">
-    <%= t(".tags") %>: 
+    <%= t(".tags") %>:
 
     <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-      <%= link_to tag.downcase, filter_path(search: tag.downcase), class: "tag" %>
+      <%= link_to tag.downcase, filter_path(search: to_search_query(tag)), class: "tag" %>
     <% end %>
   </div>
 <% end %>
 
 <div class="item__tray-item">
-  <%= t(".heroes") %>: 
+  <%= t(".heroes") %>:
 
   <% if @post.heroes.length == heroes.length %>
     <%= t(".all") %>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="item__tray-item">
-  <%= t(".maps") %>: 
+  <%= t(".maps") %>:
 
   <% if @post.maps.length == maps.length %>
     <%= t(".all") %>
@@ -53,7 +53,7 @@
 </div>
 
 <div class="item__tray-item" title="Created at: <%= @post.created_at %>">
-  <%= t(".created_at") %>: 
+  <%= t(".created_at") %>:
 
   <% if @post.draft? %>
     Draft
@@ -63,7 +63,7 @@
 </div>
 
 <div class="item__tray-item" title="Updated at: <%= @post.updated_at %>">
-  <%= t(".updated_at") %>: 
+  <%= t(".updated_at") %>:
 
   <% if @post.draft? %>
     Draft
@@ -74,7 +74,7 @@
 
 <% if @post.version.present? %>
   <div class="item__tray-item">
-    <%= t(".version") %>: 
+    <%= t(".version") %>:
 
     <%= @post.version %>
   </div>
@@ -82,7 +82,7 @@
 
 <% if @post.nice_url.present? %>
   <div class="item__tray-item">
-    <%= t(".nice_url") %>: 
+    <%= t(".nice_url") %>:
 
     <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
   </div>

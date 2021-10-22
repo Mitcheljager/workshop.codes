@@ -11,7 +11,7 @@
 <div class="heading mb-1/2">
   <h2>
     Workshop Codes
-    <% if params[:search] %> for <strong><%= params[:search] %></strong> <% end %>
+    <% if params[:search] %> for <strong><%= CGI.unescape(params[:search]) %></strong> <% end %>
     <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
     <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
     <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
