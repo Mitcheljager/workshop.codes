@@ -15,7 +15,11 @@ class ApplicationController < ActionController::Base
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   before_action :redirect_default_locale
   around_action :set_current_user
+
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
+  rescue_from AbstractController::ActionNotFound, with: :render_404
+  rescue_from ActionController::RoutingError,  with: :render_404
+  rescue_from ActionController::UnknownFormat,  with: :render_404
 
   def login_from_cookie
     return unless cookies[:remember_token] && !current_user
@@ -74,6 +78,17 @@ class ApplicationController < ActionController::Base
 
   def set_request_headers
     headers["Access-Control-Allow-Origin"] = "*"
+  end
+
+  def render_404
+    respond_to do |format|
+      format.html { render "errors/not_found", status: 404 }
+      format.xml { head 404 }
+      format.js { head 404 }
+      format.json { head 404 }
+    end
+  rescue ActionController::UnknownFormat
+    head 404
   end
 
   private
