@@ -19,7 +19,7 @@
     <%= t(".tags") %>:
 
     <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
-      <%= link_to tag.downcase, filter_path(search: to_search_query(tag)), class: "tag" %>
+      <%= link_to tag.downcase, filter_path(code: nil, search: to_search_query(tag)), class: "tag" %>
     <% end %>
   </div>
 <% end %>
