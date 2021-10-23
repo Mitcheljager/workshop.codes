@@ -76,7 +76,7 @@ class InitialiseInscrybeMDE {
         title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
       }
     ]
-    
+
     if (this.enableBlocks) {
       toolbar.push({
         action: () => { this.insertBlock("faq") },
@@ -99,7 +99,7 @@ class InitialiseInscrybeMDE {
 
     return toolbar
   }
-  
+
   initialise() {
     this.mde = new InscrybMDE({
       element: this.element,
@@ -121,7 +121,7 @@ class InitialiseInscrybeMDE {
         .post().then(data => {
           preview.innerHTML = data
         })
-    
+
         return "<div class=`p-1/2`><div class=`spinner`></div></div>"
       },
       toolbar: this.toolbar
@@ -156,26 +156,26 @@ class InitialiseInscrybeMDE {
 
   insertHeroIconSelect() {
     const button = this.mde.gui.toolbar.querySelector(".fa-hero-icon").closest("button")
-  
+
     button.classList.toggle("dropdown-open")
-  
+
     if (button.classList.contains("dropdown-open")) {
       const dropdownElement = document.createElement("div")
       dropdownElement.classList.add("editor-dropdown")
-  
-      const heroes =  ["Ana", "Ashe", "Baptiste", "Bastion", "Brigitte", "D.Va", "Doomfist", "Echo", "Genji", "Hanzo", "Junkrat", "Lúcio", "McCree", "Mei", "Mercy", "Moira", "Orisa", "Pharah", "Reaper", "Reinhardt", "Roadhog", "Sigma", "Soldier: 76", "Sombra", "Symmetra", "Torbjörn", "Tracer", "Widowmaker", "Winston", "Wrecking Ball", "Zarya", "Zenyatta"]
+
+      const heroes =  ["Ana", "Ashe", "Baptiste", "Bastion", "Brigitte", "D.Va", "Doomfist", "Echo", "Genji", "Hanzo", "Junkrat", "Lúcio", "Cassidy", "Mei", "Mercy", "Moira", "Orisa", "Pharah", "Reaper", "Reinhardt", "Roadhog", "Sigma", "Soldier: 76", "Sombra", "Symmetra", "Torbjörn", "Tracer", "Widowmaker", "Winston", "Wrecking Ball", "Zarya", "Zenyatta"]
       heroes.forEach(hero => {
         const heroElement = document.createElement("div")
         heroElement.classList.add("editor-dropdown__item")
         heroElement.innerText = hero
-  
+
         heroElement.addEventListener("click", () => {
           this.codemirror.replaceSelection(`[hero ${ hero }]`)
         })
-  
+
         dropdownElement.append(heroElement)
       })
-  
+
       button.append(dropdownElement)
     } else {
       button.querySelector(".editor-dropdown").remove()
@@ -203,7 +203,7 @@ class InitialiseInscrybeMDE {
     new FetchRails("/blocks/show_or_create", { name: name, id: blockId })
     .post().then(data => {
       marker.widgetNode.innerHTML = data
-      
+
       const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
       marker.lines[0].text = `[block ${ blockId }]`
 
@@ -235,17 +235,17 @@ class InitialiseInscrybeMDE {
     const sortableElement = marker.widgetNode.querySelector("[data-role~='sortable']")
     const insertBlockTemplateElement = marker.widgetNode.querySelector("[data-action~='insert-block-template']")
     const removeBlockTemplateElements = marker.widgetNode.querySelectorAll("[data-action~='remove-block-template']")
-    
+
     if (sortableElement) buildInputSortable(sortableElement)
     if (insertBlockTemplateElement) insertBlockTemplateElement.addEventListener("click", insertBlockTemplate)
     removeBlockTemplateElements.forEach(element => { element.addEventListener("click", removeBlockTemplate) })
   }
-  
+
   toggleImageUploader() {
     const button = this.mde.gui.toolbar.querySelector(".fa-image").closest("button")
-  
+
     button.classList.toggle("dropdown-open")
-  
+
     if (button.classList.contains("dropdown-open")) {
       const dropdownElement = document.createElement("div")
       dropdownElement.classList.add("editor-dropdown")
@@ -259,12 +259,12 @@ class InitialiseInscrybeMDE {
       labelElement.for = randomId
       labelElement.innerText = "Upload image"
       labelElement.classList.add(...labelClasslist)
-      
+
       const inputElement = document.createElement("input")
       inputElement.type = "file"
       inputElement.id = randomId
       inputElement.classList.add("hidden-field")
-      
+
       inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, this.codemirror).input() })
       labelElement.addEventListener("click", () => { inputElement.click() })
 
@@ -280,9 +280,9 @@ class InitialiseInscrybeMDE {
 
   toggleWikiSearch() {
     const button = this.mde.gui.toolbar.querySelector(".fa-wiki").closest("button")
-  
+
     button.classList.toggle("dropdown-open")
-  
+
     if (button.classList.contains("dropdown-open")) {
       const dropdownElement = document.createElement("div")
       dropdownElement.classList.add("editor-dropdown")
@@ -292,7 +292,7 @@ class InitialiseInscrybeMDE {
         <input type="text" class="form-input bg-darker" placeholder="Search the Wiki" />
         <div data-role="results"></div>
       `
-      
+
       button.append(dropdownElement)
 
       const input = button.querySelector("input")

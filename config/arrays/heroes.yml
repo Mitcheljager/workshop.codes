@@ -59,6 +59,12 @@
     en: Damage
     ko: 딜러
 -
+  en: Cassidy
+  ko: 맥크리
+  category:
+    en: Damage
+    ko: 딜러
+-
   en: Doomfist
   ko: 둠피스트
   category:
@@ -85,12 +91,6 @@
 -
   en: Junkrat
   ko: 정크랫
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: McCree
-  ko: 맥크리
   category:
     en: Damage
     ko: 딜러
