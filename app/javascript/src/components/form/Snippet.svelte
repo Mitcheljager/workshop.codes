@@ -6,6 +6,8 @@
 
   let foundTerms = []
   let processing
+  let snippetFixer = false
+  let replacedMcCree = false
 
   function autofillForm() {
     if (processing) return
@@ -60,13 +62,19 @@
 
     let maxPlayersTeamTwo = value.match(/(Max Team 2 Players:\s+).*?(?=\n)/gs)
     if (maxPlayersTeamTwo) maxPlayersTeamTwo = maxPlayersTeamTwo[0].replace("Max Team 2 Players: ", "")
-    
+
     const maxPlayers = parseInt(maxPlayersTeamOne) + parseInt(maxPlayersTeamTwo) || 12
-    
+
     const slider = document.querySelector("[name*='number_of_supported_players']")
     if (slider) slider.noUiSlider.set([1, maxPlayers])
 
     foundTerms = [...foundTerms, "max players"]
+  }
+
+  function replaceMcCree() {
+    if (value = value.replaceAll("McCree", "Cassidy")) {
+      replacedMcCree = true
+    }
   }
 </script>
 
@@ -80,7 +88,7 @@
     on:click|preventDefault={ autofillForm }
     class="button button--secondary mt-1/4"
     disabled={ processing }>
-    
+
     { processing ? "Processing..." : "Auto fill settings from snippet" }
   </button>
 { /if }
@@ -90,5 +98,32 @@
     { #each foundTerms as term, i }
       <div in:fade={{ duration: 150, delay: i * 150 }}>Set "{ term }"</div>
     { /each }
+  </div>
+{ /if }
+
+{ #if value }
+  <div class="switch-checkbox mt-1/4">
+    <input
+      id="snippet-fixer"
+      class="switch-checkbox__input"
+      autocomplete="off"
+      type="checkbox"
+      bind:checked={ snippetFixer }>
+
+    <label
+      class="switch-checkbox__label"
+      for="snippet-fixer">
+      Show Snippet Fixer Options
+    </label>
+  </div>
+{ /if }
+
+{ #if snippetFixer }
+  <div class="well well--dark mt-1/4">
+    <button
+      on:click|preventDefault={ replaceMcCree }
+      class="button { replacedMcCree ? "button--primary" : "button--secondary" }">
+      { replacedMcCree ? "Successfully replaced McCree with Cassidy" : "Replace McCree with Cassidy" }
+    </button>
   </div>
 { /if }
