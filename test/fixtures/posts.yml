@@ -7,7 +7,7 @@ post_one:
   description: This is a test
   categories: "[\"Solo\"]"
   tags: test
-  heroes: "[\"McCree\"]"
+  heroes: "[\"Cassidy\"]"
   maps: "[\"Castillo\"]"
   last_revision_created_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -18,6 +18,6 @@ post_two:
   description: This is a test
   categories: "[\"Solo\"]"
   tags: test
-  heroes: "[\"McCree\"]"
+  heroes: "[\"Cassidy\"]"
   maps: "[\"Castillo\"]"
   last_revision_created_at: <%= 5.day.ago.to_s(:db) %>

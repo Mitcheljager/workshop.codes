@@ -1703,7 +1703,7 @@ Status:
   STUNNED:
     guid: 00000000B565
     description: The player cannot move, aim, or use weapons or abilities. For example,
-      McCree's flashbang causes this status.
+      Cassidy's flashbang causes this status.
     en-US: Stunned
     es-MX: Aturdido
     fr-FR: Étourdi
