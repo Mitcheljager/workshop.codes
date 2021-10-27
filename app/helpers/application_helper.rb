@@ -73,6 +73,6 @@ module ApplicationHelper
   end
 
   def i18n_value_in_array(array, value)
-    array.select { |item| item["en"].downcase == value.downcase }[0][current_locale]
+    array.select { |item| item["en"].downcase == value&.downcase }[0]&.fetch(current_locale, nil)
   end
 end
