@@ -4,10 +4,10 @@
   <div class="well well--dark">
     <%= form_for :forgot_password, url: forgot_passwords_path do |f| %>
       <div class="form-field">
-        <%= f.label :email, "Emailaddress", class: "form-label" %>
-        <%= f.email_field :email, placeholder: "Emailaddress", class: "form-input", required: true %>
+        <%= f.label :email, "Email address", class: "form-label" %>
+        <%= f.email_field :email, placeholder: "Email address", class: "form-input", required: true %>
 
-        <div class="form-hint">If you have added an emailaddress to your account we will send you and email with instructions on how to reset your password.</div>
+        <div class="form-hint">If you have added an email address to your account we will send you an email with instructions on how to reset your password.</div>
       </div>
 
       <%= submit_tag "Submit", class: "button" %>
