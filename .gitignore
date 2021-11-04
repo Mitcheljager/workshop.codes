@@ -32,6 +32,9 @@
 /config/master.key
 config/local_env.yml
 
+# Ignore RSpec run results
+spec/examples.txt
+
 /public/packs
 /public/packs-test
 /node_modules
