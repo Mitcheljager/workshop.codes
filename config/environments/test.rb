@@ -36,10 +36,15 @@ Rails.application.configure do
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
+  # Configure job adapater
+  config.active_job.queue_adapter = :inline
+
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
 
   config.action_mailer.perform_caching = false
+  Rails.application.routes.default_url_options[:host] = "localhost:3000"
+
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
