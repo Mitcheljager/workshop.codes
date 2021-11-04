@@ -7,13 +7,17 @@ class ForgotPasswordsController < ApplicationController
   end
 
   def show
-    @forgot_password_token = ForgotPasswordToken.where(token: params[:token]).where("created_at > ?", 1.hour.ago).last
+    @forgot_password_token = ForgotPasswordToken.where(token: params[:token]).last
 
     not_found unless @forgot_password_token.present?
+
+    if @forgot_password_token.created_at <= 1.hour.ago
+      flash[:error] = "This password reset token has expired. Please request a new token."
+      redirect_to new_forgot_password_path
+    end
   end
 
   def new
-    @forgot_password_token = ForgotPasswordToken.new
   end
 
   def create
@@ -39,10 +43,14 @@ class ForgotPasswordsController < ApplicationController
 
       if @user.update(forgot_password_params.except(:token, :email))
         create_activity(:password_reset, {}, @user.id)
+        flash[:notice] = "Password successfully reset"
         redirect_to login_path
       else
         render :show
       end
+    else
+      flash[:error] = "Invalid token. It may have expired."
+      redirect_to new_forgot_password_path
     end
   end
 
