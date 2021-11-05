@@ -86,6 +86,7 @@ jobs:
         with:
           node-version: "14"
           check-latest: true
+          cache: 'yarn'
       - run: yarn install
       - name: Precompile assets
         run: |
