@@ -47,20 +47,8 @@ RSpec.describe "ForgotPasswords", type: :system do
       before(:each) do
         Timecop.freeze(Time.now)
 
-        visit logout_path
-        # Request password reset
-        visit new_forgot_password_path
-        fill_in "forgot_password_email", with: @user.email
-        click_on "Submit"
+        acquire_reset_url
 
-        # Pick up reset URL from email
-        email = ActionMailer::Base.deliveries.last
-        expect(email).to be_present
-        body = email.body.to_s
-        expect(body).to include("requested a password reset")
-        /(?<url>https?:\/\/[^\/]*?\/forgot-password\/.*)"/ =~ body
-        expect(url).to be_present
-        @url = url
         Timecop.travel(Time.now + 2.hours)
       end
 
@@ -79,21 +67,10 @@ RSpec.describe "ForgotPasswords", type: :system do
 end
 
 def attempt_reset_password
-  # Request password reset
-  visit new_forgot_password_path
-  fill_in "forgot_password_email", with: @user.email
-  click_on "Submit"
-
-  # Pick up reset URL from email
-  email = ActionMailer::Base.deliveries.last
-  expect(email).to be_present
-  body = email.body.to_s
-  expect(body).to include("requested a password reset")
-  /(?<url>https?:\/\/[^\/]*?\/forgot-password\/.*)"/ =~ body
-  expect(url).to be_present
+  acquire_reset_url
 
   # Use reset token to reset password
-  visit url
+  visit @url
   expect(page).to have_content "Reset your password"
   fill_in "forgot_password_password", with: "new_password"
   fill_in "forgot_password_password_confirmation", with: "new_password"
@@ -110,4 +87,20 @@ def attempt_reset_password
 
   # Use the new password
   sign_in_as(@user, "new_password")
+end
+
+def acquire_reset_url
+  # Request password reset
+  visit new_forgot_password_path
+  fill_in "forgot_password_email", with: @user.email
+  click_on "Submit"
+
+  # Pick up reset URL from email
+  email = ActionMailer::Base.deliveries.last
+  expect(email).to be_present
+  body = email.body.to_s
+  expect(body).to include("requested a password reset")
+  /(?<url>https?:\/\/[^\/]*?\/forgot-password\/.*)"/ =~ body
+  expect(url).to be_present
+  @url = url
 end
