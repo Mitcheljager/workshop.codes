@@ -46,6 +46,7 @@ jobs:
           node-version: "14"
           check-latest: true
           cache: 'yarn'
+          cache-dependency-path: './yarn.lock'
       - run: yarn install
       - name: Precompile assets
         run: |
@@ -89,6 +90,7 @@ jobs:
           node-version: "14"
           check-latest: true
           cache: 'yarn'
+          cache-dependency-path: './yarn.lock'
       - run: yarn install
       - name: Precompile assets
         run: |
