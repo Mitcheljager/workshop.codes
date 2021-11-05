@@ -32,6 +32,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get install libsqlite3-dev
+          sudo rm config/credentials.yml.enc
+          echo "$RAILS_MASTER_KEY" > config/master.key
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
