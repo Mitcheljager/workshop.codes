@@ -15,13 +15,10 @@ RSpec.describe "ForgotPasswords", type: :system do
 
   before(:each) do
     ActionMailer::Base.deliveries.clear
+    @user = create(:user, password: "password", email: "loxton@overwatch.net")
   end
 
   describe "happy path: proper reset procedure" do
-    before(:each) do
-      @user = create(:user, password: "password", email: "loxton@overwatch.net")
-      sign_in_as @user
-    end
 
     context "allows reset of password" do
       it "for default user" do
@@ -82,7 +79,6 @@ RSpec.describe "ForgotPasswords", type: :system do
 end
 
 def attempt_reset_password
-  visit logout_path
   # Request password reset
   visit new_forgot_password_path
   fill_in "forgot_password_email", with: @user.email
