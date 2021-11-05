@@ -36,6 +36,49 @@ RSpec.describe "ForgotPasswords", type: :system do
       end
     end
   end
+
+  #TODO: Sad path of nonexistent or expired token or invalid email
+  describe "sad path: improper token" do
+    context "which does not exist" do
+      it "returns a 404" do
+        visit forgot_password_path(token: SecureRandom.base64)
+        expect(page).to have_http_status(:not_found)
+      end
+    end
+
+    context "which has expired" do
+      before(:each) do
+        Timecop.freeze(Time.now)
+
+        visit logout_path
+        # Request password reset
+        visit new_forgot_password_path
+        fill_in "forgot_password_email", with: @user.email
+        click_on "Submit"
+
+        # Pick up reset URL from email
+        email = ActionMailer::Base.deliveries.last
+        expect(email).to be_present
+        body = email.body.to_s
+        expect(body).to include("requested a password reset")
+        /(?<url>https?:\/\/[^\/]*?\/forgot-password\/.*)"/ =~ body
+        expect(url).to be_present
+        @url = url
+        Timecop.travel(Time.now + 2.hours)
+      end
+
+      after(:each) do
+        Timecop.return
+      end
+
+      it "returns a 200" do
+        visit @url
+        expect(page).to have_http_status(:ok)
+        expect(page).to have_content("token has expired.")
+        expect(page).to have_current_path new_forgot_password_path
+      end
+    end
+  end
 end
 
 def attempt_reset_password
