@@ -56,6 +56,8 @@ group :development, :test do
   gem "selenium-webdriver", "~> 3.142.7"
   gem "shoulda-matchers", "~> 4.5"
   gem "sqlite3", "1.4.2"
+  # To freeze time and allow time travel for time-sensitive tests
+  gem "timecop"
 end
 
 group :development do
