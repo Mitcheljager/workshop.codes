@@ -64,6 +64,24 @@ RSpec.describe "ForgotPasswords", type: :system do
       end
     end
   end
+
+  describe "sad path: bad email" do
+    context "which is not linked to an account" do
+      before(:each) do
+        visit new_forgot_password_path
+        fill_in "forgot_password_email", with: "doesnotexist@null.void"
+        click_on "Submit"
+      end
+
+      it "does not create a token" do
+        expect(ForgotPasswordToken.count).to eq(0)
+      end
+
+      it "does not try to send an email" do
+        expect(ActionMailer::Base.deliveries.count).to eq(0)
+      end
+    end
+  end
 end
 
 def attempt_reset_password
