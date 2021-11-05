@@ -29,6 +29,7 @@ jobs:
     env:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       RAILS_CREDENTIALS: ${{ secrets.RAILS_CREDENTIALS }}
+      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -73,6 +74,7 @@ jobs:
     env:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       RAILS_CREDENTIALS: ${{ secrets.RAILS_CREDENTIALS }}
+      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
