@@ -59,6 +59,12 @@ jobs:
       - name: RSpec
         run: |
           bundle exec rspec
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 15
+        with:
+          limit-access-to-actor: true
   features:
     name: Cucumber Feature Check
     runs-on: ubuntu-latest
