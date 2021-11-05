@@ -27,9 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: CI
     env:
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      RAILS_CREDENTIALS: ${{ secrets.RAILS_CREDENTIALS }}
-      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+      BLIND_INDEX_MASTER_KEY: "${{ secrets.BLIND_INDEX_MASTER_KEY }}"
+      LOCKBOX_MASTER_KEY: "${{ secrets.LOCKBOX_MASTER_KEY }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -37,8 +36,6 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get install libsqlite3-dev
-          sudo rm config/credentials.yml.enc
-          echo "$RAILS_CREDENTIALS" > config/credentials.yml.enc
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -71,9 +68,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: CI
     env:
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      RAILS_CREDENTIALS: ${{ secrets.RAILS_CREDENTIALS }}
-      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+      BLIND_INDEX_MASTER_KEY: "${{ secrets.BLIND_INDEX_MASTER_KEY }}"
+      LOCKBOX_MASTER_KEY: "${{ secrets.LOCKBOX_MASTER_KEY }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -82,8 +78,6 @@ jobs:
           sudo apt update
           sudo apt-get install libsqlite3-dev
           sudo apt-get install firefox-geckodriver
-          sudo rm config/credentials.yml.enc
-          echo "$RAILS_CREDENTIALS" > config/credentials.yml.enc
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
