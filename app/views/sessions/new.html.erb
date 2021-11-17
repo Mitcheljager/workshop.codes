@@ -36,12 +36,12 @@
 
         <hr class="mt-1/2 mb-1/4">
 
-        <%= link_to "/auth/discord", class: "button button--discord mt-1/4", data: { prefetch: false } do %>
+        <%= link_to "/auth/discord", method: :post, class: "button button--discord mt-1/4", data: { prefetch: false } do %>
           <%= inline_svg_tag "discord.svg", height: 24 %>
           <%= t "sessions.login.discord" %>
         <% end %>
 
-        <%= link_to "/auth/bnet", class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
+        <%= link_to "/auth/bnet", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
           <%= t "sessions.login.battle_net" %>
         <% end %>
