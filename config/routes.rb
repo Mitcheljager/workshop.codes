@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     resources :reports, only: [:index, :show]
   end
 
-  post "/auth/:provider/callback", to: "sessions#create", as: "oauth"
+  get "/auth/:provider/callback", to: "sessions#create", as: "oauth"
 
   post "analytics/post", to: "analytics#post", as: "post_analytics"
   post "analytics/user", to: "analytics#user", as: "user_analytics"
