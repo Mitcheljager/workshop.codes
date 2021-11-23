@@ -1,6 +1,6 @@
 @keyframes move-in-alert {
   from {
-    transform: translateY(200%);
+    transform: translateY(100vh);
   }
 
   to {
@@ -31,8 +31,7 @@
   color: $pure-white;
   font-size: 14px;
   text-decoration: none;
-  z-index: 2000;
-  transform: translateY(200%);
+  transform: translateY(100vh);
   animation: move-in-alert 200ms 500ms forwards;
   max-width: min(50em, 75%);
 
