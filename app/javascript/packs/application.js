@@ -14,6 +14,7 @@ import * as carouselCards from "../src/carousel-cards"
 import * as copy from "../src/copy"
 import * as differenceViewer from "../src/difference-viewer"
 import * as disableFormBySelect from "../src/disable-form-by-select"
+import * as dismissParent from "../src/dismiss-parent"
 import * as dropdown from "../src/dropdown"
 import * as filter from "../src/filter"
 import * as gallery from "../src/gallery"
@@ -40,9 +41,10 @@ import * as wikiSearch from "../src/wiki/search"
 
 document.addEventListener("turbolinks:load", function() {
   analytics.send()
-  
+
   copy.bind()
   disableFormBySelect.bind()
+  dismissParent.bind()
   dropdown.bind()
   filter.bind()
   gallery.bind()
@@ -62,9 +64,9 @@ document.addEventListener("turbolinks:load", function() {
   tabs.bind()
   toggleContent.bind()
   wikiSearch.bind()
-  
+
   microlight.reset()
-  
+
   carousel.render()
   carouselCards.render()
   differenceViewer.render()
@@ -75,6 +77,7 @@ document.addEventListener("turbolinks:load", function() {
 
 document.addEventListener("turbolinks:before-cache", function() {
   carouselCards.destroy()
+  dismissParent.destroy()
   numPlayersSlider.destroy()
   sticky.destroy()
 })
