@@ -78,12 +78,12 @@ class InitialiseInscrybeMDE {
     ]
 
     if (this.enableBlocks) {
-      toolbar.push({
-        action: () => { this.insertBlock("faq") },
-        name: "FAQ Block",
-        className: "fa fa-block-faq",
-        title: "FAQ Block"
-      })
+      // toolbar.push({
+      //   action: () => { this.insertBlock("faq") },
+      //   name: "FAQ Block",
+      //   className: "fa fa-block-faq",
+      //   title: "FAQ Block"
+      // })
     }
 
     if (this.enableWiki) {
