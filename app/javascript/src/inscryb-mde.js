@@ -118,9 +118,9 @@ class InitialiseInscrybeMDE {
       },
       previewRender: (plainText, preview) => {
         new FetchRails("/parse-markdown", { post: { description: plainText } })
-        .post().then(data => {
-          preview.innerHTML = data
-        })
+          .post().then(data => {
+            preview.innerHTML = data
+          })
 
         return "<div class=`p-1/2`><div class=`spinner`></div></div>"
       },
@@ -201,16 +201,16 @@ class InitialiseInscrybeMDE {
     })
 
     new FetchRails("/blocks/show_or_create", { name: name, id: blockId })
-    .post().then(data => {
-      marker.widgetNode.innerHTML = data
+      .post().then(data => {
+        marker.widgetNode.innerHTML = data
 
-      const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
-      marker.lines[0].text = `[block ${ blockId }]`
+        const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
+        marker.lines[0].text = `[block ${ blockId }]`
 
-      this.bindBlockEvents(marker)
-    })
-    .catch(error => alert(error))
-    .finally(() => marker.changed())
+        this.bindBlockEvents(marker)
+      })
+      .catch(error => alert(error))
+      .finally(() => marker.changed())
   }
 
   parseBlocks() {
@@ -312,30 +312,30 @@ class InitialiseInscrybeMDE {
         resultsElement.innerHTML = "<small>Searching...</small>"
 
         new FetchRails(`/wiki/search/${ event.target.value }.json`).get()
-        .then(data => {
-          data = JSON.parse(data)
-          resultsElement.innerHTML = ""
+          .then(data => {
+            data = JSON.parse(data)
+            resultsElement.innerHTML = ""
 
-          if (!data.length) {
-            resultsElement.innerHTML = "<small>No results found</small>"
-            return
-          }
+            if (!data.length) {
+              resultsElement.innerHTML = "<small>No results found</small>"
+              return
+            }
 
-          data.forEach(item => {
-            const itemElement = document.createElement("a")
-            itemElement.classList.add("editor-dropdown__item")
-            itemElement.innerText = item.title
-            itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ item.slug }`) })
+            data.forEach(item => {
+              const itemElement = document.createElement("a")
+              itemElement.classList.add("editor-dropdown__item")
+              itemElement.innerText = item.title
+              itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ item.slug }`) })
 
-            const categoryElement = document.createElement("span")
-            categoryElement.style = "opacity: .5; font-size: .8em"
-            categoryElement.innerText = " " + item.category.title
+              const categoryElement = document.createElement("span")
+              categoryElement.style = "opacity: .5; font-size: .8em"
+              categoryElement.innerText = " " + item.category.title
 
 
-            itemElement.append(categoryElement)
-            resultsElement.append(itemElement)
+              itemElement.append(categoryElement)
+              resultsElement.append(itemElement)
+            })
           })
-        })
       }, 500)
 
       input.addEventListener("input", getSearchResults)

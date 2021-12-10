@@ -27,15 +27,15 @@
     $notificationsCount = 0
     
     new FetchRails("/unread-notifications").get()
-    .then(data => {
-      loading = false
-      $notifications = JSON.parse(data)
-    })
+      .then(data => {
+        loading = false
+        $notifications = JSON.parse(data)
+      })
   }
 
   function getUnreadCount() {
     new FetchRails("/unread-notifications-count").get()
-    .then(data => $notificationsCount = parseInt(data))
+      .then(data => $notificationsCount = parseInt(data))
   }
 </script>
 

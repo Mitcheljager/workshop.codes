@@ -16,11 +16,11 @@ function createBlock() {
   this.dataset.disabled = true
 
   new FetchRails("/blocks", { block: { content_type: this.dataset.contentType, name: this.dataset.name } })
-  .post().then(data => {
-    new Promise((resolve) => new Function("resolve", data)(resolve))
-  }).finally(() => {
-    this.dataset.disabled = false
-  })
+    .post().then(data => {
+      new Promise((resolve) => new Function("resolve", data)(resolve))
+    }).finally(() => {
+      this.dataset.disabled = false
+    })
 }
 
 function buildBlockSortable(element) {
@@ -42,10 +42,10 @@ function updateBlockSortable() {
   progressBar.show()
 
   new FetchRails("/blocks/set_positions", { blocks: positions })
-  .post().finally(() => {
-    progressBar.setValue(1)
-    progressBar.hide()
-  })
+    .post().finally(() => {
+      progressBar.setValue(1)
+      progressBar.hide()
+    })
 }
 
 export function insertBlockTemplate(event) {

@@ -20,9 +20,9 @@ const searchWiki = debounce((event) => {
   const url = resultsElement.dataset.url.replace("query", element.value) + ".json"
 
   new FetchRails(url).get()
-  .then(data => {
-    setWikiSearchResults(JSON.parse(data))
-  })
+    .then(data => {
+      setWikiSearchResults(JSON.parse(data))
+    })
 }, 500)
 
 function setWikiSearchResults(data) {

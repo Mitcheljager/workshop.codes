@@ -21,15 +21,15 @@ function getPostAnalytics(element) {
   target.insertAdjacentHTML("afterBegin", "<div class='chart__placeholder'><div class='spinner'></div></div>")
 
   new FetchRails("/analytics/post", { type: element.value, id: element.dataset.postId })
-  .post().then(data => {
-    const parsedData = JSON.parse(data)
-    target.querySelector(".chart__placeholder").remove()
+    .post().then(data => {
+      const parsedData = JSON.parse(data)
+      target.querySelector(".chart__placeholder").remove()
 
-    createChart(target, parsedData, "%Y-%m-%d %H:00", [], "bar")
-  }).finally(() => {
-    progressBar.setValue(1)
-    progressBar.hide()
-  })
+      createChart(target, parsedData, "%Y-%m-%d %H:00", [], "bar")
+    }).finally(() => {
+      progressBar.setValue(1)
+      progressBar.hide()
+    })
 }
 
 function revealPostAnalytics(event) {

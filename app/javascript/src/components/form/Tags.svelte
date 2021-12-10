@@ -76,8 +76,8 @@
 
   function cleanInput(value) {
     return splitTags(value)
-    .map((tag) => cleanTag(tag))
-    .join(delimiter)
+      .map((tag) => cleanTag(tag))
+      .join(delimiter)
   }
 
   function parseInput() {
