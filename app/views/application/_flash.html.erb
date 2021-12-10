@@ -1,4 +1,4 @@
-<div class="alerts">
+<div id="alerts" class="alerts">
   <% flash.each do |type, message| %>
     <% next if type == "alert" %>
     <div class="alerts__alert <%= "alerts__alert--#{type}" if ["warning", "error"].include? type.to_s %>">
