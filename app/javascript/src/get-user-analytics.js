@@ -22,13 +22,13 @@ function getUserAnalytics(element) {
   target.insertAdjacentHTML("afterBegin", "<div class='chart__placeholder'><div class='spinner'></div></div>")
 
   new FetchRails("/analytics/user", { type: element.value })
-  .post().then(data => {
-    const parsedData = JSON.parse(data)
-    target.querySelector(".chart__placeholder").remove()
+    .post().then(data => {
+      const parsedData = JSON.parse(data)
+      target.querySelector(".chart__placeholder").remove()
 
-    createChart(target, parsedData)
-  }).finally(() => {
-    progressBar.setValue(1)
-    progressBar.hide()
-  })
+      createChart(target, parsedData)
+    }).finally(() => {
+      progressBar.setValue(1)
+      progressBar.hide()
+    })
 }

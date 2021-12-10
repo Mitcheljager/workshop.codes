@@ -18,15 +18,15 @@ function getReportsForm(event) {
   eventTarget.innerText = "Loading..."
 
   new FetchRails(eventTarget.href).get()
-  .then(data => {
-    eventTarget.innerText = originalText
-    document.body.insertAdjacentHTML("beforeend", data)
+    .then(data => {
+      eventTarget.innerText = originalText
+      document.body.insertAdjacentHTML("beforeend", data)
 
-    const modal = document.querySelector("[data-modal='report']")
-    const backdrop = modal.querySelector(".modal__backdrop")
+      const modal = document.querySelector("[data-modal='report']")
+      const backdrop = modal.querySelector(".modal__backdrop")
 
-    backdrop.removeAndAddEventListener("click", closeModal)
-    revealBySelect.bind()
-    disableFormBySelect.bind()
-  })
+      backdrop.removeAndAddEventListener("click", closeModal)
+      revealBySelect.bind()
+      disableFormBySelect.bind()
+    })
 }

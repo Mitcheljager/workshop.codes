@@ -104,12 +104,12 @@ export default class InscrybeInsertImage {
 
         if (uploader.progress == 100) {
           new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }`)
-          .get().then(data => this.replaceMarkerWithImage(randomId, data))
-          .catch(error => alert(error))
+            .get().then(data => this.replaceMarkerWithImage(randomId, data))
+            .catch(error => alert(error))
         }
       }, 100)
     })
-    .catch(error => alert(error))
+      .catch(error => alert(error))
   }
 
   insertPlaceholderText(randomId) {

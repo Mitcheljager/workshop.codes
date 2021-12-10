@@ -25,13 +25,13 @@ function loadSnippet(event, element) {
   const ideElement = document.querySelector("[data-role~='ide-content']")
 
   new FetchRails("/get-snippet", { id: id })
-  .post()
-  .then(data => {
-    ideElement.innerHTML = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;")
+    .post()
+    .then(data => {
+      ideElement.innerHTML = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;")
 
-    initiateIde(ideElement)
-  })
-  .catch(error => {
-    ideElement.innerHTML = `Failed to load Snippet <br>${ error }`
-  })
+      initiateIde(ideElement)
+    })
+    .catch(error => {
+      ideElement.innerHTML = `Failed to load Snippet <br>${ error }`
+    })
 }

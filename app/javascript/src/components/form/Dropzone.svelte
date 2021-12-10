@@ -89,12 +89,12 @@
         clearInterval(interval)
 
         new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=thumbnail`)
-        .get()
-        .then(data => setImage(randomId, uploader.blob.id, data))
-        .catch(() => alert = "Something went wrong when retrieving your image")
+          .get()
+          .then(data => setImage(randomId, uploader.blob.id, data))
+          .catch(() => alert = "Something went wrong when retrieving your image")
       }, 100)
     })
-    .catch(error => alert = error)
+      .catch(error => alert = error)
   }
 
   function setProgress(id, progress) {

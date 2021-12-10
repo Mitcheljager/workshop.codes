@@ -20,8 +20,8 @@ function getPartial(event, element) {
   if (targetElement.dataset.loaded == "true") return
 
   new FetchRails(url).get()
-  .then(data => {
-    targetElement.dataset.loaded = "true"
-    targetElement.innerHTML = data
-  })
+    .then(data => {
+      targetElement.dataset.loaded = "true"
+      targetElement.innerHTML = data
+    })
 }
