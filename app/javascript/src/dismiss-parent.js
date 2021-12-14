@@ -13,8 +13,8 @@ export function bind() {
 function dismissParent(event) {
   const parent = this.parentNode
   parent.classList.add("fade-out")
-  setTimeout((parent) => {
+  setTimeout(() => {
     parent.remove()
-  }, 500, parent)
+  }, 500)
   event.preventDefault()
 }
