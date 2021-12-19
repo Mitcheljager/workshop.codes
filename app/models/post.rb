@@ -2,6 +2,9 @@ include ApplicationHelper
 
 class ArrayLengthValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
+    return if (value.is_a?(String) && value.empty?)
+    value = JSON.parse(value) if (value.is_a?(String))
+
     return unless options.key?(:maximum)
     return unless value.present?
     maximum = options[:maximum]
@@ -119,11 +122,13 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { minimum: 5, maximum: 75 }
   validates :code, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 5, maximum: 6 }, format: { with: /\A[A-Za-z0-9]+\z/, message: "is invalid. Only letters and numbers are allowed." }
   validates :nice_url, uniqueness: true, allow_blank: true, length: { minimum: 7, maximum: 20 }, format: { with: /\A[a-z0-9-]+\z/, message: "is invalid. Only lowercase letter, numbers, and dashes are allowed." }
+  validates :description, length: { maximum: 100000 }
   validates :categories, presence: true, array_length: { maximum: 3 }, array_name_part_of: { array: categories }
   validates :tags, length: { maximum: 100 }
   validates :heroes, presence: true, array_name_part_of: { array: heroes }
   validates :maps, presence: true, array_name_part_of: { array: maps }
   validates :version, length: { maximum: 20 }
+  validates :image_order, array_length: { maximum: 30 }
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes },
                      dimension: { max: 3500..3500 }

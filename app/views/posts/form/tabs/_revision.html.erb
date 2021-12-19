@@ -19,6 +19,6 @@
       <%= t("posts.form.revision.input.help_html") %>
     </div>
 
-    <%= form.text_area :revision_description, class: "form-input form-textarea", data: { role: "simple-mde" } %>
+    <%= form.text_area :revision_description, class: "form-input form-textarea", data: { role: "simple-mde", max_length: 100000 } %>
   </div>
 </div>

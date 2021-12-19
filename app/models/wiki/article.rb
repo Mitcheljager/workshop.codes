@@ -18,6 +18,8 @@ class Wiki::Article < ApplicationRecord
 
   validates :title, presence: true, length: { minimum: 2, maximum: 120 }
   validates :slug, presence: true
+  validates :content, length: { maximum: 100000 }
+  validates :tags, length: { maximum: 1000 }
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes }
 
