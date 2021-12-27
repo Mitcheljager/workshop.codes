@@ -30,6 +30,7 @@ class InitialiseInscrybeMDE {
     this.codemirror = null
     this.enableBlocks = element.dataset.enableBlocks
     this.enableWiki = element.dataset.enableWiki
+    this.maxLength = element.dataset.maxLength || 1000000
     this.toolbar = this.setToolbar()
   }
 
@@ -78,12 +79,12 @@ class InitialiseInscrybeMDE {
     ]
 
     if (this.enableBlocks) {
-      // toolbar.push({
-      //   action: () => { this.insertBlock("faq") },
-      //   name: "FAQ Block",
-      //   className: "fa fa-block-faq",
-      //   title: "FAQ Block"
-      // })
+      toolbar.push({
+        action: () => { this.insertBlock("faq") },
+        name: "FAQ Block",
+        className: "fa fa-block-faq",
+        title: "FAQ Block"
+      })
     }
 
     if (this.enableWiki) {
@@ -109,8 +110,16 @@ class InitialiseInscrybeMDE {
       blockStyles: {
         italic: "_"
       },
-      status: true,
-	    status: ["lines", "words"],
+	    status: ["lines", "words", {
+        className: "characters",
+        onUpdate: statusElement => {
+          this.characters = this.codemirror.getValue().length
+          statusElement.innerHTML = this.characters
+
+          statusElement.classList.toggle("error", this.characters > this.maxLength)
+          if (this.characters > this.maxLength) statusElement.innerHTML += ` / ${ this.maxLength }`
+        }
+      }],
       spellChecker: false,
       promptURLs: true,
       insertTexts: {

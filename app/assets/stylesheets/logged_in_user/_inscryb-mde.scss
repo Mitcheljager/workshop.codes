@@ -87,6 +87,16 @@
   }
 }
 
+.editor-statusbar {
+  font-family: 'Consolas', monospace;
+  padding: .5rem 0;
+  color: $text-color-dark;
+
+  .error {
+    color: $red;
+  }
+}
+
 .editor-toolbar .editor-dropdown__item {
   display: block;
   width: 100%;
@@ -209,7 +219,7 @@
   &.active {
     filter: brightness(1.15);
   }
-  
+
   .fa-eye {
     color: white;
   }

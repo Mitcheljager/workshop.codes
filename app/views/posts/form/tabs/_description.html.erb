@@ -5,7 +5,7 @@
     <%= t("posts.form.description.help_html", link: link_to("and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank")) %>
   </div>
 
-  <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_blocks: true } %>
+  <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_blocks: true, max_length: POST_DESCRIPTION_LIMIT } %>
 </div>
 
 <div class="modal modal--content-width" data-modal="markdown-preview" data-hide-on-close style="display: none">

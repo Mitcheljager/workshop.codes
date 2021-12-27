@@ -427,6 +427,8 @@ en:
               not_part_of_array: ": You have selected a Hero that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
             maps:
               not_part_of_array: ": You have selected a Map that is not part of the system. Are you trying to cheat, or was this a mistake on our part? Hmm.."
+            image_order:
+              too_long_array: ": Your post can have a maximum of %{count} images"
         user:
           attributes:
             featured_posts:
