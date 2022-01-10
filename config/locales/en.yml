@@ -109,6 +109,14 @@ en:
           <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
           <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
           <p><small><em>This code will expire in roughly %{time}.</em></small></p>
+      tabs:
+        description: Description
+        controls: Controls
+        snippet: Snippet
+        collection: Collection
+        comments: Comments
+        revisions: Update log
+    details:
       categories: Categories
       tags: Tags
       heroes: Heroes
@@ -118,13 +126,6 @@ en:
       version: Current version
       nice_url: Share URL
       all: All
-      tabs:
-        description: Description
-        controls: Controls
-        snippet: Snippet
-        collection: Collection
-        comments: Comments
-        revisions: Update log
     new:
       page_title: Create new
       title_html: <strong>Create new</strong> Workshop Code
