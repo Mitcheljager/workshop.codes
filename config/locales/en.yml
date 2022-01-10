@@ -117,6 +117,7 @@ en:
         comments: Comments
         revisions: Update log
     details:
+      players: Players
       categories: Categories
       tags: Tags
       heroes: Heroes

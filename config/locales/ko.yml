@@ -99,6 +99,7 @@ ko:
           <p class="mt-0"><small>워크샵 아이템을 영원히 잃어 버리지 않도록 새 코드를 생성하고 여기에서 업데이트하십시오.</small></p>
           <p><small><em>이 코드는 대략적으로 만료됩니다 %{time}.</em></small></p>
     details:
+      players: 플레이어
       categories: 카테고리
       tags: 태그
       heroes: 영웅
