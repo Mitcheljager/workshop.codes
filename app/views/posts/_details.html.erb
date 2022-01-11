@@ -1,6 +1,6 @@
 <% if has_player_range?(@post) %>
   <div class="item__tray-item">
-    Players |
+    <%= t(".players") %> |
 
     <%= @post.min_players %> - <%= @post.max_players %>
   </div>
