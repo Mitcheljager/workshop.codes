@@ -12,6 +12,6 @@ module BlocksHelper
   end
 
   def block_images(block)
-    JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) }
+    JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) }.filter { |i| i.present? }
   end
 end

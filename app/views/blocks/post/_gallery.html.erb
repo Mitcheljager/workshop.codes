@@ -1,6 +1,6 @@
 <% return unless block_property(block, "image_blob_ids").present? %>
 
-<% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) } %>
+<% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) }.filter { |i| i.present? } %>
 <% return unless images.any? %>
 
 <% random_id = SecureRandom.alphanumeric(8) %>
