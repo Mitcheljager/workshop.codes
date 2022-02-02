@@ -232,7 +232,7 @@ class PostsController < ApplicationController
     return unless @post.present? && @post.images.any?
 
     @image_ids = @post.image_order.present? ? @post.image_order : "[]"
-    @ordered_images = JSON.parse(@image_ids).collect { |i| @post.images.find_by_blob_id(i) }
+    @ordered_images = JSON.parse(@image_ids).collect { |i| @post.images.find_by_blob_id(i) }.filter { |i| i.present? }
   end
 
   def create_collection

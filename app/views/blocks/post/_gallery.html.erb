@@ -1,6 +1,6 @@
 <% return unless block_property(block, "image_blob_ids").present? %>
 
-<% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) } %>
+<% images = JSON.parse(block_property(block, "image_blob_ids", "[]")).collect { |i| block.images.find_by_blob_id(i) }.filter { |i| i.present? } %>
 <% return unless images.any? %>
 
 <% random_id = SecureRandom.alphanumeric(8) %>
@@ -11,7 +11,7 @@
   <% images.each do |image| %>
     <% next unless image %>
     <% url = rails_public_blob_url(image.variant(quality: 95).processed) %>
-    
+
     <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= url %>">
       <%= image_tag url, alt: "abc", loading: "lazy" %>
 
