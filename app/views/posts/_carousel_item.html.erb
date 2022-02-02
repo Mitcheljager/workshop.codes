@@ -5,7 +5,7 @@
     <img class="img-fluid" <%= "data-" if index >= 2 %>src="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500]).processed) %>" aria-label="Image for '<%= @post.title %>'" width="900" height="500" />
   </picture>
 
-  <div class="carousel__actions">            
+  <div class="carousel__actions">
     <div
       class="button button--small button--secondary"
       data-action="show-modal set-gallery"
