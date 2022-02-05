@@ -1,9 +1,5 @@
 namespace :db do
-  desc "TODO"
-  task repopulate: :environment do
-  end
-
-  desc "TODO"
+  desc "Fakes 200 posts from the first created user"
   task fakeit: :environment do
     200.times do
       min_players = Faker::Number.within(range: 1..12)

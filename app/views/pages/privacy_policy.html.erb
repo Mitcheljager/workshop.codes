@@ -1,8 +1,9 @@
 <h1 class="heading">Privacy Policy for <strong>Workshop.codes</strong></h1>
+<p><em>Last Updated: January 19th, 2022</em></p>
 
 <p>This page details the data we collect, what we do with collected data, how long we keep that data, and how you can request the deletion of said data.</p>
 
-<p>Long story short, we keep data collection to a minimum and keep it as impersonal as possible. The only personally identifiable information we collect is email addresses. Providing an email address is always optional, and the email address is encrypted before being stored.</p>
+<p><strong><u>Long story short</u></strong>, we keep data collection to a minimum and keep it as impersonal as possible. The only personally identifiable information we collect is email addresses. Providing an email address is always optional, and the email address is encrypted before being stored. However, we rely on third parties to power or enhance your experience on Workshop.codes, and those third parties aren't fully controlled by us.</p>
 
 
 
@@ -21,9 +22,9 @@
 
 <h2 class="mt-1/1" id="data-we-collect">Data We Collect and How We Use It</h2>
 
-<p>When you visit Workshop.codes you are given a token to identify you (hereafter referred to as the visitor token). The visitor token is completely anonymous, cannot be used to identify you personally, and expires after 4 hours of inactivity. Visitor tokens are saved in our database for a maximum of 1 month. An anonymized IP address is saved along with this token. For more information about how we anonymize IP addresses, please read the <%= link_to "Ahoy README", "https://github.com/ankane/ahoy#ip-masking", target: "_blank", rel: "noreferrer noopener" %>.<br></p>
+<p>When you visit Workshop.codes you are given a token to identify you (hereafter referred to as the <strong>visitor token</strong>). The visitor token is completely anonymous, cannot be used to identify you personally, and expires after 4 hours of inactivity. Visitor tokens are saved in our database for a maximum of 1 month. An anonymized IP address is saved along with this token. For more information about how we anonymize IP addresses, please read the <%= link_to "Ahoy README", "https://github.com/ankane/ahoy#ip-masking", target: "_blank", rel: "noreferrer noopener" %>.<br></p>
 
-<p>We also track certain actions you perform on Workshop.codes (hereafter referred to as action data). Action data are tied to your visitor token and contain no information that could personally identify you. Action data are stored in our database for a maximum of 1 month. We use action data for analytics that are shown to users of this website. For example, action data might be used to show how many visits a specific page has received. Analytics utilizing action data are always shown in aggregate, meaning users cannot identify the visitor tokens involved in action data, let alone the users to which action data are tied.</p>
+<p>We also track certain actions you perform on Workshop.codes (hereafter referred to as <strong>action data</strong>). Action data are tied to your visitor token and contain no information that could personally identify you. Action data are stored in our database for a maximum of 1 month. We use action data for analytics that are shown to users of this website. For example, action data might be used to show how many visits a specific page has received. Analytics utilizing action data are always shown in aggregate, meaning users cannot identify the visitor tokens involved in action data, let alone the users to which action data are tied.</p>
 
 <p>When you create an account, only the information we ask for is saved. Your username is public. Your password is encrypted before being stored. The use of an email address is completely optional, and provided email addresses are encrypted before being stored. The encryption of email addresses and passwords prevents this data from being read in the event of a data breach without the attacker also compromising the systems which encrypt said data.</p>
 
@@ -52,12 +53,6 @@
   </tr>
 
   <tr>
-    <td>__cfduid</td>
-    <td>This cookie helps Cloudflare detect malicious visitors to our Customers’ websites and minimizes blocking legitimate users. It is necessary to support Cloudflare's security features.<br>
-    More information can be found on <%= link_to "Cloudflare", "https://support.cloudflare.com/hc/en-us/articles/200170156-Understanding-the-Cloudflare-Cookies", target: "_blank", rel: "noreferrer noopener" %>.</td>
-  </tr>
-
-  <tr>
     <td>_gat_gtag_[xxx]</td>
     <td>Used by Google Analytics to throttle request rate.</td>
   </tr>
@@ -83,68 +78,102 @@
   </tr>
 </table>
 
+<p>Please note that some third parties (see below) may set other cookies on your browser while you are browsing Workshop.codes.</p>
+
 
 
 <h2 class="mt-1/1" id="third-party-privacy-policies">Third Party Privacy Policies</h2>
 
 <p>Workshop.codes' Privacy Policy does not extend to any third-party services we might use. Thus, we advise you to consult the privacy policies of the third-party services we use (listed below) for more detailed information on their practices and instructions on opting out of certain services.</p>
 
-<p>Please note that certain parts of the privacy policies listed below may not apply to you, the end user, as Workshop.codes communicates with the listed third parties on your behalf. For example, any sections regarding browser cookies do not apply to you, as your browser does not directly connect to the listed third party services when using Workshop.codes.</p>
+<p>Please note that certain parts of the privacy policies listed below may not apply to you, the end user, as Workshop.codes communicates with the listed third parties on your behalf. For example, any sections of privacy policies, besides Google's privacy policy, regarding browser cookies do not apply to you, as your browser does not store cookies from the listed third parties when using Workshop.codes.</p>
 
 <table>
   <tr>
     <th>Third Party</th>
     <th>Purpose</th>
+    <th>Information provided to third party</th>
     <th>Link to Privacy Policy</th>
+  </tr>
+
+  <tr>
+    <td>Blizzard Entertainment</td>
+    <td>Provide alternative login method</td>
+    <td>Request for authorization on behalf of end user</td>
+    <td><%= link_to "https://www.blizzard.com/en-us/legal/a4380ee5-5c8d-4e3b-83b7-ea26d01a9918/blizzard-entertainment-online-privacy-policy", "https://www.blizzard.com/en-us/legal/a4380ee5-5c8d-4e3b-83b7-ea26d01a9918/blizzard-entertainment-online-privacy-policy", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
 
   <tr>
     <td>Bonsai</td>
     <td>Execute search queries</td>
+    <td>Implicit and explicit search queries, post data and post metadata</td>
     <td><%= link_to "https://bonsai.io/privacy", "https://bonsai.io/privacy", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
 
   <tr>
     <td>Bugsnag</td>
     <td>Log information about application errors</td>
+    <td>Request metadata*</td>
     <td><%= link_to "https://docs.bugsnag.com/legal/privacy-policy/", "https://docs.bugsnag.com/legal/privacy-policy/", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
 
   <tr>
     <td>Cloudflare</td>
     <td>Security and networking</td>
+    <td>Request metadata*, request and response data</td>
     <td><%= link_to "https://www.cloudflare.com/privacypolicy/", "https://www.cloudflare.com/privacypolicy/", target: "_blank", rel: "noreferrer noopener" %></td>
+  </tr>
+
+  <tr>
+    <td>Discord, Inc.</td>
+    <td>Provide alternative login method</td>
+    <td>Request for authorization on behalf of end user</td>
+    <td><%= link_to "https://discord.com/privacy", "https://discord.com/privacy", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
 
   <tr>
     <td>Google Analytics</td>
     <td>Site traffic analytics</td>
+    <td>Request metadata*, browser-stored cookies</td>
     <td><%= link_to "https://policies.google.com/privacy", "https://policies.google.com/privacy", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
 
   <tr>
     <td>Heroku</td>
     <td>Website hosting</td>
+    <td>Request metadata*, request and response data</td>
     <td><%= link_to "https://www.heroku.com/policy/security", "https://www.heroku.com/policy/security", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
 
   <tr>
     <td>Scout APM</td>
     <td>Monitor request performance</td>
+    <td>Request metadata*</td>
     <td><%= link_to "https://scoutapm.com/privacy", "https://scoutapm.com/privacy", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
 
   <tr>
-    <td>Twillo SendGrid</td>
+    <td>Twilio SendGrid</td>
     <td>Send emails</td>
+    <td>Decrypted email addresses, post data and post metadata</td>
     <td><%= link_to "https://www.twilio.com/legal/privacy", "https://www.twilio.com/legal/privacy", target: "_blank", rel: "noreferrer noopener" %></td>
   </tr>
+
+  <tr>
+    <td>YouTube</td>
+    <td>Video hosting</td>
+    <td>Request metadata*, browser-stored cookies and information</td>
+    <td><%= link_to "https://policies.google.com/privacy", "https://policies.google.com/privacy", target: "_blank", rel: "noreferrer noopener" %></td>
+  </tr>
 </table>
+<p class="text-italic">* e.g. full IP address, browser user agent, requested path</p>
 
 
 
 <h2 class="mt-1/1" id="removal-of-data">Removal of Data</h2>
 
 <p>If for any reason you wish to delete your account, you can do so from your account settings page. This will delete your account along with any associated data. Your account's data may still exist in backups of our database and in log files for up to 6 months after deletion of your account.</p>
+
+<p>Please contact the third parties listed above individually if you would like to request that they delete any data, as deleting your account may not trigger a request or process resulting in the deletion of your data on third party platforms.</p>
 
 <p>If you cannot access your account, would like us to remove data not related to your account, or have further questions or comments, you may contact us via the #website-discussion channel in the <%= link_to "Elo Hell Workshops Discord", "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener" %> or by any other means listed in the footer below.</p>
