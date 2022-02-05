@@ -13,6 +13,10 @@
     outline: none;
   }
 
+  &:focus-visible {
+    outline: 2px solid white;
+  }
+
   &::placeholder {
     font-style: italic;
     color: $text-color-dark;

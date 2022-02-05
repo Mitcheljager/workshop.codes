@@ -16,7 +16,9 @@ function toggleContent(event) {
 
     const element = parent.querySelector("[data-role~='content-to-toggle']")
     const state = window.getComputedStyle(element).display === "none"
-    const animationTiming = parseInt(eventElement.dataset.animationTiming) > 0 ? parseInt(eventElement.dataset.animationTiming) : 0
+    const animationTiming =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 :
+        parseInt(eventElement.dataset.animationTiming) > 0 ? parseInt(eventElement.dataset.animationTiming) : 0
 
     if (!state) {
       eventElement.classList.remove("active")

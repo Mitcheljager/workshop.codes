@@ -17,7 +17,8 @@ export function setCarousel(element) {
   carousel = new Siema({
     selector: element,
     onInit: setActiveItem,
-    onChange: setActiveItem
+    onChange: setActiveItem,
+    duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 200
   })
 }
 

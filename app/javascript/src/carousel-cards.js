@@ -23,7 +23,8 @@ export function render() {
       selector: element,
       onInit: (() => element.classList.add("initialised")),
       onChange: carouselCardsChanged,
-      perPage: { 400: 2, 768: 3 }
+      perPage: { 400: 2, 768: 3 },
+      duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 200
     })]
 
     element.dataset.carouselId = carouselCards.length - 1

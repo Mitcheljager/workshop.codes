@@ -44,7 +44,7 @@
   &:hover,
   &:active,
   &:focus {
-    @content
+    @content;
   }
 }
 

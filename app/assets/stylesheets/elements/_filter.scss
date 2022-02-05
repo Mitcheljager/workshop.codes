@@ -16,6 +16,12 @@
   width: 100%;
   top: $search-height;
   z-index: 5;
+
+  --animation-duration: 150ms;
+
+  @media (prefers-reduced-motion: reduce) {
+    --animation-duration: 0ms;
+  }
 }
 
 .filter__content {
@@ -28,7 +34,7 @@
   border-bottom-right-radius: $search-height / 2;
   background: $bg-dark;
   height: 100%;
-  animation: fade-in-filter-content 150ms;
+  animation: fade-in-filter-content var(--animation-duration);
 
   &::after {
     content: "";
@@ -56,7 +62,7 @@
 
   .fading-out & {
     overflow: hidden;
-    animation: fade-out-filter-content 150ms;
+    animation: fade-out-filter-content var(--animation-duration);
   }
 }
 
@@ -78,10 +84,10 @@
 
   &--active {
     background: $body-bg;
-    
+
     a {
       color: $white;
-    }    
+    }
   }
 
   a {
@@ -158,7 +164,7 @@
 .filter__remove {
   display: none;
   margin-left: .5rem;
-  
+
   .filter__item--active & {
     display: inline-block;
     color: $red;
