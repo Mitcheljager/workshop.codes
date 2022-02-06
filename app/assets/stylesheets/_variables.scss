@@ -51,6 +51,7 @@ $media-min-widths: (
 );
 
 :root {
+  color-scheme: dark;
   --primary: #3fbf74;
   --white: #dfdfdf;
   --text-color: #{ $gray };
