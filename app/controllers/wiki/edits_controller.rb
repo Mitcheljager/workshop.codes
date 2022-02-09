@@ -19,7 +19,7 @@ class Wiki::EditsController < Wiki::BaseController
       @title_difference = Diffy::SplitDiff.new(@previous_article.title, @edit.article.title, format: :html, allow_empty_diff: false)
       @content_difference = Diffy::SplitDiff.new(@previous_article.content, @edit.article.content, format: :html, allow_empty_diff: false)
       @category_difference = Diffy::SplitDiff.new(@previous_article.category.title, @edit.article.category.title, format: :html, allow_empty_diff: false)
-      @tags_difference = Diffy::SplitDiff.new(@previous_article.tags, @edit.article.tags, format: :html, allow_empty_diff: false)
+      @tags_difference = Diffy::SplitDiff.new(@previous_article.tags || "", @edit.article.tags || "", format: :html, allow_empty_diff: false)
     end
 
     add_breadcrumb @edit.article.group_id, Proc.new { wiki_article_edits_path(@edit.article.group_id) }
