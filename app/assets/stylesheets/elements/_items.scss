@@ -217,7 +217,10 @@
   }
 
   .item--large & {
+    display: flex;
+    justify-content: space-between;
     padding-left: 0;
+    margin-bottom: $margin / 6;
   }
 
   .item--revision & {
