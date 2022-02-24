@@ -16,6 +16,7 @@ function isInfiniteScrollInView() {
   const element = elements[elements.length - 1]
 
   if (!element) return
+  if (element.offsetParent === null) return
 
   const position = element.getBoundingClientRect()
 
