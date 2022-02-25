@@ -43,8 +43,9 @@
     width: 100%;
     height: auto;
     margin-top: $margin / 4;
-    font-size: 28px;
     padding: $margin / 8 0;
+    border-radius: $border-radius / 2;
+    font-size: 28px;
 
     @include media-min(md) {
       max-width: 280px;

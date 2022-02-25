@@ -1,6 +1,8 @@
 <% return unless block_property(block, "post").present? %>
 
-<% post = @posts.find(block_property(block, "post")) %>
+<% post = @posts.find_by(id: block_property(block, "post")) %>
+
+<% return unless post %>
 
 <div class="item item--large" data-code="<%= post.code %>">
   <div>
