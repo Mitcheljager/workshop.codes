@@ -13,6 +13,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.0",
+    "acorn": "^8.1.0",
     "inscrybmde": "^1.11.6",
     "metrics-graphics": "^2.15.6",
     "microlight": "^0.0.7",
