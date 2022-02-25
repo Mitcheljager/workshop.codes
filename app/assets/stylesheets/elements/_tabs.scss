@@ -6,7 +6,7 @@
   overflow-x: auto;
   position: sticky;
 
-  .banner & {
+  .standout & {
     &:not(:first-child) {
       border-radius: 0 0 $border-radius $border-radius;
     }
@@ -91,7 +91,7 @@
     margin: 0 1px;
     padding: $margin / 8;
     border-radius: $border-radius;
-    
+
     &:hover,
     &:active,
     &:focus,

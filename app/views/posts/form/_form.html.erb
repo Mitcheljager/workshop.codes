@@ -1,7 +1,7 @@
 <%= form_with url: path, model: post, data: { role: "post-form tabs" }, html: { autocomplete: "off" }, remote: true do |form| %>
   <%= render "form_errors", errors: post.errors if post.errors.any? %>
 
-  <div class="banner p-0">
+  <div class="standout p-0">
     <div class="p-1/4">
       <div class="form-group-uneven">
         <div class="form-group mt-0">
