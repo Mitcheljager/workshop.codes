@@ -11,7 +11,7 @@ namespace :hotness do
         copy_count = Ahoy::Event.where(name: "Copy Code").where("time > ?", 1.day.ago).distinct.pluck(:visit_id, :properties).select { |s| s[1]["id"] == post.id }.count
 
         days_old = (post.last_revision_created_at.to_datetime...Time.now).count
-        days_old = [[days_old, 1].max, 30].min
+        days_old = [[days_old, 2].max, 30].min
 
         impressions_and_copy_score = impressions_count + (copy_count * 2)
         favorites_score = favorites_count * 20
