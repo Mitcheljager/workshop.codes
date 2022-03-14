@@ -1,7 +1,7 @@
 <div class="user-block">
   <% if current_user %>
     <%= svelte_component "Notifications", { viewAllPath: notifications_path } %>
-    
+
     <div class="dropdown" data-dropdown>
       <%= link_to current_user.clean_username, account_path, class: "user-block__action mbl:mr-1/16 mb-1/4 mbl:mb-0", data: { action: "toggle-dropdown" } %>
 
@@ -14,12 +14,16 @@
 
         <hr>
 
-        <%= link_to t("account.navigation.tos"), tos_path, class: "dropdown__item text-small" %>
         <%= link_to t("account.navigation.admin"), admin_root_path, class: "dropdown__item text-small", data: { prefetch: false } if is_admin?(current_user) %>
         <%= link_to t("account.navigation.profile"), edit_profile_path, class: "dropdown__item text-small" %>
         <%= link_to t("account.navigation.account"), edit_user_path, class: "dropdown__item text-small" %>
+        <%= link_to t("account.navigation.linked_users"), linked_users_path, class: "dropdown__item text-small" %>
         <%= link_to t("account.navigation.accessibility"), accessibility_path, class: "dropdown__item text-small" %>
         <%= link_to t("account.navigation.logout"), logout_path, class: "dropdown__item text-small", data: { prefetch: false } %>
+
+        <hr>
+
+        <%= link_to t("account.navigation.tos"), tos_path, class: "dropdown__item text-small" %>
       </div>
     </div>
   <% else %>

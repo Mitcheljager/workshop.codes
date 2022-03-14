@@ -15,6 +15,7 @@
     <%= link_to t("account.navigation.admin"), admin_root_path, class: "profile__action" if current_user.level == "admin" %>
     <%= link_to t("account.navigation.profile"), edit_profile_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_profile_path) }" %>
     <%= link_to t("account.navigation.account"), edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>
+    <%= link_to t("account.navigation.linked_users"), linked_users_path, class: "profile__action #{ 'profile__action--active' if current_page?(linked_users_path) }" %>
     <%= link_to t("account.navigation.accessibility"), accessibility_path, class: "profile__action #{ 'profile__action--active' if current_page?(accessibility_path) }" %>
     <%= link_to t("account.navigation.logout"), logout_path, class: "profile__action" %>
   </aside>

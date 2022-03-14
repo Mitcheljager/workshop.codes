@@ -337,6 +337,7 @@ en:
       account: Account
       accessibility: Accessibility
       logout: Logout
+      linked_users: Linked Logins
     listings:
       title: Listings in the last 60 minutes
       path: Path
@@ -409,6 +410,15 @@ en:
         pagination: Pagination
         infinite_scroll: Infinite scroll
         load_more_button: "'Load more' button"
+
+  linked_users:
+    description: Link your account together to allow log in to the same account using different logins. You can log in using different platforms with as many account as you wish, and all of them will log you in to one main account.
+    current: Currently linked logins
+    discord: Link Discord login
+    battle_net: Link Battle.net login
+    destroy:
+      action: Remove
+      confirm: Are you sure? This will destroy the link, but you can link the log in again if you wish.
 
   views:
     pagination:

@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   include ActivitiesHelper
   include UsersHelper
 
-  before_action only: [:new, :create] do
+  before_action only: [:new] do
     redirect_to root_path if current_user
   end
 
@@ -12,13 +12,21 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if auth_hash.present?
+    if current_user && auth_hash.present?
+      # User is linking their account to an OAuth provider
+      link_user
+      return
+    elsif auth_hash.present?
+      # User is logging in in with OAuth
       @user = User.find_or_create_from_auth_hash(auth_hash)
     else
+      # User is logging in without OAuth
       @user = User.find_by_username(params[:username])
     end
 
     if (@user && @user.provider.nil? && @user.authenticate(params[:password])) || (auth_hash.present? && @user)
+      @user = User.find(@user.linked_id) unless @user.linked_id.nil?
+
       reject_banned_user and return if is_banned?(@user)
 
       generate_remember_token if (params[:remember_me].present? && params[:remember_me] != "0") || (@user.provider.present?)
@@ -67,5 +75,32 @@ class SessionsController < ApplicationController
 
   def set_return_path
     session[:return_to] = request.referrer
+  end
+
+  def link_user
+    if User.find_by(uid: auth_hash["uid"])
+      # User succesfully logged in with OAuth but an account with their uid already exists
+
+      @user = User.find_or_create_from_auth_hash(auth_hash) # We still run this to update the OAuth user
+
+      if @user.linked_id.present?
+        if @user.linked_id == current_user.id
+          flash[:alert] = { class: "orange", message: "This log in is already linked to your account." }
+        else
+          flash[:alert] = { class: "orange", message: "This log in is already linked to a different account." }
+        end
+      elsif @user == current_user
+        flash[:alert] = { class: "orange", message: "You're already logged in using this log in." }
+      else
+        flash[:alert] = { class: "red", message: "An account is already created for this log in. If you wish to link the account instead please delete the original account." }
+      end
+    else
+      @user = User.find_or_create_from_auth_hash(auth_hash)
+      @user.update(linked_id: current_user.id)
+
+      flash[:alert] = { message: "Your #{@user.provider} account '#{@user.username}' has been linked." }
+    end
+
+    redirect_to linked_users_path
   end
 end
