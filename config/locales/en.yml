@@ -337,7 +337,7 @@ en:
       account: Account
       accessibility: Accessibility
       logout: Logout
-      linked_users: Linked Logins
+      linked_users: Linked Accounts
     listings:
       title: Listings in the last 60 minutes
       path: Path
@@ -412,13 +412,13 @@ en:
         load_more_button: "'Load more' button"
 
   linked_users:
-    description: Link your account together to allow log in to the same account using different logins. You can log in using different platforms with as many account as you wish, and all of them will log you in to one main account.
-    current: Currently linked logins
-    discord: Link Discord login
-    battle_net: Link Battle.net login
+    description: Link your accounts together to allow login to the same account using different authentication platforms. You can link as many accounts from any platform as you want, and all of them will log you into one central account.
+    current: Currently linked accounts
+    discord: Link Discord account
+    battle_net: Link Battle.net account
     destroy:
       action: Remove
-      confirm: Are you sure? This will destroy the link, but you can link the log in again if you wish.
+      confirm: Are you sure? This will unlink the account, but you can link the account again if you wish.
 
   views:
     pagination:
