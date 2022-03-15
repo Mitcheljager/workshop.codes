@@ -23,13 +23,13 @@
     <% end %>
   </div>
 
-  <% if @linked_users.any? %>
+  <% if current_user.linked_users.any? %>
     <hr class="mt-1/2 mb-1/2">
 
     <h2><%= t("linked_users.current") %></h2>
 
     <table>
-      <% @linked_users.each do |linked_user| %>
+      <% current_user.linked_users.each do |linked_user| %>
         <tr>
           <td><strong><%= linked_user.provider %></strong></td>
           <td><%= linked_user.username %></td>

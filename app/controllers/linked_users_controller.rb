@@ -3,9 +3,7 @@ class LinkedUsersController < ApplicationController
     redirect_to root_path unless current_user
   end
 
-  def index
-    @linked_users = User.where(linked_id: current_user.id)
-  end
+  def index; end
 
   def destroy
     @user = User.find(params[:id])

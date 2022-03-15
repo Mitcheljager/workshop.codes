@@ -60,7 +60,7 @@
 
     <h3 class="mt-1/2"><%= t("linked_users.current") %></h3>
     <table class="w-auto">
-      <% @linked_users.each do |linked_user| %>
+      <% @user.linked_users.each do |linked_user| %>
         <tr>
           <td><strong><%= linked_user.provider %></strong></td>
           <td><%= linked_user.username %></td>
