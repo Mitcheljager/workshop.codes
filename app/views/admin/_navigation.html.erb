@@ -3,15 +3,15 @@
 </div>
 
 <center>
-  <%= link_to "dashboard", admin_root_path, class: "button #{ "button--secondary" unless current_page?(admin_root_path) }" %>
-  <%= link_to "posts", admin_posts_path, class: "button #{ "button--secondary" unless current_page?(admin_posts_path) }" %>
-  <%= link_to "users", admin_users_path, class: "button #{ "button--secondary" unless current_page?(admin_users_path) }" %>
-  <%= link_to "comments", admin_comments_path, class: "button #{ "button--secondary" unless current_page?(admin_comments_path) }" %>
-  <%= link_to "favorites", admin_favorites_path, class: "button #{ "button--secondary" unless current_page?(admin_favorites_path) }" %>
-  <%= link_to "notifications", admin_notifications_path, class: "button #{ "button--secondary" unless current_page?(admin_notifications_path) }" %>
-  <%= link_to "emails", admin_email_notifications_path, class: "button #{ "button--secondary" unless current_page?(admin_email_notifications_path) }" %>
-  <%= link_to "activities", admin_activities_path, class: "button #{ "button--secondary" unless current_page?(admin_activities_path) }" %>
-  <%= link_to "reports", admin_reports_path, class: "button #{ "button--secondary" unless current_page?(admin_reports_path) }" %>
+  <%= link_to "dashboard", admin_root_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_root_path) }" %>
+  <%= link_to "posts", admin_posts_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_posts_path) }" %>
+  <%= link_to "users", admin_users_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_users_path) }" %>
+  <%= link_to "comments", admin_comments_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_comments_path) }" %>
+  <%= link_to "favorites", admin_favorites_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_favorites_path) }" %>
+  <%= link_to "notifications", admin_notifications_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_notifications_path) }" %>
+  <%= link_to "emails", admin_email_notifications_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_email_notifications_path) }" %>
+  <%= link_to "activities", admin_activities_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_activities_path) }" %>
+  <%= link_to "reports", admin_reports_path, data: { prefetch: false }, class: "button #{ "button--secondary" unless current_page?(admin_reports_path) }" %>
 </center>
 
 <hr>

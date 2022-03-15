@@ -6,6 +6,7 @@ class Admin::UsersController < Admin::BaseController
 
   def show
     @user = User.find(params[:id])
+    @linked_users = User.where(linked_id: @user.id)
   end
 
   def update

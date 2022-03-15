@@ -22,6 +22,7 @@
     <th>Img?</th>
     <th>Link?</th>
     <th>Desc?</th>
+    <th>Linked?</th>
     <th><%= link_to "Veri?", admin_users_path(where: "verified") %></th>
     <th><%= link_to "HC?", admin_users_path(where: "high_contrast") %></th>
     <th><%= link_to "Lg?", admin_users_path(where: "large_fonts") %></th>
@@ -42,6 +43,7 @@
       <td><%= "✔" if user.profile_image.attached? %></td>
       <td><%= "✔" if user.link.present? %></td>
       <td><%= "✔" if user.description.present? %></td>
+      <td><%= "✔" if user.linked_id.present? %></td>
       <td><%= "✔" if user.verified? %></td>
       <td><%= "✔" if user.high_contrast? %></td>
       <td><%= "✔" if user.large_fonts? %></td>
