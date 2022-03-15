@@ -28,7 +28,6 @@ jobs:
           yarn run eslint app/javascript
   test:
     runs-on: ubuntu-latest
-    environment: CI
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -61,7 +60,6 @@ jobs:
   features:
     name: Cucumber Feature Check
     runs-on: ubuntu-latest
-    environment: CI
     steps:
       - name: Checkout
         uses: actions/checkout@v2
