@@ -1,0 +1,13 @@
+Linking accounts:
+- Can link Battle.net account to Workshop.codes
+- Can link Discord account to Workshop.codes
+- Can link an OAuth account to another OAuth account
+- Cannot link an account that is already linked to another account
+
+Unlinking accounts:
+- Can unlink a Battle.net account
+- Can unlink a Discord account
+
+Logging in:
+- Logging in with a linked OAuth account logs into the central account
+- Logging in with a recently unlinked OAuth account creates a new, unlinked account
