@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.includes(:collections).find_by("upper(username) = ?", params[:username].upcase)
+    @user = User.includes(:collections).where(linked_id: nil).find_by("upper(username) = ?", params[:username].upcase)
 
     if @user.present?
       if @user.verified? && @user.nice_url.present? && @user.nice_url != @user.username
