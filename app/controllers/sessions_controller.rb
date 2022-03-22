@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   include ActivitiesHelper
   include UsersHelper
+  include SessionsHelper
 
   before_action only: [:new] do
     redirect_to root_path if current_user
@@ -96,9 +97,14 @@ class SessionsController < ApplicationController
       end
     else
       @user = User.find_or_create_from_auth_hash(auth_hash)
-      @user.update(linked_id: current_user.id)
+      unless @user.present?
+        # TODO: Make this explain what went wrong
+        flash[:alert] = { class: "red", message: "Something went wrong when linking your account." }
+      else
+        @user.update(linked_id: current_user.id)
 
-      flash[:alert] = { message: "Your #{@user.provider} account '#{@user.username}' has been linked." }
+        flash[:alert] = { message: "Your #{provider_nice_name(@user.provider)} account '#{@user.username}' has been linked." }
+      end
     end
 
     redirect_to linked_users_path
