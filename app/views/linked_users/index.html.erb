@@ -12,12 +12,12 @@
   <hr class="mt-1/2 mb-1/2">
 
   <div class="flex gap-1/4">
-    <%= link_to "/auth/discord", method: :post, class: "button button--discord", data: { prefetch: false } do %>
+    <%= button_to "/auth/discord", class: "button button--discord", data: { prefetch: false } do %>
       <%= inline_svg_tag "discord.svg", height: 24 %>
       <%= t "linked_users.discord" %>
     <% end %>
 
-    <%= link_to "/auth/bnet", method: :post, class: "button button--bnet", data: { prefetch: false } do %>
+    <%= button_to "/auth/bnet", class: "button button--bnet", data: { prefetch: false } do %>
       <%= inline_svg_tag "bnet.svg", height: 24 %>
       <%= t "linked_users.battle_net" %>
     <% end %>
