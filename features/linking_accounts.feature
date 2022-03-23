@@ -56,15 +56,28 @@ Feature: Users can link their accounts and log in with linked accounts
   Rule: Users can log in with their linked accounts
     Background: User has linked accounts
       Given a user named "Sojourn"
-      And a linked Battle.net account "Sojourn#12345"
-      And a linked Discord account "Sojourn#0042"
-      And I log out
+      And a Battle.net account "SojournsBnet#12345"
+      And a Discord account "SojournsDiscord#0042"
+      And I am logged in as Sojourn
 
-    Scenario: User logs in with linked account
+    Scenario: User logs in with linked Discord account
+      Given I link my Discord account
+      And I log out
       When I log in with my Discord account
       Then I should be logged in as "Sojourn"
 
-    Scenario: User logs in with unlinked account
-      Given I unlink my Discord account
+    Scenario: User logs in with linked Battle.net account
+      Given I link my Battle.net account
+      And I log out
+      When I log in with my Battle.net account
+      Then I should be logged in as "Sojourn"
+
+    Scenario: User logs in with unlinked Discord account
+      Given I log out
       When I log in with my Discord account
-      Then I should be logged in as "Sojourn#0042"
+      Then I should be logged in as "SojournsDiscord"
+
+    Scenario: User logs in with unlinked Battle.net account
+      Given I log out
+      When I log in with my Battle.net account
+      Then I should be logged in as "SojournsBnet"
