@@ -27,7 +27,9 @@ Feature: Users can link their accounts and log in with linked accounts
       And I should see "Sojourn#12345" in my linked accounts
 
     Scenario: User can only link an account to one other account
-      Given my Battle.net account is linked to my Discord account
+      Given I log in with my Discord account
+      And I link my Battle.net account
+      Then I log in as Sojourn
       And I try to link my Battle.net account
       Then I should see "This log in is already linked to a different account."
       And I should not see "Sojourn#121345" in my linked accounts
