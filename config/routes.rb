@@ -92,6 +92,8 @@ Rails.application.routes.draw do
     post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
 
     resources :linked_users, only: [:index]
+    # For some reason this cannot be merged into the above resources.
+    # See https://github.com/EloHellEsports/workshop.codes/pull/123#discussion_r827509566
     delete "linked_users/:id", to: "linked_users#destroy", as: "destroy_linked_user"
 
     resources :reports, only: [:create, :new, :destroy, :update]
