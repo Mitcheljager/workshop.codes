@@ -12,25 +12,25 @@ Feature: Users can link their accounts and log in with linked accounts
 
     Scenario: User can link their Battle.net account
       When I try to link my Battle.net account
-      Then I should see a success message
-      And I should see "Sojourn#12345" on my linked accounts page
+      Then I should see "Your Battle.net account 'Sojourn#12345' has been linked"
+      And I should see "Sojourn#12345" in my linked accounts
 
     Scenario: User can link their Discord account
       When I try to link my Discord account
-      Then I should see a success message
-      And I should see "Sojourn#0042" on my linked accounts page
+      Then I should see "Your Discord account 'Sojourn#0042' has been linked"
+      And I should see "Sojourn" in my linked accounts
 
     Scenario: User can link an OAuth account to another OAuth account
       Given I am logged in with my Discord account
       And I try to link my Battle.net account
-      Then I should see a success message
-      And I should see "Sojourn#12345" on my linked accounts page
+      Then I should see "Your Battle.net account 'Sojourn#12345' has been linked"
+      And I should see "Sojourn#12345" in my linked accounts
 
     Scenario: User can only link an account to one other account
       Given my Battle.net account is linked to my Discord account
       And I try to link my Battle.net account
-      Then I should see an error message
-      And I should not see "Sojourn#121345" on my linked accounts page
+      Then I should see "This log in is already linked to a different account."
+      And I should not see "Sojourn#121345" in my linked accounts
 
   Rule: Users can unlink their accounts
     Background: User has linked accounts
@@ -41,15 +41,15 @@ Feature: Users can link their accounts and log in with linked accounts
 
     Scenario: User can unlink their Battle.net account
       When I try to unlink my Battle.net account
-      Then I should see a success message
-      And I should not see "Sojourn#12345" on my linked accounts page
-      But I should see "Sojourn#0042"
+      Then I should see "Account successfully unlinked"
+      And I should not see "Sojourn#12345" in my linked accounts
+      But I should see "Sojourn#0042" in my linked accounts
 
     Scenario: User can unlink their Discord account
       When I try to unlink my Discord account
-      Then I should see a success message
-      And I should not see "Sojourn#0042" on my linked accounts page
-      But I should see "Sojourn#12345"
+      Then I should see "Account successfully unlinked"
+      And I should not see "Sojourn#0042" in my linked accounts
+      But I should see "Sojourn#12345" in my linked accounts
 
   Rule: Users can log in with their linked accounts
     Background: User has linked accounts
