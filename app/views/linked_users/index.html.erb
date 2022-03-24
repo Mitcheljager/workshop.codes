@@ -1,0 +1,46 @@
+<% content_for :page_title, t("account.navigation.linked_users") %>
+
+<%= render "layouts/account", title: t("account.navigation.linked_users") do %>
+  <% if flash[:alert] %>
+    <div class="warning warning--<%= flash[:alert]["class"] %> mt-0 mb-1/2"><%= flash[:alert]["message"] %></div>
+  <% end %>
+
+  <p class="mt-0">
+    <%= t("linked_users.description") %>
+  </p>
+
+  <hr class="mt-1/2 mb-1/2">
+
+  <div class="flex gap-1/4">
+    <%= button_to "/auth/discord", class: "button button--discord", data: { prefetch: false } do %>
+      <%= inline_svg_tag "discord.svg", height: 24 %>
+      <%= t "linked_users.discord" %>
+    <% end %>
+
+    <%= button_to "/auth/bnet", class: "button button--bnet", data: { prefetch: false } do %>
+      <%= inline_svg_tag "bnet.svg", height: 24 %>
+      <%= t "linked_users.battle_net" %>
+    <% end %>
+  </div>
+
+  <% if current_user.linked_users.any? %>
+    <hr class="mt-1/2 mb-1/2">
+
+    <h2><%= t("linked_users.current") %></h2>
+
+    <table>
+      <% current_user.linked_users.each do |linked_user| %>
+        <tr>
+          <td><strong><%= linked_user.provider %></strong></td>
+          <td><%= linked_user.username %></td>
+          <td><%= link_to t("linked_users.destroy.action"),
+                    destroy_linked_user_path(linked_user.id),
+                    class: "text-red",
+                    method: :delete,
+                    data: { confirm: t("linked_users.destroy.confirm") } %>
+          </td>
+        </td>
+      <% end %>
+    </table>
+  <% end %>
+<% end %>
