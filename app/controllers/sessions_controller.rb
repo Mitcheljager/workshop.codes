@@ -98,7 +98,6 @@ class SessionsController < ApplicationController
     else
       @user = User.find_or_create_from_auth_hash(auth_hash)
       unless @user.present?
-        # TODO: Make this explain what went wrong
         flash[:alert] = { class: "red", message: "Something went wrong when linking your account." }
       else
         @user.update(linked_id: current_user.id)
