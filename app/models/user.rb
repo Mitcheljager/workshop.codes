@@ -70,24 +70,21 @@ class User < ApplicationRecord
     provider = auth_hash["provider"]
     username = auth_hash["info"]["name"] || auth_hash["info"]["battletag"]
 
-    # If a user logs in with Discord their discrimimator only gets added if
-    # a user with that username already exists. This could be another Discord
-    # user or a Workshop.codes account.
-    if (auth_hash["provider"] == "discord")
-      username_exists_for_other_user = User.find_by("lower(username) = ?", username.downcase)
-
-      if username_exists_for_other_user.present? && username_exists_for_other_user.uid != uid
-        discrimimator = auth_hash["extra"]["raw_info"]["discriminator"]
-        username = username + "#" + discrimimator
-      end
-    end
-
     user = find_or_create_by(uid: uid, provider: provider)
 
     user.username = username
     user.username.gsub!(" ", "-")
     user.provider_profile_image = auth_hash["info"]["image"]
     user.password = "no_password"
+
+    # If a user logs in with Discord their discrimimator only gets added if
+    # a username validation error occurs. This could be another Discord
+    # user or a Workshop.codes account colliding with the desired username.
+    user.valid? # Trigger validations; we don't care about the result
+    if (user.errors[:username].any? && auth_hash["provider"] == "discord")
+      discrimimator = auth_hash["extra"]["raw_info"]["discriminator"]
+      username = username + "#" + discrimimator
+    end
 
     user if user.save
   end
