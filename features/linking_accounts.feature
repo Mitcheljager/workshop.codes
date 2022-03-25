@@ -44,6 +44,29 @@ Feature: Users can link their accounts and log in with linked accounts
       Then I should see "Your Discord account 'Sojourn#0042' has been linked"
       And I should see "Sojourn#0042" in my linked accounts
 
+  Rule: Users cannot link existing accounts or their current account
+    Background: Some possible login methods exist
+      Given a user named "Sojourn"
+      * a Battle.net account "Sojourn#12345"
+      * a Discord account "Sojourn#0042"
+      # Need to log in once with each OAuth method to trigger account creation
+      And I log in with my Battle.net account
+      * I log in with my Discord account
+      Then I log in as Sojourn
+
+    Scenario: User cannot link an existing Discord login
+      When I try to link my Discord account
+      Then I should see "An account is already created for this login."
+
+    Scenario: User cannot link an existing Battle.net login
+      When I try to link my Battle.net account
+      Then I should see "An account is already created for this login."
+
+    Scenario: User cannot link their own account
+      Given I log in with my Battle.net account
+      When I try to link my Battle.net account
+      Then I should see "You're already logged in using this login."
+
   Rule: Users can unlink their accounts
     Background: User has linked accounts
       Given a user named "Sojourn"

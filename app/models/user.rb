@@ -82,8 +82,8 @@ class User < ApplicationRecord
     # user or a Workshop.codes account colliding with the desired username.
     user.valid? # Trigger validations; we don't care about the result
     if (user.errors[:username].any? && auth_hash["provider"] == "discord")
-      discrimimator = auth_hash["extra"]["raw_info"]["discriminator"]
-      username = username + "#" + discrimimator
+      discriminator = auth_hash["extra"]["raw_info"]["discriminator"]
+      user.username = username + "#" + discriminator
     end
 
     user if user.save
