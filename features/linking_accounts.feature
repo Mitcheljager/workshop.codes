@@ -31,8 +31,41 @@ Feature: Users can link their accounts and log in with linked accounts
       And I link my Battle.net account
       Then I log in as Sojourn
       And I try to link my Battle.net account
-      Then I should see "This log in is already linked to a different account."
+      Then I should see "This login is already linked to a different account."
       And I should not see "Sojourn#121345" in my linked accounts
+
+    Scenario: User can link a same-name Discord account to a Battle.net account
+      # Check that the discriminator is properly set in a username collision scenario
+      Given I log in with my Battle.net account
+      And the user named "Sojourn#12345" is verified
+      # Need to remove the existing Workhops.codes account to properly test nice_url collision
+      And the user named "Sojourn" is deleted
+      When I try to link my Discord account
+      Then I should see "Your Discord account 'Sojourn#0042' has been linked"
+      And I should see "Sojourn#0042" in my linked accounts
+
+  Rule: Users cannot link existing accounts or their current account
+    Background: Some possible login methods exist
+      Given a user named "Sojourn"
+      * a Battle.net account "Sojourn#12345"
+      * a Discord account "Sojourn#0042"
+      # Need to log in once with each OAuth method to trigger account creation
+      And I log in with my Battle.net account
+      * I log in with my Discord account
+      Then I log in as Sojourn
+
+    Scenario: User cannot link an existing Discord login
+      When I try to link my Discord account
+      Then I should see "An account is already created for this login."
+
+    Scenario: User cannot link an existing Battle.net login
+      When I try to link my Battle.net account
+      Then I should see "An account is already created for this login."
+
+    Scenario: User cannot link their own account
+      Given I log in with my Battle.net account
+      When I try to link my Battle.net account
+      Then I should see "You're already logged in using this login."
 
   Rule: Users can unlink their accounts
     Background: User has linked accounts
