@@ -34,6 +34,16 @@ Feature: Users can link their accounts and log in with linked accounts
       Then I should see "This log in is already linked to a different account."
       And I should not see "Sojourn#121345" in my linked accounts
 
+    Scenario: User can link a same-name Discord account to a Battle.net account
+      # Check that the discriminator is properly set in a username collision scenario
+      Given I log in with my Battle.net account
+      And the user named "Sojourn#12345" is verified
+      # Need to remove the existing Workhops.codes account to properly test nice_url collision
+      And the user named "Sojourn" is deleted
+      When I try to link my Discord account
+      Then I should see "Your Discord account 'Sojourn#0042' has been linked"
+      And I should see "Sojourn#0042" in my linked accounts
+
   Rule: Users can unlink their accounts
     Background: User has linked accounts
       Given a user named "Sojourn"
