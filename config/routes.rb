@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "sitemap", to: "sitemaps#sitemap"
   get "privacy-policy", to: "pages#privacy_policy"
   get "tos", to: "pages#tos", as: "tos"
+  get "explanation", to: "pages#explanation"
 
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
 
@@ -155,6 +156,7 @@ Rails.application.routes.draw do
     post :bugsnag_error_reporting
     post :ko_fi
     get :get_ko_fi_value
+    get :april_fools
   end
 
   direct :rails_public_blob do |blob|
