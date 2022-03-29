@@ -155,6 +155,7 @@ Rails.application.routes.draw do
     post :bugsnag_error_reporting
     post :ko_fi
     get :get_ko_fi_value
+    get :april_fools
   end
 
   direct :rails_public_blob do |blob|

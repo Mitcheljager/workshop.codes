@@ -39,4 +39,8 @@ class WebhooksController < ApplicationController
 
     render json: @value, layout: false
   end
+
+  def april_fools
+    render json: ENV["APRIL_FOOLS_CHANCE"] || nil, layout: false
+  end
 end
