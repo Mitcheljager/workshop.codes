@@ -20,7 +20,8 @@ export function inject() {
     const foolsAlert = document.createElement("div")
     foolsAlert.dataset.role = "april-fools"
     foolsAlert.classList.add("alerts__alert", "alerts__alert--warning")
-    foolsAlert.innerHTML = "<p class=\"mt-1/16 mb-1/16\">The server closed due to excessive Workshop script load. <a class=\"text-pure-white\" title=\"Click for explanation\" href=\"/explanation\" data-prefetch=\"false\">(?)</a></p><button name=\"button\" type=\"submit\" class=\"button p-0 pl-1/16 pr-1/16 text-white\" data-role=\"dismiss-parent\">✕</button>"
+    // eslint-disable-next-line quotes
+    foolsAlert.innerHTML = `<p class="mt-1/16 mb-1/16">The server closed due to excessive Workshop script load. <a class="text-pure-white" title="Click for explanation" href="/explanation" data-prefetch="false">(?)</a></p><button name="button" type="submit" class="button p-0 pl-1/16 pr-1/16 text-white" data-role="dismiss-parent">✕</button>`
 
     alertsArea.appendChild(foolsAlert)
   })
