@@ -42,8 +42,8 @@ import * as wikiSearch from "../src/wiki/search"
 
 document.addEventListener("turbolinks:load", function() {
   analytics.send()
+  aprilFools.inject() // This must be before dismissParent.bind() to ensure the dismiss button works on the alert.
 
-  aprilFools.bind() // This must be before dismissParent.bind() to ensure the dismiss button works on the alert.
   copy.bind()
   disableFormBySelect.bind()
   dismissParent.bind()

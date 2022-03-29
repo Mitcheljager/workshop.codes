@@ -6,7 +6,7 @@ export function destroy() {
   elements.forEach((element) => element.parentNode.remove())
 }
 
-export function bind() {
+export function inject() {
   new FetchRails("/webhooks/april_fools").get().then(data => {
     const chance = parseInt(data)
     if (chance === NaN) return
