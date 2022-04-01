@@ -10,7 +10,7 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("click", dismissParent))
 }
 
-function dismissParent(event) {
+export function dismissParent(event) {
   const parent = this.parentNode
   parent.classList.add("fade-out")
   setTimeout(() => {

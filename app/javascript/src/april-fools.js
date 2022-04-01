@@ -1,4 +1,5 @@
 import FetchRails from "./fetch-rails"
+import * as dismissParent from "./dismiss-parent"
 
 export function destroy() {
   const elements = document.querySelectorAll("[data-role~='april-fools']")
@@ -24,5 +25,7 @@ export function inject() {
     foolsAlert.innerHTML = `<p class="mt-1/16 mb-1/16">The server closed due to excessive Workshop script load. <a class="text-pure-white" title="Click for explanation" href="/explanation" data-prefetch="false">(?)</a></p><button name="button" type="submit" class="button p-0 pl-1/16 pr-1/16 text-white" data-role="dismiss-parent">✕</button>`
 
     alertsArea.appendChild(foolsAlert)
+    // Cannot rely on the dismissParent bind to fire after the DOM is updated, so we need to call it manually.
+    document.querySelectorAll("[data-role~='april-fools'] [data-role~='dismiss-parent']").forEach((element) => element.removeAndAddEventListener("click", dismissParent.dismissParent))
   })
 }
