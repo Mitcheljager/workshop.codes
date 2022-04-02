@@ -52,7 +52,7 @@
   cursor: pointer;
   z-index: 2;
 
-  svg {
+  img {
     height: 24px;
 
     path {
@@ -61,8 +61,8 @@
   }
 
   @include hover-stack {
-    svg path {
-      fill: $white;
+    img {
+      filter: brightness(1.5);
     }
   }
 
@@ -73,20 +73,6 @@
 
   &[disabled] {
     opacity: .5;
-  }
-
-  &--is-active {
-    @include hover-stack {
-      svg path {
-        fill: $red;
-      }
-    }
-
-    svg {
-      path {
-        fill: $red;
-      }
-    }
   }
 
   &--animating {
@@ -106,20 +92,8 @@
       animation: grow-heart-circle 500ms forwards;
     }
 
-    svg {
+    img {
       animation: grow-heart 300ms;
-    }
-  }
-
-  &--black:not(.favorite--is-active) {
-    svg path {
-      fill: $black;
-    }
-
-    @include hover-stack {
-      svg path {
-        fill: $black;
-      }
     }
   }
 }
