@@ -2,30 +2,47 @@ import noUiSlider from "nouislider/distribute/nouislider.min"
 
 export function render() {
   const elements = document.querySelectorAll("[data-role='num-player-slider']")
-  elements.forEach(function(element) {
-    if (!element) return
-    if (element.dataset.initialised) {
-      destroySlider(element)
-    }
-    let startMin = 1
-    let startMax = 12
-    if (element.dataset.minPlayers) {
-      startMin = element.dataset.minPlayers
-    }
-    if (element.dataset.maxPlayers) {
-      startMax = element.dataset.maxPlayers
-    }
-    if (element.dataset.type == "post" && !(element.dataset.minPlayers || element.dataset.maxPlayers)) {
-      startMin, startMax = 0, 0
-    }
 
-    create(element, startMin, startMax)
-
-    if (element.dataset.type == "post") element.noUiSlider.on("set", postOnSliderUpdate)
-    if (element.dataset.type == "filter") element.noUiSlider.on("set", filterOnSliderUpdate)
-
-    element.dataset.initialised = true
+  elements.forEach(element => {
+    if (element.dataset.renderByObserver) setObserver(element)
+    else setSlider(element)
   })
+}
+
+export function setObserver(element) {
+  const observerTarget = element.dataset.renderByObserver
+  const targetNode = document.querySelector(observerTarget)
+
+  const observer = new MutationObserver(() => {
+    if(targetNode.style.display == "none") return
+
+    if (!element.dataset.initialised) setSlider(element)
+  })
+
+  observer.observe(targetNode, { attributes: true, childList: true })
+}
+
+export function setSlider(element) {
+  if (!element) return
+
+  if (element.dataset.initialised) destroySlider(element)
+
+  let startMin = 1
+  let startMax = 12
+
+  if (element.dataset.minPlayers) startMin = element.dataset.minPlayers
+  if (element.dataset.maxPlayers) startMax = element.dataset.maxPlayers
+
+  if (element.dataset.type == "post" && !(element.dataset.minPlayers || element.dataset.maxPlayers)) {
+    startMin, startMax = 0, 0
+  }
+
+  create(element, startMin, startMax)
+
+  if (element.dataset.type == "post") element.noUiSlider.on("set", postOnSliderUpdate)
+  if (element.dataset.type == "filter") element.noUiSlider.on("set", filterOnSliderUpdate)
+
+  element.dataset.initialised = true
 }
 
 export function create(element, startMin, startMax) {
@@ -58,21 +75,25 @@ export function destroy() {
 
 function postOnSliderUpdate(values, handle) {
   let element
+
   if (handle == 0) {
     element = document.getElementById("post_min_players")
     if (document.getElementById("post_max_players").value == 0) {
       document.getElementById("post_max_players").value = 1
     }
   }
+
   if (handle == 1) {
     element = document.getElementById("post_max_players")
     if (document.getElementById("post_min_players").value == 0) {
       document.getElementById("post_min_players").value = 1
     }
   }
+
   element.value = Math.round(values[handle])
 
   const warningElem = document.querySelector("[data-role='vanish-on-slider-update']")
+
   if (warningElem && !warningElem.dataset.hidden) {
     warningElem.style.display = "none"
     warningElem.dataset.hidden = true
@@ -81,11 +102,14 @@ function postOnSliderUpdate(values, handle) {
 
 function filterOnSliderUpdate(values) {
   values = values.map(v => Math.round(v))
+
   const element = document.querySelector("[data-filter-type='players']")
+
   if (values[0] == 1 && values[1] == 12) {
     element.dataset.value = ""
     return
   }
+
   element.dataset.value = `${ values[0] }-${ values[1] }`
 }
 
