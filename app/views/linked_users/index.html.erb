@@ -11,8 +11,8 @@
 
   <hr class="mt-1/2 mb-1/2">
 
-  <div class="flex gap-1/4">
-    <%= button_to "/auth/discord", class: "button button--discord", data: { prefetch: false } do %>
+  <div class="flex">
+    <%= button_to "/auth/discord", class: "button button--discord mr-1/4", data: { prefetch: false } do %>
       <%= inline_svg_tag "discord.svg", height: 24 %>
       <%= t "linked_users.discord" %>
     <% end %>
