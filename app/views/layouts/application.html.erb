@@ -24,6 +24,11 @@
 
     <link rel="manifest" href="/manifest.json">
 
+    <link rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
+
     <%= stylesheet_link_tag "application.css" %>
     <%= javascript_pack_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
@@ -47,7 +52,5 @@
     </div>
 
     <%= render "body_bg" unless is_wiki? %>
-
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   </body>
 </html>
