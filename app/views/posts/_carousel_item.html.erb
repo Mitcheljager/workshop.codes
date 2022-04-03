@@ -1,8 +1,8 @@
 <div class="carousel__item">
   <picture>
-    <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500]).processed) %>" type="image/jpeg">
-    <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250]).processed) %>" type="image/jpeg">
-    <img class="img-fluid" <%= "data-" if index >= 2 %>src="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500]).processed) %>" aria-label="Image for '<%= @post.title %>'" width="900" height="500" />
+    <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" type="image/webp">
+    <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed) %>" type="image/webp">
+    <img class="img-fluid" <%= "data-" if index >= 2 %>src="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" aria-label="Image for '<%= @post.title %>'" width="900" height="500" />
   </picture>
 
   <div class="carousel__actions">

@@ -63,9 +63,9 @@ class ApplicationController < ActionController::Base
 
     if image.present?
       if params[:type] == "thumbnail"
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5]).processed)
+        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
       else
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_limit: [1920, 1080]).processed)
+        url = rails_public_blob_url(image.variant(quality: 95, resize_to_limit: [1920, 1080], format: :webp).processed)
       end
 
       render json: url, layout: false
