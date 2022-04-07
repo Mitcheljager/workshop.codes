@@ -266,22 +266,35 @@ class PostsController < ApplicationController
 
     trimmed_codes.each do |code|
       deriv = Derivative.find_by(source_code: code, derivation: @post)
+      source_post = Post.find_by_code code
+      can_create_notification = source_post.present? && source_post.user != @post.user && @post.public?
 
       unless deriv.present?
-        source_post = Post.find_by_code code
-        d = Derivative.create(source_code: code, derivation: @post, source: source_post)
-        if d.errors.any?
+        deriv = Derivative.create(source_code: code, derivation: @post, source: source_post)
+        if deriv.errors.any?
           @post.errors.add :base, :invalid, message: "Error sourcing from #{ code }: #{ d.errors.full_messages.join(", ") }"
-        elsif source_post.present? && source_post.user != @post.user
+        elsif can_create_notification
           create_notification(
             "**#{ @post.user.username }** has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
             post_path(@post.code),
             source_post.user.id,
             :post_derived_from,
             "derivative",
-            d.id
+            deriv.id
           )
         end
+      end
+
+      # Special case: We want to send a notification if the post was a draft
+      if @was_draft && can_create_notification
+        create_notification(
+          "**#{ @post.user.username }** has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
+          post_path(@post.code),
+          source_post.user.id,
+          :post_derived_from,
+          "derivative",
+          deriv.id
+        )
       end
     end
 
