@@ -36,3 +36,18 @@ Feature: Post derivatives
     And I try to remove the post titled "Take 3 Please" as a source
     Then I should not see "Take 3 Please" as a source for "Valiant vs. Shock"
     And I should not see "Valiant vs. Shock" as a derivative of "Take 3 Please"
+
+  Scenario Outline: Non-public posts do not appear publicly via derivatives
+    Given I am logged in as OBSMoira
+    And the post titled "OBS-ing!" is <visibility>
+    When I try to edit the post titled "OBS-ing!"
+    And I add the post titled "Valiant vs. Shock" as a source
+    Then I should see "Valiant vs. Shock" as a source for "OBS-ing!"
+    But I should not see "OBS-ing!" as a derivative of "Valiant vs. Shock"
+    And the user "OBSWinston" should not have any notifications
+
+    Examples:
+      | visibility |
+      | unlisted   |
+      | private    |
+      | a draft    |
