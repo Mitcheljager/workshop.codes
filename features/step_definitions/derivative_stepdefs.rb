@@ -79,7 +79,7 @@ Then "I should not see {string} as a derivative of {string}" do |derivative, pos
   visit post_path(code: post.code)
 
   # The tab is not visible unless there are derivations
-  next unless post.derivations.present?
+  next unless post.derivations.public?.present?
   click_on "Derivations"
   within "div[data-tab='derivations']" do
     expect(page).not_to have_content(derivative)
