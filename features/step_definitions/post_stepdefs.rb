@@ -1,7 +1,19 @@
-Given /a post by ([\d\p{L}_-]*[#\d]*) titled "([^"]+)"/ do |username, title|
+Given /an? ?([a-z]+)? post by ([\d\p{L}_-]*[#\d]*) titled "([^"]+)"/ do |visibility, username, title|
+  visibility ||= "public"
   user = User.find_by_username(username)
   expect(user).to be_present
-  create(:post, user: user, title: title)
+  post = create(:post, user: user, title: title)
+  update_post_visibility(post, visibility)
+end
+
+Given "the following posts exist" do |table|
+  table.hashes.each do |hash|
+    user = User.find_by_username(hash[:user])
+    expect(user).to be_present
+    post = create(:post, user: user, title: hash[:title])
+
+    update_post_visibility(post, hash[:visibility])
+  end
 end
 
 Given "the post titled {string} is (a ){word}" do |title, visibility|
@@ -98,4 +110,17 @@ def fill_in_post_form
 
   # Return to default tab
   click_on "Description"
+end
+
+def update_post_visibility(post, visibility)
+  case visibility
+  when "public"
+    post.update(draft: false, private: false, unlisted: false)
+  when "private"
+    post.update(private: true)
+  when "unlisted"
+    post.update(unlisted: true)
+  when "draft"
+    post.update(draft: true)
+  end
 end

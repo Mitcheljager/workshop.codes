@@ -44,10 +44,23 @@ Feature: Post derivatives
     And I add the post titled "Valiant vs. Shock" as a source
     Then I should see "Valiant vs. Shock" as a source for "OBS-ing!"
     But I should not see "OBS-ing!" as a derivative of "Valiant vs. Shock"
-    And the user "OBSWinston" should not have any notifications
 
     Examples:
       | visibility |
       | unlisted   |
       | private    |
       | a draft    |
+
+  Scenario Outline: Non-public posts do not issue notifications
+    Given I am logged in as OBSMoira
+    And <visibility> post by OBSMoira titled "ReinReinRein"
+    When I try to edit the post titled "ReinReinRein"
+    And I add the post titled "Valiant vs. Shock" as a source
+    Then I should see "Valiant vs. Shock" as a source for "ReinReinRein"
+    And the user "OBSWinston" should not have any notifications
+
+  Examples:
+    | visibility    |
+    | an unlisted   |
+    | a private     |
+    | a draft       |
