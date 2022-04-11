@@ -112,6 +112,7 @@ class PostsController < ApplicationController
 
     if @post.save
       unless parse_derivatives
+        flash[:warning] = "Something went wrong when trying to parse the derivatives for your post. However, your changes were still saved."
         respond_to do |format|
           format.html { render :new }
           format.js { render "validation" }
@@ -151,6 +152,7 @@ class PostsController < ApplicationController
 
     if @post.update(post_params)
       unless parse_derivatives
+        flash[:warning] = "Something went wrong when trying to parse the derivatives for your post. However, your changes were still saved."
         respond_to do |format|
           format.html { render :new }
           format.js { render "validation" }
