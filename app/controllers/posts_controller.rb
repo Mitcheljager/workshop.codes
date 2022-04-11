@@ -61,7 +61,7 @@ class PostsController < ApplicationController
         not_found and return unless @post.present?
 
         @revisions_count = @post.revisions.where(visible: true).size
-        @derivations_count = @post.derivations.size
+        @derivations_count = @post.derivations.public?.size
 
         set_post_images
       }
