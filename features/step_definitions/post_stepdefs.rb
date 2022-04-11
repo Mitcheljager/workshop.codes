@@ -4,6 +4,20 @@ Given /a post by ([\d\p{L}_-]*[#\d]*) titled "([^"]+)"/ do |username, title|
   create(:post, user: user, title: title)
 end
 
+Given "the post titled {string} is (a ){word}" do |title, visibility|
+  post = Post.find_by(title: title)
+  expect(post).to be_present
+  unless visibility.downcase == "draft"
+    visit edit_post_path(code: post.code)
+    click_on "Settings"
+    choose visibility.titleize
+    click_on "Save"
+  else # Need to manually override the visibility status
+    post.draft = true
+    post.save
+  end
+end
+
 When 'I try to {word} a/the post titled {string}' do |action, title|
   case action
 

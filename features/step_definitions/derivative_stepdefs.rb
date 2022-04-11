@@ -8,7 +8,7 @@ Given "{string} has a source {string}" do |post_title, source_title|
   expect(derivative).to be_persisted
 end
 
-When "I try to add the post titled {string} as a source" do |title|
+When "I (try to )add the post titled {string} as a source" do |title|
   # HACK: This is not a robust check for whether we are actually editing a post (as opposed to another model)
   fail "Need to be on a post edit page" unless page.current_path.ends_with?("/edit")
 
