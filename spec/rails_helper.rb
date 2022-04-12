@@ -103,3 +103,6 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 end
+
+# Run javascript headless
+Capybara.javascript_driver = :selenium_headless

@@ -183,6 +183,10 @@ class Post < ApplicationRecord
     self.where(private: false, unlisted: false, draft: false)
   end
 
+  def public?
+    !private? && !unlisted? && !draft?
+  end
+
   def expired?
     !self.immortal? && self.last_revision_created_at < 6.months.ago
   end
