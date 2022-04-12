@@ -20,7 +20,7 @@ When "I (try to )add the post titled {string} as a source" do |title|
   # We bypass the normal source selection by using the hidden field
   page.evaluate_script "document.getElementById('post_derivatives').value = '#{ post.code }'"
 
-  click_on 'Save'
+  click_on "Save"
 end
 
 When "I try to remove the post titled {string} as a source" do |title|
@@ -34,7 +34,7 @@ When "I try to remove the post titled {string} as a source" do |title|
     close.click
   end
 
-  click_on 'Save'
+  click_on "Save"
 end
 
 Then "I should see {string} as a source for {string}" do |source, post_title|
