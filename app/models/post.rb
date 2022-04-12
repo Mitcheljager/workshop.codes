@@ -139,7 +139,7 @@ class Post < ApplicationRecord
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 
   def self.search(query, size = 100)
-    Rails.cache.fetch("posts/search/#{Digest::SHA1.hexdigest(query)}/#{size}", expires_in: 15.minutes) do
+    Rails.cache.fetch("posts/search/#{Digest::SHA1.hexdigest(query)}/#{size}", expires_in: 5.minutes) do
       __elasticsearch__.search({
         from: 0,
         size: size,
