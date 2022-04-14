@@ -138,8 +138,8 @@ class Post < ApplicationRecord
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 
-  def self.search(query, size = 100)
-    Rails.cache.fetch("posts/search/#{Digest::SHA1.hexdigest(query)}/#{size}", expires_in: 5.minutes) do
+  def self.search(query, size: 100, bypass_cache: false)
+    Rails.cache.fetch("posts/search/#{Digest::SHA1.hexdigest(query)}/#{size}", expires_in: 5.minutes, force: bypass_cache) do
       __elasticsearch__.search({
         from: 0,
         size: size,
