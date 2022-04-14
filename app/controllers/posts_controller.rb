@@ -215,7 +215,7 @@ class PostsController < ApplicationController
 
   def similar_to
     @post = Post.find(params[:id])
-    @posts = ENV["BONSAI_URL"] ? Post.includes(:user).search(@post.tags.presence || @post.title, 4).records.where.not(id: @post.id).select_overview_columns.public?.limit(3) : Post.where.not(id: @post.id).last(3)
+    @posts = ENV["BONSAI_URL"] ? Post.includes(:user).where(id: Post.search(@post.tags.presence || @post.title, 4)).where.not(id: @post.id).select_overview_columns.public?.limit(3) : Post.where.not(id: @post.id).last(3)
 
     if @posts.any?
       render collection: @posts, partial: "card", as: :post

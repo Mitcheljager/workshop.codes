@@ -138,29 +138,31 @@ class Post < ApplicationRecord
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 
-  def self.search(query, size = 100)
-    __elasticsearch__.search({
-      from: 0,
-      size: size,
-      query: {
-        function_score: {
-          query: {
-            multi_match: {
-              query: query,
-              fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
-              fuzziness: "AUTO"
-            }
-          },
-          field_value_factor: {
-            field: "hotness",
-            modifier: "log1p",
-            factor: 0.1
-          },
-          boost_mode: "sum",
-          max_boost: 2
+  def self.search(query, size: 100, bypass_cache: false)
+    Rails.cache.fetch("posts/search/#{Digest::SHA1.hexdigest(query)}/#{size}", expires_in: (ENV["POST_SEARCH_CACHE_SECONDS"] || 30).to_i.seconds, force: bypass_cache) do
+      __elasticsearch__.search({
+        from: 0,
+        size: size,
+        query: {
+          function_score: {
+            query: {
+              multi_match: {
+                query: query,
+                fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
+                fuzziness: "AUTO"
+              }
+            },
+            field_value_factor: {
+              field: "hotness",
+              modifier: "log1p",
+              factor: 0.1
+            },
+            boost_mode: "sum",
+            max_boost: 2
+          }
         }
-      }
-    })
+      }).records.ids
+    end
   end
 
   def as_indexed_json(options={})
