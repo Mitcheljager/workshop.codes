@@ -4,7 +4,7 @@
   textNode.innerText = "<%= @message || 'Successfully saved.' %>"
 
   const closeButton = document.createElement("button", { "data-role": "dismiss-parent" })
-  closeButton.classList.add("button", "p-0", "pl-1/16", "pr-1/16", "text-white")
+  closeButton.classList.add("button", "button--link", "p-0", "pl-1/16", "pr-1/16")
   closeButton.dataset.role = "dismiss-parent"
   closeButton.innerText = "✕"
 

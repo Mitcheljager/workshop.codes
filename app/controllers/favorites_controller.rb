@@ -3,10 +3,10 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.new(favorite_params)
     @favorite.user_id = current_user.id
 
-    @post = Post.find(favorite_params[:post_id])
+    @post = Post.find_by(id: favorite_params[:post_id])
 
     respond_to do |format|
-      if @favorite.save
+      if @post.present? && @favorite.save
         BadgesFavoritesJob.perform_async(@post, current_user)
 
         format.js
@@ -20,10 +20,10 @@ class FavoritesController < ApplicationController
   def destroy
     @favorite = Favorite.find_by_post_id_and_user_id(favorite_params[:post_id], current_user.id)
 
-    @post = Post.find(favorite_params[:post_id])
+    @post = Post.find_by(id: favorite_params[:post_id])
 
     respond_to do |format|
-      if @favorite.destroy
+      if @post.present? && @favorite.destroy
         format.js
         format.html { redirect_to root_path }
       else
