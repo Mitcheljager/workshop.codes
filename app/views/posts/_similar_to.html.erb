@@ -2,7 +2,12 @@
   <h2 class="mb-0"><strong>Similar</strong> Codes</h2>
 </div>
 
-<div data-action="get-partial" data-get-on-load="true" data-target="similar-posts" data-url="<%= similar_posts_url(@post.id) %>"></div>
+<div
+  data-action="get-partial"
+  data-lazy="true"
+  data-target="similar-posts"
+  data-url="<%= similar_posts_url(@post.id) %>"></div>
+
 <div class="cards" data-partial="similar-posts">
   <div class="infinite-scroll"><div class="spinner"></div></div>
 </div>

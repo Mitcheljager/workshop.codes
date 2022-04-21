@@ -17,7 +17,7 @@
     <small class="button-label">&nbsp; <%= t "comment.max_characters", count: 2000 %></small>
   <% end %>
 <% else %>
-  <div class="well well--dark block mb-1/2">
+  <div class="well well--dark block <%= 'mb-1/2' unless @comments.size %>">
     <%= link_to t("comment.log_in"), login_path, class: "text-white" %> or <%= link_to t("comment.sign_up"), new_user_path, class: "text-white" %> to place a comment.
   </div>
 <% end %>
