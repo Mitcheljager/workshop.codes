@@ -74,7 +74,7 @@ en:
       content_html: Support Workshop.codes for just <span class="text-white">$3</span>
       button: Support Workshop.codes
     overwatch_2:
-      title_html: <span class="text-overwatch-2">Overwatch 2</span> Beta compatible codes
+      title_html: <span class="text-overwatch-2">Overwatch 2</span> Beta compatible&nbsp;codes
       button: Check it out
 
   posts:
