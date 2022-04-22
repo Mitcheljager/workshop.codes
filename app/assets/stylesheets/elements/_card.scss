@@ -93,6 +93,19 @@
       filter: brightness(1.15);
     }
   }
+
+  .code {
+    height: auto;
+    padding: $margin / 8 0;
+    margin-bottom: 0;
+    font-size: 24px;
+    line-height: 1.25em;
+
+    @include hover-stack {
+      outline: none;
+      filter: brightness(1.15);
+    }
+  }
 }
 
 .card__image {
@@ -144,28 +157,4 @@
   font-size: 14px;
   font-style: italic;
   color: $text-color;
-}
-
-.card__code {
-  appearance: none;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $margin / 8 0;
-  border: 0;
-  background: $bg-dark;
-  border-radius: $border-radius;
-  font-family: "Barlow Condensed", "Impact";
-  text-transform: uppercase;
-  font-size: 24px;
-  line-height: 1.25em;
-  font-size-adjust: 0.51;
-  color: $white;
-  cursor: pointer;
-
-  @include hover-stack {
-    outline: none;
-    filter: brightness(1.15);
-  }
 }

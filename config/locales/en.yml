@@ -73,6 +73,9 @@ en:
       tagline: Turns out websites are expensive and ads suck
       content_html: Support Workshop.codes for just <span class="text-white">$3</span>
       button: Support Workshop.codes
+    overwatch_2:
+      title_html: <span class="text-overwatch-2">Overwatch 2</span> Beta compatible codes
+      button: Check it out
 
   posts:
     index:
@@ -145,6 +148,9 @@ en:
       ptr:
         label: PTR Only?
         help: Beware! Once PTR goes down you might lose access to your code. Make sure to copy paste the snippet to easily copy it to Live once the time is there.
+      overwatch_2_compatible:
+        label: Overwatch 2?
+        help: Make sure your code is actually generated on the Overwatch 2 Beta and ensure it works properly. Do not check this if you haven't tested it yourself. Misusing this option will get your code removed.
       public:
         label: Public
         help: Your code will appear anywhere as normal.

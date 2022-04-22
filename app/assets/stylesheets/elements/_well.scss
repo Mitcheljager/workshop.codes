@@ -20,6 +20,11 @@
     background: var(--bg-darker);
   }
 
+  &--overwatch-2 {
+    background: var(--bg-darker);
+    border: 2px solid $overwatch-2;
+  }
+
   a {
     text-decoration: none;
   }

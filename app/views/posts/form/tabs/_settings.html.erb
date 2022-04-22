@@ -43,15 +43,42 @@
     </div>
 
     <div class="form-group mt-1/2 sm:mt-0" data-reveal-by-checkbox>
-      <div class="checkbox">
-        <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-        <%= form.label :ptr, t("posts.form.ptr.label") %>
-      </div>
+      <!--
+        Only show this for posts that are already marked for PTR only.
+        PTR is currently unavailable so there's no point in showing it
+        for everyone until it's back up, if that ever happens.
+      -->
+      <% if @post.ptr? %>
+        <div class="checkbox">
+          <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
+          <%= form.label :ptr, t("posts.form.ptr.label") %>
+        </div>
 
-      <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
-        <p class="form-hint">
-          <%= t("posts.form.ptr.help") %>
-        </p>
+        <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
+          <p class="form-hint">
+            <%= t("posts.form.ptr.help") %>
+          </p>
+        </div>
+      <% end %>
+
+      <div class="well well--overwatch-2">
+        <div class="switch-checkbox ">
+          <%= form.check_box :overwatch_2_compatible,
+              checked: @post.overwatch_2_compatible?,
+              class: "switch-checkbox__input",
+              data: { action: "reveal-by-checkbox" },
+              autocomplete: "off" %>
+
+          <%= form.label :overwatch_2_compatible,
+              t("posts.form.overwatch_2_compatible.label"),
+              class: "switch-checkbox__label" %>
+        </div>
+
+        <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.overwatch_2_compatible? %>">
+          <p class="form-hint mb-0">
+            <%= t("posts.form.overwatch_2_compatible.help") %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
