@@ -31,4 +31,10 @@
     bottom: auto;
     transform: translateY(-100%);
   }
+
+  .tooltip--right & {
+    right: 0;
+    left: auto;
+    transform: translateY(100%);
+  }
 }

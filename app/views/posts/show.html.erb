@@ -31,6 +31,7 @@
       <%= render "code", post: @post %>
     </div>
 
+    <%= render "overwatch_2_indicator" if @post.overwatch_2_compatible? %>
     <%= render "current_user_blocks" if current_user == @post.user %>
     <%= render "expired" if @post.expired? %>
 
