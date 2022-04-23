@@ -113,6 +113,7 @@ Rails.application.routes.draw do
     get "(page/:page)", to: "posts#index"
     get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(overwatch-2/:overwatch_2)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", as: "filter", constraints: FilterContraints
     post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(overwatch-2/:overwatch_2)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#index", as: "search_post"
+    get "overwatch-2", to: "filter#index", overwatch_2: "true", as: "overwatch_2"
     get "search", to: "search#show"
     get "get-verified-users", to: "filter#get_verified_users"
 
