@@ -31,6 +31,7 @@ function buildFilterPath(event) {
     "from": filterValue("from"),
     "to": filterValue("to"),
     "exclude-expired": document.querySelector("[data-filter-type='exclude-expired']").checked ? "true" : "",
+    "overwatch-2": document.querySelector("[data-filter-type='overwatch-2']").checked ? "true" : "",
     "author": filterValue("author"),
     "players": filterValue("players"),
     "search": document.querySelector("input[name='query']").value.replace(".", " "),
