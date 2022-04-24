@@ -102,9 +102,3 @@
     font-size: 12px;
   }
 }
-
-.standout__floating-image {
-  position: absolute;
-  margin-left: -#{$margin / 4};
-  transform: translateX(-50%);
-}
