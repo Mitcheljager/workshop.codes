@@ -119,6 +119,13 @@
     en: Damage
     ko: 딜러
 -
+  en: Sojourn
+  ko: 소전
+  overwatch_2: true
+  category:
+    en: Damage
+    ko: 딜러
+-
   en: Sombra
   ko: 솜브라
   category:
