@@ -146,6 +146,22 @@
     ko: 쟁탈
   slug: oasis
 -
+  en: Toronto
+  ko: 토론토
+  overwatch_2: true
+  type:
+    en: Push
+    ko: 밀기
+  slug: toronto
+-
+  en: Rome
+  ko: 로마
+  overwatch_2: true
+  type:
+    en: Push
+    ko: 밀기
+  slug: rome
+-
   en: Black Forest
   ko: 검은 숲
   type:
