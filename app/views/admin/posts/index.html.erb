@@ -21,6 +21,7 @@
     <th>Code</th>
     <th>Prv?</th>
     <th>Unl?</th>
+    <th>OW2?</th>
     <th>URL</th>
     <th><%= link_to "Fv", admin_posts_path(order: "favorites_count") %></th>
     <th><%= link_to "Imp", admin_posts_path(order: "impressions_count") %></th>
@@ -41,6 +42,7 @@
       <td><small><%= link_to post.code, post_path(post.code) %></small></td>
       <td><%= "✔" if post.private? %></td>
       <td><%= "✔" if post.unlisted? %></td>
+      <td><%= "✔" if post.overwatch_2_compatible? %></td>
       <td><small><%= link_to nice_url_path(post.nice_url) if post.nice_url.present? %></small></td>
       <td><%= post.favorites_count %></td>
       <td><%= post.impressions_count %></td>

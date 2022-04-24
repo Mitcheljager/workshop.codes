@@ -14,12 +14,24 @@
   color: $text-color-dark;
 }
 
+.text-overwatch-2 {
+  color: $overwatch-2;
+}
+
 .bg-dark {
   background: $bg-dark;
 }
 
 .bg-darker {
   background: $bg-darker;
+}
+
+.bg-overwatch-2 {
+  background: $overwatch-2;
+}
+
+.b-overwatch-2 {
+  border: 2px solid $overwatch-2;
 }
 
 .b-dark {

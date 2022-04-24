@@ -28,7 +28,10 @@
 
                 <% heroes.each do |hero| %>
                   <% name = i18n_value_in_array(heroes, hero["en"]) %>
-                  <%= link_to name, build_filter_path(:hero, to_slug(hero["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(hero["en"]) } %>
+                  <%= link_to build_filter_path(:hero, to_slug(hero["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(hero["en"]) } do %>
+                    <%= name %>
+                    <%= tag.small "OW2", class: "text-overwatch-2" if hero["overwatch_2"].present? %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
@@ -45,7 +48,10 @@
 
                 <% maps.each do |map| %>
                   <% name = i18n_value_in_array(maps, map["en"]) %>
-                  <%= link_to name, build_filter_path(:map, to_slug(map["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(map["en"]) } %>
+                  <%= link_to build_filter_path(:map, to_slug(map["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(map["en"]) } do %>
+                    <%= name %>
+                    <%= tag.small "OW2", class: "text-overwatch-2" if map["overwatch_2"].present? %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
@@ -92,6 +98,14 @@
 
             <div class="checkbox ml-1/4">
               <%= check_box_tag :exclude_expired, "", params[:expired] == "true", data: { filter_type: "exclude-expired" }, autocomplete: "off" %>
+            </div>
+          </div>
+
+          <div class="filter__item">
+            <%= label_tag :overwatch_2, t("filter.overwatch_2.label_html"), class: "filter__label cursor-pointer" %>
+
+            <div class="checkbox ml-1/4">
+              <%= check_box_tag :overwatch_2, "", params[:overwatch_2] == "true", data: { filter_type: "overwatch-2" }, autocomplete: "off" %>
             </div>
           </div>
         </div>

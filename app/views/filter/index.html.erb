@@ -11,6 +11,7 @@
 <div class="heading mb-1/2">
   <h2>
     Workshop Codes
+    <% if params[:overwatch_2] %> for  <strong class="text-overwatch-2">Overwatch 2</strong> <% end %>
     <% if params[:search] %> for <strong><%= CGI.unescape(params[:search]) %></strong> <% end %>
     <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
     <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
@@ -23,5 +24,21 @@
     <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
   </h2>
 </div>
+
+<% if params[:overwatch_2] %>
+  <div class="well well--dark b-overwatch-2 mb-1/2">
+    <div>
+      <h3 class="mt-0 mb-0">
+        <strong><%= t("banner.overwatch_2.title_html") %></strong>
+      </h3>
+
+      <div class="mt-1/4 text-small">
+        These Workshop codes were tagged as being importable within the Overwatch 2 Beta.
+        It is possible that codes may have been invalidated, since the Overwatch 2 Beta is under active development.
+        An import code that was created in Overwatch 2 Beta will not work in Overwatch 1.
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <%= render "posts/posts", posts: @posts %>

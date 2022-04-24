@@ -34,6 +34,14 @@
     ko: 점령
   slug: volskaya-industries
 -
+  en: Circuit Royal
+  ko: Circuit Royal
+  overwatch_2: true
+  type:
+    en: Escort
+    ko: 호위
+  slug: circuit-royal
+-
   en: Dorado
   ko: 도라도
   type:
@@ -111,6 +119,14 @@
     ko: 혼합
   slug: numbani
 -
+  en: Midtown
+  ko: Midtown
+  overwatch_2: true
+  type:
+    en: Hybrid
+    ko: 혼합
+  slug: midtown
+-
   en: Busan
   ko: 부산
   type:
@@ -145,6 +161,22 @@
     en: Control
     ko: 쟁탈
   slug: oasis
+-
+  en: Toronto
+  ko: 토론토
+  overwatch_2: true
+  type:
+    en: Push
+    ko: 밀기
+  slug: toronto
+-
+  en: Rome
+  ko: 로마
+  overwatch_2: true
+  type:
+    en: Push
+    ko: 밀기
+  slug: rome
 -
   en: Black Forest
   ko: 검은 숲
