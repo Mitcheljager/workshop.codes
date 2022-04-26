@@ -61,25 +61,27 @@
         </div>
       <% end %>
 
-      <div class="well well--dark b-overwatch-2">
-        <div class="switch-checkbox ">
-          <%= form.check_box :overwatch_2_compatible,
-              checked: @post.overwatch_2_compatible?,
-              class: "switch-checkbox__input",
-              data: { action: "reveal-by-checkbox" },
-              autocomplete: "off" %>
+      <% if false %>
+        <div class="well well--dark b-overwatch-2">
+          <div class="switch-checkbox ">
+            <%= form.check_box :overwatch_2_compatible,
+                checked: @post.overwatch_2_compatible?,
+                class: "switch-checkbox__input",
+                data: { action: "reveal-by-checkbox" },
+                autocomplete: "off" %>
 
-          <%= form.label :overwatch_2_compatible,
-              t("posts.form.overwatch_2_compatible.label"),
-              class: "switch-checkbox__label" %>
-        </div>
+            <%= form.label :overwatch_2_compatible,
+                t("posts.form.overwatch_2_compatible.label"),
+                class: "switch-checkbox__label" %>
+          </div>
 
-        <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.overwatch_2_compatible? %>">
-          <p class="form-hint mb-0">
-            <%= t("posts.form.overwatch_2_compatible.help") %>
-          </p>
+          <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.overwatch_2_compatible? %>">
+            <p class="form-hint mb-0">
+              <%= t("posts.form.overwatch_2_compatible.help") %>
+            </p>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 
