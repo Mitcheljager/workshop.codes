@@ -64,6 +64,20 @@ function getInfiniteScrollContent(element) {
         element.innerHTML = "Load more"
         element.setAttribute("data-url", nextUrl)
       }
+    },
+    error: (error) => {
+      progressBar.setValue(1)
+      progressBar.hide()
+
+      const spinner = document.querySelector(".items").querySelector(".spinner")
+      if (spinner) spinner.remove()
+      if (element.classList.contains("button")) {
+        element.innerHTML = "An error occurred. Try again?"
+        element.setAttribute("data-url", currentUrl)
+      }
+
+      const button = document.querySelector("[data-role='load-more-posts']")
+      if (button) button.removeAndAddEventListener("click", loadMorePosts)
     }
   })
 }
