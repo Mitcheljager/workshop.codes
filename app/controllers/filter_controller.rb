@@ -28,7 +28,7 @@ class FilterController < ApplicationController
       @message = "Something went wrong. Please try again later."
       flash[:error] = @message
       respond_to do |format|
-        format.html { render :index, status: 500 }
+        format.html { render "errors/internal_error", status: 500 }
         format.js { render "posts/infinite_scroll_posts", status: 500 }
         format.json { render json: { message: @message }, status: 500 }
       end
