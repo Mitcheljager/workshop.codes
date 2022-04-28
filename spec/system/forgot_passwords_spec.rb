@@ -34,7 +34,7 @@ RSpec.describe "ForgotPasswords", type: :system do
     end
   end
 
-  #TODO: Sad path of nonexistent or expired token or invalid email
+  # Sad path of nonexistent or expired token or invalid email
   describe "sad path: improper token" do
     context "which does not exist" do
       it "returns a 404" do
