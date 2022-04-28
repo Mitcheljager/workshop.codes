@@ -24,8 +24,8 @@ class FilterController < ApplicationController
     rescue Elasticsearch::Transport::Transport::ServerError => e
       Bugsnag.notify(e) if Rails.env.production?
       @posts = Kaminari.paginate_array([]).page(params[:page])
-      @message = "Something went wrong. Please try again later."
-      flash[:error] = @message
+      @error = "Something went wrong. Please try again later."
+      flash[:error] = @error
       respond_to do |format|
         format.html { render "filter/index", status: 500 }
         format.js { render "posts/infinite_scroll_posts", status: 500 }
