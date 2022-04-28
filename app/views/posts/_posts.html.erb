@@ -5,18 +5,22 @@
 
       <% if @posts.size == 20 %>
         <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
-          <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>"></div>
+          <div class="infinite-scroll" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>
         <% end %>
 
         <% if current_user && current_user.pagination_type == "load_more" %>
           <div data-role="load-more-posts-marker"></div>
           <div class="flex justify-center">
-            <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-url="<%= request.original_url %>">Load more</div>
+            <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-load-method="load-more-button" data-url="<%= request.original_url %>">Load more</div>
           </div>
         <% end %>
       <% end %>
     <% else %>
-      <p><em>There doesn't seem to be anything here</em></p>
+      <% if flash[:error] %>
+        <div><button class="button" onclick="location.reload()">Try again?</button></div>
+      <% else %>
+        <p><em>There doesn't seem to be anything here</em></p>
+      <% end %>
 
       <blockquote>
         <% quote = quotes.sample %>
