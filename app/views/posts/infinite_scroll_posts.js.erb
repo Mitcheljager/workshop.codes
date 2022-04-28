@@ -14,6 +14,12 @@
     <% end %>
   <% elsif @posts.any? %>
     <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
+      <%# Remove the error button if the request succeeds after retry %>
+      const button = document.querySelector("[data-role='load-more-posts']")
+      if (button) {
+        button.remove()
+      }
+
       const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
 
       elements[elements.length - 1].insertAdjacentHTML("afterEnd", `
