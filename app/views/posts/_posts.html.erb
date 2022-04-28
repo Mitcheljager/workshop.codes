@@ -16,7 +16,11 @@
         <% end %>
       <% end %>
     <% else %>
-      <p><em>There doesn't seem to be anything here</em></p>
+      <% if flash[:error] %>
+        <div><button class="button" onclick="location.reload()">Try again?</button></div>
+      <% else %>
+        <p><em>There doesn't seem to be anything here</em></p>
+      <% end %>
 
       <blockquote>
         <% quote = quotes.sample %>
