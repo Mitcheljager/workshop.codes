@@ -95,6 +95,7 @@
   }
 
   .code {
+    flex-shrink: 0;
     height: auto;
     padding: $margin / 8 0;
     margin-bottom: 0;
