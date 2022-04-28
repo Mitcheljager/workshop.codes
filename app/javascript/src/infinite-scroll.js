@@ -69,7 +69,7 @@ function getInfiniteScrollContent(element) {
       progressBar.setValue(1)
       progressBar.hide()
 
-      const spinner = document.querySelector(".items").querySelector(".spinner")
+      const spinner = document.querySelector(".items")?.querySelector(".spinner")
       if (spinner) spinner.remove()
       if (element.classList.contains("button")) {
         element.innerHTML = "An error occurred. Try again?"
