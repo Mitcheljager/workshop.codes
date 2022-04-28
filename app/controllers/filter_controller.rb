@@ -1,6 +1,5 @@
 class FilterController < ApplicationController
   def index
-    # binding.pry
     begin
       @posts = params[:search] ? Post.includes(:user).where(id: Post.search(params[:search], bypass_cache: true)).select_overview_columns.public? : Post.select_overview_columns.public?
 
