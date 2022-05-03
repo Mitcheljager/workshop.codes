@@ -95,7 +95,7 @@ ko:
       expire_soon:
         title: 코드가 곧 만료됩니다.
         content_html: |
-          <p class="mb-0"><small><strong>오버 워치의 워크샵 코드는 6 개월 후에 만료됩니다.</strong>. 이 후에는 코드가 더 이상 작동하지 않으며 <strong>귀하의 코드가 손실됩니다</strong>.</small></p>
+          <p class="mb-0"><small><strong>오버 워치의 워크샵 코드는 6 개월 후에 만료됩니다</strong>. 이 후에는 코드가 더 이상 작동하지 않으며 <strong>귀하의 코드가 손실됩니다</strong>.</small></p>
           <p class="mt-0"><small>워크샵 아이템을 영원히 잃어 버리지 않도록 새 코드를 생성하고 여기에서 업데이트하십시오.</small></p>
           <p><small><em>이 코드는 대략적으로 만료됩니다 %{time}.</em></small></p>
     details:
