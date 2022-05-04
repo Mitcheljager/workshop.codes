@@ -107,11 +107,12 @@ en:
         title: This post is a draft.
         content: Only you can see it. When you are ready to publish this code you can change the status and it will be posted as if it was new.
       expire_soon:
-        title: Your Code will soon expire.
+        title: Your Code may expire soon.
         content_html: |
-          <p class="mb-0"><small><strong>Workshop Codes in Overwatch expire after 6 months</strong>. After this the code will no longer function and <strong>your code will be lost</strong>.</small></p>
-          <p class="mt-0"><small>Make sure to generate a new code and update it here to prevent losing your Workshop Item forever.</small></p>
-          <p><small><em>This code will expire in roughly %{time}.</em></small></p>
+          <p class="mb-0"><small><strong>Workshop Codes in Overwatch may expire after 6 months</strong>.</small></p>
+          <p class="mb-0 mt-0"><small>After expiration, codes will no longer function and <strong>their contents will be lost</strong>.</small></p>
+          <p class="mt-0"><small>Make sure to renew your import code <a href="/wiki/articles/uploading+new+content+to+existing+import+code" class="text-pure-white">(?)</a> to avoid losing your Workshop mode forever.</small></p>
+          <p><small><em>This code might expire in %{time}.</em></small></p>
       tabs:
         description: Description
         controls: Controls
