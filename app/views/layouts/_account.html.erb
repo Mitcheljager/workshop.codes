@@ -5,6 +5,7 @@
 <div class="profile">
   <aside>
     <%= link_to t("account.navigation.overview"), account_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_path) }" %>
+    <%= link_to t("account.navigation.feed"), feed_index_path, class: "profile__action #{ 'profile__action--active' if current_page?(feed_index_path) }" %>
     <%= link_to t("account.navigation.notifications"), notifications_path, class: "profile__action #{ 'profile__action--active' if current_page?(notifications_path) }" %>
     <%= link_to t("account.navigation.favorites"), account_favorites_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_favorites_path) }" %>
     <%= link_to t("account.navigation.codes"), account_posts_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_posts_path) }" %>

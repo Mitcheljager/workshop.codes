@@ -1,0 +1,62 @@
+.feed__item {
+  display: flex;
+  gap: $margin / 2;
+  padding: $margin / 2 0;
+  border-bottom: 1px solid $border-color;
+
+  .item__thumbnail {
+    display: block;
+  }
+}
+
+.feed__title {
+  margin: 0.35rem 0;
+}
+
+.feed__version {
+  margin-top: 0;
+  font-style: italic;
+}
+
+.feed__author {
+  margin: $margin / 4 0 0;
+  font-size: var(--font-size-small);
+
+  a {
+    color: $pure-white;
+    text-decoration: none;
+
+    @include hover-stack {
+      text-decoration: underline;
+    }
+  }
+}
+
+.feed__date {
+  margin: $margin / 8 0 0;
+  color: $text-color-dark;
+  font-size: var(--font-size-small);
+  font-style: italic;
+}
+
+.feed__update-notes {
+  margin-bottom: 0.5rem;
+}
+
+.feed__code {
+  height: auto;
+  width: 100%;
+  padding: $margin / 8 0;
+  margin: $margin / 8 0;
+  border-radius: $border-radius / 2;
+  font-size: 21px;
+
+  svg {
+    display: none;
+  }
+
+  .code__flag {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.3rem;
+  }
+}

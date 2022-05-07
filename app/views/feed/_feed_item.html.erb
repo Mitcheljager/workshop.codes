@@ -1,0 +1,30 @@
+<div class="feed__item">
+  <div>
+    <%= render "posts/thumbnail", post: revision.post %>
+    <%= render "posts/code", post: revision.post, item_class: "code feed__code" %>
+
+    <p class="feed__author">
+      by <%= link_to revision.post.user.clean_username, user_profile_path(revision.post.user) %>
+    </p>
+
+    <p class="feed__date"><%= time_ago_in_words revision.created_at %> ago</p>
+  </div>
+
+  <div>
+    <h3 class="feed__title"><%= revision.post.title %></h3>
+    <% if revision.version.present? %>
+      <p class="feed__version"><%= revision.version %></p>
+    <% end %>
+
+    <% if revision.description.blank? %>
+      <p>
+        <em>No update notes provided.</em>
+      </p>
+    <% else %>
+      <h5 class="feed__update-notes">Update notes</h5>
+      <div class="item__description mt-1/8">
+        <%= sanitized_markdown(revision.description) %>
+      </div>
+    <% end %>
+  </div>
+</div>

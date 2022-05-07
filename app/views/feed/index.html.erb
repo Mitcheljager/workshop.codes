@@ -1,0 +1,5 @@
+<%= render "layouts/account", title: t("account.navigation.feed") do %>
+  <% @revisions.each do |revision| %>
+    <%= render "feed_item", revision: revision %>
+  <% end %>
+<% end %>
