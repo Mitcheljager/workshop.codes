@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(version: 2022_04_21_201817) do
     t.text "custom_css"
     t.integer "pagination_type", default: 0
     t.integer "linked_id"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

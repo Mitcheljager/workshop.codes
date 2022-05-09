@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
 
     if token && token.user
       session[:user_id] = token.user.id
+      session[:user_uuid] = token.user.uuid
       create_activity(:login_from_cookie)
     end
   end
@@ -40,6 +41,12 @@ class ApplicationController < ActionController::Base
   def current_user
     if session[:user_id]
       @current_user ||= User.find_by(id: session[:user_id])
+
+      # Invalidate the session if a UUID is specified and the user's UUID does not match
+      if session[:user_uuid] && @current_user.uuid != session[:user_uuid]
+        reset_session
+        @current_user = nil
+      end
     else
       @current_user = nil
     end

@@ -32,6 +32,7 @@ class SessionsController < ApplicationController
 
       generate_remember_token if (params[:remember_me].present? && params[:remember_me] != "0") || (@user.provider.present?)
       session[:user_id] = @user.id
+      session[:user_uuid] = @user.uuid
 
       create_activity(:login, @user.id)
       ahoy.authenticate(@user)
