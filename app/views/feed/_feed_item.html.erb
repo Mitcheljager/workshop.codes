@@ -1,4 +1,4 @@
-<div class="feed__item">
+<div class="feed__item <%= "feed__item--faded" if @feed_last_visited_at && revision.created_at < @feed_last_visited_at %>">
   <div>
     <%= render "posts/thumbnail", post: revision.post %>
     <%= render "posts/code", post: revision.post, item_class: "code feed__code" %>
@@ -11,7 +11,10 @@
   </div>
 
   <div>
-    <h3 class="feed__title"><%= revision.post.title %></h3>
+    <h3 class="feed__title">
+      <%= link_to revision.post.title, post_path(revision.post.code) %>
+    </h3>
+
     <% if revision.version.present? %>
       <p class="feed__version"><%= revision.version %></p>
     <% end %>

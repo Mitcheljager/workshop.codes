@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_21_201817) do
+ActiveRecord::Schema.define(version: 2022_05_08_135642) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(version: 2022_04_21_201817) do
     t.text "custom_css"
     t.integer "pagination_type", default: 0
     t.integer "linked_id"
+    t.datetime "feed_last_visited_at"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

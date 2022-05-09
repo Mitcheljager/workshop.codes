@@ -92,7 +92,7 @@ Rails.application.routes.draw do
     get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"
     post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
 
-    resources :feed, only: [:index]
+    resources :feed, concerns: :paginatable, only: [:index]
 
     resources :linked_users, only: [:index]
     # For some reason this cannot be merged into the above resources.
