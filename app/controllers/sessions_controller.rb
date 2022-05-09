@@ -30,6 +30,7 @@ class SessionsController < ApplicationController
 
       reject_banned_user and return if is_banned?(@user)
 
+      reset_session
       generate_remember_token if (params[:remember_me].present? && params[:remember_me] != "0") || (@user.provider.present?)
       session[:user_id] = @user.id
       session[:user_uuid] = @user.uuid
