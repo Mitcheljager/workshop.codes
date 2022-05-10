@@ -26,9 +26,11 @@ class ApplicationController < ActionController::Base
     token = RememberToken.find_by_token(cookies.encrypted[:remember_token])
 
     if token && token.user
+      redirect_to = session[:return_to]
       reset_session
       session[:user_id] = token.user.id
       session[:user_uuid] = token.user.uuid
+      session[:return_to] = redirect_to
       create_activity(:login_from_cookie)
     end
   end
