@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(version: 2022_05_09_180158) do
     t.text "custom_css"
     t.integer "pagination_type", default: 0
     t.integer "linked_id"
-    t.string "uuid", limit: 36, default: ""
+    t.string "uuid", limit: 36
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
