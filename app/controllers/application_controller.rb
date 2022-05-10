@@ -51,6 +51,7 @@ class ApplicationController < ActionController::Base
     else
       @current_user = nil
     end
+    @current_user
   end
 
   def set_current_user
