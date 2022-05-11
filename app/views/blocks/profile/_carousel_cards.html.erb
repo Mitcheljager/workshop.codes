@@ -5,7 +5,7 @@
 <% end %>
 
 <div class="card-carousel">
-  <% posts = @posts.where(id: block_property(block, "posts")).limit(6) %>
+  <% posts = @posts.except(:limit, :offset).where(id: block_property(block, "posts")).limit(6) %>
 
   <div data-role="carousel-cards" data-max="<%= posts.size %>" class="cards cards--on-fire">
     <%= render collection: posts, partial: "posts/card", as: :post %>
