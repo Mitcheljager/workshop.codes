@@ -13,15 +13,15 @@
       </div>
 
       <nav class="tabs">
-        <%= link_to "Highlights", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "highlights" } if @blocks.any? %>
-        <%= link_to "Codes", "#", class: "tabs__item #{ "tabs__item--active" unless @blocks.any? }", data: { action: "set-tab", target: "codes" } %>
-        <%= link_to "Collections", "#", class: "tabs__item", data: { action: "set-tab", target: "collections" } %>
+        <%= link_to "Highlights", "#", class: "tabs__item #{"tabs__item--active" unless params[:tab].present? && params[:tab] != "highlights"}", data: { action: "set-tab", target: "highlights" } if @blocks.any? %>
+        <%= link_to "Codes", "#", class: "tabs__item #{ "tabs__item--active" unless @blocks.any? && params[:tab] != "codes" }", data: { action: "set-tab", target: "codes" } %>
+        <%= link_to "Collections", "#", class: "tabs__item #{"tabs__item--active" if params[:tab] == "collections"}", data: { action: "set-tab", target: "collections" } %>
       </nav>
     </div>
   </div>
 
   <% if @blocks.any? %>
-    <div class="tabs-content tabs-content--active" data-tab="highlights">
+    <div class="tabs-content <%= "tabs-content--active" unless params[:tab].present? && params[:tab] != "highlights" %>" data-tab="highlights">
       <% @blocks.each do |block| %>
         <div class="mt-1/1 mb-1/1" data-block-id="<%= block.id %>">
           <%= render "blocks/profile/#{ block.name }", block: block %>
@@ -30,11 +30,11 @@
     </div>
   <% end %>
 
-  <div class="tabs-content <%= "tabs-content--active" unless @blocks.any? %>" data-tab="codes">
+  <div class="tabs-content <%= "tabs-content--active" unless @blocks.any? && params[:tab] != "codes" %>" data-tab="codes">
     <%= render "blocks/profile/list" %>
   </div>
 
-  <div class="tabs-content" data-tab="collections">
+  <div class="tabs-content <%= "tabs-content--active" if params[:tab] == "collections" %>" data-tab="collections">
     <%= render "blocks/profile/all_collections" %>
   </div>
 </div>
