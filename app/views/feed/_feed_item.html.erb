@@ -1,4 +1,4 @@
-<div class="feed__item <%= "feed__item--faded" if @feed_last_visited_at && revision.created_at < @feed_last_visited_at %>">
+<div class="feed__item">
   <div>
     <%= render "posts/thumbnail", post: revision.post %>
     <%= render "posts/code", post: revision.post, item_class: "code feed__code" %>

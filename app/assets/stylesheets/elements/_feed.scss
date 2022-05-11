@@ -1,12 +1,9 @@
 .feed__item {
-  display: flex;
+  display: grid;
+  grid-template-columns: $thumbnail-width auto;
   gap: $margin / 2;
   padding: $margin / 2 0;
   border-top: 1px solid $border-color;
-
-  &--faded {
-    opacity: 0.75;
-  }
 
   .item__thumbnail {
     display: block;
@@ -57,7 +54,7 @@
 .feed__date {
   margin: $margin / 8 0 0;
   color: $text-color-dark;
-  font-size: var(--font-size-small);
+  font-size: 0.75rem;
   font-style: italic;
 }
 

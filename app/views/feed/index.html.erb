@@ -1,16 +1,15 @@
 <%= render "layouts/account", title: t("account.navigation.feed") do %>
   <% if current_user.favorites.any? %>
+    <h2 class="feed__heading">New updates</h2>
+
     <% if @feed_last_visited_at && @revisions.first.created_at < @feed_last_visited_at %>
       <p class="feed__message">There are no new updates since your last visit, which was <%= time_ago_in_words(@feed_last_visited_at) %> ago.</p>
-    <% else %>
-      <h2 class="feed__heading">New updates</h2>
     <% end %>
 
     <%= render "feed_items" %>
   <% else %>
     <p class="feed__message">
-      This is where we would show updates to your favorited codes, if you had any. <br>
-      <span class="text-white">Start favorting codes and follow there updates!</span>
+      This is where we would show updates to your favorited codes, if you had any.
     </p>
   <% end %>
 <% end %>
