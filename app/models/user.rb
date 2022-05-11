@@ -64,6 +64,14 @@ class User < ApplicationRecord
   validates :banner_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
                             size: { less_than: 2.megabytes },
                             dimension: { max: 3500..3500 }
+  validates :uuid, presence: true, uniqueness: true, length: { is: 36 }, format: { with: /\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i }
+
+  after_find do
+    # binding.pry
+    self.update_column(:uuid, SecureRandom.uuid) unless self.uuid.present?
+  end
+
+  before_validation :generate_and_set_uuid, on: :create
 
   def self.find_or_create_from_auth_hash(auth_hash)
     uid = auth_hash["uid"]
@@ -91,5 +99,11 @@ class User < ApplicationRecord
 
   def clean_username
     self.username.split("#")[0]
+  end
+
+  private
+
+  def generate_and_set_uuid
+    self.uuid = SecureRandom.uuid
   end
 end
