@@ -1,6 +1,6 @@
 <% return unless block_property(block, "post").present? %>
 
-<% post = @posts.find_by(id: block_property(block, "post")) %>
+<% post = @posts.except(:limit, :offset).find_by(id: block_property(block, "post")) %>
 
 <% return unless post %>
 
