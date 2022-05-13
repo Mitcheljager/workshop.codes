@@ -86,11 +86,11 @@
   width: 100%;
   padding: $margin / 8 0;
   border-radius: $border-radius / 2;
-  font-size: 21px;
 
   @include media-min(md) {
     height: auto;
     margin: $margin / 8 0;
+    font-size: 21px;
   }
 
   svg {
