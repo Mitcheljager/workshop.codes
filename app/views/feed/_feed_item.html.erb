@@ -1,5 +1,5 @@
 <div class="feed__item">
-  <div>
+  <div class="feed__info">
     <%= render "posts/thumbnail", post: revision.post %>
     <%= render "posts/code", post: revision.post, item_class: "code feed__code" %>
 
@@ -20,7 +20,7 @@
     <% end %>
 
     <% if revision.description.blank? %>
-      <p>
+      <p class="mb-0">
         <em>No update notes provided.</em>
       </p>
     <% else %>

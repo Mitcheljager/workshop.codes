@@ -1,12 +1,28 @@
 .feed__item {
-  display: grid;
-  grid-template-columns: $thumbnail-width auto;
-  gap: $margin / 2;
   padding: $margin / 2 0;
   border-top: 1px solid $border-color;
 
+  @include media-min(md) {
+    display: grid;
+    grid-template-columns: $thumbnail-width auto;
+    gap: $margin / 2;
+  }
+
   .item__thumbnail {
     display: block;
+  }
+}
+
+.feed__info {
+  display: grid;
+  grid-template: "thumbnail code" "author date";
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0 $margin / 8;
+  margin-bottom: $margin / 2;
+
+  @include media-min(md) {
+    display: block;
+    margin: 0;
   }
 }
 
@@ -52,10 +68,14 @@
 }
 
 .feed__date {
-  margin: $margin / 8 0 0;
+  margin: $margin / 4 0 0;
   color: $text-color-dark;
   font-size: 0.75rem;
   font-style: italic;
+
+  @include media-min(md) {
+    margin: $margin / 8 0 0;
+  }
 }
 
 .feed__update-notes {
@@ -63,12 +83,15 @@
 }
 
 .feed__code {
-  height: auto;
   width: 100%;
   padding: $margin / 8 0;
-  margin: $margin / 8 0;
   border-radius: $border-radius / 2;
   font-size: 21px;
+
+  @include media-min(md) {
+    height: auto;
+    margin: $margin / 8 0;
+  }
 
   svg {
     display: none;
