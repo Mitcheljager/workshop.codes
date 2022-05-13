@@ -75,4 +75,20 @@ module ApplicationHelper
   def i18n_value_in_array(array, value)
     array.select { |item| item["en"].downcase == value&.downcase }[0]&.fetch(current_locale, nil)
   end
+
+  def user_menu_items
+    [
+      { title: t("account.navigation.overview"), url: account_path, data: { prefetch: false } },
+      { title: t("account.navigation.feed"), url: feed_index_path, data: { prefetch: false } },
+      { title: t("account.navigation.notifications"), url: notifications_path, },
+      { title: t("account.navigation.favorites"), url: account_favorites_path, },
+      { title: t("account.navigation.codes"), url: account_posts_path, },
+      { title: t("account.navigation.collections"), url: collections_path, },
+      { title: t("account.navigation.profile"), url: edit_profile_path, },
+      { title: t("account.navigation.account"), url: edit_user_path, },
+      { title: t("account.navigation.linked_users"), url: linked_users_path, },
+      { title: t("account.navigation.accessibility"), url: accessibility_path, },
+      { title: t("account.navigation.logout"), url: logout_path, data: { prefetch: false } }
+    ]
+  end
 end

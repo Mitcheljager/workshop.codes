@@ -1,24 +1,27 @@
 <div class="heading">
+  <div class="hidden-sm mb-1/1">
+    <select onchange="location = this.value" class="form-select">
+      <% user_menu_items.each do |menu_item| %>
+        <option value=<%= menu_item[:url] %> <%= "selected" if current_page?(menu_item[:url]) %>><%= menu_item[:title] %></option>
+      <% end %>
+    </select>
+  </div>
+
   <h1 class="text-md-center text-pure-white"><%= title.html_safe %></h1>
 </div>
 
 <div class="profile">
-  <aside>
-    <%= link_to t("account.navigation.overview"), account_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_path) }", data: { prefetch: false }  %>
-    <%= link_to t("account.navigation.feed"), feed_index_path, class: "profile__action #{ 'profile__action--active' if current_page?(feed_index_path) }", data: { prefetch: false }  %>
-    <%= link_to t("account.navigation.notifications"), notifications_path, class: "profile__action #{ 'profile__action--active' if current_page?(notifications_path) }", data: { prefetch: false }  %>
-    <%= link_to t("account.navigation.favorites"), account_favorites_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_favorites_path) }" %>
-    <%= link_to t("account.navigation.codes"), account_posts_path, class: "profile__action #{ 'profile__action--active' if current_page?(account_posts_path) }" %>
-    <%= link_to t("account.navigation.collections"), collections_path, class: "profile__action #{ 'profile__action--active' if current_page?(collections_path) }" %>
+  <aside class="hidden visible-sm">
+    <% user_menu_items.each do |menu_item| %>
+      <%= link_to menu_item[:title],
+          menu_item[:url],
+          class: "profile__action #{ "profile__action--active" if current_page?(menu_item[:url]) }",
+          data: menu_item[:data] %>
 
-    <hr class="mt-1/2 mb-1/2">
-
-    <%= link_to t("account.navigation.admin"), admin_root_path, class: "profile__action", data: { prefetch: false }  if current_user.level == "admin" %>
-    <%= link_to t("account.navigation.profile"), edit_profile_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_profile_path) }" %>
-    <%= link_to t("account.navigation.account"), edit_user_path, class: "profile__action #{ 'profile__action--active' if current_page?(edit_user_path) }" %>
-    <%= link_to t("account.navigation.linked_users"), linked_users_path, class: "profile__action #{ 'profile__action--active' if current_page?(linked_users_path) }" %>
-    <%= link_to t("account.navigation.accessibility"), accessibility_path, class: "profile__action #{ 'profile__action--active' if current_page?(accessibility_path) }" %>
-    <%= link_to t("account.navigation.logout"), logout_path, class: "profile__action", data: { prefetch: false }  %>
+      <% if menu_item[:url] == collections_path %>
+        <hr class="mt-1/2 mb-1/2">
+      <% end %>
+    <% end %>
   </aside>
 
   <main>
