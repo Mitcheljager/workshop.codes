@@ -54,10 +54,19 @@
     display: block;
   }
 
-  &.lg-down\:dropup {
+  @mixin dropup() {
+    bottom: auto;
+    top: -.5rem;
+    transform: translateY(-100%);
+  }
+
+  .dropup & {
+    @include dropup;
+  }
+
+  .lg-down\:dropup & {
     @media (max-width: 999px) {
-      bottom: auto;
-      top: -.5rem;
+      @include dropup;
       right: 50%;
       transform: translateY(-100%) translateX(50%);
     }

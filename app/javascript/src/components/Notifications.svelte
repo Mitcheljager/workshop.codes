@@ -21,11 +21,11 @@
     active = true
 
     setTimeout(() => { active = false }, 1000)
-    
+
     if (loading == false) return
-    
+
     $notificationsCount = 0
-    
+
     new FetchRails("/unread-notifications").get()
       .then(data => {
         loading = false
@@ -41,7 +41,7 @@
 
 
 
-<div class="notifications dropdown mb-1/8 mbl:mb-0 mbl:mr-1/8" data-dropdown>
+<div class="notifications dropdown lg-down:dropup mb-1/8 mbl:mb-0 mbl:mr-1/8" data-dropdown>
   <div data-action="toggle-dropdown" on:click={ getNotifications }>
     <div class="notifications__label">
       <Bell animating={ active } />
@@ -52,7 +52,7 @@
     { /if }
   </div>
 
-  <div class="dropdown__content dropdown__content--large lg-down:dropup pt-0" data-dropdown-content>
+  <div class="dropdown__content dropdown__content--large pt-0" data-dropdown-content>
     <div class="dropdown__header">
       <h4 class="mt-0 mb-0">Notifications</h4>
 
