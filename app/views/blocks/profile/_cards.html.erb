@@ -3,6 +3,6 @@
 <% end %>
 
 <div class="cards">
-  <% posts = @posts.where(id: block_property(block, "posts")).limit(6) %>
+  <% posts = @posts.except(:limit, :offset).where(id: block_property(block, "posts")).limit(6) %>
   <%= render collection: posts, partial: "posts/card", as: :post %>
 </div>

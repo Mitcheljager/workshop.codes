@@ -119,7 +119,8 @@ class PostsController < ApplicationController
         end
         return
       end
-      @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet).save
+      @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet)
+      @revision.save
 
       create_activity(:create_post, post_activity_params)
       create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled

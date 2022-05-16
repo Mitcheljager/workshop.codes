@@ -30,5 +30,5 @@
     <% end %>
   </main>
 
-  <%= paginate @posts if current_user && current_user.pagination_type == "pagination" %>
+  <%= paginate @posts, params: { tab: "codes" } if current_user && current_user.pagination_type == "pagination" %>
 <% end %>
