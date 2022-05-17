@@ -1,5 +1,14 @@
 (() => {
-  <% if @revisions.any? %>
+  <% if @error.present? %>
+    <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
+      const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
+
+      const button = document.querySelector("[data-role='load-more-posts']")
+      if (!button) {
+        elements[elements.length - 1].insertAdjacentHTML("afterEnd", '<center class="mt-1/2 text-red"><%= @error %></center>')
+      }
+    <% end %>
+  <% elsif @revisions.any? %>
     <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
       const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
 
