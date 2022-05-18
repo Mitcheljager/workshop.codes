@@ -1,0 +1,41 @@
+(() => {
+  <% if @error.present? %>
+    <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
+      const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
+
+      const button = document.querySelector("[data-role='load-more-posts']")
+      if (!button) {
+        elements[elements.length - 1].insertAdjacentHTML("afterEnd", '<center class="mt-1/2 text-red"><%= @error %></center>')
+      }
+    <% end %>
+  <% elsif @revisions.any? %>
+    <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
+      const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
+
+      elements[elements.length - 1].insertAdjacentHTML("afterEnd", `
+        <%= j render "feed_items" %>
+        <% if @revisions.count == 20 %>
+          <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>"></div>
+        <% else %>
+          <h4 class="mt-1/2 mb-0"><center>You've reached the end.</center></h4>
+        <% end %>
+      `)
+    <% end %>
+
+    <% if current_user && current_user.pagination_type == "load_more" %>
+      const button = document.querySelector("[data-role='load-more-posts']")
+      const marker = document.querySelector("[data-role='load-more-posts-marker']")
+
+      marker.insertAdjacentHTML("beforeBegin", `
+        <%= j render "feed_items" %>
+        <% if @revisions.count < 20 %>
+          <h4 class="mt-1/2 mb-0"><center>You've reached the end.</center></h4>
+        <% end %>
+      `)
+
+      <% if @revisions.count < 20 %>
+        button.remove()
+      <% end %>
+    <% end %>
+  <% end %>
+})()

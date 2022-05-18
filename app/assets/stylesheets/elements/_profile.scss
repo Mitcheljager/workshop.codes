@@ -16,8 +16,8 @@
 
 .profile__action {
   display: block;
-  margin: .5rem 0;
-  font-size: 21px;
+  margin: .25rem 0;
+  font-size: 18px;
   color: $text-color;
   text-decoration: none;
   font-family: "Barlow Condensed", "Impact";
@@ -26,6 +26,11 @@
 
   @include hover-stack {
     text-decoration: underline;
+  }
+
+  @include media-min(sm) {
+    margin: .5rem 0;
+    font-size: 21px;
   }
 
   &:first-of-type {

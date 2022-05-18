@@ -1,0 +1,109 @@
+.feed__item {
+  padding: $margin / 2 0;
+  border-top: 1px solid $border-color;
+
+  @include media-min(md) {
+    display: grid;
+    grid-template-columns: $thumbnail-width auto;
+    gap: $margin / 2;
+  }
+
+  .item__thumbnail {
+    display: block;
+  }
+}
+
+.feed__info {
+  display: grid;
+  grid-template: "thumbnail code" "author date";
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0 $margin / 8;
+  margin-bottom: $margin / 2;
+
+  @include media-min(md) {
+    display: block;
+    margin: 0;
+  }
+}
+
+.feed__heading {
+  margin: 0 0 $margin / 2;
+  line-height: 1em;
+
+  .feed__item + & {
+    margin-top: $margin;
+  }
+}
+
+.feed__title {
+  margin: 0.35rem 0;
+
+  a {
+    color: $white;
+    text-decoration: none;
+
+    &:hover {
+      color: $pure-white;
+    }
+  }
+}
+
+.feed__version {
+  margin-top: 0;
+  font-style: italic;
+}
+
+.feed__author {
+  margin: $margin / 4 0 0;
+  font-size: var(--font-size-small);
+
+  a {
+    color: $white;
+    text-decoration: none;
+
+    @include hover-stack {
+      color: $pure-white;
+    }
+  }
+}
+
+.feed__date {
+  margin: $margin / 4 0 0;
+  color: $text-color-dark;
+  font-size: 0.75rem;
+  font-style: italic;
+
+  @include media-min(md) {
+    margin: $margin / 8 0 0;
+  }
+}
+
+.feed__update-notes {
+  margin-bottom: 0.5rem;
+}
+
+.feed__code {
+  width: 100%;
+  padding: $margin / 8 0;
+  border-radius: $border-radius / 2;
+
+  @include media-min(md) {
+    height: auto;
+    margin: $margin / 8 0;
+    font-size: 21px;
+  }
+
+  svg {
+    display: none;
+  }
+
+  .code__flag {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.3rem;
+  }
+}
+
+.feed__message {
+  margin: 0 0 $margin / 2;
+  font-style: italic;
+}

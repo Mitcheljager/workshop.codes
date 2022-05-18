@@ -6,24 +6,25 @@
       <%= link_to current_user.clean_username, account_path, class: "user-block__action mbl:mr-1/16 mb-1/4 mbl:mb-0", data: { action: "toggle-dropdown" } %>
 
       <div class="dropdown__content lg-down:dropup" data-dropdown-content>
-        <%= link_to t("account.navigation.overview"), account_path, class: "dropdown__item text-small", data: { prefetch: false } %>
-        <%= link_to t("account.navigation.notifications"), notifications_path, class: "dropdown__item text-small" %>
-        <%= link_to t("account.navigation.favorites"), account_favorites_path, class: "dropdown__item text-small" %>
-        <%= link_to t("account.navigation.codes"), account_posts_path, class: "dropdown__item text-small" %>
-        <%= link_to t("account.navigation.collections"), collections_path, class: "dropdown__item text-small" %>
+        <% user_menu_items.each do |menu_item| %>
+          <%= link_to menu_item[:title],
+              menu_item[:url],
+              class: "dropdown__item text-small #{ "text-pure-white" if current_page?(menu_item[:url])}",
+              data: menu_item[:data] %>
 
-        <hr>
-
-        <%= link_to t("account.navigation.admin"), admin_root_path, class: "dropdown__item text-small", data: { prefetch: false } if is_admin?(current_user) %>
-        <%= link_to t("account.navigation.profile"), edit_profile_path, class: "dropdown__item text-small" %>
-        <%= link_to t("account.navigation.account"), edit_user_path, class: "dropdown__item text-small" %>
-        <%= link_to t("account.navigation.linked_users"), linked_users_path, class: "dropdown__item text-small" %>
-        <%= link_to t("account.navigation.accessibility"), accessibility_path, class: "dropdown__item text-small" %>
-        <%= link_to t("account.navigation.logout"), logout_path, class: "dropdown__item text-small", data: { prefetch: false } %>
+          <% if menu_item[:url] == collections_path %>
+            <hr>
+          <% end %>
+        <% end %>
 
         <hr>
 
         <%= link_to t("account.navigation.tos"), tos_path, class: "dropdown__item text-small" %>
+
+        <% if is_admin?(current_user) %>
+          <hr>
+          <%= link_to t("account.navigation.admin"), admin_root_path, data: { prefetch: false }, class: "dropdown__item text-small" %>
+        <% end %>
       </div>
     </div>
   <% else %>

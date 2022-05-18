@@ -345,6 +345,7 @@ en:
       accessibility: Accessibility
       logout: Logout
       linked_users: Linked Accounts
+      feed: Update Feed
     listings:
       title: Listings in the last 60 minutes
       path: Path
