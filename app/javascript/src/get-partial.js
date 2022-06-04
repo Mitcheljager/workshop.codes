@@ -34,7 +34,26 @@ function getPartial(event, element) {
 
   new FetchRails(url).get()
     .then(data => {
-      targetElement.dataset.loaded = "true"
       targetElement.innerHTML = data
+    })
+    .then(() => {
+      if (_this.dataset.scrollOnLoad != "true") return
+
+      const hash = window.location.hash?.substring(1)
+      if (!hash) return
+
+      const scrollElement = document.getElementById(hash)
+      if (!scrollElement) return
+
+      const scrollOffset = scrollElement.getBoundingClientRect().top + document.documentElement.scrollTop
+
+      window.scrollTo({ top: scrollOffset - 70, behavior: "smooth" })
+    })
+    .catch(error => {
+      console.error(error)
+      targetElement.innerHTML = `<em>Something went wrong when loading, please try again. (${ error })</em>`
+    })
+    .finally(() => {
+      targetElement.dataset.loaded = "true"
     })
 }
