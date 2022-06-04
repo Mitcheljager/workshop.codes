@@ -1,18 +1,51 @@
-<div class="favorite favorite--is-active ml-0 mt-1/2">
-  <%= image_tag "icons/icon-heart.svg", style: "height: 16px" %>
-  <span class="favorite__label"><%= post.favorites_count %></span>
-</div>
+<div class="cards cards--fit mt-1/4">
+  <div class="card">
+    <span class="card__title">
+      <%= image_tag "icons/icon-heart.svg", height: 16 %>
+      Total favorites
+    </span>
 
-<% if post.hotness %>
-  <div class="tooltip align-center ml-0">
-    <%= inline_svg_tag "icons/icon-onfire.svg", height: 16, width: 16 %>
-    <span class="favorite__label"><%= post.hotness %></span>
-
-    <div class="tooltip__content">
-      <strong>On Fire score</strong> This value is an indicator of how popular a code is at the moment. Higher = better.
-    </div>
+    <big><%= post.favorites_count %></big>
   </div>
-<% end %>
+
+  <div class="card overflow-visible">
+    <span class="card__title">
+      <%= inline_svg_tag "icons/icon-views.svg", height: 16, width: 16, class: "fill-current-color" %>
+
+      <div class="flex">
+        Total views
+
+        <em class="tooltip align-center ml-1/8 text-base text-small">
+          (?)
+          <div class="tooltip__content">
+            Updates daily
+          </div>
+        </em>
+      </div>
+    </span>
+
+    <big><%= post.impressions_count %></big>
+  </div>
+
+  <div class="card overflow-visible">
+    <span class="card__title">
+      <%= inline_svg_tag "icons/icon-onfire.svg", height: 16, width: 16 %>
+
+      <div class="flex">
+        On Fire
+
+        <em class="tooltip align-center ml-1/8 text-base text-small">
+          (?)
+          <div class="tooltip__content">
+            This value is an indicator of how popular a code is at the moment. Higher = better.
+          </div>
+        </em>
+      </div>
+    </span>
+
+    <big><%= post.hotness %></big>
+  </div>
+</div>
 
 <div data-post-analytics data-reveal-by-select-parent class="mt-1/2">
   <label class="form-label">Analytics type</label>
