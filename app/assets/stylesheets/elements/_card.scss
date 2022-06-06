@@ -15,6 +15,10 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 
+  &--fit {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
   &--on-fire {
     display: grid;
     grid-template-columns: repeat(30, 100%);
@@ -138,7 +142,9 @@
 }
 
 .card__title {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
   padding-bottom: .5rem;
   margin-bottom: auto;
   font-family: $font-stack;
