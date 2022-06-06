@@ -46,8 +46,10 @@ function getPartial(event, element) {
       if (!scrollElement) return
 
       const scrollOffset = scrollElement.getBoundingClientRect().top + document.documentElement.scrollTop
+      const stickyElement = document.querySelector("[data-role~='sticky']")
+      const scrollExtra = stickyElement ? stickyElement.offsetHeight * 1.25 : 0
 
-      window.scrollTo({ top: scrollOffset - 70, behavior: "smooth" })
+      window.scrollTo({ top: scrollOffset - scrollExtra, behavior: "smooth" })
     })
     .catch(error => {
       console.error(error)
