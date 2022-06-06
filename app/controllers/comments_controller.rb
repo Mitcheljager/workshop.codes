@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
         if @comment.user != parent_comment_user
           create_notification(
             "Someone **has replied** to your comment on **\"==#{ @comment.post.title }==\"**",
-            post_tab_path(@comment.post.code, "comments"),
+            post_tab_path(@comment.post.code, "comments", anchor: @comment.id),
             parent_comment_user.id,
             :comment_reply,
             "comment",
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
         if @comment.user != @comment.post.user
           create_notification(
             "Someone **has left a comment** on **\"==#{ @comment.post.title }==\"**",
-            post_tab_path(@comment.post.code, "comments"),
+            post_tab_path(@comment.post.code, "comments", anchor: @comment.id),
             @comment.post.user.id,
             :comment,
             "comment",
