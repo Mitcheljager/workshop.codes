@@ -15,9 +15,15 @@
   cursor: grab;
   color: $body-bg;
 
+  @include hover-stack {
+    filter: brightness(1.1);
+    box-shadow: 0 0 0 2px $white;
+  }
+
   &:active {
     cursor: grabbing;
   }
+
 
   img,
   svg {
