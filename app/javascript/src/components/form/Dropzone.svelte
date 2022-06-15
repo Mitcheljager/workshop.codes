@@ -80,7 +80,7 @@
       const randomId = Math.random().toString(36).substr(2, 9)
       images = [...images, { id: randomId, type: "preview" }]
 
-      const interval = setInterval(async () => {
+      const interval = setInterval(async() => {
         setProgress(randomId, uploader.progress)
 
         if (!uploader.blob) return
