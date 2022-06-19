@@ -144,10 +144,21 @@ class Post < ApplicationRecord
         from: 0,
         size: size,
         query: {
-          multi_match: {
-            query: query,
-            fields: ["code^4", "title^3", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
-            fuzziness: "AUTO"
+          function_score: {
+            query: {
+              multi_match: {
+                query: query,
+                fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
+                fuzziness: "AUTO"
+              }
+            },
+            field_value_factor: {
+              field: "hotness",
+              modifier: "log1p",
+              factor: 0.1
+            },
+            boost_mode: "sum",
+            max_boost: 2
           }
         }
       }).records.ids
