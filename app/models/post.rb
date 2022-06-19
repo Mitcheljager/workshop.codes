@@ -153,6 +153,7 @@ class Post < ApplicationRecord
                   type: "cross_fields",
                   operator: "and",
                   tie_breaker: 0.1,
+                  boost: 100,
                 }
               },
               {
@@ -160,6 +161,7 @@ class Post < ApplicationRecord
                   query: query,
                   fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
                   fuzziness: "AUTO"
+                  boost: 1,
                 }
               }
             ]
