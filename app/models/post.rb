@@ -152,7 +152,8 @@ class Post < ApplicationRecord
                 type: "cross_fields",
                 operator: "and",
                 tie_breaker: 0.1,
-                boost: 100
+                boost: 100,
+                minimum_should_match: "50%"
               }
             },
             should: {
