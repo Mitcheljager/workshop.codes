@@ -138,7 +138,7 @@ class Post < ApplicationRecord
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 
-  def self.search(query, size: 100, bypass_cache: false)
+  def self.search(query, size: 100, bypass_cache: true)
     Rails.cache.fetch("posts/search/#{Digest::SHA1.hexdigest(query)}/#{size}", expires_in: (ENV["POST_SEARCH_CACHE_SECONDS"] || 30).to_i.seconds, force: bypass_cache) do
       __elasticsearch__.search({
         from: 0,
@@ -148,8 +148,7 @@ class Post < ApplicationRecord
             query: query,
             fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
             fuzziness: "AUTO",
-            type: "cross_fields",
-            operator: "AND"
+            tie_breaker: 0.0,
           }
         }
       }).records.ids
