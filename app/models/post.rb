@@ -144,12 +144,25 @@ class Post < ApplicationRecord
         from: 0,
         size: size,
         query: {
-          multi_match: {
-            query: query,
-            fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
-            type: "cross_fields",
-            operator: "and",
-            tie_breaker: 0.1,
+          dis_max: {
+            queries: [
+              {
+                multi_match: {
+                  query: query,
+                  fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
+                  type: "cross_fields",
+                  operator: "and",
+                  tie_breaker: 0.1,
+                }
+              },
+              {
+                multi_match: {
+                  query: query,
+                  fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
+                  fuzziness: "AUTO"
+                }
+              }
+            ]
           }
         }
       }).records.ids
