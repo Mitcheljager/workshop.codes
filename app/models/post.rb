@@ -147,7 +147,9 @@ class Post < ApplicationRecord
           multi_match: {
             query: query,
             fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
-            fuzziness: "AUTO"
+            fuzziness: "AUTO",
+            type: "cross_fields",
+            operator: "AND"
           }
         }
       }).records.ids
