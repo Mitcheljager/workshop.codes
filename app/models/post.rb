@@ -150,6 +150,8 @@ class Post < ApplicationRecord
                 query: query,
                 fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
                 type: "cross_fields",
+                operator: "and",
+                tie_breaker: 0.1,
                 boost: 100
               }
             },
