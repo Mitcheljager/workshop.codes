@@ -199,6 +199,15 @@ class Post < ApplicationRecord
     self.where(private: false, unlisted: false, draft: false)
   end
 
+  def self.order_by_ids(ids)
+    t = Post.arel_table
+    condition = Arel::Nodes::Case.new(t[:id])
+    ids.each_with_index do |id, index|
+      condition.when(id).then(index)
+    end
+    order(condition)
+  end
+
   def public?
     !private? && !unlisted? && !draft?
   end
