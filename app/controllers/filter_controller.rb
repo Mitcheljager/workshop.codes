@@ -6,7 +6,6 @@ class FilterController < ApplicationController
         @posts = Post.includes(:user)
                      .where(id: ids)
                      .order_by_ids(ids)
-                     .map(&:id)
                      .select_overview_columns.public?
       else
         @posts = Post.select_overview_columns.public?
