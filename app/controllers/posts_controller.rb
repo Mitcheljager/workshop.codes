@@ -217,7 +217,7 @@ class PostsController < ApplicationController
   def similar_to
     @post = Post.find(params[:id])
     @posts = ENV["BONSAI_URL"] ?
-      Post.includes(:user).search(@post.tags.presence || @post.title, size: 4, bypass_cache: false).where.not(id: @post.id).select_overview_columns.public?.limit(3) :
+      Post.includes(:user).where(id: Post.search(@post.tags.presence || @post.title, size: 4, bypass_cache: false)).records.where.not(id: @post.id).select_overview_columns.public?.limit(3) :
       Post.where.not(id: @post.id).last(3)
 
     if @posts.any?

@@ -2,7 +2,7 @@ class FilterController < ApplicationController
   def index
     begin
       if params[:search]
-        @posts = Post.includes(:user).search(params[:search]).select_overview_columns.public?
+        @posts = Post.includes(:user).search(params[:search]).records.select_overview_columns.public?
       else
         @posts = Post.select_overview_columns.public?
       end
