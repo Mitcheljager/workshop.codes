@@ -1,9 +1,15 @@
 class FilterController < ApplicationController
   def index
     begin
-      @posts = params[:search] ?
-        Post.includes(:user).where(id: Post.search(params[:search])).select_overview_columns.public? :
-        Post.select_overview_columns.public?
+      if params[:search]
+        ids = Post.search(params[:search])
+        @posts = Post.includes(:user)
+                     .where(id: ids)
+                     .order("position(id::text in '#{ids.join(',')}')")
+                     .select_overview_columns.public?
+      else
+        @posts = Post.select_overview_columns.public?
+      end
 
       @user = User.find_by_username(params[:author]) if params[:author]
       @posts = @posts.where(user_id: @user.present? ? @user.id : -1) if params[:author]

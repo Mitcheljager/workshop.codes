@@ -144,26 +144,21 @@ class Post < ApplicationRecord
         from: 0,
         size: size,
         query: {
-          bool: {
-            must: {
-              multi_match: {
-                query: query,
-                fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
-                type: "cross_fields",
-                operator: "and",
-                tie_breaker: 0.1,
-                boost: 100,
-                minimum_should_match: "50%"
-              }
-            },
-            should: {
+          function_score: {
+            query: {
               multi_match: {
                 query: query,
                 fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
-                fuzziness: "AUTO",
-                boost: 1
+                fuzziness: "AUTO"
               }
-            }
+            },
+            field_value_factor: {
+              field: "hotness",
+              modifier: "log1p",
+              factor: 0.1
+            },
+            boost_mode: "sum",
+            max_boost: 2
           }
         }
       }).records.ids
