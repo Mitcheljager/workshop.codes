@@ -2,11 +2,7 @@ class FilterController < ApplicationController
   def index
     begin
       if params[:search]
-        ids = Post.search(params[:search])
-        @posts = Post.includes(:user)
-                     .where(id: ids)
-                     .order("position(id::text in '#{ids.join(',')}')")
-                     .select_overview_columns.public?
+        @posts = Post.includes(:user).search(params[:search]).select_overview_columns.public?
       else
         @posts = Post.select_overview_columns.public?
       end
