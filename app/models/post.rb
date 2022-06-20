@@ -175,7 +175,7 @@ class Post < ApplicationRecord
             }]
           }
         }
-      })
+      }).records.ids
     end
   end
 
