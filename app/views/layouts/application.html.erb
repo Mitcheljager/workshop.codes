@@ -36,8 +36,6 @@
       <%= stylesheet_link_tag "logged_in_user.css" %>
       <%= javascript_pack_tag "logged-in-user.js", "data-turbolinks-track": "reload", defer: true %>
     <% end %>
-
-    <%= render "analytics_code" %>
   </head>
 
   <body class="<%= accessibility_settings if current_user.present? %> <%= "wiki" if is_wiki? %>">

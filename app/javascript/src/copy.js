@@ -34,9 +34,9 @@ export default function copyToClipboard(event, optionalContent = undefined) {
 
   setTimeout(() => { copyParent.querySelector(".copy__notification").remove() }, 1000)
 
-  if (targetElement.dataset.trackCopy != undefined) trackCopyGA(targetElement.textContent)
+  if (targetElement.dataset.trackCopy != undefined) trackCopy(targetElement.textContent)
 }
 
-function trackCopyGA(label) {
+function trackCopy(label) {
   new FetchRails("/copy-code", { code: label }).post()
 }
