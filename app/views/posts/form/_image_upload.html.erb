@@ -3,7 +3,11 @@
   <%= form.hidden_field :image_order %>
 
   <%= svelte_component("Dropzone", {
-        images: (@ordered_images || {}).map { |i| { id: i.blob_id, url: rails_public_blob_url(i.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5]).processed) } },
+        images: (@ordered_images || {}).map { |i| {
+          id: i.blob_id,
+          url: rails_public_blob_url(i.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5]).processed),
+          preview_url: rails_public_blob_url(i.variant(quality: 95).processed)
+        } },
         label: t("posts.form.images.dropzone.label"),
         help: t("posts.form.images.dropzone.help"),
         button: "Browse files on device",

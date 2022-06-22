@@ -19,7 +19,8 @@
   let sortable
   let active = false
   let alert = ""
-  
+  let previewImageUrl = ""
+
   const imagePreviewWidth = 200
 
   $: if (alert) setTimeout(() => { alert = "" }, 3000)
@@ -65,7 +66,6 @@
       if (file.kind == "file") file = file.getAsFile()
 
       if (file.type == "image/png" || file.type == "image/jpg" || file.type == "image/jpeg") {
-        console.log(file)
         uploadImage(file)
       } else {
         alert = "Wrong file type. Only png and jpeg are accepted."
@@ -75,12 +75,12 @@
 
   function uploadImage(image) {
     const uploader = new Uploader(image, input)
-    
+
     uploader.upload().then(() => {
       const randomId = Math.random().toString(36).substr(2, 9)
       images = [...images, { id: randomId, type: "preview" }]
 
-      const interval = setInterval(() => {
+      const interval = setInterval(async() => {
         setProgress(randomId, uploader.progress)
 
         if (!uploader.blob) return
@@ -88,13 +88,18 @@
 
         clearInterval(interval)
 
-        new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=thumbnail`)
-          .get()
-          .then(data => setImage(randomId, uploader.blob.id, data))
-          .catch(() => alert = "Something went wrong when retrieving your image")
+        try {
+          const [thumbnail, preview] = await Promise.all([
+            new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=thumbnail`).get(),
+            new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=full`).get()
+          ])
+
+          setImage(randomId, uploader.blob.id, thumbnail, preview)
+        } catch (error) {
+          alert = "Something went wrong when retrieving your image"
+        }
       }, 100)
-    })
-      .catch(error => alert = error)
+    }).catch(error => alert = error)
   }
 
   function setProgress(id, progress) {
@@ -105,11 +110,11 @@
     })
   }
 
-  function setImage(id, blobId, url) {
+  function setImage(id, blobId, thumbnail, preview) {
     images = images.map(i => {
       if (i.id != id) return i
 
-      return { id: blobId, url }
+      return { id: blobId, url: thumbnail, preview_url: preview }
     })
   }
 
@@ -119,6 +124,8 @@
 </script>
 
 
+
+<svelte:window on:keydown={event => { if (event.key === "Escape") previewImageUrl = "" }} />
 
 <div
   class="dropzone"
@@ -149,22 +156,40 @@
       data-id={ image.id }
       transition:fade={{ duration: 200 }}
       animate:flip={{ duration: 200 }}>
-      
+
       { #if image.type == "preview" }
         <div class="images-preview__progress">
           <div class="images-preview__progress-bar" style="width: { image.progress }%" />
         </div>
       { :else }
-        <img src={ image.url } height={ imagePreviewWidth / 9 * 5 } width={ imagePreviewWidth } alt="Dropzone preview" />
+        <img
+          on:click={ () => previewImageUrl = image.preview_url }
+          src={ image.url }
+          height={ imagePreviewWidth / 9 * 5 }
+          width={ imagePreviewWidth }
+          alt="" />
       { /if }
 
-      <div class="images-preview__action" on:click={ () => removeImage(image.id) }>X</div>
+      <div class="images-preview__action" on:click|stopPropagation={ () => removeImage(image.id) }>X</div>
     </div>
   { /each }
 </div>
 
 { #if alert }
-  <div class="alert alert--error">
-    { alert }
+  <div class="alerts">
+    <div class="alerts__alert alerts__alert--error">
+      { alert }
+    </div>
+  </div>
+{ /if }
+
+{ #if previewImageUrl }
+  <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close>
+
+    <div class="modal__content p-0">
+      <img class="img-fluid" src={previewImageUrl} alt="" />
+    </div>
+
+    <div class="modal__backdrop" />
   </div>
 { /if }
