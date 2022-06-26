@@ -10,6 +10,8 @@ class ReportsController < ApplicationController
       @post = Post.find(params[:id])
     elsif params[:concerns_model] == "comment"
       @comment = Comment.find(params[:id])
+    else
+      raise ActionController::RoutingError.new("Not Found")
     end
 
     render partial: "modal"
