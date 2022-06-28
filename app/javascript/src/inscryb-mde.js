@@ -141,6 +141,10 @@ class InitialiseInscrybeMDE {
     this.parseBlocks()
 
     editors.push(this.mde)
+
+    document.removeAndAddEventListener("click", event => {
+      if (event.target?.href?.includes("#")) event.preventDefault()
+    })
   }
 
   bindPaste() {
@@ -247,7 +251,11 @@ class InitialiseInscrybeMDE {
 
     if (sortableElement) buildInputSortable(sortableElement)
     if (insertBlockTemplateElement) insertBlockTemplateElement.addEventListener("click", insertBlockTemplate)
-    removeBlockTemplateElements.forEach(element => { element.addEventListener("click", removeBlockTemplate) })
+
+    document.removeAndAddEventListener("click", event => {
+      if (event.target?.dataset.action != "remove-block-template") return
+      removeBlockTemplate(event)
+    })
   }
 
   toggleImageUploader() {

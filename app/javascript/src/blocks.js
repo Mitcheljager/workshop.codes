@@ -60,7 +60,7 @@ export function insertBlockTemplate(event) {
 export function removeBlockTemplate(event) {
   event.preventDefault()
 
-  const target = this.closest("[data-remove-target]")
+  const target = event.target.closest("[data-remove-target]")
   target.remove()
 }
 
