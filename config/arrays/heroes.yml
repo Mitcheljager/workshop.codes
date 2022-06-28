@@ -5,6 +5,13 @@
     en: Tank
     ko: 탱커
 -
+  en: Junker Queen
+  ko: 정커퀸
+  overwatch_2: true
+  category:
+    en: Tank
+    ko: 탱커
+-
   en: Orisa
   ko: 오리사
   category:

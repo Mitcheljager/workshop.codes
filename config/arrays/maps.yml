@@ -127,6 +127,14 @@
     ko: 혼합
   slug: midtown
 -
+  en: Paraíso
+  ko: 파레이소
+  overwatch_2: true
+  type:
+    en: Hybrid
+    ko: 혼합
+  slug: paraiso
+-
   en: Busan
   ko: 부산
   type:
