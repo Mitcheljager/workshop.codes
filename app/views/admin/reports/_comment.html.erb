@@ -1,13 +1,15 @@
 <div class="mt-1/2 mb-1/2">
   <strong>Comment Info:</strong> <br>
-  Title of post: <%= @comment.post.title %><br>
+  <% if @comment&.post.present? %>
+    Title of post: <%= @comment.post.title %><br>
+  <% end %>
   Content at time of report:
   <div class="well block mt-1/8 mb-1/1">
     <%= markdown(report_model_property(@report, "comment", "content")) %>
   </div>
 
   <% if @comment.present? %>
-    Number of received reports for post: <%= Report.where(concerns_id: @report.concerns_id, concerns_model: "comment").count %> <br>
-    <%= link_to "view post", post_path(@comment.post.code), class: "button pt-0 button--link" %>
+    Number of received reports for comment: <%= Report.where(concerns_id: @report.concerns_id, concerns_model: "comment").count %> <br>
+    <%= @comment&.post.present? ? link_to "view post", post_path(@comment&.post.code), class: "button pt-0 button--link" : "Original post deleted" %>
   <% end %>
 </div>
