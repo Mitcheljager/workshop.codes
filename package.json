@@ -25,7 +25,7 @@
     "sass-loader": "^11.0.1",
     "siema": "^1.5.1",
     "sortablejs": "^1.10.2",
-    "svelte": "^3.35.0",
+    "svelte": "^3.49.0",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.7.0",
     "svelte-preprocess-sass": "^1.0.0",
