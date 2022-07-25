@@ -30,7 +30,7 @@ module OverwatchWorkshop
 
     # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
     # https://github.com/EloHellEsports/workshop.codes/issues/169
-    config.active_record.yaml_column_permitted_classes = [ActionController::Parameters, ActiveSupport::HashWithIndifferentAccess]
+    config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, ActionController::Parameters, ActiveSupport::HashWithIndifferentAccess]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
