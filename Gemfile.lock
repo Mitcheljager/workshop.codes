@@ -303,6 +303,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.8-x64-mingw32)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
     oauth2 (2.0.6)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
@@ -486,6 +488,7 @@ GEM
 PLATFORMS
   ruby
   x64-mingw32
+  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers
@@ -528,7 +531,7 @@ DEPENDENCIES
   pg
   pry-byebug (~> 3.9.0)
   puma (~> 4.3)
-  rails (~> 6.1.6.1)
+  rails (~> 6.1.0)
   rails-i18n
   rails_same_site_cookie
   redcarpet
