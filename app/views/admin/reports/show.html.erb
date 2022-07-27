@@ -22,7 +22,14 @@
     </div>
   <% end %>
 
-  <%= render @report.concerns_model %>
+  <%# https://stackoverflow.com/a/8180410 %>
+  <% if lookup_context.exists?(@report.concerns_model, lookup_context.prefixes, true) %>
+    <%= render @report.concerns_model %>
+  <% else %>
+    <div class="mb-1/2">
+      <p>Invalid concerns_model <strong><%= @report.concerns_model %></strong></p>
+    </div>
+  <% end %>
 
   <div class="mt-1/2 mb-1/2">
     <strong>Submitted by:</strong> <br>
