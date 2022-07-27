@@ -1,6 +1,5 @@
 require 'rails_helper'
 require './spec/support/user_helpers'
-require 'capybara/rails'
 
 RSpec.configure do |c|
   c.include Helpers::Users
