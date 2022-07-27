@@ -84,5 +84,18 @@ RSpec.describe "AdminReports", type: :feature do
         expect(page).to have_content(comment.content)
       end
     end
+
+    context "with an invalid concerned object" do
+      it "still shows the report page" do
+        concerns_model = "comment; --"
+        report = create(:report,
+          concerns_model: concerns_model
+        )
+
+        visit admin_report_path(id: report.id)
+        expect(page).to have_content("Invalid concerns_model #{concerns_model}")
+        expect(page).to have_content(report.content)
+      end
+    end
   end
 end
