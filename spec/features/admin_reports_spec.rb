@@ -15,8 +15,6 @@ RSpec.describe "AdminReports", type: :feature do
   let!(:comment) { create(:comment, user_id: comment_author.id, post: post) }
 
   before(:each) do
-    # admin.level = :admin
-    # admin.save!
     sign_in_as(admin, "password")
   end
 
