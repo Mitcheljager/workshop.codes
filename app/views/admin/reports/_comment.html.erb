@@ -10,6 +10,10 @@
 
   <% if @comment.present? %>
     Number of received reports for comment: <%= Report.where(concerns_id: @report.concerns_id, concerns_model: "comment").count %> <br>
-    <%= @comment&.post.present? ? (link_to "view comment", post_tab_path(@comment&.post.code, "comments", anchor: @comment.id), class: "button pt-0 button--link") : "Original post deleted" %>
+    <% if @comment&.post.present? %>
+      <%= link_to "view comment", post_tab_path(@comment&.post.code, "comments", anchor: @comment.id), class: "button pt-0 button--link" %>
+    <% else %>
+      "Original post deleted"
+    <% end %>
   <% end %>
 </div>
