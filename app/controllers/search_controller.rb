@@ -3,8 +3,6 @@ class SearchController < ApplicationController
 
   def index
     unless params[:query].empty?
-      track_action
-
       respond_to do |format|
         format.js { redirect_to build_filter_path(:search, params[:query].gsub(".", "")) }
         format.html { redirect_to build_filter_path(:search, params[:query].gsub(".", "")) }
@@ -19,6 +17,7 @@ class SearchController < ApplicationController
       redirect_to root_path
       return
     end
+    track_action
     begin
       @posts = get_filtered_posts(params)
     rescue Elasticsearch::Transport::Transport::ServerError => e
