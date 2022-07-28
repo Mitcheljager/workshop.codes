@@ -39,21 +39,23 @@ function getInfiniteScrollContent(element) {
 
   element.innerHTML = "<div class='spinner'></div>"
 
-  const currentUrl = element.dataset.url.replace(".js", "")
-  const splitUrl = currentUrl.split("page/")
-  let nextUrl = ""
+  // Get last requested post set URL
+  const requestUrl = new URL(element.dataset.url)
 
-  if (splitUrl.length > 1) {
-    const prefix = splitUrl[0]
-    const pageNumber = splitUrl[1]
-    nextUrl = prefix + "page/" + (parseInt(pageNumber) + 1)
+  // Increment page parameter
+  if (requestUrl.searchParams.get("page") != null) {
+    requestUrl.searchParams.set("page", Number(requestUrl.searchParams.get("page")) + 1)
   } else {
-    nextUrl = currentUrl + "/page/2"
+    requestUrl.searchParams.set("page", 2)
   }
+
+  // Ensure request is interpreted as requesting JavaScript response
+  if (!requestUrl.pathname.endsWith(".js")) requestUrl.pathname += ".js"
+  const requestUrlString = requestUrl.toString()
 
   Rails.ajax({
     type: "get",
-    url: nextUrl + ".js",
+    url: requestUrlString,
     success: (response) => {
       progressBar.setValue(1)
       progressBar.hide()
@@ -62,7 +64,7 @@ function getInfiniteScrollContent(element) {
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
         element.innerHTML = "Load more"
-        element.setAttribute("data-url", nextUrl)
+        element.setAttribute("data-url", requestUrlString)
       }
     },
     error: (error) => {
