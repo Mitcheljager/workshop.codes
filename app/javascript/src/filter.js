@@ -34,16 +34,16 @@ function buildFilterPath(event) {
     "overwatch-2": document.querySelector("[data-filter-type='overwatch-2']").checked ? "true" : "",
     "author": filterValue("author"),
     "players": filterValue("players"),
-    "search": document.querySelector("input[name='query']").value.replace(".", " "),
+    "search": document.querySelector("input[name='query']").value,
     "sort": filterValue("sort"),
     "language": filterValue("language")
   }
 
   buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
-  buildPath = Object.entries(buildPath).map(([k, v]) => `${ k }/${ v }`).join("/")
+  buildPath = Object.entries(buildPath).map(([k, v]) => `${ k }=${ v }`).join("&")
   const currentLocale = document.querySelector("[data-filter-locale]").dataset.filterLocale
 
-  window.location = "/" + (currentLocale == "en" ? "" : currentLocale + "/") + buildPath
+  window.location = `/${ currentLocale == "en" ? "" : currentLocale + "/" }search?${ buildPath }`
 }
 
 function filterValue(type) {
