@@ -4,11 +4,22 @@ class SearchController < ApplicationController
   def index
     unless params[:query].empty?
       respond_to do |format|
-        format.js { redirect_to build_filter_path(:search, params[:query].gsub(".", "")) }
-        format.html { redirect_to build_filter_path(:search, params[:query].gsub(".", "")) }
+        format.js { redirect_to build_filter_path(:search, params[:query]) }
+        format.html { redirect_to build_filter_path(:search, params[:query]) }
       end
     else
       redirect_back fallback_location: root_path
+    end
+  end
+
+  def old_index
+    if params[:query].empty?
+      redirect_back fallback_location: root_path
+      return
+    end
+    respond_to do |format|
+      format.js { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
+      format.html { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
     end
   end
 
