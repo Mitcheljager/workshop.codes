@@ -12,7 +12,7 @@ class SearchController < ApplicationController
     end
   end
 
-  def old_index
+  def redirect_to_query_params
     if params[:query].empty?
       redirect_back fallback_location: root_path
       return
