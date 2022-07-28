@@ -28,7 +28,9 @@ class SearchController < ApplicationController
       redirect_to root_path
       return
     end
+
     track_action
+
     begin
       @posts = get_filtered_posts(params)
     rescue Elasticsearch::Transport::Transport::ServerError => e
