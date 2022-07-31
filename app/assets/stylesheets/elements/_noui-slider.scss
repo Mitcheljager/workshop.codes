@@ -152,11 +152,11 @@
   background: $white;
   cursor: pointer;
 
+  @include focus-visible-outline;
+
   @include hover-stack {
     background: $pure-white;
-    outline: none;
   }
-
 }
 
 /* Handle stripes;

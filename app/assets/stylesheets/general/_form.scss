@@ -9,8 +9,11 @@
   font-size: $font-size-base;
   color: $white;
 
-  &:focus {
+  &:focus,
+  &:focus-within {
     outline: none;
+    background: lighten($bg-dark, 5%);
+    box-shadow: 0 0 0 2px rgba($pure-white, 0.25);
   }
 
   &::placeholder {
@@ -34,10 +37,6 @@
       line-height: 1.5em;
     }
 
-    &:focus {
-      background: lighten($bg-dark, 2.55%);
-    }
-
     .simple-view & {
       box-shadow: 0 0 0 5px $body-bg;
     }
@@ -53,6 +52,10 @@
 
   .standout & {
     background: darken($bg-dark, 5%);
+
+    &:focus {
+      background: darken($bg-dark, 2.5%);
+    }
   }
 }
 
@@ -136,6 +139,8 @@
 
   &:focus {
     outline: none;
+    background-color: lighten($bg-dark, 5%);
+    box-shadow: 0 0 0 2px rgba($pure-white, 0.25);
   }
 
   &:not(multiple) {
@@ -174,6 +179,8 @@
     border: 2px solid $text-color;
     cursor: pointer;
 
+    @include focus-visible-outline;
+
     &[type="radio"] {
       border-radius: 50%;
     }
@@ -188,7 +195,6 @@
     }
 
     &:focus {
-      outline: none;
       border-color: lighten($gray, 20%);
     }
   }

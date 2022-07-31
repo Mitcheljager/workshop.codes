@@ -63,3 +63,23 @@
     outline: none;
   }
 }
+
+@mixin focus-visible-outline($prepend: '') {
+  outline-offset: 0;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: outline-offset 150ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $pure-white;
+
+    &:not(:active) {
+      @if $prepend == inset {
+        outline-offset: -2px;
+      } @else {
+        outline-offset: 3px;
+      }
+    }
+  }
+}
