@@ -78,8 +78,10 @@ class SearchController < ApplicationController
       posts = Post.select_overview_columns.public?
     end
 
-    user = User.find_by_username(params[:author]) if params[:author]
-    posts = posts.where(user_id: @user.present? ? @user.id : -1) if params[:author]
+    if params[:author]
+      user = User.find_by_username(params[:author])
+      posts = posts.where(user_id: user.present? ? user.id : -1)
+    end
 
     posts = posts.where(locale: params[:language]) if params[:language]
     posts = posts.where("created_at >= ?", params[:from]) if params[:from]
