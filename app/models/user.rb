@@ -48,7 +48,7 @@ class User < ApplicationRecord
   enum level: { regular: 0, admin: 1, banned: 2, arbiter: 3 }
   enum pagination_type: { infinite_scroll: 0, load_more: 1, pagination: 2 }
 
-  encrypts :email
+  has_encrypted :email
   blind_index :email
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }, uniqueness_against_nice_url: true, format: { with: /\A[\d\p{L}_-]*[#\d]*\z/i }, length: { maximum: 32 }
