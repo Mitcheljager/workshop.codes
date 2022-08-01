@@ -19,6 +19,7 @@
 .navigation__item {
   display: block;
   margin-bottom: $margin / 4;
+  border-radius: $border-radius / 2;
   color: $pure-white;
   text-decoration: none;
   font-family: "Barlow Condensed", "Impact";
