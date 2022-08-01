@@ -95,7 +95,7 @@
       border-color: $text-color;
     }
   }
-  
+
   &::before {
     @extend .switch, ::before;
     height: calc(1rem - 8px);
@@ -115,7 +115,8 @@
     width: 2rem;
     pointer-events: all;
 
-    .switch-checkbox__input:checked + & {
+    .switch-checkbox__input:checked + &,
+    .switch-checkbox:focus-within & {
       border-color: $white;
     }
   }

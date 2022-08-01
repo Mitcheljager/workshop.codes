@@ -138,10 +138,10 @@
 
   <small>{ help }</small>
 
-  <label class="dropzone__button button button--secondary mt-1/4">
+  <label class="dropzone__button button button--secondary mt-1/4" tabindex="0">
     { button }
 
-    <input type="file" multiple="true" on:change={ changeInput } />
+    <input type="file" multiple="true" on:change={ changeInput } tabindex="-1" />
   </label>
 </div>
 

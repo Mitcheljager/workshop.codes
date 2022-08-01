@@ -23,6 +23,9 @@
 }
 
 .logo-link {
+  border-radius: $border-radius / 2;
+  @include focus-visible-outline;
+
   @include hover-stack {
     filter: brightness(1.05);
   }
