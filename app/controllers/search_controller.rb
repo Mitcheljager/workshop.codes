@@ -2,7 +2,11 @@ class SearchController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    unless params[:query].empty?
+    # Handle old uses of search instead of query as the name
+    if params[:search].present?
+       params[:query] = params.delete(:search) unless params[:query].present?
+    end
+    unless params[:query].blank?
       respond_to do |format|
         format.js { redirect_to build_filter_path(:search, params[:query]) }
         format.html { redirect_to build_filter_path(:search, params[:query]) }
@@ -13,7 +17,7 @@ class SearchController < ApplicationController
   end
 
   def redirect_to_query_params
-    if params[:query].empty?
+    if params[:query].blank?
       redirect_back fallback_location: root_path
       return
     end
