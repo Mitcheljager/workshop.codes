@@ -34,7 +34,7 @@ function buildFilterPath(event) {
     "overwatch_2": document.querySelector("[data-filter-type='overwatch-2']").checked ? "true" : "",
     "author": filterValue("author"),
     "players": filterValue("players"),
-    "search": document.querySelector("input[name='query']").value,
+    "query": document.querySelector("input[name='query']").value,
     "sort": filterValue("sort"),
     "language": filterValue("language")
   }

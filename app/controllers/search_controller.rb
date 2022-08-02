@@ -8,8 +8,8 @@ class SearchController < ApplicationController
     end
     unless params[:query].blank?
       respond_to do |format|
-        format.js { redirect_to build_filter_path(:search, params[:query]) }
-        format.html { redirect_to build_filter_path(:search, params[:query]) }
+        format.js { redirect_to build_filter_path(:query, params[:query]) }
+        format.html { redirect_to build_filter_path(:query, params[:query]) }
       end
     else
       redirect_back fallback_location: root_path
@@ -22,8 +22,8 @@ class SearchController < ApplicationController
       return
     end
     respond_to do |format|
-      format.js { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
-      format.html { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
+      format.js { redirect_to build_filter_path(:query, params[:query]), status: :moved_permanently }
+      format.html { redirect_to build_filter_path(:query, params[:query]), status: :moved_permanently }
     end
   end
 

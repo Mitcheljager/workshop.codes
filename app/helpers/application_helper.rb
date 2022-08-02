@@ -11,7 +11,7 @@ module ApplicationHelper
       author: params[:author],
       players: params[:players],
       language: params[:language],
-      search: params[:search]
+      query: params[:query]
     }
 
     parameters[key] = value
