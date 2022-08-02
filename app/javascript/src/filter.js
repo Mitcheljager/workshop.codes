@@ -25,13 +25,13 @@ function buildFilterPath(event) {
   linkElement.innerHTML = "<div class='spinner spinner--small'></div>"
 
   let buildPath = {
-    "categories": filterValue("categories"),
-    "heroes": filterValue("heroes"),
-    "maps": filterValue("maps"),
+    "category": filterValue("categories"),
+    "hero": filterValue("heroes"),
+    "map": filterValue("maps"),
     "from": filterValue("from"),
     "to": filterValue("to"),
-    "exclude-expired": document.querySelector("[data-filter-type='exclude-expired']").checked ? "true" : "",
-    "overwatch-2": document.querySelector("[data-filter-type='overwatch-2']").checked ? "true" : "",
+    "expired": document.querySelector("[data-filter-type='exclude-expired']").checked ? "true" : "",
+    "overwatch_2": document.querySelector("[data-filter-type='overwatch-2']").checked ? "true" : "",
     "author": filterValue("author"),
     "players": filterValue("players"),
     "search": document.querySelector("input[name='query']").value,
