@@ -38,7 +38,7 @@ RSpec.describe "SearchUrls", type: :request do
   describe "GET new search URLs" do
     it "handles a query alone" do
       search_params = {
-        search: "charles the 9th"
+        query: "charles the 9th"
       }
       get filter_path(params: search_params)
 
@@ -76,7 +76,7 @@ RSpec.describe "SearchUrls", type: :request do
       it "handles a single filter and a query" do
         search_params = {
           expired: true,
-          search: "charles the 9th"
+          query: "charles the 9th"
         }
         get filter_path(params: search_params)
 
@@ -91,7 +91,7 @@ RSpec.describe "SearchUrls", type: :request do
           category: "tools",
           hero: "wrecking-ball",
           sort: "views",
-          search: "charles the 9th"
+          query: "charles the 9th"
         }
         get filter_path(params: search_params)
 
@@ -112,8 +112,6 @@ RSpec.describe "SearchUrls", type: :request do
           query: "zombie"
         }
         post "/maps/havana/search", params: search_params
-        # :query is renamed to :search
-        search_params[:search] = search_params.delete(:query)
 
         search_params = search_params.merge({
           map: "havana"
@@ -127,8 +125,6 @@ RSpec.describe "SearchUrls", type: :request do
           query: "see you move"
         }
         post "/heroes/lucio/maps/paris/search", params: search_params
-        # :query is renamed to :search
-        search_params[:search] = search_params.delete(:query)
 
         search_params = search_params.merge({
           hero: "lucio",
@@ -143,14 +139,54 @@ RSpec.describe "SearchUrls", type: :request do
       post "/heroes/lucio/maps/paris/search", params: { "query": "see you move" }
       expect(response).to have_http_status(:moved_permanently)
     end
+
+    context "using `search=` instead of `query=`" do
+      it "redirects new-form searches with no filters" do
+        search_params = {
+          search: "tea time"
+        }
+        post "/search", params: search_params
+
+        # Expect search to be renamed to query
+        search_params[:query] = search_params.delete(:search)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(filter_path(params: search_params))
+      end
+
+      it "redirects new-form searches with one filter" do
+        search_params = {
+          search: "tea time 2",
+          map: "busan"
+        }
+        post "/search", params: search_params
+
+        # Expect search to be renamed to query
+        search_params[:query] = search_params.delete(:search)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(filter_path(params: search_params))
+      end
+
+      it "redirects new-form searches with many filters" do
+        search_params = {
+          search: "tea time 3",
+          map: "busan",
+          category: "1vs1",
+          hero: "zenyatta"
+        }
+        post "/search", params: search_params
+
+        # Expect search to be renamed to query
+        search_params[:query] = search_params.delete(:search)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(filter_path(params: search_params))
+      end
+    end
   end
 
   describe "POST to new search URL" do
     it "redirects a search with no filters" do
       search_params = { query: "banana" }
       post "/search", params: search_params
-      # :query is renamed to :search
-      search_params[:search] = search_params.delete(:query)
 
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(filter_path(params: search_params))
@@ -163,8 +199,6 @@ RSpec.describe "SearchUrls", type: :request do
         map: "hanamura"
       }
       post "/search", params: search_params
-      # :query is renamed to :search
-      search_params[:search] = search_params.delete(:query)
 
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(filter_path(params: search_params))
