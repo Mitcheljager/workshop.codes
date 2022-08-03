@@ -43,7 +43,6 @@ RSpec.describe "SearchUrls", type: :request do
       get filter_path(params: search_params)
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include("charles the 9th")
     end
 
     context "with filters and no query" do
@@ -54,7 +53,6 @@ RSpec.describe "SearchUrls", type: :request do
         get filter_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
-      expect(response.body).to include("Dorado")
       end
 
       it "handles multiple filters" do
@@ -66,9 +64,6 @@ RSpec.describe "SearchUrls", type: :request do
         get filter_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Hanamura")
-        expect(response.body).to include("scrims")
-        expect(response.body).to include("Wrecking Ball")
       end
     end
 
@@ -81,8 +76,6 @@ RSpec.describe "SearchUrls", type: :request do
         get filter_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("expired")
-        expect(response.body).to include("charles the 9th")
       end
 
       it "handles multiple filters and a query" do
@@ -96,11 +89,6 @@ RSpec.describe "SearchUrls", type: :request do
         get filter_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Temple Of Anubis")
-        expect(response.body).to include("tools")
-        expect(response.body).to include("Wrecking Ball")
-        expect(response.body).to include("views")
-        expect(response.body).to include("charles the 9th")
       end
     end
   end
