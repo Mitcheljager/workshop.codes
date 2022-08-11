@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.feature "SearchAndFilters", type: :feature do
   include Capybara::DSL
 
-  context "search terms only" do
+  # Searching terms must be JavaScript-enabled to ensure that
+  # the search box behaves exactly as it does on most browsers.
+  context "search terms only", js: true do
     before(:each) do
       visit root_path
     end
