@@ -17,8 +17,8 @@ When "I (try to )add the post titled {string} as a source" do |title|
 
   check id: "show_derivative", allow_label_click: true
 
-  # We bypass the normal source selection by using the hidden field
-  page.evaluate_script "document.getElementById('post_derivatives').value = '#{ post.code }'"
+  fill_in "CODE1,CODE2,etc.", with: post.code
+  find("ul.form-tags-autocomplete-results").find("li.tag-item:nth-of-type(1)").click
 
   click_on "Save"
 end

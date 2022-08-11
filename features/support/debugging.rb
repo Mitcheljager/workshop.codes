@@ -75,7 +75,7 @@ AfterStep do |scenario|
   next unless ENV['PHOTO_MODE']
   CucumberCounters.step_counter += 1
   step = CucumberCounters.step_counter
-  file_name = format('%s-step_%03d.png', @scenario_name.downcase.gsub(" ", "_"), step)
+  file_name = format('%s/step_%03d.png', @scenario_name.downcase.gsub(" ", "_"), step)
   Rails.logger.info("[Cucumber] after step: #{@scenario_name}, step: #{step}")
   begin
     Capybara.page.save_screenshot(file_name, full: true)
