@@ -1,5 +1,8 @@
 Sitemap: https://workshop.codes/sitemap.xml
 
+User-agent: *
+Crawl-delay: 5
+
 User-agent: SemrushBot
 Disallow: /
 
@@ -20,6 +23,12 @@ Disallow: /
 
 User-agent: Twitterbot
 Allow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
 
 User-agent:*
 Allow: /rails/active_storage/*
