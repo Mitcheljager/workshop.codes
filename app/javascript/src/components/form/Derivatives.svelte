@@ -61,7 +61,7 @@
     <div class="form-group mt-1/4">
       <div class="form-hint mt-1/4 mb-1/4 text-left">
         Enter the import code(s) which your mode uses. You can enter up to { maxCodes } codes.
-        
+
         <br />
         <strong>Separate import codes with a comma (<code>,</code>).</strong>
       </div>
