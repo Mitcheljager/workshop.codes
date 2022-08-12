@@ -17,6 +17,10 @@ RSpec.describe ApplicationHelper, type: :helper do
       I18n.locale = "en"
     end
 
+    after(:each) do
+      I18n.locale = I18n.default_locale
+    end
+
     context "given a valid value to pull" do
 
       it "returns the correct category" do
