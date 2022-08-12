@@ -37,7 +37,9 @@ class CommentsController < ApplicationController
 
       respond_to :js
     else
-      format.js { render "application/error" }
+      respond_to do |format|
+        format.js { render "application/error" }
+      end
     end
   end
 
@@ -57,7 +59,9 @@ class CommentsController < ApplicationController
 
       respond_to :js
     else
-      format.js { render "application/error" }
+      respond_to do |format|
+        format.js { render "application/error" }
+      end
     end
   end
 
@@ -69,7 +73,9 @@ class CommentsController < ApplicationController
 
       respond_to :js
     else
-      format.js { render "application/error" }
+      respond_to do |format|
+        format.js { render "application/error" }
+      end
     end
   end
 
@@ -89,7 +95,9 @@ class CommentsController < ApplicationController
   end
 
   def failed_authenticity_token
-    format.js { render "application/error" }
+    respond_to do |format|
+      format.js { render "application/error" }
+    end
   end
 
   private
