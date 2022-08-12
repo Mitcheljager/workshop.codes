@@ -9,7 +9,7 @@
     <%= form.hidden_field :parent_id, value: parent_id if defined?(parent_id) %>
 
     <div class="form-group">
-      <%= form.text_area :content, class: "form-input form-textarea form-textarea--extra-small bg-darker mw-100", placeholder: "Comment...", data: { role: "comment-input" } %>
+      <%= form.text_area :content, class: "form-input form-textarea form-textarea--extra-small bg-darker mw-100", placeholder: "Comment...", data: { role: "comment-input" }, required: true %>
     </div>
 
     <%= button_tag defined?(comment) ? t("comment.edit") : t("comment.submit"), class: "button mt-1/4" %>
