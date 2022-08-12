@@ -11,7 +11,7 @@ RSpec.describe "Profiles", type: :request do
 
   describe "GET /u/:username" do
     it "returns status code 200 for existing username" do
-      get "/u/#{ user.username }"
+      get profile_path(username: user.username)
       expect(response).to have_http_status(:ok)
     end
 
@@ -21,7 +21,7 @@ RSpec.describe "Profiles", type: :request do
     end
 
     it "returns status code 404 for nonexisting username" do
-      get "/u/user_does_not_exist"
+      get profile_path(username: "does_not_exist")
       expect(response).to have_http_status(:not_found)
     end
   end
