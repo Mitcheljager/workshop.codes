@@ -10,13 +10,13 @@ RSpec.describe "Profiles", type: :feature do
     it "selects the highlights tab by default if the user has a block" do
       create(:block, user_id: user.id, content_type: :profile, name: "highlight", properties: ActionController::Parameters.new({post: "#{posts.first.id}", description: "This is a highlight"}))
 
-      visit profile_path( user.username )
+      visit profile_path(username: user.username )
       expect(page).to have_link("Highlights", class: "tabs__item--active")
       expect(page).not_to have_link("Codes", class: "tabs__item--active")
     end
 
     it "shows the user's posts if they have no blocks" do
-      visit profile_path( user.username )
+      visit profile_path(username: user.username )
       expect(page).to have_link("Codes", class: "tabs__item--active")
       expect(page).not_to have_link("Highlights", class: "tabs__item--active")
 
@@ -28,7 +28,7 @@ RSpec.describe "Profiles", type: :feature do
     end
 
     it "performs an infinite scroll on the user's posts", js: true do
-      visit profile_path( user.username )
+      visit profile_path(username: user.username)
       expect(page).to have_link("Codes", class: "tabs__item--active")
 
       # Show most recent posts
@@ -56,13 +56,13 @@ RSpec.describe "Profiles", type: :feature do
     it "selects the codes tab even if the user has a block" do
       create(:block, user: user, name: "highlight", properties: "{post: #{posts.first.id}, description: }")
 
-      visit profile_path( user.username , params: { tab: "codes" })
+      visit profile_path(username: user.username , params: { tab: "codes" })
       expect(page).to have_link("Codes", class: "tabs__item--active")
       expect(page).not_to have_link("Highlights", class: "tabs__item--active")
     end
 
     it "selects the collections tab" do
-      visit profile_path( user.username , params: { tab: "collections" })
+      visit profile_path(username: user.username , params: { tab: "collections" })
       expect(page).to have_link("Collections", class: "tabs__item--active")
       expect(page).not_to have_link("Codes", class: "tabs__item--active")
       expect(page).not_to have_link("Highlights", class: "tabs__item--active")
