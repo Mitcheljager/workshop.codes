@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find_by(id: session[:user_id])
 
       # Invalidate the session if a UUID is specified and the user's UUID does not match
-      if session[:user_uuid] && @current_user.uuid != session[:user_uuid]
+      if session[:user_uuid].present? && @current_user&.uuid != session[:user_uuid]
         reset_session
         @current_user = nil
       end
