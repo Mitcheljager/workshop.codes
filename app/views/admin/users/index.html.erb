@@ -26,7 +26,6 @@
     <th><%= link_to "Veri?", admin_users_path(where: "verified") %></th>
     <th><%= link_to "HC?", admin_users_path(where: "high_contrast") %></th>
     <th><%= link_to "Lg?", admin_users_path(where: "large_fonts") %></th>
-    <th><%= link_to "Spl?", admin_users_path(where: "simple_view") %></th>
     <th>Posts</th>
     <th>Cmts</th>
     <th>Fvs</th>
@@ -47,7 +46,6 @@
       <td><%= "✔" if user.verified? %></td>
       <td><%= "✔" if user.high_contrast? %></td>
       <td><%= "✔" if user.large_fonts? %></td>
-      <td><%= "✔" if user.simple_view? %></td>
       <td><%= user.posts.count %></td>
       <td><%= user.comments.count %></td>
       <td><%= user.favorites.count %></td>

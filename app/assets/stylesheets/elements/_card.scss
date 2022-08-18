@@ -120,10 +120,6 @@
   margin: -#{ $margin / 4 } -#{ $margin / 4 } $margin / 4;
   background: $body-bg;
   font-size: 12px;
-
-  .simple-view & {
-    display: none;
-  }
 }
 
 .card__author {

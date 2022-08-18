@@ -50,10 +50,6 @@
     box-shadow: 0 0 1.5rem 1.5rem $black;
     border-radius: 99px;
     pointer-events: none;
-
-    .simple-view & {
-      display: none;
-    }
   }
 
   .fading-in & {

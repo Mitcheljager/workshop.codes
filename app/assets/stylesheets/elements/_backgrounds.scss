@@ -50,26 +50,6 @@
     object-fit: cover;
     text-indent: 10000px
   }
-
-  .simple-view & {
-    clip-path: none;
-    background: $border-color;
-    height: 90px;
-
-    @include media-min(xl) {
-      height: 120px;
-    }
-
-    img {
-      display: none;
-    }
-  }
-
-  &--large {
-    .simple-view & {
-      height: 400px;
-    }
-  }
 }
 
 .logo-background {
@@ -115,13 +95,6 @@
   &--overwatch {
     &::after {
       background-image: image-url("layout/overwatch-logo.svg");
-    }
-  }
-
-  .simple-view & {
-    &::before,
-    &::after {
-      display: none;
     }
   }
 }
