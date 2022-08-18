@@ -20,6 +20,6 @@ class AccessibilityController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:high_contrast, :large_fonts, :simple_view, :pagination_type)
+    params.require(:user).permit(:high_contrast, :large_fonts, :pagination_type)
   end
 end

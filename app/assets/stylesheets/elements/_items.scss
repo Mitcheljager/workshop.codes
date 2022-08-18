@@ -1,12 +1,6 @@
 .items {
   position: relative;
 
-  .simple-view & {
-    hr {
-      display: none;
-    }
-  }
-
   .item:last-of-type {
     border-bottom: 1px solid $border-color;
   }
@@ -102,22 +96,6 @@
       margin-top: $margin * 2;
     }
   }
-
-  .simple-view & {
-    display: grid;
-    grid-template: "title favorite"
-                   "code code";
-    grid-template-columns: calc(100% - #{ $favorite-width * 2 }) $favorite-width * 2;
-    border: 3px solid $border-color;
-    margin-bottom: 1rem;
-    padding: 0;
-
-    @include media-min(sm) {
-      display: grid;
-      grid-template: "title favorite code";
-      grid-template-columns: calc(100% - #{ $code-width } + #{ $favorite-width }) $favorite-width $code-width;
-    }
-  }
 }
 
 .item__favorite {
@@ -126,10 +104,6 @@
 
   @include media-min(sm) {
     margin: 23px $margin / 4 auto;
-  }
-
-  .simple-view & {
-    margin-right: 1rem;
   }
 }
 
@@ -164,10 +138,6 @@
 
   @include hover-stack {
     filter: brightness(1.15);
-  }
-
-  .simple-view & {
-    display: none;
   }
 
   .item--large & {
@@ -261,10 +231,6 @@
   h1 {
     margin: 0;
   }
-
-  .simple-view & {
-    padding: $margin / 3;
-  }
 }
 
 .item__sub-title {
@@ -290,10 +256,6 @@
   .item--bottom & {
     display: block;
     padding: 0;
-  }
-
-  .simple-view & {
-    display: none;
   }
 }
 
@@ -351,10 +313,6 @@
     &:first-child {
       margin-left: 0;
     }
-  }
-
-  .simple-view & {
-    padding: 0 1rem;
   }
 }
 

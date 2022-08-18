@@ -29,16 +29,6 @@
     </p>
   </div>
 
-  <div class="well well--dark mb-1/4">
-    <%= button_to t("accessibility.edit.simple_view.label"), update_accessibility_path, method: :patch, params: { user: { simple_view: !current_user.simple_view } },
-                  class: "switch__input",
-                  form_class: "switch #{ "switch--active" if current_user.simple_view }" %>
-
-    <p class="form-hint mt-0 mb-0">
-      <%= t "accessibility.edit.simple_view.description" %>
-    </p>
-  </div>
-
   <div class="well well--dark block">
     <h4 class="mt-0 mb-1/4 text-base"><%= t "accessibility.edit.pagination_type.title" %></h4>
 

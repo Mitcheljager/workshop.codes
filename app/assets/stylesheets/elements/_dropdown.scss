@@ -72,11 +72,6 @@
     }
   }
 
-  .simple-view & {
-    box-shadow: none;
-    border: 3px solid lighten($border-color, 10%);
-  }
-
   hr {
     margin: $margin / 6 0;
     background: lighten($bg-dark, 10%);
@@ -108,10 +103,6 @@
     margin-right: .75em;
     border-radius: 50%;
     background-color: $body-bg;
-
-    .simple-view & {
-      display: none;
-    }
   }
 
   small {
@@ -130,10 +121,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 70%;
-
-    .simple-view & {
-      display: none;
-    }
   }
 }
 

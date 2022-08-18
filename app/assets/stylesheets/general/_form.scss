@@ -37,16 +37,8 @@
       line-height: 1.5em;
     }
 
-    .simple-view & {
-      box-shadow: 0 0 0 5px $body-bg;
-    }
-
     .high-contrast & {
       font-weight: normal;
-    }
-
-    .high-contrast.simple-view & {
-      box-shadow: 0 0 0 5px var(--bg-darker);
     }
   }
 
