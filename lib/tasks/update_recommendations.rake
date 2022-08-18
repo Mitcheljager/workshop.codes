@@ -8,7 +8,12 @@ task :update_recommendations => :environment do
   recommender.fit(data)
 
   User.find_each do |user|
-    recommendations = recommender.user_recs(user.id)
+    recommendations = recommender.user_recs(user.id, count: 3)
     user.update_recommended_posts(recommendations)
+  end
+
+  Post.find_each do |post|
+    recommendations = recommender.item_recs(post.id, count: 3)
+    post.update_recommended_posts(recommendations)
   end
 end
