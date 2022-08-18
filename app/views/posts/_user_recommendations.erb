@@ -2,6 +2,6 @@
 
 <p class="text-small"><em>Recommendations based on your favorited codes. Favorite more codes to get better recommendations!</em></p>
 
-<main class="items">
+<section>
   <%= render collection: current_user.recommended_posts, partial: "post", as: :post %>
-</main>
+</section>
