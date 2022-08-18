@@ -19,6 +19,8 @@
     </div>
   <% end %>
 
+  <%= render "recommended_posts" if current_user && current_user.recommended_posts.any? %>
+
   <div class="action-header">
     <% if params[:page] %>
       <h1>

@@ -13,6 +13,7 @@ gem "breadcrumbs_on_rails"
 gem "bootsnap", require: false
 gem "chart-js-rails"
 gem "diffy"
+gem "disco"
 gem "discord-notifier"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"
