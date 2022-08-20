@@ -18,10 +18,6 @@ body {
   color: $text-color;
   overflow-x: hidden;
 
-  &.simple-view {
-    background: $body-bg;
-  }
-
   &.high-contrast {
     background: darken($body-bg, 5%);
   }
@@ -50,10 +46,6 @@ hr {
 
   &.small {
     margin: $margin / 2 0;
-  }
-
-  .simple-view & {
-    height: 2px;
   }
 }
 

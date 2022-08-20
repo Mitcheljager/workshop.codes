@@ -20,10 +20,6 @@
       left: 6rem;
       width: calc(100% - 12rem);
     }
-
-    .simple-view & {
-      display: none;
-    }
   }
 
   input:not([type="submit"]) {

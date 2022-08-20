@@ -17,10 +17,6 @@
     opacity: .45;
     background: $black;
     box-shadow: 0 0 2rem 2rem $black;
-
-    .simple-view & {
-      display: none;
-    }
   }
 }
 
