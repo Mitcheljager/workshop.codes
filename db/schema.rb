@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_092440) do
-
+ActiveRecord::Schema.define(version: 2022_08_18_142511) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -133,6 +132,19 @@ ActiveRecord::Schema.define(version: 2022_08_18_092440) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["source_code", "derivation_id"], name: "index_derivatives_on_source_code_and_derivation_id", unique: true
     t.index ["source_id", "derivation_id"], name: "index_derivatives_on_source_id_and_derivation_id", unique: true, where: "source_id IS NOT NULL"
+  end
+
+  create_table "disco_recommendations", force: :cascade do |t|
+    t.string "subject_type"
+    t.integer "subject_id"
+    t.string "item_type"
+    t.integer "item_id"
+    t.string "context"
+    t.float "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_type", "item_id"], name: "index_disco_recommendations_on_item"
+    t.index ["subject_type", "subject_id"], name: "index_disco_recommendations_on_subject"
   end
 
   create_table "email_notifications", force: :cascade do |t|
@@ -290,6 +302,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_092440) do
     t.integer "linked_id"
     t.datetime "feed_last_visited_at"
     t.string "uuid", limit: 36
+    t.boolean "simple_view"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

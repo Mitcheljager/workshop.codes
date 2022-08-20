@@ -103,6 +103,8 @@ class Post < ApplicationRecord
 
   has_many_attached :images, dependent: :destroy
 
+  has_recommended :posts
+
   attr_accessor :status
   attr_accessor :include_nice_url
   attr_accessor :revision

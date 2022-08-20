@@ -51,6 +51,8 @@ class User < ApplicationRecord
   has_encrypted :email
   blind_index :email
 
+  has_recommended :posts
+
   validates :username, presence: true, uniqueness: { case_sensitive: false }, uniqueness_against_nice_url: true, format: { with: /\A[\d\p{L}_-]*[#\d]*\z/i }, length: { maximum: 32 }
   validates :password, presence: true, length: { minimum: 8 }, if: :password
   validates :email, uniqueness: true, allow_blank: true, length: { maximum: 100 }

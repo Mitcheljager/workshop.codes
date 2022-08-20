@@ -17,6 +17,8 @@
         <%= render "application/banners/overwatch_2" %>
       <% end %>
     </div>
+
+    <%= render "user_recommendations" if current_user && current_user.recommended_posts.any? %>
   <% end %>
 
   <div class="action-header">
