@@ -1,7 +1,3 @@
-module Current
-  thread_mattr_accessor :user
-end
-
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include ActivitiesHelper
@@ -14,7 +10,6 @@ class ApplicationController < ActionController::Base
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   before_action :redirect_default_locale
-  around_action :set_current_user
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
   rescue_from AbstractController::ActionNotFound, with: :render_404
@@ -54,13 +49,6 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
     @current_user
-  end
-
-  def set_current_user
-    Current.user = current_user
-    yield
-  ensure
-    Current.user = nil
   end
 
   helper_method :search_terms
