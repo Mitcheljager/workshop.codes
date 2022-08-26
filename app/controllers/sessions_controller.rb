@@ -13,6 +13,15 @@ class SessionsController < ApplicationController
   end
 
   def create
+    # Handle a request to store only authorization without database-backed user
+    if should_authorize_only
+      set_session_auth
+      redirect_to "#{request.base_url}/#{omniauth_params["redirect_path"].presence || ""}"
+      return
+    else
+      clean_up_session_auth
+    end
+
     if current_user && auth_hash.present?
       # User is linking their account to an OAuth provider
       link_user
@@ -78,6 +87,10 @@ class SessionsController < ApplicationController
     request.env["omniauth.auth"]
   end
 
+  def omniauth_params
+    request.env["omniauth.params"]
+  end
+
   def set_return_path
     session[:return_to] = request.referrer
   end
@@ -121,4 +134,17 @@ class SessionsController < ApplicationController
     return{ class: "red", message: "An account is already created for this login. If you wish to link the account instead please delete the original account." }
   end
 
+  def should_authorize_only
+    current_user.blank? &&
+      omniauth_params.respond_to?(:[]) &&
+      omniauth_params["auth_only_no_user"].present? &&
+      auth_hash.present?
+  end
+
+  def set_session_auth
+    session["oauth_provider"] = auth_hash["provider"]
+    session["oauth_uid"] = auth_hash["uid"]
+    session["oauth_expires_at"] = Time.now + 30.minutes
+    flash[:notice] = "You are now authenticated as #{auth_hash["info"]["name"] || auth_hash["info"]["battletag"]} for the next 30 minutes."
+  end
 end
