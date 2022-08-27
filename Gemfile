@@ -56,11 +56,12 @@ group :development, :test do
   gem "faker"
   gem "pry-byebug", "~> 3.9.0"
   gem "rspec-rails", "~> 4.0.2"
-  gem "selenium-webdriver", "~> 3.142.7"
+  gem "selenium-webdriver", "~> 4.0"
   gem "shoulda-matchers", "~> 4.5"
   gem "sqlite3", "1.4.2"
   # To freeze time and allow time travel for time-sensitive tests
   gem "timecop"
+  gem "webdrivers", "~> 5.0"
 end
 
 group :development do
