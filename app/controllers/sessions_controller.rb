@@ -26,7 +26,9 @@ class SessionsController < ApplicationController
       # User is linking their account to an OAuth provider
       link_user
       return
-    elsif auth_hash.present?
+    end
+
+    if auth_hash.present?
       # User is logging in in with OAuth
       @user = User.find_or_create_from_auth_hash(auth_hash)
     else
