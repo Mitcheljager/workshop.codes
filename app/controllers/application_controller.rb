@@ -96,8 +96,7 @@ class ApplicationController < ActionController::Base
   private
 
   def expire_oauth_session
-    if (session[:oauth_uid].present? || session[:oauth_provider].present?) &&
-      session[:oauth_expires.at].blank?
+    if (session[:oauth_uid].present? || session[:oauth_provider].present?) && session[:oauth_expires_at].blank?
       clean_up_session_auth
       flash[:error] = "Invalid temporary OAuth session."
       return
