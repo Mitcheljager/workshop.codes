@@ -131,6 +131,8 @@ Rails.application.routes.draw do
       get ":code", to: "posts#show"
       get ":code/:tab", to: "posts#show", as: "post_tab"
       post "immortalise", to: "posts#immortalise", as: "immortalise_post"
+      patch "archive-transfer", to: "posts#archive_transfer"
+      delete "archive-destroy", to: "posts#archive_destroy"
     end
 
     namespace :wiki do
