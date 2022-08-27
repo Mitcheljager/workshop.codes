@@ -103,6 +103,7 @@ class ApplicationController < ActionController::Base
     end
     if session[:oauth_expires_at].present? && Time.now > session[:oauth_expires_at]
       clean_up_session_auth
+      flash[:warning] = "Temporary session expired."
     end
   end
 
