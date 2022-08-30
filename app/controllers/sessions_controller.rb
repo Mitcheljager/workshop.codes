@@ -106,7 +106,7 @@ class SessionsController < ApplicationController
       unless @user.present? # Problem creating account to link
         flash[:alert] = { class: "red", message: "Something went wrong when syncing your account details, and the link could not be completed." }
       else
-        flash[:alert] = flash_for_existing_account(@user)
+        flash[:alert] = flash_for_existing_account
       end
     else
       @user = User.find_or_create_from_auth_hash(auth_hash)
@@ -122,7 +122,7 @@ class SessionsController < ApplicationController
     redirect_to linked_users_path
   end
 
-  def flash_for_existing_account(user)
+  def flash_for_existing_account
     if @user.linked_id.present? # Already linked somewhere
       if @user.linked_id == current_user.id
         return { class: "orange", message: "This login is already linked to your account." }
