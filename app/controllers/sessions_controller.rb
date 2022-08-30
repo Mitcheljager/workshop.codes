@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
     # Handle a request to store only authorization without database-backed user
     if should_authorize_only
       set_session_auth
+      flash[:notice] = "You are now authenticated as #{auth_hash["info"]["name"] || auth_hash["info"]["battletag"]} for the next 30 minutes."
       redirect_to "#{request.base_url}/#{omniauth_params["redirect_path"].presence || ""}"
       return
     else
@@ -147,6 +148,5 @@ class SessionsController < ApplicationController
     session["oauth_provider"] = auth_hash["provider"]
     session["oauth_uid"] = auth_hash["uid"]
     session["oauth_expires_at"] = Time.now + 30.minutes
-    flash[:notice] = "You are now authenticated as #{auth_hash["info"]["name"] || auth_hash["info"]["battletag"]} for the next 30 minutes."
   end
 end
