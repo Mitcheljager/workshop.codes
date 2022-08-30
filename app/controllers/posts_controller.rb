@@ -248,6 +248,7 @@ class PostsController < ApplicationController
 
       flash[:notice] = "Post successfully transferred"
       redirect_to post_path(@post.code)
+      return
     end
 
     flash[:error] = "Something went wrong when transferring the post to you."
