@@ -213,18 +213,20 @@ class PostsController < ApplicationController
       return
     end
 
-    Post.transaction do
-      @post.destroy
-      @archive_authorization.destroy
+    begin
+      Post.transaction do
+        @post.destroy!
+        archive_authorization.destroy!
+      end
+
       create_activity(:destroy_archive_post, post_activity_params.merge({authorizing_bnet_uid: archive_authentication.uid}))
 
       flash[:notice] = "Post successfully deleted"
       redirect_to posts_url
-      return
+    rescue ActiveRecord::RecordNotDestroyed
+      flash[:error] = "Something went wrong while trying to delete the post."
+      redirect_back fallback_location: post_path(@post.code)
     end
-
-    flash[:error] = "Something went wrong while trying to delete the post."
-    redirect_back fallback_location: post_path(@post.code)
   end
 
   def archive_transfer
@@ -240,19 +242,21 @@ class PostsController < ApplicationController
       return
     end
 
-    Post.transaction do
-      @post.user = current_user
-      @post.save
-      archive_authorization.destroy
+    begin
+      Post.transaction do
+        @post.user = current_user
+        @post.save!
+        archive_authorization.destroy!
+      end
+
       create_activity(:transfer_archive_post, post_activity_params.merge({authorizing_bnet_uid: archive_authentication.uid}))
 
       flash[:notice] = "Post successfully transferred"
       redirect_to post_path(@post.code)
-      return
+    rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
+      flash[:error] = "Something went wrong when transferring the post to you."
+      redirect_to post_path(@post.code)
     end
-
-    flash[:error] = "Something went wrong when transferring the post to you."
-    redirect_to post_path(@post.code)
   end
 
   def copy_code
