@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   include EmailNotificationsHelper
   include NotificationsHelper
 
-  before_action :set_post, only: [:edit, :update, :destroy, :immortalise, :archive_destroy, :archive_transfer]
+  before_action :set_post, only: [:edit, :update, :destroy, :immortalise]
   before_action :set_post_images, only: [:edit]
 
   before_action only: [:edit, :update, :destroy, :immortalise] do
@@ -204,61 +204,6 @@ class PostsController < ApplicationController
     redirect_to posts_url
   end
 
-  def archive_destroy
-    archive_authorization = get_archive_authorization
-
-    unless archive_authorization.present?
-      flash[:error] = "You are not authorized to perform that action"
-      redirect_back fallback_location: post_path(@post.code)
-      return
-    end
-
-    begin
-      Post.transaction do
-        @post.destroy!
-        archive_authorization.destroy!
-      end
-
-      create_activity(:destroy_archive_post, post_activity_params.merge({authorizing_bnet_uid: archive_authentication.uid}))
-
-      flash[:notice] = "Post successfully deleted"
-      redirect_to posts_url
-    rescue ActiveRecord::RecordNotDestroyed
-      flash[:error] = "Something went wrong while trying to delete the post."
-      redirect_back fallback_location: post_path(@post.code)
-    end
-  end
-
-  def archive_transfer
-    unless current_user.present?
-      redirect_to login_path, flash: { error: "You need to be logged into an existing Workshop.codes account in order to transfer ownership" }
-      return
-    end
-
-    archive_authorization = get_archive_authorization
-
-    unless archive_authorization.present?
-      redirect_back fallback_location: post_path(@post.code), flash: { error: "You are not authorized to perform that action" }
-      return
-    end
-
-    begin
-      Post.transaction do
-        @post.user = current_user
-        @post.save!
-        archive_authorization.destroy!
-      end
-
-      create_activity(:transfer_archive_post, post_activity_params.merge({authorizing_bnet_uid: archive_authentication.uid}))
-
-      flash[:notice] = "Post successfully transferred"
-      redirect_to post_path(@post.code)
-    rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
-      flash[:error] = "Something went wrong when transferring the post to you."
-      redirect_to post_path(@post.code)
-    end
-  end
-
   def copy_code
     @post = Post.find_by_code(params[:code])
     unless @post.present?
@@ -293,24 +238,6 @@ class PostsController < ApplicationController
 
     @image_ids = @post.image_order.present? ? @post.image_order : "[]"
     @ordered_images = JSON.parse(@image_ids).collect { |i| @post.images.find_by_blob_id(i) }.filter { |i| i.present? }
-  end
-
-  def get_archive_authorization
-    authorization = ArchiveAuthorization.find_by(code: @post.code)
-    return nil unless authorization.present?
-
-    if session[:oauth_provider] == "bnet" && session[:oauth_uid] == authorization.bnet_id
-      return authorization
-    end
-    if current_user.present? && current_user.provider == "bnet"
-      return authorization
-    end
-    if @current_user.present? &&
-        @current_user.linked_users.where(provider: "bnet", uid: authorization.bnet_id).any?
-      return authorization
-    end
-
-    nil
   end
 
   def create_collection

@@ -130,8 +130,8 @@ Rails.application.routes.draw do
       resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]
       get ":code", to: "posts#show"
       get ":code/:tab", to: "posts#show", as: "post_tab"
-      post "immortalise", to: "posts#immortalise", as: "immortalise_post"
-      patch "archive-transfer", to: "posts#archive_transfer"
+      post "immortalise", to: "archive#immortalise", as: "immortalise_post"
+      patch "archive-transfer", to: "archive#archive_transfer"
       delete "archive-destroy", to: "posts#archive_destroy"
     end
 
