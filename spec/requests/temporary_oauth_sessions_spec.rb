@@ -93,13 +93,14 @@ RSpec.describe "Temporary OAuth requests", type: :request do
       # doesn't follow the redirect to the provided path from there.
       follow_redirect!
 
-      # Simulate copying the cookie down. Note that due to encryption,
-      # an attacker cannot modify the hash as they please.
-      session_hash = session.to_hash
+      session_cookie_key = Rails.application.config.session_options[:key]
+      # Simulate copying the cookie down.
+      session_cookie = cookies[session_cookie_key]
 
       Timecop.travel(Time.now + 30.minutes) do
         # We now simulate copying the session cookie back
-        get root_path(session: session_hash)
+        cookies[session_cookie_key] = session_cookie
+        get root_path
 
         expect(session[:oauth_provider]).not_to be_present
         expect(session[:oauth_uid]).not_to be_present
