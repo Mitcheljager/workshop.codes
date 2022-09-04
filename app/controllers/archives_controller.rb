@@ -1,4 +1,4 @@
-class ArchiveController < ApplicationController
+class ArchivesController < ApplicationController
   before_action :set_post
 
   before_action do
@@ -9,24 +9,7 @@ class ArchiveController < ApplicationController
     end
   end
 
-  def archive_destroy
-    begin
-      @post.transaction do
-        @post.destroy!
-        archive_authorization.destroy!
-      end
-
-      create_activity(:destroy_archive_post, post_activity_params.merge({authorizing_bnet_uid: archive_authentication.uid}))
-
-      flash[:notice] = "Post successfully deleted"
-      redirect_to posts_url
-    rescue ActiveRecord::RecordNotDestroyed
-      flash[:error] = "Something went wrong while trying to delete the post."
-      redirect_back fallback_location: post_path(@post.code)
-    end
-  end
-
-  def archive_transfer
+  def update
     unless current_user.present?
       redirect_to login_path, flash: { error: "You need to be logged into an existing Workshop.codes account in order to transfer ownership" }
       return
@@ -36,16 +19,37 @@ class ArchiveController < ApplicationController
       @post.transaction do
         @post.user = current_user
         @post.save!
-        archive_authorization.destroy!
+        @archive_authorization.destroy!
       end
 
-      create_activity(:transfer_archive_post, post_activity_params.merge({authorizing_bnet_uid: archive_authentication.uid}))
+      create_activity(:transfer_archive_post, {
+        id: @post.id,
+        authorizing_bnet_uid: session[:oauth_uid]})
 
       flash[:notice] = "Post successfully transferred"
       redirect_to post_path(@post.code)
     rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
       flash[:error] = "Something went wrong when transferring the post to you."
       redirect_to post_path(@post.code)
+    end
+  end
+
+  def destroy
+    begin
+      @post.transaction do
+        @post.destroy!
+        @archive_authorization.destroy!
+      end
+
+      create_activity(:destroy_archive_post, {
+        id: @post.id,
+        authorizing_bnet_uid: session[:oauth_uid]})
+
+      flash[:notice] = "Post successfully deleted"
+      redirect_to posts_url
+    rescue ActiveRecord::RecordNotDestroyed
+      flash[:error] = "Something went wrong while trying to delete the post."
+      redirect_back fallback_location: post_path(@post.code)
     end
   end
 
