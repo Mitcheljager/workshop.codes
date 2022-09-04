@@ -26,7 +26,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
           expect(session[:oauth_provider]).to eq("bnet")
           expect(session[:oauth_uid]).to eq(oauth_username_to_mock_uid("bnet", battletag))
           expect(session[:oauth_expires_at]).to eq(Time.now + 30.minutes)
-          expect(session[:flash].to_s).to include(battletag)
+          expect(flash[:notice]).to include(battletag)
         end
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
           expect(session[:oauth_provider]).to eq("discord")
           expect(session[:oauth_uid]).to eq(oauth_username_to_mock_uid("discord", full_username))
           expect(session[:oauth_expires_at]).to eq(Time.now + 30.minutes)
-          expect(session[:flash].to_s).to include(username)
+          expect(flash[:notice]).to include(username)
         end
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
       get root_path
       expect(session[:oauth_provider]).to be_present
       expect(session[:oauth_uid]).to be_present
-      expect(response.body).not_to include("Temporary session expired.")
+      expect(flash[:warning]).not_to be_present
     end
 
     it "does not expire within a minute" do
@@ -67,7 +67,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
           get root_path
           expect(session[:oauth_provider]).to be_present
           expect(session[:oauth_uid]).to be_present
-          expect(response.body).not_to include("Temporary session expired.")
+          expect(flash[:warning]).not_to be_present
         end
       end
     end
@@ -81,7 +81,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
         get root_path
         expect(session[:oauth_provider]).not_to be_present
         expect(session[:oauth_uid]).not_to be_present
-        expect(response.body).to include("Temporary session expired.")
+        expect(flash[:warning]).to eq("Temporary session expired.")
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
 
         expect(session[:oauth_provider]).not_to be_present
         expect(session[:oauth_uid]).not_to be_present
-        expect(response.body).to include("Temporary session expired.")
+        expect(flash[:warning]).to eq("Temporary session expired.")
       end
     end
   end
