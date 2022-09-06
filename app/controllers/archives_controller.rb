@@ -68,7 +68,7 @@ class ArchivesController < ApplicationController
     if session[:oauth_provider] == "bnet" && session[:oauth_uid] == authorization.bnet_id
       return authorization
     end
-    if current_user.present? && current_user.provider == "bnet"
+    if current_user.present? && current_user.provider == "bnet" && current_user.uid == authorization.bnet_id
       return authorization
     end
     if @current_user.present? &&
