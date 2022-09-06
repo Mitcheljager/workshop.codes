@@ -42,10 +42,10 @@ class ArchivesController < ApplicationController
       end
 
       create_activity(:delete_archive_post,
-        user_id: User.find_by!(username: "elo-hell-archive").id,
-        properties: {
+        {
           id: @post.id,
-          authorizing_bnet_uid: session[:oauth_uid]})
+          authorizing_bnet_uid: session[:oauth_uid]},
+        User.find_by!(username: "elo-hell-archive").id)
 
       flash[:notice] = "Post successfully deleted"
       redirect_to posts_url
