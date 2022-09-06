@@ -40,7 +40,7 @@ RSpec.describe "Archived posts controller", type: :request do
         }.to change { archive_post.user }
 
         expect(response).to redirect_to(post_path(code: archive_post.code))
-        expect(session[:flash]["flashes"].to_s).to include("Post successfully transferred")
+        expect(flash[:notice]).to eq("Post successfully transferred")
         expect(archive_post.user).to eq(User.find_by(username: @username))
       end
 
@@ -58,7 +58,7 @@ RSpec.describe "Archived posts controller", type: :request do
           end
         }.to change { User.count }.by(1)
         expect(response).to redirect_to(linked_users_path)
-        expect(/Your Battle\.net account [^ ]+ has been linked/).to match(session[:flash]["flashes"].to_s)
+        expect(flash[:alert][:message]).to eq("Your Battle.net account '#{@username}' has been linked.")
 
         expect {
           patch archive_path(code: archive_post.code)
@@ -66,7 +66,7 @@ RSpec.describe "Archived posts controller", type: :request do
         }.to change { archive_post.user }
 
         expect(response).to redirect_to(post_path(code: archive_post.code))
-        expect(session[:flash]["flashes"].to_s).to include("Post successfully transferred")
+        expect(flash[:notice]).to eq("Post successfully transferred")
         expect(archive_post.user).to eq(User.find_by(username: user.username))
       end
     end
@@ -142,7 +142,7 @@ RSpec.describe "Archived posts controller", type: :request do
         }.not_to change { archive_post.user }
 
         expect(response).to redirect_to(login_path)
-        expect(session[:flash]["flashes"]["error"]).to include("You need to be logged into an existing Workshop.codes account")
+        expect(flash[:error]).to eq("You need to be logged into an existing Workshop.codes account in order to transfer ownership")
       end
 
       it "does not work for a user who is not logged in" do
@@ -152,7 +152,7 @@ RSpec.describe "Archived posts controller", type: :request do
         }.not_to change { archive_post.user }
 
         expect(response).to redirect_to(post_path(code: archive_post.code))
-        expect(session[:flash]["flashes"]["error"]).to include("not authorized to perform that action")
+        expect(flash[:error]).to eq("You are not authorized to perform that action")
       end
 
       it "does not work for a user with an incorrect linked BNet account" do
