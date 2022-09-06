@@ -91,6 +91,11 @@ RSpec.describe "Temporary OAuth requests", type: :request do
       # Need to do one more redirect to emulate actual user experience,
       # since `obtain_temporary_oauth_session` only goes to callback and
       # doesn't follow the redirect to the provided path from there.
+      #
+      # This is fine in other tests because we don't care about the exact
+      # state of the cookies/session until after we make another request,
+      # but here we need the state of the cookies/session exactly as they
+      # would be in a client's browser.
       follow_redirect!
 
       session_cookie_key = Rails.application.config.session_options[:key]
