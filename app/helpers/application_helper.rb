@@ -91,4 +91,10 @@ module ApplicationHelper
       { title: t("account.navigation.logout"), url: logout_path, data: { prefetch: false } }
     ]
   end
+
+  def clean_up_session_auth
+    session.delete "oauth_provider"
+    session.delete "oauth_uid"
+    session.delete "oauth_expires_at"
+  end
 end

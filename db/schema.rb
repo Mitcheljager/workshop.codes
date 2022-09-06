@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_142511) do
+ActiveRecord::Schema.define(version: 2022_08_19_174203) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,6 +87,22 @@ ActiveRecord::Schema.define(version: 2022_08_18_142511) do
     t.datetime "started_at"
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
+  create_table "archive_authentication", force: :cascade do |t|
+    t.string "bnet_id"
+    t.string "post_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_code"], name: "index_archive_authentication_on_post_code"
+  end
+
+  create_table "archive_authorizations", force: :cascade do |t|
+    t.string "code", null: false
+    t.string "bnet_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["code"], name: "index_archive_authorizations_on_code", unique: true
   end
 
   create_table "badges", force: :cascade do |t|
@@ -302,7 +318,6 @@ ActiveRecord::Schema.define(version: 2022_08_18_142511) do
     t.integer "linked_id"
     t.datetime "feed_last_visited_at"
     t.string "uuid", limit: 36
-    t.boolean "simple_view"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

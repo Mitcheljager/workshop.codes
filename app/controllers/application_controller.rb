@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   before_action :redirect_default_locale
+  before_action :expire_oauth_session
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
   rescue_from AbstractController::ActionNotFound, with: :render_404
@@ -93,6 +94,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def expire_oauth_session
+    if (session[:oauth_uid].present? || session[:oauth_provider].present?) && session[:oauth_expires_at].blank?
+      clean_up_session_auth
+      flash[:error] = "Invalid temporary OAuth session."
+      return
+    end
+    if session[:oauth_expires_at].present? && Time.now > session[:oauth_expires_at]
+      clean_up_session_auth
+      flash[:warning] = "Temporary session expired."
+    end
+  end
 
   def redirect_non_www
     if /^www/.match(request.host)

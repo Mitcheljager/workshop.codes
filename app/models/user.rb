@@ -69,7 +69,6 @@ class User < ApplicationRecord
   validates :uuid, presence: true, uniqueness: true, length: { is: 36 }, format: { with: /\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i }
 
   after_find do
-    # binding.pry
     self.update_column(:uuid, SecureRandom.uuid) unless self.uuid.present?
   end
 
