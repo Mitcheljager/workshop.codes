@@ -1,0 +1,11 @@
+<% content_for :page_title, "Dictionary" %>
+
+<div class="action-header top-offset">
+  <h1 class="mt-0"><strong>Dictionary</strong></h1>
+</div>
+
+<h2><strong>Actions</strong></h2>
+<%= render collection: @actions.sort_by { |key, content| content["en-US"] }.to_h, partial: "item" %>
+
+<h2><strong>Values</strong></h2>
+<%= render collection: @values.sort_by { |key, content| content["en-US"] }.to_h, partial: "item" %>
