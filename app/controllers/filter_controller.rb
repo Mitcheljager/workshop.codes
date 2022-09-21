@@ -4,8 +4,8 @@ class FilterController < ApplicationController
     filtered_params = params.permit([:category, :code, :hero, :map, :from, :to, :sort, :expired, :author, :players, :language, :search, :page])
     respond_to do |format|
       format.html   { redirect_to filter_path(filtered_params), status: :moved_permanently }
-      format.js     { redirect_to filter_path(filtered_params), status: :moved_permanently }
-      format.json   { redirect_to filter_path(filtered_params), status: :moved_permanently }
+      format.js     { head :moved_permanently, location: filter_path(params: filtered_params, format: :js) }
+      format.json   { head :moved_permanently, location: filter_path(params: filtered_params, format: :json) }
     end
   end
 
