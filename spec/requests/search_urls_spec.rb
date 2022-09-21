@@ -24,7 +24,12 @@ RSpec.describe "SearchUrls", type: :request do
 
       expect(response.content_type).to start_with("application/json")
       expect(response).to have_http_status(:moved_permanently)
-      expect(response).to redirect_to(filter_path(params: { hero: "reinhardt" }))
+      expect(response).to redirect_to(filter_path(params: { hero: "reinhardt" }, format: :json))
+
+      follow_redirect!
+
+      expect(response.content_type).to start_with("application/json")
+      expect(response).to have_http_status(:ok)
     end
 
     it "redirects GET /search with no parameters to home" do
