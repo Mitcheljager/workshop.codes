@@ -328,7 +328,7 @@ en:
       content: Don't have an account?
       button: Create an account
     tos:
-      content_html: By creating or using a account, you are agreeing to the Workshop.codes %{terms_of_service}.
+      content_html: By creating or using an account, you are agreeing to the Workshop.codes %{terms_of_service}.
 
   account:
     navigation:
