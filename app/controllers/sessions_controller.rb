@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
     if should_authorize_only
       set_session_auth
       flash[:notice] = "You are now authenticated as #{auth_hash["info"]["name"] || auth_hash["info"]["battletag"]} for the next 30 minutes."
-      redirect_to "#{request.base_url}/#{omniauth_params["redirect_path"].presence || ""}"
+      path = omniauth_params["redirect_path"].presence || ""
+      redirect_to "#{request.base_url}#{path.starts_with?("/") ? "" : "/"}#{path}"
       return
     else
       clean_up_session_auth
