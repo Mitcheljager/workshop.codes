@@ -258,7 +258,7 @@ en:
       title: Archive Actions
       transfer: Transfer
       delete: Delete
-      authenticate: Authenticate
+      authenticate: Authenticate with Battle.net
 
   post:
     author: by
