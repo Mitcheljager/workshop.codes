@@ -11,6 +11,8 @@ class ArchivesController < ApplicationController
   end
 
   def show
+    potential_auth = ArchiveAuthorization.find_by(code: @post.code)
+    redirect_to(post_path(code: @post.code), flash: { error: "This post is not an archive post." }) unless potential_auth.present?
   end
 
   def update
