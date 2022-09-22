@@ -139,8 +139,7 @@ class SessionsController < ApplicationController
   end
 
   def should_authorize_only
-    current_user.blank? &&
-      omniauth_params.respond_to?(:[]) &&
+    omniauth_params.respond_to?(:[]) &&
       omniauth_params["auth_only_no_user"].present? &&
       auth_hash.present?
   end
