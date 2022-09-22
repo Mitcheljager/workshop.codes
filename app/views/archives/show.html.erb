@@ -11,15 +11,14 @@
 
 
   <% if @archive_authorization.present? %>
-    <% render "archive_controls", post: @post %>
+    <%= render "archive_controls", post: @post %>
   <% else %>
     <div class="well well--dark">
       <div class="w-100">
         <% if session[:oauth_uid].blank? %>
-          <%# Show explanation text %>
-          <% render "needs_auth" %>
+          <%= render "needs_auth" %>
         <% else %>
-          <% render "not_authorized" %>
+          <%= render "not_authorized" %>
         <% end %>
       </div>
     </div>
