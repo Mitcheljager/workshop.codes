@@ -253,6 +253,13 @@ en:
             <strong>This description is full Markdown enabled.</strong>
       submitting: Submitting...
 
+  archive:
+    navigation:
+      title: Archive Actions
+      transfer: Transfer
+      delete: Delete
+      authenticate: Authenticate
+
   post:
     author: by
     categories: Categories

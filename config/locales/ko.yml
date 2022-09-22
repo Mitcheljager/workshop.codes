@@ -244,6 +244,13 @@ ko:
     submit: 코멘트
     creator: 작성자
 
+  archive:
+    navigation:
+      title: 보관소 행위
+      transfer: 이양
+      delete: 삭제
+      authenticate: 인증하다
+
   report:
     action: 코드 신고
     loading: 로딩 ...

@@ -1,0 +1,34 @@
+<% content_for :page_title, t("archive.navigation.title") %>
+
+<div class="wrapper">
+  <div class="heading">
+    <h1 class="text-md-center text-pure-white"><%= @post.title %><br /><%= t("archive.navigation.title") %></h1>
+  </div>
+
+  <div class="well">
+    <div class="w-100">
+      <% if @archive_authorization.present? %>
+        <p class="mt-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum ex neque quis, architecto soluta voluptas vel quos qui, distinctio sed id explicabo eum ut ea magnam provident sunt eius officiis?</p>
+
+        <hr class="mt-1/4 mb-1/4">
+
+        <div class="flex">
+          <%= link_to archive_path, method: :patch, class: "button mr-1/4", data: { prefetch: false, confirm: "Are you sure you want to transfer this post to your account? \n\n This will transfer archive post: \n #{ @post.code } \n\n Title: \n #{ @post.title } \n\n to your account." } do %>
+            <%= t "archive.navigation.transfer" %>
+          <% end %>
+          <%= link_to archive_path, method: :destroy, class: "button button--danger", data: { prefetch: false, confirm: "Are you sure you want to delete this post? This cannot be undone. \n\n This will delete archive post: \n #{ @post.code } \n\n Title: \n #{ @post.title }" } do %>
+            <%= t "archive.navigation.delete" %>
+          <% end %>
+        </div>
+      <% else %>
+        <%# Show explanation text %>
+        <p class="mt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero reiciendis dolores eligendi provident ut qui saepe neque a vero itaque explicabo praesentium adipisci dolorem atque suscipit, deserunt aliquam dolore ipsam?</p>
+
+        <%= link_to "/auth/bnet?auth_only_no_user=1&redirect_path=#{archive_path(code: @post.code)}", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
+          <%= inline_svg_tag "bnet.svg", height: 24 %>
+          <%= t "archive.navigation.authenticate" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
