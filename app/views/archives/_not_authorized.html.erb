@@ -1,7 +1,0 @@
-<p class="mt-0 text-red">You are not authorized to take action on this archive post.</p>
-<p class="text-red">If you believe this is in error, try going to <a href="https://battle.net" target="_blank" rel="noreferrer noopener">Battle.net</a> and switching accounts there before trying to authenticate again.</p>
-
-<%= link_to "/auth/bnet?auth_only_no_user=1&redirect_path=#{archive_path(code: @post.code)}", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
-  <%= inline_svg_tag "bnet.svg", height: 24 %>
-  <%= t "archive.navigation.authenticate" %>
-<% end %>
