@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       set_session_auth
       flash[:notice] = "You are now authenticated as #{auth_hash["info"]["name"] || auth_hash["info"]["battletag"]} for the next 30 minutes."
       path = omniauth_params["redirect_path"].presence || ""
-      redirect_to "#{request.base_url}#{path.starts_with?("/") ? "" : "/"}#{path}"
+      redirect_to_path
       return
     else
       clean_up_session_auth
@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
 
       if omniauth_params.respond_to?(:[]) && omniauth_params["redirect_path"].present?
         path = omniauth_params["redirect_path"].presence || ""
-        redirect_to "#{request.base_url}#{path.starts_with?("/") ? "" : "/"}#{path}"
+        redirect_to_path path
         return
       end
 
@@ -103,6 +103,13 @@ class SessionsController < ApplicationController
 
   def set_return_path
     session[:return_to] = request.referrer
+  end
+
+  def redirect_to_path(path)
+    unless path.starts_with? "/" do
+      path = "/" + path
+    end
+    redirect_to(request.base_url + path)
   end
 
   def link_user
