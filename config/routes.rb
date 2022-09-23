@@ -115,10 +115,10 @@ Rails.application.routes.draw do
     get "(page/:page)", to: "posts#index"
     get "search", to: "search#show", as: "filter"
     post "search", to: "search#index", as: "search_post"
-    get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(overwatch-2/:overwatch_2)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", constraints: FilterContraints
-    post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(overwatch-2/:overwatch_2)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#redirect_to_query_params"
-    get "overwatch-2", to: "filter#index", overwatch_2: "true", as: "overwatch_2"
+    get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", constraints: FilterContraints
+    post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#redirect_to_query_params"
     get "get-verified-users", to: "filter#get_verified_users"
+    get "overwatch-2", to: redirect("/", status: 301)
 
     resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :edit, :update, :destroy]
     get "c/:nice_url(/page/:page)", to: "collections#show"

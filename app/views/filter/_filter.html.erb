@@ -100,14 +100,6 @@
               <%= check_box_tag :exclude_expired, "", params[:expired] == "true", data: { filter_type: "exclude-expired" }, autocomplete: "off" %>
             </div>
           </div>
-
-          <div class="filter__item">
-            <%= label_tag :overwatch_2, t("filter.overwatch_2.label_html"), class: "filter__label cursor-pointer" %>
-
-            <div class="checkbox ml-1/4">
-              <%= check_box_tag :overwatch_2, "", params[:overwatch_2] == "true", data: { filter_type: "overwatch-2" }, autocomplete: "off" %>
-            </div>
-          </div>
         </div>
 
         <div class="filter__group">

@@ -12,10 +12,6 @@
 
     <div class="logo-background logo-background--overwatch">
       <%= render "filter/quick_filter" %>
-
-      <% if ENV["BANNER_ROOT"] == "OW2" %>
-        <%= render "application/banners/overwatch_2" %>
-      <% end %>
     </div>
 
     <%= render "user_recommendations" if current_user && current_user.recommended_posts.any? %>
