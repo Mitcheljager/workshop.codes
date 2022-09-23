@@ -6,6 +6,10 @@
   text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .text-md-right {
   @include media-min(md) {
     text-align: right;
