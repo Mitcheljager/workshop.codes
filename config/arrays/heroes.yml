@@ -181,6 +181,13 @@
     en: Support
     ko: 지원
 -
+  en: Kiriko
+  ko: 키리코
+  overwatch_2: true
+  category:
+    en: Support
+    ko: 지원
+-
   en: Lúcio
   ko: 루시우
   category:
