@@ -4,8 +4,20 @@
 
     <p>Transferring this post will make you the owner of this post. Once the post is transferred, the post will no longer be marked as an archive post and you will be able to manage the post as if it were a normal post.</p>
 
-    <%= link_to archive_path(code: post.code), method: :patch, class: "button w-100 mt-1/4", data: { prefetch: false, confirm: "Are you sure you want to transfer this post to your account? \n\n This will transfer archive post: \n #{ post.code } \n\n Title: \n #{ post.title } \n\n to your account." } do %>
-      <%= t "archive.navigation.transfer" %>
+    <% if current_user.present? %>
+      <p class="text-orange"><b>Transfers are irreversible.</b> Make sure that the Workshop.codes account you are logged into right now is the one you want to own this post after the transfer is complete.</p>
+
+      <%= link_to archive_path(code: post.code), method: :patch, class: "button w-100 mt-1/4", data: { prefetch: false, confirm: "Are you sure you want to transfer this post to your account? \n\n This will transfer archive post: \n #{ post.code } \n\n Title: \n #{ post.title } \n\n to your account." } do %>
+        <%= t "archive.navigation.transfer" %>
+      <% end %>
+    <% else %>
+      <p class="text-red">You must be logged into a Workshop.codes account in order to transfer this post to yourself.</p>
+      <p class="text-orange">You can automatically log into Workshop.codes via Battle.net by clicking the button below. You can also <%= link_to "log into any Workshop.codes account", login_path %> and return here.</p>
+
+      <%= link_to "/auth/bnet?redirect_path=#{archive_path(code: @post.code)}", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
+        <%= inline_svg_tag "bnet.svg", height: 24 %>
+        <%= t "sessions.login.battle_net" %>
+      <% end %>
     <% end %>
   </div>
   <div class="form-group mt-1/4 sm:mt-0">

@@ -21,14 +21,24 @@
         <% else %>
           <p class="mt-0 text-red">You are not authorized to take action on this archive post.</p>
           <p class="text-red">If you believe this is in error, you may need to <a href="https://battle.net" target="_blank" rel="noreferrer noopener">go to Battle.net</a> and switch accounts there before trying to authenticate again.</p>
-          <% unless current_user.present? %>
-            <p class="text-red">Alternatively, you can <%= link_to "log in to Workshop.codes", login_path %> via the correct Battle.net account to authenticate.</p>
-          <% end %>
         <% end %>
 
         <%= link_to "/auth/bnet?auth_only_no_user=1&redirect_path=#{archive_path(code: @post.code)}", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
           <%= t "archive.navigation.authenticate" %>
+        <% end %>
+
+
+        <% if current_user.present? %>
+          <hr class="mt-1/4 mb-1/4">
+
+          <p class="text-orange">Your current Workshop.codes account is not associated with the Battle.net account which originally created this post.</p>
+          <p>If you were not expecting this to be the case, double-check that you have logged into the right Workshop.codes account and that at least one of the following two things are true:</p>
+
+          <ul>
+            <li>You logged into this Workshop.codes account via the correct Battle.net account, or</li>
+            <li>You have linked the correct Battle.net account to your current Workshop.codes account</li>
+          </ul>
         <% end %>
       </div>
     </div>
