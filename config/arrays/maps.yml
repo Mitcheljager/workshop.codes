@@ -170,6 +170,14 @@
     ko: 쟁탈
   slug: oasis
 -
+  en: Colosseo
+  ko: 콜로세오
+  overwatch_2: true
+  type:
+    en: Push
+    ko: 밀기
+  slug: rome
+-
   en: New Queen Street
   ko: 뉴 퀸 스트리트
   overwatch_2: true
@@ -178,13 +186,13 @@
     ko: 밀기
   slug: toronto
 -
-  en: Colosseo
-  ko: 콜로세오
+  en: Esperança
+  ko: 희망
   overwatch_2: true
   type:
     en: Push
     ko: 밀기
-  slug: rome
+  slug: esperanca
 -
   en: Black Forest
   ko: 검은 숲
