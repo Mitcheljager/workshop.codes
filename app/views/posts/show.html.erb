@@ -43,11 +43,12 @@
       <%= tabs_content_tag("description", "", "") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
 
-        <% if @post.description.present? || @post.source_derivs.any? %>
+        <% if @post.description.present? || @post.source_derivs.any? || @archive_authorization.present? %>
           <div class="item__content item__description">
             <%= sanitized_markdown(@post.description) %>
 
             <%= render "derivatives/derivatives" if @post.source_derivs.any? %>
+            <%= render "archive", post: @post if @archive_authorization.present? %>
           </div>
         <% end %>
 

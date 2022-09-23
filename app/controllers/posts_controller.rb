@@ -64,6 +64,7 @@ class PostsController < ApplicationController
         @derivations_count = @post.derivations.public?.size
 
         set_post_images
+        @archive_authorization = ArchiveAuthorization.find_by(code: @post.code)
       }
       format.json {
         set_request_headers
