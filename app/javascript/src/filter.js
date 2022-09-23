@@ -30,7 +30,6 @@ function buildFilterPath(event) {
     "map": filterValue("maps"),
     "from": filterValue("from"),
     "to": filterValue("to"),
-    "expired": document.querySelector("[data-filter-type='exclude-expired']").checked ? "true" : "",
     "author": filterValue("author"),
     "players": filterValue("players"),
     "search": encodeURIComponent(document.querySelector("input[name='query']").value),
