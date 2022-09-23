@@ -53,6 +53,12 @@ class SessionsController < ApplicationController
       create_activity(:login, @user.id)
       ahoy.authenticate(@user)
 
+      if omniauth_params.respond_to?(:[]) && omniauth_params["redirect_path"].present?
+        path = omniauth_params["redirect_path"].presence || ""
+        redirect_to "#{request.base_url}#{path.starts_with?("/") ? "" : "/"}#{path}"
+        return
+      end
+
       redirect_to(session[:return_to] || root_path, fallback_location: root_path)
     else
       if auth_hash.present?
