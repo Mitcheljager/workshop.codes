@@ -20,9 +20,9 @@
           <p>Authenticating via the button below will not permanently store any of your data on our servers.</p>
         <% else %>
           <p class="mt-0 text-red">You are not authorized to take action on this archive post.</p>
-          <p class="text-red">If you believe this is in error, try going to <a href="https://battle.net" target="_blank" rel="noreferrer noopener">Battle.net</a> and switching accounts there before trying to authenticate again.</p>
+          <p class="text-red">If you believe this is in error, you may need to <a href="https://battle.net" target="_blank" rel="noreferrer noopener">go to Battle.net</a> and switch accounts there before trying to authenticate again.</p>
           <% unless current_user.present? %>
-            <p class="text-red">Alternatively, you can try <%= link_to "logging into", login_path %> Workshop.codes with the correct Battle.net account.</p>
+            <p class="text-red">Alternatively, you can <%= link_to "log in to Workshop.codes", login_path %> via the correct Battle.net account to authenticate.</p>
           <% end %>
         <% end %>
 
