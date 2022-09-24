@@ -182,7 +182,8 @@ class Post < ApplicationRecord
   end
 
   def as_indexed_json(options={})
-    self.as_json(include: { user: { only: :username } } )
+    self.as_json(only: [:code, :title, :tags, :categories, :maps, :heroes, :hotness],
+                 include: { user: { only: :username } } )
   end
 
   def self.locale
