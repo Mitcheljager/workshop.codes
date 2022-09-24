@@ -1,0 +1,14 @@
+<% content_for :page_title, "#{ t("navigation.recent") }" %>
+
+<div class="heading">
+  <h1>
+    <% if params[:page] %>
+      <%= t("posts.index.recent.title_html") %>
+      <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %>
+    <% else %>
+      <%= t("posts.index.recent.title_html") %>
+    <% end %>
+  </h1>
+</div>
+
+<%= render "posts" %>
