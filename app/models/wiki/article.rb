@@ -38,7 +38,7 @@ class Wiki::Article < ApplicationRecord
           fuzziness: "AUTO"
         }
       }
-    })
+    }).records.ids
   end
 
   def as_indexed_json(options={})
