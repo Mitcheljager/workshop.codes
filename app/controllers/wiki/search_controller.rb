@@ -15,9 +15,9 @@ class Wiki::SearchController < Wiki::BaseController
   def index
     ids = Wiki::Article.search(params[:query])
     articles = Wiki::Article.where(id: ids)
-    groups = articles.results.map { |article| article.group_id }.uniq
+    groups = articles.map { |article| article.group_id }.uniq
     latest_articles = Wiki::Article.where(group_id: groups).group(:group_id).maximum(:id).values
-    @articles = articles.records.approved.where(id: latest_articles)
+    @articles = articles.approved.where(id: latest_articles)
 
     respond_to do |format|
       format.html
