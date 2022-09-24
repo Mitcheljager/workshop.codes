@@ -60,6 +60,7 @@ When 'I try to {word} a/the post titled {string}' do |action, title|
     fill_in_report_form
     click_on 'Submit'
     find('[data-role="report-alert"]') # Force Capybara to wait until report alert appears
+
   else
     fail "Don't know how to perform #{ action } on posts"
   end
@@ -77,7 +78,7 @@ Then "I should be on the page for the post titled {string}" do |title|
 end
 
 Then /there should (not)? be a post titled "([^"]+)"/ do |negate, title|
-  expect(Post.find_by_title(title).present?).not_to eq(negate.present?)
+  expect(Post.find_by_title(title).present?).to eq(negate.blank?)
 end
 
 def fill_in_post_form
