@@ -30,16 +30,11 @@ class PostsController < ApplicationController
 
   def index
     @hot_posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(10) unless params[:page].present?
-    @posts = Post.includes(:user).select_overview_columns.public?.order(created_at: :desc).page params[:page]
+    latest_posts
+  end
 
-    respond_to do |format|
-      format.html
-      format.js { render "posts/infinite_scroll_posts" }
-      format.json {
-        set_request_headers
-        render json: @posts
-      }
-    end
+  def latest
+    latest_posts
   end
 
   def show
@@ -231,6 +226,19 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by_code(params[:code])
+  end
+
+  def latest_posts
+    @posts = Post.includes(:user).select_overview_columns.public?.order(created_at: :desc).page params[:page]
+
+    respond_to do |format|
+      format.html
+      format.js { render "posts/infinite_scroll_posts" }
+      format.json {
+        set_request_headers
+        render json: @posts
+      }
+    end
   end
 
   def set_post_images
