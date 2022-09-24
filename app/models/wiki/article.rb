@@ -42,6 +42,6 @@ class Wiki::Article < ApplicationRecord
   end
 
   def as_indexed_json(options={})
-    self.as_json(include: { category: { only: :title } } )
+    self.as_json(only: [:title, :tags], include: { category: { only: :title } } )
   end
 end
