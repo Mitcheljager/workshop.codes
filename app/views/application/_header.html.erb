@@ -6,7 +6,7 @@
 
   <div class="header__content" data-role="navigation">
     <nav class="navigation">
-      <%= link_to t("navigation.recent"), posts_path(1), class: "navigation__item #{ "navigation__item--active" if controller_name == "posts" && action_name == "index" && params[:page] }" %>
+      <%= link_to t("navigation.recent"), latest_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "posts" && action_name == "latest" }" %>
       <%= link_to t("navigation.on_fire"), on_fire_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "on_fire" }" %>
       <%= link_to t("navigation.wiki"), wiki_root_path, class: "navigation__item #{ "navigation__item--active" if is_wiki? }" %>
       <%= link_to inline_svg_tag("discord.svg"), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "navigation__item mt-1/4 mbl:mt-1/8", aria: { label: "Join the Workhsop.codes Discord" } %>

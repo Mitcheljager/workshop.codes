@@ -112,7 +112,9 @@ Rails.application.routes.draw do
     get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
-    get "(page/:page)", to: "posts#index"
+    get "latest", to: "posts#latest", as: "latest"
+    get "page/1", to: redirect("/latest", status: 301)
+
     get "search", to: "search#show", as: "filter"
     post "search", to: "search#index", as: "search_post"
     get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(overwatch-2/:overwatch_2)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", constraints: FilterContraints
