@@ -32,3 +32,10 @@ Then "the user (named ){string} should not have any notifications" do |username|
   user = User.find_by(username: username)
   expect(user.notifications.count).to eq(0)
 end
+
+Then "I should own the post titled {string}" do |post_title|
+  post = Post.find_by(title: post_title)
+  expect(post).to be_present
+
+  expect(post.user).to eq(@current_user)
+end
