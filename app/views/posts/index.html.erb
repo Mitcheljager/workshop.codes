@@ -10,9 +10,9 @@
 
   <div class="logo-background logo-background--overwatch">
     <%= render "filter/quick_filter" %>
-
-    <% if ENV["BANNER_ROOT"] == "OW2" %>
-      <%= render "application/banners/overwatch_2" %>
+    
+    <% if ENV["BANNER_ROOT"] == "Workshop_Disabled" %>
+      <%= render "application/banners/workshop_disabled" %>
     <% end %>
   </div>
 

@@ -14,7 +14,6 @@
       Something went wrong while performing your search.
     <% else %>
       Workshop Codes
-      <% if params[:overwatch_2] %> for  <strong class="text-overwatch-2">Overwatch 2</strong> <% end %>
       <% if params[:search] %> for <strong><%= CGI.unescape(params[:search]) %></strong> <% end %>
       <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
       <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>

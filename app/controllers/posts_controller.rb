@@ -407,7 +407,6 @@ class PostsController < ApplicationController
     image = @ordered_images.present? && @ordered_images.first.present? ? url_for(@ordered_images.first.variant(quality: 95).processed.url) : ""
     avatar = @post.user.profile_image.present? ? url_for(@post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed.url) : ""
     content = ActionController::Base.helpers.strip_tags(post.description).truncate(type == "New" ? 500 : 250)
-    overwatch_2 = post.overwatch_2_compatible?
 
     embed = Discord::Embed.new do
       color "#3fbf74"
@@ -417,7 +416,6 @@ class PostsController < ApplicationController
       url path
       description content
       add_field name: "Update notes", value: revision.description.truncate(400) if revision && revision.description.present?
-      add_field name: "Game Version", value: overwatch_2 ? "Overwatch 2 Beta" : "Live"
       add_field name: "Code", value: post.code.upcase
       footer text: "Elo Hell Esports", icon_url: "https://elohell.gg/media/img/logos/Elo-Hell-Logo_I-C-Dark.png"
     end

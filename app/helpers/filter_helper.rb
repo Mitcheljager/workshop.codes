@@ -4,7 +4,6 @@ module FilterHelper
     params[:to] ||
     params[:sort] ||
     params[:expired] ||
-    params[:overwatch_2] ||
     params[:map] ||
     params[:hero] ||
     params[:category] ||

@@ -70,9 +70,7 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="filter__group">
           <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.sort.label") %>">
             <% if params[:search] && !params[:sort] %>
               <%= link_to "Relevancy", "#",
@@ -90,22 +88,6 @@
               <%= link_to t("filter.sort.on_fire"), build_filter_path(:sort, "on-fire"), class: "dropdown__item", data: { action: "add-filter", value: "on-fire" } %>
               <%= link_to t("filter.sort.favorites"), build_filter_path(:sort, "favorites"), class: "dropdown__item", data: { action: "add-filter", value: "favorites" } %>
               <%= link_to t("filter.sort.views"), build_filter_path(:sort, "views"), class: "dropdown__item", data: { action: "add-filter", value: "views" } %>
-            </div>
-          </div>
-
-          <div class="filter__item">
-            <%= label_tag :exclude_expired, t("filter.exclude_expired.label"), class: "filter__label cursor-pointer" %>
-
-            <div class="checkbox ml-1/4">
-              <%= check_box_tag :exclude_expired, "", params[:expired] == "true", data: { filter_type: "exclude-expired" }, autocomplete: "off" %>
-            </div>
-          </div>
-
-          <div class="filter__item">
-            <%= label_tag :overwatch_2, t("filter.overwatch_2.label_html"), class: "filter__label cursor-pointer" %>
-
-            <div class="checkbox ml-1/4">
-              <%= check_box_tag :overwatch_2, "", params[:overwatch_2] == "true", data: { filter_type: "overwatch-2" }, autocomplete: "off" %>
             </div>
           </div>
         </div>

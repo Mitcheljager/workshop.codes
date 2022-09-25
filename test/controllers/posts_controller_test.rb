@@ -8,7 +8,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @posts = posts
     @post = posts(:post_one)
-    @post_overwatch_2 = posts(:post_overwatch_2)
   end
 
   test "should get index" do
@@ -78,15 +77,5 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "Post.count", -1 do
       first(".item--small").click_link "Delete"
     end
-  end
-
-  test "A post marked as Overwatch 2 Compatible should indicate so on the overview page" do
-    visit posts_url
-    find("[data-code='#{@post_overwatch_2.code}']").has_content? "OW2"
-  end
-
-  test "A post marked as Overwatch 2 Compatible should indicate so on the show page" do
-    visit post_url(@post_overwatch_2.code)
-    first(".code").has_content? "OW2"
   end
 end
