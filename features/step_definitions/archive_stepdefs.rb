@@ -15,18 +15,16 @@ When 'I try to {word} the archive post titled {string}' do |action, title|
   post = Post.find_by_title(title)
   expect(post).to be_present
 
-  case action
+  visit post_path(code: post.code)
+  click_on "Archive Actions"
 
-    when 'transfer'
-      visit post_path(code: post.code)
-      click_on "Archive Actions"
-
-      if page.has_link? "Authenticate with Battle.net"
-        raise "Was not authenticated before visiting"
-      end
-
-      click_on "Transfer"
+  if page.has_link? "Authenticate with Battle.net"
+    stub_oauth_flow("bnet", @oauth_accounts["bnet"][:username]) do
+      click_on "Authenticate with Battle.net"
+    end
   end
+
+  click_on action.titleize
 end
 
 When 'I visit the archive actions page for the post titled {string}' do |title|
