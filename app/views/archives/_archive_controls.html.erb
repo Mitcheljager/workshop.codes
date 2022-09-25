@@ -14,7 +14,7 @@
       <% end %>
     <% else %>
       <p class="text-red mt-0">You must be logged into a Workshop.codes account in order to transfer this post to yourself.</p>
-      <p class="text-orange mt-0">You can automatically log into Workshop.codes via Battle.net by clicking the button below. You can also <%= link_to "log into any Workshop.codes account", login_path %> and return here.</p>
+      <p class="text-orange mt-0">You can automatically log into Workshop.codes via Battle.net by clicking the button below. You can also <%= link_to "log into any Workshop.codes account", login_path, class: "text-white" %> and return here.</p>
 
       <%= link_to "/auth/bnet?redirect_path=#{archive_path(code: @post.code)}", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
         <%= inline_svg_tag "bnet.svg", height: 24 %>
