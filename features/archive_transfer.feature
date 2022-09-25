@@ -25,7 +25,9 @@ Feature: Transferring archive posts
 
   Scenario: Temporarily authorized user sees notice to create account
     Given a legacy authorization for the post titled "Junkertown Treasure Hunt" and user ID 1234567890
-    When I try to transfer the archive post titled "Junkertown Treasure Hunt"
+    When I visit the archive actions page for the post titled "Junkertown Treasure Hunt"
+    And I click the Authenticate with Battle.net button
+    Then I should see "Transfer Post"
     And I should see "You must be logged into a Workshop.codes account in order to transfer this post to yourself."
 
   Scenario: Lack of authorization prevents transfer of post
