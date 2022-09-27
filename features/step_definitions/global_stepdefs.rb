@@ -5,3 +5,7 @@ end
 Then "I should see a notification saying {string}" do |string|
   page.find(".alerts__alert", text: string)
 end
+
+When "I click (on ){string}" do |string|
+  click_on string
+end

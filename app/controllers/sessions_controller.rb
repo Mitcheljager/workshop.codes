@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
     if should_authorize_only
       set_session_auth
       flash[:notice] = "You are now authenticated as #{auth_hash["info"]["name"] || auth_hash["info"]["battletag"]} for the next 30 minutes."
-      redirect_to "#{request.base_url}/#{omniauth_params["redirect_path"].presence || ""}"
+      path = omniauth_params["redirect_path"].presence || ""
+      redirect_to_path path
       return
     else
       clean_up_session_auth
@@ -51,6 +52,12 @@ class SessionsController < ApplicationController
 
       create_activity(:login, @user.id)
       ahoy.authenticate(@user)
+
+      if omniauth_params.respond_to?(:[]) && omniauth_params["redirect_path"].present?
+        path = omniauth_params["redirect_path"].presence || ""
+        redirect_to_path path
+        return
+      end
 
       redirect_to(session[:return_to] || root_path, fallback_location: root_path)
     else
@@ -98,6 +105,13 @@ class SessionsController < ApplicationController
     session[:return_to] = request.referrer
   end
 
+  def redirect_to_path(path)
+    unless path.starts_with? "/"
+      path = "/" + path
+    end
+    redirect_to(request.base_url + path)
+  end
+
   def link_user
     if User.find_by(uid: auth_hash["uid"])
       # User succesfully logged in with OAuth but an account with their uid already exists
@@ -138,8 +152,7 @@ class SessionsController < ApplicationController
   end
 
   def should_authorize_only
-    current_user.blank? &&
-      omniauth_params.respond_to?(:[]) &&
+    omniauth_params.respond_to?(:[]) &&
       omniauth_params["auth_only_no_user"].present? &&
       auth_hash.present?
   end

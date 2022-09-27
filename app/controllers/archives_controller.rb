@@ -1,12 +1,18 @@
 class ArchivesController < ApplicationController
   before_action :set_post
-
   before_action do
     @archive_authorization = get_archive_authorization
+  end
+  before_action only: [:update, :destroy] do
     unless @archive_authorization.present?
       flash[:error] = "You are not authorized to perform that action"
       redirect_back fallback_location: post_path(@post.code)
     end
+  end
+
+  def show
+    potential_auth = ArchiveAuthorization.find_by(code: @post.code)
+    redirect_to(post_path(code: @post.code), flash: { error: "This post is not an archive post." }) unless potential_auth.present?
   end
 
   def update
