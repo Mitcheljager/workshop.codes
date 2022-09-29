@@ -70,6 +70,14 @@
     </url>
   <% end %>
 
+  <% @articles.each do |article| %>
+    <url>
+      <loc><%= article_url(article.slug) %></loc>
+      <lastmod><%= article.updated_at.iso8601 %></lastmod>
+      <priority>0.90</priority>
+    </url>
+  <% end %>
+
   <% @collections.each do |collection| %>
     <url>
       <loc><%= collection_url(collection.nice_url) %></loc>
@@ -99,4 +107,5 @@
       <priority>0.85</priority>
     </url>
   <% end %>
+
 </urlset>
