@@ -1,18 +1,34 @@
 <%= form_for @article, html: { autocomplete: "off" } do |form| %>
+  <%= render "form_errors", errors: @article.errors if @article.errors.any? %>
+
   <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
 
   <div class="form-group">
     <%= form.label :title, class: "form-label" %>
+
+    <div class="form-hint mb-1/8">
+      Will also be used for slug.
+    </div>
+
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
   </div>
 
   <div class="form-group mt-1/1">
     <%= form.label :cover_image, class: "form-label" %>
+
+    <div class="form-hint mb-0">
+      Not required but heavily encouraged for SEO.
+    </div>
+
     <%= form.file_field :cover_image, direct_upload: true %>
   </div>
 
   <div class="form-group mt-1/1">
     <%= form.label :content, class: "form-label" %>
+
+    <div class="form-hint mb-1/8">
+      Full markdown enabled
+    </div>
 
     <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", max_length: WIKI_ARTICLE_CONTENT_LIMIT } %>
   </div>

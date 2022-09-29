@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   def show
+    @article = Article.find_by_slug(params[:slug])
   end
 
   def new
@@ -7,6 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    @article = Article.find_by_slug(params[:slug])
   end
 
   def create
@@ -23,17 +25,18 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:slug])
+
+    if @article.save
+      flash[:notice] = "Article successfully updated"
+      redirect_to article_path(@article.slug)
+    else
+      render :edit
+    end
   end
 
   private
 
   def article_params
     params.require(:article).permit(:title, :content, :cover_image, images: [])
-
-    if @article.save
-      redirect_to article_path(@article.slug)
-    else
-      render :edit
-    end
   end
 end

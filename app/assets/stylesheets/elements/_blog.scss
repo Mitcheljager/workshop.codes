@@ -1,0 +1,34 @@
+.blog {
+  margin-top: $margin * 2;
+}
+
+.blog__title {
+  grid-area: title;
+  margin: 0 0 $margin / 2;
+  font-size: clamp(2.5rem, 7vw, 3rem);
+  line-height: 1.1em;
+  text-align: center;
+}
+
+.blog__subtitle {
+  display: block;
+  margin: 1rem 0 0;
+  color: $text-color;
+  font-size: $font-size-small;
+  line-height: 1.15em;
+}
+
+.blog__image {
+  margin-bottom: $margin / 2;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.blog__content {
+  max-width: 640px;
+  margin: 0 auto;
+}

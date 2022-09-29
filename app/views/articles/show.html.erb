@@ -1,2 +1,26 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<% content_for :page_title, @article.title %>
+<% content_for :og_description, strip_tags(markdown(@article.content || "")).truncate(200).gsub("\n"," ") %>
+<% content_for :og_summary_small, "true" %>
+
+<article class="blog">
+  <h1 class="blog__title">
+    <%= @article.title %>
+
+    <small class="blog__subtitle mb-0" title="<%= @article.updated_at %>">
+      Last updated <%= @article.updated_at.strftime("%B %d, %Y") %>
+    </small>
+  </h1>
+
+  <div class="blog__image">
+    <% if @article.cover_image.attached? %>
+      <% begin %>
+        <%= image_tag rails_public_blob_url(@article.cover_image.variant(quality: 95, resize_to_fill: [900, 506]).processed), loading: "lazy", aria: { label: @article.cover_image }, width: 900, height: 506 %>
+      <% rescue %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="blog__content">
+    <%= sanitized_markdown(@article.content) %>
+  </div>
+</article>
