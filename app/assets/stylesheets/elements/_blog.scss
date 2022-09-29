@@ -29,6 +29,17 @@
 }
 
 .blog__content {
-  max-width: 640px;
+  max-width: map-get($media-min-widths, sm);
   margin: 0 auto;
+
+  img {
+    width: 100%;
+    max-width: map-get($media-min-widths, lg);
+    margin: $margin / 2 0;
+
+    @include media-min(xl) {
+      width: 100vw;
+      margin-left: calc((#{ map-get($media-min-widths, lg) } - #{ map-get($media-min-widths, sm) }) / -2);
+    }
+  }
 }

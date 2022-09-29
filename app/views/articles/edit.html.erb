@@ -2,4 +2,4 @@
 
 <h1 class="heading">Edit Article</h1>
 
-<%= render "form" %>
+<%= render "form", url: article_path(@article.slug) %>

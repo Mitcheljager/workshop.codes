@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+  before_action only: [:new, :create, :edit, :update, :destroy] do
+    redirect_to root_path unless is_admin?(current_user)
+  end
+
   def show
     @article = Article.find_by_slug(params[:slug])
   end
@@ -24,9 +28,9 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:slug])
+    @article = Article.find_by_slug(params[:slug])
 
-    if @article.save
+    if @article.update(article_params)
       flash[:notice] = "Article successfully updated"
       redirect_to article_path(@article.slug)
     else
