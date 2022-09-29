@@ -1,0 +1,21 @@
+<%= form_for @article, html: { autocomplete: "off" } do |form| %>
+  <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
+
+  <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
+  </div>
+
+  <div class="form-group mt-1/1">
+    <%= form.label :cover_image, class: "form-label" %>
+    <%= form.file_field :cover_image, direct_upload: true %>
+  </div>
+
+  <div class="form-group mt-1/1">
+    <%= form.label :content, class: "form-label" %>
+
+    <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", max_length: WIKI_ARTICLE_CONTENT_LIMIT } %>
+  </div>
+
+  <%= submit_tag "Submit", class: "button w-100 mt-1/1 lg:mt-0", data: { disable_with: "Submitting..." } %>
+<% end %>
