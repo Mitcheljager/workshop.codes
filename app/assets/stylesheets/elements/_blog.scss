@@ -1,11 +1,15 @@
 .blog {
-  margin-top: $margin * 3;
+  margin-top: $margin * 2;
+
+  @include media-min(sm) {
+    margin-top: $margin * 3;
+  }
 }
 
 .blog__title {
   grid-area: title;
   margin: 0 0 $margin / 2;
-  font-size: clamp(2.5rem, 7vw, 3rem);
+  font-size: clamp(2.25rem, 7vw, 3rem);
   line-height: 1.1em;
   text-align: center;
 }
