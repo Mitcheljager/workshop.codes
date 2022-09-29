@@ -1,5 +1,5 @@
 .blog {
-  margin-top: $margin * 2;
+  margin-top: $margin * 3;
 }
 
 .blog__title {
@@ -32,7 +32,7 @@
   max-width: map-get($media-min-widths, sm);
   margin: 0 auto;
 
-  img {
+  img:not([width]) {
     width: 100%;
     max-width: map-get($media-min-widths, lg);
     margin: $margin / 2 0;
