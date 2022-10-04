@@ -33,10 +33,5 @@ Disallow: /
 User-agent:*
 Allow: /rails/active_storage/*
 
-Disallow: */to/
-Disallow: */from/
-Disallow: */sort/
-Disallow: */exclude-expired/
-Disallow: */*/*/*/
 Disallow: /wiki/search/*
 Disallow: /wiki/edits
