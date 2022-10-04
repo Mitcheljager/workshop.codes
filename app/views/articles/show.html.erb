@@ -15,13 +15,13 @@
   <div class="blog__image">
     <% if @article.cover_image.attached? %>
       <% begin %>
-        <%= image_tag rails_public_blob_url(@article.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed), loading: "lazy", aria: { label: @article.cover_image }, width: 900, height: 500 %>
+        <%= image_tag rails_public_blob_url(@article.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed), loading: "lazy", alt: @article.title, width: 900, height: 500 %>
       <% rescue %>
       <% end %>
     <% end %>
   </div>
 
-  <div class="blog__content">
+  <div class="blog__content item__description">
     <%= sanitized_markdown(@article.content) %>
   </div>
 </article>
