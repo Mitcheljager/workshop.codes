@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_19_174203) do
+ActiveRecord::Schema.define(version: 2022_09_29_193454) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -96,6 +96,14 @@ ActiveRecord::Schema.define(version: 2022_08_19_174203) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_archive_authorizations_on_code", unique: true
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "badges", force: :cascade do |t|

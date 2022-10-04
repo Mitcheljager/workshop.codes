@@ -1,0 +1,5 @@
+<% content_for :page_title, "Edit Article" %>
+
+<h1 class="heading">Edit Article</h1>
+
+<%= render "form", url: article_path(@article.slug) %>

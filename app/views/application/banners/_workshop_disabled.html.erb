@@ -9,5 +9,11 @@
     <span>
       <%= t("banner.workshop_disabled.content_html") %>
     </span>
+
+    <% if ENV["BANNER_ROOT_URL"] %>
+      <div>
+        <%= link_to "Read more", ENV["BANNER_ROOT_URL"], class: "button button--link pb-0" %>
+      </div>
+    <% end %>
   </div>
 </div>
