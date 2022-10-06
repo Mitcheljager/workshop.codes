@@ -1,0 +1,49 @@
+<script>
+  import { onMount } from "svelte"
+  import EditorItem from "./EditorItem.svelte"
+  import CodeMirror from "./CodeMirror.svelte"
+  import { items, currentItemIndex } from "../../stores/editor.js"
+
+  export let values
+  export let actions
+
+  let completionsMap = []
+
+  onMount(() => {
+    completionsMap = parseKeywords()
+  })
+
+  function parseKeywords() {
+    const mappedValues = Object.values(values).map(v => {
+      return { label: v["en-US"], type: "keyword", info: v.description }
+    })
+
+    const mappedActions = Object.values(actions).map(a => {
+      return { label: a["en-US"], type: "function", info: a.description }
+    })
+
+    return [...mappedValues, ...mappedActions]
+  }
+</script>
+
+<div class="editor">
+  <div class="editor__top">
+
+  </div>
+
+  <div class="editor__aside">
+    <div class="editor__list">
+      {#each $items || [] as item, index}
+        <EditorItem {item} {index} />
+      {/each}
+    </div>
+  </div>
+
+  <div class="editor__content">
+    <CodeMirror content={$items[$currentItemIndex]?.content || ""} {completionsMap} />
+  </div>
+
+  <div class="editor__popout">
+
+  </div>
+</div>

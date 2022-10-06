@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "tos", to: "pages#tos", as: "tos"
   get "explanation", to: "pages#explanation"
 
+  get "editor", to: "editor#index"
+
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
 
   namespace :admin do

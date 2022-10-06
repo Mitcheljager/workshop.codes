@@ -1,0 +1,67 @@
+$sidebar-width: 300px;
+$popout-width: 300px;
+$top-height: 4rem;
+
+.editor {
+  display: grid;
+  grid-template: "top top top" "aside content popout";
+  grid-template-rows: $top-height auto;
+  grid-template-columns: $sidebar-width auto $popout-width;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: $bg-dark;
+  z-index: 500;
+}
+
+.editor__top {
+  grid-area: top;
+  background: lighten($bg-dark, 5%);
+  border-bottom: 1px solid lighten($border-color, 5%);
+}
+
+.editor__aside {
+  padding: $margin / 4 0;
+  grid-area: aside;
+  background: darken($bg-dark, 5%);
+}
+
+.editor__popout {
+  grid-area: popout;
+  border-left: 1px solid lighten($border-color, 5%);
+}
+
+.editor__content {
+  grid-area: content;
+
+  .cm-editor {
+    max-width: calc(100vw - #{$sidebar-width} - #{$popout-width});
+  }
+
+  .cm-scroller {
+    min-height: calc(100vh - #{$top-height});
+  }
+}
+
+.editor__list {
+  display: grid;
+}
+
+.editor-item {
+  padding: 0.5rem $margin / 4;
+  border-radius: 0.25rem;
+  cursor: pointer;
+
+  &:hover,
+  &--active {
+    background: darken($bg-dark, 7.5%);
+    color: $white;
+    border-color: $text-color-light;
+  }
+
+  &--active {
+    background: darken($bg-dark, 10%);
+  }
+}
