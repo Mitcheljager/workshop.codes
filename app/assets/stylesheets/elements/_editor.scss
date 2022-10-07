@@ -69,32 +69,22 @@ $top-height: 4rem;
 }
 
 .drag-handle {
-  display: none;
   position: absolute;
-  height: 2rem;
+  height: 100%;
   width: 0.5rem;
   padding: 0;
   background: $bg-darker;
-  border: 1px solid $text-color;
   border-radius: 99px;
-  top: 50%;
+  top: 0;
   right: 0;
-  transform: translateX(50%) translateY(-50%);
+  transform: translateX(50%);
   z-index: 20;
+  opacity: 0;
   cursor: ew-resize;
-
-  div:hover > & {
-    display: block;
-  }
-
-  &.is-dragging {
-    display: block;
-    background: $bg-dark;
-  }
 
   &--left {
     left: 0;
     right: auto;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%);
   }
 }
