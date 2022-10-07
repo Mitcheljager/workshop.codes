@@ -1,10 +1,12 @@
 import { writable } from "svelte/store"
 
-export const currentItemIndex = writable(0)
+export const currentItem = writable({})
 
 export const items = writable([
   {
     name: "Settings",
+    id: "asjkdnmasl",
+    type: "item",
     content: `settings
 {
   main
@@ -43,6 +45,9 @@ export const items = writable([
 }`
   }, {
     name: "Infinite Timer",
+    id: "dd112asfa",
+    parent: "ajsd09pl",
+    type: "item",
     content: `rule("Infinite timer")
 {
   event
@@ -64,6 +69,9 @@ export const items = writable([
 }`
   }, {
     name: "Disable default game ending",
+    id: "asdasf2g",
+    parent: "ajsd09pl",
+    type: "item",
     content: `rule("Disable default game ending")
 {
   event
@@ -83,5 +91,14 @@ export const items = writable([
     Disable Built-In Game Mode Music;
   }
 }`
+  }, {
+    name: "Folder that holds stuff",
+    id: "ajsd09pl",
+    type: "folder"
+  }, {
+    name: "Second folder that's in another",
+    id: "masokldas09",
+    type: "folder",
+    parent: "ajsd09pl"
   }
 ])

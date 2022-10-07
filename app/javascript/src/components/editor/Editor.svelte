@@ -1,9 +1,9 @@
 <script>
   import { onMount } from "svelte"
-  import EditorItem from "./EditorItem.svelte"
+  import EditorList from "./EditorList.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
-  import { items, currentItemIndex } from "../../stores/editor.js"
+  import { currentItem, items } from "../../stores/editor.js"
 
   export let values
   export let actions
@@ -12,6 +12,7 @@
 
   onMount(() => {
     completionsMap = parseKeywords()
+    $currentItem = $items[0] || {}
   })
 
   function parseKeywords() {
@@ -34,16 +35,14 @@
 
   <div class="editor__aside">
     <div class="editor__list">
-      {#each $items || [] as item, index}
-        <EditorItem {item} {index} />
-      {/each}
+      <EditorList />
     </div>
 
     <DragHandle key="sidebar-width" currentSize=300 />
   </div>
 
   <div class="editor__content">
-    <CodeMirror content={$items[$currentItemIndex]?.content || ""} {completionsMap} />
+    <CodeMirror content={$currentItem?.content || ""} {completionsMap} />
   </div>
 
   <div class="editor__popout">

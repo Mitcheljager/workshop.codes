@@ -37,6 +37,7 @@ $top-height: 4rem;
 
 .editor__content {
   grid-area: content;
+  font-size: var(--font-size, 14px);
 
   .cm-editor {
     max-width: calc(100vw - #{$sidebar-width} - #{$popout-width});
@@ -51,20 +52,55 @@ $top-height: 4rem;
   display: grid;
 }
 
-.editor-item {
-  padding: 0.5rem $margin / 4;
-  border-radius: 0.25rem;
-  cursor: pointer;
+.editor-folder {
+  position: relative;
+}
 
-  &:hover,
-  &--active {
-    background: darken($bg-dark, 7.5%);
-    color: $white;
-    border-color: $text-color-light;
+.editor-folder__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0.25rem;
+  left: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  transition: transform 150ms;
+  user-select: none;
+
+  &:hover {
+    color: $text-color-light;
   }
 
-  &--active {
+  .editor-folder--expanded > & {
+    transform: rotate(90deg);
+  }
+}
+
+.editor-folder__content {
+  padding-left: $margin / 3;
+}
+
+.editor-item {
+  width: 100%;
+  cursor: pointer;
+
+  &--active span {
     background: darken($bg-dark, 10%);
+    box-shadow: -50px 0 0 darken($bg-dark, 10%);
+    color: $white;
+  }
+
+  > span {
+    display: block;
+    padding: 0.5rem $margin / 3;
+
+    &:hover {
+      background: darken($bg-dark, 7.5%);
+      box-shadow: -50px 0 0 darken($bg-dark, 7.5%);
+      color: $white;
+    }
   }
 }
 
