@@ -1,0 +1,32 @@
+@top Program { expression* }
+
+@skip { space | LineComment }
+
+expression {
+  Keyword |
+  Variable |
+  String |
+  Number |
+  Boolean |
+  Punctuation
+}
+
+@tokens {
+  Keyword { "variables" | "subroutines" | "rule" | "disabled" | "event" | "actions" | "conditions" | "global" | "player" | "settings" }
+
+  Variable { "(?<=Global.).*" }
+
+  String { '"' (!["\\] | "\\" _)* '"' }
+
+  Boolean { "True" ![;]* | "False" ![;]* }
+
+  LineComment { "\\" ![\n]* | "//" ![\n]* }
+
+  Number { @digit+ }
+
+  space { $[ \t\n\r]+ }
+
+  Punctuation { ";" ![\n]* }
+}
+
+@detectDelim

@@ -4,7 +4,7 @@
   import { EditorView, keymap } from "@codemirror/view"
   import { indentWithTab } from "@codemirror/commands"
   import { autocompletion } from "@codemirror/autocomplete"
-  import { javascript } from "@codemirror/lang-javascript"
+  import { EXAMPLE } from "../../lib/customLanguage"
 
   export let content
   export let completionsMap = []
@@ -20,7 +20,7 @@
       parent: element,
       extensions: [
         basicSetup,
-        javascript(),
+        EXAMPLE(),
         autocompletion({
           activateOnTyping: true,
           override: [completions],
