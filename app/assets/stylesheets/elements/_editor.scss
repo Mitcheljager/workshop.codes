@@ -27,6 +27,7 @@ $top-height: 4rem;
   position: relative;
   padding: $margin / 4 0;
   background: darken($bg-dark, 5%);
+  overflow: auto;
 }
 
 .editor__popout {
@@ -95,6 +96,7 @@ $top-height: 4rem;
   > span {
     display: block;
     padding: 0.25rem $margin / 3;
+    white-space: nowrap;
 
     &:hover {
       background: darken($bg-dark, 7.5%);
