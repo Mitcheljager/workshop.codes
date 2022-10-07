@@ -41,6 +41,15 @@ class Wiki::Article < ApplicationRecord
     }).records.ids
   end
 
+  def self.order_by_ids(ids)
+    t = Wiki::Article.arel_table
+    condition = Arel::Nodes::Case.new(t[:id])
+    ids.each_with_index do |id, index|
+      condition.when(id).then(index)
+    end
+    order(condition)
+  end
+
   def as_indexed_json(options={})
     self.as_json(only: [:title, :tags], include: { category: { only: :title } } )
   end
