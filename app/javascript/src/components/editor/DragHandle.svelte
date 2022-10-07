@@ -19,8 +19,6 @@
     isDragging = true
     startX = event.pageX
     startSize = parseInt(currentSize)
-
-    console.log(startSize)
   }
 
   function mouseMove(event) {
