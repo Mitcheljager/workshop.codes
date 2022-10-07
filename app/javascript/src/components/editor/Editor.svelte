@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import EditorItem from "./EditorItem.svelte"
   import CodeMirror from "./CodeMirror.svelte"
+  import DragHandle from "./DragHandle.svelte"
   import { items, currentItemIndex } from "../../stores/editor.js"
 
   export let values
@@ -37,6 +38,8 @@
         <EditorItem {item} {index} />
       {/each}
     </div>
+
+    <DragHandle key="sidebar-width" currentSize=300 />
   </div>
 
   <div class="editor__content">
@@ -44,6 +47,6 @@
   </div>
 
   <div class="editor__popout">
-
+    <DragHandle key="popout-width" currentSize=300 align="left" />
   </div>
 </div>
