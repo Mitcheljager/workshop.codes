@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import EditorList from "./EditorList.svelte"
+  import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
@@ -35,9 +35,7 @@
   </div>
 
   <div class="editor__aside">
-    <div class="editor__list">
-      <EditorList />
-    </div>
+    <EditorAside />
 
     <DragHandle key="sidebar-width" currentSize=300 />
   </div>

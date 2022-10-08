@@ -7,7 +7,8 @@ export const items = writable([
     name: "Settings",
     id: "asjkdnmasl",
     type: "item",
-    content: `settings
+    position: 2,
+    content: `settings,
 {
   main
   {
@@ -48,6 +49,7 @@ export const items = writable([
     id: "dd112asfa",
     parent: "ajsd09pl",
     type: "item",
+    position: 2,
     content: `rule("Infinite timer")
 {
   event
@@ -72,6 +74,7 @@ export const items = writable([
     id: "asdasf2g",
     parent: "ajsd09pl",
     type: "item",
+    position: 0,
     content: `rule("Disable default game ending")
 {
   event
@@ -94,11 +97,13 @@ export const items = writable([
   }, {
     name: "Folder that holds stuff",
     id: "ajsd09pl",
-    type: "folder"
+    type: "folder",
+    position: 0
   }, {
     name: "Second folder that's in another",
     id: "masokldas09",
     type: "folder",
-    parent: "ajsd09pl"
+    parent: "ajsd09pl",
+    position: 1
   }
 ])

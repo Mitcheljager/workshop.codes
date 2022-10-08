@@ -1,6 +1,5 @@
 <script>
   import EditorList from "./EditorList.svelte"
-  import { slide } from "svelte/transition"
 
   export let item = {}
 
@@ -10,6 +9,7 @@
 <div
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
+  data-item-id={item.id}
   on:click|stopPropagation={() => expanded = !expanded}>
   <div class="editor-folder__icon">
     &gt;
@@ -19,11 +19,7 @@
     {item.name}
   </span>
 
-  <div class="editor-folder__content">
-    {#if expanded}
-      <div transition:slide={{ duration: 150 }}>
-        <EditorList parent={item} />
-      </div>
-    {/if}
+  <div class="editor-folder__content" class:editor-folder__content--expanded={expanded}>
+    <EditorList parent={item} />
   </div>
 </div>

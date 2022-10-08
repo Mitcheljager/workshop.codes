@@ -2,7 +2,7 @@ import { LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside, 
 import { styleTags, tags as t } from "@lezer/highlight"
 import { parser } from "./lang.js"
 
-export const EXAMPLELanguage = LRLanguage.define({
+export const OverwatchWorkshopLanguage = LRLanguage.define({
   parser: parser.configure({
     props: [
       indentNodeProp.add({
@@ -29,6 +29,6 @@ export const EXAMPLELanguage = LRLanguage.define({
   }
 })
 
-export function EXAMPLE() {
-  return new LanguageSupport(EXAMPLELanguage)
+export function OverwatchWorkshop() {
+  return new LanguageSupport(OverwatchWorkshopLanguage)
 }

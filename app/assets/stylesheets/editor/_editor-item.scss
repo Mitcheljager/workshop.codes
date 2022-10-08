@@ -1,0 +1,23 @@
+.editor-item {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+
+  &--active span {
+    background: darken($bg-dark, 10%);
+    box-shadow: -50px 0 0 darken($bg-dark, 10%);
+    color: $white;
+  }
+
+  > span {
+    display: block;
+    padding: 0.25rem $margin / 3;
+    white-space: nowrap;
+
+    &:hover {
+      background: darken($bg-dark, 7.5%);
+      box-shadow: -50px 0 0 darken($bg-dark, 7.5%);
+      color: $white;
+    }
+  }
+}

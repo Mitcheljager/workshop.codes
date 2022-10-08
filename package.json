@@ -28,7 +28,7 @@
     "patch-package": "^6.4.7",
     "sass-loader": "^11.0.1",
     "siema": "^1.5.1",
-    "sortablejs": "^1.10.2",
+    "sortablejs": "^1.15.0",
     "svelte": "^3.49.0",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.7.0",

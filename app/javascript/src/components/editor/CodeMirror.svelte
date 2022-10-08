@@ -4,7 +4,7 @@
   import { EditorView, keymap } from "@codemirror/view"
   import { indentWithTab } from "@codemirror/commands"
   import { autocompletion } from "@codemirror/autocomplete"
-  import { EXAMPLE } from "../../lib/customLanguage"
+  import { OverwatchWorkshop } from "../../lib/customLanguage"
 
   export let content
   export let completionsMap = []
@@ -20,10 +20,11 @@
       parent: element,
       extensions: [
         basicSetup,
-        EXAMPLE(),
+        OverwatchWorkshop(),
         autocompletion({
           activateOnTyping: true,
           override: [completions],
+          closeOnBlur: false,
         }),
         keymap.of([
           indentWithTab,
@@ -50,6 +51,7 @@
   }
 
   function keydown(event) {
+    console.log(view)
     if (event.ctrlKey && event.keyCode == 50) {
       event.preventDefault()
       view.focus()
