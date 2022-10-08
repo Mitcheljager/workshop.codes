@@ -3,7 +3,6 @@
   import { slide } from "svelte/transition"
 
   export let item = {}
-  export let index
 
   let expanded = true
 </script>

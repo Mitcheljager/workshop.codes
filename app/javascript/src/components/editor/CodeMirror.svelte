@@ -48,6 +48,15 @@
       changes: { from: 0, to: view.state.doc.length, insert: content }
     })
   }
+
+  function keydown(event) {
+    if (event.ctrlKey && event.keyCode == 50) {
+      event.preventDefault()
+      view.focus()
+    }
+  }
 </script>
+
+<svelte:window on:keydown={keydown} />
 
 <div bind:this={element} ></div>

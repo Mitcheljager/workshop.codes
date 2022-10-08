@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import EditorList from "./EditorList.svelte"
+  import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
   import { currentItem, items } from "../../stores/editor.js"
@@ -46,6 +47,8 @@
   </div>
 
   <div class="editor__popout">
+    <EditorWiki />
+
     <DragHandle key="popout-width" currentSize=300 align="left" />
   </div>
 </div>
