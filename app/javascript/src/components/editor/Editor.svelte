@@ -1,11 +1,12 @@
 <script>
   import { onMount } from "svelte"
+  import { currentItem, items } from "../../stores/editor"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
-  import { currentItem, items } from "../../stores/editor.js"
-  import ScriptImporter from "./ScriptImporter.svelte";
+  import ScriptImporter from "./ScriptImporter.svelte"
+  import Decompiler from "./Compiler.svelte"
 
   export let values
   export let actions
@@ -36,6 +37,7 @@
   <div class="editor__top">
     <div class="ml-auto">
       <ScriptImporter />
+      <Decompiler />
     </div>
   </div>
 
@@ -48,7 +50,7 @@
   </div>
 
   <div class="editor__content">
-    <CodeMirror content={$currentItem?.content || ""} {completionsMap} />
+    <CodeMirror {completionsMap} />
   </div>
 
   <div class="editor__popout editor__scrollable">

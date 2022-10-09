@@ -2,22 +2,43 @@
   import { onMount } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
+  import { EditorState } from "@codemirror/state"
   import { indentWithTab } from "@codemirror/commands"
   import { autocompletion } from "@codemirror/autocomplete"
   import { OverwatchWorkshop } from "../../lib/customLanguage"
+  import { currentItem, editorStates } from "../../stores/editor"
 
-  export let content
   export let completionsMap = []
 
   let element
   let view
+  let currentId
 
-  $: if (content && view) updateContent()
+  $: if ($currentItem.id && view) updateEditorState()
 
   onMount(() => {
     view = new EditorView({
+      parent: element
+    })
+  })
+
+  function updateEditorState() {
+    if (currentId) $editorStates[currentId] = view.state
+
+    currentId = $currentItem.id
+
+    if ($editorStates[currentId]) {
+      view.setState($editorStates[currentId])
+      return
+    }
+
+    $editorStates[currentId] = createEditorState($currentItem.content)
+    view.setState($editorStates[currentId])
+  }
+
+  function createEditorState(content) {
+    return EditorState.create({
       doc: content,
-      parent: element,
       extensions: [
         basicSetup,
         OverwatchWorkshop(),
@@ -31,7 +52,7 @@
         ])
       ]
     })
-  })
+  }
 
   function completions(context) {
     let word = context.matchBefore(/\w*/)
@@ -42,12 +63,6 @@
       from: word.from,
       options: completionsMap
     }
-  }
-
-  function updateContent() {
-    view.dispatch({
-      changes: { from: 0, to: view.state.doc.length, insert: content }
-    })
   }
 
   function keydown(event) {

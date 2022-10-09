@@ -1,5 +1,6 @@
 import { writable } from "svelte/store"
 
+export const editorStates = writable({})
 export const currentItem = writable({})
 
 export const items = writable([
