@@ -5,11 +5,14 @@
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
   import { currentItem, items } from "../../stores/editor.js"
+  import ScriptImporter from "./ScriptImporter.svelte";
 
   export let values
   export let actions
 
   let completionsMap = []
+
+  $: console.log("items", $items)
 
   onMount(() => {
     completionsMap = parseKeywords()
@@ -31,11 +34,15 @@
 
 <div class="editor">
   <div class="editor__top">
-
+    <div class="ml-auto">
+      <ScriptImporter />
+    </div>
   </div>
 
   <div class="editor__aside">
-    <EditorAside />
+    <div class="editor__scrollable">
+      <EditorAside />
+    </div>
 
     <DragHandle key="sidebar-width" currentSize=300 />
   </div>
@@ -45,7 +52,9 @@
   </div>
 
   <div class="editor__popout">
-    <EditorWiki />
+    <div class="editor__scrollable">
+      <EditorWiki />
+    </div>
 
     <DragHandle key="popout-width" currentSize=300 align="left" />
   </div>

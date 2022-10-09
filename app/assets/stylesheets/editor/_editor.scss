@@ -18,16 +18,18 @@ $top-height: 4rem;
 
 .editor__top {
   grid-area: top;
-  background: lighten($bg-dark, 5%);
+  display: flex;
+  align-items: center;
+  padding: $margin / 4;
   border-bottom: 1px solid lighten($border-color, 5%);
+  background: lighten($bg-dark, 5%);
 }
 
 .editor__aside {
   grid-area: aside;
   position: relative;
-  padding: $margin / 4 0;
   background: darken($bg-dark, 5%);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .editor__popout {
@@ -35,7 +37,16 @@ $top-height: 4rem;
   position: relative;
   padding: $margin / 4;
   border-left: 1px solid lighten($border-color, 5%);
+  overflow: hidden;
+}
+
+.editor__scrollable {
+  max-height: 100%;
+  max-width: 100%;
+  padding: $margin / 4 0;
   overflow: auto;
+
+  @include styled-scrollbar;
 }
 
 .editor__content {
@@ -54,7 +65,7 @@ $top-height: 4rem;
 .drag-handle {
   position: absolute;
   height: 100%;
-  width: 1rem;
+  width: 0.5rem;
   padding: 0;
   border-radius: 99px;
   top: 0;

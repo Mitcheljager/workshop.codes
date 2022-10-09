@@ -8,7 +8,7 @@ export const items = writable([
     id: "asjkdnmasl",
     type: "item",
     position: 2,
-    content: `settings,
+    content: `settings
 {
   main
   {

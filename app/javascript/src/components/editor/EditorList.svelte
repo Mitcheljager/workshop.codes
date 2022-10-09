@@ -8,32 +8,36 @@
   export let parent = null
 
   let element
-  let itemsInParent = $items.filter(i => parent ? i.parent == parent.id : !i.parent )
-                            .sort((a, b) => a.position > b.position)
+
+  $: itemsInParent = getItemsInParent($items)
 
   onMount(() => {
 		Sortable.create(element, {
       group: "items",
 			animation: 100,
       swapTreshhold: 0.25,
-      onEnd: onSortableUpdate
+      store: {
+        set: updateOrder
+      }
 		})
   })
 
-  function onSortableUpdate() {
+  function updateOrder() {
     const elements = document.querySelectorAll("[data-item-id]")
     console.log(elements)
     elements.forEach((e, i) => {
       const id = e.dataset.itemId
-      console.log(id)
       if (!id) return
 
       const item = $items.filter(item => item.id === id)[0]
       if (!item) return
       item.position = i
-
     })
-    console.log($items)
+  }
+
+  function getItemsInParent() {
+    return $items.filter(i => parent ? i.parent == parent.id : !i.parent )
+                 .sort((a, b) => a.position > b.position)
   }
 </script>
 
