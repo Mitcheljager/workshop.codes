@@ -10,7 +10,7 @@
   font-size: $font-size-base;
   text-align: left;
 
-  &:focus {
+  &:focus-visible {
     outline: 2px inset $white;
     outline-offset: -2px;
     box-shadow: none;

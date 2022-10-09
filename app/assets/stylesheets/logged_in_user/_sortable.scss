@@ -12,6 +12,7 @@
   }
 }
 
-.sortable__selected {
-  border: 1px solid red;
+.sortable__multi-selected {
+  outline: inset 2px $text-color;
+  outline-offset: -2px;
 }
