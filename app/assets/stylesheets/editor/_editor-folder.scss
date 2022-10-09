@@ -18,6 +18,7 @@
   cursor: pointer;
   transition: transform 150ms;
   user-select: none;
+  color: $text-color;
 
   &:hover {
     color: $text-color-light;

@@ -4,10 +4,10 @@
   export let item
 </script>
 
-<div
+<button
   class="editor-item"
   class:editor-item--active={$currentItem.id == item.id}
   data-item-id={item.id}
   on:click|stopPropagation={() => $currentItem = item}>
   <span>{ item?.name }</span>
-</div>
+</button>

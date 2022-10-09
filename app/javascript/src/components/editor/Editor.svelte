@@ -51,10 +51,8 @@
     <CodeMirror content={$currentItem?.content || ""} {completionsMap} />
   </div>
 
-  <div class="editor__popout">
-    <div class="editor__scrollable">
-      <EditorWiki />
-    </div>
+  <div class="editor__popout editor__scrollable">
+    <EditorWiki />
 
     <DragHandle key="popout-width" currentSize=300 align="left" />
   </div>

@@ -51,7 +51,6 @@
   }
 
   function keydown(event) {
-    console.log(view)
     if (event.ctrlKey && event.keyCode == 50) {
       event.preventDefault()
       view.focus()

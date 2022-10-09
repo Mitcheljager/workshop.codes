@@ -6,7 +6,7 @@
   let expanded = true
 </script>
 
-<div
+<button
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
   data-item-id={item.id}
@@ -22,4 +22,4 @@
   <div class="editor-folder__content" class:editor-folder__content--expanded={expanded}>
     <EditorList parent={item} />
   </div>
-</div>
+</button>
