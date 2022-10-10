@@ -7,7 +7,8 @@ $highlight-types: (
   number: #D19A66,
   comment: $text-color-dark,
   variable: #56B6C2,
-  boolean: #D19A66
+  action: #c678bf,
+  value: #44a4ef
 );
 
 .syntax-highlight {

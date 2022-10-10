@@ -13,9 +13,10 @@ export const OverwatchWorkshopLanguage = LRLanguage.define({
       }),
       styleTags({
         Keyword: t.keyword,
+        Action: t.bool,
+        Value: t.heading,
         Function: t.function,
         Number: t.number,
-        Boolean: t.bool,
         String: t.string,
         LineComment: t.lineComment,
         Punctuation: t.annotation,

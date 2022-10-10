@@ -1,4 +1,4 @@
-import { writable } from "svelte/store"
+import { writable, derived } from "svelte/store"
 
 export const editorStates = writable({})
 export const currentItem = writable({})
@@ -92,7 +92,10 @@ export const items = writable([
   {
     Disable Built-In Game Mode Completion;
     Disable Built-In Game Mode Announcer;
+    Event Player.Test = something;
     Disable Built-In Game Mode Music;
+    Global.SomeVariable == True;
+    Victim.someVar = asdjsa;
   }
 }`
   }, {
@@ -108,3 +111,5 @@ export const items = writable([
     position: 1
   }
 ])
+
+export const sortedItems = derived(items, $items => $items.sort((a, b) => a.position > b.position))

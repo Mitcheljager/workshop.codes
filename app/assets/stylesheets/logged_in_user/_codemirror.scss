@@ -109,10 +109,15 @@
   }
 
   .ͼc {
-    color: var(--color-boolean);
+    color: var(--color-value);
   }
 
   .ͼm {
     color: var(--color-comment);
+  }
+
+  .ͼ7 {
+    color: var(--color-action);
+    text-decoration: none;
   }
 }

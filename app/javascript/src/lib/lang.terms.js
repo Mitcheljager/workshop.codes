@@ -3,8 +3,9 @@ export const
   LineComment = 1,
   Program = 2,
   Keyword = 3,
-  Variable = 4,
-  String = 5,
-  Number = 6,
-  Boolean = 7,
-  Punctuation = 8
+  Action = 4,
+  Value = 5,
+  Variable = 6,
+  String = 7,
+  Number = 8,
+  Punctuation = 9
