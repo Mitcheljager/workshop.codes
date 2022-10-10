@@ -1,4 +1,5 @@
 <script>
+  import EditorItemActions from "./EditorItemActions.svelte"
   import EditorList from "./EditorList.svelte"
 
   let element
@@ -14,4 +15,10 @@
 
 <div bind:this={element} tabindex="0">
   <EditorList />
+
+  <div class="p-1/4">
+    <EditorItemActions>
+      <span class="button button--secondary w-100">+</span>
+    </EditorItemActions>
+  </div>
 </div>

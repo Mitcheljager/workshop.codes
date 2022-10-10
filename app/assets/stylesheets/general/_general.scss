@@ -115,3 +115,12 @@ strong {
   width: 100%;
   height: auto;
 }
+
+.empty-button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  font-family: $font-stack;
+  font-size: $font-size-base;
+  width: 100%;
+}
