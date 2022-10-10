@@ -1,24 +1,21 @@
 <script>
   import { items } from "../../stores/editor"
-  import { createNewItem } from "../../utils/editor"
+  import { createNewItem, getSettings } from "../../utils/editor"
   import { fade } from "svelte/transition"
 
   let active = false
   let replaceScript = false
   let value = ""
 
-  function getSettings() {
-    const regex = new RegExp(/settings/)
-    const match = regex.exec(value)
-    if (!match) return
+  function findSettings() {
+    const [start, end] = getSettings(value)
 
-    const untilIndex = getClosingBracket(value.slice(match.index, value.length))
-    if (!untilIndex) return
+    if (!(start || end)) return
 
-    return createNewItem("Settings", value.slice(match.index, untilIndex + 1), $items.length)
+    return createNewItem("Settings", value.slice(start, end), $items.length)
   }
 
-  function getAllRules() {
+  function findAllRules() {
     const rules = value.split(/(?=rule\()/g)
     const newItems = []
 
@@ -32,24 +29,6 @@
     return newItems
   }
 
-  function getClosingBracket(content) {
-    let closePos = 0
-    let counter = 1
-    let initial = true
-
-    while (counter > 1 || initial) {
-      let c = content[++closePos]
-      if (c == "{") {
-        counter++
-        initial = false
-      }
-      else if (c == "}") counter--
-      if (counter > 5 || closePos > 10000) counter = 0
-    }
-
-    return closePos
-  }
-
   function getTypeName(content) {
     const regex = new RegExp(/rule\("(.*)"\)/g)
     const match = regex.exec(content)
@@ -60,8 +39,8 @@
   }
 
   function submit() {
-    const settings = getSettings()
-    const rules = getAllRules()
+    const settings = findSettings()
+    const rules = findAllRules()
     const previous = replaceScript ? [] : $items
 
     const newItems = [settings, ...rules].filter(i => i)

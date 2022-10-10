@@ -2,7 +2,7 @@
   import { Sortable, MultiDrag } from "sortablejs"
   import EditorItem from "./EditorItem.svelte"
   import EditorFolder from "./EditorFolder.svelte"
-  import { items } from "../../stores/editor.js"
+  import { items, sortedItems } from "../../stores/editor.js"
   import { onMount } from "svelte"
 
   export let parent = null
@@ -48,8 +48,7 @@
   }
 
   function getItemsInParent() {
-    return $items.filter(i => parent ? i.parent == parent.id : !i.parent )
-                 .sort((a, b) => a.position > b.position)
+    return $sortedItems.filter(i => parent ? i.parent == parent.id : !i.parent )
   }
 
   function keypress(event) {
