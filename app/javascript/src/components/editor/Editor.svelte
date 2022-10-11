@@ -1,23 +1,28 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, items } from "../../stores/editor"
+  import { currentItem, currentProject, items, projects } from "../../stores/editor"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
   import ScriptImporter from "./ScriptImporter.svelte"
   import Decompiler from "./Compiler.svelte"
+  import ProjectsDropdown from "./ProjectsDropdown.svelte"
+  import Save from "./Save.svelte"
 
   export let values
   export let actions
+  export let _projects
 
   let completionsMap = []
 
   $: console.log("items", $items)
+  $: console.log("projects", $projects)
 
   onMount(() => {
     completionsMap = parseKeywords()
     $currentItem = $items[0] || {}
+    $projects = _projects || []
   })
 
   function parseKeywords() {
@@ -35,27 +40,34 @@
 
 <div class="editor">
   <div class="editor__top">
-    <div class="ml-auto">
+    {#if $projects}
+      <ProjectsDropdown />
+    {/if}
+
+    <div class="ml-auto inline-flex gap-1/8">
       <ScriptImporter />
       <Decompiler />
+      <Save />
     </div>
   </div>
 
-  <div class="editor__aside">
-    <div class="editor__scrollable">
-      <EditorAside />
+  {#if $currentProject}
+    <div class="editor__aside">
+      <div class="editor__scrollable">
+        <EditorAside />
+      </div>
+
+      <DragHandle key="sidebar-width" currentSize=300 />
     </div>
 
-    <DragHandle key="sidebar-width" currentSize=300 />
-  </div>
+    <div class="editor__content">
+      <CodeMirror {completionsMap} />
+    </div>
 
-  <div class="editor__content">
-    <CodeMirror {completionsMap} />
-  </div>
+    <div class="editor__popout editor__scrollable">
+      <EditorWiki />
 
-  <div class="editor__popout editor__scrollable">
-    <EditorWiki />
-
-    <DragHandle key="popout-width" currentSize=300 align="left" />
-  </div>
+      <DragHandle key="popout-width" currentSize=300 align="left" />
+    </div>
+  {/if}
 </div>

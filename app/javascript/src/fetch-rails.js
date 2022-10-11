@@ -39,8 +39,8 @@ export default class FetchRails {
     return this.request("get", { timeout, returnResponse, parameters })
   }
 
-  async post({timeout = 10000, returnResponse = false, parameters = {}} = {}) {
+  async post({timeout = 10000, returnResponse = false, parameters = {}, method = "post"} = {}) {
     parameters = {...parameters, body: JSON.stringify(this.body)}
-    return this.request("post", { timeout, returnResponse, parameters })
+    return this.request(method, { timeout, returnResponse, parameters })
   }
 }

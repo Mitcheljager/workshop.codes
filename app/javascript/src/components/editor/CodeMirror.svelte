@@ -6,7 +6,8 @@
   import { indentWithTab } from "@codemirror/commands"
   import { autocompletion } from "@codemirror/autocomplete"
   import { OverwatchWorkshop } from "../../lib/customLanguage"
-  import { currentItem, editorStates } from "../../stores/editor"
+  import { currentItem, editorStates, items } from "../../stores/editor"
+  import debounce from "../../debounce"
 
   export let completionsMap = []
 
@@ -49,7 +50,10 @@
         }),
         keymap.of([
           indentWithTab,
-        ])
+        ]),
+        EditorView.updateListener.of((state) => {
+          if (state.docChanged) updateItem()
+        })
       ]
     })
   }
@@ -71,6 +75,12 @@
       view.focus()
     }
   }
+
+  const updateItem = debounce(() => {
+    $currentItem.content = view.state.doc.toString()
+    const index = $items.indexOf(i => i.id == $currentItem.id)
+    $items[index] = $currentItem
+  }, 500)
 </script>
 
 <svelte:window on:keydown={keydown} />

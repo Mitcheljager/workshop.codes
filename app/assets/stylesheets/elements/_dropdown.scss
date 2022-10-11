@@ -92,6 +92,7 @@
   text-decoration: none;
   font-size: $font-size-base;
   line-height: 1.35em;
+  cursor: pointer;
 
   @include hover-stack {
     color: $pure-white;

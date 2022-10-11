@@ -56,7 +56,6 @@
 
 {#if active}
   <div class="modal" transition:fade={{ duration: 100 }} data-hide-on-close>
-
     <div class="modal__content">
       Copy your snippet from inside of Overwatch and paste it in here to convert your current snippet to this project.
 

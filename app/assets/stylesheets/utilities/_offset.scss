@@ -52,3 +52,7 @@ $directions: (
     margin-top: $margin * 1.75;
   }
 }
+
+.gap-1\/8 {
+  gap: $margin / 8;
+}

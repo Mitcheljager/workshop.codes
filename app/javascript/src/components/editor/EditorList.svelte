@@ -43,7 +43,11 @@
 
       const item = $items.filter(item => item.id === id)[0]
       if (!item) return
+
       item.position = i
+
+      const parent = e.parentNode.closest("[data-item-id]")
+      item.parent = parent ? parent.dataset.itemId : null
     })
   }
 

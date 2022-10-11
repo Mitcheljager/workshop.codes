@@ -116,6 +116,8 @@ Rails.application.routes.draw do
     get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
+    resources :projects, param: :uuid, format: :json, only: [:show, :create, :update]
+
     get "latest", to: "posts#latest", as: "latest"
     get "page/1", to: redirect("/latest", status: 301)
 
