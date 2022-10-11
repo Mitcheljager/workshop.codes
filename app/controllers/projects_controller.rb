@@ -29,6 +29,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    @project = current_user.projects.find_by_uuid(params[:uuid])
+
+    if @project.destroy
+      render json: "Success", layout: false
+    else
+      render json: "", status: 500, layout: false
+    end
+  end
+
   private
 
   def project_params

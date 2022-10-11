@@ -4,11 +4,11 @@
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
 
-  let active
-  let showCreateModal
   let value
-  let element
   let loading = true
+  let active = false
+  let showCreateModal = false
+  let showProjectSettings = false
 
   $: console.log("currentProject", $currentProject)
 
@@ -60,15 +60,39 @@
     .finally(() => loading = false)
   }
 
+  function destroyProject() {
+    if (!confirm("Are you absolutely sure you want to destroy this project? This can not be undone.")) return
+
+    loading = true
+    showProjectSettings = false
+
+    new FetchRails(`/projects/${$currentProject.uuid}`).post({ method: "delete" })
+    .then(data => {
+      if (!data) throw Error("Create failed")
+
+      $projects = $projects.filter(p => p.uuid != $currentProject.uuid)
+      $currentProject = null
+      $currentItem = {}
+    })
+    .catch(error => {
+      console.error(error)
+      alert("Something went wrong while destroying your project, please try again")
+    })
+    .finally(() => loading = false)
+  }
+
   function outsideClick(event) {
-    if (!active) return
-    if (event.target != element) active = false
+    if (!active && !showProjectSettings) return
+    if (event.target.classList.contains("dropdown")) return
+
+    active = false
+    showProjectSettings = false
   }
 </script>
 
 <svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
 
-<div class="dropdown" bind:this={element}>
+<div class="dropdown">
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style="min-width: 200px" disabled={loading}>
     {#if loading}
       Loading...
@@ -80,7 +104,9 @@
   {#if active}
     <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100">
       {#each $projects as project}
-        <div class="dropdown__item" on:click={() => fetchProject(project.uuid)}>{project.title}</div>
+        <div class="dropdown__item" on:click={() => fetchProject(project.uuid)}>
+          {project.title}
+        </div>
       {/each}
 
       <hr />
@@ -105,5 +131,21 @@
     </div>
 
     <div class="modal__backdrop" on:click={() => showCreateModal = false} />
+  </div>
+{/if}
+
+{#if !loading}
+  <div class="dropdown">
+    <button class="empty-button w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
+      Edit
+    </button>
+
+    {#if showProjectSettings}
+      <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
+        <div class="dropdown__item text-red" on:click={destroyProject}>
+          Destroy
+        </div>
+      </div>
+    {/if}
   </div>
 {/if}

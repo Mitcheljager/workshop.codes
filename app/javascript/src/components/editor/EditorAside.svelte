@@ -1,5 +1,5 @@
 <script>
-  import EditorItemActions from "./EditorItemActions.svelte"
+  import EditorItemCreate from "./EditorItemCreate.svelte"
   import EditorList from "./EditorList.svelte"
 
   let element
@@ -17,8 +17,8 @@
   <EditorList />
 
   <div class="p-1/4">
-    <EditorItemActions>
+    <EditorItemCreate>
       <span class="button button--secondary w-100">+</span>
-    </EditorItemActions>
+    </EditorItemCreate>
   </div>
 </div>

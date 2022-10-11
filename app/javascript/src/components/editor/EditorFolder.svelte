@@ -1,4 +1,5 @@
 <script>
+  import EditorItemDestroy from "./EditorItemDestroy.svelte"
   import EditorList from "./EditorList.svelte"
 
   export let item = {}
@@ -21,5 +22,9 @@
 
   <div class="editor-folder__content" class:editor-folder__content--expanded={expanded}>
     <EditorList parent={item} />
+  </div>
+
+  <div class="editor-item__actions">
+    <EditorItemDestroy {item} />
   </div>
 </button>
