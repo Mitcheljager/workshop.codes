@@ -19,11 +19,13 @@
     const rules = value.split(/(?=(disabled rule|(?<!disabled\s+)rule)\()/g)
     const newItems = []
 
-    rules.forEach((rule, i) => {
+    let counter = 0
+    rules.forEach(rule => {
       const name = getTypeName(rule)
       if (!name) return
-      const newItem = createNewItem(name, rule, $items.length + 1 + i)
+      const newItem = createNewItem(name, rule, $items.length + counter)
       newItems.push(newItem)
+      counter++
     })
 
     return newItems
@@ -39,13 +41,14 @@
   }
 
   function submit() {
+    if (replaceScript) $items = []
+
     const settings = findSettings()
     const rules = findAllRules()
-    const previous = replaceScript ? [] : $items
 
     const newItems = [settings, ...rules].filter(i => i)
 
-    $items = [...previous, ...newItems]
+    $items = [...$items, ...newItems]
     active = false
   }
 </script>
