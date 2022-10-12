@@ -21,8 +21,8 @@ export const templates = Object.freeze({
   event
   {
     Ongoing - Each Player;
-		All;
-		All;
+    All;
+    All;
   }
 
   conditions
