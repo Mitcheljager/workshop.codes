@@ -49,7 +49,5 @@ export function getSettings(value) {
   const untilIndex = match.index + getClosingBracket(value.slice(match.index, value.length))
   if (!untilIndex) return
 
-  console.log(untilIndex)
-
   return [match.index, untilIndex + 1]
 }

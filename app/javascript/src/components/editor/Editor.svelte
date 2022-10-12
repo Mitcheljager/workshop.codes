@@ -9,6 +9,7 @@
   import Decompiler from "./Compiler.svelte"
   import ProjectsDropdown from "./ProjectsDropdown.svelte"
   import Save from "./Save.svelte"
+  import Empty from "./Empty.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
 
   export let values
@@ -16,9 +17,6 @@
   export let _projects
 
   let completionsMap = []
-
-  $: console.log("items", $items)
-  $: console.log("projects", $projects)
 
   onMount(() => {
     completionsMap = parseKeywords()
@@ -54,7 +52,7 @@
     </div>
   </div>
 
-  {#if $currentProject}
+  {#if false && $currentProject}
     <div class="editor__aside">
       <div class="editor__scrollable">
         <EditorAside />
@@ -72,5 +70,7 @@
 
       <DragHandle key="popout-width" currentSize=300 align="left" />
     </div>
+  {:else}
+    <Empty />
   {/if}
 </div>

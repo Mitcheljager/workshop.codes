@@ -17,7 +17,6 @@
   })
 
   function fetchProject(uuid) {
-    console.log('fetch')
     $currentProject = null
     loading = true
 

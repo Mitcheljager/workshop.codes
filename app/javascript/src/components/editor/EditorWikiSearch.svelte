@@ -29,8 +29,6 @@
       if (!data) throw Error("No results")
 
       results = JSON.parse(data)
-
-      console.log(results)
     })
     .catch(error => {
       results = []
