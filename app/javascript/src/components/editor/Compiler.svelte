@@ -1,8 +1,14 @@
 <script>
+  import { fly } from "svelte/transition"
   import { sortedItems } from "../../stores/editor"
   import { getSettings } from "../../utils/editor"
 
-  function compile() {
+  let compiling = false
+  let copied = false
+
+  function compile(event) {
+    compiling = true
+
     let joinedItems = $sortedItems.sort().map(i => i.content).join("\n\n")
 
     const [settingsStart, settingsEnd] = getSettings(joinedItems)
@@ -13,7 +19,10 @@
     let variables = compileVariables(joinedItems)
     let subroutines = compileSubroutines(joinedItems)
 
-    console.log(settings + variables + subroutines + joinedItems)
+    setTimeout(() => {
+      compiling = false
+      copyToClipboard(settings + variables + subroutines + joinedItems)
+    }, 500)
   }
 
   function compileVariables(joinedItems) {
@@ -38,14 +47,38 @@ ${playerVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
     subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace(/\s/g, ""))
     subroutines = [...new Set(subroutines)]
 
-    console.log(subroutines)
-
     return `
 subroutines {
 ${subroutines.map((v, i) => `  ${i}: ${v}`).join("\n")}
 }\n\n`
   }
+
+  function copyToClipboard(value) {
+    copied = true
+
+    const input = document.createElement("textarea")
+    input.value = value
+    document.body.appendChild(input)
+
+    input.select()
+    document.execCommand("copy")
+    document.body.removeChild(input)
+
+    setTimeout(() => copied = false, 1000)
+  }
 </script>
 
-<button class="button button--secondary" on:click={compile}>Compile</button>
+<button class="button button--secondary tooltip" on:click={compile}>
+  {#if compiling}
+    Compiling...
+  {:else}
+    Compile
+  {/if}
+
+  {#if copied}
+    <div transition:fly={{ y: 5, duration: 150 }} class="tooltip__content bg-primary text-pure-white block">
+      Copied to clipboard
+    </div>
+  {/if}
+</button>
 
