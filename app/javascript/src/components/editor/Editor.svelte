@@ -9,6 +9,7 @@
   import Decompiler from "./Compiler.svelte"
   import ProjectsDropdown from "./ProjectsDropdown.svelte"
   import Save from "./Save.svelte"
+  import * as logo from "../../../../assets/images/logo.svg"
 
   export let values
   export let actions
@@ -40,6 +41,8 @@
 
 <div class="editor">
   <div class="editor__top">
+    <img class="mr-1/2" src={logo} height=50 alt="Workshop.codes" />
+
     {#if $projects}
       <ProjectsDropdown />
     {/if}

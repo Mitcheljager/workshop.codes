@@ -103,7 +103,7 @@
     {#if loading}
       Loading...
     {:else}
-      {$currentProject?.title || "Select a project"}
+      {$currentProject?.title || "Select a project..."}
     {/if}
   </button>
 
