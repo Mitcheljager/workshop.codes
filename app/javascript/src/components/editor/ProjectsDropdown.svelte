@@ -5,12 +5,10 @@
   import { onMount } from "svelte"
 
   let value
-  let loading = true
+  let loading = false
   let active = false
   let showCreateModal = false
   let showProjectSettings = false
-
-  $: console.log("currentProject", $currentProject)
 
   onMount(() => {
     if ($projects.length) fetchProject($projects[0].uuid)
