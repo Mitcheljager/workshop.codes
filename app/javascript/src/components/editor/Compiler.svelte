@@ -17,24 +17,25 @@
   }
 
   function compileVariables(joinedItems) {
-    let globalVariables = joinedItems.match(/(?<=Global\.).[^\s]+/g)
+    let globalVariables = joinedItems.match(/(?<=Global\.).[^\s,.[\]);]+/g)
     globalVariables = [...new Set(globalVariables)]
 
-    let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee)\.).[^\s]+/g)
+    let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee)\.).[^\s,.[\]);]+/g)
     playerVariables = [...new Set(playerVariables)]
 
     return `
 variables {
-  global:
+${globalVariables.length ? "global:" : ""}
 ${globalVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
 
-  player:
-${globalVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
+${playerVariables.length ? "player:" : ""}
+${playerVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
 }\n\n`
   }
 
   function compileSubroutines(joinedItems) {
-    let subroutines = joinedItems.match(/(?<=Global\.).[^\s]+/g)
+    let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g)
+    subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace(/\s/g, ""))
     subroutines = [...new Set(subroutines)]
 
     console.log(subroutines)
