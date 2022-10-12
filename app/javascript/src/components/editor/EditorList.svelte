@@ -18,9 +18,9 @@
       Sortable.mount(new MultiDrag())
     } catch {}
 
-		new Sortable(element, {
+    new Sortable(element, {
       group: "items",
-			animation: 100,
+      animation: 100,
       swapTreshhold: 0.25,
       multiDrag: true,
       multiDragKey: "ctrl",
@@ -33,7 +33,7 @@
       store: {
         set: updateOrder
       }
-		})
+    })
   })
 
   function updateOrder() {

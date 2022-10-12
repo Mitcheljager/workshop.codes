@@ -21,46 +21,46 @@
     const baseUrl = "/projects/"
 
     new FetchRails(baseUrl + uuid).get()
-    .then(data => {
-      if (!data) throw Error("No results")
+      .then(data => {
+        if (!data) throw Error("No results")
 
-      const parsedData = JSON.parse(data)
+        const parsedData = JSON.parse(data)
 
-      $currentProject = {
-        uuid: parsedData.uuid,
-        title: parsedData.title
-      }
+        $currentProject = {
+          uuid: parsedData.uuid,
+          title: parsedData.title
+        }
 
-      $currentItem = {}
-      $items = JSON.parse(parsedData.content) || []
-    })
-    .catch(error => {
-      console.error(error)
-      alert("Something went wrong while loading, please try again")
-    })
-    .finally(() => loading = false)
+        $currentItem = {}
+        $items = JSON.parse(parsedData.content) || []
+      })
+      .catch(error => {
+        console.error(error)
+        alert("Something went wrong while loading, please try again")
+      })
+      .finally(() => loading = false)
   }
 
   function createProject() {
     loading = true
 
     new FetchRails("/projects", { project: { title: value } }).post()
-    .then(data => {
-      if (!data) throw Error("Create failed")
+      .then(data => {
+        if (!data) throw Error("Create failed")
 
-      const parsedData = JSON.parse(data)
+        const parsedData = JSON.parse(data)
 
-      $projects = [...$projects, parsedData]
-      $currentProject = parsedData
-      $currentItem = {}
-      $items = []
-      showCreateModal = false
-    })
-    .catch(error => {
-      console.error(error)
-      alert("Something went wrong while creating your project, please try again")
-    })
-    .finally(() => loading = false)
+        $projects = [...$projects, parsedData]
+        $currentProject = parsedData
+        $currentItem = {}
+        $items = []
+        showCreateModal = false
+      })
+      .catch(error => {
+        console.error(error)
+        alert("Something went wrong while creating your project, please try again")
+      })
+      .finally(() => loading = false)
   }
 
   function destroyProject() {
@@ -69,19 +69,19 @@
     loading = true
     showProjectSettings = false
 
-    new FetchRails(`/projects/${$currentProject.uuid}`).post({ method: "delete" })
-    .then(data => {
-      if (!data) throw Error("Create failed")
+    new FetchRails(`/projects/${ $currentProject.uuid }`).post({ method: "delete" })
+      .then(data => {
+        if (!data) throw Error("Create failed")
 
-      $projects = $projects.filter(p => p.uuid != $currentProject.uuid)
-      $currentProject = null
-      $currentItem = {}
-    })
-    .catch(error => {
-      console.error(error)
-      alert("Something went wrong while destroying your project, please try again")
-    })
-    .finally(() => loading = false)
+        $projects = $projects.filter(p => p.uuid != $currentProject.uuid)
+        $currentProject = null
+        $currentItem = {}
+      })
+      .catch(error => {
+        console.error(error)
+        alert("Something went wrong while destroying your project, please try again")
+      })
+      .finally(() => loading = false)
   }
 
   function outsideClick(event) {

@@ -24,7 +24,7 @@
   function mouseMove(event) {
     if (!isDragging) return
 
-    let difference = event.pageX - startX
+    const difference = event.pageX - startX
     currentSize = startSize + difference * (align == "right" ? 1 : -1)
 
     setCssVariable()
@@ -38,10 +38,10 @@
   }
 
   function setCssVariable() {
-    document.body.style.setProperty(`--${key}`, `${currentSize}px`)
+    document.body.style.setProperty(`--${ key }`, `${ currentSize }px`)
   }
 </script>
 
 <svelte:window on:mousemove={mouseMove} on:mouseup={mouseUp} />
 
-<button class="drag-handle drag-handle--{align}" class:is-dragging={isDragging} on:mousedown={mouseDown} />
+<button class="drag-handle drag-handle--{ align }" class:is-dragging={isDragging} on:mousedown={mouseDown} />

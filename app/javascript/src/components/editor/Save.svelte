@@ -9,17 +9,17 @@
   function save() {
     loading = true
 
-    new FetchRails(`/projects/${$currentProject.uuid}`, { project: { content: JSON.stringify($items) } }).post({ method: "put" })
-    .then(data => {
-      if (!data) throw Error("Create failed")
+    new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content: JSON.stringify($items) } }).post({ method: "put" })
+      .then(data => {
+        if (!data) throw Error("Create failed")
 
-      showConfetti()
-    })
-    .catch(error => {
-      console.error(error)
-      alert("Something went wrong while saving, please try again")
-    })
-    .finally(() => loading = false)
+        showConfetti()
+      })
+      .catch(error => {
+        console.error(error)
+        alert("Something went wrong while saving, please try again")
+      })
+      .finally(() => loading = false)
   }
 
   function showConfetti() {

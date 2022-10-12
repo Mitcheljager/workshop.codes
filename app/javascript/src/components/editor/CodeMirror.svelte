@@ -46,10 +46,10 @@
         autocompletion({
           activateOnTyping: true,
           override: [completions],
-          closeOnBlur: false,
+          closeOnBlur: false
         }),
         keymap.of([
-          indentWithTab,
+          indentWithTab
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
@@ -59,7 +59,7 @@
   }
 
   function completions(context) {
-    let word = context.matchBefore(/\w*/)
+    const word = context.matchBefore(/\w*/)
 
     if (word.from == word.to && !context.explicit) return null
 

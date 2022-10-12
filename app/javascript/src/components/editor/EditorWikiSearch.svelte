@@ -25,16 +25,16 @@
     const url = baseUrl + query + ".json?parse_markdown=true"
 
     new FetchRails(url).get()
-    .then(data => {
-      if (!data) throw Error("No results")
+      .then(data => {
+        if (!data) throw Error("No results")
 
-      results = JSON.parse(data)
-    })
-    .catch(error => {
-      results = []
-      console.error(error)
-    })
-    .finally(() => loading = false)
+        results = JSON.parse(data)
+      })
+      .catch(error => {
+        results = []
+        console.error(error)
+      })
+      .finally(() => loading = false)
   }, 250)
 
   function selectResult(result) {

@@ -6,7 +6,7 @@
   let compiling = false
   let copied = false
 
-  function compile(event) {
+  function compile() {
     compiling = true
 
     let joinedItems = $sortedItems.sort().map(i => i.content).join("\n\n")
@@ -16,8 +16,8 @@
 
     joinedItems = joinedItems.replace(settings, "")
 
-    let variables = compileVariables(joinedItems)
-    let subroutines = compileSubroutines(joinedItems)
+    const variables = compileVariables(joinedItems)
+    const subroutines = compileSubroutines(joinedItems)
 
     setTimeout(() => {
       compiling = false
@@ -34,11 +34,11 @@
 
     return `
 variables {
-${globalVariables.length ? "global:" : ""}
-${globalVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
+${ globalVariables.length ? "global:" : "" }
+${ globalVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 
-${playerVariables.length ? "player:" : ""}
-${playerVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
+${ playerVariables.length ? "player:" : "" }
+${ playerVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 }\n\n`
   }
 
@@ -50,7 +50,7 @@ ${playerVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
 
     return `
 subroutines {
-${subroutines.map((v, i) => `  ${i}: ${v}`).join("\n")}
+${ subroutines.map((v, i) => `  ${ i }: ${ v }`).join("\n") }
 }\n\n`
   }
 
