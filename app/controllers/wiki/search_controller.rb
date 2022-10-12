@@ -13,7 +13,7 @@ class Wiki::SearchController < Wiki::BaseController
   end
 
   def index
-    ids = ["202", "405", "512"] || Wiki::Article.search(params[:query])
+    ids = Wiki::Article.search(params[:query])
     articles = Wiki::Article.where(id: ids)
     groups = articles.map { |article| article.group_id }.uniq
     latest_articles = Wiki::Article.where(group_id: groups).group(:group_id).maximum(:id).values
