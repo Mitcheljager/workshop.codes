@@ -52,7 +52,7 @@
     </div>
   </div>
 
-  {#if false && $currentProject}
+  {#if $currentProject}
     <div class="editor__aside">
       <div class="editor__scrollable">
         <EditorAside />
