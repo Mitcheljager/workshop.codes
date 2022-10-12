@@ -44,7 +44,8 @@ ${playerVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
 
   function compileSubroutines(joinedItems) {
     let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g)
-    subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace(/\s/g, ""))
+    subroutines = [...subroutines, ...(joinedItems.match(/Call Subroutine\((.*)\)/g) || [])]
+    subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace("Call Subroutine", "").replace(/[\())\s]/g, ""))
     subroutines = [...new Set(subroutines)]
 
     return `

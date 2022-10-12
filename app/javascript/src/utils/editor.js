@@ -10,8 +10,6 @@ export function createNewItem(name, content, position = 9999, type = "item") {
     content: content
   }
 
-  console.log(item)
-
   return item
 }
 
