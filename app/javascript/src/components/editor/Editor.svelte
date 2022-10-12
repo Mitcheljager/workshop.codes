@@ -39,7 +39,7 @@
 
 <div class="editor">
   <div class="editor__top">
-    <img class="mr-1/2" src={logo} height=50 alt="Workshop.codes" />
+    <img on:click={() => $currentProject = null} class="mr-1/2 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
 
     {#if $projects}
       <ProjectsDropdown />
