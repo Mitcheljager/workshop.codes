@@ -1,7 +1,7 @@
 .editor-folder.editor-folder {
   position: relative;
 
-  > span {
+  > span > input {
     color: $text-color-dark;
   }
 }

@@ -43,7 +43,7 @@
 
     input {
       color: $text-color;
-      padding-right: 3rem;
+      pointer-events: none;
     }
   }
 
@@ -58,6 +58,7 @@
 
       input {
         color: $white;
+        pointer-events: all;
       }
     }
   }
@@ -68,6 +69,7 @@
   position: absolute;
   right: 0;
   top: 0.25rem;
+  background: darken($bg-dark, 7.5%);
 
   .editor-item:hover > & {
     display: block;

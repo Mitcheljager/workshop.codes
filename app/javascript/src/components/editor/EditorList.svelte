@@ -4,6 +4,7 @@
   import EditorFolder from "./EditorFolder.svelte"
   import { items, sortedItems } from "../../stores/editor.js"
   import { onMount } from "svelte"
+  import { flip } from "svelte/animate"
 
   export let parent = null
 
@@ -63,11 +64,13 @@
 <svelte:window on:keydown={keypress} on:keyup={keypress} />
 
 <div class="sortable" bind:this={element}>
-  {#each itemsInParent || [] as item, index}
-    {#if item.type === "item"}
-      <EditorItem {item} {index} />
-    {:else if item.type === "folder"}
-      <EditorFolder {item} {index} />
-    {/if}
+  {#each itemsInParent || [] as item, index (item.id)}
+    <div animate:flip={{ duration: 200 }}>
+      {#if item.type === "item"}
+        <EditorItem {item} {index} />
+      {:else if item.type === "folder"}
+        <EditorFolder {item} {index} />
+      {/if}
+    </div>
   {/each}
 </div>
