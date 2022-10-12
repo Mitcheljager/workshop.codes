@@ -34,6 +34,7 @@
         title: parsedData.title
       }
 
+      $currentItem = {}
       $items = JSON.parse(parsedData.content) || []
     })
     .catch(error => {

@@ -16,7 +16,7 @@
   }
 
   function findAllRules() {
-    const rules = value.split(/(?=rule\()/g)
+    const rules = value.split(/(?=(disabled rule|(?<!disabled\s+)rule)\()/g)
     const newItems = []
 
     rules.forEach((rule, i) => {
