@@ -40,6 +40,7 @@
     <p>
       Known bugs:
       <ul>
+        <li>Spaces break autocomplete results.</li>
         <li>Variables that are only stated in a For Global (or Player) Variable Loop will not be properly compiled.</li>
         <li>Syntax highlighting can be very dumb in places.</li>
         <li>Rules without names might not be properly imported.</li>
