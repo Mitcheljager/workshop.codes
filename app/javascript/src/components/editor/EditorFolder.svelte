@@ -1,5 +1,6 @@
 <script>
   import EditorItemDestroy from "./EditorItemDestroy.svelte"
+  import EditorItemName from "./EditorItemName.svelte"
   import EditorList from "./EditorList.svelte"
 
   export let item = {}
@@ -17,7 +18,7 @@
   </div>
 
   <span>
-    {item.name}
+    <EditorItemName {item} />
   </span>
 
   <div class="editor-folder__content" class:editor-folder__content--expanded={expanded}>

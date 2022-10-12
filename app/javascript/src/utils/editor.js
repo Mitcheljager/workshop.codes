@@ -18,6 +18,10 @@ export function destroyItem(id) {
   items.set(get(items).filter(i => i.id != id && i.parent != id))
 }
 
+export function updateItemName(id, name) {
+  get(items).filter(i => i.id == id)[0].name = name
+}
+
 export function getClosingBracket(content) {
   let closePos = 0
   let counter = 1

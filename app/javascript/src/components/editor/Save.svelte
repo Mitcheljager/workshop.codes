@@ -26,7 +26,16 @@
     confettiActive = true
     setTimeout(() => confettiActive = false, 1000)
   }
+
+  function keydown(event) {
+    if (event.ctrlKey && event.keyCode == 83) {
+      event.preventDefault()
+      save()
+    }
+  }
 </script>
+
+<svelte:window on:keydown={keydown} />
 
 <div class="confetti-holder">
   <button class="button" on:click={save} disabled={loading}>

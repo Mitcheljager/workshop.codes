@@ -2,7 +2,7 @@
   import { fly } from "svelte/transition"
   import { templates } from "../../lib/templates"
   import { createNewItem } from "../../utils/editor"
-  import { items } from "../../stores/editor"
+  import { items, currentItem } from "../../stores/editor"
 
   let active = false
   let element
@@ -19,6 +19,7 @@
   function createItem(name, content, type = "item") {
     const newItem = createNewItem(name, content, $items.length, type)
     $items = [...$items, newItem]
+    if (type == "item") $currentItem = newItem
   }
 </script>
 

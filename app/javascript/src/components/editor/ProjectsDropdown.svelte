@@ -50,7 +50,12 @@
     .then(data => {
       if (!data) throw Error("Create failed")
 
-      $projects = [...$projects, JSON.parse(data)]
+      const parsedData = JSON.parse(data)
+
+      $projects = [...$projects, parsedData]
+      $currentProject = parsedData
+      $currentItem = {}
+      $items = []
       showCreateModal = false
     })
     .catch(error => {
