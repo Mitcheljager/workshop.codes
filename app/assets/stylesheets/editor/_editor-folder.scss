@@ -3,6 +3,7 @@
 
   > span > input {
     color: $text-color-dark;
+    pointer-events: all;
   }
 }
 
