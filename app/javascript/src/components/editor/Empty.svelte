@@ -20,7 +20,7 @@
     <p>Create a new project to get started. Import your existing script or start from zero.</p>
 
     <p class="text-white">
-      <mark>This editor is currently in an early alpha version. Expect bugs, many of them!</mark>
+      <mark>This editor is currently in early alpha. Expect bugs, many of them!</mark>
     </p>
 
     <p>
