@@ -24,7 +24,7 @@ class Wiki::SearchController < Wiki::BaseController
       format.json {
         @articles.each do |article|
           if params[:parse_markdown]
-            article.content = markdown(article.content)
+            article.content = sanitized_markdown(article.content)
           else
             article.content = ReverseMarkdown.convert(ActionController::Base.helpers.sanitize(markdown(article.content || ""), tags: %w(style p br strong em b blockquote h1 h2 h3 h4 h5 h6 code pre)).gsub(/h\d/, "strong"))
           end
