@@ -44,10 +44,10 @@ export function getClosingBracket(content) {
 export function getSettings(value) {
   const regex = new RegExp(/settings/)
   const match = regex.exec(value)
-  if (!match) return
+  if (!match) return []
 
   const untilIndex = match.index + getClosingBracket(value.slice(match.index, value.length))
-  if (!untilIndex) return
+  if (!untilIndex) return []
 
   return [match.index, untilIndex + 1]
 }

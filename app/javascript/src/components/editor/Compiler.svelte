@@ -15,6 +15,8 @@
       const [settingsStart, settingsEnd] = getSettings(joinedItems)
       const settings = joinedItems.slice(settingsStart, settingsEnd)
 
+      if (!settings) throw new Error("You are missing a Settings array. This is required.")
+
       joinedItems = joinedItems.replace(settings, "")
 
       const variables = compileVariables(joinedItems)
@@ -25,6 +27,7 @@
         copyToClipboard(settings + variables + subroutines + joinedItems)
       }, 500)
     } catch (error) {
+      console.log(error)
       alert(`Something went wrong while compiling, this might be an error on our part or an error in your code. ${ error }`)
       compiling = false
     }
@@ -36,6 +39,8 @@
 
     let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee)\.).[^\s,.[\]);]+/g)
     playerVariables = [...new Set(playerVariables)]
+
+    if (!globalVariables?.length && !playerVariables.length) return ""
 
     return `
 variables {
@@ -52,6 +57,8 @@ ${ playerVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
     subroutines = [...subroutines, ...(joinedItems.match(/Call Subroutine\((.*)\)/g) || [])]
     subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace("Call Subroutine", "").replace(/[\())\s]/g, ""))
     subroutines = [...new Set(subroutines)]
+
+    if (!subroutines.length) return ""
 
     return `
 subroutines {
