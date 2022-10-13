@@ -39,6 +39,7 @@ class User < ApplicationRecord
   has_many :wiki_edits, class_name: "Wiki::Edit", dependent: :destroy
   has_many :blocks
   has_many :visits, class_name: "Ahoy::Visit"
+  has_many :projects, dependent: :destroy
 
   has_one_attached :profile_image, dependent: :destroy
   has_one_attached :banner_image, dependent: :destroy

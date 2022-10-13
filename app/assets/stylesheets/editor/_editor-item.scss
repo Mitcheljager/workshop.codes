@@ -1,0 +1,77 @@
+.editor-item {
+  appearance: none;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: $font-stack;
+  font-size: $font-size-base;
+  text-align: left;
+
+  &:focus-visible {
+    outline: 2px inset $white;
+    outline-offset: -2px;
+    box-shadow: none;
+  }
+
+  &:not(.editor-folder)::before {
+    content: "•";
+    display: block;
+    position: absolute;
+    top: 0.25rem;
+    left: 0.45rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    color: $text-color-dark;
+  }
+
+  > span {
+    display: block;
+    padding: 0.25rem $margin / 3;
+    white-space: nowrap;
+
+    &:hover {
+      background: darken($bg-dark, 7.5%);
+      box-shadow: -50px 0 0 darken($bg-dark, 7.5%);
+
+      input {
+        color: $white;
+      }
+    }
+
+    input {
+      color: $text-color;
+      pointer-events: none;
+    }
+  }
+
+  &--active {
+    &:not(.editor-folder)::before {
+      color: $text-color-light;
+    }
+
+    > span {
+      background: darken($bg-dark, 10%);
+      box-shadow: -50px 0 0 darken($bg-dark, 10%);
+
+      input {
+        color: $white;
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+.editor-item__actions {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0.25rem;
+  background: darken($bg-dark, 7.5%);
+
+  .editor-item:hover > & {
+    display: block;
+  }
+}

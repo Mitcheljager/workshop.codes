@@ -29,6 +29,12 @@
   display: inline-block;
 }
 
+.sm\:inline-block {
+  @include media-min(sm) {
+    display: inline;
+  }
+}
+
 .inline-flex {
   display: inline-flex;
 }

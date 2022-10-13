@@ -6,7 +6,7 @@
   min-height: 600px;
 
   .CodeMirror-selectedtext,
-  .CodeMirror-selected {
+  .CodeMirror-selected, {
     background: lighten($bg-dark, 20%);
   }
 
@@ -18,7 +18,7 @@
     .cm-attribute {
       color: #8e74b5;
     }
-  
+
     .cm-string {
       color: #5074de;
     }
@@ -46,5 +46,78 @@
 
   .well {
     white-space: initial;
+  }
+}
+
+/// CodeMirror 6
+
+.cm-editor {
+  color: $text-color-light;
+  font-family: "Consolas", monospace;
+
+  .cm-gutters {
+    border-right: 0;
+    background: $bg-dark;
+    color: $text-color-dark;
+
+    .cm-activeLineGutter {
+      background: transparent;
+      color: $text-color-light;
+    }
+  }
+
+  .cm-activeLine {
+    background: rgba($pure-white, 0.025);
+  }
+
+  .cm-selectionBackground {
+    background: lighten($bg-dark, 10%);
+  }
+
+  .cm-selectionMatch {
+    background: lighten($bg-dark, 10%);
+  }
+
+  &.cm-focused .cm-selectionBackground {
+    background: lighten($bg-dark, 15%);
+  }
+
+  .cm-matchingBracket {
+    background: lighten($bg-dark, 20%) !important;
+  }
+
+  .cm-cursor {
+    border-color: #ff00ff;
+    border-width: 3px;
+  }
+
+  .cm-tooltip {
+    background: darken($bg-dark, 5%);
+    border-color: darken($bg-dark, 10%);
+  }
+
+  .ͼd {
+    color: var(--color-number);
+  }
+
+  .ͼe {
+    color: var(--color-string);
+  }
+
+  .ͼb {
+    color: var(--color-keyword);
+  }
+
+  .ͼc {
+    color: var(--color-value);
+  }
+
+  .ͼm {
+    color: var(--color-comment);
+  }
+
+  .ͼ7 {
+    color: var(--color-action);
+    text-decoration: none;
   }
 }

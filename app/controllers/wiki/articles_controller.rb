@@ -21,6 +21,7 @@ class Wiki::ArticlesController < Wiki::BaseController
 
   def show
     @article = Wiki::Article.approved.where(slug: params[:slug]).last
+    @article.readonly!
 
     not_found and return unless @article
     redirect_to_latest_article
@@ -30,9 +31,16 @@ class Wiki::ArticlesController < Wiki::BaseController
     @edit_ids = Wiki::Article.joins(:edit).approved.where(group_id: @article.group_id).pluck(:"wiki_edits.id")
     @edit_count = Wiki::Edit.where(id: @edit_ids).size
 
+    @article.content = sanitized_markdown(@article.content) if params[:parse_markdown]
+
     add_breadcrumb "Categories", :wiki_categories_path
     add_breadcrumb @article.category.title, Proc.new{ wiki_category_path(@article.category.slug) }
     add_breadcrumb @article.title.truncate(20), Proc.new{ wiki_article_path(@article.slug) }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @article.to_json(include: :category) }
+    end
   end
 
   def new

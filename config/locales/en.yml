@@ -78,7 +78,7 @@ en:
       button: View
     workshop_disabled:
       title: The Workshop is currently disabled
-      content_html: The Workshop is not yet enabled in Overwatch 2. <strong class="text-white">Previously created codes can still be imported</strong>. Custom games without the Workshop are still available.
+      content_html: The Workshop is not yet enabled in Overwatch 2. <strong class="text-white">Previously created codes can still be imported</strong>. Custom games without the Workshop are still available. You can still edit scripts outside of the game.
 
   posts:
     index:

@@ -1,0 +1,7 @@
+<%= javascript_pack_tag "editor.js", "data-turbolinks-track": "reload", defer: true %>
+
+<div class="fullscreen-overlay">
+  <div class="spinner"></div>
+</div>
+
+<%= svelte_component "Editor", { values: @values, actions: @actions, _projects: @projects } %>

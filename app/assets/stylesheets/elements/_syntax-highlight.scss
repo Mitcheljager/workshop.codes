@@ -6,7 +6,9 @@ $highlight-types: (
   keyword: #E06C75,
   number: #D19A66,
   comment: $text-color-dark,
-  variable: #56B6C2
+  variable: #56B6C2,
+  action: #c678bf,
+  value: #44a4ef
 );
 
 .syntax-highlight {

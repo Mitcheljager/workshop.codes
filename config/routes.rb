@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "tos", to: "pages#tos", as: "tos"
   get "explanation", to: "pages#explanation"
 
+  get "editor", to: "editor#index"
+
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
 
   namespace :admin do
@@ -113,6 +115,8 @@ Rails.application.routes.draw do
     get "revisions/partial/:id", to: "revisions#partial", as: "revisions_partial"
     get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
+
+    resources :projects, param: :uuid, format: :json, only: [:show, :create, :update, :destroy]
 
     get "latest", to: "posts#latest", as: "latest"
     get "page/1", to: redirect("/latest", status: 301)

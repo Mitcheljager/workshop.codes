@@ -1,19 +1,23 @@
 {
   "name": "overwatch-workshop",
   "private": true,
-  "resolutions": {
-    "acorn": "^8.1.0"
-  },
   "engines": {
     "node": "^14.0.0"
   },
   "dependencies": {
     "@agilie/canvas-image-cover-position": "^1.1.1",
+    "@codemirror/autocomplete": "^6.3.0",
+    "@codemirror/lang-javascript": "^6.1.0",
+    "@codemirror/state": "^6.1.2",
+    "@codemirror/view": "^6.3.0",
+    "@lezer/generator": "^1.1.1",
+    "@lezer/highlight": "^1.1.1",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.0",
     "acorn": "^8.1.0",
+    "codemirror": "^6.0.1",
     "inscrybmde": "^1.11.6",
     "metrics-graphics": "^2.15.6",
     "microlight": "^0.0.7",
@@ -24,8 +28,9 @@
     "patch-package": "^6.4.7",
     "sass-loader": "^11.0.1",
     "siema": "^1.5.1",
-    "sortablejs": "^1.10.2",
+    "sortablejs": "^1.15.0",
     "svelte": "^3.49.0",
+    "svelte-confetti": "^1.2.0",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.7.0",
     "svelte-preprocess-sass": "^1.0.0",
@@ -44,11 +49,15 @@
     "webpack-dev-server": "^3.11.2",
     "yarn-audit-fix": "^9.3.0"
   },
+  "resolutions": {
+    "acorn": "^8.1.0"
+  },
   "scripts": {
     "webpack:analyze": "yarn webpack:build_json && yarn webpack:analyze_json",
     "webpack:build_json": "ruby bin/webpack --profile --json > tmp/webpack-stats.json",
     "webpack:analyze_json": "npx webpack-bundle-analyzer tmp/webpack-stats.json public/packs",
     "postinstall": "patch-package",
-    "heroku-postbuild": "patch-package"
+    "heroku-postbuild": "patch-package",
+    "generate-ow-language": "yarn lezer-generator app/javascript/src/lib/ows.grammar -o app/javascript/src/lib/lang.js"
   }
 }

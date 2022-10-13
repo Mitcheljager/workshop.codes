@@ -11,3 +11,8 @@
     opacity: 0;
   }
 }
+
+.sortable__multi-selected {
+  outline: inset 2px $text-color;
+  outline-offset: -2px;
+}

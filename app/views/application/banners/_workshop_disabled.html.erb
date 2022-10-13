@@ -13,6 +13,7 @@
     <% if ENV["BANNER_ROOT_URL"] %>
       <div>
         <%= link_to "Read more", ENV["BANNER_ROOT_URL"], class: "button button--link pb-0" %>
+        <%= link_to "Check out our editor", editor_path(), class: "button button--link pb-0 sm:ml-1/2 block sm:inline-block text-primary text-center" %>
       </div>
     <% end %>
   </div>
