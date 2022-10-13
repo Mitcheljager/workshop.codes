@@ -3,7 +3,7 @@
   <h1 class="mb-0">Welcome to the Workshop.codes Overwatch Workshop Script Editor</h1>
   <small class="text-dark">Catchy name, right?</small>
 
-  <div class="line-height">
+  <div class="line-height-3/2">
     <p>With this editor you can create and edit your Workshop modes using a text based editor. If you have not yet used the Workshop using this editor as a starting point might be difficult. If you have never used a text based editor before but you have used the Workshop, consider this the second step to becoming a programmer!</p>
 
     <p>
