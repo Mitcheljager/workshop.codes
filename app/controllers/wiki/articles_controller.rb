@@ -21,6 +21,7 @@ class Wiki::ArticlesController < Wiki::BaseController
 
   def show
     @article = Wiki::Article.approved.where(slug: params[:slug]).last
+    @article.readonly!
 
     not_found and return unless @article
     redirect_to_latest_article
