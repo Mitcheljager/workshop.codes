@@ -9,20 +9,25 @@
   function compile() {
     compiling = true
 
-    let joinedItems = $sortedItems.sort().map(i => i.content).join("\n\n")
+    try {
+      let joinedItems = $sortedItems.sort().map(i => i.content).join("\n\n")
 
-    const [settingsStart, settingsEnd] = getSettings(joinedItems)
-    const settings = joinedItems.slice(settingsStart, settingsEnd)
+      const [settingsStart, settingsEnd] = getSettings(joinedItems)
+      const settings = joinedItems.slice(settingsStart, settingsEnd)
 
-    joinedItems = joinedItems.replace(settings, "")
+      joinedItems = joinedItems.replace(settings, "")
 
-    const variables = compileVariables(joinedItems)
-    const subroutines = compileSubroutines(joinedItems)
+      const variables = compileVariables(joinedItems)
+      const subroutines = compileSubroutines(joinedItems)
 
-    setTimeout(() => {
+      setTimeout(() => {
+        compiling = false
+        copyToClipboard(settings + variables + subroutines + joinedItems)
+      }, 500)
+    } catch (error) {
+      alert(`Something went wrong while compiling, this might be an error on our part or an error in your code. ${error}`)
       compiling = false
-      copyToClipboard(settings + variables + subroutines + joinedItems)
-    }, 500)
+    }
   }
 
   function compileVariables(joinedItems) {
@@ -43,7 +48,7 @@ ${ playerVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
   }
 
   function compileSubroutines(joinedItems) {
-    let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g)
+    let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g) || []
     subroutines = [...subroutines, ...(joinedItems.match(/Call Subroutine\((.*)\)/g) || [])]
     subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace("Call Subroutine", "").replace(/[\())\s]/g, ""))
     subroutines = [...new Set(subroutines)]
