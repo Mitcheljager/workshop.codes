@@ -25,7 +25,7 @@
         copyToClipboard(settings + variables + subroutines + joinedItems)
       }, 500)
     } catch (error) {
-      alert(`Something went wrong while compiling, this might be an error on our part or an error in your code. ${error}`)
+      alert(`Something went wrong while compiling, this might be an error on our part or an error in your code. ${ error }`)
       compiling = false
     }
   }
