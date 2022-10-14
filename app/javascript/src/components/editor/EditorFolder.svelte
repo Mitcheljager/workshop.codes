@@ -5,16 +5,21 @@
 
   export let item = {}
 
-  let expanded = true
+  let expanded = localStorage.getItem(`folder_expanded_${item.id}`)
+
+  function toggleExpanded() {
+    expanded = !expanded
+    localStorage.setItem(`folder_expanded_${item.id}`, expanded)
+  }
 </script>
 
-<button
+<div
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
   data-item-id={item.id}>
-  <div class="editor-folder__icon" on:click|stopPropagation={() => expanded = !expanded}>
+  <button class="editor-folder__icon empty-button" on:click|stopPropagation={toggleExpanded}>
     &gt;
-  </div>
+  </button>
 
   <span>
     <EditorItemName {item} />
@@ -27,4 +32,4 @@
   <div class="editor-item__actions">
     <EditorItemDestroy {item} />
   </div>
-</button>
+</div>
