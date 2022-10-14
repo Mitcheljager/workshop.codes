@@ -11,9 +11,8 @@
 <button
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
-  data-item-id={item.id}
-  on:click|stopPropagation={() => expanded = !expanded}>
-  <div class="editor-folder__icon">
+  data-item-id={item.id}>
+  <div class="editor-folder__icon" on:click|stopPropagation={() => expanded = !expanded}>
     &gt;
   </div>
 
