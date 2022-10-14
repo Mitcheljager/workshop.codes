@@ -5,7 +5,7 @@
 
   export let item = {}
 
-  let expanded = localStorage.getItem(`folder_expanded_${item.id}`)
+  let expanded = localStorage.getItem(`folder_expanded_${item.id}`) == "true" ? true : false
 
   function toggleExpanded() {
     expanded = !expanded
