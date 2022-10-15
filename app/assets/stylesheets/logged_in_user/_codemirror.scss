@@ -91,9 +91,42 @@
     border-width: 3px;
   }
 
+  .cm-completionIcon {
+    padding-right: 1rem;
+  }
+
   .cm-tooltip {
     background: darken($bg-dark, 5%);
-    border-color: darken($bg-dark, 10%);
+    border: 0;
+    box-shadow: $shadow;
+
+    > ul {
+      @include styled-scrollbar;
+    }
+
+    > .cm-tooltip {
+      background: lighten($bg-dark, 5%);
+      color: $text-color-light;
+    }
+  }
+
+  .cm-completionDetail {
+    color: $text-color;
+    font-size: 0.85em;
+
+    &::before {
+      display: inline;
+      content: "(";
+    }
+
+    &::after {
+      display: inline;
+      content: ")";
+    }
+  }
+
+  .cm-tooltip-autocomplete ul li[aria-selected] {
+    background: lighten($bg-dark, 5%);
   }
 
   .ͼd {

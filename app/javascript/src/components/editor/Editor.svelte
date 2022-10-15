@@ -25,15 +25,35 @@
   })
 
   function parseKeywords() {
-    const mappedValues = Object.values(values).map(v => {
-      return { label: v["en-US"], type: "keyword", info: v.description }
-    })
-
-    const mappedActions = Object.values(actions).map(a => {
-      return { label: a["en-US"], type: "function", info: a.description }
-    })
+    const mappedValues = objectToKeyword(values, "text")
+    const mappedActions = objectToKeyword(actions, "function")
 
     return [...mappedValues, ...mappedActions]
+  }
+
+  function objectToKeyword(obj, keywordType) {
+    return Object.values(obj).map(v => {
+      const params = {
+        label: v["en-US"],
+        type: keywordType,
+        info: v.description
+      }
+
+      if (v.args?.length) {
+        let detail = v.args.map(a => {
+          const type = typeof a.type
+          if (type === "string") return a.type
+          if (Array.isArray(a.type)) return a.type?.[0]
+          if (type === "object") return Object.keys(a.type)?.[0]
+        }).join(", ")
+
+        if (detail.length > 30) detail = detail.slice(0, 30) + "..."
+
+        params.detail = detail
+      }
+
+      return params
+    })
   }
 </script>
 
