@@ -2,8 +2,9 @@
   import { onMount } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
-  import { EditorState } from "@codemirror/state"
+  import { EditorState, EditorSelection } from "@codemirror/state"
   import { indentWithTab } from "@codemirror/commands"
+  import { indentUnit } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
   import { OverwatchWorkshop } from "../../lib/customLanguage"
   import { currentItem, editorStates, items } from "../../stores/editor"
@@ -41,19 +42,32 @@
     return EditorState.create({
       doc: content,
       extensions: [
-        basicSetup,
         OverwatchWorkshop(),
         autocompletion({
           activateOnTyping: true,
           override: [completions],
           closeOnBlur: false
         }),
+        indentUnit.of("    "),
         keymap.of([
-          indentWithTab
+          indentWithTab,
+          { key: "Enter", run: ({ state, dispatch }) => {
+            let changes = state.changeByRange(range => {
+              let { from, to } = range, line = state.doc.lineAt(from)
+              let indent = /^\s*/.exec(state.doc.lineAt(from).text)[0].length
+              let insert = "\n"
+              for (let i = 0; i < indent; i++) { insert += "\t" }
+              return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
+            })
+
+            dispatch(state.update(changes, { scrollIntoView: true, userEvent: "input" }))
+            return true
+          }}
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
-        })
+        }),
+        basicSetup,
       ]
     })
   }

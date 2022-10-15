@@ -1,16 +1,10 @@
-import { LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside, delimitedIndent } from "@codemirror/language"
+import { LRLanguage, LanguageSupport } from "@codemirror/language"
 import { styleTags, tags as t } from "@lezer/highlight"
 import { parser } from "./lang.js"
 
 export const OverwatchWorkshopLanguage = LRLanguage.define({
   parser: parser.configure({
     props: [
-      indentNodeProp.add({
-        Application: delimitedIndent({closing: ")", align: false})
-      }),
-      foldNodeProp.add({
-        Application: foldInside
-      }),
       styleTags({
         Keyword: t.keyword,
         Action: t.bool,
@@ -22,12 +16,18 @@ export const OverwatchWorkshopLanguage = LRLanguage.define({
         LineComment: t.lineComment,
         Punctuation: t.annotation,
         Variable: t.keyword,
-        "( )": t.paren
+        "( )": t.paren,
+        "[ ]": t.squareBracket,
+        "{ }": t.brace,
+        ".": t.derefOperator,
+        ", ;": t.separator
       })
     ]
   }),
   languageData: {
-    commentTokens: {line: ";"}
+    closeBrackets: { brackets: ["(", "[", "{", "'", "\"", "`"] },
+    commentTokens: { line: "//" },
+    indentOnInput: /^\s*([\}\]\)]|else:|elif |except |finally:)$/
   }
 })
 
