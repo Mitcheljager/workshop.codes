@@ -51,7 +51,7 @@
         indentUnit.of("    "),
         keymap.of([
           { key: "Tab", run: tabIndent },
-          { key: "Enter", run: autoIndentOnEnter },
+          { key: "Enter", run: autoIndentOnEnter }
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
