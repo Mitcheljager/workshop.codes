@@ -50,22 +50,9 @@
         }),
         indentUnit.of("    "),
         keymap.of([
+          { key: "Tab", run: tabAutocomplete },
+          { key: "Enter", run: autoIndent },
           indentWithTab,
-          { key: "Enter", run: ({ state, dispatch }) => {
-            const changes = state.changeByRange(range => {
-              const { from, to } = range, line = state.doc.lineAt(from)
-              const indent = /^\s*/.exec(state.doc.lineAt(from).text)?.[0].length
-              let insert = "\n"
-              for (let i = 0; i < indent; i++) { insert += "\t" }
-              const openBracket = /[\{\(\[]/gm.exec(state.doc.lineAt(from).text)?.[0].length
-              const closeBracket = /[\}\)\]]/gm.exec(state.doc.lineAt(from).text)?.[0].length
-              if (openBracket && !closeBracket) insert += "\t"
-              return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
-            })
-
-            dispatch(state.update(changes, { scrollIntoView: true, userEvent: "input" }))
-            return true
-          }}
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
@@ -91,6 +78,31 @@
       event.preventDefault()
       view.focus()
     }
+  }
+
+  function autoIndent({ state, dispatch }) {
+    const changes = state.changeByRange(range => {
+      const { from, to } = range, line = state.doc.lineAt(from)
+
+      const spaces = /^\s*/.exec(state.doc.lineAt(from).text)?.[0].length
+      const tabs = /^\t*/.exec(state.doc.lineAt(from).text)?.[0].length
+      let indent = Math.floor(spaces / 4) + tabs
+      let insert = "\n"
+      for (let i = 0; i < indent; i++) { insert += "\t" }
+
+      const openBracket = /[\{\(\[]/gm.exec(state.doc.lineAt(from).text)?.[0].length
+      const closeBracket = /[\}\)\]]/gm.exec(state.doc.lineAt(from).text)?.[0].length
+      if (openBracket && !closeBracket) insert += "\t"
+
+      return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
+    })
+
+    dispatch(state.update(changes, { scrollIntoView: true, userEvent: "input" }))
+    return true
+  }
+
+  function tabAutocomplete() {
+    return !!element.querySelector(".cm-tooltip-autocomplete")
   }
 
   const updateItem = debounce(() => {
