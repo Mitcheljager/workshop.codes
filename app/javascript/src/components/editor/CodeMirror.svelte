@@ -50,9 +50,8 @@
         }),
         indentUnit.of("    "),
         keymap.of([
-          { key: "Tab", run: tabAutocomplete },
-          { key: "Enter", run: autoIndent },
-          indentWithTab,
+          { key: "Tab", run: tabIndent },
+          { key: "Enter", run: autoIndentOnEnter },
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
@@ -80,13 +79,11 @@
     }
   }
 
-  function autoIndent({ state, dispatch }) {
+  function autoIndentOnEnter({ state, dispatch }) {
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
 
-      const spaces = /^\s*/.exec(state.doc.lineAt(from).text)?.[0].length
-      const tabs = /^\t*/.exec(state.doc.lineAt(from).text)?.[0].length
-      let indent = Math.floor(spaces / 4) + tabs
+      const indent = getsIntendForLine(state, from)
       let insert = "\n"
       for (let i = 0; i < indent; i++) { insert += "\t" }
 
@@ -101,8 +98,31 @@
     return true
   }
 
-  function tabAutocomplete() {
-    return !!element.querySelector(".cm-tooltip-autocomplete")
+  function tabIndent({ state, dispatch }) {
+    if (element.querySelector(".cm-tooltip-autocomplete")) return true
+
+    const changes = state.changeByRange(range => {
+      const { from, to } = range, line = state.doc.lineAt(from)
+
+      const previousIndent = getsIntendForLine(state, from - 1)
+      const currentIndent = getsIntendForLine(state, from)
+      let insert = "\t"
+
+      if (currentIndent < previousIndent) {
+        for (let i = 0; i < previousIndent - 1; i++) { insert += "\t" }
+      }
+
+      return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
+    })
+
+    dispatch(state.update(changes, { scrollIntoView: true, userEvent: "input" }))
+    return true
+  }
+
+  function getsIntendForLine(state, line) {
+    const spaces = /^\s*/.exec(state.doc.lineAt(line).text)?.[0].length
+    const tabs = /^\t*/.exec(state.doc.lineAt(line).text)?.[0].length
+    return Math.floor(spaces / 4) + tabs
   }
 
   const updateItem = debounce(() => {
