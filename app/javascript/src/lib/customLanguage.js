@@ -17,6 +17,7 @@ export const OverwatchWorkshopLanguage = LRLanguage.define({
         Value: t.heading,
         Function: t.function,
         Number: t.number,
+        Boolean: t.number,
         String: t.string,
         LineComment: t.lineComment,
         Punctuation: t.annotation,

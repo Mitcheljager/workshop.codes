@@ -7,5 +7,6 @@ export const
   Value = 5,
   Variable = 6,
   String = 7,
-  Number = 8,
-  Punctuation = 9
+  Boolean = 8,
+  Number = 9,
+  Punctuation = 10
