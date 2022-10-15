@@ -52,11 +52,14 @@
         keymap.of([
           indentWithTab,
           { key: "Enter", run: ({ state, dispatch }) => {
-            let changes = state.changeByRange(range => {
-              let { from, to } = range, line = state.doc.lineAt(from)
-              let indent = /^\s*/.exec(state.doc.lineAt(from).text)[0].length
+            const changes = state.changeByRange(range => {
+              const { from, to } = range, line = state.doc.lineAt(from)
+              const indent = /^\s*/.exec(state.doc.lineAt(from).text)?.[0].length
               let insert = "\n"
               for (let i = 0; i < indent; i++) { insert += "\t" }
+              const openBracket = /[\{\(\[]/gm.exec(state.doc.lineAt(from).text)?.[0].length
+              const closeBracket = /[\}\)\]]/gm.exec(state.doc.lineAt(from).text)?.[0].length
+              if (openBracket && !closeBracket) insert += "\t"
               return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
             })
 
@@ -67,7 +70,7 @@
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
         }),
-        basicSetup,
+        basicSetup
       ]
     })
   }

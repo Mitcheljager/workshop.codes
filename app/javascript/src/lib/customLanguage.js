@@ -26,8 +26,7 @@ export const OverwatchWorkshopLanguage = LRLanguage.define({
   }),
   languageData: {
     closeBrackets: { brackets: ["(", "[", "{", "'", "\"", "`"] },
-    commentTokens: { line: "//" },
-    indentOnInput: /^\s*([\}\]\)]|else:|elif |except |finally:)$/
+    commentTokens: { line: "//" }
   }
 })
 
