@@ -37,7 +37,7 @@
       const params = {
         label: v["en-US"],
         type: keywordType,
-        info: v.description,
+        info: v.description
       }
 
       if (v.args?.length) {
@@ -50,11 +50,11 @@
         }).join(", ")
 
         detail = detail.replaceAll("unsigned", "")
-        params.detail = `(${ detail.slice(0, 30)}${detail.length > 30 ? "..." : ""})`
+        params.detail = `(${ detail.slice(0, 30) }${ detail.length > 30 ? "..." : "" })`
 
         // Add apply values when selecting autocomplete, filling in default args
         const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
-        let apply = v.args.map(a => {
+        const apply = v.args.map(a => {
           const string = a.default?.toString().toLowerCase().replaceAll(",", "")
 
           if (lowercaseDefaults.includes(string)) return defaults[toCapitalize(string)]
@@ -62,7 +62,7 @@
           return toCapitalize(string)
         })
 
-        params.apply = `${v["en-US"]}(${apply.join(", ")})`
+        params.apply = `${ v["en-US"] }(${ apply.join(", ") })`
       }
 
       return params
