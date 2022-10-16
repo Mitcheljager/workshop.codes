@@ -14,6 +14,7 @@
 
   export let values
   export let actions
+  export let defaults
   export let _projects
 
   let completionsMap = []
@@ -36,10 +37,11 @@
       const params = {
         label: v["en-US"],
         type: keywordType,
-        info: v.description
+        info: v.description,
       }
 
       if (v.args?.length) {
+        // Add detail arguments in autocomplete results
         let detail = v.args.map(a => {
           const type = typeof a.type
           if (type === "string") return a.type
@@ -47,13 +49,28 @@
           if (type === "object") return Object.keys(a.type)?.[0]
         }).join(", ")
 
-        if (detail.length > 30) detail = detail.slice(0, 30) + "..."
+        detail = detail.replaceAll("unsigned", "")
+        params.detail = `(${ detail.slice(0, 30)}${detail.length > 30 ? "..." : ""})`
 
-        params.detail = detail
+        // Add apply values when selecting autocomplete, filling in default args
+        const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
+        let apply = v.args.map(a => {
+          const string = a.default?.toString().toLowerCase().replaceAll(",", "")
+
+          if (lowercaseDefaults.includes(string)) return defaults[toCapitalize(string)]
+
+          return toCapitalize(string)
+        })
+
+        params.apply = `${v["en-US"]}(${apply.join(", ")})`
       }
 
       return params
     })
+
+    function toCapitalize(string) {
+      return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+    }
   }
 </script>
 

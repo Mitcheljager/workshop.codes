@@ -1,0 +1,18 @@
+Compare: "True"
+Player: Event Player
+Primary Fire: Button(Primary Fire)
+Vector: Vector(0, 0, 0)
+Number: 0
+All Players: All Players(All Teams)
+String: ""
+Sub0: SubroutineName
+A: Global.A
+Hacked: Status(Hacked)
+Voice Line Up: Communicate(Voice Line Up)
+White: Color(White)
+Hero: Hero(Tracer)
+Team: Team(Team 1)
+Count Of: Count Of(Array)
+Add: Add(0, 0)
+
+

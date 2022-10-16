@@ -3783,6 +3783,7 @@ startModifyingHeroVoiceLines:
   - name: Pitch Scalar
     description: The amount that the pitch of the voice will be raised. (Up to 1.5) or lowered (Down to 0.5).
     type: Unsigned float
+    default: 0
   - name: REEVALUATION
     description: If True, Pitch Scalar is evaluated and updated every frame. If False, Pitch Scalar is evaluated once when the actions executes.
     type: Boolean
@@ -4175,7 +4176,7 @@ StartForcingDummyBotName:
   en-US: Start Forcing Dummy Bot Name
 
 StopForcingDummyBotName:
-  description: 
+  description:
   args:
   - name: Player
     description: The Player or Players whose names will stop being forced

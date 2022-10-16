@@ -6,7 +6,7 @@
   min-height: 600px;
 
   .CodeMirror-selectedtext,
-  .CodeMirror-selected, {
+  .CodeMirror-selected {
     background: lighten($bg-dark, 20%);
   }
 
@@ -113,16 +113,6 @@
   .cm-completionDetail {
     color: $text-color;
     font-size: 0.85em;
-
-    &::before {
-      display: inline;
-      content: "(";
-    }
-
-    &::after {
-      display: inline;
-      content: ")";
-    }
   }
 
   .cm-tooltip-autocomplete ul li[aria-selected] {
