@@ -74,6 +74,14 @@
   }
 </script>
 
+<svelte:head>
+  {#if $currentProject}
+    <title>Editor | {$currentProject.title} | Workshop.codes Script Editor</title>
+  {:else}
+  <title>Workshop.codes Script Editor | Workshop.codes</title>
+  {/if}
+</svelte:head>
+
 <div class="editor">
   <div class="editor__top">
     <img on:click={() => $currentProject = null} class="mr-1/2 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
