@@ -63,13 +63,15 @@
   }
 
   function completions(context) {
-    const word = context.matchBefore(/\w*/)
+    const word = context.matchBefore(/[a-zA-Z0-9 ]*/)
 
     if (word.from == word.to && !context.explicit) return null
 
     return {
       from: word.from,
-      options: completionsMap
+      to: word.to,
+      options: completionsMap,
+      validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }
 

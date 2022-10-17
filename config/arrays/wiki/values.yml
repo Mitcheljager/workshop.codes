@@ -741,7 +741,7 @@ __customString__:
   - name: STRING
     description: ''
     type: StringLiteral
-    default: HELLO
+    default: '"Hello"'
   - name: "{0}"
     description: The value that will be converted to text and used to replace {0}.
     type: Object
