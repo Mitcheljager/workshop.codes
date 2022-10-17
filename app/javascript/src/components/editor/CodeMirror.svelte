@@ -3,10 +3,9 @@
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection } from "@codemirror/state"
-  import { indentWithTab } from "@codemirror/commands"
-  import { indentUnit } from "@codemirror/language"
+  import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
-  import { OverwatchWorkshop } from "../../lib/customLanguage"
+  import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { currentItem, editorStates, items } from "../../stores/editor"
   import debounce from "../../debounce"
 
@@ -42,11 +41,13 @@
     return EditorState.create({
       doc: content,
       extensions: [
-        OverwatchWorkshop(),
+        syntaxHighlighting(highlightStyle),
+        StreamLanguage.define(OWLanguage),
         autocompletion({
           activateOnTyping: true,
           override: [completions],
-          closeOnBlur: false
+          closeOnBlur: false,
+          hintOptions: /[()\[\]{};:>,]/
         }),
         indentUnit.of("    "),
         keymap.of([

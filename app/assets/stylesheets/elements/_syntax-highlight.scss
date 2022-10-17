@@ -2,13 +2,16 @@ $color-base: #cbf6fb;
 
 $highlight-types: (
   string: #98C379,
-  punctuation: darken($gray, 10%),
+  punctuation: #6a9955,
   keyword: #E06C75,
   number: #D19A66,
   comment: $text-color-dark,
-  variable: #56B6C2,
+  variable: #9cdcfe,
   action: #e5c069,
-  value: #44a4ef
+  value: #6796e6,
+  operator: #569cd6,
+  bool: #9cdcfe,
+  invalid: $red,
 );
 
 .syntax-highlight {
