@@ -8,7 +8,6 @@ Rails.start()
 Turbolinks.start()
 TurbolinksPrefetch.start()
 
-import * as aprilFools from "../src/april-fools"
 import * as carousel from "../src/carousel"
 import * as carouselCards from "../src/carousel-cards"
 import * as copy from "../src/copy"
@@ -40,8 +39,6 @@ import * as toggleContent from "../src/toggle-content"
 import * as wikiSearch from "../src/wiki/search"
 
 document.addEventListener("turbolinks:load", function() {
-  aprilFools.inject()
-
   copy.bind()
   disableFormBySelect.bind()
   dismissParent.bind()
