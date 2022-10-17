@@ -87,8 +87,8 @@
   }
 
   .cm-cursor {
-    border-color: #ff00ff;
-    border-width: 3px;
+    border-color: var(--cursor-color, #ff00ff);
+    border-width: var(--cursor-width, 3px);
   }
 
   .cm-completionIcon {
@@ -117,35 +117,5 @@
 
   .cm-tooltip-autocomplete ul li[aria-selected] {
     background: lighten($bg-dark, 5%);
-  }
-
-  .ͼd {
-    color: var(--color-number);
-  }
-
-  .ͼe {
-    color: var(--color-string);
-  }
-
-  .ͼb {
-    color: var(--color-keyword);
-  }
-
-  .ͼc {
-    color: var(--color-value);
-  }
-
-  .ͼm {
-    color: var(--color-comment);
-  }
-
-  .ͼ5 {
-    color: var(--color-punctuation);
-    text-decoration: none;
-  }
-
-  .ͼ7 {
-    color: var(--color-action);
-    text-decoration: none;
   }
 }
