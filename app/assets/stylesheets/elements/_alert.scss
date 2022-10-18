@@ -43,6 +43,10 @@
     max-width: 50em;
   }
 
+  a {
+    color: $pure-white;
+  }
+
   &--error {
     background: $red;
   }

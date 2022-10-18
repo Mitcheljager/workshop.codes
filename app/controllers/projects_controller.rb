@@ -1,26 +1,28 @@
 class ProjectsController < ApplicationController
-  before_action do
+  before_action except: [:show] do
     redirect_to login_path unless current_user
   end
 
   def show
-    @project = current_user.projects.find_by_uuid(params[:uuid])
+    @project = Project.find_by_uuid!(params[:uuid])
+    @project.is_owner = current_user.present? && current_user.id == @project.user_id
 
-    render json: @project, layout: false
+    render json: @project, methods: [:is_owner], layout: false
   end
 
   def create
     @project = Project.create(title: project_params[:title], user_id: current_user.id)
+    @project.is_owner = current_user.id == @project.user_id
 
     if @project.save
-      render json: @project, layout: false
+      render json: @project, methods: [:is_owner], layout: false
     else
       render json: "", status: 500, layout: false
     end
   end
 
   def update
-    @project = current_user.projects.find_by_uuid(params[:uuid])
+    @project = current_user.projects.find_by_uuid!(params[:uuid])
 
     if @project.update(project_params)
       render json: @project, layout: false
@@ -30,7 +32,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = current_user.projects.find_by_uuid(params[:uuid])
+    @project = current_user.projects.find_by_uuid!(params[:uuid])
 
     if @project.destroy
       render json: "Success", layout: false

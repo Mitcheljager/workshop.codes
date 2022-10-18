@@ -7,6 +7,8 @@ class Project < ApplicationRecord
   validates :title, presence: true, length: { minimum: 1, maximum: 75 }
   validates :content, length: { maximum: POST_SNIPPET_LIMIT }
 
+  attr_accessor :is_owner
+
   private
 
   def generate_and_set_uuid

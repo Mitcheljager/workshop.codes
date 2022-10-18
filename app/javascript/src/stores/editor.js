@@ -9,3 +9,5 @@ export const items = writable([])
 export const currentItem = writable({})
 
 export const sortedItems = derived(items, $items => $items.sort((a, b) => a.position > b.position))
+
+export const isSignedIn = writable(false)

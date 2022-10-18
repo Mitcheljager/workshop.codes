@@ -1,6 +1,6 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { projects, currentProject, items, currentItem } from "../../stores/editor"
+  import { projects, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
 
@@ -11,12 +11,20 @@
   let showProjectSettings = false
 
   onMount(() => {
-    if ($projects.length) fetchProject($projects[0].uuid)
+    const urlParams = new URLSearchParams(window.location.search)
+    const uuid = urlParams.get("uuid")
+
+    if (uuid) fetchProject(uuid)
+    else if ($projects.length) fetchProject($projects[0].uuid)
   })
 
   function fetchProject(uuid) {
     $currentProject = null
     loading = true
+
+    const url = new URL(window.location)
+    url.searchParams.set("uuid", uuid)
+    window.history.replaceState('', '', url)
 
     const baseUrl = "/projects/"
 
@@ -28,7 +36,8 @@
 
         $currentProject = {
           uuid: parsedData.uuid,
-          title: parsedData.title
+          title: parsedData.title,
+          is_owner: parsedData.is_owner
         }
 
         $currentItem = {}
@@ -36,12 +45,17 @@
       })
       .catch(error => {
         console.error(error)
-        alert("Something went wrong while loading, please try again")
+        alert(`Something went wrong while loading, please try again. ${error}`)
       })
       .finally(() => loading = false)
   }
 
   function createProject() {
+    if (!$isSignedIn) {
+      createDemoProject()
+      return
+    }
+
     loading = true
 
     new FetchRails("/projects", { project: { title: value } }).post()
@@ -61,6 +75,19 @@
         alert("Something went wrong while creating your project, please try again")
       })
       .finally(() => loading = false)
+  }
+
+  function createDemoProject() {
+    const newProject = {
+      uuid: Math.random().toString(16).substring(2, 8),
+      title: value,
+      is_owner: true
+    }
+
+    $currentProject = newProject
+    $currentItem = {}
+    $items = []
+    showCreateModal = false
   }
 
   function destroyProject() {
@@ -112,7 +139,9 @@
         </div>
       {/each}
 
-      <hr />
+      {#if $projects?.length}
+        <hr />
+      {/if}
 
       <div class="p-1/4">
         {#if !$projects?.length}
@@ -126,11 +155,20 @@
 
 {#if showCreateModal}
   <div class="modal" transition:fade={{ duration: 100 }} data-hide-on-close>
-    <div class="modal__content">
-      <h3 class="mb-0 mt-0">Create a new project</h3>
-      <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
+    <div class="modal__content p-0">
+      {#if !$isSignedIn}
+        <div class="warning warning--orange">
+          You are not signed in and this is for demonstration purposes only. This will not be saved.
+        </div>
+      {/if}
 
-      <button class="button w-100 mt-1/4" on:click={createProject} disabled={!value || loading}>Create</button>
+      <div class="p-1/2">
+        <h3 class="mb-0 mt-0">Create a new project</h3>
+
+        <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
+
+        <button class="button w-100 mt-1/4" on:click={createProject} disabled={!value || loading}>Create</button>
+      </div>
     </div>
 
     <div class="modal__backdrop" on:click={() => showCreateModal = false} />

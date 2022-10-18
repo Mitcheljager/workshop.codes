@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, currentProject, items, projects } from "../../stores/editor"
+  import { currentItem, currentProject, items, projects, isSignedIn } from "../../stores/editor"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
   import ScriptImporter from "./ScriptImporter.svelte"
-  import Decompiler from "./Compiler.svelte"
+  import Compiler from "./Compiler.svelte"
   import ProjectsDropdown from "./ProjectsDropdown.svelte"
   import Save from "./Save.svelte"
   import Empty from "./Empty.svelte"
@@ -16,6 +16,7 @@
   export let actions
   export let defaults
   export let _projects
+  export let _isSignedIn = false
 
   let completionsMap = []
 
@@ -23,6 +24,7 @@
     completionsMap = parseKeywords()
     $currentItem = $items[0] || {}
     $projects = _projects || []
+    $isSignedIn = _isSignedIn
   })
 
   function parseKeywords() {
@@ -91,9 +93,23 @@
     {/if}
 
     <div class="ml-auto inline-flex gap-1/8">
-      <ScriptImporter />
-      <Decompiler />
-      <Save />
+      {#if $currentProject}
+        {#if !$currentProject.is_owner}
+          <div class="warning warning--orange br-1 align-self-center">
+            You do not own this project and can not save
+          </div>
+        {/if}
+
+        {#if isSignedIn && $currentProject.is_owner}
+          <ScriptImporter />
+        {/if}
+
+        <Compiler />
+
+        {#if isSignedIn && $currentProject.is_owner}
+          <Save />
+        {/if}
+      {/if}
     </div>
   </div>
 
@@ -121,3 +137,12 @@
     <Empty />
   {/if}
 </div>
+
+{#if !$isSignedIn}
+  <div class="alerts">
+    <div class="alerts__alert alerts__alert--warning">
+      You are not signed in and nothing you do will be saved!
+      <a href="/login">Please sign in</a>
+    </div>
+  </div>
+{/if}

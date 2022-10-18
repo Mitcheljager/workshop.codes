@@ -6,4 +6,10 @@
   <div class="spinner"></div>
 </div>
 
-<%= svelte_component "Editor", { values: @values, actions: @actions, defaults: @defaults, _projects: @projects } %>
+<%= svelte_component "Editor", {
+    values: @values,
+    actions: @actions,
+    defaults: @defaults,
+    _projects: @projects,
+    _isSignedIn: current_user.present?
+} %>
