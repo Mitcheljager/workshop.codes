@@ -118,4 +118,23 @@
   .cm-tooltip-autocomplete ul li[aria-selected] {
     background: lighten($bg-dark, 5%);
   }
+
+  .cm-lintRange-error {
+    box-shadow: 0 3px 0 $red;
+    background: transparent;
+  }
+
+  .cm-lint-marker-error::before {
+    content: "!";
+    display: block;
+    width: 1em;
+    height: 1em;
+    padding: 0.1em;
+    border-radius: 50%;
+    background: $red;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 1em;
+  }
 }

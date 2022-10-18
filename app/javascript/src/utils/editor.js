@@ -22,20 +22,20 @@ export function updateItemName(id, name) {
   get(items).filter(i => i.id == id)[0].name = name
 }
 
-export function getClosingBracket(content) {
-  let closePos = 0
+export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {
+  let closePos = start
   let counter = 1
   let initial = true
 
   while (counter > 1 || initial) {
     const c = content[++closePos]
 
-    if (c == "{") {
+    if (c == characterOpen) {
       counter++
       initial = false
     }
-    else if (c == "}") counter--
-    if (counter > 5 || closePos > 10000) counter = 0
+    else if (c == characterClose) counter--
+    if (counter > 5 || closePos > 10000 || closePos >= content.length) break
   }
 
   return closePos

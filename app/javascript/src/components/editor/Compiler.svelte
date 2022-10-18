@@ -44,10 +44,10 @@
 
     return `
 variables {
-${ globalVariables.length ? "global:" : "" }
+${ globalVariables.length ? "  global:" : "" }
 ${ globalVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 
-${ playerVariables.length ? "player:" : "" }
+${ playerVariables.length ? "  player:" : "" }
 ${ playerVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 }\n\n`
   }
