@@ -24,7 +24,7 @@
 
     const url = new URL(window.location)
     url.searchParams.set("uuid", uuid)
-    window.history.replaceState('', '', url)
+    window.history.replaceState("", "", url)
 
     const baseUrl = "/projects/"
 
@@ -45,7 +45,7 @@
       })
       .catch(error => {
         console.error(error)
-        alert(`Something went wrong while loading, please try again. ${error}`)
+        alert(`Something went wrong while loading, please try again. ${ error }`)
       })
       .finally(() => loading = false)
   }
