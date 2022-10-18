@@ -73,7 +73,6 @@ document.addEventListener("turbolinks:load", function() {
 })
 
 document.addEventListener("turbolinks:before-cache", function() {
-  aprilFools.destroy()
   carouselCards.destroy()
   dismissParent.destroy()
   numPlayersSlider.destroy()
