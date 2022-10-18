@@ -107,7 +107,9 @@
     </div>
 
     <div class="editor__content">
-      <CodeMirror {completionsMap} />
+      {#if Object.keys($currentItem).length}
+        <CodeMirror {completionsMap} />
+      {/if}
     </div>
 
     <div class="editor__popout editor__scrollable">
