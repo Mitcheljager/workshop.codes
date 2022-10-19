@@ -8,6 +8,7 @@
     "@agilie/canvas-image-cover-position": "^1.1.1",
     "@codemirror/autocomplete": "^6.3.0",
     "@codemirror/lang-javascript": "^6.1.0",
+    "@codemirror/search": "^6.2.2",
     "@codemirror/state": "^6.1.2",
     "@codemirror/view": "^6.3.0",
     "@lezer/generator": "^1.1.1",

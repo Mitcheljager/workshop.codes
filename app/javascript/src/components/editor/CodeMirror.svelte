@@ -5,7 +5,7 @@
   import { EditorState, EditorSelection } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
-  import { linter, lintKeymap, lintGutter } from "@codemirror/lint"
+  import { linter, lintGutter } from "@codemirror/lint"
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { currentItem, editorStates, items } from "../../stores/editor"

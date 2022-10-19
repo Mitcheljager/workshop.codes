@@ -1,5 +1,7 @@
 import { writable, derived } from "svelte/store"
 
+export const completionsMap = writable([])
+
 export const editorStates = writable({})
 
 export const projects = writable(null)

@@ -82,6 +82,11 @@
     background: lighten($bg-dark, 15%);
   }
 
+  .cm-searchMatch {
+    background: lighten($bg-dark, 10%);
+    box-shadow: 0 0 0 1px $primary;
+  }
+
   .cm-matchingBracket {
     background: lighten($bg-dark, 20%) !important;
   }
@@ -136,5 +141,38 @@
     color: white;
     font-weight: bold;
     line-height: 1em;
+  }
+
+  .cm-panel.cm-search {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: $margin / 8;
+    background: lighten($bg-dark, 5%);
+
+    input {
+      @extend .form-input !optional;
+      padding: .25em .5em;
+      width: auto;
+      font-size: $font-size-small;
+      color: $white;
+    }
+
+    label {
+      color: $text-color;
+      font-size: $font-size-small;
+      font-family: $font-stack;
+    }
+
+    .cm-button {
+      @extend .button !optional;
+      @extend .button--secondary !optional;
+      padding: .25em .5em;
+      margin-right: 0.25em;
+      border-radius: $border-radius / 2;
+      font-size: $font-size-small;
+      text-transform: none;
+    }
   }
 }

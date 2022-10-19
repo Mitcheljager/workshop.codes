@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, currentProject, items, projects, isSignedIn } from "../../stores/editor"
+  import { currentItem, currentProject, items, projects, isSignedIn, completionsMap } from "../../stores/editor"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
@@ -18,13 +18,11 @@
   export let _projects
   export let _isSignedIn = false
 
-  let completionsMap = []
-
   $: if ($currentProject && $items?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $items[0]
 
   onMount(() => {
-    completionsMap = parseKeywords()
+    $completionsMap = parseKeywords()
     $currentItem = $items?.[0] || {}
     $projects = _projects || []
     $isSignedIn = _isSignedIn
@@ -127,7 +125,7 @@
 
     <div class="editor__content">
       {#if Object.keys($currentItem).length}
-        <CodeMirror {completionsMap} />
+        <CodeMirror completionsMap={$completionsMap} />
       {/if}
     </div>
 
