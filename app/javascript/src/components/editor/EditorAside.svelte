@@ -7,6 +7,7 @@
 
   function keydown(event) {
     if (event.ctrlKey && event.keyCode == 49) {
+      event.preventDefault()
       element.focus()
     }
   }
