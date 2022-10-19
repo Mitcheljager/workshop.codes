@@ -31,7 +31,7 @@
         event.item.classList.remove("sortable__multi-selected")
       },
       onRemove: event => {
-        console.log('remove')
+        console.log("remove")
       },
       store: {
         set: updateOrder

@@ -23,8 +23,6 @@
   $: if ($currentProject && $items?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $items[0]
 
-  $: console.log($items)
-
   onMount(() => {
     completionsMap = parseKeywords()
     $currentItem = $items?.[0] || {}
