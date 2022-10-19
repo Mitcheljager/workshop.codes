@@ -30,6 +30,9 @@
       onDeselect: event => {
         event.item.classList.remove("sortable__multi-selected")
       },
+      onRemove: event => {
+        console.log('remove')
+      },
       store: {
         set: updateOrder
       }
@@ -50,6 +53,8 @@
       const parent = e.parentNode.closest("[data-item-id]")
       item.parent = parent ? parent.dataset.itemId : null
     })
+
+    $items = [...$items]
   }
 
   function getItemsInParent() {

@@ -10,7 +10,7 @@
     compiling = true
 
     try {
-      let joinedItems = $sortedItems.sort().map(i => i.content).join("\n\n")
+      let joinedItems = $sortedItems.map(i => i.content).join("\n\n")
 
       const [settingsStart, settingsEnd] = getSettings(joinedItems)
       const settings = joinedItems.slice(settingsStart, settingsEnd)
