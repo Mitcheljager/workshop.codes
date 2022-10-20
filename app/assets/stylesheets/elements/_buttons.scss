@@ -62,7 +62,7 @@
     &:hover:not([disabled]),
     &:active:not([disabled]),
     &:focus:not([disabled]) {
-      opacity: .75;
+      box-shadow: 0 0 0 2px $pure-white;
       color: $bg-dark;
     }
   }
