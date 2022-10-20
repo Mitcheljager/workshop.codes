@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, currentProject, items, projects, isSignedIn, completionsMap } from "../../stores/editor"
+  import { currentItem, currentProject, items, sortedItems, projects, isSignedIn, completionsMap } from "../../stores/editor"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
@@ -18,8 +18,8 @@
   export let _projects
   export let _isSignedIn = false
 
-  $: if ($currentProject && $items?.length && $currentItem && !Object.keys($currentItem).length)
-    $currentItem = $items[0]
+  $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
+    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
 
   onMount(() => {
     $completionsMap = parseKeywords()
@@ -40,7 +40,8 @@
       const params = {
         label: v["en-US"],
         type: keywordType,
-        info: v.description
+        info: v.description,
+        args_length: v.args?.length || 0
       }
 
       if (v.args?.length) {
