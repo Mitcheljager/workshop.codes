@@ -17,7 +17,7 @@
   let view
   let currentId
 
-  $: if ($currentItem.id && view) updateEditorState()
+  $: if ($currentItem.id != currentId && view) updateEditorState()
 
   onMount(() => {
     view = new EditorView({
