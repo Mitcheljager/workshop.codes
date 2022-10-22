@@ -110,8 +110,10 @@
     }
 
     > .cm-tooltip {
+      padding: 0.35rem 0.5rem;
       background: lighten($bg-dark, 5%);
       color: $text-color-light;
+      white-space: pre-wrap;
     }
   }
 

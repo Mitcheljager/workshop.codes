@@ -30,7 +30,6 @@ $top-height: 4rem;
   display: flex;
   align-items: center;
   padding: $margin / 4;
-  border-bottom: 1px solid lighten($border-color, 5%);
   background: lighten($bg-dark, 5%);
 }
 

@@ -58,14 +58,8 @@
 
       if (v.args?.length) {
         // Add detail arguments in autocomplete results
-        let detail = v.args.map(a => {
-          const type = typeof a.type
-          if (type === "string") return a.type
-          if (Array.isArray(a.type)) return a.type?.[0]
-          if (type === "object") return Object.keys(a.type)?.[0]
-        }).join(", ")
+        let detail = v.args.map(a => `${toCapitalize(a.name)}`).join(", ")
 
-        detail = detail.replaceAll("unsigned", "")
         params.detail = `(${ detail.slice(0, 30) }${ detail.length > 30 ? "..." : "" })`
 
         // Add apply values when selecting autocomplete, filling in default args
@@ -79,13 +73,17 @@
         })
 
         params.apply = `${ v["en-US"] }(${ apply.join(", ") })`
+
+        // Add arguments to info box
+        params.info += '\n\nArguments: '
+        params.info += detail
       }
 
       return params
     })
 
     function toCapitalize(string) {
-      return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+      return string.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
     }
   }
 </script>
