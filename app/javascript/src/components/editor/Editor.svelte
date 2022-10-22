@@ -58,7 +58,7 @@
 
       if (v.args?.length) {
         // Add detail arguments in autocomplete results
-        let detail = v.args.map(a => `${toCapitalize(a.name)}`).join(", ")
+        const detail = v.args.map(a => `${ toCapitalize(a.name) }`).join(", ")
 
         params.detail = `(${ detail.slice(0, 30) }${ detail.length > 30 ? "..." : "" })`
 
@@ -75,7 +75,7 @@
         params.apply = `${ v["en-US"] }(${ apply.join(", ") })`
 
         // Add arguments to info box
-        params.info += '\n\nArguments: '
+        params.info += "\n\nArguments: "
         params.info += detail
       }
 
