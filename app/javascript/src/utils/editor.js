@@ -35,7 +35,7 @@ export function getClosingBracket(content, characterOpen = "{", characterClose =
       initial = false
     }
     else if (c == characterClose) counter--
-    if (counter > 5 || closePos > 10000 || closePos >= content.length) break
+    if (counter > 5 || closePos > 100_000 || closePos >= content.length) break
   }
 
   return closePos

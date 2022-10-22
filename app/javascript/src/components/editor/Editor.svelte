@@ -44,6 +44,18 @@
         args_length: v.args?.length || 0
       }
 
+      // Exclude all trailing "null" defaults
+      if (v.args?.some(a => a.default?.toString().toLowerCase() == "null")) {
+        let nullCount = 0
+        for (let i = 0; i < v.args.length; i++) {
+          if (v.args[v.args.length - 1 - i].default.toLowerCase() == "null") {
+            nullCount++
+          } else break
+        }
+
+        if (nullCount) params.args_min_length = v.args.length - nullCount
+      }
+
       if (v.args?.length) {
         // Add detail arguments in autocomplete results
         let detail = v.args.map(a => {
