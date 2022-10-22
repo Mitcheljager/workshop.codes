@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.slug = CGI.escape(@article.title).gsub(".", "-").downcase
+    @article.slug = CGI.escape(@article.title.gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase
 
     if @article.save
       flash[:notice] = "Article successfully created"
