@@ -3871,8 +3871,12 @@ LogToInspector:
   en-US: Log To Inspector
 
 WaitUntil:
-  description: Waits ultil the Continue Condition is true or Timeout seconds elapse. (The Rule's Condition is ignored during this wait.)
+  description: Waits until the Continue Condition is true or Timeout seconds elapse. (The Rule's Condition is ignored during this wait.)
   args:
+  - name: Continue Condition
+    description: If this value becomes true, the wait concludes, and the next action in the action list begins executing.
+    type: Boolean
+    default: False
   - name: Timeout
     description: If this many seconds elapse, the wait concludes, and the next action in the action list begins executing.
     type: Integer
