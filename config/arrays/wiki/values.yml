@@ -452,6 +452,7 @@ atan2:
   zh-CN: 以弧度为单位的反正切值
 __array__:
   description: An array constructed from the listed values.
+  args_unlimited: true
   args:
   - name: "[0]"
     description: The value that will be stored in the array at index [0].

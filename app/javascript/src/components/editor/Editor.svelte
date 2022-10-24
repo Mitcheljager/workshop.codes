@@ -44,6 +44,8 @@
         args_length: v.args?.length || 0
       }
 
+      if (v.args_unlimited) params.args_unlimited = true
+
       // Exclude all trailing "null" defaults
       if (v.args?.some(a => a.default?.toString().toLowerCase() == "null")) {
         let nullCount = 0

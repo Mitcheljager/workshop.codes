@@ -59,6 +59,8 @@ function findIncorrectArgsLength(content) {
 
       let message = ""
 
+      if (item.args_unlimited) continue
+
       if (item.args_length && content.charAt(match.index + match.match.length) != "(") {
         // Some arguments expected but none were given
         message = `${ item.args_length } Argument(s) expected, 0 given`
