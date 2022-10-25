@@ -22,10 +22,6 @@
     $currentProject = null
     loading = true
 
-    const url = new URL(window.location)
-    url.searchParams.set("uuid", uuid)
-    window.history.replaceState("", "", url)
-
     const baseUrl = "/projects/"
 
     new FetchRails(baseUrl + uuid).get()
@@ -33,6 +29,8 @@
         if (!data) throw Error("No results")
 
         const parsedData = JSON.parse(data)
+
+        setUrl(parsedData.uuid)
 
         $currentProject = {
           uuid: parsedData.uuid,
@@ -63,6 +61,8 @@
         if (!data) throw Error("Create failed")
 
         const parsedData = JSON.parse(data)
+
+        setUrl(parsedData.uuid)
 
         $projects = [...$projects, parsedData]
         $currentProject = parsedData
@@ -100,6 +100,8 @@
       .then(data => {
         if (!data) throw Error("Create failed")
 
+        setUrl()
+
         $projects = $projects.filter(p => p.uuid != $currentProject.uuid)
         $currentProject = null
         $currentItem = {}
@@ -117,6 +119,13 @@
 
     active = false
     showProjectSettings = false
+  }
+
+  function setUrl(uuid) {
+    const url = new URL(window.location)
+    if (uuid) url.searchParams.set("uuid", uuid)
+    else url.searchParams.delete("uuid")
+    window.history.replaceState("", "", url)
   }
 </script>
 
