@@ -11,6 +11,7 @@ export function OWLanguageLinter(view) {
 
   findMissingClosingCharacters(content)
   findIncorrectArgsLength(content)
+  findMissingQuotes(content)
 
   return diagnostics
 }
@@ -32,6 +33,36 @@ function findMissingClosingCharacters(content) {
       diagnostics.push({ from: index, to: index + 1, severity: "error", message })
     })
   })
+}
+
+function findMissingQuotes(content) {
+  let followingQuote = -1
+  let escaped = false
+
+  for(let i = 0; i < content.length; i++) {
+    if (content[i] == "\\") escaped = true
+
+    if (content[i] == "\"") {
+      if (escaped) {
+        escaped = false
+        continue
+      }
+
+      if (followingQuote != -1) followingQuote = -1
+      else followingQuote = i
+    }
+
+    if (followingQuote != -1 && content[i] == "\n") {
+      diagnostics.push({
+        from: followingQuote,
+        to: i,
+        severity: "error",
+        message: "Missing closing string quote"
+      })
+
+      followingQuote = -1
+    }
+  }
 }
 
 function findIncorrectArgsLength(content) {
