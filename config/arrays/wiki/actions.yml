@@ -3672,7 +3672,7 @@ stopForcingPlayerOutlines:
     default: All Players
   en-US: Stop Forcing Player Outlines
 startScalingPlayer:
-  description: Start modifying the size of a Player or Players (including mode, movement collision, hit detection, and certain abilities). Note that large players placed into complex environments will severely impact server load, so consider also applying the Disable Movement Collision With Enviroment action.
+  description: Start modifying the size of a Player or Players (including mode, movement collision, hit detection, and certain abilities). Note that large players placed into complex environments will severely impact server load, so consider also applying the Disable Movement Collision With Environment action.
   args:
   - name: PLAYER
     description: The Player or Players whose size will be modified.
@@ -3740,9 +3740,9 @@ disableMovementCollisionWithEnvironment:
     description: If True, collision with the floors is also disabled.
     type: Boolean
     default: False
-  en-US: Disable Movement Collision With Enviroment
+  en-US: Disable Movement Collision With Environment
 enableMovementCollisionWithEnvironment:
-  description: Undoes the effect of the Disable Movement Collision With Enviroment action for one or more Players.
+  description: Undoes the effect of the Disable Movement Collision With Environment action for one or more Players.
   args:
   - name: PLAYER
     description: The Player or Players whose movement collision is affected.
