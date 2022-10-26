@@ -112,7 +112,7 @@ class SearchController < ApplicationController
     when "created"
       "created_at"
     when "updated"
-      "updated_at"
+      "last_revision_created_at"
     when "on-fire"
       "hotness"
     else
