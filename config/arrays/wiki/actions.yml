@@ -3654,6 +3654,10 @@ startForcingPlayerOutlines:
     description: The color of the specified Player Outlines if they are visible. If a particular team is chosen, the color will either be Red or Blue, depending on whether the team is hostile to the viewer.
     type: Color
     default: White
+  - name: Type
+    description: The type of the specified Player Outlines if they are visible
+    type: Outline
+    default: Default
   en-US: Start Forcing Player Outlines
 stopForcingPlayerOutlines:
   description: Cancels the behavior of Start Forcing Player Outlines for the spciefied Viewed Player or Players from the perspective of one or more Viewing Players.
