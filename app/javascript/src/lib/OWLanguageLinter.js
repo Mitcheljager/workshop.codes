@@ -40,14 +40,17 @@ function findMissingQuotes(content) {
   let escaped = false
 
   for(let i = 0; i < content.length; i++) {
-    if (content[i] == "\\") escaped = true
+    if (escaped) {
+      escaped = false
+      continue
+    }
+
+    if (content[i] == "\\") {
+      escaped = true
+      continue
+    }
 
     if (content[i] == "\"") {
-      if (escaped) {
-        escaped = false
-        continue
-      }
-
       if (followingQuote != -1) followingQuote = -1
       else followingQuote = i
     }
