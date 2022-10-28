@@ -35,7 +35,7 @@ export function getClosingBracket(content, characterOpen = "{", characterClose =
       initial = false
     }
     else if (c == characterClose) counter--
-    if (counter > 5 || closePos > 100_000 || closePos >= content.length) break
+    if (counter > 20 || closePos > 100_000 || closePos >= content.length) break
   }
 
   return closePos
@@ -50,4 +50,8 @@ export function getSettings(value) {
   if (!untilIndex) return []
 
   return [match.index, untilIndex + 1]
+}
+
+export function replaceBetween(origin, replace, startIndex, endIndex) {
+  return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
 }
