@@ -1,81 +1,81 @@
 export const templates = Object.freeze({
   RuleGlobal: `rule("Rule Name")
 {
-  event
-  {
-    Ongoing - Global;
-  }
+    event
+    {
+      Ongoing - Global;
+    }
 
-  conditions
-  {
+    conditions
+    {
 
-  }
+    }
 
-  actions
-  {
+    actions
+    {
 
-  }
+    }
 }`,
   RuleEachPlayer: `rule("Rule Name")
 {
-  event
-  {
-    Ongoing - Each Player;
-    All;
-    All;
-  }
+    event
+    {
+        Ongoing - Each Player;
+        All;
+        All;
+    }
 
-  conditions
-  {
+    conditions
+    {
 
-  }
+    }
 
-  actions
-  {
+    actions
+    {
 
-  }
+    }
 }`,
   Subroutine: `rule("Rule Name")
 {
-  event
-  {
-    Subroutine;
-    YourSubroutineName;
-  }
+    event
+    {
+        Subroutine;
+        YourSubroutineName;
+    }
 
-  actions
-  {
+    actions
+    {
 
-  }
+    }
 }`,
   Settings: `settings
 {
-  main
-  {
-    Description: "Description of your mode (Made using the Workshop.codes script editor)"
-    Mode Name: "Name of your mode"
-  }
-
-  lobby
-  {
-    Allow Players Who Are In Queue: Yes
-    Match Voice Chat: Enabled
-  }
-
-  modes
-  {
-    Skirmish
+    main
     {
-      enabled maps
-      {
-        Workshop Island 0
-      }
+        Description: "Description of your mode (Made using the Workshop.codes script editor)"
+        Mode Name: "Name of your mode"
     }
 
-    General
+    lobby
     {
+        Allow Players Who Are In Queue: Yes
+        Match Voice Chat: Enabled
     }
-  }
+
+    modes
+    {
+        Skirmish
+        {
+            enabled maps
+            {
+               Workshop Island 0
+            }
+        }
+
+        General
+        {
+        }
+    }
 }`,
   Empty: ""
 })
