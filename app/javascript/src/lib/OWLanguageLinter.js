@@ -12,6 +12,7 @@ export function OWLanguageLinter(view) {
   findMissingClosingCharacters(content)
   findIncorrectArgsLength(content)
   findMissingQuotes(content)
+  checkMixins(content)
 
   return diagnostics
 }
@@ -149,4 +150,35 @@ function findAllCharacters(content, character = "{") {
   }
 
   return indices
+}
+
+function checkMixins(content) {
+  // Fix missing parentehsis for mixin declare and include
+  const mixinRegex = /(@mixin|@include)\s\w+/g
+  let match
+  while ((match = mixinRegex.exec(content)) != null) {
+    try {
+      const closing = getClosingBracket(content, "(", ")", match.index)
+      if (closing >= content.length) throw new Error("Missing closing parenthesis")
+
+      const string = content.slice(match.index, closing)
+      const opening = string.indexOf("(")
+      const openingIndex = match.index + opening
+
+      if (opening < 0) throw new Error("Missing opening parenthesis")
+
+      const stringToOpening = content.slice(match.index, openingIndex)
+      const firstNewLine = stringToOpening.indexOf("\n")
+      const firstNewLineIndex = match.index + firstNewLine
+
+      if (firstNewLine > 0 && firstNewLineIndex < openingIndex) throw new Error("Missing opening parenthesis")
+    } catch (error) {
+      diagnostics.push({
+        from: match.index,
+        to: match.index + match[0].length,
+        severity: "error",
+        message: error.message
+      })
+    }
+  }
 }

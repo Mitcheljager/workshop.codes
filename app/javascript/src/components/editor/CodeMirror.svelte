@@ -49,7 +49,7 @@
           activateOnTyping: true,
           override: [completions],
           closeOnBlur: false,
-          hintOptions: /[()\[\]{};:>,]/
+          hintOptions: /[()\[\]{};:>,+-\=]/
         }),
         lintGutter(),
         linter(OWLanguageLinter),
@@ -136,7 +136,7 @@
     $currentItem.content = view.state.doc.toString()
     const index = $items.indexOf(i => i.id == $currentItem.id)
     $items[index] = $currentItem
-  }, 500)
+  }, 250)
 </script>
 
 <svelte:window on:keydown={keydown} />

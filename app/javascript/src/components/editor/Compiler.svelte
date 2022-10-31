@@ -1,7 +1,8 @@
 <script>
   import { fly } from "svelte/transition"
+  import { templates } from "../../lib/templates"
   import { sortedItems } from "../../stores/editor"
-  import { getSettings } from "../../utils/editor"
+  import { getClosingBracket, getSettings, replaceBetween } from "../../utils/editor"
 
   let compiling = false
   let copied = false
@@ -13,11 +14,12 @@
       let joinedItems = $sortedItems.map(i => i.content).join("\n\n")
 
       const [settingsStart, settingsEnd] = getSettings(joinedItems)
-      const settings = joinedItems.slice(settingsStart, settingsEnd)
+      let settings = joinedItems.slice(settingsStart, settingsEnd)
 
-      if (!settings) throw new Error("You are missing a Settings array. This is required.")
+      if (!settings || !settingsEnd) settings = templates.Settings
 
       joinedItems = joinedItems.replace(settings, "")
+      joinedItems = extractAndInsertMixins(joinedItems)
 
       const variables = compileVariables(joinedItems)
       const subroutines = compileSubroutines(joinedItems)
@@ -28,9 +30,70 @@
       }, 500)
     } catch (error) {
       console.log(error)
-      alert(`Something went wrong while compiling, this might be an error on our part or an error in your code. ${ error }`)
+      alert(error)
       compiling = false
     }
+  }
+
+  function extractAndInsertMixins(joinedItems) {
+    const mixins = {}
+
+    // Find stated mixins and save their names and params to an object
+    const mixinRegex = /@mixin/g
+    let match
+    while ((match = mixinRegex.exec(joinedItems)) != null) {
+      const closing = getClosingBracket(joinedItems, "{", "}", match.index)
+      const content = joinedItems.slice(match.index, closing)
+      const name = content.match(/(?<=@mixin\s)(\w+)/)?.[0]
+
+      if (!name) throw new Error("Mixin is missing a name")
+      if (mixins[name]) throw new Error(`Mixin "${name}" is already defined`)
+
+      const firstOpenBracket = content.indexOf("{")
+      const firstOpenParen = content.indexOf("(")
+      const closingParen = getClosingBracket(content, "(", ")", firstOpenParen - 1)
+      const params = content.slice(firstOpenParen + 1, closingParen).replace(/\s/, "").split(",")
+      const mixin = content.slice(firstOpenBracket + 1, closing)?.trim()
+
+      mixins[name] = {
+        content: mixin,
+        full: joinedItems.slice(match.index, closing + 1),
+        params,
+      }
+    }
+
+    // Remove mixins from content
+    Object.values(mixins).forEach(({ full }) => joinedItems = joinedItems.replace(full, ""))
+
+    // Find stated includes for mixins and replace them with mixins
+    const includeRegex = /@include/g
+    while ((match = includeRegex.exec(joinedItems)) != null) {
+      let closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
+
+      const full = joinedItems.slice(match.index, closing + 1)
+      const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
+      const mixin = mixins[name]
+      const closingSemicolon = joinedItems[closing + 1] == ";"
+
+      const argumentsOpeningParen = full.indexOf("(")
+      const argumentsclosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
+      const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsclosingParen)
+      const splitArguments = argumentsString.split(/,(?![^()]*(?:\([^()]*\))?\))/)
+
+      if (!mixin) throw new Error(`Included a mixin that was not specified: "${name}"`)
+
+      // Replace mixin params with content
+      let replaceWith = mixin.content
+      let paramIndex = 0
+      mixin.params.forEach(param => {
+        replaceWith = replaceWith.replaceAll("Mixin." + param, splitArguments[paramIndex]?.trim() || "")
+        paramIndex++
+      })
+
+      joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length + (closingSemicolon ? 1 : 0))
+    }
+
+    return joinedItems
   }
 
   function compileVariables(joinedItems) {
