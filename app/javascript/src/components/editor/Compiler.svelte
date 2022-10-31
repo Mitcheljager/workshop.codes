@@ -47,7 +47,7 @@
       const name = content.match(/(?<=@mixin\s)(\w+)/)?.[0]
 
       if (!name) throw new Error("Mixin is missing a name")
-      if (mixins[name]) throw new Error(`Mixin "${name}" is already defined`)
+      if (mixins[name]) throw new Error(`Mixin "${ name }" is already defined`)
 
       const firstOpenBracket = content.indexOf("{")
       const firstOpenParen = content.indexOf("(")
@@ -58,7 +58,7 @@
       mixins[name] = {
         content: mixin,
         full: joinedItems.slice(match.index, closing + 1),
-        params,
+        params
       }
     }
 
@@ -68,8 +68,7 @@
     // Find stated includes for mixins and replace them with mixins
     const includeRegex = /@include/g
     while ((match = includeRegex.exec(joinedItems)) != null) {
-      let closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
-
+      const closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
       const full = joinedItems.slice(match.index, closing + 1)
       const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
       const mixin = mixins[name]
@@ -80,7 +79,7 @@
       const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsclosingParen)
       const splitArguments = argumentsString.split(/,(?![^()]*(?:\([^()]*\))?\))/)
 
-      if (!mixin) throw new Error(`Included a mixin that was not specified: "${name}"`)
+      if (!mixin) throw new Error(`Included a mixin that was not specified: "${ name }"`)
 
       // Replace mixin params with content
       let replaceWith = mixin.content
