@@ -10,6 +10,7 @@
 
   let element
   let isHoldingCtrl
+  let sortable
 
   $: itemsInParent = getItemsInParent($items)
 
@@ -18,7 +19,7 @@
       Sortable.mount(new MultiDrag())
     } catch {}
 
-    new Sortable(element, {
+    sortable = new Sortable(element, {
       group: "items",
       animation: 100,
       swapTreshhold: 0.25,

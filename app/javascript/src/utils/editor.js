@@ -19,7 +19,13 @@ export function destroyItem(id) {
 }
 
 export function updateItemName(id, name) {
-  get(items).filter(i => i.id == id)[0].name = name
+  // The store needs to be updated across the board
+  // Otherwise their value will get overwritten on change
+  // There's probably a better way of doing this
+  items.set(get(items).map(i => {
+    if (i.id == id) i.name = name
+    return i
+  }))
 }
 
 export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {
