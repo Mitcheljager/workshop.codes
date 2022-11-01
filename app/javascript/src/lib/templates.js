@@ -77,5 +77,16 @@ export const templates = Object.freeze({
         }
     }
 }`,
+  Mixin: `// Mixins allow you to re-use a bit of code in any place you wish
+// They are declared using "@mixin mixinName()"
+@mixin mixinName()
+{
+    Global.value = 1;
+}
+
+// They can be included in any location using "@include mixinName()"
+@include mixinName();
+
+// See more examples at https://workshop.codes/editor?uuid=7013aa4b-4611-4f73-b1e1-6fca1bb2c771`,
   Empty: ""
 })

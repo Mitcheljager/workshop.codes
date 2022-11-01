@@ -14,6 +14,7 @@
         <li>Relevant syntax highlighting.</li>
         <li>Folders, wow!</li>
         <li>Integrated Wiki search.</li>
+        <li>Reduce code repetition using Mixins.</li>
       </ul>
     <p>
 
@@ -28,7 +29,6 @@
       <ul>
         <li>Automatic wiki searching on auto complete.</li>
         <li>OverPy! Writing scripts using a HLL is much more enjoyable, getting OverPy in is a high priority.</li>
-        <li>Automatic error detection.</li>
         <li>Optional semicolons.</li>
         <li>Search and replace across all files.</li>
         <li>More customisation; colors, fonts, sizes, etc.</li>

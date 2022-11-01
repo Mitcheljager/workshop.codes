@@ -36,6 +36,7 @@
       <button on:click={() => createTemplate("RuleEachPlayer", "Each Player Rule")} class="dropdown__item empty-button">Rule - Each Player</button>
       <button on:click={() => createTemplate("Subroutine", "Subroutine")} class="dropdown__item empty-button">Subroutine</button>
       <button on:click={() => createTemplate("Settings", "Settings")} class="dropdown__item empty-button">Settings</button>
+      <button on:click={() => createTemplate("Mixin", "Mixin")} class="dropdown__item empty-button">Mixin</button>
       <button on:click={() => createTemplate("Empty", "New item")} class="dropdown__item empty-button">Empty</button>
       <hr>
       <button on:click={() => createItem("New folder", "", "folder")} class="dropdown__item empty-button">Folder</button>
