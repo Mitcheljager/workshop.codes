@@ -1,10 +1,12 @@
 <% cache_unless current_user, [current_locale, post, "card"] do %>
+  <% image_url = url_for_post_thumbnail(post, 300, 171, "medium") %>
+
   <div class="card" data-code="<%= post.code %>">
     <%= link_to post_path(post.code), title: post.title do %>
-      <%= image_tag url_for_post_thumbnail(post, 300, 171, "medium"), alt: post.title, width: 300, height: 171, loading: "lazy", class: "card__image" %>
+      <%= image_tag image_url, alt: post.title, width: 300, height: 171, loading: "lazy", class: "card__image" %>
     <% end %>
 
-    <div class="flex mb-auto">
+    <div class="relative z-1 flex mb-auto">
       <div class="mr-1/8">
         <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title), tabindex: -1 %>
 
@@ -18,6 +20,8 @@
         <%= render "favorites/form", post: post %>
       </div>
     </div>
+
+    <%= image_tag image_url, alt: post.title, width: 300, height: 171, loading: "lazy", class: "card__blurred-background" %>
 
     <%= render "posts/code", post: post, item_class: "code mt-1/4" %>
   </div>
