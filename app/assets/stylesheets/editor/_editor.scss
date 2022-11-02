@@ -4,8 +4,8 @@ $top-height: 4rem;
 
 .editor {
   display: grid;
-  grid-template-rows: $top-height auto;
   grid-template: "top" "aside" "content" "popout";
+  grid-template-rows: $top-height auto;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,10 +13,9 @@ $top-height: 4rem;
   width: 100%;
   background: $bg-dark;
   z-index: 500;
-  overflow-y: auto;
 
   @include media-min(md) {
-    grid-template: "top top top" "aside content popout";
+    grid-template-areas: "top top top" "aside content popout";
     grid-template-columns: $sidebar-width auto $popout-width;
   }
 }
