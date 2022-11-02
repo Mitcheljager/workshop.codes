@@ -1,15 +1,51 @@
-<div class="standout standout--compact standout--editor mt-1/2 md:mt-1/1">
-  <div>
-    <h3 class="mt-0 mb-1/8">
-      <strong><%= t("banner.editor.title_html") %></strong>
+<h2 class="text-center mt-1/1"><%= t("banner.editor.title_html") %></h2>
+
+<div class="standout-grid">
+  <%= link_to editor_path, class: "standout standout--compact standout--editor", style: "--standout-color: var(--primary)", target: "_blank" do %>
+    <h3 class="mt-0 mb-0">
+      <strong>Workshop.codes Editor</strong>
     </h3>
 
-    <span>
-      <%= t("banner.editor.content_html") %>
-    </span>
-  </div>
+    <small class="block">By Workshop.codes</small>
 
-  <div>
-    <%= link_to "Take me there", editor_path, class: "button bg-overwatch-2 mt-1/4 md:mt-0" %>
-  </div>
+    <span>
+      A familiar syntax with new features such as folder, mixins, automatic variables, and more. All from within your browser!
+    </span>
+  <% end %>
+
+  <%= link_to "https://zezombye.github.io/overpy/multiline/workshop_ui", class: "standout standout--compact standout--editor", target: "_blank", rel: "noreferrer noopener" do %>
+    <h3 class="mt-0 mb-0">
+      <strong>Zez's Workshop UI</strong>
+    </h3>
+
+    <small class="block">By Zezombye</small>
+
+    <span>
+      The UI you know and love is back, now with built-in optimization!
+    </span>
+  <% end %>
+
+  <%= link_to "https://github.com/Zezombye/overpy", class: "standout standout--compact standout--editor", style: "--standout-color: #ffdd6c", target: "_blank", rel: "noreferrer noopener" do %>
+    <h3 class="mt-0 mb-0">
+      <strong>OverPy</strong>
+    </h3>
+
+    <small class="block">By Zezombye</small>
+
+    <span>
+      Code your gamemodes with modern development practices and break the limitations of the workshop UI with features such as multiple files, macros, switches, enums, optimizations, string splitting, better syntax, etc.
+    </span>
+  <% end %>
+
+  <%= link_to "https://github.com/ItsDeltin/Overwatch-Script-To-Workshop", class: "standout standout--compact standout--editor", style: "--standout-color: #69cfed", target: "_blank", rel: "noreferrer noopener" do %>
+    <h3 class="mt-0 mb-0">
+      <strong>Deltin's Script To Workshop</strong>
+    </h3>
+
+    <small class="block">By Deltin</small>
+
+    <span>
+      Ostw is an abstraction over the workshop allowing programming features such as data collections in the form of structs or classes, object oriented programming, and lambdas (or closures).
+    </span>
+  <% end %>
 </div>
