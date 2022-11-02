@@ -4,9 +4,8 @@ $top-height: 4rem;
 
 .editor {
   display: grid;
-  grid-template: "top top top" "aside content popout";
   grid-template-rows: $top-height auto;
-  grid-template-columns: $sidebar-width auto $popout-width;
+  grid-template: "top" "aside" "content" "popout";
   position: fixed;
   top: 0;
   left: 0;
@@ -14,6 +13,12 @@ $top-height: 4rem;
   width: 100%;
   background: $bg-dark;
   z-index: 500;
+  overflow-y: auto;
+
+  @include media-min(md) {
+    grid-template: "top top top" "aside content popout";
+    grid-template-columns: $sidebar-width auto $popout-width;
+  }
 }
 
 .editor__scrollable {
@@ -52,13 +57,29 @@ $top-height: 4rem;
   font-size: var(--font-size, 14px);
 
   .cm-editor {
-    max-width: calc(100vw - #{$sidebar-width} - #{$popout-width});
+    @include media-min(md) {
+      max-width: calc(100vw - #{$sidebar-width} - #{$popout-width});
+    }
   }
 
   .cm-scroller {
     height: calc(100vh - #{$top-height});
 
     @include styled-scrollbar;
+  }
+}
+
+.editor__mobile-warning {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: $margin / 4;
+  background: $red;
+  color: $white;
+
+  @include media-min(md) {
+    display: none;
   }
 }
 

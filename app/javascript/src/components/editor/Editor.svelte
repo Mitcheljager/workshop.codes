@@ -150,6 +150,10 @@
   {:else}
     <Empty />
   {/if}
+
+  <div class="editor__mobile-warning">
+    The editor is currently not functional on mobile
+  </div>
 </div>
 
 {#if !$isSignedIn}
