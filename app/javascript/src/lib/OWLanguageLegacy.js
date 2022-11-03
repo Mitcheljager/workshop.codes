@@ -46,6 +46,11 @@ function tokenBase(stream, state, prev) {
       stream.skipToEnd()
       return "comment"
     }
+
+    if (stream.match("/*")) {
+      state.tokenize.push(tokenComment)
+      return tokenComment(stream, state)
+    }
   }
 
   if (stream.match(octal)) return "number"
@@ -135,6 +140,19 @@ function tokenString(openQuote, stream, state) {
   return "string"
 }
 
+function tokenComment(stream, state) {
+  let ch
+  while (ch = stream.next()) {
+    if (ch === "/" && stream.eat("*")) {
+      state.tokenize.push(tokenComment)
+    } else if (ch === "*" && stream.eat("/")) {
+      state.tokenize.pop()
+      break
+    }
+  }
+  return "comment"
+}
+
 function Context(prev, align, indented) {
   this.prev = prev
   this.align = align
@@ -189,7 +207,7 @@ export const OWLanguage = {
 
   languageData: {
     indentOnInput: /^\s*[\)\}\]]$/,
-    commentTokens: { line: "//" },
+    commentTokens: { line: "//", block: { open: "/*", close: "*/" } },
     closeBrackets: { brackets: ["(", "[", "{", "'", "\"", "`"] }
   }
 }

@@ -13,6 +13,8 @@
     try {
       let joinedItems = $sortedItems.map(i => i.content).join("\n\n")
 
+      joinedItems = removeComments(joinedItems)
+
       const [settingsStart, settingsEnd] = getSettings(joinedItems)
       let settings = joinedItems.slice(settingsStart, settingsEnd)
 
@@ -126,6 +128,10 @@ ${ playerVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 subroutines {
 ${ subroutines.map((v, i) => `  ${ i }: ${ v }`).join("\n") }
 }\n\n`
+  }
+
+  function removeComments(joinedItems) {
+    return joinedItems.replaceAll(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, "")
   }
 
   function copyToClipboard(value) {
