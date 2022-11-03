@@ -60,7 +60,7 @@
       mixins[name] = {
         content: mixin,
         full: joinedItems.slice(match.index, closing + 1),
-        params
+        params: params.map(param => param.trim())
       }
     }
 

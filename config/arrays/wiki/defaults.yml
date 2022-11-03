@@ -11,6 +11,5 @@ White: Color(White)
 Hero: Hero(Tracer)
 Team: Team(Team 1)
 Count Of: Count Of(Array)
-Add: Add(0, 0)
 
 
