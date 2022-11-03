@@ -16,7 +16,7 @@ export const sortedItems = derived(items, $items => {
     return item
   })
 
-  return cleanedItems.sort((a, b) => a.position > b.position)
+  return cleanedItems.sort((a, b) => a.position > b.position ? 1 : -1)
 })
 
 export const isSignedIn = writable(false)
