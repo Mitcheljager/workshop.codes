@@ -24,7 +24,7 @@
     left: 0.45rem;
     height: 1.5rem;
     width: 1.5rem;
-    color: $text-color-dark;
+    color: darken($gray, 30%);
   }
 
   > span {

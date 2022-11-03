@@ -106,7 +106,7 @@
       <ProjectsDropdown />
     {/if}
 
-    <div class="ml-auto inline-flex gap-1/8">
+    <div class="editor__actions">
       {#if $currentProject}
         {#if !$currentProject.is_owner}
           <div class="warning warning--orange br-1 align-self-center">

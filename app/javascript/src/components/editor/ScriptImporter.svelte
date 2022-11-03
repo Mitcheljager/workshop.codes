@@ -55,7 +55,7 @@
 
 <svelte:window on:keydown={event => { if (event.key === "Escape") active = false }} />
 
-<button class="button button--secondary" on:click={() => active = true}>Import Script</button>
+<button class="button button--secondary button--square" on:click={() => active = true}>Import Script</button>
 
 {#if active}
   <div class="modal" transition:fade={{ duration: 100 }} data-hide-on-close>

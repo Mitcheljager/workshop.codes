@@ -38,7 +38,7 @@
 <svelte:window on:keydown={keydown} />
 
 <div class="confetti-holder">
-  <button class="button" on:click={save} disabled={loading}>
+  <button class="button button--square" on:click={save} disabled={loading}>
     {#if loading}
       Saving...
     {:else}

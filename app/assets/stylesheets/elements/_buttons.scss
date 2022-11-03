@@ -45,6 +45,11 @@
     border-radius: 99px;
   }
 
+  &--square {
+    border-radius: $border-radius / 2;
+    padding: $margin / 8 $margin / 4;
+  }
+
   &--secondary {
     color: $white;
     background: lighten($body-bg, 5%);

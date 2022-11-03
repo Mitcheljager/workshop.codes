@@ -37,6 +37,12 @@ $top-height: 4rem;
   background: lighten($bg-dark, 5%);
 }
 
+.editor__actions {
+  display: inline-flex;
+  gap: $margin / 8;
+  margin-left: auto;
+}
+
 .editor__aside {
   grid-area: aside;
   position: relative;

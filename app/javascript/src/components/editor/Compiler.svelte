@@ -149,7 +149,7 @@ ${ subroutines.map((v, i) => `  ${ i }: ${ v }`).join("\n") }
   }
 </script>
 
-<button class="button button--secondary tooltip" on:click={compile}>
+<button class="button button--secondary button--square tooltip" on:click={compile}>
   {#if compiling}
     Compiling...
   {:else}
