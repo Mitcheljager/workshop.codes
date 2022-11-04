@@ -112,6 +112,23 @@
   }
 }
 
+.form-group-inline {
+  display: grid;
+  grid-template-columns: 6rem calc(100% - 6rem);
+  align-items: center;
+  gap: $margin / 4;
+
+  label {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  input {
+    width: calc(100% - #{$margin / 4});
+  }
+}
 
 .form-select {
   -webkit-appearance: none;
@@ -305,4 +322,31 @@ input[type="file"] {
 .form-required {
   font-size: $font-size-small;
   color: $text-color-dark;
+}
+
+.range {
+  background: transparent;
+
+  &::-moz-range-thumb {
+    background: $text-color;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      background: $pure-white;
+    }
+  }
+
+  &::-moz-range-track {
+    background: $bg-darker;
+  }
+
+  &::-moz-range-progress {
+    background: $primary;
+  }
+}
+
+.color-input {
+  padding: 0;
+  border: 1px solid $border-color;
 }

@@ -60,11 +60,15 @@
 
 .cm-editor {
   color: $text-color-light;
-  font-family: "Consolas", monospace;
+
+  .cm-scroller {
+    padding-top: $margin / 4;
+    font-family: var(--editor-font, "Consolas"), monospace;
+  }
 
   .cm-gutters {
     border-right: 0;
-    background: $bg-dark;
+    background: var(--editor-background, #{$bg-dark});
     color: $text-color-dark;
 
     .cm-activeLineGutter {
@@ -99,8 +103,8 @@
   }
 
   .cm-cursor {
-    border-color: var(--cursor-color, #ff00ff);
-    border-width: var(--cursor-width, 3px);
+    border-color: var(--editor-cursor-color, #ff00ff);
+    border-width: calc(var(--editor-cursor-width, 3) * 1px);
   }
 
   .cm-completionIcon {

@@ -61,3 +61,7 @@ export function getSettings(value) {
 export function replaceBetween(origin, replace, startIndex, endIndex) {
   return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
 }
+
+export function setCssVariable(key, value) {
+  document.body.style.setProperty(`--${ key }`, value)
+}

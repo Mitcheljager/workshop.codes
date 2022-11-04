@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte"
+  import { setCssVariable } from "../../utils/editor"
 
   export let key = ""
   export let currentSize = 0
@@ -12,7 +13,7 @@
 
   onMount(() => {
     currentSize = localStorage.getItem(key) || currentSize
-    setCssVariable()
+    setCssVariable(key, `${ currentSize }px`)
   })
 
   function mouseDown(event) {
@@ -27,7 +28,7 @@
     const difference = event.pageX - startX
     currentSize = startSize + difference * (align == "right" ? 1 : -1)
 
-    setCssVariable()
+    setCssVariable(key, `${ currentSize }px`)
 
     localStorage.setItem(key, currentSize)
   }
@@ -35,10 +36,6 @@
   function mouseUp() {
     if (!isDragging) return
     isDragging = false
-  }
-
-  function setCssVariable() {
-    document.body.style.setProperty(`--${ key }`, `${ currentSize }px`)
   }
 </script>
 
