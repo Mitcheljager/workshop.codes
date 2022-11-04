@@ -37,7 +37,7 @@
 
 <svelte:window on:keydown={keydown} />
 
-<div class="confetti-holder">
+<div class="relative">
   <button class="button button--square" on:click={save} disabled={loading}>
     {#if loading}
       Saving...
@@ -47,7 +47,7 @@
   </button>
 
   {#if confettiActive}
-    <div class="confetti">
+    <div class="confetti-holder">
       <Confetti colorArray={["var(--primary)"]} x={[-0.5, 0.5]} y={[-0.15, 0.25]} fallDistance="10px" amount="20" size="7" duration=1000 />
     </div>
   {/if}
