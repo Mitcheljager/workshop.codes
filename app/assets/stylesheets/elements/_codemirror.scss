@@ -51,6 +51,13 @@
 
 /// CodeMirror 6
 
+@keyframes fly-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
 .cm-editor {
   color: $text-color-light;
   font-family: "Consolas", monospace;
@@ -148,11 +155,16 @@
   .cm-panel.cm-search {
     width: 100%;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: $margin / 4;
+    right: $margin / 4;
+    left: $margin / 4;
+    width: calc(100% - #{ $margin / 2 });
     padding: $margin / 8;
+    border-radius: $border-radius / 2;
     background: rgba(darken($bg-dark, 10%), 0.5);
     backdrop-filter: blur(10px);
+    box-shadow: $shadow;
+    animation: fly-in 200ms;
 
     input {
       @extend .form-input !optional;
