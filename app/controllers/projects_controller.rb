@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.create(title: project_params[:title], user_id: current_user.id)
+    @project = Project.create(title: project_params[:title], content_type: project_params[:content_type], user_id: current_user.id)
     @project.is_owner = current_user.id == @project.user_id
 
     if @project.save
@@ -44,6 +44,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :content)
+    params.require(:project).permit(:title, :content, :content_type)
   end
 end

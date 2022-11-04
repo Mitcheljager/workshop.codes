@@ -56,7 +56,7 @@
 
     loading = true
 
-    new FetchRails("/projects", { project: { title: value } }).post()
+    new FetchRails("/projects", { project: { title: value, content_type: "workshop_codes" } }).post()
       .then(data => {
         if (!data) throw Error("Create failed")
 

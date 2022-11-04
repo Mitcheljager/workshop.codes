@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_10_211225) do
+ActiveRecord::Schema.define(version: 2022_11_04_004705) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(version: 2022_10_10_211225) do
     t.string "uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "content_type", default: 0
   end
 
   create_table "remember_tokens", force: :cascade do |t|

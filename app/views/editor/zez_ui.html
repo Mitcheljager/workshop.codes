@@ -1,0 +1,32 @@
+<style>
+  body {
+    background: black;
+    color: white;
+  }
+</style>
+
+<h1>Zez's Workshop UI Recreation</h1>
+
+<script>
+  // Get csrf token from head
+  const token = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+
+  async function getProjects() {
+    // Get projects of the current user
+    const response = await fetch("/zez-ui", {
+      method: "get",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-CSRF-Token": token,
+      },
+      credentials: "same-origin",
+    })
+
+    console.log(response)
+    console.log(await response.json())
+  }
+
+  getProjects()
+</script>

@@ -6,8 +6,14 @@ class Project < ApplicationRecord
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 1, maximum: 75 }
   validates :content, length: { maximum: POST_SNIPPET_LIMIT }
+  validates :content_type, presence: true
 
   attr_accessor :is_owner
+
+  enum content_type: {
+    workshop_codes: 0,
+    zezombye_ui: 1
+  }
 
   private
 
