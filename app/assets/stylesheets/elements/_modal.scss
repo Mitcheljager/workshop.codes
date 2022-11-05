@@ -25,6 +25,13 @@
       align-items: flex-start;
     }
   }
+
+  &--top {
+    @include media-min(sm) {
+      align-items: flex-start;
+      padding-top: $margin;
+    }
+  }
 }
 
 .modal__backdrop {

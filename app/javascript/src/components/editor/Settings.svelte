@@ -44,8 +44,6 @@
   function updateVariables() {
     if (!mounted) return
 
-    console.log("update")
-
     Object.entries(settings).forEach(([key, value]) => {
       setCssVariable(key, value)
       localStorage.setItem(key, value)

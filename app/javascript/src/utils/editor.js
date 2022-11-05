@@ -1,4 +1,4 @@
-import { currentItem, items } from "../stores/editor"
+import { currentItem, items, openFolders } from "../stores/editor"
 import { get } from "svelte/store"
 
 export function createNewItem(name, content, position = 9999, type = "item") {
@@ -64,4 +64,31 @@ export function replaceBetween(origin, replace, startIndex, endIndex) {
 
 export function setCssVariable(key, value) {
   document.body.style.setProperty(`--${ key }`, value)
+}
+
+export function getItemById(id) {
+  return get(items).filter(i => i.id == id)[0] || null
+}
+
+export function setCurrentItemById(id) {
+  const item = getItemById(id)
+
+  if (!item) return
+
+  currentItem.set(item)
+
+  if (!item.parent) return
+  const parent = getItemById(item.parent)
+  if (parent) toggleFolderState(parent, true)
+}
+
+export function toggleFolderState(item, state, set = true) {
+  if (item?.type != "folder") return
+
+  if (set) localStorage.setItem(`folder_expanded_${ item.id }`, state)
+
+  if (state) openFolders.set([...get(openFolders), item.id])
+  else openFolders.set([...get(openFolders).filter(f => f != item.id)])
+
+  if (item.parent) toggleFolderState(getItemById(item.parent), true)
 }

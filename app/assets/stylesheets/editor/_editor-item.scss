@@ -34,7 +34,7 @@
 
     &:hover {
       background: darken($bg-dark, 7.5%);
-      box-shadow: -50px 0 0 darken($bg-dark, 7.5%);
+      box-shadow: -100px 0 0 darken($bg-dark, 7.5%);
 
       input {
         color: $white;
@@ -54,7 +54,7 @@
 
     > span {
       background: darken($bg-dark, 10%);
-      box-shadow: -50px 0 0 darken($bg-dark, 10%);
+      box-shadow: -100px 0 0 darken($bg-dark, 10%);
 
       input {
         color: $white;

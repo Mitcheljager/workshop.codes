@@ -27,6 +27,8 @@ export function closeModal(event) {
 
   if (!activeModal) return
 
+  if (activeModal.dataset.ignore != undefined) return
+
   if (activeModal.dataset.hideOnClose != undefined) {
     activeModal.style.display = "none"
 

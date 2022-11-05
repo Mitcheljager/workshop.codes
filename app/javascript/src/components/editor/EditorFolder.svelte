@@ -1,23 +1,30 @@
 <script>
+  import { onMount } from "svelte"
+  import { openFolders } from "../../stores/editor"
+  import { toggleFolderState } from "../../utils/editor"
   import EditorItemDestroy from "./EditorItemDestroy.svelte"
   import EditorItemName from "./EditorItemName.svelte"
   import EditorList from "./EditorList.svelte"
 
   export let item = {}
 
-  let expanded = localStorage.getItem(`folder_expanded_${ item.id }`) == "true" ? true : false
+  $: expanded = $openFolders.includes(item.id)
 
-  function toggleExpanded() {
-    expanded = !expanded
-    localStorage.setItem(`folder_expanded_${ item.id }`, expanded)
+  onMount(setInitialState)
+
+  function setInitialState() {
+    const state = localStorage.getItem(`folder_expanded_${ item.id }`) == "true" ? true : false
+
+    if (state) toggleFolderState(item, state, false)
   }
+
 </script>
 
 <div
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
   data-item-id={item.id}>
-  <button class="editor-folder__icon empty-button" on:click|stopPropagation={toggleExpanded}>
+  <button class="editor-folder__icon empty-button" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
     &gt;
   </button>
 

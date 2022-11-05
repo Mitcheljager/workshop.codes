@@ -129,7 +129,7 @@
   }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
+<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false; showCreateModal = false }} />
 
 <div class="dropdown">
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style="min-width: 200px" disabled={loading}>
@@ -163,8 +163,8 @@
 </div>
 
 {#if showCreateModal}
-  <div class="modal" transition:fade={{ duration: 100 }} data-hide-on-close>
-    <div class="modal__content p-0">
+  <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
+    <div class="modal__content p-0" transition:fly={{ y: 100, duration: 200 }}>
       {#if !$isSignedIn}
         <div class="warning warning--orange">
           You are not signed in and this is for demonstration purposes only. This will not be saved.

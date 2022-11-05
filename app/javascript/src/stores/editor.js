@@ -19,4 +19,6 @@ export const sortedItems = derived(items, $items => {
   return cleanedItems.sort((a, b) => a.position > b.position ? 1 : -1)
 })
 
+export const openFolders = writable([])
+
 export const isSignedIn = writable(false)

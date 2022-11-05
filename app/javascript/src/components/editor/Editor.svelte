@@ -11,6 +11,7 @@
   import Save from "./Save.svelte"
   import Empty from "./Empty.svelte"
   import Settings from "./Settings.svelte"
+  import ItemFinder from "./ItemFinder.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
 
   export let values
@@ -167,3 +168,5 @@
     </div>
   </div>
 {/if}
+
+<ItemFinder />
