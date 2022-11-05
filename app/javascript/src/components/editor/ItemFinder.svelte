@@ -25,7 +25,7 @@
       name: i.name,
       parent: i.parent,
       order: i.name.length - value.length,
-      from: i.name.toLowerCase().indexOf(value.toLocaleLowerCase()),
+      from: i.name.toLowerCase().indexOf(value.toLocaleLowerCase())
     }))
 
     selected = 0
@@ -33,7 +33,7 @@
 
   function highlightString(string, from) {
     const subString = string.substring(from, from + value.length)
-    return replaceBetween(string,  `<mark>${subString}</mark>`, from, from + value.length)
+    return replaceBetween(string,  `<mark>${ subString }</mark>`, from, from + value.length)
   }
 
   function getParentsString(id) {
