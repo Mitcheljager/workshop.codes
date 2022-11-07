@@ -14,6 +14,7 @@
 
   $: searchItems(value)
   $: sortedMatches = matches.sort((a, b) => a < b ? 1 : -1).slice(0, maxItems)
+  $: if (active) focusInput()
 
   function searchItems() {
     const filteredItems = $items.filter(i =>
@@ -63,12 +64,11 @@
     else if (selected < 0) selected = Math.min(matches.length, maxItems) - 1
   }
 
-  async function keydown(event) {
+  function keydown(event) {
     if (event.ctrlKey && event.keyCode == 81) {
       event.preventDefault()
       active = !active
-      await tick()
-      input.focus()
+      focusInput()
     }
 
     if (!active) return
@@ -80,14 +80,23 @@
     if (event.keyCode == 40) setSelected(1)
     if (event.keyCode == 38) setSelected(-1)
   }
+
+  async function focusInput() {
+    await tick()
+    input.focus()
+  }
 </script>
 
 <svelte:window on:keydown={keydown} on:keydown={event => { if (event.key === "Escape") active = false }} />
 
+<button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
+  <em>Find by name... (Ctrl+Q)</em>
+</button>
+
 {#if active}
   <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
     <div class="modal__content p-0 bg-transparent" style="max-width: 600px" transition:fly={{ y: 100, duration: 200 }}>
-      <input type="text" class="form-input form-input--large bg-darker" placeholder="Search files by name..." bind:value bind:this={input} />
+      <input type="text" class="form-input form-input--large bg-darker" placeholder="Find files by name..." bind:value bind:this={input} />
 
       {#if value}
         <div class="matches">

@@ -134,6 +134,10 @@
   {#if $currentProject}
     <div class="editor__aside">
       <div class="editor__scrollable">
+        <div class="p-1/4 pt-0">
+          <ItemFinder />
+        </div>
+
         <EditorAside />
       </div>
 
@@ -168,5 +172,3 @@
     </div>
   </div>
 {/if}
-
-<ItemFinder />

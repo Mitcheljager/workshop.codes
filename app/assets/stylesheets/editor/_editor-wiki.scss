@@ -1,5 +1,9 @@
 .editor-wiki-search {
   position: relative;
+
+  input::placeholder {
+    color: $text-color;
+  }
 }
 
 .editor-wiki-results {
