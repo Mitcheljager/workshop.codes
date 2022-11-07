@@ -1391,8 +1391,9 @@ var app = new Vue({
             const data = await response.json();
 
             var projectId = data.uuid;
-            console.log(projectId)
             this.projects.push({name: projectName, id: projectId});
+            this.currentProjectId = projectId;
+            this.setUrl();
             return projectId; //the id of the project
         },
         setUrl: function() {
