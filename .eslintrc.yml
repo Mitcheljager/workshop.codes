@@ -12,6 +12,7 @@ overrides:
     files:
       - "*.svelte"
     processor: svelte3/svelte3
+ignorePatterns: ["**/zez-ui/*.js"],
 rules:
   semi:
     - error

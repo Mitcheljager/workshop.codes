@@ -12,7 +12,7 @@ class Project < ApplicationRecord
 
   enum content_type: {
     workshop_codes: 0,
-    zezombye_ui: 1
+    zez_ui: 1
   }
 
   private
