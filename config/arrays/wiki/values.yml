@@ -3792,6 +3792,10 @@ _&getAmmo:
     description: The player whose ammo to acquire.
     type: Player
     default: EVENT PLAYER
+  - name: CLIP
+    description: The index of the clip to be acquired. 0 is the first clip, and 1 is the second. If the specified type does not exist, this will return 0.
+    type: unsigned int
+    default: 0
   return: unsigned float
   en-US: Ammo
 eventWasEnvironment:
