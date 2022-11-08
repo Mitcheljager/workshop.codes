@@ -101,7 +101,7 @@
     let globalVariables = joinedItems.match(/(?<=Global\.).[^\s,.[\]);]+/g)
     globalVariables = [...new Set(globalVariables)]
 
-    let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee)\.).[^\s,.[\]);]+/g)
+    let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player)\.).[^\s,.[\]);]+/g)
     playerVariables = [...new Set(playerVariables)]
 
     if (!globalVariables?.length && !playerVariables.length) return ""
