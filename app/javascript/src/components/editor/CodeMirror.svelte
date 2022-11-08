@@ -69,8 +69,7 @@
   function completions(context) {
     const word = context.matchBefore(/[a-zA-Z0-9 ]*/)
 
-    let add = 0
-    if (word.text[0] == " ") add = 1
+    const add = word.text.search(/\S|$/)
     if (word.from + add == word.to && !context.explicit) return null
 
     return {
@@ -112,6 +111,8 @@
 
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
+
+      console.log(line)
 
       const previousIndent = getsIntendForLine(state, from - 1)
       const currentIndent = getsIntendForLine(state, from)
