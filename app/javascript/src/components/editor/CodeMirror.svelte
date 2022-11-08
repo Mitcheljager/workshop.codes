@@ -49,7 +49,7 @@
           activateOnTyping: true,
           override: [completions],
           closeOnBlur: false,
-          hintOptions: /[()\[\]{};:>,+-\=]/
+          hintOptions: /[()\[\]{};:>,+-=]/
         }),
         lintGutter(),
         linter(OWLanguageLinter),
@@ -69,10 +69,12 @@
   function completions(context) {
     const word = context.matchBefore(/[a-zA-Z0-9 ]*/)
 
-    if (word.from == word.to && !context.explicit) return null
+    let add = 0
+    if (word.text[0] == " ") add = 1
+    if (word.from + add == word.to && !context.explicit) return null
 
     return {
-      from: word.from,
+      from: word.from + add,
       to: word.to,
       options: completionsMap,
       validFor: /^(?:[a-zA-Z0-9]+)$/i
