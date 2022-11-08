@@ -129,7 +129,7 @@
   }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false; showCreateModal = false }} />
+<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") { active = false; showCreateModal = false } }} />
 
 <div class="dropdown">
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style="min-width: 200px" disabled={loading}>
