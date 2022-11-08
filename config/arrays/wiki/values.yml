@@ -55,6 +55,7 @@ abs:
 __add__:
   guid: 00000000C408
   description: The sum of two numbers or vectors.
+  args_allow_null: true
   args:
   - name: VALUE
     description: The left-hand operand. May be any value that results in a number
@@ -331,6 +332,7 @@ angleDifference:
 __concat__:
   guid: 00000000C41A
   description: A copy of an array with one or more values appended to the end.
+  args_allow_null: true
   args:
   - name: ARRAY
     description: The array to which to append.
@@ -824,6 +826,7 @@ __divide__:
   guid: 00000000C40F
   description: The ratio of two numbers or vectors. A vector divided by a number will
     yield a scaled vector. Division by zero results in zero.
+  args_allow_null: true
   args:
   - name: VALUE
     description: The left-hand operand. May be any value that results in a number
@@ -2414,6 +2417,7 @@ __multiply__:
   guid: 00000000C40D
   description: The product of two numbers or vectors. A vector multiplied by a number
     will yield a scaled vector.
+  args_allow_null: true
   args:
   - name: VALUE
     description: The left-hand operand. May be any value that results in a number
@@ -3106,6 +3110,7 @@ __raycastHitPosition__:
   zh-CN: 射线命中位置
 __removeFromArray__:
   description: A copy of an array with one or more values removed (if found).
+  args_allow_null: true
   args:
   - name: ARRAY
     description: The array from which to remove values.
@@ -3368,6 +3373,7 @@ __localizedString__:
 __subtract__:
   guid: 00000000C40A
   description: The difference between two numbers or vectors.
+  args_allow_null: true
   args:
   - name: VALUE
     description: The left-hand operand. May be any value that results in a number

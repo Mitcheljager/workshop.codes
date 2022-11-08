@@ -47,6 +47,7 @@
       }
 
       if (v.args_unlimited) params.args_unlimited = true
+      if (v.args_allow_null) params.args_allow_null = true
 
       // Exclude all trailing "null" defaults
       if (v.args?.some(a => a.default?.toString().toLowerCase() == "null")) {

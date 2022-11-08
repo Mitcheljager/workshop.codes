@@ -97,6 +97,7 @@ function findIncorrectArgsLength(content) {
       if (item.args_unlimited) continue
 
       if (item.args_length && content.charAt(match.index + match.match.length) != "(") {
+        if (item.args_allow_null) continue
         // Some arguments expected but none were given
         message = `${ item.args_length } Argument(s) expected, 0 given`
       } else if (!item.args_length && content.charAt(match.index + match.match.length) == "(") {
