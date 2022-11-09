@@ -6,10 +6,8 @@ class Admin::BaseController < ApplicationController
   end
 
   def index
-    @posts = Post.select(:created_at).all.order(created_at: :asc)
-    @users = User.select(:created_at, :uuid).all.order(created_at: :asc)
-    @comments = Comment.select(:created_at).all.order(created_at: :asc)
-    @favorites = Favorite.select(:created_at).all.order(created_at: :asc)
-    @notifications = Notification.select(:created_at).all.order(created_at: :asc)
+    @admin_activity = Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment])
+                              .order(created_at: :desc)
+                              .limit(20)
   end
 end
