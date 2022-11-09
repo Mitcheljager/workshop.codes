@@ -112,8 +112,6 @@
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
 
-      console.log(line)
-
       const previousIndent = getsIntendForLine(state, from - 1)
       const currentIndent = getsIntendForLine(state, from)
       let insert = "\t"

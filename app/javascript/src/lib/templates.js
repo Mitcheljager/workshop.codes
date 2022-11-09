@@ -3,7 +3,7 @@ export const templates = Object.freeze({
 {
     event
     {
-      Ongoing - Global;
+        Ongoing - Global;
     }
 
     conditions
