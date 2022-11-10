@@ -1,5 +1,5 @@
 import { templates } from "../lib/templates"
-import { getSettings } from "./editor"
+import { getSettings, getClosingBracket } from "./editor"
 import { sortedItems } from "../stores/editor"
 import { get } from "svelte/store"
 
@@ -83,11 +83,13 @@ function extractAndInsertMixins(joinedItems) {
 }
 
 function compileVariables(joinedItems) {
-  let globalVariables = joinedItems.match(/(?<=Global\.).[^\s,.[\]);]+/g)
+  let globalVariables = joinedItems.match(/(?<=Global\.)[^\s,.[\]);]+/g)
   globalVariables = [...new Set(globalVariables)]
+  console.log(globalVariables)
 
-  let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player)\.).[^\s,.[\]);]+/g)
+  let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player)\.)[^\s,.[\]);]+/g)
   playerVariables = [...new Set(playerVariables)]
+  console.log(playerVariables)
 
   if (!globalVariables?.length && !playerVariables.length) return ""
 
