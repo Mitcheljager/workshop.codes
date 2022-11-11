@@ -1,5 +1,5 @@
 import { templates } from "../lib/templates"
-import { getSettings, getClosingBracket } from "./editor"
+import { getSettings, getClosingBracket, replaceBetween } from "./editor"
 import { sortedItems } from "../stores/editor"
 import { get } from "svelte/store"
 
