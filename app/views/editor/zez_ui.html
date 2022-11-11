@@ -1,10 +1,8 @@
-<style>body { background: black }</style>
-
 <script>
   const baseUrl = window.location.href
 
   async function setSourceUrls() {
-    const sources = document.querySelectorAll("[data-src]")
+    const sources = document.querySelectorAll("link[href], img[src]")
 
     const prepend = window.location.origin.includes("http") ? "" : "../../../public"
 
@@ -49,436 +47,429 @@
 
 <title>Zez's Workshop UI Recreation</title>
 
-<link rel="stylesheet" data-src="/zez-ui/libs/toastify.css">
-<link rel="stylesheet" data-src="/zez-ui/libs/vue-select.min.css">
-<link rel="icon" type="image/png" data-src="/zez-ui/img/favicon.png" />
+<link rel="stylesheet" src="/zez-ui/libs/toastify.css">
+<link rel="stylesheet" src="/zez-ui/libs/vue-select.min.css">
+<link rel="icon" type="image/png" src="/zez-ui/img/favicon.png" />
 
-<link rel="stylesheet" data-src="/zez-ui/css/workshop.css">
+<link rel="stylesheet" src="/zez-ui/css/workshop.css">
 
-<div id="app-wrapper-wrapper" :style="{'background-image': 'url(&quot;/zez-ui/img/backgrounds/'+background+'&quot;)'}">
-  <div id="app-wrapper">
-  <div id="app">
-      <div id="workshop-title" class="font-bignoodle">Zez's workshop UI recreation [BETA]</div>
-      <div id="workshop-subtitle">{{ customGameSettings?.main?.modeName || "&lt;Untitled mode&gt;" }}</div>
-      <div id="workshop-header">
-          <div id="workshop-header-left">
-              <div id="rules-title">{{ translate("rules", workshopUiKw) }}</div>
-              <div id="rules-nb">({{ rules.length || 0}})</div>
-              <img id="button-info" class="img-button button-header" data-src="/zez-ui/img/info.png" v-on:click="displayInfo = true"/>
-              <img id="button-metrics" class="img-button button-header" data-src="/zez-ui/img/metrics.png" v-on:click="displayMetricsScreen()"/>
-              <img id="button-import" class="img-button button-header" data-src="/zez-ui/img/import.png" v-on:click="displayImport = true"/>
-              <!--<img id="button-export" class="img-button button-header" data-src="/zez-ui/img/export.png" v-on:click="showExportLink()"/>-->
-              <img id="button-settings" class="img-button button-header" data-src="/zez-ui/img/settings.png" v-on:click="editCustomGameSettings()"/>
-              <img id="button-save" class="img-button button-header" data-src="/zez-ui/img/save.png" v-on:click="saveGamemode()"/>
-          </div>
-          <div id="workshop-header-right">
-              <img id="button-extensions" class="img-button button-header" data-src="/zez-ui/img/extensions.png" v-on:click="editExtensions()"/>
-              <img id="button-var-names" class="img-button button-header" data-src="/zez-ui/img/var_names.png" v-on:click="editVariables()"/>
-              <img id="button-subroutine-names" class="img-button button-header" data-src="/zez-ui/img/subroutine_names.png" v-on:click="editSubroutines()"/>
-              <div id="button-separator"></div>
-              <template v-if="rules.some(x => x.isSelected)">
-                  <img class="img-button button-header button-delete" data-src="/zez-ui/img/delete.png" v-on:click="deleteSelectedRules()"/>
-                  <div id="buttons-move-up-down" class="button-header">
-                      <img id="button-move-up" class="img-button" data-src="/zez-ui/img/move_up.png" v-on:click="moveSelectedRules(true)"/>
-                      <img id="button-move-down" class="img-button" data-src="/zez-ui/img/move_down.png" v-on:click="moveSelectedRules(false)"/>
-                  </div>
-                  <img id="button-toggle" class="img-button button-header" data-src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedRules()"/>
-                  <img id="button-copy" class="img-button button-header" data-src="/zez-ui/img/copy.png" v-on:click="copySelectedRules()"/>
-              </template>
-              <img v-if="clipboard?.type === 'rules'" id="button-paste" class="img-button button-header" data-src="/zez-ui/img/paste.png" v-on:click="pasteRules()"/>
-              <img id="button-select-all" class="img-button button-header" data-src="/zez-ui/img/select_all.png" v-on:click="selectAllRules()"/>
-              <img id="button-add" class="img-button button-header" data-src="/zez-ui/img/add.png" v-on:click="addRule()"/>
-          </div>
-      </div>
-      <div v-if="rules.length === 0" class="no-values-msg font-blizzglobal"><div id="no-rules">{{ translate("noRules", workshopUiKw) }}</div><div id="no-rules-help" class="font-futurano2d">Press the <img id="button-import" data-src="/zez-ui/img/import.png"/> button to import an existing gamemode</div></div>
-      <div v-else id="rules">
-          <div class="rule" v-for="(rule, ruleIdx) in rules">
-              <div class="rule-collapse-bar">
-                  <template v-if="rule.isCollapsed">
-                      <img class="img-button rule-expand-button" data-src="/zez-ui/img/expand_rule.png" v-on:click="rule.isCollapsed=false"/>
-                  </template>
-                  <template v-else>
-                      <img class="img-button rule-collapse-button" data-src="/zez-ui/img/collapse_rule.png" v-on:click="rule.isCollapsed=true"/>
-                      <div class="rule-collapse-line"></div>
-                  </template>
-              </div>
-              <div class="rule-header-and-content">
-
-                  <div class="rule-header">
-                      <input type="text" class="rule-title" :class="{'disabled': rule.ruleAttributes.isDisabled}" v-model="rule.ruleAttributes.name">
-                      <input type="checkbox" class="checkbox" v-model="rule.isSelected">
-                  </div>
-                  <div class="rule-content" v-if="!rule.isCollapsed">
-                      <div class="rule-event">
-                          <div class="rule-event-name">{{ translate("event", ruleAttributesDisplayNamesKw) }}</div>
-                          <div class="rule-event-value">
-                              <v-select append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('event')" :reduce="x => x.code" v-model="rule.ruleAttributes.event" v-on:input="rebuildRuleAttributes(rule)">
-                              </v-select>
-                          </div>
-                      </div>
-                      <div class="rule-event" v-if="rule.ruleAttributes.eventPlayer">
-                          <div class="rule-event-name">{{ translate("eventPlayer", ruleAttributesDisplayNamesKw) }}</div>
-                          <div class="rule-event-value"><v-select append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventPlayer')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventPlayer"></v-select></div>
-                      </div>
-                      <div class="rule-event" v-if="rule.ruleAttributes.eventTeam">
-                          <div class="rule-event-name">{{ translate("eventTeam", ruleAttributesDisplayNamesKw) }}</div>
-                          <div class="rule-event-value"><v-select append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventTeam')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventTeam"></v-select></div>
-                      </div>
-                      <div class="rule-event" v-if="rule.ruleAttributes.subroutineName">
-                          <div class="rule-event-name">{{ translate("subroutineName", ruleAttributesDisplayNamesKw) }}</div>
-                          <div class="rule-event-value"><v-select append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('Subroutine')" :reduce="x => x.code" v-model="rule.ruleAttributes.subroutineName"></v-select></div>
-                      </div>
-                      <!--TODO: subroutines-->
-                      <div class="conditions-and-actions">
-                          <div class="conditions">
-                              <div class="conditions-header">
-                                  <div class="conditions-title">{{ translate("conditions", workshopUiKw) }} <span class="conditions-nb">({{ rules[ruleIdx].ruleAttributes.conditions?.length || 0}})</span></div>
-                                  <div class="conditions-buttons">
-                                      <template v-if="rule.ruleAttributes.conditions.some(x => x.isSelected)">
-                                          <img class="img-button button-action-condition button-delete" data-src="/zez-ui/img/delete.png" v-on:click="deleteSelectedConditions(rule)"/>
-                                          <div id="buttons-move-up-down" class="button-action-condition">
-                                              <img id="button-move-up" class="img-button" data-src="/zez-ui/img/move_up.png" v-on:click="moveSelectedConditions(rule, true)"/>
-                                              <img id="button-move-down" class="img-button" data-src="/zez-ui/img/move_down.png" v-on:click="moveSelectedConditions(rule, false)"/>
-                                          </div>
-                                          <img id="button-toggle" class="img-button button-action-condition" data-src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedConditions(rule)">
-                                          <img id="button-copy" class="img-button button-action-condition" data-src="/zez-ui/img/copy.png" v-on:click="copySelectedConditions(rule)"/>
-                                      </template>
-                                      <img v-if="clipboard?.type === 'conditions'" id="button-paste" class="img-button button-action-condition" data-src="/zez-ui/img/paste.png" v-on:click="pasteConditions(rule)"/>
-                                      <img id="button-select-all" class="img-button button-action-condition" data-src="/zez-ui/img/select_all.png" v-on:click="selectAllConditions(rule)"/>
-                                      <img id="button-add" class="img-button button-action-condition" data-src="/zez-ui/img/add.png" v-on:click="addCondition(rule)"/>
-                                  </div>
-                              </div>
-                              <div v-if="!rule.ruleAttributes.conditions?.length" class="no-values-msg font-blizzglobal">{{ translate("noConditions", workshopUiKw) }}</div>
-                              <div v-else>
-                                  <div v-for="(condition, conditionIdx) in rule.ruleAttributes.conditions" class="condition">
-                                      <div class="comment" v-if="condition.comment">{{ condition.comment }}</div>
-                                      <div class="code-and-checkbox">
-                                          <div class="code-display-wrapper" :class="{'disabled': condition.isDisabled}" v-on:click="editActionOrCondition(condition, true, conditionIdx)">
-                                              <div class="code-display" v-html="displayAst(condition)"></div>
-                                          </div>
-                                          <input type="checkbox" class="checkbox" v-model="condition.isSelected">
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="actions">
-                              <div class="actions-header">
-                                  <div class="actions-title">{{ translate("actions", workshopUiKw) }} <span class="actions-nb">({{ rule.children.length }})</span></div>
-                                  <div class="actions-buttons">
-                                      <template v-if="rule.children.some(x => x.isSelected)">
-                                          <img class="img-button button-action-condition button-delete" data-src="/zez-ui/img/delete.png" v-on:click="deleteSelectedActions(rule)"/>
-                                          <div id="buttons-move-up-down" class="button-action-condition">
-                                              <img id="button-move-up" class="img-button" data-src="/zez-ui/img/move_up.png" v-on:click="moveSelectedActions(rule, true)"/>
-                                              <img id="button-move-down" class="img-button" data-src="/zez-ui/img/move_down.png" v-on:click="moveSelectedActions(rule, false)">
-                                          </div>
-                                          <img id="button-toggle" class="img-button button-action-condition" data-src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedActions(rule)"/>
-                                          <img id="button-copy" class="img-button button-action-condition" data-src="/zez-ui/img/copy.png" v-on:click="copySelectedActions(rule)"/>
-                                      </template>
-                                      <img v-if="clipboard?.type === 'actions'" id="button-paste" class="img-button button-action-condition" data-src="/zez-ui/img/paste.png" v-on:click="pasteActions(rule)"/>
-                                      <img id="button-select-all" class="img-button button-action-condition" data-src="/zez-ui/img/select_all.png" v-on:click="selectAllActions(rule)"/>
-                                      <img id="button-add" class="img-button button-action-condition" data-src="/zez-ui/img/add.png" v-on:click="addAction(rule)"/>
-                                  </div>
-                              </div>
-                              <div v-if="rule.children.length === 0" class="no-values-msg font-blizzglobal">{{ translate("noActions", workshopUiKw) }}</div>
-
-                              <div v-else v-for="(action, actionIdx) in rule.children" class="action">
-                                  <div class="comment" v-if="action.comment" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">{{ action.comment }}</div>
-                                  <div class="code-and-checkbox">
-                                      <div class="code-display-wrapper" :class="{'disabled': action.isDisabled}" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">
-                                          <div class="code-display" v-html="displayAst(action)"></div>
-                                      </div>
-                                      <input type="checkbox" class="checkbox" v-model="action.isSelected">
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div id="ast-edit" v-if="astToEdit">
-          <div id="edit-background">
-              <div id="edit-title" class="font-bignoodle">{{ translate(astToEdit.name === "__compare__" ? (astToEditIndex === null ? "addCondition" : "editCondition") : (astToEditIndex === null ? "addAction" : "editAction"), workshopUiKw) }}</div>
-
-              <div id="edit-content">
-
-                  <!--<textarea rows="1" wrap="off" id="edit-comment">{{ astToEdit.comment }}</textarea>-->
-                  <div id="edit-comment-wrapper">
-                      <textarea v-on:input="updateTextareaHeight($event.target)" id="edit-comment" class="font-blizzglobal" :placeholder="translate('editComment', workshopUiKw)" v-model="astToEdit.comment"></textarea>
-                  </div>
-                  <function-display :ast="astToEdit" :depth="astToEdit.name === '__compare__' ? -1 : 0"></function-display>
-              </div>
-              <div class="edit-buttons">
-                  <button class="cancel-button font-futurano2d" v-on:click="cancelEdition()">{{ translate("cancel", workshopUiKw) }}</button>
-                  <button class="ok-button font-futurano2d" v-on:click="validateEditedAst()">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-      <div id="delete-confirmation" :class="{'shown': displayDeleteConfirmationFor}">
-          <div id="delete-title" class="font-bignoodle">{{ translate(displayDeleteConfirmationFor === "actions" ? "deleteActions" : displayDeleteConfirmationFor === "conditions" ? "deleteConditions" : "deleteRules", workshopUiKw, displayDeleteConfirmationFor === "actions" ? deleteForRule.children.filter(x => x.isSelected).length : displayDeleteConfirmationFor === "conditions" ? deleteForRule.ruleAttributes.conditions.filter(x => x.isSelected).length : rules.filter(x => x.isSelected).length) }}</div>
-          <div class="edit-buttons">
-              <button class="cancel-button font-futurano2d" v-on:click="cancelDeletion()">{{ translate("cancel", workshopUiKw) }}</button>
-              <button class="ok-button font-futurano2d" v-on:click="validateDeletion()">{{ translate("ok", workshopUiKw) }}</button>
-          </div>
-      </div>
-      <div id="variables-edit-screen" v-show="displayVariableEditor">
-          <div class="variables-background">
-              <div class="variables-edit-title font-bignoodle">{{ translate("editVariableNames", workshopUiKw) }}</div>
-              <div id="variables-edit-wrapper">
-                  <div class="variables-edit" v-for="(varArray, i) in [editedGlobalVariables, editedPlayerVariables]">
-                      <div class="variables-edit-subtitle">{{ translate(["__global__", "__player__"][i], ruleKw) }}</div>
-                      <div class="variables-edit-fields">
-                          <div v-for="v in varArray" class="variables-edit-row">
-                              <div class="variables-edit-nb">{{ v.index }}</div>
-                              <input type="text" class="variables-edit-field" v-model="v.name">
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="reset-to-defaults">
-                  <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetVariablesToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
-              </div>
-              <div class="edit-buttons">
-                  <button class="cancel-button font-futurano2d" v-on:click="cancelVarEdition()">{{ translate("cancel", workshopUiKw) }}</button>
-                  <button class="ok-button font-futurano2d" v-on:click="validateVariables()">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-      <div id="subroutines-edit-screen" v-show="displaySubroutineEditor">
-          <div class="variables-background">
-              <div class="variables-edit-title font-bignoodle">{{ translate("editSubroutineNames", workshopUiKw) }}</div>
-              <div id="variables-edit-wrapper">
-                  <div class="variables-edit">
-                      <div class="variables-edit-fields">
-                          <div v-for="v in editedSubroutines" class="variables-edit-row">
-                              <div class="variables-edit-nb">{{ v.index }}</div>
-                              <input type="text" class="variables-edit-field" v-model="v.name">
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="reset-to-defaults">
-                  <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetSubroutinesToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
-              </div>
-              <div class="edit-buttons">
-                  <button class="cancel-button font-futurano2d" v-on:click="cancelSubroutineEdition()">{{ translate("cancel", workshopUiKw) }}</button>
-                  <button class="ok-button font-futurano2d" v-on:click="validateSubroutines()">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-      <div id="extensions-edit-screen" v-if="displayExtensionsEditor">
-          <div class="window-background">
-              <div class="window-edit-title font-bignoodle">{{ translate("editExtensions", workshopUiKw) }}</div>
-              <div class="cards">
-                  <div class="card">
-                      <div class="card-title">{{ translate("extensionPointsAvailable", workshopUiKw) }}</div>
-                      <div class="card-value">{{ availableExtensionPoints }}</div>
-                      <div class="card-description font-blizzglobal">{{ translate("extensionPointsAvailableDesc", workshopUiKw) }}</div>
-                  </div>
-                  <div class="card">
-                      <div class="card-title">{{ translate("extensionPointsSpent", workshopUiKw) }}</div>
-                      <div class="card-value">{{ getSpentExtensionPoints() }}</div>
-                      <div class="card-description font-blizzglobal">{{ translate("extensionPointsSpentDesc", workshopUiKw) }}</div>
-                  </div>
-              </div>
-              <div id="extensions">
-                  <div class="extension" v-for="(extension, extensionId) in customGameSettingsSchema.extensions.values">
-                      <div class="extension-title">{{ translate(extensionId, customGameSettingsSchema.extensions.values) }}</div>
-                      <div class="extension-description font-blizzglobal">
-                          {{ translate("descriptionLocalized", customGameSettingsSchema.extensions.values[extensionId]) }}
-                      </div>
-                      <div class="extension-points">{{ customGameSettingsSchema.extensions.values[extensionId].points }}</div>
-                      <div class="extension-checkbox">
-                          <input type="checkbox" :value="extensionId" class="checkbox" v-model="editedActivatedExtensions">
-                      </div>
-                  </div>
-              </div>
-              <div class="reset-to-defaults">
-                  <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetExtensionsToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
-              </div>
-              <div class="edit-buttons">
-                  <button class="cancel-button font-futurano2d" v-on:click="cancelExtensionEdition()">{{ translate("cancel", workshopUiKw) }}</button>
-                  <button class="ok-button font-futurano2d" v-on:click="validateExtensions()">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-      <div id="metrics-screen" v-if="displayMetrics">
-          <div class="window-background">
-              <div class="window-edit-title font-bignoodle">{{ translate("scriptDiagnostics", workshopUiKw) }}</div>
-              <div class="cards">
-                  <div class="card">
-                      <div class="card-title">{{ translate("totalElementCount", workshopUiKw) }}</div>
-                      <div class="card-value">{{ nbElements }}</div>
-                      <div class="card-description font-blizzglobal">{{ translate("totalElementCountDesc", workshopUiKw, ELEMENT_LIMIT) }}</div>
-                  </div>
-                  <div class="card">
-                      <div class="card-title">Size of largest rule</div>
-                      <div class="card-value">IDK</div>
-                      <div class="card-description font-blizzglobal">How the fuck do you calculate this shit?</div>
-                  </div>
-                  <div class="card">
-                      <div class="card-title">Hours spent making this UI</div>
-                      <div class="card-value">71</div>
-                      <div class="card-description font-blizzglobal">I am now a master at FlexBox</div>
-                  </div>
-              </div>
-              <div class="edit-buttons">
-                  <button class="ok-button font-futurano2d" v-on:click="displayMetrics = false">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-      <div id="info-screen" v-if="displayInfo || !hasPassedWelcomeScreen">
-          <div class="window-background">
-              <div class="window-edit-title font-bignoodle">Zez's Workshop UI Recreation [BETA]</div>
-              <div id="info" class="font-blizzglobal">
-                  <!--<p>Your gamemode is saved to your browser's local storage every time you edit an action/condition, or when you view the extensions or the element count.</p>-->
-                  <p>The UI was tested on Firefox with a resolution of 1920x1080. You can zoom or dezoom if the UI is not adapted to your screen resolution.</p>
-                  <p>You can save manually by clicking on the Save button: <img data-src="/zez-ui/img/save.png" width="25" height="25"/></p>
-                  <p>This workshop UI uses OverPy to decompile and compile. The only known limitation is that disabled actions and conditions cannot be outputted; they will be replaced by useless actions. Some errors use the OverPy syntax for functions.</p>
-                  <p>Below, you can configure some settings for the UI and for OverPy:</p>
-                  <div class="setting font-futurano2d" v-for="(setting, settingId) in uiAvailableSettings">
-                      <div class="setting-name">{{ setting.name }}</div>
-                      <div class="setting-value">
-                          <v-select append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="Object.keys(setting.values).map(x => ({code: x, label: setting.values[x]}))" :reduce="x => x.code" v-model="uiSettings[settingId]">
-                      </div>
-                  </div>
-        <p>Known bugs:<br>
-          <ul style="text-align: left">
-            <li>Argument names are not translated</li>
-            <li>No tooltips</li>
-            <li>No saving</li>
-            <li>The AST display is not workshop-like, eg Add() instead of +</li>
-            <li>The UI is slow when working with 200+ rules</li>
-          </ul>
-        </p>
-                  <p>Feel free to join the discord if you have any questions or feedback!<br><a data-src="https://discord.gg/EEMjjFB" target="_blank">https://discord.gg/EEMjjFB</a></p>
-                  <p>Made by Zezombye, with help from Mitsiee</p>
-              </div>
-              <div class="edit-buttons">
-                  <button class="ok-button font-futurano2d" v-on:click="displayInfo = false; hasPassedWelcomeScreen = true; saveUiSettings()">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-      <div id="import-screen" v-if="displayImport">
-          <div class="window-background">
-              <div class="window-edit-title font-bignoodle">Import Gamemode</div>
-              <div id="info" class="font-blizzglobal">
-                  <div class="setting font-futurano2d">
-                      <div class="setting-name">Import project:</div>
-                      <div class="setting-value">
-                          <v-select append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="projects.map(x => ({code: x.id, label: x.name})).concat([{code: null, label: '&lt;New project&gt;'}])" :reduce="x => x.code" v-model="projectToImportToId">
-                      </div>
-                  </div>
-                  <template v-if="projectToImportToId === null">
-                      <p>Paste your gamemode here:</p>
-                      <textarea id="decompile-text" class="font-blizzglobal" v-model="textToDecompile"></textarea>
-                      <div class="setting font-futurano2d">
-                          <div class="setting-name">Language</div>
-                          <div class="setting-value">
-                              <v-select append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="Object.keys(uiAvailableSettings.language.values).map(x => ({code: x, label: uiAvailableSettings.language.values[x]}))" :reduce="x => x.code" v-model="decompilationLanguage">
-                          </div>
-                      </div>
-                      <p>Note: this will erase the existing rules.<br>The gamemode has to be copied straight from Overwatch.</p>
-                  </template>
-              </div>
-              <div class="edit-buttons">
-                  <button class="cancel-button font-futurano2d" v-on:click="displayImport = false; textToDecompile = null">{{ translate("cancel", workshopUiKw) }}</button>
-                  <button class="ok-button font-futurano2d" v-on:click="decompile(textToDecompile)">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-      <div id="settings-screen" v-if="displaySettings">
-          <div class="window-background">
-              <div class="window-edit-title font-bignoodle">{{ translate("settings", workshopUiKw) }}</div>
-              <div id="settings-wrapper">
-        <div class="cgs-content" v-for="(categoryContent, category) in editedCustomGameSettings">
-          <div class="cgs-title-wrapper">
-            <img v-if="categoryContent.isCollapsed" class="img-button" data-src="/zez-ui/img/expand_rule.png" v-on:click="categoryContent.isCollapsed=false; updateTextareasHeight()">
-            <img v-else class="img-button" data-src="/zez-ui/img/collapse_rule.png" v-on:click="categoryContent.isCollapsed=true"/>
-            <div class="cgs-title">{{ translate(category, customGameSettingsSchema) }}</div>
-          </div>
-          <template v-if="!categoryContent.isCollapsed">
-            <cgs-values v-if="category === 'lobby' || category === 'main'" :values="categoryContent" :schema="customGameSettingsSchema[category].values">
-
-            </cgs-values>
-            <div v-else-if="category === 'gamemodes'" v-for="(gamemodeContent, gamemode) in categoryContent" class="cgs-content">
-              <template v-if="gamemode !== 'isCollapsed' && gamemode !== 'isArrayCollapsed'">
-                <div class="cgs-title-wrapper">
-                  <img v-if="gamemodeContent.isCollapsed" class="img-button" data-src="/zez-ui/img/expand_rule.png" v-on:click="gamemodeContent.isCollapsed=false"/>
-                  <img v-else class="img-button" data-src="/zez-ui/img/collapse_rule.png" v-on:click="gamemodeContent.isCollapsed=true"/>
-                  <input type="checkbox" v-if="gamemode !== 'general'" v-model="gamemodeContent.enabled"/>
-                  <div class="cgs-title">{{ translate(gamemode, customGameSettingsSchema.gamemodes.values) }}</div>
-                </div>
-                <div v-if="!gamemodeContent.isCollapsed && 'enabledMaps' in gamemodeContent" class="cgs-content">
-                  <div class="cgs-title-wrapper">
-                    <img v-if="gamemodeContent.isArrayCollapsed" class="img-button" data-src="/zez-ui/img/expand_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=false"/>
-                    <img v-else class="img-button" data-src="/zez-ui/img/collapse_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=true"/>
-                    <div class="cgs-title">{{ translate("enabledMaps", customGameSettingsSchema.gamemodes.values[gamemode].values) }}</div>
-                  </div>
-                  <cgs-values v-if="!gamemodeContent.isArrayCollapsed" :values="Object.keys(mapKw).filter(x => mapKw[x].gamemodes.includes(gamemode) && !mapKw[x].onlyInOw1)" :schema="mapKw" :array-obj="gamemodeContent" :array-key="'enabledMaps'"></cgs-values>
-                </div>
-                <cgs-values v-if="!gamemodeContent.isCollapsed" :values="gamemodeContent" :schema="customGameSettingsSchema[category].values[gamemode].values">
-                </cgs-values>
-              </template>
-
-            </div>
-            <div v-else-if="category === 'heroes'" v-for="(teamContent, team) in categoryContent" class="cgs-content">
-              <template v-if="team !== 'isCollapsed'">
-
-                <div class="cgs-title-wrapper">
-                  <img v-if="teamContent.isCollapsed" class="img-button" data-src="/zez-ui/img/expand_rule.png" v-on:click="teamContent.isCollapsed=false"/>
-                  <img v-else class="img-button" data-src="/zez-ui/img/collapse_rule.png" v-on:click="teamContent.isCollapsed=true"/>
-                  <div class="cgs-title">{{ translate(team, customGameSettingsSchema.heroes.teams) }}</div>
-                </div>
-                <div v-if="!teamContent.isCollapsed" class="cgs-content">
-                  <div class="cgs-title-wrapper">
-                    <img v-if="teamContent.isArrayCollapsed" class="img-button" data-src="/zez-ui/img/expand_rule.png" v-on:click="teamContent.isArrayCollapsed=false"/>
-                    <img v-else class="img-button" data-src="/zez-ui/img/collapse_rule.png" v-on:click="teamContent.isArrayCollapsed=true"/>
-                    <div class="cgs-title">{{ translate("enabledHeroes", customGameSettingsSchema.heroes.values) }}</div>
-                  </div>
-                  <cgs-values v-if="!teamContent.isArrayCollapsed" :values="Object.keys(heroKw)" :schema="heroKw" :array-obj="teamContent" :array-key="'enabledHeroes'"></cgs-values>
-                </div>
-                <template v-if="!teamContent.isCollapsed" v-for="(heroContent, hero) in teamContent">
-                  <div class="cgs-content" v-if="hero !== 'isCollapsed' && hero !== 'isArrayCollapsed' && hero !== 'enabledHeroes'">
-
-                    <div class="cgs-title-wrapper">
-                      <template v-if="'isCollapsed' in heroContent">
-                        <img v-if="heroContent.isCollapsed" class="img-button" data-src="/zez-ui/img/expand_rule.png" v-on:click="heroContent.isCollapsed=false"/>
-                        <img v-else class="img-button" data-src="/zez-ui/img/collapse_rule.png" v-on:click="heroContent.isCollapsed=true"/>
-                      </template>
-                      <div class="cgs-title">{{ translate(hero, (hero === 'general' ? customGameSettingsSchema.gamemodes.values : hero === 'enabledHeroes' ? customGameSettingsSchema.heroes.values : heroKw)) }}</div>
-                    </div>
-                    <cgs-values v-if="!heroContent.isCollapsed" :values="heroContent" :schema="customGameSettingsSchema[category].values[hero].values">
-
-                    </cgs-values>
-                  </div>
-                </template>
-              </template>
-            </div>
-          </template>
+<div id="app-wrapper-wrapper" :style="{'background-image': 'url(&quot;img/backgrounds/'+background+'&quot;)'}">
+<div id="app-wrapper">
+<div id="app">
+    <div id="workshop-title" class="font-bignoodle">{{ translate("zezWorkshopUiRecreation", workshopUiCustomKw) }}</div>
+    <div id="workshop-subtitle">{{ customGameSettings?.main?.modeName || translate("untitledMode", workshopUiCustomKw) }}</div>
+    <div id="workshop-header">
+        <div id="workshop-header-left">
+            <div id="rules-title">{{ translate("rules", workshopUiKw) }}</div>
+            <div id="rules-nb">({{ rules.length || 0}})</div>
+            <img id="button-info" class="img-button button-header" src="img/info.png" v-on:click="displayInfo = true"/>
+            <img id="button-metrics" class="img-button button-header" src="img/metrics.png" v-on:click="displayMetricsScreen()"/>
+            <img id="button-import" class="img-button button-header" src="img/import.png" v-on:click="displayImport = true"/>
+            <!--<img id="button-export" class="img-button button-header" src="img/export.png" v-on:click="showExportLink()"/>-->
+            <img id="button-settings" class="img-button button-header" src="img/settings.png" v-on:click="editCustomGameSettings()"/>
+            <img id="button-save" class="img-button button-header" src="img/save.png" v-on:click="saveGamemode()"/>
         </div>
-              </div>
-              <div class="edit-buttons">
-                  <button class="cancel-button font-futurano2d" v-on:click="displaySettings = false">{{ translate("cancel", workshopUiKw) }}</button>
-                  <button class="ok-button font-futurano2d" v-on:click="validateSettings()">{{ translate("ok", workshopUiKw) }}</button>
-              </div>
-          </div>
-      </div>
-  </div>
-  </div>
+        <div id="workshop-header-right">
+            <img id="button-extensions" class="img-button button-header" src="img/extensions.png" v-on:click="editExtensions()"/>
+            <img id="button-var-names" class="img-button button-header" src="img/var_names.png" v-on:click="editVariables()"/>
+            <img id="button-subroutine-names" class="img-button button-header" src="img/subroutine_names.png" v-on:click="editSubroutines()"/>
+            <div id="button-separator"></div>
+            <template v-if="rules.some(x => x.isSelected)">
+                <img class="img-button button-header button-delete" src="img/delete.png" v-on:click="deleteSelectedRules()"/>
+                <div id="buttons-move-up-down" class="button-header">
+                    <img id="button-move-up" class="img-button" src="img/move_up.png" v-on:click="moveSelectedRules(true)"/>
+                    <img id="button-move-down" class="img-button" src="img/move_down.png" v-on:click="moveSelectedRules(false)"/>
+                </div>
+                <img id="button-toggle" class="img-button button-header" src="img/toggle.png" v-on:click="toggleSelectedRules()"/>
+                <img id="button-copy" class="img-button button-header" src="img/copy.png" v-on:click="copySelectedRules()"/>
+            </template>
+            <img v-if="clipboard?.type === 'rules'" id="button-paste" class="img-button button-header" src="img/paste.png" v-on:click="pasteRules()"/>
+            <img id="button-select-all" class="img-button button-header" src="img/select_all.png" v-on:click="selectAllRules()"/>
+            <img id="button-add" class="img-button button-header" src="img/add.png" v-on:click="addRule()"/>
+        </div>
+    </div>
+    <div v-if="rules.length === 0" class="no-values-msg font-blizzglobal"><div id="no-rules">{{ translate("noRules", workshopUiKw) }}</div><div id="no-rules-help" class="font-futurano2d">{{ translate("pressButtonToImport1", workshopUiCustomKw) }}<img id="button-import" src="img/import.png"/>{{ translate("pressButtonToImport2", workshopUiCustomKw) }}</div></div>
+    <div v-else id="rules">
+        <div class="rule" v-for="(rule, ruleIdx) in rules">
+            <div class="rule-collapse-bar">
+                <template v-if="rule.isCollapsed">
+                    <img class="img-button rule-expand-button" src="img/expand_rule.png" v-on:click="rule.isCollapsed=false"/>
+                </template>
+                <template v-else>
+                    <img class="img-button rule-collapse-button" src="img/collapse_rule.png" v-on:click="rule.isCollapsed=true"/>
+                    <div class="rule-collapse-line"></div>
+                </template>
+            </div>
+            <div class="rule-header-and-content">
+
+                <div class="rule-header">
+                    <input type="text" class="rule-title" :class="{'disabled': rule.ruleAttributes.isDisabled}" v-model="rule.ruleAttributes.name">
+                    <input type="checkbox" class="checkbox" v-model="rule.isSelected">
+                </div>
+                <div class="rule-content" v-if="!rule.isCollapsed">
+                    <div class="rule-event">
+                        <div class="rule-event-name">{{ translate("event", ruleAttributesDisplayNamesKw) }}</div>
+                        <div class="rule-event-value">
+                            <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('event')" :reduce="x => x.code" v-model="rule.ruleAttributes.event" v-on:input="rebuildRuleAttributes(rule)">
+                            </v-select>
+                        </div>
+                    </div>
+                    <div class="rule-event" v-if="rule.ruleAttributes.eventTeam">
+                        <div class="rule-event-name">{{ translate("eventTeam", ruleAttributesDisplayNamesKw) }}</div>
+                        <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventTeam')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventTeam"></v-select></div>
+                    </div>
+                    <div class="rule-event" v-if="rule.ruleAttributes.eventPlayer">
+                        <div class="rule-event-name">{{ translate("eventPlayer", ruleAttributesDisplayNamesKw) }}</div>
+                        <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventPlayer')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventPlayer"></v-select></div>
+                    </div>
+                    <div class="rule-event" v-if="rule.ruleAttributes.subroutineName">
+                        <div class="rule-event-name">{{ translate("subroutineName", ruleAttributesDisplayNamesKw) }}</div>
+                        <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('Subroutine')" :reduce="x => x.code" v-model="rule.ruleAttributes.subroutineName"></v-select></div>
+                    </div>
+                    <!--TODO: subroutines-->
+                    <div class="conditions-and-actions">
+                        <div class="conditions">
+                            <div class="conditions-header">
+                                <div class="conditions-title">{{ translate("conditions", workshopUiKw) }} <span class="conditions-nb">({{ rules[ruleIdx].ruleAttributes.conditions?.length || 0}})</span></div>
+                                <div class="conditions-buttons">
+                                    <template v-if="rule.ruleAttributes.conditions.some(x => x.isSelected)">
+                                        <img class="img-button button-action-condition button-delete" src="img/delete.png" v-on:click="deleteSelectedConditions(rule)"/>
+                                        <div id="buttons-move-up-down" class="button-action-condition">
+                                            <img id="button-move-up" class="img-button" src="img/move_up.png" v-on:click="moveSelectedConditions(rule, true)"/>
+                                            <img id="button-move-down" class="img-button" src="img/move_down.png" v-on:click="moveSelectedConditions(rule, false)"/>
+                                        </div>
+                                        <img id="button-toggle" class="img-button button-action-condition" src="img/toggle.png" v-on:click="toggleSelectedConditions(rule)">
+                                        <img id="button-copy" class="img-button button-action-condition" src="img/copy.png" v-on:click="copySelectedConditions(rule)"/>
+                                    </template>
+                                    <img v-if="clipboard?.type === 'conditions'" id="button-paste" class="img-button button-action-condition" src="img/paste.png" v-on:click="pasteConditions(rule)"/>
+                                    <img id="button-select-all" class="img-button button-action-condition" src="img/select_all.png" v-on:click="selectAllConditions(rule)"/>
+                                    <img id="button-add" class="img-button button-action-condition" src="img/add.png" v-on:click="addCondition(rule)"/>
+                                </div>
+                            </div>
+                            <div v-if="!rule.ruleAttributes.conditions?.length" class="no-values-msg font-blizzglobal">{{ translate("noConditions", workshopUiKw) }}</div>
+                            <div v-else>
+                                <div v-for="(condition, conditionIdx) in rule.ruleAttributes.conditions" class="condition">
+                                    <div class="comment" v-if="condition.comment">{{ condition.comment }}</div>
+                                    <div class="code-and-checkbox">
+                                        <div class="code-display-wrapper" :class="{'disabled': condition.isDisabled}" v-on:click="editActionOrCondition(condition, true, conditionIdx)">
+                                            <div class="code-display" v-html="displayAst(condition)"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox" v-model="condition.isSelected">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <div class="actions-header">
+                                <div class="actions-title">{{ translate("actions", workshopUiKw) }} <span class="actions-nb">({{ rule.children.length }})</span></div>
+                                <div class="actions-buttons">
+                                    <template v-if="rule.children.some(x => x.isSelected)">
+                                        <img class="img-button button-action-condition button-delete" src="img/delete.png" v-on:click="deleteSelectedActions(rule)"/>
+                                        <div id="buttons-move-up-down" class="button-action-condition">
+                                            <img id="button-move-up" class="img-button" src="img/move_up.png" v-on:click="moveSelectedActions(rule, true)"/>
+                                            <img id="button-move-down" class="img-button" src="img/move_down.png" v-on:click="moveSelectedActions(rule, false)">
+                                        </div>
+                                        <img id="button-toggle" class="img-button button-action-condition" src="img/toggle.png" v-on:click="toggleSelectedActions(rule)"/>
+                                        <img id="button-copy" class="img-button button-action-condition" src="img/copy.png" v-on:click="copySelectedActions(rule)"/>
+                                    </template>
+                                    <img v-if="clipboard?.type === 'actions'" id="button-paste" class="img-button button-action-condition" src="img/paste.png" v-on:click="pasteActions(rule)"/>
+                                    <img id="button-select-all" class="img-button button-action-condition" src="img/select_all.png" v-on:click="selectAllActions(rule)"/>
+                                    <img id="button-add" class="img-button button-action-condition" src="img/add.png" v-on:click="addAction(rule)"/>
+                                </div>
+                            </div>
+                            <div v-if="rule.children.length === 0" class="no-values-msg font-blizzglobal">{{ translate("noActions", workshopUiKw) }}</div>
+    
+                            <div v-else v-for="(action, actionIdx) in rule.children" class="action">
+                                <div class="comment" v-if="action.comment" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">{{ action.comment }}</div>
+                                <div class="code-and-checkbox">
+                                    <div class="code-display-wrapper" :class="{'disabled': action.isDisabled}" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">
+                                        <div class="code-display" v-html="displayAst(action)"></div>
+                                    </div>
+                                    <input type="checkbox" class="checkbox" v-model="action.isSelected">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ast-edit" v-if="astToEdit">
+        <div id="edit-background">
+            <div id="edit-title" class="font-bignoodle">{{ translate(astToEdit.name === "__compare__" ? (astToEditIndex === null ? "addCondition" : "editCondition") : (astToEditIndex === null ? "addAction" : "editAction"), workshopUiKw) }}</div>
+
+            <div id="edit-content">
+
+                <!--<textarea rows="1" wrap="off" id="edit-comment">{{ astToEdit.comment }}</textarea>-->
+                <div id="edit-comment-wrapper">
+                    <textarea v-on:input="updateTextareaHeight($event.target)" id="edit-comment" class="font-blizzglobal" :placeholder="translate('editComment', workshopUiKw)" v-model="astToEdit.comment"></textarea>
+                </div>
+                <function-display :ast="astToEdit" :depth="astToEdit.name === '__compare__' ? -1 : 0"></function-display>
+            </div>
+            <div id="edit-margin"></div>
+            <div class="edit-buttons">
+                <button class="cancel-button font-futurano2d" v-on:click="cancelEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+                <button class="ok-button font-futurano2d" v-on:click="validateEditedAst()">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="delete-confirmation" :class="{'shown': displayDeleteConfirmationFor}">
+        <div id="delete-title" class="font-bignoodle">{{ translate(displayDeleteConfirmationFor === "actions" ? "deleteActions" : displayDeleteConfirmationFor === "conditions" ? "deleteConditions" : "deleteRules", workshopUiKw, displayDeleteConfirmationFor === "actions" ? deleteForRule.children.filter(x => x.isSelected).length : displayDeleteConfirmationFor === "conditions" ? deleteForRule.ruleAttributes.conditions.filter(x => x.isSelected).length : rules.filter(x => x.isSelected).length) }}</div>
+        <div class="edit-buttons">
+            <button class="cancel-button font-futurano2d" v-on:click="cancelDeletion()">{{ translate("cancel", workshopUiKw) }}</button>
+            <button class="ok-button font-futurano2d" v-on:click="validateDeletion()">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+    <div id="variables-edit-screen" v-show="displayVariableEditor">
+        <div class="variables-background">
+            <div class="variables-edit-title font-bignoodle">{{ translate("editVariableNames", workshopUiKw) }}</div>
+            <div id="variables-edit-wrapper">
+                <div class="variables-edit" v-for="(varArray, i) in [editedGlobalVariables, editedPlayerVariables]">
+                    <div class="variables-edit-subtitle">{{ translate(["__global__", "__player__"][i], ruleKw) }}</div>
+                    <div class="variables-edit-fields">
+                        <div v-for="v in varArray" class="variables-edit-row">
+                            <div class="variables-edit-nb">{{ v.index }}</div>
+                            <input type="text" class="variables-edit-field" v-model="v.name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reset-to-defaults">
+                <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetVariablesToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
+            </div>
+            <div class="edit-buttons">
+                <button class="cancel-button font-futurano2d" v-on:click="cancelVarEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+                <button class="ok-button font-futurano2d" v-on:click="validateVariables()">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="subroutines-edit-screen" v-show="displaySubroutineEditor">
+        <div class="variables-background">
+            <div class="variables-edit-title font-bignoodle">{{ translate("editSubroutineNames", workshopUiKw) }}</div>
+            <div id="variables-edit-wrapper">
+                <div class="variables-edit">
+                    <div class="variables-edit-fields">
+                        <div v-for="v in editedSubroutines" class="variables-edit-row">
+                            <div class="variables-edit-nb">{{ v.index }}</div>
+                            <input type="text" class="variables-edit-field" v-model="v.name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reset-to-defaults">
+                <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetSubroutinesToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
+            </div>
+            <div class="edit-buttons">
+                <button class="cancel-button font-futurano2d" v-on:click="cancelSubroutineEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+                <button class="ok-button font-futurano2d" v-on:click="validateSubroutines()">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="extensions-edit-screen" v-if="displayExtensionsEditor">
+        <div class="window-background">
+            <div class="window-edit-title font-bignoodle">{{ translate("editExtensions", workshopUiKw) }}</div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">{{ translate("extensionPointsAvailable", workshopUiKw) }}</div>
+                    <div class="card-value">{{ availableExtensionPoints }}</div>
+                    <div class="card-description font-blizzglobal">{{ translate("extensionPointsAvailableDesc", workshopUiKw) }}</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">{{ translate("extensionPointsSpent", workshopUiKw) }}</div>
+                    <div class="card-value">{{ getSpentExtensionPoints() }}</div>
+                    <div class="card-description font-blizzglobal">{{ translate("extensionPointsSpentDesc", workshopUiKw) }}</div>
+                </div>
+            </div>
+            <div id="extensions">
+                <div class="extension" v-for="(extension, extensionId) in customGameSettingsSchema.extensions.values">
+                    <div class="extension-title">{{ translate(extensionId, customGameSettingsSchema.extensions.values) }}</div>
+                    <div class="extension-description font-blizzglobal">
+                        {{ translate("descriptionLocalized", customGameSettingsSchema.extensions.values[extensionId]) }}
+                    </div>
+                    <div class="extension-points">{{ customGameSettingsSchema.extensions.values[extensionId].points }}</div>
+                    <div class="extension-checkbox">
+                        <input type="checkbox" :value="extensionId" class="checkbox" v-model="editedActivatedExtensions">
+                    </div>
+                </div>
+            </div>
+            <div class="reset-to-defaults">
+                <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetExtensionsToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
+            </div>
+            <div class="edit-buttons">
+                <button class="cancel-button font-futurano2d" v-on:click="cancelExtensionEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+                <button class="ok-button font-futurano2d" v-on:click="validateExtensions()">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="metrics-screen" v-if="displayMetrics">
+        <div class="window-background">
+            <div class="window-edit-title font-bignoodle">{{ translate("scriptDiagnostics", workshopUiKw) }}</div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">{{ translate("totalElementCount", workshopUiKw) }}</div>
+                    <div class="card-value">{{ nbElements }}</div>
+                    <div class="card-description font-blizzglobal">{{ translate("totalElementCountDesc", workshopUiKw, ELEMENT_LIMIT) }}</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">{{ translate("sizeOfLargestRule", workshopUiCustomKw) }}</div>
+                    <div class="card-value">{{ translate("idk", workshopUiCustomKw) }}</div>
+                    <div class="card-description font-blizzglobal">{{ translate("howTheFuck", workshopUiCustomKw) }}</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">{{ translate("hoursSpent", workshopUiCustomKw) }}</div>
+                    <div class="card-value">71</div>
+                    <div class="card-description font-blizzglobal">{{ translate("flexboxMaster", workshopUiCustomKw) }}</div>
+                </div>
+            </div>
+            <div class="edit-buttons">
+                <button class="ok-button font-futurano2d" v-on:click="displayMetrics = false">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="info-screen" v-if="displayInfo || !hasPassedWelcomeScreen">
+        <div class="window-background">
+            <div class="window-edit-title font-bignoodle">{{ translate("zezWorkshopUiRecreation", workshopUiCustomKw) }}</div>
+            <div id="info" class="font-blizzglobal">
+                <!--<p>Your gamemode is saved to your browser's local storage every time you edit an action/condition, or when you view the extensions or the element count.</p>-->
+                <p>{{ translate("para1", workshopUiCustomKw) }}</p>
+                <p style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">{{ translate("para2", workshopUiCustomKw) }} <img src="img/save.png" width="25" height="25" style="margin-left: 8px;"/><br>{{ translate("para3", workshopUiCustomKw) }}<br><img src="img/how_to_paste.png" style="margin-top: 5px"/></p>
+                <p>{{ translate("para4", workshopUiCustomKw) }}</p>
+                <p>{{ translate("para5", workshopUiCustomKw) }}</p>
+                <div class="setting font-futurano2d" v-for="(settingValues, settingId) in uiAvailableSettings">
+                    <div class="setting-name">{{ translate("setting-"+settingId, workshopUiCustomKw) }}</div>
+                    <div class="setting-value">
+                        <textarea class="font-blizzglobal" v-if="settingId === 'disabledWarnings'" v-model="uiSettings[settingId]"></textarea>
+                        <v-select :filter="$root.filterDropdownOptions" v-else append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="settingValues.map(x => ({code: x, label: translate('setting-'+settingId+'-'+x, workshopUiCustomKw)}))" :reduce="x => x.code" v-model="uiSettings[settingId]">
+                    </div>
+                </div>
+                <p>{{ translate("para6", workshopUiCustomKw) }}<br><a href="https://discord.gg/EEMjjFB" target="_blank">https://discord.gg/EEMjjFB</a></p>
+                <p>{{ translate("para7", workshopUiCustomKw) }}</p>
+            </div>
+            <div class="edit-buttons">
+                <button class="ok-button font-futurano2d" v-on:click="displayInfo = false; hasPassedWelcomeScreen = true; saveUiSettings()">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="import-screen" v-if="displayImport">
+        <div class="window-background">
+            <div class="window-edit-title font-bignoodle">{{ translate("importGamemode", workshopUiCustomKw) }}</div>
+            <div id="info" class="font-blizzglobal">
+                <div class="setting font-futurano2d">
+                    <div class="setting-name">{{ translate("importProject", workshopUiCustomKw) }}</div>
+                    <div class="setting-value">
+                        <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="projects.map(x => ({code: x.id, label: x.name})).concat([{code: null, label: '&lt;New project&gt;'}])" :reduce="x => x.code" v-model="projectToImportToId">
+                    </div>
+                </div>
+                <template v-if="projectToImportToId === null">
+                    <p>{{ translate("pasteGamemodeHere", workshopUiCustomKw) }}</p>
+                    <textarea id="decompile-text" class="font-blizzglobal" v-model="textToDecompile"></textarea>
+                    <div class="setting font-futurano2d">
+                        <div class="setting-name">{{ translate("language", workshopUiCustomKw) }}</div>
+                        <div class="setting-value">
+                            <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="Object.keys(uiAvailableSettings.language.values).map(x => ({code: x, label: uiAvailableSettings.language.values[x]}))" :reduce="x => x.code" v-model="decompilationLanguage">
+                        </div>
+                    </div>
+                    <p>{{ translate("note1", workshopUiCustomKw) }}<br>{{ translate("note2", workshopUiCustomKw) }}</p>
+                </template>
+            </div>
+            <div class="edit-buttons">
+                <button class="cancel-button font-futurano2d" v-on:click="displayImport = false; textToDecompile = null">{{ translate("cancel", workshopUiKw) }}</button>
+                <button class="ok-button font-futurano2d" v-on:click="decompile(textToDecompile)">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="settings-screen" v-if="displaySettings">
+        <div class="window-background">
+            <div class="window-edit-title font-bignoodle">{{ translate("settings", workshopUiKw) }}</div>
+            <div id="settings-wrapper">
+                <div class="cgs-content" v-for="(categoryContent, category) in editedCustomGameSettings">
+                    <div class="cgs-title-wrapper">
+                        <img v-if="categoryContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="categoryContent.isCollapsed=false; updateTextareasHeight()">
+                        <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="categoryContent.isCollapsed=true"/>
+                        <div class="cgs-title">{{ translate(category, customGameSettingsSchema) }}</div>
+                    </div>
+                    <template v-if="!categoryContent.isCollapsed">
+                        <cgs-values v-if="category === 'lobby' || category === 'main'" :values="categoryContent" :schema="customGameSettingsSchema[category].values">
+
+                        </cgs-values>
+                        <div v-else-if="category === 'gamemodes'" v-for="(gamemodeContent, gamemode) in categoryContent" class="cgs-content">
+                            <template v-if="gamemode !== 'isCollapsed' && gamemode !== 'isArrayCollapsed'">
+                                <div class="cgs-title-wrapper">
+                                    <img v-if="gamemodeContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="gamemodeContent.isCollapsed=false"/>
+                                    <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="gamemodeContent.isCollapsed=true"/>
+                                    <input type="checkbox" v-if="gamemode !== 'general'" v-model="gamemodeContent.enabled"/>
+                                    <div class="cgs-title">{{ translate(gamemode, customGameSettingsSchema.gamemodes.values) }}</div>
+                                </div>
+                                <div v-if="!gamemodeContent.isCollapsed && 'enabledMaps' in gamemodeContent" class="cgs-content">
+                                    <div class="cgs-title-wrapper">
+                                        <img v-if="gamemodeContent.isArrayCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=false"/>
+                                        <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=true"/>
+                                        <div class="cgs-title">{{ translate("enabledMaps", customGameSettingsSchema.gamemodes.values[gamemode].values) }}</div>
+                                    </div>
+                                    <cgs-values v-if="!gamemodeContent.isArrayCollapsed" :values="Object.keys(mapKw).filter(x => mapKw[x].gamemodes.includes(gamemode) && !mapKw[x].onlyInOw1)" :schema="mapKw" :array-obj="gamemodeContent" :array-key="'enabledMaps'"></cgs-values>
+                                </div>
+                                <cgs-values v-if="!gamemodeContent.isCollapsed" :values="gamemodeContent" :schema="customGameSettingsSchema[category].values[gamemode].values">
+                                </cgs-values>
+                            </template>
+
+                        </div>
+                        <div v-else-if="category === 'heroes'" v-for="(teamContent, team) in categoryContent" class="cgs-content">
+                            <template v-if="team !== 'isCollapsed'">
+
+                                <div class="cgs-title-wrapper">
+                                    <img v-if="teamContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="teamContent.isCollapsed=false"/>
+                                    <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="teamContent.isCollapsed=true"/>
+                                    <div class="cgs-title">{{ translate(team, customGameSettingsSchema.heroes.teams) }}</div>
+                                </div>
+                                <div v-if="!teamContent.isCollapsed" class="cgs-content">
+                                    <div class="cgs-title-wrapper">
+                                        <img v-if="teamContent.isArrayCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="teamContent.isArrayCollapsed=false"/>
+                                        <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="teamContent.isArrayCollapsed=true"/>
+                                        <div class="cgs-title">{{ translate("enabledHeroes", customGameSettingsSchema.heroes.values) }}</div>
+                                    </div>
+                                    <cgs-values v-if="!teamContent.isArrayCollapsed" :values="Object.keys(heroKw)" :schema="heroKw" :array-obj="teamContent" :array-key="'enabledHeroes'"></cgs-values>
+                                </div>
+                                <template v-if="!teamContent.isCollapsed" v-for="(heroContent, hero) in teamContent">
+                                    <div class="cgs-content" v-if="hero !== 'isCollapsed' && hero !== 'isArrayCollapsed' && hero !== 'enabledHeroes'">
+
+                                        <div class="cgs-title-wrapper">
+                                            <template v-if="'isCollapsed' in heroContent">
+                                                <img v-if="heroContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="heroContent.isCollapsed=false"/>
+                                                <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="heroContent.isCollapsed=true"/>
+                                            </template>
+                                            <div class="cgs-title">{{ translate(hero, (hero === 'general' ? customGameSettingsSchema.gamemodes.values : hero === 'enabledHeroes' ? customGameSettingsSchema.heroes.values : heroKw)) }}</div>
+                                        </div>
+                                        <cgs-values v-if="!heroContent.isCollapsed" :values="heroContent" :schema="customGameSettingsSchema[category].values[hero].values">
+        
+                                        </cgs-values>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="edit-buttons">
+                <button class="cancel-button font-futurano2d" v-on:click="displaySettings = false">{{ translate("cancel", workshopUiKw) }}</button>
+                <button class="ok-button font-futurano2d" v-on:click="validateSettings()">{{ translate("ok", workshopUiKw) }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
+</div>
 <template id="function-display-template">
     <div class="argument-value-wrapper-wrapper">
         <div class="argument-value-wrapper" v-if="!(ast.name === '__compare__' && ast.parent.name === '__rule__')">
             <div v-for="i in depth" class="indent-marker"></div>
-            <div class="argument" :class="{'argument-number': ast.type !== 'Variable' && $root.isTypeSuitable(['FloatLiteral', 'IntLiteral'], ast.type, false)}">{{ ast.parent.name === "__rule__" ? $root.translate("action", $root.workshopUiKw) : ast.parent.parent.name === "__rule__" && ast.parent.name !== "__compare__" ? $root.actionKw[ast.parent.name].args[astIdx].name : ast.parent.name === "__array__" ? "["+astIdx+"]" : $root.valueFuncKw[ast.parent.name].args[astIdx].name }}</div>
+            <div class="argument" :class="{'argument-number': ast.type !== 'Variable' && $root.isTypeSuitable(['FloatLiteral', 'IntLiteral'], ast.type, false)}" :title='ast.parent.name === "__rule__" || ast.parent.name === "__array__" || !("descriptionLocalized" in (ast.parent.type === "void" ? $root.actionKw[ast.parent.name].args[astIdx] : $root.valueFuncKw[ast.parent.name].args[astIdx])) ? "" : $root.translate("descriptionLocalized", ast.parent.parent.name === "__rule__" && ast.parent.name !== "__compare__" ? $root.actionKw[ast.parent.name].args[astIdx] : $root.valueFuncKw[ast.parent.name].args[astIdx])'>{{ ast.parent.name === "__rule__" ? $root.translate("action", $root.workshopUiKw) : ast.parent.parent.name === "__rule__" && ast.parent.name !== "__compare__" ? $root.translate("nameLocalized", $root.actionKw[ast.parent.name].args[astIdx]) : $root.translate("nameLocalized", $root.valueFuncKw[ast.parent.name].args[ast.parent.name === "__array__" ? 0 : astIdx], astIdx) }}</div>
             <div class="value">
-                <img data-src="/zez-ui/img/array_add.png" class="array-img-button array-add" v-if="ast.name === '__array__'" v-on:click="$root.addToArray(ast)"/>
-                <img data-src="/zez-ui/img/array_remove.png" class="array-img-button array-remove" v-if="ast.parent.name === '__array__'" v-on:click="$root.removeFromArray(ast.parent, astIdx)"/>
+                <img src="img/array_add.png" class="array-img-button array-add" v-if="ast.name === '__array__'" v-on:click="$root.addToArray(ast)"/>
+                <img src="img/array_remove.png" class="array-img-button array-remove" v-if="ast.parent.name === '__array__'" v-on:click="$root.removeFromArray(ast.parent, astIdx)"/>
                 <div class="array-up-down" v-if="ast.parent.name === '__array__'">
-                    <img data-src="/zez-ui/img/array_up.png" class="array-img-button array-up" v-on:click="$root.moveArrayElement(ast.parent, astIdx, true)"/>
-                    <img data-src="/zez-ui/img/array_down.png" class="array-img-button array-down" v-on:click="$root.moveArrayElement(ast.parent, astIdx, false)"/>
+                    <img src="img/array_up.png" class="array-img-button array-up" v-on:click="$root.moveArrayElement(ast.parent, astIdx, true)"/>
+                    <img src="img/array_down.png" class="array-img-button array-down" v-on:click="$root.moveArrayElement(ast.parent, astIdx, false)"/>
                 </div>
                 <div v-if="ast.type !== 'Variable' && $root.isTypeSuitable(['FloatLiteral', 'IntLiteral'], ast.type, false)" class="number-input">
                     <input type="number" step="0.001" class="font-futurano2d" v-model="ast.name">
@@ -486,8 +477,24 @@
                 <div class="value-string" v-else-if="ast.type === 'CustomStringLiteral'">
                     <textarea oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'" class="custom-string-textarea font-blizzglobal" v-model="ast.name">{{ ast.name }}</textarea>
                 </div>
-                <div class="value-dropdown" v-else>
-                    <v-select append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
+                <div class="value-dropdown" v-else :title='ast.type in $root.constantValues || ["FloatLiteral", "IntLiteral", "UnsignedIntLiteral", "GlobalVariable", "PlayerVariable", "Subroutine", "LocalizedStringLiteral"].includes(ast.type) || !("descriptionLocalized" in (ast.type === "void" ? $root.actionKw[ast.name] : $root.valueFuncKw[ast.name])) ? "" : $root.translate("descriptionLocalized", ast.type === "void" ? $root.actionKw[ast.name] : $root.valueFuncKw[ast.name])' >
+                    <v-select v-if="ast.type === 'Icon'" :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
+                        <template #option="option">
+                            <div style="display:flex; align-items: center;">
+                                <img :src='"img/icons/"+option.code.toLowerCase()+".png"' width="15px" height="15px" style="margin-right: 10px;"/>
+                                {{ option.label }}
+                            </div>
+                        </template>
+                    </v-select>
+                    <v-select v-else-if="ast.type === 'ColorLiteral'" :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
+                        <template #option="option">
+                            <div style="display:flex; align-items: center;">
+                                <div style="width: 17px; height: 17px; margin-right: 10px; border: 1px solid black;" :style="{'background-color': 'rgb('+constantValues.ColorLiteral[option.code].red+', '+constantValues.ColorLiteral[option.code].green+', '+constantValues.ColorLiteral[option.code].blue+')', 'visibility': constantValues.ColorLiteral[option.code].red === null ? 'hidden' : 'visible'}"></div>
+                                {{ option.label }}
+                            </div>
+                        </template>
+                    </v-select>
+                    <v-select v-else :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
                     </v-select>
                 </div>
             </div>
@@ -495,44 +502,42 @@
         <function-display v-for="(arg, idx) in ast.args" :ast="arg" :ast-idx="idx" :depth="depth+1"></function-display>
     </div>
 </template>
-
 <template id="custom-game-settings-values">
-  <div class="cgs-values">
-    <template v-if="arrayObj">
-      <div class="cgs-setting-name-value"  v-for="v in values">
-        <div class="cgs-setting-name">
-          {{ $root.translate(v, schema) }}
-        </div>
-        <div class="cgs-setting-value">
-          <input type="checkbox" :value="v" v-model="arrayObj[arrayKey]"/>
-        </div>
-      </div>
-    </template>
-    <template v-else v-for="(value, key) in values">
-      <div class="cgs-setting-name-value" v-if="key !== 'isCollapsed' && key !== 'isArrayCollapsed' && key !== 'enabled' && key !== 'enabledMaps' && key !== 'enabledHeroes'">
-        <div class="cgs-setting-name">
-          {{ $root.translate(key, schema) }}
-        </div>
-        <div class="cgs-setting-value">
-          <template v-if='["__boolYesNo__", "__boolOnOff__", "__boolEnabled__"].includes(schema[key].values)'>
-            <input type="checkbox" v-model="values[key]"/>
-          </template>
-          <template v-else-if="schema[key].values === '__boolReverseOnOff__'">
-            <input type="checkbox" v-model="values[key]" :true-value="false" :false-value="true"/>
-          </template>
-          <template v-else-if="['__percent__', '__int__', '__float__'].includes(schema[key].values)">
-            <input type="number" :min="schema[key].min" :max="schema[key].max" v-model.number="values[key]"/>
-            <input type="range" :min="schema[key].min" :max="schema[key].max" v-model.number="values[key]"/>
-          </template>
-          <template v-else-if="schema[key].values === '__string__'">
-            <textarea oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'" class="font-blizzglobal" v-model="values[key]"></textarea>
-          </template>
-          <template v-else>
-            <v-select append-to-body :calculate-position="$root.calculateDropdownPosition" :clearable="false" :options="$root.getDropdownOptionsForKeywordObj(schema[key].values)" :reduce="x => x.code" v-model="values[key]"></v-select>
-          </template>
-        </div>
-      </div>
-    </template>
-  </div>
+    <div class="cgs-values">
+        <template v-if="arrayObj">
+            <div class="cgs-setting-name-value"  v-for="v in values">
+                <div class="cgs-setting-name">
+                    {{ $root.translate(v, schema) }}
+                </div>
+                <div class="cgs-setting-value">
+                    <input type="checkbox" :value="v" v-model="arrayObj[arrayKey]"/>
+                </div>
+            </div>
+        </template>
+        <template v-else v-for="(value, key) in values">
+            <div class="cgs-setting-name-value" v-if="key !== 'isCollapsed' && key !== 'isArrayCollapsed' && key !== 'enabled' && key !== 'enabledMaps' && key !== 'enabledHeroes'">
+                <div class="cgs-setting-name">
+                    {{ $root.translate(key, schema) }}
+                </div>
+                <div class="cgs-setting-value">
+                    <template v-if='["__boolYesNo__", "__boolOnOff__", "__boolEnabled__"].includes(schema[key].values)'>
+                        <input type="checkbox" v-model="values[key]"/>
+                    </template>
+                    <template v-else-if="schema[key].values === '__boolReverseOnOff__'">
+                        <input type="checkbox" v-model="values[key]" :true-value="false" :false-value="true"/>
+                    </template>
+                    <template v-else-if="['__percent__', '__int__', '__float__'].includes(schema[key].values)">
+                        <input type="number" :min="schema[key].min" :max="schema[key].max" v-model.number="values[key]"/>
+                        <input type="range" :min="schema[key].min" :max="schema[key].max" v-model.number="values[key]"/>
+                    </template>
+                    <template v-else-if="schema[key].values === '__string__'">
+                        <textarea oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'" class="font-blizzglobal" v-model="values[key]"></textarea>
+                    </template>
+                    <template v-else>
+                        <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition" :clearable="false" :options="$root.getDropdownOptionsForKeywordObj(schema[key].values)" :reduce="x => x.code" v-model="values[key]"></v-select>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
 </template>
-
