@@ -52,34 +52,17 @@ export function splitArgumentsString(content) {
   let ignoredByBrackets = 0
   const commaIndexes = []
 
-  console.log(content)
-
   for (let i = 0; i < content.length; i++) {
-    if (content[i] == "\\") {
+    if (content[i] == "\\")
       i++
-      continue
-    }
-
-    if (content[i] == "\"") {
+    else if (content[i] == "\"")
       ignoredByString = !ignoredByString
-      continue
-    }
-
-    if (!ignoredByString && ["(", "[", "{"].includes(content[i])) {
-      console.log(i)
+    else if (!ignoredByString && ["(", "[", "{"].includes(content[i]))
       ignoredByBrackets++
-      continue
-    }
-
-    if (!ignoredByString && [")", "]", "}"].includes(content[i])) {
+    else if (!ignoredByString && [")", "]", "}"].includes(content[i]))
       ignoredByBrackets = Math.min(ignoredByBrackets - 1 || 0)
-      continue
-    }
-
-    if (!ignoredByString && !ignoredByBrackets && content[i] == ",") {
+    else if (!ignoredByString && !ignoredByBrackets && content[i] == ",")
       commaIndexes.push(i)
-      continue
-    }
   }
 
   if (!commaIndexes.length) return content
