@@ -64,7 +64,10 @@ module ContentHelper
 
   def markdown_hero_icon(text)
     text.gsub /\[hero\s+(.*?)\]/ do
-      ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 55, height: 50, loading: "lazy")
+      begin
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 55, height: 50, loading: "lazy")
+      rescue
+      end
     end
   end
 
@@ -100,7 +103,7 @@ module ContentHelper
 
   def youtube_to_video_id(url)
     return unless url.present?
-    
+
     url_formats = [
       %r((?:https?://)?youtu\.be/(.+)),
       %r((?:https?://)?(?:www\.)?youtube\.com/watch\?v=(.*?)(&|#|$)),
@@ -108,10 +111,10 @@ module ContentHelper
       %r((?:https?://)?(?:www\.)?youtube\.com/v/(.*?)(#|\?|$)),
       %r((?:https?://)?(?:www\.)?youtube\.com/user/.*?#\w/\w/\w/\w/(.+)\b)
     ]
-  
+
     url.strip!
     url_format = url_formats.find { |format| url =~ format }
-    
+
     if url_format.present?
       video_id = url_format and $1
     else
