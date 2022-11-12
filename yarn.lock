@@ -9832,10 +9832,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svelte-confetti@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/svelte-confetti/-/svelte-confetti-1.2.0.tgz#754a5af1c066751c06d6b393ceafb02ffff84fb3"
-  integrity sha512-6njSCc2mzNQpgxd6VnIkS8yhdbL9np9uTpK6bdmbephmLvI0+km0cBdfuM+MLmceVdW9Frx+ibwCFPDq/dBd1g==
+svelte-confetti@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/svelte-confetti/-/svelte-confetti-1.2.2.tgz#87e96d19ce859af40b099535cfd406bf38245770"
+  integrity sha512-LkvWO732jRNmYykWi0IOK7xoBX241p+p+tC7Ef1EcO3TK9b9lpB/vYqKkcwVya+onG2SgQsX2g+JVbVKxq5ixQ==
 
 svelte-dev-helper@^1.1.9:
   version "1.1.9"
