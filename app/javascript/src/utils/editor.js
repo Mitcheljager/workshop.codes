@@ -47,6 +47,53 @@ export function getClosingBracket(content, characterOpen = "{", characterClose =
   return closePos
 }
 
+export function splitArgumentsString(content) {
+  let ignoredByString = false
+  let ignoredByBrackets = 0
+  const commaIndexes = []
+
+  console.log(content)
+
+  for (let i = 0; i < content.length; i++) {
+    if (content[i] == "\\") {
+      i++
+      continue
+    }
+
+    if (content[i] == "\"") {
+      ignoredByString = !ignoredByString
+      continue
+    }
+
+    if (!ignoredByString && ["(", "[", "{"].includes(content[i])) {
+      console.log(i)
+      ignoredByBrackets++
+      continue
+    }
+
+    if (!ignoredByString && [")", "]", "}"].includes(content[i])) {
+      ignoredByBrackets = Math.min(ignoredByBrackets - 1 || 0)
+      continue
+    }
+
+    if (!ignoredByString && !ignoredByBrackets && content[i] == ",") {
+      commaIndexes.push(i)
+      continue
+    }
+  }
+
+  if (!commaIndexes.length) return content
+
+  const splitArguments = []
+  splitArguments.push(content.substring(0, commaIndexes[0]))
+
+  commaIndexes.forEach((comma, index) => {
+    splitArguments.push(content.substring(comma + 1, commaIndexes[index + 1]).trim())
+  })
+
+  return splitArguments
+}
+
 export function getSettings(value) {
   const regex = new RegExp(/settings/)
   const match = regex.exec(value)

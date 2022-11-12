@@ -1,5 +1,5 @@
 import { templates } from "../lib/templates"
-import { getSettings, getClosingBracket, replaceBetween } from "./editor"
+import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
 import { sortedItems } from "../stores/editor"
 import { get } from "svelte/store"
 
@@ -64,7 +64,7 @@ function extractAndInsertMixins(joinedItems) {
     const argumentsOpeningParen = full.indexOf("(")
     const argumentsclosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
     const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsclosingParen)
-    const splitArguments = argumentsString.split(/,(?![^()]*(?:\([^()]*\))?\))/)
+    const splitArguments = splitArgumentsString(argumentsString) || []
 
     if (!mixin) throw new Error(`Included a mixin that was not specified: "${ name }"`)
 
@@ -85,11 +85,9 @@ function extractAndInsertMixins(joinedItems) {
 function compileVariables(joinedItems) {
   let globalVariables = joinedItems.match(/(?<=Global\.)[^\s,.[\]);]+/g)
   globalVariables = [...new Set(globalVariables)]
-  console.log(globalVariables)
 
   let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player)\.)[^\s,.[\]);]+/g)
   playerVariables = [...new Set(playerVariables)]
-  console.log(playerVariables)
 
   if (!globalVariables?.length && !playerVariables.length) return ""
 
