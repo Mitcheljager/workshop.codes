@@ -82,11 +82,11 @@
       opacity: 0.1;
       pointer-events: none;
     }
-  }
 
-  .button {
-    white-space: nowrap;
-    background: var(--standout-color, #{$overwatch-2});
+    .button {
+      white-space: nowrap;
+      background: var(--standout-color, #{$overwatch-2});
+    }
   }
 
   small {
