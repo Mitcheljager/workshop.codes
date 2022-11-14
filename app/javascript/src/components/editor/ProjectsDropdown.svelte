@@ -240,13 +240,13 @@
 
     {#if showProjectSettings}
       <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
-        <p class="dropdown__item mt-0 mb-0" on:click={() => {
+        <div class="dropdown__item" on:click={() => {
           value = $currentProject.title
           modalType = "rename"
           showModal = true
         }}>
           Rename
-        </p>
+        </div>
         <div class="dropdown__item text-red" on:click={destroyProject}>
           Destroy
         </div>
