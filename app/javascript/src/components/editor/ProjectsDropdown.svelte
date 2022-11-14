@@ -94,14 +94,14 @@
 
   function renameProject() {
     if (!$isSignedIn) {
-      alert("You must be signed in to rename a project");
-      showModal = false;
-      return;
+      alert("You must be signed in to rename a project")
+      showModal = false
+      return
     } else
-        if (!$currentProject) {
-      alert("No project selected? This is probably a bug.");
-      showModal = false;
-      return;
+    if (!$currentProject) {
+      alert("No project selected? This is probably a bug.")
+      showModal = false
+      return
     }
 
     loading = true
