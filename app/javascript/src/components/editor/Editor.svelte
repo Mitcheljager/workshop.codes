@@ -91,6 +91,9 @@
       return string.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
     }
   }
+
+  // Updates the tab title if the currentProject's title changes
+  $: document.title = $currentProject?.title !== undefined ? `Editor | ${$currentProject.title} | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 </script>
 
 <svelte:head>
