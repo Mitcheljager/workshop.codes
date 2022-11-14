@@ -110,7 +110,10 @@
       .then(data => {
         if (!data) throw Error("Project rename failed")
 
-        $currentProject.title = value
+        $currentProject = {
+          ...$currentProject,
+          title: value
+        }
         showModal = false
 
         addAlert("Project renamed to " + $currentProject.title)

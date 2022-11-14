@@ -92,17 +92,9 @@
     }
   }
 
-  // Updates the tab title if the currentProject's title changes
+  // Updates the tab title
   $: document.title = $currentProject?.title !== undefined ? `Editor | ${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 </script>
-
-<svelte:head>
-  {#if $currentProject}
-    <title>Editor | {$currentProject.title} | Workshop.codes Script Editor</title>
-  {:else}
-  <title>Workshop.codes Script Editor | Workshop.codes</title>
-  {/if}
-</svelte:head>
 
 <div class="editor">
   <div class="editor__top">
