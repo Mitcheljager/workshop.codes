@@ -1,13 +1,15 @@
 <script>
   import FetchRails from "../../fetch-rails"
   import { projects, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
+  import { addAlert } from "../../lib/alerts"
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
 
   let value
   let loading = false
   let active = false
-  let showCreateModal = false
+  let showModal = false
+  let modalType = "create"
   let showProjectSettings = false
 
   onMount(() => {
@@ -68,7 +70,7 @@
         $currentProject = parsedData
         $currentItem = {}
         $items = []
-        showCreateModal = false
+        showModal = false
       })
       .catch(error => {
         console.error(error)
@@ -87,7 +89,37 @@
     $currentProject = newProject
     $currentItem = {}
     $items = []
-    showCreateModal = false
+    showModal = false
+  }
+
+  function renameProject() {
+    if (!$isSignedIn) {
+      alert("You must be signed in to rename a project");
+      showModal = false;
+      return;
+    } else
+        if (!$currentProject) {
+      alert("No project selected? This is probably a bug.");
+      showModal = false;
+      return;
+    }
+
+    loading = true
+
+    new FetchRails(`/projects/${ $currentProject.uuid }`).request("PATCH", { parameters: { body: JSON.stringify({ project: { title: value } }) } })
+      .then(data => {
+        if (!data) throw Error("Project rename failed")
+
+        $currentProject.title = value
+        showModal = false
+
+        addAlert("Project renamed to " + $currentProject.title)
+      })
+      .catch(error => {
+        console.error(error)
+        alert("Something went wrong while renaming your project. Please try again.")
+      })
+      .finally(() => loading = false)
   }
 
   function destroyProject() {
@@ -129,7 +161,7 @@
   }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") { active = false; showCreateModal = false } }} />
+<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") { active = false; showModal = false } }} />
 
 <div class="dropdown">
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style="min-width: 200px" disabled={loading}>
@@ -156,13 +188,19 @@
         {#if !$projects?.length}
           <em class="text-small block mb-1/4">Create a new project to get started.</em>
         {/if}
-        <button class="button button--small w-100" on:click={() => showCreateModal = true}>Create new</button>
+        <button class="button button--small w-100" on:click={() => {
+          value = ""
+          modalType = "create"
+          showModal = true
+        }}>
+          Create new
+        </button>
       </div>
     </div>
   {/if}
 </div>
 
-{#if showCreateModal}
+{#if showModal}
   <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
     <div class="modal__content p-0" transition:fly={{ y: 100, duration: 200 }}>
       {#if !$isSignedIn}
@@ -171,16 +209,26 @@
         </div>
       {/if}
 
-      <div class="p-1/2">
-        <h3 class="mb-0 mt-0">Create a new project</h3>
+      {#if modalType == "create"}
+        <div class="p-1/2">
+          <h3 class="mb-0 mt-0">Create a new project</h3>
 
-        <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
+          <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
 
-        <button class="button w-100 mt-1/4" on:click={createProject} disabled={!value || loading}>Create</button>
-      </div>
+          <button class="button w-100 mt-1/4" on:click={createProject} disabled={!value || loading}>Create</button>
+        </div>
+      {:else if modalType == "rename"}
+        <div class="p-1/2">
+          <h3 class="mb-0 mt-0">Rename {$currentProject?.title || "this project"}</h3>
+
+          <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
+
+          <button class="button w-100 mt-1/4" on:click={renameProject} disabled={!value || loading}>Rename</button>
+        </div>
+      {/if}
     </div>
 
-    <div class="modal__backdrop" on:click={() => showCreateModal = false} />
+    <div class="modal__backdrop" on:click={() => showModal = false} />
   </div>
 {/if}
 
@@ -192,6 +240,13 @@
 
     {#if showProjectSettings}
       <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
+        <p class="dropdown__item mt-0 mb-0" on:click={() => {
+          value = $currentProject.title
+          modalType = "rename"
+          showModal = true
+        }}>
+          Rename
+        </p>
         <div class="dropdown__item text-red" on:click={destroyProject}>
           Destroy
         </div>
