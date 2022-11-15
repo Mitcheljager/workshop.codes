@@ -1,57 +1,11 @@
-<script>
-  const baseUrl = window.location.href
-
-  async function setSourceUrls() {
-    const sources = document.querySelectorAll("link[href], img[src]")
-
-    const prepend = window.location.origin.includes("http") ? "" : "../../../public"
-
-    sources.forEach(source => {
-      const attributeType = source.localName == "link" ? "href" : "src"
-      const url = prepend + source.dataset.src
-
-      source.setAttribute(attributeType, url)
-    })
-  }
-
-  let scriptsLoaded = 0
-  function loadScriptsSerial() {
-    const scripts = [
-      "/zez-ui/libs/vue.min.js",
-      "/zez-ui/libs/vue-select.min.js",
-      "/zez-ui/libs/popper.min.js",
-      "/zez-ui/libs/toastify.js",
-      "/zez-ui/js/overpy.min.js",
-      `/zez-ui/js/workshop.js?v=${Date.now()}`
-    ]
-
-    if (scriptsLoaded >= scripts.length) return
-
-    const prepend = window.location.origin.includes("http") ? "" : "../../../public"
-
-    const url = prepend + scripts[scriptsLoaded]
-
-    const element = document.createElement("script")
-    element.src = url
-    element.onload = loadScriptsSerial
-    document.head.appendChild(element)
-
-    scriptsLoaded++
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    loadScriptsSerial()
-    setSourceUrls()
-  })
-</script>
-
 <title>Zez's Workshop UI Recreation</title>
 
-<link rel="stylesheet" src="/zez-ui/libs/toastify.css">
-<link rel="stylesheet" src="/zez-ui/libs/vue-select.min.css">
-<link rel="icon" type="image/png" src="/zez-ui/img/favicon.png" />
+<script src="/zez-ui/js/overpy.min.js"></script>
 
-<link rel="stylesheet" src="/zez-ui/css/workshop.css">
+<%= javascript_pack_tag "zez-ui.js", "data-turbolinks-track": "reload", defer: false %>
+<%= stylesheet_link_tag "zez_ui.css" %>
+
+<link rel="icon" type="image/png" src="/zez-ui/img/favicon.png" />
 
 <div id="app-wrapper-wrapper" :style="{'background-image': 'url(&quot;img/backgrounds/'+background+'&quot;)'}">
 <div id="app-wrapper">
@@ -178,7 +132,7 @@
                                 </div>
                             </div>
                             <div v-if="rule.children.length === 0" class="no-values-msg font-blizzglobal">{{ translate("noActions", workshopUiKw) }}</div>
-    
+
                             <div v-else v-for="(action, actionIdx) in rule.children" class="action">
                                 <div class="comment" v-if="action.comment" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">{{ action.comment }}</div>
                                 <div class="code-and-checkbox">
@@ -440,7 +394,7 @@
                                             <div class="cgs-title">{{ translate(hero, (hero === 'general' ? customGameSettingsSchema.gamemodes.values : hero === 'enabledHeroes' ? customGameSettingsSchema.heroes.values : heroKw)) }}</div>
                                         </div>
                                         <cgs-values v-if="!heroContent.isCollapsed" :values="heroContent" :schema="customGameSettingsSchema[category].values[hero].values">
-        
+
                                         </cgs-values>
                                     </div>
                                 </template>

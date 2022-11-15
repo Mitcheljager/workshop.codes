@@ -1,3 +1,7 @@
+import * as Vue from "./libs/vue.min"
+import * as VueSelect from "./libs/vue-select.min"
+import * as Popper from "./libs/popper.min"
+import * as Toastify from "./libs/toastify"
 
 console.debug = function() {}
 Vue.component('v-select', VueSelect.VueSelect);
@@ -219,7 +223,7 @@ var app = new Vue({
                         console.error(this.translate("cannotImportEmptyGamemode", this.workshopUiCustomKw));
                         return;
                     }
-    
+
                     resetGlobalVariables(this.decompilationLanguage);
                     [customGameSettings, rules] = decompileAllRulesToAst(content);
                     if (!customGameSettings) {
@@ -266,7 +270,7 @@ var app = new Vue({
                             rule.children[i].isSelected = false;
                             rule.children[i].isDisabled ||= false;
                         }
-    
+
                         if (rules.length > 50) {
                             rule.isCollapsed = true;
                         } else {
@@ -280,7 +284,7 @@ var app = new Vue({
                     this.subroutines.sort((a,b) => (a.index - b.index))
                     this.textToDecompile = null;
                     this.setCurrentProject(this.projectToImportToId);
-    
+
                 } catch (err) {
                     console.error(err + ", " + this.translate("contactZez", this.workshopUiCustomKw));
                     return;
@@ -446,11 +450,11 @@ var app = new Vue({
                     }
                 }
                 rule.children = rule.children.filter(x => x.name !== "__end__");
-                
+
                 rule.ruleAttributes.conditionComments = [];
                 rule.ruleAttributes.conditions = rule.ruleAttributes.conditions.filter(x => !x.isDisabled);
                 for (var i = 0; i < rule.ruleAttributes.conditions.length; i++) {
-                    
+
                     resetGlobalVariables(this.uiSettings.language);
                     globalVariables = structuredClone(this.globalVariables);
                     playerVariables = structuredClone(this.playerVariables);
@@ -460,7 +464,7 @@ var app = new Vue({
                     rule.ruleAttributes.conditions[i].parent = new Ast("@Condition", [], [], "__Annotation__");
                     recursivelySetFilestack(rule.ruleAttributes.conditions[i], [{ruleNb: ruleIdx+1, rule: rule.ruleAttributes.name, conditionNb: i+1}])
                 }
-                
+
                 if ("subroutineName" in rule.ruleAttributes) {
                     rule.ruleAttributes.subroutineName = this.subroutines.filter(x => x.index === rule.ruleAttributes.subroutineName)[0].name
                     rule.name = "__def__";
@@ -483,7 +487,7 @@ var app = new Vue({
             globalSuppressedWarnings = this.uiSettings.disabledWarnings.split(",").map(x => x.trim());
 
             return compileRules(rules)
-            
+
         },
         saveGamemode: function() {
             if (this.compiledGamemode) {
@@ -535,7 +539,7 @@ var app = new Vue({
                 "__subtract__": 6,
                 "__multiply__": 7,
                 "__divide__": 7,
-                "__modulo__": 7, 
+                "__modulo__": 7,
                 "__raiseToPower__": 8,
                 "__not__": 9,
             }
@@ -546,7 +550,7 @@ var app = new Vue({
                     op1 = "("+op1+")";
                 }
                 var op2 = this.displayAst(ast.args[1], useHtml);
-                
+
                 if (ast.args[1].name in astOperatorPrecedence && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] - (ast.name === "__raiseToPower__" ? 1 : 0)))) {
                     op2 = "("+op2+")";
                 }
@@ -558,7 +562,7 @@ var app = new Vue({
                     op1 = "("+op1+")";
                 }
                 var op2 = this.displayAst(ast.args[2], useHtml);
-                
+
                 if (ast.args[2].name in astOperatorPrecedence && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] + 0.5))) {
                     op2 = "("+op2+")";
                 }
@@ -613,13 +617,13 @@ var app = new Vue({
 
             } else if (ast.name === "__modifyGlobalVariable__" && ast.args[1].name in modifyVarFuncToOpMapping) {
                 return this.displayHtml(this.translate("__global__", this.valueKw), useHtml, "var")+"."+this.displayAst(ast.args[0], useHtml)+" "+modifyVarFuncToOpMapping[ast.args[1].name]+" "+this.displayAst(ast.args[2], useHtml);
-                
+
             } else if (ast.name === "__setGlobalVariableAtIndex__") {
                 return this.displayHtml(this.translate("__global__", this.valueKw), useHtml, "var")+"."+this.displayAst(ast.args[0], useHtml)+"["+this.displayAst(ast.args[1], useHtml)+"] = "+this.displayAst(ast.args[2], useHtml);
 
             } else if (ast.name === "__modifyGlobalVariableAtIndex__" && ast.args[2].name in modifyVarFuncToOpMapping) {
                 return this.displayHtml(this.translate("__global__", this.valueKw), useHtml, "var")+"."+this.displayAst(ast.args[0], useHtml)+" ["+this.displayAst(ast.args[1], useHtml)+"] "+modifyVarFuncToOpMapping[ast.args[2].name]+" "+this.displayAst(ast.args[3], useHtml);
-                
+
             } else if (ast.name === "__playerVar__") {
                 var result = this.displayAst(ast.args[0], useHtml);
                 if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
@@ -640,7 +644,7 @@ var app = new Vue({
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+" "+modifyVarFuncToOpMapping[ast.args[2].name]+" "+this.displayAst(ast.args[3], useHtml);
-                
+
             } else if (ast.name === "__setPlayerVariableAtIndex__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
                 if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
@@ -654,7 +658,7 @@ var app = new Vue({
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+"["+this.displayAst(ast.args[2], useHtml)+"] "+modifyVarFuncToOpMapping[ast.args[3].name]+" "+this.displayAst(ast.args[4], useHtml);
-                
+
             } else if (ast.type === "void") {
                 result += this.displayHtml(this.translate(ast.name, this.actionKw), useHtml, "operator");
 
@@ -1282,7 +1286,7 @@ var app = new Vue({
         },
         editCustomGameSettings: function() {
             var editedCustomGameSettings = structuredClone(this.customGameSettings);
-            
+
             function fillMissingKeys(settings, schema) {
                 for (var key of Object.keys(schema)) {
                     if (key === "extensions" || key === "workshop") {
@@ -1441,7 +1445,7 @@ var app = new Vue({
                     }
                 }
             }
-            
+
             for (var key in this.editedCustomGameSettings) {
                 delete this.editedCustomGameSettings[key].isCollapsed;
             }
@@ -1465,7 +1469,7 @@ var app = new Vue({
 
                     delete this.editedCustomGameSettings.heroes[team][hero].isCollapsed;
                     delete this.editedCustomGameSettings.heroes[team][hero].isArrayCollapsed;
-                    if (hero !== "enabledHeroes") {	
+                    if (hero !== "enabledHeroes") {
                         console.log(hero);
                         removeDefaults(this.editedCustomGameSettings.heroes[team][hero], customGameSettingsSchema.heroes.values[hero].values)
                         if (Object.keys(this.editedCustomGameSettings.heroes[team][hero]).length === 0) {
@@ -1479,7 +1483,7 @@ var app = new Vue({
                     delete this.editedCustomGameSettings.heroes[team];
                 }
             }
-            
+
             for (var key in this.editedCustomGameSettings) {
                 if (Object.keys(this.editedCustomGameSettings[key]).length === 0) {
                     delete this.editedCustomGameSettings[key];
@@ -1647,7 +1651,7 @@ var app = new Vue({
         loadUiSettings: async function() {
             if (localStorage.uiSettings) {
                 var uiSettings = JSON.parse(localStorage.uiSettings);
-                
+
                 this.uiSettings.background = uiSettings.background;
                 this.uiSettings.language = uiSettings.language;
                 this.uiSettings.compilationLanguage = uiSettings.compilationLanguage;
@@ -1675,7 +1679,7 @@ var app = new Vue({
         this.loadUiSettings();
         this.loadProjects();
     },
-    
+
     watch: {
         "uiSettings.language": {
             handler: function(newValue) {
