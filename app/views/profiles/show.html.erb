@@ -8,7 +8,11 @@
 <div data-role="tabs">
   <div class="pt-1/1 mb-1/1">
     <div class="standout p-0">
-      <div class="p-1/4 md:p-1/2">
+      <div class="p-1/4 md:p-1/2 relative overflow-hidden">
+        <div class="profile-blurred-background">
+          <%= render "profiles/image", user: @user, size: 140 %>
+        </div>
+
         <%= render "profile", user: @user %>
       </div>
 

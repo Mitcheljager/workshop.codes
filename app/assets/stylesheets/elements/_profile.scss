@@ -111,6 +111,8 @@
 }
 
 .profile-banner__content {
+  position: relative;
+
   @include media-min(sm) {
     max-width: map-get($media-min-widths, xs);
   }
@@ -185,5 +187,24 @@
     &:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+
+.profile-blurred-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 280px;
+  background: lighten($bg-dark, 10%);
+  filter: blur(50px);
+  opacity: 0.2;
+  z-index: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 }
