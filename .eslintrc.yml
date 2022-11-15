@@ -14,7 +14,7 @@ overrides:
     processor: svelte3/svelte3
 ignorePatterns:
   - /public
-  - */zez-ui
+  - /**/zez-ui
 rules:
   semi:
     - error
