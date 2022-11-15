@@ -1,9 +1,10 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { projects, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
+  import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
   import { addAlert } from "../../lib/alerts"
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
+  import { updateProject } from "../../utils/editor";
 
   let value
   let loading = false
@@ -21,7 +22,7 @@
   })
 
   function fetchProject(uuid) {
-    $currentProject = null
+    $currentProjectUUID = null
     loading = true
 
     const baseUrl = "/projects/"
@@ -33,12 +34,13 @@
         const parsedData = JSON.parse(data)
 
         setUrl(parsedData.uuid)
-
-        $currentProject = {
+        updateProject(parsedData.uuid, {
           uuid: parsedData.uuid,
           title: parsedData.title,
           is_owner: parsedData.is_owner
-        }
+        })
+
+        $currentProjectUUID = parsedData.uuid
 
         $currentItem = {}
         $items = JSON.parse(parsedData.content) || []
@@ -67,7 +69,7 @@
         setUrl(parsedData.uuid)
 
         $projects = [...$projects, parsedData]
-        $currentProject = parsedData
+        $currentProjectUUID = parsedData.uuid
         $currentItem = {}
         $items = []
         showModal = false
@@ -86,7 +88,8 @@
       is_owner: true
     }
 
-    $currentProject = newProject
+    $projects = [...$projects, newProject]
+    $currentProjectUUID = newProject.uuid
     $currentItem = {}
     $items = []
     showModal = false
@@ -97,8 +100,7 @@
       alert("You must be signed in to rename a project")
       showModal = false
       return
-    } else
-    if (!$currentProject) {
+    } else if (!$currentProject) {
       alert("No project selected? This is probably a bug.")
       showModal = false
       return
@@ -106,14 +108,14 @@
 
     loading = true
 
-    new FetchRails(`/projects/${ $currentProject.uuid }`).request("PATCH", { parameters: { body: JSON.stringify({ project: { title: value } }) } })
+    new FetchRails(`/projects/${ $currentProjectUUID }`).request("PATCH", { parameters: { body: JSON.stringify({ project: { title: value } }) } })
       .then(data => {
         if (!data) throw Error("Project rename failed")
 
-        $currentProject = {
-          ...$currentProject,
+        updateProject($currentProjectUUID, {
           title: value
-        }
+        })
+
         showModal = false
 
         addAlert("Project renamed to " + $currentProject.title)
@@ -131,14 +133,14 @@
     loading = true
     showProjectSettings = false
 
-    new FetchRails(`/projects/${ $currentProject.uuid }`).post({ method: "delete" })
+    new FetchRails(`/projects/${ $currentProjectUUID }`).post({ method: "delete" })
       .then(data => {
         if (!data) throw Error("Create failed")
 
         setUrl()
 
-        $projects = $projects.filter(p => p.uuid != $currentProject.uuid)
-        $currentProject = null
+        $projects = $projects.filter(p => p.uuid != $currentProjectUUID)
+        $currentProjectUUID = null
         $currentItem = {}
       })
       .catch(error => {
@@ -177,7 +179,7 @@
 
   {#if active}
     <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100">
-      {#each $projects as project}
+      {#each $projects as project (project.uuid)}
         <div class="dropdown__item" on:click={() => fetchProject(project.uuid)}>
           {project.title}
         </div>

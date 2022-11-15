@@ -1,4 +1,4 @@
-import { currentItem, items, openFolders } from "../stores/editor"
+import { currentItem, items, openFolders, projects } from "../stores/editor"
 import { get } from "svelte/store"
 
 export function createNewItem(name, content, position = 9999, type = "item") {
@@ -121,4 +121,16 @@ export function toggleFolderState(item, state, set = true) {
   else openFolders.set([...get(openFolders).filter(f => f != item.id)])
 
   if (item.parent) toggleFolderState(getItemById(item.parent), true)
+}
+
+export function updateProject(uuid, params) {
+  get(projects).forEach(project => {
+    if (project.uuid != uuid) return
+
+    Object.entries(params).forEach(([key, value]) => {
+      project[key] = value
+    })
+  })
+
+  projects.set([...get(projects)])
 }

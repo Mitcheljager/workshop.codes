@@ -5,7 +5,11 @@ export const completionsMap = writable([])
 export const editorStates = writable({})
 
 export const projects = writable(null)
-export const currentProject = writable(null)
+export const currentProjectUUID = writable(null)
+export const currentProject = derived([projects, currentProjectUUID], ([$projects, $currentProjectUUID]) => {
+  if (!$projects?.length) return null
+  return $projects.filter(p => p.uuid == $currentProjectUUID)?.[0]
+})
 
 export const items = writable([])
 export const currentItem = writable({})
