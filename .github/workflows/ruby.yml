@@ -1,14 +1,20 @@
 name: CI
 on: [push, pull_request]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   BLIND_INDEX_MASTER_KEY: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
   LOCKBOX_MASTER_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+
 jobs:
   linters:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup System
         run: |
           sudo apt update
@@ -18,7 +24,7 @@ jobs:
         with:
           ruby-version: 3.0.0
           bundler-cache: true
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "14"
           check-latest: true
@@ -30,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup System
         run: |
           sudo apt update
@@ -40,7 +46,7 @@ jobs:
         with:
           ruby-version: 3.0.0
           bundler-cache: true
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "14"
           check-latest: true
@@ -62,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup System
         run: |
           sudo apt update
@@ -74,7 +80,7 @@ jobs:
           ruby-version: 3.0.0
           bundler-cache: true
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "14"
           check-latest: true
