@@ -4,7 +4,7 @@
   import { addAlert } from "../../lib/alerts"
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
-  import { updateProject } from "../../utils/editor";
+  import { updateProject } from "../../utils/editor"
 
   let value
   let loading = false
