@@ -1528,19 +1528,14 @@ var app = new Vue({
             this.projects = projects;
         },
         createNewProject: async function(projectName) {
-            const response = await fetch("/projects/", {
-                method: "post",
-                headers: this.apiHeaders,
-                credentials: "same-origin",
-                body: JSON.stringify({
-                    project: {
-                        title: projectName || "<Untitled>",
-                        content_type: "zez_ui"
-                    }
-                })
-            });
+            const response = await new FetchRails("/projects/", {
+                project: {
+                    title: projectName || "<Untitled>",
+                    content_type: "zez_ui"
+                }
+            }).post()
 
-            const data = await response.json();
+            const data = await JSON.parse(response);
 
             var projectId = data.uuid;
             this.projects.push({name: projectName, id: projectId});
@@ -1564,8 +1559,6 @@ var app = new Vue({
         loadProject: async function(projectId) {
             const response = await new FetchRails(`/projects/${this.currentProjectId}`).get();
             const data = JSON.parse(response);
-
-            console.log(data)
 
             var projectData = {
                 rules: [],
