@@ -1,15 +1,14 @@
 import Rails from "@rails/ujs"
 
 export default class FetchRails {
-  constructor(url, body = "") {
+  constructor(url, body = "", headers = {}) {
     this.url = url
     this.body = body
     this.defaultParams = {
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
         "X-CSRF-Token": Rails.csrfToken(),
-        "X-Requested-With": "XMLHttpRequest"
+        ...headers
       },
       credentials: "same-origin"
     }

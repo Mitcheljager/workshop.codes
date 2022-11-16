@@ -1498,7 +1498,11 @@ var app = new Vue({
             this.compileGamemode();
         },
         loadProjects: async function() {
-            const response = await new FetchRails("/workshop-ui").get();
+            const response = await new FetchRails(
+                "/workshop-ui",
+                "",
+                { "X-Requested-With": "XMLHttpRequest", Accept: "application/json" }
+            ).get();
             const data = JSON.parse(response);
 
             var projects = data.map(p => ({ id: p.uuid, name: p.title })) || [];
@@ -1642,7 +1646,7 @@ var app = new Vue({
                 project: {
                     title: this.customGameSettings?.main?.modeName || "<Untitled mode>",
                     content: content,
-                }
+                },
             }).post({ method: "put" })
 
             if (!response) console.error("Error when saving, try again")
