@@ -869,7 +869,7 @@ button:hover {
     align-content: center;
     flex-wrap: wrap;
     background-color: var(--background-dim);
-    background-image: url("../img/delete-background-2.png");
+    background-image: url("zez-ui/img/delete-background-2.png");
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center;
@@ -1167,15 +1167,15 @@ button:hover {
 }
 
 .toastify.error::before {
-    background-image: url("../img/error.png");
+    background-image: url("zez-ui/img/error.png");
     background-color: var(--toast-error);
 }
 .toastify.info::before {
-    background-image: url("../img/success.png");
+    background-image: url("zez-ui/img/success.png");
     background-color: var(--toast-info);
 }
 .toastify.warning::before {
-    background-image: url("../img/warning.png");
+    background-image: url("zez-ui/img/warning.png");
     background-color: var(--toast-warning);
 }
 

@@ -1,56 +1,58 @@
 <title>Zez's Workshop UI Recreation</title>
 
-<script src="/zez-ui/js/overpy.min.js"></script>
-
-<%= javascript_pack_tag "zez-ui.js", "data-turbolinks-track": "reload", defer: false %>
 <%= stylesheet_link_tag "zez_ui.css" %>
 
-<link rel="icon" type="image/png" src="/zez-ui/img/favicon.png" />
+<link rel="icon" type="image/png" src="/zez-ui//zez-ui/img/favicon.png" />
 
-<div id="app-wrapper-wrapper" :style="{'background-image': 'url(&quot;img/backgrounds/'+background+'&quot;)'}">
+<div id="app-wrapper-wrapper" :style="{'background-image': 'url(&quot;/zez-ui/img/backgrounds/'+background+'&quot;)'}">
 <div id="app-wrapper">
-<div id="app">
+<div id="app" class="<%= "signed-in" if current_user %>">
+    <div class="sign-in-alert" v-if="!signedIn">
+        You are not signed in and nothing you do will be saved to your account.
+        <a href="/login">Please sign in</a>
+    </div>
+
     <div id="workshop-title" class="font-bignoodle">{{ translate("zezWorkshopUiRecreation", workshopUiCustomKw) }}</div>
     <div id="workshop-subtitle">{{ customGameSettings?.main?.modeName || translate("untitledMode", workshopUiCustomKw) }}</div>
     <div id="workshop-header">
         <div id="workshop-header-left">
             <div id="rules-title">{{ translate("rules", workshopUiKw) }}</div>
             <div id="rules-nb">({{ rules.length || 0}})</div>
-            <img id="button-info" class="img-button button-header" src="img/info.png" v-on:click="displayInfo = true"/>
-            <img id="button-metrics" class="img-button button-header" src="img/metrics.png" v-on:click="displayMetricsScreen()"/>
-            <img id="button-import" class="img-button button-header" src="img/import.png" v-on:click="displayImport = true"/>
-            <!--<img id="button-export" class="img-button button-header" src="img/export.png" v-on:click="showExportLink()"/>-->
-            <img id="button-settings" class="img-button button-header" src="img/settings.png" v-on:click="editCustomGameSettings()"/>
-            <img id="button-save" class="img-button button-header" src="img/save.png" v-on:click="saveGamemode()"/>
+            <img id="button-info" class="img-button button-header" src="/zez-ui/img/info.png" v-on:click="displayInfo = true"/>
+            <img id="button-metrics" class="img-button button-header" src="/zez-ui/img/metrics.png" v-on:click="displayMetricsScreen()"/>
+            <img id="button-import" class="img-button button-header" src="/zez-ui/img/import.png" v-on:click="displayImport = true"/>
+            <!--<img id="button-export" class="img-button button-header" src="/zez-ui/img/export.png" v-on:click="showExportLink()"/>-->
+            <img id="button-settings" class="img-button button-header" src="/zez-ui/img/settings.png" v-on:click="editCustomGameSettings()"/>
+            <img id="button-save" class="img-button button-header" src="/zez-ui/img/save.png" v-on:click="saveGamemode()"/>
         </div>
         <div id="workshop-header-right">
-            <img id="button-extensions" class="img-button button-header" src="img/extensions.png" v-on:click="editExtensions()"/>
-            <img id="button-var-names" class="img-button button-header" src="img/var_names.png" v-on:click="editVariables()"/>
-            <img id="button-subroutine-names" class="img-button button-header" src="img/subroutine_names.png" v-on:click="editSubroutines()"/>
+            <img id="button-extensions" class="img-button button-header" src="/zez-ui/img/extensions.png" v-on:click="editExtensions()"/>
+            <img id="button-var-names" class="img-button button-header" src="/zez-ui/img/var_names.png" v-on:click="editVariables()"/>
+            <img id="button-subroutine-names" class="img-button button-header" src="/zez-ui/img/subroutine_names.png" v-on:click="editSubroutines()"/>
             <div id="button-separator"></div>
             <template v-if="rules.some(x => x.isSelected)">
-                <img class="img-button button-header button-delete" src="img/delete.png" v-on:click="deleteSelectedRules()"/>
+                <img class="img-button button-header button-delete" src="/zez-ui/img/delete.png" v-on:click="deleteSelectedRules()"/>
                 <div id="buttons-move-up-down" class="button-header">
-                    <img id="button-move-up" class="img-button" src="img/move_up.png" v-on:click="moveSelectedRules(true)"/>
-                    <img id="button-move-down" class="img-button" src="img/move_down.png" v-on:click="moveSelectedRules(false)"/>
+                    <img id="button-move-up" class="img-button" src="/zez-ui/img/move_up.png" v-on:click="moveSelectedRules(true)"/>
+                    <img id="button-move-down" class="img-button" src="/zez-ui/img/move_down.png" v-on:click="moveSelectedRules(false)"/>
                 </div>
-                <img id="button-toggle" class="img-button button-header" src="img/toggle.png" v-on:click="toggleSelectedRules()"/>
-                <img id="button-copy" class="img-button button-header" src="img/copy.png" v-on:click="copySelectedRules()"/>
+                <img id="button-toggle" class="img-button button-header" src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedRules()"/>
+                <img id="button-copy" class="img-button button-header" src="/zez-ui/img/copy.png" v-on:click="copySelectedRules()"/>
             </template>
-            <img v-if="clipboard?.type === 'rules'" id="button-paste" class="img-button button-header" src="img/paste.png" v-on:click="pasteRules()"/>
-            <img id="button-select-all" class="img-button button-header" src="img/select_all.png" v-on:click="selectAllRules()"/>
-            <img id="button-add" class="img-button button-header" src="img/add.png" v-on:click="addRule()"/>
+            <img v-if="clipboard?.type === 'rules'" id="button-paste" class="img-button button-header" src="/zez-ui/img/paste.png" v-on:click="pasteRules()"/>
+            <img id="button-select-all" class="img-button button-header" src="/zez-ui/img/select_all.png" v-on:click="selectAllRules()"/>
+            <img id="button-add" class="img-button button-header" src="/zez-ui/img/add.png" v-on:click="addRule()"/>
         </div>
     </div>
-    <div v-if="rules.length === 0" class="no-values-msg font-blizzglobal"><div id="no-rules">{{ translate("noRules", workshopUiKw) }}</div><div id="no-rules-help" class="font-futurano2d">{{ translate("pressButtonToImport1", workshopUiCustomKw) }}<img id="button-import" src="img/import.png"/>{{ translate("pressButtonToImport2", workshopUiCustomKw) }}</div></div>
+    <div v-if="rules.length === 0" class="no-values-msg font-blizzglobal"><div id="no-rules">{{ translate("noRules", workshopUiKw) }}</div><div id="no-rules-help" class="font-futurano2d">{{ translate("pressButtonToImport1", workshopUiCustomKw) }}<img id="button-import" src="/zez-ui/img/import.png"/>{{ translate("pressButtonToImport2", workshopUiCustomKw) }}</div></div>
     <div v-else id="rules">
         <div class="rule" v-for="(rule, ruleIdx) in rules">
             <div class="rule-collapse-bar">
                 <template v-if="rule.isCollapsed">
-                    <img class="img-button rule-expand-button" src="img/expand_rule.png" v-on:click="rule.isCollapsed=false"/>
+                    <img class="img-button rule-expand-button" src="/zez-ui/img/expand_rule.png" v-on:click="rule.isCollapsed=false"/>
                 </template>
                 <template v-else>
-                    <img class="img-button rule-collapse-button" src="img/collapse_rule.png" v-on:click="rule.isCollapsed=true"/>
+                    <img class="img-button rule-collapse-button" src="/zez-ui/img/collapse_rule.png" v-on:click="rule.isCollapsed=true"/>
                     <div class="rule-collapse-line"></div>
                 </template>
             </div>
@@ -87,17 +89,17 @@
                                 <div class="conditions-title">{{ translate("conditions", workshopUiKw) }} <span class="conditions-nb">({{ rules[ruleIdx].ruleAttributes.conditions?.length || 0}})</span></div>
                                 <div class="conditions-buttons">
                                     <template v-if="rule.ruleAttributes.conditions.some(x => x.isSelected)">
-                                        <img class="img-button button-action-condition button-delete" src="img/delete.png" v-on:click="deleteSelectedConditions(rule)"/>
+                                        <img class="img-button button-action-condition button-delete" src="/zez-ui/img/delete.png" v-on:click="deleteSelectedConditions(rule)"/>
                                         <div id="buttons-move-up-down" class="button-action-condition">
-                                            <img id="button-move-up" class="img-button" src="img/move_up.png" v-on:click="moveSelectedConditions(rule, true)"/>
-                                            <img id="button-move-down" class="img-button" src="img/move_down.png" v-on:click="moveSelectedConditions(rule, false)"/>
+                                            <img id="button-move-up" class="img-button" src="/zez-ui/img/move_up.png" v-on:click="moveSelectedConditions(rule, true)"/>
+                                            <img id="button-move-down" class="img-button" src="/zez-ui/img/move_down.png" v-on:click="moveSelectedConditions(rule, false)"/>
                                         </div>
-                                        <img id="button-toggle" class="img-button button-action-condition" src="img/toggle.png" v-on:click="toggleSelectedConditions(rule)">
-                                        <img id="button-copy" class="img-button button-action-condition" src="img/copy.png" v-on:click="copySelectedConditions(rule)"/>
+                                        <img id="button-toggle" class="img-button button-action-condition" src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedConditions(rule)">
+                                        <img id="button-copy" class="img-button button-action-condition" src="/zez-ui/img/copy.png" v-on:click="copySelectedConditions(rule)"/>
                                     </template>
-                                    <img v-if="clipboard?.type === 'conditions'" id="button-paste" class="img-button button-action-condition" src="img/paste.png" v-on:click="pasteConditions(rule)"/>
-                                    <img id="button-select-all" class="img-button button-action-condition" src="img/select_all.png" v-on:click="selectAllConditions(rule)"/>
-                                    <img id="button-add" class="img-button button-action-condition" src="img/add.png" v-on:click="addCondition(rule)"/>
+                                    <img v-if="clipboard?.type === 'conditions'" id="button-paste" class="img-button button-action-condition" src="/zez-ui/img/paste.png" v-on:click="pasteConditions(rule)"/>
+                                    <img id="button-select-all" class="img-button button-action-condition" src="/zez-ui/img/select_all.png" v-on:click="selectAllConditions(rule)"/>
+                                    <img id="button-add" class="img-button button-action-condition" src="/zez-ui/img/add.png" v-on:click="addCondition(rule)"/>
                                 </div>
                             </div>
                             <div v-if="!rule.ruleAttributes.conditions?.length" class="no-values-msg font-blizzglobal">{{ translate("noConditions", workshopUiKw) }}</div>
@@ -118,17 +120,17 @@
                                 <div class="actions-title">{{ translate("actions", workshopUiKw) }} <span class="actions-nb">({{ rule.children.length }})</span></div>
                                 <div class="actions-buttons">
                                     <template v-if="rule.children.some(x => x.isSelected)">
-                                        <img class="img-button button-action-condition button-delete" src="img/delete.png" v-on:click="deleteSelectedActions(rule)"/>
+                                        <img class="img-button button-action-condition button-delete" src="/zez-ui/img/delete.png" v-on:click="deleteSelectedActions(rule)"/>
                                         <div id="buttons-move-up-down" class="button-action-condition">
-                                            <img id="button-move-up" class="img-button" src="img/move_up.png" v-on:click="moveSelectedActions(rule, true)"/>
-                                            <img id="button-move-down" class="img-button" src="img/move_down.png" v-on:click="moveSelectedActions(rule, false)">
+                                            <img id="button-move-up" class="img-button" src="/zez-ui/img/move_up.png" v-on:click="moveSelectedActions(rule, true)"/>
+                                            <img id="button-move-down" class="img-button" src="/zez-ui/img/move_down.png" v-on:click="moveSelectedActions(rule, false)">
                                         </div>
-                                        <img id="button-toggle" class="img-button button-action-condition" src="img/toggle.png" v-on:click="toggleSelectedActions(rule)"/>
-                                        <img id="button-copy" class="img-button button-action-condition" src="img/copy.png" v-on:click="copySelectedActions(rule)"/>
+                                        <img id="button-toggle" class="img-button button-action-condition" src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedActions(rule)"/>
+                                        <img id="button-copy" class="img-button button-action-condition" src="/zez-ui/img/copy.png" v-on:click="copySelectedActions(rule)"/>
                                     </template>
-                                    <img v-if="clipboard?.type === 'actions'" id="button-paste" class="img-button button-action-condition" src="img/paste.png" v-on:click="pasteActions(rule)"/>
-                                    <img id="button-select-all" class="img-button button-action-condition" src="img/select_all.png" v-on:click="selectAllActions(rule)"/>
-                                    <img id="button-add" class="img-button button-action-condition" src="img/add.png" v-on:click="addAction(rule)"/>
+                                    <img v-if="clipboard?.type === 'actions'" id="button-paste" class="img-button button-action-condition" src="/zez-ui/img/paste.png" v-on:click="pasteActions(rule)"/>
+                                    <img id="button-select-all" class="img-button button-action-condition" src="/zez-ui/img/select_all.png" v-on:click="selectAllActions(rule)"/>
+                                    <img id="button-add" class="img-button button-action-condition" src="/zez-ui/img/add.png" v-on:click="addAction(rule)"/>
                                 </div>
                             </div>
                             <div v-if="rule.children.length === 0" class="no-values-msg font-blizzglobal">{{ translate("noActions", workshopUiKw) }}</div>
@@ -286,7 +288,7 @@
             <div id="info" class="font-blizzglobal">
                 <!--<p>Your gamemode is saved to your browser's local storage every time you edit an action/condition, or when you view the extensions or the element count.</p>-->
                 <p>{{ translate("para1", workshopUiCustomKw) }}</p>
-                <p style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">{{ translate("para2", workshopUiCustomKw) }} <img src="img/save.png" width="25" height="25" style="margin-left: 8px;"/><br>{{ translate("para3", workshopUiCustomKw) }}<br><img src="img/how_to_paste.png" style="margin-top: 5px"/></p>
+                <p style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">{{ translate("para2", workshopUiCustomKw) }} <img src="/zez-ui/img/save.png" width="25" height="25" style="margin-left: 8px;"/><br>{{ translate("para3", workshopUiCustomKw) }}<br><img src="/zez-ui/img/how_to_paste.png" style="margin-top: 5px"/></p>
                 <p>{{ translate("para4", workshopUiCustomKw) }}</p>
                 <p>{{ translate("para5", workshopUiCustomKw) }}</p>
                 <div class="setting font-futurano2d" v-for="(settingValues, settingId) in uiAvailableSettings">
@@ -338,8 +340,8 @@
             <div id="settings-wrapper">
                 <div class="cgs-content" v-for="(categoryContent, category) in editedCustomGameSettings">
                     <div class="cgs-title-wrapper">
-                        <img v-if="categoryContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="categoryContent.isCollapsed=false; updateTextareasHeight()">
-                        <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="categoryContent.isCollapsed=true"/>
+                        <img v-if="categoryContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="categoryContent.isCollapsed=false; updateTextareasHeight()">
+                        <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="categoryContent.isCollapsed=true"/>
                         <div class="cgs-title">{{ translate(category, customGameSettingsSchema) }}</div>
                     </div>
                     <template v-if="!categoryContent.isCollapsed">
@@ -349,15 +351,15 @@
                         <div v-else-if="category === 'gamemodes'" v-for="(gamemodeContent, gamemode) in categoryContent" class="cgs-content">
                             <template v-if="gamemode !== 'isCollapsed' && gamemode !== 'isArrayCollapsed'">
                                 <div class="cgs-title-wrapper">
-                                    <img v-if="gamemodeContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="gamemodeContent.isCollapsed=false"/>
-                                    <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="gamemodeContent.isCollapsed=true"/>
+                                    <img v-if="gamemodeContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="gamemodeContent.isCollapsed=false"/>
+                                    <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="gamemodeContent.isCollapsed=true"/>
                                     <input type="checkbox" v-if="gamemode !== 'general'" v-model="gamemodeContent.enabled"/>
                                     <div class="cgs-title">{{ translate(gamemode, customGameSettingsSchema.gamemodes.values) }}</div>
                                 </div>
                                 <div v-if="!gamemodeContent.isCollapsed && 'enabledMaps' in gamemodeContent" class="cgs-content">
                                     <div class="cgs-title-wrapper">
-                                        <img v-if="gamemodeContent.isArrayCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=false"/>
-                                        <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=true"/>
+                                        <img v-if="gamemodeContent.isArrayCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=false"/>
+                                        <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=true"/>
                                         <div class="cgs-title">{{ translate("enabledMaps", customGameSettingsSchema.gamemodes.values[gamemode].values) }}</div>
                                     </div>
                                     <cgs-values v-if="!gamemodeContent.isArrayCollapsed" :values="Object.keys(mapKw).filter(x => mapKw[x].gamemodes.includes(gamemode) && !mapKw[x].onlyInOw1)" :schema="mapKw" :array-obj="gamemodeContent" :array-key="'enabledMaps'"></cgs-values>
@@ -371,14 +373,14 @@
                             <template v-if="team !== 'isCollapsed'">
 
                                 <div class="cgs-title-wrapper">
-                                    <img v-if="teamContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="teamContent.isCollapsed=false"/>
-                                    <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="teamContent.isCollapsed=true"/>
+                                    <img v-if="teamContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="teamContent.isCollapsed=false"/>
+                                    <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="teamContent.isCollapsed=true"/>
                                     <div class="cgs-title">{{ translate(team, customGameSettingsSchema.heroes.teams) }}</div>
                                 </div>
                                 <div v-if="!teamContent.isCollapsed" class="cgs-content">
                                     <div class="cgs-title-wrapper">
-                                        <img v-if="teamContent.isArrayCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="teamContent.isArrayCollapsed=false"/>
-                                        <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="teamContent.isArrayCollapsed=true"/>
+                                        <img v-if="teamContent.isArrayCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="teamContent.isArrayCollapsed=false"/>
+                                        <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="teamContent.isArrayCollapsed=true"/>
                                         <div class="cgs-title">{{ translate("enabledHeroes", customGameSettingsSchema.heroes.values) }}</div>
                                     </div>
                                     <cgs-values v-if="!teamContent.isArrayCollapsed" :values="Object.keys(heroKw)" :schema="heroKw" :array-obj="teamContent" :array-key="'enabledHeroes'"></cgs-values>
@@ -388,8 +390,8 @@
 
                                         <div class="cgs-title-wrapper">
                                             <template v-if="'isCollapsed' in heroContent">
-                                                <img v-if="heroContent.isCollapsed" class="img-button" src="img/expand_rule.png" v-on:click="heroContent.isCollapsed=false"/>
-                                                <img v-else class="img-button" src="img/collapse_rule.png" v-on:click="heroContent.isCollapsed=true"/>
+                                                <img v-if="heroContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="heroContent.isCollapsed=false"/>
+                                                <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="heroContent.isCollapsed=true"/>
                                             </template>
                                             <div class="cgs-title">{{ translate(hero, (hero === 'general' ? customGameSettingsSchema.gamemodes.values : hero === 'enabledHeroes' ? customGameSettingsSchema.heroes.values : heroKw)) }}</div>
                                         </div>
@@ -419,11 +421,11 @@
             <div v-for="i in depth" class="indent-marker"></div>
             <div class="argument" :class="{'argument-number': ast.type !== 'Variable' && $root.isTypeSuitable(['FloatLiteral', 'IntLiteral'], ast.type, false)}" :title='ast.parent.name === "__rule__" || ast.parent.name === "__array__" || !("descriptionLocalized" in (ast.parent.type === "void" ? $root.actionKw[ast.parent.name].args[astIdx] : $root.valueFuncKw[ast.parent.name].args[astIdx])) ? "" : $root.translate("descriptionLocalized", ast.parent.parent.name === "__rule__" && ast.parent.name !== "__compare__" ? $root.actionKw[ast.parent.name].args[astIdx] : $root.valueFuncKw[ast.parent.name].args[astIdx])'>{{ ast.parent.name === "__rule__" ? $root.translate("action", $root.workshopUiKw) : ast.parent.parent.name === "__rule__" && ast.parent.name !== "__compare__" ? $root.translate("nameLocalized", $root.actionKw[ast.parent.name].args[astIdx]) : $root.translate("nameLocalized", $root.valueFuncKw[ast.parent.name].args[ast.parent.name === "__array__" ? 0 : astIdx], astIdx) }}</div>
             <div class="value">
-                <img src="img/array_add.png" class="array-img-button array-add" v-if="ast.name === '__array__'" v-on:click="$root.addToArray(ast)"/>
-                <img src="img/array_remove.png" class="array-img-button array-remove" v-if="ast.parent.name === '__array__'" v-on:click="$root.removeFromArray(ast.parent, astIdx)"/>
+                <img src="/zez-ui/img/array_add.png" class="array-img-button array-add" v-if="ast.name === '__array__'" v-on:click="$root.addToArray(ast)"/>
+                <img src="/zez-ui/img/array_remove.png" class="array-img-button array-remove" v-if="ast.parent.name === '__array__'" v-on:click="$root.removeFromArray(ast.parent, astIdx)"/>
                 <div class="array-up-down" v-if="ast.parent.name === '__array__'">
-                    <img src="img/array_up.png" class="array-img-button array-up" v-on:click="$root.moveArrayElement(ast.parent, astIdx, true)"/>
-                    <img src="img/array_down.png" class="array-img-button array-down" v-on:click="$root.moveArrayElement(ast.parent, astIdx, false)"/>
+                    <img src="/zez-ui/img/array_up.png" class="array-img-button array-up" v-on:click="$root.moveArrayElement(ast.parent, astIdx, true)"/>
+                    <img src="/zez-ui/img/array_down.png" class="array-img-button array-down" v-on:click="$root.moveArrayElement(ast.parent, astIdx, false)"/>
                 </div>
                 <div v-if="ast.type !== 'Variable' && $root.isTypeSuitable(['FloatLiteral', 'IntLiteral'], ast.type, false)" class="number-input">
                     <input type="number" step="0.001" class="font-futurano2d" v-model="ast.name">
@@ -435,7 +437,7 @@
                     <v-select v-if="ast.type === 'Icon'" :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
                         <template #option="option">
                             <div style="display:flex; align-items: center;">
-                                <img :src='"img/icons/"+option.code.toLowerCase()+".png"' width="15px" height="15px" style="margin-right: 10px;"/>
+                                <img :src='"/zez-ui/img/icons/"+option.code.toLowerCase()+".png"' width="15px" height="15px" style="margin-right: 10px;"/>
                                 {{ option.label }}
                             </div>
                         </template>
@@ -495,3 +497,7 @@
         </template>
     </div>
 </template>
+
+<script src="/zez-ui/js/overpy.min.js"></script>
+
+<%= javascript_pack_tag "zez-ui.js", "data-turbolinks-track": "reload", defer: false %>

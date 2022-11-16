@@ -6,8 +6,10 @@ export default class FetchRails {
     this.body = body
     this.defaultParams = {
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
-        "X-CSRF-Token": Rails.csrfToken()
+        "X-CSRF-Token": Rails.csrfToken(),
+        "X-Requested-With": "XMLHttpRequest"
       },
       credentials: "same-origin"
     }

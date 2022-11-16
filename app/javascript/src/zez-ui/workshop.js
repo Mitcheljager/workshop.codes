@@ -1,7 +1,9 @@
-import * as Vue from "./libs/vue.min"
+import Vue from "./libs/vue.min"
 import * as VueSelect from "./libs/vue-select.min"
 import * as Popper from "./libs/popper.min"
 import * as Toastify from "./libs/toastify"
+import * as safeStringify from "../safe-stringify"
+import FetchRails from "../fetch-rails"
 
 console.debug = function() {}
 Vue.component('v-select', VueSelect.VueSelect);
@@ -21,6 +23,7 @@ const oldConsoleWarn = console.warn;
 var app = new Vue({
     "el": "#app-wrapper-wrapper",
     "data": {
+        signedIn: document.querySelector("#app").classList.contains("signed-in"),
         decompilationLanguage: "en-US",
         textToDecompile: null,
         displayDeleteConfirmationFor: null,
@@ -1495,13 +1498,8 @@ var app = new Vue({
             this.compileGamemode();
         },
         loadProjects: async function() {
-            const response = await fetch("/workshop-ui", {
-                method: "get",
-                headers: this.apiHeaders,
-                credentials: "same-origin",
-            });
-
-            const data = await response?.json()
+            const response = await new FetchRails("/workshop-ui").get();
+            const data = JSON.parse(response);
 
             var projects = data.map(p => ({ id: p.uuid, name: p.title })) || [];
 
@@ -1509,6 +1507,7 @@ var app = new Vue({
                 //If user has no projects, create a project for them
                 this.createNewProject("Untitled");
             }
+
             if (window.location.pathname.startsWith("/C:")) {
                 this.currentProjectId = projects[0].id;
             } else {
@@ -1519,7 +1518,7 @@ var app = new Vue({
                     this.setUrl();
                     this.loadProject(this.currentProjectId);
                 } else {
-                    this.currentProjectId = projects.filter(x => x.id === currentProjectId)[0].id;
+                    this.currentProjectId = projects?.filter(x => x.id === currentProjectId)[0].id;
                 }
             }
             this.projects = projects;
@@ -1559,11 +1558,11 @@ var app = new Vue({
             this.currentProjectId = this.projects.filter(x => x.id === projectId)[0].id;
         },
         loadProject: async function(projectId) {
-            const response = await fetch(`/projects/${this.currentProjectId}`, {
-                method: "get",
-                headers: this.apiHeaders,
-                credentials: "same-origin",
-            })
+            const response = await new FetchRails(`/projects/${this.currentProjectId}`).get();
+            const data = JSON.parse(response);
+
+            console.log(data)
+
             var projectData = {
                 rules: [],
                 customGameSettings: {
@@ -1586,10 +1585,10 @@ var app = new Vue({
                 optimization: "speed",
             }
 
-            if (response.status == 200) {
-                data = await response.json()
+            if (response) {
                 projectData = JSON.parse(data.content)
             }
+
             function addParent(ast) {
                 for (var arg of ast.args) {
                     arg.parent = ast;
@@ -1623,6 +1622,11 @@ var app = new Vue({
             this.setUrl();
         },
         saveProject: async function() {
+            if (!this.signedIn) {
+                console.warn("You are not signed in and your mode will not be saved. It is still copied to your clipboard.");
+                return;
+            }
+
             const content = JSON.safeStringify({
                 rules: [...this.rules],
                 customGameSettings: {...this.customGameSettings},
@@ -1634,19 +1638,14 @@ var app = new Vue({
                 optimization: this.uiSettings.optimization,
             })
 
-            const response = await fetch("/projects/" + this.currentProjectId, {
-                method: "put",
-                headers: this.apiHeaders,
-                credentials: "same-origin",
-                body: JSON.stringify({
-                    project: {
-                        title: this.customGameSettings?.main?.modeName || "<Untitled mode>",
-                        content: content
-                    }
-                })
-            })
+            const response = await new FetchRails("/projects/" + this.currentProjectId, {
+                project: {
+                    title: this.customGameSettings?.main?.modeName || "<Untitled mode>",
+                    content: content,
+                }
+            }).post({ method: "put" })
 
-            if (response.status != 200) console.error("Error when saving, try again")
+            if (!response) console.error("Error when saving, try again")
         },
         loadUiSettings: async function() {
             if (localStorage.uiSettings) {
