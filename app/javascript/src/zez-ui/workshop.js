@@ -1595,7 +1595,7 @@ var app = new Vue({
             }
 
             if (response) {
-                this.isOwner = data.isOwner;
+                this.isOwner = data.is_owner;
                 projectData = JSON.parse(data.content);
             }
 
@@ -1634,6 +1634,11 @@ var app = new Vue({
         saveProject: async function() {
             if (!this.signedIn) {
                 console.warn("You are not signed in and your mode will not be saved. It is still copied to your clipboard.");
+                return;
+            }
+
+            if (!this.isOwner) {
+                console.warn("You do not own this project and your changes will not be saved. It is still copied to your clipboard.");
                 return;
             }
 
