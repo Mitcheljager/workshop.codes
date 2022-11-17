@@ -228,7 +228,7 @@ var app = new Vue({
                     }
 
                     resetGlobalVariables(this.decompilationLanguage);
-                    [customGameSettings, rules] = decompileAllRulesToAst(content);
+                    var [customGameSettings, rules] = decompileAllRulesToAst(content);
                     if (!customGameSettings) {
                         console.error(this.translate("gamemodeMustHaveSettings", this.workshopUiCustomKw));
                         return;
@@ -683,7 +683,7 @@ var app = new Vue({
             }
             if (ast.args.length > 0) {
                 if (ast.name === "__customString__" || ast.name === "__localizedString__") {
-                    maxStrArg = ast.args[0].name.includes("{2}") ? 3 : ast.args[0].name.includes("{1}") ? 2 : ast.args[0].name.includes("{0}") ? 1 : 0
+                    var maxStrArg = ast.args[0].name.includes("{2}") ? 3 : ast.args[0].name.includes("{1}") ? 2 : ast.args[0].name.includes("{0}") ? 1 : 0
                     result += "(" + ast.args.slice(0, maxStrArg+1).map(x => this.displayAst(x, useHtml)).join(", ") + ")";
                 } else {
                     result += "(" + ast.args.map(x => this.displayAst(x, useHtml)).join(", ") + ")";
