@@ -1628,6 +1628,8 @@ var app = new Vue({
             this.uiSettings.disabledWarnings = projectData.disabledWarnings;
             this.uiSettings.optimization = projectData.optimization;
 
+            if (!this.isOwner) return;
+
             this.currentProjectId = this.projects.filter(x => x.id === projectId)[0].id;
             this.setUrl();
         },
