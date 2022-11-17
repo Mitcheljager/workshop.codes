@@ -1512,6 +1512,15 @@ var app = new Vue({
                 this.createNewProject("Untitled");
             }
 
+            const urlParams = new URLSearchParams(window.location.search);
+            const uuid = urlParams.get("uuid");
+
+            if (uuid) {
+                this.currentProjectId = uuid;
+                this.loadProject(this.currentProjectId);
+                return;
+            }
+
             if (window.location.pathname.startsWith("/C:")) {
                 this.currentProjectId = projects[0].id;
             } else {
