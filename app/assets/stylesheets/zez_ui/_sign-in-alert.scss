@@ -7,6 +7,11 @@
   background: var(--toast-warning);
   color: white;
 
+  &.top {
+    top: 1rem;
+    bottom: auto;
+  }
+
   a {
     color: white;
   }

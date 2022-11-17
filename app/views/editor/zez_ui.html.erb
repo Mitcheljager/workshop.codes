@@ -12,6 +12,10 @@
         <a href="/login">Please sign in</a>
     </div>
 
+    <div class="sign-in-alert top" v-if="!isOwner">
+        You do not own this project, changes will not be saved.
+    </div>
+
     <div id="workshop-title" class="font-bignoodle">{{ translate("zezWorkshopUiRecreation", workshopUiCustomKw) }}</div>
     <div id="workshop-subtitle">{{ customGameSettings?.main?.modeName || translate("untitledMode", workshopUiCustomKw) }}</div>
     <div id="workshop-header">

@@ -24,6 +24,7 @@ var app = new Vue({
     "el": "#app-wrapper-wrapper",
     "data": {
         signedIn: document.querySelector("#app").classList.contains("signed-in"),
+        isOwner: true,
         decompilationLanguage: "en-US",
         textToDecompile: null,
         displayDeleteConfirmationFor: null,
@@ -515,6 +516,8 @@ var app = new Vue({
             }
         },
         displayAst: function(ast, useHtml=true) {
+            console.log(ast)
+
             const modifyVarFuncToOpMapping = {
                 "__add__": "+=",
                 "__subtract__": "-=",
@@ -1592,7 +1595,8 @@ var app = new Vue({
             }
 
             if (response) {
-                projectData = JSON.parse(data.content)
+                this.isOwner = data.isOwner;
+                projectData = JSON.parse(data.content);
             }
 
             function addParent(ast) {
