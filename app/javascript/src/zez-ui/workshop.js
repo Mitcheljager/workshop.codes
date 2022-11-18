@@ -515,8 +515,6 @@ var app = new Vue({
             }
         },
         displayAst: function(ast, useHtml=true) {
-            console.log(ast)
-
             const modifyVarFuncToOpMapping = {
                 "__add__": "+=",
                 "__subtract__": "-=",
