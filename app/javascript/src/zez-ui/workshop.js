@@ -2,7 +2,6 @@ import Vue from "./libs/vue.min"
 import * as VueSelect from "./libs/vue-select.min"
 import * as Popper from "./libs/popper.min"
 import * as Toastify from "./libs/toastify"
-import * as safeStringify from "../safe-stringify"
 import FetchRails from "../fetch-rails"
 
 console.debug = function() {}
@@ -1521,10 +1520,7 @@ var app = new Vue({
             if (uuid) {
                 this.currentProjectId = uuid;
                 this.loadProject(this.currentProjectId);
-                return;
-            }
-
-            if (window.location.pathname.startsWith("/C:")) {
+            } else if (window.location.pathname.startsWith("/C:")) {
                 this.currentProjectId = projects[0].id;
             } else {
                 var currentProjectId = window.location.pathname.split("/")[window.location.pathname.split("/").length-1];
@@ -1644,7 +1640,7 @@ var app = new Vue({
                 return;
             }
 
-            const content = JSON.safeStringify({
+            const content = JSON.stringify({
                 rules: [...this.rules],
                 customGameSettings: {...this.customGameSettings},
                 globalVariables: this.globalVariables,
@@ -1653,7 +1649,7 @@ var app = new Vue({
                 activatedExtensions: this.activatedExtensions,
                 disabledWarnings: this.uiSettings.disabledWarnings,
                 optimization: this.uiSettings.optimization,
-            })
+            }, (key, value) => key !== "parent" ? value : undefined)
 
             const response = await new FetchRails("/projects/" + this.currentProjectId, {
                 project: {
