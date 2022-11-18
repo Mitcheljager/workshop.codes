@@ -6,6 +6,7 @@
   border-radius: 0.25rem;
   background: var(--toast-warning);
   color: white;
+  z-index: 1;
 
   &.top {
     top: 1rem;
