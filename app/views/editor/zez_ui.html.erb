@@ -502,6 +502,5 @@
     </div>
 </template>
 
-<script src="/zez-ui/js/overpy.min.js"></script>
-
+<%= javascript_include_tag "/zez-ui/js/overpy.min.js?v=2" %> <!-- TODO: Add actual cache buster -->
 <%= javascript_pack_tag "zez-ui.js", "data-turbolinks-track": "reload", defer: false %>
