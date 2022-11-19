@@ -1536,7 +1536,7 @@ var app = new Vue({
         createNewProject: async function(projectName) {
             const response = await new FetchRails("/projects/", {
                 project: {
-                    title: projectName || "<Untitled>",
+                    title: projectName || this.translate("untitledMode", this.workshopUiKw),
                     content_type: "zez_ui"
                 }
             }).post()
@@ -1558,7 +1558,7 @@ var app = new Vue({
         },
         setCurrentProject: async function(projectId) {
             if (projectId === null) {
-                projectId = await this.createNewProject("Untitled Project");
+                projectId = await this.createNewProject(this.translate("untitledMode", this.workshopUiKw));
             }
             this.currentProjectId = this.projects.filter(x => x.id === projectId)[0].id;
         },
@@ -1629,12 +1629,12 @@ var app = new Vue({
         },
         saveProject: async function() {
             if (!this.signedIn) {
-                console.warn("You are not signed in and your mode will not be saved. It is still copied to your clipboard.");
+                console.warn(this.translate("youAreNotSignedIn", this.workshopUiKw));
                 return;
             }
 
             if (!this.isOwner) {
-                console.warn("You do not own this project and your changes will not be saved. It is still copied to your clipboard.");
+                console.warn(this.translate("youDoNotOwnThisProject", this.workshopUiKw));
                 return;
             }
 
@@ -1651,12 +1651,12 @@ var app = new Vue({
 
             const response = await new FetchRails("/projects/" + this.currentProjectId, {
                 project: {
-                    title: this.customGameSettings?.main?.modeName || "<Untitled mode>",
+                    title: this.customGameSettings?.main?.modeName || this.translate("untitledMode", this.workshopUiKw),
                     content: content,
                 },
             }).post({ method: "put" })
 
-            if (!response) console.error("Error when saving, try again")
+            if (!response) console.error(this.translate("errorWhenSaving", this.workshopUiKw))
         },
         loadUiSettings: async function() {
             if (localStorage.uiSettings) {
