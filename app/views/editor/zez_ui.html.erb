@@ -8,12 +8,12 @@
 <div id="app-wrapper">
 <div id="app" class="<%= "signed-in" if current_user %>">
     <div class="sign-in-alert" v-if="!signedIn">
-        You are not signed in and nothing you do will be saved to your account.
-        <a href="/login">Please sign in</a>
+        {{ translate("modeWillNotBeSaved", workshopUiCustomKw) }}
+        <a href="/login">{{ translate("pleaseSignIn", workshopUiCustomKw) }}</a>
     </div>
 
     <div class="sign-in-alert top" v-if="!isOwner">
-        You do not own this project, changes will not be saved.
+        {{ translate("youDoNotOwnThisProject2", workshopUiCustomKw) }}
     </div>
 
     <div id="workshop-title" class="font-bignoodle">{{ translate("zezWorkshopUiRecreation", workshopUiCustomKw) }}</div>
