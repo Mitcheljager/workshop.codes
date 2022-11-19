@@ -1509,7 +1509,7 @@ var app = new Vue({
 
             if (projects.length === 0) {
                 //If user has no projects, create a project for them
-                this.createNewProject("Untitled");
+                this.createNewProject(this.translate("untitledMode", this.workshopUiCustomKw));
             }
 
             const urlParams = new URLSearchParams(window.location.search);
@@ -1536,7 +1536,7 @@ var app = new Vue({
         createNewProject: async function(projectName) {
             const response = await new FetchRails("/projects/", {
                 project: {
-                    title: projectName || this.translate("untitledMode", this.workshopUiKw),
+                    title: projectName || this.translate("untitledMode", this.workshopUiCustomKw),
                     content_type: "zez_ui"
                 }
             }).post()
@@ -1558,7 +1558,7 @@ var app = new Vue({
         },
         setCurrentProject: async function(projectId) {
             if (projectId === null) {
-                projectId = await this.createNewProject(this.translate("untitledMode", this.workshopUiKw));
+                projectId = await this.createNewProject(this.translate("untitledMode", this.workshopUiCustomKw));
             }
             this.currentProjectId = this.projects.filter(x => x.id === projectId)[0].id;
         },
@@ -1629,12 +1629,12 @@ var app = new Vue({
         },
         saveProject: async function() {
             if (!this.signedIn) {
-                console.warn(this.translate("youAreNotSignedIn", this.workshopUiKw));
+                console.warn(this.translate("youAreNotSignedIn", this.workshopUiCustomKw));
                 return;
             }
 
             if (!this.isOwner) {
-                console.warn(this.translate("youDoNotOwnThisProject", this.workshopUiKw));
+                console.warn(this.translate("youDoNotOwnThisProject", this.workshopUiCustomKw));
                 return;
             }
 
@@ -1651,12 +1651,12 @@ var app = new Vue({
 
             const response = await new FetchRails("/projects/" + this.currentProjectId, {
                 project: {
-                    title: this.customGameSettings?.main?.modeName || this.translate("untitledMode", this.workshopUiKw),
+                    title: this.customGameSettings?.main?.modeName || this.translate("untitledMode", this.workshopUiCustomKw),
                     content: content,
                 },
             }).post({ method: "put" })
 
-            if (!response) console.error(this.translate("errorWhenSaving", this.workshopUiKw))
+            if (!response) console.error(this.translate("errorWhenSaving", this.workshopUiCustomKw))
         },
         loadUiSettings: async function() {
             if (localStorage.uiSettings) {
