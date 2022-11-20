@@ -190,6 +190,7 @@ function findMissingSemicolons(content) {
   let escaped = false
   let bracketCount = 0
   let inString = false
+  let inComment = false
   let parenthesisCount = 0
 
   for(let i = 0; i < content.length; i++) {
@@ -219,6 +220,16 @@ function findMissingSemicolons(content) {
       continue
     }
 
+    if (content[i] == "/" && content[i] == "/") {
+      inComment = true
+      continue
+    }
+
+    if (inComment && content[i] == "\n") {
+      inComment = false
+      continue
+    }
+
     if (content[i] == "r" && content[i + 1] == "u"  && content[i + 2] == "l"  && content[i + 3] == "e"  && content[i + 4] == "(") { // This is dumb
       inRule = true
       continue
@@ -236,6 +247,7 @@ function findMissingSemicolons(content) {
 
     if (!inRule) continue
     if (inString) continue
+    if (inComment) continue
     if (parenthesisCount) continue
 
     if (content[i] == "{") {
