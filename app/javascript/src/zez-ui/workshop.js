@@ -483,11 +483,11 @@ var app = new Vue({
                 optimizeForSize = true;
             }
             activatedExtensions = this.activatedExtensions;
+            globalSuppressedWarnings = this.uiSettings.disabledWarnings.split(",").map(x => x.trim());
             compileCustomGameSettings(structuredClone(this.customGameSettings));
             globalVariables = structuredClone(this.globalVariables).filter(x => x.name !== defaultVarNames[x.index]);
             playerVariables = structuredClone(this.playerVariables).filter(x => x.name !== defaultVarNames[x.index]);
             subroutines = structuredClone(this.subroutines).filter(x => x.name !== defaultSubroutineNames[x.index]);
-            globalSuppressedWarnings = this.uiSettings.disabledWarnings.split(",").map(x => x.trim());
 
             return compileRules(rules)
 
