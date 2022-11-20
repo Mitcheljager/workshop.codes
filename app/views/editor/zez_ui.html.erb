@@ -329,7 +329,7 @@
                             <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="uiAvailableSettings.language.map(x => ({code: x, label: translate('setting-language-'+x, workshopUiCustomKw)}))" :reduce="x => x.code" v-model="decompilationLanguage">
                         </div>
                     </div>
-                    <p>{{ translate("note1", workshopUiCustomKw) }}<br>{{ translate("note2", workshopUiCustomKw) }}</p>
+                    <p>{{ translate("note2", workshopUiCustomKw) }}</p>
                 </template>
             </div>
             <div class="edit-buttons">
