@@ -12,6 +12,7 @@ export function OWLanguageLinter(view) {
   findMissingClosingCharacters(content)
   findIncorrectArgsLength(content)
   findMissingQuotes(content)
+  findMissingSemicolons(content)
   checkMixins(content)
 
   return diagnostics
@@ -76,7 +77,7 @@ function findIncorrectArgsLength(content) {
   const matches = []
   let match
   let index = 0
-  while ((match = phraseIdentifier.exec(content)) != null && index < 10000) {
+  while ((match = phraseIdentifier.exec(content)) != null && index < 10_000) {
     matches.push({ match: match[0], index: match.index })
     index++
   }
@@ -181,5 +182,117 @@ function checkMixins(content) {
         message: error.message
       })
     }
+  }
+}
+
+function findMissingSemicolons(content) {
+  let inRule = false
+  let escaped = false
+  let bracketCount = 0
+  let inString = false
+  let parenthesisCount = 0
+
+  for(let i = 0; i < content.length; i++) {
+    if (i > 10_000) {
+      diagnostics.push({
+        from: i - 1,
+        to: i,
+        severity: "warning",
+        message: "Content too large, no longer finding missing semicolons"
+      })
+
+      return
+    }
+
+    if (escaped) {
+      escaped = false
+      continue
+    }
+
+    if (content[i] == "\\") {
+      escaped = true
+      continue
+    }
+
+    if (content[i] == "\"") {
+      inString = !inString
+      continue
+    }
+
+    if (content[i] == "r" && content[i + 1] == "u"  && content[i + 2] == "l"  && content[i + 3] == "e"  && content[i + 4] == "(") { // This is dumb
+      inRule = true
+      continue
+    }
+
+    if (content[i] == "(") {
+      parenthesisCount++
+      continue
+    }
+
+    if (content[i] == ")") {
+      parenthesisCount--
+      continue
+    }
+
+    if (!inRule) continue
+    if (inString) continue
+    if (parenthesisCount) continue
+
+    if (content[i] == "{") {
+      bracketCount++
+      continue
+    }
+
+    if (content[i] == "}") {
+      bracketCount--
+      if (bracketCount <= 0) inRule = false
+      continue
+    }
+
+    if (content[i] == "\n" && content[i - 1] != ";") {
+      if (content[i - 1] == "{") continue
+      if (content[i - 1] == "}") continue
+
+      const leadingNonEmpty = findFirstNonEmptyCharacter(content.slice(0, i).split("").reverse().join("")) // Reverse all content leading up to current i
+      if (leadingNonEmpty == "{" || leadingNonEmpty == "}"  || leadingNonEmpty == "\"") continue
+      if (findOpenBeforeClose(content.slice(i, content.length), "{", "}")) continue
+      if (findFirstNonEmptyCharacter(content.slice(i, content.length)) == "[") continue
+
+      diagnostics.push({
+        from: i - 1,
+        to: i,
+        severity: "error",
+        message: "Missing semicolon",
+        actions: [{
+          name: "Insert Semicolon",
+          apply(view, from, to) {
+            view.dispatch({
+              changes: { from, to, insert: `${ content[i - 1] };` }
+            })
+          }
+        }]
+      })
+    }
+  }
+}
+
+function findFirstNonEmptyCharacter(content) {
+  for(let i = 0; i < content.length; i++) {
+    if ((/\s/).test(content[i])) continue
+    return content[i]
+  }
+}
+
+function findOpenBeforeClose(content, open, close) {
+  let foundOpen = false
+  let foundClose = false
+
+  for(let i = 0; i < content.length; i++) {
+    if ((/\s/).test(content[i])) continue
+    if (content[i] == close) foundClose = true
+    if (content[i] == open) foundOpen = true
+
+    if (foundClose && !foundOpen) return false
+    if (foundOpen && !foundClose) return true
   }
 }
