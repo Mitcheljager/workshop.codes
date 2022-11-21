@@ -18,6 +18,8 @@
   export let actions
   export let constants
   export let defaults
+  export let heroes
+  export let maps
   export let _projects
   export let _isSignedIn = false
 
@@ -35,14 +37,16 @@
     const mappedValues = objectToKeyword(values, "text")
     const mappedActions = objectToKeyword(actions, "function")
     const mappedConstants = objectToKeyword(constants.map(c => Object.values(c)).flat(1), "constant")
+    const mappedHeroes = objectToKeyword(heroes, "text")
+    const mappedMaps = objectToKeyword(maps, "text")
 
-    return [...mappedValues, ...mappedActions, ...mappedConstants]
+    return [...mappedValues, ...mappedActions, ...mappedConstants, ...mappedHeroes, ...mappedMaps]
   }
 
   function objectToKeyword(obj, keywordType) {
     return Object.values(obj).map(v => {
       const params = {
-        label: v["en-US"],
+        label: v["en-US"] || v["en"],
         type: keywordType,
         info: v.description,
         args_length: v.args?.length || 0
