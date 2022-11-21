@@ -266,7 +266,7 @@ function findMissingSemicolons(content) {
       if (content[i - 1] == "}") continue
 
       const leadingNonEmpty = findFirstNonEmptyCharacter(content.slice(0, i).split("").reverse().join("")) // Reverse all content leading up to current i
-      if (leadingNonEmpty == "{" || leadingNonEmpty == "}"  || leadingNonEmpty == "\"") continue
+      if (leadingNonEmpty == "{" || leadingNonEmpty == "}" || leadingNonEmpty == "\"" || leadingNonEmpty == "\n") continue
       if (findOpenBeforeClose(content.slice(i, content.length), "{", "}")) continue
       if (findFirstNonEmptyCharacter(content.slice(i, content.length)) == "[") continue
 
@@ -290,6 +290,7 @@ function findMissingSemicolons(content) {
 
 function findFirstNonEmptyCharacter(content) {
   for(let i = 0; i < content.length; i++) {
+    if (content[i] == "\n") return content[i]
     if ((/\s/).test(content[i])) continue
     return content[i]
   }
