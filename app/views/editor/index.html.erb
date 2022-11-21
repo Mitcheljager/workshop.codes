@@ -9,6 +9,7 @@
 <%= svelte_component "Editor", {
     values: @values,
     actions: @actions,
+    constants: @constants,
     defaults: @defaults,
     _projects: @projects,
     _isSignedIn: current_user.present?

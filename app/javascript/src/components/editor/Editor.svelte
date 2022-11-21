@@ -16,6 +16,7 @@
 
   export let values
   export let actions
+  export let constants
   export let defaults
   export let _projects
   export let _isSignedIn = false
@@ -33,8 +34,9 @@
   function parseKeywords() {
     const mappedValues = objectToKeyword(values, "text")
     const mappedActions = objectToKeyword(actions, "function")
+    const mappedConstants = objectToKeyword(constants.map(c => Object.values(c)).flat(1), "constant")
 
-    return [...mappedValues, ...mappedActions]
+    return [...mappedValues, ...mappedActions, ...mappedConstants]
   }
 
   function objectToKeyword(obj, keywordType) {
