@@ -56,6 +56,7 @@
         indentUnit.of("    "),
         keymap.of([
           { key: "Tab", run: tabIndent },
+          { key: "Shift-Tab", run: tabIndent },
           { key: "Enter", run: autoIndentOnEnter }
         ]),
         EditorView.updateListener.of((state) => {
@@ -106,7 +107,9 @@
     return true
   }
 
-  function tabIndent({ state, dispatch, selection }) {
+  function tabIndent({ state, dispatch }) {
+    const { shiftKey } = event
+
     if (element.querySelector(".cm-tooltip-autocomplete")) return true
 
     const changes = state.changeByRange(range => {
@@ -114,7 +117,7 @@
 
       let insert = ""
 
-      if (from == to) {
+      if (from == to && !shiftKey) {
         const previousIndent = getIntendForLine(state, from - 1)
         const currentIndent = getIntendForLine(state, from)
 
@@ -123,12 +126,32 @@
           for (let i = 0; i < previousIndent - 1; i++) { insert += "\t" }
         }
 
-        return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
+        return {
+          changes: { from, to, insert },
+          range: EditorSelection.cursor(from + insert.length)
+        }
       } else {
         let insert = view.state.doc.toString().substring(line.from, to)
-        insert = "\t" + insert.replaceAll("\n", "\n\t")
 
-        return { changes: { from: line.from, to, insert }, range: EditorSelection.range(from + 1, to + 1) }
+        const originalLength = insert.length
+        const leadingWhitespaceLength = insert.search(/\S/)
+
+        if (shiftKey) {
+          if (!/^\s/.test(insert[0]) && !insert.includes("\n\t")) return { range: EditorSelection.range(from, to) }
+
+          insert = insert.replaceAll("\n\t", "\n")
+                         .substring(1, insert.length)
+        } else {
+          insert = "\t" + insert.replaceAll("\n", "\n\t")
+        }
+
+        const fromModifier = insert.search(/\S/) - leadingWhitespaceLength
+        const toModifier = insert.length - originalLength
+
+        return {
+          changes: { from: line.from, to, insert },
+          range: EditorSelection.range(from + fromModifier, to + toModifier)
+        }
       }
     })
 
@@ -139,6 +162,8 @@
   }
 
   function getIntendForLine(state, line) {
+    line = Math.max(line, 0)
+
     const spaces = /^\s*/.exec(state.doc.lineAt(line).text)?.[0].length
     const tabs = /^\t*/.exec(state.doc.lineAt(line).text)?.[0].length
     return Math.floor(spaces / 4) + tabs

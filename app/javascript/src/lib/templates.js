@@ -1,87 +1,87 @@
 export const templates = Object.freeze({
   RuleGlobal: `rule("Rule Name")
 {
-    event
-    {
-        Ongoing - Global;
-    }
+	event
+	{
+		Ongoing - Global;
+	}
 
-    conditions
-    {
+	conditions
+	{
 
-    }
+	}
 
-    actions
-    {
+	actions
+	{
 
-    }
+	}
 }`,
   RuleEachPlayer: `rule("Rule Name")
 {
-    event
-    {
-        Ongoing - Each Player;
-        All;
-        All;
-    }
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
 
-    conditions
-    {
+	conditions
+	{
 
-    }
+	}
 
-    actions
-    {
+	actions
+	{
 
-    }
+	}
 }`,
   Subroutine: `rule("Rule Name")
 {
-    event
-    {
-        Subroutine;
-        YourSubroutineName;
+	event
+	{
+		Subroutine;
+		YourSubroutineName;
     }
 
-    actions
-    {
+	actions
+	{
 
-    }
+	}
 }`,
   Settings: `settings
 {
-    main
-    {
-        Description: "Description of your mode (Made using the Workshop.codes script editor)"
-        Mode Name: "Name of your mode"
-    }
+	main
+	{
+		Description: "Description of your mode (Made using the Workshop.codes script editor)"
+		Mode Name: "Name of your mode"
+	}
 
-    lobby
-    {
-        Allow Players Who Are In Queue: Yes
-        Match Voice Chat: Enabled
-    }
+	lobby
+	{
+		Allow Players Who Are In Queue: Yes
+		Match Voice Chat: Enabled
+	}
 
-    modes
-    {
-        Skirmish
-        {
-            enabled maps
-            {
-               Workshop Island 0
-            }
-        }
+	modes
+	{
+		Skirmish
+		{
+			enabled maps
+			{
+				Workshop Island 0
+			}
+		}
 
-        General
-        {
-        }
-    }
+		General
+		{
+		}
+	}
 }`,
   Mixin: `// Mixins allow you to re-use a bit of code in any place you wish
 // They are declared using "@mixin mixinName()"
 @mixin mixinName()
 {
-    Global.value = 1;
+	Global.value = 1;
 }
 
 // They can be included in any location using "@include mixinName()"
