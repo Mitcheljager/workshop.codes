@@ -91,7 +91,7 @@
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
 
-      const indent = getsIntendForLine(state, from)
+      const indent = getIntendForLine(state, from)
       let insert = "\n"
       for (let i = 0; i < indent; i++) { insert += "\t" }
 
@@ -106,28 +106,39 @@
     return true
   }
 
-  function tabIndent({ state, dispatch }) {
+  function tabIndent({ state, dispatch, selection }) {
     if (element.querySelector(".cm-tooltip-autocomplete")) return true
 
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
 
-      const previousIndent = getsIntendForLine(state, from - 1)
-      const currentIndent = getsIntendForLine(state, from)
-      let insert = "\t"
+      let insert = ""
 
-      if (currentIndent < previousIndent) {
-        for (let i = 0; i < previousIndent - 1; i++) { insert += "\t" }
+      if (from == to) {
+        const previousIndent = getIntendForLine(state, from - 1)
+        const currentIndent = getIntendForLine(state, from)
+
+        insert = "\t"
+        if (currentIndent < previousIndent) {
+          for (let i = 0; i < previousIndent - 1; i++) { insert += "\t" }
+        }
+
+        return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
+      } else {
+        let insert = view.state.doc.toString().substring(line.from, to)
+        insert = "\t" + insert.replaceAll("\n", "\n\t")
+
+        return { changes: { from: line.from, to, insert }, range: EditorSelection.range(from + 1, to + 1) }
       }
-
-      return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
     })
 
     dispatch(state.update(changes, { scrollIntoView: true, userEvent: "input" }))
+    dispatch({ selection: EditorSelection.create(changes.selection.ranges) })
+
     return true
   }
 
-  function getsIntendForLine(state, line) {
+  function getIntendForLine(state, line) {
     const spaces = /^\s*/.exec(state.doc.lineAt(line).text)?.[0].length
     const tabs = /^\t*/.exec(state.doc.lineAt(line).text)?.[0].length
     return Math.floor(spaces / 4) + tabs
