@@ -949,7 +949,7 @@ var app = new Vue({
             } else if (rule.ruleAttributes.event === "__subroutine__") {
                 delete rule.ruleAttributes.eventTeam;
                 delete rule.ruleAttributes.eventPlayer;
-                this.$set(rule.ruleAttributes, "subroutineName", this.subroutines[0].name);
+                this.$set(rule.ruleAttributes, "subroutineName", this.subroutines[0].index);
             } else {
                 delete rule.ruleAttributes.subroutineName;
                 if (!rule.ruleAttributes.eventTeam) {
