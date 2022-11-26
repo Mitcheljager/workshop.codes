@@ -54,8 +54,14 @@
 }
 
 @keyframes fade-in-search {
-  from { opacity: 0 }
-  to { opacity: 1 }
+  from {
+    max-width: 100px;
+    opacity: 0
+  }
+
+  to {
+    max-width: calc(100vw - 8rem);
+  }
 }
 
 .header__search {
@@ -76,9 +82,10 @@
       display: block;
       position: absolute;
       top: 6px;
-      left: $margin / 3;
-      width: calc(100vw - 9.5rem);
+      right: 5.5rem;
+      width: calc(100vw - 8rem);
       z-index: 10;
+      transform-origin: right center;
       animation: fade-in-search 150ms;
 
       .is-sticky & {
@@ -86,7 +93,6 @@
         top: 0;
         left: 0;
         margin-right: auto;
-        width: calc(100vw - 8rem);
         transition: width 200ms;
 
         input {
