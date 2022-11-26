@@ -137,10 +137,9 @@
         const leadingWhitespaceLength = insert.search(/\S/)
 
         if (shiftKey) {
-          if (!/^\s/.test(insert[0]) && !insert.includes("\n\t")) return { range: EditorSelection.range(from, to) }
+          if (!/^\s/.test(insert[0]) && !(insert.includes("\n ") || insert.includes("\n\t"))) return { range: EditorSelection.range(from, to) }
 
-          insert = insert.replaceAll("\n\t", "\n")
-            .substring(1, insert.length)
+          insert = insert.replaceAll(/\n[ \t]/g, "\n").substring(insert.search(/\S/) ? 1 : 0, insert.length)
         } else {
           insert = "\t" + insert.replaceAll("\n", "\n\t")
         }
