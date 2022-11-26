@@ -66,10 +66,16 @@
   }
 }
 
+@mixin motion() {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}
+
 @mixin focus-visible-outline($prepend: '') {
   outline-offset: 0;
 
-  @media (prefers-reduced-motion: no-preference) {
+  @include motion {
     transition: outline-offset 150ms;
   }
 

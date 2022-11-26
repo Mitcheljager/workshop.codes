@@ -48,7 +48,10 @@
       height: 100vh;
       background: $bg-darker;
       z-index: 110;
-      animation: fade-in-header-content 200ms;
+
+      @include motion {
+        animation: fade-in-header-content 200ms;
+      }
     }
   }
 }
@@ -86,14 +89,20 @@
       width: calc(100vw - 8rem);
       z-index: 10;
       transform-origin: right center;
-      animation: fade-in-search 150ms;
+
+      @include motion {
+        animation: fade-in-search 150ms;
+      }
 
       .is-sticky & {
         position: relative;
         top: 0;
         left: 0;
         margin-right: auto;
-        transition: width 200ms;
+
+        @include motion {
+          transition: width 200ms;
+        }
 
         input {
           --height: #{$search-height - 4px};
