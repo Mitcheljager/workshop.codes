@@ -47,7 +47,7 @@
       width: 100%;
       height: 100vh;
       background: $bg-darker;
-      z-index: 100;
+      z-index: 110;
       animation: fade-in-header-content 200ms;
     }
   }
@@ -61,7 +61,6 @@
 .header__search {
   display: none;
   position: relative;
-  margin: 0 $margin / 8 0;
 
   @include media-min(sm) {
     display: block;
@@ -76,17 +75,41 @@
     @media (max-width: map-get($media-min-widths, sm) - 1) {
       display: block;
       position: absolute;
-      top: $header-height;
-      left: 0;
-      width: calc(100% - 1rem);
+      top: 6px;
+      left: $margin / 3;
+      width: calc(100vw - 9.5rem);
       z-index: 10;
       animation: fade-in-search 150ms;
+
+      .is-sticky & {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-right: auto;
+        width: calc(100vw - 8rem);
+        transition: width 200ms;
+
+        input {
+          --height: #{$search-height - 4px};
+        }
+      }
+    }
+  }
+
+  &--mobile {
+    @include media-min(sm) {
+      display: none;
     }
   }
 }
 
 .header__search-trigger {
-  @extend .navigation-trigger;
+  padding-left: .5rem;
+  color: white;
+  font-size: 32px;
+  line-height: 1.2em;
+  font-weight: bolder;
+  text-decoration: none;
 
   @include media-min(sm) {
     display: none;
@@ -101,69 +124,30 @@
 
 .header__create {
   margin-left: auto;
+  margin-right: .5rem;
   white-space: nowrap;
 
   @include media-min(sm) {
     margin-left: 0;
+    margin-right: 0;
   }
 }
 
-.action-header {
-  @include media-min(md) {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  h1,
-  h2 {
-    margin-bottom: $margin / 6;
-
-    @include media-min(md) {
-      margin-bottom: $margin / 3;
-      line-height: 1em;
-    }
-  }
-
-  &.heading {
-    margin-bottom: $margin / 2;
-
-    @include media-min(md) {
-      margin-bottom: $margin;
-    }
-  }
-}
-
-.action-header__actions {
+.header__mobile-sticky {
   display: flex;
-  color: $text-color-dark;
+  flex-wrap: nowrap;
+  right: $margin / 3;
+  border-radius: $border-radius / 2;
+  transition: background-color 200ms, box-shadow 200ms;
+  z-index: 100;
 
-  @include media-min(md) {
-    text-align: right;
-  }
+  &.is-sticky {
+    background: rgba($black, 0.25);
+    box-shadow: 0 0 0 .25rem rgba($black, 0.25);
+    width: auto !important;
 
-  span {
-    margin-right: .5em;
-
-    @include media-min(md) {
-      margin-right: 0;
+    @include media-min(sm) {
+      display: none;
     }
-  }
-}
-
-.action-header__action {
-  box-shadow: inset 0 -3px 0 $border-color;
-  padding: $margin / 3 .5rem;
-  margin-left: .25rem;
-  font-size: 1rem;
-  text-decoration: none;
-
-  @include hover-stack {
-    color: $white;
-  }
-
-  &--active {
-    box-shadow: inset 0 -3px 0 $primary;
-    color: $white;
   }
 }

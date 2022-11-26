@@ -3,18 +3,20 @@
   z-index: 10;
 
   input:not([type="submit"]) {
-    height: $search-height;
+    height: var(--height, $search-height);
     padding: 0 $search-height / 2;
     padding-right: 4rem;
     border-radius: $search-height / 2;
     transition: border-radius 100ms;
     transition-delay: 180ms;
-    box-shadow: none;
+    background: $bg-darker;
 
     @include media-min(sm) {
       padding-right: 6rem;
       width: 22.5vw;
       min-width: 280px;
+      box-shadow: none;
+      background: $bg-dark;
     }
 
     &:placeholder-shown {

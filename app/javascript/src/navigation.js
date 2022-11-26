@@ -17,8 +17,8 @@ function toggleNavigation(event) {
 function toggleSearch(event) {
   event.preventDefault()
 
-  const navigationElement = document.querySelector("[data-role='search']")
-  navigationElement.classList.toggle("header__search--is-active")
+  const searchElement = document.querySelector("[data-role='search']")
+  searchElement.classList.toggle("header__search--is-active")
 
-  navigationElement.querySelector("input[name='query']").focus()
+  searchElement.querySelector("input[name='query']").focus()
 }

@@ -2,10 +2,10 @@
   <% if current_user %>
     <%= svelte_component "Notifications", { viewAllPath: notifications_path } %>
 
-    <div class="dropdown" data-dropdown>
+    <div class="dropdown lg-down:dropup" data-dropdown>
       <%= link_to current_user.clean_username, account_path, class: "user-block__action mbl:mr-1/16 mb-1/4 mbl:mb-0", data: { action: "toggle-dropdown" } %>
 
-      <div class="dropdown__content lg-down:dropup" data-dropdown-content>
+      <div class="dropdown__content" data-dropdown-content>
         <% user_menu_items.each do |menu_item| %>
           <%= link_to menu_item[:title],
               menu_item[:url],

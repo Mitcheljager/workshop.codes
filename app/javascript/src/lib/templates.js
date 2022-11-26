@@ -41,7 +41,7 @@ export const templates = Object.freeze({
 	{
 		Subroutine;
 		YourSubroutineName;
-    }
+  }
 
 	actions
 	{

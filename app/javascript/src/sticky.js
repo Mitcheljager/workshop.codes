@@ -1,37 +1,47 @@
 export function bind() {
-  const element = document.querySelector("[data-role~='sticky']")
-
-  if (element) window.addEventListener("scroll", stickyScroll)
+  window.addEventListener("scroll", stickyScroll, { passive: true })
+  stickyScroll()
 }
 
 export function destroy() {
-  window.removeEventListener("scroll", stickyScroll)
+  window.removeEventListener("scroll", stickyScroll, { passive: true })
 }
 
 function stickyScroll() {
-  const element = document.querySelector("[data-role~='sticky']")
-  const scrollElement = element.dataset.sticky == "true" ? document.querySelector("[data-role='sticky-placeholder']") : element
-  const topOffset = scrollElement.getBoundingClientRect().top
-  const scrollPosition = window.scrollY
-  const documentOffset = topOffset + scrollPosition
+  const elements = document.querySelectorAll("[data-role~='sticky']")
 
-  if (documentOffset - scrollPosition <= 0) setSticky(element)
-  if (documentOffset - scrollPosition > 0) setNotSticky(element)
+  elements.forEach(element => {
+    if ((element.dataset.stickyDesktopOnly == "true" && window.innerWidth < 640) ||
+        (element.dataset.stickyMobileOnly == "true" && window.innerWidth >= 640)) {
+      setNotSticky(element)
+      return
+    }
+
+    const scrollElement = element.dataset.sticky == "true" ? document.querySelector("[data-role='sticky-placeholder']") : element
+    const topOffset = scrollElement.getBoundingClientRect().top
+    const scrollPosition = window.scrollY
+    const documentOffset = topOffset + scrollPosition
+    const stickyOffset = parseInt(element.dataset.stickyOffset || 0)
+
+    if (documentOffset - scrollPosition - stickyOffset <= 0) setSticky(element, stickyOffset)
+    else setNotSticky(element)
+  })
 }
 
-function setSticky(element) {
+function setSticky(element, offset) {
   if (element.dataset.sticky == "true") return
   element.dataset.sticky = "true"
 
   const placeholderElement = document.createElement("div")
   placeholderElement.style.height = `${ element.offsetHeight }px`
+  placeholderElement.style.width = `${ element.offsetWidth }px`
   placeholderElement.dataset.role = "sticky-placeholder"
   element.insertAdjacentElement("beforebegin", placeholderElement)
 
   element.style.width = `${ element.offsetWidth }px`
   element.style.position = "fixed"
-  element.style.top = 0
-  element.style.zIndex = 100
+  element.style.top = offset + "px"
+  element.classList.add("is-sticky")
 }
 
 function setNotSticky(element) {
@@ -42,4 +52,5 @@ function setNotSticky(element) {
   placeholderElement.remove()
 
   element.style = ""
+  element.classList.remove("is-sticky")
 }
