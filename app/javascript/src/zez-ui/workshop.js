@@ -1482,7 +1482,7 @@ var app = new Vue({
                         delete this.editedCustomGameSettings.heroes[team].enabledHeroes;
                     }
                 }
-                if (Object.keys(this.editedCustomGameSettings.heroes[team].length === 0)) {
+                if (Object.keys(this.editedCustomGameSettings.heroes[team]).length === 0) {
                     delete this.editedCustomGameSettings.heroes[team];
                 }
             }
