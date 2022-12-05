@@ -23,7 +23,7 @@
     display: grid;
     grid-template-columns: repeat(30, 100%);
     grid-gap: 0;
-    margin: 0 $margin / -4;
+    margin: 0 $margin / -8;
     overflow-x: hidden;
     padding-bottom: $margin / 1.5;
 
@@ -33,6 +33,7 @@
 
     @include media-min(md) {
       grid-template-columns: repeat(30, 33.33%);
+      margin: 0 $margin / -4;
     }
 
     > div > div {
@@ -42,9 +43,14 @@
     .card {
       display: flex;
       flex: 0 0 auto;
-      width: calc(100% - #{ $margin / 2 });
+      width: calc(100% - #{ $margin / 4 });
       height: 100%;
-      margin: 0 $margin / 4;
+      margin: 0 $margin / 8;
+
+      @include media-min(md) {
+        margin: 0 $margin / 4;
+        width: calc(100% - #{ $margin / 2 });
+      }
     }
 
     .card__code {
@@ -56,7 +62,11 @@
     display: grid;
 
     > div > div {
-      padding: 0 $margin / 4;
+      padding: 0 $margin / 8;
+
+      @include media-min(md) {
+        padding: 0 $margin / 4;
+      }
     }
 
     .card {
