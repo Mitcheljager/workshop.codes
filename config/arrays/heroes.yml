@@ -18,6 +18,13 @@
     en: Tank
     ko: 탱커
 -
+  en: Ramattra
+  ko: 라마트라
+  overwatch_2: true
+  category:
+    en: Tank
+    ko: 탱커
+-
   en: Reinhardt
   ko: 라인하르트
   category:
