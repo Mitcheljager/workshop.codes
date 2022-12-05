@@ -77,6 +77,14 @@
     ko: 호위
   slug: route-66
 -
+  en: Shambali Monastery
+  ko: 샴발리 수도원
+  overwatch_2: true
+  type:
+    en: Escort
+    ko: 호위
+  slug: shambali-monastery
+-
   en: "Watchpoint: Gibraltar"
   ko: "감시 기지: 지브롤터"
   type:
