@@ -17,7 +17,7 @@ function toggleNavigation(event) {
 function toggleSearch(event) {
   event.preventDefault()
 
-  const searchElement = document.querySelector("[data-role='search']")
+  const searchElement = document.querySelector("[data-role~='search-popout']")
   searchElement.classList.toggle("header__search--is-active")
 
   searchElement.querySelector("input[name='query']").focus()

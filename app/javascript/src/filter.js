@@ -21,20 +21,20 @@ export function addFilter(event) {
 function buildFilterPath(event) {
   event.preventDefault()
 
-  const linkElement = document.querySelector("[data-role='filter-link']")
-  linkElement.innerHTML = "<div class='spinner spinner--small'></div>"
+  const parent = event.target.closest("[data-role~='search']")
+  event.target.innerHTML = "<div class='spinner spinner--small'></div>"
 
   let buildPath = {
-    "category": filterValue("categories"),
-    "hero": filterValue("heroes"),
-    "map": filterValue("maps"),
-    "from": filterValue("from"),
-    "to": filterValue("to"),
-    "author": filterValue("author"),
-    "players": filterValue("players"),
-    "search": encodeURIComponent(document.querySelector("input[name='query']").value),
-    "sort": filterValue("sort"),
-    "language": filterValue("language")
+    "category": filterValue("categories", parent),
+    "hero": filterValue("heroes", parent),
+    "map": filterValue("maps", parent),
+    "from": filterValue("from", parent),
+    "to": filterValue("to", parent),
+    "author": filterValue("author", parent),
+    "players": filterValue("players", parent),
+    "search": encodeURIComponent(parent.querySelector("input[name='query']").value),
+    "sort": filterValue("sort", parent),
+    "language": filterValue("language", parent)
   }
 
   buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
@@ -44,8 +44,8 @@ function buildFilterPath(event) {
   window.location = `/${ currentLocale == "en" ? "" : currentLocale + "/" }search?${ buildPath }`
 }
 
-function filterValue(type) {
-  const element = document.querySelector(`[data-filter-type='${ type }']`)
+function filterValue(type, parent) {
+  const element = parent.querySelector(`[data-filter-type='${ type }']`)
   const value = element ? (element.dataset.value || "") : ""
 
   return value
