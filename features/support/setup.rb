@@ -1,5 +1,6 @@
 require 'factory_bot'
 require 'cucumber'
+require 'webdrivers'
 
 # Enable use of factory methods without needing to prefix FactoryBot in step definitions
 World(FactoryBot::Syntax::Methods)
