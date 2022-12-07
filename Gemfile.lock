@@ -81,8 +81,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ahoy_matey (4.1.0)
       activesupport (>= 5.2)
       device_detector
@@ -123,7 +123,7 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (11.1.3)
-    capybara (3.37.1)
+    capybara (3.38.0)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -136,7 +136,6 @@ GEM
       activesupport
     chart-js-rails (0.1.7)
       railties (> 3.1)
-    childprocess (4.1.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
@@ -343,10 +342,10 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
-    public_suffix (4.0.7)
+    public_suffix (5.0.1)
     puma (4.3.12)
       nio4r (~> 2.0)
-    racc (1.6.0)
+    racc (1.6.1)
     rack (2.2.4)
     rack-proxy (0.7.2)
       rack
@@ -391,7 +390,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
-    regexp_parser (2.5.0)
+    regexp_parser (2.6.1)
     render_async (2.1.11)
     reverse_markdown (2.1.1)
       nokogiri
@@ -433,8 +432,7 @@ GEM
       tilt (>= 1.1, < 3)
     scout_apm (5.2.0)
       parser
-    selenium-webdriver (4.4.0)
-      childprocess (>= 0.5, < 5.0)
+    selenium-webdriver (4.7.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -475,7 +473,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.0.0)
+    webdrivers (5.2.0)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
