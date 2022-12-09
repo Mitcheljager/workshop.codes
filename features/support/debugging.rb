@@ -10,7 +10,7 @@ end
 
 # `cucumber LAUNCHY=1` to open save screenshot after every step
 After do |scenario|
-  next unless (ENV['LAUNCHY'] || ENV['CI']) && scenario.failed?
+  next unless (ENV['LAUNCHY']) && scenario.failed?
   puts "Opening snapshot for #{scenario.name}"
   begin
     save_and_open_screenshot

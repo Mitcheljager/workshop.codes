@@ -73,7 +73,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get install libsqlite3-dev
-          sudo apt-get install firefox-geckodriver
+          sudo apt-get install firefox
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -93,4 +93,4 @@ jobs:
       - name: Cucumber
         run: |
           bundle exec rake db:test:prepare
-          bundle exec cucumber
+          TMPDIR=$HOME/tmp bundle exec cucumber
