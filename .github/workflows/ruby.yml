@@ -93,4 +93,4 @@ jobs:
       - name: Cucumber
         run: |
           bundle exec rake db:test:prepare
-          bundle exec cucumber
+          TMPDIR=$HOME/tmp bundle exec cucumber
