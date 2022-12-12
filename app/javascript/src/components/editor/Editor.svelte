@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, currentProject, items, sortedItems, projects, isSignedIn, completionsMap } from "../../stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap } from "../../stores/editor"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
@@ -133,7 +133,7 @@
     </div>
   </div>
 
-  {#if $currentProject}
+  {#if $currentProjectUUID}
     <div class="editor__aside">
       <div class="editor__scrollable">
         <div class="p-1/4 pt-0">

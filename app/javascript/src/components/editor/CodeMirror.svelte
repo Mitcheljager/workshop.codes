@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte"
+  import { onDestroy, onMount } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection } from "@codemirror/state"
@@ -8,7 +8,7 @@
   import { linter, lintGutter } from "@codemirror/lint"
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
-  import { currentItem, editorStates, items } from "../../stores/editor"
+  import { currentItem, editorStates, items, currentProjectUUID } from "../../stores/editor"
   import debounce from "../../debounce"
 
   export let completionsMap = []
@@ -17,13 +17,17 @@
   let view
   let currentId
 
+  $: if ($currentProjectUUID) $editorStates = {}
   $: if ($currentItem.id != currentId && view) updateEditorState()
+  $: console.log($editorStates)
 
   onMount(() => {
     view = new EditorView({
       parent: element
     })
   })
+
+  onDestroy(() => $editorStates = {})
 
   function updateEditorState() {
     if (currentId) $editorStates[currentId] = view.state
@@ -34,6 +38,11 @@
       view.setState($editorStates[currentId])
       return
     }
+
+    // Remove keys not present. Used when deleting items or when switching projects
+    Object.keys($editorStates).forEach(key => {
+      if (!$items.some(i => i.id == key)) delete $editorStates[key]
+    })
 
     $editorStates[currentId] = createEditorState($currentItem.content)
     view.setState($editorStates[currentId])

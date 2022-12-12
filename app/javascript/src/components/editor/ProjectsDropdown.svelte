@@ -21,8 +21,7 @@
     else if ($projects.length) fetchProject($projects[0].uuid)
   })
 
-  function fetchProject(uuid) {
-    $currentProjectUUID = null
+  async function fetchProject(uuid) {
     loading = true
 
     const baseUrl = "/projects/"
