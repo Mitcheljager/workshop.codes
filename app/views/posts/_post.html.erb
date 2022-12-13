@@ -29,17 +29,15 @@
           <% end %>
         </div>
 
-        <% if post.expired? %>
-          <div class="item__details-item">
-            <div class="tooltip">
-              ⚠ <%= t("post.expired.title") %>
+        <div class="item__details-item" title="<%= t("post.updated") %>: <%= post.last_revision_created_at %>">
+          <%= t("post.updated") %>:
 
-              <div class="tooltip__content">
-                <%= t("post.expired.tooltip_html") %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+          <% if post.last_revision_created_at.blank? %>
+            Draft
+          <% else %>
+            <time data-role="timeago timeago-static" datetime="<%= post.last_revision_created_at %>"></time>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </article>
