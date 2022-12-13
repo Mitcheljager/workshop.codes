@@ -230,6 +230,7 @@ ko:
     expired:
       title: 만료되었을 수 있음
       tooltip_html: <strong>이 코드는 6 개월이 넘었습니다.</strong> 이는 코드가 만료되어 더 이상 작동하지 않음을 의미 할 수 있습니다.
+    updated: 최종 업데이트
 
   comments:
     title: 코멘트

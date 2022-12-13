@@ -1,4 +1,5 @@
 import Rails from "@rails/ujs"
+import * as timeago from "./timeago.js"
 
 export function bind() {
   const element = document.querySelector("[data-role='infinite-scroll-marker']")
@@ -66,6 +67,8 @@ function getInfiniteScrollContent(element) {
         element.innerHTML = "Load more"
         element.setAttribute("data-url", requestUrlString)
       }
+
+      timeago.initialize()
     },
     error: (error) => {
       progressBar.setValue(1)

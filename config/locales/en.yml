@@ -272,6 +272,7 @@ en:
     expired:
       title: Possibly expired
       tooltip_html: <strong>This code is over 6 months old.</strong> This might mean the code has expired and will no longer function.
+    updated: Last updated
 
   comments:
     title: Comments
