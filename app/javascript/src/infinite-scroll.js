@@ -1,5 +1,5 @@
 import Rails from "@rails/ujs"
-import * as timeago from "timeago.js"
+import * as timeago from "./timeago.js"
 
 export function bind() {
   const element = document.querySelector("[data-role='infinite-scroll-marker']")
@@ -68,13 +68,7 @@ function getInfiniteScrollContent(element) {
         element.setAttribute("data-url", requestUrlString)
       }
 
-      // Initialize "Last updated" attribute in newly loaded items
-      const elements = document.querySelectorAll("[data-role~='timeago']")
-      if (elements.length) timeago.render(elements)
-
-      // Don't do live updating (too distracting)
-      const staticElements = Array.from(elements.values()).filter((element) => element.matches("[data-role~='timeago-static']"))
-      if (staticElements.length) staticElements.forEach((element) => timeago.cancel(element))
+      timeago.initialize()
     },
     error: (error) => {
       progressBar.setValue(1)

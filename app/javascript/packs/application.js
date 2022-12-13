@@ -69,7 +69,7 @@ document.addEventListener("turbolinks:load", function() {
   differenceViewer.render()
   getKoFiValue.render()
   numPlayersSlider.render()
-  timeago.render()
+  timeago.initialize()
 })
 
 document.addEventListener("turbolinks:before-cache", function() {
