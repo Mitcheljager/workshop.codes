@@ -10,21 +10,7 @@ Images should be losslessly compressed. SVG and WebP should be used wherever pos
 
 ## Setup
 
-_Please note; This isn't a comprehensive guide on how to install Ruby on Rails. If you're new to this platform, do your own Googling._
-
-1. Install Ruby 3.0 (use a version manager to make things easier [https://rvm.io/](https://rvm.io/) or just install it directly from [https://rubyinstaller.org/downloads/](https://rubyinstaller.org/downloads/))
-2. Install Rails
-3. Install NPM/Yarn [https://yarnpkg.com/](https://yarnpkg.com/)
-4. `bundle install` to install dependencies
-5. `yarn install` to install javascript dependencies
-6. `rake db:create db:migrate` to set up the database
-7. `rake db:seed` to seed the database
-8. `rails s` to start the server
-9. `ruby bin/webpack-dev-server` or `./bin/webpack-dev-server` to start Webpack.
-10. Everything should now be running at `localhost:3000`
-
-Optionally you can also install ElasticSearch, but the website will run fine without it (Except for search).
-To create indexes for ElasticSearch run `rake create_search_indexes`
+Follow [this Wiki page](https://github.com/EloHellEsports/workshop.codes/wiki/Local-Development:-Setup) to get started.
 
 ## Environment vars
 
