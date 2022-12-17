@@ -111,8 +111,8 @@
     {/if}
 
     <div class="editor__actions">
-      {#if $currentProject}
-        {#if !$currentProject.is_owner}
+      {#if $currentProjectUUID}
+        {#if !$currentProject?.is_owner}
           <div class="warning warning--orange br-1 align-self-center">
             You do not own this project and can not save
           </div>
@@ -120,13 +120,13 @@
 
         <Settings />
 
-        {#if isSignedIn && $currentProject.is_owner}
+        {#if isSignedIn && $currentProject?.is_owner}
           <ScriptImporter />
         {/if}
 
         <Compiler />
 
-        {#if isSignedIn && $currentProject.is_owner}
+        {#if isSignedIn && $currentProject?.is_owner}
           <Save />
         {/if}
       {/if}
