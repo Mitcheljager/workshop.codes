@@ -32,7 +32,7 @@
       },
       onDeselect: event => {
         event.item.classList.remove("sortable__multi-selected")
-      },
+      }
     })
   })
 
