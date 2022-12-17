@@ -19,7 +19,6 @@
 
   $: if ($currentProjectUUID) $editorStates = {}
   $: if ($currentItem.id != currentId && view) updateEditorState()
-  $: console.log($editorStates)
 
   onMount(() => {
     view = new EditorView({
