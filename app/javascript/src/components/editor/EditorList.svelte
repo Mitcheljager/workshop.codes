@@ -37,7 +37,6 @@
   })
 
   function updateOrder() {
-    console.log("update")
     const elements = document.querySelectorAll("[data-item-id]")
     elements.forEach((e, i) => {
       const id = e.dataset.itemId
