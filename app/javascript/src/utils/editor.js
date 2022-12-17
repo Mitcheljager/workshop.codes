@@ -65,7 +65,7 @@ export function splitArgumentsString(content) {
       commaIndexes.push(i)
   }
 
-  if (!commaIndexes.length) return content
+  if (!commaIndexes.length) return [content]
 
   const splitArguments = []
   splitArguments.push(content.substring(0, commaIndexes[0]))
