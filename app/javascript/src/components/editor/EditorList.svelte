@@ -25,22 +25,19 @@
       swapTreshhold: 0.25,
       multiDrag: true,
       multiDragKey: "ctrl",
+      onRemove: updateOrder,
+      onUpdate: updateOrder,
       onSelect: event => {
         if (isHoldingCtrl) event.items.forEach(item => item.classList.add("sortable__multi-selected"))
       },
       onDeselect: event => {
         event.item.classList.remove("sortable__multi-selected")
       },
-      onRemove: event => {
-        console.log("remove")
-      },
-      store: {
-        set: updateOrder
-      }
     })
   })
 
   function updateOrder() {
+    console.log("update")
     const elements = document.querySelectorAll("[data-item-id]")
     elements.forEach((e, i) => {
       const id = e.dataset.itemId
