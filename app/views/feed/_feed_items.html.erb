@@ -11,20 +11,9 @@
     <% end %>
 
     <% if @revisions.count == 20 %>
-      <% unless current_user && current_user.pagination_type != "infinite_scroll" %>
-        <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>" data-load-method="infinite-scroll"></div>
-      <% end %>
-
-      <% if current_user && current_user.pagination_type == "load_more" %>
-        <div data-role="load-more-posts-marker"></div>
-        <div class="flex justify-center">
-          <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-url="<%= request.original_url %>" data-load-method="load-more-button">Load more</div>
-        </div>
-      <% end %>
+      <div class="infinite-scroll" data-role="infinite-scroll-marker" data-url="<%= request.original_url %>" data-load-method="infinite-scroll"></div>
     <% end %>
   <% else %>
     <p>No results</p>
   <% end %>
 </div>
-
-<%= paginate @revisions if current_user && current_user.pagination_type == "pagination" %>

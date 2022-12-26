@@ -28,19 +28,4 @@
       <%= t "accessibility.edit.large_fonts.description" %>
     </p>
   </div>
-
-  <div class="well well--dark block">
-    <h4 class="mt-0 mb-1/4 text-base"><%= t "accessibility.edit.pagination_type.title" %></h4>
-
-    <div class="flex">
-      <%= button_to t("accessibility.edit.pagination_type.pagination"), update_accessibility_path, method: :patch, params: { user: { pagination_type: "pagination" } },
-                    class: "mr-1/8 button #{ "button--secondary" unless current_user.pagination_type == "pagination" }" %>
-
-      <%= button_to t("accessibility.edit.pagination_type.infinite_scroll"), update_accessibility_path, method: :patch, params: { user: { pagination_type: "infinite_scroll" } },
-                    class: "mr-1/8 button #{ "button--secondary" unless current_user.pagination_type == "infinite_scroll" }" %>
-
-      <%= button_to t("accessibility.edit.pagination_type.load_more_button"), update_accessibility_path, method: :patch, params: { user: { pagination_type: "load_more" } },
-                    class: "mr-1/8 button #{ "button--secondary" unless current_user.pagination_type == "load_more" }" %>
-    </div>
-  </div>
 <% end %>

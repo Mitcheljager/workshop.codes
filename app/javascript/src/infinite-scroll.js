@@ -6,7 +6,10 @@ export function bind() {
   const button = document.querySelector("[data-role='load-more-posts']")
 
   window.removeEventListener("scroll", isInfiniteScrollInView)
-  if (element) window.addEventListener("scroll", isInfiniteScrollInView)
+  if (element) {
+    window.addEventListener("scroll", isInfiniteScrollInView)
+    hideBackupPagination()
+  }
 
   if (!button) return
   button.removeAndAddEventListener("click", loadMorePosts)
@@ -23,7 +26,7 @@ function isInfiniteScrollInView() {
 
   if (element.dataset.reached == "true") return
 
-  if(position.top < window.innerHeight && position.bottom >= 0) {
+  if(position.top < window.innerHeight + 500 && position.bottom >= 0) {
     getInfiniteScrollContent(element)
     element.setAttribute("data-reached", true)
   }
@@ -86,4 +89,10 @@ function getInfiniteScrollContent(element) {
 
     }
   })
+}
+
+function hideBackupPagination() {
+  const element = document.querySelector("[data-role='infinite-scroll-backup-pagination']")
+  if (!element) return
+  element.remove()
 }
