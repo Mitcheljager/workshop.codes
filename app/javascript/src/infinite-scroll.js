@@ -1,5 +1,6 @@
 import Rails from "@rails/ujs"
 import * as timeago from "./timeago.js"
+import isCrawler from "./utils/is-crawler.js"
 
 export function bind() {
   const element = document.querySelector("[data-role='infinite-scroll-marker']")
@@ -77,8 +78,6 @@ function getInfiniteScrollContent(element) {
       progressBar.setValue(1)
       progressBar.hide()
 
-      console.log(element)
-
       const spinner = document.querySelector(".items")?.querySelector(".spinner")
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
@@ -109,6 +108,8 @@ function getInfiniteScrollContent(element) {
 }
 
 function hideBackupPagination() {
+  if (isCrawler()) return
+
   const element = document.querySelector("[data-role='infinite-scroll-backup-pagination']")
   if (!element) return
   element.remove()
