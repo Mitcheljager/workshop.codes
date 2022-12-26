@@ -6,7 +6,7 @@
     if (!button) {
       elements[elements.length - 1].insertAdjacentHTML("afterEnd", `
         <div class="flex justify-center">
-          <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-load-method="infinite-scroll" data-url="<%= request.original_url %>">An error occurred. Try again?</div>
+          <div class="mt-1/2 button button--secondary pr-1/1 pl-1/1" data-role="load-more-posts" data-load-method="load-more-button" data-url="<%= request.original_url %>">An error occurred. Try again?</div>
         </div>
       `)
     }

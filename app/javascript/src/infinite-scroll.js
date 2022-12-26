@@ -32,7 +32,7 @@ function isInfiniteScrollInView() {
   }
 }
 
-function loadMorePosts() {
+function loadMorePosts(event) {
   getInfiniteScrollContent(event.target)
 }
 
@@ -77,14 +77,31 @@ function getInfiniteScrollContent(element) {
       progressBar.setValue(1)
       progressBar.hide()
 
+      console.log(element)
+
       const spinner = document.querySelector(".items")?.querySelector(".spinner")
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
+        console.log("more button")
         element.innerHTML = "An error occurred. Try again?"
       } else if (element.dataset.loadMethod === "infinite-scroll") {
-        const button = document.querySelector("[data-role='load-more-posts']")
-        button.innerHTML = "An error occurred. Try again?"
-        if (button) button.removeAndAddEventListener("click", loadMorePosts)
+        let button = document.querySelector("[data-role='load-more-posts']")
+        if (!button) {
+          element.insertAdjacentHTML("afterEnd", `
+            <div class="flex justify-center">
+              <div
+                class="mt-1/2 button button--secondary pr-1/1 pl-1/1"
+                data-role="load-more-posts"
+                data-load-method="load-more-button"
+                data-url="${ requestUrl }">
+
+                An error occurred. Try again?
+              </div>
+            </div>
+          `)
+        }
+        button = document.querySelector("[data-role='load-more-posts']")
+        button.removeAndAddEventListener("click", loadMorePosts)
       }
 
     }
