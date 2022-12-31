@@ -13,9 +13,15 @@
   <% end %>
 <% end %>
 
-<div class="heading <%= "mt-1/1" if @collection.cover_image.attached? %>">
+<div class="heading <%= "mt-1/1" if @collection.cover_image.attached? %> <%= "mb-1/2" if @collection.description %>">
   <h1><%= @collection.title %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
 </div>
+
+<% if @collection.description %>
+  <div class="item__description mb-1/1">
+    <big><%= sanitize(markdown(@collection.description)) %></big>
+  </div>
+<% end %>
 
 <main class="items">
   <%= render "posts/posts" %>
