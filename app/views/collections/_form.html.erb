@@ -4,6 +4,24 @@
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Collection title" %>
   </div>
 
+  <div class="form-group mt-1/2">
+    <%= form.label :cover_image, "Cover image", class: "form-label" %>
+
+    <div class="cover-image well well--dark block">
+      <%= image_tag (@collection.cover_image.attached? ? rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) : "//:0"),
+                    data: { image_preview: "cover-image" },
+                    class: "img-fluid" %>
+    </div>
+
+    <%= form.file_field :cover_image,
+                        accept: "image/png, image/jpeg, image/jpg",
+                        data: { action: "image-preview", target: "cover-image" } %>
+
+    <p class="form-hint mt-1/4 mb-0">
+      Image will be processed to a 900x500 format. Max 2MB.
+    </p>
+  </div>
+
   <hr class="mt-1/2 mb-1/2" />
 
   <%= submit_tag "Save", class: "button mt-1/4" %>

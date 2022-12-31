@@ -89,6 +89,10 @@ strong {
   font-weight: bold;
 }
 
+[src*="//:0"] {
+  display: none;
+}
+
 .wrapper {
   position: relative;
   width: 100%;
