@@ -2,51 +2,81 @@
   <%= render "form_errors", errors: @collection.errors if @collection.errors.any? %>
 
   <div class="form-group">
-    <%= form.label :title, value: "Collection title", class: "form-label" %>
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Collection title" %>
   </div>
 
-  <div class="form-group mt-1/2">
-    <%= form.label :description, t("profile.form.description.label"), class: "form-label" %>
+  <div data-role="tabs" class="mb-1/2">
+    <nav class="tabs mt-1/2">
+      <%= link_to "Display", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "display" } %>
+      <%= link_to "Codes", "#", class: "tabs__item", data: { action: "set-tab", target: "codes" } %>
+    </nav>
 
-    <div class="form-hint">
-      Basic Markdown enabled. Limited to 1000 characters.
-    </div>
+    <div class="tabs-content tabs-content--active" data-tab="display">
+      <div class="form-group mt-1/2">
+        <%= form.label :description, t("profile.form.description.label"), class: "form-label" %>
 
-    <%= form.text_area :description, class: "form-input form-textarea form-textarea--small", maxlength: 1000 %>
-  </div>
+        <div class="form-hint">
+          Basic Markdown enabled. Limited to 1000 characters.
+        </div>
 
-  <div class="form-group-uneven mt-1/2">
-    <div class="well well--dark block">
-      <div class="checkbox">
-        <%= form.radio_button :display_type, :list %>
-        <%= form.label :display_type, "List", value: :list %>
+        <%= form.text_area :description, class: "form-input form-textarea form-textarea--small", maxlength: 1000 %>
       </div>
 
-      <div class="checkbox mt-1/4">
-        <%= form.radio_button :display_type, :cards %>
-        <%= form.label :display_type, "Cards", value: :cards %>
+      <div class="form-group-uneven mt-1/2">
+        <div class="well well--dark block">
+          <div class="checkbox">
+            <%= form.radio_button :display_type, :list %>
+            <%= form.label :display_type, "List", value: :list %>
+          </div>
+
+          <div class="checkbox mt-1/4">
+            <%= form.radio_button :display_type, :cards %>
+            <%= form.label :display_type, "Cards", value: :cards %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-1/2">
+        <%= form.label :cover_image, "Cover image", class: "form-label" %>
+
+        <div class="cover-image well well--dark block">
+          <%= image_tag (@collection.cover_image.attached? ? rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) : "//:0"),
+                        data: { image_preview: "cover-image" },
+                        class: "img-fluid" %>
+        </div>
+
+        <%= form.file_field :cover_image,
+                            accept: "image/png, image/jpeg, image/jpg",
+                            direct_upload: true,
+                            data: { action: "image-preview", target: "cover-image" } %>
+
+        <p class="form-hint mt-1/4 mb-0">
+          Image will be processed to a 900x500 format. Max 2MB.
+        </p>
       </div>
     </div>
   </div>
 
-  <div class="form-group mt-1/2">
-    <%= form.label :cover_image, "Cover image", class: "form-label" %>
-
-    <div class="cover-image well well--dark block">
-      <%= image_tag (@collection.cover_image.attached? ? rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) : "//:0"),
-                    data: { image_preview: "cover-image" },
-                    class: "img-fluid" %>
-    </div>
-
-    <%= form.file_field :cover_image,
-                        accept: "image/png, image/jpeg, image/jpg",
-                        direct_upload: true,
-                        data: { action: "image-preview", target: "cover-image" } %>
-
-    <p class="form-hint mt-1/4 mb-0">
-      Image will be processed to a 900x500 format. Max 2MB.
+  <div class="tabs-content" data-tab="codes">
+    <p>
+      <em>Select all codes that are part of this collection. Codes can only be in one collection.</em>
     </p>
+
+    <% current_user.posts.select(:title, :id, :collection_id).each do |post| %>
+      <div class="checkbox well well--dark block p-1/4 mb-1/8">
+        <%= form.check_box :collection_posts, { multiple: true, checked: post.collection_id == @collection.id }, post.id, false %>
+        <%= form.label :collection_posts, value: post.id do %>
+          <%= post.title %>
+
+          <% if post.collection_id.present? && post.collection_id != @collection.id %>
+            <em class="text-dark ml-1/4">
+              In collection
+              "<%= post.collection.title %>"
+            </em>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <hr class="mt-1/2 mb-1/2" />

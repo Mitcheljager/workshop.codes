@@ -7,6 +7,8 @@ class Collection < ApplicationRecord
 
   enum display_type: { list: 0, cards: 1 }
 
+  attr_accessor :collection_posts
+
   validates :title, presence: true, length: { minimum: 3, maximum: 50 }
   validates :description, length: { maximum: 1000 }
   validates :cover_image, content_type: ["image/png", "image/jpg", "image/jpeg"],
