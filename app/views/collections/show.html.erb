@@ -18,8 +18,8 @@
 </div>
 
 <% if @collection.description %>
-  <div class="item__description mb-1/1">
-    <big><%= sanitize(markdown(@collection.description)) %></big>
+  <div class="item__description text-big mb-1/1">
+    <%= sanitize(markdown(@collection.description)) %>
   </div>
 <% end %>
 
