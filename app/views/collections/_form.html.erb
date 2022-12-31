@@ -63,7 +63,7 @@
 
       <% current_user.posts.select(:title, :id, :collection_id).each do |post| %>
         <div class="checkbox well well--dark block p-1/4 mb-1/8">
-          <%= form.check_box :collection_posts, { multiple: true, checked: post.collection_id == @collection.id }, post.id, false %>
+          <%= form.check_box :collection_posts, { multiple: true, checked: @collection.id.present? && post.collection_id == @collection.id }, post.id, false %>
           <%= form.label :collection_posts, value: post.id do %>
             <%= post.title %>
 

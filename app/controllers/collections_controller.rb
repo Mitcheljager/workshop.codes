@@ -34,6 +34,8 @@ class CollectionsController < ApplicationController
     @collection.user_id = current_user.id
 
     if @collection.save
+      set_collection_id_for_posts(collection_params[:collection_posts])
+
       flash[:notice] = "Collection created"
       redirect_to edit_collection_path(@collection.nice_url)
     else
