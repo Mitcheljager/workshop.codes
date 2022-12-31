@@ -24,6 +24,8 @@
 
       <div class="form-group-uneven mt-1/2">
         <div class="well well--dark block">
+          <%= form.label :display, "Display collection as...", class: "form-label" %>
+
           <div class="checkbox">
             <%= form.radio_button :display_type, :list %>
             <%= form.label :display_type, "List", value: :list %>
