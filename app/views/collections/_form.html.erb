@@ -1,4 +1,6 @@
-<%= form_for @collection, url: collection_path(@collection.nice_url), remote: true do |form| %>
+<%= form_for @collection, url: url do |form| %>
+  <%= render "form_errors", errors: @collection.errors if @collection.errors.any? %>
+
   <div class="form-group">
     <%= form.label :title, value: "Collection title", class: "form-label" %>
     <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Collection title" %>
@@ -39,6 +41,7 @@
 
     <%= form.file_field :cover_image,
                         accept: "image/png, image/jpeg, image/jpg",
+                        direct_upload: true,
                         data: { action: "image-preview", target: "cover-image" } %>
 
     <p class="form-hint mt-1/4 mb-0">
@@ -48,19 +51,5 @@
 
   <hr class="mt-1/2 mb-1/2" />
 
-  <%= submit_tag "Save", class: "button mt-1/4" %>
-
-  <% if @collection.posts.none? %>
-    <div class="mt-1/2">
-      <%= link_to "Destroy", collection_path(@collection.nice_url),
-                  class: "text-red",
-                  method: :delete,
-                  remote: true,
-                  data: { confirm: "Are you sure you want to destroy this collection? This cannot be undone." } %>
-    </div>
-  <% else %>
-    <p class="mb-0 text-red">
-      <small>To delete this collection please remove all posts in it.</small>
-    </p>
-  <% end %>
+  <%= submit_tag "Save", class: "button mt-1/4", data: { disable_with: "Saving..." } %>
 <% end %>

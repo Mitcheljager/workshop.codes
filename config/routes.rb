@@ -129,7 +129,7 @@ Rails.application.routes.draw do
     get "get-verified-users", to: "filter#get_verified_users"
     get "overwatch-2", to: redirect("/", status: 301)
 
-    resources :collections, path: "c", param: :nice_url, concerns: :paginatable, only: [:index, :edit, :update, :destroy]
+    resources :collections, path: "c", param: :nice_url, concerns: :paginatable
     get "c/:nice_url(/page/:page)", to: "collections#show"
     get "c/partial/:id", to: "collections#partial", as: "collection_partial"
 

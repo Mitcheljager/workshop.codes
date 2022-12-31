@@ -76,6 +76,11 @@
       margin: 0;
     }
   }
+
+  .grid-full-width {
+    grid-column: 1;
+    grid-column-end: 4;
+  }
 }
 
 .card {

@@ -24,6 +24,23 @@ class CollectionsController < ApplicationController
     render partial: "collections"
   end
 
+  def new
+    @collection = Collection.new
+  end
+
+  def create
+    @collection = Collection.new(collection_params)
+    @collection.nice_url = SecureRandom.alphanumeric(6).downcase
+    @collection.user_id = current_user.id
+
+    if @collection.save
+      flash[:notice] = "Collection created"
+      redirect_to edit_collection_path(@collection.nice_url)
+    else
+      render :new
+    end
+  end
+
   def edit
     @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
   end
@@ -31,16 +48,11 @@ class CollectionsController < ApplicationController
   def update
     @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
 
-    respond_to do |format|
-      if @collection.update(collection_params)
-        format.html {
-          flash[:alert] = "Successfully saved"
-          redirect_to edit_collection_path(@collection.nice_url)
-        }
-        format.js { render "application/success" }
-      else
-        format.js { render "application/error" }
-      end
+    if @collection.update(collection_params)
+      flash[:alert] = "Successfully saved"
+      redirect_to edit_collection_path(@collection.nice_url)
+    else
+      render :edit
     end
   end
 

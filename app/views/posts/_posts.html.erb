@@ -10,24 +10,26 @@
       <% end %>
 
       <% if @posts.size == 20 %>
-        <div class="infinite-scroll" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>
+        <div class="infinite-scroll grid-full-width" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>
 
-        <div class="flex justify-center" data-role="infinite-scroll-backup-pagination">
+        <div class="flex justify-center grid-full-width" data-role="infinite-scroll-backup-pagination">
           <%= paginate @posts %>
         </div>
       <% end %>
     <% else %>
-      <% if flash[:error] %>
-        <div><button class="button" onclick="location.reload()">Try again?</button></div>
-      <% else %>
-        <p><em>There doesn't seem to be anything here</em></p>
-      <% end %>
+      <div class="grid-full-width">
+        <% if flash[:error] %>
+          <div><button class="button" onclick="location.reload()">Try again?</button></div>
+        <% else %>
+          <p><em>There doesn't seem to be anything here</em></p>
+        <% end %>
 
-      <blockquote>
-        <% quote = quotes.sample %>
-        <em><%= quote["quote"] %></em>
-        -&nbsp;<%= quote["by"] %>
-      </blockquote>
+        <blockquote>
+          <% quote = quotes.sample %>
+          <em><%= quote["quote"] %></em>
+          -&nbsp;<%= quote["by"] %>
+        </blockquote>
+      </div>
     <% end %>
   </main>
 <% end %>

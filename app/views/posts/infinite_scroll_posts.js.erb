@@ -29,9 +29,9 @@
       <% end %>
 
       <% if @posts.size == 20 %>
-        <div class="infinite-scroll" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>
+        <div class="infinite-scroll grid-full-width" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>
       <% else %>
-        <h4 class="mt-1/2 mb-0"><center>You've reached the end.</center></h4>
+        <h4 class="mt-1/2 mb-0 grid-full-width"><center>You've reached the end.</center></h4>
       <% end %>
     `)
   <% end %>
