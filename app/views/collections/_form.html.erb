@@ -55,28 +55,28 @@
         </p>
       </div>
     </div>
-  </div>
 
-  <div class="tabs-content" data-tab="codes">
-    <p>
-      <em>Select all codes that are part of this collection. Codes can only be in one collection.</em>
-    </p>
+    <div class="tabs-content" data-tab="codes">
+      <p>
+        <em>Select all codes that are part of this collection. Codes can only be in one collection.</em>
+      </p>
 
-    <% current_user.posts.select(:title, :id, :collection_id).each do |post| %>
-      <div class="checkbox well well--dark block p-1/4 mb-1/8">
-        <%= form.check_box :collection_posts, { multiple: true, checked: post.collection_id == @collection.id }, post.id, false %>
-        <%= form.label :collection_posts, value: post.id do %>
-          <%= post.title %>
+      <% current_user.posts.select(:title, :id, :collection_id).each do |post| %>
+        <div class="checkbox well well--dark block p-1/4 mb-1/8">
+          <%= form.check_box :collection_posts, { multiple: true, checked: post.collection_id == @collection.id }, post.id, false %>
+          <%= form.label :collection_posts, value: post.id do %>
+            <%= post.title %>
 
-          <% if post.collection_id.present? && post.collection_id != @collection.id %>
-            <em class="text-dark ml-1/4">
-              In collection
-              "<%= post.collection.title %>"
-            </em>
+            <% if post.collection_id.present? && post.collection_id != @collection.id %>
+              <em class="text-dark ml-1/4">
+                In collection
+                "<%= post.collection.title %>"
+              </em>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <hr class="mt-1/2 mb-1/2" />
