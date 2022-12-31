@@ -1,3 +1,5 @@
+<% display_type = @display_type || "list" %>
+
 (() => {
   <% if @error.present? %>
     const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
@@ -20,7 +22,12 @@
     const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
 
     elements[elements.length - 1].insertAdjacentHTML("afterEnd", `
-      <%= j render @posts %>
+      <% if display_type == "list" %>
+        <%= j render @posts %>
+      <% else %>
+        <%= render collection: @posts, partial: "posts/card", as: :post  %>
+      <% end %>
+
       <% if @posts.size == 20 %>
         <div class="infinite-scroll" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>
       <% else %>

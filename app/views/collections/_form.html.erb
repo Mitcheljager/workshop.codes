@@ -5,14 +5,28 @@
   </div>
 
   <div class="form-group mt-1/2">
-      <%= form.label :description, t("profile.form.description.label"), class: "form-label" %>
+    <%= form.label :description, t("profile.form.description.label"), class: "form-label" %>
 
-      <div class="form-hint">
-        Basic Markdown enabled. Limited to 1000 characters.
+    <div class="form-hint">
+      Basic Markdown enabled. Limited to 1000 characters.
+    </div>
+
+    <%= form.text_area :description, class: "form-input form-textarea form-textarea--small", maxlength: 1000 %>
+  </div>
+
+  <div class="form-group-uneven mt-1/2">
+    <div class="well well--dark block">
+      <div class="checkbox">
+        <%= form.radio_button :display_type, :list %>
+        <%= form.label :display_type, "List", value: :list %>
       </div>
 
-      <%= form.text_area :description, class: "form-input form-textarea form-textarea--small", maxlength: 1000 %>
+      <div class="checkbox mt-1/4">
+        <%= form.radio_button :display_type, :cards %>
+        <%= form.label :display_type, "Cards", value: :cards %>
+      </div>
     </div>
+  </div>
 
   <div class="form-group mt-1/2">
     <%= form.label :cover_image, "Cover image", class: "form-label" %>

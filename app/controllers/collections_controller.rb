@@ -10,6 +10,7 @@ class CollectionsController < ApplicationController
   def show
     @collection = Collection.find_by_nice_url!(params[:nice_url].downcase)
     @posts = @collection.posts.visible?.order(created_at: :desc).page params[:page]
+    @display_type = @collection.display_type
 
     respond_to do |format|
       format.html
@@ -56,6 +57,6 @@ class CollectionsController < ApplicationController
   private
 
   def collection_params
-    params.require(:collection).permit(:title, :cover_image, :description)
+    params.require(:collection).permit(:title, :cover_image, :description, :display_type)
   end
 end

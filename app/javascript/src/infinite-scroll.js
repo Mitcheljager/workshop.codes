@@ -58,6 +58,9 @@ function getInfiniteScrollContent(element) {
   if (!requestUrl.pathname.endsWith(".js")) requestUrl.pathname += ".js"
   const requestUrlString = requestUrl.toString()
 
+  const container = document.querySelector(".items") || document.querySelector(".cards")
+  const spinner = container?.querySelector(".spinner")
+
   Rails.ajax({
     type: "get",
     url: requestUrlString,
@@ -65,7 +68,6 @@ function getInfiniteScrollContent(element) {
       progressBar.setValue(1)
       progressBar.hide()
 
-      const spinner = document.querySelector(".items").querySelector(".spinner")
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
         element.innerHTML = "Load more"
@@ -78,7 +80,6 @@ function getInfiniteScrollContent(element) {
       progressBar.setValue(1)
       progressBar.hide()
 
-      const spinner = document.querySelector(".items")?.querySelector(".spinner")
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
         console.log("more button")

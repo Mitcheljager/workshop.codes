@@ -1,7 +1,13 @@
+<% display_type ||= "list" %>
+
 <% cache_unless current_user, [current_locale, @posts] do %>
-  <main class="items">
+  <main class="<%= display_type == "list" ? "items" : "cards" %>">
     <% if @posts.any? %>
-      <%= render @posts %>
+      <% if display_type == "list" %>
+        <%= render @posts %>
+      <% else %>
+        <%= render collection: @posts, partial: "posts/card", as: :post  %>
+      <% end %>
 
       <% if @posts.size == 20 %>
         <div class="infinite-scroll" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>

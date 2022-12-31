@@ -23,6 +23,4 @@
   </div>
 <% end %>
 
-<main class="items">
-  <%= render "posts/posts" %>
-</main>
+<%= render "posts/posts", display_type: @collection.display_type %>
