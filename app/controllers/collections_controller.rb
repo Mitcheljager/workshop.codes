@@ -51,7 +51,7 @@ class CollectionsController < ApplicationController
     @collection = current_user.collections.find_by_nice_url!(params[:nice_url].downcase)
 
     initial_ids = @collection.posts.pluck(:id)
-    param_ids = collection_params[:collection_posts].map { |id| id.to_i }
+    param_ids = (collection_params[:collection_posts] || []).map { |id| id.to_i }
 
     if @collection.update(collection_params)
       if (initial_ids != param_ids)
