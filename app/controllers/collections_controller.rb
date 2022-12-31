@@ -30,10 +30,16 @@ class CollectionsController < ApplicationController
   def update
     @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
 
-    if @collection.update(collection_params)
-      redirect_to collections_path
-    else
-      render "application/error"
+    respond_to do |format|
+      if @collection.update(collection_params)
+        format.html {
+          flash[:alert] = "Successfully saved"
+          redirect_to edit_collection_path(@collection.nice_url)
+        }
+        format.js { render "application/success" }
+      else
+        format.js { render "application/error" }
+      end
     end
   end
 

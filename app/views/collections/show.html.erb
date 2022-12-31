@@ -1,7 +1,7 @@
 <% content_for :page_title, "#{ @collection.title } #{ "| Page #{ params[:page] }" if params[:page] }" %>
 
 <div class="heading">
-  <h1>Codes in <strong><%= @collection.title %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
+  <h1><%= @collection.title %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
 </div>
 
 <main class="items">
