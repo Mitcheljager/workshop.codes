@@ -5,6 +5,12 @@
     en: Tank
     ko: 탱커
 -
+  en: Doomfist
+  ko: 둠피스트
+  category:
+    en: Tank
+    ko: 탱커
+-
   en: Junker Queen
   ko: 정커퀸
   overwatch_2: true
@@ -75,12 +81,6 @@
 -
   en: Cassidy
   ko: 맥크리
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Doomfist
-  ko: 둠피스트
   category:
     en: Damage
     ko: 딜러
