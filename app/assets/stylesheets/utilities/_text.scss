@@ -32,6 +32,15 @@
   font-size: $font-size-small;
 }
 
+.text-big {
+  font-size: 1.1rem;
+  line-height: 1.35em;
+
+  @include media-min(md) {
+    font-size: 1.15rem;
+  }
+}
+
 .text-italic {
   font-style: italic;
 }

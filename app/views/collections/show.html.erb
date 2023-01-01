@@ -1,9 +1,32 @@
 <% content_for :page_title, "#{ @collection.title } #{ "| Page #{ params[:page] }" if params[:page] }" %>
+<% begin %><% content_for :og_image, "#{ rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) if @collection.cover_image.attached? }" %><% rescue %><% end %>
 
-<div class="heading">
-  <h1>Codes in <strong><%= @collection.title %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
+<% if @collection.cover_image.attached? %>
+  <% begin %>
+    <picture>
+      <source media="(min-width: 560px)" srcset="<%= rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" type="image/webp">
+      <source media="(min-width: 0px)" srcset="<%= rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed) %>" type="image/webp">
+      <img class="img-fluid cover-image" src="<%= rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" alt="<%= @collection.title %>" width="900" height="500" loading="lazy" />
+    </picture>
+  <% rescue %>
+    <p><small><em>Images are temporarily unavailable.</em></small></p>
+  <% end %>
+<% end %>
+
+<div class="heading <%= "mt-1/1" if @collection.cover_image.attached? %> <%= "mb-1/2" if @collection.description %>">
+  <h1><%= @collection.title %></strong> <%= tag.small "- Page #{ params[:page] }" if params[:page] %></h1>
 </div>
 
-<main class="items">
-  <%= render "posts/posts" %>
-</main>
+<% if @collection.description %>
+  <div class="item__description text-big mb-1/1">
+    <%= sanitize(markdown(@collection.description)) %>
+  </div>
+<% end %>
+
+<%= render "posts/posts", display_type: @collection.display_type %>
+
+<% if @collection.user == current_user %>
+  <div class="fixed-box">
+    <%= link_to "← Customise collection", edit_collection_path(@collection.nice_url), class: "button button--secondary w-100" %>
+  </div>
+<% end %>

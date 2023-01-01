@@ -1,0 +1,18 @@
+<%= render "layouts/account", title: "Edit collection" do %>
+  <%= render "form", url: collection_path(@collection.nice_url) %>
+
+  <% if @collection.posts.none? %>
+    <div class="mt-1/2">
+      <%= link_to "Destroy", collection_path(@collection.nice_url),
+                  class: "text-red",
+                  method: :delete,
+                  remote: true,
+                  data: { confirm: "Are you sure you want to destroy this collection? This cannot be undone." } %>
+    </div>
+  <% else %>
+    <p class="mb-0 text-red">
+      <small>To delete this collection please remove all posts in it.</small>
+    </p>
+  <% end %>
+<% end %>
+

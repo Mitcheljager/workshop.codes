@@ -39,7 +39,7 @@ RSpec.describe "Profiles", type: :feature do
       expect(page).to have_content(posts.last.user.username)
 
       # Don't show older posts
-      # HACK: we assume that the first post is on the next page (due to page size of 20)
+      # HACK: we assume that the first post is on the next page (due to page size of 18)
       expect(page).not_to have_content(posts.first.title)
       expect(page).not_to have_content(posts.first.code)
 
