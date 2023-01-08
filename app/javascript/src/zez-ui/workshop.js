@@ -556,47 +556,47 @@ var app = new Vue({
                 "__not__": 9,
             }
             var result = "";
-            if (ast.name in funcToOpMapping && ast.args.length === 2) {
+            if (funcToOpMapping[ast.name] !== undefined && ast.args.length === 2) {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + (ast.name === "__raiseToPower__" ? 1 : 0)))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + (ast.name === "__raiseToPower__" ? 1 : 0)))) {
                     op1 = "("+op1+")";
                 }
                 var op2 = this.displayAst(ast.args[1], useHtml);
 
-                if (ast.args[1].name in astOperatorPrecedence && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] - (ast.name === "__raiseToPower__" ? 1 : 0)))) {
+                if (astOperatorPrecedence[ast.args[1].name] !== undefined && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] - (ast.name === "__raiseToPower__" ? 1 : 0)))) {
                     op2 = "("+op2+")";
                 }
                 return op1+" "+this.displayHtml(funcToOpMapping[ast.name], useHtml, "operator")+" "+op2;
 
             } else if (ast.name === "__compare__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + 0.5))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + 0.5))) {
                     op1 = "("+op1+")";
                 }
                 var op2 = this.displayAst(ast.args[2], useHtml);
 
-                if (ast.args[2].name in astOperatorPrecedence && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] + 0.5))) {
+                if (astOperatorPrecedence[ast.args[2].name] !== undefined && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] + 0.5))) {
                     op2 = "("+op2+")";
                 }
                 return op1+" "+this.displayHtml(ast.args[1].name, useHtml, "operator")+" "+op2;
 
             } else if (ast.name === "__ifThenElse__") {
                 var opThen = this.displayAst(ast.args[1], useHtml);
-                if (ast.args[1].name in astOperatorPrecedence && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[1].name] !== undefined && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence))) {
                     opThen = "("+opThen+")";
                 }
                 var opIf = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     opIf = "("+opIf+")";
                 }
                 var opElse = this.displayAst(ast.args[2], useHtml);
-                if (ast.args[2].name in astOperatorPrecedence && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[2].name] !== undefined && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence))) {
                     opElse = "("+opElse+")";
                 }
                 return opIf+" ? "+opThen+" : "+opElse;
             } else if (ast.name === "__not__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name]))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name]))) {
                     op1 = "("+op1+")";
                 }
                 return "!"+op1;
@@ -638,35 +638,35 @@ var app = new Vue({
 
             } else if (ast.name === "__playerVar__") {
                 var result = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     result = "("+result+")";
                 }
                 return result+"."+this.displayAst(ast.args[1], useHtml);
 
             } else if (ast.name === "__setPlayerVariable__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+" = "+this.displayAst(ast.args[2], useHtml);
 
             } else if (ast.name === "__modifyPlayerVariable__" && ast.args[2].name in modifyVarFuncToOpMapping) {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+" "+modifyVarFuncToOpMapping[ast.args[2].name]+" "+this.displayAst(ast.args[3], useHtml);
 
             } else if (ast.name === "__setPlayerVariableAtIndex__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+"["+this.displayAst(ast.args[2], useHtml)+"] = "+this.displayAst(ast.args[3], useHtml);
 
             } else if (ast.name === "__modifyPlayerVariableAtIndex__" && ast.args[3].name in modifyVarFuncToOpMapping) {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+"["+this.displayAst(ast.args[2], useHtml)+"] "+modifyVarFuncToOpMapping[ast.args[3].name]+" "+this.displayAst(ast.args[4], useHtml);
@@ -677,12 +677,12 @@ var app = new Vue({
             } else if (this.isTypeSuitable(["Object", "Array"], ast.type)){
                 result += this.displayHtml(this.translate(ast.name, this.valueKw), useHtml, "value");
 
-            } else if (ast.type in this.constantValues) {
+            } else if (this.constantValues[ast.type] !== undefined) {
                 if (ast.name === "__removed_from_ow2__") {
                     result += this.displayHtml(ast.name, useHtml, (ast.type === "__Operator__" ? "operator" : "value"));
                 } else {
 
-                    if (!(ast.name in this.constantValues[ast.type])) {
+                    if (!(this.constantValues[ast.type]?.[ast.name] !== undefined)) {
                         throw new Error("Unknown "+ast.type.replace("Literal", "").toLowerCase()+" '"+ast.name+"'");
                     }
                     result += this.displayHtml(this.translate(ast.name, this.constantValues[ast.type]), useHtml, (ast.type === "__Operator__" ? "operator" : "value"));
@@ -766,7 +766,7 @@ var app = new Vue({
         rebuildAst: function(ast) {
             //console.log("Rebuilding AST: '"+ast.name+"'");
             //When selecting a new function, recreate its arguments using defaults
-            if (ast.type in this.constantValues || ["FloatLiteral", "IntLiteral", "UnsignedIntLiteral", "GlobalVariable", "PlayerVariable", "Subroutine", "CustomStringLiteral", "LocalizedStringLiteral"].includes(ast.type)) {
+            if (this.constantValues[ast.type] !== undefined || ["FloatLiteral", "IntLiteral", "UnsignedIntLiteral", "GlobalVariable", "PlayerVariable", "Subroutine", "CustomStringLiteral", "LocalizedStringLiteral"].includes(ast.type)) {
                 return; //no args
             }
             var astDefaultsToOverpy = {
@@ -1370,26 +1370,28 @@ var app = new Vue({
             if (!editedCustomGameSettings.gamemodes) {
                 editedCustomGameSettings.gamemodes = {};
             }
-            for (var gamemode in customGameSettingsSchema.gamemodes.values) {
+            for (let i = 0; i < customGameSettingsSchema.gamemodes.values.length; i++) {
+                let gamemode = customGameSettingsSchema.gamemodes.values[i];
+
                 if (gamemode in gamemodeKw && gamemodeKw[gamemode].onlyInOw1) {
                     delete editedCustomGameSettings.gamemodes[gamemode];
                     continue;
                 }
                 if (gamemode !== "general") {
-                    if (!(gamemode in editedCustomGameSettings.gamemodes)) {
+                    if (!(editedCustomGameSettings.gamemodes[gamemode] !== undefined)) {
                         editedCustomGameSettings.gamemodes[gamemode] = {enabled: false};
-                    } else if (!("enabled" in editedCustomGameSettings.gamemodes[gamemode])) {
+                    } else if (!(editedCustomGameSettings.gamemodes[gamemode]["enabled"] !== undefined)) {
                         editedCustomGameSettings.gamemodes[gamemode].enabled = true;
                     }
-                    if (!("enabledMaps" in editedCustomGameSettings.gamemodes[gamemode])) {
+                    if (!(editedCustomGameSettings.gamemodes[gamemode]["enabledMaps"])) {
                         editedCustomGameSettings.gamemodes[gamemode].enabledMaps = Object.keys(mapKw).filter(x => mapKw[x].gamemodes.includes(gamemode));
                     }
                     editedCustomGameSettings.gamemodes[gamemode].enabledMaps = editedCustomGameSettings.gamemodes[gamemode].enabledMaps.filter(x => !mapKw[x].onlyInOw1);
-                    if ("disabledMaps" in editedCustomGameSettings.gamemodes[gamemode]) {
+                    if (editedCustomGameSettings.gamemodes[gamemode]["disabledMaps"]) {
                         editedCustomGameSettings.gamemodes[gamemode].enabledMaps = editedCustomGameSettings.gamemodes[gamemode].enabledMaps.filter(x => !editedCustomGameSettings.gamemodes[gamemode].disabledMaps.includes(x));
                         delete editedCustomGameSettings.gamemodes[gamemode].disabledMaps;
                     }
-                } else if (!(gamemode in editedCustomGameSettings.gamemodes)) {
+                } else if (!(editedCustomGameSettings.gamemodes[gamemode] !== undefined)) {
                     editedCustomGameSettings.gamemodes[gamemode] = {};
                 }
                 fillMissingKeys(editedCustomGameSettings.gamemodes[gamemode], customGameSettingsSchema.gamemodes.values[gamemode].values);
@@ -1405,10 +1407,10 @@ var app = new Vue({
                 }
                 editedCustomGameSettings.heroes[team].isCollapsed = true;
                 editedCustomGameSettings.heroes[team].isArrayCollapsed = true;
-                if ("disabledHeroes" in editedCustomGameSettings.heroes[team]) {
+                if (editedCustomGameSettings.heroes[team]["disabledHeroes"] !== undefined) {
                     editedCustomGameSettings.heroes[team].enabledHeroes = Object.keys(heroKw).filter(x => !editedCustomGameSettings.heroes[team].disabledHeroes.includes(x));
                     delete editedCustomGameSettings.heroes[team].disabledHeroes
-                } else if (!("enabledHeroes" in editedCustomGameSettings.heroes[team])) {
+                } else if (!(editedCustomGameSettings.heroes[team]["enabledHeroes"] !== undefined)) {
                     editedCustomGameSettings.heroes[team].enabledHeroes = Object.keys(heroKw);
                 }
                 for (var hero in customGameSettingsSchema.heroes.values) {
@@ -1424,8 +1426,8 @@ var app = new Vue({
                 }
             }
 
-            for (var key in editedCustomGameSettings) {
-                editedCustomGameSettings[key].isCollapsed = true;
+            for (let j; j < editedCustomGameSettings.length; j++) {
+                editedCustomGameSettings[editedCustomGameSettings[j]].isCollapsed = true;
             }
 
             this.editedCustomGameSettings = editedCustomGameSettings;
@@ -1435,7 +1437,6 @@ var app = new Vue({
         validateSettings: function() {
 
             function removeDefaults(settings, schema) {
-                console.log('remove defaults', settings)
                 for (var key in settings) {
                     if (key === "enabled") {
                         continue;
