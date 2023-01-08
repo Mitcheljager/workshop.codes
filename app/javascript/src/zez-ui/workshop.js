@@ -1642,7 +1642,6 @@ var app = new Vue({
             this.setUrl();
         },
         saveProject: async function() {
-            console.log('saving')
             if (!this.signedIn) {
                 console.warn(this.translate("youAreNotSignedIn", this.workshopUiCustomKw));
                 return;
@@ -1652,8 +1651,6 @@ var app = new Vue({
                 console.warn(this.translate("youDoNotOwnThisProject", this.workshopUiCustomKw));
                 return;
             }
-
-            console.log('still saving')
 
             const content = JSON.stringify({
                 rules: [...this.rules],
