@@ -262,33 +262,33 @@ var app = new Vue({
                             this.subroutines.push({index: i, name: defaultSubroutineNames[i]})
                         }
                     }
-                    for (var rule of rules) {
-                        if ("conditions" in rule.ruleAttributes) {
-                            for (var i = 0; i < rule.ruleAttributes.conditions.length; i++) {
-                                rule.ruleAttributes.conditions[i] = this.adjustAstForWorkshop(rule.ruleAttributes.conditions[i]);
-                                rule.ruleAttributes.conditions[i].parent = rule;
-                                rule.ruleAttributes.conditions[i].isSelected = false;
-                                rule.ruleAttributes.conditions[i].isDisabled ||= false;
+                    for (let rule = 0; rule < rules.length; rule++) {
+                        if (rules[rule].ruleAttributes["conditions"] !== undefined) {
+                            for (var i = 0; i < rules[rule].ruleAttributes.conditions.length; i++) {
+                                rules[rule].ruleAttributes.conditions[i] = this.adjustAstForWorkshop(rules[rule].ruleAttributes.conditions[i]);
+                                rules[rule].ruleAttributes.conditions[i].parent = rule;
+                                rules[rule].ruleAttributes.conditions[i].isSelected = false;
+                                rules[rule].ruleAttributes.conditions[i].isDisabled ||= false;
                             }
                         } else {
-                            rule.ruleAttributes.conditions = [];
+                            rules[rule].ruleAttributes.conditions = [];
                         }
-                        if ("subroutineName" in rule.ruleAttributes) {
-                            rule.ruleAttributes.subroutineName = this.subroutines.filter(x => x.name === rule.ruleAttributes.subroutineName)[0].index;
+                        if (rules[rule].ruleAttributes["subroutineName"] !== undefined) {
+                            rules[rule].ruleAttributes.subroutineName = this.subroutines.filter(x => x.name === rules[rule].ruleAttributes.subroutineName)[0].index;
                         }
-                        for (var i = 0; i < rule.children.length; i++) {
-                            rule.children[i] = this.adjustAstForWorkshop(rule.children[i]);
-                            rule.children[i].parent = rule;
-                            rule.children[i].isSelected = false;
-                            rule.children[i].isDisabled ||= false;
+                        for (var i = 0; i < rules[rule].children.length; i++) {
+                            rules[rule].children[i] = this.adjustAstForWorkshop(rules[rule].children[i]);
+                            rules[rule].children[i].parent = rules[rule];
+                            rules[rule].children[i].isSelected = false;
+                            rules[rule].children[i].isDisabled ||= false;
                         }
 
                         if (rules.length > 50) {
-                            rule.isCollapsed = true;
+                            rules[rule].isCollapsed = true;
                         } else {
-                            rule.isCollapsed = false;
+                            rules[rule].isCollapsed = false;
                         }
-                        rule.isSelected = false;
+                        rules[rule].isSelected = false;
                     }
                     this.rules = rules;
                     this.globalVariables.sort((a,b) => (a.index - b.index))
