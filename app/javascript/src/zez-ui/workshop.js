@@ -211,7 +211,20 @@ var app = new Vue({
             return this.getDropdownOptionsForKeywordObj(keywordObj, sort);
         },
         getDropdownOptionsForKeywordObj: function(keywordObj, sort=true) {
-            var result = Object.keys(keywordObj).filter(x => typeof keywordObj[x] === "object" && !keywordObj[x].onlyInOw1 && x !== "__global__").map(x => ({"label": this.uiSettings.language in keywordObj[x] ? keywordObj[x][this.uiSettings.language] : keywordObj[x]["en-US"], "code": x})).slice()
+            const keys = Object.keys(keywordObj)
+
+            let result = [];
+            for(let i = 0; i < keys.length; i++) {
+                if (!(typeof keywordObj[keys[i]] === "object" && !keywordObj[keys[i]].onlyInOw1 && keys[i] !== "__global__")) continue;
+
+                const mappedKey = {
+                    "label": keywordObj[keys[i]]?.[this.uiSettings.language] || keywordObj[keys[i]]["en-US"],
+                    "code": keys[i]
+                }
+
+                result.push(mappedKey);
+            }
+
             if (sort) {
                 result = result.sort((a,b) => (a.label.localeCompare(b.label)))
             }
@@ -1426,6 +1439,7 @@ var app = new Vue({
         validateSettings: function() {
 
             function removeDefaults(settings, schema) {
+                console.log('remove defaults', settings)
                 for (var key in settings) {
                     if (key === "enabled") {
                         continue;
@@ -1631,6 +1645,7 @@ var app = new Vue({
             this.setUrl();
         },
         saveProject: async function() {
+            console.log('saving')
             if (!this.signedIn) {
                 console.warn(this.translate("youAreNotSignedIn", this.workshopUiCustomKw));
                 return;
@@ -1640,6 +1655,8 @@ var app = new Vue({
                 console.warn(this.translate("youDoNotOwnThisProject", this.workshopUiCustomKw));
                 return;
             }
+
+            console.log('still saving')
 
             const content = JSON.stringify({
                 rules: [...this.rules],
