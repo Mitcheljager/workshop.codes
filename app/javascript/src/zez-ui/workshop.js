@@ -157,24 +157,20 @@ var app = new Vue({
             if (!keywordObj) {
                 throw new Error("Invalid keywordobj for '"+keyword+"'");
             }
-            if (!(keyword in keywordObj)) {
-                console.log(keywordObj);
+            if (keywordObj[keyword] === undefined) {
                 throw new Error("Could not translate '"+keyword+"'");
             }
-            var result = null;
-            if (this.uiSettings.language in keywordObj[keyword]) {
-                result = keywordObj[keyword][this.uiSettings.language];
-            } else if ("en-US" in keywordObj[keyword]) {
-                result = keywordObj[keyword]["en-US"];
-            } else {
-                throw new Error("Invalid keywordobj for '"+keyword+"': "+JSON.stringify(keywordObj));
-            }
+
+            var result = keywordObj[keyword][this.uiSettings.language] || keywordObj[keyword]["en-US"];
+            if (!result) throw new Error("Invalid keywordobj for '"+keyword+"': "+JSON.stringify(keywordObj));
+
             if (result.includes("%1$s")) {
                 result = result.replace("%1$s", args[0]);
                 if (result.includes("|Rpl")) {
                     result = result.replace(/\|Rpl(.*):(.*);/, +args[0] === 1 ? "$1" : "$2")
                 }
             }
+
             return result;
         },
         getDropdownOptionsForType: function(type) {
