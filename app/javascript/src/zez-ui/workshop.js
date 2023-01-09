@@ -161,8 +161,14 @@ var app = new Vue({
                 throw new Error("Could not translate '"+keyword+"'");
             }
 
-            var result = keywordObj[keyword][this.uiSettings.language] || keywordObj[keyword]["en-US"];
-            if (!result) throw new Error("Invalid keywordobj for '"+keyword+"': "+JSON.stringify(keywordObj));
+            var result = null;
+            if (keywordObj[keyword][this.uiSettings.language] !== undefined) {
+                result = keywordObj[keyword][this.uiSettings.language];
+            } else if (keywordObj[keyword]["en-US"] !== undefined) {
+                result = keywordObj[keyword]["en-US"];
+            } else {
+                throw new Error("Invalid keywordobj for '"+keyword+"': "+JSON.stringify(keywordObj));
+            }
 
             if (result.includes("%1$s")) {
                 result = result.replace("%1$s", args[0]);
