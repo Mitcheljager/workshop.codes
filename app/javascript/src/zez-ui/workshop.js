@@ -157,24 +157,20 @@ var app = new Vue({
             if (!keywordObj) {
                 throw new Error("Invalid keywordobj for '"+keyword+"'");
             }
-            if (!(keyword in keywordObj)) {
-                console.log(keywordObj);
+            if (keywordObj[keyword] === undefined) {
                 throw new Error("Could not translate '"+keyword+"'");
             }
-            var result = null;
-            if (this.uiSettings.language in keywordObj[keyword]) {
-                result = keywordObj[keyword][this.uiSettings.language];
-            } else if ("en-US" in keywordObj[keyword]) {
-                result = keywordObj[keyword]["en-US"];
-            } else {
-                throw new Error("Invalid keywordobj for '"+keyword+"': "+JSON.stringify(keywordObj));
-            }
+
+            var result = keywordObj[keyword][this.uiSettings.language] || keywordObj[keyword]["en-US"];
+            if (!result) throw new Error("Invalid keywordobj for '"+keyword+"': "+JSON.stringify(keywordObj));
+
             if (result.includes("%1$s")) {
                 result = result.replace("%1$s", args[0]);
                 if (result.includes("|Rpl")) {
                     result = result.replace(/\|Rpl(.*):(.*);/, +args[0] === 1 ? "$1" : "$2")
                 }
             }
+
             return result;
         },
         getDropdownOptionsForType: function(type) {
@@ -211,7 +207,20 @@ var app = new Vue({
             return this.getDropdownOptionsForKeywordObj(keywordObj, sort);
         },
         getDropdownOptionsForKeywordObj: function(keywordObj, sort=true) {
-            var result = Object.keys(keywordObj).filter(x => typeof keywordObj[x] === "object" && !keywordObj[x].onlyInOw1 && x !== "__global__").map(x => ({"label": this.uiSettings.language in keywordObj[x] ? keywordObj[x][this.uiSettings.language] : keywordObj[x]["en-US"], "code": x})).slice()
+            const keys = Object.keys(keywordObj)
+
+            let result = [];
+            for(let i = 0; i < keys.length; i++) {
+                if (!(typeof keywordObj[keys[i]] === "object" && !keywordObj[keys[i]].onlyInOw1 && keys[i] !== "__global__")) continue;
+
+                const mappedKey = {
+                    "label": keywordObj[keys[i]]?.[this.uiSettings.language] || keywordObj[keys[i]]["en-US"],
+                    "code": keys[i]
+                }
+
+                result.push(mappedKey);
+            }
+
             if (sort) {
                 result = result.sort((a,b) => (a.label.localeCompare(b.label)))
             }
@@ -253,33 +262,33 @@ var app = new Vue({
                             this.subroutines.push({index: i, name: defaultSubroutineNames[i]})
                         }
                     }
-                    for (var rule of rules) {
-                        if ("conditions" in rule.ruleAttributes) {
-                            for (var i = 0; i < rule.ruleAttributes.conditions.length; i++) {
-                                rule.ruleAttributes.conditions[i] = this.adjustAstForWorkshop(rule.ruleAttributes.conditions[i]);
-                                rule.ruleAttributes.conditions[i].parent = rule;
-                                rule.ruleAttributes.conditions[i].isSelected = false;
-                                rule.ruleAttributes.conditions[i].isDisabled ||= false;
+                    for (let rule = 0; rule < rules.length; rule++) {
+                        if (rules[rule].ruleAttributes["conditions"] !== undefined) {
+                            for (var i = 0; i < rules[rule].ruleAttributes.conditions.length; i++) {
+                                rules[rule].ruleAttributes.conditions[i] = this.adjustAstForWorkshop(rules[rule].ruleAttributes.conditions[i]);
+                                rules[rule].ruleAttributes.conditions[i].parent = rule;
+                                rules[rule].ruleAttributes.conditions[i].isSelected = false;
+                                rules[rule].ruleAttributes.conditions[i].isDisabled ||= false;
                             }
                         } else {
-                            rule.ruleAttributes.conditions = [];
+                            rules[rule].ruleAttributes.conditions = [];
                         }
-                        if ("subroutineName" in rule.ruleAttributes) {
-                            rule.ruleAttributes.subroutineName = this.subroutines.filter(x => x.name === rule.ruleAttributes.subroutineName)[0].index;
+                        if (rules[rule].ruleAttributes["subroutineName"] !== undefined) {
+                            rules[rule].ruleAttributes.subroutineName = this.subroutines.filter(x => x.name === rules[rule].ruleAttributes.subroutineName)[0].index;
                         }
-                        for (var i = 0; i < rule.children.length; i++) {
-                            rule.children[i] = this.adjustAstForWorkshop(rule.children[i]);
-                            rule.children[i].parent = rule;
-                            rule.children[i].isSelected = false;
-                            rule.children[i].isDisabled ||= false;
+                        for (var i = 0; i < rules[rule].children.length; i++) {
+                            rules[rule].children[i] = this.adjustAstForWorkshop(rules[rule].children[i]);
+                            rules[rule].children[i].parent = rules[rule];
+                            rules[rule].children[i].isSelected = false;
+                            rules[rule].children[i].isDisabled ||= false;
                         }
 
                         if (rules.length > 50) {
-                            rule.isCollapsed = true;
+                            rules[rule].isCollapsed = true;
                         } else {
-                            rule.isCollapsed = false;
+                            rules[rule].isCollapsed = false;
                         }
-                        rule.isSelected = false;
+                        rules[rule].isSelected = false;
                     }
                     this.rules = rules;
                     this.globalVariables.sort((a,b) => (a.index - b.index))
@@ -547,47 +556,47 @@ var app = new Vue({
                 "__not__": 9,
             }
             var result = "";
-            if (ast.name in funcToOpMapping && ast.args.length === 2) {
+            if (funcToOpMapping[ast.name] !== undefined && ast.args.length === 2) {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + (ast.name === "__raiseToPower__" ? 1 : 0)))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + (ast.name === "__raiseToPower__" ? 1 : 0)))) {
                     op1 = "("+op1+")";
                 }
                 var op2 = this.displayAst(ast.args[1], useHtml);
 
-                if (ast.args[1].name in astOperatorPrecedence && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] - (ast.name === "__raiseToPower__" ? 1 : 0)))) {
+                if (astOperatorPrecedence[ast.args[1].name] !== undefined && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] - (ast.name === "__raiseToPower__" ? 1 : 0)))) {
                     op2 = "("+op2+")";
                 }
                 return op1+" "+this.displayHtml(funcToOpMapping[ast.name], useHtml, "operator")+" "+op2;
 
             } else if (ast.name === "__compare__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + 0.5))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name] + 0.5))) {
                     op1 = "("+op1+")";
                 }
                 var op2 = this.displayAst(ast.args[2], useHtml);
 
-                if (ast.args[2].name in astOperatorPrecedence && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] + 0.5))) {
+                if (astOperatorPrecedence[ast.args[2].name] !== undefined && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] <= astOperatorPrecedence[ast.name] + 0.5))) {
                     op2 = "("+op2+")";
                 }
                 return op1+" "+this.displayHtml(ast.args[1].name, useHtml, "operator")+" "+op2;
 
             } else if (ast.name === "__ifThenElse__") {
                 var opThen = this.displayAst(ast.args[1], useHtml);
-                if (ast.args[1].name in astOperatorPrecedence && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[1].name] !== undefined && astContainsFunctions(ast.args[1], Object.keys(astOperatorPrecedence))) {
                     opThen = "("+opThen+")";
                 }
                 var opIf = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     opIf = "("+opIf+")";
                 }
                 var opElse = this.displayAst(ast.args[2], useHtml);
-                if (ast.args[2].name in astOperatorPrecedence && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[2].name] !== undefined && astContainsFunctions(ast.args[2], Object.keys(astOperatorPrecedence))) {
                     opElse = "("+opElse+")";
                 }
                 return opIf+" ? "+opThen+" : "+opElse;
             } else if (ast.name === "__not__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name]))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence).filter(x => astOperatorPrecedence[x] < astOperatorPrecedence[ast.name]))) {
                     op1 = "("+op1+")";
                 }
                 return "!"+op1;
@@ -629,35 +638,35 @@ var app = new Vue({
 
             } else if (ast.name === "__playerVar__") {
                 var result = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     result = "("+result+")";
                 }
                 return result+"."+this.displayAst(ast.args[1], useHtml);
 
             } else if (ast.name === "__setPlayerVariable__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+" = "+this.displayAst(ast.args[2], useHtml);
 
             } else if (ast.name === "__modifyPlayerVariable__" && ast.args[2].name in modifyVarFuncToOpMapping) {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+" "+modifyVarFuncToOpMapping[ast.args[2].name]+" "+this.displayAst(ast.args[3], useHtml);
 
             } else if (ast.name === "__setPlayerVariableAtIndex__") {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+"["+this.displayAst(ast.args[2], useHtml)+"] = "+this.displayAst(ast.args[3], useHtml);
 
             } else if (ast.name === "__modifyPlayerVariableAtIndex__" && ast.args[3].name in modifyVarFuncToOpMapping) {
                 var op1 = this.displayAst(ast.args[0], useHtml);
-                if (ast.args[0].name in astOperatorPrecedence && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
+                if (astOperatorPrecedence[ast.args[0].name] !== undefined && astContainsFunctions(ast.args[0], Object.keys(astOperatorPrecedence))) {
                     op1 = "("+op1+")";
                 }
                 return op1+"."+this.displayAst(ast.args[1], useHtml)+"["+this.displayAst(ast.args[2], useHtml)+"] "+modifyVarFuncToOpMapping[ast.args[3].name]+" "+this.displayAst(ast.args[4], useHtml);
@@ -668,12 +677,12 @@ var app = new Vue({
             } else if (this.isTypeSuitable(["Object", "Array"], ast.type)){
                 result += this.displayHtml(this.translate(ast.name, this.valueKw), useHtml, "value");
 
-            } else if (ast.type in this.constantValues) {
+            } else if (this.constantValues[ast.type] !== undefined) {
                 if (ast.name === "__removed_from_ow2__") {
                     result += this.displayHtml(ast.name, useHtml, (ast.type === "__Operator__" ? "operator" : "value"));
                 } else {
 
-                    if (!(ast.name in this.constantValues[ast.type])) {
+                    if (!(this.constantValues[ast.type]?.[ast.name] !== undefined)) {
                         throw new Error("Unknown "+ast.type.replace("Literal", "").toLowerCase()+" '"+ast.name+"'");
                     }
                     result += this.displayHtml(this.translate(ast.name, this.constantValues[ast.type]), useHtml, (ast.type === "__Operator__" ? "operator" : "value"));
@@ -757,7 +766,7 @@ var app = new Vue({
         rebuildAst: function(ast) {
             //console.log("Rebuilding AST: '"+ast.name+"'");
             //When selecting a new function, recreate its arguments using defaults
-            if (ast.type in this.constantValues || ["FloatLiteral", "IntLiteral", "UnsignedIntLiteral", "GlobalVariable", "PlayerVariable", "Subroutine", "CustomStringLiteral", "LocalizedStringLiteral"].includes(ast.type)) {
+            if (this.constantValues[ast.type] !== undefined || ["FloatLiteral", "IntLiteral", "UnsignedIntLiteral", "GlobalVariable", "PlayerVariable", "Subroutine", "CustomStringLiteral", "LocalizedStringLiteral"].includes(ast.type)) {
                 return; //no args
             }
             var astDefaultsToOverpy = {
@@ -1361,26 +1370,28 @@ var app = new Vue({
             if (!editedCustomGameSettings.gamemodes) {
                 editedCustomGameSettings.gamemodes = {};
             }
-            for (var gamemode in customGameSettingsSchema.gamemodes.values) {
+            for (let i = 0; i < customGameSettingsSchema.gamemodes.values.length; i++) {
+                let gamemode = customGameSettingsSchema.gamemodes.values[i];
+
                 if (gamemode in gamemodeKw && gamemodeKw[gamemode].onlyInOw1) {
                     delete editedCustomGameSettings.gamemodes[gamemode];
                     continue;
                 }
                 if (gamemode !== "general") {
-                    if (!(gamemode in editedCustomGameSettings.gamemodes)) {
+                    if (!(editedCustomGameSettings.gamemodes[gamemode] !== undefined)) {
                         editedCustomGameSettings.gamemodes[gamemode] = {enabled: false};
-                    } else if (!("enabled" in editedCustomGameSettings.gamemodes[gamemode])) {
+                    } else if (!(editedCustomGameSettings.gamemodes[gamemode]["enabled"] !== undefined)) {
                         editedCustomGameSettings.gamemodes[gamemode].enabled = true;
                     }
-                    if (!("enabledMaps" in editedCustomGameSettings.gamemodes[gamemode])) {
+                    if (!(editedCustomGameSettings.gamemodes[gamemode]["enabledMaps"])) {
                         editedCustomGameSettings.gamemodes[gamemode].enabledMaps = Object.keys(mapKw).filter(x => mapKw[x].gamemodes.includes(gamemode));
                     }
                     editedCustomGameSettings.gamemodes[gamemode].enabledMaps = editedCustomGameSettings.gamemodes[gamemode].enabledMaps.filter(x => !mapKw[x].onlyInOw1);
-                    if ("disabledMaps" in editedCustomGameSettings.gamemodes[gamemode]) {
+                    if (editedCustomGameSettings.gamemodes[gamemode]["disabledMaps"]) {
                         editedCustomGameSettings.gamemodes[gamemode].enabledMaps = editedCustomGameSettings.gamemodes[gamemode].enabledMaps.filter(x => !editedCustomGameSettings.gamemodes[gamemode].disabledMaps.includes(x));
                         delete editedCustomGameSettings.gamemodes[gamemode].disabledMaps;
                     }
-                } else if (!(gamemode in editedCustomGameSettings.gamemodes)) {
+                } else if (!(editedCustomGameSettings.gamemodes[gamemode] !== undefined)) {
                     editedCustomGameSettings.gamemodes[gamemode] = {};
                 }
                 fillMissingKeys(editedCustomGameSettings.gamemodes[gamemode], customGameSettingsSchema.gamemodes.values[gamemode].values);
@@ -1396,10 +1407,10 @@ var app = new Vue({
                 }
                 editedCustomGameSettings.heroes[team].isCollapsed = true;
                 editedCustomGameSettings.heroes[team].isArrayCollapsed = true;
-                if ("disabledHeroes" in editedCustomGameSettings.heroes[team]) {
+                if (editedCustomGameSettings.heroes[team]["disabledHeroes"] !== undefined) {
                     editedCustomGameSettings.heroes[team].enabledHeroes = Object.keys(heroKw).filter(x => !editedCustomGameSettings.heroes[team].disabledHeroes.includes(x));
                     delete editedCustomGameSettings.heroes[team].disabledHeroes
-                } else if (!("enabledHeroes" in editedCustomGameSettings.heroes[team])) {
+                } else if (!(editedCustomGameSettings.heroes[team]["enabledHeroes"] !== undefined)) {
                     editedCustomGameSettings.heroes[team].enabledHeroes = Object.keys(heroKw);
                 }
                 for (var hero in customGameSettingsSchema.heroes.values) {
@@ -1415,8 +1426,8 @@ var app = new Vue({
                 }
             }
 
-            for (var key in editedCustomGameSettings) {
-                editedCustomGameSettings[key].isCollapsed = true;
+            for (let j; j < editedCustomGameSettings.length; j++) {
+                editedCustomGameSettings[editedCustomGameSettings[j]].isCollapsed = true;
             }
 
             this.editedCustomGameSettings = editedCustomGameSettings;
