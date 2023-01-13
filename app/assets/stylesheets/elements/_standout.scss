@@ -89,15 +89,15 @@
     }
   }
 
-  small {
+  &__subtitle {
     color: $text-color-dark;
   }
 
-  h3 {
+  &__heading {
     color: var(--standout-color, #{$overwatch-2});
   }
 
-  span {
+  &__description {
     display: none;
     margin-top: $margin / 8;
     font-size: $font-size-small;
