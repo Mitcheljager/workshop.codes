@@ -108,12 +108,6 @@
       display: block;
     }
   }
-
-  a[id] img {
-    background: darken($bg-dark, 10%);
-    color: $text-color-dark;
-    font-size: 12px;
-  }
 }
 
 .standout-grid {
