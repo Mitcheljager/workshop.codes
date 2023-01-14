@@ -1566,7 +1566,7 @@ var app = new Vue({
             this.currentProjectId = this.projects.filter(x => x.id === projectId)[0].id;
         },
         loadProject: async function(projectId) {
-            const response = await new FetchRails(`/projects/${this.currentProjectId}`).get();
+            const response = await new FetchRails(`/projects/${projectId}`).get();
             const data = JSON.parse(response);
 
             var projectData = {
@@ -1592,8 +1592,13 @@ var app = new Vue({
             }
 
             if (response) {
+                if (!data.content) {
+                    console.error("Something went wrong when loading your project")
+                    return
+                }
+
                 this.isOwner = data.is_owner;
-                projectData = JSON.parse(data.content);
+                projectData = JSON.parse(data.content || "[]");
             }
 
             function addParent(ast) {
@@ -1652,14 +1657,19 @@ var app = new Vue({
                 optimization: this.uiSettings.optimization,
             }, (key, value) => key !== "parent" ? value : undefined)
 
-            const response = await new FetchRails("/projects/" + this.currentProjectId, {
-                project: {
-                    title: this.customGameSettings?.main?.modeName || this.translate("untitledMode", this.workshopUiCustomKw),
-                    content: content,
-                },
-            }).post({ method: "put" })
+            try {
+                const response = await new FetchRails("/projects/" + this.currentProjectId, {
+                    project: {
+                        title: this.customGameSettings?.main?.modeName || this.translate("untitledMode", this.workshopUiCustomKw),
+                        content: content,
+                    },
+                }).post({ method: "put" })
 
-            if (!response) console.error(this.translate("errorWhenSaving", this.workshopUiCustomKw))
+                if (!response) throw new Error()
+            } catch (error) {
+                console.error(this.translate("errorWhenSaving", this.workshopUiCustomKw) + " " + error)
+            }
+
         },
         loadUiSettings: async function() {
             if (localStorage.uiSettings) {
