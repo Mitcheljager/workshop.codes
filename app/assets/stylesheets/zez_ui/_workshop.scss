@@ -847,6 +847,21 @@ input[type="number"]:focus {
     border: 1px solid transparent;
 }
 
+.destroy-button {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: var(--delete-title-background);
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.destroy-button:hover {
+    filter: brightness(1.5);
+}
+
 button:hover {
     border-color: white;
 }
@@ -1282,4 +1297,10 @@ button:hover {
     z-index: 999999999999999;
     visibility: hidden;
     top: calc(100% + 5px);
+}
+
+.projects-dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

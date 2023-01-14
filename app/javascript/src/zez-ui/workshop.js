@@ -1671,6 +1671,19 @@ var app = new Vue({
             }
 
         },
+        destroyProject: async function(projectId) {
+            if (projectId === this.currentProjectId) {
+                console.error("Cannot destroy project that is current loaded. Please load a different project first.");
+                return;
+            }
+            if (!confirm("Are you sure? This can not be undone.")) return
+
+            await new FetchRails("/projects/" + projectId, {
+            }).post({ method: "delete" })
+            .then(data => {
+                this.projects = this.projects.filter(p => p.id !== projectId);
+            })
+        },
         loadUiSettings: async function() {
             if (localStorage.uiSettings) {
                 var uiSettings = JSON.parse(localStorage.uiSettings);
