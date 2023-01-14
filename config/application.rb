@@ -14,6 +14,7 @@ module OverwatchWorkshop
     config.exceptions_app = self.routes
     config.active_job.queue_adapter = :sucker_punch
     config.active_storage.track_variants = true
+    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
 
     config.i18n.available_locales = [:en, :ko]
     config.i18n.default_locale = :en
