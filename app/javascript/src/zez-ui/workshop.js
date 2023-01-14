@@ -1682,6 +1682,7 @@ var app = new Vue({
             }).post({ method: "delete" })
             .then(data => {
                 this.projects = this.projects.filter(p => p.id !== projectId);
+                console.info("Succesfully destroyed project");
             })
         },
         loadUiSettings: async function() {
