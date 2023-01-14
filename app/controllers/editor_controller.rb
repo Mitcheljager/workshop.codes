@@ -23,6 +23,6 @@ class EditorController < ApplicationController
   private
 
   def current_user_projects(content_type)
-    @projects = current_user.present? ? current_user.projects.where(content_type: content_type).order(updated_at: :desc).select("uuid", "title", "content", "content_type") : []
+    @projects = current_user.present? ? current_user.projects.where(content_type: content_type).order(updated_at: :desc).select("uuid", "title", "content_type") : []
   end
 end
