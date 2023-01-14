@@ -322,7 +322,7 @@
                                 <div class="projects-dropdown-item">
                                     {{ label }}
 
-                                    <button class="destroy-button" v-on:click.stop="destroyProject(code)" v-if="!!code">
+                                    <button class="destroy-button" v-on:click.stop="destroyProject(code)" v-if="!!code && code !== currentProjectId">
                                         Destroy
                                     </button>
                                 </div>
