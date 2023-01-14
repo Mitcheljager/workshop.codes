@@ -88,25 +88,25 @@
       background: var(--standout-color, #{$overwatch-2});
     }
   }
+}
 
-  &__subtitle {
-    color: $text-color-dark;
-  }
+.standout__subtitle {
+  color: $text-color-dark;
+}
 
-  &__heading {
-    color: var(--standout-color, #{$overwatch-2});
-  }
+.standout__heading {
+  color: var(--standout-color, #{$overwatch-2});
+}
 
-  &__description {
-    display: none;
-    margin-top: $margin / 8;
-    font-size: $font-size-small;
-    line-height: 1.25em;
-    text-align: left;
+.standout__description {
+  display: none;
+  margin-top: $margin / 8;
+  font-size: $font-size-small;
+  line-height: 1.25em;
+  text-align: left;
 
-    @include media-min(md) {
-      display: block;
-    }
+  @include media-min(md) {
+    display: block;
   }
 }
 
