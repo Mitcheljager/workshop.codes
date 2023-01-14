@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     if @project.save
       render json: @project, methods: [:is_owner], layout: false
     else
-      render json: "", status: 500, layout: false
+      render json: @project.errors.to_json, status: 500, layout: false
     end
   end
 
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       render json: @project, layout: false
     else
-      render json: "", status: 500, layout: false
+      render json: @project.errors.full_messages, status: 500, layout: false
     end
   end
 
@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
     if @project.destroy
       render json: "Success", layout: false
     else
-      render json: "", status: 500, layout: false
+      render json: @project.errors.to_json, status: 500, layout: false
     end
   end
 
