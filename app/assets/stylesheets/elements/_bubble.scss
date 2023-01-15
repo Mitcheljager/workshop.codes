@@ -1,0 +1,42 @@
+@keyframes fly-in-bubble {
+  from {
+    transform: translateY(105%);
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  bottom: -#{$margin / 8};
+  left: 0;
+  transform: translateY(100%);
+  width: 100%;
+  padding: $margin / 4;
+  border-radius: $border-radius / 2;
+  background: $orange;
+  box-shadow: $shadow;
+  z-index: 10;
+  text-align: left;
+  font-size: $font-size-small;
+  color: $pure-white;
+  animation: fly-in-bubble 200ms forwards;
+
+  &::before {
+    $size: 1rem;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 1rem;
+    top: $size * -0.5;
+    transform: rotate(45deg);
+    height: $size;
+    width: $size;
+    background: $orange;
+    border-top-left-radius: $border-radius / 4;
+  }
+
+  hr {
+    margin: $margin / 4 0;
+    background: rgba($pure-white, 0.35);
+  }
+}
