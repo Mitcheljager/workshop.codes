@@ -12,7 +12,7 @@
     <% @post.errors.each do |error| %>
       elements = document.querySelectorAll("[name*='post[<%= error.attribute %>']")
       elements.forEach(element => {
-        const formGroup = element.closest(".form-group")
+        const formGroup = element.closest("[class^='form-group']")
         formGroup.classList.add("field_with_errors")
 
         const tabContent = element.closest("[data-tab]")
