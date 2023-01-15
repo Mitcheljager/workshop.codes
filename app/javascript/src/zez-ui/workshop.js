@@ -2,6 +2,7 @@ import Vue from "./libs/vue.min"
 import * as VueSelect from "./libs/vue-select.min"
 import * as Popper from "./libs/popper.min"
 import * as Toastify from "./libs/toastify"
+import * as LZString from "lz-string"
 import FetchRails from "../fetch-rails"
 
 console.debug = function() {}
@@ -1598,7 +1599,14 @@ var app = new Vue({
                 }
 
                 this.isOwner = data.is_owner;
-                projectData = JSON.parse(data.content || "[]");
+
+                let decompressedString = "";
+                try {
+                    decompressedString = LZString.decompressFromUTF16(data.content);
+                } catch {
+                    console.log("Could not decompress string, which is likely because the project is not compressed. Safe to ignore.");
+                }
+                projectData = JSON.parse(decompressedString || data.content || "[]");
             }
 
             function addParent(ast) {
@@ -1655,19 +1663,24 @@ var app = new Vue({
                 activatedExtensions: this.activatedExtensions,
                 disabledWarnings: this.uiSettings.disabledWarnings,
                 optimization: this.uiSettings.optimization,
-            }, (key, value) => key !== "parent" ? value : undefined)
+            }, (key, value) => key !== "parent" ? value : undefined);
+
+            const compressed = LZString.compressToUTF16(content);
+
+            console.log("Uncompressed", content.length);
+            console.log("Compressed", compressed.length);
 
             try {
                 const response = await new FetchRails("/projects/" + this.currentProjectId, {
                     project: {
                         title: this.customGameSettings?.main?.modeName || this.translate("untitledMode", this.workshopUiCustomKw),
-                        content: content,
+                        content: compressed,
                     },
-                }).post({ method: "put" })
+                }).post({ method: "put" });
 
-                if (!response) throw new Error()
+                if (!response) throw new Error();
             } catch (error) {
-                console.error(this.translate("errorWhenSaving", this.workshopUiCustomKw) + " " + error)
+                console.error(this.translate("errorWhenSaving", this.workshopUiCustomKw) + " " + error);
             }
 
         },
@@ -1676,7 +1689,7 @@ var app = new Vue({
                 console.error("Cannot destroy project that is current loaded. Please load a different project first.");
                 return;
             }
-            if (!confirm("Are you sure? This can not be undone.")) return
+            if (!confirm("Are you sure? This can not be undone.")) return;
 
             await new FetchRails("/projects/" + projectId, {
             }).post({ method: "delete" })
