@@ -34,11 +34,6 @@
     border-top-left-radius: $border-radius / 4;
   }
 
-  hr {
-    margin: $margin / 4 0;
-    background: rgba($pure-white, 0.35);
-  }
-
   &--warning {
     background: $orange;
     color: $pure-white;
@@ -47,4 +42,9 @@
       background: $orange;
     }
   }
+}
+
+.bubble__separator {
+  margin: $margin / 4 0;
+  background: rgba($pure-white, 0.35);
 }
