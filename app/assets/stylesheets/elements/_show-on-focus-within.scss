@@ -1,0 +1,7 @@
+.show-on-focus-within__content {
+  display: none;
+
+  .show-on-focus-within:focus-within & {
+    display: block;
+  }
+}

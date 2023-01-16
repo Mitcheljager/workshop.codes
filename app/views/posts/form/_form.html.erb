@@ -8,8 +8,18 @@
           <%= form.text_field :title, class: "form-input form-input--large", placeholder: t("posts.form.title") %>
         </div>
 
-        <div class="form-group sm:mt-0">
+        <div class="form-group relative show-on-focus-within sm:mt-0">
           <%= form.text_field :code, class: "form-input form-input--large", placeholder: t("posts.form.code"), data: { action: "reveal-on-difference", original: @post.code }, autocomplete: "off" %>
+
+          <% if current_user.posts.none? %>
+            <div class="bubble bubble--warning show-on-focus-within__content">
+              Not sure where to get a code? <br>
+              <%= link_to "Get started here", "https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code", class: "button button--small button--light text-orange mt-1/8", target: "_blank" %>
+              <hr class="bubble__separator" />
+              Looking to get started with the Workshop? <br>
+              <%= link_to "Check out our Editor", editor_path, class: "button button--small button--light text-orange mt-1/8", target: "_blank" %>
+            </div>
+          <% end %>
         </div>
       </div>
 
