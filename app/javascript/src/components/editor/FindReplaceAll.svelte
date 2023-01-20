@@ -30,7 +30,7 @@
       i.type == "item" &&
       i.content.indexOf(value) != -1)
 
-    const regex = new RegExp(value, "g")
+    const regex = new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "g")
 
     itemMatches = filteredItems.map(i => {
       const contentMatches = []
