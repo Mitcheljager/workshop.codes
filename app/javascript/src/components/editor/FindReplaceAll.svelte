@@ -17,7 +17,7 @@
   $: if (active) focusInput()
   $: if (value || replace) message = ""
   $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches.length, 0)
-  $: occurrencesString = `${ occurrences } occurance${ occurrences > 1 ? "s" : "" } in ${ itemMatches.length } item${ itemMatches.length > 1 ? "s" : "" }`
+  $: occurrencesString = `${ occurrences } occurrence${ occurrences > 1 ? "s" : "" } in ${ itemMatches.length } item${ itemMatches.length > 1 ? "s" : "" }`
 
   function searchItems() {
     if (!active) return
