@@ -16,8 +16,8 @@
   $: searchItems(value, replace)
   $: if (active) focusInput()
   $: if (value || replace) message = ""
-  $: occurances = itemMatches.reduce((p, c) => p + c.contentMatches.length, 0)
-  $: occurancesString = `${occurances} occurance${occurances > 1 ? "s" : ""} in ${itemMatches.length} item${itemMatches.length > 1 ? "s" : ""}`
+  $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches.length, 0)
+  $: occurrencesString = `${occurrences} occurance${occurrences > 1 ? "s" : ""} in ${itemMatches.length} item${itemMatches.length > 1 ? "s" : ""}`
 
   function searchItems() {
     if (!active) return
@@ -71,7 +71,7 @@
       updateItem(item)
     })
 
-    message = `Replaced ${occurancesString}`
+    message = `Replaced ${occurrencesString}`
 
     searchItems()
   }
@@ -166,7 +166,7 @@
     <div class="matches">
       {#if itemMatches.length}
         <div class="text-italic text-dark mb-1/8">
-          Found {occurancesString}
+          Found {occurrencesString}
         </div>
       {/if}
 
