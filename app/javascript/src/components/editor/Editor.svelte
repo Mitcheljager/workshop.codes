@@ -12,6 +12,7 @@
   import Empty from "./Empty.svelte"
   import Settings from "./Settings.svelte"
   import ItemFinder from "./ItemFinder.svelte"
+  import FindReplaceAll from "./FindReplaceAll.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
 
   export let values
@@ -136,9 +137,15 @@
   {#if $currentProjectUUID}
     <div class="editor__aside">
       <div class="editor__scrollable">
-        <div class="p-1/4 pt-0">
+        <div class="pr-1/4 pl-1/4">
           <ItemFinder />
+
+          <div class="mt-1/16">
+            <FindReplaceAll />
+          </div>
         </div>
+
+        <hr class="mt-1/4 mb-1/4" />
 
         <EditorAside />
       </div>
