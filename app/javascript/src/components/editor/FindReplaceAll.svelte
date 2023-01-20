@@ -4,7 +4,7 @@
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
-  let active = true
+  let active = false
   let value = ""
   let replace = ""
   let input
