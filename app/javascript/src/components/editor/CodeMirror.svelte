@@ -19,6 +19,7 @@
 
   $: if ($currentProjectUUID) $editorStates = {}
   $: if ($currentItem.id != currentId && view) updateEditorState()
+  $: if ($currentItem.forceUpdate) updateEditorState()
 
   onMount(() => {
     view = new EditorView({
@@ -29,7 +30,8 @@
   onDestroy(() => $editorStates = {})
 
   function updateEditorState() {
-    if (currentId) $editorStates[currentId] = view.state
+    if (currentId && !$currentItem.forceUpdate) $editorStates[currentId] = view.state
+    if ($currentItem.forceUpdate) $currentItem = { ...$currentItem, forceUpdate: false }
 
     currentId = $currentItem.id
 

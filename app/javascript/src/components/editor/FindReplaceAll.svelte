@@ -1,19 +1,26 @@
 <script>
   import { items } from "../../stores/editor"
-  import { getItemById, replaceBetween, setCurrentItemById } from "../../utils/editor"
+  import { getItemById, replaceBetween, setCurrentItemById, updateItem } from "../../utils/editor"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
   let active = true
   let value = ""
+  let replace = ""
   let input
+  let replaceInput
   let itemMatches = []
   let selected = 0
+  let message = ""
 
-  $: searchItems(value)
+  $: searchItems(value, replace)
   $: if (active) focusInput()
+  $: if (value || replace) message = ""
+  $: occurances = itemMatches.reduce((p, c) => p + c.contentMatches.length, 0)
+  $: occurancesString = `${occurances} occurance${occurances > 1 ? "s" : ""} in ${itemMatches.length} item${itemMatches.length > 1 ? "s" : ""}`
 
   function searchItems() {
+    if (!active) return
     if (!value) {
       itemMatches = []
       return
@@ -54,10 +61,29 @@
     selected = 0
   }
 
+  function replaceInAll() {
+    if (!active) return
+    if (!itemMatches?.length) return
+
+    itemMatches.forEach(match => {
+      const item = getItemById(match.id)
+      item.content = item.content.replaceAll(value, replace)
+      updateItem(item)
+    })
+
+    message = `Replaced ${occurancesString}`
+
+    searchItems()
+  }
+
   function highlightString(string) {
     const index = string.indexOf(value)
     const subString = string.substring(index, index + value.length)
-    return replaceBetween(string, `<mark>${ subString }</mark>`, index, index + value.length)
+    let elementString = `<mark>${ subString }</mark>`
+
+    if (replace) elementString += `<mark class="text-white"> ⇢ ${ replace }</mark>`
+
+    return replaceBetween(string, elementString, index, index + value.length)
   }
 
   function getParentsString(id) {
@@ -86,14 +112,13 @@
   }
 
   function keydown(event) {
-    if (input != document.activeElement) return
-
     if (event.ctrlKey && event.shiftKey && event.keyCode == 70) { // F key
       event.preventDefault()
       active = !active
       if (active) focusInput()
     }
 
+    if (input != document.activeElement && replaceInput != document.activeElement) return
     if (!active) return
 
     if (selected && event.keyCode == 13) { // Enter key
@@ -126,21 +151,35 @@
 {/if}
 
 {#if active}
-  <div class="flex mt-1/4">
-    <input type="text" class="form-input bg-darker" placeholder="Find in all files..." bind:value bind:this={input} />
-    <button class="button button--secondary button--square button--small ml-1/16">Find</button>
-  </div>
+  <div in:fly={{ duration: 150, y: -30 }}>
+    <input type="text" class="form-input bg-darker mt-1/4" placeholder="Find in all..." bind:value bind:this={input} />
 
-  <em class="block mt-1/16 text-dark text-small">Note: Replace can not be undone</em>
+    <div class="flex mt-1/16">
+      <input type="text" class="form-input bg-darker" placeholder="Replace found with..." bind:value={replace} bind:this={replaceInput} />
+      <button class="button button--secondary button--square button--small ml-1/16" on:click={replaceInAll}>Replace</button>
+    </div>
+
+    <div class="mt-1/16 text-italic text-dark text-small">Find is case sensitive</div>
+  </div>
 
   {#if value}
     <div class="matches">
+      {#if itemMatches.length}
+        <div class="text-italic text-dark mb-1/8">
+          Found {occurancesString}
+        </div>
+      {/if}
+
+      {#if !itemMatches.length && !message}
+        <em class="text-dark">No matches found</em>
+      {/if}
+
       {#each itemMatches as item, i}
         <div class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
           {item.name}
 
           {#if item.parent}
-            <small class="text-dark">{getParentsString(item.parent)}</small>
+            <div class="text-small text-dark">{getParentsString(item.parent)}</div>
           {/if}
 
           <div class="text-dark text-small">
@@ -154,10 +193,10 @@
           </div>
         </div>
       {/each}
-
-      {#if !itemMatches.length}
-        <em class="text-dark pl-1/4">No matches found</em>
-      {/if}
     </div>
+  {/if}
+
+  {#if message}
+    <div class="text-primary" in:fade={{ duration: 150 }}>{message}</div>
   {/if}
 {/if}

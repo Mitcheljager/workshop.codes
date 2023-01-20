@@ -1,4 +1,4 @@
-import { currentItem, items, openFolders, projects } from "../stores/editor"
+import { currentItem, items, openFolders, projects, editorStates } from "../stores/editor"
 import { get } from "svelte/store"
 
 export function createNewItem(name, content, position = 9999, type = "item") {
@@ -110,6 +110,30 @@ export function setCurrentItemById(id) {
   if (!item.parent) return
   const parent = getItemById(item.parent)
   if (parent) toggleFolderState(parent, true)
+}
+
+export function updateItem(newItem) {
+  items.set(get(items).map(item => {
+    if (item.id != newItem.id) return item
+    return newItem
+  }))
+
+  updateStateForId(newItem.id, newItem.content)
+}
+
+export async function updateStateForId(id, insert) {
+  const state = get(editorStates)[id]
+
+  if (!state) return
+
+  const transaction = state.update({changes: {from: 0, to: state.doc.length, insert}})
+
+  editorStates.set({
+    ...get(editorStates),
+    [id]: transaction.state
+  })
+
+  if (get(currentItem).id == id) currentItem.set({ ...get(currentItem), forceUpdate: true })
 }
 
 export function toggleFolderState(item, state, set = true) {
