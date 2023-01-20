@@ -73,12 +73,9 @@
 
     if (!active) return
 
-    if (event.keyCode == 13) {
-      selectItem(matches[selected].id)
-    }
-
-    if (event.keyCode == 40) setSelected(1)
-    if (event.keyCode == 38) setSelected(-1)
+    if (event.keyCode == 13) selectItem(matches[selected].id) // Enter key
+    if (event.keyCode == 40) setSelected(1) // Down key
+    if (event.keyCode == 38) setSelected(-1) // Up key
   }
 
   async function focusInput() {
@@ -99,7 +96,7 @@
       <input type="text" class="form-input form-input--large bg-darker" placeholder="Find files by name..." bind:value bind:this={input} />
 
       {#if value}
-        <div class="matches">
+        <div class="matches matches--dropdown">
           {#each sortedMatches as match, i}
             <div class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(match.id)}>
               {@html highlightString(match.name, match.from)}
