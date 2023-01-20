@@ -1,22 +1,31 @@
 .matches {
-  padding: $margin / 8 0;
   margin-top: $margin / 4;
-  border-radius: $border-radius / 2;
-  background: darken($bg-dark, 5%);
-  box-shadow: $shadow;
-  overflow: hidden;
+
+  &--dropdown {
+    padding: $margin / 8 0;
+    border-radius: $border-radius / 2;
+    background: darken($bg-dark, 5%);
+    box-shadow: $shadow;
+    overflow: hidden;
+  }
 }
 
 .matches__item {
-  padding: $margin / 8 $margin / 4;
+  padding: $margin / 8 0;
   cursor: pointer;
+
+  .matches--dropdown & {
+    padding: $margin / 8 $margin / 4;
+  }
 
   &:hover {
     background: darken($bg-dark, 7.5%);
+    box-shadow: $margin 0 0 darken($bg-dark, 7.5%), $margin * -1 0 0 darken($bg-dark, 7.5%);
   }
 
   &--active {
     background: $bg-darker;
+    box-shadow: $margin 0 0 $bg-darker, $margin * -1 0 0 $bg-darker;
     color: $white;
   }
 }

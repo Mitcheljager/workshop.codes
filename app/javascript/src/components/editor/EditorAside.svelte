@@ -15,6 +15,10 @@
 
 <svelte:window on:keydown={keydown} />
 
+<div class="pl-1/4 pr-1/4 pb-1/8">
+  <strong>Items</strong>
+</div>
+
 <div bind:this={element} tabindex="0">
   <EditorList />
 

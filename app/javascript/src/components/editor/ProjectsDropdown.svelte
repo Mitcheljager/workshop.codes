@@ -45,6 +45,8 @@
         $items = JSON.parse(parsedData.content) || []
       })
       .catch(error => {
+        $items = []
+        $currentItem = {}
         console.error(error)
         alert(`Something went wrong while loading, please try again. ${ error }`)
       })
