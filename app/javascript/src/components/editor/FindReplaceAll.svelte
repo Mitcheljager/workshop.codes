@@ -17,7 +17,7 @@
   $: if (active) focusInput()
   $: if (value || replace) message = ""
   $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches.length, 0)
-  $: occurrencesString = `${occurrences} occurance${occurrences > 1 ? "s" : ""} in ${itemMatches.length} item${itemMatches.length > 1 ? "s" : ""}`
+  $: occurrencesString = `${ occurrences } occurance${ occurrences > 1 ? "s" : "" } in ${ itemMatches.length } item${ itemMatches.length > 1 ? "s" : "" }`
 
   function searchItems() {
     if (!active) return
@@ -30,7 +30,7 @@
       i.type == "item" &&
       i.content.indexOf(value) != -1)
 
-    const regex = new RegExp(value, 'g');
+    const regex = new RegExp(value, "g")
 
     itemMatches = filteredItems.map(i => {
       const contentMatches = []
@@ -54,7 +54,7 @@
         name: i.name,
         parent: i.parent,
         order: i.name.length - value.length,
-        contentMatches,
+        contentMatches
       }
     })
 
@@ -71,7 +71,7 @@
       updateItem(item)
     })
 
-    message = `Replaced ${occurrencesString}`
+    message = `Replaced ${ occurrencesString }`
 
     searchItems()
   }
