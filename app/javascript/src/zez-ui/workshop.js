@@ -1593,20 +1593,15 @@ var app = new Vue({
             }
 
             if (response) {
-                if (!data.content) {
-                    console.error("Something went wrong when loading your project")
-                    return
-                }
-
                 this.isOwner = data.is_owner;
 
-                let decompressedString = "";
                 try {
-                    decompressedString = LZString.decompressFromUTF16(data.content);
+                    let decompressedString = LZString.decompressFromUTF16(data.content);
+                    projectData = JSON.parse(decompressedString)
                 } catch {
                     console.log("Could not decompress string, which is likely because the project is not compressed. Safe to ignore.");
+                    if (data.content) projectData = JSON.parse(data.content);
                 }
-                projectData = JSON.parse(decompressedString || data.content || "[]");
             }
 
             function addParent(ast) {
