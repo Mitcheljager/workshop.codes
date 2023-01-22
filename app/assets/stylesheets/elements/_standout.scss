@@ -115,6 +115,16 @@
   gap: $margin / 4;
 
   @include media-min(md) {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .standout {
+      width: calc(50% - #{$margin / 8});
+    }
+
+    .standout--small {
+      width: calc(33% - #{$margin / 8} - 1px);
+    }
   }
 }
