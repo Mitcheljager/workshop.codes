@@ -41,7 +41,7 @@ export function getClosingBracket(content, characterOpen = "{", characterClose =
       initial = false
     }
     else if (c == characterClose) counter--
-    if (counter > 20 || closePos > 100_000 || closePos >= content.length) break
+    if (counter > 20 || closePos > (100_000 + start) || closePos >= content.length) break
   }
 
   return closePos
