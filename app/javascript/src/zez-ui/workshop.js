@@ -1,5 +1,7 @@
+import Sortable from "sortablejs"
 import Vue from "./libs/vue.min"
 import * as VueSelect from "./libs/vue-select.min"
+import * as Draggable from "./libs/vue-draggable.min"
 import * as Popper from "./libs/popper.min"
 import * as Toastify from "./libs/toastify"
 import * as LZString from "lz-string"
@@ -7,6 +9,7 @@ import FetchRails from "../fetch-rails"
 
 console.debug = function() {}
 Vue.component('v-select', VueSelect.VueSelect);
+Vue.component('draggable', Draggable);
 Vue.component("function-display", {
     props: ["ast", "astIdx", "depth"],
     template: "#function-display-template",
@@ -114,6 +117,14 @@ var app = new Vue({
             } else {
                 return this.uiSettings.background;
             }
+        },
+        dragOptions() {
+            return {
+              animation: 200,
+              group: "description",
+              disabled: false,
+              ghostClass: "ghost"
+            };
         }
     },
     "methods": {

@@ -1,106 +1,114 @@
 <div v-if="rules.length === 0" class="no-values-msg font-blizzglobal"><div id="no-rules">{{ translate("noRules", workshopUiKw) }}</div><div id="no-rules-help" class="font-futurano2d">{{ translate("pressButtonToImport1", workshopUiCustomKw) }}<img id="button-import" src="/zez-ui/img/import.png"/>{{ translate("pressButtonToImport2", workshopUiCustomKw) }}</div></div>
     <div v-else id="rules">
-        <div class="rule" v-for="(rule, ruleIdx) in rules">
-            <div class="rule-collapse-bar">
-                <template v-if="rule.isCollapsed">
-                    <img class="img-button rule-expand-button" src="/zez-ui/img/expand_rule.png" v-on:click="rule.isCollapsed=false"/>
-                </template>
-                <template v-else>
-                    <img class="img-button rule-collapse-button" src="/zez-ui/img/collapse_rule.png" v-on:click="rule.isCollapsed=true"/>
-                    <div class="rule-collapse-line"></div>
-                </template>
-            </div>
-            <div class="rule-header-and-content">
-
-                <div class="rule-header">
-                    <input type="text" class="rule-title" :class="{'disabled': rule.ruleAttributes.isDisabled}" v-model="rule.ruleAttributes.name">
-                    <input type="checkbox" class="checkbox" v-model="rule.isSelected">
+        <draggable v-model="rules" group="rules" animation="200">
+            <div class="rule" v-for="(rule, ruleIdx) in rules">
+                <div class="rule-collapse-bar">
+                    <template v-if="rule.isCollapsed">
+                        <img class="img-button rule-expand-button" src="/zez-ui/img/expand_rule.png" v-on:click="rule.isCollapsed=false"/>
+                    </template>
+                    <template v-else>
+                        <img class="img-button rule-collapse-button" src="/zez-ui/img/collapse_rule.png" v-on:click="rule.isCollapsed=true"/>
+                        <div class="rule-collapse-line"></div>
+                    </template>
                 </div>
-                <div class="rule-content" v-if="!rule.isCollapsed">
-                    <div class="rule-event">
-                        <div class="rule-event-name">{{ translate("event", ruleAttributesDisplayNamesKw) }}</div>
-                        <div class="rule-event-value">
-                            <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('event')" :reduce="x => x.code" v-model="rule.ruleAttributes.event" v-on:input="rebuildRuleAttributes(rule)">
-                            </v-select>
-                        </div>
+                <div class="rule-header-and-content">
+
+                    <div class="rule-header">
+                        <input type="text" class="rule-title" :class="{'disabled': rule.ruleAttributes.isDisabled}" v-model="rule.ruleAttributes.name">
+                        <input type="checkbox" class="checkbox" v-model="rule.isSelected">
                     </div>
-                    <div class="rule-event" v-if="rule.ruleAttributes.eventTeam">
-                        <div class="rule-event-name">{{ translate("eventTeam", ruleAttributesDisplayNamesKw) }}</div>
-                        <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventTeam')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventTeam"></v-select></div>
-                    </div>
-                    <div class="rule-event" v-if="rule.ruleAttributes.eventPlayer">
-                        <div class="rule-event-name">{{ translate("eventPlayer", ruleAttributesDisplayNamesKw) }}</div>
-                        <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventPlayer')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventPlayer"></v-select></div>
-                    </div>
-                    <div class="rule-event" v-if="rule.ruleAttributes.subroutineName !== undefined">
-                        <div class="rule-event-name">{{ translate("subroutineName", ruleAttributesDisplayNamesKw) }}</div>
-                        <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('Subroutine')" :reduce="x => x.code" v-model="rule.ruleAttributes.subroutineName"></v-select></div>
-                    </div>
-                    <!--TODO: subroutines-->
-                    <div class="conditions-and-actions">
-                        <div class="conditions">
-                            <div class="conditions-header">
-                                <div class="conditions-title">{{ translate("conditions", workshopUiKw) }} <span class="conditions-nb">({{ rules[ruleIdx].ruleAttributes.conditions?.length || 0}})</span></div>
-                                <div class="conditions-buttons">
-                                    <template v-if="rule.ruleAttributes.conditions.some(x => x.isSelected)">
-                                        <img class="img-button button-action-condition button-delete" src="/zez-ui/img/delete.png" v-on:click="deleteSelectedConditions(rule)"/>
-                                        <div id="buttons-move-up-down" class="button-action-condition">
-                                            <img id="button-move-up" class="img-button" src="/zez-ui/img/move_up.png" v-on:click="moveSelectedConditions(rule, true)"/>
-                                            <img id="button-move-down" class="img-button" src="/zez-ui/img/move_down.png" v-on:click="moveSelectedConditions(rule, false)"/>
-                                        </div>
-                                        <img id="button-toggle" class="img-button button-action-condition" src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedConditions(rule)">
-                                        <img id="button-copy" class="img-button button-action-condition" src="/zez-ui/img/copy.png" v-on:click="copySelectedConditions(rule)"/>
-                                    </template>
-                                    <img v-if="clipboard?.type === 'conditions'" id="button-paste" class="img-button button-action-condition" src="/zez-ui/img/paste.png" v-on:click="pasteConditions(rule)"/>
-                                    <img id="button-select-all" class="img-button button-action-condition" src="/zez-ui/img/select_all.png" v-on:click="selectAllConditions(rule)"/>
-                                    <img id="button-add" class="img-button button-action-condition" src="/zez-ui/img/add.png" v-on:click="addCondition(rule)"/>
-                                </div>
+                    <div class="rule-content" v-if="!rule.isCollapsed">
+                        <div class="rule-event">
+                            <div class="rule-event-name">{{ translate("event", ruleAttributesDisplayNamesKw) }}</div>
+                            <div class="rule-event-value">
+                                <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('event')" :reduce="x => x.code" v-model="rule.ruleAttributes.event" v-on:input="rebuildRuleAttributes(rule)">
+                                </v-select>
                             </div>
-                            <div v-if="!rule.ruleAttributes.conditions?.length" class="no-values-msg font-blizzglobal">{{ translate("noConditions", workshopUiKw) }}</div>
-                            <div v-else>
-                                <div v-for="(condition, conditionIdx) in rule.ruleAttributes.conditions" class="condition">
-                                    <div class="comment" v-if="condition.comment">{{ condition.comment }}</div>
-                                    <div class="code-and-checkbox">
-                                        <div class="code-display-wrapper" :class="{'disabled': condition.isDisabled}" v-on:click="editActionOrCondition(condition, true, conditionIdx)">
-                                            <div class="code-display" v-html="displayAst(condition)"></div>
-                                        </div>
-                                        <input type="checkbox" class="checkbox" v-model="condition.isSelected">
+                        </div>
+                        <div class="rule-event" v-if="rule.ruleAttributes.eventTeam">
+                            <div class="rule-event-name">{{ translate("eventTeam", ruleAttributesDisplayNamesKw) }}</div>
+                            <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventTeam')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventTeam"></v-select></div>
+                        </div>
+                        <div class="rule-event" v-if="rule.ruleAttributes.eventPlayer">
+                            <div class="rule-event-name">{{ translate("eventPlayer", ruleAttributesDisplayNamesKw) }}</div>
+                            <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('eventPlayer')" :reduce="x => x.code" v-model="rule.ruleAttributes.eventPlayer"></v-select></div>
+                        </div>
+                        <div class="rule-event" v-if="rule.ruleAttributes.subroutineName !== undefined">
+                            <div class="rule-event-name">{{ translate("subroutineName", ruleAttributesDisplayNamesKw) }}</div>
+                            <div class="rule-event-value"><v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition"  :clearable="false" :options="getDropdownOptionsForType('Subroutine')" :reduce="x => x.code" v-model="rule.ruleAttributes.subroutineName"></v-select></div>
+                        </div>
+                        <!--TODO: subroutines-->
+                        <div class="conditions-and-actions">
+                            <div class="conditions">
+                                <div class="conditions-header">
+                                    <div class="conditions-title">{{ translate("conditions", workshopUiKw) }} <span class="conditions-nb">({{ rules[ruleIdx].ruleAttributes.conditions?.length || 0}})</span></div>
+                                    <div class="conditions-buttons">
+                                        <template v-if="rule.ruleAttributes.conditions.some(x => x.isSelected)">
+                                            <img class="img-button button-action-condition button-delete" src="/zez-ui/img/delete.png" v-on:click="deleteSelectedConditions(rule)"/>
+                                            <div id="buttons-move-up-down" class="button-action-condition">
+                                                <img id="button-move-up" class="img-button" src="/zez-ui/img/move_up.png" v-on:click="moveSelectedConditions(rule, true)"/>
+                                                <img id="button-move-down" class="img-button" src="/zez-ui/img/move_down.png" v-on:click="moveSelectedConditions(rule, false)"/>
+                                            </div>
+                                            <img id="button-toggle" class="img-button button-action-condition" src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedConditions(rule)">
+                                            <img id="button-copy" class="img-button button-action-condition" src="/zez-ui/img/copy.png" v-on:click="copySelectedConditions(rule)"/>
+                                        </template>
+                                        <img v-if="clipboard?.type === 'conditions'" id="button-paste" class="img-button button-action-condition" src="/zez-ui/img/paste.png" v-on:click="pasteConditions(rule)"/>
+                                        <img id="button-select-all" class="img-button button-action-condition" src="/zez-ui/img/select_all.png" v-on:click="selectAllConditions(rule)"/>
+                                        <img id="button-add" class="img-button button-action-condition" src="/zez-ui/img/add.png" v-on:click="addCondition(rule)"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="actions-header">
-                                <div class="actions-title">{{ translate("actions", workshopUiKw) }} <span class="actions-nb">({{ rule.children.length }})</span></div>
-                                <div class="actions-buttons">
-                                    <template v-if="rule.children.some(x => x.isSelected)">
-                                        <img class="img-button button-action-condition button-delete" src="/zez-ui/img/delete.png" v-on:click="deleteSelectedActions(rule)"/>
-                                        <div id="buttons-move-up-down" class="button-action-condition">
-                                            <img id="button-move-up" class="img-button" src="/zez-ui/img/move_up.png" v-on:click="moveSelectedActions(rule, true)"/>
-                                            <img id="button-move-down" class="img-button" src="/zez-ui/img/move_down.png" v-on:click="moveSelectedActions(rule, false)">
+                                <div v-if="!rule.ruleAttributes.conditions?.length" class="no-values-msg font-blizzglobal">{{ translate("noConditions", workshopUiKw) }}</div>
+                                <div v-else>
+                                    <draggable v-model="rule.ruleAttributes.conditions" animation="200">
+                                        <div v-for="(condition, conditionIdx) in rule.ruleAttributes.conditions" class="condition">
+                                            <div class="comment" v-if="condition.comment">{{ condition.comment }}{{ console.log(condition) }}</div>
+                                            <div class="code-and-checkbox">
+                                                <div class="code-display-wrapper" :class="{'disabled': condition.isDisabled}" v-on:click="editActionOrCondition(condition, true, conditionIdx)">
+                                                    <div class="code-display" v-html="displayAst(condition)"></div>
+                                                </div>
+                                                <input type="checkbox" class="checkbox" v-model="condition.isSelected">
+                                            </div>
                                         </div>
-                                        <img id="button-toggle" class="img-button button-action-condition" src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedActions(rule)"/>
-                                        <img id="button-copy" class="img-button button-action-condition" src="/zez-ui/img/copy.png" v-on:click="copySelectedActions(rule)"/>
-                                    </template>
-                                    <img v-if="clipboard?.type === 'actions'" id="button-paste" class="img-button button-action-condition" src="/zez-ui/img/paste.png" v-on:click="pasteActions(rule)"/>
-                                    <img id="button-select-all" class="img-button button-action-condition" src="/zez-ui/img/select_all.png" v-on:click="selectAllActions(rule)"/>
-                                    <img id="button-add" class="img-button button-action-condition" src="/zez-ui/img/add.png" v-on:click="addAction(rule)"/>
+                                    </draggable>
                                 </div>
                             </div>
-                            <div v-if="rule.children.length === 0" class="no-values-msg font-blizzglobal">{{ translate("noActions", workshopUiKw) }}</div>
-
-                            <div v-else v-for="(action, actionIdx) in rule.children" class="action">
-                                <div class="comment" v-if="action.comment" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">{{ action.comment }}</div>
-                                <div class="code-and-checkbox">
-                                    <div class="code-display-wrapper" :class="{'disabled': action.isDisabled}" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">
-                                        <div class="code-display" v-html="displayAst(action)"></div>
+                            <div class="actions">
+                                <div class="actions-header">
+                                    <div class="actions-title">{{ translate("actions", workshopUiKw) }} <span class="actions-nb">({{ rule.children.length }})</span></div>
+                                    <div class="actions-buttons">
+                                        <template v-if="rule.children.some(x => x.isSelected)">
+                                            <img class="img-button button-action-condition button-delete" src="/zez-ui/img/delete.png" v-on:click="deleteSelectedActions(rule)"/>
+                                            <div id="buttons-move-up-down" class="button-action-condition">
+                                                <img id="button-move-up" class="img-button" src="/zez-ui/img/move_up.png" v-on:click="moveSelectedActions(rule, true)"/>
+                                                <img id="button-move-down" class="img-button" src="/zez-ui/img/move_down.png" v-on:click="moveSelectedActions(rule, false)">
+                                            </div>
+                                            <img id="button-toggle" class="img-button button-action-condition" src="/zez-ui/img/toggle.png" v-on:click="toggleSelectedActions(rule)"/>
+                                            <img id="button-copy" class="img-button button-action-condition" src="/zez-ui/img/copy.png" v-on:click="copySelectedActions(rule)"/>
+                                        </template>
+                                        <img v-if="clipboard?.type === 'actions'" id="button-paste" class="img-button button-action-condition" src="/zez-ui/img/paste.png" v-on:click="pasteActions(rule)"/>
+                                        <img id="button-select-all" class="img-button button-action-condition" src="/zez-ui/img/select_all.png" v-on:click="selectAllActions(rule)"/>
+                                        <img id="button-add" class="img-button button-action-condition" src="/zez-ui/img/add.png" v-on:click="addAction(rule)"/>
                                     </div>
-                                    <input type="checkbox" class="checkbox" v-model="action.isSelected">
+                                </div>
+                                <div v-if="rule.children.length === 0" class="no-values-msg font-blizzglobal">{{ translate("noActions", workshopUiKw) }}</div>
+
+                                <div v-else>
+                                    <draggable v-model="rule.children" animation="200">
+                                        <div v-for="(action, actionIdx) in rule.children" class="action">
+                                            <div class="comment" v-if="action.comment" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">{{ action.comment }}</div>
+                                            <div class="code-and-checkbox">
+                                                <div class="code-display-wrapper" :class="{'disabled': action.isDisabled}" :style="{'margin-left': calculateActionPadding(action, actionIdx, rule.children)}" v-on:click="editActionOrCondition(action, false, actionIdx)">
+                                                    <div class="code-display" v-html="displayAst(action)"></div>
+                                                </div>
+                                                <input type="checkbox" class="checkbox" v-model="action.isSelected">
+                                            </div>
+                                        </div>
+                                    </draggable>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </draggable>
     </div>

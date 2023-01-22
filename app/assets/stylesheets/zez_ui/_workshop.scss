@@ -1304,3 +1304,10 @@ button:hover {
     justify-content: space-between;
     align-items: center;
 }
+
+.sortable-ghost {
+    opacity: 0.5;
+    outline: dashed 3px white;
+    outline-offset: -3px;
+}
+
