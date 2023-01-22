@@ -1,0 +1,77 @@
+<div id="settings-screen" v-if="displaySettings">
+    <div class="window-background">
+        <div class="window-edit-title font-bignoodle">{{ translate("settings", workshopUiKw) }}</div>
+        <div id="settings-wrapper">
+            <div class="cgs-content" v-for="(categoryContent, category) in editedCustomGameSettings">
+                <div class="cgs-title-wrapper">
+                    <img v-if="categoryContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="categoryContent.isCollapsed=false; updateTextareasHeight()">
+                    <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="categoryContent.isCollapsed=true"/>
+                    <div class="cgs-title">{{ translate(category, customGameSettingsSchema) }}</div>
+                </div>
+                <template v-if="!categoryContent.isCollapsed">
+                    <cgs-values v-if="category === 'lobby' || category === 'main'" :values="categoryContent" :schema="customGameSettingsSchema[category].values">
+
+                    </cgs-values>
+                    <div v-else-if="category === 'gamemodes'" v-for="(gamemodeContent, gamemode) in categoryContent" class="cgs-content">
+                        <template v-if="gamemode !== 'isCollapsed' && gamemode !== 'isArrayCollapsed'">
+                            <div class="cgs-title-wrapper">
+                                <img v-if="gamemodeContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="gamemodeContent.isCollapsed=false"/>
+                                <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="gamemodeContent.isCollapsed=true"/>
+                                <input type="checkbox" v-if="gamemode !== 'general'" v-model="gamemodeContent.enabled"/>
+                                <div class="cgs-title">{{ translate(gamemode, customGameSettingsSchema.gamemodes.values) }}</div>
+                            </div>
+                            <div v-if="!gamemodeContent.isCollapsed && 'enabledMaps' in gamemodeContent" class="cgs-content">
+                                <div class="cgs-title-wrapper">
+                                    <img v-if="gamemodeContent.isArrayCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=false"/>
+                                    <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="gamemodeContent.isArrayCollapsed=true"/>
+                                    <div class="cgs-title">{{ translate("enabledMaps", customGameSettingsSchema.gamemodes.values[gamemode].values) }}</div>
+                                </div>
+                                <cgs-values v-if="!gamemodeContent.isArrayCollapsed" :values="Object.keys(mapKw).filter(x => mapKw[x].gamemodes.includes(gamemode) && !mapKw[x].onlyInOw1)" :schema="mapKw" :array-obj="gamemodeContent" :array-key="'enabledMaps'"></cgs-values>
+                            </div>
+                            <cgs-values v-if="!gamemodeContent.isCollapsed" :values="gamemodeContent" :schema="customGameSettingsSchema[category].values[gamemode].values">
+                            </cgs-values>
+                        </template>
+
+                    </div>
+                    <div v-else-if="category === 'heroes'" v-for="(teamContent, team) in categoryContent" class="cgs-content">
+                        <template v-if="team !== 'isCollapsed'">
+
+                            <div class="cgs-title-wrapper">
+                                <img v-if="teamContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="teamContent.isCollapsed=false"/>
+                                <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="teamContent.isCollapsed=true"/>
+                                <div class="cgs-title">{{ translate(team, customGameSettingsSchema.heroes.teams) }}</div>
+                            </div>
+                            <div v-if="!teamContent.isCollapsed" class="cgs-content">
+                                <div class="cgs-title-wrapper">
+                                    <img v-if="teamContent.isArrayCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="teamContent.isArrayCollapsed=false"/>
+                                    <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="teamContent.isArrayCollapsed=true"/>
+                                    <div class="cgs-title">{{ translate("enabledHeroes", customGameSettingsSchema.heroes.values) }}</div>
+                                </div>
+                                <cgs-values v-if="!teamContent.isArrayCollapsed" :values="Object.keys(heroKw)" :schema="heroKw" :array-obj="teamContent" :array-key="'enabledHeroes'"></cgs-values>
+                            </div>
+                            <template v-if="!teamContent.isCollapsed" v-for="(heroContent, hero) in teamContent">
+                                <div class="cgs-content" v-if="hero !== 'isCollapsed' && hero !== 'isArrayCollapsed' && hero !== 'enabledHeroes'">
+
+                                    <div class="cgs-title-wrapper">
+                                        <template v-if="'isCollapsed' in heroContent">
+                                            <img v-if="heroContent.isCollapsed" class="img-button" src="/zez-ui/img/expand_rule.png" v-on:click="heroContent.isCollapsed=false"/>
+                                            <img v-else class="img-button" src="/zez-ui/img/collapse_rule.png" v-on:click="heroContent.isCollapsed=true"/>
+                                        </template>
+                                        <div class="cgs-title">{{ translate(hero, (hero === 'general' ? customGameSettingsSchema.gamemodes.values : hero === 'enabledHeroes' ? customGameSettingsSchema.heroes.values : heroKw)) }}</div>
+                                    </div>
+                                    <cgs-values v-if="!heroContent.isCollapsed" :values="heroContent" :schema="customGameSettingsSchema[category].values[hero].values">
+
+                                    </cgs-values>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="edit-buttons">
+            <button class="cancel-button font-futurano2d" v-on:click="displaySettings = false">{{ translate("cancel", workshopUiKw) }}</button>
+            <button class="ok-button font-futurano2d" v-on:click="validateSettings()">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>

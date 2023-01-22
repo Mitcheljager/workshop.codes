@@ -1,0 +1,19 @@
+<div id="ast-edit" v-if="astToEdit">
+    <div id="edit-background">
+        <div id="edit-title" class="font-bignoodle">{{ translate(astToEdit.name === "__compare__" ? (astToEditIndex === null ? "addCondition" : "editCondition") : (astToEditIndex === null ? "addAction" : "editAction"), workshopUiKw) }}</div>
+
+        <div id="edit-content">
+
+            <!--<textarea rows="1" wrap="off" id="edit-comment">{{ astToEdit.comment }}</textarea>-->
+            <div id="edit-comment-wrapper">
+                <textarea v-on:input="updateTextareaHeight($event.target)" id="edit-comment" class="font-blizzglobal" :placeholder="translate('editComment', workshopUiKw)" v-model="astToEdit.comment"></textarea>
+            </div>
+            <function-display :ast="astToEdit" :depth="astToEdit.name === '__compare__' ? -1 : 0"></function-display>
+        </div>
+        <div id="edit-margin"></div>
+        <div class="edit-buttons">
+            <button class="cancel-button font-futurano2d" v-on:click="cancelEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+            <button class="ok-button font-futurano2d" v-on:click="validateEditedAst()">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>

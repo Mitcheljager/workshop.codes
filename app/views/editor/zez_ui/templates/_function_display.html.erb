@@ -1,0 +1,43 @@
+<template id="function-display-template">
+    <div class="argument-value-wrapper-wrapper">
+        <div class="argument-value-wrapper" v-if="!(ast.name === '__compare__' && ast.parent.name === '__rule__')">
+            <div v-for="i in depth" class="indent-marker"></div>
+            <div class="argument" :class="{'argument-number': ast.type !== 'Variable' && $root.isTypeSuitable(['FloatLiteral', 'IntLiteral'], ast.type, false)}" :title='ast.parent.name === "__rule__" || ast.parent.name === "__array__" || !("descriptionLocalized" in (ast.parent.type === "void" ? $root.actionKw[ast.parent.name].args[astIdx] : $root.valueFuncKw[ast.parent.name].args[astIdx])) ? "" : $root.translate("descriptionLocalized", ast.parent.parent.name === "__rule__" && ast.parent.name !== "__compare__" ? $root.actionKw[ast.parent.name].args[astIdx] : $root.valueFuncKw[ast.parent.name].args[astIdx])'>{{ ast.parent.name === "__rule__" ? $root.translate("action", $root.workshopUiKw) : ast.parent.parent.name === "__rule__" && ast.parent.name !== "__compare__" ? $root.translate("nameLocalized", $root.actionKw[ast.parent.name].args[astIdx]) : $root.translate("nameLocalized", $root.valueFuncKw[ast.parent.name].args[ast.parent.name === "__array__" ? 0 : astIdx], astIdx) }}</div>
+            <div class="value">
+                <img src="/zez-ui/img/array_add.png" class="array-img-button array-add" v-if="ast.name === '__array__'" v-on:click="$root.addToArray(ast)"/>
+                <img src="/zez-ui/img/array_remove.png" class="array-img-button array-remove" v-if="ast.parent.name === '__array__'" v-on:click="$root.removeFromArray(ast.parent, astIdx)"/>
+                <div class="array-up-down" v-if="ast.parent.name === '__array__'">
+                    <img src="/zez-ui/img/array_up.png" class="array-img-button array-up" v-on:click="$root.moveArrayElement(ast.parent, astIdx, true)"/>
+                    <img src="/zez-ui/img/array_down.png" class="array-img-button array-down" v-on:click="$root.moveArrayElement(ast.parent, astIdx, false)"/>
+                </div>
+                <div v-if="ast.type !== 'Variable' && $root.isTypeSuitable(['FloatLiteral', 'IntLiteral'], ast.type, false)" class="number-input">
+                    <input type="number" step="0.001" class="font-futurano2d" v-model="ast.name">
+                </div>
+                <div class="value-string" v-else-if="ast.type === 'CustomStringLiteral'">
+                    <textarea oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'" class="custom-string-textarea font-blizzglobal" v-model="ast.name">{{ ast.name }}</textarea>
+                </div>
+                <div class="value-dropdown" v-else :title='ast.type in $root.constantValues || ["FloatLiteral", "IntLiteral", "UnsignedIntLiteral", "GlobalVariable", "PlayerVariable", "Subroutine", "LocalizedStringLiteral"].includes(ast.type) || !("descriptionLocalized" in (ast.type === "void" ? $root.actionKw[ast.name] : $root.valueFuncKw[ast.name])) ? "" : $root.translate("descriptionLocalized", ast.type === "void" ? $root.actionKw[ast.name] : $root.valueFuncKw[ast.name])' >
+                    <v-select v-if="ast.type === 'Icon'" :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
+                        <template #option="option">
+                            <div style="display:flex; align-items: center;">
+                                <img :src='"/zez-ui/img/icons/"+option.code.toLowerCase()+".png"' width="15px" height="15px" style="margin-right: 10px;"/>
+                                {{ option.label }}
+                            </div>
+                        </template>
+                    </v-select>
+                    <v-select v-else-if="ast.type === 'ColorLiteral'" :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
+                        <template #option="option">
+                            <div style="display:flex; align-items: center;">
+                                <div style="width: 17px; height: 17px; margin-right: 10px; border: 1px solid black;" :style="{'background-color': 'rgb('+constantValues.ColorLiteral[option.code].red+', '+constantValues.ColorLiteral[option.code].green+', '+constantValues.ColorLiteral[option.code].blue+')', 'visibility': constantValues.ColorLiteral[option.code].red === null ? 'hidden' : 'visible'}"></div>
+                                {{ option.label }}
+                            </div>
+                        </template>
+                    </v-select>
+                    <v-select v-else :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition"  :clearable="false" :options="$root.getDropdownOptionsForType(ast.type)" :reduce="x => x.code" v-model="ast.name" v-on:input="$root.rebuildAst(ast)">
+                    </v-select>
+                </div>
+            </div>
+        </div>
+        <function-display v-for="(arg, idx) in ast.args" :ast="arg" :ast-idx="idx" :depth="depth+1"></function-display>
+    </div>
+</template>

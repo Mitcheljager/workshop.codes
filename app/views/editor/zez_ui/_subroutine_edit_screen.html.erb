@@ -1,0 +1,22 @@
+<div id="subroutines-edit-screen" v-show="displaySubroutineEditor">
+    <div class="variables-background">
+        <div class="variables-edit-title font-bignoodle">{{ translate("editSubroutineNames", workshopUiKw) }}</div>
+        <div id="variables-edit-wrapper">
+            <div class="variables-edit">
+                <div class="variables-edit-fields">
+                    <div v-for="v in editedSubroutines" class="variables-edit-row">
+                        <div class="variables-edit-nb">{{ v.index }}</div>
+                        <input type="text" class="variables-edit-field" v-model="v.name">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reset-to-defaults">
+            <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetSubroutinesToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
+        </div>
+        <div class="edit-buttons">
+            <button class="cancel-button font-futurano2d" v-on:click="cancelSubroutineEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+            <button class="ok-button font-futurano2d" v-on:click="validateSubroutines()">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>

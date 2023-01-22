@@ -1,0 +1,36 @@
+<div id="extensions-edit-screen" v-if="displayExtensionsEditor">
+    <div class="window-background">
+        <div class="window-edit-title font-bignoodle">{{ translate("editExtensions", workshopUiKw) }}</div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-title">{{ translate("extensionPointsAvailable", workshopUiKw) }}</div>
+                <div class="card-value">{{ availableExtensionPoints }}</div>
+                <div class="card-description font-blizzglobal">{{ translate("extensionPointsAvailableDesc", workshopUiKw) }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">{{ translate("extensionPointsSpent", workshopUiKw) }}</div>
+                <div class="card-value">{{ getSpentExtensionPoints() }}</div>
+                <div class="card-description font-blizzglobal">{{ translate("extensionPointsSpentDesc", workshopUiKw) }}</div>
+            </div>
+        </div>
+        <div id="extensions">
+            <div class="extension" v-for="(extension, extensionId) in customGameSettingsSchema.extensions.values">
+                <div class="extension-title">{{ translate(extensionId, customGameSettingsSchema.extensions.values) }}</div>
+                <div class="extension-description font-blizzglobal">
+                    {{ translate("descriptionLocalized", customGameSettingsSchema.extensions.values[extensionId]) }}
+                </div>
+                <div class="extension-points">{{ customGameSettingsSchema.extensions.values[extensionId].points }}</div>
+                <div class="extension-checkbox">
+                    <input type="checkbox" :value="extensionId" class="checkbox" v-model="editedActivatedExtensions">
+                </div>
+            </div>
+        </div>
+        <div class="reset-to-defaults">
+            <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetExtensionsToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
+        </div>
+        <div class="edit-buttons">
+            <button class="cancel-button font-futurano2d" v-on:click="cancelExtensionEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+            <button class="ok-button font-futurano2d" v-on:click="validateExtensions()">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>

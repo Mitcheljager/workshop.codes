@@ -1,0 +1,7 @@
+<div id="delete-confirmation" :class="{'shown': displayDeleteConfirmationFor}">
+    <div id="delete-title" class="font-bignoodle">{{ translate(displayDeleteConfirmationFor === "actions" ? "deleteActions" : displayDeleteConfirmationFor === "conditions" ? "deleteConditions" : "deleteRules", workshopUiKw, displayDeleteConfirmationFor === "actions" ? deleteForRule.children.filter(x => x.isSelected).length : displayDeleteConfirmationFor === "conditions" ? deleteForRule.ruleAttributes.conditions.filter(x => x.isSelected).length : rules.filter(x => x.isSelected).length) }}</div>
+    <div class="edit-buttons">
+        <button class="cancel-button font-futurano2d" v-on:click="cancelDeletion()">{{ translate("cancel", workshopUiKw) }}</button>
+        <button class="ok-button font-futurano2d" v-on:click="validateDeletion()">{{ translate("ok", workshopUiKw) }}</button>
+    </div>
+</div>

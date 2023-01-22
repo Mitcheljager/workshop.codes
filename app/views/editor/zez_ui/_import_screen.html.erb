@@ -1,0 +1,38 @@
+<div id="import-screen" v-if="displayImport">
+    <div class="window-background">
+        <div class="window-edit-title font-bignoodle">{{ translate("importGamemode", workshopUiCustomKw) }}</div>
+        <div id="info" class="font-blizzglobal">
+            <div class="setting font-futurano2d">
+                <div class="setting-name">{{ translate("importProject", workshopUiCustomKw) }}</div>
+                <div class="setting-value">
+                    <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="projects.map(x => ({code: x.id, label: x.name})).concat([{code: null, label: '&lt;New project&gt;'}])" :reduce="x => x.code" v-model="projectToImportToId">
+                        <template #option="{ code, label }">
+                            <div class="projects-dropdown-item">
+                                {{ label }}
+
+                                <button class="destroy-button" v-on:click.stop="destroyProject(code)" v-if="!!code && code !== currentProjectId">
+                                    Destroy
+                                </button>
+                            </div>
+                        </template>
+                    </v-select>
+                </div>
+            </div>
+            <template v-if="projectToImportToId === null">
+                <p>{{ translate("pasteGamemodeHere", workshopUiCustomKw) }}</p>
+                <textarea id="decompile-text" class="font-blizzglobal" v-model="textToDecompile"></textarea>
+                <div class="setting font-futurano2d">
+                    <div class="setting-name">{{ translate("language", workshopUiCustomKw) }}</div>
+                    <div class="setting-value">
+                        <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="uiAvailableSettings.language.map(x => ({code: x, label: translate('setting-language-'+x, workshopUiCustomKw)}))" :reduce="x => x.code" v-model="decompilationLanguage">
+                    </div>
+                </div>
+                <p>{{ translate("note2", workshopUiCustomKw) }}</p>
+            </template>
+        </div>
+        <div class="edit-buttons">
+            <button class="cancel-button font-futurano2d" v-on:click="displayImport = false; textToDecompile = null">{{ translate("cancel", workshopUiKw) }}</button>
+            <button class="ok-button font-futurano2d" v-on:click="decompile(textToDecompile)">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>

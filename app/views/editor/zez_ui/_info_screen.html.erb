@@ -1,0 +1,24 @@
+<div id="info-screen" v-if="displayInfo || !hasPassedWelcomeScreen">
+    <div class="window-background">
+        <div class="window-edit-title font-bignoodle">{{ translate("zezWorkshopUiRecreation", workshopUiCustomKw) }}</div>
+        <div id="info" class="font-blizzglobal">
+            <!--<p>Your gamemode is saved to your browser's local storage every time you edit an action/condition, or when you view the extensions or the element count.</p>-->
+            <p>{{ translate("para1", workshopUiCustomKw) }}</p>
+            <p style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">{{ translate("para2", workshopUiCustomKw) }} <img src="/zez-ui/img/save.png" width="25" height="25" style="margin-left: 8px;"/><br>{{ translate("para3", workshopUiCustomKw) }}<br><img src="/zez-ui/img/how_to_paste.png" style="margin-top: 5px"/></p>
+            <p>{{ translate("para4", workshopUiCustomKw) }}</p>
+            <p>{{ translate("para5", workshopUiCustomKw) }}</p>
+            <div class="setting font-futurano2d" v-for="(settingValues, settingId) in uiAvailableSettings">
+                <div class="setting-name">{{ translate("setting-"+settingId, workshopUiCustomKw) }}</div>
+                <div class="setting-value">
+                    <textarea class="font-blizzglobal" v-if="settingId === 'disabledWarnings'" v-model="uiSettings[settingId]"></textarea>
+                    <v-select :filter="$root.filterDropdownOptions" v-else append-to-body :calculate-position="calculateDropdownPosition" :clearable="false" :options="settingValues.map(x => ({code: x, label: translate('setting-'+settingId+'-'+x, workshopUiCustomKw)}))" :reduce="x => x.code" v-model="uiSettings[settingId]">
+                </div>
+            </div>
+            <p>{{ translate("para6", workshopUiCustomKw) }}<br><a href="https://discord.gg/EEMjjFB" target="_blank">https://discord.gg/EEMjjFB</a></p>
+            <p>{{ translate("para7", workshopUiCustomKw) }}</p>
+        </div>
+        <div class="edit-buttons">
+            <button class="ok-button font-futurano2d" v-on:click="displayInfo = false; hasPassedWelcomeScreen = true; saveUiSettings()">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div id="variables-edit-screen" v-show="displayVariableEditor">
+    <div class="variables-background">
+        <div class="variables-edit-title font-bignoodle">{{ translate("editVariableNames", workshopUiKw) }}</div>
+        <div id="variables-edit-wrapper">
+            <div class="variables-edit" v-for="(varArray, i) in [editedGlobalVariables, editedPlayerVariables]">
+                <div class="variables-edit-subtitle">{{ translate(["__global__", "__player__"][i], ruleKw) }}</div>
+                <div class="variables-edit-fields">
+                    <div v-for="v in varArray" class="variables-edit-row">
+                        <div class="variables-edit-nb">{{ v.index }}</div>
+                        <input type="text" class="variables-edit-field" v-model="v.name">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reset-to-defaults">
+            <button class="reset-to-defaults-button font-futurano2d" v-on:click="resetVariablesToDefault()">{{ translate("resetToDefaults", workshopUiKw) }}</button>
+        </div>
+        <div class="edit-buttons">
+            <button class="cancel-button font-futurano2d" v-on:click="cancelVarEdition()">{{ translate("cancel", workshopUiKw) }}</button>
+            <button class="ok-button font-futurano2d" v-on:click="validateVariables()">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>

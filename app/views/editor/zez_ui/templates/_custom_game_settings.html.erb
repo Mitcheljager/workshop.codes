@@ -1,0 +1,39 @@
+<template id="custom-game-settings-values">
+    <div class="cgs-values">
+        <template v-if="arrayObj">
+            <div class="cgs-setting-name-value"  v-for="v in values">
+                <div class="cgs-setting-name">
+                    {{ $root.translate(v, schema) }}
+                </div>
+                <div class="cgs-setting-value">
+                    <input type="checkbox" :value="v" v-model="arrayObj[arrayKey]"/>
+                </div>
+            </div>
+        </template>
+        <template v-else v-for="(value, key) in values">
+            <div class="cgs-setting-name-value" v-if="key !== 'isCollapsed' && key !== 'isArrayCollapsed' && key !== 'enabled' && key !== 'enabledMaps' && key !== 'enabledHeroes'">
+                <div class="cgs-setting-name">
+                    {{ $root.translate(key, schema) }}
+                </div>
+                <div class="cgs-setting-value">
+                    <template v-if='["__boolYesNo__", "__boolOnOff__", "__boolEnabled__"].includes(schema[key].values)'>
+                        <input type="checkbox" v-model="values[key]"/>
+                    </template>
+                    <template v-else-if="schema[key].values === '__boolReverseOnOff__'">
+                        <input type="checkbox" v-model="values[key]" :true-value="false" :false-value="true"/>
+                    </template>
+                    <template v-else-if="['__percent__', '__int__', '__float__'].includes(schema[key].values)">
+                        <input type="number" :min="schema[key].min" :max="schema[key].max" v-model.number="values[key]"/>
+                        <input type="range" :min="schema[key].min" :max="schema[key].max" v-model.number="values[key]"/>
+                    </template>
+                    <template v-else-if="schema[key].values === '__string__'">
+                        <textarea oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'" class="font-blizzglobal" v-model="values[key]"></textarea>
+                    </template>
+                    <template v-else>
+                        <v-select :filter="$root.filterDropdownOptions" append-to-body :calculate-position="$root.calculateDropdownPosition" :clearable="false" :options="$root.getDropdownOptionsForKeywordObj(schema[key].values)" :reduce="x => x.code" v-model="values[key]"></v-select>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

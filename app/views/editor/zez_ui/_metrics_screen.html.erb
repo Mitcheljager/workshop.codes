@@ -1,0 +1,25 @@
+<div id="metrics-screen" v-if="displayMetrics">
+    <div class="window-background">
+        <div class="window-edit-title font-bignoodle">{{ translate("scriptDiagnostics", workshopUiKw) }}</div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-title">{{ translate("totalElementCount", workshopUiKw) }}</div>
+                <div class="card-value">{{ nbElements }}</div>
+                <div class="card-description font-blizzglobal">{{ translate("totalElementCountDesc", workshopUiKw, ELEMENT_LIMIT) }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">{{ translate("sizeOfLargestRule", workshopUiCustomKw) }}</div>
+                <div class="card-value">{{ translate("idk", workshopUiCustomKw) }}</div>
+                <div class="card-description font-blizzglobal">{{ translate("howTheFuck", workshopUiCustomKw) }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">{{ translate("hoursSpent", workshopUiCustomKw) }}</div>
+                <div class="card-value">71</div>
+                <div class="card-description font-blizzglobal">{{ translate("flexboxMaster", workshopUiCustomKw) }}</div>
+            </div>
+        </div>
+        <div class="edit-buttons">
+            <button class="ok-button font-futurano2d" v-on:click="displayMetrics = false">{{ translate("ok", workshopUiKw) }}</button>
+        </div>
+    </div>
+</div>
