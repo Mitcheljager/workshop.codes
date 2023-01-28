@@ -6,6 +6,7 @@
 
   let active = false
   let element
+  let dropup = false
 
   function outsideClick(event) {
     if (!active) return
@@ -21,12 +22,18 @@
     $items = [...$items, newItem]
     if (type == "item") $currentItem = newItem
   }
+
+  function toggle() {
+    active = !active
+
+    dropup = window.innerHeight - element.getBoundingClientRect().bottom < 100
+  }
 </script>
 
 <svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
 
-<div class="dropdown w-100">
-  <button class="empty-button" on:click|stopPropagation={() => active = !active} bind:this={element}>
+<div class="dropdown w-100" class:dropup>
+  <button class="empty-button" on:click|stopPropagation={toggle} bind:this={element}>
     <slot />
   </button>
 
