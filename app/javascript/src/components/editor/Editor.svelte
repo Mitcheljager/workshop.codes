@@ -13,6 +13,7 @@
   import Settings from "./Settings.svelte"
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
+  import LineFinder from "./LineFinder.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
 
   export let values
@@ -139,6 +140,10 @@
       <div class="editor__scrollable">
         <div class="pr-1/4 pl-1/4">
           <ItemFinder />
+
+          <div class="mt-1/16">
+            <LineFinder />
+          </div>
 
           <div class="mt-1/16">
             <FindReplaceAll />

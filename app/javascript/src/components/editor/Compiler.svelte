@@ -13,7 +13,7 @@
 
       setTimeout(() => {
         compiling = false
-        copyToClipboard(compiled)
+        copyToClipboard(compiled.result)
       }, 500)
     } catch (error) {
       console.log(error)

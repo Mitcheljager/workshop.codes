@@ -4,7 +4,10 @@ import { sortedItems } from "../stores/editor"
 import { get } from "svelte/store"
 
 export function compile() {
-  let joinedItems = get(sortedItems).map(i => i.content).join("\n\n")
+  let joinedItems = get(sortedItems).filter(i => i.type == "item").map(i => {
+    // Insert line marker to use keep track of line numbers
+    return `!!!LineMarker${ i.id }!!!` + i.content
+  }).join("\n\n")
 
   joinedItems = removeComments(joinedItems)
 
@@ -19,7 +22,9 @@ export function compile() {
   const variables = compileVariables(joinedItems)
   const subroutines = compileSubroutines(joinedItems)
 
-  return settings + variables + subroutines + joinedItems
+  return {
+    result: settings + variables + subroutines + joinedItems
+  }
 }
 
 function extractAndInsertMixins(joinedItems) {
