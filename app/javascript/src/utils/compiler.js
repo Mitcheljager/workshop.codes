@@ -121,6 +121,8 @@ function removeComments(joinedItems) {
 }
 
 function convertTranslations(joinedItems) {
+  const defaultLanguage = "en"
+
   const languages = {
     0: "en",
     1: "fr"
@@ -149,11 +151,19 @@ function convertTranslations(joinedItems) {
     const splitArguments = splitArgumentsString(argumentsString) || []
     const key = splitArguments[0].replaceAll("\"", "")
 
+    console.log(key)
+
+    let eachLanguageString = ""
+    Object.entries(languages).forEach(([id, language]) => {
+      eachLanguageString += `Local Player.Language == ${ id } ? Custom String("${ translationKeys[key]?.[language] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }) : `
+    })
+
     const replaceWith = `Custom String("{0}",
-      Local Player.Language == 0 ? Custom String("${ translationKeys[key]?.["en"] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }) :
-      Local Player.Language == 1 ? Custom String("${ translationKeys[key]?.["fr"] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }) :
-      Custom String("${ translationKeys[key]?.["en"] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" })
+      ${ eachLanguageString }
+      Custom String("${ translationKeys[key]?.[defaultLanguage] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" })
     )`
+
+    console.log(replaceWith)
 
     joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length + (closingSemicolon ? 1 : 0))
   }

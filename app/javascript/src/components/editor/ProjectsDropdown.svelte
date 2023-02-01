@@ -238,7 +238,7 @@
   </div>
 {/if}
 
-{#if !loading}
+{#if $currentProject?.is_owner && !loading}
   <div class="dropdown">
     <button class="empty-button w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
       Edit

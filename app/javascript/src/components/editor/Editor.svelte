@@ -6,6 +6,7 @@
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
   import ScriptImporter from "./ScriptImporter.svelte"
+  import TranslationKeys from "./TranslationKeys.svelte"
   import Compiler from "./Compiler.svelte"
   import ProjectsDropdown from "./ProjectsDropdown.svelte"
   import Save from "./Save.svelte"
@@ -120,6 +121,8 @@
         {/if}
 
         <Settings />
+
+        <TranslationKeys />
 
         {#if isSignedIn && $currentProject?.is_owner}
           <ScriptImporter />
