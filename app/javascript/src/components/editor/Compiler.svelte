@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition"
   import { compile } from "../../utils/compiler"
+  import { copyValueToClipboard } from "../../copy"
 
   let compiling = false
   let copied = false
@@ -25,13 +26,7 @@
   function copyToClipboard(value) {
     copied = true
 
-    const input = document.createElement("textarea")
-    input.value = value
-    document.body.appendChild(input)
-
-    input.select()
-    document.execCommand("copy")
-    document.body.removeChild(input)
+    copyValueToClipboard(value)
 
     setTimeout(() => copied = false, 1000)
   }

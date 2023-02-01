@@ -1,6 +1,6 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
-import { sortedItems } from "../stores/editor"
+import { sortedItems, translationKeys, defaultLanguage, selectedLanguages } from "../stores/editor"
 import { get } from "svelte/store"
 
 export function compile() {
@@ -121,18 +121,9 @@ function removeComments(joinedItems) {
 }
 
 function convertTranslations(joinedItems) {
-  const defaultLanguage = "en"
-
   const languages = {
     0: "en",
     1: "fr"
-  }
-
-  const translationKeys = {
-    "Some Key": {
-      en: "Test en",
-      fr: "Test fr"
-    }
   }
 
   console.log("Finding translations")
@@ -154,13 +145,13 @@ function convertTranslations(joinedItems) {
     console.log(key)
 
     let eachLanguageString = ""
-    Object.entries(languages).forEach(([id, language]) => {
-      eachLanguageString += `Local Player.Language == ${ id } ? Custom String("${ translationKeys[key]?.[language] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }) : `
+    get(selectedLanguages).forEach((language, index) => {
+      eachLanguageString += `Local Player.Language == ${ index } ? Custom String("${ get(translationKeys)[key]?.[language] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }, ${ splitArguments[3] || "null" }) : `
     })
 
     const replaceWith = `Custom String("{0}",
       ${ eachLanguageString }
-      Custom String("${ translationKeys[key]?.[defaultLanguage] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" })
+      Custom String("${ get(translationKeys)[key]?.[get(defaultLanguage)] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" })
     )`
 
     console.log(replaceWith)

@@ -12,7 +12,7 @@
 
 .translation-settings__item {
   appearance: none;
-  display: block;
+  display: flex;
   width: 100%;
   padding: $margin / 8 0;
   border: 0;
@@ -30,5 +30,19 @@
   &--active,
   &:hover {
     color: $white;
+  }
+}
+
+.translation-settings__copy {
+  margin-left: auto;
+  text-transform: lowercase;
+  color: $text-color-dark;
+
+  &:hover {
+    color: $text-color;
+  }
+
+  &:active {
+    color: $primary;
   }
 }
