@@ -15,6 +15,7 @@ export function compile() {
 
   joinedItems = joinedItems.replace(settings, "")
   joinedItems = extractAndInsertMixins(joinedItems)
+  joinedItems = convertTranslations(joinedItems)
 
   const variables = compileVariables(joinedItems)
   const subroutines = compileSubroutines(joinedItems)
@@ -117,4 +118,45 @@ ${ subroutines.map((v, i) => `  ${ i }: ${ v }`).join("\n") }
 
 function removeComments(joinedItems) {
   return joinedItems.replaceAll(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, "")
+}
+
+function convertTranslations(joinedItems) {
+  const languages = {
+    0: "en",
+    1: "fr"
+  }
+
+  const translationKeys = {
+    "Some Key": {
+      en: "Test en",
+      fr: "Test fr"
+    }
+  }
+
+  console.log("Finding translations")
+
+  // Find stated includes for mixins and replace them with mixins
+  let match
+  const includeRegex = /@translate/g
+  while ((match = includeRegex.exec(joinedItems)) != null) {
+    const closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
+    const full = joinedItems.slice(match.index, closing + 1)
+    const closingSemicolon = joinedItems[closing + 1] == ";"
+
+    const argumentsOpeningParen = full.indexOf("(")
+    const argumentsclosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
+    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsclosingParen)
+    const splitArguments = splitArgumentsString(argumentsString) || []
+    const key = splitArguments[0].replaceAll("\"", "")
+
+    const replaceWith = `Custom String("{0}",
+      Local Player.Language == 0 ? Custom String("${ translationKeys[key]?.["en"] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }) :
+      Local Player.Language == 1 ? Custom String("${ translationKeys[key]?.["fr"] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }) :
+      Custom String("${ translationKeys[key]?.["en"] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" })
+    )`
+
+    joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length + (closingSemicolon ? 1 : 0))
+  }
+
+  return joinedItems
 }
