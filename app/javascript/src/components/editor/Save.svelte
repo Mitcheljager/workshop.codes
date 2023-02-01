@@ -9,7 +9,11 @@
   function save() {
     loading = true
 
-    new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content: JSON.stringify($items) } }).post({ method: "put" })
+    const content =  JSON.stringify({
+      items: $items
+    })
+
+    new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })
       .then(data => {
         if (!data) throw Error("Create failed")
 

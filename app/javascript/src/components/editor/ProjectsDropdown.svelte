@@ -42,7 +42,9 @@
         $currentProjectUUID = parsedData.uuid
 
         $currentItem = {}
-        $items = JSON.parse(parsedData.content) || []
+
+        const parsedContent = JSON.parse(parsedData.content)
+        $items = parsedContent.items || parsedContent || []
       })
       .catch(error => {
         $items = []
