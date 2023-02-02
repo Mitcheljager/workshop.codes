@@ -1,6 +1,7 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
 import { sortedItems, translationKeys, defaultLanguage, selectedLanguages } from "../stores/editor"
+import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
 export function compile() {
@@ -121,14 +122,9 @@ function removeComments(joinedItems) {
 }
 
 function convertTranslations(joinedItems) {
-  const languages = {
-    0: "en",
-    1: "fr"
-  }
+  if (!get(selectedLanguages).length) return joinedItems
 
-  console.log("Finding translations")
-
-  // Find stated includes for mixins and replace them with mixins
+  // Find @translate in content and replace with given translation key
   let match
   const includeRegex = /@translate/g
   while ((match = includeRegex.exec(joinedItems)) != null) {
@@ -142,11 +138,10 @@ function convertTranslations(joinedItems) {
     const splitArguments = splitArgumentsString(argumentsString) || []
     const key = splitArguments[0].replaceAll("\"", "")
 
-    console.log(key)
-
     let eachLanguageString = ""
     get(selectedLanguages).forEach((language, index) => {
-      eachLanguageString += `Local Player.Language == ${ index } ? Custom String("${ get(translationKeys)[key]?.[language] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }, ${ splitArguments[3] || "null" }) : `
+      const translation = get(translationKeys)[key]?.[language] || get(translationKeys)[key]?.[get(defaultLanguage)] || key
+      eachLanguageString += `Local Player.Language == ${ index } ? Custom String("${ translation }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }, ${ splitArguments[3] || "null" }) : `
     })
 
     const replaceWith = `Custom String("{0}",
@@ -159,5 +154,20 @@ function convertTranslations(joinedItems) {
     joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length + (closingSemicolon ? 1 : 0))
   }
 
-  return joinedItems
+  // Insert a rule that determines the language of the player
+  let detectPlayerLanguageString = ""
+  get(selectedLanguages).forEach((language, index) => {
+    detectPlayerLanguageString += `
+      ${ index > 0 ? "Else" : "" } If(Custom String("{0}", Map(Practice Range)) == Custom String("${ languageOptions[language].detect }"));
+			  Event Player.Language = ${ index };
+    `
+  })
+
+  const rule = `
+  rule("Detect Language") {
+    event { Ongoing - Each Player; All; All; }
+    actions{ ${ detectPlayerLanguageString } End; }
+  }`
+
+  return joinedItems + rule
 }

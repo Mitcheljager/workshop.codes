@@ -1,6 +1,6 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
+  import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn, selectedLanguages, translationKeys, defaultLanguage } from "../../stores/editor"
   import { addAlert } from "../../lib/alerts"
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
@@ -45,6 +45,10 @@
 
         const parsedContent = JSON.parse(parsedData.content)
         $items = parsedContent.items || parsedContent || []
+
+        $translationKeys = parsedContent?.translations?.keys || {}
+        $selectedLanguages = parsedContent?.translations?.selectedLanguages || ["en-US"]
+        $defaultLanguage = parsedContent?.translations?.defaultLanguage || "en-US"
       })
       .catch(error => {
         $items = []

@@ -1,6 +1,6 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { currentProject, items } from "../../stores/editor"
+  import { currentProject, items, defaultLanguage, selectedLanguages, translationKeys } from "../../stores/editor"
   import { Confetti } from "svelte-confetti"
 
   let loading = false
@@ -10,7 +10,12 @@
     loading = true
 
     const content =  JSON.stringify({
-      items: $items
+      items: $items,
+      translations: {
+        keys: $translationKeys,
+        selectedLanguages: $selectedLanguages,
+        defaultLanguage: $defaultLanguage
+      }
     })
 
     new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })

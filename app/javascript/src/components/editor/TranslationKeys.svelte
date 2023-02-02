@@ -1,19 +1,15 @@
 <script>
   import { translationKeys, selectedLanguages, defaultLanguage } from "../../stores/editor"
+  import { languageOptions } from "../../lib/languageOptions"
   import { copyValueToClipboard } from "../../copy"
   import { fade, fly } from "svelte/transition"
-
-  const languageOptions = {
-    en: "English",
-    sp: "Spanish",
-    fr: "French",
-    pt: "Portuguese"
-  }
 
   let active = false
   let selectedKey = null
   let showLanguageSettings = false
   let newKeyInput
+
+  console.log(languageOptions)
 
   function addKey() {
     const value = newKeyInput?.value
@@ -47,7 +43,7 @@
           <h4 class="mb-1/8">Keys</h4>
 
           <div>
-            {#each Object.entries($translationKeys) as [key]}
+            {#each Object.keys($translationKeys) as key}
               <button
                 class="translation-settings__item"
                 class:translation-settings__item--active={selectedKey == key}
@@ -69,11 +65,11 @@
           {#if showLanguageSettings}
             <p class="mt-0">Select all languages you wish to add translations for. If you do not enter a translations for a given key the default language will be used instead.</p>
 
-            {#each Object.entries(languageOptions) as [key, value]}
+            {#each Object.entries(languageOptions) as [key, { name }]}
               <div class="checkbox">
                 <input type="checkbox" bind:group={$selectedLanguages} value={key} id="option_{key}" />
                 <label for="option_{key}">
-                  {value}
+                  {key} - {name}
 
                   {#if key == $defaultLanguage}
                     <small class="text-base">(Current default)</small>
@@ -86,7 +82,7 @@
           {:else if selectedKey}
             {#each $selectedLanguages as language}
               <div class="form-group-inline mb-1/8">
-                <label for="">{languageOptions[language]}</label>
+                <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
 
                 <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]} />
               </div>

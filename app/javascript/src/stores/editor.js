@@ -28,5 +28,5 @@ export const openFolders = writable([])
 export const isSignedIn = writable(false)
 
 export const translationKeys = writable({})
-export const selectedLanguages = writable(["en"])
-export const defaultLanguage = writable("en")
+export const selectedLanguages = writable(["en-US"])
+export const defaultLanguage = writable("en-US")
