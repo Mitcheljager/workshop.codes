@@ -1,17 +1,40 @@
 <script>
   import { translationKeys, selectedLanguages } from "../../../stores/editor"
   import { languageOptions } from "../../../lib/languageOptions"
+  import { createEventDispatcher } from "svelte"
 
   export let selectedKey
+
+  const dispatch = createEventDispatcher()
+
+  let renameInput
+
+  function renameKey() {
+    const value = renameInput.value
+
+    delete Object.assign($translationKeys, { [value]: $translationKeys[selectedKey] })[selectedKey]
+    $translationKeys = { ...$translationKeys }
+
+    dispatch("updateKey", value)
+  }
+
+  function removeKey() {
+    if (!confirm("Are you sure?")) return;
+
+    delete $translationKeys[selectedKey]
+    $translationKeys = { ...$translationKeys }
+
+    dispatch("removeKey")
+  }
 </script>
 
 <div class="well well--dark block p-1/4 mb-1/4">
   <div class="form-group-uneven">
-    <input class="form-input" value={selectedKey} />
+    <input class="form-input" value={selectedKey} bind:this={renameInput} />
 
     <div class="flex">
-      <button class="button button--secondary">Rename</button>
-      <button class="button button--danger ml-1/8">Remove</button>
+      <button class="button button--secondary" on:click={renameKey}>Rename</button>
+      <button class="button button--danger ml-1/8" on:click={removeKey}>Remove</button>
     </div>
   </div>
 </div>
@@ -36,10 +59,12 @@
   </code>
 </p>
 
-{#each $selectedLanguages as language}
-  <div class="form-group-inline mb-1/8">
-    <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
+{#if $translationKeys[selectedKey]}
+  {#each $selectedLanguages as language}
+    <div class="form-group-inline mb-1/8">
+      <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
 
-    <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]} />
-  </div>
-{/each}
+      <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]} />
+    </div>
+  {/each}
+{/if}

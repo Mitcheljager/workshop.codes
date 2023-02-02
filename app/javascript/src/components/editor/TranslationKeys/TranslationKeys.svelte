@@ -11,8 +11,6 @@
   let showLanguageSettings = false
   let newKeyInput
 
-  console.log(languageOptions)
-
   function addKey() {
     const value = newKeyInput?.value
     if (!value) return
@@ -67,7 +65,7 @@
           {#if showLanguageSettings}
             <TranslationKeysSelectLanguages />
           {:else if selectedKey}
-            <TranslationKeysEditStrings {selectedKey} />
+            <TranslationKeysEditStrings {selectedKey} on:updateKey={({ detail }) => selectedKey = detail} on:removeKey={() => selectedKey = null} />
           {:else}
             <em>Select or create a key to set up your translations.</em>
           {/if}
