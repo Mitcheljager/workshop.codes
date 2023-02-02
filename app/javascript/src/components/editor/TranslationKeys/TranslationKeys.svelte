@@ -19,7 +19,7 @@
 
     if ($translationKeys[value]) {
       error = "Key already taken"
-      return;
+      return
     }
 
     $translationKeys[value] = {}

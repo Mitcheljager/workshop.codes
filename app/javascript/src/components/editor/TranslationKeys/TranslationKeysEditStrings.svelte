@@ -19,12 +19,12 @@
 
     if (!value) {
       error = "Key can't be empty"
-      return;
+      return
     }
 
     if ($translationKeys[value]) {
       error = "Key already taken"
-      return;
+      return
     }
 
     delete Object.assign($translationKeys, { [value]: $translationKeys[selectedKey] })[selectedKey]
@@ -34,7 +34,7 @@
   }
 
   function removeKey() {
-    if (!confirm("Are you sure?")) return;
+    if (!confirm("Are you sure?")) return
 
     delete $translationKeys[selectedKey]
     $translationKeys = { ...$translationKeys }
