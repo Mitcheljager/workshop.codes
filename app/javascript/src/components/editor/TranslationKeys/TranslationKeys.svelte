@@ -1,10 +1,12 @@
 <script>
-  import { translationKeys, selectedLanguages, defaultLanguage } from "../../stores/editor"
-  import { languageOptions } from "../../lib/languageOptions"
-  import { copyValueToClipboard } from "../../copy"
+  import TranslationKeysEditStrings from "./TranslationKeysEditStrings.svelte"
+  import TranslationKeysSelectLanguages from "./TranslationKeysSelectLanguages.svelte"
+  import { translationKeys, orderedTranslationKeys, selectedLanguages } from "../../../stores/editor"
+  import { languageOptions } from "../../../lib/languageOptions"
+  import { copyValueToClipboard } from "../../../copy"
   import { fade, fly } from "svelte/transition"
 
-  let active = false
+  let active = true
   let selectedKey = null
   let showLanguageSettings = false
   let newKeyInput
@@ -43,7 +45,7 @@
           <h4 class="mb-1/8">Keys</h4>
 
           <div>
-            {#each Object.keys($translationKeys) as key}
+            {#each Object.keys($orderedTranslationKeys) as key}
               <button
                 class="translation-settings__item"
                 class:translation-settings__item--active={selectedKey == key}
@@ -63,30 +65,9 @@
 
         <div class="translation-settings__content">
           {#if showLanguageSettings}
-            <p class="mt-0">Select all languages you wish to add translations for. If you do not enter a translations for a given key the default language will be used instead.</p>
-
-            {#each Object.entries(languageOptions) as [key, { name }]}
-              <div class="checkbox">
-                <input type="checkbox" bind:group={$selectedLanguages} value={key} id="option_{key}" />
-                <label for="option_{key}">
-                  {key} - {name}
-
-                  {#if key == $defaultLanguage}
-                    <small class="text-base">(Current default)</small>
-                  {:else if $selectedLanguages.includes(key)}
-                    <small class="text-base" on:click|preventDefault|stopPropagation={() => $defaultLanguage = key}>Set as default</small>
-                  {/if}
-                </label>
-              </div>
-            {/each}
+            <TranslationKeysSelectLanguages />
           {:else if selectedKey}
-            {#each $selectedLanguages as language}
-              <div class="form-group-inline mb-1/8">
-                <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
-
-                <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]} />
-              </div>
-            {/each}
+            <TranslationKeysEditStrings {selectedKey} />
           {:else}
             <em>Select or create a key to set up your translations.</em>
           {/if}
