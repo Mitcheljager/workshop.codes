@@ -4,7 +4,7 @@ Primary Fire: Button(Primary Fire)
 Vector: Vector(0, 0, 0)
 Number: 0
 All Players: All Players(All Teams)
-String: ""
+String: Custom String("Some string")
 Sub0: SubroutineName
 A: Global.A
 White: Color(White)
