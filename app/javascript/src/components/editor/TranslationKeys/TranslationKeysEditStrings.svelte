@@ -8,9 +8,24 @@
   const dispatch = createEventDispatcher()
 
   let renameInput
+  let error = ""
 
   function renameKey() {
-    const value = renameInput.value
+    error = ""
+
+    const value = renameInput.value.trim()
+
+    if (value == selectedKey) return
+
+    if (!value) {
+      error = "Key can't be empty"
+      return;
+    }
+
+    if ($translationKeys[value]) {
+      error = "Key already taken"
+      return;
+    }
 
     delete Object.assign($translationKeys, { [value]: $translationKeys[selectedKey] })[selectedKey]
     $translationKeys = { ...$translationKeys }
@@ -32,11 +47,15 @@
   <div class="form-group-uneven">
     <input class="form-input" value={selectedKey} bind:this={renameInput} />
 
-    <div class="flex">
-      <button class="button button--secondary" on:click={renameKey}>Rename</button>
-      <button class="button button--danger ml-1/8" on:click={removeKey}>Remove</button>
+    <div class="flex justify-end">
+      <button class="button button--secondary button--small button--square" on:click={renameKey}>Rename</button>
+      <button class="button button--danger button--small button--square ml-1/8" on:click={removeKey}>Remove</button>
     </div>
   </div>
+
+  {#if error}
+    <div class="text-red mt-1/8">{error}</div>
+  {/if}
 </div>
 
 <p class="text-small">

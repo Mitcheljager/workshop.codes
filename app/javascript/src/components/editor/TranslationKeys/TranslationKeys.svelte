@@ -8,11 +8,19 @@
   let active = false
   let selectedKey = null
   let showLanguageSettings = false
+  let error = ""
   let newKeyInput
 
   function addKey() {
-    const value = newKeyInput?.value
+    error = ""
+
+    const value = newKeyInput?.value.trim()
     if (!value) return
+
+    if ($translationKeys[value]) {
+      error = "Key already taken"
+      return;
+    }
 
     $translationKeys[value] = {}
     selectedKey = value
@@ -56,7 +64,12 @@
           <div class="well well--dark block p-1/4 mt-1/4">
             <label class="form-label text-small" for="">Create new key</label>
             <input bind:this={newKeyInput} class="form-input" type="text" placeholder="Some Translation Key..." />
-            <button on:click={addKey} class="button button--secondary button--small w-100 mt-1/8">Create</button>
+
+            {#if error}
+              <div class="text-red mt-1/8 text-small">{error}</div>
+            {/if}
+
+            <button on:click={addKey} class="button button--secondary button--small button--square w-100 mt-1/8">Create</button>
           </div>
         </div>
 
