@@ -5,7 +5,7 @@
   import { copyValueToClipboard } from "../../../copy"
   import { fade, fly } from "svelte/transition"
 
-  let active = true
+  let active = false
   let selectedKey = null
   let showLanguageSettings = false
   let newKeyInput
