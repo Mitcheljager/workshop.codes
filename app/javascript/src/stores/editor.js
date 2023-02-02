@@ -26,13 +26,3 @@ export const sortedItems = derived(items, $items => {
 export const openFolders = writable([])
 
 export const isSignedIn = writable(false)
-
-export const translationKeys = writable({})
-export const orderedTranslationKeys = derived(translationKeys, $translationKeys =>
-  Object.keys($translationKeys).sort().reduce((result, key) => {
-    result[key] = $translationKeys[key]
-    return result
-  }, {})
-)
-export const selectedLanguages = writable(["en-US"])
-export const defaultLanguage = writable("en-US")

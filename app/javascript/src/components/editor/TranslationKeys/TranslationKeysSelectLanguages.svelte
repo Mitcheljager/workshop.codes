@@ -1,5 +1,5 @@
 <script>
-  import { selectedLanguages, defaultLanguage } from "../../../stores/editor"
+  import { selectedLanguages, defaultLanguage } from "../../../stores/translationKeys"
   import { languageOptions } from "../../../lib/languageOptions"
 </script>
 

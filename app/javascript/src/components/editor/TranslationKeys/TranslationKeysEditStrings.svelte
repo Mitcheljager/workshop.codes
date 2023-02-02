@@ -1,5 +1,5 @@
 <script>
-  import { translationKeys, selectedLanguages } from "../../../stores/editor"
+  import { translationKeys, selectedLanguages } from "../../../stores/translationKeys"
   import { languageOptions } from "../../../lib/languageOptions"
   import { createEventDispatcher } from "svelte"
 

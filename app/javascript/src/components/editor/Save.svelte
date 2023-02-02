@@ -1,6 +1,7 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { currentProject, items, defaultLanguage, selectedLanguages, translationKeys } from "../../stores/editor"
+  import { currentProject, items } from "../../stores/editor"
+  import { defaultLanguage, selectedLanguages, translationKeys } from "../../stores/translationKeys"
   import { Confetti } from "svelte-confetti"
 
   let loading = false

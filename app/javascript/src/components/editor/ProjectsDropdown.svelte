@@ -1,6 +1,7 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn, selectedLanguages, translationKeys, defaultLanguage } from "../../stores/editor"
+  import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
+  import { translationKeys, defaultLanguage, selectedLanguages } from "../../stores/translationKeys"
   import { addAlert } from "../../lib/alerts"
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"

@@ -1,8 +1,7 @@
 <script>
   import TranslationKeysEditStrings from "./TranslationKeysEditStrings.svelte"
   import TranslationKeysSelectLanguages from "./TranslationKeysSelectLanguages.svelte"
-  import { translationKeys, orderedTranslationKeys, selectedLanguages } from "../../../stores/editor"
-  import { languageOptions } from "../../../lib/languageOptions"
+  import { translationKeys, orderedTranslationKeys, selectedLanguages } from "../../../stores/translationKeys"
   import { copyValueToClipboard } from "../../../copy"
   import { fade, fly } from "svelte/transition"
 

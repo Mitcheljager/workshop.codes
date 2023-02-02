@@ -1,6 +1,7 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
-import { sortedItems, translationKeys, defaultLanguage, selectedLanguages } from "../stores/editor"
+import { sortedItems } from "../stores/editor"
+import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
