@@ -139,35 +139,26 @@ function convertTranslations(joinedItems) {
     const splitArguments = splitArgumentsString(argumentsString) || []
     const key = splitArguments[0].replaceAll("\"", "")
 
-    let eachLanguageString = ""
-    get(selectedLanguages).forEach((language, index) => {
+    const eachLanguageStrings = []
+    get(selectedLanguages).forEach((language) => {
       const translation = get(translationKeys)[key]?.[language] || get(translationKeys)[key]?.[get(defaultLanguage)] || key
-      eachLanguageString += `Local Player.Language == ${ index } ? Custom String("${ translation }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" }, ${ splitArguments[3] || "null" }) : `
+      eachLanguageStrings.push(`Custom String("${ translation }"${ splitArguments.length > 1 ? ", " : "" }${ splitArguments.slice(1).join(", ") })`)
     })
 
-    const replaceWith = `Custom String("{0}",
-      ${ eachLanguageString }
-      Custom String("${ get(translationKeys)[key]?.[get(defaultLanguage)] || key }", ${ splitArguments[1] || "null" }, ${ splitArguments[2] || "null" })
+    const replaceWith = `Value In Array(
+      Array(${ eachLanguageStrings.join(", ") }),
+      Max(False, Index Of Array Value(Global.WCDynamicLanguages, Custom String("{0}", Map(Practice Range), Null, Null)))
     )`
-
-    console.log(replaceWith)
 
     joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length + (closingSemicolon ? 1 : 0))
   }
 
-  // Insert a rule that determines the language of the player
-  let detectPlayerLanguageString = ""
-  get(selectedLanguages).forEach((language, index) => {
-    detectPlayerLanguageString += `
-      ${ index > 0 ? "Else" : "" } If(Custom String("{0}", Map(Practice Range)) == Custom String("${ languageOptions[language].detect }"));
-			  Event Player.Language = ${ index };
-    `
-  })
-
+  // Array with custom string for Practice Range in each selected language
+  const customStringArrayForEachLanguage = get(selectedLanguages).map(language => `Custom String("${ languageOptions[language].detect }")`)
   const rule = `
-  rule("Detect Language") {
-    event { Ongoing - Each Player; All; All; }
-    actions{ ${ detectPlayerLanguageString } End; }
+  rule("Workshop.codes Editor Dynamic Language - Set Languages") {
+    event { Ongoing - Global; }
+    actions { Global.WCDynamicLanguages = Array(${ customStringArrayForEachLanguage.join(", ") }); }
   }`
 
   return joinedItems + rule
