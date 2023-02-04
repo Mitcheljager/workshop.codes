@@ -10,7 +10,9 @@
   <div class="mt-1/2">
     <div class="text-dark mb-1/8">{article.category.title}</div>
     <h2 class="mt-0 mb-1/8">{article.title}</h2>
-    <h5 class="mt-0">{article.subtitle}</h5>
+    {#if article.subtitle}
+      <h5 class="mt-0">{article.subtitle}</h5>
+    {/if}
 
     <div class="item__description">
       {@html article.content}
