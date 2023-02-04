@@ -1,4 +1,5 @@
 <script>
+  import FetchRails from "../../fetch-rails"
   import EditorWikiSearch from "./EditorWikiSearch.svelte"
 
   let article
@@ -7,7 +8,31 @@
     if (!event.target.href) return
 
     event.preventDefault()
-    window.open(event.target.href, "_blank")
+
+    const currentHost = window.location.hostname
+    if (event.target.href.includes(currentHost)) fetchArticle(event.target.href)
+    else window.open(event.target.href, "_blank")
+  }
+
+  function fetchArticle(baseUrl) {
+    const progressBar = new Turbolinks.ProgressBar()
+    progressBar.setValue(0)
+    progressBar.show()
+
+    new FetchRails(baseUrl + ".json?parse_markdown=true").get()
+      .then(data => {
+        if (!data) throw Error("Error while loading wiki article")
+
+        article = JSON.parse(data)
+      })
+      .catch(error => {
+        alert(error)
+        console.error(error)
+      })
+      .finally(() => {
+        progressBar.setValue(1)
+        progressBar.hide()
+      })
   }
 </script>
 
