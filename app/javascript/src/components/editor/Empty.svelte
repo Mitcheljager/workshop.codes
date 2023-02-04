@@ -16,7 +16,7 @@
         <li>Integrated <mark class="text-white">Wiki</mark> search.</li>
         <li>Automatic <mark class="text-white">error detection</mark> (it's a bit limited, but still).</li>
         <li>Reduce code repetition using <mark class="text-white">Mixins</mark>.</li>
-        <li>Each to manage <mark class="text-white">translation keys</mark> for strings.</li>
+        <li>Easy to manage <mark class="text-white">dynamic translation keys</mark>.</li>
       </ul>
     <p>
 
