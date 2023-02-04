@@ -6,7 +6,7 @@ Number: 1
 All Players: All Players(All Teams)
 String: Custom String("Some string")
 Sub0: SubroutineName
-A: Global.A
+A: variableName
 White: Color(White)
 Hero: Hero(Tracer)
 Team: Team(Team 1)
