@@ -74,7 +74,7 @@
           if (state.docChanged) updateItem()
         }),
         basicSetup,
-        parameterTooltip(),
+        parameterTooltip()
       ]
     })
   }
