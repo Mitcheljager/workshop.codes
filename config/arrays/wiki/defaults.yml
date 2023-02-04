@@ -2,7 +2,7 @@ Compare: "True"
 Player: Event Player
 Primary Fire: Button(Primary Fire)
 Vector: Vector(0, 0, 0)
-Number: 0
+Number: 1
 All Players: All Players(All Teams)
 String: Custom String("Some string")
 Sub0: SubroutineName
@@ -11,5 +11,3 @@ White: Color(White)
 Hero: Hero(Tracer)
 Team: Team(Team 1)
 Count Of: Count Of(Array)
-
-
