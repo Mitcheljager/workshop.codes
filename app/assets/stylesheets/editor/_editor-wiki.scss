@@ -15,6 +15,7 @@
   transform: translateY(100%);
   background: $bg-darker;
   box-shadow: $shadow;
+  z-index: 10;
 }
 
 .editor-wiki-results__item {
