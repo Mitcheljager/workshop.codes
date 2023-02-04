@@ -70,7 +70,9 @@
       {/each}
 
       {#if loading}
-        <div class="spinner spinner--small mt-1/4" />
+        <div class="flex justify-center">
+          <div class="spinner spinner--small mt-1/4 mb-1/4" />
+        </div>
       {/if}
     </div>
   {/if}
