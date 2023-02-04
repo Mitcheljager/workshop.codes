@@ -73,6 +73,7 @@
         // Add detail arguments in autocomplete results
         const detail = v.args.map(a => `${ toCapitalize(a.name) }`).join(", ")
 
+        params.detail_full = detail
         params.detail = `(${ detail.slice(0, 30) }${ detail.length > 30 ? "..." : "" })`
 
         // Add apply values when selecting autocomplete, filling in default args

@@ -120,6 +120,15 @@
     border: 0;
     box-shadow: $shadow;
 
+    &.cm-tooltip-hover {
+      border-radius: $border-radius;
+      padding: $margin / 16 $margin / 8;
+      box-shadow: none;
+      color: $text-color;
+      font-size: 0.75rem;
+      pointer-events: none;
+    }
+
     > ul {
       @include styled-scrollbar;
     }
@@ -130,6 +139,10 @@
       color: $text-color-light;
       white-space: pre-wrap;
     }
+  }
+
+  .cm-tooltip-arrow {
+    display: none;
   }
 
   .cm-completionDetail {

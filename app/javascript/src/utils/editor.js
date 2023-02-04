@@ -92,6 +92,17 @@ export function replaceBetween(origin, replace, startIndex, endIndex) {
   return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
 }
 
+export function getPhraseFromPosition(text, start, direction = 1) {
+  let lastValidCharacterPosition = start
+  for (let i = 1; i < 100; i++) {
+    const char = text[start + i * direction]
+    if (char !== undefined && /[A-Za-z\- ]/.test(char)) lastValidCharacterPosition += direction
+    else i = 100
+  }
+
+  return lastValidCharacterPosition
+}
+
 export function setCssVariable(key, value) {
   document.body.style.setProperty(`--${ key }`, value)
 }

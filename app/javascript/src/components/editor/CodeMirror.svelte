@@ -8,6 +8,7 @@
   import { linter, lintGutter } from "@codemirror/lint"
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
+  import { parameterTooltip } from "../../lib/parameterTooltip"
   import { currentItem, editorStates, items, currentProjectUUID } from "../../stores/editor"
   import debounce from "../../debounce"
 
@@ -72,7 +73,8 @@
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
         }),
-        basicSetup
+        basicSetup,
+        parameterTooltip(),
       ]
     })
   }
