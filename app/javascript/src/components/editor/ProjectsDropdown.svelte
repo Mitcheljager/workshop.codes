@@ -1,6 +1,7 @@
 <script>
   import FetchRails from "../../fetch-rails"
   import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
+  import { translationKeys, defaultLanguage, selectedLanguages } from "../../stores/translationKeys"
   import { addAlert } from "../../lib/alerts"
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
@@ -42,7 +43,13 @@
         $currentProjectUUID = parsedData.uuid
 
         $currentItem = {}
-        $items = JSON.parse(parsedData.content) || []
+
+        const parsedContent = JSON.parse(parsedData.content)
+        $items = parsedContent.items || parsedContent || []
+
+        $translationKeys = parsedContent?.translations?.keys || {}
+        $selectedLanguages = parsedContent?.translations?.selectedLanguages || ["en-US"]
+        $defaultLanguage = parsedContent?.translations?.defaultLanguage || "en-US"
       })
       .catch(error => {
         $items = []
@@ -238,7 +245,7 @@
   </div>
 {/if}
 
-{#if !loading}
+{#if $currentProject?.is_owner && !loading}
   <div class="dropdown">
     <button class="empty-button w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
       Edit

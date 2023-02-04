@@ -6,4 +6,4 @@
   let value = item.name
 </script>
 
-<input type="text" class="inline-input" bind:value on:blur={() => updateItemName(item.id, value)} />
+<input type="text" class="inline-input" bind:value on:input={() => updateItemName(item.id, value)} />

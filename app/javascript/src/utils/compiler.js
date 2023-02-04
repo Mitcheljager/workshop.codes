@@ -1,6 +1,8 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
 import { sortedItems } from "../stores/editor"
+import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
+import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
 export function compile() {
@@ -15,6 +17,7 @@ export function compile() {
 
   joinedItems = joinedItems.replace(settings, "")
   joinedItems = extractAndInsertMixins(joinedItems)
+  joinedItems = convertTranslations(joinedItems)
 
   const variables = compileVariables(joinedItems)
   const subroutines = compileSubroutines(joinedItems)
@@ -117,4 +120,46 @@ ${ subroutines.map((v, i) => `  ${ i }: ${ v }`).join("\n") }
 
 function removeComments(joinedItems) {
   return joinedItems.replaceAll(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, "")
+}
+
+function convertTranslations(joinedItems) {
+  if (!get(selectedLanguages).length) return joinedItems
+
+  // Find @translate in content and replace with given translation key
+  let match
+  const includeRegex = /@translate/g
+  while ((match = includeRegex.exec(joinedItems)) != null) {
+    const closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
+    const full = joinedItems.slice(match.index, closing + 1)
+    const closingSemicolon = joinedItems[closing + 1] == ";"
+
+    const argumentsOpeningParen = full.indexOf("(")
+    const argumentsclosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
+    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsclosingParen)
+    const splitArguments = splitArgumentsString(argumentsString) || []
+    const key = splitArguments[0].replaceAll("\"", "")
+
+    const eachLanguageStrings = []
+    get(selectedLanguages).forEach((language) => {
+      const translation = get(translationKeys)[key]?.[language] || get(translationKeys)[key]?.[get(defaultLanguage)] || key
+      eachLanguageStrings.push(`Custom String("${ translation }"${ splitArguments.length > 1 ? ", " : "" }${ splitArguments.slice(1).join(", ") })`)
+    })
+
+    const replaceWith = `Value In Array(
+      Array(${ eachLanguageStrings.join(", ") }),
+      Max(False, Index Of Array Value(Global.WCDynamicLanguages, Custom String("{0}", Map(Practice Range), Null, Null)))
+    )`
+
+    joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length + (closingSemicolon ? 1 : 0))
+  }
+
+  // Array with custom string for Practice Range in each selected language
+  const customStringArrayForEachLanguage = get(selectedLanguages).map(language => `Custom String("${ languageOptions[language].detect }")`)
+  const rule = `
+  rule("Workshop.codes Editor Dynamic Language - Set Languages") {
+    event { Ongoing - Global; }
+    actions { Global.WCDynamicLanguages = Array(${ customStringArrayForEachLanguage.join(", ") }); }
+  }`
+
+  return joinedItems + rule
 }
