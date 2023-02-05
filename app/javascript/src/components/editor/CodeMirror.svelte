@@ -200,7 +200,7 @@
 
     const phrase = getPhraseFromPosition(line, position)
 
-    if ($completionsMap.some(v => v.label == phrase.text)) dispatch('search', phrase.text)
+    if ($completionsMap.some(v => v.label == phrase.text)) dispatch("search", phrase.text)
   }
 </script>
 

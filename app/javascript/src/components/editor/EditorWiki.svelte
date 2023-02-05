@@ -19,7 +19,7 @@
     progressBar.setValue(0)
     progressBar.show()
 
-    new FetchRails(`${ baseUrl }.json?parse_markdown=true${ single ? '&single=true' : '' }`).get()
+    new FetchRails(`${ baseUrl }.json?parse_markdown=true${ single ? "&single=true" : "" }`).get()
       .then(data => {
         if (!data) throw Error("Error while loading wiki article")
 
