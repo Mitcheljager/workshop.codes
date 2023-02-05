@@ -92,7 +92,7 @@ export function replaceBetween(origin, replace, startIndex, endIndex) {
   return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
 }
 
-export function getPhraseFromPosition(text, start, direction = 1) {
+export function getPhraseEnd(text, start, direction = 1) {
   let lastValidCharacterPosition = start
   for (let i = 1; i < 100; i++) {
     const char = text[start + i * direction]
@@ -101,6 +101,17 @@ export function getPhraseFromPosition(text, start, direction = 1) {
   }
 
   return lastValidCharacterPosition
+}
+
+export function getPhraseFromPosition(line, position) {
+  const start = getPhraseEnd(line.text, position - line.from, -1)
+  const end = getPhraseEnd(line.text, position - line.from, 1)
+
+  return {
+    start,
+    end,
+    text: line.text.slice(start, end + 1).trim()
+  }
 }
 
 export function setCssVariable(key, value) {

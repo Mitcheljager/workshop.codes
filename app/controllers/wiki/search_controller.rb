@@ -30,8 +30,14 @@ class Wiki::SearchController < Wiki::BaseController
           end
         end
 
+
         set_request_headers
-        render json: @articles.to_json(include: :category)
+
+        if params[:single]
+          render json: @articles.first.to_json(include: :category)
+        else
+          render json: @articles.to_json(include: :category)
+        end
       }
     end
   end

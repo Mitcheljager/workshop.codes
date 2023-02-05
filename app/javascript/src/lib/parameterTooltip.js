@@ -9,18 +9,16 @@ export function parameterTooltip() {
 
     if (!line.text) return null
 
-    const phraseStart = getPhraseFromPosition(line.text, position - line.from, -1)
-    const phraseEnd = getPhraseFromPosition(line.text, position - line.from, 1)
-    const phrase = line.text.slice(phraseStart, phraseEnd + 1).trim()
+    const phrase = getPhraseFromPosition(line, position)
 
     const possibleValues = get(completionsMap).filter(v => v.args_length)
-    const validValue = possibleValues.find(v => v.label == phrase)
+    const validValue = possibleValues.find(v => v.label == phrase.text)
 
     if (!validValue) return null
 
     return {
-      pos: line.from + phraseStart,
-      end: line.from + phraseEnd,
+      pos: line.from + phrase.start,
+      end: line.from + phrase.end,
       above: true,
       create: () => {
         const dom = document.createElement("div")

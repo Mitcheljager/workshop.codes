@@ -25,6 +25,8 @@
   export let _projects
   export let _isSignedIn = false
 
+  let fetchArticle
+
   $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
 
@@ -159,12 +161,12 @@
 
     <div class="editor__content">
       {#if Object.keys($currentItem).length}
-        <CodeMirror completionsMap={$completionsMap} />
+        <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${detail}`, true)} />
       {/if}
     </div>
 
     <div class="editor__popout editor__scrollable">
-      <EditorWiki />
+      <EditorWiki bind:fetchArticle />
 
       <DragHandle key="popout-width" currentSize=300 align="left" />
     </div>

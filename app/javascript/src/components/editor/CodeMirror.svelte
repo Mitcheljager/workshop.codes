@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy, onMount } from "svelte"
+  import { onDestroy, onMount, createEventDispatcher } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection } from "@codemirror/state"
@@ -9,10 +9,11 @@
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
-  import { currentItem, editorStates, items, currentProjectUUID } from "../../stores/editor"
+  import { currentItem, editorStates, items, currentProjectUUID, completionsMap } from "../../stores/editor"
+  import { getPhraseFromPosition } from "../../utils/editor"
   import debounce from "../../debounce"
 
-  export let completionsMap = []
+  const dispatch = createEventDispatcher()
 
   let element
   let view
@@ -88,7 +89,7 @@
     return {
       from: word.from + add,
       to: word.to,
-      options: completionsMap,
+      options: $completionsMap,
       validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }
@@ -185,8 +186,24 @@
     const index = $items.indexOf(i => i.id == $currentItem.id)
     $items[index] = $currentItem
   }, 250)
+
+  function click(event) {
+    if (!event.altKey) return
+
+    event.preventDefault()
+    searchWiki()
+  }
+
+  function searchWiki() {
+    const position = view.state.selection.ranges[0].from
+    const line = view.state.doc.lineAt(view.state.selection.ranges[0].from)
+
+    const phrase = getPhraseFromPosition(line, position)
+
+    if ($completionsMap.some(v => v.label == phrase.text)) dispatch('search', phrase.text)
+  }
 </script>
 
 <svelte:window on:keydown={keydown} />
 
-<div bind:this={element} ></div>
+<div bind:this={element} on:click={click}></div>

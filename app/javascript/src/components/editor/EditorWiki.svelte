@@ -14,12 +14,12 @@
     else window.open(event.target.href, "_blank")
   }
 
-  function fetchArticle(baseUrl) {
+  export function fetchArticle(baseUrl, single = false) {
     const progressBar = new Turbolinks.ProgressBar()
     progressBar.setValue(0)
     progressBar.show()
 
-    new FetchRails(baseUrl + ".json?parse_markdown=true").get()
+    new FetchRails(`${ baseUrl }.json?parse_markdown=true${ single ? '&single=true' : '' }`).get()
       .then(data => {
         if (!data) throw Error("Error while loading wiki article")
 
