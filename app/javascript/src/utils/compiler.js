@@ -123,7 +123,8 @@ function removeComments(joinedItems) {
 }
 
 function convertTranslations(joinedItems) {
-  if (!get(selectedLanguages).length) return joinedItems
+  if (!get(selectedLanguages)?.length) return joinedItems
+  if (!Object.keys(get(translationKeys) || {})?.length) return joinedItems
 
   // Find @translate in content and replace with given translation key
   let match
