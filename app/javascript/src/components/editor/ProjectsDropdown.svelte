@@ -45,7 +45,7 @@
         $currentItem = {}
 
         const parsedContent = JSON.parse(parsedData.content)
-        $items = parsedContent.items || parsedContent || []
+        $items = parsedContent?.items || parsedContent || []
 
         $translationKeys = parsedContent?.translations?.keys || {}
         $selectedLanguages = parsedContent?.translations?.selectedLanguages || ["en-US"]
