@@ -716,6 +716,14 @@ __currentArrayElement__:
   ja-JP: 現在の配列の要素
   pt-BR: Elemento da Matriz Atual
   zh-CN: 当前数组元素
+__currentArrayIndex__:
+  description: The current array index being considered. Only meaningful during
+    the evaluation of values such as filtered array and sorted array.
+  args: []
+  return:
+  - Object
+  - Array
+  en-US: Current Array Index
 getCurrentGamemode:
   description: The current game mode of the custom game.
   args: []
