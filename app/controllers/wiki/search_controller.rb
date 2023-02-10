@@ -30,7 +30,6 @@ class Wiki::SearchController < Wiki::BaseController
           end
         end
 
-
         set_request_headers
 
         if params[:single]
