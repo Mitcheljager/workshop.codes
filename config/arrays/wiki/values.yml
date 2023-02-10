@@ -3301,6 +3301,21 @@ __sortedArray__:
   ja-JP: ソートされた配列
   pt-BR: Matriz Ordenada
   zh-CN: 已排序的数组
+__mappedArray__:
+  description: A copy of the specified array with the values mapped according to the Mapping Expression that is evaluated for each element.
+  args:
+  - name: ARRAY
+    description: The array whose copy will be sorted.
+    type:
+      Array: Object
+    default: GLOBAL VARIABLE
+  - name: Mapping expression
+    description: The mapping expression that is evaluated for each element of the copied array. Use the Current Array Element value to reference the element of the array currently being considered.
+    type: Object
+    default: CURRENT ARRAY ELEMENT
+  return:
+    Array: Object
+  en-US: Mapped Array
 _&getSpeed:
   description: The current speed of a player in meters per second.
   args:
