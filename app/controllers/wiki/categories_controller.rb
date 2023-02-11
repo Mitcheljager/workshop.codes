@@ -13,8 +13,8 @@ class Wiki::CategoriesController < Wiki::BaseController
   def show
     @category = Wiki::Category.find_by_slug!(params[:slug])
 
-    @articles = Wiki::Article.approved.where(category: @category).group(:group_id).maximum(:id).values
-    @articles = Wiki::Article.approved.where(id: @articles).order(title: :asc).page(params[:page])
+    @articles = Wiki::Article.where(category: @category).group(:group_id).maximum(:id).values
+    @articles = Wiki::Article.where(id: @articles).order(title: :asc).page(params[:page])
 
     add_breadcrumb @category.title, Proc.new{ wiki_category_path(@category.slug) }
 

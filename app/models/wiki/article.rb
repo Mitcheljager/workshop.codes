@@ -23,10 +23,6 @@ class Wiki::Article < ApplicationRecord
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes }
 
-  def self.approved
-    where(edit: Wiki::Edit.where(approved: true))
-  end
-
   def self.search(query, size=20)
     __elasticsearch__.search({
       from: 0,
