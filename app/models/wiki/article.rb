@@ -43,10 +43,12 @@ class Wiki::Article < ApplicationRecord
               boost: 100,
               minimum_should_match: "25%"
             }
-          }, multi_match: {
-            query: query,
-            fields: ["title^2", "tags^1.5", "category.title"],
-            fuzziness: "AUTO"
+          }, {
+            multi_match: {
+              query: query,
+              fields: ["title^2", "tags^1.5", "category.title"],
+              fuzziness: "AUTO"
+            }
           }]
         }
       }
