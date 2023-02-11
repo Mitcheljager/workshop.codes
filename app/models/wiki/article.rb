@@ -32,10 +32,22 @@ class Wiki::Article < ApplicationRecord
       from: 0,
       size: size,
       query: {
-        multi_match: {
-          query: query,
-          fields: ["title^2", "tags^1.5", "category.title"],
-          fuzziness: "AUTO"
+        bool: {
+          should: [{
+            multi_match: {
+              query: query,
+              fields: ["title"],
+              type: "cross_fields",
+              operator: "and",
+              tie_breaker: 0.1,
+              boost: 100,
+              minimum_should_match: "25%"
+            }
+          }, multi_match: {
+            query: query,
+            fields: ["title^2", "tags^1.5", "category.title"],
+            fuzziness: "AUTO"
+          }]
         }
       }
     }).records.ids
