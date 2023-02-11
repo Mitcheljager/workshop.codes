@@ -554,7 +554,7 @@ __button__:
   - name: BUTTON
     description: A button constant.
     type: ButtonLiteral
-    default: PRIMARY FIRE
+    default: Interact
   return: Button
   guid: 000000010B3B
   en-US: Button
