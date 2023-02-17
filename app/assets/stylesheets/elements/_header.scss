@@ -119,6 +119,9 @@
 }
 
 .header__search-trigger {
+  appearance: none;
+  background: transparent;
+  border: 0;
   padding-left: .5rem;
   color: white;
   font-size: 32px;
@@ -131,6 +134,8 @@
   }
 
   svg {
+    display: block;
+
     path {
       fill: white;
     }
