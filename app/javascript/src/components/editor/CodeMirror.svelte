@@ -10,9 +10,9 @@
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, mixinsMap } from "../../stores/editor"
+  import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/editor"
   import debounce from "../../debounce"
-  import { translationsMap } from "../../stores/translationKeys";
 
   const dispatch = createEventDispatcher()
 
