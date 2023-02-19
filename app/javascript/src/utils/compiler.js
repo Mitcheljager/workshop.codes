@@ -1,12 +1,12 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
-import { sortedItems } from "../stores/editor"
+import { flatItems } from "../stores/editor"
 import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
 export function compile() {
-  let joinedItems = get(sortedItems).map(i => i.content).join("\n\n")
+  let joinedItems = get(flatItems)
 
   joinedItems = removeComments(joinedItems)
 
@@ -23,6 +23,23 @@ export function compile() {
   const subroutines = compileSubroutines(joinedItems)
 
   return settings + variables + subroutines + joinedItems
+}
+
+export function getVariables(joinedItems) {
+  let globalVariables = joinedItems.match(/(?<=Global\.)[^\s,.[\]);]+/g)
+  globalVariables = [...new Set(globalVariables)]
+
+  let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player)\.)[^\s,.[\]);]+/g)
+  playerVariables = [...new Set(playerVariables)]
+
+  return { globalVariables, playerVariables }
+}
+
+export function getSubroutines(joinedItems) {
+  let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g) || []
+  subroutines = [...subroutines, ...(joinedItems.match(/Call Subroutine\((.*)\)/g) || [])]
+  subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace("Call Subroutine", "").replace(/[\())\s]/g, ""))
+  return [...new Set(subroutines)]
 }
 
 function extractAndInsertMixins(joinedItems) {
@@ -86,11 +103,7 @@ function extractAndInsertMixins(joinedItems) {
 }
 
 function compileVariables(joinedItems) {
-  let globalVariables = joinedItems.match(/(?<=Global\.)[^\s,.[\]);]+/g)
-  globalVariables = [...new Set(globalVariables)]
-
-  let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player)\.)[^\s,.[\]);]+/g)
-  playerVariables = [...new Set(playerVariables)]
+  const { globalVariables, playerVariables } = getVariables(joinedItems)
 
   if (!globalVariables?.length && !playerVariables.length) return ""
 
@@ -105,16 +118,13 @@ ${ playerVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 }
 
 function compileSubroutines(joinedItems) {
-  let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g) || []
-  subroutines = [...subroutines, ...(joinedItems.match(/Call Subroutine\((.*)\)/g) || [])]
-  subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace("Call Subroutine", "").replace(/[\())\s]/g, ""))
-  subroutines = [...new Set(subroutines)]
+  const subroutines = getSubroutines(joinedItems)
 
   if (!subroutines.length) return ""
 
   return `
 subroutines {
-${ subroutines.map((v, i) => `  ${ i }: ${ v }`).join("\n") }
+${ subroutines.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 }\n\n`
 }
 
