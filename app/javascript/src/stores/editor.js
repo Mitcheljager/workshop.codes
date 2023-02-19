@@ -1,5 +1,5 @@
 import { writable, derived } from "svelte/store"
-import { getSubroutines, getVariables } from "../utils/compiler"
+import { getMixins, getSubroutines, getVariables } from "../utils/compiler"
 
 export const editorStates = writable({})
 
@@ -38,4 +38,10 @@ export const variablesMap = derived(flatItems, $flatItems => {
     ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" })),
     ...subroutines.map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
   ]
+})
+
+export const mixinsMap = derived(flatItems, $flatItems => {
+  const mixins = getMixins($flatItems)
+
+  return mixins.map(v => ({ detail: "Mixin", label: `@include ${ v }()`, type: "variable" }))
 })

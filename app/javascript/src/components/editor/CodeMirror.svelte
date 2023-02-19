@@ -9,9 +9,10 @@
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
-  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap } from "../../stores/editor"
+  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, mixinsMap } from "../../stores/editor"
   import { getPhraseFromPosition } from "../../utils/editor"
   import debounce from "../../debounce"
+  import { translationsMap } from "../../stores/translationKeys";
 
   const dispatch = createEventDispatcher()
 
@@ -81,15 +82,23 @@
   }
 
   function completions(context) {
-    const word = context.matchBefore(/[a-zA-Z0-9 ]*/)
+    const word = context.matchBefore(/[@a-zA-Z0-9 ]*/)
 
     const add = word.text.search(/\S|$/)
     if (word.from + add == word.to && !context.explicit) return null
 
+    // There's probably a better way of doing this
+    let specialOverwrite = null
+    if (word.text.includes("@i")) {
+      specialOverwrite = $mixinsMap
+    } else if (word.text.includes("@t")) {
+      specialOverwrite = $translationsMap
+    }
+
     return {
       from: word.from + add,
       to: word.to,
-      options: [...$completionsMap, ...$variablesMap],
+      options: specialOverwrite || [...$completionsMap, ...$variablesMap],
       validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }
