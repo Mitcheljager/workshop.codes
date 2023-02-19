@@ -34,8 +34,8 @@ export const variablesMap = derived(flatItems, $flatItems => {
   const subroutines = getSubroutines($flatItems)
 
   return [
-    ...[...globalVariables].map(v => ({ detail: "Global Variable", label: v, type: "variable" })),
-    ...[...playerVariables].map(v => ({ detail: "Player Variable", label: v, type: "variable" })),
-    ...[...subroutines].map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
+    ...globalVariables.map(v => ({ detail: "Global Variable", label: v, type: "variable" })),
+    ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" })),
+    ...subroutines.map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
   ]
 })
