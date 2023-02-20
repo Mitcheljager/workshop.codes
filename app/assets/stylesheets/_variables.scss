@@ -5,6 +5,7 @@ $gray: #90989c;
 $gray-dark: #6a7277;
 $red: #b33834;
 $orange: #e89930;
+$green: #3fbf74;
 $body-bg: #1f2326;
 $primary: var(--primary);
 $bg-dark: #2e3337;
@@ -17,6 +18,7 @@ $discord: #7289DA;
 $bnet: #0288d1;
 $ko-fi: #ff5e5b;
 $overwatch-2: #ed6516;
+$wiki: #00abff;
 
 $font-stack: var(--font-stack);
 
@@ -53,11 +55,12 @@ $media-min-widths: (
 
 :root {
   color-scheme: dark;
-  --primary: #3fbf74;
+  --primary: #ed6516;
   --white: #dfdfdf;
   --orange: #{ $orange };
   --red: #{ $red };
   --overwatch-2: #{ $overwatch-2 };
+  --wiki: #{ $wiki };
   --text-color: #{ $gray };
   --text-color-light: #{ lighten($gray, 10%) };
   --text-color-dark: #{ $gray-dark };
@@ -87,5 +90,5 @@ $media-min-widths: (
 }
 
 .wiki {
-  --primary: #00abff;
+  --primary: #{ $wiki };
 }
