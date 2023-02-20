@@ -17,11 +17,10 @@
 .profile__action {
   display: block;
   margin: .25rem 0;
-  font-size: 18px;
+  font-weight: bold;
   color: $text-color;
+  font-family: var(--font-stack-alt);
   text-decoration: none;
-  font-family: "Barlow Condensed", "Impact";
-  font-size-adjust: 0.52;
   text-transform: uppercase;
 
   @include hover-stack {
@@ -30,7 +29,7 @@
 
   @include media-min(sm) {
     margin: .5rem 0;
-    font-size: 21px;
+    font-size: 18px;
   }
 
   &:first-of-type {
