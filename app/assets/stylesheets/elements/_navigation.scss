@@ -22,15 +22,14 @@
   border-radius: $border-radius / 2;
   color: $pure-white;
   text-decoration: none;
-  font-family: "Barlow Condensed", "Impact";
+  font-family: var(--font-stack-alt);
   text-transform: uppercase;
-  font-size: 21px;
-  font-size-adjust: 0.52;
+  font-size: 18px;
 
   @include focus-visible-outline;
 
   @include media-min(mbl) {
-    font-size: clamp(22px, 2vw, 28px);
+    font-size: clamp(19px, 2vw, 24px);
     margin-right: clamp(#{ $margin / 8 }, 1.25vw, #{ $margin / 2 });
     margin-bottom: 0;
   }

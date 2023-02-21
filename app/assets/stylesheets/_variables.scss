@@ -5,6 +5,7 @@ $gray: #90989c;
 $gray-dark: #6a7277;
 $red: #b33834;
 $orange: #e89930;
+$green: #3fbf74;
 $body-bg: #1f2326;
 $primary: var(--primary);
 $bg-dark: #2e3337;
@@ -17,12 +18,13 @@ $discord: #7289DA;
 $bnet: #0288d1;
 $ko-fi: #ff5e5b;
 $overwatch-2: #ed6516;
+$wiki: #00abff;
 
 $font-stack: var(--font-stack);
 
 $margin: 4rem;
 $border-radius: 1rem;
-$logo-height: 80px;
+$logo-height: 90px;
 $search-height: 42px;
 $wiki-search-height: 80px;
 $header-height: $margin;
@@ -53,11 +55,12 @@ $media-min-widths: (
 
 :root {
   color-scheme: dark;
-  --primary: #3fbf74;
+  --primary: #ed6516;
   --white: #dfdfdf;
   --orange: #{ $orange };
   --red: #{ $red };
   --overwatch-2: #{ $overwatch-2 };
+  --wiki: #{ $wiki };
   --text-color: #{ $gray };
   --text-color-light: #{ lighten($gray, 10%) };
   --text-color-dark: #{ $gray-dark };
@@ -69,7 +72,8 @@ $media-min-widths: (
   --shadow: #{ $shadow };
   --font-size-base: 16px;
   --font-size-small: 14px;
-  --font-stack: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-stack-alt: "Barlow Condensed", "Impact", monospace;
 }
 
 .high-contrast {
@@ -87,5 +91,5 @@ $media-min-widths: (
 }
 
 .wiki {
-  --primary: #00abff;
+  --primary: #{ $wiki };
 }
