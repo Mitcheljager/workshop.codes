@@ -85,3 +85,7 @@
     fill: currentColor;
   }
 }
+
+.cog-color {
+  --cog-color: #{ $logo-cog };
+}
