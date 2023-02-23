@@ -32,8 +32,9 @@
 
   &--small {
     font-size: 12px;
+    line-height: 1.2em;
     font-family: $font-stack;
-    font-weight: 600;
+    font-weight: bold;
   }
 
   &--thin {
