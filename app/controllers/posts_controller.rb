@@ -418,7 +418,7 @@ class PostsController < ApplicationController
       description content
       add_field name: "Update notes", value: revision.description.truncate(400) if revision && revision.description.present?
       add_field name: "Code", value: post.code.upcase
-      footer text: "Elo Hell Esports", icon_url: "https://elohell.gg/media/img/logos/Elo-Hell-Logo_I-C-Dark.png"
+      footer text: "Workshop.codes"
     end
 
     Discord::Notifier.message(embed)
