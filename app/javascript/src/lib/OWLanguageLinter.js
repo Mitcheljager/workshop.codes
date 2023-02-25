@@ -148,7 +148,27 @@ function findIncorrectArgsLength(content) {
 function findAllCharacters(content, character = "{") {
   const indices = []
 
+  let inString = false
+  let inComment = false
+
   for(let i = 0; i < content.length; i++) {
+    if (content[i] == "\"") {
+      inString = !inString
+      continue
+    }
+
+    if (content[i] == "/" && content[i + 1] == "/") {
+      inComment = true
+      continue
+    }
+
+    if (inComment && content[i] == "\n") {
+      inComment = false
+    }
+
+    if (inString) continue
+    if (inComment) continue
+
     if (content[i] == character) indices.push(i)
   }
 
@@ -221,7 +241,7 @@ function findMissingSemicolons(content) {
       continue
     }
 
-    if (content[i] == "/" && content[i] == "/") {
+    if (content[i] == "/" && content[i + 1] == "/") {
       inComment = true
       continue
     }
