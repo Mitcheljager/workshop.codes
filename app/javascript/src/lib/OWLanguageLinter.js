@@ -13,6 +13,7 @@ export function OWLanguageLinter(view) {
   findIncorrectArgsLength(content)
   findMissingQuotes(content)
   findMissingSemicolons(content)
+  findExtraSimicolons(content)
   checkMixins(content)
 
   return diagnostics
@@ -283,6 +284,19 @@ function findMissingSemicolons(content) {
             })
           }
         }]
+      })
+    }
+  }
+}
+
+function findExtraSimicolons(content) {
+  for(let i = 0; i < content.length; i++) {
+    if (content[i] == "}" && content[i + 1] == ";") {
+      diagnostics.push({
+        from: i,
+        to: i + 2,
+        severity: "error",
+        message: "Unexpected semicolon"
       })
     }
   }
