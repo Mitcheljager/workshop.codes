@@ -67,12 +67,20 @@ function extractAndInsertMixins(joinedItems) {
     const firstOpenParen = content.indexOf("(")
     const closingParen = getClosingBracket(content, "(", ")", firstOpenParen - 1)
     const params = content.slice(firstOpenParen + 1, closingParen).replace(/\s/, "").split(",")
+    const paramsDefaults = params
+      .map(param => {
+        const slicedAt = param.indexOf("=")
+        if (slicedAt != -1) return [param.slice(0, param.indexOf("=")), param.slice(param.indexOf("=") + 1)]
+        else return [param]
+      })
+      .map(([key, value]) => ({ key: key.trim(), default: (value || "").trim() }))
+
     const mixin = content.slice(firstOpenBracket + 1, closing)?.trim()
 
     mixins[name] = {
       content: mixin,
       full: joinedItems.slice(match.index, closing + 1),
-      params: params.map(param => param.trim()),
+      params: paramsDefaults,
       hasContents: mixin.includes("@contents;")
     }
   }
@@ -117,7 +125,7 @@ function extractAndInsertMixins(joinedItems) {
 
     let paramIndex = 0
     mixin.params.forEach(param => {
-      replaceWith = replaceWith.replaceAll("Mixin." + param, splitArguments[paramIndex]?.trim() || "")
+      replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[paramIndex]?.trim() || param.default)
       paramIndex++
     })
 
