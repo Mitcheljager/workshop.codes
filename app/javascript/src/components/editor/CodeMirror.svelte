@@ -118,8 +118,9 @@
       let insert = "\n"
       for (let i = 0; i < indent; i++) { insert += "\t" }
 
-      const openBracket = /[\{\(\[]/gm.exec(state.doc.lineAt(from).text)?.[0].length
-      const closeBracket = /[\}\)\]]/gm.exec(state.doc.lineAt(from).text)?.[0].length
+      const isComment = line.text.includes("//")
+      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text)?.[0].length
+      const closeBracket = !isComment && /[\}\)\]]/gm.exec(line.text)?.[0].length
       if (openBracket && !closeBracket) insert += "\t"
 
       return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
