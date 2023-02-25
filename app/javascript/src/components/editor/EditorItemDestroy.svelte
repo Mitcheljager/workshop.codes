@@ -9,5 +9,5 @@
 </script>
 
 <button class="empty-button text-small text-red" on:click={destroy}>
-  Destroy
+  ╳
 </button>

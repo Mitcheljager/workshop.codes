@@ -1,5 +1,6 @@
 import { writable, derived } from "svelte/store"
 import { getMixins, getSubroutines, getVariables } from "../utils/compiler"
+import { isAnyParentHidden } from "../utils/editor"
 
 export const editorStates = writable({})
 
@@ -22,7 +23,11 @@ export const sortedItems = derived(items, $items => {
   return cleanedItems.sort((a, b) => a.position > b.position ? 1 : -1)
 })
 
-export const flatItems = derived(sortedItems, $sortedItems => $sortedItems.map(i => i.content).join("\n\n"))
+export const flatItems = derived(sortedItems, $sortedItems => {
+  return $sortedItems
+    .filter(i => !i.hidden && !isAnyParentHidden(i))
+    .map(i => i.content).join("\n\n")
+})
 
 export const openFolders = writable([])
 

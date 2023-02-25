@@ -19,13 +19,27 @@ export function destroyItem(id) {
 }
 
 export function updateItemName(id, name) {
-  // The store needs to be updated across the board
-  // Otherwise their value will get overwritten on change
-  // There's probably a better way of doing this
   items.set(get(items).map(i => {
     if (i.id == id) i.name = name
     return i
   }))
+}
+
+export function toggleHideItem(id) {
+  items.set(get(items).map(i => {
+    if (i.id == id) i.hidden = !i.hidden
+    return i
+  }))
+}
+
+export function isAnyParentHidden(item) {
+  while (item.parent) {
+    item = get(items).find(i => i.id === item.parent)
+
+    if (item.hidden) return true
+  }
+
+  return false
 }
 
 export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {

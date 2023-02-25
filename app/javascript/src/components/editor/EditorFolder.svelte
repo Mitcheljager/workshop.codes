@@ -1,8 +1,9 @@
 <script>
   import { onMount } from "svelte"
   import { openFolders } from "../../stores/editor"
-  import { toggleFolderState } from "../../utils/editor"
+  import { isAnyParentHidden, toggleFolderState } from "../../utils/editor"
   import EditorItemDestroy from "./EditorItemDestroy.svelte"
+  import EditorItemHide from "./EditorItemHide.svelte"
   import EditorItemName from "./EditorItemName.svelte"
   import EditorList from "./EditorList.svelte"
 
@@ -23,6 +24,7 @@
 <div
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
+  class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
   data-item-id={item.id}>
   <button class="editor-folder__icon empty-button" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
     &gt;
@@ -37,6 +39,7 @@
   </div>
 
   <div class="editor-item__actions">
+    <EditorItemHide {item} />
     <EditorItemDestroy {item} />
   </div>
 </div>
