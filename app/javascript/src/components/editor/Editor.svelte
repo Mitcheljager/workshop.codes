@@ -12,6 +12,7 @@
   import Save from "./Save.svelte"
   import Empty from "./Empty.svelte"
   import Settings from "./Settings.svelte"
+  import Shortcuts from "./Shortcuts.svelte"
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
@@ -122,6 +123,8 @@
             You do not own this project and can not save
           </div>
         {/if}
+
+        <Shortcuts />
 
         <Settings />
 

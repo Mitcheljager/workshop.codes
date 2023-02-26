@@ -15,7 +15,7 @@
       setTimeout(() => {
         compiling = false
         copyToClipboard(compiled)
-      }, 500)
+      }, 150)
     } catch (error) {
       console.log(error)
       alert(error)
@@ -30,7 +30,16 @@
 
     setTimeout(() => copied = false, 1000)
   }
+
+  function keydown(event) {
+    if (event.ctrlKey && event.shiftKey && event.keyCode == 83) {
+      event.preventDefault()
+      doCompile()
+    }
+  }
 </script>
+
+<svelte:window on:keydown={keydown} />
 
 <button class="button button--secondary button--square tooltip" on:click={doCompile}>
   {#if compiling}
