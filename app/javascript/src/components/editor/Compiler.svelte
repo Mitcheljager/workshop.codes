@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition"
   import { compile } from "../../utils/compiler"
+  import { copyValueToClipboard } from "../../copy"
 
   let compiling = false
   let copied = false
@@ -14,7 +15,7 @@
       setTimeout(() => {
         compiling = false
         copyToClipboard(compiled.result)
-      }, 500)
+      }, 150)
     } catch (error) {
       console.log(error)
       alert(error)
@@ -25,17 +26,20 @@
   function copyToClipboard(value) {
     copied = true
 
-    const input = document.createElement("textarea")
-    input.value = value
-    document.body.appendChild(input)
-
-    input.select()
-    document.execCommand("copy")
-    document.body.removeChild(input)
+    copyValueToClipboard(value)
 
     setTimeout(() => copied = false, 1000)
   }
+
+  function keydown(event) {
+    if (event.ctrlKey && event.shiftKey && event.keyCode == 83) {
+      event.preventDefault()
+      doCompile()
+    }
+  }
 </script>
+
+<svelte:window on:keydown={keydown} />
 
 <button class="button button--secondary button--square tooltip" on:click={doCompile}>
   {#if compiling}

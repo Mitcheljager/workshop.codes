@@ -554,7 +554,7 @@ __button__:
   - name: BUTTON
     description: A button constant.
     type: ButtonLiteral
-    default: PRIMARY FIRE
+    default: Interact
   return: Button
   guid: 000000010B3B
   en-US: Button
@@ -716,6 +716,14 @@ __currentArrayElement__:
   ja-JP: 現在の配列の要素
   pt-BR: Elemento da Matriz Atual
   zh-CN: 当前数组元素
+__currentArrayIndex__:
+  description: The current array index being considered. Only meaningful during
+    the evaluation of values such as filtered array and sorted array.
+  args: []
+  return:
+  - Object
+  - Array
+  en-US: Current Array Index
 getCurrentGamemode:
   description: The current game mode of the custom game.
   args: []
@@ -3293,6 +3301,21 @@ __sortedArray__:
   ja-JP: ソートされた配列
   pt-BR: Matriz Ordenada
   zh-CN: 已排序的数组
+__mappedArray__:
+  description: A copy of the specified array with the values mapped according to the Mapping Expression that is evaluated for each element.
+  args:
+  - name: ARRAY
+    description: The array whose copy will be sorted.
+    type:
+      Array: Object
+    default: GLOBAL VARIABLE
+  - name: Mapping expression
+    description: The mapping expression that is evaluated for each element of the copied array. Use the Current Array Element value to reference the element of the array currently being considered.
+    type: Object
+    default: CURRENT ARRAY ELEMENT
+  return:
+    Array: Object
+  en-US: Mapped Array
 _&getSpeed:
   description: The current speed of a player in meters per second.
   args:

@@ -40,7 +40,7 @@
   font-size: 16px;
   line-height: 1em;
   color: $pure-white;
-  font-family: "Barlow Condensed", "Impact";
+  font-family: var(--font-stack-alt);
   text-align: center;
   animation: fade-out-notification 500ms forwards;
   animation-delay: 500ms;

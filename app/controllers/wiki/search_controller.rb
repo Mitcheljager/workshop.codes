@@ -17,7 +17,7 @@ class Wiki::SearchController < Wiki::BaseController
     articles = Wiki::Article.where(id: ids)
     groups = articles.map { |article| article.group_id }.uniq
     latest_articles = Wiki::Article.where(group_id: groups).group(:group_id).maximum(:id).values
-    @articles = articles.approved.where(id: latest_articles).order_by_ids(ids)
+    @articles = Wiki::Article.where(id: latest_articles).order_by_ids(ids)
 
     respond_to do |format|
       format.html
@@ -31,7 +31,12 @@ class Wiki::SearchController < Wiki::BaseController
         end
 
         set_request_headers
-        render json: @articles.to_json(include: :category)
+
+        if params[:single]
+          render json: @articles.first.to_json(include: :category)
+        else
+          render json: @articles.to_json(include: :category)
+        end
       }
     end
   end

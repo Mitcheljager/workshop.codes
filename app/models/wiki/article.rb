@@ -23,19 +23,29 @@ class Wiki::Article < ApplicationRecord
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes }
 
-  def self.approved
-    where(edit: Wiki::Edit.where(approved: true))
-  end
-
   def self.search(query, size=20)
     __elasticsearch__.search({
       from: 0,
       size: size,
       query: {
-        multi_match: {
-          query: query,
-          fields: ["title^3", "tags^1.5", "category.title^1"],
-          fuzziness: "AUTO"
+        bool: {
+          should: [{
+            multi_match: {
+              query: query,
+              fields: ["title"],
+              type: "cross_fields",
+              operator: "and",
+              tie_breaker: 0.1,
+              boost: 100,
+              minimum_should_match: "25%"
+            }
+          }, {
+            multi_match: {
+              query: query,
+              fields: ["title^2", "tags^1.5", "category.title"],
+              fuzziness: "AUTO"
+            }
+          }]
         }
       }
     }).records.ids

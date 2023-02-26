@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "sitemap", to: "sitemaps#sitemap"
   get "privacy-policy", to: "pages#privacy_policy"
   get "tos", to: "pages#tos", as: "tos"
+  get "brand", to: "pages#brand", as: "brand"
   get "explanation", to: "pages#explanation"
 
   get "editor", to: "editor#index"

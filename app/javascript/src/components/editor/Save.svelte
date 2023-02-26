@@ -1,6 +1,7 @@
 <script>
   import FetchRails from "../../fetch-rails"
   import { currentProject, items } from "../../stores/editor"
+  import { defaultLanguage, selectedLanguages, translationKeys } from "../../stores/translationKeys"
   import { Confetti } from "svelte-confetti"
 
   let loading = false
@@ -9,7 +10,16 @@
   function save() {
     loading = true
 
-    new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content: JSON.stringify($items) } }).post({ method: "put" })
+    const content =  JSON.stringify({
+      items: $items,
+      translations: {
+        keys: $translationKeys,
+        selectedLanguages: $selectedLanguages,
+        defaultLanguage: $defaultLanguage
+      }
+    })
+
+    new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })
       .then(data => {
         if (!data) throw Error("Create failed")
 
@@ -28,7 +38,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.keyCode == 83) {
+    if (event.ctrlKey && !event.shiftKey && event.keyCode == 83) {
       event.preventDefault()
       save()
     }

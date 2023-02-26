@@ -808,7 +808,6 @@ Communication:
     zh-CN: 不用谢
 Icon:
   ARROW_DOWN:
-    description: __iconDescription__
     guid: 00000000C2C9
     en-US: 'Arrow: Down'
     es-MX: 'Flecha: Hacia abajo'
@@ -817,7 +816,6 @@ Icon:
     pt-BR: 'Seta: Baixo'
     zh-CN: 箭头：向下
   ARROW_LEFT:
-    description: __iconDescription__
     guid: 00000000C2CA
     en-US: 'Arrow: Left'
     es-MX: 'Flecha: Hacia la izquierda'
@@ -826,7 +824,6 @@ Icon:
     pt-BR: 'Seta: Esquerda'
     zh-CN: 箭头：向左
   ARROW_RIGHT:
-    description: __iconDescription__
     guid: 00000000C2CB
     en-US: 'Arrow: Right'
     es-MX: 'Flecha: Hacia la derecha'
@@ -835,7 +832,6 @@ Icon:
     pt-BR: 'Seta: Direita'
     zh-CN: 箭头：向右
   ARROW_UP:
-    description: __iconDescription__
     guid: 00000000C2CC
     en-US: 'Arrow: Up'
     es-MX: 'Flecha: Hacia arriba'
@@ -844,7 +840,6 @@ Icon:
     pt-BR: 'Seta: Cima'
     zh-CN: 箭头：向上
   ASTERISK:
-    description: __iconDescription__
     guid: 00000000C2CD
     en-US: Asterisk
     es-MX: Asterisco
@@ -853,7 +848,6 @@ Icon:
     pt-BR: Asterisco
     zh-CN: 星形
   BOLT:
-    description: __iconDescription__
     guid: 00000000C2CE
     en-US: Bolt
     es-MX: Rayo
@@ -862,7 +856,6 @@ Icon:
     pt-BR: Raio
     zh-CN: 箭矢
   CHECKMARK:
-    description: __iconDescription__
     guid: 00000000C2CF
     en-US: Checkmark
     es-MX: Marca de control
@@ -872,7 +865,6 @@ Icon:
     zh-CN: 对号
   CIRCLE:
     guid: 00000000C2D0
-    description: __iconDescription__
     en-US: Circle
     es-MX: Círculo
     fr-FR: Cercle
@@ -881,7 +873,6 @@ Icon:
     zh-CN: 圆圈
   CLUB:
     guid: 00000000C2D1
-    description: __iconDescription__
     en-US: Club
     es-MX: Trébol
     fr-FR: Trèfle
@@ -890,7 +881,6 @@ Icon:
     zh-CN: 梅花
   DIAMOND:
     guid: 00000000C2D2
-    description: __iconDescription__
     en-US: Diamond
     es-MX: Diamante
     fr-FR: Carreau
@@ -899,7 +889,6 @@ Icon:
     zh-CN: 方块
   DIZZY:
     guid: 00000000C2D3
-    description: __iconDescription__
     en-US: Dizzy
     es-MX: Mareado
     fr-FR: Étourdi
@@ -907,7 +896,6 @@ Icon:
     pt-BR: Tonto
     zh-CN: 晕眩
   EXCLAMATION_MARK:
-    description: __iconDescription__
     guid: 00000000C2D4
     en-US: Exclamation Mark
     es-MX: Signo de exclamación
@@ -916,7 +904,6 @@ Icon:
     pt-BR: Ponto de Exclamação
     zh-CN: 感叹号
   EYE:
-    description: __iconDescription__
     guid: 00000000C2D5
     en-US: Eye
     es-MX: Ojo
@@ -925,7 +912,6 @@ Icon:
     pt-BR: Olho
     zh-CN: 眼睛
   FIRE:
-    description: __iconDescription__
     guid: 00000000C2D6
     en-US: Fire
     es-MX: Fuego
@@ -934,7 +920,6 @@ Icon:
     pt-BR: Fogo
     zh-CN: 火焰
   FLAG:
-    description: __iconDescription__
     guid: 00000000C2F0
     en-US: Flag
     es-MX: Bandera
@@ -944,13 +929,11 @@ Icon:
     zh-CN: 旗帜
   HALO:
     guid: 00000000C2D7
-    description: __iconDescription__
     en-US: Halo
     ja-JP: 光輪
     pt-BR: Auréola
     zh-CN: 光晕
   HAPPY:
-    description: __iconDescription__
     guid: 00000000C2D8
     en-US: Happy
     es-MX: Feliz
@@ -960,7 +943,6 @@ Icon:
     zh-CN: 高兴
   HEART:
     guid: 00000000C2D9
-    description: __iconDescription__
     en-US: Heart
     es-MX: Corazón
     fr-FR: Cœur
@@ -969,7 +951,6 @@ Icon:
     zh-CN: 红桃
   MOON:
     guid: 00000000C2DA
-    description: __iconDescription__
     en-US: Moon
     es-MX: Luna
     fr-FR: Lune
@@ -978,14 +959,12 @@ Icon:
     zh-CN: 满月
   'NO':
     guid: 00000000C2DB
-    description: __iconDescription__
     en-US: 'No'
     fr-FR: Interdit
     ja-JP: いいえ
     pt-BR: Não
     zh-CN: 拒绝
   PLUS:
-    description: __iconDescription__
     guid: 00000000C2DC
     en-US: Plus
     es-MX: Signo de suma
@@ -993,7 +972,6 @@ Icon:
     pt-BR: Mais
     zh-CN: 加号
   POISON:
-    description: __iconDescription__
     guid: 00000000C2DD
     en-US: Poison
     es-MX: Veneno
@@ -1001,7 +979,6 @@ Icon:
     pt-BR: Veneno
     zh-CN: 剧毒
   POISON_2:
-    description: __iconDescription__
     guid: 00000000C2DE
     en-US: Poison 2
     es-MX: Veneno 2
@@ -1010,7 +987,6 @@ Icon:
     pt-BR: Veneno 2
     zh-CN: 剧毒2
   QUESTION_MARK:
-    description: __iconDescription__
     guid: 00000000C2DF
     en-US: Question Mark
     es-MX: Signo de interrogación
@@ -1019,7 +995,6 @@ Icon:
     pt-BR: Ponto de Interrogação
     zh-CN: 问号
   RADIOACTIVE:
-    description: __iconDescription__
     guid: 00000000C2E4
     en-US: Radioactive
     es-MX: Radiactivo
@@ -1028,7 +1003,6 @@ Icon:
     pt-BR: Radiativo
     zh-CN: 辐射
   RECYCLE:
-    description: __iconDescription__
     guid: 00000000C2E5
     en-US: Recycle
     es-MX: Reciclaje
@@ -1037,7 +1011,6 @@ Icon:
     pt-BR: Reciclagem
     zh-CN: 回收
   RING_THICK:
-    description: __iconDescription__
     guid: 00000000C2E6
     en-US: Ring Thick
     es-MX: Anillo grueso
@@ -1046,7 +1019,6 @@ Icon:
     pt-BR: Anel Grosso
     zh-CN: 宽环
   RING_THIN:
-    description: __iconDescription__
     guid: 00000000C2E7
     en-US: Ring Thin
     es-MX: Anillo delgado
@@ -1055,7 +1027,6 @@ Icon:
     pt-BR: Anel Fino
     zh-CN: 细环
   SAD:
-    description: __iconDescription__
     guid: 00000000C2E8
     en-US: Sad
     es-MX: Triste
@@ -1065,7 +1036,6 @@ Icon:
     zh-CN: 难过
   SKULL:
     guid: 00000000C2E9
-    description: __iconDescription__
     en-US: Skull
     es-MX: Cráneo
     fr-FR: Crâne
@@ -1074,7 +1044,6 @@ Icon:
     zh-CN: 骷髅
   SPADE:
     guid: 00000000C2EA
-    description: __iconDescription__
     en-US: Spade
     es-MX: Pica
     fr-FR: Pique
@@ -1082,7 +1051,6 @@ Icon:
     pt-BR: Espadas
     zh-CN: 黑桃
   SPIRAL:
-    description: __iconDescription__
     guid: 00000000C2EB
     en-US: Spiral
     es-MX: Espiral
@@ -1092,14 +1060,12 @@ Icon:
     zh-CN: 螺旋
   STOP:
     guid: 00000000C2EC
-    description: __iconDescription__
     en-US: Stop
     es-MX: Alto
     ja-JP: 停止
     pt-BR: Parada
     zh-CN: 停止
   TRASHCAN:
-    description: __iconDescription__
     guid: 00000000C2ED
     en-US: Trashcan
     es-MX: Tacho de basura
@@ -1109,7 +1075,6 @@ Icon:
     zh-CN: 垃圾箱
   WARNING:
     guid: 00000000C2EE
-    description: __iconDescription__
     en-US: Warning
     es-MX: Advertencia
     fr-FR: Avertissement
@@ -1118,7 +1083,6 @@ Icon:
     zh-CN: 警告
   CROSS:
     guid: 00000000C2EF
-    description: __iconDescription__
     en-US: X
     fr-FR: Croix
 Relativity:

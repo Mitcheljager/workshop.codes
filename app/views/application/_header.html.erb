@@ -26,11 +26,11 @@
 
   <div class="header__mobile-sticky" data-role="sticky" data-sticky-offset="20" data-sticky-mobile-only="true">
     <div class="header__search header__search--mobile" data-role="search search-popout">
-      <%= render "search" %>
+      <%= render "search", id: "query_mobile" %>
       <%= render "filter/filter" %>
     </div>
 
-    <%= link_to inline_svg_tag("icons/icon-search.svg", height: 24), "#", class: "header__search-trigger", data: { action: "toggle-search" } %>
+    <%= tag.button inline_svg_tag("icons/icon-search.svg", height: 24), class: "header__search-trigger", data: { action: "toggle-search" } %>
     <%= link_to "☰", "#", class: "navigation-trigger", data: { action: "toggle-navigation" } %>
   </div>
 </header>

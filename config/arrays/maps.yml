@@ -143,6 +143,14 @@
     ko: 혼합
   slug: paraiso
 -
+  en: Antarctic Peninsula
+  ko: 남극 반도
+  overwatch_2: true
+  type:
+    en: Control
+    ko: 쟁탈
+  slug: antarctic-peninsula
+-
   en: Busan
   ko: 부산
   type:

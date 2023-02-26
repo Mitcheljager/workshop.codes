@@ -62,16 +62,45 @@
       }
     }
   }
+
+  &--hidden {
+    > span {
+      opacity: 0.5;
+
+      input {
+        text-decoration: line-through;
+      }
+    }
+  }
 }
 
 .editor-item__actions {
   display: none;
+  align-items: center;
+  gap: 0.1rem;
   position: absolute;
   right: 0;
   top: 0.25rem;
   background: darken($bg-dark, 7.5%);
 
   .editor-item:hover > & {
-    display: block;
+    display: flex;
+  }
+
+  button {
+    &:hover {
+      filter: brightness(1.25);
+    }
+
+    &.inactive {
+      opacity: 0.5;
+    }
+
+    svg {
+      display: block;
+      height: 1rem;
+      width: 1rem;
+      fill: currentColor;
+    }
   }
 }

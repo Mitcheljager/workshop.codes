@@ -1,0 +1,76 @@
+<h1 class="heading mb-0">Brand</h1>
+<p>
+  <big>On this page you will find logos and styleguides for the Workshop.codes brand.</big>
+</p>
+
+<h2 class="mt-1/1">Colors</h2>
+<div class="flex align-center text-white mb-1/8">
+  <div class="bg-primary mr-1/2" style="width: 50px; height: 50px;"></div>
+  Primary: #f06414
+</div>
+
+<div class="flex align-center text-white mb-1/8">
+  <div class="bg-wiki mr-1/2" style="width: 50px; height: 50px;"></div>
+  Wiki: #00abff
+</div>
+
+<div class="flex align-center text-white mb-1/8">
+  <div class="mr-1/2" style="width: 50px; height: 50px; background: black"></div>
+  Logo cog: #000000
+</div>
+
+<div class="flex align-center text-white mb-1/8">
+  <div class="mr-1/2" style="width: 50px; height: 50px; background: #565a5d"></div>
+  Alternative logo cog: #565a5d
+</div>
+
+<div class="flex align-center text-white mb-1/8">
+  <div class="mr-1/2" style="width: 50px; height: 50px; background: white"></div>
+  Text color: #ffffff
+</div>
+
+<h2 class="mt-1/1">Fonts</h2>
+<p>The logo uses an altered version of <strong><%= link_to "Raleway", "https://fonts.google.com/specimen/Raleway", target: "_blank", rel: "noreferrer noopener" %></strong>, notabily using a different version of the W.</p>
+<p>Special elements use <span style="font-family: var(--font-stack-alt)"><%= link_to "Barlow Consended", "https://fonts.google.com/specimen/Barlow+Condensed", target: "_blank", rel: "noreferrer noopener" %></span></p>
+<p>Basic font (this one) used on the website vary on your device. It's not recommended to use this in any styling, as it's not consistent. In order of importance: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji".</p>
+
+<h2 class="mt-1/1">Logos</h2>
+<p>The logo should not be altered. Not in form and not in color. The logo should always be displayed with either the black or gray cog, the color of the cog should not be altered. The text should always be displayed in white.</p>
+<div class="well block">
+  <h3 class="mt-0">Primary Logo, SVG</h3>
+  <%= image_tag "logo.svg", width: 400 %>
+
+  <h3>Primary Logo, PNG</h3>
+  <%= image_tag "brand/logo.png", width: 400 %>
+
+  <h3>Alternative Logo, PNG</h3>
+  <%= image_tag "brand/logo-alt.png", width: 400 %>
+
+  <h3>Wiki Logo, PNG</h3>
+  <%= image_tag "brand/logo-wiki.png", width: 400 %>
+
+  <h3>Primary icon, SVG</h3>
+  <%= image_tag "logo-small.svg", width: 100 %>
+
+  <h3>Primary icon, PNG</h3>
+  <%= image_tag "brand/icon.png", width: 100 %>
+
+  <h3>Alternative icon, PNG</h3>
+  <%= image_tag "brand/icon-alt.png", width: 100 %>
+</div>
+
+<h2 class="mt-1/1">Background</h2>
+<p>These backgrounds are often used in association with other branding. Please note that some of these are altered images from Overwatch and not direct property of Workshop.codes</p>
+<div class="well block">
+  <h3 class="mt-0">Primary background, JPG</h3>
+  <%= image_tag "layout/header-bg_lg.jpg", width: 400 %>
+
+  <h3>Wiki background, JPG</h3>
+  <%= image_tag "wiki/bg.jpg", width: 400 %>
+
+  <h3>Pattern background full, JPG</h3>
+  <%= image_tag "brand/pattern.jpg" %>
+
+  <h3>Pattern background single, Webp</h3>
+  <%= image_tag "layout/pattern-bg.webp" %>
+</div>

@@ -6,7 +6,8 @@
   <div class="spinner"></div>
 </div>
 
-<%= svelte_component "Editor", {
+<div class="wiki">
+  <%= svelte_component "Editor", {
     values: @values,
     actions: @actions,
     constants: @constants,
@@ -15,4 +16,5 @@
     maps: maps,
     _projects: @projects,
     _isSignedIn: current_user.present?
-} %>
+  } %>
+</div>

@@ -16,13 +16,7 @@ export default function copyToClipboard(event, optionalContent = undefined) {
 
   if (!targetElement) return
 
-  const input = document.createElement("textarea")
-  input.value = optionalContent || targetElement.textContent
-  document.body.appendChild(input)
-
-  input.select()
-  document.execCommand("copy")
-  document.body.removeChild(input)
+  copyValueToClipboard(optionalContent || targetElement.textContent)
 
   const notificationElement = document.createElement("div")
   notificationElement.classList.add("copy__notification")
@@ -35,6 +29,16 @@ export default function copyToClipboard(event, optionalContent = undefined) {
   setTimeout(() => { copyParent.querySelector(".copy__notification").remove() }, 1000)
 
   if (targetElement.dataset.trackCopy != undefined) trackCopy(targetElement.textContent)
+}
+
+export function copyValueToClipboard(value) {
+  const input = document.createElement("textarea")
+  input.value = value
+  document.body.appendChild(input)
+
+  input.select()
+  document.execCommand("copy")
+  document.body.removeChild(input)
 }
 
 function trackCopy(label) {

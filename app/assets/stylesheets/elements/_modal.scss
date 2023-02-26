@@ -29,7 +29,7 @@
   &--top {
     @include media-min(sm) {
       align-items: flex-start;
-      padding-top: $margin;
+      padding: $margin 0;
     }
   }
 }

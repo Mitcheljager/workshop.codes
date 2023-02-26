@@ -1,9 +1,9 @@
 <center class="top-offset">
-  <%= link_to inline_svg_tag("elo-hell-logo-white.svg", height: 80), "https://elohell.gg/", target: "_blank", rel: "noreferrer noopener" %>
+  <%= inline_svg_tag("logo-small.svg", height: 80, class: "cog-color") %>
 
   <div>
     <%= link_to "https://discord.gg/DdxsQRD", class: "button button--link", target: "_blank", rel: "noreferrer noopener" do %>
-      Join the <mark>Elo Hell Workshops</mark> Discord
+      Join the <mark>Workshop.codes</mark> Discord
     <% end %>
   </div>
 </center>
@@ -11,7 +11,8 @@
 <footer class="footer">
   <p>
     <%= link_to t("footer.privacy_policy"), privacy_policy_path %> |
-    <%= link_to t("footer.tos"), tos_path %>
+    <%= link_to t("footer.tos"), tos_path %> |
+    <%= link_to t("footer.brand"), brand_path %>
     <br>
     <%= t "footer.copyright" %> &copy; <%= Date.current.year %> |
     <%= t "footer.disclaimer" %>

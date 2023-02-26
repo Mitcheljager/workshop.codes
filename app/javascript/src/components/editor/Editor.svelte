@@ -6,11 +6,13 @@
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
   import ScriptImporter from "./ScriptImporter.svelte"
+  import TranslationKeys from "./TranslationKeys/TranslationKeys.svelte"
   import Compiler from "./Compiler.svelte"
   import ProjectsDropdown from "./ProjectsDropdown.svelte"
   import Save from "./Save.svelte"
   import Empty from "./Empty.svelte"
   import Settings from "./Settings.svelte"
+  import Shortcuts from "./Shortcuts.svelte"
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
@@ -24,6 +26,8 @@
   export let maps
   export let _projects
   export let _isSignedIn = false
+
+  let fetchArticle
 
   $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
@@ -73,6 +77,7 @@
         // Add detail arguments in autocomplete results
         const detail = v.args.map(a => `${ toCapitalize(a.name) }`).join(", ")
 
+        params.detail_full = detail
         params.detail = `(${ detail.slice(0, 30) }${ detail.length > 30 ? "..." : "" })`
 
         // Add apply values when selecting autocomplete, filling in default args
@@ -120,7 +125,11 @@
           </div>
         {/if}
 
+        <Shortcuts />
+
         <Settings />
+
+        <TranslationKeys />
 
         {#if isSignedIn && $currentProject?.is_owner}
           <ScriptImporter />
@@ -160,12 +169,12 @@
 
     <div class="editor__content">
       {#if Object.keys($currentItem).length}
-        <CodeMirror completionsMap={$completionsMap} />
+        <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
       {/if}
     </div>
 
     <div class="editor__popout editor__scrollable">
-      <EditorWiki />
+      <EditorWiki bind:fetchArticle />
 
       <DragHandle key="popout-width" currentSize=300 align="left" />
     </div>

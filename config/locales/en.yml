@@ -64,6 +64,7 @@ en:
   footer:
     privacy_policy: Privacy Policy
     tos: Terms of Service
+    brand: Brand
     copyright: Copyright
     disclaimer: All images and icons belong to their respective owner.
 
@@ -80,7 +81,7 @@ en:
       title: The Workshop is currently disabled
       content_html: The Workshop is not yet enabled in Overwatch 2. <strong class="text-white">Previously created codes can still be imported</strong>. Custom games without the Workshop are still available. You can still edit scripts outside of the game.
     editor:
-      title_html: Workshop Disabled? <strong>There's options!</strong>
+      title_html: Workshop unstable? <strong>There's options!</strong>
       content_html: The Workshop might be disabled in-game but you can still use our web based editor.
 
   posts:

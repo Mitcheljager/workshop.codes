@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy, onMount } from "svelte"
+  import { onDestroy, onMount, createEventDispatcher } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection } from "@codemirror/state"
@@ -8,10 +8,13 @@
   import { linter, lintGutter } from "@codemirror/lint"
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
-  import { currentItem, editorStates, items, currentProjectUUID } from "../../stores/editor"
+  import { parameterTooltip } from "../../lib/parameterTooltip"
+  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, mixinsMap } from "../../stores/editor"
+  import { translationsMap } from "../../stores/translationKeys"
+  import { getPhraseFromPosition } from "../../utils/editor"
   import debounce from "../../debounce"
 
-  export let completionsMap = []
+  const dispatch = createEventDispatcher()
 
   let element
   let view
@@ -72,21 +75,30 @@
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
         }),
-        basicSetup
+        basicSetup,
+        parameterTooltip()
       ]
     })
   }
 
   function completions(context) {
-    const word = context.matchBefore(/[a-zA-Z0-9 ]*/)
+    const word = context.matchBefore(/[@a-zA-Z0-9 ]*/)
 
     const add = word.text.search(/\S|$/)
     if (word.from + add == word.to && !context.explicit) return null
 
+    // There's probably a better way of doing this
+    let specialOverwrite = null
+    if (word.text.includes("@i")) {
+      specialOverwrite = $mixinsMap
+    } else if (word.text.includes("@t")) {
+      specialOverwrite = $translationsMap
+    }
+
     return {
       from: word.from + add,
       to: word.to,
-      options: completionsMap,
+      options: specialOverwrite || [...$completionsMap, ...$variablesMap],
       validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }
@@ -106,8 +118,9 @@
       let insert = "\n"
       for (let i = 0; i < indent; i++) { insert += "\t" }
 
-      const openBracket = /[\{\(\[]/gm.exec(state.doc.lineAt(from).text)?.[0].length
-      const closeBracket = /[\}\)\]]/gm.exec(state.doc.lineAt(from).text)?.[0].length
+      const isComment = line.text.includes("//")
+      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text)?.[0].length
+      const closeBracket = !isComment && /[\}\)\]]/gm.exec(line.text)?.[0].length
       if (openBracket && !closeBracket) insert += "\t"
 
       return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
@@ -183,8 +196,24 @@
     const index = $items.indexOf(i => i.id == $currentItem.id)
     $items[index] = $currentItem
   }, 250)
+
+  function click(event) {
+    if (!event.altKey) return
+
+    event.preventDefault()
+    searchWiki()
+  }
+
+  function searchWiki() {
+    const position = view.state.selection.ranges[0].from
+    const line = view.state.doc.lineAt(view.state.selection.ranges[0].from)
+
+    const phrase = getPhraseFromPosition(line, position)
+
+    if ($completionsMap.some(v => v.label == phrase.text)) dispatch("search", phrase.text)
+  }
 </script>
 
 <svelte:window on:keydown={keydown} />
 
-<div bind:this={element} ></div>
+<div bind:this={element} on:click={click}></div>

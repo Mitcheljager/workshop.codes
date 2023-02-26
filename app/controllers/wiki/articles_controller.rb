@@ -10,8 +10,8 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def index
-    @articles = Wiki::Article.approved.group(:group_id).maximum(:id).values
-    @articles = Wiki::Article.approved.where(id: @articles).order(created_at: :desc).page(params[:page])
+    @articles = Wiki::Article.group(:group_id).maximum(:id).values
+    @articles = Wiki::Article.where(id: @articles).order(created_at: :desc).page(params[:page])
 
     respond_to do |format|
       format.html
@@ -20,14 +20,14 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def show
-    @article = Wiki::Article.approved.where(slug: params[:slug]).last
+    @article = Wiki::Article.where(slug: params[:slug]).last
 
     not_found and return unless @article
     redirect_to_latest_article
 
-    @initial_article = Wiki::Article.approved.where(group_id: @article.group_id).first
+    @initial_article = Wiki::Article.where(group_id: @article.group_id).first
 
-    @edit_ids = Wiki::Article.joins(:edit).approved.where(group_id: @article.group_id).pluck(:"wiki_edits.id")
+    @edit_ids = Wiki::Article.joins(:edit).where(group_id: @article.group_id).pluck(:"wiki_edits.id")
     @edit_count = Wiki::Edit.where(id: @edit_ids).size
 
     @article.readonly!
@@ -56,7 +56,7 @@ class Wiki::ArticlesController < Wiki::BaseController
       create_wiki_edit(:created, @article.id)
       create_activity(:create_wiki_article, { id: @article.id })
 
-      if @article.edit.approved?
+      if @article
         BadgesWikiJob.perform_async(current_user)
         flash[:notice] = "Article successfully created" # FIXME: i18n
         redirect_to wiki_article_path(@article.slug)
@@ -133,7 +133,7 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def redirect_to_latest_article
-    @latest_article = Wiki::Article.approved.where(group_id: @article.group_id).last
+    @latest_article = Wiki::Article.where(group_id: @article.group_id).last
 
     if @latest_article != @article
       redirect_to wiki_article_path(@latest_article.slug)

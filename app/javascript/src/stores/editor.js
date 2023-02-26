@@ -1,6 +1,6 @@
 import { writable, derived } from "svelte/store"
-
-export const completionsMap = writable([])
+import { getMixins, getSubroutines, getVariables } from "../utils/compiler"
+import { isAnyParentHidden } from "../utils/editor"
 
 export const editorStates = writable({})
 
@@ -23,6 +23,30 @@ export const sortedItems = derived(items, $items => {
   return cleanedItems.sort((a, b) => a.position > b.position ? 1 : -1)
 })
 
+export const flatItems = derived(sortedItems, $sortedItems => {
+  return $sortedItems
+    .filter(i => !i.hidden && !isAnyParentHidden(i))
+    .map(i => i.content).join("\n\n")
+})
+
 export const openFolders = writable([])
 
 export const isSignedIn = writable(false)
+
+export const completionsMap = writable([])
+export const variablesMap = derived(flatItems, $flatItems => {
+  const { globalVariables, playerVariables } = getVariables($flatItems)
+  const subroutines = getSubroutines($flatItems)
+
+  return [
+    ...globalVariables.map(v => ({ detail: "Global Variable", label: v, type: "variable" })),
+    ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" })),
+    ...subroutines.map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
+  ]
+})
+
+export const mixinsMap = derived(flatItems, $flatItems => {
+  const mixins = getMixins($flatItems)
+
+  return mixins.map(v => ({ detail: "Mixin", label: `@include ${ v }()`, type: "variable" }))
+})

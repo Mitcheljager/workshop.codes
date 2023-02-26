@@ -13,6 +13,8 @@ export function OWLanguageLinter(view) {
   findIncorrectArgsLength(content)
   findMissingQuotes(content)
   findMissingSemicolons(content)
+  findExtraSemicolons(content)
+  findMissingComparisonsInConditions(content)
   checkMixins(content)
 
   return diagnostics
@@ -147,7 +149,27 @@ function findIncorrectArgsLength(content) {
 function findAllCharacters(content, character = "{") {
   const indices = []
 
+  let inString = false
+  let inComment = false
+
   for(let i = 0; i < content.length; i++) {
+    if (content[i] == "\"") {
+      inString = !inString
+      continue
+    }
+
+    if (content[i] == "/" && content[i + 1] == "/") {
+      inComment = true
+      continue
+    }
+
+    if (inComment && content[i] == "\n") {
+      inComment = false
+    }
+
+    if (inString) continue
+    if (inComment) continue
+
     if (content[i] == character) indices.push(i)
   }
 
@@ -220,7 +242,7 @@ function findMissingSemicolons(content) {
       continue
     }
 
-    if (content[i] == "/" && content[i] == "/") {
+    if (content[i] == "/" && content[i + 1] == "/") {
       inComment = true
       continue
     }
@@ -288,6 +310,19 @@ function findMissingSemicolons(content) {
   }
 }
 
+function findExtraSemicolons(content) {
+  for(let i = 0; i < content.length; i++) {
+    if (content[i] == "}" && content[i + 1] == ";") {
+      diagnostics.push({
+        from: i,
+        to: i + 2,
+        severity: "error",
+        message: "Unexpected semicolon"
+      })
+    }
+  }
+}
+
 function findFirstNonEmptyCharacter(content) {
   for(let i = 0; i < content.length; i++) {
     if (content[i] == "\n") return content[i]
@@ -307,5 +342,39 @@ function findOpenBeforeClose(content, open, close) {
 
     if (foundClose && !foundOpen) return false
     if (foundOpen && !foundClose) return true
+  }
+}
+
+function findMissingComparisonsInConditions(content) {
+  const mixinRegex = /(conditions[\s]*{)/g
+  let match
+  while ((match = mixinRegex.exec(content)) != null) {
+    const closing = getClosingBracket(content, "{", "}", match.index)
+    const conditionContent = content.slice(match.index + match[0].length, closing)
+
+    // Get indexes of semicolons
+    const semicolons = findAllCharacters(conditionContent, ";")
+
+    for(let i = 0; i < semicolons.length; i++) {
+      const start = i == 0 ? 0 : (semicolons[i - 1] + 1)
+      const end = semicolons[i]
+      const condition = conditionContent.substring(start, end)
+
+      // Remove all content that is between parenthesis
+      const conditionWithoutParenthesis = condition.replaceAll(/\([^\)]*\)/g, "")
+
+      // Ignore conditions that hold mixins
+      if (conditionWithoutParenthesis.includes("@include") || conditionWithoutParenthesis.includes("Mixin.")) continue
+
+      // Pass if content contains any comparison symbols
+      if (conditionWithoutParenthesis.match(/==|<|>|>=|<=|!=/)) continue
+
+      diagnostics.push({
+        from: match.index + match[0].length + start + condition.search(/\S/),
+        to: match.index + match[0].length + end,
+        severity: "error",
+        message: "Expected condition to have a comparison"
+      })
+    }
   }
 }

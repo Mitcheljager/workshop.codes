@@ -19,13 +19,27 @@ export function destroyItem(id) {
 }
 
 export function updateItemName(id, name) {
-  // The store needs to be updated across the board
-  // Otherwise their value will get overwritten on change
-  // There's probably a better way of doing this
   items.set(get(items).map(i => {
     if (i.id == id) i.name = name
     return i
   }))
+}
+
+export function toggleHideItem(id) {
+  items.set(get(items).map(i => {
+    if (i.id == id) i.hidden = !i.hidden
+    return i
+  }))
+}
+
+export function isAnyParentHidden(item) {
+  while (item.parent) {
+    item = get(items).find(i => i.id === item.parent)
+
+    if (item.hidden) return true
+  }
+
+  return false
 }
 
 export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {
@@ -90,6 +104,28 @@ export function getSettings(value) {
 
 export function replaceBetween(origin, replace, startIndex, endIndex) {
   return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
+}
+
+export function getPhraseEnd(text, start, direction = 1) {
+  let lastValidCharacterPosition = start
+  for (let i = 1; i < 100; i++) {
+    const char = text[start + i * direction]
+    if (char !== undefined && /[A-Za-z\- ]/.test(char)) lastValidCharacterPosition += direction
+    else i = 100
+  }
+
+  return lastValidCharacterPosition
+}
+
+export function getPhraseFromPosition(line, position) {
+  const start = getPhraseEnd(line.text, position - line.from, -1)
+  const end = getPhraseEnd(line.text, position - line.from, 1)
+
+  return {
+    start,
+    end,
+    text: line.text.slice(start, end + 1).trim()
+  }
 }
 
 export function setCssVariable(key, value) {
