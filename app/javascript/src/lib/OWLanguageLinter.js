@@ -13,7 +13,8 @@ export function OWLanguageLinter(view) {
   findIncorrectArgsLength(content)
   findMissingQuotes(content)
   findMissingSemicolons(content)
-  findExtraSimicolons(content)
+  findExtraSemicolons(content)
+  findMissingComparisonsInConditions(content)
   checkMixins(content)
 
   return diagnostics
@@ -309,7 +310,7 @@ function findMissingSemicolons(content) {
   }
 }
 
-function findExtraSimicolons(content) {
+function findExtraSemicolons(content) {
   for(let i = 0; i < content.length; i++) {
     if (content[i] == "}" && content[i + 1] == ";") {
       diagnostics.push({
@@ -341,5 +342,39 @@ function findOpenBeforeClose(content, open, close) {
 
     if (foundClose && !foundOpen) return false
     if (foundOpen && !foundClose) return true
+  }
+}
+
+function findMissingComparisonsInConditions(content) {
+  const mixinRegex = /(conditions[\s]*{)/g
+  let match
+  while ((match = mixinRegex.exec(content)) != null) {
+    const closing = getClosingBracket(content, "{", "}", match.index)
+    const conditionContent = content.slice(match.index + match[0].length, closing)
+
+    // Get indexes of semicolons
+    const semicolons = findAllCharacters(conditionContent, ";")
+
+    for(let i = 0; i < semicolons.length; i++) {
+      const start = i == 0 ? 0 : (semicolons[i - 1] + 1)
+      const end = semicolons[i]
+      const condition = conditionContent.substring(start, end)
+
+      // Remove all content that is between parenthesis
+      const conditionWithoutParenthesis = condition.replaceAll(/\([^\)]*\)/g, "")
+
+      // Ignore conditions that hold mixins
+      if (conditionWithoutParenthesis.includes("@include") || conditionWithoutParenthesis.includes("Mixin.")) continue
+
+      // Pass if content contains any comparison symbols
+      if (conditionWithoutParenthesis.match(/==|<|>|>=|<=|!=/)) continue
+
+      diagnostics.push({
+        from: match.index + match[0].length + start + condition.search(/\S/),
+        to: match.index + match[0].length + end,
+        severity: "error",
+        message: "Expected condition to have a comparison"
+      })
+    }
   }
 }
