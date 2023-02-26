@@ -24,7 +24,7 @@
     { keys: ["Alt", "↓"], text: "Move current line down" },
     { keys: ["Ctrl", "1"], text: "Focus files list" },
     { keys: ["Ctrl", "2"], text: "Focus editor" },
-    { keys: ["Ctrl", "3"], text: "Focus wiki search" },
+    { keys: ["Ctrl", "3"], text: "Focus wiki search" }
   ]
 
   function outsideClick(event) {
