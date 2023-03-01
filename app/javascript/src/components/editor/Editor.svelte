@@ -126,9 +126,7 @@
         {/if}
 
         <Shortcuts />
-
         <Settings />
-
         <TranslationKeys />
 
         {#if isSignedIn && $currentProject?.is_owner}

@@ -1,14 +1,31 @@
 <script>
-  import { items } from "../../stores/editor"
-  import { setCurrentItemById } from "../../utils/editor"
+  import { sortedItems, editorStates } from "../../stores/editor"
+  import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
+  import { compile } from "../../utils/compiler"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
-  let active = false
+  let active = true
+  let found = false
   let value = ""
+  let error = ""
+  let foundCompiled = {}
+  let foundItem = {}
+  let lineNumber = 0
   let input
 
-  $: if (active) focusInput()
+  $: if (active) {
+    value = ""
+    error = ""
+    found = false
+
+    focusInput()
+  }
+
+  $: if (value) {
+    error = ""
+    found = false
+  }
 
   function keydown(event) {
     if (event.ctrlKey && event.keyCode == 66) {
@@ -23,7 +40,77 @@
   }
 
   function find() {
-    console.log("value", value)
+    error = ""
+
+    const content = $sortedItems.filter(i => i.type == "item" && !i.hidden && !isAnyParentHidden(i)).map(i => {
+      // Insert line marker to use keep track of line numbers
+      return i.content.split("\n").map((line, lineNumber) => `[linemarker]${ i.id },${ lineNumber + 1 }[/linemarker]${ line }`).join("\n")
+    }).join("\n\n")
+
+    try {
+      const intValue = Math.max(parseInt(value) - 1, 0)
+
+      if (isNaN(intValue)) throw new Error("That's not a number")
+
+      const compiled = compile(content)
+      const splitCompiled = compiled.split("\n")
+
+      if (intValue > splitCompiled.length) throw new Error("Line was not found, are you sure you entered it correctly?")
+
+      let linemarkerStart = -1
+      let i = intValue
+      while (linemarkerStart == -1 && i) {
+        linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
+        i--
+      }
+      const linemarkerEnd = splitCompiled[i].indexOf("[/linemarker]")
+      const linemarkerData = splitCompiled[i].substring(linemarkerStart + "[linemarker]".length, linemarkerEnd)
+      const splitLineData = linemarkerData.split(",")
+      const itemId = splitLineData[0]
+      const item = getItemById(itemId)
+      lineNumber = splitLineData[1]
+
+      foundCompiled = {
+        lineNumber: intValue,
+        foundLine: findLineRangeInContent(compiled, intValue)
+      }
+
+      foundItem = {
+        item,
+        lineNumber,
+        foundLine: findLineRangeInContent(item.content, lineNumber)
+      }
+
+      found = true
+    } catch (e) {
+      error = e
+    }
+  }
+
+  function findLineRangeInContent(content, line) {
+    const cleanedContent = content.replaceAll(/(\[linemarker].*\[\/linemarker])/g, "").split("\n")
+
+    return cleanedContent[line]
+  }
+
+  async function goToItemAndSelect() {
+    setCurrentItemById(foundItem.item.id)
+    const state = $editorStates[foundItem.item.id]
+
+    await tick()
+
+    if (!state) return
+
+    const { from, to } = state.doc.line(lineNumber)
+
+    const createSelection = new CustomEvent("create-selection", {
+      bubbles: true,
+      detail: { from, to }
+    })
+
+    document.body.dispatchEvent(createSelection)
+
+    active = false
   }
 
   async function focusInput() {
@@ -43,10 +130,28 @@
     <div class="modal__content" style="max-width: 600px" transition:fly={{ y: 100, duration: 200 }}>
       Received an in-game error pointing to a specific line? Enter the line number you received and this tool will attempt to find the matching line in the correct file. <em>Success not guaranteed.</em>
 
-      <input type="text" class="form-input form-input--large bg-darker mt-1/4" placeholder="Find error by line..." bind:value bind:this={input} />
+      <input
+        type="text"
+        class="form-input form-input--large bg-darker mt-1/4"
+        placeholder="Find error by line..."
+        bind:value
+        bind:this={input} />
 
-      {#if value}
-        Value entered
+      {#if error}
+        <div class="text-red mt-1/4">{error}</div>
+      {/if}
+
+      {#if found}
+        <p class="mb-1/8">This is what the line looks like in your compiled code:</p>
+        <code class="block">{foundCompiled.lineNumber}. {foundCompiled.foundLine}</code>
+
+        <p class="mb-1/8">
+          This is what the corresponding line looks like in your code: <br>
+          File name: <strong class="text-white">{foundItem.item?.name}</strong>.
+        </p>
+        <code class="block">{foundItem.lineNumber}. {foundItem.foundLine}</code>
+
+        <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there!</button>
       {/if}
     </div>
 

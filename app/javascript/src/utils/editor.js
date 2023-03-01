@@ -133,7 +133,7 @@ export function setCssVariable(key, value) {
 }
 
 export function getItemById(id) {
-  return get(items).filter(i => i.id == id)[0] || null
+  return get(items).find(i => i.id == id) || null
 }
 
 export function setCurrentItemById(id) {

@@ -5,11 +5,8 @@ import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/t
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
-export function compile() {
-  let joinedItems = get(flatItems).map(i => {
-    // Insert line marker to use keep track of line numbers
-    return `!!!LineMarker${ i.id }!!!` + i.content
-  })
+export function compile(overwriteContent = null) {
+  let joinedItems = overwriteContent || get(flatItems)
 
   joinedItems = removeComments(joinedItems)
 
@@ -25,9 +22,7 @@ export function compile() {
   const variables = compileVariables(joinedItems)
   const subroutines = compileSubroutines(joinedItems)
 
-  return {
-    result: settings + variables + subroutines + joinedItems
-  }
+  return settings + variables + subroutines + joinedItems
 }
 
 export function getVariables(joinedItems) {
