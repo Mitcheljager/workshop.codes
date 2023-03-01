@@ -6,7 +6,7 @@
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
-  let active = true
+  let active = false
   let found = false
   let value = ""
   let error = ""
