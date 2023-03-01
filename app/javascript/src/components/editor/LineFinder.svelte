@@ -2,6 +2,7 @@
   import { sortedItems, editorStates } from "../../stores/editor"
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
+  import { reset as microlight } from '../../microlight'
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
@@ -27,6 +28,8 @@
     found = false
   }
 
+  $: if (found) syntaxHighlight()
+
   function keydown(event) {
     if (event.ctrlKey && event.keyCode == 66) {
       event.preventDefault()
@@ -44,7 +47,7 @@
 
     const content = $sortedItems.filter(i => i.type == "item" && !i.hidden && !isAnyParentHidden(i)).map(i => {
       // Insert line marker to use keep track of line numbers
-      return i.content.split("\n").map((line, lineNumber) => `[linemarker]${ i.id },${ lineNumber + 1 }[/linemarker]${ line }`).join("\n")
+      return i.content.split("\n").map((line, lineNumber) => `[linemarker]${ i.id }|${ lineNumber + 1 }[/linemarker]${ line }`).join("\n")
     }).join("\n\n")
 
     try {
@@ -57,18 +60,23 @@
 
       if (intValue > splitCompiled.length) throw new Error("Line was not found, are you sure you entered it correctly?")
 
+      console.log(splitCompiled)
+
       let linemarkerStart = -1
       let i = intValue
       while (linemarkerStart == -1 && i) {
+        console.log('while', i)
         linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
         i--
       }
       const linemarkerEnd = splitCompiled[i].indexOf("[/linemarker]")
       const linemarkerData = splitCompiled[i].substring(linemarkerStart + "[linemarker]".length, linemarkerEnd)
-      const splitLineData = linemarkerData.split(",")
+      const splitLineData = linemarkerData.split("|")
       const itemId = splitLineData[0]
       const item = getItemById(itemId)
-      lineNumber = splitLineData[1]
+      lineNumber = parseInt(splitLineData[1])
+
+      if (!item) throw new Error("Couldn't find a corresponding file.")
 
       foundCompiled = {
         lineNumber: intValue,
@@ -83,6 +91,7 @@
 
       found = true
     } catch (e) {
+      console.error(e)
       error = e
     }
   }
@@ -101,7 +110,7 @@
 
     if (!state) return
 
-    const { from, to } = state.doc.line(lineNumber)
+    const { from, to } = state.doc.line(lineNumber + 1)
 
     const createSelection = new CustomEvent("create-selection", {
       bubbles: true,
@@ -111,6 +120,11 @@
     document.body.dispatchEvent(createSelection)
 
     active = false
+  }
+
+  async function syntaxHighlight() {
+    await tick()
+    microlight()
   }
 
   async function focusInput() {
@@ -128,14 +142,21 @@
 {#if active}
   <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
     <div class="modal__content" style="max-width: 600px" transition:fly={{ y: 100, duration: 200 }}>
-      Received an in-game error pointing to a specific line? Enter the line number you received and this tool will attempt to find the matching line in the correct file. <em>Success not guaranteed.</em>
+      <p class="mt-0">
+        <strong class="text-white">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br>
+        <em>Success not guaranteed.</em>
+      </p>
 
-      <input
-        type="text"
-        class="form-input form-input--large bg-darker mt-1/4"
-        placeholder="Find error by line..."
-        bind:value
-        bind:this={input} />
+      <div class="flex">
+        <input
+          type="text"
+          class="form-input form-input--large bg-darker"
+          placeholder="Find error by line..."
+          bind:value
+          bind:this={input} />
+
+        <button class="button button--secondary button--square ml-1/8" on:click={find}>Find</button>
+      </div>
 
       {#if error}
         <div class="text-red mt-1/4">{error}</div>
@@ -143,13 +164,13 @@
 
       {#if found}
         <p class="mb-1/8">This is what the line looks like in your compiled code:</p>
-        <code class="block">{foundCompiled.lineNumber}. {foundCompiled.foundLine}</code>
+        <code class="block">{foundCompiled.lineNumber + 1}. <span class="microlight">{foundCompiled.foundLine}</span></code>
 
         <p class="mb-1/8">
           This is what the corresponding line looks like in your code: <br>
           File name: <strong class="text-white">{foundItem.item?.name}</strong>.
         </p>
-        <code class="block">{foundItem.lineNumber}. {foundItem.foundLine}</code>
+        <code class="block">{foundItem.lineNumber + 1}. <span class="microlight">{foundItem.foundLine}</span></code>
 
         <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there!</button>
       {/if}
