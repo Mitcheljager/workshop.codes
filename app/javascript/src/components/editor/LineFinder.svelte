@@ -2,7 +2,7 @@
   import { sortedItems, editorStates } from "../../stores/editor"
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
-  import { reset as microlight } from '../../microlight'
+  import { reset as microlight } from "../../microlight"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
