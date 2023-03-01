@@ -60,12 +60,15 @@
 
       if (intValue > splitCompiled.length) throw new Error("Line was not found, are you sure you entered it correctly?")
 
+      // Attempt to find line marker starting at current line moving up
       let linemarkerStart = -1
       let i = intValue
       while (linemarkerStart == -1 && i) {
         linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
         i--
       }
+
+      // Get end of linemarker and split data for item id and line number
       const linemarkerEnd = splitCompiled[i].indexOf("[/linemarker]")
       const linemarkerData = splitCompiled[i].substring(linemarkerStart + "[linemarker]".length, linemarkerEnd)
       const splitLineData = linemarkerData.split("|")
@@ -75,6 +78,7 @@
 
       if (!item) throw new Error("Couldn't find a corresponding file.")
 
+      // Get data for compiled content, include line before and fter
       foundCompiled = {
         lineNumber: intValue,
         foundLine: findLineRangeInContent(compiled, intValue),
@@ -85,6 +89,7 @@
         ]
       }
 
+      // Get data for original item content, include line before and fter
       foundItem = {
         item,
         lineNumber,
@@ -117,8 +122,8 @@
     const state = $editorStates[foundItem.item.id]
     if (!state) return
 
+    // Fire event to set selection, captured in CodeMirror.svelte
     const { from, to } = state.doc.line(lineNumber + 1)
-
     const createSelection = new CustomEvent("create-selection", {
       bubbles: true,
       detail: { from, to }
