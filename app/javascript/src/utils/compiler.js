@@ -5,8 +5,8 @@ import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/t
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
-export function compile() {
-  let joinedItems = get(flatItems)
+export function compile(overwriteContent = null) {
+  let joinedItems = overwriteContent || get(flatItems)
 
   joinedItems = removeComments(joinedItems)
 

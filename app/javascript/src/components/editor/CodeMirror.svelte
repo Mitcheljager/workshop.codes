@@ -212,8 +212,16 @@
 
     if ($completionsMap.some(v => v.label == phrase.text)) dispatch("search", phrase.text)
   }
+
+  function createSelection({ from, to }) {
+    view.dispatch({
+      selection: EditorSelection.create([
+        EditorSelection.range(from, to)
+      ])
+    })
+  }
 </script>
 
-<svelte:window on:keydown={keydown} />
+<svelte:window on:keydown={keydown} on:create-selection={({ detail }) => createSelection(detail)} />
 
 <div bind:this={element} on:click={click}></div>
