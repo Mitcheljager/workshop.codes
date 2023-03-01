@@ -60,12 +60,9 @@
 
       if (intValue > splitCompiled.length) throw new Error("Line was not found, are you sure you entered it correctly?")
 
-      console.log(splitCompiled)
-
       let linemarkerStart = -1
       let i = intValue
       while (linemarkerStart == -1 && i) {
-        console.log('while', i)
         linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
         i--
       }
@@ -80,13 +77,23 @@
 
       foundCompiled = {
         lineNumber: intValue,
-        foundLine: findLineRangeInContent(compiled, intValue)
+        foundLine: findLineRangeInContent(compiled, intValue),
+        multiline: [
+          findLineRangeInContent(compiled, intValue - 1),
+          findLineRangeInContent(compiled, intValue),
+          findLineRangeInContent(compiled, intValue + 1)
+        ]
       }
 
       foundItem = {
         item,
         lineNumber,
-        foundLine: findLineRangeInContent(item.content, lineNumber)
+        foundLine: findLineRangeInContent(item.content, lineNumber),
+        multiline: [
+          findLineRangeInContent(item.content, lineNumber - 1),
+          findLineRangeInContent(item.content, lineNumber),
+          findLineRangeInContent(item.content, lineNumber + 1)
+        ]
       }
 
       found = true
@@ -104,10 +111,10 @@
 
   async function goToItemAndSelect() {
     setCurrentItemById(foundItem.item.id)
-    const state = $editorStates[foundItem.item.id]
 
     await tick()
 
+    const state = $editorStates[foundItem.item.id]
     if (!state) return
 
     const { from, to } = state.doc.line(lineNumber + 1)
@@ -164,13 +171,21 @@
 
       {#if found}
         <p class="mb-1/8">This is what the line looks like in your compiled code:</p>
-        <code class="block">{foundCompiled.lineNumber + 1}. <span class="microlight">{foundCompiled.foundLine}</span></code>
+        <code class="block">
+          {#each foundCompiled.multiline as line, index}
+            {foundCompiled.lineNumber + index}. <span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
+          {/each}
+        </code>
 
         <p class="mb-1/8">
           This is what the corresponding line looks like in your code: <br>
           File name: <strong class="text-white">{foundItem.item?.name}</strong>.
         </p>
-        <code class="block">{foundItem.lineNumber + 1}. <span class="microlight">{foundItem.foundLine}</span></code>
+        <code class="block">
+          {#each foundItem.multiline as line, index}
+            {foundItem.lineNumber + index}. <span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
+          {/each}
+        </code>
 
         <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there!</button>
       {/if}
