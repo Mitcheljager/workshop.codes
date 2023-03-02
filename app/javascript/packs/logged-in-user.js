@@ -21,6 +21,7 @@ import * as getPostAnalytics from "../src/get-post-analytics"
 import * as getUserAnalytics from "../src/get-user-analytics"
 import * as ide from "../src/ide"
 import * as inscrybMde from "../src/inscryb-mde"
+import * as linkedInput from "../src/linked-input"
 import * as setCssVariable from "../src/set-css-variable"
 
 document.addEventListener("turbolinks:load", function() {
@@ -31,6 +32,7 @@ document.addEventListener("turbolinks:load", function() {
   getPostAnalytics.bind()
   getUserAnalytics.bind()
   setCssVariable.bind()
+  linkedInput.bind()
 
   chart.render()
   inscrybMde.render()

@@ -13,6 +13,16 @@
   </span>
 
   <div class="form-group mt-1/2" data-role="hidden-by-checkbox" style="<%= "display: none" %>">
+    <div class="form-group form-group-max-width mb-1/2">
+      <%= form.label :version, t("posts.form.version.label"), class: "form-label" %>
+
+      <div class="form-hint">
+        Update the version number if you are creating a revision. If you already changed it in the Settings tab you don't need to do it here again.
+      </div>
+
+      <%= form.text_field :version, class: "form-input", placeholder: t("posts.form.version.placeholder"), data: { role: "linked-input", key: "version" } %>
+    </div>
+
     <%= form.label :revision_description, t("posts.form.revision.input.label"), class: "form-label" %>
 
     <div class="form-hint">
