@@ -176,9 +176,9 @@
 
       {#if found}
         <p class="mb-1/8">This is what the line looks like in your compiled code:</p>
-        <code class="block">
+        <code class="block overflow-auto">
           {#each foundCompiled.multiline as line, index}
-            {foundCompiled.lineNumber + index}. <span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
+            {foundCompiled.lineNumber + index}.&nbsp;<span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
           {/each}
         </code>
 
@@ -186,9 +186,9 @@
           This is what the corresponding line looks like in your code: <br>
           File name: <strong class="text-white">{foundItem.item?.name}</strong>.
         </p>
-        <code class="block">
+        <code class="block overflow-auto">
           {#each foundItem.multiline as line, index}
-            {foundItem.lineNumber + index}. <span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
+            {foundItem.lineNumber + index}.&nbsp;<span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
           {/each}
         </code>
 
