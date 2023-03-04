@@ -9,6 +9,43 @@ module ContentHelper
     def image(link, title, alt_text)
       image_tag(link, title: title, alt: alt_text, loading: "lazy")
     end
+
+    # losely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
+    def header_anchor_hash(title)
+      result = ""
+      i = 0
+      while i < title.length do
+        # skip html tags
+        if title[i] == "<"
+          while title[i] != ">" && i < title.length
+            i += 1
+          end
+        end
+
+        # skip html entities
+        if title[i] == "&"
+          while title[i] != ";" && i < title.length
+            i += 1
+          end
+        end
+
+        result += title[i]
+        i += 1
+      end
+
+      result
+        .downcase
+        .gsub(/[^a-z0-9\- ]/i, "")
+        .strip
+        .gsub(/ +/, "-")
+    end
+
+    def header(title, level)
+      tag = "h#{ level }"
+      hash = header_anchor_hash(title)
+
+      "<#{ tag } id=\"#{ hash }\"><a class=\"header_anchor\" href=\"\##{ hash }\">#{ title }</#{ tag }>"
+    end
   end
 
   def markdown(text)
