@@ -44,7 +44,7 @@ module ContentHelper
       tag = "h#{ level }"
       hash = header_anchor_hash(title)
 
-      "<#{ tag } id=\"#{ hash }\"><a class=\"header_anchor\" href=\"\##{ hash }\">#{ title }</#{ tag }>"
+      "<#{ tag } id=\"#{ hash }\"><a class=\"header_anchor\" href=\"\##{ hash }\">#{ title }</a></#{ tag }>"
     end
   end
 
