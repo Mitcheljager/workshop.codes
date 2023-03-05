@@ -53,11 +53,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: -20px;
     width: 20px;
     height: 1em;
-    line-height: 1;
-
     background: transparent image-url("icons/icon-link.svg") no-repeat;
     background-position: left center;
-
     opacity: 0;
     transition: opacity 150ms linear;
   }
