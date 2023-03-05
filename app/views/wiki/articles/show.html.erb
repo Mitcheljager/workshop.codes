@@ -16,7 +16,7 @@
 
 
     <div class="article__content">
-      <%= sanitized_markdown(@article.content || "_This article does not yet have a description_") %>
+      <%= sanitized_markdown(@article.content || "_This article does not yet have a description_", rendererOptions: { header_anchors: true }) %>
     </div>
   </main>
 
