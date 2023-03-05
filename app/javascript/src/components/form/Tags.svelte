@@ -184,7 +184,7 @@
     on:keydown={ keydown }
     { readOnly }
     { placeholder }
-    class="form-tags__input" />
+    class="form-tags__input helper-input" />
 
   <input
     id="{prefix}_{ name }"
