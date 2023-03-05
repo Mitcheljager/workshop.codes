@@ -9,16 +9,58 @@ module ContentHelper
     def image(link, title, alt_text)
       image_tag(link, title: title, alt: alt_text, loading: "lazy")
     end
+
+    # loosely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
+    def header_anchor_hash(title)
+      result = ""
+      i = 0
+      while i < title.length do
+        # skip html tags
+        if title[i] == "<"
+          while title[i] != ">" && i < title.length
+            i += 1
+          end
+        end
+
+        # skip html entities
+        if title[i] == "&"
+          while title[i] != ";" && i < title.length
+            i += 1
+          end
+        end
+
+        result += title[i]
+        i += 1
+      end
+
+      result
+        .downcase
+        .gsub(/[^a-z0-9\- ]/i, "")
+        .strip
+        .gsub(/ +/, "-")
+    end
+
+    def header(title, level)
+      tag = "h#{ level }"
+      hash = header_anchor_hash(title)
+
+      if @options[:header_anchors]
+        "<#{ tag } id=\"#{ hash }\"><a class=\"header_anchor\" href=\"\##{ hash }\">#{ title }</a></#{ tag }>"
+      else
+        "<#{ tag }>#{ title }</#{ tag }>"
+      end
+    end
   end
 
-  def markdown(text)
-    options = {
+  def markdown(text, rendererOptions: {})
+    finalRendererOptions = {
       space_after_headers: true,
+      header_anchors: false,
       hard_wrap: true,
       link_attributes: { rel: "noreferrer noopener", target: "_blank" }
-    }
+    }.merge(rendererOptions)
 
-    renderer = HTML.new(options)
+    renderer = HTML.new(finalRendererOptions)
     markdown = Redcarpet::Markdown.new(renderer,
       disable_indented_code_blocks: true,
       highlight: true,
@@ -97,8 +139,12 @@ module ContentHelper
     "heroes/50/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
   end
 
-  def sanitized_markdown(text)
-    ActionController::Base.helpers.sanitize(markdown(text), tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong), attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls))
+  def sanitized_markdown(text, rendererOptions: {})
+    ActionController::Base.helpers.sanitize(
+      markdown(text, rendererOptions: rendererOptions),
+      tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
+      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls)
+    )
   end
 
   def youtube_to_video_id(url)

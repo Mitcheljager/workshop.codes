@@ -47,6 +47,11 @@ h6 {
   font-size: $font-size-base;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  .header_anchor {
+    text-decoration: none;
+  }
+}
 .title-icon {
   display: inline-block;
   height: .75em;
