@@ -57,10 +57,12 @@ h1, h2, h3, h4, h5, h6 {
     background-position: left center;
     opacity: 0;
     transition: opacity 150ms linear;
+    display: none;
   }
 
   &:hover .header_anchor {
     opacity: 1;
+    display: initial;
   }
 }
 .title-icon {
