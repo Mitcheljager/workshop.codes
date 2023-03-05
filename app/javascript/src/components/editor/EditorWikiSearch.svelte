@@ -67,10 +67,7 @@
           class="editor-wiki-results__item"
           href={`/wiki/articles/${result.slug}`}
           target="_blank"
-          on:click={(event) => {
-            event.preventDefault();
-            selectResult(result);
-          }}
+          on:click|preventDefault={() => selectResult(result)}
         >
           {result.title}
           <small>{result.category.title}</small>
