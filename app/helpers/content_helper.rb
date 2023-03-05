@@ -10,7 +10,7 @@ module ContentHelper
       image_tag(link, title: title, alt: alt_text, loading: "lazy")
     end
 
-    # losely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
+    # loosely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
     def header_anchor_hash(title)
       result = ""
       i = 0
