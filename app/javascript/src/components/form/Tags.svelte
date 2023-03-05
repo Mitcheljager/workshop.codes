@@ -4,6 +4,7 @@
   import { onMount } from "svelte"
   import { flip } from "svelte/animate"
 
+  export let prefix = ""
   export let name = "tags"
   export let placeholder = "Insert tags here"
   export let delimiter = ","
@@ -47,7 +48,7 @@
     if (event.key == "Backspace" || event.key == "Delete") {
       if (input == "") removeTag(values.length - 1)
     }
-    
+
     if (event.key == "Enter") {
       event.preventDefault()
       return false
@@ -108,7 +109,7 @@
     values = [...values.slice(0, index), ...values.slice(index + 1)]
     placeholder = storePlaceholder
     inputElem.focus()
-    
+
     readOnly = false
   }
 
@@ -186,8 +187,8 @@
     class="form-tags__input" />
 
   <input
-    id="post_{ name }"
-    name="post[{ name }]"
+    id="{prefix}_{ name }"
+    name="{prefix}[{ name }]"
     value={ hidden ? null : values }
     type="hidden" />
 </div>
