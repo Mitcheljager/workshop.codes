@@ -1,0 +1,17 @@
+<div class="standout standout--compact standout--floating-image standout--border bg-darker mt-1/1">
+  <div class="mr-1/4">
+    <h3 class="mt-0 mb-0"><strong>Join the first <span class="text-primary">Workshop.codes</span> Jam!</strong></h3>
+
+    <p class="mt-1/8 mb-0">
+      Some blurb about winning
+      <%= inline_svg_tag "icons/overwatch-coin", height: 18, class: "inline-block", style: "margin-bottom: -0.2rem; margin-right: -0.2rem" %>
+      <strong style="color: #d0b582">1000 Overwatch Coins</strong>.
+    </p>
+
+    <% if ENV["BANNER_ROOT_URL"] %>
+      <%= link_to "Read more", ENV["BANNER_ROOT_URL"], class: "button mt-1/4" %>
+    <% end %>
+  </div>
+
+  <%= image_tag "banners/ollie-workshop-cutout.png", alt: "Workshop.codes Jam", style: "bottom: -24px; right: -30px" %>
+</div>

@@ -18,6 +18,8 @@
     <% if ENV["BANNER_ROOT"] == "Workshop_Disabled" %>
       <%= render "application/banners/workshop_disabled" %>
     <% end %>
+
+    <%= render "application/banners/jam" %>
   </div>
 
   <%= render "user_recommendations" if current_user && current_user.recommended_posts.any? %>

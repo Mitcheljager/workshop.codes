@@ -35,9 +35,22 @@
     }
   }
 
+  &--floating-image {
+    padding-right: 200px;
+
+    img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  &--border {
+    border: 2px solid $primary;
+  }
+
   &--workshop-disabled {
     gap: $margin / 4;
-    border: 2px solid $orange;
 
     svg {
       display: none;
