@@ -48,6 +48,7 @@ default: &default
     - .jpeg
     - .jpg
     - .webp
+    - .svelte
 
 development:
   <<: *default
