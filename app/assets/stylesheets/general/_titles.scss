@@ -47,7 +47,12 @@ h6 {
   font-size: $font-size-base;
 }
 
-:is(h1, h2, h3, h4, h5, h6) .header_anchor {
+h1 .header_anchor,
+h2 .header_anchor,
+h3 .header_anchor,
+h4 .header_anchor,
+h5 .header_anchor,
+h6 .header_anchor {
   text-decoration: none;
 }
 
