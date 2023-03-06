@@ -48,9 +48,11 @@ h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  position: relative;
+
   .header-anchor {
-    float: left;
-    margin-left: -20px;
+    position: absolute;
+    left: -20px;
     width: 20px;
     height: 1em;
     background: transparent image-url("icons/icon-link.svg") no-repeat;
