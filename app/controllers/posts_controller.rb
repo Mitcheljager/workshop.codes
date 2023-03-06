@@ -98,41 +98,40 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    @post.locale = current_locale
-    @post.last_revision_created_at = Time.now
+    begin
+      Post.transaction do
+        @post = Post.new(post_params)
+        @post.user_id = current_user.id
+        @post.locale = current_locale
+        @post.last_revision_created_at = Time.now
 
-    set_post_status
-    parse_carousel_video
+        set_post_status
+        parse_carousel_video
 
-    if @post.save
-      unless parse_derivatives
-        flash[:warning] = "Something went wrong when trying to process the derivatives for your post. However, your other changes were still saved."
-        respond_to do |format|
-          format.html { render :new }
-          format.js { render "validation" }
-        end
-        return
+        post_save_success = @post.save
+        parse_derivatives_success = parse_derivatives
+
+        raise ActiveRecord::ActiveRecordError.new "Post saving unsuccessful" unless post_save_success && parse_derivatives_success
+
+        @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet)
+        @revision.save
+
+        create_activity(:create_post, post_activity_params)
+        create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
+        create_collection if post_params[:new_collection] != ""
+        update_blocks
       end
-      @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet)
-      @revision.save
-
-      create_activity(:create_post, post_activity_params)
-      create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
-      create_collection if post_params[:new_collection] != ""
-      update_blocks
-
-      notify_discord("New")
-
-      flash[:notice] = "Post successfully created" # FIXME: i18n
-      redirect_to post_path(@post.code)
-    else
+    rescue ActiveRecord::ActiveRecordError
       respond_to do |format|
         format.html { render :new }
         format.js { render "validation" }
       end
+      return
     end
+
+    notify_discord("New")
+    flash[:notice] = "Post successfully created" # FIXME: i18n
+    redirect_to post_path(@post.code)
   end
 
   def update
@@ -144,44 +143,42 @@ class PostsController < ApplicationController
     current_version = @post.version
     current_code = @post.code
 
-    set_post_status
-    parse_carousel_video
+    begin
+      Post.transaction do
+        set_post_status
+        parse_carousel_video
 
-    if @post.update(post_params)
-      unless parse_derivatives
-        flash[:warning] = "Something went wrong when trying to process the derivatives for your post. However, your other changes were still saved."
-        respond_to do |format|
-          format.html { render :new }
-          format.js { render "validation" }
+        post_save_success = @post.update(post_params)
+        parse_derivatives_success = parse_derivatives
+
+        raise ActiveRecord::ActiveRecordError.new "Post updating unsuccessful" unless post_save_success && parse_derivatives_success
+
+        create_activity(:update_post, post_activity_params)
+        create_collection if post_params[:new_collection] != ""
+        update_email_notifications
+        update_blocks
+        update_draft if @was_draft
+
+        if (post_params[:revision].present? && post_params[:revision] != "0") || current_code != post_params[:code] || current_version != post_params[:version]
+          invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
+          @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
+          @post.update(last_revision_created_at: @revision.created_at) if @revision.save
+
+          notify_discord("Update") unless published_from_draft
         end
-        return
       end
-      create_activity(:update_post, post_activity_params)
-      create_collection if post_params[:new_collection] != ""
-      update_email_notifications
-      update_blocks
-      update_draft if @was_draft
-
-      if (post_params[:revision].present? && post_params[:revision] != "0") || current_code != post_params[:code] || current_version != post_params[:version]
-        invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
-        @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
-        @post.update(last_revision_created_at: @revision.created_at) if @revision.save
-
-        notify_discord("Update") unless published_from_draft
-      end
-
-      notify_discord("New") if published_from_draft
-
-      flash[:notice] = "Post successfully edited" # FIXME: i18n
-      redirect_to post_path(@post.code)
-    else
-      @post.code = current_code
-
+    rescue ActiveRecord::ActiveRecordError => exception
       respond_to do |format|
         format.html { render :edit }
         format.js { render "validation" }
       end
+      return
     end
+
+    notify_discord("New") if published_from_draft
+
+    flash[:notice] = "Post successfully edited" # FIXME: i18n
+    redirect_to post_path(@post.code)
   end
 
   def immortalise
@@ -271,9 +268,9 @@ class PostsController < ApplicationController
   end
 
   def parse_derivatives
-    return true unless params[:post][:derivatives]
+    return true unless params[:post][:derivations]
 
-    codes = params[:post][:derivatives].split(",")
+    codes = params[:post][:derivations].split(",")
     trimmed_codes = codes[0, Post::MAX_SOURCES]
 
     Derivative.where(derivation: @post).where.not(source_code: trimmed_codes).destroy_all
@@ -286,7 +283,10 @@ class PostsController < ApplicationController
       unless deriv.present?
         deriv = Derivative.create(source_code: code, derivation: @post, source: source_post)
         if deriv.errors.any?
-          @post.errors.add :base, :invalid, message: "Error sourcing from #{ code }: #{ d.errors.full_messages.join(", ") }"
+          errors_to_show = deriv.errors
+          # Prevent showing misleading error if the post itself has errors and thus was not available to save into the derivative relationship record
+          errors_to_show = errors_to_show.filter { |error| !(error.attribute == :derivation_id && error.type == :blank) } if @post.errors.any?
+          @post.errors.add :derivations, :invalid, message: "error while sourcing from #{ code }: #{ errors_to_show.map { |error| error.full_message }.join(", ") }" if errors_to_show.any?
         elsif can_create_notification
           create_notification(
             "**#{ @post.user.username }** has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
