@@ -118,7 +118,7 @@
       if (active) {
         focusInput()
 
-        const { from: fromIndex, to: toIndex } = $editorStates[$currentItem.id].selection.main;
+        const { from: fromIndex, to: toIndex } = $editorStates[$currentItem.id].selection.main
         const codeMirrorSelectedText = $editorStates[$currentItem.id].sliceDoc(fromIndex, toIndex)
         value = codeMirrorSelectedText || getSelection().toString()
       }
