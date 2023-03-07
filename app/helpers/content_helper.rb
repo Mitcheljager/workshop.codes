@@ -45,7 +45,10 @@ module ContentHelper
       hash = header_anchor_hash(title)
 
       if @options[:header_anchors]
-        "<#{ tag } id=\"#{ hash }\"><a class=\"header_anchor\" href=\"\##{ hash }\">#{ title }</a></#{ tag }>"
+        "<#{ tag } id='#{ hash }'>
+          <a class='header-anchor' href='\##{ hash }' aria-hidden='true'></a>
+          #{ title }
+        </#{ tag }>"
       else
         "<#{ tag }>#{ title }</#{ tag }>"
       end
