@@ -117,7 +117,7 @@
       active = !active
       if (active) {
         focusInput()
-        value = getSelection().toString();
+        value = getSelection().toString()
       }
     }
 
