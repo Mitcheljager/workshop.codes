@@ -117,7 +117,7 @@
       active = !active
       if (active) {
         focusInput()
-        let codeMirrorSelectedText = $editorStates[$currentItem.id].sliceDoc($editorStates[$currentItem.id].selection.main.from, $editorStates[$currentItem.id].selection.main.to)
+        const codeMirrorSelectedText = $editorStates[$currentItem.id].sliceDoc($editorStates[$currentItem.id].selection.main.from, $editorStates[$currentItem.id].selection.main.to)
         value = codeMirrorSelectedText || getSelection().toString()
       }
     }
