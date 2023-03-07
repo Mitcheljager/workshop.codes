@@ -74,6 +74,7 @@
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
+          if (state.selectionSet) $editorStates[currentId].selection = view.state.selection
         }),
         basicSetup,
         parameterTooltip()
