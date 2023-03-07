@@ -115,7 +115,10 @@
     if (event.ctrlKey && event.shiftKey && event.keyCode == 70) { // F key
       event.preventDefault()
       active = !active
-      if (active) focusInput()
+      if (active) {
+        focusInput()
+        value = getSelection().toString();
+      }
     }
 
     if (input != document.activeElement && replaceInput != document.activeElement) return
