@@ -1,5 +1,5 @@
 <script>
-  import { items } from "../../stores/editor"
+  import { items, currentItem, editorStates } from "../../stores/editor"
   import { getItemById, replaceBetween, setCurrentItemById, updateItem } from "../../utils/editor"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
@@ -117,7 +117,8 @@
       active = !active
       if (active) {
         focusInput()
-        value = getSelection().toString()
+        let codeMirrorSelectedText = $editorStates[$currentItem.id].sliceDoc($editorStates[$currentItem.id].selection.main.from, $editorStates[$currentItem.id].selection.main.to)
+        value = codeMirrorSelectedText || getSelection().toString()
       }
     }
 
