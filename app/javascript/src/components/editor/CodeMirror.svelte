@@ -189,7 +189,7 @@
 
     const spaces = /^\s*/.exec(state.doc.lineAt(line).text)?.[0].length
     const tabs = /^\t*/.exec(state.doc.lineAt(line).text)?.[0].length
-    return Math.floor(spaces / 4) + tabs
+    return Math.floor((spaces - tabs) / 4) + tabs
   }
 
   const updateItem = debounce(() => {
