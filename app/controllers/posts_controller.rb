@@ -129,7 +129,12 @@ class PostsController < ApplicationController
       return
     end
 
-    notify_discord("New")
+    begin
+      notify_discord("New")
+    rescue => exception
+      Bugsnag.notify(exception) if Rails.env.production?
+    end
+
     flash[:notice] = "Post successfully created" # FIXME: i18n
     redirect_to post_path(@post.code)
   end
@@ -163,8 +168,6 @@ class PostsController < ApplicationController
           invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
           @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
           @post.update(last_revision_created_at: @revision.created_at) if @revision.save
-
-          notify_discord("Update") unless published_from_draft
         end
       end
     rescue ActiveRecord::ActiveRecordError => exception
@@ -175,7 +178,15 @@ class PostsController < ApplicationController
       return
     end
 
-    notify_discord("New") if published_from_draft
+    begin
+      if published_from_draft
+        notify_discord("New")
+      elsif (post_params[:revision].present? && post_params[:revision] != "0") || current_code != post_params[:code] || current_version != post_params[:version]
+        notify_discord("Update") unless published_from_draft
+      end
+    rescue => exception
+      Bugsnag.notify(exception) if Rails.env.production?
+    end
 
     flash[:notice] = "Post successfully edited" # FIXME: i18n
     redirect_to post_path(@post.code)
