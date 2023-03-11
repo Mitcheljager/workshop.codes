@@ -177,7 +177,6 @@ function convertTranslations(joinedItems) {
   while ((match = includeRegex.exec(joinedItems)) != null) {
     const closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
     const full = joinedItems.slice(match.index, closing + 1)
-    const closingSemicolon = joinedItems[closing + 1] == ";"
 
     const argumentsOpeningParen = full.indexOf("(")
     const argumentsclosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
@@ -196,7 +195,7 @@ function convertTranslations(joinedItems) {
       Max(False, Index Of Array Value(Global.WCDynamicLanguages, Custom String("{0}", Map(Practice Range), Null, Null)))
     )`
 
-    joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length + (closingSemicolon ? 1 : 0))
+    joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length)
   }
 
   // Array with custom string for Practice Range in each selected language
