@@ -67,7 +67,8 @@
       </div>
 
       <Tags
-        name="derivatives"
+        prefix="post"
+        name="derivations"
         placeholder="CODE1,CODE2,etc."
         fillValues={ currentSources }
         hidden={ !showDerivative }

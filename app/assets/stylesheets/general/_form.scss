@@ -268,8 +268,13 @@ input[type="file"] {
   display: inline;
 
   input,
-  select {
+  select,
+  .form-input {
     border: 1px solid $red;
+
+    &.helper-input {
+      border: unset;
+    }
   }
 }
 

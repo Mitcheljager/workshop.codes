@@ -47,6 +47,26 @@ h6 {
   font-size: $font-size-base;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  position: relative;
+
+  .header-anchor {
+    position: absolute;
+    left: -20px;
+    width: 20px;
+    height: 1em;
+    background: transparent image-url("icons/icon-link.svg") no-repeat;
+    background-position: left center;
+    opacity: 0;
+    transition: opacity 150ms linear;
+    display: none;
+  }
+
+  &:hover .header-anchor {
+    opacity: 1;
+    display: initial;
+  }
+}
 .title-icon {
   display: inline-block;
   height: .75em;

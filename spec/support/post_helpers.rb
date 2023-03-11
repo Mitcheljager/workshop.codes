@@ -1,5 +1,8 @@
 module Helpers
   module Posts
+    # Assumes session has been navigated to a post create or edit form, and attempts to fill out the form with mock data.
+    #
+    # @return attributes used to fill out post form
     def fill_in_post_form
       post_attrs = attributes_for(:post)
 
@@ -30,6 +33,8 @@ module Helpers
 
       # Return to default tab
       click_on "Description"
+
+      post_attrs
     end
   end
 end

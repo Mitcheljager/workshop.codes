@@ -15,6 +15,7 @@ export function OWLanguageLinter(view) {
   findMissingSemicolons(content)
   findExtraSemicolons(content)
   findMissingComparisonsInConditions(content)
+  findTrailingCommas(content)
   checkMixins(content)
 
   return diagnostics
@@ -376,5 +377,18 @@ function findMissingComparisonsInConditions(content) {
         message: "Expected condition to have a comparison"
       })
     }
+  }
+}
+
+function findTrailingCommas(content) {
+  const regex = /,[\n\s\t]+[\],\)]/g
+  let match
+  while ((match = regex.exec(content)) != null) {
+    diagnostics.push({
+      from: match.index,
+      to: match.index + 1,
+      severity: "error",
+      message: "Trailing commas are not allowed"
+    })
   }
 }
