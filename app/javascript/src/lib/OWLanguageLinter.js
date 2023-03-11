@@ -1,4 +1,4 @@
-import { getClosingBracket } from "../utils/editor"
+import { getClosingBracket, getPhraseFromPosition } from "../utils/editor"
 import { completionsMap } from "../stores/editor"
 import { get } from "svelte/store"
 
@@ -17,6 +17,7 @@ export function OWLanguageLinter(view) {
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
   checkMixins(content)
+  checkTranslations(content)
 
   return diagnostics
 }
@@ -202,6 +203,37 @@ function checkMixins(content) {
         from: match.index,
         to: match.index + match[0].length,
         severity: "error",
+        message: error.message
+      })
+    }
+  }
+}
+
+function checkTranslations(content) {
+  // Find translations that are not in client side actions
+  const mixinRegex = /@translate/g
+  let match
+  while ((match = mixinRegex.exec(content)) != null) {
+    try {
+      let walk = match.index
+      let closingParenCount = 0
+      while(walk) {
+        const char = content[walk]
+        if (char == ";") throw new Error("Using @translate outside of an action has no effect")
+        if (char == ")") closingParenCount++
+        if (char == "(" && !closingParenCount) break
+        if (char == "(") closingParenCount--
+        walk--
+      }
+
+      const phrase = getPhraseFromPosition({ text: content, from: 0 }, walk - 1)
+      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Set Objective Description", "Big Message", "Small Message"]
+      if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${ phrase.text }" has no effect.`)
+    } catch (error) {
+      diagnostics.push({
+        from: match.index,
+        to: match.index + match[0].length,
+        severity: "warning",
         message: error.message
       })
     }
