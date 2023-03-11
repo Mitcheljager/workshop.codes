@@ -36,12 +36,19 @@
   }
 
   &--floating-image {
-    padding-right: 200px;
+    @include media-min(md) {
+      padding-right: 200px;
+    }
 
     img {
+      display: none;
       position: absolute;
       bottom: 0;
       right: 0;
+
+      @include media-min(md) {
+        display: block;
+      }
     }
   }
 
