@@ -35,9 +35,29 @@
     }
   }
 
+  &--floating-image {
+    @include media-min(md) {
+      padding-right: 200px;
+    }
+
+    img {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+
+      @include media-min(md) {
+        display: block;
+      }
+    }
+  }
+
+  &--border {
+    border: 2px solid $primary;
+  }
+
   &--workshop-disabled {
     gap: $margin / 4;
-    border: 2px solid $orange;
 
     svg {
       display: none;
