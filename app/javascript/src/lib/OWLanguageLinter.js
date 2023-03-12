@@ -211,14 +211,15 @@ function checkMixins(content) {
 
 function checkTranslations(content) {
   // Find translations that are not in client side actions
-  const mixinRegex = /@translate/g
+  const regex = /@translate/g
   let match
-  while ((match = mixinRegex.exec(content)) != null) {
+  while ((match = regex.exec(content)) != null) {
     try {
       let walk = match.index
       let closingParenCount = 0
       while(walk) {
         const char = content[walk]
+        if (char == "@" && content.slice(walk, walk + 6) == "@mixin") break
         if (char == ";") throw new Error("Using @translate outside of an action has no effect")
         if (char == ")") closingParenCount++
         if (char == "(" && !closingParenCount) break
@@ -228,6 +229,7 @@ function checkTranslations(content) {
 
       const phrase = getPhraseFromPosition({ text: content, from: 0 }, walk - 1)
       const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Set Objective Description", "Big Message", "Small Message"]
+      if (phrase?.text.includes("include")) return
       if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${ phrase.text }" has no effect.`)
     } catch (error) {
       diagnostics.push({
