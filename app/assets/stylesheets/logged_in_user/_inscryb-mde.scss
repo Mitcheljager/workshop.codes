@@ -226,6 +226,17 @@
 
   &.active {
     filter: brightness(1.15);
+
+    .fa-eye::before {
+      visibility: hidden;
+    }
+    .fa-eye::after {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      content: "Edit";
+    }
   }
 
   .fa-eye {
