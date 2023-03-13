@@ -115,4 +115,14 @@
       </div>
     </div>
   </div>
+
+  <div class="tabs-content" data-tab="custom-css">
+    <h2 class="mt-1/1 mb-0">Custom CSS</h2>
+
+    <div class="well well--dark block mt-1/2">
+      <p>Since you are verified, you can add custom CSS to your profile!</p>
+      <p>Changing your custom CSS is done in your profile, so you can preview it live.</p>
+      <%= link_to "Take me there", user_profile_path(current_user), class: "button button--primary" %>
+    </div>
+  </div>
 <% end %>
