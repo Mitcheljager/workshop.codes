@@ -277,7 +277,14 @@ function findMissingSemicolons(content) {
       continue
     }
 
-    if (content[i] == "/" && content[i + 1] == "/") {
+    if (content[i] == "/") {
+      if(content[i + 1] == "/" || content[i + 1] == "*") {
+        inComment = true
+        continue
+      }
+    }
+    
+    if (content.slice(i, i+2) == "*/"){
       inComment = true
       continue
     }
@@ -287,7 +294,7 @@ function findMissingSemicolons(content) {
       continue
     }
 
-    if (content[i] == "r" && content[i + 1] == "u"  && content[i + 2] == "l"  && content[i + 3] == "e"  && content[i + 4] == "(") { // This is dumb
+    if (content.slice(i, i+5) == "rule("){
       inRule = true
       continue
     }
@@ -323,7 +330,7 @@ function findMissingSemicolons(content) {
       if (content[i - 1] == "}") continue
 
       const leadingNonEmpty = findFirstNonEmptyCharacter(content.slice(0, i).split("").reverse().join("")) // Reverse all content leading up to current i
-      if (leadingNonEmpty == "{" || leadingNonEmpty == "}" || leadingNonEmpty == "\"" || leadingNonEmpty == "\n") continue
+      if (leadingNonEmpty == ";" || leadingNonEmpty == "{" || leadingNonEmpty == "}" || leadingNonEmpty == "\"" || leadingNonEmpty == "\n") continue
       if (findOpenBeforeClose(content.slice(i, content.length), "{", "}")) continue
       if (findFirstNonEmptyCharacter(content.slice(i, content.length)) == "[") continue
 
