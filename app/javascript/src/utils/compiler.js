@@ -89,11 +89,11 @@ function extractAndInsertMixins(joinedItems) {
   Object.values(mixins).forEach(({ full }) => joinedItems = joinedItems.replace(full, ""))
 
   // Find stated includes for mixins and replace them with mixins
-  const includeRegex = /@include/g
-  while ((match = includeRegex.exec(joinedItems)) != null) {
+  while (joinedItems.indexOf("@include") != -1) {
     // Get arguments
-    const closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
-    const full = joinedItems.slice(match.index, closing + 1)
+    const index = joinedItems.indexOf("@include")
+    const closing = getClosingBracket(joinedItems, "(", ")", index + 1)
+    const full = joinedItems.slice(index, closing + 1)
     const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
     const mixin = mixins[name]
 
@@ -105,19 +105,20 @@ function extractAndInsertMixins(joinedItems) {
     const splitArguments = splitArgumentsString(argumentsString) || []
 
     let replaceWith = mixin.content
+    if (replaceWith.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
 
     // Get content for @contents
     let fullMixin
     let contents
     if (mixin.hasContents) {
-      const contentsClosing = getClosingBracket(joinedItems, "{", "}", match.index)
-      fullMixin = joinedItems.slice(match.index, contentsClosing + 1)
+      const contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
+      fullMixin = joinedItems.slice(index, contentsClosing + 1)
 
       const contentsOpening = fullMixin.indexOf("{")
 
       if (contentsOpening != -1) {
         contents = fullMixin.slice(contentsOpening + 1, fullMixin.length - 1)
-        if (contents.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
+        if (contents.includes(`@include\s${ name }`)) throw new Error("Can not include a mixin in itself")
       }
 
       replaceWith = replaceWith.replace("@contents;", contents || "")
@@ -131,7 +132,7 @@ function extractAndInsertMixins(joinedItems) {
 
     const closingSemicolon = (!mixin.hasContents || !contents) && joinedItems[closing + 1] == ";"
 
-    joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + ((contents && fullMixin) || full).length + (closingSemicolon ? 1 : 0))
+    joinedItems = replaceBetween(joinedItems, replaceWith, index, index + ((contents && fullMixin) || full).length + (closingSemicolon ? 1 : 0))
   }
 
   return joinedItems
