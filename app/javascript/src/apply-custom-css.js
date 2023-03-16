@@ -8,5 +8,5 @@ function applyCustomCSS(event) {
   const value = this.value
   const styleTag = document.querySelector("#custom-css")
 
-  styleTag.innerHTML = value
+  styleTag.textContent = value
 }
