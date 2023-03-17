@@ -63,7 +63,7 @@
   }
 
   to {
-    max-width: calc(100vw - 8rem);
+    max-width: calc(100vw - 7.5rem);
   }
 }
 
@@ -85,8 +85,8 @@
       display: block;
       position: absolute;
       top: 6px;
-      right: 5.5rem;
-      width: calc(100vw - 8rem);
+      right: 5rem;
+      width: calc(100vw - 7.5rem);
       z-index: 10;
       transform-origin: right center;
 
@@ -122,6 +122,7 @@
   appearance: none;
   background: transparent;
   border: 0;
+  width: 2.375rem;
   padding-left: .5rem;
   color: white;
   font-size: 32px;

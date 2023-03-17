@@ -31,6 +31,6 @@
     </div>
 
     <%= tag.button inline_svg_tag("icons/icon-search.svg", height: 24), class: "header__search-trigger", data: { action: "toggle-search" } %>
-    <%= link_to "☰", "#", class: "navigation-trigger", data: { action: "toggle-navigation" } %>
+    <%= link_to inline_svg_tag("layout/hamburger.svg", height: 24), "#", class: "navigation-trigger", data: { action: "toggle-navigation" } %>
   </div>
 </header>

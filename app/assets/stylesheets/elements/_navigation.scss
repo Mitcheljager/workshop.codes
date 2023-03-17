@@ -81,9 +81,12 @@
 }
 
 .navigation-trigger {
+  display: flex;
+  align-items: center;
   position: relative;
+  height: 2.375rem;
+  width: 2.375rem;
   padding: 0 .5rem;
-  margin-left: .5rem;
   color: white;
   font-size: 32px;
   line-height: 1.2em;
@@ -102,6 +105,10 @@
 
   &:focus {
     color: white;
+  }
+
+  svg {
+    display: block;
   }
 }
 

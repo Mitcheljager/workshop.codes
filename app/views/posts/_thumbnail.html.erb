@@ -1,3 +1,10 @@
 <%= link_to post_path(post.code), class: "item__thumbnail" do %>
-  <%= image_tag url_for_post_thumbnail(post), alt: post.title, width: 120, height: 68, loading: "lazy" %>
+  <%= image_tag url_for_post_thumbnail(post),
+    srcset: "
+      #{ url_for_post_thumbnail(post) } 1x,
+      #{ url_for_post_thumbnail(post, 240, 128, "medium") } 2x",
+    alt: post.title,
+    width: 120,
+    height: 68,
+    loading: "lazy" %>
 <% end %>
