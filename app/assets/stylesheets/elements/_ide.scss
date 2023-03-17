@@ -23,6 +23,7 @@
   overflow: auto;
   tab-size: 2;
   -moz-tab-size: 2;
+  -webkit-text-size-adjust: 100%;
 
   @include media-min("lg") {
     font-size: $font-size-small;
