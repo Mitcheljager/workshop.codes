@@ -3,7 +3,15 @@
 
   <div class="card" data-code="<%= post.code %>">
     <%= link_to post_path(post.code), title: post.title do %>
-      <%= image_tag image_url, alt: post.title, width: 300, height: 171, loading: "lazy", class: "card__image" %>
+      <%= image_tag image_url,
+        srcset: "
+          #{ image_url } 1x,
+          #{ url_for_post_thumbnail(post, 600, 342, "large") } 2x",
+        alt: post.title,
+        width: 300,
+        height: 171,
+        loading: "lazy",
+        class: "card__image" %>
     <% end %>
 
     <div class="relative z-1 flex mb-auto">
