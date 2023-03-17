@@ -81,6 +81,8 @@
 }
 
 .navigation-trigger {
+  display: flex;
+  align-items: center;
   position: relative;
   padding: 0 .5rem;
   margin-left: .5rem;
@@ -102,6 +104,10 @@
 
   &:focus {
     color: white;
+  }
+
+  svg {
+    display: block;
   }
 }
 
