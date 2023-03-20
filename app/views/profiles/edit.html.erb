@@ -23,9 +23,6 @@
       <%= link_to "Images", "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
       <%= link_to "Badges", "#", class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
       <%= link_to "Blocks", "#", class: "tabs__item", data: { action: "set-tab", target: "blocks" } %>
-      <% if @user.verified? %>
-        <%= link_to "Custom CSS", "#", class: "tabs__item", data: { action: "set-tab", target: "custom-css" } %>
-      <% end %>
     </nav>
 
     <%= render "form" %>
