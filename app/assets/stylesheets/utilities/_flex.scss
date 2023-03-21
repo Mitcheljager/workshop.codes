@@ -3,6 +3,10 @@
   display: flex;
 }
 
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
 .align-self-center {
   align-self: center;
 }

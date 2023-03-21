@@ -3,9 +3,12 @@
     <h2 class="mt-1/1 mb-0">About you</h2>
 
     <% if @user.verified? %>
-      <div class="well align-center justify-start mt-1/2">
+      <div class="well align-start justify-start flex-nowrap mt-1/2">
         <%= inline_svg_tag "icons/verified.svg", height: 30, width: 30, class: "fill-current-color" %>
-        <div class="pl-1/4"><%= t "profile.form.verified" %></div>
+        <div class="pl-1/4">
+          <%= t "profile.form.verified" %>
+          <div class="mt-1/8">As a gift for your efforts, you are now able to customize the CSS of your profile page. (<%= link_to "Click here", user_profile_path(current_user), class: "button--link" %> to edit)</li></div>
+        </div>
       </div>
     <% else %>
       <em data-toggle-content>
