@@ -1416,8 +1416,7 @@ In-World Text Reevaulation:
     ja-JP: 表示される相手、位置、文字列
     pt-BR: Visível para Posição e String
     zh-CN: 可见，位置和字符串
-Chase Reevaluation: {}
-__ChaseRateReeval__:
+Chase Reevaluation:
   DESTINATION_AND_RATE:
     guid: 00000000B8CA
     en-US: Destination and Rate
@@ -1434,7 +1433,7 @@ __ChaseRateReeval__:
     ja-JP: なし
     pt-BR: Nenhuma
     zh-CN: 全部禁用
-__ChaseTimeReeval__:
+Chase Time Reevaluation:
   DESTINATION_AND_DURATION:
     guid: 00000000C479
     en-US: Destination and Duration
