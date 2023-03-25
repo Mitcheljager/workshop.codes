@@ -51,6 +51,8 @@ function setNotSticky(element) {
   const placeholderElement = document.querySelector("[data-role='sticky-placeholder']")
   placeholderElement.remove()
 
-  element.style = ""
+  element.style.removeProperty("width")
+  element.style.removeProperty("position")
+  element.style.removeProperty("top")
   element.classList.remove("is-sticky")
 }

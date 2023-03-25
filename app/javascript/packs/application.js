@@ -15,6 +15,7 @@ import * as differenceViewer from "../src/difference-viewer"
 import * as disableFormBySelect from "../src/disable-form-by-select"
 import * as dismissParent from "../src/dismiss-parent"
 import * as dropdown from "../src/dropdown"
+import * as dynamicMaxHeight from "../src/dynamic-max-height"
 import * as filter from "../src/filter"
 import * as gallery from "../src/gallery"
 import * as getKoFiValue from "../src/get-ko-fi-value"
@@ -43,6 +44,7 @@ document.addEventListener("turbolinks:load", function() {
   disableFormBySelect.bind()
   dismissParent.bind()
   dropdown.bind()
+  dynamicMaxHeight.bind()
   filter.bind()
   gallery.bind()
   getPartial.bind()
@@ -77,4 +79,5 @@ document.addEventListener("turbolinks:before-cache", function() {
   dismissParent.destroy()
   numPlayersSlider.destroy()
   sticky.destroy()
+  dynamicMaxHeight.destroy()
 })

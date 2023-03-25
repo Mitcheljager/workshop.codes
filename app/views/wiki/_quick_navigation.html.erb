@@ -5,8 +5,8 @@
   constants = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml"))).map { |n, c| n }.sort_by { |n| n }
 %>
 
-<div class="quick-navigation">
-  <div class="quick-navigation__scroll" data-role="sticky">
+<div class="quick-navigation" data-role="dynamic-max-height">
+  <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target>
     <div data-toggle-content>
       <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Actions" %>" data-action="toggle-content">
         Actions
@@ -18,7 +18,8 @@
         <% actions.each do |content| %>
           <%= link_to content["en-US"],
             CGI.escape(content["en-US"]).downcase,
-            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }" %>
+            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
+            data: { prefetch: false } %>
         <% end %>
       </div>
     </div>
@@ -34,7 +35,8 @@
         <% values.each do |content| %>
           <%= link_to content["en-US"],
             CGI.escape(content["en-US"]).downcase,
-            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }" %>
+            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
+            data: { prefetch: false } %>
         <% end %>
       </div>
     </div>
@@ -50,7 +52,8 @@
         <% events.each do |content| %>
           <%= link_to content["en-US"],
             CGI.escape(content["en-US"]).downcase,
-            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }" %>
+            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
+            data: { prefetch: false } %>
         <% end %>
       </div>
     </div>
@@ -66,7 +69,8 @@
         <% constants.each do |name| %>
           <%= link_to name,
             CGI.escape(name).downcase,
-            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == name }" %>
+            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == name }",
+            data: { prefetch: false } %>
         <% end %>
       </div>
     </div>
