@@ -1,10 +1,12 @@
 export function bind() {
   window.addEventListener("scroll", setHeight, { passive: true })
+  window.addEventListener("resize", setHeight, { passive: true })
   setHeight()
 }
 
 export function destroy() {
   window.removeEventListener("scroll", setHeight, { passive: true })
+  window.removeEventListener("resize", setHeight, { passive: true })
 }
 
 function setHeight() {
