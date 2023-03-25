@@ -6,57 +6,25 @@
 %>
 
 <div class="quick-navigation" data-role="dynamic-max-height">
-  <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target>
-    <div data-toggle-content>
-      <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Actions" %>" data-action="toggle-content">
-        Actions
+  <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target data-scroll-container>
+    <% { "Actions": actions, "Values": values, "Events": events }.each do |category, props| %>
+      <div data-toggle-content>
+        <button class="quick-navigation__toggle <%= "active" if @article.category.title == category.to_s %>" data-action="toggle-content">
+          <%= category %>
 
-        <div class="quick-navigation__icon">&#8250;</div>
-      </button>
+          <div class="quick-navigation__icon">&#8250;</div>
+        </button>
 
-      <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != "Actions" %>">
-        <% actions.each do |content| %>
-          <%= link_to content["en-US"],
-            CGI.escape(content["en-US"]).downcase,
-            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
-            data: { prefetch: false } %>
-        <% end %>
+        <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != category.to_s %>">
+          <% props.each do |content| %>
+            <%= link_to content["en-US"],
+              CGI.escape(content["en-US"]).downcase,
+              class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
+              data: { prefetch: false, role: ( 'scroll-into-view-on-load' if @article.title == content["en-US"]) } %>
+          <% end %>
+        </div>
       </div>
-    </div>
-
-    <div data-toggle-content>
-      <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Values" %>" data-action="toggle-content">
-        Values
-
-        <div class="quick-navigation__icon">&#8250;</div>
-      </button>
-
-      <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != "Values" %>">
-        <% values.each do |content| %>
-          <%= link_to content["en-US"],
-            CGI.escape(content["en-US"]).downcase,
-            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
-            data: { prefetch: false } %>
-        <% end %>
-      </div>
-    </div>
-
-    <div data-toggle-content>
-      <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Events" %>" data-action="toggle-content">
-        Events
-
-        <div class="quick-navigation__icon">&#8250;</div>
-      </button>
-
-      <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != "Events" %>">
-        <% events.each do |content| %>
-          <%= link_to content["en-US"],
-            CGI.escape(content["en-US"]).downcase,
-            class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
-            data: { prefetch: false } %>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
 
     <div data-toggle-content>
       <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Constants" %>" data-action="toggle-content">

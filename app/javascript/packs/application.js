@@ -33,6 +33,7 @@ import * as revealByCheckbox from "../src/reveal-by-checkbox"
 import * as revealBySelect from "../src/reveal-by-select"
 import * as revealOnDifference from "../src/reveal-on-difference"
 import * as scrollIndicator from "../src/scroll-indicator"
+import * as scrollIntoViewOnLoad from "../src/scroll-into-view-on-load"
 import * as sticky from "../src/sticky"
 import * as tabs from "../src/tabs"
 import * as timeago from "../src/timeago"
@@ -71,7 +72,9 @@ document.addEventListener("turbolinks:load", function() {
   differenceViewer.render()
   getKoFiValue.render()
   numPlayersSlider.render()
+
   timeago.initialize()
+  scrollIntoViewOnLoad.initialize()
 })
 
 document.addEventListener("turbolinks:before-cache", function() {
