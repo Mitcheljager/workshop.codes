@@ -44,6 +44,7 @@ $width: clamp(10rem, 12.5vw, 15rem);
 
   &--active {
     color: $text-color-light;
+    font-weight: bold;
   }
 }
 
