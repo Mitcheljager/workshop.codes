@@ -4,6 +4,6 @@ export function initialize() {
   elements.forEach(element => {
     const parent = element.closest("[data-scroll-container]")
 
-    parent.scrollTop = element.offsetTop
+    parent.scrollTop = Math.max(element.offsetTop - 55, 0)
   })
 }
