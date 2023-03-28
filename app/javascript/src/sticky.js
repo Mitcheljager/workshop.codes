@@ -32,16 +32,16 @@ function setSticky(element, offset) {
   if (element.dataset.sticky == "true") return
   element.dataset.sticky = "true"
 
+  element.style.width = `${ element.offsetWidth }px`
+  element.style.position = "fixed"
+  element.style.top = offset + "px"
+  element.classList.add("is-sticky")
+
   const placeholderElement = document.createElement("div")
   placeholderElement.style.height = `${ element.offsetHeight }px`
   placeholderElement.style.width = `${ element.offsetWidth }px`
   placeholderElement.dataset.role = "sticky-placeholder"
   element.insertAdjacentElement("beforebegin", placeholderElement)
-
-  element.style.width = `${ element.offsetWidth }px`
-  element.style.position = "fixed"
-  element.style.top = offset + "px"
-  element.classList.add("is-sticky")
 }
 
 function setNotSticky(element) {
@@ -51,6 +51,8 @@ function setNotSticky(element) {
   const placeholderElement = document.querySelector("[data-role='sticky-placeholder']")
   placeholderElement.remove()
 
-  element.style = ""
+  element.style.removeProperty("width")
+  element.style.removeProperty("position")
+  element.style.removeProperty("top")
   element.classList.remove("is-sticky")
 }

@@ -14,7 +14,13 @@
 }
 
 @mixin media-min($media) {
-  @media (min-width: #{ map-get($media-min-widths, $media) }) {
+  $value: $media;
+
+  @if map-has-key($media-min-widths, $media) {
+    $value: map-get($media-min-widths, $media);
+  }
+
+  @media (min-width: #{ $value }) {
     @content;
   }
 }
