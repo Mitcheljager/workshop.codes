@@ -19,6 +19,7 @@
     "@rails/webpacker": "5.4.0",
     "acorn": "^8.1.0",
     "codemirror": "^6.0.1",
+    "impetus": "^0.8.8",
     "inscrybmde": "^1.11.6",
     "lz-string": "^1.4.4",
     "metrics-graphics": "^2.15.6",
