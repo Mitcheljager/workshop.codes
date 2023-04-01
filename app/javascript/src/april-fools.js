@@ -25,6 +25,7 @@ async function hiimpetus(event) {
     source: element,
     friction: 0.96,
     boundX: [(window.innerWidth - element.offsetWidth - 100) * -0.5, (window.innerWidth - element.offsetWidth - 100) * 0.5],
+    boundY: [-element.offsetHeight, Infinity],
     update: function(x, y) {
       element.style.transform = `translateX(${ x }px) translateY(${ y }px)`
       element.dataset.x = x
