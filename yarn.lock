@@ -5465,11 +5465,6 @@ immutable@^4.0.0:
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.1.0.tgz#f795787f0db780183307b9eb2091fcac1f6fafef"
   integrity sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==
 
-impetus@^0.8.8:
-  version "0.8.8"
-  resolved "https://registry.yarnpkg.com/impetus/-/impetus-0.8.8.tgz#8848c56ac8ccdd375fa541bfe62533c3cc472050"
-  integrity sha512-7ejVjFxRAiBlnZQbdNGzUGgxMvLjVke/QNP2TFN/VK8baASsuRiE8YuSbD0qyiU8Pae+w95De4ZYz+rxSo5FJw==
-
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
