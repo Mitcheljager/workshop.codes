@@ -11,8 +11,6 @@
   <div class="logo-background logo-background--overwatch">
     <%= render "filter/quick_filter" %>
 
-    <%= render "application/banners/jam" %>
-
     <% if ENV["BANNER_ROOT"] == "Editor" %>
       <%= render "application/banners/editor" %>
     <% end %>
