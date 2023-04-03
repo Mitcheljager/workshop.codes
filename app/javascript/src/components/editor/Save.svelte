@@ -6,23 +6,18 @@
 
   let loading = false
   let confettiActive = false
+  let lastSaveContent = ""
 
   function save() {
     loading = true
 
-    const content =  JSON.stringify({
-      items: $items,
-      translations: {
-        keys: $translationKeys,
-        selectedLanguages: $selectedLanguages,
-        defaultLanguage: $defaultLanguage
-      }
-    })
+    const content = getSaveContent()
 
     new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })
       .then(data => {
         if (!data) throw Error("Create failed")
 
+        lastSaveContent = content
         showConfetti()
       })
       .catch(error => {
@@ -43,9 +38,27 @@
       save()
     }
   }
+
+  function getSaveContent() {
+    return JSON.stringify({
+      items: $items,
+      translations: {
+        keys: $translationKeys,
+        selectedLanguages: $selectedLanguages,
+        defaultLanguage: $defaultLanguage
+      }
+    })
+  }
+
+  function beforeUnload(event) {
+    if (!lastSaveContent || JSON.stringify(lastSaveContent) === JSON.stringify(getSaveContent())) return
+
+    event.preventDefault()
+    return (event.returnValue = "")
+  }
 </script>
 
-<svelte:window on:keydown={keydown} />
+<svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} />
 
 <div class="relative">
   <button class="button button--square" on:click={save} disabled={loading}>

@@ -15,6 +15,7 @@ import * as differenceViewer from "../src/difference-viewer"
 import * as disableFormBySelect from "../src/disable-form-by-select"
 import * as dismissParent from "../src/dismiss-parent"
 import * as dropdown from "../src/dropdown"
+import * as dynamicMaxHeight from "../src/dynamic-max-height"
 import * as filter from "../src/filter"
 import * as gallery from "../src/gallery"
 import * as getKoFiValue from "../src/get-ko-fi-value"
@@ -32,6 +33,7 @@ import * as revealByCheckbox from "../src/reveal-by-checkbox"
 import * as revealBySelect from "../src/reveal-by-select"
 import * as revealOnDifference from "../src/reveal-on-difference"
 import * as scrollIndicator from "../src/scroll-indicator"
+import * as scrollIntoViewOnLoad from "../src/scroll-into-view-on-load"
 import * as sticky from "../src/sticky"
 import * as tabs from "../src/tabs"
 import * as timeago from "../src/timeago"
@@ -43,6 +45,7 @@ document.addEventListener("turbolinks:load", function() {
   disableFormBySelect.bind()
   dismissParent.bind()
   dropdown.bind()
+  dynamicMaxHeight.bind()
   filter.bind()
   gallery.bind()
   getPartial.bind()
@@ -69,7 +72,9 @@ document.addEventListener("turbolinks:load", function() {
   differenceViewer.render()
   getKoFiValue.render()
   numPlayersSlider.render()
+
   timeago.initialize()
+  scrollIntoViewOnLoad.initialize()
 })
 
 document.addEventListener("turbolinks:before-cache", function() {
@@ -77,4 +82,5 @@ document.addEventListener("turbolinks:before-cache", function() {
   dismissParent.destroy()
   numPlayersSlider.destroy()
   sticky.destroy()
+  dynamicMaxHeight.destroy()
 })

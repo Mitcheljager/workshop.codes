@@ -3,6 +3,8 @@
 <% content_for :og_summary_small, "true" %>
 
 <article class="article top-offset">
+  <%= render "wiki/quick_navigation" %>
+
   <main class="article__main">
     <%= link_to @article.category.title, wiki_category_path(@article.category.slug), class: "article__category" %>
 
