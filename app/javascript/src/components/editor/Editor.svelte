@@ -18,6 +18,7 @@
   import LineFinder from "./LineFinder.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
 
+  export let events
   export let values
   export let actions
   export let constants
@@ -40,13 +41,14 @@
   })
 
   function parseKeywords() {
+    const mappedEvents = objectToKeyword(events, "event")
     const mappedValues = objectToKeyword(values, "text")
     const mappedActions = objectToKeyword(actions, "function")
     const mappedConstants = objectToKeyword(constants.map(c => Object.values(c)).flat(1), "constant")
     const mappedHeroes = objectToKeyword(heroes, "text")
     const mappedMaps = objectToKeyword(maps, "text")
 
-    return [...mappedValues, ...mappedActions, ...mappedConstants, ...mappedHeroes, ...mappedMaps]
+    return [...mappedEvents, ...mappedValues, ...mappedActions, ...mappedConstants, ...mappedHeroes, ...mappedMaps]
   }
 
   function objectToKeyword(obj, keywordType) {

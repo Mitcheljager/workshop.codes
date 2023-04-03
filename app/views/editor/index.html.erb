@@ -8,6 +8,7 @@
 
 <div class="wiki">
   <%= svelte_component "Editor", {
+    events: @events,
     values: @values,
     actions: @actions,
     constants: @constants,

@@ -2,6 +2,7 @@ class EditorController < ApplicationController
   def index
     current_user_projects(:workshop_codes)
 
+    @events = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
     @actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
     @values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
     @defaults = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "defaults.yml")))
