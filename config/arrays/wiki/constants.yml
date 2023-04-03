@@ -171,6 +171,33 @@ Color:
     ja-JP: 黄色
     pt-BR: Amarelo
     zh-CN: 黄色
+  BLACK:
+    en-US: Black
+    es-MX: Negro
+    fr-FR: Noir
+    ja-JP: ブラック
+    pt-BR: Preto
+    zh-CN: 黑色
+  GRAY: 
+    en-US: Gray
+    es-MX: Gris
+    fr-FR: Gris
+    ja-JP: グレー
+    pt-BR: Cinza
+    zh-CN: 灰色
+  ROSE:
+    en-US: Rose
+    es-MX: Rosa
+    ja-JP: ローズ
+    pt-BR: Rosa
+    zh-CN: 玫红
+  VIOLET:
+    en-US: Violet
+    es-MX: Violeta
+    fr-FR: Mauve
+    ja-JP: バイオレット
+    pt-BR: Violeta
+    zh-CN: 紫色
 Button:
   ABILITY_1:
     guid: 00000000B179

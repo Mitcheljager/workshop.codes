@@ -203,7 +203,7 @@ __chaseGlobalVariableAtRate__:
   - name: RATE
     description: The amount of change that will happen to the variable's value each second.
     type: float
-    default: NUMBER
+    default: NUMBER (1)
   - name: REEVALUATION
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
     type: __ChaseRateReeval__
@@ -232,7 +232,7 @@ __chaseGlobalVariableOverTime__:
   - name: DURATION
     description: The amount of time, in seconds, over which the variable's value will approach the destination.
     type: float
-    default: NUMBER
+    default: NUMBER (1)
   - name: REEVALUATION
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
     type: __ChaseTimeReeval__
@@ -267,7 +267,7 @@ __chasePlayerVariableAtRate__:
   - name: RATE
     description: The amount of change that will happen to the variable's value each second.
     type: float
-    default: NUMBER
+    default: NUMBER (1)
   - name: REEVALUATION
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
     type: __ChaseRateReeval__
@@ -302,7 +302,7 @@ __chasePlayerVariableOverTime__:
   - name: DURATION
     description: The amount of time, in seconds, over which the variable's value will approach the destination.
     type: float
-    default: NUMBER
+    default: NUMBER (1)
   - name: REEVALUATION
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
     type: __ChaseTimeReeval__
@@ -392,7 +392,7 @@ createBeam:
   - name: COLOR
     description: The color of the beam to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer. Does not apply to sound effects. Only the "good" and "bad" beam effects can have color applied.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: REEVALUATION
     description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
     type: EffectReeval
@@ -454,7 +454,7 @@ createEffect:
   - name: COLOR
     description: The color of the effect to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer. Does not apply to sound effects.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: POSITION
     description: The effect's position. If this value is a player, then the effect will move along with the player. Otherwise, the value is interpreted as a position in the world.
     type: Position
@@ -462,7 +462,7 @@ createEffect:
   - name: RADIUS
     description: The radius of this effect.
     type: unsigned float
-    default: NUMBER
+    default: NUMBER (1)
   - name: REEVALUATION
     description: Specifies which of this action's inputs will be continuously reevaluated.
     type: EffectReeval
@@ -510,15 +510,15 @@ __hudText__:
   - name: HEADER COLOR
     description: The color of the header.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: SUBHEADER COLOR
     description: The color of the subheader.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: TEXT COLOR
     description: The color of the text.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: REEVALUATION
     description: Specifies which of this action's inputs will be continuously reevaluated.
     type: HudReeval
@@ -561,7 +561,7 @@ createIcon:
   - name: ICON COLOR
     description: The color of the icon to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: SHOW WHEN OFFSCREEN
     description: Should this icon appear even when it is behind you?
     type: bool
@@ -597,7 +597,7 @@ createInWorldText:
   - name: SCALE
     description: The text's scale.
     type: float
-    default: NUMBER
+    default: NUMBER (1)
   - name: CLIPPING
     description: Specifies whether the text can be seen through walls or is instead clipped.
     type: Clip
@@ -609,7 +609,7 @@ createInWorldText:
   - name: TEXT COLOR
     description: Specifies the color of the in-world text to use.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: SPECTATORS
     description: Whether spectators can see the text or not.
     type: SpecVisibility
@@ -1177,7 +1177,7 @@ __forGlobalVariable__:
   - name: STEP
     description: This value is added to the control variable when the end action is reached. If this modification causes the control variable to reach or pass the range stop value, then the loop exits, and execution jumps to the next action after the end action. Otherwise, the loop continues, and execution jumps to the next action after the for action.
     type: float
-    default: NUMBER
+    default: NUMBER (1)
   guid: 00000000FEE2
   return: void
   en-US: For Global Variable
@@ -1212,7 +1212,7 @@ __forPlayerVariable__:
   - name: STEP
     description: This value is added to the control variable when the end action is reached. If this modification causes the control variable to reach or pass the range stop value, then the loop exits, and execution jumps to the next action after the end action. Otherwise, the loop continues, and execution jumps to the next action after the for action.
     type: float
-    default: NUMBER
+    default: NUMBER (1)
   guid: 00000000FEE1
   return: void
   en-US: For Player Variable
@@ -1548,7 +1548,7 @@ playEffect:
   - name: COLOR
     description: The color of the effect to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: WHITE
+    default: Color(White)
   - name: POSITION
     description: The effect's position. If this value is a player, then the effect will play at the player's position. Otherwise, the value is interpreted as a position in the world.
     type: Position
@@ -3653,7 +3653,7 @@ startForcingPlayerOutlines:
   - name: Color
     description: The color of the specified Player Outlines if they are visible. If a particular team is chosen, the color will either be Red or Blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: White
+    default: Color(White)
   - name: Type
     description: The type of the specified Player Outlines if they are visible
     type: Outline
@@ -3984,7 +3984,7 @@ CreateProgressBarHUDText:
   - name: Text
     description: The text to be displayed (can be blank)
     type: Object
-    default: Custom String
+    default: Custom String("")
   - name: Location
     description: The location on the screen where the text will appear.
     type: HudPosition
@@ -3996,11 +3996,11 @@ CreateProgressBarHUDText:
   - name: Progress Bar Color
     description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: White
+    default: Color(White)
   - name: Text Color
     description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: White
+    default: Color(White)
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
     type: HudReeval
@@ -4040,7 +4040,7 @@ CreateProgressBarIn-WorldText:
   - name: Text
     description: The text to be displayed (can be blank)
     type: Object
-    default: Custom String
+    default: Custom String("")
   - name: Position
     description: The text's position. If this value is a player, then the text will appear above the player's head. Otherwise, the value is interpreted as a position in the world.
     type: Position
@@ -4056,11 +4056,11 @@ CreateProgressBarIn-WorldText:
   - name: Progress Bar Color
     description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: White
+    default: Color(White)
   - name: Text Color
     description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: White
+    default: Color(White)
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
     type: HudReeval
@@ -4180,7 +4180,7 @@ StartForcingDummyBotName:
   - name: Name
     description: The name to be forced.
     type: String
-    default: Custom String
+    default: Custom String("")
   en-US: Start Forcing Dummy Bot Name
 
 StopForcingDummyBotName:

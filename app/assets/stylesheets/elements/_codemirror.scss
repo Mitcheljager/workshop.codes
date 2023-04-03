@@ -114,7 +114,9 @@
   .cm-completionIcon {
     padding-right: 1rem;
   }
-
+  .cm-completionIcon-event::after {
+    content: "∈";
+  }
   .cm-tooltip {
     background: darken($bg-dark, 5%);
     border: 0;
