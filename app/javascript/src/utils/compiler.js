@@ -37,7 +37,6 @@ export function getVariables(joinedItems) {
 
 export function getSubroutines(joinedItems) {
   let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g) || []
-  subroutines = [...subroutines, ...(joinedItems.match(/Call Subroutine\((.*)\)/g) || [])]
   subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace("Call Subroutine", "").replace(/[\())\s]/g, ""))
   return [...new Set(subroutines)]
 }
