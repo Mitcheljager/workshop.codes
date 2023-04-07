@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
   get "similar_to/:id", to: "posts#similar_to", as: "similar_posts"
 
+  get "ai/:query", to: "open_ai#show"
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/, default: "en" do
     root "posts#index"
 
