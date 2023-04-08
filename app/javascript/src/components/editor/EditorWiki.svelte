@@ -50,4 +50,6 @@
       {@html article.content}
     </div>
   </div>
+{:else}
+  <em class="block text-dark text-small mt-1/8">Tip: Alt + click a keyword to instantly search.</em>
 {/if}
