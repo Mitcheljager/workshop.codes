@@ -1556,7 +1556,7 @@ playEffect:
   - name: RADIUS
     description: The effect's radius in meters.
     type: unsigned float
-    default: NUMBER
+    default: NUMBER (1)
   guid: 00000000BB27
   return: void
   en-US: Play Effect
