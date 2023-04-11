@@ -86,6 +86,8 @@ function findIncorrectArgsLength(content) {
     index++
   }
 
+  console.log(get(completionsMap))
+
   for (let i = 0; i < matches.length; i++) {
     const match = matches[i]
     const name = match.match?.replaceAll(/[\(\)\{\};,=\[\]\t]/g, "").trim()
@@ -101,11 +103,7 @@ function findIncorrectArgsLength(content) {
 
       if (item.args_unlimited) continue
 
-      if (item.args_length && content.charAt(match.index + match.match.length) != "(") {
-        if (item.args_allow_null) continue
-        // Some arguments expected but none were given
-        message = `${ item.args_length } Argument(s) expected, 0 given`
-      } else if (!item.args_length && content.charAt(match.index + match.match.length) == "(") {
+      if (!item.args_length && content.charAt(match.index + match.match.length) == "(") {
         // No arguments expected but some (or ()) were given
         message = "0 arguments expected"
       } else if (item.args_length && content.charAt(match.index + match.match.length) == "(") {
