@@ -4192,3 +4192,188 @@ StopForcingDummyBotName:
     default: Event Player
   en-US: Stop Forcing Dummy Bot Name
 
+CreateProjectile:
+  description: Create a projectile entity that either heals or damages players and player owned entities. This action will fail if too many entities have been created.
+  en-US: Create Projectile
+  args:
+  - name: Projectile Type
+    description: Type of projectile to be created. New options can be added to this list by enabling the Projectiles Workshop Extension.
+    type: Projectile Effect
+    default: Orb Projectile
+  - name: Player
+    description: The player who owns this projectile and will receive credit for kills. If null, the projectile will be owned by nobody. The projectile will not affect its owner.
+    type: Player
+    default: Event Player
+  - name: Start Position
+    description: The start position of the projectile. If null, the player's eye position will be used.
+    type: Position
+    default: "Null"
+  - name: Direction
+    description: The direction for the projectile to travel. If null, the player's facing direction will be used.
+    type: Direction
+    default: "Null"
+  - name: Relative
+    description: Whether the projectile's start position and direction are relative to the player or to the world.
+    type: Relativity
+    default: To World
+  - name: Modify Health Type
+    description: Whether the projectile will heal or damage targets it collides with.
+    type: Modify Health Type
+    default: Damage
+  - name: Affected Team
+    description: Which team the projectile will collide with. The projectile will never affect its owner regardless of team.
+    type: Team
+    default: Team
+  - name: Amount
+    description: The amount of damage or healing the projectile will apply to targets it collides with. If explosion radius is set to an amount greater than 0, this is how much damage the explosion will do at its center.
+    type: Float
+    default: Number (1)
+  - name: Amount Scalar
+    description: If explosion radius is set to 0 this is how much to scale the damage amount for critical hits. If the explosion radius is greater than 0 this is how much damage the projectile will do at the edge of the explosion.
+    type: Float
+    default: Number (1)
+  - name: Explosion Radius
+    description: The radius of the explosion created by this projectile. If 0, this projectile doesn't create an explosion.
+    type: Float
+    default: Number
+  - name: Explosion Effect
+    description: The effect to use when the projectile explodes. If explosion radius is 0 this effect will not be created.
+    type: Effect
+    default: Bad Explosion
+  - name: Explosion Sound Effect
+    description: The sound effect to use when the projectile explodes. If explosion radius is 0 this effect will not be created.
+    type: Effect
+    default: Explosion Sound
+  - name: Oversize
+    description: A 0 to 1 range for how oversized the projectile should be, 0 being the default size, 1 being the maximum allowed size. The maximum allowed size is different for each projectile type.
+    type: Float
+    default: Number
+  - name: Speed
+    description: The speed in meters per second that the projectile will travel along its direction.
+    type: Float
+    default: Number (1)
+  - name: Lifetime
+    description: How long in seconds before the projectile expires.
+    type: Float
+    default: 5.00
+  - name: Impulse
+    description: The impulse to apply to a target when hit by this projectile. If explosion radius greater than 0, this impulse will applied to all targets affected by the explosion.
+    type: Float
+    default: Number
+  - name: Ricochet Count
+    description: How many times the projectile will ricochet off the environment before expiring.
+    type: Interger
+    default: Number
+  - name: Gravity
+    description: The amount of gravity affecting the projectile, creating an arc. If negative, the projectile will arc upwards.
+    type: Float
+    default: Number
+
+CreateHomingProjectile:
+  description: Create a projectile entity that either heals or damages players or player owned entities. The projectile follows the provided target with variable strength. This action will fail if too many entities have been created.
+  en-US: Create Homing Projectile
+  args:
+  - name: Projectile Type
+    description: Type of projectile to be created. New options can be added to this list by enabling the Projectiles Workshop Extension.
+    type: Projectile Effect
+    default: Orb Projectile
+  - name: Player
+    description: The player who owns this projectile and will receive credit for kills. If null, the projectile will be owned by nobody. The projectile will not affect its owner.
+    type: Player
+    default: Event Player
+  - name: Start Position
+    description: The start position of the projectile. If null, the player's eye position will be used.
+    type: Position
+    default: "Null"
+  - name: Direction
+    description: The direction for the projectile to travel. If null, the player's facing direction will be used.
+    type: Direction
+    default: "Null"
+  - name: Relative
+    description: Whether the projectile's start position and direction are relative to the player or to the world.
+    type: Relativity
+    default: To World
+  - name: Modify Health Type
+    description: Whether the projectile will heal or damage targets it collides with.
+    type: Modify Health Type
+    default: Damage
+  - name: Affected Team
+    description: Which team the projectile will collide with. The projectile will never affect its owner regardless of team.
+    type: Team
+    default: Team
+  - name: Amount
+    description: The amount of damage or healing the projectile will apply to targets it collides with. If explosion radius is set to an amount greater than 0, this is how much damage the explosion will do at its center.
+    type: Float
+    default: Number (1)
+  - name: Amount Scalar
+    description: If explosion radius is set to 0 this is how much to scale the damage amount for critical hits. If the explosion radius is greater than 0 this is how much damage the projectile will do at the edge of the explosion.
+    type: Float
+    default: Number (1)
+  - name: Explosion Radius
+    description: The radius of the explosion created by this projectile. If 0, this projectile doesn't create an explosion.
+    type: Float
+    default: Number
+  - name: Explosion Effect
+    description: The effect to use when the projectile explodes. If explosion radius is 0 this effect will not be created.
+    type: Effect
+    default: Bad Explosion
+  - name: Explosion Sound Effect
+    description: The sound effect to use when the projectile explodes. If explosion radius is 0 this effect will not be created.
+    type: Effect
+    default: Explosion Sound
+  - name: Oversize
+    description: A 0 to 1 range for how oversized the projectile should be, 0 being the default size, 1 being the maximum allowed size. The maximum allowed size is different for each projectile type.
+    type: Float
+    default: Number
+  - name: Speed
+    description: The speed in meters per second that the projectile will travel along its direction.
+    type: Float
+    default: Number (1)
+  - name: Lifetime
+    description: How long in seconds before the projectile expires.
+    type: Float
+    default: Number (1)
+  - name: Impulse
+    description: The impulse to apply to a target when hit by this projectile. If explosion radius greater than 0, this impulse will applied to all targets affected by the explosion.
+    type: Float
+    default: Number
+  - name: Homing Target
+    description: The homing target for the projectile. If null, the projectile will travel in a straight line.
+    type: Player
+    default: "Null"
+  - name: Homing Strength
+    type: Float
+    description: A 0 to 1 value representing how strongly the projectile will follow its target and how easily it will lose its target. At 0, the projectile won't follow its target at all, at 1, it will follow its target aggressively and never lose it.
+    default: Number (1)
+
+Create Projectile Effect:
+  description: Creates an in-world projectile effect entity. This effect entity will persist until destroyed. To obtain a reference to this entity, use the Last Created Entity value. This action will fail if too many entities have been created.
+  en-US: Create Projectile Effect
+  args:
+  - name: Visible To
+    description: One or more players who will be able to see the effect.
+    type: Player
+    default: All
+  - name: Projectile Type
+    description: Type of projectile to be created. New options can be added to this list by enabling the Projectiles Workshop Extension.
+    type: Projectile Effect
+    default: Orb Projectile
+  - name: Friendly To
+    description: One or more players who the projectile will appear friendly to.
+    type: Player
+    default: "Null"
+  - name: Position
+    description: The position in of the effect.
+    type: Position
+    default: Event Player
+  - name: Direction
+    description: The facing direction of the effect.
+    default: Vector
+  - name: Oversize
+    description: A 0 to 1 range for how oversized the projectile should be, 0 being the default size, 1 being the maximum allowed size. The maximum allowed size is different for each projectile type.
+    type: Float
+    default: Number
+  - name: Reevaluation
+    description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
+    type: Projectile Effect Reevaluation
+    default: Visible To, Position, Direction and Size

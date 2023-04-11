@@ -178,7 +178,7 @@ Color:
     ja-JP: ブラック
     pt-BR: Preto
     zh-CN: 黑色
-  GRAY: 
+  GRAY:
     en-US: Gray
     es-MX: Gris
     fr-FR: Gris
@@ -1860,6 +1860,7 @@ Operator:
     guid: 000000007812
     en-US: ">"
     fr-FR: "> supérieur à"
+
 Health:
   NORMAL:
     en-US: Health
@@ -1867,3 +1868,69 @@ Health:
     en-US: Armor
   SHIELDS:
     en-US: Shields
+
+Modify Health Type:
+  Damage:
+    en-US: Damage
+  Heal:
+    en-US: Heal
+
+Projectile Effect:
+  Orb Projectile:
+    en-US: Orb Projectile
+  Baptiste Biotic Launcher:
+    en-US: Baptiste Biotic Launcher
+  Bastion A-36 Tactical Grenade:
+    en-US: Bastion A-36 Tactical Grenade
+  Echo Sticky Bomb:
+    en-US: Echo Sticky Bomb
+  Genji Shuriken:
+    en-US: Genji Shuriken
+  Lucio Sonic Amplifier:
+    en-US: Lucio Sonic Amplifier
+  Mei Icicle:
+    en-US: Mei Icicle
+  Mercy Caduceus Blaster:
+    en-US: Mercy Caduceus Blaster
+  Moira Damage Orb:
+    en-US: Moira Damage Orb
+  Moira Heal Orb:
+    en-US: Moira Heal Orb
+  Orisa Fusion Driver:
+    en-US: Orissa Fusion Driver
+  Pharah Rocket:
+    en-US: Pharah Rocket
+  Reinhardt Fire Strike:
+    en-US: Reinhardt Fire Strike
+  Roadhog Scrap:
+    en-US: Roadhog Scrap
+  Roadhog Scrap Ball:
+    en-US: Roadhog Scrap Ball
+  Sigma Hypersphere:
+    en-US: Sigma Hypersphere
+  Symmetra Photon Projector:
+    en-US: Symmetra Photon Projector
+  Ramattra Ravenous Vortex Sphere:
+    en-US: Ramattra Ravenous Vortex Sphere
+  Zarya Graviton:
+    en-US: Zarya Graviton
+  Zarya Particle Cannon:
+    en-US: Zarya Particle Cannon
+
+Projectile Effect Reevaluation:
+  Visible To, Position, Direction and Size:
+    en-US: Visible To, Position, Direction and Size
+  Position, Direction And Size:
+    en-US: Position, Direction And Size
+  Visible To:
+    en-US: Visible To
+  None:
+    en-US: None
+  Visible To, Friendly To, Position, Direction And Size:
+    en-US: Visible To, Friendly To, Position, Direction And Size
+  Friendly To, Position, Direction And Size:
+    en-US: Friendly To, Position, Direction And Size
+  Visible To, Friendly To:
+    en-US: Visible To, Friendly To
+  Friendly To:
+    en-US: Friendly To
