@@ -4255,7 +4255,7 @@ CreateProjectile:
   - name: Lifetime
     description: How long in seconds before the projectile expires.
     type: Float
-    default: 5.00
+    default: Number (1)
   - name: Impulse
     description: The impulse to apply to a target when hit by this projectile. If explosion radius greater than 0, this impulse will applied to all targets affected by the explosion.
     type: Float
