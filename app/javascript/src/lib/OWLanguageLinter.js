@@ -86,8 +86,6 @@ function findIncorrectArgsLength(content) {
     index++
   }
 
-  console.log(get(completionsMap))
-
   for (let i = 0; i < matches.length; i++) {
     const match = matches[i]
     const name = match.match?.replaceAll(/[\(\)\{\};,=\[\]\t]/g, "").trim()
