@@ -18,6 +18,7 @@
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
+  import Info from '../icon/Info.svelte';
 
   export let events
   export let values
@@ -115,9 +116,14 @@
 <div class="editor">
   <div class="editor__top">
     <img on:click={() => {
+      window.location.pathname = "/"
+    }} class="mr-1/4 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
+    <span on:click={() => {
       $currentProjectUUID = null
       setOpenProjectInUrl(null, false)
-    }} class="mr-1/4 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
+    }} class="mr-1/4 cursor-pointer">
+      <Info />
+    </span>
 
     {#if $projects}
       <ProjectsDropdown />
