@@ -205,7 +205,7 @@
       {/each}
 
       {#if $projects?.length && !filteredProjects.length}
-        <em class="block text-dark text-small pl-1/8 pr-1/8">No projects match your filter.</em>
+        <em class="block text-dark text-small pl-1/8 pr-1/8">No projects match your search.</em>
       {/if}
 
       {#if $projects?.length}
