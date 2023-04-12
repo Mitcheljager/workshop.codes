@@ -17,8 +17,8 @@
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
+  import Info from "../icon/Info.svelte"
   import * as logo from "../../../../assets/images/logo.svg"
-  import Info from '../icon/Info.svelte';
 
   export let events
   export let values
