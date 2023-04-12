@@ -17,6 +17,8 @@
   let showProjectSettings = false
   let filteredProjects = $projects
 
+  $: if (showModal) active = false
+
   onMount(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const uuid = urlParams.get("uuid")
