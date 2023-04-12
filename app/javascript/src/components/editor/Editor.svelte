@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap } from "../../stores/editor"
+  import { setOpenProjectInUrl } from "../../utils/routing"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
@@ -113,7 +114,10 @@
 
 <div class="editor">
   <div class="editor__top">
-    <img on:click={() => $currentProjectUUID = null} class="mr-1/2 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
+    <img on:click={() => {
+      $currentProjectUUID = null
+      setOpenProjectInUrl(null, false)
+    }} class="mr-1/4 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
 
     {#if $projects}
       <ProjectsDropdown />

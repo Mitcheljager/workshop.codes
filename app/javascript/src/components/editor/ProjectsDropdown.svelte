@@ -6,6 +6,7 @@
   import { fly, fade } from "svelte/transition"
   import { onMount } from "svelte"
   import { updateProject } from "../../utils/editor"
+  import { setOpenProjectInUrl } from "../../utils/routing"
 
   let value
   let loading = false
@@ -33,7 +34,7 @@
 
         const parsedData = JSON.parse(data)
 
-        setUrl(parsedData.uuid)
+        setOpenProjectInUrl(parsedData.uuid, true)
         updateProject(parsedData.uuid, {
           uuid: parsedData.uuid,
           title: parsedData.title,
@@ -74,7 +75,7 @@
 
         const parsedData = JSON.parse(data)
 
-        setUrl(parsedData.uuid)
+        setOpenProjectInUrl(parsedData.uuid, true)
 
         $projects = [...$projects, parsedData]
         $currentProjectUUID = parsedData.uuid
@@ -145,7 +146,7 @@
       .then(data => {
         if (!data) throw Error("Create failed")
 
-        setUrl()
+        setOpenProjectInUrl(null, true)
 
         $projects = $projects.filter(p => p.uuid != $currentProjectUUID)
         $currentProjectUUID = null
@@ -164,13 +165,6 @@
 
     active = false
     showProjectSettings = false
-  }
-
-  function setUrl(uuid) {
-    const url = new URL(window.location)
-    if (uuid) url.searchParams.set("uuid", uuid)
-    else url.searchParams.delete("uuid")
-    window.history.replaceState("", "", url)
   }
 </script>
 
