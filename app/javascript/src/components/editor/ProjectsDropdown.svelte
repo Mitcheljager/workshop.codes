@@ -192,10 +192,6 @@
     <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100">
       <div class="pl-1/8 pr-1/8">
         <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
-
-        {#if $projects?.length && !filteredProjects.length}
-          <em>No projects match your filter.</em>
-        {/if}
       </div>
 
       <hr />
@@ -205,6 +201,10 @@
           {project.title}
         </div>
       {/each}
+
+      {#if $projects?.length && !filteredProjects.length}
+        <em class="block text-dark text-small pl-1/8 pr-1/8">No projects match your filter.</em>
+      {/if}
 
       {#if $projects?.length}
         <hr />
