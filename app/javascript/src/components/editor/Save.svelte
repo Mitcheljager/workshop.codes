@@ -1,7 +1,7 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { currentProject, items } from "../../stores/editor"
-  import { defaultLanguage, selectedLanguages, translationKeys } from "../../stores/translationKeys"
+  import { currentProject } from "../../stores/editor"
+  import { getSaveContent } from "../../utils/editor"
   import { Confetti } from "svelte-confetti"
 
   let loading = false
@@ -37,17 +37,6 @@
       event.preventDefault()
       save()
     }
-  }
-
-  function getSaveContent() {
-    return JSON.stringify({
-      items: $items,
-      translations: {
-        keys: $translationKeys,
-        selectedLanguages: $selectedLanguages,
-        defaultLanguage: $defaultLanguage
-      }
-    })
   }
 
   function beforeUnload(event) {
