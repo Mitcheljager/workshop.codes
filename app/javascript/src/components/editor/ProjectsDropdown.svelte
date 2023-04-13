@@ -2,7 +2,8 @@
   import SearchObjects from "./SearchObjects.svelte"
   import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
   import { projects, currentProject } from "../../stores/editor"
-  import { destroyCurrentProject, fetchProject } from "../../utils/project"
+  import { getSaveContent } from "../../utils/editor"
+  import { createProject, destroyCurrentProject, fetchProject } from "../../utils/project"
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
@@ -43,8 +44,20 @@
     loading = false
   }
 
-  function duplicateProject() {
+  async function duplicateProject() {
     if (!confirm("This will create a copy of the current project. Please confirm!")) return
+
+    loading = true
+
+    const content = getSaveContent()
+    const data = await createProject($currentProject.title + " (Copy)", content)
+    if (data) {
+      setUrl(data.uuid)
+      await fetchProject(data.uuid)
+    }
+
+    showProjectSettings = false
+    loading = false
   }
 
   function outsideClick(event) {
@@ -56,6 +69,7 @@
   }
 
   function setUrl(uuid) {
+    console.log('set url', uuid)
     const url = new URL(window.location)
     if (uuid) url.searchParams.set("uuid", uuid)
     else url.searchParams.delete("uuid")

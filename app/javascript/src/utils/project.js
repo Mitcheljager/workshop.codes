@@ -4,7 +4,7 @@ import { projects, currentProjectUUID, currentProject, items, currentItem, isSig
 import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
 import { get } from "svelte/store"
 
-export async function createProject(title, content) {
+export async function createProject(title, content = null) {
   if (!get(isSignedIn)) {
     createDemoProject()
     return
@@ -16,7 +16,7 @@ export async function createProject(title, content) {
 
       const parsedData = JSON.parse(data)
 
-      projects.set([...get(projects), parsedData])
+      projects.set([parsedData, ...get(projects)])
       currentProjectUUID.set(parsedData.uuid)
       currentItem.set({})
       items.set([])
@@ -36,7 +36,7 @@ export function createDemoProject() {
     is_owner: true
   }
 
-  projects.set([...get(projects), newProject])
+  projects.set([newProject, ...get(projects)])
   currentProjectUUID.set(newProject.uuid)
   currentItem.set({})
   items.set([])
@@ -110,7 +110,7 @@ export async function renameCurrentProject(value) {
 }
 
 export async function destroyCurrentProject() {
-  new FetchRails(`/projects/${ get(currentProjectUUID) }`).post({ method: "delete" })
+  return await new FetchRails(`/projects/${ get(currentProjectUUID) }`).post({ method: "delete" })
     .then(data => {
       if (!data) throw Error("Create failed")
 
