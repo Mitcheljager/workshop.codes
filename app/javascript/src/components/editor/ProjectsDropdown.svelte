@@ -1,11 +1,13 @@
 <script>
   import FetchRails from "../../fetch-rails"
+  import SearchObjects from "./SearchObjects.svelte"
   import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../../stores/editor"
   import { translationKeys, defaultLanguage, selectedLanguages } from "../../stores/translationKeys"
   import { addAlert } from "../../lib/alerts"
-  import { fly, fade } from "svelte/transition"
-  import { onMount } from "svelte"
   import { updateProject } from "../../utils/editor"
+  import { onMount } from "svelte"
+  import { fly, fade } from "svelte/transition"
+  import { flip } from "svelte/animate"
 
   let value
   let loading = false
@@ -13,6 +15,9 @@
   let showModal = false
   let modalType = "create"
   let showProjectSettings = false
+  let filteredProjects = $projects
+
+  $: if (showModal) active = false
 
   onMount(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -160,7 +165,7 @@
 
   function outsideClick(event) {
     if (!active && !showProjectSettings) return
-    if (event.target.classList.contains("dropdown")) return
+    if (event.target.classList.contains("dropdown") || event.target.closest(".dropdown")) return
 
     active = false
     showProjectSettings = false
@@ -187,11 +192,21 @@
 
   {#if active}
     <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100">
-      {#each $projects as project (project.uuid)}
-        <div class="dropdown__item" on:click={() => fetchProject(project.uuid)}>
+      <div class="pl-1/8 pr-1/8">
+        <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
+      </div>
+
+      <hr />
+
+      {#each filteredProjects as project (project.uuid)}
+        <div class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => fetchProject(project.uuid)}>
           {project.title}
         </div>
       {/each}
+
+      {#if $projects?.length && !filteredProjects.length}
+        <em class="block text-dark text-small pl-1/8 pr-1/8">No projects match your search.</em>
+      {/if}
 
       {#if $projects?.length}
         <hr />
