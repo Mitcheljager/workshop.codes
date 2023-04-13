@@ -69,7 +69,6 @@
   }
 
   function setUrl(uuid) {
-    console.log('set url', uuid)
     const url = new URL(window.location)
     if (uuid) url.searchParams.set("uuid", uuid)
     else url.searchParams.delete("uuid")
