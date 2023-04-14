@@ -153,32 +153,32 @@ function extractAndInsertMixins(joinedItems) {
   return joinedItems
 }
 
-function evaluateConditionals(source) {
+function evaluateConditionals(joinedItems) {
   const conditionalStartRegex = /@if *\( *((?:.|\n)+?) *(==|!=) *((?:.|\n)+?)\) *[ \n]*\{/g
   const conditionalElseStartRegex = / *@else *\{/
 
   let match
-  while ((match = conditionalStartRegex.exec(source)) != null) {
+  while ((match = conditionalStartRegex.exec(joinedItems)) != null) {
     const [matchedConditionalStartText, left, operation, right] = match
     const afterMatchedTextIndex = match.index + matchedConditionalStartText.length
 
-    const afterClosingBracketIndex = getClosingBracket(source, "{", "}", afterMatchedTextIndex - 2)
+    const afterClosingBracketIndex = getClosingBracket(joinedItems, "{", "}", afterMatchedTextIndex - 2)
     if (afterClosingBracketIndex < 0) {
       continue
     }
 
     let conditionalEndingIndex = afterClosingBracketIndex - 1
 
-    const trueBlockContent = source.substring(afterMatchedTextIndex, afterClosingBracketIndex)
+    const trueBlockContent = joinedItems.substring(afterMatchedTextIndex, afterClosingBracketIndex)
     let falseBlockContent = ""
 
     conditionalElseStartRegex.lastIndex = afterClosingBracketIndex - 1 // set start position for the exec below
-    const elseMatch = conditionalElseStartRegex.exec(source)
+    const elseMatch = conditionalElseStartRegex.exec(joinedItems)
     if (elseMatch != null) {
       const afterElseMatchedTextIndex = elseMatch.index + elseMatch[0].length
-      const matchingClosingBracketForElseIndex = getClosingBracket(source, "{", "}", afterElseMatchedTextIndex - 2)
+      const matchingClosingBracketForElseIndex = getClosingBracket(joinedItems, "{", "}", afterElseMatchedTextIndex - 2)
       if (matchingClosingBracketForElseIndex > 0) {
-        falseBlockContent = source.substring(afterElseMatchedTextIndex, matchingClosingBracketForElseIndex)
+        falseBlockContent = joinedItems.substring(afterElseMatchedTextIndex, matchingClosingBracketForElseIndex)
         conditionalEndingIndex = matchingClosingBracketForElseIndex
       } else {
         continue
@@ -201,8 +201,8 @@ function evaluateConditionals(source) {
     }
 
     const finalContent = passed ? trueBlockContent : falseBlockContent
-    source = replaceBetween(
-      source,
+    joinedItems = replaceBetween(
+      joinedItems,
       finalContent,
       match.index,
       conditionalEndingIndex + 1
@@ -211,7 +211,7 @@ function evaluateConditionals(source) {
     conditionalStartRegex.lastIndex = match.index
   }
 
-  return source
+  return joinedItems
 }
 
 function compileVariables(joinedItems) {
