@@ -149,7 +149,6 @@ function evaluateConditionals(source) {
 
     const afterClosingBracketIndex = getClosingBracket(source, "{", "}", afterMatchedTextIndex - 2)
     if (afterClosingBracketIndex < 0) {
-      // TODO: warn user?
       continue
     }
 
@@ -158,7 +157,7 @@ function evaluateConditionals(source) {
     const trueBlockContent = source.substring(afterMatchedTextIndex, afterClosingBracketIndex)
     let falseBlockContent = ""
 
-    conditionalElseStartRegex.lastIndex = afterClosingBracketIndex - 1
+    conditionalElseStartRegex.lastIndex = afterClosingBracketIndex - 1 // set start position for the exec below
     const elseMatch = conditionalElseStartRegex.exec(source)
     if (elseMatch != null) {
       const afterElseMatchedTextIndex = elseMatch.index + elseMatch[0].length
@@ -166,7 +165,7 @@ function evaluateConditionals(source) {
       if (matchingClosingBracketForElseIndex > 0) {
         falseBlockContent = source.substring(afterElseMatchedTextIndex, matchingClosingBracketForElseIndex)
         conditionalEndingIndex = matchingClosingBracketForElseIndex
-      } // TODO: else warn user?
+      }
     }
 
     let passed = null
