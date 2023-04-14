@@ -17,6 +17,7 @@ export function compile(overwriteContent = null) {
 
   joinedItems = joinedItems.replace(settings, "")
   joinedItems = extractAndInsertMixins(joinedItems)
+  joinedItems = extractAndInsertConditionals(joinedItems)
   joinedItems = convertTranslations(joinedItems)
 
   const variables = compileVariables(joinedItems)
@@ -135,6 +136,92 @@ function extractAndInsertMixins(joinedItems) {
   }
 
   return joinedItems
+}
+
+/**
+ * @param {string} source
+ * @param {number} fromIndex
+ * @returns
+ */
+function findMatchingClosingBracketIndex(source, fromIndex) {
+  let result = -1
+  let currentDepth = 1
+  for (let i = fromIndex; i < source.length; i++) {
+    const char = source[i]
+    if (char === "{") {
+      currentDepth++
+    } else if (char === "}") {
+      currentDepth--
+      if (currentDepth <= 0) {
+        result = i
+        break
+      }
+    }
+  }
+  return result
+}
+
+/**
+ * @param {string} source
+ * @returns {string}
+ */
+function extractAndInsertConditionals(source) {
+  const conditionalStartRegex = /@if *\( *((?:.|\n)+?) *(==|!=) *((?:.|\n)+?)\) *[ \n]*\{/g
+  const conditionalElseStartRegex = /^ *@else *\{/
+
+  let match
+  while ((match = conditionalStartRegex.exec(source)) != null) {
+    const [matchedConditionalStartText, left, operation, right] = match
+    const afterMatchedTextIndex = match.index + matchedConditionalStartText.length
+
+    const matchingClosingBracketIndex = findMatchingClosingBracketIndex(source, afterMatchedTextIndex)
+    if (matchingClosingBracketIndex < 0) {
+      // TODO: warn user?
+      continue
+    }
+
+    let conditionalEndingIndex = matchingClosingBracketIndex
+
+    const trueBlockContent = source.substring(afterMatchedTextIndex, matchingClosingBracketIndex)
+    let falseBlockContent = ""
+
+    const elseMatch = conditionalElseStartRegex.exec(source.substring(matchingClosingBracketIndex + 1))
+    if (elseMatch != null) {
+      const afterElseMatchedTextIndex = matchingClosingBracketIndex + 1 + elseMatch[0].length
+      const matchingClosingBracketForElseIndex = findMatchingClosingBracketIndex(source, afterElseMatchedTextIndex)
+      if (matchingClosingBracketForElseIndex > 0) {
+        falseBlockContent = source.substring(afterElseMatchedTextIndex, matchingClosingBracketForElseIndex)
+        conditionalEndingIndex = matchingClosingBracketForElseIndex
+      } // TODO: else warn user?
+    }
+
+    let passed = null
+    const sanitizedLeft = left.trimEnd()
+    const sanitizedRight = right.trimStart()
+    switch (operation) {
+      case "==": {
+        passed = sanitizedLeft === sanitizedRight
+        break
+      }
+      case "!=": {
+        passed = sanitizedLeft !== sanitizedRight
+        break
+      }
+      // TODO: contains operator, regex operator?
+    }
+
+    const finalContent = passed ? trueBlockContent : falseBlockContent
+    source = replaceBetween(
+      source,
+      finalContent,
+      match.index,
+      conditionalEndingIndex + 1
+    )
+    // reset regex last index to right on the replaced content, to allow for nested `@if`s
+    conditionalStartRegex.lastIndex = match.index
+  }
+
+  return source
 }
 
 function compileVariables(joinedItems) {
