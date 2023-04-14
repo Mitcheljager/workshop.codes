@@ -17,7 +17,7 @@ export function compile(overwriteContent = null) {
 
   joinedItems = joinedItems.replace(settings, "")
   joinedItems = extractAndInsertMixins(joinedItems)
-  joinedItems = extractAndInsertConditionals(joinedItems)
+  joinedItems = evaluateConditionals(joinedItems)
   joinedItems = convertTranslations(joinedItems)
 
   const variables = compileVariables(joinedItems)
@@ -165,7 +165,7 @@ function findMatchingClosingBracketIndex(source, fromIndex) {
  * @param {string} source
  * @returns {string}
  */
-function extractAndInsertConditionals(source) {
+function evaluateConditionals(source) {
   const conditionalStartRegex = /@if *\( *((?:.|\n)+?) *(==|!=) *((?:.|\n)+?)\) *[ \n]*\{/g
   const conditionalElseStartRegex = / *@else *\{/
 
@@ -208,6 +208,7 @@ function extractAndInsertConditionals(source) {
         passed = sanitizedLeft !== sanitizedRight
         break
       }
+      case ""
       // TODO: contains operator, regex operator?
     }
 
