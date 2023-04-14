@@ -49,9 +49,6 @@ export function duplicateItem(item, newParent = null) {
   newItem.parent = newParent || item.parent
   newItem.hidden = item.hidden
 
-  console.log(newItem.id)
-  console.log(newItem.parent, newParent)
-
   items.set([...get(items), newItem])
 
   if (item.type == "folder") {
