@@ -1,4 +1,4 @@
-import { currentItem, items, openFolders, projects, editorStates } from "../stores/editor"
+import { currentItem, items, openFolders, editorStates } from "../stores/editor"
 import { defaultLanguage, selectedLanguages, translationKeys } from "../stores/translationKeys"
 import { get } from "svelte/store"
 
@@ -41,6 +41,22 @@ export function isAnyParentHidden(item) {
   }
 
   return false
+}
+
+export function duplicateItem(item, newParent = null) {
+  const name = newParent ? item.name : item.name + " (Copy)"
+  const newItem = createNewItem(name, item.content, item.position, item.type)
+  newItem.parent = newParent || item.parent
+  newItem.hidden = item.hidden
+
+  console.log(newItem.id)
+  console.log(newItem.parent, newParent)
+
+  items.set([...get(items), newItem])
+
+  if (item.type == "folder") {
+    get(items).filter(i => i.parent == item.id).forEach(i => duplicateItem(i, newItem.id))
+  }
 }
 
 export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {
@@ -175,6 +191,7 @@ export async function updateStateForId(id, insert) {
 
 export function toggleFolderState(item, state, set = true) {
   if (item?.type != "folder") return
+
 
   if (set) localStorage.setItem(`folder_expanded_${ item.id }`, state)
 

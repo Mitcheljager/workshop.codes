@@ -4,6 +4,7 @@
   import { isAnyParentHidden, toggleFolderState } from "../../utils/editor"
   import EditorItemDestroy from "./EditorItemDestroy.svelte"
   import EditorItemHide from "./EditorItemHide.svelte"
+  import EditorItemDuplicate from "./EditorItemDuplicate.svelte"
   import EditorItemName from "./EditorItemName.svelte"
   import EditorList from "./EditorList.svelte"
 
@@ -39,6 +40,7 @@
   </div>
 
   <div class="editor-item__actions">
+    <EditorItemDuplicate {item} />
     <EditorItemHide {item} />
     <EditorItemDestroy {item} />
   </div>
