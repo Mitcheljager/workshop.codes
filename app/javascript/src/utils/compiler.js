@@ -56,7 +56,10 @@ function extractAndInsertMixins(joinedItems) {
   const mixinRegex = /@mixin/g
   let match
   while ((match = mixinRegex.exec(joinedItems)) != null) {
-    const closing = getClosingBracket(joinedItems, "{", "}", match.index)
+    let closing = getClosingBracket(joinedItems, "{", "}", match.index)
+    if (closing < 0) {
+      closing = joinedItems.length
+    }
     const content = joinedItems.slice(match.index, closing)
     const name = content.match(/(?<=@mixin\s)(\w+)/)?.[0]
 
@@ -66,6 +69,9 @@ function extractAndInsertMixins(joinedItems) {
     const firstOpenBracket = content.indexOf("{")
     const firstOpenParen = content.indexOf("(")
     const closingParen = getClosingBracket(content, "(", ")", firstOpenParen - 1)
+    if (closingParen < 0) {
+      continue
+    }
     const params = content.slice(firstOpenParen + 1, closingParen).replace(/\s/, "").split(",")
     const paramsDefaults = params
       .map(param => {
@@ -92,7 +98,10 @@ function extractAndInsertMixins(joinedItems) {
   while (joinedItems.indexOf("@include") != -1) {
     // Get arguments
     const index = joinedItems.indexOf("@include")
-    const closing = getClosingBracket(joinedItems, "(", ")", index + 1)
+    let closing = getClosingBracket(joinedItems, "(", ")", index + 1)
+    if (closing < 0) {
+      closing = joinedItems.length
+    }
     const full = joinedItems.slice(index, closing + 1)
     const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
     const mixin = mixins[name]
@@ -100,8 +109,11 @@ function extractAndInsertMixins(joinedItems) {
     if (!mixin) throw new Error(`Included a mixin that was not specified: "${ name }"`)
 
     const argumentsOpeningParen = full.indexOf("(")
-    const argumentsclosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
-    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsclosingParen)
+    const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
+    if (argumentsClosingParen < 0) {
+      continue
+    }
+    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
     const splitArguments = splitArgumentsString(argumentsString) || []
 
     let replaceWith = mixin.content
@@ -111,7 +123,10 @@ function extractAndInsertMixins(joinedItems) {
     let fullMixin
     let contents
     if (mixin.hasContents) {
-      const contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
+      let contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
+      if (contentsClosing) {
+        contentsClosing = joinedItems.length
+      }
       fullMixin = joinedItems.slice(index, contentsClosing + 1)
 
       const contentsOpening = fullMixin.indexOf("{")
@@ -165,6 +180,8 @@ function evaluateConditionals(source) {
       if (matchingClosingBracketForElseIndex > 0) {
         falseBlockContent = source.substring(afterElseMatchedTextIndex, matchingClosingBracketForElseIndex)
         conditionalEndingIndex = matchingClosingBracketForElseIndex
+      } else {
+        continue
       }
     }
 
@@ -236,11 +253,17 @@ function convertTranslations(joinedItems) {
   const includeRegex = /@translate/g
   while ((match = includeRegex.exec(joinedItems)) != null) {
     const closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
+    if (closing < 0) {
+      continue
+    }
     const full = joinedItems.slice(match.index, closing + 1)
 
     const argumentsOpeningParen = full.indexOf("(")
-    const argumentsclosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
-    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsclosingParen)
+    const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
+    if (argumentsClosingParen < 0) {
+      continue
+    }
+    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
     const splitArguments = splitArgumentsString(argumentsString) || []
     const key = splitArguments[0].replaceAll("\"", "")
 
