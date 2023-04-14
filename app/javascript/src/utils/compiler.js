@@ -154,8 +154,8 @@ function extractAndInsertMixins(joinedItems) {
 }
 
 const conditionalOperations = {
-  "==": (l, r) => l === r,
-  "!=": (l, r) => l !== r
+  "is not": (l, r) => l !== r,
+  "is": (l, r) => l === r
 }
 
 function evaluateConditionals(joinedItems) {
