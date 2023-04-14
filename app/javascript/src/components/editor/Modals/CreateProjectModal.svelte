@@ -54,7 +54,7 @@
     <div class="modal__content p-0" transition:fly={{ y: 100, duration: 200 }}>
       {#if !$isSignedIn}
         <div class="warning warning--orange">
-          You are not signed in and this is for demonstration purposes only. This will not be saved.
+          You are not signed in and this is for demonstration purposes only. Any changes you make will not be saved.
         </div>
       {/if}
 
