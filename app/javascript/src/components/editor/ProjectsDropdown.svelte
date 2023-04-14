@@ -45,7 +45,7 @@
   }
 
   async function duplicateProject() {
-    if (!confirm("This will create a copy of the current project. Please confirm!")) return
+    if (!confirm("This will create a copy of the current project. Do you want to continue?")) return
 
     loading = true
 
