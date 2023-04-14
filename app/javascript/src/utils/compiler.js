@@ -138,33 +138,6 @@ function extractAndInsertMixins(joinedItems) {
   return joinedItems
 }
 
-/**
- * @param {string} source
- * @param {number} fromIndex
- * @returns
- */
-function findMatchingClosingBracketIndex(source, fromIndex) {
-  let result = -1
-  let currentDepth = 1
-  for (let i = fromIndex; i < source.length; i++) {
-    const char = source[i]
-    if (char === "{") {
-      currentDepth++
-    } else if (char === "}") {
-      currentDepth--
-      if (currentDepth <= 0) {
-        result = i
-        break
-      }
-    }
-  }
-  return result
-}
-
-/**
- * @param {string} source
- * @returns {string}
- */
 function evaluateConditionals(source) {
   const conditionalStartRegex = /@if *\( *((?:.|\n)+?) *(==|!=) *((?:.|\n)+?)\) *[ \n]*\{/g
   const conditionalElseStartRegex = / *@else *\{/
@@ -174,22 +147,22 @@ function evaluateConditionals(source) {
     const [matchedConditionalStartText, left, operation, right] = match
     const afterMatchedTextIndex = match.index + matchedConditionalStartText.length
 
-    const matchingClosingBracketIndex = findMatchingClosingBracketIndex(source, afterMatchedTextIndex)
-    if (matchingClosingBracketIndex < 0) {
+    const afterClosingBracketIndex = getClosingBracket(source, "{", "}", afterMatchedTextIndex - 2)
+    if (afterClosingBracketIndex < 0) {
       // TODO: warn user?
       continue
     }
 
-    let conditionalEndingIndex = matchingClosingBracketIndex
+    let conditionalEndingIndex = afterClosingBracketIndex - 1
 
-    const trueBlockContent = source.substring(afterMatchedTextIndex, matchingClosingBracketIndex)
+    const trueBlockContent = source.substring(afterMatchedTextIndex, afterClosingBracketIndex)
     let falseBlockContent = ""
 
-    conditionalElseStartRegex.lastIndex = matchingClosingBracketIndex
+    conditionalElseStartRegex.lastIndex = afterClosingBracketIndex - 1
     const elseMatch = conditionalElseStartRegex.exec(source)
     if (elseMatch != null) {
       const afterElseMatchedTextIndex = elseMatch.index + elseMatch[0].length
-      const matchingClosingBracketForElseIndex = findMatchingClosingBracketIndex(source, afterElseMatchedTextIndex)
+      const matchingClosingBracketForElseIndex = getClosingBracket(source, "{", "}", afterElseMatchedTextIndex - 2)
       if (matchingClosingBracketForElseIndex > 0) {
         falseBlockContent = source.substring(afterElseMatchedTextIndex, matchingClosingBracketForElseIndex)
         conditionalEndingIndex = matchingClosingBracketForElseIndex
