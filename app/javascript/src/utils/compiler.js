@@ -153,8 +153,13 @@ function extractAndInsertMixins(joinedItems) {
   return joinedItems
 }
 
+const conditionalOperations = {
+  "==": (l, r) => l === r,
+  "!=": (l, r) => l !== r
+}
+
 function evaluateConditionals(joinedItems) {
-  const conditionalStartRegex = /@if *\( *((?:.|\n)+?) *(==|!=) *((?:.|\n)+?)\) *[ \n]*\{/g
+  const conditionalStartRegex = new RegExp(`@if *\\( *((?:.|\\n)+?) *(${ Object.keys(conditionalOperations).join("|") }) *((?:.|\\n)+?)\\) *[ \\n]*\\{`, "g")
   const conditionalElseStartRegex = / *@else *\{/
 
   let match
@@ -185,20 +190,9 @@ function evaluateConditionals(joinedItems) {
       }
     }
 
-    let passed = null
     const sanitizedLeft = left.trimEnd()
     const sanitizedRight = right.trimStart()
-    switch (operation) {
-      case "==": {
-        passed = sanitizedLeft === sanitizedRight
-        break
-      }
-      case "!=": {
-        passed = sanitizedLeft !== sanitizedRight
-        break
-      }
-      // TODO: contains operator, regex operator?
-    }
+    const passed = conditionalOperations[operation]?.(sanitizedLeft, sanitizedRight)
 
     const finalContent = passed ? trueBlockContent : falseBlockContent
     joinedItems = replaceBetween(
