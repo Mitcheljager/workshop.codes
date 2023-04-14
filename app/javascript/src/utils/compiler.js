@@ -167,7 +167,7 @@ function findMatchingClosingBracketIndex(source, fromIndex) {
  */
 function extractAndInsertConditionals(source) {
   const conditionalStartRegex = /@if *\( *((?:.|\n)+?) *(==|!=) *((?:.|\n)+?)\) *[ \n]*\{/g
-  const conditionalElseStartRegex = /^ *@else *\{/
+  const conditionalElseStartRegex = / *@else *\{/
 
   let match
   while ((match = conditionalStartRegex.exec(source)) != null) {
@@ -185,9 +185,10 @@ function extractAndInsertConditionals(source) {
     const trueBlockContent = source.substring(afterMatchedTextIndex, matchingClosingBracketIndex)
     let falseBlockContent = ""
 
-    const elseMatch = conditionalElseStartRegex.exec(source.substring(matchingClosingBracketIndex + 1))
+    conditionalElseStartRegex.lastIndex = matchingClosingBracketIndex
+    const elseMatch = conditionalElseStartRegex.exec(source)
     if (elseMatch != null) {
-      const afterElseMatchedTextIndex = matchingClosingBracketIndex + 1 + elseMatch[0].length
+      const afterElseMatchedTextIndex = elseMatch.index + elseMatch[0].length
       const matchingClosingBracketForElseIndex = findMatchingClosingBracketIndex(source, afterElseMatchedTextIndex)
       if (matchingClosingBracketForElseIndex > 0) {
         falseBlockContent = source.substring(afterElseMatchedTextIndex, matchingClosingBracketForElseIndex)
