@@ -208,7 +208,6 @@ function evaluateConditionals(source) {
         passed = sanitizedLeft !== sanitizedRight
         break
       }
-      case ""
       // TODO: contains operator, regex operator?
     }
 
