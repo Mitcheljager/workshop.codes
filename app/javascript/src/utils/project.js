@@ -112,7 +112,7 @@ export async function renameCurrentProject(value) {
 export async function destroyCurrentProject() {
   return await new FetchRails(`/projects/${ get(currentProjectUUID) }`).post({ method: "delete" })
     .then(data => {
-      if (!data) throw Error("Create failed")
+      if (!data) throw Error("Destroying current project failed")
 
       projects.set(get(projects).filter(p => p.uuid != get(currentProjectUUID)))
       currentProjectUUID.set(null)
