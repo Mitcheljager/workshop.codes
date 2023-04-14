@@ -189,7 +189,6 @@ export async function updateStateForId(id, insert) {
 export function toggleFolderState(item, state, set = true) {
   if (item?.type != "folder") return
 
-
   if (set) localStorage.setItem(`folder_expanded_${ item.id }`, state)
 
   if (state) openFolders.set([...get(openFolders), item.id])
