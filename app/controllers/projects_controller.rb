@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create(title: project_params[:title], content_type: project_params[:content_type], user_id: current_user.id)
+    @project.content = project_params[:content] if project_params[:content].present?
     @project.is_owner = current_user.id == @project.user_id
 
     if @project.save
