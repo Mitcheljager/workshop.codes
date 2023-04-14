@@ -153,9 +153,28 @@ function extractAndInsertMixins(joinedItems) {
   return joinedItems
 }
 
+const regexRegex = /^\/(.+)\/(\w*)$/
+
 const conditionalOperations = {
+  // order is deliberate as to not make RegExp work too much
   "is not": (l, r) => l !== r,
-  "is": (l, r) => l === r
+  "is": (l, r) => l === r,
+  "contains": (l, r) => l.includes(r),
+  "test": (l, r) => {
+    const match = r.match(regexRegex)
+    if (!match) {
+      // TODO: mark in linter
+      return false
+    }
+    const [_, pattern, flags] = match
+    let regex
+    try {
+      regex = new RegExp(pattern, flags)
+    } catch (err) {
+      return false
+    }
+    return regex.test(l)
+  }
 }
 
 function evaluateConditionals(joinedItems) {
