@@ -177,9 +177,9 @@ const conditionalOperations = {
 }
 
 function evaluateConditionals(joinedItems) {
-  const ifStartRegex = /@if[ \n]*\(/g
-  const startBracketRegex = /[ \n]*\{/g
-  const elseStartRegex = /[ \n]*@else[ \n]*\{/g
+  const ifStartRegex = /@if[\s\n]*\(/g
+  const startBracketRegex = /[\s\n]*\{/g
+  const elseStartRegex = /[\s\n]*@else[\s\n]*\{/g
   const operatorRegex = new RegExp(`(?<=\\b)(${ Object.keys(conditionalOperations).join("|") })(?=\\b)`)
 
   let match
