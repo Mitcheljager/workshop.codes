@@ -156,14 +156,13 @@ function extractAndInsertMixins(joinedItems) {
 const regexRegex = /^\/(.+)\/(\w*)$/
 
 const conditionalOperations = {
-  // order is deliberate as to not make RegExp work too much
+  // order is deliberate so longer operators match first
   "is not": (l, r) => l !== r,
   "is": (l, r) => l === r,
   "contains": (l, r) => l.includes(r),
   "test": (l, r) => {
     const match = r.match(regexRegex)
     if (!match) {
-      // TODO: mark in linter
       return false
     }
     const [_, pattern, flags] = match
@@ -178,27 +177,50 @@ const conditionalOperations = {
 }
 
 function evaluateConditionals(joinedItems) {
-  const conditionalStartRegex = new RegExp(`@if[ \\n]*\\([ \\n]*((?:.|\\n)+?)[ \\n]*(${ Object.keys(conditionalOperations).join("|") })[ \\n]*((?:.|\\n)+?)[ \\n]*\\)[ \\n]*\\{`, "g")
-  const conditionalElseStartRegex = /[ \n]*@else[ \n]*\{/
+  const ifStartRegex = /@if[ \n]*\(/g
+  const startBracketRegex = /[ \n]*\{/g
+  const elseStartRegex = /[ \n]*@else[ \n]*\{/g
+  const operatorRegex = new RegExp(`(?<=\\b)(${ Object.keys(conditionalOperations).join("|") })(?=\\b)`)
 
   let match
-  while ((match = conditionalStartRegex.exec(joinedItems)) != null) {
-    const [matchedConditionalStartText, left, operation, right] = match
-    const afterMatchedTextIndex = match.index + matchedConditionalStartText.length
-
-    const afterClosingBracketIndex = getClosingBracket(joinedItems, "{", "}", afterMatchedTextIndex - 2)
-    if (afterClosingBracketIndex < 0) {
+  while ((match = ifStartRegex.exec(joinedItems)) != null) {
+    const openingConditionParenIndex = match.index + match[0].length - 1
+    const closingConditionParenIndex = getClosingBracket(joinedItems, "(", ")", openingConditionParenIndex - 1)
+    if (closingConditionParenIndex < 0) {
       continue
     }
 
-    let conditionalEndingIndex = afterClosingBracketIndex - 1
+    const conditionStr = joinedItems.substring(openingConditionParenIndex + 1, closingConditionParenIndex)
 
-    const trueBlockContent = joinedItems.substring(afterMatchedTextIndex, afterClosingBracketIndex)
+    const operatorMatch = operatorRegex.exec(conditionStr)
+    if (operatorMatch == null) {
+      continue
+    }
+
+    const operator = operatorMatch[1]
+    const lefthand = conditionStr.substring(0, operatorMatch.index).trimEnd()
+    const righthand = conditionStr.substring(operatorMatch.index + operator.length).trimStart()
+
+    startBracketRegex.lastIndex = closingConditionParenIndex + 1 // set start position for the exec below
+    const startBracketMatch = startBracketRegex.exec(joinedItems)
+    if (startBracketMatch == null || startBracketMatch.index !== closingConditionParenIndex + 1) {
+      continue
+    }
+
+    const openingBracketIndex = startBracketMatch.index + startBracketMatch[0].length - 1
+    const closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingBracketIndex - 1)
+    if (closingBracketIndex < 0) {
+      continue
+    }
+
+    let conditionalEndingIndex = closingBracketIndex
+
+    const trueBlockContent = joinedItems.substring(openingBracketIndex + 1, closingBracketIndex)
     let falseBlockContent = ""
 
-    conditionalElseStartRegex.lastIndex = afterClosingBracketIndex - 1 // set start position for the exec below
-    const elseMatch = conditionalElseStartRegex.exec(joinedItems)
-    if (elseMatch != null) {
+    elseStartRegex.lastIndex = closingBracketIndex + 1 // set start position for the exec below
+    const elseMatch = elseStartRegex.exec(joinedItems)
+    if (elseMatch != null && elseMatch.index === closingBracketIndex + 1) {
       const afterElseMatchedTextIndex = elseMatch.index + elseMatch[0].length
       const matchingClosingBracketForElseIndex = getClosingBracket(joinedItems, "{", "}", afterElseMatchedTextIndex - 2)
       if (matchingClosingBracketForElseIndex > 0) {
@@ -209,9 +231,7 @@ function evaluateConditionals(joinedItems) {
       }
     }
 
-    const sanitizedLeft = left.trimEnd()
-    const sanitizedRight = right.trimStart()
-    const passed = conditionalOperations[operation]?.(sanitizedLeft, sanitizedRight)
+    const passed = conditionalOperations[operator]?.(lefthand, righthand)
 
     const finalContent = passed ? trueBlockContent : falseBlockContent
     joinedItems = replaceBetween(
@@ -221,7 +241,7 @@ function evaluateConditionals(joinedItems) {
       conditionalEndingIndex + 1
     )
     // reset regex last index to right on the replaced content, to allow for nested `@if`s
-    conditionalStartRegex.lastIndex = match.index
+    ifStartRegex.lastIndex = match.index
   }
 
   return joinedItems
