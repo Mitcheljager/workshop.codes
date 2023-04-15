@@ -153,26 +153,117 @@ function extractAndInsertMixins(joinedItems) {
   return joinedItems
 }
 
-const regexRegex = /^\/(.+)\/(\w*)$/
-
 const conditionalOperations = {
-  // order is deliberate so longer operators match first
-  "is not": (l, r) => l !== r,
-  "is": (l, r) => l === r,
-  "contains": (l, r) => l.includes(r),
-  "test": (l, r) => {
-    const match = r.match(regexRegex)
-    if (!match) {
-      return false
+  "is not": {
+    eval: (l, r) => l !== r
+  },
+  "is": {
+    eval: (l, r) => l === r
+  },
+  "contains": {
+    eval: (l, r) => l.includes(r)
+  },
+  "test": {
+    _regexRegex: /^\/(.+)\/(\w*)$/,
+    eval(l, r) {
+      const match = r.match(this._regexRegex)
+      if (!match) {
+        return false
+      }
+      const [_, pattern, flags] = match
+      let regex
+      try {
+        regex = new RegExp(pattern, flags)
+      } catch (err) {
+        return false
+      }
+      return regex.test(l)
     }
-    const [_, pattern, flags] = match
-    let regex
-    try {
-      regex = new RegExp(pattern, flags)
-    } catch (err) {
-      return false
+  }
+}
+
+const sortedConditionalOperationSymbols = Object.keys(conditionalOperations)
+
+function removeSurroundingParenthesis(source) {
+  const openMatch = /^[\s\n]*\(/.exec(source)
+  const closeMatch = /\)[\s\n]*$/.exec(source)
+  return openMatch != null && closeMatch != null
+    ? removeSurroundingParenthesis(source.substring(openMatch.index + openMatch[0].length, closeMatch.index))
+    : source
+}
+
+function getOperationsTree(expression) {
+  expression = removeSurroundingParenthesis(expression)
+
+  const result = {
+    DEBUG__input: expression
+  }
+
+  for (let currentIndex = 0; currentIndex < expression.length; currentIndex++) {
+    const char = expression[currentIndex]
+    if (char === "(") {
+      const closingIndex = getClosingBracket(expression, "(", ")", currentIndex - 1)
+      if (closingIndex < 0) {
+        // parentheses are open-ended, like "(a == b"
+        result.invalid = true
+        break
+      }
+      currentIndex = closingIndex
+    } else {
+      let operatorSymbol = null
+      let operatorIndex = -1
+      for (const symbol of sortedConditionalOperationSymbols) {
+        const index = expression.indexOf(symbol, currentIndex)
+        if (index >= 0) {
+          operatorSymbol = symbol
+          operatorIndex = index
+          break
+        }
+      }
+
+      if (operatorSymbol == null) {
+        result.value = expression
+        break
+      }
+
+      if (result.operator == null) {
+        const lefthand = expression.substring(0, operatorIndex)
+        const righthand = expression.substring(operatorIndex + operatorSymbol.length)
+
+        result.operator = operatorSymbol
+        result.arguments = []
+
+        if (lefthand.length > 0) {
+          result.arguments.push(getOperationsTree(lefthand))
+        } else {
+          result.invalid = true
+          break
+        }
+        if (righthand.length > 0) {
+          result.arguments.push(getOperationsTree(righthand))
+        } else {
+          result.invalid = true
+          break
+        }
+
+        break
+      }
     }
-    return regex.test(l)
+  }
+
+  return result
+}
+
+function evaluateOperationsTree(tree) {
+  if (tree.invalid) {
+    return null
+  } else if (tree.value) {
+    return tree.value.trim()
+  } else {
+    const evaluatedArguments = tree.arguments.map((argument) => evaluateOperationsTree(argument))
+    const result = conditionalOperations[tree.operator].eval(... evaluatedArguments)
+    console.log(evaluatedArguments, tree.operator, result)
+    return result
   }
 }
 
@@ -180,7 +271,6 @@ function evaluateConditionals(joinedItems) {
   const ifStartRegex = /@if[\s\n]*\(/g
   const startBracketRegex = /[\s\n]*\{/g
   const elseStartRegex = /[\s\n]*@else[\s\n]*\{/g
-  const operatorRegex = new RegExp(`(?<=\\b)(${ Object.keys(conditionalOperations).join("|") })(?=\\b)`)
 
   let match
   while ((match = ifStartRegex.exec(joinedItems)) != null) {
@@ -190,16 +280,8 @@ function evaluateConditionals(joinedItems) {
       continue
     }
 
-    const conditionStr = joinedItems.substring(openingConditionParenIndex + 1, closingConditionParenIndex)
-
-    const operatorMatch = operatorRegex.exec(conditionStr)
-    if (operatorMatch == null) {
-      continue
-    }
-
-    const operator = operatorMatch[1]
-    const lefthand = conditionStr.substring(0, operatorMatch.index).trimEnd()
-    const righthand = conditionStr.substring(operatorMatch.index + operator.length).trimStart()
+    const conditionExpression = joinedItems.substring(openingConditionParenIndex + 1, closingConditionParenIndex)
+    const operationsTree = getOperationsTree(conditionExpression)
 
     startBracketRegex.lastIndex = closingConditionParenIndex + 1 // set start position for the exec below
     const startBracketMatch = startBracketRegex.exec(joinedItems)
@@ -231,7 +313,7 @@ function evaluateConditionals(joinedItems) {
       }
     }
 
-    const passed = conditionalOperations[operator]?.(lefthand, righthand)
+    const passed = evaluateOperationsTree(operationsTree)
 
     const finalContent = passed ? trueBlockContent : falseBlockContent
     joinedItems = replaceBetween(
