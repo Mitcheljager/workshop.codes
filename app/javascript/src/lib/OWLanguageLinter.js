@@ -16,6 +16,7 @@ export function OWLanguageLinter(view) {
   findExtraSemicolons(content)
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
+  findConditionalsRegexErrors(content)
   checkMixins(content)
   checkTranslations(content)
 
@@ -431,5 +432,37 @@ function findTrailingCommas(content) {
       severity: "error",
       message: "Trailing commas are not allowed"
     })
+  }
+}
+
+function findConditionalsRegexErrors(content) {
+  const regex = /(test[ \n]*)(.*)[ \n]*\)[ \n]*\{/g // matches " test righthand) {" and " /regex/flags) {"
+  const regexRegex = /\/(.*)\/(\w*)/ // TODO: share this with compiler.js?
+  let match
+  while ((match = regex.exec(content)) != null) {
+    const [_, beforeRighthand, righthand] = match
+    const righthandIsRegexMatch = righthand.match(regexRegex)
+    const from = match.index + beforeRighthand.length
+    const to = match.index + beforeRighthand.length + righthand.length
+    if (righthandIsRegexMatch) {
+      const [_, pattern, flags] = righthandIsRegexMatch
+      try {
+        new RegExp(pattern, flags)
+      } catch (err) {
+        diagnostics.push({
+          from,
+          to,
+          severity: "error",
+          message: `Invalid RegExp: ${ err }`
+        })
+      }
+    } else {
+      diagnostics.push({
+        from,
+        to,
+        severity: "error",
+        message: "Expected a RegExp for the righthand side of this test"
+      })
+    }
   }
 }
