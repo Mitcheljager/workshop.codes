@@ -328,7 +328,7 @@ function convertTranslations(joinedItems) {
 
 function evaluateForLoops(joinedItems) {
   let match
-  const forRegex = /@for\s+(?:(\w+)\s+)?(?:from\s+)?(\d+)\s+(?:through\s+)?(\d+)\s*\{/g // Matches "@for [var] [from] number through number" in groups for each param
+  const forRegex = /@for\s+\(\s*(?:(\w+)\s+)?(?:from\s+)?(\d+)\s+(?:through\s+)?(\d+)\s*\)\s*\{/g // Matches "@for [var] [from] number through number" in groups for each param
   while ((match = forRegex.exec(joinedItems)) != null) {
     const [full, variable, start, end] = match
 
