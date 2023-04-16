@@ -44,7 +44,13 @@ export function isAnyParentHidden(item) {
 }
 
 export function duplicateItem(item, newParent = null) {
-  const name = newParent ? item.name : item.name + " (Copy)"
+  const itemCount = get(items).filter(i => {
+    if (i.parent != item.parent) return false
+    return i.name.match(/\(Copy(?: \d+)?\)/g)
+  })?.length
+
+  const copyString = ` (Copy${ itemCount ? ` ${ itemCount + 1 }` : "" })`
+  const name = newParent ? item.name : (item.name.replace(/\s\(Copy(?: \d+)?\)/g, "") + copyString)
   const newItem = createNewItem(name, item.content, item.position, item.type)
   newItem.parent = newParent || item.parent
   newItem.hidden = item.hidden
