@@ -154,16 +154,16 @@ function extractAndInsertMixins(joinedItems) {
 }
 
 const conditionalOperations = {
-  "is not": {
-    eval: (l, r) => l !== r
-  },
-  "is": {
+  "==": {
     eval: (l, r) => l === r
   },
-  "contains": {
+  "!=": {
+    eval: (l, r) => l !== r
+  },
+  "*=": {
     eval: (l, r) => l.includes(r)
   },
-  "test": {
+  "~=": {
     _regexRegex: /^\/(.+)\/(\w*)$/,
     eval(l, r) {
       const match = r.match(this._regexRegex)
