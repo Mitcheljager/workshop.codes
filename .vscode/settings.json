@@ -1,4 +1,14 @@
 {
   "eslint.enable": true,
   "eslint.validate": ["svelte", "javascript"],
+  "[svelte]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
 }
