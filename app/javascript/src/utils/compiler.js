@@ -153,7 +153,7 @@ function extractAndInsertMixins(joinedItems) {
   return joinedItems
 }
 
-const conditionalOperations = {
+const comparisonOperators = {
   "!": {
     type: "unary-left",
     order: -1,
@@ -205,11 +205,11 @@ const conditionalOperations = {
   }
 }
 
-const sortedConditionalOperationSymbols = Object.keys(conditionalOperations)
+const sortedComparisonOperatorsSymbols = Object.keys(comparisonOperators)
   .sort((a, b) => {
-    // sort descending by order, so higher order operations are matched first
+    // sort descending by order, so higher order operators are matched first
     // and the evaluation works with normal logic
-    const orderRank = conditionalOperations[b].order - conditionalOperations[a].order
+    const orderRank = comparisonOperators[b].order - comparisonOperators[a].order
     if (orderRank === 0) {
       // sort descending by length, so longer operators are matched first
       // and we don't potentially skip the shorter ones
@@ -228,7 +228,7 @@ function removeSurroundingParenthesis(source) {
     : source
 }
 
-function getOperationsTree(expression) {
+function getExpressionTree(expression) {
   expression = removeSurroundingParenthesis(expression)
 
   const result = {
@@ -248,7 +248,7 @@ function getOperationsTree(expression) {
     } else {
       let operatorSymbol = null
       let operatorIndex = -1
-      for (const symbol of sortedConditionalOperationSymbols) {
+      for (const symbol of sortedComparisonOperatorsSymbols) {
         const index = expression.indexOf(symbol, currentIndex)
         if (index >= 0) {
           operatorSymbol = symbol
@@ -262,7 +262,7 @@ function getOperationsTree(expression) {
         break
       }
 
-      const operator = conditionalOperations[operatorSymbol]
+      const operator = comparisonOperators[operatorSymbol]
 
       if (result.operator == null) {
         const lefthand = expression.substring(0, operatorIndex)
@@ -273,7 +273,7 @@ function getOperationsTree(expression) {
 
         if (["binary", "unary-right"].includes(operator.type)) {
           if (lefthand.length > 0) {
-            result.arguments.push(getOperationsTree(lefthand))
+            result.arguments.push(getExpressionTree(lefthand))
           } else {
             result.invalid = true
             break
@@ -281,7 +281,7 @@ function getOperationsTree(expression) {
         }
         if (["binary", "unary-left"].includes(operator.type)) {
           if (righthand.length > 0) {
-            result.arguments.push(getOperationsTree(righthand))
+            result.arguments.push(getExpressionTree(righthand))
           } else {
             result.invalid = true
             break
@@ -296,15 +296,15 @@ function getOperationsTree(expression) {
   return result
 }
 
-function evaluateOperationsTree(tree) {
-  if (tree.invalid) {
+function evaluateExpressionTree(node) {
+  if (node.invalid) {
     return null
-  } else if (tree.value) {
-    return tree.value.trim()
+  } else if (node.value) {
+    return node.value.trim()
   } else {
-    const evaluatedArguments = tree.arguments.map((argument) => evaluateOperationsTree(argument))
-    const result = conditionalOperations[tree.operator].eval(... evaluatedArguments)
-    console.log(evaluatedArguments, tree.operator, result)
+    const evaluatedArguments = node.arguments.map((argument) => evaluateExpressionTree(argument))
+    const result = comparisonOperators[node.operator].eval(... evaluatedArguments)
+    console.log(evaluatedArguments, node.operator, result)
     return result
   }
 }
@@ -323,7 +323,7 @@ function evaluateConditionals(joinedItems) {
     }
 
     const conditionExpression = joinedItems.substring(openingConditionParenIndex + 1, closingConditionParenIndex)
-    const operationsTree = getOperationsTree(conditionExpression)
+    const conditionExpressionTree = getExpressionTree(conditionExpression)
 
     startBracketRegex.lastIndex = closingConditionParenIndex + 1 // set start position for the exec below
     const startBracketMatch = startBracketRegex.exec(joinedItems)
@@ -355,7 +355,7 @@ function evaluateConditionals(joinedItems) {
       }
     }
 
-    const passed = evaluateOperationsTree(operationsTree)
+    const passed = evaluateExpressionTree(conditionExpressionTree)
 
     const finalContent = passed ? trueBlockContent : falseBlockContent
     joinedItems = replaceBetween(
