@@ -154,16 +154,29 @@ function extractAndInsertMixins(joinedItems) {
 }
 
 const conditionalOperations = {
+  "!": {
+    type: "unary-left",
+    order: -1,
+    eval: (v) => !v
+  },
   "==": {
+    type: "binary",
+    order: 0,
     eval: (l, r) => l === r
   },
   "!=": {
+    type: "binary",
+    order: 0,
     eval: (l, r) => l !== r
   },
   "*=": {
+    type: "binary",
+    order: 0,
     eval: (l, r) => l.includes(r)
   },
   "~=": {
+    type: "binary",
+    order: 0,
     _regexRegex: /^\/(.+)\/(\w*)$/,
     eval(l, r) {
       const match = r.match(this._regexRegex)
@@ -179,10 +192,33 @@ const conditionalOperations = {
       }
       return regex.test(l)
     }
+  },
+  "&&": {
+    type: "binary",
+    order: 1,
+    eval: (l, r) => l && r
+  },
+  "||": {
+    type: "binary",
+    order: 1,
+    eval: (l, r) => l || r
   }
 }
 
 const sortedConditionalOperationSymbols = Object.keys(conditionalOperations)
+  .sort((a, b) => {
+    // sort descending by order, so higher order operations are matched first
+    // and the evaluation works with normal logic
+    const orderRank = conditionalOperations[b].order - conditionalOperations[a].order
+    if (orderRank === 0) {
+      // sort descending by length, so longer operators are matched first
+      // and we don't potentially skip the shorter ones
+      const lengthRank = b.length - a.length
+      return lengthRank
+    } else {
+      return orderRank
+    }
+  })
 
 function removeSurroundingParenthesis(source) {
   const openMatch = /^[\s\n]*\(/.exec(source)
@@ -226,6 +262,8 @@ function getOperationsTree(expression) {
         break
       }
 
+      const operator = conditionalOperations[operatorSymbol]
+
       if (result.operator == null) {
         const lefthand = expression.substring(0, operatorIndex)
         const righthand = expression.substring(operatorIndex + operatorSymbol.length)
@@ -233,17 +271,21 @@ function getOperationsTree(expression) {
         result.operator = operatorSymbol
         result.arguments = []
 
-        if (lefthand.length > 0) {
-          result.arguments.push(getOperationsTree(lefthand))
-        } else {
-          result.invalid = true
-          break
+        if (["binary", "unary-right"].includes(operator.type)) {
+          if (lefthand.length > 0) {
+            result.arguments.push(getOperationsTree(lefthand))
+          } else {
+            result.invalid = true
+            break
+          }
         }
-        if (righthand.length > 0) {
-          result.arguments.push(getOperationsTree(righthand))
-        } else {
-          result.invalid = true
-          break
+        if (["binary", "unary-left"].includes(operator.type)) {
+          if (righthand.length > 0) {
+            result.arguments.push(getOperationsTree(righthand))
+          } else {
+            result.invalid = true
+            break
+          }
         }
 
         break
