@@ -330,7 +330,6 @@ function evaluateForLoops(joinedItems) {
   let match
   const forRegex = /@for\s+\(\s*((?:(\w+)\s+)?(?:from\s+))?(\d+)\s+(?:(through|to)\s+)?(\d+)\s*\)\s*\{/g // Matches "@for ([var] [from] number through|to number) {" in groups for each param
   while ((match = forRegex.exec(joinedItems)) != null) {
-    console.log(match)
     const [full, _, variable, start, clusivity, end] = match
 
     const inclusive = clusivity === "through"
