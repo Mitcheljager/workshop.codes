@@ -128,4 +128,24 @@ strong {
   font-size: $font-size-base;
   width: 100%;
   cursor: pointer;
+
+  &[data-tooltip]:hover {
+    position: relative;
+
+    &::after {
+      content: attr(data-tooltip);
+      display: block;
+      background: $bg-dark;
+      position: absolute;
+      right: 0;
+      bottom: -0.25em;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+      transform: translateY(100%);
+      font-size: $font-size-small;
+      color: $text-color-dark;
+      white-space: nowrap;
+      z-index: 2;
+    }
+  }
 }
