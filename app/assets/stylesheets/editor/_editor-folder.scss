@@ -20,6 +20,7 @@
   transition: transform 150ms;
   user-select: none;
   color: $text-color-dark;
+  z-index: 1;
 
   &:hover {
     color: $text-color-light;

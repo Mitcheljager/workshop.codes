@@ -1,4 +1,4 @@
-import { currentItem, items, openFolders, projects, editorStates } from "../stores/editor"
+import { currentItem, items, openFolders, editorStates } from "../stores/editor"
 import { defaultLanguage, selectedLanguages, translationKeys } from "../stores/translationKeys"
 import { get } from "svelte/store"
 
@@ -41,6 +41,25 @@ export function isAnyParentHidden(item) {
   }
 
   return false
+}
+
+export function duplicateItem(item, newParent = null) {
+  const itemCount = get(items).filter(i => {
+    if (i.parent != item.parent) return false
+    return i.name.match(/\(Copy(?: \d+)?\)/g)
+  })?.length
+
+  const copyString = ` (Copy${ itemCount ? ` ${ itemCount + 1 }` : "" })`
+  const name = newParent ? item.name : (item.name.replace(/\s\(Copy(?: \d+)?\)/g, "") + copyString)
+  const newItem = createNewItem(name, item.content, item.position, item.type)
+  newItem.parent = newParent || item.parent
+  newItem.hidden = item.hidden
+
+  items.set([...get(items), newItem])
+
+  if (item.type == "folder") {
+    get(items).filter(i => i.parent == item.id).forEach(i => duplicateItem(i, newItem.id))
+  }
 }
 
 export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {

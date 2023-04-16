@@ -17,7 +17,6 @@ export function OWLanguageLinter(view) {
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
   findConditionalsRegexErrors(content)
-  findConditionalsOperators(content)
   checkMixins(content)
   checkTranslations(content)
 
@@ -465,26 +464,5 @@ function findConditionalsRegexErrors(content) {
         message: "Expected a RegExp for the righthand side of this test"
       })
     }
-  }
-}
-
-function findConditionalsOperators(content) {
-  const regex = /@if\s*\(([\s\S]*?)\)/g // Matches content between ( and ) for @if statements
-  let match
-  while ((match = regex.exec(content)) != null) {
-    const [full, content] = match
-    const shouldContain = ["is", "is not", "equals", "test"]
-
-    if (shouldContain.some(s => content.includes(s))) continue
-
-    const from = match.index
-    const to = match.index + full.length
-
-    diagnostics.push({
-      from,
-      to,
-      severity: "error",
-      message: `Expected any operator of "${ shouldContain.join(", ") }"`
-    })
   }
 }
