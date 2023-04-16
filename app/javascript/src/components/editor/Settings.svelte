@@ -72,7 +72,7 @@
 <svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
 
 <div class="dropdown settings">
-  <button class="button button--secondary button--square" on:click|stopPropagation={() => active = !active}>
+  <button class="button button--secondary button--icon-square" on:click|stopPropagation={() => active = !active}>
     <Cogs />
   </button>
 

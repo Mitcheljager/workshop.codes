@@ -137,4 +137,25 @@
   .spinner {
     margin-bottom: $margin / 8;
   }
+
+  &--icon-square {
+    @extend .button--square;
+
+    display: flex;
+    align-items: center;
+    padding: $margin / 8;
+    height: 100%;
+    background: transparent;
+
+    svg {
+      height: 1.15rem;
+      width: auto;
+      margin-right: 0;
+
+      path {
+        fill: $white;
+      }
+    }
+  }
+
 }

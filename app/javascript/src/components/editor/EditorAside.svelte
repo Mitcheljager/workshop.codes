@@ -15,8 +15,9 @@
 
 <svelte:window on:keydown={keydown} />
 
-<div class="pl-1/4 pr-1/4 pb-1/8">
+<div class="flex align-center justify-between pl-1/4 pr-1/4 pb-1/8">
   <strong>Items</strong>
+  <EditorItemCreate />
 </div>
 
 <div bind:this={element} tabindex="0">
@@ -25,10 +26,4 @@
   {#if !$items?.length}
     <p class="mt-0 mb-0 pl-1/4 pr-1/4 small text-dark"><em>Start by creating a new item using the button below.</em></p>
   {/if}
-
-  <div class="p-1/8 mt-1/4">
-    <EditorItemCreate>
-      <span class="button button--secondary w-100 button--square">Add</span>
-    </EditorItemCreate>
-  </div>
 </div>

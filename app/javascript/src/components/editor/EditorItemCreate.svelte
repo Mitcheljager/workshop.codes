@@ -3,6 +3,7 @@
   import { templates } from "../../lib/templates"
   import { createNewItem } from "../../utils/editor"
   import { items, currentItem } from "../../stores/editor"
+  import Plus from "../icon/Plus.svelte"
 
   let active = false
   let element
@@ -32,13 +33,13 @@
 
 <svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
 
-<div class="dropdown w-100" class:dropup>
-  <button class="empty-button" on:click|stopPropagation={toggle} bind:this={element}>
-    <slot />
+<div class="dropdown" class:dropup>
+  <button class="button button--secondary button--icon-square" on:click|stopPropagation={toggle} bind:this={element}>
+    <Plus />
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100">
+    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content block">
       <button on:click={() => createTemplate("RuleGlobal", "Global Rule")} class="dropdown__item empty-button">Rule - Global</button>
       <button on:click={() => createTemplate("RuleEachPlayer", "Each Player Rule")} class="dropdown__item empty-button">Rule - Each Player</button>
       <button on:click={() => createTemplate("Subroutine", "Subroutine")} class="dropdown__item empty-button">Subroutine</button>
