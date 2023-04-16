@@ -1,5 +1,6 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
+import { comparisonOperators, sortedComparisonOperatorsSymbols } from "./operators"
 import { flatItems } from "../stores/editor"
 import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
 import { languageOptions } from "../lib/languageOptions"
@@ -153,26 +154,91 @@ function extractAndInsertMixins(joinedItems) {
   return joinedItems
 }
 
-const regexRegex = /^\/(.+)\/(\w*)$/
+function removeSurroundingParenthesis(source) {
+  const openMatch = /^[\s\n]*\(/.exec(source)
+  const closeMatch = /\)[\s\n]*$/.exec(source)
+  return openMatch != null && closeMatch != null
+    ? removeSurroundingParenthesis(source.substring(openMatch.index + openMatch[0].length, closeMatch.index))
+    : source
+}
 
-const conditionalOperations = {
-  // order is deliberate so longer operators match first
-  "is not": (l, r) => l !== r,
-  "is": (l, r) => l === r,
-  "contains": (l, r) => l.includes(r),
-  "test": (l, r) => {
-    const match = r.match(regexRegex)
-    if (!match) {
-      return false
+function getExpressionTree(expression) {
+  expression = removeSurroundingParenthesis(expression)
+
+  const result = {
+    DEBUG__input: expression
+  }
+
+  for (let currentIndex = 0; currentIndex < expression.length; currentIndex++) {
+    const char = expression[currentIndex]
+    if (char === "(") {
+      const closingIndex = getClosingBracket(expression, "(", ")", currentIndex - 1)
+      if (closingIndex < 0) {
+        // parentheses are open-ended, like "(a == b"
+        result.invalid = true
+        break
+      }
+      currentIndex = closingIndex
+    } else {
+      let operatorSymbol = null
+      let operatorIndex = -1
+      for (const symbol of sortedComparisonOperatorsSymbols) {
+        const index = expression.indexOf(symbol, currentIndex)
+        if (index >= 0) {
+          operatorSymbol = symbol
+          operatorIndex = index
+          break
+        }
+      }
+
+      if (operatorSymbol == null) {
+        result.value = expression
+        break
+      }
+
+      const operator = comparisonOperators[operatorSymbol]
+
+      if (result.operator == null) {
+        const lefthand = expression.substring(0, operatorIndex)
+        const righthand = expression.substring(operatorIndex + operatorSymbol.length)
+
+        result.operator = operatorSymbol
+        result.arguments = []
+
+        if (["binary", "unary-right"].includes(operator.type)) {
+          if (lefthand.length > 0) {
+            result.arguments.push(getExpressionTree(lefthand))
+          } else {
+            result.invalid = true
+            break
+          }
+        }
+        if (["binary", "unary-left"].includes(operator.type)) {
+          if (righthand.length > 0) {
+            result.arguments.push(getExpressionTree(righthand))
+          } else {
+            result.invalid = true
+            break
+          }
+        }
+
+        break
+      }
     }
-    const [_, pattern, flags] = match
-    let regex
-    try {
-      regex = new RegExp(pattern, flags)
-    } catch (err) {
-      return false
-    }
-    return regex.test(l)
+  }
+
+  return result
+}
+
+function evaluateExpressionTree(node) {
+  if (node.invalid) {
+    return null
+  } else if (node.value) {
+    return node.value.trim()
+  } else {
+    const evaluatedArguments = node.arguments.map((argument) => evaluateExpressionTree(argument))
+    const result = comparisonOperators[node.operator].eval(... evaluatedArguments)
+    return result
   }
 }
 
@@ -180,7 +246,6 @@ function evaluateConditionals(joinedItems) {
   const ifStartRegex = /@if[\s\n]*\(/g
   const startBracketRegex = /[\s\n]*\{/g
   const elseStartRegex = /[\s\n]*@else[\s\n]*\{/g
-  const operatorRegex = new RegExp(`(?<=\\b)(${ Object.keys(conditionalOperations).join("|") })(?=\\b)`)
 
   let match
   while ((match = ifStartRegex.exec(joinedItems)) != null) {
@@ -190,16 +255,8 @@ function evaluateConditionals(joinedItems) {
       continue
     }
 
-    const conditionStr = joinedItems.substring(openingConditionParenIndex + 1, closingConditionParenIndex)
-
-    const operatorMatch = operatorRegex.exec(conditionStr)
-    if (operatorMatch == null) {
-      continue
-    }
-
-    const operator = operatorMatch[1]
-    const lefthand = conditionStr.substring(0, operatorMatch.index).trimEnd()
-    const righthand = conditionStr.substring(operatorMatch.index + operator.length).trimStart()
+    const conditionExpression = joinedItems.substring(openingConditionParenIndex + 1, closingConditionParenIndex)
+    const conditionExpressionTree = getExpressionTree(conditionExpression)
 
     startBracketRegex.lastIndex = closingConditionParenIndex + 1 // set start position for the exec below
     const startBracketMatch = startBracketRegex.exec(joinedItems)
@@ -231,7 +288,7 @@ function evaluateConditionals(joinedItems) {
       }
     }
 
-    const passed = conditionalOperations[operator]?.(lefthand, righthand)
+    const passed = evaluateExpressionTree(conditionExpressionTree)
 
     const finalContent = passed ? trueBlockContent : falseBlockContent
     joinedItems = replaceBetween(
