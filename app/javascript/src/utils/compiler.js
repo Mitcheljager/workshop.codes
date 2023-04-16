@@ -304,7 +304,6 @@ function evaluateExpressionTree(node) {
   } else {
     const evaluatedArguments = node.arguments.map((argument) => evaluateExpressionTree(argument))
     const result = comparisonOperators[node.operator].eval(... evaluatedArguments)
-    console.log(evaluatedArguments, node.operator, result)
     return result
   }
 }
