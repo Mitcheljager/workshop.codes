@@ -1,10 +1,10 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
+import { comparisonOperators, sortedComparisonOperatorsSymbols } from "./operators"
 import { flatItems } from "../stores/editor"
 import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
-import { comparisonOperators, sortedComparisonOperatorsSymbols } from './operators'
 
 export function compile(overwriteContent = null) {
   let joinedItems = overwriteContent || get(flatItems)
