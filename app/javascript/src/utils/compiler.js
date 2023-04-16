@@ -330,7 +330,6 @@ function evaluateForLoops(joinedItems) {
   let match
   const forRegex = /@for\s+\(\s*((?:(\w+)\s+)?(?:from\s+))?(\d+)\s+(?:through\s+)?(\d+)\s*\)\s*\{/g // Matches "@for [var] [from] number through number" in groups for each param
   while ((match = forRegex.exec(joinedItems)) != null) {
-    console.log(match)
     const [full, _, variable, start, end] = match
 
     const openingBracketIndex = match.index + full.length - 1
