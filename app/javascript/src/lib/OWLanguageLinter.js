@@ -110,7 +110,8 @@ function findIncorrectArgsLength(content) {
         message = "0 arguments expected"
       } else if (item.args_length && content.charAt(match.index + match.match.length) == "(") {
         // Get the number of arguments
-        const closing = getClosingBracket(content, "(", ")", match.index)
+        let closing = getClosingBracket(content, "(", ")", match.index)
+        if (closing === -1) closing = content.length
 
         let argumentsString = content.slice(match.index + match.match.length + 1, closing)
         let safeIndex = 0
