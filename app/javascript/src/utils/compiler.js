@@ -166,8 +166,11 @@ function removeSurroundingParenthesis(source) {
 function getExpressionTree(expression) {
   expression = removeSurroundingParenthesis(expression)
 
-  const result = {
-    DEBUG__input: expression
+  const result = {}
+
+  if (expression.length === 0) {
+    result.value = ""
+    return result
   }
 
   for (let currentIndex = 0; currentIndex < expression.length; currentIndex++) {
@@ -234,7 +237,7 @@ function getExpressionTree(expression) {
 function evaluateExpressionTree(node) {
   if (node.invalid) {
     return null
-  } else if (node.value) {
+  } else if (node.value != null) {
     return node.value.trim()
   } else {
     const evaluatedArguments = node.arguments.map((argument) => evaluateExpressionTree(argument))
