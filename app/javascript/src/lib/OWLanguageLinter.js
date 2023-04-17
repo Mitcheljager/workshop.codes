@@ -36,7 +36,9 @@ function findMissingClosingCharacters(content) {
     openingBrackets.forEach(index => {
       const closingBracketIndex = getClosingBracket(content, open, close, index - 1)
 
-      if (closingBracketIndex < content.length) return
+      console.log(closingBracketIndex)
+
+      if (closingBracketIndex !== -1) return
 
       diagnostics.push({ from: index, to: index + 1, severity: "error", message })
     })
