@@ -184,7 +184,7 @@ function checkMixins(content) {
   while ((match = mixinRegex.exec(content)) != null) {
     try {
       const closing = getClosingBracket(content, "(", ")", match.index)
-      if (closing >= content.length) throw new Error("Missing closing parenthesis")
+      if (closing === -1) throw new Error("Missing closing parenthesis")
 
       const string = content.slice(match.index, closing)
       const opening = string.indexOf("(")
