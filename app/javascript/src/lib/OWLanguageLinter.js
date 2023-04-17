@@ -20,6 +20,7 @@ export function OWLanguageLinter(view) {
   findConditionalsElseIfUses(content)
   checkMixins(content)
   checkTranslations(content)
+  checkForLoops(content)
 
   return diagnostics
 }
@@ -239,6 +240,31 @@ function checkTranslations(content) {
         from: match.index,
         to: match.index + match[0].length,
         severity: "warning",
+        message: error.message
+      })
+    }
+  }
+}
+
+function checkForLoops(content) {
+  // Find missing parenthesis and keywords
+  const forRegex = /@for\s+(.*?)\s*\{\n/g
+  let match
+  while ((match = forRegex.exec(content)) != null) {
+    try {
+      const [_, params] = match
+
+      if (params[0] != "(") throw new Error("Missing opening parenthesis")
+      if (params[params.length - 1] != ")") throw new Error("Missing closing parenthesis")
+      if (!/to|through/.test(params)) throw new Error("Either \"to\" or \"through\" are expected")
+
+      const splitParams = params.split(" ")
+      if (splitParams.length > 3 && splitParams[1] != "from") throw new Error("Missing \"from\" after iterator name")
+    } catch (error) {
+      diagnostics.push({
+        from: match.index,
+        to: match.index + match[0].length,
+        severity: "error",
         message: error.message
       })
     }
