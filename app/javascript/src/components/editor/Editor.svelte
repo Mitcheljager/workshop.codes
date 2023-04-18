@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte"
+  import { fly } from "svelte/transition"
   import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap, isMobile, screenWidth } from "../../stores/editor"
   import EditorActions from "./EditorActions.svelte"
   import EditorAside from "./EditorAside.svelte"
@@ -124,7 +125,7 @@
   </div>
 
   {#if $currentProjectUUID}
-    <div class="editor__aside">
+    <div class="editor__aside" in:fly={$isMobile ? { y: -10, duration: 200 } : { x: -10, duration: 200 }}>
       <div class="editor__scrollable">
         <div class="pr-1/4 pl-1/4">
           <ItemFinder />
@@ -152,7 +153,7 @@
       {/if}
     </div>
 
-    <div class="editor__popout editor__scrollable">
+    <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
       <EditorWiki bind:fetchArticle />
 
       <DragHandle key="popout-width" currentSize=300 align="left" />

@@ -1,5 +1,6 @@
 <script>
-  import { currentProject, isSignedIn, isMobile } from "../../stores/editor"
+  import { fly } from "svelte/transition"
+  import { currentProject, isSignedIn, isMobile, currentProjectUUID } from "../../stores/editor"
   import ScriptImporter from "./ScriptImporter.svelte"
   import TranslationKeys from "./TranslationKeys/TranslationKeys.svelte"
   import Compiler from "./Compiler.svelte"
@@ -10,8 +11,8 @@
   let active = false
 </script>
 
-<div class="editor__actions">
-  {#if !$currentProject?.is_owner}
+<div class="editor__actions" transition:fly={{ y: -10, duration: 200 }}>
+  {#if $currentProjectUUID && !$currentProject?.is_owner}
     <div class="warning warning--orange br-1 align-self-center">
       You do not own this project and can not save
     </div>
