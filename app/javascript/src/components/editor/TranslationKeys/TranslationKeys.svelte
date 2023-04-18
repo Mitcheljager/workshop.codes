@@ -30,7 +30,7 @@
 
 <svelte:window on:keydown={event => { if (event.key === "Escape") active = false }} />
 
-<button class="button button--secondary button--square text-left" on:click={() => active = true}>
+<button class="button button--secondary button--square" on:click={() => active = true}>
   Translations
 </button>
 

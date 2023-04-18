@@ -25,9 +25,12 @@
     {/if}
 
     {#if !$isMobile || active}
-      <div class:dropdown__content={$isMobile} class:editor__mobile-actions={$isMobile}>
-        <Shortcuts />
-        <Settings />
+      <div class={$isMobile ? "dropdown__content editor__mobile-actions" : "" }>
+        {#if !$isMobile}
+          <Shortcuts />
+          <Settings />
+        {/if}
+
         <TranslationKeys />
 
         {#if isSignedIn && $currentProject?.is_owner}

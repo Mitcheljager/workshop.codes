@@ -108,7 +108,7 @@
 
 <svelte:window bind:innerWidth={$screenWidth} />
 
-<div class="editor">
+<div class="editor" class:editor--empty={!$currentProjectUUID}>
   <div class="editor__top">
     <button class="empty-button w-auto {$isMobile ? 'mr-1/4' : 'mr-1/2'}" on:click={() => $currentProjectUUID = null}>
       <Logo />
