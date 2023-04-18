@@ -1,7 +1,7 @@
 <script>
   import SearchObjects from "./SearchObjects.svelte"
   import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
-  import { projects, currentProject } from "../../stores/editor"
+  import { projects, currentProject, isMobile } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
   import { createProject, destroyCurrentProject, fetchProject } from "../../utils/project"
   import { onMount } from "svelte"
@@ -13,6 +13,8 @@
   let active = false
   let showProjectSettings = false
   let filteredProjects = $projects
+
+  $: limit = $isMobile ? 5 : 25
 
   onMount(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -81,16 +83,16 @@
 <CreateProjectModal bind:showModalOfType on:setUrl={({ detail }) => setUrl(detail)} />
 
 <div class="dropdown">
-  <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style="min-width: 200px" disabled={loading}>
+  <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
     {#if loading}
       Loading...
     {:else}
-      {$currentProject?.title || "Select a project..."}
+      {$currentProject?.title.substring(0, limit).trim() || "Select a project..."}{#if $currentProject?.title.length > limit}...{/if}
     {/if}
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100">
+    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style:min-width="200px">
       <div class="pl-1/8 pr-1/8">
         <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
       </div>

@@ -1,22 +1,17 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap } from "../../stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap, isMobile, screenWidth } from "../../stores/editor"
+  import EditorActions from "./EditorActions.svelte"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
-  import ScriptImporter from "./ScriptImporter.svelte"
-  import TranslationKeys from "./TranslationKeys/TranslationKeys.svelte"
-  import Compiler from "./Compiler.svelte"
   import ProjectsDropdown from "./ProjectsDropdown.svelte"
-  import Save from "./Save.svelte"
   import Empty from "./Empty.svelte"
-  import Settings from "./Settings.svelte"
-  import Shortcuts from "./Shortcuts.svelte"
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
-  import * as logo from "../../../../assets/images/logo.svg"
+  import Logo from "../icon/Logo.svelte"
 
   export let events
   export let values
@@ -111,37 +106,21 @@
   $: document.title = $currentProject?.title !== undefined ? `Editor | ${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 </script>
 
+<svelte:window bind:innerWidth={$screenWidth} />
+
 <div class="editor">
   <div class="editor__top">
-    <img on:click={() => $currentProjectUUID = null} class="mr-1/2 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
+    <button class="empty-button w-auto {$isMobile ? 'mr-1/4' : 'mr-1/2'}" on:click={() => $currentProjectUUID = null}>
+      <Logo />
+    </button>
 
     {#if $projects}
       <ProjectsDropdown />
     {/if}
 
-    <div class="editor__actions">
-      {#if $currentProjectUUID}
-        {#if !$currentProject?.is_owner}
-          <div class="warning warning--orange br-1 align-self-center">
-            You do not own this project and can not save
-          </div>
-        {/if}
-
-        <Shortcuts />
-        <Settings />
-        <TranslationKeys />
-
-        {#if isSignedIn && $currentProject?.is_owner}
-          <ScriptImporter />
-        {/if}
-
-        <Compiler />
-
-        {#if isSignedIn && $currentProject?.is_owner}
-          <Save />
-        {/if}
-      {/if}
-    </div>
+    {#if $currentProjectUUID}
+      <EditorActions />
+    {/if}
   </div>
 
   {#if $currentProjectUUID}
@@ -181,10 +160,6 @@
   {:else}
     <Empty />
   {/if}
-
-  <div class="editor__mobile-warning">
-    The editor is currently not functional on mobile
-  </div>
 </div>
 
 {#if !$isSignedIn}

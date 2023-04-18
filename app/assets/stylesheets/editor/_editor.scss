@@ -14,7 +14,7 @@ $top-height: 4rem;
   background: var(--editor-background, #{$bg-dark});
   z-index: 500;
 
-  @include media-min(md) {
+  @include media-min(mbl) {
     grid-template-areas: "top top top" "aside content popout";
     grid-template-columns: $sidebar-width auto $popout-width;
   }
@@ -56,9 +56,16 @@ $top-height: 4rem;
 
 .editor__actions {
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
   gap: $margin / 8;
   margin-left: auto;
+}
+
+.editor__mobile-actions {
+  display: block;
+  max-height: auto;
+  overflow: visible;
 }
 
 .editor__aside {
@@ -81,7 +88,7 @@ $top-height: 4rem;
   font-size: calc(var(--editor-font-size, 14) * 1px);
 
   .cm-editor {
-    @include media-min(md) {
+    @include media-min(mbl) {
       max-width: calc(100vw - #{$sidebar-width} - #{$popout-width});
     }
   }
@@ -90,20 +97,6 @@ $top-height: 4rem;
     height: calc(100vh - #{$top-height});
 
     @include styled-scrollbar;
-  }
-}
-
-.editor__mobile-warning {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: $margin / 4;
-  background: $red;
-  color: $white;
-
-  @include media-min(md) {
-    display: none;
   }
 }
 
