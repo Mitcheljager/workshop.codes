@@ -81,6 +81,7 @@ function tokenBase(stream, state) {
     const ident = stream.current()
     if (actions.hasOwnProperty(ident)) return "labelName"
     if (values.hasOwnProperty(ident)) return "attributeValue"
+    if (bools.hasOwnProperty(ident)) return "bool"
     return "variable"
   }
 
@@ -88,7 +89,6 @@ function tokenBase(stream, state) {
     const ident = stream.current()
     if (values.hasOwnProperty(ident)) return "attributeValue"
     if (keywords.hasOwnProperty(ident)) return "keyword"
-    if (bools.hasOwnProperty(ident)) return "bool"
     return "variable"
   }
 
