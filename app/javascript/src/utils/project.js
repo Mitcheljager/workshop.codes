@@ -6,7 +6,7 @@ import { get } from "svelte/store"
 
 export async function createProject(title, content = null) {
   if (!get(isSignedIn)) {
-    createDemoProject()
+    createDemoProject(title)
     return
   }
 
@@ -29,10 +29,10 @@ export async function createProject(title, content = null) {
     })
 }
 
-export function createDemoProject() {
+export function createDemoProject(title) {
   const newProject = {
     uuid: Math.random().toString(16).substring(2, 8),
-    title: value,
+    title,
     is_owner: true
   }
 

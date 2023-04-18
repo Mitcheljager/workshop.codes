@@ -1,7 +1,7 @@
 <script>
   import SearchObjects from "./SearchObjects.svelte"
   import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
-  import { projects, currentProject, isMobile } from "../../stores/editor"
+  import { projects, currentProject, isSignedIn, isMobile } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
   import { createProject, destroyCurrentProject, fetchProject } from "../../utils/project"
   import { onMount } from "svelte"
@@ -128,7 +128,7 @@
   {/if}
 </div>
 
-{#if $currentProject?.is_owner && !loading}
+{#if $isSignedIn && $currentProject?.is_owner && !loading}
   <div class="dropdown">
     <button class="empty-button w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
       Edit

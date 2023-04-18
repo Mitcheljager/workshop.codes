@@ -21,14 +21,14 @@
     <Settings />
     <TranslationKeys />
 
-    {#if isSignedIn && $currentProject?.is_owner}
+    {#if $isSignedIn && $currentProject?.is_owner}
       <ScriptImporter />
     {/if}
 
     <Compiler />
   {/if}
 
-  {#if isSignedIn && $currentProject?.is_owner}
+  {#if $isSignedIn && $currentProject?.is_owner}
     <Save />
   {/if}
 </div>
