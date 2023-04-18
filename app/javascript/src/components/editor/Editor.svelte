@@ -131,13 +131,13 @@
         <Settings />
         <TranslationKeys />
 
-        {#if isSignedIn && $currentProject?.is_owner}
+        {#if $isSignedIn && $currentProject?.is_owner}
           <ScriptImporter />
         {/if}
 
         <Compiler />
 
-        {#if isSignedIn && $currentProject?.is_owner}
+        {#if $isSignedIn && $currentProject?.is_owner}
           <Save />
         {/if}
       {/if}
