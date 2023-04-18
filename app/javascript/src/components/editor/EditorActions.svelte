@@ -7,8 +7,6 @@
   import Settings from "./Settings.svelte"
   import Shortcuts from "./Shortcuts.svelte"
   import Save from "./Save.svelte"
-
-  let active = false
 </script>
 
 <div class="editor__actions" transition:fly={{ y: -10, duration: 200 }}>
@@ -18,30 +16,17 @@
     </div>
   {/if}
 
-  <div class:dropdown={$isMobile}>
-    {#if $isMobile}
-      <button class="empty-button" on:click={() => active = !active}>
-        ⠇
-      </button>
+  {#if !$isMobile}
+    <Shortcuts />
+    <Settings />
+    <TranslationKeys />
+
+    {#if isSignedIn && $currentProject?.is_owner}
+      <ScriptImporter />
     {/if}
 
-    {#if !$isMobile || active}
-      <div class={$isMobile ? "dropdown__content editor__mobile-actions" : "" }>
-        {#if !$isMobile}
-          <Shortcuts />
-          <Settings />
-        {/if}
-
-        <TranslationKeys />
-
-        {#if isSignedIn && $currentProject?.is_owner}
-          <ScriptImporter />
-        {/if}
-
-        <Compiler />
-      </div>
-    {/if}
-  </div>
+    <Compiler />
+  {/if}
 
   {#if isSignedIn && $currentProject?.is_owner}
     <Save />
