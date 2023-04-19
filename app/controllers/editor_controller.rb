@@ -7,8 +7,6 @@ class EditorController < ApplicationController
     @values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
     @defaults = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "defaults.yml")))
     @constants = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
-
-    @constants = @constants.map { |c| c[1] }
   end
 
   def zez_ui

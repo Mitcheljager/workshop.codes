@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap } from "../../stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants } from "../../stores/editor"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
@@ -35,6 +35,7 @@
 
   onMount(() => {
     $completionsMap = parseKeywords()
+    $workshopConstants = constants
     $currentItem = $items?.[0] || {}
     $projects = _projects || []
     $isSignedIn = _isSignedIn
@@ -44,7 +45,7 @@
     const mappedEvents = objectToKeyword(events, "event")
     const mappedValues = objectToKeyword(values, "text")
     const mappedActions = objectToKeyword(actions, "function")
-    const mappedConstants = objectToKeyword(constants.map(c => Object.values(c)).flat(1), "constant")
+    const mappedConstants = objectToKeyword(Object.values(constants).map(c => Object.values(c)).flat(1), "constant")
     const mappedHeroes = objectToKeyword(heroes, "text")
     const mappedMaps = objectToKeyword(maps, "text")
 

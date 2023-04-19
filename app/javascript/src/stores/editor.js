@@ -50,3 +50,5 @@ export const mixinsMap = derived(flatItems, $flatItems => {
 
   return mixins.map(v => ({ detail: "Mixin", label: `@include ${ v }()`, type: "variable" }))
 })
+
+export const workshopConstants = writable({})

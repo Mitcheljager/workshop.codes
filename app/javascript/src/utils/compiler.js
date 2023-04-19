@@ -1,7 +1,7 @@
 import { templates } from "../lib/templates"
 import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
 import { comparisonOperators, sortedComparisonOperatorsSymbols } from "./operators"
-import { flatItems } from "../stores/editor"
+import { flatItems, workshopConstants } from "../stores/editor"
 import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
@@ -19,6 +19,7 @@ export function compile(overwriteContent = null) {
   joinedItems = joinedItems.replace(settings, "")
   joinedItems = extractAndInsertMixins(joinedItems)
   joinedItems = evaluateForLoops(joinedItems)
+  joinedItems = evaluateEachLoops(joinedItems)
   joinedItems = evaluateConditionals(joinedItems)
   joinedItems = convertTranslations(joinedItems)
 
@@ -406,6 +407,104 @@ function evaluateForLoops(joinedItems) {
 
     joinedItems = replaceBetween(joinedItems, repeatedContent, match.index, closingBracketIndex + 1)
     forRegex.lastIndex = 0 // This is necessary in case the replaced content is shorter than the original content
+  }
+
+  return joinedItems
+}
+
+function parseArrayValues(input) {
+  const commaRegex = /, */g
+
+  const result = []
+  let commaMatch
+  let nextStartingIndex = 0
+  let lastValidCommaEndIndex = -1
+  while ((commaMatch = commaRegex.exec(input)) != null) {
+    // Check if the comma is inside parentheses (e.g. the second comma in "[1, (2, 3), 4]")
+    // because the parenthesis group should be taken as one value (e.g. for the previous
+    // example, we should return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
+    const openBracketIndex = input.indexOf("(", nextStartingIndex)
+    if (openBracketIndex >= 0 && openBracketIndex < commaMatch.index) {
+      const closingBracketIndex = getClosingBracket(input, "(", ")", openBracketIndex - 1)
+      nextStartingIndex = closingBracketIndex < 0 ? input.length : closingBracketIndex
+    } else {
+      const commaEndIndex = commaMatch.index + commaMatch[0].length - 1
+      result.push(input.substring(lastValidCommaEndIndex + 1, commaMatch.index))
+
+      lastValidCommaEndIndex = commaEndIndex
+      nextStartingIndex = lastValidCommaEndIndex + 1
+    }
+
+    commaRegex.lastIndex = nextStartingIndex
+  }
+
+  const lastValue = input.substring(lastValidCommaEndIndex + 1)
+  if (lastValue.length > 0) {
+    result.push(lastValue)
+  }
+  return result
+}
+
+function evaluateEachLoops(joinedItems) {
+  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+((?:.|\n)+?)\s*\)\s*\{/g
+
+  let match
+  while ((match = eachRegex.exec(joinedItems)) != null) {
+    const [_, valueVar, indexVar, iterableStr] = match
+
+    let iterable = []
+    if (iterableStr[0] === "[" && iterableStr[iterableStr.length - 1] === "]") {
+      iterable = parseArrayValues(iterableStr.substring(1, iterableStr.length - 1))
+    } else {
+      const language = get(defaultLanguage)
+      const constants = get(workshopConstants)
+
+      const sanitizedIterableStr = iterableStr.toLowerCase().trim()
+
+      // TODO: support constant names in other languages
+
+      const usedConstantName = Object.keys(constants)
+        .find((name) => {
+          const sanitizedName = name.toLowerCase()
+          return sanitizedName === sanitizedIterableStr ||
+            `${ sanitizedName }s` === sanitizedIterableStr // naive way to allow plurals, which is more natural (e.g. "value in Buttons")
+        })
+
+      if (usedConstantName != null) {
+        iterable = Object.values(constants[usedConstantName]).map((value) => value[language])
+      }
+    }
+
+    if (iterable == null) {
+      continue
+    }
+
+    const openingBracketIndex = match.index + match[0].length - 1
+    const closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingBracketIndex - 1)
+    if (closingBracketIndex < 0) {
+      continue
+    }
+
+    const contentToRepeat = joinedItems.substring(openingBracketIndex + 1, closingBracketIndex)
+    const indexVarRegex = new RegExp(`Each.${ indexVar || "i" }(?=\\W|$)`, "g")
+    const valueVarRegex = new RegExp(`Each.${ valueVar }(?=\\W|$)`, "g")
+
+    let finalContent = ""
+    // Replace "Each.[valueVar]" and "Each.[indexVar]"
+    for (const [index, value] of Object.entries(iterable)) {
+      finalContent += contentToRepeat
+        .replaceAll(indexVarRegex, index)
+        .replaceAll(valueVarRegex, value)
+    }
+
+    joinedItems = replaceBetween(
+      joinedItems,
+      finalContent,
+      match.index,
+      closingBracketIndex + 1
+    )
+    // reset regex last index to right on the replaced content, to allow for nested `@each`s
+    eachRegex.lastIndex = match.index
   }
 
   return joinedItems
