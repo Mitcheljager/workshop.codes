@@ -439,9 +439,7 @@ function parseArrayValues(input) {
   }
 
   const lastValue = input.substring(lastValidCommaEndIndex + 1)
-  if (lastValue.length > 0) {
-    result.push(lastValue)
-  }
+  if (lastValue.length > 0) result.push(lastValue)
   return result
 }
 
@@ -461,7 +459,6 @@ function evaluateEachLoops(joinedItems) {
 
       const sanitizedIterableStr = iterableStr.toLowerCase().trim()
 
-      // TODO: support constant names in other languages
 
       const usedConstantName = Object.keys(constants)
         .find((name) => {
@@ -475,9 +472,7 @@ function evaluateEachLoops(joinedItems) {
       }
     }
 
-    if (iterable == null) {
-      continue
-    }
+if (iterable == null) continue
 
     const openingBracketIndex = match.index + match[0].length - 1
     const closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingBracketIndex - 1)
@@ -489,13 +484,11 @@ function evaluateEachLoops(joinedItems) {
     const indexVarRegex = new RegExp(`Each.${ indexVar || "i" }(?=\\W|$)`, "g")
     const valueVarRegex = new RegExp(`Each.${ valueVar }(?=\\W|$)`, "g")
 
-    let finalContent = ""
-    // Replace "Each.[valueVar]" and "Each.[indexVar]"
-    for (const [index, value] of Object.entries(iterable)) {
-      finalContent += contentToRepeat
-        .replaceAll(indexVarRegex, index)
-        .replaceAll(valueVarRegex, value)
-    }
+const finalContent = Object.entries(iterable).reduce((current, [index, value]) => {
+  return current + contentToRepeat
+    .replaceAll(indexVarRegex, index)
+    .replaceAll(valueVarRegex, value)
+}, "")
 
     joinedItems = replaceBetween(
       joinedItems,
