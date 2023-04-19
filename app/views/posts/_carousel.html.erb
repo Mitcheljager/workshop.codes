@@ -4,7 +4,7 @@
       <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
         <%= render "carousel_item", image: @ordered_images.first, index: 0 %>
       <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
-        <div data-role="carousel">
+        <div class="shadow-block bg-darker" data-role="carousel">
           <% if @post.carousel_video.present? %>
             <div class="carousel__item">
               <%= render "carousel_video" %>
@@ -15,26 +15,26 @@
             <%= render "carousel_item", image: image, index: index %>
           <% end %>
         </div>
+
+        <div class="carousel__navigation">
+          <% if @post.carousel_video.present? %>
+            <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="0">
+              <div class="carousel__navigation-item-video-overlay"></div>
+              <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg" %>
+            </div>
+          <% end %>
+
+          <% @ordered_images.each_with_index do |image, index| %>
+            <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>">
+              <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [120, 120], format: :webp).processed), aria: { label: "Thumbnail image for '#{ @post.title }'" }, height: 120, width: 120 %>
+            </div>
+          <% end %>
+        <% elsif !@ordered_images.present? && @post.carousel_video.present? %>
+          <div>
+            <%= render "carousel_video" %>
+          </div>
+        <% end %>
       </div>
-
-      <div class="carousel__navigation">
-        <% if @post.carousel_video.present? %>
-          <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="0">
-            <div class="carousel__navigation-item-video-overlay"></div>
-            <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg" %>
-          </div>
-        <% end %>
-
-        <% @ordered_images.each_with_index do |image, index| %>
-          <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>">
-            <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [120, 120], format: :webp).processed), aria: { label: "Thumbnail image for '#{ @post.title }'" }, height: 120, width: 120 %>
-          </div>
-        <% end %>
-      <% elsif !@ordered_images.present? && @post.carousel_video.present? %>
-        <div>
-          <%= render "carousel_video" %>
-        </div>
-      <% end %>
     </div>
   </div>
 <% rescue %>

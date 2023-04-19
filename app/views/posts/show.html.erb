@@ -5,7 +5,7 @@
 
 <div data-role="tabs" data-tabs-set-url="true">
   <article class="item item--show">
-    <div class="item__header">
+    <div class="item__header shadow-block">
       <div>
         <%= link_to user_profile_path(@post.user), class: "item__author" do %>
           <div class="item__avatar <%= "profile-image--empty" unless @post.user.profile_image.attached? || @post.user.provider_profile_image.present? %>">
@@ -40,17 +40,19 @@
     <% end %>
 
     <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs, current_locale] do %>
-      <%= tabs_content_tag("description", "", "") do %>
+      <%= tabs_content_tag("description", "", "mt-1/4") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
 
-        <% if @post.description.present? || @post.source_derivs.any? || @archive_authorization.present? %>
-          <div class="item__content item__description">
+        <div class="item__content item__description shadow-block">
+          <% if @post.description.present? %>
             <%= sanitized_markdown(@post.description) %>
+          <% else %>
+            <em>No description was given.</em>
+          <% end %>
 
-            <%= render "derivatives/derivatives" if @post.source_derivs.any? %>
-            <%= render "archive", post: @post if @archive_authorization.present? %>
-          </div>
-        <% end %>
+          <%= render "derivatives/derivatives" if @post.source_derivs.any? %>
+          <%= render "archive", post: @post if @archive_authorization.present? %>
+        </div>
 
         <div class="item__tray">
           <%= render "details" %>

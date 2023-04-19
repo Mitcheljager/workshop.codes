@@ -11,20 +11,20 @@
 </div>
 
 <% if @post.private? %>
-  <div class="warning warning--mild">
+  <div class="warning warning--mild shadow-block">
     <p class="mb-0 mt-0 text-white">🔐 <%= t("posts.show.private.title") %></p>
     <p class="mt-0 mb-0"><small><%= t("posts.show.private.content") %></small></p>
   </div>
 <% end %>
 
 <% if @post.unlisted? %>
-  <div class="warning warning--mild">
+  <div class="warning warning--mild shadow-block">
     <p class="mb-0 text-white mt-0">📃 <%= t("posts.show.unlisted") %></p>
   </div>
 <% end %>
 
 <% if @post.draft? %>
-  <div class="warning warning--mild">
+  <div class="warning warning--mild shadow-block">
     <p class="mb-0 mt-0 text-white">✏ <%= t("posts.show.draft.title") %></p>
     <p class="mt-0 mb-0"><small><%= t("posts.show.draft.content") %></small></p>
   </div>

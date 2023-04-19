@@ -62,10 +62,6 @@
     padding: 0;
     margin: 0;
     border: 0;
-    border-radius: $border-radius * 2;
-    background: $bg-dark;
-    box-shadow: $shadow;
-    overflow: hidden;
   }
 
   &--small {
@@ -235,6 +231,7 @@
 
 .item__sub-title {
   display: block;
+  margin-top: $margin / 8;
   font-family: $font-stack;
   font-size: 1rem;
   line-height: 1rem;
@@ -321,8 +318,9 @@
   grid-template: "title favorite" "code code";
   grid-template-columns: auto $favorite-width;
   align-items: center;
+  gap: $margin / 4;
   padding: $margin / 4;
-  grid-gap: $margin / 4;
+  background-image: linear-gradient(130deg, transparent calc(100% - 20rem), rgba($primary-var, 0.1));
 
   @include media-min(lg) {
     grid-template: "title favorite code";
@@ -341,12 +339,9 @@
 }
 
 .item__tray {
-  background: darken($bg-dark, 5%);
-  padding: $margin / 6 $margin / 4;
   font-size: $font-size-small;
 
   @include media-min(md) {
-    padding: $margin / 3 $margin / 2;
     display: flex;
     flex-wrap: wrap;
   }

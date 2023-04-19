@@ -18,8 +18,6 @@
 }
 
 .carousel__wrapper {
-  overflow: hidden;
-
   &--is-inactive {
     display: none;
   }
@@ -54,7 +52,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: $margin / 4;
-  padding: $margin / 4;
+  margin-top: $margin / 4;
 
   @include media-min(sm) {
     grid-template-columns: repeat(7, 1fr);
