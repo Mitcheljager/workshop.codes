@@ -459,7 +459,6 @@ function evaluateEachLoops(joinedItems) {
 
       const sanitizedIterableStr = iterableStr.toLowerCase().trim()
 
-
       const usedConstantName = Object.keys(constants)
         .find((name) => {
           const sanitizedName = name.toLowerCase()
