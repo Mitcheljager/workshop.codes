@@ -9,6 +9,7 @@
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
+  import { extraCompletions } from "../../lib/extraCompletions"
   import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, mixinsMap } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/editor"
@@ -99,7 +100,7 @@
     return {
       from: word.from + add,
       to: word.to,
-      options: specialOverwrite || [...$completionsMap, ...$variablesMap],
+      options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...extraCompletions],
       validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }
