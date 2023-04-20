@@ -78,7 +78,7 @@ async function setBlurColor() {
   const activeElement = carousel.innerElements[carousel.currentSlide]
   const image = activeElement.querySelector("img")
 
-  const [r, g, b] = await getAverageColor(image.src)
+  const [r, g, b] = image ? await getAverageColor(image.src) : [50, 50, 50]
 
   const blurElement = document.querySelector("[data-role='carousel-blur']")
   blurElement.style.background = `rgb(${ r }, ${ g }, ${ b })`
