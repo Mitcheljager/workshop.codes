@@ -20,6 +20,8 @@ export function setCarousel(element) {
     onChange: setActiveItem,
     duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 200
   })
+
+  setResizeHandler()
 }
 
 function carouselGoTo() {
@@ -65,7 +67,19 @@ function stopVideo() {
   const carousel = document.querySelector("[data-role='carousel']")
   const iframe = carousel.querySelector("iframe")
 
+  console.log("here")
+
   if (!iframe) return
 
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
+}
+
+function setResizeHandler() {
+  window.removeEventListener("resize", carousel.resizeHandler)
+  window.removeEventListener("resize", resizeHandler)
+  window.addEventListener("resize", resizeHandler)
+}
+
+function resizeHandler() {
+  if (!document.fullscreenElement) carousel.resizeHandler()
 }
