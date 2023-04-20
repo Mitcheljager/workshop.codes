@@ -515,7 +515,7 @@ function findEachLoopsWithInvalidIterables(content) {
   const constants = get(workshopConstants)
 
   const regex = /@each\s*\(.+in\s+(.+)\s*\)\s*\{/g
-  const constantRegex = /Constant\.([\w\s]*)/
+  const variableIterableRegex = /(Constant|For|Each)\.([\w\s]*)/
 
   let match
   while ((match = regex.exec(content)) != null) {
@@ -525,11 +525,11 @@ function findEachLoopsWithInvalidIterables(content) {
       continue
     }
 
-    const constantMatch = constantRegex.exec(eachFull)
+    const constantMatch = variableIterableRegex.exec(eachFull)
     if (constantMatch != null) {
-      const [constantFull, constantName] = constantMatch
+      const [constantFull, constantType, constantName] = constantMatch
 
-      if (!constants[constantName]) {
+      if (constantType === "Constant" && !constants[constantName]) {
         const from = match.index + constantMatch.index
         diagnostics.push({
           from,
@@ -538,6 +538,7 @@ function findEachLoopsWithInvalidIterables(content) {
           message: `\"${ constantName }\" is not a known Workshop Constant`
         })
       }
+
       continue
     }
 
