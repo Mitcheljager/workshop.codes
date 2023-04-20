@@ -67,14 +67,15 @@ function stopVideo() {
   const carousel = document.querySelector("[data-role='carousel']")
   const iframe = carousel.querySelector("iframe")
 
-  console.log("here")
-
   if (!iframe) return
 
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
 }
 
 function setResizeHandler() {
+  // Normally videos can't fullscreened because Siema resizeHandler fires when
+  // you go into fullscreen. This fixes that by checking if the page is in
+  // fullscreen before firing resizeHandler.
   window.removeEventListener("resize", carousel.resizeHandler)
   window.removeEventListener("resize", resizeHandler)
   window.addEventListener("resize", resizeHandler)
