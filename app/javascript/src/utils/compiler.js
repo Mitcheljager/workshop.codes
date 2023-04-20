@@ -444,7 +444,7 @@ function parseArrayValues(input) {
 }
 
 function evaluateEachLoops(joinedItems) {
-  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+((?:.|\n)+?)\s*\)\s*\{/g
+  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*\]|Constant\..+)\s*\)\s*\{/g
 
   let match
   while ((match = eachRegex.exec(joinedItems)) != null) {
@@ -453,21 +453,15 @@ function evaluateEachLoops(joinedItems) {
     let iterable = []
     if (iterableStr[0] === "[" && iterableStr[iterableStr.length - 1] === "]") {
       iterable = parseArrayValues(iterableStr.substring(1, iterableStr.length - 1))
-    } else {
+    } else if (iterableStr.startsWith("Constant.")) {
       const language = get(defaultLanguage)
       const constants = get(workshopConstants)
 
-      const sanitizedIterableStr = iterableStr.toLowerCase().trim()
+      const usedConstant = constants[iterableStr.substring("Constant.".length)]
 
-      const usedConstantName = Object.keys(constants)
-        .find((name) => {
-          const sanitizedName = name.toLowerCase()
-          return sanitizedName === sanitizedIterableStr ||
-            `${ sanitizedName }s` === sanitizedIterableStr // naive way to allow plurals, which is more natural (e.g. "value in Buttons")
-        })
-
-      if (usedConstantName != null) {
-        iterable = Object.values(constants[usedConstantName]).map((value) => value[language])
+      if (usedConstant != null) {
+        iterable = Object.values(usedConstant)
+          .map((value) => value[language])
       }
     }
 
