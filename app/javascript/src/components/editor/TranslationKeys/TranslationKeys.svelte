@@ -3,7 +3,7 @@
   import TranslationKeysSelectLanguages from "./TranslationKeysSelectLanguages.svelte"
   import { translationKeys, orderedTranslationKeys, selectedLanguages } from "../../../stores/translationKeys"
   import { copyValueToClipboard } from "../../../copy"
-  import { fade, fly } from "svelte/transition"
+  import { fade } from "svelte/transition"
 
   let active = false
   let selectedKey = null
@@ -30,13 +30,13 @@
 
 <svelte:window on:keydown={event => { if (event.key === "Escape") active = false }} />
 
-<button class="button button--secondary button--square text-left" on:click={() => active = true}>
+<button class="button button--secondary button--square" on:click={() => active = true}>
   Translations
 </button>
 
 {#if active}
   <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
-    <div class="modal__content" style="max-width: 80vw;" transition:fly={{ y: 100, duration: 200 }}>
+    <div class="modal__content" style="max-width: 80vw;">
       <h2 class="mt-0">Translation settings</h2>
 
       <p>Translation keys allow you to insert a Key in place of a Custom String. You can set up translations and the key will automatically be translated based on the player's game language.</p>
