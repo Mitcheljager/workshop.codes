@@ -11,6 +11,9 @@ export function render() {
 
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
   navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
+
+  const blurElement = document.querySelector("[data-use-blur='true']")
+  if (blurElement) setBlurColor(blurElement)
 }
 
 export function setCarousel(element) {
@@ -41,7 +44,7 @@ async function setActiveItem() {
 
   await new Promise(res => setTimeout(res)) // Wait(0) for carousel to be initiated
 
-  if (carousel?.selector?.dataset.useBlur) setBlurColor(this)
+  if (carousel?.selector?.dataset.useBlur) setBlurColor(carousel.innerElements[carousel.currentSlide])
 }
 
 function setLazyImage(element) {
@@ -74,9 +77,8 @@ function stopVideo() {
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
 }
 
-async function setBlurColor() {
-  const activeElement = carousel.innerElements[carousel.currentSlide]
-  const image = activeElement.querySelector("img")
+async function setBlurColor(element) {
+  const image = element.querySelector("img")
 
   const [r, g, b] = image ? await getAverageColor(image.src) : [50, 50, 50]
 
