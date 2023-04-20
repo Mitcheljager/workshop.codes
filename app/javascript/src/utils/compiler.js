@@ -426,7 +426,7 @@ function parseArrayValues(input) {
     const openBracketIndex = input.indexOf("(", nextStartingIndex)
     if (openBracketIndex >= 0 && openBracketIndex < commaMatch.index) {
       const closingBracketIndex = getClosingBracket(input, "(", ")", openBracketIndex - 1)
-      nextStartingIndex = closingBracketIndex < 0 ? input.length : closingBracketIndex
+      nextStartingIndex = closingBracketIndex < 0 ? input.length : closingBracketIndex + 1
     } else {
       const commaEndIndex = commaMatch.index + commaMatch[0].length - 1
       result.push(input.substring(lastValidCommaEndIndex + 1, commaMatch.index))
@@ -439,7 +439,14 @@ function parseArrayValues(input) {
   }
 
   const lastValue = input.substring(lastValidCommaEndIndex + 1)
-  if (lastValue.length > 0) result.push(lastValue)
+  if (
+    lastValue.length > 0 ||
+    // input ends with a comma outside parentheses, meaning the item is empty
+    lastValidCommaEndIndex === input.length - 1
+  ) {
+    result.push(lastValue)
+  }
+
   return result
 }
 
