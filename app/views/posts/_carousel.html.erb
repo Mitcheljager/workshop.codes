@@ -3,7 +3,7 @@
     <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
       <%= render "carousel_item", image: @ordered_images.first, index: 0 %>
     <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
-      <div class="shadow-block bg-darker" data-role="carousel">
+      <div class="shadow-block bg-darker" data-role="carousel" data-use-blur="true">
         <% if @post.carousel_video.present? %>
           <div class="carousel__item">
             <%= render "carousel_video" %>
@@ -34,6 +34,8 @@
         <%= render "carousel_video" %>
       </div>
     <% end %>
+
+    <div class="carousel__blur" data-role="carousel-blur"></div>
   </div>
 <% rescue %>
   <p><small><em>Images are temporarily unavailable.</em></small></p>
