@@ -82,7 +82,13 @@ function stopVideo() {
 async function setBlurColor(element) {
   const image = element.querySelector("img")
 
-  const [r, g, b] = image ? await getAverageColor(image.src) : [50, 50, 50]
+  let [r, g, b] = image ? await getAverageColor(image.src) : [100, 100, 100]
+
+  if (r < 100 && g < 100 && b < 100) {
+    r += 100
+    g += 100
+    b += 100
+  }
 
   const blurElement = document.querySelector("[data-role='carousel-blur']")
   blurElement.style.background = `rgb(${ r }, ${ g }, ${ b })`
@@ -100,11 +106,15 @@ async function getAverageColor(src) {
     image.crossOrigin = "anonymous"
 
     image.onload = () => {
+      // Draw image as 1x1 representation, averaging all colors
       context.drawImage(image, 0, 0, 1, 1)
 
       try {
         // This doesn't work locally on FireFox, but it does work on prod
-        resolve(context.getImageData(0, 0, 1, 1).data.slice(0, 3))
+        const imageData = context.getImageData(0, 0, 1, 1)
+
+        // First 3 values are R G B
+        resolve(imageData.data.slice(0, 3))
       } catch {
         // Ignore
       }
