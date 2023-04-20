@@ -5,39 +5,42 @@
 
 <div data-role="tabs" data-tabs-set-url="true">
   <article class="item item--show">
-    <div class="item__header shadow-block">
-      <div>
-        <%= link_to user_profile_path(@post.user), class: "item__author" do %>
-          <div class="item__avatar <%= "profile-image--empty" unless @post.user.profile_image.attached? || @post.user.provider_profile_image.present? %>">
-            <%= render "profiles/image", user: @post.user, size: 32 %>
-          </div>
+    <div class="standout shadow-block text-left p-0">
+      <div class="item__header">
+        <div>
+          <%= link_to user_profile_path(@post.user), class: "item__author" do %>
+            <div class="item__avatar <%= "profile-image--empty" unless @post.user.profile_image.attached? || @post.user.provider_profile_image.present? %>">
+              <%= render "profiles/image", user: @post.user, size: 32 %>
+            </div>
 
-          <%= @post.user.clean_username %>
-        <% end %>
-
-        <h1 class="item__title item__title--large">
-          <%= @post.title %>
-
-          <% if @post.source_derivs.any? %>
-            <a href="#sources" class="item__sub-title" data-turbolinks="false">
-              + <%= @post.source_derivs.count %> sources
-            </a>
+            <%= @post.user.clean_username %>
           <% end %>
-        </h1>
+
+          <h1 class="item__title item__title--large">
+            <%= @post.title %>
+
+            <% if @post.source_derivs.any? %>
+              <a href="#sources" class="item__sub-title" data-turbolinks="false">
+                + <%= @post.source_derivs.count %> sources
+              </a>
+            <% end %>
+          </h1>
+        </div>
+
+        <%= render "favorites/form", post: @post %>
+
+        <%= render "code", post: @post %>
       </div>
 
-      <%= render "favorites/form", post: @post %>
-
-      <%= render "code", post: @post %>
+      <% cache_unless params[:tab].present?, [@post, @post.comments_count, @revisions_count, @derivations_count, "tabs", current_locale] do %>
+        <%= render "tabs" %>
+      <% end %>
     </div>
 
     <%= render "overwatch_2_indicator" if @post.overwatch_2_compatible? %>
     <%= render "current_user_blocks" if current_user == @post.user %>
     <%= render "expired" if @post.expired? %>
 
-    <% cache_unless params[:tab].present?, [@post, @post.comments_count, @revisions_count, @derivations_count, "tabs", current_locale] do %>
-      <%= render "tabs" %>
-    <% end %>
 
     <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs, current_locale] do %>
       <%= tabs_content_tag("description", "", "mt-1/4") do %>
