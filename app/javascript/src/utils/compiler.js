@@ -412,6 +412,17 @@ function evaluateForLoops(joinedItems) {
   return joinedItems
 }
 
+const openToClosingBracketsMap = {
+  "(": ")",
+  "[": "]"
+}
+const openBracketRegex = new RegExp(
+  Object.keys(openToClosingBracketsMap)
+    .map((c) => `\\${ c }`)
+    .join("|"),
+  "g"
+)
+
 function parseArrayValues(input) {
   const commaRegex = /, */g
 
@@ -420,12 +431,15 @@ function parseArrayValues(input) {
   let nextStartingIndex = 0
   let lastValidCommaEndIndex = -1
   while ((commaMatch = commaRegex.exec(input)) != null) {
-    // Check if the comma is inside parentheses (e.g. the second comma in "[1, (2, 3), 4]")
-    // because the parenthesis group should be taken as one value (e.g. for the previous
-    // example, we should return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
-    const openBracketIndex = input.indexOf("(", nextStartingIndex)
-    if (openBracketIndex >= 0 && openBracketIndex < commaMatch.index) {
-      const closingBracketIndex = getClosingBracket(input, "(", ")", openBracketIndex - 1)
+    // Check if the comma is inside brackets (e.g. the second comma in "[1, (2, 3), 4]" or "[1, [2, 3], 4]")
+    // because the parenthesis group should be taken as one value (e.g. for the previous example, we should
+    // return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
+    openBracketRegex.lastIndex = nextStartingIndex
+    const openBracketMatch = openBracketRegex.exec(input)
+    if (openBracketMatch != null && openBracketMatch.index < commaMatch.index) {
+      const openingBracketChar = openBracketMatch[0]
+      const closingBracketChar = openToClosingBracketsMap[openingBracketChar]
+      const closingBracketIndex = getClosingBracket(input, openingBracketChar, closingBracketChar, openBracketMatch.index - 1)
       nextStartingIndex = closingBracketIndex < 0 ? input.length : closingBracketIndex + 1
     } else {
       const commaEndIndex = commaMatch.index + commaMatch[0].length - 1
@@ -451,7 +465,7 @@ function parseArrayValues(input) {
 }
 
 function evaluateEachLoops(joinedItems) {
-  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*\]|Constant\..+)\s*\)\s*\{/g
+  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*\]|(?:Constant)\..+)\s*\)\s*\{/g
 
   let match
   while ((match = eachRegex.exec(joinedItems)) != null) {
