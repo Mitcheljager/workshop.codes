@@ -1,7 +1,7 @@
 <script>
   import { items } from "../../stores/editor"
   import { getItemById, replaceBetween, setCurrentItemById } from "../../utils/editor"
-  import { fade, fly } from "svelte/transition"
+  import { fade } from "svelte/transition"
   import { tick } from "svelte"
 
   let active = false
@@ -92,7 +92,7 @@
 
 {#if active}
   <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
-    <div class="modal__content p-0 bg-transparent" style="max-width: 600px" transition:fly={{ y: 100, duration: 200 }}>
+    <div class="modal__content p-0 bg-transparent" style="max-width: 600px">
       <input type="text" class="form-input form-input--large bg-darker" placeholder="Find files by name..." bind:value bind:this={input} />
 
       {#if value}

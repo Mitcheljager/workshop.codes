@@ -3,7 +3,7 @@
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
   import { reset as microlight } from "../../microlight"
-  import { fade, fly } from "svelte/transition"
+  import { fade } from "svelte/transition"
   import { tick } from "svelte"
 
   let active = false
@@ -153,7 +153,7 @@
 
 {#if active}
   <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
-    <div class="modal__content" style="max-width: 600px" transition:fly={{ y: 100, duration: 200 }}>
+    <div class="modal__content" style="max-width: 600px">
       <p class="mt-0">
         <strong class="text-white">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br>
         <em>Success not guaranteed.</em>

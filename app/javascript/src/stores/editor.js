@@ -2,6 +2,9 @@ import { writable, derived } from "svelte/store"
 import { getMixins, getSubroutines, getVariables } from "../utils/compiler"
 import { isAnyParentHidden } from "../utils/editor"
 
+export const screenWidth = writable(0)
+export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1100)
+
 export const editorStates = writable({})
 
 export const projects = writable(null)
