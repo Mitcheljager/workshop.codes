@@ -1238,6 +1238,11 @@
     webpack-cli "^3.3.12"
     webpack-sources "^1.4.3"
 
+"@replit/codemirror-indentation-markers@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@replit/codemirror-indentation-markers/-/codemirror-indentation-markers-6.4.0.tgz#8fc0756cfbd9d9896809558bd2993e112ce8e0c1"
+  integrity sha512-iYorMjZnTuxzDceIYYxu2Atgapb+DMbJHlVXIGA+fnwGuvLNsUUtE+pOkpQzozSCubBVHEuAhAk3eaeFqYRw5Q==
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
