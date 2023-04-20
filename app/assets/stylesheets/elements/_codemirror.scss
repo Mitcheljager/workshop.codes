@@ -59,7 +59,14 @@
 }
 
 .cm-editor {
+  --indent-marker-bg-color: #{ lighten($bg-dark, 5%) };
+  --indent-marker-active-bg-color: #{ lighten($bg-dark, 15%) };
   color: $text-color-light;
+
+  body[style*="--show-indent-markers: false"] & { // Hacky solution for css var based if statement
+    --indent-marker-bg-color: transparent;
+    --indent-marker-active-bg-color: transparent;
+  }
 
   .cm-scroller {
     padding-top: $margin / 4;

@@ -22,7 +22,8 @@
     "color-operator": "#569cd6",
     "color-bool": "#d19a66",
     "color-invalid": "#b33834",
-    "color-custom-keyword": "#c678dd"
+    "color-custom-keyword": "#c678dd",
+    "show-indent-markers": true
   }
   const defaults = { ...settings }
 
@@ -32,8 +33,13 @@
 
   onMount(() => {
     Object.entries(settings).forEach(([key]) => {
-      const value = localStorage.getItem(key)
-      if (value) settings[key] = value
+      let value = localStorage.getItem(key)
+      if (value) {
+        if (value == "true") value = true
+        if (value == "false") value = false
+
+        settings[key] = value
+      }
 
       setCssVariable(key, settings[key])
     })
@@ -116,6 +122,11 @@
       {/each}
 
       <hr>
+
+      <div class="checkbox mt-1/8 mb-1/4">
+        <input id="show-line-indent-markers" type="checkbox" bind:checked={settings["show-indent-markers"]} />
+        <label for="show-line-indent-markers">Show line indent markers</label>
+      </div>
 
       <button class="button button--link button--small pb-0" on:click={resetToDefault}>Reset all to default</button>
     </div>

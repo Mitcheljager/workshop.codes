@@ -1,4 +1,5 @@
 .carousel {
+  position: relative;
   width: 100%;
   max-width: 900px;
 
@@ -14,18 +15,6 @@
   [data-role="carousel"]:not([style]) {
     height: 500px;
     overflow: hidden;
-  }
-}
-
-.carousel__wrapper {
-  overflow: hidden;
-
-  &--is-inactive {
-    display: none;
-  }
-
-  img:not([src]) {
-    height: 1px;
   }
 }
 
@@ -54,7 +43,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: $margin / 4;
-  padding: $margin / 4;
+  margin-top: $margin / 4;
 
   @include media-min(sm) {
     grid-template-columns: repeat(7, 1fr);
@@ -115,6 +104,21 @@
     font-size: 24px;
     background: rgba($black, .5);
   }
+}
+
+.carousel__blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  border-radius: $border-radius * 2;
+  aspect-ratio: 16/9;
+  filter: blur(50px);
+  transform: scale(1.1);
+  transition: background-color 1000ms;
+  opacity: 0.125;
+  z-index: -1;
 }
 
 .card-carousel {

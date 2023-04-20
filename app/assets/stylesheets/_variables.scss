@@ -8,6 +8,7 @@ $orange: #e89930;
 $green: #3fbf74;
 $body-bg: #1f2326;
 $primary: var(--primary);
+$primary-var: #f06414; // FIXME: This sucks but is used for scss methods. Should refactor $primary to not be a css variable
 $bg-dark: #2e3337;
 $bg-darker: var(--bg-darker);
 $text-color: var(--text-color);
@@ -56,7 +57,7 @@ $media-min-widths: (
 
 :root {
   color-scheme: dark;
-  --primary: #f06414;
+  --primary: #{ $primary-var };
   --white: #dfdfdf;
   --orange: #{ $orange };
   --red: #{ $red };

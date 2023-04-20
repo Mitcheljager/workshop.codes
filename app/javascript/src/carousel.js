@@ -11,6 +11,9 @@ export function render() {
 
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
   navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
+
+  const blurElement = document.querySelector("[data-use-blur='true']")
+  if (blurElement) setBlurColor(blurElement)
 }
 
 export function setCarousel(element) {
@@ -30,7 +33,7 @@ function carouselGoTo() {
   carousel.goTo(target)
 }
 
-function setActiveItem() {
+async function setActiveItem() {
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
   const activeElement = document.querySelector(".carousel__navigation-item--is-active")
 
@@ -40,6 +43,10 @@ function setActiveItem() {
   setLazyImage(this)
 
   stopVideo()
+
+  await new Promise(res => setTimeout(res)) // Wait(0) for carousel to be initiated
+
+  if (carousel?.selector?.dataset.useBlur) setBlurColor(carousel.innerElements[carousel.currentSlide])
 }
 
 function setLazyImage(element) {
@@ -70,6 +77,39 @@ function stopVideo() {
   if (!iframe) return
 
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
+}
+
+async function setBlurColor(element) {
+  const image = element.querySelector("img")
+
+  const [r, g, b] = image ? await getAverageColor(image.src) : [50, 50, 50]
+
+  const blurElement = document.querySelector("[data-role='carousel-blur']")
+  blurElement.style.background = `rgb(${ r }, ${ g }, ${ b })`
+}
+
+async function getAverageColor(src) {
+  // https://stackoverflow.com/questions/2541481/get-average-color-of-image-via-javascript
+  return new Promise(resolve => {
+    const context = document.createElement("canvas").getContext("2d")
+    context.imageSmoothingEnabled = true
+
+    const image = new Image
+
+    image.src = src
+    image.crossOrigin = "anonymous"
+
+    image.onload = () => {
+      context.drawImage(image, 0, 0, 1, 1)
+
+      try {
+        // This doesn't work locally on FireFox, but it does work on prod
+        resolve(context.getImageData(0, 0, 1, 1).data.slice(0, 3))
+      } catch {
+        // Ignore
+      }
+    }
+  })
 }
 
 function setResizeHandler() {

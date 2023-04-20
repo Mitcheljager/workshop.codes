@@ -6,6 +6,7 @@
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
   import { linter, lintGutter } from "@codemirror/lint"
+  import { indentationMarkers } from "@replit/codemirror-indentation-markers"
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
@@ -78,7 +79,8 @@
           if (state.selectionSet) $editorStates[currentId].selection = view.state.selection
         }),
         basicSetup,
-        parameterTooltip()
+        parameterTooltip(),
+        indentationMarkers()
       ]
     })
   }
