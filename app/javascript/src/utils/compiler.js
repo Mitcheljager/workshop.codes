@@ -6,6 +6,18 @@ import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/t
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
+const openToClosingArrayBracketsMap = {
+  "(": ")",
+  "[": "]"
+}
+
+const openArrayBracketRegex = new RegExp(
+  `(?<!\\\\)(?:${ Object.keys(openToClosingArrayBracketsMap)
+    .map((c) => `\\${ c }`)
+    .join("|") })`,
+  "g"
+)
+
 export function compile(overwriteContent = null) {
   let joinedItems = overwriteContent || get(flatItems)
 
@@ -412,21 +424,11 @@ function evaluateForLoops(joinedItems) {
   return joinedItems
 }
 
-const openToClosingBracketsMap = {
-  "(": ")",
-  "[": "]"
-}
-const openBracketRegex = new RegExp(
-  Object.keys(openToClosingBracketsMap)
-    .map((c) => `\\${ c }`)
-    .join("|"),
-  "g"
-)
-
 function parseArrayValues(input) {
   const commaRegex = /, */g
 
   const result = []
+
   let commaMatch
   let nextStartingIndex = 0
   let lastValidCommaEndIndex = -1
@@ -434,11 +436,11 @@ function parseArrayValues(input) {
     // Check if the comma is inside brackets (e.g. the second comma in "[1, (2, 3), 4]" or "[1, [2, 3], 4]")
     // because the parenthesis group should be taken as one value (e.g. for the previous example, we should
     // return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
-    openBracketRegex.lastIndex = nextStartingIndex
-    const openBracketMatch = openBracketRegex.exec(input)
+    openArrayBracketRegex.lastIndex = nextStartingIndex
+    const openBracketMatch = openArrayBracketRegex.exec(input)
     if (openBracketMatch != null && openBracketMatch.index < commaMatch.index) {
       const openingBracketChar = openBracketMatch[0]
-      const closingBracketChar = openToClosingBracketsMap[openingBracketChar]
+      const closingBracketChar = openToClosingArrayBracketsMap[openingBracketChar]
       const closingBracketIndex = getClosingBracket(input, openingBracketChar, closingBracketChar, openBracketMatch.index - 1)
       nextStartingIndex = closingBracketIndex < 0 ? input.length : closingBracketIndex + 1
     } else {
