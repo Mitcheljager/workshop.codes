@@ -30,10 +30,13 @@ export function compile(overwriteContent = null) {
 }
 
 export function getVariables(joinedItems) {
-  let globalVariables = joinedItems.match(/(?<=Global\.)[^\s,.[\]);]+/g)
+  let globalVariables = joinedItems.match(/(?<=Global\.)[^\s,.[\]);]+/g) || []
+  globalVariables = [...globalVariables, ...(joinedItems.match(/(?<=For Global Variable\()[^\s,.[\]);]+/g) || [])]
   globalVariables = [...new Set(globalVariables)]
 
   let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player|Host Player)\.)[^\s,.[\]);]+/g)
+  const playerForLoops =  [...joinedItems.matchAll(/(?<=For Player Variable\()[^,]+[, \t]+([^\s,]+)/g)].map(v => v[1])
+  playerVariables = [...playerVariables, ...playerForLoops]
   playerVariables = [...new Set(playerVariables)]
 
   return { globalVariables, playerVariables }
