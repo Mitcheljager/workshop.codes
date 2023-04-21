@@ -33,6 +33,8 @@
 
     setCssVariable(key, `${ currentSize }px`)
 
+    currentSize = Math.min(Math.max(currentSize, (Math.max(window.innerWidth, window.innerHeight) / 10)), Math.max(window.innerWidth, window.innerHeight) / 2)
+
     localStorage.setItem(key, currentSize)
   }
 
