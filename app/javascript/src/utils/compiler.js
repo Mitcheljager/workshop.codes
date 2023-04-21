@@ -6,6 +6,18 @@ import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/t
 import { languageOptions } from "../lib/languageOptions"
 import { get } from "svelte/store"
 
+const openToClosingArrayBracketsMap = {
+  "(": ")",
+  "[": "]"
+}
+
+const openArrayBracketRegex = new RegExp(
+  `(?<!\\\\)(?:${ Object.keys(openToClosingArrayBracketsMap)
+    .map((c) => `\\${ c }`)
+    .join("|") })`,
+  "g"
+)
+
 export function compile(overwriteContent = null) {
   let joinedItems = overwriteContent || get(flatItems)
 
@@ -416,17 +428,21 @@ function parseArrayValues(input) {
   const commaRegex = /, */g
 
   const result = []
+
   let commaMatch
   let nextStartingIndex = 0
   let lastValidCommaEndIndex = -1
   while ((commaMatch = commaRegex.exec(input)) != null) {
-    // Check if the comma is inside parentheses (e.g. the second comma in "[1, (2, 3), 4]")
-    // because the parenthesis group should be taken as one value (e.g. for the previous
-    // example, we should return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
-    const openBracketIndex = input.indexOf("(", nextStartingIndex)
-    if (openBracketIndex >= 0 && openBracketIndex < commaMatch.index) {
-      const closingBracketIndex = getClosingBracket(input, "(", ")", openBracketIndex - 1)
-      nextStartingIndex = closingBracketIndex < 0 ? input.length : closingBracketIndex
+    // Check if the comma is inside brackets (e.g. the second comma in "[1, (2, 3), 4]" or "[1, [2, 3], 4]")
+    // because the parenthesis group should be taken as one value (e.g. for the previous example, we should
+    // return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
+    openArrayBracketRegex.lastIndex = nextStartingIndex
+    const openBracketMatch = openArrayBracketRegex.exec(input)
+    if (openBracketMatch != null && openBracketMatch.index < commaMatch.index) {
+      const openingBracketChar = openBracketMatch[0]
+      const closingBracketChar = openToClosingArrayBracketsMap[openingBracketChar]
+      const closingBracketIndex = getClosingBracket(input, openingBracketChar, closingBracketChar, openBracketMatch.index - 1)
+      nextStartingIndex = closingBracketIndex < 0 ? input.length : closingBracketIndex + 1
     } else {
       const commaEndIndex = commaMatch.index + commaMatch[0].length - 1
       result.push(input.substring(lastValidCommaEndIndex + 1, commaMatch.index))
@@ -439,12 +455,19 @@ function parseArrayValues(input) {
   }
 
   const lastValue = input.substring(lastValidCommaEndIndex + 1)
-  if (lastValue.length > 0) result.push(lastValue)
+  if (
+    lastValue.length > 0 ||
+    // input ends with a comma outside parentheses, meaning the item is empty
+    lastValidCommaEndIndex === input.length - 1
+  ) {
+    result.push(lastValue)
+  }
+
   return result
 }
 
 function evaluateEachLoops(joinedItems) {
-  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+((?:.|\n)+?)\s*\)\s*\{/g
+  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*\]|(?:Constant)\..+)\s*\)\s*\{/g
 
   let match
   while ((match = eachRegex.exec(joinedItems)) != null) {
@@ -453,21 +476,15 @@ function evaluateEachLoops(joinedItems) {
     let iterable = []
     if (iterableStr[0] === "[" && iterableStr[iterableStr.length - 1] === "]") {
       iterable = parseArrayValues(iterableStr.substring(1, iterableStr.length - 1))
-    } else {
+    } else if (iterableStr.startsWith("Constant.")) {
       const language = get(defaultLanguage)
       const constants = get(workshopConstants)
 
-      const sanitizedIterableStr = iterableStr.toLowerCase().trim()
+      const usedConstant = constants[iterableStr.substring("Constant.".length)]
 
-      const usedConstantName = Object.keys(constants)
-        .find((name) => {
-          const sanitizedName = name.toLowerCase()
-          return sanitizedName === sanitizedIterableStr ||
-            `${ sanitizedName }s` === sanitizedIterableStr // naive way to allow plurals, which is more natural (e.g. "value in Buttons")
-        })
-
-      if (usedConstantName != null) {
-        iterable = Object.values(constants[usedConstantName]).map((value) => value[language])
+      if (usedConstant != null) {
+        iterable = Object.values(usedConstant)
+          .map((value) => value[language])
       }
     }
 

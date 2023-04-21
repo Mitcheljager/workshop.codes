@@ -1,5 +1,5 @@
 import { getClosingBracket, getPhraseFromPosition } from "../utils/editor"
-import { completionsMap } from "../stores/editor"
+import { completionsMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 
 let diagnostics = []
@@ -18,6 +18,7 @@ export function OWLanguageLinter(view) {
   findTrailingCommas(content)
   findConditionalsRegexErrors(content)
   findConditionalsElseIfUses(content)
+  findEachLoopsWithInvalidIterables(content)
   checkMixins(content)
   checkTranslations(content)
   checkForLoops(content)
@@ -506,6 +507,47 @@ function findConditionalsElseIfUses(content) {
       to: match.index + match[0].length,
       severity: "error",
       message: `\`${ usageFormatted }\` is not supported. Use \`@else { @if (elseIfCondition) { ... } }\` instead.`
+    })
+  }
+}
+
+function findEachLoopsWithInvalidIterables(content) {
+  const constants = get(workshopConstants)
+
+  const regex = /@each\s*\(.+in\s+(.+)\s*\)\s*\{/g
+  const variableIterableRegex = /(Constant|For|Each)\.([\w\s]*)/
+
+  let match
+  while ((match = regex.exec(content)) != null) {
+    const [eachFull, iterableStr] = match
+
+    if (iterableStr[0] === "[" && iterableStr[iterableStr.length - 1] === "]") {
+      continue
+    }
+
+    const constantMatch = variableIterableRegex.exec(eachFull)
+    if (constantMatch != null) {
+      const [constantFull, constantType, constantName] = constantMatch
+
+      if (constantType === "Constant" && !constants[constantName]) {
+        const from = match.index + constantMatch.index
+        diagnostics.push({
+          from,
+          to: from + constantFull.length,
+          severity: "error",
+          message: `"${ constantName }" is not a known Workshop Constant`
+        })
+      }
+
+      continue
+    }
+
+    const from = match.index + eachFull.lastIndexOf(iterableStr)
+    diagnostics.push({
+      from,
+      to: from + iterableStr.length,
+      severity: "error",
+      message: "@each iterable must be an array in the format [item1, item2, ...], or a Workshop Constant in the format Constant.Name (e.g. Constant.Button)"
     })
   }
 }
