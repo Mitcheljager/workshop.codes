@@ -129,9 +129,7 @@ function extractAndInsertMixins(joinedItems) {
     let contents
     if (mixin.hasContents) {
       let contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
-      if (contentsClosing) {
-        contentsClosing = joinedItems.length
-      }
+      if (contentsClosing == -1) contentsClosing = joinedItems.length
       fullMixin = joinedItems.slice(index, contentsClosing + 1)
 
       const contentsOpening = fullMixin.indexOf("{")
