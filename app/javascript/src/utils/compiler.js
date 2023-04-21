@@ -34,7 +34,7 @@ export function getVariables(joinedItems) {
   globalVariables = [...globalVariables, ...(joinedItems.match(/(?<=For Global Variable\()[^\s,.[\]);]+/g) || [])]
   globalVariables = [...new Set(globalVariables)]
 
-  let playerVariables = joinedItems.match(/(?<=((Event|Host|Local) Player|Victim|Attacker|Healer|Healee)\.)[^\s,.[\]);]+/g)
+  let playerVariables = joinedItems.match(/(?<=(Event Player|Victim|Attacker|Healer|Healee|Local Player|Host Player)\.)[^\s,.[\]);]+/g)
   const playerForLoops =  [...joinedItems.matchAll(/(?<=For Player Variable\()[^,]+[, \t]+([^\s,]+)/g)].map(v => v[1])
   playerVariables = [...playerVariables, ...playerForLoops]
   playerVariables = [...new Set(playerVariables)]
