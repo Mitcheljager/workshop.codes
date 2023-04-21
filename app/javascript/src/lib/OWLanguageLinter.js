@@ -535,7 +535,7 @@ function findEachLoopsWithInvalidIterables(content) {
           from,
           to: from + constantFull.length,
           severity: "error",
-          message: `\"${ constantName }\" is not a known Workshop Constant`
+          message: `"${ constantName }" is not a known Workshop Constant`
         })
       }
 
