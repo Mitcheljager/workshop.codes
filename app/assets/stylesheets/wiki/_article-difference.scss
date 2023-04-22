@@ -2,4 +2,5 @@
   display: grid;
   grid-template-columns: repeat(2, calc(50% - #{ $margin / 4 }));
   grid-gap: $margin / 2;
+  word-break: break-word;
 }
