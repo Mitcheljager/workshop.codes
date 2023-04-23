@@ -20,8 +20,5 @@ function getVerifiedUsers(event) {
     const element = document.querySelector("[data-role='filter-authors']")
 
     element.innerHTML = data
-
-    const elements = element.querySelectorAll("[data-action='add-filter']")
-    elements.forEach((element) => element.addEventListener("click", addFilter))
   })
 }
