@@ -10,18 +10,7 @@
 }
 
 .revision__description {
-  border: 1px solid lighten($border-color, 5%);
-  padding: $margin / 4;
-
-  @include media-min(lg) {
-    padding: $margin / 2;
-  }
-
-  *:first-child {
-    margin-top: 0;
-  }
-
-  *:last-child {
-    margin-bottom: 0;
-  }
+  border-top: 1px solid lighten($border-color, 5%);
+  padding-top: $margin / 4;
+  margin-top: $margin / 4;
 }

@@ -27,7 +27,7 @@ class RevisionsController < ApplicationController
   end
 
   def partial
-    @post = Post.select(:id, :user_id).includes(:revisions).find(params[:id])
+    @post = Post.select(:id, :user_id, :code).includes(:revisions).find(params[:id])
 
     render partial: "revisions"
   end

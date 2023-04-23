@@ -78,23 +78,23 @@
     <% end %>
 
     <% if @post.collection && @post.collection.posts.visible?.many? %>
-      <%= tabs_content_tag("collection") do %>
+      <%= tabs_content_tag("collection", nil, "mt-1/2") do %>
         <div class="infinite-scroll"><div class="spinner"></div></div>
       <% end %>
     <% end %>
 
-    <%= tabs_content_tag("comments") do %>
+    <%= tabs_content_tag("comments", nil, "mt-1/2") do %>
       <div class="infinite-scroll"><div class="spinner"></div></div>
     <% end %>
 
     <% if @revisions_count > 1 %>
-      <%= tabs_content_tag("update-log") do %>
+      <%= tabs_content_tag("update-log", nil, "mt-1/2") do %>
         <div class="infinite-scroll"><div class="spinner"></div></div>
       <% end %>
     <% end %>
 
     <% if @derivations_count > 0 %>
-      <%= tabs_content_tag("derivations") do %>
+      <%= tabs_content_tag("derivations", nil, "mt-1/2") do %>
         <div class="infinite-scroll"><div class="spinner"></div></div>
       <% end %>
     <% end %>

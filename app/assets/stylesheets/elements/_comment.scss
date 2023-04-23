@@ -16,7 +16,11 @@
   margin-bottom: $margin / 4;
   padding: $margin / 6;
   border-radius: $border-radius / 2;
-  background: lighten($bg-dark, 3.5%);
+  background: $bg-dark;
+
+  @include media-min(sm) {
+    padding: $margin / 4;
+  }
 
   &:last-child {
     margin-bottom: 0;
@@ -24,7 +28,7 @@
 
   .post-comment {
     margin-top: $margin / 4;
-    background: $bg-dark;
+    background: darken($bg-dark, 3.5%);
 
     &:last-child {
       border-bottom: 0;

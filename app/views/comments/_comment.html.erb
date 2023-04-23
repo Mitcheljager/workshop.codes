@@ -1,4 +1,4 @@
-<div class="post-comment" data-comment="<%= comment.id %>" id="<%= comment.id %>">
+<div class="post-comment <%= "shadow-block" if comment.parent_id.nil? %>" data-comment="<%= comment.id %>" id="<%= comment.id %>">
   <div class="post-comment__layout">
     <%= link_to user_profile_path(comment.user), class: "profile-image #{ "profile-image--empty" unless comment.user.profile_image.attached? || comment.user.provider_profile_image.present? }" do %>
       <%= render "profiles/image", user: comment.user, size: 40 %>
