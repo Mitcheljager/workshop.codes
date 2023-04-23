@@ -14,7 +14,7 @@
 
 .post-comment {
   margin-bottom: $margin / 4;
-  padding: $margin / 4;
+  padding: $margin / 6;
   border-radius: $border-radius / 2;
   background: lighten($bg-dark, 3.5%);
 
@@ -25,21 +25,14 @@
   .post-comment {
     margin-top: $margin / 4;
     background: $bg-dark;
-  }
 
-  @for $i from 1 through 5 {
-    $classname: "";
-
-    @for $j from 1 through $i {
-      $classname: $classname + ".post-comment ";
+    &:last-child {
+      border-bottom: 0;
     }
 
-    #{$classname} {
-      @if $i % 2 == 0 {
-        background: lighten($bg-dark, 3.5%);
-      } @else {
-        background: $bg-dark;
-      }
+    .post-comment {
+      padding: 0;
+      margin-top: $margin / 2;
     }
   }
 
