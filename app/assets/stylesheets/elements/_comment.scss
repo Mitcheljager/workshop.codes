@@ -55,25 +55,25 @@
 }
 
 .post-comment__information {
-  margin-top: .25em;
   line-height: 1em;
 
   @include media-min(sm) {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 
   .profile-image {
     height: 30px;
     width: 30px;
     flex: 0 0 30px;
-    margin: 0 1rem 0 0;
+    margin: 0 $margin / 8 0 0;
     background-size: 80%;
   }
 }
 
 .post-comment__content {
-  margin: $margin / 4 0 0;
+  margin: $margin / 8 0 0;
   overflow-wrap: break-word;
 
   h1 {
@@ -90,13 +90,20 @@
     font-size: $font-size-base;
   }
 
+  *:first-child {
+    margin-top: 0;
+  }
+
   *:last-child {
     margin-bottom: 0;
   }
 }
 
 .post-comment__actions {
-  margin: $margin / 4 0 $margin / 4 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $margin / 4;
+  margin-top: $margin / 8;
 
   &:last-child {
     margin-bottom: 0;
@@ -105,11 +112,14 @@
 
 .post-comment__action {
   display: inline-block;
-  margin-right: $margin / 4;
   font-size: $font-size-small;
   text-transform: lowercase;
   text-decoration: none;
-  color: lighten($gray, 20%);
+  color: $text-color-dark;
+
+  @include hover-stack() {
+    color: $text-color-light;
+  }
 
   &:last-child {
     margin-right: 0;
@@ -120,8 +130,12 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: lighten($gray, 20%);
+  color: $white;
   margin-right: 2rem;
+
+  @include hover-stack() {
+    filter: brightness(1.2);
+  }
 
   small {
     display: inline-block;
@@ -133,7 +147,7 @@
 
 .post-comment__date {
   margin-top: .5rem;
-  font-size: $font-size-small;
+  font-size: 0.75rem;
   font-style: italic;
   text-transform: lowercase;
   color: $text-color-dark;
