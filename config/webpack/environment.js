@@ -1,7 +1,11 @@
-const { environment } = require("@rails/webpacker")
+const { config, environment } = require("@rails/webpacker")
+
+const WebpackerPwa = require("webpacker-pwa")
 
 const globCssImporter = require("node-sass-glob-importer")
 const svelte = require("./loaders/svelte")
+
+new WebpackerPwa(config, environment)
 
 environment.loaders.prepend("svelte", svelte)
 
