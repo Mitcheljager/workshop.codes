@@ -54,6 +54,21 @@
   }
 }
 
+.post-comment__layout {
+  display: grid;
+  grid-template-columns: 30px auto;
+  gap: $margin / 6;
+  width: 100%;
+
+  .profile-image {
+    height: 30px;
+    width: 30px;
+    flex: 0 0 30px;
+    margin: 0;
+    background-size: 80%;
+  }
+}
+
 .post-comment__information {
   line-height: 1em;
 
@@ -61,20 +76,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-
-  .profile-image {
-    height: 30px;
-    width: 30px;
-    flex: 0 0 30px;
-    margin: 0 $margin / 8 0 0;
-    background-size: 80%;
+    margin-top: .35rem;
   }
 }
 
 .post-comment__content {
   margin: $margin / 8 0 0;
   overflow-wrap: break-word;
+  font-size: $font-size-small;
+
+  @include media-min(sm) {
+    font-size: $font-size-base;
+  }
 
   h1 {
     font-size: 21px;
@@ -127,10 +140,9 @@
 }
 
 .post-comment__author {
-  display: flex;
-  align-items: center;
   text-decoration: none;
   color: $white;
+  font-weight: bold;
   margin-right: 2rem;
 
   @include hover-stack() {
@@ -141,13 +153,14 @@
     display: inline-block;
     color: $text-color-dark;
     font-size: $font-size-small;
+    font-weight: normal;
     margin-left: .25em;
   }
 }
 
 .post-comment__date {
   margin-top: .5rem;
-  font-size: 0.75rem;
+  font-size: .75rem;
   font-style: italic;
   text-transform: lowercase;
   color: $text-color-dark;
