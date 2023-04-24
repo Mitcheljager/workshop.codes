@@ -197,9 +197,9 @@
     animation: fly-in 200ms;
 
     input {
-      @extend .form-input !optional;
       width: auto;
       padding: .25em .5em;
+      border: 0;
       border-radius: $border-radius / 4;
       font-size: $font-size-small;
       background: lighten($bg-dark, 10%);
@@ -208,6 +208,7 @@
       &:focus {
         background: lighten($bg-dark, 12.5%);
         box-shadow: 0 0 0 2px rgba($pure-white, 0.5);
+        outline: 0;
       }
 
       &::placeholder {
@@ -223,14 +224,22 @@
     }
 
     .cm-button {
-      @extend .button !optional;
-      @extend .button--secondary !optional;
+      appearance: none;
       padding: .25em .5em;
       margin-right: 0.25em;
+      border: 0;
       border-radius: $border-radius / 4;
       background: lighten($bg-dark, 5%);
       font-size: $font-size-small;
+      color: $text-color-light;
       text-transform: none;
+      cursor: pointer;
+
+      @include hover-stack {
+        outline: 0;
+        background: lighten($bg-dark, 15%);
+        color: $white;
+      }
     }
 
     button[name="close"] {
