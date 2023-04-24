@@ -22,11 +22,7 @@
     <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: nil)) %>" hreflang="en" />
     <link rel="alternate" href="<%= request.base_url + url_for(params.clone.permit!.merge(locale: :ko)) %>" hreflang="ko" />
 
-    <% if is_editor? %>
-      <link rel="manifest" href="/editor-manifest.json">
-    <% else %>
-      <link rel="manifest" href="/manifest.json">
-    <% end %>
+    <link rel="manifest" href="/manifest.json">
 
     <link rel="preload"
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&display=swap"

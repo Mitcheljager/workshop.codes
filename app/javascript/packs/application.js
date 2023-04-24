@@ -75,8 +75,6 @@ document.addEventListener("turbolinks:load", function() {
 
   timeago.initialize()
   scrollIntoViewOnLoad.initialize()
-
-  navigator.serviceWorker.register("/service-worker.js")
 })
 
 document.addEventListener("turbolinks:before-cache", function() {

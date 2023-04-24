@@ -32,10 +32,6 @@ module ApplicationHelper
     controller_path.split('/').first == "wiki" ? true : false
   end
 
-  def is_editor?
-    controller_path.split('/').first == "editor" ? true : false
-  end
-
   def is_admin_controller?
     controller_path.split('/').first == "admin" ? true : false
   end

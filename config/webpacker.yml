@@ -18,8 +18,6 @@ default: &default
   # Extract and emit a css file
   extract_css: false
 
-  service_workers_entry_path: service-workers
-
   static_assets_extensions:
     - .jpg
     - .jpeg
