@@ -3,7 +3,7 @@
   display: grid;
   grid-gap: $margin / 4;
 
-  @include media-min(xs) {
+  @include media-min(450px) {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: $margin / 2;
   }
