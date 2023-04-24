@@ -39,9 +39,7 @@
 
           <div class="item__actions">
             <button class="well button button--secondary button--small pt-1/8 pb-1/8 pl-1/4 pr-1/4 mr-1/8" data-action="copy-to-clipboard" data-target="<%= post.code %>">
-              <span class="copy cursor-pointer">
-                <a data-copy="<%= post.code %>"><%= post.code %></a>
-              </span>
+              <span class="copy cursor-pointer" data-copy="<%= post.code %>"><%= post.code %></span>
             </button>
 
             <%= tag.span "Analytics", class: "text-white mr-1/4 mt-1/4 md:mt-0 cursor-pointer", data: { action: "toggle-content reveal-post-analytics", id: post.id } %>
@@ -54,8 +52,8 @@
           <% data = {} %>
           <% values = Statistic.where(on_date: 30.days.ago.to_date..Date.today, timeframe: :daily, model_id: post.id, content_type: :visit)
                                .order(created_at: :asc)
-                               .select(:on_date, :value) %> 
-          
+                               .select(:on_date, :value) %>
+
           <% (30.days.ago.to_date..Date.today).map{ |date| data[date.strftime("%B %d")] = 0 } %>
           <% values.map { |v| data[v.on_date.strftime("%B %d")] = v.value } %>
 
