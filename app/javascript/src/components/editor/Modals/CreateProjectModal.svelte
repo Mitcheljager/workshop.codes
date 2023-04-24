@@ -21,9 +21,9 @@
     loading = true
 
     const data = await createProject(value)
-    if (data) {
-      dispatch("setUrl", data.uuid)
+    if (data != "error") {
       active = false
+      if (data) dispatch("setUrl", data.uuid)
     }
 
     loading = false

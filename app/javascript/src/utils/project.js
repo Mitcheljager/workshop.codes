@@ -5,10 +5,7 @@ import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/t
 import { get } from "svelte/store"
 
 export async function createProject(title, content = null) {
-  if (!get(isSignedIn)) {
-    createDemoProject(title)
-    return
-  }
+  if (!get(isSignedIn)) return createDemoProject(title)
 
   return await new FetchRails("/projects", { project: { title, content, content_type: "workshop_codes" } }).post()
     .then(data => {
@@ -26,6 +23,8 @@ export async function createProject(title, content = null) {
     .catch(error => {
       console.error(error)
       alert("Something went wrong while creating your project, please try again")
+
+      return "error"
     })
 }
 
