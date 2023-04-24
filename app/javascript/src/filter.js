@@ -1,4 +1,5 @@
 import FetchRails from "./fetch-rails"
+import { render as renderNumPlayersSlider } from "../src/num-players-slider"
 import { bind as bindGetVerifiedUsers } from "../src/get-verified-users"
 
 export function bind() {
@@ -28,6 +29,7 @@ function bindFilterContent() {
   linkElements.forEach((element) => element.removeAndAddEventListener("click", buildFilterPath))
 
   bindGetVerifiedUsers()
+  renderNumPlayersSlider()
 }
 
 function addFilter(event) {
