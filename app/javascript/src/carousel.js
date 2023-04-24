@@ -3,6 +3,9 @@ import Siema from "siema/dist/siema.min"
 export let carousel
 
 export function render() {
+  const blurElement = document.querySelector("[data-use-blur='true']")
+  if (blurElement && blurElement.dataset.role != "carousel") setBlurColor(blurElement)
+
   const element = document.querySelector("[data-role='carousel']")
 
   if (!element) return
@@ -11,9 +14,6 @@ export function render() {
 
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
   navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
-
-  const blurElement = document.querySelector("[data-use-blur='true']")
-  if (blurElement) setBlurColor(blurElement)
 }
 
 export function setCarousel(element) {
@@ -34,6 +34,10 @@ function carouselGoTo() {
 }
 
 async function setActiveItem() {
+  await new Promise(res => setTimeout(res)) // Wait(0) for carousel to be initiated
+
+  if (carousel?.selector?.dataset.useBlur == "true") carousel.selector.dataset.setBlur = false
+
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
   const activeElement = document.querySelector(".carousel__navigation-item--is-active")
 
@@ -43,8 +47,6 @@ async function setActiveItem() {
   setLazyImage(this)
 
   stopVideo()
-
-  await new Promise(res => setTimeout(res)) // Wait(0) for carousel to be initiated
 
   if (carousel?.selector?.dataset.useBlur) setBlurColor(carousel.innerElements[carousel.currentSlide])
 }
@@ -82,27 +84,27 @@ function stopVideo() {
 async function setBlurColor(element) {
   const image = element.querySelector("img")
 
-  let [r, g, b] = image ? await getAverageColor(image.src) : [100, 100, 100]
+  if (carousel && carousel.selector.dataset.setBlur == "true") return
+  if (carousel) carousel.selector.dataset.setBlur = true
+
+  let [r, g, b] = image ? await getAverageColor(image) : [100, 100, 100]
 
   if (r < 100 && g < 100 && b < 100) {
-    r += 100
-    g += 100
-    b += 100
+    r *= 2.5
+    g *= 2.5
+    b *= 2.5
   }
 
   const blurElement = document.querySelector("[data-role='carousel-blur']")
   blurElement.style.background = `rgb(${ r }, ${ g }, ${ b })`
 }
 
-async function getAverageColor(src) {
+async function getAverageColor(image) {
   // https://stackoverflow.com/questions/2541481/get-average-color-of-image-via-javascript
   return new Promise(resolve => {
     const context = document.createElement("canvas").getContext("2d")
     context.imageSmoothingEnabled = true
 
-    const image = new Image
-
-    image.src = src
     image.crossOrigin = "anonymous"
 
     image.onload = () => {

@@ -1,7 +1,7 @@
 <% begin %>
   <div class="carousel">
     <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
-      <div class="shadow-block bg-darker" data-role="carousel" data-use-blur="true">
+      <div class="shadow-block bg-darker overflow-hidden" data-use-blur="true">
         <%= render "carousel_item", image: @ordered_images.first, index: 0 %>
       </div>
     <% elsif (@ordered_images.present? && @ordered_images.many?) || (@post.carousel_video.present? && @ordered_images.present?) %>
