@@ -1,4 +1,5 @@
 import FetchRails from "./fetch-rails"
+import { bind as bindGetVerifiedUsers } from "../src/get-verified-users"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='get-filter-content']")
@@ -25,6 +26,8 @@ function bindFilterContent() {
 
   const linkElements = document.querySelectorAll("[data-role='filter-link']")
   linkElements.forEach((element) => element.removeAndAddEventListener("click", buildFilterPath))
+
+  bindGetVerifiedUsers()
 }
 
 function addFilter(event) {

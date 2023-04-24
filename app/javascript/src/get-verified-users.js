@@ -1,5 +1,4 @@
 import FetchRails from "./fetch-rails"
-import { addFilter } from "./filter"
 
 export function bind() {
   const element = document.querySelector("[data-action~='get-verified-users']")
