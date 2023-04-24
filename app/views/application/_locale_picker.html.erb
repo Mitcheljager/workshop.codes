@@ -1,5 +1,7 @@
 <div class="dropdown lg-down:dropup" data-dropdown>
-  <%= link_to I18n.locale, "", class: "dropdown__toggle button button--secondary button--thin button--small bg-light", data: { action: "toggle-dropdown" } %>
+  <button class="dropdown__toggle button button--secondary button--thin button--small bg-light" data-action="toggle-dropdown">
+    <%= I18n.locale %>
+  </button>
 
   <div class="dropdown__content" data-dropdown-content>
     <div class="dropdown__label">
