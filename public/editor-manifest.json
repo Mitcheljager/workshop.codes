@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Workshop.codes Script Editor",
+  "short_name": "Workshop.codes Editor",
+  "id": "workshop.codes/editor",
+  "start_url": "/editor",
+  "icons": [
+    {
+      "src": "/assets/favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/favicon.svg",
+      "sizes": "270x270",
+      "type": "image/svg"
+    }
+  ],
+  "display": "standalone",
+  "background_color": "#1f2326",
+  "theme_color": "#f06414"
+}

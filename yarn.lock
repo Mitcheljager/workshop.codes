@@ -10711,6 +10711,11 @@ webpack@4.46.0, webpack@^4.46.0:
     watchpack "^1.7.4"
     webpack-sources "^1.4.1"
 
+webpacker-pwa@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/webpacker-pwa/-/webpacker-pwa-0.1.2.tgz#7b44f6f23383f830206b5c66dc1885ecc34e46d4"
+  integrity sha512-DfKbInyb9Z+p4Bl+9deKJW4MSiQaqcfK24DGJnzq+c2DwzhL6GpnrXHPr7GXcXq4SLnAh4O8u1JhUGay2htkVA==
+
 webpacker-svelte@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/webpacker-svelte/-/webpacker-svelte-1.0.0.tgz#c1bac3dc557fcfae6fa2fd883614a8ce17037678"
