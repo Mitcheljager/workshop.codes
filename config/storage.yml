@@ -15,6 +15,8 @@ digitalocean:
   bucket: <%= ENV["DIGITALOCEAN_SPACES_BUCKET"] %>
   endpoint: <%= ENV["DIGITALOCEAN_SPACES_ENDPOINT"] %>
   public: true
+  upload:
+    cache_control: "public, max-age=31536000"
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
