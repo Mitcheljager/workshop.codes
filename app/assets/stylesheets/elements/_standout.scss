@@ -4,6 +4,7 @@
   text-align: center;
   background: $bg-dark;
   border-radius: $border-radius;
+  box-shadow: $shadow;
 
   &::before {
     content: "";

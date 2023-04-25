@@ -3,6 +3,7 @@
   padding: $margin / 8;
   border-radius: $border-radius;
   background: darken($bg-dark, 5%);
+  box-shadow: $shadow;
 
   &::before {
     content: "";
