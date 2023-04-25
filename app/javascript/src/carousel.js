@@ -87,7 +87,7 @@ async function setBlurColor(element) {
   if (carousel && carousel.selector.dataset.setBlur == "true") return
   if (carousel) carousel.selector.dataset.setBlur = true
 
-  let [r, g, b] = image ? await getAverageColor(image) : [100, 100, 100]
+  let [r, g, b] = image ? await getAverageColor(image.src) : [100, 100, 100]
 
   if (r < 100 && g < 100 && b < 100) {
     r *= 2.5
@@ -99,12 +99,14 @@ async function setBlurColor(element) {
   blurElement.style.background = `rgb(${ r }, ${ g }, ${ b })`
 }
 
-async function getAverageColor(image) {
+async function getAverageColor(src) {
   // https://stackoverflow.com/questions/2541481/get-average-color-of-image-via-javascript
   return new Promise(resolve => {
     const context = document.createElement("canvas").getContext("2d")
     context.imageSmoothingEnabled = true
 
+    const image = new Image()
+    image.src = src
     image.crossOrigin = "anonymous"
 
     image.onload = () => {
