@@ -4,7 +4,7 @@ export let carousel
 
 export function render() {
   const blurElement = document.querySelector("[data-use-blur='true']")
-  if (blurElement && blurElement.dataset.role != "carousel") setBlurColor(blurElement)
+  if (blurElement && blurElement.dataset.role != "carousel") setBlur(blurElement)
 
   const element = document.querySelector("[data-role='carousel']")
 
@@ -36,8 +36,6 @@ function carouselGoTo() {
 async function setActiveItem() {
   await new Promise(res => setTimeout(res)) // Wait(0) for carousel to be initiated
 
-  if (carousel?.selector?.dataset.useBlur == "true") carousel.selector.dataset.setBlur = false
-
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
   const activeElement = document.querySelector(".carousel__navigation-item--is-active")
 
@@ -48,7 +46,7 @@ async function setActiveItem() {
 
   stopVideo()
 
-  if (carousel?.selector?.dataset.useBlur) setBlurColor(carousel.innerElements[carousel.currentSlide])
+  if (carousel?.selector?.dataset.useBlur) setBlur(carousel.innerElements[carousel.currentSlide])
 }
 
 function setLazyImage(element) {
@@ -81,49 +79,32 @@ function stopVideo() {
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
 }
 
-async function setBlurColor(element) {
+async function setBlur(element) {
   const image = element.querySelector("img")
+  const blurElements = document.querySelectorAll("[data-role='carousel-blur']")
+  const blurElement = blurElements[blurElements.length - 1]
+  const whitePixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NobW39DwAFsQKP8FV1WwAAAABJRU5ErkJggg=="
 
-  if (carousel && carousel.selector.dataset.setBlur == "true") return
-  if (carousel) carousel.selector.dataset.setBlur = true
+  const newElement = new Image()
+  if (blurElement.classList.contains("carousel__blur--visible")) {
+    newElement.src = image?.src || whitePixel
+    newElement.dataset.role = "carousel-blur"
+    newElement.classList.add("carousel__blur")
 
-  let [r, g, b] = image ? await getAverageColor(image.src) : [100, 100, 100]
+    blurElement.insertAdjacentElement("afterend", newElement)
 
-  if (r < 100 && g < 100 && b < 100) {
-    r *= 2.5
-    g *= 2.5
-    b *= 2.5
+    await new Promise(res => setTimeout(res, 1)) // Await one tick before fading
+
+    newElement.classList.add("carousel__blur--visible")
+    blurElement.classList.remove("carousel__blur--visible")
+
+    await new Promise(res => setTimeout(res, 1200)) // Await transition
+    blurElement.remove()
+  } else {
+    blurElement.src = image?.src || whitePixel
+    await new Promise(res => setTimeout(res, 1)) // Await one tick before fading
+    blurElement.classList.add("carousel__blur--visible")
   }
-
-  const blurElement = document.querySelector("[data-role='carousel-blur']")
-  blurElement.style.background = `rgb(${ r }, ${ g }, ${ b })`
-}
-
-async function getAverageColor(src) {
-  // https://stackoverflow.com/questions/2541481/get-average-color-of-image-via-javascript
-  return new Promise(resolve => {
-    const context = document.createElement("canvas").getContext("2d")
-    context.imageSmoothingEnabled = true
-
-    const image = new Image()
-    image.src = src
-    image.crossOrigin = "anonymous"
-
-    image.onload = () => {
-      // Draw image as 1x1 representation, averaging all colors
-      context.drawImage(image, 0, 0, 1, 1)
-
-      try {
-        // This doesn't work locally on FireFox, but it does work on prod
-        const imageData = context.getImageData(0, 0, 1, 1)
-
-        // First 3 values are R G B
-        resolve(imageData.data.slice(0, 3))
-      } catch {
-        // Ignore
-      }
-    }
-  })
 }
 
 function setResizeHandler() {
