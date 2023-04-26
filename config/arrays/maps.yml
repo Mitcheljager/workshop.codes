@@ -186,6 +186,13 @@
     ko: 쟁탈
   slug: oasis
 -
+  en: Talantis
+  ko: 탈란티스
+  type:
+    en: Control
+    ko: 쟁탈
+  slug: talantis
+-
   en: Colosseo
   ko: 콜로세오
   overwatch_2: true
