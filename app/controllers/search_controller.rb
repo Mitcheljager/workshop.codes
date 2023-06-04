@@ -87,11 +87,6 @@ class SearchController < ApplicationController
       posts = posts.where(user_id: user.present? ? user.id : -1)
     end
 
-    posts = posts.where(locale: params[:language]) if params[:language]
-    posts = posts.where("created_at >= ?", params[:from]) if params[:from]
-    posts = posts.where("created_at <= ?", params[:to]) if params[:to]
-    posts = posts.where("last_revision_created_at > ?", 6.months.ago) if params[:expired]
-
     posts = posts.order("#{ sort_switch } DESC") if params[:sort]
 
     posts = posts.select { |post| to_slug(post.categories).include?(to_slug(params[:category])) } if params[:category]

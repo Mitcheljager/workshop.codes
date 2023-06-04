@@ -52,13 +52,10 @@ function buildFilterPath(event) {
     "category": filterValue("categories", parent),
     "hero": filterValue("heroes", parent),
     "map": filterValue("maps", parent),
-    "from": filterValue("from", parent),
-    "to": filterValue("to", parent),
     "author": filterValue("author", parent),
     "players": filterValue("players", parent),
     "search": encodeURIComponent(parent.querySelector("input[name='query']").value),
-    "sort": filterValue("sort", parent),
-    "language": filterValue("language", parent)
+    "sort": filterValue("sort", parent)
   }
 
   buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
