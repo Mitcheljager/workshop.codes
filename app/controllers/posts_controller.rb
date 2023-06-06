@@ -106,12 +106,13 @@ class PostsController < ApplicationController
         @post.last_revision_created_at = Time.now
 
         set_post_status
-        parse_carousel_video
+        unless parse_carousel_video
+          @post.errors.add :carousel_video, :invalid, message: "must be a YouTube link or video ID"
+          raise ActiveRecord::RecordInvalid.new @post
+        end
 
-        post_save_success = @post.save
-        parse_derivatives_success = parse_derivatives
-
-        raise ActiveRecord::ActiveRecordError.new "Post saving unsuccessful" unless post_save_success && parse_derivatives_success
+        @post.save!
+        raise ActiveRecord::ActiveRecordError.new "Post derivatives saving unsuccessful" unless parse_derivatives
 
         @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, snippet: @post.snippet)
         @revision.save
@@ -151,12 +152,13 @@ class PostsController < ApplicationController
     begin
       Post.transaction do
         set_post_status
-        parse_carousel_video
+        unless parse_carousel_video
+          @post.errors.add :carousel_video, :invalid, message: "must be a YouTube link or video ID"
+          raise ActiveRecord::RecordInvalid.new @post
+        end
 
-        post_save_success = @post.update(post_params)
-        parse_derivatives_success = parse_derivatives
-
-        raise ActiveRecord::ActiveRecordError.new "Post updating unsuccessful" unless post_save_success && parse_derivatives_success
+        @post.update!(post_params)
+        raise ActiveRecord::ActiveRecordError.new "Post updating unsuccessful" unless parse_derivatives
 
         create_activity(:update_post, post_activity_params)
         create_collection if post_params[:new_collection] != ""
@@ -275,7 +277,43 @@ class PostsController < ApplicationController
   end
 
   def parse_carousel_video
-    params[:post][:carousel_video] = youtube_to_video_id(post_params[:carousel_video])
+    carousel_video_str = post_params[:carousel_video]
+    return true if carousel_video_str.blank?
+
+    if carousel_video_str =~ /^[A-Za-z0-9\-\_]+$/
+      @post.carousel_video = carousel_video_str
+      return true
+    end
+
+    begin
+      uri = URI.parse(carousel_video_str)
+    rescue URI::InvalidURIError => exception
+      return false
+    end
+
+    return false unless uri.scheme == "http" || uri.scheme == "https"
+
+    return false unless uri.host.ends_with?("youtube-nocookie.com") || uri.host.ends_with?("youtube.com") || uri.host == "youtu.be"
+
+    if uri.host == "youtu.be"
+      return false unless uri.path.match? /^\/(.+)$/
+      @post.carousel_video = $1
+      return true
+    end
+
+    if uri.path.starts_with? "/watch"
+      query_params = Rack::Utils.parse_query uri.query
+      return false unless query_params["v"].present?
+      @post.carousel_video = query_params["v"]
+      return true
+    end
+
+    if uri.path.match? /^\/(?:v|e|embed)\/(.+)$/
+      @post.carousel_video = $1
+      return true
+    end
+
+    return false
   end
 
   def parse_derivatives
