@@ -264,6 +264,11 @@ input[type="file"] {
   }
 }
 
+.error-help-text {
+  display: none;
+  color: $red;
+}
+
 .field_with_errors {
   display: inline;
 
@@ -275,6 +280,10 @@ input[type="file"] {
     &.helper-input {
       border: unset;
     }
+  }
+
+  .error-help-text {
+    display: block;
   }
 }
 
