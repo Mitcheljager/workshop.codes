@@ -1,3 +1,5 @@
+include PostsHelper
+
 class ReportsController < ApplicationController
   before_action only: [:update] do
     redirect_to root_path unless is_admin?(current_user)
@@ -24,7 +26,12 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
-        notify_discord
+        if report_params[:concerns_model] == "post"
+          notify_discord_post
+        elsif report_params[:concerns_model] == "comment"
+          notify_discord_comment
+        end
+
         format.js
       else
         format.js { render "application/error" }
@@ -50,21 +57,80 @@ class ReportsController < ApplicationController
     params.require(:report).permit(:concerns_id, :concerns_model, :category, :content, :reported_user_id, properties: {})
   end
 
-  def notify_discord
+  def notify_discord_post
     return unless ENV["DISCORD_REPORTS_WEBHOOK_URL"].present?
 
     report = @report
     path = admin_report_url(@report)
     content = report.content
     visit_token = report.visit_token
+    accept_url = report_submit_url(report.id, :accepted)
+    reject_url = report_submit_url(report.id, :rejected)
+
+    post = Post.find(report.concerns_id)
+    post_url = post_url(post.code)
+    admin_post_url = admin_post_url(post.id)
+
+    image = ""
+    if post.images.any? && post.image_order.present? && JSON.parse(post.image_order).length
+      image = url_for_post_thumbnail(post, 240, 128, "medium")
+    end
 
     embed = Discord::Embed.new do
       title "A post has been reported. (Go to admin)"
       url path
-      add_field name: "Visit token", value: report.visit_token
-      add_field name: "Concerns model", value: report.concerns_model
+      thumbnail url: image
+      add_field name: "Report data", value: "
+        #{ report.visit_token }
+        #{ report.concerns_model }: #{ report.concerns_id }
+      "
+      add_field name: "Post data", value: "
+        **Title**: #{ post.title }
+        **Code**: #{ post.code }
+        **Has snippet**: #{ post.snippet.present? }
+        **Description start**: #{ post.description.truncate(200) }
+      "
       add_field name: "Report category", value: report.category
-      add_field name: "Description", value: content
+      add_field name: "Report description", value: content
+      add_field name: "Actions", value: "
+        [View in admin](#{ admin_post_url })
+        [View post](#{ post_url })
+
+        [Accept](#{ accept_url })
+        [Reject](#{ reject_url })
+      "
+    end
+
+    Discord::Notifier.message(embed, url: ENV["DISCORD_REPORTS_WEBHOOK_URL"])
+  end
+
+  def notify_discord_comment
+    return unless ENV["DISCORD_REPORTS_WEBHOOK_URL"].present?
+
+    report = @report
+    path = admin_report_url(@report)
+    content = report.content
+    visit_token = report.visit_token
+    accept_url = report_submit_url(report.id, :accepted)
+    reject_url = report_submit_url(report.id, :rejected)
+
+    comment = Comment.find(report.concerns_id)
+    comment_content = comment.content
+
+    embed = Discord::Embed.new do
+      title "A comment has been reported. (Go to admin)"
+      url path
+      add_field name: "Report data", value: "
+        #{ report.visit_token }
+        #{ report.concerns_model }: #{ report.concerns_id }
+      "
+      add_field name: "Report category", value: report.category
+      add_field name: "Report description", value: content
+      add_field name: "Comment content", value: comment_content
+      add_field name: "Actions", value: "
+        [Accept](#{ accept_url })
+        [Reject](#{ reject_url })
+      "
     end
 
     Discord::Notifier.message(embed, url: ENV["DISCORD_REPORTS_WEBHOOK_URL"])

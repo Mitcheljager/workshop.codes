@@ -106,6 +106,7 @@ Rails.application.routes.draw do
     delete "linked_users/:id", to: "linked_users#destroy", as: "destroy_linked_user"
 
     resources :reports, only: [:create, :new, :destroy, :update]
+    get "reports/:id/:status", to: "reports#update", as: "report_submit"
     resources :notifications, only: [:index], concerns: :paginatable
     get "unread-notifications", to: "notifications#get_unread_notifications"
     get "unread-notifications-count", to: "notifications#get_unread_notifications_count"
