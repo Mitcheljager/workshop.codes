@@ -67,7 +67,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "Creating a post with an invalid carousel video ID does not create a post" do
+  test "Creating a post with an invalid carousel video URL does not create a post" do
     sign_in_as users(:user_one)
 
     visit new_post_url
@@ -79,6 +79,23 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_no_changes "Post.count" do
       click_button "Create Post"
       assert page.has_content? "Create new Workshop Code"
+      assert_nil Post.last.carousel_video
+    end
+  end
+
+  test "Creating a post with a filepath (from dragging file into browser) does not succeed" do
+    sign_in_as users(:user_one)
+
+    visit new_post_url
+
+    fill_in_post_details
+
+    fill_in "post_carousel_video", with: "\"C:\\Users\\user\\Videos\\Overwatch\\Overwatch 2016.12.20 - 15.53.29.mp4\""
+
+    assert_no_changes "Post.count" do
+      click_button "Create Post"
+      assert page.has_content? "Create new Workshop Code"
+      assert_nil Post.last.carousel_video
     end
   end
 
