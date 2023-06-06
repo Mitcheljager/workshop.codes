@@ -160,6 +160,7 @@ ko:
           label: 유튜브 동영상
           help_html: "캐러셀의 첫 번째 항목으로 동영상을 포함하세요. 전체 URL이 아닌 YouTube 동영상 ID 만 입력하세요. (동영상 ID는 굵게 표시됨 : youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)"
           placeholder: "동영상 ID는 다음과 같이 보입니다. FqnKB22pOC0"
+          invalid: "유효한 YouTube 동영상 링크 또는 동영상 ID를 입력하세요."
       description:
         title: 설명
         help_html: |
