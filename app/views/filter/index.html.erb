@@ -28,26 +28,4 @@
   </h2>
 </div>
 
-<% if params[:overwatch_2] %>
-  <div class="well well--dark b-overwatch-2 mb-1/2">
-    <div>
-      <h3 class="mt-0 mb-0">
-        <strong><%= t("banner.overwatch_2.title_html") %></strong>
-      </h3>
-
-      <div class="mt-1/4 text-small">
-        <p>
-          These codes were tagged as being importable within the Overwatch 2 Beta.
-          It is possible that codes may have been invalidated, since the Overwatch 2 Beta is under active development.
-          An import code that was created in Overwatch 2 Beta will not work in Overwatch 1.
-        </p>
-        <p class="mb-0">
-          The Workshop is unfortunately <strong><u>not</u></strong> currently available in the beta.
-          However, custom lobby settings can still be shared with import codes.
-        </p>
-      </div>
-    </div>
-  </div>
-<% end %>
-
 <%= render "posts/posts", disable_cache: true %>
