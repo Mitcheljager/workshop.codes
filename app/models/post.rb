@@ -141,44 +141,42 @@ class Post < ApplicationRecord
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
 
   def self.search(query, size: 100, bypass_cache: true)
-    Rails.cache.fetch("posts/search/#{Digest::SHA1.hexdigest(query)}/#{size}", expires_in: (ENV["POST_SEARCH_CACHE_SECONDS"] || 30).to_i.seconds, force: bypass_cache) do
-      __elasticsearch__.search({
-        from: 0,
-        size: size,
-        query: {
-          bool: {
-            should: [{
-              multi_match: {
-                query: query,
-                fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
-                type: "cross_fields",
-                operator: "and",
-                tie_breaker: 0.1,
-                boost: 100,
-                minimum_should_match: "50%"
-              }
-            }, {
-              function_score: {
-                query: {
-                  multi_match: {
-                    query: query,
-                    fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
-                    fuzziness: "AUTO"
-                  }
-                },
-                field_value_factor: {
-                  field: "hotness",
-                  modifier: "log1p",
-                  factor: 0.1
-                },
-                boost_mode: "sum",
-                max_boost: 2
-              }
-            }]
-          }
+    __elasticsearch__.search({
+      from: 0,
+      size: size,
+      query: {
+        bool: {
+          should: [{
+            multi_match: {
+              query: query,
+              fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
+              type: "cross_fields",
+              operator: "and",
+              tie_breaker: 0.1,
+              boost: 100,
+              minimum_should_match: "50%"
+            }
+          }, {
+            function_score: {
+              query: {
+                multi_match: {
+                  query: query,
+                  fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
+                  fuzziness: "AUTO"
+                }
+              },
+              field_value_factor: {
+                field: "hotness",
+                modifier: "log1p",
+                factor: 0.1
+              },
+              boost_mode: "sum",
+              max_boost: 2
+            }
+          }]
         }
-      }).records.ids
-    end
+      }
+    }).records.ids
   end
 
   def as_indexed_json(options={})
