@@ -18,10 +18,7 @@
       <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
       <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
       <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-      <% if params[:from] %> from <strong><%= time_ago_in_words(params[:from]).gsub("about", "") %> ago</strong> <% end %>
-      <% if params[:to] %> to <strong><%= time_ago_in_words(params[:to]).gsub("about", "") %> ago</strong> <% end %>
       <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
-      <% if params[:expired] %> excluding <strong>expired</strong> <% end %>
       <% if params[:author] %> by <strong><%= params[:author].split("#")[0] %></strong> <% end %>
       <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
     <% end %>
