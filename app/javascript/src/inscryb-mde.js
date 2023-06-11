@@ -342,7 +342,7 @@ class InitialiseInscrybeMDE {
               const itemElement = document.createElement("a")
               itemElement.classList.add("editor-dropdown__item")
               itemElement.innerText = item.title
-              itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ item.slug }`) })
+              itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ decodeURIComponent(item.slug) }`) })
 
               const categoryElement = document.createElement("span")
               categoryElement.style = "opacity: .5; font-size: .8em"
