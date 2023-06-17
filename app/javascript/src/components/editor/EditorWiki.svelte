@@ -1,6 +1,7 @@
 <script>
   import FetchRails from "../../fetch-rails"
   import EditorWikiSearch from "./EditorWikiSearch.svelte"
+  import ExternalLinkIcon from "../icon/ExternalLink.svelte"
 
   let article
 
@@ -41,7 +42,9 @@
 {#if article}
   <div class="mt-1/2" on:click={click}>
     <div class="text-dark mb-1/8">{article.category.title}</div>
-    <h2 class="mt-0 mb-1/8">{article.title}</h2>
+    <h2 class="mt-0 mb-1/8">
+      {article.title} <a href={`/wiki/articles/${ article.slug }`} target="_blank"><ExternalLinkIcon /></a>
+    </h2>
     {#if article.subtitle}
       <h5 class="mt-0">{article.subtitle}</h5>
     {/if}
