@@ -13,17 +13,13 @@
     const href = new URL(event.target.href)
 
     const currentHost = window.location.hostname
-    if (href.hostname === currentHost) {
-      if (!!href.hash) {
-        jumpToSection(href.hash.substring(1))
-        return
-      } else if (href.pathname.startsWith("/wiki")) {
-        fetchArticle(event.target.href)
-        return
-      }
+    if (href.hostname != currentHost) {
+      window.open(event.target.href, "_blank")
+      return
     }
-
-    window.open(event.target.href, "_blank")
+    
+    if (!!href.hash) jumpToSection(href.hash.substring(1))
+    else if (href.pathname.startsWith("/wiki")) fetchArticle(event.target.href)
   }
 
   function jumpToSection(slug) {
