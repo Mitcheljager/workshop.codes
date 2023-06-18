@@ -61,5 +61,7 @@
       </code>
     </div>
   </div>
+
+  <div class="modal__backdrop" on:click={() => expanded = false} />
 </div>
 {/if}
