@@ -1,4 +1,6 @@
 <script>
+  import { tick } from "svelte"
+  import { reset as microlight } from "../../microlight"
   import Expand from "../icon/Expand.svelte"
 
   export let fullContentLines
@@ -16,6 +18,13 @@
     }
   }
 
+  async function syntaxHighlight() {
+    await tick()
+    microlight()
+  }
+
+  $: if (expanded || !expanded) syntaxHighlight()
+
   function escapeLine(line) {
     return line.replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")
   }
@@ -26,7 +35,7 @@
     background-color: rgba(255, 255, 0, 0.2);
   }
 
-  .microlight {
+  .line {
     width: 100%;
   }
 </style>
@@ -38,7 +47,7 @@
   <code class="block overflow-auto">
     {#each snippetLines as line, index}
       <div class="flex">
-        {snippetHighlightedLineIndex + index}.&nbsp;<div class="microlight">{@html escapeLine(line || "")}</div>
+        {snippetHighlightedLineIndex + index}.&nbsp;<div class="line microlight">{@html escapeLine(line || "")}</div>
       </div>
     {/each}
   </code>
@@ -54,7 +63,7 @@
       <code class="block overflow-auto">
         {#each fullContentLines as line, index}
           <div class="flex">
-            {index}.&nbsp;<div class="microlight" class:highlighted={index === snippetHighlightedLineIndex}>{@html escapeLine(line || "")}</div>
+            {index}.&nbsp;<div class="line microlight" class:highlighted={index === snippetHighlightedLineIndex}>{@html escapeLine(line || "")}</div>
           </div>
         {/each}
       </code>

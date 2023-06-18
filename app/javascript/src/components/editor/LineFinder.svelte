@@ -29,8 +29,6 @@
     found = false
   }
 
-  $: if (found) syntaxHighlight()
-
   function keydown(event) {
     if (event.ctrlKey && event.keyCode == 66) {
       event.preventDefault()
