@@ -12,8 +12,7 @@
 </script>
 
 <svg
-  class={$$restProps.class || ""}
-  style={$$restProps.style || ""}
+  {...$$restProps}
   width="24"
   height="24"
   viewBox="0 0 24 24"
