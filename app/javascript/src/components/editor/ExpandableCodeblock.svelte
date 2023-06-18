@@ -11,7 +11,6 @@
     snippetLines = []
 
     const snippetStartLineIdx = snippetHighlightedLineIndex + Math.max(0, Math.round(snippetLineCount / 2))
-    console.log({ snippetStartLineIdx })
     for (let i = snippetStartLineIdx; i < snippetStartLineIdx + snippetLineCount; i++) {
       snippetLines.push(fullContentLines[i])
     }
