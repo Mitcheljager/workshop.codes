@@ -3,7 +3,6 @@
 
   const ARROW_STYLE = "fill: currentColor; transform-origin: center; transform-box: fill-box;"
 
-  let cssRotation
   $: cssRotation = contract ? "rotate(180deg)" : ""
 
 </script>
