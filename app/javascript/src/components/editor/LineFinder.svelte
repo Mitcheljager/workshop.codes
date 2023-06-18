@@ -2,9 +2,7 @@
   import { sortedItems, editorStates } from "../../stores/editor"
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
-  import { reset as microlight } from "../../microlight"
   import { fade } from "svelte/transition"
-  import { tick } from "svelte"
   import ExpandableCodeblock from "./ExpandableCodeblock.svelte"
 
   let active = false
@@ -118,11 +116,6 @@
     document.body.dispatchEvent(createSelection)
 
     active = false
-  }
-
-  async function syntaxHighlight() {
-    await tick()
-    microlight()
   }
 
   async function focusInput() {
