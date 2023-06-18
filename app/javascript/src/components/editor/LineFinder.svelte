@@ -5,6 +5,7 @@
   import { reset as microlight } from "../../microlight"
   import { fade } from "svelte/transition"
   import { tick } from "svelte"
+  import ExpandableCodeblock from "./ExpandableCodeblock.svelte"
 
   let active = false
   let found = false
@@ -78,27 +79,20 @@
 
       if (!item) throw new Error("Couldn't find a corresponding file.")
 
+      const cleanCompiledLines = compiled.replaceAll(/(\[linemarker].*\[\/linemarker])/g, "").split("\n")
+      const cleanItemContentLines = item.content.replaceAll(/(\[linemarker].*\[\/linemarker])/g, "").split("\n")
+
       // Get data for compiled content, include line before and fter
       foundCompiled = {
         lineNumber: intValue,
-        foundLine: findLineRangeInContent(compiled, intValue),
-        multiline: [
-          findLineRangeInContent(compiled, intValue - 1),
-          findLineRangeInContent(compiled, intValue),
-          findLineRangeInContent(compiled, intValue + 1)
-        ]
+        multiline: cleanCompiledLines
       }
 
       // Get data for original item content, include line before and fter
       foundItem = {
         item,
         lineNumber,
-        foundLine: findLineRangeInContent(item.content, lineNumber),
-        multiline: [
-          findLineRangeInContent(item.content, lineNumber - 1),
-          findLineRangeInContent(item.content, lineNumber),
-          findLineRangeInContent(item.content, lineNumber + 1)
-        ]
+        multiline: cleanItemContentLines
       }
 
       found = true
@@ -106,12 +100,6 @@
       console.error(e)
       error = e
     }
-  }
-
-  function findLineRangeInContent(content, line) {
-    const cleanedContent = content.replaceAll(/(\[linemarker].*\[\/linemarker])/g, "").split("\n")
-
-    return cleanedContent[line]
   }
 
   async function goToItemAndSelect() {
@@ -176,21 +164,19 @@
 
       {#if found}
         <p class="mb-1/8">This is what the line looks like in your compiled code:</p>
-        <code class="block overflow-auto">
-          {#each foundCompiled.multiline as line, index}
-            {foundCompiled.lineNumber + index}.&nbsp;<span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
-          {/each}
-        </code>
+        <ExpandableCodeblock
+          fullContentLines={foundCompiled.multiline}
+          snippetHighlightedLineIndex={foundCompiled.lineNumber}
+        />
 
         <p class="mb-1/8">
           This is what the corresponding line looks like in your code: <br>
           File name: <strong class="text-white">{foundItem.item?.name}</strong>.
         </p>
-        <code class="block overflow-auto">
-          {#each foundItem.multiline as line, index}
-            {foundItem.lineNumber + index}.&nbsp;<span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
-          {/each}
-        </code>
+        <ExpandableCodeblock
+          fullContentLines={foundItem.multiline}
+          snippetHighlightedLineIndex={foundItem.lineNumber}
+        />
 
         <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there!</button>
       {/if}
