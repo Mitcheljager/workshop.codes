@@ -3,11 +3,8 @@
 
   const ARROW_STYLE = "fill: currentColor; transform-origin: center; transform-box: fill-box;"
 
-  let cssRotation = ""
-  $: {
-    if (contract) cssRotation = "rotate(180deg)"
-    else cssRotation = ""
-  }
+  let cssRotation
+  $: cssRotation = contract ? "rotate(180deg)" : ""
 
 </script>
 
@@ -16,11 +13,6 @@
   width="24"
   height="24"
   viewBox="0 0 24 24"
-  fill="none"
-  version="1.1"
-  id="svg4"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:svg="http://www.w3.org/2000/svg"
 >
   <path
     d="M 2,3.41421 V 7 C 2,7.55228 1.55228,8 1,8 0.447715,8 0,7.55228 0,7 V 1 C 0,0.447715 0.447715,0 1,0 H 7 C 7.55228,0 8,0.447715 8,1 8,1.55228 7.55228,2 7,2 H 3.41421 l 5.2929,5.29289 c 0.39052,0.39053 0.39052,1.02369 0,1.41422 -0.39053,0.39052 -1.02369,0.39052 -1.41422,0 z"

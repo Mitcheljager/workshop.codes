@@ -71,9 +71,7 @@
       let i = intValue
       while (i) {
         linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
-        if (linemarkerStart != -1) {
-          break
-        }
+        if (linemarkerStart != -1) break
         i--
       }
 
