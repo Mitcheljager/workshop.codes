@@ -3,7 +3,7 @@
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
   import { fade } from "svelte/transition"
-  import ExpandableCodeblock from "./ExpandableCodeblock.svelte"
+  import ExpandableSnippet from "./ExpandableSnippet.svelte"
 
   let active = false
   let found = false
@@ -166,7 +166,7 @@
 
       {#if found}
         <p class="mb-1/8">This is what the line looks like in your compiled code:</p>
-        <ExpandableCodeblock
+        <ExpandableSnippet
           fullContentLines={foundCompiled.multiline}
           snippetHighlightedLineIndex={foundCompiled.lineNumber}
         />
@@ -175,7 +175,7 @@
           This is what the corresponding line looks like in your code: <br>
           File name: <strong class="text-white">{foundItem.item?.name}</strong>.
         </p>
-        <ExpandableCodeblock
+        <ExpandableSnippet
           fullContentLines={foundItem.multiline}
           snippetHighlightedLineIndex={foundItem.lineNumber}
         />

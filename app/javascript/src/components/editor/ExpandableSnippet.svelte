@@ -8,15 +8,22 @@
   export let snippetHighlightedLineIndex = 0
 
   let expanded = false
+  let snippetLines
   let snippetStartLineIdx
-  let snippetLines = []
-  $: {
-    snippetLines = []
 
+  $: {
     snippetStartLineIdx = snippetHighlightedLineIndex - Math.max(0, Math.floor(snippetLineCount / 2))
+    snippetLines = getLines(snippetLineCount)
+  }
+
+  function getLines() {
+    const lines = []
+
     for (let i = snippetStartLineIdx; i < snippetStartLineIdx + snippetLineCount; i++) {
-      snippetLines.push(fullContentLines[i])
+      lines.push(fullContentLines[i])
     }
+
+    return lines
   }
 
   async function syntaxHighlight() {
@@ -31,24 +38,14 @@
   }
 </script>
 
-<style>
-  .highlighted {
-    background-color: rgba(255, 255, 0, 0.2);
-  }
-
-  .line {
-    width: 100%;
-  }
-</style>
-
-<div class="relative">
-  <div class="absolute inline-block cursor-pointer top-0 right-0 p-1/16" on:click={() => expanded = true}>
-    <Expand style="width: 15px; height: auto" />
+<div class="expandable-snippet relative">
+  <div class="expandable-codeblock__expand-button" on:click={() => expanded = true}>
+    <Expand />
   </div>
   <code class="block overflow-auto">
     {#each snippetLines as line, index}
       <div class="flex">
-        {snippetStartLineIdx + index}.&nbsp;<div class="line microlight">{@html escapeLine(line || "")}</div>
+        {snippetStartLineIdx + index}.&nbsp;<div class="microlight expandable-snippet__line">{@html escapeLine(line || "")}</div>
       </div>
     {/each}
   </code>
@@ -57,14 +54,14 @@
 {#if expanded}
 <div class="modal modal--top" data-ignore>
   <div class="modal__content" style="min-width: 600px; max-width: initial">
-    <div class="relative">
-      <div class="absolute inline-block cursor-pointer top-0 right-0 p-1/16" on:click={() => expanded = false}>
+    <div class="snippet relative">
+      <div class="snippet__expand-button" on:click={() => expanded = false}>
         <Expand contract />
       </div>
       <code class="block overflow-auto">
         {#each fullContentLines as line, index}
           <div class="flex">
-            {index}.&nbsp;<div class="line microlight" class:highlighted={index === snippetHighlightedLineIndex}>{@html escapeLine(line || "")}</div>
+            {index}.&nbsp;<div class="microlight expandable-snippet__line" class:expandable-snippet__line--highlighted={index === snippetHighlightedLineIndex}>{@html escapeLine(line || "")}</div>
           </div>
         {/each}
       </code>

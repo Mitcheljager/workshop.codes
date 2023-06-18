@@ -1,0 +1,23 @@
+.expandable-snippet {
+  &__line {
+    width: 100%;
+
+    &--highlighted {
+      background-color: rgba(255, 255, 0, 0.2);
+    }
+  }
+
+  &__expand-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.25rem;
+    cursor: pointer;
+    display: inline-block;
+
+    > svg {
+      width: 15px;
+      height: auto;
+    }
+  }
+}
