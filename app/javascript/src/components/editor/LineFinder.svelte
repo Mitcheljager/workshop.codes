@@ -44,7 +44,15 @@
 
     const content = $sortedItems.filter(i => i.type == "item" && !i.hidden && !isAnyParentHidden(i)).map(i => {
       // Insert line marker to use keep track of line numbers
-      return i.content.split("\n").map((line, lineNumber) => `[linemarker]${ i.id }|${ lineNumber + 1 }[/linemarker]${ line }`).join("\n")
+      return i.content
+        .split("\n")
+        .map((line, lineNumber) => {
+          const linemarker = `[linemarker]${ i.id }|${ lineNumber + 1 }[/linemarker]`
+          return line.startsWith("settings") // workaround for compiler shenanigans
+            ? `${ line }${ linemarker }`
+            : `${ linemarker }${ line }`
+        })
+        .join("\n")
     }).join("\n\n")
 
     try {
