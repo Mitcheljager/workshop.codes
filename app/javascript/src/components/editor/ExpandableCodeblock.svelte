@@ -8,11 +8,12 @@
   export let snippetHighlightedLineIndex = 0
 
   let expanded = false
+  let snippetStartLineIdx
   let snippetLines = []
   $: {
     snippetLines = []
 
-    const snippetStartLineIdx = snippetHighlightedLineIndex + Math.max(0, Math.round(snippetLineCount / 2))
+    snippetStartLineIdx = snippetHighlightedLineIndex - Math.max(0, Math.floor(snippetLineCount / 2))
     for (let i = snippetStartLineIdx; i < snippetStartLineIdx + snippetLineCount; i++) {
       snippetLines.push(fullContentLines[i])
     }
@@ -47,7 +48,7 @@
   <code class="block overflow-auto">
     {#each snippetLines as line, index}
       <div class="flex">
-        {snippetHighlightedLineIndex + index}.&nbsp;<div class="line microlight">{@html escapeLine(line || "")}</div>
+        {snippetStartLineIdx + index}.&nbsp;<div class="line microlight">{@html escapeLine(line || "")}</div>
       </div>
     {/each}
   </code>

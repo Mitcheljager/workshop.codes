@@ -48,7 +48,7 @@
     }).join("\n\n")
 
     try {
-      const intValue = Math.max(parseInt(value) - 1, 0)
+      const intValue = Math.max(parseInt(value), 0)
 
       if (isNaN(intValue)) throw new Error("That's not a number")
 
@@ -60,8 +60,11 @@
       // Attempt to find line marker starting at current line moving up
       let linemarkerStart = -1
       let i = intValue
-      while (linemarkerStart == -1 && i) {
+      while (i) {
         linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
+        if (linemarkerStart != -1) {
+          break
+        }
         i--
       }
 
