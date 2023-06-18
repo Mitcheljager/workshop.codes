@@ -3,6 +3,7 @@
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
   import { fade } from "svelte/transition"
+  import { tick } from "svelte"
   import ExpandableSnippet from "./ExpandableSnippet.svelte"
 
   let active = false
