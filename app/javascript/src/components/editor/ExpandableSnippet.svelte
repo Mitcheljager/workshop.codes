@@ -39,7 +39,7 @@
 </script>
 
 <div class="expandable-snippet relative">
-  <div class="expandable-codeblock__expand-button" on:click={() => expanded = true}>
+  <div class="expandable-snippet__expand-button" on:click={() => expanded = true}>
     <Expand />
   </div>
   <code class="block overflow-auto">
@@ -54,8 +54,8 @@
 {#if expanded}
 <div class="modal modal--top" data-ignore>
   <div class="modal__content" style="min-width: 600px; max-width: initial">
-    <div class="snippet relative">
-      <div class="snippet__expand-button" on:click={() => expanded = false}>
+    <div class="expandable-snippet relative">
+      <div class="expandable-snippet__expand-button" on:click={() => expanded = false}>
         <Expand contract />
       </div>
       <code class="block overflow-auto">
