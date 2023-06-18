@@ -1,0 +1,15 @@
+$sides: top, bottom, left, right;
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+@each $side in $sides {
+  .#{ $side }-0 {
+    #{ $side }: 0;
+  }
+}

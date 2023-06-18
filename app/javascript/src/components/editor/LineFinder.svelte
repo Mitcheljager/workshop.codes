@@ -2,9 +2,9 @@
   import { sortedItems, editorStates } from "../../stores/editor"
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
-  import { reset as microlight } from "../../microlight"
   import { fade } from "svelte/transition"
   import { tick } from "svelte"
+  import ExpandableSnippet from "./ExpandableSnippet.svelte"
 
   let active = false
   let found = false
@@ -28,8 +28,6 @@
     found = false
   }
 
-  $: if (found) syntaxHighlight()
-
   function keydown(event) {
     if (event.ctrlKey && event.keyCode == 66) {
       event.preventDefault()
@@ -47,11 +45,19 @@
 
     const content = $sortedItems.filter(i => i.type == "item" && !i.hidden && !isAnyParentHidden(i)).map(i => {
       // Insert line marker to use keep track of line numbers
-      return i.content.split("\n").map((line, lineNumber) => `[linemarker]${ i.id }|${ lineNumber + 1 }[/linemarker]${ line }`).join("\n")
+      return i.content
+        .split("\n")
+        .map((line, lineNumber) => {
+          const linemarker = `[linemarker]${ i.id }|${ lineNumber + 1 }[/linemarker]`
+          return line.startsWith("settings") // workaround for compiler shenanigans
+            ? `${ line }${ linemarker }`
+            : `${ linemarker }${ line }`
+        })
+        .join("\n")
     }).join("\n\n")
 
     try {
-      const intValue = Math.max(parseInt(value) - 1, 0)
+      const intValue = Math.max(parseInt(value), 0)
 
       if (isNaN(intValue)) throw new Error("That's not a number")
 
@@ -63,8 +69,9 @@
       // Attempt to find line marker starting at current line moving up
       let linemarkerStart = -1
       let i = intValue
-      while (linemarkerStart == -1 && i) {
+      while (i) {
         linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
+        if (linemarkerStart != -1) break
         i--
       }
 
@@ -78,27 +85,20 @@
 
       if (!item) throw new Error("Couldn't find a corresponding file.")
 
+      const cleanCompiledLines = compiled.replaceAll(/(\[linemarker].*\[\/linemarker])/g, "").split("\n")
+      const cleanItemContentLines = item.content.replaceAll(/(\[linemarker].*\[\/linemarker])/g, "").split("\n")
+
       // Get data for compiled content, include line before and fter
       foundCompiled = {
         lineNumber: intValue,
-        foundLine: findLineRangeInContent(compiled, intValue),
-        multiline: [
-          findLineRangeInContent(compiled, intValue - 1),
-          findLineRangeInContent(compiled, intValue),
-          findLineRangeInContent(compiled, intValue + 1)
-        ]
+        multiline: cleanCompiledLines
       }
 
       // Get data for original item content, include line before and fter
       foundItem = {
         item,
         lineNumber,
-        foundLine: findLineRangeInContent(item.content, lineNumber),
-        multiline: [
-          findLineRangeInContent(item.content, lineNumber - 1),
-          findLineRangeInContent(item.content, lineNumber),
-          findLineRangeInContent(item.content, lineNumber + 1)
-        ]
+        multiline: cleanItemContentLines
       }
 
       found = true
@@ -106,12 +106,6 @@
       console.error(e)
       error = e
     }
-  }
-
-  function findLineRangeInContent(content, line) {
-    const cleanedContent = content.replaceAll(/(\[linemarker].*\[\/linemarker])/g, "").split("\n")
-
-    return cleanedContent[line]
   }
 
   async function goToItemAndSelect() {
@@ -132,11 +126,6 @@
     document.body.dispatchEvent(createSelection)
 
     active = false
-  }
-
-  async function syntaxHighlight() {
-    await tick()
-    microlight()
   }
 
   async function focusInput() {
@@ -176,21 +165,19 @@
 
       {#if found}
         <p class="mb-1/8">This is what the line looks like in your compiled code:</p>
-        <code class="block overflow-auto">
-          {#each foundCompiled.multiline as line, index}
-            {foundCompiled.lineNumber + index}.&nbsp;<span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
-          {/each}
-        </code>
+        <ExpandableSnippet
+          fullContentLines={foundCompiled.multiline}
+          snippetHighlightedLineIndex={foundCompiled.lineNumber}
+        />
 
         <p class="mb-1/8">
           This is what the corresponding line looks like in your code: <br>
           File name: <strong class="text-white">{foundItem.item?.name}</strong>.
         </p>
-        <code class="block overflow-auto">
-          {#each foundItem.multiline as line, index}
-            {foundItem.lineNumber + index}.&nbsp;<span class="microlight">{@html (line || "").replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")}</span><br>
-          {/each}
-        </code>
+        <ExpandableSnippet
+          fullContentLines={foundItem.multiline}
+          snippetHighlightedLineIndex={foundItem.lineNumber}
+        />
 
         <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there!</button>
       {/if}
