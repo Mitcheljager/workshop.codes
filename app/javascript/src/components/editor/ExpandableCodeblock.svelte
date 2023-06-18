@@ -24,7 +24,7 @@
     microlight()
   }
 
-  $: if (expanded || !expanded) syntaxHighlight()
+  $: syntaxHighlight(expanded)
 
   function escapeLine(line) {
     return line.replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")
