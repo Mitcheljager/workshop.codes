@@ -53,18 +53,20 @@
 
 {#if expanded}
 <div class="modal modal--top" data-ignore>
-  <div class="modal__content" style="min-width: 600px; max-width: initial">
+  <div class="modal__content expandable-snippet-modal" style="min-width: 600px; max-width: initial;">
     <div class="expandable-snippet relative">
       <div class="expandable-snippet__expand-button" on:click={() => expanded = false}>
         <Expand contract />
       </div>
-      <code class="block overflow-auto">
-        {#each fullContentLines as line, index}
-          <div class="flex">
-            {index}.&nbsp;<div class="microlight expandable-snippet__line" class:expandable-snippet__line--highlighted={index === snippetHighlightedLineIndex}>{@html escapeLine(line || "")}</div>
-          </div>
-        {/each}
-      </code>
+      <div class="expandable-snippet__code overflow-auto">
+        <code class="block">
+          {#each fullContentLines as line, index}
+            <div class="flex">
+              {index}.&nbsp;<div class="microlight expandable-snippet__line" class:expandable-snippet__line--highlighted={index === snippetHighlightedLineIndex}>{@html escapeLine(line || "")}</div>
+            </div>
+          {/each}
+        </code>
+      </div>
     </div>
   </div>
 
