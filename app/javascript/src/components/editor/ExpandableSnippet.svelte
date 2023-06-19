@@ -10,6 +10,7 @@
   let expanded = false
   let snippetLines
   let snippetStartLineIdx
+  let expandedCodeEl
 
   $: {
     snippetStartLineIdx = snippetHighlightedLineIndex - Math.max(0, Math.floor(snippetLineCount / 2))
@@ -32,6 +33,19 @@
   }
 
   $: syntaxHighlight(expanded)
+
+  async function scrollToHighlightedLine() {
+    await tick()
+
+    if (!expandedCodeEl) return
+
+    const highlightedLineEl = expandedCodeEl.querySelector(".expandable-snippet__line--highlighted")
+    if (!highlightedLineEl) return
+
+    highlightedLineEl.scrollIntoViewIfNeeded()
+  }
+
+  $: if (expanded) scrollToHighlightedLine()
 
   function escapeLine(line) {
     return line.replaceAll(/\s/g, "&nbsp;").replaceAll(/\t/g, "&nbsp;&nbsp;")
@@ -59,10 +73,13 @@
         <Expand contract />
       </div>
       <div class="expandable-snippet__code overflow-auto">
-        <code class="block">
+        <code class="block" bind:this={expandedCodeEl}>
           {#each fullContentLines as line, index}
             <div class="flex">
-              {index}.&nbsp;<div class="microlight expandable-snippet__line" class:expandable-snippet__line--highlighted={index === snippetHighlightedLineIndex}>{@html escapeLine(line || "")}</div>
+              {index}.&nbsp;<div
+                class="microlight expandable-snippet__line"
+                class:expandable-snippet__line--highlighted={index === snippetHighlightedLineIndex}
+              >{@html escapeLine(line || "")}</div>
             </div>
           {/each}
         </code>
