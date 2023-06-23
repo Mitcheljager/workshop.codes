@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseFromPosition } from "../utils/editor"
+import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/editor"
 import { completionsMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 
@@ -123,7 +123,7 @@ function findIncorrectArgsLength(content) {
           safeIndex++
         }
 
-        const splitContent = argumentsString.split(",")
+        const splitContent = splitArgumentsString(argumentsString)
 
         if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
         if (!item.args_min_length && splitContent.length == item.args_length) break
