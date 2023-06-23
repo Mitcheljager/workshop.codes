@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_31_021043) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_06_23_182226) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.integer "record_id", null: false
     t.integer "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -28,8 +27,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.string "content_type"
     t.text "metadata"
     t.integer "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -44,8 +43,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.integer "user_id"
     t.integer "content_type"
     t.text "properties"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
@@ -54,7 +53,7 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.integer "user_id"
     t.string "name"
     t.text "properties"
-    t.datetime "time"
+    t.datetime "time", precision: nil
     t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
     t.index ["user_id"], name: "index_ahoy_events_on_user_id"
     t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
@@ -85,7 +84,7 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.string "app_version"
     t.string "os_version"
     t.string "platform"
-    t.datetime "started_at"
+    t.datetime "started_at", precision: nil
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
@@ -93,8 +92,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
   create_table "archive_authorizations", force: :cascade do |t|
     t.string "code", null: false
     t.string "bnet_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["code"], name: "index_archive_authorizations_on_code", unique: true
   end
 
@@ -102,15 +101,15 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.string "title"
     t.string "slug"
     t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "badges", force: :cascade do |t|
     t.integer "badge_id"
     t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "blocks", force: :cascade do |t|
@@ -120,15 +119,15 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.string "name"
     t.text "properties"
     t.integer "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "collections", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "nice_url"
     t.text "description"
     t.integer "display_type", default: 0
@@ -139,16 +138,16 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.integer "post_id"
     t.integer "parent_id"
     t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "derivatives", force: :cascade do |t|
     t.integer "source_id"
     t.integer "derivation_id"
     t.string "source_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["source_code", "derivation_id"], name: "index_derivatives_on_source_code_and_derivation_id", unique: true
     t.index ["source_id", "derivation_id"], name: "index_derivatives_on_source_id_and_derivation_id", unique: true, where: "source_id IS NOT NULL"
   end
@@ -160,8 +159,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.integer "item_id"
     t.string "context"
     t.float "score"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["item_type", "item_id"], name: "index_disco_recommendations_on_item"
     t.index ["subject_type", "subject_id"], name: "index_disco_recommendations_on_subject"
   end
@@ -170,16 +169,16 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.text "email_ciphertext"
     t.integer "post_id"
     t.integer "content_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["post_id"], name: "index_email_notifications_on_post_id"
   end
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["post_id"], name: "index_favorites_on_post_id"
     t.index ["user_id", "post_id"], name: "index_favorites_on_user_id_and_post_id"
   end
@@ -187,8 +186,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
   create_table "forgot_password_tokens", force: :cascade do |t|
     t.integer "user_id"
     t.string "token"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_forgot_password_tokens_on_user_id"
   end
 
@@ -197,8 +196,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.integer "has_been_read", default: 0
     t.string "content"
     t.string "go_to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "content_type", default: 0
     t.string "concerns_model", default: "post"
     t.integer "concerns_id", default: 0
@@ -215,8 +214,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.string "tags"
     t.string "heroes"
     t.string "maps"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "version"
     t.integer "favorites_count", default: 0
     t.integer "impressions_count", default: 0
@@ -231,7 +230,7 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.boolean "unlisted", default: false
     t.string "locale", default: "en"
     t.boolean "ptr", default: false
-    t.datetime "last_revision_created_at"
+    t.datetime "last_revision_created_at", precision: nil
     t.boolean "immortal", default: false
     t.boolean "draft", default: false
     t.text "controls", default: "[]"
@@ -255,16 +254,16 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.string "title"
     t.text "content"
     t.string "uuid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "content_type", default: 0
   end
 
   create_table "remember_tokens", force: :cascade do |t|
     t.integer "user_id"
     t.string "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_remember_tokens_on_user_id"
   end
 
@@ -275,8 +274,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.text "content"
     t.string "category"
     t.integer "status", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "visit_token"
     t.text "properties", default: "[]"
     t.integer "reported_user_id"
@@ -287,8 +286,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.string "code"
     t.string "version"
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "visible", default: true
     t.text "snippet"
     t.index ["post_id"], name: "index_revisions_on_post_id"
@@ -297,9 +296,9 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
   create_table "statistics", force: :cascade do |t|
     t.integer "timeframe"
     t.integer "value"
-    t.datetime "on_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "on_date", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "properties", default: "{}"
     t.integer "model_id"
     t.integer "content_type", default: 0
@@ -311,8 +310,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "email_ciphertext"
     t.string "email_bidx"
     t.string "link"
@@ -329,7 +328,7 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.text "custom_css"
     t.integer "pagination_type", default: 0
     t.integer "linked_id"
-    t.datetime "feed_last_visited_at"
+    t.datetime "feed_last_visited_at", precision: nil
     t.string "uuid", limit: 36
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -338,8 +337,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
   create_table "webhook_values", force: :cascade do |t|
     t.string "name"
     t.string "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "wiki_articles", force: :cascade do |t|
@@ -350,16 +349,16 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.text "tags"
     t.integer "category_id"
     t.string "group_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "wiki_categories", force: :cascade do |t|
     t.string "title"
     t.string "slug"
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "is_documentation", default: false
   end
 
@@ -369,8 +368,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_021043) do
     t.integer "content_type"
     t.text "notes"
     t.boolean "approved"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

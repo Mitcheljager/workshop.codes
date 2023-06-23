@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module OverwatchWorkshop
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 7.0
     config.active_storage.replace_on_assign_to_many = false
     config.exceptions_app = self.routes
     config.active_job.queue_adapter = :sucker_punch
@@ -20,6 +20,9 @@ module OverwatchWorkshop
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
     config.i18n.fallbacks = [:en]
+
+    config.active_support.cache_format_version = 7.0
+    config.active_support.disable_to_s_conversion = true
 
     config.before_configuration do
       env_file = File.join(Rails.root, "config", "local_env.yml")
