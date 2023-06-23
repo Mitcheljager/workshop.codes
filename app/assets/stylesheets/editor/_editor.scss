@@ -131,9 +131,10 @@ $top-height: 4rem;
   bottom: 0;
   right: 0;
   opacity: 0;
-  cursor: ew-resize;
+  cursor: ns-resize;
 
   @include media-min(mbl) {
+    cursor: ew-resize;
     height: 100%;
     width: 0.5rem;
   }
