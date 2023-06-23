@@ -23,7 +23,7 @@
   <% end %>
 
   <%# https://stackoverflow.com/a/8180410 %>
-  <% if lookup_context.exists?(@report.concerns_model, lookup_context.prefixes, partial = true) %>
+  <% if lookup_context.exist?(@report.concerns_model, lookup_context.prefixes, partial = true) %>
     <%= render @report.concerns_model %>
   <% else %>
     <div class="mb-1/2">

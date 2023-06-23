@@ -349,12 +349,12 @@ GEM
       racc
     pg (1.5.3)
     pg (1.5.3-x64-mingw32)
-    pry (0.13.1)
+    pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry-byebug (3.9.0)
+    pry-byebug (3.10.1)
       byebug (~> 11.0)
-      pry (~> 0.13.0)
+      pry (>= 0.13, < 0.15)
     public_suffix (5.0.1)
     puma (4.3.12)
       nio4r (~> 2.0)
@@ -556,7 +556,7 @@ DEPENDENCIES
   omniauth-discord
   omniauth-rails_csrf_protection
   pg
-  pry-byebug (~> 3.9.0)
+  pry-byebug (~> 3.10.1)
   puma (~> 4.3)
   rails (~> 7.0.5)
   rails-i18n
@@ -584,7 +584,7 @@ DEPENDENCIES
   win32-security
 
 RUBY VERSION
-   ruby 3.0.0p0
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.3.7

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "~> 3.0.0"
+ruby "~> 3.2.2"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "active_model_serializers"
@@ -43,6 +43,7 @@ gem "sendgrid-ruby"
 gem "sprockets-rails"
 gem "sucker_punch"
 gem "turbolinks", "~> 5"
+gem "tzinfo-data"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker", "~> 5.0"
 gem "webpacker-svelte", "~> 1.0.0"
@@ -55,7 +56,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker"
-  gem "pry-byebug", "~> 3.9.0"
+  gem "pry-byebug", "~> 3.10.1"
   gem "rspec-rails", "~> 4.0.2"
   gem "selenium-webdriver", "~> 4.0"
   gem "shoulda-matchers", "~> 4.5"
@@ -78,5 +79,3 @@ group :production do
   gem "pg"
   gem "scout_apm"
 end
-
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

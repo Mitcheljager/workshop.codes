@@ -24,7 +24,7 @@ module WebpackTestBuild
   end
 
   def self.timestamp_outdated?
-    return true if !File.exists?(TS_FILE)
+    return true if !File.exist?(TS_FILE)
 
     current = current_bundle_timestamp(TS_FILE)
 
