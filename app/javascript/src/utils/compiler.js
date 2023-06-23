@@ -263,6 +263,7 @@ function evaluateConditionals(joinedItems) {
   const ifStartRegex = /@if[\s\n]*\(/g
   const startBracketRegex = /[\s\n]*\{/g
   const elseStartRegex = /[\s\n]*@else[\s\n]*\{/g
+  const elifStartRegex = /[\s\n]*@elif[\s\n]*\(/g
 
   let match
   while ((match = ifStartRegex.exec(joinedItems)) != null) {
@@ -271,6 +272,8 @@ function evaluateConditionals(joinedItems) {
     if (closingConditionParenIndex < 0) {
       continue
     }
+
+    console.log("Getting if...")
 
     const conditionExpression = joinedItems.substring(openingConditionParenIndex + 1, closingConditionParenIndex)
     const conditionExpressionTree = getExpressionTree(conditionExpression)
@@ -282,15 +285,60 @@ function evaluateConditionals(joinedItems) {
     }
 
     const openingBracketIndex = startBracketMatch.index + startBracketMatch[0].length - 1
-    const closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingBracketIndex - 1)
+    let closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingBracketIndex - 1)
     if (closingBracketIndex < 0) {
       continue
     }
 
     let conditionalEndingIndex = closingBracketIndex
 
-    const trueBlockContent = joinedItems.substring(openingBracketIndex + 1, closingBracketIndex)
+    let trueBlockContent = joinedItems.substring(openingBracketIndex + 1, closingBracketIndex)
     let falseBlockContent = ""
+
+    let passed = evaluateExpressionTree(conditionExpressionTree)
+    elifStartRegex.lastIndex = closingBracketIndex
+    let elifMatch = elifStartRegex.exec(joinedItems)
+
+    console.log(`If passed with: ${ passed }`)
+
+    while (elifMatch != null && elifMatch.index === closingBracketIndex + 1) {
+      console.log("Getting else if...")
+      const openingElifConditionParenIndex = elifMatch.index + elifMatch[0].length - 1
+      const closingElifConditionParenIndex = getClosingBracket(joinedItems, "(", ")", openingElifConditionParenIndex - 1)
+      if (closingElifConditionParenIndex < 0) {
+        break
+      }
+
+      const conditionElifExpression = joinedItems.substring(openingElifConditionParenIndex + 1, closingElifConditionParenIndex)
+      const conditionElifExpressionTree = getExpressionTree(conditionElifExpression)
+
+      startBracketRegex.lastIndex = closingElifConditionParenIndex + 1 // set start position for the exec below
+      const startElifBracketMatch = startBracketRegex.exec(joinedItems)
+      if (startElifBracketMatch == null || startElifBracketMatch.index !== closingElifConditionParenIndex + 1) {
+        break
+      }
+
+      const openingElifBracketIndex = startElifBracketMatch.index + startElifBracketMatch[0].length - 1
+      closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingElifBracketIndex - 1)
+      if (closingBracketIndex < 0) {
+        break
+      }
+
+      conditionalEndingIndex = closingBracketIndex
+
+      if(!passed) {
+        passed = evaluateExpressionTree(conditionElifExpressionTree)
+        if(passed) {
+          trueBlockContent = joinedItems.substring(openingElifBracketIndex + 1, closingBracketIndex)
+          console.log("Else If passed with: true")
+        }
+        else
+          console.log("Else If passed with: false")
+      }
+
+      elifStartRegex.lastIndex = closingBracketIndex
+      elifMatch = elifStartRegex.exec(joinedItems)
+    }
 
     elseStartRegex.lastIndex = closingBracketIndex + 1 // set start position for the exec below
     const elseMatch = elseStartRegex.exec(joinedItems)
@@ -305,7 +353,9 @@ function evaluateConditionals(joinedItems) {
       }
     }
 
-    const passed = evaluateExpressionTree(conditionExpressionTree)
+    console.log(`True block is: ${ trueBlockContent }`)
+    console.log(`False block is: ${ falseBlockContent }`)
+    console.log(`Match index is: ${ match.index } and ending is ${ conditionalEndingIndex + 1 }`)
 
     const finalContent = passed ? trueBlockContent : falseBlockContent
     joinedItems = replaceBetween(
