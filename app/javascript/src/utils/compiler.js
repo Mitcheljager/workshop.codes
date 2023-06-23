@@ -89,7 +89,7 @@ function extractAndInsertMixins(joinedItems) {
     if (closingParen < 0) {
       continue
     }
-    const params = content.slice(firstOpenParen + 1, closingParen).replace(/\s/, "").split(",")
+    const params = splitArgumentsString(content.slice(firstOpenParen + 1, closingParen).replace(/\s/, ""))
     const paramsDefaults = params
       .map(param => {
         const slicedAt = param.indexOf("=")
