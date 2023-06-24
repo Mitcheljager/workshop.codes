@@ -465,7 +465,7 @@ function findTrailingCommas(content) {
 }
 
 function findConditionalsRegexErrors(content) {
-  const regex = /(test[ \n]*)(.*)[ \n]*\)[ \n]*\{/g // matches " test righthand) {" and " /regex/flags) {"
+  const regex = /(~=[ \n]*)(.*)[ \n]*\)[ \n]*\{/g // matches "~= righthand) {" and "~= /regex/flags) {"
   const regexRegex = /\/(.*)\/(\w*)/ // TODO: share this with compiler.js?
   let match
   while ((match = regex.exec(content)) != null) {
