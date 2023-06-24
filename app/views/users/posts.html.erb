@@ -54,7 +54,7 @@
                                .order(created_at: :asc)
                                .select(:on_date, :value) %>
 
-          <% (30.days.ago.to_date..Date.today).map{ |date| data[date.strftime("%B %d")] = 0 } %>
+          <% (30.days.ago.to_date..Date.today).map{ |date| data[date.strftime("%B %d")] = 10 } %>
           <% values.map { |v| data[v.on_date.strftime("%B %d")] = v.value } %>
 
           <%= svelte_component("LinkedChart", {
@@ -62,7 +62,8 @@
               data: data,
               fill: "var(--primary)",
               showValue: true,
-              valuePosition: "floating" }) %>
+              valuePosition: "floating",
+              tabindex: 0 }) %>
         </div>
       </div>
 
