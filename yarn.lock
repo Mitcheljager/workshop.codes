@@ -9890,10 +9890,10 @@ svelte-preprocess@^4.7.0:
     sorcery "^0.10.0"
     strip-indent "^3.0.0"
 
-svelte-tiny-linked-charts@^1.0.6:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/svelte-tiny-linked-charts/-/svelte-tiny-linked-charts-1.1.3.tgz#a4162b36007cf59b8e209c504a56c5528411adaf"
-  integrity sha512-ZYvDKej6xVxyNyJThxE+D/tpog4yS7ZNt8ZnUn6wjnJjsyv+ytAio6/COkDEhD5TZ4RnqdDSs2y+iHPtRIEZ4A==
+svelte-tiny-linked-charts@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/svelte-tiny-linked-charts/-/svelte-tiny-linked-charts-1.3.0.tgz#dad1458c2b9fc00be9ff989750cd2d6f7c85579c"
+  integrity sha512-IBzAth0kFpGIBmGUALcO+G7CrGTpMoXro97IousKx18ZISvC4kzVrUB2boqeKR1T8Bkxl1zsODZkFOH9+uV7Qw==
 
 svelte@^3.49.0:
   version "3.50.1"
