@@ -4,6 +4,7 @@
   import { onMount } from "svelte"
   import Sortable from "sortablejs"
 
+  import { escapeable } from "../actions/escapeable"
   import Uploader from "../../uploader"
   import FetchRails from "../../fetch-rails"
   import debounce from "../../debounce"
@@ -125,11 +126,11 @@
 
 
 
-<svelte:window on:keydown={event => { if (event.key === "Escape") previewImageUrl = "" }} />
-
 <div
   class="dropzone"
   class:dropzone--is-active={ active }
+  use:escapeable
+  on:escape={ () => previewImageUrl = "" }
   on:dragover|preventDefault={ () => active = true }
   on:dragleave={ () => active = false}
   on:drop|preventDefault={ drop }>

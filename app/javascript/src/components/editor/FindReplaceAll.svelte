@@ -1,6 +1,7 @@
 <script>
   import { items, currentItem, editorStates } from "../../stores/editor"
   import { getItemById, replaceBetween, setCurrentItemById, updateItem } from "../../utils/editor"
+  import { escapeable } from "../actions/escapeable"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
@@ -148,8 +149,6 @@
   }
 </script>
 
-<svelte:window on:keydown={keydown} on:keydown={event => { if (event.key === "Escape") active = false }} />
-
 {#if !active}
   <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
     <em>Find/Replace in all... (Ctrl+Shift+F)</em>
@@ -157,7 +156,7 @@
 {/if}
 
 {#if active}
-  <div in:fly={{ duration: 150, y: -30 }}>
+  <div in:fly={{ duration: 150, y: -30 }} use:escapeable on:escape={() => active = false}>
     <input type="text" class="form-input bg-darker mt-1/4" placeholder="Find in all..." bind:value bind:this={input} />
 
     <div class="flex mt-1/16">

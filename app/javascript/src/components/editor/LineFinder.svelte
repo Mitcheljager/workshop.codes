@@ -2,6 +2,7 @@
   import { sortedItems, editorStates } from "../../stores/editor"
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
   import { compile } from "../../utils/compiler"
+  import { escapeable } from "../actions/escapeable"
   import { fade } from "svelte/transition"
   import { tick } from "svelte"
   import ExpandableSnippet from "./ExpandableSnippet.svelte"
@@ -134,14 +135,12 @@
   }
 </script>
 
-<svelte:window on:keydown={keydown} on:keydown={event => { if (event.key === "Escape") active = false }} />
-
 <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
   <em>Find line... (Ctrl+B)</em>
 </button>
 
 {#if active}
-  <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
+  <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore use:escapeable on:escape={() => active = false}>
     <div class="modal__content" style="max-width: 600px">
       <p class="mt-0">
         <strong class="text-white">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br>

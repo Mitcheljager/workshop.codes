@@ -1,6 +1,7 @@
 <script>
   import { items } from "../../stores/editor"
   import { getItemById, replaceBetween, setCurrentItemById } from "../../utils/editor"
+  import { escapeable } from "../actions/escapeable"
   import { fade } from "svelte/transition"
   import { tick } from "svelte"
 
@@ -84,14 +85,12 @@
   }
 </script>
 
-<svelte:window on:keydown={keydown} on:keydown={event => { if (event.key === "Escape") active = false }} />
-
 <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
   <em>Find by name... (Ctrl+Q)</em>
 </button>
 
 {#if active}
-  <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
+  <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore use:escapeable on:escape={() => active = false}>
     <div class="modal__content p-0 bg-transparent" style="max-width: 600px">
       <input type="text" class="form-input form-input--large bg-darker" placeholder="Find files by name..." bind:value bind:this={input} />
 

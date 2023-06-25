@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition"
   import { onMount, tick } from "svelte"
+  import { escapeable } from "../actions/escapeable"
   import { setCssVariable } from "../../utils/editor"
   import Cogs from "../icon/Cogs.svelte"
 
@@ -75,7 +76,7 @@
   }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
+<svelte:window on:click={outsideClick} />
 
 <div class="dropdown settings">
   <button class="button button--secondary button--square" on:click|stopPropagation={() => active = !active}>
@@ -83,7 +84,7 @@
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content block p-1/4" style="width: 300px">
+    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content block p-1/4" style="width: 300px">
       <h5 class="mt-0 mb-1/8">Font</h5>
 
       <div class="form-group-inline">

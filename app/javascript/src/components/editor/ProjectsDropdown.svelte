@@ -4,6 +4,7 @@
   import { projects, currentProject, isSignedIn, isMobile } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
   import { createProject, destroyCurrentProject, fetchProject } from "../../utils/project"
+  import { escapeable } from "../actions/escapeable"
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
@@ -78,7 +79,7 @@
   }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") { active = false } }} />
+<svelte:window on:click={outsideClick} />
 
 <CreateProjectModal bind:showModalOfType on:setUrl={({ detail }) => setUrl(detail)} />
 
@@ -92,7 +93,7 @@
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style:min-width="200px">
+    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content dropdown__content--left block w-100" style:min-width="200px">
       <div class="pl-1/8 pr-1/8">
         <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
       </div>

@@ -1,6 +1,7 @@
 <script>
   import { items } from "../../stores/editor"
   import { createNewItem, getSettings } from "../../utils/editor"
+  import { escapeable } from "../actions/escapeable"
   import { fade } from "svelte/transition"
 
   let active = false
@@ -53,12 +54,10 @@
   }
 </script>
 
-<svelte:window on:keydown={event => { if (event.key === "Escape") active = false }} />
-
 <button class="button button--secondary button--square" on:click={() => active = true}>Import Script</button>
 
 {#if active}
-  <div class="modal" transition:fade={{ duration: 100 }} data-hide-on-close>
+  <div class="modal" transition:fade={{ duration: 100 }} use:escapeable on:escape={() => active = false} data-hide-on-close>
     <div class="modal__content">
       Copy your snippet from inside of Overwatch and paste it in here to convert your current snippet to this project.
 

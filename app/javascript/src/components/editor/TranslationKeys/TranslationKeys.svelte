@@ -3,6 +3,7 @@
   import TranslationKeysSelectLanguages from "./TranslationKeysSelectLanguages.svelte"
   import { translationKeys, orderedTranslationKeys, selectedLanguages } from "../../../stores/translationKeys"
   import { copyValueToClipboard } from "../../../copy"
+  import { escapeable } from "../../actions/escapeable"
   import { fade } from "svelte/transition"
 
   let active = false
@@ -28,14 +29,12 @@
   }
 </script>
 
-<svelte:window on:keydown={event => { if (event.key === "Escape") active = false }} />
-
 <button class="button button--secondary button--square" on:click={() => active = true}>
   Translations
 </button>
 
 {#if active}
-  <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
+  <div class="modal modal--top" transition:fade={{ duration: 100 }} use:escapeable on:escape={() => active = false} data-ignore>
     <div class="modal__content" style="max-width: 80vw;">
       <h2 class="mt-0">Translation settings</h2>
 
