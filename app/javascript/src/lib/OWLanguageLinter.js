@@ -17,7 +17,7 @@ export function OWLanguageLinter(view) {
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
   findConditionalsRegexErrors(content)
-  findConditionalsElseIfUses(content)
+  findConditionalsElifUses(content)
   findEachLoopsWithInvalidIterables(content)
   checkMixins(content)
   checkTranslations(content)
@@ -496,17 +496,17 @@ function findConditionalsRegexErrors(content) {
   }
 }
 
-function findConditionalsElseIfUses(content) {
-  const regex = /@else[\s\n]+@?if/g
+function findConditionalsElifUses(content) {
+  const regex = /@elif/g
 
   let match
   while ((match = regex.exec(content)) != null) {
-    const usageFormatted = match[0].replace(/[\s\n]+/, " ")
     diagnostics.push({
       from: match.index,
       to: match.index + match[0].length,
       severity: "error",
-      message: `\`${ usageFormatted }\` is not supported. Use \`@else { @if (elseIfCondition) { ... } }\` instead.`
+      // maybe update the error message? i'm just not sure what to
+      message: "@elif is not valid. Use `@else if (elseIfCondition) { ... }` instead."
     })
   }
 }
