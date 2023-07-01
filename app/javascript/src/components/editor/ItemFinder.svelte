@@ -1,6 +1,7 @@
 <script>
   import { items } from "../../stores/editor"
-  import { getItemById, replaceBetween, setCurrentItemById } from "../../utils/editor"
+  import { getItemById, setCurrentItemById } from "../../utils/editor"
+  import { replaceBetween } from "../../utils/parse"
   import { escapeable } from "../actions/escapeable"
   import { fade } from "svelte/transition"
   import { tick } from "svelte"

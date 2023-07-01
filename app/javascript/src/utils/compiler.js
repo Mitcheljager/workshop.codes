@@ -1,5 +1,6 @@
 import { templates } from "../lib/templates"
-import { getSettings, getClosingBracket, replaceBetween, splitArgumentsString } from "./editor"
+import { getSettings, getClosingBracket, splitArgumentsString } from "./parse"
+import { replaceBetween } from "./parse"
 import { comparisonOperators, sortedComparisonOperatorsSymbols } from "./operators"
 import { flatItems, workshopConstants } from "../stores/editor"
 import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"

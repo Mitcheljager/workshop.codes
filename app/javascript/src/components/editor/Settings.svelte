@@ -2,7 +2,7 @@
   import { fly } from "svelte/transition"
   import { onMount, tick } from "svelte"
   import { escapeable } from "../actions/escapeable"
-  import { setCssVariable } from "../../utils/editor"
+  import { setCssVariable } from "../../utils/setCssVariable"
   import Cogs from "../icon/Cogs.svelte"
 
   let mounted = false

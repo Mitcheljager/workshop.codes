@@ -13,7 +13,7 @@
   import { extraCompletions } from "../../lib/extraCompletions"
   import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, mixinsMap } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
-  import { getPhraseFromPosition } from "../../utils/editor"
+  import { getPhraseFromPosition } from "../../utils/parse"
   import debounce from "../../debounce"
 
   const dispatch = createEventDispatcher()
