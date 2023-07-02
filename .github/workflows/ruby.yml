@@ -63,6 +63,9 @@ jobs:
       - name: RSpec
         run: |
           bundle exec rspec
+      - name: Jest
+        run: |
+          yarn jest
   features:
     name: Cucumber Feature Check
     runs-on: ubuntu-latest
@@ -93,6 +96,3 @@ jobs:
         run: |
           bundle exec rake db:test:prepare
           bundle exec cucumber
-      - name: Jest
-        run: |
-          yarn jest
