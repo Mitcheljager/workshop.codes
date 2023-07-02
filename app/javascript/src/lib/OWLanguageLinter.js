@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/editor"
+import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
 import { completionsMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 

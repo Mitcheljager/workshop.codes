@@ -1,6 +1,7 @@
 <script>
   import { items } from "../../stores/editor"
-  import { createNewItem, getSettings } from "../../utils/editor"
+  import { createNewItem } from "../../utils/editor"
+  import { getSettings } from "../../utils/parse"
   import { escapeable } from "../actions/escapeable"
   import { fade } from "svelte/transition"
 
