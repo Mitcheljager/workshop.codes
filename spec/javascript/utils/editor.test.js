@@ -1,6 +1,6 @@
-import { createNewItem, destroyItem, duplicateItem, getItemById, getSaveContent, isAnyParentHidden, setCurrentItemById, toggleFolderState, toggleHideItem, updateItem, updateItemName, updateStateForId } from "../../app/javascript/src/utils/editor"
-import { currentItem, items, editorStates, openFolders } from "../../app/javascript/src/stores/editor"
-import { defaultLanguage, selectedLanguages, translationKeys } from "../../app/javascript/src/stores/translationKeys"
+import { createNewItem, destroyItem, duplicateItem, getItemById, getSaveContent, isAnyParentHidden, setCurrentItemById, toggleFolderState, toggleHideItem, updateItem, updateItemName, updateStateForId } from "../../../app/javascript/src/utils/editor"
+import { currentItem, items, editorStates, openFolders } from "../../../app/javascript/src/stores/editor"
+import { defaultLanguage, selectedLanguages, translationKeys } from "../../../app/javascript/src/stores/translationKeys"
 import { get } from "svelte/store"
 
 const localStorageMock = (() => {
