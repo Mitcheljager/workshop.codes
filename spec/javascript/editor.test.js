@@ -135,7 +135,6 @@ describe("editor.js", () => {
 
   describe("duplicateItem", () => {
     beforeEach(() => {
-      // Reset the items before each test
       items.set([
         { id: 1, name: "Item 1", parent: null, hidden: false, content: "Content 1", position: 1, type: "folder" },
         { id: 2, name: "Item 2", parent: 1, hidden: false, content: "Content 2", position: 2, type: "item" },
