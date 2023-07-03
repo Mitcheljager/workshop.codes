@@ -35,7 +35,7 @@ const decimal = /^\-?\d[\d_]*(?:\.\d[\d_]*)?(?:[Ee]\-?\d[\d_]*)?/
 const identifier = /^\$\d+|(`?)[_A-Za-z][_A-Za-z$0-9]*\1/
 const actionsValuesIdentifier = /^\s*(?=[A-Z])\b[A-Z][\w\s-]*/g
 const phraseIdentifier = /^\s*(?=[A-Z]).+?(?= [+\-*%=|&<>~^?!]|[\(\)\{\}:;,./\n\[\]]|\s==)/
-const customKeywords = /(?<!\w)@\w+/
+const customKeywords = /(?<!\w)@(?:else if|\w+)/
 
 function tokenBase(stream, state) {
   if (stream.sol()) state.indented = stream.indentation()

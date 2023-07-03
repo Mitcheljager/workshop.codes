@@ -17,7 +17,6 @@ export function OWLanguageLinter(view) {
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
   findConditionalsRegexErrors(content)
-  findConditionalsElseIfUses(content)
   findEachLoopsWithInvalidIterables(content)
   checkMixins(content)
   checkTranslations(content)
@@ -496,20 +495,6 @@ function findConditionalsRegexErrors(content) {
   }
 }
 
-function findConditionalsElseIfUses(content) {
-  const regex = /@else[\s\n]+@?if/g
-
-  let match
-  while ((match = regex.exec(content)) != null) {
-    const usageFormatted = match[0].replace(/[\s\n]+/, " ")
-    diagnostics.push({
-      from: match.index,
-      to: match.index + match[0].length,
-      severity: "error",
-      message: `\`${ usageFormatted }\` is not supported. Use \`@else { @if (elseIfCondition) { ... } }\` instead.`
-    })
-  }
-}
 
 function findEachLoopsWithInvalidIterables(content) {
   const constants = get(workshopConstants)
