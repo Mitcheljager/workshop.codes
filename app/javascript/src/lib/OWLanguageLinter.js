@@ -17,7 +17,6 @@ export function OWLanguageLinter(view) {
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
   findConditionalsRegexErrors(content)
-  findConditionalsElifUses(content)
   findEachLoopsWithInvalidIterables(content)
   checkMixins(content)
   checkTranslations(content)
@@ -496,20 +495,6 @@ function findConditionalsRegexErrors(content) {
   }
 }
 
-function findConditionalsElifUses(content) {
-  const regex = /@elif/g
-
-  let match
-  while ((match = regex.exec(content)) != null) {
-    diagnostics.push({
-      from: match.index,
-      to: match.index + match[0].length,
-      severity: "error",
-      // maybe update the error message? i'm just not sure what to
-      message: "@elif is not valid. Use `@else if (elseIfCondition) { ... }` instead."
-    })
-  }
-}
 
 function findEachLoopsWithInvalidIterables(content) {
   const constants = get(workshopConstants)
