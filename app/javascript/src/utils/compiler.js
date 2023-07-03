@@ -263,7 +263,7 @@ function evaluateConditionals(joinedItems) {
   const ifStartRegex = /@if[\s\n]*\(/g
   const startBracketRegex = /[\s\n]*\{/g
   const elseStartRegex = /[\s\n]*@else[\s\n]*\{/g
-  const elseifStartRegex = /[\s\n]*@else if[\s\n]*\(/g
+  const elseIfStartRegex = /[\s\n]*@else if[\s\n]*\(/g
 
   let match
   while ((match = ifStartRegex.exec(joinedItems)) != null) {
@@ -294,11 +294,11 @@ function evaluateConditionals(joinedItems) {
     let falseBlockContent = ""
     let passed = evaluateExpressionTree(conditionExpressionTree)
 
-    elseifStartRegex.lastIndex = closingBracketIndex
-    let elseifMatch = elseifStartRegex.exec(joinedItems)
+    elseIfStartRegex.lastIndex = closingBracketIndex
+    let elseIfMatch = elseIfStartRegex.exec(joinedItems)
 
-    while (elseifMatch != null && elseifMatch.index === closingBracketIndex + 1) {
-      const openingElseifConditionParenIndex = elseifMatch.index + elseifMatch[0].length - 1
+    while (elseIfMatch != null && elseIfMatch.index === closingBracketIndex + 1) {
+      const openingElseifConditionParenIndex = elseIfMatch.index + elseIfMatch[0].length - 1
       const closingElseifConditionParenIndex = getClosingBracket(joinedItems, "(", ")", openingElseifConditionParenIndex - 1)
       if (closingElseifConditionParenIndex < 0) {
         break
@@ -328,8 +328,8 @@ function evaluateConditionals(joinedItems) {
         }
       }
 
-      elseifStartRegex.lastIndex = closingBracketIndex
-      elseifMatch = elseifStartRegex.exec(joinedItems)
+      elseIfStartRegex.lastIndex = closingBracketIndex
+      elseIfMatch = elseIfStartRegex.exec(joinedItems)
     }
 
     elseStartRegex.lastIndex = closingBracketIndex + 1 // set start position for the exec below
