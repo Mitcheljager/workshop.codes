@@ -263,7 +263,7 @@ function evaluateConditionals(joinedItems) {
   const ifStartRegex = /@if[\s\n]*\(/g
   const startBracketRegex = /[\s\n]*\{/g
   const elseStartRegex = /[\s\n]*@else[\s\n]*\{/g
-  const elifStartRegex = /[\s\n]*@else if[\s\n]*\(/g
+  const elseifStartRegex = /[\s\n]*@else if[\s\n]*\(/g
 
   let match
   while ((match = ifStartRegex.exec(joinedItems)) != null) {
@@ -294,42 +294,42 @@ function evaluateConditionals(joinedItems) {
     let falseBlockContent = ""
     let passed = evaluateExpressionTree(conditionExpressionTree)
 
-    elifStartRegex.lastIndex = closingBracketIndex
-    let elifMatch = elifStartRegex.exec(joinedItems)
+    elseifStartRegex.lastIndex = closingBracketIndex
+    let elseifMatch = elseifStartRegex.exec(joinedItems)
 
-    while (elifMatch != null && elifMatch.index === closingBracketIndex + 1) {
-      const openingElifConditionParenIndex = elifMatch.index + elifMatch[0].length - 1
-      const closingElifConditionParenIndex = getClosingBracket(joinedItems, "(", ")", openingElifConditionParenIndex - 1)
-      if (closingElifConditionParenIndex < 0) {
+    while (elseifMatch != null && elseifMatch.index === closingBracketIndex + 1) {
+      const openingElseifConditionParenIndex = elseifMatch.index + elseifMatch[0].length - 1
+      const closingElseifConditionParenIndex = getClosingBracket(joinedItems, "(", ")", openingElseifConditionParenIndex - 1)
+      if (closingElseifConditionParenIndex < 0) {
         break
       }
 
-      const conditionElifExpression = joinedItems.substring(openingElifConditionParenIndex + 1, closingElifConditionParenIndex)
-      const conditionElifExpressionTree = getExpressionTree(conditionElifExpression)
+      const conditionElseifExpression = joinedItems.substring(openingElseifConditionParenIndex + 1, closingElseifConditionParenIndex)
+      const conditionElseifExpressionTree = getExpressionTree(conditionElseifExpression)
 
-      startBracketRegex.lastIndex = closingElifConditionParenIndex + 1 // set start position for the exec below
-      const startElifBracketMatch = startBracketRegex.exec(joinedItems)
-      if (startElifBracketMatch == null || startElifBracketMatch.index !== closingElifConditionParenIndex + 1) {
+      startBracketRegex.lastIndex = closingElseifConditionParenIndex + 1 // set start position for the exec below
+      const startElseifBracketMatch = startBracketRegex.exec(joinedItems)
+      if (startElseifBracketMatch == null || startElseifBracketMatch.index !== closingElseifConditionParenIndex + 1) {
         break
       }
 
-      const openingElifBracketIndex = startElifBracketMatch.index + startElifBracketMatch[0].length - 1
-      closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingElifBracketIndex - 1)
+      const openingElseifBracketIndex = startElseifBracketMatch.index + startElseifBracketMatch[0].length - 1
+      closingBracketIndex = getClosingBracket(joinedItems, "{", "}", openingElseifBracketIndex - 1)
       if (closingBracketIndex < 0) {
         break
       }
 
       conditionalEndingIndex = closingBracketIndex
 
-      if(!passed) {
-        passed = evaluateExpressionTree(conditionElifExpressionTree)
+      if (!passed) {
+        passed = evaluateExpressionTree(conditionElseifExpressionTree)
         if (passed) {
-          trueBlockContent = joinedItems.substring(openingElifBracketIndex + 1, closingBracketIndex)
+          trueBlockContent = joinedItems.substring(openingElseifBracketIndex + 1, closingBracketIndex)
         }
       }
 
-      elifStartRegex.lastIndex = closingBracketIndex
-      elifMatch = elifStartRegex.exec(joinedItems)
+      elseifStartRegex.lastIndex = closingBracketIndex
+      elseifMatch = elseifStartRegex.exec(joinedItems)
     }
 
     elseStartRegex.lastIndex = closingBracketIndex + 1 // set start position for the exec below
