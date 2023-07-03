@@ -323,7 +323,7 @@ function evaluateConditionals(joinedItems) {
 
       if(!passed) {
         passed = evaluateExpressionTree(conditionElifExpressionTree)
-        if(passed) {
+        if (passed) {
           trueBlockContent = joinedItems.substring(openingElifBracketIndex + 1, closingBracketIndex)
         }
       }
