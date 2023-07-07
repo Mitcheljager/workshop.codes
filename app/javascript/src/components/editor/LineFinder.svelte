@@ -135,6 +135,8 @@
   }
 </script>
 
+<svelte:window on:keydown={keydown} />
+
 <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
   <em>Find line... (Ctrl+B)</em>
 </button>

@@ -150,6 +150,8 @@
   }
 </script>
 
+<svelte:window on:keydown={keydown} />
+
 {#if !active}
   <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
     <em>Find/Replace in all... (Ctrl+Shift+F)</em>
