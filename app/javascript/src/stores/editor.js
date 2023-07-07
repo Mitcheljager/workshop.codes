@@ -1,6 +1,8 @@
 import { writable, derived } from "svelte/store"
-import { getMixins, getSubroutines, getVariables } from "../utils/compiler"
+import { getVariables } from "../utils/compiler/variables"
 import { isAnyParentHidden } from "../utils/editor"
+import { getMixins } from "../utils/compiler/mixins"
+import { getSubroutines } from "../utils/compiler/subroutines"
 
 export const screenWidth = writable(0)
 export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1100)

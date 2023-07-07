@@ -1,6 +1,6 @@
 <script>
   import { fly } from "svelte/transition"
-  import { compile } from "../../utils/compiler"
+  import { compile } from "../../utils/compiler/compile"
   import { copyValueToClipboard } from "../../copy"
 
   let compiling = false

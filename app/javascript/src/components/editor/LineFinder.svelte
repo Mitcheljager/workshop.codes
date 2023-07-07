@@ -1,7 +1,7 @@
 <script>
   import { sortedItems, editorStates } from "../../stores/editor"
   import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../utils/editor"
-  import { compile } from "../../utils/compiler"
+  import { compile } from "../../utils/compiler/compile"
   import { escapeable } from "../actions/escapeable"
   import { fade } from "svelte/transition"
   import { tick } from "svelte"

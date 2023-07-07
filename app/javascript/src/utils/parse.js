@@ -83,3 +83,11 @@ export function getPhraseFromPosition(line, position) {
     text: line.text.slice(start, end + 1).trim()
   }
 }
+
+export function removeSurroundingParenthesis(source) {
+  const openMatch = /^[\s\n]*\(/.exec(source)
+  const closeMatch = /\)[\s\n]*$/.exec(source)
+  return openMatch != null && closeMatch != null
+    ? removeSurroundingParenthesis(source.substring(openMatch.index + openMatch[0].length, closeMatch.index))
+    : source
+}
