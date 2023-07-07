@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, replaceBetween, splitArgumentsString } from "../../../app/javascript/src/utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString } from "../../../app/javascript/src/utils/parse"
 
 describe("parse.js", () => {
   describe("getClosingBracket", () => {
@@ -133,6 +133,16 @@ describe("parse.js", () => {
         end: 21,
         text: "Some Value"
       })
+    })
+  })
+
+  describe("removeSurroundingParenthesis", () => {
+    test("Should remove surrounding parentheses when present", () => {
+      expect(removeSurroundingParenthesis("(Test)")).toBe("Test")
+    })
+
+    test("should remove only the outermost pair of surrounding parentheses", () => {
+      expect(removeSurroundingParenthesis("((Test), word)")).toBe("(Test), word")
     })
   })
 })
