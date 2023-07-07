@@ -1,4 +1,5 @@
-import { getVariables } from "../../../../app/javascript/src/utils/compiler/variables"
+import { compileVariables, getVariables } from "../../../../app/javascript/src/utils/compiler/variables"
+import { disregardWhitespace } from "../../helpers/text"
 
 describe("variables.js", () => {
   describe("getVariables", () => {
@@ -60,6 +61,31 @@ describe("variables.js", () => {
         playerVariables: []
       }
       expect(getVariables(input)).toEqual(expectedOutput)
+    })
+  })
+
+  describe("compileVariables", () => {
+    test("should compile global variables", () => {
+      const input = `
+        Global.variable1 = Test;
+        Global.variable2 = Test;
+        For Global Variable(variable3, 0, 1) {
+          // Do something
+        }
+
+        Event Player.variable1 = Test
+      `
+      const expectedOutput = `
+        variables {
+          global:
+            0: variable1
+            1: variable2
+            2: variable3
+          player:
+            0: variable1
+        }\n\n
+      `
+      expect(disregardWhitespace(compileVariables(input))).toBe(disregardWhitespace(expectedOutput))
     })
   })
 })
