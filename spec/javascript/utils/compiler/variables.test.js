@@ -65,7 +65,7 @@ describe("variables.js", () => {
   })
 
   describe("compileVariables", () => {
-    test("should compile global variables", () => {
+    test("Should compile global variables", () => {
       const input = `
         Global.variable1 = Test;
         Global.variable2 = Test;
