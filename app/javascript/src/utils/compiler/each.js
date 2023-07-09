@@ -57,7 +57,7 @@ export function evaluateEachLoops(joinedItems) {
   return joinedItems
 }
 
-function parseArrayValues(input) {
+export function parseArrayValues(input) {
   const commaRegex = /, */g
 
   const result = []
