@@ -9,7 +9,7 @@ describe("conditionals.js", () => {
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should not render if if statement is false", () => {
+    test("Should not render 'if' if statement is false", () => {
       const input = `@if (1 == 2) {
         Do Something();
       }`
@@ -17,13 +17,25 @@ describe("conditionals.js", () => {
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should render else if statement is false", () => {
+    test("Should render 'else' if statement is false", () => {
       const input = `@if (1 == 2) {
         Do Something();
       } @else {
         Do Something Else();
       }`
       const expectedOutput = "Do Something Else();"
+      expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+
+    test("Should render 'else if' if statement is false", () => {
+      const input = `@if (1 == 2) {
+        Do Something();
+      } @else if (1 == 1) {
+        Do Something Else If();
+      } @else {
+        Do Something Else();
+      }`
+      const expectedOutput = "Do Something Else If();"
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
