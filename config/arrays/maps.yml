@@ -280,6 +280,13 @@
     ko: 루시우볼
   slug: busan-stadium-classic
 -
+  en: Estádio Dos Gorilas
+  ko: 도스 고릴라스 스타디움
+  type:
+    en: Winston's Beach Volleyball
+    ko: 윈스턴의 비치 발리볼
+  slug: estadio-dos-gorilas
+-
   en: Château Guillard
   ko: 샤토 기야르
   type:
