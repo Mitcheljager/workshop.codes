@@ -12,7 +12,7 @@
     { keys: ["Ctrl", "Z"], text: "Undo" },
     { keys: ["Ctrl", "C"], text: "Copy current line or selection" },
     { keys: ["Ctrl", "X"], text: "Cut current line or selection" },
-    { keys: ["Shift", "F"], text: "Search/replace" },
+    { keys: ["Ctrl", "F"], text: "Search/replace" },
     { keys: ["Ctrl", "Shift", "F"], text: "Search/replace in all files" },
     { keys: ["Alt", "Click"], text: "Search wiki for keyword" },
     { keys: ["Ctrl", "Q"], text: "Find by name" },
