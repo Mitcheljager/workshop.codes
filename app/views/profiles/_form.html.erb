@@ -45,6 +45,7 @@
     <hr class="small mt-1/1">
 
     <%= submit_tag t("profile.form.submit"), class: "button pr-1/1 pl-1/1", data: { disable_with: "Submitting..." } %>
+    <%= button_tag "Cancel", type: "button", class: "button button--secondary pr-1/1 pl-1/1", onclick: "location.reload();" %>
   </div>
 
   <div class="tabs-content" data-tab="images">
@@ -75,6 +76,11 @@
           <p class="form-hint mt-1/4 mb-0">
             <%= t "profile.form.image.help" %>
           </p>
+
+          <%= hidden_field_tag :remove_profile_image, "", data: { clear_image_flag: "profile-image" } %>
+          <%= button_tag "Remove", type: "button", class: "mt-1/4",
+                             data: { action: "clear-image", target: "profile-image" }  %>
+
         </div>
       <% end %>
     </div>
@@ -96,11 +102,16 @@
       <p class="form-hint mt-1/4 mb-0">
         <%= t "profile.form.banner_image.help" %>
       </p>
+
+      <%= hidden_field_tag :remove_banner_image, "", data: { clear_image_flag: "banner" } %>
+      <%= button_tag "Remove", type: "button", class: "mt-1/4",
+                          data: { action: "clear-image", target: "banner" }  %>
     </div>
 
     <hr class="small mt-1/1">
 
     <%= submit_tag t("profile.form.submit"), class: "button pr-1/1 pl-1/1", data: { disable_with: "Submitting..." } %>
+    <%= button_tag "Cancel", type: "button", class: "button button--secondary pr-1/1 pl-1/1", onclick: "location.reload();" %>
   </div>
 
   <div class="tabs-content" data-tab="badges">
