@@ -37,20 +37,33 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @user = current_user
+    begin
+      @user = current_user
+      User.transaction do
 
-    if profile_params[:featured_posts] == nil
-      @user.featured_posts = ""
-    end
+        if profile_params[:featured_posts] == nil
+          @user.featured_posts = ""
+        end
 
-    respond_to do |format|
-      if @user.update(profile_params)
-        format.html {
-          flash[:alert] = "Successfully saved"
-          redirect_to edit_profile_path
-        }
+        if (params[:remove_profile_image].present?)
+          @user.profile_image.purge
+        end
+        if (params[:remove_banner_image].present?)
+          @user.banner_image.purge
+        end
+
+        @user.update!(profile_params)
+      end
+
+      flash[:alert] = "Successfully saved"
+      respond_to do |format|
+        format.html { redirect_to edit_profile_path }
         format.js { render "application/success" }
-      else
+      end
+    rescue ActiveRecord::ActiveRecordError => exception
+      flash[:error] = "Something went wrong, and your changes weren't saved"
+      respond_to do |format|
+        format.html { redirect_to edit_profile_path }
         format.js { render "application/error" }
       end
     end
