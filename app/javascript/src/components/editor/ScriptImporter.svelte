@@ -9,6 +9,8 @@
   let replaceScript = false
   let value = ""
 
+  $: if (active) value = ""
+
   function findSettings() {
     const [start, end] = getSettings(value)
 
