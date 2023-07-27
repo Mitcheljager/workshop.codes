@@ -90,6 +90,26 @@ describe("for.js", () => {
       `
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
+
+    test("Should be able handle inner loops", () => {
+      const input = `
+        @each (innerArray in [[a, b], [c, d]]) {
+          @each (value in Each.innerArray) {
+            Each.value;
+          }
+          ---
+        }
+      `
+      const expectedOutput = `
+        a;
+        b;
+        ---
+        c;
+        d;
+        ---
+      `
+      expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
+    })
   })
 
   describe("parseArrayValues", () => {
