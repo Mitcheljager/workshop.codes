@@ -569,7 +569,7 @@ function findEventBlocksWithMissingArguments(content) {
 
     const requiredEventArgs = eventTypeToArgumentsMap[eventType.toLowerCase()]
 
-    if (requiredEventArgs.length !== givenEventArgs.length) {
+    if (requiredEventArgs && requiredEventArgs.length !== givenEventArgs.length) {
       const missingArguments = requiredEventArgs.slice(givenEventArgs.length)
       diagnostics.push({
         from: eventBlockStart,
