@@ -56,6 +56,22 @@ describe("for.js", () => {
       `
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
+
+    test("Should be able use new lines inside array literals", () => {
+      const input = `@each (thing in [
+        one,
+        two,
+        three
+      ]) {
+        Each.thing;
+      }`
+      const expectedOutput = `
+        one;
+        two;
+        three;
+      `
+      expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
+    })
   })
 
   describe("parseArrayValues", () => {

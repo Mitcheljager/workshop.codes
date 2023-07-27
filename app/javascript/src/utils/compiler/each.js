@@ -5,7 +5,7 @@ import { openArrayBracketRegex, openToClosingArrayBracketsMap } from "./constant
 import { get } from "svelte/store"
 
 export function evaluateEachLoops(joinedItems) {
-  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*\]|(?:Constant)\..+)\s*\)\s*\{/g
+  const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*\]|(?:Constant)\.[\w\s]+)\s*\)\s*\{/gs
 
   let match
   while ((match = eachRegex.exec(joinedItems)) != null) {
