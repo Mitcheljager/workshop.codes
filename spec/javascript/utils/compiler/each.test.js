@@ -72,6 +72,24 @@ describe("for.js", () => {
       `
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
+
+    test("Should be able handle each loop individually", () => {
+      const input = `
+        @each (thing in [loop1]) {
+          Each.thing;
+        }
+
+        @each (thing in [loop2]) {
+          Each.thing;
+        }
+      `
+      const expectedOutput = `
+        loop1;
+
+        loop2;
+      `
+      expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
+    })
   })
 
   describe("parseArrayValues", () => {
