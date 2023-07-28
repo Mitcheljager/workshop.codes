@@ -114,7 +114,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.shiftKey && event.keyCode == 70) { // F key
+    if (event.ctrlKey && event.shiftKey && event.key === "f") {
       event.preventDefault()
       active = !active
       if (active) {
@@ -129,16 +129,16 @@
     if (input != document.activeElement && replaceInput != document.activeElement) return
     if (!active) return
 
-    if (selected && event.keyCode == 13) { // Enter key
+    if (selected && event.key === "Enter") {
       selectItem(itemMatches[selected].id)
     }
 
-    if (event.keyCode == 40) { // Down array
+    if (event.key === "ArrowDown") {
       event.preventDefault()
       setSelected(1)
     }
 
-    if (event.keyCode == 38) { // Up array
+    if (event.key === "ArrowUp") {
       event.preventDefault()
       setSelected(-1)
     }

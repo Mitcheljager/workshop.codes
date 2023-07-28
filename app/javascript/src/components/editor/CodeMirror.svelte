@@ -108,7 +108,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.keyCode == 50) {
+    if (event.ctrlKey && event.key === "2") {
       event.preventDefault()
       view.focus()
     }

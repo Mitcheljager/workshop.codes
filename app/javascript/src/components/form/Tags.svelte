@@ -45,11 +45,11 @@
   onMount(() => fillValues.forEach(code => addTag(code)))
 
   function keydown(event) {
-    if (event.key == "Backspace" || event.key == "Delete") {
-      if (input == "") removeTag(values.length - 1)
+    if (event.key === "Backspace" || event.key === "Delete") {
+      if (input === "") removeTag(values.length - 1)
     }
 
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       event.preventDefault()
       return false
     }
@@ -59,17 +59,17 @@
 
   function inputHandleAutoComplete(event) {
     // TAB: If autocompleting, and a value can be found, add the first value
-    if (event.key == "Tab") {
+    if (event.key === "Tab") {
       event.preventDefault()
       resultsList.querySelectorAll("li.tag-item")[0].click()
     }
     // ArrowDown: focus first element of results
-    if (event.key == "ArrowDown" || event.key == "Down") {
+    if (event.key === "ArrowDown" || event.key === "Down") {
       event.preventDefault()
       resultsList.querySelector("li:first-child").focus()
     }
     // ArrowUp: focus last element of results
-    if (event.key == "ArrowUp" || event.key == "Up") {
+    if (event.key === "ArrowUp" || event.key === "Up") {
       event.preventDefault()
       resultsList.querySelector("li:last-child").focus()
     }
@@ -132,7 +132,7 @@
 
     event.preventDefault()
 
-    if (event.key == "ArrowDown" || event.key == "Down") {
+    if (event.key === "ArrowDown" || event.key === "Down") {
       if (index + 1 >= length) {
         resultsList.querySelector("li:first-child").focus()
         return
@@ -141,7 +141,7 @@
       return
     }
 
-    if (event.key == "ArrowUp" || event.key == "Up") {
+    if (event.key === "ArrowUp" || event.key === "Up") {
       if (index <= 0) {
         resultsList.querySelector("li:last-child").focus()
         return
@@ -150,12 +150,12 @@
       return
     }
 
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       addTag(label)
       return
     }
 
-    if (event.key == "Escape" || event.key == "Esc") {
+    if (event.key === "Escape" || event.key === "Esc") {
       inputElem.focus()
     }
   }

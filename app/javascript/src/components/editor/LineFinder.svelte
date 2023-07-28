@@ -30,7 +30,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.keyCode == 66) {
+    if (event.ctrlKey && event.key === "b") {
       event.preventDefault()
       active = !active
       focusInput()
@@ -38,7 +38,7 @@
 
     if (!active) return
 
-    if (event.keyCode == 13) find() // Enter key
+    if (event.key === "Enter") find()
   }
 
   function find() {
