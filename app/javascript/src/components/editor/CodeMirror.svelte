@@ -5,6 +5,7 @@
   import { EditorState, EditorSelection } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
+  import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
@@ -72,7 +73,8 @@
         keymap.of([
           { key: "Tab", run: tabIndent },
           { key: "Shift-Tab", run: tabIndent },
-          { key: "Enter", run: autoIndentOnEnter }
+          { key: "Enter", run: autoIndentOnEnter },
+          { key: "Ctrl-Shift-z", run: redoAction }
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
@@ -114,6 +116,12 @@
     }
   }
 
+  function redoAction({ dispatch }) {
+    const { transaction } = redo(view)
+    if (transaction) dispatch(transaction)
+    return true
+  }
+
   function autoIndentOnEnter({ state, dispatch }) {
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
@@ -134,7 +142,7 @@
     return true
   }
 
-  function tabIndent({ state, dispatch }) {
+  function tabIndent({ state, dispatch }, event) {
     const { shiftKey } = event
 
     if (element.querySelector(".cm-tooltip-autocomplete")) return true

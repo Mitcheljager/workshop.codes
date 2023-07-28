@@ -11,6 +11,7 @@
     { keys: ["Ctrl", "Space"], text: "Show autocomplete suggestions" },
     { keys: ["Ctrl", "Z"], text: "Undo" },
     { keys: ["Ctrl", "Y"], text: "Redo" },
+    { keys: ["Ctrl", "Shift", "Z"], text: "Redo" },
     { keys: ["Ctrl", "C"], text: "Copy current line or selection" },
     { keys: ["Ctrl", "X"], text: "Cut current line or selection" },
     { keys: ["Ctrl", "F"], text: "Search/replace" },
