@@ -6,19 +6,22 @@ describe("variables.js", () => {
     test("Should extract global variables", () => {
       const input = `
         Global.variable1 = Test;
-        Global.variable2 = Test;
-        For Global Variable(variable3, 0, 1) {
+        Set Global Variable(variable2, Test);
+        Modify Global Variable(variable3, Test);
+        Chase Global Variable At Rate(variable4, Test, ...);
+        Chase Global Variable Over Time(variable5, Test, ...);
+        For Global Variable(variable6, 0, 1) {
           // Do something
         }
       `
       const expectedOutput = {
-        globalVariables: ["variable1", "variable2", "variable3"],
+        globalVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6"],
         playerVariables: []
       }
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should extract player variables", () => {
+    test("Should extract simple player variables", () => {
       const input = `
         Event Player.variable1 = Test;
         Victim.variable2 = Test;
@@ -27,13 +30,42 @@ describe("variables.js", () => {
         Healee.variable5 = Test;
         Local Player.variable6 = Test;
         Host Player.variable7 = Test;
-        For Player Variable(Event Player, variable8, 1) {
+        Set Player Variable(Event Player, variable8, Test);
+        Modify Player Variable(Event Player, variable9, Test);
+        Chase Player Variable At Rate(Event Player, variable10, Test, ...);
+        Chase Player Variable Over Time(Event Player, variable11, Test, ...);
+        For Player Variable(Event Player, variable12, 1) {
           // Do something
         }
       `
       const expectedOutput = {
         globalVariables: [],
-        playerVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8"]
+        playerVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8", "variable9", "variable10", "variable11", "variable12"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should handle nested player variables", () => {
+      const input = `
+        Event Player.variableA.variableB = Test;
+        Event Player.variableA.variableB.variableC = Test;
+        Event Player.variableC[0].variableD = Test;
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["variableA", "variableB", "variableC", "variableD"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should handle player variables nested in global variables", () => {
+      const input = `
+        Global.variableA.variableB = Test;
+        Global.variableC[0].variableD = Test;
+      `
+      const expectedOutput = {
+        globalVariables: ["variableA", "variableC"],
+        playerVariables: ["variableB", "variableD"]
       }
       expect(getVariables(input)).toEqual(expectedOutput)
     })
@@ -45,6 +77,49 @@ describe("variables.js", () => {
         playerVariables: []
       }
       expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    describe("Player variable edge cases", () => {
+      test("Should ignore decimals of a number", () => {
+        const input = `
+          1.234;
+          1.abc;
+        `
+        const expectedOutput = {
+          globalVariables: [],
+          playerVariables: []
+        }
+        expect(getVariables(input)).toEqual(expectedOutput)
+      })
+
+      test("Should not ignore nested variables ending in a number", () => {
+        const input = `
+          Event Player.variable1.variable2;
+        `
+        const expectedOutput = {
+          globalVariables: [],
+          playerVariables: ["variable1", "variable2"]
+        }
+        expect(getVariables(input)).toEqual(expectedOutput)
+      })
+
+      test("Should ignore constants with periods", () => {
+        const input = "Hero(D.Va)"
+        const expectedOutput = {
+          globalVariables: [],
+          playerVariables: []
+        }
+        expect(getVariables(input)).toEqual(expectedOutput)
+      })
+
+      test("Should not ignore player variables that look like constants with periods", () => {
+        const input = "Event Player.D.Va"
+        const expectedOutput = {
+          globalVariables: [],
+          playerVariables: ["D", "Va"]
+        }
+        expect(getVariables(input)).toEqual(expectedOutput)
+      })
     })
 
     test("Should handle duplicate variables", () => {
@@ -65,7 +140,7 @@ describe("variables.js", () => {
   })
 
   describe("compileVariables", () => {
-    test("Should compile global variables", () => {
+    test("Should compile variables", () => {
       const input = `
         Global.variable1 = Test;
         Global.variable2 = Test;
