@@ -67,7 +67,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.keyCode == 81) {
+    if (event.ctrlKey && event.key === "q") {
       event.preventDefault()
       active = !active
       focusInput()
@@ -75,9 +75,9 @@
 
     if (!active) return
 
-    if (event.keyCode == 13) selectItem(matches[selected].id) // Enter key
-    if (event.keyCode == 40) setSelected(1) // Down key
-    if (event.keyCode == 38) setSelected(-1) // Up key
+    if (event.key === "Enter") selectItem(matches[selected].id)
+    if (event.key === "ArrowDown") setSelected(1)
+    if (event.key === "ArrowUp") setSelected(-1)
   }
 
   async function focusInput() {

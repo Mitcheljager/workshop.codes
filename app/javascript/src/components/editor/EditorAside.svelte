@@ -6,7 +6,7 @@
   let element
 
   function keydown(event) {
-    if (event.ctrlKey && event.keyCode == 49) {
+    if (event.ctrlKey && event.key === "1") {
       event.preventDefault()
       element.focus()
     }

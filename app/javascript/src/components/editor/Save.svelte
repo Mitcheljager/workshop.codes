@@ -33,7 +33,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && !event.shiftKey && event.keyCode == 83) {
+    if (event.ctrlKey && !event.shiftKey && event.key === "s") {
       event.preventDefault()
       save()
     }
