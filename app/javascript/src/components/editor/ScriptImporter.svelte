@@ -20,7 +20,7 @@
   }
 
   function findAllRules() {
-    const rules = value.split(/(?=(disabled rule|(?<!disabled\s+)rule)\()/g)
+    const rules = value.split(/(?=(?:disabled\s+)?rule\s*\()/g)
     const newItems = []
 
     let counter = 0
@@ -36,7 +36,7 @@
   }
 
   function getTypeName(content) {
-    const regex = new RegExp(/rule\("(.*)"\)/g)
+    const regex = new RegExp(/rule\s*\("(.*)"\)/g)
     const match = regex.exec(content)
 
     if (!match) return
