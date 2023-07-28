@@ -1,5 +1,6 @@
 import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
-import { completionsMap, workshopConstants } from "../stores/editor"
+import { getSubroutines } from "../utils/compiler/subroutines"
+import { completionsMap, flatItems, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 
 let diagnostics = []
@@ -19,6 +20,7 @@ export function OWLanguageLinter(view) {
   findConditionalsRegexErrors(content)
   findEachLoopsWithInvalidIterables(content)
   findEventBlocksWithMissingArguments(content)
+  findUndefinedSubroutines(content)
   checkMixins(content)
   checkTranslations(content)
   checkForLoops(content)
@@ -576,6 +578,26 @@ function findEventBlocksWithMissingArguments(content) {
         to: eventBlockStart + eventType.length,
         severity: "error",
         message: `Events ${ eventType } require ${ requiredEventArgs.length } arguments, but you are missing the following: ${ missingArguments.join(", ") }`
+      })
+    }
+  }
+}
+
+function findUndefinedSubroutines(content) {
+  const fullScriptContent = get(flatItems)
+  const definedSubroutines = getSubroutines(fullScriptContent)
+
+  for (const match of content.matchAll(/(?<=(?:Call Subroutine|Start Rule))\(/g)) {
+    const argsEnd = getClosingBracket(content, "(", ")", match.index - 1)
+    const [subroutineName] = splitArgumentsString(content.substring(match.index + 1, argsEnd))
+
+    if (!definedSubroutines.includes(subroutineName)) {
+      const from = match.index + 1
+      diagnostics.push({
+        from,
+        to: from + subroutineName.length,
+        severity: "error",
+        message: `There is no subroutine rule with name "${ subroutineName }"`
       })
     }
   }
