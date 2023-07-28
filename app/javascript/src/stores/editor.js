@@ -41,11 +41,17 @@ export const isSignedIn = writable(false)
 export const completionsMap = writable([])
 export const variablesMap = derived(flatItems, $flatItems => {
   const { globalVariables, playerVariables } = getVariables($flatItems)
-  const subroutines = getSubroutines($flatItems)
 
   return [
     ...globalVariables.map(v => ({ detail: "Global Variable", label: v, type: "variable" })),
-    ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" })),
+    ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" }))
+  ]
+})
+
+export const subroutinesMap = derived(flatItems, $flatItems => {
+  const subroutines = getSubroutines($flatItems)
+
+  return [
     ...subroutines.map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
   ]
 })

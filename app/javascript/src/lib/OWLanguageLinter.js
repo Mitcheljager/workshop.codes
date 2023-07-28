@@ -1,6 +1,5 @@
 import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
-import { getSubroutines } from "../utils/compiler/subroutines"
-import { completionsMap, flatItems, workshopConstants } from "../stores/editor"
+import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 
 let diagnostics = []
@@ -584,8 +583,7 @@ function findEventBlocksWithMissingArguments(content) {
 }
 
 function findUndefinedSubroutines(content) {
-  const fullScriptContent = get(flatItems)
-  const definedSubroutines = getSubroutines(fullScriptContent)
+  const definedSubroutines = get(subroutinesMap).map(({ label }) => label)
 
   for (const match of content.matchAll(/(?<=(?:Call Subroutine|Start Rule))\(/g)) {
     const argsEnd = getClosingBracket(content, "(", ")", match.index - 1)
