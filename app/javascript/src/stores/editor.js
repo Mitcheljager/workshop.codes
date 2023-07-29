@@ -3,6 +3,7 @@ import { getVariables } from "../utils/compiler/variables"
 import { isAnyParentHidden } from "../utils/editor"
 import { getMixins } from "../utils/compiler/mixins"
 import { getSubroutines } from "../utils/compiler/subroutines"
+import { debounced } from "../utils/store"
 
 // Preferably keep below the debounce time for the linter, so it
 // has access to the most up-to-date information from the store.
