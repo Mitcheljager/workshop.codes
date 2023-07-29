@@ -79,47 +79,45 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    describe("Player variable edge cases", () => {
-      test("Should ignore decimals of a number", () => {
-        const input = `
-          1.234;
-          1.abc;
-        `
-        const expectedOutput = {
-          globalVariables: [],
-          playerVariables: []
-        }
-        expect(getVariables(input)).toEqual(expectedOutput)
-      })
+    test("Should ignore decimals of a number", () => {
+      const input = `
+        1.234;
+        1.abc;
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
 
-      test("Should not ignore nested variables ending in a number", () => {
-        const input = `
-          Event Player.variable1.variable2;
-        `
-        const expectedOutput = {
-          globalVariables: [],
-          playerVariables: ["variable1", "variable2"]
-        }
-        expect(getVariables(input)).toEqual(expectedOutput)
-      })
+    test("Should not ignore nested variables ending in a number", () => {
+      const input = `
+        Event Player.variable1.variable2;
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["variable1", "variable2"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
 
-      test("Should ignore constants with periods", () => {
-        const input = "Hero(D.Va)"
-        const expectedOutput = {
-          globalVariables: [],
-          playerVariables: []
-        }
-        expect(getVariables(input)).toEqual(expectedOutput)
-      })
+    test("Should ignore constants with periods", () => {
+      const input = "Hero(D.Va)"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
 
-      test("Should not ignore player variables that look like constants with periods", () => {
-        const input = "Event Player.D.Va"
-        const expectedOutput = {
-          globalVariables: [],
-          playerVariables: ["D", "Va"]
-        }
-        expect(getVariables(input)).toEqual(expectedOutput)
-      })
+    test("Should not ignore player variables that look like constants with periods", () => {
+      const input = "Event Player.D.Va"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["D", "Va"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
     })
 
     test("Should handle duplicate variables", () => {
