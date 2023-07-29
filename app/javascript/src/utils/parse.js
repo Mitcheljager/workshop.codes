@@ -99,7 +99,7 @@ export function findRangesOfStrings(source) {
 
   for (let i = 0; i < source.length; i++) {
     if (source[i] === "\"") {
-      if (currentRange == null) {
+      if (currentRangeIndex == null) {
         currentRangeIndex = i
       } else if (source[i - 1] !== "\\") {
         const range = [currentRangeIndex, i]
