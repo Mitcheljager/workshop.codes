@@ -1,8 +1,8 @@
-export function debounced(cb, ms) {
+export function debounced(callback, wait) {
   return (values, set) => {
     const timeout = setTimeout(() => {
-      return set(cb(values))
-    }, ms)
+      return set(callback(values))
+    }, wait)
     return () => clearTimeout(timeout)
   }
 }
