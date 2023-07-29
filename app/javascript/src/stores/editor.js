@@ -4,6 +4,10 @@ import { isAnyParentHidden } from "../utils/editor"
 import { getMixins } from "../utils/compiler/mixins"
 import { getSubroutines } from "../utils/compiler/subroutines"
 
+// Preferably keep below the debounce time for the linter, so it
+// has access to the most up-to-date information from the store.
+const VARIABLE_EXTRACTION_DEBOUNCE_MS = 500
+
 export const screenWidth = writable(0)
 export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1100)
 
@@ -39,25 +43,27 @@ export const openFolders = writable([])
 export const isSignedIn = writable(false)
 
 export const completionsMap = writable([])
-export const variablesMap = derived(flatItems, ($flatItems, set) => {
-  const timeout = setTimeout(() => {
-    const { globalVariables, playerVariables } = getVariables($flatItems)
-    const subroutines = getSubroutines($flatItems)
+export const variablesMap = derived(flatItems, debounced($flatItems => {
+  const { globalVariables, playerVariables } = getVariables($flatItems)
 
-    return set([
-      ...globalVariables.map(v => ({ detail: "Global Variable", label: v, type: "variable" })),
-      ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" })),
-      ...subroutines.map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
-    ])
-  }, 500)
+  return [
+    ...globalVariables.map(v => ({ detail: "Global Variable", label: v, type: "variable" })),
+    ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" }))
+  ]
+}, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
-  return () => clearTimeout(timeout)
-})
+export const subroutinesMap = derived(flatItems, debounced($flatItems => {
+  const subroutines = getSubroutines($flatItems)
 
-export const mixinsMap = derived(flatItems, $flatItems => {
+  return [
+    ...subroutines.map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
+  ]
+}, VARIABLE_EXTRACTION_DEBOUNCE_MS))
+
+export const mixinsMap = derived(flatItems, debounced($flatItems => {
   const mixins = getMixins($flatItems)
 
   return mixins.map(v => ({ detail: "Mixin", label: `@include ${ v }()`, type: "variable" }))
-})
+}, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const workshopConstants = writable({})
