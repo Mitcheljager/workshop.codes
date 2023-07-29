@@ -12,7 +12,7 @@
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
-  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, mixinsMap } from "../../stores/editor"
+  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
   import debounce from "../../debounce"
@@ -104,7 +104,7 @@
     return {
       from: word.from + add,
       to: word.to,
-      options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...extraCompletions],
+      options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...$subroutinesMap, ...extraCompletions],
       validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }
