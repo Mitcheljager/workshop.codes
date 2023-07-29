@@ -124,3 +124,10 @@ export async function destroyCurrentProject() {
       alert("Something went wrong while destroying your project, please try again")
     })
 }
+
+export function setUrl(uuid) {
+  const url = new URL(window.location)
+  if (uuid) url.searchParams.set("uuid", uuid)
+  else url.searchParams.delete("uuid")
+  window.history.replaceState("", "", url)
+}

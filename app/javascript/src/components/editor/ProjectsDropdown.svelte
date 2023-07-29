@@ -3,7 +3,7 @@
   import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
   import { projects, currentProject, isSignedIn, isMobile } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
-  import { createProject, destroyCurrentProject, fetchProject } from "../../utils/project"
+  import { createProject, destroyCurrentProject, fetchProject, setUrl } from "../../utils/project"
   import { escapeable } from "../actions/escapeable"
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
@@ -69,13 +69,6 @@
 
     active = false
     showProjectSettings = false
-  }
-
-  function setUrl(uuid) {
-    const url = new URL(window.location)
-    if (uuid) url.searchParams.set("uuid", uuid)
-    else url.searchParams.delete("uuid")
-    window.history.replaceState("", "", url)
   }
 </script>
 

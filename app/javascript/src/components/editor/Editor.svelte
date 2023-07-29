@@ -153,15 +153,15 @@
         <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
       {/if}
     </div>
-
-    <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
-      <EditorWiki bind:fetchArticle />
-
-      <DragHandle key="popout-width" currentSize=300 align="left" />
-    </div>
   {:else}
     <Empty />
   {/if}
+
+  <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
+    <EditorWiki bind:fetchArticle />
+
+    <DragHandle key="popout-width" currentSize=300 align="left" />
+  </div>
 </div>
 
 {#if !$isSignedIn}
