@@ -8,14 +8,16 @@ describe("variables.js", () => {
         Global.variable1 = Test;
         Set Global Variable(variable2, Test);
         Modify Global Variable(variable3, Test);
-        Chase Global Variable At Rate(variable4, Test, ...);
-        Chase Global Variable Over Time(variable5, Test, ...);
-        For Global Variable(variable6, 0, 1) {
+        Set Global Variable(variable4, Test);
+        Modify Global Variable(variable5, Test);
+        Chase Global Variable At Rate(variable6, Test, ...);
+        Chase Global Variable Over Time(variable7, Test, ...);
+        For Global Variable(variable8, 0, 1) {
           // Do something
         }
       `
       const expectedOutput = {
-        globalVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6"],
+        globalVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8"],
         playerVariables: []
       }
       expect(getVariables(input)).toEqual(expectedOutput)
@@ -31,16 +33,18 @@ describe("variables.js", () => {
         Local Player.variable6 = Test;
         Host Player.variable7 = Test;
         Set Player Variable(Event Player, variable8, Test);
-        Modify Player Variable(Event Player, variable9, Test);
-        Chase Player Variable At Rate(Event Player, variable10, Test, ...);
-        Chase Player Variable Over Time(Event Player, variable11, Test, ...);
-        For Player Variable(Event Player, variable12, 1) {
+        Set Player Variable At Index(Event Player, variable9, Test);
+        Modify Player Variable(Event Player, variable10, Test);
+        Modify Player Variable At Index(Event Player, variable11, Test);
+        Chase Player Variable At Rate(Event Player, variable12, Test, ...);
+        Chase Player Variable Over Time(Event Player, variable13, Test, ...);
+        For Player Variable(Event Player, variable14, 1) {
           // Do something
         }
       `
       const expectedOutput = {
         globalVariables: [],
-        playerVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8", "variable9", "variable10", "variable11", "variable12"]
+        playerVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8", "variable9", "variable10", "variable11", "variable12", "variable13", "variable14"]
       }
       expect(getVariables(input)).toEqual(expectedOutput)
     })

@@ -15,7 +15,7 @@ const invalidVariablePrefixRegex = /[^\w.](?:\d+|D)$/
 
 const maxVariableNameLength = 32
 
-const actionsDefiningVariablesRegex = /(?:(?:Set|Modify|For) (?:Global|Player) Variable|Chase (?:Global|Player) Variable (?:Over Time|At Rate))\(/g
+const actionsDefiningVariablesRegex = /(?:(?:Set|Modify) (?:Global|Player) Variable(?: At Index)?|For (?:Global|Player) Variable|Chase (?:Global|Player) Variable (?:Over Time|At Rate))\(/g
 
 export function compileVariables(joinedItems) {
   const { globalVariables, playerVariables } = getVariables(joinedItems)
