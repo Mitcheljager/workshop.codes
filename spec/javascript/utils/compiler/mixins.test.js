@@ -90,11 +90,11 @@ describe("mixins.js", () => {
       expect(disregardWhitespace(extractAndInsertMixins(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    it("Should replace Mixin variables with given arguments", () => {
+    it("Should avoid replacing one Mixin variable with the value of another when the variable names overlap", () => {
       const input = `
-        @mixin testMixin(someArg, someOtherArg) {
+        @mixin testMixin(someArg, someArg2) {
           Mixin.someArg;
-          Some Action(Mixin.someOtherArg);
+          Some Action(Mixin.someArg2);
         }
         @include testMixin(One, Two)`
 
