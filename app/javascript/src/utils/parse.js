@@ -91,3 +91,35 @@ export function removeSurroundingParenthesis(source) {
     ? removeSurroundingParenthesis(source.substring(openMatch.index + openMatch[0].length, closeMatch.index))
     : source
 }
+
+export function findRangesOfStrings(source) {
+  const foundRanges = []
+
+  let currentRangeIndex = null
+
+  for (let i = 0; i < source.length; i++) {
+    if (source[i] === "\"") {
+      if (currentRangeIndex == null) {
+        currentRangeIndex = i
+      } else if (source[i - 1] !== "\\") {
+        const range = [currentRangeIndex, i]
+        foundRanges.push(range)
+
+        currentRangeIndex = null
+      }
+    }
+  }
+
+  return foundRanges
+}
+
+export function matchAllOutsideRanges(ranges, content, regex) {
+  const matches = []
+  for (const match of content.matchAll(regex)) {
+    if (match.index >= ranges[0] && match.index + match[0].length <= ranges[1]) {
+      continue
+    }
+    matches.push(match)
+  }
+  return matches
+}
