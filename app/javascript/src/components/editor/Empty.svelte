@@ -1,6 +1,7 @@
 <script>
   import { isSignedIn, projects } from "../../stores/editor"
   import { createDemoProject, createProject, fetchProject, setUrl } from "../../utils/project"
+  import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
 
   async function getProject(uuid) {
     const data = await fetchProject(uuid)
@@ -33,7 +34,12 @@
       <p>
 
       {#if $projects?.length}
-        <h2 class="mt-1/1">Your projects</h2>
+        <div class="flex align-center justify-between mt-1/1">
+          <h2>Your projects</h2>
+          <CreateProjectModal let:showModalOfType on:setUrl={({ detail }) => setUrl(detail)}>
+            <button class="button button--ghost button--small" on:click={() => showModalOfType("create")}>Create new</button>
+          </CreateProjectModal>
+        </div>
 
         {#each $projects as { title, uuid, updated_at }}
           <button class="empty-button project" on:click={() => getProject(uuid)}>
