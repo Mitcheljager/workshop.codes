@@ -95,11 +95,12 @@ export function extractAndInsertMixins(joinedItems) {
       replaceWith = replaceWith.replace("@contents;", contents || "")
     }
 
-    let paramIndex = 0
-    ;[... mixin.params].sort((p1, p2) => p2.key.length - p1.key.length).forEach(param => {
-      replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[paramIndex]?.trim() || param.default)
-      paramIndex++
-    })
+    mixin.params
+      .map((param, index) => ({ ...param, index }))
+      .sort((p1, p2) => p2.key.length - p1.key.length)
+      .forEach(param => {
+        replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[param.index]?.trim() || param.default)
+      })
 
     const closingSemicolon = (!mixin.hasContents || !contents) && joinedItems[closing + 1] == ";"
 
