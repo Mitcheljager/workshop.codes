@@ -96,7 +96,7 @@ export function extractAndInsertMixins(joinedItems) {
     }
 
     let paramIndex = 0
-    ([... mixin.params]).sort((p1, p2) => p2.key.length - p1.key.length).forEach(param => {
+    ;[... mixin.params].sort((p1, p2) => p2.key.length - p1.key.length).forEach(param => {
       replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[paramIndex]?.trim() || param.default)
       paramIndex++
     })
