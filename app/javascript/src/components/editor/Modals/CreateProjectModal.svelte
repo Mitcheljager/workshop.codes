@@ -49,6 +49,8 @@
   }
 </script>
 
+<slot {showModalOfType} />
+
 {#if active}
   <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
     <div class="modal__content p-0">
