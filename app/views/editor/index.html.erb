@@ -1,4 +1,5 @@
 <% content_for :page_title, "Editor | #{(@project.title + " | ") if @project.present?} Workshop.codes Script Editor" %>
+<% content_for :og_description, "The Workshop.codes Overwatch Workshop Script Editor enables editing your Workshop Script right from your browser using an intuitive and easy to use text based editor. Useful for new and experienced programmers!" %>
 <% content_for :og_summary_small, "true" %>
 
 <%= javascript_pack_tag "editor.js", "data-turbolinks-track": "reload", defer: true %>
