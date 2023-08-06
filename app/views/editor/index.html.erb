@@ -1,4 +1,5 @@
-<% content_for :page_title, "Workshop.codes Script Editor" %>
+<% content_for :page_title, "Editor | #{(@project.title + " | ") if @project.present?} Workshop.codes Script Editor" %>
+<% content_for :og_summary_small, "true" %>
 
 <%= javascript_pack_tag "editor.js", "data-turbolinks-track": "reload", defer: true %>
 
