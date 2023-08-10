@@ -217,6 +217,22 @@
     ko: 밀기
   slug: esperanca
 -
+  en: New Junk City
+  ko: 뉴 정크 시티
+  overwatch_2: true
+  type:
+    en: Flashpoint
+    ko: 플래시포인트
+  slug: new-junk-city
+-
+  en: Suravasa
+  ko: 수라바사의
+  overwatch_2: true
+  type:
+    en: Flashpoint
+    ko: 플래시포인트
+  slug: suravasa
+-
   en: Black Forest
   ko: 검은 숲
   type:
