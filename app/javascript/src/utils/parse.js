@@ -102,7 +102,7 @@ export function findRangesOfStrings(source) {
       if (currentRangeIndex == null) {
         currentRangeIndex = i
       } else if (source[i - 1] !== "\\") {
-        const range = [currentRangeIndex, i]
+        const range = [currentRangeIndex, i + 1]
         foundRanges.push(range)
 
         currentRangeIndex = null
@@ -116,7 +116,8 @@ export function findRangesOfStrings(source) {
 export function matchAllOutsideRanges(ranges, content, regex) {
   const matches = []
   for (const match of content.matchAll(regex)) {
-    if (match.index >= ranges[0] && match.index + match[0].length <= ranges[1]) {
+    const isInsideRange = ranges.some((range) => match.index >= range[0] && match.index + match[0].length <= range[1])
+    if (isInsideRange) {
       continue
     }
     matches.push(match)

@@ -124,6 +124,15 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
+    test("Should ignore variable-likes inside strings", () => {
+      const input = "Custom String(\"Hello.World I8.5.3\")"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
     test("Should handle duplicate variables", () => {
       const input = `
         Global.variable1 = 10;
