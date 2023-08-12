@@ -1,7 +1,7 @@
 <script>
   import SearchObjects from "./SearchObjects.svelte"
   import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
-  import { projects, currentProject, isSignedIn, isMobile } from "../../stores/editor"
+  import { projects, currentProject, isSignedIn, isMobile, modal } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
   import { createProject, destroyCurrentProject, fetchProject, setUrl } from "../../utils/project"
   import { escapeable } from "../actions/escapeable"
@@ -9,7 +9,6 @@
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
 
-  let showModalOfType
   let loading = false
   let active = false
   let showProjectSettings = false
@@ -74,7 +73,7 @@
 
 <svelte:window on:click={outsideClick} />
 
-<CreateProjectModal bind:showModalOfType on:setUrl={({ detail }) => setUrl(detail)} />
+<CreateProjectModal on:setUrl={({ detail }) => setUrl(detail)} />
 
 <div class="dropdown">
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
@@ -113,7 +112,7 @@
         {/if}
         <button class="button button--small w-100" on:click={() => {
           active = false
-          showModalOfType("create")
+          modal.show("create-project", { type: "create" })
         }}>
           Create new
         </button>
@@ -130,7 +129,7 @@
 
     {#if showProjectSettings}
       <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
-        <div class="dropdown__item" on:click={() => showModalOfType("rename", $currentProject.title)}>
+        <div class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
           Rename
         </div>
 

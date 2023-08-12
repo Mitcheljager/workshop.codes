@@ -1,5 +1,5 @@
 <script>
-  import { isSignedIn, projects } from "../../stores/editor"
+  import { isSignedIn, projects, modal } from "../../stores/editor"
   import { createDemoProject, createProject, fetchProject, setUrl } from "../../utils/project"
   import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
 
@@ -36,9 +36,7 @@
       {#if $projects?.length}
         <div class="flex align-center justify-between mt-1/1">
           <h2>Your projects</h2>
-          <CreateProjectModal let:showModalOfType on:setUrl={({ detail }) => setUrl(detail)}>
-            <button class="button button--ghost button--small" on:click={() => showModalOfType("create")}>Create new</button>
-          </CreateProjectModal>
+          <button class="button button--ghost button--small" on:click={() => modal.show("create-project", { type: "create" })}>Create new</button>
         </div>
 
         {#each $projects as { title, uuid, updated_at }}
