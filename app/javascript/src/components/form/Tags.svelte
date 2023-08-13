@@ -45,11 +45,11 @@
   onMount(() => fillValues.forEach(code => addTag(code)))
 
   function keydown(event) {
-    if (event.key === "Backspace" || event.key === "Delete") {
+    if (event.code === "Backspace" || event.code === "Delete") {
       if (input === "") removeTag(values.length - 1)
     }
 
-    if (event.key === "Enter") {
+    if (event.code === "Enter") {
       event.preventDefault()
       return false
     }
@@ -59,17 +59,17 @@
 
   function inputHandleAutoComplete(event) {
     // TAB: If autocompleting, and a value can be found, add the first value
-    if (event.key === "Tab") {
+    if (event.code === "Tab") {
       event.preventDefault()
       resultsList.querySelectorAll("li.tag-item")[0].click()
     }
     // ArrowDown: focus first element of results
-    if (event.key === "ArrowDown" || event.key === "Down") {
+    if (event.code === "ArrowDown") {
       event.preventDefault()
       resultsList.querySelector("li:first-child").focus()
     }
     // ArrowUp: focus last element of results
-    if (event.key === "ArrowUp" || event.key === "Up") {
+    if (event.code === "ArrowUp") {
       event.preventDefault()
       resultsList.querySelector("li:last-child").focus()
     }
@@ -132,7 +132,7 @@
 
     event.preventDefault()
 
-    if (event.key === "ArrowDown" || event.key === "Down") {
+    if (event.code === "ArrowDown" || event.code === "Down") {
       if (index + 1 >= length) {
         resultsList.querySelector("li:first-child").focus()
         return
@@ -141,7 +141,7 @@
       return
     }
 
-    if (event.key === "ArrowUp" || event.key === "Up") {
+    if (event.code === "ArrowUp" || event.code === "Up") {
       if (index <= 0) {
         resultsList.querySelector("li:last-child").focus()
         return
@@ -150,12 +150,12 @@
       return
     }
 
-    if (event.key === "Enter") {
+    if (event.code === "Enter") {
       addTag(label)
       return
     }
 
-    if (event.key === "Escape" || event.key === "Esc") {
+    if (event.code === "Escape") {
       inputElem.focus()
     }
   }

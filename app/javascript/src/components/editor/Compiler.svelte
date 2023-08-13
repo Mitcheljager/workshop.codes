@@ -32,7 +32,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.shiftKey && event.key === "s") {
+    if (event.ctrlKey && event.shiftKey && event.code === "KeyS") {
       event.preventDefault()
       doCompile()
     }
