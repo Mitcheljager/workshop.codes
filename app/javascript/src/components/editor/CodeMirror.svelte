@@ -27,8 +27,6 @@
   $: if ($currentItem.id != currentId && view) updateEditorState()
   $: if ($currentItem.forceUpdate) updateEditorState()
 
-  $: console.log($items)
-
   onMount(() => {
     view = new EditorView({
       parent: element
