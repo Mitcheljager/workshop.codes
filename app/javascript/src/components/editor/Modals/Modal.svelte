@@ -1,15 +1,11 @@
 <script>
-  import { currentProject, isSignedIn, modal } from "../../../stores/editor"
-  import { createProject, renameCurrentProject } from "../../../utils/project"
+  import { modal } from "../../../stores/editor"
   import { escapeable } from "../../actions/escapeable"
-  import { createEventDispatcher } from "svelte"
   import { fade } from "svelte/transition"
 
   export let align = "top"
   export let flush = false
   export let key = "key"
-
-  const dispatch = createEventDispatcher()
 
   function close() {
     modal.close()

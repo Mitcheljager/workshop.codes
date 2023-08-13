@@ -4,6 +4,7 @@
   import { currentProject, projects, modal } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
   import { updateProject } from "../../utils/project"
+  import { createProjectBackup } from "../../utils/projectBackups"
   import { escapeable } from "../actions/escapeable"
   import { Confetti } from "svelte-confetti"
   import { fly } from "svelte/transition"
@@ -32,6 +33,12 @@
         alert("Something went wrong while saving, please try again")
       })
       .finally(() => loading = false)
+  }
+
+  async function createBackup() {
+    loading = true
+    const data = await createProjectBackup($currentProject.uuid)
+    loading = false
   }
 
   function showConfetti() {
@@ -87,8 +94,12 @@
             {new Date($currentProject.updated_at).toLocaleString()}
           </p>
 
-          <button class="button button--square button--small w-100">
-            Save backup
+          <button class="button button--square button--small w-100" on:click={createBackup} disabled={loading}>
+            {#if loading}
+              Creating backup...
+            {:else}
+              Create backup
+            {/if}
           </button>
 
           <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show("backups")}>

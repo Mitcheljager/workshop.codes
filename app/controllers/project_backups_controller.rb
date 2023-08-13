@@ -5,21 +5,24 @@ class ProjectBackupsController < ApplicationController
 
   def index
     @project = current_user.projects.find_by_uuid!(params[:uuid])
+    render json: @project.project_backups.order(created_at: :desc), layout: false
   end
 
   def show
     @project_backup = ProjectBackup.find_by_uuid!(params[:uuid])
 
-    if (!is_project_owner(@project_backup.project)) return
-
-    render json: @project_backup, layout: false
+    if (!is_project_owner(@project_backup.project))
+      render json: "No permission", status: 403, layout: false
+    else
+      render json: @project_backup, layout: false
+    end
   end
 
   def create
     @project = current_user.projects.find_by_uuid!(project_params[:uuid])
-    @project_backup = ProjectBackup.create(title: project.title)
+    @project_backup = ProjectBackup.create(title: @project.title, content: @project.content, project_uuid: @project.uuid)
 
-    if @project.save
+    if @project_backup.save
       render json: @project_backup, layout: false
     else
       render json: @project_backup.errors.to_json, status: 500, layout: false
@@ -27,14 +30,14 @@ class ProjectBackupsController < ApplicationController
   end
 
   def destroy
-    @project_backup = ProjectBackup.find_by_uuid!(project_backup_params[:uuid])
+    @project_backup = ProjectBackup.find_by_uuid!(params[:uuid])
 
-    if (!is_project_owner(@project_backup.project)) return
-
-    if @project.destroy
+    if (!is_project_owner(@project_backup.project))
+      render json: "No permission", status: 403, layout: false
+    elsif @project_backup.destroy
       render json: "Success", layout: false
     else
-      render json: @project.errors.to_json, status: 500, layout: false
+      render json: @project_backup.errors.to_json, status: 500, layout: false
     end
   end
 

@@ -120,6 +120,7 @@ Rails.application.routes.draw do
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
     resources :projects, param: :uuid, format: :json, only: [:show, :create, :update, :destroy]
+    resources :project_backups, param: :uuid, format: :json
 
     get "latest", to: "posts#latest", as: "latest"
     get "page/1", to: redirect("/latest", status: 301)

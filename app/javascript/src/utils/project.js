@@ -98,7 +98,7 @@ export async function renameCurrentProject(value) {
         title: value
       })
 
-      addAlert(`Project renamed to "${ get(currentProject).title }" `)
+      addAlert(`Project renamed to "${ get(currentProject).title }"`)
 
       return data
     })
