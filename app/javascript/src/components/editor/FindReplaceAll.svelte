@@ -114,7 +114,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.shiftKey && event.key === "f") {
+    if (event.ctrlKey && event.shiftKey && event.code === "KeyF") {
       event.preventDefault()
       active = !active
       if (active) {
@@ -129,16 +129,16 @@
     if (input != document.activeElement && replaceInput != document.activeElement) return
     if (!active) return
 
-    if (selected && event.key === "Enter") {
+    if (selected && event.code === "Enter") {
       selectItem(itemMatches[selected].id)
     }
 
-    if (event.key === "ArrowDown") {
+    if (event.code === "ArrowDown") {
       event.preventDefault()
       setSelected(1)
     }
 
-    if (event.key === "ArrowUp") {
+    if (event.code === "ArrowUp") {
       event.preventDefault()
       setSelected(-1)
     }
