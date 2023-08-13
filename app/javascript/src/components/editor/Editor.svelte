@@ -149,7 +149,7 @@
     </div>
 
     <div class="editor__content">
-      {#if Object.keys($currentItem).length}
+      {#if $currentItem?.id}
         <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
       {/if}
     </div>
