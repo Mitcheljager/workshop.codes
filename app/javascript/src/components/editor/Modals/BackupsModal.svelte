@@ -46,6 +46,8 @@
   }
 
   async function getBackupContent(uuid) {
+    if (!confirm("Are you sure? This can not be undone. If you are unsure you could create an additional backup of your current state so you can always go back if you wish.")) return
+
     const data = await fetchBackupContent(uuid)
 
     if (!data) return
@@ -62,6 +64,9 @@
     $translationKeys = parsedContent.translations?.keys || {}
     $selectedLanguages = parsedContent.translations?.selectedLanguages || ["en-US"]
     $defaultLanguage = parsedContent.translations?.defaultLanguage || "en-US"
+
+    showActionsFor = ""
+    modal.close()
   }
 </script>
 
