@@ -1,11 +1,17 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import { currentProject } from "../../stores/editor"
+  import BackupsModal from "./Modals/BackupsModal.svelte"
+  import { currentProject, projects, modal } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
+  import { updateProject } from "../../utils/project"
+  import { createProjectBackup } from "../../utils/projectBackups"
+  import { escapeable } from "../actions/escapeable"
   import { Confetti } from "svelte-confetti"
+  import { fly } from "svelte/transition"
 
   let loading = false
   let confettiActive = false
+  let dropdownActive = false
   let lastSaveContent = ""
 
   function save() {
@@ -18,6 +24,8 @@
         if (!data) throw Error("Create failed")
 
         lastSaveContent = content
+        updateProject($currentProject.uuid, { updated_at: Date.now() })
+
         showConfetti()
       })
       .catch(error => {
@@ -25,6 +33,12 @@
         alert("Something went wrong while saving, please try again")
       })
       .finally(() => loading = false)
+  }
+
+  async function createBackup() {
+    loading = true
+    const data = await createProjectBackup($currentProject.uuid)
+    loading = false
   }
 
   function showConfetti() {
@@ -45,18 +59,56 @@
     event.preventDefault()
     return (event.returnValue = "")
   }
+
+  function outsideClick(event) {
+    if (!dropdownActive) return
+    if (event.target.classList.contains("dropdown") || event.target.closest(".dropdown")) return
+
+    dropdownActive = false
+  }
 </script>
 
-<svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} />
+<svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} on:click={outsideClick}/>
 
 <div class="relative">
-  <button class="button button--square" on:click={save} disabled={loading}>
-    {#if loading}
-      Saving...
-    {:else}
-      Save
-    {/if}
-  </button>
+  <div class="button-group">
+    <button class="button button--square" on:click={save} disabled={loading}>
+      {#if loading}
+        Saving...
+      {:else}
+        Save
+      {/if}
+    </button>
+
+    <div class="dropdown">
+      <button class="button button--square pr-0 pl-0 h-100 flex align-center" on:click={() => dropdownActive = !dropdownActive}>
+        <svg width="18px" height="18px" viewBox="0 0 24 24" class="m-0">
+          <path d="M7.00003 8.5C6.59557 8.5 6.23093 8.74364 6.07615 9.11732C5.92137 9.49099 6.00692 9.92111 6.29292 10.2071L11.2929 15.2071C11.6834 15.5976 12.3166 15.5976 12.7071 15.2071L17.7071 10.2071C17.9931 9.92111 18.0787 9.49099 17.9239 9.11732C17.7691 8.74364 17.4045 8.5 17 8.5H7.00003Z" fill="white" />
+        </svg>
+      </button>
+
+      {#if dropdownActive}
+        <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => dropdownActive = false} class="dropdown__content block w-100 p-1/4" style="width: 200px">
+          <p class="mt-0 text-italic text-small text-base">
+            Last saved:<br>
+            {new Date($currentProject.updated_at).toLocaleString()}
+          </p>
+
+          <button class="button button--square button--small w-100" on:click={createBackup} disabled={loading}>
+            {#if loading}
+              Creating backup...
+            {:else}
+              Create backup
+            {/if}
+          </button>
+
+          <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show("backups")}>
+            View backups
+          </button>
+        </div>
+      {/if}
+    </div>
+  </div>
 
   {#if confettiActive}
     <div class="confetti-holder">
@@ -65,4 +117,4 @@
   {/if}
 </div>
 
-
+<BackupsModal />

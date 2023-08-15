@@ -15,7 +15,7 @@
 
   &:hover:not([disabled]),
   &:active:not([disabled]),
-  &:focus:not([disabled]) {
+  &:focus-visible:not([disabled]) {
     color: $pure-white;
     box-shadow: inset 0 0 0 2px $pure-white;
     outline: none;
@@ -130,11 +130,44 @@
     }
   }
 
+  &--group {
+    display: flex;
+  }
+
   svg {
     margin-right: .5em;
   }
 
   .spinner {
     margin-bottom: $margin / 8;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 2px;
+
+  // First button
+  > .button:first-child,
+  > .dropdown:first-child > .button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  // In between
+  > .button:not(:first-child):not(:last-child),
+  > .dropdown:not(:first-child):not(:last-child) > .button {
+    border-radius: 0;
+  }
+
+  // Last button
+  > .button:last-child,
+  > .dropdown:last-child > .button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  svg {
+    margin: 0;
   }
 }
