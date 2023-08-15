@@ -1,7 +1,7 @@
 
 export function escapeable(node) {
   function keydown(event) {
-    if (event.code != "Escape") return
+    if (event.code !== "Escape") return
 
     node.dispatchEvent(new CustomEvent("escape"))
   }
