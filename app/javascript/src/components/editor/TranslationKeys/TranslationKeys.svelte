@@ -3,6 +3,7 @@
   import TranslationKeysSelectLanguages from "./TranslationKeysSelectLanguages.svelte"
   import { translationKeys, orderedTranslationKeys, selectedLanguages } from "../../../stores/translationKeys"
   import { copyValueToClipboard } from "../../../copy"
+  import { submittable } from "../../actions/submittable"
   import { escapeable } from "../../actions/escapeable"
   import { fade } from "svelte/transition"
 
@@ -62,7 +63,14 @@
 
           <div class="well well--dark block p-1/4 mt-1/4">
             <label class="form-label text-small" for="">Create new key</label>
-            <input bind:this={newKeyInput} class="form-input" type="text" placeholder="Some Translation Key..." />
+            <input
+              bind:this={newKeyInput}
+              class="form-input"
+              type="text"
+              placeholder="Some Translation Key..."
+              use:submittable
+              on:submit={addKey}
+            />
 
             {#if error}
               <div class="text-red mt-1/8 text-small">{error}</div>

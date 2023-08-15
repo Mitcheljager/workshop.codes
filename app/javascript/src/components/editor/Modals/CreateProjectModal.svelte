@@ -2,6 +2,8 @@
   import Modal from "./Modal.svelte"
   import { currentProject, isSignedIn, modal } from "../../../stores/editor"
   import { createProject, renameCurrentProject } from "../../../utils/project"
+  import { escapeable } from "../../actions/escapeable"
+  import { submittable } from "../../actions/submittable"
   import { createEventDispatcher } from "svelte"
   import { fade } from "svelte/transition"
 
@@ -59,7 +61,7 @@
     <div class="p-1/2">
       <h3 class="mb-0 mt-0">Create a new project</h3>
 
-      <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
+      <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value use:submittable on:submit={newProject} />
 
       <button class="button w-100 mt-1/4" on:click={newProject} disabled={!value || loading}>
         {#if loading}
@@ -73,7 +75,7 @@
     <div class="p-1/2">
       <h3 class="mb-0 mt-0">Rename {$currentProject?.title || "this project"}</h3>
 
-      <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
+      <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value use:submittable on:submit={renameProject} />
 
       <button class="button w-100 mt-1/4" on:click={renameProject} disabled={!value || loading}>
         {#if loading}

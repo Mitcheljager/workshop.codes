@@ -2,14 +2,18 @@
   import { items } from "../../stores/editor"
   import { createNewItem } from "../../utils/editor"
   import { getSettings } from "../../utils/parse"
+  import { submittable } from "../actions/submittable"
   import { escapeable } from "../actions/escapeable"
   import { fade } from "svelte/transition"
 
   let active = false
   let replaceScript = false
   let value = ""
+  let disallowSubmit
 
   $: if (active) value = ""
+
+  $: disallowSubmit = !value
 
   function findSettings() {
     const [start, end] = getSettings(value)
@@ -45,6 +49,8 @@
   }
 
   function submit() {
+    if (disallowSubmit) return
+
     if (replaceScript) $items = []
 
     const settings = findSettings()
@@ -64,7 +70,12 @@
     <div class="modal__content">
       Copy your snippet from inside of Overwatch and paste it in here to convert your current snippet to this project.
 
-      <textarea class="form-input form-textarea form-textarea--extra-small mt-1/4" bind:value />
+      <textarea
+        class="form-input form-textarea form-textarea--extra-small mt-1/4"
+        bind:value
+        use:submittable
+        on:submit={submit}
+      />
 
       <div class="switch-checkbox mt-1/4">
         <input
@@ -72,7 +83,8 @@
           class="switch-checkbox__input"
           autocomplete="off"
           type="checkbox"
-          bind:checked={replaceScript}>
+          bind:checked={replaceScript}
+        >
 
         <label
           class="switch-checkbox__label"
@@ -81,7 +93,7 @@
         </label>
       </div>
 
-      <button class="button w-100 mt-1/4" on:click={submit} disabled={!value}>Import</button>
+      <button class="button w-100 mt-1/4" on:click={submit} disabled={disallowSubmit}>Import</button>
     </div>
 
     <div class="modal__backdrop" on:click={() => active = false} />
