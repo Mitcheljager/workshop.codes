@@ -9,7 +9,7 @@ export function submittable(node) {
 
   function keydown(event) {
     if (event.code !== "Enter") return
-    if (nodeIsTextarea && (event.metaKey || event.altKey || event.shiftKey || event.ctrlKey)) return
+    if (nodeIsTextarea && (event.metaKey || event.altKey || event.shiftKey || !event.ctrlKey)) return
 
     event.preventDefault()
 
