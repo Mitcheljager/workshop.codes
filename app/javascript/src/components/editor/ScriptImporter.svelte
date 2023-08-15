@@ -74,8 +74,7 @@
         class="form-input form-textarea form-textarea--extra-small mt-1/4"
         bind:value
         use:submittable
-        on:submit={submit}
-      />
+        on:submit={submit}/>
 
       <div class="switch-checkbox mt-1/4">
         <input
@@ -83,8 +82,7 @@
           class="switch-checkbox__input"
           autocomplete="off"
           type="checkbox"
-          bind:checked={replaceScript}
-        >
+          bind:checked={replaceScript}>
 
         <label
           class="switch-checkbox__label"
