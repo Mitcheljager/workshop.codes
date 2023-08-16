@@ -127,7 +127,7 @@
 
 <svelte:window on:keydown={keydown} />
 
-<Modal>
+<Modal maxWidth="600px">
   <p class="mt-0">
     <strong class="text-white">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br>
     <em>Success not guaranteed.</em>

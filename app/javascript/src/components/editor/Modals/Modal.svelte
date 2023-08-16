@@ -11,8 +11,6 @@
   function close() {
     modal.close()
   }
-
-  $: console.log($modal)
 </script>
 
 <div
