@@ -1,6 +1,5 @@
 <script>
   import SearchObjects from "./SearchObjects.svelte"
-  import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
   import { projects, currentProject, isSignedIn, isMobile, modal } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
   import { createProject, destroyCurrentProject, fetchProject, setUrl } from "../../utils/project"
