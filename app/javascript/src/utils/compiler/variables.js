@@ -15,12 +15,50 @@ const possiblePlayerVariablesRegex = /(?<![^\w.]Global)\.(?<variableName>[A-Za-z
 
 const invalidVariablePrefixRegex = /[^\w.](?:\d+|D)$/
 
+const maxVariableCount = 128
 const maxVariableNameLength = 32
 
 const actionsDefiningVariablesRegex = /(?:(?:Set|Modify) (?:Global|Player) Variable(?: At Index)?|For (?:Global|Player) Variable|Chase (?:Global|Player) Variable (?:Over Time|At Rate))\(/g
 
+export function getDefaultVariableNameIndex(name) {
+  const singleCharFirstIndexOffset = "A".charCodeAt(0) - 1
+  const maxSingleCharIndex = "Z".charCodeAt(0) - singleCharFirstIndexOffset
+
+  if (!/^[A-Z]{1,2}$/.test(name)) {
+    return -1
+  }
+
+  const index = name
+    .split("")
+    .reduce((total, char, pos) => {
+      const charIndex = char.charCodeAt(0) - singleCharFirstIndexOffset
+      total += charIndex * Math.pow(maxSingleCharIndex, name.length - pos - 1)
+      return total
+    }, 0)
+
+  return index - 1
+}
+
+export function excludeDefaultVariableNames(variables) {
+  let removedCount = 0
+  return variables.filter((name) => {
+    const defaultIndex = getDefaultVariableNameIndex(name)
+    if (
+      defaultIndex >= 0 &&
+      defaultIndex < maxVariableCount &&
+      defaultIndex > (variables.length - removedCount)) {
+      removedCount++
+      return false
+    }
+    return true
+  })
+}
+
 export function compileVariables(joinedItems) {
-  const { globalVariables, playerVariables } = getVariables(joinedItems)
+  let { globalVariables, playerVariables } = getVariables(joinedItems)
+
+  globalVariables = excludeDefaultVariableNames(globalVariables)
+  playerVariables = excludeDefaultVariableNames(playerVariables)
 
   if (!globalVariables?.length && !playerVariables.length) return ""
 
