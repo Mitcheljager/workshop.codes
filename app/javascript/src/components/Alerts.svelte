@@ -1,7 +1,13 @@
 <script>
   import { slide } from "svelte/transition"
 
+  // When alerts are passed from rails they are passed as a string
+  // that is an array of arrays shaped like [[type, text], [type, text]]
+  export let initialAlerts = ""
+
   let alerts = []
+
+  $: if (initialAlerts) JSON.parse(initialAlerts)?.forEach(([type, text]) => add({ text, type: `alerts__alert--${ type }` }))
 
   function add(alert) {
     alerts = [...alerts, { ...alert, key: Math.random() }]
@@ -16,10 +22,12 @@
 
 <div class="alerts">
   {#each alerts as { text, type, key }, i (key)}
-    <div class="alerts__alert {type} static" transition:slide={{ duration: 200 }}>
-      <p class="m-0">{text}</p>
+    <div transition:slide={{ duration: 200 }}>
+      <div class="alerts__alert {type} static">
+        <p class="m-0">{text}</p>
 
-      <button class="button p-0 pl-1/16 pr-1/16 text-pure-white" on:click={() => close(i)}>✕</button>
+        <button class="button p-0 pl-1/16 pr-1/16 text-pure-white" on:click={() => close(i)}>✕</button>
+      </div>
     </div>
   {/each}
 </div>
