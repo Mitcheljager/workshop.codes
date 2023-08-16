@@ -1,4 +1,4 @@
-import { compileVariables, getVariables } from "../../../../app/javascript/src/utils/compiler/variables"
+import { compileVariables, excludeDefaultVariableNames, getDefaultVariableNameIndex, getVariables } from "../../../../app/javascript/src/utils/compiler/variables"
 import { disregardWhitespace } from "../../helpers/text"
 
 describe("variables.js", () => {
@@ -18,6 +18,35 @@ describe("variables.js", () => {
       `
       const expectedOutput = {
         globalVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8"],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Global variables should only contain letters, numbers, or an underscore", () => {
+      // caughtByTheGame means the variable is technically an error in-game,
+      // but we leave informing users of that fact to our Linter
+      const input = `
+        Global.variable1;
+        Global.vArIaBlE;
+        Global.variable_1;
+        Global.1caughtByTheGame;
+        Global.variable2+5;
+        Global.$notAValidVariable;
+        Global.TorbTurret+Up*2;
+
+        Set Global Variable($caughtByTheGame, whatever);
+      `
+      const expectedOutput = {
+        globalVariables: [
+          "variable1",
+          "vArIaBlE",
+          "variable_1",
+          "1caughtByTheGame",
+          "variable2",
+          "TorbTurret",
+          "$caughtByTheGame"
+        ],
         playerVariables: []
       }
       expect(getVariables(input)).toEqual(expectedOutput)
@@ -45,6 +74,35 @@ describe("variables.js", () => {
       const expectedOutput = {
         globalVariables: [],
         playerVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8", "variable9", "variable10", "variable11", "variable12", "variable13", "variable14"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Player variables should only contain letters, numbers, or an underscore", () => {
+      // caughtByTheGame means the variable is technically an error in-game,
+      // but we leave informing users of that fact to our Linter
+      const input = `
+        Event Player.variable1;
+        Event Player.vArIaBlE;
+        Event Player.variable_1;
+        Event Player.1caughtByTheGame;
+        Event Player.variable2+5;
+        Event Player.$notAValidVariable;
+        Event Player.TorbTurret+Up*2
+
+        Set Player Variable(Event Player, $caughtByTheGame, whatever);
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: [
+          "variable1",
+          "vArIaBlE",
+          "variable_1",
+          "1caughtByTheGame",
+          "variable2",
+          "TorbTurret",
+          "$caughtByTheGame"
+        ]
       }
       expect(getVariables(input)).toEqual(expectedOutput)
     })
@@ -172,6 +230,101 @@ describe("variables.js", () => {
         }\n\n
       `
       expect(disregardWhitespace(compileVariables(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+
+    test("Should exclude default variables if their index is different from the default", () => {
+      const input = `
+        Global.variable;
+        Global.A;
+        Global.DX;
+        Global.DY;
+        Global.ZZ;
+
+        Event Player.variable;
+        Event Player.A;
+        Event Player.DX;
+        Event Player.DY;
+        Event Player.ZZ;
+      `
+      const expectedOutput = `
+        variables {
+          global:
+            0: variable
+            1: A
+            2: DY
+            3: ZZ
+          player:
+            0: variable
+            1: A
+            2: DY
+            3: ZZ
+        }\n\n
+      `
+      expect(disregardWhitespace(compileVariables(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+  })
+
+  describe("excludeDefaultVariableNames", () => {
+    test("Should exclude single letter variables if their index is different from the default", () => {
+      const input = [
+        "A",
+        "variable",
+        "Z",
+        "B"
+      ]
+      const expectedOutput = [
+        "A",
+        "variable",
+        "B"
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should exclude double letter variables if their index is different from the default", () => {
+      const input = [
+        ... (new Array(100).fill("ignore me")),
+        "DW",
+        "DX",
+        "DY",
+        "DZ",
+        "ZZ"
+      ]
+      const expectedOutput = [
+        ... (new Array(100).fill("ignore me")),
+        "DY",
+        "DZ",
+        "ZZ"
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+  })
+
+  describe("getDefaultVariableNameIndex", () => {
+    test("Should give a correct value for A and Z", () => {
+      const expectedOutput = {
+        "A": 0,
+        "B": 1,
+        "Y": 24,
+        "Z": 25
+      }
+
+      expect(
+        Object.fromEntries(Object.keys(expectedOutput).map((name) => [name, getDefaultVariableNameIndex(name)]))
+      ).toStrictEqual(expectedOutput)
+    })
+
+    test("Should give a correct value for AA and ZZ", () => {
+      const expectedOutput = {
+        "AA": 26,
+        "DX": 127,
+        "DY": 128,
+        "ZZ": 701
+      }
+
+      expect(
+        Object.fromEntries(Object.keys(expectedOutput)
+          .map((name) => [name, getDefaultVariableNameIndex(name)]))
+      ).toStrictEqual(expectedOutput)
     })
   })
 })
