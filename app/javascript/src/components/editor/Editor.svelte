@@ -12,6 +12,7 @@
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
+  import Modals from "./Modals/Modals.svelte"
   import Logo from "../icon/Logo.svelte"
 
   export let events
@@ -172,3 +173,5 @@
     </div>
   </div>
 {/if}
+
+<Modals />

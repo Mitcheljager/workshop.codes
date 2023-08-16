@@ -4,8 +4,6 @@
   import { translationKeys, defaultLanguage, selectedLanguages } from "../../../stores/translationKeys"
   import { updateProject } from "../../../utils/project"
   import { fetchBackupsForProject, destroyBackup, fetchBackupContent } from "../../../utils/projectBackups"
-  import { escapeable } from "../../actions/escapeable"
-  import { addAlertError } from "../../../lib/alerts"
   import { flip } from "svelte/animate"
   import { onMount } from "svelte"
 
@@ -14,7 +12,7 @@
   let showActionsFor = ""
   let backups = []
 
-  $: if ($modal?.key === "backups") getBackups()
+  onMount(getBackups)
 
   async function getBackups() {
     loading = true

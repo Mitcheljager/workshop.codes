@@ -73,8 +73,6 @@
 
 <svelte:window on:click={outsideClick} />
 
-<CreateProjectModal on:setUrl={({ detail }) => setUrl(detail)} />
-
 <div class="dropdown">
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
     {#if loading}

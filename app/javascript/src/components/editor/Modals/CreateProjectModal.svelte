@@ -2,12 +2,7 @@
   import Modal from "./Modal.svelte"
   import { currentProject, isSignedIn, modal } from "../../../stores/editor"
   import { createProject, renameCurrentProject } from "../../../utils/project"
-  import { escapeable } from "../../actions/escapeable"
   import { submittable } from "../../actions/submittable"
-  import { createEventDispatcher } from "svelte"
-  import { fade } from "svelte/transition"
-
-  const dispatch = createEventDispatcher()
 
   let loading
   let value
@@ -20,7 +15,7 @@
     const data = await createProject(value)
     if (data != "error") {
       modal.close()
-      if (data) dispatch("setUrl", data.uuid)
+      if (data) setUrl(data.uuid)
     }
 
     loading = false
