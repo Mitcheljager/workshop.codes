@@ -68,7 +68,7 @@
   }
 </script>
 
-<Modal key="backups">
+<Modal>
   <h3 class="mt-0 mb-0">Backups of "{$currentProject.title}""</h3>
 
   {#if loading}

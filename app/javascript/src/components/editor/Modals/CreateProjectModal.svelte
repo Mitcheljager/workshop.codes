@@ -45,7 +45,7 @@
   }
 </script>
 
-<Modal key="create-project" flush>
+<Modal flush>
   {#if !$isSignedIn}
     <div class="warning warning--orange">
       You are not signed in and this is for demonstration purposes only. Any changes you make will not be saved.
