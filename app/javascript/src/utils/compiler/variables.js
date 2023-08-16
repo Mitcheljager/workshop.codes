@@ -1,5 +1,7 @@
 import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "../parse"
 
+const globalVariablesRegex = /(?<=Global\.)[A-Za-z0-9_]+/g
+
 /**
  * This regex tries to capture:
  *   "Event Player.playerVar" => ".playerVar"
@@ -9,7 +11,7 @@ import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArg
  *   "Global.myGlobalVar.myPlayerVar.otherPlayerVar" => ".myPlayerVar", ".otherPlayerVar"
  *   "Global.Global.Global.myPlayerVar.otherPlayerVar" => "Global" (the second one), ".myPlayerVar", ".otherPlayerVar"
  */
-const possiblePlayerVariablesRegex = /(?<![^\w.]Global)\.(?<variableName>[^\s,.[\]));"]+)/g
+const possiblePlayerVariablesRegex = /(?<![^\w.]Global)\.(?<variableName>[A-Za-z0-9_]+)/g
 
 const invalidVariablePrefixRegex = /[^\w.](?:\d+|D)$/
 
@@ -67,7 +69,7 @@ export function getVariables(joinedItems) {
     }
   }
 
-  const literalGlobalVariables = matchAllOutsideRanges(stringRanges, joinedItems, /(?<=Global\.)[^\s,.[\]);]+/g).map((match) => match[0])
+  const literalGlobalVariables = matchAllOutsideRanges(stringRanges, joinedItems, globalVariablesRegex).map((match) => match[0])
   const literalPlayerVariables = getLiteralPlayerVariables(joinedItems, stringRanges)
 
   const playerVariables = [...new Set([...literalPlayerVariables, ...playerVariablesFromActions])]

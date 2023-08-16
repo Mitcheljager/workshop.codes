@@ -23,6 +23,35 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
+    test("Global variables should only contain letters, numbers, or an underscore", () => {
+      // caughtByTheGame means the variable is technically an error in-game,
+      // but we leave informing users of that fact to our Linter
+      const input = `
+        Global.variable1;
+        Global.vArIaBlE;
+        Global.variable_1;
+        Global.1caughtByTheGame;
+        Global.variable2+5;
+        Global.$notAValidVariable;
+        Global.TorbTurret+Up*2;
+
+        Set Global Variable($caughtByTheGame, whatever);
+      `
+      const expectedOutput = {
+        globalVariables: [
+          "variable1",
+          "vArIaBlE",
+          "variable_1",
+          "1caughtByTheGame",
+          "variable2",
+          "TorbTurret",
+          "$caughtByTheGame"
+        ],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
     test("Should extract simple player variables", () => {
       const input = `
         Event Player.variable1 = Test;
@@ -45,6 +74,35 @@ describe("variables.js", () => {
       const expectedOutput = {
         globalVariables: [],
         playerVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8", "variable9", "variable10", "variable11", "variable12", "variable13", "variable14"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Player variables should only contain letters, numbers, or an underscore", () => {
+      // caughtByTheGame means the variable is technically an error in-game,
+      // but we leave informing users of that fact to our Linter
+      const input = `
+        Event Player.variable1;
+        Event Player.vArIaBlE;
+        Event Player.variable_1;
+        Event Player.1caughtByTheGame;
+        Event Player.variable2+5;
+        Event Player.$notAValidVariable;
+        Event Player.TorbTurret+Up*2
+
+        Set Player Variable(Event Player, $caughtByTheGame, whatever);
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: [
+          "variable1",
+          "vArIaBlE",
+          "variable_1",
+          "1caughtByTheGame",
+          "variable2",
+          "TorbTurret",
+          "$caughtByTheGame"
+        ]
       }
       expect(getVariables(input)).toEqual(expectedOutput)
     })
