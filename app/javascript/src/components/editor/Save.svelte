@@ -1,10 +1,10 @@
 <script>
   import FetchRails from "../../fetch-rails"
-  import BackupsModal from "./Modals/BackupsModal.svelte"
-  import { currentProject, projects, modal } from "../../stores/editor"
+  import { currentProject, modal } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
   import { updateProject } from "../../utils/project"
   import { createProjectBackup } from "../../utils/projectBackups"
+  import { Modal } from "../../constants/Modal"
   import { escapeable } from "../actions/escapeable"
   import { Confetti } from "svelte-confetti"
   import { fly } from "svelte/transition"
@@ -37,7 +37,7 @@
 
   async function createBackup() {
     loading = true
-    const data = await createProjectBackup($currentProject.uuid)
+    await createProjectBackup($currentProject.uuid)
     loading = false
   }
 
@@ -102,7 +102,7 @@
             {/if}
           </button>
 
-          <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show("backups")}>
+          <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show(Modal.Backups)}>
             View backups
           </button>
         </div>
@@ -116,5 +116,3 @@
     </div>
   {/if}
 </div>
-
-<BackupsModal />
