@@ -41,7 +41,8 @@ RSpec.feature "Comments", type: :feature do
 
       find(".comment-form").click_on "Comment"
 
-      expect(page).to have_content("Something went wrong when performing that action.")
+      json_div = page.find('div[data-svelte-component="Alerts"]')
+      expect(json_div).to have_json_property("data-svelte-props", "Something went wrong when performing that action.")
     end
   end
 end

@@ -97,7 +97,8 @@ RSpec.describe "Profiles", type: :feature do
         }.to change { user.profile_image.attached? }.from(false).to(true)
         .and not_change { user.banner_image.attached? }
 
-        expect(page).to have_content "Successfully saved"
+        json_div = page.find('div[data-svelte-component="Alerts"]')
+        expect(json_div).to have_json_property("data-svelte-props", "Successfully saved")
       end
 
       it "allows uploading a banner image" do
@@ -109,7 +110,8 @@ RSpec.describe "Profiles", type: :feature do
         }.to change { user.banner_image.attached? }.from(false).to(true)
         .and not_change { user.profile_image.attached? }
 
-        expect(page).to have_content "Successfully saved"
+        json_div = page.find('div[data-svelte-component="Alerts"]')
+        expect(json_div).to have_json_property("data-svelte-props", "Successfully saved")
       end
 
       it "allows uploading both images at once" do
