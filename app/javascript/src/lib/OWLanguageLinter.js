@@ -502,7 +502,7 @@ function findEachLoopsWithInvalidIterables(content) {
   const constants = get(workshopConstants)
 
   const regex = /@each\s*\(.+in\s+(.+)\s*\)\s*\{/g
-  const variableIterableRegex = /(Constant|For|Each)\.([\w\s]*)/
+  const variableIterableRegex = /(Constant|Mixin|For|Each)\.([\w\s]*)/
 
   let match
   while ((match = regex.exec(content)) != null) {
