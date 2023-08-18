@@ -63,19 +63,17 @@
 
       {#if showMobileDropdown}
         <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--right block w-100" style="width: 200px">
-          <div class="dropdown__item" on:click={() => modal.show(Modal.TranslationKeys)}>
+          <button class="dropdown__item" on:click={() => modal.show(Modal.TranslationKeys)}>
             Translations
-          </div>
+          </button>
 
           {#if $isSignedIn && $currentProject?.is_owner}
-            <div class="dropdown__item" on:click={() => modal.show(Modal.ScriptImporter)}>
+            <button class="dropdown__item" on:click={() => modal.show(Modal.ScriptImporter)}>
               Import Script
-            </div>
+            </button>
           {/if}
 
-          <div class="dropdown__item">
-            <Compiler inline={true} />
-          </div>
+          <Compiler class="dropdown__item" inline={true} />
         </div>
       {/if}
     </div>

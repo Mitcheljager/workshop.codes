@@ -43,11 +43,9 @@
 
 <svelte:window on:keydown={keydown} />
 
-<svelte:element
-  this={inline ? "span" : "button"}
-  class={inline ? "w-100" : "button button--secondary button--square tooltip"}
-  on:click={doCompile}
->
+<button
+  class={"tooltip " + ($$restProps["class"] ?? "") + " " + (inline ? "empty-button" : "button button--secondary button--square")}
+  on:click={doCompile}>
   {#if inline && copied}
     Compiled and copied!
   {:else}
@@ -63,5 +61,5 @@
       Copied to clipboard
     </div>
   {/if}
-</svelte:element>
+</button>
 
