@@ -53,32 +53,32 @@
   {/if}
 
   {#if $isMobile}
-  <div class="dropdown settings" bind:this={mobileDropdown}>
-    <button
-      class="button button--secondary button--square"
-      on:click|stopPropagation={() => showMobileDropdown = !showMobileDropdown}
-    >
-      <ThreeDotMenu />
-    </button>
+    <div class="dropdown settings" bind:this={mobileDropdown}>
+      <button
+        class="button button--secondary button--square"
+        on:click|stopPropagation={() => showMobileDropdown = !showMobileDropdown}
+      >
+        <ThreeDotMenu />
+      </button>
 
-    {#if showMobileDropdown}
-      <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--right block w-100" style="width: 200px">
-        <div class="dropdown__item" on:click={() => modal.show(Modal.TranslationKeys)}>
-          Translations
-        </div>
-
-        {#if $isSignedIn && $currentProject?.is_owner}
-          <div class="dropdown__item" on:click={() => modal.show(Modal.ScriptImporter)}>
-            Import Script
+      {#if showMobileDropdown}
+        <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--right block w-100" style="width: 200px">
+          <div class="dropdown__item" on:click={() => modal.show(Modal.TranslationKeys)}>
+            Translations
           </div>
-        {/if}
 
-        <div class="dropdown__item">
-          <Compiler inline={true} />
+          {#if $isSignedIn && $currentProject?.is_owner}
+            <div class="dropdown__item" on:click={() => modal.show(Modal.ScriptImporter)}>
+              Import Script
+            </div>
+          {/if}
+
+          <div class="dropdown__item">
+            <Compiler inline={true} />
+          </div>
         </div>
-      </div>
-    {/if}
-  </div>
+      {/if}
+    </div>
   {/if}
 
   {#if $isSignedIn && $currentProject?.is_owner}
