@@ -27,7 +27,7 @@
   class:editor-folder--expanded={expanded}
   class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
   data-item-id={item.id}>
-  <button class="editor-folder__icon empty-button" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
+  <button class="editor-folder__icon" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
     &gt;
   </button>
 

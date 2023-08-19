@@ -113,7 +113,7 @@
 
 <div class="editor" class:editor--empty={!$currentProjectUUID}>
   <div class="editor__top">
-    <button class="empty-button w-auto {$isMobile ? 'mr-1/4' : 'mr-1/2'}" on:click={() => $currentProjectUUID = null}>
+    <button class="w-auto {$isMobile ? 'mr-1/4' : 'mr-1/2'}" on:click={() => $currentProjectUUID = null}>
       <Logo />
     </button>
 

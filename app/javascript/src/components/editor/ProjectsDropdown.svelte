@@ -90,9 +90,9 @@
       <hr />
 
       {#each filteredProjects as project (project.uuid)}
-        <div class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
+        <button class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
           {project.title}
-        </div>
+        </button>
       {/each}
 
       {#if $projects?.length && !filteredProjects.length}
@@ -120,23 +120,23 @@
 
 {#if $isSignedIn && $currentProject?.is_owner && !loading}
   <div class="dropdown">
-    <button class="empty-button w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
+    <button class="w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
       Edit
     </button>
 
     {#if showProjectSettings}
       <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
-        <div class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
+        <button class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
           Rename
-        </div>
+        </button>
 
-        <div class="dropdown__item" on:click={duplicateProject}>
+        <button class="dropdown__item" on:click={duplicateProject}>
           Duplicate
-        </div>
+        </button>
 
-        <div class="dropdown__item text-red" on:click={destroyProject}>
+        <button class="dropdown__item text-red" on:click={destroyProject}>
           Destroy
-        </div>
+        </button>
       </div>
     {/if}
   </div>

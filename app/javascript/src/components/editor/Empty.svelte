@@ -40,7 +40,7 @@
         </div>
 
         {#each $projects as { title, uuid, updated_at }}
-          <button class="empty-button project" on:click={() => getProject(uuid)}>
+          <button class="project" on:click={() => getProject(uuid)}>
             <div class="text-white">{title}</div>
             <small>Last updated: { new Date(updated_at).toLocaleString() }</small>
           </button>

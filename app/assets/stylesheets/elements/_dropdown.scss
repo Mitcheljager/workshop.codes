@@ -84,12 +84,18 @@
 }
 
 .dropdown__item {
+  appearance: none;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: .5rem 1rem;
+  width: 100%;
+  border: 0;
+  background: transparent;
   color: $white;
   text-decoration: none;
+  text-align: left;
+  font-family: $font-stack;
   font-size: $font-size-base;
   line-height: 1.35em;
   cursor: pointer;

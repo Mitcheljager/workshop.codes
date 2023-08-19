@@ -48,7 +48,7 @@
             class:translation-settings__item--active={selectedKey == key}
             on:click={() => { selectedKey = key; showLanguageSettings = false }}>
             {key}
-            <div class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</div>
+            <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
           </button>
         {/each}
       </div>
