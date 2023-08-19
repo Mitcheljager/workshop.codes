@@ -24,7 +24,7 @@ class ForgotPasswordsController < ApplicationController
     @user = User.find_by_email(forgot_password_params[:email])
 
     if @user.present?
-      @forgot_password_token = ForgotPasswordToken.new(user_id: @user.id, token: SecureRandom.base64)
+      @forgot_password_token = ForgotPasswordToken.new(user_id: @user.id, token: SecureRandom.uuid)
 
       if @forgot_password_token.save
         create_activity(:forgot_password, {}, @user.id)

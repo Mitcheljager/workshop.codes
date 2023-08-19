@@ -1,6 +1,6 @@
 <script>
   import { fly } from "svelte/transition"
-  import { compile } from "../../utils/compiler"
+  import { compile } from "../../utils/compiler/compile"
   import { copyValueToClipboard } from "../../copy"
 
   let compiling = false
@@ -32,7 +32,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.shiftKey && event.keyCode == 83) {
+    if (event.ctrlKey && event.shiftKey && event.code === "KeyS") {
       event.preventDefault()
       doCompile()
     }

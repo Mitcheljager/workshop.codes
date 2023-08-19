@@ -1,6 +1,8 @@
 <script>
   import { items, currentItem, editorStates } from "../../stores/editor"
-  import { getItemById, replaceBetween, setCurrentItemById, updateItem } from "../../utils/editor"
+  import { getItemById, setCurrentItemById, updateItem } from "../../utils/editor"
+  import { replaceBetween } from "../../utils/parse"
+  import { escapeable } from "../actions/escapeable"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
@@ -112,7 +114,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.shiftKey && event.keyCode == 70) { // F key
+    if (event.ctrlKey && event.shiftKey && event.code === "KeyF") {
       event.preventDefault()
       active = !active
       if (active) {
@@ -127,16 +129,16 @@
     if (input != document.activeElement && replaceInput != document.activeElement) return
     if (!active) return
 
-    if (selected && event.keyCode == 13) { // Enter key
+    if (selected && event.code === "Enter") {
       selectItem(itemMatches[selected].id)
     }
 
-    if (event.keyCode == 40) { // Down array
+    if (event.code === "ArrowDown") {
       event.preventDefault()
       setSelected(1)
     }
 
-    if (event.keyCode == 38) { // Up array
+    if (event.code === "ArrowUp") {
       event.preventDefault()
       setSelected(-1)
     }
@@ -148,7 +150,7 @@
   }
 </script>
 
-<svelte:window on:keydown={keydown} on:keydown={event => { if (event.key === "Escape") active = false }} />
+<svelte:window on:keydown={keydown} />
 
 {#if !active}
   <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
@@ -157,7 +159,7 @@
 {/if}
 
 {#if active}
-  <div in:fly={{ duration: 150, y: -30 }}>
+  <div in:fly={{ duration: 150, y: -30 }} use:escapeable on:escape={() => active = false}>
     <input type="text" class="form-input bg-darker mt-1/4" placeholder="Find in all..." bind:value bind:this={input} />
 
     <div class="flex mt-1/16">

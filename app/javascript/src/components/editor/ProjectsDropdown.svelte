@@ -1,14 +1,13 @@
 <script>
   import SearchObjects from "./SearchObjects.svelte"
-  import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
-  import { projects, currentProject, isSignedIn, isMobile } from "../../stores/editor"
+  import { projects, currentProject, isSignedIn, isMobile, modal } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
-  import { createProject, destroyCurrentProject, fetchProject } from "../../utils/project"
+  import { createProject, destroyCurrentProject, fetchProject, setUrl } from "../../utils/project"
+  import { escapeable } from "../actions/escapeable"
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
 
-  let showModalOfType
   let loading = false
   let active = false
   let showProjectSettings = false
@@ -69,18 +68,9 @@
     active = false
     showProjectSettings = false
   }
-
-  function setUrl(uuid) {
-    const url = new URL(window.location)
-    if (uuid) url.searchParams.set("uuid", uuid)
-    else url.searchParams.delete("uuid")
-    window.history.replaceState("", "", url)
-  }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") { active = false } }} />
-
-<CreateProjectModal bind:showModalOfType on:setUrl={({ detail }) => setUrl(detail)} />
+<svelte:window on:click={outsideClick} />
 
 <div class="dropdown">
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
@@ -92,7 +82,7 @@
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style:min-width="200px">
+    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content dropdown__content--left block w-100" style:min-width="200px">
       <div class="pl-1/8 pr-1/8">
         <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
       </div>
@@ -119,7 +109,7 @@
         {/if}
         <button class="button button--small w-100" on:click={() => {
           active = false
-          showModalOfType("create")
+          modal.show("create-project", { type: "create" })
         }}>
           Create new
         </button>
@@ -136,7 +126,7 @@
 
     {#if showProjectSettings}
       <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
-        <div class="dropdown__item" on:click={() => showModalOfType("rename", $currentProject.title)}>
+        <div class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
           Rename
         </div>
 

@@ -98,7 +98,7 @@ export async function renameCurrentProject(value) {
         title: value
       })
 
-      addAlert(`Project renamed to "${ get(currentProject).title }" `)
+      addAlert(`Project renamed to "${ get(currentProject).title }"`)
 
       return data
     })
@@ -123,4 +123,11 @@ export async function destroyCurrentProject() {
       console.error(error)
       alert("Something went wrong while destroying your project, please try again")
     })
+}
+
+export function setUrl(uuid) {
+  const url = new URL(window.location)
+  if (uuid) url.searchParams.set("uuid", uuid)
+  else url.searchParams.delete("uuid")
+  window.history.replaceState("", "", url)
 }

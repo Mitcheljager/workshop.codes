@@ -1,6 +1,7 @@
 <script>
-  import { fly } from "svelte/transition"
+  import { escapeable } from "../actions/escapeable"
   import Keyboard from "../icon/Keyboard.svelte"
+  import { fly } from "svelte/transition"
 
   let active = false
 
@@ -9,9 +10,11 @@
     { keys: ["Ctrl", "Shift", "S"], text: "Compile" },
     { keys: ["Ctrl", "Space"], text: "Show autocomplete suggestions" },
     { keys: ["Ctrl", "Z"], text: "Undo" },
+    { keys: ["Ctrl", "Y"], text: "Redo" },
+    { keys: ["Ctrl", "Shift", "Z"], text: "Redo" },
     { keys: ["Ctrl", "C"], text: "Copy current line or selection" },
     { keys: ["Ctrl", "X"], text: "Cut current line or selection" },
-    { keys: ["Shift", "F"], text: "Search/replace" },
+    { keys: ["Ctrl", "F"], text: "Search/replace" },
     { keys: ["Ctrl", "Shift", "F"], text: "Search/replace in all files" },
     { keys: ["Alt", "Click"], text: "Search wiki for keyword" },
     { keys: ["Ctrl", "Q"], text: "Find by name" },
@@ -36,7 +39,7 @@
   }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
+<svelte:window on:click={outsideClick} />
 
 <div class="dropdown shortcuts settings">
   <button class="button button--secondary button--square" on:click|stopPropagation={() => active = !active}>
@@ -44,7 +47,7 @@
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content block p-1/4" style="width: 400px">
+    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content block p-1/4" style="width: 400px">
       <h5 class="mt-0 mb-1/8">Keyboard shortcuts</h5>
 
       {#each shortcuts as { keys, text }}

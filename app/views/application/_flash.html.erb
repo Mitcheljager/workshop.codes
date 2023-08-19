@@ -1,9 +1,1 @@
-<div class="alerts" data-role="alerts">
-  <% flash.each do |type, message| %>
-    <% next if type == "alert" %>
-    <div class="alerts__alert <%= "alerts__alert--#{type}" if ["warning", "error"].include? type.to_s %>">
-      <p class="mt-1/16 mb-1/16"><%= message %></p>
-      <%= button_tag "✕", class: "button p-0 pl-1/16 pr-1/16 text-white", data: { role: "dismiss-parent" } %>
-    </div>
-  <% end %>
-</div>
+<%= svelte_component "Alerts", { initialAlerts: flash.to_json } %>

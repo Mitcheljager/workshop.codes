@@ -1,29 +1,21 @@
 <script>
-  import { currentProject, isSignedIn } from "../../../stores/editor"
+  import Modal from "./Modal.svelte"
+  import { currentProject, isSignedIn, modal } from "../../../stores/editor"
   import { createProject, renameCurrentProject } from "../../../utils/project"
-  import { createEventDispatcher } from "svelte"
-  import { fade } from "svelte/transition"
-
-  const dispatch = createEventDispatcher()
+  import { submittable } from "../../actions/submittable"
 
   let loading
   let value
-  let active = false
-  let modalType = "create"
 
-  export function showModalOfType(type, title = "") {
-    modalType = type
-    value = title
-    active = true
-  }
+  $: if ($modal?.key === "create-project") setValue($modal?.type === "rename" ? $currentProject.title : "")
 
   async function newProject() {
     loading = true
 
     const data = await createProject(value)
     if (data != "error") {
-      active = false
-      if (data) dispatch("setUrl", data.uuid)
+      modal.close()
+      if (data) setUrl(data.uuid)
     }
 
     loading = false
@@ -32,63 +24,61 @@
   async function renameProject() {
     if (!$isSignedIn) {
       alert("You must be signed in to rename a project")
-      active = false
+      modal.close()
       return
     } else if (!$currentProject) {
       alert("No project selected? This is probably a bug.")
-      active = false
+      modal.close()
       return
     }
 
     loading = true
 
     const data = await renameCurrentProject(value)
-    if (data) active = false
+    if (data) modal.close()
 
     loading = false
   }
+
+  function setValue(title) {
+    value = title
+  }
 </script>
 
-{#if active}
-  <div class="modal modal--top" transition:fade={{ duration: 100 }} data-ignore>
-    <div class="modal__content p-0">
-      {#if !$isSignedIn}
-        <div class="warning warning--orange">
-          You are not signed in and this is for demonstration purposes only. Any changes you make will not be saved.
-        </div>
-      {/if}
-
-      {#if modalType == "create"}
-        <div class="p-1/2">
-          <h3 class="mb-0 mt-0">Create a new project</h3>
-
-          <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
-
-          <button class="button w-100 mt-1/4" on:click={newProject} disabled={!value || loading}>
-            {#if loading}
-              ...
-            {:else}
-              Create
-            {/if}
-          </button>
-        </div>
-      {:else if modalType == "rename"}
-        <div class="p-1/2">
-          <h3 class="mb-0 mt-0">Rename {$currentProject?.title || "this project"}</h3>
-
-          <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value />
-
-          <button class="button w-100 mt-1/4" on:click={renameProject} disabled={!value || loading}>
-            {#if loading}
-              ...
-            {:else}
-              Rename
-            {/if}
-          </button>
-        </div>
-      {/if}
+<Modal flush>
+  {#if !$isSignedIn}
+    <div class="warning warning--orange">
+      You are not signed in and this is for demonstration purposes only. Any changes you make will not be saved.
     </div>
+  {/if}
 
-    <div class="modal__backdrop" on:click={() => active = false} />
-  </div>
-{/if}
+  {#if $modal?.type == "create"}
+    <div class="p-1/2">
+      <h3 class="mb-0 mt-0">Create a new project</h3>
+
+      <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value use:submittable on:submit={newProject} />
+
+      <button class="button w-100 mt-1/4" on:click={newProject} disabled={!value || loading}>
+        {#if loading}
+          ...
+        {:else}
+          Create
+        {/if}
+      </button>
+    </div>
+  {:else if $modal?.type == "rename"}
+    <div class="p-1/2">
+      <h3 class="mb-0 mt-0">Rename {$currentProject?.title || "this project"}</h3>
+
+      <input type="text" class="form-input mt-1/4" placeholder="Project title" bind:value use:submittable on:submit={renameProject} />
+
+      <button class="button w-100 mt-1/4" on:click={renameProject} disabled={!value || loading}>
+        {#if loading}
+          ...
+        {:else}
+          Rename
+        {/if}
+      </button>
+    </div>
+  {/if}
+</Modal>

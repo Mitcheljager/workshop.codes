@@ -3,6 +3,7 @@ import * as ActiveStorage from "@rails/activestorage"
 ActiveStorage.start()
 
 import WebpackerSvelte from "webpacker-svelte"
+import Alerts from "../src/components/Alerts.svelte"
 import Dropzone from "../src/components/form/Dropzone.svelte"
 import ControlsForm from "../src/components/form/Controls.svelte"
 import SnippetForm from "../src/components/form/Snippet.svelte"
@@ -11,7 +12,7 @@ import DerivativesForm from "../src/components/form/Derivatives.svelte"
 import Notifications from "../src/components/Notifications.svelte"
 import { LinkedChart, LinkedLabel } from "svelte-tiny-linked-charts"
 
-WebpackerSvelte.setup({ Dropzone, ControlsForm, SnippetForm, TagsForm, DerivativesForm, Notifications, LinkedChart, LinkedLabel })
+WebpackerSvelte.setup({ Alerts, Dropzone, ControlsForm, SnippetForm, TagsForm, DerivativesForm, Notifications, LinkedChart, LinkedLabel })
 
 import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"

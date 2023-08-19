@@ -1,6 +1,7 @@
 <script>
   import { translationKeys, selectedLanguages } from "../../../stores/translationKeys"
   import { languageOptions } from "../../../lib/languageOptions"
+  import { submittable } from "../../actions/submittable"
   import { createEventDispatcher } from "svelte"
 
   export let selectedKey
@@ -45,7 +46,7 @@
 
 <div class="well well--dark block p-1/4 mb-1/4">
   <div class="form-group-uneven">
-    <input class="form-input" value={selectedKey} bind:this={renameInput} />
+    <input class="form-input" value={selectedKey} bind:this={renameInput} use:submittable on:submit={renameKey} />
 
     <div class="flex justify-end">
       <button class="button button--secondary button--small button--square" on:click={renameKey}>Rename</button>

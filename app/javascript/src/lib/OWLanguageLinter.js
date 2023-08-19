@@ -1,5 +1,5 @@
-import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/editor"
-import { completionsMap, workshopConstants } from "../stores/editor"
+import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
+import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 
 let diagnostics = []
@@ -17,8 +17,9 @@ export function OWLanguageLinter(view) {
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
   findConditionalsRegexErrors(content)
-  findConditionalsElseIfUses(content)
   findEachLoopsWithInvalidIterables(content)
+  findEventBlocksWithMissingArguments(content)
+  findUndefinedSubroutines(content)
   checkMixins(content)
   checkTranslations(content)
   checkForLoops(content)
@@ -465,7 +466,7 @@ function findTrailingCommas(content) {
 }
 
 function findConditionalsRegexErrors(content) {
-  const regex = /(test[ \n]*)(.*)[ \n]*\)[ \n]*\{/g // matches " test righthand) {" and " /regex/flags) {"
+  const regex = /(~=[ \n]*)(.*)[ \n]*\)[ \n]*\{/g // matches "~= righthand) {" and "~= /regex/flags) {"
   const regexRegex = /\/(.*)\/(\w*)/ // TODO: share this with compiler.js?
   let match
   while ((match = regex.exec(content)) != null) {
@@ -496,26 +497,12 @@ function findConditionalsRegexErrors(content) {
   }
 }
 
-function findConditionalsElseIfUses(content) {
-  const regex = /@else[\s\n]+@?if/g
-
-  let match
-  while ((match = regex.exec(content)) != null) {
-    const usageFormatted = match[0].replace(/[\s\n]+/, " ")
-    diagnostics.push({
-      from: match.index,
-      to: match.index + match[0].length,
-      severity: "error",
-      message: `\`${ usageFormatted }\` is not supported. Use \`@else { @if (elseIfCondition) { ... } }\` instead.`
-    })
-  }
-}
 
 function findEachLoopsWithInvalidIterables(content) {
   const constants = get(workshopConstants)
 
   const regex = /@each\s*\(.+in\s+(.+)\s*\)\s*\{/g
-  const variableIterableRegex = /(Constant|For|Each)\.([\w\s]*)/
+  const variableIterableRegex = /(Constant|Mixin|For|Each)\.([\w\s]*)/
 
   let match
   while ((match = regex.exec(content)) != null) {
@@ -549,5 +536,67 @@ function findEachLoopsWithInvalidIterables(content) {
       severity: "error",
       message: "@each iterable must be an array in the format [item1, item2, ...], or a Workshop Constant in the format Constant.Name (e.g. Constant.Button)"
     })
+  }
+}
+
+const eventTypeToArgumentsMap = {
+  "subroutine": ["SubroutineName"],
+  "ongoing - each player": ["Team", "Player"],
+  "player dealt damage": ["Team", "Player"],
+  "player dealt final blow": ["Team", "Player"],
+  "player dealt healing": ["Team", "Player"],
+  "player dealt knockback": ["Team", "Player"],
+  "player died": ["Team", "Player"],
+  "player earned elimination": ["Team", "Player"],
+  "player joined match": ["Team", "Player"],
+  "player left match": ["Team", "Player"],
+  "player received healing": ["Team", "Player"],
+  "player received knockback": ["Team", "Player"],
+  "player took damage": ["Team", "Player"]
+}
+
+function findEventBlocksWithMissingArguments(content) {
+  const eventBlockRegex = /event\s*\{\s*/g
+
+  let eventBlockMatch
+  while ((eventBlockMatch = eventBlockRegex.exec(content)) != null) {
+    const eventBlockStart = eventBlockMatch.index + eventBlockMatch[0].length
+    const eventBlockEnd = getClosingBracket(content, "{", "}", eventBlockMatch.index)
+
+    const [eventType, ... givenEventArgs] = content.substring(eventBlockStart, eventBlockEnd)
+      .split(";")
+      .map((s) => s.trim())
+      .filter((s) => !!s)
+
+    const requiredEventArgs = eventTypeToArgumentsMap[eventType.toLowerCase()]
+
+    if (requiredEventArgs && requiredEventArgs.length !== givenEventArgs.length) {
+      const missingArguments = requiredEventArgs.slice(givenEventArgs.length)
+      diagnostics.push({
+        from: eventBlockStart,
+        to: eventBlockStart + eventType.length,
+        severity: "error",
+        message: `Events ${ eventType } require ${ requiredEventArgs.length } arguments, but you are missing the following: ${ missingArguments.join(", ") }`
+      })
+    }
+  }
+}
+
+function findUndefinedSubroutines(content) {
+  const definedSubroutines = get(subroutinesMap).map(({ label }) => label)
+
+  for (const match of content.matchAll(/(?<=(?:Call Subroutine|Start Rule))\(/g)) {
+    const argsEnd = getClosingBracket(content, "(", ")", match.index - 1)
+    const [subroutineName] = splitArgumentsString(content.substring(match.index + 1, argsEnd))
+
+    if (!definedSubroutines.includes(subroutineName)) {
+      const from = match.index + 1
+      diagnostics.push({
+        from,
+        to: from + subroutineName.length,
+        severity: "error",
+        message: `There is no subroutine rule with name "${ subroutineName }"`
+      })
+    }
   }
 }

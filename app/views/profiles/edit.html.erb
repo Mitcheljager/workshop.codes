@@ -19,10 +19,10 @@
     <% end %>
 
     <nav class="tabs mt-1/2">
-      <%= link_to "About you", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "about-you" } %>
-      <%= link_to "Images", "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
-      <%= link_to "Badges", "#", class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
-      <%= link_to "Blocks", "#", class: "tabs__item", data: { action: "set-tab", target: "blocks" } %>
+      <%= link_to "About you", "?tab=about-you", class: "tabs__item #{"tabs__item--active" unless params[:tab].present? && params[:tab] != "about-you"}", data: { action: "set-tab", target: "about-you" } %>
+      <%= link_to "Images", "?tab=images", class: "tabs__item #{"tabs__item--active" if params[:tab].present? && params[:tab] == "images"}", data: { action: "set-tab", target: "images" } %>
+      <%= link_to "Badges", "?tab=badges", class: "tabs__item #{"tabs__item--active" if params[:tab].present? && params[:tab] == "badges"}", data: { action: "set-tab", target: "badges" } %>
+      <%= link_to "Blocks", "?tab=blocks", class: "tabs__item #{"tabs__item--active" if params[:tab].present? && params[:tab] == "blocks"}", data: { action: "set-tab", target: "blocks" } %>
     </nav>
 
     <%= render "form" %>

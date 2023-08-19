@@ -5,15 +5,16 @@
   import { EditorState, EditorSelection } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
+  import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
   import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
-  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, mixinsMap } from "../../stores/editor"
+  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
-  import { getPhraseFromPosition } from "../../utils/editor"
+  import { getPhraseFromPosition } from "../../utils/parse"
   import debounce from "../../debounce"
 
   const dispatch = createEventDispatcher()
@@ -72,7 +73,8 @@
         keymap.of([
           { key: "Tab", run: tabIndent },
           { key: "Shift-Tab", run: tabIndent },
-          { key: "Enter", run: autoIndentOnEnter }
+          { key: "Enter", run: autoIndentOnEnter },
+          { key: "Ctrl-Shift-z", run: redoAction }
         ]),
         EditorView.updateListener.of((state) => {
           if (state.docChanged) updateItem()
@@ -102,16 +104,22 @@
     return {
       from: word.from + add,
       to: word.to,
-      options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...extraCompletions],
+      options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...$subroutinesMap, ...extraCompletions],
       validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.keyCode == 50) {
+    if (event.ctrlKey && event.key === "2") {
       event.preventDefault()
       view.focus()
     }
+  }
+
+  function redoAction({ dispatch }) {
+    const { transaction } = redo(view)
+    if (transaction) dispatch(transaction)
+    return true
   }
 
   function autoIndentOnEnter({ state, dispatch }) {
@@ -134,7 +142,7 @@
     return true
   }
 
-  function tabIndent({ state, dispatch }) {
+  function tabIndent({ state, dispatch }, event) {
     const { shiftKey } = event
 
     if (element.querySelector(".cm-tooltip-autocomplete")) return true

@@ -43,7 +43,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.keyCode == 51) {
+    if (event.ctrlKey && event.key === "3") {
       event.preventDefault()
       input.focus()
     }

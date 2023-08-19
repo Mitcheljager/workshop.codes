@@ -12,6 +12,7 @@
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
+  import Modals from "./Modals/Modals.svelte"
   import Logo from "../icon/Logo.svelte"
 
   export let events
@@ -149,26 +150,28 @@
     </div>
 
     <div class="editor__content">
-      {#if Object.keys($currentItem).length}
+      {#if $currentItem?.id}
         <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
       {/if}
-    </div>
-
-    <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
-      <EditorWiki bind:fetchArticle />
-
-      <DragHandle key="popout-width" currentSize=300 align="left" />
     </div>
   {:else}
     <Empty />
   {/if}
+
+  <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
+    <EditorWiki bind:fetchArticle />
+
+    <DragHandle key="popout-width" currentSize=300 align="left" />
+  </div>
 </div>
 
 {#if !$isSignedIn}
   <div class="alerts">
-    <div class="alerts__alert alerts__alert--warning">
+    <div class="alert alert--warning">
       You are not signed in and nothing you do will be saved!
       <a href="/login">Please sign in</a>
     </div>
   </div>
 {/if}
+
+<Modals />

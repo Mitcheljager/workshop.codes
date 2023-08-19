@@ -217,6 +217,22 @@
     ko: 밀기
   slug: esperanca
 -
+  en: New Junk City
+  ko: 뉴 정크 시티
+  overwatch_2: true
+  type:
+    en: Flashpoint
+    ko: 플래시포인트
+  slug: new-junk-city
+-
+  en: Suravasa
+  ko: 수라바사의
+  overwatch_2: true
+  type:
+    en: Flashpoint
+    ko: 플래시포인트
+  slug: suravasa
+-
   en: Black Forest
   ko: 검은 숲
   type:
@@ -279,6 +295,13 @@
     en: Lúcioball
     ko: 루시우볼
   slug: busan-stadium-classic
+-
+  en: Estádio Dos Gorilas
+  ko: 도스 고릴라스 스타디움
+  type:
+    en: Winston's Beach Volleyball
+    ko: 윈스턴의 비치 발리볼
+  slug: estadio-dos-gorilas
 -
   en: Château Guillard
   ko: 샤토 기야르

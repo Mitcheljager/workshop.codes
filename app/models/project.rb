@@ -1,7 +1,11 @@
 class Project < ApplicationRecord
+  self.primary_key = 'uuid'
+
   before_validation :generate_and_set_uuid, on: :create
 
   belongs_to :user
+
+  has_many :project_backups, -> { select(:uuid, :project_uuid, :created_at) }, class_name: "ProjectBackup", foreign_key: :project_uuid, dependent: :destroy
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 1, maximum: 75 }
