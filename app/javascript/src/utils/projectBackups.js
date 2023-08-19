@@ -9,7 +9,7 @@ export async function createProjectBackup(uuid) {
     })
     .catch(error => {
       console.error(error)
-      addAlert("Something went wrong while creating your backup, please try again", ["alerts__alert--error"])
+      addAlert("Something went wrong while creating your backup, please try again", ["alert--error"])
     })
 }
 
@@ -32,7 +32,7 @@ export async function destroyBackup(uuid) {
     })
     .catch(error => {
       console.error(error)
-      addAlert("Something went wrong while deleting your backup, please try again", ["alerts__alert--error"])
+      addAlert("Something went wrong while deleting your backup, please try again", ["alert--error"])
       throw new Error(error)
     })
 }
@@ -45,7 +45,7 @@ export async function fetchBackupContent(uuid) {
     })
     .catch(error => {
       console.error(error)
-      addAlert("Something went wrong while fetching your backup, please try again", ["alerts__alert--error"])
+      addAlert("Something went wrong while fetching your backup, please try again", ["alert--error"])
       throw new Error(error)
     })
 }

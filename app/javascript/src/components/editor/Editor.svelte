@@ -166,7 +166,7 @@
 
 {#if !$isSignedIn}
   <div class="alerts">
-    <div class="alerts__alert alerts__alert--warning">
+    <div class="alert alert--warning">
       You are not signed in and nothing you do will be saved!
       <a href="/login">Please sign in</a>
     </div>

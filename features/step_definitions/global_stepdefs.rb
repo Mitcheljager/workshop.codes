@@ -4,7 +4,7 @@ end
 
 Then "I should see a notification saying {string}" do |string|
   # TODO: Fix test to work with Svelte component, should find JSON on element instead
-  # page.find(".alerts__alert", text: string)
+  # page.find(".alert", text: string)
 end
 
 When "I click (on ){string}" do |string|

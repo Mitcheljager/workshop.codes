@@ -3,9 +3,9 @@ export function addAlert(alertText, additionalAlertClasses = []) {
 }
 
 export function addAlertWarning(alertText) {
-  addAlert(alertText, ["alerts__alert--warning"])
+  addAlert(alertText, ["alert--warning"])
 }
 
 export function addAlertError(alertText) {
-  addAlert(alertText, ["alerts__alert--error"])
+  addAlert(alertText, ["alert--error"])
 }

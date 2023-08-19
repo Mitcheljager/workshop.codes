@@ -178,7 +178,7 @@
 
 { #if alert }
   <div class="alerts">
-    <div class="alerts__alert alerts__alert--error">
+    <div class="alert alert--error">
       { alert }
     </div>
   </div>

@@ -5,9 +5,11 @@
   // that is an array of arrays shaped like [[type, text], [type, text]]
   export let initialAlerts = ""
 
+  const timeout = 3000
+
   let alerts = []
 
-  $: if (initialAlerts) JSON.parse(initialAlerts)?.forEach(([type, text]) => add({ text, type: `alerts__alert--${ type }` }))
+  $: if (initialAlerts) JSON.parse(initialAlerts)?.forEach(([type, text]) => add({ text, type: `alert--${ type }` }))
 
   function add(alert) {
     alerts = [...alerts, { ...alert, key: Math.random() }]
@@ -23,7 +25,7 @@
 <div class="alerts">
   {#each alerts as { text, type, key }, i (key)}
     <div transition:slide={{ duration: 200 }}>
-      <div class="alerts__alert {type} static">
+      <div class="alert {type} static">
         <p class="m-0">{text}</p>
 
         <button class="button p-0 pl-1/16 pr-1/16 text-pure-white" on:click={() => close(i)}>✕</button>
