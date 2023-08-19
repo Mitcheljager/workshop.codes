@@ -11,6 +11,8 @@
   let mobileDropdown
   let showMobileDropdown = false
 
+  $: if (!$isMobile) showMobileDropdown = false
+
   function outsideClick(event) {
     if (!showMobileDropdown) return
     if (mobileDropdown.contains(event.target)) return
