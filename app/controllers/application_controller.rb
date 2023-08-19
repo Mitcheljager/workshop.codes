@@ -18,10 +18,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::UnknownFormat,  with: :render_404
 
   def login_from_cookie
-    puts maps
-    puts heroes
-    puts categories
-
     return unless cookies[:remember_token] && !current_user
     token = RememberToken.find_by_token(cookies.encrypted[:remember_token])
 
