@@ -19,6 +19,7 @@
   <strong>Items</strong>
 </div>
 
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div bind:this={element} tabindex="0">
   <EditorList />
 

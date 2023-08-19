@@ -183,7 +183,7 @@
       {/if}
 
       {#each itemMatches as item, i}
-        <div class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
+        <button class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
           {item.name}
 
           {#if item.parent}
@@ -199,7 +199,7 @@
               </div>
             {/each}
           </div>
-        </div>
+        </button>
       {/each}
     </div>
   {/if}

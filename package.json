@@ -32,7 +32,7 @@
     "sass-loader": "^11.0.1",
     "siema": "^1.5.1",
     "sortablejs": "^1.15.0",
-    "svelte": "^3.49.0",
+    "svelte": "^3.59.1",
     "svelte-confetti": "^1.2.2",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.7.0",

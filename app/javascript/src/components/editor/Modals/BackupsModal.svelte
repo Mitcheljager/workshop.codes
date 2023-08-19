@@ -89,8 +89,8 @@
 
               {#if showActionsFor === uuid}
                 <div class="dropdown__content block">
-                  <div class="dropdown__item" on:click={() => getBackupContent(uuid)}>Restore from backup</div>
-                  <div class="dropdown__item text-red" on:click={() => destroy(uuid)}>Delete</div>
+                  <button class="dropdown__item" on:click={() => getBackupContent(uuid)}>Restore from backup</button>
+                  <button class="dropdown__item text-red" on:click={() => destroy(uuid)}>Delete</button>
                 </div>
               {/if}
             </div>

@@ -236,4 +236,5 @@
 
 <svelte:window on:keydown={keydown} on:create-selection={({ detail }) => createSelection(detail)} />
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div bind:this={element} on:click={click}></div>

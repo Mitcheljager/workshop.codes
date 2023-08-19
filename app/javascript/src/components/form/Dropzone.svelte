@@ -139,7 +139,7 @@
 
   <small>{ help }</small>
 
-  <label class="dropzone__button button button--secondary mt-1/4" tabindex="0">
+  <label for="" class="dropzone__button button button--secondary mt-1/4">
     { button }
 
     <input type="file" multiple="true" on:change={ changeInput } tabindex="-1" />
@@ -163,6 +163,7 @@
           <div class="images-preview__progress-bar" style="width: { image.progress }%" />
         </div>
       { :else }
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img
           on:click={ () => previewImageUrl = image.preview_url }
           src={ image.url }
@@ -171,7 +172,7 @@
           alt="" />
       { /if }
 
-      <div class="images-preview__action" on:click|stopPropagation={ () => removeImage(image.id) }>X</div>
+      <button class="images-preview__action" on:click|stopPropagation={ () => removeImage(image.id) }>X</button>
     </div>
   { /each }
 </div>
@@ -185,6 +186,7 @@
 { /if }
 
 { #if previewImageUrl }
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close>
 
     <div class="modal__content p-0">

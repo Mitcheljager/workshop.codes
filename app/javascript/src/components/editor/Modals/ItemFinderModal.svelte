@@ -69,6 +69,14 @@
     if (event.code === "Enter") selectItem(matches[selected].id)
     if (event.code === "ArrowDown") setSelected(1)
     if (event.code === "ArrowUp") setSelected(-1)
+    if (event.code === "Tab") setFocused()
+  }
+
+  async function setFocused() {
+    await new Promise(res => setTimeout(res, 1))
+    const i = document.activeElement?.dataset.i
+
+    if (i) selected = i
   }
 
   async function focusInput() {
@@ -85,13 +93,13 @@
   {#if value}
     <div class="matches matches--dropdown">
       {#each sortedMatches as match, i}
-        <div class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(match.id)}>
+        <button class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(match.id)} data-i={i}>
           {@html highlightString(match.name, match.from)}
 
           {#if match.parent}
             <small class="text-dark">{getParentsString(match.parent)}</small>
           {/if}
-        </div>
+        </button>
       {/each}
 
       {#if !matches.length}
