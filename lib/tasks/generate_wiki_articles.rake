@@ -1,9 +1,9 @@
 desc "Generate wiki articles. This file is ugly. Please don't judge."
 task :generate_wiki_articles => :environment do
-  actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
-  events = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
-  values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
-  constants = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
+  actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
+  events = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
+  values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
+  constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
 
   @user = User.find_by_username("mitsiee")
   @user = User.find_by_username("admin") unless @user.present?

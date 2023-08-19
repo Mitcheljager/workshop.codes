@@ -3,11 +3,11 @@ class EditorController < ApplicationController
     current_user_projects(:workshop_codes)
 
     @project = Project.select(:uuid, :title).find_by_uuid(params[:uuid]) if params[:uuid].present?
-    @events = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
-    @actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
-    @values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
-    @defaults = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "defaults.yml")))
-    @constants = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
+    @events = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
+    @actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
+    @values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
+    @defaults = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "defaults.yml")))
+    @constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
   end
 
   def zez_ui
