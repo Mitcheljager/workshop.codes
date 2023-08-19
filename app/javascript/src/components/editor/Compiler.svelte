@@ -6,6 +6,13 @@
   export let inline = false
 
   let compiling = false
+  let classes
+
+  $: classes = [
+    "tooltip",
+    $$restProps["class"],
+    !inline && "button button--secondary button--square"
+  ].filter((c) => !!c).join(" ")
 
   function doCompile() {
     compiling = true
@@ -41,7 +48,7 @@
 <svelte:window on:keydown={keydown} />
 
 <button
-  class={($$restProps["class"] ?? "") + " " + (!inline ? "button button--secondary button--square" : "")}
+  class={classes}
   on:click={doCompile}>
   {#if compiling}
     Compiling...
