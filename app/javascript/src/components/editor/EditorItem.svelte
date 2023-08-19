@@ -20,9 +20,9 @@
     <EditorItemName {item} />
   </span>
 
-  <div class="editor-item__actions" on:click|stopPropagation>
+  <button class="editor-item__actions" on:click|stopPropagation>
     <EditorItemDuplicate {item} />
     <EditorItemHide {item} />
     <EditorItemDestroy {item} />
-  </div>
+  </button>
 </button>
