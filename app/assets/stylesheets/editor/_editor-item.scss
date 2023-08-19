@@ -88,6 +88,8 @@
   }
 
   button {
+    padding: 0.1rem 0.15rem;
+
     &:hover {
       filter: brightness(1.25);
     }
