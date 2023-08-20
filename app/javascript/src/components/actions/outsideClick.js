@@ -1,6 +1,6 @@
 export function outsideClick(node) {
   function click(event) {
-    if (node.contains(event.target)) return
+    if (!(node instanceof HTMLElement) || node.contains(event.target)) return
 
     node.dispatchEvent(new CustomEvent("outsideClick"))
   }
