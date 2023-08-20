@@ -44,7 +44,7 @@
 <svelte:window on:keydown={keydown} />
 
 <button
-  class={"tooltip " + ($$restProps["class"] ?? "") + " " + (inline ? "empty-button" : "button button--secondary button--square")}
+  class="tooltip {$$restProps["class"] ?? ""} {!inline ? "button button--secondary button--square" : ""}"
   on:click={doCompile}>
   {#if inline && copied}
     Compiled and copied!
