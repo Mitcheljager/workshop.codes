@@ -4,15 +4,11 @@
   import { createNewItem } from "../../utils/editor"
   import { items, currentItem } from "../../stores/editor"
   import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
 
   let active = false
   let element
   let dropup = false
-
-  function outsideClick(event) {
-    if (!active) return
-    if (event.target != element) active = false
-  }
 
   function createTemplate(template, name) {
     createItem(name, templates[template])
@@ -31,15 +27,13 @@
   }
 </script>
 
-<svelte:window on:click={outsideClick} />
-
-<div class="dropdown w-100" class:dropup>
+<div class="dropdown w-100" class:dropup use:outsideClick on:outsideClick={() => active = false}>
   <button class="w-100" on:click|stopPropagation={toggle} bind:this={element}>
     <slot />
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content dropdown__content--left block w-100">
+    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false}  on:click={() => active = false} class="dropdown__content dropdown__content--left block w-100">
       <button on:click={() => createTemplate("RuleGlobal", "Global Rule")} class="dropdown__item">Rule - Global</button>
       <button on:click={() => createTemplate("RuleEachPlayer", "Each Player Rule")} class="dropdown__item">Rule - Each Player</button>
       <button on:click={() => createTemplate("Subroutine", "Subroutine")} class="dropdown__item">Subroutine</button>

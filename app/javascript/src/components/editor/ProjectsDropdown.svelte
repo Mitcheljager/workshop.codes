@@ -4,6 +4,7 @@
   import { getSaveContent } from "../../utils/editor"
   import { createProject, destroyCurrentProject, fetchProject, setUrl } from "../../utils/project"
   import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
@@ -60,19 +61,9 @@
     showProjectSettings = false
     loading = false
   }
-
-  function outsideClick(event) {
-    if (!active && !showProjectSettings) return
-    if (event.target.classList.contains("dropdown") || event.target.closest(".dropdown")) return
-
-    active = false
-    showProjectSettings = false
-  }
 </script>
 
-<svelte:window on:click={outsideClick} />
-
-<div class="dropdown">
+<div class="dropdown" use:outsideClick on:outsideClick={() => active = false}>
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
     {#if loading}
       Loading...
@@ -119,7 +110,7 @@
 </div>
 
 {#if $isSignedIn && $currentProject?.is_owner && !loading}
-  <div class="dropdown">
+  <div class="dropdown" use:outsideClick on:outsideClick={() => showProjectSettings = false}>
     <button class="w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
       Edit
     </button>
