@@ -62,7 +62,7 @@
   }
 </script>
 
-<svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} on:click={outsideClick}/>
+<svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} />
 
 <div class="relative">
   <div class="button-group">
