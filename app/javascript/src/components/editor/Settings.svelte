@@ -2,6 +2,7 @@
   import { fly } from "svelte/transition"
   import { onMount, tick } from "svelte"
   import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
   import { setCssVariable } from "../../utils/setCssVariable"
   import Cogs from "../icon/Cogs.svelte"
 
@@ -66,19 +67,9 @@
       localStorage.removeItem(key)
     })
   }
-
-  function outsideClick(event) {
-    if (!active) return
-    if (event.target.classList.contains("settings")) return
-    if (event.target.closest(".settings")) return
-
-    active = false
-  }
 </script>
 
-<svelte:window on:click={outsideClick} />
-
-<div class="dropdown settings">
+<div class="dropdown settings" use:outsideClick on:outsideClick={(() => active = false)}>
   <button class="button button--secondary button--square" on:click|stopPropagation={() => active = !active}>
     <Cogs />
   </button>

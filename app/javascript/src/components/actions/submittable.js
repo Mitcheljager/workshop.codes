@@ -1,4 +1,3 @@
-
 export function submittable(node) {
   const nodeIsInput = node.tagName === "INPUT"
   const nodeIsTextarea = node.tagName === "TEXTAREA"

@@ -6,6 +6,7 @@
   import { createProjectBackup } from "../../utils/projectBackups"
   import { Modal } from "../../constants/Modal"
   import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
   import { Confetti } from "svelte-confetti"
   import { fly } from "svelte/transition"
 
@@ -59,16 +60,9 @@
     event.preventDefault()
     return (event.returnValue = "")
   }
-
-  function outsideClick(event) {
-    if (!dropdownActive) return
-    if (event.target.classList.contains("dropdown") || event.target.closest(".dropdown")) return
-
-    dropdownActive = false
-  }
 </script>
 
-<svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} on:click={outsideClick}/>
+<svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} />
 
 <div class="relative">
   <div class="button-group">
@@ -80,7 +74,7 @@
       {/if}
     </button>
 
-    <div class="dropdown">
+    <div class="dropdown" use:outsideClick on:outsideClick={() => dropdownActive = false}>
       <button class="button button--square pr-0 pl-0 h-100 flex align-center" on:click={() => dropdownActive = !dropdownActive}>
         <svg width="18px" height="18px" viewBox="0 0 24 24" class="m-0">
           <path d="M7.00003 8.5C6.59557 8.5 6.23093 8.74364 6.07615 9.11732C5.92137 9.49099 6.00692 9.92111 6.29292 10.2071L11.2929 15.2071C11.6834 15.5976 12.3166 15.5976 12.7071 15.2071L17.7071 10.2071C17.9931 9.92111 18.0787 9.49099 17.9239 9.11732C17.7691 8.74364 17.4045 8.5 17 8.5H7.00003Z" fill="white" />

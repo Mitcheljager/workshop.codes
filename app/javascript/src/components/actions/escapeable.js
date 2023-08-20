@@ -1,4 +1,3 @@
-
 export function escapeable(node) {
   function keydown(event) {
     if (event.code !== "Escape") return
