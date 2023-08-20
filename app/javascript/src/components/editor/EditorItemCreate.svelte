@@ -20,6 +20,13 @@
     if (type == "item") $currentItem = newItem
   }
 
+  function withCloseDropdown(fn) {
+    return (... args) => {
+      fn(... args)
+      active = false
+    }
+  }
+
   function toggle() {
     active = !active
 
@@ -33,15 +40,15 @@
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false}  on:click={() => active = false} class="dropdown__content dropdown__content--left block w-100">
-      <button on:click={() => createTemplate("RuleGlobal", "Global Rule")} class="dropdown__item">Rule - Global</button>
-      <button on:click={() => createTemplate("RuleEachPlayer", "Each Player Rule")} class="dropdown__item">Rule - Each Player</button>
-      <button on:click={() => createTemplate("Subroutine", "Subroutine")} class="dropdown__item">Subroutine</button>
-      <button on:click={() => createTemplate("Settings", "Settings")} class="dropdown__item">Settings</button>
-      <button on:click={() => createTemplate("Mixin", "Mixin")} class="dropdown__item">Mixin</button>
-      <button on:click={() => createTemplate("Empty", "New item")} class="dropdown__item">Empty</button>
+    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content dropdown__content--left block w-100">
+      <button on:click={withCloseDropdown(() => createTemplate("RuleGlobal", "Global Rule"))} class="dropdown__item">Rule - Global</button>
+      <button on:click={withCloseDropdown(() => createTemplate("RuleEachPlayer", "Each Player Rule"))} class="dropdown__item">Rule - Each Player</button>
+      <button on:click={withCloseDropdown(() => createTemplate("Subroutine", "Subroutine"))} class="dropdown__item">Subroutine</button>
+      <button on:click={withCloseDropdown(() => createTemplate("Settings", "Settings"))} class="dropdown__item">Settings</button>
+      <button on:click={withCloseDropdown(() => createTemplate("Mixin", "Mixin"))} class="dropdown__item">Mixin</button>
+      <button on:click={withCloseDropdown(() => createTemplate("Empty", "New item"))} class="dropdown__item">Empty</button>
       <hr>
-      <button on:click={() => createItem("New folder", "", "folder")} class="dropdown__item">Folder</button>
+      <button on:click={withCloseDropdown(() => createItem("New folder", "", "folder"))} class="dropdown__item">Folder</button>
     </div>
   {/if}
 </div>
