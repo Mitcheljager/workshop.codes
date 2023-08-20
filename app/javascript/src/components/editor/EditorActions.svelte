@@ -2,6 +2,7 @@
   import { fly } from "svelte/transition"
   import { currentProject, isSignedIn, isMobile, currentProjectUUID, modal } from "../../stores/editor"
   import { Modal } from "../../constants/Modal"
+  import { outsideClick } from "../actions/outsideClick"
   import Compiler from "./Compiler.svelte"
   import Settings from "./Settings.svelte"
   import Shortcuts from "./Shortcuts.svelte"
@@ -12,16 +13,7 @@
   let showMobileDropdown = false
 
   $: if (!$isMobile) showMobileDropdown = false
-
-  function outsideClick(event) {
-    if (!showMobileDropdown) return
-    if (mobileDropdown.contains(event.target)) return
-
-    showMobileDropdown = false
-  }
 </script>
-
-<svelte:window on:click={outsideClick}></svelte:window>
 
 <div class="editor__actions" transition:fly={{ y: -10, duration: 200 }}>
   {#if $currentProjectUUID && !$currentProject?.is_owner}
@@ -55,7 +47,7 @@
   {/if}
 
   {#if $isMobile}
-    <div class="dropdown settings" bind:this={mobileDropdown}>
+    <div class="dropdown settings" bind:this={mobileDropdown} use:outsideClick on:outsideClick={() => showMobileDropdown = false}>
       <button
         class="button button--secondary button--square"
         on:click|stopPropagation={() => showMobileDropdown = !showMobileDropdown}
