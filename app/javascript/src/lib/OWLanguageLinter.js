@@ -234,7 +234,7 @@ function checkTranslations(content) {
       if (lastParenAtIndex == -1) throw new Error("Using @translate outside of an action has no effect")
 
       const phrase = getPhraseFromPosition({ text: content, from: 0 }, lastParenAtIndex - 1)
-      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Set Objective Description", "Big Message", "Small Message"]
+      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
       if (phrase?.text.includes("include")) return
       if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${ phrase.text }" has no effect.`)
     } catch (error) {
