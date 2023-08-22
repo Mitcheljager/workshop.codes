@@ -172,7 +172,7 @@
           alt="" />
       { /if }
 
-      <button class="images-preview__action" on:click|stopPropagation={ () => removeImage(image.id) }>X</button>
+      <button class="images-preview__action" on:click|stopPropagation|preventDefault={ () => removeImage(image.id) }>X</button>
     </div>
   { /each }
 </div>
