@@ -142,7 +142,7 @@
   <label class="dropzone__button button button--secondary mt-1/4">
     { button }
 
-    <input type="file" multiple="true" accept="image/png, image/jpeg" on:change={ changeInput } tabindex="-1" />
+    <input type="file" multiple="true" accept="image/png, image/jpeg, image/jpg" on:change={ changeInput } tabindex="-1" />
   </label>
 </div>
 
