@@ -12,7 +12,7 @@
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
-  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap } from "../../stores/editor"
+  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
   import debounce from "../../debounce"
@@ -82,7 +82,8 @@
         }),
         basicSetup,
         parameterTooltip(),
-        indentationMarkers()
+        indentationMarkers(),
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
       ]
     })
   }

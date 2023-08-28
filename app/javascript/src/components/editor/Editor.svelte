@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
-  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth } from "../../stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "../../stores/editor"
   import EditorActions from "./EditorActions.svelte"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
@@ -151,7 +151,12 @@
 
     <div class="editor__content">
       {#if $currentItem?.id}
-        <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
+        <!-- This key makes it so CodeMirror has to re-render when the "word-wrap" setting is changed.
+        There could be more elegant solutions that use the CodeMirror API to update extensions,
+        but this is the far more simple and readable solution. -->
+        {#key $settings["word-wrap"]}
+          <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
+        {/key}
       {/if}
     </div>
   {:else}

@@ -82,3 +82,24 @@ export const mixinsMap = derived(flatItems, debounced($flatItems => {
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const workshopConstants = writable({})
+
+export const settings = writable({
+  "editor-font": "Consolas",
+  "editor-font-size": "14",
+  "editor-cursor-color": "#ff00ff",
+  "editor-cursor-width": "3",
+  "color-string": "#98C379",
+  "color-punctuation": "#6a9955",
+  "color-keyword": "#E06C75",
+  "color-number": "#d19a66",
+  "color-comment": "#6a7277",
+  "color-variable": "#9cdcfe",
+  "color-action": "#e5c069",
+  "color-value": "#6796e6",
+  "color-operator": "#569cd6",
+  "color-bool": "#d19a66",
+  "color-invalid": "#b33834",
+  "color-custom-keyword": "#c678dd",
+  "show-indent-markers": true,
+  "word-wrap": false
+})
