@@ -100,7 +100,7 @@
 
       <hr>
 
-      <div class="checkbox mt-1/8 mb-1/4">
+      <div class="checkbox mt-1/8">
         <input id="show-line-indent-markers" type="checkbox" bind:checked={$settings["show-indent-markers"]} />
         <label for="show-line-indent-markers">Show line indent markers</label>
       </div>
