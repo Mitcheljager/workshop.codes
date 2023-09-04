@@ -97,4 +97,7 @@ export function parseArrayValues(input) {
   }
 
   return result
+    // HACK: line finder inserts [linemarker]s on the input, which may confuse @each
+    // into thinking they are nested arrays.
+    .map((item) => item.replace(/\s*\[linemarker\].*?\[\/linemarker\]\s*/g, ""))
 }

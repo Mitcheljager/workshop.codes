@@ -136,5 +136,11 @@ describe("for.js", () => {
       const expected = ["1", "(2, [3, 4])", "5"]
       expect(parseArrayValues(input)).toEqual(expected)
     })
+
+    it("Should ignore [linemarker]s", () => {
+      const input = "\n[linemarker]itemID|2[/linemarker]\t\t1, 2, 3\n[linemarker]itemID|3[/linemarker]\t\t"
+      const expected = ["1", "2", "3"]
+      expect(parseArrayValues(input)).toEqual(expected)
+    })
   })
 })
