@@ -100,7 +100,7 @@ class SearchController < ApplicationController
   end
 
   def get_search_users(params)
-    return if params[:search].empty?
+    return if params[:search].blank?
     return if params[:category] || params[:map] || params[:hero] || params[:players] || params[:code]
 
     if ENV["BONSAI_URL"]
