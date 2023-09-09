@@ -94,7 +94,6 @@ class User < ApplicationRecord
           must: [
             match: {
               username: query,
-              minimum_should_match: "25%",
               fuzziness: "AUTO"
             }
           ],
