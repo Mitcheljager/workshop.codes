@@ -93,8 +93,10 @@ class User < ApplicationRecord
         bool: {
           must: [
             match: {
-              username: query,
-              fuzziness: "AUTO"
+              username: {
+                query: query,
+                fuzziness: "AUTO"
+              }
             }
           ],
           filter: [{
