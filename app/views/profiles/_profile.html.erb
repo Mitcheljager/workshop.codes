@@ -1,5 +1,5 @@
 <% small ||= false %>
-<% size = small ? 80 : 140 %>
+<% size = small ? 60 : 140 %>
 
 <div class="profile-banner <%= "profile-banner--small" if small %>">
   <%= link_to user_profile_path(user), class: "profile-image #{ user.profile_image.attached? || user.provider_profile_image.present? ? '' : 'profile-image--empty' }", aria: { label: "Go to profile of '#{ user.username }'" } do %>

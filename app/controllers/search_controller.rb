@@ -37,6 +37,7 @@ class SearchController < ApplicationController
 
     begin
       @posts = get_filtered_posts(params)
+      @users = get_search_users(params)
     rescue Elasticsearch::Transport::Transport::ServerError => e
       Bugsnag.notify(e) if Rails.env.production?
       @posts = Kaminari.paginate_array([]).page(params[:page])
@@ -79,7 +80,7 @@ class SearchController < ApplicationController
                    .order_by_ids(ids)
                    .select_overview_columns.public?
     else
-      posts = Post.select_overview_columns.public?
+      posts = Post.order(created_at: :desc).limit(50).select_overview_columns.public?
     end
 
     if params[:author]
@@ -96,6 +97,24 @@ class SearchController < ApplicationController
     posts = posts.select { |post| post.code.upcase.start_with?(params[:code].upcase) } if params[:code]
 
     posts = Kaminari.paginate_array(posts).page(params[:page])
+  end
+
+  def get_search_users(params)
+    return if params[:category] || params[:map] || params[:hero] || params[:players] || params[:code]
+
+    if params[:search].present? && ENV["BONSAI_URL"]
+      ids = User.search(params[:search])
+      users = User.where(id: ids).order_by_ids(ids)
+    else
+      users = User.limit(3)
+    end
+
+    users = users.includes(:badges)
+                 .includes(:posts)
+                 .where(linked_id: nil) # Is not a linked account
+                 .where.not(level: :banned) # Not banned
+                 .where.not(posts: { id: nil }) # Has any posts
+                 .limit(3)
   end
 
   def sort_switch

@@ -8,21 +8,28 @@
   <% content_for :page_title, "#{ params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
 <% end %>
 
-<div class="heading mb-1/2">
-  <h2>
-    <% if flash[:error] %>
-      Something went wrong while performing your search.
-    <% else %>
-      Workshop Codes
-      <% if params[:search] %> for <strong><%= CGI.unescape(params[:search]) %></strong> <% end %>
-      <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-      <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-      <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-      <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
-      <% if params[:author] %> by <strong><%= params[:author].split("#")[0] %></strong> <% end %>
-      <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
-    <% end %>
-  </h2>
-</div>
+<div class="heading"></div>
+
+<% if @users.present? && @users.any? %>
+  <h2>Creators for <strong><%= CGI.unescape(params[:search]) %></strong></h2>
+  <% @users.each do |user| %>
+    <%= render "profiles/profile", user: user, small: true %>
+  <% end %>
+<% end %>
+
+<h2 class="<%= "mt-1/1" if @users.present? && @users.any? %>">
+  <% if flash[:error] %>
+    Something went wrong while performing your search.
+  <% else %>
+    Workshop Codes
+    <% if params[:search] %> for <strong><%= CGI.unescape(params[:search]) %></strong> <% end %>
+    <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+    <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+    <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+    <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
+    <% if params[:author] %> by <strong><%= params[:author].split("#")[0] %></strong> <% end %>
+    <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
+  <% end %>
+</h2>
 
 <%= render "posts/posts", disable_cache: true %>

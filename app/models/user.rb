@@ -22,6 +22,16 @@ class UniquenessAgainstNiceUrlValidator < ActiveModel::Validator
 end
 
 class User < ApplicationRecord
+  if ENV["BONSAI_URL"]
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
+
+    settings index: {
+      number_of_shards: 1,
+      number_of_replicas: 1
+    }
+  end
+
   has_secure_password
 
   has_many :posts, dependent: :destroy
@@ -75,6 +85,27 @@ class User < ApplicationRecord
 
   before_validation :generate_and_set_uuid, on: :create
 
+  def self.search(query, size=100)
+    __elasticsearch__.search({
+      from: 0,
+      size: size,
+      query: {
+        bool: {
+          must: [
+            match: {
+              username: query,
+              minimum_should_match: "25%",
+              fuzziness: "AUTO"
+            }
+          ],
+          filter: [{
+            where: { linked_id: nil }
+          }]
+        }
+      }
+    }).records.ids
+  end
+
   def self.find_or_create_from_auth_hash(auth_hash)
     uid = auth_hash["uid"]
     provider = auth_hash["provider"]
@@ -100,8 +131,21 @@ class User < ApplicationRecord
     user if user.save
   end
 
+  def self.order_by_ids(ids)
+    t = User.arel_table
+    condition = Arel::Nodes::Case.new(t[:id])
+    ids.each_with_index do |id, index|
+      condition.when(id).then(index)
+    end
+    order(condition)
+  end
+
   def clean_username
     self.username.split("#")[0]
+  end
+
+  def as_indexed_json(options={})
+    self.as_json(only: [:username])
   end
 
   private
