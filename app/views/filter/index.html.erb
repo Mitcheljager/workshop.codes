@@ -10,7 +10,7 @@
 
 <div class="heading"></div>
 
-<% if @users.present? && @users.any? %>
+<% if params[:search].present? && @users.present? && @users.any? %>
   <h2>Creators for <strong><%= CGI.unescape(params[:search]) %></strong></h2>
   <% @users.each do |user| %>
     <%= render "profiles/profile", user: user, small: true %>

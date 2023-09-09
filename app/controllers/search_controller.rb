@@ -100,9 +100,10 @@ class SearchController < ApplicationController
   end
 
   def get_search_users(params)
+    return if params[:search].empty?
     return if params[:category] || params[:map] || params[:hero] || params[:players] || params[:code]
 
-    if params[:search].present? && ENV["BONSAI_URL"]
+    if ENV["BONSAI_URL"]
       ids = User.search(params[:search])
       users = User.where(id: ids).order_by_ids(ids)
     else
