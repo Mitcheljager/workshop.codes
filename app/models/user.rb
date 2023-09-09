@@ -90,18 +90,11 @@ class User < ApplicationRecord
       from: 0,
       size: size,
       query: {
-        bool: {
-          must: [
-            match: {
-              username: {
-                query: query,
-                fuzziness: "AUTO"
-              }
-            }
-          ],
-          filter: [{
-            where: { linked_id: nil }
-          }]
+        match: {
+          username: {
+            query: query,
+            fuzziness: "AUTO"
+          }
         }
       }
     }).records.ids
