@@ -5,6 +5,9 @@
   export let apiKey = ""
 
   onMount(() => {
-    Bugsnag.start(apiKey)
+    Bugsnag.start({
+      apiKey,
+      collectUserIp: false
+    })
   })
 </script>
