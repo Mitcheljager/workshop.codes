@@ -20,6 +20,8 @@
 
     const content = getSaveContent()
 
+    saveToLocalStorage(content)
+
     new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })
       .then(data => {
         if (!data) throw Error("Create failed")
@@ -34,6 +36,17 @@
         alert("Something went wrong while saving, please try again")
       })
       .finally(() => loading = false)
+  }
+
+  function saveToLocalStorage(content) {
+    const currentSaved = JSON.parse(localStorage.getItem("saved-projects") || "{}")
+    localStorage.setItem("saved-projects", JSON.stringify({
+      ...currentSaved,
+      [$currentProject.uuid]: {
+        updated_at: Date.now(),
+        content
+      }
+    }))
   }
 
   async function createBackup() {
