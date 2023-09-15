@@ -58,6 +58,7 @@ export async function fetchProject(uuid) {
       // This is a fallback and should not be the norm.
       if (localProject && new Date(parsedData.updated_at) < new Date(localProject.updated_at)) {
         parsedData.content = localProject.content
+        addAlert("We recovered a version of your project that wasn't fully saved.")
       }
 
       updateProject(parsedData.uuid, {
