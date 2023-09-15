@@ -1,3 +1,4 @@
+import Bugsnag from "@bugsnag/js"
 import FetchRails from "../fetch-rails"
 import { addAlert } from "../lib/alerts"
 import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../stores/editor"
@@ -44,11 +45,23 @@ export function createDemoProject(title) {
 export async function fetchProject(uuid) {
   const baseUrl = "/projects/"
 
+  const localProject = getProjectFromLocalStorage(uuid)
+
   return await new FetchRails(baseUrl + uuid).get()
     .then(data => {
       if (!data) throw Error("No results")
 
       const parsedData = JSON.parse(data)
+
+      // If the project in localStorage is newer than the project from the API
+      // something may have gone wrong when saving to the API, but the localStorage
+      // was still saved as expected. In this case we use the data from localStorage.
+      // This is a fallback and should not be the norm.
+      if (localProject && new Date(parsedData.updated_at) < new Date(localProject.updated_at)) {
+        parsedData.content = localProject.content
+        addAlert("We recovered a version of your project that wasn't fully saved.")
+        Bugsnag.notify(`Project with uuid "${ uuid }" was recovered from localStorage.`)
+      }
 
       updateProject(parsedData.uuid, {
         uuid: parsedData.uuid,
@@ -75,6 +88,11 @@ export async function fetchProject(uuid) {
       console.error(error)
       alert(`Something went wrong while loading, please try again. ${ error }`)
     })
+}
+
+function getProjectFromLocalStorage(uuid) {
+  const localContent = JSON.parse(localStorage.getItem("saved-projects") || "{}")
+  return localContent[uuid]
 }
 
 export function updateProject(uuid, params) {

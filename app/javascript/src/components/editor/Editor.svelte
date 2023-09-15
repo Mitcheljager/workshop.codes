@@ -14,6 +14,7 @@
   import LineFinder from "./LineFinder.svelte"
   import Modals from "./Modals/Modals.svelte"
   import Logo from "../icon/Logo.svelte"
+  import Bugsnag from "../Bugsnag.svelte"
 
   export let events
   export let values
@@ -22,6 +23,7 @@
   export let defaults
   export let heroes
   export let maps
+  export let bugsnagApiKey = ""
   export let _projects
   export let _isSignedIn = false
 
@@ -180,3 +182,7 @@
 {/if}
 
 <Modals />
+
+{#if bugsnagApiKey}
+  <Bugsnag apiKey={bugsnagApiKey} />
+{/if}

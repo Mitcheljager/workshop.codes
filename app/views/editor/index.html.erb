@@ -17,6 +17,7 @@
     defaults: @defaults,
     heroes: heroes,
     maps: maps,
+    bugsnagApiKey: ENV["BUGSNAG_API_KEY"],
     _projects: @projects,
     _isSignedIn: current_user.present?
   } %>
