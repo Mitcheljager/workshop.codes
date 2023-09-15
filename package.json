@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@agilie/canvas-image-cover-position": "^1.1.1",
+    "@bugsnag/js": "^7.21.0",
     "@codemirror/autocomplete": "^6.3.0",
     "@codemirror/lang-javascript": "^6.1.0",
     "@codemirror/search": "^6.2.2",

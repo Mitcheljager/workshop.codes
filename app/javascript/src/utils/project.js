@@ -1,3 +1,4 @@
+import Bugsnag from "@bugsnag/js"
 import FetchRails from "../fetch-rails"
 import { addAlert } from "../lib/alerts"
 import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../stores/editor"
@@ -59,6 +60,7 @@ export async function fetchProject(uuid) {
       if (localProject && new Date(parsedData.updated_at) < new Date(localProject.updated_at)) {
         parsedData.content = localProject.content
         addAlert("We recovered a version of your project that wasn't fully saved.")
+        Bugsnag.notify(`Project with uuid "${ uuid }" was recovered from localStorage.`)
       }
 
       updateProject(parsedData.uuid, {
