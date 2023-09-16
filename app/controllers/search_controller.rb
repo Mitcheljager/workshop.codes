@@ -80,7 +80,7 @@ class SearchController < ApplicationController
                    .order_by_ids(ids)
                    .select_overview_columns.public?
     else
-      posts = Post.order(created_at: :desc).limit(50).select_overview_columns.public?
+      posts = Post.select_overview_columns.public?
     end
 
     if params[:author]
