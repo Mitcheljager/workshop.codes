@@ -4350,10 +4350,12 @@ Create Projectile Effect:
   description: Creates an in-world projectile effect entity. This effect entity will persist until destroyed. To obtain a reference to this entity, use the Last Created Entity value. This action will fail if too many entities have been created.
   en-US: Create Projectile Effect
   args:
-  - name: Visible To
+  - name: VISIBLE TO
     description: One or more players who will be able to see the effect.
-    type: Player
-    default: All
+    type:
+    - Player
+    - Array: Player
+    default: ALL PLAYERS
   - name: Projectile Type
     description: Type of projectile to be created. New options can be added to this list by enabling the Projectiles Workshop Extension.
     type: Projectile Effect
