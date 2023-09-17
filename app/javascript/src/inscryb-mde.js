@@ -280,6 +280,7 @@ class InitialiseInscrybeMDE {
       const inputElement = document.createElement("input")
       inputElement.type = "file"
       inputElement.id = randomId
+      inputElement.accept = "image/png, image/jpeg, image/jpg"
       inputElement.classList.add("hidden-field")
 
       inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, this.codemirror).input() })
