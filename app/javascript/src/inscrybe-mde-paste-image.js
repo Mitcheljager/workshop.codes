@@ -1,5 +1,6 @@
 import Uploader from "./uploader"
 import FetchRails from "./fetch-rails"
+import { addAlertError } from "./lib/alerts"
 
 export default class InscrybeInsertImage {
   constructor(event, editor) {
@@ -16,7 +17,7 @@ export default class InscrybeInsertImage {
   input() {
     const items = this.event.target.files
     this.file = items[0]
-    
+
     this.isFileImage()
   }
 
@@ -28,9 +29,17 @@ export default class InscrybeInsertImage {
   }
 
   isFileImage() {
-    if (this.file.type == "image/png" || this.file.type == "image/jpg" || this.file.type == "image/jpeg") {
-      this.drawImageOnCanvas()
+    if (this.file.type != "image/png" && this.file.type != "image/jpg" && this.file.type != "image/jpeg") {
+      addAlertError("Unsupported filetype. Only png and jpg are supported.")
+      return
     }
+
+    if (this.file.size > 50 * 1048576) {
+      addAlertError("File exceeds max filesize of 50MB.")
+      return
+    }
+
+    this.drawImageOnCanvas()
   }
 
   drawImageOnCanvas() {
@@ -125,7 +134,7 @@ export default class InscrybeInsertImage {
 
   replaceMarkerWithImage(randomId, url) {
     const marker = this.editor.getAllMarks().find(m => m.randomId == randomId)
-                
+
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)

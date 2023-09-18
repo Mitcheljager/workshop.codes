@@ -102,6 +102,7 @@ class Post < ApplicationRecord
   has_many :sources, through: :source_derivs, source: :source
 
   has_many_attached :images, dependent: :destroy
+  has_many_attached :videos, dependent: :destroy
 
   has_recommended :posts
 
@@ -135,10 +136,12 @@ class Post < ApplicationRecord
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes },
                      dimension: { max: 3500..3500 }
+  validates :videos, content_type: ["video/mp4"], size: { less_than: 50.megabytes }
   validates_with SupportedPlayersValidator
 
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
+  before_save :set_video_acl, if: :new_videos_attached?
 
   def self.search(query, size: 50, bypass_cache: true)
     __elasticsearch__.search({
@@ -229,5 +232,25 @@ class Post < ApplicationRecord
 
   def self.find_by_code(code)
     Post.find_by("upper(code) = ?", code.upcase)
+  end
+
+  def new_videos_attached?
+    videos_attachments.any? { |attachment| attachment.new_record? }
+  end
+
+  def set_video_acl
+    # Check if new videos are attached
+    new_videos = videos.select(&:new_record?)
+
+    new_videos.each do |video_attachment|
+      # Set the ACL for the new video file to make it public
+      if video_attachment.present?
+        video_attachment.service.client.put_object_acl(
+          bucket: ENV["DIGITALOCEAN_SPACES_BUCKET"],
+          key: video_attachment.key,
+          acl: 'public-read'
+        )
+      end
+    end
   end
 end

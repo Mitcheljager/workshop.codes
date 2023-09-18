@@ -395,7 +395,7 @@ class PostsController < ApplicationController
       :revision, :revision_description,
       :min_players, :max_players,
       :email_notification, :email,
-      :carousel_video, :image_order, images: [])
+      :carousel_video, :image_order, images: [], videos: [])
   end
 
   def email_notification_enabled

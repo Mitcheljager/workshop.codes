@@ -1,7 +1,7 @@
 import InscrybMDE from "inscrybmde"
 import InscrybeInsertImage from "./inscrybe-mde-paste-image"
+import InscrybeInsertVideo from "./inscrybe-mde-insert-video"
 import FetchRails from "./fetch-rails"
-import setCssVariable from "./set-css-variable"
 import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
 import debounce from "./debounce"
 
@@ -61,6 +61,12 @@ class InitialiseInscrybeMDE {
         name: "image",
         className: "fa fa-image",
         title: "Upload an image"
+      },
+      {
+        action: () => { this.toggleVideoUploader() },
+        name: "video",
+        className: "fa fa-video",
+        title: "Upload a video"
       },
       "|",
       "table",
@@ -247,7 +253,6 @@ class InitialiseInscrybeMDE {
   bindBlockEvents(marker) {
     const sortableElement = marker.widgetNode.querySelector("[data-role~='sortable']")
     const insertBlockTemplateElement = marker.widgetNode.querySelector("[data-action~='insert-block-template']")
-    const removeBlockTemplateElements = marker.widgetNode.querySelectorAll("[data-action~='remove-block-template']")
 
     if (sortableElement) buildInputSortable(sortableElement)
     if (insertBlockTemplateElement) insertBlockTemplateElement.addEventListener("click", insertBlockTemplate)
@@ -284,6 +289,44 @@ class InitialiseInscrybeMDE {
       inputElement.classList.add("hidden-field")
 
       inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, this.codemirror).input() })
+      labelElement.addEventListener("click", () => { inputElement.click() })
+
+      document.body.append(inputElement)
+
+      textElement.append(labelElement)
+      dropdownElement.append(textElement)
+      button.append(dropdownElement)
+    } else {
+      button.querySelector(".editor-dropdown").remove()
+    }
+  }
+
+  toggleVideoUploader() {
+    const button = this.mde.gui.toolbar.querySelector(".fa-video").closest("button")
+
+    button.classList.toggle("dropdown-open")
+
+    if (button.classList.contains("dropdown-open")) {
+      const dropdownElement = document.createElement("div")
+      dropdownElement.classList.add("editor-dropdown")
+
+      const textElement = document.createElement("small")
+      textElement.innerText = "Upload an video. Limited to mp4 filetype and 50mb filesize."
+
+      const randomId = Math.random().toString().substr(2, 8)
+      const labelElement = document.createElement("label")
+      const labelClasslist = ["button", "button--small", "mt-1/4", "w-100"]
+      labelElement.for = randomId
+      labelElement.innerText = "Upload video"
+      labelElement.classList.add(...labelClasslist)
+
+      const inputElement = document.createElement("input")
+      inputElement.type = "file"
+      inputElement.id = randomId
+      inputElement.accept = "video/mp4"
+      inputElement.classList.add("hidden-field")
+
+      inputElement.addEventListener("change", () => { new InscrybeInsertVideo(event, this.codemirror).input() })
       labelElement.addEventListener("click", () => { inputElement.click() })
 
       document.body.append(inputElement)

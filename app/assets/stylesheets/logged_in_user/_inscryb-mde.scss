@@ -156,6 +156,10 @@
   content: "🖼️";
 }
 
+.fa-video::before {
+  content: "▶";
+}
+
 .fa-minus::before {
   content: "⚊";
 }

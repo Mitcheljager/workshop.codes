@@ -1,0 +1,84 @@
+import Uploader from "./uploader"
+import FetchRails from "./fetch-rails"
+import { addAlertError } from "./lib/alerts"
+
+export default class InscrybeInsertVideo {
+  constructor(event, editor) {
+    this.event = event,
+    this.editor = editor,
+    this.file = ""
+  }
+
+  input() {
+    const items = this.event.target.files
+    this.file = items[0]
+
+    this.isFileVideo()
+  }
+
+  readFiles(files) {
+    if (files[0].kind === "file") {
+      this.file = files[0].getAsFile()
+      this.isFileVideo()
+    }
+  }
+
+  isFileVideo() {
+    if (this.file.type != "video/mp4") {
+      addAlertError("Unsupported filetype. Only mp4 is supported.")
+      return
+    }
+
+    if (this.file.size > 50 * 1048576) {
+      addAlertError("File exceeds max filesize of 50MB.")
+      return
+    }
+
+    this.upload()
+  }
+
+  upload() {
+    const randomId = Math.random().toString().substr(2, 8)
+    const uploader = new Uploader(this.file, document.querySelector("input[type='file'][name*='[videos]']"))
+
+    this.insertPlaceholderText(randomId)
+
+    uploader.upload().then(() => {
+      const interval = setInterval(() => {
+        if (uploader.blob == "") return
+
+        clearInterval(interval)
+
+        if (uploader.progress == 100) {
+          new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=video`)
+            .get().then(data => this.replaceMarkerWithImage(randomId, data))
+            .catch(error => alert(error))
+        }
+      }, 100)
+    }).catch(error => alert(error))
+  }
+
+  insertPlaceholderText(randomId) {
+    const position = this.editor.getCursor()
+
+    const markerElement = document.createElement("span")
+    markerElement.classList.add("text-dark")
+    markerElement.innerText = "[Uploading video...]"
+
+    const marker = this.editor.setBookmark(position, { widget: markerElement })
+    marker.randomId = randomId
+  }
+
+  replaceMarkerWithImage(randomId, url) {
+    const marker = this.editor.getAllMarks().find(m => m.randomId == randomId)
+
+    const cursorPosition = this.editor.getCursor()
+    const position = marker.find()
+    this.editor.setSelection(position, position)
+    this.editor.replaceSelection(`[video ${ url }]`)
+
+    this.editor.setSelection(cursorPosition, cursorPosition)
+
+    marker.clear()
+  }
+}
