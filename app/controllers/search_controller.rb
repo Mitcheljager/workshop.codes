@@ -104,7 +104,10 @@ class SearchController < ApplicationController
     return if params[:category] || params[:map] || params[:hero] || params[:players] || params[:code]
 
     if ENV["BONSAI_URL"]
-      ids = User.search(params[:search])
+      ids = Rails.cache.fetch("user_search_#{params[:search]}", expires_in: 1.day) do
+        User.search(params[:search])
+      end
+
       users = User.where(id: ids).order_by_ids(ids)
     else
       users = User.limit(3)
