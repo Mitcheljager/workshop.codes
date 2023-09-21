@@ -142,17 +142,24 @@ describe("variables.js", () => {
     })
 
     test("Should ignore decimals of a number", () => {
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+
       const input = `
         1.234;
         1.abc;
         .1234;
         Wait(.1234);
       `
-      const expectedOutput = {
-        globalVariables: [],
-        playerVariables: []
-      }
       expect(getVariables(input)).toEqual(expectedOutput)
+
+      const specialCaseBeginningOfText1Input = `.1234`
+      expect(getVariables(specialCaseBeginningOfText1Input)).toEqual(expectedOutput)
+
+      const specialCaseBeginningOfText2Input = `.abcd`
+      expect(getVariables(specialCaseBeginningOfText2Input)).toEqual(expectedOutput)
     })
 
     test("Should not ignore nested variables ending in a number", () => {
