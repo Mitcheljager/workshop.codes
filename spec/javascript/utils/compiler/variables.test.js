@@ -145,6 +145,8 @@ describe("variables.js", () => {
       const input = `
         1.234;
         1.abc;
+        .1234;
+        Wait(.1234);
       `
       const expectedOutput = {
         globalVariables: [],
@@ -184,6 +186,15 @@ describe("variables.js", () => {
 
     test("Should ignore variable-likes inside strings", () => {
       const input = "Custom String(\"Hello.World I8.5.3\")"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should ignore variable-likes when there is a symbol behind them", () => {
+      const input = "Wait(.15)"
       const expectedOutput = {
         globalVariables: [],
         playerVariables: []
