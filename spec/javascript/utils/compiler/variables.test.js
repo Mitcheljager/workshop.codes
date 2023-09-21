@@ -142,15 +142,24 @@ describe("variables.js", () => {
     })
 
     test("Should ignore decimals of a number", () => {
-      const input = `
-        1.234;
-        1.abc;
-      `
       const expectedOutput = {
         globalVariables: [],
         playerVariables: []
       }
+
+      const input = `
+        1.234;
+        1.abc;
+        .1234;
+        Wait(.1234);
+      `
       expect(getVariables(input)).toEqual(expectedOutput)
+
+      const specialCaseBeginningOfText1Input = `.1234`
+      expect(getVariables(specialCaseBeginningOfText1Input)).toEqual(expectedOutput)
+
+      const specialCaseBeginningOfText2Input = `.abcd`
+      expect(getVariables(specialCaseBeginningOfText2Input)).toEqual(expectedOutput)
     })
 
     test("Should not ignore nested variables ending in a number", () => {
@@ -184,6 +193,15 @@ describe("variables.js", () => {
 
     test("Should ignore variable-likes inside strings", () => {
       const input = "Custom String(\"Hello.World I8.5.3\")"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should ignore variable-likes when there is a symbol behind them", () => {
+      const input = "Wait(.15)"
       const expectedOutput = {
         globalVariables: [],
         playerVariables: []
