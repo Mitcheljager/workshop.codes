@@ -44,7 +44,6 @@ export default class InscrybeInsertImage {
 
   drawImageOnCanvas() {
     const reader = new FileReader()
-    reader.readAsDataURL(this.file)
 
     reader.onload = event => {
       let image = new Image()
@@ -77,6 +76,8 @@ export default class InscrybeInsertImage {
         }, "image/jpeg", 0.95)
       }
     }
+
+    reader.readAsDataURL(this.file)
   }
 
   resizeImageToFit(image) {

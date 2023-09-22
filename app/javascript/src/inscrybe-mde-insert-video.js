@@ -34,12 +34,30 @@ export default class InscrybeInsertVideo {
       return
     }
 
-    this.upload()
+    this.videoToFile()
   }
 
-  upload() {
+  videoToFile() {
+    const reader = new FileReader()
+
+    reader.onload = event => {
+      const fileContent = event.target.result
+      const filename =  Math.random().toString(36).substring(2, 15) + ".mp4"
+      const blob = new Blob([fileContent], { type: "video/mp4" })
+      const blobFile = new File([blob], filename, {
+        type: "video/mp4",
+        lastModified: Date.now()
+      })
+
+      this.upload(blobFile)
+    }
+
+    reader.readAsArrayBuffer(this.file)
+  }
+
+  upload(video) {
     const randomId = Math.random().toString().substr(2, 8)
-    const uploader = new Uploader(this.file, document.querySelector("input[type='file'][name*='[videos]']"))
+    const uploader = new Uploader(video, document.querySelector("input[type='file'][name*='[videos]']"))
 
     this.insertPlaceholderText(randomId)
 
@@ -51,7 +69,7 @@ export default class InscrybeInsertVideo {
 
         if (uploader.progress == 100) {
           new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=video`)
-            .get().then(data => this.replaceMarkerWithImage(randomId, data))
+            .get().then(data => this.replaceMarkerWithVideo(randomId, data))
             .catch(error => alert(error))
         }
       }, 100)
@@ -69,7 +87,7 @@ export default class InscrybeInsertVideo {
     marker.randomId = randomId
   }
 
-  replaceMarkerWithImage(randomId, url) {
+  replaceMarkerWithVideo(randomId, url) {
     const marker = this.editor.getAllMarks().find(m => m.randomId == randomId)
 
     const cursorPosition = this.editor.getCursor()
