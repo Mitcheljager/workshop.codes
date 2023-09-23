@@ -42,7 +42,7 @@ class InitialiseInscrybeMDE {
       "bold",
       "italic",
       {
-        action: () => { this.insertHighlight() },
+        action: () => this.insertHighlight(),
         name: "highlight",
         className: "fa fa-highlight",
         title: "Highlight"
@@ -57,13 +57,13 @@ class InitialiseInscrybeMDE {
       "code",
       "link",
       {
-        action: () => { this.toggleImageUploader() },
+        action: event => this.toggleImageUploader(event),
         name: "image",
         className: "fa fa-image",
         title: "Upload an image"
       },
       {
-        action: () => { this.toggleVideoUploader() },
+        action: event => this.toggleVideoUploader(event),
         name: "video",
         className: "fa fa-video",
         title: "Upload a video"
@@ -71,13 +71,13 @@ class InitialiseInscrybeMDE {
       "|",
       "table",
       {
-        action: () => { this.insertGallery() },
+        action: () => this.insertGallery(),
         name: "gallery",
         className: "fa fa-gallery",
         title: "Gallery"
       },
       {
-        action: () => { this.insertHeroIconSelect() },
+        action: () => this.insertHeroIconSelect(),
         name: "hero-icon",
         className: "fa fa-hero-icon",
         title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
@@ -97,7 +97,7 @@ class InitialiseInscrybeMDE {
       toolbar.push("|")
 
       toolbar.push({
-        action: () => { this.toggleWikiSearch() },
+        action: event => this.toggleWikiSearch(event),
         name: "wiki",
         className: "fa fa-wiki",
         title: "Wiki Link"
@@ -263,7 +263,7 @@ class InitialiseInscrybeMDE {
     })
   }
 
-  toggleImageUploader() {
+  toggleImageUploader(event) {
     const button = this.mde.gui.toolbar.querySelector(".fa-image").closest("button")
 
     button.classList.toggle("dropdown-open")
@@ -288,7 +288,7 @@ class InitialiseInscrybeMDE {
       inputElement.accept = "image/png, image/jpeg, image/jpg"
       inputElement.classList.add("hidden-field")
 
-      inputElement.addEventListener("change", () => { new InscrybeInsertImage(event, this.codemirror).input() })
+      inputElement.addEventListener("change", event => { new InscrybeInsertImage(event, this.codemirror).input() })
       labelElement.addEventListener("click", () => { inputElement.click() })
 
       document.body.append(inputElement)
@@ -301,7 +301,8 @@ class InitialiseInscrybeMDE {
     }
   }
 
-  toggleVideoUploader() {
+  toggleVideoUploader(event) {
+    console.log(event)
     const button = this.mde.gui.toolbar.querySelector(".fa-video").closest("button")
 
     button.classList.toggle("dropdown-open")
@@ -326,7 +327,7 @@ class InitialiseInscrybeMDE {
       inputElement.accept = "video/mp4"
       inputElement.classList.add("hidden-field")
 
-      inputElement.addEventListener("change", () => { new InscrybeInsertVideo(event, this.codemirror).input() })
+      inputElement.addEventListener("change", event => { new InscrybeInsertVideo(event, this.codemirror).input() })
       labelElement.addEventListener("click", () => { inputElement.click() })
 
       document.body.append(inputElement)
