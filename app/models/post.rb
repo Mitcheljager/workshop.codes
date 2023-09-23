@@ -141,7 +141,6 @@ class Post < ApplicationRecord
 
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
-  before_save :set_video_acl, if: :new_videos_attached?
 
   def self.search(query, size: 50, bypass_cache: true)
     __elasticsearch__.search({
@@ -236,21 +235,5 @@ class Post < ApplicationRecord
 
   def new_videos_attached?
     videos_attachments.any? { |attachment| attachment.new_record? }
-  end
-
-  def set_video_acl
-    # Check if new videos are attached
-    new_videos = videos.select(&:new_record?)
-
-    new_videos.each do |video_attachment|
-      # Set the ACL for the new video file to make it public
-      if video_attachment.present?
-        video_attachment.service.client.put_object_acl(
-          bucket: ENV["DIGITALOCEAN_SPACES_BUCKET"],
-          key: video_attachment.key,
-          acl: 'public-read'
-        )
-      end
-    end
   end
 end
