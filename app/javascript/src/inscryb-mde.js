@@ -311,7 +311,7 @@ class InitialiseInscrybeMDE {
       dropdownElement.classList.add("editor-dropdown")
 
       const textElement = document.createElement("small")
-      textElement.innerText = "Upload an video. Limited to mp4 filetype and 50mb filesize."
+      textElement.innerText = "Upload a video. Limited to mp4 filetype and 50mb filesize."
 
       const randomId = Math.random().toString().substr(2, 8)
       const labelElement = document.createElement("label")
