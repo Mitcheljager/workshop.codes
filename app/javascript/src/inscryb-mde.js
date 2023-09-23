@@ -57,13 +57,13 @@ class InitialiseInscrybeMDE {
       "code",
       "link",
       {
-        action: event => this.toggleImageUploader(),
+        action: () => this.toggleImageUploader(),
         name: "image",
         className: "fa fa-image",
         title: "Upload an image"
       },
       {
-        action: event => this.toggleVideoUploader(),
+        action: () => this.toggleVideoUploader(),
         name: "video",
         className: "fa fa-video",
         title: "Upload a video"
