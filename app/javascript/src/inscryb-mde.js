@@ -57,13 +57,13 @@ class InitialiseInscrybeMDE {
       "code",
       "link",
       {
-        action: event => this.toggleImageUploader(event),
+        action: event => this.toggleImageUploader(),
         name: "image",
         className: "fa fa-image",
         title: "Upload an image"
       },
       {
-        action: event => this.toggleVideoUploader(event),
+        action: event => this.toggleVideoUploader(),
         name: "video",
         className: "fa fa-video",
         title: "Upload a video"
@@ -97,7 +97,7 @@ class InitialiseInscrybeMDE {
       toolbar.push("|")
 
       toolbar.push({
-        action: event => this.toggleWikiSearch(event),
+        action: () => this.toggleWikiSearch(),
         name: "wiki",
         className: "fa fa-wiki",
         title: "Wiki Link"
@@ -263,7 +263,7 @@ class InitialiseInscrybeMDE {
     })
   }
 
-  toggleImageUploader(event) {
+  toggleImageUploader() {
     const button = this.mde.gui.toolbar.querySelector(".fa-image").closest("button")
 
     button.classList.toggle("dropdown-open")
@@ -301,8 +301,7 @@ class InitialiseInscrybeMDE {
     }
   }
 
-  toggleVideoUploader(event) {
-    console.log(event)
+  toggleVideoUploader() {
     const button = this.mde.gui.toolbar.querySelector(".fa-video").closest("button")
 
     button.classList.toggle("dropdown-open")
