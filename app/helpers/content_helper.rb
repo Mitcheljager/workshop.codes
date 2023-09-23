@@ -94,7 +94,6 @@ module ContentHelper
 
   def markdown_video(text)
     text.gsub /\[video\s+(.*?)\]/ do
-      video_id = $1
       "<div class='video'>#{video_tag $1, controls: true}</div>"
     end
   end
