@@ -93,7 +93,7 @@ module ContentHelper
   end
 
   def markdown_video(text)
-    text.gsub /\[video\s+(.*?)\]/ do
+    text.gsub /\[video\s(https?:\/\/\S+)\]/ do
       "<div class='video'>#{ActionController::Base.helpers.video_tag($1, controls: true)}</div>"
     end
   end
