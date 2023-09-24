@@ -3,6 +3,11 @@
 	padding-bottom: 56.25%;
 	height: 0;
 	background: $bg-darker;
+
+	video {
+		width: 100%;
+		height: auto;
+	}
 }
 
 .video__iframe {

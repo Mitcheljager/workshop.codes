@@ -75,6 +75,7 @@ module ContentHelper
 
     text = text.gsub(/<script.*?>[\s\S]*<\/script>/i, "")
     text = markdown_youtube(text)
+    text = markdown_video(text)
     text = markdown_gallery(text)
     text = markdown_hero_icon(text)
     text = markdown.render(text)
@@ -88,6 +89,12 @@ module ContentHelper
       "<div class='video'>
         <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{ youtube_to_video_id(video_id) }' frameborder='0' allowfullscreen></iframe>
       </div>"
+    end
+  end
+
+  def markdown_video(text)
+    text.gsub /\[video\s(https?:\/\/\S+)\]/ do
+      "<div class='video'>#{ActionController::Base.helpers.video_tag($1, controls: true)}</div>"
     end
   end
 
@@ -145,7 +152,7 @@ module ContentHelper
   def sanitized_markdown(text, rendererOptions: {})
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
-      tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
+      tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
       attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls)
     )
   end

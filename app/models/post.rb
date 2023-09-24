@@ -102,6 +102,7 @@ class Post < ApplicationRecord
   has_many :sources, through: :source_derivs, source: :source
 
   has_many_attached :images, dependent: :destroy
+  has_many_attached :videos, dependent: :destroy
 
   has_recommended :posts
 
@@ -135,6 +136,7 @@ class Post < ApplicationRecord
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes },
                      dimension: { max: 3500..3500 }
+  validates :videos, content_type: ["video/mp4"], size: { less_than: 50.megabytes }
   validates_with SupportedPlayersValidator
 
   # Ensure unresolved reports about this post are archived
@@ -229,5 +231,9 @@ class Post < ApplicationRecord
 
   def self.find_by_code(code)
     Post.find_by("upper(code) = ?", code.upcase)
+  end
+
+  def new_videos_attached?
+    videos_attachments.any? { |attachment| attachment.new_record? }
   end
 end

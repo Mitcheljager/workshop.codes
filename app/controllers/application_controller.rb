@@ -59,15 +59,17 @@ class ApplicationController < ActionController::Base
   end
 
   def active_storage_blob_variant_url
-    image = ActiveStorage::Blob.find_by_key(params[:key])
+    blob = ActiveStorage::Blob.find_by_key(params[:key])
 
-    if image.present?
-      if params[:type] == "thumbnail"
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
+    if blob.present?
+      if params[:type] == "video"
+        url = rails_public_blob_url(blob)
+      elsif params[:type] == "thumbnail"
+        url = rails_public_blob_url(blob.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
       elsif params[:type] == "full"
-        url = rails_public_blob_url(image.variant(quality: 95).processed)
+        url = rails_public_blob_url(blob.variant(quality: 95).processed)
       else
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_limit: [1920, 1080], format: :webp).processed)
+        url = rails_public_blob_url(blob.variant(quality: 95, resize_to_limit: [1920, 1080], format: :webp).processed)
       end
 
       render json: url, layout: false

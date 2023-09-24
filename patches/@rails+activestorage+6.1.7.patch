@@ -1,0 +1,44 @@
+diff --git a/node_modules/@rails/activestorage/app/assets/javascripts/activestorage.js b/node_modules/@rails/activestorage/app/assets/javascripts/activestorage.js
+index 6061fb9..63d33cf 100644
+--- a/node_modules/@rails/activestorage/app/assets/javascripts/activestorage.js
++++ b/node_modules/@rails/activestorage/app/assets/javascripts/activestorage.js
+@@ -560,6 +560,7 @@
+       this.xhr.setRequestHeader("Content-Type", "application/json");
+       this.xhr.setRequestHeader("Accept", "application/json");
+       this.xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
++      this.xhr.setRequestHeader("x-amz-acl", "public-read");
+       var csrfToken = getMetaValue("csrf-token");
+       if (csrfToken != undefined) {
+         this.xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+@@ -638,6 +639,7 @@
+       for (var key in headers) {
+         this.xhr.setRequestHeader(key, headers[key]);
+       }
++      this.xhr.setRequestHeader("x-amz-acl", "public-read")
+       this.xhr.addEventListener("load", function(event) {
+         return _this.requestDidLoad(event);
+       });
+diff --git a/node_modules/@rails/activestorage/src/blob_record.js b/node_modules/@rails/activestorage/src/blob_record.js
+index 997c123..f626d5c 100644
+--- a/node_modules/@rails/activestorage/src/blob_record.js
++++ b/node_modules/@rails/activestorage/src/blob_record.js
+@@ -17,6 +17,7 @@ export class BlobRecord {
+     this.xhr.setRequestHeader("Content-Type", "application/json")
+     this.xhr.setRequestHeader("Accept", "application/json")
+     this.xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
++    this.xhr.setRequestHeader("x-amz-acl", "public-read")
+ 
+     const csrfToken = getMetaValue("csrf-token")
+     if (csrfToken != undefined) {
+diff --git a/node_modules/@rails/activestorage/src/blob_upload.js b/node_modules/@rails/activestorage/src/blob_upload.js
+index 277cc8f..c7c5864 100644
+--- a/node_modules/@rails/activestorage/src/blob_upload.js
++++ b/node_modules/@rails/activestorage/src/blob_upload.js
+@@ -11,6 +11,7 @@ export class BlobUpload {
+     for (const key in headers) {
+       this.xhr.setRequestHeader(key, headers[key])
+     }
++    this.xhr.setRequestHeader("x-amz-acl", "public-read")
+     this.xhr.addEventListener("load", event => this.requestDidLoad(event))
+     this.xhr.addEventListener("error", event => this.requestDidError(event))
+   }

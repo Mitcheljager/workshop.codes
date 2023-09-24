@@ -16,6 +16,7 @@
   <%= render "form_errors", errors: @article.errors if @article.errors.any? %>
 
   <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
+  <%= form.file_field :videos, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-videos" } %>
 
   <article class="article">
     <main class="article__main">
