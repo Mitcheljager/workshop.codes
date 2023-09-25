@@ -15,10 +15,10 @@
   let selected = 0
   let message = ""
 
-  $: searchItems(value, replace)
+  $: searchItems(value, replace, $items)
   $: if (active) focusInput()
   $: if (value || replace) message = ""
-  $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches.length, 0)
+  $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches?.length, 0)
   $: occurrencesString = `${ occurrences } occurrence${ occurrences > 1 ? "s" : "" } in ${ itemMatches.length } item${ itemMatches.length > 1 ? "s" : "" }`
 
   function searchItems() {
@@ -172,17 +172,17 @@
 
   {#if value}
     <div class="matches">
-      {#if itemMatches.length}
+      {#if itemMatches?.length}
         <div class="text-italic text-dark mb-1/8">
           Found {occurrencesString}
         </div>
       {/if}
 
-      {#if !itemMatches.length && !message}
+      {#if !itemMatches?.length && !message}
         <em class="text-dark">No matches found</em>
       {/if}
 
-      {#each itemMatches as item, i}
+      {#each (itemMatches || []) as item, i}
         <button class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
           {item.name}
 
@@ -191,9 +191,9 @@
           {/if}
 
           <div class="text-dark text-small">
-            <span class="text-white">Matches: {item.contentMatches.length}</span>
+            <span class="text-white">Matches: {item.contentMatches?.length}</span>
 
-            {#each item.contentMatches as match}
+            {#each (item.contentMatches || []) as match}
               <div>
                 - {match.truncateStart ? "..." : ""}{@html highlightString(match.string)}{match.truncateEnd ? "..." : ""}
               </div>
