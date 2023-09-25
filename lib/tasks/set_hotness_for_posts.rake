@@ -11,11 +11,11 @@ namespace :hotness do
         copy_count = Ahoy::Event.where(name: "Copy Code").where("time > ?", 1.day.ago).distinct.pluck(:visit_id, :properties).select { |s| s[1]["id"] == post.id }.count
 
         days_old = (post.last_revision_created_at.to_datetime...Time.now).count
-        days_old = [[days_old, 2].max, 30].min
+        days_old = [[days_old, 3].max, 45].min
 
         impressions_and_copy_score = impressions_count + (copy_count * 2)
         favorites_score = favorites_count * 20
-        total_score = [[impressions_and_copy_score + favorites_score, 1].max / (days_old / 2), 1].max.round
+        total_score = [[impressions_and_copy_score + favorites_score, 1].max / (days_old / 3), 1].max.round
 
         if total_score >= 1000
           create_badge(badge_id: 3, user: post.user)
