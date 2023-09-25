@@ -22,6 +22,10 @@ namespace :hotness do
         end
 
         post.update_column(:hotness, total_score)
+
+        if (total_score > post.top_hotness)
+          post.update_columns(top_hotness: total_score, top_hotness_at: DateTime.now)
+        end
       end
     end
   end

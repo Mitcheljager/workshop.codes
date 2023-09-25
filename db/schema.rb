@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_12_221036) do
+ActiveRecord::Schema.define(version: 2023_09_25_144402) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -239,6 +239,8 @@ ActiveRecord::Schema.define(version: 2023_08_12_221036) do
     t.integer "max_players"
     t.integer "comments_count", default: 0
     t.boolean "overwatch_2_compatible", default: false
+    t.integer "top_hotness", default: 1
+    t.datetime "top_hotness_at"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"
