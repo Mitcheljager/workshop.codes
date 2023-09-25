@@ -206,8 +206,8 @@
 
   const updateItem = debounce(() => {
     $currentItem.content = view.state.doc.toString()
-    const index = $items.indexOf(i => i.id == $currentItem.id)
-    $items[index] = $currentItem
+    const index = $items.findIndex(i => i.id == $currentItem.id)
+    if (index !== -1) $items[index] = $currentItem
   }, 250)
 
   function click(event) {
