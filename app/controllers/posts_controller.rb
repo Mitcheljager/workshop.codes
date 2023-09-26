@@ -169,7 +169,7 @@ class PostsController < ApplicationController
         if (post_params[:revision].present? && post_params[:revision] != "0") || current_code != post_params[:code] || current_version != post_params[:version]
           invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
           @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
-          @post.update(last_revision_created_at: @revision.created_at) if @revision.save
+          @post.update_column(:last_revision_created_at, @revision.created_at) if @revision.save
         end
       end
     rescue ActiveRecord::ActiveRecordError => exception
@@ -428,6 +428,10 @@ class PostsController < ApplicationController
         @block.update(content_id: @post.id, properties: properties)
       end
     end
+
+    # Update the updated_at time manually in case the base post was not changed.
+    # This is needed to make sure the cache updates as expected.
+    @post.update_column(:updated_at, Time.now)
   end
 
   def published_from_draft
