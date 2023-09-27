@@ -20,6 +20,21 @@
     if (selected.length >= limit) selected = [...selected.slice(1), value]
     else selected = [...selected, value]
   }
+
+  /**
+   * Generate an id for the given value.
+   * The id is based on the name and value value.
+   * The name might consist of brackets, the first bracket is replaced by an underscore,
+   * other brackets are ignored. Spaces are replaced with underscores.
+   * This results in an id like post_categories_some_value to match Rails ids.
+   * @param {string} value The given value to use for the id
+   */
+  function getId(value) {
+    return (name + "_" + value).toLowerCase()
+      .replace("[", "_")
+      .replace(/\[|\]/g, "")
+      .replace(" ", "_")
+  }
 </script>
 
 <div class="well well--scrollable block br-1/2">
@@ -29,11 +44,11 @@
         type="checkbox"
         {name}
         {value}
-        id={name + value}
+        id={getId(value)}
         checked={selected?.some(o => o === value)}
         on:change={({ target: { checked } }) => bind(checked, value)} />
 
-      <label for={name + value}>{label}</label>
+      <label for={getId(value)}>{label}</label>
     </div>
   {/each}
 </div>
