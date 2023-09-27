@@ -1,0 +1,12 @@
+diff --git a/node_modules/webpacker-svelte/dist/webpacker-svelte.js b/node_modules/webpacker-svelte/dist/webpacker-svelte.js
+index b92f3ab..c4b9c0e 100644
+--- a/node_modules/webpacker-svelte/dist/webpacker-svelte.js
++++ b/node_modules/webpacker-svelte/dist/webpacker-svelte.js
+@@ -130,6 +130,7 @@ const WebpackerSvelte = {
+       const component = registeredComponents[className];
+ 
+       if (component) {
++        node.innerHTML = ""
+         if (node.innerHTML.length === 0) this.render(node, component);
+       } else {
+         console.error(
