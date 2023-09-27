@@ -20,6 +20,13 @@
     background: var(--bg-darker);
   }
 
+  &--scrollable {
+    max-height: 10rem;
+    overflow-y: auto;
+
+    @include styled-scrollbar;
+  }
+
   a {
     text-decoration: none;
   }

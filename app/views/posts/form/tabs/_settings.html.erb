@@ -148,11 +148,10 @@
       <%= t("posts.form.categories.help") %>
     </div>
 
-    <%= form.select :categories, options_for_select(
-                                  categories.map { |category| [category[current_locale], category["en"]] },
-                                  (@post.categories if @post.categories)),
-                                { include_hidden: false },
-                                { multiple: true, size: 5, class: "form-select" } %>
+    <%= svelte_component "LimitedCheckboxes", {
+                         name: "post[categories][]",
+                         categories: categories.map { |category| [category[current_locale], category["en"]] },
+                         selected: @post.categories || [] } %>
   </div>
 
   <div class="form-group">
