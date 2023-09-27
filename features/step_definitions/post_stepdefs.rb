@@ -90,9 +90,10 @@ def fill_in_post_form
 
   # Settings
   click_on "Settings"
-  post_attrs[:categories].each do |category|
-    select(category, from: "post_categories")
+  post_attrs[:categories].first(3).each do |category|
+    check(category)
   end
+
   # Simulating actualy clicking/pressing/dragging is a pain with Capybara
   slider = page.evaluate_script "slider=document.querySelector('[data-role=\"num-player-slider\"][data-type=\"post\"]');"
   page.execute_script "const slider = arguments[0]; slider.noUiSlider.set([#{ post_attrs[:min_players] }, #{ post_attrs[:max_players] }]);", slider
