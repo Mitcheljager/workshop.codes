@@ -44,10 +44,10 @@ document.addEventListener("turbolinks:before-cache", function() {
   inscrybMde.destroy()
 
   const svelteComponents = document.querySelectorAll("[data-svelte-component]")
-  svelteComponents.forEach(element => element.innerHTML = null)
+  svelteComponents.forEach(element => element.dataset.initialized = null)
 })
 
 document.addEventListener("turbolinks:click", () => {
   const svelteComponents = document.querySelectorAll("[data-svelte-component]")
-  svelteComponents.forEach(element => element.innerHTML = null)
+  svelteComponents.forEach(element => element.dataset.initialized = null)
 })
