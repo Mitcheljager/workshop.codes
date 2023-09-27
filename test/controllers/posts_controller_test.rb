@@ -137,7 +137,7 @@ def fill_in_post_details
   fill_in "post_tags", with: @post.tags
   fill_in "post_version", with: @post.version
 
-  find("#post_categories").find("option[value='Team Deathmatch']").select_option
+  find("#post[categories][]Team Deathmatch").set(true)
   find("#post_heroes_reinhardt").set(true)
   find("#post_maps_hanamura").set(true)
   find("#post_min_players", visible: false).set(1)
