@@ -148,11 +148,12 @@
       <%= t("posts.form.categories.help") %>
     </div>
 
-    <%= form.select :categories, options_for_select(
-                                  categories.map { |category| [category[current_locale], category["en"]] },
-                                  (@post.categories if @post.categories)),
-                                { include_hidden: false },
-                                { multiple: true, size: 5, class: "form-select" } %>
+    <%= svelte_component "LimitedCheckboxes", {
+                         name: "post[categories][]",
+                         options: categories.map { |category| [category[current_locale], category["en"]] },
+                         selected: @post.categories || [] } do %>
+      <%= form.check_box :categories, { multiple: true, checked: false, include_hidden: false }, "Team Deathmatch" %>
+    <% end %>
   </div>
 
   <div class="form-group">
