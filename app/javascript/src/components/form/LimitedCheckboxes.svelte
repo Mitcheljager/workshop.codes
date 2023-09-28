@@ -48,7 +48,7 @@
         checked={selected?.some(o => o === value)}
         on:change={({ target: { checked } }) => bind(checked, value)} />
 
-      <label for={getId(value)}>{label}</label>
+      <label class="w-100" for={getId(value)}>{label}</label>
     </div>
   {/each}
 </div>
