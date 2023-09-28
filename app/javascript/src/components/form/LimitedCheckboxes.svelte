@@ -1,6 +1,6 @@
 <script>
   export let name = "checkboxes"
-  export let categories = []
+  export let options = []
   export let selected = []
   export let limit = 3
 
@@ -26,7 +26,7 @@
    * The id is based on the name and value value.
    * The name might consist of brackets, the first bracket is replaced by an underscore,
    * other brackets are ignored. Spaces are replaced with underscores.
-   * This results in an id like post_categories_some_value to match Rails ids.
+   * This results in an id like post_options_some_value to match Rails ids.
    * @param {string} value The given value to use for the id
    */
   function getId(value) {
@@ -38,7 +38,7 @@
 </script>
 
 <div class="well well--scrollable block br-1/2">
-  {#each categories as [label, value]}
+  {#each options as [label, value]}
     <div class="checkbox">
       <input
         type="checkbox"
