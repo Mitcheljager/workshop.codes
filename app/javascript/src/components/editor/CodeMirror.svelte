@@ -77,7 +77,7 @@
           { key: "Ctrl-Shift-z", run: redoAction }
         ]),
         EditorView.updateListener.of((state) => {
-          if (state.docChanged) updateItem()
+          if (state.docChanged) updateItem(state?.state?.doc?.text)
           if (state.selectionSet) $editorStates[currentId].selection = view.state.selection
         }),
         basicSetup,
@@ -204,8 +204,14 @@
     return Math.floor((spaces - tabs) / 4) + tabs
   }
 
-  const updateItem = debounce(() => {
-    $currentItem.content = view.state.doc.toString()
+  const updateItem = debounce((text) => {
+    if (!text?.length) return
+
+    $currentItem = {
+      ...$currentItem,
+      content: text[0]
+    }
+
     const index = $items.findIndex(i => i.id == $currentItem.id)
     if (index !== -1) $items[index] = $currentItem
   }, 250)
