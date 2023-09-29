@@ -20,15 +20,18 @@
     loading = true
 
     const content = getSaveContent()
-
-    saveToLocalStorage(content)
+    saveToLocalStorage(content, Date.now())
 
     new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })
       .then(data => {
         if (!data) throw Error("Create failed")
 
         lastSaveContent = content
-        updateProject($currentProject.uuid, { updated_at: Date.now() })
+
+        const updated_at = JSON.parse(data).updated_at
+
+        updateProject($currentProject.uuid, { updated_at })
+        saveToLocalStorage(content, updated_at) // Save again to localStorage to update the updated_at date
 
         showConfetti()
       })
@@ -36,15 +39,17 @@
         Bugsnag.notify(error)
         alert("Something went wrong while saving, please try again")
       })
-      .finally(() => loading = false)
+      .finally(() => {
+        loading = false
+      })
   }
 
-  function saveToLocalStorage(content) {
+  function saveToLocalStorage(content, date) {
     const currentSaved = JSON.parse(localStorage.getItem("saved-projects") || "{}")
     localStorage.setItem("saved-projects", JSON.stringify({
       ...currentSaved,
       [$currentProject.uuid]: {
-        updated_at: Date.now(),
+        updated_at: date,
         content
       }
     }))
