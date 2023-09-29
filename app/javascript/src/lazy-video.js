@@ -8,6 +8,7 @@ export function bind() {
       const element = entry.target
 
       element.src = element.dataset.src
+      if (element.dataset.autoplay === "true") element.play()
       observer.unobserve(element)
     })
   })
