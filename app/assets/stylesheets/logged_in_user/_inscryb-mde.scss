@@ -72,7 +72,7 @@
   right: 0;
   top: 2rem;
   max-height: 300px;
-  width: 150px;
+  width: 220px;
   background: $bg-dark;
   border: 1px solid $text-color-dark;
   border-radius: $border-radius;
@@ -84,6 +84,10 @@
   small {
     display: block;
     padding: .5rem;
+  }
+
+  .checkbox label {
+    padding-left: .5rem;
   }
 }
 

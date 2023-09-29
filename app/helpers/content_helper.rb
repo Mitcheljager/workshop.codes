@@ -93,8 +93,18 @@ module ContentHelper
   end
 
   def markdown_video(text)
-    text.gsub /\[video\s(https?:\/\/\S+)\]/ do
-      "<div class='video'>#{ActionController::Base.helpers.video_tag($1, controls: true)}</div>"
+    text.gsub /\[video\s(https?:\/\/\S+)(?:\s(autoplay))?\]/ do
+      video_url = $1
+      autoplay = $2.blank? ? nil : true
+
+      video_element = ActionController::Base.helpers.video_tag(video_url,
+        playsinline: true,
+        controls: !autoplay,
+        muted: autoplay,
+        autoplay: autoplay,
+        loop: autoplay)
+
+      "<div class='video'>#{video_element}</div>"
     end
   end
 
@@ -153,7 +163,7 @@ module ContentHelper
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
       tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
-      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls)
+      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls playsinline loop muted autoplay)
     )
   end
 

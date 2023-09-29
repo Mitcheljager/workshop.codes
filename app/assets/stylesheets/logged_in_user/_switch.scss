@@ -103,7 +103,8 @@
     pointer-events: all;
     transition: left 100ms;
 
-    .switch-checkbox__input:checked + & {
+    .switch-checkbox__input:checked + &,
+    .switch-checkbox--active & {
       left: calc(1rem + 6px);
       background: $white;
     }
@@ -116,7 +117,8 @@
     pointer-events: all;
 
     .switch-checkbox__input:checked + &,
-    .switch-checkbox:focus-within & {
+    .switch-checkbox:focus-within &,
+    .switch-checkbox--active & {
       border-color: $white;
     }
   }
