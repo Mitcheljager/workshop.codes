@@ -277,7 +277,7 @@ class InitialiseInscrybeMDE {
     dropdownElement.classList.add("editor-dropdown")
 
     const textElement = document.createElement("small")
-    textElement.innerText = "Upload an image. Alternative, with an image on your clipboard simply paste it in the text area."
+    textElement.innerText = "Upload an image. Alternatively, with an image on your clipboard simply paste it in the text area."
 
     const randomId = Math.random().toString().substr(2, 8)
     const labelElement = document.createElement("label")
