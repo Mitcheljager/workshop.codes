@@ -97,14 +97,15 @@ module ContentHelper
       video_url = $1
       autoplay = $2.blank? ? nil : true
 
-      video_element = ActionController::Base.helpers.video_tag(video_url,
+      video_element = ActionController::Base.helpers.video_tag("",
+        data: { role: "lazy-video", src: video_url },
         playsinline: true,
         controls: !autoplay,
         muted: autoplay,
         autoplay: autoplay,
         loop: autoplay)
 
-      "<div class='video'>#{video_element}</div>"
+      "<div class='bg-darker'>#{video_element}</div>"
     end
   end
 
@@ -163,7 +164,7 @@ module ContentHelper
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
       tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
-      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls playsinline loop muted autoplay)
+      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls playsinline loop muted autoplay)
     )
   end
 
