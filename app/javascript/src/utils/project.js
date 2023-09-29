@@ -60,7 +60,7 @@ export async function fetchProject(uuid) {
       if (localProject && new Date(parsedData.updated_at) < new Date(localProject.updated_at)) {
         parsedData.content = localProject.content
         addAlert("We recovered a version of your project that wasn't fully saved.")
-        Bugsnag.notify(`Project with uuid "${ uuid }" was recovered from localStorage.`)
+        Bugsnag.notify("Project was recovered from localStorage.")
       }
 
       updateProject(parsedData.uuid, {

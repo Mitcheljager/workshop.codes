@@ -1,4 +1,5 @@
 <script>
+  import Bugsnag from "@bugsnag/js"
   import FetchRails from "../../fetch-rails"
   import { currentProject, modal } from "../../stores/editor"
   import { getSaveContent } from "../../utils/editor"
@@ -32,7 +33,7 @@
         showConfetti()
       })
       .catch(error => {
-        console.error(error)
+        Bugsnag.notify(error)
         alert("Something went wrong while saving, please try again")
       })
       .finally(() => loading = false)
