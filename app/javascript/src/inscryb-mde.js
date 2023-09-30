@@ -4,6 +4,7 @@ import InscrybeInsertVideo from "./inscrybe-mde-insert-video"
 import FetchRails from "./fetch-rails"
 import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
 import debounce from "./debounce"
+import * as lazyVideo from "../src/lazy-video"
 
 let editors = []
 
@@ -135,6 +136,7 @@ class InitialiseInscrybeMDE {
         new FetchRails("/parse-markdown", { post: { description: plainText } })
           .post().then(data => {
             preview.innerHTML = data
+            lazyVideo.bind()
           })
 
         return "<div class=`p-1/2`><div class=`spinner`></div></div>"
@@ -268,37 +270,38 @@ class InitialiseInscrybeMDE {
 
     button.classList.toggle("dropdown-open")
 
-    if (button.classList.contains("dropdown-open")) {
-      const dropdownElement = document.createElement("div")
-      dropdownElement.classList.add("editor-dropdown")
-
-      const textElement = document.createElement("small")
-      textElement.innerText = "Upload an image. Alternative, with an image on your clipboard simply paste it in the text area."
-
-      const randomId = Math.random().toString().substr(2, 8)
-      const labelElement = document.createElement("label")
-      const labelClasslist = ["button", "button--small", "mt-1/4", "w-100"]
-      labelElement.for = randomId
-      labelElement.innerText = "Upload image"
-      labelElement.classList.add(...labelClasslist)
-
-      const inputElement = document.createElement("input")
-      inputElement.type = "file"
-      inputElement.id = randomId
-      inputElement.accept = "image/png, image/jpeg, image/jpg"
-      inputElement.classList.add("hidden-field")
-
-      inputElement.addEventListener("change", event => { new InscrybeInsertImage(event, this.codemirror).input() })
-      labelElement.addEventListener("click", () => { inputElement.click() })
-
-      document.body.append(inputElement)
-
-      textElement.append(labelElement)
-      dropdownElement.append(textElement)
-      button.append(dropdownElement)
-    } else {
+    if (!button.classList.contains("dropdown-open")) {
       button.querySelector(".editor-dropdown").remove()
+      return
     }
+
+    const dropdownElement = document.createElement("div")
+    dropdownElement.classList.add("editor-dropdown")
+
+    const textElement = document.createElement("small")
+    textElement.innerText = "Upload an image. Alternatively, with an image on your clipboard simply paste it in the text area."
+
+    const randomId = Math.random().toString().substr(2, 8)
+    const labelElement = document.createElement("label")
+    const labelClasslist = ["button", "button--small", "mt-1/4", "w-100"]
+    labelElement.for = randomId
+    labelElement.innerText = "Upload image"
+    labelElement.classList.add(...labelClasslist)
+
+    const inputElement = document.createElement("input")
+    inputElement.type = "file"
+    inputElement.id = randomId
+    inputElement.accept = "image/png, image/jpeg, image/jpg"
+    inputElement.classList.add("hidden-field")
+
+    inputElement.addEventListener("change", event => { new InscrybeInsertImage(event, this.codemirror).input() })
+    labelElement.addEventListener("click", () => { inputElement.click() })
+
+    document.body.append(inputElement)
+
+    textElement.append(labelElement)
+    dropdownElement.append(textElement)
+    button.append(dropdownElement)
   }
 
   toggleVideoUploader() {
@@ -306,37 +309,65 @@ class InitialiseInscrybeMDE {
 
     button.classList.toggle("dropdown-open")
 
-    if (button.classList.contains("dropdown-open")) {
-      const dropdownElement = document.createElement("div")
-      dropdownElement.classList.add("editor-dropdown")
-
-      const textElement = document.createElement("small")
-      textElement.innerText = "Upload a video. Limited to mp4 filetype and 50mb filesize."
-
-      const randomId = Math.random().toString().substr(2, 8)
-      const labelElement = document.createElement("label")
-      const labelClasslist = ["button", "button--small", "mt-1/4", "w-100"]
-      labelElement.for = randomId
-      labelElement.innerText = "Upload video"
-      labelElement.classList.add(...labelClasslist)
-
-      const inputElement = document.createElement("input")
-      inputElement.type = "file"
-      inputElement.id = randomId
-      inputElement.accept = "video/mp4"
-      inputElement.classList.add("hidden-field")
-
-      inputElement.addEventListener("change", event => { new InscrybeInsertVideo(event, this.codemirror).input() })
-      labelElement.addEventListener("click", () => { inputElement.click() })
-
-      document.body.append(inputElement)
-
-      textElement.append(labelElement)
-      dropdownElement.append(textElement)
-      button.append(dropdownElement)
-    } else {
+    if (!button.classList.contains("dropdown-open")) {
       button.querySelector(".editor-dropdown").remove()
+      return
     }
+
+    const dropdownElement = document.createElement("div")
+    dropdownElement.classList.add("editor-dropdown")
+
+    const textElement = document.createElement("small")
+    textElement.innerText = "Upload a video. Limited to mp4 filetype and 50mb filesize."
+
+    const randomId = Math.random().toString().substr(2, 8)
+    const labelElement = document.createElement("label")
+    const labelClasslist = ["button", "button--small", "mt-1/8", "w-100"]
+    labelElement.for = randomId
+    labelElement.innerText = "Upload video"
+    labelElement.classList.add(...labelClasslist)
+
+    const inputElement = document.createElement("input")
+    inputElement.type = "file"
+    inputElement.id = randomId
+    inputElement.accept = "video/mp4"
+    inputElement.classList.add("hidden-field")
+
+    inputElement.addEventListener("change", event => new InscrybeInsertVideo(event, this.codemirror).input())
+    labelElement.addEventListener("click", () => inputElement.click())
+
+    const autoplayCheckboxElement = document.createElement("div")
+    autoplayCheckboxElement.classList.add("switch-checkbox", "mt-1/8", "mb-1/8")
+    autoplayCheckboxElement.addEventListener("click", event => {
+      event.preventDefault()
+      event.stopPropagation()
+
+      const checkbox = event.target.closest(".switch-checkbox")
+      if (!checkbox) return
+      const input = document.querySelector("#autoplay" + randomId)
+      if (input) input.checked = !input.checked
+      checkbox.classList.toggle("switch-checkbox--active", input.checked)
+    })
+
+    const autoplayLabelElement = document.createElement("label")
+    autoplayLabelElement.classList.add("switch-checkbox__label")
+    autoplayLabelElement.innerText = "Loop and autoplay on mute"
+    autoplayLabelElement.for = "autoplay" + randomId
+
+    const autoplayInputElement = document.createElement("input")
+    autoplayInputElement.classList.add("switch-checkbox__input")
+    autoplayInputElement.type = "checkbox"
+    autoplayInputElement.id = "autoplay" + randomId
+
+    autoplayCheckboxElement.append(autoplayLabelElement)
+
+    document.body.append(autoplayInputElement)
+    document.body.append(inputElement)
+
+    textElement.append(autoplayCheckboxElement)
+    textElement.append(labelElement)
+    dropdownElement.append(textElement)
+    button.append(dropdownElement)
   }
 
   toggleWikiSearch() {
@@ -344,65 +375,65 @@ class InitialiseInscrybeMDE {
 
     button.classList.toggle("dropdown-open")
 
-    if (button.classList.contains("dropdown-open")) {
-      const dropdownElement = document.createElement("div")
-      dropdownElement.classList.add("editor-dropdown")
-
-      dropdownElement.innerHTML = `
-        <small>Search the Wiki and insert a link to an article.</small>
-        <input type="text" class="form-input bg-darker" placeholder="Search the Wiki" />
-        <div data-role="results"></div>
-      `
-
-      button.append(dropdownElement)
-
-      const input = button.querySelector("input")
-      input.focus()
-
-      input.addEventListener("click", event => {
-        event.stopPropagation()
-        event.preventDefault()
-
-        input.focus()
-      })
-
-      const getSearchResults = debounce(event => {
-        if (!event.target.value) return
-
-        const resultsElement = button.querySelector("[data-role='results']")
-        resultsElement.innerHTML = "<small>Searching...</small>"
-
-        new FetchRails(`/wiki/search/${ event.target.value }.json`).get()
-          .then(data => {
-            data = JSON.parse(data)
-            resultsElement.innerHTML = ""
-
-            if (!data.length) {
-              resultsElement.innerHTML = "<small>No results found</small>"
-              return
-            }
-
-            data.forEach(item => {
-              const itemElement = document.createElement("a")
-              itemElement.classList.add("editor-dropdown__item")
-              itemElement.innerText = item.title
-              itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ decodeURIComponent(item.slug) }`) })
-
-              const categoryElement = document.createElement("span")
-              categoryElement.style = "opacity: .5; font-size: .8em"
-              categoryElement.innerText = " " + item.category.title
-
-
-              itemElement.append(categoryElement)
-              resultsElement.append(itemElement)
-            })
-          })
-      }, 500)
-
-      input.addEventListener("input", getSearchResults)
-    } else {
+    if (!button.classList.contains("dropdown-open")) {
       button.querySelector(".editor-dropdown").remove()
+      return
     }
+    const dropdownElement = document.createElement("div")
+    dropdownElement.classList.add("editor-dropdown")
+
+    dropdownElement.innerHTML = `
+      <small>Search the Wiki and insert a link to an article.</small>
+      <input type="text" class="form-input bg-darker" placeholder="Search the Wiki" />
+      <div data-role="results"></div>
+    `
+
+    button.append(dropdownElement)
+
+    const input = button.querySelector("input")
+    input.focus()
+
+    input.addEventListener("click", event => {
+      event.stopPropagation()
+      event.preventDefault()
+
+      input.focus()
+    })
+
+    const getSearchResults = debounce(event => {
+      if (!event.target.value) return
+
+      const resultsElement = button.querySelector("[data-role='results']")
+      resultsElement.innerHTML = "<small>Searching...</small>"
+
+      new FetchRails(`/wiki/search/${ event.target.value }.json`).get()
+        .then(data => {
+          data = JSON.parse(data)
+          resultsElement.innerHTML = ""
+
+          if (!data.length) {
+            resultsElement.innerHTML = "<small>No results found</small>"
+            return
+          }
+
+          data.forEach(item => {
+            const itemElement = document.createElement("a")
+            itemElement.classList.add("editor-dropdown__item")
+            itemElement.innerText = item.title
+            itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ decodeURIComponent(item.slug) }`) })
+
+            const categoryElement = document.createElement("span")
+            categoryElement.style = "opacity: .5; font-size: .8em"
+            categoryElement.innerText = " " + item.category.title
+
+
+            itemElement.append(categoryElement)
+            resultsElement.append(itemElement)
+          })
+        })
+    }, 500)
+
+    input.addEventListener("input", getSearchResults)
   }
 
   insertLink(link = "") {

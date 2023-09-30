@@ -7,11 +7,13 @@ export default class InscrybeInsertVideo {
     this.event = event,
     this.editor = editor,
     this.file = ""
+    this.id = ""
   }
 
   input() {
     const items = this.event.target.files
     this.file = items[0]
+    this.id = this.event.target.id
 
     this.isFileVideo()
   }
@@ -90,10 +92,12 @@ export default class InscrybeInsertVideo {
   replaceMarkerWithVideo(randomId, url) {
     const marker = this.editor.getAllMarks().find(m => m.randomId == randomId)
 
+    const autoplay = document.querySelector("#autoplay" + this.id)?.checked
+
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)
-    this.editor.replaceSelection(`[video ${ url }]`)
+    this.editor.replaceSelection(`[video ${ url }${ autoplay ? " autoplay" : "" }]`)
 
     this.editor.setSelection(cursorPosition, cursorPosition)
 

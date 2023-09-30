@@ -25,6 +25,7 @@ import * as getSnippet from "../src/get-snippet"
 import * as getVerifiedUsers from "../src/get-verified-users"
 import * as imagePreview from "../src/image-preview"
 import * as infiniteScroll from "../src/infinite-scroll"
+import * as lazyVideo from "../src/lazy-video"
 import * as microlight from "../src/microlight"
 import * as modal from "../src/modal"
 import * as navigation from "../src/navigation"
@@ -54,6 +55,7 @@ document.addEventListener("turbolinks:load", function() {
   getVerifiedUsers.bind()
   imagePreview.bind()
   infiniteScroll.bind()
+  lazyVideo.bind()
   modal.bind()
   navigation.bind()
   revealByCheckbox.bind()
