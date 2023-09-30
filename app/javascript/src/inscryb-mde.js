@@ -4,6 +4,7 @@ import InscrybeInsertVideo from "./inscrybe-mde-insert-video"
 import FetchRails from "./fetch-rails"
 import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
 import debounce from "./debounce"
+import * as lazyVideo from "../src/lazy-video"
 
 let editors = []
 
@@ -135,6 +136,7 @@ class InitialiseInscrybeMDE {
         new FetchRails("/parse-markdown", { post: { description: plainText } })
           .post().then(data => {
             preview.innerHTML = data
+            lazyVideo.bind()
           })
 
         return "<div class=`p-1/2`><div class=`spinner`></div></div>"
