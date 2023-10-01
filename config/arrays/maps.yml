@@ -186,6 +186,14 @@
     ko: 쟁탈
   slug: oasis
 -
+  en: Samoa
+  ko: 사모아
+  overwatch_2: true
+  type:
+    en: Control
+    ko: 쟁탈
+  slug: samoa
+-
   en: Talantis
   ko: 탈란티스
   type:
