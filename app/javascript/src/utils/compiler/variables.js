@@ -17,7 +17,7 @@ const globalVariablesRegex = /(?<=Global\.)[A-Za-z0-9_]+/g
  */
 const possiblePlayerVariablesRegex = /(?<![^\w.]Global)\.(?<variableName>[A-Za-z0-9_]+)/g
 
-const invalidVariablePrefixRegex = /(?:^|(?:^|[^\w.])(?:\d+|D)|[^A-Za-z0-9_\]])$/
+const invalidVariablePrefixRegex = /(?:^|(?:^|[^\w.])(?:\d+|D)|[^A-Za-z0-9_)\]])$/
 
 const maxVariableCount = 128
 const maxVariableNameLength = 32
