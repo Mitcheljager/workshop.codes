@@ -209,6 +209,15 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
+    test("Should not ignore player variables coming after a value with arguments", () => {
+      const input = "Ray Cast Hit Player(bla, bla, bla).variableA.variableB"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["variableA", "variableB"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
     test("Should handle duplicate variables", () => {
       const input = `
         Global.variable1 = 10;
