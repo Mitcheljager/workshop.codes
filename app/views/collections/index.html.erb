@@ -1,9 +1,9 @@
 <% content_for :page_title, "Collections" %>
 
 <div class="header top-offset mb-1/2">
-  <h1>All <strong>collections</strong></h1>
+  <h1 class="mb-0">All <strong>collections</strong></h1>
 </div>
 
-<div class="cards">
+<div class="items">
   <%= render collection: @collections, partial: "collections/collection_card", as: :collection %>
 </div>
