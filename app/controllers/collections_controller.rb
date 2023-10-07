@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @collections = current_user.collections.order(created_at: :desc)
+    @collections = Collection.where("posts_count > ?", 0).order(created_at: :desc)
   end
 
   def show
