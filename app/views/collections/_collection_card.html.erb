@@ -23,7 +23,7 @@
     </div>
 
     <div class="collection__posts">
-      <% collection.posts.limit(4).each do |post| %>
+      <% collection.posts.order(updated_at: :desc).limit(4).each do |post| %>
         <div class="collection__post">
           <%= render "posts/thumbnail", post: post %>
         </div>
