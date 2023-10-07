@@ -15,13 +15,13 @@
     <% end %>
   </div>
 
-  <% if @collection.posts.length > 6 %>
+  <% if @collection.posts.size > 6 %>
     <center class="mt-1/2"><big>
-      This collection contains <%= @collection.posts.length - 6 %> more code<%= "s" if @collection.posts.length - 6 > 1 %>
+      This collection contains <%= @collection.posts.size - 6 %> more code<%= "s" if @collection.posts.size - 6 > 1 %>
     </big></center>
   <% end %>
 
   <center>
-    <%= link_to "View full collection", collection_path(@collection.nice_url), class: "button button--ghost #{@collection.posts.length > 6 ? "mt-1/4" : "mt-1/2" }" %>
+    <%= link_to "View full collection", collection_path(@collection.nice_url), class: "button button--ghost #{@collection.posts.size > 6 ? "mt-1/4" : "mt-1/2" }" %>
   </center>
 </section>
