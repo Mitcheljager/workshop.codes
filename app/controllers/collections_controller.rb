@@ -34,6 +34,7 @@ class CollectionsController < ApplicationController
     @collection.user_id = current_user.id
 
     if @collection.save
+      params[:collection][:collection_posts] = [] if collection_params[:collection_posts].nil?
       set_collection_id_for_posts(collection_params[:collection_posts])
 
       flash[:notice] = "Collection created"
@@ -81,7 +82,7 @@ class CollectionsController < ApplicationController
     params.require(:collection).permit(:title, :cover_image, :description, :display_type, { collection_posts: [] })
   end
 
-  def set_collection_id_for_posts(current_ids, initial_ids = [])
+  def set_collection_id_for_posts(current_ids = [], initial_ids = [])
     new_ids = current_ids - initial_ids
 
     posts = current_user.posts.where(id: new_ids)
