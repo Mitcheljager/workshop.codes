@@ -20,6 +20,7 @@ class CollectionsController < ApplicationController
 
   def partial
     @post = Post.select(:id, :collection_id).includes(:collection).find(params[:id])
+    @collection = @post.collection
 
     render partial: "collections"
   end

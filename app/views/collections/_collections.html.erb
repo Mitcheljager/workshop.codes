@@ -1,17 +1,27 @@
 <section class="collections">
-  <div class="heading items-heading mt-0 mb-1/2">
+  <div class="heading items-heading mt-0 mb-0">
     <h2 class="mt-0 mb-0">Other Codes part of <strong><%= @post.collection.title %></strong></h2>
   </div>
 
-  <div class="cards">
-    <% @post.collection.posts.visible?.where.not(id: @post.id).limit(9).each do |post| %>
+  <% if @collection.description %>
+    <div class="item__description text-big mt-1/4 mb-1/2">
+      <%= sanitize(markdown(@collection.description)) %>
+    </div>
+  <% end %>
+
+  <div class="cards mt-1/2">
+    <% @collection.posts.visible?.where.not(id: @post.id).limit(6).each do |post| %>
       <%= render "posts/card", post: post %>
     <% end %>
   </div>
 
-  <% if @post.collection.posts.visible?.where.not(id: @post.id).size > 9 %>
-    <small class="mt-1/2 mr-1/4"><em><%= "And #{ @post.collection.posts.visible?.where.not(id: @post.id).size - 9 } more..." %></em></small>
+  <% if @collection.posts.length > 6 %>
+    <center class="mt-1/2"><big>
+      This collection contains <%= @collection.posts.length - 6 %> more code<%= "s" if @collection.posts.length - 6 > 1 %>
+    </big></center>
   <% end %>
 
-  <%= link_to "View collection", collection_path(@post.collection.nice_url), class: "button button--dark button--small mt-1/2" %>
+  <center>
+    <%= link_to "View full collection", collection_path(@collection.nice_url), class: "button button--ghost #{@collection.posts.length > 6 ? "mt-1/4" : "mt-1/2" }" %>
+  </center>
 </section>
