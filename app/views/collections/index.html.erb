@@ -1,9 +1,9 @@
 <% content_for :page_title, "Collections" %>
 
-<%= render "layouts/account", title: "Collections" do %>
-  <%= render(@collections) || "You have not yet created any collections." %>
+<div class="header top-offset mb-1/2">
+  <h1>All <strong>collections</strong></h1>
+</div>
 
-  <hr class="mt-1/2 mb-1/2" />
-
-  <%= link_to "New collection", new_collection_path, class: "button" %>
-<% end %>
+<div class="cards">
+  <%= render collection: @collections, partial: "collections/collection_card", as: :collection %>
+</div>

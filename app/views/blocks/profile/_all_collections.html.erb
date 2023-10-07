@@ -1,13 +1,7 @@
 <h2>Collections made by <%= tag.strong @user.clean_username %></h2>
 
 <div class="cards">
-  <% @user.collections.each do |collection| %>
-    <div class="card">
-      <%= link_to collection.title, collection_path(collection.nice_url), class: "card__title" %>
-
-      <%= link_to "View collection", collection_path(collection.nice_url), class: "button button--secondary mt-1/8" %>
-    </div>
-  <% end %>
+  <%= render collection: @user.collections, partial: "collections/collection_card", as: :collection %>
 </div>
 
 <%= tag.em "#{ @user.clean_username } has not yet created any collections" if @user.collections.none? %>

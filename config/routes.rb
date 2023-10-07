@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     get "account(/page/:page)", to: "users#show", as: "account"
     get "account/edit", to: "users#edit", as: "edit_user"
     get "account/posts", to: "users#posts", as: "account_posts"
+    get "account/collections", to: "users#collections", as: "account_collections"
     get "favorites", to: "users#favorites", as: "account_favorites"
     patch "user", to: "users#update", as: "update_user"
     delete "user", to: "users#destroy", as: "destroy_user"
@@ -133,7 +134,8 @@ Rails.application.routes.draw do
     get "get-verified-users", to: "filter#get_verified_users"
     get "overwatch-2", to: redirect("/", status: 301)
 
-    resources :collections, path: "c", param: :nice_url, concerns: :paginatable
+    get "collections", to: "collections#index", as: "collections_index"
+    resources :collections, path: "c", param: :nice_url, concerns: :paginatable, except: [:index]
     get "c/:nice_url(/page/:page)", to: "collections#show"
     get "c/partial/:id", to: "collections#partial", as: "collection_partial"
 
