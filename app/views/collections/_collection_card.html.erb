@@ -1,4 +1,7 @@
 <div class="card">
   <%= link_to collection.title, collection_path(collection.nice_url), class: "card__title" %>
-  <%= link_to "View collection", collection_path(collection.nice_url), class: "button button--secondary mt-1/8" %>
+  <small class="text-dark">
+    <%= collection.posts.size %> codes
+  </small>
+  <%= link_to "View collection", collection_path(collection.nice_url), class: "button button--secondary mt-1/4" %>
 </div>

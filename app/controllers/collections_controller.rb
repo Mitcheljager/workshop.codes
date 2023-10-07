@@ -91,12 +91,14 @@ class CollectionsController < ApplicationController
     posts = current_user.posts.where(id: new_ids)
     posts.each do |post|
       post.update_column(:collection_id, @collection.id)
+      Collection.increment_counter(:posts_count, @collection.id)
     end
 
     removed_ids = initial_ids - current_ids
     posts = current_user.posts.where(id: removed_ids)
     posts.each do |post|
       post.update_column(:collection_id, nil)
+      Collection.decrement_counter(:posts_count, @collection.id)
     end
   end
 

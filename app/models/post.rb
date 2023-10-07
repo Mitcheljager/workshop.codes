@@ -86,7 +86,7 @@ class Post < ApplicationRecord
   MAX_SOURCES = 5
 
   belongs_to :user
-  belongs_to :collection, optional: true
+  belongs_to :collection, optional: true, counter_cache: true
 
   has_many :favorites, dependent: :destroy
   has_many :revisions, -> { select("created_at", "updated_at", "post_id", "id", "version", "code", "description") }, dependent: :destroy

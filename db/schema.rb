@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_05_181808) do
+ActiveRecord::Schema.define(version: 2023_10_07_201634) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 2023_10_05_181808) do
     t.string "nice_url"
     t.text "description"
     t.integer "display_type", default: 0
+    t.integer "posts_count"
   end
 
   create_table "comments", force: :cascade do |t|
