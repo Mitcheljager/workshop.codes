@@ -24,7 +24,7 @@ class CollectionsController < ApplicationController
     @post = Post.select(:id, :collection_id).includes(:collection).find(params[:id])
     @collection = @post.collection
 
-    render partial: "collections"
+    render partial: "post_collection_posts"
   end
 
   def new
