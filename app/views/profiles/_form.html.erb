@@ -78,7 +78,7 @@
           </p>
 
           <%= hidden_field_tag :remove_profile_image, "", data: { clear_image_flag: "profile-image" } %>
-          <%= button_tag "Remove", type: "button", class: "mt-1/4 button button--small",
+          <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
                              data: { action: "clear-image", target: "profile-image" }  %>
 
         </div>
@@ -104,7 +104,7 @@
       </p>
 
       <%= hidden_field_tag :remove_banner_image, "", data: { clear_image_flag: "banner" } %>
-      <%= button_tag "Remove", type: "button", class: "mt-1/4 button button--small",
+      <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
                           data: { action: "clear-image", target: "banner" }  %>
     </div>
 
