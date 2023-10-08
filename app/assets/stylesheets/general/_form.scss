@@ -170,6 +170,7 @@
 
     &:checked {
       background: linear-gradient($text-color, $text-color);
+      color: $black;
     }
   }
 }
