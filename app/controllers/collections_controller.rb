@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @collections = current_user.collections.order(created_at: :desc)
+    @collections = Collection.includes(:posts).where("posts_count > ?", 0).order(created_at: :desc).limit(20)
   end
 
   def show
@@ -58,6 +58,10 @@ class CollectionsController < ApplicationController
     param_ids = (collection_params[:collection_posts] || []).map { |id| id.to_i }
 
     if @collection.update(collection_params)
+      if (params[:remove_cover_image].present?)
+        @collection.cover_image.purge
+      end
+
       if (initial_ids != param_ids)
         set_collection_id_for_posts(param_ids, initial_ids)
       end
@@ -91,12 +95,14 @@ class CollectionsController < ApplicationController
     posts = current_user.posts.where(id: new_ids)
     posts.each do |post|
       post.update_column(:collection_id, @collection.id)
+      Collection.increment_counter(:posts_count, @collection.id)
     end
 
     removed_ids = initial_ids - current_ids
     posts = current_user.posts.where(id: removed_ids)
     posts.each do |post|
       post.update_column(:collection_id, nil)
+      Collection.decrement_counter(:posts_count, @collection.id)
     end
   end
 

@@ -43,14 +43,18 @@
 
         <div class="cover-image well well--dark block">
           <%= image_tag (@collection.cover_image.attached? ? rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) : "//:0"),
-                        data: { image_preview: "cover-image" },
+                        data: { image_preview: "cover" },
                         class: "img-fluid" %>
         </div>
 
         <%= form.file_field :cover_image,
                             accept: "image/png, image/jpeg, image/jpg",
                             direct_upload: true,
-                            data: { action: "image-preview", target: "cover-image" } %>
+                            data: { action: "image-preview", target: "cover" } %>
+
+        <%= hidden_field_tag :remove_cover_image, "", data: { clear_image_flag: "cover" } %>
+        <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
+                            data: { action: "clear-image", target: "cover" }  %>
 
         <p class="form-hint mt-1/4 mb-0">
           Image will be processed to a 900x500 format. Max 2MB.

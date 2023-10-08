@@ -1,4 +1,6 @@
 <%= render "layouts/account", title: "Edit collection" do %>
+  <%= link_to "View collection", collection_path(@collection.nice_url), class: "button button--secondary mb-1/4" %>
+
   <%= render "form", url: collection_path(@collection.nice_url) %>
 
   <% if @collection.posts.none? %>
