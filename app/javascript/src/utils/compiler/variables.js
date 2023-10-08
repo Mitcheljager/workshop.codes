@@ -43,6 +43,25 @@ export function getDefaultVariableNameIndex(name) {
   return index - 1
 }
 
+/**
+ * Exclude variables that would already be defined by default.
+ *
+ * For example, the following would fail because Overwatch already declares "B" at index 1 by default:
+ * ```
+ *   global:
+ *     0: B
+ * ```
+ *
+ * On the other hand, the following would not fail because the variable name at index 1 was overwritten:
+ * ```
+ *   global:
+ *     0: B
+ *     1: someNameThatIsNotJustB
+ * ```
+ *
+ * @param {string[]} variables A list of variables
+ * @returns {string[]} The list of variables without
+ */
 export function excludeDefaultVariableNames(variables) {
   let removedCount = 0
   return variables.filter((name) => {
