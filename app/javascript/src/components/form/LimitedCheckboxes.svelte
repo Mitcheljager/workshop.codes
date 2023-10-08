@@ -4,6 +4,8 @@
   export let selected = []
   export let limit = 3
 
+  const key = Math.random().toString().substr(2, 8)
+
   /**
    * Add the selected option to the list of selected options.
    * If you select more than the given limit the first item will be replaced with the new one.
@@ -13,7 +15,7 @@
    */
   function bind(checked, value) {
     if (!checked) {
-      selected = selected?.filter(o => o !== value)
+      selected = selected?.filter(o => o.toString() !== value.toString())
       return
     }
 
@@ -30,7 +32,7 @@
    * @param {string} value The given value to use for the id
    */
   function getId(value) {
-    return (name + "_" + value).toLowerCase()
+    return (name + "_" + value + "_" + key).toLowerCase()
       .replace("[", "_")
       .replace(/\[|\]/g, "")
       .replace(" ", "_")
@@ -45,7 +47,7 @@
         {name}
         {value}
         id={getId(value)}
-        checked={selected?.some(o => o === value)}
+        checked={(selected || []).some(o => o.toString() === value.toString())}
         on:change={({ target: { checked } }) => bind(checked, value)} />
 
       <label class="w-100" for={getId(value)}>{label}</label>
