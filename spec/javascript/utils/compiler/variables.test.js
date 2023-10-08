@@ -261,30 +261,38 @@ describe("variables.js", () => {
 
     test("Should exclude default variables if their index is different from the default", () => {
       const input = `
-        Global.variable;
         Global.A;
+        Global.variable;
+        Global.B;
+        Global.Z;
+        Global.AA;
         Global.DX;
         Global.DY;
-        Global.ZZ;
 
-        Event Player.variable;
         Event Player.A;
+        Event Player.variable;
+        Event Player.B;
+        Event Player.Z;
+        Event Player.AA;
         Event Player.DX;
         Event Player.DY;
-        Event Player.ZZ;
       `
       const expectedOutput = `
         variables {
           global:
-            0: variable
-            1: A
-            2: DY
-            3: ZZ
+            0: A
+            1: variable
+            2: B
+            3: AA
+            4: DX
+            5: DY
           player:
-            0: variable
-            1: A
-            2: DY
-            3: ZZ
+            0: A
+            1: variable
+            2: B
+            3: AA
+            4: DX
+            5: DY
         }\n\n
       `
       expect(disregardWhitespace(compileVariables(input))).toBe(disregardWhitespace(expectedOutput))
@@ -292,35 +300,71 @@ describe("variables.js", () => {
   })
 
   describe("excludeDefaultVariableNames", () => {
-    test("Should exclude single letter variables if their index is different from the default", () => {
+    test("Should not exclude A as it is at its default index (0)", () => {
       const input = [
-        "A",
-        "variable",
-        "Z",
-        "B"
+        "A"
       ]
       const expectedOutput = [
-        "A",
-        "variable",
-        "B"
+        "A"
       ]
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
 
-    test("Should exclude double letter variables if their index is different from the default", () => {
+    test("Should not exclude A as the variable at the default index of A (0) was already defined with another name", () => {
       const input = [
-        ... (new Array(100).fill("ignore me")),
-        "DW",
-        "DX",
-        "DY",
-        "DZ",
-        "ZZ"
+        "someNameThatIsNotA",
+        "A"
       ]
       const expectedOutput = [
-        ... (new Array(100).fill("ignore me")),
-        "DY",
-        "DZ",
-        "ZZ"
+        "someNameThatIsNotA",
+        "A"
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should exclude B as there aren't enough variables to reach the default index of B (1)", () => {
+      const input = [
+        "B"
+      ]
+      const expectedOutput = [
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should exclude Z as there is no variable at the default index of Z (25)", () => {
+      const input = [
+        "someVar1",
+        "someVar2",
+        "Z",
+        "someVar3",
+        "someVar4"
+      ]
+      const expectedOutput = [
+        "someVar1",
+        "someVar2",
+        "someVar3",
+        "someVar4",
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should exclude C and D as there are no variable at their default indices", () => {
+      const input = [
+        "C",
+        "D"
+      ]
+      const expectedOutput = [
+        // None
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should not exclude AA as its default index (26) is past the max initial variable indices (up to 25)", () => {
+      const input = [
+        "AA"
+      ]
+      const expectedOutput = [
+        "AA"
       ]
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })

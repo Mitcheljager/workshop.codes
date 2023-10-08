@@ -19,7 +19,7 @@ const possiblePlayerVariablesRegex = /(?<![^\w.]Global)\.(?<variableName>[A-Za-z
 
 const invalidVariablePrefixRegex = /(?:^|(?:^|[^\w.])(?:\d+|D)|[^A-Za-z0-9_)\]])$/
 
-const maxVariableCount = 128
+const maxInitialVariableCount = 26 // A to Z
 const maxVariableNameLength = 32
 
 const actionsDefiningVariablesRegex = /(?:(?:Set|Modify) (?:Global|Player) Variable(?: At Index)?|For (?:Global|Player) Variable|Chase (?:Global|Player) Variable (?:Over Time|At Rate))\(/g
@@ -43,14 +43,61 @@ export function getDefaultVariableNameIndex(name) {
   return index - 1
 }
 
+/**
+ * Exclude variables that would already be defined by default.
+ *
+ * For example, the following would fail because Workshop already declares "B"
+ * at index 1 by default:
+ * ```
+ *   global:
+ *     0: B // error: B is already declared at index 1
+ * ```
+ *
+ * On the other hand, the following would not fail because the variable name at
+ * index 1 was overwritten:
+ * ```
+ *   global:
+ *     0: B // this is fine because we overwrite the name at index 1
+ *     1: someNameThatIsNotJustB
+ * ```
+ *
+ * Anything past Z (AA, AB, ..., DY, DX) should not be excluded as in the
+ * in-game editor these variables can be added dynamically.
+ * So in the following examples, Workshop doesn't complain if we map a variable
+ * with the same name:
+ * ```
+ *   global:
+ *     0: A
+ *     1: B
+ *     // ...
+ *     25: Z
+ *     26: AZ // this is fine because index 51 (what would be AZ) hasn't been mapped by Workshop yet
+ * ```
+ *
+ * ```
+ *   global:
+ *     0: A
+ *     1: B
+ *     // ...
+ *     25: Z
+ *     26: AZ // this is also fine, because we rename index 51 (what would be AZ)
+ *     // ...
+ *     50: AY
+ *     51: someNameThatIsNotJustAZ
+ *     52: BA
+ * ```
+ *
+ * @param {string[]} variables A list of variables
+ * @returns {string[]} The list of variables without
+ */
 export function excludeDefaultVariableNames(variables) {
   let removedCount = 0
   return variables.filter((name) => {
     const defaultIndex = getDefaultVariableNameIndex(name)
     if (
       defaultIndex >= 0 &&
-      defaultIndex < maxVariableCount &&
-      defaultIndex > (variables.length - removedCount)) {
+      defaultIndex < maxInitialVariableCount &&
+      defaultIndex >= (variables.length - removedCount)) {
       removedCount++
       return false
     }
