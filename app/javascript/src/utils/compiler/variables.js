@@ -50,7 +50,7 @@ export function excludeDefaultVariableNames(variables) {
     if (
       defaultIndex >= 0 &&
       defaultIndex < maxVariableCount &&
-      defaultIndex > (variables.length - removedCount)) {
+      defaultIndex >= (variables.length - removedCount)) {
       removedCount++
       return false
     }
