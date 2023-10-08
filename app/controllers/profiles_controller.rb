@@ -40,8 +40,8 @@ class ProfilesController < ApplicationController
   def update
     begin
       @user = current_user
-      User.transaction do
 
+      User.transaction do
         if profile_params[:featured_posts] == nil
           @user.featured_posts = ""
         end
@@ -49,6 +49,7 @@ class ProfilesController < ApplicationController
         if (params[:remove_profile_image].present?)
           @user.profile_image.purge
         end
+
         if (params[:remove_banner_image].present?)
           @user.banner_image.purge
         end
