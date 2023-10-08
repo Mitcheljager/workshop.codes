@@ -44,6 +44,6 @@ def compress_visits
   @statistic.save
 
   collection_visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Collection Visit").distinct.pluck(:visit_id, :properties).count
-  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_collection_visit, on_date: Date.today, value: visit_count)
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_collection_visit, on_date: Date.today, value: collection_visit_count)
   @statistic.save
 end
