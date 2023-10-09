@@ -11,9 +11,10 @@ import LimitedCheckboxes from "../src/components/form/LimitedCheckboxes.svelte"
 import TagsForm from "../src/components/form/Tags.svelte"
 import DerivativesForm from "../src/components/form/Derivatives.svelte"
 import Notifications from "../src/components/Notifications.svelte"
+import Ollie from "../src/components/Ollie.svelte"
 import { LinkedChart, LinkedLabel } from "svelte-tiny-linked-charts"
 
-WebpackerSvelte.setup({ Alerts, Dropzone, ControlsForm, SnippetForm, LimitedCheckboxes, TagsForm, DerivativesForm, Notifications, LinkedChart, LinkedLabel })
+WebpackerSvelte.setup({ Alerts, Dropzone, ControlsForm, SnippetForm, LimitedCheckboxes, TagsForm, DerivativesForm, Notifications, LinkedChart, LinkedLabel, Ollie })
 
 import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"

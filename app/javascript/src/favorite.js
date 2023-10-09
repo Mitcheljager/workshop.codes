@@ -22,6 +22,9 @@ async function favorite(event) {
   eventTarget.classList.toggle("favorite--animating", !active)
 
   new FetchRails("/favorites", body).post({ method: active ? "delete" : "post" })
+    .then(() => {
+      if (!active) window.dispatchEvent(new CustomEvent("favorite"))
+    })
     .catch(() => {
       imageElement.src = !active ? eventTarget.dataset.inactiveIcon : eventTarget.dataset.activeIcon
       eventTarget.classList.toggle("favorite--is-active", active)
