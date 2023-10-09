@@ -10,8 +10,6 @@
     if (active) return
     const random = Math.random() * 100
 
-    console.log(random)
-
     if (random > chance) return
 
     active = true
