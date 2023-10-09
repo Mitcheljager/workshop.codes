@@ -19,6 +19,7 @@ import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"
 import * as chart from "../src/chart"
 import * as checkboxSelectAll from "../src/checkbox-select-all"
+import * as favorite from "../src/favorite"
 import * as getPostAnalytics from "../src/get-post-analytics"
 import * as getUserAnalytics from "../src/get-user-analytics"
 import * as ide from "../src/ide"
@@ -31,6 +32,7 @@ document.addEventListener("turbolinks:load", function() {
   applyCustomCss.bind()
   blocks.bind()
   checkboxSelectAll.bind()
+  favorite.bind()
   getPostAnalytics.bind()
   getUserAnalytics.bind()
   setCssVariable.bind()
