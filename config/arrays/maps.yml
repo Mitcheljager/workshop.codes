@@ -186,8 +186,17 @@
     ko: 쟁탈
   slug: oasis
 -
+  en: Samoa
+  ko: 사모아
+  overwatch_2: true
+  type:
+    en: Control
+    ko: 쟁탈
+  slug: samoa
+-
   en: Talantis
   ko: 탈란티스
+  overwatch_2: true
   type:
     en: Control
     ko: 쟁탈
@@ -298,6 +307,7 @@
 -
   en: Estádio Dos Gorilas
   ko: 도스 고릴라스 스타디움
+  overwatch_2: true
   type:
     en: Winston's Beach Volleyball
     ko: 윈스턴의 비치 발리볼
