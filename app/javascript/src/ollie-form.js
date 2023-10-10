@@ -6,6 +6,7 @@ export function bind() {
   const usernameInput = element.querySelector("input[name='username']")
   usernameInput.removeAndAddEventListener("input", event => setPupilPosition(event, element))
   usernameInput.removeAndAddEventListener("focus", event => setPupilPosition(event, element))
+  usernameInput.removeAndAddEventListener("focus", () => setOllieBody(element, "base"))
   usernameInput.removeAndAddEventListener("blur", () => resetPupilPosition(element))
 
   const passwordInput = element.querySelector("input[type='password']")
@@ -37,6 +38,7 @@ function getOlliePart(element, part) {
 function setOllieBody(element, variant = "base") {
   const base = getOlliePart(element, "body-base")
   const happy = getOlliePart(element, "body-happy")
+  const suspicious = getOlliePart(element, "body-suspicious")
   const eyesClosed = getOlliePart(element, "body-eyes-closed")
   const eyesClosedHappy = getOlliePart(element, "body-eyes-closed-happy")
   const pupils = getOlliePart(element, "pupils")
@@ -47,6 +49,7 @@ function setOllieBody(element, variant = "base") {
 
   base.classList.toggle("hidden", !(variant === "base" && !rememberMe))
   happy.classList.toggle("hidden", !(variant === "base" && rememberMe))
+  suspicious.classList.add("hidden")
   eyesClosed.classList.toggle("hidden", !(variant === "eyes-closed" && !rememberMe))
   eyesClosedHappy.classList.toggle("hidden", !(variant === "eyes-closed" && rememberMe))
   pupils.classList.toggle("hidden", variant === "eyes-closed")
