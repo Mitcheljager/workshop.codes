@@ -101,7 +101,7 @@
   transition: transform 200ms;
 
   &.out-of-view {
-    transform: rotate(30deg) translateY(100%);
+    transform: rotate(30deg) translateY(110%);
   }
 }
 
@@ -114,6 +114,6 @@
   transition: transform 200ms;
 
   &.out-of-view {
-    transform: rotate(-30deg) translateY(100%);
+    transform: rotate(-30deg) translateY(110%);
   }
 }
