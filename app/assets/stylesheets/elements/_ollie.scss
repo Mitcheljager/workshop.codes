@@ -1,0 +1,119 @@
+@keyframes ollie-fly-by {
+  from {
+    transform: translateX(-100%) translateY(50%);
+    bottom: 0;
+    left: 0;
+  }
+
+  to {
+    transform: translateX(100%) translateY(-50%);
+    bottom: 100%;
+    left: 100%;
+  }
+}
+
+@keyframes ollie-heart {
+  0%, 100% {
+    transform: translateY(100%);
+  }
+
+  40%, 60% {
+    transform: translateY(0);
+  }
+}
+
+.ollie-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+
+  @media (prefers-reduced-motion) {
+    display: none;
+  }
+}
+
+.ollie-fly-by {
+  img {
+    position: absolute;
+    animation: ollie-fly-by 1500ms cubic-bezier(0, 1, 1, 0) forwards;
+    z-index: 100;
+  }
+
+  .confetti-holder {
+    position: fixed !important;
+    top: auto;
+    left: -50px;
+    bottom: -50px;
+    z-index: 1;
+  }
+}
+
+.ollie-heart {
+  img {
+    position: absolute;
+    right: 50px;
+    bottom: -10px;
+    animation: ollie-heart 1500ms forwards;
+    z-index: 100;
+  }
+}
+
+.ollie-login {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  padding: $margin / 4;
+  border-radius: 50%;
+  border: 3px solid lighten($border-color, 10%);
+  background: lighten($bg-dark, 5%);
+  overflow: hidden;
+}
+
+.ollie-login__body {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 80px;
+  height: auto;
+  z-index: 1;
+}
+
+.ollie-login__pupils {
+  position: absolute;
+  bottom: 50px;
+  left: 27px;
+  width: 25px;
+  height: auto;
+  transition: transform 50ms;
+  z-index: 2;
+}
+
+.ollie-login__arm-left {
+  position: absolute;
+  bottom: 1px;
+  left: 9px;
+  width: 28px;
+  z-index: 5;
+  transition: transform 200ms;
+
+  &.out-of-view {
+    transform: rotate(30deg) translateY(100%);
+  }
+}
+
+.ollie-login__arm-right {
+  position: absolute;
+  bottom: 8px;
+  left: 42px;
+  width: 41px;
+  z-index: 5;
+  transition: transform 200ms;
+
+  &.out-of-view {
+    transform: rotate(-30deg) translateY(100%);
+  }
+}
