@@ -45,8 +45,6 @@ function setOllieBody(element, variant = "base") {
 
   const rememberMe = element.querySelector("input[type='checkbox'][name='remember_me']").checked
 
-  console.log(rememberMe)
-
   base.classList.toggle("hidden", !(variant === "base" && !rememberMe))
   happy.classList.toggle("hidden", !(variant === "base" && rememberMe))
   eyesClosed.classList.toggle("hidden", !(variant === "eyes-closed" && !rememberMe))
