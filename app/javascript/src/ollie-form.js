@@ -19,7 +19,7 @@ export function bind() {
 function setPupilPosition({ target }, element) {
   const max = 32
   const valueLength = Math.min(max, Math.max(0, target.value.length))
-  const xOffset = -1 + (valueLength / 16) * 2
+  const xOffset = -1 + (valueLength / (max / 2)) * 2
 
   const pupils = getOlliePart(element, "pupils")
   pupils.style.transform = `translateX(${ xOffset }px) translateY(1px)`
