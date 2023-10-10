@@ -1,4 +1,4 @@
-@keyframes ollie-animation {
+@keyframes ollie-fly-by {
   from {
     transform: translateX(-100%) translateY(50%);
     bottom: 0;
@@ -9,6 +9,16 @@
     transform: translateX(100%) translateY(-50%);
     bottom: 100%;
     left: 100%;
+  }
+}
+
+@keyframes ollie-heart {
+  0%, 100% {
+    transform: translateY(100%);
+  }
+
+  40%, 60% {
+    transform: translateY(0);
   }
 }
 
@@ -23,10 +33,12 @@
   @media (prefers-reduced-motion) {
     display: none;
   }
+}
 
+.ollie-fly-by {
   img {
     position: absolute;
-    animation: ollie-animation 1500ms cubic-bezier(0,1,1,0) forwards;
+    animation: ollie-fly-by 1500ms cubic-bezier(0, 1, 1, 0) forwards;
     z-index: 100;
   }
 
@@ -36,5 +48,15 @@
     left: -50px;
     bottom: -50px;
     z-index: 1;
+  }
+}
+
+.ollie-heart {
+  img {
+    position: absolute;
+    right: 50px;
+    bottom: -10px;
+    animation: ollie-heart 1500ms forwards;
+    z-index: 100;
   }
 }

@@ -52,6 +52,6 @@
 
     <%= render "body_bg" unless is_wiki? %>
 
-    <%= svelte_component "Ollie", { image: image_path("ollie/ollie-float.png") } if current_user.present? %>
+    <%= svelte_component "Ollie", { imageFlyBy: image_path("ollie/ollie-float.png"), imageHeart: image_path("ollie/ollie-heart.png") } if current_user.present? %>
   </body>
 </html>
