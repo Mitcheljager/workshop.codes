@@ -1,7 +1,7 @@
 <script>
   import { Confetti } from "svelte-confetti"
 
-  export let chance = 10
+  export let chance = 5
   export let imageFlyBy = ""
   export let imageHeart = ""
 
