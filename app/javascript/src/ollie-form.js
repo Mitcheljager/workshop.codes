@@ -63,8 +63,6 @@ function loadImagesSimultaniously() {
   const element = document.querySelector("[data-role='ollie-image-holder']")
   const images = element.querySelectorAll("img")
 
-  console.log(images)
-
   let imagesLoaded = 0
   images.forEach(image => {
     if (image.complete) {
