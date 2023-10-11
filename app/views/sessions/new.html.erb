@@ -11,8 +11,10 @@
 
     <div class="well well--dark">
       <div class="w-100">
-        <%= form_with url: sessions_path do |form| %>
-          <div class="form-group">
+        <%= form_with url: sessions_path, data: { role: "ollie-form" } do |form| %>
+          <%= render "ollie" %>
+
+          <div class="form-group mt-1/8">
             <%= form.label :username, t("sessions.login.username"), class: "form-label" %>
             <%= form.text_field :username, placeholder: t("sessions.login.username"), class: "form-input" %>
           </div>

@@ -30,6 +30,7 @@ import * as microlight from "../src/microlight"
 import * as modal from "../src/modal"
 import * as navigation from "../src/navigation"
 import * as numPlayersSlider from "../src/num-players-slider"
+import * as ollieForm from "../src/ollie-form"
 import * as revealByCheckbox from "../src/reveal-by-checkbox"
 import * as revealBySelect from "../src/reveal-by-select"
 import * as revealOnDifference from "../src/reveal-on-difference"
@@ -58,6 +59,7 @@ document.addEventListener("turbolinks:load", function() {
   lazyVideo.bind()
   modal.bind()
   navigation.bind()
+  ollieForm.bind()
   revealByCheckbox.bind()
   revealBySelect.bind()
   revealOnDifference.bind()
