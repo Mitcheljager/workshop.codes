@@ -99,6 +99,7 @@ $ollie-login-size: 100px;
   bottom: $ollie-login-size * 0.48;
   left: $ollie-login-size * 0.24;
   width: $ollie-login-size * 0.33;
+  box-shadow: $ollie-login-size * 0.05 0 0 white;
   height: auto;
   transition: transform 50ms;
   z-index: 0;
