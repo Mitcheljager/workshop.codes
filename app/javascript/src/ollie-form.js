@@ -3,6 +3,8 @@ export function bind() {
 
   if (!element) return
 
+  loadImagesSimultaniously()
+
   const usernameInput = element.querySelector("input[name='username']")
   usernameInput.removeAndAddEventListener("input", event => setPupilPosition(event, element))
   usernameInput.removeAndAddEventListener("focus", event => setPupilPosition(event, element))
@@ -55,4 +57,25 @@ function setOllieBody(element, variant = "base") {
   pupils.classList.toggle("hidden", variant === "eyes-closed")
   armLeft.classList.toggle("out-of-view", variant !== "eyes-closed")
   armRight.classList.toggle("out-of-view", variant !== "eyes-closed")
+}
+
+function loadImagesSimultaniously() {
+  const element = document.querySelector("[data-role='ollie-image-holder']")
+  const images = element.querySelectorAll("img")
+
+  console.log(images)
+
+  let imagesLoaded = 0
+  images.forEach(image => {
+    if (image.complete) {
+      imagesLoaded++
+      if (imagesLoaded === images.length) element.classList.add("ollie-login__images--loaded")
+      return
+    }
+
+    image.removeAndAddEventListener("load", () => {
+      imagesLoaded++
+      if (imagesLoaded === images.length) element.classList.add("ollie-login__images--loaded")
+    })
+  })
 }
