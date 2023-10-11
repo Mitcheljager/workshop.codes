@@ -2,10 +2,11 @@
 <link rel="preload" as="image" href="<%= image_path "ollie/login/ollie-happy.png" %>">
 <link rel="preload" as="image" href="<%= image_path "ollie/login/ollie-eyes-closed.png" %>">
 <link rel="preload" as="image" href="<%= image_path "ollie/login/ollie-eyes-closed-happy.png" %>">
+<link rel="preload" as="image" href="<%= image_path "ollie/login/ollie-suspicious.png" %>">
 <link rel="preload" as="image" href="<%= image_path "ollie/login/ollie-pupils.png" %>">
 
 <div class="ollie-login">
-  <div class="ollie-login__images" data-role="ollie-image-holder">
+  <div class="ollie-login__images <%= "ollie-login__images--loaded" if flash[:alert] %>" data-role="ollie-image-holder">
     <%= image_tag "ollie/login/ollie-smile.png", class: "ollie-login__body", data: { ollie: "body-base" } %>
     <%= image_tag "ollie/login/ollie-happy.png", class: "ollie-login__body hidden", data: { ollie: "body-happy" } %>
     <%= image_tag "ollie/login/ollie-eyes-closed.png", class: "ollie-login__body hidden", data: { ollie: "body-eyes-closed" } %>
