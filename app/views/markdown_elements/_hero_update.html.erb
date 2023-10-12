@@ -1,0 +1,39 @@
+<div class="update-notes" id="<%= hero %>">
+  <% if hero.present? %>
+    <div class="update-notes__header">
+      <div class="update-notes__icon">
+        <% begin %>
+          <%= image_tag hero_name_to_icon_url(hero, 256), loading: "lazy" %>
+        <% rescue; end %>
+      </div>
+
+      <h5 class="update-notes__title"><%= hero %></h5>
+    </div>
+  <% end %>
+
+  <div class="update-notes__body">
+    <% if description.present? %>
+      <div class="update-notes__description">
+        <%= description %>
+      </div>
+    <% end %>
+
+    <% if abilities.present? %>
+      <div class="update-notes__list">
+        <% abilities.each do |key, strings| %>
+          <div class="update-notes__item">
+            <div>
+              <div class="update-notes__name"><%= key %></div>
+
+              <ul class="update-notes__changes">
+                <% strings.each do |string| %>
+                  <li><%= string %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

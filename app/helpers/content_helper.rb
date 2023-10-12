@@ -78,6 +78,7 @@ module ContentHelper
     text = markdown_video(text)
     text = markdown_gallery(text)
     text = markdown_hero_icon(text)
+    text = markdown_hero_update(text)
     text = markdown.render(text)
 
     content = markdown_post_block(text).html_safe
@@ -155,8 +156,54 @@ module ContentHelper
     end
   end
 
+  def markdown_hero_update(text)
+    text.gsub /\[update\s+{(.*?)}\]/m do
+      begin
+        data = extract_update_data($1)
+
+        hero = data[:hero]
+        description = data[:description]
+        abilities = data[:abilities]
+
+        if action_name == "parse_markdown"
+          render_to_string partial: "markdown_elements/hero_update", locals: { hero: hero, description: description, abilities: abilities }
+        else
+          render partial: "markdown_elements/hero_update", locals: { hero: hero, description: description, abilities: abilities }
+        end
+      rescue
+        "<em>An error was found in the Hero Update markdown</em>"
+      end
+    end
+  end
+
+  def extract_update_data(input)
+    data = {}
+
+    input.scan(/(\w+):\s*"([^"]*)"/) do |key, value|
+      data[key.to_sym] = value
+    end
+
+    abilities_match = input.match(/abilities:\s*{(.*?)}/m)
+    if abilities_match
+      abilities_data = extract_abilities_data(abilities_match[1])
+      data[:abilities] = abilities_data
+    end
+
+    data
+  end
+
+  def extract_abilities_data(input)
+    abilities_data = {}
+
+    input.scan(/"([^"]+)"\s*:\s*\[([^\]]+)\]/) do |ability, changes|
+      abilities_data[ability] = changes.split(",").map { |change| change.strip.gsub(/"([^"]*)"/, "\\1").strip }
+    end
+
+    abilities_data
+  end
+
   def hero_name_to_icon_url(hero, size = 50)
-    "heroes/50/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
+    "heroes/#{ size }/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
   end
 
   def sanitized_markdown(text, rendererOptions: {})
