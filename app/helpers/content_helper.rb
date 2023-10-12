@@ -195,8 +195,25 @@ module ContentHelper
   def extract_abilities_data(input)
     abilities_data = {}
 
-    input.scan(/"([^"]+)"\s*:\s*\[([^\]]+)\]/) do |ability, changes|
-      abilities_data[ability] = changes.split(",").map { |change| change.strip.gsub(/"([^"]*)"/, "\\1").strip }
+    input.scan(/"([^"]+)"\s*:\s*\[([^]]+)\]/) do |ability, notes|
+      notes_array = []
+      in_quoted_string = false
+      current_note = ""
+
+      notes_text = notes.strip.gsub(/^,/, "")
+      notes_text.each_char do |char|
+        if char == "\""
+          in_quoted_string = !in_quoted_string
+        elsif char == "," && !in_quoted_string
+          notes_array << current_note.strip
+          current_note = ""
+        else
+          current_note += char
+        end
+      end
+
+      notes_array << current_note.strip
+      abilities_data[ability] = notes_array
     end
 
     abilities_data
