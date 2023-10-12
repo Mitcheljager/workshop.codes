@@ -1,5 +1,8 @@
+<% errors = @post.errors %>
+<% errors = errors.copy!(@revision.errors) if @revision.present? %>
+
 (() => {
-  <% if @post.errors.any? %>
+  <% if errors.any? %>
     const errorBlock = document.querySelector(".error-block")
     if (errorBlock) errorBlock.remove()
     document.querySelectorAll(".field_with_errors").forEach(element => element.classList.remove("field_with_errors"))
@@ -9,7 +12,7 @@
     document.querySelector("[data-role~='post-form']").insertAdjacentHTML("afterBegin", "<%= j render "form_errors", errors: @post.errors %>")
 
     let elements;
-    <% @post.errors.each do |error| %>
+    <% errors.each do |error| %>
       elements = document.querySelectorAll("[name*='post[<%= error.attribute %>]']")
       elements.forEach(element => {
         const formGroup = element.closest("[class^='form-group']")
