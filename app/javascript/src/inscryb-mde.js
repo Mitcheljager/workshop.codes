@@ -187,8 +187,8 @@ class InitialiseInscrybeMDE {
   hero: "Reinhardt",
   description: "A description on why changes were made",
   abilities: {
-    "Change": [
-      "Some change you made to this ability"
+    "Charge": [
+      "Some change you made to this ability",
     ],
     "Firestrike": [
       "Some change you made to this ability",
