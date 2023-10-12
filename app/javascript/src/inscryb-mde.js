@@ -78,6 +78,12 @@ class InitialiseInscrybeMDE {
         title: "Gallery"
       },
       {
+        action: () => this.insertUpdateNotes(),
+        name: "update-notes",
+        className: "fa fa-update-notes",
+        title: "Update Notes"
+      },
+      {
         action: () => this.insertHeroIconSelect(),
         name: "hero-icon",
         className: "fa fa-hero-icon",
@@ -171,6 +177,25 @@ class InitialiseInscrybeMDE {
 
   insertGallery() {
     const output = "[gallery {\n  \"Gallery Item 1\": \"https://\",\n  \"Gallery Item 2\": \"https://\"\n}]"
+
+    this.codemirror.replaceSelection(output)
+  }
+
+  insertUpdateNotes() {
+    const output = `<!-- Update notes are formatted to look like the official patch notes. Replace each value with the hero, ability, or text you want. Each value is optional and can be left out entirely. -->
+[update {
+  hero: "Reinhardt",
+  description: "A description on why changes were made",
+  abilities: {
+    "Change": [
+      "Some change you made to this ability"
+    ],
+    "Firestrike": [
+      "Some change you made to this ability",
+      "Some other change you made to this ability"
+    ]
+  }
+}]`
 
     this.codemirror.replaceSelection(output)
   }
