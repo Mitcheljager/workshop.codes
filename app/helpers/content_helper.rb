@@ -212,7 +212,7 @@ module ContentHelper
         end
       end
 
-      notes_array << current_note.strip
+      notes_array << current_note.strip if current_note.present?
       abilities_data[ability] = notes_array
     end
 
