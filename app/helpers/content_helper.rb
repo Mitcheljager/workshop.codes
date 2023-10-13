@@ -227,6 +227,11 @@ module ContentHelper
     Rails.application.assets.find_asset(string).present? ? string : nil
   end
 
+  def ability_name_to_icon_url(ability, size = 50)
+    string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "") }.png"
+    Rails.application.assets.find_asset(string).present? ? string : nil
+  end
+
   def sanitized_markdown(text, rendererOptions: {})
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),

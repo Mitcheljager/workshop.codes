@@ -190,7 +190,7 @@ class InitialiseInscrybeMDE {
     "Charge": [
       "Some change you made to this ability",
     ],
-    "Firestrike": [
+    "Fire Strike": [
       "Some change you made to this ability",
       "Some other change you made to this ability"
     ]

@@ -45,6 +45,7 @@
   }
 }
 
+
 .update-notes__list {
   margin: 0;
 }
@@ -60,8 +61,8 @@
 }
 
 .update-notes__ability {
-  width: calc(2rem + #{ $margin / 8 });
-  padding: .25rem;
+  width: 40px;
+  padding: $margin / 16;
   margin-right: $margin / 8;
   border: 2px solid $text-color-dark;
 }
