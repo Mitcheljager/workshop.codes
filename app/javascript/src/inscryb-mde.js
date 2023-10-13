@@ -185,6 +185,7 @@ class InitialiseInscrybeMDE {
     const output = `<!-- Update notes are formatted to look like the official patch notes. Replace each value with the hero, ability, or text you want. Each value is optional and can be left out entirely. -->
 [update {
   hero: "Reinhardt",
+  title: "Optional title to change the hero name, remove to default to the hero name",
   description: "A description on why changes were made",
   abilities: {
     "Charge": [

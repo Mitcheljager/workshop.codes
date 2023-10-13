@@ -162,13 +162,14 @@ module ContentHelper
         data = extract_update_data($1)
 
         hero = data[:hero]
+        title = data[:title]
         description = data[:description]
         abilities = data[:abilities]
 
         if action_name == "parse_markdown"
-          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, description: description, abilities: abilities }
+          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
         else
-          render partial: "markdown_elements/update_notes", locals: { hero: hero, description: description, abilities: abilities }
+          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
         end
       rescue => error
         "<em>An error was found in the Hero Update markdown</em>"

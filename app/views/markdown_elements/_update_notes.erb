@@ -9,7 +9,7 @@
         </div>
       <% end %>
 
-      <h5 class="update-notes__title"><%= hero %></h5>
+      <h5 class="update-notes__title"><%= title.present? ? title : hero %></h5>
     </div>
   <% end %>
 
