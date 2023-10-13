@@ -10,6 +10,8 @@ module AssetsHelper
   end
 
   def asset_exists?(path)
+    return unless path.present?
+
     if assets = Rails.application.assets
       asset = assets.find_asset(path)
       return asset.present?
