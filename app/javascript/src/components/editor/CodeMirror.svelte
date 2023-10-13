@@ -66,7 +66,7 @@
   function onStateUpdateEnd() {
     view.setState($editorStates[currentId])
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       updatingState = false
       setScrollPosition()
     })
