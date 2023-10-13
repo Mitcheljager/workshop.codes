@@ -9,7 +9,7 @@
       <div class="item__header">
         <div>
           <%= link_to user_profile_path(@post.user), class: "item__author" do %>
-            <div class="item__avatar <%= "profile-image--empty" unless @post.user.profile_image.attached? || @post.user.provider_profile_image.present? %>">
+            <div class="item__avatar <%= "profile-image--empty" unless @post.user.profile_image.attached? %>">
               <%= render "profiles/image", user: @post.user, size: 32 %>
             </div>
 

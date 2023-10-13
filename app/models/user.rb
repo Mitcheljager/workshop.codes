@@ -110,7 +110,6 @@ class User < ApplicationRecord
     user.username = username
     user.username.gsub!(" ", "-")
     user.username.gsub!(".", "-")
-    user.provider_profile_image = auth_hash["info"]["image"]
     user.password = "no_password"
 
     # If a user logs in with Discord their discrimimator only gets added if

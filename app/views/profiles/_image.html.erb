@@ -3,6 +3,4 @@
     <%= image_tag rails_public_blob_url(user.profile_image.variant(quality: 95, resize_to_fill: [size, size]).processed), loading: "lazy", aria: { label: "Profile image of '#{ user.username }'" }, height: size, width: size %>
   <% rescue %>
   <% end %>
-<% elsif user.provider_profile_image.present? %>
-  <%= image_tag user.provider_profile_image, loading: "lazy", aria: { label: "Profile image of '#{ user.username }'" } %>
 <% end %>
