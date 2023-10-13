@@ -171,7 +171,6 @@ module ContentHelper
           render partial: "markdown_elements/update_notes", locals: { hero: hero, description: description, abilities: abilities }
         end
       rescue => error
-        abort error.inspect
         "<em>An error was found in the Hero Update markdown</em>"
       end
     end
