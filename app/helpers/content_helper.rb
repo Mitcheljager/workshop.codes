@@ -189,12 +189,14 @@ module ContentHelper
 
   def hero_name_to_icon_url(hero, size = 50)
     string = "heroes/#{ size }/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
-    asset_exists?(string) ? string : nil
+    # asset_exists?(string) ? string : nil
+    string
   end
 
   def ability_name_to_icon_url(ability, size = 50)
     string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "") }.png"
-    asset_exists?(string) ? string : nil
+    # asset_exists?(string) ? string : nil
+    string
   end
 
   def sanitized_markdown(text, rendererOptions: {})
