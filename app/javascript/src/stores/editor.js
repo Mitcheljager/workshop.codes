@@ -27,6 +27,7 @@ export const modal = (() => {
 })()
 
 export const editorStates = writable({})
+export const editorScrollPositions = writable({})
 
 export const projects = writable(null)
 export const currentProjectUUID = writable(null)

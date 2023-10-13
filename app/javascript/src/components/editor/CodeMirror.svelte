@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy, onMount, createEventDispatcher } from "svelte"
+  import { onDestroy, onMount, createEventDispatcher, tick } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection } from "@codemirror/state"
@@ -12,7 +12,7 @@
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
-  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
+  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
   import debounce from "../../debounce"
@@ -22,6 +22,7 @@
   let element
   let view
   let currentId
+  let updatingState = false
 
   $: if ($currentProjectUUID) $editorStates = {}
   $: if ($currentItem.id != currentId && view) updateEditorState()
@@ -36,13 +37,15 @@
   onDestroy(() => $editorStates = {})
 
   function updateEditorState() {
+    updatingState = true
+
     if (currentId && !$currentItem.forceUpdate) $editorStates[currentId] = view.state
     if ($currentItem.forceUpdate) $currentItem = { ...$currentItem, forceUpdate: false }
 
     currentId = $currentItem.id
 
     if ($editorStates[currentId]) {
-      view.setState($editorStates[currentId])
+      onStateUpdateEnd()
       return
     }
 
@@ -52,7 +55,21 @@
     })
 
     $editorStates[currentId] = createEditorState($currentItem.content)
+
+    onStateUpdateEnd()
+  }
+
+  /**
+   * This is fired after updateEditorState, after all required bits are set.
+   * Part of this is wrapped in an empty setTimeout to wait for the view state to update.
+   */
+  function onStateUpdateEnd() {
     view.setState($editorStates[currentId])
+
+    requestAnimationFrame(() => {
+      updatingState = false
+      setScrollPosition()
+    })
   }
 
   function createEditorState(content) {
@@ -83,6 +100,7 @@
         basicSetup,
         parameterTooltip(),
         indentationMarkers(),
+        rememberScrollPosition(),
         ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
       ]
     })
@@ -237,9 +255,34 @@
       ])
     })
   }
+
+  /**
+   * Returns a plguin that updates a store of scroll positions when the view is scrolled.
+   * The view is also scrolled when updating the view, but we don't want to store that position.
+   * For this we use the updatingState flag to determine if it was a user scroll or a update scroll.
+   */
+  function rememberScrollPosition(event) {
+    return EditorView.domEventHandlers({
+      scroll(event, view) {
+        if (updatingState) return
+
+        $editorScrollPositions = {
+          ...$editorScrollPositions,
+          [currentId]: view.scrollDOM.scrollTop
+        }
+      }
+    })
+  }
+
+  async function setScrollPosition() {
+    view.scrollDOM.scrollTo({ top: $editorScrollPositions[currentId] || 0 })
+  }
+
 </script>
 
-<svelte:window on:keydown={keydown} on:create-selection={({ detail }) => createSelection(detail)} />
+<svelte:window
+  on:keydown={keydown}
+  on:create-selection={({ detail }) => createSelection(detail)} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div bind:this={element} on:click={click}></div>
