@@ -78,7 +78,7 @@ module ContentHelper
     text = markdown_video(text)
     text = markdown_gallery(text)
     text = markdown_hero_icon(text)
-    text = markdown_hero_update(text)
+    text = markdown_update_notes(text)
     text = markdown.render(text)
 
     content = markdown_post_block(text).html_safe
@@ -156,7 +156,7 @@ module ContentHelper
     end
   end
 
-  def markdown_hero_update(text)
+  def markdown_update_notes(text)
     text.gsub /\[update\s+{(.*?)}\]/m do
       begin
         data = extract_update_data($1)
@@ -166,9 +166,9 @@ module ContentHelper
         abilities = data[:abilities]
 
         if action_name == "parse_markdown"
-          render_to_string partial: "markdown_elements/hero_update", locals: { hero: hero, description: description, abilities: abilities }
+          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, description: description, abilities: abilities }
         else
-          render partial: "markdown_elements/hero_update", locals: { hero: hero, description: description, abilities: abilities }
+          render partial: "markdown_elements/update_notes", locals: { hero: hero, description: description, abilities: abilities }
         end
       rescue => error
         abort error.inspect
