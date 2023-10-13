@@ -10,14 +10,18 @@ module AssetsHelper
   end
 
   def asset_exists?(path)
-    return unless path.present?
+    begin
+      return unless path.present?
 
-    if assets = Rails.application.assets
-      asset = assets.find_asset(path)
-      return asset.present?
-    else
-      public_file_path = File.join(Rails.root, "public", path)
-      return File.exist?(public_file_path)
+      if assets = Rails.application.assets
+        asset = assets.find_asset(path)
+        return asset.present?
+      else
+        public_file_path = File.join(Rails.root, "public", path)
+        return File.exist?(public_file_path)
+      end
+    rescue
+      return false
     end
   end
 
