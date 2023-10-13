@@ -59,6 +59,10 @@
     onStateUpdateEnd()
   }
 
+  /**
+   * This is fired after updateEditorState, after all required bits are set.
+   * Part of this is wrapped in an empty setTimeout to wait for the view state to update.
+   */
   function onStateUpdateEnd() {
     view.setState($editorStates[currentId])
 
