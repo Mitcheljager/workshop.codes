@@ -52,37 +52,28 @@
     <h2 class="mt-1/1 mb-0">Images</h2>
 
     <div class="well well--dark block mt-1/2">
-      <% if @user.provider_profile_image.present? %>
-        <%= form.label :profile_image, "Profile image", class: "form-label" %>
-        <%= image_tag @user.provider_profile_image, class: "profile-image" %>
+      <div class="form-group-max-width">
+        <%= form.label :profile_image, t("profile.form.image.label"), class: "form-label" %>
 
-        <p class="form-hint mt-1/4">
-          <%= t "profile.form.image.discord" %>
-        </p>
-      <% else %>
-        <div class="form-group-max-width">
-          <%= form.label :profile_image, t("profile.form.image.label"), class: "form-label" %>
-
-          <div class="profile-image">
-            <%= image_tag (@user.profile_image.attached? ? rails_public_blob_url(@user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed) : "//:0"),
-                          data: { image_preview: "profile-image" } %>
-          </div>
-
-
-          <%= form.file_field :profile_image,
-                              accept: "image/png, image/jpeg, image/jpg",
-                              data: { action: "image-preview", target: "profile-image" } %>
-
-          <p class="form-hint mt-1/4 mb-0">
-            <%= t "profile.form.image.help" %>
-          </p>
-
-          <%= hidden_field_tag :remove_profile_image, "", data: { clear_image_flag: "profile-image" } %>
-          <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
-                             data: { action: "clear-image", target: "profile-image" }  %>
-
+        <div class="profile-image">
+          <%= image_tag (@user.profile_image.attached? ? rails_public_blob_url(@user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed) : "//:0"),
+                        data: { image_preview: "profile-image" } %>
         </div>
-      <% end %>
+
+
+        <%= form.file_field :profile_image,
+                            accept: "image/png, image/jpeg, image/jpg",
+                            data: { action: "image-preview", target: "profile-image" } %>
+
+        <p class="form-hint mt-1/4 mb-0">
+          <%= t "profile.form.image.help" %>
+        </p>
+
+        <%= hidden_field_tag :remove_profile_image, "", data: { clear_image_flag: "profile-image" } %>
+        <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
+                            data: { action: "clear-image", target: "profile-image" }  %>
+
+      </div>
     </div>
 
     <div class="well well--dark block mt-1/2">
