@@ -77,6 +77,7 @@ module ContentHelper
     text = markdown_youtube(text)
     text = markdown_video(text)
     text = markdown_gallery(text)
+    text = markdown_ability_icon(text)
     text = markdown_hero_icon(text)
     text = markdown_update_notes(text)
     text = markdown.render(text)
@@ -129,6 +130,15 @@ module ContentHelper
     text.gsub /\[hero\s+(.*?)\]/ do
       begin
         ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 55, height: 50, loading: "lazy")
+      rescue
+      end
+    end
+  end
+
+  def markdown_ability_icon(text)
+    text.gsub /\[ability\s+(.*?)\]/ do
+      begin
+        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy")
       rescue
       end
     end

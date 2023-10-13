@@ -88,6 +88,12 @@ class InitialiseInscrybeMDE {
         name: "hero-icon",
         className: "fa fa-hero-icon",
         title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
+      },
+      {
+        action: () => this.insertAbilityIcon(),
+        name: "ability-icon",
+        className: "fa fa-ability-icon",
+        title: "Ability Icon (Use English ability name)."
       }
     ]
 
@@ -227,6 +233,10 @@ class InitialiseInscrybeMDE {
     } else {
       button.querySelector(".editor-dropdown").remove()
     }
+  }
+
+  insertAbilityIcon() {
+    this.codemirror.replaceSelection("[ability Biotic Grenade]")
   }
 
   insertBlock(name = "", existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {

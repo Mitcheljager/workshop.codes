@@ -63,7 +63,7 @@
 
   i.separator {
     border: 0;
-    margin: 0 $margin / 8;
+    margin: 0 $margin / 16;
   }
 }
 
@@ -185,6 +185,7 @@
 .editor-toolbar button[title="Controls"],
 .editor-toolbar button[title="Insert Table"],
 .editor-toolbar button[title*="Hero Icon"],
+.editor-toolbar button[title*="Ability Icon"],
 .editor-toolbar button[title*="Toggle Preview"],
 .editor-toolbar button[title*="Wiki Link"] {
   width: auto;
@@ -207,7 +208,7 @@
 }
 
 .fa-update-notes::before {
-  content: "Update Notes";
+  content: "Update";
 }
 
 .fa-block-gallery::before {
@@ -220,6 +221,10 @@
 
 .fa-hero-icon::before {
   content: "Hero";
+}
+
+.fa-ability-icon::before {
+  content: "Ability";
 }
 
 .fa-arrows-alt::before {
