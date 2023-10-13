@@ -181,6 +181,7 @@
 
 .editor-toolbar button[title*="Block"],
 .editor-toolbar button[title="Gallery"],
+.editor-toolbar button[title="Update Notes"],
 .editor-toolbar button[title="Controls"],
 .editor-toolbar button[title="Insert Table"],
 .editor-toolbar button[title*="Hero Icon"],
@@ -203,6 +204,10 @@
 
 .fa-gallery::before {
   content: "Gallery";
+}
+
+.fa-update-notes::before {
+  content: "Update Notes";
 }
 
 .fa-block-gallery::before {

@@ -78,6 +78,7 @@ module ContentHelper
     text = markdown_video(text)
     text = markdown_gallery(text)
     text = markdown_hero_icon(text)
+    text = markdown_update_notes(text)
     text = markdown.render(text)
 
     content = markdown_post_block(text).html_safe
@@ -155,8 +156,80 @@ module ContentHelper
     end
   end
 
+  def markdown_update_notes(text)
+    text.gsub /\[update\s+{(.*?)}\]/m do
+      begin
+        data = extract_update_data($1)
+
+        hero = data[:hero]
+        title = data[:title]
+        description = data[:description]
+        abilities = data[:abilities]
+
+        if action_name == "parse_markdown"
+          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+        else
+          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+        end
+      rescue => error
+        "<em>An error was found in the Hero Update markdown</em>"
+      end
+    end
+  end
+
+  def extract_update_data(input)
+    data = {}
+
+    input = input.gsub('\\"', '&quot;')
+
+    input.scan(/(\w+):\s*"([^"]*)"/) do |key, value|
+      data[key.to_sym] = value
+    end
+
+    abilities_match = input.match(/abilities:\s*{(.*?)}/m)
+    if abilities_match
+      abilities_data = extract_abilities_data(abilities_match[1])
+      data[:abilities] = abilities_data
+    end
+
+    data
+  end
+
+  def extract_abilities_data(input)
+    abilities_data = {}
+
+    input.scan(/"([^"]+)"\s*:\s*\[([^]]+)\]/) do |ability, notes|
+      notes_array = []
+      in_quoted_string = false
+      current_note = ""
+
+      notes_text = notes.strip.gsub(/^,/, "")
+      notes_text.each_char do |char|
+        if char == "\""
+          in_quoted_string = !in_quoted_string
+        elsif char == "," && !in_quoted_string
+          notes_array << current_note.strip
+          current_note = ""
+        else
+          current_note += char
+        end
+      end
+
+      notes_array << current_note.strip if current_note.present?
+      abilities_data[ability] = notes_array
+    end
+
+    abilities_data
+  end
+
   def hero_name_to_icon_url(hero, size = 50)
-    "heroes/50/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
+    string = "heroes/#{ size }/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
+    Rails.application.assets.find_asset(string).present? ? string : nil
+  end
+
+  def ability_name_to_icon_url(ability, size = 50)
+    string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "") }.png"
+    Rails.application.assets.find_asset(string).present? ? string : nil
   end
 
   def sanitized_markdown(text, rendererOptions: {})
