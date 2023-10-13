@@ -1,11 +1,13 @@
+<% hero_image = hero.present? ? hero_name_to_icon_url(hero, 100) : nil %>
+
 <div class="update-notes" id="<%= hero %>">
   <% if hero.present? %>
-    <div class="update-notes__header">
-      <div class="update-notes__icon">
-        <% begin %>
-          <%= image_tag hero_name_to_icon_url(hero, 100), loading: "lazy" %>
-        <% rescue; end %>
-      </div>
+    <div class="update-notes__header <%= "update-notes__header--no-image" if !hero_image.present? %>">
+      <% if hero_image.present? %>
+        <div class="update-notes__icon">
+          <%= image_tag hero_image, loading: "lazy" %>
+        </div>
+      <% end %>
 
       <h5 class="update-notes__title"><%= hero %></h5>
     </div>

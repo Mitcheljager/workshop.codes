@@ -8,6 +8,10 @@
   position: relative;
   padding: $margin / 4 $margin / 4 $margin / 4 calc(1.5rem + 90px);
   background: #292e31;
+
+  &--no-image {
+    padding: $margin / 4;
+  }
 }
 
 .update-notes__title {

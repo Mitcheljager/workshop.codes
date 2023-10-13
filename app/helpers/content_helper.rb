@@ -170,7 +170,8 @@ module ContentHelper
         else
           render partial: "markdown_elements/hero_update", locals: { hero: hero, description: description, abilities: abilities }
         end
-      rescue
+      rescue => error
+        abort error.inspect
         "<em>An error was found in the Hero Update markdown</em>"
       end
     end
@@ -178,6 +179,8 @@ module ContentHelper
 
   def extract_update_data(input)
     data = {}
+
+    input = input.gsub('\\"', '&quot;')
 
     input.scan(/(\w+):\s*"([^"]*)"/) do |key, value|
       data[key.to_sym] = value
@@ -220,7 +223,8 @@ module ContentHelper
   end
 
   def hero_name_to_icon_url(hero, size = 50)
-    "heroes/#{ size }/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
+    string = "heroes/#{ size }/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
+    Rails.application.assets.find_asset(string).present? ? string : nil
   end
 
   def sanitized_markdown(text, rendererOptions: {})
