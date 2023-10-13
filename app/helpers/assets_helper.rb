@@ -9,6 +9,16 @@ module AssetsHelper
     end
   end
 
+  def asset_exists?(path)
+    if assets = Rails.application.assets
+      asset = assets.find_asset(path)
+      return asset.present?
+    else
+      public_file_path = File.join(Rails.root, "public", path)
+      return File.exist?(public_file_path)
+    end
+  end
+
   def inline_js(path)
     "<script>#{ inline_file path }</script>".html_safe
   end
