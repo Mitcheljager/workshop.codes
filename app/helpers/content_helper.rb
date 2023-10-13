@@ -159,12 +159,12 @@ module ContentHelper
   def markdown_update_notes(text)
     text.gsub /\[update\s+{(.*?)}\]/m do
       begin
-        data = extract_update_data($1)
+        data = YAML.load("{#{$1}}")
 
-        hero = data[:hero]
-        title = data[:title]
-        description = data[:description]
-        abilities = data[:abilities]
+        hero = data["hero"]
+        title = data["title"]
+        description = data["description"]
+        abilities = data["abilities"]
 
         if action_name == "parse_markdown"
           render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
@@ -175,51 +175,6 @@ module ContentHelper
         "<em>An error was found in the Hero Update markdown</em>"
       end
     end
-  end
-
-  def extract_update_data(input)
-    data = {}
-
-    input = input.gsub('\\"', '&quot;')
-
-    input.scan(/(\w+):\s*"([^"]*)"/) do |key, value|
-      data[key.to_sym] = value
-    end
-
-    abilities_match = input.match(/abilities:\s*{(.*?)}/m)
-    if abilities_match
-      abilities_data = extract_abilities_data(abilities_match[1])
-      data[:abilities] = abilities_data
-    end
-
-    data
-  end
-
-  def extract_abilities_data(input)
-    abilities_data = {}
-
-    input.scan(/"([^"]+)"\s*:\s*\[([^]]+)\]/) do |ability, notes|
-      notes_array = []
-      in_quoted_string = false
-      current_note = ""
-
-      notes_text = notes.strip.gsub(/^,/, "")
-      notes_text.each_char do |char|
-        if char == "\""
-          in_quoted_string = !in_quoted_string
-        elsif char == "," && !in_quoted_string
-          notes_array << current_note.strip
-          current_note = ""
-        else
-          current_note += char
-        end
-      end
-
-      notes_array << current_note.strip if current_note.present?
-      abilities_data[ability] = notes_array
-    end
-
-    abilities_data
   end
 
   def hero_name_to_icon_url(hero, size = 50)
