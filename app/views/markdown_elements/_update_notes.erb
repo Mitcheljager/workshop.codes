@@ -24,8 +24,10 @@
       <div class="update-notes__list">
         <% abilities.each do |key, strings| %>
           <div class="update-notes__item">
-            <% ability_image = ability_name_to_icon_url(key, 50) %>
-            <%= image_tag ability_image, loading: "lazy", class: "update-notes__ability" if ability_image.present? %>
+            <% begin %>
+              <% ability_image = ability_name_to_icon_url(key, 50) %>
+              <%= image_tag ability_image, loading: "lazy", class: "update-notes__ability" if ability_image.present? %>
+            <% rescue; end %>
 
             <div>
               <div class="update-notes__name"><%= key %></div>
