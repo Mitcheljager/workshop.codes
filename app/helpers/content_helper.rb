@@ -130,8 +130,7 @@ module ContentHelper
     text.gsub /\[hero\s+(.*?)\]/ do
       begin
         ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 55, height: 50, loading: "lazy")
-      rescue
-      end
+      rescue; end
     end
   end
 
@@ -139,8 +138,7 @@ module ContentHelper
     text.gsub /\[ability\s+(.*?)\]/ do
       begin
         ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy")
-      rescue
-      end
+      rescue; end
     end
   end
 
@@ -189,14 +187,12 @@ module ContentHelper
 
   def hero_name_to_icon_url(hero, size = 50)
     string = "heroes/#{ size }/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
-    # asset_exists?(string) ? string : nil
-    string
+    asset_exists?(string) ? string : nil
   end
 
   def ability_name_to_icon_url(ability, size = 50)
     string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "") }.png"
-    # asset_exists?(string) ? string : nil
-    string
+    asset_exists?(string) ? string : nil
   end
 
   def sanitized_markdown(text, rendererOptions: {})
@@ -225,6 +221,16 @@ module ContentHelper
       video_id = url_format and $1
     else
       video_id = url
+    end
+  end
+
+  def asset_exists?(path)
+    return false unless path.present?
+
+    if Rails.configuration.assets.compile
+      Rails.application.precompiled_assets.include? path
+    else
+      Rails.application.assets_manifest.assets[path].present?
     end
   end
 end

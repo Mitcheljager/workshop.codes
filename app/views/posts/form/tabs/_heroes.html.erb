@@ -25,7 +25,8 @@
           <div class="checkbox">
             <%= form.check_box :heroes, { multiple: true, checked: (@post.heroes.include?(hero["en"]) if @post.heroes) }, hero["en"], false %>
             <%= form.label "heroes_#{ hero["en"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "_") }" do %>
-              <%= image_tag hero_name_to_icon_url(hero["en"]), height: 20, loading: "lazy" %>
+              <% hero_icon = hero_name_to_icon_url(hero["en"]) %>
+              <%= image_tag hero_icon, height: 20, loading: "lazy" if hero_icon.present? %>
               <%= i18n_value_in_array(heroes, hero["en"]) %>
               <%= tag.small "OW2", class: "text-overwatch-2" if hero["overwatch_2"].present? %>
             <% end %>
