@@ -24,8 +24,9 @@
     }
 
     .cm-comment {
-      color: var(--color-comment);
       background: transparent;
+      color: var(--color-comment);
+      font-style: italic;
     }
   }
 
