@@ -7,7 +7,7 @@
         <h2 class="feed__heading">Seen updates</h2>
       <% end %>
 
-      <%= render "feed_item", revision: revision %>
+      <%= render "feed/feed_item", revision: revision %>
     <% end %>
 
     <% if @revisions.count == PAGE_SIZE %>

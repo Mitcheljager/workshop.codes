@@ -83,6 +83,19 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def revisions
+    @collection = Collection.find_by_nice_url!(params[:nice_url].downcase)
+    @post_ids = @collection.posts.visible?.pluck(:id)
+    @revisions = Revision.includes(:post).where(visible: true, post_id: @post_ids).order(created_at: :desc).page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render "feed/infinite_scroll_feed_items"
+      }
+    end
+  end
+
   private
 
   def collection_params

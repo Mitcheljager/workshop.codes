@@ -137,6 +137,7 @@ Rails.application.routes.draw do
     get "collections", to: "collections#index", as: "collections_index"
     resources :collections, path: "c", param: :nice_url, concerns: :paginatable, except: [:index]
     get "c/:nice_url(/page/:page)", to: "collections#show"
+    get "c/:nice_url/revisions(/page/:page)", to: "collections#revisions", as: "collection_revisions"
     get "c/partial/:id", to: "collections#partial", as: "collection_partial"
 
     get "derived_from/:post_id", to: "derivatives#derived_from", as: "derived_from"
