@@ -59,6 +59,10 @@
       position: relative;
       background: lighten($bg-dark, 10%);
     }
+
+    &.active {
+      background: lighten($bg-dark, 10%);
+    }
   }
 
   i.separator {
