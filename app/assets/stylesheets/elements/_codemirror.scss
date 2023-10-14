@@ -22,6 +22,11 @@
     .cm-string {
       color: #5074de;
     }
+
+    .cm-comment {
+      color: var(--color-comment);
+      background: transparent;
+    }
   }
 
   &.CodeMirror-fullscreen {
