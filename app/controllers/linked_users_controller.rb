@@ -11,9 +11,9 @@ class LinkedUsersController < ApplicationController
     return unless @user.linked_id == current_user.id
 
     if @user.destroy
-      flash[:alert] = { class: "", message: "Account successfully unlinked." }
+      flash[:alert] = "Account successfully unlinked."
     else
-      flash[:alert] = { class: "red", message: "Something went wrong. Please try again." }
+      flash[:error] = "Something went wrong. Please try again."
     end
 
     redirect_to linked_users_path

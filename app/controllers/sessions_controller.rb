@@ -119,18 +119,18 @@ class SessionsController < ApplicationController
       @user = User.find_or_create_from_auth_hash(auth_hash) # We still run this to update the OAuth user
 
       unless @user.present? # Problem creating account to link
-        flash[:alert] = { class: "red", message: "Something went wrong when syncing your account details, and the link could not be completed." }
+        flash[:error] = "Something went wrong when syncing your account details, and the link could not be completed."
       else
-        flash[:alert] = flash_for_existing_account
+        flash_for_existing_account
       end
     else
       @user = User.find_or_create_from_auth_hash(auth_hash)
       unless @user.present?
-        flash[:alert] = { class: "red", message: "Something went wrong when linking your account." }
+        flash[:alert] = "Something went wrong when linking your account."
       else
         @user.update(linked_id: current_user.id)
 
-        flash[:alert] = { message: "Your #{provider_nice_name(@user.provider)} account '#{@user.username}' has been linked." }
+        flash[:alert] = "Your #{provider_nice_name(@user.provider)} account '#{@user.username}' has been linked."
       end
     end
 
@@ -140,15 +140,15 @@ class SessionsController < ApplicationController
   def flash_for_existing_account
     if @user.linked_id.present? # Already linked somewhere
       if @user.linked_id == current_user.id
-        return { class: "orange", message: "This login is already linked to your account." }
+        flash[:warning] = "This login is already linked to your account."
       end
-      return { class: "orange", message: "This login is already linked to a different account." }
+      flash[:warning] = "This login is already linked to a different account."
     end
     if @user == current_user # User is trying to link their own account
-      return { class: "orange", message: "You're already logged in using this login." }
+      flash[:warning] = "You're already logged in using this login."
     end
     # If this account already exists, and isn't linked, we can't link it to the current user
-    return{ class: "red", message: "An account is already created for this login. If you wish to link the account instead please delete the original account." }
+    flash[:warning] = "An account is already created for this login. If you wish to link the account instead please delete the original account."
   end
 
   def should_authorize_only

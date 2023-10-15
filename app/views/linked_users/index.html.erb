@@ -1,10 +1,6 @@
 <% content_for :page_title, t("account.navigation.linked_users") %>
 
 <%= render "layouts/account", title: t("account.navigation.linked_users") do %>
-  <% if flash[:alert] %>
-    <div class="warning warning--<%= flash[:alert]["class"] %> mt-0 mb-1/2"><%= flash[:alert]["message"] %></div>
-  <% end %>
-
   <p class="mt-0">
     <%= t("linked_users.description") %>
   </p>
