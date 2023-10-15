@@ -7,13 +7,13 @@
 
   <hr class="mt-1/2 mb-1/2">
 
-  <div class="flex">
-    <%= button_to "/auth/discord", class: "button button--discord mr-1/4", data: { prefetch: false } do %>
+  <div class="flex flex-wrap gap-1/4">
+    <%= button_to "/auth/discord", class: "button button--discord h-100 nowrap", data: { prefetch: false, disable_with: "Connecting..." } do %>
       <%= inline_svg_tag "discord.svg", height: 24 %>
       <%= t "linked_users.discord" %>
     <% end %>
 
-    <%= button_to "/auth/bnet", class: "button button--bnet", data: { prefetch: false } do %>
+    <%= button_to "/auth/bnet", class: "button button--bnet h-100 nowrap", data: { prefetch: false, disable_with: "Connecting..." } do %>
       <%= inline_svg_tag "bnet.svg", height: 24 %>
       <%= t "linked_users.battle_net" %>
     <% end %>
