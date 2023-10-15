@@ -141,12 +141,18 @@ class SessionsController < ApplicationController
     if @user.linked_id.present? # Already linked somewhere
       if @user.linked_id == current_user.id
         flash[:warning] = "This login is already linked to your account."
+        return
+      else
+        flash[:warning] = "This login is already linked to a different account."
+        return
       end
-      flash[:warning] = "This login is already linked to a different account."
     end
+
     if @user == current_user # User is trying to link their own account
       flash[:warning] = "You're already logged in using this login."
+      return
     end
+
     # If this account already exists, and isn't linked, we can't link it to the current user
     flash[:warning] = "An account is already created for this login. If you wish to link the account instead please delete the original account."
   end
