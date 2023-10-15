@@ -16,7 +16,7 @@
   <div class="update-notes__body">
     <% if description.present? %>
       <div class="update-notes__description">
-        <%= description %>
+        <%= markdown(sanitize(description)) %>
       </div>
     <% end %>
 
@@ -34,7 +34,7 @@
 
               <ul class="update-notes__changes">
                 <% strings.each do |string| %>
-                  <li><%= string %></li>
+                  <li><%= markdown(sanitize(string)) %></li>
                 <% end %>
               </ul>
             </div>
