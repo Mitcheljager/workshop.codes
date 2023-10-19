@@ -7,6 +7,12 @@ export function getMixins(joinedItems) {
   return mixins
 }
 
+/**
+ * Replace and remove all occurances of `@include` and `@mixin`. `@include` is replaced with the declarations of their
+ * corresponding `@mixin`.
+ * @param {string} joinedItems Given string of the currently parsed compiled items.
+ * @returns {string} joinedItems with mixin includes replaced.
+ */
 export function extractAndInsertMixins(joinedItems) {
   const mixins = {}
 
@@ -96,7 +102,14 @@ export function extractAndInsertMixins(joinedItems) {
 }
 
 /**
- * Replace every contents occurance with their corresponding slot from the mixin include.
+ * Replace every `@contents` occurance with their corresponding slot from the mixin include.
+ * @param {Object} mixin - The mixin
+ * @param {string} joinedItems - The full given content
+ * @param {number} index - The starting index of the mixin content
+ * @param {string} replaceWith - String constructed to far to replace the starting value
+ * @returns {Object} An object containing the extracted contents of the mixin, the full mixin string (including the declare),
+ *                  and the updated content after slot replacement.
+ * @throws {Error} If the mixin includes itself
  */
 function replaceContents(mixin, joinedItems, index, replaceWith) {
   let contents = ""
@@ -108,7 +121,7 @@ function replaceContents(mixin, joinedItems, index, replaceWith) {
 
   if (contentsOpening != -1) {
     contents = fullMixin.slice(contentsOpening + 1, fullMixin.length - 1)
-    if (contents.includes(`@include\s${ name }`)) throw new Error("Can not include a mixin in itself")
+    if (contents.includes(`@include\s${ mixin.name }`)) throw new Error("Can not include a mixin in itself")
   }
 
   const slotContents = getSlotContents(contents)
@@ -120,16 +133,18 @@ function replaceContents(mixin, joinedItems, index, replaceWith) {
     const start = match.index
     const end = match.index + match[0].length
 
-    if (!slot in slotContents) {
-      throw new Error(`Slot "${ slot }" not found in mixin "${ mixin.name }"`)
-    }
-
     replaceWith = replaceBetween(replaceWith, slotContents[slot], start, end)
   }
 
   return { contents, fullMixin, replaceWith }
 }
 
+/**
+ * Get all given slots in the mixin include
+ * @param {string} contents Contents of the mixin include
+ * @returns {Object} An object containing the extracted slot with their names as keys
+ *                   and slot content as value. Includes the default slot.
+ */
 function getSlotContents(contents) {
   const slotContents = {}
   const defaultSlotContent = []
