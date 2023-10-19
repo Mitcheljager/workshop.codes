@@ -111,7 +111,7 @@ function replaceContents(mixin, joinedItems, index, replaceWith) {
     if (contents.includes(`@include\s${ name }`)) throw new Error("Can not include a mixin in itself")
   }
 
-  const slotContents = getSlotContents(contents, mixin)
+  const slotContents = getSlotContents(contents)
 
   const contentsRegex = /@contents(?:\("(.+?)"\))?;?/g
   let match
@@ -130,7 +130,7 @@ function replaceContents(mixin, joinedItems, index, replaceWith) {
   return { contents, fullMixin, replaceWith }
 }
 
-function getSlotContents(contents, mixin) {
+function getSlotContents(contents) {
   const slotContents = {}
   const defaultSlotContent = []
 
@@ -142,13 +142,13 @@ function getSlotContents(contents, mixin) {
     const name = match[1] || ""
     const slotClosing = getClosingBracket(contents, "{", "}", match.index)
 
-    defaultSlotContent.push(contents.slice(lastIndex, match.index))
-    slotContents[name] = contents.slice(match.index + match[0].length, slotClosing)
+    defaultSlotContent.push(contents.slice(lastIndex, match.index).trim())
+    slotContents[name] = contents.slice(match.index + match[0].length, slotClosing).trim()
     lastIndex = slotClosing + 1
   }
 
   // Add content after final slot to default slot
-  defaultSlotContent.push(contents.slice(lastIndex))
+  defaultSlotContent.push(contents.slice(lastIndex).trim())
 
-  return { ...slotContents, default: defaultSlotContent.join("") }
+  return { ...slotContents, default: defaultSlotContent.join("").trim() }
 }
