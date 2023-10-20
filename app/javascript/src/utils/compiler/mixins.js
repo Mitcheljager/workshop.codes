@@ -47,6 +47,8 @@ export function extractAndInsertMixins(joinedItems) {
 
     const mixin = content.slice(firstOpenBracket + 1, closing)?.trim()
 
+    if (mixin.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
+
     mixins[name] = {
       content: mixin,
       full: joinedItems.slice(match.index, closing + 1),
@@ -78,13 +80,8 @@ export function extractAndInsertMixins(joinedItems) {
     const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
     const splitArguments = splitArgumentsString(argumentsString) || []
 
-    let replaceWith = mixin.content
-    if (replaceWith.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
-
-    // Get content for @contents
-    let fullMixin
-    let contents
-    if (mixin.hasContents) ({ replaceWith, fullMixin, contents } = replaceContents(mixin, joinedItems, index, replaceWith))
+    // eslint-disable-next-line prefer-const
+    let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, mixin.content)
 
     mixin.params
       .map((param, index) => ({ ...param, index }))
@@ -111,7 +108,7 @@ export function extractAndInsertMixins(joinedItems) {
  *                  and the updated content after slot replacement.
  * @throws {Error} If the mixin includes itself
  */
-function replaceContents(mixin, joinedItems, index, replaceWith) {
+export function replaceContents(joinedItems, index, replaceWith) {
   let contents = ""
   let contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
   if (contentsClosing == -1) contentsClosing = joinedItems.length
@@ -119,10 +116,7 @@ function replaceContents(mixin, joinedItems, index, replaceWith) {
   const fullMixin = joinedItems.slice(index, contentsClosing + 1)
   const contentsOpening = fullMixin.indexOf("{")
 
-  if (contentsOpening != -1) {
-    contents = fullMixin.slice(contentsOpening + 1, fullMixin.length - 1)
-    if (contents.includes(`@include\s${ mixin.name }`)) throw new Error("Can not include a mixin in itself")
-  }
+  if (contentsOpening != -1) contents = fullMixin.slice(contentsOpening + 1, fullMixin.length - 1)
 
   const slotContents = getSlotContents(contents)
 
@@ -145,7 +139,7 @@ function replaceContents(mixin, joinedItems, index, replaceWith) {
  * @returns {Object} An object containing the extracted slot with their names as keys
  *                   and slot content as value. Includes the default slot.
  */
-function getSlotContents(contents) {
+export function getSlotContents(contents) {
   const slotContents = {}
   const defaultSlotContent = []
 
