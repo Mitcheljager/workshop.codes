@@ -120,14 +120,13 @@ export function replaceContents(joinedItems, index, replaceWith) {
 
   const slotContents = getSlotContents(contents)
 
-  const contentsRegex = /@contents(?:\("(.+?)"\))?;?/g
-  let match
-  while ((match = contentsRegex.exec(replaceWith)) !== null) {
+  while (replaceWith.indexOf("@contents") != -1) {
+    const match = /@contents(?:\("(.+?)"\))?;?/.exec(replaceWith)
     const slot = match[1] || "default"
     const start = match.index
     const end = match.index + match[0].length
 
-    replaceWith = replaceBetween(replaceWith, slotContents[slot], start, end)
+    replaceWith = replaceBetween(replaceWith, slotContents[slot] || "", start, end)
   }
 
   return { contents, fullMixin, replaceWith }

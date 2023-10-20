@@ -1,4 +1,4 @@
-import { extractAndInsertMixins } from "../../../../app/javascript/src/utils/compiler/mixins"
+import { extractAndInsertMixins, replaceContents } from "../../../../app/javascript/src/utils/compiler/mixins"
 import { disregardWhitespace } from "../../helpers/text"
 
 describe("mixins.js", () => {
@@ -21,6 +21,11 @@ describe("mixins.js", () => {
     it("Should throw an error if a mixin is included that is not defined", () => {
       const input = "@mixin someMixin() {} @include someOtherMixin"
       expect(() => extractAndInsertMixins(input)).toThrow("Included a mixin that was not specified: \"someOtherMixin\"")
+    })
+
+    it("Should throw an error if the mixin includes itself", () => {
+      const input = "@mixin testMixin() { @include testMixin(); }"
+      expect(() => extractAndInsertMixins(input)).toThrow("Can not include a mixin in itself")
     })
 
     it("Should replace @include with the mixins content and remove the defined mixin from the output", () => {
@@ -157,6 +162,62 @@ describe("mixins.js", () => {
       const expectedOutput = "Some Action(Some Value)"
 
       expect(disregardWhitespace(extractAndInsertMixins(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+  })
+
+  describe("extractAndInsertMixins", () => {
+    it("Should replace @contents with default content", () => {
+      const joinedItems = "@include testMixin() { Global.value = 1; }"
+      const replaceWith = "@contents;"
+      const index = 0
+
+      const result = replaceContents(joinedItems, index, replaceWith)
+
+      expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("Global.value = 1;"))
+      expect(result.fullMixin).toEqual(joinedItems)
+      expect(result.replaceWith).toEqual("Global.value = 1;")
+    })
+
+    it("Should replace @contents with corresponding slot content", () => {
+      const joinedItems = `@include testMixin() {
+        @slot("Slot 1") { Global.slot = 1; } @slot("Slot 2") { Global.slot = 2; }
+      }`
+      const replaceWith = "@contents(\"Slot 1\"); Action(@contents(\"Slot 2\")); @contents(\"Slot 2\");"
+      const index = 0
+
+      const result = replaceContents(joinedItems, index, replaceWith)
+
+      expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("@slot(\"Slot 1\") { Global.slot = 1; } @slot(\"Slot 2\") { Global.slot = 2; }"))
+      expect(result.fullMixin).toEqual(joinedItems)
+      expect(result.replaceWith).toEqual("Global.slot = 1; Action(Global.slot = 2;); Global.slot = 2;")
+    })
+
+    it("Should replace both @contents with corresponding slot content and default content", () => {
+      const joinedItems = `@include testMixin() {
+        Global.value = 1; @slot("Slot 1") { Global.slot = 1; } @slot("Slot 2") { Global.slot = 2; }
+      }`
+      const replaceWith = "@contents; @contents(\"Slot 1\"); Action(@contents(\"Slot 2\")); @contents(\"Slot 2\");"
+      const index = 0
+
+      const result = replaceContents(joinedItems, index, replaceWith)
+
+      expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("Global.value = 1; @slot(\"Slot 1\") { Global.slot = 1; } @slot(\"Slot 2\") { Global.slot = 2; }"))
+      expect(result.fullMixin).toEqual(joinedItems)
+      expect(result.replaceWith).toEqual("Global.value = 1; Global.slot = 1; Action(Global.slot = 2;); Global.slot = 2;")
+    })
+
+    it("Should @contents without matching @slot with nothing", () => {
+      const joinedItems = `@include testMixin() {
+        @slot("Slot 1") { Global.slot = 1; }
+      }`
+      const replaceWith = "@contents(\"Slot 1\"); @contents(\"Slot 2\");"
+      const index = 0
+
+      const result = replaceContents(joinedItems, index, replaceWith)
+
+      expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("@slot(\"Slot1\") { Global.slot=1; }"))
+      expect(result.fullMixin).toEqual(joinedItems)
+      expect(disregardWhitespace(result.replaceWith)).toEqual(disregardWhitespace("Global.slot = 1;"))
     })
   })
 })
