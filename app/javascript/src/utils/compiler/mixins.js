@@ -100,7 +100,6 @@ export function extractAndInsertMixins(joinedItems) {
 
 /**
  * Replace every `@contents` occurance with their corresponding slot from the mixin include.
- * @param {Object} mixin - The mixin
  * @param {string} joinedItems - The full given content
  * @param {number} index - The starting index of the mixin content
  * @param {string} replaceWith - String constructed to far to replace the starting value
