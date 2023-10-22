@@ -1,5 +1,5 @@
 .update-notes {
-  margin-top: $margin;
+  margin: $margin / 1.15 0 $margin / 4;
   border: 2px solid lighten($border-color, 10%);
   background: $body-bg;
 }

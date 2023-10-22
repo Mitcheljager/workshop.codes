@@ -121,11 +121,15 @@
 }
 
 .editor-preview table td,
-.editor-preview table th,
+.editor-preview table th,,
 .editor-preview-side table td,
 .editor-preview-side table th {
   border: 0;
   padding: .5rem;
+}
+
+.editor-preview p {
+  margin-top: 1rem;
 }
 
 .fa-bold::before {
