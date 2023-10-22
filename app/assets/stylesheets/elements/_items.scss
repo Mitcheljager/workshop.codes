@@ -414,7 +414,7 @@
   overflow-wrap: break-word;
   color: $text-color;
 
-  *:first-child {
+  *:first-child:not(.update-notes) {
     margin-top: 0;
   }
 
