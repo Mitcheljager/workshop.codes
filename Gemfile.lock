@@ -427,8 +427,9 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
-    ruby-openai (3.7.0)
-      httparty (>= 0.18.1)
+    ruby-openai (5.1.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
@@ -568,7 +569,7 @@ DEPENDENCIES
   render_async
   reverse_markdown
   rspec-rails (~> 4.0.2)
-  ruby-openai
+  ruby-openai (~> 5.0)
   sass-rails (~> 5.0)
   scout_apm
   selenium-webdriver (~> 4.0)
