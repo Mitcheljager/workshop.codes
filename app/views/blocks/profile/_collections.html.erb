@@ -4,13 +4,7 @@
   <h2><%= block_property(block, "title") %></h2>
 <% end %>
 
-<div class="cards">
+<div>
   <% collections = @user.collections.where(id: block_property(block, "collections")).limit(6) %>
-  <% collections.each do |collection| %>
-    <div class="card">
-      <%= link_to collection.title, collection_path(collection.nice_url), class: "card__title" %>
-
-      <%= link_to "View collection", collection_path(collection.nice_url), class: "button button--secondary mt-1/8" %>
-    </div>
-  <% end %>
+  <%= render collection: collections, partial: "collections/collection_card", as: :collection %>
 </div>

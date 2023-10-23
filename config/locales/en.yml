@@ -11,6 +11,7 @@ en:
     recent: Latest
     on_fire: On Fire
     wiki: Wiki
+    editor: Editor
     create: Create
     login: Login
     tos: Rules
@@ -191,9 +192,10 @@ en:
           label: Drop images here to add them to your post
           help: Images will be displayed in a 900x500 format (max 2MB per image, jpeg/png only)
         video:
-          label: Youtube video
+          label: YouTube video
           help_html: "Include a video as the first item in the carousel. Enter only the YouTube video ID, not the full url. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)"
           placeholder: "A video ID looks like this: FqnKB22pOC0"
+          invalid: "Please provide a valid YouTube video link or video ID"
       description:
         title: Description
         help_html: |

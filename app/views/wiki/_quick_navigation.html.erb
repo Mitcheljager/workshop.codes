@@ -6,7 +6,7 @@
 %>
 
 <div class="quick-navigation" data-role="dynamic-max-height">
-  <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target data-scroll-container>
+  <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target data-scroll-container data-sticky-absolute>
     <% { "Actions": actions, "Values": values, "Events": events }.each do |category, props| %>
       <div data-toggle-content>
         <button class="quick-navigation__toggle <%= "active" if @article.category.title == category.to_s %>" data-action="toggle-content">

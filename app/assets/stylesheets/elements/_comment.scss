@@ -14,9 +14,13 @@
 
 .post-comment {
   margin-bottom: $margin / 4;
-  padding: $margin / 4;
+  padding: $margin / 6;
   border-radius: $border-radius / 2;
-  background: lighten($bg-dark, 3.5%);
+  background: $bg-dark;
+
+  @include media-min(sm) {
+    padding: $margin / 4;
+  }
 
   &:last-child {
     margin-bottom: 0;
@@ -24,22 +28,15 @@
 
   .post-comment {
     margin-top: $margin / 4;
-    background: $bg-dark;
-  }
+    background: darken($bg-dark, 3.5%);
 
-  @for $i from 1 through 5 {
-    $classname: "";
-
-    @for $j from 1 through $i {
-      $classname: $classname + ".post-comment ";
+    &:last-child {
+      border-bottom: 0;
     }
 
-    #{$classname} {
-      @if $i % 2 == 0 {
-        background: lighten($bg-dark, 3.5%);
-      } @else {
-        background: $bg-dark;
-      }
+    .post-comment {
+      padding: 0;
+      margin-top: $margin / 2;
     }
   }
 
@@ -61,27 +58,40 @@
   }
 }
 
-.post-comment__information {
-  margin-top: .25em;
-  line-height: 1em;
-
-  @include media-min(sm) {
-    display: flex;
-    align-items: center;
-  }
+.post-comment__layout {
+  display: grid;
+  grid-template-columns: 30px auto;
+  gap: $margin / 6;
+  width: 100%;
 
   .profile-image {
     height: 30px;
     width: 30px;
     flex: 0 0 30px;
-    margin: 0 1rem 0 0;
+    margin: 0;
     background-size: 80%;
   }
 }
 
+.post-comment__information {
+  line-height: 1em;
+
+  @include media-min(sm) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: .35rem;
+  }
+}
+
 .post-comment__content {
-  margin: $margin / 4 0 0;
+  margin: $margin / 8 0 0;
   overflow-wrap: break-word;
+  font-size: $font-size-small;
+
+  @include media-min(sm) {
+    font-size: $font-size-base;
+  }
 
   h1 {
     font-size: 21px;
@@ -97,13 +107,20 @@
     font-size: $font-size-base;
   }
 
+  *:first-child {
+    margin-top: 0;
+  }
+
   *:last-child {
     margin-bottom: 0;
   }
 }
 
 .post-comment__actions {
-  margin: $margin / 4 0 $margin / 4 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $margin / 4;
+  margin-top: $margin / 8;
 
   &:last-child {
     margin-bottom: 0;
@@ -112,11 +129,14 @@
 
 .post-comment__action {
   display: inline-block;
-  margin-right: $margin / 4;
   font-size: $font-size-small;
   text-transform: lowercase;
   text-decoration: none;
-  color: lighten($gray, 20%);
+  color: $text-color-dark;
+
+  @include hover-stack() {
+    color: $text-color-light;
+  }
 
   &:last-child {
     margin-right: 0;
@@ -124,23 +144,27 @@
 }
 
 .post-comment__author {
-  display: flex;
-  align-items: center;
   text-decoration: none;
-  color: lighten($gray, 20%);
+  color: $white;
+  font-weight: bold;
   margin-right: 2rem;
+
+  @include hover-stack() {
+    filter: brightness(1.2);
+  }
 
   small {
     display: inline-block;
     color: $text-color-dark;
     font-size: $font-size-small;
+    font-weight: normal;
     margin-left: .25em;
   }
 }
 
 .post-comment__date {
   margin-top: .5rem;
-  font-size: $font-size-small;
+  font-size: .75rem;
   font-style: italic;
   text-transform: lowercase;
   color: $text-color-dark;

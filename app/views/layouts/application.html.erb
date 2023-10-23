@@ -25,9 +25,10 @@
     <link rel="manifest" href="/manifest.json">
 
     <link rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&display=swap"
+      href="<%= asset_path "fonts.css" %>"
       as="style"
       onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
+    <noscript><%= stylesheet_link_tag "fonts.css" %></noscript>
 
     <%= stylesheet_link_tag "application.css" %>
     <%= javascript_pack_tag "application", "data-turbolinks-track": "reload", defer: true %>
@@ -50,5 +51,7 @@
     </div>
 
     <%= render "body_bg" unless is_wiki? %>
+
+    <%= svelte_component "Ollie", { imageFlyBy: image_path("ollie/ollie-float.png"), imageHeart: image_path("ollie/ollie-heart.png") } if current_user.present? %>
   </body>
 </html>

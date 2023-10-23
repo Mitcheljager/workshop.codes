@@ -60,7 +60,7 @@
     }
   }
 
-  @include hover-stack {
+  &:hover {
     img {
       filter: brightness(1.5);
     }
@@ -69,6 +69,12 @@
   &:focus {
     outline: none;
     box-shadow: none;
+  }
+
+  &:focus-visible {
+    border-radius: $border-radius / 2;
+    outline: 2px solid $pure-white;
+    outline-offset: 5px;
   }
 
   &[disabled] {

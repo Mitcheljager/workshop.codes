@@ -188,6 +188,13 @@
     en: Support
     ko: 지원
 -
+  en: Illari
+  ko: 일리아리
+  overwatch_2: true
+  category:
+    en: Support
+    ko: 지원
+-
   en: Kiriko
   ko: 키리코
   overwatch_2: true

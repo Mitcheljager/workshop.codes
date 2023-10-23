@@ -8,6 +8,6 @@
   }
 </script>
 
-<button class="empty-button text-small text-red" on:click={destroy}>
+<button class="text-small text-red" on:click={destroy} data-tooltip="Destroy">
   ╳
 </button>

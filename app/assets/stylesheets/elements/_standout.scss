@@ -4,6 +4,7 @@
   text-align: center;
   background: $bg-dark;
   border-radius: $border-radius;
+  box-shadow: $shadow;
 
   &::before {
     content: "";
@@ -36,18 +37,25 @@
   }
 
   &--floating-image {
+    padding-bottom: 200px;
+    text-align: center;
+
     @include media-min(md) {
+      padding-bottom: $margin / 3;
       padding-right: 200px;
+      text-align: left;
     }
 
     img {
-      display: none;
       position: absolute;
       bottom: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
 
       @include media-min(md) {
-        display: block;
+        right: 0;
+        left: auto;
+        transform: none;
       }
     }
   }

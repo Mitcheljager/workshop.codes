@@ -1,43 +1,44 @@
-<div class="post-comment" data-comment="<%= comment.id %>" id="<%= comment.id %>">
-  <div class="post-comment__information">
-    <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
-      <div class="profile-image <%= "profile-image--empty" unless comment.user.profile_image.attached? || comment.user.provider_profile_image.present? %>">
-        <%= render "profiles/image", user: comment.user, size: 40 %>
+<div class="post-comment <%= "shadow-block" if comment.parent_id.nil? %>" data-comment="<%= comment.id %>" id="<%= comment.id %>">
+  <div class="post-comment__layout">
+    <%= link_to user_profile_path(comment.user), class: "profile-image #{ "profile-image--empty" unless comment.user.profile_image.attached? }" do %>
+      <%= render "profiles/image", user: comment.user, size: 40 %>
+    <% end %>
+
+    <div>
+      <div class="post-comment__information">
+        <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
+          <%= comment.user.username %>
+          <%= tag.small t("comment.creator") if comment.user == @post.user %>
+        <% end %>
+
+        <span class="post-comment__date" title="Created at: <%= l comment.created_at %>">
+          <span><%= time_ago_in_words(comment.created_at) %> ago</span>
+
+          <% if comment.created_at != comment.updated_at %>
+            <span title="This comment was edited at <%= l comment.updated_at %>">*</span>
+          <% end %>
+        </span>
+
       </div>
 
-      <span>
-        <%= comment.user.username %>
-        <%= tag.small t("comment.creator") if comment.user == @post.user %>
-      </span>
-    <% end %>
+      <div class="post-comment__content">
+        <%= markdown(sanitize(comment.content)) %>
+      </div>
 
-    <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
-      <span class="post-comment__date" title="Created at: <%= l comment.created_at %>">
-        <span><%= time_ago_in_words(comment.created_at) %> ago</span>
+      <% if current_user %>
+        <div class="post-comment__actions">
+          <%= link_to t("comment.reply"), create_reply_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
 
-        <% if comment.created_at != comment.updated_at %>
-          <span title="This comment was edited at <%= l comment.updated_at %>">*</span>
-        <% end %>
-      </span>
-    <% end %>
+          <% if comment.user == current_user %>
+            <%= link_to t("comment.edit"), create_edit_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
+            <%= link_to t("comment.delete"), comment_path(comment.id), class: "post-comment__action", remote: true, method: :delete, data: { confirm: "Are you sure?", disable_with: "Deleting..." } %>
+          <% end %>
 
-  </div>
-
-  <div class="post-comment__content">
-    <%= markdown(sanitize(comment.content)) %>
-  </div>
-
-  <% if current_user %>
-    <div class="post-comment__actions">
-      <%= link_to t("comment.reply"), create_reply_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
-      <%= link_to t("comment.report"), new_report_path(id: comment.id, concerns_model: "comment"), class: "post-comment__action text-red", data: { action: "get-reports-form" } %>
-
-      <% if comment.user == current_user %>
-        <%= link_to t("comment.edit"), create_edit_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
-        <%= link_to t("comment.delete"), comment_path(comment.id), class: "post-comment__action", remote: true, method: :delete, data: { confirm: "Are you sure?", disable_with: "Deleting..." } %>
+          <%= link_to t("comment.report"), new_report_path(id: comment.id, concerns_model: "comment"), class: "post-comment__action", data: { action: "get-reports-form" } %>
+        </div>
       <% end %>
     </div>
-  <% end %>
+  </div>
 
   <%= render comment.post.comments.where(parent_id: comment.id).order(created_at: :desc) %>
 </div>

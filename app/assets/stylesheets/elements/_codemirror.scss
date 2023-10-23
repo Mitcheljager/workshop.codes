@@ -22,6 +22,12 @@
     .cm-string {
       color: #5074de;
     }
+
+    .cm-comment {
+      background: transparent;
+      color: var(--color-comment);
+      font-style: italic;
+    }
   }
 
   &.CodeMirror-fullscreen {
@@ -59,7 +65,14 @@
 }
 
 .cm-editor {
+  --indent-marker-bg-color: #{ lighten($bg-dark, 5%) };
+  --indent-marker-active-bg-color: #{ lighten($bg-dark, 15%) };
   color: $text-color-light;
+
+  body[style*="--show-indent-markers: false"] & { // Hacky solution for css var based if statement
+    --indent-marker-bg-color: transparent;
+    --indent-marker-active-bg-color: transparent;
+  }
 
   .cm-scroller {
     padding-top: $margin / 4;
@@ -190,9 +203,9 @@
     animation: fly-in 200ms;
 
     input {
-      @extend .form-input !optional;
       width: auto;
       padding: .25em .5em;
+      border: 0;
       border-radius: $border-radius / 4;
       font-size: $font-size-small;
       background: lighten($bg-dark, 10%);
@@ -201,6 +214,7 @@
       &:focus {
         background: lighten($bg-dark, 12.5%);
         box-shadow: 0 0 0 2px rgba($pure-white, 0.5);
+        outline: 0;
       }
 
       &::placeholder {
@@ -216,14 +230,22 @@
     }
 
     .cm-button {
-      @extend .button !optional;
-      @extend .button--secondary !optional;
+      appearance: none;
       padding: .25em .5em;
       margin-right: 0.25em;
+      border: 0;
       border-radius: $border-radius / 4;
       background: lighten($bg-dark, 5%);
       font-size: $font-size-small;
+      color: $text-color-light;
       text-transform: none;
+      cursor: pointer;
+
+      @include hover-stack {
+        outline: 0;
+        background: lighten($bg-dark, 15%);
+        color: $white;
+      }
     }
 
     button[name="close"] {

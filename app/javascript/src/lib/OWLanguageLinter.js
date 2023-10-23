@@ -1,5 +1,5 @@
-import { getClosingBracket, getPhraseFromPosition } from "../utils/editor"
-import { completionsMap } from "../stores/editor"
+import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
+import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 
 let diagnostics = []
@@ -16,8 +16,13 @@ export function OWLanguageLinter(view) {
   findExtraSemicolons(content)
   findMissingComparisonsInConditions(content)
   findTrailingCommas(content)
+  findConditionalsRegexErrors(content)
+  findEachLoopsWithInvalidIterables(content)
+  findEventBlocksWithMissingArguments(content)
+  findUndefinedSubroutines(content)
   checkMixins(content)
   checkTranslations(content)
+  checkForLoops(content)
 
   return diagnostics
 }
@@ -34,7 +39,7 @@ function findMissingClosingCharacters(content) {
     openingBrackets.forEach(index => {
       const closingBracketIndex = getClosingBracket(content, open, close, index - 1)
 
-      if (closingBracketIndex < content.length) return
+      if (closingBracketIndex !== -1) return
 
       diagnostics.push({ from: index, to: index + 1, severity: "error", message })
     })
@@ -101,16 +106,13 @@ function findIncorrectArgsLength(content) {
 
       if (item.args_unlimited) continue
 
-      if (item.args_length && content.charAt(match.index + match.match.length) != "(") {
-        if (item.args_allow_null) continue
-        // Some arguments expected but none were given
-        message = `${ item.args_length } Argument(s) expected, 0 given`
-      } else if (!item.args_length && content.charAt(match.index + match.match.length) == "(") {
+      if (!item.args_length && content.charAt(match.index + match.match.length) == "(") {
         // No arguments expected but some (or ()) were given
         message = "0 arguments expected"
       } else if (item.args_length && content.charAt(match.index + match.match.length) == "(") {
         // Get the number of arguments
-        const closing = getClosingBracket(content, "(", ")", match.index)
+        let closing = getClosingBracket(content, "(", ")", match.index)
+        if (closing === -1) closing = content.length
 
         let argumentsString = content.slice(match.index + match.match.length + 1, closing)
         let safeIndex = 0
@@ -122,7 +124,7 @@ function findIncorrectArgsLength(content) {
           safeIndex++
         }
 
-        const splitContent = argumentsString.split(",")
+        const splitContent = splitArgumentsString(argumentsString)
 
         if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
         if (!item.args_min_length && splitContent.length == item.args_length) break
@@ -185,7 +187,7 @@ function checkMixins(content) {
   while ((match = mixinRegex.exec(content)) != null) {
     try {
       const closing = getClosingBracket(content, "(", ")", match.index)
-      if (closing >= content.length) throw new Error("Missing closing parenthesis")
+      if (closing === -1) throw new Error("Missing closing parenthesis")
 
       const string = content.slice(match.index, closing)
       const opening = string.indexOf("(")
@@ -232,7 +234,7 @@ function checkTranslations(content) {
       if (lastParenAtIndex == -1) throw new Error("Using @translate outside of an action has no effect")
 
       const phrase = getPhraseFromPosition({ text: content, from: 0 }, lastParenAtIndex - 1)
-      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Set Objective Description", "Big Message", "Small Message"]
+      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
       if (phrase?.text.includes("include")) return
       if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${ phrase.text }" has no effect.`)
     } catch (error) {
@@ -240,6 +242,31 @@ function checkTranslations(content) {
         from: match.index,
         to: match.index + match[0].length,
         severity: "warning",
+        message: error.message
+      })
+    }
+  }
+}
+
+function checkForLoops(content) {
+  // Find missing parenthesis and keywords
+  const forRegex = /@for\s+(.*?)\s*\{\n/g
+  let match
+  while ((match = forRegex.exec(content)) != null) {
+    try {
+      const [_, params] = match
+
+      if (params[0] != "(") throw new Error("Missing opening parenthesis")
+      if (params[params.length - 1] != ")") throw new Error("Missing closing parenthesis")
+      if (!/to|through/.test(params)) throw new Error("Either \"to\" or \"through\" are expected")
+
+      const splitParams = params.split(" ")
+      if (splitParams.length > 3 && splitParams[1] != "from") throw new Error("Missing \"from\" after iterator name")
+    } catch (error) {
+      diagnostics.push({
+        from: match.index,
+        to: match.index + match[0].length,
+        severity: "error",
         message: error.message
       })
     }
@@ -435,5 +462,141 @@ function findTrailingCommas(content) {
       severity: "error",
       message: "Trailing commas are not allowed"
     })
+  }
+}
+
+function findConditionalsRegexErrors(content) {
+  const regex = /(~=[ \n]*)(.*)[ \n]*\)[ \n]*\{/g // matches "~= righthand) {" and "~= /regex/flags) {"
+  const regexRegex = /\/(.*)\/(\w*)/ // TODO: share this with compiler.js?
+  let match
+  while ((match = regex.exec(content)) != null) {
+    const [_, beforeRighthand, righthand] = match
+    const righthandIsRegexMatch = righthand.match(regexRegex)
+    const from = match.index + beforeRighthand.length
+    const to = match.index + beforeRighthand.length + righthand.length
+    if (righthandIsRegexMatch) {
+      const [_, pattern, flags] = righthandIsRegexMatch
+      try {
+        new RegExp(pattern, flags)
+      } catch (err) {
+        diagnostics.push({
+          from,
+          to,
+          severity: "error",
+          message: `Invalid RegExp: ${ err }`
+        })
+      }
+    } else {
+      diagnostics.push({
+        from,
+        to,
+        severity: "error",
+        message: "Expected a RegExp for the righthand side of this test"
+      })
+    }
+  }
+}
+
+
+function findEachLoopsWithInvalidIterables(content) {
+  const constants = get(workshopConstants)
+
+  const regex = /@each\s*\(.+in\s+(.+)\s*\)\s*\{/g
+  const variableIterableRegex = /(Constant|Mixin|For|Each)\.([\w\s]*)/
+
+  let match
+  while ((match = regex.exec(content)) != null) {
+    const [eachFull, iterableStr] = match
+
+    if (iterableStr[0] === "[" && iterableStr[iterableStr.length - 1] === "]") {
+      continue
+    }
+
+    const constantMatch = variableIterableRegex.exec(eachFull)
+    if (constantMatch != null) {
+      const [constantFull, constantType, constantName] = constantMatch
+
+      if (constantType === "Constant" && !constants[constantName]) {
+        const from = match.index + constantMatch.index
+        diagnostics.push({
+          from,
+          to: from + constantFull.length,
+          severity: "error",
+          message: `"${ constantName }" is not a known Workshop Constant`
+        })
+      }
+
+      continue
+    }
+
+    const from = match.index + eachFull.lastIndexOf(iterableStr)
+    diagnostics.push({
+      from,
+      to: from + iterableStr.length,
+      severity: "error",
+      message: "@each iterable must be an array in the format [item1, item2, ...], or a Workshop Constant in the format Constant.Name (e.g. Constant.Button)"
+    })
+  }
+}
+
+const eventTypeToArgumentsMap = {
+  "subroutine": ["SubroutineName"],
+  "ongoing - each player": ["Team", "Player"],
+  "player dealt damage": ["Team", "Player"],
+  "player dealt final blow": ["Team", "Player"],
+  "player dealt healing": ["Team", "Player"],
+  "player dealt knockback": ["Team", "Player"],
+  "player died": ["Team", "Player"],
+  "player earned elimination": ["Team", "Player"],
+  "player joined match": ["Team", "Player"],
+  "player left match": ["Team", "Player"],
+  "player received healing": ["Team", "Player"],
+  "player received knockback": ["Team", "Player"],
+  "player took damage": ["Team", "Player"]
+}
+
+function findEventBlocksWithMissingArguments(content) {
+  const eventBlockRegex = /event\s*\{\s*/g
+
+  let eventBlockMatch
+  while ((eventBlockMatch = eventBlockRegex.exec(content)) != null) {
+    const eventBlockStart = eventBlockMatch.index + eventBlockMatch[0].length
+    const eventBlockEnd = getClosingBracket(content, "{", "}", eventBlockMatch.index)
+
+    const [eventType, ... givenEventArgs] = content.substring(eventBlockStart, eventBlockEnd)
+      .split(";")
+      .map((s) => s.trim())
+      .filter((s) => !!s)
+
+    const requiredEventArgs = eventTypeToArgumentsMap[eventType.toLowerCase()]
+
+    if (requiredEventArgs && requiredEventArgs.length !== givenEventArgs.length) {
+      const missingArguments = requiredEventArgs.slice(givenEventArgs.length)
+      diagnostics.push({
+        from: eventBlockStart,
+        to: eventBlockStart + eventType.length,
+        severity: "error",
+        message: `Events ${ eventType } require ${ requiredEventArgs.length } arguments, but you are missing the following: ${ missingArguments.join(", ") }`
+      })
+    }
+  }
+}
+
+function findUndefinedSubroutines(content) {
+  const definedSubroutines = get(subroutinesMap).map(({ label }) => label)
+
+  for (const match of content.matchAll(/(?<=(?:Call Subroutine|Start Rule))\(/g)) {
+    const argsEnd = getClosingBracket(content, "(", ")", match.index - 1)
+    const [subroutineName] = splitArgumentsString(content.substring(match.index + 1, argsEnd))
+
+    if (!definedSubroutines.includes(subroutineName)) {
+      const from = match.index + 1
+      diagnostics.push({
+        from,
+        to: from + subroutineName.length,
+        severity: "error",
+        message: `There is no subroutine rule with name "${ subroutineName }"`
+      })
+    }
   }
 }

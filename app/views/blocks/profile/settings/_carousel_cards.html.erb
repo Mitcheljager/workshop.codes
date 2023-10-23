@@ -7,10 +7,10 @@
   <%= form.label "Codes (max 6)", class: "form-label" %>
   <p class="form-hint">Select up to 6 codes to display in a carousel.</p>
   <% if @user.posts.any? %>
-    <%= form.select "properties[posts]",
-          @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] },
-          { include_hidden: false, selected: block_property(block, "posts") },
-          { multiple: true, size: 5, class: "form-select", autocomplete: "off" } %>
+    <%= svelte_component "LimitedCheckboxes", {
+                         name: "block[properties[posts]][]",
+                         options: @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] },
+                         selected: block_property(block, "posts") || [] } %>
   <% else %>
     <p><%= t "profile.form.featured_posts.empty" %></p>
   <% end %>

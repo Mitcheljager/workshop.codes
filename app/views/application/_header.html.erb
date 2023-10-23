@@ -9,6 +9,7 @@
       <%= link_to t("navigation.recent"), latest_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "posts" && action_name == "latest" }" %>
       <%= link_to t("navigation.on_fire"), on_fire_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "on_fire" }" %>
       <%= link_to t("navigation.wiki"), wiki_root_path, class: "navigation__item #{ "navigation__item--active" if is_wiki? }" %>
+      <%= link_to t("navigation.editor"), editor_path, class: "navigation__item hidden visible-lg", target: "_blank" %>
       <%= link_to inline_svg_tag("discord.svg"), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "navigation__item mt-1/4 mbl:mt-1/8", aria: { label: "Join the Workhsop.codes Discord" } %>
     </nav>
 
@@ -30,7 +31,7 @@
       <%= render "filter/filter" %>
     </div>
 
-    <%= tag.button inline_svg_tag("icons/icon-search.svg", height: 24), class: "header__search-trigger", data: { action: "toggle-search" } %>
-    <%= link_to inline_svg_tag("layout/hamburger.svg", height: 24), "#", class: "navigation-trigger", data: { action: "toggle-navigation" } %>
+    <%= tag.button inline_svg_tag("icons/icon-search.svg", height: 24), class: "header__search-trigger", data: { action: "toggle-search" }, aria: { label: "Search" } %>
+    <%= tag.button inline_svg_tag("layout/hamburger.svg", height: 24), class: "navigation-trigger", data: { action: "toggle-navigation" }, aria: { label: "Open navigation" } %>
   </div>
 </header>

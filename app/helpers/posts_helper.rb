@@ -26,7 +26,7 @@ module PostsHelper
   def has_player_range?(post)
     post.min_players.present? && post.max_players.present?
   end
-  
+
   def controls_button_value(item, index)
     if item && item["buttons"]
       if item["buttons"][index] && item["buttons"][index]["Custom"]
@@ -52,7 +52,7 @@ module PostsHelper
     return false
   end
 
-  def tabs_content_tag(name, alt_url = nil, extra_class = "item__content")
+  def tabs_content_tag(name, alt_url = nil, extra_class = "item__content shadow-block")
     tag.div class: "#{ extra_class } tabs-content #{ "tabs-content--active" if is_active_tab?(alt_url || name) }",
             data: { tab: name, partial: name } do
       yield

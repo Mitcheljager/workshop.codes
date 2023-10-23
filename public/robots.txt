@@ -39,5 +39,6 @@ Disallow: /
 User-agent:*
 Allow: /rails/active_storage/*
 
+Disallow: /*search=
 Disallow: /wiki/search/*
 Disallow: /wiki/edits

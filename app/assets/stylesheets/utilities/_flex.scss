@@ -3,6 +3,16 @@
   display: flex;
 }
 
+.md\:flex {
+  @include media-min(md) {
+    display: flex;
+  }
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .flex-nowrap {
   flex-wrap: nowrap;
 }
@@ -12,7 +22,6 @@
 }
 
 .align-center {
-  display: flex;
   align-items: center;
 }
 
@@ -34,4 +43,12 @@
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-1\/4 {
+  gap: $margin / 4;
+}
+
+.gap-1\/8 {
+  gap: $margin / 8;
 }

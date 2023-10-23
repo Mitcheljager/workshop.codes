@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_id(params[:id])
+    @post = Post.find_by_id!(params[:id])
     @comments = @post.comments.includes(:user).where(parent_id: nil).order(created_at: :desc)
 
     render layout: false

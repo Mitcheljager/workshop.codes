@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte"
-  import { setCssVariable } from "../../utils/editor"
+  import { setCssVariable } from "../../utils/setCssVariable"
+  import { isMobile } from "../../stores/editor"
 
   export let key = ""
   export let currentSize = 0
@@ -8,27 +9,31 @@
 
   let isDragging = false
 
-  let startX = 0
+  let startPosition = 0
   let startSize = currentSize
 
+  $: direction = $isMobile ? "pageY" : "pageX"
+
   onMount(() => {
-    currentSize = localStorage.getItem(key) || currentSize
+    currentSize = Math.max(Math.min(localStorage.getItem(key) || currentSize, Math.max(window.innerWidth, window.innerHeight)), 0)
     setCssVariable(key, `${ currentSize }px`)
   })
 
   function mouseDown(event) {
     isDragging = true
-    startX = event.pageX
+    startPosition = event[direction] || event.targetTouches[0]?.[direction]
     startSize = parseInt(currentSize)
   }
 
   function mouseMove(event) {
     if (!isDragging) return
 
-    const difference = event.pageX - startX
+    const difference = (event[direction] || event.targetTouches[0]?.[direction]) - startPosition
     currentSize = startSize + difference * (align == "right" ? 1 : -1)
 
     setCssVariable(key, `${ currentSize }px`)
+
+    currentSize = Math.min(Math.max(currentSize, (Math.max(window.innerWidth, window.innerHeight) / 10)), Math.max(window.innerWidth, window.innerHeight) / 2)
 
     localStorage.setItem(key, currentSize)
   }
@@ -39,6 +44,6 @@
   }
 </script>
 
-<svelte:window on:mousemove={mouseMove} on:mouseup={mouseUp} />
+<svelte:window on:mousemove={mouseMove} on:touchmove={mouseMove} on:mouseup={mouseUp} on:touchend={mouseUp} />
 
-<button class="drag-handle drag-handle--{ align }" class:is-dragging={isDragging} on:mousedown={mouseDown} />
+<button class="drag-handle drag-handle--{ align }" class:is-dragging={isDragging} on:mousedown={mouseDown} on:touchstart={mouseDown} />

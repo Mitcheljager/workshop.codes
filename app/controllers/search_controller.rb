@@ -37,6 +37,7 @@ class SearchController < ApplicationController
 
     begin
       @posts = get_filtered_posts(params)
+      @users = get_search_users(params)
     rescue Elasticsearch::Transport::Transport::ServerError => e
       Bugsnag.notify(e) if Rails.env.production?
       @posts = Kaminari.paginate_array([]).page(params[:page])
@@ -87,11 +88,6 @@ class SearchController < ApplicationController
       posts = posts.where(user_id: user.present? ? user.id : -1)
     end
 
-    posts = posts.where(locale: params[:language]) if params[:language]
-    posts = posts.where("created_at >= ?", params[:from]) if params[:from]
-    posts = posts.where("created_at <= ?", params[:to]) if params[:to]
-    posts = posts.where("last_revision_created_at > ?", 6.months.ago) if params[:expired]
-
     posts = posts.order("#{ sort_switch } DESC") if params[:sort]
 
     posts = posts.select { |post| to_slug(post.categories).include?(to_slug(params[:category])) } if params[:category]
@@ -101,6 +97,28 @@ class SearchController < ApplicationController
     posts = posts.select { |post| post.code.upcase.start_with?(params[:code].upcase) } if params[:code]
 
     posts = Kaminari.paginate_array(posts).page(params[:page])
+  end
+
+  def get_search_users(params)
+    return if params[:search].blank?
+    return if params[:category] || params[:map] || params[:hero] || params[:players] || params[:code]
+
+    if ENV["BONSAI_URL"]
+      ids = Rails.cache.fetch("user_search_#{params[:search]}", expires_in: 1.day) do
+        User.search(params[:search])
+      end
+
+      users = User.where(id: ids).order_by_ids(ids)
+    else
+      users = User.limit(3)
+    end
+
+    users = users.includes(:badges)
+                 .includes(:posts)
+                 .where(linked_id: nil) # Is not a linked account
+                 .where.not(level: :banned) # Not banned
+                 .where.not(posts: { id: nil }) # Has any posts
+                 .limit(3)
   end
 
   def sort_switch

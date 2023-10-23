@@ -11,8 +11,10 @@
 
     <div class="well well--dark">
       <div class="w-100">
-        <%= form_with url: sessions_path do |form| %>
-          <div class="form-group">
+        <%= form_with url: sessions_path, data: { role: "ollie-form" } do |form| %>
+          <%= render "ollie" %>
+
+          <div class="form-group mt-1/8">
             <%= form.label :username, t("sessions.login.username"), class: "form-label" %>
             <%= form.text_field :username, placeholder: t("sessions.login.username"), class: "form-input" %>
           </div>
@@ -36,12 +38,12 @@
 
         <hr class="mt-1/2 mb-1/4">
 
-        <%= link_to "/auth/discord", method: :post, class: "button button--discord mt-1/4", data: { prefetch: false } do %>
+        <%= link_to "/auth/discord", method: :post, class: "button button--discord mt-1/4", data: { prefetch: false, disable_with: "Signing in..." } do %>
           <%= inline_svg_tag "discord.svg", height: 24 %>
           <%= t "sessions.login.discord" %>
         <% end %>
 
-        <%= link_to "/auth/bnet", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
+        <%= link_to "/auth/bnet", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false, disable_with: "Signing in..." } do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
           <%= t "sessions.login.battle_net" %>
         <% end %>

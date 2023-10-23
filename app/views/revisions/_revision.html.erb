@@ -1,5 +1,5 @@
-<div class="revision">
-  <div class="item item--revision p-0 mt-1/2">
+<div class="revision shadow-block p-1/4">
+  <div class="item item--revision p-0">
     <div class="item__title item__title--small mt-0">
       <div>
         <div class="dropdown dropup mr-1/4" data-dropdown>
@@ -25,7 +25,7 @@
           <small><%= time_ago_in_words(revision.created_at) %> ago</small>
         </span>
 
-        <% if revision.created_at < 6.months.ago %>
+        <% if revision.code != @post.code && revision.created_at < 6.months.ago %>
           <small class="tooltip">
             ⚠
 
@@ -47,7 +47,7 @@
   </div>
 
   <% unless revision.description.blank? %>
-    <div class="item__description revision__description mt-1/8">
+    <div class="item__description revision__description">
       <%= sanitized_markdown(revision.description) %>
     </div>
   <% end %>

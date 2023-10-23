@@ -1,0 +1,132 @@
+@keyframes ollie-fly-by {
+  from {
+    transform: translateX(-100%) translateY(50%);
+    bottom: 0;
+    left: 0;
+  }
+
+  to {
+    transform: translateX(100%) translateY(-50%);
+    bottom: 100%;
+    left: 100%;
+  }
+}
+
+@keyframes ollie-heart {
+  0%, 100% {
+    transform: translateY(100%);
+  }
+
+  40%, 60% {
+    transform: translateY(0);
+  }
+}
+
+.ollie-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+
+  @media (prefers-reduced-motion) {
+    display: none;
+  }
+}
+
+.ollie-fly-by {
+  img {
+    position: absolute;
+    animation: ollie-fly-by 1500ms cubic-bezier(0, 1, 1, 0) forwards;
+    z-index: 100;
+  }
+
+  .confetti-holder {
+    position: fixed !important;
+    top: auto;
+    left: -50px;
+    bottom: -50px;
+    z-index: 1;
+  }
+}
+
+.ollie-heart {
+  img {
+    position: absolute;
+    right: 50px;
+    bottom: -10px;
+    animation: ollie-heart 1500ms forwards;
+    z-index: 100;
+  }
+}
+
+$ollie-login-size: 100px;
+
+.ollie-login {
+  width: $ollie-login-size;
+  height: $ollie-login-size;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: lighten($bg-dark, 5%);
+  overflow: hidden;
+}
+
+.ollie-login__images {
+  position: relative;
+  width: $ollie-login-size;
+  height: $ollie-login-size;
+  margin-top: $ollie-login-size;
+  padding: $margin / 4;
+  transition: margin 500ms;
+
+  &--loaded {
+    margin-top: 0;
+  }
+}
+
+.ollie-login__body {
+  position: absolute;
+  bottom: 0;
+  left: $ollie-login-size * 0.1;
+  width: $ollie-login-size * 0.8;
+  height: auto;
+  z-index: 1;
+}
+
+.ollie-login__pupils {
+  position: absolute;
+  bottom: $ollie-login-size * 0.48;
+  left: $ollie-login-size * 0.24;
+  width: $ollie-login-size * 0.33;
+  box-shadow: $ollie-login-size * 0.05 0 0 white;
+  height: auto;
+  transition: transform 50ms;
+  z-index: 0;
+}
+
+.ollie-login__arm-left {
+  position: absolute;
+  bottom: $ollie-login-size * 0.01;
+  left: $ollie-login-size * 0.09;
+  width: $ollie-login-size * 0.28;
+  z-index: 5;
+  transition: transform 200ms;
+
+  &.out-of-view {
+    transform: rotate(30deg) translateY(110%);
+  }
+}
+
+.ollie-login__arm-right {
+  position: absolute;
+  bottom: $ollie-login-size * 0.08;
+  left: $ollie-login-size * 0.42;
+  width: $ollie-login-size * 0.41;
+  z-index: 5;
+  transition: transform 200ms;
+
+  &.out-of-view {
+    transform: rotate(-30deg) translateY(110%);
+  }
+}

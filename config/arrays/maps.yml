@@ -186,6 +186,22 @@
     ko: 쟁탈
   slug: oasis
 -
+  en: Samoa
+  ko: 사모아
+  overwatch_2: true
+  type:
+    en: Control
+    ko: 쟁탈
+  slug: samoa
+-
+  en: Talantis
+  ko: 탈란티스
+  overwatch_2: true
+  type:
+    en: Control
+    ko: 쟁탈
+  slug: talantis
+-
   en: Colosseo
   ko: 콜로세오
   overwatch_2: true
@@ -209,6 +225,22 @@
     en: Push
     ko: 밀기
   slug: esperanca
+-
+  en: New Junk City
+  ko: 뉴 정크 시티
+  overwatch_2: true
+  type:
+    en: Flashpoint
+    ko: 플래시포인트
+  slug: new-junk-city
+-
+  en: Suravasa
+  ko: 수라바사의
+  overwatch_2: true
+  type:
+    en: Flashpoint
+    ko: 플래시포인트
+  slug: suravasa
 -
   en: Black Forest
   ko: 검은 숲
@@ -272,6 +304,14 @@
     en: Lúcioball
     ko: 루시우볼
   slug: busan-stadium-classic
+-
+  en: Estádio Dos Gorilas
+  ko: 도스 고릴라스 스타디움
+  overwatch_2: true
+  type:
+    en: Winston's Beach Volleyball
+    ko: 윈스턴의 비치 발리볼
+  slug: estadio-dos-gorilas
 -
   en: Château Guillard
   ko: 샤토 기야르

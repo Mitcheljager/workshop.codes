@@ -2,6 +2,7 @@
   import EditorItemDestroy from "./EditorItemDestroy.svelte"
   import EditorItemName from "./EditorItemName.svelte"
   import EditorItemHide from "./EditorItemHide.svelte"
+  import EditorItemDuplicate from "./EditorItemDuplicate.svelte"
   import { currentItem } from "../../stores/editor.js"
   import { isAnyParentHidden } from "../../utils/editor"
 
@@ -19,8 +20,9 @@
     <EditorItemName {item} />
   </span>
 
-  <div class="editor-item__actions" on:click|stopPropagation>
+  <button class="editor-item__actions" on:click|stopPropagation>
+    <EditorItemDuplicate {item} />
     <EditorItemHide {item} />
     <EditorItemDestroy {item} />
-  </div>
+  </button>
 </button>

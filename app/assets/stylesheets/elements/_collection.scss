@@ -1,0 +1,115 @@
+.collection {
+  position: relative;
+  padding: $margin / 4;
+  margin-bottom: $margin / 4;
+  border-radius: $border-radius;
+  background: darken($bg-dark, 3.5%);
+  overflow: hidden;
+  box-shadow: $shadow;
+}
+
+.collection__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.35;
+  background: lighten($bg-dark, 10%);
+  mask-image: linear-gradient(to bottom, rgba($black, 1), rgba($black, 0));
+
+  @include media-min(md) {
+    width: 50%;
+    mask-image: linear-gradient(to right, rgba($black, 1), rgba($black, 0));
+  }
+
+  a {
+    width: 100%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.collection__content {
+  position: relative;
+
+  @include media-min(md) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $margin / 4;
+  }
+}
+
+.collection__info {
+  width: 15rem;
+  flex: 0 0 15rem;
+  margin-bottom: $margin / 4;
+
+  @include media-min(md) {
+    margin-bottom: 0;
+  }
+}
+
+.collection__title {
+  display: block;
+  margin-bottom: $margin / 16;
+  color: $white;
+  font-size: 18px;
+  line-height: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: $pure-white;
+  }
+}
+
+.collection__author {
+  color: $white;
+  font-size: $font-size-small;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: $pure-white;
+  }
+}
+
+.collection__count {
+  color: $white;
+  font-style: italic;
+  font-size: $font-size-small;
+}
+
+.collection__posts {
+  display: flex;
+  gap: $margin / 8;
+  margin: 0 $margin / 4 * -1;
+  padding: 0 $margin / 4;
+  overflow: auto;
+  scrollbar-width: none;
+  filter: drop-shadow(0 4px 2px rgba(0, 0, 0, .1)) drop-shadow(0 8px 4px rgba(0, 0, 0, 0.1)) drop-shadow(0 32px 16px rgba(0, 0, 0, 0.1));
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.collection__post {
+  flex: 0 0 $thumbnail-width;
+  width: $thumbnail-width;
+
+  .item__thumbnail {
+    display: block;
+    border-radius: $border-radius / 2;
+    overflow: hidden;
+    box-shadow: none;
+  }
+}

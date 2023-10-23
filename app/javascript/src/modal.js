@@ -40,7 +40,7 @@ export function closeModal(event) {
 }
 
 function closeModalOnKeyDown(event) {
-  if (event.key === "Escape") closeModal()
+  if (event.code === "Escape") closeModal()
 }
 
 function getScrollbarWidth() {

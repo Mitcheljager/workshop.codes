@@ -1,6 +1,8 @@
 <script>
-  import { fly } from "svelte/transition"
+  import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
   import Keyboard from "../icon/Keyboard.svelte"
+  import { fly } from "svelte/transition"
 
   let active = false
 
@@ -9,9 +11,11 @@
     { keys: ["Ctrl", "Shift", "S"], text: "Compile" },
     { keys: ["Ctrl", "Space"], text: "Show autocomplete suggestions" },
     { keys: ["Ctrl", "Z"], text: "Undo" },
+    { keys: ["Ctrl", "Y"], text: "Redo" },
+    { keys: ["Ctrl", "Shift", "Z"], text: "Redo" },
     { keys: ["Ctrl", "C"], text: "Copy current line or selection" },
     { keys: ["Ctrl", "X"], text: "Cut current line or selection" },
-    { keys: ["Shift", "F"], text: "Search/replace" },
+    { keys: ["Ctrl", "F"], text: "Search/replace" },
     { keys: ["Ctrl", "Shift", "F"], text: "Search/replace in all files" },
     { keys: ["Alt", "Click"], text: "Search wiki for keyword" },
     { keys: ["Ctrl", "Q"], text: "Find by name" },
@@ -26,25 +30,15 @@
     { keys: ["Ctrl", "2"], text: "Focus editor" },
     { keys: ["Ctrl", "3"], text: "Focus wiki search" }
   ]
-
-  function outsideClick(event) {
-    if (!active) return
-    if (event.target.classList.contains("shortcuts")) return
-    if (event.target.closest(".shortcuts")) return
-
-    active = false
-  }
 </script>
 
-<svelte:window on:click={outsideClick} on:keydown={event => { if (event.key === "Escape") active = false }} />
-
-<div class="dropdown shortcuts settings">
+<div class="dropdown shortcuts settings" use:outsideClick on:outsideClick={() => active = false}>
   <button class="button button--secondary button--square" on:click|stopPropagation={() => active = !active}>
     <Keyboard />
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content block p-1/4" style="width: 400px">
+    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content block p-1/4" style="width: 400px">
       <h5 class="mt-0 mb-1/8">Keyboard shortcuts</h5>
 
       {#each shortcuts as { keys, text }}

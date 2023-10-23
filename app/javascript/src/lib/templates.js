@@ -1,5 +1,5 @@
 export const templates = Object.freeze({
-  RuleGlobal: `rule("Rule Name")
+  RuleGlobal: `rule("Global Rule")
 {
 	event
 	{
@@ -16,7 +16,7 @@ export const templates = Object.freeze({
 
 	}
 }`,
-  RuleEachPlayer: `rule("Rule Name")
+  RuleEachPlayer: `rule("Each Player Rule")
 {
 	event
 	{
@@ -35,7 +35,7 @@ export const templates = Object.freeze({
 
 	}
 }`,
-  Subroutine: `rule("Rule Name")
+  Subroutine: `rule("Subroutine")
 {
 	event
 	{

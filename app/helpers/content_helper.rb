@@ -75,8 +75,11 @@ module ContentHelper
 
     text = text.gsub(/<script.*?>[\s\S]*<\/script>/i, "")
     text = markdown_youtube(text)
+    text = markdown_video(text)
     text = markdown_gallery(text)
+    text = markdown_ability_icon(text)
     text = markdown_hero_icon(text)
+    text = markdown_update_notes(text)
     text = markdown.render(text)
 
     content = markdown_post_block(text).html_safe
@@ -88,6 +91,22 @@ module ContentHelper
       "<div class='video'>
         <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{ youtube_to_video_id(video_id) }' frameborder='0' allowfullscreen></iframe>
       </div>"
+    end
+  end
+
+  def markdown_video(text)
+    text.gsub /\[video\s(https?:\/\/\S+)(?:\s(autoplay))?\]/ do
+      video_url = $1
+      autoplay = $2.blank? ? nil : true
+
+      video_element = ActionController::Base.helpers.video_tag("",
+        data: { role: "lazy-video", src: video_url, autoplay: autoplay },
+        playsinline: true,
+        controls: !autoplay,
+        muted: autoplay,
+        loop: autoplay)
+
+      "<div class='bg-darker'>#{video_element}</div>"
     end
   end
 
@@ -110,9 +129,16 @@ module ContentHelper
   def markdown_hero_icon(text)
     text.gsub /\[hero\s+(.*?)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 55, height: 50, loading: "lazy")
-      rescue
-      end
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 50, height: 50, loading: "lazy")
+      rescue; end
+    end
+  end
+
+  def markdown_ability_icon(text)
+    text.gsub /\[ability\s+(.*?)\]/ do
+      begin
+        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy")
+      rescue; end
     end
   end
 
@@ -138,15 +164,42 @@ module ContentHelper
     end
   end
 
+  def markdown_update_notes(text)
+    text.gsub /\[update\s+{(.*?)}\]/m do
+      begin
+        data = YAML.load("{#{$1}}")
+
+        hero = data["hero"]
+        title = data["title"]
+        description = data["description"]
+        abilities = data["abilities"]
+
+        if action_name == "parse_markdown"
+          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+        else
+          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+        end
+      rescue => error
+        "<em>An error was found in the Hero Update markdown</em>"
+      end
+    end
+  end
+
   def hero_name_to_icon_url(hero, size = 50)
-    "heroes/50/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
+    string = "heroes/#{ size }/#{ hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o") }.png"
+    asset_exists?(string) ? string : nil
+  end
+
+  def ability_name_to_icon_url(ability, size = 50)
+    string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "") }.png"
+    asset_exists?(string) ? string : nil
   end
 
   def sanitized_markdown(text, rendererOptions: {})
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
-      tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
-      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls)
+      tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
+      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls playsinline loop muted)
     )
   end
 
@@ -168,6 +221,16 @@ module ContentHelper
       video_id = url_format and $1
     else
       video_id = url
+    end
+  end
+
+  def asset_exists?(path)
+    return false unless path.present?
+
+    if Rails.configuration.assets.compile
+      Rails.application.precompiled_assets.include? path
+    else
+      Rails.application.assets_manifest.assets[path].present?
     end
   end
 end

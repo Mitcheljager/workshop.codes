@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 
 /**
  * @fileoverview microlight - syntax highlightning library
@@ -22,7 +23,7 @@ export async function reset(cls) {
     j,
     microlighted,
     el;  // current microlighted element to run through
-    
+
   // nodes to highlight
   microlighted = _document.getElementsByClassName(cls || 'microlight');
 
@@ -98,7 +99,7 @@ export async function reset(cls) {
             // 2: braces
             1,                // consist of a single character
             // 3: (key)word
-            !/[$\w]/[test](chr),
+            !/[$\w]/[test](chr) || prev1 == '@' && multichar,
             // 4: number
             !/[$\w]/[test](chr),
             // 5: string with "
@@ -109,7 +110,7 @@ export async function reset(cls) {
           if (token) {
             // remapping token type into style
             // (some types are highlighted similarly)
-            
+
             el[appendChild](
               node = _document.createElement('span')
             ).setAttribute('class', [
@@ -137,7 +138,7 @@ export async function reset(cls) {
                     tokenType >= 5 ? 3 :
                       // otherwise tokenType == 3, (key)word
                       // (1 if regexp matches, 0 otherwise)
-                      + /^(variables|subroutines|rule|disabled|event|actions|conditions|global|player|settings)$/[test](token)
+                      + /^(variables|subroutines|rule|disabled|event|actions|conditions|global|player|settings|@\w+)$/[test](token)
             ]);
 
             node[appendChild](_document.createTextNode(token));
@@ -159,9 +160,9 @@ export async function reset(cls) {
           while (![
             1,                   //  0: whitespace
             //  1: operator or braces
-            /[\/{}[(\-+*=<>:;|\\.,?!&@~]/[test](chr),
+            /[\/{}[(\-+*=<>:;|\\.,?!&~]/[test](chr),
             /[\])]/[test](chr),  //  2: closing brace
-            /[$\w]/[test](chr),  //  3: (key)word
+            chr === '@' || /[$\w]/[test](chr),//  3: (key)word
             /^\d+$/[test](chr),  //  4: number
             chr == '"',          //  5: string with "
           ][--tokenType]);

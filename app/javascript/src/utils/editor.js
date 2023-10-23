@@ -1,4 +1,5 @@
-import { currentItem, items, openFolders, projects, editorStates } from "../stores/editor"
+import { currentItem, items, openFolders, editorStates } from "../stores/editor"
+import { defaultLanguage, selectedLanguages, translationKeys } from "../stores/translationKeys"
 import { get } from "svelte/store"
 
 export function createNewItem(name, content, position = 9999, type = "item") {
@@ -42,94 +43,23 @@ export function isAnyParentHidden(item) {
   return false
 }
 
-export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {
-  let closePos = start
-  let counter = 1
-  let initial = true
+export function duplicateItem(item, newParent = null) {
+  const itemCount = get(items).filter(i => {
+    if (i.parent != item.parent) return false
+    return i.name.match(/\(Copy(?: \d+)?\)/g)
+  })?.length
 
-  while (counter > 1 || initial) {
-    const c = content[++closePos]
+  const copyString = ` (Copy${ itemCount ? ` ${ itemCount + 1 }` : "" })`
+  const name = newParent ? item.name : (item.name.replace(/\s\(Copy(?: \d+)?\)/g, "") + copyString)
+  const newItem = createNewItem(name, item.content, item.position, item.type)
+  newItem.parent = newParent || item.parent
+  newItem.hidden = item.hidden
 
-    if (c == characterOpen) {
-      counter++
-      initial = false
-    }
-    else if (c == characterClose) counter--
-    if (counter > 20 || closePos > (100_000 + start) || closePos >= content.length) break
+  items.set([...get(items), newItem])
+
+  if (item.type == "folder") {
+    get(items).filter(i => i.parent == item.id).forEach(i => duplicateItem(i, newItem.id))
   }
-
-  return closePos
-}
-
-export function splitArgumentsString(content) {
-  let ignoredByString = false
-  let ignoredByBrackets = 0
-  const commaIndexes = []
-
-  for (let i = 0; i < content.length; i++) {
-    if (content[i] == "\\")
-      i++
-    else if (content[i] == "\"")
-      ignoredByString = !ignoredByString
-    else if (!ignoredByString && ["(", "[", "{"].includes(content[i]))
-      ignoredByBrackets++
-    else if (!ignoredByString && [")", "]", "}"].includes(content[i]))
-      ignoredByBrackets = Math.min(ignoredByBrackets - 1 || 0)
-    else if (!ignoredByString && !ignoredByBrackets && content[i] == ",")
-      commaIndexes.push(i)
-  }
-
-  if (!commaIndexes.length) return [content]
-
-  const splitArguments = []
-  splitArguments.push(content.substring(0, commaIndexes[0]))
-
-  commaIndexes.forEach((comma, index) => {
-    splitArguments.push(content.substring(comma + 1, commaIndexes[index + 1]).trim())
-  })
-
-  return splitArguments
-}
-
-export function getSettings(value) {
-  const regex = new RegExp(/settings/)
-  const match = regex.exec(value)
-  if (!match) return []
-
-  const untilIndex = match.index + getClosingBracket(value.slice(match.index, value.length))
-  if (!untilIndex) return []
-
-  return [match.index, untilIndex + 1]
-}
-
-export function replaceBetween(origin, replace, startIndex, endIndex) {
-  return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
-}
-
-export function getPhraseEnd(text, start, direction = 1) {
-  let lastValidCharacterPosition = start
-  for (let i = 1; i < 100; i++) {
-    const char = text[start + i * direction]
-    if (char !== undefined && /[A-Za-z\- ]/.test(char)) lastValidCharacterPosition += direction
-    else i = 100
-  }
-
-  return lastValidCharacterPosition
-}
-
-export function getPhraseFromPosition(line, position) {
-  const start = getPhraseEnd(line.text, position - line.from, -1)
-  const end = getPhraseEnd(line.text, position - line.from, 1)
-
-  return {
-    start,
-    end,
-    text: line.text.slice(start, end + 1).trim()
-  }
-}
-
-export function setCssVariable(key, value) {
-  document.body.style.setProperty(`--${ key }`, value)
 }
 
 export function getItemById(id) {
@@ -183,14 +113,13 @@ export function toggleFolderState(item, state, set = true) {
   if (item.parent) toggleFolderState(getItemById(item.parent), true)
 }
 
-export function updateProject(uuid, params) {
-  get(projects).forEach(project => {
-    if (project.uuid != uuid) return
-
-    Object.entries(params).forEach(([key, value]) => {
-      project[key] = value
-    })
+export function getSaveContent() {
+  return JSON.stringify({
+    items: get(items),
+    translations: {
+      keys: get(translationKeys),
+      selectedLanguages: get(selectedLanguages),
+      defaultLanguage: get(defaultLanguage)
+    }
   })
-
-  projects.set([...get(projects)])
 }

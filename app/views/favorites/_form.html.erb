@@ -2,12 +2,14 @@
   <% has_been_favorited = current_user.favorites.find_by_post_id(post.id).present? %>
 
   <div data-favorite="<%= post.id %>">
-    <%= button_to favorites_path,
-        remote: true,
-        method: has_been_favorited ? :delete : :post,
-        params: { favorite: { post_id: post.id } },
-        form: { autocomplete: "off" },
-        aria: { label: "Favorite code #{ post.code }" },
+    <%= button_tag aria: { label: "Favorite code #{ post.code }" },
+        data: {
+          action: "favorite",
+          target: post.id,
+          active: has_been_favorited,
+          active_icon: image_path("icons/icon-heart.svg"),
+          inactive_icon: image_path("icons/icon-heart-border.svg")
+        },
         class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
       <%= image_tag "icons/icon-heart#{ "-border" unless has_been_favorited }.svg", width: 24, height: 24, aria: { label: "Favorite" } %>
     <% end %>

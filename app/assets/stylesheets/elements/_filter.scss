@@ -24,6 +24,7 @@
 
 .filter__content {
   position: relative;
+  height: 100%;
   width: 100%;
   margin-top: $search-height / -2;
   padding-top: calc(1rem + #{ $search-height / 2 });
@@ -31,7 +32,8 @@
   border-bottom-left-radius: $search-height / 2;
   border-bottom-right-radius: $search-height / 2;
   background: $bg-dark;
-  height: 100%;
+  box-shadow: $shadow;
+  transition: box-shadow var(--animation-duration);
   animation: fade-in-filter-content var(--animation-duration, 0ms);
 
   &::after {

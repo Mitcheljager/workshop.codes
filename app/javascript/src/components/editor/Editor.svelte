@@ -1,22 +1,20 @@
 <script>
   import { onMount } from "svelte"
-  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap } from "../../stores/editor"
+  import { fly } from "svelte/transition"
+  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "../../stores/editor"
+  import EditorActions from "./EditorActions.svelte"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
   import CodeMirror from "./CodeMirror.svelte"
   import DragHandle from "./DragHandle.svelte"
-  import ScriptImporter from "./ScriptImporter.svelte"
-  import TranslationKeys from "./TranslationKeys/TranslationKeys.svelte"
-  import Compiler from "./Compiler.svelte"
   import ProjectsDropdown from "./ProjectsDropdown.svelte"
-  import Save from "./Save.svelte"
   import Empty from "./Empty.svelte"
-  import Settings from "./Settings.svelte"
-  import Shortcuts from "./Shortcuts.svelte"
   import ItemFinder from "./ItemFinder.svelte"
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
-  import * as logo from "../../../../assets/images/logo.svg"
+  import Modals from "./Modals/Modals.svelte"
+  import Logo from "../icon/Logo.svelte"
+  import Bugsnag from "../Bugsnag.svelte"
 
   export let events
   export let values
@@ -25,6 +23,7 @@
   export let defaults
   export let heroes
   export let maps
+  export let bugsnagApiKey = ""
   export let _projects
   export let _isSignedIn = false
 
@@ -35,6 +34,7 @@
 
   onMount(() => {
     $completionsMap = parseKeywords()
+    $workshopConstants = constants
     $currentItem = $items?.[0] || {}
     $projects = _projects || []
     $isSignedIn = _isSignedIn
@@ -44,7 +44,7 @@
     const mappedEvents = objectToKeyword(events, "event")
     const mappedValues = objectToKeyword(values, "text")
     const mappedActions = objectToKeyword(actions, "function")
-    const mappedConstants = objectToKeyword(constants.map(c => Object.values(c)).flat(1), "constant")
+    const mappedConstants = objectToKeyword(Object.values(constants).map(c => Object.values(c)).flat(1), "constant")
     const mappedHeroes = objectToKeyword(heroes, "text")
     const mappedMaps = objectToKeyword(maps, "text")
 
@@ -111,41 +111,25 @@
   $: document.title = $currentProject?.title !== undefined ? `Editor | ${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 </script>
 
-<div class="editor">
+<svelte:window bind:innerWidth={$screenWidth} />
+
+<div class="editor" class:editor--empty={!$currentProjectUUID}>
   <div class="editor__top">
-    <img on:click={() => $currentProjectUUID = null} class="mr-1/2 cursor-pointer" src={logo} height=50 alt="Workshop.codes" />
+    <button class="w-auto {$isMobile ? 'mr-1/4' : 'mr-1/2'}" on:click={() => $currentProjectUUID = null}>
+      <Logo />
+    </button>
 
     {#if $projects}
       <ProjectsDropdown />
     {/if}
 
-    <div class="editor__actions">
-      {#if $currentProjectUUID}
-        {#if !$currentProject?.is_owner}
-          <div class="warning warning--orange br-1 align-self-center">
-            You do not own this project and can not save
-          </div>
-        {/if}
-
-        <Shortcuts />
-        <Settings />
-        <TranslationKeys />
-
-        {#if isSignedIn && $currentProject?.is_owner}
-          <ScriptImporter />
-        {/if}
-
-        <Compiler />
-
-        {#if isSignedIn && $currentProject?.is_owner}
-          <Save />
-        {/if}
-      {/if}
-    </div>
+    {#if $currentProjectUUID}
+      <EditorActions />
+    {/if}
   </div>
 
   {#if $currentProjectUUID}
-    <div class="editor__aside">
+    <div class="editor__aside" in:fly={$isMobile ? { y: -10, duration: 200 } : { x: -10, duration: 200 }}>
       <div class="editor__scrollable">
         <div class="pr-1/4 pl-1/4">
           <ItemFinder />
@@ -168,30 +152,37 @@
     </div>
 
     <div class="editor__content">
-      {#if Object.keys($currentItem).length}
-        <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
+      {#if $currentItem?.id}
+        <!-- This key makes it so CodeMirror has to re-render when the "word-wrap" setting is changed.
+        There could be more elegant solutions that use the CodeMirror API to update extensions,
+        but this is the far more simple and readable solution. -->
+        {#key $settings["word-wrap"]}
+          <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
+        {/key}
       {/if}
-    </div>
-
-    <div class="editor__popout editor__scrollable">
-      <EditorWiki bind:fetchArticle />
-
-      <DragHandle key="popout-width" currentSize=300 align="left" />
     </div>
   {:else}
     <Empty />
   {/if}
 
-  <div class="editor__mobile-warning">
-    The editor is currently not functional on mobile
+  <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
+    <EditorWiki bind:fetchArticle />
+
+    <DragHandle key="popout-width" currentSize=300 align="left" />
   </div>
 </div>
 
 {#if !$isSignedIn}
   <div class="alerts">
-    <div class="alerts__alert alerts__alert--warning">
+    <div class="alert alert--warning">
       You are not signed in and nothing you do will be saved!
       <a href="/login">Please sign in</a>
     </div>
   </div>
+{/if}
+
+<Modals />
+
+{#if bugsnagApiKey}
+  <Bugsnag apiKey={bugsnagApiKey} />
 {/if}

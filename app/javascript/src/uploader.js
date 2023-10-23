@@ -9,8 +9,6 @@ export default class Uploader {
   }
 
   async upload() {
-    if (this.file.size > (2 * 1048576)) throw new Error("Filesize is too large. Max 2MB.")
-
     const directUploadUrl = document.querySelector("[data-direct-upload-url]").dataset.directUploadUrl
     const upload = new DirectUpload(this.file, directUploadUrl, this)
 

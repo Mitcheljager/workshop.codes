@@ -14,4 +14,8 @@ class FilterController < ApplicationController
 
     render layout: false
   end
+
+  def partial
+    render partial: "filter/filter_content"
+  end
 end

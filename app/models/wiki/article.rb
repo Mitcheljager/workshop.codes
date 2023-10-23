@@ -13,6 +13,7 @@ class Wiki::Article < ApplicationRecord
 
   has_one :edit, dependent: :destroy
   has_many_attached :images, dependent: :destroy
+  has_many_attached :videos, dependent: :destroy
 
   attr_accessor :edit_notes
 

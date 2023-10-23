@@ -120,12 +120,40 @@ strong {
   height: auto;
 }
 
-.empty-button {
+.shadow-block {
+  background: $bg-dark;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  margin: $margin / 4 0;
+}
+
+button {
   appearance: none;
   background: transparent;
   border: 0;
+  padding: 0;
   font-family: $font-stack;
   font-size: $font-size-base;
-  width: 100%;
+  text-align: left;
   cursor: pointer;
+
+  &[data-tooltip]:hover {
+    position: relative;
+
+    &::after {
+      content: attr(data-tooltip);
+      display: block;
+      background: $bg-dark;
+      position: absolute;
+      right: 0;
+      bottom: -0.25em;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+      transform: translateY(100%);
+      font-size: $font-size-small;
+      color: $text-color-dark;
+      white-space: nowrap;
+      z-index: 2;
+    }
+  }
 }

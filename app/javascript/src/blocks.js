@@ -1,4 +1,6 @@
 import Sortable from "sortablejs"
+import WebpackerSvelte from "webpacker-svelte"
+import LimitedCheckboxes from "../src/components/form/LimitedCheckboxes.svelte"
 import FetchRails from "./fetch-rails"
 
 export function bind() {
@@ -18,6 +20,7 @@ function createBlock() {
   new FetchRails("/blocks", { block: { content_type: this.dataset.contentType, name: this.dataset.name } })
     .post().then(data => {
       new Promise((resolve) => new Function("resolve", data)(resolve))
+      renderSvelteComponents()
     }).finally(() => {
       this.dataset.disabled = false
     })
@@ -46,6 +49,10 @@ function updateBlockSortable() {
       progressBar.setValue(1)
       progressBar.hide()
     })
+}
+
+function renderSvelteComponents() {
+  WebpackerSvelte.setup({ LimitedCheckboxes })
 }
 
 export function insertBlockTemplate(event) {

@@ -1,6 +1,18 @@
 .carousel {
+  position: relative;
   width: 100%;
   max-width: 900px;
+
+  [data-role="carousel"]:not([style]) {
+    height: 500px;
+    overflow: hidden;
+  }
+}
+
+.carousel__item {
+  position: relative;
+  background: $body-bg;
+  overflow: hidden;
 
   img {
     display: block;
@@ -10,29 +22,6 @@
     text-indent: 1000 * 1000px;
     aspect-ratio: 16/9;
   }
-
-  [data-role="carousel"]:not([style]) {
-    height: 500px;
-    overflow: hidden;
-  }
-}
-
-.carousel__wrapper {
-  overflow: hidden;
-
-  &--is-inactive {
-    display: none;
-  }
-
-  img:not([src]) {
-    height: 1px;
-  }
-}
-
-.carousel__item {
-  position: relative;
-  background: $body-bg;
-  overflow: hidden;
 }
 
 .carousel__actions {
@@ -54,7 +43,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: $margin / 4;
-  padding: $margin / 4;
+  margin-top: $margin / 4;
 
   @include media-min(sm) {
     grid-template-columns: repeat(7, 1fr);

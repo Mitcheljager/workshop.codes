@@ -6,4 +6,8 @@
   These posts use <strong><%= @post.code %></strong> as part of their code. This could be because they remixed it, used parts of it, were inspired by it, or other reasons.
 </blockquote>
 
-<%= render @posts %>
+<div class="cards">
+  <% @posts.each do |post| %>
+    <%= render "posts/card", post: post %>
+  <% end %>
+</div>

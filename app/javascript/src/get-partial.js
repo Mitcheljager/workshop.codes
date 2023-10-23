@@ -26,7 +26,8 @@ function setObserver(element) {
 function getPartial(event, element) {
   if (event) event.preventDefault()
 
-  const _this = element || event.target
+  let _this = element || event.target
+  if (!_this.dataset.url) _this = event.target.closest("[data-action~='get-partial']")
   const targetElement = document.querySelector(`[data-partial="${ _this.dataset.target }"]`)
   const url = _this.dataset.url
 

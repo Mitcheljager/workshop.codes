@@ -7,7 +7,7 @@ class RevisionsController < ApplicationController
   end
 
   def index
-    @post = Post.select(:title, :id, :user_id).includes(:user).find_by_code!(params[:code])
+    @post = Post.select(:title, :id, :user_id, :code).includes(:user).find_by_code!(params[:code])
     @revisions = Revision.where(visible: true, post_id: @post).select(:id, :post_id, :version, :code, :description, :created_at, :updated_at).order(created_at: :desc)
   end
 
@@ -27,7 +27,7 @@ class RevisionsController < ApplicationController
   end
 
   def partial
-    @post = Post.select(:id, :user_id).includes(:revisions).find(params[:id])
+    @post = Post.select(:id, :user_id, :code).includes(:revisions).find(params[:id])
 
     render partial: "revisions"
   end

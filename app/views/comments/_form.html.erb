@@ -3,13 +3,17 @@
     url: defined?(comment) ? comment_path(comment.id) : comments_path,
     method: defined?(comment) ? :patch : :post,
     remote: true,
-    html: { class: "comment-form" } do |form| %>
+    html: { class: "comment-form #{ defined?(parent_id) ? "mt-1/4" : "shadow-block p-1/4" }" } do |form| %>
 
     <%= form.hidden_field :post_id, value: post.id %>
     <%= form.hidden_field :parent_id, value: parent_id if defined?(parent_id) %>
 
-    <div class="form-group">
-      <%= form.text_area :content, class: "form-input form-textarea form-textarea--extra-small bg-darker mw-100", placeholder: "Comment...", data: { role: "comment-input" }, required: true %>
+    <div class="form-group mt-0">
+      <%= form.text_area :content,
+        class: "form-input form-textarea form-textarea--extra-small bg-darker mw-100",
+        placeholder: "Leave a comment... Please remember to be kind and respectful, these are real people, just like you!",
+        data: { role: "comment-input" },
+        required: true %>
     </div>
 
     <%= button_tag defined?(comment) ? t("comment.edit") : t("comment.submit"), class: "button mt-1/4" %>

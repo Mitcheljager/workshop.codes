@@ -4,6 +4,7 @@
   import { isAnyParentHidden, toggleFolderState } from "../../utils/editor"
   import EditorItemDestroy from "./EditorItemDestroy.svelte"
   import EditorItemHide from "./EditorItemHide.svelte"
+  import EditorItemDuplicate from "./EditorItemDuplicate.svelte"
   import EditorItemName from "./EditorItemName.svelte"
   import EditorList from "./EditorList.svelte"
 
@@ -26,7 +27,7 @@
   class:editor-folder--expanded={expanded}
   class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
   data-item-id={item.id}>
-  <button class="editor-folder__icon empty-button" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
+  <button class="editor-folder__icon" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
     &gt;
   </button>
 
@@ -39,6 +40,7 @@
   </div>
 
   <div class="editor-item__actions">
+    <EditorItemDuplicate {item} />
     <EditorItemHide {item} />
     <EditorItemDestroy {item} />
   </div>

@@ -1,7 +1,9 @@
 <script>
   import { fly } from "svelte/transition"
-  import { compile } from "../../utils/compiler"
+  import { compile } from "../../utils/compiler/compile"
   import { copyValueToClipboard } from "../../copy"
+
+  export let inline = false
 
   let compiling = false
   let copied = false
@@ -32,7 +34,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.shiftKey && event.keyCode == 83) {
+    if (event.ctrlKey && event.shiftKey && event.code === "KeyS") {
       event.preventDefault()
       doCompile()
     }
@@ -41,14 +43,20 @@
 
 <svelte:window on:keydown={keydown} />
 
-<button class="button button--secondary button--square tooltip" on:click={doCompile}>
-  {#if compiling}
-    Compiling...
+<button
+  class="tooltip {$$restProps["class"] ?? ""} {!inline ? "button button--secondary button--square" : ""}"
+  on:click={doCompile}>
+  {#if inline && copied}
+    Compiled and copied!
   {:else}
-    Compile
+    {#if compiling}
+      Compiling...
+    {:else}
+      Compile
+    {/if}
   {/if}
 
-  {#if copied}
+  {#if copied && !inline}
     <div transition:fly={{ y: 5, duration: 150 }} class="tooltip__content bg-primary text-pure-white block">
       Copied to clipboard
     </div>

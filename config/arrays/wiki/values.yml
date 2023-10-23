@@ -4030,7 +4030,7 @@ workshopSettingToggle:
   - name: Default
     description: The default value for this setting.
     type: BoolLiteral
-    default: 0
+    default: False
   - name: Sort Order
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
     type: IntLiteral

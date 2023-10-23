@@ -33,5 +33,5 @@ function closeDropdown(event) {
 }
 
 function closeOnKeyDown(event) {
-  if (event.key === "Escape") closeDropdown(event)
+  if (event.code === "Escape") closeDropdown(event)
 }

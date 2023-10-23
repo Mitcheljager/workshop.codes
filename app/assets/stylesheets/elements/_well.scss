@@ -20,6 +20,30 @@
     background: var(--bg-darker);
   }
 
+  &--scrollable {
+    max-height: 10rem;
+    overflow-y: auto;
+
+    @include styled-scrollbar;
+  }
+
+  &--image {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include media-min(sm) {
+      padding-left: 150px;
+    }
+
+    img {
+      display: none;
+
+      @include media-min(sm) {
+        display: block
+      }
+    }
+  }
+
   a {
     text-decoration: none;
   }

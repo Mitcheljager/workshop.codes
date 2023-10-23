@@ -1,6 +1,8 @@
 <script>
   import { items, currentItem, editorStates } from "../../stores/editor"
-  import { getItemById, replaceBetween, setCurrentItemById, updateItem } from "../../utils/editor"
+  import { getItemById, setCurrentItemById, updateItem } from "../../utils/editor"
+  import { replaceBetween } from "../../utils/parse"
+  import { escapeable } from "../actions/escapeable"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
@@ -13,10 +15,10 @@
   let selected = 0
   let message = ""
 
-  $: searchItems(value, replace)
+  $: searchItems(value, replace, $items)
   $: if (active) focusInput()
   $: if (value || replace) message = ""
-  $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches.length, 0)
+  $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches?.length, 0)
   $: occurrencesString = `${ occurrences } occurrence${ occurrences > 1 ? "s" : "" } in ${ itemMatches.length } item${ itemMatches.length > 1 ? "s" : "" }`
 
   function searchItems() {
@@ -112,7 +114,7 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && event.shiftKey && event.keyCode == 70) { // F key
+    if (event.ctrlKey && event.shiftKey && event.code === "KeyF") {
       event.preventDefault()
       active = !active
       if (active) {
@@ -127,16 +129,16 @@
     if (input != document.activeElement && replaceInput != document.activeElement) return
     if (!active) return
 
-    if (selected && event.keyCode == 13) { // Enter key
+    if (selected && event.code === "Enter") {
       selectItem(itemMatches[selected].id)
     }
 
-    if (event.keyCode == 40) { // Down array
+    if (event.code === "ArrowDown") {
       event.preventDefault()
       setSelected(1)
     }
 
-    if (event.keyCode == 38) { // Up array
+    if (event.code === "ArrowUp") {
       event.preventDefault()
       setSelected(-1)
     }
@@ -148,7 +150,7 @@
   }
 </script>
 
-<svelte:window on:keydown={keydown} on:keydown={event => { if (event.key === "Escape") active = false }} />
+<svelte:window on:keydown={keydown} />
 
 {#if !active}
   <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
@@ -157,7 +159,7 @@
 {/if}
 
 {#if active}
-  <div in:fly={{ duration: 150, y: -30 }}>
+  <div in:fly={{ duration: 150, y: -30 }} use:escapeable on:escape={() => active = false}>
     <input type="text" class="form-input bg-darker mt-1/4" placeholder="Find in all..." bind:value bind:this={input} />
 
     <div class="flex mt-1/16">
@@ -170,18 +172,18 @@
 
   {#if value}
     <div class="matches">
-      {#if itemMatches.length}
+      {#if itemMatches?.length}
         <div class="text-italic text-dark mb-1/8">
           Found {occurrencesString}
         </div>
       {/if}
 
-      {#if !itemMatches.length && !message}
+      {#if !itemMatches?.length && !message}
         <em class="text-dark">No matches found</em>
       {/if}
 
-      {#each itemMatches as item, i}
-        <div class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
+      {#each (itemMatches || []) as item, i}
+        <button class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
           {item.name}
 
           {#if item.parent}
@@ -189,15 +191,15 @@
           {/if}
 
           <div class="text-dark text-small">
-            <span class="text-white">Matches: {item.contentMatches.length}</span>
+            <span class="text-white">Matches: {item.contentMatches?.length}</span>
 
-            {#each item.contentMatches as match}
+            {#each (item.contentMatches || []) as match}
               <div>
                 - {match.truncateStart ? "..." : ""}{@html highlightString(match.string)}{match.truncateEnd ? "..." : ""}
               </div>
             {/each}
           </div>
-        </div>
+        </button>
       {/each}
     </div>
   {/if}

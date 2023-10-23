@@ -1,30 +1,64 @@
 <script>
+  import Bugsnag from "@bugsnag/js"
   import FetchRails from "../../fetch-rails"
-  import { currentProject, items } from "../../stores/editor"
-  import { defaultLanguage, selectedLanguages, translationKeys } from "../../stores/translationKeys"
+  import { currentProject, modal } from "../../stores/editor"
+  import { getSaveContent } from "../../utils/editor"
+  import { updateProject } from "../../utils/project"
+  import { createProjectBackup } from "../../utils/projectBackups"
+  import { Modal } from "../../constants/Modal"
+  import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
   import { Confetti } from "svelte-confetti"
+  import { fly } from "svelte/transition"
 
   let loading = false
   let confettiActive = false
+  let dropdownActive = false
   let lastSaveContent = ""
 
   function save() {
     loading = true
 
     const content = getSaveContent()
+    saveToLocalStorage(content, Date.now())
 
     new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })
       .then(data => {
         if (!data) throw Error("Create failed")
 
         lastSaveContent = content
+
+        const updated_at = JSON.parse(data).updated_at
+
+        updateProject($currentProject.uuid, { updated_at })
+        saveToLocalStorage(content, updated_at) // Save again to localStorage to update the updated_at date
+
         showConfetti()
       })
       .catch(error => {
-        console.error(error)
+        Bugsnag.notify(error)
         alert("Something went wrong while saving, please try again")
       })
-      .finally(() => loading = false)
+      .finally(() => {
+        loading = false
+      })
+  }
+
+  function saveToLocalStorage(content, date) {
+    const currentSaved = JSON.parse(localStorage.getItem("saved-projects") || "{}")
+    localStorage.setItem("saved-projects", JSON.stringify({
+      ...currentSaved,
+      [$currentProject.uuid]: {
+        updated_at: date,
+        content
+      }
+    }))
+  }
+
+  async function createBackup() {
+    loading = true
+    await createProjectBackup($currentProject.uuid)
+    loading = false
   }
 
   function showConfetti() {
@@ -33,21 +67,10 @@
   }
 
   function keydown(event) {
-    if (event.ctrlKey && !event.shiftKey && event.keyCode == 83) {
+    if (event.ctrlKey && !event.shiftKey && event.code === "KeyS") {
       event.preventDefault()
       save()
     }
-  }
-
-  function getSaveContent() {
-    return JSON.stringify({
-      items: $items,
-      translations: {
-        keys: $translationKeys,
-        selectedLanguages: $selectedLanguages,
-        defaultLanguage: $defaultLanguage
-      }
-    })
   }
 
   function beforeUnload(event) {
@@ -61,13 +84,44 @@
 <svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} />
 
 <div class="relative">
-  <button class="button button--square" on:click={save} disabled={loading}>
-    {#if loading}
-      Saving...
-    {:else}
-      Save
-    {/if}
-  </button>
+  <div class="button-group">
+    <button class="button button--square" on:click={save} disabled={loading}>
+      {#if loading}
+        Saving...
+      {:else}
+        Save
+      {/if}
+    </button>
+
+    <div class="dropdown" use:outsideClick on:outsideClick={() => dropdownActive = false}>
+      <button class="button button--square pr-0 pl-0 h-100 flex align-center" on:click={() => dropdownActive = !dropdownActive}>
+        <svg width="18px" height="18px" viewBox="0 0 24 24" class="m-0">
+          <path d="M7.00003 8.5C6.59557 8.5 6.23093 8.74364 6.07615 9.11732C5.92137 9.49099 6.00692 9.92111 6.29292 10.2071L11.2929 15.2071C11.6834 15.5976 12.3166 15.5976 12.7071 15.2071L17.7071 10.2071C17.9931 9.92111 18.0787 9.49099 17.9239 9.11732C17.7691 8.74364 17.4045 8.5 17 8.5H7.00003Z" fill="white" />
+        </svg>
+      </button>
+
+      {#if dropdownActive}
+        <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => dropdownActive = false} class="dropdown__content block w-100 p-1/4" style="width: 200px">
+          <p class="mt-0 text-italic text-small text-base">
+            Last saved:<br>
+            {new Date($currentProject.updated_at).toLocaleString()}
+          </p>
+
+          <button class="button button--square button--small w-100" on:click={createBackup} disabled={loading}>
+            {#if loading}
+              Creating backup...
+            {:else}
+              Create backup
+            {/if}
+          </button>
+
+          <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show(Modal.Backups)}>
+            View backups
+          </button>
+        </div>
+      {/if}
+    </div>
+  </div>
 
   {#if confettiActive}
     <div class="confetti-holder">
@@ -75,5 +129,3 @@
     </div>
   {/if}
 </div>
-
-

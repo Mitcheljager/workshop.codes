@@ -13,7 +13,10 @@ class Wiki::SearchController < Wiki::BaseController
   end
 
   def index
-    ids = Wiki::Article.search(params[:query])
+    ids = Rails.cache.fetch("wiki_article_search_#{params[:query]}", expires_in: 1.day) do
+      Wiki::Article.search(params[:query])
+    end
+
     articles = Wiki::Article.where(id: ids)
     groups = articles.map { |article| article.group_id }.uniq
     latest_articles = Wiki::Article.where(group_id: groups).group(:group_id).maximum(:id).values
@@ -24,7 +27,7 @@ class Wiki::SearchController < Wiki::BaseController
       format.json {
         @articles.each do |article|
           if params[:parse_markdown]
-            article.content = sanitized_markdown(article.content)
+            article.content = sanitized_markdown(article.content, rendererOptions: { header_anchors: true })
           else
             article.content = ReverseMarkdown.convert(ActionController::Base.helpers.sanitize(markdown(article.content || ""), tags: %w(style p br strong em b blockquote h1 h2 h3 h4 h5 h6 code pre)).gsub(/h\d/, "strong"))
           end

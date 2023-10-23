@@ -30,7 +30,7 @@ When "I try to remove the post titled {string} as a source" do |title|
   expect(post).to be_present
 
   within "[data-svelte-component='DerivativesForm']" do
-    close = find("span", text: post.code).find("div")
+    close = find("span", text: post.code).find("button")
     close.click
   end
 

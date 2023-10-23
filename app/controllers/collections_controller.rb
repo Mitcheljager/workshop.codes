@@ -3,8 +3,10 @@ class CollectionsController < ApplicationController
     redirect_to login_path unless current_user
   end
 
+  after_action :track_action, only: [:show]
+
   def index
-    @collections = current_user.collections.order(created_at: :desc)
+    @collections = Collection.includes(:posts).where("posts_count > ?", 0).order(created_at: :desc).limit(20)
   end
 
   def show
@@ -20,8 +22,9 @@ class CollectionsController < ApplicationController
 
   def partial
     @post = Post.select(:id, :collection_id).includes(:collection).find(params[:id])
+    @collection = @post.collection
 
-    render partial: "collections"
+    render partial: "post_collection_posts"
   end
 
   def new
@@ -34,6 +37,7 @@ class CollectionsController < ApplicationController
     @collection.user_id = current_user.id
 
     if @collection.save
+      params[:collection][:collection_posts] = [] if collection_params[:collection_posts].nil?
       set_collection_id_for_posts(collection_params[:collection_posts])
 
       flash[:notice] = "Collection created"
@@ -54,6 +58,10 @@ class CollectionsController < ApplicationController
     param_ids = (collection_params[:collection_posts] || []).map { |id| id.to_i }
 
     if @collection.update(collection_params)
+      if (params[:remove_cover_image].present?)
+        @collection.cover_image.purge
+      end
+
       if (initial_ids != param_ids)
         set_collection_id_for_posts(param_ids, initial_ids)
       end
@@ -75,24 +83,46 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def revisions
+    @collection = Collection.find_by_nice_url!(params[:nice_url].downcase)
+    @post_ids = @collection.posts.visible?.pluck(:id)
+    @revisions = Revision.includes(:post).where(visible: true, post_id: @post_ids).order(created_at: :desc).page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render "feed/infinite_scroll_feed_items"
+      }
+    end
+  end
+
   private
 
   def collection_params
     params.require(:collection).permit(:title, :cover_image, :description, :display_type, { collection_posts: [] })
   end
 
-  def set_collection_id_for_posts(current_ids, initial_ids = [])
+  def set_collection_id_for_posts(current_ids = [], initial_ids = [])
     new_ids = current_ids - initial_ids
 
     posts = current_user.posts.where(id: new_ids)
     posts.each do |post|
       post.update_column(:collection_id, @collection.id)
+      Collection.increment_counter(:posts_count, @collection.id)
     end
 
     removed_ids = initial_ids - current_ids
     posts = current_user.posts.where(id: removed_ids)
     posts.each do |post|
       post.update_column(:collection_id, nil)
+      Collection.decrement_counter(:posts_count, @collection.id)
     end
+  end
+
+  def track_action
+    parameters = request.path_parameters
+    parameters["id"] = @collection.id
+
+    TrackingJob.perform_async(ahoy, "Collection Visit", parameters)
   end
 end

@@ -35,11 +35,15 @@ def compress_visits
   @statistic = Statistic.new(timeframe: :daily, content_type: :unique_visit, on_date: Date.today, value: visits)
   @statistic.save
 
-  copy_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Copy Code").distinct.pluck(:visit_id, :properties).count
-  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_copies, on_date: Date.today, value: copy_count)
+  post_copy_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Copy Code").distinct.pluck(:visit_id, :properties).count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_copies, on_date: Date.today, value: post_copy_count)
   @statistic.save
 
-  visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Posts Visit").distinct.pluck(:visit_id, :properties).count
-  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_post_visits, on_date: Date.today, value: visit_count)
+  post_visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Posts Visit").distinct.pluck(:visit_id, :properties).count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_post_visit, on_date: Date.today, value: post_visit_count)
+  @statistic.save
+
+  collection_visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Collection Visit").distinct.pluck(:visit_id, :properties).count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_collection_visit, on_date: Date.today, value: collection_visit_count)
   @statistic.save
 end

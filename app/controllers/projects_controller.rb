@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create(title: project_params[:title], content_type: project_params[:content_type], user_id: current_user.id)
+    @project.content = project_params[:content] if project_params[:content].present?
     @project.is_owner = current_user.id == @project.user_id
 
     if @project.save
@@ -24,9 +25,11 @@ class ProjectsController < ApplicationController
   def update
     @project = current_user.projects.find_by_uuid!(params[:uuid])
 
-    if @project.update(project_params)
+    begin
+      @project.update!(project_params)
       render json: @project, layout: false
-    else
+    rescue => exception
+      Bugsnag.notify(exception) if Rails.env.production?
       render json: @project.errors.full_messages, status: 500, layout: false
     end
   end

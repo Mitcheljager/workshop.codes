@@ -58,7 +58,7 @@ RSpec.describe "Archived posts controller", type: :request do
           end
         }.to change { User.count }.by(1)
         expect(response).to redirect_to(linked_users_path)
-        expect(flash[:alert][:message]).to eq("Your Battle.net account '#{@username}' has been linked.")
+        expect(flash[:alert]).to eq("Your Battle.net account '#{@username}' has been linked.")
 
         expect {
           patch archive_path(code: archive_post.code)
@@ -118,7 +118,7 @@ RSpec.describe "Archived posts controller", type: :request do
           end
           user.reload
         }.to change { user.linked_users.count }.by(1)
-        expect(flash[:alert][:message]).to eq("Your Battle.net account '#{@username}' has been linked.")
+        expect(flash[:alert]).to eq("Your Battle.net account '#{@username}' has been linked.")
 
         expect {
           delete archive_path(code: archive_post.code)
@@ -172,7 +172,7 @@ RSpec.describe "Archived posts controller", type: :request do
           post "/auth/bnet"
           follow_redirect!
         end
-        expect(flash[:alert][:message]).to eq("Your Battle.net account '#{bnet_username}' has been linked.")
+        expect(flash[:alert]).to eq("Your Battle.net account '#{bnet_username}' has been linked.")
 
         expect {
           patch archive_path(code: archive_post.code)

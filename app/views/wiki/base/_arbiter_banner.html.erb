@@ -1,7 +1,9 @@
-<div class="mt-1/1 well well--dark">
-  <div class="mb-1/4 lg:mb-0">
+<div class="mt-1/1 well well--dark well--image gap-1/8">
+  <div>
     Hello there, <strong><%= current_user.username %></strong>. Share what you know and help us fill out the wiki.
   </div>
 
   <%= link_to "Create new article", new_wiki_article_path, class: "button" %>
+
+  <%= image_tag "ollie/ollie-study.png", width: 110, class: "absolute left-0 bottom-0 ml-1/4" %>
 </div>

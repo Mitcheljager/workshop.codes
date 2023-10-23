@@ -4,7 +4,7 @@
   <h3 class="mt-0">Report for: <strong><%= @report.concerns_model %> <%= @report.concerns_id %></strong></h3>
 
   <div class="mb-1/2">
-    Status: <span class="<%= "text-primary" if @report.status == "accepted" %> <%= "text-red" if @report.status == "rejected" %>"><%= @report.status %></span> <br>
+    Status: <span class="<%= "text-green" if @report.status == "accepted" %> <%= "text-red" if @report.status == "rejected" %>"><%= @report.status %></span> <br>
     Created at: <%= @report.created_at %>
   </div>
 

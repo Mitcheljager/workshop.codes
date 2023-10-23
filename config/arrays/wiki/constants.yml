@@ -178,7 +178,7 @@ Color:
     ja-JP: ブラック
     pt-BR: Preto
     zh-CN: 黑色
-  GRAY: 
+  GRAY:
     en-US: Gray
     es-MX: Gris
     fr-FR: Gris
@@ -1860,6 +1860,7 @@ Operator:
     guid: 000000007812
     en-US: ">"
     fr-FR: "> supérieur à"
+
 Health:
   NORMAL:
     en-US: Health
@@ -1867,3 +1868,403 @@ Health:
     en-US: Armor
   SHIELDS:
     en-US: Shields
+
+Modify Health Type:
+  Damage:
+    en-US: Damage
+  Heal:
+    en-US: Heal
+
+Projectile Effect:
+  Orb Projectile:
+    en-US: Orb Projectile
+  Baptiste Biotic Launcher:
+    en-US: Baptiste Biotic Launcher
+  Bastion A-36 Tactical Grenade:
+    en-US: Bastion A-36 Tactical Grenade
+  Echo Sticky Bomb:
+    en-US: Echo Sticky Bomb
+  Genji Shuriken:
+    en-US: Genji Shuriken
+  Lucio Sonic Amplifier:
+    en-US: Lucio Sonic Amplifier
+  Mei Icicle:
+    en-US: Mei Icicle
+  Mercy Caduceus Blaster:
+    en-US: Mercy Caduceus Blaster
+  Moira Damage Orb:
+    en-US: Moira Damage Orb
+  Moira Heal Orb:
+    en-US: Moira Heal Orb
+  Orisa Fusion Driver:
+    en-US: Orisa Fusion Driver
+  Pharah Rocket:
+    en-US: Pharah Rocket
+  Reinhardt Fire Strike:
+    en-US: Reinhardt Fire Strike
+  Roadhog Scrap:
+    en-US: Roadhog Scrap
+  Roadhog Scrap Ball:
+    en-US: Roadhog Scrap Ball
+  Sigma Hypersphere:
+    en-US: Sigma Hypersphere
+  Symmetra Photon Projector:
+    en-US: Symmetra Photon Projector
+  Ramattra Ravenous Vortex Sphere:
+    en-US: Ramattra Ravenous Vortex Sphere
+  Zarya Graviton:
+    en-US: Zarya Graviton
+  Zarya Particle Cannon:
+    en-US: Zarya Particle Cannon
+
+Projectile Effect Reevaluation:
+  Visible To, Position, Direction and Size:
+    en-US: Visible To, Position, Direction and Size
+  Position, Direction And Size:
+    en-US: Position, Direction And Size
+  Visible To:
+    en-US: Visible To
+  None:
+    en-US: None
+  Visible To, Friendly To, Position, Direction And Size:
+    en-US: Visible To, Friendly To, Position, Direction And Size
+  Friendly To, Position, Direction And Size:
+    en-US: Friendly To, Position, Direction And Size
+  Visible To, Friendly To:
+    en-US: Visible To, Friendly To
+  Friendly To:
+    en-US: Friendly To
+
+Kinetic Explosion Effect:
+  Ana Biotic Grenade Explosion Effect:
+    en-US: Ana Biotic Grenade Explosion Effect
+  Ashe Dynamite Explosion Effect:
+    en-US: Ashe Dynamite Explosion Effect
+  Baptiste Biotic Launcher Explosion Effect:
+    en-US: Baptiste Biotic Launcher Explosion Effect
+  Bastion Tank Cannon Explosion Effect:
+    en-US: Bastion Tank Cannon Explosion Effect
+  Doomfist Rising Uppercut Leap Effect:
+    en-US: Doomfist Rising Uppercut Leap Effect
+  Doomfist Rising Uppercut Impact Effect:
+    en-US: Doomfist Rising Uppercut Impact Effect
+  Doomfist Meteor Strike Impact Effect:
+    en-US: Doomfist Meteor Strike Impact Effect
+  Junkrat Frag Launcher Explosion Effect:
+    en-US: Junkrat Frag Launcher Explosion Effect
+  Junkrat Concussion Mine Explosion Effect:
+    en-US: Junkrat Concussion Mine Explosion Effect
+  Junkrat RIP Tire Explosion Effect:
+    en-US: Junkrat RIP Tire Explosion Effect
+  Cassidy Flashbang Explosion Effect:
+    en-US: Cassidy Flashbang Explosion Effect
+  Pharah Rocket Launcher Explosion Effect:
+    en-US: Pharah Rocket Launcher Explosion Effect
+  Pharah Concussive Blast Effect:
+    en-US: Pharah Concussive Blast Effect
+  Pharah Barrage Explosion Effect:
+    en-US: Pharah Barrage Explosion Effect
+  Reinhardt Fire Strike Target Impact Effect:
+    en-US: Reinhardt Fire Strike Target Impact Effect
+  Sigma Accretion Impact Effect:
+    en-US: Sigma Accretion Impact Effect
+  Widowmaker Venom Mine Explosion Effect:
+    en-US: Widowmaker Venom Mine Explosion Effect
+  Winston Jump Pack Landing Effect:
+    en-US: Winston Jump Pack Landing Effect
+  Wrecking Ball Piledriver Impact Effect:
+    en-US: Wrecking Ball Piledriver Impact Effect
+  Wrecking Ball Minefield Explosion Effect:
+    en-US: Wrecking Ball Minefield Explosion Effect
+
+Energy Explosion Effect:
+  Brigitte Repair Pack Impact Effect:
+    en-US: Brigitte Repair Pack Impact Effect
+  Brigitte Repair Pack Armor Effect:
+    en-US: Brigitte Repair Pack Armor Effect
+  Brigitte Whip Shot Heal Area Effect:
+    en-US: Brigitte Whip Shot Heal Area Effect
+  DVa Micro Missiles Explosion Effect:
+    en-US: DVa Micro Missiles Explosion Effect
+  DVa Self Destruct Explosion Effect:
+    en-US: DVa Self Destruct Explosion Effect
+  Echo Sticky Bomb Explosion Effect:
+    en-US: Echo Sticky Bomb Explosion Effect
+  Hanzo Sonic Arrow Initial Pulse Effect:
+    en-US: Hanzo Sonic Arrow Initial Pulse Effect
+  Lúcio Sound Barrier Cast Effect:
+    en-US: Lúcio Sound Barrier Cast Effect
+  Moira Fade Disappear Effect:
+    en-US: Moira Fade Disappear Effect
+  Moira Fade Reappear Effect:
+    en-US: Moira Fade Reappear Effect
+  Orisa Halt Implosion Effect:
+    en-US: Orisa Halt Implosion Effect
+  Sigma Hypersphere Implosion Effect:
+    en-US: Sigma Hypersphere Implosion Effect
+  Sombra Logo Effect:
+    en-US: Sombra Logo Effect
+  Sombra Translocator Disappear Effect:
+    en-US: Sombra Translocator Disappear Effect
+  Sombra Translocator Reappear Effect:
+    en-US: Sombra Translocator Reappear Effect
+  Sombra EMP Explosion Effect:
+    en-US: Sombra EMP Explosion Effect
+  Symmetra Teleporter Reappear Effect:
+    en-US: Symmetra Teleporter Reappear Effect
+  Tracer Recall Disappear Effect:
+    en-US: Tracer Recall Disappear Effect
+  Tracer Recall Reappear Effect:
+    en-US: Tracer Recall Reappear Effect
+  Zarya Particle Cannon Explosion Effect:
+    en-US: Zarya Particle Cannon Explosion Effect
+
+Beam Effect:
+  Brigitte Flail Chain Beam:
+    en-US: Brigitte Flail Chain Beam
+  Echo Focusing Beam:
+    en-US: Echo Focusing Beam
+  Junkrat Trap Chain Beam:
+    en-US: Junkrat Trap Chain Beam
+  Mercy Heal Beam:
+    en-US: Mercy Heal Beam
+  Mercy Boost Beam:
+    en-US: Mercy Boost Beam
+  Moira Orb Heal Beam:
+    en-US: Moira Orb Heal Beam
+  Moira Orb Damage Beam:
+    en-US: Moira Orb Damage Beam
+  Moira Grasp Connected Beam:
+    en-US: Moira Grasp Connected Beam
+  Moira Coalescence Beam:
+    en-US: Moira Coalescence Beam
+  Orisa Halt Tendril Beam:
+    en-US: Orisa Halt Tendril Beam
+  Symmetra Projector Beam:
+    en-US: Symmetra Projector Beam
+  Symmetra Turret Beam:
+    en-US: Symmetra Turret Beam
+  Torbjörn Turret Sight Beam:
+    en-US: Torbjörn Turret Sight Beam
+  Winston Tesla Cannon Beam:
+    en-US: Winston Tesla Cannon Beam
+  Zarya Particle Beam:
+    en-US: Zarya Particle Beam
+  Omnic Slicer Beam :
+    en-US: Omnic Slicer Beam
+
+Buff Status Effect:
+  Heal Target Active Effect:
+    en-US: Heal Target Active Effect
+  Heal Target Effect:
+    en-US: Heal Target Effect
+  Ana Biotic Grenade Increased Healing Effect:
+    en-US: Ana Biotic Grenade Increased Healing Effect
+  Ana Nano Boosted Effect:
+    en-US: Ana Nano Boosted Effect
+  Baptiste Immortality Field Protected Effect:
+    en-US: Baptiste Immortality Field Protected Effect
+  Echo Cloning Effect:
+    en-US: Echo Cloning Effect
+  Lúcio Sound Barrier Protected Effect:
+    en-US: Lúcio Sound Barrier Protected Effect
+  Mercy Damage Boosted Effect:
+    en-US: Mercy Damage Boosted Effect
+  Reaper Wraith Form Effect:
+    en-US: Reaper Wraith Form Effect
+  "Soldier: 76 Sprinting Effect":
+    en-US: "Soldier: 76 Sprinting Effect"
+  Sombra Translocating Material Effect:
+    en-US: Sombra Translocating Material Effect
+  Torbjörn Overloading Effect:
+    en-US: Torbjörn Overloading Effect
+  Winston Primal Rage Effect:
+    en-US: Winston Primal Rage Effect
+  Wrecking Ball Adaptive Shield Target Effect:
+    en-US: Wrecking Ball Adaptive Shield Target Effect
+  Wrecking Ball Piledriver Fire Effect :
+    en-US: Wrecking Ball Piledriver Fire Effect
+
+Debuff Status Effect:
+  Ana Biotic Grenade No Healing Effect:
+    en-US: Ana Biotic Grenade No Healing Effect
+  Ana Sleeping Effect:
+    en-US: Ana Sleeping Effect
+  Ashe Dynamite Burning Particle Effect:
+    en-US: Ashe Dynamite Burning Particle Effect
+  Ashe Dynamite Burning Material Effect:
+    en-US: Ashe Dynamite Burning Material Effect
+  Cassidy Flashbang Stunned Effect:
+    en-US: Cassidy Flashbang Stunned Effect
+  Mei Frozen Effect:
+    en-US: Mei Frozen Effect
+  Sigma Gravitic Flux Target Effect:
+    en-US: Sigma Gravitic Flux Target Effect
+  Sombra Hacked Starting Effect:
+    en-US: Sombra Hacked Starting Effect
+  Sombra Hacked Looping Effect:
+    en-US: Sombra Hacked Looping Effect
+  Widowmaker Venom Mine Target Effect:
+    en-US: Widowmaker Venom Mine Target Effect
+  Winston Tesla Cannon Target Effect:
+    en-US: Winston Tesla Cannon Target Effect
+  Zenyatta Orb of Discord Target Effect:
+    en-US: Zenyatta Orb of Discord Target Effect
+
+Beam Sound:
+  Orisa Amplifier Sound:
+    en-US: Orisa Amplifier Sound
+  Orisa Halt Tendril Sound:
+    en-US: Orisa Halt Tendril Sound
+  Mercy Boost Beam Sound:
+    en-US: Mercy Boost Beam Sound
+  Mercy Heal Beam Sound:
+    en-US: Mercy Heal Beam Sound
+  Junkrat Trap Chain Sound:
+    en-US: Junkrat Trap Chain Sound
+  Echo Focusing Beam Sound:
+    en-US: Echo Focusing Beam Sound
+  Moira Grasp Connected Sound:
+    en-US: Moira Grasp Connected Sound
+  Moira Orb Damage Sound:
+    en-US: Moira Orb Damage Sound
+  Moira Orb heal Sound:
+    en-US: Moira Orb heal Sound
+  Moira Coalescence Sound:
+    en-US: Moira Coalescence Sound
+  Zarya Particle Beam Sound:
+    en-US: Zarya Particle Beam Sound
+  Omnic Slicer Beam Sound:
+    en-US: Omnic Slicer Beam Sound
+  Winston Tesla Cannon Sound:
+    en-US: Winston Tesla Cannon Sound
+  Symmetra Projector Sound:
+    en-US: Symmetra Projector Sound
+
+Explosion Sound:
+  Ana Biotic Grenade Explosion Sound:
+    en-US: Ana Biotic Grenade Explosion Sound
+  Ashe Dynamite Explosion Sound:
+    en-US: Ashe Dynamite Explosion Sound
+  Baptiste Biotic Launcher Explosion Sound:
+    en-US: Baptiste Biotic Launcher Explosion Sound
+  Bastion Tank Cannon Explosion Sound:
+    en-US: Bastion Tank Cannon Explosion Sound
+  Brigitte Repair Pack Impact Sound:
+    en-US: Brigitte Repair Pack Impact Sound
+  Brigitte Repair Pack Armor Sound:
+    en-US: Brigitte Repair Pack Armor Sound
+  Brigitte Whip Shot Heal Area Sound:
+    en-US: Brigitte Whip Shot Heal Area Sound
+  DVa Micro Missiles Explosion Sound:
+    en-US: DVa Micro Missiles Explosion Sound
+  DVa Self Destruct Explosion Sound:
+    en-US: DVa Self Destruct Explosion Sound
+  Doomfist Rising Uppercut Leap Sound:
+    en-US: Doomfist Rising Uppercut Leap Sound
+  Doomfist Rising Uppercut Impact Sound:
+    en-US: Doomfist Rising Uppercut Impact Sound
+  Doomfist Meteor Strike Impact Sound:
+    en-US: Doomfist Meteor Strike Impact Sound
+  Echo Sticky Bomb Explosion Sound:
+    en-US: Echo Sticky Bomb Explosion Sound
+  Junkrat Frag Launcher Explosion Sound:
+    en-US: Junkrat Frag Launcher Explosion Sound
+  Junkrat Concussion Mine Explosion Sound:
+    en-US: Junkrat Concussion Mine Explosion Sound
+  Junkrat RIP Tire Explosion Sound:
+    en-US: Junkrat RIP Tire Explosion Sound
+  Hanzo Sonic Arrow Initial Pulse Sound:
+    en-US: Hanzo Sonic Arrow Initial Pulse Sound
+  Lúcio Sound Barrier Cast Sound:
+    en-US: Lúcio Sound Barrier Cast Sound
+  Cassidy Flashbang Explosion Sound:
+    en-US: Cassidy Flashbang Explosion Sound
+  Moira Fade Disappear Sound:
+    en-US: Moira Fade Disappear Sound
+  Moira Fade Reappear Sound:
+    en-US: Moira Fade Reappear Sound
+  Orisa Halt Implosion Sound:
+    en-US: Orisa Halt Implosion Sound
+  Pharah Rocket Launcher Explosion Sound:
+    en-US: Pharah Rocket Launcher Explosion Sound
+  Pharah Concussive Blast Sound:
+    en-US: Pharah Concussive Blast Sound
+  Pharah Barrage Explosion Sound:
+    en-US: Pharah Barrage Explosion Sound
+  Reinhardt Fire Strike Target Impact Sound:
+    en-US: Reinhardt Fire Strike Target Impact Sound
+  Sigma Hypersphere Implosion Sound:
+    en-US: Sigma Hypersphere Implosion Sound
+  Sigma Accretion Impact Sound:
+    en-US: Sigma Accretion Impact Sound
+  Sombra Logo Sound:
+    en-US: Sombra Logo Sound
+  Sombra Translocator Disappear Sound:
+    en-US: Sombra Translocator Disappear Sound
+  Sombra Translocator Reappear Sound:
+    en-US: Sombra Translocator Reappear Sound
+  Sombra EMP Explosion Sound:
+    en-US: Sombra EMP Explosion Sound
+  Symmetra Teleporter Reappear Sound:
+    en-US: Symmetra Teleporter Reappear Sound
+  Tracer Recall Disappear Sound:
+    en-US: Tracer Recall Disappear Sound
+  Tracer Recall Reappear Sound:
+    en-US: Tracer Recall Reappear Sound
+  Widowmaker Venom Mine Explosion Sound:
+    en-US: Widowmaker Venom Mine Explosion Sound
+  Winston Jump Pack Landing Sound:
+    en-US: Winston Jump Pack Landing Sound
+  Wrecking Ball Piledriver Impact Sound:
+    en-US: Wrecking Ball Piledriver Impact Sound
+  Wrecking Ball Minefield Explosion Sound:
+    en-US: Wrecking Ball Minefield Explosion Sound
+  Zarya Particle Cannon Explosion Sound:
+    en-US: Zarya Particle Cannon Explosion Sound
+
+Buff and Debuff Sound:
+  Ana Biotic Grenade Increased Healing Sound:
+    en-US: Ana Biotic Grenade Increased Healing Sound
+  Ana Biotic Grenade No Healing Sound:
+    en-US: Ana Biotic Grenade No Healing Sound
+  Ana Sleeping Sound:
+    en-US: Ana Sleeping Sound
+  Ana Nano Boosted Sound:
+    en-US: Ana Nano Boosted Sound
+  Baptiste Immortality Field Protected Sound:
+    en-US: Baptiste Immortality Field Protected Sound
+  Echo Cloning Sound:
+    en-US: Echo Cloning Sound
+  Lúcio Sound Barrier Protected Sound:
+    en-US: Lúcio Sound Barrier Protected Sound
+  Mei Frozen Sound:
+    en-US: Mei Frozen Sound
+  Mercy Damage Boosted Sound:
+    en-US: Mercy Damage Boosted Sound
+  Reaper Wraith Form Sound:
+    en-US: Reaper Wraith Form Sound
+  Sigma Gravitic Flux Target Sound:
+    en-US: Sigma Gravitic Flux Target Sound
+  Sombra Hacking Sound:
+    en-US: Sombra Hacking Sound
+  Sombra Hacked Sound:
+    en-US: Sombra Hacked Sound
+  Sombra Translocating Sound:
+    en-US: Sombra Translocating Sound
+  "Soldier: 76 Sprint Start Sound":
+    en-US: "Soldier: 76 Sprint Start Sound"
+  Torbjörn Overloading Sound:
+    en-US: Torbjörn Overloading Sound
+  Widowmaker Venom Mine Target Sound:
+    en-US: Widowmaker Venom Mine Target Sound
+  Winston Tesla Cannon Target Sound:
+    en-US: Winston Tesla Cannon Target Sound
+  Winston Primal Rage Sound:
+    en-US: Winston Primal Rage Sound
+  Wrecking Ball Adaptive Shield Target Sound:
+    en-US: Wrecking Ball Adaptive Shield Target Sound
+  Wrecking Ball Piledriver Fire Sound:
+    en-US: Wrecking Ball Piledriver Fire Sound
+  Zenyatta Orb of Discord Target Sound :
+    en-US: Zenyatta Orb of Discord Target Sound

@@ -2,30 +2,31 @@
   <div class="scroll-indicator scroll-indicator--left" data-role="scroll-indicator-left" data-target="tabs">
     <%= inline_svg_tag "layout/carousel-left.svg" %>
   </div>
+
   <div class="scroll-indicator" data-role="scroll-indicator-right" data-target="tabs">
     <%= inline_svg_tag "layout/carousel-right.svg" %>
   </div>
 
-  <nav class="tabs tabs--light" data-role="scroll-indicator" data-scroll-indicator="tabs">
+  <nav class="tabs" data-role="scroll-indicator" data-scroll-indicator="tabs">
     <%= link_to t("posts.show.tabs.description"), post_path(@post.code),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("") }",
-                data: { action: "set-tab", target: "description" } %>
+                data: { action: "set-tab scroll", target: "description" } %>
 
     <%= link_to t("posts.show.tabs.controls"), post_tab_path(@post.code, "controls"),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("controls") }",
-                data: { action: "set-tab", target: "controls" } if @post.parsed_controls.any? %>
+                data: { action: "set-tab scroll", target: "controls" } if @post.parsed_controls.any? %>
 
     <%= link_to t("posts.show.tabs.snippet"), post_tab_path(@post.code, "snippet"),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("snippet") }",
-                data: { action: "set-tab load-snippet", target: "snippet", id: @post.id, get_on_load: is_active_tab?("snippet") } if @post.snippet.present? %>
+                data: { action: "set-tab scroll load-snippet", target: "snippet", id: @post.id, get_on_load: is_active_tab?("snippet") } if @post.snippet.present? %>
 
     <%= link_to t("posts.show.tabs.collection"), post_tab_path(@post.code, "collection"),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("collection") }",
-                data: { action: "set-tab get-partial", target: "collection", url: collection_partial_path(@post.id), get_on_load: is_active_tab?("collection") } if @post.collection && @post.collection.posts.visible?.many? %>
+                data: { action: "set-tab scroll get-partial", target: "collection", url: collection_partial_path(@post.id), get_on_load: is_active_tab?("collection") } if @post.collection && @post.collection.posts.visible?.many? %>
 
     <%= link_to post_tab_path(@post.code, "comments"),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("comments") }",
-                data: { action: "set-tab get-partial", target: "comments", url: comment_path(@post.id), get_on_load: is_active_tab?("comments"), scroll_on_load: true } do %>
+                data: { action: "set-tab scroll get-partial", target: "comments", url: comment_path(@post.id), get_on_load: is_active_tab?("comments"), scroll_on_load: true } do %>
 
       <%= t("posts.show.tabs.comments") %>
       <small data-role="comment-total" class="text-dark"><%= @post.comments_count %></small>

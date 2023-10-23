@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "brand", to: "pages#brand", as: "brand"
   get "explanation", to: "pages#explanation"
 
-  get "editor", to: "editor#index"
+  get "editor", to: "editor#index", as: "editor"
   get "workshop-ui", to: "editor#zez_ui", as: "zez_ui"
 
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
@@ -73,6 +73,7 @@ Rails.application.routes.draw do
     get "account(/page/:page)", to: "users#show", as: "account"
     get "account/edit", to: "users#edit", as: "edit_user"
     get "account/posts", to: "users#posts", as: "account_posts"
+    get "account/collections", to: "users#collections", as: "account_collections"
     get "favorites", to: "users#favorites", as: "account_favorites"
     patch "user", to: "users#update", as: "update_user"
     delete "user", to: "users#destroy", as: "destroy_user"
@@ -108,6 +109,7 @@ Rails.application.routes.draw do
     delete "linked_users/:id", to: "linked_users#destroy", as: "destroy_linked_user"
 
     resources :reports, only: [:create, :new, :destroy, :update]
+    get "reports/:id/:status", to: "reports#update", as: "report_submit"
     resources :notifications, only: [:index], concerns: :paginatable
     get "unread-notifications", to: "notifications#get_unread_notifications"
     get "unread-notifications-count", to: "notifications#get_unread_notifications_count"
@@ -121,19 +123,23 @@ Rails.application.routes.draw do
     get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
     resources :projects, param: :uuid, format: :json, only: [:show, :create, :update, :destroy]
+    resources :project_backups, param: :uuid, format: :json
 
     get "latest", to: "posts#latest", as: "latest"
     get "page/1", to: redirect("/latest", status: 301)
 
     get "search", to: "search#show", as: "filter"
+    get "filter/partial", to: "filter#partial", as: "filter_partial"
     post "search", to: "search#index", as: "search_post"
     get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", constraints: FilterContraints
     post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#redirect_to_query_params"
     get "get-verified-users", to: "filter#get_verified_users"
     get "overwatch-2", to: redirect("/", status: 301)
 
-    resources :collections, path: "c", param: :nice_url, concerns: :paginatable
+    get "collections", to: "collections#index", as: "collections_index"
+    resources :collections, path: "c", param: :nice_url, concerns: :paginatable, except: [:index]
     get "c/:nice_url(/page/:page)", to: "collections#show"
+    get "c/:nice_url/revisions(/page/:page)", to: "collections#revisions", as: "collection_revisions"
     get "c/partial/:id", to: "collections#partial", as: "collection_partial"
 
     get "derived_from/:post_id", to: "derivatives#derived_from", as: "derived_from"

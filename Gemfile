@@ -31,7 +31,7 @@ gem "omniauth-bnet"
 gem "omniauth-discord"
 # Mitigate CVE-2015-9284
 gem 'omniauth-rails_csrf_protection'
-gem "puma", "~> 4.3"
+gem "puma", "~> 5.6"
 gem "rails", "~> 6.1.0"
 gem "rails-i18n"
 gem "rails_same_site_cookie"
