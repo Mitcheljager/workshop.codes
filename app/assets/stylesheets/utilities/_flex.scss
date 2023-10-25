@@ -17,6 +17,12 @@
   flex-wrap: nowrap;
 }
 
+.md\:flex-nowrap {
+  @include media-min(md) {
+    flex-wrap: nowrap;
+  }
+}
+
 .align-self-center {
   align-self: center;
 }
