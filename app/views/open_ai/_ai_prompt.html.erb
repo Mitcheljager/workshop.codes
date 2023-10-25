@@ -1,0 +1,17 @@
+<div class="well well--image well--wiki bg-transparent md:flex-nowrap gap-1/8 mb-1/1" data-role="ai-prompt">
+  <div data-role="ai-message">
+    <h3 class="mt-0 mb-1/8">Snowball AI</h3>
+    <p class="mt-0 mb-1/8 md:mb-0">Need help? Let Snowball explain you complex concepts with the help of AI!
+  </div>
+
+  <%= button_to "Explain with AI",
+      ai_path,
+      method: :post,
+      params: { prompt: @article.title, category: @article.category.title },
+      data: { disable_with: t("global.processing") },
+      form: { autocomplete: "off" },
+      remote: true,
+      class: "button" %>
+
+  <%= image_tag "snowball.png", width: 170, class: "absolute ml-1/4 b-2", style: "left: -50px; top: -10px;" %>
+</div>

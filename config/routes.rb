@@ -62,12 +62,12 @@ Rails.application.routes.draw do
   post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
   get "similar_to/:id", to: "posts#similar_to", as: "similar_posts"
 
-  get "ai/:query", to: "open_ai#show"
+  post "ai", to: "open_ai#show", as: "ai"
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/, default: "en" do
     root "posts#index"
 
-    resources :articles, param: :slug, except: [:index, :destroy]
+    resources :articles, param: :slug, except: [:index, :destroy], as: "ai"
 
     resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
     get "account(/page/:page)", to: "users#show", as: "account"

@@ -42,10 +42,26 @@
         display: block
       }
     }
+
+    .text-small {
+      line-height: 1.3em;
+    }
+  }
+
+  &--wiki {
+    border: 2px solid $wiki;
   }
 
   a {
     text-decoration: none;
+  }
+
+  > div > p:first-child {
+    margin-top: 0;
+  }
+
+  > div > p:last-child {
+    margin-bottom: 0;
   }
 }
 
