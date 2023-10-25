@@ -1,0 +1,9 @@
+.markdown {
+  > div > p:first-child {
+    margin-top: 0;
+  }
+
+  > div > p:last-child {
+    margin-bottom: 0;
+  }
+}
