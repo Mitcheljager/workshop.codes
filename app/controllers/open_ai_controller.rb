@@ -28,19 +28,23 @@ class OpenAiController < ApplicationController
       #{ "The description given in-game is \"#{description}\". Feel free to use this description to improve your explanation, or feel free to ignore it." if description.present? }
     "
 
-    response = client.chat(parameters: {
-      model: "gpt-3.5-turbo",
-      messages: [{
-        role: "user",
-        content: prompt
-      }],
-      temperature: 0.7,
-    })
+    begin
+      response = client.chat(parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{
+          role: "user",
+          content: prompt
+        }],
+        temperature: 0.7,
+      })
 
-    @message = markdown(response["choices"][0]["message"]["content"])
+      @message = markdown(response["choices"][0]["message"]["content"])
 
-    respond_to do |format|
-      format.js
+      respond_to do |format|
+        format.js
+      end
+    rescue
+      render "application/error"
     end
   end
 end
