@@ -55,14 +55,6 @@
   a {
     text-decoration: none;
   }
-
-  > div > p:first-child {
-    margin-top: 0;
-  }
-
-  > div > p:last-child {
-    margin-bottom: 0;
-  }
 }
 
 .well__content {
@@ -77,4 +69,17 @@
 
 .well__tray {
   flex: 0 0 100%;
+}
+
+.well__marker {
+  position: absolute;
+  right: $margin / 3;
+  top: 0;
+  padding: 0 $margin / 8;
+  transform: translateY(-50%);
+  border-radius: $border-radius;
+  background: $bg-dark;
+  font-size: 0.75rem;
+  color: $pure-white;
+  font-weight: bold;
 }

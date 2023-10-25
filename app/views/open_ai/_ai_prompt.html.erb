@@ -1,7 +1,12 @@
-<div class="well well--image well--wiki bg-transparent md:flex-nowrap gap-1/8 mb-1/1" data-role="ai-prompt">
-  <div data-role="ai-message">
-    <h3 class="mt-0 mb-1/8">Snowball AI</h3>
-    <p class="mt-0 mb-1/8 md:mb-0">Need help? Let Snowball explain you complex concepts with the help of AI!
+<div class="well well--image well--wiki bg-transparent md:flex-nowrap gap-1/4 mb-1/1" data-role="ai-prompt">
+  <div class="markdown" data-role="ai-message">
+    <h3 class="mt-0 mb-1/8">
+      Snowball AI
+    </h3>
+
+    <p class="mt-0 mb-1/8 md:mb-0">
+      Need help? Let Snowball explain complex concepts with the help of AI!
+    </p>
   </div>
 
   <%= button_to "Explain with AI",
@@ -14,4 +19,11 @@
       class: "button" %>
 
   <%= image_tag "snowball.png", width: 170, class: "absolute ml-1/4 b-2", style: "left: -50px; top: -10px;" %>
+
+  <span class="tooltip well__marker bg-wiki">
+    Experimental
+    <div class="tooltip__content">
+      Snowball AI is an experimental feature, and as with all generative AI, has no guarantee of accuracy. Please exercise caution when using the results of Snowball AI.
+    </div>
+  </span>
 </div>
