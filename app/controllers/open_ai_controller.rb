@@ -8,11 +8,18 @@ class OpenAiController < ApplicationController
     merged_array = @actions.merge(@values)
 
     description = ""
+    found_match = false
     merged_array.each do |item|
       if item.is_a?(Array) && item[1].is_a?(Hash) && item[1]['en-US'] == params[:prompt]
+        found_match = true
         description = item[1]['description']
         break
       end
+    end
+
+    if !found_match
+      @message = "Your request did not match a known Workshop value. This is probably our fault!"
+      render "application/error" and return
     end
 
     system_prompt = "You are a teacher, trying your best to explain programming terms within the context of the Overwatch Workshop.
