@@ -22,7 +22,7 @@ class OpenAiController < ApplicationController
       Because of this it might be useful to explain something within the context of Overwatch.
       Please use Markdown to make certain keywords bold or italic."
 
-    prompt = "Explain the #{params[:category]} \"#{params[:prompt]}\"
+    prompt = "Explain the #{params[:category]} \"#{params[:prompt]}\".
       #{ "The description given in-game is \"#{description}\". Feel free to use this description to improve your explanation, or feel free to ignore it." if description.present? }"
 
     begin
@@ -31,8 +31,7 @@ class OpenAiController < ApplicationController
         messages: [{
           role: "system",
           content: system_prompt
-        },
-        {
+        }, {
           role: "user",
           content: prompt
         }],
