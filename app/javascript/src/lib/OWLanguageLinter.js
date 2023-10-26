@@ -587,6 +587,9 @@ function findUndefinedSubroutines(content) {
 
   for (const match of content.matchAll(/(?<=(?:Call Subroutine|Start Rule))\(/g)) {
     const argsEnd = getClosingBracket(content, "(", ")", match.index - 1)
+
+    if (argsEnd === -1) continue
+
     const [subroutineName] = splitArgumentsString(content.substring(match.index + 1, argsEnd))
 
     if (!definedSubroutines.includes(subroutineName)) {
