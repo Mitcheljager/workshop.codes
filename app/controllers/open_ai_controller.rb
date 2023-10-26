@@ -50,7 +50,8 @@ class OpenAiController < ApplicationController
       respond_to do |format|
         format.js
       end
-    rescue
+    rescue => exception
+      Bugsnag.notify(exception) if Rails.env.production?
       render "application/error"
     end
   end
