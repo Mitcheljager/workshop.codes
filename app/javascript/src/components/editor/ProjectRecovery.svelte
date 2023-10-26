@@ -35,6 +35,8 @@
     </em>
   </p>
 
-  <button class="button bg-orange button--square" on:click={recover}>Recover</button>
-  <button class="button button--secondary button--square" on:click={() => $recoveredProject = null}>Cancel</button>
+  <p>You are viewing the <strong>fetched</strong> project.</p>
+
+  <button class="button bg-orange button--square" on:click={recover}>Use local</button>
+  <button class="button button--secondary button--square" on:click={() => $recoveredProject = null}>Use fetched</button>
 </div>
