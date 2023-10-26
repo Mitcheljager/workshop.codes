@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
-  import { currentItem, currentProject, currentProjectUUID, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "../../stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "../../stores/editor"
   import EditorActions from "./EditorActions.svelte"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
@@ -13,6 +13,7 @@
   import FindReplaceAll from "./FindReplaceAll.svelte"
   import LineFinder from "./LineFinder.svelte"
   import Modals from "./Modals/Modals.svelte"
+  import ProjectRecovery from "./ProjectRecovery.svelte"
   import Logo from "../icon/Logo.svelte"
   import Bugsnag from "../Bugsnag.svelte"
 
@@ -170,6 +171,10 @@
 
     <DragHandle key="popout-width" currentSize=300 align="left" />
   </div>
+
+  {#if $recoveredProject}
+    <ProjectRecovery />
+  {/if}
 </div>
 
 {#if !$isSignedIn}

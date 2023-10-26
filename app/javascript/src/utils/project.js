@@ -1,7 +1,7 @@
-import Bugsnag from "@bugsnag/js"
+
 import FetchRails from "../fetch-rails"
 import { addAlert } from "../lib/alerts"
-import { projects, currentProjectUUID, currentProject, items, currentItem, isSignedIn } from "../stores/editor"
+import { projects, currentProjectUUID, currentProject, recoveredProject, items, currentItem, isSignedIn } from "../stores/editor"
 import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
 import { get } from "svelte/store"
 
@@ -58,27 +58,23 @@ export async function fetchProject(uuid) {
       // was still saved as expected. In this case we use the data from localStorage.
       // This is a fallback and should not be the norm.
       if (localProject && new Date(parsedData.updated_at) < new Date(localProject.updated_at)) {
-        parsedData.content = localProject.content
-        addAlert("We recovered a version of your project that wasn't fully saved.")
-        Bugsnag.notify("Project was recovered from localStorage.")
+        recoveredProject.set({
+          content: localProject.content,
+          updated_at: localProject.updated_at
+        })
       }
 
       updateProject(parsedData.uuid, {
         uuid: parsedData.uuid,
         title: parsedData.title,
-        is_owner: parsedData.is_owner
+        is_owner: parsedData.is_owner,
+        updated_at: parsedData.updated_at
       })
 
       currentProjectUUID.set(parsedData.uuid)
-
       currentItem.set({})
 
-      const parsedContent = JSON.parse(parsedData.content)
-      items.set(parsedContent?.items || parsedContent || [])
-
-      translationKeys.set(parsedContent?.translations?.keys || {})
-      selectedLanguages.set(parsedContent?.translations?.selectedLanguages || ["en-US"])
-      defaultLanguage.set(parsedContent?.translations?.defaultLanguage || "en-US")
+      updateProjectContent(parsedData.content)
 
       return parsedData
     })
@@ -88,6 +84,15 @@ export async function fetchProject(uuid) {
       console.error(error)
       alert(`Something went wrong while loading, please try again. ${ error }`)
     })
+}
+
+export function updateProjectContent(content) {
+  const parsedContent = JSON.parse(content)
+
+  items.set(parsedContent?.items || parsedContent || [])
+  translationKeys.set(parsedContent?.translations?.keys || {})
+  selectedLanguages.set(parsedContent?.translations?.selectedLanguages || ["en-US"])
+  defaultLanguage.set(parsedContent?.translations?.defaultLanguage || "en-US")
 }
 
 function getProjectFromLocalStorage(uuid) {

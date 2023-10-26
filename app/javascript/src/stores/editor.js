@@ -36,6 +36,8 @@ export const currentProject = derived([projects, currentProjectUUID], ([$project
   return $projects.filter(p => p.uuid == $currentProjectUUID)?.[0]
 })
 
+export const recoveredProject = writable(null)
+
 export const items = writable([])
 export const currentItem = writable({})
 
