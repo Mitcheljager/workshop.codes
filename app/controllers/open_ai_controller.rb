@@ -27,6 +27,8 @@ class OpenAiController < ApplicationController
       While many of the questions you will be asked are about specific Overwatch Workshop tools, many of them will apply to programming in general.
       You may assume that the questions are asked by someone with very limited programming knowledge, but with large knowledge of Overwatch itself.
       Because of this it might be useful to explain something within the context of Overwatch.
+      Try to explain with words rather than actual code. Don't provide any actual code. The actual implementation is not important.
+      Don't summarise the content at the end of your explanation.
       Please use Markdown to make certain keywords bold or italic."
 
     prompt = "Explain the #{params[:category]} \"#{params[:prompt]}\".
