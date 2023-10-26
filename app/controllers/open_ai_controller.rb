@@ -1,21 +1,21 @@
 class OpenAiController < ApplicationController
   def show
-    client = OpenAI::Client.new
+    @article = Wiki::Article.includes(:category).select(:id, :title, :category_id).find_by_id(params[:article_id])
+    render "application/error" and return if @article.nil?
 
-    @actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
-    @values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
-
-    if params[:category] != "Actions" && params[:category] != "Values"
+    if @article.category.title != "Actions" && @article.category.title != "Values"
       @message = "Your request did not match a known category. This is probably our fault!"
       render "application/error" and return
     end
 
-    merged_array = @actions.merge(@values)
+    actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
+    values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
+    merged_array = actions.merge(values)
 
     description = ""
     found_match = false
     merged_array.each do |item|
-      if item.is_a?(Array) && item[1].is_a?(Hash) && item[1]['en-US'] == params[:prompt]
+      if item.is_a?(Array) && item[1].is_a?(Hash) && item[1]['en-US'] == @article.title
         found_match = true
         description = item[1]['description']
         break
@@ -36,10 +36,12 @@ class OpenAiController < ApplicationController
       Don't summarise the content at the end of your explanation.
       Please use Markdown to make certain keywords bold or italic."
 
-    prompt = "Explain the #{params[:category]} \"#{params[:prompt]}\".
+    prompt = "Explain the #{ @article.category.title} \"#{@article.title }\".
       #{ "The description given in-game is \"#{description}\". Feel free to use this description to improve your explanation, or feel free to ignore it." if description.present? }"
 
     begin
+      client = OpenAI::Client.new
+
       response = client.chat(parameters: {
         model: "gpt-3.5-turbo",
         messages: [{
