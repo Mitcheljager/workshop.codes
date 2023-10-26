@@ -433,6 +433,8 @@ function findMissingComparisonsInConditions(content) {
       const end = semicolons[i]
       const condition = conditionContent.substring(start, end)
 
+      if (condition.includes("@contents")) continue
+
       // Remove all content that is between parenthesis
       const conditionWithoutParenthesis = condition.replaceAll(/\([^\)]*\)/g, "")
 
