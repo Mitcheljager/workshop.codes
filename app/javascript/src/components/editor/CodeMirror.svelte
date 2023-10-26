@@ -107,7 +107,7 @@
   }
 
   function completions(context) {
-    const word = context.matchBefore(/[@a-zA-Z0-9 ]*/)
+    const word = context.matchBefore(/[@a-zA-Z0-9_ ]*/)
 
     const add = word.text.search(/\S|$/)
     if (word.from + add == word.to && !context.explicit) return null
