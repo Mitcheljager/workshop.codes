@@ -165,7 +165,7 @@ describe("mixins.js", () => {
     })
   })
 
-  describe("extractAndInsertMixins", () => {
+  describe("replaceContents", () => {
     it("Should replace @contents with default content", () => {
       const joinedItems = "@include testMixin() { Global.value = 1; }"
       const replaceWith = "@contents;"
@@ -206,7 +206,7 @@ describe("mixins.js", () => {
       expect(result.replaceWith).toEqual("Global.value = 1; Global.slot = 1; Action(Global.slot = 2;); Global.slot = 2;")
     })
 
-    it("Should @contents without matching @slot with nothing", () => {
+    it("Should replace @contents without matching @slot with nothing", () => {
       const joinedItems = `@include testMixin() {
         @slot("Slot 1") { Global.slot = 1; }
       }`
