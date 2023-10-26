@@ -5,6 +5,11 @@ class OpenAiController < ApplicationController
     @actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
     @values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
 
+    if params[:category] != 'Actions' || params[:category] != 'Values'
+      @message = "Your request did not match a known category. This is probably our fault!"
+      render "application/error" and return
+    end
+
     merged_array = @actions.merge(@values)
 
     description = ""

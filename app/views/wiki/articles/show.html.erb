@@ -16,7 +16,7 @@
       </small>
     </h1>
 
-    <%= render "open_ai/ai_prompt" if @article.category.is_documentation? %>
+    <%= render "open_ai/ai_prompt" if @article.category.title === "Actions" || @article.category.title === "Values" %>
 
     <div class="article__content">
       <%= sanitized_markdown(@article.content || "_This article does not yet have a description_", rendererOptions: { header_anchors: true }) %>
