@@ -181,14 +181,14 @@ __and__:
   - name: Value
     description: One of the two inputs considered. If both are true (or equivalent
       to true), then the and value is true.
-    type: bool
+    type: Boolean
     default: 'True'
   - name: Value
     description: One of the two inputs considered. If both are true (or equivalent
       to true), then the and value is true.
-    type: bool
+    type: Boolean
     default: 'True'
-  return: bool
+  return: Boolean
   en-US: And
 angleBetweenVectors:
   description: The angle in degrees between two directional vectors (no normalization
@@ -328,7 +328,7 @@ __arrayContains__:
     description: The value for which to search.
     type: Object
     default: Number
-  return: bool
+  return: Boolean
   en-US: Array Contains
 __arraySlice__:
   description: A copy of the specified array containing only values from a specified
@@ -410,7 +410,7 @@ __compare__:
     - Object
     - Array
     default: Number
-  return: bool
+  return: Boolean
   en-US: Compare
 getControlScorePercentage:
   description: The score percentage for the specified team in control mode.
@@ -613,7 +613,7 @@ entityExists:
     - Player
     - EntityId
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Entity Exists
 eventAbility:
   description: The ability for the event currently being processed by this rule associated
@@ -649,13 +649,13 @@ eventWasCriticalHit:
   description: Whether the damage was a critical hit (such as a headshot) for the
     event currently being processed by this rule.
   args:
-  return: bool
+  return: Boolean
   en-US: Event Was Critical Hit
 eventWasHealthPack:
   description: Whether the healing was a health pack for the event currently being
     processed by this rule.
   args:
-  return: bool
+  return: Boolean
   en-US: Event Was Health Pack
 _&getEyePosition:
   description: The position of a player's first person view (used for aiming)
@@ -679,7 +679,7 @@ _&getFacingDirection:
 'false':
   description: The boolean value of false.
   args:
-  return: bool
+  return: Boolean
   en-US: 'False'
 getFarthestPlayer:
   description: The player farthest from a position, optionally restricted by team.
@@ -706,7 +706,7 @@ __filteredArray__:
     description: The condition that is evaluated for each element of the copied array.
       If the condition is true, the element is kept in the copied array. Use the current
       array element value to reference the element of the array currently being considered.
-    type: bool
+    type: Boolean
     default: Compare
   return: Array
   en-US: Filtered Array
@@ -765,7 +765,7 @@ _&hasSpawned:
       to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Has Spawned
 _&hasStatusEffect:
   description: Whether the specified player has the specified status, either from
@@ -779,7 +779,7 @@ _&hasStatusEffect:
     description: The status to check for.
     type: Status
     default: Hacked
-  return: bool
+  return: Boolean
   en-US: Has Status
 healee:
   description: The player that received the healing for the event currently being
@@ -928,7 +928,7 @@ __ifThenElse__:
   - name: If
     description: If this condition evaluates to true, the result of the value is then;
       otherwise, the result is else.
-    type: bool
+    type: Boolean
     default: 'True'
   - name: Then
     description: The result of the value when the if condition evaluates to true.
@@ -968,17 +968,17 @@ _&isAlive:
     description: The player whose life to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Alive
 isAssemblingHeroes:
   description: Whether the match is currently in its assemble heroes phase.
   args: []
-  return: bool
+  return: Boolean
   en-US: Is Assembling Heroes
 isMatchBetweenRounds:
   description: Whether the match is between rounds.
   args: []
-  return: bool
+  return: Boolean
   en-US: Is Between Rounds
 _&isHoldingButton:
   description: Whether a player is holding a specific button.
@@ -991,7 +991,7 @@ _&isHoldingButton:
     description: The button to check.
     type: ButtonLiteral
     default: Primary Fire
-  return: bool
+  return: Boolean
   en-US: Is Button Held
 _&isCommunicating:
   description: Whether a player is using a specific communication type (such as emoting,
@@ -1007,7 +1007,7 @@ _&isCommunicating:
       durations are assumed to be 2 seconds.
     type: Comms
     default: Voice Line Up
-  return: bool
+  return: Boolean
   en-US: Is Communicating
 _&isCommunicatingAnything:
   description: Whether a player is using any communication type (such as emoting,
@@ -1017,7 +1017,7 @@ _&isCommunicatingAnything:
     description: The player whose communication status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Communicating Any
 _&isCommunicatingEmote:
   description: Whether a player is using an emote.
@@ -1026,7 +1026,7 @@ _&isCommunicatingEmote:
     description: The player whose emoting status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Communicating Any Emote
 _&isCommunicatingVoiceline:
   description: Whether a player is using a voice line. (The duration of voice lines
@@ -1036,12 +1036,12 @@ _&isCommunicatingVoiceline:
     description: The player whose voice line status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Communicating Any Voice line
 isControlPointLocked:
   description: Whether the point is locked in control mode.
   args: []
-  return: bool
+  return: Boolean
   en-US: Is Control Mode Point Locked
 _&isCrouching:
   description: Whether a player is crouching.
@@ -1050,7 +1050,7 @@ _&isCrouching:
     description: The player whose crouching status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Crouching
 _&isInAlternateForm:
   description: "Whether the specified player is currently in an alternate form:\n
@@ -1062,12 +1062,12 @@ _&isInAlternateForm:
     description: The player whose form to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is In Alternate Form
 isInSuddenDeath:
   description: Whether the current game of capture the flag is in sudden death.
   args: []
-  return: bool
+  return: Boolean
   en-US: Is CTF Mode In Sudden Death
 _&isDead:
   description: Whether a player is dead.
@@ -1076,7 +1076,7 @@ _&isDead:
     description: The player whose death to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Dead
 _&isDummy:
   description: Whether a player is a dummy bot.
@@ -1085,7 +1085,7 @@ _&isDummy:
     description: Player to consider.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Dummy Bot
 _&isDuplicatingAHero:
   description: Whether the specified player is duplicating another hero. To check
@@ -1095,7 +1095,7 @@ _&isDuplicatingAHero:
     description: The player whose duplication status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Duplicating
 _&isFiringPrimaryFire:
   description: Whether the specified player's primary weapon attack is being used.
@@ -1104,7 +1104,7 @@ _&isFiringPrimaryFire:
     description: The player whose primary weapon attack usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Firing Primary
 _&isFiringSecondaryFire:
   description: Whether the specified player's secondary weapon attack is being used.
@@ -1113,7 +1113,7 @@ _&isFiringSecondaryFire:
     description: The player whose secondary weapon attack usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Firing Secondary
 isFlagAtBase:
   description: Whether a specific team's flag is at its base in capture the flag.
@@ -1122,7 +1122,7 @@ isFlagAtBase:
     description: The team whose flag to check.
     type: Team
     default: Team
-  return: bool
+  return: Boolean
   en-US: Is Flag At Base
 isFlagBeingCarried:
   description: Whether a specific team's flag is being carried by a member of the
@@ -1132,13 +1132,13 @@ isFlagBeingCarried:
     description: The team whose flag to check.
     type: Team
     default: Team
-  return: bool
+  return: Boolean
   en-US: Is Flag Being Carried
 isGameInProgress:
   description: Whether the main phase of the match is in progress (during which time
     combat and scoring are allowed).
   args: []
-  return: bool
+  return: Boolean
   en-US: Is Game In Progress
 teamHasHero:
   description: Whether a specific hero is being played (either on a team or in the
@@ -1152,7 +1152,7 @@ teamHasHero:
     description: The team or teams on which to check for the hero being played.
     type: Team
     default: Team
-  return: bool
+  return: Boolean
   en-US: Is Hero Being Played
 _&isInAir:
   description: Whether a player is airborne.
@@ -1161,7 +1161,7 @@ _&isInAir:
     description: The player whose airborne status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is In Air
 isInLoS:
   description: Whether two positions have line of sight with each other.
@@ -1186,12 +1186,12 @@ isInLoS:
       pos (if any) is used.
     type: BarrierLos
     default: Barriers DO NOT BLOCK LOS
-  return: bool
+  return: Boolean
   en-US: Is In Line of Sight
 isInSetup:
   description: Whether the match is currently in its setup phase.
   args: []
-  return: bool
+  return: Boolean
   en-US: Is In Setup
 _&isInSpawnRoom:
   description: Whether a specific player is in the spawn room (and is thus being healed
@@ -1201,7 +1201,7 @@ _&isInSpawnRoom:
     description: The player whose spawn room status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is In Spawn Room
 _&isInViewAngle:
   description: Whether a location is within view of a player.
@@ -1218,7 +1218,7 @@ _&isInViewAngle:
     description: The view angle to compare against in degrees.
     type: float
     default: Number
-  return: bool
+  return: Boolean
   en-US: Is In View Angle
 _&isJumping:
   description: Whether the specified player is jumping.
@@ -1227,12 +1227,12 @@ _&isJumping:
     description: The player whose jump usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Jumping
 isMatchComplete:
   description: Whether the match has finished.
   args: []
-  return: bool
+  return: Boolean
   en-US: Is Match Complete
 _&isMeleeing:
   description: Whether the specified player is meleeing.
@@ -1241,7 +1241,7 @@ _&isMeleeing:
     description: The player whose melee usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Meleeing
 _&isMoving:
   description: Whether a player is moving (defined as having a nonzero current speed).
@@ -1250,7 +1250,7 @@ _&isMoving:
     description: The player whose moving status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Moving
 isObjectiveComplete:
   description: Whether the specified objective has been completed. Results in false
@@ -1262,7 +1262,7 @@ isObjectiveComplete:
       own index.
     type: Integer
     default: Number
-  return: bool
+  return: Boolean
   en-US: Is Objective Complete
 _&isOnGround:
   description: Whether a player is on the ground (or other walkable surface).
@@ -1271,7 +1271,7 @@ _&isOnGround:
     description: The player whose ground status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is On Ground
 _&isOnObjective:
   description: Whether a specific player is currently occupying a payload or capture
@@ -1281,7 +1281,7 @@ _&isOnObjective:
     description: The player whose objective status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is On Objective
 _&isOnWall:
   description: Whether a player is on a wall (climbing or riding).
@@ -1290,7 +1290,7 @@ _&isOnWall:
     description: The player whose wall status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is On Wall
 _&isOnFire:
   description: Whether a specific player's portrait is on fire.
@@ -1299,7 +1299,7 @@ _&isOnFire:
     description: The player whose portrait to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Portrait On Fire
 _&isStanding:
   description: Whether a player is standing (defined as both not moving and not in
@@ -1309,7 +1309,7 @@ _&isStanding:
     description: The player whose standing status to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Standing
 isTeamOnDefense:
   description: Whether the specified team is currently on defense. Results in false
@@ -1319,7 +1319,7 @@ isTeamOnDefense:
     description: The team whose role to check.
     type: Team
     default: Team
-  return: bool
+  return: Boolean
   en-US: Is Team On Defense
 isTeamOnOffense:
   description: Whether the specified team is currently on offense. Results in false
@@ -1329,7 +1329,7 @@ isTeamOnOffense:
     description: The team whose role to check.
     type: Team
     default: Team
-  return: bool
+  return: Boolean
   en-US: Is Team On Offense
 __all__:
   description: Whether the specified condition evaluates to true for every value in
@@ -1343,9 +1343,9 @@ __all__:
     description: The condition that is evaluated for each element of the specified
       array. Use the current array element value to reference the element of the array
       currently being considered.
-    type: bool
+    type: Boolean
     default: Compare
-  return: bool
+  return: Boolean
   en-US: Is True For All
 __any__:
   description: Whether the specified condition evaluates to true for any value in
@@ -1359,9 +1359,9 @@ __any__:
     description: The condition that is evaluated for each element of the specified
       array. Use the current array element value to reference the element of the array
       currently being considered.
-    type: bool
+    type: Boolean
     default: Compare
-  return: bool
+  return: Boolean
   en-US: Is True For Any
 _&isUsingAbility1:
   description: Whether the specified player is using ability 1.
@@ -1370,7 +1370,7 @@ _&isUsingAbility1:
     description: The player whose ability 1 usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Using Ability 1
 _&isUsingAbility2:
   description: Whether the specified player is using ability 2.
@@ -1379,7 +1379,7 @@ _&isUsingAbility2:
     description: The player whose ability 2 usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Using Ability 2
 _&isUsingUltimate:
   description: Whether a player is using an ultimate ability.
@@ -1388,12 +1388,12 @@ _&isUsingUltimate:
     description: The player whose ultimate ability usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Using Ultimate
 isWaitingForPlayers:
   description: Whether the match is waiting for players to join before starting.
   args: []
-  return: bool
+  return: Boolean
   en-US: Is Waiting For Players
 getLastCreatedEntity:
   description: A reference to the last effect or icon entity created by the event
@@ -1593,9 +1593,9 @@ __not__:
   - name: Value
     description: When this input is false (or equivalent to false), then the not value
       is true. Otherwise, the not value is false.
-    type: bool
+    type: Boolean
     default: 'True'
-  return: bool
+  return: Boolean
   en-US: Not
 'null':
   description: The absence of a player. Used when no player is desired for a particular
@@ -1717,14 +1717,14 @@ __or__:
   - name: Value
     description: One of the two inputs considered. If either one is true (or equivalent
       to true), then the or value is true.
-    type: bool
+    type: Boolean
     default: 'True'
   - name: Value
     description: One of the two inputs considered. If either one is true (or equivalent
       to true), then the or value is true.
-    type: bool
+    type: Boolean
     default: 'True'
-  return: bool
+  return: Boolean
   en-US: Or
 getPayloadPosition:
   description: The position in the world of the active payload.
@@ -1957,7 +1957,7 @@ __raycastHitNormal__:
   - name: Include Player Owned Objects
     description: Whether player-owned objects (such as barriers or turrets) should
       be included in the ray cast.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Direction
   en-US: Ray Cast Hit Normal
@@ -1988,7 +1988,7 @@ __raycastHitPlayer__:
   - name: Include Player Owned Objects
     description: Whether player-owned objects (such as barriers or turrets) should
       be included in the ray cast.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Player
   en-US: Ray Cast Hit Player
@@ -2292,7 +2292,7 @@ getTotalTimeElapsed:
 'true':
   description: The boolean value of true.
   args:
-  return: bool
+  return: Boolean
   en-US: 'True'
 _&getUltCharge:
   description: The current ultimate ability charge percentage of a player.
@@ -2515,7 +2515,7 @@ eventWasEnvironment:
   description: Whether the elimination was due to the environment for the event currently
     being processed by this rule.
   args:
-  return: bool
+  return: Boolean
   en-US: Event Was Environment
 _&getHealthOfType:
   description: The current health of the specified player, filtered by the given health
@@ -2548,7 +2548,7 @@ _&isReloading:
     description: The player whose reload usage to check.
     type: Player
     default: Event Player
-  return: bool
+  return: Boolean
   en-US: Is Reloading
 getLastCreatedHealthPool:
   description: An ID representing the most recent Add Health Pool action that was
@@ -2705,7 +2705,7 @@ workshopSettingToggle:
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
     type: IntLiteral
     default: 0
-  return: bool
+  return: Boolean
   en-US: Workshop Setting Toggle
 WorkshopSettingCombo:
   description: Provides the value (a choice of Custom Strings) of a new option setting that will appear in the Workshop Settings card as a combo box. This value returns the index of the selected choice.

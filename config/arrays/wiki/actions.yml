@@ -9,7 +9,7 @@ __abortIf__:
   args:
   - name: Condition
     description: Specifies whether the execution is stopped.
-    type: bool
+    type: Boolean
     default: Compare
   return: Void
   en-US: Abort If
@@ -433,7 +433,7 @@ createIcon:
     default: Color(White)
   - name: Show When Offscreen
     description: Should this icon appear even when it is behind you?
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Create Icon
@@ -722,7 +722,7 @@ __elif__:
   args:
   - name: Condition
     description: If this evaluates to true, execution continues with the next action. Otherwise, execution jumps to the next else if, else, or end action at the current level.
-    type: bool
+    type: Boolean
     default: Compare
   return: Void
   en-US: Else If
@@ -881,7 +881,7 @@ __if__:
   args:
   - name: Condition
     description: If this evaluates to true, execution continues with the next action. Otherwise, execution jumps to the next else if, else, or end action at the current level.
-    type: bool
+    type: Boolean
     default: Compare
   return: Void
   en-US: If
@@ -915,7 +915,7 @@ __loopIf__:
   args:
   - name: Condition
     description: Specifies whether the loop will occur.
-    type: bool
+    type: Boolean
     default: Compare
   return: Void
   en-US: Loop If
@@ -1183,7 +1183,7 @@ _&setAbility1Enabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use ability 1. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Ability 1 Enabled
@@ -1198,7 +1198,7 @@ _&setAbility2Enabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use ability 2. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Ability 2 Enabled
@@ -1248,7 +1248,7 @@ _&setCrouchEnabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use crouch. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Crouch Enabled
@@ -1415,7 +1415,7 @@ _&setJumpEnabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use jump. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Jump Enabled
@@ -1458,7 +1458,7 @@ _&setMeleeEnabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use melee. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Melee Enabled
@@ -1593,7 +1593,7 @@ _&setPrimaryFireEnabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use primary fire. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Primary Fire Enabled
@@ -1657,7 +1657,7 @@ _&setSecondaryFireEnabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use secondary fire. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Secondary Fire Enabled
@@ -1720,7 +1720,7 @@ _&setUltEnabled:
     default: Event Player
   - name: Enabled
     description: Specifies whether the player or players are able to use their ultimate ability. Expects a boolean value such as true, false, or compare.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Set Ultimate Ability Enabled
@@ -1756,7 +1756,7 @@ __skipIf__:
   args:
   - name: Condition
     description: Specifies whether the skip occurs.
-    type: bool
+    type: Boolean
     default: Compare
   - name: Number OF Actions
     description: The number of actions to skip, not including this action.
@@ -1947,7 +1947,7 @@ _&startForcingPosition:
     default: Vector
   - name: REEVALUATE
     description: If this value is true, then the position will be reevaluated and applied to the player every frame. If this value is false, then the posiiton is only evaluated once when the action begins.
-    type: bool
+    type: Boolean
     default: 'True'
   return: Void
   en-US: Start Forcing Player Position
@@ -2411,7 +2411,7 @@ __while__:
   args:
   - name: Condition
     description: If this evaluates to true, execution continues with the next action. Otherwise, execution jumps to the next end action at the current level.
-    type: bool
+    type: Boolean
     default: Compare
   return: Void
   en-US: While
