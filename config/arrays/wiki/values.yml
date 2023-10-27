@@ -219,7 +219,7 @@ angleDifference:
     description: One of the two angles between which to measure the resulting angle.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Angle Difference
 __concat__:
   description: A copy of an array with one or more values appended to the end.
@@ -245,7 +245,7 @@ acosDeg:
     description: Input value for the function.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Arccosine In Degrees
 acos:
   description: Arccosine in radians of the specified value.
@@ -254,7 +254,7 @@ acos:
     description: Input value for the function.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Arccosine In Radians
 asinDeg:
   description: Arcsine in degrees of the specified value.
@@ -263,7 +263,7 @@ asinDeg:
     description: Input value for the function.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Arcsine In Degrees
 asin:
   description: Arcsine in radians of the specified value.
@@ -272,7 +272,7 @@ asin:
     description: Input value for the function.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Arcsine In Radians
 atan2Deg:
   description: Arctangent in degrees of the specified numerator and denominator (often
@@ -286,7 +286,7 @@ atan2Deg:
     description: Denominator input for the function.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Arctangent In Degrees
 atan2:
   description: Arctangent in radians of the specified numerator and denominator (often
@@ -300,7 +300,7 @@ atan2:
     description: Denominator input for the function.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Arctangent In Radians
 __array__:
   description: An array constructed from the listed values.
@@ -434,7 +434,7 @@ cosDeg:
     description: Angle in degrees.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Cosine From Degrees
 cos:
   description: Cosine of the specified angle in radians.
@@ -443,7 +443,7 @@ cos:
     description: Angle in radians.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Cosine From Radians
 len:
   description: The number of elements in the specified array.
@@ -587,7 +587,7 @@ dotProduct:
     description: One of two vector operands of the dot product.
     type: Vector
     default: Vector
-  return: float
+  return: Float
   en-US: Dot Product
 Vector.DOWN:
   description: Shorthand for the directional vector(0, -1, 0), which points downward.
@@ -859,7 +859,7 @@ horizontalAngleFromDirection:
       degrees. The vector is unitized before calculation begins.
     type: Direction
     default: Vector
-  return: float
+  return: Float
   en-US: Horizontal Angle From Direction
 horizontalAngleTowards:
   description: The horizontal angle in degrees from a player's current forward direction
@@ -874,7 +874,7 @@ horizontalAngleTowards:
     description: The position in the world where the angle ends.
     type: Position
     default: Vector
-  return: float
+  return: Float
   en-US: Horizontal Angle Towards
 __gamemode__:
   description: A game mode constant.
@@ -894,7 +894,7 @@ _&getHorizontalFacingAngle:
     description: The player whose horizontal facing angle to acquire.
     type: Player
     default: Event Player
-  return: float
+  return: Float
   en-US: Horizontal Facing Angle Of
 _&getHorizontalSpeed:
   description: The current horizontal speed of a player in meters per second. This
@@ -1507,7 +1507,7 @@ max:
     description: The right-hand operand. May be any value that results in a number.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Max
 _&getMaxHealth:
   description: The max health of a player, including armor and shields.
@@ -1529,7 +1529,7 @@ min:
     description: The right-hand operand. May be any value that results in a number.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Min
 __modulo__:
   description: The remainder of the left-hand operand divided by the right-hand operand.
@@ -1543,7 +1543,7 @@ __modulo__:
     description: The right-hand operand. May be any value that results in a number.
     type: Float
     default: Number
-  return: float
+  return: Float
   en-US: Modulo
 __multiply__:
   description: The product of two numbers or vectors. A vector multiplied by a number
@@ -1855,7 +1855,7 @@ getCapturePercentage:
   description: The current progress towards capture for the active control point (expressed
     as a percentage).
   args: []
-  return: float
+  return: Float
   en-US: Point Capture Percentage
 _&getPosition:
   description: The current position of a player as a vector.
@@ -1906,7 +1906,7 @@ random.uniform:
     description: The largest real number allowed.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Random Real
 random.choice:
   description: A random value from the specified array.
@@ -2104,7 +2104,7 @@ sinDeg:
     description: Angle in degrees.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Sine From Degrees
 sin:
   description: Sine of the specified angle in radians.
@@ -2113,7 +2113,7 @@ sin:
     description: Angle in radians.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Sine From Radians
 _&getSlot:
   description: The slot number of the specified player. In team games, each team has
@@ -2241,7 +2241,7 @@ tanDeg:
     description: Angle in degrees.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Tangent From Degrees
 tan:
   description: Tangent of the specified angle in radians.
@@ -2250,7 +2250,7 @@ tan:
     description: Angle in radians.
     type: float
     default: Number
-  return: float
+  return: Float
   en-US: Tangent From Radians
 _&getTeam:
   description: The team of a player. If the game mode is free-for-all, the team is
@@ -2379,7 +2379,7 @@ verticalAngleOfDirection:
       The vector is unitized before calculation begins.
     type: Direction
     default: Vector
-  return: float
+  return: Float
   en-US: Vertical Angle From Direction
 verticalAngleTowards:
   description: The vertical angle in degrees from a player's current forward direction
@@ -2394,7 +2394,7 @@ verticalAngleTowards:
     description: The position in the world where the angle ends.
     type: Position
     default: Vector
-  return: float
+  return: Float
   en-US: Vertical Angle Towards
 _&getVerticalFacingAngle:
   description: The vertical angle in degrees of a player's current facing relative
@@ -2404,7 +2404,7 @@ _&getVerticalFacingAngle:
     description: The player whose vertical facing angle to acquire.
     type: Player
     default: Event Player
-  return: float
+  return: Float
   en-US: Vertical Facing Angle Of
 _&getVerticalSpeed:
   description: The current vertical speed of a player in meters per second. This measurement
@@ -2450,7 +2450,7 @@ __xComponentOf__:
     description: The vector from which to acquire the x component.
     type: Vector
     default: Vector
-  return: float
+  return: Float
   en-US: X Component Of
 __yComponentOf__:
   description: The y component of the specified vector, usually representing an upward
@@ -2460,7 +2460,7 @@ __yComponentOf__:
     description: The vector from which to acquire the y component.
     type: Vector
     default: Vector
-  return: float
+  return: Float
   en-US: Y Component Of
 __zComponentOf__:
   description: The z component of the specified vector, usually representing a forward
@@ -2470,7 +2470,7 @@ __zComponentOf__:
     description: The vector from which to acquire the z component.
     type: Vector
     default: Vector
-  return: float
+  return: Float
   en-US: Z Component Of
 _&getAbilityCharge:
   description: The ability charge count for a player associated by button.
@@ -2652,7 +2652,7 @@ workshopSettingReal:
     type: IntLiteral
     default: 0
   isConstant: true
-  return: float
+  return: Float
   en-US: Workshop Setting Real
 workshopSettingInteger:
   description: Provides the value of a new integer setting that will appear in the
