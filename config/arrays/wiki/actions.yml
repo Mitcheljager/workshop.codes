@@ -3,7 +3,7 @@ return:
   description: Stops execution of the action list.
   args:
   guid: 00000000BB09
-  return: void
+  return: Void
   en-US: Abort
   es-MX: Abortar
   fr-FR: Interrompre
@@ -18,7 +18,7 @@ __abortIf__:
     type: bool
     default: Compare
   guid: 00000000BB04
-  return: void
+  return: Void
   en-US: Abort If
   es-MX: Abortar si
   fr-FR: Interrompre si
@@ -29,7 +29,7 @@ __abortIfConditionIsFalse__:
   description: Stops execution of the action list if at least one condition in the condition list is false. If all conditions are true, execution continues with the next action.
   args: []
   guid: 00000000BB02
-  return: void
+  return: Void
   en-US: Abort If Condition Is False
   es-MX: Abortar si la condición es falsa
   fr-FR: Interrompre si la condition est fausse
@@ -40,7 +40,7 @@ __abortIfConditionIsTrue__:
   description: Stops execution of the action list if all conditions in the condition list are true. If any are false, execution continues with the next action.
   args: []
   guid: 00000000BB03
-  return: void
+  return: Void
   en-US: Abort If Condition Is True
   es-MX: Abortar si la condición es verdadera
   fr-FR: Interrompre si la condition est vraie
@@ -61,7 +61,7 @@ _&allowButton:
     type: ButtonLiteral
     default: Primary Fire
   guid: 00000000B9D0
-  return: void
+  return: Void
   en-US: Allow Button
   es-MX: Habilitar botón
   fr-FR: Autoriser un bouton
@@ -94,7 +94,7 @@ _&applyImpulse:
     type: Impulse
     default: Cancel Contrary Motion
   guid: 0000000078F6
-  return: void
+  return: Void
   en-US: Apply Impulse
   es-MX: Aplicar impulso
   fr-FR: Appliquer une impulsion
@@ -116,7 +116,7 @@ _&attachTo:
     description: The coordinates of the child relative to the parent. For example, `vect(1,2,0)` would be above and to the left of the parent's head.
     type: Position
     default: Vector
-  return: void
+  return: Void
   guid: 000000010E4F
   en-US: Attach Players
   es-MX: Anexar jugadores
@@ -138,7 +138,7 @@ bigMessage:
     type: Object
     default: String
   guid: 00000000BA88
-  return: void
+  return: Void
   en-US: Big Message
   es-MX: Mensaje grande
   fr-FR: Message en grand
@@ -148,7 +148,7 @@ bigMessage:
 break:
   description: Goes to the end of the innermost `switch` statement, or `do/while`, `while` or `for` loop.
   args:
-  return: void
+  return: Void
   guid: 0000000105B6
   en-US: Break
   fr-FR: Arrêter
@@ -163,7 +163,7 @@ __callSubroutine__:
     type: Subroutine
     default: Sub0
   guid: 00000001001E
-  return: void
+  return: Void
   en-US: Call Subroutine
   es-MX: Llamada a subrutina
   fr-FR: Sous-programme à appeler
@@ -179,7 +179,7 @@ _&cancelPrimaryAction:
     - Player
     - Array: Player
     default: Event Player
-  return: void
+  return: Void
   guid: 0000000109CB
   en-US: Cancel Primary Action
   es-MX: Cancelar acción primaria
@@ -209,7 +209,7 @@ __chaseGlobalVariableAtRate__:
     type: __ChaseRateReeval__
     default: Destination And Rate
   guid: 00000000B840
-  return: void
+  return: Void
   en-US: Chase Global Variable At Rate
   es-MX: Seguir variable global según la tasa
   fr-FR: Modifier une variable globale selon une cadence
@@ -238,7 +238,7 @@ __chaseGlobalVariableOverTime__:
     type: __ChaseTimeReeval__
     default: Destination And Duration
   guid: 00000000B842
-  return: void
+  return: Void
   en-US: Chase Global Variable Over Time
   es-MX: Seguir variable global con el tiempo
   fr-FR: Modifier une variable globale sur la durée
@@ -273,7 +273,7 @@ __chasePlayerVariableAtRate__:
     type: __ChaseRateReeval__
     default: Destination And Rate
   guid: 00000000B83F
-  return: void
+  return: Void
   en-US: Chase Player Variable At Rate
   es-MX: Seguir variable de jugador según la tasa
   fr-FR: Modifier une variable de joueur selon une cadence
@@ -308,7 +308,7 @@ __chasePlayerVariableOverTime__:
     type: __ChaseTimeReeval__
     default: Destination And Duration
   guid: 00000000B841
-  return: void
+  return: Void
   en-US: Chase Player Variable Over Time
   es-MX: Seguir variable del jugador con el tiempo
   fr-FR: Modifier une variable de joueur sur la durée
@@ -329,7 +329,7 @@ _&clearStatusEffect:
     type: Status
     default: Hacked
   guid: 00000000B595
-  return: void
+  return: Void
   en-US: Clear Status
   es-MX: Eliminar estado
   fr-FR: Effacer le statut
@@ -350,7 +350,7 @@ _&communicate:
     type: Comms
     default: Voice Line Up
   guid: 00000000B9E3
-  return: void
+  return: Void
   en-US: Communicate
   es-MX: Comunicar
   fr-FR: Communiquer
@@ -361,7 +361,7 @@ continue:
   description: Goes back to the start of the innermost loop.
   args:
   guid: 0000000105B7
-  return: void
+  return: Void
   en-US: Continue
   es-MX: Continuar
   fr-FR: Continuer
@@ -398,7 +398,7 @@ createBeam:
     type: EffectReeval
     default: Visible To, Position, And Radius
   guid: 00000000CE80
-  return: void
+  return: Void
   en-US: Create Beam Effect
   es-MX: Crear efecto de rayo
   fr-FR: Créer un effet de rayon
@@ -418,7 +418,7 @@ createDummy:
     default: Team
   - name: Slot
     description: The player slot which will receive the bot (-1 for first available slot). Up to 6 bots may be added to each team, or 12 bots to the free-for-all team, regardless of lobby settings.
-    type: int
+    type: Integer
     default: Number
   - name: Position
     description: The initial position where the bot will appear.
@@ -429,7 +429,7 @@ createDummy:
     type: Direction
     default: Vector
   guid: 00000000CA6A
-  return: void
+  return: Void
   en-US: Create Dummy Bot
   es-MX: Crear robot de entrenamiento
   fr-FR: Créer une I.A.
@@ -468,7 +468,7 @@ createEffect:
     type: EffectReeval
     default: Visible To, Position, And Radius
   guid: 00000000B8AF
-  return: void
+  return: Void
   en-US: Create Effect
   es-MX: Crear efecto
   fr-FR: Créer un effet
@@ -528,7 +528,7 @@ __hudText__:
     type: SpecVisibility
     default: Default Visibility
   guid: 00000000BAD3
-  return: void
+  return: Void
   en-US: Create HUD Text
   es-MX: Crear texto del HUD
   fr-FR: Créer du texte d’interface
@@ -567,7 +567,7 @@ createIcon:
     type: bool
     default: 'True'
   guid: 00000000ACFA
-  return: void
+  return: Void
   en-US: Create Icon
   es-MX: Crear ícono
   fr-FR: Créer une icône
@@ -615,7 +615,7 @@ createInWorldText:
     type: SpecVisibility
     default: Default Visibility
   guid: 00000000BAD0
-  return: void
+  return: Void
   en-US: Create In-World Text
   es-MX: Crear texto dentro del mundo
   fr-FR: Créer du texte en jeu
@@ -641,7 +641,7 @@ damage:
     description: The amount of damage to apply. This amount may be modified by buffs, debuffs, or armor.
     type: float
     default: Number
-  return: void
+  return: Void
   en-US: Damage
   es-MX: Infligir daño
   fr-FR: Infliger des dégâts
@@ -653,7 +653,7 @@ declareDraw:
     modes.
   args: []
   guid: 00000000B9F1
-  return: void
+  return: Void
   en-US: Declare Match Draw
   es-MX: Declarar empate de la partida
   fr-FR: Déclarer le match nul
@@ -669,7 +669,7 @@ declarePlayerVictory:
     type: Player
     default: Event Player
   guid: 00000000AD30
-  return: void
+  return: Void
   en-US: Declare Player Victory
   es-MX: Declarar victoria del jugador
   fr-FR: Déclarer la victoire d’un joueur
@@ -680,7 +680,7 @@ declareRoundDraw:
   description: Declare a draw for the current round. This only works in the elimination
     game mode.
   args: []
-  return: void
+  return: Void
   guid: 00000001098F
   en-US: Declare Round Draw
   es-MX: Declarar ronda empatada
@@ -697,7 +697,7 @@ declareRoundVictory:
     type: Team
     default: Team
   guid: 00000000BF93
-  return: void
+  return: Void
   en-US: Declare Round Victory
   es-MX: Declarar victoria de la ronda
   fr-FR: Déclarer la victoire de la manche
@@ -713,7 +713,7 @@ declareTeamVictory:
     type: Team
     default: Team
   guid: 0000000078FD
-  return: void
+  return: Void
   en-US: Declare Team Victory
   es-MX: Declarar la victoria del equipo
   fr-FR: Déclarer la victoire d’une équipe
@@ -724,7 +724,7 @@ destroyAllDummies:
   description: Removes all dummy bots from the match.
   args: []
   guid: 00000000D1D4
-  return: void
+  return: Void
   en-US: Destroy All Dummy Bots
   es-MX: Destruir todos los robots de entrenamiento
   fr-FR: Détruire toutes les I.A.
@@ -735,7 +735,7 @@ destroyAllEffects:
   description: Destroys all effect entities created by create effect.
   args: []
   guid: 00000000B8AD
-  return: void
+  return: Void
   en-US: Destroy All Effects
   es-MX: Destruir todos los efectos
   fr-FR: Détruire tous les effets
@@ -746,7 +746,7 @@ destroyAllHudTexts:
   description: Destroys all hud text that was created by the create hud text action.
   args: []
   guid: 00000000BAD1
-  return: void
+  return: Void
   en-US: Destroy All HUD Text
   es-MX: Destruir todo el texto del HUD
   fr-FR: Détruire tous les textes d’interface
@@ -757,7 +757,7 @@ destroyAllIcons:
   description: Destroys all icon entities created by create icon.
   args: []
   guid: 00000000B8AC
-  return: void
+  return: Void
   en-US: Destroy All Icons
   es-MX: Destruir todos los íconos
   fr-FR: Détruire toutes les icônes
@@ -768,7 +768,7 @@ destroyAllInWorldText:
   description: Destroys all in-world text created by create in-world text.
   args: []
   guid: 00000000B8AB
-  return: void
+  return: Void
   en-US: Destroy All In-World Text
   es-MX: Destruir todo el texto dentro del mundo
   fr-FR: Détruire tous les textes en jeu
@@ -784,10 +784,10 @@ destroyDummy:
     default: Team
   - name: Slot
     description: The slot to remove the dummy bot from.
-    type: int
+    type: Integer
     default: Number
   guid: 00000000CC21
-  return: void
+  return: Void
   en-US: Destroy Dummy Bot
   es-MX: Destruir robot de entrenamiento
   fr-FR: Détruire une I.A.
@@ -802,7 +802,7 @@ destroyEffect:
     type: EntityId
     default: Last Created Entity Entity
   guid: 00000000B8AE
-  return: void
+  return: Void
   en-US: Destroy Effect
   es-MX: Destruir efecto
   fr-FR: Détruire un effet
@@ -817,7 +817,7 @@ destroyHudText:
     type: TextId
     default: Last Text ID
   guid: 00000000BAD2
-  return: void
+  return: Void
   en-US: Destroy HUD Text
   es-MX: Destruir texto del HUD
   fr-FR: Détruire du texte d’interface
@@ -832,7 +832,7 @@ destroyIcon:
     type: EntityId
     default: Last Created Entity Entity
   guid: 00000000B4E7
-  return: void
+  return: Void
   en-US: Destroy Icon
   es-MX: Destruir ícono
   fr-FR: Détruire une icône
@@ -847,7 +847,7 @@ destroyInWorldText:
     type: TextId
     default: Last Text ID
   guid: 00000000BACF
-  return: void
+  return: Void
   en-US: Destroy In-World Text
   es-MX: Destruir texto dentro del mundo
   fr-FR: Détruire du texte en jeu
@@ -864,7 +864,7 @@ _&detach:
     - Player
     - Array: Player
     default: Event Player
-  return: void
+  return: Void
   guid: 000000010E52
   en-US: Detach Players
   es-MX: Separar jugadores
@@ -877,7 +877,7 @@ disableAnnouncer:
     or the match ends.
   args: []
   guid: 00000000C3F8
-  return: void
+  return: Void
   en-US: Disable Built-In Game Mode Announcer
   es-MX: Deshabilitar el presentador integrado del modo de juego
   fr-FR: Désactiver l’annonceur prédéfini par le mode de jeu
@@ -889,7 +889,7 @@ disableGamemodeCompletion:
     the match to be completed by scripting commands.
   args: []
   guid: 00000000AD2D
-  return: void
+  return: Void
   en-US: Disable Built-In Game Mode Completion
   es-MX: Deshabilitar la finalización integrada del modo de juego
   fr-FR: Désactiver l’accomplissement prédéfini par le mode de jeu
@@ -900,7 +900,7 @@ disableMusic:
   description: Disables all game mode music until reenabled or the match ends.
   args: []
   guid: 00000000C3F4
-  return: void
+  return: Void
   en-US: Disable Built-In Game Mode Music
   es-MX: Deshabilitar la música integrada del modo de juego
   fr-FR: Désactiver la musique prédéfinie par le mode de jeu
@@ -918,7 +918,7 @@ _&disableRespawn:
     - Array: Player
     default: Event Player
   guid: 00000000B87A
-  return: void
+  return: Void
   en-US: Disable Built-In Game Mode Respawning
   es-MX: Deshabilitar la reaparición integrada del modo de juego
   fr-FR: Désactiver la réapparition prédéfinie par le mode de jeu
@@ -930,7 +930,7 @@ disableScoring:
     only allowing scores to be changed by scripting commands.
   args: []
   guid: 00000000ABFA
-  return: void
+  return: Void
   en-US: Disable Built-In Game Mode Scoring
   es-MX: Deshabilitar el sistema de puntuación integrado del modo de juego
   fr-FR: Désactiver le calcul des points prédéfini par le mode de jeu
@@ -948,7 +948,7 @@ _&disableDeathSpectateAllPlayers:
     - Array: Player
     default: Event Player
   guid: 00000000B9B5
-  return: void
+  return: Void
   en-US: Disable Death Spectate All Players
   es-MX: Deshabilitar la observación de todos los jugadores como espectador muerto
   fr-FR: Empêcher d’observer n’importe qui après la mort
@@ -966,7 +966,7 @@ _&disableDeathSpectateTargetHud:
     - Array: Player
     default: Event Player
   guid: 00000000B9B3
-  return: void
+  return: Void
   en-US: Disable Death Spectate Target HUD
   es-MX: Deshabilitar la observación del HUD objetivo como espectador muerto
   fr-FR: Empêcher de voir l’interface de la cible après la mort
@@ -979,7 +979,7 @@ disableInspector:
     arrays.
   args: []
   guid: 00000000FB2F
-  return: void
+  return: Void
   en-US: Disable Inspector Recording
   es-MX: Desactivar registro de Inspector
   fr-FR: Désactiver l’enregistrement du contrôleur
@@ -1001,7 +1001,7 @@ _&disallowButton:
     type: ButtonLiteral
     default: Primary Fire
   guid: 00000000B9CF
-  return: void
+  return: Void
   en-US: Disallow Button
   es-MX: Deshabilitar botón
   fr-FR: Interdire le bouton
@@ -1013,7 +1013,7 @@ __else__:
     if the previous If or Else If action's condition was false.
   args: []
   guid: 00000000FB34
-  return: void
+  return: Void
   en-US: Else
   es-MX: Si no
   fr-FR: Sinon
@@ -1028,7 +1028,7 @@ __elif__:
     type: bool
     default: Compare
   guid: 00000000FB33
-  return: void
+  return: Void
   en-US: Else If
   es-MX: Si no si
   fr-FR: Sinon Si
@@ -1037,7 +1037,7 @@ enableAnnouncer:
   description: Undoes the effect of the disable built-in game mode announcer action.
   args: []
   guid: 00000000C3FA
-  return: void
+  return: Void
   en-US: Enable Built-In Game Mode Announcer
   es-MX: Habilitar presentador integrado del modo de juego
   fr-FR: Activer l’annonceur prédéfini par le mode de jeu
@@ -1048,7 +1048,7 @@ enableGamemodeCompletion:
   description: Undoes the effect of the disable built-in game mode completion action.
   args: []
   guid: 00000000AD2F
-  return: void
+  return: Void
   en-US: Enable Built-In Game Mode Completion
   es-MX: Habilitar la finalización integrada del modo de juego
   fr-FR: Activer l’accomplissement prédéfini par le mode de jeu
@@ -1059,7 +1059,7 @@ enableMusic:
   description: Undoes the effect of the disable built-in game mode music action.
   args: []
   guid: 00000000C3F6
-  return: void
+  return: Void
   en-US: Enable Built-In Game Mode Music
   es-MX: Habilitar la música integrada del modo de juego
   fr-FR: Activer la musique prédéfinie par le mode de jeu
@@ -1077,7 +1077,7 @@ _&enableRespawn:
     - Array: Player
     default: Event Player
   guid: 00000000B878
-  return: void
+  return: Void
   en-US: Enable Built-In Game Mode Respawning
   es-MX: Habilitar la reaparición integrada del modo de juego
   fr-FR: Activer la réapparition prédéfinie par le mode de jeu
@@ -1088,7 +1088,7 @@ enableScoring:
   description: Undoes the effect of the disable built-in game mode scoring action.
   args: []
   guid: 00000000ABF8
-  return: void
+  return: Void
   en-US: Enable Built-In Game Mode Scoring
   es-MX: Habilitar el sistema de puntuación integrado del modo de juego
   fr-FR: Activer le calcul des points prédéfini par le mode de jeu
@@ -1106,7 +1106,7 @@ _&enableDeathSpectateAllPlayers:
     - Array: Player
     default: Event Player
   guid: 00000000B9AE
-  return: void
+  return: Void
   en-US: Enable Death Spectate All Players
   es-MX: Habilitar la observación de todos los jugadores como espectador muerto
   fr-FR: Permettre d’observer n’importe qui après la mort
@@ -1124,7 +1124,7 @@ _&enableDeathSpectateTargetHud:
     - Array: Player
     default: Event Player
   guid: 00000000B9B4
-  return: void
+  return: Void
   en-US: Enable Death Spectate Target HUD
   es-MX: Habilitar la observación del HUD objetivo como espectador muerto
   fr-FR: Permettre de voir l’interface de la cible après la mort
@@ -1137,7 +1137,7 @@ enableInspector:
     easier to debug problematic areas in your logic.
   args: []
   guid: 00000000FB2E
-  return: void
+  return: Void
   en-US: Enable Inspector Recording
   es-MX: Activar registro de Inspector
   fr-FR: Activer l’enregistrement du contrôleur
@@ -1149,7 +1149,7 @@ __end__:
     while, or for action.
   args: []
   guid: 00000000FB37
-  return: void
+  return: Void
   en-US: End
   es-MX: Fin
   fr-FR: Fin
@@ -1179,7 +1179,7 @@ __forGlobalVariable__:
     type: float
     default: Number (1)
   guid: 00000000FEE2
-  return: void
+  return: Void
   en-US: For Global Variable
   es-MX: Para variable global
   fr-FR: Pour variable globale
@@ -1214,7 +1214,7 @@ __forPlayerVariable__:
     type: float
     default: Number (1)
   guid: 00000000FEE1
-  return: void
+  return: Void
   en-US: For Player Variable
   es-MX: Para variable de jugador
   fr-FR: Pour variable de joueur
@@ -1226,7 +1226,7 @@ goToAssembleHeroes:
     works if the game is in progress.
   args: []
   guid: 00000000C5B5
-  return: void
+  return: Void
   en-US: Go To Assemble Heroes
   es-MX: Ir a Forma tu equipo
   fr-FR: Aller à Choisissez vos héros
@@ -1252,7 +1252,7 @@ heal:
     description: The amount of healing to apply. This amount may be modified by buff or debuffs. Healing is capped by each player's max health.
     type: float
     default: Number
-  return: void
+  return: Void
   en-US: Heal
   es-MX: Sanar
   fr-FR: Soigner
@@ -1268,7 +1268,7 @@ __if__:
     type: bool
     default: Compare
   guid: 00000000FB32
-  return: void
+  return: Void
   en-US: If
   es-MX: Si
   fr-FR: Si
@@ -1287,7 +1287,7 @@ kill:
     description: The player who will receive credit for the kill. A killer of null indicates no player will receive credit.
     type: Player
     default: 'Null'
-  return: void
+  return: Void
   en-US: Kill
   es-MX: Matar
   fr-FR: Tuer
@@ -1300,7 +1300,7 @@ __loop__:
     loop, a wait action must execute between the start of the action list and this
     action.
   args: []
-  return: void
+  return: Void
   en-US: Loop
   es-MX: Bucle
   fr-FR: Boucle
@@ -1318,7 +1318,7 @@ __loopIf__:
     type: bool
     default: Compare
   guid: 00000000BB06
-  return: void
+  return: Void
   en-US: Loop If
   es-MX: Repetir si
   fr-FR: Boucle si
@@ -1332,7 +1332,7 @@ __loopIfConditionIsFalse__:
     between the start of the action list and this action.
   args: []
   guid: 00000000BB05
-  return: void
+  return: Void
   en-US: Loop If Condition Is False
   es-MX: Repetir si la condición es falsa
   fr-FR: Boucle si la condition est fausse
@@ -1346,7 +1346,7 @@ __loopIfConditionIsTrue__:
     action list and this action.
   args: []
   guid: 000000007874
-  return: void
+  return: Void
   en-US: Loop If Condition Is True
   es-MX: Repetir si la condición es verdadera
   fr-FR: Boucle si la condition est vraie
@@ -1372,7 +1372,7 @@ __modifyGlobalVariable__:
     - Array
     default: Number
   guid: 00000000786E
-  return: void
+  return: Void
   en-US: Modify Global Variable
   es-MX: Modificar variable global
   fr-FR: Modifier une variable globale
@@ -1389,7 +1389,7 @@ __modifyGlobalVariableAtIndex__:
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
-    type: unsigned int
+    type: Integer
     default: Number
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
@@ -1402,7 +1402,7 @@ __modifyGlobalVariableAtIndex__:
     - Array
     default: Number
   guid: 00000000C7E1
-  return: void
+  return: Void
   en-US: Modify Global Variable At Index
   es-MX: Modificar variable global según el índice
   fr-FR: Modifier une variable globale à l’index
@@ -1421,10 +1421,10 @@ _&addToScore:
     default: Event Player
   - name: Score
     description: The amount the score will increase or decrease. If positive, the score will increase. If negative, the score will decrease.
-    type: int
+    type: Integer
     default: Number
   guid: 000000007873
-  return: void
+  return: Void
   en-US: Modify Player Score
   es-MX: Modificar puntuación del jugador
   fr-FR: Modifier le score d’un joueur
@@ -1456,7 +1456,7 @@ __modifyPlayerVariable__:
     - Array
     default: Number
   guid: 00000000786F
-  return: void
+  return: Void
   en-US: Modify Player Variable
   es-MX: Modificar variable de jugador
   fr-FR: Modifier une variable de joueur
@@ -1479,7 +1479,7 @@ __modifyPlayerVariableAtIndex__:
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
-    type: unsigned int
+    type: Integer
     default: Number
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
@@ -1492,7 +1492,7 @@ __modifyPlayerVariableAtIndex__:
     - Array
     default: Number
   guid: 00000000C7DF
-  return: void
+  return: Void
   en-US: Modify Player Variable At Index
   es-MX: Modificar variable de jugador según el índice
   fr-FR: Modifier une variable de joueur à l’index
@@ -1509,10 +1509,10 @@ addToTeamScore:
     default: Team
   - name: Score
     description: The amount the score will increase or decrease. If positive, the score will increase. If negative, the score will decrease.
-    type: int
+    type: Integer
     default: Number
   guid: 00000000BB24
-  return: void
+  return: Void
   en-US: Modify Team Score
   es-MX: Modificar puntuación del equipo
   fr-FR: Modifier le score de l’équipe
@@ -1524,7 +1524,7 @@ pauseMatchTime:
     criteria are unaffected by the pause.
   args: []
   guid: 00000000B9EF
-  return: void
+  return: Void
   en-US: Pause Match Time
   es-MX: Pausar tiempo de la partida
   fr-FR: Mettre en pause le temps de jeu
@@ -1558,7 +1558,7 @@ playEffect:
     type: unsigned float
     default: Number (1)
   guid: 00000000BB27
-  return: void
+  return: Void
   en-US: Play Effect
   es-MX: Reproducir efecto
   fr-FR: Jouer un effet
@@ -1583,7 +1583,7 @@ _&preloadHero:
     - Array: Hero
     default: Hero
   guid: 00000000B9B1
-  return: void
+  return: Void
   en-US: Preload Hero
   es-MX: Precargar héroe
   fr-FR: Précharger un héros
@@ -1605,7 +1605,7 @@ _&forceButtonPress:
     type: ButtonLiteral
     default: Primary Fire
   guid: 0000000078FB
-  return: void
+  return: Void
   en-US: Press Button
   es-MX: Presionar botón
   fr-FR: Appuyer sur un bouton
@@ -1625,7 +1625,7 @@ _&resetHeroAvailability:
     - Array: Player
     default: Event Player
   guid: 00000000BA5A
-  return: void
+  return: Void
   en-US: Reset Player Hero Availability
   es-MX: Restablecer disponibilidad de héroes de los jugadores
   fr-FR: Réinitialiser la disponibilité du héros pour un joueur
@@ -1643,7 +1643,7 @@ _&respawn:
     - Array: Player
     default: Event Player
   guid: 0000000078FC
-  return: void
+  return: Void
   en-US: Respawn
   es-MX: Reaparecer
   fr-FR: Réapparaître
@@ -1661,7 +1661,7 @@ _&resurrect:
     - Player
     - Array: Player
     default: Event Player
-  return: void
+  return: Void
   en-US: Resurrect
   es-MX: Resucitar
   fr-FR: Ressusciter
@@ -1682,7 +1682,7 @@ _&setAbility1Enabled:
     type: bool
     default: 'True'
   guid: 00000000B9B8
-  return: void
+  return: Void
   en-US: Set Ability 1 Enabled
   es-MX: Establecer habilidad 1 habilitada
   fr-FR: Définir l’activation de la capacité 1
@@ -1703,7 +1703,7 @@ _&setAbility2Enabled:
     type: bool
     default: 'True'
   guid: 00000000B9B7
-  return: void
+  return: Void
   en-US: Set Ability 2 Enabled
   es-MX: Establecer habilidad 2 habilitada
   fr-FR: Définir l’activation de la capacité 2
@@ -1727,7 +1727,7 @@ _&setAbilityCooldown:
     description: The cooldown time that will be set in seconds. Max of 1000.
     type: unsigned float
     default: Number
-  return: void
+  return: Void
   guid: 0000000109CA
   en-US: Set Ability Cooldown
   es-MX: Establecer Reutilización de habilidad
@@ -1750,7 +1750,7 @@ _&setAimSpeed:
     type: unsigned float
     default: Number
   guid: 00000000C364
-  return: void
+  return: Void
   en-US: Set Aim Speed
   es-MX: Establecer velocidad al apuntar
   fr-FR: Définir la vitesse de visée
@@ -1770,7 +1770,7 @@ _&setCrouchEnabled:
     description: Specifies whether the player or players are able to use crouch. Expects a boolean value such as true, false, or compare.
     type: bool
     default: 'True'
-  return: void
+  return: Void
   guid: 0000000105A3
   en-US: Set Crouch Enabled
   es-MX: Establecer acción de agacharse activado
@@ -1793,7 +1793,7 @@ _&setDamageDealt:
     type: unsigned float
     default: Number
   guid: 00000000B995
-  return: void
+  return: Void
   en-US: Set Damage Dealt
   es-MX: Establecer daño infligido
   fr-FR: Définir les dégâts infligés
@@ -1815,7 +1815,7 @@ _&setDamageReceived:
     type: unsigned float
     default: Number
   guid: 00000000B997
-  return: void
+  return: Void
   en-US: Set Damage Received
   es-MX: Establecer daño recibido
   fr-FR: Définir les dégâts subis
@@ -1840,7 +1840,7 @@ _&setFacing:
     type: Relativity
     default: To World
   guid: 00000000BB29
-  return: void
+  return: Void
   en-US: Set Facing
   es-MX: Establecer orientación
   fr-FR: Définir la direction du regard
@@ -1862,7 +1862,7 @@ __setGlobalVariable__:
     - Array
     default: Number
   guid: 0000000077DE
-  return: void
+  return: Void
   en-US: Set Global Variable
   es-MX: Establecer variable global
   fr-FR: Définir une variable globale
@@ -1880,7 +1880,7 @@ __setGlobalVariableAtIndex__:
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
-    type: unsigned int
+    type: Integer
     default: Number
   - name: Value
     description: The value that will be stored into the array.
@@ -1889,7 +1889,7 @@ __setGlobalVariableAtIndex__:
     - Array
     default: Number
   guid: 00000000BBAA
-  return: void
+  return: Void
   en-US: Set Global Variable At Index
   es-MX: Establecer variable global según el índice
   fr-FR: Définir une variable globale à l’index
@@ -1911,7 +1911,7 @@ _&setGravity:
     type: unsigned float
     default: Number
   guid: 00000000B999
-  return: void
+  return: Void
   en-US: Set Gravity
   es-MX: Establecer gravedad
   fr-FR: Définir la gravité
@@ -1933,7 +1933,7 @@ _&setHealingDealt:
     type: unsigned float
     default: Number
   guid: 00000000B991
-  return: void
+  return: Void
   en-US: Set Healing Dealt
   es-MX: Establecer sanación realizada
   fr-FR: Définir les soins prodigués
@@ -1955,7 +1955,7 @@ _&setHealingReceived:
     type: unsigned float
     default: Number
   guid: 00000000B993
-  return: void
+  return: Void
   en-US: Set Healing Received
   es-MX: Establecer sanación recibida
   fr-FR: Définir les soins reçus
@@ -1977,7 +1977,7 @@ _&setInvisibility:
     type: Invis
     default: ALL
   guid: 00000000B9ED
-  return: void
+  return: Void
   en-US: Set Invisible
   es-MX: Establecer invisibilidad
   fr-FR: Définir l’invisibilité
@@ -1997,7 +1997,7 @@ _&setJumpEnabled:
     description: Specifies whether the player or players are able to use jump. Expects a boolean value such as true, false, or compare.
     type: bool
     default: 'True'
-  return: void
+  return: Void
   guid: 0000000105A5
   en-US: Set Jump Enabled
   es-MX: Establecer salto activado
@@ -2012,10 +2012,10 @@ setMatchTime:
   args:
   - name: Time
     description: The match time in seconds.
-    type: unsigned int
+    type: Integer
     default: Number
   guid: 00000000AD31
-  return: void
+  return: Void
   en-US: Set Match Time
   es-MX: Establecer tiempo de la partida
   fr-FR: Définir le temps de jeu
@@ -2038,7 +2038,7 @@ _&setMaxHealth:
     type: unsigned float
     default: Number
   guid: 0000000078FA
-  return: void
+  return: Void
   en-US: Set Max Health
   es-MX: Establecer salud máxima
   fr-FR: Définir les points de vie maximum
@@ -2058,7 +2058,7 @@ _&setMeleeEnabled:
     description: Specifies whether the player or players are able to use melee. Expects a boolean value such as true, false, or compare.
     type: bool
     default: 'True'
-  return: void
+  return: Void
   guid: 000000010596
   en-US: Set Melee Enabled
   es-MX: Establecer ataques melé activado
@@ -2081,7 +2081,7 @@ _&setMoveSpeed:
     type: unsigned float
     default: Number
   guid: 00000000B998
-  return: void
+  return: Void
   en-US: Set Move Speed
   es-MX: Establecer velocidad de movimiento
   fr-FR: Définir la vitesse de déplacement
@@ -2107,7 +2107,7 @@ setObjectiveDescription:
     type: HudReeval
     default: Visible To And String
   guid: 00000000BA85
-  return: void
+  return: Void
   en-US: Set Objective Description
   es-MX: Establecer descripción de objetivo
   fr-FR: Définir la description d’objectif
@@ -2132,7 +2132,7 @@ _&setAllowedHeroes:
     - Array: Hero
     default: Hero
   guid: 00000000BA5B
-  return: void
+  return: Void
   en-US: Set Player Allowed Heroes
   es-MX: Establecer héroes permitidos para los jugadores
   fr-FR: Définir les héros autorisés pour un joueur
@@ -2151,10 +2151,10 @@ _&setScore:
     default: Event Player
   - name: Score
     description: The score that will be set.
-    type: int
+    type: Integer
     default: Number
   guid: 00000000BB22
-  return: void
+  return: Void
   en-US: Set Player Score
   es-MX: Establecer puntuación del jugador
   fr-FR: Définir le score d’un joueur
@@ -2182,7 +2182,7 @@ __setPlayerVariable__:
     - Array
     default: Number
   guid: 0000000077DF
-  return: void
+  return: Void
   en-US: Set Player Variable
   es-MX: Establecer variable de jugador
   fr-FR: Définir une variable de joueur
@@ -2206,7 +2206,7 @@ __setPlayerVariableAtIndex__:
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
-    type: unsigned int
+    type: Integer
     default: Number
   - name: Value
     description: The value that will be stored into the array.
@@ -2215,7 +2215,7 @@ __setPlayerVariableAtIndex__:
     - Array
     default: Number
   guid: 00000000BBA9
-  return: void
+  return: Void
   en-US: Set Player Variable At Index
   es-MX: Establecer variable de jugador según el índice
   fr-FR: Définir une variable de joueur à l’index
@@ -2236,7 +2236,7 @@ _&setPrimaryFireEnabled:
     type: bool
     default: 'True'
   guid: 00000000C6C5
-  return: void
+  return: Void
   en-US: Set Primary Fire Enabled
   es-MX: Establecer disparo principal habilitado
   fr-FR: Définir l’activation du tir principal
@@ -2258,7 +2258,7 @@ _&setProjectileGravity:
     type: unsigned float
     default: Number
   guid: 00000000B99B
-  return: void
+  return: Void
   en-US: Set Projectile Gravity
   es-MX: Establecer gravedad del proyectil
   fr-FR: Définir la gravité des projectiles
@@ -2280,7 +2280,7 @@ _&setProjectileSpeed:
     type: unsigned float
     default: Number
   guid: 00000000B99D
-  return: void
+  return: Void
   en-US: Set Projectile Speed
   es-MX: Establecer velocidad del proyectil
   fr-FR: Définir la vitesse des projectiles
@@ -2300,10 +2300,10 @@ _&setRespawnTime:
     default: Event Player
   - name: Time
     description: The duration between death and respawn in seconds.
-    type: unsigned int
+    type: Integer
     default: Number
   guid: 00000000B9CD
-  return: void
+  return: Void
   en-US: Set Respawn Max Time
   es-MX: Establecer tiempo máximo de reaparición
   fr-FR: Définir la durée maximum avant réapparition
@@ -2324,7 +2324,7 @@ _&setSecondaryFireEnabled:
     type: bool
     default: 'True'
   guid: 00000000C6C4
-  return: void
+  return: Void
   en-US: Set Secondary Fire Enabled
   es-MX: Establecer disparo secundario habilitado
   fr-FR: Définir l’activation du tir secondaire
@@ -2340,7 +2340,7 @@ setSlowMotion:
     type: unsigned float
     default: Number
   guid: 00000000B9F2
-  return: void
+  return: Void
   en-US: Set Slow Motion
   es-MX: Establecer cámara lenta
   fr-FR: Définir un ralenti
@@ -2370,7 +2370,7 @@ _&setStatusEffect:
     type: unsigned float
     default: Number
   guid: 00000000B588
-  return: void
+  return: Void
   en-US: Set Status
   es-MX: Establecer estado
   fr-FR: Définir un statut
@@ -2387,10 +2387,10 @@ setTeamScore:
     default: Team
   - name: Score
     description: The score that will be set.
-    type: int
+    type: Integer
     default: Number
   guid: 00000000BB25
-  return: void
+  return: Void
   en-US: Set Team Score
   es-MX: Establecer puntuación del equipo
   fr-FR: Définir le score d’une équipe
@@ -2411,7 +2411,7 @@ _&setUltEnabled:
     type: bool
     default: 'True'
   guid: 00000000B9B6
-  return: void
+  return: Void
   en-US: Set Ultimate Ability Enabled
   es-MX: Establecer habilidad máxima habilitada
   fr-FR: Définir l’activation de la capacité ultime
@@ -2433,7 +2433,7 @@ _&setUltCharge:
     type: unsigned float
     default: Number
   guid: 00000000BB1C
-  return: void
+  return: Void
   en-US: Set Ultimate Charge
   es-MX: Establecer carga de habilidad máxima
   fr-FR: Définir la charge de la capacité ultime
@@ -2446,9 +2446,9 @@ __skip__:
   args:
   - name: Number OF Actions
     description: The number of actions to skip, not including this action.
-    type: unsigned int
+    type: Integer
     default: Number
-  return: void
+  return: Void
   en-US: Skip
   es-MX: Omitir
   fr-FR: Passer
@@ -2466,10 +2466,10 @@ __skipIf__:
     default: Compare
   - name: Number OF Actions
     description: The number of actions to skip, not including this action.
-    type: unsigned int
+    type: Integer
     default: Number
   guid: 00000000BB00
-  return: void
+  return: Void
   en-US: Skip If
   es-MX: Omitir si
   fr-FR: Passer si
@@ -2491,7 +2491,7 @@ smallMessage:
     type: Object
     default: String
   guid: 00000000BA87
-  return: void
+  return: Void
   en-US: Small Message
   es-MX: Mensaje pequeño
   fr-FR: Message en petit
@@ -2528,7 +2528,7 @@ _&startAcceleration:
     type: AccelReeval
     default: Direction, Rate, And Max Speed
   guid: 00000000BB0D
-  return: void
+  return: Void
   en-US: Start Accelerating
   es-MX: Comenzar la aceleración
   fr-FR: Accélérer
@@ -2557,7 +2557,7 @@ _&setCamera:
     type: unsigned float
     default: Number
   guid: 00000000C393
-  return: void
+  return: Void
   en-US: Start Camera
   es-MX: Comenzar cámara
   fr-FR: Lancer la caméra
@@ -2591,7 +2591,7 @@ startDamageModification:
     type: DamageReeval
     default: Receivers, Damagers, And Damage Percent
   guid: 00000000C639
-  return: void
+  return: Void
   en-US: Start Damage Modification
   es-MX: Comenzar modificación de daño
   fr-FR: Lancer la modification des dégâts
@@ -2622,7 +2622,7 @@ _&startDoT:
     type: unsigned float
     default: Number
   guid: 00000000B9C5
-  return: void
+  return: Void
   en-US: Start Damage Over Time
   es-MX: Comenzar daño con el tiempo
   fr-FR: Infliger des dégâts sur la durée
@@ -2655,7 +2655,7 @@ _&startFacing:
     type: FacingReeval
     default: Direction And Turn Rate
   guid: 00000000BB20
-  return: void
+  return: Void
   en-US: Start Facing
   es-MX: Comenzar orientación
   fr-FR: Regarder vers
@@ -2679,7 +2679,7 @@ _&startForcingHero:
     type: Hero
     default: Hero
   guid: 00000000ABFB
-  return: void
+  return: Void
   en-US: Start Forcing Player To Be Hero
   es-MX: Comenzar a forzar a un jugador a usar un héroe
   fr-FR: Forcer un héros
@@ -2703,7 +2703,7 @@ _&startForcingPosition:
     description: If this value is true, then the position will be reevaluated and applied to the player every frame. If this value is false, then the posiiton is only evaluated once when the action begins.
     type: bool
     default: 'True'
-  return: void
+  return: Void
   guid: 000000010E85
   en-US: Start Forcing Player Position
   es-MX: Comenzar a forzar la posición del jugador
@@ -2722,10 +2722,10 @@ startForcingSpawn:
     default: Team
   - name: Room
     description: The number of the spawn room to be forced. 0 is the first spawn room, 1 the second, and 2 is the third. If the specified spawn room does not exist, players will use the normal spawn room.
-    type: unsigned int
+    type: Integer
     default: Number
   guid: 00000000B573
-  return: void
+  return: Void
   en-US: Start Forcing Spawn Room
   es-MX: Comenzar a forzar cuarto de reaparición
   fr-FR: Forcer une salle d’apparition
@@ -2767,7 +2767,7 @@ _&startForcingThrottle:
     type: unsigned float
     default: Number
   guid: 00000000BB0F
-  return: void
+  return: Void
   en-US: Start Forcing Throttle
   es-MX: Comenzar a forzar la aceleración
   fr-FR: Forcer l’accélération
@@ -2798,7 +2798,7 @@ _&startHoT:
     type: unsigned float
     default: Number
   guid: 00000000B9C2
-  return: void
+  return: Void
   en-US: Start Heal Over Time
   es-MX: Comenzar sanación con el tiempo
   fr-FR: Prodiguer des soins sur la durée
@@ -2832,7 +2832,7 @@ startHealingModification:
     type: HealingReeval
     default: Receivers, Healers, And Healing Percent
   guid: 00000000C639
-  return: void
+  return: Void
   en-US: Start Healing Modification
   es-MX: Comenzar modificación de sanación
   fr-FR: Lancer la modification des soins
@@ -2854,7 +2854,7 @@ _&startForcingButton:
     type: ButtonLiteral
     default: Primary Fire
   guid: 00000000B9D3
-  return: void
+  return: Void
   en-US: Start Holding Button
   es-MX: Comenzar a mantener el botón presionado
   fr-FR: Maintenir un bouton enfoncé
@@ -2876,7 +2876,7 @@ __startRule__:
     type: AsyncBehavior
     default: RESTART RULE
   guid: '000000010022'
-  return: void
+  return: Void
   en-US: Start Rule
   es-MX: Comenzar regla
   fr-FR: Lancer la règle
@@ -2915,7 +2915,7 @@ _&startThrottleInDirection:
     type: ThrottleReeval
     default: Direction And Magnitude
   guid: 00000000CEA4
-  return: void
+  return: Void
   en-US: Start Throttle In Direction
   es-MX: Comenzar aceleración en dirección
   fr-FR: Commencer l’accélération directionnelle
@@ -2946,7 +2946,7 @@ _&startTransformingThrottle:
     type: Direction
     default: Vector
   guid: 00000000CC26
-  return: void
+  return: Void
   en-US: Start Transforming Throttle
   es-MX: Comenzar a transformar la aceleración
   fr-FR: Début de modification de l’accélération
@@ -2964,7 +2964,7 @@ _&stopAcceleration:
     - Array: Player
     default: Event Player
   guid: 00000000BB0C
-  return: void
+  return: Void
   en-US: Stop Accelerating
   es-MX: Detener la aceleración
   fr-FR: Arrêter l’accélération
@@ -2976,7 +2976,7 @@ stopAllDamageModifications:
     modification action.
   args: []
   guid: 00000000C647
-  return: void
+  return: Void
   en-US: Stop All Damage Modifications
   es-MX: Detener todas las modificaciones de daño
   fr-FR: Arrêter toutes les modifications de dégâts
@@ -2988,7 +2988,7 @@ stopAllHealingModifications:
     modification action.
   args: []
   guid: 00000000FD3B
-  return: void
+  return: Void
   en-US: Stop All Healing Modifications
   es-MX: Detener todas las modificaciones de sanación
   fr-FR: Terminer toutes les modifications de soins
@@ -3006,7 +3006,7 @@ _&stopAllDoT:
     - Array: Player
     default: Event Player
   guid: 00000000B9C3
-  return: void
+  return: Void
   en-US: Stop All Damage Over Time
   es-MX: Detener todo el daño con el tiempo
   fr-FR: Arrêter tous les dégâts sur la durée
@@ -3024,7 +3024,7 @@ _&stopAllHoT:
     - Array: Player
     default: Event Player
   guid: 00000000B9C0
-  return: void
+  return: Void
   en-US: Stop All Heal Over Time
   es-MX: Detener toda la sanación con el tiempo
   fr-FR: Arrêter tous les soins sur la durée
@@ -3041,7 +3041,7 @@ _&stopCamera:
     - Array: Player
     default: Event Player
   guid: 00000000C3B1
-  return: void
+  return: Void
   en-US: Stop Camera
   es-MX: Detener cámara
   fr-FR: Arrêter la caméra
@@ -3057,7 +3057,7 @@ __stopChasingGlobalVariable__:
     type: GlobalVariable
     default: A
   guid: 00000000B83E
-  return: void
+  return: Void
   en-US: Stop Chasing Global Variable
   es-MX: Detener seguimiento de variable global
   fr-FR: Arrêter de modifier une variable globale
@@ -3079,7 +3079,7 @@ __stopChasingPlayerVariable__:
     type: PlayerVariable
     default: A
   guid: 00000000B83D
-  return: void
+  return: Void
   en-US: Stop Chasing Player Variable
   es-MX: Detener seguimiento de variable de jugador
   fr-FR: Arrêter de modifier une variable de joueur
@@ -3095,7 +3095,7 @@ stopDamageModification:
     type: DamageModificationId
     default: Last Damage Modification ID
   guid: 00000000C649
-  return: void
+  return: Void
   en-US: Stop Damage Modification
   es-MX: Detener modificación de daño
   fr-FR: Arrêter la modification des dégâts
@@ -3111,7 +3111,7 @@ stopDoT:
     type: DotId
     default: Last Damage Over Time ID
   guid: 00000000B9C4
-  return: void
+  return: Void
   en-US: Stop Damage Over Time
   es-MX: Detener daño con el tiempo
   fr-FR: Arrêter des dégâts sur la durée
@@ -3129,7 +3129,7 @@ _&stopFacing:
     - Array: Player
     default: Event Player
   guid: 00000000BB21
-  return: void
+  return: Void
   en-US: Stop Facing
   es-MX: Detener orientación
   fr-FR: Arrêter de regarder vers
@@ -3148,7 +3148,7 @@ _&stopForcingCurrentHero:
     - Array: Player
     default: Event Player
   guid: 00000000AC1B
-  return: void
+  return: Void
   en-US: Stop Forcing Player To Be Hero
   es-MX: Dejar de forzar a un jugador a usar un héroe
   fr-FR: Arrêter de forcer un héros
@@ -3165,7 +3165,7 @@ _&stopForcingPosition:
     - Player
     - Array: Player
     default: Event Player
-  return: void
+  return: Void
   guid: 000000010E8D
   en-US: Stop Forcing Player Position
   es-MX: Dejar de forzar la posición del jugador
@@ -3182,7 +3182,7 @@ stopForcingSpawn:
     type: Team
     default: Team
   guid: 00000000B574
-  return: void
+  return: Void
   en-US: Stop Forcing Spawn Room
   es-MX: Dejar de forzar cuarto de reaparición
   fr-FR: Arrêter de forcer une salle d’apparition
@@ -3200,7 +3200,7 @@ _&stopForcingThrottle:
     - Array: Player
     default: Event Player
   guid: 00000000BB0E
-  return: void
+  return: Void
   en-US: Stop Forcing Throttle
   es-MX: Dejar de forzar la aceleración
   fr-FR: Arrêter de forcer l’accélération
@@ -3216,7 +3216,7 @@ stopHoT:
     type: HotId
     default: Player Variable
   guid: 00000000B9C1
-  return: void
+  return: Void
   en-US: Stop Heal Over Time
   es-MX: Detener sanación con el tiempo
   fr-FR: Arrêter des soins sur la durée
@@ -3232,7 +3232,7 @@ stopHealingModification:
     type: HealingModificationId
     default: Last Healing Modification ID
   guid: 00000000FD37
-  return: void
+  return: Void
   en-US: Stop Healing Modification
   es-MX: Detener modificación de sanación
   fr-FR: Terminer la modification de soins
@@ -3254,7 +3254,7 @@ _&stopForcingButton:
     type: ButtonLiteral
     default: Primary Fire
   guid: 00000000B9D2
-  return: void
+  return: Void
   en-US: Stop Holding Button
   es-MX: Dejar de mantener el botón presionado
   fr-FR: Arrêter de maintenir un bouton enfoncé
@@ -3271,7 +3271,7 @@ _&stopThrottleInDirection:
     - Array: Player
     default: Event Player
   guid: 00000000CEA3
-  return: void
+  return: Void
   en-US: Stop Throttle In Direction
   es-MX: Detener aceleración en dirección
   fr-FR: Arrêter l’accélération directionnelle
@@ -3289,7 +3289,7 @@ _&stopTransformingThrottle:
     - Array: Player
     default: Event Player
   guid: 00000000CC25
-  return: void
+  return: Void
   en-US: Stop Transforming Throttle
   es-MX: Dejar de transformar la aceleración
   fr-FR: Arrêt de modification de l’accélération
@@ -3310,7 +3310,7 @@ _&teleport:
     description: The position to which the player or players will teleport. If a player is provided, the position of the player is used.
     type: Position
     default: Vector
-  return: void
+  return: Void
   en-US: Teleport
   es-MX: Transportar
   fr-FR: Téléportation
@@ -3321,7 +3321,7 @@ unpauseMatchTime:
   description: Unpauses the match time.
   args: []
   guid: 00000000B9F0
-  return: void
+  return: Void
   en-US: Unpause Match Time
   es-MX: Despausar tiempo de la partida
   fr-FR: Reprendre le temps de jeu
@@ -3341,7 +3341,7 @@ __wait__:
     description: Specifies if and how the wait can be interrupted. If the condition list is ignored, the wait will not be interrupted. Otherwise, the condition list will determine if and when the action list will abort or restart.
     type: Wait
     default: Ignore Condition
-  return: void
+  return: Void
   en-US: Wait
   es-MX: Esperar
   fr-FR: Attente
@@ -3360,7 +3360,7 @@ __while__:
     type: bool
     default: Compare
   guid: 00000000FB35
-  return: void
+  return: Void
   en-US: While
   es-MX: Mientras
   fr-FR: Tant que
@@ -4157,7 +4157,7 @@ MovePlayertoTeam:
     default: All
   - name: Slot
     description: The player slot which will receive the Player (-1 for first available slot).
-    type: int
+    type: Integer
     default: -1
   en-US: Move Player To Team
 
@@ -4262,7 +4262,7 @@ CreateProjectile:
     default: Number
   - name: Ricochet Count
     description: How many times the projectile will ricochet off the environment before expiring.
-    type: Interger
+    type: Integer
     default: Number
   - name: Gravity
     description: The amount of gravity affecting the projectile, creating an arc. If negative, the projectile will arc upwards.

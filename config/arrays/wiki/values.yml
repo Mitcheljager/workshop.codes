@@ -9,7 +9,7 @@ _&getAbilityCooldown:
     description: The ability to check associated by button.
     type: Button
     default: Button
-  return: unsigned float
+  return: Float
   guid: 0000000109B3
   en-US: Ability Cooldown
   es-MX: Reutilización de habilidad
@@ -44,7 +44,7 @@ abs:
     description: The real number value whose absolute value will be computed.
     type: float
     default: Number
-  return: unsigned float
+  return: Float
   guid: 00000000C358
   en-US: Absolute Value
   es-MX: Valor absoluto
@@ -257,7 +257,7 @@ _&getAltitude:
     description: The player whose altitude to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   guid: 00000000B11D
   en-US: Altitude Of
   es-MX: Altitud de
@@ -300,7 +300,7 @@ angleBetweenVectors:
       in degrees. This vector does not need to be pre-normalized.
     type: Direction
     default: Vector
-  return: unsigned float
+  return: Float
   guid: 00000000C813
   en-US: Angle Between Vectors
   es-MX: Ángulo entre vectores
@@ -504,13 +504,13 @@ __arraySlice__:
     default: All Players
   - name: Start Index
     description: The first index of the range.
-    type: unsigned int
+    type: Integer
     default: Number
   - name: Count
     description: The number of elements in the resulting array. The resulting array
       will contain fewer elements if the specified range exceeds the bounds of the
       array.
-    type: unsigned int
+    type: Integer
     default: Number
   return:
     Array: Object
@@ -539,9 +539,9 @@ Vector.Backward:
   args:
   return:
     Direction:
-    - unsigned int
-    - unsigned int
-    - signed int
+    - Integer
+    - Integer
+    - Integer
   en-US: Backward
   es-MX: Atrás
   fr-FR: Arrière
@@ -618,7 +618,7 @@ getControlScorePercentage:
     description: The team whose score percentage to acquire.
     type: Team
     default: Team
-  return: unsigned float
+  return: Float
   guid: 00000000B37C
   en-US: Control Mode Scoring Percentage
   es-MX: Porcentaje de puntuación en el modo Control
@@ -675,7 +675,7 @@ len:
     description: The array whose elements will be counted.
     type: Array
     default: Global Variable
-  return: unsigned int
+  return: Integer
   guid: 00000000B26E
   en-US: Count Of
   es-MX: Conteo de
@@ -822,7 +822,7 @@ distance:
     description: One of the two positions used in the distance measurement.
     type: Position
     default: Vector
-  return: unsigned float
+  return: Float
   guid: 00000000B1E7
   en-US: Distance Between
   es-MX: Distancia entre
@@ -884,9 +884,9 @@ Vector.DOWN:
   args:
   return:
     Direction:
-    - unsigned int
-    - signed int
-    - unsigned int
+    - Integer
+    - Integer
+    - Integer
   en-US: Down
   es-MX: Abajo
   fr-FR: Bas
@@ -938,7 +938,7 @@ eventDamage:
   description: The amount of damage received by the victim for the event currently
     being processed by this rule.
   args:
-  return: unsigned float
+  return: Float
   guid: 00000000C635
   en-US: Event Damage
   es-MX: Daño de evento
@@ -962,7 +962,7 @@ eventHealing:
   description: The amount of healing received by the healee for the event currently
     being processed by this rule.
   args:
-  return: unsigned float
+  return: Float
   guid: 00000000CC33
   en-US: Event Healing
   es-MX: Sanación de evento
@@ -1126,9 +1126,9 @@ Vector.Forward:
   args:
   return:
     Direction:
-    - unsigned int
-    - unsigned int
-    - unsigned int
+    - Integer
+    - Integer
+    - Integer
   en-US: Forward
   es-MX: Adelante
   fr-FR: Avant
@@ -1230,7 +1230,7 @@ _&getHealth:
     description: The player whose health to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   en-US: Health
   es-MX: Salud
   fr-FR: Points de vie
@@ -1246,7 +1246,7 @@ _&getNormalizedHealth:
     description: The player whose normalized health to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   guid: 0000000081C3
   en-US: Normalized Health
   es-MX: Salud normalizada
@@ -1393,7 +1393,7 @@ _&getHorizontalSpeed:
     description: The player whose horizontal speed to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   guid: 00000000B25E
   en-US: Horizontal Speed Of
   es-MX: Velocidad horizontal de
@@ -1469,7 +1469,7 @@ __indexOfArrayValue__:
     description: The value for which to search.
     type: Object
     default: Number
-  return: int
+  return: Integer
   guid: 00000000C330
   en-US: Index Of Array Value
   es-MX: Índice del valor de la matriz
@@ -1956,7 +1956,7 @@ isObjectiveComplete:
     description: The index of the objective to consider, starting at 0 and counting
       up. Each control point, payload checkpoint, and payload destination has its
       own index.
-    type: unsigned int
+    type: Integer
     default: Number
   return: bool
   guid: 00000000B378
@@ -2272,9 +2272,9 @@ Vector.Left:
   args:
   return:
     Direction:
-    - unsigned int
-    - unsigned int
-    - unsigned int
+    - Integer
+    - Integer
+    - Integer
   en-US: Left
   es-MX: Izquierda
   fr-FR: Gauche
@@ -2330,7 +2330,7 @@ __map__:
 getMatchRound:
   description: The current round of the match, counting up from 1.
   args: []
-  return: unsigned int
+  return: Integer
   guid: 00000000B375
   en-US: Match Round
   es-MX: Ronda de la partida
@@ -2341,7 +2341,7 @@ getMatchRound:
 getMatchTime:
   description: The amount of time in seconds remaining in the current game mode phase.
   args: []
-  return: unsigned float
+  return: Float
   guid: 00000000AD3B
   en-US: Match Time
   es-MX: Tiempo de la partida
@@ -2375,7 +2375,7 @@ _&getMaxHealth:
     description: The player whose max health to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   guid: 0000000081C4
   en-US: Max Health
   es-MX: Salud máxima
@@ -2516,7 +2516,7 @@ getNumberOfDeadPlayers:
     description: The team or teams on which to count players.
     type: Team
     default: Team
-  return: unsigned int
+  return: Integer
   guid: 00000000B29A
   en-US: Number of Dead Players
   es-MX: Cantidad de jugadores muertos
@@ -2532,7 +2532,7 @@ _&getNumberOfDeaths:
     description: The player whose death count to acquire.
     type: Player
     default: Event Player
-  return: unsigned int
+  return: Integer
   guid: 00000000B103
   en-US: Number of Deaths
   es-MX: Cantidad de muertes
@@ -2548,7 +2548,7 @@ _&getNumberOfElims:
     description: The player whose elimination count to acquire.
     type: Player
     default: Event Player
-  return: unsigned int
+  return: Integer
   guid: 00000000B101
   en-US: Number of Eliminations
   es-MX: Cantidad de eliminaciones
@@ -2564,7 +2564,7 @@ _&getNumberOfFinalBlows:
     description: The player whose final blow count to acquire.
     type: Player
     default: Event Player
-  return: unsigned int
+  return: Integer
   guid: 00000000B102
   en-US: Number of Final Blows
   es-MX: Cantidad de golpes de gracia
@@ -2583,7 +2583,7 @@ getNumberOfHeroes:
     description: The team or teams on which to check for the hero being played.
     type: Team
     default: Team
-  return: unsigned int
+  return: Integer
   guid: 00000000B296
   en-US: Number of Heroes
   es-MX: Cantidad de héroes
@@ -2598,7 +2598,7 @@ getNumberOfLivingPlayers:
     description: The team or teams on which to count players.
     type: Team
     default: Team
-  return: unsigned int
+  return: Integer
   guid: 00000000B297
   en-US: Number of Living Players
   es-MX: Cantidad de jugadores vivos
@@ -2613,7 +2613,7 @@ getNumberOfPlayers:
     description: The team or teams on which to count players.
     type: Team
     default: Team
-  return: unsigned int
+  return: Integer
   guid: 00000000B295
   en-US: Number of Players
   es-MX: Cantidad de jugadores
@@ -2629,7 +2629,7 @@ getNumberOfPlayersOnObjective:
     description: The team or teams on which to count players.
     type: Team
     default: Team
-  return: unsigned int
+  return: Integer
   guid: 00000000B29B
   en-US: Number of Players On Objective
   es-MX: Cantidad de jugadores en el objetivo
@@ -2641,7 +2641,7 @@ getCurrentObjective:
   description: The control point, payload checkpoint, or payload destination currently
     active (either 0, 1, or 2). Valid in assault, assault/escort, escort, and control.
   args: []
-  return: unsigned int
+  return: Integer
   guid: 00000000B37D
   en-US: Objective Index
   es-MX: Índice de objetivo
@@ -2658,9 +2658,9 @@ getObjectivePosition:
     description: The index of the objective to consider, starting at 0 and counting
       up. Each control point, payload checkpoint, and payload destination has its
       own index.
-    type: unsigned int
+    type: Integer
     default: Number
-  return: unsigned int
+  return: Integer
   guid: 00000000B355
   en-US: Objective Position
   es-MX: Posición del objetivo
@@ -2719,7 +2719,7 @@ getPayloadProgressPercentage:
   description: The current progress towards the destination for the active payload
     (expressed as a percentage).
   args: []
-  return: unsigned float
+  return: Float
   guid: 00000000B357
   en-US: Payload Progress Percentage
   es-MX: Porcentaje de progreso de la carga
@@ -2790,7 +2790,7 @@ getPlayersInSlot:
     description: The slot number from which to acquire a player or players. In team
       games, each team has slots 0 through 5. In free-for-all games, slots are numbered
       0 through 11.
-    type: unsigned int
+    type: Integer
     default: Number
   - name: Team
     description: The team or teams from which to acquire a player or players.
@@ -2923,7 +2923,7 @@ __raiseToPower__:
     description: The right-hand operand. May be any value that results in a number.
     type: float
     default: Number
-  return: unsigned float
+  return: Float
   en-US: Raise To Power
   es-MX: Elevar a la potencia
   fr-FR: 'Élévation à une puissance '
@@ -2936,14 +2936,14 @@ random.randint:
   - name: Min
     description: The smallest integer allowed. If a real number is provided to this
       input, it is rounded to the nearest integer.
-    type: int
+    type: Integer
     default: Number
   - name: Max
     description: The largest integer allowed. If a real number is provided to this
       input, it is rounded to the nearest integer.
-    type: int
+    type: Integer
     default: Number
-  return: int
+  return: Integer
   guid: 00000000B59B
   en-US: Random Integer
   es-MX: Número entero aleatorio
@@ -3146,9 +3146,9 @@ Vector.RIGHT:
   args:
   return:
     Direction:
-    - signed int
-    - unsigned int
-    - unsigned int
+    - Integer
+    - Integer
+    - Integer
   en-US: Right
   es-MX: Derecha
   fr-FR: Droite
@@ -3166,7 +3166,7 @@ __round__:
     description: Determines the direction in which the value will be rounded.
     type: __Rounding__
     default: UP
-  return: int
+  return: Integer
   guid: 00000000C354
   en-US: Round To Integer
   es-MX: Redondear a número entero
@@ -3182,7 +3182,7 @@ _&getScore:
     description: The player whose score to acquire.
     type: Player
     default: Event Player
-  return: int
+  return: Integer
   guid: 00000000AD3C
   en-US: Score Of
   es-MX: Puntuación de
@@ -3196,7 +3196,7 @@ getServerLoad:
     instance. As this number approaches or exceeds 100, it becomes increasingly likely
     that the instance will be shut down because it is consuming too many resources.
   args: []
-  return: unsigned float
+  return: Float
   en-US: Server Load
   es-MX: Uso del servidor
   fr-FR: Charge du serveur
@@ -3210,7 +3210,7 @@ getAverageServerLoad:
     100, it becomes increasingly likely that the instance will be shut down because
     it is consuming too many resources.
   args: []
-  return: unsigned float
+  return: Float
   en-US: Server Load Average
   es-MX: Uso promedio del servidor
   fr-FR: Charge moyenne du serveur
@@ -3224,7 +3224,7 @@ getPeakServerLoad:
     100, it becomes increasingly likely that the instance will be shut down because
     it is consuming too many resources.
   args: []
-  return: unsigned float
+  return: Float
   en-US: Server Load Peak
   es-MX: Uso máximo del servidor
   fr-FR: Pic de charge du serveur
@@ -3269,7 +3269,7 @@ _&getSlot:
     description: The player whose slot number to acquire.
     type: Player
     default: Event Player
-  return: unsigned int
+  return: Integer
   guid: 00000000BB7F
   en-US: Slot Of
   es-MX: Posición de
@@ -3323,7 +3323,7 @@ _&getSpeed:
     description: The player whose speed to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   guid: 00000000B25D
   en-US: Speed Of
   es-MX: Velocidad de
@@ -3343,7 +3343,7 @@ _&getSpeedInDirection:
     description: The direction of travel in which to measure the player's speed.
     type: Direction
     default: Vector
-  return: unsigned float
+  return: Float
   guid: 00000000B260
   en-US: Speed Of In Direction
   es-MX: Velocidad de/en dirección
@@ -3359,7 +3359,7 @@ sqrt:
       values result in zero.
     type: unsigned float
     default: Number
-  return: unsigned float
+  return: Float
   guid: 00000000C356
   en-US: Square Root
   es-MX: Raíz cuadrada
@@ -3476,7 +3476,7 @@ teamScore:
     description: The team whose score to acquire.
     type: Team
     default: Team
-  return: int
+  return: Integer
   en-US: Team Score
   es-MX: Puntuación del equipo
   fr-FR: Score de l’équipe
@@ -3504,7 +3504,7 @@ getTotalTimeElapsed:
   description: The total time in seconds that have elapsed since the game instance
     was created (including setup time and transitions).
   args: []
-  return: unsigned float
+  return: Float
   guid: 00000000B361
   en-US: Total Time Elapsed
   es-MX: Tiempo total transcurrido
@@ -3528,7 +3528,7 @@ _&getUltCharge:
     description: The player whose ultimate charge percentage to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   guid: 0000000081C5
   en-US: Ultimate Charge Percent
   es-MX: Porcentaje de carga de la habilidad máxima
@@ -3542,9 +3542,9 @@ Vector.UP:
   args:
   return:
     Direction:
-    - unsigned int
-    - unsigned int
-    - unsigned int
+    - Integer
+    - Integer
+    - Integer
   en-US: Up
   es-MX: Arriba
   fr-FR: Haut
@@ -3561,7 +3561,7 @@ __valueInArray__:
     default: Global Variable
   - name: Index
     description: The index of the element to acquire.
-    type: unsigned int
+    type: Integer
     default: Number
   return:
   - Object
@@ -3694,7 +3694,7 @@ _&getVerticalSpeed:
     description: The player whose vertical speed to acquire.
     type: Player
     default: Event Player
-  return: unsigned float
+  return: Float
   guid: 00000000B25F
   en-US: Vertical Speed Of
   es-MX: Velocidad vertical de
@@ -3799,7 +3799,7 @@ _&getAbilityCharge:
     description: The ability to check associated by button.
     type: Button
     default: Button
-  return: unsigned int
+  return: Integer
   en-US: Ability Charge
 _&getAbilityResource:
   description: The ability resource percent for a player associated by button.
@@ -3812,7 +3812,7 @@ _&getAbilityResource:
     description: The ability to check associated by button.
     type: Button
     default: Button
-  return: unsigned float
+  return: Float
   en-US: Ability Resource
 _&getAmmo:
   description: The current ammo of a player.
@@ -3823,9 +3823,9 @@ _&getAmmo:
     default: Event Player
   - name: Clip
     description: The index of the clip to be acquired. 0 is the first clip, and 1 is the second. If the specified type does not exist, this will return 0.
-    type: unsigned int
+    type: Integer
     default: 0
-  return: unsigned float
+  return: Float
   en-US: Ammo
 eventWasEnvironment:
   description: Whether the elimination was due to the environment for the event currently
@@ -3846,7 +3846,7 @@ _&getHealthOfType:
     description: The type of health to acquire.
     type: Health
     default: Health
-  return: unsigned float
+  return: Float
   en-US: Health of Type
 buttonString:
   description: Converts a button parameter into a string that shows up based on the
@@ -3882,9 +3882,9 @@ _&getMaxAmmo:
     default: Event Player
   - name: Clip
     description: The index of the clip to be acquired. 0 is the first clip, and 1 is the second. If the specified type does not exist, this will return 0.
-    type: unsigned int
+    type: Integer
     default: 0
-  return: unsigned float
+  return: Float
   en-US: Max Ammo
 _&getMaxHealthOfType:
   guid: 0000000081C2
@@ -3899,7 +3899,7 @@ _&getMaxHealthOfType:
     description: The type of max health to acquire.
     type: Health
     default: Health
-  return: unsigned float
+  return: Float
   en-US: Max Health of Type
 _&getCurrentWeapon:
   description: The currently held weapon of a player. Returns 2 for Baby Dva's gun,
@@ -3909,7 +3909,7 @@ _&getCurrentWeapon:
     description: The player whose weapon to acquire.
     type: Player
     default: Event Player
-  return: unsigned int
+  return: Integer
   en-US: Weapon
 Color:
   description: A Color Constant
@@ -4007,7 +4007,7 @@ workshopSettingInteger:
     type: IntLiteral
     default: 0
   isConstant: true
-  return: int
+  return: Integer
   guid: '000000011375'
   en-US: Workshop Setting Integer
   es-MX: Número entero de la configuración del Workshop
@@ -4111,7 +4111,7 @@ MagnitudeOf:
   - name: Value
     description: The Vector operand of the magnitude operation.
     default: Vector
-  return: unsigned float
+  return: Float
   en-US: Magnitude Of
 NumberofSlots:
   description: The number of Slots on a Team or in the match.
