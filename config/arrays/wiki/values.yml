@@ -10,7 +10,6 @@ _&getAbilityCooldown:
     type: Button
     default: Button
   return: Float
-  guid: 0000000109B3
   en-US: Ability Cooldown
   es-MX: Reutilización de habilidad
   fr-FR: Temps de recharge de la capacité
@@ -30,7 +29,6 @@ abilityIconString:
     type: Button
     default: Button
   return: String
-  guid: 000000010B52
   en-US: Ability Icon String
   es-MX: Cadena de ícono de habilidad
   fr-FR: Chaîne d’icône de la capacité
@@ -45,7 +43,6 @@ abs:
     type: float
     default: Number
   return: Float
-  guid: 00000000C358
   en-US: Absolute Value
   es-MX: Valor absoluto
   fr-FR: Valeur absolue
@@ -53,7 +50,6 @@ abs:
   pt-BR: Valor Absoluto
   zh-CN: 绝对值
 __add__:
-  guid: 00000000C408
   description: The sum of two numbers or vectors.
   args_allow_null: true
   args:
@@ -89,7 +85,6 @@ getDeadPlayers:
     default: Team
   return:
     Array: Player
-  guid: 00000000B265
   en-US: All Dead Players
   es-MX: Todos los jugadores muertos
   fr-FR: Tous les joueurs morts
@@ -106,7 +101,6 @@ getDamageHeroes:
   args: []
   return:
     Array: Hero
-  guid: 00000000D40A
   en-US: All Damage Heroes
   de-DE: Alle Schadenshelden
   es-MX: Todos los héroes de daño
@@ -115,7 +109,6 @@ getDamageHeroes:
   pt-BR: Todos os Heróis de Dano
   zh-CN: 所有输出英雄
 getAllHeroes:
-  guid: 00000000BF58
   description: "The array of all heroes in overwatch. The order is as follows:\n        \n
     \       0. Reaper   \n        1. Tracer   \n        2. Mercy    \n        3. Hanzo
     \   \n        4. Torbjorn \n        5. Reinhardt\n        6. Pharah   \n        7.
@@ -144,7 +137,6 @@ getLivingPlayers:
     default: Team
   return:
     Array: Player
-  guid: 00000000B264
   en-US: All Living Players
   es-MX: Todos los jugadores vivos
   fr-FR: Tous les joueurs en vie
@@ -160,7 +152,6 @@ getPlayers:
     default: Team
   return:
     Array: Player
-  guid: 00000000B261
   en-US: All Players
   es-MX: Todos los jugadores
   fr-FR: Tous les joueurs
@@ -177,7 +168,6 @@ getPlayersNotOnObjective:
     default: Team
   return:
     Array: Player
-  guid: 00000000B267
   en-US: All Players Not On Objective
   es-MX: Todos los jugadores que no están en el objetivo
   fr-FR: Tous les joueurs éloignés de l’objectif
@@ -194,7 +184,6 @@ getPlayersOnObjective:
     default: Team
   return:
     Array: Player
-  guid: 00000000B266
   en-US: All Players On Objective
   es-MX: Todos los jugadores que están en el objetivo
   fr-FR: Tous les joueurs sur l’objectif
@@ -211,7 +200,6 @@ _&getAllowedHeroes:
     default: Event Player
   return:
     Array: Hero
-  guid: 00000000BBA8
   en-US: Allowed Heroes
   es-MX: Héroes permitidos
   fr-FR: Héros autorisés
@@ -225,7 +213,6 @@ getSupportHeroes:
   args: []
   return:
     Array: Hero
-  guid: 00000000D40B
   en-US: All Support Heroes
   de-DE: Alle Unterstützungshelden
   es-MX: Todos los héroes de apoyo
@@ -241,7 +228,6 @@ getTankHeroes:
   args: []
   return:
     Array: Hero
-  guid: 00000000D40C
   en-US: All Tank Heroes
   de-DE: Alle Tankhelden
   es-MX: Todos los héroes tanques
@@ -258,7 +244,6 @@ _&getAltitude:
     type: Player
     default: Event Player
   return: Float
-  guid: 00000000B11D
   en-US: Altitude Of
   es-MX: Altitud de
   fr-FR: Altitude de
@@ -279,7 +264,6 @@ __and__:
     type: bool
     default: 'True'
   return: bool
-  guid: 00000000B273
   en-US: And
   es-MX: Y
   fr-FR: Et
@@ -301,7 +285,6 @@ angleBetweenVectors:
     type: Direction
     default: Vector
   return: Float
-  guid: 00000000C813
   en-US: Angle Between Vectors
   es-MX: Ángulo entre vectores
   fr-FR: Angle entre deux vecteurs
@@ -322,7 +305,6 @@ angleDifference:
     type: float
     default: Number
   return: float
-  guid: 00000000B282
   en-US: Angle Difference
   es-MX: Diferencia de ángulo
   fr-FR: Différence entre angles
@@ -330,7 +312,6 @@ angleDifference:
   pt-BR: Diferença de Ângulo
   zh-CN: 角度差
 __concat__:
-  guid: 00000000C41A
   description: A copy of an array with one or more values appended to the end.
   args_allow_null: true
   args:
@@ -360,7 +341,6 @@ acosDeg:
     type: float
     default: Number
   return: float
-  guid: 00000000C809
   en-US: Arccosine In Degrees
   es-MX: Arcocoseno en grados
   fr-FR: Arc cosinus en degrés
@@ -375,7 +355,6 @@ acos:
     type: float
     default: Number
   return: float
-  guid: 00000000C807
   en-US: Arccosine In Radians
   es-MX: Arcocoseno en radianes
   fr-FR: Arc cosinus en radians
@@ -390,7 +369,6 @@ asinDeg:
     type: float
     default: Number
   return: float
-  guid: 00000000C805
   en-US: Arcsine In Degrees
   es-MX: Arcoseno en grados
   fr-FR: Arc sinus en degrés
@@ -405,7 +383,6 @@ asin:
     type: float
     default: Number
   return: float
-  guid: 00000000C803
   en-US: Arcsine In Radians
   es-MX: Arcoseno en radianes
   fr-FR: Arc sinus en radians
@@ -425,7 +402,6 @@ atan2Deg:
     type: float
     default: Number
   return: float
-  guid: 00000000C801
   en-US: Arctangent In Degrees
   es-MX: Arcotangente en grados
   fr-FR: Arc tangente en degrés
@@ -445,7 +421,6 @@ atan2:
     type: float
     default: Number
   return: float
-  guid: 00000000C7FF
   en-US: Arctangent In Radians
   es-MX: Arcotangente en radianes
   fr-FR: Arc tangente en radians
@@ -463,7 +438,6 @@ __array__:
     - Array
     default: 'Null'
   return: Array
-  guid: 000000010BC0
   en-US: Array
   es-ES: Matriz
   es-MX: Matriz
@@ -486,7 +460,6 @@ __arrayContains__:
     type: Object
     default: Number
   return: bool
-  guid: 00000000C336
   en-US: Array Contains
   es-MX: La matriz contiene
   fr-FR: Contenu du tableau
@@ -514,7 +487,6 @@ __arraySlice__:
     default: Number
   return:
     Array: Object
-  guid: 00000000B597
   en-US: Array Slice
   es-MX: Extracción de matriz
   fr-FR: Section de tableau
@@ -522,7 +494,6 @@ __arraySlice__:
   pt-BR: Fatia da Matriz
   zh-CN: 数组分割
 attacker:
-  guid: 00000000B32F
   description: The player that dealt the damage for the event currently being processed
     by this rule. May be the same as the victim or the event player.
   args:
@@ -534,7 +505,6 @@ attacker:
   pt-BR: Atacante
   zh-CN: 攻击方
 Vector.Backward:
-  guid: 00000000B11B
   description: Shorthand for the directional vector(0, 0, -1), which points backward.
   args:
   return:
@@ -556,7 +526,6 @@ __button__:
     type: ButtonLiteral
     default: Interact
   return: Button
-  guid: 000000010B3B
   en-US: Button
   es-MX: Botón
   fr-FR: Bouton
@@ -575,7 +544,6 @@ getClosestPlayer:
     type: Team
     default: Team
   return: Player
-  guid: 00000000B1DE
   en-US: Closest Player To
   es-MX: Jugador más cercano a
   fr-FR: Joueur le plus proche de
@@ -604,7 +572,6 @@ __compare__:
     - Array
     default: Number
   return: bool
-  guid: 00000000B276
   en-US: Compare
   es-MX: Comparar
   fr-FR: Comparer
@@ -619,7 +586,6 @@ getControlScorePercentage:
     type: Team
     default: Team
   return: Float
-  guid: 00000000B37C
   en-US: Control Mode Scoring Percentage
   es-MX: Porcentaje de puntuación en el modo Control
   fr-FR: Pourcentage du score en mode Contrôle
@@ -631,7 +597,6 @@ getControlScoringTeam:
     mode. Results in all if neither team is accumulating score.
   args: []
   return: Team
-  guid: 00000000B39A
   en-US: Control Mode Scoring Team
   es-MX: Equipo que anota en el modo Control
   fr-FR: Équipe contrôlant le point en mode Contrôle
@@ -646,7 +611,6 @@ cosDeg:
     type: float
     default: Number
   return: float
-  guid: 00000000C33E
   en-US: Cosine From Degrees
   es-MX: Coseno en grados
   fr-FR: Cosinus en degrés
@@ -661,7 +625,6 @@ cos:
     type: float
     default: Number
   return: float
-  guid: 00000000C342
   en-US: Cosine From Radians
   es-MX: Coseno en radianes
   fr-FR: Cosinus en radians
@@ -676,7 +639,6 @@ len:
     type: Array
     default: Global Variable
   return: Integer
-  guid: 00000000B26E
   en-US: Count Of
   es-MX: Conteo de
   fr-FR: Décompte de
@@ -695,7 +657,6 @@ crossProduct:
     type: Vector
     default: Vector
   return: Vector
-  guid: 00000000C35D
   en-US: Cross Product
   es-MX: Producto vectorial
   fr-FR: Produit croisé
@@ -709,7 +670,6 @@ __currentArrayElement__:
   return:
   - Object
   - Array
-  guid: 00000000B5B9
   en-US: Current Array Element
   es-MX: Elemento de matriz actual
   fr-FR: Élément de tableau actuel
@@ -728,7 +688,6 @@ getCurrentGamemode:
   description: The current game mode of the custom game.
   args: []
   return: Gamemode
-  guid: 00000000F163
   en-US: Current Game Mode
   es-MX: Modo de juego actual
   fr-FR: Mode de jeu actuel
@@ -736,7 +695,6 @@ getCurrentGamemode:
   pt-BR: Modo de jogo atual
   zh-CN: 当前比赛模式
 getCurrentMap:
-  guid: 00000000D418
   description: The current map of the custom game.
   args: []
   return: Map
@@ -766,7 +724,6 @@ __customString__:
     type: Object
     default: 'Null'
   return: String
-  guid: 00000000CE3C
   en-US: Custom String
   es-MX: Cadena personalizada
   fr-FR: Chaîne personnalisée
@@ -785,7 +742,6 @@ angleToDirection:
     type: float
     default: Number
   return: Direction
-  guid: 00000000BB2D
   en-US: Direction From Angles
   es-MX: Dirección desde los ángulos
   fr-FR: Direction depuis des angles
@@ -804,7 +760,6 @@ directionTowards:
     type: Position
     default: Vector
   return: Direction
-  guid: 00000000B1EA
   en-US: Direction Towards
   es-MX: Dirección hacia
   fr-FR: Direction
@@ -823,7 +778,6 @@ distance:
     type: Position
     default: Vector
   return: Float
-  guid: 00000000B1E7
   en-US: Distance Between
   es-MX: Distancia entre
   fr-FR: Distance entre
@@ -831,7 +785,6 @@ distance:
   pt-BR: Distância entre
   zh-CN: 相距距离
 __divide__:
-  guid: 00000000C40F
   description: The ratio of two numbers or vectors. A vector divided by a number will
     yield a scaled vector. Division by zero results in zero.
   args_allow_null: true
@@ -871,7 +824,6 @@ dotProduct:
     type: Vector
     default: Vector
   return: float
-  guid: 00000000C35A
   en-US: Dot Product
   es-MX: Producto escalar
   fr-FR: Produit scalaire
@@ -879,7 +831,6 @@ dotProduct:
   pt-BR: Produto Escalar
   zh-CN: 标量积
 Vector.DOWN:
-  guid: 00000000B119
   description: Shorthand for the directional vector(0, -1, 0), which points downward.
   args:
   return:
@@ -897,7 +848,6 @@ __emptyArray__:
   description: An array with no elements.
   args: []
   return: Array
-  guid: 00000000BF5A
   en-US: Empty Array
   es-MX: Matriz vacía
   fr-FR: Tableau vide
@@ -915,7 +865,6 @@ entityExists:
     - EntityId
     default: Event Player
   return: bool
-  guid: 00000000B619
   en-US: Entity Exists
   es-MX: La entidad existe
   fr-FR: Existence de l’entité
@@ -927,7 +876,6 @@ eventAbility:
     by button.
   args:
   return: Button
-  guid: 0000000109CF
   en-US: Event Ability
   es-MX: Evento de habilidad
   fr-FR: Capacité d’évènement
@@ -939,7 +887,6 @@ eventDamage:
     being processed by this rule.
   args:
   return: Float
-  guid: 00000000C635
   en-US: Event Damage
   es-MX: Daño de evento
   fr-FR: Dégâts d’évènement
@@ -951,7 +898,6 @@ eventDirection:
     rule.
   args:
   return: Direction
-  guid: 0000000107D5
   en-US: Event Direction
   es-MX: Dirección del evento
   fr-FR: Direction de l’évènement
@@ -963,7 +909,6 @@ eventHealing:
     being processed by this rule.
   args:
   return: Float
-  guid: 00000000CC33
   en-US: Event Healing
   es-MX: Sanación de evento
   fr-FR: Évènement soin
@@ -975,7 +920,6 @@ eventPlayer:
     same as the attacker or victim.
   args:
   return: Player
-  guid: 00000000B331
   en-US: Event Player
   es-MX: Jugador del evento
   fr-FR: Joueur exécutant
@@ -987,7 +931,6 @@ eventWasCriticalHit:
     event currently being processed by this rule.
   args:
   return: bool
-  guid: 00000000C637
   en-US: Event Was Critical Hit
   es-MX: El evento fue un golpe crítico
   fr-FR: L’évènement était un coup critique
@@ -999,7 +942,6 @@ eventWasHealthPack:
     processed by this rule.
   args:
   return: bool
-  guid: 00000000FC80
   en-US: Event Was Health Pack
   es-MX: Evento fue suministro de salud
   fr-FR: L’évènement était un kit de soins
@@ -1007,7 +949,6 @@ eventWasHealthPack:
   pt-BR: Evento foi kit Médico
   zh-CN: 事件为急救包
 _&getEyePosition:
-  guid: 00000000C595
   description: The position of a player's first person view (used for aiming)
   args:
   - name: Player
@@ -1030,7 +971,6 @@ _&getFacingDirection:
     type: Player
     default: Event Player
   return: Direction
-  guid: 00000000B281
   en-US: Facing Direction Of
   es-MX: Dirección de orientación de
   fr-FR: Regard en direction de
@@ -1041,7 +981,6 @@ _&getFacingDirection:
   description: The boolean value of false.
   args:
   return: bool
-  guid: 00000000AC3A
   en-US: 'False'
   es-MX: Falso
   fr-FR: Faux
@@ -1058,7 +997,6 @@ getFarthestPlayer:
     type: Team
     default: Team
   return: Player
-  guid: 00000000B1DF
   en-US: Farthest Player From
   es-MX: Jugador más lejos de
   fr-FR: Joueur le plus éloigné de
@@ -1080,7 +1018,6 @@ __filteredArray__:
     type: bool
     default: Compare
   return: Array
-  guid: 00000000B5B7
   en-US: Filtered Array
   es-MX: Matriz filtrada
   fr-FR: Tableau filtré
@@ -1098,7 +1035,6 @@ __firstOf__:
   return:
   - Object
   - Array
-  guid: 00000000B5C2
   en-US: First Of
   es-MX: Primero de
   fr-FR: Premier de
@@ -1113,7 +1049,6 @@ getFlagPosition:
     type: Team
     default: Team
   return: Position
-  guid: 00000000B3A0
   en-US: Flag Position
   es-MX: Posición de la bandera
   fr-FR: Position du drapeau
@@ -1121,7 +1056,6 @@ getFlagPosition:
   pt-BR: Posição da Bandeira
   zh-CN: 旗帜位置
 Vector.Forward:
-  guid: 00000000B11A
   description: Shorthand for the directional vector(0, 0, 1), which points forward.
   args:
   return:
@@ -1137,7 +1071,6 @@ Vector.Forward:
   zh-CN: 前
 __global__:
   return: GlobalVariable
-  guid: 00000000EAFB
   en-US: Global
   it-IT: Globale
   ja-JP: グローバル
@@ -1154,7 +1087,6 @@ __globalVar__:
     type: GlobalVariable
     default: A
   return: Value
-  guid: 00000000B0F9
   en-US: Global Variable
   es-MX: Variable global
   fr-FR: Variable globale
@@ -1171,7 +1103,6 @@ _&hasSpawned:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000C192
   en-US: Has Spawned
   es-MX: Ha aparecido
   fr-FR: Apparition
@@ -1191,7 +1122,6 @@ _&hasStatusEffect:
     type: Status
     default: Hacked
   return: bool
-  guid: 00000000B363
   en-US: Has Status
   es-MX: Tiene estado
   fr-FR: Statut
@@ -1203,7 +1133,6 @@ healee:
     processed by this rule. May be the same as the healer or the event player.
   args:
   return: Player
-  guid: 00000000CC1C
   en-US: Healee
   es-MX: Sanado
   fr-FR: Soigné
@@ -1211,7 +1140,6 @@ healee:
   pt-BR: Curado
   zh-CN: 受治疗者
 healer:
-  guid: 00000000CC1A
   description: The player that dealt the healing for the event currently being processed
     by this rule. May be the same as the healee or the event player.
   args:
@@ -1223,7 +1151,6 @@ healer:
   pt-BR: Curandeiro
   zh-CN: 治疗者
 _&getHealth:
-  guid: 0000000081C2
   description: The current health of a player, including armor and shields.
   args:
   - name: Player
@@ -1247,7 +1174,6 @@ _&getNormalizedHealth:
     type: Player
     default: Event Player
   return: Float
-  guid: 0000000081C3
   en-US: Normalized Health
   es-MX: Salud normalizada
   fr-FR: Points de vie normalisés
@@ -1255,7 +1181,6 @@ _&getNormalizedHealth:
   pt-BR: Vida Normalizada
   zh-CN: 标准化生命值
 __hero__:
-  guid: 00000000ACAA
   description: A hero constant.
   args:
   - name: Hero
@@ -1278,7 +1203,6 @@ _&getHeroOfDuplication:
     type: Player
     default: Event Player
   return: Hero
-  guid: 000000010E6A
   en-US: Hero Being Duplicated
   es-MX: Héroe que está siendo copiado
   fr-FR: Héros dupliqué
@@ -1293,7 +1217,6 @@ heroIcon:
     type: Hero
     default: Hero
   return: String
-  guid: 00000000C1FE
   en-US: Hero Icon String
   es-MX: Cadena de ícono de héroe
   fr-FR: Chaîne d’icône du héros
@@ -1308,7 +1231,6 @@ _&getCurrentHero:
     type: Player
     default: Event Player
   return: Hero
-  guid: 00000000ACA9
   en-US: Hero Of
   es-MX: Héroe de
   fr-FR: Héros de
@@ -1325,7 +1247,6 @@ horizontalAngleFromDirection:
     type: Direction
     default: Vector
   return: float
-  guid: 00000000BB2C
   en-US: Horizontal Angle From Direction
   es-MX: Ángulo horizontal desde la dirección
   fr-FR: Angle horizontal depuis une direction
@@ -1346,7 +1267,6 @@ horizontalAngleTowards:
     type: Position
     default: Vector
   return: float
-  guid: 00000000B27D
   en-US: Horizontal Angle Towards
   es-MX: Ángulo horizontal en dirección a
   fr-FR: Angle horizontal vers
@@ -1354,7 +1274,6 @@ horizontalAngleTowards:
   pt-BR: Ângulo Horizontal Rumo a
   zh-CN: 水平方向夹角
 __gamemode__:
-  guid: 00000000F161
   description: A game mode constant.
   args:
   - name: GAME MODE
@@ -1378,7 +1297,6 @@ _&getHorizontalFacingAngle:
     type: Player
     default: Event Player
   return: float
-  guid: 00000000B27F
   en-US: Horizontal Facing Angle Of
   es-MX: Ángulo horizontal de orientación de
   fr-FR: Angle horizontal du regard de
@@ -1394,7 +1312,6 @@ _&getHorizontalSpeed:
     type: Player
     default: Event Player
   return: Float
-  guid: 00000000B25E
   en-US: Horizontal Speed Of
   es-MX: Velocidad horizontal de
   fr-FR: Vitesse horizontale de
@@ -1406,7 +1323,6 @@ hostPlayer:
     will change if the current host player leaves the match.
   args:
   return: Player
-  guid: 00000000CC1E
   en-US: Host Player
   es-MX: Jugador anfitrión
   fr-FR: Joueur hôte
@@ -1421,7 +1337,6 @@ iconString:
     type: Icon
     default: 'Arrow: Down'
   return: String
-  guid: 00000000CCDC
   en-US: Icon String
   es-MX: Cadena de ícono
   fr-FR: Chaîne d’icône
@@ -1452,7 +1367,6 @@ __ifThenElse__:
   return:
   - Object
   - Array
-  guid: 000000010BC7
   en-US: If-Then-Else
   fr-FR: Si-Alors-Sinon
   ja-JP: If-Then-Else
@@ -1470,7 +1384,6 @@ __indexOfArrayValue__:
     type: Object
     default: Number
   return: Integer
-  guid: 00000000C330
   en-US: Index Of Array Value
   es-MX: Índice del valor de la matriz
   fr-FR: Index de la valeur de tableau
@@ -1485,7 +1398,6 @@ _&isAlive:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B278
   en-US: Is Alive
   es-MX: Está vivo
   fr-FR: En vie
@@ -1496,7 +1408,6 @@ isAssemblingHeroes:
   description: Whether the match is currently in its assemble heroes phase.
   args: []
   return: bool
-  guid: 00000000B35C
   en-US: Is Assembling Heroes
   es-MX: En Forma tu equipo
   fr-FR: Phase de choix de héros
@@ -1507,7 +1418,6 @@ isMatchBetweenRounds:
   description: Whether the match is between rounds.
   args: []
   return: bool
-  guid: 00000000B35F
   en-US: Is Between Rounds
   es-MX: Entre rondas
   fr-FR: Entre deux manches
@@ -1526,7 +1436,6 @@ _&isHoldingButton:
     type: ButtonLiteral
     default: Primary Fire
   return: bool
-  guid: 00000000B2F3
   en-US: Is Button Held
   es-MX: Botón presionado
   fr-FR: Bouton maintenu enfoncé
@@ -1548,7 +1457,6 @@ _&isCommunicating:
     type: Comms
     default: Voice Line Up
   return: bool
-  guid: 00000000B268
   en-US: Is Communicating
   es-MX: Se está comunicando
   fr-FR: Communication
@@ -1564,7 +1472,6 @@ _&isCommunicatingAnything:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B9E5
   en-US: Is Communicating Any
   es-MX: Comunica algo
   fr-FR: N’importe quelle communication
@@ -1579,7 +1486,6 @@ _&isCommunicatingEmote:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B9E8
   en-US: Is Communicating Any Emote
   es-MX: Comunica un gesto
   fr-FR: Communication par emote
@@ -1595,7 +1501,6 @@ _&isCommunicatingVoiceline:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B9E7
   en-US: Is Communicating Any Voice line
   es-MX: Comunica una línea de voz
   fr-FR: Communication par réplique
@@ -1606,7 +1511,6 @@ isControlPointLocked:
   description: Whether the point is locked in control mode.
   args: []
   return: bool
-  guid: 00000000B37B
   en-US: Is Control Mode Point Locked
   es-MX: Punto bloqueado en el modo Control
   fr-FR: Point de contrôle verrouillé
@@ -1621,7 +1525,6 @@ _&isCrouching:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B289
   en-US: Is Crouching
   es-MX: Agachado
   fr-FR: Accroupi
@@ -1639,7 +1542,6 @@ _&isInAlternateForm:
     type: Player
     default: Event Player
   return: bool
-  guid: 000000010E62
   en-US: Is In Alternate Form
   es-MX: Está en su forma alterna
   fr-FR: Est dans une forme alternative
@@ -1650,7 +1552,6 @@ isInSuddenDeath:
   description: Whether the current game of capture the flag is in sudden death.
   args: []
   return: bool
-  guid: 00000000B3A4
   en-US: Is CTF Mode In Sudden Death
   es-MX: Modo CLB en muerte súbita
   fr-FR: Capture du drapeau en mort subite
@@ -1665,7 +1566,6 @@ _&isDead:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B277
   en-US: Is Dead
   es-MX: Está muerto
   fr-FR: Mort
@@ -1680,7 +1580,6 @@ _&isDummy:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000CEDF
   en-US: Is Dummy Bot
   es-MX: Robot de entrenamiento
   fr-FR: Est une I.A.
@@ -1696,7 +1595,6 @@ _&isDuplicatingAHero:
     type: Player
     default: Event Player
   return: bool
-  guid: 000000010E65
   en-US: Is Duplicating
   es-MX: Está copiando
   fr-FR: Effectue une duplication
@@ -1711,7 +1609,6 @@ _&isFiringPrimaryFire:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000C3E7
   en-US: Is Firing Primary
   es-MX: Está usando el disparo principal
   fr-FR: Tir principal
@@ -1726,7 +1623,6 @@ _&isFiringSecondaryFire:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000C3E9
   en-US: Is Firing Secondary
   es-MX: Está usando el disparo secundario
   fr-FR: Tir secondaire
@@ -1741,7 +1637,6 @@ isFlagAtBase:
     type: Team
     default: Team
   return: bool
-  guid: 00000000B3A1
   en-US: Is Flag At Base
   es-MX: La bandera está en la base
   fr-FR: Drapeau à la base
@@ -1757,7 +1652,6 @@ isFlagBeingCarried:
     type: Team
     default: Team
   return: bool
-  guid: 00000000B3A2
   en-US: Is Flag Being Carried
   es-MX: La bandera está siendo transportada
   fr-FR: Drapeau transporté
@@ -1769,7 +1663,6 @@ isGameInProgress:
     combat and scoring are allowed).
   args: []
   return: bool
-  guid: 00000000B35E
   en-US: Is Game In Progress
   es-MX: Partida en curso
   fr-FR: Partie en cours
@@ -1789,7 +1682,6 @@ teamHasHero:
     type: Team
     default: Team
   return: bool
-  guid: 00000000B292
   en-US: Is Hero Being Played
   es-MX: Jugando con el héroe
   fr-FR: Héros joué
@@ -1804,7 +1696,6 @@ _&isInAir:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B28B
   en-US: Is In Air
   es-MX: En el aire
   fr-FR: Dans les airs
@@ -1835,7 +1726,6 @@ isInLoS:
     type: BarrierLos
     default: Barriers DO NOT BLOCK LOS
   return: bool
-  guid: 00000000B1EC
   en-US: Is In Line of Sight
   es-MX: En la línea de visión
   fr-FR: Dans la ligne de vue
@@ -1846,7 +1736,6 @@ isInSetup:
   description: Whether the match is currently in its setup phase.
   args: []
   return: bool
-  guid: 00000000B35D
   en-US: Is In Setup
   es-MX: En preparación
   fr-FR: Dans les paramètres
@@ -1862,7 +1751,6 @@ _&isInSpawnRoom:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B3B1
   en-US: Is In Spawn Room
   es-MX: En el cuarto de reaparición
   fr-FR: Dans la salle d’apparition
@@ -1885,7 +1773,6 @@ _&isInViewAngle:
     type: float
     default: Number
   return: bool
-  guid: 00000000BF7C
   en-US: Is In View Angle
   es-MX: En el ángulo de vista
   fr-FR: Dans le champ de vision
@@ -1900,7 +1787,6 @@ _&isJumping:
     type: Player
     default: Event Player
   return: bool
-  guid: 0000000105A0
   en-US: Is Jumping
   es-MX: Está saltando
   fr-FR: Utilise Saut
@@ -1911,7 +1797,6 @@ isMatchComplete:
   description: Whether the match has finished.
   args: []
   return: bool
-  guid: 00000000B360
   en-US: Is Match Complete
   es-MX: Partida Completada
   fr-FR: Partie terminée
@@ -1926,7 +1811,6 @@ _&isMeleeing:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000001059A
   en-US: Is Meleeing
   es-MX: Está usando un ataque melé
   fr-FR: Utilise Mêlée
@@ -1941,7 +1825,6 @@ _&isMoving:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B288
   en-US: Is Moving
   es-MX: En movimiento
   fr-FR: Se déplace
@@ -1959,7 +1842,6 @@ isObjectiveComplete:
     type: Integer
     default: Number
   return: bool
-  guid: 00000000B378
   en-US: Is Objective Complete
   es-MX: Objetivo completado
   fr-FR: Objectif accompli
@@ -1974,7 +1856,6 @@ _&isOnGround:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000BF70
   en-US: Is On Ground
   es-MX: En el suelo
   fr-FR: Au sol
@@ -1990,7 +1871,6 @@ _&isOnObjective:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B3B2
   en-US: Is On Objective
   es-MX: En el objetivo
   fr-FR: Sur l’objectif
@@ -2005,7 +1885,6 @@ _&isOnWall:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000BB0B
   en-US: Is On Wall
   es-MX: En el muro
   fr-FR: Sur le mur
@@ -2020,7 +1899,6 @@ _&isOnFire:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B3B3
   en-US: Is Portrait On Fire
   es-MX: Retrato en llamas
   fr-FR: Portrait « en feu »
@@ -2036,7 +1914,6 @@ _&isStanding:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B287
   en-US: Is Standing
   es-MX: De pie
   fr-FR: Debout
@@ -2052,7 +1929,6 @@ isTeamOnDefense:
     type: Team
     default: Team
   return: bool
-  guid: 00000000B359
   en-US: Is Team On Defense
   es-MX: Equipo defensor
   fr-FR: Équipe en défense
@@ -2068,7 +1944,6 @@ isTeamOnOffense:
     type: Team
     default: Team
   return: bool
-  guid: 00000000B354
   en-US: Is Team On Offense
   es-MX: Equipo atacante
   fr-FR: Équipe en attaque
@@ -2090,7 +1965,6 @@ __all__:
     type: bool
     default: Compare
   return: bool
-  guid: 00000000B5BA
   en-US: Is True For All
   es-MX: Es verdadero para todos
   fr-FR: Vrai pour tous
@@ -2112,7 +1986,6 @@ __any__:
     type: bool
     default: Compare
   return: bool
-  guid: 00000000B5BB
   en-US: Is True For Any
   es-MX: Es verdadero para cualquiera
   fr-FR: Vrai pour n’importe qui
@@ -2127,7 +2000,6 @@ _&isUsingAbility1:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000C3EB
   en-US: Is Using Ability 1
   es-MX: Está utilizando la habilidad 1
   fr-FR: Capacité 1 utilisée
@@ -2142,7 +2014,6 @@ _&isUsingAbility2:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000C3ED
   en-US: Is Using Ability 2
   es-MX: Está utilizando la habilidad 2
   fr-FR: Capacité 2 utilisée
@@ -2157,7 +2028,6 @@ _&isUsingUltimate:
     type: Player
     default: Event Player
   return: bool
-  guid: 00000000B9D4
   en-US: Is Using Ultimate
   es-MX: Está usando la habilidad máxima
   fr-FR: Capacité ultime utilisée
@@ -2168,7 +2038,6 @@ isWaitingForPlayers:
   description: Whether the match is waiting for players to join before starting.
   args: []
   return: bool
-  guid: 00000000B35B
   en-US: Is Waiting For Players
   es-MX: Esperando jugadores
   fr-FR: En attente de joueurs
@@ -2180,7 +2049,6 @@ getLastCreatedEntity:
     player (or created at the global level).
   args: []
   return: EntityId
-  guid: 00000000B362
   en-US: Last Created Entity
   es-MX: Última entidad creada
   fr-FR: Dernière entité créée
@@ -2192,7 +2060,6 @@ getLastDamageModification:
     that was executed by the event player (or executed at the global level).
   args: []
   return: DamageModificationId
-  guid: 00000000C64A
   en-US: Last Damage Modification ID
   es-MX: ID de modificación de daño anterior
   fr-FR: Dernier identifiant de modification de dégâts
@@ -2204,7 +2071,6 @@ getLastDoT:
     executed by the event player (or executed at the global level).
   args: []
   return: DotId
-  guid: 00000000B263
   en-US: Last Damage Over Time ID
   es-MX: ID de daño con el tiempo anterior
   fr-FR: Dernier identifiant de dégâts sur la durée
@@ -2216,7 +2082,6 @@ getLastHoT:
     by the event player (or executed at the global level).
   args: []
   return: HotId
-  guid: 00000000B262
   en-US: Last Heal Over Time ID
   es-MX: ID de sanación con el tiempo anterior
   fr-FR: Dernier identifiant de soins sur la durée
@@ -2228,7 +2093,6 @@ getLastHealingModification:
     that was executed by the event player (or executed at the global level).
   args: []
   return: HealingModificationId
-  guid: 00000000FD2A
   en-US: Last Healing Modification ID
   es-MX: ID de modificación de sanación anterior
   fr-FR: Dernier identifiant de modification de soins
@@ -2246,7 +2110,6 @@ __lastOf__:
   return:
   - Object
   - Array
-  guid: 00000000B5C1
   en-US: Last Of
   es-MX: Último de
   fr-FR: Dernier
@@ -2258,7 +2121,6 @@ getLastCreatedText:
     created at the global level) via the create hud text or create in-world text action.
   args: []
   return: TextId
-  guid: 00000000BAFE
   en-US: Last Text ID
   es-MX: ID de texto anterior
   fr-FR: Dernier identifiant de texte
@@ -2266,7 +2128,6 @@ getLastCreatedText:
   pt-BR: ID de Texto Mais Recente
   zh-CN: 上一个文本ID
 Vector.Left:
-  guid: 00000000B116
   description: Shorthand for the directional vector(1, 0, 0), which points to the
     left.
   args:
@@ -2300,7 +2161,6 @@ localVector:
     type: Transform
     default: ROTATION
   return: Vector
-  guid: 00000000B342
   en-US: Local Vector Of
   es-MX: Vector local de
   fr-FR: Vecteur local de
@@ -2308,7 +2168,6 @@ localVector:
   pt-BR: Vetor Local de
   zh-CN: 本地矢量
 __map__:
-  guid: 00000000D411
   description: A map constant.
   args:
   - name: MAP
@@ -2331,7 +2190,6 @@ getMatchRound:
   description: The current round of the match, counting up from 1.
   args: []
   return: Integer
-  guid: 00000000B375
   en-US: Match Round
   es-MX: Ronda de la partida
   fr-FR: Manche de la partie
@@ -2342,7 +2200,6 @@ getMatchTime:
   description: The amount of time in seconds remaining in the current game mode phase.
   args: []
   return: Float
-  guid: 00000000AD3B
   en-US: Match Time
   es-MX: Tiempo de la partida
   fr-FR: Temps de jeu
@@ -2350,7 +2207,6 @@ getMatchTime:
   pt-BR: Tempo da Partida
   zh-CN: 比赛时间
 max:
-  guid: 00000000C418
   description: The greater of two numbers.
   args:
   - name: Value
@@ -2376,7 +2232,6 @@ _&getMaxHealth:
     type: Player
     default: Event Player
   return: Float
-  guid: 0000000081C4
   en-US: Max Health
   es-MX: Salud máxima
   fr-FR: Points de vie maximum
@@ -2384,7 +2239,6 @@ _&getMaxHealth:
   pt-BR: Vida Máxima
   zh-CN: 最大生命值
 min:
-  guid: 00000000C416
   description: The lesser of two numbers.
   args:
   - name: Value
@@ -2403,7 +2257,6 @@ min:
   pt-BR: Mín.
   zh-CN: 较小
 __modulo__:
-  guid: 00000000C410
   description: The remainder of the left-hand operand divided by the right-hand operand.
     Any number modulo zero results in zero.
   args:
@@ -2422,7 +2275,6 @@ __modulo__:
   pt-BR: Modular
   zh-CN: 余数
 __multiply__:
-  guid: 00000000C40D
   description: The product of two numbers or vectors. A vector multiplied by a number
     will yield a scaled vector.
   args_allow_null: true
@@ -2459,7 +2311,6 @@ nearestWalkablePosition:
     type: Position
     default: Vector
   return: Position
-  guid: 00000000C324
   en-US: Nearest Walkable Position
   es-MX: Posición caminable más cercana
   fr-FR: Position la plus proche en marchant
@@ -2474,7 +2325,6 @@ normalize:
     type: Vector
     default: Vector
   return: Vector
-  guid: 00000000C344
   en-US: Normalize
   es-MX: Normalizar
   fr-FR: Normalisation
@@ -2482,7 +2332,6 @@ normalize:
   pt-BR: Normalizar
   zh-CN: 归一化
 __not__:
-  guid: 00000000B275
   description: Whether the input is false (or equivalent to false).
   args:
   - name: Value
@@ -2502,7 +2351,6 @@ __not__:
     input. Equivalent to the real number 0 for the purposes of comparison and debugging.
   args:
   return: Player
-  guid: 00000000B594
   en-US: 'Null'
   es-MX: Nulo
   fr-FR: Non applicable
@@ -2517,7 +2365,6 @@ getNumberOfDeadPlayers:
     type: Team
     default: Team
   return: Integer
-  guid: 00000000B29A
   en-US: Number of Dead Players
   es-MX: Cantidad de jugadores muertos
   fr-FR: Nombre de joueurs morts
@@ -2533,7 +2380,6 @@ _&getNumberOfDeaths:
     type: Player
     default: Event Player
   return: Integer
-  guid: 00000000B103
   en-US: Number of Deaths
   es-MX: Cantidad de muertes
   fr-FR: Nombre de morts
@@ -2549,7 +2395,6 @@ _&getNumberOfElims:
     type: Player
     default: Event Player
   return: Integer
-  guid: 00000000B101
   en-US: Number of Eliminations
   es-MX: Cantidad de eliminaciones
   fr-FR: Nombre d’éliminations
@@ -2565,7 +2410,6 @@ _&getNumberOfFinalBlows:
     type: Player
     default: Event Player
   return: Integer
-  guid: 00000000B102
   en-US: Number of Final Blows
   es-MX: Cantidad de golpes de gracia
   fr-FR: Nombre de coups de grâce
@@ -2584,7 +2428,6 @@ getNumberOfHeroes:
     type: Team
     default: Team
   return: Integer
-  guid: 00000000B296
   en-US: Number of Heroes
   es-MX: Cantidad de héroes
   fr-FR: Nombre de héros
@@ -2599,7 +2442,6 @@ getNumberOfLivingPlayers:
     type: Team
     default: Team
   return: Integer
-  guid: 00000000B297
   en-US: Number of Living Players
   es-MX: Cantidad de jugadores vivos
   fr-FR: Nombre de joueurs en vie
@@ -2614,7 +2456,6 @@ getNumberOfPlayers:
     type: Team
     default: Team
   return: Integer
-  guid: 00000000B295
   en-US: Number of Players
   es-MX: Cantidad de jugadores
   fr-FR: Nombre de joueurs
@@ -2630,7 +2471,6 @@ getNumberOfPlayersOnObjective:
     type: Team
     default: Team
   return: Integer
-  guid: 00000000B29B
   en-US: Number of Players On Objective
   es-MX: Cantidad de jugadores en el objetivo
   fr-FR: Nombre de joueurs sur l’objectif
@@ -2642,7 +2482,6 @@ getCurrentObjective:
     active (either 0, 1, or 2). Valid in assault, assault/escort, escort, and control.
   args: []
   return: Integer
-  guid: 00000000B37D
   en-US: Objective Index
   es-MX: Índice de objetivo
   fr-FR: Index de l’objectif
@@ -2661,7 +2500,6 @@ getObjectivePosition:
     type: Integer
     default: Number
   return: Integer
-  guid: 00000000B355
   en-US: Objective Position
   es-MX: Posición del objetivo
   fr-FR: Position de l’objectif
@@ -2676,7 +2514,6 @@ getOppositeTeam:
     type: Team
     default: Team
   return: Team
-  guid: 00000000BB0A
   en-US: Opposite Team Of
   es-MX: Equipo contrario de
   fr-FR: Équipe opposée à
@@ -2684,7 +2521,6 @@ getOppositeTeam:
   pt-BR: Equipe Adversária de
   zh-CN: 对方队伍
 __or__:
-  guid: 00000000B274
   description: Whether either of the two inputs are true (or equivalent to true).
   args:
   - name: Value
@@ -2708,7 +2544,6 @@ getPayloadPosition:
   description: The position in the world of the active payload.
   args: []
   return: Position
-  guid: 00000000B356
   en-US: Payload Position
   es-MX: Posición de la carga
   fr-FR: Position du convoi
@@ -2720,7 +2555,6 @@ getPayloadProgressPercentage:
     (expressed as a percentage).
   args: []
   return: Float
-  guid: 00000000B357
   en-US: Payload Progress Percentage
   es-MX: Porcentaje de progreso de la carga
   fr-FR: Pourcentage de progression du convoi
@@ -2736,7 +2570,6 @@ getFlagCarrier:
     type: Team
     default: Team
   return: Player
-  guid: 00000000B3A3
   en-US: Player Carrying Flag
   es-MX: Jugador que transporta la bandera
   fr-FR: Joueur portant le drapeau
@@ -2756,7 +2589,6 @@ _&getPlayerClosestToReticle:
     type: Team
     default: Team
   return: Player
-  guid: 00000000C328
   en-US: Player Closest To Reticle
   es-MX: Jugador más cercano al retículo
   fr-FR: Joueur le plus proche du réticule
@@ -2776,7 +2608,6 @@ __playerVar__:
     type: PlayerVariable
     default: A
   return: Value
-  guid: 00000000B0FD
   en-US: Player Variable
   es-MX: Variable de jugador
   fr-FR: Variable de joueur
@@ -2799,7 +2630,6 @@ getPlayersInSlot:
   return:
   - Player
   - Array: Player
-  guid: 00000000B334
   en-US: Players In Slot
   es-MX: Jugadores en la posición
   fr-FR: Joueurs dans l’emplacement
@@ -2824,7 +2654,6 @@ _&getPlayersInViewAngle:
     default: Number
   return:
     Array: Player
-  guid: 00000000C32F
   en-US: Players in View Angle
   es-MX: Jugadores en el ángulo de vista
   fr-FR: Joueurs dans le champ de vision
@@ -2844,7 +2673,6 @@ getPlayersOnHero:
     default: Team
   return:
     Array: Player
-  guid: 00000000B338
   en-US: Players On Hero
   es-MX: Jugadores con el héroe
   fr-FR: Joueurs sur le héros
@@ -2876,7 +2704,6 @@ getPlayersInRadius:
     default: 'OFF'
   return:
     Array: Player
-  guid: 00000000B1E0
   en-US: Players Within Radius
   es-MX: Jugadores dentro del radio
   fr-FR: Joueurs dans un rayon
@@ -2888,7 +2715,6 @@ getCapturePercentage:
     as a percentage).
   args: []
   return: float
-  guid: 00000000B358
   en-US: Point Capture Percentage
   es-MX: Porcentaje de captura de punto
   fr-FR: Pourcentage de capture du point
@@ -2903,7 +2729,6 @@ _&getPosition:
     type: Player
     default: Event Player
   return: Position
-  guid: 00000000B11C
   en-US: Position Of
   es-MX: Posición de
   fr-FR: Position de
@@ -2911,7 +2736,6 @@ _&getPosition:
   pt-BR: Posição de
   zh-CN: 所选位置
 __raiseToPower__:
-  guid: 00000000C414
   description: The left-hand operand raised to the power of the right-hand operand.
     If the left-hand operand is negative, the result is always zero.
   args:
@@ -2944,7 +2768,6 @@ random.randint:
     type: Integer
     default: Number
   return: Integer
-  guid: 00000000B59B
   en-US: Random Integer
   es-MX: Número entero aleatorio
   fr-FR: Nombre entier aléatoire
@@ -2963,7 +2786,6 @@ random.uniform:
     type: float
     default: Number
   return: float
-  guid: 00000000B59A
   en-US: Random Real
   es-MX: Número real aleatorio
   fr-FR: Nombre réel aléatoire
@@ -2981,7 +2803,6 @@ random.choice:
   return:
   - Object
   - Array
-  guid: 00000000B599
   en-US: Random Value In Array
   es-MX: Valor aleatorio en matriz
   fr-FR: Valeur aléatoire dans le tableau
@@ -2996,7 +2817,6 @@ random.shuffle:
     type: Array
     default: Global Variable
   return: Array
-  guid: 00000000B598
   en-US: Randomized Array
   es-MX: Matriz aleatorizada
   fr-FR: Tableau aléatoire
@@ -3034,7 +2854,6 @@ __raycastHitNormal__:
     type: bool
     default: 'True'
   return: Direction
-  guid: 00000000C613
   en-US: Ray Cast Hit Normal
   es-MX: Estándar de impacto de lanzamiento de rayo
   fr-FR: Surface intersectée par le rayon émis
@@ -3071,7 +2890,6 @@ __raycastHitPlayer__:
     type: bool
     default: 'True'
   return: Player
-  guid: 00000000C611
   en-US: Ray Cast Hit Player
   es-MX: Jugador de impacto de lanzamiento de rayo
   fr-FR: Joueur intersecté par le rayon émis
@@ -3109,7 +2927,6 @@ __raycastHitPosition__:
     type: BooleanValue
     default: 'True'
   return: Position
-  guid: 00000000C597
   en-US: Ray Cast Hit Position
   es-MX: Posición de impacto de lanzamiento de rayo
   fr-FR: Position d’impact du rayon émis
@@ -3132,7 +2949,6 @@ __removeFromArray__:
     - Array
     default: Number
   return: Array
-  guid: 00000000C421
   en-US: Remove From Array
   es-MX: Eliminar de la matriz
   fr-FR: Supprimer du tableau
@@ -3140,7 +2956,6 @@ __removeFromArray__:
   pt-BR: Remover da Matriz
   zh-CN: 从数组中移除
 Vector.RIGHT:
-  guid: 00000000B117
   description: Shorthand for the directional vector(-1, 0, 0), which points to the
     right.
   args:
@@ -3167,7 +2982,6 @@ __round__:
     type: __Rounding__
     default: UP
   return: Integer
-  guid: 00000000C354
   en-US: Round To Integer
   es-MX: Redondear a número entero
   fr-FR: Arrondir à l’entier
@@ -3183,7 +2997,6 @@ _&getScore:
     type: Player
     default: Event Player
   return: Integer
-  guid: 00000000AD3C
   en-US: Score Of
   es-MX: Puntuación de
   fr-FR: Score de
@@ -3191,7 +3004,6 @@ _&getScore:
   pt-BR: Pontuação de
   zh-CN: 分数
 getServerLoad:
-  guid: 00000000C961
   description: Provides a percentage representing the CPU load of the current game
     instance. As this number approaches or exceeds 100, it becomes increasingly likely
     that the instance will be shut down because it is consuming too many resources.
@@ -3204,7 +3016,6 @@ getServerLoad:
   pt-BR: Uso do Servidor
   zh-CN: 服务器负载
 getAverageServerLoad:
-  guid: 00000000C997
   description: Provides a percentage representing the average CPU load of the current
     game instance over the last two seconds. As this number approaches or exceeds
     100, it becomes increasingly likely that the instance will be shut down because
@@ -3218,7 +3029,6 @@ getAverageServerLoad:
   pt-BR: Média de Uso do Servidor
   zh-CN: 服务器负载平均值
 getPeakServerLoad:
-  guid: 00000000C996
   description: Provides a percentage representing the highest CPU load of the current
     game instance over the last two seconds. As this number approaches or exceeds
     100, it becomes increasingly likely that the instance will be shut down because
@@ -3239,7 +3049,6 @@ sinDeg:
     type: float
     default: Number
   return: float
-  guid: 00000000C33C
   en-US: Sine From Degrees
   es-MX: Seno en grados
   fr-FR: Sinus en degrés
@@ -3254,7 +3063,6 @@ sin:
     type: float
     default: Number
   return: float
-  guid: 00000000C340
   en-US: Sine From Radians
   es-MX: Seno en radianes
   fr-FR: Sinus en radians
@@ -3270,7 +3078,6 @@ _&getSlot:
     type: Player
     default: Event Player
   return: Integer
-  guid: 00000000BB7F
   en-US: Slot Of
   es-MX: Posición de
   fr-FR: Emplacement de
@@ -3294,7 +3101,6 @@ __sortedArray__:
     default: Current Array Element
   return:
     Array: Object
-  guid: 00000000B5C0
   en-US: Sorted Array
   es-MX: Matriz ordenada
   fr-FR: Tableau trié
@@ -3324,7 +3130,6 @@ _&getSpeed:
     type: Player
     default: Event Player
   return: Float
-  guid: 00000000B25D
   en-US: Speed Of
   es-MX: Velocidad de
   fr-FR: Vitesse de
@@ -3344,7 +3149,6 @@ _&getSpeedInDirection:
     type: Direction
     default: Vector
   return: Float
-  guid: 00000000B260
   en-US: Speed Of In Direction
   es-MX: Velocidad de/en dirección
   fr-FR: Vitesse dans la direction donnée de
@@ -3360,7 +3164,6 @@ sqrt:
     type: Float
     default: Number
   return: Float
-  guid: 00000000C356
   en-US: Square Root
   es-MX: Raíz cuadrada
   fr-FR: Racine carrée
@@ -3368,7 +3171,6 @@ sqrt:
   pt-BR: Raiz Quadrada
   zh-CN: 平方根
 __localizedString__:
-  guid: 00000000BA60
   description: Text formed from a selection of strings and specified values.
   args:
   - name: String
@@ -3394,7 +3196,6 @@ __localizedString__:
   ja-JP: 文字列
   zh-CN: 字符串
 __subtract__:
-  guid: 00000000C40A
   description: The difference between two numbers or vectors.
   args_allow_null: true
   args:
@@ -3429,7 +3230,6 @@ tanDeg:
     type: float
     default: Number
   return: float
-  guid: 00000000C7F8
   en-US: Tangent From Degrees
   es-MX: Tangente en grados
   fr-FR: Tangente en degrés
@@ -3444,7 +3244,6 @@ tan:
     type: float
     default: Number
   return: float
-  guid: 00000000C7FD
   en-US: Tangent From Radians
   es-MX: Tangente en radianes
   fr-FR: Tangente en radians
@@ -3460,7 +3259,6 @@ _&getTeam:
     type: Player
     default: Event Player
   return: Team
-  guid: 00000000B279
   en-US: Team Of
   es-MX: Equipo de
   fr-FR: Équipe de
@@ -3468,7 +3266,6 @@ _&getTeam:
   pt-BR: Equipe de
   zh-CN: 所在队伍
 teamScore:
-  guid: 00000000B353
   description: The current score for the specified team. Results in 0 in free-for-all
     game modes.
   args:
@@ -3493,7 +3290,6 @@ _&getThrottle:
     type: Player
     default: Event Player
   return: Direction
-  guid: 00000000B2F5
   en-US: Throttle Of
   es-MX: Aceleración de
   fr-FR: Accélération de
@@ -3505,7 +3301,6 @@ getTotalTimeElapsed:
     was created (including setup time and transitions).
   args: []
   return: Float
-  guid: 00000000B361
   en-US: Total Time Elapsed
   es-MX: Tiempo total transcurrido
   fr-FR: Temps total écoulé
@@ -3516,7 +3311,6 @@ getTotalTimeElapsed:
   description: The boolean value of true.
   args:
   return: bool
-  guid: 00000000AC39
   en-US: 'True'
   es-MX: Verdadero
   fr-FR: Vrai
@@ -3529,7 +3323,6 @@ _&getUltCharge:
     type: Player
     default: Event Player
   return: Float
-  guid: 0000000081C5
   en-US: Ultimate Charge Percent
   es-MX: Porcentaje de carga de la habilidad máxima
   fr-FR: Pourcentage de charge de la capacité ultime
@@ -3537,7 +3330,6 @@ _&getUltCharge:
   pt-BR: Percentual de Carga da Suprema
   zh-CN: 终极技能充能百分比
 Vector.UP:
-  guid: 00000000B118
   description: Shorthand for the directional vector(0, 1, 0), which points upward.
   args:
   return:
@@ -3566,7 +3358,6 @@ __valueInArray__:
   return:
   - Object
   - Array
-  guid: 00000000B52A
   en-US: Value In Array
   es-MX: Valor en la matriz
   fr-FR: Valeur dans le tableau
@@ -3574,7 +3365,6 @@ __valueInArray__:
   pt-BR: Valor na Matriz
   zh-CN: 数组中的值
 vect:
-  guid: 00000000B0F1
   description: A vector composed of three real numbers (x, y, z) where x is left,
     y is up, and z is forward. Vectors are used for position, direction, and velocity.
   args:
@@ -3608,7 +3398,6 @@ vectorTowards:
     type: Position
     default: Vector
   return: Direction
-  guid: 00000000B1EB
   en-US: Vector Towards
   es-MX: Vector hacia
   fr-FR: Vecteur vers
@@ -3625,7 +3414,6 @@ _&getVelocity:
     type: Player
     default: Event Player
   return: Velocity
-  guid: 00000000B25C
   en-US: Velocity Of
   es-MX: Velocidad de
   fr-FR: Vélocité de
@@ -3642,7 +3430,6 @@ verticalAngleOfDirection:
     type: Direction
     default: Vector
   return: float
-  guid: 00000000BB2B
   en-US: Vertical Angle From Direction
   es-MX: Ángulo vertical desde la dirección
   fr-FR: Angle vertical depuis une direction
@@ -3663,7 +3450,6 @@ verticalAngleTowards:
     type: Position
     default: Vector
   return: float
-  guid: 00000000B27E
   en-US: Vertical Angle Towards
   es-MX: Ángulo vertical en dirección a
   fr-FR: Angle vertical vers
@@ -3679,7 +3465,6 @@ _&getVerticalFacingAngle:
     type: Player
     default: Event Player
   return: float
-  guid: 00000000B280
   en-US: Vertical Facing Angle Of
   es-MX: Ángulo vertical de orientación de
   fr-FR: Angle vertical du regard de
@@ -3695,7 +3480,6 @@ _&getVerticalSpeed:
     type: Player
     default: Event Player
   return: Float
-  guid: 00000000B25F
   en-US: Vertical Speed Of
   es-MX: Velocidad vertical de
   fr-FR: Vitesse verticale de
@@ -3703,7 +3487,6 @@ _&getVerticalSpeed:
   pt-BR: Velocidade Vertical de
   zh-CN: 垂直速度
 victim:
-  guid: 00000000B330
   description: The player that received the damage for the event currently being processed
     by this rule. May be the same as the attacker or the event player.
   args:
@@ -3733,7 +3516,6 @@ worldVector:
     type: Transform
     default: ROTATION
   return: Vector
-  guid: 00000000B33A
   en-US: World Vector Of
   es-MX: Vector global de
   fr-FR: Vecteur mondial de
@@ -3749,7 +3531,6 @@ __xComponentOf__:
     type: Vector
     default: Vector
   return: float
-  guid: 00000000B26F
   en-US: X Component Of
   es-MX: Componente X de
   fr-FR: Composante X de
@@ -3765,7 +3546,6 @@ __yComponentOf__:
     type: Vector
     default: Vector
   return: float
-  guid: 00000000B270
   en-US: Y Component Of
   es-MX: Componente Y de
   fr-FR: Composante Y de
@@ -3781,7 +3561,6 @@ __zComponentOf__:
     type: Vector
     default: Vector
   return: float
-  guid: 00000000B272
   en-US: Z Component Of
   es-MX: Componente Z de
   fr-FR: Composante Z de
@@ -3834,7 +3613,6 @@ eventWasEnvironment:
   return: bool
   en-US: Event Was Environment
 _&getHealthOfType:
-  guid: 0000000081C2
   description: The current health of the specified player, filtered by the given health
     type.
   args:
@@ -3887,7 +3665,6 @@ _&getMaxAmmo:
   return: Float
   en-US: Max Ammo
 _&getMaxHealthOfType:
-  guid: 0000000081C2
   description: The max health of the specified player, filtered by the given health
     type.
   args:
@@ -3971,7 +3748,6 @@ workshopSettingReal:
     default: 0
   isConstant: true
   return: float
-  guid: 00000001137B
   en-US: Workshop Setting Real
   es-MX: Configuración del Workshop real
   fr-FR: Paramètre réel de la Forge
@@ -4008,7 +3784,6 @@ workshopSettingInteger:
     default: 0
   isConstant: true
   return: Integer
-  guid: '000000011375'
   en-US: Workshop Setting Integer
   es-MX: Número entero de la configuración del Workshop
   fr-FR: Paramètre entier de la Forge
@@ -4036,7 +3811,6 @@ workshopSettingToggle:
     type: IntLiteral
     default: 0
   return: bool
-  guid: 00000001136B
   en-US: Workshop Setting Toggle
   es-MX: Alternado de configuración del Workshop
   fr-FR: Activerdésactiver le paramètre de la Forge

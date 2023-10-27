@@ -1,5 +1,4 @@
 global:
-  guid: 000000007895
   en-US: Ongoing - Global
   es-MX: En curso - Global
   fr-FR: Toute la partie - Tout le monde
@@ -7,7 +6,6 @@ global:
   pt-BR: Em andamento - Global
   zh-CN: 持续 - 全局
 eachPlayer:
-  guid: 000000007897
   en-US: Ongoing - Each Player
   es-MX: En curso - Cada jugador
   fr-FR: Toute la partie - Chaque joueur
@@ -15,7 +13,6 @@ eachPlayer:
   pt-BR: Em andamento - Cada Jogador
   zh-CN: 持续 - 每名玩家
 playerTookDamage:
-  guid: 00000000B313
   en-US: Player Took Damage
   es-MX: El jugador recibió daño
   fr-FR: Un joueur subit des dégâts
@@ -24,7 +21,6 @@ playerTookDamage:
   ru-RU: Player took damage
   zh-CN: 玩家受到伤害
 playerDealtDamage:
-  guid: 00000000B52D
   en-US: Player Dealt Damage
   es-MX: El jugador infligió daño
   fr-FR: Un joueur inflige des dégâts
@@ -33,7 +29,6 @@ playerDealtDamage:
   ru-RU: Player dealt damage
   zh-CN: 玩家造成伤害
 playerDealtFinalBlow:
-  guid: 0000000078F8
   en-US: Player Dealt Final Blow
   es-MX: El jugador asestó un golpe de gracia
   fr-FR: Un joueur inflige un coup de grâce
@@ -42,7 +37,6 @@ playerDealtFinalBlow:
   ru-RU: Player dealt final blow
   zh-CN: 玩家造成最后一击
 playerDied:
-  guid: 00000000B314
   en-US: Player Died
   es-MX: El jugador murió
   fr-FR: Un joueur meurt
@@ -50,7 +44,6 @@ playerDied:
   pt-BR: Jogador morreu
   zh-CN: 玩家阵亡
 playerEarnedElimination:
-  guid: 0000000078F7
   en-US: Player Earned Elimination
   es-MX: El jugador obtuvo una eliminación
   fr-FR: Un joueur obtient une élimination
@@ -59,7 +52,6 @@ playerEarnedElimination:
   ru-RU: Player earned elimination
   zh-CN: 玩家参与消灭
 playerDealtHealing:
-  guid: 00000000CC16
   en-US: Player Dealt Healing
   es-MX: El jugador realizó una sanación
   fr-FR: Un joueur a prodigué des soins
@@ -67,7 +59,6 @@ playerDealtHealing:
   pt-BR: Jogador Realizou Cura
   zh-CN: 玩家造成治疗
 playerReceivedHealing:
-  guid: 00000000CC17
   en-US: Player Received Healing
   es-MX: El jugador recibió una sanación
   fr-FR: Un joueur a reçu des soins
@@ -75,7 +66,6 @@ playerReceivedHealing:
   pt-BR: Jogador Recebeu Cura
   zh-CN: 玩家受到治疗
 playerJoined:
-  guid: 00000000CC18
   en-US: Player Joined Match
   es-MX: El jugador se unió a la partida
   fr-FR: Un joueur a rejoint la partie
@@ -83,7 +73,6 @@ playerJoined:
   pt-BR: Jogador Entrou na Partida
   zh-CN: 玩家加入比赛
 playerLeft:
-  guid: 00000000CC19
   en-US: Player Left Match
   es-MX: El jugador abandonó la partida
   fr-FR: Un joueur a quitté la partie
@@ -91,7 +80,6 @@ playerLeft:
   pt-BR: Jogador Saiu da Partida
   zh-CN: 玩家离开比赛
 __subroutine__:
-  guid: 00000000FFF6
   en-US: Subroutine
   es-ES: Subrutina
   es-MX: Subrutina
@@ -100,7 +88,6 @@ __subroutine__:
   pt-BR: Sub-rotina
   zh-CN: 子程序
 playerDealtKnockback:
-  guid: 0000000105BB
   en-US: Player Dealt Knockback
   es-ES: Repulsión infligida por el jugador
   es-MX: El jugador infligió un derribo
@@ -109,7 +96,6 @@ playerDealtKnockback:
   pt-BR: Jogador Causou Repulsão
   zh-CN: 玩家造成击退
 playerReceivedKnockback:
-  guid: 0000000105BC
   en-US: Player Received Knockback
   es-ES: Repulsión sufrida por el jugador
   es-MX: El jugador recibió un derribo
