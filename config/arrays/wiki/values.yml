@@ -2413,7 +2413,7 @@ __modulo__:
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
-    type: unsigned float
+    type: Float
     default: Number
   return: float
   en-US: Modulo
@@ -2862,7 +2862,7 @@ getPlayersInRadius:
   - name: Radius
     description: The radius in meters inside which players must be in order to be
       included in the resulting array.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Team
     description: The team or teams to which a player must belong to be included in
@@ -2917,7 +2917,7 @@ __raiseToPower__:
   args:
   - name: Value
     description: The left-hand operand. May be any value that results in a number.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
@@ -3357,7 +3357,7 @@ sqrt:
   - name: Value
     description: The real number value whose square root will be computed. Negative
       values result in zero.
-    type: unsigned float
+    type: Float
     default: Number
   return: Float
   guid: 00000000C356

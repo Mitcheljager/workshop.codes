@@ -461,7 +461,7 @@ createEffect:
     default: Vector
   - name: Radius
     description: The radius of this effect.
-    type: unsigned float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated.
@@ -1555,7 +1555,7 @@ playEffect:
     default: Vector
   - name: Radius
     description: The effect's radius in meters.
-    type: unsigned float
+    type: Float
     default: Number (1)
   guid: 00000000BB27
   return: Void
@@ -1725,7 +1725,7 @@ _&setAbilityCooldown:
     default: Primary Fire
   - name: COOLDOWN
     description: The cooldown time that will be set in seconds. Max of 1000.
-    type: unsigned float
+    type: Float
     default: Number
   return: Void
   guid: 0000000109CA
@@ -1747,7 +1747,7 @@ _&setAimSpeed:
     default: Event Player
   - name: Turn Speed Percent
     description: The percentage of normal aim speed to which the player or players will set their aim speed.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000C364
   return: Void
@@ -1790,7 +1790,7 @@ _&setDamageDealt:
     default: Event Player
   - name: Damage Dealt Percent
     description: The percentage of raw damage dealt to which the player or players will set their damage dealt.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B995
   return: Void
@@ -1812,7 +1812,7 @@ _&setDamageReceived:
     default: Event Player
   - name: Damage Received Percent
     description: The percentage of raw damage received to which the player or players will set their damage received.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B997
   return: Void
@@ -1908,7 +1908,7 @@ _&setGravity:
     default: Event Player
   - name: Gravity Percent
     description: The percentage of regular movement gravity to which the player or players will set their personal movement gravity.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B999
   return: Void
@@ -1930,7 +1930,7 @@ _&setHealingDealt:
     default: Event Player
   - name: Healing Dealt Percent
     description: ''
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B991
   return: Void
@@ -1952,7 +1952,7 @@ _&setHealingReceived:
     default: Event Player
   - name: Healing Received Percent
     description: The percentage of raw healing received to which the player or players will set their healing received.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B993
   return: Void
@@ -2035,7 +2035,7 @@ _&setMaxHealth:
     default: Event Player
   - name: Health Percent
     description: The percentage of raw max health to which the player or players will set their max health.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 0000000078FA
   return: Void
@@ -2078,7 +2078,7 @@ _&setMoveSpeed:
     default: Event Player
   - name: Move Speed Percent
     description: The percentage of raw move speed to which the player or players will set their move speed.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B998
   return: Void
@@ -2255,7 +2255,7 @@ _&setProjectileGravity:
     default: Event Player
   - name: Projectile Gravity Percent
     description: The percentage of regular projectile gravity to which the player or players will set their personal projectile gravity.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B99B
   return: Void
@@ -2277,7 +2277,7 @@ _&setProjectileSpeed:
     default: Event Player
   - name: Projectile Speed Percent
     description: The percentage of regular projectile speed to which the player or players will set their personal projectile speed.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B99D
   return: Void
@@ -2337,7 +2337,7 @@ setSlowMotion:
   args:
   - name: Speed Percent
     description: The simulation rate as a percentage of normal speed. Only rates up to 100% are allowed.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B9F2
   return: Void
@@ -2367,7 +2367,7 @@ _&setStatusEffect:
     default: Hacked
   - name: Duration
     description: The duration of the status in seconds. To have a status that lasts until a clear status action is executed, provide an arbitrarily long duration such as 9999.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B588
   return: Void
@@ -2430,7 +2430,7 @@ _&setUltCharge:
     default: Event Player
   - name: Charge Percent
     description: The percentage of maximum charge.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000BB1C
   return: Void
@@ -2513,11 +2513,11 @@ _&startAcceleration:
     default: Vector
   - name: Rate
     description: The rate of acceleration in meters per second squared. This value may need to be quite high in order to overcome gravity and/or surface friction.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Max Speed
     description: The speed at which acceleration will stop for the player or players. It may not be possible to reach this speed due to gravity and/or surface friction.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Relative
     description: Specifies whether direction is relative to world coordinates or the local coordinates of the player or players.
@@ -2554,7 +2554,7 @@ _&setCamera:
     default: Vector
   - name: Blend Speed
     description: How fast to blend the camera speed as positions change. 0 means do not blend at all, and just change positions instantly.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000C393
   return: Void
@@ -2584,7 +2584,7 @@ startDamageModification:
     default: All Players
   - name: Damage Percent
     description: The percentage of damage that will apply to receivers when attacked by damagers.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
@@ -2615,11 +2615,11 @@ _&startDoT:
     default: 'Null'
   - name: Duration
     description: The duration of the damage over time in seconds. To have a dot that lasts until stopped by script, provide an arbitrarily long duration such as 9999.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Damage Per Second
     description: The damage per second for the damage over time.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B9C5
   return: Void
@@ -2644,7 +2644,7 @@ _&startFacing:
     default: Vector
   - name: Turn Rate
     description: The turn rate in degrees per second.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Relative
     description: Specifies whether direction is relative to world coordinates or the local coordinates of the player or players.
@@ -2744,27 +2744,27 @@ _&startForcingThrottle:
     default: Event Player
   - name: Min Forward
     description: Sets the minimum run forward amount. 0 allows the player or players to stop while 1 forces full forward movement.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Max Forward
     description: Sets the maximum run forward amount. 0 prevents the player or players from moving forward while 1 allows full forward movement.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Min Backward
     description: Sets the minimum run backward amount. 0 allows the player or players to stop while 1 forces full backward movement.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Max Backward
     description: Sets the maximum run backward amount. 0 prevents the player or players from moving backward while 1 allows full backward movement.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Min Sideways
     description: Sets the minimum run sideways amount. 0 allows the player or players to stop while 1 forces full sideways movement.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Max Sideways
     description: Sets the maximum run sideways amount. 0 prevents the player or players from moving Sideways while 1 allows full sideways movement.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000BB0F
   return: Void
@@ -2791,11 +2791,11 @@ _&startHoT:
     default: 'Null'
   - name: Duration
     description: The duration of the heal over time in seconds. To have a hot that lasts until stopped by script, provide an arbitrarily long duration such as 9999.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Healing Per Second
     description: The healing per second for the heal over time.
-    type: unsigned float
+    type: Float
     default: Number
   guid: 00000000B9C2
   return: Void
@@ -2825,7 +2825,7 @@ startHealingModification:
     default: All Players
   - name: Healing Percent
     description: The percentage of healing that will apply to receivers when healed by healers.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
@@ -2900,7 +2900,7 @@ _&startThrottleInDirection:
     default: Vector
   - name: Magnitude
     description: The amount of throttle (or change to throttle). A value of 1 denotes full throttle.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Relative
     description: Specifies whether direction is relative to world coordinates or the local coordinates of the player or players.
@@ -2935,11 +2935,11 @@ _&startTransformingThrottle:
     default: Event Player
   - name: X Axis Scalar
     description: The player or players will have their throttle X axis (left to right) multiplied by this value before the throttle is rotated to its new relative direction. This value is evaluated continuously (meaning it updates every frame).
-    type: unsigned float
+    type: Float
     default: Number
   - name: Y Axis Scalar
     description: The player or players will have their throttle Y axis (front to back) multiplied by this value before the throttle is rotated to its new relative direction. This value is evaluated continuously (meaning it updates every frame).
-    type: unsigned float
+    type: Float
     default: Number
   - name: Relative Direction
     description: After the axis scalars are applied, the player or players will have their throttle transformed so that it is relative to this unit direction vector. For example, to make the throttle camera relative, provide the direction that the camera is facing. This value is evaluated continuously (meaning it updates every frame) and normalized internally.
@@ -3335,7 +3335,7 @@ __wait__:
   args:
   - name: Time
     description: The duration of the pause.
-    type: unsigned float
+    type: Float
     default: Number
   - name: Wait Behavior
     description: Specifies if and how the wait can be interrupted. If the condition list is ignored, the wait will not be interrupted. Otherwise, the condition list will determine if and when the action list will abort or restart.
