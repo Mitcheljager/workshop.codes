@@ -1,4 +1,4 @@
-import { extractAndInsertMixins, replaceContents } from "../../../../app/javascript/src/utils/compiler/mixins"
+import { extractAndInsertMixins, replaceContents, getOpeningBracketAt } from "../../../../app/javascript/src/utils/compiler/mixins"
 import { disregardWhitespace } from "../../helpers/text"
 
 describe("mixins.js", () => {
@@ -169,9 +169,8 @@ describe("mixins.js", () => {
     it("Should replace @contents with default content", () => {
       const joinedItems = "@include testMixin() { Global.value = 1; }"
       const replaceWith = "@contents;"
-      const index = 0
 
-      const result = replaceContents(joinedItems, index, replaceWith)
+      const result = replaceContents(joinedItems, 0, 20, replaceWith)
 
       expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("Global.value = 1;"))
       expect(result.fullMixin).toEqual(joinedItems)
@@ -183,9 +182,8 @@ describe("mixins.js", () => {
         @slot("Slot 1") { Global.slot = 1; } @slot("Slot 2") { Global.slot = 2; }
       }`
       const replaceWith = "@contents(\"Slot 1\"); Action(@contents(\"Slot 2\")); @contents(\"Slot 2\");"
-      const index = 0
 
-      const result = replaceContents(joinedItems, index, replaceWith)
+      const result = replaceContents(joinedItems, 0, 20, replaceWith)
 
       expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("@slot(\"Slot 1\") { Global.slot = 1; } @slot(\"Slot 2\") { Global.slot = 2; }"))
       expect(result.fullMixin).toEqual(joinedItems)
@@ -197,9 +195,8 @@ describe("mixins.js", () => {
         Global.value = 1; @slot("Slot 1") { Global.slot = 1; } @slot("Slot 2") { Global.slot = 2; }
       }`
       const replaceWith = "@contents; @contents(\"Slot 1\"); Action(@contents(\"Slot 2\")); @contents(\"Slot 2\");"
-      const index = 0
 
-      const result = replaceContents(joinedItems, index, replaceWith)
+      const result = replaceContents(joinedItems, 0, 20, replaceWith)
 
       expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("Global.value = 1; @slot(\"Slot 1\") { Global.slot = 1; } @slot(\"Slot 2\") { Global.slot = 2; }"))
       expect(result.fullMixin).toEqual(joinedItems)
@@ -211,13 +208,18 @@ describe("mixins.js", () => {
         @slot("Slot 1") { Global.slot = 1; }
       }`
       const replaceWith = "@contents(\"Slot 1\"); @contents(\"Slot 2\");"
-      const index = 0
 
-      const result = replaceContents(joinedItems, index, replaceWith)
+      const result = replaceContents(joinedItems, 0, 20, replaceWith)
 
       expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("@slot(\"Slot1\") { Global.slot=1; }"))
       expect(result.fullMixin).toEqual(joinedItems)
       expect(disregardWhitespace(result.replaceWith)).toEqual(disregardWhitespace("Global.slot = 1;"))
+    })
+  })
+
+  describe("getOpeningBracketAt", () => {
+    it("Should return the index of the first bracket", () => {
+      expect(getOpeningBracketAt(" {")).toBe(1)
     })
   })
 })

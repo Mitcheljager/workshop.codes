@@ -81,7 +81,7 @@ export function extractAndInsertMixins(joinedItems) {
     const splitArguments = splitArgumentsString(argumentsString) || []
 
     // eslint-disable-next-line prefer-const
-    let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, mixin.content)
+    let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, closing, mixin.content)
 
     mixin.params
       .map((param, index) => ({ ...param, index }))
@@ -101,21 +101,22 @@ export function extractAndInsertMixins(joinedItems) {
 /**
  * Replace every `@contents` occurance with their corresponding slot from the mixin include.
  * @param {string} joinedItems - The full given content
- * @param {number} index - The starting index of the mixin content
+ * @param {number} index - The starting index of the include
+ * @param {number} closing - The index of the closing parenthesis of the include arguments
  * @param {string} replaceWith - String constructed to far to replace the starting value
  * @returns {Object} An object containing the extracted contents of the mixin, the full mixin string (including the declare),
  *                  and the updated content after slot replacement.
  * @throws {Error} If the mixin includes itself
  */
-export function replaceContents(joinedItems, index, replaceWith) {
+export function replaceContents(joinedItems, index, closing, replaceWith) {
   let contents = ""
   let contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
   if (contentsClosing == -1) contentsClosing = joinedItems.length
 
-  const fullMixin = joinedItems.slice(index, contentsClosing + 1)
-  const contentsOpening = fullMixin.indexOf("{")
+  const openingBracketAt = getOpeningBracketAt(joinedItems.slice(closing + 1, joinedItems.length))
+  const fullMixin = joinedItems.slice(index, openingBracketAt != -1 ? contentsClosing + 1 : closing + 1)
 
-  if (contentsOpening != -1) contents = fullMixin.slice(contentsOpening + 1, fullMixin.length - 1)
+  if (openingBracketAt != -1) contents = joinedItems.slice(closing + 1 + openingBracketAt + 1, contentsClosing)
 
   const slotContents = getSlotContents(contents)
 
@@ -158,4 +159,18 @@ export function getSlotContents(contents) {
   defaultSlotContent.push(contents.slice(lastIndex).trim())
 
   return { ...slotContents, default: defaultSlotContent.join("").trim() }
+}
+
+/**
+ * Get the opening bracket for mixin includes. If there is none, return -1
+ * @param {string} content
+ * @returns {index} index of the found opening bracket
+ */
+export function getOpeningBracketAt(content) {
+  for (let i = 0; i < content.length; i++) {
+    const char = content[i]
+
+    if (char === "{") return i
+    if (!char.match(/\s/)) return -1
+  }
 }
