@@ -18,6 +18,13 @@
     en: Tank
     ko: 탱커
 -
+  en: Mauga
+  ko: 마우가
+  overwatch_2: true
+  category:
+    en: Tank
+    ko: 탱커
+-
   en: Orisa
   ko: 오리사
   category:
