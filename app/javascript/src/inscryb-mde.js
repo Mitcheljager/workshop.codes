@@ -2,6 +2,7 @@ import InscrybMDE from "inscrybmde"
 import InscrybeInsertImage from "./inscrybe-mde-paste-image"
 import InscrybeInsertVideo from "./inscrybe-mde-insert-video"
 import FetchRails from "./fetch-rails"
+import { insertAbilityIconSelect } from "./inscryb-mde-ability-select"
 import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
 import debounce from "./debounce"
 import * as lazyVideo from "../src/lazy-video"
@@ -90,7 +91,7 @@ class InitialiseInscrybeMDE {
         title: "Hero Icon (Use English Hero name). Simple names are ok (Torbjörn -> Torbjorn)"
       },
       {
-        action: () => this.insertAbilityIcon(),
+        action: () => insertAbilityIconSelect(this.element, this.mde, this.codemirror),
         name: "ability-icon",
         className: "fa fa-ability-icon",
         title: "Ability Icon (Use English ability name)."
@@ -233,10 +234,6 @@ class InitialiseInscrybeMDE {
     } else {
       button.querySelector(".editor-dropdown").remove()
     }
-  }
-
-  insertAbilityIcon() {
-    this.codemirror.replaceSelection("[ability Biotic Grenade]")
   }
 
   insertBlock(name = "", existingBlock = true, blockId = null, lineNumber = null, charCount = 0) {

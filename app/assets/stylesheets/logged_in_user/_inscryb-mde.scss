@@ -109,6 +109,7 @@
   display: block;
   width: 100%;
   height: auto;
+  min-height: 2.5rem;
   padding: .25em .75em;
   text-align: left;
   font-size: $font-size-small;
@@ -118,10 +119,20 @@
     background: lighten($bg-dark, 5%);
     color: $white;
   }
+
+  &--icon {
+    display: flex;
+    align-items: center;
+    gap: $margin / 8;
+
+    img {
+      width: 2rem;
+    }
+  }
 }
 
 .editor-preview table td,
-.editor-preview table th,,
+.editor-preview table th,
 .editor-preview-side table td,
 .editor-preview-side table th {
   border: 0;
