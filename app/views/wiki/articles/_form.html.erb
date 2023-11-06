@@ -33,7 +33,7 @@
           This includes HTML and CSS, which can be used for markup of more advanced layouts.
         </div>
 
-        <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_wiki: "true", max_length: WIKI_ARTICLE_CONTENT_LIMIT } %>
+        <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_wiki: "true", max_length: WIKI_ARTICLE_CONTENT_LIMIT, abilities: ability_icons } %>
       </div>
 
       <% if @article.persisted? %>
