@@ -233,4 +233,12 @@ module ContentHelper
       Rails.application.assets_manifest.assets[path].present?
     end
   end
+
+  def ability_icons
+    abilities.map { |ability| [ability.to_sym, image_url(ability_name_to_icon_url(ability))] }.to_h
+  end
+
+  def hero_names
+    heroes.map { |hero| hero["en"] }.sort
+  end
 end

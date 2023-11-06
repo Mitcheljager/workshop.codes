@@ -217,7 +217,7 @@ class InitialiseInscrybeMDE {
       const dropdownElement = document.createElement("div")
       dropdownElement.classList.add("editor-dropdown")
 
-      const heroes =  ["Ana", "Ashe", "Baptiste", "Bastion", "Brigitte", "D.Va", "Doomfist", "Echo", "Genji", "Hanzo", "Illari", "Junkerqueen", "Junkrat", "Kiriko", "Lifeweaver", "Lúcio", "Cassidy", "Mauga", "Mei", "Mercy", "Moira", "Orisa", "Pharah", "Reaper", "Ramattra", "Reinhardt", "Roadhog", "Sigma", "Soldier: 76", "Sojourn", "Sombra", "Symmetra", "Torbjörn", "Tracer", "Widowmaker", "Winston", "Wrecking Ball", "Zarya", "Zenyatta"]
+      const heroes = JSON.parse(this.element.dataset.heroes)
       heroes.forEach(hero => {
         const heroElement = document.createElement("div")
         heroElement.classList.add("editor-dropdown__item")

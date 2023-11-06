@@ -68,9 +68,8 @@ module ApplicationHelper
     YAML.load(File.read(Rails.root.join("config/arrays", "badges.yml")))
   end
 
-  def ability_icons
-    abilities = YAML.load(File.read(Rails.root.join("config/arrays", "abilities.yml")))
-    abilities.map { |ability| [ability.to_sym, image_url(ability_name_to_icon_url(ability))] }.to_h
+  def abilities
+    YAML.load(File.read(Rails.root.join("config/arrays", "abilities.yml")))
   end
 
   def current_locale
