@@ -3,7 +3,7 @@
 
   <%= render "form", url: collection_path(@collection.nice_url) %>
 
-  <% if @collection.posts.none? %>
+  <% if @collection.posts.length == 0 %>
     <div class="mt-1/2">
       <%= link_to "Destroy", collection_path(@collection.nice_url),
                   class: "text-red",
