@@ -2498,7 +2498,7 @@ enableGameModeHUD:
     - Player
     - Array: Player
     default: Event Player
-  en-US: Enabled Game Mode HUD
+  en-US: Enable Game Mode HUD
 disableGameModeInWorldUI:
   description: Disables the Game Mode In-World UI for one or more Players until reenabled.
   args:
