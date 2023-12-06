@@ -265,4 +265,33 @@
   .cm-diagnostic {
     padding: .5rem;
   }
+
+  .cm-foldGutter {
+    opacity: 0;
+    transition: opacity 200ms;
+
+    span {
+      padding: 0;
+
+      &[title="Fold line"] {
+        display: block;
+        height: 1em;
+        margin-top: -0.15em;
+      }
+    }
+  }
+
+  .cm-gutters:hover .cm-foldGutter {
+    opacity: 1;
+  }
+
+  .cm-foldPlaceholder {
+    background: transparent;
+    border: 0;
+    color: $text-color-dark;
+
+    &:hover {
+      color: $text-color-light;
+    }
+  }
 }

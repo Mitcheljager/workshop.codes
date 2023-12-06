@@ -12,6 +12,7 @@
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
+  import { foldBrackets } from "../../lib/foldBrackets"
   import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
@@ -101,6 +102,7 @@
         parameterTooltip(),
         indentationMarkers(),
         rememberScrollPosition(),
+        foldBrackets(),
         ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
       ]
     })
