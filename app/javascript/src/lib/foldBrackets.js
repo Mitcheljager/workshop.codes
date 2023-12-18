@@ -12,6 +12,9 @@ export function foldBrackets() {
     if (startBracket === -1) return
 
     const matchingBracketIndex = getClosingBracket(state.doc.toString(), "{", "}", from - 1)
+
+    if (matchingBracketIndex === -1) return
+
     const foldEnd = state.doc.lineAt(matchingBracketIndex)
 
     if (foldStart.number === foldEnd.number) return
