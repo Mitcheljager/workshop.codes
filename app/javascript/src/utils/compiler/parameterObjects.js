@@ -27,8 +27,10 @@ export function getFirstParameterObject(content) {
 
   const phrase = getPhraseFromIndex(content, match.index)
   const completion = get(completionsMap).find(item => item.args_length && item.label === phrase)
+  let end = getClosingBracket(content, "{", "}", match.index)
 
-  const end = getClosingBracket(content, "{", "}", match.index)
+  if (end === -1) end = match.index + match.length
+
   const string = content.slice(match.index + match[0].length, end).trim()
   const splitParameters = splitArgumentsString(string)
   const given = {}
