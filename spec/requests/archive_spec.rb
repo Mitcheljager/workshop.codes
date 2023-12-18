@@ -302,5 +302,16 @@ RSpec.describe "Archived posts controller", type: :request do
         expect(flash[:error]).to eq("You are not authorized to perform that action")
       end
     end
+
+    context "show request" do
+      it "does not work for a code that does not exist" do
+        post_code = archive_post.code
+        archive_post.destroy!
+
+        get archive_path(code: post_code)
+        expect(response).to redirect_to(posts_path)
+        expect(flash[:error]).to eq("Post not found")
+      end
+    end
   end
 end
