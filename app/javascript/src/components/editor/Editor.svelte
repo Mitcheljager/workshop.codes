@@ -93,7 +93,7 @@
           return toCapitalize(string)
         })
 
-        params.parameterDefaults = apply
+        params.parameter_defaults = apply
         params.apply = `${ v["en-US"] }(${ apply.join(", ") })`
 
         // Add arguments to info box
@@ -174,7 +174,7 @@
   </div>
 
   {#if $recoveredProject}
-    <ProjectRecovery />
+    <ProjectRecovery />y
   {/if}
 </div>
 

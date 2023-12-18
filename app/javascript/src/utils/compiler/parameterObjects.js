@@ -20,7 +20,7 @@ export function evaluateParameterObjects(joinedItems) {
 }
 
 export function getFirstParameterObject(content) {
-  const regex = /[a-z]\(\s*{/
+  const regex = /[a-z]\s*\(\s*{/
   const match = content.match(regex)
 
   if (!match) return null
@@ -52,7 +52,7 @@ export function getFirstParameterObject(content) {
   return {
     ...result,
     phraseParameters: completion.detail_full.split(", "),
-    phraseDefaults: completion.parameterDefaults
+    phraseDefaults: completion.parameter_defaults
   }
 }
 
