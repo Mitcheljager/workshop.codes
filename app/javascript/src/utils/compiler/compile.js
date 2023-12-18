@@ -5,6 +5,7 @@ import { removeComments } from "./comments"
 import { evaluateConditionals } from "./conditionals"
 import { evaluateEachLoops } from "./each"
 import { evaluateForLoops } from "./for"
+import { evaluateParameterObjects } from "./parameterObjects"
 import { extractAndInsertMixins } from "./mixins"
 import { compileSubroutines } from "./subroutines"
 import { convertTranslations } from "./translations"
@@ -23,6 +24,7 @@ export function compile(overwriteContent = null) {
 
   joinedItems = joinedItems.replace(settings, "")
   joinedItems = extractAndInsertMixins(joinedItems)
+  joinedItems = evaluateParameterObjects(joinedItems)
   joinedItems = evaluateForLoops(joinedItems)
   joinedItems = evaluateEachLoops(joinedItems)
   joinedItems = evaluateConditionals(joinedItems)

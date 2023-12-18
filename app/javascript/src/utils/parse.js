@@ -84,6 +84,13 @@ export function getPhraseFromPosition(line, position) {
   }
 }
 
+export function getPhraseFromIndex(text, index) {
+  const start = getPhraseEnd(text, index, -1)
+  const end = getPhraseEnd(text, index, 1)
+
+  return text.slice(start, end + 1).trim()
+}
+
 export function removeSurroundingParenthesis(source) {
   const openMatch = /^[\s\n]*\(/.exec(source)
   const closeMatch = /\)[\s\n]*$/.exec(source)

@@ -93,6 +93,7 @@
           return toCapitalize(string)
         })
 
+        params.parameterDefaults = apply
         params.apply = `${ v["en-US"] }(${ apply.join(", ") })`
 
         // Add arguments to info box
