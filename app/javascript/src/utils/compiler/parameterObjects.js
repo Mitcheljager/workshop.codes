@@ -20,15 +20,13 @@ export function evaluateParameterObjects(joinedItems) {
 }
 
 export function getFirstParameterObject(content) {
-  const regex = /\(\s*{/
+  const regex = /[a-z]\(\s*{/
   const match = content.match(regex)
 
   if (!match) return null
 
-  const phrase = getPhraseFromIndex(content, match.index - 1)
+  const phrase = getPhraseFromIndex(content, match.index)
   const completion = get(completionsMap).find(item => item.args_length && item.label === phrase)
-
-  if (!completion) return null
 
   const end = getClosingBracket(content, "{", "}", match.index)
   const string = content.slice(match.index + match[0].length, end).trim()
@@ -37,13 +35,24 @@ export function getFirstParameterObject(content) {
 
   splitParameters.forEach(item => {
     const [key, value] = item.split(/:(.+)/)
-    given[key.trim()] = value.trim()
+    given[key.trim()] = (value || "").trim()
   })
 
-  return {
-    start: match.index + 1,
+  const result = {
+    start: match.index + match[0].indexOf("{"),
     end,
-    given,
+    given
+  }
+
+  // Return a false object to replace contents of unfound phrase
+  if (!completion) return {
+    ...result,
+    phraseParameters: [],
+    phraseDefaults: []
+  }
+
+  return {
+    ...result,
     phraseParameters: completion.detail_full.split(", "),
     phraseDefaults: completion.parameterDefaults
   }
