@@ -25,12 +25,12 @@ export function getFirstParameterObject(content) {
 
   if (!match) return null
 
-  const phrase = getPhraseFromIndex(content, match.index)
-  const completion = get(completionsMap).find(item => item.args_length && item.label === phrase)
   let end = getClosingBracket(content, "{", "}", match.index)
-
   if (end === -1) end = match.index + match.length
 
+  const start = match.index + match[0].indexOf("{")
+  const phrase = getPhraseFromIndex(content, match.index)
+  const completion = get(completionsMap).find(item => item.args_length && item.label === phrase)
   const string = content.slice(match.index + match[0].length, end).trim()
   const splitParameters = splitArgumentsString(string)
   const given = {}
@@ -40,11 +40,7 @@ export function getFirstParameterObject(content) {
     given[key.trim()] = (value || "").trim()
   })
 
-  const result = {
-    start: match.index + match[0].indexOf("{"),
-    end,
-    given
-  }
+  const result = { start, end, given }
 
   // Return a false object to replace contents of unfound phrase
   if (!completion) return {
