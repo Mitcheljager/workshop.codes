@@ -1,7 +1,12 @@
 class ArchivesController < ApplicationController
   before_action :set_post
   before_action do
-    @archive_authorization = get_archive_authorization
+    unless @post.present?
+      flash[:error] = "Post not found"
+      redirect_back fallback_location: posts_path
+    else
+      @archive_authorization = get_archive_authorization
+    end
   end
   before_action only: [:update, :destroy] do
     unless @archive_authorization.present?
