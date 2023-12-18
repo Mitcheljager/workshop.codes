@@ -1,6 +1,7 @@
 import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
 import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
+import { getFirstParameterObject } from "../utils/compiler/parameterObjects"
 
 let diagnostics = []
 
@@ -103,6 +104,7 @@ function findIncorrectArgsLength(content) {
       if (item.label != name) continue
 
       let message = ""
+      let severity = "error"
 
       if (item.args_unlimited) continue
 
@@ -126,14 +128,29 @@ function findIncorrectArgsLength(content) {
 
         const splitContent = splitArgumentsString(argumentsString)
 
-        if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
-        if (!item.args_min_length && splitContent.length == item.args_length) break
+        // Arguments string is a parameter object
+        if (argumentsString.trim()[0] === "{") {
+          const parameterObject = getFirstParameterObject(content.slice(match.index, closing + 1))
 
-        const expectedString = `${ item.args_min_length ? "Atleast" : "" } ${ item.args_min_length || item.args_length }`
-        const maxString = `${ item.args_min_length ? ` (${ item.args_length } max)` : "" }`
-        const givenString = `${ splitContent.length } given`
+          if (!parameterObject) break
 
-        message = `${ expectedString } Argument(s) expected${ maxString }, ${ givenString }`
+          const invalidArgument = Object.keys(parameterObject.given).filter(i => i && !parameterObject.phraseParameters.includes(i))
+          if (invalidArgument?.length) {
+            message = `Argument(s) "${ invalidArgument.join(", ") }" are not valid for "${ name }"`
+            severity = "warning"
+          } else break
+        } else {
+          // Argument string is a regular list of arguments
+          if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
+          if (!item.args_min_length && splitContent.length == item.args_length) break
+
+          const expectedString = `${ item.args_min_length ? "Atleast" : "" } ${ item.args_min_length || item.args_length }`
+          const maxString = `${ item.args_min_length ? ` (${ item.args_length } max)` : "" }`
+          const givenString = `${ splitContent.length } given`
+
+          message = `${ expectedString } Argument(s) expected${ maxString }, ${ givenString }`
+        }
+
       }
 
       if (!message) break
@@ -141,7 +158,7 @@ function findIncorrectArgsLength(content) {
       diagnostics.push({
         from: match.index + match.match.length - name.length,
         to: match.index + match.match.length,
-        severity: "error",
+        severity,
         message: message
       })
 
