@@ -174,7 +174,7 @@
   </div>
 
   {#if $recoveredProject}
-    <ProjectRecovery />y
+    <ProjectRecovery />
   {/if}
 </div>
 
