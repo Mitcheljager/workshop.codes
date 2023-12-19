@@ -1,19 +1,21 @@
 import { completionsMap } from "../../stores/editor"
-import { getClosingBracket, getPhraseFromIndex, splitArgumentsString } from "../parse"
+import { getClosingBracket, getPhraseFromIndex, replaceBetween, splitArgumentsString } from "../parse"
 import { get } from "svelte/store"
 
 export function evaluateParameterObjects(joinedItems) {
   let moreAvailableObjects = true
+  let safety = 0
 
   while (moreAvailableObjects) {
     const parameterObject = getFirstParameterObject(joinedItems)
 
-    if (!parameterObject) {
+    if (!parameterObject || safety > 10_000) {
       moreAvailableObjects = false
       continue
     }
 
     joinedItems = replaceParameterObject(joinedItems, parameterObject)
+    safety++
   }
 
   return joinedItems
@@ -25,18 +27,18 @@ export function getFirstParameterObject(content) {
 
   if (!match) return null
 
-  let end = getClosingBracket(content, "{", "}", match.index)
+  let end = getClosingBracket(content, "{", "}", match.index - 1)
   if (end === -1) end = match.index + match.length
 
   const start = match.index + match[0].indexOf("{")
   const phrase = getPhraseFromIndex(content, match.index)
-  const completion = get(completionsMap).find(item => item.args_length && item.label === phrase)
+  const completion = get(completionsMap).find(item => item.args_length && item.label.replace(" ", "") === phrase.replace(" ", ""))
   const string = content.slice(match.index + match[0].length, end).trim()
   const splitParameters = splitArgumentsString(string)
   const given = {}
 
   splitParameters.forEach(item => {
-    const [key, value] = item.split(/:(.+)/)
+    const [key, value] = item.split(/:(.*)/s)
     given[key.trim()] = (value || "").trim()
   })
 
@@ -56,23 +58,13 @@ export function getFirstParameterObject(content) {
   }
 }
 
-function replaceParameterObject(content, parameterObject) {
-  let offset = 0
-
+export function replaceParameterObject(content, parameterObject) {
   const { start, end, given, phraseParameters, phraseDefaults } = parameterObject
 
+  if (end > content.length - 1) return content
+
   const parameters = phraseDefaults.map((parameterDefault, i) => given[phraseParameters[i]] || parameterDefault)
-
-  const effectiveStart = start + offset
-  const effectiveEnd = end + offset
-
-  const prefix = content.slice(0, effectiveStart)
-  const suffix = content.slice(effectiveEnd + 1)
-
-  const string = parameters.join(", ")
-
-  content = prefix + string + suffix
-  offset += string.length - (effectiveEnd - effectiveStart + 1)
+  content = replaceBetween(content, parameters.join(", "), start, end + 1)
 
   return content
 }
