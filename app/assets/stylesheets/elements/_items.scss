@@ -500,7 +500,7 @@
     list-style: none;
     padding-left: 2.5rem;
 
-    li {
+    > li {
       counter-increment: ordered-list;
       position: relative;
 
