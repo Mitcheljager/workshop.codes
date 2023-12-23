@@ -66,6 +66,19 @@ describe("parameterObjects.js", () => {
         }
       )`)).toEqual({ ...expected, start: 21, end: 60 })
     })
+
+    test("Should skip results when startFromIndex is given", () => {
+      const content = "Some Action({ One: 10, Three: 20 }); Some Action({ Two: 2 })"
+      const expected = {
+        start: 49,
+        end: 58,
+        given: { Two: "2" },
+        phraseParameters: ["One", "Two", "Three"],
+        phraseDefaults: [0, 0, 0]
+      }
+
+      expect(getFirstParameterObject(content, 20)).toEqual(expected)
+    })
   })
 
   describe("replaceParameterObject", () => {
@@ -114,12 +127,12 @@ describe("parameterObjects.js", () => {
       const input = `
         Some Action({ Two: 20 })
         Some Second Action({ First: Some Value, Fourth: Some Other Value })
-        Some Other Action({ A: "1", B: "2", C: "3" })
+        Some Action({ Three: 20 })
       `
       const expected = `
         Some Action(0, 20, 0)
         Some Second Action(Some Value, B, C, Some Other Value)
-        Some Other Action()
+        Some Action(0, 0, 20)
       `
 
       expect(evaluateParameterObjects(input)).toBe(expected)
@@ -143,6 +156,21 @@ describe("parameterObjects.js", () => {
       `
       const expected = `
         Some Action(Some Second Action(Some Value, B, C, D), Some Second Action(A, Some Second Value, C, D), 0)
+      `
+
+      expect(evaluateParameterObjects(input)).toBe(expected)
+    })
+
+    test("Should leave non existing phrases intact", () => {
+      const input = `
+        Some Action({ One: ABC, Two: DEF })
+        Some False Action({ Test: Value })
+        Some Action({ One: 1, Two: 2 })
+      `
+      const expected = `
+        Some Action(ABC, DEF, 0)
+        Some False Action({ Test: Value })
+        Some Action(1, 2, 0)
       `
 
       expect(evaluateParameterObjects(input)).toBe(expected)

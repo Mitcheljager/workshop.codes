@@ -5,12 +5,18 @@ import { get } from "svelte/store"
 export function evaluateParameterObjects(joinedItems) {
   let moreAvailableObjects = true
   let safety = 0
+  let startFromIndex = 0
 
   while (moreAvailableObjects) {
-    const parameterObject = getFirstParameterObject(joinedItems)
+    const parameterObject = getFirstParameterObject(joinedItems, startFromIndex)
 
-    if (!parameterObject || safety > 10_000) {
+    if (!parameterObject || safety > 1000) {
       moreAvailableObjects = false
+      continue
+    }
+
+    if (!parameterObject.phraseParameters.length) {
+      startFromIndex = parameterObject.start
       continue
     }
 
@@ -21,7 +27,9 @@ export function evaluateParameterObjects(joinedItems) {
   return joinedItems
 }
 
-export function getFirstParameterObject(content) {
+export function getFirstParameterObject(content, startFromIndex = 0) {
+  content = content.slice(startFromIndex)
+
   const regex = /[a-z]\s*\(\s*{/
   const match = content.match(regex)
 
@@ -42,7 +50,7 @@ export function getFirstParameterObject(content) {
     given[key.trim()] = (value || "").trim()
   })
 
-  const result = { start, end, given }
+  const result = { start: start + startFromIndex, end: end + startFromIndex, given }
 
   // Return a false object to replace contents of unfound phrase
   if (!completion) return {
