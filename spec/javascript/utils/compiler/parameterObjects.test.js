@@ -7,12 +7,12 @@ describe("parameterObjects.js", () => {
     completionsMap.set([{
       label: "Some Action",
       args_length: 3,
-      detail_full: "One, Two, Three",
+      parameter_keys: ["One", "Two", "Three"],
       parameter_defaults: [0, 0, 0]
     }, {
       label: "Some Second Action",
       args_length: 4,
-      detail_full: "First, Second, Third, Fourth",
+      parameter_keys: ["First", "Second", "Third", "Fourth"],
       parameter_defaults: ["A", "B", "C", "D"]
     }])
   })
@@ -59,6 +59,7 @@ describe("parameterObjects.js", () => {
       expect(getFirstParameterObject("Some Action   ({ One: 10, Three: 20 })")).toEqual({ ...expected, start: 15, end: 36 })
       expect(getFirstParameterObject("Some Action(   { One: 10, Three: 20 }   )")).toEqual({ ...expected, start: 15, end: 36 })
       expect(getFirstParameterObject("Some Action({ One: 10,    Three: 20 })")).toEqual({ ...expected, start: 12, end: 36 })
+      expect(getFirstParameterObject("Some Action({ One    :10,    Three :     20 })")).toEqual({ ...expected, start: 12, end: 44 })
       expect(getFirstParameterObject(`Some Action(
         {
           One: 10, Three: 20
