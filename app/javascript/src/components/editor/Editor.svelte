@@ -78,10 +78,11 @@
 
       if (v.args?.length) {
         // Add detail arguments in autocomplete results
-        const detail = v.args.map(a => `${ toCapitalize(a.name) }`).join(", ")
+        const detail = v.args.map(a => `${ toCapitalize(a.name) }`)
+        const joinedDetail = detail.join(", ")
 
-        params.detail_full = detail
-        params.detail = `(${ detail.slice(0, 30) }${ detail.length > 30 ? "..." : "" })`
+        params.detail_full = joinedDetail
+        params.detail = `(${ joinedDetail.slice(0, 30) }${ joinedDetail.length > 30 ? "..." : "" })`
 
         // Add apply values when selecting autocomplete, filling in default args
         const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
@@ -93,6 +94,7 @@
           return toCapitalize(string)
         })
 
+        params.parameter_keys = detail
         params.parameter_defaults = apply
         params.apply = `${ v["en-US"] }(${ apply.join(", ") })`
 

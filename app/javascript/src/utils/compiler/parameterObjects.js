@@ -53,7 +53,7 @@ export function getFirstParameterObject(content) {
 
   return {
     ...result,
-    phraseParameters: completion.detail_full.split(", "),
+    phraseParameters: completion.parameter_keys,
     phraseDefaults: completion.parameter_defaults
   }
 }
