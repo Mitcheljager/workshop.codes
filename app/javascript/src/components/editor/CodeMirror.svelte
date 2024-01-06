@@ -246,8 +246,9 @@
     const line = view.state.doc.lineAt(view.state.selection.ranges[0].from)
 
     const phrase = getPhraseFromPosition(line, position)
+    const escaped = phrase.text.replace(".", "%2E")
 
-    if ($completionsMap.some(v => v.label == phrase.text)) dispatch("search", phrase.text)
+    if ($completionsMap.some(v => v.label == phrase.text)) dispatch("search", escaped)
   }
 
   function createSelection({ from, to }) {
