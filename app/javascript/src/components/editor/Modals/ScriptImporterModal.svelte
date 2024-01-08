@@ -2,7 +2,7 @@
   import Modal from "./Modal.svelte"
   import { items, modal } from "../../../stores/editor"
   import { createNewItem } from "../../../utils/editor"
-  import { getSettings } from "../../../utils/parse"
+  import { getClosingBracket, getSettings } from "../../../utils/parse"
   import { submittable } from "../../actions/submittable"
   import { onMount } from "svelte"
 
@@ -25,28 +25,26 @@
   }
 
   function findAllRules() {
-    const rules = value.split(/(?=(?:disabled\s+)?rule\s*\()/g)
-    const newItems = []
+    const regex = /(?:disabled\s+)?rule\s*\("(.*)"\)\s*{/g
 
+    const newItems = []
     let counter = 0
-    rules.forEach(rule => {
-      const name = getTypeName(rule)
-      if (!name) return
+    let match = null
+    while ((match = regex.exec(value)) != null) {
+      const name = match[1]
+
+      const openBracket = match.index + match[0].length - 1
+      let end = getClosingBracket(value, "{", "}", openBracket - 1)
+      if (end === -1) end = value.length
+
+      const rule = value.substring(match.index, end + 1)
+
       const newItem = createNewItem(name, rule, $items.length + counter)
       newItems.push(newItem)
       counter++
-    })
+    }
 
     return newItems
-  }
-
-  function getTypeName(content) {
-    const regex = new RegExp(/rule\s*\("(.*)"\)/g)
-    const match = regex.exec(content)
-
-    if (!match) return
-
-    return match[1]
   }
 
   function submit() {
