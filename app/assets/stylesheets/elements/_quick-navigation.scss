@@ -19,14 +19,12 @@ $width: clamp(10rem, 12.5vw, 15rem);
   overflow-x: hidden;
   scrollbar-color: transparent transparent;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @include styled-scrollbar();
+  @include styled-scrollbar(transparent, transparent);
 
   &:hover {
     scrollbar-color: initial;
+
+    @include styled-scrollbar();
 
     &::-webkit-scrollbar {
       display: block

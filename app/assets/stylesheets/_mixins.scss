@@ -25,7 +25,7 @@
   }
 }
 
-@mixin styled-scrollbar($background: $bg-dark) {
+@mixin styled-scrollbar($background: $bg-dark, $thumb-color: $text-color) {
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -40,7 +40,7 @@
 
   &::-webkit-scrollbar-thumb {
     border: 4px solid $background;
-    background-color: $text-color;
+    background-color: $thumb-color;
   }
 
   &::-webkit-scrollbar-corner {
