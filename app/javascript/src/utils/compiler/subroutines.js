@@ -10,7 +10,9 @@ ${ subroutines.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
 }
 
 export function getSubroutines(joinedItems) {
-  let subroutines = joinedItems.match(/Subroutine;[\r\n]+([^\r\n;]+)/g) || []
-  subroutines = subroutines.map(s => s.replace("Subroutine;\n", "").replace("Call Subroutine", "").replace(/[\())\s]/g, ""))
-  return [...new Set(subroutines)]
+  const declaredSubroutines = Array.from(joinedItems.matchAll(/Subroutine;[\r\n]+([^\r\n;]+)/g))
+    .map((match) => match[1].trim())
+  const usedSubroutines = Array.from(joinedItems.matchAll(/(?:Call Subroutine|Start Rule)\s*\(([^,\)]+)/g))
+    .map((match) => match[1].trim())
+  return [...new Set([...declaredSubroutines, ...usedSubroutines])]
 }
