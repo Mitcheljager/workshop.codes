@@ -627,7 +627,7 @@ function findUndefinedSubroutines(content) {
 function findTripleEquals(content) {
   const stringRanges = findRangesOfStrings(content);
 
-  for (const match of matchAllOutsideRanges(stringRanges, content, /={3}/g)) {
+  for (const match of matchAllOutsideRanges(stringRanges, content, /===/g)) {
     const from = match.index
     diagnostics.push({
       from,
