@@ -284,8 +284,9 @@ function checkForLoops(content) {
         splitParams.length > 3 &&
         toThroughIndex !== 1 &&
         splitParams[toThroughIndex - 2] !== "from"
-      )
+      ) {
         throw new Error("Missing \"from\" after iterator name")
+      }
 
     } catch (error) {
       diagnostics.push({
