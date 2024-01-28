@@ -48,6 +48,18 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
+    test("Should evaluate a for loop with a custom step size", () => {
+      const input = `@for (2 through 6 in steps of 2) {
+        For.i;
+      }`
+      const expectedOutput = `
+        2;
+        4;
+        6;
+      `
+      expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+
     test("Should handle nested for loops", () => {
       const input = `@for (1 through 2) {
         Test;
