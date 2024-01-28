@@ -632,7 +632,7 @@ function findTripleEquals(content) {
     diagnostics.push({
       from,
       to: from + match[0].length,
-      severity: "warning",
+      severity: "error",
       message: "This isn't JavaScript! Use single equals for assignments, or double equals to comparisons."
     })
   }
