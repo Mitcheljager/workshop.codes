@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
+import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "../utils/parse"
 import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
 import { getFirstParameterObject } from "../utils/compiler/parameterObjects"
@@ -21,6 +21,7 @@ export function OWLanguageLinter(view) {
   findEachLoopsWithInvalidIterables(content)
   findEventBlocksWithMissingArguments(content)
   findUndefinedSubroutines(content)
+  findTripleEquals(content)
   checkMixins(content)
   checkTranslations(content)
   checkForLoops(content)
@@ -629,5 +630,19 @@ function findUndefinedSubroutines(content) {
         message: `There is no subroutine rule with name "${ subroutineName }"`
       })
     }
+  }
+}
+
+function findTripleEquals(content) {
+  const stringRanges = findRangesOfStrings(content)
+
+  for (const match of matchAllOutsideRanges(stringRanges, content, /===/g)) {
+    const from = match.index
+    diagnostics.push({
+      from,
+      to: from + match[0].length,
+      severity: "error",
+      message: "Use single equals for assignments, or double equals to comparisons. Triple equals doesn't exist here (this isn't JavaScript!)."
+    })
   }
 }
