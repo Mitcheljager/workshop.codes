@@ -633,7 +633,7 @@ function findTripleEquals(content) {
       from,
       to: from + match[0].length,
       severity: "error",
-      message: "This isn't JavaScript! Use single equals for assignments, or double equals to comparisons."
+      message: "Use single equals for assignments, or double equals to comparisons. Triple equals doesn't exist here (this isn't JavaScript!)."
     })
   }
 }
