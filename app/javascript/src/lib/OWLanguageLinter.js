@@ -273,12 +273,21 @@ function checkForLoops(content) {
     try {
       const [_, params] = match
 
-      if (params[0] != "(") throw new Error("Missing opening parenthesis")
-      if (params[params.length - 1] != ")") throw new Error("Missing closing parenthesis")
-      if (!/to|through/.test(params)) throw new Error("Either \"to\" or \"through\" are expected")
+      if (params[0] !== "(") throw new Error("Missing opening parenthesis")
+      if (params[params.length - 1] !== ")") throw new Error("Missing closing parenthesis")
 
-      const splitParams = params.split(" ")
-      if (splitParams.length > 3 && splitParams[1] != "from") throw new Error("Missing \"from\" after iterator name")
+      const splitParams = params.split(/\s+/)
+      const toThroughIndex = splitParams.findIndex((s) => /to|through/.test(s))
+      if (toThroughIndex < 0) throw new Error("Either \"to\" or \"through\" are expected")
+
+      if (
+        splitParams.length > 3 &&
+        toThroughIndex !== 1 &&
+        splitParams[toThroughIndex - 2] !== "from"
+      ) {
+        throw new Error("Missing \"from\" after iterator name")
+      }
+
     } catch (error) {
       diagnostics.push({
         from: match.index,
