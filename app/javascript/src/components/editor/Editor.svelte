@@ -164,6 +164,10 @@
           <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
         {/key}
       {/if}
+
+      {#if !$items?.length}
+        <em class="block p-1/4 text-dark">Your project is empty. Start by creating a new item in the sidebar.</em>
+      {/if}
     </div>
   {:else}
     <Empty />
