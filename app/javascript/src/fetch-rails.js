@@ -30,10 +30,7 @@ export default class FetchRails {
     const response = await fetch(this.url, finalParams)
     clearTimeout(timeoutID)
     if (returnResponse) return response
-    if (!response.ok) {
-      const json = await response.json()
-      throw new Error(json?.length ? json : `${ response.status }: ${ response.statusText }.`)
-    }
+    if (!response.ok) throw new Error(`${ response.status }: ${ response.statusText }.`)
 
     const data = await response.text()
     return data
