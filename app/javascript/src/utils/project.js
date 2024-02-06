@@ -51,6 +51,8 @@ export async function fetchProject(uuid) {
     .then(data => {
       if (!data) throw Error("No results")
 
+      console.log(data)
+
       const parsedData = JSON.parse(data)
 
       // If the project in localStorage is newer than the project from the API
@@ -81,6 +83,9 @@ export async function fetchProject(uuid) {
     .catch(error => {
       items.set([])
       currentItem.set({})
+
+      if (!get(isSignedIn)) return
+
       console.error(error)
       alert(`Something went wrong while loading, please try again. ${ error }`)
     })
