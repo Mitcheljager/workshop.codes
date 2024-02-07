@@ -1,4 +1,5 @@
 import { getClosingBracket, replaceBetween, splitArgumentsString } from "../parse"
+import { getFirstParameterObject } from "./parameterObjects"
 
 export function getMixins(joinedItems) {
   let mixins = joinedItems.match(/(?<=@mixin\s)[^\s\(]+/g)
@@ -69,6 +70,7 @@ export function extractAndInsertMixins(joinedItems) {
     const full = joinedItems.slice(index, closing + 1)
     const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
     const mixin = mixins[name]
+    const parameterObjectGiven = getFirstParameterObject(full)?.given
 
     if (!mixin) throw new Error(`Included a mixin that was not specified: "${ name }"`)
 
@@ -78,7 +80,11 @@ export function extractAndInsertMixins(joinedItems) {
       continue
     }
     const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
-    const splitArguments = splitArgumentsString(argumentsString) || []
+    let splitArguments = splitArgumentsString(argumentsString) || []
+
+    // If there is only one argument and that argument is a parameter object we assume the given argument is not for a param.
+    // This allows us to either insert a single parameter object to be used for the mixin or insert multiple to be used for the params.
+    if (splitArguments.length === 1 && parameterObjectGiven) splitArguments = []
 
     // eslint-disable-next-line prefer-const
     let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, closing, mixin.content)
@@ -87,7 +93,7 @@ export function extractAndInsertMixins(joinedItems) {
       .map((param, index) => ({ ...param, index }))
       .sort((p1, p2) => p2.key.length - p1.key.length)
       .forEach(param => {
-        replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[param.index]?.trim() || param.default)
+        replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[param.index]?.trim() || parameterObjectGiven?.[param.key] || param.default)
       })
 
     const closingSemicolon = (!mixin.hasContents || !contents) && joinedItems[closing + 1] == ";"

@@ -215,6 +215,36 @@ describe("mixins.js", () => {
       expect(result.fullMixin).toEqual(joinedItems)
       expect(disregardWhitespace(result.replaceWith)).toEqual(disregardWhitespace("Global.slot = 1;"))
     })
+
+    it("Should replace Mixin variables with parameter objects if it's given as the only param", () => {
+      const input = `
+        @mixin testMixin(One = 1, Two = 2) {
+          Mixin.One;
+          Some Action(Mixin.Two);
+        }
+        @include testMixin({ Two: 3 });`
+
+      const expectedOutput = `
+        1;
+        Some Action(3);`
+
+      expect(disregardWhitespace(extractAndInsertMixins(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+
+    it("Should replace Mixin variables with given parameter objects as parameters if more than one object is given", () => {
+      const input = `
+        @mixin testMixin(One, Two) {
+          Mixin.One;
+          Some Action(Mixin.Two);
+        }
+        @include testMixin({ One: 1 }, { someVar: someValue });`
+
+      const expectedOutput = `
+        { One: 1 };
+        Some Action({ someVar: someValue });`
+
+      expect(disregardWhitespace(extractAndInsertMixins(input))).toBe(disregardWhitespace(expectedOutput))
+    })
   })
 
   describe("getOpeningBracketAt", () => {
