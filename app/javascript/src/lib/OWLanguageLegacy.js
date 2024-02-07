@@ -32,7 +32,7 @@ const punc = ":;,.(){}[]+-\\*"
 const octal = /^\-?0o[0-7][0-7_]*/
 const hexadecimal = /^\-?0x[\dA-Fa-f][\dA-Fa-f_]*(?:(?:\.[\dA-Fa-f][\dA-Fa-f_]*)?[Pp]\-?\d[\d_]*)?/
 const decimal = /^\-?\d[\d_]*(?:\.\d[\d_]*)?(?:[Ee]\-?\d[\d_]*)?/
-const identifier = /^\$\d+|(`?)[_A-Za-z][_A-Za-z$0-9]*\1/
+const identifier = /^\$\d+|(`?)[_A-Za-zÀ-ÖØ-öø-ÿ][_A-Za-zÀ-ÖØ-öø-ÿ$0-9]*\1/
 const actionsValuesIdentifier = /^\s*(?=[A-Z])\b[A-Z][\w\s-]*(?!:)/g
 const phraseIdentifier = /^\s*(?=[A-Z]).+?(?= [+\-*%=|&<>~^?!]|[\(\)\{\}:;,./\n\[\]]|\s==)/
 const customKeywords = /(?<!\w)@(?:else if|\w+)/
