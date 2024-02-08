@@ -218,8 +218,8 @@
   }
 
   function getIndentForLine(state, line, charLimit) {
-    let lineText = state.doc.lineAt(Math.max(line, 0)).text;
-    lineText = charLimit !== undefined ? lineText.slice(0, charLimit) : lineText;
+    let lineText = state.doc.lineAt(Math.max(line, 0)).text
+    lineText = charLimit !== undefined ? lineText.slice(0, charLimit) : lineText
 
     const tabs = /^\t*/.exec(lineText)?.[0].length
     const spaces = /^\s*/.exec(lineText)?.[0].length - tabs
