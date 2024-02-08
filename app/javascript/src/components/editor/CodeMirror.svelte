@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy, onMount, createEventDispatcher, tick } from "svelte"
+  import { onDestroy, onMount, createEventDispatcher } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection } from "@codemirror/state"
@@ -12,8 +12,7 @@
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
-  import { foldBrackets } from "../../lib/foldBrackets"
-  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
+  import { currentItem, editorStates, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
   import debounce from "../../debounce"
@@ -23,7 +22,6 @@
   let element
   let view
   let currentId
-  let updatingState = false
 
   $: if ($currentProjectUUID) $editorStates = {}
   $: if ($currentItem.id != currentId && view) updateEditorState()
@@ -38,15 +36,13 @@
   onDestroy(() => $editorStates = {})
 
   function updateEditorState() {
-    updatingState = true
-
     if (currentId && !$currentItem.forceUpdate) $editorStates[currentId] = view.state
     if ($currentItem.forceUpdate) $currentItem = { ...$currentItem, forceUpdate: false }
 
     currentId = $currentItem.id
 
     if ($editorStates[currentId]) {
-      onStateUpdateEnd()
+      view.setState($editorStates[currentId])
       return
     }
 
@@ -56,21 +52,7 @@
     })
 
     $editorStates[currentId] = createEditorState($currentItem.content)
-
-    onStateUpdateEnd()
-  }
-
-  /**
-   * This is fired after updateEditorState, after all required bits are set.
-   * Part of this is wrapped in an empty setTimeout to wait for the view state to update.
-   */
-  function onStateUpdateEnd() {
     view.setState($editorStates[currentId])
-
-    requestAnimationFrame(() => {
-      updatingState = false
-      setScrollPosition()
-    })
   }
 
   function createEditorState(content) {
@@ -101,15 +83,13 @@
         basicSetup,
         parameterTooltip(),
         indentationMarkers(),
-        rememberScrollPosition(),
-        foldBrackets(),
         ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
       ]
     })
   }
 
   function completions(context) {
-    const word = context.matchBefore(/[@a-zA-Z0-9_ ]*/)
+    const word = context.matchBefore(/[@a-zA-Z0-9 ]*/)
 
     const add = word.text.search(/\S|$/)
     if (word.from + add == word.to && !context.explicit) return null
@@ -147,15 +127,15 @@
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
 
-      const indent = getIntendForLine(state, from)
+      const indent = getIndentForLine(state, from, from - line.from)
       let insert = "\n"
       for (let i = 0; i < indent; i++) { insert += "\t" }
 
       const isComment = line.text.includes("//")
-      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text)?.[0].length
+      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text.slice(0, from - line.from))?.[0].length
       const closeBracket = !isComment && /[\}\)\]]/gm.exec(line.text)?.[0].length
       if (openBracket && !closeBracket) insert += "\t"
-
+      
       return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
     })
 
@@ -174,8 +154,8 @@
       let insert = ""
 
       if (from == to && !shiftKey) {
-        const previousIndent = getIntendForLine(state, from - 1)
-        const currentIndent = getIntendForLine(state, from)
+        const previousIndent = getIndentForLine(state, from - 1)
+        const currentIndent = getIndentForLine(state, from)
 
         insert = "\t"
         if (currentIndent < previousIndent) {
@@ -195,12 +175,12 @@
         if (shiftKey) {
           if (!/^\s/.test(insert[0]) && !(insert.includes("\n ") || insert.includes("\n\t"))) return { range: EditorSelection.range(from, to) }
 
-          insert = insert.replaceAll(/\n[ \t]/g, "\n").substring(insert.search(/\S/) ? 1 : 0, insert.length)
+          insert = (/^\n/.test(insert[0]) ? "\n" : "").concat(insert.replaceAll(/\n[ \t]/g, "\n").substring(insert.search(/\S/) ? 1 : 0, insert.length))
         } else {
           insert = "\t" + insert.replaceAll("\n", "\n\t")
         }
-
-        const fromModifier = insert.search(/\S/) - leadingWhitespaceLength
+        //'line.from' and 'from' are equal at start of line, dont reduce indents lower than 0.
+        const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1: 0))
         const toModifier = insert.length - originalLength
 
         return {
@@ -216,22 +196,19 @@
     return true
   }
 
-  function getIntendForLine(state, line) {
-    line = Math.max(line, 0)
+  function getIndentForLine(state, line, charLimit) {
+    let lineText = state.doc.lineAt(Math.max(line, 0)).text;
+    lineText = charLimit !== undefined ? lineText.slice(0, charLimit) : lineText;
 
-    const spaces = /^\s*/.exec(state.doc.lineAt(line).text)?.[0].length
-    const tabs = /^\t*/.exec(state.doc.lineAt(line).text)?.[0].length
-    return Math.floor((spaces - tabs) / 4) + tabs
+    const tabs = /^\t*/.exec(lineText)?.[0].length
+    const spaces = /^\s*/.exec(lineText)?.[0].length - tabs
+    return Math.floor(spaces / 4) + tabs
   }
 
   const updateItem = debounce(() => {
-    $currentItem = {
-      ...$currentItem,
-      content: view.state.doc.toString()
-    }
-
-    const index = $items.findIndex(i => i.id == $currentItem.id)
-    if (index !== -1) $items[index] = $currentItem
+    $currentItem.content = view.state.doc.toString()
+    const index = $items.indexOf(i => i.id == $currentItem.id)
+    $items[index] = $currentItem
   }, 250)
 
   function click(event) {
@@ -246,9 +223,8 @@
     const line = view.state.doc.lineAt(view.state.selection.ranges[0].from)
 
     const phrase = getPhraseFromPosition(line, position)
-    const escaped = phrase.text.replace(".", "%2E")
 
-    if ($completionsMap.some(v => v.label == phrase.text)) dispatch("search", escaped)
+    if ($completionsMap.some(v => v.label == phrase.text)) dispatch("search", phrase.text)
   }
 
   function createSelection({ from, to }) {
@@ -258,34 +234,9 @@
       ])
     })
   }
-
-  /**
-   * Returns a plguin that updates a store of scroll positions when the view is scrolled.
-   * The view is also scrolled when updating the view, but we don't want to store that position.
-   * For this we use the updatingState flag to determine if it was a user scroll or a update scroll.
-   */
-  function rememberScrollPosition(event) {
-    return EditorView.domEventHandlers({
-      scroll(event, view) {
-        if (updatingState) return
-
-        $editorScrollPositions = {
-          ...$editorScrollPositions,
-          [currentId]: view.scrollDOM.scrollTop
-        }
-      }
-    })
-  }
-
-  async function setScrollPosition() {
-    view.scrollDOM.scrollTo({ top: $editorScrollPositions[currentId] || 0 })
-  }
-
 </script>
 
-<svelte:window
-  on:keydown={keydown}
-  on:create-selection={({ detail }) => createSelection(detail)} />
+<svelte:window on:keydown={keydown} on:create-selection={({ detail }) => createSelection(detail)} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div bind:this={element} on:click={click}></div>
