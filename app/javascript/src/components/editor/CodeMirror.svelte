@@ -195,7 +195,9 @@
         if (shiftKey) {
           if (!/^\s/.test(insert[0]) && !(insert.includes("\n ") || insert.includes("\n\t"))) return { range: EditorSelection.range(from, to) }
 
-          insert = (/^\n/.test(insert[0]) ? "\n" : "").concat(insert.replaceAll(/\n[ \t]/g, "\n").substring(insert.search(/\S/) ? 1 : 0, insert.length))
+          const firstChar = insert[0]
+          insert = insert.replaceAll(/\n[ \t]/g, "\n").substring(insert.search(/\S/) ? 1 : 0, insert.length)
+          insert = (/^\n/.test(firstChar) ? "\n" : "").concat(insert)
         } else {
           insert = "\t" + insert.replaceAll("\n", "\n\t")
         }
