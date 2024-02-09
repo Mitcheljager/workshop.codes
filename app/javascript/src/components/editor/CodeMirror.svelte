@@ -147,12 +147,12 @@
     const changes = state.changeByRange(range => {
       const { from, to } = range, line = state.doc.lineAt(from)
 
-      const indent = getIntendForLine(state, from)
+      const indent = getIndentForLine(state, from, from - line.from)
       let insert = "\n"
       for (let i = 0; i < indent; i++) { insert += "\t" }
 
       const isComment = line.text.includes("//")
-      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text)?.[0].length
+      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text.slice(0, from - line.from))?.[0].length
       const closeBracket = !isComment && /[\}\)\]]/gm.exec(line.text)?.[0].length
       if (openBracket && !closeBracket) insert += "\t"
 
@@ -174,8 +174,8 @@
       let insert = ""
 
       if (from == to && !shiftKey) {
-        const previousIndent = getIntendForLine(state, from - 1)
-        const currentIndent = getIntendForLine(state, from)
+        const previousIndent = getIndentForLine(state, from - 1)
+        const currentIndent = getIndentForLine(state, from)
 
         insert = "\t"
         if (currentIndent < previousIndent) {
@@ -195,12 +195,15 @@
         if (shiftKey) {
           if (!/^\s/.test(insert[0]) && !(insert.includes("\n ") || insert.includes("\n\t"))) return { range: EditorSelection.range(from, to) }
 
+          const firstChar = insert[0]
           insert = insert.replaceAll(/\n[ \t]/g, "\n").substring(insert.search(/\S/) ? 1 : 0, insert.length)
+          insert = (/^\n/.test(firstChar) ? "\n" : "").concat(insert)
         } else {
           insert = "\t" + insert.replaceAll("\n", "\n\t")
         }
 
-        const fromModifier = insert.search(/\S/) - leadingWhitespaceLength
+        //'line.from' and 'from' are equal at start of line, dont reduce indents lower than 0.
+        const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1: 0))
         const toModifier = insert.length - originalLength
 
         return {
@@ -216,12 +219,13 @@
     return true
   }
 
-  function getIntendForLine(state, line) {
-    line = Math.max(line, 0)
+  function getIndentForLine(state, line, charLimit) {
+    let lineText = state.doc.lineAt(Math.max(line, 0)).text
+    lineText = charLimit !== undefined ? lineText.slice(0, charLimit) : lineText
 
-    const spaces = /^\s*/.exec(state.doc.lineAt(line).text)?.[0].length
-    const tabs = /^\t*/.exec(state.doc.lineAt(line).text)?.[0].length
-    return Math.floor((spaces - tabs) / 4) + tabs
+    const tabs = /^\t*/.exec(lineText)?.[0].length
+    const spaces = /^\s*/.exec(lineText)?.[0].length - tabs
+    return Math.floor(spaces / 4) + tabs
   }
 
   const updateItem = debounce(() => {
