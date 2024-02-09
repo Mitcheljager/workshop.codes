@@ -2,7 +2,7 @@ import { getClosingBracket, replaceBetween } from "../parse"
 
 export function evaluateForLoops(joinedItems) {
   let match
-  const forRegex = /@for\s+\(\s*((?:(\w+)\s+)?(?:from\s+))?(\d+)\s+(?:(through|to)\s+)?(\d+)(?:\s*in steps of\s+(\d+))?\s*\)\s*\{/g // Matches "@for ([var] [from] number through|to number [in steps of number]) {" in groups for each param
+  const forRegex = /@for\s+\(\s*((?:(\w+)\s+)?(?:from\s+))?(-?[\d\.]+)\s+(?:(through|to)\s+)?(-?[\d\.]+)(?:\s*in steps of\s+(-?[\d\.]+))?\s*\)\s*\{/g // Matches "@for ([var] [from] number through|to number [in steps of number]) {" in groups for each param
   while ((match = forRegex.exec(joinedItems)) != null) {
     const [full, _, variable, startString, clusivityKeyword, endString, stepString = "1"] = match
 
@@ -12,7 +12,7 @@ export function evaluateForLoops(joinedItems) {
 
     const content = joinedItems.substring(openingBracketIndex + 1, closingBracketIndex)
 
-    const [start, end, step] = [parseInt(startString), parseInt(endString), parseInt(stepString)]
+    const [start, end, step] = [parseFloat(startString), parseFloat(endString), parseFloat(stepString)]
     if (step === 0) throw new Error("For loop would cause an infinite loop")
 
     // Replace "For.[variable]" with the current index
