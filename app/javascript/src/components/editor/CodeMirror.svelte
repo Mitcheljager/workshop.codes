@@ -2,9 +2,9 @@
   import { onDestroy, onMount, createEventDispatcher, tick } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
-  import { EditorState, EditorSelection } from "@codemirror/state"
+  import { EditorState, EditorSelection, Transaction } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
-  import { autocompletion } from "@codemirror/autocomplete"
+  import { autocompletion, pickedCompletion } from "@codemirror/autocomplete"
   import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
@@ -94,9 +94,12 @@
           { key: "Enter", run: autoIndentOnEnter },
           { key: "Ctrl-Shift-z", run: redoAction }
         ]),
-        EditorView.updateListener.of((state) => {
-          if (state.docChanged) updateItem()
-          if (state.selectionSet) $editorStates[currentId].selection = view.state.selection
+        EditorView.updateListener.of((transaction) => {
+          if (transaction.docChanged) {
+            indentMultilineInserts(transaction)
+            updateItem()
+          }
+          if (transaction.selectionSet) $editorStates[currentId].selection = view.state.selection
         }),
         basicSetup,
         parameterTooltip(),
@@ -225,6 +228,7 @@
 
     const tabs = /^\t*/.exec(lineText)?.[0].length
     const spaces = /^\s*/.exec(lineText)?.[0].length - tabs
+
     return Math.floor(spaces / 4) + tabs
   }
 
@@ -281,10 +285,28 @@
     })
   }
 
-  async function setScrollPosition() {
+  function setScrollPosition() {
     view.scrollDOM.scrollTo({ top: $editorScrollPositions[currentId] || 0 })
   }
 
+  function indentMultilineInserts(transaction) {
+    // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
+    if (transaction.transactions.every(tr => ["input.paste", "input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
+      const [range] = transaction.changedRanges
+      const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
+      const indents = getIndentForLine(view.state, range.fromB)
+      let tabs = ""
+      for (let i = 0; i < indents; i++) { tabs += "\t" }
+
+      const changes = {
+        from: range.fromB,
+        to: range.toB,
+        insert: text.replaceAll(/\n/g, "\n" + tabs)
+      }
+
+      view.dispatch({ changes })
+    }
+  }
 </script>
 
 <svelte:window

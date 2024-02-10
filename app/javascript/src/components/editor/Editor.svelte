@@ -33,8 +33,9 @@
   $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
 
+  $: $completionsMap = parseKeywords($settings)
+
   onMount(() => {
-    $completionsMap = parseKeywords()
     $workshopConstants = constants
     $currentItem = $items?.[0] || {}
     $projects = _projects || []
@@ -76,32 +77,37 @@
         if (nullCount) params.args_min_length = v.args.length - nullCount
       }
 
-      if (v.args?.length) {
-        // Add detail arguments in autocomplete results
-        const detail = v.args.map(a => `${ toCapitalize(a.name) }`)
-        const joinedDetail = detail.join(", ")
+      if (!params.args_length) return params
 
-        params.detail_full = joinedDetail
-        params.detail = `(${ joinedDetail.slice(0, 30) }${ joinedDetail.length > 30 ? "..." : "" })`
+      // Add detail arguments in autocomplete results
+      const detail = v.args.map(a => `${ toCapitalize(a.name) }`)
+      const joinedDetail = detail.join(", ")
 
-        // Add apply values when selecting autocomplete, filling in default args
-        const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
-        const apply = v.args.map(a => {
-          const string = a.default?.toString().toLowerCase().replaceAll(",", "")
+      params.detail_full = joinedDetail
+      params.detail = `(${ joinedDetail.slice(0, 30) }${ joinedDetail.length > 30 ? "..." : "" })`
 
-          if (lowercaseDefaults.includes(string)) return defaults[toCapitalize(string)]
+      // Add apply values when selecting autocomplete, filling in default args
+      const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
+      const useParameterObject = $settings["autocomplete-parameter-objects"] && params.args_length >= $settings["autocomplete-min-parameter-size"]
+      const apply = v.args.map(a => {
+        let string = a.default?.toString().toLowerCase().replaceAll(",", "")
+        if (useParameterObject) string = `\n\t${ a.name }: ${ string }`
 
-          return toCapitalize(string)
-        })
+        if (lowercaseDefaults.includes(string)) return defaults[toCapitalize(string)]
 
-        params.parameter_keys = detail
-        params.parameter_defaults = apply
-        params.apply = `${ v["en-US"] }(${ apply.join(", ") })`
+        return toCapitalize(string)
+      })
 
-        // Add arguments to info box
-        params.info += "\n\nArguments: "
-        params.info += detail
-      }
+      params.parameter_keys = detail
+      params.parameter_defaults = apply
+
+      params.apply = useParameterObject ?
+        `${ v["en-US"] }({ ${ apply.join(", ") }\n})` :
+        `${ v["en-US"] }(${ apply.join(", ") })`
+
+      // Add arguments to info box
+      params.info += "\n\nArguments: "
+      params.info += detail
 
       return params
     })
