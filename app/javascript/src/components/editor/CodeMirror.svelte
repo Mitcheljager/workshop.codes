@@ -295,8 +295,7 @@
       const [range] = transaction.changedRanges
       const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
       const indents = getIndentForLine(view.state, range.fromB)
-      let tabs = ""
-      for (let i = 0; i < indents; i++) { tabs += "\t" }
+      const tabs = "\t".repeat(indents)
 
       const changes = {
         from: range.fromB,
