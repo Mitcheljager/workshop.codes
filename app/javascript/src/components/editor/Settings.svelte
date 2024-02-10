@@ -148,7 +148,7 @@
 
       <hr>
 
-      <button class="button button--link button--small pb-0 mt-1/4" on:click={resetToDefault}>Reset all to default</button>
+      <button class="button button--link button--small pb-0" on:click={resetToDefault}>Reset all to default</button>
     </div>
   {/if}
 </div>
