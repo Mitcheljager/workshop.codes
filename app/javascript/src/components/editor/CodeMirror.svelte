@@ -154,10 +154,7 @@
       let insert = "\n"
       for (let i = 0; i < indent; i++) { insert += "\t" }
 
-      const isComment = line.text.includes("//")
-      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text.slice(0, from - line.from))?.[0].length
-      const closeBracket = !isComment && /[\}\)\]]/gm.exec(line.text)?.[0].length
-      if (openBracket && !closeBracket) insert += "\t"
+      if (shouldNextLineBeIndent(line.text)) insert += "\t"
 
       return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
     })
@@ -226,10 +223,22 @@
     let lineText = state.doc.lineAt(Math.max(line, 0)).text
     lineText = charLimit !== undefined ? lineText.slice(0, charLimit) : lineText
 
-    const tabs = /^\t*/.exec(lineText)?.[0].length
-    const spaces = /^\s*/.exec(lineText)?.[0].length - tabs
+    return getIndentCountForText(lineText)
+  }
+
+  function getIndentCountForText(text) {
+    const tabs = /^\t*/.exec(text)?.[0].length
+    const spaces = /^\s*/.exec(text)?.[0].length - tabs
 
     return Math.floor(spaces / 4) + tabs
+  }
+
+  function shouldNextLineBeIndent(text) {
+    const isComment = text.includes("//")
+    const openBracket = !isComment && /[\{\(\[]/gm.exec(text)?.[0].length
+    const closeBracket = !isComment && /[\}\)\]]/gm.exec(text)?.[0].length
+
+    return !!(openBracket && !closeBracket)
   }
 
   const updateItem = debounce(() => {
@@ -293,14 +302,31 @@
     // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
     if (transaction.transactions.every(tr => ["input.paste", "input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
       const [range] = transaction.changedRanges
+      const rangeLine = view.state.doc.lineAt(range.fromB)
       const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
-      const indents = getIndentForLine(view.state, range.fromB)
-      const tabs = "\t".repeat(indents)
+      const splitText = text.split("\n")
+
+      let startIndentCount = 0
+      let firstIndentCount = 0
+      const mappedText = splitText.map((line, i) => {
+        if (!i) {
+          firstIndentCount = getIndentCountForText(line)
+          startIndentCount = getIndentCountForText(rangeLine.text) - firstIndentCount
+
+          return line.replace(/^\s+/, "")
+        }
+
+        const currentLineIndentCount = getIndentCountForText(line)
+        const totalIndentCount = startIndentCount - firstIndentCount + currentLineIndentCount
+        const tabs = "\t".repeat(totalIndentCount)
+
+        return tabs + line.replace(/^\s+/, "")
+      })
 
       const changes = {
         from: range.fromB,
         to: range.toB,
-        insert: text.replaceAll(/\n/g, "\n" + tabs)
+        insert: mappedText.join("\n")
       }
 
       view.dispatch({ changes })
