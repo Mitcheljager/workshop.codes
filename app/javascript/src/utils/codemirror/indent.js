@@ -24,9 +24,7 @@ export function tabIndent({ state, dispatch }, event) {
       const currentIndent = getIndentForLine(state, from)
 
       insert = "\t"
-      if (currentIndent < previousIndent) {
-        for (let i = 0; i < previousIndent - 1; i++) { insert += "\t" }
-      }
+      if (currentIndent < previousIndent) insert += "\t".repeat(previousIndent - 1)
 
       return {
         changes: { from, to, insert },
