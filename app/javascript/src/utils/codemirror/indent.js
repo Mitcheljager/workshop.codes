@@ -1,15 +1,24 @@
 import { EditorSelection, Transaction } from "@codemirror/state"
 
+/**
+ * Indent on using tab with special conditions. Indent is reversed while holding shift
+ * @param {Object} view CodeMirror view
+ * @param {Object} event Event as fired from CodeMirror
+ * @returns {Boolean} Should return true on complete
+ */
 export function tabIndent({ state, dispatch }, event) {
   const { shiftKey, target } = event
 
-  if (target.querySelector(".cm-tooltip-autocomplete")) return true
+  // Do not indent when autocomplete is open
+  if (target.closest(".cm-editor").querySelector(".cm-tooltip-autocomplete")) return true
 
+  // Insert tabs for each range, each range meaning a cursor position and/or selection
   const changes = state.changeByRange(range => {
     const { from, to } = range, line = state.doc.lineAt(from)
 
     let insert = ""
 
+    // Using tab from a regular cursor without a selection
     if (from == to && !shiftKey) {
       const previousIndent = getIndentForLine(state, from - 1)
       const currentIndent = getIndentForLine(state, from)
@@ -56,6 +65,13 @@ export function tabIndent({ state, dispatch }, event) {
   return true
 }
 
+/**
+ * Fine the number of indents of a given line number.
+ * @param {Object} state CodeMirror editor state
+ * @param {Number} line CodeMirror line number
+ * @param {Number} charLimit Max characters given in the text
+ * @returns {Number} Number of indents for the given line
+ */
 export function getIndentForLine(state, line, charLimit) {
   let lineText = state.doc.lineAt(Math.max(line, 0)).text
   lineText = charLimit !== undefined ? lineText.slice(0, charLimit) : lineText
@@ -63,6 +79,11 @@ export function getIndentForLine(state, line, charLimit) {
   return getIndentCountForText(lineText)
 }
 
+/**
+ * Get the number of indents for a given text. One tab means one indent, 4 spaces equal one tab.
+ * @param {String} text String to check for number of indents
+ * @returns {Number} Number of indents
+ */
 export function getIndentCountForText(text) {
   const tabs = /^\t*/.exec(text)?.[0].length
   const spaces = /^\s*/.exec(text)?.[0].length - tabs
@@ -70,6 +91,12 @@ export function getIndentCountForText(text) {
   return Math.floor(spaces / 4) + tabs
 }
 
+/**
+ * Returns whether or not the next given line should be indented. This is purely based on there
+ * being an opening character without a closing character on the previous line.
+ * @param {String} text String to check for expected indent level, should be a single line
+ * @returns {Boolean}
+ */
 export function shouldNextLineBeIndent(text) {
   const isComment = text.includes("//")
   const openBracket = !isComment && /[\{\(\[]/gm.exec(text)?.[0].length
@@ -78,15 +105,21 @@ export function shouldNextLineBeIndent(text) {
   return !!(openBracket && !closeBracket)
 }
 
+/**
+ * Indent the next line when pressing enter. The number of indents is based on the indents on the
+ * previous line as well as there being an opening character on the previous line.
+ * @param {Object} view CodeMirror view
+ * @returns {Boolean} Should return true on complete
+ */
 export function autoIndentOnEnter({ state, dispatch }) {
   const changes = state.changeByRange(range => {
     const { from, to } = range, line = state.doc.lineAt(from)
 
-    const indent = getIndentForLine(state, from, from - line.from)
-    let insert = "\n"
-    for (let i = 0; i < indent; i++) { insert += "\t" }
+    let indent = getIndentForLine(state, from, from - line.from)
+    if (shouldNextLineBeIndent(line.text)) indent++
 
-    if (shouldNextLineBeIndent(line.text)) insert += "\t"
+    let insert = "\n"
+    insert += "\t".repeat(indent)
 
     return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
   })
@@ -95,11 +128,17 @@ export function autoIndentOnEnter({ state, dispatch }) {
   return true
 }
 
-export function indentMultilineInserts(view, transaction) {
+/**
+ * Add indents to multiline inserts. This could be either when pasting multiple lines of code or
+ * on autocomplete with results that contain new lines.
+ * @param {Object} view CodeMirror view
+ * @param {Object} transaction CodeMirror transaction
+ */
+export function indentMultilineInserts({ state, dispatch }, transaction) {
   // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
   if (transaction.transactions.every(tr => ["input.paste", "input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
     const [range] = transaction.changedRanges
-    const rangeLine = view.state.doc.lineAt(range.fromB)
+    const rangeLine = state.doc.lineAt(range.fromB)
     const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
     const splitText = text.split("\n")
 
@@ -126,6 +165,6 @@ export function indentMultilineInserts(view, transaction) {
       insert: mappedText.join("\n")
     }
 
-    view.dispatch({ changes })
+    dispatch({ changes })
   }
 }
