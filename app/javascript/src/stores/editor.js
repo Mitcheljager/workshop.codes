@@ -106,5 +106,6 @@ export const settings = writable({
   "show-indent-markers": true,
   "word-wrap": false,
   "autocomplete-parameter-objects": false,
-  "autocomplete-min-parameter-size": 2
+  "autocomplete-min-parameter-size": 2,
+  "autocomplete-min-parameter-newlines": 2
 })

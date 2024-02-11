@@ -105,6 +105,19 @@
             Only autocomplete when an action or value has equal or more than this value in parameters.
           </div>
         </div>
+
+        <div class="form-group mt-1/8 tooltip" transition:slide|local={{ duration: 100 }}>
+          <label for="" class="text-base nowrap">Minimum newline length</label>
+
+          <div class="flex align-center">
+            <input type="range" min=1 max=20 step=1 class="range mr-1/8" bind:value={$settings["autocomplete-min-parameter-newlines"]} />
+            {$settings["autocomplete-min-parameter-newlines"]}
+          </div>
+
+          <div class="tooltip__content bg-darker">
+            Place each parameter on a new line when the action or value has equal or more than this value in parameters.
+          </div>
+        </div>
       {/if}
 
       <hr />

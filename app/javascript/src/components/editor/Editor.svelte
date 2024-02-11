@@ -89,9 +89,11 @@
       // Add apply values when selecting autocomplete, filling in default args
       const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
       const useParameterObject = $settings["autocomplete-parameter-objects"] && params.args_length >= $settings["autocomplete-min-parameter-size"]
+      const useNewlines = params.args_length >= $settings["autocomplete-min-parameter-newlines"]
+
       const apply = v.args.map(a => {
         let string = a.default?.toString().toLowerCase().replaceAll(",", "")
-        if (useParameterObject) string = `\n\t${ a.name }: ${ string }`
+        if (useParameterObject) string = `${ useNewlines ? "\n\t" : "" }${ a.name }: ${ string }`
 
         if (lowercaseDefaults.includes(string)) return defaults[toCapitalize(string)]
 
@@ -102,7 +104,9 @@
       params.parameter_defaults = apply
 
       params.apply = useParameterObject ?
-        `${ v["en-US"] }({ ${ apply.join(", ") }\n})` :
+        useNewlines ?
+          `${ v["en-US"] }({ ${ apply.join(",") }\n})` :
+          `${ v["en-US"] }({ ${ apply.join(", ") } })` :
         `${ v["en-US"] }(${ apply.join(", ") })`
 
       // Add arguments to info box
