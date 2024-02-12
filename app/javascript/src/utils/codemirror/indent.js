@@ -49,10 +49,12 @@ export function tabIndent({ state, dispatch }, event) {
       //'line.from' and 'from' are equal at start of line, dont reduce indents lower than 0.
       const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1: 0))
       const toModifier = insert.length - originalLength
+      const selectionDirection = state.selection.main.head === to
 
       return {
         changes: { from: line.from, to, insert },
-        range: EditorSelection.range(from + fromModifier, to + toModifier)
+        range: selectionDirection ? EditorSelection.range(from + fromModifier, to + toModifier) : 
+        EditorSelection.range(to + toModifier, from + fromModifier)
       }
     }
   })
@@ -113,8 +115,9 @@ export function autoIndentOnEnter({ state, dispatch }) {
   const changes = state.changeByRange(range => {
     const { from, to } = range, line = state.doc.lineAt(from)
 
-    let indent = getIndentForLine(state, from, from - line.from)
-    if (shouldNextLineBeIndent(line.text)) indent++
+    const cursorPos = from - line.from
+    let indent = getIndentForLine(state, from, cursorPos)
+    if (shouldNextLineBeIndent(line.text.slice(0, cursorPos))) indent++
 
     let insert = "\n"
     insert += "\t".repeat(indent)
@@ -151,7 +154,7 @@ export function indentMultilineInserts({ state, dispatch }, transaction) {
       }
 
       const currentLineIndentCount = getIndentCountForText(line)
-      const totalIndentCount = startIndentCount - firstIndentCount + currentLineIndentCount
+      const totalIndentCount = Math.max(startIndentCount - firstIndentCount + currentLineIndentCount)
       const tabs = "\t".repeat(totalIndentCount)
 
       return tabs + line.replace(/^\s+/, "")
