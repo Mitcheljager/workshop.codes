@@ -122,7 +122,7 @@
   }
 
   /**
-   * Returns a plguin that updates a store of scroll positions when the view is scrolled.
+   * Returns a plugin that updates a store of scroll positions when the view is scrolled.
    * The view is also scrolled when updating the view, but we don't want to store that position.
    * For this we use the updatingState flag to determine if it was a user scroll or a update scroll.
    */
