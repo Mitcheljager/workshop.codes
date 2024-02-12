@@ -102,7 +102,7 @@ function findIncorrectArgsLength(content) {
     for(let j = 0; j < $completionsMap.length; j++) {
       const item = $completionsMap[j]
 
-      if (item.label != name) continue
+      if (item.label != name || item.type === "constant") continue
 
       let message = ""
       let severity = "error"
