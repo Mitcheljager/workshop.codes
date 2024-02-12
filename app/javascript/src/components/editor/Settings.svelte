@@ -1,5 +1,5 @@
 <script>
-  import { fly } from "svelte/transition"
+  import { fly, slide } from "svelte/transition"
   import { onMount, tick } from "svelte"
   import { escapeable } from "../actions/escapeable"
   import { outsideClick } from "../actions/outsideClick"
@@ -61,6 +61,67 @@
 
   {#if active}
     <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content block p-1/4" style="width: 300px">
+      <h5 class="mt-0 mb-1/8">Settings</h5>
+
+      <div class="checkbox tooltip mt-1/8">
+        <input id="show-line-indent-markers" type="checkbox" bind:checked={$settings["show-indent-markers"]} />
+        <label for="show-line-indent-markers">Show line indent markers</label>
+
+        <div class="tooltip__content bg-darker">
+          Show line markers at the expected indents at 1 tab or 4 spaces.
+        </div>
+      </div>
+
+      <div class="checkbox tooltip mt-1/8">
+        <input id="word-wrap" type="checkbox" bind:checked={$settings["word-wrap"]} />
+        <label for="word-wrap">Word wrap</label>
+
+        <div class="tooltip__content bg-darker">
+          Wrap lines that no longer fit on screen.
+        </div>
+      </div>
+
+      <div class="checkbox tooltip mt-1/8">
+        <input id="autocomplete-parameter-objects" type="checkbox" bind:checked={$settings["autocomplete-parameter-objects"]} />
+        <label for="autocomplete-parameter-objects">
+          Autocomplete using parameter objects
+        </label>
+
+        <div class="tooltip__content bg-darker">
+          Parameter objects change the format of parameters in actions and values to be more readable and less cumbersome to write. You can exclude any parameters you don't change the default off.
+        </div>
+      </div>
+
+      {#if $settings["autocomplete-parameter-objects"]}
+        <div class="form-group mt-1/8 tooltip" transition:slide|local={{ duration: 100 }}>
+          <label for="" class="text-base nowrap">Minimum parameter length</label>
+
+          <div class="flex align-center">
+            <input type="range" min=1 max=20 step=1 class="range mr-1/8" bind:value={$settings["autocomplete-min-parameter-size"]} />
+            {$settings["autocomplete-min-parameter-size"]}
+          </div>
+
+          <div class="tooltip__content bg-darker">
+            Only autocomplete when an action or value has equal or more than this value in parameters.
+          </div>
+        </div>
+
+        <div class="form-group mt-1/8 tooltip" transition:slide|local={{ duration: 100 }}>
+          <label for="" class="text-base nowrap">Minimum newline length</label>
+
+          <div class="flex align-center">
+            <input type="range" min=1 max=20 step=1 class="range mr-1/8" bind:value={$settings["autocomplete-min-parameter-newlines"]} />
+            {$settings["autocomplete-min-parameter-newlines"]}
+          </div>
+
+          <div class="tooltip__content bg-darker">
+            Place each parameter on a new line when the action or value has equal or more than this value in parameters.
+          </div>
+        </div>
+      {/if}
+
+      <hr />
+
       <h5 class="mt-0 mb-1/8">Font</h5>
 
       <div class="form-group-inline">
@@ -99,16 +160,6 @@
       {/each}
 
       <hr>
-
-      <div class="checkbox mt-1/8">
-        <input id="show-line-indent-markers" type="checkbox" bind:checked={$settings["show-indent-markers"]} />
-        <label for="show-line-indent-markers">Show line indent markers</label>
-      </div>
-
-      <div class="checkbox mt-1/8 mb-1/4">
-        <input id="word-wrap" type="checkbox" bind:checked={$settings["word-wrap"]} />
-        <label for="word-wrap">Word wrap</label>
-      </div>
 
       <button class="button button--link button--small pb-0" on:click={resetToDefault}>Reset all to default</button>
     </div>

@@ -2,9 +2,9 @@
   import { onDestroy, onMount, createEventDispatcher, tick } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
-  import { EditorState, EditorSelection } from "@codemirror/state"
+  import { EditorState, EditorSelection, Transaction } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
-  import { autocompletion } from "@codemirror/autocomplete"
+  import { autocompletion, pickedCompletion } from "@codemirror/autocomplete"
   import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
@@ -16,9 +16,19 @@
   import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
+  import { tabIndent, getIndentForLine, getIndentCountForText, shouldNextLineBeIndent, autoIndentOnEnter, indentMultilineInserts } from "../../utils/codemirror/indent"
   import debounce from "../../debounce"
 
   const dispatch = createEventDispatcher()
+  const updateItem = debounce(() => {
+    $currentItem = {
+      ...$currentItem,
+      content: view.state.doc.toString()
+    }
+
+    const index = $items.findIndex(i => i.id == $currentItem.id)
+    if (index !== -1) $items[index] = $currentItem
+  }, 250)
 
   let element
   let view
@@ -36,6 +46,44 @@
   })
 
   onDestroy(() => $editorStates = {})
+
+  function createEditorState(content) {
+    return EditorState.create({
+      doc: content,
+      extensions: [
+        syntaxHighlighting(highlightStyle),
+        StreamLanguage.define(OWLanguage),
+        autocompletion({
+          activateOnTyping: true,
+          override: [completions],
+          closeOnBlur: false,
+          hintOptions: /[()\[\]{};:>,+-=]/
+        }),
+        lintGutter(),
+        linter(OWLanguageLinter),
+        indentUnit.of("    "),
+        keymap.of([
+          { key: "Tab", run: tabIndent },
+          { key: "Shift-Tab", run: tabIndent },
+          { key: "Enter", run: autoIndentOnEnter },
+          { key: "Ctrl-Shift-z", run: redoAction }
+        ]),
+        EditorView.updateListener.of((transaction) => {
+          if (transaction.docChanged) {
+            indentMultilineInserts(view, transaction)
+            updateItem()
+          }
+          if (transaction.selectionSet) $editorStates[currentId].selection = view.state.selection
+        }),
+        basicSetup,
+        parameterTooltip(),
+        indentationMarkers(),
+        rememberScrollPosition(),
+        foldBrackets(),
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
+      ]
+    })
+  }
 
   function updateEditorState() {
     updatingState = true
@@ -69,43 +117,30 @@
 
     requestAnimationFrame(() => {
       updatingState = false
-      setScrollPosition()
+      setScrollPosition(view, currentId)
     })
   }
 
-  function createEditorState(content) {
-    return EditorState.create({
-      doc: content,
-      extensions: [
-        syntaxHighlighting(highlightStyle),
-        StreamLanguage.define(OWLanguage),
-        autocompletion({
-          activateOnTyping: true,
-          override: [completions],
-          closeOnBlur: false,
-          hintOptions: /[()\[\]{};:>,+-=]/
-        }),
-        lintGutter(),
-        linter(OWLanguageLinter),
-        indentUnit.of("    "),
-        keymap.of([
-          { key: "Tab", run: tabIndent },
-          { key: "Shift-Tab", run: tabIndent },
-          { key: "Enter", run: autoIndentOnEnter },
-          { key: "Ctrl-Shift-z", run: redoAction }
-        ]),
-        EditorView.updateListener.of((state) => {
-          if (state.docChanged) updateItem()
-          if (state.selectionSet) $editorStates[currentId].selection = view.state.selection
-        }),
-        basicSetup,
-        parameterTooltip(),
-        indentationMarkers(),
-        rememberScrollPosition(),
-        foldBrackets(),
-        ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
-      ]
+  /**
+   * Returns a plugin that updates a store of scroll positions when the view is scrolled.
+   * The view is also scrolled when updating the view, but we don't want to store that position.
+   * For this we use the updatingState flag to determine if it was a user scroll or a update scroll.
+   */
+  function rememberScrollPosition() {
+    return EditorView.domEventHandlers({
+      scroll(_, view) {
+        if (updatingState) return
+
+        $editorScrollPositions = {
+          ...$editorScrollPositions,
+          [currentId]: view.scrollDOM.scrollTop
+        }
+      }
     })
+  }
+
+  function setScrollPosition(view, id) {
+    view.scrollDOM.scrollTo({ top: $editorScrollPositions[id] || 0 })
   }
 
   function completions(context) {
@@ -130,6 +165,13 @@
     }
   }
 
+  function click(event) {
+    if (!event.altKey) return
+
+    event.preventDefault()
+    searchWiki()
+  }
+
   function keydown(event) {
     if (event.ctrlKey && event.key === "2") {
       event.preventDefault()
@@ -141,108 +183,6 @@
     const { transaction } = redo(view)
     if (transaction) dispatch(transaction)
     return true
-  }
-
-  function autoIndentOnEnter({ state, dispatch }) {
-    const changes = state.changeByRange(range => {
-      const { from, to } = range, line = state.doc.lineAt(from)
-
-      const indent = getIndentForLine(state, from, from - line.from)
-      let insert = "\n"
-      for (let i = 0; i < indent; i++) { insert += "\t" }
-
-      const isComment = line.text.includes("//")
-      const openBracket = !isComment && /[\{\(\[]/gm.exec(line.text.slice(0, from - line.from))?.[0].length
-      const closeBracket = !isComment && /[\}\)\]]/gm.exec(line.text)?.[0].length
-      if (openBracket && !closeBracket) insert += "\t"
-
-      return { changes: { from, to, insert }, range: EditorSelection.cursor(from + insert.length) }
-    })
-
-    dispatch(state.update(changes, { scrollIntoView: true, userEvent: "input" }))
-    return true
-  }
-
-  function tabIndent({ state, dispatch }, event) {
-    const { shiftKey } = event
-
-    if (element.querySelector(".cm-tooltip-autocomplete")) return true
-
-    const changes = state.changeByRange(range => {
-      const { from, to } = range, line = state.doc.lineAt(from)
-
-      let insert = ""
-
-      if (from == to && !shiftKey) {
-        const previousIndent = getIndentForLine(state, from - 1)
-        const currentIndent = getIndentForLine(state, from)
-
-        insert = "\t"
-        if (currentIndent < previousIndent) {
-          for (let i = 0; i < previousIndent - 1; i++) { insert += "\t" }
-        }
-
-        return {
-          changes: { from, to, insert },
-          range: EditorSelection.cursor(from + insert.length)
-        }
-      } else {
-        let insert = view.state.doc.toString().substring(line.from, to)
-
-        const originalLength = insert.length
-        const leadingWhitespaceLength = insert.search(/\S/)
-
-        if (shiftKey) {
-          if (!/^\s/.test(insert[0]) && !(insert.includes("\n ") || insert.includes("\n\t"))) return { range: EditorSelection.range(from, to) }
-
-          const firstChar = insert[0]
-          insert = insert.replaceAll(/\n[ \t]/g, "\n").substring(insert.search(/\S/) ? 1 : 0, insert.length)
-          insert = (/^\n/.test(firstChar) ? "\n" : "").concat(insert)
-        } else {
-          insert = "\t" + insert.replaceAll("\n", "\n\t")
-        }
-
-        //'line.from' and 'from' are equal at start of line, dont reduce indents lower than 0.
-        const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1: 0))
-        const toModifier = insert.length - originalLength
-
-        return {
-          changes: { from: line.from, to, insert },
-          range: EditorSelection.range(from + fromModifier, to + toModifier)
-        }
-      }
-    })
-
-    dispatch(state.update(changes, { scrollIntoView: true, userEvent: "input" }))
-    dispatch({ selection: EditorSelection.create(changes.selection.ranges) })
-
-    return true
-  }
-
-  function getIndentForLine(state, line, charLimit) {
-    let lineText = state.doc.lineAt(Math.max(line, 0)).text
-    lineText = charLimit !== undefined ? lineText.slice(0, charLimit) : lineText
-
-    const tabs = /^\t*/.exec(lineText)?.[0].length
-    const spaces = /^\s*/.exec(lineText)?.[0].length - tabs
-    return Math.floor(spaces / 4) + tabs
-  }
-
-  const updateItem = debounce(() => {
-    $currentItem = {
-      ...$currentItem,
-      content: view.state.doc.toString()
-    }
-
-    const index = $items.findIndex(i => i.id == $currentItem.id)
-    if (index !== -1) $items[index] = $currentItem
-  }, 250)
-
-  function click(event) {
-    if (!event.altKey) return
-
-    event.preventDefault()
-    searchWiki()
   }
 
   function searchWiki() {
@@ -262,29 +202,6 @@
       ])
     })
   }
-
-  /**
-   * Returns a plguin that updates a store of scroll positions when the view is scrolled.
-   * The view is also scrolled when updating the view, but we don't want to store that position.
-   * For this we use the updatingState flag to determine if it was a user scroll or a update scroll.
-   */
-  function rememberScrollPosition(event) {
-    return EditorView.domEventHandlers({
-      scroll(event, view) {
-        if (updatingState) return
-
-        $editorScrollPositions = {
-          ...$editorScrollPositions,
-          [currentId]: view.scrollDOM.scrollTop
-        }
-      }
-    })
-  }
-
-  async function setScrollPosition() {
-    view.scrollDOM.scrollTo({ top: $editorScrollPositions[currentId] || 0 })
-  }
-
 </script>
 
 <svelte:window
