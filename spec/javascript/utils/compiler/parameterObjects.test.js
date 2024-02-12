@@ -79,6 +79,19 @@ describe("parameterObjects.js", () => {
 
       expect(getFirstParameterObject(content, 20)).toEqual(expected)
     })
+
+    test("Should ignore [linemarker]s", () => {
+      const content = "[linemarker]itemID|1[/linemarker]Some Action({\n[linemarker]itemID|2[/linemarker]\tOne: 10,\n[linemarker]itemID|3[/linemarker]\tThree: 20,\n[linemarker]itemID|4[/linemarker]})"
+      const expected = {
+        start: 45,
+        end: 168,
+        given: { One: "10", Three: "20" },
+        phraseParameters: ["One", "Two", "Three"],
+        phraseDefaults: [0, 0, 0]
+      }
+
+      expect(getFirstParameterObject(content)).toEqual(expected)
+    })
   })
 
   describe("replaceParameterObject", () => {
