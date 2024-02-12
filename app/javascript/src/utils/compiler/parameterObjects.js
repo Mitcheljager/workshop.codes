@@ -52,8 +52,11 @@ export function getFirstParameterObject(content, startFromIndex = 0) {
   const given = {}
 
   splitParameters.forEach(item => {
-    const [key, value] = item.split(/:(.*)/s)
-    given[key.trim()] = (value || "").trim()
+    let [key, value] = item.split(/:(.*)/s)
+    key = key.replace(/\[linemarker\].*?\[\/linemarker\]/, "").trim()
+    value = (value || "").trim()
+    if (!key) return
+    given[key] = value
   })
 
   const result = { start: start + startFromIndex, end: end + startFromIndex, given }
