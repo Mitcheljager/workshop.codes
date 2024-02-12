@@ -53,8 +53,8 @@ export function tabIndent({ state, dispatch }, event) {
 
       return {
         changes: { from: line.from, to, insert },
-        range: selectionDirection ? EditorSelection.range(from + fromModifier, to + toModifier) : 
-        EditorSelection.range(to + toModifier, from + fromModifier)
+        range: selectionDirection ? EditorSelection.range(from + fromModifier, to + toModifier) :
+          EditorSelection.range(to + toModifier, from + fromModifier)
       }
     }
   })
