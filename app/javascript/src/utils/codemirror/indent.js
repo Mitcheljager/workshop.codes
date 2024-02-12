@@ -115,9 +115,9 @@ export function autoIndentOnEnter({ state, dispatch }) {
   const changes = state.changeByRange(range => {
     const { from, to } = range, line = state.doc.lineAt(from)
 
-    const cursorPos = from - line.from
-    let indent = getIndentForLine(state, from, cursorPos)
-    if (shouldNextLineBeIndent(line.text.slice(0, cursorPos))) indent++
+    const cursorPosition = from - line.from
+    let indent = getIndentForLine(state, from, cursorPosition)
+    if (shouldNextLineBeIndent(line.text.slice(0, cursorPosition))) indent++
 
     let insert = "\n"
     insert += "\t".repeat(indent)
