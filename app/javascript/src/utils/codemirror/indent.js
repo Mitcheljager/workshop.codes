@@ -49,12 +49,14 @@ export function tabIndent({ state, dispatch }, event) {
       //'line.from' and 'from' are equal at start of line, dont reduce indents lower than 0.
       const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1: 0))
       const toModifier = insert.length - originalLength
-      const selectionDirection = state.selection.main.head === to
-
+      const reverseSelection = state.selection.main.head === to
+      
+      let range = EditorSelection.range(to + toModifier, from + fromModifier)
+      if (reverseSelection) range = EditorSelection.range(from + fromModifier, to + toModifier)
+      
       return {
         changes: { from: line.from, to, insert },
-        range: selectionDirection ? EditorSelection.range(from + fromModifier, to + toModifier) :
-          EditorSelection.range(to + toModifier, from + fromModifier)
+        range
       }
     }
   })
