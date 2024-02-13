@@ -156,7 +156,7 @@ export function indentMultilineInserts({ state, dispatch }, transaction) {
       }
 
       const currentLineIndentCount = getIndentCountForText(line)
-      const totalIndentCount = Math.max(startIndentCount - firstIndentCount + currentLineIndentCount)
+      const totalIndentCount = Math.max(0, startIndentCount - firstIndentCount + currentLineIndentCount)
       const tabs = "\t".repeat(totalIndentCount)
 
       return tabs + line.replace(/^\s+/, "")
