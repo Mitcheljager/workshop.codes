@@ -1,5 +1,4 @@
 import { EditorSelection, Transaction } from "@codemirror/state"
-import {indent} from "@codemirror/state"
 /**
  * Indent on using tab with special conditions. Indent is reversed while holding shift
  * @param {Object} view CodeMirror view
