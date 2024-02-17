@@ -139,7 +139,7 @@ export function autoIndentOnEnter({ state, dispatch }) {
  */
 export function indentMultilineInserts({ state, dispatch }, transaction) {
   // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
-  if (transaction.transactions.every(tr => ["input.paste", "input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
+  if (transaction.transactions.every(tr => ["input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
     const [range] = transaction.changedRanges
     const rangeLine = state.doc.lineAt(range.fromB)
     const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
