@@ -1,4 +1,5 @@
 import { EditorSelection, Transaction } from "@codemirror/state"
+
 /**
  * Indent on using tab with special conditions. Indent is reversed while holding shift
  * @param {Object} view CodeMirror view
@@ -138,30 +139,33 @@ export function autoIndentOnEnter({ state, dispatch }) {
  */
 export function indentMultilineInserts({ state, dispatch }, transaction) {
   // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
-  if (transaction.transactions.every(tr => ["input.paste", "input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
+  if (transaction.transactions.every(tr => ["input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
     const [range] = transaction.changedRanges
-    let text = transaction.state.doc.toString().slice(range.fromB, range.toB)
+    const rangeLine = state.doc.lineAt(range.fromB)
+    const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
     const splitText = text.split("\n")
 
-    let indentDifference = 0
-    //Dont touch single-line content (allow pasting of whitespace characters without treating them as indents)
-    if(splitText.length >= 2){
-      const charLimit = range.fromB - transaction.state.doc.lineAt(range.fromB).from
-      const lineIndentCount = getIndentForLine(transaction.state, range.fromB, charLimit)
-      const pasteIndentCount = (text.match(/^\s+/)?.[0]?.length) ?? 0
-      indentDifference = pasteIndentCount - lineIndentCount
+    let startIndentCount = 0
+    let firstIndentCount = 0
+    const mappedText = splitText.map((line, i) => {
+      if (!i) {
+        firstIndentCount = getIndentCountForText(line)
+        startIndentCount = getIndentCountForText(rangeLine.text) - firstIndentCount
 
-      text = text.replace(/^\s+/, "")
-      if(indentDifference > 0){
-        const tabs = "\t".repeat(indentDifference)
-        text = tabs.concat(text)
+        return line.replace(/^\s+/, "")
       }
-    }
+
+      const currentLineIndentCount = getIndentCountForText(line)
+      const totalIndentCount = Math.max(0, startIndentCount - firstIndentCount + currentLineIndentCount)
+      const tabs = "\t".repeat(totalIndentCount)
+
+      return tabs + line.replace(/^\s+/, "")
+    })
 
     const changes = {
-      from: range.fromB + (indentDifference < 0 ? indentDifference : 0),
+      from: range.fromB,
       to: range.toB,
-      insert: text
+      insert: mappedText.join("\n")
     }
 
     dispatch({ changes })
