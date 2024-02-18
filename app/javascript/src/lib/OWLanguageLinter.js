@@ -122,6 +122,7 @@ function findIncorrectArgsLength(content) {
         let argumentMatch
         while ((argumentMatch = /\(/g.exec(argumentsString)) != null && safeIndex < 100) {
           const argumentClosing = getClosingBracket(argumentsString, "(", ")", argumentMatch.index - 1)
+          if (argumentClosing === -1) break
           argumentsString = argumentsString.substring(0, argumentMatch.index) + argumentsString.substring(argumentClosing + 1)
 
           safeIndex++
