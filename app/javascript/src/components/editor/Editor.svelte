@@ -98,7 +98,7 @@
           defaults[toCapitalize(defaultValue)] :
           toCapitalize(defaultValue)
 
-        return useParameterObject ? `${useNewlines ? "\n\t" : ""}${name}: ${defaultValue}` : defaultValue
+        return useParameterObject ? `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }` : defaultValue
       })
 
       params.parameter_keys = detail
