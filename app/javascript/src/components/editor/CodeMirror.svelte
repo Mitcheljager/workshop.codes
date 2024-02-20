@@ -17,6 +17,7 @@
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
   import { tabIndent, getIndentForLine, getIndentCountForText, shouldNextLineBeIndent, autoIndentOnEnter, indentMultilineInserts } from "../../utils/codemirror/indent"
+  import { get } from "svelte/store"
   import debounce from "../../debounce"
 
   const dispatch = createEventDispatcher()
@@ -70,7 +71,7 @@
         ]),
         EditorView.updateListener.of((transaction) => {
           if (transaction.docChanged) {
-            indentMultilineInserts(view, transaction)
+            autocompleteFormatting(view, transaction)
             updateItem()
           }
           if (transaction.selectionSet) $editorStates[currentId].selection = view.state.selection
@@ -162,6 +163,34 @@
       to: word.to,
       options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...$subroutinesMap, ...extraCompletions],
       validFor: /^(?:[a-zA-Z0-9]+)$/i
+    }
+  }
+
+  function autocompleteFormatting(view, transaction) {
+    if (transaction.transactions.every(tr => ["input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
+      indentMultilineInserts(view, transaction)
+      insertSemicolon(view, transaction)
+    }
+  }
+
+  function insertSemicolon(view, transaction) {
+    const line = view.state.doc.lineAt(transaction.changedRanges[0].fromB)
+    const phrase = getPhraseFromPosition(line, transaction.changedRanges[0].fromB)
+
+    const possibleValues = get(completionsMap).filter(v => v.args_length)
+    const validValue = possibleValues.find(v => v.label == phrase.text)
+
+    if (validValue?.type) {
+      const insertPosition = view.state.selection.ranges[0].from
+      
+      if(validValue.type === "function") {
+        view.dispatch({
+          changes: { from: insertPosition, insert: `;` },
+          selection: EditorSelection.create([
+            EditorSelection.range(insertPosition + 1, insertPosition + 1)
+          ])
+        })
+      }
     }
   }
 
