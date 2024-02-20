@@ -185,7 +185,7 @@
       
       if(validValue.type === "function") {
         view.dispatch({
-          changes: { from: insertPosition, insert: `;` },
+          changes: { from: insertPosition, insert: ";" },
           selection: EditorSelection.create([
             EditorSelection.range(insertPosition + 1, insertPosition + 1)
           ])
