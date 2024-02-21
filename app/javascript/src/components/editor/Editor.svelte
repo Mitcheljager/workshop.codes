@@ -94,9 +94,9 @@
       const apply = v.args.map(a => {
         const name = toCapitalize(a.name?.toString().toLowerCase())
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
-        defaultValue = lowercaseDefaults.includes(defaultValue.toLowerCase()) ?
-          defaults[toCapitalize(defaultValue)] :
-          toCapitalize(defaultValue)
+        
+        if (lowercaseDefaults.includes(defaultValue.toLowerCase()) defaultValue = defaults[toCapitalize(defaultValue)]
+        else defaultValue =toCapitalize(defaultValue)
 
         return useParameterObject ? `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }` : defaultValue
       })
