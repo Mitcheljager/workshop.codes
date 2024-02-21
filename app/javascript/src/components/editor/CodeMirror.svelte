@@ -180,18 +180,18 @@
     const possibleValues = get(completionsMap).filter(v => v.args_length)
     const validValue = possibleValues.find(v => v.label == phrase.text)
 
-    if (validValue?.type) {
-      const insertPosition = view.state.selection.ranges[0].from
+    if (!validValue?.type) return
+
+    const insertPosition = view.state.selection.ranges[0].from
       
-      if(validValue.type === "function") {
-        view.dispatch({
-          changes: { from: insertPosition, insert: ";" },
-          selection: EditorSelection.create([
-            EditorSelection.range(insertPosition + 1, insertPosition + 1)
-          ])
-        })
-      }
-    }
+    if(validValue.type !== "function") return
+    
+    view.dispatch({
+      changes: { from: insertPosition, insert: ";" },
+      selection: EditorSelection.create([
+        EditorSelection.range(insertPosition + 1, insertPosition + 1)
+      ])
+    })
   }
 
   function click(event) {
