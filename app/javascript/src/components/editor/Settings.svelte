@@ -82,6 +82,15 @@
       </div>
 
       <div class="checkbox tooltip mt-1/8">
+        <input id="autocomplete-semicolon" type="checkbox" bind:checked={$settings["autocomplete-semicolon"]} />
+        <label for="autocomplete-semicolon">Insert semicolon on autocomplete</label>
+
+        <div class="tooltip__content bg-darker">
+          Insert a semicolon at the end of the line when autocompleting actions.
+        </div>
+      </div>
+      
+      <div class="checkbox tooltip mt-1/8">
         <input id="autocomplete-parameter-objects" type="checkbox" bind:checked={$settings["autocomplete-parameter-objects"]} />
         <label for="autocomplete-parameter-objects">
           Autocomplete using parameter objects

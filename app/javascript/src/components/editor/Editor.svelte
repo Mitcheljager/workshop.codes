@@ -95,10 +95,12 @@
         const name = toCapitalize(a.name?.toString().toLowerCase())
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
         
-        if (lowercaseDefaults.includes(defaultValue.toLowerCase()) defaultValue = defaults[toCapitalize(defaultValue)]
+        if (lowercaseDefaults.includes(defaultValue.toLowerCase())) defaultValue = defaults[toCapitalize(defaultValue)]
         else defaultValue =toCapitalize(defaultValue)
 
-        return useParameterObject ? `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }` : defaultValue
+        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
+        
+        return defaultValue
       })
 
       params.parameter_keys = detail

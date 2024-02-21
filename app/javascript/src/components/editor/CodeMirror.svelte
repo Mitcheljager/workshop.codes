@@ -174,17 +174,17 @@
   }
 
   function insertSemicolon(view, transaction) {
+    if (!$settings["autocomplete-semicolon"]) return
+
     const line = view.state.doc.lineAt(transaction.changedRanges[0].fromB)
     const phrase = getPhraseFromPosition(line, transaction.changedRanges[0].fromB)
-
     const possibleValues = get(completionsMap).filter(v => v.args_length)
     const validValue = possibleValues.find(v => v.label == phrase.text)
 
     if (!validValue?.type) return
+    if(validValue.type !== "function") return
 
     const insertPosition = view.state.selection.ranges[0].from
-      
-    if(validValue.type !== "function") return
     
     view.dispatch({
       changes: { from: insertPosition, insert: ";" },
