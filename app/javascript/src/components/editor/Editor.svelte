@@ -96,7 +96,7 @@
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
         
         if (lowercaseDefaults.includes(defaultValue.toLowerCase())) defaultValue = defaults[toCapitalize(defaultValue)]
-        else defaultValue =toCapitalize(defaultValue)
+        else defaultValue = toCapitalize(defaultValue)
 
         if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
         
