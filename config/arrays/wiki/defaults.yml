@@ -5,7 +5,7 @@ Vector: Vector(0, 0, 0)
 Number: 0
 Number (1): 1
 All Players: All Players(All Teams)
-String: Custom String("Some string")
+String: Custom String("")
 Sub0: SubroutineName
 A: variableName
 Hero: Hero(Tracer)
