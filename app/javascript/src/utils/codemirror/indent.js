@@ -132,42 +132,38 @@ export function autoIndentOnEnter({ state, dispatch }) {
 }
 
 /**
- * Add indents to multiline inserts. This could be either when pasting multiple lines of code or
- * on autocomplete with results that contain new lines.
+ * Add indents on autocomplete with results that contain new lines.
  * @param {Object} view CodeMirror view
  * @param {Object} transaction CodeMirror transaction
  */
 export function indentMultilineInserts({ state, dispatch }, transaction) {
-  // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
-  if (transaction.transactions.every(tr => ["input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
-    const [range] = transaction.changedRanges
-    const rangeLine = state.doc.lineAt(range.fromB)
-    const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
-    const splitText = text.split("\n")
+  const [range] = transaction.changedRanges
+  const rangeLine = state.doc.lineAt(range.fromB)
+  const text = transaction.state.doc.toString().slice(range.fromB, range.toB)
+  const splitText = text.split("\n")
 
-    let startIndentCount = 0
-    let firstIndentCount = 0
-    const mappedText = splitText.map((line, i) => {
-      if (!i) {
-        firstIndentCount = getIndentCountForText(line)
-        startIndentCount = getIndentCountForText(rangeLine.text) - firstIndentCount
+  let startIndentCount = 0
+  let firstIndentCount = 0
+  const mappedText = splitText.map((line, i) => {
+    if (!i) {
+      firstIndentCount = getIndentCountForText(line)
+      startIndentCount = getIndentCountForText(rangeLine.text) - firstIndentCount
 
-        return line.replace(/^\s+/, "")
-      }
-
-      const currentLineIndentCount = getIndentCountForText(line)
-      const totalIndentCount = Math.max(0, startIndentCount - firstIndentCount + currentLineIndentCount)
-      const tabs = "\t".repeat(totalIndentCount)
-
-      return tabs + line.replace(/^\s+/, "")
-    })
-
-    const changes = {
-      from: range.fromB,
-      to: range.toB,
-      insert: mappedText.join("\n")
+      return line.replace(/^\s+/, "")
     }
 
-    dispatch({ changes })
+    const currentLineIndentCount = getIndentCountForText(line)
+    const totalIndentCount = Math.max(0, startIndentCount - firstIndentCount + currentLineIndentCount)
+    const tabs = "\t".repeat(totalIndentCount)
+
+    return tabs + line.replace(/^\s+/, "")
+  })
+
+  const changes = {
+    from: range.fromB,
+    to: range.toB,
+    insert: mappedText.join("\n")
   }
+
+  dispatch({ changes })
 }

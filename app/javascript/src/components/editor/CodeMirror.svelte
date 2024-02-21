@@ -167,15 +167,15 @@
   }
 
   function autocompleteFormatting(view, transaction) {
+    // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
     if (transaction.transactions.every(tr => ["input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
       indentMultilineInserts(view, transaction)
-      insertSemicolon(view, transaction)
+      if ($settings["autocomplete-semicolon"])
+        insertSemicolon(view, transaction)
     }
   }
 
   function insertSemicolon(view, transaction) {
-    if (!$settings["autocomplete-semicolon"]) return
-
     const line = view.state.doc.lineAt(transaction.changedRanges[0].fromB)
     const phrase = getPhraseFromPosition(line, transaction.changedRanges[0].fromB)
     const possibleValues = get(completionsMap).filter(v => v.args_length)
