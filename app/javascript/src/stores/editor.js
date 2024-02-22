@@ -105,6 +105,7 @@ export const settings = writable({
   "color-custom-keyword": "#c678dd",
   "show-indent-markers": true,
   "word-wrap": false,
+  "autocomplete-semicolon": true,
   "autocomplete-parameter-objects": false,
   "autocomplete-min-parameter-size": 2,
   "autocomplete-min-parameter-newlines": 2

@@ -92,12 +92,15 @@
       const useNewlines = params.args_length >= $settings["autocomplete-min-parameter-newlines"]
 
       const apply = v.args.map(a => {
-        let string = a.default?.toString().toLowerCase().replaceAll(",", "")
-        if (useParameterObject) string = `${ useNewlines ? "\n\t" : "" }${ a.name }: ${ string }`
+        const name = toCapitalize(a.name?.toString().toLowerCase())
+        let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
+        
+        if (lowercaseDefaults.includes(defaultValue.toLowerCase())) defaultValue = defaults[toCapitalize(defaultValue)]
+        else defaultValue = toCapitalize(defaultValue)
 
-        if (lowercaseDefaults.includes(string)) return defaults[toCapitalize(string)]
-
-        return toCapitalize(string)
+        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
+        
+        return defaultValue
       })
 
       params.parameter_keys = detail
