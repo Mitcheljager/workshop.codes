@@ -97,16 +97,18 @@
         
         if (lowercaseDefaults.includes(defaultValue.toLowerCase())) defaultValue = defaults[toCapitalize(defaultValue)]
         else defaultValue = toCapitalize(defaultValue)
-
-        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
+        
+        const notVector = name !== "X" && name !== "Y" && name !== "Z" 
+        if (useParameterObject && notVector) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
         
         return defaultValue
       })
 
       params.parameter_keys = detail
       params.parameter_defaults = apply
-
-      params.apply = useParameterObject ?
+      const notVector = detail[0] !== "X" && detail[1] !== "Y" && detail[2] !== "Z" 
+      
+      params.apply = (useParameterObject && notVector) ?
         useNewlines ?
           `${ v["en-US"] }({ ${ apply.join(",") }\n})` :
           `${ v["en-US"] }({ ${ apply.join(", ") } })` :
