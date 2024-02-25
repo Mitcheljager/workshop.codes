@@ -1,5 +1,5 @@
 import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "../parse"
-
+import { evaluateParameterObjects } from "./parameterObjects"
 // NOTE: The fact variable names can start with a decimal is intention.
 // We leave it to Overwatch to warn the user that this is not allowed.
 const globalVariablesRegex = /(?<=Global\.)[A-Za-z0-9_]+/g
@@ -138,6 +138,7 @@ function getLiteralPlayerVariables(source, stringRanges) {
 }
 
 export function getVariables(joinedItems) {
+  joinedItems = evaluateParameterObjects(joinedItems)
   const stringRanges = findRangesOfStrings(joinedItems)
 
   const playerVariablesFromActions = []
