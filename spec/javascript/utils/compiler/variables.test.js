@@ -262,13 +262,13 @@ describe("variables.js", () => {
         globalVariables: ["variable2", "variable1"],
         playerVariables: []
       }
-  
+
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
     test("Should extract Player variables from parameter objects", () => {
       const input =
-        `Chase Player Variable Over Time({ 
+        `Chase Player Variable Over Time({
           Player: Event Player,
           Variable: variable1,
           Destination: 0,
@@ -279,7 +279,7 @@ describe("variables.js", () => {
         globalVariables: [],
         playerVariables: ["variable1"]
       }
-  
+
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
@@ -288,7 +288,7 @@ describe("variables.js", () => {
         `For Global Variable({
           Control Variable: variable1,
           Range Start: 0,
-          Range Stop: Some Action({ 
+          Range Stop: Some Action({
             First: Global.variable2,
             Second: Event Player.variable3
           }),
@@ -298,7 +298,7 @@ describe("variables.js", () => {
         globalVariables: ["variable2", "variable1"],
         playerVariables: ["variable3"]
       }
-  
+
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
@@ -308,7 +308,21 @@ describe("variables.js", () => {
         globalVariables: ["variable1"],
         playerVariables: []
       }
-  
+
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should ignore actions that modify variables when there aren't enough arguments on those actions", () => {
+      const input = `
+        Set Global Variable();
+        Set Player Variable();
+        Set Player Variable(Event Player);
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+
       expect(getVariables(input)).toEqual(expectedOutput)
     })
   })
