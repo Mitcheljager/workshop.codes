@@ -1,6 +1,7 @@
 import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "../parse"
 import { evaluateParameterObjects } from "./parameterObjects"
-// NOTE: The fact variable names can start with a decimal is intention.
+
+// NOTE: The fact variable names can start with a decimal is intentional.
 // We leave it to Overwatch to warn the user that this is not allowed.
 const globalVariablesRegex = /(?<=Global\.)[A-Za-z0-9_]+/g
 
@@ -13,7 +14,6 @@ const globalVariablesRegex = /(?<=Global\.)[A-Za-z0-9_]+/g
  *   "Global.myGlobalVar.myPlayerVar.otherPlayerVar" => ".myPlayerVar", ".otherPlayerVar"
  *   "Global.Global.Global.myPlayerVar.otherPlayerVar" => "Global" (the second one), ".myPlayerVar", ".otherPlayerVar"
  *
- * NOTE: The fact variable names can start with a
  */
 const possiblePlayerVariablesRegex = /(?<![^\w.]Global)\.(?<variableName>[A-Za-z0-9_]+)/g
 
