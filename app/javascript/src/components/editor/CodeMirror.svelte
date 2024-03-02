@@ -92,9 +92,9 @@
       // Only perform this function if transaction is of an expected type performed by the user
       // to prevent infinite loops on changes made by CodeMirror.
       const userEvents = transaction.transactions.map(tr => tr.annotation(Transaction.userEvent))
-      if (userEvents.every(eventType => ["input.complete"].includes(eventType))) {
+      if (userEvents.every(eventType => eventType === "input.complete")) {
         autocompleteFormatting(view, transaction)
-      } else if (userEvents.every(eventType => ["input.paste"].includes(eventType))) {
+      } else if (userEvents.every(eventType => eventType === "input.paste")) {
         pasteIndentAdjustments(view, transaction)
       }
     }
@@ -160,6 +160,7 @@
 
   function searchScrollMargin(view, transaction) {
     if (transaction.transactions[0].annotations[0].value !== "select.search") return
+    
     view.dispatch ({
       effects: EditorView.scrollIntoView (
         view.state.selection.main.head,

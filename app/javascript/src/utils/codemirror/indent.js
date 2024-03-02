@@ -180,9 +180,9 @@ export function pasteIndentAdjustments({ dispatch }, transaction){
   const lineText = line.text.slice(0, range.fromB - line.from)
 
   let indentCount = 0
-  if(paste.includes("\n")){
-    while((lineText[indentCount] == "\t" || lineText[indentCount] == " ") &&
-    (paste[indentCount] == "\t" || paste[indentCount] == " ")){
+  if (paste.includes("\n")) {
+    while ((lineText[indentCount] == "\t" || lineText[indentCount] == " ") &&
+    (paste[indentCount] == "\t" || paste[indentCount] == " ")) {
       indentCount++
     }
   }
