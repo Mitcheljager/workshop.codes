@@ -41,3 +41,8 @@ spec/examples.txt
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.vscode/launch.json
+.vscode/tasks.json
+.gitignore
+.vscode/launch.json
+.vscode/tasks.json

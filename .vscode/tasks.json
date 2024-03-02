@@ -1,12 +1,23 @@
 {
-	// See https://go.microsoft.com/fwlink/?LinkId=733558
-	// for the documentation about the tasks.json format
-	"version": "2.0.0",
-	"tasks": [
+    "version": "2.0.0",
+    "tasks": [
 		{
-			"label": "Kill server",
+			"label": "Run Project1",
 			"type": "shell",
-			"command": "kill --KILL (cat \"${workspaceFolder}/tmp/pids/server.pid\") && rm \"${workspaceFolder}/tmp/pids/server.pid\""
-		}
+			"command": "bundle install",
+			"args": []
+		},
+		{
+			"label": "Run bundle",
+			"type": "shell",
+			"command": "bundle exec rails s",
+			"args": []
+		},
+		{
+			"label": "Run ruby",
+			"type": "shell",
+			"command": "ruby bin/webpack-dev-server",
+			"args": []
+		},
 	]
-}
+  }

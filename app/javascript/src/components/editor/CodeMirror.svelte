@@ -73,7 +73,7 @@
           handleTransactionDocChanged(view, transaction)
           updateItem()
           if (transaction.selectionSet) {
-            $editorStates[currentId].selection = view.state.selection 
+            $editorStates[currentId].selection = view.state.selection
             searchScrollMargin(view, transaction)
           }
         }),
@@ -92,6 +92,7 @@
       // Only perform this function if transaction is of an expected type performed by the user
       // to prevent infinite loops on changes made by CodeMirror.
       const userEvents = transaction.transactions.map(tr => tr.annotation(Transaction.userEvent))
+      
       if (userEvents.every(eventType => eventType === "input.complete")) {
         autocompleteFormatting(view, transaction)
       } else if (userEvents.every(eventType => eventType === "input.paste")) {

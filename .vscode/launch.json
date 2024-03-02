@@ -1,26 +1,42 @@
+// launch.json
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
+  "version": "0.2.0",
+  "configurations": [
     {
-      // Required gems: ruby-debug-base and ruby-debug-ide
-      // Required extension: rebornix.ruby
-      "name": "Rails server",
-      "type": "Ruby",
+      "name": "run bundle",
+      "program": "${workspaceFolder}/tasks.json",
       "request": "launch",
-      "program": "${workspaceRoot}/bin/rails",
-      "args": [
-        "server"
-      ]
+      "preLaunchTask": "run bundle",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+
+    {"name": "Rails Server",
+    "type": "node",
+    "request": "launch",
+    "preLaunchTask": "run bundle"},
+    
+    {
+      "name": "Rails Server",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "run ruby"
     },
     {
-			"type": "chrome",
-			"request": "launch",
-			"name": "Chrome against localhost:3000",
-			"url": "http://localhost:3000",
-			"webRoot": "${workspaceFolder}/app"
-		}
-	]
+      "name": "Webpack Dev Server",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "StartWebpackServer"
+    },
+    {
+      "name": "Chrome against localhost:3000",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/app"
+    }
+  ]
 }

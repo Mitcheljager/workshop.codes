@@ -113,11 +113,10 @@
   .cm-searchMatch {
     background: lighten($bg-dark, 10%);
     box-shadow: 0 0 0 1px $primary;
-	
-    &-selected {
-      background: darken($bg-dark, 10%);
-      box-shadow: 0 0 0 1px $shadow;
-    }
+  }
+
+  .cm-searchMatch-selected {
+    background: darken($bg-dark, 10%);
   }
 
   .cm-matchingBracket {
