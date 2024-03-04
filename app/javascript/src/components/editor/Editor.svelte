@@ -90,23 +90,24 @@
       const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
       const useParameterObject = $settings["autocomplete-parameter-objects"] && params.args_length >= $settings["autocomplete-min-parameter-size"]
       const useNewlines = params.args_length >= $settings["autocomplete-min-parameter-newlines"]
-
+      const notVector = (v["en-US"] != "Vector")
+      
       const apply = v.args.map(a => {
         const name = toCapitalize(a.name?.toString().toLowerCase())
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
         
         if (lowercaseDefaults.includes(defaultValue.toLowerCase())) defaultValue = defaults[toCapitalize(defaultValue)]
         else defaultValue = toCapitalize(defaultValue)
-
-        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
+        
+        if (useParameterObject && notVector) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
         
         return defaultValue
       })
 
       params.parameter_keys = detail
       params.parameter_defaults = apply
-
-      params.apply = useParameterObject ?
+      
+      params.apply = (useParameterObject && notVector) ?
         useNewlines ?
           `${ v["en-US"] }({ ${ apply.join(",") }\n})` :
           `${ v["en-US"] }({ ${ apply.join(", ") } })` :
