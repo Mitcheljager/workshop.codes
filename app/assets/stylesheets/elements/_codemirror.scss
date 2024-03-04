@@ -115,6 +115,10 @@
     box-shadow: 0 0 0 1px $primary;
   }
 
+  .cm-searchMatch-selected {
+    background: darken($bg-dark, 10%);
+  }
+
   .cm-matchingBracket {
     background: lighten($bg-dark, 20%) !important;
   }

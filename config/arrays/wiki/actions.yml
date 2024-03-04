@@ -209,7 +209,7 @@ __chasePlayerVariableOverTime__:
   - name: Variable
     description: Specifies which of the player's variables to modify gradually.
     type: PlayerVariable
-    default: Variable
+    default: A
   - name: Destination
     description: The value that the player variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
@@ -306,7 +306,7 @@ createDummy:
   - name: Slot
     description: The player slot which will receive the bot (-1 for first available slot). Up to 6 bots may be added to each team, or 12 bots to the free-for-all team, regardless of lobby settings.
     type: Integer
-    default: Number
+    default: -1
   - name: Position
     description: The initial position where the bot will appear.
     type: Position

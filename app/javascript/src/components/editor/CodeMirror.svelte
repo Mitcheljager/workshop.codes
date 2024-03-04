@@ -16,7 +16,7 @@
   import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
-  import { tabIndent, getIndentForLine, getIndentCountForText, shouldNextLineBeIndent, autoIndentOnEnter, indentMultilineInserts } from "../../utils/codemirror/indent"
+  import { tabIndent, getIndentForLine, getIndentCountForText, shouldNextLineBeIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "../../utils/codemirror/indent"
   import { get } from "svelte/store"
   import debounce from "../../debounce"
 
@@ -70,11 +70,12 @@
           { key: "Ctrl-Shift-z", run: redoAction }
         ]),
         EditorView.updateListener.of((transaction) => {
-          if (transaction.docChanged) {
-            autocompleteFormatting(view, transaction)
-            updateItem()
+          handleTransactionDocChanged(view, transaction)
+          updateItem()
+          if (transaction.selectionSet) {
+            $editorStates[currentId].selection = view.state.selection
+            searchScrollMargin(view, transaction)
           }
-          if (transaction.selectionSet) $editorStates[currentId].selection = view.state.selection
         }),
         basicSetup,
         parameterTooltip(),
@@ -84,6 +85,20 @@
         ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
       ]
     })
+  }
+
+  function handleTransactionDocChanged(view, transaction) {
+    if (transaction.docChanged) {
+      // Only perform this function if transaction is of an expected type performed by the user
+      // to prevent infinite loops on changes made by CodeMirror.
+      const userEvents = transaction.transactions.map(tr => tr.annotation(Transaction.userEvent))
+      
+      if (userEvents.every(eventType => eventType === "input.complete")) {
+        autocompleteFormatting(view, transaction)
+      } else if (userEvents.every(eventType => eventType === "input.paste")) {
+        pasteIndentAdjustments(view, transaction)
+      }
+    }
   }
 
   function updateEditorState() {
@@ -144,6 +159,17 @@
     view.scrollDOM.scrollTo({ top: $editorScrollPositions[id] || 0 })
   }
 
+  function searchScrollMargin(view, transaction) {
+    if (transaction.transactions[0].annotations[0].value !== "select.search") return
+    
+    view.dispatch ({
+      effects: EditorView.scrollIntoView (
+        view.state.selection.main.head,
+        { yMargin: 110 }
+      )
+    })
+  }
+
   function completions(context) {
     const word = context.matchBefore(/[@a-zA-Z0-9_ ]*/)
 
@@ -167,23 +193,18 @@
   }
 
   function autocompleteFormatting(view, transaction) {
-    // Only perform this function if transaction is of an expected type performed by the user to prevent infinite loops on changes made by CodeMirror
-    if (transaction.transactions.every(tr => ["input.complete"].includes(tr.annotation(Transaction.userEvent)))) {
-      indentMultilineInserts(view, transaction)
-      if ($settings["autocomplete-semicolon"])
-        insertSemicolon(view, transaction)
-    }
+    indentMultilineInserts(view, transaction)
+    if ($settings["autocomplete-semicolon"])
+      insertSemicolon(view, transaction)
   }
 
   function insertSemicolon(view, transaction) {
     const line = view.state.doc.lineAt(transaction.changedRanges[0].fromB)
     const phrase = getPhraseFromPosition(line, transaction.changedRanges[0].fromB)
-    const possibleValues = get(completionsMap).filter(v => v.args_length)
+    const possibleValues = get(completionsMap).filter(v => v.type === "function")
     const validValue = possibleValues.find(v => v.label == phrase.text)
 
     if (!validValue?.type) return
-    if(validValue.type !== "function") return
-
     const insertPosition = view.state.selection.ranges[0].from
     
     view.dispatch({

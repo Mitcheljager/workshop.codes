@@ -30,3 +30,8 @@
     color: $white;
   }
 }
+
+.matches__hidden {
+  opacity: 0.5;
+  text-decoration: line-through;
+}

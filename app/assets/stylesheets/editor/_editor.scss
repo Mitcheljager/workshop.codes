@@ -125,7 +125,7 @@ $top-height: 4rem;
 
 .drag-handle {
   position: absolute;
-  height: 0.5rem;
+  height: 0.75rem;
   width: 100%;
   padding: 0;
   bottom: 0;
@@ -136,7 +136,7 @@ $top-height: 4rem;
   @include media-min(mbl) {
     cursor: ew-resize;
     height: 100%;
-    width: 0.5rem;
+    width: 0.25rem;
   }
 
   &--left {
