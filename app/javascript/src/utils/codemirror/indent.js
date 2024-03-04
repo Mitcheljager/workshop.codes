@@ -167,3 +167,27 @@ export function indentMultilineInserts({ state, dispatch }, transaction) {
 
   dispatch({ changes })
 }
+
+/**
+ * Adjust multiline-indents so that the indent on first line matches the rest.
+ * @param {Object} view CodeMirror view
+ * @param {Object} transaction CodeMirror transaction
+ */
+export function pasteIndentAdjustments({ dispatch }, transaction){
+  const [range] = transaction.changedRanges
+  const paste = transaction.state.doc.toString().slice(range.fromB, range.toB)
+  const line = transaction.state.doc.lineAt(range.fromB)
+  const lineText = line.text.slice(0, range.fromB - line.from)
+
+  let indentCount = 0
+  if (paste.includes("\n")) {
+    while ((lineText[indentCount] == "\t" || lineText[indentCount] == " ") &&
+    (paste[indentCount] == "\t" || paste[indentCount] == " ")) {
+      indentCount++
+    }
+  }
+
+  dispatch({
+    changes: { from: range.fromB, to: range.fromB + indentCount, insert: "" }
+  })
+}

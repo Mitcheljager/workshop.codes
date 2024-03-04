@@ -305,6 +305,11 @@ Impulse:
     description: If the target is moving against the direction of the impulse, this
       relative velocity is negated before the impulse is applied.
     en-US: Cancel Contrary Motion
+  CANCEL_CONTRARY_MOTION_XYZ:
+    description: If the target is moving against the direction of the impulse, this
+      relative velocity is negated before the impulse is applied. Horizontal and
+      vertical velocity (XYZ) are processed together.
+    en-US: Cancel Contrary Motion XYZ
   INCORPORATE_CONTRARY_MOTION:
     description: The impulse is added directly to the velocity of the target, so if
       the target is moving against the direction of the impulse, it might seem like

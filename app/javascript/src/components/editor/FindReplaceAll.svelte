@@ -52,6 +52,7 @@
       }
 
       return {
+        hidden: i.hidden,
         id: i.id,
         name: i.name,
         parent: i.parent,
@@ -184,7 +185,7 @@
 
       {#each (itemMatches || []) as item, i}
         <button class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
-          {item.name}
+          <div class="{item.hidden ? "matches__hidden" : ""}">{item.name}</div>
 
           {#if item.parent}
             <div class="text-small text-dark">{getParentsString(item.parent)}</div>
