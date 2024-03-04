@@ -1,4 +1,5 @@
 import { compileVariables, excludeDefaultVariableNames, getDefaultVariableNameIndex, getVariables } from "../../../../app/javascript/src/utils/compiler/variables"
+import { completionsMap } from "../../../../app/javascript/src/stores/editor"
 import { disregardWhitespace } from "../../helpers/text"
 
 describe("variables.js", () => {
@@ -12,9 +13,7 @@ describe("variables.js", () => {
         Modify Global Variable(variable5, Test);
         Chase Global Variable At Rate(variable6, Test, ...);
         Chase Global Variable Over Time(variable7, Test, ...);
-        For Global Variable(variable8, 0, 1) {
-          // Do something
-        }
+        For Global Variable(variable8, 0, 1, 1);
       `
       const expectedOutput = {
         globalVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8"],
@@ -67,9 +66,7 @@ describe("variables.js", () => {
         Modify Player Variable At Index(Event Player, variable11, Test);
         Chase Player Variable At Rate(Event Player, variable12, Test, ...);
         Chase Player Variable Over Time(Event Player, variable13, Test, ...);
-        For Player Variable(Event Player, variable14, 1) {
-          // Do something
-        }
+        For Player Variable(Event Player, variable14, 0, 1);
       `
       const expectedOutput = {
         globalVariables: [],
@@ -155,10 +152,10 @@ describe("variables.js", () => {
       `
       expect(getVariables(input)).toEqual(expectedOutput)
 
-      const specialCaseBeginningOfText1Input = `.1234`
+      const specialCaseBeginningOfText1Input = ".1234"
       expect(getVariables(specialCaseBeginningOfText1Input)).toEqual(expectedOutput)
 
-      const specialCaseBeginningOfText2Input = `.abcd`
+      const specialCaseBeginningOfText2Input = ".abcd"
       expect(getVariables(specialCaseBeginningOfText2Input)).toEqual(expectedOutput)
     })
 
@@ -343,7 +340,7 @@ describe("variables.js", () => {
         "someVar1",
         "someVar2",
         "someVar3",
-        "someVar4",
+        "someVar4"
       ]
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
@@ -397,5 +394,68 @@ describe("variables.js", () => {
           .map((name) => [name, getDefaultVariableNameIndex(name)]))
       ).toStrictEqual(expectedOutput)
     })
+
+    test("Should get Global variables from parameter objects", () => {
+      completionsMap.set(setCompletionsMap("For Global Variable"))
+      const input = "For Global Variable({ One: variable1, Two: Global.variable2, Three: Count Of(Array()), Four: 1 })"
+      const expectedOutput = {
+        globalVariables: ["variable2", "variable1"],
+        playerVariables: []
+      }
+  
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+  
+    test("Should get variables from nested parameter objects", () => {
+      completionsMap.set(setCompletionsMap("For Global Variable"))
+      const input =
+        `For Global Variable({
+          One: variable1,
+          Two: 0,
+          Three: Some Action({ 
+            First: Global.variable2,
+            Second: Event Player.variable3
+          }),
+          Four: 1
+        })`
+      const expectedOutput = {
+        globalVariables: ["variable2", "variable1"],
+        playerVariables: ["variable3"]
+      }
+  
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+  
+    test("Should get Player variables from parameter objects", () => {
+      completionsMap.set(setCompletionsMap("Chase Player Variable Over Time"))
+      const input =
+        `Chase Player Variable Over Time({ 
+          One: Event Player,
+          Two: variable1,
+          Three: 0,
+          Four: 1,
+          Five: Destination And Duration
+        })`
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["variable1"]
+      }
+  
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
   })
 })
+
+function setCompletionsMap(actionLabel) {
+  return [{
+    label: actionLabel,
+    args_length: 4,
+    parameter_keys: ["One", "Two", "Three", "Four"],
+    parameter_defaults: ["A", "B", "C", "D"]
+  }, {
+    label: "Some Action",
+    args_length: 4,
+    parameter_keys: ["First", "Second", "Third", "Fourth"],
+    parameter_defaults: ["A", "B", "C", "D"]
+  }]
+}
