@@ -93,7 +93,7 @@
       const useNewlines = params.args_length >= $settings["autocomplete-min-parameter-newlines"]
 
       // Generate Apply map to be used for autocomplete and other bits
-      let apply = v.args.map(a => {
+      const apply = v.args.map(a => {
         const name = toCapitalize(a.name?.toString().toLowerCase())
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
 
@@ -107,12 +107,13 @@
       params.parameter_keys = detail
       params.parameter_defaults = apply.map(([_, defaultValue]) => defaultValue)
 
-      // If useParameterObject is enabled transform the apply to include the parameter name.
-      // It's important this happens after setting the parameter_defaults param, as that uses
-      // a different format and we don't want it to use the parameter object format.
-      if (useParameterObject) apply = apply.map(([name, defaultValue]) => ([name, `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`]))
-
-      const applyValues = apply.map(([_, defaultValue]) => defaultValue)
+      const applyValues = apply.map(([name, defaultValue]) => {
+        // If useParameterObject is enabled add the parameter name to the apply.
+        // It's important this happens after setting the parameter_defaults param, as that uses
+        // a different format and we don't want it to use the parameter object format.
+        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
+        return defaultValue
+      })
 
       // params.apply is used by CodeMirror for autocompete values.
       // The value we set is dependent on useParameterObjects and useNewlines.
