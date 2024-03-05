@@ -395,9 +395,33 @@ describe("variables.js", () => {
       ).toStrictEqual(expectedOutput)
     })
 
-    test("Should get Global variables from parameter objects", () => {
-      completionsMap.set(setCompletionsMap("For Global Variable"))
-      const input = "For Global Variable({ One: variable1, Two: Global.variable2, Three: Count Of(Array()), Four: 1 })"
+    //CompletionsMap required for Parameter Objects
+    beforeAll(() => {
+      completionsMap.set([{
+        label: "Some Action",
+        args_length: 3,
+        parameter_keys: ["First", "Second", "Third"],
+        parameter_defaults: ["A", "B", "C"]
+      }, {
+        label: "For Global Variable",
+        args_length: 4,
+        parameter_keys: ["Control Variable", "Range Start", "Range Stop", "Step"],
+        parameter_defaults: ["variableName", "0", " Count Of(Array())", "1"]
+      }, {
+        label: "Chase Player Variable Over Time",
+        args_length: 5,
+        parameter_keys: ["Player", "Variable", "Destination", "Duration", "Reevaluation"],
+        parameter_defaults: ["Event Player", "variableName", "0", "1", "Destination And Duration"]
+      }, {
+        label: "Create Effect",
+        args_length: 5,
+        parameter_keys: ["Visible To", "Type", "Color", "Position", "Radius", "Reevaluation"],
+        parameter_defaults: ["All Players(All Teams)", "Sphere", "Color(white)", "Vector(0, 0, 0)", "1", "Visible To Position And Radius"]
+      }])
+    })
+
+    test("Should extract Global variables from parameter objects", () => {
+      const input = "For Global Variable({ Control Variable: variable1, Range Start: Global.variable2, Range Stop: Count Of(Array()), Step: 1 })"
       const expectedOutput = {
         globalVariables: ["variable2", "variable1"],
         playerVariables: []
@@ -405,36 +429,15 @@ describe("variables.js", () => {
   
       expect(getVariables(input)).toEqual(expectedOutput)
     })
-  
-    test("Should get variables from nested parameter objects", () => {
-      completionsMap.set(setCompletionsMap("For Global Variable"))
-      const input =
-        `For Global Variable({
-          One: variable1,
-          Two: 0,
-          Three: Some Action({ 
-            First: Global.variable2,
-            Second: Event Player.variable3
-          }),
-          Four: 1
-        })`
-      const expectedOutput = {
-        globalVariables: ["variable2", "variable1"],
-        playerVariables: ["variable3"]
-      }
-  
-      expect(getVariables(input)).toEqual(expectedOutput)
-    })
-  
-    test("Should get Player variables from parameter objects", () => {
-      completionsMap.set(setCompletionsMap("Chase Player Variable Over Time"))
+
+    test("Should extract Player variables from parameter objects", () => {
       const input =
         `Chase Player Variable Over Time({ 
-          One: Event Player,
-          Two: variable1,
-          Three: 0,
-          Four: 1,
-          Five: Destination And Duration
+          Player: Event Player,
+          Variable: variable1,
+          Destination: 0,
+          Duration: 1,
+          Reevaluation: Destination And Duration
         })`
       const expectedOutput = {
         globalVariables: [],
@@ -443,19 +446,34 @@ describe("variables.js", () => {
   
       expect(getVariables(input)).toEqual(expectedOutput)
     })
+
+    test("Should extract variables from nested parameter objects", () => {
+      const input =
+        `For Global Variable({
+          Control Variable: variable1,
+          Range Start: 0,
+          Range Stop: Some Action({ 
+            First: Global.variable2,
+            Second: Event Player.variable3
+          }),
+          Step: 1
+        })`
+      const expectedOutput = {
+        globalVariables: ["variable2", "variable1"],
+        playerVariables: ["variable3"]
+      }
+  
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should extract variables from parameter objects where not all parameters are filled in", () => {
+      const input = "Create Effect({ Position: Global.variable1 });"
+      const expectedOutput = {
+        globalVariables: ["variable1"],
+        playerVariables: []
+      }
+  
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
   })
 })
-
-function setCompletionsMap(actionLabel) {
-  return [{
-    label: actionLabel,
-    args_length: 4,
-    parameter_keys: ["One", "Two", "Three", "Four"],
-    parameter_defaults: ["A", "B", "C", "D"]
-  }, {
-    label: "Some Action",
-    args_length: 4,
-    parameter_keys: ["First", "Second", "Third", "Fourth"],
-    parameter_defaults: ["A", "B", "C", "D"]
-  }]
-}
