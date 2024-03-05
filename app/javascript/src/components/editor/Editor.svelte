@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "../../stores/editor"
+  import { toCapitalize } from "../../utils/text"
   import EditorActions from "./EditorActions.svelte"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
@@ -91,26 +92,35 @@
       const useParameterObject = $settings["autocomplete-parameter-objects"] && params.args_length >= $settings["autocomplete-min-parameter-size"]
       const useNewlines = params.args_length >= $settings["autocomplete-min-parameter-newlines"]
 
-      const apply = v.args.map(a => {
+      // Generate Apply map to be used for autocomplete and other bits
+      let apply = v.args.map(a => {
         const name = toCapitalize(a.name?.toString().toLowerCase())
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
-        
+
         if (lowercaseDefaults.includes(defaultValue.toLowerCase())) defaultValue = defaults[toCapitalize(defaultValue)]
         else defaultValue = toCapitalize(defaultValue)
 
-        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
-        
-        return defaultValue
+        return [name, defaultValue]
       })
 
+      // Set completion map keys and default
       params.parameter_keys = detail
-      params.parameter_defaults = apply
+      params.parameter_defaults = apply.map(([_, defaultValue]) => defaultValue)
 
+      // If useParameterObject is enabled transform the apply to include the parameter name.
+      // It's important this happens after setting the parameter_defaults param, as that uses
+      // a different format and we don't want it to use the parameter object format.
+      if (useParameterObject) apply = apply.map(([name, defaultValue]) => ([name, `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`]))
+
+      const applyValues = apply.map(([_, defaultValue]) => defaultValue)
+
+      // params.apply is used by CodeMirror for autocompete values.
+      // The value we set is dependent on useParameterObjects and useNewlines.
       params.apply = useParameterObject ?
         useNewlines ?
-          `${ v["en-US"] }({ ${ apply.join(",") }\n})` :
-          `${ v["en-US"] }({ ${ apply.join(", ") } })` :
-        `${ v["en-US"] }(${ apply.join(", ") })`
+          `${ v["en-US"] }({ ${ applyValues.join(", ") }\n})` :
+          `${ v["en-US"] }({ ${ applyValues.join(", ") } })` :
+        `${ v["en-US"] }(${ applyValues.join(", ") })`
 
       // Add arguments to info box
       params.info += "\n\nArguments: "
@@ -118,10 +128,6 @@
 
       return params
     })
-
-    function toCapitalize(string) {
-      return string.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
-    }
   }
 
   // Updates the tab title
