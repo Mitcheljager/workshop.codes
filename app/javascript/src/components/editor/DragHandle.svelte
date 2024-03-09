@@ -28,14 +28,19 @@
   function mouseMove(event) {
     if (!isDragging) return
 
-    const difference = (event[direction] || event.targetTouches[0]?.[direction]) - startPosition
-    currentSize = startSize + difference * (align == "right" ? 1 : -1)
+    requestAnimationFrame(() => {
+      const difference = (event[direction] || event.targetTouches[0]?.[direction]) - startPosition
+      currentSize = startSize + difference * (align == "right" ? 1 : -1)
 
-    setCssVariable(key, `${ currentSize }px`)
+      setCssVariable(key, `${ currentSize }px`)
 
-    currentSize = Math.min(Math.max(currentSize, (Math.max(window.innerWidth, window.innerHeight) / 10)), Math.max(window.innerWidth, window.innerHeight) / 2)
+      currentSize = Math.min(
+        Math.max(currentSize, Math.max(window.innerWidth, window.innerHeight) / 10),
+        Math.max(window.innerWidth, window.innerHeight) / 2
+      )
 
-    localStorage.setItem(key, currentSize)
+      localStorage.setItem(key, currentSize)
+    })
   }
 
   function mouseUp() {
