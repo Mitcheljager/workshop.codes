@@ -38,10 +38,6 @@
   overflow-y: auto;
   z-index: 100;
 
-  @media (max-width: 999px) {
-    right: -70px;
-  }
-
   @include styled-scrollbar();
 
   &--left {

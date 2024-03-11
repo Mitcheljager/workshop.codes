@@ -4,7 +4,7 @@
   import { escapeable } from "../actions/escapeable"
   import { outsideClick } from "../actions/outsideClick"
   import { setCssVariable } from "../../utils/setCssVariable"
-  import { settings } from "../../stores/editor"
+  import { settings, isMobile } from "../../stores/editor"
   import Cogs from "../icon/Cogs.svelte"
 
   let mounted = false
@@ -60,7 +60,12 @@
   </button>
 
   {#if active}
-    <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content block p-1/4" style="width: 300px">
+    <div
+      transition:fly={{ duration: 150, y: 20 }}
+      use:escapeable on:escape={() => active = false}
+      class="dropdown__content block p-1/4"
+      style="width: 300px; right: { isMobile ? -70 : 0 }px">
+
       <h5 class="mt-0 mb-1/8">Settings</h5>
 
       <div class="checkbox tooltip mt-1/8">

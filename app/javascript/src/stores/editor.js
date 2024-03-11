@@ -10,7 +10,7 @@ import { debounced } from "../utils/debounceStore"
 const VARIABLE_EXTRACTION_DEBOUNCE_MS = 500
 
 export const screenWidth = writable(0)
-export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 999)
+export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1100)
 
 export const modal = (() => {
   const { subscribe, set } = writable(null)
