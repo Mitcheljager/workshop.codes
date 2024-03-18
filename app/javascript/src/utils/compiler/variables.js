@@ -146,15 +146,17 @@ export function getVariables(joinedItems) {
   for (const match of matchAllOutsideRanges(stringRanges, joinedItems, actionsDefiningVariablesRegex)) {
     const argsContent = joinedItems.substring(
       match.index + match[0].length,
-      getClosingBracket(joinedItems, "(", ")", match.index) - 1
+      getClosingBracket(joinedItems, "(", ")", match.index - 1)
     )
     const args = splitArgumentsString(argsContent)
 
     const isPlayer = match[0].includes("Player")
 
     if (isPlayer) {
+      if (args[1]?.length === 0) continue
       playerVariablesFromActions.push(args[1])
     } else {
+      if (args[0]?.length === 0) continue
       globalVariablesFromActions.push(args[0])
     }
   }
