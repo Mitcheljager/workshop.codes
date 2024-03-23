@@ -18,7 +18,6 @@ gem "discord-notifier"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"
 gem "geocoder"
-gem "high_voltage", "~> 3.0.0"
 gem "httparty"
 gem "image_processing", "~> 1.12"
 gem "inline_svg"
@@ -70,6 +69,8 @@ group :development do
   gem "active_record_doctor"
   gem "web-console", ">= 3.3.0"
   gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]
+  gem "derailed_benchmarks", group: :development
+  gem "sys-proctable", platforms: [:mingw, :x64_mingw, :mswin]
 end
 
 group :production do
