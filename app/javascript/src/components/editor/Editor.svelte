@@ -32,6 +32,9 @@
 
   $: if (data) $completionsMap = parseKeywords($settings)
 
+  // Updates the tab title
+  $: document.title = $currentProject?.title !== undefined ? `${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
+
   onMount(async() => {
     loading = true
 
@@ -150,9 +153,6 @@
         alert(`Something went wrong while loading, please try again. ${ error }`)
       })
   }
-
-  // Updates the tab title
-  $: document.title = $currentProject?.title !== undefined ? `Editor | ${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 </script>
 
 <svelte:window bind:innerWidth={$screenWidth} />
