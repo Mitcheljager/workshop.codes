@@ -3,6 +3,7 @@
   import { fly } from "svelte/transition"
   import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "../../stores/editor"
   import { toCapitalize } from "../../utils/text"
+  import FetchRails from "../../fetch-rails"
   import EditorActions from "./EditorActions.svelte"
   import EditorAside from "./EditorAside.svelte"
   import EditorWiki from "./EditorWiki.svelte"
@@ -18,32 +19,39 @@
   import Logo from "../icon/Logo.svelte"
   import Bugsnag from "../Bugsnag.svelte"
 
-  export let events
-  export let values
-  export let actions
-  export let constants
-  export let defaults
-  export let heroes
-  export let maps
   export let bugsnagApiKey = ""
-  export let _projects
   export let _isSignedIn = false
 
   let fetchArticle
+  let data = null
+  let defaults = {}
+  let loading = true
 
   $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
 
-  $: $completionsMap = parseKeywords($settings)
+  $: if (data) $completionsMap = parseKeywords($settings)
 
-  onMount(() => {
-    $workshopConstants = constants
+  onMount(async() => {
+    loading = true
+
+    data = await fetchData()
+
+    if (!data) return
+
+    $workshopConstants = data.constants
+    $projects = data.current_user_projects || []
+    defaults = data.defaults || {}
+
     $currentItem = $items?.[0] || {}
-    $projects = _projects || []
     $isSignedIn = _isSignedIn
+
+    loading = false
   })
 
   function parseKeywords() {
+    const { events, values, actions, constants, heroes, maps } = data
+
     const mappedEvents = objectToKeyword(events, "event")
     const mappedValues = objectToKeyword(values, "text")
     const mappedActions = objectToKeyword(actions, "function")
@@ -131,6 +139,18 @@
     })
   }
 
+  async function fetchData() {
+    return new FetchRails("/editor/data.json").get()
+      .then(data => {
+        if (!data) throw Error("No data was returned.")
+
+        return JSON.parse(data)
+      })
+      .catch(error => {
+        alert(`Something went wrong while loading, please try again. ${ error }`)
+      })
+  }
+
   // Updates the tab title
   $: document.title = $currentProject?.title !== undefined ? `Editor | ${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 </script>
@@ -189,6 +209,10 @@
         <em class="block p-1/4 text-dark">Your project is empty. Start by creating a new item in the sidebar.</em>
       {/if}
     </div>
+  {:else if loading}
+    <div class="fullscreen-overlay">
+      <div class="spinner"></div>
+    </div>
   {:else}
     <Empty />
   {/if}
@@ -204,7 +228,7 @@
   {/if}
 </div>
 
-{#if !$isSignedIn}
+{#if !loading && !$isSignedIn}
   <div class="alerts">
     <div class="alert alert--warning">
       You are not signed in and nothing you do will be saved!
