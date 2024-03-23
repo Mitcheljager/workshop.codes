@@ -38,10 +38,6 @@ function loadMorePosts(event) {
 }
 
 function getInfiniteScrollContent(element) {
-  const progressBar = new Turbolinks.ProgressBar()
-  progressBar.setValue(0)
-  progressBar.show()
-
   element.innerHTML = "<div class='spinner'></div>"
 
   // Get last requested post set URL
@@ -65,9 +61,6 @@ function getInfiniteScrollContent(element) {
     type: "get",
     url: requestUrlString,
     success: (response) => {
-      progressBar.setValue(1)
-      progressBar.hide()
-
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
         element.innerHTML = "Load more"
@@ -77,9 +70,6 @@ function getInfiniteScrollContent(element) {
       timeago.initialize()
     },
     error: (error) => {
-      progressBar.setValue(1)
-      progressBar.hide()
-
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
         console.log("more button")
