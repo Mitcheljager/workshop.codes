@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  require "httparty"
-
   include EmailNotificationsHelper
   include NotificationsHelper
 
