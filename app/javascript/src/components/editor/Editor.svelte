@@ -42,10 +42,7 @@
     $isSignedIn = _isSignedIn
 
     ;[data, userProjects] = (
-      await Promise.allSettled([
-        fetchData().then(r => r || {}),
-        fetchProjects().then(r => r || [])
-      ])
+      await Promise.allSettled([fetchData(), fetchProjects()])
     ).map(promise => promise.value)
 
     if (!data) return
