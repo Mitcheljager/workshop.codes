@@ -4,6 +4,8 @@ class EditorController < ApplicationController
   def data
     respond_to do |format|
       format.json {
+        expires_in 4.hours, public: true
+
         response = Rails.cache.fetch("editor_data", expires_in: 1.day) do
           events = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
           actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
@@ -22,10 +24,17 @@ class EditorController < ApplicationController
           }
         end
 
-        current_user_projects(:workshop_codes)
-        response["current_user_projects"] = @projects
-
         render json: response, layout: false
+      }
+    end
+  end
+
+  def user_projects
+    respond_to do |format|
+      format.json {
+        current_user_projects(:workshop_codes)
+
+        render json: @projects, layout: false
       }
     end
   end

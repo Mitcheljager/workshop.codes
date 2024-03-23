@@ -24,6 +24,7 @@
 
   let fetchArticle
   let data = null
+  let userProjects = null
   let defaults = {}
   let loading = true
 
@@ -38,16 +39,22 @@
   onMount(async() => {
     loading = true
 
-    data = await fetchData()
+    $isSignedIn = _isSignedIn
+
+    ;[data, userProjects] = (
+      await Promise.allSettled([
+        fetchData().then(r => r || {}),
+        fetchProjects().then(r => r || [])
+      ])
+    ).map(promise => promise.value)
 
     if (!data) return
 
     $workshopConstants = data.constants
-    $projects = data.current_user_projects || []
+    $projects = userProjects || []
     defaults = data.defaults || {}
 
     $currentItem = $items?.[0] || {}
-    $isSignedIn = _isSignedIn
 
     loading = false
   })
@@ -153,6 +160,20 @@
         alert(`Something went wrong while loading, please try again. ${ error }`)
       })
   }
+
+  async function fetchProjects() {
+    if (!$isSignedIn) return []
+
+    return new FetchRails("/editor/user_projects.json").get()
+      .then(data => {
+        if (!data) throw Error("No projects data was returned.")
+
+        return JSON.parse(data)
+      })
+      .catch(error => {
+        alert(`Something went wrong while loading, please try again. ${ error }`)
+      })
+  }
 </script>
 
 <svelte:window bind:innerWidth={$screenWidth} />
@@ -163,7 +184,7 @@
       <Logo />
     </button>
 
-    {#if $projects}
+    {#if !loading && $projects}
       <ProjectsDropdown />
     {/if}
 
