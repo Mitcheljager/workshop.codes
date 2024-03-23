@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get "explanation", to: "pages#explanation"
 
   get "editor", to: "editor#index", as: "editor"
+  get "editor/data", "editor#data"
+  get "editor/user_projects", "editor#user_projects"
   get "workshop-ui", to: "editor#zez_ui", as: "zez_ui"
 
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
