@@ -105,6 +105,7 @@ $top-height: 4rem;
 }
 
 .editor__content {
+  position: relative;
   grid-area: content;
   font-size: calc(var(--editor-font-size, 14) * 1px);
 
@@ -120,6 +121,54 @@ $top-height: 4rem;
     height: calc(100vh - #{$top-height});
 
     @include styled-scrollbar;
+  }
+}
+
+.editor-hidden-item-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 1rem;
+  background-color: var(--secondary);
+  color: #fff;
+  opacity: 0.5;
+  transition: opacity 200ms linear;
+  user-select: none;
+
+  &__tooltip {
+    $tooltip-bg-color: $bg-darker;
+    $tooltip-arrow-size: 0.5rem;
+
+    position: absolute;
+    top: calc(100% + #{$tooltip-arrow-size});
+    right: 0;
+    width: max-content;
+    max-width: 200px;
+    padding: 0.25em 0.5em;
+    background: $tooltip-bg-color;
+    pointer-events: none;
+    display: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: -$tooltip-arrow-size;
+      right: 0.5rem;
+      border-inline: $tooltip-arrow-size solid transparent;
+      border-bottom: $tooltip-arrow-size solid $tooltip-bg-color;
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:hover &__tooltip {
+    display: initial;
   }
 }
 
