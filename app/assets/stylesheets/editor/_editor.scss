@@ -137,38 +137,38 @@ $top-height: 4rem;
   transition: opacity 200ms linear;
   user-select: none;
 
-  &__tooltip {
-    $tooltip-bg-color: $bg-darker;
-    $tooltip-arrow-size: 0.5rem;
-
-    position: absolute;
-    top: calc(100% + #{$tooltip-arrow-size});
-    right: 0;
-    width: max-content;
-    max-width: 200px;
-    padding: 0.25em 0.5em;
-    background: $tooltip-bg-color;
-    pointer-events: none;
-    display: none;
-
-    &::before {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 0;
-      top: -$tooltip-arrow-size;
-      right: 0.5rem;
-      border-inline: $tooltip-arrow-size solid transparent;
-      border-bottom: $tooltip-arrow-size solid $tooltip-bg-color;
-    }
-  }
-
   &:hover {
     opacity: 1;
-  }
 
-  &:hover &__tooltip {
-    display: initial;
+    .editor-hidden-item-indicator__tooltip {
+      display: initial;
+    }
+  }
+}
+
+.editor-hidden-item-indicator__tooltip {
+  $tooltip-bg-color: $bg-darker;
+  $tooltip-arrow-size: 0.5rem;
+
+  position: absolute;
+  top: calc(100% + #{$tooltip-arrow-size});
+  right: 0;
+  width: max-content;
+  max-width: 200px;
+  padding: 0.25em 0.5em;
+  background: $tooltip-bg-color;
+  pointer-events: none;
+  display: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -$tooltip-arrow-size;
+    right: 0.5rem;
+    border-inline: $tooltip-arrow-size solid transparent;
+    border-bottom: $tooltip-arrow-size solid $tooltip-bg-color;
   }
 }
 
