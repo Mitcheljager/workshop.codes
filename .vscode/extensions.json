@@ -2,6 +2,7 @@
 	"recommendations": [
 		"svelte.svelte-vscode",
 		"dbaeumer.vscode-eslint",
-    "Orta.vscode-jest"
+    "Orta.vscode-jest",
+    "KoichiSasada.vscode-rdbg"
 	]
 }
