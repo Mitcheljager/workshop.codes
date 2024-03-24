@@ -29,14 +29,11 @@
   let defaults = {}
   let loading = true
 
+  $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
+    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
+
   let isCurrentItemInherentlyHidden = false
-
-  $: if ($currentProject && $sortedItems?.length) {
-    if ($currentItem && !Object.keys($currentItem).length)
-      $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
-
-    isCurrentItemInherentlyHidden = isInherentlyHidden($currentItem)
-  }
+  $: isCurrentItemInherentlyHidden = $currentItem && isInherentlyHidden($currentItem)
 
   $: if (data) $completionsMap = parseKeywords($settings)
 
@@ -154,19 +151,13 @@
   }
 
   function isInherentlyHidden(item) {
-    if (item.hidden) {
-      return true
-    }
-
-    if (item.parent) {
-      const parent = $sortedItems.find((parentItem) => parentItem.id === item.parent)
-
-      if (parent) {
-        return isInherentlyHidden(parent)
-      }
-    }
-
-    return false
+    if (item.hidden) return true
+    if (!item.parent) return false
+    
+    const parent = $sortedItems.find((parentItem) => parentItem.id === item.parent)
+    if (!parent) return false
+    
+    return isInherentlyHidden(parent)
   }
 
   async function fetchData() {
