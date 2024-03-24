@@ -5,22 +5,41 @@
 	"version": "0.2.0",
 	"configurations": [
     {
-      // Required gems: ruby-debug-base and ruby-debug-ide
-      // Required extension: rebornix.ruby
-      "name": "Rails server",
-      "type": "Ruby",
+      // Required gems: debug
+      // Required extension: KoichiSasada.vscode-rdbg
+      "name": "Rails Server",
+      "type": "rdbg",
       "request": "launch",
-      "program": "${workspaceRoot}/bin/rails",
-      "args": [
-        "server"
-      ]
+      "command": "bundle exec",
+      "script": "rails s",
+      "useBundler": true,
+      "cwd": "${workspaceFolder}",
     },
     {
+      // Required gems: debug
+      // Required extension: KoichiSasada.vscode-rdbg
+      "name": "Webpack Dev Server",
+      "type": "rdbg",
+      "request": "launch",
+      "script": "./bin/webpack-dev-server",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+			"name": "Chrome against localhost:3000",
 			"type": "chrome",
 			"request": "launch",
-			"name": "Chrome against localhost:3000",
 			"url": "http://localhost:3000",
 			"webRoot": "${workspaceFolder}/app"
 		}
-	]
+	],
+  "compounds": [
+    {
+      "name": "All",
+      "configurations": [
+        "Rails Server",
+        "Webpack Dev Server",
+        "Chrome against localhost:3000"
+      ]
+    }
+  ]
 }
