@@ -7,7 +7,7 @@
 
   <div class="filter-actions">
     <% if is_filter_active? %>
-      <%= button_tag t("filter.active"), name: "Filter is active", class: "filter__link filter__link--active",
+      <%= button_tag "Filter active", name: "Filter is active", class: "filter__link filter__link--active",
                      data: {
                       action: "toggle-content get-filter-content",
                       url: filter_partial_path(params.permit!),

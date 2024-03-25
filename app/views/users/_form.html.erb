@@ -13,29 +13,29 @@
     <% end %>
 
     <div class="form-field">
-      <%= f.label :username, t("users.form.username.label"), class: "form-label" %>
-      <%= f.text_field :username, placeholder: t("users.form.username.label"), class: "form-input" %>
+      <%= f.label :username, "Username", class: "form-label" %>
+      <%= f.text_field :username, placeholder: "Username", class: "form-input" %>
     </div>
 
     <hr class="small">
 
     <div class="form-field">
-      <%= f.label :password, t("users.form.password.label"), class: "form-label" %>
-      <%= f.password_field :password, placeholder: t("users.form.password.label"), class: "form-input" %>
+      <%= f.label :password, "Password", class: "form-label" %>
+      <%= f.password_field :password, placeholder: "Password", class: "form-input" %>
 
       <div class="form-hint">Please use a unique password that is different from the one you use for Overwatch. Passwords are encrypted and securely stored.</div>
     </div>
 
     <div class="form-field">
-      <%= f.label :password_confirmation, t("users.form.password_confirmation.label"), class: "form-label" %>
-      <%= f.password_field :password_confirmation, placeholder: t("users.form.password_confirmation.label"), class: "form-input" %>
+      <%= f.label :password_confirmation, "Password confirmation", class: "form-label" %>
+      <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-input" %>
     </div>
 
     <hr class="small">
 
     <div class="form-field">
-      <%= f.label :email, "#{ t("users.form.email.label") } #{ t("users.form.optional") }", class: "form-label" %>
-      <%= f.email_field :email, placeholder: t("users.form.email.label"), class: "form-input" %>
+      <%= f.label :email, "#{ "Email address" } #{ "(Optional)" }", class: "form-label" %>
+      <%= f.email_field :email, placeholder: "Email address", class: "form-input" %>
 
       <div class="form-hint">Your email address is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your email address is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.</div>
     </div>
@@ -44,11 +44,11 @@
 
     <div class="form-group checkbox">
       <%= check_box_tag :remember_me %>
-      <%= label_tag :remember_me, t("users.form.remember_me") %>
+      <%= label_tag :remember_me, "Remember me (uses cookies)" %>
     </div>
 
     <p class="form-hint"><%= t("users.form.tos_html", terms_of_service: link_to(t("footer.tos"), tos_path, class: "text-white")) %></p>
 
-    <%= submit_tag t("users.form.submit"), class: "button w-100" %>
+    <%= submit_tag "Submit", class: "button w-100" %>
   <% end %>
 </div>

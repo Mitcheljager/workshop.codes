@@ -16,12 +16,12 @@
         required: true %>
     </div>
 
-    <%= button_tag defined?(comment) ? t("comment.edit") : t("comment.submit"), class: "button mt-1/4" %>
+    <%= button_tag defined?(comment) ? "Edit" : "Comment", class: "button mt-1/4" %>
 
     <small class="button-label">&nbsp; <%= t "comment.max_characters", count: 2000 %></small>
   <% end %>
 <% else %>
   <div class="well well--dark block <%= 'mb-1/2' unless @comments.size %>">
-    <%= link_to t("comment.log_in"), login_path, class: "text-white" %> or <%= link_to t("comment.sign_up"), new_user_path, class: "text-white" %> to place a comment.
+    <%= link_to "Log in", login_path, class: "text-white" %> or <%= link_to "Sign up", new_user_path, class: "text-white" %> to place a comment.
   </div>
 <% end %>

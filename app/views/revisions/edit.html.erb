@@ -9,7 +9,7 @@
                 revision_path(@revision),
                 method: :patch,
                 params: { revision: { visible: false } },
-                data: { disable_with: t("global.processing"), confirm: "Are you sure? Once the Revision is hidden it cannot be made visible again." },
+                data: { disable_with: "Processing...", confirm: "Are you sure? Once the Revision is hidden it cannot be made visible again." },
                 form: { autocomplete: "off" },
                 remote: true,
                 class: "button button--dark button--small mt-0" %>

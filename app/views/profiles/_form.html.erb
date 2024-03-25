@@ -13,7 +13,7 @@
     <% else %>
       <em data-toggle-content>
         <small>
-          <%= tag.strong t("profile.form.not_verified"), class: "cursor-pointer inline-block mt-1/2", data: { action: "toggle-content" } %>
+          <%= tag.strong "You are not verified (?)", class: "cursor-pointer inline-block mt-1/2", data: { action: "toggle-content" } %>
           <div data-role="content-to-toggle snippet-container" style="display: none">
             <p>User names are not unique. A battletag can be the same for multiple users. Being verified helps users identify that you are indeed you. Furthermore if you are logged in with battle.net you will claim the url without the id. For example path/username#12345 will become path/username. The old url will also remain functional.</p>
             <p>If you wish to be verified, please contact Mitsiee#9370 on Discord or @ me wherever you want on the Elo Hell Workshop Discord.</p>
@@ -24,7 +24,7 @@
     <% end %>
 
     <div class="form-group mt-1/2">
-      <%= form.label :description, t("profile.form.description.label"), class: "form-label" %>
+      <%= form.label :description, "Description", class: "form-label" %>
 
       <div class="form-hint">
         Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you. Basic Markdown enabled. Limited to 255 characters.
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-group-max-width mt-1/2">
-      <%= form.label :link, t("profile.form.link.label"), class: "form-label" %>
+      <%= form.label :link, "Link", class: "form-label" %>
       <p class="form-hint">
         Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
       </p>
@@ -44,7 +44,7 @@
 
     <hr class="small mt-1/1">
 
-    <%= submit_tag t("profile.form.submit"), class: "button pr-1/1 pl-1/1", data: { disable_with: "Submitting..." } %>
+    <%= submit_tag "Save", class: "button pr-1/1 pl-1/1", data: { disable_with: "Submitting..." } %>
     <%= button_tag "Cancel", type: "button", class: "button button--secondary pr-1/1 pl-1/1", onclick: "location.search = '?tab=about-you'" %>
   </div>
 
@@ -53,7 +53,7 @@
 
     <div class="well well--dark block mt-1/2">
       <div class="form-group-max-width">
-        <%= form.label :profile_image, t("profile.form.image.label"), class: "form-label" %>
+        <%= form.label :profile_image, "Profile image", class: "form-label" %>
 
         <div class="profile-image">
           <%= image_tag (@user.profile_image.attached? ? rails_public_blob_url(@user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed) : "//:0"),
@@ -77,7 +77,7 @@
     </div>
 
     <div class="well well--dark block mt-1/2">
-      <%= form.label :banner_image, t("profile.form.banner_image.label"), class: "form-label" %>
+      <%= form.label :banner_image, "Banner image", class: "form-label" %>
       <p class="form-hint mt-1/4 mb-0">
         This image is displayed at the top of your profile.
       </p>
@@ -101,7 +101,7 @@
 
     <hr class="small mt-1/1">
 
-    <%= submit_tag t("profile.form.submit"), class: "button pr-1/1 pl-1/1", data: { disable_with: "Submitting..." } %>
+    <%= submit_tag "Save", class: "button pr-1/1 pl-1/1", data: { disable_with: "Submitting..." } %>
     <%= button_tag "Cancel", type: "button", class: "button button--secondary pr-1/1 pl-1/1", onclick: "location.search = '?tab=images'" %>
   </div>
 

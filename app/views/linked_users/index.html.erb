@@ -1,6 +1,6 @@
-<% content_for :page_title, t("account.navigation.linked_users") %>
+<% content_for :page_title, "Linked Accounts" %>
 
-<%= render "layouts/account", title: t("account.navigation.linked_users") do %>
+<%= render "layouts/account", title: "Linked Accounts" do %>
   <% if flash.keys.any? %>
     <div class="warning warning--<%= flash.keys.first %> mt-0 mb-1/2"><%= flash[flash.keys.first] %></div>
   <% end %>
@@ -33,11 +33,11 @@
         <tr>
           <td><strong><%= linked_user.provider %></strong></td>
           <td><%= linked_user.username %></td>
-          <td><%= link_to t("linked_users.destroy.action"),
+          <td><%= link_to "Remove",
                     destroy_linked_user_path(linked_user.id),
                     class: "text-red",
                     method: :delete,
-                    data: { confirm: t("linked_users.destroy.confirm") } %>
+                    data: { confirm: "Are you sure? This will unlink the account, but you can link the account again if you wish." } %>
           </td>
         </td>
       <% end %>

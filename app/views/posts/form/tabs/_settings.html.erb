@@ -5,7 +5,7 @@
     <div class="well well--dark block pb-0">
       <div class="checkbox">
         <%= form.radio_button :status, "public", checked: !@post.unlisted && !@post.private %>
-        <%= form.label :status, t("posts.form.public.label"), value: "public" %>
+        <%= form.label :status, "Public", value: "public" %>
       </div>
 
       <div class="form-hint mt-1/8">
@@ -14,7 +14,7 @@
 
       <div class="checkbox">
         <%= form.radio_button :status, "unlisted", checked: @post.unlisted %>
-        <%= form.label :status, t("posts.form.unlisted.label"), value: "unlisted" %>
+        <%= form.label :status, "Unlisted", value: "unlisted" %>
       </div>
 
       <div class="form-hint mt-1/8">
@@ -23,7 +23,7 @@
 
       <div class="checkbox">
         <%= form.radio_button :status, "private", checked: @post.private %>
-        <%= form.label :status, t("posts.form.private.label"), value: "private" %>
+        <%= form.label :status, "Private", value: "private" %>
       </div>
 
       <div class="form-hint mt-1/8">
@@ -33,7 +33,7 @@
       <% unless @post.persisted? && !@post.draft? %>
         <div class="checkbox">
           <%= form.radio_button :status, "draft", checked: @post.draft %>
-          <%= form.label :status, t("posts.form.draft.label"), value: "draft" %>
+          <%= form.label :status, "Draft", value: "draft" %>
         </div>
 
         <div class="form-hint mt-1/8">
@@ -51,7 +51,7 @@
       <% if @post.ptr? %>
         <div class="checkbox">
           <%= form.check_box :ptr, checked: @post.ptr?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-          <%= form.label :ptr, t("posts.form.ptr.label") %>
+          <%= form.label :ptr, "PTR Only?" %>
         </div>
 
         <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
@@ -76,7 +76,7 @@
                 autocomplete: "off" %>
 
             <%= form.label :overwatch_2_compatible,
-                t("posts.form.overwatch_2_compatible.label"),
+                "Overwatch 2?",
                 class: "switch-checkbox__label" %>
           </div>
 
@@ -93,7 +93,7 @@
   <div class="form-group mt-1/1" data-reveal-by-checkbox>
     <div class="checkbox">
       <%= form.check_box :include_nice_url, checked: @post.nice_url.present?, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-      <%= form.label :include_nice_url, t("posts.form.nice_url.label") %>
+      <%= form.label :include_nice_url, "Include Pretty URL" %>
     </div>
 
     <p class="form-hint">
@@ -131,7 +131,7 @@
     <% end %>
 
     <% unless @post.min_players.present? && @post.max_players.present? %>
-      <%= tag.small t("posts.form.num_players.warning"), class: "block mb-1/2 text-red", data: { role: "vanish-on-slider-update" } %>
+      <%= tag.small "Number of supported players has not been set. Use the slider below to specify how many players your mode can support.", class: "block mb-1/2 text-red", data: { role: "vanish-on-slider-update" } %>
     <% end %>
 
     <%= content_tag :div, nil, class: "noUi--large", data: { role: "num-player-slider", type: "post", min_players: @post.min_players, max_players: @post.max_players }, name: "post[number_of_supported_players]" %>
@@ -161,34 +161,34 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :tags, t("posts.form.tags.label"), class: "form-label" %>
+    <%= form.label :tags, "Tags", class: "form-label" %>
 
     <div class="form-hint">
       Choose tags that people might search for to find your item. You can choose up to 5 tags. A large amount of irrelevant tags might result in your item being more difficult to find. <strong>Separate tags with a comma and a space ",&nbsp;".</strong>
     </div>
 
-    <%= form.text_field :tags, class: "form-input", placeholder: t("posts.form.tags.placeholder") %>
+    <%= form.text_field :tags, class: "form-input", placeholder: "These, are, separate, tags" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :version, t("posts.form.version.label"), class: "form-label" %>
+    <%= form.label :version, "Version", class: "form-label" %>
 
     <div class="form-hint">
       Add a version number if you plan on making revisions in the future. This will help people find the most up to date version of your item.
     </div>
 
-    <%= form.text_field :version, class: "form-input", placeholder: t("posts.form.version.placeholder"), data: { role: "linked-input", key: "version" } %>
+    <%= form.text_field :version, class: "form-input", placeholder: "E.g. 1.0.5", data: { role: "linked-input", key: "version" } %>
   </div>
 
   <div class="form-group">
-    <%= form.label :collection, t("posts.form.collection.label"), class: "form-label" %>
+    <%= form.label :collection, "Collection", class: "form-label" %>
 
     <div class="form-hint">
       Collections allow you to group multiple Codes together to help users more quickly find the others. This can for example be used when you have a gamemode with different codes for different maps.
     </div>
 
-    <%= form.select :collection_id, options_from_collection_for_select(current_user.collections, "id", "title", @post.collection_id), { include_blank: current_user.collections.any? ? t("posts.form.collection.none") : t("posts.form.collection.empty") }, { class: "form-select form-select--small" } %>
-    <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-1/4", placeholder: t("posts.form.collection.placeholder") %>
+    <%= form.select :collection_id, options_from_collection_for_select(current_user.collections, "id", "title", @post.collection_id), { include_blank: current_user.collections.any? ? "None" : "You have not yet created a collection" }, { class: "form-select form-select--small" } %>
+    <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-1/4", placeholder: "Create new collection" %>
 
     <div class="form-hint mt-1/8 mb-0">
       <small>Min 3, max 50 characters.</small>

@@ -19,7 +19,7 @@
 
   <div class="checkbox">
     <%= form.check_box :email_notification, checked: @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?), data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-    <%= form.label :email_notification, t("posts.form.expiry_notifications.label") %>
+    <%= form.label :email_notification, "Also notify me by email" %>
   </div>
 
   <span class="form-hint">
@@ -30,7 +30,7 @@
     <div class="form-group-columns">
       <div class="well well--dark block">
         <div class="form-group mt-0">
-          <%= form.label :email, t("posts.form.expiry_notifications.email.label"), class: "form-label" %>
+          <%= form.label :email, "Email address", class: "form-label" %>
           <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
 
           <p class="form-hint mb-0">To make sure we don't end up in your spam folder, add <strong>notifications@workshop.codes</strong> to your approved senders list.</p>

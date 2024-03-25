@@ -1,4 +1,4 @@
-<% content_for :page_title, t("sessions.login.title") %>
+<% content_for :page_title, "Login" %>
 <% content_for :bg_size, "large" unless params[:page] %>
 
 <div class="form-group-columns mt-1/1">
@@ -15,24 +15,24 @@
           <%= render "ollie" %>
 
           <div class="form-group mt-1/8">
-            <%= form.label :username, t("sessions.login.username"), class: "form-label" %>
-            <%= form.text_field :username, placeholder: t("sessions.login.username"), class: "form-input" %>
+            <%= form.label :username, "Username", class: "form-label" %>
+            <%= form.text_field :username, placeholder: "Username", class: "form-input" %>
           </div>
 
           <div class="form-group mt-1/4">
-            <%= form.label :password, t("sessions.login.password"), class: "form-label" %>
-            <%= form.password_field :password, placeholder: t("sessions.login.password"), class: "form-input" %>
+            <%= form.label :password, "Password", class: "form-label" %>
+            <%= form.password_field :password, placeholder: "Password", class: "form-input" %>
           </div>
 
           <div class="form-group checkbox">
             <%= form.check_box :remember_me %>
-            <%= form.label :remember_me, t("sessions.login.remember_me") %>
+            <%= form.label :remember_me, "Remember me (uses cookies)" %>
           </div>
 
-          <%= submit_tag t("sessions.login.submit"), class: "button button--secondary mt-1/2 w-100", data: { disable_with: "Submitting..." } %>
+          <%= submit_tag "Submit", class: "button button--secondary mt-1/2 w-100", data: { disable_with: "Submitting..." } %>
 
           <div class="mt-1/4">
-            <small><%= link_to t("sessions.login.forgot_password"), new_forgot_password_path %></small>
+            <small><%= link_to "Forgot your password?", new_forgot_password_path %></small>
           </div>
         <% end %>
 
@@ -60,7 +60,7 @@
           <p class="mt-0">Don't have an account?</p>
         </center>
 
-        <div><%= link_to t("sessions.create_user.button"), new_user_path, class: "button w-100" %></div>
+        <div><%= link_to "Create an account", new_user_path, class: "button w-100" %></div>
       </div>
     </div>
 

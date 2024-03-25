@@ -1,6 +1,6 @@
-<% content_for :page_title, t("accessibility.edit.title") %>
+<% content_for :page_title, "Accessibility" %>
 
-<%= render "layouts/account", title: t("accessibility.edit.title") do %>
+<%= render "layouts/account", title: "Accessibility" do %>
   <% if flash[:alert] %>
     <div class="warning mt-0 mb-1/2"><%= flash[:alert] %></div>
   <% end %>
@@ -10,7 +10,7 @@
   </p>
 
   <div class="well well--dark mb-1/4">
-    <%= button_to t("accessibility.edit.high_contrast.label"), update_accessibility_path, method: :patch, params: { user: { high_contrast: !current_user.high_contrast } },
+    <%= button_to "High Contrast", update_accessibility_path, method: :patch, params: { user: { high_contrast: !current_user.high_contrast } },
                   class: "switch__input",
                   form_class: "switch #{ "switch--active" if current_user.high_contrast }" %>
 
@@ -20,7 +20,7 @@
   </div>
 
   <div class="well well--dark mb-1/4">
-    <%= button_to t("accessibility.edit.large_fonts.label"), update_accessibility_path, method: :patch, params: { user: { large_fonts: !current_user.large_fonts } },
+    <%= button_to "Large fonts", update_accessibility_path, method: :patch, params: { user: { large_fonts: !current_user.large_fonts } },
                   class: "switch__input",
                   form_class: "switch #{ "switch--active" if current_user.large_fonts }" %>
 

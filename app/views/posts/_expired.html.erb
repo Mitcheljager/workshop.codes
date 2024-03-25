@@ -8,11 +8,11 @@
     <div class="mt-1/8">
       <p><small>If you are certain your code is immortal and has not expired you can mark it as such. To find out you can import this code in-game. If it is still functional even though you are seeing this message, it's likely immortal.</small></p>
 
-      <%= button_to t("posts.show.immortal.button"),
+      <%= button_to "This code is immortal",
           immortalise_post_path,
           method: :post,
           params: { code: @post.code },
-          data: { disable_with: t("global.processing"), confirm: "Are you sure? Check your code before clicking this button. This action cannot be undone." },
+          data: { disable_with: "Processing...", confirm: "Are you sure? Check your code before clicking this button. This action cannot be undone." },
           form: { autocomplete: "off" },
           remote: true,
           class: "button button--light button--small text-orange mt-1/8" %>
