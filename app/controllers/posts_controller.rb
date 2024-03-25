@@ -100,7 +100,6 @@ class PostsController < ApplicationController
       Post.transaction do
         @post = Post.new(post_params)
         @post.user_id = current_user.id
-        @post.locale = current_locale
         @post.last_revision_created_at = Time.now
 
         set_post_status

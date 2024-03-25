@@ -10,7 +10,7 @@
   Categories:
 
   <% @post.categories.each do |category| %>
-    <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
+    <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
   <% end %>
 </div>
 
@@ -31,7 +31,7 @@
     All
   <% else %>
     <% @post.heroes.take(5).each do |hero| %>
-      <%= link_to i18n_value_in_array(heroes, hero), filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
+      <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
     <% end %>
 
     <%= "and #{ @post.heroes.length - 5 } more..." if @post.heroes.length > 5 %>
@@ -45,7 +45,7 @@
     All
   <% else %>
     <% @post.maps.take(5).each do |map| %>
-      <%= link_to i18n_value_in_array(maps, map), filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
+      <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
     <% end %>
 
     <%= "and #{ @post.maps.length - 5 } more..." if @post.maps.length > 5 %>

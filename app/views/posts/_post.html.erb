@@ -1,6 +1,6 @@
-<% cache_unless current_user, [current_locale, post] do %>
+<% cache_unless current_user, [post] do %>
   <article class="item" data-code="<%= post.code %>">
-    <% cache [current_locale, post, "title_thumbnail"] do %>
+    <% cache [post, "title_thumbnail"] do %>
       <%= render "posts/thumbnail", post: post %>
 
       <div class="item__title">
@@ -12,7 +12,7 @@
       <%= render "favorites/form", post: post %>
     </div>
 
-    <% cache [current_locale, post, "information"] do %>
+    <% cache [post, "information"] do %>
       <%= render "posts/code", post: post %>
 
       <div class="item__details">
@@ -25,7 +25,7 @@
           Categories |
 
           <% post.categories.each do |category| %>
-            <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
+            <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
           <% end %>
         </div>
 

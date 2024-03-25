@@ -72,14 +72,6 @@ module ApplicationHelper
     YAML.load(File.read(Rails.root.join("config/arrays", "abilities.yml")))
   end
 
-  def current_locale
-    I18n.locale == :mixed ? "en" : I18n.locale.to_s
-  end
-
-  def i18n_value_in_array(array, value)
-    array.select { |item| item["en"].downcase == value&.downcase }[0]&.fetch(current_locale, nil)
-  end
-
   def user_menu_items
     [
       { title: t("account.navigation.overview"), url: account_path, data: { prefetch: false } },

@@ -1,4 +1,4 @@
-<% cache_unless current_user, [current_locale, post, "card"] do %>
+<% cache_unless current_user, [post, "card"] do %>
   <% image_url = url_for_post_thumbnail(post, 300, 171, "medium") %>
 
   <div class="card" data-code="<%= post.code %>">

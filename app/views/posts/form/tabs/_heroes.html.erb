@@ -12,7 +12,7 @@
   <div class="form-group-triple">
     <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
       <div class="form-group" data-checkbox-group>
-        <h3><%= hero_category[current_locale] %></h3>
+        <h3><%= hero_category["en"] %></h3>
 
         <div class="checkbox">
           <%= form.check_box "checkbox_group_#{ hero_category["en"] }", data: { action: "checkbox-select-all" } %>
@@ -27,7 +27,7 @@
             <%= form.label "heroes_#{ hero["en"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "_") }" do %>
               <% hero_icon = hero_name_to_icon_url(hero["en"]) %>
               <%= image_tag hero_icon, height: 20, loading: "lazy" if hero_icon.present? %>
-              <%= i18n_value_in_array(heroes, hero["en"]) %>
+              <%= hero["en"] %>
               <%= tag.small "OW2", class: "text-overwatch-2" if hero["overwatch_2"].present? %>
             <% end %>
           </div>

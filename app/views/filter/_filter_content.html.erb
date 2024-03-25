@@ -1,14 +1,13 @@
 <div class="filter__group">
   <div class="filter__item <%= "filter__item--active" if params[:category] %> dropdown" data-dropdown data-filter data-default="Categories...">
     <% current_category = params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") if params[:category] %>
-    <% i18n_category = i18n_value_in_array(categories, current_category) if current_category.present? %>
-    <%= link_to current_category.present? ? i18n_category : "Categories...", "#",
+    <%= link_to current_category.present? ? current_category : "Categories...", "#",
                 data: { action: "toggle-dropdown", filter_type: "categories", value: params[:category] } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
       <% categories.each do |category| %>
-        <%= link_to category[current_locale], build_filter_path(:category, to_slug(category["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(category["en"]) } %>
+        <%= link_to category["en"], build_filter_path(:category, to_slug(category["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(category["en"]) } %>
       <% end %>
     </div>
   </div>
@@ -20,10 +19,10 @@
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
       <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
-        <span class="dropdown__label"><%= hero_category[current_locale] %></span>
+        <span class="dropdown__label"><%= hero_category["en"] %></span>
 
         <% heroes.each do |hero| %>
-          <% name = i18n_value_in_array(heroes, hero["en"]) %>
+          <% name = hero["en"] %>
           <%= link_to build_filter_path(:hero, to_slug(hero["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(hero["en"]) } do %>
             <%= name %>
             <%= tag.small "OW2", class: "text-overwatch-2" if hero["overwatch_2"].present? %>
@@ -40,12 +39,11 @@
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
       <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
-        <span class="dropdown__label"><%= map_type[current_locale]  %></span>
+        <span class="dropdown__label"><%= map_type["en"]  %></span>
 
         <% maps.each do |map| %>
-          <% name = i18n_value_in_array(maps, map["en"]) %>
           <%= link_to build_filter_path(:map, to_slug(map["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(map["en"]) } do %>
-            <%= name %>
+            <%= map["en"] %>
             <%= tag.small "OW2", class: "text-overwatch-2" if map["overwatch_2"].present? %>
           <% end %>
         <% end %>

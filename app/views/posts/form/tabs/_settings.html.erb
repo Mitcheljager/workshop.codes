@@ -154,7 +154,7 @@
 
     <%= svelte_component "LimitedCheckboxes", {
                          name: "post[categories][]",
-                         options: categories.map { |category| [category[current_locale], category["en"]] },
+                         options: categories.map { |category| [category["en"], category["en"]] },
                          selected: @post.categories || [] } do %>
       <%= form.check_box :categories, { multiple: true, checked: false, include_hidden: false }, "Team Deathmatch" %>
     <% end %>

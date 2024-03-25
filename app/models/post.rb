@@ -186,10 +186,6 @@ class Post < ApplicationRecord
                  include: { user: { only: :username } } )
   end
 
-  def self.locale
-    self.where(locale: current_locale)
-  end
-
   def self.select_overview_columns
     self.select(Post.attribute_names - ["snippet", "description", "controls"])
   end
