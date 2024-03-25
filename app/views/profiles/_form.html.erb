@@ -6,7 +6,7 @@
       <div class="well align-start justify-start flex-nowrap mt-1/2">
         <%= inline_svg_tag "icons/verified.svg", height: 30, width: 30, class: "fill-current-color" %>
         <div class="pl-1/4">
-          <%= t "profile.form.verified" %>
+          You're verified!
           <div class="mt-1/8">As a gift for your efforts, you are now able to customize the CSS of your profile page. (<%= link_to "Click here", user_profile_path(current_user), class: "button--link" %> to edit)</li></div>
         </div>
       </div>
@@ -27,7 +27,7 @@
       <%= form.label :description, t("profile.form.description.label"), class: "form-label" %>
 
       <div class="form-hint">
-        <%= t "profile.form.description.help" %>
+        Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you. Basic Markdown enabled. Limited to 255 characters.
       </div>
 
       <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small", maxlength: 255 %>
@@ -36,7 +36,7 @@
     <div class="form-group-max-width mt-1/2">
       <%= form.label :link, t("profile.form.link.label"), class: "form-label" %>
       <p class="form-hint">
-        <%= t "profile.form.link.help_html" %>
+        Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
       </p>
 
       <%= form.text_field :link, placeholder: "Link", class: "form-input" %>
@@ -66,7 +66,7 @@
                             data: { action: "image-preview", target: "profile-image" } %>
 
         <p class="form-hint mt-1/4 mb-0">
-          <%= t "profile.form.image.help" %>
+          The image will be processed to a 140x140 format. Max 2MB.
         </p>
 
         <%= hidden_field_tag :remove_profile_image, "", data: { clear_image_flag: "profile-image" } %>
@@ -79,7 +79,7 @@
     <div class="well well--dark block mt-1/2">
       <%= form.label :banner_image, t("profile.form.banner_image.label"), class: "form-label" %>
       <p class="form-hint mt-1/4 mb-0">
-        <%= t "profile.form.banner_image.description" %>
+        This image is displayed at the top of your profile.
       </p>
 
       <%= image_tag (@user.banner_image.attached? ? rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) : "//:0"),
@@ -91,7 +91,7 @@
                           data: { action: "image-preview", target: "banner" } %>
 
       <p class="form-hint mt-1/4 mb-0">
-        <%= t "profile.form.banner_image.help" %>
+        This image will be processed to a 1920x400 format. Max 2MB.
       </p>
 
       <%= hidden_field_tag :remove_banner_image, "", data: { clear_image_flag: "banner" } %>

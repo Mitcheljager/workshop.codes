@@ -3,7 +3,7 @@
 
 <div class="form-group-columns mt-1/1">
   <div>
-    <h2 class="mt-0 text-black"><center><%= t "sessions.login.title" %></center></h2>
+    <h2 class="mt-0 text-black"><center>Login</center></h2>
 
     <% if flash[:alert] %>
       <div class="warning warning--red br-1 mt-0 mb-1/4"><%= flash[:alert] %></div>
@@ -40,24 +40,24 @@
 
         <%= link_to "/auth/discord", method: :post, class: "button button--discord mt-1/4", data: { prefetch: false, disable_with: "Signing in..." } do %>
           <%= inline_svg_tag "discord.svg", height: 24 %>
-          <%= t "sessions.login.discord" %>
+          Login with Discord
         <% end %>
 
         <%= link_to "/auth/bnet", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false, disable_with: "Signing in..." } do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
-          <%= t "sessions.login.battle_net" %>
+          Login with Battle.net
         <% end %>
       </div>
     </div>
   </div>
 
   <div>
-    <h2 class="mt-1/2 sm:mt-0 text-black"><center><%= t "sessions.create_user.title" %></center></h2>
+    <h2 class="mt-1/2 sm:mt-0 text-black"><center>Create an account</center></h2>
 
     <div class="well well--dark">
       <div class="w-100">
         <center>
-          <p class="mt-0"><%= t "sessions.create_user.content" %></p>
+          <p class="mt-0">Don't have an account?</p>
         </center>
 
         <div><%= link_to t("sessions.create_user.button"), new_user_path, class: "button w-100" %></div>

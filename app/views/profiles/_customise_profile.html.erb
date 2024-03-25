@@ -7,7 +7,7 @@
     <%= form_for current_user, url: update_profile_path, remote: true do |form| %>
       <div class="form-group">
         <%= form.label :custom_css, class: "form-label" do %>
-          <%= t "profile.form.custom_css.label" %>
+          Custom CSS
           <%= inline_svg_tag "icons/verified.svg", class: "profile-banner__verified" %>
         <% end %>
 

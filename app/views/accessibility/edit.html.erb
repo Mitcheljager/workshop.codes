@@ -6,7 +6,7 @@
   <% end %>
 
   <p class="mt-0 mb-1/2">
-    <%= t "accessibility.edit.content"  %>
+    Accessibility options help you better navigate the website in case you have difficulty.
   </p>
 
   <div class="well well--dark mb-1/4">
@@ -15,7 +15,7 @@
                   form_class: "switch #{ "switch--active" if current_user.high_contrast }" %>
 
     <p class="form-hint mt-0 mb-0">
-      <%= t "accessibility.edit.high_contrast.description" %>
+      All contrast on text will be increased. Thin fonts will appear thicker, making it easier to read.
     </p>
   </div>
 
@@ -25,7 +25,7 @@
                   form_class: "switch #{ "switch--active" if current_user.large_fonts }" %>
 
     <p class="form-hint mt-0 mb-0">
-      <%= t "accessibility.edit.large_fonts.description" %>
+      All regular and small fonts will appear larger. Fonts that were already large remain unchanged.
     </p>
   </div>
 <% end %>
