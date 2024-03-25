@@ -73,8 +73,8 @@ export function codeActions(providers) {
      * @param {ViewUpdate} update
      */
     update(update) {
-      if (!(update.docChanged || update.selectionSet || update.viewportChanged))
-      
+      if (!(update.docChanged || update.selectionSet || update.viewportChanged)) return
+
       this.decorations = Decoration.none
 
       const actions = providers
@@ -82,7 +82,7 @@ export function codeActions(providers) {
         .flat()
 
       if (!actions.length) return
-      
+
       const { from } = update.state.selection.main
       const decorationPosition = actions.reduce((position, action) => Math.min(action.position ?? Infinity, position), from)
 

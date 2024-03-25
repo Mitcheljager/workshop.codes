@@ -81,10 +81,10 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
         const indent = "\t".repeat(getIndentForLine(state, cursorFrom, cursorFrom))
 
         let parameterObject = "{"
-        
+
         if (isMultiLine) parameterObject += "\n"
         else parameterObject += " "
-        
+
         parameterObject += args
           .map((value, index) => {
             const keyValue = `${ completion.parameter_keys[index] }: ${ value.trim() }`
@@ -94,8 +94,9 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
 
         if (isMultiLine) parameterObject += "\n" + indent
         else parameterObject += " "
-        
+
         parameterObject += "}"
+
 
         view.dispatch(
           view.state.update({
