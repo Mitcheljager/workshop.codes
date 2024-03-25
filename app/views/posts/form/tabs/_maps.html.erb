@@ -12,12 +12,12 @@
   <div class="form-group-triple">
     <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
       <div class="form-group" data-checkbox-group>
-        <h3><%= map_type["en"] %></h3>
+        <h3><%= map_type %></h3>
 
         <% if maps.count > 1 %>
           <div class="checkbox">
-            <%= form.check_box "checkbox_group_#{ map_type["en"] }", data: { action: "checkbox-select-all" } %>
-            <%= form.label "checkbox_group_#{ map_type["en"] }", "Check all #{map_type["en"]} maps" %>
+            <%= form.check_box "checkbox_group_#{ map_type }", data: { action: "checkbox-select-all" } %>
+            <%= form.label "checkbox_group_#{ map_type }", "Check all #{map_type} maps" %>
           </div>
 
           <br>
@@ -25,9 +25,9 @@
 
         <% maps.each do |map| %>
           <div class="checkbox">
-            <%= form.check_box :maps, { multiple: true, checked: (@post.maps.include?(map["en"]) if @post.maps) }, map["en"], false %>
-            <%= form.label "maps_#{ map["en"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "") }" do %>
-              <%= map["en"] %>
+            <%= form.check_box :maps, { multiple: true, checked: (@post.maps.include?(map["name"]) if @post.maps) }, map["name"], false %>
+            <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "") }" do %>
+              <%= map["name"] %>
               <%= tag.small "OW2", class: "text-overwatch-2" if map["overwatch_2"].present? %>
             <% end %>
           </div>

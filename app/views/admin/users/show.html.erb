@@ -127,7 +127,7 @@
         <%= form.hidden_field :user_id, value: @user.id %>
 
         <%= form.label :badge_id, class: "form-label" %>
-        <%= form.select :badge_id, badges.map { |b| ["#{ b["en"]["label"] } - #{ b["en"]["description"] }", b["id"]] }, {}, class: "form-select w-auto" %>
+        <%= form.select :badge_id, badges.map { |b| ["#{ b["label"] } - #{ b["description"] }", b["id"]] }, {}, class: "form-select w-auto" %>
 
         <br />
 
