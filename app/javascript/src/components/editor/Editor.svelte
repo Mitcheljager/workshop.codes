@@ -18,6 +18,7 @@
   import ProjectRecovery from "./ProjectRecovery.svelte"
   import Logo from "../icon/Logo.svelte"
   import Bugsnag from "../Bugsnag.svelte"
+  import EyeIcon from "../icon/Eye.svelte"
 
   export let bugsnagApiKey = ""
   export let _isSignedIn = false
@@ -30,6 +31,9 @@
 
   $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
+
+  let isCurrentItemInherentlyHidden = false
+  $: isCurrentItemInherentlyHidden = $currentItem && isInherentlyHidden($currentItem)
 
   $: if (data) $completionsMap = parseKeywords($settings)
 
@@ -146,6 +150,16 @@
     })
   }
 
+  function isInherentlyHidden(item) {
+    if (item.hidden) return true
+    if (!item.parent) return false
+    
+    const parent = $sortedItems.find((parentItem) => parentItem.id === item.parent)
+    if (!parent) return false
+    
+    return isInherentlyHidden(parent)
+  }
+
   async function fetchData() {
     return new FetchRails("/editor/data.json").get()
       .then(data => {
@@ -221,6 +235,31 @@
         {#key $settings["word-wrap"]}
           <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
         {/key}
+
+        {#if isCurrentItemInherentlyHidden}
+          <div class="editor-hidden-item-indicator">
+            <span class="editor-hidden-item-indicator__content">
+              <EyeIcon
+                class="vertical-align-text-bottom"
+                height="1rem"
+                fill="currentColor"
+                crossed={true} />
+              Hidden
+            </span>
+
+            <div class="editor-hidden-item-indicator__tooltip">
+              This item or one of its containing folders has been hidden,
+              meaning this file won't be included in the compiled output.
+              <br /><br />
+              To unhide it, hover over the item on the sidebar and press the
+              <EyeIcon
+                class="vertical-align-middle"
+                height="1rem"
+                fill="currentColor"
+                crossed={true} /> icon.
+            </div>
+          </div>
+        {/if}
       {/if}
 
       {#if !$items?.length}
