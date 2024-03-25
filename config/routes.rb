@@ -4,9 +4,19 @@ class FilterContraints
   end
 end
 
+class KoConstraint
+  def matches?(request)
+    request.path.starts_with?('/ko')
+  end
+end
+
 Rails.application.routes.draw do
   concern :paginatable do
     get "(page/:page)", action: :index, on: :collection, as: ""
+  end
+
+  constraints(KoConstraint.new) do
+    get "*path", to: redirect { |params, request| request.path.sub("/ko", "") }, format: false
   end
 
   root "posts#index"
