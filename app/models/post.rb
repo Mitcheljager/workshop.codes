@@ -127,7 +127,7 @@ class Post < ApplicationRecord
   validates :nice_url, uniqueness: true, allow_blank: true, length: { minimum: 7, maximum: 20 }, format: { with: /\A[a-z0-9-]+\z/, message: "is invalid. Only lowercase letter, numbers, and dashes are allowed." }
   validates :description, length: { maximum: POST_DESCRIPTION_LIMIT }
   validates :snippet, length: { maximum: POST_SNIPPET_LIMIT }
-  validates :categories, presence: true, array_length: { maximum: 3 }, array_name_part_of: { array: categories }
+  validates :categories, presence: true, array_length: { maximum: 3 }, array_part_of: { array: categories }
   validates :tags, length: { maximum: 100 }
   validates :heroes, presence: true, array_name_part_of: { array: heroes }
   validates :maps, presence: true, array_name_part_of: { array: maps }
