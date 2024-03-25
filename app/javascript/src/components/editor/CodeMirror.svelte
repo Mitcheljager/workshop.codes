@@ -13,6 +13,7 @@
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
   import { codeActions } from "../../lib/codeActions"
+  import { transformParameterObjectsIntoPositionalParameters } from "../../lib/codeActionProviders/transformParameterObjectsIntoPositionalParameters"
   import { foldBrackets } from "../../lib/foldBrackets"
   import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
@@ -83,21 +84,7 @@
         indentationMarkers(),
         rememberScrollPosition(),
         codeActions([
-          function(update) {
-            const from = update.state.selection.main.from
-            if (!update.state.doc.sliceString(from).startsWith("@codeActionTest"))
-              return
-
-            return [
-              {
-                label: "It works?",
-                position: from,
-                run() {
-                  alert("It works!")
-                }
-              }
-            ]
-          }
+          transformParameterObjectsIntoPositionalParameters
         ]),
         foldBrackets(),
         ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
