@@ -73,22 +73,22 @@ export function codeActions(providers) {
      * @param {ViewUpdate} update
      */
     update(update) {
-      if (update.docChanged || update.selectionSet || update.viewportChanged) {
-        this.decorations = Decoration.none
+      if (!(update.docChanged || update.selectionSet || update.viewportChanged))
+      
+      this.decorations = Decoration.none
 
-        const actions = providers
-          .map((provider) => provider(update) ?? [])
-          .flat()
+      const actions = providers
+        .map((provider) => provider(update) ?? [])
+        .flat()
 
-        if (actions.length > 0) {
-          const { from } = update.state.selection.main
-          const decorationPosition = actions.reduce((position, action) => Math.min(action.position ?? Infinity, position), from)
+      if (!actions.length) return
+      
+      const { from } = update.state.selection.main
+      const decorationPosition = actions.reduce((position, action) => Math.min(action.position ?? Infinity, position), from)
 
-          this.decorations = Decoration.set([
-            createLightBulbDecoration(decorationPosition, actions)
-          ])
-        }
-      }
+      this.decorations = Decoration.set([
+        createLightBulbDecoration(decorationPosition, actions)
+      ])
     }
   }, {
     decorations: (extension) => extension.decorations

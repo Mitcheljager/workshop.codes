@@ -313,7 +313,7 @@
     padding: 0.25rem;
     border-radius: 2px;
     cursor: pointer;
-    transform: translate(-100%, -50%);
+    transform: translateX(-100%) translateY(-50%);
     opacity: 0.5;
     display: inline-block;
   }
