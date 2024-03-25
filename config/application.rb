@@ -28,11 +28,6 @@ module OverwatchWorkshop
     config.active_storage.track_variants = true
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
 
-    config.i18n.available_locales = [:en, :ko]
-    config.i18n.default_locale = :en
-    config.i18n.fallbacks = true
-    config.i18n.fallbacks = [:en]
-
     config.before_configuration do
       env_file = File.join(Rails.root, "config", "local_env.yml")
 
