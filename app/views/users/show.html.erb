@@ -1,6 +1,6 @@
 <% content_for :page_title, "Your account" %>
 
-<%= render "layouts/account", title: t(".welcome_html", name: current_user.username) do %>
+<%= render "layouts/account", title: "Hello there, <strong>#{current_user.username}</strong>" do %>
   <% if current_user.link.blank? && current_user.profile_image.blank? && current_user.description.blank? && current_user.featured_posts.blank? %>
     <div class="well mt-0 mb-1/2">
       <%= link_to "← Customise your profile", edit_profile_path %>

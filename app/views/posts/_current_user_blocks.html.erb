@@ -33,6 +33,9 @@
 <% if @post.last_revision_created_at > 6.months.ago && @post.last_revision_created_at < 5.months.ago %>
   <div class="warning warning--orange shadow-block">
     <p><strong>Your Code may expire soon.</strong></p>
-    <%= t("posts.show.expire_soon.content_html", time: time_ago_in_words(@post.last_revision_created_at + 6.months)) %>
+    <p class="mb-0"><small><strong>Workshop Codes in Overwatch may expire after 6 months</strong>.</small></p>
+    <p class="mb-0 mt-0"><small>After expiration, codes will no longer function and <strong>their contents will be lost</strong>.</small></p>
+    <p class="mt-0"><small>Make sure to renew your import code <a href="/wiki/articles/uploading+new+content+to+existing+import+code" class="text-pure-white">(?)</a> to avoid losing your Workshop mode forever.</small></p>
+    <p><small><em>This code might expire in <%= time_ago_in_words(@post.last_revision_created_at + 6.months) %>.</em></small></p>
   </div>
 <% end %>

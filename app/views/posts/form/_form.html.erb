@@ -25,8 +25,8 @@
 
       <div class="warning warning--mild mt-1/4 pt-1/8 pb-1/8" data-role="reveal-on-difference" style="display: none">
         <p class="mb-0"><mark>Heads up!</mark></p>
-        <p class="mt-0"><small><%= t("posts.form.code_change.explanation_html", article_url: "https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code") %></small></p>
-        <p class="mt-0"><small><%= t("posts.form.code_change.current_code_html", current_code: @post.code) %></small></p>
+        <p class="mt-0"><small>If you aren't trying to have an import code for each version, you probably want to update your existing import code instead of making a new one. If you're not sure how to do that, read this <a href="https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code" target="_blank"><mark>Wiki article</mark></a>.</small></p>
+        <p class="mt-0"><small>In case you forgot, your original import code is <code><%= @post.code %></code>.</small></p>
       </div>
 
       <%= svelte_component "DerivativesForm", { currentSources: post.source_derivs.map(&:source_code), maxCodes: Post::MAX_SOURCES } %>

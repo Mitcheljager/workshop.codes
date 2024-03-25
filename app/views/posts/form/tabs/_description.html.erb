@@ -2,7 +2,8 @@
 
 <div class="form-group">
   <div class="form-hint">
-    <%= t("posts.form.description.help_html", link: link_to("and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank")) %>
+    Write a short description that will help people play your game. A quick description of the controls and rules will help explain what's going on. <br>
+    <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to("and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank") %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
   </div>
 
   <%= form.file_field :videos, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-videos" } %>

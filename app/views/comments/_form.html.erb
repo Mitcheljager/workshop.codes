@@ -18,7 +18,7 @@
 
     <%= button_tag defined?(comment) ? "Edit" : "Comment", class: "button mt-1/4" %>
 
-    <small class="button-label">&nbsp; <%= t "comment.max_characters", count: 2000 %></small>
+    <small class="button-label">&nbsp; Max 2000 characters</small>
   <% end %>
 <% else %>
   <div class="well well--dark block <%= 'mb-1/2' unless @comments.size %>">

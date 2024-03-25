@@ -9,7 +9,7 @@
     <div class="well well--dark">
       <% if @user.provider.present? %>
         <p class="mt-0">
-          <%= t("users.edit.provider", provider: @user.provider.humanize) %>
+          You are logged in with <%= @user.provider.humanize %> and cannot edit your account directly from Workshop.codes. Editing your account on <%= @user.provider.humanize %> will automatically adjust it here.
         </p>
       <% else %>
         <%= render "form", user: @user, url: update_user_path %>
