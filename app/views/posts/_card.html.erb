@@ -19,7 +19,7 @@
         <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title), tabindex: -1 %>
 
         <small class="card__author">
-          <%= t("post.author") %>
+          by
           <%= link_to post.user.clean_username, user_profile_path(post.user), rel: "author" %>
         </small>
       </div>

@@ -1,12 +1,12 @@
 <div class="warning warning--orange shadow-block">
   <p>
-    <strong><%= t("posts.show.expired.title") %></strong>
-    <small><%= t("posts.show.expired.content") %></small>
+    <strong>This code is over 6 months old.</strong>
+    <small>The code may have expired and might no longer function.</small>
   </p>
 
   <% if current_user == @post.user %>
     <div class="mt-1/8">
-      <p><small><%= t("posts.show.immortal.content") %></small></p>
+      <p><small>If you are certain your code is immortal and has not expired you can mark it as such. To find out you can import this code in-game. If it is still functional even though you are seeing this message, it's likely immortal.</small></p>
 
       <%= button_to t("posts.show.immortal.button"),
           immortalise_post_path,

@@ -1,5 +1,5 @@
 <div class="filter__group">
-  <div class="filter__item <%= "filter__item--active" if params[:category] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.categories") %>">
+  <div class="filter__item <%= "filter__item--active" if params[:category] %> dropdown" data-dropdown data-filter data-default="Categories...">
     <% current_category = params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") if params[:category] %>
     <% i18n_category = i18n_value_in_array(categories, current_category) if current_category.present? %>
     <%= link_to current_category.present? ? i18n_category : t("filter.categories"), "#",
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:hero] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.heroes") %>">
+  <div class="filter__item <%= "filter__item--active" if params[:hero] %> dropdown" data-dropdown data-filter data-default="Heroes...">
     <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.heroes"), "#",
                 data: { action: "toggle-dropdown", filter_type: "heroes", value: params[:hero] } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:map] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.maps") %>">
+  <div class="filter__item <%= "filter__item--active" if params[:map] %> dropdown" data-dropdown data-filter data-default="Maps...">
     <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.maps"), "#",
                 data: { action: "toggle-dropdown", filter_type: "maps", value: params[:map] } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:author] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.author") %>">
+  <div class="filter__item <%= "filter__item--active" if params[:author] %> dropdown" data-dropdown data-filter data-default="Author...">
     <%= link_to params[:author] ? params[:author].split("#")[0] : t("filter.author"), "#",
                 data: { action: "toggle-dropdown get-verified-users", filter_type: "author", value: (CGI.escape(params[:author]) if params[:author].present?) } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.sort.label") %>">
+  <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="Sort by...">
     <% if params[:search] && !params[:sort] %>
       <%= link_to "Relevancy", "#",
                   data: { action: "toggle-dropdown", filter_type: "sort", value: "" } %>
@@ -91,7 +91,7 @@
 <div class="filter__group">
   <div class="filter__item block w-100">
     <p class="filter__label mt-0">
-      <%= t("filter.num_players.label") %>
+      Players
     </p>
 
     <%= tag.div data: {

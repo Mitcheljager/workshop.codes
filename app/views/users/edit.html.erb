@@ -17,12 +17,12 @@
 
       <div class="form-group-max-width">
         <div class="form-danger-zone">
-          <%= t("users.edit.destroy.title") %>
+          Danger zone!
 
           <%= link_to t("users.edit.destroy.action"), destroy_user_path, method: :delete, data: { confirm: t("users.edit.destroy.confirm") } %>
 
           <div class="form-hint mb-0">
-            <%= t("users.edit.destroy.help") %>
+            Deleting your account is a permanent action and cannot be undone. Your account will be completely wiped from our database, along with any associations to it.
           </div>
         </div>
       </div>

@@ -1,8 +1,10 @@
-<h2 class="mt-1/1"><%= t("posts.form.images.title") %></h2>
+<h2 class="mt-1/1">Images</h2>
 
 <div class="form-group">
   <p class="form-hint">
-    <%= t("posts.form.images.help_html") %>
+    <strong>Include an image (or video) at the top of your post.</strong> If you add more than 1 image it turns in to an image slider. All images are displayed in a 900x500 format. <br>
+    Alternatively you can use a 3rd party (Imgur) to add images to your description in the next step.<br>
+    <strong>The first image will be your Thumbnail.</strong>
   </p>
 
   <%= render "posts/form/image_upload", form: form %>

@@ -6,7 +6,7 @@
   <% end %>
 
   <p class="mt-0">
-    <%= t("linked_users.description") %>
+    Link your accounts together to allow login to the same account using different authentication platforms. You can link as many accounts from any platform as you want, and all of them will log you into one central account.
   </p>
 
   <hr class="mt-1/2 mb-1/2">
@@ -26,7 +26,7 @@
   <% if current_user.linked_users.any? %>
     <hr class="mt-1/2 mb-1/2">
 
-    <h2><%= t("linked_users.current") %></h2>
+    <h2>Currently linked accounts</h2>
 
     <table>
       <% current_user.linked_users.each do |linked_user| %>

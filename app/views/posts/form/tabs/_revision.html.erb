@@ -1,6 +1,6 @@
 <% return unless @post.persisted? %>
 
-<h2 class="mt-1/1"><%= t("posts.form.revision.title") %></h2>
+<h2 class="mt-1/1">Update log</h2>
 
 <div data-reveal-by-checkbox>
   <div class="checkbox">
@@ -9,7 +9,8 @@
   </div>
 
   <span class="form-hint">
-    <%= t("posts.form.revision.help_html") %>
+    Checking this tells our system you've updated your Workshop code. This will allow you to write a summary of what has changed. This should only be used if you've made changes to your gamemode, not if you've only made changes to your post on this website.<br>
+    If your share code has changed the URL to your old code will continue to function, even if you do not check this box.
   </span>
 
   <div class="form-group mt-1/2" data-role="hidden-by-checkbox" style="<%= "display: none" %>">
@@ -27,7 +28,8 @@
       <%= form.label :revision_description, t("posts.form.revision.input.label"), class: "form-label" %>
 
       <div class="form-hint">
-        <%= t("posts.form.revision.input.help_html") %>
+        Write a short summary of what has changed in this version in relation to the previous. <strong>This description is full Markdown enabled.</strong>
+
       </div>
 
       <%= form.text_area :revision_description, class: "form-input form-textarea", data: { role: "simple-mde", max_length: REVISION_DESCRIPTION_LIMIT } %>

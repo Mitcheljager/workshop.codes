@@ -1,4 +1,4 @@
-<h2 class="mt-1/1"><%= t("posts.form.settings.title") %></h2>
+<h2 class="mt-1/1">Settings</h2>
 
 <div data-reveal-by-select-parent data-reveal-by-checkbox>
   <div class="form-group-uneven mt-1/2">
@@ -9,7 +9,7 @@
       </div>
 
       <div class="form-hint mt-1/8">
-        <%= t("posts.form.public.help") %>
+        Your code will appear anywhere as normal.
       </div>
 
       <div class="checkbox">
@@ -18,7 +18,7 @@
       </div>
 
       <div class="form-hint mt-1/8">
-        <%= t("posts.form.unlisted.help") %>
+        Your code can only be found through a direct link. Your code will not appear in any lists.
       </div>
 
       <div class="checkbox">
@@ -27,7 +27,7 @@
       </div>
 
       <div class="form-hint mt-1/8">
-        <%= t("posts.form.private.help") %>
+        Your code can only be accessed by you. Setting your code to public at a later date will not "publish" the code as if it was new.
       </div>
 
       <% unless @post.persisted? && !@post.draft? %>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-hint mt-1/8">
-          <%= t("posts.form.draft.help") %>
+          Your post will not be visible to others. When you switch this to a different visibility your post will be published as if it was new. An already published code can not be set back to this option.
         </div>
       <% end %>
     </div>
@@ -56,7 +56,7 @@
 
         <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.ptr? %>">
           <p class="form-hint">
-            <%= t("posts.form.ptr.help") %>
+            Beware! Once PTR goes down you might lose access to your code. Make sure to copy paste the snippet to easily copy it to Live once the time is there.
           </p>
         </div>
       <% end %>
@@ -82,7 +82,7 @@
 
           <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.overwatch_2_compatible? %>">
             <p class="form-hint mb-0">
-              <%= t("posts.form.overwatch_2_compatible.help") %>
+              Make sure your code is actually generated on the Overwatch 2 Beta and ensure it works properly. Do not check this if you haven't tested it yourself. Misusing this option will get your code removed.
             </p>
           </div>
         </div>
@@ -97,7 +97,7 @@
     </div>
 
     <p class="form-hint">
-      <%= t("posts.form.nice_url.help") %>
+      Include a pretty URL that is easier to remember and will always link to your most recent code. Keep in mind that if you change the code, all previous codes will continue to link to your newest code.
     </p>
 
     <div data-role="hidden-by-checkbox" style="<%= "display: none" unless @post.nice_url.present? %>">
@@ -111,7 +111,11 @@
           </div>
 
           <ul class="form-hint mb-0">
-            <%= t("posts.form.nice_url.list_html") %>
+            <li><strong>Keep the URL relevant to your code.</strong></li>
+            <li>Misused URLs will be removed. "havana-parkour" is fine, "privacy-policy" is not.</li>
+            <li>You can use letters, numbers, and dashes "-".</li>
+            <li>All letter must be lowercase. <small>(The URL itself is not case sensitive.)</small></li>
+            <li>Minimum of 7 characters, maximum of 20.</li>
           </ul>
         </div>
       </div>
@@ -122,8 +126,8 @@
 <div class="form-group-uneven mt-1/1 mb-1/1">
   <div>
     <%= form.label :number_of_supported_players, class: "form-label mb-1/4" do %>
-      <%= t("posts.form.num_players.title") %>
-      <span class="form-required">(<%= t("global.required") %>)</span>
+      Number of supported players
+      <span class="form-required">(Required)</span>
     <% end %>
 
     <% unless @post.min_players.present? && @post.max_players.present? %>
@@ -140,12 +144,12 @@
 <div class="form-group-columns mt-1/1">
   <div class="form-group">
     <%= form.label :categories, class: "form-label" do %>
-      <%= t("posts.form.categories.label") %>
-      <span class="form-required">(<%= t("global.required") %>)</span>
+      Categories
+      <span class="form-required">(Required)</span>
     <% end %>
 
     <div class="form-hint">
-      <%= t("posts.form.categories.help") %>
+      Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
     </div>
 
     <%= svelte_component "LimitedCheckboxes", {
@@ -160,7 +164,7 @@
     <%= form.label :tags, t("posts.form.tags.label"), class: "form-label" %>
 
     <div class="form-hint">
-      <%= t("posts.form.tags.help_html") %>
+      Choose tags that people might search for to find your item. You can choose up to 5 tags. A large amount of irrelevant tags might result in your item being more difficult to find. <strong>Separate tags with a comma and a space ",&nbsp;".</strong>
     </div>
 
     <%= form.text_field :tags, class: "form-input", placeholder: t("posts.form.tags.placeholder") %>
@@ -170,7 +174,7 @@
     <%= form.label :version, t("posts.form.version.label"), class: "form-label" %>
 
     <div class="form-hint">
-      <%= t("posts.form.version.help") %>
+      Add a version number if you plan on making revisions in the future. This will help people find the most up to date version of your item.
     </div>
 
     <%= form.text_field :version, class: "form-input", placeholder: t("posts.form.version.placeholder"), data: { role: "linked-input", key: "version" } %>
@@ -180,14 +184,14 @@
     <%= form.label :collection, t("posts.form.collection.label"), class: "form-label" %>
 
     <div class="form-hint">
-      <%= t("posts.form.collection.help") %>
+      Collections allow you to group multiple Codes together to help users more quickly find the others. This can for example be used when you have a gamemode with different codes for different maps.
     </div>
 
     <%= form.select :collection_id, options_from_collection_for_select(current_user.collections, "id", "title", @post.collection_id), { include_blank: current_user.collections.any? ? t("posts.form.collection.none") : t("posts.form.collection.empty") }, { class: "form-select form-select--small" } %>
     <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-1/4", placeholder: t("posts.form.collection.placeholder") %>
 
     <div class="form-hint mt-1/8 mb-0">
-      <small><%= t("posts.form.collection.limit") %></small>
+      <small>Min 3, max 50 characters.</small>
     </div>
   </div>
 </div>

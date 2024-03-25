@@ -20,12 +20,12 @@
       <%= form.label :carousel_video, t("posts.form.images.video.label"), class: "form-label" %>
 
       <div class="form-hint">
-        <%= t("posts.form.images.video.help_html") %>
+        Include a video as the first item in the carousel. Enter only the YouTube video ID, not the full url. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
       </div>
 
       <%= form.text_field :carousel_video, class: "form-input", placeholder: t("posts.form.images.video.placeholder") %>
 
-      <p class="error-help-text mb-0"><%= t("posts.form.images.video.invalid") %></p>
+      <p class="error-help-text mb-0">Please provide a valid YouTube video link or video ID</p>
     </div>
   </div>
 </div>

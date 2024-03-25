@@ -12,27 +12,27 @@
 
 <% if @post.private? %>
   <div class="warning warning--mild shadow-block">
-    <p class="mb-0 mt-0 text-white">🔐 <%= t("posts.show.private.title") %></p>
-    <p class="mt-0 mb-0"><small><%= t("posts.show.private.content") %></small></p>
+    <p class="mb-0 mt-0 text-white">🔐 This code is set to private.</p>
+    <p class="mt-0 mb-0"><small>Only you can see it.</small></p>
   </div>
 <% end %>
 
 <% if @post.unlisted? %>
   <div class="warning warning--mild shadow-block">
-    <p class="mb-0 text-white mt-0">📃 <%= t("posts.show.unlisted") %></p>
+    <p class="mb-0 text-white mt-0">📃 This code is unlisted.</p>
   </div>
 <% end %>
 
 <% if @post.draft? %>
   <div class="warning warning--mild shadow-block">
-    <p class="mb-0 mt-0 text-white">✏ <%= t("posts.show.draft.title") %></p>
-    <p class="mt-0 mb-0"><small><%= t("posts.show.draft.content") %></small></p>
+    <p class="mb-0 mt-0 text-white">✏ This post is a draft.</p>
+    <p class="mt-0 mb-0"><small>Only you can see it. When you are ready to publish this code you can change the status and it will be posted as if it was new.</small></p>
   </div>
 <% end %>
 
 <% if @post.last_revision_created_at > 6.months.ago && @post.last_revision_created_at < 5.months.ago %>
   <div class="warning warning--orange shadow-block">
-    <p><strong><%= t("posts.show.expire_soon.title") %></strong></p>
+    <p><strong>Your Code may expire soon.</strong></p>
     <%= t("posts.show.expire_soon.content_html", time: time_ago_in_words(@post.last_revision_created_at + 6.months)) %>
   </div>
 <% end %>

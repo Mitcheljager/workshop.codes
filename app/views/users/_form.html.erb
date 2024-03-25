@@ -23,7 +23,7 @@
       <%= f.label :password, t("users.form.password.label"), class: "form-label" %>
       <%= f.password_field :password, placeholder: t("users.form.password.label"), class: "form-input" %>
 
-      <div class="form-hint"><%= t("users.form.password.help") %></div>
+      <div class="form-hint">Please use a unique password that is different from the one you use for Overwatch. Passwords are encrypted and securely stored.</div>
     </div>
 
     <div class="form-field">
@@ -37,7 +37,7 @@
       <%= f.label :email, "#{ t("users.form.email.label") } #{ t("users.form.optional") }", class: "form-label" %>
       <%= f.email_field :email, placeholder: t("users.form.email.label"), class: "form-input" %>
 
-      <div class="form-hint"><%= t("users.form.email.help_html") %></div>
+      <div class="form-hint">Your email address is used to recover your account when you forget your password. <strong>This is completely optional.</strong> Your email address is encrypted and securely stored. It will not be used for anything unless explicitely allowed by you.</div>
     </div>
 
     <hr class="small">

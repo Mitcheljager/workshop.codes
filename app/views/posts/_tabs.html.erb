@@ -28,7 +28,7 @@
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("comments") }",
                 data: { action: "set-tab scroll get-partial", target: "comments", url: comment_path(@post.id), get_on_load: is_active_tab?("comments"), scroll_on_load: true } do %>
 
-      <%= t("posts.show.tabs.comments") %>
+      Comments
       <small data-role="comment-total" class="text-dark"><%= @post.comments_count %></small>
     <% end %>
 
@@ -37,7 +37,7 @@
                   class: "tabs__item #{ "tabs__item--active" if is_active_tab?("update-log") }",
                   data: { action: "set-tab get-partial", target: "update-log", url: revisions_partial_path(@post.id), get_on_load: is_active_tab?("update-log") } do %>
 
-        <%= t("posts.show.tabs.revisions") %>
+        Update log
         <small class="text-dark"><%= @revisions_count %></small>
       <% end %>
     <% end %>

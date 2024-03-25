@@ -17,20 +17,20 @@
 
       <div class="item__details">
         <div class="item__details-item">
-          <%= t("post.author") %>
+          by
           <%= link_to post.user.clean_username, user_profile_path(post.user) %>
         </div>
 
         <div class="item__details-item">
-          <%= t("post.categories") %> |
+          Categories |
 
           <% post.categories.each do |category| %>
             <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == post.categories.last %>
           <% end %>
         </div>
 
-        <div class="item__details-item" title="<%= t("post.updated") %>: <%= post.last_revision_created_at %>">
-          <%= t("post.updated") %>:
+        <div class="item__details-item" title="Last updated: <%= post.last_revision_created_at %>">
+          Last updated:
 
           <% if post.last_revision_created_at.blank? %>
             Draft
