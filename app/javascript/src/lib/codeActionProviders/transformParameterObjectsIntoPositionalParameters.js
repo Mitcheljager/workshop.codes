@@ -1,7 +1,8 @@
-import { completionsMap } from "../../stores/editor"
+import { completionsMap, settings } from "../../stores/editor"
 import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../../utils/parse"
 import { get } from "svelte/store"
 import { parseParameterObjectContent } from "../../utils/compiler/parameterObjects"
+import { getIndentForLine } from "../../utils/codemirror/indent"
 
 /**
  * @type {import("../codeActions").CodeActionProvider}
@@ -9,13 +10,13 @@ import { parseParameterObjectContent } from "../../utils/compiler/parameterObjec
 export function transformParameterObjectsIntoPositionalParameters({ view, state }) {
   const actions = []
 
-  const { from: start, to: end } = state.selection.main
-  if (start !== end) return
+  const { from: cursorFrom, to: cursorTo } = state.selection.main
+  if (cursorFrom !== cursorTo) return
 
-  const line = state.doc.lineAt(start)
+  const line = state.doc.lineAt(cursorFrom)
   if (!line.text) return null
 
-  const phrase = getPhraseFromPosition(line, start)
+  const phrase = getPhraseFromPosition(line, cursorFrom)
   const completion = get(completionsMap).find(({ type, label }) => type === "function" && label === phrase.text)
   if (!completion) return
 
@@ -76,11 +77,21 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
       run() {
         const args = splitArgumentsString(state.doc.sliceString(fileWideParenFrom + 1, fileWideParenTo - 1))
 
-        // TODO(netux): indent according to "Autocomplete parameter objects → Minimum newline length"
+        const isMultiLine = args.length > get(settings)["autocomplete-min-parameter-newlines"]
+        const indent = "\t".repeat(getIndentForLine(state, cursorFrom, cursorFrom))
 
-        const parameterObject = `{ ${ args
-          .map((value, index) => `${ completion.parameter_keys[index] }: ${ value.trim() }`)
-          .join(", ") } }`
+        let parameterObject = "{"
+        if (isMultiLine) parameterObject += "\n"
+        else parameterObject += " "
+        parameterObject += args
+          .map((value, index) => {
+            const keyValue = `${ completion.parameter_keys[index] }: ${ value.trim() }`
+            return (isMultiLine ? (indent + "\t") : "") + keyValue
+          })
+          .join(",\n")
+        if (isMultiLine) parameterObject += "\n" + indent
+        else parameterObject += " "
+        parameterObject += "}"
 
         view.dispatch(
           view.state.update({
