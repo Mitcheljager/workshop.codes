@@ -52,7 +52,7 @@
 
   &--secondary {
     color: $white;
-    background: lighten($body-bg, 5%);
+    background: $secondary;
   }
 
   &--dark {
