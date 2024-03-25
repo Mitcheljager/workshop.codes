@@ -36,21 +36,21 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
   // empty positional parameters
   if (fileWideParenTo - fileWideParenFrom <= "()".length) return
 
-  const openParameterObjectBracketIndex = actionCallCont.slice(openParenIndex).match(/(?<=^\s*)\{/)?.index ?? -1
-  if (actionCallCont.slice(1).trimStart()[0] === "{") {
+  const openParameterObjectBracketIndex = actionCallCont.slice(openParenIndex + 1).match(/(?<=^\s*)\{/)?.index ?? -1
+  if (openParameterObjectBracketIndex >= 0) {
     // parameter object → positional parameters
 
     const closingParameterObjectBracketIndex = getClosingBracket(actionCallCont, "{", "}", 0)
     if (closingParameterObjectBracketIndex < 0) return
 
-    const fileWideParameterObjectFrom = fileWideParenFrom + openParameterObjectBracketIndex
-    const fileWideParameterObjectTo = fileWideParenFrom + closingParameterObjectBracketIndex
+    const fileWideParameterObjectFrom = (fileWideParenFrom + 1) + openParameterObjectBracketIndex
+    const fileWideParameterObjectTo = (fileWideParenFrom + 1) + closingParameterObjectBracketIndex
 
     actions.push({
       label: "Transform object into positional parameters",
       position: fileWideActionNameStart,
       run() {
-        const parameterObject = state.doc.sliceString(fileWideParameterObjectFrom, fileWideParameterObjectTo)
+        const parameterObject = state.doc.sliceString(fileWideParameterObjectFrom + 1, fileWideParameterObjectTo - 1)
         const parameters = parseParameterObjectContent(parameterObject, 0)
 
         const argumentList = completion.parameter_keys
