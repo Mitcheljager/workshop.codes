@@ -1,4 +1,4 @@
-import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects } from "../../../../app/javascript/src/utils/compiler/parameterObjects"
+import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects, parseParameterObjectContent } from "../../../../app/javascript/src/utils/compiler/parameterObjects"
 import { completionsMap } from "../../../../app/javascript/src/stores/editor"
 import { disregardWhitespace } from "../../helpers/text"
 
@@ -91,6 +91,28 @@ describe("parameterObjects.js", () => {
       }
 
       expect(getFirstParameterObject(content)).toEqual(expected)
+    })
+  })
+
+  describe("parseParameterObjectContent", () => {
+    test("Should convert the string contents of a parameter object into a JS object", () => {
+      const content = "One:    10,\n\tThree: 20    ,\n"
+      const expected = {
+        One: "10",
+        Three: "20"
+      }
+
+      expect(parseParameterObjectContent(content)).toEqual(expected)
+    })
+
+    test("Should ignore [linemarker]s", () => {
+      const content = "[linemarker]itemID|1[/linemarker]\tOne: 10,\n[linemarker]itemID|2[/linemarker]\tThree: 20,\n[linemarker]itemID|3[/linemarker]"
+      const expected = {
+        One: "10",
+        Three: "20"
+      }
+
+      expect(parseParameterObjectContent(content)).toEqual(expected)
     })
   })
 
