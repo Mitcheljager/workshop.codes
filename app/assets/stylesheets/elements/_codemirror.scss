@@ -303,4 +303,27 @@
       color: $text-color-light;
     }
   }
+
+  .cm-codeActionsLightbulb {
+    position: absolute;
+    aspect-ratio: 1;
+    line-height: 1;
+    font-size: 0.75rem;
+    background-color: $bg-darker;
+    padding: 0.25rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transform: translate(-100%, -50%);
+    opacity: 0.5;
+    display: inline-block;
+  }
+
+  .cm-codeActionsLightbulb__dropdown {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
 }
