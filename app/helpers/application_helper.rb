@@ -91,7 +91,6 @@ module ApplicationHelper
       { title: t("account.navigation.profile"), url: edit_profile_path, },
       { title: t("account.navigation.account"), url: edit_user_path, },
       { title: t("account.navigation.linked_users"), url: linked_users_path, },
-      { title: t("account.navigation.accessibility"), url: accessibility_path, },
       { title: t("account.navigation.logout"), url: logout_path, data: { prefetch: false } }
     ]
   end
