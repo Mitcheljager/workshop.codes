@@ -1,38 +1,38 @@
 <nav class="tabs tabs--stepper pr-0 pl-0">
   <div class="tabs--stepper__content">
     <%= link_to "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "description" } do %>
-      <small class="tabs__label"><%= t("global.optional") %></small>
-      <%= t("posts.form.description.title") %>
+      <small class="tabs__label">Optional</small>
+      Description
     <% end %>
 
     <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "images" } do %>
-      <small class="tabs__label"><%= t("global.optional") %></small>
-      <%= t("posts.form.images.title") %>
+      <small class="tabs__label">Optional</small>
+      Images
     <% end %>
 
     <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "snippet" } do %>
-      <small class="tabs__label"><%= t("global.optional") %></small>
-      <%= t("posts.form.snippet.tab") %>
+      <small class="tabs__label">Optional</small>
+      Snippet
     <% end %>
 
     <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "settings" } do %>
-      <small class="tabs__label"><%= t("global.required") %></small>
-      <%= t("posts.form.settings.title") %>
+      <small class="tabs__label">Required</small>
+      Settings
     <% end %>
 
     <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "heroes" } do %>
-      <small class="tabs__label"><%= t("global.required") %></small>
-      <%= t("posts.form.heroes.title") %>
+      <small class="tabs__label">Required</small>
+      Heroes
     <% end %>
 
     <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "maps" } do %>
-      <small class="tabs__label"><%= t("global.required") %></small>
-      <%= t("posts.form.maps.title") %>
+      <small class="tabs__label">Required</small>
+      Maps
     <% end %>
 
     <%= link_to "#", class: "tabs__item", data: { action: "set-tab", target: "revision" } do %>
-      <small class="tabs__label"><%= t("global.optional") %></small>
-      <%= t("posts.form.revision.title") %>
+      <small class="tabs__label">Optional</small>
+      Update log
     <% end if @post.persisted? %>
 
     <div class="tabs--stepper__spacer"></div>

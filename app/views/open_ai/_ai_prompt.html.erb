@@ -13,7 +13,7 @@
       ai_path,
       method: :post,
       params: { article_id: @article.id },
-      data: { disable_with: t("global.processing") },
+      data: { disable_with: "Processing..." },
       form: { autocomplete: "off" },
       remote: true,
       class: "button" %>

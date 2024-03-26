@@ -7,7 +7,7 @@
     <%= form_for current_user, url: update_profile_path, remote: true do |form| %>
       <div class="form-group">
         <%= form.label :custom_css, class: "form-label" do %>
-          <%= t "profile.form.custom_css.label" %>
+          Custom CSS
           <%= inline_svg_tag "icons/verified.svg", class: "profile-banner__verified" %>
         <% end %>
 
@@ -22,12 +22,12 @@
 
           <div data-role="content-to-toggle" style="display: none">
             <div class="form-hint">
-              <%= t("profile.form.custom_css.help") %>
+              You're verified, which means you get to add some extra styling to your profile. Be respectful with your styling. Don't hide anything that isn't yours. Don't alter text that isn't yours. Don't go overboard. Misuse may result in your verified status being removed.
             </div>
 
             <%= form.text_area :custom_css, class: "form-input form-textarea form-textarea--extra-small", data: { action: "apply-custom-css" }, autocomplete: "off" %>
 
-            <%= submit_tag t("profile.form.submit"), class: "button button--small mt-1/4", data: { disable_with: "Saving..." } %>
+            <%= submit_tag "Save", class: "button button--small mt-1/4", data: { disable_with: "Saving..." } %>
           </div>
 
         </div>

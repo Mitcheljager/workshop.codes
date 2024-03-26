@@ -76,7 +76,7 @@
   function objectToKeyword(obj, keywordType) {
     return Object.values(obj).map(v => {
       const params = {
-        label: v["en-US"] || v["en"],
+        label: v["en-US"] || v["name"],
         type: keywordType,
         info: v.description,
         args_length: v.args?.length || 0

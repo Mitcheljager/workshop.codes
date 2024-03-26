@@ -31,7 +31,6 @@ gem "omniauth-discord"
 gem 'omniauth-rails_csrf_protection'
 gem "puma", "~> 5.6"
 gem "rails", "~> 6.1.7"
-gem "rails-i18n"
 gem "rails_same_site_cookie"
 gem "redcarpet"
 gem "render_async"

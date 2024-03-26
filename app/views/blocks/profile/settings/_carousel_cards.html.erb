@@ -12,6 +12,6 @@
                          options: @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] },
                          selected: block_property(block, "posts") || [] } %>
   <% else %>
-    <p><%= t "profile.form.featured_posts.empty" %></p>
+    <p>You've not yet posted anything.</p>
   <% end %>
 </div>

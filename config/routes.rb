@@ -4,10 +4,22 @@ class FilterContraints
   end
 end
 
+class KoConstraint
+  def matches?(request)
+    request.path.starts_with?('/ko')
+  end
+end
+
 Rails.application.routes.draw do
   concern :paginatable do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end
+
+  constraints(KoConstraint.new) do
+    get "*path", to: redirect { |params, request| request.path.sub("/ko", "") }, format: false
+  end
+
+  root "posts#index"
 
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#unacceptable"
@@ -66,107 +78,103 @@ Rails.application.routes.draw do
 
   post "ai", to: "open_ai#show", as: "ai"
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/, default: "en" do
-    root "posts#index"
+  resources :articles, param: :slug, except: [:index, :destroy]
 
-    resources :articles, param: :slug, except: [:index, :destroy]
+  resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
+  get "account(/page/:page)", to: "users#show", as: "account"
+  get "account/edit", to: "users#edit", as: "edit_user"
+  get "account/posts", to: "users#posts", as: "account_posts"
+  get "account/collections", to: "users#collections", as: "account_collections"
+  get "favorites", to: "users#favorites", as: "account_favorites"
+  patch "user", to: "users#update", as: "update_user"
+  delete "user", to: "users#destroy", as: "destroy_user"
 
-    resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
-    get "account(/page/:page)", to: "users#show", as: "account"
-    get "account/edit", to: "users#edit", as: "edit_user"
-    get "account/posts", to: "users#posts", as: "account_posts"
-    get "account/collections", to: "users#collections", as: "account_collections"
-    get "favorites", to: "users#favorites", as: "account_favorites"
-    patch "user", to: "users#update", as: "update_user"
-    delete "user", to: "users#destroy", as: "destroy_user"
+  get "account/accessibility", to: "accessibility#edit", as: "accessibility"
+  patch "account/accessibility", to: "accessibility#update", as: "update_accessibility"
 
-    get "account/accessibility", to: "accessibility#edit", as: "accessibility"
-    patch "account/accessibility", to: "accessibility#update", as: "update_accessibility"
+  resources :sessions, only: [:new, :create, :destroy]
 
-    resources :sessions, only: [:new, :create, :destroy]
+  get "u/:username(/page/:page)", to: "profiles#show", as: "profile"
+  patch "profile/edit", to: "profiles#update", as: "update_profile"
+  get "profile/edit", to: "profiles#edit", as: "edit_profile"
+  get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
 
-    get "u/:username(/page/:page)", to: "profiles#show", as: "profile"
-    patch "profile/edit", to: "profiles#update", as: "update_profile"
-    get "profile/edit", to: "profiles#edit", as: "edit_profile"
-    get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
+  resources :blocks, only: [:create, :update, :destroy]
+  post "blocks/set_positions", to: "blocks#set_positions"
+  post "blocks/show_or_create", to: "blocks#show_or_create"
 
-    resources :blocks, only: [:create, :update, :destroy]
-    post "blocks/set_positions", to: "blocks#set_positions"
-    post "blocks/show_or_create", to: "blocks#show_or_create"
+  get "register", to: "users#new", as: "new_user"
+  get "login", to: "sessions#new", as: "login"
+  get "logout", to: "sessions#destroy", as: "logout"
 
-    get "register", to: "users#new", as: "new_user"
-    get "login", to: "sessions#new", as: "login"
-    get "logout", to: "sessions#destroy", as: "logout"
+  resources :forgot_passwords, param: :token, only: [:index, :create]
+  get "forgot-password", to: "forgot_passwords#new", as: "new_forgot_password"
+  get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"
+  post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
 
-    resources :forgot_passwords, param: :token, only: [:index, :create]
-    get "forgot-password", to: "forgot_passwords#new", as: "new_forgot_password"
-    get "forgot-password/:token", to: "forgot_passwords#show", as: "forgot_password"
-    post "reset_password", to: "forgot_passwords#reset_password", as: "reset_password"
+  resources :feed, concerns: :paginatable, only: [:index]
 
-    resources :feed, concerns: :paginatable, only: [:index]
+  resources :linked_users, only: [:index]
+  # For some reason this cannot be merged into the above resources.
+  # See https://github.com/EloHellEsports/workshop.codes/pull/123#discussion_r827509566
+  delete "linked_users/:id", to: "linked_users#destroy", as: "destroy_linked_user"
 
-    resources :linked_users, only: [:index]
-    # For some reason this cannot be merged into the above resources.
-    # See https://github.com/EloHellEsports/workshop.codes/pull/123#discussion_r827509566
-    delete "linked_users/:id", to: "linked_users#destroy", as: "destroy_linked_user"
+  resources :reports, only: [:create, :new, :destroy, :update]
+  get "reports/:id/:status", to: "reports#update", as: "report_submit"
+  resources :notifications, only: [:index], concerns: :paginatable
+  get "unread-notifications", to: "notifications#get_unread_notifications"
+  get "unread-notifications-count", to: "notifications#get_unread_notifications_count"
 
-    resources :reports, only: [:create, :new, :destroy, :update]
-    get "reports/:id/:status", to: "reports#update", as: "report_submit"
-    resources :notifications, only: [:index], concerns: :paginatable
-    get "unread-notifications", to: "notifications#get_unread_notifications"
-    get "unread-notifications-count", to: "notifications#get_unread_notifications_count"
+  get "on-fire(/page/:page)", to: "on_fire#index", as: "on_fire"
 
-    get "on-fire(/page/:page)", to: "on_fire#index", as: "on_fire"
+  resources :revisions, only: [:edit, :update]
+  get ":code/revisions", to: "revisions#index", as: "revisions"
+  get "revisions/partial/:id", to: "revisions#partial", as: "revisions_partial"
+  get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
+  get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
 
-    resources :revisions, only: [:edit, :update]
-    get ":code/revisions", to: "revisions#index", as: "revisions"
-    get "revisions/partial/:id", to: "revisions#partial", as: "revisions_partial"
-    get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
-    get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
+  resources :projects, param: :uuid, format: :json, only: [:show, :create, :update, :destroy]
+  resources :project_backups, param: :uuid, format: :json
 
-    resources :projects, param: :uuid, format: :json, only: [:show, :create, :update, :destroy]
-    resources :project_backups, param: :uuid, format: :json
+  get "latest", to: "posts#latest", as: "latest"
+  get "page/1", to: redirect("/latest", status: 301)
 
-    get "latest", to: "posts#latest", as: "latest"
-    get "page/1", to: redirect("/latest", status: 301)
+  get "search", to: "search#show", as: "filter"
+  get "filter/partial", to: "filter#partial", as: "filter_partial"
+  post "search", to: "search#index", as: "search_post"
+  get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", constraints: FilterContraints
+  post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#redirect_to_query_params"
+  get "get-verified-users", to: "filter#get_verified_users"
+  get "overwatch-2", to: redirect("/", status: 301)
 
-    get "search", to: "search#show", as: "filter"
-    get "filter/partial", to: "filter#partial", as: "filter_partial"
-    post "search", to: "search#index", as: "search_post"
-    get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", constraints: FilterContraints
-    post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#redirect_to_query_params"
-    get "get-verified-users", to: "filter#get_verified_users"
-    get "overwatch-2", to: redirect("/", status: 301)
+  get "collections", to: "collections#index", as: "collections_index"
+  resources :collections, path: "c", param: :nice_url, concerns: :paginatable, except: [:index]
+  get "c/:nice_url(/page/:page)", to: "collections#show"
+  get "c/:nice_url/revisions(/page/:page)", to: "collections#revisions", as: "collection_revisions"
+  get "c/partial/:id", to: "collections#partial", as: "collection_partial"
 
-    get "collections", to: "collections#index", as: "collections_index"
-    resources :collections, path: "c", param: :nice_url, concerns: :paginatable, except: [:index]
-    get "c/:nice_url(/page/:page)", to: "collections#show"
-    get "c/:nice_url/revisions(/page/:page)", to: "collections#revisions", as: "collection_revisions"
-    get "c/partial/:id", to: "collections#partial", as: "collection_partial"
+  get "derived_from/:post_id", to: "derivatives#derived_from", as: "derived_from"
 
-    get "derived_from/:post_id", to: "derivatives#derived_from", as: "derived_from"
+  constraints code: /.{5,6}/ do
+    resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]
+    get ":code", to: "posts#show"
+    get ":code/:tab", to: "posts#show", as: "post_tab"
+    post "immortalise", to: "posts#immortalise", as: "immortalise_post"
+    resources :archives, param: :code, path: "archive", only: [:show, :update, :destroy]
+  end
 
-    constraints code: /.{5,6}/ do
-      resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]
-      get ":code", to: "posts#show"
-      get ":code/:tab", to: "posts#show", as: "post_tab"
-      post "immortalise", to: "posts#immortalise", as: "immortalise_post"
-      resources :archives, param: :code, path: "archive", only: [:show, :update, :destroy]
-    end
+  namespace :wiki do
+    root to: "base#index"
+    resources :categories, param: :slug, concerns: :paginatable, except: [:show]
+    get "categories/:slug(/page/:page)", to: "categories#show"
 
-    namespace :wiki do
-      root to: "base#index"
-      resources :categories, param: :slug, concerns: :paginatable, except: [:show]
-      get "categories/:slug(/page/:page)", to: "categories#show"
+    resources :articles, param: :slug, concerns: :paginatable
+    resources :edits, concerns: :paginatable
+    get "edits/article/:group_id", to: "edits#article", as: "article_edits"
 
-      resources :articles, param: :slug, concerns: :paginatable
-      resources :edits, concerns: :paginatable
-      get "edits/article/:group_id", to: "edits#article", as: "article_edits"
-
-      post "search", to: "search#query", as: "search"
-      get "search/:query", to: "search#index", as: "search_results"
-      get "dictionary", to: "dictionary#index"
-    end
+    post "search", to: "search#query", as: "search"
+    get "search/:query", to: "search#index", as: "search_results"
+    get "dictionary", to: "dictionary#index"
   end
 
   post "/new", to: "posts#create", as: "create_post"

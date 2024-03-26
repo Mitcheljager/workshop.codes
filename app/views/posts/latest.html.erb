@@ -1,12 +1,12 @@
-<% content_for :page_title, "#{ t("navigation.recent") }" %>
+<% content_for :page_title, "#{ "Latest" }" %>
 
 <div class="heading">
   <h1>
     <% if params[:page] %>
-      <%= t("posts.index.recent.title_html") %>
+      <strong>Latest</strong> Codes
       <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %>
     <% else %>
-      <%= t("posts.index.recent.title_html") %>
+      <strong>Latest</strong> Codes
     <% end %>
   </h1>
 </div>

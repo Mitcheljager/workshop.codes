@@ -239,6 +239,6 @@ module ContentHelper
   end
 
   def hero_names
-    heroes.map { |hero| hero["en"] }.sort
+    heroes.map { |hero| hero["name"] }.sort
   end
 end

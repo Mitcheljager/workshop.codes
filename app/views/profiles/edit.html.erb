@@ -1,5 +1,5 @@
-<%= render "layouts/account", title: t("profile.edit.title_html") do %>
-  <%= link_to t("profile.edit.go_to_profile"), user_profile_path(current_user), class: "button button--secondary" %>
+<%= render "layouts/account", title: "<strong>Customise</strong> your profile" do %>
+  <%= link_to "Go to your profile", user_profile_path(current_user), class: "button button--secondary" %>
 
   <% if flash[:alert] %>
     <div class="warning mt-1/2"><%= flash[:alert] %></div>

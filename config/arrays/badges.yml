@@ -1,52 +1,42 @@
 -
   id: 0
   name: beloved-100
-  en:
-    label: Admired
-    description: Received 100 Favorites across all codes
+  label: Admired
+  description: Received 100 Favorites across all codes
 -
   id: 1
   name: beloved-500
-  en:
-    label: Beloved
-    description: Received 500 Favorites across all codes
+  label: Beloved
+  description: Received 500 Favorites across all codes
 - id: 2
   name: bug-squasher
-  en:
-    label: Bug Squasher
-    description: Submitted a Workshop bug report that got fixed
+  label: Bug Squasher
+  description: Submitted a Workshop bug report that got fixed
 - id: 3
   name: hot-1000
-  en:
-    label: Hot Head
-    description: Reached 1000 On Fire score on a single code
+  label: Hot Head
+  description: Reached 1000 On Fire score on a single code
 - id: 4
   name: github-helper
-  en:
-    label: Open Sourcerer
-    description: Helped contribute to Workshop.codes on GitHub
+  label: Open Sourcerer
+  description: Helped contribute to Workshop.codes on GitHub
 - id: 5
   name: giver
-  en:
-    label: Giver
-    description: Added 50 codes to their Favorites
+  label: Giver
+  description: Added 50 codes to their Favorites
 - id: 6
   name: elo-hell-jam
-  en:
-    label: Jam Winner
-    description: Winner of an Elo Hell Workshop Jam
+  label: Jam Winner
+  description: Winner of an Elo Hell Workshop Jam
 - id: 7
   name: ko-fi-supporter
-  en:
-    label: Ko-fi Supporter
-    description: Donated on Ko-fi. Thank you!
+  label: Ko-fi Supporter
+  description: Donated on Ko-fi. Thank you!
 - id: 8
   name: wiki-contributor
-  en:
-    label: Sukuma Wiki
-    description: Contributed to the Workshop.codes Wiki.
+  label: Sukuma Wiki
+  description: Contributed to the Workshop.codes Wiki.
 - id: 9
   name: workshop-owl
-  en:
-    label: Workshop Owl
-    description: Voted as best during a Workshop.codes Game Night
+  label: Workshop Owl
+  description: Voted as best during a Workshop.codes Game Night

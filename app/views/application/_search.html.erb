@@ -8,7 +8,7 @@
 
     <%= text_field_tag :query, params[:search] ? CGI.unescape(params[:search]) : "", class: "form-input", placeholder: " ", itemprop: "query-input", required: "true", autocomplete: "off", id: id %>
     <%= label_tag :query do %>
-      <%= t("search.label") %>
+      Search
     <% end %>
 
     <%= submit_tag "", class: "search__submit", data: { role: "filter-link" } %>

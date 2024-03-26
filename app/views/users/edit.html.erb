@@ -9,7 +9,7 @@
     <div class="well well--dark">
       <% if @user.provider.present? %>
         <p class="mt-0">
-          <%= t("users.edit.provider", provider: @user.provider.humanize) %>
+          You are logged in with <%= @user.provider.humanize %> and cannot edit your account directly from Workshop.codes. Editing your account on <%= @user.provider.humanize %> will automatically adjust it here.
         </p>
       <% else %>
         <%= render "form", user: @user, url: update_user_path %>
@@ -17,12 +17,12 @@
 
       <div class="form-group-max-width">
         <div class="form-danger-zone">
-          <%= t("users.edit.destroy.title") %>
+          Danger zone!
 
-          <%= link_to t("users.edit.destroy.action"), destroy_user_path, method: :delete, data: { confirm: t("users.edit.destroy.confirm") } %>
+          <%= link_to "Delete your account", destroy_user_path, method: :delete, data: { confirm: "Are you sure you wish to delete your account? This cannot be undone." } %>
 
           <div class="form-hint mb-0">
-            <%= t("users.edit.destroy.help") %>
+            Deleting your account is a permanent action and cannot be undone. Your account will be completely wiped from our database, along with any associations to it.
           </div>
         </div>
       </div>

@@ -60,9 +60,8 @@ function buildFilterPath(event) {
 
   buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
   buildPath = Object.entries(buildPath).map(([k, v]) => `${ k }=${ v }`).join("&")
-  const currentLocale = document.querySelector("[data-filter-locale]").dataset.filterLocale
 
-  window.location = `/${ currentLocale == "en" ? "" : currentLocale + "/" }search?${ buildPath }`
+  window.location = `/search?${ buildPath }`
 }
 
 function filterValue(type, parent) {
