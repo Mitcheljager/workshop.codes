@@ -1,5 +1,5 @@
 .mg-active-datapoint {
-  fill: $white;
+  fill: $text-color-lightest;
   font-size: $font-size-small;
   font-weight: 400;
 }
@@ -65,7 +65,7 @@ text.mg-barplot-group-label {
 .mg-header {
   cursor: default;
   font-size: 1rem;
-  fill: $white;
+  fill: $text-color-lightest;
 }
 
 .mg-header .mg-chart-description {

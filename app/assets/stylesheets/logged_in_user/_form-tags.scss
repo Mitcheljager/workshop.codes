@@ -28,7 +28,7 @@
   padding: 0 .25rem;
   background: transparent;
   border: none;
-  color: $white;
+  color: $text-color-lightest;
   cursor: pointer;
 }
 
@@ -62,7 +62,7 @@
       &:focus {
         background: lighten($bg-dark, 10%);
         outline: none;
-        color: $white;
+        color: $text-color-lightest;
       }
     }
   }

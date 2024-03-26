@@ -34,11 +34,11 @@
   &--active {
     &::before {
       left: calc(2rem + 6px);
-      background: $white;
+      background: $text-color-lightest;
     }
 
     &::after {
-      border-color: $white;
+      border-color: $text-color-lightest;
     }
   }
 }
@@ -61,7 +61,7 @@
   }
 
   .switch--active & {
-    color: $white;
+    color: $text-color-lightest;
   }
 }
 
@@ -106,7 +106,7 @@
     .switch-checkbox__input:checked + &,
     .switch-checkbox--active & {
       left: calc(1rem + 6px);
-      background: $white;
+      background: $text-color-lightest;
     }
   }
 
@@ -119,7 +119,7 @@
     .switch-checkbox__input:checked + &,
     .switch-checkbox:focus-within &,
     .switch-checkbox--active & {
-      border-color: $white;
+      border-color: $text-color-lightest;
     }
   }
 }

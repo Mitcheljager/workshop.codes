@@ -10,7 +10,7 @@
   padding: $margin / 8;
   border-radius: $border-radius / 2;
   background: darken($bg-dark, 5%);
-  color: $white;
+  color: $text-color-lightest;
   text-decoration: none;
   overflow: hidden;
 
@@ -30,10 +30,10 @@
 
 .derivative__code {
   margin-top: auto;
-  color: $white;
+  color: $text-color-lightest;
   font-size: 1.25rem;
   font-weight: normal;
   line-height: 1em;
-  font-family: var(--font-stack-alt);
+  font-family: $font-stack-alt;
   text-transform: uppercase;
 }

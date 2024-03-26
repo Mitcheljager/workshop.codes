@@ -20,9 +20,9 @@
   display: block;
   margin-bottom: $margin / 4;
   border-radius: $border-radius / 2;
-  color: $pure-white;
+  color: $white;
   text-decoration: none;
-  font-family: var(--font-stack-alt);
+  font-family: $font-stack-alt;
   text-transform: uppercase;
   font-size: 18px;
 
@@ -42,7 +42,7 @@
   &:active,
   &:focus,
   &--active {
-    color: $pure-white;
+    color: $white;
     position: relative;
 
     &::before {
@@ -54,19 +54,19 @@
       width: 100%;
       height: 3px;
       border-radius: 10px;
-      background: $pure-white;
+      background: $white;
       opacity: .5;
     }
   }
 
   &--active {
     &::before {
-      background: $pure-white;
+      background: $white;
       opacity: 1;
     }
 
     &:hover::before {
-      background: $pure-white;
+      background: $white;
       opacity: 1;
     }
   }

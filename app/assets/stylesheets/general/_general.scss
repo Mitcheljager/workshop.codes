@@ -28,14 +28,14 @@ a {
   outline: none;
 
   @include hover-stack {
-    color: $white;
+    color: $text-color-lightest;
     outline: none;
   }
 }
 
 mark {
   background: transparent;
-  color: $primary;
+  color: var(--primary, $primary);
 }
 
 hr {

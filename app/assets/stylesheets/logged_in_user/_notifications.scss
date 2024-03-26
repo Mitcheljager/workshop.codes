@@ -16,7 +16,7 @@
   margin-left: auto;
   background: $primary;
   box-shadow: 0 0 10px 2px $primary;
-  color: $pure-white;
+  color: $white;
   line-height: 1em;
   font-size: 11px;
   text-decoration: none;
@@ -30,7 +30,7 @@
   display: block;
   padding: 1rem 0;
   border-bottom: 1px solid $border-color;
-  color: $white;
+  color: $text-color-lightest;
   font-size: $font-size-small;
   line-height: 1.35em;
 
@@ -92,7 +92,7 @@
 
   @include hover-stack {
     path {
-      fill: $pure-white;
+      fill: $white;
 
       @include media-min(mbl) {
         fill: $bg-darker;
@@ -101,8 +101,8 @@
   }
 
   path {
-    fill: $white;
-    
+    fill: $text-color-lightest;
+
     @include media-min(mbl) {
       fill: $bg-dark;
     }

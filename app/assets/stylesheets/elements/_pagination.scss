@@ -9,7 +9,7 @@
     padding: .4em .6em;
     margin: 0 .25em;
     border: 0;
-    color: $pure-white;
+    color: $white;
     font-size: 16px;
     font-family: "bignoodletitlingregular", $font-stack;
     text-decoration: none;
@@ -20,8 +20,8 @@
     cursor: pointer;
 
     @include hover-stack {
-      color: $pure-white;
-      box-shadow: inset 0 0 0 2px $pure-white;
+      color: $white;
+      box-shadow: inset 0 0 0 2px $white;
     }
   }
 }

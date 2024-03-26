@@ -1,30 +1,44 @@
-$white: var(--white);
-$pure-white: #fff;
+$media-min-widths: (
+  xs: 400px,
+  sm: 640px,
+  md: 768px,
+  lg: 900px,
+  mbl: 1000px,
+  xl: 1200px
+);
+
+$white: #fff;
 $black: #000;
 $gray: #90989c;
 $gray-dark: #6a7277;
 $red: #b33834;
 $orange: #e89930;
 $green: #3fbf74;
+
 $body-bg: #1f2326;
-$primary: var(--primary);
-$primary-var: #f06414; // FIXME: This sucks but is used for scss methods. Should refactor $primary to not be a css variable
-$secondary: var(--secondary);
-$secondary-var: lighten($body-bg, 5%); // FIXME: ditto $primary-var
 $bg-dark: #2e3337;
-$bg-darker: var(--bg-darker);
-$text-color: var(--text-color);
-$text-color-light: var(--text-color-light);
-$text-color-dark: var(--text-color-dark);
+$bg-darker: darken($body-bg, 5%);
 $border-color: #353b3f;
-$discord: #7289DA;
+
+$primary: #f06414;
+$secondary: lighten($body-bg, 5%);
+$discord: #7289da;
 $bnet: #0288d1;
 $ko-fi: #ff5e5b;
 $overwatch-2: #ed6516;
 $wiki: #00abff;
 $logo-cog: #565a5d;
 
-$font-stack: var(--font-stack);
+$text-color: $gray;
+$text-color-light: lighten($gray, 10%);
+$text-color-lightest: #dfdfdf;
+$text-color-dark: $gray-dark;
+
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-stack-alt: "Barlow Condensed", "Impact", monospace;
+
+$font-size-base: 16px;
+$font-size-small: 14px;
 
 $margin: 4rem;
 $border-radius: 1rem;
@@ -43,56 +57,30 @@ $shadow: 0 2px 1px rgba(0, 0, 0, .1),
          0 16px 8px rgba(0, 0, 0, 0.1),
          0 32px 16px rgba(0, 0, 0, 0.1);
 
-$font-size-base: var(--font-size-base);
-$font-size-small: var(--font-size-small);
-
-$snowball-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABFCAMAAAArU9sbAAAAe1BMVEUAAAB8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIpNki3+AAAAKHRSTlMABLL3KunTXE3i2O+eVqWZlHoWCcrCvLasdW9jMB6JhGhSEEY/NoF/HOa9KAAAAohJREFUWMPtlnt3sjAMxqlcKhcFRKdM8O72fP9P+Ma0BaTgnH++83fOzmganyZpgjpv3rz5PxGifXiMaB5siUKmIQB3UspxKTYfv0MQfub1heQKXSZSqk+1KDc5QZfNncwHbFwXH9vjTCF3sUsG22na5reFwvf9mP7wENdX6NWpUeFDPg7GsPgsY7gYIs6lozntQ07eiCQgtk6Potx/7UJ94ibff0mnTwriqFVuVanEc7dry6z1HgW/cl6DVJYOcwYCOuwl5iSzMAl5nX6kCnyfxkTF4mu3zx3ReEfAjp9WQOs11W030ru66Y6NTEUp8SKmhAxTaOZiSGQOzbRTmdXNtQayZky6zW2zQUNHJeYeAy7m4B1aEmFH0rJu68vlPQBWKIx1b+hy1rs54N0XN+f9pe5Yea8irmwNs0wVzlwaRU3/Ik6MWZqCsF/ZUzmYgkgeijbCQDgiQGqmEETUVCDoleWzqVYAtD1GH2GVXHR6ZdZe+JDK0THBlM69yrdW5YQLNRTE0lYxjRLfGrOnsuq88cK2+XIxpsKecU/FhH5w3VjFVYH4HFc5R647V9aam1dERoWei8JRZGmanHoqpyTLErMqyJutJb/gxJIOEENvJWHZCMtzDdSqd0PafJGLucsAWHov6QhnFnLTETVPV/3jV6ud4IWbXaqlGp9gS6V9ToqdrqkLwjdFFdJ8Yawn6ZXWP8VwzTYRiP6YeGkMQ1A/lNmjwT/Y21vWV1M/zhqaaCtGYl1UiauGaYzZLfFwVi8e5y14SMZ8Cv1z4wlAJAOugtNZP9kInirdsaq8DtcEjPMsK4xTPt+bAca4/GrIQgzhV+J3QzLdTHok55v9d4gh05s3b/4G/wDSXXZB30j/zAAAAABJRU5ErkJggg==';
-
-$media-min-widths: (
-  xs: 400px,
-  sm: 640px,
-  md: 768px,
-  lg: 900px,
-  mbl: 1000px,
-  xl: 1200px
-);
+$snowball-icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABFCAMAAAArU9sbAAAAe1BMVEUAAAB8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIp8hIpNki3+AAAAKHRSTlMABLL3KunTXE3i2O+eVqWZlHoWCcrCvLasdW9jMB6JhGhSEEY/NoF/HOa9KAAAAohJREFUWMPtlnt3sjAMxqlcKhcFRKdM8O72fP9P+Ma0BaTgnH++83fOzmganyZpgjpv3rz5PxGifXiMaB5siUKmIQB3UspxKTYfv0MQfub1heQKXSZSqk+1KDc5QZfNncwHbFwXH9vjTCF3sUsG22na5reFwvf9mP7wENdX6NWpUeFDPg7GsPgsY7gYIs6lozntQ07eiCQgtk6Potx/7UJ94ibff0mnTwriqFVuVanEc7dry6z1HgW/cl6DVJYOcwYCOuwl5iSzMAl5nX6kCnyfxkTF4mu3zx3ReEfAjp9WQOs11W030ru66Y6NTEUp8SKmhAxTaOZiSGQOzbRTmdXNtQayZky6zW2zQUNHJeYeAy7m4B1aEmFH0rJu68vlPQBWKIx1b+hy1rs54N0XN+f9pe5Yea8irmwNs0wVzlwaRU3/Ik6MWZqCsF/ZUzmYgkgeijbCQDgiQGqmEETUVCDoleWzqVYAtD1GH2GVXHR6ZdZe+JDK0THBlM69yrdW5YQLNRTE0lYxjRLfGrOnsuq88cK2+XIxpsKecU/FhH5w3VjFVYH4HFc5R647V9aam1dERoWei8JRZGmanHoqpyTLErMqyJutJb/gxJIOEENvJWHZCMtzDdSqd0PafJGLucsAWHov6QhnFnLTETVPV/3jV6ud4IWbXaqlGp9gS6V9ToqdrqkLwjdFFdJ8Yawn6ZXWP8VwzTYRiP6YeGkMQ1A/lNmjwT/Y21vWV1M/zhqaaCtGYl1UiauGaYzZLfFwVi8e5y14SMZ8Cv1z4wlAJAOugtNZP9kInirdsaq8DtcEjPMsK4xTPt+bAca4/GrIQgzhV+J3QzLdTHok55v9d4gh05s3b/4G/wDSXXZB30j/zAAAAABJRU5ErkJggg==";
 
 :root {
   color-scheme: dark;
-  --primary: #{ $primary-var };
-  --secondary: #{ $secondary-var };
-  --white: #dfdfdf;
+  --primary: #{ $primary };
+  --secondary: #{ $secondary };
+  --white: #{ $text-color-lightest };
   --orange: #{ $orange };
   --red: #{ $red };
   --overwatch-2: #{ $overwatch-2 };
   --wiki: #{ $wiki };
   --text-color: #{ $gray };
-  --text-color-light: #{ lighten($gray, 10%) };
+  --text-color-light: #{ $text-color-light };
   --text-color-dark: #{ $gray-dark };
   --bg-body: #{ $body-bg };
   --bg-dark: #{ $bg-dark };
-  --bg-darker: #{ darken($body-bg, 5%) };
+  --bg-darker: #{ $bg-darker };
   --border-color: #{ $border-color };
   --border-radius: #{ $border-radius };
   --shadow: #{ $shadow };
-  --font-size-base: 16px;
-  --font-size-small: 14px;
-  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-stack-alt: "Barlow Condensed", "Impact", monospace;
-}
-
-.high-contrast {
-  --white: #fff;
-  --text-color: #{ lighten($gray, 15%) };
-  --text-color-light: #{ lighten($gray, 10%) };
-  --text-color-dark: #{ $gray };
-  --bg-darker: #{ darken($body-bg, 10%) };
-  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
-}
-
-.large-fonts {
-  --font-size-base: 19px;
-  --font-size-small: 16px;
+  --font-size-base: #{ $font-size-base };
+  --font-size-small: { $font-size-small };
+  --font-stack: #{ $font-stack };
+  --font-stack-alt: #{ $font-stack-alt };
 }
 
 .wiki {

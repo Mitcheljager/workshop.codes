@@ -38,7 +38,7 @@
   margin: 0 $margin / 8;
   color: $text-color;
   text-decoration: none;
-  font-family: var(--font-stack-alt);
+  font-family: $font-stack-alt;
   text-transform: uppercase;
   font-size: 19px;
   text-align: left;
@@ -58,10 +58,10 @@
   }
 
   @include hover-stack {
-    color: $white;
+    color: $text-color-lightest;
 
     &::after {
-      background: $white;
+      background: $text-color-lightest;
       width: 100%;
       transition: width 50ms, background-color 50ms;
     }
@@ -71,7 +71,7 @@
   &--active:hover,
   &--active:active,
   &--active:focus {
-    color: $white;
+    color: $text-color-lightest;
 
     &::after {
       background: $primary;

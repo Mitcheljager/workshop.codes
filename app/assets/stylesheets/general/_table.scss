@@ -12,11 +12,11 @@ td {
   padding: .5rem;
 
   tr:nth-child(odd) & {
-    background: rgba($pure-white, .05);
+    background: rgba($white, .05);
   }
 
   a {
-    color: $white;
+    color: $text-color-lightest;
     text-decoration: none;
 
     @include hover-stack {
@@ -30,13 +30,13 @@ th {
   background: rgba($black, .15);
   text-align: left;
   font-weight: bolder;
-  color: $white;
+  color: $text-color-lightest;
 }
 
 tr {
   @include hover-stack {
     td {
-      background: rgba($pure-white, .1);
+      background: rgba($white, .1);
     }
   }
 }
