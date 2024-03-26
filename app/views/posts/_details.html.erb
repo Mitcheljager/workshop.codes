@@ -1,22 +1,22 @@
 <% if has_player_range?(@post) %>
   <div class="item__tray-item">
-    <%= t(".players") %> |
+    Players |
 
     <%= @post.min_players %> - <%= @post.max_players %>
   </div>
 <% end %>
 
 <div class="item__tray-item">
-  <%= t(".categories") %>:
+  Categories:
 
   <% @post.categories.each do |category| %>
-    <%= link_to i18n_value_in_array(categories, category), filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
+    <%= link_to category, filter_path(category: to_slug(category)) %><%= "," unless category == @post.categories.last %>
   <% end %>
 </div>
 
 <% if @post.tags.present? %>
   <div class="item__tray-item">
-    <%= t(".tags") %>:
+    Tags:
 
     <% @post.tags.tr("[]", "").split(/,\s*/).each do |tag| %>
       <%= link_to tag.downcase, filter_path(code: nil, search: to_search_query(tag)), class: "tag" %>
@@ -25,13 +25,13 @@
 <% end %>
 
 <div class="item__tray-item">
-  <%= t(".heroes") %>:
+  Heroes:
 
   <% if @post.heroes.length == heroes.length %>
-    <%= t(".all") %>
+    All
   <% else %>
     <% @post.heroes.take(5).each do |hero| %>
-      <%= link_to i18n_value_in_array(heroes, hero), filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
+      <%= link_to hero, filter_path(hero: to_slug(hero)) %><%= "," unless hero == @post.heroes.last %>
     <% end %>
 
     <%= "and #{ @post.heroes.length - 5 } more..." if @post.heroes.length > 5 %>
@@ -39,13 +39,13 @@
 </div>
 
 <div class="item__tray-item">
-  <%= t(".maps") %>:
+  Maps:
 
   <% if @post.maps.length == maps.length %>
-    <%= t(".all") %>
+    All
   <% else %>
     <% @post.maps.take(5).each do |map| %>
-      <%= link_to i18n_value_in_array(maps, map), filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
+      <%= link_to map, filter_path(map: to_slug(map)) %><%= "," unless map == @post.maps.last %>
     <% end %>
 
     <%= "and #{ @post.maps.length - 5 } more..." if @post.maps.length > 5 %>
@@ -53,7 +53,7 @@
 </div>
 
 <div class="item__tray-item" title="Created at: <%= @post.created_at %>">
-  <%= t(".created_at") %>:
+  Created at:
 
   <% if @post.draft? %>
     Draft
@@ -63,7 +63,7 @@
 </div>
 
 <div class="item__tray-item" title="Updated at: <%= @post.updated_at %>">
-  <%= t(".updated_at") %>:
+  Last updated:
 
   <% if @post.draft? %>
     Draft
@@ -74,7 +74,7 @@
 
 <% if @post.version.present? %>
   <div class="item__tray-item">
-    <%= t(".version") %>:
+    Current version:
 
     <%= @post.version %>
   </div>
@@ -82,12 +82,12 @@
 
 <% if @post.nice_url.present? %>
   <div class="item__tray-item">
-    <%= t(".nice_url") %>:
+    Share URL:
 
     <%= link_to nice_url_url(@post.nice_url), nice_url_path(@post.nice_url) %>
   </div>
 <% end %>
 
 <div class="item__tray-item">
-  <%= link_to t("report.action"), new_report_path(id: @post.id, concerns_model: "post"), class: "text-red", data: { action: "get-reports-form" } %>
+  <%= link_to "Report code", new_report_path(id: @post.id, concerns_model: "post"), class: "text-red", data: { action: "get-reports-form" } %>
 </div>

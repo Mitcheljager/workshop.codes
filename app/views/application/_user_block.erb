@@ -19,17 +19,15 @@
 
         <hr>
 
-        <%= link_to t("account.navigation.tos"), tos_path, class: "dropdown__item text-small" %>
+        <%= link_to "Rules", tos_path, class: "dropdown__item text-small" %>
 
         <% if is_admin?(current_user) %>
           <hr>
-          <%= link_to t("account.navigation.admin"), admin_root_path, data: { prefetch: false }, class: "dropdown__item text-small" %>
+          <%= link_to "Admin", admin_root_path, data: { prefetch: false }, class: "dropdown__item text-small" %>
         <% end %>
       </div>
     </div>
   <% else %>
-    <%= link_to t("navigation.login"), login_path, class: "user-block__action mbl:mr-1/16 mb-1/4 mbl:mb-0" %>
+    <%= link_to "Login", login_path, class: "user-block__action mbl:mr-1/16 mb-1/4 mbl:mb-0" %>
   <% end %>
-
-  <%= render "locale_picker" %>
 </div>

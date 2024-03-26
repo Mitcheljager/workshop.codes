@@ -1,7 +1,7 @@
 <% display_type ||= "list" %>
 <% disable_cache ||= false %>
 
-<% cache_if !current_user && !disable_cache, [current_locale, @posts] do %>
+<% cache_if !current_user && !disable_cache, [@posts] do %>
   <main class="<%= display_type == "list" ? "items" : "cards" %>">
     <% if @posts.any? %>
       <% if display_type == "list" %>

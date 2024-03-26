@@ -1,11 +1,11 @@
-<% content_for :page_title, "#{ t "archive.navigation.title" } for #{ @post.code }" %>
+<% content_for :page_title, "Archive Actions for #{ @post.code }" %>
 
 <div class="wrapper">
   <div class="heading">
     <h1 class="text-md-center text-pure-white">
       <%= @post.title %><br>
       Code: <%= @post.code %><br>
-      <%= t("archive.navigation.title") %>
+      Archive Actions
     </h1>
   </div>
 
@@ -25,7 +25,7 @@
 
         <%= link_to "/auth/bnet?auth_only_no_user=1&redirect_path=#{archive_path(code: @post.code)}", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
-          <%= t "archive.navigation.authenticate" %>
+          Authenticate with Battle.net
         <% end %>
 
 

@@ -20,7 +20,7 @@ class PostSerializer < ActiveModel::Serializer
       random_with_seed = Random.new(object.id).rand(object.maps.length)
       maps_array = YAML.load(File.read(Rails.root.join("config/arrays", "maps.yml")))
 
-      map = maps_array.find { |m| m["en"] == object.maps[random_with_seed - 1] }
+      map = maps_array.find { |m| m["name"] == object.maps[random_with_seed - 1] }
 
       url = root_url + ActionController::Base.helpers.image_url("maps/large/#{ map["slug"] }.jpg")
     end

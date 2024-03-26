@@ -1,9 +1,9 @@
-<% content_for :page_title, t("sessions.login.title") %>
+<% content_for :page_title, "Login" %>
 <% content_for :bg_size, "large" unless params[:page] %>
 
 <div class="form-group-columns mt-1/1">
   <div>
-    <h2 class="mt-0 text-black"><center><%= t "sessions.login.title" %></center></h2>
+    <h2 class="mt-0 text-black"><center>Login</center></h2>
 
     <% if flash[:alert] %>
       <div class="warning warning--red br-1 mt-0 mb-1/4"><%= flash[:alert] %></div>
@@ -15,24 +15,24 @@
           <%= render "ollie" %>
 
           <div class="form-group mt-1/8">
-            <%= form.label :username, t("sessions.login.username"), class: "form-label" %>
-            <%= form.text_field :username, placeholder: t("sessions.login.username"), class: "form-input" %>
+            <%= form.label :username, "Username", class: "form-label" %>
+            <%= form.text_field :username, placeholder: "Username", class: "form-input" %>
           </div>
 
           <div class="form-group mt-1/4">
-            <%= form.label :password, t("sessions.login.password"), class: "form-label" %>
-            <%= form.password_field :password, placeholder: t("sessions.login.password"), class: "form-input" %>
+            <%= form.label :password, "Password", class: "form-label" %>
+            <%= form.password_field :password, placeholder: "Password", class: "form-input" %>
           </div>
 
           <div class="form-group checkbox">
             <%= form.check_box :remember_me %>
-            <%= form.label :remember_me, t("sessions.login.remember_me") %>
+            <%= form.label :remember_me, "Remember me (uses cookies)" %>
           </div>
 
-          <%= submit_tag t("sessions.login.submit"), class: "button button--secondary mt-1/2 w-100", data: { disable_with: "Submitting..." } %>
+          <%= submit_tag "Submit", class: "button button--secondary mt-1/2 w-100", data: { disable_with: "Submitting..." } %>
 
           <div class="mt-1/4">
-            <small><%= link_to t("sessions.login.forgot_password"), new_forgot_password_path %></small>
+            <small><%= link_to "Forgot your password?", new_forgot_password_path %></small>
           </div>
         <% end %>
 
@@ -40,34 +40,34 @@
 
         <%= link_to "/auth/discord", method: :post, class: "button button--discord mt-1/4", data: { prefetch: false, disable_with: "Signing in..." } do %>
           <%= inline_svg_tag "discord.svg", height: 24 %>
-          <%= t "sessions.login.discord" %>
+          Login with Discord
         <% end %>
 
         <%= link_to "/auth/bnet", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false, disable_with: "Signing in..." } do %>
           <%= inline_svg_tag "bnet.svg", height: 24 %>
-          <%= t "sessions.login.battle_net" %>
+          Login with Battle.net
         <% end %>
       </div>
     </div>
   </div>
 
   <div>
-    <h2 class="mt-1/2 sm:mt-0 text-black"><center><%= t "sessions.create_user.title" %></center></h2>
+    <h2 class="mt-1/2 sm:mt-0 text-black"><center>Create an account</center></h2>
 
     <div class="well well--dark">
       <div class="w-100">
         <center>
-          <p class="mt-0"><%= t "sessions.create_user.content" %></p>
+          <p class="mt-0">Don't have an account?</p>
         </center>
 
-        <div><%= link_to t("sessions.create_user.button"), new_user_path, class: "button w-100" %></div>
+        <div><%= link_to "Create an account", new_user_path, class: "button w-100" %></div>
       </div>
     </div>
 
     <div class="well well--dark mt-1/4">
       <div class="w-100">
         <center>
-          <p class="mt-0 mb-0"><%= t("sessions.tos.content_html", terms_of_service: link_to(t("footer.tos"), tos_path, class: "text-white")) %></p>
+          <p class="mt-0 mb-0">By creating an account, you are agreeing to the Workshop.codes <%= link_to(t("footer.tos"), tos_path, class: "text-white") %>.</p>
         </center>
       </div>
     </div>

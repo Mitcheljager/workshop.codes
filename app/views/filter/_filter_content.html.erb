@@ -1,30 +1,29 @@
 <div class="filter__group">
-  <div class="filter__item <%= "filter__item--active" if params[:category] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.categories") %>">
+  <div class="filter__item <%= "filter__item--active" if params[:category] %> dropdown" data-dropdown data-filter data-default="Categories...">
     <% current_category = params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") if params[:category] %>
-    <% i18n_category = i18n_value_in_array(categories, current_category) if current_category.present? %>
-    <%= link_to current_category.present? ? i18n_category : t("filter.categories"), "#",
+    <%= link_to current_category.present? ? current_category : "Categories...", "#",
                 data: { action: "toggle-dropdown", filter_type: "categories", value: params[:category] } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
       <% categories.each do |category| %>
-        <%= link_to category[current_locale], build_filter_path(:category, to_slug(category["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(category["en"]) } %>
+        <%= link_to category, build_filter_path(:category, to_slug(category)), class: "dropdown__item", data: { action: "add-filter", value: to_slug(category) } %>
       <% end %>
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:hero] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.heroes") %>">
-    <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.heroes"), "#",
+  <div class="filter__item <%= "filter__item--active" if params[:hero] %> dropdown" data-dropdown data-filter data-default="Heroes...">
+    <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : "Heroes...", "#",
                 data: { action: "toggle-dropdown", filter_type: "heroes", value: params[:hero] } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
       <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
-        <span class="dropdown__label"><%= hero_category[current_locale] %></span>
+        <span class="dropdown__label"><%= hero_category %></span>
 
         <% heroes.each do |hero| %>
-          <% name = i18n_value_in_array(heroes, hero["en"]) %>
-          <%= link_to build_filter_path(:hero, to_slug(hero["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(hero["en"]) } do %>
+          <% name = hero["name"] %>
+          <%= link_to build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(hero["name"]) } do %>
             <%= name %>
             <%= tag.small "OW2", class: "text-overwatch-2" if hero["overwatch_2"].present? %>
           <% end %>
@@ -33,19 +32,18 @@
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:map] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.maps") %>">
-    <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : t("filter.maps"), "#",
+  <div class="filter__item <%= "filter__item--active" if params[:map] %> dropdown" data-dropdown data-filter data-default="Maps...">
+    <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : "Maps...", "#",
                 data: { action: "toggle-dropdown", filter_type: "maps", value: params[:map] } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
       <% maps.group_by { |item| item["type"] }.each do |map_type, maps| %>
-        <span class="dropdown__label"><%= map_type[current_locale]  %></span>
+        <span class="dropdown__label"><%= map_type %></span>
 
         <% maps.each do |map| %>
-          <% name = i18n_value_in_array(maps, map["en"]) %>
-          <%= link_to build_filter_path(:map, to_slug(map["en"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(map["en"]) } do %>
-            <%= name %>
+          <%= link_to build_filter_path(:map, to_slug(map["name"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(map["name"]) } do %>
+            <%= map["name"] %>
             <%= tag.small "OW2", class: "text-overwatch-2" if map["overwatch_2"].present? %>
           <% end %>
         <% end %>
@@ -53,13 +51,13 @@
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:author] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.author") %>">
-    <%= link_to params[:author] ? params[:author].split("#")[0] : t("filter.author"), "#",
+  <div class="filter__item <%= "filter__item--active" if params[:author] %> dropdown" data-dropdown data-filter data-default="Author...">
+    <%= link_to params[:author] ? params[:author].split("#")[0] : "Author...", "#",
                 data: { action: "toggle-dropdown get-verified-users", filter_type: "author", value: (CGI.escape(params[:author]) if params[:author].present?) } %>
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
-      <span class="dropdown__label"><small><%= t "filter.verified_authors" %></small></span>
+      <span class="dropdown__label"><small>This is a list of verified creators</small></span>
 
       <div data-role="filter-authors">
         <span class="dropdown__item text-base"><div class="spinner spinner--small mb-1/4"></div></span>
@@ -67,23 +65,23 @@
     </div>
   </div>
 
-  <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="<%= t("filter.sort.label") %>">
+  <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="Sort by...">
     <% if params[:search] && !params[:sort] %>
       <%= link_to "Relevancy", "#",
                   data: { action: "toggle-dropdown", filter_type: "sort", value: "" } %>
     <% else %>
-      <%= link_to params[:sort] ? params[:sort].gsub("-", " ").humanize : t("filter.sort.label"), "#",
+      <%= link_to params[:sort] ? params[:sort].gsub("-", " ").humanize : "Sort by...", "#",
                   data: { action: "toggle-dropdown", filter_type: "sort", value: params[:sort] } %>
     <% end %>
 
     <%= link_to "X", "#", class: "filter__remove", data: { action: "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
-      <%= link_to t("filter.sort.created"), build_filter_path(:sort, "created"), class: "dropdown__item", data: { action: "add-filter", value: "created" } %>
-      <%= link_to t("filter.sort.updated"), build_filter_path(:sort, "updated"), class: "dropdown__item", data: { action: "add-filter", value: "updated" } %>
-      <%= link_to t("filter.sort.on_fire"), build_filter_path(:sort, "on-fire"), class: "dropdown__item", data: { action: "add-filter", value: "on-fire" } %>
-      <%= link_to t("filter.sort.favorites"), build_filter_path(:sort, "favorites"), class: "dropdown__item", data: { action: "add-filter", value: "favorites" } %>
-      <%= link_to t("filter.sort.views"), build_filter_path(:sort, "views"), class: "dropdown__item", data: { action: "add-filter", value: "views" } %>
+      <%= link_to "Created", build_filter_path(:sort, "created"), class: "dropdown__item", data: { action: "add-filter", value: "created" } %>
+      <%= link_to "Updated", build_filter_path(:sort, "updated"), class: "dropdown__item", data: { action: "add-filter", value: "updated" } %>
+      <%= link_to "On Fire", build_filter_path(:sort, "on-fire"), class: "dropdown__item", data: { action: "add-filter", value: "on-fire" } %>
+      <%= link_to "Favorites", build_filter_path(:sort, "favorites"), class: "dropdown__item", data: { action: "add-filter", value: "favorites" } %>
+      <%= link_to "Views", build_filter_path(:sort, "views"), class: "dropdown__item", data: { action: "add-filter", value: "views" } %>
     </div>
   </div>
 </div>
@@ -91,7 +89,7 @@
 <div class="filter__group">
   <div class="filter__item block w-100">
     <p class="filter__label mt-0">
-      <%= t("filter.num_players.label") %>
+      Players
     </p>
 
     <%= tag.div data: {
@@ -104,9 +102,9 @@
 </div>
 
 <div class="filter__group flex mt-1/4">
-  <%= link_to t("filter.apply"), build_filter_path(nil, nil), class: "button button--ghost mr-1/4", data: { role: "filter-link", prefetch: false } %>
+  <%= link_to "Apply filter", build_filter_path(nil, nil), class: "button button--ghost mr-1/4", data: { role: "filter-link", prefetch: false } %>
 
   <% if is_filter_active? %>
-    <%= link_to t("filter.remove_all"), params[:search] ? "/search/#{ params[:search] }" : posts_path(1), class: "filter__link text-red text-small" %>
+    <%= link_to "Remove filters", params[:search] ? "/search/#{ params[:search] }" : posts_path(1), class: "filter__link text-red text-small" %>
   <% end %>
 </div>

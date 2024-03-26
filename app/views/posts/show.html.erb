@@ -32,7 +32,7 @@
         <%= render "code", post: @post %>
       </div>
 
-      <% cache_unless params[:tab].present?, [@post, @post.comments_count, @revisions_count, @derivations_count, "tabs", current_locale] do %>
+      <% cache_unless params[:tab].present?, [@post, @post.comments_count, @revisions_count, @derivations_count, "tabs"] do %>
         <%= render "tabs" %>
       <% end %>
     </div>
@@ -42,7 +42,7 @@
     <%= render "expired" if @post.expired? %>
 
 
-    <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs, current_locale] do %>
+    <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs] do %>
       <%= tabs_content_tag("description", "", "mt-1/4") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
 
