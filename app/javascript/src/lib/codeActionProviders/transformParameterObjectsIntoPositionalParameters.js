@@ -47,7 +47,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
     const fileWideParameterObjectTo = (fileWideParenFrom + 1) + closingParameterObjectBracketIndex
 
     actions.push({
-      label: "Transform object into positional parameters",
+      label: "Transform parameter object into normal parameters",
       position: fileWideActionNameStart,
       run() {
         const parameterObject = state.doc.sliceString(fileWideParameterObjectFrom + 1, fileWideParameterObjectTo - 1)
