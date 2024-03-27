@@ -1,14 +1,14 @@
 <div class="content-block">
   <% if block_property(block, "battlenet").present? %>
     <div class="content-block__social">
-      <%= inline_svg_tag "icons/icon-battlenet.svg", height: 21, width: 21 %>
+      <%= inline_svg_tag "icons/icon-battlenet.svg", height: 21, width: 21, class: "icon-battlenet" %>
       <%= block_property(block, "battlenet") %>
     </div>
   <% end %>
 
   <% if block_property(block, "discord").present? %>
     <div class="content-block__social">
-      <%= inline_svg_tag "icons/icon-discord.svg", height: 21, width: 21 %>
+      <%= inline_svg_tag "icons/icon-discord.svg", height: 21, width: 21, class: "icon-discord" %>
       <%= block_property(block, "discord") %>
     </div>
   <% end %>

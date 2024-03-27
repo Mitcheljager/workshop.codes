@@ -13,12 +13,12 @@
 
   <div class="flex flex-wrap gap-1/4">
     <%= button_to "/auth/discord", class: "button button--discord h-100 w-100 nowrap", data: { prefetch: false, disable_with: "Connecting..." } do %>
-      <%= inline_svg_tag "discord.svg", height: 24 %>
+      <%= inline_svg_tag "icons/icon-discord.svg", height: 24, width: 24 %>
       Link Discord account
     <% end %>
 
     <%= button_to "/auth/bnet", class: "button button--bnet h-100 w-100 nowrap", data: { prefetch: false, disable_with: "Connecting..." } do %>
-      <%= inline_svg_tag "bnet.svg", height: 24 %>
+      <%= inline_svg_tag "icons/icon-battlenet.svg", height: 24, width: 24 %>
       Link Battle.net account
     <% end %>
   </div>
