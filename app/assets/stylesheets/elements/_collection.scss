@@ -60,30 +60,30 @@
 .collection__title {
   display: block;
   margin-bottom: $margin / 16;
-  color: $white;
+  color: $text-color-lightest;
   font-size: 18px;
   line-height: 1.2em;
   font-weight: bold;
   text-decoration: none;
 
   &:hover {
-    color: $pure-white;
+    color: $white;
   }
 }
 
 .collection__author {
-  color: $white;
+  color: $text-color-lightest;
   font-size: $font-size-small;
   font-weight: bold;
   text-decoration: none;
 
   &:hover {
-    color: $pure-white;
+    color: $white;
   }
 }
 
 .collection__count {
-  color: $white;
+  color: $text-color-lightest;
   font-style: italic;
   font-size: $font-size-small;
 }

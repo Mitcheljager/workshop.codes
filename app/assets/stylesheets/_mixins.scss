@@ -65,7 +65,7 @@
   background: transparent;
   font-family: $font-stack;
   font-size: $font-size-base;
-  color: $white;
+  color: $text-color-lightest;
 
   &:focus {
     outline: none;
@@ -86,7 +86,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $pure-white;
+    outline: 2px solid $white;
 
     &:not(:active) {
       @if $prepend == inset {

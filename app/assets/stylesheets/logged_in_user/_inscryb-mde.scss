@@ -22,7 +22,7 @@
   }
 
   &.fullscreen {
-    background: var(--bg-darker);
+    background: $bg-darker;
     z-index: 1000;
 
     &::before,
@@ -116,7 +116,7 @@
   &:hover,
   &:active {
     background: lighten($bg-dark, 5%);
-    color: $white;
+    color: $text-color-lightest;
   }
 
   &--icon {
@@ -189,7 +189,7 @@
 
 .fa-highlight::before {
   content: "h";
-  color: $primary;
+  color: var(--primary, $primary);
 }
 
 .fa-code::before {
@@ -259,7 +259,7 @@
 }
 
 .editor-toolbar button[title*="Toggle Preview"] {
-  background: $primary;
+  background: var(--primary, $primary);
 
   &.active {
     filter: brightness(1.15);

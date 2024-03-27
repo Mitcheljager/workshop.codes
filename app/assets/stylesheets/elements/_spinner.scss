@@ -16,7 +16,7 @@
     height: 2rem;
     border-radius: 50%;
     border: .25rem solid $text-color;
-    border-color:  $text-color rgba($pure-white, .1) rgba($pure-white, .1);
+    border-color:  $text-color rgba($white, .1) rgba($white, .1);
     animation: spinner 750ms linear infinite;
   }
 

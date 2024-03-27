@@ -83,7 +83,6 @@ module ApplicationHelper
       { title: "Profile", url: edit_profile_path, },
       { title: "Account", url: edit_user_path, },
       { title: "Linked Accounts", url: linked_users_path, },
-      { title: "Accessibility", url: accessibility_path, },
       { title: "Logout", url: logout_path, data: { prefetch: false } }
     ]
   end

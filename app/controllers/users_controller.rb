@@ -76,8 +76,6 @@ class UsersController < ApplicationController
     @collections = current_user.collections.order(created_at: :desc)
   end
 
-  def accessibility; end
-
   private
 
   def set_user

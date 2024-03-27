@@ -58,7 +58,7 @@ $width: clamp(10rem, 12.5vw, 15rem);
   cursor: pointer;
 
   &:hover {
-    color: $white;
+    color: $text-color-lightest;
   }
 }
 

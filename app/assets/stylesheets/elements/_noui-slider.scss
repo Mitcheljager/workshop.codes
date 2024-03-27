@@ -147,15 +147,15 @@
 }
 
 .noUi-handle {
-  border: 1px solid $white;
+  border: 1px solid $text-color-lightest;
   border-radius: 50%;
-  background: $white;
+  background: $text-color-lightest;
   cursor: pointer;
 
   @include focus-visible-outline;
 
   @include hover-stack {
-    background: $pure-white;
+    background: $white;
   }
 }
 

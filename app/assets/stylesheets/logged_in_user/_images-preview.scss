@@ -17,7 +17,7 @@
 
   @include hover-stack {
     filter: brightness(1.1);
-    box-shadow: 0 0 0 2px $white;
+    box-shadow: 0 0 0 2px $text-color-lightest;
   }
 
   &:active {
@@ -43,7 +43,7 @@
   padding: .25em .5em;
   background: $red;
   font-size: 12px;
-  color: $pure-white;
+  color: $white;
   cursor: pointer;
 
   &:hover,

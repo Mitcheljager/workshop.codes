@@ -19,7 +19,7 @@
   margin: .25rem 0;
   font-weight: bold;
   color: $text-color;
-  font-family: var(--font-stack-alt);
+  font-family: $font-stack-alt;
   text-decoration: none;
   text-transform: uppercase;
 
@@ -37,7 +37,7 @@
   }
 
   &--active {
-    color: $white;
+    color: $text-color-lightest;
   }
 }
 
@@ -127,7 +127,7 @@
 .profile-banner__title {
   display: block;
   margin: $margin / 4 0 .1em;
-  color: $white;
+  color: $text-color-lightest;
   font-weight: bold;
   font-size: 32px;
   text-decoration: none;

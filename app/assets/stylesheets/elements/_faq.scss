@@ -16,7 +16,7 @@
   cursor: pointer;
 
   @include hover-stack {
-    color: $white;
+    color: $text-color-lightest;
   }
 }
 

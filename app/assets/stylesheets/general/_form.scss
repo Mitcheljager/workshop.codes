@@ -7,13 +7,13 @@
   border-radius: $border-radius / 2;
   font-family: $font-stack;
   font-size: $font-size-base;
-  color: $white;
+  color: $text-color-lightest;
 
   &:focus,
   &:focus-within {
     outline: none;
     background: lighten($bg-dark, 5%);
-    box-shadow: 0 0 0 2px rgba($pure-white, 0.25);
+    box-shadow: 0 0 0 2px rgba($white, 0.25);
   }
 
   &::placeholder {
@@ -149,7 +149,7 @@
   &:focus {
     outline: none;
     background-color: lighten($bg-dark, 5%);
-    box-shadow: 0 0 0 2px rgba($pure-white, 0.25);
+    box-shadow: 0 0 0 2px rgba($white, 0.25);
   }
 
   &:not(multiple) {
@@ -233,7 +233,7 @@
 
 input[type="checkbox"] {
   &:checked + label {
-    color: $white;
+    color: $text-color-lightest;
   }
 
   &[disabled],
@@ -312,7 +312,7 @@ input[type="file"] {
   font-size: $font-size-small;
 
   a {
-    color: $white;
+    color: $text-color-lightest;
   }
 }
 
@@ -349,7 +349,7 @@ input[type="file"] {
     cursor: pointer;
 
     &:hover {
-      background: $pure-white;
+      background: $white;
     }
   }
 

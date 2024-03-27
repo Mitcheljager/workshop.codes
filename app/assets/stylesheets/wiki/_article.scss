@@ -20,7 +20,7 @@
   display: inline-block;
   margin: 0 0 $margin / 4;
   font-size: 18px;
-  color: $primary;
+  color: var(--primary, $primary);
   text-decoration: none;
 }
 
@@ -55,7 +55,7 @@
 
 .article__aside-content {
   margin-top: $margin;
-  background: var(--bg-darker);
+  background: $bg-darker;
   padding: $margin / 4;
   border-radius: $border-radius;
   font-size: $font-size-small;
@@ -66,11 +66,11 @@
   }
 
   a {
-    color: $white;
+    color: $text-color-lightest;
     text-decoration: none;
 
     @include hover-stack {
-      color: $pure-white;
+      color: $white;
     }
   }
 }

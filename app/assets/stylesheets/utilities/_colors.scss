@@ -1,13 +1,13 @@
 .text-white {
-  color: $white !important;
+  color: $text-color-lightest !important;
 }
 
 .hover\:text-white:hover {
-  color: $white;
+  color: $text-color-lightest;
 }
 
 .text-pure-white {
-  color: $pure-white;
+  color: $white;
 }
 
 .text-dark {
@@ -23,7 +23,7 @@
 }
 
 .bg-primary {
-  background: $primary;
+  background: var(--primary, $primary);
 }
 
 .bg-dark {
@@ -85,7 +85,7 @@
 }
 
 .text-primary {
-  color: $primary;
+  color: var(--primary, $primary);
 }
 
 .text-orange {

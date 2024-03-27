@@ -4,7 +4,7 @@ h3,
 h4,
 h5 {
   font-weight: lighter;
-  color: $white;
+  color: $text-color-lightest;
 
   .high-contrast & {
     font-weight: normal;

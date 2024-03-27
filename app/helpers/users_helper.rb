@@ -1,8 +1,4 @@
 module UsersHelper
-  def accessibility_settings
-    "#{ "high-contrast" if current_user.high_contrast? } #{ "large-fonts" if current_user.large_fonts? }"
-  end
-
   def is_arbiter?(user)
     if user && (user.level == "admin" || user.level == "arbiter")
       return true

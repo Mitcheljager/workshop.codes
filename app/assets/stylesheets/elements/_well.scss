@@ -17,7 +17,7 @@
   }
 
   &--dark {
-    background: var(--bg-darker);
+    background: $bg-darker;
   }
 
   &--scrollable {
@@ -80,6 +80,6 @@
   border-radius: $border-radius;
   background: $bg-dark;
   font-size: 0.75rem;
-  color: $pure-white;
+  color: $white;
   font-weight: bold;
 }

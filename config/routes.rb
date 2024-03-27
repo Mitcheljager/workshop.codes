@@ -89,9 +89,6 @@ Rails.application.routes.draw do
   patch "user", to: "users#update", as: "update_user"
   delete "user", to: "users#destroy", as: "destroy_user"
 
-  get "account/accessibility", to: "accessibility#edit", as: "accessibility"
-  patch "account/accessibility", to: "accessibility#update", as: "update_accessibility"
-
   resources :sessions, only: [:new, :create, :destroy]
 
   get "u/:username(/page/:page)", to: "profiles#show", as: "profile"

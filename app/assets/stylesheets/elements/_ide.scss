@@ -56,7 +56,7 @@
 
   &::selection,
   span::selection {
-    background: rgba($pure-white, .1);
+    background: rgba($white, .1);
   }
 
   .ide--input & {
@@ -101,7 +101,7 @@
   }
 
   @include hover-stack {
-    color: $white;
+    color: $text-color-lightest;
   }
 
   .copy__notification {
