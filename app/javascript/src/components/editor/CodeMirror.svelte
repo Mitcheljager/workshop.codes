@@ -1,10 +1,10 @@
 <script>
-  import { onDestroy, onMount, createEventDispatcher, tick } from "svelte"
+  import { onDestroy, onMount, createEventDispatcher } from "svelte"
   import { basicSetup } from "codemirror"
   import { EditorView, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection, Transaction } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
-  import { autocompletion, pickedCompletion } from "@codemirror/autocomplete"
+  import { autocompletion } from "@codemirror/autocomplete"
   import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
@@ -12,11 +12,13 @@
   import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
   import { parameterTooltip } from "../../lib/parameterTooltip"
   import { extraCompletions } from "../../lib/extraCompletions"
+  import { codeActions } from "../../lib/codeActions"
+  import { transformParameterObjectsIntoPositionalParameters } from "../../lib/codeActionProviders/transformParameterObjectsIntoPositionalParameters"
   import { foldBrackets } from "../../lib/foldBrackets"
   import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
   import { translationsMap } from "../../stores/translationKeys"
   import { getPhraseFromPosition } from "../../utils/parse"
-  import { tabIndent, getIndentForLine, getIndentCountForText, shouldNextLineBeIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "../../utils/codemirror/indent"
+  import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "../../utils/codemirror/indent"
   import { get } from "svelte/store"
   import debounce from "../../debounce"
 
@@ -81,6 +83,9 @@
         parameterTooltip(),
         indentationMarkers(),
         rememberScrollPosition(),
+        codeActions([
+          transformParameterObjectsIntoPositionalParameters
+        ]),
         foldBrackets(),
         ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
       ]
@@ -92,7 +97,7 @@
       // Only perform this function if transaction is of an expected type performed by the user
       // to prevent infinite loops on changes made by CodeMirror.
       const userEvents = transaction.transactions.map(tr => tr.annotation(Transaction.userEvent))
-      
+
       if (userEvents.every(eventType => eventType === "input.complete")) {
         autocompleteFormatting(view, transaction)
       } else if (userEvents.every(eventType => eventType === "input.paste")) {
@@ -161,7 +166,7 @@
 
   function searchScrollMargin(view, transaction) {
     if (transaction.transactions[0].annotations[0].value !== "select.search") return
-    
+
     view.dispatch ({
       effects: EditorView.scrollIntoView (
         view.state.selection.main.head,
@@ -206,7 +211,7 @@
 
     if (!validValue?.type) return
     const insertPosition = view.state.selection.ranges[0].from
-    
+
     view.dispatch({
       changes: { from: insertPosition, insert: ";" },
       selection: EditorSelection.create([

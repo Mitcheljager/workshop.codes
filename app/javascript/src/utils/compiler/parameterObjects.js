@@ -28,6 +28,27 @@ export function evaluateParameterObjects(joinedItems) {
 }
 
 /**
+ * Obtain a JavaScript Object out of the string contents of a parameter object
+ *
+ * @param {string} innerContent Content inside the parameter object's curly braces
+ * @returns {Object}
+ */
+export function parseParameterObjectContent(innerContent) {
+  const splitParameters = splitArgumentsString(innerContent)
+  const result = {}
+
+  splitParameters.forEach(item => {
+    let [key, value] = item.split(/:(.*)/s)
+    key = key.replace(/\[linemarker\].*?\[\/linemarker\]/, "").trim()
+    value = (value || "").trim()
+    if (!key) return
+    result[key] = value
+  })
+
+  return result
+}
+
+/**
  * Find the first matching parameter object in a given string. Parameter objects are a special format that allow the user to give only specific sets of parameters rather than having to write them all out.
  * @param {string} content Content to search for parameter objects in.
  * @param {*} startFromIndex Skip over previous results. This is used when the regex format was found without matches phrases to skip over previous results.
@@ -47,17 +68,8 @@ export function getFirstParameterObject(content, startFromIndex = 0) {
   const start = match.index + match[0].indexOf("{")
   const phrase = getPhraseFromIndex(content, match.index)
   const completion = get(completionsMap).find(item => item.args_length && item.label.replace(" ", "") === phrase.replace(" ", ""))
-  const string = content.slice(match.index + match[0].length, end).trim()
-  const splitParameters = splitArgumentsString(string)
-  const given = {}
-
-  splitParameters.forEach(item => {
-    let [key, value] = item.split(/:(.*)/s)
-    key = key.replace(/\[linemarker\].*?\[\/linemarker\]/, "").trim()
-    value = (value || "").trim()
-    if (!key) return
-    given[key] = value
-  })
+  const innerContent = content.slice(match.index + match[0].length, end).trim()
+  const given = parseParameterObjectContent(innerContent)
 
   const result = { start: start + startFromIndex, end: end + startFromIndex, given }
 

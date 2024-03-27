@@ -1,4 +1,4 @@
-import { EditorSelection, Transaction } from "@codemirror/state"
+import { EditorSelection } from "@codemirror/state"
 
 /**
  * Indent on using tab with special conditions. Indent is reversed while holding shift
@@ -50,10 +50,10 @@ export function tabIndent({ state, dispatch }, event) {
       const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1: 0))
       const toModifier = insert.length - originalLength
       const reverseSelection = state.selection.main.head === to
-      
+
       let range = EditorSelection.range(to + toModifier, from + fromModifier)
       if (reverseSelection) range = EditorSelection.range(from + fromModifier, to + toModifier)
-      
+
       return {
         changes: { from: line.from, to, insert },
         range
@@ -68,7 +68,7 @@ export function tabIndent({ state, dispatch }, event) {
 }
 
 /**
- * Fine the number of indents of a given line number.
+ * Find the number of indents of a given line number.
  * @param {Object} state CodeMirror editor state
  * @param {Number} line CodeMirror line number
  * @param {Number} charLimit Max characters given in the text
