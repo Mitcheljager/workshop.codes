@@ -46,6 +46,9 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
     const fileWideParameterObjectFrom = (fileWideParenFrom + 1) + openParameterObjectBracketIndex
     const fileWideParameterObjectTo = (fileWideParenFrom + 1) + closingParameterObjectBracketIndex
 
+    // there is other stuff after the parameter object (that is not white space)
+    if (!(/^\s*$/.test(state.doc.sliceString(fileWideParameterObjectTo, fileWideParenTo - 1)))) return
+
     actions.push({
       label: "Transform parameter object into normal parameters",
       position: fileWideActionNameStart,
