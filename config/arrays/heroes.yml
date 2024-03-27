@@ -87,6 +87,10 @@
   name: Tracer
   category: Damage
 -
+  name: Venture
+  category: Damage
+  overwatch_2: true
+-
   name: Widowmaker
   category: Damage
 -
