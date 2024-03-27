@@ -17,10 +17,11 @@
 }
 
 .navigation__item {
+  --color: #{$body-bg};
   display: block;
   margin-bottom: $margin / 4;
   border-radius: $border-radius / 2;
-  color: $white;
+  color: var(--color);
   text-decoration: none;
   font-family: $font-stack-alt;
   text-transform: uppercase;
@@ -42,7 +43,7 @@
   &:active,
   &:focus,
   &--active {
-    color: $white;
+    color: var(--color);
     position: relative;
 
     &::before {
@@ -54,21 +55,19 @@
       width: 100%;
       height: 3px;
       border-radius: 10px;
-      background: $white;
-      opacity: .5;
+      background: var(--color);
     }
   }
 
   &--active {
-    &::before {
-      background: $white;
-      opacity: 1;
-    }
-
+    &::before,
     &:hover::before {
-      background: $white;
-      opacity: 1;
+      background: var(--primary, $primary);
     }
+  }
+
+  .wiki & {
+    --color: #{$white};
   }
 
   svg {
