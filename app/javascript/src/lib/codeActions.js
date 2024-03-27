@@ -20,11 +20,11 @@ class CodeActionLightBulbWidget extends WidgetType {
 
   toDOM() {
     const container = document.createElement("span")
-    container.className = "button cm-codeActionsLightbulb"
+    container.className = "button code-actions-lightbulb"
     container.textContent = "💡"
 
     const dropdown = document.createElement("select")
-    dropdown.className = "cm-codeActionsLightbulb__dropdown"
+    dropdown.className = "code-actions-lightbulb__dropdown"
     container.appendChild(dropdown)
 
     const blankOption = document.createElement("option")
