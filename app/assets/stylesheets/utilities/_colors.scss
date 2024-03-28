@@ -6,18 +6,6 @@
   color: $text-color-lightest;
 }
 
-.icon-white {
-  color: $white;
-}
-
-.icon-discord {
-  color: $discord;
-}
-
-.icon-battlenet {
-  color: $bnet;
-}
-
 .text-pure-white {
   color: $white;
 }
@@ -32,6 +20,10 @@
 
 .text-discord {
   color: $discord;
+}
+
+.text-battlenet {
+  color: $bnet;
 }
 
 .bg-primary {
