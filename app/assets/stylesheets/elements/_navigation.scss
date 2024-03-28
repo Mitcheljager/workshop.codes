@@ -17,7 +17,7 @@
 }
 
 .navigation__item {
-  --color: #{$body-bg};
+  --color: #{$text-color-lightest};
   display: block;
   margin-bottom: $margin / 4;
   border-radius: $border-radius / 2;
@@ -30,6 +30,7 @@
   @include focus-visible-outline;
 
   @include media-min(mbl) {
+    --color: #{$body-bg};
     font-size: clamp(19px, 2vw, 24px);
     margin-right: clamp(#{ $margin / 8 }, 1.25vw, #{ $margin / 2 });
     margin-bottom: 0;
