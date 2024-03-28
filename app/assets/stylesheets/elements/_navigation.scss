@@ -77,6 +77,15 @@
       height: 24px;
     }
   }
+
+  &--discord {
+    display: flex;
+    color: $discord;
+
+    &:hover {
+      color: $discord;
+    }
+  }
 }
 
 .navigation-trigger {
