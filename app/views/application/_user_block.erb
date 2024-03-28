@@ -9,7 +9,7 @@
         <% user_menu_items.each do |menu_item| %>
           <%= link_to menu_item[:title],
               menu_item[:url],
-              class: "dropdown__item text-small #{ "text-pure-white" if current_page?(menu_item[:url])}",
+              class: "dropdown__item text-small #{ "text-white" if current_page?(menu_item[:url])}",
               data: menu_item[:data] %>
 
           <% if menu_item[:url] == collections_path %>

@@ -4,7 +4,7 @@
 
 <% @admin_activity.each do |activity| %>
   <div class="well block mb-1/8">
-    <div class="mb-1/4 text-white">
+    <div class="mb-1/4 text-lightest">
       <small><%= time_ago_in_words(activity.created_at) %> ago &nbsp;</small>
       <strong><%= activity.user.username %></strong> - <%= activity.content_type %>
     </div>

@@ -20,7 +20,7 @@
 
   <% if @user.linked_id %>
     <div class="warning warning--orange mb-1/2">
-      This is a linked account. <%= link_to "View main account", admin_user_path(@user.linked_id), class: "text-white" %>
+      This is a linked account. <%= link_to "View main account", admin_user_path(@user.linked_id), class: "text-lightest" %>
     </div>
   <% end %>
 
@@ -102,7 +102,7 @@
     <% @user.notifications.order(created_at: :desc).limit(10).each do |notification| %>
       <div class="well well--dark block mb-1/8 p-1/4">
         <em><%= time_ago_in_words(notification.created_at) %></em> -
-        <span class="text-white"><%= notification.content %></span>
+        <span class="text-lightest"><%= notification.content %></span>
       </div>
     <% end %>
   </div>
@@ -158,12 +158,12 @@
     <% @user.comments.order(created_at: :desc).limit(20).each do |comment| %>
       <div class="well well--dark block mb-1/8 p-1/4">
         <em><%= time_ago_in_words(comment.created_at) %></em>
-        <div class="text-white"><%= markdown(comment.content) %></div>
+        <div class="text-lightest"><%= markdown(comment.content) %></div>
 
         <hr class="mt-1/4 mb-1/4">
 
         <%= link_to "🗑️", admin_comment_path(comment.id), method: :delete, data: { confirm: "Are you sure you wish to destroy this comment?" } %> |
-        On post: <%= link_to comment.post.title, post_path(comment.post.code), class: "text-white" %>
+        On post: <%= link_to comment.post.title, post_path(comment.post.code), class: "text-lightest" %>
       </div>
     <% end %>
   </div>
@@ -174,7 +174,7 @@
     <% @user.activities.order(created_at: :desc).limit(20).each do |activity| %>
       <div class="well well--dark block mb-1/8 p-1/4">
         <em><%= time_ago_in_words(activity.created_at) %></em> -
-        <span class="text-white"><%= activity.content_type %></span>
+        <span class="text-lightest"><%= activity.content_type %></span>
       </div>
     <% end %>
   </div>

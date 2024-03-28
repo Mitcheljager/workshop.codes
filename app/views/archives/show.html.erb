@@ -2,7 +2,7 @@
 
 <div class="wrapper">
   <div class="heading">
-    <h1 class="text-md-center text-pure-white">
+    <h1 class="text-md-center text-white">
       <%= @post.title %><br>
       Code: <%= @post.code %><br>
       Archive Actions
@@ -20,7 +20,7 @@
           <p>Authenticating via the button below will not create a Workshop.codes account or permanently store any additional data on our servers.</p>
         <% else %>
           <p class="mt-0 text-red">You are not authorized to take action on this archive post.</p>
-          <p class="text-red">If you believe this is in error, you may need to <a href="https://battle.net" target="_blank" rel="noreferrer noopener" class="text-white">go to Battle.net</a> and switch accounts there before trying to authenticate again.</p>
+          <p class="text-red">If you believe this is in error, you may need to <a href="https://battle.net" target="_blank" rel="noreferrer noopener" class="text-lightest">go to Battle.net</a> and switch accounts there before trying to authenticate again.</p>
         <% end %>
 
         <%= link_to "/auth/bnet?auth_only_no_user=1&redirect_path=#{archive_path(code: @post.code)}", method: :post, class: "button button--bnet mt-1/8", data: { prefetch: false } do %>

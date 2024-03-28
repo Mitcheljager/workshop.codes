@@ -19,17 +19,17 @@
       <p>With this editor, you can create and edit your Workshop modes using a text based editor. If you have not used the Workshop before, using this editor as a starting point might be difficult. If you have never used a text based editor before but you have used the Workshop, consider this the second step to becoming a programmer!</p>
 
       <p>
-        <strong class="text-white">Features:</strong>
+        <strong class="text-lightest">Features:</strong>
         <ul>
-          <li><mark class="text-white">Autocomplete</mark> any Workshop actions and values.</li>
-          <li><mark class="text-white">Automatic variable detecting</mark>, no need to declare your variables anywhere.</li>
-          <li>Relevant <mark class="text-white">syntax highlighting.</mark></li>
-          <li><mark class="text-white">Folders</mark>, wow!</li>
-          <li>Integrated <mark class="text-white">Wiki</mark> search.</li>
-          <li>Automatic <mark class="text-white">error detection</mark> (it's a bit limited, but still).</li>
-          <li>Reduce code repetition using <mark class="text-white">Mixins</mark>, <mark class="text-white">Loops</mark>, and <mark class="text-white">Conditionals</mark>.</li>
-          <li>Easily manage <mark class="text-white">translations</mark> for all supported languages.</li>
-          <li><mark class="text-white">Share</mark> your projects with others (Maybe even collaborate together in the future!).</li>
+          <li><mark class="text-lightest">Autocomplete</mark> any Workshop actions and values.</li>
+          <li><mark class="text-lightest">Automatic variable detecting</mark>, no need to declare your variables anywhere.</li>
+          <li>Relevant <mark class="text-lightest">syntax highlighting.</mark></li>
+          <li><mark class="text-lightest">Folders</mark>, wow!</li>
+          <li>Integrated <mark class="text-lightest">Wiki</mark> search.</li>
+          <li>Automatic <mark class="text-lightest">error detection</mark> (it's a bit limited, but still).</li>
+          <li>Reduce code repetition using <mark class="text-lightest">Mixins</mark>, <mark class="text-lightest">Loops</mark>, and <mark class="text-lightest">Conditionals</mark>.</li>
+          <li>Easily manage <mark class="text-lightest">translations</mark> for all supported languages.</li>
+          <li><mark class="text-lightest">Share</mark> your projects with others (Maybe even collaborate together in the future!).</li>
         </ul>
       <p>
 
@@ -41,7 +41,7 @@
 
         {#each $projects as { title, uuid, updated_at }}
           <button class="project" on:click={() => getProject(uuid)}>
-            <div class="text-white">{title}</div>
+            <div class="text-lightest">{title}</div>
             <small>Last updated: { new Date(updated_at).toLocaleString() }</small>
           </button>
         {/each}

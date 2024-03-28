@@ -6,3 +6,7 @@
   overflow: auto;
   @include styled-scrollbar;
 }
+
+.overflow-visible {
+  overflow: visible;
+}

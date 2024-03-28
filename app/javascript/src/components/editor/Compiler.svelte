@@ -57,7 +57,7 @@
   {/if}
 
   {#if copied && !inline}
-    <div transition:fly={{ y: 5, duration: 150 }} class="tooltip__content bg-primary text-pure-white block">
+    <div transition:fly={{ y: 5, duration: 150 }} class="tooltip__content bg-primary text-white block">
       Copied to clipboard
     </div>
   {/if}

@@ -84,7 +84,7 @@
     const subString = string.substring(index, index + value.length)
     let elementString = `<mark>${ subString }</mark>`
 
-    if (replace) elementString += `<mark class="text-white"> ⇢ ${ replace }</mark>`
+    if (replace) elementString += `<mark class="text-lightest"> ⇢ ${ replace }</mark>`
 
     return replaceBetween(string, elementString, index, index + value.length)
   }
@@ -192,7 +192,7 @@
           {/if}
 
           <div class="text-dark text-small">
-            <span class="text-white">Matches: {item.contentMatches?.length}</span>
+            <span class="text-lightest">Matches: {item.contentMatches?.length}</span>
 
             {#each (item.contentMatches || []) as match}
               <div>
