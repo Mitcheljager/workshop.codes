@@ -81,6 +81,10 @@
   &--discord {
     display: flex;
     color: $discord;
+
+    &:hover {
+      color: $discord;
+    }
   }
 }
 
