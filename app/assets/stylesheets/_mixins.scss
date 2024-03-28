@@ -51,7 +51,7 @@
 @mixin hover-stack() {
   &:hover,
   &:active,
-  &:focus {
+  &:focus-visible {
     @content;
   }
 }

@@ -11,6 +11,11 @@
     transition-delay: 180ms;
     background: $bg-darker;
 
+    &:focus {
+      box-shadow: 0 0 0 2px $white;
+      background: lighten($bg-dark, 5%);
+    }
+
     @include media-min(sm) {
       padding-right: 6rem;
       width: 22.5vw;

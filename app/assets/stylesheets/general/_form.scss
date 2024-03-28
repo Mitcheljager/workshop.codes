@@ -366,3 +366,7 @@ input[type="file"] {
   padding: 0;
   border: 1px solid $border-color;
 }
+
+input[type="submit"] {
+  @include focus-visible-outline;
+}

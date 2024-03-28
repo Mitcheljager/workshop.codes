@@ -122,11 +122,6 @@
     margin-bottom: 0;
     font-size: 22px;
     line-height: 1.25em;
-
-    @include hover-stack {
-      outline: none;
-      filter: brightness(1.15);
-    }
   }
 }
 

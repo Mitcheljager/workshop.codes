@@ -44,6 +44,18 @@
   text-align: left;
   white-space: nowrap;
 
+  @include focus-visible-outline(inset);
+
+  @include hover-stack {
+    color: $text-color-lightest;
+
+    &::after {
+      background: $text-color-lightest;
+      width: 100%;
+      transition: width 50ms, background-color 50ms;
+    }
+  }
+
   &::after {
     content: "";
     display: block;
@@ -55,16 +67,6 @@
     background: transparent;
     transform: translateX(-50%);
     transition: width 50ms, background-color 0ms 50ms;
-  }
-
-  @include hover-stack {
-    color: $text-color-lightest;
-
-    &::after {
-      background: $text-color-lightest;
-      width: 100%;
-      transition: width 50ms, background-color 50ms;
-    }
   }
 
   &--active,

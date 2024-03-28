@@ -27,8 +27,6 @@
   text-transform: uppercase;
   font-size: 18px;
 
-  @include focus-visible-outline;
-
   @include media-min(mbl) {
     --color: #{$body-bg};
     font-size: clamp(19px, 2vw, 24px);
@@ -101,8 +99,6 @@
   line-height: 1.2em;
   font-weight: bolder;
   text-decoration: none;
-
-  @include focus-visible-outline;
 
   @include media-min(sm) {
     margin-left: 1rem;

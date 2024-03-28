@@ -8,6 +8,8 @@ button {
   text-align: left;
   cursor: pointer;
 
+  @include focus-visible-outline;
+
   &[data-tooltip]:hover {
     position: relative;
 

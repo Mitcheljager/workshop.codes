@@ -27,9 +27,10 @@ a {
   color: $text-color;
   outline: none;
 
+  @include focus-visible-outline;
+
   @include hover-stack {
     color: $text-color-lightest;
-    outline: none;
   }
 }
 

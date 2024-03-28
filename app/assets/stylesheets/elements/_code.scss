@@ -21,7 +21,6 @@
   overflow: hidden;
 
   @include hover-stack {
-    outline: none;
     filter: brightness(1.15);
   }
 
