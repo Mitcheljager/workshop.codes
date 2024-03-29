@@ -51,9 +51,9 @@
 </script>
 
 <div class="expandable-snippet relative">
-  <div class="expandable-snippet__expand-button" on:click={() => expanded = true}>
+  <button class="expandable-snippet__expand-button" on:click={() => expanded = true}>
     <Expand />
-  </div>
+  </button>
   <code class="block overflow-auto">
     {#each snippetLines as line, index}
       <div class="flex">
@@ -67,9 +67,9 @@
 <div class="modal modal--top" data-ignore>
   <div class="modal__content expandable-snippet-modal" style="min-width: 600px; max-width: initial;">
     <div class="expandable-snippet relative">
-      <div class="expandable-snippet__expand-button" on:click={() => expanded = false}>
+      <button class="expandable-snippet__expand-button" on:click={() => expanded = false}>
         <Expand contract />
-      </div>
+      </button>
       <div class="expandable-snippet__code overflow-auto">
         <code class="block" bind:this={expandedCodeElement}>
           {#each fullContentLines as line, index}
@@ -85,6 +85,7 @@
     </div>
   </div>
 
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="modal__backdrop" on:click={() => expanded = false} />
 </div>
 {/if}

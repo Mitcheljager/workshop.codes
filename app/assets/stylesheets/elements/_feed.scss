@@ -39,11 +39,11 @@
   margin: 0.35rem 0;
 
   a {
-    color: $white;
+    color: $text-color-lightest;
     text-decoration: none;
 
     &:hover {
-      color: $pure-white;
+      color: $white;
     }
   }
 }
@@ -58,11 +58,11 @@
   font-size: var(--font-size-small);
 
   a {
-    color: $white;
+    color: $text-color-lightest;
     text-decoration: none;
 
     @include hover-stack {
-      color: $pure-white;
+      color: $white;
     }
   }
 }

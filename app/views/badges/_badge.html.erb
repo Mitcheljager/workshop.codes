@@ -4,8 +4,8 @@
   <%= inline_svg_tag "badges/#{ badges[badge.badge_id]["name"] }.svg", class: "badge__icon #{ "badge__icon--large" if large }" %>
 
   <div class="tooltip__content">
-    <big class="block mb-1/8 text-white"><strong><%= badges[badge.badge_id]["en"]["label"] %></strong></big>
-    <p class="mb-0"><%= badges[badge.badge_id]["en"]["description"] %></p>
+    <big class="block mb-1/8 text-lightest"><strong><%= badges[badge.badge_id]["label"] %></strong></big>
+    <p class="mb-0"><%= badges[badge.badge_id]["description"] %></p>
     <small title="<%= badge.created_at %>">Earned <%= time_ago_in_words badge.created_at %> ago</small>
   </div>
 </div>

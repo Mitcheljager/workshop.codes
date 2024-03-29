@@ -1,4 +1,8 @@
 <div class="card-carousel">
+  <div class="skip-links">
+    <a href="#past-carousel" data-turbolinks="false">Skip past carousel</a>
+  </div>
+
   <div data-role="carousel-cards" data-max="10" data-url="" class="cards cards--on-fire">
     <%= render collection: @hot_posts, partial: "card", as: :post %>
   </div>
@@ -6,3 +10,5 @@
   <div class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" data-action="carousel-previous"><%= inline_svg_tag "layout/carousel-left.svg" %></div>
   <div class="card-carousel__control card-carousel__control--next" data-action="carousel-next"><%= inline_svg_tag "layout/carousel-right.svg" %></div>
 </div>
+
+<div id="past-carousel"></div>

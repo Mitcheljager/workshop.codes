@@ -22,7 +22,7 @@
   }
 
   &.fullscreen {
-    background: var(--bg-darker);
+    background: $bg-darker;
     z-index: 1000;
 
     &::before,
@@ -59,11 +59,15 @@
       position: relative;
       background: lighten($bg-dark, 10%);
     }
+
+    &.active {
+      background: lighten($bg-dark, 10%);
+    }
   }
 
   i.separator {
     border: 0;
-    margin: 0 $margin / 8;
+    margin: 0 $margin / 16;
   }
 }
 
@@ -72,7 +76,7 @@
   right: 0;
   top: 2rem;
   max-height: 300px;
-  width: 150px;
+  width: 220px;
   background: $bg-dark;
   border: 1px solid $text-color-dark;
   border-radius: $border-radius;
@@ -84,6 +88,10 @@
   small {
     display: block;
     padding: .5rem;
+  }
+
+  .checkbox label {
+    padding-left: .5rem;
   }
 }
 
@@ -108,7 +116,18 @@
   &:hover,
   &:active {
     background: lighten($bg-dark, 5%);
-    color: $white;
+    color: $text-color-lightest;
+  }
+
+  &--icon {
+    display: flex;
+    align-items: center;
+    gap: $margin / 8;
+    min-height: 2.5rem;
+
+    img {
+      width: 2rem;
+    }
   }
 }
 
@@ -118,6 +137,10 @@
 .editor-preview-side table th {
   border: 0;
   padding: .5rem;
+}
+
+.editor-preview p {
+  margin-top: 1rem;
 }
 
 .fa-bold::before {
@@ -156,13 +179,17 @@
   content: "🖼️";
 }
 
+.fa-video::before {
+  content: "▶";
+}
+
 .fa-minus::before {
   content: "⚊";
 }
 
 .fa-highlight::before {
   content: "h";
-  color: $primary;
+  color: var(--primary, $primary);
 }
 
 .fa-code::before {
@@ -173,9 +200,11 @@
 
 .editor-toolbar button[title*="Block"],
 .editor-toolbar button[title="Gallery"],
+.editor-toolbar button[title="Update Notes"],
 .editor-toolbar button[title="Controls"],
 .editor-toolbar button[title="Insert Table"],
 .editor-toolbar button[title*="Hero Icon"],
+.editor-toolbar button[title*="Ability Icon"],
 .editor-toolbar button[title*="Toggle Preview"],
 .editor-toolbar button[title*="Wiki Link"] {
   width: auto;
@@ -197,6 +226,10 @@
   content: "Gallery";
 }
 
+.fa-update-notes::before {
+  content: "Update";
+}
+
 .fa-block-gallery::before {
   content: "Block: Gallery";
 }
@@ -207,6 +240,10 @@
 
 .fa-hero-icon::before {
   content: "Hero";
+}
+
+.fa-ability-icon::before {
+  content: "Ability";
 }
 
 .fa-arrows-alt::before {
@@ -222,7 +259,7 @@
 }
 
 .editor-toolbar button[title*="Toggle Preview"] {
-  background: $primary;
+  background: var(--primary, $primary);
 
   &.active {
     filter: brightness(1.15);

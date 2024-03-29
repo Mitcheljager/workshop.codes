@@ -4,4 +4,4 @@ end
 # set to true for JavaScript tracking
 Ahoy.api = false
 Ahoy.mask_ips = true
-Ahoy.cookies = false
+Ahoy.cookies = :none

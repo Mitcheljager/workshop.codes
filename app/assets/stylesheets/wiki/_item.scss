@@ -13,11 +13,11 @@
 
   &[href],
   a {
-    color: $white;
+    color: $text-color-lightest;
     text-decoration: none;
 
     @include hover-stack {
-      color: $pure-white;
+      color: $white;
     }
   }
 

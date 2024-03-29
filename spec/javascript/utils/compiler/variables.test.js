@@ -1,8 +1,34 @@
 import { compileVariables, excludeDefaultVariableNames, getDefaultVariableNameIndex, getVariables } from "../../../../app/javascript/src/utils/compiler/variables"
+import { completionsMap } from "../../../../app/javascript/src/stores/editor"
 import { disregardWhitespace } from "../../helpers/text"
 
 describe("variables.js", () => {
   describe("getVariables", () => {
+    //CompletionsMap required for Parameter Objects
+    beforeAll(() => {
+      completionsMap.set([{
+        label: "Some Action",
+        args_length: 3,
+        parameter_keys: ["First", "Second", "Third"],
+        parameter_defaults: ["A", "B", "C"]
+      }, {
+        label: "For Global Variable",
+        args_length: 4,
+        parameter_keys: ["Control Variable", "Range Start", "Range Stop", "Step"],
+        parameter_defaults: ["variableName", "0", " Count Of(Array())", "1"]
+      }, {
+        label: "Chase Player Variable Over Time",
+        args_length: 5,
+        parameter_keys: ["Player", "Variable", "Destination", "Duration", "Reevaluation"],
+        parameter_defaults: ["Event Player", "variableName", "0", "1", "Destination And Duration"]
+      }, {
+        label: "Create Effect",
+        args_length: 5,
+        parameter_keys: ["Visible To", "Type", "Color", "Position", "Radius", "Reevaluation"],
+        parameter_defaults: ["All Players(All Teams)", "Sphere", "Color(white)", "Vector(0, 0, 0)", "1", "Visible To Position And Radius"]
+      }])
+    })
+
     test("Should extract global variables", () => {
       const input = `
         Global.variable1 = Test;
@@ -12,9 +38,7 @@ describe("variables.js", () => {
         Modify Global Variable(variable5, Test);
         Chase Global Variable At Rate(variable6, Test, ...);
         Chase Global Variable Over Time(variable7, Test, ...);
-        For Global Variable(variable8, 0, 1) {
-          // Do something
-        }
+        For Global Variable(variable8, 0, 1, 1);
       `
       const expectedOutput = {
         globalVariables: ["variable1", "variable2", "variable3", "variable4", "variable5", "variable6", "variable7", "variable8"],
@@ -67,9 +91,7 @@ describe("variables.js", () => {
         Modify Player Variable At Index(Event Player, variable11, Test);
         Chase Player Variable At Rate(Event Player, variable12, Test, ...);
         Chase Player Variable Over Time(Event Player, variable13, Test, ...);
-        For Player Variable(Event Player, variable14, 1) {
-          // Do something
-        }
+        For Player Variable(Event Player, variable14, 0, 1);
       `
       const expectedOutput = {
         globalVariables: [],
@@ -142,15 +164,24 @@ describe("variables.js", () => {
     })
 
     test("Should ignore decimals of a number", () => {
-      const input = `
-        1.234;
-        1.abc;
-      `
       const expectedOutput = {
         globalVariables: [],
         playerVariables: []
       }
+
+      const input = `
+        1.234;
+        1.abc;
+        .1234;
+        Wait(.1234);
+      `
       expect(getVariables(input)).toEqual(expectedOutput)
+
+      const specialCaseBeginningOfText1Input = ".1234"
+      expect(getVariables(specialCaseBeginningOfText1Input)).toEqual(expectedOutput)
+
+      const specialCaseBeginningOfText2Input = ".abcd"
+      expect(getVariables(specialCaseBeginningOfText2Input)).toEqual(expectedOutput)
     })
 
     test("Should not ignore nested variables ending in a number", () => {
@@ -191,6 +222,24 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
+    test("Should ignore variable-likes when there is a symbol behind them", () => {
+      const input = "Wait(.15)"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should not ignore player variables coming after a value with arguments", () => {
+      const input = "Ray Cast Hit Player(bla, bla, bla).variableA.variableB"
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["variableA", "variableB"]
+      }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
     test("Should handle duplicate variables", () => {
       const input = `
         Global.variable1 = 10;
@@ -204,6 +253,76 @@ describe("variables.js", () => {
         globalVariables: ["variable1", "variable2"],
         playerVariables: []
       }
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should extract Global variables from parameter objects", () => {
+      const input = "For Global Variable({ Control Variable: variable1, Range Start: Global.variable2, Range Stop: Count Of(Array()), Step: 1 })"
+      const expectedOutput = {
+        globalVariables: ["variable2", "variable1"],
+        playerVariables: []
+      }
+
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should extract Player variables from parameter objects", () => {
+      const input =
+        `Chase Player Variable Over Time({
+          Player: Event Player,
+          Variable: variable1,
+          Destination: 0,
+          Duration: 1,
+          Reevaluation: Destination And Duration
+        })`
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["variable1"]
+      }
+
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should extract variables from nested parameter objects", () => {
+      const input =
+        `For Global Variable({
+          Control Variable: variable1,
+          Range Start: 0,
+          Range Stop: Some Action({
+            First: Global.variable2,
+            Second: Event Player.variable3
+          }),
+          Step: 1
+        })`
+      const expectedOutput = {
+        globalVariables: ["variable2", "variable1"],
+        playerVariables: ["variable3"]
+      }
+
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should extract variables from parameter objects where not all parameters are filled in", () => {
+      const input = "Create Effect({ Position: Global.variable1 });"
+      const expectedOutput = {
+        globalVariables: ["variable1"],
+        playerVariables: []
+      }
+
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
+
+    test("Should ignore actions that modify variables when there aren't enough arguments on those actions", () => {
+      const input = `
+        Set Global Variable();
+        Set Player Variable();
+        Set Player Variable(Event Player);
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+
       expect(getVariables(input)).toEqual(expectedOutput)
     })
   })
@@ -234,30 +353,38 @@ describe("variables.js", () => {
 
     test("Should exclude default variables if their index is different from the default", () => {
       const input = `
-        Global.variable;
         Global.A;
+        Global.variable;
+        Global.B;
+        Global.Z;
+        Global.AA;
         Global.DX;
         Global.DY;
-        Global.ZZ;
 
-        Event Player.variable;
         Event Player.A;
+        Event Player.variable;
+        Event Player.B;
+        Event Player.Z;
+        Event Player.AA;
         Event Player.DX;
         Event Player.DY;
-        Event Player.ZZ;
       `
       const expectedOutput = `
         variables {
           global:
-            0: variable
-            1: A
-            2: DY
-            3: ZZ
+            0: A
+            1: variable
+            2: B
+            3: AA
+            4: DX
+            5: DY
           player:
-            0: variable
-            1: A
-            2: DY
-            3: ZZ
+            0: A
+            1: variable
+            2: B
+            3: AA
+            4: DX
+            5: DY
         }\n\n
       `
       expect(disregardWhitespace(compileVariables(input))).toBe(disregardWhitespace(expectedOutput))
@@ -265,35 +392,71 @@ describe("variables.js", () => {
   })
 
   describe("excludeDefaultVariableNames", () => {
-    test("Should exclude single letter variables if their index is different from the default", () => {
+    test("Should not exclude A as it is at its default index (0)", () => {
       const input = [
-        "A",
-        "variable",
-        "Z",
-        "B"
+        "A"
       ]
       const expectedOutput = [
-        "A",
-        "variable",
-        "B"
+        "A"
       ]
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
 
-    test("Should exclude double letter variables if their index is different from the default", () => {
+    test("Should not exclude A as the variable at the default index of A (0) was already defined with another name", () => {
       const input = [
-        ... (new Array(100).fill("ignore me")),
-        "DW",
-        "DX",
-        "DY",
-        "DZ",
-        "ZZ"
+        "someNameThatIsNotA",
+        "A"
       ]
       const expectedOutput = [
-        ... (new Array(100).fill("ignore me")),
-        "DY",
-        "DZ",
-        "ZZ"
+        "someNameThatIsNotA",
+        "A"
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should exclude B as there aren't enough variables to reach the default index of B (1)", () => {
+      const input = [
+        "B"
+      ]
+      const expectedOutput = [
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should exclude Z as there is no variable at the default index of Z (25)", () => {
+      const input = [
+        "someVar1",
+        "someVar2",
+        "Z",
+        "someVar3",
+        "someVar4"
+      ]
+      const expectedOutput = [
+        "someVar1",
+        "someVar2",
+        "someVar3",
+        "someVar4"
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should exclude C and D as there are no variable at their default indices", () => {
+      const input = [
+        "C",
+        "D"
+      ]
+      const expectedOutput = [
+        // None
+      ]
+      expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
+    })
+
+    test("Should not exclude AA as its default index (26) is past the max initial variable indices (up to 25)", () => {
+      const input = [
+        "AA"
+      ]
+      const expectedOutput = [
+        "AA"
       ]
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })

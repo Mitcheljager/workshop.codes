@@ -3,8 +3,28 @@
   display: flex;
 }
 
+.md\:flex {
+  @include media-min(md) {
+    display: flex;
+  }
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .flex-nowrap {
   flex-wrap: nowrap;
+}
+
+.md\:flex-nowrap {
+  @include media-min(md) {
+    flex-wrap: nowrap;
+  }
 }
 
 .align-self-center {
@@ -12,7 +32,6 @@
 }
 
 .align-center {
-  display: flex;
   align-items: center;
 }
 
@@ -34,4 +53,12 @@
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-1\/4 {
+  gap: $margin / 4;
+}
+
+.gap-1\/8 {
+  gap: $margin / 8;
 }

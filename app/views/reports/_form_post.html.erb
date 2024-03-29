@@ -1,6 +1,6 @@
 <%= form_for @report, remote: true do |form| %>
   <div class="form-hint mb-1/2 text-red">
-    <%= t "report.modal.disclaimer_html" %>
+    <strong>Please note:</strong> Reports are sent to the Workshop.codes admins. <u>Reports are not sent to post authors. Do not use this form to report bugs or request changes.</u>
   </div>
 
   <%= form.hidden_field :concerns_id, value: @post.id %>

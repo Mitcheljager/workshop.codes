@@ -1,6 +1,6 @@
 <div class="post-comment <%= "shadow-block" if comment.parent_id.nil? %>" data-comment="<%= comment.id %>" id="<%= comment.id %>">
   <div class="post-comment__layout">
-    <%= link_to user_profile_path(comment.user), class: "profile-image #{ "profile-image--empty" unless comment.user.profile_image.attached? || comment.user.provider_profile_image.present? }" do %>
+    <%= link_to user_profile_path(comment.user), class: "profile-image #{ "profile-image--empty" unless comment.user.profile_image.attached? }" do %>
       <%= render "profiles/image", user: comment.user, size: 40 %>
     <% end %>
 
@@ -8,7 +8,7 @@
       <div class="post-comment__information">
         <%= link_to user_profile_path(comment.user), class: "post-comment__author" do %>
           <%= comment.user.username %>
-          <%= tag.small t("comment.creator") if comment.user == @post.user %>
+          <%= tag.small "creator" if comment.user == @post.user %>
         <% end %>
 
         <span class="post-comment__date" title="Created at: <%= l comment.created_at %>">
@@ -27,14 +27,14 @@
 
       <% if current_user %>
         <div class="post-comment__actions">
-          <%= link_to t("comment.reply"), create_reply_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
+          <%= link_to "Reply", create_reply_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
 
           <% if comment.user == current_user %>
-            <%= link_to t("comment.edit"), create_edit_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
-            <%= link_to t("comment.delete"), comment_path(comment.id), class: "post-comment__action", remote: true, method: :delete, data: { confirm: "Are you sure?", disable_with: "Deleting..." } %>
+            <%= link_to "Edit", create_edit_form_path(comment.id), class: "post-comment__action", remote: true, data: { disable_with: "Retrieving..." } %>
+            <%= link_to "Delete", comment_path(comment.id), class: "post-comment__action", remote: true, method: :delete, data: { confirm: "Are you sure?", disable_with: "Deleting..." } %>
           <% end %>
 
-          <%= link_to t("comment.report"), new_report_path(id: comment.id, concerns_model: "comment"), class: "post-comment__action", data: { action: "get-reports-form" } %>
+          <%= link_to "Report", new_report_path(id: comment.id, concerns_model: "comment"), class: "post-comment__action", data: { action: "get-reports-form" } %>
         </div>
       <% end %>
     </div>

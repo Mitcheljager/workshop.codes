@@ -89,8 +89,8 @@
 
               {#if showActionsFor === uuid}
                 <div class="dropdown__content block">
-                  <div class="dropdown__item" on:click={() => getBackupContent(uuid)}>Restore from backup</div>
-                  <div class="dropdown__item text-red" on:click={() => destroy(uuid)}>Delete</div>
+                  <button class="dropdown__item" on:click={() => getBackupContent(uuid)}>Restore from backup</button>
+                  <button class="dropdown__item text-red" on:click={() => destroy(uuid)}>Delete</button>
                 </div>
               {/if}
             </div>
@@ -98,7 +98,7 @@
         {/each}
       </div>
     {:else}
-      <p><em class="text-white">You have not yet created any backups for this project.</em></p>
+      <p><em class="text-lightest">You have not yet created any backups for this project.</em></p>
       <p>Backups help you keep and restore older versions of your project. This can be useful if you want to make changes to your project, but are afraid you might irreversably mess things up.</p>
     {/if}
 
@@ -106,7 +106,7 @@
   {/if}
 
   {#if hasError}
-    <div class="bg-red p-1/4 mt-1/4 text-white">
+    <div class="bg-red p-1/4 mt-1/4 text-lightest">
       <p class="mt-0">Something went wrong while fetching your backups.</p>
 
       <button class="button button--light button--square w-100" on:click={getBackups}>Try again</button>

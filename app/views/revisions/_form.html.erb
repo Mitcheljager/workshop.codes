@@ -31,7 +31,7 @@
       <strong>This description is full Markdown enabled.</strong>
     </div>
 
-    <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde", max_length: REVISION_DESCRIPTION_LIMIT } %>
+    <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde", max_length: REVISION_DESCRIPTION_LIMIT, abilities: ability_icons, heroes: hero_names } %>
   </div>
 
   <hr>

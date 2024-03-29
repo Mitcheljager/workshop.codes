@@ -15,7 +15,7 @@ module PostsHelper
 
     unless url.present?
       random_with_seed = Random.new(post.id).rand(post.maps.length)
-      map = maps.find { |m| m["en"] == post.maps[random_with_seed - 1] }
+      map = maps.find { |m| m["name"] == post.maps[random_with_seed - 1] }
 
       url = image_path "maps/#{ size }/webp/#{ map["slug"] }.webp"
     end

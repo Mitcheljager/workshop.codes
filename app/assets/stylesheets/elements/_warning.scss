@@ -4,18 +4,24 @@
   text-align: center;
   color: white;
 
+  &--alert {
+    background: $green;
+  }
+
   &--mild {
     background: $bg-darker;
     color: $text-color;
   }
 
-  &--red {
+  &--red,
+  &--error {
     margin-top: $margin * 2;
     padding: 1rem;
     background: $red;
   }
 
-  &--orange {
+  &--orange,
+  &--warning {
     background: $orange;
     font-size: $font-size-small;
   }

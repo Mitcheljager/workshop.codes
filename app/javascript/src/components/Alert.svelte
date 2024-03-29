@@ -21,7 +21,7 @@
 <div class="alert {type} static">
   <p class="m-0">{text}</p>
 
-  <button class="button p-0 pl-1/16 pr-1/16 text-pure-white" on:click={close}>✕</button>
+  <button class="button p-0 pl-1/16 pr-1/16 text-white" on:click={close}>✕</button>
 
   <div class="alert__timer" style="--timer: {timer}ms" />
 </div>

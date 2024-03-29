@@ -58,7 +58,7 @@ class Wiki::ArticlesController < Wiki::BaseController
 
       if @article
         BadgesWikiJob.perform_async(current_user)
-        flash[:notice] = "Article successfully created" # FIXME: i18n
+        flash[:notice] = "Article successfully created"
         redirect_to wiki_article_path(@article.slug)
       else
         redirect_to wiki_articles_path
@@ -116,7 +116,7 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def article_params
-    params.require(:wiki_article).permit(:title, :subtitle, :content, :tags, :category_id, :edit_notes, images: [])
+    params.require(:wiki_article).permit(:title, :subtitle, :content, :tags, :category_id, :edit_notes, images: [], videos: [])
   end
 
   def random_string

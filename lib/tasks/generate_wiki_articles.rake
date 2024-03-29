@@ -34,7 +34,7 @@ task :generate_wiki_articles => :environment do
       #{ content["description"] }
       #{ content_args if content_args }",
       category_id: @category.id,
-      tags: "#{ content["en-US"] }#{ ", " + content["es-MX"] if content["es-MX"] }#{ ", " + content["fr-FR"] if content["fr-FR"] }#{ ", " + content["ja-JP"] if content["ja-JP"] }#{ ", " + content["pt-BR"] if content["pt-BR"] }#{ ", " + content["zh-CN"] if content["zh-CN"] }"
+      tags: "#{ content["en-US"] }"
     )
 
     @edit = Wiki::Edit.create(
@@ -59,7 +59,7 @@ task :generate_wiki_articles => :environment do
       slug: CGI.escape(content["en-US"]).downcase,
       group_id: SecureRandom.urlsafe_base64,
       category_id: @category.id,
-      tags: "#{ content["en-US"] }#{ ", " + content["es-MX"] if content["es-MX"] }#{ ", " + content["fr-FR"] if content["fr-FR"] }#{ ", " + content["ja-JP"] if content["ja-JP"] }#{ ", " + content["pt-BR"] if content["pt-BR"] }#{ ", " + content["zh-CN"] if content["zh-CN"] }"
+      tags: "#{ content["en-US"] }"
     )
 
     @edit = Wiki::Edit.create(
@@ -103,7 +103,7 @@ task :generate_wiki_articles => :environment do
       #{ content_return if content_return }
       #{ content_args if content_args }",
       category_id: @category.id,
-      tags: "#{ content["en-US"] }#{ ", " + content["es-MX"] if content["es-MX"] }#{ ", " + content["fr-FR"] if content["fr-FR"] }#{ ", " + content["ja-JP"] if content["ja-JP"] }#{ ", " + content["pt-BR"] if content["pt-BR"] }#{ ", " + content["zh-CN"] if content["zh-CN"] }"
+      tags: "#{ content["en-US"] }"
     )
 
     @edit = Wiki::Edit.create(

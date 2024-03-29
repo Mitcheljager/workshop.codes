@@ -4,6 +4,7 @@
   import { getSaveContent } from "../../utils/editor"
   import { createProject, destroyCurrentProject, fetchProject, setUrl } from "../../utils/project"
   import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
@@ -60,19 +61,9 @@
     showProjectSettings = false
     loading = false
   }
-
-  function outsideClick(event) {
-    if (!active && !showProjectSettings) return
-    if (event.target.classList.contains("dropdown") || event.target.closest(".dropdown")) return
-
-    active = false
-    showProjectSettings = false
-  }
 </script>
 
-<svelte:window on:click={outsideClick} />
-
-<div class="dropdown">
+<div class="dropdown" use:outsideClick on:outsideClick={() => active = false}>
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
     {#if loading}
       Loading...
@@ -90,9 +81,9 @@
       <hr />
 
       {#each filteredProjects as project (project.uuid)}
-        <div class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
+        <button class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
           {project.title}
-        </div>
+        </button>
       {/each}
 
       {#if $projects?.length && !filteredProjects.length}
@@ -119,24 +110,24 @@
 </div>
 
 {#if $isSignedIn && $currentProject?.is_owner && !loading}
-  <div class="dropdown">
-    <button class="empty-button w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
+  <div class="dropdown" use:outsideClick on:outsideClick={() => showProjectSettings = false}>
+    <button class="w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
       Edit
     </button>
 
     {#if showProjectSettings}
       <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
-        <div class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
+        <button class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
           Rename
-        </div>
+        </button>
 
-        <div class="dropdown__item" on:click={duplicateProject}>
+        <button class="dropdown__item" on:click={duplicateProject}>
           Duplicate
-        </div>
+        </button>
 
-        <div class="dropdown__item text-red" on:click={destroyProject}>
+        <button class="dropdown__item text-red" on:click={destroyProject}>
           Destroy
-        </div>
+        </button>
       </div>
     {/if}
   </div>

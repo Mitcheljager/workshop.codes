@@ -38,11 +38,23 @@
   margin: 0 $margin / 8;
   color: $text-color;
   text-decoration: none;
-  font-family: var(--font-stack-alt);
+  font-family: $font-stack-alt;
   text-transform: uppercase;
   font-size: 19px;
   text-align: left;
   white-space: nowrap;
+
+  @include focus-visible-outline(inset);
+
+  @include hover-stack {
+    color: $text-color-lightest;
+
+    &::after {
+      background: $text-color-lightest;
+      width: 100%;
+      transition: width 50ms, background-color 50ms;
+    }
+  }
 
   &::after {
     content: "";
@@ -57,21 +69,11 @@
     transition: width 50ms, background-color 0ms 50ms;
   }
 
-  @include hover-stack {
-    color: $white;
-
-    &::after {
-      background: $white;
-      width: 100%;
-      transition: width 50ms, background-color 50ms;
-    }
-  }
-
   &--active,
   &--active:hover,
   &--active:active,
   &--active:focus {
-    color: $white;
+    color: $text-color-lightest;
 
     &::after {
       background: $primary;

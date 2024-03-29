@@ -25,6 +25,9 @@
       swapTreshhold: 0.25,
       multiDrag: true,
       multiDragKey: "ctrl",
+      fallbackTolerance: 3,
+      delayOnTouchOnly: true,
+      delay: 100,
       onRemove: updateOrder,
       onUpdate: updateOrder,
       onSelect: event => {
@@ -75,4 +78,8 @@
       {/if}
     </div>
   {/each}
+
+  {#if $items.length && !itemsInParent.length}
+    <em class="pl-1/8 text-dark">Empty folder</em>
+  {/if}
 </div>

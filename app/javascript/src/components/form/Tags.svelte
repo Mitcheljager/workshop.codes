@@ -168,11 +168,11 @@
     <span animate:flip={{ duration: 100 }} class="form-tags__tag">
       { value }
 
-      <div
+      <button
         class="form-tags__remove-tag"
         on:click|preventDefault={ () => removeTag(i) }>
         &#215;
-      </div>
+      </button>
     </span>
   { /each }
 
@@ -201,6 +201,7 @@
       { :then autoCompleteValues }
         { #if autoCompleteValues.length }
           { #each autoCompleteValues.slice(0, 5) as result, index }
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             <li
               class="list-element tag-item"
               tabindex="-1"

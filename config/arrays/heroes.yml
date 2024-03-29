@@ -1,234 +1,128 @@
 -
-  en: D.va
-  ko: D.va
-  category:
-    en: Tank
-    ko: 탱커
+  name: D.va
+  category: Tank
 -
-  en: Doomfist
-  ko: 둠피스트
-  category:
-    en: Tank
-    ko: 탱커
+  name: Doomfist
+  category: Tank
 -
-  en: Junker Queen
-  ko: 정커퀸
+  name: Junker Queen
+  category: Tank
   overwatch_2: true
-  category:
-    en: Tank
-    ko: 탱커
 -
-  en: Orisa
-  ko: 오리사
-  category:
-    en: Tank
-    ko: 탱커
--
-  en: Ramattra
-  ko: 라마트라
+  name: Mauga
+  category: Tank
   overwatch_2: true
-  category:
-    en: Tank
-    ko: 탱커
 -
-  en: Reinhardt
-  ko: 라인하르트
-  category:
-    en: Tank
-    ko: 탱커
+  name: Orisa
+  category: Tank
 -
-  en: Roadhog
-  ko: 로드호그
-  category:
-    en: Tank
-    ko: 탱커
--
-  en: Sigma
-  ko: 시그마
-  category:
-    en: Tank
-    ko: 탱커
--
-  en: Winston
-  ko: 윈스턴
-  category:
-    en: Tank
-    ko: 탱커
--
-  en: Wrecking Ball
-  ko: 레킹볼
-  category:
-    en: Tank
-    ko: 탱커
--
-  en: Zarya
-  ko: 자리야
-  category:
-    en: Tank
-    ko: 탱커
--
-  en: Ashe
-  ko: 애쉬
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Bastion
-  ko: 바스티온
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Cassidy
-  ko: 맥크리
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Echo
-  ko: 에코
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Genji
-  ko: 겐지
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Hanzo
-  ko: 한조
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Junkrat
-  ko: 정크랫
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Mei
-  ko: 메이
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Pharah
-  ko: 파라
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Reaper
-  ko: 리퍼
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: "Soldier: 76"
-  ko: "솔저: 76"
-  category:
-    en: Damage
-    ko: 딜러
--
-  en: Sojourn
-  ko: 소전
+  name: Ramattra
+  category: Tank
   overwatch_2: true
-  category:
-    en: Damage
-    ko: 딜러
 -
-  en: Sombra
-  ko: 솜브라
-  category:
-    en: Damage
-    ko: 딜러
+  name: Reinhardt
+  category: Tank
 -
-  en: Symmetra
-  ko: 시메트라
-  category:
-    en: Damage
-    ko: 딜러
+  name: Roadhog
+  category: Tank
 -
-  en: Torbjörn
-  ko: 토르비욘
-  category:
-    en: Damage
-    ko: 딜러
+  name: Sigma
+  category: Tank
 -
-  en: Tracer
-  ko: 트레이서
-  category:
-    en: Damage
-    ko: 딜러
+  name: Winston
+  category: Tank
 -
-  en: Widowmaker
-  ko: 위도우메이커
-  category:
-    en: Damage
-    ko: 딜러
+  name: Wrecking Ball
+  category: Tank
 -
-  en: Ana
-  ko: 아나
-  category:
-    en: Support
-    ko: 지원
+  name: Zarya
+  category: Tank
 -
-  en: Baptiste
-  ko: 바티스트
-  category:
-    en: Support
-    ko: 지원
+  name: Ashe
+  category: Damage
 -
-  en: Brigitte
-  ko: 브리기테
-  category:
-    en: Support
-    ko: 지원
+  name: Bastion
+  category: Damage
 -
-  en: Illari
-  ko: 일리아리
+  name: Cassidy
+  category: Damage
+-
+  name: Echo
+  category: Damage
+-
+  name: Genji
+  category: Damage
+-
+  name: Hanzo
+  category: Damage
+-
+  name: Junkrat
+  category: Damage
+-
+  name: Mei
+  category: Damage
+-
+  name: Pharah
+  category: Damage
+-
+  name: Reaper
+  category: Damage
+-
+  name: "Soldier: 76"
+  category: Damage
+-
+  name: Sojourn
+  category: Damage
   overwatch_2: true
-  category:
-    en: Support
-    ko: 지원
 -
-  en: Kiriko
-  ko: 키리코
+  name: Sombra
+  category: Damage
+-
+  name: Symmetra
+  category: Damage
+-
+  name: Torbjörn
+  category: Damage
+-
+  name: Tracer
+  category: Damage
+-
+  name: Venture
+  category: Damage
   overwatch_2: true
-  category:
-    en: Support
-    ko: 지원
 -
-  en: Lifeweaver
-  ko: 라이프위버를
+  name: Widowmaker
+  category: Damage
+-
+  name: Ana
+  category: Support
+-
+  name: Baptiste
+  category: Support
+-
+  name: Brigitte
+  category: Support
+-
+  name: Illari
+  category: Support
   overwatch_2: true
-  category:
-    en: Support
-    ko: 지원
 -
-  en: Lúcio
-  ko: 루시우
-  category:
-    en: Support
-    ko: 지원
+  name: Kiriko
+  category: Support
+  overwatch_2: true
 -
-  en: Mercy
-  ko: 메르시
-  category:
-    en: Support
-    ko: 지원
+  name: Lifeweaver
+  category: Support
+  overwatch_2: true
 -
-  en: Moira
-  ko: 모이라
-  category:
-    en: Support
-    ko: 지원
+  name: Lúcio
+  category: Support
 -
-  en: Zenyatta
-  ko: 젠야타
-  category:
-    en: Support
-    ko: 지원
+  name: Mercy
+  category: Support
+-
+  name: Moira
+  category: Support
+-
+  name: Zenyatta
+  category: Support

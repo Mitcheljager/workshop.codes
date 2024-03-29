@@ -13,7 +13,7 @@ module Helpers
       # Settings
       click_on "Settings"
       post_attrs[:categories].each do |category|
-        select(category, from: "post_categories")
+        check(category)
       end
       # Simulating actualy clicking/pressing/dragging is a pain with Capybara
       slider = page.evaluate_script "slider=document.querySelector('[data-role=\"num-player-slider\"][data-type=\"post\"]');"

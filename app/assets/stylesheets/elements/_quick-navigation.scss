@@ -19,18 +19,12 @@ $width: clamp(10rem, 12.5vw, 15rem);
   overflow-x: hidden;
   scrollbar-color: transparent transparent;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @include styled-scrollbar();
+  @include styled-scrollbar(transparent, transparent);
 
   &:hover {
     scrollbar-color: initial;
 
-    &::-webkit-scrollbar {
-      display: block
-    }
+    @include styled-scrollbar();
   }
 }
 
@@ -64,7 +58,7 @@ $width: clamp(10rem, 12.5vw, 15rem);
   cursor: pointer;
 
   &:hover {
-    color: $white;
+    color: $text-color-lightest;
   }
 }
 

@@ -25,9 +25,11 @@ class ProjectsController < ApplicationController
   def update
     @project = current_user.projects.find_by_uuid!(params[:uuid])
 
-    if @project.update(project_params)
+    begin
+      @project.update!(project_params)
       render json: @project, layout: false
-    else
+    rescue => exception
+      Bugsnag.notify(exception) if Rails.env.production?
       render json: @project.errors.full_messages, status: 500, layout: false
     end
   end

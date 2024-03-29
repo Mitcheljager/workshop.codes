@@ -167,7 +167,7 @@
   margin-top: auto;
   font-size: 131%;
   font-weight: lighter;
-  color: $white;
+  color: $text-color-lightest;
 
   @include media-min(sm) {
     padding: $margin / 12 0 $margin / 6 $margin / 3;
@@ -207,11 +207,11 @@
   }
 
   a {
-    color: $white;
+    color: $text-color-lightest;
     text-decoration: none;
 
     @include hover-stack {
-      color: $pure-white;
+      color: $white;
     }
   }
 
@@ -277,7 +277,7 @@
     text-decoration: none;
 
     @include hover-stack {
-      color: $white;
+      color: $text-color-lightest;
     }
   }
 
@@ -320,7 +320,7 @@
   align-items: center;
   gap: $margin / 4;
   padding: $margin / 4;
-  background-image: linear-gradient(130deg, transparent calc(100% - 20rem), rgba($primary-var, 0.1));
+  background-image: linear-gradient(130deg, transparent calc(100% - 20rem), rgba($primary, 0.1));
 
   @include media-min(lg) {
     grid-template: "title favorite code";
@@ -361,7 +361,7 @@
     text-decoration: none;
 
     @include hover-stack {
-      color: $white;
+      color: $text-color-lightest;
     }
   }
 }
@@ -414,7 +414,7 @@
   overflow-wrap: break-word;
   color: $text-color;
 
-  *:first-child {
+  *:first-child:not(.update-notes) {
     margin-top: 0;
   }
 
@@ -476,7 +476,7 @@
         left: 0;
         top: 0;
         content: "•";
-        color: $primary;
+        color: var(--primary, $primary);
         padding-right: .5rem;
         transform: translateX(-100%);
       }
@@ -500,7 +500,7 @@
     list-style: none;
     padding-left: 2.5rem;
 
-    li {
+    > li {
       counter-increment: ordered-list;
       position: relative;
 
@@ -510,7 +510,7 @@
         left: 0;
         top: 0;
         content: counter(ordered-list) ".";
-        color: $primary;
+        color: var(--primary, $primary);
         padding-right: .5rem;
         transform: translateX(-100%);
       }
@@ -519,7 +519,7 @@
 
   iframe {
     max-width: 100%;
-    background: var(--bg-darker);
+    background: $bg-darker;
 
     &[src*="gfycat"] {
       height: clamp(0px, calc((80vw - #{ $margin }) / 16 * 9), map-get($media-min-widths, lg) / 16 * 9);

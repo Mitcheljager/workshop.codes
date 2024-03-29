@@ -82,7 +82,7 @@
     background: $body-bg;
 
     a {
-      color: $white;
+      color: $text-color-lightest;
     }
   }
 
@@ -122,37 +122,33 @@
   background: transparent;
   border: 0;
   padding: .65rem .5rem;
-  color: $white;
+  color: $text-color-lightest;
   font-family: $font-stack;
   font-size: $font-size-base;
   text-decoration: none;
   cursor: pointer;
 
   @include hover-stack {
-    color: $pure-white;
+    color: $white;
 
     path {
-      fill: $white;
+      fill: $text-color-lightest;
     }
-  }
-
-  &:focus {
-    outline: none;
   }
 
   &--remove {
     background: $red;
-    color: $pure-white;
+    color: $white;
   }
 
   &--active {
     background: $primary;
-    color: $pure-white;
+    color: $white;
     font-size: 12px;
 
     @include hover-stack {
       filter: brightness(1.15);
-      color: $pure-white;
+      color: $white;
     }
   }
 }

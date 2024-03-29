@@ -1,6 +1,18 @@
 require_relative "boot"
 
-require "rails/all"
+require "rails"
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "active_storage/engine"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+# require "action_mailbox/engine"
+# require "action_text/engine"
+require "action_view/railtie"
+# require "action_cable/engine"
+require "sprockets/railtie"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -15,11 +27,6 @@ module OverwatchWorkshop
     config.active_job.queue_adapter = :sucker_punch
     config.active_storage.track_variants = true
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
-
-    config.i18n.available_locales = [:en, :ko]
-    config.i18n.default_locale = :en
-    config.i18n.fallbacks = true
-    config.i18n.fallbacks = [:en]
 
     config.active_support.cache_format_version = 7.0
     config.active_support.disable_to_s_conversion = true

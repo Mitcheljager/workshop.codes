@@ -11,7 +11,7 @@
   text-align: left;
 
   &:focus-visible {
-    outline: 2px inset $white;
+    outline: 2px inset $text-color-lightest;
     outline-offset: -2px;
     box-shadow: none;
   }
@@ -23,7 +23,7 @@
     top: 0.25rem;
     left: 0.45rem;
     height: 1.5rem;
-    width: 1.5rem;
+    width: 1.05rem;
     color: darken($gray, 30%);
   }
 
@@ -37,7 +37,7 @@
       box-shadow: -100px 0 0 darken($bg-dark, 7.5%);
 
       input {
-        color: $white;
+        color: $text-color-lightest;
       }
     }
 
@@ -57,7 +57,7 @@
       box-shadow: -100px 0 0 darken($bg-dark, 10%);
 
       input {
-        color: $white;
+        color: $text-color-lightest;
         pointer-events: all;
       }
     }
@@ -82,12 +82,15 @@
   right: 0;
   top: 0.25rem;
   background: darken($bg-dark, 7.5%);
+  z-index: 1;
 
   .editor-item:hover > & {
     display: flex;
   }
 
   button {
+    padding: 0.1rem 0.15rem;
+
     &:hover {
       filter: brightness(1.25);
     }

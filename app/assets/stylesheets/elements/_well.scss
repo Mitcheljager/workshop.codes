@@ -17,7 +17,39 @@
   }
 
   &--dark {
-    background: var(--bg-darker);
+    background: $bg-darker;
+  }
+
+  &--scrollable {
+    max-height: 10rem;
+    overflow-y: auto;
+
+    @include styled-scrollbar;
+  }
+
+  &--image {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include media-min(sm) {
+      padding-left: 150px;
+    }
+
+    img {
+      display: none;
+
+      @include media-min(sm) {
+        display: block
+      }
+    }
+
+    .text-small {
+      line-height: 1.3em;
+    }
+  }
+
+  &--wiki {
+    border: 2px solid $wiki;
   }
 
   a {
@@ -37,4 +69,17 @@
 
 .well__tray {
   flex: 0 0 100%;
+}
+
+.well__marker {
+  position: absolute;
+  right: $margin / 3;
+  top: 0;
+  padding: 0 $margin / 8;
+  transform: translateY(-50%);
+  border-radius: $border-radius;
+  background: $bg-dark;
+  font-size: 0.75rem;
+  color: $white;
+  font-weight: bold;
 }

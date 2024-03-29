@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_12_221036) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_07_201634) do
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_221036) do
     t.datetime "started_at", precision: nil
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+    t.index ["visitor_token", "started_at"], name: "index_ahoy_visits_on_visitor_token_and_started_at"
   end
 
   create_table "archive_authorizations", force: :cascade do |t|
@@ -131,6 +133,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_221036) do
     t.string "nice_url"
     t.text "description"
     t.integer "display_type", default: 0
+    t.integer "posts_count"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -238,6 +241,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_221036) do
     t.integer "max_players"
     t.integer "comments_count", default: 0
     t.boolean "overwatch_2_compatible", default: false
+    t.integer "top_hotness", default: 1
+    t.datetime "top_hotness_at"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

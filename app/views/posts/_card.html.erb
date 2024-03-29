@@ -1,8 +1,8 @@
-<% cache_unless current_user, [current_locale, post, "card"] do %>
+<% cache_unless current_user, [post, "card"] do %>
   <% image_url = url_for_post_thumbnail(post, 300, 171, "medium") %>
 
   <div class="card" data-code="<%= post.code %>">
-    <%= link_to post_path(post.code), title: post.title do %>
+    <%= link_to post_path(post.code), title: post.title, tabindex: -1 do %>
       <%= image_tag image_url,
         srcset: "
           #{ image_url } 1x,
@@ -16,10 +16,10 @@
 
     <div class="relative z-1 flex mb-auto">
       <div class="mr-1/8">
-        <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title), tabindex: -1 %>
+        <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title) %>
 
         <small class="card__author">
-          <%= t("post.author") %>
+          by
           <%= link_to post.user.clean_username, user_profile_path(post.user), rel: "author" %>
         </small>
       </div>

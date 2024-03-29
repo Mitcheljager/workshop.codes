@@ -1,32 +1,33 @@
 <h2 class="mt-1/1">
-  <%= t("posts.form.heroes.title") %>
-  <span class="form-required">(<%= t("global.required") %>)</span>
+  Heroes
+  <span class="form-required">(Required)</span>
 </h2>
 
 <div data-checkbox-group>
   <div class="form-group checkbox">
     <%= form.check_box :checkbox_group_heroes, data: { action: "checkbox-select-all" } %>
-    <%= form.label :checkbox_group_heroes, t("posts.form.heroes.check_all") %>
+    <%= form.label :checkbox_group_heroes, "Check all heroes" %>
   </div>
 
   <div class="form-group-triple">
     <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
       <div class="form-group" data-checkbox-group>
-        <h3><%= hero_category[current_locale] %></h3>
+        <h3><%= hero_category %></h3>
 
         <div class="checkbox">
-          <%= form.check_box "checkbox_group_#{ hero_category["en"] }", data: { action: "checkbox-select-all" } %>
-          <%= form.label "checkbox_group_#{ hero_category["en"] }", t("posts.form.heroes.check_all_type", type: hero_category[current_locale]) %>
+          <%= form.check_box "checkbox_group_#{ hero_category }", data: { action: "checkbox-select-all" } %>
+          <%= form.label "checkbox_group_#{ hero_category }", "Check all #{ hero_category } heroes" %>
         </div>
 
         <br>
 
         <% heroes.each do |hero| %>
           <div class="checkbox">
-            <%= form.check_box :heroes, { multiple: true, checked: (@post.heroes.include?(hero["en"]) if @post.heroes) }, hero["en"], false %>
-            <%= form.label "heroes_#{ hero["en"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "_") }" do %>
-              <%= image_tag hero_name_to_icon_url(hero["en"]), height: 20, loading: "lazy" %>
-              <%= i18n_value_in_array(heroes, hero["en"]) %>
+            <%= form.check_box :heroes, { multiple: true, checked: (@post.heroes.include?(hero["name"]) if @post.heroes) }, hero["name"], false %>
+            <%= form.label "heroes_#{ hero["name"].downcase.gsub(" ", "_").gsub(":", "").gsub(".", "_") }" do %>
+              <% hero_icon = hero_name_to_icon_url(hero["name"]) %>
+              <%= image_tag hero_icon, height: 20, loading: "lazy" if hero_icon.present? %>
+              <%= hero["name"] %>
               <%= tag.small "OW2", class: "text-overwatch-2" if hero["overwatch_2"].present? %>
             <% end %>
           </div>

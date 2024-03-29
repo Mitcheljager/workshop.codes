@@ -1,43 +1,43 @@
-<% content_for :page_title, t("account.navigation.linked_users") %>
+<% content_for :page_title, "Linked Accounts" %>
 
-<%= render "layouts/account", title: t("account.navigation.linked_users") do %>
-  <% if flash[:alert] %>
-    <div class="warning warning--<%= flash[:alert]["class"] %> mt-0 mb-1/2"><%= flash[:alert]["message"] %></div>
+<%= render "layouts/account", title: "Linked Accounts" do %>
+  <% if flash.keys.any? %>
+    <div class="warning warning--<%= flash.keys.first %> mt-0 mb-1/2"><%= flash[flash.keys.first] %></div>
   <% end %>
 
   <p class="mt-0">
-    <%= t("linked_users.description") %>
+    Link your accounts together to allow login to the same account using different authentication platforms. You can link as many accounts from any platform as you want, and all of them will log you into one central account.
   </p>
 
   <hr class="mt-1/2 mb-1/2">
 
-  <div class="flex">
-    <%= button_to "/auth/discord", class: "button button--discord mr-1/4", data: { prefetch: false } do %>
-      <%= inline_svg_tag "discord.svg", height: 24 %>
-      <%= t "linked_users.discord" %>
+  <div class="flex flex-wrap gap-1/4">
+    <%= button_to "/auth/discord", class: "button button--discord h-100 w-100 nowrap", data: { prefetch: false, disable_with: "Connecting..." } do %>
+      <%= inline_svg_tag "icons/icon-discord.svg", height: 24, width: 24 %>
+      Link Discord account
     <% end %>
 
-    <%= button_to "/auth/bnet", class: "button button--bnet", data: { prefetch: false } do %>
-      <%= inline_svg_tag "bnet.svg", height: 24 %>
-      <%= t "linked_users.battle_net" %>
+    <%= button_to "/auth/bnet", class: "button button--bnet h-100 w-100 nowrap", data: { prefetch: false, disable_with: "Connecting..." } do %>
+      <%= inline_svg_tag "icons/icon-battlenet.svg", height: 24, width: 24 %>
+      Link Battle.net account
     <% end %>
   </div>
 
   <% if current_user.linked_users.any? %>
     <hr class="mt-1/2 mb-1/2">
 
-    <h2><%= t("linked_users.current") %></h2>
+    <h2>Currently linked accounts</h2>
 
     <table>
       <% current_user.linked_users.each do |linked_user| %>
         <tr>
           <td><strong><%= linked_user.provider %></strong></td>
           <td><%= linked_user.username %></td>
-          <td><%= link_to t("linked_users.destroy.action"),
+          <td><%= link_to "Remove",
                     destroy_linked_user_path(linked_user.id),
                     class: "text-red",
                     method: :delete,
-                    data: { confirm: t("linked_users.destroy.confirm") } %>
+                    data: { confirm: "Are you sure? This will unlink the account, but you can link the account again if you wish." } %>
           </td>
         </td>
       <% end %>

@@ -129,7 +129,7 @@
 
 <Modal maxWidth="600px">
   <p class="mt-0">
-    <strong class="text-white">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br>
+    <strong class="text-lightest">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br>
     <em>Success not guaranteed.</em>
   </p>
 
@@ -156,7 +156,7 @@
 
     <p class="mb-1/8">
       This is what the corresponding line looks like in your code: <br>
-      File name: <strong class="text-white">{foundItem.item?.name}</strong>.
+      File name: <strong class="text-lightest">{foundItem.item?.name}</strong>.
     </p>
     <ExpandableSnippet
       fullContentLines={foundItem.multiline}

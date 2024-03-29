@@ -32,7 +32,7 @@ class ArrayNamePartOfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless options.key?(:array)
     return unless value.present?
-    array = options[:array].pluck("en")
+    array = options[:array].pluck("name")
 
     value.each do |item|
       unless array.include? item
@@ -86,7 +86,7 @@ class Post < ApplicationRecord
   MAX_SOURCES = 5
 
   belongs_to :user
-  belongs_to :collection, optional: true
+  belongs_to :collection, optional: true, counter_cache: true
 
   has_many :favorites, dependent: :destroy
   has_many :revisions, -> { select("created_at", "updated_at", "post_id", "id", "version", "code", "description") }, dependent: :destroy
@@ -102,6 +102,7 @@ class Post < ApplicationRecord
   has_many :sources, through: :source_derivs, source: :source
 
   has_many_attached :images, dependent: :destroy
+  has_many_attached :videos, dependent: :destroy
 
   has_recommended :posts
 
@@ -126,7 +127,7 @@ class Post < ApplicationRecord
   validates :nice_url, uniqueness: true, allow_blank: true, length: { minimum: 7, maximum: 20 }, format: { with: /\A[a-z0-9-]+\z/, message: "is invalid. Only lowercase letter, numbers, and dashes are allowed." }
   validates :description, length: { maximum: POST_DESCRIPTION_LIMIT }
   validates :snippet, length: { maximum: POST_SNIPPET_LIMIT }
-  validates :categories, presence: true, array_length: { maximum: 3 }, array_name_part_of: { array: categories }
+  validates :categories, presence: true, array_length: { maximum: 3 }, array_part_of: { array: categories }
   validates :tags, length: { maximum: 100 }
   validates :heroes, presence: true, array_name_part_of: { array: heroes }
   validates :maps, presence: true, array_name_part_of: { array: maps }
@@ -135,6 +136,7 @@ class Post < ApplicationRecord
   validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
                      size: { less_than: 2.megabytes },
                      dimension: { max: 3500..3500 }
+  validates :videos, content_type: ["video/mp4"], size: { less_than: 50.megabytes }
   validates_with SupportedPlayersValidator
 
   # Ensure unresolved reports about this post are archived
@@ -184,10 +186,6 @@ class Post < ApplicationRecord
                  include: { user: { only: :username } } )
   end
 
-  def self.locale
-    self.where(locale: current_locale)
-  end
-
   def self.select_overview_columns
     self.select(Post.attribute_names - ["snippet", "description", "controls"])
   end
@@ -229,5 +227,9 @@ class Post < ApplicationRecord
 
   def self.find_by_code(code)
     Post.find_by("upper(code) = ?", code.upcase)
+  end
+
+  def new_videos_attached?
+    videos_attachments.any? { |attachment| attachment.new_record? }
   end
 end

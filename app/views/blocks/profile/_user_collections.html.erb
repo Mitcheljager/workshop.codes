@@ -1,0 +1,5 @@
+<h2>Collections made by <%= tag.strong @user.clean_username %></h2>
+
+<%= render collection: @collections, partial: "collections/collection_card", as: :collection %>
+
+<%= tag.em "#{ @user.clean_username } has not yet created any collections" if @user.collections.none? %>

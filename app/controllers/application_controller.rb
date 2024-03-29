@@ -5,11 +5,9 @@ class ApplicationController < ActionController::Base
   include ContentHelper
 
   protect_from_forgery with: :exception
-  before_action :set_locale
   before_action :login_from_cookie
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
-  before_action :redirect_default_locale
   before_action :expire_oauth_session
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
@@ -59,15 +57,17 @@ class ApplicationController < ActionController::Base
   end
 
   def active_storage_blob_variant_url
-    image = ActiveStorage::Blob.find_by_key(params[:key])
+    blob = ActiveStorage::Blob.find_by_key(params[:key])
 
-    if image.present?
-      if params[:type] == "thumbnail"
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
+    if blob.present?
+      if params[:type] == "video"
+        url = rails_public_blob_url(blob)
+      elsif params[:type] == "thumbnail"
+        url = rails_public_blob_url(blob.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
       elsif params[:type] == "full"
-        url = rails_public_blob_url(image.variant(quality: 95).processed)
+        url = rails_public_blob_url(blob.variant(quality: 95).processed)
       else
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_limit: [1920, 1080], format: :webp).processed)
+        url = rails_public_blob_url(blob.variant(quality: 95, resize_to_limit: [1920, 1080], format: :webp).processed)
       end
 
       render json: url, layout: false
@@ -111,21 +111,6 @@ class ApplicationController < ActionController::Base
     if /^www/.match(request.host)
       redirect_to("#{ request.url }".gsub("www.", ""), status: 301)
     end
-  end
-
-  def redirect_default_locale
-    if params[:locale] == "en"
-      redirect_to(request.original_url.gsub("/en", ""), status: 301)
-    end
-  end
-
-  def set_locale
-    locale = params[:locale].to_s.strip.to_sym
-    I18n.locale = I18n.available_locales.include?(locale) ? locale : I18n.default_locale
-  end
-
-  def default_url_options
-    { locale: ((I18n.locale == I18n.default_locale) ? nil : I18n.locale) }
   end
 
   def handle_failed_authenticity_token

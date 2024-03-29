@@ -10,7 +10,7 @@ import { debounced } from "../utils/debounceStore"
 const VARIABLE_EXTRACTION_DEBOUNCE_MS = 500
 
 export const screenWidth = writable(0)
-export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1100)
+export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1000)
 
 export const modal = (() => {
   const { subscribe, set } = writable(null)
@@ -27,6 +27,7 @@ export const modal = (() => {
 })()
 
 export const editorStates = writable({})
+export const editorScrollPositions = writable({})
 
 export const projects = writable(null)
 export const currentProjectUUID = writable(null)
@@ -34,6 +35,8 @@ export const currentProject = derived([projects, currentProjectUUID], ([$project
   if (!$projects?.length) return null
   return $projects.filter(p => p.uuid == $currentProjectUUID)?.[0]
 })
+
+export const recoveredProject = writable(null)
 
 export const items = writable([])
 export const currentItem = writable({})
@@ -82,3 +85,28 @@ export const mixinsMap = derived(flatItems, debounced($flatItems => {
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const workshopConstants = writable({})
+
+export const settings = writable({
+  "editor-font": "Consolas",
+  "editor-font-size": "14",
+  "editor-cursor-color": "#ff00ff",
+  "editor-cursor-width": "3",
+  "color-string": "#98C379",
+  "color-punctuation": "#6a9955",
+  "color-keyword": "#E06C75",
+  "color-number": "#d19a66",
+  "color-comment": "#6a7277",
+  "color-variable": "#9cdcfe",
+  "color-action": "#e5c069",
+  "color-value": "#6796e6",
+  "color-operator": "#569cd6",
+  "color-bool": "#d19a66",
+  "color-invalid": "#b33834",
+  "color-custom-keyword": "#c678dd",
+  "show-indent-markers": true,
+  "word-wrap": false,
+  "autocomplete-semicolon": true,
+  "autocomplete-parameter-objects": false,
+  "autocomplete-min-parameter-size": 2,
+  "autocomplete-min-parameter-newlines": 2
+})

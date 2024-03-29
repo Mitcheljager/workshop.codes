@@ -19,7 +19,7 @@ task :notify_expiry => :environment do
                 **Workshop Codes in Overwatch may expire after 6 months**. If a code expires, **your work will be lost**.
                 You can check if a code has expired by attempting to import it in-game. If you receive an error, your code has expired.
                 In the event that your code expires, you can recover it via by copy and pasting a Code Snippet (stored either on Workshop.codes or somewhere else) in Overwatch.",
-              go_to: "#{ post_path(nil, post.code) }",
+              go_to: "#{ post_path(post.code) }",
               user_id: post.user.id,
               content_type: :has_expired,
               concerns_model: "post",
@@ -36,7 +36,7 @@ task :notify_expiry => :environment do
                 "==⚠ The Code for **\"#{ post.title }\"** may soon expire.==
                 **Workshop Codes in Overwatch may expire after 6 months**. If your code expires, then this code will no longer function and **your code will be lost**.
                 Make sure to renew your code by importing it and uploading it to the same code (see [this article](https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code) for more information).",
-              go_to: "#{ post_path(nil, post.code) }",
+              go_to: "#{ post_path(post.code) }",
               user_id: post.user.id,
               content_type: :will_expire,
               concerns_model: "post",

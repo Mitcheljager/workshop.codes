@@ -1,4 +1,5 @@
 import { getClosingBracket, replaceBetween, splitArgumentsString } from "../parse"
+import { getFirstParameterObject } from "./parameterObjects"
 
 export function getMixins(joinedItems) {
   let mixins = joinedItems.match(/(?<=@mixin\s)[^\s\(]+/g)
@@ -7,6 +8,12 @@ export function getMixins(joinedItems) {
   return mixins
 }
 
+/**
+ * Replace and remove all occurances of `@include` and `@mixin`. `@include` is replaced with the declarations of their
+ * corresponding `@mixin`.
+ * @param {string} joinedItems Given string of the currently parsed compiled items.
+ * @returns {string} joinedItems with mixin includes replaced.
+ */
 export function extractAndInsertMixins(joinedItems) {
   const mixins = {}
 
@@ -41,11 +48,13 @@ export function extractAndInsertMixins(joinedItems) {
 
     const mixin = content.slice(firstOpenBracket + 1, closing)?.trim()
 
+    if (mixin.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
+
     mixins[name] = {
       content: mixin,
       full: joinedItems.slice(match.index, closing + 1),
       params: paramsDefaults,
-      hasContents: mixin.includes("@contents;")
+      hasContents: mixin.includes("@contents")
     }
   }
 
@@ -57,12 +66,11 @@ export function extractAndInsertMixins(joinedItems) {
     // Get arguments
     const index = joinedItems.indexOf("@include")
     let closing = getClosingBracket(joinedItems, "(", ")", index + 1)
-    if (closing < 0) {
-      closing = joinedItems.length
-    }
+    if (closing < 0) closing = joinedItems.length
     const full = joinedItems.slice(index, closing + 1)
     const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
     const mixin = mixins[name]
+    const parameterObjectGiven = getFirstParameterObject(full)?.given
 
     if (!mixin) throw new Error(`Included a mixin that was not specified: "${ name }"`)
 
@@ -72,34 +80,20 @@ export function extractAndInsertMixins(joinedItems) {
       continue
     }
     const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
-    const splitArguments = splitArgumentsString(argumentsString) || []
+    let splitArguments = splitArgumentsString(argumentsString) || []
 
-    let replaceWith = mixin.content
-    if (replaceWith.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
+    // If there is only one argument and that argument is a parameter object we assume the given argument is not for a param.
+    // This allows us to either insert a single parameter object to be used for the mixin or insert multiple to be used for the params.
+    if (splitArguments.length === 1 && parameterObjectGiven) splitArguments = []
 
-    // Get content for @contents
-    let fullMixin
-    let contents
-    if (mixin.hasContents) {
-      let contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
-      if (contentsClosing == -1) contentsClosing = joinedItems.length
-      fullMixin = joinedItems.slice(index, contentsClosing + 1)
-
-      const contentsOpening = fullMixin.indexOf("{")
-
-      if (contentsOpening != -1) {
-        contents = fullMixin.slice(contentsOpening + 1, fullMixin.length - 1)
-        if (contents.includes(`@include\s${ name }`)) throw new Error("Can not include a mixin in itself")
-      }
-
-      replaceWith = replaceWith.replace("@contents;", contents || "")
-    }
+    // eslint-disable-next-line prefer-const
+    let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, closing, mixin.content)
 
     mixin.params
       .map((param, index) => ({ ...param, index }))
       .sort((p1, p2) => p2.key.length - p1.key.length)
       .forEach(param => {
-        replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[param.index]?.trim() || param.default)
+        replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[param.index]?.trim() || parameterObjectGiven?.[param.key] || param.default)
       })
 
     const closingSemicolon = (!mixin.hasContents || !contents) && joinedItems[closing + 1] == ";"
@@ -108,4 +102,81 @@ export function extractAndInsertMixins(joinedItems) {
   }
 
   return joinedItems
+}
+
+/**
+ * Replace every `@contents` occurance with their corresponding slot from the mixin include.
+ * @param {string} joinedItems - The full given content
+ * @param {number} index - The starting index of the include
+ * @param {number} closing - The index of the closing parenthesis of the include arguments
+ * @param {string} replaceWith - String constructed to far to replace the starting value
+ * @returns {Object} An object containing the extracted contents of the mixin, the full mixin string (including the declare),
+ *                  and the updated content after slot replacement.
+ * @throws {Error} If the mixin includes itself
+ */
+export function replaceContents(joinedItems, index, closing, replaceWith) {
+  let contents = ""
+  let contentsClosing = getClosingBracket(joinedItems, "{", "}", index)
+  if (contentsClosing == -1) contentsClosing = joinedItems.length
+
+  const openingBracketAt = getOpeningBracketAt(joinedItems.slice(closing + 1, joinedItems.length))
+  const fullMixin = joinedItems.slice(index, openingBracketAt != -1 ? contentsClosing + 1 : closing + 1)
+
+  if (openingBracketAt != -1) contents = joinedItems.slice(closing + 1 + openingBracketAt + 1, contentsClosing)
+
+  const slotContents = getSlotContents(contents)
+
+  while (replaceWith.indexOf("@contents") != -1) {
+    const match = /@contents(?:\("(.+?)"\))?;?/.exec(replaceWith)
+    const slot = match[1] || "default"
+    const start = match.index
+    const end = match.index + match[0].length
+
+    replaceWith = replaceBetween(replaceWith, slotContents[slot] || "", start, end)
+  }
+
+  return { contents, fullMixin, replaceWith }
+}
+
+/**
+ * Get all given slots in the mixin include
+ * @param {string} contents Contents of the mixin include
+ * @returns {Object} An object containing the extracted slot with their names as keys
+ *                   and slot content as value. Includes the default slot.
+ */
+export function getSlotContents(contents) {
+  const slotContents = {}
+  const defaultSlotContent = []
+
+  const slotsRegex = /@slot\("([^"]+)"\) {/g
+  let lastIndex = 0
+  let match
+
+  while ((match = slotsRegex.exec(contents)) !== null) {
+    const name = match[1] || ""
+    const slotClosing = getClosingBracket(contents, "{", "}", match.index)
+
+    defaultSlotContent.push(contents.slice(lastIndex, match.index).trim())
+    slotContents[name] = contents.slice(match.index + match[0].length, slotClosing).trim()
+    lastIndex = slotClosing + 1
+  }
+
+  // Add content after final slot to default slot
+  defaultSlotContent.push(contents.slice(lastIndex).trim())
+
+  return { ...slotContents, default: defaultSlotContent.join("").trim() }
+}
+
+/**
+ * Get the opening bracket for mixin includes. If there is none, return -1
+ * @param {string} content
+ * @returns {index} index of the found opening bracket
+ */
+export function getOpeningBracketAt(content) {
+  for (let i = 0; i < content.length; i++) {
+    const char = content[i]
+
+    if (char === "{") return i
+    if (!char.match(/\s/)) return -1
+  }
 }

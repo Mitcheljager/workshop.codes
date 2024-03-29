@@ -11,6 +11,7 @@
 }
 
 .matches__item {
+  width: 100%;
   padding: $margin / 8 0;
   cursor: pointer;
 
@@ -26,6 +27,11 @@
   &--active {
     background: $bg-darker;
     box-shadow: $margin 0 0 $bg-darker, $margin * -1 0 0 $bg-darker;
-    color: $white;
+    color: $text-color-lightest;
   }
+}
+
+.matches__hidden {
+  opacity: 0.5;
+  text-decoration: line-through;
 }

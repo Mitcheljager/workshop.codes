@@ -17,18 +17,18 @@
 }
 
 .navigation__item {
+  --color: #{$text-color-lightest};
   display: block;
   margin-bottom: $margin / 4;
   border-radius: $border-radius / 2;
-  color: $pure-white;
+  color: var(--color);
   text-decoration: none;
-  font-family: var(--font-stack-alt);
+  font-family: $font-stack-alt;
   text-transform: uppercase;
   font-size: 18px;
 
-  @include focus-visible-outline;
-
   @include media-min(mbl) {
+    --color: #{$body-bg};
     font-size: clamp(19px, 2vw, 24px);
     margin-right: clamp(#{ $margin / 8 }, 1.25vw, #{ $margin / 2 });
     margin-bottom: 0;
@@ -42,7 +42,7 @@
   &:active,
   &:focus,
   &--active {
-    color: $pure-white;
+    color: var(--color);
     position: relative;
 
     &::before {
@@ -54,21 +54,19 @@
       width: 100%;
       height: 3px;
       border-radius: 10px;
-      background: $pure-white;
-      opacity: .5;
+      background: var(--color);
     }
   }
 
   &--active {
-    &::before {
-      background: $pure-white;
-      opacity: 1;
-    }
-
+    &::before,
     &:hover::before {
-      background: $pure-white;
-      opacity: 1;
+      background: var(--primary, $primary);
     }
+  }
+
+  .wiki & {
+    --color: #{$white};
   }
 
   svg {
@@ -76,6 +74,15 @@
 
     @include media-min(mbl) {
       height: 24px;
+    }
+  }
+
+  &--discord {
+    display: flex;
+    color: $discord;
+
+    &:hover {
+      color: $discord;
     }
   }
 }
@@ -92,8 +99,6 @@
   line-height: 1.2em;
   font-weight: bolder;
   text-decoration: none;
-
-  @include focus-visible-outline;
 
   @include media-min(sm) {
     margin-left: 1rem;

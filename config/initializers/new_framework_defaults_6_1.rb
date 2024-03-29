@@ -53,12 +53,6 @@ Rails.application.config.active_storage.queues.analysis = nil
 # Set the default queue name for the purge job to the queue adapter default.
 Rails.application.config.active_storage.queues.purge = nil
 
-# Set the default queue name for the incineration job to the queue adapter default.
-Rails.application.config.action_mailbox.queues.incineration = nil
-
-# Set the default queue name for the routing job to the queue adapter default.
-Rails.application.config.action_mailbox.queues.routing = nil
-
 # Set the default queue name for the mail deliver job to the queue adapter default.
 Rails.application.config.action_mailer.deliver_later_queue_name = nil
 

@@ -25,10 +25,12 @@ import * as getSnippet from "../src/get-snippet"
 import * as getVerifiedUsers from "../src/get-verified-users"
 import * as imagePreview from "../src/image-preview"
 import * as infiniteScroll from "../src/infinite-scroll"
+import * as lazyVideo from "../src/lazy-video"
 import * as microlight from "../src/microlight"
 import * as modal from "../src/modal"
 import * as navigation from "../src/navigation"
 import * as numPlayersSlider from "../src/num-players-slider"
+import * as ollieForm from "../src/ollie-form"
 import * as revealByCheckbox from "../src/reveal-by-checkbox"
 import * as revealBySelect from "../src/reveal-by-select"
 import * as revealOnDifference from "../src/reveal-on-difference"
@@ -54,8 +56,10 @@ document.addEventListener("turbolinks:load", function() {
   getVerifiedUsers.bind()
   imagePreview.bind()
   infiniteScroll.bind()
+  lazyVideo.bind()
   modal.bind()
   navigation.bind()
+  ollieForm.bind()
   revealByCheckbox.bind()
   revealBySelect.bind()
   revealOnDifference.bind()

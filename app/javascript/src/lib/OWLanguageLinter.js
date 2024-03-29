@@ -1,6 +1,7 @@
-import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../utils/parse"
+import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "../utils/parse"
 import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
 import { get } from "svelte/store"
+import { getFirstParameterObject } from "../utils/compiler/parameterObjects"
 
 let diagnostics = []
 
@@ -20,6 +21,7 @@ export function OWLanguageLinter(view) {
   findEachLoopsWithInvalidIterables(content)
   findEventBlocksWithMissingArguments(content)
   findUndefinedSubroutines(content)
+  findTripleEquals(content)
   checkMixins(content)
   checkTranslations(content)
   checkForLoops(content)
@@ -100,9 +102,10 @@ function findIncorrectArgsLength(content) {
     for(let j = 0; j < $completionsMap.length; j++) {
       const item = $completionsMap[j]
 
-      if (item.label != name) continue
+      if (item.label != name || item.type === "constant") continue
 
       let message = ""
+      let severity = "error"
 
       if (item.args_unlimited) continue
 
@@ -119,6 +122,7 @@ function findIncorrectArgsLength(content) {
         let argumentMatch
         while ((argumentMatch = /\(/g.exec(argumentsString)) != null && safeIndex < 100) {
           const argumentClosing = getClosingBracket(argumentsString, "(", ")", argumentMatch.index - 1)
+          if (argumentClosing === -1) break
           argumentsString = argumentsString.substring(0, argumentMatch.index) + argumentsString.substring(argumentClosing + 1)
 
           safeIndex++
@@ -126,14 +130,29 @@ function findIncorrectArgsLength(content) {
 
         const splitContent = splitArgumentsString(argumentsString)
 
-        if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
-        if (!item.args_min_length && splitContent.length == item.args_length) break
+        // Arguments string is a parameter object
+        if (argumentsString.trim()[0] === "{") {
+          const parameterObject = getFirstParameterObject(content.slice(match.index, closing + 1))
 
-        const expectedString = `${ item.args_min_length ? "Atleast" : "" } ${ item.args_min_length || item.args_length }`
-        const maxString = `${ item.args_min_length ? ` (${ item.args_length } max)` : "" }`
-        const givenString = `${ splitContent.length } given`
+          if (!parameterObject) break
 
-        message = `${ expectedString } Argument(s) expected${ maxString }, ${ givenString }`
+          const invalidArgument = Object.keys(parameterObject.given).filter(i => i && !parameterObject.phraseParameters.includes(i))
+          if (invalidArgument?.length) {
+            message = `Argument(s) "${ invalidArgument.join(", ") }" are not valid for "${ name }"`
+            severity = "warning"
+          } else break
+        } else {
+          // Argument string is a regular list of arguments
+          if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
+          if (!item.args_min_length && splitContent.length == item.args_length) break
+
+          const expectedString = `${ item.args_min_length ? "Atleast" : "" } ${ item.args_min_length || item.args_length }`
+          const maxString = `${ item.args_min_length ? ` (${ item.args_length } max)` : "" }`
+          const givenString = `${ splitContent.length } given`
+
+          message = `${ expectedString } Argument(s) expected${ maxString }, ${ givenString }`
+        }
+
       }
 
       if (!message) break
@@ -141,7 +160,7 @@ function findIncorrectArgsLength(content) {
       diagnostics.push({
         from: match.index + match.match.length - name.length,
         to: match.index + match.match.length,
-        severity: "error",
+        severity,
         message: message
       })
 
@@ -234,7 +253,7 @@ function checkTranslations(content) {
       if (lastParenAtIndex == -1) throw new Error("Using @translate outside of an action has no effect")
 
       const phrase = getPhraseFromPosition({ text: content, from: 0 }, lastParenAtIndex - 1)
-      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Set Objective Description", "Big Message", "Small Message"]
+      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
       if (phrase?.text.includes("include")) return
       if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${ phrase.text }" has no effect.`)
     } catch (error) {
@@ -256,12 +275,21 @@ function checkForLoops(content) {
     try {
       const [_, params] = match
 
-      if (params[0] != "(") throw new Error("Missing opening parenthesis")
-      if (params[params.length - 1] != ")") throw new Error("Missing closing parenthesis")
-      if (!/to|through/.test(params)) throw new Error("Either \"to\" or \"through\" are expected")
+      if (params[0] !== "(") throw new Error("Missing opening parenthesis")
+      if (params[params.length - 1] !== ")") throw new Error("Missing closing parenthesis")
 
-      const splitParams = params.split(" ")
-      if (splitParams.length > 3 && splitParams[1] != "from") throw new Error("Missing \"from\" after iterator name")
+      const splitParams = params.split(/\s+/)
+      const toThroughIndex = splitParams.findIndex((s) => /to|through/.test(s))
+      if (toThroughIndex < 0) throw new Error("Either \"to\" or \"through\" are expected")
+
+      if (
+        splitParams.length > 3 &&
+        toThroughIndex !== 1 &&
+        splitParams[toThroughIndex - 2] !== "from"
+      ) {
+        throw new Error("Missing \"from\" after iterator name")
+      }
+
     } catch (error) {
       diagnostics.push({
         from: match.index,
@@ -433,6 +461,8 @@ function findMissingComparisonsInConditions(content) {
       const end = semicolons[i]
       const condition = conditionContent.substring(start, end)
 
+      if (condition.includes("@contents")) continue
+
       // Remove all content that is between parenthesis
       const conditionWithoutParenthesis = condition.replaceAll(/\([^\)]*\)/g, "")
 
@@ -587,6 +617,9 @@ function findUndefinedSubroutines(content) {
 
   for (const match of content.matchAll(/(?<=(?:Call Subroutine|Start Rule))\(/g)) {
     const argsEnd = getClosingBracket(content, "(", ")", match.index - 1)
+
+    if (argsEnd === -1) continue
+
     const [subroutineName] = splitArgumentsString(content.substring(match.index + 1, argsEnd))
 
     if (!definedSubroutines.includes(subroutineName)) {
@@ -598,5 +631,19 @@ function findUndefinedSubroutines(content) {
         message: `There is no subroutine rule with name "${ subroutineName }"`
       })
     }
+  }
+}
+
+function findTripleEquals(content) {
+  const stringRanges = findRangesOfStrings(content)
+
+  for (const match of matchAllOutsideRanges(stringRanges, content, /===/g)) {
+    const from = match.index
+    diagnostics.push({
+      from,
+      to: from + match[0].length,
+      severity: "error",
+      message: "Use single equals for assignments, or double equals to comparisons. Triple equals doesn't exist here (this isn't JavaScript!)."
+    })
   }
 }

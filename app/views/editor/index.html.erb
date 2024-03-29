@@ -1,4 +1,4 @@
-<% content_for :page_title, "Editor | #{(@project.title + " | ") if @project.present?} Workshop.codes Script Editor" %>
+<% content_for :page_title, "Editor | Workshop.codes Script Editor" %>
 <% content_for :og_description, "The Workshop.codes Overwatch Workshop Script Editor enables editing your Workshop Script right from your browser using an intuitive and easy to use text based editor. Useful for new and experienced programmers!" %>
 <% content_for :og_summary_small, "true" %>
 
@@ -10,14 +10,7 @@
 
 <div class="wiki">
   <%= svelte_component "Editor", {
-    events: @events,
-    values: @values,
-    actions: @actions,
-    constants: @constants,
-    defaults: @defaults,
-    heroes: heroes,
-    maps: maps,
-    _projects: @projects,
+    bugsnagApiKey: ENV["BUGSNAG_API_KEY"],
     _isSignedIn: current_user.present?
   } %>
 </div>

@@ -48,6 +48,72 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
+    test("Should evaluate a for loop with a custom step size", () => {
+      const input = `@for (2 through 6 in steps of 2) {
+        For.i;
+      }`
+      const expectedOutput = `
+        2;
+        4;
+        6;
+      `
+      expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+
+    test("Should evaluate a for loop with from, to, and step of decimal values", () => {
+      const input = `
+      // Inclusive (0.5..4.2 / 1.5)
+      @for (inc_lt from 0.5 through 4.2 in steps of 1.5) {
+        For.inc_lt;
+      }
+
+      // Inclusive (0.5..5.0 / 1.5)
+      @for (inc_eq from 0.5 through 5 in steps of 1.5) {
+        For.inc_eq;
+      }
+
+      // Inclusive (0.5..5.2 / 1.5)
+      @for (inc_gt from 0.5 through 5.2 in steps of 1.5) {
+        For.inc_gt;
+      }
+
+      // Exclusive (0.5..4.2 / 1.5)
+      @for (exc_lt from 0.5 to 4.2 in steps of 1.5) {
+        For.exc_lt;
+      }
+
+      // Exclusive (0.5..5.0 / 1.5)
+      @for (exc_eq from 0.5 to 5 in steps of 1.5) {
+        For.exc_eq;
+      }
+
+      // Exclusive (0.5..5.2 / 1.5)
+      @for (exc_gt from 0.5 to 5.2 in steps of 1.5) {
+        For.exc_gt;
+      }
+      `
+      const expectedOutput = `
+        // Inclusive (0.5..4.2 / 1.5)
+        0.5;  2;  3.5;  5;
+
+        // Inclusive (0.5..5.0 / 1.5)
+        0.5;  2;  3.5;  5;
+
+        // Inclusive (0.5..5.2 / 1.5)
+        0.5;  2;  3.5;  5;  6.5;
+
+        // Exclusive (0.5..4.2 / 1.5)
+        0.5;  2;  3.5;
+
+        // Exclusive (0.5..5.0 / 1.5)
+        0.5;  2;  3.5;
+
+        // Exclusive (0.5..5.2 / 1.5)
+        0.5;  2;  3.5;  5;
+      `
+      expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+
     test("Should handle nested for loops", () => {
       const input = `@for (1 through 2) {
         Test;

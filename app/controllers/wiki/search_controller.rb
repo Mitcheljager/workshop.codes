@@ -13,7 +13,10 @@ class Wiki::SearchController < Wiki::BaseController
   end
 
   def index
-    ids = Wiki::Article.search(params[:query])
+    ids = Rails.cache.fetch("wiki_article_search_#{params[:query]}", expires_in: 1.day) do
+      Wiki::Article.search(params[:query])
+    end
+
     articles = Wiki::Article.where(id: ids)
     groups = articles.map { |article| article.group_id }.uniq
     latest_articles = Wiki::Article.where(group_id: groups).group(:group_id).maximum(:id).values

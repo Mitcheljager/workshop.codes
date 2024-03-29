@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  require "httparty"
-
   include EmailNotificationsHelper
   include NotificationsHelper
 
@@ -12,7 +10,6 @@ class PostsController < ApplicationController
       unless current_user
         redirect_to login_path
       else
-        # FIXME: i18n
         redirect_to post_path(@post.code), flash: { error: "You are not authorized to perform that action" } unless current_user == @post.user
       end
     else
@@ -102,7 +99,6 @@ class PostsController < ApplicationController
       Post.transaction do
         @post = Post.new(post_params)
         @post.user_id = current_user.id
-        @post.locale = current_locale
         @post.last_revision_created_at = Time.now
 
         set_post_status
@@ -136,7 +132,7 @@ class PostsController < ApplicationController
       Bugsnag.notify(exception) if Rails.env.production?
     end
 
-    flash[:notice] = "Post successfully created" # FIXME: i18n
+    flash[:notice] = "Post successfully created"
     redirect_to post_path(@post.code)
   end
 
@@ -169,7 +165,7 @@ class PostsController < ApplicationController
         if (post_params[:revision].present? && post_params[:revision] != "0") || current_code != post_params[:code] || current_version != post_params[:version]
           invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
           @revision = Revision.new(post_id: @post.id, code: @post.code, version: @post.version, description: post_params[:revision_description], snippet: @post.snippet, visible: invisible)
-          @post.update(last_revision_created_at: @revision.created_at) if @revision.save
+          @post.update_column(:last_revision_created_at, @revision.created_at) if @revision.save!
         end
       end
     rescue ActiveRecord::ActiveRecordError => exception
@@ -190,7 +186,7 @@ class PostsController < ApplicationController
       Bugsnag.notify(exception) if Rails.env.production?
     end
 
-    flash[:notice] = "Post successfully edited" # FIXME: i18n
+    flash[:notice] = "Post successfully edited"
     redirect_to post_path(@post.code)
   end
 
@@ -206,7 +202,7 @@ class PostsController < ApplicationController
     @post.destroy
     create_activity(:destroy_post, post_activity_params)
 
-    flash[:notice] = "Post successfully deleted" # FIXME: i18n
+    flash[:notice] = "Post successfully deleted"
     redirect_to posts_url
   end
 
@@ -229,7 +225,7 @@ class PostsController < ApplicationController
     if @posts.any?
       render collection: @posts, partial: "card", as: :post
     else
-      render plain: "No similar posts were found" # FIXME: i18n
+      render plain: "No similar posts were found"
     end
   end
 
@@ -395,7 +391,7 @@ class PostsController < ApplicationController
       :revision, :revision_description,
       :min_players, :max_players,
       :email_notification, :email,
-      :carousel_video, :image_order, images: [])
+      :carousel_video, :image_order, images: [], videos: [])
   end
 
   def email_notification_enabled
@@ -428,6 +424,10 @@ class PostsController < ApplicationController
         @block.update(content_id: @post.id, properties: properties)
       end
     end
+
+    # Update the updated_at time manually in case the base post was not changed.
+    # This is needed to make sure the cache updates as expected.
+    @post.update_column(:updated_at, Time.now)
   end
 
   def published_from_draft

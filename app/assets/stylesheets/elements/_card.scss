@@ -92,7 +92,7 @@
   border-radius: $border-radius;
   background: darken($bg-dark, 3.5%);
   text-align: left;
-  color: $white;
+  color: $text-color-lightest;
   text-decoration: none;
   overflow: hidden;
   box-shadow: $shadow;
@@ -122,11 +122,6 @@
     margin-bottom: 0;
     font-size: 22px;
     line-height: 1.25em;
-
-    @include hover-stack {
-      outline: none;
-      filter: brightness(1.15);
-    }
   }
 }
 
@@ -151,7 +146,7 @@
     text-decoration: none;
 
     @include hover-stack {
-      color: var(--white);
+      color: $text-color-lightest;
     }
   }
 }
@@ -164,12 +159,12 @@
   margin-bottom: auto;
   font-family: $font-stack;
   font-size: 16px;
-  color: $white;
+  color: $text-color-lightest;
   text-decoration: none;
 
   &[href] {
     @include hover-stack {
-      color: $pure-white;
+      color: $white;
     }
   }
 }

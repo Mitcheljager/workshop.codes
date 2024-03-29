@@ -9,7 +9,7 @@
     height: 100%;
     width: 100%;
     margin-top: 0;
-    z-index: 10;
+    z-index: 100;
   }
 }
 
@@ -34,6 +34,7 @@
 
   .ide--fullscreen & {
     max-height: 100%;
+    border-radius: 0;
   }
 }
 
@@ -55,7 +56,7 @@
 
   &::selection,
   span::selection {
-    background: rgba($pure-white, .1);
+    background: rgba($white, .1);
   }
 
   .ide--input & {
@@ -75,14 +76,14 @@
   line-height: 1.5em;
 }
 
-.ide__tray {
+.ide__actions {
   display: flex;
   position: absolute;
-  bottom: 1.5rem;
+  top: 1.5rem;
   right: 1.5rem;
 }
 
-.ide__tray-item {
+.ide__actions-item {
   appearance: none;
   position: relative;
   padding: .5em;
@@ -100,7 +101,7 @@
   }
 
   @include hover-stack {
-    color: $white;
+    color: $text-color-lightest;
   }
 
   .copy__notification {

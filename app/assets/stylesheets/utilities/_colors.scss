@@ -1,103 +1,45 @@
-.text-white {
-  color: $white !important;
-}
+$text-colors: (
+  base: $text-color,
+  lightest: $text-color-lightest,
+  light: $text-color-light,
+  dark: $text-color-dark,
+  primary: var(--primary, $primary),
+  discord: $discord,
+  bnet: $bnet,
+  wiki: $wiki,
+  overwatch-2: $overwatch-2,
+  'orange': $orange,
+  'red': $red,
+  'green': $green,
+  'black': $black,
+  'transparent': transparent,
+);
 
-.hover\:text-white:hover {
-  color: $white;
-}
+@each $name, $color in $text-colors {
+  .text-#{$name} {
+    color: $color;
+  }
 
-.text-pure-white {
-  color: $pure-white;
-}
-
-.text-dark {
-  color: $text-color-dark;
-}
-
-.text-overwatch-2 {
-  color: $overwatch-2;
-}
-
-.text-discord {
-  color: $discord;
-}
-
-.bg-primary {
-  background: $primary;
-}
-
-.bg-dark {
-  background: $bg-dark;
-}
-
-.bg-darker {
-  background: $bg-darker;
-}
-
-.bg-overwatch-2 {
-  background: $overwatch-2;
-}
-
-.bg-transparent {
-  background: transparent;
-}
-
-.bg-wiki {
-  background: $wiki;
-}
-
-.b-overwatch-2 {
-  border: 2px solid $overwatch-2;
-}
-
-.b-dark {
-  border: 1px solid $bg-dark;
-}
-
-.text-base {
-  color: $text-color;
-}
-
-.text-black {
-  color: $black;
-}
-
-.text-red {
-  color: $red !important;
-
-  &[href] {
-    @include hover-stack {
-      color: lighten($red, 15%) !important;
-    }
+  .hover\:#{$name}:hover {
+    color: $color;
   }
 }
 
-.text-green {
-  color: $green;
-}
+$bg-colors: (
+  primary: var(--primary, $primary),
+  dark: $bg-dark,
+  darker: $bg-darker,
+  overwatch-2: $overwatch-2,
+  wiki: $wiki,
+  'orange': $orange,
+  'red': $red,
+  'green': $green,
+  'transparent': transparent,
+);
 
-.bg-red {
-  background: $red;
-}
-
-.text-primary {
-  color: $primary;
-}
-
-.text-orange {
-  color: $orange;
-}
-
-.text-ko-fi {
-  color: $ko-fi;
-}
-
-.fill-current-color {
-  path {
-    fill: currentColor;
+@each $name, $color in $bg-colors {
+  .bg-#{$name} {
+    background: $color;
   }
 }
 
-.cog-color {
-  --cog-color: #{ $logo-cog };
-}

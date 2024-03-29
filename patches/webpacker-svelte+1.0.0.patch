@@ -1,0 +1,18 @@
+diff --git a/node_modules/webpacker-svelte/dist/webpacker-svelte.js b/node_modules/webpacker-svelte/dist/webpacker-svelte.js
+index b92f3ab..11fb6ce 100644
+--- a/node_modules/webpacker-svelte/dist/webpacker-svelte.js
++++ b/node_modules/webpacker-svelte/dist/webpacker-svelte.js
+@@ -130,7 +130,12 @@ const WebpackerSvelte = {
+       const component = registeredComponents[className];
+ 
+       if (component) {
+-        if (node.innerHTML.length === 0) this.render(node, component);
++        if (node.dataset.initialized === "true" && node.innerHTML) continue
++        console.log("initialize", className)
++        node.innerHTML = ""
++        node.dataset.initialized = true
++
++        this.render(node, component);
+       } else {
+         console.error(
+           `webpacker-svelte: can not render a component that has not been registered: ${className}`

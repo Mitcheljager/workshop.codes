@@ -5,6 +5,7 @@
   import Sortable from "sortablejs"
 
   import { escapeable } from "../actions/escapeable"
+  import { addAlertError } from "../../lib/alerts"
   import Uploader from "../../uploader"
   import FetchRails from "../../fetch-rails"
   import debounce from "../../debounce"
@@ -15,16 +16,15 @@
   export let button
   export let input
   export let orderInput
+  export let maxDimensions = 3500
+  export let maxSizeMB = 2
 
   let listElement
   let sortable
   let active = false
-  let alert = ""
   let previewImageUrl = ""
 
   const imagePreviewWidth = 200
-
-  $: if (alert) setTimeout(() => { alert = "" }, 3000)
   $: updateOrder(images)
 
   onMount(() => {
@@ -63,14 +63,20 @@
   }
 
   function readFiles(files) {
-    Array.from(files).forEach(file => {
+    Array.from(files).forEach(async file => {
       if (file.kind == "file") file = file.getAsFile()
 
-      if (file.type == "image/png" || file.type == "image/jpg" || file.type == "image/jpeg") {
-        uploadImage(file)
-      } else {
-        alert = "Wrong file type. Only png and jpeg are accepted."
+      if (file.type != "image/png" && file.type != "image/jpg" && file.type != "image/jpeg") {
+        addAlertError("Wrong file type. Only png and jpeg are accepted.")
+        return
       }
+
+      if (!await isAcceptableSize(file)) {
+        addAlertError(`Image "${ file.name }" is too large. Image exceeds ${ maxDimensions }x${ maxDimensions } or ${ maxSizeMB }MB`)
+        return
+      }
+
+      uploadImage(file)
     })
   }
 
@@ -97,10 +103,10 @@
 
           setImage(randomId, uploader.blob.id, thumbnail, preview)
         } catch (error) {
-          alert = "Something went wrong when retrieving your image"
+          addAlertError("Something went wrong when retrieving your image")
         }
       }, 100)
-    }).catch(error => alert = error)
+    }).catch(error => addAlertError(error))
   }
 
   function setProgress(id, progress) {
@@ -122,9 +128,25 @@
   function removeImage(id) {
     if (confirm("Are you sure?")) images = images.filter(i => i.id != id)
   }
+
+  async function isAcceptableSize(file) {
+    return new Promise(resolve => {
+      const image = new Image()
+      image.src = URL.createObjectURL(file)
+
+      image.onload = () => {
+        const { width, height } = image
+
+        URL.revokeObjectURL(image.src)
+
+        if (Math.max(width, height) > maxDimensions) resolve(false)
+        if (file.size > maxSizeMB * 1048576) resolve(false)
+
+        return resolve(true)
+      }
+    })
+  }
 </script>
-
-
 
 <div
   class="dropzone"
@@ -139,10 +161,10 @@
 
   <small>{ help }</small>
 
-  <label class="dropzone__button button button--secondary mt-1/4" tabindex="0">
+  <label class="dropzone__button button button--secondary mt-1/4">
     { button }
 
-    <input type="file" multiple="true" on:change={ changeInput } tabindex="-1" />
+    <input type="file" multiple="true" accept="image/png, image/jpeg, image/jpg" on:change={ changeInput } tabindex="-1" />
   </label>
 </div>
 
@@ -163,6 +185,7 @@
           <div class="images-preview__progress-bar" style="width: { image.progress }%" />
         </div>
       { :else }
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img
           on:click={ () => previewImageUrl = image.preview_url }
           src={ image.url }
@@ -171,20 +194,13 @@
           alt="" />
       { /if }
 
-      <div class="images-preview__action" on:click|stopPropagation={ () => removeImage(image.id) }>X</div>
+      <button class="images-preview__action" on:click|stopPropagation|preventDefault={ () => removeImage(image.id) }>X</button>
     </div>
   { /each }
 </div>
 
-{ #if alert }
-  <div class="alerts">
-    <div class="alert alert--error">
-      { alert }
-    </div>
-  </div>
-{ /if }
-
 { #if previewImageUrl }
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close>
 
     <div class="modal__content p-0">

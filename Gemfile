@@ -18,8 +18,6 @@ gem "discord-notifier"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"
 gem "geocoder"
-gem "high_voltage", "~> 3.0.0"
-gem "httparty"
 gem "image_processing", "~> 1.12"
 gem "inline_svg"
 gem "jbuilder", "~> 2.5"
@@ -31,13 +29,13 @@ gem "omniauth-bnet"
 gem "omniauth-discord"
 # Mitigate CVE-2015-9284
 gem 'omniauth-rails_csrf_protection'
-gem "puma", "~> 4.3"
+gem "puma", "~> 5.6"
 gem "rails", "~> 7.0.5"
-gem "rails-i18n"
 gem "rails_same_site_cookie"
 gem "redcarpet"
 gem "render_async"
 gem "reverse_markdown"
+gem "ruby-openai", "~> 5.0"
 gem "sass-rails", "~> 5.0"
 gem "sendgrid-ruby"
 gem "sprockets-rails"
@@ -70,6 +68,8 @@ group :development do
   gem "active_record_doctor"
   gem "web-console", ">= 3.3.0"
   gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]
+  gem "derailed_benchmarks", group: :development
+  gem "sys-proctable"
 end
 
 group :production do

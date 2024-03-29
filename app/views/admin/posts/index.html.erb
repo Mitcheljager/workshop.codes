@@ -26,6 +26,7 @@
     <th><%= link_to "Fv", admin_posts_path(order: "favorites_count") %></th>
     <th><%= link_to "Imp", admin_posts_path(order: "impressions_count") %></th>
     <th><%= link_to "Hot", admin_posts_path(order: "hotness") %></th>
+    <th><%= link_to "Top", admin_posts_path(order: "top_hotness") %></th>
     <th>Rev</th>
     <th>Com</th>
     <th>Img?</th>
@@ -47,6 +48,7 @@
       <td><%= post.favorites_count %></td>
       <td><%= post.impressions_count %></td>
       <td><%= post.hotness %></td>
+      <td><%= post.top_hotness %></td>
       <td><%= post.revisions.size %></td>
       <td><%= post.comments.size %></td>
       <td><%= "✔" if post.images.any? %></td>

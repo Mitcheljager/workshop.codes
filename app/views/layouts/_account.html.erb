@@ -7,7 +7,7 @@
     </select>
   </div>
 
-  <h1 class="text-md-center text-pure-white"><%= title.html_safe %></h1>
+  <h1 class="text-md-center text-white"><%= title.html_safe %></h1>
 </div>
 
 <div class="profile">
@@ -18,7 +18,7 @@
           class: "profile__action #{ "profile__action--active" if current_page?(menu_item[:url]) }",
           data: menu_item[:data] %>
 
-      <% if menu_item[:url] == collections_path %>
+      <% if menu_item[:url] == account_collections_path %>
         <hr class="mt-1/2 mb-1/2">
       <% end %>
     <% end %>

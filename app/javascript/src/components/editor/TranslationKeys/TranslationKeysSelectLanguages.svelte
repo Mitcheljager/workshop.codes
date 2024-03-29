@@ -14,7 +14,7 @@
       {#if key == $defaultLanguage}
         <small class="text-base">(Current default)</small>
       {:else if $selectedLanguages.includes(key)}
-        <small class="text-base" on:click|preventDefault|stopPropagation={() => $defaultLanguage = key}>Set as default</small>
+        <button class="text-base" on:click|preventDefault|stopPropagation={() => $defaultLanguage = key}><small>Set as default</small></button>
       {/if}
     </label>
   </div>

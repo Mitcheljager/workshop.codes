@@ -35,7 +35,7 @@
   text-transform: capitalize;
 
   &:hover {
-    color: $white;
+    color: $text-color-lightest;
     background: lighten($bg-dark, 10%);
   }
 

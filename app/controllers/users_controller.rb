@@ -72,7 +72,9 @@ class UsersController < ApplicationController
     @posts = Post.where(user_id: current_user.id).select_overview_columns.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
   end
 
-  def accessibility; end
+  def collections
+    @collections = current_user.collections.order(created_at: :desc)
+  end
 
   private
 

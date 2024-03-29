@@ -1,5 +1,6 @@
 <script>
   import { escapeable } from "../actions/escapeable"
+  import { outsideClick } from "../actions/outsideClick"
   import Keyboard from "../icon/Keyboard.svelte"
   import { fly } from "svelte/transition"
 
@@ -29,19 +30,9 @@
     { keys: ["Ctrl", "2"], text: "Focus editor" },
     { keys: ["Ctrl", "3"], text: "Focus wiki search" }
   ]
-
-  function outsideClick(event) {
-    if (!active) return
-    if (event.target.classList.contains("shortcuts")) return
-    if (event.target.closest(".shortcuts")) return
-
-    active = false
-  }
 </script>
 
-<svelte:window on:click={outsideClick} />
-
-<div class="dropdown shortcuts settings">
+<div class="dropdown shortcuts settings" use:outsideClick on:outsideClick={() => active = false}>
   <button class="button button--secondary button--square" on:click|stopPropagation={() => active = !active}>
     <Keyboard />
   </button>

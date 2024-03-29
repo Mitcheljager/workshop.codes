@@ -30,7 +30,7 @@
   background: $green;
   box-shadow: 0 10px 10px rgba($black, .5);
   overflow: hidden;
-  color: $pure-white;
+  color: $white;
   font-size: 14px;
   text-decoration: none;
 
@@ -54,7 +54,7 @@
   }
 
   a {
-    color: $pure-white;
+    color: $white;
   }
 
   &--error {
@@ -78,6 +78,6 @@
   left: 0;
   height: 0.15rem;
   width: 100%;
-  background: rgba($pure-white, 0.75);
+  background: rgba($white, 0.75);
   animation: deplete-timer var(--timer) forwards linear;
 }

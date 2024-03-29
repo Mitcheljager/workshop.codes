@@ -58,7 +58,7 @@ RSpec.describe "Archived posts controller", type: :request do
           end
         }.to change { User.count }.by(1)
         expect(response).to redirect_to(linked_users_path)
-        expect(flash[:alert][:message]).to eq("Your Battle.net account '#{@username}' has been linked.")
+        expect(flash[:alert]).to eq("Your Battle.net account '#{@username}' has been linked.")
 
         expect {
           patch archive_path(code: archive_post.code)
@@ -118,7 +118,7 @@ RSpec.describe "Archived posts controller", type: :request do
           end
           user.reload
         }.to change { user.linked_users.count }.by(1)
-        expect(flash[:alert][:message]).to eq("Your Battle.net account '#{@username}' has been linked.")
+        expect(flash[:alert]).to eq("Your Battle.net account '#{@username}' has been linked.")
 
         expect {
           delete archive_path(code: archive_post.code)
@@ -172,7 +172,7 @@ RSpec.describe "Archived posts controller", type: :request do
           post "/auth/bnet"
           follow_redirect!
         end
-        expect(flash[:alert][:message]).to eq("Your Battle.net account '#{bnet_username}' has been linked.")
+        expect(flash[:alert]).to eq("Your Battle.net account '#{bnet_username}' has been linked.")
 
         expect {
           patch archive_path(code: archive_post.code)
@@ -300,6 +300,17 @@ RSpec.describe "Archived posts controller", type: :request do
           delete archive_path(code: archive_post.code)
         }.not_to change { Post.count }
         expect(flash[:error]).to eq("You are not authorized to perform that action")
+      end
+    end
+
+    context "show request" do
+      it "does not work for a code that does not exist" do
+        post_code = archive_post.code
+        archive_post.destroy!
+
+        get archive_path(code: post_code)
+        expect(response).to redirect_to(posts_path)
+        expect(flash[:error]).to eq("Post not found")
       end
     end
   end

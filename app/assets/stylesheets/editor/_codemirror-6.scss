@@ -1,0 +1,270 @@
+@keyframes fly-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.cm-editor {
+  --indent-marker-bg-color: #{ lighten($bg-dark, 5%) };
+  --indent-marker-active-bg-color: #{ lighten($bg-dark, 15%) };
+  color: $text-color-light;
+
+  body[style*="--show-indent-markers: false"] & { // Hacky solution for css var based if statement
+    --indent-marker-bg-color: transparent;
+    --indent-marker-active-bg-color: transparent;
+  }
+
+  .cm-scroller {
+    padding-top: $margin / 4;
+    font-family: var(--editor-font, "Consolas"), monospace;
+  }
+
+  .cm-gutters {
+    border-right: 0;
+    background: var(--editor-background, #{$bg-dark});
+    color: $text-color-dark;
+
+    .cm-activeLineGutter {
+      background: transparent;
+      color: $text-color-light;
+    }
+  }
+
+  .cm-content {
+    padding-bottom: 75vh;
+  }
+
+  .cm-activeLine {
+    background: rgba($white, 0.025);
+  }
+
+  .cm-selectionBackground {
+    background: lighten($bg-dark, 10%);
+  }
+
+  .cm-selectionMatch {
+    background: lighten($bg-dark, 10%);
+  }
+
+  &.cm-focused .cm-selectionBackground {
+    background: lighten($bg-dark, 15%);
+  }
+
+  .cm-searchMatch {
+    background: lighten($bg-dark, 10%);
+    box-shadow: 0 0 0 1px $primary;
+  }
+
+  .cm-searchMatch-selected {
+    background: darken($bg-dark, 10%);
+  }
+
+  .cm-matchingBracket {
+    background: lighten($bg-dark, 20%) !important;
+  }
+
+  .cm-cursor {
+    border-color: var(--editor-cursor-color, #ff00ff);
+    border-width: calc(var(--editor-cursor-width, 3) * 1px);
+  }
+
+  .cm-completionIcon {
+    padding-right: 1rem;
+  }
+  .cm-completionIcon-event::after {
+    content: "∈";
+  }
+  .cm-tooltip {
+    background: darken($bg-dark, 5%);
+    border: 0;
+    box-shadow: $shadow;
+
+    &.cm-tooltip-hover {
+      border-radius: $border-radius;
+      padding: $margin / 16 $margin / 8;
+      box-shadow: none;
+      color: $text-color;
+      font-size: 0.75rem;
+      pointer-events: none;
+    }
+
+    > ul {
+      @include styled-scrollbar;
+    }
+
+    > .cm-tooltip {
+      padding: 0.35rem 0.5rem;
+      background: lighten($bg-dark, 5%);
+      color: $text-color-light;
+      white-space: pre-wrap;
+    }
+  }
+
+  .cm-tooltip-arrow {
+    display: none;
+  }
+
+  .cm-completionDetail {
+    color: $text-color;
+    font-size: 0.85em;
+  }
+
+  .cm-tooltip-autocomplete ul li[aria-selected] {
+    background: lighten($bg-dark, 5%);
+  }
+
+  .cm-lintRange-error {
+    box-shadow: 0 3px 0 $red;
+    background: transparent;
+  }
+
+  .cm-lintRange-warning {
+    box-shadow: 0 3px 0 $orange;
+    background: transparent;
+  }
+
+  .cm-lint-marker-error::before {
+    content: "!";
+    display: block;
+    width: 1em;
+    height: 1em;
+    padding: 0.1em;
+    border-radius: 50%;
+    background: $red;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 1em;
+  }
+
+  .cm-panel.cm-search {
+    width: 100%;
+    position: absolute;
+    bottom: $margin / 4;
+    right: $margin / 4;
+    left: $margin / 4;
+    width: calc(100% - #{ $margin / 2 });
+    padding: $margin / 8;
+    border-radius: $border-radius / 2;
+    background: rgba(darken($bg-dark, 10%), 0.5);
+    backdrop-filter: blur(10px);
+    box-shadow: $shadow;
+    animation: fly-in 200ms;
+
+    input {
+      width: auto;
+      padding: .25em .5em;
+      border: 0;
+      border-radius: $border-radius / 4;
+      font-size: $font-size-small;
+      background: lighten($bg-dark, 10%);
+      color: $text-color-lightest;
+
+      &:focus {
+        background: lighten($bg-dark, 12.5%);
+        box-shadow: 0 0 0 2px rgba($white, 0.5);
+        outline: 0;
+      }
+
+      &::placeholder {
+        font-style: italic;
+        color: $text-color;
+      }
+    }
+
+    label {
+      color: $text-color;
+      font-size: $font-size-small;
+      font-family: $font-stack;
+    }
+
+    .cm-button {
+      appearance: none;
+      padding: .25em .5em;
+      margin-right: 0.25em;
+      border: 0;
+      border-radius: $border-radius / 4;
+      background: lighten($bg-dark, 5%);
+      font-size: $font-size-small;
+      color: $text-color-light;
+      text-transform: none;
+      cursor: pointer;
+
+      @include hover-stack {
+        outline: 0;
+        background: lighten($bg-dark, 15%);
+        color: $text-color-lightest;
+      }
+    }
+
+    button[name="close"] {
+      right: 0;
+      padding: 0 0.25rem;
+      background: transparent;
+      font-size: 1.25rem;
+      color: $text-color-light;
+      cursor: pointer;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .cm-diagnostic {
+    padding: .5rem;
+  }
+
+  .cm-foldGutter {
+    opacity: 0;
+    transition: opacity 200ms;
+
+    span {
+      padding: 0;
+
+      &[title="Fold line"] {
+        display: block;
+        height: 1em;
+        margin-top: -0.15em;
+      }
+    }
+  }
+
+  .cm-gutters:hover .cm-foldGutter {
+    opacity: 1;
+  }
+
+  .cm-foldPlaceholder {
+    background: transparent;
+    border: 0;
+    color: $text-color-dark;
+
+    &:hover {
+      color: $text-color-light;
+    }
+  }
+
+  .code-actions-lightbulb {
+    position: absolute;
+    aspect-ratio: 1;
+    line-height: 1;
+    font-size: 0.75rem;
+    background-color: $bg-darker;
+    padding: 0.25rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transform: translateX(-100%) translateY(-50%);
+    opacity: 0.5;
+    display: inline-block;
+  }
+
+  .code-actions-lightbulb__dropdown {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+}

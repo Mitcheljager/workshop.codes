@@ -16,6 +16,7 @@
   <%= render "form_errors", errors: @article.errors if @article.errors.any? %>
 
   <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" } %>
+  <%= form.file_field :videos, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-videos" } %>
 
   <article class="article">
     <main class="article__main">
@@ -32,7 +33,7 @@
           This includes HTML and CSS, which can be used for markup of more advanced layouts.
         </div>
 
-        <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_wiki: "true", max_length: WIKI_ARTICLE_CONTENT_LIMIT } %>
+        <%= form.text_area :content, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_wiki: "true", max_length: WIKI_ARTICLE_CONTENT_LIMIT, abilities: ability_icons, heroes: hero_names } %>
       </div>
 
       <% if @article.persisted? %>

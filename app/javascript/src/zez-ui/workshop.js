@@ -1650,6 +1650,9 @@ var app = new Vue({
             this.setUrl();
         },
         saveProject: async function() {
+            console.warn("This UI is deprecated and will no longer be supported. Saving is not possible.");
+            return;
+
             if (!this.signedIn) {
                 console.warn(this.translate("youAreNotSignedIn", this.workshopUiCustomKw));
                 return;
@@ -1672,9 +1675,6 @@ var app = new Vue({
             }, (key, value) => key !== "parent" ? value : undefined);
 
             const compressed = LZString.compressToUTF16(content);
-
-            console.log("Uncompressed", content.length);
-            console.log("Compressed", compressed.length);
 
             try {
                 const response = await new FetchRails("/projects/" + this.currentProjectId, {

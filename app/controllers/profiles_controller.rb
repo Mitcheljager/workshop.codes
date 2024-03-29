@@ -18,6 +18,7 @@ class ProfilesController < ApplicationController
 
     @posts = @user.posts.select_overview_columns.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
     @blocks = Block.where(user_id: @user.id, content_type: :profile).order(position: :asc, created_at: :asc)
+    @collections = @user.collections.includes(:posts).where("posts_count > ?", 0)
 
     respond_to do |format|
       format.html
@@ -39,8 +40,8 @@ class ProfilesController < ApplicationController
   def update
     begin
       @user = current_user
-      User.transaction do
 
+      User.transaction do
         if profile_params[:featured_posts] == nil
           @user.featured_posts = ""
         end
@@ -48,6 +49,7 @@ class ProfilesController < ApplicationController
         if (params[:remove_profile_image].present?)
           @user.profile_image.purge
         end
+
         if (params[:remove_banner_image].present?)
           @user.banner_image.purge
         end

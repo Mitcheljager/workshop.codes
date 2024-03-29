@@ -86,24 +86,24 @@ async function setBlur(element) {
   const whitePixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NobW39DwAFsQKP8FV1WwAAAABJRU5ErkJggg=="
 
   const newElement = new Image()
-  if (blurElement.classList.contains("carousel__blur--visible")) {
+  if (blurElement.classList.contains("background-blur--visible")) {
     newElement.src = image?.src || whitePixel
     newElement.dataset.role = "carousel-blur"
-    newElement.classList.add("carousel__blur")
+    newElement.classList.add("background-blur")
 
     blurElement.insertAdjacentElement("afterend", newElement)
 
     await new Promise(res => setTimeout(res, 1)) // Await one tick before fading
 
-    newElement.classList.add("carousel__blur--visible")
-    blurElement.classList.remove("carousel__blur--visible")
+    newElement.classList.add("background-blur--visible")
+    blurElement.classList.remove("background-blur--visible")
 
     await new Promise(res => setTimeout(res, 1200)) // Await transition
     blurElement.remove()
   } else {
     blurElement.src = image?.src || whitePixel
     await new Promise(res => setTimeout(res, 1)) // Await one tick before fading
-    blurElement.classList.add("carousel__blur--visible")
+    blurElement.classList.add("background-blur--visible")
   }
 }
 

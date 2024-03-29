@@ -1,374 +1,225 @@
 -
-  en: Hanamura
-  ko: 하나무라
-  type:
-    en: Assault
-    ko: 점령
+  name: Hanamura
+  type: Assault
   slug: hanamura
 -
-  en: Horizon Lunar Colony
-  ko: 호라이즌 달 기지
-  type:
-    en: Assault
-    ko: 점령
+  name: Horizon Lunar Colony
+  type: Assault
   slug: horizon-lunar-colony
 -
-  en: Paris
-  ko: 파리
-  type:
-    en: Assault
-    ko: 점령
+  name: Paris
+  type: Assault
   slug: paris
 -
-  en: Temple of Anubis
-  ko:  아누비스 신전
-  type:
-    en: Assault
-    ko: 점령
+  name: Temple of Anubis
+  type: Assault
   slug: temple-of-anubis
 -
-  en: Volskaya Industries
-  ko: 볼스카야 인더스트리
-  type:
-    en: Assault
-    ko: 점령
+  name: Volskaya Industries
+  type: Assault
   slug: volskaya-industries
 -
-  en: Circuit Royal
-  ko: Circuit Royal
-  overwatch_2: true
-  type:
-    en: Escort
-    ko: 호위
+  name: Circuit Royal
+  type: Escort
   slug: circuit-royal
+  overwatch_2: true
 -
-  en: Dorado
-  ko: 도라도
-  type:
-    en: Escort
-    ko: 호위
+  name: Dorado
+  type: Escort
   slug: dorado
 -
-  en: Havana
-  ko: 하바나
-  type:
-    en: Escort
-    ko: 호위
+  name: Havana
+  type: Escort
   slug: havana
 -
-  en: Junkertown
-  ko: 쓰레기촌
-  type:
-    en: Escort
-    ko: 호위
+  name: Junkertown
+  type: Escort
   slug: junkertown
 -
-  en: Rialto
-  ko: 리알토
-  type:
-    en: Escort
-    ko: 호위
+  name: Rialto
+  type: Escort
   slug: rialto
 -
-  en: Route 66
-  ko: 66번 국도
-  type:
-    en: Escort
-    ko: 호위
+  name: Route 66
+  type: Escort
   slug: route-66
 -
-  en: Shambali Monastery
-  ko: 샴발리 수도원
-  overwatch_2: true
-  type:
-    en: Escort
-    ko: 호위
+  name: Shambali Monastery
+  type: Escort
   slug: shambali-monastery
+  overwatch_2: true
 -
-  en: "Watchpoint: Gibraltar"
-  ko: "감시 기지: 지브롤터"
-  type:
-    en: Escort
-    ko: 호위
+  name: "Watchpoint: Gibraltar"
+  type: Escort
   slug: watchpoint-gibraltar
 -
-  en: Blizzard World
-  ko: 블리자드 월드
-  type:
-    en: Hybrid
-    ko: 혼합
+  name: Blizzard World
+  type: Hybrid
   slug: blizzard-world
 -
-  en: Eichenwalde
-  ko: 아이헨발데
-  type:
-    en: Hybrid
-    ko: 혼합
+  name: Eichenwalde
+  type: Hybrid
   slug: eichenwalde
 -
-  en: Hollywood
-  ko: 할리우드
-  type:
-    en: Hybrid
-    ko: 혼합
+  name: Hollywood
+  type: Hybrid
   slug: hollywood
 -
-  en: King's Row
-  ko:  왕의 길
-  type:
-    en: Hybrid
-    ko: 혼합
+  name: King's Row
+  type: Hybrid
   slug: kings-row
 -
-  en: Numbani
-  ko: 눔바니
-  type:
-    en: Hybrid
-    ko: 혼합
+  name: Numbani
+  type: Hybrid
   slug: numbani
 -
-  en: Midtown
-  ko: Midtown
-  overwatch_2: true
-  type:
-    en: Hybrid
-    ko: 혼합
+  name: Midtown
+  type: Hybrid
   slug: midtown
--
-  en: Paraíso
-  ko: 파레이소
   overwatch_2: true
-  type:
-    en: Hybrid
-    ko: 혼합
+-
+  name: Paraíso
+  type: Hybrid
   slug: paraiso
--
-  en: Antarctic Peninsula
-  ko: 남극 반도
   overwatch_2: true
-  type:
-    en: Control
-    ko: 쟁탈
-  slug: antarctic-peninsula
 -
-  en: Busan
-  ko: 부산
-  type:
-    en: Control
-    ko: 쟁탈
+  name: Antarctic Peninsula
+  type: Control
+  slug: antarctic-peninsula
+  overwatch_2: true
+-
+  name: Busan
+  type: Control
   slug: busan
 -
-  en: Ilios
-  ko: 일리오스
-  type:
-    en: Control
-    ko: 쟁탈
+  name: Ilios
+  type: Control
   slug: ilios
 -
-  en: Lijiang Tower
-  ko: 리장 타워
-  type:
-    en: Control
-    ko: 쟁탈
+  name: Lijiang Tower
+  type: Control
   slug: lijiang-tower
 -
-  en: Nepal
-  ko: 네팔
-  type:
-    en: Control
-    ko: 쟁탈
+  name: Nepal
+  type: Control
   slug: nepal
 -
-  en: Oasis
-  ko: 오아시스
-  type:
-    en: Control
-    ko: 쟁탈
+  name: Oasis
+  type: Control
   slug: oasis
 -
-  en: Talantis
-  ko: 탈란티스
-  type:
-    en: Control
-    ko: 쟁탈
+  name: Samoa
+  type: Control
+  slug: samoa
+  overwatch_2: true
+-
+  name: Talantis
+  type: Control
   slug: talantis
--
-  en: Colosseo
-  ko: 콜로세오
   overwatch_2: true
-  type:
-    en: Push
-    ko: 밀기
+-
+  name: Colosseo
+  type: Push
   slug: rome
--
-  en: New Queen Street
-  ko: 뉴 퀸 스트리트
   overwatch_2: true
-  type:
-    en: Push
-    ko: 밀기
+-
+  name: New Queen Street
+  type: Push
   slug: toronto
--
-  en: Esperança
-  ko: 희망
   overwatch_2: true
-  type:
-    en: Push
-    ko: 밀기
+-
+  name: Esperança
+  type: Push
   slug: esperanca
--
-  en: New Junk City
-  ko: 뉴 정크 시티
   overwatch_2: true
-  type:
-    en: Flashpoint
-    ko: 플래시포인트
+-
+  name: New Junk City
+  type: Flashpoint
   slug: new-junk-city
--
-  en: Suravasa
-  ko: 수라바사의
   overwatch_2: true
-  type:
-    en: Flashpoint
-    ko: 플래시포인트
-  slug: suravasa
 -
-  en: Black Forest
-  ko: 검은 숲
-  type:
-    en: Arcade
-    ko: 아케이드
+  name: Suravasa
+  type: Flashpoint
+  slug: suravasa
+  overwatch_2: true
+-
+  name: Black Forest
+  type: Arcade
   slug: black-forest
 -
-  en: Castillo
-  ko: 카스티요
-  type:
-    en: Arcade
-    ko: 아케이드
+  name: Castillo
+  type: Arcade
   slug: castillo
 -
-  en: "Ecopoint: Antarctica"
-  ko: "탐사 기지: 남극"
-  type:
-    en: Arcade
-    ko: 아케이드
+  name: "Ecopoint: Antarctica"
+  type: Arcade
   slug: ecopoint-antarctica
 -
-  en: Necropolis
-  ko: 네크로폴리스
-  type:
-    en: Arcade
-    ko: 아케이드
+  name: Necropolis
+  type: Arcade
   slug: necropolis
 -
-  en: Estádio das Rãs
-  ko: 이스타지우 다스 하스
-  type:
-    en: Lúcioball
-    ko: 루시우볼
+  name: Estádio das Rãs
+  type: Lúcioball
   slug: estadio-das-ras
 -
-  en: Sydney Harbour Arena
-  ko: 시드니 하버 아레나
-  type:
-    en: Lúcioball
-    ko: 루시우볼
+  name: Sydney Harbour Arena
+  type: Lúcioball
   slug: sydney-harbour-arena
 -
-  en: Sydney Harbour Arena Classic
-  ko: 시드니 하버 아레나 클래식
-  type:
-    en: Lúcioball
-    ko: 루시우볼
+  name: Sydney Harbour Arena Classic
+  type: Lúcioball
   slug: sydney-harbour-arena-classic
 -
-  en: Busan Stadium
-  ko: 부산 스타디움
-  type:
-    en: Lúcioball
-    ko: 루시우볼
+  name: Busan Stadium
+  type: Lúcioball
   slug: busan-stadium
 -
-  en: Busan Stadium Classic
-  ko: 부산 스타디움 클래식
-  type:
-    en: Lúcioball
-    ko: 루시우볼
+  name: Busan Stadium Classic
+  type: Lúcioball
   slug: busan-stadium-classic
 -
-  en: Estádio Dos Gorilas
-  ko: 도스 고릴라스 스타디움
-  type:
-    en: Winston's Beach Volleyball
-    ko: 윈스턴의 비치 발리볼
+  name: Estádio Dos Gorilas
+  type: Winston's Beach Volleyball
   slug: estadio-dos-gorilas
+  overwatch_2: true
 -
-  en: Château Guillard
-  ko: 샤토 기야르
-  type:
-    en: Deathmatch
-    ko: 데스매치
+  name: Château Guillard
+  type: Deathmatch
   slug: chateau-guillard
 -
-  en: Kanezaka
-  ko: 카네자카
-  type:
-    en: Deathmatch
-    ko: 데스매치
+  name: Kanezaka
+  type: Deathmatch
   slug: kanezaka
 -
-  en: Malevento
-  ko: 말레벤토
-  type:
-    en: Deathmatch
-    ko: 데스매치
+  name: Malevento
+  type: Deathmatch
   slug: malevento
 -
-  en: Petra
-  ko: 페트라
-  type:
-    en: Deathmatch
-    ko: 데스매치
+  name: Petra
+  type: Deathmatch
   slug: petra
 -
-  en: Ayutthaya
-  ko: 아유타야
-  type:
-    en: Capture the Flag
-    ko: 깃발 뺏기
+  name: Ayutthaya
+  type: Capture the Flag
   slug: ayutthaya
 -
-  en: Practice Range
-  ko: 훈련장
-  type:
-    en: Practice
-    ko: 연습
+  name: Practice Range
+  type: Practice
   slug: practice-range
 -
-  en: Workshop Chamber
-  ko: 워크샵 방
-  type:
-    en: Workshop
-    ko: 위크샵
+  name: Workshop Chamber
+  type: Workshop
   slug: workshop-chamber
 -
-  en: Workshop Island
-  ko: 워크샵 섬
-  type:
-    en: Workshop
-    ko: 위크샵
+  name: Workshop Island
+  type: Workshop
   slug: workshop-island
 -
-  en: Workshop Expanse
-  ko: 워크샵 개활지
-  type:
-    en: Workshop
-    ko: 위크샵
+  name: Workshop Expanse
+  type: Workshop
   slug: workshop-expanse
 -
-  en: Workshop Green Screen
-  ko: 워크샵 초록색 화면
-  type:
-    en: Workshop
-    ko: 위크샵
+  name: Workshop Green Screen
+  type: Workshop
   slug: workshop-green-screen
