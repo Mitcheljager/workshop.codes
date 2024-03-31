@@ -1,5 +1,5 @@
+import { initializeSvelteComponent } from "./svelte-component"
 import Sortable from "sortablejs"
-import WebpackerSvelte from "webpacker-svelte"
 import LimitedCheckboxes from "../src/components/form/LimitedCheckboxes.svelte"
 import FetchRails from "./fetch-rails"
 
@@ -52,7 +52,7 @@ function updateBlockSortable() {
 }
 
 function renderSvelteComponents() {
-  WebpackerSvelte.setup({ LimitedCheckboxes })
+  initializeSvelteComponent("LimitedCheckboxes", LimitedCheckboxes)
 }
 
 export function insertBlockTemplate(event) {

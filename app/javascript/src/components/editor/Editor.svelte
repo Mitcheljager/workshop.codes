@@ -153,10 +153,10 @@
   function isInherentlyHidden(item) {
     if (item.hidden) return true
     if (!item.parent) return false
-    
+
     const parent = $sortedItems.find((parentItem) => parentItem.id === item.parent)
     if (!parent) return false
-    
+
     return isInherentlyHidden(parent)
   }
 

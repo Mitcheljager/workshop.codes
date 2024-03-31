@@ -28,7 +28,7 @@ gem "mini_magick", ">= 4.9.5"
 gem "omniauth-bnet"
 gem "omniauth-discord"
 # Mitigate CVE-2015-9284
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth-rails_csrf_protection"
 gem "puma", "~> 5.6"
 gem "rails", "~> 6.1.7"
 gem "rails_same_site_cookie"
@@ -42,8 +42,6 @@ gem "sucker_punch"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "vite_rails"
-gem "webpacker", "~> 5.0"
-gem "webpacker-svelte", "~> 1.0.0"
 
 group :development, :test do
   gem "bullet"

@@ -1,4 +1,5 @@
-import WebpackerSvelte from "webpacker-svelte"
+import { initializeSvelteComponent } from "../src/svelte-component"
+
 import Editor from "../src/components/editor/Editor.svelte"
 
-WebpackerSvelte.setup({ Editor })
+initializeSvelteComponent("Editor", Editor)

@@ -2,7 +2,7 @@ import * as ActiveStorage from "@rails/activestorage"
 
 ActiveStorage.start()
 
-import WebpackerSvelte from "webpacker-svelte"
+import { initializeSvelteComponent } from "../src/svelte-component"
 import Alerts from "../src/components/Alerts.svelte"
 import Dropzone from "../src/components/form/Dropzone.svelte"
 import ControlsForm from "../src/components/form/Controls.svelte"
@@ -13,8 +13,6 @@ import DerivativesForm from "../src/components/form/Derivatives.svelte"
 import Notifications from "../src/components/Notifications.svelte"
 import Ollie from "../src/components/Ollie.svelte"
 import { LinkedChart, LinkedLabel } from "svelte-tiny-linked-charts"
-
-WebpackerSvelte.setup({ Alerts, Dropzone, ControlsForm, SnippetForm, LimitedCheckboxes, TagsForm, DerivativesForm, Notifications, LinkedChart, LinkedLabel, Ollie })
 
 import * as applyCustomCss from "../src/apply-custom-css"
 import * as blocks from "../src/blocks"
@@ -29,6 +27,22 @@ import * as linkedInput from "../src/linked-input"
 import * as setCssVariable from "../src/set-css-variable"
 
 document.addEventListener("turbolinks:load", function() {
+  const svelteComponents = {
+    Alerts: Alerts,
+    Dropzone: Dropzone,
+    ControlsForm: ControlsForm,
+    SnippetForm: SnippetForm,
+    LimitedCheckboxes: LimitedCheckboxes,
+    TagsForm: TagsForm,
+    DerivativesForm: DerivativesForm,
+    Notifications: Notifications,
+    LinkedChart: LinkedChart,
+    LinkedLabel: LinkedLabel,
+    Ollie: Ollie
+  }
+
+  Object.entries(svelteComponents).forEach(([name, component]) => initializeSvelteComponent(name, component))
+
   ide.bind()
   applyCustomCss.bind()
   blocks.bind()
