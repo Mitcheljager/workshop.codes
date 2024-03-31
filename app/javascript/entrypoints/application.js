@@ -1,4 +1,4 @@
-require("../src/remove-and-add-event-listener")
+import "../src/remove-and-add-event-listener"
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"

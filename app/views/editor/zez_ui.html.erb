@@ -67,7 +67,7 @@
 <%= render "editor/zez_ui/templates/custom_game_settings" %>
 
 <%= javascript_include_tag "/zez-ui/js/overpy.min.js?v=6" %> <!-- TODO: Add actual cache buster -->
-<%= javascript_pack_tag "zez-ui.js", "data-turbolinks-track": "reload", defer: false %>
+<%= vite_javascript_tag "zez-ui.js", "data-turbolinks-track": "reload", defer: false %>
 
 <div class="deprecated">
     This UI is deprecated and will no longer be supported. You can still load your already existing modes but you can <strong>not</strong> save.

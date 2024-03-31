@@ -28,11 +28,13 @@
     <noscript><%= stylesheet_link_tag "fonts.css" %></noscript>
 
     <%= stylesheet_link_tag "application.css" %>
-    <%= javascript_pack_tag "application", "data-turbolinks-track": "reload", defer: true %>
+
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
     <% if current_user %>
       <%= stylesheet_link_tag "logged_in_user.css" %>
-      <%= javascript_pack_tag "logged-in-user.js", "data-turbolinks-track": "reload", defer: true %>
+      <%= vite_javascript_tag "logged-in-user.js", "data-turbolinks-track": "reload", defer: true %>
     <% end %>
   </head>
 
