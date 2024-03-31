@@ -55,7 +55,7 @@ jobs:
       - run: yarn install
       - name: Precompile assets
         run: |
-          bundle exec rails webpacker:compile RAILS_ENV=test
+          bundle exec rails vite:build RAILS_ENV=test
       - name: Test
         run: |
           bundle exec rake db:test:prepare
@@ -91,7 +91,7 @@ jobs:
       - run: yarn install
       - name: Precompile assets
         run: |
-          bundle exec rails webpacker:compile RAILS_ENV=test
+          bundle exec rails vite:build RAILS_ENV=test
       - name: Cucumber
         run: |
           bundle exec rake db:test:prepare
