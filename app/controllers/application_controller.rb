@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   include UsersHelper
   include ContentHelper
 
+  content_security_policy Rails.env.production?
+
   protect_from_forgery with: :exception
   before_action :login_from_cookie
   before_action :reject_if_banned
