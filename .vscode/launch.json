@@ -18,10 +18,10 @@
     {
       // Required gems: debug
       // Required extension: KoichiSasada.vscode-rdbg
-      "name": "Webpack Dev Server",
+      "name": "Vite Dev Server",
       "type": "rdbg",
       "request": "launch",
-      "script": "./bin/webpack-dev-server",
+      "script": "./bin/vite dev",
       "cwd": "${workspaceFolder}"
     },
     {
@@ -38,7 +38,7 @@
       "name": "All",
       "configurations": [
         "Rails Server",
-        "Webpack Dev Server",
+        "Vite Dev Server",
         "Chrome against localhost:3000"
       ]
     }
