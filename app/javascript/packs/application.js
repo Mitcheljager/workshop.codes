@@ -8,6 +8,11 @@ Rails.start()
 Turbolinks.start()
 TurbolinksPrefetch.start()
 
+import WebpackerSvelte from "webpacker-svelte"
+import AprilFools from "../src/components/AprilFools.svelte"
+
+WebpackerSvelte.setup({ AprilFools })
+
 import * as carousel from "../src/carousel"
 import * as carouselCards from "../src/carousel-cards"
 import * as copy from "../src/copy"

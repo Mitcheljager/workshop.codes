@@ -50,5 +50,20 @@
     <%= render "body_bg" unless is_wiki? %>
 
     <%= svelte_component "Ollie", { imageFlyBy: image_path("ollie/ollie-float.png"), imageHeart: image_path("ollie/ollie-heart.png") } if current_user.present? %>
+
+    <%= svelte_component "AprilFools", {
+      images: [
+        image_path("april-fools/birdhouse.jpg"),
+        image_path("april-fools/havanabanana.jpg"),
+        image_path("april-fools/hosting.jpg"),
+        image_path("april-fools/meicecream.jpg"),
+        image_path("april-fools/nanocola.jpg"),
+        image_path("april-fools/peanutbutter.jpg"),
+        image_path("april-fools/recycledskins.jpg"),
+        image_path("april-fools/socks.jpg"),
+        image_path("april-fools/workshopworkshop.jpg"),
+        image_path("april-fools/zengarden.jpg")
+      ]
+    } %>
   </body>
 </html>
