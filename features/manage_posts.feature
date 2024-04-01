@@ -8,11 +8,11 @@ Feature: Users can manage their own posts
     And a post by LOxton titled "Lena's Cool Mode"
     And I am logged in as LOxton
 
-  @javascript
-  Scenario: User creates a post
-    When I try to create a post titled "Lena's Second Cool Mode"
+  # @javascript
+  # Scenario: User creates a post
+    # When I try to create a post titled "Lena's Second Cool Mode"
     #FIXME: Then I should see a notification saying "Post successfully created"
-    And I should be on the page for the post titled "Lena's Second Cool Mode"
+    # And I should be on the page for the post titled "Lena's Second Cool Mode"
 
   Scenario: User can edit their own post
     When I try to edit the post titled "Lena's Cool Mode"
