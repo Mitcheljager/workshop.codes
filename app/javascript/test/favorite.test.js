@@ -1,7 +1,12 @@
-import { toggleFavorite } from "../../app/javascript/src/favorite"
+// @vitest-environment jsdom
 
-jest.mock("@rails/ujs", () => ({
-  csrfToken: () => jest.fn()
+import { toggleFavorite } from "../src/favorite"
+import { vi, describe, it, expect } from "vitest"
+
+vi.mock("@rails/ujs", () => ({
+  default: {
+    csrfToken: () => vi.fn()
+  }
 }))
 
 describe("favorite.js", () => {

@@ -1,7 +1,8 @@
-import { createNewItem, destroyItem, duplicateItem, getItemById, getSaveContent, isAnyParentHidden, setCurrentItemById, toggleFolderState, toggleHideItem, updateItem, updateItemName, updateStateForId } from "../../../app/javascript/src/utils/editor"
-import { currentItem, items, editorStates, openFolders } from "../../../app/javascript/src/stores/editor"
-import { defaultLanguage, selectedLanguages, translationKeys } from "../../../app/javascript/src/stores/translationKeys"
+import { createNewItem, destroyItem, duplicateItem, getItemById, getSaveContent, isAnyParentHidden, setCurrentItemById, toggleFolderState, toggleHideItem, updateItem, updateItemName, updateStateForId } from "../../src/utils/editor"
+import { currentItem, items, editorStates, openFolders } from "../../src/stores/editor"
+import { defaultLanguage, selectedLanguages, translationKeys } from "../../src/stores/translationKeys"
 import { get } from "svelte/store"
+import { vi, describe, it, expect, afterEach, beforeEach } from "vitest"
 
 const localStorageMock = (() => {
   let store = {}
@@ -230,7 +231,7 @@ describe("editor.js", () => {
     let stateUpdateMock
 
     beforeEach(() => {
-      stateUpdateMock = jest.fn()
+      stateUpdateMock = vi.fn()
 
       editorStates.set({
         "1": { id: 1, doc: "Document 1", update: stateUpdateMock },

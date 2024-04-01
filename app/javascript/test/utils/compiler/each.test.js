@@ -1,6 +1,7 @@
-import { evaluateEachLoops, parseArrayValues } from "../../../../app/javascript/src/utils/compiler/each"
-import { workshopConstants } from "../../../../app/javascript/src/stores/editor"
+import { evaluateEachLoops, parseArrayValues } from "../../../src/utils/compiler/each"
+import { workshopConstants } from "../../../src/stores/editor"
 import { disregardWhitespace } from "../../helpers/text"
+import { describe, it, expect, afterEach } from "vitest"
 
 describe("for.js", () => {
   afterEach(() => {
@@ -8,7 +9,7 @@ describe("for.js", () => {
   })
 
   describe("evaluateEachLoops", () => {
-    test("Should evaluate a simple each loop", () => {
+    it("Should evaluate a simple each loop", () => {
       const input = `@each (thing in [one, two, three]) {
         Each.thing;
       }`
@@ -20,7 +21,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should include iterator by default", () => {
+    it("Should include iterator by default", () => {
       const input = `@each (thing in [one, two, three]) {
         Each.thing = Each.i;
       }`
@@ -32,7 +33,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should be able to rename iterator", () => {
+    it("Should be able to rename iterator", () => {
       const input = `@each (thing, j in [one, two, three]) {
         Each.thing = Each.j;
       }`
@@ -44,7 +45,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should be able use constants from store as arrays", () => {
+    it("Should be able use constants from store as arrays", () => {
       workshopConstants.set({ Test: { One: { "en-US": "one" }, Two: { "en-US": "two" }, Three: { "en-US": "three" }}})
       const input = `@each (thing in Constant.Test) {
         Each.thing;
@@ -57,7 +58,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should be able use new lines inside array literals", () => {
+    it("Should be able use new lines inside array literals", () => {
       const input = `@each (thing in [
         one,
         two,
@@ -73,7 +74,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should be able handle each loop individually", () => {
+    it("Should be able handle each loop individually", () => {
       const input = `
         @each (thing in [loop1]) {
           Each.thing;
@@ -91,7 +92,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateEachLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should be able handle inner loops", () => {
+    it("Should be able handle inner loops", () => {
       const input = `
         @each (innerArray in [[a, b], [c, d]]) {
           @each (value in Each.innerArray) {

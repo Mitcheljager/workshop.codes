@@ -1,9 +1,10 @@
-import { evaluateForLoops } from "../../../../app/javascript/src/utils/compiler/for"
+import { evaluateForLoops } from "../../../src/utils/compiler/for"
 import { disregardWhitespace } from "../../helpers/text"
+import { describe, it, expect } from "vitest"
 
 describe("for.js", () => {
   describe("evaluateForLoops", () => {
-    test("Should evaluate a simple for loop", () => {
+    it("Should evaluate a simple for loop", () => {
       const input = `@for (1 to 3) {
         Test;
       }`
@@ -14,7 +15,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should include final number when using through", () => {
+    it("Should include final number when using through", () => {
       const input = `@for (1 through 3) {
         Test;
       }`
@@ -26,7 +27,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should evaluate variable in for loop", () => {
+    it("Should evaluate variable in for loop", () => {
       const input = `@for (1 to 3) {
         For.i;
       }`
@@ -37,7 +38,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should evaluate a for loop with custom variable name", () => {
+    it("Should evaluate a for loop with custom variable name", () => {
       const input = `@for (someVar from 5 to 7) {
         For.someVar;
       }`
@@ -48,7 +49,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should evaluate a for loop with a custom step size", () => {
+    it("Should evaluate a for loop with a custom step size", () => {
       const input = `@for (2 through 6 in steps of 2) {
         For.i;
       }`
@@ -60,7 +61,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should evaluate a for loop with from, to, and step of decimal values", () => {
+    it("Should evaluate a for loop with from, to, and step of decimal values", () => {
       const input = `
       // Inclusive (0.5..4.2 / 1.5)
       @for (inc_lt from 0.5 through 4.2 in steps of 1.5) {
@@ -114,7 +115,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should handle nested for loops", () => {
+    it("Should handle nested for loops", () => {
       const input = `@for (1 through 2) {
         Test;
         @for (1 through 2) {
@@ -132,7 +133,7 @@ describe("for.js", () => {
       expect(disregardWhitespace(evaluateForLoops(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("should handle multiple for loops", () => {
+    it("should handle multiple for loops", () => {
       const input = `@for (1 through 2) {
         Test;
       }

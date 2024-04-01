@@ -1,9 +1,10 @@
-import { compileSubroutines, getSubroutines } from "../../../../app/javascript/src/utils/compiler/subroutines"
+import { compileSubroutines, getSubroutines } from "../../../src/utils/compiler/subroutines"
 import { disregardWhitespace } from "../../helpers/text"
+import { describe, it, expect } from "vitest"
 
 describe("subroutines.js", () => {
   describe("getSubroutines", () => {
-    test("Should extract subroutines declared from rules", () => {
+    it("Should extract subroutines declared from rules", () => {
       const input = `
         Subroutine;
         someSubroutine1;
@@ -15,7 +16,7 @@ describe("subroutines.js", () => {
       expect(getSubroutines(input)).toEqual(expectedOutput)
     })
 
-    test("Should extract subroutines used in actions", () => {
+    it("Should extract subroutines used in actions", () => {
       const input = `
         Call Subroutine(someSubroutine1);
 
@@ -25,7 +26,7 @@ describe("subroutines.js", () => {
       expect(getSubroutines(input)).toEqual(expectedOutput)
     })
 
-    test("Should handle duplicate subroutines", () => {
+    it("Should handle duplicate subroutines", () => {
       const input = `
         Subroutine;
         someSubroutine;
@@ -43,7 +44,7 @@ describe("subroutines.js", () => {
   })
 
   describe("compileSubroutines", () => {
-    test("Should compile subroutines", () => {
+    it("Should compile subroutines", () => {
       const input = `
         Subroutine;
         someSubroutine1;

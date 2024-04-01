@@ -1,15 +1,16 @@
-import { evaluateConditionals } from "../../../../app/javascript/src/utils/compiler/conditionals"
+import { evaluateConditionals } from "../../../src/utils/compiler/conditionals"
 import { disregardWhitespace } from "../../helpers/text"
+import { describe, it, expect } from "vitest"
 
 describe("conditionals.js", () => {
   describe("evaluateConditionals", () => {
-    test("Should evaluate a simple if statement", () => {
+    it("Should evaluate a simple if statement", () => {
       const input = "@if (1 == 1) { Do Something(); }"
       const expectedOutput = "Do Something();"
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should not render 'if' if statement is false", () => {
+    it("Should not render 'if' if statement is false", () => {
       const input = `@if (1 == 2) {
         Do Something();
       }`
@@ -17,7 +18,7 @@ describe("conditionals.js", () => {
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should render 'else' if statement is false", () => {
+    it("Should render 'else' if statement is false", () => {
       const input = `@if (1 == 2) {
         Do Something();
       } @else {
@@ -27,7 +28,7 @@ describe("conditionals.js", () => {
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should render 'else if' if statement is false", () => {
+    it("Should render 'else if' if statement is false", () => {
       const input = `@if (1 == 2) {
         Do Something();
       } @else if (1 == 1) {
@@ -39,19 +40,19 @@ describe("conditionals.js", () => {
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should evaluate a negative compare", () => {
+    it("Should evaluate a negative compare", () => {
       const input = "@if (1 != 2) { Do Something(); }"
       const expectedOutput = "Do Something();"
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should evaluate an or compare", () => {
+    it("Should evaluate an or compare", () => {
       const input = "@if (1 == 2 || 1 == 1) { Do Something(); }"
       const expectedOutput = "Do Something();"
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should evaluate an and compare", () => {
+    it("Should evaluate an and compare", () => {
       const input = "@if (1 == 1 && 1 == 1) { Do Something(); }"
       const expectedOutput = "Do Something();"
       expect(disregardWhitespace(evaluateConditionals(input))).toBe(disregardWhitespace(expectedOutput))
@@ -61,7 +62,7 @@ describe("conditionals.js", () => {
       expect(disregardWhitespace(evaluateConditionals(input2))).toBe(disregardWhitespace(expectedOutput2))
     })
 
-    test("Should handle nested if statements", () => {
+    it("Should handle nested if statements", () => {
       const input = `
         @if (1 == 1) {
           Do Something();

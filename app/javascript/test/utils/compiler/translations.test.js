@@ -1,6 +1,7 @@
-import { selectedLanguages, translationKeys } from "../../../../app/javascript/src/stores/translationKeys"
-import { convertTranslations } from "../../../../app/javascript/src/utils/compiler/translations"
+import { selectedLanguages, translationKeys } from "../../../src/stores/translationKeys"
+import { convertTranslations } from "../../../src/utils/compiler/translations"
 import { disregardWhitespace } from "../../helpers/text"
+import { describe, it, expect, afterEach } from "vitest"
 
 describe("translations.js", () => {
   describe("convertTranslations", () => {

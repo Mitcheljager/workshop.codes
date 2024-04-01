@@ -1,4 +1,5 @@
-import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString } from "../../../app/javascript/src/utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString } from "../../src/utils/parse"
+import { describe, it, expect } from "vitest"
 
 describe("parse.js", () => {
   describe("getClosingBracket", () => {
@@ -137,11 +138,11 @@ describe("parse.js", () => {
   })
 
   describe("removeSurroundingParenthesis", () => {
-    test("Should remove surrounding parentheses when present", () => {
+    it("Should remove surrounding parentheses when present", () => {
       expect(removeSurroundingParenthesis("(Test)")).toBe("Test")
     })
 
-    test("should remove only the outermost pair of surrounding parentheses", () => {
+    it("should remove only the outermost pair of surrounding parentheses", () => {
       expect(removeSurroundingParenthesis("((Test), word)")).toBe("(Test), word")
     })
   })

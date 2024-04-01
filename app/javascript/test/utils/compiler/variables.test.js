@@ -1,6 +1,7 @@
-import { compileVariables, excludeDefaultVariableNames, getDefaultVariableNameIndex, getVariables } from "../../../../app/javascript/src/utils/compiler/variables"
-import { completionsMap } from "../../../../app/javascript/src/stores/editor"
+import { compileVariables, excludeDefaultVariableNames, getDefaultVariableNameIndex, getVariables } from "../../..//src/utils/compiler/variables"
+import { completionsMap } from "../../..//src/stores/editor"
 import { disregardWhitespace } from "../../helpers/text"
+import { describe, it, expect, beforeAll } from "vitest"
 
 describe("variables.js", () => {
   describe("getVariables", () => {
@@ -29,7 +30,7 @@ describe("variables.js", () => {
       }])
     })
 
-    test("Should extract global variables", () => {
+    it("Should extract global variables", () => {
       const input = `
         Global.variable1 = Test;
         Set Global Variable(variable2, Test);
@@ -47,7 +48,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Global variables should only contain letters, numbers, or an underscore", () => {
+    it("Global variables should only contain letters, numbers, or an underscore", () => {
       // caughtByTheGame means the variable is technically an error in-game,
       // but we leave informing users of that fact to our Linter
       const input = `
@@ -76,7 +77,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should extract simple player variables", () => {
+    it("Should extract simple player variables", () => {
       const input = `
         Event Player.variable1 = Test;
         Victim.variable2 = Test;
@@ -100,7 +101,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Player variables should only contain letters, numbers, or an underscore", () => {
+    it("Player variables should only contain letters, numbers, or an underscore", () => {
       // caughtByTheGame means the variable is technically an error in-game,
       // but we leave informing users of that fact to our Linter
       const input = `
@@ -129,7 +130,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should handle nested player variables", () => {
+    it("Should handle nested player variables", () => {
       const input = `
         Event Player.variableA.variableB = Test;
         Event Player.variableA.variableB.variableC = Test;
@@ -142,7 +143,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should handle player variables nested in global variables", () => {
+    it("Should handle player variables nested in global variables", () => {
       const input = `
         Global.variableA.variableB = Test;
         Global.variableC[0].variableD = Test;
@@ -154,7 +155,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should handle no variables present", () => {
+    it("Should handle no variables present", () => {
       const input = "Just Some Action;"
       const expectedOutput = {
         globalVariables: [],
@@ -163,7 +164,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should ignore decimals of a number", () => {
+    it("Should ignore decimals of a number", () => {
       const expectedOutput = {
         globalVariables: [],
         playerVariables: []
@@ -184,7 +185,7 @@ describe("variables.js", () => {
       expect(getVariables(specialCaseBeginningOfText2Input)).toEqual(expectedOutput)
     })
 
-    test("Should not ignore nested variables ending in a number", () => {
+    it("Should not ignore nested variables ending in a number", () => {
       const input = `
         Event Player.variable1.variable2;
       `
@@ -195,7 +196,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should ignore constants with periods", () => {
+    it("Should ignore constants with periods", () => {
       const input = "Hero(D.Va)"
       const expectedOutput = {
         globalVariables: [],
@@ -204,7 +205,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should not ignore player variables that look like constants with periods", () => {
+    it("Should not ignore player variables that look like constants with periods", () => {
       const input = "Event Player.D.Va"
       const expectedOutput = {
         globalVariables: [],
@@ -213,7 +214,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should ignore variable-likes inside strings", () => {
+    it("Should ignore variable-likes inside strings", () => {
       const input = "Custom String(\"Hello.World I8.5.3\")"
       const expectedOutput = {
         globalVariables: [],
@@ -222,7 +223,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should ignore variable-likes when there is a symbol behind them", () => {
+    it("Should ignore variable-likes when there is a symbol behind them", () => {
       const input = "Wait(.15)"
       const expectedOutput = {
         globalVariables: [],
@@ -231,7 +232,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should not ignore player variables coming after a value with arguments", () => {
+    it("Should not ignore player variables coming after a value with arguments", () => {
       const input = "Ray Cast Hit Player(bla, bla, bla).variableA.variableB"
       const expectedOutput = {
         globalVariables: [],
@@ -240,7 +241,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should handle duplicate variables", () => {
+    it("Should handle duplicate variables", () => {
       const input = `
         Global.variable1 = 10;
         Global.variable2 = 20;
@@ -256,7 +257,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should extract Global variables from parameter objects", () => {
+    it("Should extract Global variables from parameter objects", () => {
       const input = "For Global Variable({ Control Variable: variable1, Range Start: Global.variable2, Range Stop: Count Of(Array()), Step: 1 })"
       const expectedOutput = {
         globalVariables: ["variable2", "variable1"],
@@ -266,7 +267,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should extract Player variables from parameter objects", () => {
+    it("Should extract Player variables from parameter objects", () => {
       const input =
         `Chase Player Variable Over Time({
           Player: Event Player,
@@ -283,7 +284,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should extract variables from nested parameter objects", () => {
+    it("Should extract variables from nested parameter objects", () => {
       const input =
         `For Global Variable({
           Control Variable: variable1,
@@ -302,7 +303,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should extract variables from parameter objects where not all parameters are filled in", () => {
+    it("Should extract variables from parameter objects where not all parameters are filled in", () => {
       const input = "Create Effect({ Position: Global.variable1 });"
       const expectedOutput = {
         globalVariables: ["variable1"],
@@ -312,7 +313,7 @@ describe("variables.js", () => {
       expect(getVariables(input)).toEqual(expectedOutput)
     })
 
-    test("Should ignore actions that modify variables when there aren't enough arguments on those actions", () => {
+    it("Should ignore actions that modify variables when there aren't enough arguments on those actions", () => {
       const input = `
         Set Global Variable();
         Set Player Variable();
@@ -328,7 +329,7 @@ describe("variables.js", () => {
   })
 
   describe("compileVariables", () => {
-    test("Should compile variables", () => {
+    it("Should compile variables", () => {
       const input = `
         Global.variable1 = Test;
         Global.variable2 = Test;
@@ -351,7 +352,7 @@ describe("variables.js", () => {
       expect(disregardWhitespace(compileVariables(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
-    test("Should exclude default variables if their index is different from the default", () => {
+    it("Should exclude default variables if their index is different from the default", () => {
       const input = `
         Global.A;
         Global.variable;
@@ -392,7 +393,7 @@ describe("variables.js", () => {
   })
 
   describe("excludeDefaultVariableNames", () => {
-    test("Should not exclude A as it is at its default index (0)", () => {
+    it("Should not exclude A as it is at its default index (0)", () => {
       const input = [
         "A"
       ]
@@ -402,7 +403,7 @@ describe("variables.js", () => {
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
 
-    test("Should not exclude A as the variable at the default index of A (0) was already defined with another name", () => {
+    it("Should not exclude A as the variable at the default index of A (0) was already defined with another name", () => {
       const input = [
         "someNameThatIsNotA",
         "A"
@@ -414,7 +415,7 @@ describe("variables.js", () => {
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
 
-    test("Should exclude B as there aren't enough variables to reach the default index of B (1)", () => {
+    it("Should exclude B as there aren't enough variables to reach the default index of B (1)", () => {
       const input = [
         "B"
       ]
@@ -423,7 +424,7 @@ describe("variables.js", () => {
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
 
-    test("Should exclude Z as there is no variable at the default index of Z (25)", () => {
+    it("Should exclude Z as there is no variable at the default index of Z (25)", () => {
       const input = [
         "someVar1",
         "someVar2",
@@ -440,7 +441,7 @@ describe("variables.js", () => {
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
 
-    test("Should exclude C and D as there are no variable at their default indices", () => {
+    it("Should exclude C and D as there are no variable at their default indices", () => {
       const input = [
         "C",
         "D"
@@ -451,7 +452,7 @@ describe("variables.js", () => {
       expect(excludeDefaultVariableNames(input)).toStrictEqual(expectedOutput)
     })
 
-    test("Should not exclude AA as its default index (26) is past the max initial variable indices (up to 25)", () => {
+    it("Should not exclude AA as its default index (26) is past the max initial variable indices (up to 25)", () => {
       const input = [
         "AA"
       ]
@@ -463,7 +464,7 @@ describe("variables.js", () => {
   })
 
   describe("getDefaultVariableNameIndex", () => {
-    test("Should give a correct value for A and Z", () => {
+    it("Should give a correct value for A and Z", () => {
       const expectedOutput = {
         "A": 0,
         "B": 1,
@@ -476,7 +477,7 @@ describe("variables.js", () => {
       ).toStrictEqual(expectedOutput)
     })
 
-    test("Should give a correct value for AA and ZZ", () => {
+    it("Should give a correct value for AA and ZZ", () => {
       const expectedOutput = {
         "AA": 26,
         "DX": 127,

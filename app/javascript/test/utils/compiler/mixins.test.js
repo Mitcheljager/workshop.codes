@@ -1,5 +1,6 @@
-import { extractAndInsertMixins, replaceContents, getOpeningBracketAt } from "../../../../app/javascript/src/utils/compiler/mixins"
+import { extractAndInsertMixins, replaceContents, getOpeningBracketAt } from "../../../src/utils/compiler/mixins"
 import { disregardWhitespace } from "../../helpers/text"
+import { describe, it, expect } from "vitest"
 
 describe("mixins.js", () => {
   describe("extractAndInsertMixins", () => {
