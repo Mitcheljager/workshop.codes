@@ -1,6 +1,8 @@
+@use "sass:math";
+
 .wiki-cards {
   display: grid;
-  grid-gap: $margin / 2;
+  grid-gap: $margin * 0.5;
 
   @include media-min(md) {
     grid-gap: $margin;
@@ -16,13 +18,13 @@
 
 .wiki-card__item {
   display: block;
-  padding: $margin / 4 0;
+  padding: $margin * 0.25 0;
   border-bottom: 1px solid $border-color;
   font-size: $font-size-small;
   color: $text-color;
 
   &:last-of-type {
-    margin-bottom: $margin / 3;
+    margin-bottom: math.div($margin, 3);
   }
 
   a {

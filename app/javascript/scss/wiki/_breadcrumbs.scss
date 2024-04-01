@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: $margin / 4;
+  margin-top: $margin * 0.25;
   font-size: 14px;
   line-height: 1.5em;
 
@@ -24,6 +24,6 @@
   }
 
   span {
-    margin: 0 $margin / 8;
+    margin: 0 $margin * 0.125;
   }
 }

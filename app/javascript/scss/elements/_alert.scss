@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @keyframes move-in-alert {
   from {
     transform: translateY(100vh);
@@ -10,8 +12,8 @@
 
 .alerts {
   position: fixed;
-  right: $margin / 3;
-  bottom: $margin / 3;
+  right: math.div($margin, 3);
+  bottom: math.div($margin, 3);
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -24,7 +26,7 @@
   display: flex;
   align-items: center;
   gap: 1em;
-  margin-top: $margin / 8;
+  margin-top: $margin * 0.125;
   padding: .5em 1em;
   border-radius: $border-radius;
   background: $green;

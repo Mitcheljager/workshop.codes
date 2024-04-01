@@ -1,6 +1,6 @@
 .content-block {
   display: block;
-  padding: $margin / 2;
+  padding: $margin * 0.5;
   background: $bg-darker;
   border-radius: $border-radius;
   text-align: left;
@@ -14,7 +14,7 @@
 
   a {
     text-decoration: none;
-    margin-left: $margin / 8;
+    margin-left: $margin * 0.125;
 
     @include hover-stack {
       filter: brightness(1.1);
@@ -25,7 +25,7 @@
 .content-block__social {
   display: flex;
   align-items: center;
-  margin-bottom: $margin / 8;
+  margin-bottom: $margin * 0.125;
   font-size: 112.5%;
 
   &:last-child {
@@ -43,7 +43,7 @@
   }
 
   svg {
-    margin-right: $margin / 4;
+    margin-right: $margin * 0.25;
   }
 }
 

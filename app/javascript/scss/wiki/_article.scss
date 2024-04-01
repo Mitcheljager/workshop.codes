@@ -6,7 +6,7 @@
     display: grid;
     grid-template: "main aside";
     grid-template-columns: auto 250px;
-    grid-gap: $margin / 2;
+    grid-gap: $margin * 0.5;
   }
 }
 
@@ -18,7 +18,7 @@
 
 .article__category {
   display: inline-block;
-  margin: 0 0 $margin / 4;
+  margin: 0 0 $margin * 0.25;
   font-size: 18px;
   color: var(--primary, $primary);
   text-decoration: none;
@@ -49,14 +49,14 @@
 
 .article__aside {
   hr {
-    margin: $margin / 4 0;
+    margin: $margin * 0.25 0;
   }
 }
 
 .article__aside-content {
   margin-top: $margin;
   background: $bg-darker;
-  padding: $margin / 4;
+  padding: $margin * 0.25;
   border-radius: $border-radius;
   font-size: $font-size-small;
   line-height: 1.75em;

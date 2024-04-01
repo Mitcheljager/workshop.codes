@@ -1,11 +1,11 @@
 .feed__item {
-  padding: $margin / 2 0;
+  padding: $margin * 0.5 0;
   border-top: 1px solid $border-color;
 
   @include media-min(md) {
     display: grid;
     grid-template-columns: $thumbnail-width auto;
-    gap: $margin / 2;
+    gap: $margin * 0.5;
   }
 
   .item__thumbnail {
@@ -17,8 +17,8 @@
   display: grid;
   grid-template: "thumbnail code" "author date";
   grid-template-columns: 1fr 1fr;
-  grid-gap: 0 $margin / 8;
-  margin-bottom: $margin / 2;
+  grid-gap: 0 $margin * 0.125;
+  margin-bottom: $margin * 0.5;
 
   @include media-min(md) {
     display: block;
@@ -27,7 +27,7 @@
 }
 
 .feed__heading {
-  margin: 0 0 $margin / 2;
+  margin: 0 0 $margin * 0.5;
   line-height: 1em;
 
   .feed__item + & {
@@ -54,7 +54,7 @@
 }
 
 .feed__author {
-  margin: $margin / 4 0 0;
+  margin: $margin * 0.25 0 0;
   font-size: var(--font-size-small);
 
   a {
@@ -68,13 +68,13 @@
 }
 
 .feed__date {
-  margin: $margin / 4 0 0;
+  margin: $margin * 0.25 0 0;
   color: $text-color-dark;
   font-size: 0.75rem;
   font-style: italic;
 
   @include media-min(md) {
-    margin: $margin / 8 0 0;
+    margin: $margin * 0.125 0 0;
   }
 }
 
@@ -84,12 +84,12 @@
 
 .feed__code {
   width: 100%;
-  padding: $margin / 8 0;
-  border-radius: $border-radius / 2;
+  padding: $margin * 0.125 0;
+  border-radius: $border-radius * 0.5;
 
   @include media-min(md) {
     height: auto;
-    margin: $margin / 8 0;
+    margin: $margin * 0.125 0;
     font-size: 21px;
   }
 
@@ -104,6 +104,6 @@
 }
 
 .feed__message {
-  margin: 0 0 $margin / 2;
+  margin: 0 0 $margin * 0.5;
   font-style: italic;
 }

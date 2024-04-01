@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @keyframes fly-in {
   from {
     transform: translateY(100%);
@@ -16,7 +18,7 @@
   }
 
   .cm-scroller {
-    padding-top: $margin / 4;
+    padding-top: $margin * 0.25;
     font-family: var(--editor-font, "Consolas"), monospace;
   }
 
@@ -82,7 +84,7 @@
 
     &.cm-tooltip-hover {
       border-radius: $border-radius;
-      padding: $margin / 16 $margin / 8;
+      padding: math.div($margin, 16) $margin * 0.125;
       box-shadow: none;
       color: $text-color;
       font-size: 0.75rem;
@@ -141,12 +143,12 @@
   .cm-panel.cm-search {
     width: 100%;
     position: absolute;
-    bottom: $margin / 4;
-    right: $margin / 4;
-    left: $margin / 4;
-    width: calc(100% - #{ $margin / 2 });
-    padding: $margin / 8;
-    border-radius: $border-radius / 2;
+    bottom: $margin * 0.25;
+    right: $margin * 0.25;
+    left: $margin * 0.25;
+    width: calc(100% - #{ $margin * 0.5 });
+    padding: $margin * 0.125;
+    border-radius: $border-radius * 0.5;
     background: rgba(darken($bg-dark, 10%), 0.5);
     backdrop-filter: blur(10px);
     box-shadow: $shadow;
@@ -156,7 +158,7 @@
       width: auto;
       padding: .25em .5em;
       border: 0;
-      border-radius: $border-radius / 4;
+      border-radius: $border-radius * 0.25;
       font-size: $font-size-small;
       background: lighten($bg-dark, 10%);
       color: $text-color-lightest;
@@ -184,7 +186,7 @@
       padding: .25em .5em;
       margin-right: 0.25em;
       border: 0;
-      border-radius: $border-radius / 4;
+      border-radius: $border-radius * 0.25;
       background: lighten($bg-dark, 5%);
       font-size: $font-size-small;
       color: $text-color-light;

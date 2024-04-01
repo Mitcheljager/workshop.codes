@@ -2,11 +2,11 @@
   display: grid;
   grid-template-columns: auto;
   align-items: center;
-  margin-bottom: $margin / 8;
+  margin-bottom: $margin * 0.125;
 
   @include media-min(md) {
     grid-template-columns: auto 1fr;
-    grid-gap: $margin / 8 0;
+    grid-gap: $margin * 0.125 0;
   }
 }
 
@@ -14,15 +14,15 @@
   display: flex;
   align-items: center;
   height: 100%;
-  padding: $margin / 4;
-  margin-top: $margin / 8;
+  padding: $margin * 0.25;
+  margin-top: $margin * 0.125;
   background: darken($bg-dark, 5%);
-  border-radius: $border-radius / 2 $border-radius / 2 0 0;
+  border-radius: $border-radius * 0.5 $border-radius * 0.5 0 0;
 
   @include media-min(md) {
     margin-top: 0;
-    padding: $margin / 8 $margin / 4;
-    border-radius: $border-radius / 2 0 0 $border-radius / 2;
+    padding: $margin * 0.125 $margin * 0.25;
+    border-radius: $border-radius * 0.5 0 0 $border-radius * 0.5;
   }
 
   img {
@@ -39,13 +39,13 @@
 
 .controls__description {
   height: 100%;
-  padding: 0 $margin / 4 $margin / 4;
-  border-radius: 0 0 $border-radius / 2 $border-radius / 2;
+  padding: 0 $margin * 0.25 $margin * 0.25;
+  border-radius: 0 0 $border-radius * 0.5 $border-radius * 0.5;
   background: darken($bg-dark, 5%);
 
   @include media-min(md) {
-    padding: $margin / 4;
-    border-radius: 0 $border-radius / 2 $border-radius / 2 0;
+    padding: $margin * 0.25;
+    border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
   }
 }
 
@@ -54,7 +54,7 @@
   align-items: flex-start;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-gap: $margin / 8 0;
+  grid-gap: $margin * 0.125 0;
 
   @include media-min(md) {
     grid-template-rows: 1fr;
@@ -69,12 +69,12 @@
   font-weight: bold;
 
   span {
-    padding: $margin / 4 5px;
+    padding: $margin * 0.25 5px;
   }
 
   select {
     margin-right: .5rem;
-    padding: $margin / 4 $margin / 2 $margin / 4 $margin / 8;
+    padding: $margin * 0.25 $margin * 0.5 $margin * 0.25 $margin * 0.125;
 
     @include media-min(md) {
       max-width: 125px;
@@ -83,8 +83,8 @@
 }
 
 .controls-form-item__custom {
-  margin-top: $margin / 8;
-  padding: $margin / 8;
+  margin-top: $margin * 0.125;
+  padding: $margin * 0.125;
 
   @include media-min(md) {
     max-width: 125px;
@@ -103,8 +103,8 @@
   button {
     display: block;
     border: 0;
-    padding: $margin / 8 0;
-    margin-left: $margin / 8;
+    padding: $margin * 0.125 0;
+    margin-left: $margin * 0.125;
     background: transparent;
     text-decoration: none;
     color: $text-color;
@@ -116,5 +116,5 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: $margin / 4;
+  margin-bottom: $margin * 0.25;
 }

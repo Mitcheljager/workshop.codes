@@ -37,7 +37,7 @@
 
 .CodeMirror-scroll {
   min-height: 600px !important;
-  padding-right: #{ $margin / 2 };
+  padding-right: #{ $margin * 0.5 };
   padding-bottom: #{ $margin };
   margin-right: -#{ $margin };
   margin-bottom: -#{ $margin };

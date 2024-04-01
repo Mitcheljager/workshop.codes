@@ -3,7 +3,7 @@ $width: clamp(10rem, 12.5vw, 15rem);
 .quick-navigation {
   display: none;
   position: absolute;
-  left: calc((#{ $width } + #{ $margin / 2 }) * -1);
+  left: calc((#{ $width } + #{ $margin * 0.5 }) * -1);
 
   @include media-min(1400px) {
     display: block;
@@ -13,7 +13,7 @@ $width: clamp(10rem, 12.5vw, 15rem);
 .quick-navigation__scroll {
   height: 100%;
   width: $width;
-  padding-right: $margin / 8;
+  padding-right: $margin * 0.125;
   box-shadow: 0 2px 0 $border-color, 0 -2px 0 $border-color;
   overflow-y: auto;
   overflow-x: hidden;
@@ -46,9 +46,9 @@ $width: clamp(10rem, 12.5vw, 15rem);
   appearance: none;
   display: flex;
   align-items: center;
-  gap: $margin / 8;
+  gap: $margin * 0.125;
   width: 100%;
-  padding: $margin / 8 0;
+  padding: $margin * 0.125 0;
   margin: 0;
   border: 0;
   background: transparent;

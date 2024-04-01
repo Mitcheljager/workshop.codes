@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .dropdown {
   display: inline-block;
   position: relative;
@@ -73,7 +75,7 @@
   }
 
   hr {
-    margin: $margin / 6 0;
+    margin: math.div($margin, 6) 0;
     background: lighten($bg-dark, 10%);
   }
 

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 h1,
 h2,
 h3,
@@ -31,7 +33,7 @@ h1 {
 
 h2 {
   @include responsive-font-width(28px, map-get($media-min-widths, lg), 24px);
-  margin-bottom: $margin / 3;
+  margin-bottom: math.div($margin, 3);
 }
 
 h3 {

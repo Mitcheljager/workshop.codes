@@ -1,7 +1,9 @@
+@use "sass:math";
+
 .collection {
   position: relative;
-  padding: $margin / 4;
-  margin-bottom: $margin / 4;
+  padding: $margin * 0.25;
+  margin-bottom: $margin * 0.25;
   border-radius: $border-radius;
   background: darken($bg-dark, 3.5%);
   overflow: hidden;
@@ -43,14 +45,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: $margin / 4;
+    gap: $margin * 0.25;
   }
 }
 
 .collection__info {
   width: 15rem;
   flex: 0 0 15rem;
-  margin-bottom: $margin / 4;
+  margin-bottom: $margin * 0.25;
 
   @include media-min(md) {
     margin-bottom: 0;
@@ -59,7 +61,7 @@
 
 .collection__title {
   display: block;
-  margin-bottom: $margin / 16;
+  margin-bottom: math.div($margin, 16);
   color: $text-color-lightest;
   font-size: 18px;
   line-height: 1.2em;
@@ -90,9 +92,9 @@
 
 .collection__posts {
   display: flex;
-  gap: $margin / 8;
-  margin: 0 $margin / 4 * -1;
-  padding: 0 $margin / 4;
+  gap: $margin * 0.125;
+  margin: 0 $margin * 0.25 * -1;
+  padding: 0 $margin * 0.25;
   overflow: auto;
   scrollbar-width: none;
   filter: drop-shadow(0 4px 2px rgba(0, 0, 0, .1)) drop-shadow(0 8px 4px rgba(0, 0, 0, 0.1)) drop-shadow(0 32px 16px rgba(0, 0, 0, 0.1));
@@ -108,7 +110,7 @@
 
   .item__thumbnail {
     display: block;
-    border-radius: $border-radius / 2;
+    border-radius: $border-radius * 0.5;
     overflow: hidden;
     box-shadow: none;
   }

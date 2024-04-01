@@ -77,7 +77,7 @@ $ollie-login-size: 100px;
   width: $ollie-login-size;
   height: $ollie-login-size;
   margin-top: $ollie-login-size;
-  padding: $margin / 4;
+  padding: $margin * 0.25;
   transition: margin 500ms;
 
   &--loaded {

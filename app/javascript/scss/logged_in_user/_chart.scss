@@ -1,6 +1,6 @@
 .chart-wrapper {
   position: relative;
-  padding: $margin / 8;
+  padding: $margin * 0.125;
   border-radius: $border-radius;
   background: darken($bg-dark, 5%);
   box-shadow: $shadow;

@@ -1,6 +1,8 @@
+@use "sass:math";
+
 .well {
   position: relative;
-  padding: $margin / 3;
+  padding: math.div($margin, 3);
   border-radius: $border-radius;
   background: $bg-dark;
 
@@ -58,7 +60,7 @@
 }
 
 .well__content {
-  margin-top: $margin / 4;
+  margin-top: $margin * 0.25;
   font-size: $font-size-small;
 
   @include media-min(sm) {
@@ -73,9 +75,9 @@
 
 .well__marker {
   position: absolute;
-  right: $margin / 3;
+  right: math.div($margin, 3);
   top: 0;
-  padding: 0 $margin / 8;
+  padding: 0 $margin * 0.125;
   transform: translateY(-50%);
   border-radius: $border-radius;
   background: $bg-dark;

@@ -1,11 +1,13 @@
+@use "sass:math";
+
 @mixin responsive-font-width($max-value, $max-width, $min-value: 10px) {
   font-size: $min-value;
 
-  $percentage-of: ($min-value / $max-value) * 100;
-  $min-width: ($max-width / ($max-width * 0 + 1)) / 100 * $percentage-of;
+  $percentage-of: math.div($min-value, $max-value) * 100;
+  $min-width: math.div($max-width, $max-width * 0 + 1) * 0.01 * $percentage-of;
 
   @media (min-width: #{$min-width}px) {
-    font-size: ($max-value / ($max-value * 0 + 1)) / (($max-width / ($max-width * 0 + 1)) / 100) + vw;
+    font-size: math.div(math.div($max-value, $max-value * 0 + 1), (math.div($max-width, $max-width * 0 + 1) * 0.01)) + vw;
   }
 
   @include media-min(lg) {

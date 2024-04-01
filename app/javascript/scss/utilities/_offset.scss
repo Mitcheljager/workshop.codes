@@ -1,11 +1,13 @@
+@use "sass:math";
+
 $offset-values: (
   'auto': auto,
   0: 0,
   1\/1: $margin,
-  1\/2: $margin / 2,
-  1\/4: $margin / 4,
-  1\/8: $margin / 8,
-  1\/16: $margin / 16
+  1\/2: $margin * 0.5,
+  1\/4: $margin * 0.25,
+  1\/8: $margin * 0.125,
+  1\/16: math.div($margin, 16)
 );
 
 $properties: (
@@ -54,5 +56,5 @@ $directions: (
 }
 
 .gap-1\/8 {
-  gap: $margin / 8;
+  gap: $margin * 0.125;
 }

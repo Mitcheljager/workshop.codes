@@ -1,6 +1,6 @@
 .article-difference {
   display: grid;
-  grid-template-columns: repeat(2, calc(50% - #{ $margin / 4 }));
-  grid-gap: $margin / 2;
+  grid-template-columns: repeat(2, calc(50% - #{ $margin * 0.25 }));
+  grid-gap: $margin * 0.5;
   word-break: break-word;
 }

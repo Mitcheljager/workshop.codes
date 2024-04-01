@@ -1,5 +1,7 @@
+@use "sass:math";
+
 .search-terms {
-  padding: $margin / 2.5;
+  padding: math.div($margin, 2.5);
 
   @include media-min(lg) {
     display: flex;
@@ -9,10 +11,10 @@
 
 .search-terms__title {
   font-size: 18px;
-  margin: 0 0 $margin / 4;
+  margin: 0 0 $margin * 0.25;
 
   @include media-min(lg) {
-    margin: 0 $margin / 2 0 0;
+    margin: 0 $margin * 0.5 0 0;
     text-align: left;
   }
 }

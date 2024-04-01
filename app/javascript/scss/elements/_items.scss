@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .items {
   position: relative;
 
@@ -13,12 +15,12 @@
   @include media-min(md) {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-column-gap: $margin / 2;
+    grid-column-gap: $margin * 0.5;
     justify-content: space-between;
   }
 
   h1 {
-    margin-top: $margin / 2;
+    margin-top: $margin * 0.5;
     margin-bottom: 0;
 
     @include media-min(md) {
@@ -41,15 +43,15 @@
     "details details details";
   grid-template-columns: 50% calc(50% - #{ $favorite-width }) $favorite-width;
   border-top: 1px solid $border-color;
-  margin-bottom: $margin / 3;
-  padding-top: $margin / 3;
+  margin-bottom: math.div($margin, 3);
+  padding-top: math.div($margin, 3);
 
   @include media-min(sm) {
     grid-template:
       "thumbnail title favorite code"
       "thumbnail details favorite code";
     grid-template-columns: $thumbnail-width calc(100% - #{ $thumbnail-width } - #{ $favorite-width  } - #{ $code-width }) $favorite-width $code-width;
-    padding: $margin / 3 0;
+    padding: math.div($margin, 3) 0;
     margin: 0;
   }
 
@@ -74,12 +76,12 @@
     grid-template: "thumbnail"
                     "details";
     border: 0;
-    padding: $margin / 2 0;
+    padding: $margin * 0.5 0;
 
     @include media-min(sm) {
       grid-template: "thumbnail details";
       grid-template-columns: 33.33% auto;
-      grid-gap: $margin / 2;
+      grid-gap: $margin * 0.5;
     }
   }
 
@@ -96,10 +98,10 @@
 
 .item__favorite {
   grid-area: favorite;
-  margin: $margin / 3 0 0 auto;
+  margin: math.div($margin, 3) 0 0 auto;
 
   @include media-min(sm) {
-    margin: 23px $margin / 4 auto;
+    margin: 23px $margin * 0.25 auto;
   }
 }
 
@@ -108,8 +110,8 @@
   flex-shrink: 0;
   position: relative;
   width: 120px;
-  height: 120px / 16 * 9;
-  border-radius: $border-radius / 2;
+  height: math.div(120px, 16) * 9;
+  border-radius: $border-radius * 0.5;
   overflow: hidden;
   background: $bg-dark;
   box-shadow: $shadow;
@@ -140,7 +142,7 @@
     width: 100%;
     height: auto;
     max-width: 280px;
-    max-height: 280px / 16 * 9;
+    max-height: math.div(280px, 16) * 9;
 
     @include media-min(sm) {
 
@@ -163,22 +165,22 @@
 
 .item__title {
   grid-area: title;
-  padding: $margin / 3 0;
+  padding: math.div($margin, 3) 0;
   margin-top: auto;
   font-size: 131%;
   font-weight: lighter;
   color: $text-color-lightest;
 
   @include media-min(sm) {
-    padding: $margin / 12 0 $margin / 6 $margin / 3;
+    padding: math.div($margin, 12) 0 math.div($margin, 6) math.div($margin, 3);
   }
 
   .item--small & {
-    padding: 0 0 $margin / 6 $margin / 3
+    padding: 0 0 math.div($margin, 6) math.div($margin, 3)
   }
 
   .item--extra-small & {
-    padding: ($margin / 6) 0;
+    padding: math.div($margin, 6) 0;
     font-size: 21px;
   }
 
@@ -186,7 +188,7 @@
     display: flex;
     justify-content: space-between;
     padding-left: 0;
-    margin-bottom: $margin / 6;
+    margin-bottom: math.div($margin, 6);
   }
 
   .item--revision & {
@@ -231,7 +233,7 @@
 
 .item__sub-title {
   display: block;
-  margin-top: $margin / 8;
+  margin-top: $margin * 0.125;
   font-family: $font-stack;
   font-size: 1rem;
   line-height: 1rem;
@@ -258,14 +260,14 @@
 
 .item__details-item {
   display: block;
-  margin: $margin / 12 0;
+  margin: math.div($margin, 12) 0;
 
   @include media-min(sm) {
-    margin: $margin / 12 $margin / 3;
+    margin: math.div($margin, 12) math.div($margin, 3);
   }
 
   &:last-child {
-    margin-right: $margin / 3;
+    margin-right: math.div($margin, 3);
 
     @media (max-width: #{map-get($media-min-widths, sm) - 1px}) {
       margin-bottom: 0;
@@ -282,7 +284,7 @@
   }
 
   .item--bottom & {
-    margin: 0 0 $margin / 6;
+    margin: 0 0 math.div($margin, 6);
 
     &:last-child {
       margin-bottom: 0;
@@ -295,7 +297,7 @@
   flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
-  padding-left: $margin / 3;
+  padding-left: math.div($margin, 3);
 
   @include media-min(md) {
     flex-direction: row;
@@ -318,14 +320,14 @@
   grid-template: "title favorite" "code code";
   grid-template-columns: auto $favorite-width;
   align-items: center;
-  gap: $margin / 4;
-  padding: $margin / 4;
+  gap: $margin * 0.25;
+  padding: $margin * 0.25;
   background-image: linear-gradient(130deg, transparent calc(100% - 20rem), rgba($primary, 0.1));
 
   @include media-min(lg) {
     grid-template: "title favorite code";
     grid-template-columns: auto $favorite-width $code-width;
-    padding: $margin / 2;
+    padding: $margin * 0.5;
     grid-gap: 0;
   }
 
@@ -376,7 +378,7 @@
 .item__author {
   display: inline-flex;
   align-items: center;
-  margin-bottom: $margin / 4;
+  margin-bottom: $margin * 0.25;
   color: $text-color;
   text-decoration: none;
 
@@ -388,7 +390,7 @@
 .item__avatar {
   width: 2rem;
   height: 2rem;
-  margin-right: $margin / 6;
+  margin-right: math.div($margin, 6);
   border-radius: 50%;
   background-color: $bg-darker;
   background-size: 1rem;
@@ -401,10 +403,10 @@
 }
 
 .item__content {
-  padding: $margin / 4;
+  padding: $margin * 0.25;
 
   @include media-min(md) {
-    padding: $margin / 2;
+    padding: $margin * 0.5;
   }
 }
 
@@ -423,11 +425,11 @@
   }
 
   details {
-    margin-bottom: $margin / 6;
+    margin-bottom: math.div($margin, 6);
   }
 
   summary {
-    padding: $margin / 6;
+    padding: math.div($margin, 6);
     border: 1px solid $border-color;
     cursor: pointer;
 
@@ -447,7 +449,7 @@
 
   h1,
   h2 {
-    margin: $margin 0 $margin / 2;
+    margin: $margin 0 $margin * 0.5;
     line-height: 1.1em;
   }
 
@@ -455,7 +457,7 @@
   h4,
   h5,
   h6 {
-    margin: $margin / 1.5 0 $margin / 4;
+    margin: math.div($margin, 1.5) 0 $margin * 0.25;
     line-height: 1.1em;
   }
 

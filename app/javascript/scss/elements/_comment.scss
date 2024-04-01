@@ -1,5 +1,7 @@
+@use "sass:math";
+
 .comments__wrapper {
-  margin-top: $margin / 2;
+  margin-top: $margin * 0.5;
 
   &:empty {
     margin-top: 0;
@@ -13,13 +15,13 @@
 }
 
 .post-comment {
-  margin-bottom: $margin / 4;
-  padding: $margin / 6;
-  border-radius: $border-radius / 2;
+  margin-bottom: $margin * 0.25;
+  padding: math.div($margin, 6);
+  border-radius: $border-radius * 0.5;
   background: $bg-dark;
 
   @include media-min(sm) {
-    padding: $margin / 4;
+    padding: $margin * 0.25;
   }
 
   &:last-child {
@@ -27,7 +29,7 @@
   }
 
   .post-comment {
-    margin-top: $margin / 4;
+    margin-top: $margin * 0.25;
     background: darken($bg-dark, 3.5%);
 
     &:last-child {
@@ -36,7 +38,7 @@
 
     .post-comment {
       padding: 0;
-      margin-top: $margin / 2;
+      margin-top: $margin * 0.5;
     }
   }
 
@@ -61,7 +63,7 @@
 .post-comment__layout {
   display: grid;
   grid-template-columns: 30px auto;
-  gap: $margin / 6;
+  gap: math.div($margin, 6);
   width: 100%;
 
   .profile-image {
@@ -85,7 +87,7 @@
 }
 
 .post-comment__content {
-  margin: $margin / 8 0 0;
+  margin: $margin * 0.125 0 0;
   overflow-wrap: break-word;
   font-size: $font-size-small;
 
@@ -119,8 +121,8 @@
 .post-comment__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: $margin / 4;
-  margin-top: $margin / 8;
+  gap: $margin * 0.25;
+  margin-top: $margin * 0.125;
 
   &:last-child {
     margin-bottom: 0;

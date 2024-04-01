@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .editor-folder.editor-folder {
   position: relative;
 
@@ -33,7 +35,7 @@
 
 .editor-folder__content {
   display: none;
-  padding-left: $margin / 3;
+  padding-left: math.div($margin, 3);
 
   &.editor-folder__content--expanded {
     display: block;

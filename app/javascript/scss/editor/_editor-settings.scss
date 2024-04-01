@@ -2,7 +2,7 @@
   .button--square {
     display: flex;
     align-items: center;
-    padding: $margin / 8;
+    padding: $margin * 0.125;
     height: 100%;
     background: transparent;
   }

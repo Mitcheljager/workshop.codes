@@ -1,10 +1,12 @@
+@use "sass:math";
+
 .header {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: $margin / 2;
+  margin-bottom: $margin * 0.5;
   padding: 0;
   color: $white;
 
@@ -13,7 +15,7 @@
   }
 
   @include media-min(xl) {
-    padding: 0 $margin / 3 0 0;
+    padding: 0 math.div($margin, 3) 0 0;
   }
 }
 
@@ -43,7 +45,7 @@
       justify-content: center;
       top: 0;
       left: 0;
-      padding: $margin calc(10vw - #{ $margin / 2 });
+      padding: $margin calc(10vw - #{ $margin * 0.5 });
       width: 100%;
       height: 100vh;
       background: $bg-darker;
@@ -73,11 +75,11 @@
 
   @include media-min(sm) {
     display: block;
-    margin: 0 $margin / 8 0 auto;
+    margin: 0 $margin * 0.125 0 auto;
   }
 
   @include media-min(mbl) {
-    margin: 0 $margin / 8;
+    margin: 0 $margin * 0.125;
   }
 
   &--is-active {
@@ -157,8 +159,8 @@
 .header__mobile-sticky {
   display: flex;
   flex-wrap: nowrap;
-  right: $margin / 3;
-  border-radius: $border-radius / 2;
+  right: math.div($margin, 3);
+  border-radius: $border-radius * 0.5;
   transition: background-color 200ms, box-shadow 200ms;
   z-index: 100;
 

@@ -7,12 +7,12 @@
 
 .bubble {
   position: absolute;
-  bottom: -#{$margin / 8};
+  bottom: -#{$margin * 0.125};
   left: 0;
   transform: translateY(100%);
   width: 100%;
-  padding: $margin / 4;
-  border-radius: $border-radius / 2;
+  padding: $margin * 0.25;
+  border-radius: $border-radius * 0.5;
   background: lighten($bg-dark, 5%);
   box-shadow: $shadow;
   z-index: 10;
@@ -31,7 +31,7 @@
     height: $size;
     width: $size;
     background: lighten($bg-dark, 5%);
-    border-top-left-radius: $border-radius / 4;
+    border-top-left-radius: $border-radius * 0.25;
   }
 
   &--warning {
@@ -45,6 +45,6 @@
 }
 
 .bubble__separator {
-  margin: $margin / 4 0;
+  margin: $margin * 0.25 0;
   background: rgba($white, 0.35);
 }

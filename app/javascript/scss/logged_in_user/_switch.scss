@@ -1,6 +1,6 @@
 .switch {
   position: relative;
-  margin-bottom: $margin / 4;
+  margin-bottom: $margin * 0.25;
   max-width: 300px;
 
   &::before {

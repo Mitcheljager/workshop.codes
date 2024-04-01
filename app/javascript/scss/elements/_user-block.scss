@@ -37,8 +37,8 @@
 }
 
 .user-block__create {
-  margin-top: $margin / 2;
-  margin-bottom: $margin / 2;
+  margin-top: $margin * 0.5;
+  margin-bottom: $margin * 0.5;
 
   @include media-min(mbl) {
     margin-top: 0;

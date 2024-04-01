@@ -1,6 +1,8 @@
+@use "sass:math";
+
 .wiki-item {
   display: block;
-  padding: $margin / 3 0;
+  padding: math.div($margin, 3) 0;
   margin: 0;
   border-bottom: 1px solid $border-color;
   font-size: 18px;
@@ -33,7 +35,7 @@
 }
 
 .wiki-item__tray {
-  margin-top: $margin / 8;
+  margin-top: $margin * 0.125;
   font-size: 14px;
   color: $text-color;
   font-weight: normal;

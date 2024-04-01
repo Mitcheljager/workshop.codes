@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .code {
   appearance: none;
   position: relative;
@@ -6,7 +8,7 @@
   align-items: center;
   justify-content: center;
   height: $thumbnail-height;
-  padding: $margin / 6 0;
+  padding: math.div($margin, 6) 0;
   margin-bottom: auto;
   border: 0;
   background: $bg-dark;
@@ -29,7 +31,7 @@
   }
 
   .item--extra-small & {
-    padding: $margin / 8 0;
+    padding: $margin * 0.125 0;
     font-size: 28px;
 
     .copy-trigger {
@@ -41,9 +43,9 @@
   .item--large & {
     width: 100%;
     height: auto;
-    margin-top: $margin / 4;
-    padding: $margin / 8 0;
-    border-radius: $border-radius / 2;
+    margin-top: $margin * 0.25;
+    padding: $margin * 0.125 0;
+    border-radius: $border-radius * 0.5;
     font-size: 28px;
 
     @include media-min(md) {

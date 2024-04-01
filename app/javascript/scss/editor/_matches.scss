@@ -1,9 +1,9 @@
 .matches {
-  margin-top: $margin / 4;
+  margin-top: $margin * 0.25;
 
   &--dropdown {
-    padding: $margin / 8 0;
-    border-radius: $border-radius / 2;
+    padding: $margin * 0.125 0;
+    border-radius: $border-radius * 0.5;
     background: darken($bg-dark, 5%);
     box-shadow: $shadow;
     overflow: hidden;
@@ -12,11 +12,11 @@
 
 .matches__item {
   width: 100%;
-  padding: $margin / 8 0;
+  padding: $margin * 0.125 0;
   cursor: pointer;
 
   .matches--dropdown & {
-    padding: $margin / 8 $margin / 4;
+    padding: $margin * 0.125 $margin * 0.25;
   }
 
   &:hover {

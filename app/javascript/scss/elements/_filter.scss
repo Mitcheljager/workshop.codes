@@ -1,10 +1,12 @@
+@use "sass:math";
+
 @keyframes fade-in-filter-content {
   from { max-height: 0; padding-top: 0 }
-  to { max-height: 20rem; padding-top: calc(1rem + #{ $search-height / 2 }) }
+  to { max-height: 20rem; padding-top: calc(1rem + #{ $search-height * 0.5 }) }
 }
 
 @keyframes fade-out-filter-content {
-  from { max-height: 20rem; padding-top: calc(1rem + #{ $search-height / 2 }) }
+  from { max-height: 20rem; padding-top: calc(1rem + #{ $search-height * 0.5 }) }
   to { max-height: 0; padding-top: 0 }
 }
 
@@ -26,11 +28,11 @@
   position: relative;
   height: 100%;
   width: 100%;
-  margin-top: $search-height / -2;
-  padding-top: calc(1rem + #{ $search-height / 2 });
+  margin-top: math.div($search-height, -2);
+  padding-top: calc(1rem + #{ $search-height * 0.5 });
   padding-bottom: 1rem;
-  border-bottom-left-radius: $search-height / 2;
-  border-bottom-right-radius: $search-height / 2;
+  border-bottom-left-radius: $search-height * 0.5;
+  border-bottom-right-radius: $search-height * 0.5;
   background: $bg-dark;
   box-shadow: $shadow;
   transition: box-shadow var(--animation-duration);
@@ -107,10 +109,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem $search-height / 2;
+  padding: .5rem $search-height * 0.5;
   margin-top: 1.5rem;
-  border-bottom-left-radius: $search-height / 2;
-  border-bottom-right-radius: $search-height / 2;
+  border-bottom-left-radius: $search-height * 0.5;
+  border-bottom-right-radius: $search-height * 0.5;
   background: $bg-darker;
 }
 

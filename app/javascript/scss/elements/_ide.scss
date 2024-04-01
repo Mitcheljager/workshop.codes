@@ -1,6 +1,6 @@
 .ide {
   position: relative;
-  margin-top: $margin / 2;
+  margin-top: $margin * 0.5;
 
   &--fullscreen {
     position: fixed;
@@ -89,7 +89,7 @@
   padding: .5em;
   margin-left: .5rem;
   border: 0;
-  border-radius: $border-radius / 2;
+  border-radius: $border-radius * 0.5;
   background: $body-bg;
   font-size: 10px;
   line-height: 1em;

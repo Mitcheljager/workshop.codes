@@ -8,7 +8,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-left: $margin / 2;
+    margin-left: $margin * 0.5;
   }
 
   @media (min-width: 1400px) {
@@ -19,8 +19,8 @@
 .navigation__item {
   --color: #{$text-color-lightest};
   display: block;
-  margin-bottom: $margin / 4;
-  border-radius: $border-radius / 2;
+  margin-bottom: $margin * 0.25;
+  border-radius: $border-radius * 0.5;
   color: var(--color);
   text-decoration: none;
   font-family: $font-stack-alt;
@@ -30,7 +30,7 @@
   @include media-min(mbl) {
     --color: #{$body-bg};
     font-size: clamp(19px, 2vw, 24px);
-    margin-right: clamp(#{ $margin / 8 }, 1.25vw, #{ $margin / 2 });
+    margin-right: clamp(#{ $margin * 0.125 }, 1.25vw, #{ $margin * 0.5 });
     margin-bottom: 0;
   }
 

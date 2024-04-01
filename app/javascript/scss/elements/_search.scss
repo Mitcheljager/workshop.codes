@@ -4,9 +4,9 @@
 
   input:not([type="submit"]) {
     height: var(--height, $search-height);
-    padding: 0 $search-height / 2;
+    padding: 0 $search-height * 0.5;
     padding-right: 4rem;
-    border-radius: $search-height / 2;
+    border-radius: $search-height * 0.5;
     transition: border-radius 100ms;
     transition-delay: 180ms;
     background: $bg-darker;
@@ -34,7 +34,7 @@
   label {
     display: none;
     position: absolute;
-    left: $search-height / 2;
+    left: $search-height * 0.5;
     top: 50%;
     transform: translateY(-50%);
     font-style: italic;
@@ -83,8 +83,8 @@
   width: 100%;
   max-height: 0;
   transform: translateY(100%);
-  border-bottom-left-radius: $search-height / 2;
-  border-bottom-right-radius: $search-height / 2;
+  border-bottom-left-radius: $search-height * 0.5;
+  border-bottom-right-radius: $search-height * 0.5;
   background: darken($bg-dark, 5%);
   z-index: 1;
   overflow: hidden;

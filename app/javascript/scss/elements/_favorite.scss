@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @keyframes grow-heart {
   0% {
     transform: scale(1);
@@ -72,7 +74,7 @@
   }
 
   &:focus-visible {
-    border-radius: $border-radius / 2;
+    border-radius: $border-radius * 0.5;
     outline: 2px solid $white;
     outline-offset: 5px;
   }
@@ -106,7 +108,7 @@
 
 .favorite__label {
   display: block;
-  margin: 0 $margin / 3 0 $margin / 6;
+  margin: 0 math.div($margin, 3) 0 math.div($margin, 6);
   font-weight: bold;
   color: $text-color-lightest;
 }

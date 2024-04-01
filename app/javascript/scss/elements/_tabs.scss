@@ -1,7 +1,7 @@
 .tabs {
   display: flex;
   background: $bg-darker;
-  padding: 0 $margin / 4;
+  padding: 0 $margin * 0.25;
   margin: 0;
   overflow-x: auto;
   position: sticky;
@@ -34,8 +34,8 @@
 .tabs__item {
   position: relative;
   display: block;
-  padding: $margin / 4 $margin / 8;
-  margin: 0 $margin / 8;
+  padding: $margin * 0.25 $margin * 0.125;
+  margin: 0 $margin * 0.125;
   color: $text-color;
   text-decoration: none;
   font-family: $font-stack-alt;
@@ -83,7 +83,7 @@
   }
 
   .tabs--stepper & {
-    padding: $margin / 4 $margin / 8;
+    padding: $margin * 0.25 $margin * 0.125;
     font-family: $font-stack;
     font-size: $font-size-small;
     text-transform: none;
@@ -91,7 +91,7 @@
 
   .tabs--buttons & {
     margin: 0 1px;
-    padding: $margin / 8;
+    padding: $margin * 0.125;
     border-radius: $border-radius;
 
     &:hover,
