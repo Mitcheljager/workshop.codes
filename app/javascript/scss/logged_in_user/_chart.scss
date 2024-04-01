@@ -1,0 +1,39 @@
+.chart-wrapper {
+  position: relative;
+  padding: $margin / 8;
+  border-radius: $border-radius;
+  background: darken($bg-dark, 5%);
+  box-shadow: $shadow;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+    height: 50%;
+    width: 80%;
+    border-radius: $border-radius;
+    z-index: -1;
+    opacity: .45;
+    background: $black;
+    box-shadow: 0 0 2rem 2rem $black;
+  }
+}
+
+.chart {
+  position: relative;
+  min-height: 300px;
+}
+
+.chart__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(darken($bg-dark, 5%), .5);
+}

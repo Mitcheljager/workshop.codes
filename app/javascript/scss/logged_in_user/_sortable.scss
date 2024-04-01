@@ -1,0 +1,18 @@
+.sortable-ghost {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba($bg-dark, .25),
+    rgba($bg-dark, .25) 10px,
+    rgba($bg-dark, .5) 10px,
+    rgba($bg-dark, .5) 20px
+  );
+
+  img {
+    opacity: 0;
+  }
+}
+
+.sortable__multi-selected {
+  outline: inset 2px $text-color;
+  outline-offset: -2px;
+}

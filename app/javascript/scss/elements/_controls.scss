@@ -1,0 +1,120 @@
+.controls {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  margin-bottom: $margin / 8;
+
+  @include media-min(md) {
+    grid-template-columns: auto 1fr;
+    grid-gap: $margin / 8 0;
+  }
+}
+
+.controls__buttons {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: $margin / 4;
+  margin-top: $margin / 8;
+  background: darken($bg-dark, 5%);
+  border-radius: $border-radius / 2 $border-radius / 2 0 0;
+
+  @include media-min(md) {
+    margin-top: 0;
+    padding: $margin / 8 $margin / 4;
+    border-radius: $border-radius / 2 0 0 $border-radius / 2;
+  }
+
+  img {
+    height: 1.75em;
+    width: auto;
+    min-width: 1em;
+  }
+
+  strong {
+    margin: 0 .25rem;
+    color: $text-color-dark;
+  }
+}
+
+.controls__description {
+  height: 100%;
+  padding: 0 $margin / 4 $margin / 4;
+  border-radius: 0 0 $border-radius / 2 $border-radius / 2;
+  background: darken($bg-dark, 5%);
+
+  @include media-min(md) {
+    padding: $margin / 4;
+    border-radius: 0 $border-radius / 2 $border-radius / 2 0;
+  }
+}
+
+.controls-form-item {
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: $margin / 8 0;
+
+  @include media-min(md) {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 3fr;
+  }
+}
+
+.controls-form-item__button {
+  display: flex;
+  align-items: flex-start;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  span {
+    padding: $margin / 4 5px;
+  }
+
+  select {
+    margin-right: .5rem;
+    padding: $margin / 4 $margin / 2 $margin / 4 $margin / 8;
+
+    @include media-min(md) {
+      max-width: 125px;
+    }
+  }
+}
+
+.controls-form-item__custom {
+  margin-top: $margin / 8;
+  padding: $margin / 8;
+
+  @include media-min(md) {
+    max-width: 125px;
+  }
+}
+
+.controls-form-item__description {
+  display: flex;
+  align-items: center;
+  grid-column: 1 / span 3;
+
+   @include media-min(md) {
+    grid-column: auto;
+  }
+
+  button {
+    display: block;
+    border: 0;
+    padding: $margin / 8 0;
+    margin-left: $margin / 8;
+    background: transparent;
+    text-decoration: none;
+    color: $text-color;
+    cursor: pointer;
+  }
+}
+
+.controls-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $margin / 4;
+}

@@ -1,0 +1,64 @@
+.flex {
+  width: 100%;
+  display: flex;
+}
+
+.md\:flex {
+  @include media-min(md) {
+    display: flex;
+  }
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.md\:flex-nowrap {
+  @include media-min(md) {
+    flex-wrap: nowrap;
+  }
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-start {
+  align-items: start;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-1\/4 {
+  gap: $margin / 4;
+}
+
+.gap-1\/8 {
+  gap: $margin / 8;
+}

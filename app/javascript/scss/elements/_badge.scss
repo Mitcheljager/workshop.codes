@@ -1,0 +1,19 @@
+.badge {
+  display: inline-block;
+  margin-left: .1rem;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.badge__icon {
+  display: block;
+  height: .7em;
+  width: .7em;
+
+  &--large {
+    height: 2rem;
+    width: 2rem;
+  }
+}

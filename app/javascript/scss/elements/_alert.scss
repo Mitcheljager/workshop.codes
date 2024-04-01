@@ -1,0 +1,83 @@
+@keyframes move-in-alert {
+  from {
+    transform: translateY(100vh);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.alerts {
+  position: fixed;
+  right: $margin / 3;
+  bottom: $margin / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width: min(35em, 75%);
+  z-index: 2000;
+}
+
+.alert {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-top: $margin / 8;
+  padding: .5em 1em;
+  border-radius: $border-radius;
+  background: $green;
+  box-shadow: 0 10px 10px rgba($black, .5);
+  overflow: hidden;
+  color: $white;
+  font-size: 14px;
+  text-decoration: none;
+
+  &:not(.static) {
+    transform: translateY(100vh);
+    animation: move-in-alert 200ms 500ms forwards;
+  }
+
+  > button {
+    background-color: transparent;
+    font-size: 0.75rem;
+
+    &:hover:not([disabled]) {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  p {
+    max-width: 50em;
+  }
+
+  a {
+    color: $white;
+  }
+
+  &--error {
+    background: $red;
+  }
+
+  &--warning {
+    background: darken($orange, 8%);
+  }
+}
+
+@keyframes deplete-timer {
+  to {
+    width: 0%;
+  }
+}
+
+.alert__timer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0.15rem;
+  width: 100%;
+  background: rgba($white, 0.75);
+  animation: deplete-timer var(--timer) forwards linear;
+}

@@ -1,0 +1,54 @@
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-md-right {
+  @include media-min(md) {
+    text-align: right;
+  }
+}
+
+.text-sm-right {
+  @include media-min(sm) {
+    text-align: right;
+  }
+}
+
+.text-md-center {
+  @include media-min(md) {
+    text-align: center;
+  }
+}
+
+.text-small {
+  font-size: $font-size-small;
+}
+
+.text-big {
+  font-size: 1.1rem;
+  line-height: 1.35em;
+
+  @include media-min(md) {
+    font-size: 1.15rem;
+  }
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.line-height-3\/2 {
+  line-height: 1.5rem;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

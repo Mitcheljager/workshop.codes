@@ -1,0 +1,59 @@
+.action-header {
+  @include media-min(md) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: $margin / 6;
+
+    @include media-min(md) {
+      margin-bottom: $margin / 3;
+      line-height: 1em;
+    }
+  }
+
+  &.heading {
+    margin-bottom: $margin / 2;
+
+    @include media-min(md) {
+      margin-bottom: $margin;
+    }
+  }
+}
+
+.action-header__actions {
+  display: flex;
+  color: $text-color-dark;
+
+  @include media-min(md) {
+    text-align: right;
+  }
+
+  span {
+    margin-right: .5em;
+
+    @include media-min(md) {
+      margin-right: 0;
+    }
+  }
+}
+
+.action-header__action {
+  box-shadow: inset 0 -3px 0 $border-color;
+  padding: $margin / 3 .5rem;
+  margin-left: .25rem;
+  font-size: 1rem;
+  text-decoration: none;
+
+  @include hover-stack {
+    color: $text-color-lightest;
+  }
+
+  &--active {
+    box-shadow: inset 0 -3px 0 $primary;
+    color: $text-color-lightest;
+  }
+}

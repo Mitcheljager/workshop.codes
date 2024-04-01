@@ -1,0 +1,40 @@
+.tooltip {
+  position: relative;
+
+  @include hover-stack {
+    .tooltip__content {
+      display: block;
+    }
+  }
+}
+
+.tooltip__content {
+  display: none;
+  position: absolute;
+  bottom: -.5rem;
+  left: 50%;
+  padding: .5rem;
+  width: 200px;
+  border-radius: $border-radius;
+  transform: translateY(100%) translateX(-50%);
+  background: $bg-dark;
+  font-size: 12px;
+  font-weight: normal;
+  color: $text-color;
+  line-height: 1.5em;
+  box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
+  z-index: 10;
+
+  .tooltip--top-left & {
+    left: 0;
+    top: -.5rem;
+    bottom: auto;
+    transform: translateY(-100%);
+  }
+
+  .tooltip--right & {
+    right: 0;
+    left: auto;
+    transform: translateY(100%);
+  }
+}

@@ -1,0 +1,42 @@
+table {
+  width: 100%;
+  border-spacing: 0;
+
+  @media (max-width: 1000px) {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+td {
+  padding: .5rem;
+
+  tr:nth-child(odd) & {
+    background: rgba($white, .05);
+  }
+
+  a {
+    color: $text-color-lightest;
+    text-decoration: none;
+
+    @include hover-stack {
+      text-decoration: underline;
+    }
+  }
+}
+
+th {
+  padding: .5rem;
+  background: rgba($black, .15);
+  text-align: left;
+  font-weight: bolder;
+  color: $text-color-lightest;
+}
+
+tr {
+  @include hover-stack {
+    td {
+      background: rgba($white, .1);
+    }
+  }
+}

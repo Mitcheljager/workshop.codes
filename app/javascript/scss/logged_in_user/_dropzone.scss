@@ -1,0 +1,65 @@
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 200px;
+  border: 2px dashed $border-color;
+  padding: clamp($margin / 2, 10vw, $margin);
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.5em;
+  transition: box-shadow 100ms, background-color 100ms;
+
+  &--is-active {
+    background: $body-bg;
+    border: 2px solid $border-color;
+    box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
+  }
+
+  * {
+    // pointer-events: none;
+  }
+
+  span {
+    color: $text-color-lightest;
+  }
+}
+
+.dropzone__button {
+  input {
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+}
+
+.textarea-dropzone--is-active {
+  position: relative;
+
+  &::after {
+    content: "Drop images to upload";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    background: rgba($bg-dark, .75);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px dashed $text-color;
+    z-index: 2;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,76 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: lighter;
+  color: $text-color-lightest;
+
+  .high-contrast & {
+    font-weight: normal;
+  }
+
+  small {
+    font-size: 60%;
+    color: $text-color;
+  }
+}
+
+.heading {
+  margin-top: $margin * 2.5;
+  margin-bottom: $margin;
+
+  small {
+    color: $text-color;
+  }
+}
+
+h1 {
+  @include responsive-font-width(36px, map-get($media-min-widths, lg), 32px);
+}
+
+h2 {
+  @include responsive-font-width(28px, map-get($media-min-widths, lg), 24px);
+  margin-bottom: $margin / 3;
+}
+
+h3 {
+  @include responsive-font-width(21px, map-get($media-min-widths, lg), 19px);
+}
+
+h4 {
+  @include responsive-font-width(18px, map-get($media-min-widths, lg), 16px);
+}
+
+h5,
+h6 {
+  font-size: $font-size-base;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  position: relative;
+
+  .header-anchor {
+    position: absolute;
+    left: -20px;
+    width: 20px;
+    height: 1em;
+    background: transparent url("/images/icons/icon-link.svg") no-repeat;
+    background-position: left center;
+    opacity: 0;
+    transition: opacity 150ms linear;
+    display: none;
+  }
+
+  &:hover .header-anchor {
+    opacity: 1;
+    display: initial;
+  }
+}
+.title-icon {
+  display: inline-block;
+  height: .75em;
+  width: .75em;
+  margin-right: .25rem;
+  line-height: 1em;
+}

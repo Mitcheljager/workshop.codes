@@ -1,0 +1,16 @@
+.item--revision {
+  grid-template: "title" "code";
+  margin-bottom: 0;
+  border: 0;
+
+  @include media-min(sm) {
+    grid-template: "title code";
+    grid-template-columns: auto $code-width;
+  }
+}
+
+.revision__description {
+  border-top: 1px solid lighten($border-color, 5%);
+  padding-top: $margin / 4;
+  margin-top: $margin / 4;
+}

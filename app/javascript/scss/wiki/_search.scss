@@ -1,0 +1,72 @@
+.search--wiki {
+  z-index: 1;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 4rem;
+    bottom: .65rem;
+    height: 20%;
+    width: calc(100% - 8rem);
+    z-index: -1;
+    opacity: .45;
+    background: $black;
+    box-shadow: 0 0 2rem 2rem $black;
+    border-radius: 99px;
+    pointer-events: none;
+
+    @include media-min(sm) {
+      left: 6rem;
+      width: calc(100% - 12rem);
+    }
+  }
+
+  input:not([type="submit"]) {
+    width: 100%;
+    height: $wiki-search-height;
+    border-radius: $wiki-search-height / 2;
+    padding: calc(#{ $wiki-search-height / 1.25 } - (1.5em * 2)) calc(#{ $wiki-search-height / 2.5});
+
+    @include media-min(sm) {
+      padding: calc(#{ $wiki-search-height } - (1.5em * 2)) calc(#{ $wiki-search-height / 2} + .5em);
+    }
+
+    &:focus {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      transition-delay: 0ms;
+    }
+  }
+
+  label {
+    left: calc(#{ $wiki-search-height / 2.5 });
+    color: $text-color;
+    font-size: 0;
+
+    @include media-min(sm) {
+      font-size: $font-size-base;
+      left: calc(#{ $wiki-search-height / 2} + .75em);
+    }
+
+    strong {
+      color: $text-color-lightest;
+      font-size: 20px;
+      font-weight: lighter;
+
+      @include media-min(md) {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .search__submit {
+    padding: 0 2.5rem;
+    background-size: 24px 24px;
+
+    @include media-min(sm) {
+      padding: 0 3rem;
+      background-size: 28px 28px;
+    }
+  }
+}

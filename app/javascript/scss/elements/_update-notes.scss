@@ -1,0 +1,79 @@
+.update-notes {
+  margin: $margin / 1.15 0 $margin / 4;
+  border: 2px solid lighten($border-color, 10%);
+  background: $body-bg;
+}
+
+.update-notes__header {
+  position: relative;
+  padding: $margin / 4 $margin / 4 $margin / 4 calc(1.5rem + 90px);
+  background: #292e31;
+
+  &--no-image {
+    padding: $margin / 4;
+  }
+}
+
+.update-notes__title {
+  margin: 0 !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.update-notes__body {
+  padding: $margin / 4;
+}
+
+.update-notes__description {
+  border-left: 4px solid $primary;
+  padding-left: $margin / 4;
+  margin-bottom: $margin / 4;
+}
+
+.update-notes__icon {
+  position: absolute;
+  bottom: $margin / 8;
+  width: 90px;
+  height: 90px;
+  left: $margin / 8;
+  background: $bg-darker;
+  border: 2px solid $text-color;
+
+  img {
+    display: block;
+    width: 90px;
+  }
+}
+
+
+.update-notes__list {
+  margin: 0;
+}
+
+.update-notes__item {
+  display: flex;
+  align-items: flex-start;
+  margin: $margin / 4 0 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.update-notes__ability {
+  width: 40px;
+  padding: $margin / 16;
+  margin-right: $margin / 8;
+  border: 2px solid $text-color-dark;
+}
+
+.update-notes__name {
+  line-height: 1.5rem;
+  font-weight: bold;
+  color: $text-color-lightest;
+}
+
+.update-notes__changes {
+  margin: 0 0;
+  padding-left: 1.5rem !important;
+}

@@ -1,0 +1,30 @@
+.sign-in-alert {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: var(--toast-warning);
+  color: white;
+  z-index: 1;
+
+  &.top {
+    top: 1rem;
+    bottom: auto;
+  }
+
+  a {
+    color: white;
+  }
+}
+
+.deprecated {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: var(--toast-warning);
+  color: white;
+  z-index: 1000;
+}

@@ -1,0 +1,41 @@
+.editor-folder.editor-folder {
+  position: relative;
+
+  > span > input {
+    color: $text-color-dark;
+    pointer-events: all;
+  }
+}
+
+.editor-folder__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0.1rem;
+  left: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  transition: transform 150ms;
+  user-select: none;
+  color: $text-color-dark;
+  z-index: 1;
+
+  &:hover {
+    color: $text-color-light;
+  }
+
+  .editor-folder--expanded > & {
+    transform: rotate(90deg);
+  }
+}
+
+.editor-folder__content {
+  display: none;
+  padding-left: $margin / 3;
+
+  &.editor-folder__content--expanded {
+    display: block;
+  }
+}

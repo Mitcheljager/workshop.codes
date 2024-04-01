@@ -1,0 +1,11 @@
+.project-recovery {
+  position: absolute;
+  bottom: $margin / 2;
+  right: $margin / 2;
+  max-width: min(30rem, 80vw);
+  padding: $margin / 4;
+  border: 2px solid $orange;
+  border-radius: $border-radius;
+  background: darken($bg-dark, 10%);
+  box-shadow: $shadow;
+}
