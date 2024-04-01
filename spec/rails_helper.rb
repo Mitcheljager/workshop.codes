@@ -57,6 +57,15 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
+  # config.before :all, type: :system do
+  #   if !ENV["ASSET_PRECOMPILE_DONE"]
+  #     puts "\n\nPrecompiling assets for system tests..."
+  #     prep_passed = system "rake assets:precompile"
+  #     ENV["ASSET_PRECOMPILE_DONE"] = "true"
+  #     abort "\nYour assets didn't compile. Exiting WITHOUT running any tests. Review the output above to resolve any errors." if !prep_passed
+  #   end
+  # end
+
  # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
