@@ -79,7 +79,7 @@ $snowball-icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABFCAMAAAArU
   --border-radius: #{ $border-radius };
   --shadow: #{ $shadow };
   --font-size-base: #{ $font-size-base };
-  --font-size-small: { $font-size-small };
+  --font-size-small: #{ $font-size-small };
   --font-stack: #{ $font-stack };
   --font-stack-alt: #{ $font-stack-alt };
 }
