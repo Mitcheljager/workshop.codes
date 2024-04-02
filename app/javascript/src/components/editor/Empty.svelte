@@ -41,7 +41,7 @@
         {#each $projects as { title, uuid, updated_at }}
           <button class="project" on:click={() => getProject(uuid)}>
             <div class="text-lightest">{title}</div>
-            <small>Last updated: { new Date(updated_at).toLocaleString() }</small>
+            <small>Last updated: {new Date(updated_at).toLocaleString()}</small>
           </button>
         {/each}
       {:else}

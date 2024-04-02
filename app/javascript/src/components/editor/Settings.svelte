@@ -64,7 +64,7 @@
       transition:fly={{ duration: 150, y: 20 }}
       use:escapeable on:escape={() => active = false}
       class="dropdown__content block p-1/4"
-      style="width: 300px; right: { isMobile ? -70 : 0 }px">
+      style="width: 300px; right: {isMobile ? -70 : 0}px">
 
       <h5 class="mt-0 mb-1/8">Settings</h5>
 

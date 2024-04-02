@@ -46,7 +46,7 @@
           <div>
             {@html keys.map(key => `<kbd>${key}</kbd>`).join(" + ")}
           </div>
-          { text }
+          {text}
         </div>
       {/each}
     </div>

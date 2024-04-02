@@ -87,3 +87,5 @@ rules:
     - all
   svelte/no-spaces-around-equal-signs-in-attribute:
     - error
+  svelte/mustache-spacing:
+    - error

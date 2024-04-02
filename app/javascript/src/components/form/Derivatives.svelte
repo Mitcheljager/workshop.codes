@@ -46,7 +46,7 @@
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
-      bind:checked={ showDerivative }/>
+      bind:checked={showDerivative}/>
 
     <label
       class="switch-checkbox__label"
@@ -55,10 +55,10 @@
     </label>
   </div>
 
-  { #if showDerivative }
+  {#if showDerivative}
     <div class="form-group mt-1/4">
       <div class="form-hint mt-1/4 mb-1/4 text-left">
-        Enter the import code(s) which your mode uses. You can enter up to { maxCodes } codes.
+        Enter the import code(s) which your mode uses. You can enter up to {maxCodes} codes.
 
         <br />
         <strong>Separate import codes with a comma (<code>,</code>).</strong>
@@ -68,14 +68,14 @@
         prefix="post"
         name="derivations"
         placeholder="CODE1,CODE2,etc."
-        fillValues={ currentSources }
-        hidden={ !showDerivative }
-        allowSpace={ false }
-        onlyAlphanumeric={ true }
-        onlyCaps={ true }
-        tagLimit={ maxCodes }
-        useAutoComplete={ true }
-        fetchAutoCompleteValues={ handleAutoCompleteRequest } />
+        fillValues={currentSources}
+        hidden={!showDerivative}
+        allowSpace={false}
+        onlyAlphanumeric={true}
+        onlyCaps={true}
+        tagLimit={maxCodes}
+        useAutoComplete={true}
+        fetchAutoCompleteValues={handleAutoCompleteRequest} />
     </div>
-  { /if }
+  {/if}
 </div>

@@ -150,57 +150,57 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class="dropzone"
-  class:dropzone--is-active={ active }
+  class:dropzone--is-active={active}
   use:escapeable
-  on:escape={ () => previewImageUrl = "" }
-  on:dragover|preventDefault={ () => active = true }
-  on:dragleave={ () => active = false}
-  on:drop|preventDefault={ drop }>
+  on:escape={() => previewImageUrl = ""}
+  on:dragover|preventDefault={() => active = true}
+  on:dragleave={() => active = false}
+  on:drop|preventDefault={drop}>
 
-  <span>{ label }</span>
+  <span>{label}</span>
 
-  <small>{ help }</small>
+  <small>{help}</small>
 
   <label class="dropzone__button button button--secondary mt-1/4">
-    { button }
+    {button}
 
-    <input type="file" multiple="true" accept="image/png, image/jpeg, image/jpg" on:change={ changeInput } tabindex="-1" />
+    <input type="file" multiple="true" accept="image/png, image/jpeg, image/jpg" on:change={changeInput} tabindex="-1" />
   </label>
 </div>
 
-{ #if images.length }
+{#if images.length}
   <small class="form-hint"><em>Drag images to change their order. The first image will be your thumbnail.</em></small>
-{ /if }
+{/if}
 
-<div class="images-preview" bind:this={ listElement }>
-  { #each images as image (image.id) }
+<div class="images-preview" bind:this={listElement}>
+  {#each images as image (image.id)}
     <div
       class="images-preview__item"
-      data-id={ image.id }
+      data-id={image.id}
       transition:fade={{ duration: 200 }}
       animate:flip={{ duration: 200 }}>
 
-      { #if image.type == "preview" }
+      {#if image.type == "preview"}
         <div class="images-preview__progress">
-          <div class="images-preview__progress-bar" style="width: { image.progress }%" />
+          <div class="images-preview__progress-bar" style="width: {image.progress}%" />
         </div>
-      { :else }
+      {:else}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
         <img
-          on:click={ () => previewImageUrl = image.preview_url }
-          src={ image.url }
-          height={ imagePreviewWidth / 9 * 5 }
-          width={ imagePreviewWidth }
+          on:click={() => previewImageUrl = image.preview_url}
+          src={image.url}
+          height={imagePreviewWidth / 9 * 5}
+          width={imagePreviewWidth}
           alt="" />
-      { /if }
+      {/if}
 
-      <button class="images-preview__action" on:click|stopPropagation|preventDefault={ () => removeImage(image.id) }>X</button>
+      <button class="images-preview__action" on:click|stopPropagation|preventDefault={() => removeImage(image.id)}>X</button>
     </div>
-  { /each }
+  {/each}
 </div>
 
-{ #if previewImageUrl }
+{#if previewImageUrl}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close>
@@ -211,4 +211,4 @@
 
     <div class="modal__backdrop" />
   </div>
-{ /if }
+{/if}

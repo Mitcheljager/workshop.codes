@@ -78,35 +78,35 @@
   }
 </script>
 
-<textarea { name } bind:value class="form-input form-textarea form-textarea--small" />
+<textarea {name} bind:value class="form-input form-textarea form-textarea--small" />
 
-{ #if value }
+{#if value}
   <button
     transition:fade={{ duration: 150 }}
-    on:click|preventDefault={ autofillForm }
+    on:click|preventDefault={autofillForm}
     class="button button--secondary mt-1/4"
-    disabled={ processing }>
+    disabled={processing}>
 
-    { processing ? "Processing..." : "Auto fill settings from snippet" }
+    {processing ? "Processing..." : "Auto fill settings from snippet"}
   </button>
-{ /if }
+{/if}
 
-{ #if foundTerms.length }
+{#if foundTerms.length}
   <div class="well well--dark block mt-1/4">
-    { #each foundTerms as term, i }
-      <div in:fade={{ duration: 150, delay: i * 150 }}>Set "{ term }"</div>
-    { /each }
+    {#each foundTerms as term, i}
+      <div in:fade={{ duration: 150, delay: i * 150 }}>Set "{term}"</div>
+    {/each}
   </div>
-{ /if }
+{/if}
 
-{ #if value }
+{#if value}
   <div class="switch-checkbox mt-1/4">
     <input
       id="snippet-fixer"
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
-      bind:checked={ snippetFixer }/>
+      bind:checked={snippetFixer}/>
 
     <label
       class="switch-checkbox__label"
@@ -114,14 +114,14 @@
       Show Snippet Fixer Options
     </label>
   </div>
-{ /if }
+{/if}
 
-{ #if snippetFixer }
+{#if snippetFixer}
   <div class="well well--dark mt-1/4">
     <button
-      on:click|preventDefault={ replaceMcCree }
-      class="button { replacedMcCree ? "button--primary" : "button--secondary" }">
-      { replacedMcCree ? "Successfully replaced McCree with Cassidy" : "Replace McCree with Cassidy" }
+      on:click|preventDefault={replaceMcCree}
+      class="button {replacedMcCree ? "button--primary" : "button--secondary"}">
+      {replacedMcCree ? "Successfully replaced McCree with Cassidy" : "Replace McCree with Cassidy"}
     </button>
   </div>
-{ /if }
+{/if}

@@ -50,4 +50,4 @@
 
 <svelte:window on:mousemove={mouseMove} on:touchmove={mouseMove} on:mouseup={mouseUp} on:touchend={mouseUp} />
 
-<button class="drag-handle drag-handle--{ align }" class:is-dragging={isDragging} on:mousedown={mouseDown} on:touchstart={mouseDown} />
+<button class="drag-handle drag-handle--{align}" class:is-dragging={isDragging} on:mousedown={mouseDown} on:touchstart={mouseDown} />
