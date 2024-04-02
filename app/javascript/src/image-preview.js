@@ -6,7 +6,7 @@ export function bind() {
   clearButtons.forEach(element => element.removeAndAddEventListener("click", clearImage))
 }
 
-function setImagePreview(event) {
+function setImagePreview() {
   const removeFileFlag = document.querySelector(`[data-clear-image-flag="${this.dataset.target}"]`)
   const target = document.querySelector(`[data-image-preview="${this.dataset.target}"]`)
 
@@ -22,7 +22,7 @@ function setImagePreview(event) {
   removeFileFlag.value = ""
 }
 
-function clearImage(event) {
+function clearImage() {
   const preview = document.querySelector(`[data-image-preview="${this.dataset.target}"]`)
   const field = document.querySelector(`[data-action~="image-preview"][data-target="${this.dataset.target}"]`)
   const removeFileFlag = document.querySelector(`[data-clear-image-flag="${this.dataset.target}"]`)

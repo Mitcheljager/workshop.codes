@@ -8,7 +8,6 @@
   export let name
 
   let listElement
-  let sortable
 
   const values = [
     ["None", ""],
@@ -31,7 +30,7 @@
   onMount(createSortable)
 
   function createSortable() {
-    sortable = Sortable.create(listElement, {
+    Sortable.create(listElement, {
       handle: "[data-role='controls-item-move-handle']",
       animation: 100,
       store: {

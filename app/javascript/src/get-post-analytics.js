@@ -32,7 +32,7 @@ function getPostAnalytics(element) {
     })
 }
 
-function revealPostAnalytics(event) {
+function revealPostAnalytics() {
   const parentElement = this.closest("[data-toggle-content]")
   const selectElement = parentElement.querySelector("[data-action~='get-post-analytics']")
 

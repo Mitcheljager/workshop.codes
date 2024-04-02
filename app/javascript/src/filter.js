@@ -58,7 +58,7 @@ function buildFilterPath(event) {
     "sort": filterValue("sort", parent)
   }
 
-  buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
+  buildPath = Object.fromEntries(Object.entries(buildPath).filter(([_, v]) => v != ""))
   buildPath = Object.entries(buildPath).map(([k, v]) => `${k}=${v}`).join("&")
 
   window.location = `/search?${buildPath}`

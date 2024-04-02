@@ -26,7 +26,7 @@ export default class Uploader {
     })
   }
 
-  directUploadWillStoreFileWithXHR(request, xhr) {
+  directUploadWillStoreFileWithXHR(request) {
     request.upload.addEventListener("progress", event => this.directUploadDidProgress(event))
   }
 

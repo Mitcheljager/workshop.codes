@@ -60,7 +60,7 @@ function getInfiniteScrollContent(element) {
   Rails.ajax({
     type: "get",
     url: requestUrlString,
-    success: (response) => {
+    success: () => {
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
         element.innerHTML = "Load more"
@@ -69,10 +69,9 @@ function getInfiniteScrollContent(element) {
 
       timeago.initialize()
     },
-    error: (error) => {
+    error: () => {
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
-        console.log("more button")
         element.innerHTML = "An error occurred. Try again?"
       } else if (element.dataset.loadMethod === "infinite-scroll") {
         let button = document.querySelector("[data-role='load-more-posts']")

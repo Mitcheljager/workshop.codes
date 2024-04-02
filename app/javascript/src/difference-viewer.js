@@ -18,7 +18,7 @@ export function render() {
   scrollAlong()
 }
 
-function toggleUnchangedFiles(event) {
+function toggleUnchangedFiles() {
   const element = document.querySelector(".diff")
   const state = this.checked
 
@@ -61,7 +61,7 @@ function goToRule(event) {
   window.scroll(0, offset)
 }
 
-function scrollAlong(event) {
+function scrollAlong() {
   const element = document.querySelector("[data-role='difference-header']")
   const elementOffset = element.getBoundingClientRect().top
 

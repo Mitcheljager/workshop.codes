@@ -4,7 +4,7 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("click", toggleRevealByCheckbox))
 }
 
-function toggleRevealByCheckbox(event) {
+function toggleRevealByCheckbox() {
   const state = this.checked
   const parent = this.closest("[data-reveal-by-checkbox]")
   const target = parent.dataset.revealByCheckbox

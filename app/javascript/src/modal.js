@@ -11,7 +11,7 @@ export function bind() {
   document.body.removeAndAddEventListener("keydown", closeModalOnKeyDown)
 }
 
-function showModal(event) {
+function showModal() {
   const modal = document.querySelector(`[data-modal="${this.dataset.target}"]`)
 
   if (!modal) return
@@ -22,7 +22,7 @@ function showModal(event) {
   document.body.style.overflowY = "hidden"
 }
 
-export function closeModal(event) {
+export function closeModal() {
   const activeModal = document.querySelector(".modal:not([style*='none'])")
 
   if (!activeModal) return

@@ -10,7 +10,7 @@ export function bind() {
   element.addEventListener("input", searchWiki)
 }
 
-const searchWiki = debounce((event) => {
+const searchWiki = debounce(() => {
   const element = document.querySelector("[data-role='wiki-search']")
   if (!element.value) return
 

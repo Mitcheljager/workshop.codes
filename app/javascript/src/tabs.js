@@ -21,7 +21,7 @@ function setTab(event) {
   if (this.dataset.action.includes("scroll")) scrollToElement(parentElement)
 }
 
-function revealTab(target, parentElement, scroll) {
+function revealTab(target, parentElement) {
   const targetElement = document.querySelector(`[data-tab~='${target}']`)
   const tabElements = parentElement.querySelectorAll(".tabs-content")
 

@@ -17,7 +17,7 @@
   export let useAutoComplete = false
   export let minCharsAutoComplete = 2
   export let fillValues = []
-  export let fetchAutoCompleteValues = value => {
+  export let fetchAutoCompleteValues = () => {
     return new Promise(resolve => resolve([]))
   }
 

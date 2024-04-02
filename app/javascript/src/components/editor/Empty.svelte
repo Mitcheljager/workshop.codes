@@ -1,7 +1,6 @@
 <script>
   import { isSignedIn, projects, modal } from "../../stores/editor"
   import { createDemoProject, createProject, fetchProject, setUrl } from "../../utils/project"
-  import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
 
   async function getProject(uuid) {
     const data = await fetchProject(uuid)

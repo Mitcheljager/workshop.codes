@@ -19,7 +19,7 @@
         copyToClipboard(compiled)
       }, 150)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       alert(error)
       compiling = false
     }
