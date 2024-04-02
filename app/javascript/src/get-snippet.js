@@ -35,6 +35,6 @@ function loadSnippet(event, element) {
     })
     .catch(error => {
       console.error(error)
-      ideElement.innerHTML = `Failed to load Snippet <br>${error}`
+      ideElement.innerText = `Failed to load Snippet <br />${error}`
     })
 }
