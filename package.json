@@ -42,7 +42,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.4",
     "eslint": "^7.25.0",
-    "eslint-plugin-svelte3": "^3.2.0",
+    "eslint-plugin-svelte": "^2.35.1",
     "jest-environment-jsdom": "^29.7.0",
     "sass": "^1.69.5",
     "string.prototype.replaceall": "^1.0.7",
