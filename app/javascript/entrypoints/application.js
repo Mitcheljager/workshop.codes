@@ -4,7 +4,7 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import TurbolinksPrefetch from "../src/turbolinks-prefetch"
 
-Rails.start()
+if (!window._rails_loaded) Rails.start()
 Turbolinks.start()
 TurbolinksPrefetch.start()
 
