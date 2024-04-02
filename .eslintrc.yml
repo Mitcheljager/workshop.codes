@@ -82,8 +82,6 @@ rules:
     - error
   svelte/no-dupe-use-directives:
     - error
-  svelte/no-object-in-text-mustache:
-    - error
   svelte/html-self-closing:
     - error
     - all
