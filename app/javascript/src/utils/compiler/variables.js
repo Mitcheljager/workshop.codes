@@ -153,10 +153,10 @@ export function getVariables(joinedItems) {
     const isPlayer = match[0].includes("Player")
 
     if (isPlayer) {
-      if (args[1]?.length === 0) continue
+      if (!args[1]?.length) continue
       playerVariablesFromActions.push(args[1])
     } else {
-      if (args[0]?.length === 0) continue
+      if (!args[0]?.length) continue
       globalVariablesFromActions.push(args[0])
     }
   }
@@ -164,8 +164,8 @@ export function getVariables(joinedItems) {
   const literalGlobalVariables = matchAllOutsideRanges(stringRanges, joinedItems, globalVariablesRegex).map((match) => match[0])
   const literalPlayerVariables = getLiteralPlayerVariables(joinedItems, stringRanges)
 
-  const playerVariables = [...new Set([...literalPlayerVariables, ...playerVariablesFromActions])].filter(v => v)
-  const globalVariables = [...new Set([...literalGlobalVariables, ...globalVariablesFromActions])].filter(v => v)
+  const playerVariables = [...new Set([...literalPlayerVariables, ...playerVariablesFromActions])]
+  const globalVariables = [...new Set([...literalGlobalVariables, ...globalVariablesFromActions])]
 
   return { globalVariables, playerVariables }
 }
