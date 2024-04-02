@@ -1,9 +1,9 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
     {
       // Required gems: debug
       // Required extension: KoichiSasada.vscode-rdbg
@@ -25,14 +25,14 @@
       "cwd": "${workspaceFolder}"
     },
     {
-			"name": "Chrome against localhost:3000",
-			"type": "chrome",
-			"request": "launch",
-			"url": "http://localhost:3000",
-			"webRoot": "${workspaceFolder}",
+      "name": "Chrome against localhost:3000",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/app/javascript",
       "sourceMaps": true
-		}
-	],
+    }
+  ],
   "compounds": [
     {
       "name": "All",
