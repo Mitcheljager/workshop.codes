@@ -164,8 +164,8 @@ export function getVariables(joinedItems) {
   const literalGlobalVariables = matchAllOutsideRanges(stringRanges, joinedItems, globalVariablesRegex).map((match) => match[0])
   const literalPlayerVariables = getLiteralPlayerVariables(joinedItems, stringRanges)
 
-  const playerVariables = [...new Set([...literalPlayerVariables, ...playerVariablesFromActions])]
-  const globalVariables = [...new Set([...literalGlobalVariables, ...globalVariablesFromActions])]
+  const playerVariables = [...new Set([...literalPlayerVariables, ...playerVariablesFromActions])].filter(v => v)
+  const globalVariables = [...new Set([...literalGlobalVariables, ...globalVariablesFromActions])].filter(v => v)
 
   return { globalVariables, playerVariables }
 }

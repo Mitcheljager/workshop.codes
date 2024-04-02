@@ -1,0 +1,51 @@
+@use "sass:math";
+
+.search-terms {
+  padding: math.div($margin, 2.5);
+
+  @include media-min(lg) {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
+.search-terms__title {
+  font-size: 18px;
+  margin: 0 0 $margin * 0.25;
+
+  @include media-min(lg) {
+    margin: 0 $margin * 0.5 0 0;
+    text-align: left;
+  }
+}
+
+.search-terms__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.search-term {
+  display: block;
+  background: lighten($bg-dark, 5%);
+  margin: .1em;
+  padding: .5em .75em;
+  font-size: $font-size-small;
+  line-height: 1em;
+  color: $text-color-light;
+  text-decoration: none;
+  text-transform: capitalize;
+
+  &:hover {
+    color: $text-color-lightest;
+    background: lighten($bg-dark, 10%);
+  }
+
+  &:nth-child(n+16) {
+    display: none;
+
+    @include media-min(lg) {
+      display: block;
+    }
+  }
+}

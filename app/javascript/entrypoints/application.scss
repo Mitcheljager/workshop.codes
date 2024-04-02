@@ -1,0 +1,9 @@
+@import "@scss/variables",
+        "@scss/mixins";
+
+// Aliases don't work for glob imports
+@import "../scss/general/*";
+@import "../scss/elements/*";
+@import "../scss/editor/*";
+@import "../scss/utilities/*";
+@import "../scss/wiki/*"

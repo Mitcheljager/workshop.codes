@@ -1,0 +1,15 @@
+.infinite-scroll {
+  position: absolute;
+  bottom: 0;
+}
+
+.infinite-scroll:not(:empty) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: $margin * 0.5 0;
+  padding: $margin * 0.5 0;
+  background: $bg-darker;
+  border-radius: $border-radius;
+}

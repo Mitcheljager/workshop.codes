@@ -49,7 +49,7 @@ There are several rake tasks you can use to make development a little closer to 
 
 ### VSCode
 
-There are 3 main launch tasks: Rails Server, Webpack Dev Server, and Chrome.
+There are 3 main launch tasks: Rails Server, Vite Dev Server, and Chrome.
 You can run all of them via the compound task "All".
 
 - The Ruby tasks require the [VSCode rdbg Ruby Debugger extension](https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg), which requires you to install the `debug` gem like so:

@@ -1,0 +1,125 @@
+.navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include media-min(mbl) {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: $margin * 0.5;
+  }
+
+  @media (min-width: 1400px) {
+    margin-left: $margin;
+  }
+}
+
+.navigation__item {
+  --color: #{$text-color-lightest};
+  display: block;
+  margin-bottom: $margin * 0.25;
+  border-radius: $border-radius * 0.5;
+  color: var(--color);
+  text-decoration: none;
+  font-family: $font-stack-alt;
+  text-transform: uppercase;
+  font-size: 18px;
+
+  @include media-min(mbl) {
+    --color: #{$body-bg};
+    font-size: clamp(19px, 2vw, 24px);
+    margin-right: clamp(#{ $margin * 0.125 }, 1.25vw, #{ $margin * 0.5 });
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover,
+  &:active,
+  &:focus,
+  &--active {
+    color: var(--color);
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 10px;
+      background: var(--color);
+    }
+  }
+
+  &--active {
+    &::before,
+    &:hover::before {
+      background: var(--primary, $primary);
+    }
+  }
+
+  .wiki & {
+    --color: #{$white};
+  }
+
+  svg {
+    height: 32px;
+
+    @include media-min(mbl) {
+      height: 24px;
+    }
+  }
+
+  &--discord {
+    display: flex;
+    color: $discord;
+
+    &:hover {
+      color: $discord;
+    }
+  }
+}
+
+.navigation-trigger {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 2.375rem;
+  width: 2.375rem;
+  padding: 0 .5rem;
+  color: white;
+  font-size: 32px;
+  line-height: 1.2em;
+  font-weight: bolder;
+  text-decoration: none;
+
+  @include media-min(sm) {
+    margin-left: 1rem;
+  }
+
+  @include media-min(mbl) {
+    display: none;
+  }
+
+  &:focus {
+    color: white;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.navigation-close {
+  @extend .navigation-trigger;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}

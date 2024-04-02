@@ -1,0 +1,107 @@
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  z-index: 1000;
+
+  @include media-min(sm) {
+    align-items: center;
+  }
+
+  &--content-width {
+    align-items: flex-start;
+  }
+
+  &--auto {
+    padding: $margin 0;
+
+    @include media-min(sm) {
+      align-items: flex-start;
+    }
+  }
+
+  &--top {
+    @include media-min(sm) {
+      align-items: flex-start;
+      padding: $margin 0;
+    }
+  }
+}
+
+.modal__backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: $bg-dark;
+  opacity: .75;
+  z-index: -10;
+}
+
+.modal__content {
+  position: relative;
+  width: 90%;
+  max-width: map-get($media-min-widths, xs);
+  padding: $margin * 0.5;
+  background: $body-bg;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 3rem;
+    bottom: 0;
+    height: 50%;
+    width: calc(100% - 6rem);
+    border-radius: $border-radius * 2;
+    z-index: -1;
+    opacity: .45;
+    background: $black;
+    box-shadow: 0 0 2rem 2rem $black;
+
+    @include media-min(sm) {
+      left: 4rem;
+      width: calc(100% - 8rem);
+    }
+  }
+
+  .modal--auto & {
+    width: auto;
+    max-width: 90%;
+    min-width: 300px;
+    min-height: 200px;
+    z-index: 100;
+
+    @include media-min(sm) {
+      max-width: 80%;
+    }
+
+    img {
+      display: block;
+      background: $bg-darker;
+    }
+  }
+
+  .modal--content-width & {
+    max-width: calc(#{ map-get($media-min-widths, lg) } + #{ $margin });
+    max-height: 90vh;
+    margin-top: 5vh;
+    overflow: auto;
+
+    &::before {
+      display: none;;
+    }
+  }
+}
+
+.modal__title {
+  margin: 0 0 $margin * 0.5;
+}

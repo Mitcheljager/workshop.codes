@@ -1,0 +1,37 @@
+.matches {
+  margin-top: $margin * 0.25;
+
+  &--dropdown {
+    padding: $margin * 0.125 0;
+    border-radius: $border-radius * 0.5;
+    background: darken($bg-dark, 5%);
+    box-shadow: $shadow;
+    overflow: hidden;
+  }
+}
+
+.matches__item {
+  width: 100%;
+  padding: $margin * 0.125 0;
+  cursor: pointer;
+
+  .matches--dropdown & {
+    padding: $margin * 0.125 $margin * 0.25;
+  }
+
+  &:hover {
+    background: darken($bg-dark, 7.5%);
+    box-shadow: $margin 0 0 darken($bg-dark, 7.5%), $margin * -1 0 0 darken($bg-dark, 7.5%);
+  }
+
+  &--active {
+    background: $bg-darker;
+    box-shadow: $margin 0 0 $bg-darker, $margin * -1 0 0 $bg-darker;
+    color: $text-color-lightest;
+  }
+}
+
+.matches__hidden {
+  opacity: 0.5;
+  text-decoration: line-through;
+}

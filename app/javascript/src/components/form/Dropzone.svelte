@@ -148,6 +148,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class="dropzone"
   class:dropzone--is-active={ active }
@@ -186,6 +187,7 @@
         </div>
       { :else }
         <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
         <img
           on:click={ () => previewImageUrl = image.preview_url }
           src={ image.url }
@@ -201,6 +203,7 @@
 
 { #if previewImageUrl }
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close>
 
     <div class="modal__content p-0">

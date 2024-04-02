@@ -1,0 +1,162 @@
+.tabs {
+  display: flex;
+  background: $bg-darker;
+  padding: 0 $margin * 0.25;
+  margin: 0;
+  overflow-x: auto;
+  position: sticky;
+
+  .standout & {
+    &:not(:first-child) {
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+  }
+
+  &--stepper {
+    display: grid;
+    grid-template-columns: auto 5rem;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  &--light {
+    background: darken($bg-dark, 5%);
+  }
+
+  &--buttons {
+    background: initial;
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+.tabs__item {
+  position: relative;
+  display: block;
+  padding: $margin * 0.25 $margin * 0.125;
+  margin: 0 $margin * 0.125;
+  color: $text-color;
+  text-decoration: none;
+  font-family: $font-stack-alt;
+  text-transform: uppercase;
+  font-size: 19px;
+  text-align: left;
+  white-space: nowrap;
+
+  @include focus-visible-outline(inset);
+
+  @include hover-stack {
+    color: $text-color-lightest;
+
+    &::after {
+      background: $text-color-lightest;
+      width: 100%;
+      transition: width 50ms, background-color 50ms;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 2px;
+    width: 0%;
+    background: transparent;
+    transform: translateX(-50%);
+    transition: width 50ms, background-color 0ms 50ms;
+  }
+
+  &--active,
+  &--active:hover,
+  &--active:active,
+  &--active:focus {
+    color: $text-color-lightest;
+
+    &::after {
+      background: $primary;
+      width: 100%;
+      transition: width 50ms, background-color 50ms;
+    }
+  }
+
+  .tabs--stepper & {
+    padding: $margin * 0.25 $margin * 0.125;
+    font-family: $font-stack;
+    font-size: $font-size-small;
+    text-transform: none;
+  }
+
+  .tabs--buttons & {
+    margin: 0 1px;
+    padding: $margin * 0.125;
+    border-radius: $border-radius;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &--active {
+      background: $bg-darker;
+      box-shadow: inset 0 0 0 2px $border-color;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  svg {
+    display: block;
+    height: 1em;
+  }
+}
+
+.tabs__label {
+  display: block;
+  color: $text-color-dark;
+
+  .tabs__item--with-errors & {
+    color: $red;
+  }
+}
+
+@keyframes transition-tab-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tabs-content {
+  display: none;
+  transition: opacity 150ms;
+
+  &--active {
+    display: block;
+  }
+
+  &--transitioning-out {
+    opacity: 0;
+  }
+
+  &--transitioning-in {
+    animation: transition-tab-in 150ms;
+  }
+}
+
+.tabs--stepper__content {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+}
+
+.tabs--stepper__spacer {
+  width: 2.5rem;
+  flex-shrink: 0;
+}
+
+.tabs__floating {
+  border-radius: 0;
+  box-shadow: 0 0 2.5rem 2.5rem $bg-darker;
+  z-index: 2;
+}

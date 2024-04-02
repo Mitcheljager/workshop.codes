@@ -26,7 +26,7 @@ jobs:
           bundler-cache: true
       - uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "18"
           check-latest: true
       - run: yarn install
       - name: ESLint
@@ -48,14 +48,14 @@ jobs:
           bundler-cache: true
       - uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "18"
           check-latest: true
           cache: 'yarn'
           cache-dependency-path: './yarn.lock'
       - run: yarn install
       - name: Precompile assets
         run: |
-          bundle exec rails webpacker:compile RAILS_ENV=test
+          bundle exec rails vite:build RAILS_ENV=test
       - name: Test
         run: |
           bundle exec rake db:test:prepare
@@ -63,9 +63,9 @@ jobs:
       - name: RSpec
         run: |
           bundle exec rspec
-      - name: Jest
+      - name: Vitest
         run: |
-          yarn jest
+          yarn test
   features:
     name: Cucumber Feature Check
     runs-on: ubuntu-latest
@@ -84,14 +84,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "18"
           check-latest: true
           cache: 'yarn'
           cache-dependency-path: './yarn.lock'
       - run: yarn install
       - name: Precompile assets
         run: |
-          bundle exec rails webpacker:compile RAILS_ENV=test
+          bundle exec rails vite:build RAILS_ENV=test
       - name: Cucumber
         run: |
           bundle exec rake db:test:prepare

@@ -1,0 +1,74 @@
+$width: clamp(10rem, 12.5vw, 15rem);
+
+.quick-navigation {
+  display: none;
+  position: absolute;
+  left: calc((#{ $width } + #{ $margin * 0.5 }) * -1);
+
+  @include media-min(1400px) {
+    display: block;
+  }
+}
+
+.quick-navigation__scroll {
+  height: 100%;
+  width: $width;
+  padding-right: $margin * 0.125;
+  box-shadow: 0 2px 0 $border-color, 0 -2px 0 $border-color;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: transparent transparent;
+
+  @include styled-scrollbar(transparent, transparent);
+
+  &:hover {
+    scrollbar-color: initial;
+
+    @include styled-scrollbar();
+  }
+}
+
+.quick-navigation__item {
+  display: block;
+  padding: 0.35rem 0;
+  text-decoration: none;
+  color: $text-color-dark;
+  font-size: $font-size-small;
+  line-height: 1.2em;
+
+  &--active {
+    color: $text-color-light;
+    font-weight: bold;
+  }
+}
+
+.quick-navigation__toggle {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: $margin * 0.125;
+  width: 100%;
+  padding: $margin * 0.125 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: $text-color-light;
+  font-family: $font-stack;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    color: $text-color-lightest;
+  }
+}
+
+.quick-navigation__icon {
+  height: 1rem;
+  font-size: 1.25rem;
+  line-height: 1rem;
+  transition: transform 100ms;
+
+  .active & {
+    transform: rotate(90deg) translateY(-0.25rem);
+  }
+}

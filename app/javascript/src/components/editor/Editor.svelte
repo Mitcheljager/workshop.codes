@@ -153,10 +153,10 @@
   function isInherentlyHidden(item) {
     if (item.hidden) return true
     if (!item.parent) return false
-    
+
     const parent = $sortedItems.find((parentItem) => parentItem.id === item.parent)
     if (!parent) return false
-    
+
     return isInherentlyHidden(parent)
   }
 
@@ -191,7 +191,7 @@
 
 <div class="editor" class:editor--empty={!$currentProjectUUID}>
   <div class="editor__top">
-    <button class="w-auto {$isMobile ? 'mr-1/4' : 'mr-1/2'}" on:click={() => $currentProjectUUID = null}>
+    <button class="w-auto {$isMobile ? "mr-1/4" : "mr-1/2"}" on:click={() => $currentProjectUUID = null}>
       <Logo />
     </button>
 

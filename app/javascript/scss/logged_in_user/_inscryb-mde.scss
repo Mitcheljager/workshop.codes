@@ -1,0 +1,284 @@
+@use "sass:math";
+
+.editor-preview {
+  margin-top: 0;
+  background: $body-bg;
+  border: 1px solid $border-color;
+}
+
+.editor-toolbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 0;
+  border-radius: 0;
+  padding: 0 .25rem .25rem;
+  background: $bg-darker;
+  opacity: 1;
+  z-index: 50;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.fullscreen {
+    background: $bg-darker;
+    z-index: 1000;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  a,
+  button {
+    display: block;
+    border: 0;
+    margin-top: .25rem;
+    margin-right: .25rem;
+    background-color: $bg-dark;
+    color: $text-color !important;
+    font-size: 1rem;
+
+    @include hover-stack {
+      background-color: lighten($bg-dark, 10%);
+      color: $text-color-light !important;
+      border: 0;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    i {
+      font-style: normal;
+    }
+
+    &.dropdown-open {
+      position: relative;
+      background: lighten($bg-dark, 10%);
+    }
+
+    &.active {
+      background: lighten($bg-dark, 10%);
+    }
+  }
+
+  i.separator {
+    border: 0;
+    margin: 0 math.div($margin, 16);
+  }
+}
+
+.editor-dropdown {
+  position: absolute;
+  right: 0;
+  top: 2rem;
+  max-height: 300px;
+  width: 220px;
+  background: $bg-dark;
+  border: 1px solid $text-color-dark;
+  border-radius: $border-radius;
+  overflow-y: auto;
+  text-align: left;
+  font-size: $font-size-small;
+  z-index: 20;
+
+  small {
+    display: block;
+    padding: .5rem;
+  }
+
+  .checkbox label {
+    padding-left: .5rem;
+  }
+}
+
+.editor-statusbar {
+  font-family: 'Consolas', monospace;
+  padding: .5rem 0;
+  color: $text-color-dark;
+
+  .error {
+    color: $red;
+  }
+}
+
+.editor-toolbar .editor-dropdown__item {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: .25em .75em;
+  text-align: left;
+  font-size: $font-size-small;
+
+  &:hover,
+  &:active {
+    background: lighten($bg-dark, 5%);
+    color: $text-color-lightest;
+  }
+
+  &--icon {
+    display: flex;
+    align-items: center;
+    gap: $margin * 0.125;
+    min-height: 2.5rem;
+
+    img {
+      width: 2rem;
+    }
+  }
+}
+
+.editor-preview table td,
+.editor-preview table th,
+.editor-preview-side table td,
+.editor-preview-side table th {
+  border: 0;
+  padding: .5rem;
+}
+
+.editor-preview p {
+  margin-top: 1rem;
+}
+
+.fa-bold::before {
+  content: "B";
+  font-weight: bold;
+}
+
+.fa-italic::before {
+  content: "i";
+  font-style: italic;
+}
+
+.fa-header::before {
+  content: "H";
+  font-weight: bold;
+}
+
+.fa-quote-left::before {
+  content: "❞";
+  font-weight: bold;
+}
+
+.fa-list-ul::before {
+  content: "•";
+}
+
+.fa-list-ol::before {
+  content: "1";
+}
+
+.fa-link::before {
+  content: "🔗";
+}
+
+.fa-image::before {
+  content: "🖼️";
+}
+
+.fa-video::before {
+  content: "▶";
+}
+
+.fa-minus::before {
+  content: "⚊";
+}
+
+.fa-highlight::before {
+  content: "h";
+  color: var(--primary, $primary);
+}
+
+.fa-code::before {
+  content: "<>";
+  font-weight: bold;
+  font-size: $font-size-small;
+}
+
+.editor-toolbar button[title*="Block"],
+.editor-toolbar button[title="Gallery"],
+.editor-toolbar button[title="Update Notes"],
+.editor-toolbar button[title="Controls"],
+.editor-toolbar button[title="Insert Table"],
+.editor-toolbar button[title*="Hero Icon"],
+.editor-toolbar button[title*="Ability Icon"],
+.editor-toolbar button[title*="Toggle Preview"],
+.editor-toolbar button[title*="Wiki Link"] {
+  width: auto;
+  padding: 0 .5rem;
+  font-size: 12px;
+}
+
+.editor-toolbar button:not([title]) {
+  width: 100%;
+  height: 0;
+  margin-top: -.25rem;
+}
+
+.fa-table::before {
+  content: "Table";
+}
+
+.fa-gallery::before {
+  content: "Gallery";
+}
+
+.fa-update-notes::before {
+  content: "Update";
+}
+
+.fa-block-gallery::before {
+  content: "Block: Gallery";
+}
+
+.fa-block-faq::before {
+  content: "Block: FAQ";
+}
+
+.fa-hero-icon::before {
+  content: "Hero";
+}
+
+.fa-ability-icon::before {
+  content: "Ability";
+}
+
+.fa-arrows-alt::before {
+  content: "⛶";
+}
+
+.fa-eye::before {
+  content: "Preview";
+}
+
+.fa-wiki::before {
+  content: "Wiki Link";
+}
+
+.editor-toolbar button[title*="Toggle Preview"] {
+  background: var(--primary, $primary);
+
+  &.active {
+    filter: brightness(1.15);
+
+    .fa-eye::before {
+      visibility: hidden;
+    }
+    .fa-eye::after {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      content: "Edit";
+    }
+  }
+
+  .fa-eye {
+    color: white;
+  }
+}

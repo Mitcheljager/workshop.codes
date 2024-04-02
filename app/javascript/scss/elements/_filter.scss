@@ -1,0 +1,174 @@
+@use "sass:math";
+
+@keyframes fade-in-filter-content {
+  from { max-height: 0; padding-top: 0 }
+  to { max-height: 20rem; padding-top: calc(1rem + #{ $search-height * 0.5 }) }
+}
+
+@keyframes fade-out-filter-content {
+  from { max-height: 20rem; padding-top: calc(1rem + #{ $search-height * 0.5 }) }
+  to { max-height: 0; padding-top: 0 }
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  top: $search-height;
+  z-index: 5;
+
+  @include motion {
+    --animation-duration: 150ms;
+  }
+}
+
+.filter__content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin-top: math.div($search-height, -2);
+  padding-top: calc(1rem + #{ $search-height * 0.5 });
+  padding-bottom: 1rem;
+  border-bottom-left-radius: $search-height * 0.5;
+  border-bottom-right-radius: $search-height * 0.5;
+  background: $bg-dark;
+  box-shadow: $shadow;
+  transition: box-shadow var(--animation-duration);
+  animation: fade-in-filter-content var(--animation-duration, 0ms);
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 3rem;
+    bottom: .65rem;
+    height: 10px;
+    width: calc(100% - 6rem);
+    z-index: -1;
+    opacity: .45;
+    background: $black;
+    box-shadow: 0 0 1.5rem 1.5rem $black;
+    border-radius: 99px;
+    pointer-events: none;
+  }
+
+  .fading-in & {
+    overflow: hidden;
+  }
+
+  .fading-out & {
+    overflow: hidden;
+    animation: fade-out-filter-content var(--animation-duration, 0ms);
+  }
+}
+
+.filter__group {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.filter__item {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: .1rem 0;
+  padding: .5rem .75rem;
+  border-radius: $border-radius;
+  background: $bg-darker;
+  font-size: $font-size-small;
+
+  &--active {
+    background: $body-bg;
+
+    a {
+      color: $text-color-lightest;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.filter__label {
+  color: $text-color-dark;
+}
+
+.filter__button {
+  padding: .5em .75em;
+  border-radius: $border-radius;
+  background: $bg-dark;
+}
+
+.filter__tray {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem $search-height * 0.5;
+  margin-top: 1.5rem;
+  border-bottom-left-radius: $search-height * 0.5;
+  border-bottom-right-radius: $search-height * 0.5;
+  background: $bg-darker;
+}
+
+.filter__link {
+  display: flex;
+  align-items: center;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  padding: .65rem .5rem;
+  color: $text-color-lightest;
+  font-family: $font-stack;
+  font-size: $font-size-base;
+  text-decoration: none;
+  cursor: pointer;
+
+  @include hover-stack {
+    color: $white;
+
+    path {
+      fill: $text-color-lightest;
+    }
+  }
+
+  &--remove {
+    background: $red;
+    color: $white;
+  }
+
+  &--active {
+    background: $primary;
+    color: $white;
+    font-size: 12px;
+
+    @include hover-stack {
+      filter: brightness(1.15);
+      color: $white;
+    }
+  }
+}
+
+.filter__remove {
+  display: none;
+  margin-left: .5rem;
+
+  .filter__item--active & {
+    display: inline-block;
+    color: $red;
+  }
+}
+
+.filter-actions {
+  position: absolute;
+  right: 2.5rem;
+  top: 0;
+  display: flex;
+  z-index: 15;
+}

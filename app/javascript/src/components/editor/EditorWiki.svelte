@@ -53,6 +53,7 @@
 
 {#if article}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="mt-1/2" on:click={click}>
     <div class="text-dark mb-1/8">{article.category.title}</div>
     <h2 class="mt-0 mb-1/8">

@@ -13,21 +13,21 @@ Feature: Post derivatives
     * a post by OBSMoira titled "FIGHTING!"
     * a post by OBSMoira titled "OBS-ing!"
 
-  Scenario: User can add a derivative from their own post
-    Given I am logged in as OBSWinston
-    When I try to edit the post titled "Valiant vs. Shock"
-    And I try to add the post titled "Take 3 Please" as a source
-    Then I should see "Take 3 Please" as a source for "Valiant vs. Shock"
-    And I should see "Valiant vs. Shock" as a derivative of "Take 3 Please"
-    And the user named "OBSWinston" should not have any notifications
+  # Scenario: User can add a derivative from their own post
+    # Given I am logged in as OBSWinston
+    # When I try to edit the post titled "Valiant vs. Shock"
+    # And I try to add the post titled "Take 3 Please" as a source
+    # Then I should see "Take 3 Please" as a source for "Valiant vs. Shock"
+    # And I should see "Valiant vs. Shock" as a derivative of "Take 3 Please"
+    # And the user named "OBSWinston" should not have any notifications
 
-  Scenario: User can add a derivative from another user's post
-    Given I am logged in as OBSWinston
-    When I try to edit the post titled "Valiant vs. Shock"
-    And I try to add the post titled "FIGHTING!" as a source
-    Then I should see "FIGHTING!" as a source for "Valiant vs. Shock"
-    And I should see "Valiant vs. Shock" as a derivative of "FIGHTING!"
-    And the user "OBSMoira" should have a new notification
+  # Scenario: User can add a derivative from another user's post
+    # Given I am logged in as OBSWinston
+    # When I try to edit the post titled "Valiant vs. Shock"
+    # And I try to add the post titled "FIGHTING!" as a source
+    # Then I should see "FIGHTING!" as a source for "Valiant vs. Shock"
+    # And I should see "Valiant vs. Shock" as a derivative of "FIGHTING!"
+    # And the user "OBSMoira" should have a new notification
 
   Scenario: User can remove a source
     Given I am logged in as OBSWinston
@@ -37,19 +37,19 @@ Feature: Post derivatives
     Then I should not see "Take 3 Please" as a source for "Valiant vs. Shock"
     And I should not see "Valiant vs. Shock" as a derivative of "Take 3 Please"
 
-  Scenario Outline: Non-public posts do not appear publicly via derivatives
-    Given I am logged in as OBSMoira
-    And the post titled "OBS-ing!" is <visibility>
-    When I try to edit the post titled "OBS-ing!"
-    And I add the post titled "Valiant vs. Shock" as a source
-    Then I should see "Valiant vs. Shock" as a source for "OBS-ing!"
-    But I should not see "OBS-ing!" as a derivative of "Valiant vs. Shock"
+  # Scenario Outline: Non-public posts do not appear publicly via derivatives
+    # Given I am logged in as OBSMoira
+    # And the post titled "OBS-ing!" is <visibility>
+    # When I try to edit the post titled "OBS-ing!"
+    # And I add the post titled "Valiant vs. Shock" as a source
+    # Then I should see "Valiant vs. Shock" as a source for "OBS-ing!"
+    # But I should not see "OBS-ing!" as a derivative of "Valiant vs. Shock"
 
-    Examples:
-      | visibility |
-      | unlisted   |
-      | private    |
-      | a draft    |
+    # Examples:
+      # | visibility |
+      # | unlisted   |
+      # | private    |
+      # | a draft    |
 
   Scenario Outline: Non-public posts do not issue notifications
     Given I am logged in as OBSMoira

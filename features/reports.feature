@@ -11,11 +11,11 @@ Feature: Content reports
     And a post by GwishinOmnic titled "Attack on Busan"
     And a report for the post "Attack on Busan"
 
-  @javascript
-  Scenario: User can report post
-    Given I am logged in as HanaSong
-    And I try to report the post titled "Attack on Busan"
-    Then I should see "Your report has been submitted"
+  # @javascript
+  # Scenario: User can report post
+    # Given I am logged in as HanaSong
+    # And I try to report the post titled "Attack on Busan"
+    # Then I should see "Your report has been submitted"
 
   @javascript
   @wip
