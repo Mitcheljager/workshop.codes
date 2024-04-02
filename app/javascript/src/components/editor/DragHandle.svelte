@@ -16,7 +16,7 @@
 
   onMount(() => {
     currentSize = Math.max(Math.min(localStorage.getItem(key) || currentSize, Math.max(window.innerWidth, window.innerHeight)), 0)
-    setCssVariable(key, `${ currentSize }px`)
+    setCssVariable(key, `${currentSize}px`)
   })
 
   function mouseDown(event) {
@@ -32,7 +32,7 @@
     const difference = (event[direction] || event.targetTouches[0]?.[direction]) - startPosition
     currentSize = startSize + difference * (align == "right" ? 1 : -1)
 
-    setCssVariable(key, `${ currentSize }px`)
+    setCssVariable(key, `${currentSize}px`)
 
     currentSize = Math.min(
       Math.max(currentSize, Math.max(window.innerWidth, window.innerHeight) / 10),

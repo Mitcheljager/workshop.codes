@@ -94,7 +94,7 @@
           Insert a semicolon at the end of the line when autocompleting actions.
         </div>
       </div>
-      
+
       <div class="checkbox tooltip mt-1/8">
         <input id="autocomplete-parameter-objects" type="checkbox" bind:checked={$settings["autocomplete-parameter-objects"]} />
         <label for="autocomplete-parameter-objects">
@@ -148,7 +148,7 @@
         <input type="range" min=10 max=18 step=1 class="range" bind:value={$settings["editor-font-size"]} />
       </div>
 
-      <hr>
+      <hr/>
 
       <h5 class="mt-1/4 mb-1/8">Cursor</h5>
 
@@ -162,18 +162,18 @@
         <input type="range" min=1 max=10 step=1 class="range" bind:value={$settings["editor-cursor-width"]} />
       </div>
 
-      <hr>
+      <hr/>
 
       <h5 class="mt-1/4 mb-0">Syntax Highlighting</h5>
 
       {#each syntaxHighlight as color}
         <div class="form-group-inline mt-1/8">
           <label for="" class="text-base font-size nowrap">{color}</label>
-          <input type="color" class="color-input" bind:value={$settings[`color-${ color }`]} />
+          <input type="color" class="color-input" bind:value={$settings[`color-${color}`]} />
         </div>
       {/each}
 
-      <hr>
+      <hr/>
 
       <button class="button button--link button--small pb-0" on:click={resetToDefault}>Reset all to default</button>
     </div>

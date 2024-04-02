@@ -8,7 +8,7 @@ export function bind() {
 
 export default function setCssVariable(event) {
   event.preventDefault()
-  const targetElement = document.querySelector(`[data-css-variable="${ this.dataset.target }"]`)
+  const targetElement = document.querySelector(`[data-css-variable="${this.dataset.target}"]`)
 
-  targetElement.style.setProperty(`--${ this.dataset.variable }`, this.value + "px")
+  targetElement.style.setProperty(`--${this.dataset.variable}`, this.value + "px")
 }

@@ -83,7 +83,7 @@ function getInfiniteScrollContent(element) {
                 class="mt-1/2 button button--secondary pr-1/1 pl-1/1"
                 data-role="load-more-posts"
                 data-load-method="load-more-button"
-                data-url="${ requestUrl }">
+                data-url="${requestUrl}">
 
                 An error occurred. Try again?
               </div>

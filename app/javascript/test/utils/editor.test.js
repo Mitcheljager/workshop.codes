@@ -270,7 +270,7 @@ describe("editor.js", () => {
       const set = true
 
       toggleFolderState(item, state, set)
-      expect(localStorageMock.getItem(`folder_expanded_${ item.id }`)).toBe("true")
+      expect(localStorageMock.getItem(`folder_expanded_${item.id}`)).toBe("true")
     })
 
     it("Should not set the state of the folder item in localStorage if set is false", () => {
@@ -278,7 +278,7 @@ describe("editor.js", () => {
       const set = false
 
       toggleFolderState(item, state, set)
-      expect(localStorageMock.getItem(`folder_expanded_${ item.id }`)).toBeUndefined()
+      expect(localStorageMock.getItem(`folder_expanded_${item.id}`)).toBeUndefined()
     })
 
     it("Should add the folder item id to openFolders if the state is true", () => {

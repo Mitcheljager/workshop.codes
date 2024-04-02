@@ -30,7 +30,6 @@ export function render() {
     element.dataset.carouselId = carouselCards.length - 1
   })
 
-
   const previousElements = document.querySelectorAll("[data-action='carousel-previous']")
   previousElements.forEach((element) => element.removeAndAddEventListener("click", carouselPrevious))
 

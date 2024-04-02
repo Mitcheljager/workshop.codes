@@ -26,13 +26,13 @@
   <p>
     The <strong>fetched</strong> project was last saved
     <em>
-      { timeago.format($currentProject?.updated_at || "") } <br>
+      { timeago.format($currentProject?.updated_at || "") } <br/>
       <small class="text-dark">{ toDate($currentProject?.updated_at) }</small>
-    </em> <br>
+    </em> <br/>
 
     The <strong>local</strong> project was last saved
     <em>
-      { timeago.format($recoveredProject?.updated_at || "") } <br>
+      { timeago.format($recoveredProject?.updated_at || "") } <br/>
       <small class="text-dark">{ toDate($recoveredProject?.updated_at) }</small>
     </em>
   </p>

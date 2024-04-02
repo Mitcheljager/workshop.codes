@@ -29,11 +29,11 @@ export function convertTranslations(joinedItems) {
     const eachLanguageStrings = []
     get(selectedLanguages).forEach((language) => {
       const translation = get(translationKeys)[key]?.[language] || get(translationKeys)[key]?.[get(defaultLanguage)] || key
-      eachLanguageStrings.push(`Custom String("${ translation }"${ splitArguments.length > 1 ? ", " : "" }${ splitArguments.slice(1).join(", ") })`)
+      eachLanguageStrings.push(`Custom String("${translation}"${splitArguments.length > 1 ? ", " : ""}${splitArguments.slice(1).join(", ")})`)
     })
 
     const replaceWith = `Value In Array(
-      Array(${ eachLanguageStrings.join(", ") }),
+      Array(${eachLanguageStrings.join(", ")}),
       Max(False, Index Of Array Value(Global.WCDynamicLanguages, Custom String("{0}", Map(Practice Range), Null, Null)))
     )`
 
@@ -41,11 +41,11 @@ export function convertTranslations(joinedItems) {
   }
 
   // Array with custom string for Practice Range in each selected language
-  const customStringArrayForEachLanguage = get(selectedLanguages).map(language => `Custom String("${ languageOptions[language].detect }")`)
+  const customStringArrayForEachLanguage = get(selectedLanguages).map(language => `Custom String("${languageOptions[language].detect}")`)
   const rule = `
   rule("Workshop.codes Editor Dynamic Language - Set Languages") {
     event { Ongoing - Global; }
-    actions { Global.WCDynamicLanguages = Array(${ customStringArrayForEachLanguage.join(", ") }); }
+    actions { Global.WCDynamicLanguages = Array(${customStringArrayForEachLanguage.join(", ")}); }
   }`
 
   return joinedItems + rule

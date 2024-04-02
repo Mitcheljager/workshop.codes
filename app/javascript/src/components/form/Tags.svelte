@@ -161,8 +161,6 @@
   }
 </script>
 
-
-
 <div class="form-tags__wrapper form-input mt-1/4">
   { #each values as value, i (value) }
     <span animate:flip={{ duration: 100 }} class="form-tags__tag">

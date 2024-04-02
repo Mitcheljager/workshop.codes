@@ -73,9 +73,7 @@
   }
 </script>
 
-
-
-<input type="hidden" { value } { name }>
+<input type="hidden" { value } { name }/>
 
 <div class="well well--dark block">
   <div bind:this={ listElement }>

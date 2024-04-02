@@ -39,8 +39,6 @@
   }
 </script>
 
-
-
 <div class="notifications dropdown lg-down:dropup mb-1/8 mbl:mb-0 mbl:mr-1/8" data-dropdown>
   <button data-action="toggle-dropdown" on:click={ getNotifications }>
     <div class="notifications__label">
@@ -60,7 +58,7 @@
     </div>
 
     { #if loading }
-      <span class="dropdown__item"><div class="spinner spinner--small mb-1/8"></div></span>
+      <span class="dropdown__item"><div class="spinner spinner--small mb-1/8"/></span>
     { /if }
 
     { #each $notifications as notification }

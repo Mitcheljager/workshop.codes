@@ -25,23 +25,23 @@
   }
 
   function setName(name) {
-    findValue(`enabled ${ name }`, name, true)
+    findValue(`enabled ${name}`, name, true)
 
-    if (!foundTerms.includes(`enabled ${ name }`)) findValue(`disabled ${ name }`, name, false)
-    if (!foundTerms.includes(`enabled ${ name }`) && !foundTerms.includes(`disabled ${ name }`)) {
-      foundTerms = [...foundTerms, `all ${ name }`]
+    if (!foundTerms.includes(`enabled ${name}`)) findValue(`disabled ${name}`, name, false)
+    if (!foundTerms.includes(`enabled ${name}`) && !foundTerms.includes(`disabled ${name}`)) {
+      foundTerms = [...foundTerms, `all ${name}`]
       setCheckboxes(name, [], false)
     }
   }
 
   function findValue(term, name, initial) {
-    const regex = new RegExp(`(${ term }\\s+).*?(?=\\s+})`, "gs")
+    const regex = new RegExp(`(${term}\\s+).*?(?=\\s+})`, "gs")
 
     let result = value.match(regex)
     if (result) {
       foundTerms = [...foundTerms, term]
       result = result.join("")
-      result = result.replaceAll(`enabled ${ name } {`, "").replace(/\t/g, "").replace(/\r/g, "")
+      result = result.replaceAll(`enabled ${name} {`, "").replace(/\t/g, "").replace(/\r/g, "")
       result = result.split("\n").filter(r => r)
     }
 
@@ -49,7 +49,7 @@
   }
 
   function setCheckboxes(name, result, initial) {
-    const elements = document.querySelectorAll(`[type="checkbox"][name*="${ name }"]`)
+    const elements = document.querySelectorAll(`[type="checkbox"][name*="${name}"]`)
     elements.forEach(element => {
       if (initial) element.checked = (!result || result.includes(element.value))
       if (!initial) element.checked = !(!result || result.includes(element.value))
@@ -77,8 +77,6 @@
     }
   }
 </script>
-
-
 
 <textarea { name } bind:value class="form-input form-textarea form-textarea--small" />
 
@@ -108,7 +106,7 @@
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
-      bind:checked={ snippetFixer }>
+      bind:checked={ snippetFixer }/>
 
     <label
       class="switch-checkbox__label"

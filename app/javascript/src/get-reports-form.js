@@ -13,7 +13,7 @@ function getReportsForm(event) {
   if (!eventTarget) return
 
   event.preventDefault()
-  
+
   const originalText = eventTarget.innerText
   eventTarget.innerText = "Loading..."
 

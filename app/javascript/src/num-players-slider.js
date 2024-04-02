@@ -110,7 +110,7 @@ function filterOnSliderUpdate(values) {
     return
   }
 
-  element.dataset.value = `${ values[0] }-${ values[1] }`
+  element.dataset.value = `${values[0]}-${values[1]}`
 }
 
 function destroySlider(element) {

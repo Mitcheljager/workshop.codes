@@ -4,7 +4,7 @@ export function bind() {
 }
 
 function setGallery(event) {
-  const target = document.querySelector(`[data-gallery="${ this.dataset.target }"]`)
+  const target = document.querySelector(`[data-gallery="${this.dataset.target}"]`)
 
   if (target) {
     target.src = ""

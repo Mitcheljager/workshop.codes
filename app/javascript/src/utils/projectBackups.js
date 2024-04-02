@@ -14,7 +14,7 @@ export async function createProjectBackup(uuid) {
 }
 
 export async function fetchBackupsForProject(uuid) {
-  return await new FetchRails(`/project_backups?uuid=${ uuid }`).get()
+  return await new FetchRails(`/project_backups?uuid=${uuid}`).get()
     .then(data => {
       return JSON.parse(data)
     })
@@ -25,7 +25,7 @@ export async function fetchBackupsForProject(uuid) {
 }
 
 export async function destroyBackup(uuid) {
-  return await new FetchRails(`/project_backups/${ uuid }`).post({ method: "delete" })
+  return await new FetchRails(`/project_backups/${uuid}`).post({ method: "delete" })
     .then(data => {
       if (!data) throw Error("Destroying current project failed")
       return true
@@ -38,7 +38,7 @@ export async function destroyBackup(uuid) {
 }
 
 export async function fetchBackupContent(uuid) {
-  return await new FetchRails(`/project_backups/${ uuid }`).get()
+  return await new FetchRails(`/project_backups/${uuid}`).get()
     .then(data => {
       if (!data) throw new Error("Fetch contained no data")
       return JSON.parse(data)

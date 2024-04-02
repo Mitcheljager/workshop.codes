@@ -4,7 +4,7 @@ export function bind() {
   const element = document.querySelector("[data-role~='scroll-indicator']")
 
   if (!element) return
-  
+
   element.removeAndAddEventListener("scroll", () => scrollIndicator(element))
   scrollIndicator(element)
 }

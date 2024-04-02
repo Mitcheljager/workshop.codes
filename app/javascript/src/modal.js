@@ -12,13 +12,13 @@ export function bind() {
 }
 
 function showModal(event) {
-  const modal = document.querySelector(`[data-modal="${ this.dataset.target }"]`)
+  const modal = document.querySelector(`[data-modal="${this.dataset.target}"]`)
 
   if (!modal) return
 
   modal.style.display = "flex"
 
-  document.body.style.borderRight = `${ getScrollbarWidth() }px solid transparent`
+  document.body.style.borderRight = `${getScrollbarWidth()}px solid transparent`
   document.body.style.overflowY = "hidden"
 }
 

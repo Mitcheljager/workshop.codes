@@ -22,7 +22,7 @@
     const content = getSaveContent()
     saveToLocalStorage(content, Date.now())
 
-    new FetchRails(`/projects/${ $currentProject.uuid }`, { project: { content } }).post({ method: "put" })
+    new FetchRails(`/projects/${$currentProject.uuid}`, { project: { content } }).post({ method: "put" })
       .then(data => {
         if (!data) throw Error("Create failed")
 
@@ -103,7 +103,7 @@
       {#if dropdownActive}
         <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => dropdownActive = false} class="dropdown__content block w-100 p-1/4" style="width: 200px">
           <p class="mt-0 text-italic text-small text-base">
-            Last saved:<br>
+            Last saved:<br/>
             {new Date($currentProject.updated_at).toLocaleString()}
           </p>
 

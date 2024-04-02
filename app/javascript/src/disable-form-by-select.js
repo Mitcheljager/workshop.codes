@@ -5,7 +5,7 @@ export function bind() {
 }
 
 function updateFormSubmitButton() {
-  const target = document.querySelector(`[data-disable-by-select-target="${ this.value }"]`)
+  const target = document.querySelector(`[data-disable-by-select-target="${this.value}"]`)
   const elements = document.querySelectorAll("[data-disable-by-select-target]")
 
   elements.forEach(element => element.disabled = false)

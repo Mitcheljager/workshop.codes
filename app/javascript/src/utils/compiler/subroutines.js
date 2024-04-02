@@ -5,7 +5,7 @@ export function compileSubroutines(joinedItems) {
 
   return `
 subroutines {
-${ subroutines.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
+${subroutines.map((v, i) => `    ${i}: ${v}`).join("\n")}
 }\n\n`
 }
 

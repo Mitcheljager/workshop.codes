@@ -24,6 +24,6 @@ function setHeight() {
     const parentDistanceFromBottom = Math.max((distanceFromBottom - window.innerHeight) * -1, 0)
     const visibleParentHeight = window.innerHeight - parentDistanceFromBottom
 
-    target.style.maxHeight = `${ Math.min(Math.min(maxHeight, visibleParentHeight), parent.offsetHeight) }px`
+    target.style.maxHeight = `${Math.min(Math.min(maxHeight, visibleParentHeight), parent.offsetHeight)}px`
   })
 }

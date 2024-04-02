@@ -137,7 +137,7 @@ class InitialiseInscrybeMDE {
           statusElement.innerHTML = this.characters
 
           statusElement.classList.toggle("error", this.characters > this.maxLength)
-          if (this.characters > this.maxLength) statusElement.innerHTML += ` / ${ this.maxLength }`
+          if (this.characters > this.maxLength) statusElement.innerHTML += ` / ${this.maxLength}`
         }
       }],
       spellChecker: false,
@@ -177,7 +177,7 @@ class InitialiseInscrybeMDE {
   insertHighlight() {
     const selectedText = this.codemirror.getSelection()
     const text = selectedText || "text"
-    const output = `==${ text }==`
+    const output = `==${text}==`
 
     this.codemirror.replaceSelection(output)
   }
@@ -224,7 +224,7 @@ class InitialiseInscrybeMDE {
         heroElement.innerText = hero
 
         heroElement.addEventListener("click", () => {
-          this.codemirror.replaceSelection(`[hero ${ hero }]`)
+          this.codemirror.replaceSelection(`[hero ${hero}]`)
         })
 
         dropdownElement.append(heroElement)
@@ -259,7 +259,7 @@ class InitialiseInscrybeMDE {
         marker.widgetNode.innerHTML = data
 
         const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
-        marker.lines[0].text = `[block ${ blockId }]`
+        marker.lines[0].text = `[block ${blockId}]`
 
         this.bindBlockEvents(marker)
       })
@@ -439,7 +439,7 @@ class InitialiseInscrybeMDE {
       const resultsElement = button.querySelector("[data-role='results']")
       resultsElement.innerHTML = "<small>Searching...</small>"
 
-      new FetchRails(`/wiki/search/${ event.target.value }.json`).get()
+      new FetchRails(`/wiki/search/${event.target.value}.json`).get()
         .then(data => {
           data = JSON.parse(data)
           resultsElement.innerHTML = ""
@@ -453,12 +453,11 @@ class InitialiseInscrybeMDE {
             const itemElement = document.createElement("a")
             itemElement.classList.add("editor-dropdown__item")
             itemElement.innerText = item.title
-            itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ decodeURIComponent(item.slug) }`) })
+            itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${decodeURIComponent(item.slug)}`) })
 
             const categoryElement = document.createElement("span")
             categoryElement.style = "opacity: .5; font-size: .8em"
             categoryElement.innerText = " " + item.category.title
-
 
             itemElement.append(categoryElement)
             resultsElement.append(itemElement)
@@ -472,7 +471,7 @@ class InitialiseInscrybeMDE {
   insertLink(link = "") {
     const selectedText = this.codemirror.getSelection()
     const text = selectedText || "text"
-    const output = `[${ text }](${ link })`
+    const output = `[${text}](${link})`
 
     this.codemirror.replaceSelection(output)
   }

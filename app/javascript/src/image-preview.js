@@ -7,8 +7,8 @@ export function bind() {
 }
 
 function setImagePreview(event) {
-  const removeFileFlag = document.querySelector(`[data-clear-image-flag="${ this.dataset.target }"]`)
-  const target = document.querySelector(`[data-image-preview="${ this.dataset.target }"]`)
+  const removeFileFlag = document.querySelector(`[data-clear-image-flag="${this.dataset.target}"]`)
+  const target = document.querySelector(`[data-image-preview="${this.dataset.target}"]`)
 
   if (!this.files && !this.files[0]) return
 
@@ -23,9 +23,9 @@ function setImagePreview(event) {
 }
 
 function clearImage(event) {
-  const preview = document.querySelector(`[data-image-preview="${ this.dataset.target }"]`)
-  const field = document.querySelector(`[data-action~="image-preview"][data-target="${ this.dataset.target }"]`)
-  const removeFileFlag = document.querySelector(`[data-clear-image-flag="${ this.dataset.target }"]`)
+  const preview = document.querySelector(`[data-image-preview="${this.dataset.target}"]`)
+  const field = document.querySelector(`[data-action~="image-preview"][data-target="${this.dataset.target}"]`)
+  const removeFileFlag = document.querySelector(`[data-clear-image-flag="${this.dataset.target}"]`)
 
   preview.src = ""
   field.value = ""

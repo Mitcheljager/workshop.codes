@@ -18,7 +18,7 @@ export function evaluateForLoops(joinedItems) {
     // Replace "For.[variable]" with the current index
     let repeatedContent = ""
     for(let i = start; i < end + (inclusive ? step : 0); i += step) {
-      repeatedContent += content.replaceAll(`For.${ variable || "i" }`, i)
+      repeatedContent += content.replaceAll(`For.${variable || "i"}`, i)
     }
 
     joinedItems = replaceBetween(joinedItems, repeatedContent, match.index, closingBracketIndex + 1)

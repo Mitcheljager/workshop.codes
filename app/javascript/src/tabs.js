@@ -14,7 +14,7 @@ function setTab(event) {
   const target = this.dataset.target
   const parentElement = this.closest("[data-role~='tabs']")
 
-  const tabElement = this.classList.contains("tabs__item") ? this : document.querySelector(`.tabs__item[data-target~='${ target }']`)
+  const tabElement = this.classList.contains("tabs__item") ? this : document.querySelector(`.tabs__item[data-target~='${target}']`)
 
   setActiveTab(tabElement, parentElement)
   revealTab(target, parentElement, scroll)
@@ -22,7 +22,7 @@ function setTab(event) {
 }
 
 function revealTab(target, parentElement, scroll) {
-  const targetElement = document.querySelector(`[data-tab~='${ target }']`)
+  const targetElement = document.querySelector(`[data-tab~='${target}']`)
   const tabElements = parentElement.querySelectorAll(".tabs-content")
 
   const activeElement = Array.from(tabElements).find(element => {

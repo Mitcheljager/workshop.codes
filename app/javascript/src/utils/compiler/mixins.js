@@ -29,7 +29,7 @@ export function extractAndInsertMixins(joinedItems) {
     const name = content.match(/(?<=@mixin\s)(\w+)/)?.[0]
 
     if (!name) throw new Error("Mixin is missing a name")
-    if (mixins[name]) throw new Error(`Mixin "${ name }" is already defined`)
+    if (mixins[name]) throw new Error(`Mixin "${name}" is already defined`)
 
     const firstOpenBracket = content.indexOf("{")
     const firstOpenParen = content.indexOf("(")
@@ -48,7 +48,7 @@ export function extractAndInsertMixins(joinedItems) {
 
     const mixin = content.slice(firstOpenBracket + 1, closing)?.trim()
 
-    if (mixin.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
+    if (mixin.includes(`@include ${name}`)) throw new Error("Can not include a mixin in itself")
 
     mixins[name] = {
       content: mixin,
@@ -72,7 +72,7 @@ export function extractAndInsertMixins(joinedItems) {
     const mixin = mixins[name]
     const parameterObjectGiven = getFirstParameterObject(full)?.given
 
-    if (!mixin) throw new Error(`Included a mixin that was not specified: "${ name }"`)
+    if (!mixin) throw new Error(`Included a mixin that was not specified: "${name}"`)
 
     const argumentsOpeningParen = full.indexOf("(")
     const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)

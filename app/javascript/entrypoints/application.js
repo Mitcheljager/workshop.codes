@@ -42,7 +42,7 @@ import * as timeago from "../src/timeago"
 import * as toggleContent from "../src/toggle-content"
 import * as wikiSearch from "../src/wiki/search"
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("turbolinks:load", () => {
   copy.bind()
   disableFormBySelect.bind()
   dismissParent.bind()
@@ -81,7 +81,7 @@ document.addEventListener("turbolinks:load", function() {
   scrollIntoViewOnLoad.initialize()
 })
 
-document.addEventListener("turbolinks:before-cache", function() {
+document.addEventListener("turbolinks:before-cache", () => {
   carouselCards.destroy()
   dismissParent.destroy()
   numPlayersSlider.destroy()

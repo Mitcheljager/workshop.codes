@@ -16,7 +16,7 @@
   async function handleAutoCompleteRequest(value) {
     if (!value) return []
 
-    return new FetchRails(`/code/${ value }`).get({
+    return new FetchRails(`/code/${value}`).get({
       returnResponse: true,
       parameters: {
         headers: { "Accept": "application/json" }
@@ -26,7 +26,7 @@
         const json = await response.json()
         return json.map(post => postToResult(post))
       } else {
-        throw new Error(`${ response.status } ${ response.statusText }`)
+        throw new Error(`${response.status} ${response.statusText}`)
       }
     })
   }
@@ -34,12 +34,10 @@
   function postToResult(post) {
     return {
       label: post.code,
-      html: `<strong>${ post.code.toUpperCase() }</strong> - ${ post.title } by ${ post.user.username }`
+      html: `<strong>${post.code.toUpperCase()}</strong> - ${post.title} by ${post.user.username}`
     }
   }
 </script>
-
-
 
 <div class="form-group mt-1/4">
   <div class="switch-checkbox">
@@ -48,7 +46,7 @@
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
-      bind:checked={ showDerivative }>
+      bind:checked={ showDerivative }/>
 
     <label
       class="switch-checkbox__label"

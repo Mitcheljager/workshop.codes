@@ -81,7 +81,7 @@ export const subroutinesMap = derived(flatItems, debounced($flatItems => {
 export const mixinsMap = derived(flatItems, debounced($flatItems => {
   const mixins = getMixins($flatItems)
 
-  return mixins.map(v => ({ detail: "Mixin", label: `@include ${ v }()`, type: "variable" }))
+  return mixins.map(v => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const workshopConstants = writable({})

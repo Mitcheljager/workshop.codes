@@ -113,7 +113,7 @@ export default class InscrybeInsertImage {
         clearInterval(interval)
 
         if (uploader.progress == 100) {
-          new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }`)
+          new FetchRails(`/active_storage_blob_variant_url/${uploader.blob.key}`)
             .get().then(data => this.replaceMarkerWithImage(randomId, data))
             .catch(error => alert(error))
         }
@@ -139,7 +139,7 @@ export default class InscrybeInsertImage {
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)
-    this.editor.replaceSelection(`![](${ url })`)
+    this.editor.replaceSelection(`![](${url})`)
 
     this.editor.setSelection(cursorPosition, cursorPosition)
 

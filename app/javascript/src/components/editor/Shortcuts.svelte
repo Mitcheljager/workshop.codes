@@ -44,7 +44,7 @@
       {#each shortcuts as { keys, text }}
         <div class="shortcut">
           <div>
-            {@html keys.map(key => `<kbd>${ key }</kbd>`).join(" + ")}
+            {@html keys.map(key => `<kbd>${key}</kbd>`).join(" + ")}
           </div>
           { text }
         </div>

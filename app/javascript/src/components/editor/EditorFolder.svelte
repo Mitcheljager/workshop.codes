@@ -15,7 +15,7 @@
   onMount(setInitialState)
 
   function setInitialState() {
-    const state = localStorage.getItem(`folder_expanded_${ item.id }`) == "true" ? true : false
+    const state = localStorage.getItem(`folder_expanded_${item.id}`) == "true" ? true : false
 
     if (state) toggleFolderState(item, state, false)
   }

@@ -20,7 +20,6 @@
   export let maxSizeMB = 2
 
   let listElement
-  let sortable
   let active = false
   let previewImageUrl = ""
 
@@ -28,8 +27,8 @@
   $: updateOrder(images)
 
   onMount(() => {
-    input = document.querySelector(`[type="file"][name="${ input }"]`)
-    orderInput = document.querySelector(`[name="${ orderInput }"]`)
+    input = document.querySelector(`[type="file"][name="${input}"]`)
+    orderInput = document.querySelector(`[name="${orderInput}"]`)
     createSortable()
   })
 
@@ -42,7 +41,7 @@
   }, 500)
 
   function createSortable() {
-    sortable = new Sortable(listElement, {
+    new Sortable(listElement, {
       animation: 100,
       store: {
         set: updateOrder
@@ -72,7 +71,7 @@
       }
 
       if (!await isAcceptableSize(file)) {
-        addAlertError(`Image "${ file.name }" is too large. Image exceeds ${ maxDimensions }x${ maxDimensions } or ${ maxSizeMB }MB`)
+        addAlertError(`Image "${file.name}" is too large. Image exceeds ${maxDimensions}x${maxDimensions} or ${maxSizeMB}MB`)
         return
       }
 
@@ -97,8 +96,8 @@
 
         try {
           const [thumbnail, preview] = await Promise.all([
-            new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=thumbnail`).get(),
-            new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=full`).get()
+            new FetchRails(`/active_storage_blob_variant_url/${uploader.blob.key}?type=thumbnail`).get(),
+            new FetchRails(`/active_storage_blob_variant_url/${uploader.blob.key}?type=full`).get()
           ])
 
           setImage(randomId, uploader.blob.id, thumbnail, preview)

@@ -54,7 +54,7 @@ function createRules() {
 }
 
 function goToRule(event) {
-  const target = document.querySelector(`.diff li:nth-child(${ event.target.value })`)
+  const target = document.querySelector(`.diff li:nth-child(${event.target.value})`)
   const differenceHeaderElement = document.querySelector("[data-role='difference-header']")
 
   const offset = target.getBoundingClientRect().top + window.scrollY - differenceHeaderElement.offsetHeight

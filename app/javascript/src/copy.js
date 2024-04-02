@@ -12,7 +12,7 @@ export default function copyToClipboard(event, optionalContent = undefined) {
   event.preventDefault()
 
   const target = eventTarget.dataset.target
-  const targetElement = document.querySelector(`[data-copy="${ target }"]`)
+  const targetElement = document.querySelector(`[data-copy="${target}"]`)
 
   if (!targetElement) return
 

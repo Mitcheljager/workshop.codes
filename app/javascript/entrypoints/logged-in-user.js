@@ -26,7 +26,7 @@ import * as inscrybMde from "../src/inscryb-mde"
 import * as linkedInput from "../src/linked-input"
 import * as setCssVariable from "../src/set-css-variable"
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("turbolinks:load", () => {
   const svelteComponents = {
     Alerts: Alerts,
     Dropzone: Dropzone,
@@ -57,7 +57,7 @@ document.addEventListener("turbolinks:load", function() {
   inscrybMde.render()
 })
 
-document.addEventListener("turbolinks:before-cache", function() {
+document.addEventListener("turbolinks:before-cache", () => {
   inscrybMde.destroy()
 
   const svelteComponents = document.querySelectorAll("[data-svelte-component]")
