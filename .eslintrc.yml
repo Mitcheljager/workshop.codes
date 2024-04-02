@@ -48,3 +48,5 @@ rules:
   template-curly-spacing:
     - error
     - always
+  svelte/no-at-html-tags:
+    - off

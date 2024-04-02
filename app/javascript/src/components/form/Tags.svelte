@@ -201,7 +201,7 @@
       { :then autoCompleteValues }
         { #if autoCompleteValues.length }
           { #each autoCompleteValues.slice(0, 5) as result, index }
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
             <li
               class="list-element tag-item"
               tabindex="-1"
