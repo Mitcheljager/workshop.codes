@@ -9,7 +9,6 @@ export default class {
       return
     }
 
-
     const prefetcher = new Prefetcher(window.Turbolinks.controller)
     prefetcher.start(delay)
   }
@@ -121,7 +120,6 @@ class Prefetcher {
   prefetching(url) {
     return !!this.fetchers[url]
   }
-
 
   isAction(action) {
     return action == "advance" || action == "replace" || action == "restore"

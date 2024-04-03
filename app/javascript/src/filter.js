@@ -58,14 +58,14 @@ function buildFilterPath(event) {
     "sort": filterValue("sort", parent)
   }
 
-  buildPath = Object.fromEntries(Object.entries(buildPath).filter(([k, v]) => v != ""))
-  buildPath = Object.entries(buildPath).map(([k, v]) => `${ k }=${ v }`).join("&")
+  buildPath = Object.fromEntries(Object.entries(buildPath).filter(([_, v]) => v != ""))
+  buildPath = Object.entries(buildPath).map(([k, v]) => `${k}=${v}`).join("&")
 
-  window.location = `/search?${ buildPath }`
+  window.location = `/search?${buildPath}`
 }
 
 function filterValue(type, parent) {
-  const element = parent.querySelector(`[data-filter-type='${ type }']`)
+  const element = parent.querySelector(`[data-filter-type='${type}']`)
   const value = element ? (element.dataset.value || "") : ""
 
   return value

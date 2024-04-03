@@ -47,7 +47,7 @@
       <button on:click={withCloseDropdown(() => createTemplate("Settings", "Settings"))} class="dropdown__item">Settings</button>
       <button on:click={withCloseDropdown(() => createTemplate("Mixin", "Mixin"))} class="dropdown__item">Mixin</button>
       <button on:click={withCloseDropdown(() => createTemplate("Empty", "New item"))} class="dropdown__item">Empty</button>
-      <hr>
+      <hr/>
       <button on:click={withCloseDropdown(() => createItem("New folder", "", "folder"))} class="dropdown__item">Folder</button>
     </div>
   {/if}

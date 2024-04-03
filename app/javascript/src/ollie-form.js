@@ -25,7 +25,7 @@ function setPupilPosition({ target }, element) {
   const xOffset = -6 + (valueLength / (max / 6)) * 2
 
   const pupils = getOlliePart(element, "pupils")
-  pupils.style.transform = `translateX(${ xOffset }%) translateY(8%)`
+  pupils.style.transform = `translateX(${xOffset}%) translateY(8%)`
 }
 
 function resetPupilPosition(element) {
@@ -34,7 +34,7 @@ function resetPupilPosition(element) {
 }
 
 function getOlliePart(element, part) {
-  return element.querySelector(`[data-ollie="${ part }"]`)
+  return element.querySelector(`[data-ollie="${part}"]`)
 }
 
 function setOllieBody(element, variant = "base") {

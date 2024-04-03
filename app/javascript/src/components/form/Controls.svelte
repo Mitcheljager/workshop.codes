@@ -8,7 +8,6 @@
   export let name
 
   let listElement
-  let sortable
 
   const values = [
     ["None", ""],
@@ -31,7 +30,7 @@
   onMount(createSortable)
 
   function createSortable() {
-    sortable = Sortable.create(listElement, {
+    Sortable.create(listElement, {
       handle: "[data-role='controls-item-move-handle']",
       animation: 100,
       store: {
@@ -73,52 +72,50 @@
   }
 </script>
 
-
-
-<input type="hidden" { value } { name }>
+<input type="hidden" {value} {name}/>
 
 <div class="well well--dark block">
-  <div bind:this={ listElement }>
-    { #each controls as control, index (control) }
+  <div bind:this={listElement}>
+    {#each controls as control, index (control)}
       <div
         class="controls-form-item mb-1/4"
-        data-id={ index }
+        data-id={index}
         transition:fade={{ duration: 200 }}
         animate:flip={{ duration: 200 }}>
 
-        { #each Array(3) as _, i }
+        {#each Array(3) as _, i}
           <span class="controls-form-item__button">
             <div>
               <select
-                bind:value={ control.buttons[i] }
-                name="controls-items-button-{ i }"
+                bind:value={control.buttons[i]}
+                name="controls-items-button-{i}"
                 class="form-select">
 
-                { #each values as [label, value] }
-                  <option { value }>{ label }</option>
-                { /each }
+                {#each values as [label, value]}
+                  <option {value}>{label}</option>
+                {/each}
               </select>
 
-              { #if control?.buttons?.[i] == "Custom" || typeof control?.buttons?.[i] === "object" }
+              {#if control?.buttons?.[i] == "Custom" || typeof control?.buttons?.[i] === "object"}
                 <input
-                  value={ control.buttons[i]["Custom"] || "" }
-                  on:change={ () => setCustom(index, i) }
+                  value={control.buttons[i]["Custom"] || ""}
+                  on:change={() => setCustom(index, i)}
                   type="text"
-                  name="controls-item-button-{ i }"
+                  name="controls-item-button-{i}"
                   class="form-input controls-form-item__custom"
                   maxlength=15 />
-              { /if }
+              {/if}
             </div>
 
-            { #if i < 2 }
+            {#if i < 2}
               <span>+</span>
-            { /if }
+            {/if}
           </span>
-        { /each }
+        {/each}
 
         <div class="controls-form-item__description">
           <input
-            bind:value={ control.description }
+            bind:value={control.description}
             type="text"
             name="controls-item-description"
             class="form-input pt-1/4 pb-1/4 md:ml-1/4"
@@ -126,11 +123,11 @@
             maxlength=500 />
 
           <button href="#" data-role="controls-item-move-handle" on:click|preventDefault>⇅</button>
-          <button on:click|preventDefault={ () => remove(index) }>🗑️</button>
+          <button on:click|preventDefault={() => remove(index)}>🗑️</button>
         </div>
       </div>
-    { /each }
+    {/each}
   </div>
 
-  <button class="button button--secondary" on:click|preventDefault={ add }>+ Add line</button>
+  <button class="button button--secondary" on:click|preventDefault={add}>+ Add line</button>
 </div>

@@ -35,12 +35,12 @@ function setSticky(element, offset) {
   const absolute = element.dataset.stickyAbsolute
 
   const placeholderElement = document.createElement("div")
-  if (absolute === undefined) placeholderElement.style.height = `${ element.offsetHeight }px`
-  placeholderElement.style.width = `${ element.offsetWidth }px`
+  if (absolute === undefined) placeholderElement.style.height = `${element.offsetHeight}px`
+  placeholderElement.style.width = `${element.offsetWidth}px`
   placeholderElement.dataset.role = "sticky-placeholder"
   element.insertAdjacentElement("beforebegin", placeholderElement)
 
-  element.style.width = `${ element.offsetWidth }px`
+  element.style.width = `${element.offsetWidth}px`
   element.style.position = "fixed"
   element.style.top = offset + "px"
   element.classList.add("is-sticky")

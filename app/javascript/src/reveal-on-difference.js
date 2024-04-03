@@ -4,7 +4,7 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("input", toggleRevealOnDifference))
 }
 
-function toggleRevealOnDifference(event) {
+function toggleRevealOnDifference() {
   const value = this.value
   const original = this.dataset.original
   const different = value !== original && original !== undefined

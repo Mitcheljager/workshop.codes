@@ -70,7 +70,7 @@ export default class InscrybeInsertVideo {
         clearInterval(interval)
 
         if (uploader.progress == 100) {
-          new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=video`)
+          new FetchRails(`/active_storage_blob_variant_url/${uploader.blob.key}?type=video`)
             .get().then(data => this.replaceMarkerWithVideo(randomId, data))
             .catch(error => alert(error))
         }
@@ -97,7 +97,7 @@ export default class InscrybeInsertVideo {
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)
-    this.editor.replaceSelection(`[video ${ url }${ autoplay ? " autoplay" : "" }]`)
+    this.editor.replaceSelection(`[video ${url}${autoplay ? " autoplay" : ""}]`)
 
     this.editor.setSelection(cursorPosition, cursorPosition)
 

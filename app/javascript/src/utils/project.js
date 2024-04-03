@@ -82,7 +82,7 @@ export async function fetchProject(uuid) {
       items.set([])
       currentItem.set({})
       console.error(error)
-      alert(`Something went wrong while loading, please try again. ${ error }`)
+      alert(`Something went wrong while loading, please try again. ${error}`)
     })
 }
 
@@ -113,7 +113,7 @@ export function updateProject(uuid, params) {
 }
 
 export async function renameCurrentProject(value) {
-  return await new FetchRails(`/projects/${ get(currentProjectUUID) }`).request("PATCH", { parameters: { body: JSON.stringify({ project: { title: value } }) } })
+  return await new FetchRails(`/projects/${get(currentProjectUUID)}`).request("PATCH", { parameters: { body: JSON.stringify({ project: { title: value } }) } })
     .then(data => {
       if (!data) throw Error("Project rename failed")
 
@@ -121,7 +121,7 @@ export async function renameCurrentProject(value) {
         title: value
       })
 
-      addAlert(`Project renamed to "${ get(currentProject).title }"`)
+      addAlert(`Project renamed to "${get(currentProject).title}"`)
 
       return data
     })
@@ -132,7 +132,7 @@ export async function renameCurrentProject(value) {
 }
 
 export async function destroyCurrentProject() {
-  return await new FetchRails(`/projects/${ get(currentProjectUUID) }`).post({ method: "delete" })
+  return await new FetchRails(`/projects/${get(currentProjectUUID)}`).post({ method: "delete" })
     .then(data => {
       if (!data) throw Error("Destroying current project failed")
 

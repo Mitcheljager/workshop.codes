@@ -2,7 +2,7 @@
   import Bugsnag from "@bugsnag/js"
   import * as timeago from "timeago.js"
   import { fly } from "svelte/transition"
-  import { recoveredProject, currentProject, currentItem, items } from "../../stores/editor"
+  import { recoveredProject, currentProject, currentItem } from "../../stores/editor"
   import { updateProjectContent } from "../../utils/project"
 
   function recover() {
@@ -26,14 +26,14 @@
   <p>
     The <strong>fetched</strong> project was last saved
     <em>
-      { timeago.format($currentProject?.updated_at || "") } <br>
-      <small class="text-dark">{ toDate($currentProject?.updated_at) }</small>
-    </em> <br>
+      {timeago.format($currentProject?.updated_at || "")} <br />
+      <small class="text-dark">{toDate($currentProject?.updated_at)}</small>
+    </em> <br />
 
     The <strong>local</strong> project was last saved
     <em>
-      { timeago.format($recoveredProject?.updated_at || "") } <br>
-      <small class="text-dark">{ toDate($recoveredProject?.updated_at) }</small>
+      {timeago.format($recoveredProject?.updated_at || "")} <br />
+      <small class="text-dark">{toDate($recoveredProject?.updated_at)}</small>
     </em>
   </p>
 

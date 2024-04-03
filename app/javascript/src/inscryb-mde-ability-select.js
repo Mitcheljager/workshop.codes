@@ -59,7 +59,7 @@ function buildItems(abilitiesElement, codemirror, abilities) {
     abilityElement.prepend(iconElement)
 
     abilityElement.addEventListener("click", () => {
-      codemirror.replaceSelection(`[ability ${ key }]`)
+      codemirror.replaceSelection(`[ability ${key}]`)
     })
 
     abilitiesElement.append(abilityElement)

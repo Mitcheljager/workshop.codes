@@ -77,7 +77,7 @@
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
-      bind:checked={replaceScript}>
+      bind:checked={replaceScript}/>
 
     <label
       class="switch-checkbox__label"

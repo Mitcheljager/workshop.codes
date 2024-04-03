@@ -39,10 +39,10 @@
       return i.content
         .split("\n")
         .map((line, lineNumber) => {
-          const linemarker = `[linemarker]${ i.id }|${ lineNumber + 1 }[/linemarker]`
+          const linemarker = `[linemarker]${i.id}|${lineNumber + 1}[/linemarker]`
           return line.startsWith("settings") // workaround for compiler shenanigans
-            ? `${ line }${ linemarker }`
-            : `${ linemarker }${ line }`
+            ? `${line}${linemarker}`
+            : `${linemarker}${line}`
         })
         .join("\n")
     }).join("\n\n")
@@ -129,7 +129,7 @@
 
 <Modal maxWidth="600px">
   <p class="mt-0">
-    <strong class="text-lightest">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br>
+    <strong class="text-lightest">Enter the line number you received from an in-game error</strong> and this tool will attempt to find the matching line in the correct file.<br />
     <em>Success not guaranteed.</em>
   </p>
 
@@ -155,7 +155,7 @@
       snippetHighlightedLineIndex={foundCompiled.lineNumber} />
 
     <p class="mb-1/8">
-      This is what the corresponding line looks like in your code: <br>
+      This is what the corresponding line looks like in your code: <br />
       File name: <strong class="text-lightest">{foundItem.item?.name}</strong>.
     </p>
     <ExpandableSnippet

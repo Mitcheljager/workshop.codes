@@ -28,7 +28,7 @@ function getPartial(event, element) {
 
   let _this = element || event.target
   if (!_this.dataset.url) _this = event.target.closest("[data-action~='get-partial']")
-  const targetElement = document.querySelector(`[data-partial="${ _this.dataset.target }"]`)
+  const targetElement = document.querySelector(`[data-partial="${_this.dataset.target}"]`)
   const url = _this.dataset.url
 
   if (targetElement.dataset.loaded == "true") return
@@ -54,7 +54,7 @@ function getPartial(event, element) {
     })
     .catch(error => {
       console.error(error)
-      targetElement.innerHTML = `<em>Something went wrong when loading, please try again. (${ error })</em>`
+      targetElement.innerHTML = `<em>Something went wrong when loading, please try again. (${error})</em>`
     })
     .finally(() => {
       targetElement.dataset.loaded = "true"

@@ -35,8 +35,8 @@ export function evaluateEachLoops(joinedItems) {
     }
 
     const contentToRepeat = joinedItems.substring(openingBracketIndex + 1, closingBracketIndex)
-    const indexVarRegex = new RegExp(`Each.${ indexVar || "i" }(?=\\W|$)`, "g")
-    const valueVarRegex = new RegExp(`Each.${ valueVar }(?=\\W|$)`, "g")
+    const indexVarRegex = new RegExp(`Each.${indexVar || "i"}(?=\\W|$)`, "g")
+    const valueVarRegex = new RegExp(`Each.${valueVar}(?=\\W|$)`, "g")
 
     const finalContent = Object.entries(iterable).reduce((current, [index, value]) => {
       return current + contentToRepeat

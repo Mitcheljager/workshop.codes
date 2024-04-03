@@ -35,7 +35,7 @@
 
   function highlightString(string, from) {
     const subString = string.substring(from, from + value.length)
-    return replaceBetween(string,  `<mark>${ subString }</mark>`, from, from + value.length)
+    return replaceBetween(string,  `<mark>${subString}</mark>`, from, from + value.length)
   }
 
   function getParentsString(id) {

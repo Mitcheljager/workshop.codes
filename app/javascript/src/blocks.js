@@ -58,8 +58,8 @@ function renderSvelteComponents() {
 export function insertBlockTemplate(event) {
   event.preventDefault()
 
-  const template = document.getElementById(`${ this.dataset.template }`).content.cloneNode(true)
-  const targetElement = document.querySelector(`[data-template-target="${ this.dataset.target }"]`)
+  const template = document.getElementById(`${this.dataset.template}`).content.cloneNode(true)
+  const targetElement = document.querySelector(`[data-template-target="${this.dataset.target}"]`)
 
   targetElement.append(template)
 }

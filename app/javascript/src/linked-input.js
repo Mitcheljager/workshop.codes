@@ -11,7 +11,7 @@ export function bind() {
 function updateLinkedInputs(event) {
   const key = event.target.dataset.key
 
-  const elements = document.querySelectorAll(`[data-key="${ key }"]`)
+  const elements = document.querySelectorAll(`[data-key="${key}"]`)
 
   elements.forEach(element => {
     element.value = event.target.value

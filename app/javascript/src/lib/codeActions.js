@@ -1,4 +1,4 @@
-import { Decoration, ViewPlugin, ViewUpdate, WidgetType } from "@codemirror/view"
+import { Decoration, ViewPlugin, WidgetType } from "@codemirror/view"
 
 /**
  * @typedef CodeAction

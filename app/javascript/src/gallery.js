@@ -3,8 +3,8 @@ export function bind() {
   elements.forEach(element => element.removeAndAddEventListener("click", setGallery))
 }
 
-function setGallery(event) {
-  const target = document.querySelector(`[data-gallery="${ this.dataset.target }"]`)
+function setGallery() {
+  const target = document.querySelector(`[data-gallery="${this.dataset.target}"]`)
 
   if (target) {
     target.src = ""

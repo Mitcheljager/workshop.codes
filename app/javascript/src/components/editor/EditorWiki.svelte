@@ -24,7 +24,7 @@
   }
 
   function jumpToSection(slug) {
-    contentElement.querySelector(`#${ slug }`)?.scrollIntoView()
+    contentElement.querySelector(`#${slug}`)?.scrollIntoView()
   }
 
   export function fetchArticle(baseUrl, single = false) {
@@ -32,7 +32,7 @@
     progressBar.setValue(0)
     progressBar.show()
 
-    new FetchRails(`${ baseUrl }.json?parse_markdown=true${ single ? "&single=true" : "" }`).get()
+    new FetchRails(`${baseUrl}.json?parse_markdown=true${single ? "&single=true" : ""}`).get()
       .then(data => {
         if (!data) throw Error("Error while loading wiki article")
 
@@ -57,7 +57,7 @@
   <div class="mt-1/2" on:click={click}>
     <div class="text-dark mb-1/8">{article.category.title}</div>
     <h2 class="mt-0 mb-1/8">
-      {article.title} <a href={`/wiki/articles/${ article.slug }`} target="_blank"><ExternalLinkIcon /></a>
+      {article.title} <a href={`/wiki/articles/${article.slug}`} target="_blank"><ExternalLinkIcon /></a>
     </h2>
     {#if article.subtitle}
       <h5 class="mt-0">{article.subtitle}</h5>

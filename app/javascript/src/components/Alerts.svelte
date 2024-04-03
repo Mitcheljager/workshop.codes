@@ -8,7 +8,7 @@
 
   let alerts = []
 
-  $: if (initialAlerts) JSON.parse(initialAlerts)?.forEach(([type, text]) => add({ text, type: `alert--${ type }` }))
+  $: if (initialAlerts) JSON.parse(initialAlerts)?.forEach(([type, text]) => add({ text, type: `alert--${type}` }))
 
   function add(alert) {
     alerts = [...alerts, { ...alert, key: Math.random() }]

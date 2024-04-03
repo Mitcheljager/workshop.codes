@@ -38,7 +38,7 @@
   $: if (data) $completionsMap = parseKeywords($settings)
 
   // Updates the tab title
-  $: document.title = $currentProject?.title !== undefined ? `${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
+  $: document.title = $currentProject?.title !== undefined ? `${$currentProject.title} | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 
   onMount(async() => {
     loading = true
@@ -100,11 +100,11 @@
       if (!params.args_length) return params
 
       // Add detail arguments in autocomplete results
-      const detail = v.args.map(a => `${ toCapitalize(a.name) }`)
+      const detail = v.args.map(a => `${toCapitalize(a.name)}`)
       const joinedDetail = detail.join(", ")
 
       params.detail_full = joinedDetail
-      params.detail = `(${ joinedDetail.slice(0, 30) }${ joinedDetail.length > 30 ? "..." : "" })`
+      params.detail = `(${joinedDetail.slice(0, 30)}${joinedDetail.length > 30 ? "..." : ""})`
 
       // Add apply values when selecting autocomplete, filling in default args
       const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
@@ -130,7 +130,7 @@
         // If useParameterObject is enabled add the parameter name to the apply.
         // It's important this happens after setting the parameter_defaults param, as that uses
         // a different format and we don't want it to use the parameter object format.
-        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
+        if (useParameterObject) return `${useNewlines ? "\n\t" : ""} ${name}: ${defaultValue}`
         return defaultValue
       })
 
@@ -138,9 +138,9 @@
       // The value we set is dependent on useParameterObjects and useNewlines.
       params.apply = useParameterObject ?
         useNewlines ?
-          `${ v["en-US"] }({ ${ applyValues.join(", ") }\n})` :
-          `${ v["en-US"] }({ ${ applyValues.join(", ") } })` :
-        `${ v["en-US"] }(${ applyValues.join(", ") })`
+          `${v["en-US"]}({ ${applyValues.join(", ")}\n})` :
+          `${v["en-US"]}({ ${applyValues.join(", ")} })` :
+        `${v["en-US"]}(${applyValues.join(", ")})`
 
       // Add arguments to info box
       params.info += "\n\nArguments: "
@@ -168,7 +168,7 @@
         return JSON.parse(data)
       })
       .catch(error => {
-        alert(`Something went wrong while loading, please try again. ${ error }`)
+        alert(`Something went wrong while loading, please try again. ${error}`)
       })
   }
 
@@ -182,7 +182,7 @@
         return JSON.parse(data)
       })
       .catch(error => {
-        alert(`Something went wrong while loading, please try again. ${ error }`)
+        alert(`Something went wrong while loading, please try again. ${error}`)
       })
   }
 </script>
@@ -233,7 +233,7 @@
         There could be more elegant solutions that use the CodeMirror API to update extensions,
         but this is the far more simple and readable solution. -->
         {#key $settings["word-wrap"]}
-          <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
+          <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${detail}`, true)} />
         {/key}
 
         {#if isCurrentItemInherentlyHidden}
@@ -268,7 +268,7 @@
     </div>
   {:else if loading}
     <div class="fullscreen-overlay">
-      <div class="spinner"></div>
+      <div class="spinner"/>
     </div>
   {:else}
     <Empty />

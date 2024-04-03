@@ -65,7 +65,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
             changes: {
               from: fileWideParenFrom,
               to: fileWideParenTo,
-              insert: `(${ argumentList })`
+              insert: `(${argumentList})`
             }
           })
         )
@@ -90,7 +90,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
 
         parameterObject += args
           .map((value, index) => {
-            const keyValue = `${ completion.parameter_keys[index] }: ${ value.trim() }`
+            const keyValue = `${completion.parameter_keys[index]}: ${value.trim()}`
             return (isMultiLine ? (indent + "\t") : "") + keyValue
           })
           .join(",\n")
@@ -100,13 +100,12 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
 
         parameterObject += "}"
 
-
         view.dispatch(
           view.state.update({
             changes: {
               from: fileWideParenFrom,
               to: fileWideParenTo,
-              insert: `(${ parameterObject })`
+              insert: `(${parameterObject})`
             }
           })
         )

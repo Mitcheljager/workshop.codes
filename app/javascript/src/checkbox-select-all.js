@@ -4,7 +4,7 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("click", toggleCheckboxes))
 }
 
-function toggleCheckboxes(event) {
+function toggleCheckboxes() {
   const parent = this.closest("[data-checkbox-group]")
 
   const checkboxes = parent.querySelectorAll("input[type='checkbox']")

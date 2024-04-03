@@ -4,9 +4,9 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("input", toggleRevealBySelect))
 }
 
-function toggleRevealBySelect(event) {
+function toggleRevealBySelect() {
   const parent = this.closest("[data-reveal-by-select-parent]")
-  const target = parent.querySelector(`[data-reveal-by-select-target="${ this.value }"]`)
+  const target = parent.querySelector(`[data-reveal-by-select-target="${this.value}"]`)
   const elements = parent.querySelectorAll("[data-reveal-by-select-target]")
 
   elements.forEach(element => element.classList.add("visibility-hidden"))

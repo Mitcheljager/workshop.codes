@@ -10,7 +10,7 @@ export function bind() {
   element.addEventListener("input", searchWiki)
 }
 
-const searchWiki = debounce((event) => {
+const searchWiki = debounce(() => {
   const element = document.querySelector("[data-role='wiki-search']")
   if (!element.value) return
 
@@ -38,7 +38,7 @@ function setWikiSearchResults(data) {
     const itemElement = document.createElement("a")
     itemElement.classList.add("search__item")
     itemElement.innerText = item.title
-    itemElement.href = `/wiki/articles/${ decodeURIComponent(item.slug) }`
+    itemElement.href = `/wiki/articles/${decodeURIComponent(item.slug)}`
 
     const categoryElement = document.createElement("span")
     categoryElement.classList.add("search__item-category")
