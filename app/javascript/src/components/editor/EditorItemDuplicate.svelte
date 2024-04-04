@@ -1,5 +1,5 @@
 <script>
-  import { duplicateItem } from "../../utils/editor"
+  import { duplicateItem } from "@utils/editor"
 
   export let item
 

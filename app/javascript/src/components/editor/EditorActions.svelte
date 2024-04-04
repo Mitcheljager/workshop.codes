@@ -1,13 +1,13 @@
 <script>
   import { fly } from "svelte/transition"
-  import { currentProject, isSignedIn, isMobile, currentProjectUUID, modal } from "../../stores/editor"
-  import { Modal } from "../../constants/Modal"
-  import { outsideClick } from "../actions/outsideClick"
-  import Compiler from "./Compiler.svelte"
-  import Settings from "./Settings.svelte"
-  import Shortcuts from "./Shortcuts.svelte"
-  import Save from "./Save.svelte"
-  import ThreeDotMenu from "../icon/ThreeDotMenu.svelte"
+  import { currentProject, isSignedIn, isMobile, currentProjectUUID, modal } from "@stores/editor"
+  import { Modal } from "@constants/Modal"
+  import { outsideClick } from "@components/actions/outsideClick"
+  import Compiler from "@components/editor/Compiler.svelte"
+  import Settings from "@components/editor/Settings.svelte"
+  import Shortcuts from "@components/editor/Shortcuts.svelte"
+  import Save from "@components/editor/Save.svelte"
+  import ThreeDotMenu from "@components/icon/ThreeDotMenu.svelte"
 
   let mobileDropdown
   let showMobileDropdown = false

@@ -1,5 +1,5 @@
-import { getClosingBracket, replaceBetween, splitArgumentsString } from "../parse"
-import { getFirstParameterObject } from "@src/parameterObjects"
+import { getClosingBracket, replaceBetween, splitArgumentsString } from "@utils/parse"
+import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 
 export function getMixins(joinedItems) {
   let mixins = joinedItems.match(/(?<=@mixin\s)[^\s\(]+/g)

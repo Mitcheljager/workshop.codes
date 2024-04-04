@@ -1,5 +1,5 @@
 import { foldService } from "@codemirror/language"
-import { getClosingBracket } from "../utils/parse"
+import { getClosingBracket } from "@utils/parse"
 
 /**
  * Returns fold out for curly brackets. Returns the values between the brackets, leaving the brackets in place.

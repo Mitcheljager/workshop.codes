@@ -2,10 +2,10 @@
   import { onMount } from "svelte"
   import * as timeago from "timeago.js"
 
-  import FetchRails from "../fetch-rails"
-  import { notifications, notificationsCount } from "../stores/notifications"
+  import FetchRails from "@src/fetch-rails"
+  import { notifications, notificationsCount } from "@stores/notifications"
 
-  import Bell from "./icon/Bell.svelte"
+  import Bell from "@components/icon/Bell.svelte"
 
   export let viewAllPath
 

@@ -1,6 +1,6 @@
 <script>
-  import { modal } from "../../../stores/editor"
-  import { escapeable } from "../../actions/escapeable"
+  import { modal } from "@stores/editor"
+  import { escapeable } from "@components/actions/escapeable"
   import { fade } from "svelte/transition"
 
   export let align = "top"

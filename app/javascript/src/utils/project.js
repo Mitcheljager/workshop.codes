@@ -1,8 +1,8 @@
 
-import FetchRails from "../fetch-rails"
-import { addAlert } from "../lib/alerts"
-import { projects, currentProjectUUID, currentProject, recoveredProject, items, currentItem, isSignedIn } from "../stores/editor"
-import { translationKeys, defaultLanguage, selectedLanguages } from "../stores/translationKeys"
+import FetchRails from "@src/fetch-rails"
+import { addAlert } from "@lib/alerts"
+import { projects, currentProjectUUID, currentProject, recoveredProject, items, currentItem, isSignedIn } from "@stores/editor"
+import { translationKeys, defaultLanguage, selectedLanguages } from "@stores/translationKeys"
 import { get } from "svelte/store"
 
 export async function createProject(title, content = null) {

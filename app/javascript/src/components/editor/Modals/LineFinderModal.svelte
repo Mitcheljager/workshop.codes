@@ -1,9 +1,9 @@
 <script>
-  import Modal from "./Modal.svelte"
-  import ExpandableSnippet from "../ExpandableSnippet.svelte"
-  import { sortedItems, editorStates, modal } from "../../../stores/editor"
-  import { getItemById, isAnyParentHidden, setCurrentItemById } from "../../../utils/editor"
-  import { compile } from "../../../utils/compiler/compile"
+  import Modal from "@components/editor/Modals/Modal.svelte"
+  import ExpandableSnippet from "@components/editor/ExpandableSnippet.svelte"
+  import { sortedItems, editorStates, modal } from "@stores/editor"
+  import { getItemById, isAnyParentHidden, setCurrentItemById } from "@utils/editor"
+  import { compile } from "@utils/compiler/compile"
   import { onMount, tick } from "svelte"
 
   let found = false

@@ -1,6 +1,6 @@
 <script>
-  import { isSignedIn, projects, modal } from "../../stores/editor"
-  import { createDemoProject, createProject, fetchProject, setUrl } from "../../utils/project"
+  import { isSignedIn, projects, modal } from "@stores/editor"
+  import { createDemoProject, createProject, fetchProject, setUrl } from "@utils/project"
 
   async function getProject(uuid) {
     const data = await fetchProject(uuid)

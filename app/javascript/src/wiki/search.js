@@ -1,5 +1,5 @@
-import debounce from "../debounce"
-import FetchRails from "../fetch-rails"
+import debounce from "@src/debounce"
+import FetchRails from "@src/fetch-rails"
 
 export function bind() {
   const element = document.querySelector("[data-role='wiki-search']")

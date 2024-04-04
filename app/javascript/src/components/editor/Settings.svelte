@@ -1,11 +1,11 @@
 <script>
   import { fly, slide } from "svelte/transition"
   import { onMount, tick } from "svelte"
-  import { escapeable } from "../actions/escapeable"
-  import { outsideClick } from "../actions/outsideClick"
-  import { setCssVariable } from "../../utils/setCssVariable"
-  import { settings, isMobile } from "../../stores/editor"
-  import Cogs from "../icon/Cogs.svelte"
+  import { escapeable } from "@components/actions/escapeable"
+  import { outsideClick } from "@components/actions/outsideClick"
+  import { setCssVariable } from "@utils/setCssVariable"
+  import { settings, isMobile } from "@stores/editor"
+  import Cogs from "@components/icon/Cogs.svelte"
 
   let mounted = false
   let active = false

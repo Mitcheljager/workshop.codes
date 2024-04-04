@@ -1,8 +1,8 @@
 <script>
-  import Modal from "./Modal.svelte"
-  import { items, modal } from "../../../stores/editor"
-  import { getItemById, setCurrentItemById } from "../../../utils/editor"
-  import { replaceBetween } from "../../../utils/parse"
+  import Modal from "@components/editor/Modals/Modal.svelte"
+  import { items, modal } from "@stores/editor"
+  import { getItemById, setCurrentItemById } from "@utils/editor"
+  import { replaceBetween } from "@utils/parse"
   import { onMount, tick } from "svelte"
 
   let value = ""

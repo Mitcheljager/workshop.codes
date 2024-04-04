@@ -1,6 +1,6 @@
-import { languageOptions } from "../../lib/languageOptions"
-import { defaultLanguage, selectedLanguages, translationKeys } from "../../stores/translationKeys"
-import { getClosingBracket, replaceBetween, splitArgumentsString } from "../parse"
+import { languageOptions } from "@lib/languageOptions"
+import { defaultLanguage, selectedLanguages, translationKeys } from "@stores/translationKeys"
+import { getClosingBracket, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
 
 export function convertTranslations(joinedItems) {

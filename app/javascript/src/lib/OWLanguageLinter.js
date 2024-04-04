@@ -1,7 +1,7 @@
-import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "../utils/parse"
-import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
+import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
+import { completionsMap, subroutinesMap, workshopConstants } from "@stores/editor"
 import { get } from "svelte/store"
-import { getFirstParameterObject } from "../utils/compiler/parameterObjects"
+import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 
 let diagnostics = []
 

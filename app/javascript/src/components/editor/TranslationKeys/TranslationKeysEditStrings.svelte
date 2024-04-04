@@ -1,7 +1,7 @@
 <script>
-  import { translationKeys, selectedLanguages } from "../../../stores/translationKeys"
-  import { languageOptions } from "../../../lib/languageOptions"
-  import { submittable } from "../../actions/submittable"
+  import { translationKeys, selectedLanguages } from "@stores/translationKeys"
+  import { languageOptions } from "@lib/languageOptions"
+  import { submittable } from "@components/actions/submittable"
   import { createEventDispatcher } from "svelte"
 
   export let selectedKey

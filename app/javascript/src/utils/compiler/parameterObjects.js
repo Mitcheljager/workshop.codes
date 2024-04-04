@@ -1,5 +1,5 @@
-import { completionsMap } from "../../stores/editor"
-import { getClosingBracket, getPhraseFromIndex, replaceBetween, splitArgumentsString } from "../parse"
+import { completionsMap } from "@stores/editor"
+import { getClosingBracket, getPhraseFromIndex, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
 
 export function evaluateParameterObjects(joinedItems) {

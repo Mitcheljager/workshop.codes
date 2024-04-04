@@ -25,7 +25,8 @@ export default defineConfig({
       "@components": resolve(__dirname, "app/javascript/src/components"),
       "@constants": resolve(__dirname, "app/javascript/src/constants"),
       "@lib": resolve(__dirname, "app/javascript/src/lib"),
-      "@utils": resolve(__dirname, "app/javascript/src/utils")
+      "@utils": resolve(__dirname, "app/javascript/src/utils"),
+      "@stores": resolve(__dirname, "app/javascript/src/stores")
     }
   }
 })
