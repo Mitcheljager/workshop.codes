@@ -82,6 +82,8 @@ class ApplicationController < ActionController::Base
 
   def set_request_headers
     headers["Access-Control-Allow-Origin"] = "*"
+    headers["Access-Control-Allow-Methods"] = "GET"
+    headers["Access-Control-Allow-Headers"] = "Origin"
   end
 
   def render_404
