@@ -1,5 +1,5 @@
-import { compileSubroutines, getSubroutines } from "../../../src/utils/compiler/subroutines"
-import { disregardWhitespace } from "../../helpers/text"
+import { compileSubroutines, getSubroutines } from "@utils/compiler/subroutines"
+import { disregardWhitespace } from "@test/helpers/text"
 import { describe, it, expect } from "vitest"
 
 describe("subroutines.js", () => {

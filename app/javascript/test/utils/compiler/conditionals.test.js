@@ -1,5 +1,5 @@
-import { evaluateConditionals } from "../../../src/utils/compiler/conditionals"
-import { disregardWhitespace } from "../../helpers/text"
+import { evaluateConditionals } from "@utils/compiler/conditionals"
+import { disregardWhitespace } from "@test/helpers/text"
 import { describe, it, expect } from "vitest"
 
 describe("conditionals.js", () => {
