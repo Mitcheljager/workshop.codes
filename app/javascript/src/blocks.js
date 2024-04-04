@@ -1,7 +1,7 @@
-import { initializeSvelteComponent } from "./svelte-component"
+import { initializeSvelteComponent } from "@src/svelte-component"
 import Sortable from "sortablejs"
-import LimitedCheckboxes from "../src/components/form/LimitedCheckboxes.svelte"
-import FetchRails from "./fetch-rails"
+import LimitedCheckboxes from "@components/form/LimitedCheckboxes.svelte"
+import FetchRails from "@src/fetch-rails"
 
 export function bind() {
   const element = document.querySelector("[data-role~='block-sortable']")
