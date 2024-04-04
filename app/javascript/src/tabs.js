@@ -1,4 +1,4 @@
-import { carousel, setCarousel } from "./carousel"
+import { carousel, setCarousel } from "@src/carousel"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='set-tab']")

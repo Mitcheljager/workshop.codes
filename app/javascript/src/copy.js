@@ -1,4 +1,4 @@
-import FetchRails from "./fetch-rails"
+import FetchRails from "@src/fetch-rails"
 
 export function bind() {
   document.body.removeAndAddEventListener("click", copyToClipboard)

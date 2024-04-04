@@ -1,7 +1,7 @@
 import { workshopConstants } from "../../stores/editor"
 import { defaultLanguage } from "../../stores/translationKeys"
 import { getClosingBracket, replaceBetween } from "../parse"
-import { openArrayBracketRegex, openToClosingArrayBracketsMap } from "./constants"
+import { openArrayBracketRegex, openToClosingArrayBracketsMap } from "@src/constants"
 import { get } from "svelte/store"
 
 export function evaluateEachLoops(joinedItems) {

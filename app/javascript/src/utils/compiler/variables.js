@@ -1,5 +1,5 @@
 import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "../parse"
-import { evaluateParameterObjects } from "./parameterObjects"
+import { evaluateParameterObjects } from "@src/parameterObjects"
 
 // NOTE: The fact variable names can start with a decimal is intentional.
 // We leave it to Overwatch to warn the user that this is not allowed.

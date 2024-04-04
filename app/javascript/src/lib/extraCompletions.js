@@ -1,4 +1,4 @@
-import { templates } from "./templates"
+import { templates } from "@src/templates"
 
 export const extraCompletions = [
   { detail: "Editor For loop (exclusive)", label: "@for (0 to 10) {\n\n}", type: "variable" },
