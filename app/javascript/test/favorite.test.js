@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { toggleFavorite } from "../src/favorite"
+import { toggleFavorite } from "@src/favorite"
 import { vi, describe, it, expect } from "vitest"
 
 vi.mock("@rails/ujs", () => ({

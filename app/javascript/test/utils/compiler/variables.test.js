@@ -1,6 +1,6 @@
-import { compileVariables, excludeDefaultVariableNames, getDefaultVariableNameIndex, getVariables } from "../../..//src/utils/compiler/variables"
-import { completionsMap } from "../../..//src/stores/editor"
-import { disregardWhitespace } from "../../helpers/text"
+import { compileVariables, excludeDefaultVariableNames, getDefaultVariableNameIndex, getVariables } from "@utils/compiler/variables"
+import { completionsMap } from "@stores/editor"
+import { disregardWhitespace } from "@test/helpers/text"
 import { describe, it, expect, beforeAll } from "vitest"
 
 describe("variables.js", () => {

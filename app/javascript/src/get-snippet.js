@@ -1,5 +1,5 @@
-import FetchRails from "./fetch-rails"
-import { initiateIde } from "./ide"
+import FetchRails from "@src/fetch-rails"
+import { initiateIde } from "@src/ide"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='load-snippet']")

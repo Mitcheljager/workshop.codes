@@ -1,9 +1,7 @@
 <script>
   import { onMount } from "svelte"
-
-  import FetchRails from "../../fetch-rails"
-
-  import Tags from "./Tags.svelte"
+  import FetchRails from "@src/fetch-rails"
+  import Tags from "@components/form/Tags.svelte"
 
   let showDerivative = false
   export let maxCodes = 5

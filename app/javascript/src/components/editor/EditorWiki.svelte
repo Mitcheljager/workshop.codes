@@ -1,7 +1,7 @@
 <script>
-  import FetchRails from "../../fetch-rails"
-  import EditorWikiSearch from "./EditorWikiSearch.svelte"
-  import ExternalLinkIcon from "../icon/ExternalLink.svelte"
+  import FetchRails from "@src/fetch-rails"
+  import EditorWikiSearch from "@components/editor/EditorWikiSearch.svelte"
+  import ExternalLinkIcon from "@components/icon/ExternalLink.svelte"
 
   let article
   let contentElement

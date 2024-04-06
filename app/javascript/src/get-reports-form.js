@@ -1,7 +1,7 @@
-import FetchRails from "./fetch-rails"
-import { closeModal } from "./modal"
-import * as revealBySelect from "../src/reveal-by-select"
-import * as disableFormBySelect from "../src/disable-form-by-select"
+import FetchRails from "@src/fetch-rails"
+import { closeModal } from "@src/modal"
+import * as revealBySelect from "@src/reveal-by-select"
+import * as disableFormBySelect from "@src/disable-form-by-select"
 
 export function bind() {
   document.body.removeAndAddEventListener("click", getReportsForm)

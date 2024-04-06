@@ -1,10 +1,10 @@
 <script>
-  import EditorItemDestroy from "./EditorItemDestroy.svelte"
-  import EditorItemName from "./EditorItemName.svelte"
-  import EditorItemHide from "./EditorItemHide.svelte"
-  import EditorItemDuplicate from "./EditorItemDuplicate.svelte"
-  import { currentItem } from "../../stores/editor.js"
-  import { isAnyParentHidden } from "../../utils/editor"
+  import EditorItemDestroy from "@components/editor/EditorItemDestroy.svelte"
+  import EditorItemName from "@components/editor/EditorItemName.svelte"
+  import EditorItemHide from "@components/editor/EditorItemHide.svelte"
+  import EditorItemDuplicate from "@components/editor/EditorItemDuplicate.svelte"
+  import { currentItem } from "@stores/editor.js"
+  import { isAnyParentHidden } from "@utils/editor"
 
   export let item
 </script>

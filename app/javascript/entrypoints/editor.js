@@ -1,5 +1,5 @@
-import { initializeSvelteComponent } from "../src/svelte-component"
+import { initializeSvelteComponent } from "@src/svelte-component"
 
-import Editor from "../src/components/editor/Editor.svelte"
+import Editor from "@src/components/editor/Editor.svelte"
 
 initializeSvelteComponent("Editor", Editor)

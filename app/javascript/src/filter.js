@@ -1,6 +1,6 @@
-import FetchRails from "./fetch-rails"
-import { render as renderNumPlayersSlider } from "../src/num-players-slider"
-import { bind as bindGetVerifiedUsers } from "../src/get-verified-users"
+import FetchRails from "@src/fetch-rails"
+import { render as renderNumPlayersSlider } from "@src/num-players-slider"
+import { bind as bindGetVerifiedUsers } from "@src/get-verified-users"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='get-filter-content']")

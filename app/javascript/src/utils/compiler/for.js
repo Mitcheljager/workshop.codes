@@ -1,4 +1,4 @@
-import { getClosingBracket, replaceBetween } from "../parse"
+import { getClosingBracket, replaceBetween } from "@utils/parse"
 
 export function evaluateForLoops(joinedItems) {
   let match

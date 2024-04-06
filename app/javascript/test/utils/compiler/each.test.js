@@ -1,6 +1,6 @@
-import { evaluateEachLoops, parseArrayValues } from "../../../src/utils/compiler/each"
-import { workshopConstants } from "../../../src/stores/editor"
-import { disregardWhitespace } from "../../helpers/text"
+import { evaluateEachLoops, parseArrayValues } from "@utils/compiler/each"
+import { workshopConstants } from "@stores/editor"
+import { disregardWhitespace } from "@test/helpers/text"
 import { describe, it, expect, afterEach } from "vitest"
 
 describe("for.js", () => {

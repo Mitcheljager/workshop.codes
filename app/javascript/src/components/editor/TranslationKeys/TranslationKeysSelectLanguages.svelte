@@ -1,6 +1,6 @@
 <script>
-  import { selectedLanguages, defaultLanguage } from "../../../stores/translationKeys"
-  import { languageOptions } from "../../../lib/languageOptions"
+  import { selectedLanguages, defaultLanguage } from "@stores/translationKeys"
+  import { languageOptions } from "@lib/languageOptions"
 </script>
 
 <p class="mt-0">Select all languages you wish to add translations for. If you do not enter a translations for a given key the default language will be used instead.</p>

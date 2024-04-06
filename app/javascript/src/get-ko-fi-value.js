@@ -1,4 +1,4 @@
-import FetchRails from "./fetch-rails"
+import FetchRails from "@src/fetch-rails"
 
 export function render() {
   const element = document.querySelector("[data-role~='ko-fi-progress']")

@@ -1,10 +1,10 @@
 <script>
   import { fly } from "svelte/transition"
-  import { templates } from "../../lib/templates"
-  import { createNewItem } from "../../utils/editor"
-  import { items, currentItem } from "../../stores/editor"
-  import { escapeable } from "../actions/escapeable"
-  import { outsideClick } from "../actions/outsideClick"
+  import { templates } from "@lib/templates"
+  import { createNewItem } from "@utils/editor"
+  import { items, currentItem } from "@stores/editor"
+  import { escapeable } from "@components/actions/escapeable"
+  import { outsideClick } from "@components/actions/outsideClick"
 
   let active = false
   let element

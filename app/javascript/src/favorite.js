@@ -1,5 +1,5 @@
-import FetchRails from "./fetch-rails"
-import { addAlertError } from "./lib/alerts"
+import FetchRails from "@src/fetch-rails"
+import { addAlertError } from "@src/lib/alerts"
 
 export function bind() {
   document.body.removeAndAddEventListener("click", favorite)

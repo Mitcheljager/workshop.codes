@@ -1,5 +1,5 @@
-import { evaluateForLoops } from "../../../src/utils/compiler/for"
-import { disregardWhitespace } from "../../helpers/text"
+import { evaluateForLoops } from "@utils/compiler/for"
+import { disregardWhitespace } from "@test/helpers/text"
 import { describe, it, expect } from "vitest"
 
 describe("for.js", () => {

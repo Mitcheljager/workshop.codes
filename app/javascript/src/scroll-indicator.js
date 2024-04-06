@@ -1,4 +1,4 @@
-import debounce from "./debounce"
+import debounce from "@src/debounce"
 
 export function bind() {
   const element = document.querySelector("[data-role~='scroll-indicator']")

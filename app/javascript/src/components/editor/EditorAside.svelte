@@ -1,7 +1,7 @@
 <script>
-  import EditorItemCreate from "./EditorItemCreate.svelte"
-  import EditorList from "./EditorList.svelte"
-  import { items } from "../../stores/editor"
+  import EditorItemCreate from "@components/editor/EditorItemCreate.svelte"
+  import EditorList from "@components/editor/EditorList.svelte"
+  import { items } from "@stores/editor"
 
   let element
 

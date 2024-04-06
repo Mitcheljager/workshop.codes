@@ -1,7 +1,7 @@
 <script>
   import { tick } from "svelte"
-  import { reset as microlight } from "../../microlight"
-  import Expand from "../icon/Expand.svelte"
+  import { reset as microlight } from "@src/microlight"
+  import Expand from "@components/icon/Expand.svelte"
 
   export let fullContentLines
   export let snippetLineCount = 3

@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString } from "../../src/utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { describe, it, expect } from "vitest"
 
 describe("parse.js", () => {

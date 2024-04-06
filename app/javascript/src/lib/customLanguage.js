@@ -1,6 +1,6 @@
 import { LRLanguage, LanguageSupport } from "@codemirror/language"
 import { styleTags, tags as t } from "@lezer/highlight"
-import { parser } from "./lang.js"
+import { parser } from "@src/lang.js"
 
 export const OverwatchWorkshopLanguage = LRLanguage.define({
   parser: parser.configure({

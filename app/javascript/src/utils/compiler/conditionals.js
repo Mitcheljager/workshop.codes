@@ -1,5 +1,5 @@
-import { comparisonOperators, sortedComparisonOperatorsSymbols } from "../operators"
-import { getClosingBracket, removeSurroundingParenthesis, replaceBetween } from "../parse"
+import { comparisonOperators, sortedComparisonOperatorsSymbols } from "@utils/operators"
+import { getClosingBracket, removeSurroundingParenthesis, replaceBetween } from "@utils/parse"
 
 export function evaluateConditionals(joinedItems) {
   const ifStartRegex = /@if[\s\n]*\(/g

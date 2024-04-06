@@ -1,6 +1,6 @@
 <script>
-  import FetchRails from "../../fetch-rails"
-  import debounce from "../../debounce"
+  import FetchRails from "@src/fetch-rails"
+  import debounce from "@src/debounce"
   import { createEventDispatcher } from "svelte"
 
   let query = ""

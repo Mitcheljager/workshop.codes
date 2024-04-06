@@ -1,4 +1,4 @@
-import FetchRails from "./fetch-rails"
+import FetchRails from "@src/fetch-rails"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='get-partial']")

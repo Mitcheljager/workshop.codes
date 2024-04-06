@@ -1,5 +1,5 @@
-import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects, parseParameterObjectContent } from "../../../src/utils/compiler/parameterObjects"
-import { completionsMap } from "../../../src/stores/editor"
+import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects, parseParameterObjectContent } from "@utils/compiler/parameterObjects"
+import { completionsMap } from "@stores/editor"
 import { describe, it, expect, beforeEach } from "vitest"
 
 describe("parameterObjects.js", () => {

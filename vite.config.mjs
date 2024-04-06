@@ -17,7 +17,16 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@scss": resolve(__dirname, "app/javascript/scss")
+      "@scss": resolve(__dirname, "app/javascript/scss"),
+      "@images": resolve(__dirname, "app/javascript/images"),
+      "@fonts": resolve(__dirname, "app/javascript/fonts"),
+      "@test": resolve(__dirname, "app/javascript/test"),
+      "@src": resolve(__dirname, "app/javascript/src"),
+      "@components": resolve(__dirname, "app/javascript/src/components"),
+      "@constants": resolve(__dirname, "app/javascript/src/constants"),
+      "@lib": resolve(__dirname, "app/javascript/src/lib"),
+      "@utils": resolve(__dirname, "app/javascript/src/utils"),
+      "@stores": resolve(__dirname, "app/javascript/src/stores")
     }
   }
 })

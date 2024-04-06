@@ -1,5 +1,5 @@
-import FetchRails from "../fetch-rails"
-import { addAlert } from "../lib/alerts"
+import FetchRails from "@src/fetch-rails"
+import { addAlert } from "@lib/alerts"
 
 export async function createProjectBackup(uuid) {
   return await new FetchRails("/project_backups", { project: { uuid } }).post()

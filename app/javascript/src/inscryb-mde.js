@@ -1,11 +1,11 @@
 import InscrybMDE from "inscrybmde"
-import InscrybeInsertImage from "./inscrybe-mde-paste-image"
-import InscrybeInsertVideo from "./inscrybe-mde-insert-video"
-import FetchRails from "./fetch-rails"
-import { insertAbilityIconSelect } from "./inscryb-mde-ability-select"
-import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
-import debounce from "./debounce"
-import * as lazyVideo from "../src/lazy-video"
+import InscrybeInsertImage from "@src/inscrybe-mde-paste-image"
+import InscrybeInsertVideo from "@src/inscrybe-mde-insert-video"
+import FetchRails from "@src/fetch-rails"
+import { insertAbilityIconSelect } from "@src/inscryb-mde-ability-select"
+import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "@src/blocks"
+import debounce from "@src/debounce"
+import * as lazyVideo from "@src/lazy-video"
 
 let editors = []
 

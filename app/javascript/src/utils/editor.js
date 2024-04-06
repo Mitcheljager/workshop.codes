@@ -1,5 +1,5 @@
-import { currentItem, items, openFolders, editorStates } from "../stores/editor"
-import { defaultLanguage, selectedLanguages, translationKeys } from "../stores/translationKeys"
+import { currentItem, items, openFolders, editorStates } from "@stores/editor"
+import { defaultLanguage, selectedLanguages, translationKeys } from "@stores/translationKeys"
 import { get } from "svelte/store"
 
 export function createNewItem(name, content, position = 9999, type = "item") {

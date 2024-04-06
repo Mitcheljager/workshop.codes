@@ -1,4 +1,4 @@
-import * as microlight from "./microlight"
+import * as microlight from "@src/microlight"
 
 export function bind() {
   const fullscreenElements = document.querySelectorAll("[data-action='toggle-ide-fullscreen']")

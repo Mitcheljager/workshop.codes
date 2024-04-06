@@ -1,6 +1,6 @@
-import Uploader from "./uploader"
-import FetchRails from "./fetch-rails"
-import { addAlertError } from "./lib/alerts"
+import Uploader from "@src/uploader"
+import FetchRails from "@src/fetch-rails"
+import { addAlertError } from "@src/lib/alerts"
 
 export default class InscrybeInsertVideo {
   constructor(event, editor) {

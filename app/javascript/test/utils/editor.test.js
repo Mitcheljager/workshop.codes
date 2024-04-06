@@ -1,6 +1,6 @@
-import { createNewItem, destroyItem, duplicateItem, getItemById, getSaveContent, isAnyParentHidden, setCurrentItemById, toggleFolderState, toggleHideItem, updateItem, updateItemName, updateStateForId } from "../../src/utils/editor"
-import { currentItem, items, editorStates, openFolders } from "../../src/stores/editor"
-import { defaultLanguage, selectedLanguages, translationKeys } from "../../src/stores/translationKeys"
+import { createNewItem, destroyItem, duplicateItem, getItemById, getSaveContent, isAnyParentHidden, setCurrentItemById, toggleFolderState, toggleHideItem, updateItem, updateItemName, updateStateForId } from "@utils/editor"
+import { currentItem, items, editorStates, openFolders } from "@stores/editor"
+import { defaultLanguage, selectedLanguages, translationKeys } from "@stores/translationKeys"
 import { get } from "svelte/store"
 import { vi, describe, it, expect, afterEach, beforeEach } from "vitest"
 

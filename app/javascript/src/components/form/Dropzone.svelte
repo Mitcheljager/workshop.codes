@@ -4,11 +4,11 @@
   import { onMount } from "svelte"
   import Sortable from "sortablejs"
 
-  import { escapeable } from "../actions/escapeable"
-  import { addAlertError } from "../../lib/alerts"
-  import Uploader from "../../uploader"
-  import FetchRails from "../../fetch-rails"
-  import debounce from "../../debounce"
+  import { escapeable } from "@components/actions/escapeable"
+  import { addAlertError } from "@lib/alerts"
+  import Uploader from "@src/uploader"
+  import FetchRails from "@src/fetch-rails"
+  import debounce from "@src/debounce"
 
   export let images
   export let label

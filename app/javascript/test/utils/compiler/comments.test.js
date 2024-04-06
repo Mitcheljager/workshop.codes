@@ -1,4 +1,4 @@
-import { removeComments } from "../../../src/utils/compiler/comments"
+import { removeComments } from "@utils/compiler/comments"
 import { describe, it, expect } from "vitest"
 
 describe("comments.js", () => {

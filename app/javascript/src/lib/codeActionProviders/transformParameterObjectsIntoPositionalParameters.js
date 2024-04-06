@@ -1,8 +1,8 @@
-import { completionsMap, settings } from "../../stores/editor"
-import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../../utils/parse"
+import { completionsMap, settings } from "@stores/editor"
+import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
-import { parseParameterObjectContent } from "../../utils/compiler/parameterObjects"
-import { getIndentForLine } from "../../utils/codemirror/indent"
+import { parseParameterObjectContent } from "@utils/compiler/parameterObjects"
+import { getIndentForLine } from "@utils/codemirror/indent"
 
 /**
  * @type {import("../codeActions").CodeActionProvider}

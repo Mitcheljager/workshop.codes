@@ -1,7 +1,7 @@
 <script>
-  import { escapeable } from "../actions/escapeable"
-  import { outsideClick } from "../actions/outsideClick"
-  import Keyboard from "../icon/Keyboard.svelte"
+  import { escapeable } from "@components/actions/escapeable"
+  import { outsideClick } from "@components/actions/outsideClick"
+  import Keyboard from "@components/icon/Keyboard.svelte"
   import { fly } from "svelte/transition"
 
   let active = false
