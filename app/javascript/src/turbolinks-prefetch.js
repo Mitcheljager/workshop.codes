@@ -114,7 +114,7 @@ class Prefetcher {
   prefetched(url) {
     const hasSnapshot = location.href === url || this.controller.cache.has(url)
     const snapshot = this.controller.cache.get(url)
-    return hasSnapshot && snapshot.isFresh
+    return hasSnapshot && snapshot?.isFresh
   }
 
   prefetching(url) {
@@ -129,7 +129,8 @@ class Prefetcher {
     const { controller } = this
     const location = controller.getVisitableLocationForLink(link)
     const snapshot = controller.cache.get(location)
-    if (snapshot && snapshot.isFresh) {
+
+    if (snapshot?.isFresh) {
       snapshot.isFresh = false
       controller.cache.put(link, snapshot)
       return "restore"
