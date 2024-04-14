@@ -143,6 +143,11 @@
   slug: suravasa
   overwatch_2: true
 -
+  name: Hanaoka
+  type: Clash
+  slug: hanaoka
+  overwatch_2: true
+-
   name: Black Forest
   type: Arcade
   slug: black-forest
