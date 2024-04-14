@@ -66,6 +66,8 @@
   }
 
   function keydown(event) {
+    if (!matches?.length) return
+
     if (event.code === "Enter") selectItem(matches[selected].id)
     if (event.code === "ArrowDown") setSelected(1)
     if (event.code === "ArrowUp") setSelected(-1)
