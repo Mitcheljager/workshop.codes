@@ -25,7 +25,6 @@
           <% name = hero["name"] %>
           <%= link_to build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(hero["name"]) } do %>
             <%= name %>
-            <%= tag.small "OW2", class: "text-overwatch-2" if hero["overwatch_2"].present? %>
           <% end %>
         <% end %>
       <% end %>
@@ -44,7 +43,6 @@
         <% maps.each do |map| %>
           <%= link_to build_filter_path(:map, to_slug(map["name"])), class: "dropdown__item", data: { action: "add-filter", value: to_slug(map["name"]) } do %>
             <%= map["name"] %>
-            <%= tag.small "OW2", class: "text-overwatch-2" if map["overwatch_2"].present? %>
           <% end %>
         <% end %>
       <% end %>
