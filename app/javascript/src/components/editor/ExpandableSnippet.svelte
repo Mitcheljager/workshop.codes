@@ -42,7 +42,7 @@
     const highlightedLineElement = expandedCodeElement.querySelector(".expandable-snippet__line--highlighted")
     if (!highlightedLineElement) return
 
-    highlightedLineElement.scrollIntoViewIfNeeded()
+    if (typeof highlightedLineElement.scrollIntoViewIfNeeded === "function") highlightedLineElement.scrollIntoViewIfNeeded()
   }
 
   function escapeLine(line) {
