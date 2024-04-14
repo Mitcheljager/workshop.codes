@@ -3,32 +3,38 @@ export function bind() {
 }
 
 function toggleContent(event) {
-  let eventElement = event.target
+  let { target } = event
 
-  if (eventElement.dataset.action == null || !eventElement.dataset.action.includes("toggle-content")) {
-    eventElement = eventElement.closest("[data-action~='toggle-content']")
+  if (!target) return
+
+  if (target.dataset.action == null || !target.dataset.action.includes("toggle-content")) {
+    target = target.closest("[data-action~='toggle-content']")
   }
 
-  if (eventElement && eventElement.dataset.action != null && eventElement.dataset.action.includes("toggle-content")) {
+  if (target && target.dataset.action != null && target.dataset.action.includes("toggle-content")) {
     event.preventDefault()
 
-    const parent = eventElement.closest("[data-toggle-content]")
+    const parent = target.closest("[data-toggle-content]")
 
     const element = parent.querySelector("[data-role~='content-to-toggle']")
     const state = window.getComputedStyle(element).display === "none"
     const animationTiming =
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 :
-        parseInt(eventElement.dataset.animationTiming) > 0 ? parseInt(eventElement.dataset.animationTiming) : 0
+        parseInt(target.dataset.animationTiming) > 0 ? parseInt(target.dataset.animationTiming) : 0
 
     if (!state) {
-      eventElement.classList.remove("active")
+      target.classList.remove("active")
       parent.classList.add("fading-out")
-      if (eventElement.dataset.hideWith) eventElement.textContent = eventElement.dataset.hideWith
+      if (target.dataset.hideWith) target.textContent = target.dataset.hideWith
     } else {
-      eventElement.classList.add("active")
+      target.classList.add("active")
       if (animationTiming > 0) element.style.display = "initial"
       parent.classList.add("fading-in")
-      if (eventElement.dataset.showWith) eventElement.textContent = eventElement.dataset.showWith
+      if (target.dataset.showWith) target.textContent = target.dataset.showWith
+
+      if (parent.dataset.closeOnOutsideClick !== undefined) {
+        document.body.removeAndAddEventListener("click", closeOnOutsideClick)
+      }
     }
 
     setTimeout(() => {
@@ -37,4 +43,12 @@ function toggleContent(event) {
       parent.classList.remove("fading-in")
     }, animationTiming)
   }
+}
+
+function closeOnOutsideClick({ target }) {
+  if (target.closest("[data-toggle-content]")) return
+  if (target.nodeName === "INPUT") return
+
+  toggleContent({ target: document.querySelector("[data-toggle-content] .active"), preventDefault: () => null })
+  document.body.removeEventListener("click", closeOnOutsideClick)
 }
