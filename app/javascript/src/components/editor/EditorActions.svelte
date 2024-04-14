@@ -32,26 +32,19 @@
     <button class="button button--secondary button--square" on:click={() => modal.show(Modal.TranslationKeys)}>
       Translations
     </button>
-  {/if}
 
-  {#if $isSignedIn && $currentProject?.is_owner}
-    {#if !$isMobile}
+    {#if $currentProject?.is_owner}
       <button class="button button--secondary button--square" on:click={() => modal.show(Modal.ScriptImporter)}>
         Import Script
       </button>
     {/if}
-  {/if}
 
-  {#if !$isMobile}
     <Compiler />
-  {/if}
-
-  {#if $isMobile}
+  {:else}
     <div class="dropdown settings" bind:this={mobileDropdown} use:outsideClick on:outsideClick={() => showMobileDropdown = false}>
       <button
         class="button button--secondary button--square"
-        on:click|stopPropagation={() => showMobileDropdown = !showMobileDropdown}
-      >
+        on:click|stopPropagation={() => showMobileDropdown = !showMobileDropdown}>
         <ThreeDotMenu />
       </button>
 
@@ -61,7 +54,7 @@
             Translations
           </button>
 
-          {#if $isSignedIn && $currentProject?.is_owner}
+          {#if $currentProject?.is_owner}
             <button class="dropdown__item" on:click={() => modal.show(Modal.ScriptImporter)}>
               Import Script
             </button>
