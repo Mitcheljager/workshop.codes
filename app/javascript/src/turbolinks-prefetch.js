@@ -1,6 +1,6 @@
 // Adjusted from https://github.com/huacnlee/turbolinks-prefetch
 // The original NPM package is modified to include links around images
-// and to automatically exclude links with the data-actions attrubute
+// and to automatically exclude links with the data-actions attribute
 
 export default class {
   static start(delay) {
