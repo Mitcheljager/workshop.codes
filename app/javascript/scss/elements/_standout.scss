@@ -118,6 +118,34 @@
       background: var(--standout-color, #{$overwatch-2});
     }
   }
+
+  &--venture {
+    padding-top: clamp(150px, 45vw, 170px);
+    padding-bottom: math.div($margin, 3);
+    border: 4px solid $bg-dark;
+
+    @include media-min(md) {
+      padding: math.div($margin, 3);
+    }
+
+    .standout__content {
+      @include media-min(md) {
+        max-width: 50%;
+      }
+    }
+
+    .standout__image {
+      width: 300px;
+      max-width: 100%;
+      top: -50px;
+
+      @include media-min(lg) {
+        width: 400px;
+        bottom: -60px;
+        right: -60px;
+      }
+    }
+  }
 }
 
 .standout__subtitle {
@@ -157,4 +185,9 @@
       width: calc(33% - #{$margin * 0.125} - 1px);
     }
   }
+}
+
+.standout__shadow-image {
+  filter: drop-shadow(0 10px 15px rgba($black, 0.5));
+  pointer-events: none;
 }
