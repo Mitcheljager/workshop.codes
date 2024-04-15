@@ -1,6 +1,7 @@
 import FetchRails from "@src/fetch-rails"
 import { render as renderNumPlayersSlider } from "@src/num-players-slider"
 import { bind as bindGetVerifiedUsers } from "@src/get-verified-users"
+import { closeDropdown } from "@src/dropdown"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='get-filter-content']")
@@ -42,6 +43,8 @@ function addFilter(event) {
   filterToggle.classList.toggle("filter__item--active", event.target.dataset.value != "")
   filterElement.dataset.value = event.target.dataset.value
   filterElement.innerText = event.target.dataset.value == "" ? defaultValue : event.target.innerText
+
+  closeDropdown(event, true)
 }
 
 function buildFilterPath(event) {
