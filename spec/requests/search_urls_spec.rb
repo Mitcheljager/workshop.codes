@@ -32,11 +32,11 @@ RSpec.describe "SearchUrls", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it "redirects GET /search with no parameters to home" do
+    it "redirects GET /search with no parameters to latest path" do
       get "/search"
 
       expect(response).to have_http_status(:found)
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(latest_path)
     end
   end
 
