@@ -17,7 +17,7 @@ module ApplicationHelper
     parameters[key] = value
 
     if parameters.values.all? { |v| v.nil? }
-      return root_path
+      return filter_path(sort: :latest)
     else
       return filter_path(parameters)
     end

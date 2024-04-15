@@ -32,4 +32,25 @@
   <% end %>
 </h2>
 
+<div class="hero-grid mb-1/4" data-expandable-content>
+  <div class="hero-grid__content">
+    <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
+      <% heroes.each do |hero| %>
+        <%= link_to image_tag(hero_name_to_icon_url(hero["name"]), width: 50, height: 50),
+                    build_filter_path(:hero, params[:hero] && params[:hero] == to_slug(hero["name"]) ? nil : to_slug(hero["name"])),
+                    class: "hero-grid__item #{ "hero-grid__item--inactive" if params[:hero] && params[:hero] != to_slug(hero["name"]) }",
+                    data: { prefetch: false } %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="hero-grid__expand">
+    <button class="button button--secondary button--small" data-action="expand-content">Show more</button>
+  </div>
+</div>
+
+<%= render "filter/filter_content", classes: "filter__group--light p-0", show_players: false, show_submit: false, show_heroes: false, direct: true %>
+
+<div class="mb-1/4"></div>
+
 <%= render "posts/posts", disable_cache: true %>

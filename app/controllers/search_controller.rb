@@ -6,21 +6,23 @@ class SearchController < ApplicationController
     if params[:search].present?
        params[:query] = params.delete(:search) unless params[:query].present?
     end
+
     unless params[:query].blank?
       respond_to do |format|
         format.js { redirect_to build_filter_path(:search, params[:query]) }
         format.html { redirect_to build_filter_path(:search, params[:query]) }
       end
     else
-      redirect_back fallback_location: root_path
+      redirect_back fallback_location: latest_path
     end
   end
 
   def redirect_to_query_params
     if params[:query].blank?
-      redirect_back fallback_location: root_path
+      redirect_back fallback_location: latest_path
       return
     end
+
     respond_to do |format|
       format.js { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
       format.html { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
@@ -29,7 +31,7 @@ class SearchController < ApplicationController
 
   def show
     if params.keys.without("controller", "action", "default").length == 0
-      redirect_to root_path
+      redirect_to latest_path
       return
     end
 
