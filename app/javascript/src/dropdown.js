@@ -3,7 +3,7 @@ export function bind() {
   document.body.removeAndAddEventListener("keydown", closeOnKeyDown)
 }
 
-function toggleDropdown(event) {
+export function toggleDropdown(event) {
   closeDropdown(event)
 
   let eventTarget = event.target
@@ -19,17 +19,17 @@ function toggleDropdown(event) {
   target.classList.toggle("active", JSON.parse(target.dataset.active))
 }
 
-function closeDropdown(event) {
+export function closeDropdown(event, closeActive = false) {
   const activeDropdown = document.querySelector("[data-dropdown-content].active")
   if (!activeDropdown) return
 
   const eventTarget = event.target.closest("[data-dropdown]")
-  if (eventTarget && event.type != "keydown" && eventTarget.querySelector("[data-dropdown-content]") == activeDropdown) return
+  if (!closeActive && eventTarget && eventTarget.querySelector("[data-dropdown-content]") == activeDropdown) return
 
   activeDropdown.classList.remove("active")
   activeDropdown.dataset.active = false
 }
 
 function closeOnKeyDown(event) {
-  if (event.code === "Escape") closeDropdown(event)
+  if (event.code === "Escape") closeDropdown(event, true)
 }
