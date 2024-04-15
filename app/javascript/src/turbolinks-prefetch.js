@@ -41,6 +41,7 @@ class Prefetcher {
     if (target.hasAttribute("data-remote")) return
     if (target.hasAttribute("data-method")) return
     if (target.getAttribute("data-prefetch") === "false") return
+    if (target.closest("[data-prefetch='false']")) return
     if (target.getAttribute("target") === "_blank") return
     const href = target.getAttribute("href") || target.getAttribute("data-prefetch")
 
