@@ -107,10 +107,15 @@
     background: darken($bg-dark, 5%);
   }
 
+  &--thin {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+  }
+
   img {
     display: block;
     margin-right: .75em;
-    border-radius: 50%;
+    border-radius: $border-radius * 0.5;
     background-color: $body-bg;
   }
 

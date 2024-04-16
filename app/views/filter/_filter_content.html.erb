@@ -28,9 +28,9 @@
         <span class="dropdown__label"><%= hero_category %></span>
 
         <% heroes.each do |hero| %>
-          <% name = hero["name"] %>
-          <%= link_to build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item", data: { action: direct ? nil : "add-filter", value: to_slug(hero["name"]) } do %>
-            <%= name %>
+          <%= link_to build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item dropdown__item--thin", data: { action: direct ? nil : "add-filter", value: to_slug(hero["name"]) } do %>
+            <%= image_tag hero_name_to_icon_url(hero["name"]), width: 30, height: 30, loading: "lazy" %>
+            <%= hero["name"] %>
           <% end %>
         <% end %>
       <% end %>

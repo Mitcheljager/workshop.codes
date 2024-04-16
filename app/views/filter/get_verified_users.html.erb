@@ -1,7 +1,7 @@
 <% @verified_users.each do |user| %>
   <% next if user.posts.size == 0 %>
 
-  <%= link_to build_filter_path(:author, user.username), class: "dropdown__item", data: { action: "add-filter", value: CGI.escape(user.username) } do %>
+  <%= link_to build_filter_path(:author, user.username), class: "dropdown__item dropdown__item--thin", data: { action: "add-filter", value: CGI.escape(user.username) } do %>
     <% if user.profile_image.attached? %>
       <%= image_tag rails_public_blob_url(user.profile_image.variant(quality: 95, resize_to_fill: [30, 30]).processed), width: 30, height: 30, loading: "lazy" %>
     <% else %>
