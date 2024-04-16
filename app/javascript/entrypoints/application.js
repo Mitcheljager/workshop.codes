@@ -16,7 +16,6 @@ import * as disableFormBySelect from "@src/disable-form-by-select"
 import * as dismissParent from "@src/dismiss-parent"
 import * as dropdown from "@src/dropdown"
 import * as dynamicMaxHeight from "@src/dynamic-max-height"
-import * as expandContent from "@src/expand-content"
 import * as filter from "@src/filter"
 import * as gallery from "@src/gallery"
 import * as getKoFiValue from "@src/get-ko-fi-value"
@@ -49,7 +48,6 @@ document.addEventListener("turbolinks:load", () => {
   dismissParent.bind()
   dropdown.bind()
   dynamicMaxHeight.bind()
-  expandContent.bind()
   filter.bind()
   gallery.bind()
   getPartial.bind()
