@@ -88,6 +88,14 @@
     }
   }
 
+  .filter__group--light & {
+    background: darken($bg-dark, 3%);
+
+    &--active {
+      background: $bg-dark;
+    }
+  }
+
   a {
     text-decoration: none;
   }
@@ -162,6 +170,10 @@
   .filter__item--active & {
     display: inline-block;
     color: $red;
+
+    &:hover {
+      color: lighten($red, 10%);
+    }
   }
 }
 
