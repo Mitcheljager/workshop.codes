@@ -129,6 +129,9 @@
     }
 
     .standout__content {
+      position: relative;
+      z-index: 1;
+
       @include media-min(md) {
         max-width: 50%;
       }
@@ -190,4 +193,21 @@
 .standout__shadow-image {
   filter: drop-shadow(0 10px 15px rgba($black, 0.5));
   pointer-events: none;
+  z-index: 1;
+}
+
+.standout__background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  opacity: 0.75;
+  z-index: 0;
+  mask-image: linear-gradient(to top, transparent 30%, black);
+
+  @include media-min(md) {
+    mask-image: linear-gradient(to right, transparent 30%, black);
+  }
 }
