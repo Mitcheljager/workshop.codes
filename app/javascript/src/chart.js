@@ -1,6 +1,3 @@
-import { curveStep } from  "d3"
-import * as MG from "metrics-graphics"
-
 export function render() {
   const charts = document.querySelectorAll("[data-role='chart']")
 
@@ -9,7 +6,10 @@ export function render() {
   })
 }
 
-export default function createChart(element, data, dateformat = "%Y-%m-%d") {
+export default async function createChart(element, data, dateformat = "%Y-%m-%d") {
+  const { curveStep } = await import("d3")
+  const MG = await import("metrics-graphics")
+
   element.innerHTML = ""
 
   let processedMarkers = []
