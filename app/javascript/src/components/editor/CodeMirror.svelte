@@ -69,6 +69,7 @@
           { key: "Tab", run: tabIndent },
           { key: "Shift-Tab", run: tabIndent },
           { key: "Enter", run: autoIndentOnEnter },
+          { key: "Shift-Enter", run: autoIndentOnEnter },
           { key: "Ctrl-Shift-z", run: redoAction }
         ]),
         EditorView.updateListener.of((transaction) => {
