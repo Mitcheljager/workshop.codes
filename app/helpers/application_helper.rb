@@ -4,13 +4,10 @@ module ApplicationHelper
       category: params[:category],
       hero: params[:hero],
       map: params[:map],
-      from: params[:from],
-      to: params[:to],
       sort: params[:sort],
       expired: params[:expired],
       author: params[:author],
       players: params[:players],
-      language: params[:language],
       search: params[:search]
     }
 
