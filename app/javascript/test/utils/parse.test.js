@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString } from "@utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString, getCommasIndexesOutsideQuotes } from "@utils/parse"
 import { describe, it, expect } from "vitest"
 
 describe("parse.js", () => {
@@ -144,6 +144,22 @@ describe("parse.js", () => {
 
     it("should remove only the outermost pair of surrounding parentheses", () => {
       expect(removeSurroundingParenthesis("((Test), word)")).toBe("(Test), word")
+    })
+  })
+
+  describe("getCommasIndexOutsideQoutes", () => {
+    it("Should return the indexes of commas in a string that are not without qoutes", () => {
+      expect(getCommasIndexesOutsideQuotes("1, 2, \"3, 4\", 5")).toEqual([1, 4, 12])
+      expect(getCommasIndexesOutsideQuotes("1, 2, '3, 4', 5")).toEqual([1, 4, 12])
+    })
+
+    it("Should return an empty array if no valid commas are found", () => {
+      expect(getCommasIndexesOutsideQuotes("1 2 3 4 5")).toEqual([])
+      expect(getCommasIndexesOutsideQuotes("1 2 '3, 4' 5")).toEqual([])
+    })
+
+    it("Should return an empty array no input was given", () => {
+      expect(getCommasIndexesOutsideQuotes("")).toEqual([])
     })
   })
 })

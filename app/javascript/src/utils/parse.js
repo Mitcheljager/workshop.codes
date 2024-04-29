@@ -131,3 +131,19 @@ export function matchAllOutsideRanges(ranges, content, regex) {
   }
   return matches
 }
+
+export function getCommasIndexesOutsideQuotes(string) {
+  const commaIndexes = []
+
+  let insideQuotes = false
+
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === "\"" || string[i] === "'") {
+      insideQuotes = !insideQuotes
+    } else if ((string[i] === "," || string[i] === ",") && !insideQuotes) {
+      commaIndexes.push(i)
+    }
+  }
+
+  return commaIndexes
+}
