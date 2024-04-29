@@ -44,10 +44,15 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_id!(params[:id])
-    @comments = @post.comments.includes(:user).where(parent_id: nil).order(created_at: :desc)
+    paginated_comments
 
     render layout: false
+  end
+
+  def more
+    paginated_comments
+
+    render @comments, layout: false
   end
 
   def update
@@ -108,5 +113,10 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:post_id, :content, :parent_id)
+  end
+
+  def paginated_comments
+    @post = Post.find_by_id!(params[:id])
+    @comments = @post.comments.includes(:user).where(parent_id: nil).order(created_at: :desc).page(params[:page])
   end
 end

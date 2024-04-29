@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :update, :destroy, :show]
   get "create_edit_form/:comment_id", to: "comments#create_edit_form", as: "create_edit_form"
   get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
+  get "comments/:id/:page", to: "comments#more", as: "more_comments"
 
   post "copy-code", to: "posts#copy_code", as: "copy_code"
 

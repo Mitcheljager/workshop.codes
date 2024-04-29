@@ -19,6 +19,7 @@ import * as dynamicMaxHeight from "@src/dynamic-max-height"
 import * as filter from "@src/filter"
 import * as gallery from "@src/gallery"
 import * as getKoFiValue from "@src/get-ko-fi-value"
+import * as getMoreComments from "@src/comments"
 import * as getPartial from "@src/get-partial"
 import * as getReportsForm from "@src/get-reports-form"
 import * as getSnippet from "@src/get-snippet"
@@ -50,6 +51,7 @@ document.addEventListener("turbolinks:load", () => {
   dynamicMaxHeight.bind()
   filter.bind()
   gallery.bind()
+  getMoreComments.bind()
   getPartial.bind()
   getReportsForm.bind()
   getSnippet.bind()
