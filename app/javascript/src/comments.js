@@ -21,6 +21,7 @@ function getMoreComments(event) {
 
   parent.loading = "true"
   button.innerText = "Loading..."
+  button.disabled = true
 
   new FetchRails(`/comments/${id}/${page + 1}`).get().then(data => {
     buttonParent.insertAdjacentHTML("beforeBegin", data)
@@ -29,5 +30,6 @@ function getMoreComments(event) {
   }).finally(() => {
     button.innerText = initialText
     parent.dataset.page = page + 1
+    button.disabled = false
   })
 }
