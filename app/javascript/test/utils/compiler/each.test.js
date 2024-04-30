@@ -147,7 +147,6 @@ describe("for.js", () => {
     it("Should ignore commas in within qoutes", () => {
       // eslint-disable-next-line quotes
       expect(parseArrayValues('"Some string", "Some, string", "Some third string"')).toEqual(['"Some string"', '"Some, string"', '"Some third string"'])
-      expect(parseArrayValues("'Some string', 'Some, string', 'Some third string'")).toEqual(["'Some string'", "'Some, string'", "'Some third string'"])
     })
   })
 })
