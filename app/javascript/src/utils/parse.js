@@ -134,15 +134,13 @@ export function matchAllOutsideRanges(ranges, content, regex) {
 
 export function getCommasIndexesOutsideQuotes(string) {
   const commaIndexes = []
-
-  let insideQuotes = false
+  const stringRanges = findRangesOfStrings(string)
 
   for (let i = 0; i < string.length; i++) {
-    if (string[i] === "\"" || string[i] === "'") {
-      insideQuotes = !insideQuotes
-    } else if ((string[i] === "," || string[i] === ",") && !insideQuotes) {
-      commaIndexes.push(i)
-    }
+    if (!(string[i] === "," || string[i] === ",")) continue
+
+    const withinStringRange = stringRanges.some(([start, end]) => i > start && i < end)
+    if (!withinStringRange) commaIndexes.push(i)
   }
 
   return commaIndexes

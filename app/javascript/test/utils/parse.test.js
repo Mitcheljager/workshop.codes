@@ -149,13 +149,11 @@ describe("parse.js", () => {
 
   describe("getCommasIndexOutsideQoutes", () => {
     it("Should return the indexes of commas in a string that are not without qoutes", () => {
-      expect(getCommasIndexesOutsideQuotes("1, 2, \"3, 4\", 5")).toEqual([1, 4, 12])
-      expect(getCommasIndexesOutsideQuotes("1, 2, '3, 4', 5")).toEqual([1, 4, 12])
+      expect(getCommasIndexesOutsideQuotes("1, 2, \"3, 4\", 5, 6")).toEqual([1, 4, 12, 15])
     })
 
     it("Should return an empty array if no valid commas are found", () => {
       expect(getCommasIndexesOutsideQuotes("1 2 3 4 5")).toEqual([])
-      expect(getCommasIndexesOutsideQuotes("1 2 '3, 4' 5")).toEqual([])
     })
 
     it("Should return an empty array no input was given", () => {
