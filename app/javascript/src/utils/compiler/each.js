@@ -3,6 +3,7 @@ import { defaultLanguage } from "@stores/translationKeys"
 import { getClosingBracket, replaceBetween } from "@utils/parse"
 import { openArrayBracketRegex, openToClosingArrayBracketsMap } from "@utils/compiler/constants"
 import { get } from "svelte/store"
+import { getCommasIndexesOutsideQuotes } from "../parse"
 
 export function evaluateEachLoops(joinedItems) {
   const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*?\]|(?:Constant)\.[\w\s]+)\s*\)\s*\{/gs
@@ -61,11 +62,15 @@ export function parseArrayValues(input) {
   const commaRegex = /, */g
 
   const result = []
+  const validCommaIndexes = getCommasIndexesOutsideQuotes(input)
 
   let commaMatch
   let nextStartingIndex = 0
   let lastValidCommaEndIndex = -1
+
   while ((commaMatch = commaRegex.exec(input)) != null) {
+    if (!validCommaIndexes.includes(commaMatch.index)) continue
+
     // Check if the comma is inside brackets (e.g. the second comma in "[1, (2, 3), 4]" or "[1, [2, 3], 4]")
     // because the parenthesis group should be taken as one value (e.g. for the previous example, we should
     // return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
