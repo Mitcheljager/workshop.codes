@@ -46,4 +46,5 @@ Disallow: /*search=*
 Disallow: /wiki/search/*
 Disallow: /wiki/edits
 Disallow: /revisions/*
+Disallow: /revisions/*/*
 Disallow: /raw-snippet/*
