@@ -55,12 +55,6 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
-  helper_method :search_terms
-
-  def search_terms
-    @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(18)
-  end
-
   def active_storage_blob_variant_url
     blob = ActiveStorage::Blob.find_by_key(params[:key])
 
