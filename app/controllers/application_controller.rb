@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   before_action :expire_oauth_session
+  before_action :set_authenticated_header
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
   rescue_from AbstractController::ActionNotFound, with: :render_404
@@ -50,10 +51,12 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
 
+    @current_user
+  end
+
+  def set_authenticated_header
     # Set header to disable edge cache for logged in users
     headers["authenticated"] = "true" if @current_user
-
-    @current_user
   end
 
   helper_method :search_terms
