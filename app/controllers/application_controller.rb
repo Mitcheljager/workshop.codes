@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   before_action :reject_if_banned
   before_action :redirect_non_www, if: -> { Rails.env.production? }
   before_action :expire_oauth_session
-  before_action :set_authenticated_cookie
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
   rescue_from AbstractController::ActionNotFound, with: :render_404
@@ -20,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   def login_from_cookie
     return unless cookies[:remember_token] && !current_user
-
     token = RememberToken.find_by_token(cookies.encrypted[:remember_token])
 
     if token && token.user
@@ -30,8 +28,6 @@ class ApplicationController < ActionController::Base
       session[:user_uuid] = token.user.uuid
       session[:return_to] = return_path
       create_activity(:login_from_cookie)
-    else
-      cookies.delete :remember_token
     end
   end
 
@@ -89,18 +85,6 @@ class ApplicationController < ActionController::Base
     headers["Access-Control-Allow-Methods"] = "GET"
     headers["Access-Control-Allow-Headers"] = "*"
     headers["Content-Security-Policy"] = "default-src 'none'"
-  end
-
-  def set_authenticated_cookie
-    # Set a cookie to know if the user should be marked as authenticated
-    # This is used for edge caching, along with the remember_token cookie
-    # to identify if the page should be cached or not. Pages should not
-    # be cached for logged in users.
-    if current_user
-      cookies[:authenticated] = { value: true, expires: 1.days }
-    elsif cookies[:authenticated]
-      cookies.delete :authenticated
-    end
   end
 
   def render_404
