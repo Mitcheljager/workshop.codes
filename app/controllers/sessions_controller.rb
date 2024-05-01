@@ -73,7 +73,9 @@ class SessionsController < ApplicationController
 
   def destroy
     current_user.remember_tokens.destroy_all if current_user && current_user.remember_tokens.any?
+
     cookies.delete :remember_token
+    cookies.delete :authenticated
 
     reset_session
     redirect_to login_path
