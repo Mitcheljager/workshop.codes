@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
     end
 
     # Set header to disable edge cache for logged in users
-    headers["authenticated"] = "true" if @current_user
+    headers["X-User-Authenticated"] = "true" if @current_user
 
     @current_user
   end
