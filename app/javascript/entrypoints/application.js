@@ -2,11 +2,11 @@ import "@src/remove-and-add-event-listener"
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
-import TurbolinksPrefetch from "@src/turbolinks-prefetch"
+// import TurbolinksPrefetch from "@src/turbolinks-prefetch"
 
 if (!window._rails_loaded) Rails.start()
 Turbolinks.start()
-TurbolinksPrefetch.start()
+// TurbolinksPrefetch.start()
 
 import * as carousel from "@src/carousel"
 import * as carouselCards from "@src/carousel-cards"
