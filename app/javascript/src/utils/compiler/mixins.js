@@ -22,9 +22,8 @@ export function extractAndInsertMixins(joinedItems) {
   let match
   while ((match = mixinRegex.exec(joinedItems)) != null) {
     let closing = getClosingBracket(joinedItems, "{", "}", match.index)
-    if (closing < 0) {
-      closing = joinedItems.length
-    }
+    if (closing < 0) closing = joinedItems.length
+
     const content = joinedItems.slice(match.index, closing)
     const name = content.match(/(?<=@mixin\s)(\w+)/)?.[0]
 
@@ -65,8 +64,10 @@ export function extractAndInsertMixins(joinedItems) {
   while (joinedItems.indexOf("@include") != -1) {
     // Get arguments
     const index = joinedItems.indexOf("@include")
-    let closing = getClosingBracket(joinedItems, "(", ")", index + 1)
-    if (closing < 0) closing = joinedItems.length
+    const closing = getClosingBracket(joinedItems, "(", ")", index + 1)
+
+    if (closing < 0) throw new Error("Mixin @include was not closed properly")
+
     const full = joinedItems.slice(index, closing + 1)
     const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
     const mixin = mixins[name]
@@ -76,9 +77,9 @@ export function extractAndInsertMixins(joinedItems) {
 
     const argumentsOpeningParen = full.indexOf("(")
     const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
-    if (argumentsClosingParen < 0) {
-      continue
-    }
+
+    if (argumentsClosingParen < 0) continue
+
     const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
     let splitArguments = splitArgumentsString(argumentsString) || []
 
