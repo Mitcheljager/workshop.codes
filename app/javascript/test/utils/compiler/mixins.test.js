@@ -20,13 +20,18 @@ describe("mixins.js", () => {
     })
 
     it("Should throw an error if a mixin is included that is not defined", () => {
-      const input = "@mixin someMixin() {} @include someOtherMixin"
+      const input = "@mixin someMixin() {} @include someOtherMixin()"
       expect(() => extractAndInsertMixins(input)).toThrow("Included a mixin that was not specified: \"someOtherMixin\"")
     })
 
     it("Should throw an error if the mixin includes itself", () => {
       const input = "@mixin testMixin() { @include testMixin(); }"
       expect(() => extractAndInsertMixins(input)).toThrow("Can not include a mixin in itself")
+    })
+
+    it("Should throw an error if @include was not closed properly", () => {
+      const input = "@mixin testMixin() { } @include testMixin(;"
+      expect(() => extractAndInsertMixins(input)).toThrow("Mixin @include was not closed properly")
     })
 
     it("Should replace @include with the mixins content and remove the defined mixin from the output", () => {
