@@ -138,7 +138,7 @@
       // The value we set is dependent on useParameterObjects and useNewlines.
       params.apply = useParameterObject ?
         useNewlines ?
-          `${v["en-US"]}({ ${applyValues.join(", ")}\n})` :
+          `${v["en-US"]}({ ${applyValues.join(",")}\n})` :
           `${v["en-US"]}({ ${applyValues.join(", ")} })` :
         `${v["en-US"]}(${applyValues.join(", ")})`
 
