@@ -136,11 +136,13 @@ function findIncorrectArgsLength(content) {
 
           if (!parameterObject) break
 
-          const invalidArgument = Object.keys(parameterObject.given).filter(i => i && !parameterObject.phraseParameters.includes(i))
+          const invalidArgument = Object.keys(parameterObject.given).filter(i => i && !parameterObject.phraseParameters.includes(i) && !i.startsWith("//"))
           if (invalidArgument?.length) {
             message = `Argument(s) "${invalidArgument.join(", ")}" are not valid for "${name}"`
             severity = "warning"
-          } else break
+          } else {
+            break
+          }
         } else {
           // Argument string is a regular list of arguments
           if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
