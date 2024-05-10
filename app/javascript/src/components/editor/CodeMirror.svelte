@@ -89,8 +89,7 @@
           transformParameterObjectsIntoPositionalParameters
         ]),
         foldBrackets(),
-        ...($settings["word-wrap"] ? [EditorView.lineWrapping] : []),
-        indentedLineWrap
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : [])
       ]
     })
   }
