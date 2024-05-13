@@ -20,6 +20,7 @@
   import { getPhraseFromPosition } from "@utils/parse"
   import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"
   import { get } from "svelte/store"
+  import { indentedLineWrap } from "@utils/codemirror/indentedLineWrap"
   import debounce from "@src/debounce"
 
   const dispatch = createEventDispatcher()
@@ -88,7 +89,7 @@
           transformParameterObjectsIntoPositionalParameters
         ]),
         foldBrackets(),
-        ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : [])
       ]
     })
   }
