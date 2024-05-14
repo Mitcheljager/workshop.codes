@@ -18,8 +18,7 @@
 
 .navigation__item {
   --color: #{$text-color-lightest};
-  --discord-drop-shadow-color: #{rgba($text-color-lightest, 0.4)};
-
+  --discord-drop-shadow-color: var(--color);
   display: block;
   margin-bottom: $margin * 0.25;
   border-radius: $border-radius * 0.5;
