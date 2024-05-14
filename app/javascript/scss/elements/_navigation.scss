@@ -79,7 +79,12 @@
 
   &--discord {
     display: flex;
-    color: $discord;
+
+    @include media-min(mbl) {
+      :not(.wiki) & {
+        color: $discord;
+      }
+    }
 
     &:hover {
       color: $discord;
