@@ -1,8 +1,9 @@
-$sidebar-width: clamp(10vmax, var(--sidebar-width, 300px), 80vmax); // width = height on mobile
-$popout-width: clamp(10vmax, var(--popout-width, 300px), 80vmax); // width = height on mobile
+$sidebar-width: clamp(var(--clamp-min), var(--sidebar-width, 300px), 80vmax); // width = height on mobile
+$popout-width: clamp(var(--popout-clamp-min, var(--clamp-min)), var(--popout-width, 300px), 80vmax); // width = height on mobile
 $top-height: 4rem;
 
 .editor {
+  --clamp-min: 10vmax;
   display: grid;
   grid-template: "top" "aside" "content" "popout";
   grid-template-rows: $top-height $sidebar-width calc(100vh - #{ $sidebar-width } - #{ $popout-width }) $popout-width;
@@ -22,6 +23,11 @@ $top-height: 4rem;
 
   &--empty {
     grid-template-rows: $top-height auto;
+  }
+
+  &--no-wiki {
+    --popout-width: 0px;
+    --popout-clamp-min: 0px;
   }
 }
 

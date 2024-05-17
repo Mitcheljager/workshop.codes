@@ -96,6 +96,17 @@
       </div>
 
       <div class="checkbox tooltip mt-1/8">
+        <input id="hide-wiki-sidebar" type="checkbox" bind:checked={$settings["hide-wiki-sidebar"]} />
+        <label for="hide-wiki-sidebar">
+          Hide wiki sidebar
+        </label>
+
+        <div class="tooltip__content bg-darker">
+          Hide the wiki sidebar from view. It will not appear when using alt+click on a keyword.
+        </div>
+      </div>
+
+      <div class="checkbox tooltip mt-1/8">
         <input id="autocomplete-parameter-objects" type="checkbox" bind:checked={$settings["autocomplete-parameter-objects"]} />
         <label for="autocomplete-parameter-objects">
           Autocomplete using parameter objects

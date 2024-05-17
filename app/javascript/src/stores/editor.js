@@ -108,5 +108,6 @@ export const settings = writable({
   "autocomplete-semicolon": true,
   "autocomplete-parameter-objects": false,
   "autocomplete-min-parameter-size": 2,
-  "autocomplete-min-parameter-newlines": 2
+  "autocomplete-min-parameter-newlines": 2,
+  "hide-wiki-sidebar": false
 })

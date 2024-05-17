@@ -189,7 +189,7 @@
 
 <svelte:window bind:innerWidth={$screenWidth} />
 
-<div class="editor" class:editor--empty={!$currentProjectUUID}>
+<div class="editor" class:editor--empty={!$currentProjectUUID} class:editor--no-wiki={$settings["hide-wiki-sidebar"]}>
   <div class="editor__top">
     <button class="w-auto {$isMobile ? "mr-1/4" : "mr-1/2"}" on:click={() => $currentProjectUUID = null}>
       <Logo />
@@ -274,11 +274,13 @@
     <Empty />
   {/if}
 
-  <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
-    <EditorWiki bind:fetchArticle />
+  {#if !$settings["hide-wiki-sidebar"]}
+    <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
+      <EditorWiki bind:fetchArticle />
 
-    <DragHandle key="popout-width" currentSize=300 align="left" />
-  </div>
+      <DragHandle key="popout-width" currentSize=300 align="left" />
+    </div>
+  {/if}
 
   {#if $recoveredProject}
     <ProjectRecovery />
