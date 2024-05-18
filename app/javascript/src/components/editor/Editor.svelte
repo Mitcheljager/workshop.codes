@@ -40,6 +40,8 @@
   // Updates the tab title
   $: document.title = $currentProject?.title !== undefined ? `${$currentProject.title} | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 
+  $: document.body.classList.toggle("is-firefox", navigator.userAgent.includes("Firefox"))
+
   onMount(async() => {
     loading = true
 
