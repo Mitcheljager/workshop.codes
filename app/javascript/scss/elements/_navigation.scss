@@ -87,10 +87,6 @@
     display: flex;
     color: var(--discord-color);
     filter: var(--discord-drop-shadow);
-
-    &:hover {
-      color: $discord;
-    }
   }
 }
 
