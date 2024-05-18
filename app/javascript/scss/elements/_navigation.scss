@@ -18,6 +18,8 @@
 
 .navigation__item {
   --color: #{$text-color-lightest};
+  --discord-color: #{$discord};
+  --discord-drop-shadow: drop-shadow(0 0 4px #{rgba($white, 0.2)});
   display: block;
   margin-bottom: $margin * 0.25;
   border-radius: $border-radius * 0.5;
@@ -67,6 +69,8 @@
 
   .wiki & {
     --color: #{$white};
+    --discord-color: #{$white};
+    --discord-drop-shadow: none;
   }
 
   svg {
@@ -79,15 +83,8 @@
 
   &--discord {
     display: flex;
-    color: $discord;
-
-    &:hover {
-      color: $discord;
-    }
-
-    .wiki & {
-      color: $white;
-    }
+    color: var(--discord-color);
+    filter: var(--discord-drop-shadow);
   }
 }
 
