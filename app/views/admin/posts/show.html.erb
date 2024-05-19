@@ -28,26 +28,8 @@
 
 <hr>
 
-<% date_counts = {} %>
-<% (Date.parse(@post.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date| %>
-  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
-<% end %>
-
-<% @views.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
-<% end %>
-
 <h3 class="mt-1/1">Total views per day</h3>
-<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
-
-<% date_counts = {} %>
-<% (Date.parse(@post.created_at.strftime("%Y-%m-%d"))...DateTime.now).each do |date| %>
-  <% date_counts[date.strftime("%Y-%m-%d")] = 0 %>
-<% end %>
-
-<% @copies.group_by { |x| x["on_date"].to_date.strftime("%Y-%m-%d") }.each do |group| %>
-  <% date_counts[group[0]] = group[1].map { |h| h[:value] }.sum %>
-<% end %>
+<div class="chart" data-role="chart" data-data="<%= @views.to_json %>"></div>
 
 <h3 class="mt-1/1">Total copies per day</h3>
-<div><canvas height="300" class="chart" data-role="chart" data-labels="<%= date_counts.keys %>" data-values="<%= date_counts.values %>"></canvas></div>
+<div class="chart" data-role="chart" data-data="<%= @copies.to_json %>"></div>
