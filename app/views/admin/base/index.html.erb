@@ -1,6 +1,12 @@
 <%= render "admin/navigation" %>
 
-<h3>Admin activity log</h3>
+<h3>Unique visits</h3>
+
+<div class="chart-wrapper pb-0">
+  <div class="chart" data-role="chart" data-data="<%= @unique_visits.to_json %>"></div>
+</div>
+
+<h3 class="mt-1/1">Admin activity log</h3>
 
 <% @admin_activity.each do |activity| %>
   <div class="well block mb-1/8">

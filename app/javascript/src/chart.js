@@ -15,12 +15,10 @@ export default async function createChart(element, data, dateformat = "%Y-%m-%d"
   let processedMarkers = []
   if (element.dataset.markers != null) {
     const markers = JSON.parse(element.dataset.markers)
-    processedMarkers = markers.map(marker => {
-      return {
-        "date": new Date(marker[2]),
-        "label": marker[1]
-      }
-    })
+    processedMarkers = markers.map(marker => ({
+      "date": new Date(marker[2]),
+      "label": marker[1]
+    }))
   }
 
   MG.data_graphic({
