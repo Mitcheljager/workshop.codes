@@ -10,6 +10,10 @@ class Admin::BaseController < ApplicationController
       { date: on_date.strftime("%Y-%m-%d"), value: value }
     end
 
+    @unique_copies = Statistic.where(content_type: :unique_copies).where("on_date > ?", 12.months.ago).pluck(:on_date, :value).map do |on_date, value|
+      { date: on_date.strftime("%Y-%m-%d"), value: value }
+    end
+
     @admin_activity = Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment])
                               .order(created_at: :desc)
                               .limit(20)
