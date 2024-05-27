@@ -1,4 +1,5 @@
 import FetchRails from "@src/fetch-rails"
+import * as lazyVideo from "@src/lazy-video"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='get-partial']")
@@ -38,6 +39,8 @@ function getPartial(event, element) {
       targetElement.innerHTML = data
     })
     .then(() => {
+      lazyVideo.bind(targetElement)
+
       if (_this.dataset.scrollOnLoad != "true") return
 
       const hash = window.location.hash?.substring(1)
