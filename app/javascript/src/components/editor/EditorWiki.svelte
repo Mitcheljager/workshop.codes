@@ -34,14 +34,14 @@
     progressBar.show()
 
     new FetchRails(`${baseUrl}.json?parse_markdown=true${single ? "&single=true" : ""}`).get()
-      .then(async data => {
+      .then(data => {
         if (!data) throw Error("Error while loading wiki article")
 
         article = JSON.parse(data)
 
-        await new Promise(res => setTimeout(res))
-
-        lazyVideo.bind(contentElement)
+        requestAnimationFrame(() => {
+          lazyVideo.bind(contentElement)
+        })
       })
       .catch(error => {
         alert(error)
