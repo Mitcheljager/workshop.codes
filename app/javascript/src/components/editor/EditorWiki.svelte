@@ -1,4 +1,5 @@
 <script>
+  import * as lazyVideo from "@src/lazy-video"
   import FetchRails from "@src/fetch-rails"
   import EditorWikiSearch from "@components/editor/EditorWikiSearch.svelte"
   import ExternalLinkIcon from "@components/icon/ExternalLink.svelte"
@@ -33,10 +34,14 @@
     progressBar.show()
 
     new FetchRails(`${baseUrl}.json?parse_markdown=true${single ? "&single=true" : ""}`).get()
-      .then(data => {
+      .then(async data => {
         if (!data) throw Error("Error while loading wiki article")
 
         article = JSON.parse(data)
+
+        await new Promise(res => setTimeout(res))
+
+        lazyVideo.bind(contentElement)
       })
       .catch(error => {
         alert(error)
