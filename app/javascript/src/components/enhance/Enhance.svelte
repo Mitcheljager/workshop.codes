@@ -1,7 +1,7 @@
 <script>
   import { onDestroy } from "svelte"
   import EnhanceAudio from "@components/Enhance/EnhanceAudio.svelte"
-  import { slide } from "svelte/transition";
+  import { slide } from "svelte/transition"
 
   const supported = "showOpenFilePicker" in self
   const components = {
@@ -11,25 +11,45 @@
   let interval
   let enhanceItems = []
   let fileLastModified = null
-
-  $: console.log(enhanceItems)
+  let currentFileName = ""
 
   onDestroy(() => {
     if (interval) clearInterval(interval)
   })
 
   async function openLogFile() {
-    const handles = await showOpenFilePicker()
+    const directoryHandle  = await window.showDirectoryPicker()
 
     if (interval) clearInterval(interval)
 
     interval = setInterval(async() => {
-      const file = await handles[0].getFile()
-      const text = await file.text()
+      let mostRecentFile = null
+      let mostRecentDate = new Date(0)
 
-      if (new Date(fileLastModified).getTime() === new Date(file.lastModifiedDate).getTime()) return
+      for await (const entry of directoryHandle.values()) {
+        if (entry.kind === "file") {
+          const fileHandle = await directoryHandle.getFileHandle(entry.name)
+          const file = await fileHandle.getFile()
 
-      fileLastModified = file.lastModifiedDate
+          if (file.lastModifiedDate > mostRecentDate) {
+            mostRecentDate = file.lastModifiedDate
+            mostRecentFile = file
+          }
+        }
+      }
+
+      if (!mostRecentFile) return
+
+      if (mostRecentFile.name !== currentFileName) {
+        enhanceItems = []
+        currentFileName = mostRecentFile.name
+      }
+
+      const text = await mostRecentFile.text()
+
+      if (new Date(fileLastModified).getTime() === new Date(mostRecentFile.lastModifiedDate).getTime()) return
+
+      fileLastModified = mostRecentFile.lastModifiedDate
 
       const allItems = extractItems(text)
       const newItems = []
@@ -84,7 +104,7 @@
   {#if supported}
     <button class="button" on:click={openLogFile}>Open Workshop Log file</button>
   {:else}
-    <div class="warning warning--error mt-0">Unfortunately your browser does not support this feature. Currently only Chrome is supported.</div>
+    <div class="warning warning--error mt-0">You browser does not support being a host, but you can still join as a client.</div>
   {/if}
 
   <div class="mt-1/2">
