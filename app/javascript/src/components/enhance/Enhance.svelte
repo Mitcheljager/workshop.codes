@@ -1,0 +1,104 @@
+<script>
+  import { onDestroy } from "svelte"
+  import EnhanceAudio from "@components/Enhance/EnhanceAudio.svelte"
+  import { slide } from "svelte/transition";
+
+  const supported = "showOpenFilePicker" in self
+  const components = {
+    audio: EnhanceAudio
+  }
+
+  let interval
+  let enhanceItems = []
+  let fileLastModified = null
+
+  $: console.log(enhanceItems)
+
+  onDestroy(() => {
+    if (interval) clearInterval(interval)
+  })
+
+  async function openLogFile() {
+    const handles = await showOpenFilePicker()
+
+    if (interval) clearInterval(interval)
+
+    interval = setInterval(async() => {
+      const file = await handles[0].getFile()
+      const text = await file.text()
+
+      if (new Date(fileLastModified).getTime() === new Date(file.lastModifiedDate).getTime()) return
+
+      fileLastModified = file.lastModifiedDate
+
+      const allItems = extractItems(text)
+      const newItems = []
+      for (let i = 0; i < Math.min(allItems.length, 1000); i++) {
+        const currentIdIndex = enhanceItems.findIndex(j => j.id === allItems[i].id)
+
+        if (currentIdIndex >= 0) {
+          enhanceItems[currentIdIndex] = allItems[i]
+          continue
+        }
+
+        const newIdIndex = newItems.findIndex(j => j.id === allItems[i].id)
+        if (newIdIndex >= 0) newItems[newIdIndex] = allItems[i]
+        else newItems.push(allItems[i])
+      }
+
+      enhanceItems = [...newItems, ...enhanceItems]
+    }, 100)
+  }
+
+  function extractItems(text) {
+    const regex = /\[WCEnhance (.*?)\](.*?)\[\/WCEnhance\]/gs
+    let matches
+    const results = []
+
+    while ((matches = regex.exec(text)) !== null) {
+      const properties = JSON.parse(matches[1])
+
+      // Remove timestamps
+      const contentLines = matches[2]
+        .split("\n")
+        .map(line => line.replace(/^\[\d{2}:\d{2}:\d{2}\]\s*/, "").trim())
+        .filter(line => line.length > 0)
+
+      // Parse each line into an object
+      const content = {}
+      contentLines.forEach(line => {
+        const [key, value] = line.split(": ").map(s => s.trim())
+        content[key] = !value || isNaN(value) ? value : parseFloat(value)
+
+        return content
+      })
+
+      results.push({ ...properties, content })
+    }
+
+    return results
+  }
+</script>
+
+<div class="standout text-left">
+  {#if supported}
+    <button class="button" on:click={openLogFile}>Open Workshop Log file</button>
+  {:else}
+    <div class="warning warning--error mt-0">Unfortunately your browser does not support this feature. Currently only Chrome is supported.</div>
+  {/if}
+
+  <div class="mt-1/2">
+    Enhance!
+  </div>
+
+  {#each enhanceItems as { id, type, ...rest } (id)}
+    <div class="well well--dark mt-1/8" in:slide={{ duration: 200 }}>
+      <div>Enhance received with type "{type}"</div>
+      <div>{JSON.stringify(rest.content)}</div>
+
+      {#if components[type]}
+        <svelte:component this={components[type]} {...rest} />
+      {/if}
+    </div>
+  {/each}
+</div>
