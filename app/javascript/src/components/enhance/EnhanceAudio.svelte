@@ -51,10 +51,9 @@
   }
 
   function lerpEffectValues() {
-    const duration = 1
+    const durationInSeconds = 1
     const fps = 30
-    const steps = duration * fps
-    let currentStep = 0
+    const steps = durationInSeconds * fps
 
     const initialPan = stereoPanner.pan.value
     const targetPan = Math.sin(((content.direction || 0) * Math.PI) / 180)
@@ -65,20 +64,22 @@
     const initialGain = gain.gain.value
     const targetGain = Math.max(Math.min(content.volume || 1, 1), 0)
 
-    function update() {
-      if (currentStep <= steps) {
-        const time = currentStep / steps
+    let currentStep = 0
 
-        stereoPanner.pan.value = lerp(initialPan, targetPan, time)
-        lowPassFilter.frequency.value = lerp(initialFrequency, targetFrequency, time)
-        gain.gain.value = lerp(initialGain, targetGain, time)
+    const step = () => {
+      if (currentStep > steps) return
 
-        currentStep += 1
-        requestAnimationFrame(update)
-      }
+      const time = currentStep / steps
+
+      stereoPanner.pan.value = lerp(initialPan, targetPan, time)
+      lowPassFilter.frequency.value = lerp(initialFrequency, targetFrequency, time)
+      gain.gain.value = lerp(initialGain, targetGain, time)
+
+      currentStep += 1
+      requestAnimationFrame(step)
     }
 
-    update()
+    step()
 
     currentContentKey = JSON.stringify(content)
   }
