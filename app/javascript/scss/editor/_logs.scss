@@ -1,0 +1,45 @@
+.logs {
+  background: lighten($bg-darker, 5%);
+  height: calc(100% - var(--offset) - 4.5rem);
+  margin-top: $margin * 0.25;
+  border-radius: $border-radius;
+  overflow: auto;
+
+  @include styled-scrollbar();
+}
+
+.logs__scroller {
+  display: flex;
+  flex-direction: column;
+  gap: $margin * 0.125;
+  overflow-anchor: none;
+  min-height: 100.001%;
+  padding: $margin * 0.25;
+}
+
+.logs__anchor {
+  height: 1px;
+  overflow-anchor: auto;
+}
+
+.log {
+  flex: 0 0 auto;
+  background: $bg-darker;
+  border-radius: $border-radius;
+  padding: $margin * 0.125;
+  word-break: break-all;
+  overflow-anchor: none;
+
+  &:first-child {
+    margin-top: auto;
+  }
+}
+
+.log__timestamp {
+  font-size: $font-size-small;
+  color: $text-color-dark;
+}
+
+.log__content {
+  color: $text-color-light;
+}

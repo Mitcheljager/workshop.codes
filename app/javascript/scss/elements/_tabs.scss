@@ -76,7 +76,7 @@
     color: $text-color-lightest;
 
     &::after {
-      background: $primary;
+      background: var(--primary, #{$primary});
       width: 100%;
       transition: width 50ms, background-color 50ms;
     }
