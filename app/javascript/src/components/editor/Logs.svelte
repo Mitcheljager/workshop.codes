@@ -13,14 +13,15 @@
   let infoHeight = 0
   let element
 
-  onMount(() => {
-    element.scroll(0, 10000)
-  })
-
+  onMount(() => element.scroll(0, 10000))
   onDestroy(() => {
     if (interval) clearInterval(interval)
   })
 
+  /**
+   * Open the Workshop logs file directory and select the most recent file.
+   * The file is processed by line, assuming that a new line is always a new entry.
+   */
   async function openLogFile() {
     directoryHandle = await window.showDirectoryPicker()
 
@@ -31,6 +32,7 @@
 
       if (!mostRecentFile) return
 
+      // If file is larger than 1MB it likely is not an inspector log, and processing it might prove fatal.
       if (mostRecentFile.size > 1_000_000) {
         entries = []
         currentFileName = mostRecentFile.name
@@ -38,22 +40,26 @@
         return
       }
 
+      // The most recent file has changed, mostly likely because a new lobby was opened. In this case we reset the logs.
       if (mostRecentFile.name !== currentFileName) {
         entries = []
         currentFileName = mostRecentFile.name
       }
 
-      const text = await mostRecentFile.text()
-
       if (new Date(fileLastModified).getTime() === new Date(mostRecentFile.lastModifiedDate).getTime()) return
-
       fileLastModified = mostRecentFile.lastModifiedDate
 
+      const text = await mostRecentFile.text()
       const lines = text.split(/\n/).filter(Boolean)
+
       entries = parseEntries(lines.slice(Math.max(lines.length - 100, 0))) // Last 100 entries
     }, 1000)
   }
 
+  /**
+   * Parse entries to separate the timestamp from the actual content.
+   * @param {Array} entries Array of strings which are expected to start with a timestamp
+   */
   function parseEntries(entries) {
     const parsedEntries = []
 
