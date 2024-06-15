@@ -76,13 +76,13 @@
 </script>
 
 <div bind:clientHeight={infoHeight}>
-  {#if supported}
-    {#if !directoryHandle}
-      <p>View inspector logs right from your browser, allowing you to more easily copy over values from the Workshop.</p>
-      <p>Use "Log To Inspector" to have the log appear here.</p>
-      <p>Make sure you have enabled "Enable Workshop Inspector Log File" in your Overwatch settings under "Settings &gt; Gameplay &gt; General &gt; Custom Games - Workshop".</p>
-    {/if}
+  {#if !directoryHandle}
+    <p>View inspector logs right from your browser, allowing you to more easily copy over values from the Workshop.</p>
+    <p>Use "Log To Inspector" to have the log appear here.</p>
+    <p>Make sure you have enabled "Enable Workshop Inspector Log File" in your Overwatch settings under "Settings &gt; Gameplay &gt; General &gt; Custom Games - Workshop".</p>
+  {/if}
 
+  {#if supported}
     <button class="button button--square w-100" class:button--dark={directoryHandle} on:click={openLogFile}>
       {directoryHandle ? "Change Workshop Log Directory" : "Select Workshop Log Directory"}
     </button>
