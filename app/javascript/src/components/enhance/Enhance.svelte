@@ -2,6 +2,7 @@
   import { onDestroy } from "svelte"
   import EnhanceAudio from "@components/Enhance/EnhanceAudio.svelte"
   import { slide } from "svelte/transition"
+  import { getMostRecentFileFromDirectory } from "@utils/files"
 
   const supported = "showOpenFilePicker" in self
   const components = {
@@ -18,25 +19,12 @@
   })
 
   async function openLogFile() {
-    const directoryHandle  = await window.showDirectoryPicker()
+    const directoryHandle = await window.showDirectoryPicker()
 
     if (interval) clearInterval(interval)
 
     interval = setInterval(async() => {
-      let mostRecentFile = null
-      let mostRecentDate = new Date(0)
-
-      for await (const entry of directoryHandle.values()) {
-        if (entry.kind != "file") continue
-
-        const fileHandle = await directoryHandle.getFileHandle(entry.name)
-        const file = await fileHandle.getFile()
-
-        if (file.lastModifiedDate < mostRecentDate) continue
-
-        mostRecentDate = file.lastModifiedDate
-        mostRecentFile = file
-      }
+      const mostRecentFile = await getMostRecentFileFromDirectory(directoryHandle)
 
       if (!mostRecentFile) return
 

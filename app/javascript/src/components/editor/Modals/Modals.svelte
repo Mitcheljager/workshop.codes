@@ -1,6 +1,7 @@
 <script>
   import BackupsModal from "@components/editor/Modals/BackupsModal.svelte"
   import CreateProjectModal from "@components/editor/Modals/CreateProjectModal.svelte"
+  import EnhanceModal from "@components/editor/Modals/EnhanceModal.svelte"
   import LineFinderModal from "@components/editor/Modals/LineFinderModal.svelte"
   import ItemFinderModal from "@components/editor/Modals/ItemFinderModal.svelte"
   import TranslationKeysModal from "@components/editor/Modals/TranslationKeysModal.svelte"
@@ -11,6 +12,7 @@
   const components = {
     [Modal.Backups]: BackupsModal,
     [Modal.CreateProject]: CreateProjectModal,
+    [Modal.Enhance]: EnhanceModal,
     [Modal.LineFinder]: LineFinderModal,
     [Modal.ItemFinder]: ItemFinderModal,
     [Modal.TranslationKeys]: TranslationKeysModal,

@@ -29,6 +29,10 @@
   <Settings />
 
   {#if !$isMobile}
+    <button class="button button--secondary button--square" on:click={() => modal.show(Modal.Enhance)}>
+      Enhance
+    </button>
+
     <button class="button button--secondary button--square" on:click={() => modal.show(Modal.TranslationKeys)}>
       Translations
     </button>
@@ -50,6 +54,10 @@
 
       {#if showMobileDropdown}
         <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--right block w-100" style="width: 200px">
+          <button class="dropdown__item" on:click={() => modal.show(Modal.Enhance)}>
+            Enhance
+          </button>
+
           <button class="dropdown__item" on:click={() => modal.show(Modal.TranslationKeys)}>
             Translations
           </button>
