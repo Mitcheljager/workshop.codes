@@ -7,6 +7,8 @@ class Project < ApplicationRecord
 
   has_many :project_backups, -> { select(:uuid, :project_uuid, :created_at) }, class_name: "ProjectBackup", foreign_key: :project_uuid, dependent: :destroy
 
+  has_many_attached :audio, dependent: :destroy
+
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 1, maximum: 75 }
   validates :content, length: { maximum: PROJECT_CONTENT_LIMIT }

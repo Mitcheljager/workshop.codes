@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
     blob = ActiveStorage::Blob.find_by_key(params[:key])
 
     if blob.present?
-      if params[:type] == "video"
+      if params[:type] == "video" || params[:type] == "audio"
         url = rails_public_blob_url(blob)
       elsif params[:type] == "thumbnail"
         url = rails_public_blob_url(blob.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
