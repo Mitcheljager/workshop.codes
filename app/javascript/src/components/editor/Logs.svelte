@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from "svelte"
   import { getMostRecentFileFromDirectory } from "@utils/files"
 
-  const supported = "showOpenFilePicker" in self
+  const supported = "showDirectoryPicker" in self
 
   let interval
   let entries = []
@@ -86,6 +86,10 @@
     <button class="button button--square w-100" class:button--dark={directoryHandle} on:click={openLogFile}>
       {directoryHandle ? "Change Workshop Log Directory" : "Select Workshop Log Directory"}
     </button>
+
+    {#if !directoryHandle}
+      <p class="text-small"><em>By default the Workshop directory is found in "C:\Users\[username]\Documents\Overwatch\Workshop"</em></p>
+    {/if}
   {:else}
     <div class="warning br-1 mt-0">Your browser does not support this feature. Sorry :&#40;</div>
   {/if}
