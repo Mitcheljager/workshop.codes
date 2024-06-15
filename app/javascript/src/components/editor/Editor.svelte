@@ -19,7 +19,7 @@
   import Logo from "@components/icon/Logo.svelte"
   import Bugsnag from "@components/Bugsnag.svelte"
   import EyeIcon from "@components/icon/Eye.svelte"
-  import Logs from "@components/Editor/Logs.svelte"
+  import Logs from "@components/editor/Logs.svelte"
 
   export let bugsnagApiKey = ""
   export let _isSignedIn = false
