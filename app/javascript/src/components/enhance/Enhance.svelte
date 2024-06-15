@@ -67,7 +67,7 @@
       }
 
       enhanceItems = [...newItems, ...enhanceItems]
-    }, 100)
+    }, 200)
   }
 
   function extractItems(text) {
