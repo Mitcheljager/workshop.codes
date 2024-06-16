@@ -32,18 +32,17 @@
 
       if (!mostRecentFile) return
 
-      // If file is larger than 1MB it likely is not an inspector log, and processing it might prove fatal.
-      if (mostRecentFile.size > 1_000_000) {
-        entries = []
-        currentFileName = mostRecentFile.name
-        fileTooLarge = true
-        return
-      }
-
       // The most recent file has changed, mostly likely because a new lobby was opened. In this case we reset the logs.
       if (mostRecentFile.name !== currentFileName) {
         entries = []
         currentFileName = mostRecentFile.name
+        fileTooLarge = false
+      }
+
+      // If file is larger than 1MB it likely is not an inspector log, and processing it might prove fatal.
+      if (mostRecentFile.size > 1_000_000) {
+        fileTooLarge = true
+        return
       }
 
       if (new Date(fileLastModified).getTime() === new Date(mostRecentFile.lastModifiedDate).getTime()) return
