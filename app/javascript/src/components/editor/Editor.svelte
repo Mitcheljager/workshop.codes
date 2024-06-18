@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte"
+  import { onMount, tick } from "svelte"
   import { fly } from "svelte/transition"
   import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "@stores/editor"
   import { toCapitalize } from "@utils/text"
@@ -19,6 +19,7 @@
   import Logo from "@components/icon/Logo.svelte"
   import Bugsnag from "@components/Bugsnag.svelte"
   import EyeIcon from "@components/icon/Eye.svelte"
+  import Logs from "@components/editor/Logs.svelte"
 
   export let bugsnagApiKey = ""
   export let _isSignedIn = false
@@ -28,6 +29,7 @@
   let userProjects = null
   let defaults = {}
   let loading = true
+  let currentSidebarTab = "wiki"
 
   $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
@@ -235,7 +237,11 @@
         There could be more elegant solutions that use the CodeMirror API to update extensions,
         but this is the far more simple and readable solution. -->
         {#key $settings["word-wrap"]}
-          <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${detail}`, true)} />
+          <CodeMirror on:search={async({ detail }) => {
+            currentSidebarTab = "wiki"
+            await tick()
+            fetchArticle(`wiki/search/${detail}`, true)
+          }} />
         {/key}
 
         {#if isCurrentItemInherentlyHidden}
@@ -278,7 +284,16 @@
 
   {#if !$settings["hide-wiki-sidebar"]}
     <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
-      <EditorWiki bind:fetchArticle />
+      <div class="tabs bg-transparent p-0 mb-1/4">
+        <button class="tabs__item pt-1/8 pb-1/8 m-0 mr-1/4" class:tabs__item--active={currentSidebarTab === "wiki"} on:click={() => currentSidebarTab = "wiki"}>Wiki</button>
+        <button class="tabs__item pt-1/8 pb-1/8 m-0" class:tabs__item--active={currentSidebarTab === "logs"} on:click={() => currentSidebarTab = "logs"}>Live inspector logs</button>
+      </div>
+
+      {#if currentSidebarTab === "wiki"}
+        <EditorWiki bind:fetchArticle />
+      {:else}
+        <Logs />
+      {/if}
 
       <DragHandle key="popout-width" currentSize=300 align="left" />
     </div>
