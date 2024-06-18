@@ -23,7 +23,11 @@
    * The file is processed by line, assuming that a new line is always a new entry.
    */
   async function openLogFile() {
-    directoryHandle = await window.showDirectoryPicker()
+    try {
+      directoryHandle = await window.showDirectoryPicker()
+    } catch {
+      return
+    }
 
     if (interval) clearInterval(interval)
 
