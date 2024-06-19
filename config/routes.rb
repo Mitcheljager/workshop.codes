@@ -34,8 +34,8 @@ Rails.application.routes.draw do
   get "editor", to: "editor#index", as: "editor"
   get "editor/data", "editor#data"
   get "editor/user_projects", "editor#user_projects"
-  get "enhance", to: "enhance#index", as: "enhance"
   get "workshop-ui", to: "editor#zez_ui", as: "zez_ui"
+  get "enhance", to: "enhance#index", as: "enhance"
 
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
 
@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     resources :email_notifications, only: [:index]
     resources :activities, only: [:index]
     resources :reports, only: [:index, :show]
+    resources :enhance, only: [:index]
   end
 
   get "/auth/:provider/callback", to: "sessions#create", as: "oauth"

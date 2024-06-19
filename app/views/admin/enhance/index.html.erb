@@ -1,0 +1,25 @@
+<%= render "admin/navigation"  %>
+
+<p>Total enhance audio files: <strong><%= EnhanceAudioFile.all.size %></strong></p>
+
+<hr>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>User ID</th>
+    <th>Name</th>
+    <th>File</th>
+  </tr>
+
+  <% @enhance_audio_files.each do |audio_file| %>
+    <tr>
+      <td><%= audio_file.id %></td>
+      <td><%= audio_file.user_id %></td>
+      <td><%= audio_file.name %></td>
+      <td><%= audio_file.file %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate @enhance_audio_files %>
