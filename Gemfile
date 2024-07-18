@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "~> 3.0.3"
+ruby "~> 3.2.4"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "active_model_serializers"
@@ -13,7 +13,7 @@ gem "breadcrumbs_on_rails"
 gem "bootsnap", require: false
 gem "chart-js-rails"
 gem "diffy"
-gem "disco"
+gem "disco", "~> 0.4.2"
 gem "discord-notifier"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"
