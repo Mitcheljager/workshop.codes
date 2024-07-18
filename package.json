@@ -67,5 +67,10 @@
     "*.{js,.ts,.svelte}": [
       "eslint --cache --fix"
     ]
+  },
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node"
+    }
   }
 }
