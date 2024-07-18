@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
-ruby "~> 3.2.4"
+ruby "~> 3.0.0"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "active_model_serializers"
 gem "active_storage_validations"
 gem "ahoy_matey"
-gem "argon2", "~> 2.3.0", git: "https://github.com/technion/ruby-argon2.git", submodules: true
+gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: true
 gem "aws-sdk-s3", require: false
 gem "bcrypt", require: "bcrypt"
 gem "blind_index"
@@ -13,7 +13,7 @@ gem "breadcrumbs_on_rails"
 gem "bootsnap", require: false
 gem "chart-js-rails"
 gem "diffy"
-gem "disco", "~> 0.4.2"
+gem "disco"
 gem "discord-notifier"
 gem "elasticsearch-model", "~> 6"
 gem "elasticsearch-rails", "~> 6"

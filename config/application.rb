@@ -33,7 +33,7 @@ module OverwatchWorkshop
 
       YAML.load(File.open(env_file)).each do |key, value|
         ENV[key.to_s] = value
-      end if File.exist?(env_file)
+      end if File.exists?(env_file)
     end
 
     # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017

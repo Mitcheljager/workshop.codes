@@ -63,8 +63,7 @@
     "test": "vitest",
     "postinstall": "patch-package",
     "generate-ow-language": "yarn lezer-generator app/javascript/src/lib/ows.grammar -o app/javascript/src/lib/lang.js",
-    "prepare": "husky install",
-    "heroku-prebuild": "yarn"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,.ts,.svelte}": [
