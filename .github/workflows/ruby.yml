@@ -28,10 +28,10 @@ jobs:
         with:
           node-version: "18"
           check-latest: true
-      - run: yarn install
+      - run: npm install
       - name: ESLint
         run: |
-          yarn run eslint app/javascript
+          npm run eslint app/javascript
   test:
     runs-on: ubuntu-latest
     steps:
@@ -50,9 +50,9 @@ jobs:
         with:
           node-version: "18"
           check-latest: true
-          cache: 'yarn'
-          cache-dependency-path: './yarn.lock'
-      - run: yarn install
+          cache: 'npm'
+          cache-dependency-path: './package-lock.json'
+      - run: npm install
       - name: Precompile assets
         run: |
           bundle exec rails vite:build RAILS_ENV=test
@@ -65,7 +65,7 @@ jobs:
           bundle exec rspec
       - name: Vitest
         run: |
-          yarn test
+          npm test
   features:
     name: Cucumber Feature Check
     runs-on: ubuntu-latest
@@ -86,9 +86,9 @@ jobs:
         with:
           node-version: "18"
           check-latest: true
-          cache: 'yarn'
-          cache-dependency-path: './yarn.lock'
-      - run: yarn install
+          cache: 'npm'
+          cache-dependency-path: './package-lock.json'
+      - run: npm install
       - name: Precompile assets
         run: |
           bundle exec rails vite:build RAILS_ENV=test

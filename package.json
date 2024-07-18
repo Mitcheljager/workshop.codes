@@ -53,8 +53,7 @@
     "vite-plugin-full-reload": "^1.1.0",
     "vite-plugin-rails": "0.5.0",
     "vite-plugin-sass-glob-import": "^3.0.2",
-    "vitest": "^1.4.0",
-    "yarn-audit-fix": "^9.3.0"
+    "vitest": "^1.4.0"
   },
   "resolutions": {
     "acorn": "^8.1.0"
@@ -62,7 +61,6 @@
   "scripts": {
     "test": "vitest",
     "postinstall": "patch-package",
-    "generate-ow-language": "yarn lezer-generator app/javascript/src/lib/ows.grammar -o app/javascript/src/lib/lang.js",
     "prepare": "husky install"
   },
   "lint-staged": {
