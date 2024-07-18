@@ -604,7 +604,7 @@ DEPENDENCIES
   win32-security
 
 RUBY VERSION
-   ruby 3.0.0p0
+   ruby 3.0.6p216
 
 BUNDLED WITH
    2.3.7
