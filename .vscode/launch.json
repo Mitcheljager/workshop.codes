@@ -21,7 +21,7 @@
       "name": "Vite Dev Server",
       "type": "rdbg",
       "request": "launch",
-      "script": "./bin/vite dev",
+      "script": "npx vite",
       "cwd": "${workspaceFolder}"
     },
     {
