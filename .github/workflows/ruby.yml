@@ -28,9 +28,7 @@ jobs:
         with:
           node-version: "18"
           check-latest: true
-      - name: Clean npm cache
-        run: npm cache clean --force
-      - run: npm install --legacy-peer-deps
+      - run: npm install
       - name: ESLint
         run: |
           npm run eslint app/javascript
@@ -54,9 +52,7 @@ jobs:
           check-latest: true
           cache: 'npm'
           cache-dependency-path: './package-lock.json'
-      - name: Clean npm cache
-        run: npm cache clean --force
-      - run: npm install --legacy-peer-deps
+      - run: npm install
       - name: Precompile assets
         run: |
           bundle exec rails vite:build RAILS_ENV=test
@@ -92,9 +88,7 @@ jobs:
           check-latest: true
           cache: 'npm'
           cache-dependency-path: './package-lock.json'
-      - name: Clean npm cache
-        run: npm cache clean --force
-      - run: npm install --legacy-peer-deps
+      - run: npm install
       - name: Precompile assets
         run: |
           bundle exec rails vite:build RAILS_ENV=test
