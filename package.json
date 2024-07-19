@@ -21,7 +21,7 @@
     "codemirror": "^6.0.1",
     "inscrybmde": "^1.11.6",
     "lz-string": "^1.4.4",
-    "metrics-graphics": "^2.15.6",
+    "metrics-graphics": "^3.0.0-beta1",
     "microlight": "^0.0.7",
     "nouislider": "^14.7.0",
     "patch-package": "^6.4.7",
