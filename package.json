@@ -67,13 +67,5 @@
     "*.{js,.ts,.svelte}": [
       "eslint --cache --fix"
     ]
-  },
-  "overrides": {
-    "vite": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.18.1"
   }
 }
