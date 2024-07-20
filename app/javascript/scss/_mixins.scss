@@ -68,10 +68,6 @@
   font-family: $font-stack;
   font-size: $font-size-base;
   color: $text-color-lightest;
-
-  &:focus {
-    outline: none;
-  }
 }
 
 @mixin motion() {

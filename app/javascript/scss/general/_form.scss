@@ -335,6 +335,10 @@ input[type="file"] {
 
 .inline-input {
   @include inline-input;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .form-required {

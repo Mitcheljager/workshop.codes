@@ -4,6 +4,7 @@
 
 .overflow-auto {
   overflow: auto;
+
   @include styled-scrollbar;
 }
 

@@ -24,7 +24,7 @@ $width: clamp(10rem, 12.5vw, 15rem);
   &:hover {
     scrollbar-color: initial;
 
-    @include styled-scrollbar();
+    @include styled-scrollbar;
   }
 }
 

@@ -32,8 +32,9 @@ h1 {
 }
 
 h2 {
-  @include responsive-font-width(28px, map-get($media-min-widths, lg), 24px);
   margin-bottom: math.div($margin, 3);
+
+  @include responsive-font-width(28px, map-get($media-min-widths, lg), 24px);
 }
 
 h3 {

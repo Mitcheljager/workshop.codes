@@ -10,6 +10,10 @@
   width: initial;
   margin-top: .35rem;
   padding: .35rem;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .form-tags__tag {
