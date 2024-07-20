@@ -67,8 +67,8 @@
         linter(OWLanguageLinter),
         indentUnit.of("    "),
         keymap.of([
-          { key: "Tab", run: tabIndent },
-          { key: "Shift-Tab", run: tabIndent },
+          { key: "Tab", run: (view) => tabIndent(view, event) },
+          { key: "Shift-Tab", run: (view) => tabIndent(view, event)  },
           { key: "Enter", run: autoIndentOnEnter },
           { key: "Shift-Enter", run: autoIndentOnEnter },
           { key: "Ctrl-Shift-z", run: redoAction }

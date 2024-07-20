@@ -7,7 +7,7 @@ import { EditorSelection } from "@codemirror/state"
  * @returns {Boolean} Should return true on complete
  */
 export function tabIndent({ state, dispatch }, event) {
-  const { shiftKey, target } = event
+  const { shiftKey, target } = event || {}
 
   // Do not indent when autocomplete is open
   if (target.closest(".cm-editor").querySelector(".cm-tooltip-autocomplete")) return true
