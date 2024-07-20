@@ -51,7 +51,7 @@
           Create your first project
         </button>
 
-        <a class="button button--ghost" href="https://workshop.codes/editor?uuid=c7b3c40a-2f86-45c4-9b3f-f39d3c2974bc">Check out a sample project</a>
+        <a class="button button--ghost" href="https://workshop.codes/editor?uuid=abb302fc-46ef-4b4c-b7db-e09488463477">Check out a sample project</a>
       {/if}
     </div>
   </div>
