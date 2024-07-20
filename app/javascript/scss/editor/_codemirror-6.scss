@@ -42,7 +42,7 @@
   }
 
   .cm-selectionBackground {
-    background: lighten($bg-dark, 10%);
+    background: lighten($bg-dark, 10%) !important;
   }
 
   .cm-selectionMatch {
