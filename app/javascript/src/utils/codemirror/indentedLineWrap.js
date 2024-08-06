@@ -11,18 +11,19 @@ const getDecorations = (state) => {
   for (let i = 0; i < state.doc.lines; i ++) {
     const line = state.doc.line(i + 1)
     const numberOfTabs = getStartTabs(line.text).length
+
     if (numberOfTabs === 0) continue
 
     const offset = numberOfTabs * state.tabSize
 
-    const linerwapper = Decoration.line({
+    const lineWrapper = Decoration.line({
       attributes: {
         style: `--indented: ${offset}ch;`,
         class: "indented-wrapped-line"
       }
     })
 
-    decorations.push(linerwapper.range(line.from, line.from))
+    decorations.push(lineWrapper.range(line.from, line.from))
   }
 
   return Decoration.set(decorations)
