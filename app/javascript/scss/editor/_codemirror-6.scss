@@ -274,7 +274,7 @@
 
 .indented-wrapped-line {
   --text-indent-multiplier: -1.5;
-  border-left: var(--indented);
+  margin-left: var(--indented);
   text-indent: calc(var(--text-indent-multiplier) * var(--indented));
 
   @supports (-moz-appearance: none) {
