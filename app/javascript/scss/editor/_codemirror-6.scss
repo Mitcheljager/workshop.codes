@@ -273,26 +273,24 @@
 }
 
 .indented-wrapped-line {
-  --text-indent-multiplier: -1.5;
-  margin-left: var(--indented);
-  text-indent: calc(var(--text-indent-multiplier) * var(--indented));
-
   @supports (-moz-appearance: none) {
     --text-indent-multiplier: -1;
-  }
+    margin-left: var(--indented);
+    text-indent: calc(var(--text-indent-multiplier) * var(--indented));
 
-  &.cm-activeLine {
-    box-shadow: calc((-1 * var(--indented)) + 4px) 0 0 rgba($white, 0.025)
-  }
-
-  &.cm-indent-markers {
-    &::before {
-      left: calc(var(--indented) * -1 + 2px);
+    &.cm-activeLine {
+      box-shadow: calc((-1 * var(--indented)) + 4px) 0 0 rgba($white, 0.025)
     }
-  }
 
-  button,
-  .button {
-    text-indent: 0;
+    &.cm-indent-markers {
+      &::before {
+        left: calc(var(--indented) * -1 + 2px);
+      }
+    }
+
+    button,
+    .button {
+      text-indent: 0;
+    }
   }
 }
