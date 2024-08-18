@@ -11,11 +11,11 @@
   opacity: 0;
   z-index: -1;
 
-  &--visible {
-    opacity: .25;
-  }
-
   @include media-min(sm) {
     transition: opacity 1000ms;
+  }
+
+  &--visible {
+    opacity: .25;
   }
 }
