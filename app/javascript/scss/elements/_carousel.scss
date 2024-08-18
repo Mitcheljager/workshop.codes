@@ -4,7 +4,7 @@
   max-width: 900px;
 
   [data-role="carousel"]:not([style]) {
-    height: 500px;
+    aspect-ratio: 900/500;
     overflow: hidden;
   }
 }
@@ -20,7 +20,7 @@
     height: 100%;
     background: $bg-darker;
     text-indent: 1000 * 1000px;
-    aspect-ratio: 16/9;
+    aspect-ratio: 900/500;
   }
 }
 
