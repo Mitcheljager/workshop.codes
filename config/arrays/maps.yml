@@ -153,6 +153,11 @@
   slug: hanaoka
   overwatch_2: true
 -
+  name: Throne of Anubis
+  type: Clash
+  slug: throne-of-anubis
+  overwatch_2: true
+-
   name: Black Forest
   type: Arcade
   slug: black-forest
