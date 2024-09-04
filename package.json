@@ -28,7 +28,7 @@
     "postcss-import": "^16.1.0",
     "siema": "^1.5.1",
     "sortablejs": "^1.15.0",
-    "svelte": "^4.2.12",
+    "svelte": "^4.2.19",
     "svelte-confetti": "^1.2.2",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^5.1.3",
