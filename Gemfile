@@ -10,14 +10,15 @@ gem "aws-sdk-s3", require: false
 gem "bcrypt", require: "bcrypt"
 gem "blind_index"
 gem "breadcrumbs_on_rails"
+gem 'bonsai-elasticsearch-rails', github: 'omc/bonsai-elasticsearch-rails', branch: 'master'
 gem "bootsnap", require: false
 gem "chart-js-rails"
 gem "diffy"
 gem "disco"
 gem "discord-notifier"
 gem "dynoscale_ruby"
-gem "elasticsearch-model", "~> 6"
-gem "elasticsearch-rails", "~> 6"
+gem "elasticsearch-model", "~> 7.2.1"
+gem "elasticsearch-rails", "~> 7.2.1"
 gem "geocoder"
 gem "image_processing", "~> 1.12"
 gem "inline_svg"
