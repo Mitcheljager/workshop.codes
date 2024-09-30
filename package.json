@@ -61,7 +61,7 @@
   "scripts": {
     "test": "vitest",
     "postinstall": "patch-package",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,.ts,.svelte}": [
