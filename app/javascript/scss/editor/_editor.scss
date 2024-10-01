@@ -44,6 +44,7 @@ $top-height: 4rem;
   position: sticky;
   bottom: 0;
   padding: 1.5rem 0.5rem 0.5rem;
+  z-index: 5;
 
   background: linear-gradient(180deg,
     rgba(darken($bg-dark, 5%), 0) 0,
