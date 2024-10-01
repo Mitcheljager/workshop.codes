@@ -27,7 +27,7 @@
     <p class="mt-0 mb-0 pl-1/4 pr-1/4 small text-dark"><em>Start by creating a new item using the button below.</em></p>
   {/if}
 
-  <div class="item-list__add-item">
+  <div class="editor__add-item">
     <EditorItemCreate>
       <span class="button button--secondary w-100 button--square">Add</span>
     </EditorItemCreate>

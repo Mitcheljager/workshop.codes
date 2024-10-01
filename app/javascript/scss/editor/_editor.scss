@@ -38,16 +38,16 @@ $top-height: 4rem;
   overflow: auto;
 
   @include styled-scrollbar;
+}
 
-  .item-list__add-item {
-    position: sticky;
-    bottom: 0;
-    padding: 1.5rem 0.5rem 0.5rem;
+.editor__add-item {
+  position: sticky;
+  bottom: 0;
+  padding: 1.5rem 0.5rem 0.5rem;
 
-    background: linear-gradient(180deg,
-      change-color(darken($bg-dark, 5%), $alpha: 0) 0,
-      darken($bg-dark, 5%) 1.5rem);
-  }
+  background: linear-gradient(180deg,
+    rgba(darken($bg-dark, 5%), 0) 0,
+    darken($bg-dark, 5%) 1.5rem);
 }
 
 .editor__top {
