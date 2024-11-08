@@ -189,7 +189,7 @@ class InitialiseInscrybeMDE {
   }
 
   insertUpdateNotes() {
-    const output = `<!-- Update notes are formatted to look like the official patch notes. Replace each value with the hero, ability, or text you want. Each value is optional and can be left out entirely. -->
+    const output = `<!-- Update notes are formatted to look like the official patch notes. Replace each value with the hero, ability, or text you want. Each value is optional and can be left out entirely. Icons can be overridden using the "icons" section. Specify each icon with the ability name to replace. This can be either another ability name or a URL to a custom image. When using a url it should start with "https://" -->
 [update {
   hero: "Reinhardt",
   title: "Optional title to change the hero name, remove to default to the hero name",
@@ -202,6 +202,9 @@ class InitialiseInscrybeMDE {
       "Some change you made to this ability",
       "Some other change you made to this ability"
     ]
+  },
+  icons: {
+    "Charge": "Blizzard"
   }
 }]`
 

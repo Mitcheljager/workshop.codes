@@ -173,11 +173,12 @@ module ContentHelper
         title = data["title"]
         description = data["description"]
         abilities = data["abilities"]
+        icons = data["icons"] || {}
 
         if action_name == "parse_markdown"
-          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities, icons: icons }
         else
-          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities, icons: icons }
         end
       rescue => error
         "<em>An error was found in the Hero Update markdown</em>"
