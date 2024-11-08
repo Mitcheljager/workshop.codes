@@ -30,7 +30,7 @@
     <%= vite_stylesheet_tag "application.scss" %>
 
     <%= vite_client_tag %>
-    <%= vite_javascript_tag "application", "data-turbolinks-track": "reload", defer: true %>
+    <%= vite_typescript_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
     <% if current_user %>
       <%= vite_stylesheet_tag "logged-in-user.scss" %>
