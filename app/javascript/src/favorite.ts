@@ -5,22 +5,24 @@ export function bind() {
   document.body.removeAndAddEventListener("click", favorite)
 }
 
-async function favorite(event) {
-  let eventTarget = event.target
-  if (eventTarget.dataset.action != "favorite") eventTarget = event.target.closest("[data-action~='favorite']")
+async function favorite(event: MouseEvent) {
+  let eventTarget = event.target as HTMLElement
+  if (eventTarget.dataset.action != "favorite") eventTarget = eventTarget.closest("[data-action~='favorite']") as HTMLElement
 
   if (eventTarget) toggleFavorite(eventTarget)
 }
 
-export function toggleFavorite(element) {
+export function toggleFavorite(element: HTMLElement) {
   const postId = element.dataset.target
   const active = element.dataset.active == "true"
   const body = { favorite: { post_id: postId } }
   const imageSrc = active ? element.dataset.inactiveIcon : element.dataset.activeIcon
   const imageElement = element.querySelector("img")
 
+  if (!imageElement || !imageSrc) return
+
   imageElement.src = imageSrc
-  element.dataset.active = !active
+  element.dataset.active = (!active).toString()
   element.classList.toggle("favorite--is-active", !active)
   element.classList.toggle("favorite--animating", !active)
 
@@ -29,9 +31,9 @@ export function toggleFavorite(element) {
       if (!active) window.dispatchEvent(new CustomEvent("favorite"))
     })
     .catch(() => {
-      imageElement.src = !active ? element.dataset.inactiveIcon : element.dataset.activeIcon
+      imageElement.src = (!active ? element.dataset.inactiveIcon : element.dataset.activeIcon) || ""
       element.classList.toggle("favorite--is-active", active)
-      element.dataset.active = active
+      element.dataset.active = active.toString()
 
       addAlertError("Something went wrong, please try again")
     })
