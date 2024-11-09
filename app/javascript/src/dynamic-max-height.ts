@@ -5,8 +5,8 @@ export function bind() {
 }
 
 export function destroy() {
-  window.removeEventListener("scroll", setHeight, { passive: true })
-  window.removeEventListener("resize", setHeight, { passive: true })
+  window.removeEventListener("scroll", setHeight)
+  window.removeEventListener("resize", setHeight)
 }
 
 function setHeight() {
@@ -14,9 +14,9 @@ function setHeight() {
 
   elements.forEach(element => {
     const parent = element.parentElement
-    const target = element.querySelector("[data-dynamic-height-target]")
+    const target = element.querySelector("[data-dynamic-height-target]") as HTMLElement
 
-    if (!target) return
+    if (!parent || !target) return
 
     const distanceFromTop = parent.getBoundingClientRect().top
     const distanceFromBottom = parent.getBoundingClientRect().bottom

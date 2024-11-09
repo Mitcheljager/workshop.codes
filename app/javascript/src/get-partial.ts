@@ -2,16 +2,16 @@ import FetchRails from "@src/fetch-rails"
 import * as lazyVideo from "@src/lazy-video"
 
 export function bind() {
-  const elements = document.querySelectorAll("[data-action~='get-partial']")
+  const elements = Array.from(document.querySelectorAll("[data-action~='get-partial']")) as HTMLElement[]
 
   elements.forEach(element => {
-    if (element.dataset.getOnLoad == "true") getPartial(event, element)
+    if (element.dataset.getOnLoad == "true") getPartial(null, element)
     if (element.dataset.lazy == "true") setObserver(element)
     else element.removeAndAddEventListener("click", getPartial)
   })
 }
 
-function setObserver(element) {
+function setObserver(element: HTMLElement) {
   const observer = new IntersectionObserver(entries => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return
@@ -24,15 +24,19 @@ function setObserver(element) {
   observer.observe(element)
 }
 
-function getPartial(event, element) {
+function getPartial(event: Event | null, element: HTMLElement) {
   if (event) event.preventDefault()
 
-  let _this = element || event.target
-  if (!_this.dataset.url) _this = event.target.closest("[data-action~='get-partial']")
-  const targetElement = document.querySelector(`[data-partial="${_this.dataset.target}"]`)
-  const url = _this.dataset.url
+  const target = event?.target as HTMLElement
+
+  let eventElement = element || target
+  if (!eventElement.dataset.url) eventElement = target.closest("[data-action~='get-partial']") as HTMLElement
+
+  const targetElement = document.querySelector(`[data-partial="${eventElement.dataset.target}"]`) as HTMLElement
+  const url = eventElement.dataset.url
 
   if (targetElement.dataset.loaded == "true") return
+  if (!url) return
 
   new FetchRails(url).get()
     .then(data => {
@@ -41,7 +45,7 @@ function getPartial(event, element) {
     .then(() => {
       lazyVideo.bind(targetElement)
 
-      if (_this.dataset.scrollOnLoad != "true") return
+      if (eventElement.dataset.scrollOnLoad != "true") return
 
       const hash = window.location.hash?.substring(1)
       if (!hash) return
@@ -50,7 +54,7 @@ function getPartial(event, element) {
       if (!scrollElement) return
 
       const scrollOffset = scrollElement.getBoundingClientRect().top + document.documentElement.scrollTop
-      const stickyElement = document.querySelector("[data-role~='sticky']")
+      const stickyElement = document.querySelector("[data-role~='sticky']") as HTMLElement
       const scrollExtra = stickyElement ? stickyElement.offsetHeight * 1.25 : 0
 
       window.scrollTo({ top: scrollOffset - scrollExtra, behavior: "smooth" })

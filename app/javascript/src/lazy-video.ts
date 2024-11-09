@@ -1,13 +1,13 @@
-export function bind(target = document) {
+export function bind(target: HTMLElement | Document = document) {
   const elements = target.querySelectorAll("[data-role~='lazy-video']")
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return
 
-      const element = entry.target
+      const element = entry.target as HTMLVideoElement
 
-      element.src = element.dataset.src
+      element.src = element.dataset.src || ""
       if (element.dataset.autoplay === "true") element.play()
       observer.unobserve(element)
     })
