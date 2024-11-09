@@ -45,6 +45,7 @@
     "@types/rails__activestorage": "^7.1.1",
     "@types/rails__ujs": "^6.0.4",
     "@types/siema": "^1.4.11",
+    "@types/sortablejs": "^1.15.8",
     "@types/turbolinks": "^5.2.2",
     "eslint": "^7.25.0",
     "eslint-plugin-svelte": "^2.35.1",

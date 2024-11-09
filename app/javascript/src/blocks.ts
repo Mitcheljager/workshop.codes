@@ -4,7 +4,7 @@ import LimitedCheckboxes from "@components/form/LimitedCheckboxes.svelte"
 import FetchRails from "@src/fetch-rails"
 
 export function bind() {
-  const element = document.querySelector("[data-role~='block-sortable']")
+  const element = document.querySelector("[data-role~='block-sortable']") as HTMLElement
 
   if (element) buildBlockSortable(element)
 
@@ -12,21 +12,21 @@ export function bind() {
   createBlockElements.forEach(element => element.removeAndAddEventListener("click", createBlock))
 }
 
-function createBlock() {
-  if (this.dataset.disabled == "true") return
+function createBlock({ currentTarget }: { currentTarget: HTMLElement }) {
+  if (currentTarget.dataset.disabled == "true") return
 
-  this.dataset.disabled = true
+  currentTarget.dataset.disabled = "true"
 
-  new FetchRails("/blocks", { block: { content_type: this.dataset.contentType, name: this.dataset.name } })
+  new FetchRails("/blocks", { block: { content_type: currentTarget.dataset.contentType, name: currentTarget.dataset.name } })
     .post().then(data => {
       new Promise((resolve) => new Function("resolve", data)(resolve))
       renderSvelteComponents()
     }).finally(() => {
-      this.dataset.disabled = false
+      currentTarget.dataset.disabled = "false"
     })
 }
 
-function buildBlockSortable(element) {
+function buildBlockSortable(element: HTMLElement) {
   Sortable.create(element, {
     draggable: "[data-sortable-block]",
     animation: 50,
@@ -35,11 +35,12 @@ function buildBlockSortable(element) {
 }
 
 function updateBlockSortable() {
-  const blocks = document.querySelectorAll(".content-block")
+  const blocks = Array.from(document.querySelectorAll(".content-block")) as HTMLElement[]
 
-  const positions = []
+  const positions: { id: any[]; position: number }[] = []
   blocks.forEach((block, i) => positions.push({ id: [block.dataset.id], position: i }))
 
+  // @ts-ignore
   const progressBar = new Turbolinks.ProgressBar()
   progressBar.setValue(0)
   progressBar.show()
@@ -55,23 +56,30 @@ function renderSvelteComponents() {
   initializeSvelteComponent("LimitedCheckboxes", LimitedCheckboxes)
 }
 
-export function insertBlockTemplate(event) {
+export function insertBlockTemplate(event: MouseEvent) {
   event.preventDefault()
 
-  const template = document.getElementById(`${this.dataset.template}`).content.cloneNode(true)
-  const targetElement = document.querySelector(`[data-template-target="${this.dataset.target}"]`)
+  const currentTarget = event.currentTarget as HTMLElement
+  const templateElement = document.getElementById(`${currentTarget.dataset.template}`) as HTMLFormElement
 
-  targetElement.append(template)
+  if (!templateElement) return
+
+  const template = templateElement.content.cloneNode(true)
+  const targetElement = document.querySelector(`[data-template-target="${currentTarget.dataset.target}"]`)
+
+  if (targetElement) targetElement.append(template)
 }
 
-export function removeBlockTemplate(event) {
+export function removeBlockTemplate(event: MouseEvent) {
   event.preventDefault()
 
-  const target = event.target.closest("[data-remove-target]")
-  target.remove()
+  const currentTarget = event.currentTarget as HTMLElement
+  const target = currentTarget.closest("[data-remove-target]")
+
+  if (target) target.remove()
 }
 
-export function buildInputSortable(element) {
+export function buildInputSortable(element: HTMLElement) {
   Sortable.create(element, {
     animation: 50,
     handle: "[data-role~='sortable-handle']"

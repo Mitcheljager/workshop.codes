@@ -31,9 +31,7 @@ import * as modal from "@src/modal"
 import * as navigation from "@src/navigation"
 import * as numPlayersSlider from "@src/num-players-slider"
 import * as ollieForm from "@src/ollie-form"
-import * as revealByCheckbox from "@src/reveal-by-checkbox" // TODO: Move to logged-in-users
 import * as revealBySelect from "@src/reveal-by-select"
-import * as revealOnDifference from "@src/reveal-on-difference" // TODO: Move to logged-in-users
 import * as scrollIndicator from "@src/scroll-indicator"
 import * as scrollIntoViewOnLoad from "@src/scroll-into-view-on-load"
 import * as sticky from "@src/sticky"
@@ -60,9 +58,7 @@ document.addEventListener("turbolinks:load", () => {
   modal.bind()
   navigation.bind()
   ollieForm.bind()
-  revealByCheckbox.bind()
   revealBySelect.bind()
-  revealOnDifference.bind()
   scrollIndicator.bind()
   sticky.bind()
   tabs.bind()

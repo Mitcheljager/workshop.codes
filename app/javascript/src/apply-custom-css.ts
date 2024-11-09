@@ -4,9 +4,9 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("input", applyCustomCSS))
 }
 
-function applyCustomCSS() {
-  const value = this.value
+function applyCustomCSS({ currentTarget }: { currentTarget: HTMLFormElement }) {
+  const value = currentTarget.value
   const styleTag = document.querySelector("#custom-css")
 
-  styleTag.textContent = value
+  if (styleTag) styleTag.textContent = value
 }

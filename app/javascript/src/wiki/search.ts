@@ -1,5 +1,6 @@
 import debounce from "@src/debounce"
 import FetchRails from "@src/fetch-rails"
+import type { WikiArticle } from "@src/types"
 
 export function bind() {
   const element = document.querySelector("[data-role='wiki-search']")
@@ -11,13 +12,15 @@ export function bind() {
 }
 
 const searchWiki = debounce(() => {
-  const element = document.querySelector("[data-role='wiki-search']")
+  const element = document.querySelector("[data-role='wiki-search']") as HTMLFormElement
   if (!element.value) return
 
-  const resultsElement = document.querySelector("[data-role='wiki-search-results']")
+  const resultsElement = document.querySelector("[data-role='wiki-search-results']") as HTMLElement
 
   resultsElement.innerHTML = "Searching..."
-  const url = resultsElement.dataset.url.replace("query", element.value) + ".json"
+  const url = resultsElement.dataset.url?.replace("query", element.value) + ".json"
+
+  if (!url) throw new Error("No valid URL was provided for searchWiki")
 
   new FetchRails(url).get()
     .then(data => {
@@ -25,8 +28,8 @@ const searchWiki = debounce(() => {
     })
 }, 500)
 
-function setWikiSearchResults(data) {
-  const resultsElement = document.querySelector("[data-role='wiki-search-results']")
+function setWikiSearchResults(data: WikiArticle[]) {
+  const resultsElement = document.querySelector("[data-role='wiki-search-results']") as HTMLElement
   resultsElement.innerHTML = ""
 
   if (!data.length) {
@@ -34,7 +37,7 @@ function setWikiSearchResults(data) {
     return
   }
 
-  data.forEach(item => {
+  data.forEach((item: WikiArticle) => {
     const itemElement = document.createElement("a")
     itemElement.classList.add("search__item")
     itemElement.innerText = item.title

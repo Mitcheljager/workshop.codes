@@ -26,6 +26,8 @@ import * as imagePreview from "@src/image-preview"
 import * as inscrybMde from "@src/inscryb-mde"
 import * as linkedInput from "@src/linked-input"
 import * as setCssVariable from "@src/set-css-variable"
+import * as revealByCheckbox from "@src/reveal-by-checkbox"
+import * as revealOnDifference from "@src/reveal-on-difference"
 
 document.addEventListener("turbolinks:load", () => {
   const svelteComponents = {
@@ -54,6 +56,8 @@ document.addEventListener("turbolinks:load", () => {
   setCssVariable.bind()
   linkedInput.bind()
   imagePreview.bind()
+  revealByCheckbox.bind()
+  revealOnDifference.bind()
 
   chart.render()
   inscrybMde.render()
