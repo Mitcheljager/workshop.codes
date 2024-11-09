@@ -6,28 +6,32 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("click", setTab))
 }
 
-function setTab(event) {
-  event.preventDefault()
+function setTab({ currentTarget, preventDefault }: { currentTarget: HTMLElement, preventDefault: Function }) {
+  preventDefault()
 
-  if (this.classList.contains("tabs__item--active")) return
+  if (currentTarget.classList.contains("tabs__item--active")) return
 
-  const target = this.dataset.target
-  const parentElement = this.closest("[data-role~='tabs']")
+  const target = currentTarget.dataset.target
+  const parentElement = currentTarget.closest("[data-role~='tabs']") as HTMLElement
 
-  const tabElement = this.classList.contains("tabs__item") ? this : document.querySelector(`.tabs__item[data-target~='${target}']`)
+  if (!target) return
+  if (!parentElement) return
+
+  const tabElement = (currentTarget.classList.contains("tabs__item") ? currentTarget : document.querySelector(`.tabs__item[data-target~='${target}']`)) as HTMLAnchorElement
+  if (!tabElement) return
 
   setActiveTab(tabElement, parentElement)
-  revealTab(target, parentElement, scroll)
-  if (this.dataset.action.includes("scroll")) scrollToElement(parentElement)
+  revealTab(target, parentElement)
+  if (currentTarget.dataset.action?.includes("scroll")) scrollToElement(parentElement)
 }
 
-function revealTab(target, parentElement) {
+function revealTab(target: string, parentElement: Element) {
   const targetElement = document.querySelector(`[data-tab~='${target}']`)
   const tabElements = parentElement.querySelectorAll(".tabs-content")
 
   const activeElement = Array.from(tabElements).find(element => {
     if (!element.classList.contains("tabs-content--active")) return
-    if (element.closest("[data-role~='tabs']").innerHTML != parentElement.innerHTML) return
+    if (element.closest("[data-role~='tabs']")?.innerHTML != parentElement.innerHTML) return
 
     return element
   })
@@ -40,6 +44,8 @@ function revealTab(target, parentElement) {
       activeElement.classList.remove("tabs-content--transitioning-out")
     }
 
+    if (!targetElement) return
+
     targetElement.classList.add("tabs-content--active")
     targetElement.classList.add("tabs-content--transitioning-in")
 
@@ -47,11 +53,11 @@ function revealTab(target, parentElement) {
   }, 150)
 }
 
-function setActiveTab(targetElement, parentElement) {
+function setActiveTab(targetElement: HTMLAnchorElement, parentElement: HTMLElement) {
   const tabs = parentElement.querySelectorAll(".tabs__item")
 
-  tabs.forEach(tab => {
-    if (tab.closest("[data-role~='tabs']").innerHTML != parentElement.innerHTML) return
+  tabs.forEach((tab: Element) => {
+    if (tab.closest("[data-role~='tabs']")?.innerHTML != parentElement.innerHTML) return
     tab.classList.remove("tabs__item--active")
   })
 
@@ -62,15 +68,15 @@ function setActiveTab(targetElement, parentElement) {
   }
 }
 
-function resetCarouselInTab(targetElement) {
-  const carouselElement = targetElement.querySelector("[data-role='carousel']")
+function resetCarouselInTab(targetElement: Element) {
+  const carouselElement = targetElement.querySelector("[data-role='carousel']") as HTMLElement
   if (!carouselElement || !carousel) return
 
   carousel.destroy(true)
   setCarousel(carouselElement)
 }
 
-function scrollToElement(element) {
+function scrollToElement(element: Element) {
   const scrollTop = document.documentElement.scrollTop
   const offset = element.getBoundingClientRect().top + scrollTop
   if (offset < scrollTop) window.scrollTo({ top: offset - 10 })

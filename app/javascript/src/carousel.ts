@@ -1,12 +1,17 @@
-import Siema from "siema/dist/siema.min"
+import Siema, { type SiemaOptions } from "siema"
 
-export let carousel
+interface SiemaExtended extends Siema {
+  innerElements: HTMLElement[],
+  resizeHandler: EventListener
+}
+
+export let carousel: SiemaExtended
 
 export function render() {
-  const blurElement = document.querySelector("[data-use-blur='true']")
+  const blurElement = document.querySelector("[data-use-blur='true']") as HTMLElement
   if (blurElement && blurElement.dataset.role != "carousel") setBlur(blurElement)
 
-  const element = document.querySelector("[data-role='carousel']")
+  const element = document.querySelector("[data-role='carousel']") as HTMLElement
 
   if (!element) return
 
@@ -16,24 +21,23 @@ export function render() {
   navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
 }
 
-export function setCarousel(element) {
+export function setCarousel(element: HTMLElement) {
   carousel = new Siema({
     selector: element,
     onInit: setActiveItem,
     onChange: setActiveItem,
     duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 200
-  })
+  }) as SiemaExtended
 
   setResizeHandler()
 }
 
-function carouselGoTo() {
-  const target = this.dataset.target
-
+function carouselGoTo({ currentTarget }: { currentTarget: HTMLElement }) {
+  const target = parseInt(currentTarget.dataset.target || '0')
   carousel.goTo(target)
 }
 
-async function setActiveItem() {
+async function setActiveItem(this: SiemaExtended & SiemaOptions) {
   await new Promise(res => setTimeout(res)) // Wait(0) for carousel to be initiated
 
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
@@ -46,19 +50,20 @@ async function setActiveItem() {
 
   stopVideo()
 
-  if (carousel?.selector?.dataset.useBlur) setBlur(carousel.innerElements[carousel.currentSlide])
+  const selector = this.selector as HTMLElement
+  if (selector.dataset.useBlur) setBlur(carousel.innerElements[carousel.currentSlide])
 }
 
-function setLazyImage(element) {
+function setLazyImage(carousel: SiemaExtended) {
   const slides = []
-  slides.push(element.innerElements[element.currentSlide - 1])
-  slides.push(element.innerElements[element.currentSlide])
-  slides.push(element.innerElements[element.currentSlide + 1])
+  slides.push(carousel.innerElements[carousel.currentSlide - 1])
+  slides.push(carousel.innerElements[carousel.currentSlide])
+  slides.push(carousel.innerElements[carousel.currentSlide + 1])
 
   slides.forEach(slide => {
     if (!slide) return
 
-    const sources = slide.querySelectorAll("source, img")
+    const sources = Array.from(slide.querySelectorAll("source, img")) as HTMLImageElement[]
 
     sources.forEach(source => {
       if (source.dataset.src) {
@@ -72,16 +77,17 @@ function setLazyImage(element) {
 
 function stopVideo() {
   const carousel = document.querySelector("[data-role='carousel']")
-  const iframe = carousel.querySelector("iframe")
+  if (!carousel) return
 
-  if (!iframe) return
+  const iframe = carousel.querySelector("iframe")
+  if (!iframe?.contentWindow) return
 
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
 }
 
-async function setBlur(element) {
+async function setBlur(element: HTMLElement) {
   const image = element.querySelector("img")
-  const blurElements = document.querySelectorAll("[data-role='carousel-blur']")
+  const blurElements = Array.from(document.querySelectorAll("[data-role='carousel-blur']")) as HTMLImageElement[]
   const blurElement = blurElements[blurElements.length - 1]
   const whitePixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NobW39DwAFsQKP8FV1WwAAAABJRU5ErkJggg=="
 
@@ -116,6 +122,6 @@ function setResizeHandler() {
   window.addEventListener("resize", resizeHandler)
 }
 
-function resizeHandler() {
-  if (!document.fullscreenElement) carousel.resizeHandler()
+function resizeHandler(event: Event) {
+  if (!document.fullscreenElement) carousel.resizeHandler(event)
 }
