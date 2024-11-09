@@ -18,7 +18,7 @@ export function bind() {
 
 function isInfiniteScrollInView() {
   const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
-  const element = elements[elements.length - 1]
+  const element = elements[elements.length - 1] as HTMLElement
 
   if (!element) return
   if (element.offsetParent === null) return
@@ -29,15 +29,17 @@ function isInfiniteScrollInView() {
 
   if(position.top < window.innerHeight + 500 && position.bottom >= 0) {
     getInfiniteScrollContent(element)
-    element.setAttribute("data-reached", true)
+    element.setAttribute("data-reached", "true")
   }
 }
 
-function loadMorePosts(event) {
-  getInfiniteScrollContent(event.target)
+function loadMorePosts({ target }: { target: HTMLElement }) {
+  getInfiniteScrollContent(target)
 }
 
-function getInfiniteScrollContent(element) {
+function getInfiniteScrollContent(element: HTMLElement) {
+  if (!element.dataset.url) return
+
   element.innerHTML = "<div class='spinner'></div>"
 
   // Get last requested post set URL
@@ -45,9 +47,9 @@ function getInfiniteScrollContent(element) {
 
   // Increment page parameter
   if (requestUrl.searchParams.get("page") != null) {
-    requestUrl.searchParams.set("page", Number(requestUrl.searchParams.get("page")) + 1)
+    requestUrl.searchParams.set("page", (Number(requestUrl.searchParams.get("page")) + 1).toString())
   } else {
-    requestUrl.searchParams.set("page", 2)
+    requestUrl.searchParams.set("page", "2")
   }
 
   // Ensure request is interpreted as requesting JavaScript response
@@ -76,7 +78,7 @@ function getInfiniteScrollContent(element) {
       } else if (element.dataset.loadMethod === "infinite-scroll") {
         let button = document.querySelector("[data-role='load-more-posts']")
         if (!button) {
-          element.insertAdjacentHTML("afterEnd", `
+          element.insertAdjacentHTML("afterend", `
             <div class="flex justify-center">
               <div
                 class="mt-1/2 button button--secondary pr-1/1 pl-1/1"
@@ -89,7 +91,8 @@ function getInfiniteScrollContent(element) {
             </div>
           `)
         }
-        button = document.querySelector("[data-role='load-more-posts']")
+
+        button = document.querySelector("[data-role='load-more-posts']") as HTMLElement
         button.removeAndAddEventListener("click", loadMorePosts)
       }
 

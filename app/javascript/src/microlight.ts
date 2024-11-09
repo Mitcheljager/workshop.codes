@@ -11,7 +11,7 @@
  * Code structure aims at minimizing the compressed library size
  */
 
-export async function reset(cls) {
+export async function reset(className = "") {
   // for better compression
   var _window = window,
     _document = document,
@@ -25,7 +25,7 @@ export async function reset(cls) {
     el;  // current microlighted element to run through
 
   // nodes to highlight
-  microlighted = _document.getElementsByClassName(cls || 'microlight');
+  microlighted = _document.getElementsByClassName(className || 'microlight');
 
   for (i = 0; el = microlighted[i++];) {
     const fullText = el.textContent

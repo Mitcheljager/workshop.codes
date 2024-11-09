@@ -2,28 +2,28 @@ import FetchRails from "@src/fetch-rails"
 import { initiateIde } from "@src/ide"
 
 export function bind() {
-  const elements = document.querySelectorAll("[data-action~='load-snippet']")
+  const elements = Array.from(document.querySelectorAll("[data-action~='load-snippet']")) as HTMLElement[]
 
   elements.forEach((element) => {
     element.removeAndAddEventListener("click", loadSnippet)
 
-    if (element.dataset.getOnLoad == "true") loadSnippet(event, element)
+    if (element.dataset.getOnLoad == "true") loadSnippet(null, element)
   })
 }
 
-function loadSnippet(event, element) {
-  event.preventDefault()
+function loadSnippet(event: Event | null, element: HTMLElement) {
+  if (event) event.preventDefault()
 
-  const _this = element || event.target
+  const targetElement = element || event?.target
 
-  if (_this.dataset.retrieved == "true") return
+  if (targetElement.dataset.retrieved == "true") return
 
-  _this.dataset.retrieved = true
+  targetElement.dataset.retrieved = "true"
 
-  const id = _this.dataset.id
+  const id = targetElement.dataset.id
 
-  const ideElement = document.querySelector("[data-role~='ide-content']")
-  const copyElement = document.querySelector("[data-copy~='snippet']")
+  const ideElement = document.querySelector("[data-role~='ide-content']") as HTMLElement
+  const copyElement = document.querySelector("[data-copy~='snippet']") as HTMLElement
 
   new FetchRails("/get-snippet", { id: id })
     .post()

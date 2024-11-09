@@ -8,15 +8,17 @@ export function bind() {
   element.removeAndAddEventListener("click", getVerifiedUsers)
 }
 
-function getVerifiedUsers(event) {
+function getVerifiedUsers(event: Event) {
   event.preventDefault()
 
-  if (this.dataset.authorsLoaded == "true") return
+  const target = event.target as HTMLElement
 
-  this.dataset.authorsLoaded = true
+  if (target.dataset.authorsLoaded == "true") return
+
+  target.dataset.authorsLoaded = "true"
 
   new FetchRails("/get-verified-users").get().then(data => {
-    const element = document.querySelector("[data-role='filter-authors']")
+    const element = document.querySelector("[data-role='filter-authors']") as HTMLElement
 
     element.innerHTML = data
   })

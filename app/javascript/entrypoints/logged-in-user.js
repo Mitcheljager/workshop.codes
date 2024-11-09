@@ -22,6 +22,7 @@ import * as favorite from "@src/favorite"
 import * as getPostAnalytics from "@src/get-post-analytics"
 import * as getUserAnalytics from "@src/get-user-analytics"
 import * as ide from "@src/ide"
+import * as imagePreview from "@src/image-preview"
 import * as inscrybMde from "@src/inscryb-mde"
 import * as linkedInput from "@src/linked-input"
 import * as setCssVariable from "@src/set-css-variable"
@@ -52,6 +53,7 @@ document.addEventListener("turbolinks:load", () => {
   getUserAnalytics.bind()
   setCssVariable.bind()
   linkedInput.bind()
+  imagePreview.bind()
 
   chart.render()
   inscrybMde.render()

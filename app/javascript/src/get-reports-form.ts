@@ -7,9 +7,10 @@ export function bind() {
   document.body.removeAndAddEventListener("click", getReportsForm)
 }
 
-function getReportsForm(event) {
-  let eventTarget = event.target
-  if (eventTarget.dataset.action != "get-reports-form") eventTarget = event.target.closest("[data-action='get-reports-form']")
+function getReportsForm(event: Event) {
+  let eventTarget = event.target as HTMLAnchorElement
+  if (eventTarget.dataset.action != "get-reports-form") eventTarget = eventTarget.closest("[data-action='get-reports-form']") as HTMLAnchorElement
+
   if (!eventTarget) return
 
   event.preventDefault()
@@ -22,8 +23,8 @@ function getReportsForm(event) {
       eventTarget.innerText = originalText
       document.body.insertAdjacentHTML("beforeend", data)
 
-      const modal = document.querySelector("[data-modal='report']")
-      const backdrop = modal.querySelector(".modal__backdrop")
+      const modal = document.querySelector("[data-modal='report']") as HTMLElement
+      const backdrop = modal.querySelector(".modal__backdrop") as HTMLElement
 
       backdrop.removeAndAddEventListener("click", closeModal)
       revealBySelect.bind()
