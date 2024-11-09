@@ -9,7 +9,7 @@ vi.mock("@rails/ujs", () => ({
   }
 }))
 
-describe("favorite.js", () => {
+describe("favorite.ts", () => {
   describe("toggleFavorite", () => {
     it("Should set active state when not active", () => {
       const element = document.createElement("div")
@@ -25,6 +25,7 @@ describe("favorite.js", () => {
     it("Should set inactive state when active", () => {
       const element = document.createElement("div")
       const imageElement = document.createElement("img")
+      imageElement.src = "some-src"
       element.insertAdjacentElement("afterbegin", imageElement)
       element.dataset.active = "true"
 
