@@ -41,6 +41,7 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.4",
+    "@types/d3": "^7.4.3",
     "@types/nouislider": "^9.0.10",
     "@types/rails__activestorage": "^7.1.1",
     "@types/rails__ujs": "^6.0.4",
