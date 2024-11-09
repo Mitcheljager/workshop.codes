@@ -3,5 +3,5 @@
     "module": "CommonJS",
     "target": "ES2022"
   },
-  "include": ["./*.js", "./app/**/*.js", "./public/**/*.js"]
+  "include": ["./*.js", "./*.ts", "./app/**/*.js", "./public/**/*.js"]
 }
