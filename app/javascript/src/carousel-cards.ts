@@ -39,11 +39,9 @@ export function render() {
 
 function carouselCardsChanged(this: Siema & SiemaOptions) {
   const selector = this.selector as HTMLElement
-
   if (!selector) return
 
   const parent = selector.closest(".card-carousel")
-
   if (!parent) return
 
   const nextElement = parent.querySelector("[data-action='carousel-next']")
@@ -53,25 +51,17 @@ function carouselCardsChanged(this: Siema & SiemaOptions) {
   if (nextElement) nextElement.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ''))
 }
 
-function carouselNext(this: Siema & SiemaOptions) {
-  const selector = this.selector as HTMLElement
-
-  if (!selector) return
-
-  const carouselId = getCarouselId(selector)
+function carouselNext({ currentTarget }: { currentTarget: HTMLElement }) {
+  const carouselId = getCarouselId(currentTarget)
   carouselCards[carouselId].next()
 }
 
-function carouselPrevious(this: Siema & SiemaOptions) {
-  const selector = this.selector as HTMLElement
-
-  if (!selector) return
-
-  const carouselId = getCarouselId(selector)
+function carouselPrevious({ currentTarget }: { currentTarget: HTMLElement }) {
+  const carouselId = getCarouselId(currentTarget)
   carouselCards[carouselId].prev()
 }
 
 function getCarouselId(element: HTMLElement): number {
   const carouselElement = element.closest(".card-carousel")?.querySelector("[data-role='carousel-cards']") as HTMLElement
-  return parseInt(carouselElement.dataset.carouselId || '')
+  return parseInt(carouselElement.dataset.carouselId || '0')
 }
