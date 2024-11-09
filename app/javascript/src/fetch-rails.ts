@@ -8,9 +8,9 @@ export default class FetchRails {
     credentials: RequestCredentials
   }
 
-  constructor(url: string, body: string | object, headers = {}) {
+  constructor(url: string, body?: string | object, headers = {}) {
     this.url = url
-    this.body = body
+    this.body = body || ''
     this.defaultParams = {
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export default class FetchRails {
     }
   }
 
-  async request(method = "get", {timeout = 10000, returnResponse = false, parameters = {}} = {}) {
+  async request(method = "get", { timeout = 10000, returnResponse = false, parameters = {} } = {}) {
     const timeoutController = new AbortController()
     const timeoutID = setTimeout(() => timeoutController.abort(), timeout)
 
@@ -37,14 +37,14 @@ export default class FetchRails {
     }
     const response = await fetch(this.url, finalParams)
     clearTimeout(timeoutID)
-    if (returnResponse) return response
+    if (returnResponse) return await response.text()
     if (!response.ok) throw new Error(`${response.status}: ${response.statusText}.`)
 
     const data = await response.text()
-    return data
+    return data.toString()
   }
 
-  async get({timeout = 10000, returnResponse = false, parameters = {}} = {}) {
+  async get({timeout = 10000, returnResponse = false, parameters = {}} = {}): Promise<string> {
     return this.request("get", { timeout, returnResponse, parameters })
   }
 
