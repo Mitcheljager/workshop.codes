@@ -62,11 +62,11 @@ document.addEventListener("turbolinks:load", () => {
 document.addEventListener("turbolinks:before-cache", () => {
   inscrybMde.destroy()
 
-  const svelteComponents = document.querySelectorAll("[data-svelte-component]")
-  svelteComponents.forEach(element => element.dataset.initialized = null)
+  const svelteComponents = Array.from(document.querySelectorAll("[data-svelte-component]")) as HTMLElement[]
+  svelteComponents.forEach(element => element.dataset.initialized = "null")
 })
 
 document.addEventListener("turbolinks:click", () => {
-  const svelteComponents = document.querySelectorAll("[data-svelte-component]")
-  svelteComponents.forEach(element => element.dataset.initialized = null)
+  const svelteComponents = Array.from(document.querySelectorAll("[data-svelte-component]")) as HTMLElement[]
+  svelteComponents.forEach(element => element.dataset.initialized = "null")
 })

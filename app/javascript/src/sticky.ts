@@ -4,11 +4,11 @@ export function bind() {
 }
 
 export function destroy() {
-  window.removeEventListener("scroll", stickyScroll, { passive: true })
+  window.removeEventListener("scroll", stickyScroll)
 }
 
 function stickyScroll() {
-  const elements = document.querySelectorAll("[data-role~='sticky']")
+  const elements = Array.from(document.querySelectorAll("[data-role~='sticky']")) as HTMLElement[]
 
   elements.forEach(element => {
     if ((element.dataset.stickyDesktopOnly == "true" && window.innerWidth < 640) ||
@@ -17,18 +17,18 @@ function stickyScroll() {
       return
     }
 
-    const scrollElement = element.dataset.sticky == "true" ? document.querySelector("[data-role='sticky-placeholder']") : element
+    const scrollElement = element.dataset.sticky == "true" ? (document.querySelector("[data-role='sticky-placeholder']") as HTMLElement) : element
     const topOffset = scrollElement.getBoundingClientRect().top
     const scrollPosition = window.scrollY
     const documentOffset = topOffset + scrollPosition
-    const stickyOffset = parseInt(element.dataset.stickyOffset || 0)
+    const stickyOffset = parseInt(element.dataset.stickyOffset || "0")
 
     if (documentOffset - scrollPosition - stickyOffset <= 0) setSticky(element, stickyOffset)
     else setNotSticky(element)
   })
 }
 
-function setSticky(element, offset) {
+function setSticky(element: HTMLElement, offset: number) {
   if (element.dataset.sticky == "true") return
   element.dataset.sticky = "true"
 
@@ -46,12 +46,12 @@ function setSticky(element, offset) {
   element.classList.add("is-sticky")
 }
 
-function setNotSticky(element) {
+function setNotSticky(element: HTMLElement) {
   if (element.dataset.sticky != "true") return
   element.dataset.sticky = "false"
 
   const placeholderElement = document.querySelector("[data-role='sticky-placeholder']")
-  placeholderElement.remove()
+  if (placeholderElement) placeholderElement.remove()
 
   element.style.removeProperty("width")
   element.style.removeProperty("position")
