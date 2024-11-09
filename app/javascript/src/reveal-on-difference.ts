@@ -4,12 +4,12 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("input", toggleRevealOnDifference))
 }
 
-function toggleRevealOnDifference() {
-  const value = this.value
-  const original = this.dataset.original
+function toggleRevealOnDifference({ currentTarget }: { currentTarget: HTMLFormElement }) {
+  const value = currentTarget.value
+  const original = currentTarget.dataset.original
   const different = value !== original && original !== undefined
 
-  const elements = document.querySelectorAll("[data-role='reveal-on-difference']")
+  const elements = Array.from(document.querySelectorAll("[data-role='reveal-on-difference']")) as HTMLElement[]
 
   elements.forEach(element => element.style.display = different ? "block" : "none")
 }

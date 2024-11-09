@@ -4,21 +4,22 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("click", toggleNavigation))
 
   const searchElement = document.querySelector("[data-action='toggle-search']")
-  searchElement.removeAndAddEventListener("click", toggleSearch)
+  if (searchElement) searchElement.removeAndAddEventListener("click", toggleSearch)
 }
 
-function toggleNavigation(event) {
+function toggleNavigation(event: Event) {
   event.preventDefault()
 
   const navigationElement = document.querySelector("[data-role='navigation']")
-  navigationElement.classList.toggle("header__content--is-active")
+  navigationElement?.classList.toggle("header__content--is-active")
 }
 
-function toggleSearch(event) {
+function toggleSearch(event: Event) {
   event.preventDefault()
 
   const searchElement = document.querySelector("[data-role~='search-popout']")
-  searchElement.classList.toggle("header__search--is-active")
+  searchElement?.classList.toggle("header__search--is-active")
 
-  searchElement.querySelector("input[name='query']").focus()
+  const inputElement = searchElement?.querySelector("input[name='query']") as HTMLFormElement
+  if (inputElement) inputElement.focus()
 }

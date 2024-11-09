@@ -11,8 +11,8 @@ export function bind() {
   document.body.removeAndAddEventListener("keydown", closeModalOnKeyDown)
 }
 
-function showModal() {
-  const modal = document.querySelector(`[data-modal="${this.dataset.target}"]`)
+function showModal({ currentTarget }: { currentTarget: HTMLElement }) {
+  const modal = document.querySelector(`[data-modal="${currentTarget.dataset.target}"]`) as HTMLElement
 
   if (!modal) return
 
@@ -23,23 +23,22 @@ function showModal() {
 }
 
 export function closeModal() {
-  const activeModal = document.querySelector(".modal:not([style*='none'])")
+  const activeModal = document.querySelector(".modal:not([style*='none'])") as HTMLElement
 
   if (!activeModal) return
-
   if (activeModal.dataset.ignore != undefined) return
 
   if (activeModal.dataset.hideOnClose != undefined) {
     activeModal.style.display = "none"
 
-    document.body.style.borderRight = 0
+    document.body.style.borderRight = "0"
     document.body.style.overflowY = "auto"
   } else {
     activeModal.remove()
   }
 }
 
-function closeModalOnKeyDown(event) {
+function closeModalOnKeyDown(event: KeyboardEvent) {
   if (event.code === "Escape") closeModal()
 }
 
