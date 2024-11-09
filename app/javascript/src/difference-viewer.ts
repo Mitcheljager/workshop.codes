@@ -18,11 +18,11 @@ export function render() {
   scrollAlong()
 }
 
-function toggleUnchangedFiles() {
+function toggleUnchangedFiles({ target }: { target: HTMLFormElement }) {
   const element = document.querySelector(".diff")
-  const state = this.checked
+  const state = target.checked
 
-  element.classList.toggle("hide-unchanged", state)
+  if (element) element.classList.toggle("hide-unchanged", state)
 }
 
 function createRules() {
@@ -33,11 +33,13 @@ function createRules() {
   const selectElement = document.querySelector("[data-action='jump-to-rule']")
   const items = element.querySelectorAll("li")
 
+  if (!selectElement) return
+
   selectElement.removeAndAddEventListener("input", goToRule)
 
-  const array = []
+  const array: (string | number)[][] = []
   items.forEach((item, index) => {
-    const content = item.textContent
+    const content = item.textContent || ''
     if (!content.match(/rule\("(.*)"\)/g)) return
 
     array.push([content.replace("rule(", "").replace(")", ""), index])
@@ -46,25 +48,30 @@ function createRules() {
   array.forEach(rule => {
     const item = document.createElement("option")
 
-    item.innerHTML = rule[0]
-    item.value = rule[1]
+    item.innerHTML = rule[0].toString()
+    item.value = rule[1].toString()
 
     selectElement.append(item)
   })
 }
 
-function goToRule(event) {
-  const target = document.querySelector(`.diff li:nth-child(${event.target.value})`)
-  const differenceHeaderElement = document.querySelector("[data-role='difference-header']")
+function goToRule({ target }: { target: HTMLFormElement }) {
+  const destination = document.querySelector(`.diff li:nth-child(${target.value})`)
+  const differenceHeaderElement = document.querySelector("[data-role='difference-header']") as HTMLElement
 
-  const offset = target.getBoundingClientRect().top + window.scrollY - differenceHeaderElement.offsetHeight
+  if (!destination || !differenceHeaderElement) return
+
+  const offset = destination.getBoundingClientRect().top + window.scrollY - differenceHeaderElement.offsetHeight
   window.scroll(0, offset)
 }
 
 function scrollAlong() {
-  const element = document.querySelector("[data-role='difference-header']")
-  const elementOffset = element.getBoundingClientRect().top
+  const element = document.querySelector("[data-role='difference-header']") as HTMLElement
+  const headerElement = element?.querySelector(".difference-header") as HTMLElement
+  const elementOffset = element?.getBoundingClientRect().top || 0
 
-  element.style.height = element.querySelector(".difference-header").offsetHeight + "px"
-  element.querySelector(".difference-header").classList.toggle("difference-header--fixed", elementOffset < 1)
+  if (!element || !headerElement) return
+
+  element.style.height = headerElement.offsetHeight + "px"
+  headerElement.classList.toggle("difference-header--fixed", elementOffset < 1)
 }

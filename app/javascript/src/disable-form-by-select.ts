@@ -4,9 +4,9 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("input", updateFormSubmitButton))
 }
 
-function updateFormSubmitButton() {
-  const target = document.querySelector(`[data-disable-by-select-target="${this.value}"]`)
-  const elements = document.querySelectorAll("[data-disable-by-select-target]")
+function updateFormSubmitButton({ target: { value } }: { target: { value: string } }) {
+  const target = document.querySelector(`[data-disable-by-select-target="${value}"]`) as HTMLFormElement
+  const elements = Array.from(document.querySelectorAll("[data-disable-by-select-target]")) as HTMLFormElement[]
 
   elements.forEach(element => element.disabled = false)
   if (target) target.disabled = true
