@@ -1,13 +1,20 @@
 import Rails from "@rails/ujs"
 
 export default class FetchRails {
-  constructor(url, body = "", headers = {}) {
+  url: string
+  body: string | object
+  defaultParams: {
+    headers: { [key: string]: string }
+    credentials: RequestCredentials
+  }
+
+  constructor(url: string, body: string | object, headers = {}) {
     this.url = url
     this.body = body
     this.defaultParams = {
       headers: {
         "Content-Type": "application/json",
-        "X-CSRF-Token": Rails.csrfToken(),
+        "X-CSRF-Token": Rails.csrfToken() || '',
         ...headers
       },
       credentials: "same-origin"
@@ -18,9 +25,10 @@ export default class FetchRails {
     const timeoutController = new AbortController()
     const timeoutID = setTimeout(() => timeoutController.abort(), timeout)
 
-    if ("headers" in parameters) {
-      parameters["headers"] = {...this.defaultParams.headers, ...parameters.headers}
+    if ("headers" in parameters && typeof parameters.headers === "object") {
+      parameters["headers"] = { ...this.defaultParams.headers, ...parameters.headers }
     }
+
     const finalParams = {
       method: method,
       ...this.defaultParams,
