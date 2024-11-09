@@ -6,8 +6,11 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("click", setTab))
 }
 
-function setTab({ currentTarget, preventDefault }: { currentTarget: HTMLElement, preventDefault: Function }) {
-  preventDefault()
+function setTab(event: Event) {
+  event.preventDefault()
+
+  const { currentTarget } = event
+  if (!(currentTarget instanceof HTMLElement)) return
 
   if (currentTarget.classList.contains("tabs__item--active")) return
 
