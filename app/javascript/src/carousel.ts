@@ -77,9 +77,8 @@ function setLazyImage(carousel: SiemaExtended) {
 
 function stopVideo() {
   const carousel = document.querySelector("[data-role='carousel']")
-  if (!carousel) return
+  const iframe = carousel!.querySelector("iframe")
 
-  const iframe = carousel.querySelector("iframe")
   if (!iframe?.contentWindow) return
 
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")

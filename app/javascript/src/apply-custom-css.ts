@@ -8,5 +8,5 @@ function applyCustomCSS({ currentTarget }: { currentTarget: HTMLFormElement }) {
   const value = currentTarget.value
   const styleTag = document.querySelector("#custom-css")
 
-  if (styleTag) styleTag.textContent = value
+  styleTag!.textContent = value
 }

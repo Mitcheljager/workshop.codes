@@ -15,8 +15,6 @@ export default function copyToClipboard(event: MouseEvent, optionalContent = '')
   const target: string = eventTarget.dataset.target || ''
   const targetElement = document.querySelector(`[data-copy="${target}"]`) as HTMLElement
 
-  if (!targetElement) return
-
   const { textContent } = targetElement
 
   if (!textContent) return

@@ -61,13 +61,10 @@ export function insertBlockTemplate(event: MouseEvent) {
 
   const currentTarget = event.currentTarget as HTMLElement
   const templateElement = document.getElementById(`${currentTarget.dataset.template}`) as HTMLFormElement
-
-  if (!templateElement) return
-
   const template = templateElement.content.cloneNode(true)
   const targetElement = document.querySelector(`[data-template-target="${currentTarget.dataset.target}"]`)
 
-  if (targetElement) targetElement.append(template)
+  targetElement!.append(template)
 }
 
 export function removeBlockTemplate(event: MouseEvent) {
@@ -76,7 +73,7 @@ export function removeBlockTemplate(event: MouseEvent) {
   const currentTarget = event.currentTarget as HTMLElement
   const target = currentTarget.closest("[data-remove-target]")
 
-  if (target) target.remove()
+  target!.remove()
 }
 
 export function buildInputSortable(element: HTMLElement) {

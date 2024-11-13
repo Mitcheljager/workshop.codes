@@ -39,16 +39,12 @@ export function render() {
 
 function carouselCardsChanged(this: Siema & SiemaOptions) {
   const selector = this.selector as HTMLElement
-  if (!selector) return
-
   const parent = selector.closest(".card-carousel")
-  if (!parent) return
+  const nextElement = parent!.querySelector("[data-action='carousel-next']")
+  const previousElement = parent!.querySelector("[data-action='carousel-previous']")
 
-  const nextElement = parent.querySelector("[data-action='carousel-next']")
-  const previousElement = parent.querySelector("[data-action='carousel-previous']")
-
-  if (previousElement) previousElement.classList.toggle("card-carousel__control--disabled", this.currentSlide == 0)
-  if (nextElement) nextElement.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ''))
+  previousElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide == 0)
+  nextElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ''))
 }
 
 function carouselNext({ currentTarget }: { currentTarget: HTMLElement }) {

@@ -12,9 +12,9 @@ export function bind() {
 const scrollIndicator = debounce(element => {
   const scrollableDistanceFromRight = element.scrollWidth - element.clientWidth - element.scrollLeft
   const indicatorRight = document.querySelector("[data-role='scroll-indicator-right']")
-  if (indicatorRight) indicatorRight.classList.toggle("scroll-indicator--active", scrollableDistanceFromRight > 50)
+  indicatorRight!.classList.toggle("scroll-indicator--active", scrollableDistanceFromRight > 50)
 
   const scrolledFromLeft = element.scrollLeft
   const indicatorLeft = document.querySelector("[data-role='scroll-indicator-left']")
-  if (indicatorLeft) indicatorLeft.classList.toggle("scroll-indicator--active", scrolledFromLeft > 50)
+   indicatorLeft!.classList.toggle("scroll-indicator--active", scrolledFromLeft > 50)
 }, 10)

@@ -15,8 +15,6 @@ export function toggleDropdown(event: Event) {
   const parent = eventTarget.closest("[data-dropdown]")
   const target = parent?.querySelector("[data-dropdown-content]") as HTMLElement
 
-  if (!target) return
-
   target.dataset.active = (!JSON.parse(target.dataset.active || "false")).toString()
   target.classList.toggle("active", JSON.parse(target.dataset.active))
 }

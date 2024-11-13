@@ -10,7 +10,6 @@ function setImagePreview({ target }: { target: HTMLFormElement }) {
   const removeFileFlag = document.querySelector(`[data-clear-image-flag="${target.dataset.target}"]`) as HTMLFormElement
   const targetImage = document.querySelector(`[data-image-preview="${target.dataset.target}"]`) as HTMLImageElement
 
-  if (!targetImage) return
   if (!target.files && !target.files[0]) return
 
   const reader = new FileReader()

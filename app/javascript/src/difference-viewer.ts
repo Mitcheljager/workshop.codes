@@ -22,20 +22,15 @@ function toggleUnchangedFiles({ target }: { target: HTMLFormElement }) {
   const element = document.querySelector(".diff")
   const state = target.checked
 
-  if (element) element.classList.toggle("hide-unchanged", state)
+  element!.classList.toggle("hide-unchanged", state)
 }
 
 function createRules() {
   const element = document.querySelector(".diff")
-
-  if (!element) return
-
   const selectElement = document.querySelector("[data-action='jump-to-rule']")
-  const items = element.querySelectorAll("li")
+  const items = element!.querySelectorAll("li")
 
-  if (!selectElement) return
-
-  selectElement.removeAndAddEventListener("input", goToRule)
+  selectElement!.removeAndAddEventListener("input", goToRule)
 
   const array: (string | number)[][] = []
   items.forEach((item, index) => {
@@ -51,7 +46,7 @@ function createRules() {
     item.innerHTML = rule[0].toString()
     item.value = rule[1].toString()
 
-    selectElement.append(item)
+    selectElement!.append(item)
   })
 }
 
@@ -69,8 +64,6 @@ function scrollAlong() {
   const element = document.querySelector("[data-role='difference-header']") as HTMLElement
   const headerElement = element?.querySelector(".difference-header") as HTMLElement
   const elementOffset = element?.getBoundingClientRect().top || 0
-
-  if (!element || !headerElement) return
 
   element.style.height = headerElement.offsetHeight + "px"
   headerElement.classList.toggle("difference-header--fixed", elementOffset < 1)

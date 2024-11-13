@@ -6,10 +6,7 @@ export function bind() {
 
 function toggleCheckboxes({ currentTarget }: { currentTarget: HTMLFormElement }) {
   const parent = currentTarget.closest("[data-checkbox-group]")
-
-  if (!parent) return
-
-  const checkboxes = Array.from(parent.querySelectorAll("input[type='checkbox']")) as HTMLFormElement[]
+  const checkboxes = Array.from(parent!.querySelectorAll("input[type='checkbox']")) as HTMLFormElement[]
   const state = currentTarget.checked
 
   checkboxes.forEach(checkbox => checkbox.checked = state)

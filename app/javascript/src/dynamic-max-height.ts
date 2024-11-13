@@ -13,11 +13,8 @@ function setHeight() {
   const elements = document.querySelectorAll("[data-role~='dynamic-max-height']")
 
   elements.forEach(element => {
-    const parent = element.parentElement
+    const parent = element.parentElement as HTMLElement
     const target = element.querySelector("[data-dynamic-height-target]") as HTMLElement
-
-    if (!parent || !target) return
-
     const distanceFromTop = parent.getBoundingClientRect().top
     const distanceFromBottom = parent.getBoundingClientRect().bottom
     const maxHeight = window.innerHeight - distanceFromTop

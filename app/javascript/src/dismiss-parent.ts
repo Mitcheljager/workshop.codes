@@ -14,8 +14,6 @@ export function dismissParent(event: Event) {
   const currentTarget = event.currentTarget as HTMLElement
   const parent = currentTarget?.parentNode as HTMLElement
 
-  if (!parent) return
-
   parent.classList.add("fade-out")
   setTimeout(() => {
     parent.remove()
