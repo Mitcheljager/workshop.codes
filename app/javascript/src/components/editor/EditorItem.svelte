@@ -3,8 +3,8 @@
   import EditorItemName from "@components/editor/EditorItemName.svelte"
   import EditorItemHide from "@components/editor/EditorItemHide.svelte"
   import EditorItemDuplicate from "@components/editor/EditorItemDuplicate.svelte"
-  import { currentItem } from "@stores/editor.js"
-  import { isAnyParentHidden } from "@utils/editor"
+  import { currentItem } from "@src/stores/editor.js"
+  import { isAnyParentHidden } from "@src/utils/editor"
 
   export let item
 </script>

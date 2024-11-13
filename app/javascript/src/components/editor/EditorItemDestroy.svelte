@@ -1,5 +1,5 @@
 <script>
-  import { destroyItem } from "@utils/editor"
+  import { destroyItem } from "@src/utils/editor"
 
   export let item
 

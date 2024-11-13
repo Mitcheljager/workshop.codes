@@ -5,7 +5,7 @@
   import ItemFinderModal from "@components/editor/Modals/ItemFinderModal.svelte"
   import TranslationKeysModal from "@components/editor/Modals/TranslationKeysModal.svelte"
   import ScriptImporterModal from "@components/editor/Modals/ScriptImporterModal.svelte"
-  import { modal } from "@stores/editor"
+  import { modal } from "@src/stores/editor"
   import { Modal } from "@constants/Modal"
 
   const components = {

@@ -1,5 +1,5 @@
 <script>
-  import { updateItemName } from "@utils/editor"
+  import { updateItemName } from "@src/utils/editor"
 
   export let item
 

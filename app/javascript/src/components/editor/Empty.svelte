@@ -1,5 +1,5 @@
 <script>
-  import { isSignedIn, projects, modal } from "@stores/editor"
+  import { isSignedIn, projects, modal } from "@src/stores/editor"
   import { createDemoProject, createProject, fetchProject, setUrl } from "@utils/project"
 
   async function getProject(uuid) {

@@ -1,8 +1,8 @@
 <script>
   import Modal from "@components/editor/Modals/Modal.svelte"
   import ExpandableSnippet from "@components/editor/ExpandableSnippet.svelte"
-  import { sortedItems, editorStates, modal } from "@stores/editor"
-  import { getItemById, isAnyParentHidden, setCurrentItemById } from "@utils/editor"
+  import { sortedItems, editorStates, modal } from "@src/stores/editor"
+  import { getItemById, isAnyParentHidden, setCurrentItemById } from "@src/utils/editor"
   import { compile } from "@utils/compiler/compile"
   import { onMount, tick } from "svelte"
 

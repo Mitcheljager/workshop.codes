@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick } from "svelte"
   import { fly } from "svelte/transition"
-  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "@stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "@src/stores/editor"
   import { toCapitalize } from "@utils/text"
   import FetchRails from "@src/fetch-rails"
   import EditorActions from "@components/editor/EditorActions.svelte"
@@ -31,8 +31,8 @@
   let loading = true
   let currentSidebarTab = "wiki"
 
-  $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
-    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
+  $: if ($currentProject && $sortedItems?.length && $currentItem)
+    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || null
 
   let isCurrentItemInherentlyHidden = false
   $: isCurrentItemInherentlyHidden = $currentItem && isInherentlyHidden($currentItem)

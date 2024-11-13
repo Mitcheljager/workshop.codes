@@ -1,6 +1,6 @@
 <script>
-  import { items, currentItem, editorStates } from "@stores/editor"
-  import { getItemById, setCurrentItemById, updateItem } from "@utils/editor"
+  import { items, currentItem, editorStates } from "@src/stores/editor"
+  import { getItemById, setCurrentItemById, updateItem } from "@src/utils/editor"
   import { replaceBetween } from "@utils/parse"
   import { escapeable } from "@components/actions/escapeable"
   import { fade, fly } from "svelte/transition"

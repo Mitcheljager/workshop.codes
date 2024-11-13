@@ -1,6 +1,6 @@
 <script>
   import { Modal } from "@constants/Modal"
-  import { modal } from "@stores/editor"
+  import { modal } from "@src/stores/editor"
 
   function keydown(event) {
     if (!(event.ctrlKey && event.code === "KeyB")) return

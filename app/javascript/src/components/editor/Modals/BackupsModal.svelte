@@ -1,6 +1,6 @@
 <script>
   import Modal from "@components/editor/Modals/Modal.svelte"
-  import { currentProject, items, currentItem, editorStates, modal } from "@stores/editor"
+  import { currentProject, items, currentItem, editorStates, modal } from "@src/stores/editor"
   import { translationKeys, defaultLanguage, selectedLanguages } from "@stores/translationKeys"
   import { updateProject } from "@utils/project"
   import { fetchBackupsForProject, destroyBackup, fetchBackupContent } from "@utils/projectBackups"

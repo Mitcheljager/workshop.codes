@@ -1,5 +1,5 @@
 <script>
-  import { isMobile } from "@stores/editor"
+  import { isMobile } from "@src/stores/editor"
 
   export let height = 50
 </script>

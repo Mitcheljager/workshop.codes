@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import { setCssVariable } from "@utils/setCssVariable"
-  import { isMobile } from "@stores/editor"
+  import { isMobile } from "@src/stores/editor"
 
   export let key = ""
   export let currentSize = 0

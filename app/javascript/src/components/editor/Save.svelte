@@ -1,8 +1,8 @@
 <script>
   import Bugsnag from "@bugsnag/js"
   import FetchRails from "@src/fetch-rails"
-  import { currentProject, modal } from "@stores/editor"
-  import { getSaveContent } from "@utils/editor"
+  import { currentProject, modal } from "@src/stores/editor"
+  import { getSaveContent } from "@src/utils/editor"
   import { updateProject } from "@utils/project"
   import { createProjectBackup } from "@utils/projectBackups"
   import { Modal } from "@constants/Modal"
