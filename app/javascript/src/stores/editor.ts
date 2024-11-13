@@ -4,6 +4,8 @@ import { isAnyParentHidden } from "@utils/editor"
 import { getMixins } from "@utils/compiler/mixins"
 import { getSubroutines } from "@utils/compiler/subroutines"
 import { debounced } from "@utils/debounceStore"
+import type { EditorStates, Item, Project } from "@src/types/editor"
+import type { Completion } from "@codemirror/autocomplete"
 
 // Preferably keep below the debounce time for the linter, so it
 // has access to the most up-to-date information from the store.
@@ -13,11 +15,11 @@ export const screenWidth = writable(0)
 export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1000)
 
 export const modal = (() => {
-  const { subscribe, set } = writable(null)
+  const { subscribe, set } = writable<{ [key: string]: Object } | null>(null)
 
   return {
     subscribe,
-    show: (key, options = {}) => {
+    show: (key: string, options = {}) => {
       set({ key, ...options })
     },
     close: () => {
@@ -26,11 +28,11 @@ export const modal = (() => {
   }
 })()
 
-export const editorStates = writable({})
+export const editorStates = writable<EditorStates>({})
 export const editorScrollPositions = writable({})
 
-export const projects = writable(null)
-export const currentProjectUUID = writable(null)
+export const projects = writable<Project[] | null>(null)
+export const currentProjectUUID = writable<string | null>(null)
 export const currentProject = derived([projects, currentProjectUUID], ([$projects, $currentProjectUUID]) => {
   if (!$projects?.length) return null
   return $projects.filter(p => p.uuid == $currentProjectUUID)?.[0]
@@ -38,12 +40,12 @@ export const currentProject = derived([projects, currentProjectUUID], ([$project
 
 export const recoveredProject = writable(null)
 
-export const items = writable([])
-export const currentItem = writable({})
+export const items = writable<Item[]>([])
+export const currentItem = writable<Item | null>(null)
 
 export const sortedItems = derived(items, $items => {
-  const cleanedItems = $items.map(item => {
-    item.parent = $items.some(i => item.parent == i.id) ? item.parent : null
+  const cleanedItems = $items.map((item) => {
+    item.parent = $items.some(i => item.parent == i.id) ? item.parent : ''
     return item
   })
 
@@ -56,32 +58,32 @@ export const flatItems = derived(sortedItems, $sortedItems => {
     .map(i => i.content).join("\n\n")
 })
 
-export const openFolders = writable([])
+export const openFolders = writable<string[]>([])
 
 export const isSignedIn = writable(false)
 
 export const completionsMap = writable([])
-export const variablesMap = derived(flatItems, debounced($flatItems => {
+export const variablesMap = derived(flatItems, debounced(($flatItems: string) => {
   const { globalVariables, playerVariables } = getVariables($flatItems)
 
   return [
-    ...globalVariables.map(v => ({ detail: "Global Variable", label: v, type: "variable" })),
-    ...playerVariables.map(v => ({ detail: "Player Variable", label: v, type: "variable" }))
+    ...globalVariables.map((v: Completion) => ({ detail: "Global Variable", label: v, type: "variable" })),
+    ...playerVariables.map((v: Completion) => ({ detail: "Player Variable", label: v, type: "variable" }))
   ]
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
-export const subroutinesMap = derived(flatItems, debounced($flatItems => {
+export const subroutinesMap = derived(flatItems, debounced(($flatItems: string) => {
   const subroutines = getSubroutines($flatItems)
 
   return [
-    ...subroutines.map(v => ({ detail: "Subroutine", label: v, type: "variable" }))
+    ...subroutines.map((v: Completion) => ({ detail: "Subroutine", label: v, type: "variable" }))
   ]
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
-export const mixinsMap = derived(flatItems, debounced($flatItems => {
+export const mixinsMap = derived(flatItems, debounced(($flatItems: string) => {
   const mixins = getMixins($flatItems)
 
-  return mixins.map(v => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
+  return mixins.map((v: Completion) => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const workshopConstants = writable({})
