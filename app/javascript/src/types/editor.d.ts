@@ -12,6 +12,15 @@ export type Project = {
   is_owner: boolean
 }
 
+export type ProjectBackup = {
+  uuid: string
+  project_uuid: string,
+  title: string,
+  content: string,
+  created_at: string,
+  updated_at: string
+}
+
 export type Item = {
   name: string,
   id: string,
