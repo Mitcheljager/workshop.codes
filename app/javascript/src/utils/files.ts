@@ -1,4 +1,4 @@
-export async function getMostRecentFileFromDirectory(directoryHandle) {
+export async function getMostRecentFileFromDirectory(directoryHandle: FileSystemDirectoryHandle) {
   let mostRecentFile = null
   let mostRecentDate = new Date(0)
 
@@ -8,9 +8,11 @@ export async function getMostRecentFileFromDirectory(directoryHandle) {
     const fileHandle = await directoryHandle.getFileHandle(entry.name)
     const file = await fileHandle.getFile()
 
-    if (file.lastModifiedDate < mostRecentDate) continue
+    const lastModifiedDate = new Date(file.lastModified)
 
-    mostRecentDate = file.lastModifiedDate
+    if (lastModifiedDate < mostRecentDate) continue
+
+    mostRecentDate = lastModifiedDate
     mostRecentFile = file
   }
 
