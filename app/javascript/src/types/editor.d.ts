@@ -1,14 +1,14 @@
 import type { EditorState } from "@codemirror/state"
 
 export type Project = {
-  id: string,
-  user_id: number
   title: string,
   content: string,
   uuid: string,
-  created_at: string
-  updated_at: string,
-  content_type: "workshop_codes",
+  id?: number,
+  user_id?: number
+  created_at?: string
+  updated_at?: string,
+  content_type?: "workshop_codes",
   is_owner: boolean
 }
 
@@ -18,6 +18,11 @@ export type ProjectBackup = {
   title: string,
   content: string,
   created_at: string,
+  updated_at: string
+}
+
+export type RecoveredProject = {
+  content: string
   updated_at: string
 }
 

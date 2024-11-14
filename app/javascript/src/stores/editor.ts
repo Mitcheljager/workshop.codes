@@ -4,7 +4,7 @@ import { isAnyParentHidden } from "@utils/editor"
 import { getMixins } from "@utils/compiler/mixins"
 import { getSubroutines } from "@utils/compiler/subroutines"
 import { debounced } from "@utils/debounceStore"
-import type { EditorStates, Item, Project } from "@src/types/editor"
+import type { EditorStates, Item, Project, RecoveredProject } from "@src/types/editor"
 import type { Completion } from "@codemirror/autocomplete"
 
 // Preferably keep below the debounce time for the linter, so it
@@ -31,14 +31,14 @@ export const modal = (() => {
 export const editorStates = writable<EditorStates>({})
 export const editorScrollPositions = writable({})
 
-export const projects = writable<Project[] | null>(null)
+export const projects = writable<Project[]>([])
 export const currentProjectUUID = writable<string | null>(null)
 export const currentProject = derived([projects, currentProjectUUID], ([$projects, $currentProjectUUID]) => {
   if (!$projects?.length) return null
   return $projects.filter(p => p.uuid == $currentProjectUUID)?.[0]
 })
 
-export const recoveredProject = writable(null)
+export const recoveredProject = writable<RecoveredProject | null>(null)
 
 export const items = writable<Item[]>([])
 export const currentItem = writable<Item | null>(null)

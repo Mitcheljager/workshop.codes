@@ -4,8 +4,9 @@ import { addAlert } from "@lib/alerts"
 import { projects, currentProjectUUID, currentProject, recoveredProject, items, currentItem, isSignedIn } from "@stores/editor"
 import { translationKeys, defaultLanguage, selectedLanguages } from "@stores/translationKeys"
 import { get } from "svelte/store"
+import type { Project, RecoveredProject } from "@src/types/editor"
 
-export async function createProject(title, content = null) {
+export async function createProject(title: string, content = null): Promise<Project> {
   if (!get(isSignedIn)) return createDemoProject(title)
 
   return await new FetchRails("/projects", { project: { title, content, content_type: "workshop_codes" } }).post()
@@ -16,7 +17,7 @@ export async function createProject(title, content = null) {
 
       projects.set([parsedData, ...get(projects)])
       currentProjectUUID.set(parsedData.uuid)
-      currentItem.set({})
+      currentItem.set(null)
       items.set([])
 
       return parsedData
@@ -29,23 +30,26 @@ export async function createProject(title, content = null) {
     })
 }
 
-export function createDemoProject(title) {
-  const newProject = {
+export function createDemoProject(title: string): Project {
+  const newProject: Project = {
     uuid: Math.random().toString(16).substring(2, 8),
     title,
+    content: "",
     is_owner: true
   }
 
   projects.set([newProject, ...get(projects)])
   currentProjectUUID.set(newProject.uuid)
-  currentItem.set({})
+  currentItem.set(null)
   items.set([])
+
+  return newProject
 }
 
-export async function fetchProject(uuid) {
+export async function fetchProject(uuid: string): Promise<Project> {
   const baseUrl = "/projects/"
 
-  const localProject = getProjectFromLocalStorage(uuid)
+  const localProject: RecoveredProject = getProjectFromLocalStorage(uuid)
 
   return await new FetchRails(baseUrl + uuid).get()
     .then(data => {
@@ -72,7 +76,7 @@ export async function fetchProject(uuid) {
       })
 
       currentProjectUUID.set(parsedData.uuid)
-      currentItem.set({})
+      currentItem.set(null)
 
       updateProjectContent(parsedData.content)
 
@@ -80,13 +84,13 @@ export async function fetchProject(uuid) {
     })
     .catch(error => {
       items.set([])
-      currentItem.set({})
+      currentItem.set(null)
       console.error(error)
       alert(`Something went wrong while loading, please try again. ${error}`)
     })
 }
 
-export function updateProjectContent(content) {
+export function updateProjectContent(content: string): void {
   const parsedContent = JSON.parse(content)
 
   items.set(parsedContent?.items || parsedContent || [])
@@ -95,16 +99,17 @@ export function updateProjectContent(content) {
   defaultLanguage.set(parsedContent?.translations?.defaultLanguage || "en-US")
 }
 
-function getProjectFromLocalStorage(uuid) {
+function getProjectFromLocalStorage(uuid: string): RecoveredProject {
   const localContent = JSON.parse(localStorage.getItem("saved-projects") || "{}")
   return localContent[uuid]
 }
 
-export function updateProject(uuid, params) {
+export function updateProject(uuid: string, params: object): void {
   get(projects).forEach(project => {
     if (project.uuid != uuid) return
 
     Object.entries(params).forEach(([key, value]) => {
+      // @ts-ignore
       project[key] = value
     })
   })
@@ -112,16 +117,16 @@ export function updateProject(uuid, params) {
   projects.set([...get(projects)])
 }
 
-export async function renameCurrentProject(value) {
-  return await new FetchRails(`/projects/${get(currentProjectUUID)}`).request("PATCH", { parameters: { body: JSON.stringify({ project: { title: value } }) } })
+export async function renameCurrentProject(title: string): Promise<string | void> {
+  return await new FetchRails(`/projects/${get(currentProjectUUID)}`).request("PATCH", { parameters: { body: JSON.stringify({ project: { title } }) } })
     .then(data => {
       if (!data) throw Error("Project rename failed")
 
-      updateProject(get(currentProjectUUID), {
-        title: value
+      updateProject(get(currentProjectUUID)!, {
+        title
       })
 
-      addAlert(`Project renamed to "${get(currentProject).title}"`)
+      addAlert(`Project renamed to "${get(currentProject)!.title}"`)
 
       return data
     })
@@ -131,14 +136,14 @@ export async function renameCurrentProject(value) {
     })
 }
 
-export async function destroyCurrentProject() {
+export async function destroyCurrentProject(): Promise<string | void> {
   return await new FetchRails(`/projects/${get(currentProjectUUID)}`).post({ method: "delete" })
     .then(data => {
       if (!data) throw Error("Destroying current project failed")
 
       projects.set(get(projects).filter(p => p.uuid != get(currentProjectUUID)))
       currentProjectUUID.set(null)
-      currentItem.set({})
+      currentItem.set(null)
 
       return data
     })
@@ -148,8 +153,8 @@ export async function destroyCurrentProject() {
     })
 }
 
-export function setUrl(uuid) {
-  const url = new URL(window.location)
+export function setUrl(uuid: string): void {
+  const url = new URL(window.location.toString())
   if (uuid) url.searchParams.set("uuid", uuid)
   else url.searchParams.delete("uuid")
   window.history.replaceState("", "", url)
