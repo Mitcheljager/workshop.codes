@@ -97,6 +97,8 @@ export function updateProjectContent(content: string): void {
   translationKeys.set(parsedContent?.translations?.keys || {})
   selectedLanguages.set(parsedContent?.translations?.selectedLanguages || ["en-US"])
   defaultLanguage.set(parsedContent?.translations?.defaultLanguage || "en-US")
+
+  console.log(parsedContent?.translations?.keys)
 }
 
 function getProjectFromLocalStorage(uuid: string): RecoveredProject {

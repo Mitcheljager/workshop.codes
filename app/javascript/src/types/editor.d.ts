@@ -1,4 +1,5 @@
 import type { EditorState } from "@codemirror/state"
+import type { languageOptions } from "@src/lib/languageOptions"
 
 export type Project = {
   title: string,
@@ -44,3 +45,13 @@ export type Range = [number, number]
 export type EditorStates = {
   [key: string]: EditorState
 }
+
+export type TranslationKey = {
+  [locale in LanguageKey]: string
+}
+
+export type TranslateKeys = {
+  [key: string]: TranslationKey
+}
+
+export type Language = keyof typeof languageOptions
