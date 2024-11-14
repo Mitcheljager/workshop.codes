@@ -75,10 +75,10 @@ export function getIndentForLine(state: EditorState, line: number, charLimit?: n
 
 /** Get the number of indents for a given text. One tab means one indent, 4 spaces equal one tab. */
 export function getIndentCountForText(text: string): number {
-  const tabs = /^\t*/.exec(text)?.[0].length || 0
-  const spaces = /^\s*/.exec(text)?.[0].length || 0 - tabs
+  const tabs = /^\t*/.exec(text)![0].length
+  const spaces = /^\s*/.exec(text)![0].length
 
-  return Math.floor(spaces / 4) + tabs
+  return Math.floor((spaces - tabs) / 4) + tabs
 }
 
 /** Returns whether or not the next given line should be indented. This is purely based on there
