@@ -1,8 +1,8 @@
 import FetchRails from "@src/fetch-rails"
 import { addAlert } from "@lib/alerts"
-import type { ProjectBackup } from "@src/types/editor"
+import type { Project, ProjectBackup } from "@src/types/editor"
 
-export async function createProjectBackup(uuid: string) {
+export async function createProjectBackup(uuid: string): Promise<void> {
   return await new FetchRails("/project_backups", { project: { uuid } }).post()
     .then(data => {
       if (!data) throw Error("Creating backup failed")
@@ -15,7 +15,7 @@ export async function createProjectBackup(uuid: string) {
     })
 }
 
-export async function fetchBackupsForProject(uuid: string) {
+export async function fetchBackupsForProject(uuid: string): Promise<ProjectBackup[]> {
   return await new FetchRails(`/project_backups?uuid=${uuid}`).get()
     .then(data => {
       return JSON.parse(data) as ProjectBackup[]
@@ -26,7 +26,7 @@ export async function fetchBackupsForProject(uuid: string) {
     })
 }
 
-export async function destroyBackup(uuid: string) {
+export async function destroyBackup(uuid: string): Promise<boolean> {
   return await new FetchRails(`/project_backups/${uuid}`).post({ method: "delete" })
     .then(data => {
       if (!data) throw Error("Destroying current project failed")
@@ -40,7 +40,7 @@ export async function destroyBackup(uuid: string) {
     })
 }
 
-export async function fetchBackupContent(uuid: string) {
+export async function fetchBackupContent(uuid: string): Promise<ProjectBackup> {
   return await new FetchRails(`/project_backups/${uuid}`).get()
     .then(data => {
       if (!data) throw new Error("Fetch contained no data")

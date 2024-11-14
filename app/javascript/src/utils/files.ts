@@ -1,4 +1,4 @@
-export async function getMostRecentFileFromDirectory(directoryHandle: FileSystemDirectoryHandle) {
+export async function getMostRecentFileFromDirectory(directoryHandle: FileSystemDirectoryHandle): Promise<File | null> {
   let mostRecentFile = null
   let mostRecentDate = new Date(0)
 

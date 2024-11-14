@@ -17,26 +17,26 @@ export function createNewItem(name: string, content: string, position = 9999, ty
   return item
 }
 
-export function destroyItem(id: string) {
+export function destroyItem(id: string): void {
   if (get(currentItem)!.id == id || get(currentItem)!.parent == id) currentItem.set(null)
   items.set(get(items).filter(i => i.id != id && i.parent != id))
 }
 
-export function updateItemName(id: string, name: string) {
+export function updateItemName(id: string, name: string): void {
   items.set(get(items).map(i => {
     if (i.id == id) i.name = name
     return i
   }))
 }
 
-export function toggleHideItem(id: string) {
+export function toggleHideItem(id: string): void {
   items.set(get(items).map(i => {
     if (i.id == id) i.hidden = !i.hidden
     return i
   }))
 }
 
-export function isAnyParentHidden(item: Item) {
+export function isAnyParentHidden(item: Item): boolean {
   while (item.parent) {
     const parentItem: Item | undefined = get(items).find(i => i.id === item.parent)
 
@@ -46,7 +46,7 @@ export function isAnyParentHidden(item: Item) {
   return false
 }
 
-export function duplicateItem(item: Item, newParent: string = '') {
+export function duplicateItem(item: Item, newParent: string = ''): void {
   const itemCount = get(items).filter(i => {
     if (i.parent != item.parent) return false
     return i.name.match(/\(Copy(?: \d+)?\)/g)
@@ -65,7 +65,7 @@ export function duplicateItem(item: Item, newParent: string = '') {
   }
 }
 
-export function getItemById(id: string) {
+export function getItemById(id: string): Item | null {
   return get(items).find(i => i.id == id) || null
 }
 
@@ -81,7 +81,7 @@ export function setCurrentItemById(id: string) {
   if (parent) toggleFolderState(parent, true)
 }
 
-export function updateItem(newItem: Item) {
+export function updateItem(newItem: Item): void {
   items.set(get(items).map(item => {
     if (item.id != newItem.id) return item
     return newItem
@@ -90,7 +90,7 @@ export function updateItem(newItem: Item) {
   updateStateForId(newItem.id, newItem.content)
 }
 
-export async function updateStateForId(id: string, insert: string) {
+export function updateStateForId(id: string, insert: string): void {
   const state = get(editorStates)[id]
 
   if (!state) return
@@ -105,7 +105,7 @@ export async function updateStateForId(id: string, insert: string) {
   if (get(currentItem)!.id == id) currentItem.set({ ...get(currentItem)!, forceUpdate: true })
 }
 
-export function toggleFolderState(item: Item, state: boolean, set = true) {
+export function toggleFolderState(item: Item, state: boolean, set = true): void {
   if (item?.type != "folder") return
 
   if (set) localStorage.setItem(`folder_expanded_${item.id}`, state.toString())
@@ -116,7 +116,7 @@ export function toggleFolderState(item: Item, state: boolean, set = true) {
   if (item.parent) toggleFolderState(getItemById(item.parent)!, true)
 }
 
-export function getSaveContent() {
+export function getSaveContent(): string {
   return JSON.stringify({
     items: get(items),
     translations: {
