@@ -31,13 +31,11 @@
   let loading = true
   let currentSidebarTab = "wiki"
 
-  $: if ($currentProject && $sortedItems?.length && $currentItem)
-    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || null
-
   let isCurrentItemInherentlyHidden = false
   $: isCurrentItemInherentlyHidden = $currentItem && isInherentlyHidden($currentItem)
 
   $: if (data) $completionsMap = parseKeywords($settings)
+  $: if ($currentProject) openFirstItem()
 
   // Updates the tab title
   $: document.title = $currentProject?.title !== undefined ? `${$currentProject.title} | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
@@ -57,7 +55,7 @@
     $projects = userProjects || []
     defaults = data.defaults || {}
 
-    $currentItem = $items?.[0] || {}
+    $currentItem = $items?.[0] || null
 
     loading = false
   })
@@ -186,6 +184,10 @@
       .catch(error => {
         alert(`Something went wrong while loading, please try again. ${error}`)
       })
+  }
+
+  function openFirstItem() {
+    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || null
   }
 </script>
 
