@@ -1,6 +1,6 @@
 <script>
   import EyeIcon from "@components/icon/Eye.svelte"
-  import { toggleHideItem } from "@src/utils/editor"
+  import { toggleHideItem } from "@utils/editor"
 
   export let item
 

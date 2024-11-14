@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte"
-  import { openFolders } from "@src/stores/editor"
-  import { isAnyParentHidden, toggleFolderState } from "@src/utils/editor"
+  import { openFolders } from "@stores/editor"
+  import { isAnyParentHidden, toggleFolderState } from "@utils/editor"
   import EditorItemDestroy from "@components/editor/EditorItemDestroy.svelte"
   import EditorItemHide from "@components/editor/EditorItemHide.svelte"
   import EditorItemDuplicate from "@components/editor/EditorItemDuplicate.svelte"

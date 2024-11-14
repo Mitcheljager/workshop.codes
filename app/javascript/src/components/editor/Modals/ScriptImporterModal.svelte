@@ -1,7 +1,7 @@
 <script>
   import Modal from "@components/editor/Modals/Modal.svelte"
-  import { items, modal } from "@src/stores/editor"
-  import { createNewItem } from "@src/utils/editor"
+  import { items, modal } from "@stores/editor"
+  import { createNewItem } from "@utils/editor"
   import { getClosingBracket, getSettings } from "@utils/parse"
   import { submittable } from "@components/actions/submittable"
   import { onMount } from "svelte"

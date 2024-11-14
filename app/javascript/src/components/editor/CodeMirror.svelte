@@ -15,7 +15,7 @@
   import { codeActions } from "@lib/codeActions"
   import { transformParameterObjectsIntoPositionalParameters } from "@lib/codeActionProviders/transformParameterObjectsIntoPositionalParameters"
   import { foldBrackets } from "@lib/foldBrackets"
-  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "@src/stores/editor"
+  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "@stores/editor"
   import { translationsMap } from "@stores/translationKeys"
   import { getPhraseFromPosition } from "@utils/parse"
   import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"

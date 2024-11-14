@@ -1,7 +1,7 @@
 <script>
   import Modal from "@components/editor/Modals/Modal.svelte"
-  import { items, modal } from "@src/stores/editor"
-  import { getItemById, setCurrentItemById } from "@src/utils/editor"
+  import { items, modal } from "@stores/editor"
+  import { getItemById, setCurrentItemById } from "@utils/editor"
   import { replaceBetween } from "@utils/parse"
   import { onMount, tick } from "svelte"
 

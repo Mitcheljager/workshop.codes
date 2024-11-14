@@ -1,8 +1,8 @@
 <script>
   import { fly } from "svelte/transition"
   import { templates } from "@lib/templates"
-  import { createNewItem } from "@src/utils/editor"
-  import { items, currentItem } from "@src/stores/editor"
+  import { createNewItem } from "@utils/editor"
+  import { items, currentItem } from "@stores/editor"
   import { escapeable } from "@components/actions/escapeable"
   import { outsideClick } from "@components/actions/outsideClick"
 

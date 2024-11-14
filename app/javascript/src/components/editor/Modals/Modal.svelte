@@ -1,5 +1,5 @@
 <script>
-  import { modal } from "@src/stores/editor"
+  import { modal } from "@stores/editor"
   import { escapeable } from "@components/actions/escapeable"
   import { fade } from "svelte/transition"
 

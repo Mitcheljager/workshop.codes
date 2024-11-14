@@ -1,6 +1,6 @@
 <script>
   import { fly } from "svelte/transition"
-  import { currentProject, isSignedIn, isMobile, currentProjectUUID, modal } from "@src/stores/editor"
+  import { currentProject, isSignedIn, isMobile, currentProjectUUID, modal } from "@stores/editor"
   import { Modal } from "@constants/Modal"
   import { outsideClick } from "@components/actions/outsideClick"
   import Compiler from "@components/editor/Compiler.svelte"

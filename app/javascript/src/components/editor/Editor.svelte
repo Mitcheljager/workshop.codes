@@ -1,8 +1,8 @@
 <script>
   import { onMount, tick } from "svelte"
   import { fly } from "svelte/transition"
-  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "@src/stores/editor"
-  import { toCapitalize } from "@src/utils/text"
+  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "@stores/editor"
+  import { toCapitalize } from "@utils/text"
   import FetchRails from "@src/fetch-rails"
   import EditorActions from "@components/editor/EditorActions.svelte"
   import EditorAside from "@components/editor/EditorAside.svelte"
