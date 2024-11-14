@@ -62,7 +62,7 @@ export function getSettings(value: string): number[] {
   return [match.index, untilIndex + 1]
 }
 
-export function replaceBetween(origin: string, replace: string, startIndex: number, endIndex: number) {
+export function replaceBetween(origin: string, replace: string, startIndex: number, endIndex: number): string {
   return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
 }
 
