@@ -1,11 +1,11 @@
 // Adapted from https://github.com/fonsp/Pluto.jl/blob/eb85b0d34b05ee02e61c0316e6f2ea901afe9ab4/frontend/components/CellInput/awesome_line_wrapping.js
 
 import { EditorView, Decoration } from "@codemirror/view"
-import { StateField } from "@codemirror/state"
+import { EditorState, RangeSet, StateField } from "@codemirror/state"
 
-export const getStartTabs = (line) => /^\t*/.exec(line)?.[0] ?? ""
+export const getStartTabs = (line: string): string => /^\t*/.exec(line)?.[0] ?? ""
 
-const getDecorations = (state) => {
+const getDecorations = (state: EditorState): RangeSet<Decoration> => {
   const decorations = []
 
   for (let i = 0; i < state.doc.lines; i ++) {
