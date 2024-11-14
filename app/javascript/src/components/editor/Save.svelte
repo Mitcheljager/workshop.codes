@@ -4,7 +4,7 @@
   import { currentProject, modal } from "@src/stores/editor"
   import { getSaveContent } from "@src/utils/editor"
   import { updateProject } from "@utils/project"
-  import { createProjectBackup } from "@utils/projectBackups"
+  import { createProjectBackup } from "@src/utils/projectBackups"
   import { Modal } from "@constants/Modal"
   import { escapeable } from "@components/actions/escapeable"
   import { outsideClick } from "@components/actions/outsideClick"

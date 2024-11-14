@@ -3,7 +3,7 @@
   import { currentProject, items, currentItem, editorStates, modal } from "@src/stores/editor"
   import { translationKeys, defaultLanguage, selectedLanguages } from "@stores/translationKeys"
   import { updateProject } from "@utils/project"
-  import { fetchBackupsForProject, destroyBackup, fetchBackupContent } from "@utils/projectBackups"
+  import { fetchBackupsForProject, destroyBackup, fetchBackupContent } from "@src/utils/projectBackups"
   import { flip } from "svelte/animate"
   import { onMount } from "svelte"
 
