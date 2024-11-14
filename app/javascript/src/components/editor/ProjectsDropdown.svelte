@@ -2,7 +2,7 @@
   import SearchObjects from "@components/editor/SearchObjects.svelte"
   import { projects, currentProject, isSignedIn, isMobile, modal } from "@src/stores/editor"
   import { getSaveContent } from "@src/utils/editor"
-  import { createProject, destroyCurrentProject, fetchProject, setUrl } from "@utils/project"
+  import { createProject, destroyCurrentProject, fetchProject, setUrl } from "@src/utils/project"
   import { escapeable } from "@components/actions/escapeable"
   import { outsideClick } from "@components/actions/outsideClick"
   import { onMount } from "svelte"

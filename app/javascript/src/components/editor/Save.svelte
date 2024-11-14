@@ -3,7 +3,7 @@
   import FetchRails from "@src/fetch-rails"
   import { currentProject, modal } from "@src/stores/editor"
   import { getSaveContent } from "@src/utils/editor"
-  import { updateProject } from "@utils/project"
+  import { updateProject } from "@src/utils/project"
   import { createProjectBackup } from "@src/utils/projectBackups"
   import { Modal } from "@constants/Modal"
   import { escapeable } from "@components/actions/escapeable"

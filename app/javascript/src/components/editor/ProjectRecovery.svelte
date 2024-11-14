@@ -3,7 +3,7 @@
   import * as timeago from "timeago.js"
   import { fly } from "svelte/transition"
   import { recoveredProject, currentProject, currentItem } from "@src/stores/editor"
-  import { updateProjectContent } from "@utils/project"
+  import { updateProjectContent } from "@src/utils/project"
 
   function recover() {
     Bugsnag.notify("Project was recovered from localStorage.")

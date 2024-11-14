@@ -1,7 +1,7 @@
 <script>
   import Modal from "@components/editor/Modals/Modal.svelte"
   import { currentProject, isSignedIn, modal } from "@src/stores/editor"
-  import { createProject, renameCurrentProject, setUrl } from "@utils/project"
+  import { createProject, renameCurrentProject, setUrl } from "@src/utils/project"
   import { submittable } from "@components/actions/submittable"
 
   let loading
