@@ -35,7 +35,7 @@
   $: isCurrentItemInherentlyHidden = $currentItem && isInherentlyHidden($currentItem)
 
   $: if (data) $completionsMap = parseKeywords($settings)
-  $: if ($currentProject) openFirstItem()
+  $: if ($currentProject && !$currentItem) openFirstItem()
 
   // Updates the tab title
   $: document.title = $currentProject?.title !== undefined ? `${$currentProject.title} | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
