@@ -67,8 +67,8 @@ export const variablesMap = derived(flatItems, debounced(($flatItems: string) =>
   const { globalVariables, playerVariables } = getVariables($flatItems)
 
   return [
-    ...globalVariables.map((v: Completion) => ({ detail: "Global Variable", label: v, type: "variable" })),
-    ...playerVariables.map((v: Completion) => ({ detail: "Player Variable", label: v, type: "variable" }))
+    ...globalVariables.map((v: string) => ({ detail: "Global Variable", label: v, type: "variable" })),
+    ...playerVariables.map((v: string) => ({ detail: "Player Variable", label: v, type: "variable" }))
   ]
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
@@ -76,14 +76,14 @@ export const subroutinesMap = derived(flatItems, debounced(($flatItems: string) 
   const subroutines = getSubroutines($flatItems)
 
   return [
-    ...subroutines.map((v: Completion) => ({ detail: "Subroutine", label: v, type: "variable" }))
+    ...subroutines.map((v: string) => ({ detail: "Subroutine", label: v, type: "variable" }))
   ]
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const mixinsMap = derived(flatItems, debounced(($flatItems: string) => {
   const mixins = getMixins($flatItems)
 
-  return mixins.map((v: Completion) => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
+  return mixins.map((v: string) => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const workshopConstants = writable({})
