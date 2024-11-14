@@ -39,6 +39,8 @@ export type Item = {
 
 export type ItemType = "item" | "folder"
 
+export type Range = [number, number]
+
 export type EditorStates = {
   [key: string]: EditorState
 }

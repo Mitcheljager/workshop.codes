@@ -1,4 +1,7 @@
-export function getClosingBracket(content, characterOpen = "{", characterClose = "}", start = 0) {
+import type { Line } from "@codemirror/state"
+import type { Range } from "@src/types/editor"
+
+export function getClosingBracket(content: string, characterOpen = "{", characterClose = "}", start = 0): number {
   let closePos = start
   let counter = 1
   let initial = true
@@ -17,10 +20,11 @@ export function getClosingBracket(content, characterOpen = "{", characterClose =
   return closePos
 }
 
-export function splitArgumentsString(content) {
+export function splitArgumentsString(content: string): string[] {
   let ignoredByString = false
   let ignoredByBrackets = 0
-  const commaIndexes = []
+
+  const commaIndexes: number[] = []
 
   for (let i = 0; i < content.length; i++) {
     if (content[i] == "\\")
@@ -47,7 +51,7 @@ export function splitArgumentsString(content) {
   return splitArguments
 }
 
-export function getSettings(value) {
+export function getSettings(value: string): number[] {
   const regex = new RegExp(/settings/)
   const match = regex.exec(value)
   if (!match) return []
@@ -58,12 +62,13 @@ export function getSettings(value) {
   return [match.index, untilIndex + 1]
 }
 
-export function replaceBetween(origin, replace, startIndex, endIndex) {
+export function replaceBetween(origin: string, replace: string, startIndex: number, endIndex: number) {
   return origin.substring(0, startIndex) + replace + origin.substring(endIndex)
 }
 
-export function getPhraseEnd(text, start, direction = 1) {
+export function getPhraseEnd(text: string, start: number, direction = 1): number {
   let lastValidCharacterPosition = start
+
   for (let i = 1; i < 100; i++) {
     const char = text[start + i * direction]
     if (char !== undefined && /[A-Za-z\- ]/.test(char)) lastValidCharacterPosition += direction
@@ -73,7 +78,7 @@ export function getPhraseEnd(text, start, direction = 1) {
   return lastValidCharacterPosition
 }
 
-export function getPhraseFromPosition(line, position) {
+export function getPhraseFromPosition(line: Line, position: number): { start: number, end: number, text: string } {
   const start = getPhraseEnd(line.text, position - line.from, -1)
   const end = getPhraseEnd(line.text, position - line.from, 1)
 
@@ -84,22 +89,23 @@ export function getPhraseFromPosition(line, position) {
   }
 }
 
-export function getPhraseFromIndex(text, index) {
+export function getPhraseFromIndex(text: string, index: number): string {
   const start = getPhraseEnd(text, index, -1)
   const end = getPhraseEnd(text, index, 1)
 
   return text.slice(start, end + 1).trim()
 }
 
-export function removeSurroundingParenthesis(source) {
+export function removeSurroundingParenthesis(source: string): string {
   const openMatch = /^[\s\n]*\(/.exec(source)
   const closeMatch = /\)[\s\n]*$/.exec(source)
+
   return openMatch != null && closeMatch != null
     ? removeSurroundingParenthesis(source.substring(openMatch.index + openMatch[0].length, closeMatch.index))
     : source
 }
 
-export function findRangesOfStrings(source) {
+export function findRangesOfStrings(source: string): Range[] {
   const foundRanges = []
 
   let currentRangeIndex = null
@@ -109,7 +115,7 @@ export function findRangesOfStrings(source) {
       if (currentRangeIndex == null) {
         currentRangeIndex = i
       } else if (source[i - 1] !== "\\") {
-        const range = [currentRangeIndex, i + 1]
+        const range: Range = [currentRangeIndex, i + 1]
         foundRanges.push(range)
 
         currentRangeIndex = null
@@ -120,19 +126,20 @@ export function findRangesOfStrings(source) {
   return foundRanges
 }
 
-export function matchAllOutsideRanges(ranges, content, regex) {
+export function matchAllOutsideRanges(ranges: Range[], content: string, regex: RegExp): RegExpExecArray[] {
   const matches = []
   for (const match of content.matchAll(regex)) {
-    const isInsideRange = ranges.some((range) => match.index >= range[0] && match.index + match[0].length <= range[1])
-    if (isInsideRange) {
-      continue
-    }
+    const isInsideRange = ranges.some((range: Range) => match.index >= range[0] && match.index + match[0].length <= range[1])
+
+    if (isInsideRange) continue
+
     matches.push(match)
   }
+
   return matches
 }
 
-export function getCommasIndexesOutsideQuotes(string) {
+export function getCommasIndexesOutsideQuotes(string: string): number[] {
   const commaIndexes = []
   const stringRanges = findRangesOfStrings(string)
 
