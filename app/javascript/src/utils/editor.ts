@@ -18,7 +18,7 @@ export function createNewItem(name: string, content: string, position = 9999, ty
 }
 
 export function destroyItem(id: string): void {
-  if (get(currentItem)!.id == id || get(currentItem)!.parent == id) currentItem.set(null)
+  if (get(currentItem)?.id == id || get(currentItem)?.parent == id) currentItem.set(null)
   items.set(get(items).filter(i => i.id != id && i.parent != id))
 }
 
