@@ -38,9 +38,9 @@ export function toggleHideItem(id: string): void {
 
 export function isAnyParentHidden(item: Item): boolean {
   while (item.parent) {
-    const parentItem: Item | undefined = get(items).find(i => i.id === item.parent)
+    item = get(items).find(i => i.id === item.parent)!
 
-    if (parentItem?.hidden) return true
+    if (item?.hidden) return true
   }
 
   return false
