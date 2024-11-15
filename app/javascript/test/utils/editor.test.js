@@ -78,11 +78,11 @@ describe("editor.js", () => {
     it("Should unset currentItem if currentItem is the removed item or parent", () => {
       currentItem.set({ id: 2 })
       destroyItem(2)
-      expect(get(currentItem)).toEqual({})
+      expect(get(currentItem)).toEqual(null)
 
       currentItem.set({ parent: 1 })
       destroyItem(1)
-      expect(get(currentItem)).toEqual({})
+      expect(get(currentItem)).toEqual(null)
     })
   })
 
