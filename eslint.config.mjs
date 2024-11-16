@@ -95,7 +95,8 @@ export default [{
 
     rules: {
         "@typescript-eslint/explicit-function-return-type": ["error", {
-          "allowTypedFunctionExpressions": true
+          "allowTypedFunctionExpressions": true,
+          "allowExpressions": true
         }],
 
         "@typescript-eslint/ban-ts-comment": "off",
