@@ -2,7 +2,7 @@ import Rails from "@rails/ujs"
 import * as timeago from "@src/timeago.js"
 import isCrawler from "@src/utils/is-crawler.js"
 
-export function bind() {
+export function bind(): void {
   const element = document.querySelector("[data-role='infinite-scroll-marker']")
   const button = document.querySelector("[data-role='load-more-posts']")
 
@@ -16,7 +16,7 @@ export function bind() {
   button.removeAndAddEventListener("click", loadMorePosts)
 }
 
-function isInfiniteScrollInView() {
+function isInfiniteScrollInView(): void {
   const elements = document.querySelectorAll("[data-role='infinite-scroll-marker']")
   const element = elements[elements.length - 1] as HTMLElement
 
@@ -33,11 +33,11 @@ function isInfiniteScrollInView() {
   }
 }
 
-function loadMorePosts({ target }: { target: HTMLElement }) {
+function loadMorePosts({ target }: { target: HTMLElement }): void {
   getInfiniteScrollContent(target)
 }
 
-function getInfiniteScrollContent(element: HTMLElement) {
+function getInfiniteScrollContent(element: HTMLElement): void {
   if (!element.dataset.url) return
 
   element.innerHTML = "<div class='spinner'></div>"
@@ -100,7 +100,7 @@ function getInfiniteScrollContent(element: HTMLElement) {
   })
 }
 
-function hideBackupPagination() {
+function hideBackupPagination(): void {
   if (isCrawler()) return
 
   const element = document.querySelector("[data-role='infinite-scroll-backup-pagination']")

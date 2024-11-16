@@ -1,4 +1,4 @@
-export function bind() {
+export function bind(): void {
   const fileUploadFields = document.querySelectorAll("[data-action~='image-preview']")
   fileUploadFields.forEach(element => element.removeAndAddEventListener("change", setImagePreview))
 
@@ -6,7 +6,7 @@ export function bind() {
   clearButtons.forEach(element => element.removeAndAddEventListener("click", clearImage))
 }
 
-function setImagePreview({ target }: { target: HTMLFormElement }) {
+function setImagePreview({ target }: { target: HTMLFormElement }): void {
   const removeFileFlag = document.querySelector(`[data-clear-image-flag="${target.dataset.target}"]`) as HTMLFormElement
   const targetImage = document.querySelector(`[data-image-preview="${target.dataset.target}"]`) as HTMLImageElement
 
@@ -22,7 +22,7 @@ function setImagePreview({ target }: { target: HTMLFormElement }) {
   removeFileFlag.value = ""
 }
 
-function clearImage({ currentTarget }: { currentTarget: HTMLElement }) {
+function clearImage({ currentTarget }: { currentTarget: HTMLElement }): void {
   const preview = document.querySelector(`[data-image-preview="${currentTarget.dataset.target}"]`) as HTMLImageElement
   const field = document.querySelector(`[data-action~="image-preview"][data-target="${currentTarget.dataset.target}"]`) as HTMLInputElement
   const removeFileFlag = document.querySelector(`[data-clear-image-flag="${currentTarget.dataset.target}"]`) as HTMLInputElement

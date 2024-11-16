@@ -79,7 +79,7 @@ export default [{
     rules: {
       "svelte/no-at-html-tags": "off",
     }
-}, ...compat.extends("plugin:@typescript-eslint/recommended").map(config => ({
+}, ...compat.extends("plugin:@typescript-eslint/recommended").map(config() => ({
     ...config,
     files: ["**/*.ts"],
 })), {
@@ -94,7 +94,9 @@ export default [{
     },
 
     rules: {
-        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/explicit-function-return-type": ["error", {
+          "allowTypedFunctionExpressions": true
+        }],
 
         "@typescript-eslint/ban-ts-comment": "off",
 

@@ -3,7 +3,7 @@ import Sortable from "sortablejs"
 import LimitedCheckboxes from "@components/form/LimitedCheckboxes.svelte"
 import FetchRails from "@src/fetch-rails"
 
-export function bind() {
+export function bind(): void {
   const element = document.querySelector("[data-role~='block-sortable']") as HTMLElement
 
   if (element) buildBlockSortable(element)
@@ -12,7 +12,7 @@ export function bind() {
   createBlockElements.forEach(element => element.removeAndAddEventListener("click", createBlock))
 }
 
-function createBlock({ currentTarget }: { currentTarget: HTMLElement }) {
+function createBlock({ currentTarget }: { currentTarget: HTMLElement }): void {
   if (currentTarget.dataset.disabled == "true") return
 
   currentTarget.dataset.disabled = "true"
@@ -26,7 +26,7 @@ function createBlock({ currentTarget }: { currentTarget: HTMLElement }) {
     })
 }
 
-function buildBlockSortable(element: HTMLElement) {
+function buildBlockSortable(element: HTMLElement): void {
   Sortable.create(element, {
     draggable: "[data-sortable-block]",
     animation: 50,
@@ -34,7 +34,7 @@ function buildBlockSortable(element: HTMLElement) {
   })
 }
 
-function updateBlockSortable() {
+function updateBlockSortable(): void {
   const blocks = Array.from(document.querySelectorAll(".content-block")) as HTMLElement[]
 
   const positions: { id: any[]; position: number }[] = []
@@ -52,11 +52,11 @@ function updateBlockSortable() {
     })
 }
 
-function renderSvelteComponents() {
+function renderSvelteComponents(): void {
   initializeSvelteComponent("LimitedCheckboxes", LimitedCheckboxes)
 }
 
-export function insertBlockTemplate(event: MouseEvent) {
+export function insertBlockTemplate(event: MouseEvent): void {
   event.preventDefault()
 
   const currentTarget = event.currentTarget as HTMLElement
@@ -67,7 +67,7 @@ export function insertBlockTemplate(event: MouseEvent) {
   targetElement!.append(template)
 }
 
-export function removeBlockTemplate(event: MouseEvent) {
+export function removeBlockTemplate(event: MouseEvent): void {
   event.preventDefault()
 
   const currentTarget = event.currentTarget as HTMLElement
@@ -76,7 +76,7 @@ export function removeBlockTemplate(event: MouseEvent) {
   target!.remove()
 }
 
-export function buildInputSortable(element: HTMLElement) {
+export function buildInputSortable(element: HTMLElement): void {
   Sortable.create(element, {
     animation: 50,
     handle: "[data-role~='sortable-handle']"

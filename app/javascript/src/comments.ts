@@ -1,10 +1,10 @@
 import FetchRails from "@src/fetch-rails"
 
-export function bind() {
+export function bind(): void {
   document.body.removeAndAddEventListener("click", getMoreComments)
 }
 
-function getMoreComments(event: Event) {
+function getMoreComments(event: Event): void {
   let eventTarget = event.target as HTMLElement | null | undefined
   if (eventTarget?.dataset.action != "get-more-comments") eventTarget = eventTarget?.closest("[data-action~='get-more-comments']")
   if (!eventTarget) return

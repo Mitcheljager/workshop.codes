@@ -1,16 +1,16 @@
-export function destroy() {
+export function destroy(): void {
   const elements = Array.from(document.querySelectorAll("[data-role~='dismiss-parent']")) as HTMLElement[]
 
-  elements.forEach((element) => element.parentNode?.removeChild(element))
+  elements.forEach((element): HTMLElement | undefined => element.parentNode?.removeChild(element))
 }
 
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-role~='dismiss-parent']")
 
   elements.forEach((element) => element.removeAndAddEventListener("click", dismissParent))
 }
 
-export function dismissParent(event: Event) {
+export function dismissParent(event: Event): void {
   const currentTarget = event.currentTarget as HTMLElement
   const parent = currentTarget?.parentNode as HTMLElement
 

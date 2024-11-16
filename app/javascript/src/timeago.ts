@@ -1,6 +1,6 @@
 import * as timeago from "timeago.js"
 
-export function initialize() {
+export function initialize(): void {
   const elements = Array.from(document.querySelectorAll("[data-role~='timeago']")) as HTMLElement[]
 
   if (elements.length) timeago.render(elements)

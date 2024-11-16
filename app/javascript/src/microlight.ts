@@ -11,7 +11,7 @@
  * Code structure aims at minimizing the compressed library size
  */
 
-export async function reset(className = "") {
+export async function reset(className = ""): Promise<void> {
   // for better compression
   var _window = window,
     _document = document,

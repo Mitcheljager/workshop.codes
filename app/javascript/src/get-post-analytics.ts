@@ -1,7 +1,7 @@
 import FetchRails from "@src/fetch-rails"
 import createChart from "@src/chart"
 
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action~='get-post-analytics']")
   elements.forEach(element => element.removeAndAddEventListener("change", (event: Event) => getPostAnalytics(event)))
 
@@ -9,7 +9,7 @@ export function bind() {
   revealElements.forEach(element => element.removeAndAddEventListener("click", revealPostAnalytics))
 }
 
-function getPostAnalytics(event: Event) {
+function getPostAnalytics(event: Event): void {
   if (event) event.preventDefault()
 
   const currentTarget = event.currentTarget as HTMLFormElement
@@ -38,7 +38,7 @@ function getPostAnalytics(event: Event) {
     })
 }
 
-function revealPostAnalytics({ currentTarget }: { currentTarget: HTMLElement }) {
+function revealPostAnalytics({ currentTarget }: { currentTarget: HTMLElement }): void {
   const parentElement = currentTarget.closest("[data-toggle-content]")
   if (!parentElement) throw new Error("parentElement was not found in revealPostAnalytics")
 

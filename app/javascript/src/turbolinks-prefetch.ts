@@ -28,7 +28,7 @@ class Prefetcher {
     this.doc = document.implementation.createHTMLDocument("prefetch")
     this.xhr = new XMLHttpRequest()
     this.controller = controller
-    this.controller.getActionForLink = (link: HTMLElement) => {
+    this.controller.getActionForLink = (link: HTMLElement): "restore" | "advance" | "replace" => {
       return this.getActionForLink(link)
     }
   }

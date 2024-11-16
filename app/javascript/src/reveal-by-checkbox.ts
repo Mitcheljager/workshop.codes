@@ -1,10 +1,10 @@
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action='reveal-by-checkbox']")
 
   elements.forEach((element) => element.removeAndAddEventListener("click", toggleRevealByCheckbox))
 }
 
-function toggleRevealByCheckbox({ currentTarget }: { currentTarget: HTMLFormElement }) {
+function toggleRevealByCheckbox({ currentTarget }: { currentTarget: HTMLFormElement }): void {
   const state = currentTarget.checked
   const parent = currentTarget.closest("[data-reveal-by-checkbox]") as HTMLElement
   const target = parent?.dataset.revealByCheckbox

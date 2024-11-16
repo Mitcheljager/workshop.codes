@@ -1,4 +1,4 @@
-export function bind(target: HTMLElement | Document = document) {
+export function bind(target: HTMLElement | Document = document): void {
   const elements = target.querySelectorAll("[data-role~='lazy-video']")
 
   const observer = new IntersectionObserver(entries => {
