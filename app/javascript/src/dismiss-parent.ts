@@ -1,7 +1,7 @@
 export function destroy(): void {
   const elements = Array.from(document.querySelectorAll("[data-role~='dismiss-parent']")) as HTMLElement[]
 
-  elements.forEach((element): HTMLElement | undefined => element.parentNode?.removeChild(element))
+  elements.forEach((element) => element.parentNode?.removeChild(element))
 }
 
 export function bind(): void {
