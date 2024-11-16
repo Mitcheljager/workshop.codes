@@ -11,11 +11,11 @@ Element.prototype.removeAndAddEventListener = function(event, fun) {
   this.removeEventListener(event, fun)
   // @ts-ignore
   this.addEventListener(event, fun)
-};
+}
 
 Document.prototype.removeAndAddEventListener = function(event, fun) {
   // @ts-ignore
   this.removeEventListener(event, fun)
   // @ts-ignore
   this.addEventListener(event, fun)
-};
+}

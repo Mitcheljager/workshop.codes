@@ -54,7 +54,7 @@ function buildFilterPath({ target }: { target: HTMLElement }) {
   const parent = target.closest("[data-role~='search']") as HTMLElement
   target.innerHTML = "<div class='spinner spinner--small'></div>"
 
-  let buildPath = {
+  const buildPath = {
     "category": filterValue("categories", parent),
     "hero": filterValue("heroes", parent),
     "map": filterValue("maps", parent),

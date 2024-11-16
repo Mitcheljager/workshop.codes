@@ -10,11 +10,11 @@ export default class FetchRails {
 
   constructor(url: string, body?: string | object, headers = {}) {
     this.url = url
-    this.body = body || ''
+    this.body = body || ""
     this.defaultParams = {
       headers: {
         "Content-Type": "application/json",
-        "X-CSRF-Token": Rails.csrfToken() || '',
+        "X-CSRF-Token": Rails.csrfToken() || "",
         ...headers
       },
       credentials: "same-origin"

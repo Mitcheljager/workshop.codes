@@ -34,7 +34,7 @@ function createRules() {
 
   const array: (string | number)[][] = []
   items.forEach((item, index) => {
-    const content = item.textContent || ''
+    const content = item.textContent || ""
     if (!content.match(/rule\("(.*)"\)/g)) return
 
     array.push([content.replace("rule(", "").replace(")", ""), index])

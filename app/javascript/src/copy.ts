@@ -4,7 +4,7 @@ export function bind() {
   document.body.removeAndAddEventListener("click", copyToClipboard)
 }
 
-export default function copyToClipboard(event: MouseEvent, optionalContent = '') {
+export default function copyToClipboard(event: MouseEvent, optionalContent = "") {
   let eventTarget = event.target as HTMLElement | undefined | null
   if (eventTarget?.dataset?.action != "copy") eventTarget = eventTarget?.closest("[data-action~='copy-to-clipboard']")
 
@@ -12,7 +12,7 @@ export default function copyToClipboard(event: MouseEvent, optionalContent = '')
 
   event.preventDefault()
 
-  const target: string = eventTarget.dataset.target || ''
+  const target: string = eventTarget.dataset.target || ""
   const targetElement = document.querySelector(`[data-copy="${target}"]`) as HTMLElement
 
   const { textContent } = targetElement

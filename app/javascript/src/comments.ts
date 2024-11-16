@@ -13,9 +13,9 @@ function getMoreComments(event: Event) {
   const button = parent.querySelector("[data-action~='get-more-comments']") as HTMLButtonElement
   const buttonParent = parent.querySelector("[data-role~='load-more']")
   const id = parent.dataset.id
-  const page = parseInt(parent.dataset.page || '0')
-  const commentsCount = parseInt(parent.dataset.commentsCount || '0')
-  const initialText = button.innerText || ''
+  const page = parseInt(parent.dataset.page || "0")
+  const commentsCount = parseInt(parent.dataset.commentsCount || "0")
+  const initialText = button.innerText || ""
 
   if (parent.dataset.loading === "true") return
 
@@ -26,7 +26,7 @@ function getMoreComments(event: Event) {
   new FetchRails(`/comments/${id}/${page + 1}`).get().then(data => {
     if (data) buttonParent!.insertAdjacentHTML("beforebegin", data)
 
-      console.log(parent.querySelectorAll("[data-comment]").length, commentsCount)
+    console.log(parent.querySelectorAll("[data-comment]").length, commentsCount)
 
     if (parent.querySelectorAll("[data-comment]").length >= commentsCount) buttonParent!.remove()
   }).finally(() => {

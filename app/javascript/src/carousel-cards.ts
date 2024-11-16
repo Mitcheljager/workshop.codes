@@ -44,7 +44,7 @@ function carouselCardsChanged(this: Siema & SiemaOptions) {
   const previousElement = parent!.querySelector("[data-action='carousel-previous']")
 
   previousElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide == 0)
-  nextElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ''))
+  nextElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ""))
 }
 
 function carouselNext({ currentTarget }: { currentTarget: HTMLElement }) {
@@ -59,5 +59,5 @@ function carouselPrevious({ currentTarget }: { currentTarget: HTMLElement }) {
 
 function getCarouselId(element: HTMLElement): number {
   const carouselElement = element.closest(".card-carousel")?.querySelector("[data-role='carousel-cards']") as HTMLElement
-  return parseInt(carouselElement.dataset.carouselId || '0')
+  return parseInt(carouselElement.dataset.carouselId || "0")
 }

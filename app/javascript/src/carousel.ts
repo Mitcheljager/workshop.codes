@@ -33,7 +33,7 @@ export function setCarousel(element: HTMLElement) {
 }
 
 function carouselGoTo({ currentTarget }: { currentTarget: HTMLElement }) {
-  const target = parseInt(currentTarget.dataset.target || '0')
+  const target = parseInt(currentTarget.dataset.target || "0")
   carousel.goTo(target)
 }
 

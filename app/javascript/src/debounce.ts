@@ -1,4 +1,4 @@
-export default function debounce<T extends (...args: any[]) => any>(fun: T, wait = 50, immediate = false) {
+export default function debounce<T extends(...args: any[]) => any>(fun: T, wait = 50, immediate = false) {
   let timeout: ReturnType<typeof setTimeout> | null
 
   return function(this: ThisParameterType<T>, ...args: Parameters<T>) {
