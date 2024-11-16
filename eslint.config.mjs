@@ -79,7 +79,7 @@ export default [{
     rules: {
       "svelte/no-at-html-tags": "off",
     }
-}, ...compat.extends("plugin:@typescript-eslint/recommended").map(config() => ({
+}, ...compat.extends("plugin:@typescript-eslint/recommended").map(config => ({
     ...config,
     files: ["**/*.ts"],
 })), {
