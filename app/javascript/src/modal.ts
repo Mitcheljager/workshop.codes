@@ -1,4 +1,4 @@
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action='toggle-modal']")
   elements.forEach(element => element.removeAndAddEventListener("click", closeModal))
 
@@ -11,7 +11,7 @@ export function bind() {
   document.body.removeAndAddEventListener("keydown", closeModalOnKeyDown)
 }
 
-function showModal({ currentTarget }: { currentTarget: HTMLElement }) {
+function showModal({ currentTarget }: { currentTarget: HTMLElement }): void {
   const modal = document.querySelector(`[data-modal="${currentTarget.dataset.target}"]`) as HTMLElement
 
   if (!modal) return
@@ -22,7 +22,7 @@ function showModal({ currentTarget }: { currentTarget: HTMLElement }) {
   document.body.style.overflowY = "hidden"
 }
 
-export function closeModal() {
+export function closeModal(): void {
   const activeModal = document.querySelector(".modal:not([style*='none'])") as HTMLElement
 
   if (!activeModal) return
@@ -38,10 +38,10 @@ export function closeModal() {
   }
 }
 
-function closeModalOnKeyDown(event: KeyboardEvent) {
+function closeModalOnKeyDown(event: KeyboardEvent): void {
   if (event.code === "Escape") closeModal()
 }
 
-function getScrollbarWidth() {
+function getScrollbarWidth(): number {
   return window.innerWidth - document.body.offsetWidth
 }

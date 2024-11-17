@@ -1,4 +1,4 @@
-export function bind() {
+export function bind(): void {
   const element = document.querySelector("[data-role='ollie-form']") as HTMLElement
 
   if (!element) return
@@ -19,7 +19,7 @@ export function bind() {
   rememberMeInput?.removeAndAddEventListener("input", () => setOllieBody(element, "base"))
 }
 
-function setPupilPosition(event: Event, element: HTMLElement) {
+function setPupilPosition(event: Event, element: HTMLElement): void {
   const target = event.target as HTMLFormElement
   const max = 32
   const valueLength = Math.min(max, Math.max(0, target.value.length))
@@ -29,7 +29,7 @@ function setPupilPosition(event: Event, element: HTMLElement) {
   pupils.style.transform = `translateX(${xOffset}%) translateY(8%)`
 }
 
-function resetPupilPosition(element: HTMLElement) {
+function resetPupilPosition(element: HTMLElement): void {
   const pupils = getOlliePart(element, "pupils")
   pupils.style.transform = "none"
 }
@@ -38,7 +38,7 @@ function getOlliePart(element: HTMLElement, part: string): HTMLElement {
   return element.querySelector(`[data-ollie="${part}"]`) as HTMLElement
 }
 
-function setOllieBody(element: HTMLElement, variant = "base") {
+function setOllieBody(element: HTMLElement, variant = "base"): void {
   const base = getOlliePart(element, "body-base")
   const happy = getOlliePart(element, "body-happy")
   const suspicious = getOlliePart(element, "body-suspicious")
@@ -61,7 +61,7 @@ function setOllieBody(element: HTMLElement, variant = "base") {
   armRight?.classList.toggle("out-of-view", variant !== "eyes-closed")
 }
 
-function loadImagesSimultaniously() {
+function loadImagesSimultaniously(): void {
   const element = document.querySelector("[data-role='ollie-image-holder']") as HTMLElement
   const images = element.querySelectorAll("img")
 

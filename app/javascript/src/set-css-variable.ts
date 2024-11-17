@@ -1,4 +1,4 @@
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action~='set-css-variable']")
 
   elements.forEach(element => {
@@ -6,7 +6,7 @@ export function bind() {
   })
 }
 
-export default function setCssVariable(event: InputEvent) {
+export default function setCssVariable(event: InputEvent): void {
   event.preventDefault()
 
   const currentTarget = event.currentTarget as HTMLFormElement

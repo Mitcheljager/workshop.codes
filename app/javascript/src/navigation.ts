@@ -1,4 +1,4 @@
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action='toggle-navigation']")
 
   elements.forEach((element) => element.removeAndAddEventListener("click", toggleNavigation))
@@ -7,14 +7,14 @@ export function bind() {
   if (searchElement) searchElement.removeAndAddEventListener("click", toggleSearch)
 }
 
-function toggleNavigation(event: Event) {
+function toggleNavigation(event: Event): void {
   event.preventDefault()
 
   const navigationElement = document.querySelector("[data-role='navigation']")
   navigationElement?.classList.toggle("header__content--is-active")
 }
 
-function toggleSearch(event: Event) {
+function toggleSearch(event: Event): void {
   event.preventDefault()
 
   const searchElement = document.querySelector("[data-role~='search-popout']")

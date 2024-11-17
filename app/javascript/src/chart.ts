@@ -1,4 +1,4 @@
-export function render() {
+export function render(): void {
   const charts = Array.from(document.querySelectorAll("[data-role='chart']")) as HTMLElement[]
 
   charts.forEach(element => {
@@ -6,7 +6,7 @@ export function render() {
   })
 }
 
-export default async function createChart(element: HTMLElement, data: any, dateformat = "%Y-%m-%d") {
+export default async function createChart(element: HTMLElement, data: any, dateformat = "%Y-%m-%d"): Promise<void> {
   const { curveStep } = await import("d3")
   // @ts-ignore
   const MG = await import("metrics-graphics")
@@ -16,7 +16,7 @@ export default async function createChart(element: HTMLElement, data: any, datef
   let processedMarkers = []
   if (element.dataset.markers != null) {
     const markers = JSON.parse(element.dataset.markers)
-    processedMarkers = markers.map((marker: string[]) => ({
+    processedMarkers = markers.map((marker: string[]): { date: Date; label: string; } => ({
       "date": new Date(marker[2]),
       "label": marker[1]
     }))

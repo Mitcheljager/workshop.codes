@@ -1,12 +1,12 @@
 import FetchRails from "@src/fetch-rails"
 
-export function render() {
+export function render(): void {
   const element = document.querySelector("[data-role~='ko-fi-progress']") as HTMLElement
 
   if (element) getKoFiValue(element)
 }
 
-function getKoFiValue(element: HTMLElement) {
+function getKoFiValue(element: HTMLElement): void {
   new FetchRails("/webhooks/get_ko_fi_value").get().then(data => {
     const parsedData = parseInt(data)
     const max = parseInt(element.dataset.max || "0")

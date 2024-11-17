@@ -1,7 +1,7 @@
 import FetchRails from "@src/fetch-rails"
 import createChart from "@src/chart"
 
-export function bind() {
+export function bind(): void {
   const element = document.querySelector("[data-action~='get-user-analytics']") as HTMLFormElement
 
   if (!element) return
@@ -11,7 +11,7 @@ export function bind() {
   getUserAnalytics(null, element)
 }
 
-function getUserAnalytics(event: Event | null, element: HTMLFormElement) {
+function getUserAnalytics(event: Event | null, element: HTMLFormElement): void {
   if (event) event.preventDefault()
 
   // @ts-ignore

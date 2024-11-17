@@ -3,12 +3,12 @@ import { render as renderNumPlayersSlider } from "@src/num-players-slider"
 import { bind as bindGetVerifiedUsers } from "@src/get-verified-users"
 import { closeDropdown } from "@src/dropdown"
 
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action~='get-filter-content']")
   elements.forEach(element => element.removeAndAddEventListener("click", getPartial))
 }
 
-function getPartial({ target }: { target: HTMLElement }) {
+function getPartial({ target }: { target: HTMLElement }): void {
   const targetElement = target.dataset.url ? target : target.closest("[data-url]") as HTMLElement
   const url = targetElement.dataset.url
 
@@ -24,7 +24,7 @@ function getPartial({ target }: { target: HTMLElement }) {
   }).then(() => bindFilterContent())
 }
 
-function bindFilterContent() {
+function bindFilterContent(): void {
   const elements = document.querySelectorAll("[data-action='add-filter']")
   elements.forEach((element) => element.removeAndAddEventListener("click", addFilter))
 
@@ -35,7 +35,7 @@ function bindFilterContent() {
   renderNumPlayersSlider()
 }
 
-function addFilter(event: Event) {
+function addFilter(event: Event): void {
   event.preventDefault()
 
   const target = event.target as HTMLElement
@@ -50,11 +50,11 @@ function addFilter(event: Event) {
   closeDropdown(event, true)
 }
 
-function buildFilterPath({ target }: { target: HTMLElement }) {
+function buildFilterPath({ target }: { target: HTMLElement }): void {
   const parent = target.closest("[data-role~='search']") as HTMLElement
   target.innerHTML = "<div class='spinner spinner--small'></div>"
 
-  let buildPath = {
+  const buildPath = {
     "category": filterValue("categories", parent),
     "hero": filterValue("heroes", parent),
     "map": filterValue("maps", parent),
@@ -70,7 +70,7 @@ function buildFilterPath({ target }: { target: HTMLElement }) {
   window.location.href = `/search?${buildPathString}`
 }
 
-function filterValue(type: string, parent: HTMLElement) {
+function filterValue(type: string, parent: HTMLElement): string {
   const element = parent.querySelector(`[data-filter-type='${type}']`) as HTMLElement
   const value = element ? (element.dataset.value || "") : ""
 

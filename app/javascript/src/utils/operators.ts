@@ -32,7 +32,7 @@ export const comparisonOperators = {
       let regex
       try {
         regex = new RegExp(pattern, flags)
-      } catch (err) {
+      } catch {
         return false
       }
       return regex.test(l)

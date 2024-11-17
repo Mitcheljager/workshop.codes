@@ -1,7 +1,7 @@
 import FetchRails from "@src/fetch-rails"
 import { initiateIde } from "@src/ide"
 
-export function bind() {
+export function bind(): void {
   const elements = Array.from(document.querySelectorAll("[data-action~='load-snippet']")) as HTMLElement[]
 
   elements.forEach((element) => {
@@ -11,7 +11,7 @@ export function bind() {
   })
 }
 
-function loadSnippet(event: Event | null, element: HTMLElement) {
+function loadSnippet(event: Event | null, element: HTMLElement): void {
   if (event) event.preventDefault()
 
   const targetElement = element || event?.target

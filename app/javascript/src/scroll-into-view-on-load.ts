@@ -1,4 +1,4 @@
-export function initialize() {
+export function initialize(): void {
   const elements = Array.from(document.querySelectorAll("[data-role~='scroll-into-view-on-load']")) as HTMLElement[]
 
   elements.forEach(element => {

@@ -1,8 +1,8 @@
-export function bind() {
+export function bind(): void {
   document.body.removeAndAddEventListener("click", toggleContent)
 }
 
-function toggleContent(event: MouseEvent) {
+function toggleContent(event: MouseEvent): void {
   let target = event.target as HTMLElement
 
   if (target.dataset.action === undefined || !target.dataset.action.includes("toggle-content")) {
@@ -43,7 +43,7 @@ function toggleContent(event: MouseEvent) {
   }, animationTiming)
 }
 
-function closeOnOutsideClick(event: MouseEvent) {
+function closeOnOutsideClick(event: MouseEvent): void {
   const target = event.target as HTMLElement
 
   if (target.closest("[data-toggle-content]")) return

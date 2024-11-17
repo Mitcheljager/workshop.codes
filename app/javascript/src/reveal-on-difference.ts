@@ -1,10 +1,10 @@
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action='reveal-on-difference']")
 
   elements.forEach((element) => element.removeAndAddEventListener("input", toggleRevealOnDifference))
 }
 
-function toggleRevealOnDifference({ currentTarget }: { currentTarget: HTMLFormElement }) {
+function toggleRevealOnDifference({ currentTarget }: { currentTarget: HTMLFormElement }): void {
   const value = currentTarget.value
   const original = currentTarget.dataset.original
   const different = value !== original && original !== undefined

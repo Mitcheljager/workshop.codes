@@ -10,18 +10,18 @@ export default class FetchRails {
 
   constructor(url: string, body?: string | object, headers = {}) {
     this.url = url
-    this.body = body || ''
+    this.body = body || ""
     this.defaultParams = {
       headers: {
         "Content-Type": "application/json",
-        "X-CSRF-Token": Rails.csrfToken() || '',
+        "X-CSRF-Token": Rails.csrfToken() || "",
         ...headers
       },
       credentials: "same-origin"
     }
   }
 
-  async request(method = "get", { timeout = 10000, returnResponse = false, parameters = {} } = {}) {
+  async request(method = "get", { timeout = 10000, returnResponse = false, parameters = {} } = {}): Promise<string> {
     const timeoutController = new AbortController()
     const timeoutID = setTimeout(() => timeoutController.abort(), timeout)
 
@@ -48,7 +48,7 @@ export default class FetchRails {
     return this.request("get", { timeout, returnResponse, parameters })
   }
 
-  async post({timeout = 10000, returnResponse = false, parameters = {}, method = "post"} = {}) {
+  async post({timeout = 10000, returnResponse = false, parameters = {}, method = "post"} = {}): Promise<string> {
     parameters = {...parameters, body: JSON.stringify(this.body)}
     return this.request(method, { timeout, returnResponse, parameters })
   }

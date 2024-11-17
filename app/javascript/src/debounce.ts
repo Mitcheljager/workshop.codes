@@ -1,12 +1,10 @@
-export default function debounce<T extends (...args: any[]) => any>(fun: T, wait = 50, immediate = false) {
+export default function debounce<T extends(...args: any[]) => any>(fun: T, wait = 50, immediate = false): (this: ThisParameterType<T>, ...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | null
 
-  return function(this: ThisParameterType<T>, ...args: Parameters<T>) {
-    const context = this
-
-    const later = () => {
+  return function(this: ThisParameterType<T>, ...args: Parameters<T>): void {
+    const later = (): any => {
       timeout = null
-      if (!immediate) fun.apply(context, args)
+      if (!immediate) fun.apply(this, args)
     }
 
     const callNow = immediate && !timeout
@@ -14,6 +12,6 @@ export default function debounce<T extends (...args: any[]) => any>(fun: T, wait
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(later, wait)
 
-    if (callNow) fun.apply(context, args)
+    if (callNow) fun.apply(this, args)
   }
 }

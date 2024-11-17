@@ -2,7 +2,7 @@ import Siema, { type SiemaOptions } from "siema"
 
 let carouselCards: Siema[] = []
 
-export function destroy() {
+export function destroy(): void {
   if (carouselCards.length == 0) return
 
   const elements = document.querySelectorAll("[data-role='carousel-cards']")
@@ -13,7 +13,7 @@ export function destroy() {
   carouselCards = []
 }
 
-export function render() {
+export function render(): void {
   const elements = Array.from(document.querySelectorAll("[data-role='carousel-cards']")) as HTMLElement[]
 
   if (elements.length == 0) return
@@ -37,27 +37,27 @@ export function render() {
   nextElements.forEach((element) => element.removeAndAddEventListener("click", carouselNext))
 }
 
-function carouselCardsChanged(this: Siema & SiemaOptions) {
+function carouselCardsChanged(this: Siema & SiemaOptions): void {
   const selector = this.selector as HTMLElement
   const parent = selector.closest(".card-carousel")
   const nextElement = parent!.querySelector("[data-action='carousel-next']")
   const previousElement = parent!.querySelector("[data-action='carousel-previous']")
 
   previousElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide == 0)
-  nextElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ''))
+  nextElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ""))
 }
 
-function carouselNext({ currentTarget }: { currentTarget: HTMLElement }) {
+function carouselNext({ currentTarget }: { currentTarget: HTMLElement }): void {
   const carouselId = getCarouselId(currentTarget)
   carouselCards[carouselId].next()
 }
 
-function carouselPrevious({ currentTarget }: { currentTarget: HTMLElement }) {
+function carouselPrevious({ currentTarget }: { currentTarget: HTMLElement }): void {
   const carouselId = getCarouselId(currentTarget)
   carouselCards[carouselId].prev()
 }
 
 function getCarouselId(element: HTMLElement): number {
   const carouselElement = element.closest(".card-carousel")?.querySelector("[data-role='carousel-cards']") as HTMLElement
-  return parseInt(carouselElement.dataset.carouselId || '0')
+  return parseInt(carouselElement.dataset.carouselId || "0")
 }

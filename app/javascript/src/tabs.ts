@@ -1,12 +1,12 @@
 import { carousel, setCarousel } from "@src/carousel"
 
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-action~='set-tab']")
 
   elements.forEach((element) => element.removeAndAddEventListener("click", setTab))
 }
 
-function setTab(event: Event) {
+function setTab(event: Event): void {
   event.preventDefault()
 
   const { currentTarget } = event
@@ -28,7 +28,7 @@ function setTab(event: Event) {
   if (currentTarget.dataset.action?.includes("scroll")) scrollToElement(parentElement)
 }
 
-function revealTab(target: string, parentElement: Element) {
+function revealTab(target: string, parentElement: Element): void {
   const targetElement = document.querySelector(`[data-tab~='${target}']`)
   const tabElements = parentElement.querySelectorAll(".tabs-content")
 
@@ -56,7 +56,7 @@ function revealTab(target: string, parentElement: Element) {
   }, 150)
 }
 
-function setActiveTab(targetElement: HTMLAnchorElement, parentElement: HTMLElement) {
+function setActiveTab(targetElement: HTMLAnchorElement, parentElement: HTMLElement): void {
   const tabs = parentElement.querySelectorAll(".tabs__item")
 
   tabs.forEach((tab: Element) => {
@@ -71,7 +71,7 @@ function setActiveTab(targetElement: HTMLAnchorElement, parentElement: HTMLEleme
   }
 }
 
-function resetCarouselInTab(targetElement: Element) {
+function resetCarouselInTab(targetElement: Element): void {
   const carouselElement = targetElement.querySelector("[data-role='carousel']") as HTMLElement
   if (!carouselElement || !carousel) return
 
@@ -79,7 +79,7 @@ function resetCarouselInTab(targetElement: Element) {
   setCarousel(carouselElement)
 }
 
-function scrollToElement(element: Element) {
+function scrollToElement(element: Element): void {
   const scrollTop = document.documentElement.scrollTop
   const offset = element.getBoundingClientRect().top + scrollTop
   if (offset < scrollTop) window.scrollTo({ top: offset - 10 })
