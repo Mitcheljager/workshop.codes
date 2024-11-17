@@ -1,24 +1,24 @@
-import { Decoration, ViewPlugin, WidgetType } from "@codemirror/view"
+import type { Range } from "@codemirror/state"
+import { Decoration, ViewPlugin, WidgetType, type ViewUpdate } from "@codemirror/view"
 
-/**
- * @typedef CodeAction
- * @property {number} position
- * @property {string} label
- * @property {Function} run
- */
+export interface CodeAction {
+  position: number,
+  label: string,
+  run: () => void
+}
 
-/**
- * @typedef {(update: ViewUpdate) => CodeAction[]} CodeActionProvider
- */
+export type CodeActionProvider = (update: ViewUpdate) => CodeAction[]
 
 class CodeActionLightBulbWidget extends WidgetType {
-  constructor(actions) {
+  actions: CodeAction[]
+
+  constructor(actions: CodeAction[]) {
     super()
 
     this.actions = actions
   }
 
-  toDOM() {
+  toDOM(): HTMLElement {
     const container = document.createElement("span")
     container.className = "button code-actions-lightbulb"
     container.textContent = "💡"
@@ -42,7 +42,8 @@ class CodeActionLightBulbWidget extends WidgetType {
 
     container.addEventListener("click", () => dropdown.click())
     dropdown.addEventListener("change", (event) => {
-      const actionIndex = parseInt(event.target.value, 10)
+      const target = event.target as HTMLSelectElement
+      const actionIndex = parseInt(target.value, 10)
       const action = this.actions[actionIndex]
 
       action.run()
@@ -52,7 +53,7 @@ class CodeActionLightBulbWidget extends WidgetType {
   }
 }
 
-function createLightBulbDecoration(position, actions) {
+function createLightBulbDecoration(position: number, actions: CodeAction[]): Range<Decoration> {
   return Decoration.widget({
     widget: new CodeActionLightBulbWidget(actions),
     side: -1, // -1 for left, 1 for right
@@ -60,19 +61,15 @@ function createLightBulbDecoration(position, actions) {
   }).range(position)
 }
 
-/**
- * @param {CodeActionProvider[]} providers
- */
-export function codeActions(providers) {
+export function codeActions(providers: CodeActionProvider[]): ViewPlugin<any> {
   return ViewPlugin.fromClass(class {
-    constructor(_view) {
+    decorations = Decoration.none
+
+    constructor(_view: any) {
       this.decorations = Decoration.none
     }
 
-    /**
-     * @param {ViewUpdate} update
-     */
-    update(update) {
+    update(update: ViewUpdate): void {
       if (!(update.docChanged || update.selectionSet || update.viewportChanged)) return
 
       this.decorations = Decoration.none
