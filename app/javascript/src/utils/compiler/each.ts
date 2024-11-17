@@ -5,6 +5,11 @@ import { openArrayBracketRegex, openToClosingArrayBracketsMap } from "@utils/com
 import { get } from "svelte/store"
 
 export function evaluateEachLoops(joinedItems: string): string {
+  // Matches "@each" loops extracting the item and optional index variables, along with the iterable.
+  // For example:
+  // @each (thing in [a, b, c])
+  // @each (item, index in [1, 2, 3]) {
+  // @each (item in Constant.Button) {
   const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*?\]|(?:Constant)\.[\w\s]+)\s*\)\s*\{/gs
 
   let match
