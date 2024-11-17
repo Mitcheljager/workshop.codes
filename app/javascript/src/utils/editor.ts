@@ -10,7 +10,7 @@ export function createNewItem(name: string, content: string, position = 9999, ty
     type: type,
     position,
     content: content,
-    parent: '',
+    parent: "",
     hidden: false
   }
 
@@ -46,7 +46,7 @@ export function isAnyParentHidden(item: Item): boolean {
   return false
 }
 
-export function duplicateItem(item: Item, newParent: string = ''): void {
+export function duplicateItem(item: Item, newParent: string = ""): void {
   const itemCount = get(items).filter(i => {
     if (i.parent != item.parent) return false
     return i.name.match(/\(Copy(?: \d+)?\)/g)
@@ -69,7 +69,7 @@ export function getItemById(id: string): Item | null {
   return get(items).find(i => i.id == id) || null
 }
 
-export function setCurrentItemById(id: string) {
+export function setCurrentItemById(id: string): void {
   const item = getItemById(id)
 
   if (!item) return
