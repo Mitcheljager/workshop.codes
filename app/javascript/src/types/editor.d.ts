@@ -102,3 +102,5 @@ export type Variables = {
   playerVariables: string[],
   globalVariables: string[]
 }
+
+export type Severity = "hint" | "info" | "warning" | "error"
