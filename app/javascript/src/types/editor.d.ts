@@ -80,3 +80,5 @@ export type ExtendedCompletion = Completion & {
   args_unlimited: boolean,
   args_allow_null: boolean,
 }
+
+export type WorkshopConstant = Record<string, Record<Language, string>>
