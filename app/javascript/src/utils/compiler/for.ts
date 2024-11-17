@@ -1,8 +1,10 @@
 import { getClosingBracket, replaceBetween } from "@utils/parse"
 
-export function evaluateForLoops(joinedItems) {
+export function evaluateForLoops(joinedItems: string): string {
+  // Matches "@for ([var] [from] number through|to number [in steps of number]) {" in groups for each param
+  const forRegex = /@for\s+\(\s*((?:(\w+)\s+)?(?:from\s+))?(-?[\d\.]+)\s+(?:(through|to)\s+)?(-?[\d\.]+)(?:\s*in steps of\s+(-?[\d\.]+))?\s*\)\s*\{/g
+
   let match
-  const forRegex = /@for\s+\(\s*((?:(\w+)\s+)?(?:from\s+))?(-?[\d\.]+)\s+(?:(through|to)\s+)?(-?[\d\.]+)(?:\s*in steps of\s+(-?[\d\.]+))?\s*\)\s*\{/g // Matches "@for ([var] [from] number through|to number [in steps of number]) {" in groups for each param
   while ((match = forRegex.exec(joinedItems)) != null) {
     const [full, _, variable, startString, clusivityKeyword, endString, stepString = "1"] = match
 
@@ -18,7 +20,7 @@ export function evaluateForLoops(joinedItems) {
     // Replace "For.[variable]" with the current index
     let repeatedContent = ""
     for(let i = start; i < end + (inclusive ? step : 0); i += step) {
-      repeatedContent += content.replaceAll(`For.${variable || "i"}`, i)
+      repeatedContent += content.replaceAll(`For.${variable || "i"}`, i.toString())
     }
 
     joinedItems = replaceBetween(joinedItems, repeatedContent, match.index, closingBracketIndex + 1)

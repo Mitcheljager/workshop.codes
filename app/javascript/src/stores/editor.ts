@@ -4,7 +4,7 @@ import { isAnyParentHidden } from "@utils/editor"
 import { getMixins } from "@utils/compiler/mixins"
 import { getSubroutines } from "@utils/compiler/subroutines"
 import { debounced } from "@utils/debounceStore"
-import type { EditorStates, ExtendedCompletion, Item, Project, RecoveredProject } from "@src/types/editor"
+import type { EditorStates, ExtendedCompletion, Item, Language, Project, RecoveredProject } from "@src/types/editor"
 
 // Preferably keep below the debounce time for the linter, so it
 // has access to the most up-to-date information from the store.
@@ -85,7 +85,8 @@ export const mixinsMap = derived(flatItems, debounced(($flatItems: string) => {
   return mixins.map((v: string) => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
-export const workshopConstants = writable({})
+/* Example: { "Color": { "AQUA": { "en-US": "Aqua" }, { "BLUE": { "en-US": "Blue" } } } */
+export const workshopConstants = writable<Record<string, Record<string, Record<Language, string>>>>({})
 
 export const settings = writable({
   "editor-font": "Consolas",
