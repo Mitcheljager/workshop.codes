@@ -14,7 +14,7 @@ export const screenWidth = writable(0)
 export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1000)
 
 export const modal = (() => {
-  const { subscribe, set } = writable<{ [key: string]: object } | null>(null)
+  const { subscribe, set } = writable<{ [key: string]: string } | null>(null)
 
   return {
     subscribe,
