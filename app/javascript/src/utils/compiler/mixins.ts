@@ -103,13 +103,13 @@ export function extractAndInsertMixins(joinedItems: string): string {
 
 /**
  * Replace every `@contents` occurance with their corresponding slot from the mixin include.
- * @param {string} joinedItems - The full given content
- * @param {number} index - The starting index of the include
- * @param {number} closing - The index of the closing parenthesis of the include arguments
- * @param {string} replaceWith - String constructed to far to replace the starting value
- * @returns {object} An object containing the extracted contents of the mixin, the full mixin string (including the declare),
+ * @param joinedItems - The full given content
+ * @param index - The starting index of the include
+ * @param closing - The index of the closing parenthesis of the include arguments
+ * @param replaceWith - String constructed to far to replace the starting value
+ * @returns An object containing the extracted contents of the mixin, the full mixin string (including the declare),
  *                  and the updated content after slot replacement.
- * @throws {Error} If the mixin includes itself
+ * @throws If the mixin includes itself
  */
 export function replaceContents(joinedItems: string, index: number, closing: number, replaceWith: string): { contents: string, fullMixin: string, replaceWith: string } {
   let contents = ""

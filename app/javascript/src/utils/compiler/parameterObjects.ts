@@ -46,9 +46,9 @@ export function parseParameterObjectContent(innerContent: string): Record<string
 
 /**
  * Find the first matching parameter object in a given string. Parameter objects are a special format that allow the user to give only specific sets of parameters rather than having to write them all out.
- * @param {string} content Content to search for parameter objects in.
- * @param {*} startFromIndex Skip over previous results. This is used when the regex format was found without matches phrases to skip over previous results.
- * @returns {object|null} Object containing details about the parameter object and matching phrase.
+ * @param content Content to search for parameter objects in.
+ * @param startFromIndex Skip over previous results. This is used when the regex format was found without matches phrases to skip over previous results.
+ * @returns Object containing details about the parameter object and matching phrase.
  */
 export function getFirstParameterObject(content: string, startFromIndex = 0): ParameterObject | null {
   content = content.slice(startFromIndex)
@@ -85,9 +85,9 @@ export function getFirstParameterObject(content: string, startFromIndex = 0): Pa
 
 /**
  * Replaces and returns a parameter object in the given string.
- * @param {string} content String the parameter object will be replaced in.
- * @param {object} parameterObject Object containing all data needed to replace the expected string. This object contains a start index, end index, given parameters, parameter keys, and parameter defaults.
- * @returns {string} String with parameter object replaced with Workshop code.
+ * @param content String the parameter object will be replaced in.
+ * @param parameterObject Object containing all data needed to replace the expected string. This object contains a start index, end index, given parameters, parameter keys, and parameter defaults.
+ * @returns String with parameter object replaced with Workshop code.
  */
 export function replaceParameterObject(content: string, parameterObject: ParameterObject): string {
   const { start, end, given, phraseParameters, phraseDefaults } = parameterObject
