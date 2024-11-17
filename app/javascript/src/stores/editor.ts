@@ -4,7 +4,7 @@ import { isAnyParentHidden } from "@utils/editor"
 import { getMixins } from "@utils/compiler/mixins"
 import { getSubroutines } from "@utils/compiler/subroutines"
 import { debounced } from "@utils/debounceStore"
-import type { EditorStates, Item, Project, RecoveredProject } from "@src/types/editor"
+import type { EditorStates, ExtendedCompletion, Item, Project, RecoveredProject } from "@src/types/editor"
 
 // Preferably keep below the debounce time for the linter, so it
 // has access to the most up-to-date information from the store.
@@ -61,7 +61,7 @@ export const openFolders = writable<string[]>([])
 
 export const isSignedIn = writable(false)
 
-export const completionsMap = writable([])
+export const completionsMap = writable<ExtendedCompletion[]>([])
 export const variablesMap = derived(flatItems, debounced(($flatItems: string) => {
   const { globalVariables, playerVariables } = getVariables($flatItems)
 

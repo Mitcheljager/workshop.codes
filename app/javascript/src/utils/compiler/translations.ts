@@ -3,7 +3,7 @@ import { defaultLanguage, selectedLanguages, translationKeys } from "@stores/tra
 import { getClosingBracket, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
 
-export function convertTranslations(joinedItems) {
+export function convertTranslations(joinedItems: string): string {
   if (!get(selectedLanguages)?.length) return joinedItems
   if (!Object.keys(get(translationKeys) || {})?.length) return joinedItems
 
@@ -12,21 +12,18 @@ export function convertTranslations(joinedItems) {
   const regex = /@translate/g
   while ((match = regex.exec(joinedItems)) != null) {
     const closing = getClosingBracket(joinedItems, "(", ")", match.index + 1)
-    if (closing < 0) {
-      continue
-    }
-    const full = joinedItems.slice(match.index, closing + 1)
+    if (closing < 0) continue
 
+    const full = joinedItems.slice(match.index, closing + 1)
     const argumentsOpeningParen = full.indexOf("(")
     const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
-    if (argumentsClosingParen < 0) {
-      continue
-    }
+    if (argumentsClosingParen < 0) continue
+
     const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
     const splitArguments = splitArgumentsString(argumentsString) || []
     const key = splitArguments[0].replaceAll("\"", "")
 
-    const eachLanguageStrings = []
+    const eachLanguageStrings: string[] = []
     get(selectedLanguages).forEach((language) => {
       const translation = get(translationKeys)[key]?.[language] || get(translationKeys)[key]?.[get(defaultLanguage)] || key
       eachLanguageStrings.push(`Custom String("${translation}"${splitArguments.length > 1 ? ", " : ""}${splitArguments.slice(1).join(", ")})`)
