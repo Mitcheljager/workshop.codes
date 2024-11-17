@@ -281,7 +281,7 @@ function checkForLoops(content) {
       if (params[params.length - 1] !== ")") throw new Error("Missing closing parenthesis")
 
       const splitParams = params.split(/\s+/)
-      const toThroughIndex = splitParams.findIndex((s) => /to|through/.test(s))
+      const toThroughIndex = splitParams.findIndex((s) => /\b(to|through)\b/.test(s))
       if (toThroughIndex < 0) throw new Error("Either \"to\" or \"through\" are expected")
 
       if (
