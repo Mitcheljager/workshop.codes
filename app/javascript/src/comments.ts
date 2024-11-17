@@ -26,8 +26,6 @@ function getMoreComments(event: Event): void {
   new FetchRails(`/comments/${id}/${page + 1}`).get().then(data => {
     if (data) buttonParent!.insertAdjacentHTML("beforebegin", data)
 
-    console.log(parent.querySelectorAll("[data-comment]").length, commentsCount)
-
     if (parent.querySelectorAll("[data-comment]").length >= commentsCount) buttonParent!.remove()
   }).finally(() => {
     button.innerText = initialText
