@@ -82,3 +82,22 @@ export type ExtendedCompletion = Completion & {
 }
 
 export type WorkshopConstant = Record<string, Record<Language, string>>
+
+export type ExpressionTree = {
+  value: string | null,
+  operator: string | null,
+  invalid: boolean,
+  arguments: ExpressionTree[],
+}
+
+export type ComparisonOperator = {
+  type: string,
+  order: number,
+  _regexRegex?: RegExp,
+  eval: Function
+}
+
+export type Variables = {
+  playerVariables: string[],
+  globalVariables: string[]
+}

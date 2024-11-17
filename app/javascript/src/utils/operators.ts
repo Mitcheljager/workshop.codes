@@ -1,4 +1,6 @@
-export const comparisonOperators = {
+import type { ComparisonOperator } from "@src/types/editor"
+
+export const comparisonOperators: Record<string, ComparisonOperator> = {
   "!": {
     type: "unary-left",
     order: -1,
@@ -24,6 +26,7 @@ export const comparisonOperators = {
     order: 0,
     _regexRegex: /^\/(.+)\/(\w*)$/,
     eval(l: string, r: string) {
+      // @ts-ignore
       const match = r.match(this._regexRegex)
       if (!match) {
         return false
