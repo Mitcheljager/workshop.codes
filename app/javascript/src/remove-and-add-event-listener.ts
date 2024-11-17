@@ -1,7 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Element {
   removeAndAddEventListener(event: string, fun: Function): void
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Document {
   removeAndAddEventListener(event: string, fun: Function): void
 }
