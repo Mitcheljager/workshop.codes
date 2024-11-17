@@ -1,12 +1,12 @@
 import noUiSlider from "nouislider"
 
-export function render() {
+export function render(): void {
   const elements = Array.from(document.querySelectorAll("[data-role='num-player-slider']")) as noUiSlider.Instance[]
 
   elements.forEach(element => setSlider(element))
 }
 
-export function setSlider(element: noUiSlider.Instance) {
+export function setSlider(element: noUiSlider.Instance): void {
   if (!element) return
 
   if (element.dataset.initialised === "true") destroySlider(element)
@@ -30,7 +30,7 @@ export function setSlider(element: noUiSlider.Instance) {
   element.dataset.initialised = "true"
 }
 
-export function create(element: noUiSlider.Instance, startMin: number, startMax: number) {
+export function create(element: noUiSlider.Instance, startMin: number, startMax: number): void {
   noUiSlider.create(element, {
     start: [startMin, startMax],
     connect: true,
@@ -47,7 +47,7 @@ export function create(element: noUiSlider.Instance, startMin: number, startMax:
   })
 }
 
-export function destroy() {
+export function destroy(): void {
   const elements = Array.from(document.querySelectorAll("[data-role='num-player-slider']")) as noUiSlider.Instance[]
 
   elements.forEach(element => {
@@ -57,7 +57,7 @@ export function destroy() {
   })
 }
 
-function postOnSliderUpdate(values: any[], handle: number) {
+function postOnSliderUpdate(values: any[], handle: number): void {
   let element
 
   if (!element) return
@@ -86,7 +86,7 @@ function postOnSliderUpdate(values: any[], handle: number) {
   }
 }
 
-function filterOnSliderUpdate(values: number[]) {
+function filterOnSliderUpdate(values: number[]): void {
   values = values.map(v => Math.round(v))
 
   const element = document.querySelector("[data-filter-type='players']") as HTMLElement
@@ -99,7 +99,7 @@ function filterOnSliderUpdate(values: number[]) {
   element.dataset.value = `${values[0]}-${values[1]}`
 }
 
-function destroySlider(element: noUiSlider.Instance) {
+function destroySlider(element: noUiSlider.Instance): void {
   element.noUiSlider.destroy()
   element.dataset.initialised = "false"
 }

@@ -1,4 +1,4 @@
-export function bind() {
+export function bind(): void {
   const elements = document.querySelectorAll("[data-role~='linked-input']")
 
   if (!elements?.length) return
@@ -8,7 +8,7 @@ export function bind() {
   })
 }
 
-function updateLinkedInputs(event: Event) {
+function updateLinkedInputs(event: Event): void {
   const currentTarget = event.currentTarget as HTMLInputElement
   const key = currentTarget.dataset.key
 

@@ -5,7 +5,6 @@ import { getMixins } from "@utils/compiler/mixins"
 import { getSubroutines } from "@utils/compiler/subroutines"
 import { debounced } from "@utils/debounceStore"
 import type { EditorStates, Item, Project, RecoveredProject } from "@src/types/editor"
-import type { Completion } from "@codemirror/autocomplete"
 
 // Preferably keep below the debounce time for the linter, so it
 // has access to the most up-to-date information from the store.
@@ -15,7 +14,7 @@ export const screenWidth = writable(0)
 export const isMobile = derived(screenWidth, $screenWidth => $screenWidth && $screenWidth < 1000)
 
 export const modal = (() => {
-  const { subscribe, set } = writable<{ [key: string]: Object } | null>(null)
+  const { subscribe, set } = writable<{ [key: string]: string } | null>(null)
 
   return {
     subscribe,
@@ -45,7 +44,7 @@ export const currentItem = writable<Item | null>(null)
 
 export const sortedItems = derived(items, $items => {
   const cleanedItems = $items.map((item) => {
-    item.parent = $items.some(i => item.parent == i.id) ? item.parent : ''
+    item.parent = $items.some(i => item.parent == i.id) ? item.parent : ""
     return item
   })
 

@@ -1,18 +1,18 @@
 import * as microlight from "@src/microlight"
 
-export function bind() {
+export function bind(): void {
   const fullscreenElements = document.querySelectorAll("[data-action='toggle-ide-fullscreen']")
 
   fullscreenElements.forEach(element => element.removeAndAddEventListener("click", toggleIdeFullscreen))
 }
 
-export function initiateIde(element: HTMLElement) {
+export function initiateIde(element: HTMLElement): void {
   createLineCount(element)
 
   microlight.reset()
 }
 
-function createLineCount(element: HTMLElement) {
+function createLineCount(element: HTMLElement): void {
   const pre = element.closest("pre") as HTMLElement
 
   const lineCount = element.textContent?.split("\n").length || 0
@@ -28,7 +28,7 @@ function createLineCount(element: HTMLElement) {
   }
 }
 
-function toggleIdeFullscreen({ target }: { target: HTMLElement }) {
+function toggleIdeFullscreen({ target }: { target: HTMLElement }): void {
   const element = target.closest(".ide") as HTMLElement
 
   element.classList.toggle("ide--fullscreen")

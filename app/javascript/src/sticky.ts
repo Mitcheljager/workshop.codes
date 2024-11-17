@@ -1,13 +1,13 @@
-export function bind() {
+export function bind(): void {
   window.addEventListener("scroll", stickyScroll, { passive: true })
   stickyScroll()
 }
 
-export function destroy() {
+export function destroy(): void {
   window.removeEventListener("scroll", stickyScroll)
 }
 
-function stickyScroll() {
+function stickyScroll(): void {
   const elements = Array.from(document.querySelectorAll("[data-role~='sticky']")) as HTMLElement[]
 
   elements.forEach(element => {
@@ -28,7 +28,7 @@ function stickyScroll() {
   })
 }
 
-function setSticky(element: HTMLElement, offset: number) {
+function setSticky(element: HTMLElement, offset: number): void {
   if (element.dataset.sticky == "true") return
   element.dataset.sticky = "true"
 
@@ -46,7 +46,7 @@ function setSticky(element: HTMLElement, offset: number) {
   element.classList.add("is-sticky")
 }
 
-function setNotSticky(element: HTMLElement) {
+function setNotSticky(element: HTMLElement): void {
   if (element.dataset.sticky != "true") return
   element.dataset.sticky = "false"
 

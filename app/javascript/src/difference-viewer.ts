@@ -1,4 +1,4 @@
-export function render() {
+export function render(): void {
   document.removeEventListener("scroll", scrollAlong)
 
   const toggleUnchangedFilesElement = document.querySelector("[data-action='toggle-unchanged-difference']")
@@ -18,14 +18,14 @@ export function render() {
   scrollAlong()
 }
 
-function toggleUnchangedFiles({ target }: { target: HTMLFormElement }) {
+function toggleUnchangedFiles({ target }: { target: HTMLFormElement }): void {
   const element = document.querySelector(".diff")
   const state = target.checked
 
   element!.classList.toggle("hide-unchanged", state)
 }
 
-function createRules() {
+function createRules(): void {
   const element = document.querySelector(".diff")
   const selectElement = document.querySelector("[data-action='jump-to-rule']")
   const items = element!.querySelectorAll("li")
@@ -34,7 +34,7 @@ function createRules() {
 
   const array: (string | number)[][] = []
   items.forEach((item, index) => {
-    const content = item.textContent || ''
+    const content = item.textContent || ""
     if (!content.match(/rule\("(.*)"\)/g)) return
 
     array.push([content.replace("rule(", "").replace(")", ""), index])
@@ -50,7 +50,7 @@ function createRules() {
   })
 }
 
-function goToRule({ target }: { target: HTMLFormElement }) {
+function goToRule({ target }: { target: HTMLFormElement }): void {
   const destination = document.querySelector(`.diff li:nth-child(${target.value})`)
   const differenceHeaderElement = document.querySelector("[data-role='difference-header']") as HTMLElement
 
@@ -60,7 +60,7 @@ function goToRule({ target }: { target: HTMLFormElement }) {
   window.scroll(0, offset)
 }
 
-function scrollAlong() {
+function scrollAlong(): void {
   const element = document.querySelector("[data-role='difference-header']") as HTMLElement
   const headerElement = element?.querySelector(".difference-header") as HTMLElement
   const elementOffset = element?.getBoundingClientRect().top || 0

@@ -13,7 +13,7 @@ export default class Uploader {
     this.progress = 0
   }
 
-  async upload() {
+  async upload(): Promise<void> {
     const element = document.querySelector("[data-direct-upload-url]") as HTMLElement
     const directUploadUrl = element.dataset.directUploadUrl || ""
     const upload = new DirectUpload(this.file, directUploadUrl, this)
@@ -32,11 +32,11 @@ export default class Uploader {
     })
   }
 
-  directUploadWillStoreFileWithXHR(request: XMLHttpRequest) {
+  directUploadWillStoreFileWithXHR(request: XMLHttpRequest): void {
     request.upload.addEventListener("progress", event => this.directUploadDidProgress(event))
   }
 
-  directUploadDidProgress(event: ProgressEvent<XMLHttpRequestEventTarget>) {
+  directUploadDidProgress(event: ProgressEvent<XMLHttpRequestEventTarget>): void {
     this.progress = Math.round((100 / event.total) * event.loaded)
   }
 }

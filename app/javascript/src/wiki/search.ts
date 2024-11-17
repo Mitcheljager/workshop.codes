@@ -2,7 +2,7 @@ import debounce from "@src/debounce"
 import FetchRails from "@src/fetch-rails"
 import type { WikiArticle } from "@src/types/wiki"
 
-export function bind() {
+export function bind(): void {
   const element = document.querySelector("[data-role='wiki-search']")
 
   if (!element) return
@@ -28,7 +28,7 @@ const searchWiki = debounce(() => {
     })
 }, 500)
 
-function setWikiSearchResults(data: WikiArticle[]) {
+function setWikiSearchResults(data: WikiArticle[]): void {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']") as HTMLElement
   resultsElement.innerHTML = ""
 

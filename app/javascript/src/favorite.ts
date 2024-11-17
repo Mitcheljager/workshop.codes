@@ -1,18 +1,18 @@
 import FetchRails from "@src/fetch-rails"
 import { addAlertError } from "@src/lib/alerts"
 
-export function bind() {
+export function bind(): void {
   document.body.removeAndAddEventListener("click", favorite)
 }
 
-async function favorite(event: MouseEvent) {
+async function favorite(event: MouseEvent): Promise<void> {
   let eventTarget = event.currentTarget as HTMLElement
   if (eventTarget.dataset.action != "favorite") eventTarget = eventTarget.closest("[data-action~='favorite']") as HTMLElement
 
   if (eventTarget) toggleFavorite(eventTarget)
 }
 
-export function toggleFavorite(element: HTMLElement) {
+export function toggleFavorite(element: HTMLElement): void {
   const postId = element.dataset.target
   const active = element.dataset.active == "true"
   const imageSrc = active ? element.dataset.inactiveIcon : element.dataset.activeIcon

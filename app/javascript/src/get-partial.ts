@@ -1,7 +1,7 @@
 import FetchRails from "@src/fetch-rails"
 import * as lazyVideo from "@src/lazy-video"
 
-export function bind() {
+export function bind(): void {
   const elements = Array.from(document.querySelectorAll("[data-action~='get-partial']")) as HTMLElement[]
 
   elements.forEach(element => {
@@ -11,7 +11,7 @@ export function bind() {
   })
 }
 
-function setObserver(element: HTMLElement) {
+function setObserver(element: HTMLElement): void {
   const observer = new IntersectionObserver(entries => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return
@@ -24,7 +24,7 @@ function setObserver(element: HTMLElement) {
   observer.observe(element)
 }
 
-function getPartial(event: Event | null, element: HTMLElement) {
+function getPartial(event: Event | null, element: HTMLElement): void {
   if (event) event.preventDefault()
 
   const target = event?.target as HTMLElement

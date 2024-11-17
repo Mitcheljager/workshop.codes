@@ -1,9 +1,9 @@
-export function bind() {
+export function bind(): void {
   document.body.removeAndAddEventListener("click", toggleDropdown)
   document.body.removeAndAddEventListener("keydown", closeOnKeyDown)
 }
 
-export function toggleDropdown(event: Event) {
+export function toggleDropdown(event: Event): void {
   closeDropdown(event)
 
   let eventTarget = event.target as HTMLElement
@@ -19,7 +19,7 @@ export function toggleDropdown(event: Event) {
   target.classList.toggle("active", JSON.parse(target.dataset.active))
 }
 
-export function closeDropdown(event: Event, closeActive = false) {
+export function closeDropdown(event: Event, closeActive = false): void {
   const activeDropdown = document.querySelector("[data-dropdown-content].active") as HTMLElement
   if (!activeDropdown) return
 
@@ -30,6 +30,6 @@ export function closeDropdown(event: Event, closeActive = false) {
   activeDropdown.dataset.active = "false"
 }
 
-function closeOnKeyDown(event: KeyboardEvent) {
+function closeOnKeyDown(event: KeyboardEvent): void {
   if (event.code === "Escape") closeDropdown(event, true)
 }

@@ -7,7 +7,7 @@ interface SiemaExtended extends Siema {
 
 export let carousel: SiemaExtended
 
-export function render() {
+export function render(): void {
   const blurElement = document.querySelector("[data-use-blur='true']") as HTMLElement
   if (blurElement && blurElement.dataset.role != "carousel") setBlur(blurElement)
 
@@ -21,7 +21,7 @@ export function render() {
   navigationElements.forEach((element) => element.removeAndAddEventListener("click", carouselGoTo))
 }
 
-export function setCarousel(element: HTMLElement) {
+export function setCarousel(element: HTMLElement): void {
   carousel = new Siema({
     selector: element,
     onInit: setActiveItem,
@@ -32,12 +32,12 @@ export function setCarousel(element: HTMLElement) {
   setResizeHandler()
 }
 
-function carouselGoTo({ currentTarget }: { currentTarget: HTMLElement }) {
-  const target = parseInt(currentTarget.dataset.target || '0')
+function carouselGoTo({ currentTarget }: { currentTarget: HTMLElement }): void {
+  const target = parseInt(currentTarget.dataset.target || "0")
   carousel.goTo(target)
 }
 
-async function setActiveItem(this: SiemaExtended & SiemaOptions) {
+async function setActiveItem(this: SiemaExtended & SiemaOptions): Promise<void> {
   await new Promise(res => setTimeout(res)) // Wait(0) for carousel to be initiated
 
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
@@ -54,7 +54,7 @@ async function setActiveItem(this: SiemaExtended & SiemaOptions) {
   if (selector.dataset.useBlur) setBlur(carousel.innerElements[carousel.currentSlide])
 }
 
-function setLazyImage(carousel: SiemaExtended) {
+function setLazyImage(carousel: SiemaExtended): void {
   const slides = []
   slides.push(carousel.innerElements[carousel.currentSlide - 1])
   slides.push(carousel.innerElements[carousel.currentSlide])
@@ -75,7 +75,7 @@ function setLazyImage(carousel: SiemaExtended) {
   })
 }
 
-function stopVideo() {
+function stopVideo(): void {
   const carousel = document.querySelector("[data-role='carousel']")
   const iframe = carousel!.querySelector("iframe")
 
@@ -84,7 +84,7 @@ function stopVideo() {
   iframe.contentWindow.postMessage("{\"event\":\"command\",\"func\":\"pauseVideo\",\"args\":\"\"}", "*")
 }
 
-async function setBlur(element: HTMLElement) {
+async function setBlur(element: HTMLElement): Promise<void> {
   const image = element.querySelector("img")
   const blurElements = Array.from(document.querySelectorAll("[data-role='carousel-blur']")) as HTMLImageElement[]
   const blurElement = blurElements[blurElements.length - 1]
@@ -112,7 +112,7 @@ async function setBlur(element: HTMLElement) {
   }
 }
 
-function setResizeHandler() {
+function setResizeHandler(): void {
   // Normally videos can't fullscreened because Siema resizeHandler fires when
   // you go into fullscreen. This fixes that by checking if the page is in
   // fullscreen before firing resizeHandler.
@@ -121,6 +121,6 @@ function setResizeHandler() {
   window.addEventListener("resize", resizeHandler)
 }
 
-function resizeHandler(event: Event) {
+function resizeHandler(event: Event): void {
   if (!document.fullscreenElement) carousel.resizeHandler(event)
 }

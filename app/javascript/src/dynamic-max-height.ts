@@ -1,15 +1,15 @@
-export function bind() {
+export function bind(): void {
   window.addEventListener("scroll", setHeight, { passive: true })
   window.addEventListener("resize", setHeight, { passive: true })
   setHeight()
 }
 
-export function destroy() {
+export function destroy(): void {
   window.removeEventListener("scroll", setHeight)
   window.removeEventListener("resize", setHeight)
 }
 
-function setHeight() {
+function setHeight(): void {
   const elements = document.querySelectorAll("[data-role~='dynamic-max-height']")
 
   elements.forEach(element => {

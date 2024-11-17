@@ -1,6 +1,6 @@
 import FetchRails from "@src/fetch-rails"
 
-export function bind() {
+export function bind(): void {
   const element = document.querySelector("[data-action~='get-verified-users']")
 
   if (!element) return
@@ -8,7 +8,7 @@ export function bind() {
   element.removeAndAddEventListener("click", getVerifiedUsers)
 }
 
-function getVerifiedUsers(event: Event) {
+function getVerifiedUsers(event: Event): void {
   event.preventDefault()
 
   const target = event.target as HTMLElement

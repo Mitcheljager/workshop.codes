@@ -1,10 +1,10 @@
 import FetchRails from "@src/fetch-rails"
 
-export function bind() {
+export function bind(): void {
   document.body.removeAndAddEventListener("click", copyToClipboard)
 }
 
-export default function copyToClipboard(event: MouseEvent, optionalContent = '') {
+export default function copyToClipboard(event: MouseEvent, optionalContent = ""): void {
   let eventTarget = event.target as HTMLElement | undefined | null
   if (eventTarget?.dataset?.action != "copy") eventTarget = eventTarget?.closest("[data-action~='copy-to-clipboard']")
 
@@ -12,7 +12,7 @@ export default function copyToClipboard(event: MouseEvent, optionalContent = '')
 
   event.preventDefault()
 
-  const target: string = eventTarget.dataset.target || ''
+  const target: string = eventTarget.dataset.target || ""
   const targetElement = document.querySelector(`[data-copy="${target}"]`) as HTMLElement
 
   const { textContent } = targetElement
@@ -29,12 +29,12 @@ export default function copyToClipboard(event: MouseEvent, optionalContent = '')
   if (!copyParent) copyParent = eventTarget
   copyParent.append(notificationElement)
 
-  setTimeout(() => copyParent.querySelector(".copy__notification")?.remove(), 1000)
+  setTimeout((): void | undefined => copyParent.querySelector(".copy__notification")?.remove(), 1000)
 
   if (targetElement.dataset.trackCopy != undefined) trackCopy(textContent)
 }
 
-export function copyValueToClipboard(value: string) {
+export function copyValueToClipboard(value: string): void {
   const input = document.createElement("textarea")
   input.value = value
   document.body.appendChild(input)
@@ -44,6 +44,6 @@ export function copyValueToClipboard(value: string) {
   document.body.removeChild(input)
 }
 
-function trackCopy(label: string) {
+function trackCopy(label: string): void {
   new FetchRails("/copy-code", { code: label }).post()
 }

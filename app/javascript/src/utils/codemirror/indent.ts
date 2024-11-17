@@ -1,5 +1,4 @@
-import { EditorSelection } from "@codemirror/state"
-import type { EditorState, Transaction } from "@codemirror/state"
+import { EditorSelection, type EditorState, type Transaction } from "@codemirror/state"
 import type { Range } from "@src/types/editor"
 
 /** Indent on using tab with special conditions. Indent is reversed while holding shift */
