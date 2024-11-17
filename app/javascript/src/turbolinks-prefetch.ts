@@ -3,7 +3,7 @@
 // and to automatically exclude links with the data-actions attribute
 
 export default class {
-  static start(delay?: number) {
+  static start(delay?: number): void {
     if (!window.Turbolinks) {
       console.error("window.Turbolinks not found, you must import Turbolinks with global.")
       return
@@ -33,14 +33,14 @@ class Prefetcher {
     }
   }
 
-  start(delay = 100) {
+  start(delay = 100): void {
     this.delay = delay || this.delay
     document.addEventListener("mouseover", (event) => {
       this.mouseover(event)
     })
   }
 
-  mouseover(event: MouseEvent) {
+  mouseover(event: MouseEvent): void {
     let target = event.target as HTMLElement | null
     if (target instanceof HTMLImageElement) target = target.closest("a")
 
@@ -77,12 +77,12 @@ class Prefetcher {
     this.fetchers[href] = setTimeout(() => this.prefetch(href), this.delay)
   }
 
-  mouseleave(event: MouseEvent, href: string) {
+  mouseleave(event: MouseEvent, href: string): void {
     this.xhr.abort()
     this.cleanup(event, href)
   }
 
-  cleanup(event: MouseEvent, href: string) {
+  cleanup(event: MouseEvent, href: string): void {
     const element = event.target as HTMLElement
     clearTimeout(this.fetchers[href])
     this.fetchers[href] = null
@@ -92,7 +92,7 @@ class Prefetcher {
     })
   }
 
-  fetchPage(url: string, success: Function) {
+  fetchPage(url: string, success: Function): void {
     const { xhr } = this
     xhr.open("GET", url)
     xhr.setRequestHeader("Purpose", "prefetch")
@@ -105,7 +105,7 @@ class Prefetcher {
     xhr.send()
   }
 
-  prefetchTurbolink(url: string) {
+  prefetchTurbolink(url: string): void {
     const { doc } = this
     this.fetchPage(url, (responseText: string) => {
       doc.open()
@@ -121,26 +121,26 @@ class Prefetcher {
     })
   }
 
-  prefetch(url: string) {
+  prefetch(url: string): void {
     if (this.prefetched(url)) return
     this.prefetchTurbolink(url)
   }
 
-  prefetched(url: string) {
+  prefetched(url: string): boolean {
     const hasSnapshot = location.href === url || this.controller.cache.has(url)
     const snapshot = this.controller.cache.get(url)
     return hasSnapshot && snapshot?.isFresh
   }
 
-  prefetching(url: string) {
+  prefetching(url: string): boolean {
     return !!this.fetchers[url]
   }
 
-  isAction(action: string) {
+  isAction(action: string): boolean {
     return action == "advance" || action == "replace" || action == "restore"
   }
 
-  getActionForLink(link: HTMLElement) {
+  getActionForLink(link: HTMLElement): string {
     const { controller } = this
     const location = controller.getVisitableLocationForLink(link)
     const snapshot = controller.cache.get(location)
