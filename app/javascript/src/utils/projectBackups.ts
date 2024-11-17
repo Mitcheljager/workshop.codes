@@ -1,6 +1,6 @@
 import FetchRails from "@src/fetch-rails"
 import { addAlert } from "@lib/alerts"
-import type { Project, ProjectBackup } from "@src/types/editor"
+import type { ProjectBackup } from "@src/types/editor"
 
 export async function createProjectBackup(uuid: string): Promise<void> {
   return await new FetchRails("/project_backups", { project: { uuid } }).post()
