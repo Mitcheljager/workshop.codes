@@ -3,18 +3,18 @@ import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "
 import { get } from "svelte/store"
 import { parseParameterObjectContent } from "@utils/compiler/parameterObjects"
 import { getIndentForLine } from "@utils/codemirror/indent"
+import type { CodeAction } from "../codeActions"
+import type { EditorState } from "@codemirror/state"
+import type { EditorView } from "codemirror"
 
-/**
- * @type {import("../codeActions").CodeActionProvider}
- */
-export function transformParameterObjectsIntoPositionalParameters({ view, state }) {
-  const actions = []
+export function transformParameterObjectsIntoPositionalParameters({ view, state }: { view: EditorView, state: EditorState }): CodeAction[] | void {
+  const actions: CodeAction[] = []
 
   const { from: cursorFrom, to: cursorTo } = state.selection.main
   if (cursorFrom !== cursorTo) return
 
   const line = state.doc.lineAt(cursorFrom)
-  if (!line.text) return null
+  if (!line.text) return
 
   const phrase = getPhraseFromPosition(line, cursorFrom)
   const completion = get(completionsMap).find(({ type, label }) => type === "function" && label === phrase.text)
@@ -54,7 +54,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
       position: fileWideActionNameStart,
       run() {
         const parameterObject = state.doc.sliceString(fileWideParameterObjectFrom + 1, fileWideParameterObjectTo - 1)
-        const parameters = parseParameterObjectContent(parameterObject, 0)
+        const parameters = parseParameterObjectContent(parameterObject)
 
         const argumentList = completion.parameter_keys
           .map((key, index) => parameters[key] ?? completion.parameter_defaults[index])
