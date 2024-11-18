@@ -1,12 +1,10 @@
-import noUiSlider from "nouislider/distribute/nouislider.min"
-
 export function render() {
   const elements = document.querySelectorAll("[data-role='num-player-slider']")
 
   elements.forEach(element => setSlider(element))
 }
 
-export function setSlider(element) {
+export async function setSlider(element) {
   if (!element) return
 
   if (element.dataset.initialised === "true") destroySlider(element)
@@ -22,7 +20,7 @@ export function setSlider(element) {
     startMax = 0
   }
 
-  create(element, startMin, startMax)
+  await create(element, startMin, startMax)
 
   if (element.dataset.type == "post") element.noUiSlider.on("set", postOnSliderUpdate)
   if (element.dataset.type == "filter") element.noUiSlider.on("set", filterOnSliderUpdate)
@@ -30,7 +28,9 @@ export function setSlider(element) {
   element.dataset.initialised = true
 }
 
-export function create(element, startMin, startMax) {
+export async function create(element, startMin, startMax) {
+  const noUiSlider = await import("nouislider/distribute/nouislider.min")
+
   noUiSlider.create(element, {
     start: [startMin, startMax],
     connect: true,
