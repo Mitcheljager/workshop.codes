@@ -13,7 +13,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     visit posts_url
 
-    assert page.has_content? "On Fire Codes"
+    assert page.has_content? "On Fire Workshop Codes"
     assert page.has_content? "Latest Codes"
 
     assert page.has_content? posts(:post_one).title
