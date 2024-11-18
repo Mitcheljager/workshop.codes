@@ -27,6 +27,14 @@
       onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
     <noscript><%= vite_stylesheet_tag "fonts.scss" %></noscript>
 
+    <!-- Prevent flashbangs -->
+    <style>
+      body {
+        background: #1f2326;
+        color: #90989c;
+      }
+    </style>
+
     <%= vite_stylesheet_tag "application.scss" %>
 
     <%= vite_client_tag %>
