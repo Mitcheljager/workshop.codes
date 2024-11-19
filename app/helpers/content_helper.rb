@@ -7,7 +7,7 @@ module ContentHelper
     end
 
     def image(link, title, alt_text)
-      image_tag(link, title: title, alt: alt_text, loading: "lazy")
+      image_tag(link, title: title, alt: alt_text || "", loading: "lazy")
     end
 
     # loosely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
