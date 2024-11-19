@@ -129,7 +129,7 @@ module ContentHelper
   def markdown_hero_icon(text)
     text.gsub /\[hero\s+(.*?)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 50, height: 50, loading: "lazy")
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 50, height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
@@ -137,7 +137,7 @@ module ContentHelper
   def markdown_ability_icon(text)
     text.gsub /\[ability\s+(.*?)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy")
+        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
