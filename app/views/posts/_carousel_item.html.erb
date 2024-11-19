@@ -1,8 +1,18 @@
+<% preload ||= false %>
+<% image_small = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed) %>
+<% image_large = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>
+<% image_breakpoint = 560 %>
+
+<% content_for :preload do %>
+  <link rel="preload" fetchpriority="high" as="image" type="image/webp" href="<%= image_large %>" media="(min-width: <%= image_breakpoint %>px)">
+  <link rel="preload" fetchpriority="high" as="image" type="image/webp" href="<%= image_small %>" media="(max-width: <%= image_breakpoint - 1 %>px)">
+<% end if preload && index == 0 %>
+
 <div class="carousel__item">
   <picture>
-    <source media="(min-width: 560px)" <%= "data-" if index >= 2 %>srcset="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" type="image/webp">
-    <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed) %>" type="image/webp">
-    <img class="img-fluid" <%= "data-" if index >= 2 %>src="<%= rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" aria-label="Image for '<%= @post.title %>'" width="900" height="500" />
+    <source media="(min-width: <%= image_breakpoint %>px)" <%= "data-" if index >= 2 %>srcset="<%= image_large %>" type="image/webp">
+    <source media="(min-width: 0px)" <%= "data-" if index >= 2 %>srcset="<%= image_small %>" type="image/webp">
+    <img class="img-fluid" <%= "data-" if index >= 2 %>src="<%= image_large %>" alt="" width="900" height="500" />
   </picture>
 
   <div class="carousel__actions">

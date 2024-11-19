@@ -13,7 +13,7 @@
         <% end %>
 
         <% @ordered_images.each_with_index do |image, index| %>
-          <%= render "carousel_item", image: image, index: index %>
+          <%= render "carousel_item", image: image, index: index, preload: !@post.carousel_video.present? %>
         <% end %>
       </div>
 

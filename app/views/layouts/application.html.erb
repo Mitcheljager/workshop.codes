@@ -16,6 +16,8 @@
       <meta property="og:description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
     <% end %>
 
+    <%= yield(:preload) if yield(:preload).present? %>
+
     <%= render "application/og_tags" %>
     <%= render "favicons" %>
 
