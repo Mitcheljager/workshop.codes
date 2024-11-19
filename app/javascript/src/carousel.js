@@ -58,14 +58,11 @@ function setLazyImage(element) {
   slides.forEach(slide => {
     if (!slide) return
 
-    const sources = slide.querySelectorAll("source, img")
+    const images = slide.querySelectorAll("img")
 
-    sources.forEach(source => {
-      if (source.dataset.src) {
-        source.src = source.dataset.src
-      } else if (source.dataset.srcset) {
-        source.srcset = source.dataset.srcset
-      }
+    images.forEach(image => {
+      if (image.dataset.src) image.src = image.dataset.src
+      if (image.dataset.srcset) image.srcset = image.dataset.srcset
     })
   })
 }
