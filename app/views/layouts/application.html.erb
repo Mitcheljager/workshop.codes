@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes Resource" %></title>
+    <title><%= yield(:page_title).present? ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes Resource" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,7 +11,7 @@
     <meta name="ir-site-verification-token" value="2456162" />
     <meta http-equiv=”content-language” content="en" />
 
-    <% unless yield(:og_description) != "" %>
+    <% unless yield(:og_description).present? %>
       <meta name="description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
       <meta property="og:description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
     <% end %>
