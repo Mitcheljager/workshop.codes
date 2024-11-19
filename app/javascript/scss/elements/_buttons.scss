@@ -33,12 +33,13 @@ button {
 
 .button {
   display: inline-block;
-  padding: .55em 1.25em;
+  padding: .5em 1.25em;
   border: 0;
   border-radius: 99px;
   background: var(--primary, $primary);
   color: $white;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: bold;
   font-family: $font-stack-alt;
   text-transform: uppercase;
   text-decoration: none;
