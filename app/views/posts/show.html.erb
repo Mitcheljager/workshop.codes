@@ -41,7 +41,6 @@
     <%= render "current_user_blocks" if current_user == @post.user %>
     <%= render "expired" if @post.expired? %>
 
-
     <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs] do %>
       <%= tabs_content_tag("description", "", "mt-1/4") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
