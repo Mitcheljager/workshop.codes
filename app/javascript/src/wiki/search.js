@@ -27,9 +27,11 @@ const searchWiki = debounce(() => {
 
 function setWikiSearchResults(data) {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']")
+  resultsElement.classList.remove("search__results--empty")
   resultsElement.innerHTML = ""
 
   if (!data.length) {
+    resultsElement.classList.add("search__results--empty")
     resultsElement.innerText = "No results found"
     return
   }
