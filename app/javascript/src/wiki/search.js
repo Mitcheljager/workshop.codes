@@ -17,6 +17,7 @@ const searchWiki = debounce(() => {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']")
 
   resultsElement.innerHTML = "Searching..."
+  resultsElement.classList.add("search__results--empty")
   const url = resultsElement.dataset.url.replace("query", element.value) + ".json"
 
   new FetchRails(url).get()
@@ -27,14 +28,14 @@ const searchWiki = debounce(() => {
 
 function setWikiSearchResults(data) {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']")
-  resultsElement.classList.remove("search__results--empty")
-  resultsElement.innerHTML = ""
 
   if (!data.length) {
-    resultsElement.classList.add("search__results--empty")
-    resultsElement.innerText = "No results found"
+    resultsElement.innerHTML = "No results found"
     return
   }
+
+  resultsElement.classList.remove("search__results--empty")
+  resultsElement.innerHTML = ""
 
   data.forEach(item => {
     const itemElement = document.createElement("a")
