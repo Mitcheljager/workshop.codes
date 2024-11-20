@@ -23,7 +23,7 @@ const searchWiki = debounce(() => {
     .then(data => {
       setWikiSearchResults(JSON.parse(data))
     })
-}, 500)
+}, 250)
 
 function setWikiSearchResults(data) {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']")
