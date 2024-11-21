@@ -11,6 +11,23 @@ RSpec.describe "Profiles", type: :feature do
   let!(:user) { create(:user, password: "password123") }
   let!(:posts) { create_list(:post, 30, user_id: user.id) }
 
+  before do
+    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "maps.yml"))).and_return([
+      { "name" => "Hanamura", "type" => "Assault", "slug" => "hanamura" },
+      { "name" => "Paris", "type" => "Assault", "slug" => "paris" }
+    ])
+
+    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "heroes.yml"))).and_return([
+      { "name" => "Doomfist", "category" => "Tank" },
+      { "name" => "Sigma", "category" => "Tank" }
+    ])
+
+    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "categories.yml"))).and_return([
+      "Solo",
+      "Parkour"
+    ])
+  end
+
   describe "page default behavior" do
     it "selects the highlights tab by default if the user has a block" do
       create(:block, user_id: user.id, content_type: :profile, name: "highlight", properties: ActionController::Parameters.new({post: "#{posts.first.id}", description: "This is a highlight"}))

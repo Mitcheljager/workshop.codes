@@ -25,11 +25,13 @@
           <p><em>There doesn't seem to be anything here</em></p>
         <% end %>
 
-        <blockquote>
-          <% quote = quotes.sample %>
-          <em><%= quote["quote"] %></em>
-          -&nbsp;<%= quote["by"] %>
-        </blockquote>
+        <% if quotes.present? %>
+          <blockquote>
+            <% quote = quotes.sample %>
+            <em><%= quote["quote"] %></em>
+            -&nbsp;<%= quote["by"] %>
+          </blockquote>
+        <% end %>
       </div>
     <% end %>
   </main>

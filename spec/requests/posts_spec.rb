@@ -5,6 +5,23 @@ RSpec.describe "Posts controller", type: :request do
   let!(:posts) { create_list(:post, PAGE_SIZE, user_id: user.id) }
   let(:post) { posts.first }
 
+  before do
+    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "maps.yml"))).and_return([
+      { "name" => "Hanamura", "type" => "Assault", "slug" => "hanamura" },
+      { "name" => "Paris", "type" => "Assault", "slug" => "paris" }
+    ])
+
+    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "heroes.yml"))).and_return([
+      { "name" => "Doomfist", "category" => "Tank" },
+      { "name" => "Sigma", "category" => "Tank" }
+    ])
+
+    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "categories.yml"))).and_return([
+      "Solo",
+      "Parkour"
+    ])
+  end
+
   describe "GET root" do
     before { get "/" }
 
