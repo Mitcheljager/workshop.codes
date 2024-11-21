@@ -46,19 +46,35 @@ module ApplicationHelper
   end
 
   def maps
-    YAML.safe_load(File.read(Rails.root.join("config/arrays", "maps.yml")))
+    if Rails.env.test?
+      [{ "name" => "Hanamura", "type" => "Some type", "slug" => "hanamura" }]
+    else
+      YAML.safe_load(File.read(Rails.root.join("config/arrays", "maps.yml")))
+    end
   end
 
   def heroes
-    YAML.safe_load(File.read(Rails.root.join("config/arrays", "heroes.yml")))
+    if Rails.env.test?
+      [{ "name" => "Hanzo", "category" => "Damage" }]
+    else
+      YAML.safe_load(File.read(Rails.root.join("config/arrays", "heroes.yml")))
+    end
   end
 
   def categories
-    YAML.safe_load(File.read(Rails.root.join("config/arrays", "categories.yml")))
+    if Rails.env.test?
+      ["Some category"]
+    else
+      YAML.safe_load(File.read(Rails.root.join("config/arrays", "categories.yml")))
+    end
   end
 
   def quotes
-    YAML.safe_load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
+    if Rails.env.test?
+      [{ "quote" => "Some quote", "by" => "Some name" }]
+    else
+      YAML.safe_load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
+    end
   end
 
   def badges
