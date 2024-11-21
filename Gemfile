@@ -52,14 +52,14 @@ gem "vite_rails"
 group :development, :test do
   gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "capybara", "~> 3.35"
+  gem "capybara", "3.38.0"
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker"
   gem "pry-byebug", "~> 3.10.1"
   gem "rspec-rails", "~> 4.0.2"
-  gem "selenium-webdriver", "~> 4.0"
+  gem "selenium-webdriver", "~> 4.7.1"
   gem "shoulda-matchers", "~> 4.5"
   gem "sqlite3", "1.4.2"
   # To freeze time and allow time travel for time-sensitive tests
