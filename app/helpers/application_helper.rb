@@ -55,7 +55,7 @@ module ApplicationHelper
 
   def heroes
     if Rails.env.test?
-      [{ "name" => "Reinhardt", "category" => "Tank" }]
+      [{ "name" => "Hanzo", "category" => "Damage" }]
     else
       YAML.safe_load(File.read(Rails.root.join("config/arrays", "heroes.yml")))
     end
@@ -63,7 +63,7 @@ module ApplicationHelper
 
   def categories
     if Rails.env.test?
-      ["Team Deathmatch"]
+      ["Some category"]
     else
       YAML.safe_load(File.read(Rails.root.join("config/arrays", "categories.yml")))
     end

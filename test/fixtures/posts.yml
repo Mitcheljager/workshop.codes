@@ -7,8 +7,8 @@ post_one:
   description: This is a test
   categories: "[\"Solo\"]"
   tags: test
-  heroes: "[\"Reinhardt\"]"
-  maps: "[\"Hanamura\"]"
+  heroes: "[\"Cassidy\"]"
+  maps: "[\"Castillo\"]"
   last_revision_created_at: <%= 5.day.ago.to_s(:db) %>
 
 post_two:
@@ -18,8 +18,8 @@ post_two:
   description: This is a test
   categories: "[\"Solo\"]"
   tags: test
-  heroes: "[\"Reinhardt\"]"
-  maps: "[\"Hanamura\"]"
+  heroes: "[\"Cassidy\"]"
+  maps: "[\"Castillo\"]"
   last_revision_created_at: <%= 5.day.ago.to_s(:db) %>
 
 post_overwatch_2:
@@ -29,7 +29,7 @@ post_overwatch_2:
   description: This is a code for the Overwatch 2 Beta
   categories: "[\"Solo\"]"
   tags: test
-  heroes: "[\"Reinhardt\"]"
-  maps: "[\"Hanamura\"]"
+  heroes: "[\"Cassidy\"]"
+  maps: "[\"Castillo\"]"
   last_revision_created_at: <%= 5.day.ago.to_s(:db) %>
   overwatch_2_compatible: true
