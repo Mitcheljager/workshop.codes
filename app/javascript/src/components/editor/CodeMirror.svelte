@@ -90,7 +90,7 @@
         ]),
         foldBrackets(),
         ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : []),
-        ...($settings["highlight-trailing-whitespace"] ? [highlightTrailingWhitespace()] : []),
+        ...($settings["highlight-trailing-whitespace"] ? [highlightTrailingWhitespace()] : [])
       ]
     })
   }
