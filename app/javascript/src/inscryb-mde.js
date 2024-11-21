@@ -1,11 +1,10 @@
-import InscrybMDE from "inscrybmde"
-import InscrybeInsertImage from "./inscrybe-mde-paste-image"
-import InscrybeInsertVideo from "./inscrybe-mde-insert-video"
-import FetchRails from "./fetch-rails"
-import { insertAbilityIconSelect } from "./inscryb-mde-ability-select"
-import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "./blocks"
-import debounce from "./debounce"
-import * as lazyVideo from "../src/lazy-video"
+import InscrybeInsertImage from "@src/inscrybe-mde-paste-image"
+import InscrybeInsertVideo from "@src/inscrybe-mde-insert-video"
+import FetchRails from "@src/fetch-rails"
+import { insertAbilityIconSelect } from "@src/inscryb-mde-ability-select"
+import { buildInputSortable, insertBlockTemplate, removeBlockTemplate } from "@src/blocks"
+import debounce from "@src/debounce"
+import * as lazyVideo from "@src/lazy-video"
 
 let editors = []
 
@@ -121,7 +120,9 @@ class InitialiseInscrybeMDE {
     return toolbar
   }
 
-  initialise() {
+  async initialise() {
+    const { default: InscrybMDE } = await import("inscrybmde")
+
     this.mde = new InscrybMDE({
       element: this.element,
       autoDownloadFontAwesome: false,
@@ -137,7 +138,7 @@ class InitialiseInscrybeMDE {
           statusElement.innerHTML = this.characters
 
           statusElement.classList.toggle("error", this.characters > this.maxLength)
-          if (this.characters > this.maxLength) statusElement.innerHTML += ` / ${ this.maxLength }`
+          if (this.characters > this.maxLength) statusElement.innerHTML += ` / ${this.maxLength}`
         }
       }],
       spellChecker: false,
@@ -177,7 +178,7 @@ class InitialiseInscrybeMDE {
   insertHighlight() {
     const selectedText = this.codemirror.getSelection()
     const text = selectedText || "text"
-    const output = `==${ text }==`
+    const output = `==${text}==`
 
     this.codemirror.replaceSelection(output)
   }
@@ -189,7 +190,7 @@ class InitialiseInscrybeMDE {
   }
 
   insertUpdateNotes() {
-    const output = `<!-- Update notes are formatted to look like the official patch notes. Replace each value with the hero, ability, or text you want. Each value is optional and can be left out entirely. -->
+    const output = `<!-- Update notes are formatted to look like the official patch notes. Replace each value with the hero, ability, or text you want. Each value is optional and can be left out entirely. Icons can be overridden using the "icons" section. Specify each icon with the ability name to replace. This can be either another ability name or a URL to a custom image. When using a url it should start with "https://" -->
 [update {
   hero: "Reinhardt",
   title: "Optional title to change the hero name, remove to default to the hero name",
@@ -202,6 +203,9 @@ class InitialiseInscrybeMDE {
       "Some change you made to this ability",
       "Some other change you made to this ability"
     ]
+  },
+  icons: {
+    "Charge": "Blizzard"
   }
 }]`
 
@@ -224,7 +228,7 @@ class InitialiseInscrybeMDE {
         heroElement.innerText = hero
 
         heroElement.addEventListener("click", () => {
-          this.codemirror.replaceSelection(`[hero ${ hero }]`)
+          this.codemirror.replaceSelection(`[hero ${hero}]`)
         })
 
         dropdownElement.append(heroElement)
@@ -259,7 +263,7 @@ class InitialiseInscrybeMDE {
         marker.widgetNode.innerHTML = data
 
         const blockId = marker.widgetNode.querySelector("[data-id]").dataset.id
-        marker.lines[0].text = `[block ${ blockId }]`
+        marker.lines[0].text = `[block ${blockId}]`
 
         this.bindBlockEvents(marker)
       })
@@ -439,7 +443,7 @@ class InitialiseInscrybeMDE {
       const resultsElement = button.querySelector("[data-role='results']")
       resultsElement.innerHTML = "<small>Searching...</small>"
 
-      new FetchRails(`/wiki/search/${ event.target.value }.json`).get()
+      new FetchRails(`/wiki/search/${event.target.value}.json`).get()
         .then(data => {
           data = JSON.parse(data)
           resultsElement.innerHTML = ""
@@ -453,12 +457,11 @@ class InitialiseInscrybeMDE {
             const itemElement = document.createElement("a")
             itemElement.classList.add("editor-dropdown__item")
             itemElement.innerText = item.title
-            itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${ decodeURIComponent(item.slug) }`) })
+            itemElement.addEventListener("click", () => { this.insertLink(`/wiki/articles/${decodeURIComponent(item.slug)}`) })
 
             const categoryElement = document.createElement("span")
             categoryElement.style = "opacity: .5; font-size: .8em"
             categoryElement.innerText = " " + item.category.title
-
 
             itemElement.append(categoryElement)
             resultsElement.append(itemElement)
@@ -472,7 +475,7 @@ class InitialiseInscrybeMDE {
   insertLink(link = "") {
     const selectedText = this.codemirror.getSelection()
     const text = selectedText || "text"
-    const output = `[${ text }](${ link })`
+    const output = `[${text}](${link})`
 
     this.codemirror.replaceSelection(output)
   }

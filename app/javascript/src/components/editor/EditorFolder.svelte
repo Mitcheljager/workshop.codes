@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte"
-  import { openFolders } from "../../stores/editor"
-  import { isAnyParentHidden, toggleFolderState } from "../../utils/editor"
-  import EditorItemDestroy from "./EditorItemDestroy.svelte"
-  import EditorItemHide from "./EditorItemHide.svelte"
-  import EditorItemDuplicate from "./EditorItemDuplicate.svelte"
-  import EditorItemName from "./EditorItemName.svelte"
-  import EditorList from "./EditorList.svelte"
+  import { openFolders } from "@stores/editor"
+  import { isAnyParentHidden, toggleFolderState } from "@utils/editor"
+  import EditorItemDestroy from "@components/editor/EditorItemDestroy.svelte"
+  import EditorItemHide from "@components/editor/EditorItemHide.svelte"
+  import EditorItemDuplicate from "@components/editor/EditorItemDuplicate.svelte"
+  import EditorItemName from "@components/editor/EditorItemName.svelte"
+  import EditorList from "@components/editor/EditorList.svelte"
 
   export let item = {}
 
@@ -15,7 +15,7 @@
   onMount(setInitialState)
 
   function setInitialState() {
-    const state = localStorage.getItem(`folder_expanded_${ item.id }`) == "true" ? true : false
+    const state = localStorage.getItem(`folder_expanded_${item.id}`) == "true" ? true : false
 
     if (state) toggleFolderState(item, state, false)
   }

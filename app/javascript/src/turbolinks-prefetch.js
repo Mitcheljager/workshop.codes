@@ -1,6 +1,6 @@
 // Adjusted from https://github.com/huacnlee/turbolinks-prefetch
 // The original NPM package is modified to include links around images
-// and to automatically exclude links with the data-actions attrubute
+// and to automatically exclude links with the data-actions attribute
 
 export default class {
   static start(delay) {
@@ -8,7 +8,6 @@ export default class {
       console.error("window.Turbolinks not found, you must import Turbolinks with global.")
       return
     }
-
 
     const prefetcher = new Prefetcher(window.Turbolinks.controller)
     prefetcher.start(delay)
@@ -42,6 +41,7 @@ class Prefetcher {
     if (target.hasAttribute("data-remote")) return
     if (target.hasAttribute("data-method")) return
     if (target.getAttribute("data-prefetch") === "false") return
+    if (target.closest("[data-prefetch='false']")) return
     if (target.getAttribute("target") === "_blank") return
     const href = target.getAttribute("href") || target.getAttribute("data-prefetch")
 
@@ -115,13 +115,12 @@ class Prefetcher {
   prefetched(url) {
     const hasSnapshot = location.href === url || this.controller.cache.has(url)
     const snapshot = this.controller.cache.get(url)
-    return hasSnapshot && snapshot.isFresh
+    return hasSnapshot && snapshot?.isFresh
   }
 
   prefetching(url) {
     return !!this.fetchers[url]
   }
-
 
   isAction(action) {
     return action == "advance" || action == "replace" || action == "restore"
@@ -131,7 +130,8 @@ class Prefetcher {
     const { controller } = this
     const location = controller.getVisitableLocationForLink(link)
     const snapshot = controller.cache.get(location)
-    if (snapshot && snapshot.isFresh) {
+
+    if (snapshot?.isFresh) {
       snapshot.isFresh = false
       controller.cache.put(link, snapshot)
       return "restore"

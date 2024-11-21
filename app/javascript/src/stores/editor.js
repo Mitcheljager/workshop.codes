@@ -1,9 +1,9 @@
 import { writable, derived } from "svelte/store"
-import { getVariables } from "../utils/compiler/variables"
-import { isAnyParentHidden } from "../utils/editor"
-import { getMixins } from "../utils/compiler/mixins"
-import { getSubroutines } from "../utils/compiler/subroutines"
-import { debounced } from "../utils/debounceStore"
+import { getVariables } from "@utils/compiler/variables"
+import { isAnyParentHidden } from "@utils/editor"
+import { getMixins } from "@utils/compiler/mixins"
+import { getSubroutines } from "@utils/compiler/subroutines"
+import { debounced } from "@utils/debounceStore"
 
 // Preferably keep below the debounce time for the linter, so it
 // has access to the most up-to-date information from the store.
@@ -81,7 +81,7 @@ export const subroutinesMap = derived(flatItems, debounced($flatItems => {
 export const mixinsMap = derived(flatItems, debounced($flatItems => {
   const mixins = getMixins($flatItems)
 
-  return mixins.map(v => ({ detail: "Mixin", label: `@include ${ v }()`, type: "variable" }))
+  return mixins.map(v => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const workshopConstants = writable({})
@@ -108,5 +108,6 @@ export const settings = writable({
   "autocomplete-semicolon": true,
   "autocomplete-parameter-objects": false,
   "autocomplete-min-parameter-size": 2,
-  "autocomplete-min-parameter-newlines": 2
+  "autocomplete-min-parameter-newlines": 2,
+  "hide-wiki-sidebar": false
 })

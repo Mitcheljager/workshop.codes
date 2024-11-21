@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte"
-  import { setCssVariable } from "../../utils/setCssVariable"
-  import { isMobile } from "../../stores/editor"
+  import { setCssVariable } from "@utils/setCssVariable"
+  import { isMobile } from "@stores/editor"
 
   export let key = ""
   export let currentSize = 0
@@ -16,7 +16,7 @@
 
   onMount(() => {
     currentSize = Math.max(Math.min(localStorage.getItem(key) || currentSize, Math.max(window.innerWidth, window.innerHeight)), 0)
-    setCssVariable(key, `${ currentSize }px`)
+    setCssVariable(key, `${currentSize}px`)
   })
 
   function mouseDown(event) {
@@ -32,7 +32,7 @@
     const difference = (event[direction] || event.targetTouches[0]?.[direction]) - startPosition
     currentSize = startSize + difference * (align == "right" ? 1 : -1)
 
-    setCssVariable(key, `${ currentSize }px`)
+    setCssVariable(key, `${currentSize}px`)
 
     currentSize = Math.min(
       Math.max(currentSize, Math.max(window.innerWidth, window.innerHeight) / 10),
@@ -50,4 +50,4 @@
 
 <svelte:window on:mousemove={mouseMove} on:touchmove={mouseMove} on:mouseup={mouseUp} on:touchend={mouseUp} />
 
-<button class="drag-handle drag-handle--{ align }" class:is-dragging={isDragging} on:mousedown={mouseDown} on:touchstart={mouseDown} />
+<button class="drag-handle drag-handle--{align}" class:is-dragging={isDragging} on:mousedown={mouseDown} on:touchstart={mouseDown} />

@@ -1,9 +1,9 @@
 <script>
-  import Modal from "./Modal.svelte"
-  import { currentProject, items, currentItem, editorStates, modal } from "../../../stores/editor"
-  import { translationKeys, defaultLanguage, selectedLanguages } from "../../../stores/translationKeys"
-  import { updateProject } from "../../../utils/project"
-  import { fetchBackupsForProject, destroyBackup, fetchBackupContent } from "../../../utils/projectBackups"
+  import Modal from "@components/editor/Modals/Modal.svelte"
+  import { currentProject, items, currentItem, editorStates, modal } from "@stores/editor"
+  import { translationKeys, defaultLanguage, selectedLanguages } from "@stores/translationKeys"
+  import { updateProject } from "@utils/project"
+  import { fetchBackupsForProject, destroyBackup, fetchBackupContent } from "@utils/projectBackups"
   import { flip } from "svelte/animate"
   import { onMount } from "svelte"
 

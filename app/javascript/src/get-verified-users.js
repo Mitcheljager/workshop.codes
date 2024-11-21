@@ -1,4 +1,4 @@
-import FetchRails from "./fetch-rails"
+import FetchRails from "@src/fetch-rails"
 
 export function bind() {
   const element = document.querySelector("[data-action~='get-verified-users']")

@@ -1,6 +1,6 @@
 import { hoverTooltip } from "@codemirror/view"
-import { completionsMap } from "../stores/editor"
-import { getPhraseFromPosition } from "../utils/parse"
+import { completionsMap } from "@stores/editor"
+import { getPhraseFromPosition } from "@utils/parse"
 import { get } from "svelte/store"
 
 export function parameterTooltip() {

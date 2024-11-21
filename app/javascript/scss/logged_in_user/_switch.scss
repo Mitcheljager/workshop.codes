@@ -1,0 +1,125 @@
+.switch {
+  position: relative;
+  margin-bottom: $margin * 0.25;
+  max-width: 300px;
+
+  &::before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    height: calc(2rem - 8px);
+    width: calc(2rem - 8px);
+    border-radius: 99px;
+    background: lighten($border-color, 10%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2rem;
+    width: 4rem;
+    border-radius: 99px;
+    border: 2px solid lighten($border-color, 10%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &--active {
+    &::before {
+      left: calc(2rem + 6px);
+      background: $text-color-lightest;
+    }
+
+    &::after {
+      border-color: $text-color-lightest;
+    }
+  }
+}
+
+.switch__input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: .5rem 0 .5rem 6rem;
+  border: 0;
+  background: transparent;
+  color: $text-color;
+  font-size: $font-size-base;
+  font-weight: normal;
+  text-align: left;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  .switch--active & {
+    color: $text-color-lightest;
+  }
+}
+
+.switch-checkbox {
+  position: relative;
+  margin-right: auto;
+}
+
+.switch-checkbox__input {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-checkbox__label {
+  display: block;
+  padding-left: 3rem;
+  text-align: left;
+  cursor: pointer;
+
+  @include hover-stack {
+    &::before {
+      background: $text-color;
+    }
+
+    &::after {
+      border-color: $text-color;
+    }
+  }
+
+  &::before {
+    @extend .switch, ::before;
+    height: calc(1rem - 8px);
+    width: calc(1rem - 8px);
+    pointer-events: all;
+    transition: left 100ms;
+
+    .switch-checkbox__input:checked + &,
+    .switch-checkbox--active & {
+      left: calc(1rem + 6px);
+      background: $text-color-lightest;
+    }
+  }
+
+  &::after {
+    @extend .switch, ::after;
+    height: 1rem;
+    width: 2rem;
+    pointer-events: all;
+
+    .switch-checkbox__input:checked + &,
+    .switch-checkbox:focus-within &,
+    .switch-checkbox--active & {
+      border-color: $text-color-lightest;
+    }
+  }
+}

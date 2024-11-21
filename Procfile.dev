@@ -1,0 +1,3 @@
+
+vite: npx vite
+web: bin/rails s

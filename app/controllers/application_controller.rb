@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   include UsersHelper
   include ContentHelper
 
+  content_security_policy Rails.env.production?
+
   protect_from_forgery with: :exception
   before_action :login_from_cookie
   before_action :reject_if_banned
@@ -17,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   def login_from_cookie
     return unless cookies[:remember_token] && !current_user
+
     token = RememberToken.find_by_token(cookies.encrypted[:remember_token])
 
     if token && token.user
@@ -26,6 +29,8 @@ class ApplicationController < ActionController::Base
       session[:user_uuid] = token.user.uuid
       session[:return_to] = return_path
       create_activity(:login_from_cookie)
+    else
+      cookies.delete :remember_token
     end
   end
 
@@ -48,12 +53,6 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
     @current_user
-  end
-
-  helper_method :search_terms
-
-  def search_terms
-    @search_terms = Statistic.where(content_type: :search).order(value: :desc).limit(18)
   end
 
   def active_storage_blob_variant_url
@@ -80,6 +79,9 @@ class ApplicationController < ActionController::Base
 
   def set_request_headers
     headers["Access-Control-Allow-Origin"] = "*"
+    headers["Access-Control-Allow-Methods"] = "GET"
+    headers["Access-Control-Allow-Headers"] = "*"
+    headers["Content-Security-Policy"] = "default-src 'none'"
   end
 
   def render_404

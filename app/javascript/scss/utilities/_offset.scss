@@ -1,0 +1,60 @@
+@use "sass:math";
+
+$offset-values: (
+  'auto': auto,
+  0: 0,
+  1\/1: $margin,
+  1\/2: $margin * 0.5,
+  1\/4: $margin * 0.25,
+  1\/8: $margin * 0.125,
+  1\/16: math.div($margin, 16)
+);
+
+$properties: (
+  padding: p,
+  margin: m
+);
+
+$directions: (
+  "": "",
+  "-left": l,
+  "-right": r,
+  "-top": t,
+  "-bottom": b
+);
+
+@each $property, $property-abr in $properties {
+  @each $direction, $direction-abr in $directions {
+    @each $name, $value in $offset-values {
+      .#{ $property-abr }#{ $direction-abr }-#{ $name } {
+        #{ $property }#{ $direction }: $value;
+      }
+    }
+  }
+}
+
+@each $breakpoint, $breakpoint-value in map-remove(map-remove($media-min-widths, xs), xl) {
+  @media (min-width: $breakpoint-value) {
+    @each $property, $property-abr in $properties {
+      @each $direction, $direction-abr in $directions {
+        @each $name, $value in $offset-values {
+          .#{ $breakpoint }\:#{ $property-abr }#{ $direction-abr }-#{ $name } {
+            #{ $property }#{ $direction }: $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+.top-offset {
+  margin-top: $margin;
+
+  @include media-min(sm) {
+    margin-top: $margin * 1.75;
+  }
+}
+
+.gap-1\/8 {
+  gap: $margin * 0.125;
+}

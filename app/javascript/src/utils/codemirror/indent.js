@@ -7,7 +7,7 @@ import { EditorSelection } from "@codemirror/state"
  * @returns {Boolean} Should return true on complete
  */
 export function tabIndent({ state, dispatch }, event) {
-  const { shiftKey, target } = event
+  const { shiftKey, target } = event || {}
 
   // Do not indent when autocomplete is open
   if (target.closest(".cm-editor").querySelector(".cm-tooltip-autocomplete")) return true
@@ -47,7 +47,7 @@ export function tabIndent({ state, dispatch }, event) {
       }
 
       //'line.from' and 'from' are equal at start of line, dont reduce indents lower than 0.
-      const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1: 0))
+      const fromModifier = line.from === from ? 0 : (insert.search(/\S/) - leadingWhitespaceLength - (from === to ? 1 : 0))
       const toModifier = insert.length - originalLength
       const reverseSelection = state.selection.main.head === to
 
@@ -173,7 +173,7 @@ export function indentMultilineInserts({ state, dispatch }, transaction) {
  * @param {Object} view CodeMirror view
  * @param {Object} transaction CodeMirror transaction
  */
-export function pasteIndentAdjustments({ dispatch }, transaction){
+export function pasteIndentAdjustments({ dispatch }, transaction) {
   const [range] = transaction.changedRanges
   const paste = transaction.state.doc.toString().slice(range.fromB, range.toB)
   const line = transaction.state.doc.lineAt(range.fromB)

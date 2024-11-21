@@ -1,10 +1,10 @@
 <script>
-  import { destroyItem } from "../../utils/editor"
+  import { destroyItem } from "@utils/editor"
 
   export let item
 
   function destroy() {
-    if (confirm(`Are you sure you wish to destroy "${ item.name }"?`)) destroyItem(item.id)
+    if (confirm(`Are you sure you wish to destroy "${item.name}"?`)) destroyItem(item.id)
   }
 </script>
 

@@ -1,7 +1,8 @@
 <script>
-  import FetchRails from "../../fetch-rails"
-  import EditorWikiSearch from "./EditorWikiSearch.svelte"
-  import ExternalLinkIcon from "../icon/ExternalLink.svelte"
+  import * as lazyVideo from "@src/lazy-video"
+  import FetchRails from "@src/fetch-rails"
+  import EditorWikiSearch from "@components/editor/EditorWikiSearch.svelte"
+  import ExternalLinkIcon from "@components/icon/ExternalLink.svelte"
 
   let article
   let contentElement
@@ -24,7 +25,7 @@
   }
 
   function jumpToSection(slug) {
-    contentElement.querySelector(`#${ slug }`)?.scrollIntoView()
+    contentElement.querySelector(`#${slug}`)?.scrollIntoView()
   }
 
   export function fetchArticle(baseUrl, single = false) {
@@ -32,11 +33,15 @@
     progressBar.setValue(0)
     progressBar.show()
 
-    new FetchRails(`${ baseUrl }.json?parse_markdown=true${ single ? "&single=true" : "" }`).get()
+    new FetchRails(`${baseUrl}.json?parse_markdown=true${single ? "&single=true" : ""}`).get()
       .then(data => {
         if (!data) throw Error("Error while loading wiki article")
 
         article = JSON.parse(data)
+
+        requestAnimationFrame(() => {
+          lazyVideo.bind(contentElement)
+        })
       })
       .catch(error => {
         alert(error)
@@ -53,10 +58,11 @@
 
 {#if article}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="mt-1/2" on:click={click}>
     <div class="text-dark mb-1/8">{article.category.title}</div>
     <h2 class="mt-0 mb-1/8">
-      {article.title} <a href={`/wiki/articles/${ article.slug }`} target="_blank"><ExternalLinkIcon /></a>
+      {article.title} <a href={`/wiki/articles/${article.slug}`} target="_blank"><ExternalLinkIcon /></a>
     </h2>
     {#if article.subtitle}
       <h5 class="mt-0">{article.subtitle}</h5>

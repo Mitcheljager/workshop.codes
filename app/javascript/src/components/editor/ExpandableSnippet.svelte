@@ -1,7 +1,7 @@
 <script>
   import { tick } from "svelte"
-  import { reset as microlight } from "../../microlight"
-  import Expand from "../icon/Expand.svelte"
+  import { reset as microlight } from "@src/microlight"
+  import Expand from "@components/icon/Expand.svelte"
 
   export let fullContentLines
   export let snippetLineCount = 3
@@ -42,7 +42,7 @@
     const highlightedLineElement = expandedCodeElement.querySelector(".expandable-snippet__line--highlighted")
     if (!highlightedLineElement) return
 
-    highlightedLineElement.scrollIntoViewIfNeeded()
+    if (typeof highlightedLineElement.scrollIntoViewIfNeeded === "function") highlightedLineElement.scrollIntoViewIfNeeded()
   }
 
   function escapeLine(line) {
@@ -57,6 +57,7 @@
   <code class="block overflow-auto">
     {#each snippetLines as line, index}
       <div class="flex">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {snippetStartLineIdx + index}.&nbsp;<div class="microlight expandable-snippet__line">{@html escapeLine(line || "")}</div>
       </div>
     {/each}
@@ -86,6 +87,7 @@
   </div>
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="modal__backdrop" on:click={() => expanded = false} />
 </div>
 {/if}

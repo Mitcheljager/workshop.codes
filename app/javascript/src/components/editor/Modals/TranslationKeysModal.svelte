@@ -1,10 +1,10 @@
 <script>
-  import Modal from "./Modal.svelte"
-  import TranslationKeysEditStrings from "../TranslationKeys/TranslationKeysEditStrings.svelte"
-  import TranslationKeysSelectLanguages from "../TranslationKeys/TranslationKeysSelectLanguages.svelte"
-  import { translationKeys, orderedTranslationKeys, selectedLanguages } from "../../../stores/translationKeys"
-  import { copyValueToClipboard } from "../../../copy"
-  import { submittable } from "../../actions/submittable"
+  import Modal from "@components/editor/Modals/Modal.svelte"
+  import TranslationKeysEditStrings from "@components/editor/TranslationKeys/TranslationKeysEditStrings.svelte"
+  import TranslationKeysSelectLanguages from "@components/editor/TranslationKeys/TranslationKeysSelectLanguages.svelte"
+  import { translationKeys, orderedTranslationKeys, selectedLanguages } from "@stores/translationKeys"
+  import { copyValueToClipboard } from "@src/copy"
+  import { submittable } from "@components/actions/submittable"
 
   let selectedKey = null
   let showLanguageSettings = false

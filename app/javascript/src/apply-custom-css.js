@@ -4,7 +4,7 @@ export function bind() {
   elements.forEach((element) => element.removeAndAddEventListener("input", applyCustomCSS))
 }
 
-function applyCustomCSS(event) {
+function applyCustomCSS() {
   const value = this.value
   const styleTag = document.querySelector("#custom-css")
 

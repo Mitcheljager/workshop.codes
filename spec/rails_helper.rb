@@ -10,7 +10,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require "capybara/rspec"
 require "capybara/rails"
-require File.expand_path('./support/webpack.rb', __dir__)
+# require File.expand_path('./support/webpack.rb', __dir__)
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -56,6 +56,15 @@ RSpec.configure do |config|
   # config.use_active_record = false
 
   config.include FactoryBot::Syntax::Methods
+
+  # config.before :all, type: :system do
+  #   if !ENV["ASSET_PRECOMPILE_DONE"]
+  #     puts "\n\nPrecompiling assets for system tests..."
+  #     prep_passed = system "rake assets:precompile"
+  #     ENV["ASSET_PRECOMPILE_DONE"] = "true"
+  #     abort "\nYour assets didn't compile. Exiting WITHOUT running any tests. Review the output above to resolve any errors." if !prep_passed
+  #   end
+  # end
 
  # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
   config.before(:suite) do

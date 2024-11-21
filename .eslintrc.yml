@@ -5,13 +5,13 @@ parserOptions:
   ecmaVersion: 12
   sourceType: module
   allowImportExportEverywhere: true
-plugins:
-  - svelte3
+extends:
+  - "plugin:svelte/recommended"
 overrides:
   -
     files:
       - "*.svelte"
-    processor: svelte3/svelte3
+    parser: svelte-eslint-parser
 ignorePatterns:
   - /public
   - /**/zez-ui
@@ -33,7 +33,6 @@ rules:
     - SwitchCase: 1
   no-trailing-spaces:
     - error
-    - skipBlankLines: true
   space-before-function-paren:
     - error
     - never
@@ -47,4 +46,46 @@ rules:
       after: true
   template-curly-spacing:
     - error
-    - always
+    - never
+  svelte/no-at-html-tags:
+    - off
+  no-unused-vars:
+    - error
+    - vars: all
+      args: after-used
+      ignoreRestSiblings: true
+      argsIgnorePattern: "^_"
+      varsIgnorePattern: "^_"
+      caughtErrorsIgnorePattern: "^_"
+  no-whitespace-before-property:
+    - error
+  block-spacing:
+    - error
+  prefer-arrow-callback:
+    - error
+  prefer-spread:
+    - error
+  no-duplicate-imports:
+    - error
+  space-before-blocks:
+    - error
+  no-console:
+    - warn
+    - allow:
+      - error
+  space-infix-ops:
+    - error
+  no-multiple-empty-lines:
+    - warn
+    - max: 1
+  svelte/no-dupe-on-directives:
+    - error
+  svelte/no-dupe-use-directives:
+    - error
+  svelte/html-self-closing:
+    - error
+    - all
+  svelte/no-spaces-around-equal-signs-in-attribute:
+    - error
+  svelte/mustache-spacing:
+    - error

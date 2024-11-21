@@ -1,4 +1,5 @@
-import FetchRails from "./fetch-rails"
+import FetchRails from "@src/fetch-rails"
+import * as lazyVideo from "@src/lazy-video"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='get-partial']")
@@ -28,7 +29,7 @@ function getPartial(event, element) {
 
   let _this = element || event.target
   if (!_this.dataset.url) _this = event.target.closest("[data-action~='get-partial']")
-  const targetElement = document.querySelector(`[data-partial="${ _this.dataset.target }"]`)
+  const targetElement = document.querySelector(`[data-partial="${_this.dataset.target}"]`)
   const url = _this.dataset.url
 
   if (targetElement.dataset.loaded == "true") return
@@ -38,6 +39,8 @@ function getPartial(event, element) {
       targetElement.innerHTML = data
     })
     .then(() => {
+      lazyVideo.bind(targetElement)
+
       if (_this.dataset.scrollOnLoad != "true") return
 
       const hash = window.location.hash?.substring(1)
@@ -54,7 +57,7 @@ function getPartial(event, element) {
     })
     .catch(error => {
       console.error(error)
-      targetElement.innerHTML = `<em>Something went wrong when loading, please try again. (${ error })</em>`
+      targetElement.innerHTML = `<em>Something went wrong when loading, please try again. (${error})</em>`
     })
     .finally(() => {
       targetElement.dataset.loaded = "true"

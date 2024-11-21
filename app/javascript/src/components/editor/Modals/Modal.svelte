@@ -1,6 +1,6 @@
 <script>
-  import { modal } from "../../../stores/editor"
-  import { escapeable } from "../../actions/escapeable"
+  import { modal } from "@stores/editor"
+  import { escapeable } from "@components/actions/escapeable"
   import { fade } from "svelte/transition"
 
   export let align = "top"
@@ -24,5 +24,6 @@
   </div>
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="modal__backdrop" on:click={close} />
 </div>

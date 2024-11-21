@@ -1,8 +1,8 @@
 <script>
-  import Modal from "./Modal.svelte"
-  import { currentProject, isSignedIn, modal } from "../../../stores/editor"
-  import { createProject, renameCurrentProject, setUrl } from "../../../utils/project"
-  import { submittable } from "../../actions/submittable"
+  import Modal from "@components/editor/Modals/Modal.svelte"
+  import { currentProject, isSignedIn, modal } from "@stores/editor"
+  import { createProject, renameCurrentProject, setUrl } from "@utils/project"
+  import { submittable } from "@components/actions/submittable"
 
   let loading
   let value

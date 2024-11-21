@@ -1,10 +1,10 @@
 <script>
   import { fly } from "svelte/transition"
-  import { templates } from "../../lib/templates"
-  import { createNewItem } from "../../utils/editor"
-  import { items, currentItem } from "../../stores/editor"
-  import { escapeable } from "../actions/escapeable"
-  import { outsideClick } from "../actions/outsideClick"
+  import { templates } from "@lib/templates"
+  import { createNewItem } from "@utils/editor"
+  import { items, currentItem } from "@stores/editor"
+  import { escapeable } from "@components/actions/escapeable"
+  import { outsideClick } from "@components/actions/outsideClick"
 
   let active = false
   let element
@@ -47,7 +47,7 @@
       <button on:click={withCloseDropdown(() => createTemplate("Settings", "Settings"))} class="dropdown__item">Settings</button>
       <button on:click={withCloseDropdown(() => createTemplate("Mixin", "Mixin"))} class="dropdown__item">Mixin</button>
       <button on:click={withCloseDropdown(() => createTemplate("Empty", "New item"))} class="dropdown__item">Empty</button>
-      <hr>
+      <hr/>
       <button on:click={withCloseDropdown(() => createItem("New folder", "", "folder"))} class="dropdown__item">Folder</button>
     </div>
   {/if}

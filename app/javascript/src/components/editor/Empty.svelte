@@ -1,7 +1,6 @@
 <script>
-  import { isSignedIn, projects, modal } from "../../stores/editor"
-  import { createDemoProject, createProject, fetchProject, setUrl } from "../../utils/project"
-  import CreateProjectModal from "./Modals/CreateProjectModal.svelte"
+  import { isSignedIn, projects, modal } from "@stores/editor"
+  import { createDemoProject, createProject, fetchProject, setUrl } from "@utils/project"
 
   async function getProject(uuid) {
     const data = await fetchProject(uuid)
@@ -42,7 +41,7 @@
         {#each $projects as { title, uuid, updated_at }}
           <button class="project" on:click={() => getProject(uuid)}>
             <div class="text-lightest">{title}</div>
-            <small>Last updated: { new Date(updated_at).toLocaleString() }</small>
+            <small>Last updated: {new Date(updated_at).toLocaleString()}</small>
           </button>
         {/each}
       {:else}
@@ -52,7 +51,7 @@
           Create your first project
         </button>
 
-        <a class="button button--ghost" href="https://workshop.codes/editor?uuid=c7b3c40a-2f86-45c4-9b3f-f39d3c2974bc">Check out a sample project</a>
+        <a class="button button--ghost" href="https://workshop.codes/editor?uuid=abb302fc-46ef-4b4c-b7db-e09488463477" target="_blank">Check out a sample project</a>
       {/if}
     </div>
   </div>

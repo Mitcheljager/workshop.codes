@@ -8,6 +8,16 @@
   <div class="comments__wrapper"
        data-role="comments"
        data-id="<%= @post.id %>"
-       data-comments-count="<%= @post.comments_count %>"><%= render @comments %></div>
+       data-page="1"
+       data-page-size=<%= PAGE_SIZE %>
+       data-comments-count="<%= @post.comments_count %>">
+    <%= render @comments %>
+
+    <% if @comments.count == PAGE_SIZE %>
+      <div class="flex justify-center mt-1/2" data-role="load-more">
+        <%= tag.button "Load more comments", class: "button", data: { action: "get-more-comments" } %>
+      </div>
+    <% end %>
+  </div>
 </div>
 

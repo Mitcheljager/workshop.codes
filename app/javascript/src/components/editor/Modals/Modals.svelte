@@ -1,12 +1,12 @@
 <script>
-  import BackupsModal from "./BackupsModal.svelte"
-  import CreateProjectModal from "./CreateProjectModal.svelte"
-  import LineFinderModal from "./LineFinderModal.svelte"
-  import ItemFinderModal from "./ItemFinderModal.svelte"
-  import TranslationKeysModal from "./TranslationKeysModal.svelte"
-  import ScriptImporterModal from "./ScriptImporterModal.svelte"
-  import { modal } from "../../../stores/editor"
-  import { Modal } from "../../../constants/Modal"
+  import BackupsModal from "@components/editor/Modals/BackupsModal.svelte"
+  import CreateProjectModal from "@components/editor/Modals/CreateProjectModal.svelte"
+  import LineFinderModal from "@components/editor/Modals/LineFinderModal.svelte"
+  import ItemFinderModal from "@components/editor/Modals/ItemFinderModal.svelte"
+  import TranslationKeysModal from "@components/editor/Modals/TranslationKeysModal.svelte"
+  import ScriptImporterModal from "@components/editor/Modals/ScriptImporterModal.svelte"
+  import { modal } from "@stores/editor"
+  import { Modal } from "@constants/Modal"
 
   const components = {
     [Modal.Backups]: BackupsModal,

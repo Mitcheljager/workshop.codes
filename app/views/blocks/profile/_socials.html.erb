@@ -13,13 +13,6 @@
     </div>
   <% end %>
 
-  <% if block_property(block, "twitter").present? %>
-    <%= link_to block_property(block, "twitter_url"), target: "_blank", rel: "noreferrer noopener", class: "content-block__social" do %>
-      <%= inline_svg_tag "icons/icon-twitter.svg", height: 21, width: 21 %>
-      <%= block_property(block, "twitter") %>
-    <% end %>
-  <% end %>
-
   <% if block_property(block, "youtube").present? %>
     <%= link_to block_property(block, "youtube_url"), target: "_blank", rel: "noreferrer noopener", class: "content-block__social" do %>
       <%= inline_svg_tag "icons/icon-youtube.svg", height: 21, width: 21 %>

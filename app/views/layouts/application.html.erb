@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes Resource" %></title>
+    <title><%= yield(:page_title).present? ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes Resource" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,10 +11,12 @@
     <meta name="ir-site-verification-token" value="2456162" />
     <meta http-equiv=”content-language” content="en" />
 
-    <% unless yield(:og_description) != "" %>
+    <% unless yield(:og_description).present? %>
       <meta name="description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
       <meta property="og:description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
     <% end %>
+
+    <%= yield(:preload) if yield(:preload).present? %>
 
     <%= render "application/og_tags" %>
     <%= render "favicons" %>
@@ -22,17 +24,27 @@
     <link rel="manifest" href="/manifest.json">
 
     <link rel="preload"
-      href="<%= asset_path "fonts.css" %>"
+      href="<%= vite_asset_url "fonts.scss" %>"
       as="style"
       onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
-    <noscript><%= stylesheet_link_tag "fonts.css" %></noscript>
+    <noscript><%= vite_stylesheet_tag "fonts.scss" %></noscript>
 
-    <%= stylesheet_link_tag "application.css" %>
-    <%= javascript_pack_tag "application", "data-turbolinks-track": "reload", defer: true %>
+    <!-- Prevent flashbangs -->
+    <style>
+      body {
+        background: #1f2326;
+        color: #90989c;
+      }
+    </style>
+
+    <%= vite_stylesheet_tag "application.scss" %>
+
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
     <% if current_user %>
-      <%= stylesheet_link_tag "logged_in_user.css" %>
-      <%= javascript_pack_tag "logged-in-user.js", "data-turbolinks-track": "reload", defer: true %>
+      <%= vite_stylesheet_tag "logged-in-user.scss" %>
+      <%= vite_javascript_tag "logged-in-user.js", "data-turbolinks-track": "reload", defer: true %>
     <% end %>
   </head>
 

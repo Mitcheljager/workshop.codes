@@ -18,7 +18,7 @@ export function render() {
   scrollAlong()
 }
 
-function toggleUnchangedFiles(event) {
+function toggleUnchangedFiles() {
   const element = document.querySelector(".diff")
   const state = this.checked
 
@@ -54,14 +54,14 @@ function createRules() {
 }
 
 function goToRule(event) {
-  const target = document.querySelector(`.diff li:nth-child(${ event.target.value })`)
+  const target = document.querySelector(`.diff li:nth-child(${event.target.value})`)
   const differenceHeaderElement = document.querySelector("[data-role='difference-header']")
 
   const offset = target.getBoundingClientRect().top + window.scrollY - differenceHeaderElement.offsetHeight
   window.scroll(0, offset)
 }
 
-function scrollAlong(event) {
+function scrollAlong() {
   const element = document.querySelector("[data-role='difference-header']")
   const elementOffset = element.getBoundingClientRect().top
 

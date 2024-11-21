@@ -1,0 +1,82 @@
+.form-tags__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 .35rem .15rem .35rem;
+}
+
+.form-tags__input {
+  @include inline-input;
+  width: initial;
+  margin-top: .35rem;
+  padding: .35rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.form-tags__tag {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: .1rem;
+  margin-right: .35rem;
+  margin-top: .25rem;
+  padding: .15rem .2rem;
+  border-radius: $border-radius * 0.25;
+  background: lighten($bg-dark, 5%);
+  line-height: 1em;
+  color: $text-color-light;
+  font-weight: bold;
+}
+
+.form-tags__remove-tag {
+  padding: .1rem .2rem .2rem;
+  background: transparent;
+  border: none;
+  color: $text-color-lightest;
+  cursor: pointer;
+  line-height: 1em;
+
+  &:hover,
+  &:active {
+    color: $white;
+  }
+}
+
+.form-tags-autocomplete-results__anchor {
+  position: relative;
+}
+
+.form-tags-autocomplete-results {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: .2rem 0;
+  padding: .25rem;
+  background: lighten($bg-dark, 5%);
+  border-radius: $border-radius * 0.5;
+  max-height: 20rem;
+  overflow-y: auto;
+  z-index: 100;
+  text-align: left;
+  box-shadow: $shadow;
+
+  .list-element {
+    list-style: none;
+    padding: .25rem;
+
+    &.tag-item {
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background: lighten($bg-dark, 10%);
+        outline: none;
+        color: $text-color-lightest;
+      }
+    }
+  }
+}

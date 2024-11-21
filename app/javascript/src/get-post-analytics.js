@@ -1,5 +1,5 @@
-import FetchRails from "./fetch-rails"
-import createChart from "./chart"
+import FetchRails from "@src/fetch-rails"
+import createChart from "@src/chart"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='get-post-analytics']")
@@ -32,7 +32,7 @@ function getPostAnalytics(element) {
     })
 }
 
-function revealPostAnalytics(event) {
+function revealPostAnalytics() {
   const parentElement = this.closest("[data-toggle-content]")
   const selectElement = parentElement.querySelector("[data-action~='get-post-analytics']")
 

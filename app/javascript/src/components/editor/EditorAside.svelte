@@ -1,7 +1,7 @@
 <script>
-  import EditorItemCreate from "./EditorItemCreate.svelte"
-  import EditorList from "./EditorList.svelte"
-  import { items } from "../../stores/editor"
+  import EditorItemCreate from "@components/editor/EditorItemCreate.svelte"
+  import EditorList from "@components/editor/EditorList.svelte"
+  import { items } from "@stores/editor"
 
   let element
 
@@ -27,7 +27,7 @@
     <p class="mt-0 mb-0 pl-1/4 pr-1/4 small text-dark"><em>Start by creating a new item using the button below.</em></p>
   {/if}
 
-  <div class="p-1/8 mt-1/4">
+  <div class="editor__add-item">
     <EditorItemCreate>
       <span class="button button--secondary w-100 button--square">Add</span>
     </EditorItemCreate>

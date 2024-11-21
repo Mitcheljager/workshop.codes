@@ -1,7 +1,7 @@
 <script>
-  import { translationKeys, selectedLanguages } from "../../../stores/translationKeys"
-  import { languageOptions } from "../../../lib/languageOptions"
-  import { submittable } from "../../actions/submittable"
+  import { translationKeys, selectedLanguages } from "@stores/translationKeys"
+  import { languageOptions } from "@lib/languageOptions"
+  import { submittable } from "@components/actions/submittable"
   import { createEventDispatcher } from "svelte"
 
   export let selectedKey
@@ -68,12 +68,12 @@
 
 <p class="text-small">
   Include optional parameters just like you would when using <code>Custom String</code>.
-  <br>
+  <br />
   <code class="inline-block mt-1/8" style="color: var(--color-punctuation)">
     <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>,
     <span style="color: var(--color-value)">Icon String</span>(<span style="color: var(--color-variable)">Bolt</span>))
   </code>
-  <br>
+  <br />
   <code class="inline-block mt-1/8">
     Some translation &#123;0&#125; with and icon in the middle
   </code>

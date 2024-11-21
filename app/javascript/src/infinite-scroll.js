@@ -1,6 +1,6 @@
 import Rails from "@rails/ujs"
-import * as timeago from "./timeago.js"
-import isCrawler from "./utils/is-crawler.js"
+import * as timeago from "@src/timeago.js"
+import isCrawler from "@src/utils/is-crawler.js"
 
 export function bind() {
   const element = document.querySelector("[data-role='infinite-scroll-marker']")
@@ -60,7 +60,7 @@ function getInfiniteScrollContent(element) {
   Rails.ajax({
     type: "get",
     url: requestUrlString,
-    success: (response) => {
+    success: () => {
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
         element.innerHTML = "Load more"
@@ -69,10 +69,9 @@ function getInfiniteScrollContent(element) {
 
       timeago.initialize()
     },
-    error: (error) => {
+    error: () => {
       if (spinner) spinner.remove()
       if (element.dataset.loadMethod === "load-more-button") {
-        console.log("more button")
         element.innerHTML = "An error occurred. Try again?"
       } else if (element.dataset.loadMethod === "infinite-scroll") {
         let button = document.querySelector("[data-role='load-more-posts']")
@@ -83,7 +82,7 @@ function getInfiniteScrollContent(element) {
                 class="mt-1/2 button button--secondary pr-1/1 pl-1/1"
                 data-role="load-more-posts"
                 data-load-method="load-more-button"
-                data-url="${ requestUrl }">
+                data-url="${requestUrl}">
 
                 An error occurred. Try again?
               </div>

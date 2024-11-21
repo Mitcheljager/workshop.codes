@@ -1,0 +1,39 @@
+@use "sass:math";
+
+.wiki-cards {
+  display: grid;
+  grid-gap: $margin * 0.5;
+
+  @include media-min(md) {
+    grid-gap: $margin;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wiki-card {
+  display: flex;
+  flex-direction: column;
+  font-size: $font-size-base;
+}
+
+.wiki-card__item {
+  display: block;
+  padding: $margin * 0.25 0;
+  border-bottom: 1px solid $border-color;
+  font-size: $font-size-small;
+  color: $text-color;
+
+  &:last-of-type {
+    margin-bottom: math.div($margin, 3);
+  }
+
+  a {
+    color: $text-color-lightest;
+    text-decoration: none;
+
+    @include hover-stack {
+      text-decoration: underline;
+      color: $white;
+    }
+  }
+}

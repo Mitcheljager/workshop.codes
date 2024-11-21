@@ -4,20 +4,17 @@ module ApplicationHelper
       category: params[:category],
       hero: params[:hero],
       map: params[:map],
-      from: params[:from],
-      to: params[:to],
       sort: params[:sort],
       expired: params[:expired],
       author: params[:author],
       players: params[:players],
-      language: params[:language],
       search: params[:search]
     }
 
     parameters[key] = value
 
     if parameters.values.all? { |v| v.nil? }
-      return root_path
+      return filter_path(sort: :latest)
     else
       return filter_path(parameters)
     end

@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :update, :destroy, :show]
   get "create_edit_form/:comment_id", to: "comments#create_edit_form", as: "create_edit_form"
   get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
+  get "comments/:id/:page", to: "comments#more", as: "more_comments"
 
   post "copy-code", to: "posts#copy_code", as: "copy_code"
 
@@ -139,8 +140,8 @@ Rails.application.routes.draw do
   get "search", to: "search#show", as: "filter"
   get "filter/partial", to: "filter#partial", as: "filter_partial"
   post "search", to: "search#index", as: "search_post"
-  get "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/(page/:page)", to: "filter#index", constraints: FilterContraints
-  post "(categories/:category)/(heroes/:hero)/(maps/:map)/(from/:from)/(to/:to)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(language/:language)/search", to: "search#redirect_to_query_params"
+  get "(categories/:category)/(heroes/:hero)/(maps/:map)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", constraints: FilterContraints
+  post "(categories/:category)/(heroes/:hero)/(maps/:map)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/search", to: "search#redirect_to_query_params"
   get "get-verified-users", to: "filter#get_verified_users"
   get "overwatch-2", to: redirect("/", status: 301)
 

@@ -21,7 +21,7 @@ class Wiki::Article < ApplicationRecord
   validates :slug, presence: true
   validates :content, length: { maximum: WIKI_ARTICLE_CONTENT_LIMIT }
   validates :tags, length: { maximum: 1000 }
-  validates :images, content_type: ["image/png", "image/jpg", "image/jpeg"],
+  validates :images, content_type: ["image/png", "image/jpg", "image/jpeg", "image/webp"],
                      size: { less_than: 2.megabytes }
 
   def self.search(query, size=100)

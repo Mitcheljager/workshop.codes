@@ -133,6 +133,11 @@
   slug: esperanca
   overwatch_2: true
 -
+  name: Runasapi
+  type: Push
+  slug: runasapi
+  overwatch_2: true
+-
   name: New Junk City
   type: Flashpoint
   slug: new-junk-city
@@ -141,6 +146,16 @@
   name: Suravasa
   type: Flashpoint
   slug: suravasa
+  overwatch_2: true
+-
+  name: Hanaoka
+  type: Clash
+  slug: hanaoka
+  overwatch_2: true
+-
+  name: Throne of Anubis
+  type: Clash
+  slug: throne-of-anubis
   overwatch_2: true
 -
   name: Black Forest

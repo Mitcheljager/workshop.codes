@@ -1,8 +1,8 @@
-import { completionsMap, settings } from "../../stores/editor"
-import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "../../utils/parse"
+import { completionsMap, settings } from "@stores/editor"
+import { getClosingBracket, getPhraseFromPosition, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
-import { parseParameterObjectContent } from "../../utils/compiler/parameterObjects"
-import { getIndentForLine } from "../../utils/codemirror/indent"
+import { parseParameterObjectContent } from "@utils/compiler/parameterObjects"
+import { getIndentForLine } from "@utils/codemirror/indent"
 
 /**
  * @type {import("../codeActions").CodeActionProvider}
@@ -65,7 +65,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
             changes: {
               from: fileWideParenFrom,
               to: fileWideParenTo,
-              insert: `(${ argumentList })`
+              insert: `(${argumentList})`
             }
           })
         )
@@ -90,7 +90,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
 
         parameterObject += args
           .map((value, index) => {
-            const keyValue = `${ completion.parameter_keys[index] }: ${ value.trim() }`
+            const keyValue = `${completion.parameter_keys[index]}: ${value.trim()}`
             return (isMultiLine ? (indent + "\t") : "") + keyValue
           })
           .join(",\n")
@@ -100,13 +100,12 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
 
         parameterObject += "}"
 
-
         view.dispatch(
           view.state.update({
             changes: {
               from: fileWideParenFrom,
               to: fileWideParenTo,
-              insert: `(${ parameterObject })`
+              insert: `(${parameterObject})`
             }
           })
         )

@@ -10,13 +10,17 @@ gem "aws-sdk-s3", require: false
 gem "bcrypt", require: "bcrypt"
 gem "blind_index"
 gem "breadcrumbs_on_rails"
+gem 'bonsai-elasticsearch-rails', github: 'omc/bonsai-elasticsearch-rails', branch: 'master'
 gem "bootsnap", require: false
 gem "chart-js-rails"
 gem "diffy"
 gem "disco"
 gem "discord-notifier"
-gem "elasticsearch-model", "~> 6"
-gem "elasticsearch-rails", "~> 6"
+gem "dynoscale_ruby"
+gem "elasticsearch-model", "7.1.1"
+gem "elasticsearch-rails", "7.1.1"
+gem "elasticsearch", "<= 7.10.2" # Limited by Bonsai support
+gem "elasticsearch-api", "<= 7.10.2" # Limited by Bonsai support
 gem "geocoder"
 gem "image_processing", "~> 1.12"
 gem "inline_svg"
@@ -28,7 +32,7 @@ gem "mini_magick", ">= 4.9.5"
 gem "omniauth-bnet"
 gem "omniauth-discord"
 # Mitigate CVE-2015-9284
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth-rails_csrf_protection"
 gem "puma", "~> 5.6"
 gem "rails", "~> 7.0.5"
 gem "rails_same_site_cookie"
@@ -43,8 +47,7 @@ gem "sucker_punch"
 gem "turbolinks", "~> 5"
 gem "tzinfo-data"
 gem "uglifier", ">= 1.3.0"
-gem "webpacker", "~> 5.0"
-gem "webpacker-svelte", "~> 1.0.0"
+gem "vite_rails"
 
 group :development, :test do
   gem "bullet"

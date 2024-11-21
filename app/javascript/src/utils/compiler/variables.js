@@ -1,5 +1,5 @@
-import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "../parse"
-import { evaluateParameterObjects } from "./parameterObjects"
+import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
+import { evaluateParameterObjects } from "@utils/compiler/parameterObjects"
 
 // NOTE: The fact variable names can start with a decimal is intentional.
 // We leave it to Overwatch to warn the user that this is not allowed.
@@ -115,11 +115,11 @@ export function compileVariables(joinedItems) {
 
   return `
 variables {
-${ globalVariables.length ? "  global:" : "" }
-${ globalVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
+${globalVariables.length ? "  global:" : ""}
+${globalVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
 
-${ playerVariables.length ? "  player:" : "" }
-${ playerVariables.map((v, i) => `    ${ i }: ${ v }`).join("\n") }
+${playerVariables.length ? "  player:" : ""}
+${playerVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
 }\n\n`
 }
 
@@ -153,10 +153,10 @@ export function getVariables(joinedItems) {
     const isPlayer = match[0].includes("Player")
 
     if (isPlayer) {
-      if (args[1]?.length === 0) continue
+      if (!args[1]?.length) continue
       playerVariablesFromActions.push(args[1])
     } else {
-      if (args[0]?.length === 0) continue
+      if (!args[0]?.length) continue
       globalVariablesFromActions.push(args[0])
     }
   }

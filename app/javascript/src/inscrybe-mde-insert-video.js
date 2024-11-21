@@ -1,6 +1,6 @@
-import Uploader from "./uploader"
-import FetchRails from "./fetch-rails"
-import { addAlertError } from "./lib/alerts"
+import Uploader from "@src/uploader"
+import FetchRails from "@src/fetch-rails"
+import { addAlertError } from "@src/lib/alerts"
 
 export default class InscrybeInsertVideo {
   constructor(event, editor) {
@@ -70,7 +70,7 @@ export default class InscrybeInsertVideo {
         clearInterval(interval)
 
         if (uploader.progress == 100) {
-          new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }?type=video`)
+          new FetchRails(`/active_storage_blob_variant_url/${uploader.blob.key}?type=video`)
             .get().then(data => this.replaceMarkerWithVideo(randomId, data))
             .catch(error => alert(error))
         }
@@ -97,7 +97,7 @@ export default class InscrybeInsertVideo {
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)
-    this.editor.replaceSelection(`[video ${ url }${ autoplay ? " autoplay" : "" }]`)
+    this.editor.replaceSelection(`[video ${url}${autoplay ? " autoplay" : ""}]`)
 
     this.editor.setSelection(cursorPosition, cursorPosition)
 

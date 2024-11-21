@@ -1,24 +1,25 @@
 <script>
-  import { onMount } from "svelte"
+  import { onMount, tick } from "svelte"
   import { fly } from "svelte/transition"
-  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "../../stores/editor"
-  import { toCapitalize } from "../../utils/text"
-  import FetchRails from "../../fetch-rails"
-  import EditorActions from "./EditorActions.svelte"
-  import EditorAside from "./EditorAside.svelte"
-  import EditorWiki from "./EditorWiki.svelte"
-  import CodeMirror from "./CodeMirror.svelte"
-  import DragHandle from "./DragHandle.svelte"
-  import ProjectsDropdown from "./ProjectsDropdown.svelte"
-  import Empty from "./Empty.svelte"
-  import ItemFinder from "./ItemFinder.svelte"
-  import FindReplaceAll from "./FindReplaceAll.svelte"
-  import LineFinder from "./LineFinder.svelte"
-  import Modals from "./Modals/Modals.svelte"
-  import ProjectRecovery from "./ProjectRecovery.svelte"
-  import Logo from "../icon/Logo.svelte"
-  import Bugsnag from "../Bugsnag.svelte"
-  import EyeIcon from "../icon/Eye.svelte"
+  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "@stores/editor"
+  import { toCapitalize } from "@utils/text"
+  import FetchRails from "@src/fetch-rails"
+  import EditorActions from "@components/editor/EditorActions.svelte"
+  import EditorAside from "@components/editor/EditorAside.svelte"
+  import EditorWiki from "@components/editor/EditorWiki.svelte"
+  import CodeMirror from "@components/editor/CodeMirror.svelte"
+  import DragHandle from "@components/editor/DragHandle.svelte"
+  import ProjectsDropdown from "@components/editor/ProjectsDropdown.svelte"
+  import Empty from "@components/editor/Empty.svelte"
+  import ItemFinder from "@components/editor/ItemFinder.svelte"
+  import FindReplaceAll from "@components/editor/FindReplaceAll.svelte"
+  import LineFinder from "@components/editor/LineFinder.svelte"
+  import Modals from "@components/editor/Modals/Modals.svelte"
+  import ProjectRecovery from "@components/editor/ProjectRecovery.svelte"
+  import Logo from "@components/icon/Logo.svelte"
+  import Bugsnag from "@components/Bugsnag.svelte"
+  import EyeIcon from "@components/icon/Eye.svelte"
+  import Logs from "@components/editor/Logs.svelte"
 
   export let bugsnagApiKey = ""
   export let _isSignedIn = false
@@ -28,6 +29,7 @@
   let userProjects = null
   let defaults = {}
   let loading = true
+  let currentSidebarTab = "wiki"
 
   $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
     $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
@@ -38,7 +40,7 @@
   $: if (data) $completionsMap = parseKeywords($settings)
 
   // Updates the tab title
-  $: document.title = $currentProject?.title !== undefined ? `${ $currentProject.title } | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
+  $: document.title = $currentProject?.title !== undefined ? `${$currentProject.title} | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
 
   onMount(async() => {
     loading = true
@@ -100,11 +102,11 @@
       if (!params.args_length) return params
 
       // Add detail arguments in autocomplete results
-      const detail = v.args.map(a => `${ toCapitalize(a.name) }`)
+      const detail = v.args.map(a => `${toCapitalize(a.name)}`)
       const joinedDetail = detail.join(", ")
 
       params.detail_full = joinedDetail
-      params.detail = `(${ joinedDetail.slice(0, 30) }${ joinedDetail.length > 30 ? "..." : "" })`
+      params.detail = `(${joinedDetail.slice(0, 30)}${joinedDetail.length > 30 ? "..." : ""})`
 
       // Add apply values when selecting autocomplete, filling in default args
       const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
@@ -130,7 +132,7 @@
         // If useParameterObject is enabled add the parameter name to the apply.
         // It's important this happens after setting the parameter_defaults param, as that uses
         // a different format and we don't want it to use the parameter object format.
-        if (useParameterObject) return `${ useNewlines ? "\n\t" : "" } ${ name }: ${ defaultValue }`
+        if (useParameterObject) return `${useNewlines ? "\n\t" : ""} ${name}: ${defaultValue}`
         return defaultValue
       })
 
@@ -138,9 +140,9 @@
       // The value we set is dependent on useParameterObjects and useNewlines.
       params.apply = useParameterObject ?
         useNewlines ?
-          `${ v["en-US"] }({ ${ applyValues.join(", ") }\n})` :
-          `${ v["en-US"] }({ ${ applyValues.join(", ") } })` :
-        `${ v["en-US"] }(${ applyValues.join(", ") })`
+          `${v["en-US"]}({ ${applyValues.join(",")}\n})` :
+          `${v["en-US"]}({ ${applyValues.join(", ")} })` :
+        `${v["en-US"]}(${applyValues.join(", ")})`
 
       // Add arguments to info box
       params.info += "\n\nArguments: "
@@ -153,10 +155,10 @@
   function isInherentlyHidden(item) {
     if (item.hidden) return true
     if (!item.parent) return false
-    
+
     const parent = $sortedItems.find((parentItem) => parentItem.id === item.parent)
     if (!parent) return false
-    
+
     return isInherentlyHidden(parent)
   }
 
@@ -168,7 +170,7 @@
         return JSON.parse(data)
       })
       .catch(error => {
-        alert(`Something went wrong while loading, please try again. ${ error }`)
+        alert(`Something went wrong while loading, please try again. ${error}`)
       })
   }
 
@@ -182,16 +184,16 @@
         return JSON.parse(data)
       })
       .catch(error => {
-        alert(`Something went wrong while loading, please try again. ${ error }`)
+        alert(`Something went wrong while loading, please try again. ${error}`)
       })
   }
 </script>
 
 <svelte:window bind:innerWidth={$screenWidth} />
 
-<div class="editor" class:editor--empty={!$currentProjectUUID}>
+<div class="editor" class:editor--empty={!$currentProjectUUID} class:editor--no-wiki={$settings["hide-wiki-sidebar"]}>
   <div class="editor__top">
-    <button class="w-auto {$isMobile ? 'mr-1/4' : 'mr-1/2'}" on:click={() => $currentProjectUUID = null}>
+    <button class="w-auto {$isMobile ? "mr-1/4" : "mr-1/2"}" on:click={() => $currentProjectUUID = null}>
       <Logo />
     </button>
 
@@ -233,7 +235,11 @@
         There could be more elegant solutions that use the CodeMirror API to update extensions,
         but this is the far more simple and readable solution. -->
         {#key $settings["word-wrap"]}
-          <CodeMirror on:search={({ detail }) => fetchArticle(`wiki/search/${ detail }`, true)} />
+          <CodeMirror on:search={async({ detail }) => {
+            currentSidebarTab = "wiki"
+            await tick()
+            fetchArticle(`wiki/search/${detail}`, true)
+          }} />
         {/key}
 
         {#if isCurrentItemInherentlyHidden}
@@ -268,17 +274,28 @@
     </div>
   {:else if loading}
     <div class="fullscreen-overlay">
-      <div class="spinner"></div>
+      <div class="spinner"/>
     </div>
   {:else}
     <Empty />
   {/if}
 
-  <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
-    <EditorWiki bind:fetchArticle />
+  {#if !$settings["hide-wiki-sidebar"]}
+    <div class="editor__popout editor__scrollable" in:fly={$isMobile ? { y: 10, duration: 200 } : { x: 10, duration: 200 }}>
+      <div class="tabs bg-transparent p-0 mb-1/4">
+        <button class="tabs__item pt-1/8 pb-1/8 m-0 mr-1/4" class:tabs__item--active={currentSidebarTab === "wiki"} on:click={() => currentSidebarTab = "wiki"}>Wiki</button>
+        <button class="tabs__item pt-1/8 pb-1/8 m-0" class:tabs__item--active={currentSidebarTab === "logs"} on:click={() => currentSidebarTab = "logs"}>Live inspector logs</button>
+      </div>
 
-    <DragHandle key="popout-width" currentSize=300 align="left" />
-  </div>
+      {#if currentSidebarTab === "wiki"}
+        <EditorWiki bind:fetchArticle />
+      {:else}
+        <Logs />
+      {/if}
+
+      <DragHandle key="popout-width" currentSize=300 align="left" />
+    </div>
+  {/if}
 
   {#if $recoveredProject}
     <ProjectRecovery />

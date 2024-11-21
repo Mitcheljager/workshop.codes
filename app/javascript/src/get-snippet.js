@@ -1,5 +1,5 @@
-import FetchRails from "./fetch-rails"
-import { initiateIde } from "./ide"
+import FetchRails from "@src/fetch-rails"
+import { initiateIde } from "@src/ide"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='load-snippet']")
@@ -35,6 +35,12 @@ function loadSnippet(event, element) {
     })
     .catch(error => {
       console.error(error)
-      ideElement.innerHTML = `Failed to load Snippet <br>${ error }`
+      ideElement.innerHTML = ""
+
+      const errorElement = document.createElement("div")
+      errorElement.innerText = error
+
+      ideElement.innerText = "Failed to load Snippet"
+      ideElement.insertAdjacentElement("beforeend", errorElement)
     })
 }

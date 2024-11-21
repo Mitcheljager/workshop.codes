@@ -1,7 +1,7 @@
 class FilterController < ApplicationController
   def index
     # REFACTOR: Make this set of attributes have a single source of accessible truth
-    filtered_params = params.permit([:category, :code, :hero, :map, :from, :to, :sort, :expired, :author, :players, :language, :search, :page])
+    filtered_params = params.permit([:category, :code, :hero, :map, :sort, :expired, :author, :players, :search, :page])
     respond_to do |format|
       format.html   { redirect_to filter_path(filtered_params), status: :moved_permanently }
       format.js     { head :moved_permanently, location: filter_path(params: filtered_params, format: :js) }

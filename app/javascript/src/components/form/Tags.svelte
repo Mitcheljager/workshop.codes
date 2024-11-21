@@ -17,7 +17,7 @@
   export let useAutoComplete = false
   export let minCharsAutoComplete = 2
   export let fillValues = []
-  export let fetchAutoCompleteValues = value => {
+  export let fetchAutoCompleteValues = () => {
     return new Promise(resolve => resolve([]))
   }
 
@@ -161,60 +161,58 @@
   }
 </script>
 
-
-
 <div class="form-tags__wrapper form-input mt-1/4">
-  { #each values as value, i (value) }
+  {#each values as value, i (value)}
     <span animate:flip={{ duration: 100 }} class="form-tags__tag">
-      { value }
+      {value}
 
       <button
         class="form-tags__remove-tag"
-        on:click|preventDefault={ () => removeTag(i) }>
+        on:click|preventDefault={() => removeTag(i)}>
         &#215;
       </button>
     </span>
-  { /each }
+  {/each}
 
   <input
     type="text"
-    bind:this={ inputElem }
-    bind:value={ input }
-    on:input={ parseInput }
-    on:keydown={ keydown }
-    { readOnly }
-    { placeholder }
+    bind:this={inputElem}
+    bind:value={input}
+    on:input={parseInput}
+    on:keydown={keydown}
+    {readOnly}
+    {placeholder}
     class="form-tags__input helper-input" />
 
   <input
-    id="{prefix}_{ name }"
-    name="{prefix}[{ name }]"
-    value={ hidden ? null : values }
+    id="{prefix}_{name}"
+    name="{prefix}[{name}]"
+    value={hidden ? null : values}
     type="hidden" />
 </div>
 
-{ #if useAutoComplete && !waiting && input.length >= minCharsAutoComplete }
+{#if useAutoComplete && !waiting && input.length >= minCharsAutoComplete}
   <div class="form-tags-autocomplete-results__anchor">
     <ul bind:this={resultsList} class="form-tags-autocomplete-results">
-      { #await autoCompletePromise }
+      {#await autoCompletePromise}
         <li class="list-element"><strong class="m-0">Searching...</strong></li>
-      { :then autoCompleteValues }
-        { #if autoCompleteValues.length }
-          { #each autoCompleteValues.slice(0, 5) as result, index }
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
+      {:then autoCompleteValues}
+        {#if autoCompleteValues.length}
+          {#each autoCompleteValues.slice(0, 5) as result, index}
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
             <li
               class="list-element tag-item"
               tabindex="-1"
-              on:keydown={ (event) => navAutoComplete(event, index, result.label, autoCompleteValues.length) }
-              on:click={ () => addTag(result.label) }>
+              on:keydown={(event) => navAutoComplete(event, index, result.label, autoCompleteValues.length)}
+              on:click={() => addTag(result.label)}>
 
-              { @html result.html }
+              {@html result.html}
             </li>
-          { /each }
-        { :else }
+          {/each}
+        {:else}
           <li class="list-element"><em>No results on Workshop.codes, but you can still add the code.</em></li>
-        { /if }
-      { :catch error }
+        {/if}
+      {:catch error}
         <li class="list-element">
           <strong class="m-0">
             Something went wrong. Try again later.
@@ -222,9 +220,9 @@
 
           <br />
 
-          <span class="m-0"><small>{ error }</small></span>
+          <span class="m-0"><small>{error}</small></span>
         </li>
-      { /await }
+      {/await}
     </ul>
   </div>
-{ /if }
+{/if}

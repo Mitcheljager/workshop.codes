@@ -1,11 +1,11 @@
 <script>
   import { fly, slide } from "svelte/transition"
   import { onMount, tick } from "svelte"
-  import { escapeable } from "../actions/escapeable"
-  import { outsideClick } from "../actions/outsideClick"
-  import { setCssVariable } from "../../utils/setCssVariable"
-  import { settings, isMobile } from "../../stores/editor"
-  import Cogs from "../icon/Cogs.svelte"
+  import { escapeable } from "@components/actions/escapeable"
+  import { outsideClick } from "@components/actions/outsideClick"
+  import { setCssVariable } from "@utils/setCssVariable"
+  import { settings, isMobile } from "@stores/editor"
+  import Cogs from "@components/icon/Cogs.svelte"
 
   let mounted = false
   let active = false
@@ -64,7 +64,7 @@
       transition:fly={{ duration: 150, y: 20 }}
       use:escapeable on:escape={() => active = false}
       class="dropdown__content block p-1/4"
-      style="width: 300px; right: { isMobile ? -70 : 0 }px">
+      style="width: 300px; right: {isMobile ? -70 : 0}px">
 
       <h5 class="mt-0 mb-1/8">Settings</h5>
 
@@ -94,7 +94,18 @@
           Insert a semicolon at the end of the line when autocompleting actions.
         </div>
       </div>
-      
+
+      <div class="checkbox tooltip mt-1/8">
+        <input id="hide-wiki-sidebar" type="checkbox" bind:checked={$settings["hide-wiki-sidebar"]} />
+        <label for="hide-wiki-sidebar">
+          Hide wiki sidebar
+        </label>
+
+        <div class="tooltip__content bg-darker">
+          Hide the wiki sidebar from view. It will not appear when using alt+click on a keyword.
+        </div>
+      </div>
+
       <div class="checkbox tooltip mt-1/8">
         <input id="autocomplete-parameter-objects" type="checkbox" bind:checked={$settings["autocomplete-parameter-objects"]} />
         <label for="autocomplete-parameter-objects">
@@ -148,7 +159,7 @@
         <input type="range" min=10 max=18 step=1 class="range" bind:value={$settings["editor-font-size"]} />
       </div>
 
-      <hr>
+      <hr/>
 
       <h5 class="mt-1/4 mb-1/8">Cursor</h5>
 
@@ -162,18 +173,18 @@
         <input type="range" min=1 max=10 step=1 class="range" bind:value={$settings["editor-cursor-width"]} />
       </div>
 
-      <hr>
+      <hr/>
 
       <h5 class="mt-1/4 mb-0">Syntax Highlighting</h5>
 
       {#each syntaxHighlight as color}
         <div class="form-group-inline mt-1/8">
           <label for="" class="text-base font-size nowrap">{color}</label>
-          <input type="color" class="color-input" bind:value={$settings[`color-${ color }`]} />
+          <input type="color" class="color-input" bind:value={$settings[`color-${color}`]} />
         </div>
       {/each}
 
-      <hr>
+      <hr/>
 
       <button class="button button--link button--small pb-0" on:click={resetToDefault}>Reset all to default</button>
     </div>

@@ -1,13 +1,13 @@
 <script>
   import { fly } from "svelte/transition"
-  import { currentProject, isSignedIn, isMobile, currentProjectUUID, modal } from "../../stores/editor"
-  import { Modal } from "../../constants/Modal"
-  import { outsideClick } from "../actions/outsideClick"
-  import Compiler from "./Compiler.svelte"
-  import Settings from "./Settings.svelte"
-  import Shortcuts from "./Shortcuts.svelte"
-  import Save from "./Save.svelte"
-  import ThreeDotMenu from "../icon/ThreeDotMenu.svelte"
+  import { currentProject, isSignedIn, isMobile, currentProjectUUID, modal } from "@stores/editor"
+  import { Modal } from "@constants/Modal"
+  import { outsideClick } from "@components/actions/outsideClick"
+  import Compiler from "@components/editor/Compiler.svelte"
+  import Settings from "@components/editor/Settings.svelte"
+  import Shortcuts from "@components/editor/Shortcuts.svelte"
+  import Save from "@components/editor/Save.svelte"
+  import ThreeDotMenu from "@components/icon/ThreeDotMenu.svelte"
 
   let mobileDropdown
   let showMobileDropdown = false
@@ -32,26 +32,19 @@
     <button class="button button--secondary button--square" on:click={() => modal.show(Modal.TranslationKeys)}>
       Translations
     </button>
-  {/if}
 
-  {#if $isSignedIn && $currentProject?.is_owner}
-    {#if !$isMobile}
+    {#if $currentProject?.is_owner}
       <button class="button button--secondary button--square" on:click={() => modal.show(Modal.ScriptImporter)}>
         Import Script
       </button>
     {/if}
-  {/if}
 
-  {#if !$isMobile}
     <Compiler />
-  {/if}
-
-  {#if $isMobile}
+  {:else}
     <div class="dropdown settings" bind:this={mobileDropdown} use:outsideClick on:outsideClick={() => showMobileDropdown = false}>
       <button
         class="button button--secondary button--square"
-        on:click|stopPropagation={() => showMobileDropdown = !showMobileDropdown}
-      >
+        on:click|stopPropagation={() => showMobileDropdown = !showMobileDropdown}>
         <ThreeDotMenu />
       </button>
 
@@ -61,7 +54,7 @@
             Translations
           </button>
 
-          {#if $isSignedIn && $currentProject?.is_owner}
+          {#if $currentProject?.is_owner}
             <button class="dropdown__item" on:click={() => modal.show(Modal.ScriptImporter)}>
               Import Script
             </button>

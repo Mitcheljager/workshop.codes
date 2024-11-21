@@ -7,7 +7,7 @@ export default function debounce(func, wait, immediate) {
       timeout = null
       if (!immediate) func.apply(context, args)
     }
-  
+
     const callNow = immediate && !timeout
 
     clearTimeout(timeout)

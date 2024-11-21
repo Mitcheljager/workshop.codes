@@ -1,0 +1,111 @@
+@use "sass:math";
+
+.editor-item {
+  appearance: none;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: $font-stack;
+  font-size: $font-size-base;
+  text-align: left;
+
+  &:focus-visible {
+    outline: 2px inset $text-color-lightest;
+    outline-offset: -2px;
+    box-shadow: none;
+  }
+
+  &:not(.editor-folder)::before {
+    content: "•";
+    display: block;
+    position: absolute;
+    top: 0.25rem;
+    left: 0.45rem;
+    height: 1.5rem;
+    width: 1.05rem;
+    color: darken($gray, 30%);
+  }
+
+  > span {
+    display: block;
+    padding: 0.25rem 0.25rem 0.25rem math.div($margin, 3);
+    white-space: nowrap;
+
+    &:hover {
+      background: darken($bg-dark, 7.5%);
+      box-shadow: -100px 0 0 darken($bg-dark, 7.5%);
+
+      input {
+        color: $text-color-lightest;
+      }
+    }
+
+    input {
+      color: $text-color;
+      pointer-events: none;
+    }
+  }
+
+  &--active {
+    &:not(.editor-folder)::before {
+      color: $text-color-light;
+    }
+
+    > span {
+      background: darken($bg-dark, 10%);
+      box-shadow: -100px 0 0 darken($bg-dark, 10%);
+
+      input {
+        color: $text-color-lightest;
+        pointer-events: all;
+      }
+    }
+  }
+
+  &--hidden {
+    > span {
+      opacity: 0.5;
+
+      input {
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+.editor-item__actions {
+  display: none;
+  align-items: center;
+  gap: 0.1rem;
+  position: absolute;
+  right: 0;
+  top: 0.25rem;
+  background: darken($bg-dark, 7.5%);
+  z-index: 1;
+
+  .editor-item:hover > & {
+    display: flex;
+  }
+
+  button {
+    padding: 0.1rem 0.15rem;
+
+    &:hover {
+      filter: brightness(1.25);
+    }
+
+    &.inactive {
+      opacity: 0.5;
+    }
+
+    svg {
+      display: block;
+      height: 1rem;
+      width: 1rem;
+      fill: currentColor;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 <script>
   import { fly } from "svelte/transition"
-  import { compile } from "../../utils/compiler/compile"
-  import { copyValueToClipboard } from "../../copy"
+  import { compile } from "@utils/compiler/compile"
+  import { copyValueToClipboard } from "@src/copy"
 
   export let inline = false
 
@@ -19,7 +19,7 @@
         copyToClipboard(compiled)
       }, 150)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       alert(error)
       compiling = false
     }

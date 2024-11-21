@@ -1,5 +1,5 @@
-import { getClosingBracket, replaceBetween, splitArgumentsString } from "../parse"
-import { getFirstParameterObject } from "./parameterObjects"
+import { getClosingBracket, replaceBetween, splitArgumentsString } from "@utils/parse"
+import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 
 export function getMixins(joinedItems) {
   let mixins = joinedItems.match(/(?<=@mixin\s)[^\s\(]+/g)
@@ -22,14 +22,13 @@ export function extractAndInsertMixins(joinedItems) {
   let match
   while ((match = mixinRegex.exec(joinedItems)) != null) {
     let closing = getClosingBracket(joinedItems, "{", "}", match.index)
-    if (closing < 0) {
-      closing = joinedItems.length
-    }
+    if (closing < 0) closing = joinedItems.length
+
     const content = joinedItems.slice(match.index, closing)
     const name = content.match(/(?<=@mixin\s)(\w+)/)?.[0]
 
     if (!name) throw new Error("Mixin is missing a name")
-    if (mixins[name]) throw new Error(`Mixin "${ name }" is already defined`)
+    if (mixins[name]) throw new Error(`Mixin "${name}" is already defined`)
 
     const firstOpenBracket = content.indexOf("{")
     const firstOpenParen = content.indexOf("(")
@@ -48,7 +47,7 @@ export function extractAndInsertMixins(joinedItems) {
 
     const mixin = content.slice(firstOpenBracket + 1, closing)?.trim()
 
-    if (mixin.includes(`@include ${ name }`)) throw new Error("Can not include a mixin in itself")
+    if (mixin.includes(`@include ${name}`)) throw new Error("Can not include a mixin in itself")
 
     mixins[name] = {
       content: mixin,
@@ -65,20 +64,22 @@ export function extractAndInsertMixins(joinedItems) {
   while (joinedItems.indexOf("@include") != -1) {
     // Get arguments
     const index = joinedItems.indexOf("@include")
-    let closing = getClosingBracket(joinedItems, "(", ")", index + 1)
-    if (closing < 0) closing = joinedItems.length
+    const closing = getClosingBracket(joinedItems, "(", ")", index + 1)
+
+    if (closing < 0) throw new Error("Mixin @include was not closed properly")
+
     const full = joinedItems.slice(index, closing + 1)
     const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
     const mixin = mixins[name]
     const parameterObjectGiven = getFirstParameterObject(full)?.given
 
-    if (!mixin) throw new Error(`Included a mixin that was not specified: "${ name }"`)
+    if (!mixin) throw new Error(`Included a mixin that was not specified: "${name}"`)
 
     const argumentsOpeningParen = full.indexOf("(")
     const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
-    if (argumentsClosingParen < 0) {
-      continue
-    }
+
+    if (argumentsClosingParen < 0) continue
+
     const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
     let splitArguments = splitArgumentsString(argumentsString) || []
 

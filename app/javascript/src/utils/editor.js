@@ -1,5 +1,5 @@
-import { currentItem, items, openFolders, editorStates } from "../stores/editor"
-import { defaultLanguage, selectedLanguages, translationKeys } from "../stores/translationKeys"
+import { currentItem, items, openFolders, editorStates } from "@stores/editor"
+import { defaultLanguage, selectedLanguages, translationKeys } from "@stores/translationKeys"
 import { get } from "svelte/store"
 
 export function createNewItem(name, content, position = 9999, type = "item") {
@@ -49,7 +49,7 @@ export function duplicateItem(item, newParent = null) {
     return i.name.match(/\(Copy(?: \d+)?\)/g)
   })?.length
 
-  const copyString = ` (Copy${ itemCount ? ` ${ itemCount + 1 }` : "" })`
+  const copyString = ` (Copy${itemCount ? ` ${itemCount + 1}` : ""})`
   const name = newParent ? item.name : (item.name.replace(/\s\(Copy(?: \d+)?\)/g, "") + copyString)
   const newItem = createNewItem(name, item.content, item.position, item.type)
   newItem.parent = newParent || item.parent
@@ -105,7 +105,7 @@ export async function updateStateForId(id, insert) {
 export function toggleFolderState(item, state, set = true) {
   if (item?.type != "folder") return
 
-  if (set) localStorage.setItem(`folder_expanded_${ item.id }`, state)
+  if (set) localStorage.setItem(`folder_expanded_${item.id}`, state)
 
   if (state) openFolders.set([...get(openFolders), item.id])
   else openFolders.set([...get(openFolders).filter(f => f != item.id)])

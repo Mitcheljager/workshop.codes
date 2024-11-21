@@ -11,18 +11,18 @@ export function bind() {
   document.body.removeAndAddEventListener("keydown", closeModalOnKeyDown)
 }
 
-function showModal(event) {
-  const modal = document.querySelector(`[data-modal="${ this.dataset.target }"]`)
+function showModal() {
+  const modal = document.querySelector(`[data-modal="${this.dataset.target}"]`)
 
   if (!modal) return
 
   modal.style.display = "flex"
 
-  document.body.style.borderRight = `${ getScrollbarWidth() }px solid transparent`
+  document.body.style.borderRight = `${getScrollbarWidth()}px solid transparent`
   document.body.style.overflowY = "hidden"
 }
 
-export function closeModal(event) {
+export function closeModal() {
   const activeModal = document.querySelector(".modal:not([style*='none'])")
 
   if (!activeModal) return

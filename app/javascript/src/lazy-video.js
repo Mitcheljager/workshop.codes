@@ -1,5 +1,5 @@
-export function bind() {
-  const elements = document.querySelectorAll("[data-role~='lazy-video']")
+export function bind(target = document) {
+  const elements = target.querySelectorAll("[data-role~='lazy-video']")
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {

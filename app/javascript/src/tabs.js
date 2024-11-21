@@ -1,4 +1,4 @@
-import { carousel, setCarousel } from "./carousel"
+import { carousel, setCarousel } from "@src/carousel"
 
 export function bind() {
   const elements = document.querySelectorAll("[data-action~='set-tab']")
@@ -14,15 +14,15 @@ function setTab(event) {
   const target = this.dataset.target
   const parentElement = this.closest("[data-role~='tabs']")
 
-  const tabElement = this.classList.contains("tabs__item") ? this : document.querySelector(`.tabs__item[data-target~='${ target }']`)
+  const tabElement = this.classList.contains("tabs__item") ? this : document.querySelector(`.tabs__item[data-target~='${target}']`)
 
   setActiveTab(tabElement, parentElement)
   revealTab(target, parentElement, scroll)
   if (this.dataset.action.includes("scroll")) scrollToElement(parentElement)
 }
 
-function revealTab(target, parentElement, scroll) {
-  const targetElement = document.querySelector(`[data-tab~='${ target }']`)
+function revealTab(target, parentElement) {
+  const targetElement = document.querySelector(`[data-tab~='${target}']`)
   const tabElements = parentElement.querySelectorAll(".tabs-content")
 
   const activeElement = Array.from(tabElements).find(element => {

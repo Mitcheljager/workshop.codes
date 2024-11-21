@@ -1,5 +1,5 @@
-import debounce from "../debounce"
-import FetchRails from "../fetch-rails"
+import debounce from "@src/debounce"
+import FetchRails from "@src/fetch-rails"
 
 export function bind() {
   const element = document.querySelector("[data-role='wiki-search']")
@@ -10,35 +10,38 @@ export function bind() {
   element.addEventListener("input", searchWiki)
 }
 
-const searchWiki = debounce((event) => {
+const searchWiki = debounce(() => {
   const element = document.querySelector("[data-role='wiki-search']")
   if (!element.value) return
 
   const resultsElement = document.querySelector("[data-role='wiki-search-results']")
 
   resultsElement.innerHTML = "Searching..."
+  resultsElement.classList.add("search__results--empty")
   const url = resultsElement.dataset.url.replace("query", element.value) + ".json"
 
   new FetchRails(url).get()
     .then(data => {
       setWikiSearchResults(JSON.parse(data))
     })
-}, 500)
+}, 250)
 
 function setWikiSearchResults(data) {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']")
-  resultsElement.innerHTML = ""
 
   if (!data.length) {
-    resultsElement.innerText = "No results found"
+    resultsElement.innerHTML = "No results found"
     return
   }
+
+  resultsElement.classList.remove("search__results--empty")
+  resultsElement.innerHTML = ""
 
   data.forEach(item => {
     const itemElement = document.createElement("a")
     itemElement.classList.add("search__item")
     itemElement.innerText = item.title
-    itemElement.href = `/wiki/articles/${ decodeURIComponent(item.slug) }`
+    itemElement.href = `/wiki/articles/${decodeURIComponent(item.slug)}`
 
     const categoryElement = document.createElement("span")
     categoryElement.classList.add("search__item-category")

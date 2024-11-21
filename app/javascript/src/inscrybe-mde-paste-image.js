@@ -1,6 +1,6 @@
-import Uploader from "./uploader"
-import FetchRails from "./fetch-rails"
-import { addAlertError } from "./lib/alerts"
+import Uploader from "@src/uploader"
+import FetchRails from "@src/fetch-rails"
+import { addAlertError } from "@src/lib/alerts"
 
 export default class InscrybeInsertImage {
   constructor(event, editor) {
@@ -65,15 +65,15 @@ export default class InscrybeInsertImage {
         )
 
         ctx.canvas.toBlob(blob => {
-          const filename =  Math.random().toString(36).substring(2, 15) + ".jpeg"
+          const filename =  Math.random().toString(36).substring(2, 15) + ".webp"
           const renderedImage = new File([blob], filename, {
-            type: "image/jpeg",
+            type: "image/webp",
             quality: 0.95,
             lastModified: Date.now()
           })
 
           this.upload(renderedImage)
-        }, "image/jpeg", 0.95)
+        }, "image/webp", 0.95)
       }
     }
 
@@ -113,7 +113,7 @@ export default class InscrybeInsertImage {
         clearInterval(interval)
 
         if (uploader.progress == 100) {
-          new FetchRails(`/active_storage_blob_variant_url/${ uploader.blob.key }`)
+          new FetchRails(`/active_storage_blob_variant_url/${uploader.blob.key}`)
             .get().then(data => this.replaceMarkerWithImage(randomId, data))
             .catch(error => alert(error))
         }
@@ -139,7 +139,7 @@ export default class InscrybeInsertImage {
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)
-    this.editor.replaceSelection(`![](${ url })`)
+    this.editor.replaceSelection(`![](${url})`)
 
     this.editor.setSelection(cursorPosition, cursorPosition)
 

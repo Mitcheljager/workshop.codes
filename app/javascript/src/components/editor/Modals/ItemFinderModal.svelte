@@ -1,8 +1,8 @@
 <script>
-  import Modal from "./Modal.svelte"
-  import { items, modal } from "../../../stores/editor"
-  import { getItemById, setCurrentItemById } from "../../../utils/editor"
-  import { replaceBetween } from "../../../utils/parse"
+  import Modal from "@components/editor/Modals/Modal.svelte"
+  import { items, modal } from "@stores/editor"
+  import { getItemById, setCurrentItemById } from "@utils/editor"
+  import { replaceBetween } from "@utils/parse"
   import { onMount, tick } from "svelte"
 
   let value = ""
@@ -35,7 +35,7 @@
 
   function highlightString(string, from) {
     const subString = string.substring(from, from + value.length)
-    return replaceBetween(string,  `<mark>${ subString }</mark>`, from, from + value.length)
+    return replaceBetween(string,  `<mark>${subString}</mark>`, from, from + value.length)
   }
 
   function getParentsString(id) {
@@ -66,6 +66,8 @@
   }
 
   function keydown(event) {
+    if (!matches?.length) return
+
     if (event.code === "Enter") selectItem(matches[selected].id)
     if (event.code === "ArrowDown") setSelected(1)
     if (event.code === "ArrowUp") setSelected(-1)

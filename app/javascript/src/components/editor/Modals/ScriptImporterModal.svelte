@@ -1,9 +1,9 @@
 <script>
-  import Modal from "./Modal.svelte"
-  import { items, modal } from "../../../stores/editor"
-  import { createNewItem } from "../../../utils/editor"
-  import { getClosingBracket, getSettings } from "../../../utils/parse"
-  import { submittable } from "../../actions/submittable"
+  import Modal from "@components/editor/Modals/Modal.svelte"
+  import { items, modal } from "@stores/editor"
+  import { createNewItem } from "@utils/editor"
+  import { getClosingBracket, getSettings } from "@utils/parse"
+  import { submittable } from "@components/actions/submittable"
   import { onMount } from "svelte"
 
   let replaceScript = false
@@ -77,7 +77,7 @@
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
-      bind:checked={replaceScript}>
+      bind:checked={replaceScript}/>
 
     <label
       class="switch-checkbox__label"

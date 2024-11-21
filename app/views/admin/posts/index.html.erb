@@ -27,8 +27,8 @@
     <th><%= link_to "Imp", admin_posts_path(order: "impressions_count") %></th>
     <th><%= link_to "Hot", admin_posts_path(order: "hotness") %></th>
     <th><%= link_to "Top", admin_posts_path(order: "top_hotness") %></th>
+    <th><%= link_to "Com", admin_posts_path(order: "comments_count") %></th>
     <th>Rev</th>
-    <th>Com</th>
     <th>Img?</th>
     <th>Email?</th>
     <th>Snip?</th>
@@ -49,8 +49,8 @@
       <td><%= post.impressions_count %></td>
       <td><%= post.hotness %></td>
       <td><%= post.top_hotness %></td>
-      <td><%= post.revisions.size %></td>
       <td><%= post.comments.size %></td>
+      <td><%= post.revisions.size %></td>
       <td><%= "✔" if post.images.any? %></td>
       <td><%= "✔" if post.email_notifications.any? %></td>
       <td><%= "✔" if post.snippet.present? %></td>

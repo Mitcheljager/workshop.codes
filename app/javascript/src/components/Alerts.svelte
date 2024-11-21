@@ -1,5 +1,5 @@
 <script>
-  import Alert from "./Alert.svelte"
+  import Alert from "@components/Alert.svelte"
   import { slide } from "svelte/transition"
 
   // When alerts are passed from rails they are passed as a string
@@ -8,7 +8,7 @@
 
   let alerts = []
 
-  $: if (initialAlerts) JSON.parse(initialAlerts)?.forEach(([type, text]) => add({ text, type: `alert--${ type }` }))
+  $: if (initialAlerts) JSON.parse(initialAlerts)?.forEach(([type, text]) => add({ text, type: `alert--${type}` }))
 
   function add(alert) {
     alerts = [...alerts, { ...alert, key: Math.random() }]

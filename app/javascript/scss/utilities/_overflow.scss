@@ -1,0 +1,13 @@
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+
+  @include styled-scrollbar;
+}
+
+.overflow-visible {
+  overflow: visible;
+}

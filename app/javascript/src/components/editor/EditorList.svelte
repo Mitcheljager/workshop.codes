@@ -1,8 +1,8 @@
 <script>
   import { Sortable, MultiDrag } from "sortablejs"
-  import EditorItem from "./EditorItem.svelte"
-  import EditorFolder from "./EditorFolder.svelte"
-  import { items, sortedItems } from "../../stores/editor.js"
+  import EditorItem from "@components/editor/EditorItem.svelte"
+  import EditorFolder from "@components/editor/EditorFolder.svelte"
+  import { items, sortedItems } from "@stores/editor.js"
   import { onMount } from "svelte"
   import { flip } from "svelte/animate"
 
@@ -10,7 +10,6 @@
 
   let element
   let isHoldingCtrl
-  let sortable
 
   $: itemsInParent = getItemsInParent($items)
 
@@ -19,7 +18,7 @@
       Sortable.mount(new MultiDrag())
     } catch {}
 
-    sortable = new Sortable(element, {
+    new Sortable(element, {
       group: "items",
       animation: 100,
       swapTreshhold: 0.25,

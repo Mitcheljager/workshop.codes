@@ -1,8 +1,8 @@
 <script>
-  import { items, currentItem, editorStates } from "../../stores/editor"
-  import { getItemById, setCurrentItemById, updateItem } from "../../utils/editor"
-  import { replaceBetween } from "../../utils/parse"
-  import { escapeable } from "../actions/escapeable"
+  import { items, currentItem, editorStates } from "@stores/editor"
+  import { getItemById, setCurrentItemById, updateItem } from "@utils/editor"
+  import { replaceBetween } from "@utils/parse"
+  import { escapeable } from "@components/actions/escapeable"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
 
@@ -19,7 +19,7 @@
   $: if (active) focusInput()
   $: if (value || replace) message = ""
   $: occurrences = itemMatches.reduce((p, c) => p + c.contentMatches?.length, 0)
-  $: occurrencesString = `${ occurrences } occurrence${ occurrences > 1 ? "s" : "" } in ${ itemMatches.length } item${ itemMatches.length > 1 ? "s" : "" }`
+  $: occurrencesString = `${occurrences} occurrence${occurrences > 1 ? "s" : ""} in ${itemMatches.length} item${itemMatches.length > 1 ? "s" : ""}`
 
   function searchItems() {
     if (!active) return
@@ -74,7 +74,7 @@
       updateItem(item)
     })
 
-    message = `Replaced ${ occurrencesString }`
+    message = `Replaced ${occurrencesString}`
 
     searchItems()
   }
@@ -82,9 +82,9 @@
   function highlightString(string) {
     const index = string.indexOf(value)
     const subString = string.substring(index, index + value.length)
-    let elementString = `<mark>${ subString }</mark>`
+    let elementString = `<mark>${subString}</mark>`
 
-    if (replace) elementString += `<mark class="text-lightest"> ⇢ ${ replace }</mark>`
+    if (replace) elementString += `<mark class="text-lightest"> ⇢ ${replace}</mark>`
 
     return replaceBetween(string, elementString, index, index + value.length)
   }

@@ -1,0 +1,211 @@
+.profile {
+  @include media-min(sm) {
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-gap: $margin * 0.5;
+  }
+
+  aside {
+    margin-bottom: $margin;
+
+    @include media-min(sm) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.profile__action {
+  display: block;
+  margin: .25rem 0;
+  font-weight: bold;
+  color: $text-color;
+  font-family: $font-stack-alt;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  @include hover-stack {
+    text-decoration: underline;
+  }
+
+  @include media-min(sm) {
+    margin: .5rem 0;
+    font-size: 18px;
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &--active {
+    color: $text-color-lightest;
+  }
+}
+
+.profile-image {
+  position: relative;
+  display: block;
+  flex: 0 0 140px;
+  height: 140px;
+  width: 140px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: darken($bg-dark, 5%);
+  overflow: hidden;
+  z-index: 1;
+
+  @include media-min(sm) {
+    margin: 0 $margin 0 0;
+  }
+
+  @include hover-stack {
+    filter: brightness(1.15);
+  }
+
+  &--empty {
+    background-image: url("/images/snowball-face.png");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .profile-banner--small & {
+    flex: 0 0 60px;
+    height: 60px;
+    width: 60px;
+    margin: 0 $margin * 0.25 0 0;
+    background-size: 30px 30px;
+    box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.profile-banner {
+  align-items: center;
+  text-align: center;
+  overflow-wrap: break-word;
+
+  @include media-min(sm) {
+    display: flex;
+    text-align: left;
+  }
+
+  &--small {
+    display: flex;
+    flex-direction: row;
+    padding: $margin * 0.25;
+    border-radius: $border-radius;
+    margin: 0 0 $margin * 0.25;
+    background: $bg-dark;
+    text-align: left;
+  }
+
+  p {
+    margin: 0;
+
+    + p {
+      margin-top: 1em;
+    }
+  }
+}
+
+.profile-banner__content {
+  position: relative;
+
+  @include media-min(sm) {
+    max-width: map-get($media-min-widths, xs);
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.profile-banner__title {
+  display: block;
+  margin: $margin * 0.25 0 .1em;
+  color: $text-color-lightest;
+  font-weight: bold;
+  font-size: 32px;
+  text-decoration: none;
+  line-height: 1em;
+
+  @include media-min(sm) {
+    margin-top: 0;
+  }
+
+  .profile-banner--small & {
+    margin-top: 0;
+    font-size: 21px;
+  }
+
+  @include hover-stack {
+    color: white;
+
+    .profile-banner__verified path {
+      fill: $text-color-dark;
+    }
+  }
+}
+
+.profile-banner__verified {
+  display: inline-block;
+  height: .7em;
+  width: .7em;
+
+  path {
+    fill: lighten($bg-dark, 15%);
+  }
+}
+
+.profile-banner__action {
+  word-break: break-all;
+}
+
+.profile-analytics {
+  width: 100%;
+
+  @include media-min(md) {
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-gap: $margin * 0.5;
+    height: 440px;
+  }
+}
+
+.profile-analytics__cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .card {
+    margin-bottom: $margin * 0.25;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.profile-blurred-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: min(280px, 100%);
+  background: lighten($bg-dark, 10%);
+  filter: blur(50px);
+  opacity: 0.2;
+  z-index: 0;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}

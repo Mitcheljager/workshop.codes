@@ -1,0 +1,21 @@
+@use "sass:math";
+
+.footer {
+  font-size: 12px;
+  margin-top: $margin * 0.5;
+  padding: math.div($margin, 6) 0;
+  border-top: 1px solid $border-color;
+
+  @include media-min(md) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a {
+    color: $text-color;
+  }
+
+  .large-fonts & {
+    font-size: 14px;
+  }
+}

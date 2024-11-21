@@ -1,7 +1,7 @@
-import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "../utils/parse"
-import { completionsMap, subroutinesMap, workshopConstants } from "../stores/editor"
+import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
+import { completionsMap, subroutinesMap, workshopConstants } from "@stores/editor"
 import { get } from "svelte/store"
-import { getFirstParameterObject } from "../utils/compiler/parameterObjects"
+import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 
 let diagnostics = []
 
@@ -136,21 +136,23 @@ function findIncorrectArgsLength(content) {
 
           if (!parameterObject) break
 
-          const invalidArgument = Object.keys(parameterObject.given).filter(i => i && !parameterObject.phraseParameters.includes(i))
+          const invalidArgument = Object.keys(parameterObject.given).filter(i => i && !parameterObject.phraseParameters.includes(i) && !i.startsWith("//"))
           if (invalidArgument?.length) {
-            message = `Argument(s) "${ invalidArgument.join(", ") }" are not valid for "${ name }"`
+            message = `Argument(s) "${invalidArgument.join(", ")}" are not valid for "${name}"`
             severity = "warning"
-          } else break
+          } else {
+            break
+          }
         } else {
           // Argument string is a regular list of arguments
           if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
           if (!item.args_min_length && splitContent.length == item.args_length) break
 
-          const expectedString = `${ item.args_min_length ? "Atleast" : "" } ${ item.args_min_length || item.args_length }`
-          const maxString = `${ item.args_min_length ? ` (${ item.args_length } max)` : "" }`
-          const givenString = `${ splitContent.length } given`
+          const expectedString = `${item.args_min_length ? "Atleast" : ""} ${item.args_min_length || item.args_length}`
+          const maxString = `${item.args_min_length ? ` (${item.args_length} max)` : ""}`
+          const givenString = `${splitContent.length} given`
 
-          message = `${ expectedString } Argument(s) expected${ maxString }, ${ givenString }`
+          message = `${expectedString} Argument(s) expected${maxString}, ${givenString}`
         }
 
       }
@@ -255,7 +257,7 @@ function checkTranslations(content) {
       const phrase = getPhraseFromPosition({ text: content, from: 0 }, lastParenAtIndex - 1)
       const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
       if (phrase?.text.includes("include")) return
-      if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${ phrase.text }" has no effect.`)
+      if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${phrase.text}" has no effect.`)
     } catch (error) {
       diagnostics.push({
         from: match.index,
@@ -279,7 +281,7 @@ function checkForLoops(content) {
       if (params[params.length - 1] !== ")") throw new Error("Missing closing parenthesis")
 
       const splitParams = params.split(/\s+/)
-      const toThroughIndex = splitParams.findIndex((s) => /to|through/.test(s))
+      const toThroughIndex = splitParams.findIndex((s) => /\b(to|through)\b/.test(s))
       if (toThroughIndex < 0) throw new Error("Either \"to\" or \"through\" are expected")
 
       if (
@@ -343,7 +345,7 @@ function findMissingSemicolons(content) {
       }
     }
 
-    if (content.slice(i, i+2) == "*/"){
+    if (content.slice(i, i + 2) == "*/") {
       inComment = true
       continue
     }
@@ -353,7 +355,7 @@ function findMissingSemicolons(content) {
       continue
     }
 
-    if (content.slice(i, i+5) == "rule("){
+    if (content.slice(i, i + 5) == "rule(") {
       inRule = true
       continue
     }
@@ -402,7 +404,7 @@ function findMissingSemicolons(content) {
           name: "Insert Semicolon",
           apply(view, from, to) {
             view.dispatch({
-              changes: { from, to, insert: `${ content[i - 1] };` }
+              changes: { from, to, insert: `${content[i - 1]};` }
             })
           }
         }]
@@ -513,7 +515,7 @@ function findConditionalsRegexErrors(content) {
           from,
           to,
           severity: "error",
-          message: `Invalid RegExp: ${ err }`
+          message: `Invalid RegExp: ${err}`
         })
       }
     } else {
@@ -526,7 +528,6 @@ function findConditionalsRegexErrors(content) {
     }
   }
 }
-
 
 function findEachLoopsWithInvalidIterables(content) {
   const constants = get(workshopConstants)
@@ -552,7 +553,7 @@ function findEachLoopsWithInvalidIterables(content) {
           from,
           to: from + constantFull.length,
           severity: "error",
-          message: `"${ constantName }" is not a known Workshop Constant`
+          message: `"${constantName}" is not a known Workshop Constant`
         })
       }
 
@@ -598,6 +599,8 @@ function findEventBlocksWithMissingArguments(content) {
       .map((s) => s.trim())
       .filter((s) => !!s)
 
+    if (!eventType) return
+
     const requiredEventArgs = eventTypeToArgumentsMap[eventType.toLowerCase()]
 
     if (requiredEventArgs && requiredEventArgs.length !== givenEventArgs.length) {
@@ -606,7 +609,7 @@ function findEventBlocksWithMissingArguments(content) {
         from: eventBlockStart,
         to: eventBlockStart + eventType.length,
         severity: "error",
-        message: `Events ${ eventType } require ${ requiredEventArgs.length } arguments, but you are missing the following: ${ missingArguments.join(", ") }`
+        message: `Events ${eventType} require ${requiredEventArgs.length} arguments, but you are missing the following: ${missingArguments.join(", ")}`
       })
     }
   }
@@ -628,7 +631,7 @@ function findUndefinedSubroutines(content) {
         from,
         to: from + subroutineName.length,
         severity: "error",
-        message: `There is no subroutine rule with name "${ subroutineName }"`
+        message: `There is no subroutine rule with name "${subroutineName}"`
       })
     }
   }

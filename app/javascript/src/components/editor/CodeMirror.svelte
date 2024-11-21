@@ -8,19 +8,20 @@
   import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
-  import { OWLanguage, highlightStyle } from "../../lib/OWLanguageLegacy"
-  import { OWLanguageLinter } from "../../lib/OWLanguageLinter"
-  import { parameterTooltip } from "../../lib/parameterTooltip"
-  import { extraCompletions } from "../../lib/extraCompletions"
-  import { codeActions } from "../../lib/codeActions"
-  import { transformParameterObjectsIntoPositionalParameters } from "../../lib/codeActionProviders/transformParameterObjectsIntoPositionalParameters"
-  import { foldBrackets } from "../../lib/foldBrackets"
-  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "../../stores/editor"
-  import { translationsMap } from "../../stores/translationKeys"
-  import { getPhraseFromPosition } from "../../utils/parse"
-  import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "../../utils/codemirror/indent"
+  import { OWLanguage, highlightStyle } from "@lib/OWLanguageLegacy"
+  import { OWLanguageLinter } from "@lib/OWLanguageLinter"
+  import { parameterTooltip } from "@lib/parameterTooltip"
+  import { extraCompletions } from "@lib/extraCompletions"
+  import { codeActions } from "@lib/codeActions"
+  import { transformParameterObjectsIntoPositionalParameters } from "@lib/codeActionProviders/transformParameterObjectsIntoPositionalParameters"
+  import { foldBrackets } from "@lib/foldBrackets"
+  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "@stores/editor"
+  import { translationsMap } from "@stores/translationKeys"
+  import { getPhraseFromPosition } from "@utils/parse"
+  import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"
   import { get } from "svelte/store"
-  import debounce from "../../debounce"
+  import { indentedLineWrap } from "@utils/codemirror/indentedLineWrap"
+  import debounce from "@src/debounce"
 
   const dispatch = createEventDispatcher()
   const updateItem = debounce(() => {
@@ -66,9 +67,10 @@
         linter(OWLanguageLinter),
         indentUnit.of("    "),
         keymap.of([
-          { key: "Tab", run: tabIndent },
-          { key: "Shift-Tab", run: tabIndent },
+          { key: "Tab", run: (view) => tabIndent(view, event) },
+          { key: "Shift-Tab", run: (view) => tabIndent(view, event)  },
           { key: "Enter", run: autoIndentOnEnter },
+          { key: "Shift-Enter", run: autoIndentOnEnter },
           { key: "Ctrl-Shift-z", run: redoAction }
         ]),
         EditorView.updateListener.of((transaction) => {
@@ -87,7 +89,7 @@
           transformParameterObjectsIntoPositionalParameters
         ]),
         foldBrackets(),
-        ...($settings["word-wrap"] ? [EditorView.lineWrapping] : [])
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : [])
       ]
     })
   }
@@ -264,4 +266,5 @@
   on:create-selection={({ detail }) => createSelection(detail)} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div bind:this={element} on:click={click}></div>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div bind:this={element} on:click={click}/>
