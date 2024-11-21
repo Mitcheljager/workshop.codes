@@ -12,21 +12,6 @@ RSpec.describe "Archived posts controller", type: :request do
   before do
     OmniAuth.config.test_mode = true
     Faker::UniqueGenerator.clear # Clear unique value tracker
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "maps.yml"))).and_return([
-      { "name" => "Hanamura", "type" => "Assault", "slug" => "hanamura" },
-      { "name" => "Paris", "type" => "Assault", "slug" => "paris" }
-    ])
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "heroes.yml"))).and_return([
-      { "name" => "Doomfist", "category" => "Tank" },
-      { "name" => "Sigma", "category" => "Tank" }
-    ])
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "categories.yml"))).and_return([
-      "Solo",
-      "Parkour"
-    ])
   end
 
   after do

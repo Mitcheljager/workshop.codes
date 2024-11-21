@@ -1,23 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Post, type: :model do
-  before do
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "maps.yml"))).and_return([
-      { "name" => "Hanamura", "type" => "Assault", "slug" => "hanamura" },
-      { "name" => "Paris", "type" => "Assault", "slug" => "paris" }
-    ])
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "heroes.yml"))).and_return([
-      { "name" => "Doomfist", "category" => "Tank" },
-      { "name" => "Sigma", "category" => "Tank" }
-    ])
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "categories.yml"))).and_return([
-      "Solo",
-      "Parkour"
-    ])
-  end
-
   context "associations" do
     it { should belong_to(:user) }
 

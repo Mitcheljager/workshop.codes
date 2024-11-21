@@ -16,21 +16,6 @@ RSpec.describe "AdminReports", type: :feature do
 
   before(:each) do
     sign_in_as(admin, "password")
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "maps.yml"))).and_return([
-      { "name" => "Hanamura", "type" => "Assault", "slug" => "hanamura" },
-      { "name" => "Paris", "type" => "Assault", "slug" => "paris" }
-    ])
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "heroes.yml"))).and_return([
-      { "name" => "Doomfist", "category" => "Tank" },
-      { "name" => "Sigma", "category" => "Tank" }
-    ])
-
-    allow(YAML).to receive(:safe_load).with(File.read(Rails.root.join("config/arrays", "categories.yml"))).and_return([
-      "Solo",
-      "Parkour"
-    ])
   end
 
   describe "access control" do
