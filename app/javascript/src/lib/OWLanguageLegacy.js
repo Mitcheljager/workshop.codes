@@ -81,8 +81,8 @@ function tokenBase(stream, state) {
     stream.next()
     stream.match("..")
 
-    if (ch == ":" || ch == ",") {
-      state.inObjectValue = ch == ":" && ch != ","
+    if (ch == ":" || ch == "," || ch == ";") {
+      state.inObjectValue = ch == ":" && ch != "," && ch != ";"
     }
 
     return "punctuation"
