@@ -146,7 +146,7 @@ GEM
       addressable
       matrix
       mini_mime (>= 0.1.3)
-      nokogiri (~> 1.11)
+      nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
@@ -481,8 +481,6 @@ GEM
     scout_apm (5.4.0)
       parser
     selenium-webdriver (4.7.1)
-      base64 (~> 0.2)
-      logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -527,9 +525,10 @@ GEM
     vite_rails (3.0.19)
       railties (>= 5.1, < 9)
       vite_ruby (~> 3.0, >= 3.2.2)
-    vite_ruby (3.9.0)
+    vite_ruby (3.9.1)
       dry-cli (>= 0.7, < 2)
       logger (~> 1.6)
+      mutex_m
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
     web-console (4.2.1)
@@ -537,10 +536,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.2.0)
+    webdrivers (5.3.1)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0)
+      selenium-webdriver (~> 4.0, < 4.11)
     websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
