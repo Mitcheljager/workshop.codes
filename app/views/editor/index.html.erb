@@ -2,7 +2,8 @@
 <% content_for :og_description, "The Workshop.codes Overwatch Workshop Script Editor enables editing your Workshop Script right from your browser using an intuitive and easy to use text based editor. Useful for new and experienced programmers!" %>
 <% content_for :og_summary_small, "true" %>
 
-<%= vite_typescript_tag "editor.ts", "data-turbolinks-track": "reload", defer: true %>
+<%= vite_stylesheet_tag "editor.scss", defer: true %>
+<%= vite_javascript_tag "editor.ts", "data-turbolinks-track": "reload", defer: true %>
 
 <div class="fullscreen-overlay">
   <div class="spinner"></div>

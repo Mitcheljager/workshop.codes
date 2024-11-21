@@ -7,15 +7,15 @@
 
 <div class="wiki-cards mt-1/1">
   <div class="wiki-card">
-    <h3 class="mt-0">Wiki categories</h3>
+    <h3 aria-level="2" class="mt-0">Wiki categories</h3>
     <%= render @categories.where(is_documentation: false) %>
 
-    <h3 class="mt-1/2">Workshop documentation</h3>
+    <h3 aria-level="2" class="mt-1/2">Workshop documentation</h3>
     <%= render @categories.where(is_documentation: true) %>
   </div>
 
   <div class="wiki-card">
-    <h3 class="mt-1/2 md:mt-0">Latest changes</h3>
+    <h3 aria-level="2" class="mt-1/2 md:mt-0">Latest changes</h3>
 
     <% @edits.each do |edit| %>
       <div class="wiki-card__item">

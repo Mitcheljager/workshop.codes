@@ -18,24 +18,25 @@ const searchWiki = debounce(() => {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']") as HTMLElement
 
   resultsElement.innerHTML = "Searching..."
-  const url = resultsElement.dataset.url?.replace("query", element.value) + ".json"
-
-  if (!url) throw new Error("No valid URL was provided for searchWiki")
+  resultsElement.classList.add("search__results--empty")
+  const url = resultsElement.dataset.url!.replace("query", element.value) + ".json"
 
   new FetchRails(url).get()
     .then(data => {
       setWikiSearchResults(JSON.parse(data))
     })
-}, 500)
+}, 250)
 
 function setWikiSearchResults(data: WikiArticle[]): void {
   const resultsElement = document.querySelector("[data-role='wiki-search-results']") as HTMLElement
-  resultsElement.innerHTML = ""
 
   if (!data.length) {
-    resultsElement.innerText = "No results found"
+    resultsElement.innerHTML = "No results found"
     return
   }
+
+  resultsElement.classList.remove("search__results--empty")
+  resultsElement.innerHTML = ""
 
   data.forEach((item: WikiArticle) => {
     const itemElement = document.createElement("a")

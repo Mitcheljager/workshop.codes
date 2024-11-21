@@ -1,5 +1,5 @@
-<% content_for :page_title, "#{ @post.title }" %>
-<% begin %><% content_for :og_image, "#{ rails_public_blob_url(@ordered_images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed) if @ordered_images.present? && @ordered_images.any? }" %><% rescue %><% end %>
+<% content_for :page_title, @post.title %>
+<% begin %><% content_for :og_image, rails_public_blob_url(@ordered_images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed) if @ordered_images.present? && @ordered_images.any? %><% rescue %><% end %>
 <% content_for :og_description, strip_tags(markdown(@post.description || "")).truncate(200).gsub("\n"," ") %>
 <% content_for :bg_size, "medium" %>
 
@@ -40,7 +40,6 @@
     <%= render "overwatch_2_indicator" if @post.overwatch_2_compatible? %>
     <%= render "current_user_blocks" if current_user == @post.user %>
     <%= render "expired" if @post.expired? %>
-
 
     <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs] do %>
       <%= tabs_content_tag("description", "", "mt-1/4") do %>

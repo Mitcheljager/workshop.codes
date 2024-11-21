@@ -1,12 +1,10 @@
-import noUiSlider from "nouislider"
-
 export function render(): void {
   const elements = Array.from(document.querySelectorAll("[data-role='num-player-slider']")) as noUiSlider.Instance[]
 
   elements.forEach(element => setSlider(element))
 }
 
-export function setSlider(element: noUiSlider.Instance): void {
+export async function setSlider(element: noUiSlider.Instance): Promise<void> {
   if (!element) return
 
   if (element.dataset.initialised === "true") destroySlider(element)
@@ -22,7 +20,7 @@ export function setSlider(element: noUiSlider.Instance): void {
     startMax = 0
   }
 
-  create(element, startMin, startMax)
+  await create(element, startMin, startMax)
 
   if (element.dataset.type == "post") element.noUiSlider.on("set", postOnSliderUpdate)
   if (element.dataset.type == "filter") element.noUiSlider.on("set", filterOnSliderUpdate)
@@ -30,7 +28,9 @@ export function setSlider(element: noUiSlider.Instance): void {
   element.dataset.initialised = "true"
 }
 
-export function create(element: noUiSlider.Instance, startMin: number, startMax: number): void {
+export async function create(element: noUiSlider.Instance, startMin: number, startMax: number): Promise<void> {
+  const noUiSlider = await import("nouislider")
+
   noUiSlider.create(element, {
     start: [startMin, startMax],
     connect: true,

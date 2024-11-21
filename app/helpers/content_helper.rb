@@ -7,7 +7,7 @@ module ContentHelper
     end
 
     def image(link, title, alt_text)
-      image_tag(link, title: title, alt: alt_text, loading: "lazy")
+      image_tag(link, title: title, alt: alt_text || "", loading: "lazy")
     end
 
     # loosely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
@@ -129,7 +129,7 @@ module ContentHelper
   def markdown_hero_icon(text)
     text.gsub /\[hero\s+(.*?)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 50, height: 50, loading: "lazy")
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 50, height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
@@ -137,7 +137,7 @@ module ContentHelper
   def markdown_ability_icon(text)
     text.gsub /\[ability\s+(.*?)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy")
+        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
