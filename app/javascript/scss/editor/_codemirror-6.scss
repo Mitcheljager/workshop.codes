@@ -247,6 +247,47 @@
     }
   }
 
+  .cm-trailingSpace {
+    position: relative;
+    background: transparent;
+
+    &:hover {
+      &::after {
+        display: block;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      height: 1px;
+      width: calc(100% - 4px);
+      background: repeating-linear-gradient(90deg, var(--color-comment), var(--color-comment) 0.25rem, transparent 0.25rem,transparent 0.5rem);
+      opacity: 0.5;
+    }
+
+    &::after {
+      display: none;
+      content: "Trailing whitespace";
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(-100%);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0 $border-radius / 2 $border-radius / 2 0;
+      border-left: 3px solid $text-color;
+      background: darken($bg-dark, 5%);
+      white-space: nowrap;
+      line-height: 1;
+      text-indent: 0;
+      font-family: $font-stack;
+      color: $text-color;
+    }
+  }
+
   .code-actions-lightbulb {
     position: absolute;
     aspect-ratio: 1;

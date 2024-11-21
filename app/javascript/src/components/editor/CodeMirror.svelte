@@ -1,7 +1,7 @@
 <script>
   import { onDestroy, onMount, createEventDispatcher } from "svelte"
   import { basicSetup } from "codemirror"
-  import { EditorView, keymap } from "@codemirror/view"
+  import { EditorView, highlightTrailingWhitespace, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection, Transaction } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
@@ -89,7 +89,8 @@
           transformParameterObjectsIntoPositionalParameters
         ]),
         foldBrackets(),
-        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : [])
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : []),
+        ...($settings["highlight-trailing-whitespace"] ? [highlightTrailingWhitespace()] : []),
       ]
     })
   }

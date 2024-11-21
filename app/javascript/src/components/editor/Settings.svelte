@@ -96,6 +96,15 @@
       </div>
 
       <div class="checkbox tooltip mt-1/8">
+        <input id="highlight-trailing-whitespace" type="checkbox" bind:checked={$settings["highlight-trailing-whitespace"]} />
+        <label for="highlight-trailing-whitespace">Highlight trailing whitespace</label>
+
+        <div class="tooltip__content bg-darker">
+          Mark whitespace at the end of a line.
+        </div>
+      </div>
+
+      <div class="checkbox tooltip mt-1/8">
         <input id="hide-wiki-sidebar" type="checkbox" bind:checked={$settings["hide-wiki-sidebar"]} />
         <label for="hide-wiki-sidebar">
           Hide wiki sidebar
