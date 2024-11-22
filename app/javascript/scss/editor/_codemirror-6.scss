@@ -277,7 +277,7 @@
       left: 0;
       transform: translateY(-100%);
       padding: 0.25rem 0.5rem;
-      border-radius: 0 $border-radius / 2 $border-radius / 2 0;
+      border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
       border-left: 3px solid $text-color;
       background: darken($bg-dark, 5%);
       white-space: nowrap;
