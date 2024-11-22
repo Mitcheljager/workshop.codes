@@ -62,11 +62,11 @@ class ApplicationController < ActionController::Base
       if params[:type] == "video"
         url = rails_public_blob_url(blob)
       elsif params[:type] == "thumbnail"
-        url = rails_public_blob_url(blob.variant(saver: { quality: 95 }, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
+        url = rails_public_blob_url(blob.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5], format: :webp).processed)
       elsif params[:type] == "full"
-        url = rails_public_blob_url(blob.variant(saver: { quality: 95 }).processed)
+        url = rails_public_blob_url(blob.variant(quality: 95).processed)
       else
-        url = rails_public_blob_url(blob.variant(saver: { quality: 95 }, resize_to_limit: [1920, 1080], format: :webp).processed)
+        url = rails_public_blob_url(blob.variant(quality: 95, resize_to_limit: [1920, 1080], format: :webp).processed)
       end
 
       render json: url, layout: false

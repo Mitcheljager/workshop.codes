@@ -42,7 +42,7 @@
         <%= form.label :cover_image, "Cover image", class: "form-label" %>
 
         <div class="cover-image well well--dark block">
-          <%= image_tag (@collection.cover_image.attached? ? rails_public_blob_url(@collection.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500]).processed) : "//:0"),
+          <%= image_tag (@collection.cover_image.attached? ? rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) : "//:0"),
                         data: { image_preview: "cover" },
                         class: "img-fluid" %>
         </div>

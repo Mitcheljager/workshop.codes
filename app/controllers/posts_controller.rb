@@ -454,8 +454,8 @@ class PostsController < ApplicationController
     revision = @revision
     path = post_url(post.code.upcase)
     user_path = user_url(post.user.username)
-    image = @ordered_images.present? && @ordered_images.first.present? ? url_for(@ordered_images.first.variant(saver: { quality: 95 }).processed.url) : ""
-    avatar = @post.user.profile_image.present? ? url_for(@post.user.profile_image.variant(saver: { quality: 95 }, resize_to_fill: [120, 120]).processed.url) : ""
+    image = @ordered_images.present? && @ordered_images.first.present? ? url_for(@ordered_images.first.variant(quality: 95).processed.url) : ""
+    avatar = @post.user.profile_image.present? ? url_for(@post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed.url) : ""
     content = ActionController::Base.helpers.strip_tags(post.description).truncate(type == "New" ? 500 : 250)
 
     embed = Discord::Embed.new do

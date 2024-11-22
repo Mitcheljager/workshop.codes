@@ -2,11 +2,11 @@
   <div class="collection__image">
     <% if collection.cover_image.attached? %>
       <%= link_to collection_path(collection.nice_url), title: collection.title do %>
-        <% image_url = rails_public_blob_url(collection.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [450, 250], format: :webp).processed) %>
+        <% image_url = rails_public_blob_url(collection.cover_image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed) %>
         <%= image_tag image_url,
           srcset: "
             #{ image_url } 1x,
-            #{ rails_public_blob_url(collection.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500], format: :webp).processed) } 2x",
+            #{ rails_public_blob_url(collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) } 2x",
           alt: collection.title,
           width: 450,
           height: 250,
