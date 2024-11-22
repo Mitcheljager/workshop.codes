@@ -111,9 +111,9 @@ module ContentHelper
   end
 
   def markdown_gallery(text)
-    text.gsub /\[gallery\s+(.*?)\]/m do
+    text.gsub /\[gallery\s+([^\]]+)\]/m do
       begin
-        images = JSON.parse($1)
+        images = JSON.parse($1.strip)
 
         if action_name == "parse_markdown"
           render_to_string partial: "markdown_elements/gallery", locals: { images: images }
