@@ -25,8 +25,10 @@ module OverwatchWorkshop
     config.active_storage.replace_on_assign_to_many = false
     config.exceptions_app = self.routes
     config.active_job.queue_adapter = :sucker_punch
-    config.active_storage.track_variants = true
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+
+    config.active_storage.track_variants = true
+    config.active_storage.variant_processor = :mini_magick
 
     config.active_support.cache_format_version = 7.0
     config.active_support.disable_to_s_conversion = true
