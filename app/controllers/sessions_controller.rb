@@ -102,7 +102,7 @@ class SessionsController < ApplicationController
   end
 
   def set_return_path
-    return if !request.referrer?.present
+    return if !request.referrer.present?
 
     referrer_domain = URI(request.referrer).host
     current_domain = request.host
