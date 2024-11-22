@@ -3,5 +3,5 @@
 </div>
 
 <div class="cards">
-  <%= render collection: @post.recommended_posts, partial: "card", as: :post %>
+  <%= render collection: @post.recommended_posts.includes(:user), partial: "card", as: :post %>
 </div>
