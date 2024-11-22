@@ -7,7 +7,7 @@ module PostsHelper
         image = post.images.find_by_blob_id(JSON.parse(post.image_order).first)
 
         if image
-          url = rails_public_blob_url(image.variant(quality: 90, resize_to_fill: [width, height], format: :webp).processed)
+          url = rails_public_blob_url(image.variant(saver: { quality: 90 }, resize_to_fill: [width, height], format: :webp).processed)
         end
       rescue
       end

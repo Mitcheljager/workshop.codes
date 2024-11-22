@@ -5,8 +5,8 @@
   <%= svelte_component("Dropzone", {
         images: (@ordered_images || {}).map { |i| {
           id: i.blob_id,
-          url: rails_public_blob_url(i.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5]).processed),
-          preview_url: rails_public_blob_url(i.variant(quality: 95).processed)
+          url: rails_public_blob_url(i.variant(saver: { quality: 95 }, resize_to_fill: [200, 200 / 9 * 5]).processed),
+          preview_url: rails_public_blob_url(i.variant(saver: { quality: 95 }).processed)
         } },
         label: "Drop images here to add them to your post",
         help: "Images will be displayed in a 900x500 format (max 2MB per image, jpeg/png only)",

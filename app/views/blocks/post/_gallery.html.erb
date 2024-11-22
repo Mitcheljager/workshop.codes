@@ -10,7 +10,7 @@
 <div class="gallery gallery--<%= block.id %>">
   <% images.each do |image| %>
     <% next unless image %>
-    <% url = rails_public_blob_url(image.variant(quality: 95).processed) %>
+    <% url = rails_public_blob_url(image.variant(saver: { quality: 95 }).processed) %>
 
     <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= url %>">
       <%= image_tag url, alt: "", loading: "lazy" %>

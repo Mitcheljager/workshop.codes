@@ -1,14 +1,14 @@
 <% content_for :page_title, "#{ @collection.title } #{ "| Page #{ params[:page] }" if params[:page] }" %>
-<% begin %><% content_for :og_image, "#{ rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) if @collection.cover_image.attached? }" %><% rescue %><% end %>
+<% begin %><% content_for :og_image, "#{ rails_public_blob_url(@collection.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500]).processed) if @collection.cover_image.attached? }" %><% rescue %><% end %>
 
 <% if @collection.cover_image.attached? %>
   <% begin %>
     <div class="relative">
       <% ["", "background-blur background-blur--visible"].each do |classes| %>
         <picture class="<%= classes %>">
-          <source media="(min-width: 560px)" srcset="<%= rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" type="image/webp">
-          <source media="(min-width: 0px)" srcset="<%= rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed) %>" type="image/webp">
-          <img class="img-fluid cover-image" src="<%= rails_public_blob_url(@collection.cover_image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>" alt="<%= @collection.title %>" width="900" height="500" loading="lazy" />
+          <source media="(min-width: 560px)" srcset="<%= rails_public_blob_url(@collection.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500], format: :webp).processed) %>" type="image/webp">
+          <source media="(min-width: 0px)" srcset="<%= rails_public_blob_url(@collection.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [450, 250], format: :webp).processed) %>" type="image/webp">
+          <img class="img-fluid cover-image" src="<%= rails_public_blob_url(@collection.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500], format: :webp).processed) %>" alt="<%= @collection.title %>" width="900" height="500" loading="lazy" />
         </picture>
       <% end %>
     </div>

@@ -1,6 +1,6 @@
 <% preload ||= false %>
-<% image_small = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed) %>
-<% image_large = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 500], format: :webp).processed) %>
+<% image_small = rails_public_blob_url(image.variant(saver: { quality: 95 }, resize_to_fill: [450, 250], format: :webp).processed) %>
+<% image_large = rails_public_blob_url(image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500], format: :webp).processed) %>
 <% image_breakpoint = 560 %>
 
 <% content_for :preload do %>
@@ -27,7 +27,7 @@
       class="button button--small button--secondary"
       data-action="show-modal set-gallery"
       data-target="carousel-modal"
-      data-url="<%= rails_public_blob_url(image.variant(quality: 95).processed) %>">
+      data-url="<%= rails_public_blob_url(image.variant(saver: { quality: 95 }).processed) %>">
       View original size
     </div>
   </div>

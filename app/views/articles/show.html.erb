@@ -1,7 +1,7 @@
 <% content_for :page_title, @article.title %>
 <% content_for :og_description, strip_tags(markdown(@article.content || "")).truncate(200).gsub("\n"," ") %>
 <% content_for :og_summary_small, "true" %>
-<% begin %><% content_for :og_image, "#{ rails_public_blob_url(@article.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed) if @article.cover_image.present? }" %><% rescue %><% end %>
+<% begin %><% content_for :og_image, "#{ rails_public_blob_url(@article.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500]).processed) if @article.cover_image.present? }" %><% rescue %><% end %>
 
 <% cache @article do %>
   <article class="blog">
@@ -16,7 +16,7 @@
     <div class="blog__image">
       <% if @article.cover_image.attached? %>
         <% begin %>
-          <%= image_tag rails_public_blob_url(@article.cover_image.variant(quality: 95, resize_to_fill: [900, 500]).processed), loading: "lazy", alt: @article.title, width: 900, height: 500 %>
+          <%= image_tag rails_public_blob_url(@article.cover_image.variant(saver: { quality: 95 }, resize_to_fill: [900, 500]).processed), loading: "lazy", alt: @article.title, width: 900, height: 500 %>
         <% rescue %>
         <% end %>
       <% end %>
