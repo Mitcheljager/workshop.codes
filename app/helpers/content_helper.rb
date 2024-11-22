@@ -73,7 +73,7 @@ module ContentHelper
       fenced_code_blocks: true
     )
 
-    text = Sanitize.fragment(text, elements: ["script"])
+    text = text.gsub(/<script.*?>[\s\S]*<\/script>/i, "")
     text = markdown_youtube(text)
     text = markdown_video(text)
     text = markdown_gallery(text)
