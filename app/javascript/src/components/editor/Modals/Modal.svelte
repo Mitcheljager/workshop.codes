@@ -19,7 +19,7 @@
   use:escapeable on:escape={() => modal.close()}
   data-ignore>
 
-  <div class="modal__content" class:bg-transparent={transparent} class:p-0={flush} style:max-width={maxWidth}>
+  <div class="modal__content overflow-hidden" class:bg-transparent={transparent} class:p-0={flush} style:max-width={maxWidth}>
     <slot {close} />
   </div>
 
