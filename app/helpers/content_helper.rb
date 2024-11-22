@@ -135,9 +135,10 @@ module ContentHelper
   end
 
   def markdown_ability_icon(text)
-    text.gsub /\[ability\s+(.*?)\]/ do
+    text.gsub /\[ability\s+([a-zA-Z0-9_:\-]+)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy", alt: $1)
+        ability_name = $1.strip
+        ActionController::Base.helpers.image_tag(ability_name_to_icon_url(ability_name), height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
