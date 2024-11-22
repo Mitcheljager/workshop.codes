@@ -34,7 +34,6 @@
     <p class="mb-0">Translation keys allow you to insert a Key in place of a Custom String. You can set up translations and the key will automatically be translated based on the player's game language.</p>
   </div>
 
-
   <div class="translation-settings">
     <div class="translation-settings__aside">
       <button on:click={() => { showLanguageSettings = true; selectedKey = null }} class="button button--secondary button--square button--small text-base w-100">
