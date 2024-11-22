@@ -105,6 +105,15 @@
       </div>
 
       <div class="checkbox tooltip mt-1/8">
+        <input id="remove-trailing-whitespace-on-save" type="checkbox" bind:checked={$settings["remove-trailing-whitespace-on-save"]} />
+        <label for="remove-trailing-whitespace-on-save">Remove trailing whitespace on save</label>
+
+        <div class="tooltip__content bg-darker">
+          Remove whitespace at the end of a line every time you save.
+        </div>
+      </div>
+
+      <div class="checkbox tooltip mt-1/8">
         <input id="hide-wiki-sidebar" type="checkbox" bind:checked={$settings["hide-wiki-sidebar"]} />
         <label for="hide-wiki-sidebar">
           Hide wiki sidebar
