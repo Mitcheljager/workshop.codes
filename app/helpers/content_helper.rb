@@ -129,7 +129,7 @@ module ContentHelper
   def markdown_hero_icon(text)
     text.gsub /\[hero\s+([\p{L}\p{N}_:.\-\s]+)\]/ do
       begin
-        hero_name = $1.strip
+        hero_name = ERB::Util.html_escape($1.strip)
         ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name), width: 50, height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
@@ -138,7 +138,7 @@ module ContentHelper
   def markdown_ability_icon(text)
     text.gsub /\[ability\s+([\p{L}\p{N}_:.\-\s]+)\]/ do
       begin
-        ability_name = $1.strip
+        ability_name = ERB::Util.html_escape($1.strip)
         ActionController::Base.helpers.image_tag(ability_name_to_icon_url(ability_name), height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
