@@ -9,18 +9,6 @@
   display: none;
 }
 
-@each $identifier, $breakpoint in $media-min-widths {
-  @include media-min(#{$identifier}) {
-    .hidden-#{$identifier} {
-      display: none;
-    }
-
-    .visible-#{$identifier} {
-      display: initial;
-    }
-  }
-}
-
 .block {
   display: block;
 }
@@ -29,8 +17,22 @@
   display: inline-block;
 }
 
+.sm\:hidden {
+  @include media-min(sm) {
+    display: none;
+  }
+}
+
 .sm\:inline-block {
   @include media-min(sm) {
     display: inline;
+  }
+}
+
+@each $identifier, $breakpoint in $media-min-widths {
+  @include media-min(#{$identifier}) {
+    .#{$identifier}\:visible {
+      display: initial;
+    }
   }
 }

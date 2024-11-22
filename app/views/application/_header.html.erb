@@ -9,7 +9,7 @@
       <%= link_to "Latest", latest_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "posts" && action_name == "latest" }" %>
       <%= link_to "On Fire", on_fire_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "on_fire" }" %>
       <%= link_to "Wiki", wiki_root_path, class: "navigation__item #{ "navigation__item--active" if is_wiki? }" %>
-      <%= link_to "Editor", editor_path, class: "navigation__item hidden visible-lg", target: "_blank" %>
+      <%= link_to "Editor", editor_path, class: "navigation__item hidden lg:visible", target: "_blank" %>
       <%= link_to inline_svg_tag("icons/icon-discord.svg", width: 25, height: 25), "https://discord.gg/DdxsQRD", target: "_blank", rel: "noreferrer noopener", class: "navigation__item navigation__item--discord", aria: { label: "Join the Workshop.codes Discord" } %>
     </nav>
 
