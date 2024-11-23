@@ -23,9 +23,9 @@ export function parameterTooltip(): Extension {
       above: true,
       create: () => {
         const dom = document.createElement("div")
-        dom.textContent = validValue.detail_full
+        dom.innerHTML = validValue.detail_full
         return { dom }
       }
     }
-  }, { hoverTime: 100 })
+  }, { hoverTime: 50 })
 }

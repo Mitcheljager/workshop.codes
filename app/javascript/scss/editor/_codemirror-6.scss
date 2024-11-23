@@ -74,21 +74,28 @@
   .cm-completionIcon {
     padding-right: 1rem;
   }
+
   .cm-completionIcon-event::after {
     content: "∈";
   }
+
   .cm-tooltip {
     background: darken($bg-dark, 5%);
     border: 0;
     box-shadow: $shadow;
 
     &.cm-tooltip-hover {
-      border-radius: $border-radius;
-      padding: math.div($margin, 16) $margin * 0.125;
+      max-width: 25em;
+      max-height: 15em;
+      overflow-y: auto;
+      border-radius: $border-radius / 2;
+      border: 1px solid $bg-darker;
+      padding: $margin * 0.125;
       box-shadow: none;
       color: $text-color;
       font-size: 0.75rem;
-      pointer-events: none;
+
+      @include styled-scrollbar;
     }
 
     > ul {
@@ -100,6 +107,11 @@
       background: lighten($bg-dark, 5%);
       color: $text-color-light;
       white-space: pre-wrap;
+    }
+
+    hr {
+      margin: $margin * 0.125 0;
+      background-color: $bg-darker
     }
   }
 
