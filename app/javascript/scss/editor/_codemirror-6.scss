@@ -153,18 +153,22 @@
     background: transparent;
   }
 
-  .cm-lint-marker-error::before {
-    content: "!";
-    display: block;
-    width: 1em;
-    height: 1em;
-    padding: 0.1em;
-    border-radius: 50%;
-    background: $red;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    line-height: 1em;
+  .cm-lint-marker-error {
+    content: "";
+
+    &::before {
+      content: "!";
+      display: block;
+      width: 1em;
+      height: 1em;
+      padding: 0.1em;
+      border-radius: 50%;
+      background: $red;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      line-height: 1em;
+    }
   }
 
   .cm-panel.cm-search {
