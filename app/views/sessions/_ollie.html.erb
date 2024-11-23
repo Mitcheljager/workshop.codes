@@ -7,15 +7,15 @@
 
 <div class="ollie-login">
   <div class="ollie-login__images <%= "ollie-login__images--loaded" if flash[:alert] %>" data-role="ollie-image-holder">
-    <%= image_tag "ollie/login/ollie-smile.png", class: "ollie-login__body", data: { ollie: "body-base" } %>
-    <%= image_tag "ollie/login/ollie-happy.png", class: "ollie-login__body hidden", data: { ollie: "body-happy" } %>
-    <%= image_tag "ollie/login/ollie-eyes-closed.png", class: "ollie-login__body hidden", data: { ollie: "body-eyes-closed" } %>
-    <%= image_tag "ollie/login/ollie-eyes-closed-happy.png", class: "ollie-login__body hidden", data: { ollie: "body-eyes-closed-happy" } %>
-    <%= image_tag "ollie/login/ollie-suspicious.png", class: "ollie-login__body #{ "hidden" if !flash[:alert] }", data: { ollie: "body-suspicious" } %>
+    <%= image_tag "ollie/login/ollie-smile.png", class: "ollie-login__body", data: { ollie: "body-base" }, alt: "" %>
+    <%= image_tag "ollie/login/ollie-happy.png", class: "ollie-login__body hidden", data: { ollie: "body-happy" }, alt: "" %>
+    <%= image_tag "ollie/login/ollie-eyes-closed.png", class: "ollie-login__body hidden", data: { ollie: "body-eyes-closed" }, alt: "" %>
+    <%= image_tag "ollie/login/ollie-eyes-closed-happy.png", class: "ollie-login__body hidden", data: { ollie: "body-eyes-closed-happy" }, alt: "" %>
+    <%= image_tag "ollie/login/ollie-suspicious.png", class: "ollie-login__body #{ "hidden" if !flash[:alert] }", data: { ollie: "body-suspicious" }, alt: "" %>
 
-    <%= image_tag "ollie/login/ollie-pupils.png", class: "ollie-login__pupils #{ "hidden" if flash[:alert] }", data: { ollie: "pupils" } %>
+    <%= image_tag "ollie/login/ollie-pupils.png", class: "ollie-login__pupils #{ "hidden" if flash[:alert] }", data: { ollie: "pupils" }, alt: "" %>
 
-    <%= image_tag "ollie/login/ollie-arm-left.png", class: "ollie-login__arm-left out-of-view", data: { ollie: "arm-left" } %>
-    <%= image_tag "ollie/login/ollie-arm-right.png", class: "ollie-login__arm-right out-of-view", data: { ollie: "arm-right" } %>
+    <%= image_tag "ollie/login/ollie-arm-left.png", class: "ollie-login__arm-left out-of-view", data: { ollie: "arm-left" }, alt: "" %>
+    <%= image_tag "ollie/login/ollie-arm-right.png", class: "ollie-login__arm-right out-of-view", data: { ollie: "arm-right" }, alt: "" %>
   </div>
 </div>

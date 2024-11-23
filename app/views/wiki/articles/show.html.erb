@@ -23,9 +23,10 @@
 
   <aside class="article__aside">
     <div class="article__aside-content">
-      <h3 class="mt-0 mb-1/4">Article details</h3>
+      <h3 aria-level="2" class="mt-0 mb-1/4">Article details</h3>
       <span class="text-dark">Created at:</span> <%= @initial_article.created_at.strftime("%d %b %Y %R") %> <br>
       <span class="text-dark">Updated at:</span> <%= @article.created_at.strftime("%d %b %Y %R") %> <br>
+
       <%= link_to wiki_article_edits_path(@article.group_id) do %>
         <%= @edit_count %> Edit<%= "s" if @edit_count > 1 %>
       <% end %>

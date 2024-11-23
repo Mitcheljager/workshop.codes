@@ -7,7 +7,7 @@ module ContentHelper
     end
 
     def image(link, title, alt_text)
-      image_tag(link, title: title, alt: alt_text, loading: "lazy")
+      image_tag(link, title: title, alt: alt_text || "", loading: "lazy")
     end
 
     # loosely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
@@ -111,9 +111,9 @@ module ContentHelper
   end
 
   def markdown_gallery(text)
-    text.gsub /\[gallery\s+(.*?)\]/m do
+    text.gsub /\[gallery\s+([^\]]+)\]/m do
       begin
-        images = JSON.parse($1)
+        images = JSON.parse($1.strip)
 
         if action_name == "parse_markdown"
           render_to_string partial: "markdown_elements/gallery", locals: { images: images }
@@ -127,17 +127,19 @@ module ContentHelper
   end
 
   def markdown_hero_icon(text)
-    text.gsub /\[hero\s+(.*?)\]/ do
+    text.gsub /\[hero\s+([\p{L}\p{N}_:.\-\s]+)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 50, height: 50, loading: "lazy")
+        hero_name = ERB::Util.html_escape($1.strip)
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name), width: 50, height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
 
   def markdown_ability_icon(text)
-    text.gsub /\[ability\s+(.*?)\]/ do
+    text.gsub /\[ability\s+([\p{L}\p{N}_:.\-\s]+)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy")
+        ability_name = ERB::Util.html_escape($1.strip)
+        ActionController::Base.helpers.image_tag(ability_name_to_icon_url(ability_name), height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end

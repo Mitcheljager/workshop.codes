@@ -26,8 +26,10 @@ $directions: (
 @each $property, $property-abr in $properties {
   @each $direction, $direction-abr in $directions {
     @each $name, $value in $offset-values {
-      .#{ $property-abr }#{ $direction-abr }-#{ $name } {
-        #{ $property }#{ $direction }: $value;
+      @if not ($property == padding and $value == auto) {
+        .#{ $property-abr }#{ $direction-abr }-#{ $name } {
+          #{ $property }#{ $direction }: $value;
+        }
       }
     }
   }
@@ -38,8 +40,10 @@ $directions: (
     @each $property, $property-abr in $properties {
       @each $direction, $direction-abr in $directions {
         @each $name, $value in $offset-values {
-          .#{ $breakpoint }\:#{ $property-abr }#{ $direction-abr }-#{ $name } {
-            #{ $property }#{ $direction }: $value;
+          @if not ($property == padding and $value == auto) {
+            .#{ $breakpoint }\:#{ $property-abr }#{ $direction-abr }-#{ $name } {
+              #{ $property }#{ $direction }: $value;
+            }
           }
         }
       }

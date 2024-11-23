@@ -10,7 +10,7 @@ Images should be losslessly compressed. SVG and WebP should be used wherever pos
 
 ## Setup
 
-Follow [this Wiki page](https://github.com/EloHellEsports/workshop.codes/wiki/Local-Development:-Setup) to get started.
+Follow [this Wiki page](https://github.com/Mitcheljager/workshop.codes/wiki/Local-Development:-Setup) to get started.
 
 ## Environment vars
 

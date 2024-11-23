@@ -80,7 +80,7 @@
     height: 120vw;
     max-height: 800px;
     max-width: 800px;
-    background: url("/images/layout/elo-hell-logo.svg");
+    background-image: url("/images/layout/overwatch-logo.svg");
     background-size: 120vw;
     background-position: center;
     transform: translateX(-50%) translateY(-50%);
@@ -89,12 +89,6 @@
 
     @media (min-width: 800px) {
       background-size: contain;
-    }
-  }
-
-  &--overwatch {
-    &::after {
-      background-image: url("/images/layout/overwatch-logo.svg");
     }
   }
 }

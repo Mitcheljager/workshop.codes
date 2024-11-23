@@ -13,7 +13,7 @@
     <% url = rails_public_blob_url(image.variant(quality: 95).processed) %>
 
     <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= url %>">
-      <%= image_tag url, alt: "abc", loading: "lazy" %>
+      <%= image_tag url, alt: "", loading: "lazy" %>
 
       <% if block_property(block, "image_label_#{ image.blob_id }").present? %>
         <span class="gallery__title"><%= block_property(block, "image_label_#{ image.blob_id }") %></span>
