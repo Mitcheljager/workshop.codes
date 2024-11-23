@@ -132,7 +132,7 @@ __chaseGlobalVariableAtRate__:
   - name: Destination
     description: The value that the global variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Rate
@@ -155,7 +155,7 @@ __chaseGlobalVariableOverTime__:
   - name: Destination
     description: The value that the global variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Duration
@@ -184,7 +184,7 @@ __chasePlayerVariableAtRate__:
   - name: Destination
     description: The value that the player variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Rate
@@ -213,7 +213,7 @@ __chasePlayerVariableOverTime__:
   - name: Destination
     description: The value that the player variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Duration

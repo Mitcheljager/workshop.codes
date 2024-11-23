@@ -42,18 +42,18 @@ __add__:
     description: The left-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   return:
-  - float
+  - Float
   - Vector
   en-US: Add
 getDeadPlayers:
@@ -562,18 +562,18 @@ __divide__:
     description: The left-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   return:
-  - float
+  - Float
   - Vector
   en-US: Divide
 dotProduct:
@@ -1554,18 +1554,18 @@ __multiply__:
     description: The left-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   return:
-  - float
+  - Float
   - Vector
   en-US: Multiply
 nearestWalkablePosition:
@@ -2220,18 +2220,18 @@ __subtract__:
     description: The left-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number
       or a vector.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   return:
-  - float
+  - Float
   - Vector
   en-US: Subtract
 tanDeg:
