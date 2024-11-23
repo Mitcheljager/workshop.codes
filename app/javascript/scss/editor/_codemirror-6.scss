@@ -113,6 +113,12 @@
       margin: $margin * 0.125 0;
       background-color: $bg-darker
     }
+
+    em {
+      color: var(--color-custom-keyword);
+      font-weight: bold;
+      font-style: normal;
+    }
   }
 
   .cm-tooltip-arrow {

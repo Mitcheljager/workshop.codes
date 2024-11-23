@@ -12,7 +12,7 @@ export function parameterTooltip(): Extension {
 
     const phrase = getPhraseFromPosition(line, position)
 
-    const possibleValues = get(completionsMap).filter(v => v.args_length)
+    const possibleValues = get(completionsMap).filter(v => v.info)
     const validValue = possibleValues.find(v => v.label == phrase.text)
 
     if (!validValue) return null

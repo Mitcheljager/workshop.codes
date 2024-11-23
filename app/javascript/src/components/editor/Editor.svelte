@@ -97,12 +97,19 @@
         if (nullCount) params.args_min_length = v.args.length - nullCount
       }
 
-      if (!params.args_length) return params
+      // Add detail arguments to autocomplete results
+      const detail = v.args?.map(a => `${toCapitalize(a.name)}`) || []
 
-      // Add detail arguments in autocomplete results
-      const detail = v.args.map(a => `${toCapitalize(a.name)}`)
+      let returnValue = v.return || "Void"
+
+      if (Array.isArray(returnValue)) returnValue = returnValue.map(i => `<em>${i}</em>`).join(" | ")
+      else if (typeof returnValue === "string") returnValue = `<em>${returnValue}</em>`
+      else if (typeof returnValue === "object") returnValue = Object.entries(returnValue).map(([key, value]) => `<em>${key}</em> (<em>${value}</em>)`).join(" | ")
+
       const detailFull = `
         ${detail.map(d => `<mark>${d}</mark>`).join(", ")}
+        ${detail.length ? "<hr>" : ""}
+        Returns: ${returnValue}
         <hr>
         <strong class="text-light">${params.label}</strong><br>
         ${params.info}
@@ -111,13 +118,15 @@
       params.detail_full = detailFull
       params.detail = `(${detail.join(", ").slice(0, 30)}${detail.join(", ").length > 30 ? "..." : ""})`
 
+      if (!params.args_length) return params
+
       // Add apply values when selecting autocomplete, filling in default args
       const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
       const useParameterObject = $settings["autocomplete-parameter-objects"] && params.args_length >= $settings["autocomplete-min-parameter-size"]
       const useNewlines = params.args_length >= $settings["autocomplete-min-parameter-newlines"]
 
       // Generate Apply map to be used for autocomplete and other bits
-      const apply = v.args.map(a => {
+      const apply = v.args?.map(a => {
         const name = toCapitalize(a.name?.toString().toLowerCase())
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
 
