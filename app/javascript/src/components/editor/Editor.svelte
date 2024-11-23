@@ -139,6 +139,7 @@
       // Set completion map keys and default
       params.parameter_keys = detail
       params.parameter_defaults = apply.map(([_, defaultValue]) => defaultValue)
+      params.parameter_types = v.args.map(a => a.type)
 
       const applyValues = apply.map(([name, defaultValue]) => {
         // If useParameterObject is enabled add the parameter name to the apply.

@@ -69,12 +69,14 @@ export type ParameterObject = {
   end: number,
   given: Record<string, string>,
   phraseParameters: string[],
-  phraseDefaults: string[]
+  phraseDefaults: string[],
+  phraseTypes: string[]
 }
 
 export type ExtendedCompletion = Completion & {
   parameter_keys: string[]
   parameter_defaults: string[],
+  parameter_types: string[],
   args_length: number
   args_min_length: number,
   args_unlimited: boolean,

@@ -73,13 +73,15 @@ export function getFirstParameterObject(content: string, startFromIndex = 0): Pa
   if (!completion) return {
     ...result,
     phraseParameters: [],
-    phraseDefaults: []
+    phraseDefaults: [],
+    phraseTypes: []
   }
 
   return {
     ...result,
     phraseParameters: completion.parameter_keys,
-    phraseDefaults: completion.parameter_defaults
+    phraseDefaults: completion.parameter_defaults,
+    phraseTypes: completion.parameter_types
   }
 }
 

@@ -43,7 +43,8 @@ describe("parameterObjects.js", () => {
         end: 39,
         given: { One: "10", Three: "20" },
         phraseParameters: [],
-        phraseDefaults: []
+        phraseDefaults: [],
+        phraseTypes: []
       }
 
       expect(getFirstParameterObject(content)).toEqual(expected)
