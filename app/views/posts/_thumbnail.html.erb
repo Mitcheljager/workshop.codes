@@ -1,8 +1,9 @@
+<% image = url_for_post_thumbnail(post) %>
+<% image_large = url_for_post_thumbnail(post, 240, 128, "medium") %>
+
 <%= link_to post_path(post.code), class: "item__thumbnail" do %>
-  <%= image_tag url_for_post_thumbnail(post),
-    srcset: "
-      #{ url_for_post_thumbnail(post) } 1x,
-      #{ url_for_post_thumbnail(post, 240, 128, "medium") } 2x",
+  <%= image_tag image,
+    srcset: "#{ image } 1x, #{ image_large } 2x",
     alt: post.title,
     width: 120,
     height: 68,

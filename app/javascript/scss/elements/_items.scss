@@ -116,26 +116,12 @@
   background: $bg-dark;
   box-shadow: $shadow;
 
-  @include media-min(sm) {
-    display: block;
-  }
-
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("/images/snowball-face.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 40%;
-  }
-
   @include hover-stack {
     filter: brightness(1.15);
+  }
+
+  @include media-min(sm) {
+    display: block;
   }
 
   .item--large & {
