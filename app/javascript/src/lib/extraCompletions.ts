@@ -1,6 +1,7 @@
+import type { Completion } from "@codemirror/autocomplete"
 import { templates } from "@lib/templates"
 
-export const extraCompletions = [
+export const extraCompletions: Completion[] = [
   { detail: "Editor For loop (exclusive)", label: "@for (0 to 10) {\n\n}", type: "variable" },
   { detail: "Editor For loop (inclusive)", label: "@for (0 through 10) {\n\n}", type: "variable" },
   { detail: "Editor If Statement", label: "@if (Mixin.variable) {\n\n}", type: "variable" },
