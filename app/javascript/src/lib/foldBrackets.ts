@@ -1,10 +1,10 @@
 import { foldService } from "@codemirror/language"
+import type { Extension } from "@codemirror/state"
 import { getClosingBracket } from "@utils/parse"
 
-/**
- * Returns fold out for curly brackets. Returns the values between the brackets, leaving the brackets in place.
- */
-export function foldBrackets() {
+/** Returns fold out for curly brackets. Returns the values between the brackets, leaving the brackets in place. */
+export function foldBrackets(): Extension {
+  // @ts-ignore
   return foldService.of((state, from) => {
     const foldStart = state.doc.lineAt(from)
     const startBracket = foldStart.text.search("{")

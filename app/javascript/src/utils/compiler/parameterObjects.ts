@@ -1,8 +1,9 @@
+import type { ParameterObject } from "@src/types/editor"
 import { completionsMap } from "@stores/editor"
 import { getClosingBracket, getPhraseFromIndex, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
 
-export function evaluateParameterObjects(joinedItems) {
+export function evaluateParameterObjects(joinedItems: string): string {
   let moreAvailableObjects = true
   let safety = 0
   let startFromIndex = 0
@@ -27,15 +28,10 @@ export function evaluateParameterObjects(joinedItems) {
   return joinedItems
 }
 
-/**
- * Obtain a JavaScript Object out of the string contents of a parameter object
- *
- * @param {string} innerContent Content inside the parameter object's curly braces
- * @returns {Object}
- */
-export function parseParameterObjectContent(innerContent) {
+/** Obtain an object out of the string contents of a parameter object */
+export function parseParameterObjectContent(innerContent: string): Record<string, string> {
   const splitParameters = splitArgumentsString(innerContent)
-  const result = {}
+  const result: Record<string, string> = {}
 
   splitParameters.forEach(item => {
     let [key, value] = item.split(/:(.*)/s)
@@ -50,17 +46,17 @@ export function parseParameterObjectContent(innerContent) {
 
 /**
  * Find the first matching parameter object in a given string. Parameter objects are a special format that allow the user to give only specific sets of parameters rather than having to write them all out.
- * @param {string} content Content to search for parameter objects in.
- * @param {*} startFromIndex Skip over previous results. This is used when the regex format was found without matches phrases to skip over previous results.
- * @returns {object|null} Object containing details about the parameter object and matching phrase.
+ * @param content Content to search for parameter objects in.
+ * @param startFromIndex Skip over previous results. This is used when the regex format was found without matches phrases to skip over previous results.
+ * @returns Object containing details about the parameter object and matching phrase.
  */
-export function getFirstParameterObject(content, startFromIndex = 0) {
+export function getFirstParameterObject(content: string, startFromIndex = 0): ParameterObject | null {
   content = content.slice(startFromIndex)
 
   const regex = /[a-z]\s*\(\s*{/
   const match = content.match(regex)
 
-  if (!match) return null
+  if (!match?.index) return null
 
   let end = getClosingBracket(content, "{", "}", match.index - 1)
   if (end === -1) end = match.index + match.length
@@ -89,11 +85,11 @@ export function getFirstParameterObject(content, startFromIndex = 0) {
 
 /**
  * Replaces and returns a parameter object in the given string.
- * @param {string} content String the parameter object will be replaced in.
- * @param {object} parameterObject Object containing all data needed to replace the expected string. This object contains a start index, end index, given parameters, parameter keys, and parameter defaults.
- * @returns {string} String with parameter object replaced with Workshop code.
+ * @param content String the parameter object will be replaced in.
+ * @param parameterObject Object containing all data needed to replace the expected string. This object contains a start index, end index, given parameters, parameter keys, and parameter defaults.
+ * @returns String with parameter object replaced with Workshop code.
  */
-export function replaceParameterObject(content, parameterObject) {
+export function replaceParameterObject(content: string, parameterObject: ParameterObject): string {
   const { start, end, given, phraseParameters, phraseDefaults } = parameterObject
 
   if (end > content.length - 1) return content

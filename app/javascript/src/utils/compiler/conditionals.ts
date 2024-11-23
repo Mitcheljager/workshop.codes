@@ -1,7 +1,8 @@
+import type { ExpressionTree } from "@src/types/editor"
 import { comparisonOperators, sortedComparisonOperatorsSymbols } from "@utils/operators"
 import { getClosingBracket, removeSurroundingParenthesis, replaceBetween } from "@utils/parse"
 
-export function evaluateConditionals(joinedItems) {
+export function evaluateConditionals(joinedItems: string): string {
   const ifStartRegex = /@if[\s\n]*\(/g
   const startBracketRegex = /[\s\n]*\{/g
   const elseStartRegex = /[\s\n]*@else[\s\n]*\{/g
@@ -101,43 +102,45 @@ export function evaluateConditionals(joinedItems) {
   return joinedItems
 }
 
-export function evaluateExpressionTree(node) {
-  if (node.invalid) {
-    return null
-  } else if (node.value != null) {
-    return node.value.trim()
-  } else {
-    const evaluatedArguments = node.arguments.map((argument) => evaluateExpressionTree(argument))
-    const result = comparisonOperators[node.operator].eval(... evaluatedArguments)
-    return result
-  }
+export function evaluateExpressionTree(node: ExpressionTree): boolean | string | null {
+  if (node.invalid) return null
+  if (node.value != null) return node.value.trim()
+
+  const evaluatedArguments = node.arguments!.map((argument) => evaluateExpressionTree(argument))
+  const result = comparisonOperators[node.operator!].eval(... evaluatedArguments)
+  return result
 }
 
-export function getExpressionTree(expression) {
+export function getExpressionTree(expression: string): ExpressionTree {
   expression = removeSurroundingParenthesis(expression)
 
-  const result = {}
-
-  if (expression.length === 0) {
-    result.value = ""
-    return result
+  const result: ExpressionTree = {
+    value: null,
+    invalid: false,
+    operator: null,
+    arguments: []
   }
+
+  if (expression.length === 0) return result
 
   for (let currentIndex = 0; currentIndex < expression.length; currentIndex++) {
     const char = expression[currentIndex]
     if (char === "(") {
       const closingIndex = getClosingBracket(expression, "(", ")", currentIndex - 1)
+
       if (closingIndex < 0) {
         // parentheses are open-ended, like "(a == b"
         result.invalid = true
         break
       }
+
       currentIndex = closingIndex
     } else {
       let operatorSymbol = null
       let operatorIndex = -1
       for (const symbol of sortedComparisonOperatorsSymbols) {
         const index = expression.indexOf(symbol, currentIndex)
+
         if (index >= 0) {
           operatorSymbol = symbol
           operatorIndex = index
@@ -157,7 +160,6 @@ export function getExpressionTree(expression) {
         const righthand = expression.substring(operatorIndex + operatorSymbol.length)
 
         result.operator = operatorSymbol
-        result.arguments = []
 
         if (["binary", "unary-right"].includes(operator.type)) {
           if (lefthand.length > 0) {

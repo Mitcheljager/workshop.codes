@@ -1,5 +1,6 @@
 import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
 import { evaluateParameterObjects } from "@utils/compiler/parameterObjects"
+import type { Range, Variables } from "@src/types/editor"
 
 // NOTE: The fact variable names can start with a decimal is intentional.
 // We leave it to Overwatch to warn the user that this is not allowed.
@@ -24,7 +25,7 @@ const maxVariableNameLength = 32
 
 const actionsDefiningVariablesRegex = /(?:(?:Set|Modify) (?:Global|Player) Variable(?: At Index)?|For (?:Global|Player) Variable|Chase (?:Global|Player) Variable (?:Over Time|At Rate))\(/g
 
-export function getDefaultVariableNameIndex(name) {
+export function getDefaultVariableNameIndex(name: string): number {
   const singleCharFirstIndexOffset = "A".charCodeAt(0) - 1
   const maxSingleCharIndex = "Z".charCodeAt(0) - singleCharFirstIndexOffset
 
@@ -86,11 +87,8 @@ export function getDefaultVariableNameIndex(name) {
  *     51: someNameThatIsNotJustAZ
  *     52: BA
  * ```
- *
- * @param {string[]} variables A list of variables
- * @returns {string[]} The list of variables without
  */
-export function excludeDefaultVariableNames(variables) {
+export function excludeDefaultVariableNames(variables: string[]): string[] {
   let removedCount = 0
   return variables.filter((name) => {
     const defaultIndex = getDefaultVariableNameIndex(name)
@@ -105,7 +103,7 @@ export function excludeDefaultVariableNames(variables) {
   })
 }
 
-export function compileVariables(joinedItems) {
+export function compileVariables(joinedItems: string): string {
   let { globalVariables, playerVariables } = getVariables(joinedItems)
 
   globalVariables = excludeDefaultVariableNames(globalVariables)
@@ -123,21 +121,22 @@ ${playerVariables.map((v, i) => `    ${i}: ${v}`).join("\n")}
 }\n\n`
 }
 
-function getLiteralPlayerVariables(source, stringRanges) {
+function getLiteralPlayerVariables(source: string, stringRanges: Range[]): string[] {
   const literalPlayerVariables = []
   for (const match of matchAllOutsideRanges(stringRanges, source, possiblePlayerVariablesRegex)) {
     const matchPrefix = source.substring(match.index - maxVariableNameLength, match.index)
-    if (invalidVariablePrefixRegex.test(matchPrefix)) {
-      continue
-    }
 
-    const { variableName } = match.groups
+    if (invalidVariablePrefixRegex.test(matchPrefix)) continue
+
+    // variableName comes from possiblePlayerVariablesRegex
+    const { variableName } = match.groups as { variableName: string }
     literalPlayerVariables.push(variableName)
   }
+
   return literalPlayerVariables
 }
 
-export function getVariables(joinedItems) {
+export function getVariables(joinedItems: string): Variables {
   joinedItems = evaluateParameterObjects(joinedItems)
   const stringRanges = findRangesOfStrings(joinedItems)
 
@@ -148,8 +147,8 @@ export function getVariables(joinedItems) {
       match.index + match[0].length,
       getClosingBracket(joinedItems, "(", ")", match.index - 1)
     )
-    const args = splitArgumentsString(argsContent)
 
+    const args = splitArgumentsString(argsContent)
     const isPlayer = match[0].includes("Player")
 
     if (isPlayer) {

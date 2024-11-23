@@ -12,7 +12,7 @@ import { convertTranslations } from "@utils/compiler/translations"
 import { compileVariables } from "@utils/compiler/variables"
 import { get } from "svelte/store"
 
-export function compile(overwriteContent = null) {
+export function compile(overwriteContent = ""): string {
   let joinedItems = overwriteContent || get(flatItems)
 
   joinedItems = removeComments(joinedItems)

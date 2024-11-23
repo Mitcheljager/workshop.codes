@@ -2,10 +2,14 @@ import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAll
 import { completionsMap, subroutinesMap, workshopConstants } from "@stores/editor"
 import { get } from "svelte/store"
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
+import type { EditorView } from "codemirror"
+import type { Diagnostic } from "@codemirror/lint"
+import type { Severity } from "@src/types/editor"
+import type { Line } from "@codemirror/state"
 
-let diagnostics = []
+let diagnostics: Diagnostic[] = []
 
-export function OWLanguageLinter(view) {
+export function OWLanguageLinter(view: EditorView): Diagnostic[] {
   diagnostics = []
 
   const content = view.state.doc.toString()
@@ -29,7 +33,7 @@ export function OWLanguageLinter(view) {
   return diagnostics
 }
 
-function findMissingClosingCharacters(content) {
+function findMissingClosingCharacters(content: string): void {
   const openingCharacters = [
     { open: "{", close: "}", message: "Missing closing curly bracket \"{\"" },
     { open: "[", close: "]", message: "Missing closing square bracket \"[\"" },
@@ -48,11 +52,11 @@ function findMissingClosingCharacters(content) {
   })
 }
 
-function findMissingQuotes(content) {
+function findMissingQuotes(content: string): void {
   let followingQuote = -1
   let escaped = false
 
-  for(let i = 0; i < content.length; i++) {
+  for (let i = 0; i < content.length; i++) {
     if (escaped) {
       escaped = false
       continue
@@ -81,7 +85,7 @@ function findMissingQuotes(content) {
   }
 }
 
-function findIncorrectArgsLength(content) {
+function findIncorrectArgsLength(content: string): void {
   const $completionsMap = get(completionsMap)
 
   const phraseIdentifier = /.+?(?=[\(\)\{\};,=\[\]])/g
@@ -105,7 +109,7 @@ function findIncorrectArgsLength(content) {
       if (item.label != name || item.type === "constant") continue
 
       let message = ""
-      let severity = "error"
+      let severity: Severity = "error"
 
       if (item.args_unlimited) continue
 
@@ -171,7 +175,7 @@ function findIncorrectArgsLength(content) {
   }
 }
 
-function findAllCharacters(content, character = "{") {
+function findAllCharacters(content: string, character = "{"): number[] {
   const indices = []
 
   let inString = false
@@ -201,7 +205,7 @@ function findAllCharacters(content, character = "{") {
   return indices
 }
 
-function checkMixins(content) {
+function checkMixins(content: string): void {
   // Fix missing parentehsis for mixin declare and include
   const mixinRegex = /(@mixin|@include)\s\w+/g
   let match
@@ -221,7 +225,7 @@ function checkMixins(content) {
       const firstNewLineIndex = match.index + firstNewLine
 
       if (firstNewLine > 0 && firstNewLineIndex < openingIndex) throw new Error("Missing opening parenthesis")
-    } catch (error) {
+    } catch (error: any) {
       diagnostics.push({
         from: match.index,
         to: match.index + match[0].length,
@@ -232,7 +236,7 @@ function checkMixins(content) {
   }
 }
 
-function checkTranslations(content) {
+function checkTranslations(content: string): void {
   // Find translations that are not in client side actions
   const regex = /@translate/g
   let match
@@ -254,11 +258,13 @@ function checkTranslations(content) {
 
       if (lastParenAtIndex == -1) throw new Error("Using @translate outside of an action has no effect")
 
-      const phrase = getPhraseFromPosition({ text: content, from: 0 }, lastParenAtIndex - 1)
+      const line: Line = { text: content, from: 0, to: 0, number: 0, length: 0 }
+
+      const phrase = getPhraseFromPosition(line, lastParenAtIndex - 1)
       const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
       if (phrase?.text.includes("include")) return
       if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${phrase.text}" has no effect.`)
-    } catch (error) {
+    } catch (error: any) {
       diagnostics.push({
         from: match.index,
         to: match.index + match[0].length,
@@ -269,7 +275,7 @@ function checkTranslations(content) {
   }
 }
 
-function checkForLoops(content) {
+function checkForLoops(content: string): void {
   // Find missing parenthesis and keywords
   const forRegex = /@for\s+(.*?)\s*\{\n/g
   let match
@@ -292,7 +298,7 @@ function checkForLoops(content) {
         throw new Error("Missing \"from\" after iterator name")
       }
 
-    } catch (error) {
+    } catch (error: any) {
       diagnostics.push({
         from: match.index,
         to: match.index + match[0].length,
@@ -303,7 +309,7 @@ function checkForLoops(content) {
   }
 }
 
-function findMissingSemicolons(content) {
+function findMissingSemicolons(content: string): void {
   let inRule = false
   let escaped = false
   let bracketCount = 0
@@ -413,7 +419,7 @@ function findMissingSemicolons(content) {
   }
 }
 
-function findExtraSemicolons(content) {
+function findExtraSemicolons(content: string): void {
   for(let i = 0; i < content.length; i++) {
     if (content[i] == "}" && content[i + 1] == ";") {
       diagnostics.push({
@@ -426,15 +432,17 @@ function findExtraSemicolons(content) {
   }
 }
 
-function findFirstNonEmptyCharacter(content) {
+function findFirstNonEmptyCharacter(content: string): string {
   for(let i = 0; i < content.length; i++) {
     if (content[i] == "\n") return content[i]
     if ((/\s/).test(content[i])) continue
     return content[i]
   }
+
+  return ""
 }
 
-function findOpenBeforeClose(content, open, close) {
+function findOpenBeforeClose(content: string, open: string, close: string): boolean {
   let foundOpen = false
   let foundClose = false
 
@@ -446,9 +454,11 @@ function findOpenBeforeClose(content, open, close) {
     if (foundClose && !foundOpen) return false
     if (foundOpen && !foundClose) return true
   }
+
+  return false
 }
 
-function findMissingComparisonsInConditions(content) {
+function findMissingComparisonsInConditions(content: string): void {
   const mixinRegex = /(conditions[\s]*{)/g
   let match
   while ((match = mixinRegex.exec(content)) != null) {
@@ -484,7 +494,7 @@ function findMissingComparisonsInConditions(content) {
   }
 }
 
-function findTrailingCommas(content) {
+function findTrailingCommas(content: string): void {
   const regex = /,[\n\s\t]+[\],\)]/g
   let match
   while ((match = regex.exec(content)) != null) {
@@ -497,7 +507,7 @@ function findTrailingCommas(content) {
   }
 }
 
-function findConditionalsRegexErrors(content) {
+function findConditionalsRegexErrors(content: string): void {
   const regex = /(~=[ \n]*)(.*)[ \n]*\)[ \n]*\{/g // matches "~= righthand) {" and "~= /regex/flags) {"
   const regexRegex = /\/(.*)\/(\w*)/ // TODO: share this with compiler.js?
   let match
@@ -529,7 +539,7 @@ function findConditionalsRegexErrors(content) {
   }
 }
 
-function findEachLoopsWithInvalidIterables(content) {
+function findEachLoopsWithInvalidIterables(content: string): void {
   const constants = get(workshopConstants)
 
   const regex = /@each\s*\(.+in\s+(.+)\s*\)\s*\{/g
@@ -586,7 +596,7 @@ const eventTypeToArgumentsMap = {
   "player took damage": ["Team", "Player"]
 }
 
-function findEventBlocksWithMissingArguments(content) {
+function findEventBlocksWithMissingArguments(content: string): void {
   const eventBlockRegex = /event\s*\{\s*/g
 
   let eventBlockMatch
@@ -601,6 +611,7 @@ function findEventBlocksWithMissingArguments(content) {
 
     if (!eventType) return
 
+    // @ts-ignore
     const requiredEventArgs = eventTypeToArgumentsMap[eventType.toLowerCase()]
 
     if (requiredEventArgs && requiredEventArgs.length !== givenEventArgs.length) {
@@ -615,8 +626,8 @@ function findEventBlocksWithMissingArguments(content) {
   }
 }
 
-function findUndefinedSubroutines(content) {
-  const definedSubroutines = get(subroutinesMap).map(({ label }) => label)
+function findUndefinedSubroutines(content: string): void {
+  const definedSubroutines = get(subroutinesMap).map(({ label }: { label: string }) => label)
 
   for (const match of content.matchAll(/(?<=(?:Call Subroutine|Start Rule))\(/g)) {
     const argsEnd = getClosingBracket(content, "(", ")", match.index - 1)
@@ -637,7 +648,7 @@ function findUndefinedSubroutines(content) {
   }
 }
 
-function findTripleEquals(content) {
+function findTripleEquals(content: string): void {
   const stringRanges = findRangesOfStrings(content)
 
   for (const match of matchAllOutsideRanges(stringRanges, content, /===/g)) {

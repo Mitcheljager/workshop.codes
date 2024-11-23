@@ -1,30 +1,29 @@
 import { workshopConstants } from "@stores/editor"
 import { defaultLanguage } from "@stores/translationKeys"
-import { getClosingBracket, replaceBetween } from "@utils/parse"
+import { getClosingBracket, replaceBetween, getCommasIndexesOutsideQuotes } from "@utils/parse"
 import { openArrayBracketRegex, openToClosingArrayBracketsMap } from "@utils/compiler/constants"
 import { get } from "svelte/store"
-import { getCommasIndexesOutsideQuotes } from "../parse"
 
-export function evaluateEachLoops(joinedItems) {
+export function evaluateEachLoops(joinedItems: string): string {
+  // Matches "@each" loops extracting the item and optional index variables, along with the iterable.
+  // For example:
+  // @each (thing in [a, b, c])
+  // @each (item, index in [1, 2, 3]) {
+  // @each (item in Constant.Button) {
   const eachRegex = /@each\s*\((\w+)(?:,\s+(\w+))?\s+in\s+(\[.*?\]|(?:Constant)\.[\w\s]+)\s*\)\s*\{/gs
 
   let match
   while ((match = eachRegex.exec(joinedItems)) != null) {
     const [_, valueVar, indexVar, iterableStr] = match
 
-    let iterable = []
+    let iterable: string[] = []
+
     if (iterableStr[0] === "[" && iterableStr[iterableStr.length - 1] === "]") {
       iterable = parseArrayValues(iterableStr.substring(1, iterableStr.length - 1))
     } else if (iterableStr.startsWith("Constant.")) {
-      const language = get(defaultLanguage)
-      const constants = get(workshopConstants)
+      const usedConstant = get(workshopConstants)[iterableStr.substring("Constant.".length)]
 
-      const usedConstant = constants[iterableStr.substring("Constant.".length)]
-
-      if (usedConstant != null) {
-        iterable = Object.values(usedConstant)
-          .map((value) => value[language])
-      }
+      if (usedConstant != null) iterable = Object.values(usedConstant).map((value) => value[get(defaultLanguage)])
     }
 
     if (iterable == null) continue
@@ -58,7 +57,7 @@ export function evaluateEachLoops(joinedItems) {
   return joinedItems
 }
 
-export function parseArrayValues(input) {
+export function parseArrayValues(input: string): string[] {
   const commaRegex = /, */g
 
   const result = []
@@ -76,6 +75,7 @@ export function parseArrayValues(input) {
     // return ["1", "(2, 3)", "4"], not ["1", "(2", "3)", "4"])
     openArrayBracketRegex.lastIndex = nextStartingIndex
     const openBracketMatch = openArrayBracketRegex.exec(input)
+
     if (openBracketMatch != null && openBracketMatch.index < commaMatch.index) {
       const openingBracketChar = openBracketMatch[0]
       const closingBracketChar = openToClosingArrayBracketsMap[openingBracketChar]
@@ -101,8 +101,8 @@ export function parseArrayValues(input) {
     result.push(lastValue)
   }
 
+  // HACK: line finder inserts [linemarker]s on the input, which may confuse @each
+  // into thinking they are nested arrays.
   return result
-    // HACK: line finder inserts [linemarker]s on the input, which may confuse @each
-    // into thinking they are nested arrays.
     .map((item) => item.replace(/\s*\[linemarker\].*?\[\/linemarker\]\s*/g, ""))
 }

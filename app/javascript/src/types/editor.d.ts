@@ -1,5 +1,6 @@
 import type { EditorState } from "@codemirror/state"
 import type { languageOptions } from "@src/lib/languageOptions"
+import type { Completion } from "@codemirror/autocomplete"
 
 export type Project = {
   title: string,
@@ -55,3 +56,51 @@ export type TranslationKey = {
 export type TranslateKeys = {
   [key: string]: TranslationKey
 }
+
+export type Mixin = {
+  content: string,
+  full: string,
+  params: { key: string, default: string }[],
+  hasContents: boolean
+}
+
+export type ParameterObject = {
+  start: number,
+  end: number,
+  given: Record<string, string>,
+  phraseParameters: string[],
+  phraseDefaults: string[]
+}
+
+export type ExtendedCompletion = Completion & {
+  parameter_keys: string[]
+  parameter_defaults: string[],
+  args_length: number
+  args_min_length: number,
+  args_unlimited: boolean,
+  args_allow_null: boolean,
+  detail_full: string
+}
+
+export type WorkshopConstant = Record<string, Record<Language, string>>
+
+export type ExpressionTree = {
+  value: string | null,
+  operator: string | null,
+  invalid: boolean,
+  arguments: ExpressionTree[]
+}
+
+export type ComparisonOperator = {
+  type: string,
+  order: number,
+  _regexRegex?: RegExp,
+  eval: Function
+}
+
+export type Variables = {
+  playerVariables: string[],
+  globalVariables: string[]
+}
+
+export type Severity = "hint" | "info" | "warning" | "error"

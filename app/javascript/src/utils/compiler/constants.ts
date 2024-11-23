@@ -1,4 +1,4 @@
-export const openToClosingArrayBracketsMap = {
+export const openToClosingArrayBracketsMap: Record<string, string> = {
   "(": ")",
   "[": "]"
 }
