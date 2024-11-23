@@ -2,7 +2,7 @@
   import { Sortable, MultiDrag } from "sortablejs"
   import EditorItem from "@components/editor/EditorItem.svelte"
   import EditorFolder from "@components/editor/EditorFolder.svelte"
-  import { items, sortedItems } from "@stores/editor.js"
+  import { items, sortedItems } from "@stores/editor"
   import { onMount } from "svelte"
   import { flip } from "svelte/animate"
 
