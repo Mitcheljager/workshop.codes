@@ -74,6 +74,13 @@
     }
   }
 
+  &--no-shadow {
+    &::before {
+      display: none;
+      box-shadow: none;
+    }
+  }
+
   .modal--auto & {
     width: auto;
     max-width: 90%;
