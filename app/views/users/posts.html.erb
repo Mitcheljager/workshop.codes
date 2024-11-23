@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="ml-auto pb-1/4 hidden visible-lg">
+    <div class="ml-auto pb-1/4 hidden lg:visible">
       <%= svelte_component("LinkedLabel", { linked: "posts", empty: "Hover charts for views per day" }) %>
     </div>
   </div>
@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div class="linked-chart ml-auto hidden visible-lg">
+        <div class="linked-chart ml-auto hidden lg:visible">
           <% data = {} %>
           <% values = Statistic.where(on_date: 30.days.ago.to_date..Date.today, timeframe: :daily, model_id: post.id, content_type: :visit)
                                .order(created_at: :asc)

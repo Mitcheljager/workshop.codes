@@ -46,27 +46,27 @@ module ApplicationHelper
   end
 
   def maps
-    YAML.load(File.read(Rails.root.join("config/arrays", "maps.yml")))
+    YAML.safe_load(File.read(Rails.root.join("config/arrays", "maps.yml")))
   end
 
   def heroes
-    YAML.load(File.read(Rails.root.join("config/arrays", "heroes.yml")))
+    YAML.safe_load(File.read(Rails.root.join("config/arrays", "heroes.yml")))
   end
 
   def categories
-    YAML.load(File.read(Rails.root.join("config/arrays", "categories.yml")))
+    YAML.safe_load(File.read(Rails.root.join("config/arrays", "categories.yml")))
   end
 
   def quotes
-    YAML.load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
+    YAML.safe_load(File.read(Rails.root.join("config/arrays", "quotes.yml")))
   end
 
   def badges
-    YAML.load(File.read(Rails.root.join("config/arrays", "badges.yml")))
+    YAML.safe_load(File.read(Rails.root.join("config/arrays", "badges.yml")))
   end
 
   def abilities
-    YAML.load(File.read(Rails.root.join("config/arrays", "abilities.yml")))
+    YAML.safe_load(File.read(Rails.root.join("config/arrays", "abilities.yml")))
   end
 
   def user_menu_items
