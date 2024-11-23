@@ -1,6 +1,6 @@
 import debounce from "@src/debounce"
 import FetchRails from "@src/fetch-rails"
-import type { WikiArticle } from "@src/types"
+import type { WikiArticle } from "@src/types/wiki"
 
 export function bind(): void {
   const element = document.querySelector("[data-role='wiki-search']")

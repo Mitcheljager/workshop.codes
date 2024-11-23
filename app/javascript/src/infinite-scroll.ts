@@ -1,6 +1,6 @@
 import Rails from "@rails/ujs"
 import * as timeago from "@src/timeago.js"
-import isCrawler from "@src/utils/is-crawler.js"
+import isCrawler from "@utils/is-crawler.js"
 
 export function bind(): void {
   const element = document.querySelector("[data-role='infinite-scroll-marker']")

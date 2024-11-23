@@ -3,7 +3,7 @@
   import EditorItemName from "@components/editor/EditorItemName.svelte"
   import EditorItemHide from "@components/editor/EditorItemHide.svelte"
   import EditorItemDuplicate from "@components/editor/EditorItemDuplicate.svelte"
-  import { currentItem } from "@stores/editor.js"
+  import { currentItem } from "@stores/editor"
   import { isAnyParentHidden } from "@utils/editor"
 
   export let item
@@ -11,7 +11,7 @@
 
 <button
   class="editor-item"
-  class:editor-item--active={$currentItem.id == item.id}
+  class:editor-item--active={$currentItem && $currentItem.id == item.id}
   class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
   data-item-id={item.id}
   on:click|stopPropagation={() => $currentItem = item}>
