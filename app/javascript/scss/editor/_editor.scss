@@ -45,7 +45,6 @@ $top-height: 4rem;
   bottom: 0;
   padding: 1.5rem 0.5rem 0.5rem;
   z-index: 5;
-
   background: linear-gradient(180deg,
     rgba(darken($bg-dark, 5%), 0) 0,
     darken($bg-dark, 5%) 1.5rem);
@@ -106,18 +105,22 @@ $top-height: 4rem;
   position: relative;
   background: darken($bg-dark, 5%);
   overflow: hidden;
+
+  @include media-min(mbl) {
+    border-right: 1px solid $bg-darker;
+  }
 }
 
 .editor__popout {
   grid-area: popout;
   position: relative;
   padding: $margin * 0.25;
-  border-top: 1px solid lighten($border-color, 5%);
+  border-top: 1px solid $bg-darker;
   background: $bg-dark;
 
   @include media-min(mbl) {
     border-top: 0;
-    border-left: 1px solid lighten($border-color, 5%);
+    border-left: 1px solid $bg-darker;
   }
 }
 
@@ -166,7 +169,6 @@ $top-height: 4rem;
 .editor-hidden-item-indicator__tooltip {
   $tooltip-bg-color: $bg-darker;
   $tooltip-arrow-size: 0.5rem;
-
   position: absolute;
   top: calc(100% + #{$tooltip-arrow-size});
   right: 0;

@@ -228,7 +228,7 @@
           </div>
         </div>
 
-        <hr class="mt-1/4 mb-1/4" />
+        <hr class="mt-1/4 mb-1/4 bg-darker" />
 
         <EditorAside />
       </div>
