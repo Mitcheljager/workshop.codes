@@ -107,7 +107,7 @@
       else if (typeof returnValue === "object") returnValue = Object.entries(returnValue).map(([key, value]) => `<em>${key}</em> (<em>${value}</em>)`).join(" | ")
 
       const detailFull = `
-        ${detail.map(d => `<mark>${d}</mark>`).join(", ")}
+        ${detail.length ? `Arguments: ${detail.map(d => `<mark>${d}</mark>`).join(", ")}` : ""}
         ${detail.length ? "<hr>" : ""}
         Returns: ${returnValue}
         <hr>
