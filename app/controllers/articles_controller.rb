@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find_by_slug(params[:slug])
+    @article = Article.find_by_slug!(params[:slug])
 
     track_action
   end

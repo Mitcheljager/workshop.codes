@@ -18,7 +18,7 @@ class PostSerializer < ActiveModel::Serializer
 
     unless url.present?
       random_with_seed = Random.new(object.id).rand(object.maps.length)
-      maps_array = YAML.load(File.read(Rails.root.join("config/arrays", "maps.yml")))
+      maps_array = YAML.safe_load(File.read(Rails.root.join("config/arrays", "maps.yml")))
 
       map = maps_array.find { |m| m["name"] == object.maps[random_with_seed - 1] }
 

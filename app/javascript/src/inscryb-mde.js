@@ -1,4 +1,3 @@
-import InscrybMDE from "inscrybmde"
 import InscrybeInsertImage from "@src/inscrybe-mde-paste-image"
 import InscrybeInsertVideo from "@src/inscrybe-mde-insert-video"
 import FetchRails from "@src/fetch-rails"
@@ -121,7 +120,9 @@ class InitialiseInscrybeMDE {
     return toolbar
   }
 
-  initialise() {
+  async initialise() {
+    const { default: InscrybMDE } = await import("inscrybmde")
+
     this.mde = new InscrybMDE({
       element: this.element,
       autoDownloadFontAwesome: false,

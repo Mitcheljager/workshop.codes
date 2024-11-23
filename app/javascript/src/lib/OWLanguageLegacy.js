@@ -80,6 +80,11 @@ function tokenBase(stream, state) {
   if (punc.indexOf(ch) > -1) {
     stream.next()
     stream.match("..")
+
+    if (ch == ":" || ch == "," || ch == ";") {
+      state.inObjectValue = ch == ":" && ch != "," && ch != ";"
+    }
+
     return "punctuation"
   }
 
@@ -88,6 +93,11 @@ function tokenBase(stream, state) {
     const tokenize = tokenString.bind(null, stringMatch[0])
     state.tokenize.push(tokenize)
     return tokenize(stream, state)
+  }
+
+  if (!state.inObjectValue && stream.match(/^\s*[\w$ ]+\w*(?=\w:)/)) {
+    stream.next()
+    return "keyword"
   }
 
   if (stream.match(actionsValuesIdentifier)) {
@@ -177,6 +187,7 @@ function Context(prev, align, indented) {
   this.prev = prev
   this.align = align
   this.indented = indented
+  this.inObjectValue = false
 }
 
 function pushContext(state, stream) {

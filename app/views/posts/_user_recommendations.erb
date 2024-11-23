@@ -3,5 +3,5 @@
 <p class="text-small"><em>Recommendations based on your favorited codes. Favorite more codes to get better recommendations!</em></p>
 
 <section>
-  <%= render collection: current_user.recommended_posts, partial: "post", as: :post %>
+  <%= render collection: current_user.recommended_posts.includes(:user), partial: "post", as: :post %>
 </section>

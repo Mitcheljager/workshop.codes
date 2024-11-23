@@ -102,7 +102,14 @@ class SessionsController < ApplicationController
   end
 
   def set_return_path
-    session[:return_to] = request.referrer
+    return if !request.referrer.present?
+
+    referrer_domain = URI(request.referrer).host
+    current_domain = request.host
+
+    if referrer_domain == current_domain
+      session[:return_to] = request.referrer
+    end
   end
 
   def redirect_to_path(path)

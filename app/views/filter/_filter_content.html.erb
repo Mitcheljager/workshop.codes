@@ -99,7 +99,7 @@
         Players
       </p>
 
-      <%= tag.div data: {
+      <%= tag.div class: "noUi-placeholder", data: {
         role: "num-player-slider",
         type: "filter",
         min_players: (to_range(CGI.escape(params[:players])).first if params[:players].present?),

@@ -30,12 +30,11 @@
         </div>
 
         <div class="item__details-item" title="Last updated: <%= post.last_revision_created_at %>">
-          Last updated:
-
           <% if post.last_revision_created_at.blank? %>
             Draft
           <% else %>
-            <time data-role="timeago timeago-static" datetime="<%= post.last_revision_created_at %>"></time>
+            Updated
+            <time><%= time_ago_in_words(post.last_revision_created_at).gsub("about ", "").gsub("over ", "") %> ago</time>
           <% end %>
         </div>
       </div>

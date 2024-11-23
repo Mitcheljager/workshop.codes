@@ -2,8 +2,8 @@ class Wiki::DictionaryController < Wiki::BaseController
   add_breadcrumb "Dictionary", :wiki_dictionary_path
 
   def index
-    @actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
-    @values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
+    @actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
+    @values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
 
     merged_array = @actions.merge(@values)
 

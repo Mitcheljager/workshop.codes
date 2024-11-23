@@ -1,7 +1,7 @@
 <script>
   import { onDestroy, onMount, createEventDispatcher } from "svelte"
   import { basicSetup } from "codemirror"
-  import { EditorView, keymap } from "@codemirror/view"
+  import { EditorView, highlightTrailingWhitespace, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection, Transaction } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
@@ -21,6 +21,7 @@
   import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"
   import { get } from "svelte/store"
   import { indentedLineWrap } from "@utils/codemirror/indentedLineWrap"
+  import { removeTrailingWhitespace } from "@utils/codemirror/removeTrailingWhitespace"
   import debounce from "@src/debounce"
 
   const dispatch = createEventDispatcher()
@@ -71,7 +72,8 @@
           { key: "Shift-Tab", run: (view) => tabIndent(view, event)  },
           { key: "Enter", run: autoIndentOnEnter },
           { key: "Shift-Enter", run: autoIndentOnEnter },
-          { key: "Ctrl-Shift-z", run: redoAction }
+          { key: "Ctrl-Shift-z", run: redoAction },
+          { key: "Ctrl-s", run: removeTrailingWhitespace }
         ]),
         EditorView.updateListener.of((transaction) => {
           handleTransactionDocChanged(view, transaction)
@@ -89,7 +91,8 @@
           transformParameterObjectsIntoPositionalParameters
         ]),
         foldBrackets(),
-        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : [])
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : []),
+        ...($settings["highlight-trailing-whitespace"] ? [highlightTrailingWhitespace()] : [])
       ]
     })
   }
