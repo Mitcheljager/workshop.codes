@@ -111,5 +111,7 @@ export const settings = writable({
   "autocomplete-parameter-objects": false,
   "autocomplete-min-parameter-size": 2,
   "autocomplete-min-parameter-newlines": 2,
-  "hide-wiki-sidebar": false
+  "hide-wiki-sidebar": false,
+  "highlight-trailing-whitespace": true,
+  "remove-trailing-whitespace-on-save": true
 })

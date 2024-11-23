@@ -2,7 +2,7 @@ class Wiki::SearchController < Wiki::BaseController
   add_breadcrumb "Search", :wiki_articles_path
 
   def query
-    unless params[:query].empty?
+    if params[:query].present?
       respond_to do |format|
         format.js { redirect_to wiki_search_results_path(params[:query].gsub(".", "")) }
         format.html { redirect_to wiki_search_results_path(params[:query].gsub(".", "")) }

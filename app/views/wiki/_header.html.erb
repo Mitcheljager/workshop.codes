@@ -10,21 +10,21 @@
       <%= form_tag wiki_search_path, remote: true, class: "search search--wiki", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction" do %>
         <meta itemprop="target" content="https://workshop.codes/wiki/search/{query}"/>
 
-        <%= text_field_tag :query, params[:search], class: "form-input form-input--large", placeholder: " ", itemprop: "query-input", required: "true", autocomplete: "off", data: { role: "wiki-search" } %>
+        <%= text_field_tag :wiki_query, params[:search], class: "form-input form-input--large", placeholder: " ", itemprop: "query-input", required: "true", autocomplete: "off", data: { role: "wiki-search" } %>
 
-        <%= label_tag :query do %>
+        <%= label_tag :wiki_query do %>
           <strong>Search </strong> wiki articles by Titles, Tags, and Categories
         <% end %>
 
         <div class="search__tray">
           <div class="search-terms">
-            <div class="search-terms__content search__results" data-role="wiki-search-results" data-url="<%= wiki_search_results_path("query") %>">
+            <div class="search-terms__content search__results search__results--empty" data-role="wiki-search-results" data-url="<%= wiki_search_results_path("query") %>">
               <em>Start typing to search</em>
             </div>
           </div>
         </div>
 
-        <%= submit_tag "", class: "search__submit" %>
+        <%= submit_tag "", class: "search__submit", aria: { label: "Search wiki" } %>
       <% end %>
     </div>
 

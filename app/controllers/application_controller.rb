@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :login_from_cookie
   before_action :reject_if_banned
-  before_action :redirect_non_www, if: -> { Rails.env.production? }
   before_action :expire_oauth_session
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
@@ -106,12 +105,6 @@ class ApplicationController < ActionController::Base
     if session[:oauth_expires_at].present? && Time.now > session[:oauth_expires_at]
       clean_up_session_auth
       flash[:warning] = "Temporary session expired."
-    end
-  end
-
-  def redirect_non_www
-    if /^www/.match(request.host)
-      redirect_to("#{ request.url }".gsub("www.", ""), status: 301)
     end
   end
 

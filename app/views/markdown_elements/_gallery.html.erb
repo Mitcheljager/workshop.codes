@@ -3,7 +3,7 @@
 <div class="gallery">
   <% images.each do |title, image| %>
     <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= image %>">
-      <%= image_tag image, alt: title, loading: "lazy" %>
+      <%= image_tag image, alt: "", loading: "lazy" %>
 
       <% if title.present? %>
         <span class="gallery__title"><%= title %></span>
