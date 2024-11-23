@@ -24,7 +24,9 @@
           </div>
         </div>
 
-        <%= submit_tag "", class: "search__submit", aria: { label: "Search wiki" } %>
+        <%= button_tag "", type: :submit, class: "search__submit", aria: { label: "Search wiki" } do %>
+          <%= inline_svg_tag "icons/icon-search.svg", height: 20 %>
+        <% end %>
       <% end %>
     </div>
 

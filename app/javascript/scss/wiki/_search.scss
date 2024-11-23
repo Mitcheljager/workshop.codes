@@ -63,12 +63,14 @@
   }
 
   .search__submit {
-    padding: 0 2.5rem;
-    background-size: 24px 24px;
+    padding: 0 2rem 0 1rem;
 
-    @include media-min(sm) {
-      padding: 0 3rem;
-      background-size: 28px 28px;
+    svg {
+      height: 24px;
+
+      @include media-min(sm) {
+        height: 28px;
+      }
     }
   }
 }
