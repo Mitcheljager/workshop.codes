@@ -109,6 +109,10 @@
       white-space: pre-wrap;
     }
 
+    .cm-diagnostic {
+      background: $bg-darker;
+    }
+
     hr {
       margin: $margin * 0.125 0;
       background-color: $bg-darker
@@ -119,6 +123,11 @@
       font-weight: bold;
       font-style: normal;
     }
+  }
+
+  .cm-tooltip-section:not(:first-child) {
+    border: 0;
+    margin-top: $margin * 0.125;
   }
 
   .cm-tooltip-arrow {
