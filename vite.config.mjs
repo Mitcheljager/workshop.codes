@@ -30,6 +30,6 @@ export default defineConfig({
     }
   },
   build: {
-    assetsInlineLimit: 512
+    assetsInlineLimit: 1024
   }
 })
