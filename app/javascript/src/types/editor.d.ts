@@ -61,7 +61,7 @@ export type Mixin = {
   content: string,
   full: string,
   params: { key: string, default: string }[],
-  hasContents: boolean,
+  hasContents: boolean
 }
 
 export type ParameterObject = {
@@ -69,7 +69,7 @@ export type ParameterObject = {
   end: number,
   given: Record<string, string>,
   phraseParameters: string[],
-  phraseDefaults: string[],
+  phraseDefaults: string[]
 }
 
 export type ExtendedCompletion = Completion & {
@@ -79,6 +79,7 @@ export type ExtendedCompletion = Completion & {
   args_min_length: number,
   args_unlimited: boolean,
   args_allow_null: boolean,
+  detail_full: string
 }
 
 export type WorkshopConstant = Record<string, Record<Language, string>>
@@ -87,7 +88,7 @@ export type ExpressionTree = {
   value: string | null,
   operator: string | null,
   invalid: boolean,
-  arguments: ExpressionTree[],
+  arguments: ExpressionTree[]
 }
 
 export type ComparisonOperator = {
@@ -101,3 +102,5 @@ export type Variables = {
   playerVariables: string[],
   globalVariables: string[]
 }
+
+export type Severity = "hint" | "info" | "warning" | "error"
