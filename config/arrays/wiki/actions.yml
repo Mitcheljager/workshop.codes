@@ -288,7 +288,7 @@ createBeam:
     default: Color(White)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
-    type: EffectReeval
+    type: Effect Reevaluation
     default: Visible To, Position, And Radius
   return: Void
   en-US: Create Beam Effect
@@ -346,7 +346,7 @@ createEffect:
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated.
-    type: EffectReeval
+    type: Effect Reevaluation
     default: Visible To, Position, And Radius
   return: Void
   en-US: Create Effect
@@ -376,7 +376,7 @@ __hudText__:
     default: 'Null'
   - name: Location
     description: The location on the screen where the text will appear.
-    type: HudPosition
+    type: HUD Position
     default: Left
   - name: SORT ORDER
     description: The sort order of the text relative to other text in the same location. A higher sort order will come after a lower sort order.
@@ -396,11 +396,11 @@ __hudText__:
     default: Color(White)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated.
-    type: HudReeval
+    type: HUD Reevaluation
     default: Visible To And String
   - name: Spectators
     description: Whether spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   return: Void
   en-US: Create HUD Text
@@ -425,7 +425,7 @@ createIcon:
     default: 'Arrow: Down'
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The icon will keep asking for and using new values from reevaluated inputs.
-    type: IconReeval
+    type: Icon Reevaluation
     default: Visible To And Position
   - name: Icon Color
     description: The color of the icon to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
@@ -1494,7 +1494,7 @@ setObjectiveDescription:
     default: String
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The message will keep asking for and using new values from reevaluated inputs.
-    type: HudReeval
+    type: HUD Reevaluation
     default: Visible To And String
   return: Void
   en-US: Set Objective Description
@@ -1807,7 +1807,7 @@ _&startAcceleration:
     default: To World
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: AccelReeval
+    type: Acceleration Reevaluation
     default: Direction, Rate, And Max Speed
   return: Void
   en-US: Start Accelerating
@@ -3037,7 +3037,7 @@ CreateProgressBarHUDText:
     default: Custom String("")
   - name: Location
     description: The location on the screen where the text will appear.
-    type: HudPosition
+    type: HUD Position
     default: Left
   - name: Sort Order
     description: The sort order of the text relative to other text in the same location. Text with a higher sort order will come after the text with a lower sort order.
@@ -3053,7 +3053,7 @@ CreateProgressBarHUDText:
     default: Color(White)
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
-    type: HudReeval
+    type: HUD Reevaluation
     default: Visible To, Values, and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
@@ -3113,7 +3113,7 @@ CreateProgressBarIn-WorldText:
     default: Color(White)
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
-    type: HudReeval
+    type: HUD Reevaluation
     default: Visible To, Values, and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
