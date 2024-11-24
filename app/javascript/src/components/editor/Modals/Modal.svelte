@@ -20,7 +20,7 @@
   data-ignore>
 
   <div
-    class="modal__content modal__content--no-shadow overflow-hidden"
+    class="modal__content modal__content--no-shadow"
     class:bg-transparent={transparent}
     class:p-0={flush}
     style:max-width={maxWidth}

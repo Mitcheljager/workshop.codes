@@ -29,7 +29,7 @@
 </script>
 
 <Modal maxWidth="clamp(300px, 90vw, 900px)" flush>
-  <div class="bg-darker p-1/4">
+  <div class="bg-darker br-top p-1/4">
     <h2 class="mt-0 mb-1/4">Translation settings</h2>
     <p class="mb-0">Translation keys allow you to insert a Key in place of a Custom String. You can set up translations and the key will automatically be translated based on the player's game language.</p>
   </div>

@@ -5,3 +5,7 @@
 .br-1\/2 {
   border-radius: $border-radius * 0.5;
 }
+
+.br-top {
+  border-radius: $border-radius $border-radius 0 0;
+}
