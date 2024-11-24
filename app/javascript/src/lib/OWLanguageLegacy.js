@@ -22,7 +22,7 @@ function wordSet(words) {
   return set
 }
 
-const keywords = wordSet(["variables", "subroutines", "disabled", "event", "rule", "actions", "conditions", "settings"])
+const keywords = wordSet(["variables", "subroutines", "enabled", "disabled", "event", "rule", "actions", "conditions", "settings", "maps", "heroes"])
 const actions = wordSet(
   /*
    * Regenerate this with (requires [yq](https://github.com/kislyuk/yq)):
@@ -51,7 +51,10 @@ const customKeywords = /(?<!\w)@(?:else if|\w+)/
 
 function tokenBase(stream, state) {
   if (stream.sol()) state.indented = stream.indentation()
-  if (stream.eatSpace()) return null
+  if (stream.eatSpace()) {
+    state.inObjectValue = false
+    return null
+  }
 
   const ch = stream.peek()
   if (ch == "/") {
