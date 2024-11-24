@@ -1,4 +1,3 @@
----
 return:
   description: Stops execution of the action list.
   args:
@@ -34,7 +33,7 @@ _&allowButton:
     default: Event Player
   - name: Button
     description: The logical button that is being reenabled.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Allow Button
@@ -127,7 +126,7 @@ __chaseGlobalVariableAtRate__:
   args:
   - name: Variable
     description: Specifies which global variable to modify gradually.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Destination
     description: The value that the global variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
@@ -141,7 +140,7 @@ __chaseGlobalVariableAtRate__:
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseRateReeval__
+    type: Chase Reevaluation
     default: Destination And Rate
   return: Void
   en-US: Chase Global Variable At Rate
@@ -150,7 +149,7 @@ __chaseGlobalVariableOverTime__:
   args:
   - name: Variable
     description: Specifies which global variable to modify gradually.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Destination
     description: The value that the global variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
@@ -164,7 +163,7 @@ __chaseGlobalVariableOverTime__:
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseTimeReeval__
+    type: Chase Time Reevaluation
     default: Destination And Duration
   return: Void
   en-US: Chase Global Variable Over Time
@@ -179,7 +178,7 @@ __chasePlayerVariableAtRate__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify gradually.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Destination
     description: The value that the player variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
@@ -193,7 +192,7 @@ __chasePlayerVariableAtRate__:
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseRateReeval__
+    type: Chase Reevaluation
     default: Destination And Rate
   return: Void
   en-US: Chase Player Variable At Rate
@@ -208,7 +207,7 @@ __chasePlayerVariableOverTime__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify gradually.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Destination
     description: The value that the player variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
@@ -222,7 +221,7 @@ __chasePlayerVariableOverTime__:
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseTimeReeval__
+    type: Chase Time Reevaluation
     default: Destination And Duration
   return: Void
   en-US: Chase Player Variable Over Time
@@ -593,7 +592,7 @@ destroyHudText:
   args:
   - name: Text ID
     description: Specifies which hud text to destroy. This id may be last text id or a variable into which last text id was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   return: Void
   en-US: Destroy HUD Text
@@ -611,7 +610,7 @@ destroyInWorldText:
   args:
   - name: Text ID
     description: Specifies which in-world text to destroy. This id may be last text id or a variable into which last text id was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   return: Void
   en-US: Destroy In-World Text
@@ -705,7 +704,7 @@ _&disallowButton:
     default: Event Player
   - name: Button
     description: The logical button that is being disabled.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Disallow Button
@@ -804,7 +803,7 @@ __forGlobalVariable__:
   args:
   - name: Control Variable
     description: The variable being modified in this loop. It is set to the range start value when the loop begins, and the loop continues until the control variable reaches or passes the range stop value.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Range Start
     description: The control variable is set to this value when the loop begins.
@@ -833,7 +832,7 @@ __forPlayerVariable__:
     default: Event Player
   - name: Control Variable
     description: The variable being modified in this loop. It is set to the range start value when the loop begins, and the loop continues until the control variable reaches or passes the range stop value.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Range Start
     description: The control variable is set to this value when the loop begins.
@@ -941,11 +940,11 @@ __modifyGlobalVariable__:
   args:
   - name: Variable
     description: The global variable to modify.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -961,7 +960,7 @@ __modifyGlobalVariableAtIndex__:
   args:
   - name: Variable
     description: The global variable to modify.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -969,7 +968,7 @@ __modifyGlobalVariableAtIndex__:
     default: Number
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -1007,11 +1006,11 @@ __modifyPlayerVariable__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -1033,7 +1032,7 @@ __modifyPlayerVariableAtIndex__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -1041,7 +1040,7 @@ __modifyPlayerVariableAtIndex__:
     default: Number
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -1130,7 +1129,7 @@ _&forceButtonPress:
     default: Event Player
   - name: Button
     description: The button to be pressed.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Press Button
@@ -1309,7 +1308,7 @@ __setGlobalVariable__:
   args:
   - name: Variable
     description: Specifies which global variable to store the value into.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Value
     description: The value that will be stored.
@@ -1326,7 +1325,7 @@ __setGlobalVariableAtIndex__:
   args:
   - name: Variable
     description: Specifies which global variable's value is the array to modify. If the variable's value is not an array, then its value becomes an empty array.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -1545,7 +1544,7 @@ __setPlayerVariable__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to store the value into.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Value
     description: The value that will be stored.
@@ -1568,7 +1567,7 @@ __setPlayerVariableAtIndex__:
     default: Event Player
   - name: Variable
     description: Specifies which player variable's value is the array to modify. If the variable's value is not an array, then its value becomes an empty array.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -2067,7 +2066,7 @@ _&startForcingButton:
     default: Event Player
   - name: Button
     description: The logical button that is being held virtually.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Start Holding Button
@@ -2210,7 +2209,7 @@ __stopChasingGlobalVariable__:
   args:
   - name: Variable
     description: Specifies which global variable to stop modifying.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   return: Void
   en-US: Stop Chasing Global Variable
@@ -2226,7 +2225,7 @@ __stopChasingPlayerVariable__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to stop modifying.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   return: Void
   en-US: Stop Chasing Player Variable
@@ -2246,7 +2245,7 @@ stopDoT:
   args:
   - name: Damage Over Time ID
     description: Specifies which damage over time instance to stop. This id may be last damage over time id or a variable into which last damage over time id was earlier stored.
-    type: DotId
+    type: Damage Over Time ID
     default: Last Damage Over Time ID
   return: Void
   en-US: Stop Damage Over Time
@@ -2341,7 +2340,7 @@ _&stopForcingButton:
     default: Event Player
   - name: Button
     description: The logical button that is no longer being held virtually.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Stop Holding Button
@@ -3001,7 +3000,7 @@ StartAssist:
     default: All Players
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continously reevaluated. This Action will keep asking for and using new Values from reevaluated Inputs.
-    type: __ChaseRateReeval__
+    type: Chase Reevaluation
     default: Assisters and Targets
   en-US: Start Assist
 
@@ -3066,7 +3065,7 @@ DestroyProgressBarHUDText:
   args:
   - name: Text ID
     description: Specifies which Progress Bar HUD text to destroy. This ID may be Last Text ID or a Variable into which Last Text ID was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   en-US: Destroy Progress Bar HUD Text
 
@@ -3126,7 +3125,7 @@ DestroyProgressBarIn-WorldText:
   args:
   - name: Text ID
     description: Specifies which Progress Bar In-World text to destroy. This ID may be Last Text ID or a Variable into which Last Text ID was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   en-US: Destroy Progress Bar In-World Text
 

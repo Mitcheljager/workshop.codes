@@ -372,7 +372,7 @@ __button__:
   args:
   - name: Button
     description: A button constant.
-    type: ButtonLiteral
+    type: Button
     default: Interact
   return: Button
   en-US: Button
@@ -401,7 +401,7 @@ __compare__:
     default: Number
   - name: Comparison
     description: ''
-    type: __Operator__
+    type: Operator
     default: "=="
   - name: Value
     description: The right-hand side of the comparison. This may be any value type
@@ -752,7 +752,7 @@ __globalVar__:
   args:
   - name: Variable
     description: The variable whose value to acquire.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   return: Value
   en-US: Global Variable
@@ -989,7 +989,7 @@ _&isHoldingButton:
     default: Event Player
   - name: Button
     description: The button to check.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Boolean
   en-US: Is Button Held
@@ -1411,7 +1411,7 @@ getLastDoT:
   description: An id representing the most recent damage over time action that was
     executed by the event player (or executed at the global level).
   args: []
-  return: DotId
+  return: Damage Over Time ID
   en-US: Last Damage Over Time ID
 getLastHoT:
   description: An id representing the most recent heal over time action that was executed
@@ -1441,7 +1441,7 @@ getLastCreatedText:
   description: A reference to the last piece of text created by the event player (or
     created at the global level) via the create hud text or create in-world text action.
   args: []
-  return: TextId
+  return: Text ID
   en-US: Last Text ID
 Vector.Left:
   description: Shorthand for the directional vector(1, 0, 0), which points to the
@@ -1771,7 +1771,7 @@ __playerVar__:
     default: Event Player
   - name: Variable
     description: The variable whose value to acquire.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   return: Value
   en-US: Player Variable
@@ -2060,7 +2060,7 @@ __round__:
     default: Number
   - name: Rounding Type
     description: Determines the direction in which the value will be rounded.
-    type: __Rounding__
+    type: Rounding
     default: UP
   return: Integer
   en-US: Round To Integer
