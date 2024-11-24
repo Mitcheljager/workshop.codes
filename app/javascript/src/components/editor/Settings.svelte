@@ -66,106 +66,120 @@
       class="dropdown__content block p-1/4"
       style="width: 300px; right: {isMobile ? -70 : 0}px">
 
-      <h5 class="mt-0 mb-1/8">Settings</h5>
+      <h4 class="mt-0 mb-1/4 text-bold"><strong>Settings</strong></h4>
 
-      <div class="checkbox tooltip mt-1/8">
+      <div class="checkbox mt-1/8">
         <input id="show-line-indent-markers" type="checkbox" bind:checked={$settings["show-indent-markers"]} />
         <label for="show-line-indent-markers">Show line indent markers</label>
-
-        <div class="tooltip__content bg-darker">
-          Show line markers at the expected indents at 1 tab or 4 spaces.
-        </div>
       </div>
 
-      <div class="checkbox tooltip mt-1/8">
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Show line markers at the expected indents at 1 tab or 4 spaces.
+      </div>
+
+      <hr>
+
+      <div class="checkbox mt-1/8">
         <input id="word-wrap" type="checkbox" bind:checked={$settings["word-wrap"]} />
         <label for="word-wrap">Word wrap</label>
-
-        <div class="tooltip__content bg-darker">
-          Wrap lines that no longer fit on screen.
-        </div>
       </div>
 
-      <div class="checkbox tooltip mt-1/8">
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Wrap lines that no longer fit on screen.
+      </div>
+
+      <hr>
+
+      <div class="checkbox mt-1/8">
         <input id="autocomplete-semicolon" type="checkbox" bind:checked={$settings["autocomplete-semicolon"]} />
         <label for="autocomplete-semicolon">Insert semicolon on autocomplete</label>
-
-        <div class="tooltip__content bg-darker">
-          Insert a semicolon at the end of the line when autocompleting actions.
-        </div>
       </div>
 
-      <div class="checkbox tooltip mt-1/8">
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Insert a semicolon at the end of the line when autocompleting actions.
+      </div>
+
+      <hr>
+
+      <div class="checkbox mt-1/8">
         <input id="highlight-trailing-whitespace" type="checkbox" bind:checked={$settings["highlight-trailing-whitespace"]} />
         <label for="highlight-trailing-whitespace">Highlight trailing whitespace</label>
-
-        <div class="tooltip__content bg-darker">
-          Mark whitespace at the end of a line.
-        </div>
       </div>
 
-      <div class="checkbox tooltip mt-1/8">
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Mark whitespace at the end of a line.
+      </div>
+
+      <hr>
+
+      <div class="checkbox mt-1/8">
         <input id="remove-trailing-whitespace-on-save" type="checkbox" bind:checked={$settings["remove-trailing-whitespace-on-save"]} />
         <label for="remove-trailing-whitespace-on-save">Remove trailing whitespace on save</label>
-
-        <div class="tooltip__content bg-darker">
-          Remove whitespace at the end of a line every time you save.
-        </div>
       </div>
 
-      <div class="checkbox tooltip mt-1/8">
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Remove whitespace at the end of a line every time you save.
+      </div>
+
+      <hr>
+
+      <div class="checkbox mt-1/8">
         <input id="hide-wiki-sidebar" type="checkbox" bind:checked={$settings["hide-wiki-sidebar"]} />
         <label for="hide-wiki-sidebar">
           Hide wiki sidebar
         </label>
-
-        <div class="tooltip__content bg-darker">
-          Hide the wiki sidebar from view. It will not appear when using alt+click on a keyword.
-        </div>
       </div>
 
-      <div class="checkbox tooltip mt-1/8">
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Hide the wiki sidebar from view. It will not appear when using alt+click on a keyword.
+      </div>
+
+      <hr>
+
+      <div class="checkbox mt-1/8">
         <input id="autocomplete-parameter-objects" type="checkbox" bind:checked={$settings["autocomplete-parameter-objects"]} />
         <label for="autocomplete-parameter-objects">
           Autocomplete using parameter objects
         </label>
+      </div>
 
-        <div class="tooltip__content bg-darker">
-          Parameter objects change the format of parameters in actions and values to be more readable and less cumbersome to write. You can exclude any parameters you don't change the default off.
-        </div>
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Parameter objects change the format of parameters in actions and values to be more readable and less cumbersome to write. You can exclude any parameters you don't change the default off.
       </div>
 
       {#if $settings["autocomplete-parameter-objects"]}
-        <div class="form-group mt-1/8 tooltip" transition:slide|local={{ duration: 100 }}>
-          <label for="" class="text-base nowrap">Minimum parameter length</label>
+        <div class="pl-1/2 mt-1/8" transition:slide|local={{ duration: 100 }}>
+          <div class="form-group mt-0">
+            <label for="" class="text-base text-small text-light nowrap">Minimum parameter length</label>
 
-          <div class="flex align-center">
-            <input type="range" min=1 max=20 step=1 class="range mr-1/8" bind:value={$settings["autocomplete-min-parameter-size"]} />
-            {$settings["autocomplete-min-parameter-size"]}
+            <div class="flex align-center">
+              <input type="range" min=1 max=20 step=1 class="range mr-1/8" bind:value={$settings["autocomplete-min-parameter-size"]} />
+              {$settings["autocomplete-min-parameter-size"]}
+            </div>
           </div>
 
-          <div class="tooltip__content bg-darker">
+          <div class="text-small mt-1/16 text-base">
             Only autocomplete when an action or value has equal or more than this value in parameters.
           </div>
-        </div>
 
-        <div class="form-group mt-1/8 tooltip" transition:slide|local={{ duration: 100 }}>
-          <label for="" class="text-base nowrap">Minimum newline length</label>
+          <div class="form-group mt-1/8">
+            <label for="" class="text-base text-small text-light nowrap">Minimum newline length</label>
 
-          <div class="flex align-center">
-            <input type="range" min=1 max=20 step=1 class="range mr-1/8" bind:value={$settings["autocomplete-min-parameter-newlines"]} />
-            {$settings["autocomplete-min-parameter-newlines"]}
+            <div class="flex align-center">
+              <input type="range" min=1 max=20 step=1 class="range mr-1/8" bind:value={$settings["autocomplete-min-parameter-newlines"]} />
+              {$settings["autocomplete-min-parameter-newlines"]}
+            </div>
           </div>
 
-          <div class="tooltip__content bg-darker">
+          <div class="text-small mt-1/16 text-base">
             Place each parameter on a new line when the action or value has equal or more than this value in parameters.
           </div>
         </div>
       {/if}
 
-      <hr />
+      <hr class="large">
 
-      <h5 class="mt-0 mb-1/8">Font</h5>
+      <h5 class="mt-0 mb-1/4 text-bold"><strong>Font</strong></h5>
 
       <div class="form-group-inline">
         <label for="" class="text-base">Family</label>
@@ -177,9 +191,9 @@
         <input type="range" min=10 max=18 step=1 class="range" bind:value={$settings["editor-font-size"]} />
       </div>
 
-      <hr/>
+      <hr class="large">
 
-      <h5 class="mt-1/4 mb-1/8">Cursor</h5>
+      <h5 class="mt-0 mb-1/4 text-bold"><strong>Cursor</strong></h5>
 
       <div class="form-group-inline">
         <label for="" class="text-base font-size nowrap">Color</label>
@@ -191,9 +205,9 @@
         <input type="range" min=1 max=10 step=1 class="range" bind:value={$settings["editor-cursor-width"]} />
       </div>
 
-      <hr/>
+      <hr class="large">
 
-      <h5 class="mt-1/4 mb-0">Syntax Highlighting</h5>
+      <h5 class="mt-0 mb-1/4 text-bold"><strong>Syntax Highlighting</strong></h5>
 
       {#each syntaxHighlight as color}
         <div class="form-group-inline mt-1/8">
@@ -202,9 +216,9 @@
         </div>
       {/each}
 
-      <hr/>
+      <hr class="large">
 
-      <button class="button button--link button--small pb-0" on:click={resetToDefault}>Reset all to default</button>
+      <button class="button button--link button--small pb-0 pt-0" on:click={resetToDefault}>Reset all to default</button>
     </div>
   {/if}
 </div>
