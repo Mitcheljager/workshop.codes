@@ -59,25 +59,27 @@
   {/if}
 </div>
 
-<p class="text-small">
+<p class="text-small mb-0">
   Include this key in your project using
   <code style="color: var(--color-punctuation)">
     <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>)
-  </code>.
+  </code>
 </p>
 
-<p class="text-small">
-  Include optional parameters just like you would when using <code>Custom String</code>.
-  <br />
-  <code class="inline-block mt-1/8" style="color: var(--color-punctuation)">
-    <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>,
-    <span style="color: var(--color-value)">Icon String</span>(<span style="color: var(--color-variable)">Bolt</span>))
-  </code>
-  <br />
-  <code class="inline-block mt-1/8">
-    Some translation &#123;0&#125; with an icon in the middle
-  </code>
+<p class="text-small mt-1/8 mb-0">
+  Include optional parameters just like you would when using <code>Custom String</code>
 </p>
+
+<code class="inline-block mt-1/8 text-small" style="color: var(--color-punctuation)">
+  <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>,
+  <span style="color: var(--color-value)">Icon String</span>(<span style="color: var(--color-variable)">Bolt</span>))
+</code>
+
+<code class="inline-block mt-1/8 text-small">
+  Some translation &#123;0&#125; with an icon in the middle
+</code>
+
+<hr class="mt-1/4 mb-1/4">
 
 {#if $translationKeys[selectedKey]}
   {#each $selectedLanguages as language}
