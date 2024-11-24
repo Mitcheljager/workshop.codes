@@ -22,7 +22,7 @@ function wordSet(words) {
   return set
 }
 
-const keywords = wordSet(["variables", "subroutines", "enabled", "disabled", "event", "rule", "actions", "conditions", "settings", "maps", "heroes"])
+const keywords = wordSet(["variables", "subroutines", "event", "rule", "actions", "conditions", "settings"])
 const actions = wordSet(
   /*
    * Regenerate this with (requires [yq](https://github.com/kislyuk/yq)):
