@@ -44,6 +44,7 @@
     "@types/codemirror": "^5.60.15",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^8.14.0",
+    "acorn": "^8.1.0",
     "eslint": "9.14.0",
     "eslint-plugin-svelte": "^2.35.1",
     "globals": "^15.12.0",
