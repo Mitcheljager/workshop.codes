@@ -75,7 +75,7 @@
   </code>
   <br />
   <code class="inline-block mt-1/8">
-    Some translation &#123;0&#125; with and icon in the middle
+    Some translation &#123;0&#125; with an icon in the middle
   </code>
 </p>
 
