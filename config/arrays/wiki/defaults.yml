@@ -11,5 +11,5 @@ A: variableName
 Hero: Hero(Tracer)
 Team: Team(Team 1)
 Count Of: Count Of(Array())
-Global Variable: Global.variable
-Player Variable: Player.variable
+Global Variable: Global.variableName
+Player Variable: Player.variableName

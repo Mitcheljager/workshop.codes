@@ -470,7 +470,7 @@
     default: Color(White)
   - name: Spectators
     description: Whether spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   return: Void
   en-US: Create In-World Text
@@ -572,7 +572,7 @@
   args:
   - name: Entity
     description: Specifies which effect entity to destroy. This entity may be last created entity or a variable into which last created entity was earlier stored.
-    type: EntityId
+    type: Entity ID
     default: Last Created Entity Entity
   return: Void
   en-US: Destroy Effect
@@ -590,7 +590,7 @@
   args:
   - name: Entity
     description: Specifies which icon entity to destroy. This entity may be last created entity or a variable into which last created entity was earlier stored.
-    type: EntityId
+    type: Entity ID
     default: Last Created Entity Entity
   return: Void
   en-US: Destroy Icon
@@ -2400,6 +2400,7 @@
     description: The ammo that will be set.
     type: Integer
     default: 0
+  return: Void
   en-US: Set Ammo
 -
   description: Set the max ammo of one or more Players.
@@ -2416,7 +2417,7 @@
     default: 0
   - name: Ammo
     description: The max ammo that will be set.
-    type: Unsigned integer
+    type: Integer
     default: 0
   en-US: Set Max Ammo
 -
@@ -2430,7 +2431,7 @@
     default: Event Player
   - name: Weapon
     description: The number of the weapon to be equipped. 1 Is the first weapon, and 2 is the second. If the specified weapon does not exist, players will use the default weapon.
-    type: Unsigned integer
+    type: Integer
     default: 0
   en-US: Set Weapon
 -
@@ -2600,7 +2601,7 @@
     default: Primary Fire
   - name: Resource Percent
     description: The Percentage of Resource that will be set with respect to each Player's Ability Resource capacity.
-    type: Unsigned Float
+    type: Float
     default: 0
   en-US: Set Ability Resource
 -
@@ -2614,7 +2615,7 @@
     default: Event Player
   - name: Jump Vertical Speed Percent
     description: The Percentage of Resource that will be set with respect to each Player's Ability Resource capacity.
-    type: Unsigned Float
+    type: Float
     default: 100
   en-US: Set Jump Vertical Speed
 -
@@ -2704,7 +2705,7 @@
     default: Event Player
   - name: Scale
     description: The multiplier applied to the size of the player or players (So 0.5 halves the size, 2.0 doubles the size, etc.).
-    type: Unsigned Float
+    type: Float
     default: 1
   - name: Reevaluation
     description: If this value is True, then scale will be Reevaluated and applied to the Player or Players every frame. If this value is False, then the scale is only avaluated once when the action begins.
@@ -2732,7 +2733,7 @@
     default: Event Player
   - name: Scale
     description: The multiplier applied to the size of the barriers (So 0.5 halves the size, 2.0 doubles the size, etc.).
-    type: Unsigned Float
+    type: Float
     default: 1
   - name: Reevaluation
     description: If this value is True, then scale will be Reevaluated and applied to the Player or Players every frame. If this value is False, then the scale is only avaluated once when the action begins.
@@ -2804,7 +2805,7 @@
     default: Event Player
   - name: Pitch Scalar
     description: The amount that the pitch of the voice will be raised. (Up to 1.5) or lowered (Down to 0.5).
-    type: Unsigned float
+    type: Float
     default: 0
   - name: Reevaluation
     description: If True, Pitch Scalar is evaluated and updated every frame. If False, Pitch Scalar is evaluated once when the actions executes.
@@ -2838,7 +2839,7 @@
     default: Armor
   - name: Max Health
     description: The size of the Health Pool
-    type: Unsigned Float
+    type: Float
     default: 100
   - name: Recoverable
     description: Whether health in this pool can be healed once it is lost. If this is value is False, then the Health Pool will shrink and disappear as it is damaged.
@@ -2878,7 +2879,7 @@
     default: Event Player
   - name: Amount
     description: How much health the Player or Players will have.
-    type: Unsigned float
+    type: Float
     default: 1
   en-US: Set Player Health
 -
@@ -2987,7 +2988,7 @@
     default: All Players
   - name: Value
     description: The value of the progress bar to be displayed as a percentage from 0 to 100.
-    type: Unsigned float
+    type: Float
     default: 0
   - name: Text
     description: The text to be displayed (can be blank)
@@ -3015,7 +3016,7 @@
     default: Visible To, Values, and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   en-US: Create Progress Bar HUD Text
 -
@@ -3040,7 +3041,7 @@
     default: All Players
   - name: Value
     description: The value of the progress bar to be displayed as a percentage from 0 to 100.
-    type: Unsigned float
+    type: Float
     default: 0
   - name: Text
     description: The text to be displayed (can be blank)
@@ -3072,7 +3073,7 @@
     default: Visible To, Values, and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   en-US: Create Progress Bar In-World Text
 -

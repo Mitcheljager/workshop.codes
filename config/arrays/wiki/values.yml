@@ -485,7 +485,7 @@
   args:
   - name: String
     description: ''
-    type: StringLiteral
+    type: String
     default: '"Hello"'
   - name: "{0}"
     description: The value that will be converted to text and used to replace {0}.
@@ -597,7 +597,7 @@
     description: The player, icon entity, or effect entity whose existence to check.
     type:
     - Player
-    - EntityId
+    - Entity ID
     default: Event Player
   return: Boolean
   en-US: Entity Exists
@@ -1373,7 +1373,7 @@
 -
   description: A reference to the last effect or icon entity created by the event
     player (or created at the global level).
-  return: EntityId
+  return: Entity ID
   en-US: Last Created Entity
 -
   description: An id representing the most recent start damage modification action
@@ -1426,7 +1426,7 @@
   description: The vector in local coordinates corresponding to the provided vector
     in world coordinates.
   args:
-  - name: WORLD Vector
+  - name: World Vector
     description: The vector in world coordinates that will be converted to local coordinates.
     type: Vector
     default: Vector
@@ -1434,21 +1434,21 @@
     description: The player to whom the resulting vector will be relative.
     type: Player
     default: Event Player
-  - name: TRANSFORMATION
+  - name: Transformation
     description: Specifies whether the vector should receive a rotation and a translation
       (usually applied to positions) or only a rotation (usually applied to directions
       and velocities).
     type: Transform
-    default: ROTATION
+    default: Rotation
   return: Vector
   en-US: Local Vector Of
 -
   description: A map constant.
   args:
-  - name: MAP
+  - name: Map
     description: A map constant.
-    type: MapLiteral
-    default: AYUTTHAYA
+    type: Map
+    default: Ayuttahaya
   return: Map
   en-US: Map
   es-ES: Mapa
@@ -2156,7 +2156,7 @@
   args:
   - name: String
     description: ''
-    type: LocalizedStringLiteral
+    type: String
     default: Hello
   - name: "{0}"
     description: The value that will be converted to text and used to replace {0}.
@@ -2393,12 +2393,12 @@
     description: The player to whom the local vector is relative.
     type: Player
     default: Event Player
-  - name: TRANSFORMATION
+  - name: Transformation
     description: Specifies whether the vector should receive a rotation and a translation
       (usually applied to positions) or only a rotation (usually applied to directions
       and velocities).
     type: Transform
-    default: ROTATION
+    default: Rotation
   return: Vector
   en-US: World Vector Of
 -
@@ -2587,11 +2587,11 @@
   args:
   - name: Category
     description: The name of the category in which this setting will be found.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Name
     description: The name of this setting.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Default
     description: The default value for this setting.
@@ -2618,11 +2618,11 @@
   args:
   - name: Category
     description: The name of the category in which this setting will be found.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Name
     description: The name of this setting.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Default
     description: The default value for this setting.
@@ -2649,11 +2649,11 @@
   args:
   - name: Category
     description: The name of the category in which this setting will be found.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Name
     description: The name of this setting.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Default
     description: The default value for this setting.
@@ -2870,6 +2870,7 @@
     description: The index of the character to be acquired (with 0 as the first character, 1 as the second character, etc.).
     type: Integer
     default: 0
+  return: String
   en-US: Char In String
 -
   description: The index of a character within a String or -1 if no such character can be found.
@@ -2882,6 +2883,7 @@
     description: The character for which to search
     type: String
     default: Global Variable
+  return: Index
   en-US: Index Of String Char
 -
   description: Results in an Array of String Values. These String Values will be built from the specified String Value, split around the separator String.
@@ -2894,6 +2896,8 @@
     description: The separator String with which to split the String Value.
     type: String
     default: Global Variable
+  return:
+    Array: String
   en-US: String Split
 -
   description: Results in a String Value. This String Value will be built from the specified String Value, where all occurences of the pattern String are replaced with the replacement String.
@@ -2910,4 +2914,5 @@
     description: The String Value with which to replace the pattern String
     type: String
     default: Global Variable
+  return: String
   en-US: String Replace
