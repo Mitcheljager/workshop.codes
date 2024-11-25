@@ -664,7 +664,7 @@ _&getEyePosition:
     description: The position of a player's first person view (used for aiming)
     type: Player
     default: Event Player
-  return: Position
+  return: Vector
   en-US: Eye Position
 _&getFacingDirection:
   description: The unit-length directional vector of a player's current facing relative
@@ -729,7 +729,7 @@ getFlagPosition:
     description: The team whose flag position to acquire.
     type: Team
     default: Team
-  return: Position
+  return: Vector
   en-US: Flag Position
 Vector.Forward:
   description: Shorthand for the directional vector(0, 0, 1), which points forward.
@@ -1576,7 +1576,7 @@ nearestWalkablePosition:
     description: The position from which to search for the nearest walkable position.
     type: Position
     default: Vector
-  return: Position
+  return: Vector
   en-US: Nearest Walkable Position
 normalize:
   description: The unit-length normalization of a vector.
@@ -1729,7 +1729,7 @@ __or__:
 getPayloadPosition:
   description: The position in the world of the active payload.
   args: []
-  return: Position
+  return: Vector
   en-US: Payload Position
 getPayloadProgressPercentage:
   description: The current progress towards the destination for the active payload
@@ -1864,7 +1864,7 @@ _&getPosition:
     description: The player whose position to acquire.
     type: Player
     default: Event Player
-  return: Position
+  return: Vector
   en-US: Position Of
 __raiseToPower__:
   description: The left-hand operand raised to the power of the right-hand operand.
@@ -2022,7 +2022,7 @@ __raycastHitPosition__:
       be included in the ray cast.
     type: BooleanValue
     default: 'True'
-  return: Position
+  return: Vector
   en-US: Ray Cast Hit Position
 __removeFromArray__:
   description: A copy of an array with one or more values removed (if found).
