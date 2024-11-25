@@ -1,6 +1,6 @@
 -
   return: Void
-  en-US: Abort2
+  en-US: Abort
 -
   description: Stops execution of the action list if this action's condition evaluates to true. If it does not, execution continues with the next action.
   args:
