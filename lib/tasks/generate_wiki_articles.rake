@@ -13,7 +13,7 @@ task :generate_wiki_articles => :environment do
   @category = Wiki::Category.find_by_title("Actions")
   @category = Wiki::Category.create(title: "Actions", slug: "actions") unless @category.present?
 
-  actions.each do |name, content|
+  actions.each do |content|
     @article = Wiki::Article.find_by_title(content["en-US"])
     next if @article.present?
 
@@ -75,7 +75,7 @@ task :generate_wiki_articles => :environment do
   @category = Wiki::Category.find_by_title("Values")
   @category = Wiki::Category.create(title: "Values", slug: "values") unless @category.present?
 
-  values.each do |name, content|
+  values.each do |content|
     @article = Wiki::Article.find_by_title(content["en-US"])
     next if @article.present?
 
