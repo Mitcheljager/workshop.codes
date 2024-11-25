@@ -29,7 +29,7 @@
   args:
   - name: Value
     description: The real number value whose absolute value will be computed.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Absolute Value
@@ -205,11 +205,11 @@
   args:
   - name: Angle
     description: One of the two angles between which to measure the resulting angle.
-    type: float
+    type: Float
     default: Number
   - name: Angle
     description: One of the two angles between which to measure the resulting angle.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Angle Difference
@@ -235,7 +235,7 @@
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arccosine In Degrees
@@ -244,7 +244,7 @@
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arccosine In Radians
@@ -253,7 +253,7 @@
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arcsine In Degrees
@@ -262,7 +262,7 @@
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arcsine In Radians
@@ -272,11 +272,11 @@
   args:
   - name: Numerator
     description: Numerator input for the function.
-    type: float
+    type: Float
     default: Number
   - name: Denominator
     description: Denominator input for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arctangent In Degrees
@@ -286,11 +286,11 @@
   args:
   - name: Numerator
     description: Numerator input for the function.
-    type: float
+    type: Float
     default: Number
   - name: Denominator
     description: Denominator input for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arctangent In Radians
@@ -423,7 +423,7 @@
   args:
   - name: Angle
     description: Angle in degrees.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Cosine From Degrees
@@ -432,7 +432,7 @@
   args:
   - name: Angle
     description: Angle in radians.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Cosine From Radians
@@ -506,11 +506,11 @@
   args:
   - name: Horizontal Angle
     description: The horizontal angle in degrees used to construct the resulting vector.
-    type: float
+    type: Float
     default: Number
   - name: Vectical Angle
     description: The vertical angle in degrees used to construct the resulting vector.
-    type: float
+    type: Float
     default: Number
   return: Direction
   en-US: Direction From Angles
@@ -1193,7 +1193,7 @@
     default: Vector
   - name: View Angle
     description: The view angle to compare against in degrees.
-    type: float
+    type: Float
     default: Number
   return: Boolean
   en-US: Is In View Angle
@@ -1468,11 +1468,11 @@
   args:
   - name: Value
     description: The left-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Max
@@ -1490,11 +1490,11 @@
   args:
   - name: Value
     description: The left-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Min
@@ -1504,7 +1504,7 @@
   args:
   - name: Value
     description: The left-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
@@ -1770,7 +1770,7 @@
     default: Team
   - name: View Angle
     description: The view angle to compare against in degrees.
-    type: float
+    type: Float
     default: Number
   return:
     Array: Player
@@ -1839,7 +1839,7 @@
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Raise To Power
@@ -1863,11 +1863,11 @@
   args:
   - name: Min
     description: The smallest real number allowed.
-    type: float
+    type: Float
     default: Number
   - name: Max
     description: The largest real number allowed.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Random Real
@@ -2019,7 +2019,7 @@
   args:
   - name: Value
     description: The real number to round.
-    type: float
+    type: Float
     default: Number
   - name: Rounding Type
     description: Determines the direction in which the value will be rounded.
@@ -2062,7 +2062,7 @@
   args:
   - name: Angle
     description: Angle in degrees.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Sine From Degrees
@@ -2071,7 +2071,7 @@
   args:
   - name: Angle
     description: Angle in radians.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Sine From Radians
@@ -2199,7 +2199,7 @@
   args:
   - name: Angle
     description: Angle in degrees.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Tangent From Degrees
@@ -2208,7 +2208,7 @@
   args:
   - name: Angle
     description: Angle in radians.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Tangent From Radians
@@ -2293,15 +2293,15 @@
   args:
   - name: X
     description: The x value of the vector.
-    type: float
+    type: Float
     default: Number
   - name: Y
     description: The y value of the vector.
-    type: float
+    type: Float
     default: Number
   - name: Z
     description: The z value of the vector.
-    type: float
+    type: Float
     default: Number
   return: Vector
   en-US: Vector

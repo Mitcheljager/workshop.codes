@@ -48,7 +48,7 @@
     default: Vector
   - name: Speed
     description: The magnitude of the change to the velocities of the player or players.
-    type: float
+    type: Float
     default: Number
   - name: Relative
     description: Specifies whether direction is relative to world coordinates or the local coordinates of the player or players.
@@ -132,7 +132,7 @@
     default: Number
   - name: Rate
     description: The amount of change that will happen to the variable's value each second.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
@@ -155,7 +155,7 @@
     default: Number
   - name: Duration
     description: The amount of time, in seconds, over which the variable's value will approach the destination.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
@@ -184,7 +184,7 @@
     default: Number
   - name: Rate
     description: The amount of change that will happen to the variable's value each second.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
@@ -213,7 +213,7 @@
     default: Number
   - name: Duration
     description: The amount of time, in seconds, over which the variable's value will approach the destination.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
@@ -375,7 +375,7 @@
     default: Left
   - name: SORT ORDER
     description: The sort order of the text relative to other text in the same location. A higher sort order will come after a lower sort order.
-    type: float
+    type: Float
     default: Number
   - name: Header Color
     description: The color of the header.
@@ -454,7 +454,7 @@
     default: Vector
   - name: Scale
     description: The text's scale.
-    type: float
+    type: Float
     default: Number (1)
   - name: Clipping
     description: Specifies whether the text can be seen through walls or is instead clipped.
@@ -490,7 +490,7 @@
     default: 'Null'
   - name: Amount
     description: The amount of damage to apply. This amount may be modified by buffs, debuffs, or armor.
-    type: float
+    type: Float
     default: Number
   return: Void
   en-US: Damage
@@ -784,15 +784,15 @@
     default: A
   - name: Range Start
     description: The control variable is set to this value when the loop begins.
-    type: float
+    type: Float
     default: Number
   - name: Range Stop
     description: If the control variable reaches or passes this value, then the loop will exit, and execution jumps to the next action after the end action. Whether this value is considered passed or not is based on whether the step value is negative or positive. If the control variable has already reached or passed this value when the loop begins, then the loop exits.
-    type: float
+    type: Float
     default: Count OF
   - name: Step
     description: This value is added to the control variable when the end action is reached. If this modification causes the control variable to reach or pass the range stop value, then the loop exits, and execution jumps to the next action after the end action. Otherwise, the loop continues, and execution jumps to the next action after the for action.
-    type: float
+    type: Float
     default: Number (1)
   return: Void
   en-US: For Global Variable
@@ -813,15 +813,15 @@
     default: A
   - name: Range Start
     description: The control variable is set to this value when the loop begins.
-    type: float
+    type: Float
     default: Number
   - name: Range Stop
     description: If the control variable reaches or passes this value, then the loop will exit, and execution jumps to the next action after the end action. Whether this value is considered passed or not is based on whether the step value is negative or positive. If the control variable has already reached or passed this value when the loop begins, then the loop exits.
-    type: float
+    type: Float
     default: Count OF
   - name: Step
     description: This value is added to the control variable when the end action is reached. If this modification causes the control variable to reach or pass the range stop value, then the loop exits, and execution jumps to the next action after the end action. Otherwise, the loop continues, and execution jumps to the next action after the for action.
-    type: float
+    type: Float
     default: Number (1)
   return: Void
   en-US: For Player Variable
@@ -846,7 +846,7 @@
     default: 'Null'
   - name: Amount
     description: The amount of healing to apply. This amount may be modified by buff or debuffs. Healing is capped by each player's max health.
-    type: float
+    type: Float
     default: Number
   return: Void
   en-US: Heal
@@ -3000,7 +3000,7 @@
     default: Left
   - name: Sort Order
     description: The sort order of the text relative to other text in the same location. Text with a higher sort order will come after the text with a lower sort order.
-    type: float
+    type: Float
     default: 0
   - name: Progress Bar Color
     description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
@@ -3053,7 +3053,7 @@
     default: Event Player
   - name: Scale
     description: The text's scale.
-    type: float
+    type: Float
     default: Number
   - name: Clipping
     description: Specifies whether the text can be seen through walls or is instead clipped.
