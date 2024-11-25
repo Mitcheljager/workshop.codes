@@ -60,8 +60,6 @@ export function destroy(): void {
 function postOnSliderUpdate(values: any[], handle: number): void {
   let element
 
-  if (!element) return
-
   if (handle == 0) {
     element = document.getElementById("post_min_players") as HTMLFormElement
     const maxElement = document.getElementById("post_max_players") as HTMLFormElement
@@ -76,7 +74,7 @@ function postOnSliderUpdate(values: any[], handle: number): void {
     if (minElement.value == 0) minElement.value = 1
   }
 
-  element.value = Math.round(values[handle])
+  element!.value = Math.round(values[handle])
 
   const warningElement = document.querySelector("[data-role='vanish-on-slider-update']") as HTMLElement
 
