@@ -9,7 +9,7 @@
     <%= link_to @article.category.title, wiki_category_path(@article.category.slug), class: "article__category" %>
 
     <h1 class="article__title">
-      <%= @article.title %>
+      <strong><%= @article.title %></strong>
 
       <small class="article__subtitle mb-0" title="<%= @article.updated_at %>">
         Last updated <%= @article.updated_at.strftime("%B %d, %Y") %>

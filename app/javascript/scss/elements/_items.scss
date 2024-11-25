@@ -428,17 +428,26 @@
     }
   }
 
+  a {
+    color: currentColor;
+    text-decoration: underline;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
   img {
     max-width: 100%;
     height: auto;
   }
 
-  h1,
-  h2 {
+  h1 {
     margin: $margin 0 $margin * 0.5;
     line-height: 1.1em;
   }
 
+  h2,
   h3,
   h4,
   h5,

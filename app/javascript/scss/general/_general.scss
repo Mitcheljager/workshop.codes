@@ -80,12 +80,20 @@ pre {
 blockquote {
   display: inline-block;
   margin: $margin * 0.5 0;
-  padding: 1em 2em 1em 2em;
-  border-left: 3px solid $border-color;
-  background: rgba($black, .1);
+  padding: 1em 1.5em 1em 1.5em;
+  border-left: 3px solid var(--primary);
+  background: rgba($black, .35);
   line-height: 1.5em;
-  border-top-right-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius * 0.5;
+  border-bottom-right-radius: $border-radius * 0.5;
+
+  strong {
+    color: $text-color-lightest;
+  }
+
+  mark strong {
+    color: var(--primary);
+  }
 }
 
 strong {
