@@ -1,6 +1,6 @@
 <%
-  actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml"))).map { |_, c| c }.sort_by { |c| c["en-US"] }
-  values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml"))).map { |_, c| c }.sort_by { |c| c["en-US"] }
+  actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml"))).sort_by { |c| c["en-US"] }
+  values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml"))).sort_by { |c| c["en-US"] }
   events = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "events.yml"))).map { |_, c| c }.sort_by { |c| c["en-US"] }
   constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml"))).map { |n, c| n }.sort_by { |n| n }
 %>

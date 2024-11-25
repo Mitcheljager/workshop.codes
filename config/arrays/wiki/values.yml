@@ -1,3 +1,4 @@
+-
   args:
   - name: Player
     description: The player whose ability to check.
@@ -71,11 +72,9 @@
     \       8. Genji\n        9. Cassidy\n        10. Junkrat\n        11. Soldier\n
     \       12. Mei\n        13. Sombra\n        14. Doomfist\n        15. Ashe  \n
     \       16. Echo  \n"
-  args: []
   return:
     Array: Hero
   en-US: All Damage Heroes
-  de-DE: Alle Schadenshelden
 -
   description: "The array of all heroes in overwatch. The order is as follows:\n        \n
     \       0. Reaper   \n        1. Tracer   \n        2. Mercy    \n        3. Hanzo
@@ -87,7 +86,6 @@
     Sombra   \n        22. Doomfist \n        23. Ana      \n        24. Orisa    \n
     \       25. Brigitte \n        26. Moira    \n        27. Hammond  \n        28.
     Ashe     \n        29. Echo \n        30. Baptiste    \n        31. Sigma    \n"
-  args: []
   return:
     Array: Hero
   en-US: All Heroes
@@ -148,21 +146,17 @@
   description: "The array of all support heroes in overwatch. The order is as follows:\n
     \       \n        0. Mercy\n        1. Zenyatta\n        2. Lucio\n        3.
     Ana\n        4. Brigitte\n        5. Moira\n        6. Baptiste    \n        "
-  args: []
   return:
     Array: Hero
   en-US: All Support Heroes
-  de-DE: Alle Unterstützungshelden
 -
   description: "The array of all tank heroes in overwatch. The order is as follows:\n
     \       \n        0. Reinhardt\n        1. Winston\n        2. Roadhog\n        3.
     Zarya\n        4. Dva\n        5. Orisa\n        6. Hammond\n        7. Sigma
     \   \n        "
-  args: []
   return:
     Array: Hero
   en-US: All Tank Heroes
-  de-DE: Alle Tankhelden
 -
   description: The player's current height in meters above a surface. Results in 0
     whenever the player is on a surface.
@@ -422,7 +416,6 @@
 -
   description: The team that is currently accumulating score percentage in control
     mode. Results in all if neither team is accumulating score.
-  args: []
   return: Team
   en-US: Control Mode Scoring Team
 -
@@ -468,7 +461,6 @@
 -
   description: The current array element being considered. Only meaningful during
     the evaluation of values such as filtered array and sorted array.
-  args: []
   return:
   - Object
   - Array
@@ -476,19 +468,16 @@
 -
   description: The current array index being considered. Only meaningful during
     the evaluation of values such as filtered array and sorted array.
-  args: []
   return:
   - Object
   - Array
   en-US: Current Array Index
 -
   description: The current game mode of the custom game.
-  args: []
   return: Gamemode
   en-US: Current Game Mode
 -
   description: The current map of the custom game.
-  args: []
   return: Map
   en-US: Current Map
 -
@@ -598,7 +587,6 @@
   en-US: Down
 -
   description: An array with no elements.
-  args: []
   return: Array
   en-US: Empty Array
 -
@@ -738,12 +726,9 @@
     - Integer
     - Integer
   en-US: Forward
-__global__:
-  return: GlobalVariable
+-
+  return: Global Variable
   en-US: Global
-  it-IT: Globale
-  pl-PL: Globalnie
-  zh-TW: 全域
 -
   description: The current value of a global variable, which is a variable that belongs
     to the game itself.
@@ -970,12 +955,10 @@ __global__:
   en-US: Is Alive
 -
   description: Whether the match is currently in its assemble heroes phase.
-  args: []
   return: Boolean
   en-US: Is Assembling Heroes
 -
   description: Whether the match is between rounds.
-  args: []
   return: Boolean
   en-US: Is Between Rounds
 -
@@ -1038,7 +1021,6 @@ __global__:
   en-US: Is Communicating Any Voice line
 -
   description: Whether the point is locked in control mode.
-  args: []
   return: Boolean
   en-US: Is Control Mode Point Locked
 -
@@ -1064,7 +1046,6 @@ __global__:
   en-US: Is In Alternate Form
 -
   description: Whether the current game of capture the flag is in sudden death.
-  args: []
   return: Boolean
   en-US: Is CTF Mode In Sudden Death
 -
@@ -1135,7 +1116,6 @@ __global__:
 -
   description: Whether the main phase of the match is in progress (during which time
     combat and scoring are allowed).
-  args: []
   return: Boolean
   en-US: Is Game In Progress
 -
@@ -1188,7 +1168,6 @@ __global__:
   en-US: Is In Line of Sight
 -
   description: Whether the match is currently in its setup phase.
-  args: []
   return: Boolean
   en-US: Is In Setup
 -
@@ -1229,7 +1208,6 @@ __global__:
   en-US: Is Jumping
 -
   description: Whether the match has finished.
-  args: []
   return: Boolean
   en-US: Is Match Complete
 -
@@ -1390,37 +1368,31 @@ __global__:
   en-US: Is Using Ultimate
 -
   description: Whether the match is waiting for players to join before starting.
-  args: []
   return: Boolean
   en-US: Is Waiting For Players
 -
   description: A reference to the last effect or icon entity created by the event
     player (or created at the global level).
-  args: []
   return: EntityId
   en-US: Last Created Entity
 -
   description: An id representing the most recent start damage modification action
     that was executed by the event player (or executed at the global level).
-  args: []
   return: DamageModificationId
   en-US: Last Damage Modification ID
 -
   description: An id representing the most recent damage over time action that was
     executed by the event player (or executed at the global level).
-  args: []
   return: Damage Over Time ID
   en-US: Last Damage Over Time ID
 -
   description: An id representing the most recent heal over time action that was executed
     by the event player (or executed at the global level).
-  args: []
   return: HotId
   en-US: Last Heal Over Time ID
 -
   description: An id representing the most recent start healing modification action
     that was executed by the event player (or executed at the global level).
-  args: []
   return: HealingModificationId
   en-US: Last Healing Modification ID
 -
@@ -1438,7 +1410,6 @@ __global__:
 -
   description: A reference to the last piece of text created by the event player (or
     created at the global level) via the create hud text or create in-world text action.
-  args: []
   return: Text ID
   en-US: Last Text ID
 -
@@ -1486,12 +1457,10 @@ __global__:
   zh-TW: 地圖
 -
   description: The current round of the match, counting up from 1.
-  args: []
   return: Integer
   en-US: Match Round
 -
   description: The amount of time in seconds remaining in the current game mode phase.
-  args: []
   return: Float
   en-US: Match Time
 -
@@ -1684,7 +1653,6 @@ __global__:
 -
   description: The control point, payload checkpoint, or payload destination currently
     active (either 0, 1, or 2). Valid in assault, assault/escort, escort, and control.
-  args: []
   return: Integer
   en-US: Objective Index
 -
@@ -1726,13 +1694,11 @@ __global__:
   en-US: Or
 -
   description: The position in the world of the active payload.
-  args: []
   return: Vector
   en-US: Payload Position
 -
   description: The current progress towards the destination for the active payload
     (expressed as a percentage).
-  args: []
   return: Float
   en-US: Payload Progress Percentage
 -
@@ -1852,7 +1818,6 @@ __global__:
 -
   description: The current progress towards capture for the active control point (expressed
     as a percentage).
-  args: []
   return: Float
   en-US: Point Capture Percentage
 -
@@ -2076,7 +2041,6 @@ __global__:
   description: Provides a percentage representing the CPU load of the current game
     instance. As this number approaches or exceeds 100, it becomes increasingly likely
     that the instance will be shut down because it is consuming too many resources.
-  args: []
   return: Float
   en-US: Server Load
 -
@@ -2084,7 +2048,6 @@ __global__:
     game instance over the last two seconds. As this number approaches or exceeds
     100, it becomes increasingly likely that the instance will be shut down because
     it is consuming too many resources.
-  args: []
   return: Float
   en-US: Server Load Average
 -
@@ -2092,7 +2055,6 @@ __global__:
     game instance over the last two seconds. As this number approaches or exceeds
     100, it becomes increasingly likely that the instance will be shut down because
     it is consuming too many resources.
-  args: []
   return: Float
   en-US: Server Load Peak
 -
@@ -2284,7 +2246,6 @@ __global__:
 -
   description: The total time in seconds that have elapsed since the game instance
     was created (including setup time and transitions).
-  args: []
   return: Float
   en-US: Total Time Elapsed
 -
@@ -2551,7 +2512,6 @@ __global__:
 -
   description: An ID representing the most recent Add Health Pool action that was
     executed by the event player (or executed at the global level).
-  args: []
   return: HealthPoolId
   en-US: Last Created Health Pool
 -

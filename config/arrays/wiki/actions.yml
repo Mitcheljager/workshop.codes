@@ -1,5 +1,4 @@
 -
-  args:
   return: Void
   en-US: Abort2
 -
@@ -13,12 +12,10 @@
   en-US: Abort If
 -
   description: Stops execution of the action list if at least one condition in the condition list is false. If all conditions are true, execution continues with the next action.
-  args: []
   return: Void
   en-US: Abort If Condition Is False
 -
   description: Stops execution of the action list if all conditions in the condition list are true. If any are false, execution continues with the next action.
-  args: []
   return: Void
   en-US: Abort If Condition Is True
 -
@@ -500,7 +497,6 @@
 -
   description: Instantly ends the match in a draw. This action has no effect in free-for-all
     modes.
-  args: []
   return: Void
   en-US: Declare Match Draw
 -
@@ -516,7 +512,6 @@
 -
   description: Declare a draw for the current round. This only works in the elimination
     game mode.
-  args: []
   return: Void
   en-US: Declare Round Draw
 -
@@ -541,27 +536,22 @@
   en-US: Declare Team Victory
 -
   description: Removes all dummy bots from the match.
-  args: []
   return: Void
   en-US: Destroy All Dummy Bots
 -
   description: Destroys all effect entities created by create effect.
-  args: []
   return: Void
   en-US: Destroy All Effects
 -
   description: Destroys all hud text that was created by the create hud text action.
-  args: []
   return: Void
   en-US: Destroy All HUD Text
 -
   description: Destroys all icon entities created by create icon.
-  args: []
   return: Void
   en-US: Destroy All Icons
 -
   description: Destroys all in-world text created by create in-world text.
-  args: []
   return: Void
   en-US: Destroy All In-World Text
 -
@@ -628,18 +618,15 @@
 -
   description: Disables game mode announcements from the announcer until reenabled
     or the match ends.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Announcer
 -
   description: Disables completion of the match from the game mode itself, only allowing
     the match to be completed by scripting commands.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Completion
 -
   description: Disables all game mode music until reenabled or the match ends.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Music
 -
@@ -657,7 +644,6 @@
 -
   description: Disables changes to player and team scores from the game mode itself,
     only allowing scores to be changed by scripting commands.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Scoring
 -
@@ -688,7 +674,6 @@
   description: Causes the workshop inspector to stop recording new entries. This has
     the benefit of reducing your script's server load, particularly when modifying
     arrays.
-  args: []
   return: Void
   en-US: Disable Inspector Recording
 -
@@ -710,7 +695,6 @@
 -
   description: Denotes the beginning of a series of actions that will only execute
     if the previous If or Else If action's condition was false.
-  args: []
   return: Void
   en-US: Else
 -
@@ -726,17 +710,14 @@
   en-US: Else If
 -
   description: Undoes the effect of the disable built-in game mode announcer action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Announcer
 -
   description: Undoes the effect of the disable built-in game mode completion action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Completion
 -
   description: Undoes the effect of the disable built-in game mode music action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Music
 -
@@ -753,7 +734,6 @@
   en-US: Enable Built-In Game Mode Respawning
 -
   description: Undoes the effect of the disable built-in game mode scoring action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Scoring
 -
@@ -784,13 +764,11 @@
   description: Causes the workshop inspector to resume recording new entries (in case
     it had been disabled earlier). Enabling recording at specific times may make it
     easier to debug problematic areas in your logic.
-  args: []
   return: Void
   en-US: Enable Inspector Recording
 -
   description: Denotes the end of a series of actions started by an if, else if, else,
     while, or for action.
-  args: []
   return: Void
   en-US: End
 -
@@ -850,7 +828,6 @@
 -
   description: Returns the match to the assemble heroes phase of the game mode. Only
     works if the game is in progress.
-  args: []
   return: Void
   en-US: Go To Assemble Heroes
 -
@@ -902,7 +879,6 @@
   description: Restarts the action list from the beginning. To prevent an infinite
     loop, a wait action must execute between the start of the action list and this
     action.
-  args: []
   return: Void
   en-US: Loop
 -
@@ -922,7 +898,6 @@
     in the condition list is false. If all conditions are true, execution continues
     with the next action. To prevent an infinite loop, a wait action must execute
     between the start of the action list and this action.
-  args: []
   return: Void
   en-US: Loop If Condition Is False
 -
@@ -930,7 +905,6 @@
     condition list is true. If any are false, execution continues with the next action.
     To prevent an infinite loop, a wait action must execute between the start of the
     action list and this action.
-  args: []
   return: Void
   en-US: Loop If Condition Is True
 -
@@ -1066,7 +1040,6 @@
 -
   description: Pauses the match time. Players, objective logic, and game mode advancement
     criteria are unaffected by the pause.
-  args: []
   return: Void
   en-US: Pause Match Time
 -
@@ -2158,13 +2131,11 @@
 -
   description: Stops all damage modifications that were started using the start damage
     modification action.
-  args: []
   return: Void
   en-US: Stop All Damage Modifications
 -
   description: Stops all healing modifications that were started using the start healing
     modification action.
-  args: []
   return: Void
   en-US: Stop All Healing Modifications
 -
@@ -2383,7 +2354,6 @@
   en-US: Teleport
 -
   description: Unpauses the match time.
-  args: []
   return: Void
   en-US: Unpause Match Time
 -
