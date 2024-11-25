@@ -107,7 +107,7 @@
       else if (typeof returnValue === "object") returnValue = Object.entries(returnValue).map(([key, value]) => `<em>${key}</em> (<em>${value}</em>)`).join(" | ")
 
       const detailFull = `
-        ${detail.length ? `Arguments: ${detail.map(d => `<mark>${d}</mark>`).join(", ")}` : ""}
+        ${detail.length ? `Properties: ${detail.map(d => `<mark>${d}</mark>`).join(", ")}` : ""}
         ${detail.length ? "<hr>" : ""}
         Returns: ${returnValue}
         <hr>
@@ -158,7 +158,7 @@
         `${v["en-US"]}(${applyValues.join(", ")})`
 
       // Add arguments to info box
-      params.info += "\n\nArguments: "
+      params.info += "\n\nProperties: "
       params.info += detail
 
       return params
