@@ -450,11 +450,11 @@
   args:
   - name: Value
     description: The left-hand-side vector operand of the cross product.
-    type: Vector
+    type: Position
     default: Vector
   - name: Value
     description: The right-hand-side vector operand of the cross product.
-    type: Vector
+    type: Position
     default: Vector
   return: Vector
   en-US: Cross Product
@@ -568,11 +568,11 @@
   args:
   - name: Value
     description: One of two vector operands of the dot product.
-    type: Vector
+    type: Position
     default: Vector
   - name: Value
     description: One of two vector operands of the dot product.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: Dot Product
@@ -1428,7 +1428,7 @@
   args:
   - name: World Vector
     description: The vector in world coordinates that will be converted to local coordinates.
-    type: Vector
+    type: Position
     default: Vector
   - name: Relative Player
     description: The player to whom the resulting vector will be relative.
@@ -1550,7 +1550,7 @@
   args:
   - name: Vector
     description: The vector to normalize.
-    type: Vector
+    type: Position
     default: Vector
   return: Vector
   en-US: Normalize
@@ -2387,7 +2387,7 @@
   args:
   - name: Local Vector
     description: The vector in local coordinates that will be converted to world coordinates.
-    type: Vector
+    type: Position
     default: Vector
   - name: Relative Player
     description: The player to whom the local vector is relative.
@@ -2407,7 +2407,7 @@
   args:
   - name: Value
     description: The vector from which to acquire the x component.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: X Component Of
@@ -2417,7 +2417,7 @@
   args:
   - name: Value
     description: The vector from which to acquire the y component.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: Y Component Of
@@ -2427,7 +2427,7 @@
   args:
   - name: Value
     description: The vector from which to acquire the z component.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: Z Component Of

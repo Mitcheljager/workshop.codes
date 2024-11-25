@@ -428,7 +428,7 @@ Healing Reevaluation:
     en-US: Receivers and Healers
   RECEIVERS_HEALERS_AND_HEALPERCENT:
     en-US: Receivers Healers and Healing Percent
-FacingReeval:
+Facing Reevaluation:
   DIRECTION_AND_TURN_RATE:
     en-US: Direction and Turn Rate
   NONE:
@@ -606,20 +606,20 @@ Projectile Effect:
     en-US: Zarya Particle Cannon
 
 Projectile Effect Reevaluation:
-  Visible To, Position, Direction and Size:
-    en-US: Visible To, Position, Direction and Size
+  Visible To Position, Direction and Size:
+    en-US: Visible To Position Direction and Size
   Position, Direction And Size:
     en-US: Position, Direction And Size
   Visible To:
     en-US: Visible To
   None:
     en-US: None
-  Visible To, Friendly To, Position, Direction And Size:
-    en-US: Visible To, Friendly To, Position, Direction And Size
-  Friendly To, Position, Direction And Size:
-    en-US: Friendly To, Position, Direction And Size
-  Visible To, Friendly To:
-    en-US: Visible To, Friendly To
+  Visible To Friendly To Position Direction And Size:
+    en-US: Visible To Friendly To Position, Direction And Size
+  Friendly To Position Direction And Size:
+    en-US: Friendly To Position Direction And Size
+  Visible To Friendly To:
+    en-US: Visible To Friendly To
   Friendly To:
     en-US: Friendly To
 

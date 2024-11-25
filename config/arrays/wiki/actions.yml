@@ -284,7 +284,7 @@
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
     type: Effect Reevaluation
-    default: Visible To, Position, And Radius
+    default: Visible To Position And Radius
   return: Void
   en-US: Create Beam Effect
 -
@@ -342,7 +342,7 @@
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated.
     type: Effect Reevaluation
-    default: Visible To, Position, And Radius
+    default: Visible To Position And Radius
   return: Void
   en-US: Create Effect
 -
@@ -463,7 +463,7 @@
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The text will keep asking for and using new values from reevaluated inputs.
     type: WorldTextReeval
-    default: Visible To, Position, And String
+    default: Visible To Position And String
   - name: Text Color
     description: Specifies the color of the in-world text to use.
     type: Color
@@ -1881,7 +1881,7 @@
     default: To World
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: FacingReeval
+    type: Facing Reevaluation
     default: Direction And Turn Rate
   return: Void
   en-US: Start Facing
@@ -3013,7 +3013,7 @@
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
     type: HUD Reevaluation
-    default: Visible To, Values, and Color
+    default: Visible To Values and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
     type: Spectator Visibility
@@ -3070,7 +3070,7 @@
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
     type: HUD Reevaluation
-    default: Visible To, Values, and Color
+    default: Visible To Values and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
     type: Spectator Visibility
@@ -3355,11 +3355,12 @@
     type: Player
     default: "Null"
   - name: Position
-    description: The position in of the effect.
+    description: The position of the effect.
     type: Position
     default: Event Player
   - name: Direction
     description: The facing direction of the effect.
+    type: Direction
     default: Vector
   - name: Oversize
     description: A 0 to 1 range for how oversized the projectile should be, 0 being the default size, 1 being the maximum allowed size. The maximum allowed size is different for each projectile type.
@@ -3368,4 +3369,4 @@
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
     type: Projectile Effect Reevaluation
-    default: Visible To, Position, Direction and Size
+    default: Visible To Position Direction and Size
