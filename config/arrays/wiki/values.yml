@@ -801,7 +801,7 @@
   args:
   - name: Hero
     description: A hero constant.
-    type: HeroLiteral
+    type: Hero
     default: ANA
   return: Hero
   en-US: Hero
@@ -862,10 +862,10 @@
 -
   description: A game mode constant.
   args:
-  - name: GAME MODE
+  - name: Game Mode
     description: A game mode constant.
-    type: GamemodeLiteral
-    default: ASSAULT
+    type: Gamemode
+    default: Assault
   return: Gamemode
   en-US: Game Mode
 -
@@ -2595,19 +2595,19 @@
     default: Custom String
   - name: Default
     description: The default value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Min
     description: The lowest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Max
     description: The highest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 100
   - name: Sort Order
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
-    type: IntLiteral
+    type: Integer
     default: 0
   isConstant: true
   return: Float
@@ -2626,19 +2626,19 @@
     default: Custom String
   - name: Default
     description: The default value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Min
     description: The lowest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Max
     description: The highest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 100
   - name: Sort Order
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
-    type: IntLiteral
+    type: Integer
     default: 0
   isConstant: true
   return: Integer
@@ -2657,11 +2657,11 @@
     default: Custom String
   - name: Default
     description: The default value for this setting.
-    type: BoolLiteral
+    type: Boolean
     default: False
   - name: Sort Order
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
-    type: IntLiteral
+    type: Integer
     default: 0
   return: Boolean
   en-US: Workshop Setting Toggle
@@ -2716,6 +2716,7 @@
   args:
   - name: Input Value
     description: This value is only evaluated once per action or condition.
+    type: Void
     default: 0
   return: Value
   en-US: Evaluate Once
@@ -2724,6 +2725,7 @@
   args:
   - name: Input Value
     description: This value's update rate will be increased from once every few frame to every frame.
+    type: Void
     default: Position Of
   return: Value
   en-US: Update Every Frame
@@ -2732,6 +2734,7 @@
   args:
   - name: Value
     description: The Vector operand of the magnitude operation.
+    type: Void
     default: Vector
   return: Float
   en-US: Magnitude Of
@@ -2838,27 +2841,35 @@
 -
   description: The current number of Damage Over Time instances started from the Damage Over Time action.
   en-US: Damage Over Time Count
+  return: Integer
 -
   description: The current number of Heal Over Time instances started from the Heal Over Time action.
   en-US: Heal Over Time Count
+  return: Integer
 -
   description: The current number of Text instances started from the Create HUD Text, Create In-World Text, Create Progress Bar HUD text, or Create Progress Bar In-World Text Action.
   en-US: Text Count
+  return: Integer
 -
   description: The current number of Damage Modification instances started from the Start Damage Modification Action.
   en-US: Damage Modification Count
+  return: Integer
 -
   description: The current number of Healing Modification instances started from the Start Healing Modification Action.
   en-US: Healing Modification Count
+  return: Integer
 -
   description: The current number of Assist instances started from the Start Assist Action.
   en-US: Assist Count
+  return: Integer
 -
   description: The current number of Entities created from the Create Effect, Create Beam Effect, or Create Icon Action.
   en-US: Entity Count
+  return: Integer
 -
   description: The Player being controlled on the end user's computer. This Value is different for each end user and thus can only be accessed in Actions which affect visuals or the HUD. This Value cannot be stored in Variables.
   en-US: Local Player
+  return: Player
 -
   description: The character found at a specified index of a String.
   args:
