@@ -54,7 +54,7 @@
     description: Specifies whether direction is relative to world coordinates or the local coordinates of the player or players.
     type: Relativity
     default: To World
-  - name: MOTION
+  - name: Motion
     description: Specifies whether existing velocity that is counter to direction should first be cancelled out before applying the impulse.
     type: Impulse
     default: Cancel Contrary Motion
@@ -63,15 +63,15 @@
 -
   description: Attaches the player (the 'child') to another player (the 'parent'). Once attached, the child will be unable to move freely until detached or teleported away. Multiple children may be attached to the same parent, but not vice versa.
   args:
-  - name: CHILD
+  - name: Child
     description: The player that will attach to the parent. This player will be unable to move freely until detached or teleported away.
     type: Player
     default: Event Player
-  - name: PARENT
+  - name: Parent
     description: The player to whom the child will attach. This player's movement will be unaffected and will determine the child's position.
     type: Player
     default: Last Created Entity Entity
-  - name: OFFSET
+  - name: Offset
     description: The coordinates of the child relative to the parent. For example, `vect(1,2,0)` would be above and to the left of the parent's head.
     type: Position
     default: Vector
@@ -306,7 +306,7 @@
     description: The initial position where the bot will appear.
     type: Position
     default: Vector
-  - name: FACING
+  - name: Facing
     description: The initial direction that the bot will face.
     type: Direction
     default: Vector
