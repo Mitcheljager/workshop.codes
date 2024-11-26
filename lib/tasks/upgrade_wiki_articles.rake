@@ -95,7 +95,3 @@ task :upgrade_wiki_articles => :environment do
     )
   end
 end
-
-def to_formatted_slug(string)
-  string.gsub(/[^0-9a-z ]/i, "").parameterize.gsub("+", "-").downcase
-end
