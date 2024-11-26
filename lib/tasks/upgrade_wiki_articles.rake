@@ -5,7 +5,7 @@ task :upgrade_wiki_articles => :environment do
   defaults = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "defaults.yml")))
 
   user = User.find_by_username("mitsiee")
-  user = User.find_by_username("admin") unless @user.present?
+  user = User.find_by_username("admin") unless user.present?
 
   (actions + values).each do |current|
     article = Wiki::Article.where(title: current["en-US"]).last

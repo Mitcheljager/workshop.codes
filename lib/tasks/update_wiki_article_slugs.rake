@@ -1,7 +1,7 @@
 desc "Upgrade wiki articles slugs from + to - for spaces"
 task :update_wiki_article_slugs => :environment do
   user = User.find_by_username("mitsiee")
-  user = User.find_by_username("admin") unless @user.present?
+  user = User.find_by_username("admin") unless user.present?
 
   articles_ids = Wiki::Article.group(:group_id).maximum(:id).values
   articles = Wiki::Article.where(id: articles_ids)
