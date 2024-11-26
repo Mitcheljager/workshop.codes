@@ -462,7 +462,7 @@
     default: Clip Against Surfaces
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The text will keep asking for and using new values from reevaluated inputs.
-    type: WorldTextReeval
+    type: In-World Text Reevaluation
     default: Visible To Position And String
   - name: Text Color
     description: Specifies the color of the in-world text to use.
