@@ -1,5 +1,4 @@
-_&getAbilityCooldown:
-  description: The ability cooldown time in seconds for a player associated by button.
+-
   args:
   - name: Player
     description: The player whose ability to check.
@@ -11,7 +10,7 @@ _&getAbilityCooldown:
     default: Button
   return: Float
   en-US: Ability Cooldown
-abilityIconString:
+-
   description: Converts a Hero and Button parameter into a string that shows up as
     an icon (up to 4 per string).
   args:
@@ -25,16 +24,16 @@ abilityIconString:
     default: Button
   return: String
   en-US: Ability Icon String
-abs:
+-
   description: The absolute value of the specified value.
   args:
   - name: Value
     description: The real number value whose absolute value will be computed.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Absolute Value
-__add__:
+-
   description: The sum of two numbers or vectors.
   args_allow_null: true
   args:
@@ -56,7 +55,7 @@ __add__:
   - Float
   - Vector
   en-US: Add
-getDeadPlayers:
+-
   description: An array containing all dead players on a team or in the match.
   args:
   - name: Team
@@ -66,19 +65,17 @@ getDeadPlayers:
   return:
     Array: Player
   en-US: All Dead Players
-getDamageHeroes:
+-
   description: "The array of all damage heroes in overwatch. The order is as follows:\n
     \       \n        0. Reaper\n        1. Tracer\n        2. Hanzo\n        3. Torbjorn\n
     \       4. Pharah\n        5. Widowmaker\n        6. Bastion\n        7. Symmetra\n
     \       8. Genji\n        9. Cassidy\n        10. Junkrat\n        11. Soldier\n
     \       12. Mei\n        13. Sombra\n        14. Doomfist\n        15. Ashe  \n
     \       16. Echo  \n"
-  args: []
   return:
     Array: Hero
   en-US: All Damage Heroes
-  de-DE: Alle Schadenshelden
-getAllHeroes:
+-
   description: "The array of all heroes in overwatch. The order is as follows:\n        \n
     \       0. Reaper   \n        1. Tracer   \n        2. Mercy    \n        3. Hanzo
     \   \n        4. Torbjorn \n        5. Reinhardt\n        6. Pharah   \n        7.
@@ -89,11 +86,10 @@ getAllHeroes:
     Sombra   \n        22. Doomfist \n        23. Ana      \n        24. Orisa    \n
     \       25. Brigitte \n        26. Moira    \n        27. Hammond  \n        28.
     Ashe     \n        29. Echo \n        30. Baptiste    \n        31. Sigma    \n"
-  args: []
   return:
     Array: Hero
   en-US: All Heroes
-getLivingPlayers:
+-
   description: An array containing all living players on a team or in the match.
   args:
   - name: Team
@@ -103,7 +99,7 @@ getLivingPlayers:
   return:
     Array: Player
   en-US: All Living Players
-getPlayers:
+-
   description: An array containing all players on a team or in the match.
   args:
   - name: Team
@@ -113,7 +109,7 @@ getPlayers:
   return:
     Array: Player
   en-US: All Players
-getPlayersNotOnObjective:
+-
   description: An array containing all players occupying neither a payload nor a control
     point (either on a team or in the match).
   args:
@@ -124,7 +120,7 @@ getPlayersNotOnObjective:
   return:
     Array: Player
   en-US: All Players Not On Objective
-getPlayersOnObjective:
+-
   description: An array containing all players occupying a payload or control point
     (either on a team or in the match).
   args:
@@ -135,7 +131,7 @@ getPlayersOnObjective:
   return:
     Array: Player
   en-US: All Players On Objective
-_&getAllowedHeroes:
+-
   description: The array of heroes from which the specified player is currently allowed
     to select.
   args:
@@ -146,26 +142,22 @@ _&getAllowedHeroes:
   return:
     Array: Hero
   en-US: Allowed Heroes
-getSupportHeroes:
+-
   description: "The array of all support heroes in overwatch. The order is as follows:\n
     \       \n        0. Mercy\n        1. Zenyatta\n        2. Lucio\n        3.
     Ana\n        4. Brigitte\n        5. Moira\n        6. Baptiste    \n        "
-  args: []
   return:
     Array: Hero
   en-US: All Support Heroes
-  de-DE: Alle Unterstützungshelden
-getTankHeroes:
+-
   description: "The array of all tank heroes in overwatch. The order is as follows:\n
     \       \n        0. Reinhardt\n        1. Winston\n        2. Roadhog\n        3.
     Zarya\n        4. Dva\n        5. Orisa\n        6. Hammond\n        7. Sigma
     \   \n        "
-  args: []
   return:
     Array: Hero
   en-US: All Tank Heroes
-  de-DE: Alle Tankhelden
-_&getAltitude:
+-
   description: The player's current height in meters above a surface. Results in 0
     whenever the player is on a surface.
   args:
@@ -175,7 +167,7 @@ _&getAltitude:
     default: Event Player
   return: Float
   en-US: Altitude Of
-__and__:
+-
   description: Whether both of the two inputs are true (or equivalent to true).
   args:
   - name: Value
@@ -190,7 +182,7 @@ __and__:
     default: 'True'
   return: Boolean
   en-US: And
-angleBetweenVectors:
+-
   description: The angle in degrees between two directional vectors (no normalization
     required).
   args:
@@ -206,22 +198,22 @@ angleBetweenVectors:
     default: Vector
   return: Float
   en-US: Angle Between Vectors
-angleDifference:
+-
   description: The difference in degrees between two angles. After the angles are
     wrapped to be within +/- 180 of each other, the result is positive if the second
     angle is greater than the first angle. Otherwise, the result is zero or negative.
   args:
   - name: Angle
     description: One of the two angles between which to measure the resulting angle.
-    type: float
+    type: Float
     default: Number
   - name: Angle
     description: One of the two angles between which to measure the resulting angle.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Angle Difference
-__concat__:
+-
   description: A copy of an array with one or more values appended to the end.
   args_allow_null: true
   args:
@@ -238,71 +230,71 @@ __concat__:
     default: Number
   return: Array
   en-US: Append To Array
-acosDeg:
+-
   description: Arccosine in degrees of the specified value.
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arccosine In Degrees
-acos:
+-
   description: Arccosine in radians of the specified value.
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arccosine In Radians
-asinDeg:
+-
   description: Arcsine in degrees of the specified value.
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arcsine In Degrees
-asin:
+-
   description: Arcsine in radians of the specified value.
   args:
   - name: Value
     description: Input value for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arcsine In Radians
-atan2Deg:
+-
   description: Arctangent in degrees of the specified numerator and denominator (often
     referred to as atan2).
   args:
   - name: Numerator
     description: Numerator input for the function.
-    type: float
+    type: Float
     default: Number
   - name: Denominator
     description: Denominator input for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arctangent In Degrees
-atan2:
+-
   description: Arctangent in radians of the specified numerator and denominator (often
     referred to as atan2).
   args:
   - name: Numerator
     description: Numerator input for the function.
-    type: float
+    type: Float
     default: Number
   - name: Denominator
     description: Denominator input for the function.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Arctangent In Radians
-__array__:
+-
   description: An array constructed from the listed values.
   args_unlimited: true
   args:
@@ -317,7 +309,7 @@ __array__:
   es-ES: Matriz
   pl-PL: Tabela
   zh-TW: 陣列
-__arrayContains__:
+-
   description: Whether the specified array contains the specified value.
   args:
   - name: Array
@@ -330,7 +322,7 @@ __arrayContains__:
     default: Number
   return: Boolean
   en-US: Array Contains
-__arraySlice__:
+-
   description: A copy of the specified array containing only values from a specified
     index range.
   args:
@@ -352,13 +344,13 @@ __arraySlice__:
   return:
     Array: Object
   en-US: Array Slice
-attacker:
+-
   description: The player that dealt the damage for the event currently being processed
     by this rule. May be the same as the victim or the event player.
   args:
   return: Player
   en-US: Attacker
-Vector.Backward:
+-
   description: Shorthand for the directional vector(0, 0, -1), which points backward.
   args:
   return:
@@ -367,7 +359,7 @@ Vector.Backward:
     - Integer
     - Integer
   en-US: Backward
-__button__:
+-
   description: A button constant.
   args:
   - name: Button
@@ -376,7 +368,7 @@ __button__:
     default: Interact
   return: Button
   en-US: Button
-getClosestPlayer:
+-
   description: The player closest to a position, optionally restricted by team.
   args:
   - name: Center
@@ -389,7 +381,7 @@ getClosestPlayer:
     default: Team
   return: Player
   en-US: Closest Player To
-__compare__:
+-
   description: Whether the comparison of the two inputs is true.
   args:
   - name: Value
@@ -412,7 +404,7 @@ __compare__:
     default: Number
   return: Boolean
   en-US: Compare
-getControlScorePercentage:
+-
   description: The score percentage for the specified team in control mode.
   args:
   - name: Team
@@ -421,31 +413,30 @@ getControlScorePercentage:
     default: Team
   return: Float
   en-US: Control Mode Scoring Percentage
-getControlScoringTeam:
+-
   description: The team that is currently accumulating score percentage in control
     mode. Results in all if neither team is accumulating score.
-  args: []
   return: Team
   en-US: Control Mode Scoring Team
-cosDeg:
+-
   description: Cosine of the specified angle in degrees.
   args:
   - name: Angle
     description: Angle in degrees.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Cosine From Degrees
-cos:
+-
   description: Cosine of the specified angle in radians.
   args:
   - name: Angle
     description: Angle in radians.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Cosine From Radians
-len:
+-
   description: The number of elements in the specified array.
   args:
   - name: Array
@@ -454,51 +445,47 @@ len:
     default: Global Variable
   return: Integer
   en-US: Count Of
-crossProduct:
+-
   description: The cross product of the specified values. (Left cross up equals forward.)
   args:
   - name: Value
     description: The left-hand-side vector operand of the cross product.
-    type: Vector
+    type: Position
     default: Vector
   - name: Value
     description: The right-hand-side vector operand of the cross product.
-    type: Vector
+    type: Position
     default: Vector
   return: Vector
   en-US: Cross Product
-__currentArrayElement__:
+-
   description: The current array element being considered. Only meaningful during
     the evaluation of values such as filtered array and sorted array.
-  args: []
   return:
   - Object
   - Array
   en-US: Current Array Element
-__currentArrayIndex__:
+-
   description: The current array index being considered. Only meaningful during
     the evaluation of values such as filtered array and sorted array.
-  args: []
   return:
   - Object
   - Array
   en-US: Current Array Index
-getCurrentGamemode:
+-
   description: The current game mode of the custom game.
-  args: []
   return: Gamemode
   en-US: Current Game Mode
-getCurrentMap:
+-
   description: The current map of the custom game.
-  args: []
   return: Map
   en-US: Current Map
-__customString__:
+-
   description: ty magzie for adding that
   args:
   - name: String
     description: ''
-    type: StringLiteral
+    type: String
     default: '"Hello"'
   - name: "{0}"
     description: The value that will be converted to text and used to replace {0}.
@@ -514,20 +501,20 @@ __customString__:
     default: 'Null'
   return: String
   en-US: Custom String
-angleToDirection:
+-
   description: The unit-length direction vector corresponding to the specified angles.
   args:
   - name: Horizontal Angle
     description: The horizontal angle in degrees used to construct the resulting vector.
-    type: float
+    type: Float
     default: Number
   - name: Vectical Angle
     description: The vertical angle in degrees used to construct the resulting vector.
-    type: float
+    type: Float
     default: Number
   return: Direction
   en-US: Direction From Angles
-directionTowards:
+-
   description: The unit-length direction vector from one position to another.
   args:
   - name: Start Pos
@@ -540,7 +527,7 @@ directionTowards:
     default: Vector
   return: Direction
   en-US: Direction Towards
-distance:
+-
   description: The distance between two positions in meters.
   args:
   - name: Start Pos
@@ -553,7 +540,7 @@ distance:
     default: Vector
   return: Float
   en-US: Distance Between
-__divide__:
+-
   description: The ratio of two numbers or vectors. A vector divided by a number will
     yield a scaled vector. Division by zero results in zero.
   args_allow_null: true
@@ -576,20 +563,20 @@ __divide__:
   - Float
   - Vector
   en-US: Divide
-dotProduct:
+-
   description: The dot product of the specified values.
   args:
   - name: Value
     description: One of two vector operands of the dot product.
-    type: Vector
+    type: Position
     default: Vector
   - name: Value
     description: One of two vector operands of the dot product.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: Dot Product
-Vector.DOWN:
+-
   description: Shorthand for the directional vector(0, -1, 0), which points downward.
   args:
   return:
@@ -598,12 +585,11 @@ Vector.DOWN:
     - Integer
     - Integer
   en-US: Down
-__emptyArray__:
+-
   description: An array with no elements.
-  args: []
   return: Array
   en-US: Empty Array
-entityExists:
+-
   description: Whether the specified player, icon entity, or effect entity still exists.
     Useful for determining if a player has left the match or an entity has been destroyed.
   args:
@@ -611,53 +597,53 @@ entityExists:
     description: The player, icon entity, or effect entity whose existence to check.
     type:
     - Player
-    - EntityId
+    - Entity ID
     default: Event Player
   return: Boolean
   en-US: Entity Exists
-eventAbility:
+-
   description: The ability for the event currently being processed by this rule associated
     by button.
   args:
   return: Button
   en-US: Event Ability
-eventDamage:
+-
   description: The amount of damage received by the victim for the event currently
     being processed by this rule.
   args:
   return: Float
   en-US: Event Damage
-eventDirection:
+-
   description: The incoming direction for the event currently being processed by this
     rule.
   args:
   return: Direction
   en-US: Event Direction
-eventHealing:
+-
   description: The amount of healing received by the healee for the event currently
     being processed by this rule.
   args:
   return: Float
   en-US: Event Healing
-eventPlayer:
+-
   description: The player executing this rule, as specified by the event. May be the
     same as the attacker or victim.
   args:
   return: Player
   en-US: Event Player
-eventWasCriticalHit:
+-
   description: Whether the damage was a critical hit (such as a headshot) for the
     event currently being processed by this rule.
   args:
   return: Boolean
   en-US: Event Was Critical Hit
-eventWasHealthPack:
+-
   description: Whether the healing was a health pack for the event currently being
     processed by this rule.
   args:
   return: Boolean
   en-US: Event Was Health Pack
-_&getEyePosition:
+-
   description: The position of a player's first person view (used for aiming)
   args:
   - name: Player
@@ -666,7 +652,7 @@ _&getEyePosition:
     default: Event Player
   return: Vector
   en-US: Eye Position
-_&getFacingDirection:
+-
   description: The unit-length directional vector of a player's current facing relative
     to the world. This value includes both horizontal and vertical facing.
   args:
@@ -676,12 +662,12 @@ _&getFacingDirection:
     default: Event Player
   return: Direction
   en-US: Facing Direction Of
-'false':
+-
   description: The boolean value of false.
   args:
   return: Boolean
   en-US: 'False'
-getFarthestPlayer:
+-
   description: The player farthest from a position, optionally restricted by team.
   args:
   - name: Center
@@ -694,7 +680,7 @@ getFarthestPlayer:
     default: Team
   return: Player
   en-US: Farthest Player From
-__filteredArray__:
+-
   description: A copy of the specified array with any values that do not match the
     specified condition removed.
   args:
@@ -710,7 +696,7 @@ __filteredArray__:
     default: Compare
   return: Array
   en-US: Filtered Array
-__firstOf__:
+-
   description: The value at the start of the specified array. Results in 0 if the
     specified array is empty.
   args:
@@ -722,7 +708,7 @@ __firstOf__:
   - Object
   - Array
   en-US: First Of
-getFlagPosition:
+-
   description: The position of a specific team's flag in capture the flag.
   args:
   - name: Team
@@ -731,7 +717,7 @@ getFlagPosition:
     default: Team
   return: Vector
   en-US: Flag Position
-Vector.Forward:
+-
   description: Shorthand for the directional vector(0, 0, 1), which points forward.
   args:
   return:
@@ -740,13 +726,10 @@ Vector.Forward:
     - Integer
     - Integer
   en-US: Forward
-__global__:
-  return: GlobalVariable
+-
+  return: Global Variable
   en-US: Global
-  it-IT: Globale
-  pl-PL: Globalnie
-  zh-TW: 全域
-__globalVar__:
+-
   description: The current value of a global variable, which is a variable that belongs
     to the game itself.
   args:
@@ -756,7 +739,7 @@ __globalVar__:
     default: A
   return: Value
   en-US: Global Variable
-_&hasSpawned:
+-
   description: Whether an entity has spawned in the world. Results in false for players
     who have not chosen a hero yet.
   args:
@@ -767,7 +750,7 @@ _&hasSpawned:
     default: Event Player
   return: Boolean
   en-US: Has Spawned
-_&hasStatusEffect:
+-
   description: Whether the specified player has the specified status, either from
     the set status action or from a non-scripted game mechanic.
   args:
@@ -781,19 +764,19 @@ _&hasStatusEffect:
     default: Hacked
   return: Boolean
   en-US: Has Status
-healee:
+-
   description: The player that received the healing for the event currently being
     processed by this rule. May be the same as the healer or the event player.
   args:
   return: Player
   en-US: Healee
-healer:
+-
   description: The player that dealt the healing for the event currently being processed
     by this rule. May be the same as the healee or the event player.
   args:
   return: Player
   en-US: Healer
-_&getHealth:
+-
   description: The current health of a player, including armor and shields.
   args:
   - name: Player
@@ -802,7 +785,7 @@ _&getHealth:
     default: Event Player
   return: Float
   en-US: Health
-_&getNormalizedHealth:
+-
   description: The current health of a player, including armor and shields, normalized
     between 0 and 1. (for example, 0 is no health, 0.5 is half health, 1 is full health,
     etc.)
@@ -813,16 +796,16 @@ _&getNormalizedHealth:
     default: Event Player
   return: Float
   en-US: Normalized Health
-__hero__:
+-
   description: A hero constant.
   args:
   - name: Hero
     description: A hero constant.
-    type: HeroLiteral
-    default: ANA
+    type: Hero
+    default: Ana
   return: Hero
   en-US: Hero
-_&getHeroOfDuplication:
+-
   description: The hero currently being duplicated by the specified player. If no
     hero is being duplicated, the resulting value is 0.
   args:
@@ -832,7 +815,7 @@ _&getHeroOfDuplication:
     default: Event Player
   return: Hero
   en-US: Hero Being Duplicated
-heroIcon:
+-
   description: Converts a hero parameter into a string that shows up as an icon.
   args:
   - name: Value
@@ -841,7 +824,7 @@ heroIcon:
     default: Hero
   return: String
   en-US: Hero Icon String
-_&getCurrentHero:
+-
   description: The current hero of a player.
   args:
   - name: Player
@@ -850,7 +833,7 @@ _&getCurrentHero:
     default: Event Player
   return: Hero
   en-US: Hero Of
-horizontalAngleFromDirection:
+-
   description: The horizontal angle in degrees corresponding to the specified direction
     vector.
   args:
@@ -861,7 +844,7 @@ horizontalAngleFromDirection:
     default: Vector
   return: Float
   en-US: Horizontal Angle From Direction
-horizontalAngleTowards:
+-
   description: The horizontal angle in degrees from a player's current forward direction
     to the specified position. The result is positive if the position is on the player's
     left. Otherwise, the result is zero or negative.
@@ -876,16 +859,16 @@ horizontalAngleTowards:
     default: Vector
   return: Float
   en-US: Horizontal Angle Towards
-__gamemode__:
+-
   description: A game mode constant.
   args:
-  - name: GAME MODE
+  - name: Game Mode
     description: A game mode constant.
-    type: GamemodeLiteral
-    default: ASSAULT
+    type: Gamemode
+    default: Assault
   return: Gamemode
   en-US: Game Mode
-_&getHorizontalFacingAngle:
+-
   description: The horizontal angle in degrees of a player's current facing relative
     to the world. This value increases as the player rotates to the left (wrapping
     around at +/- 180).
@@ -896,7 +879,7 @@ _&getHorizontalFacingAngle:
     default: Event Player
   return: Float
   en-US: Horizontal Facing Angle Of
-_&getHorizontalSpeed:
+-
   description: The current horizontal speed of a player in meters per second. This
     measurement excludes all vertical motion.
   args:
@@ -906,13 +889,13 @@ _&getHorizontalSpeed:
     default: Event Player
   return: Float
   en-US: Horizontal Speed Of
-hostPlayer:
+-
   description: The player that is currently the host of the custom game. This value
     will change if the current host player leaves the match.
   args:
   return: Player
   en-US: Host Player
-iconString:
+-
   description: Allows you to use an icon inside of a string.
   args:
   - name: Icon
@@ -921,7 +904,7 @@ iconString:
     default: 'Arrow: Down'
   return: String
   en-US: Icon String
-__ifThenElse__:
+-
   description: Results in the Then value when the If condition is true; otherwise,
     results in the Else value.
   args:
@@ -946,7 +929,7 @@ __ifThenElse__:
   - Object
   - Array
   en-US: If-Then-Else
-__indexOfArrayValue__:
+-
   description: The index of a value within an array or -1 if no such value can be
     found.
   args:
@@ -961,7 +944,7 @@ __indexOfArrayValue__:
     default: Number
   return: Integer
   en-US: Index Of Array Value
-_&isAlive:
+-
   description: Whether a player is alive.
   args:
   - name: Player
@@ -970,17 +953,15 @@ _&isAlive:
     default: Event Player
   return: Boolean
   en-US: Is Alive
-isAssemblingHeroes:
+-
   description: Whether the match is currently in its assemble heroes phase.
-  args: []
   return: Boolean
   en-US: Is Assembling Heroes
-isMatchBetweenRounds:
+-
   description: Whether the match is between rounds.
-  args: []
   return: Boolean
   en-US: Is Between Rounds
-_&isHoldingButton:
+-
   description: Whether a player is holding a specific button.
   args:
   - name: Player
@@ -993,7 +974,7 @@ _&isHoldingButton:
     default: Primary Fire
   return: Boolean
   en-US: Is Button Held
-_&isCommunicating:
+-
   description: Whether a player is using a specific communication type (such as emoting,
     using a voice line, etc.).
   args:
@@ -1009,7 +990,7 @@ _&isCommunicating:
     default: Voice Line Up
   return: Boolean
   en-US: Is Communicating
-_&isCommunicatingAnything:
+-
   description: Whether a player is using any communication type (such as emoting,
     using a voice line, etc.).
   args:
@@ -1019,7 +1000,7 @@ _&isCommunicatingAnything:
     default: Event Player
   return: Boolean
   en-US: Is Communicating Any
-_&isCommunicatingEmote:
+-
   description: Whether a player is using an emote.
   args:
   - name: Player
@@ -1028,7 +1009,7 @@ _&isCommunicatingEmote:
     default: Event Player
   return: Boolean
   en-US: Is Communicating Any Emote
-_&isCommunicatingVoiceline:
+-
   description: Whether a player is using a voice line. (The duration of voice lines
     is assumed to be 4 seconds.)
   args:
@@ -1038,12 +1019,11 @@ _&isCommunicatingVoiceline:
     default: Event Player
   return: Boolean
   en-US: Is Communicating Any Voice line
-isControlPointLocked:
+-
   description: Whether the point is locked in control mode.
-  args: []
   return: Boolean
   en-US: Is Control Mode Point Locked
-_&isCrouching:
+-
   description: Whether a player is crouching.
   args:
   - name: Player
@@ -1052,7 +1032,7 @@ _&isCrouching:
     default: Event Player
   return: Boolean
   en-US: Is Crouching
-_&isInAlternateForm:
+-
   description: "Whether the specified player is currently in an alternate form:\n
     \       \n- Hammond's ball form\n- Baby Dva\n- Bastion's turret and tank forms\n-
     Lucio's speed song\n- Mercy's pistol\n- Torbjorn's hammer\n\nFor Echo duplication,
@@ -1064,12 +1044,11 @@ _&isInAlternateForm:
     default: Event Player
   return: Boolean
   en-US: Is In Alternate Form
-isInSuddenDeath:
+-
   description: Whether the current game of capture the flag is in sudden death.
-  args: []
   return: Boolean
   en-US: Is CTF Mode In Sudden Death
-_&isDead:
+-
   description: Whether a player is dead.
   args:
   - name: Player
@@ -1078,7 +1057,7 @@ _&isDead:
     default: Event Player
   return: Boolean
   en-US: Is Dead
-_&isDummy:
+-
   description: Whether a player is a dummy bot.
   args:
   - name: Player
@@ -1087,7 +1066,7 @@ _&isDummy:
     default: Event Player
   return: Boolean
   en-US: Is Dummy Bot
-_&isDuplicatingAHero:
+-
   description: Whether the specified player is duplicating another hero. To check
     which hero, use the Hero Being Duplicated value.
   args:
@@ -1097,7 +1076,7 @@ _&isDuplicatingAHero:
     default: Event Player
   return: Boolean
   en-US: Is Duplicating
-_&isFiringPrimaryFire:
+-
   description: Whether the specified player's primary weapon attack is being used.
   args:
   - name: Player
@@ -1106,7 +1085,7 @@ _&isFiringPrimaryFire:
     default: Event Player
   return: Boolean
   en-US: Is Firing Primary
-_&isFiringSecondaryFire:
+-
   description: Whether the specified player's secondary weapon attack is being used.
   args:
   - name: Player
@@ -1115,7 +1094,7 @@ _&isFiringSecondaryFire:
     default: Event Player
   return: Boolean
   en-US: Is Firing Secondary
-isFlagAtBase:
+-
   description: Whether a specific team's flag is at its base in capture the flag.
   args:
   - name: Team
@@ -1124,7 +1103,7 @@ isFlagAtBase:
     default: Team
   return: Boolean
   en-US: Is Flag At Base
-isFlagBeingCarried:
+-
   description: Whether a specific team's flag is being carried by a member of the
     opposing team in capture the flag.
   args:
@@ -1134,13 +1113,12 @@ isFlagBeingCarried:
     default: Team
   return: Boolean
   en-US: Is Flag Being Carried
-isGameInProgress:
+-
   description: Whether the main phase of the match is in progress (during which time
     combat and scoring are allowed).
-  args: []
   return: Boolean
   en-US: Is Game In Progress
-teamHasHero:
+-
   description: Whether a specific hero is being played (either on a team or in the
     match).
   args:
@@ -1154,7 +1132,7 @@ teamHasHero:
     default: Team
   return: Boolean
   en-US: Is Hero Being Played
-_&isInAir:
+-
   description: Whether a player is airborne.
   args:
   - name: Player
@@ -1163,7 +1141,7 @@ _&isInAir:
     default: Event Player
   return: Boolean
   en-US: Is In Air
-isInLoS:
+-
   description: Whether two positions have line of sight with each other.
   args:
   - name: Start Pos
@@ -1188,12 +1166,11 @@ isInLoS:
     default: Barriers DO NOT BLOCK LOS
   return: Boolean
   en-US: Is In Line of Sight
-isInSetup:
+-
   description: Whether the match is currently in its setup phase.
-  args: []
   return: Boolean
   en-US: Is In Setup
-_&isInSpawnRoom:
+-
   description: Whether a specific player is in the spawn room (and is thus being healed
     and able to change heroes).
   args:
@@ -1203,7 +1180,7 @@ _&isInSpawnRoom:
     default: Event Player
   return: Boolean
   en-US: Is In Spawn Room
-_&isInViewAngle:
+-
   description: Whether a location is within view of a player.
   args:
   - name: Player
@@ -1216,11 +1193,11 @@ _&isInViewAngle:
     default: Vector
   - name: View Angle
     description: The view angle to compare against in degrees.
-    type: float
+    type: Float
     default: Number
   return: Boolean
   en-US: Is In View Angle
-_&isJumping:
+-
   description: Whether the specified player is jumping.
   args:
   - name: Player
@@ -1229,12 +1206,11 @@ _&isJumping:
     default: Event Player
   return: Boolean
   en-US: Is Jumping
-isMatchComplete:
+-
   description: Whether the match has finished.
-  args: []
   return: Boolean
   en-US: Is Match Complete
-_&isMeleeing:
+-
   description: Whether the specified player is meleeing.
   args:
   - name: Player
@@ -1243,7 +1219,7 @@ _&isMeleeing:
     default: Event Player
   return: Boolean
   en-US: Is Meleeing
-_&isMoving:
+-
   description: Whether a player is moving (defined as having a nonzero current speed).
   args:
   - name: Player
@@ -1252,7 +1228,7 @@ _&isMoving:
     default: Event Player
   return: Boolean
   en-US: Is Moving
-isObjectiveComplete:
+-
   description: Whether the specified objective has been completed. Results in false
     if the game mode is not assault, escort, or assault/escort.
   args:
@@ -1264,7 +1240,7 @@ isObjectiveComplete:
     default: Number
   return: Boolean
   en-US: Is Objective Complete
-_&isOnGround:
+-
   description: Whether a player is on the ground (or other walkable surface).
   args:
   - name: Player
@@ -1273,7 +1249,7 @@ _&isOnGround:
     default: Event Player
   return: Boolean
   en-US: Is On Ground
-_&isOnObjective:
+-
   description: Whether a specific player is currently occupying a payload or capture
     point.
   args:
@@ -1283,7 +1259,7 @@ _&isOnObjective:
     default: Event Player
   return: Boolean
   en-US: Is On Objective
-_&isOnWall:
+-
   description: Whether a player is on a wall (climbing or riding).
   args:
   - name: Player
@@ -1292,7 +1268,7 @@ _&isOnWall:
     default: Event Player
   return: Boolean
   en-US: Is On Wall
-_&isOnFire:
+-
   description: Whether a specific player's portrait is on fire.
   args:
   - name: Player
@@ -1301,7 +1277,7 @@ _&isOnFire:
     default: Event Player
   return: Boolean
   en-US: Is Portrait On Fire
-_&isStanding:
+-
   description: Whether a player is standing (defined as both not moving and not in
     the air).
   args:
@@ -1311,7 +1287,7 @@ _&isStanding:
     default: Event Player
   return: Boolean
   en-US: Is Standing
-isTeamOnDefense:
+-
   description: Whether the specified team is currently on defense. Results in false
     if the game mode is not assault, escort, or assault/escort.
   args:
@@ -1321,7 +1297,7 @@ isTeamOnDefense:
     default: Team
   return: Boolean
   en-US: Is Team On Defense
-isTeamOnOffense:
+-
   description: Whether the specified team is currently on offense. Results in false
     if the game mode is not assault, escort, or assault/escort.
   args:
@@ -1331,7 +1307,7 @@ isTeamOnOffense:
     default: Team
   return: Boolean
   en-US: Is Team On Offense
-__all__:
+-
   description: Whether the specified condition evaluates to true for every value in
     the specified array.
   args:
@@ -1347,7 +1323,7 @@ __all__:
     default: Compare
   return: Boolean
   en-US: Is True For All
-__any__:
+-
   description: Whether the specified condition evaluates to true for any value in
     the specified array.
   args:
@@ -1363,7 +1339,7 @@ __any__:
     default: Compare
   return: Boolean
   en-US: Is True For Any
-_&isUsingAbility1:
+-
   description: Whether the specified player is using ability 1.
   args:
   - name: Player
@@ -1372,7 +1348,7 @@ _&isUsingAbility1:
     default: Event Player
   return: Boolean
   en-US: Is Using Ability 1
-_&isUsingAbility2:
+-
   description: Whether the specified player is using ability 2.
   args:
   - name: Player
@@ -1381,7 +1357,7 @@ _&isUsingAbility2:
     default: Event Player
   return: Boolean
   en-US: Is Using Ability 2
-_&isUsingUltimate:
+-
   description: Whether a player is using an ultimate ability.
   args:
   - name: Player
@@ -1390,42 +1366,36 @@ _&isUsingUltimate:
     default: Event Player
   return: Boolean
   en-US: Is Using Ultimate
-isWaitingForPlayers:
+-
   description: Whether the match is waiting for players to join before starting.
-  args: []
   return: Boolean
   en-US: Is Waiting For Players
-getLastCreatedEntity:
+-
   description: A reference to the last effect or icon entity created by the event
     player (or created at the global level).
-  args: []
-  return: EntityId
+  return: Entity ID
   en-US: Last Created Entity
-getLastDamageModification:
+-
   description: An id representing the most recent start damage modification action
     that was executed by the event player (or executed at the global level).
-  args: []
-  return: DamageModificationId
+  return: Damage Modification ID
   en-US: Last Damage Modification ID
-getLastDoT:
+-
   description: An id representing the most recent damage over time action that was
     executed by the event player (or executed at the global level).
-  args: []
   return: Damage Over Time ID
   en-US: Last Damage Over Time ID
-getLastHoT:
+-
   description: An id representing the most recent heal over time action that was executed
     by the event player (or executed at the global level).
-  args: []
-  return: HotId
+  return: Heal Over Time ID
   en-US: Last Heal Over Time ID
-getLastHealingModification:
+-
   description: An id representing the most recent start healing modification action
     that was executed by the event player (or executed at the global level).
-  args: []
-  return: HealingModificationId
+  return: Healing Modification ID
   en-US: Last Healing Modification ID
-__lastOf__:
+-
   description: The value at the end of the specified array. Results in 0 if the specified
     array is empty.
   args:
@@ -1437,13 +1407,12 @@ __lastOf__:
   - Object
   - Array
   en-US: Last Of
-getLastCreatedText:
+-
   description: A reference to the last piece of text created by the event player (or
     created at the global level) via the create hud text or create in-world text action.
-  args: []
   return: Text ID
   en-US: Last Text ID
-Vector.Left:
+-
   description: Shorthand for the directional vector(1, 0, 0), which points to the
     left.
   args:
@@ -1453,63 +1422,61 @@ Vector.Left:
     - Integer
     - Integer
   en-US: Left
-localVector:
+-
   description: The vector in local coordinates corresponding to the provided vector
     in world coordinates.
   args:
-  - name: WORLD Vector
+  - name: World Vector
     description: The vector in world coordinates that will be converted to local coordinates.
-    type: Vector
+    type: Position
     default: Vector
   - name: Relative Player
     description: The player to whom the resulting vector will be relative.
     type: Player
     default: Event Player
-  - name: TRANSFORMATION
+  - name: Transformation
     description: Specifies whether the vector should receive a rotation and a translation
       (usually applied to positions) or only a rotation (usually applied to directions
       and velocities).
     type: Transform
-    default: ROTATION
+    default: Rotation
   return: Vector
   en-US: Local Vector Of
-__map__:
+-
   description: A map constant.
   args:
-  - name: MAP
+  - name: Map
     description: A map constant.
-    type: MapLiteral
-    default: AYUTTHAYA
+    type: Map
+    default: Ayuttahaya
   return: Map
   en-US: Map
   es-ES: Mapa
   it-IT: Mappa
   pl-PL: Mapa
   zh-TW: 地圖
-getMatchRound:
+-
   description: The current round of the match, counting up from 1.
-  args: []
   return: Integer
   en-US: Match Round
-getMatchTime:
+-
   description: The amount of time in seconds remaining in the current game mode phase.
-  args: []
   return: Float
   en-US: Match Time
-max:
+-
   description: The greater of two numbers.
   args:
   - name: Value
     description: The left-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Max
-_&getMaxHealth:
+-
   description: The max health of a player, including armor and shields.
   args:
   - name: Player
@@ -1518,26 +1485,26 @@ _&getMaxHealth:
     default: Event Player
   return: Float
   en-US: Max Health
-min:
+-
   description: The lesser of two numbers.
   args:
   - name: Value
     description: The left-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Min
-__modulo__:
+-
   description: The remainder of the left-hand operand divided by the right-hand operand.
     Any number modulo zero results in zero.
   args:
   - name: Value
     description: The left-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
@@ -1545,7 +1512,7 @@ __modulo__:
     default: Number
   return: Float
   en-US: Modulo
-__multiply__:
+-
   description: The product of two numbers or vectors. A vector multiplied by a number
     will yield a scaled vector.
   args_allow_null: true
@@ -1568,7 +1535,7 @@ __multiply__:
   - Float
   - Vector
   en-US: Multiply
-nearestWalkablePosition:
+-
   description: The position closest to the specified position that can be stood on
     and is accessible from a spawn point.
   args:
@@ -1578,16 +1545,16 @@ nearestWalkablePosition:
     default: Vector
   return: Vector
   en-US: Nearest Walkable Position
-normalize:
+-
   description: The unit-length normalization of a vector.
   args:
   - name: Vector
     description: The vector to normalize.
-    type: Vector
+    type: Position
     default: Vector
   return: Vector
   en-US: Normalize
-__not__:
+-
   description: Whether the input is false (or equivalent to false).
   args:
   - name: Value
@@ -1597,13 +1564,13 @@ __not__:
     default: 'True'
   return: Boolean
   en-US: Not
-'null':
+-
   description: The absence of a player. Used when no player is desired for a particular
     input. Equivalent to the real number 0 for the purposes of comparison and debugging.
   args:
   return: Player
   en-US: 'Null'
-getNumberOfDeadPlayers:
+-
   description: The number of dead players on a team or in the match.
   args:
   - name: Team
@@ -1612,7 +1579,7 @@ getNumberOfDeadPlayers:
     default: Team
   return: Integer
   en-US: Number of Dead Players
-_&getNumberOfDeaths:
+-
   description: The number of deaths a specific player has earned. This value only
     accumulates while a game is in progress.
   args:
@@ -1622,7 +1589,7 @@ _&getNumberOfDeaths:
     default: Event Player
   return: Integer
   en-US: Number of Deaths
-_&getNumberOfElims:
+-
   description: The number of eliminations a specific player has earned. This value
     only accumulates while a game is in progress.
   args:
@@ -1632,7 +1599,7 @@ _&getNumberOfElims:
     default: Event Player
   return: Integer
   en-US: Number of Eliminations
-_&getNumberOfFinalBlows:
+-
   description: The number of final blows a specific player has earned. This value
     only accumulates while a game is in progress.
   args:
@@ -1642,7 +1609,7 @@ _&getNumberOfFinalBlows:
     default: Event Player
   return: Integer
   en-US: Number of Final Blows
-getNumberOfHeroes:
+-
   description: The number of players playing a specific hero on a team or in the match.
   args:
   - name: Hero
@@ -1655,7 +1622,7 @@ getNumberOfHeroes:
     default: Team
   return: Integer
   en-US: Number of Heroes
-getNumberOfLivingPlayers:
+-
   description: The number of living players on a team or in the match.
   args:
   - name: Team
@@ -1664,7 +1631,7 @@ getNumberOfLivingPlayers:
     default: Team
   return: Integer
   en-US: Number of Living Players
-getNumberOfPlayers:
+-
   description: The number of players on a team or in the match.
   args:
   - name: Team
@@ -1673,7 +1640,7 @@ getNumberOfPlayers:
     default: Team
   return: Integer
   en-US: Number of Players
-getNumberOfPlayersOnObjective:
+-
   description: The number of players occupying a payload or control point (either
     on a team or in the match).
   args:
@@ -1683,13 +1650,12 @@ getNumberOfPlayersOnObjective:
     default: Team
   return: Integer
   en-US: Number of Players On Objective
-getCurrentObjective:
+-
   description: The control point, payload checkpoint, or payload destination currently
     active (either 0, 1, or 2). Valid in assault, assault/escort, escort, and control.
-  args: []
   return: Integer
   en-US: Objective Index
-getObjectivePosition:
+-
   description: The position in the world of the specified objective (either a control
     point, a payload checkpoint, or a payload destination). Valid in assault, assault/escort,
     escort, and control.
@@ -1702,7 +1668,7 @@ getObjectivePosition:
     default: Number
   return: Integer
   en-US: Objective Position
-getOppositeTeam:
+-
   description: The team opposite the specified team.
   args:
   - name: Team
@@ -1711,7 +1677,7 @@ getOppositeTeam:
     default: Team
   return: Team
   en-US: Opposite Team Of
-__or__:
+-
   description: Whether either of the two inputs are true (or equivalent to true).
   args:
   - name: Value
@@ -1726,18 +1692,16 @@ __or__:
     default: 'True'
   return: Boolean
   en-US: Or
-getPayloadPosition:
+-
   description: The position in the world of the active payload.
-  args: []
   return: Vector
   en-US: Payload Position
-getPayloadProgressPercentage:
+-
   description: The current progress towards the destination for the active payload
     (expressed as a percentage).
-  args: []
   return: Float
   en-US: Payload Progress Percentage
-getFlagCarrier:
+-
   description: The player carrying a particular team's flag in capture the flag. Results
     in null if no player is carrying the flag.
   args:
@@ -1747,7 +1711,7 @@ getFlagCarrier:
     default: Team
   return: Player
   en-US: Player Carrying Flag
-_&getPlayerClosestToReticle:
+-
   description: The player closest to the reticle of the specified player, optionally
     restricted by team.
   args:
@@ -1761,7 +1725,7 @@ _&getPlayerClosestToReticle:
     default: Team
   return: Player
   en-US: Player Closest To Reticle
-__playerVar__:
+-
   description: The current value of a player variable, which is a variable that belongs
     to a specific player.
   args:
@@ -1775,7 +1739,7 @@ __playerVar__:
     default: A
   return: Value
   en-US: Player Variable
-getPlayersInSlot:
+-
   description: The player or array of players who occupy a specific slot in the game.
   args:
   - name: Slot
@@ -1792,7 +1756,7 @@ getPlayersInSlot:
   - Player
   - Array: Player
   en-US: Players In Slot
-_&getPlayersInViewAngle:
+-
   description: The players who are within a specific view angle of a specific player's
     reticle, optionally restricted by team.
   args:
@@ -1806,12 +1770,12 @@ _&getPlayersInViewAngle:
     default: Team
   - name: View Angle
     description: The view angle to compare against in degrees.
-    type: float
+    type: Float
     default: Number
   return:
     Array: Player
   en-US: Players in View Angle
-getPlayersOnHero:
+-
   description: The array of players playing a specific hero on a team or in the match.
   args:
   - name: Hero
@@ -1825,7 +1789,7 @@ getPlayersOnHero:
   return:
     Array: Player
   en-US: Players On Hero
-getPlayersInRadius:
+-
   description: An array containing all players within a certain distance of a position,
     optionally restricted by team and line of sight.
   args:
@@ -1851,13 +1815,12 @@ getPlayersInRadius:
   return:
     Array: Player
   en-US: Players Within Radius
-getCapturePercentage:
+-
   description: The current progress towards capture for the active control point (expressed
     as a percentage).
-  args: []
   return: Float
   en-US: Point Capture Percentage
-_&getPosition:
+-
   description: The current position of a player as a vector.
   args:
   - name: Player
@@ -1866,7 +1829,7 @@ _&getPosition:
     default: Event Player
   return: Vector
   en-US: Position Of
-__raiseToPower__:
+-
   description: The left-hand operand raised to the power of the right-hand operand.
     If the left-hand operand is negative, the result is always zero.
   args:
@@ -1876,11 +1839,11 @@ __raiseToPower__:
     default: Number
   - name: Value
     description: The right-hand operand. May be any value that results in a number.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Raise To Power
-random.randint:
+-
   description: A random integer between the specified min and max, inclusive.
   args:
   - name: Min
@@ -1895,20 +1858,20 @@ random.randint:
     default: Number
   return: Integer
   en-US: Random Integer
-random.uniform:
+-
   description: A random real number between the specified min and max.
   args:
   - name: Min
     description: The smallest real number allowed.
-    type: float
+    type: Float
     default: Number
   - name: Max
     description: The largest real number allowed.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Random Real
-random.choice:
+-
   description: A random value from the specified array.
   args:
   - name: Array
@@ -1920,7 +1883,7 @@ random.choice:
   - Object
   - Array
   en-US: Random Value In Array
-random.shuffle:
+-
   description: A copy of the specified array with the values in a random order.
   args:
   - name: Array
@@ -1929,7 +1892,7 @@ random.shuffle:
     default: Global Variable
   return: Array
   en-US: Randomized Array
-__raycastHitNormal__:
+-
   description: The surface normal at the ray cast hit position (or from end pos to
     start pos if no hit occurs).
   args:
@@ -1961,7 +1924,7 @@ __raycastHitNormal__:
     default: 'True'
   return: Direction
   en-US: Ray Cast Hit Normal
-__raycastHitPlayer__:
+-
   description: The player hit by the ray cast (or null if no player is hit).
   args:
   - name: Start Pos
@@ -1992,7 +1955,7 @@ __raycastHitPlayer__:
     default: 'True'
   return: Player
   en-US: Ray Cast Hit Player
-__raycastHitPosition__:
+-
   description: The position where the ray cast hits a surface, object, or player (or
     the end pos if no hit occurs).
   args:
@@ -2024,7 +1987,7 @@ __raycastHitPosition__:
     default: 'True'
   return: Vector
   en-US: Ray Cast Hit Position
-__removeFromArray__:
+-
   description: A copy of an array with one or more values removed (if found).
   args_allow_null: true
   args:
@@ -2041,7 +2004,7 @@ __removeFromArray__:
     default: Number
   return: Array
   en-US: Remove From Array
-Vector.RIGHT:
+-
   description: Shorthand for the directional vector(-1, 0, 0), which points to the
     right.
   args:
@@ -2051,12 +2014,12 @@ Vector.RIGHT:
     - Integer
     - Integer
   en-US: Right
-__round__:
+-
   description: The integer to which the specified value rounds.
   args:
   - name: Value
     description: The real number to round.
-    type: float
+    type: Float
     default: Number
   - name: Rounding Type
     description: Determines the direction in which the value will be rounded.
@@ -2064,7 +2027,7 @@ __round__:
     default: UP
   return: Integer
   en-US: Round To Integer
-_&getScore:
+-
   description: The current score of a player. Results in 0 if the game mode is not
     free-for-all.
   args:
@@ -2074,48 +2037,45 @@ _&getScore:
     default: Event Player
   return: Integer
   en-US: Score Of
-getServerLoad:
+-
   description: Provides a percentage representing the CPU load of the current game
     instance. As this number approaches or exceeds 100, it becomes increasingly likely
     that the instance will be shut down because it is consuming too many resources.
-  args: []
   return: Float
   en-US: Server Load
-getAverageServerLoad:
+-
   description: Provides a percentage representing the average CPU load of the current
     game instance over the last two seconds. As this number approaches or exceeds
     100, it becomes increasingly likely that the instance will be shut down because
     it is consuming too many resources.
-  args: []
   return: Float
   en-US: Server Load Average
-getPeakServerLoad:
+-
   description: Provides a percentage representing the highest CPU load of the current
     game instance over the last two seconds. As this number approaches or exceeds
     100, it becomes increasingly likely that the instance will be shut down because
     it is consuming too many resources.
-  args: []
   return: Float
   en-US: Server Load Peak
-sinDeg:
+-
   description: Sine of the specified angle in degrees.
   args:
   - name: Angle
     description: Angle in degrees.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Sine From Degrees
-sin:
+-
   description: Sine of the specified angle in radians.
   args:
   - name: Angle
     description: Angle in radians.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Sine From Radians
-_&getSlot:
+-
   description: The slot number of the specified player. In team games, each team has
     slots 0 through 5. In free-for-all games, slots are numbered 0 through 11.
   args:
@@ -2125,7 +2085,7 @@ _&getSlot:
     default: Event Player
   return: Integer
   en-US: Slot Of
-__sortedArray__:
+-
   description: A copy of the specified array with the values sorted according to the
     value rank that is evaluated for each element.
   args:
@@ -2143,7 +2103,7 @@ __sortedArray__:
   return:
     Array: Object
   en-US: Sorted Array
-__mappedArray__:
+-
   description: A copy of the specified array with the values mapped according to the Mapping Expression that is evaluated for each element.
   args:
   - name: Array
@@ -2158,7 +2118,7 @@ __mappedArray__:
   return:
     Array: Object
   en-US: Mapped Array
-_&getSpeed:
+-
   description: The current speed of a player in meters per second.
   args:
   - name: Player
@@ -2167,7 +2127,7 @@ _&getSpeed:
     default: Event Player
   return: Float
   en-US: Speed Of
-_&getSpeedInDirection:
+-
   description: The current speed of a player in a specific direction in meters per
     second.
   args:
@@ -2181,7 +2141,7 @@ _&getSpeedInDirection:
     default: Vector
   return: Float
   en-US: Speed Of In Direction
-sqrt:
+-
   description: The square root of the specified value.
   args:
   - name: Value
@@ -2191,12 +2151,12 @@ sqrt:
     default: Number
   return: Float
   en-US: Square Root
-__localizedString__:
+-
   description: Text formed from a selection of strings and specified values.
   args:
   - name: String
     description: ''
-    type: LocalizedStringLiteral
+    type: String
     default: Hello
   - name: "{0}"
     description: The value that will be converted to text and used to replace {0}.
@@ -2212,7 +2172,7 @@ __localizedString__:
     default: 'Null'
   return: String
   en-US: String
-__subtract__:
+-
   description: The difference between two numbers or vectors.
   args_allow_null: true
   args:
@@ -2234,25 +2194,25 @@ __subtract__:
   - Float
   - Vector
   en-US: Subtract
-tanDeg:
+-
   description: Tangent of the specified angle in degrees.
   args:
   - name: Angle
     description: Angle in degrees.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Tangent From Degrees
-tan:
+-
   description: Tangent of the specified angle in radians.
   args:
   - name: Angle
     description: Angle in radians.
-    type: float
+    type: Float
     default: Number
   return: Float
   en-US: Tangent From Radians
-_&getTeam:
+-
   description: The team of a player. If the game mode is free-for-all, the team is
     considered to be all.
   args:
@@ -2262,7 +2222,7 @@ _&getTeam:
     default: Event Player
   return: Team
   en-US: Team Of
-teamScore:
+-
   description: The current score for the specified team. Results in 0 in free-for-all
     game modes.
   args:
@@ -2272,7 +2232,7 @@ teamScore:
     default: Team
   return: Integer
   en-US: Team Score
-_&getThrottle:
+-
   description: The directional input of a player, represented by a vector with horizontal
     input on the x component (positive to the left) and vertical input on the z component
     (positive upward).
@@ -2283,18 +2243,17 @@ _&getThrottle:
     default: Event Player
   return: Direction
   en-US: Throttle Of
-getTotalTimeElapsed:
+-
   description: The total time in seconds that have elapsed since the game instance
     was created (including setup time and transitions).
-  args: []
   return: Float
   en-US: Total Time Elapsed
-'true':
+-
   description: The boolean value of true.
   args:
   return: Boolean
   en-US: 'True'
-_&getUltCharge:
+-
   description: The current ultimate ability charge percentage of a player.
   args:
   - name: Player
@@ -2303,7 +2262,7 @@ _&getUltCharge:
     default: Event Player
   return: Float
   en-US: Ultimate Charge Percent
-Vector.UP:
+-
   description: Shorthand for the directional vector(0, 1, 0), which points upward.
   args:
   return:
@@ -2312,7 +2271,7 @@ Vector.UP:
     - Integer
     - Integer
   en-US: Up
-__valueInArray__:
+-
   description: The value found at a specific element of an array. Results in 0 if
     the element does not exist.
   args:
@@ -2328,25 +2287,25 @@ __valueInArray__:
   - Object
   - Array
   en-US: Value In Array
-vect:
+-
   description: A vector composed of three real numbers (x, y, z) where x is left,
     y is up, and z is forward. Vectors are used for position, direction, and velocity.
   args:
   - name: X
     description: The x value of the vector.
-    type: float
+    type: Float
     default: Number
   - name: Y
     description: The y value of the vector.
-    type: float
+    type: Float
     default: Number
   - name: Z
     description: The z value of the vector.
-    type: float
+    type: Float
     default: Number
   return: Vector
   en-US: Vector
-vectorTowards:
+-
   description: The displacement vector from one position to another.
   args:
   - name: Start Pos
@@ -2359,7 +2318,7 @@ vectorTowards:
     default: Vector
   return: Direction
   en-US: Vector Towards
-_&getVelocity:
+-
   description: The current velocity of a player as a vector. If the player is on a
     surface, the y component of this velocity will be 0, even when traveling up or
     down a slope.
@@ -2370,7 +2329,7 @@ _&getVelocity:
     default: Event Player
   return: Velocity
   en-US: Velocity Of
-verticalAngleOfDirection:
+-
   description: The vertical angle in degrees corresponding to the specified direction
     vector.
   args:
@@ -2381,7 +2340,7 @@ verticalAngleOfDirection:
     default: Vector
   return: Float
   en-US: Vertical Angle From Direction
-verticalAngleTowards:
+-
   description: The vertical angle in degrees from a player's current forward direction
     to the specified position. The result is positive if the position is below the
     player. Otherwise, the result is zero or negative.
@@ -2396,7 +2355,7 @@ verticalAngleTowards:
     default: Vector
   return: Float
   en-US: Vertical Angle Towards
-_&getVerticalFacingAngle:
+-
   description: The vertical angle in degrees of a player's current facing relative
     to the world. This value increases as the player looks down.
   args:
@@ -2406,7 +2365,7 @@ _&getVerticalFacingAngle:
     default: Event Player
   return: Float
   en-US: Vertical Facing Angle Of
-_&getVerticalSpeed:
+-
   description: The current vertical speed of a player in meters per second. This measurement
     excludes all horizontal motion, including motion while traveling up and down slopes.
   args:
@@ -2416,63 +2375,63 @@ _&getVerticalSpeed:
     default: Event Player
   return: Float
   en-US: Vertical Speed Of
-victim:
+-
   description: The player that received the damage for the event currently being processed
     by this rule. May be the same as the attacker or the event player.
   args:
   return: Player
   en-US: Victim
-worldVector:
+-
   description: The vector in world coordinates corresponding to the provided vector
     in local coordinates.
   args:
   - name: Local Vector
     description: The vector in local coordinates that will be converted to world coordinates.
-    type: Vector
+    type: Position
     default: Vector
   - name: Relative Player
     description: The player to whom the local vector is relative.
     type: Player
     default: Event Player
-  - name: TRANSFORMATION
+  - name: Transformation
     description: Specifies whether the vector should receive a rotation and a translation
       (usually applied to positions) or only a rotation (usually applied to directions
       and velocities).
     type: Transform
-    default: ROTATION
+    default: Rotation
   return: Vector
   en-US: World Vector Of
-__xComponentOf__:
+-
   description: The x component of the specified vector, usually representing a leftward
     amount.
   args:
   - name: Value
     description: The vector from which to acquire the x component.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: X Component Of
-__yComponentOf__:
+-
   description: The y component of the specified vector, usually representing an upward
     amount.
   args:
   - name: Value
     description: The vector from which to acquire the y component.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: Y Component Of
-__zComponentOf__:
+-
   description: The z component of the specified vector, usually representing a forward
     amount.
   args:
   - name: Value
     description: The vector from which to acquire the z component.
-    type: Vector
+    type: Position
     default: Vector
   return: Float
   en-US: Z Component Of
-_&getAbilityCharge:
+-
   description: The ability charge count for a player associated by button.
   args:
   - name: Player
@@ -2485,7 +2444,7 @@ _&getAbilityCharge:
     default: Button
   return: Integer
   en-US: Ability Charge
-_&getAbilityResource:
+-
   description: The ability resource percent for a player associated by button.
   args:
   - name: Player
@@ -2498,7 +2457,7 @@ _&getAbilityResource:
     default: Button
   return: Float
   en-US: Ability Resource
-_&getAmmo:
+-
   description: The current ammo of a player.
   args:
   - name: Player
@@ -2511,13 +2470,13 @@ _&getAmmo:
     default: 0
   return: Float
   en-US: Ammo
-eventWasEnvironment:
+-
   description: Whether the elimination was due to the environment for the event currently
     being processed by this rule.
   args:
   return: Boolean
   en-US: Event Was Environment
-_&getHealthOfType:
+-
   description: The current health of the specified player, filtered by the given health
     type.
   args:
@@ -2530,8 +2489,8 @@ _&getHealthOfType:
     type: Health
     default: Health
   return: Float
-  en-US: Health of Type
-buttonString:
+  en-US: Health Of Type
+-
   description: Converts a button parameter into a string that shows up based on the
     player's input bindings. This value cannot be stored in variables.
   args:
@@ -2541,7 +2500,7 @@ buttonString:
     default: Button
   return: String
   en-US: Input Binding String
-_&isReloading:
+-
   description: Whether the specified player is reloading.
   args:
   - name: Player
@@ -2550,13 +2509,12 @@ _&isReloading:
     default: Event Player
   return: Boolean
   en-US: Is Reloading
-getLastCreatedHealthPool:
+-
   description: An ID representing the most recent Add Health Pool action that was
     executed by the event player (or executed at the global level).
-  args: []
-  return: HealthPoolId
+  return: Health Pool ID
   en-US: Last Created Health Pool
-_&getMaxAmmo:
+-
   description: The current max ammo of a player.
   args:
   - name: Player
@@ -2569,7 +2527,7 @@ _&getMaxAmmo:
     default: 0
   return: Float
   en-US: Max Ammo
-_&getMaxHealthOfType:
+-
   description: The max health of the specified player, filtered by the given health
     type.
   args:
@@ -2583,7 +2541,7 @@ _&getMaxHealthOfType:
     default: Health
   return: Float
   en-US: Max Health of Type
-_&getCurrentWeapon:
+-
   description: The currently held weapon of a player. Returns 2 for Baby Dva's gun,
     Torbjorn's hammer, and Mercy's pistol; 1 otherwise.
   args:
@@ -2593,7 +2551,7 @@ _&getCurrentWeapon:
     default: Event Player
   return: Integer
   en-US: Weapon
-Color:
+-
   description: A Color Constant
   return: Color
   args:
@@ -2602,7 +2560,7 @@ Color:
     type: Color
     default: White
   en-US: Color
-CustomColor:
+-
   description: Custom color with specified rgb and alpha values.
   args:
   - name: Red
@@ -2623,91 +2581,91 @@ CustomColor:
     default: 255
   return: Color
   en-US: Custom Color
-workshopSettingReal:
+-
   description: Provides the value of a new real number setting that will appear in
     the workshop settings card as a slider.
   args:
   - name: Category
     description: The name of the category in which this setting will be found.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Name
     description: The name of this setting.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Default
     description: The default value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Min
     description: The lowest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Max
     description: The highest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 100
   - name: Sort Order
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
-    type: IntLiteral
+    type: Integer
     default: 0
   isConstant: true
   return: Float
   en-US: Workshop Setting Real
-workshopSettingInteger:
+-
   description: Provides the value of a new integer setting that will appear in the
     workshop settings card as a slider.
   args:
   - name: Category
     description: The name of the category in which this setting will be found.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Name
     description: The name of this setting.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Default
     description: The default value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Min
     description: The lowest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 0
   - name: Max
     description: The highest allowed value for this setting.
-    type: FloatLiteral
+    type: Float
     default: 100
   - name: Sort Order
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
-    type: IntLiteral
+    type: Integer
     default: 0
   isConstant: true
   return: Integer
   en-US: Workshop Setting Integer
-workshopSettingToggle:
+-
   description: Provides the value (true or false) of a new toggle setting that will
     appear in the workshop settings card as a checkbox.
   args:
   - name: Category
     description: The name of the category in which this setting will be found.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Name
     description: The name of this setting.
-    type: CustomStringLiteral
+    type: String
     default: Custom String
   - name: Default
     description: The default value for this setting.
-    type: BoolLiteral
+    type: Boolean
     default: False
   - name: Sort Order
     description: The sort order of the setting relative to other settings in the same category. Settings with a higher sort order will come after settings with a lower sort order.
-    type: IntLiteral
+    type: Integer
     default: 0
   return: Boolean
   en-US: Workshop Setting Toggle
-WorkshopSettingCombo:
+-
   description: Provides the value (a choice of Custom Strings) of a new option setting that will appear in the Workshop Settings card as a combo box. This value returns the index of the selected choice.
   args:
   - name: Category
@@ -2732,7 +2690,7 @@ WorkshopSettingCombo:
     default: 0
   return: Object
   en-US: Workshop Setting Combo
-WorkshopSettingHero:
+-
   description: Provides the value of a new hero setting that will appear in the Workshop Settings card as a combo box.
   args:
   - name: Category
@@ -2753,31 +2711,34 @@ WorkshopSettingHero:
     default: 0
   return: Hero
   en-US: Workshop Setting Hero
-EvaluateOnce:
+-
   description: Results in the first value that was provided to the Input Value parameter for the given action or condition (usefor for selectively not reevaluating certain parts of a value when used in conjunction with an action that is capable of reevaluation).
   args:
   - name: Input Value
     description: This value is only evaluated once per action or condition.
+    type: Void
     default: 0
   return: Value
   en-US: Evaluate Once
-UpdateEveryFrame:
+-
   description: Results in the value that is provided to the Input Value parameter and increases the update frequency of the value to once per frame. Useful for smoothing the appearance of certain Values - such as Position Of - that normally only update every few frames. Applies to Conditions as well as Action Parameters that reevaluate. May increase server load and/or lower framerate.
   args:
   - name: Input Value
     description: This value's update rate will be increased from once every few frame to every frame.
+    type: Void
     default: Position Of
   return: Value
   en-US: Update Every Frame
-MagnitudeOf:
+-
   description: The magnitude of the spcified Value
   args:
   - name: Value
     description: The Vector operand of the magnitude operation.
+    type: Void
     default: Vector
   return: Float
   en-US: Magnitude Of
-NumberofSlots:
+-
   description: The number of Slots on a Team or in the match.
   args:
   - name: Team
@@ -2786,7 +2747,7 @@ NumberofSlots:
     default: Team
   return: Integer
   en-US: Number of Slots
-SpawnPoints:
+-
   description: The active spawn points for a Team or for the match, provided as an array of position vectors.
   args:
   - name: Team
@@ -2795,7 +2756,7 @@ SpawnPoints:
     default: Team
   return: Array
   en-US: Spawn Points
-StringContains:
+-
   description: Whether the specified String contains the specified Value.
   args:
   - name: String
@@ -2808,7 +2769,7 @@ StringContains:
     default: Custom String
   return: Boolean
   en-US: String Contains
-StringLength:
+-
   description: Results in the number of characters in the String value (or 0 if the value is not a string).
   args:
   - name: String
@@ -2817,7 +2778,7 @@ StringLength:
     default: Global Variable
   return: Integer
   en-US: String Length
-StringSlice:
+-
   description: Results in the specified substring of the String value.
   args:
   - name: String
@@ -2834,11 +2795,11 @@ StringSlice:
     default: 0
   return: String
   en-US: String Slice
-LastAssistID:
+-
   description: An ID representing the most recent Start Assist Action that was executed by the Event Player (or executed at the Global level).
   return: AssistId
   en-US: Last Assist ID
-IsCommunicatingAnySpray:
+-
   description: Whether a Player is using a spray.
   args:
   - name: Player
@@ -2847,7 +2808,7 @@ IsCommunicatingAnySpray:
     default: Event Player
   return: Boolean
   en-US: Is Communicating Any Spray
-PlayerStat:
+-
   description: Provides a statistic of the specified Player (limited to the current match). Statistics are only gathered when the game is in progress. Dummy bots do not gather statistics.
   args:
   - name: Player
@@ -2860,7 +2821,7 @@ PlayerStat:
     default: All Damage Dealt
   return: Integer
   en-US: Player Stat
-PlayerHeroStat:
+-
   description: Provides a statistic of the specified Player's time playing a specific Hero (limited to the current match). Statistics are only gathered when the game is in progress. Dummy bots do not gather statistics.
   args:
   - name: Player
@@ -2877,40 +2838,39 @@ PlayerHeroStat:
     default: All Damage Dealt
   return: Integer
   en-US: Player Hero Stat
-
-DamageOverTimeCount:
+-
   description: The current number of Damage Over Time instances started from the Damage Over Time action.
   en-US: Damage Over Time Count
-
-HealOverTimeCount:
+  return: Integer
+-
   description: The current number of Heal Over Time instances started from the Heal Over Time action.
   en-US: Heal Over Time Count
-
-TextCount:
+  return: Integer
+-
   description: The current number of Text instances started from the Create HUD Text, Create In-World Text, Create Progress Bar HUD text, or Create Progress Bar In-World Text Action.
   en-US: Text Count
-
-DamageModificationCount:
+  return: Integer
+-
   description: The current number of Damage Modification instances started from the Start Damage Modification Action.
   en-US: Damage Modification Count
-
-HealingModificationCount:
+  return: Integer
+-
   description: The current number of Healing Modification instances started from the Start Healing Modification Action.
   en-US: Healing Modification Count
-
-AssistCount:
+  return: Integer
+-
   description: The current number of Assist instances started from the Start Assist Action.
   en-US: Assist Count
-
-EntityCount:
+  return: Integer
+-
   description: The current number of Entities created from the Create Effect, Create Beam Effect, or Create Icon Action.
   en-US: Entity Count
-
-LocalPlayer:
+  return: Integer
+-
   description: The Player being controlled on the end user's computer. This Value is different for each end user and thus can only be accessed in Actions which affect visuals or the HUD. This Value cannot be stored in Variables.
   en-US: Local Player
-
-CharInString:
+  return: Player
+-
   description: The character found at a specified index of a String.
   args:
   - name: String
@@ -2921,9 +2881,9 @@ CharInString:
     description: The index of the character to be acquired (with 0 as the first character, 1 as the second character, etc.).
     type: Integer
     default: 0
+  return: String
   en-US: Char In String
-
-IndexOfStringChar:
+-
   description: The index of a character within a String or -1 if no such character can be found.
   args:
   - name: String
@@ -2934,9 +2894,9 @@ IndexOfStringChar:
     description: The character for which to search
     type: String
     default: Global Variable
+  return: Index
   en-US: Index Of String Char
-
-StringSplit:
+-
   description: Results in an Array of String Values. These String Values will be built from the specified String Value, split around the separator String.
   args:
   - name: String
@@ -2947,9 +2907,10 @@ StringSplit:
     description: The separator String with which to split the String Value.
     type: String
     default: Global Variable
+  return:
+    Array: String
   en-US: String Split
-
-StringReplace:
+-
   description: Results in a String Value. This String Value will be built from the specified String Value, where all occurences of the pattern String are replaced with the replacement String.
   args:
   - name: String
@@ -2964,4 +2925,5 @@ StringReplace:
     description: The String Value with which to replace the pattern String
     type: String
     default: Global Variable
+  return: String
   en-US: String Replace
