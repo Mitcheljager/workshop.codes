@@ -1378,7 +1378,7 @@
 -
   description: An id representing the most recent start damage modification action
     that was executed by the event player (or executed at the global level).
-  return: DamageModificationId
+  return: Damage Modification ID
   en-US: Last Damage Modification ID
 -
   description: An id representing the most recent damage over time action that was
@@ -1393,7 +1393,7 @@
 -
   description: An id representing the most recent start healing modification action
     that was executed by the event player (or executed at the global level).
-  return: HealingModificationId
+  return: Healing Modification ID
   en-US: Last Healing Modification ID
 -
   description: The value at the end of the specified array. Results in 0 if the specified
