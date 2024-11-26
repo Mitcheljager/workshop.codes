@@ -1388,7 +1388,7 @@
 -
   description: An id representing the most recent heal over time action that was executed
     by the event player (or executed at the global level).
-  return: HotId
+  return: Heal Over Time ID
   en-US: Last Heal Over Time ID
 -
   description: An id representing the most recent start healing modification action
@@ -2489,7 +2489,7 @@
     type: Health
     default: Health
   return: Float
-  en-US: Health of Type
+  en-US: Health Of Type
 -
   description: Converts a button parameter into a string that shows up based on the
     player's input bindings. This value cannot be stored in variables.
@@ -2512,7 +2512,7 @@
 -
   description: An ID representing the most recent Add Health Pool action that was
     executed by the event player (or executed at the global level).
-  return: HealthPoolId
+  return: Health Pool ID
   en-US: Last Created Health Pool
 -
   description: The current max ammo of a player.
