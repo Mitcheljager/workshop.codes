@@ -25,7 +25,7 @@ task :upgrade_wiki_articles => :environment do
 
       type_array.map { |type|
         type_article = Wiki::Article.where(title: type).last if type && type.is_a?(String)
-        type_slug = type_article.present? ? type_article.slug : nil
+        type_slug = type_article.present? && type_article.category.title === "Constants" ? type_article.slug : nil
 
         if type.is_a?(String)
           type_string_array.push("**#{ type_slug.present? ? "[#{ type }](/wiki/articles/#{ type_slug })" : (type || "Void") }**")
@@ -33,9 +33,15 @@ task :upgrade_wiki_articles => :environment do
           type_string_array.push("**#{ type[0] || type.keys[0] }** (**#{ type[1] || type.values[0] }**)")
         end
       }
+
+      default_article = Wiki::Article.where(title: item["default"]).last
+      default_slug = default_article.present? && default_article.category.title === "Values" ? default_article.slug : nil
+      default_string = item["default"]
+      default_string = "[#{ item["default"] }](/wiki/articles/#{ default_slug })" if default_slug.present?
+
 "
 > ==**#{ item["name"] }**==
-> _Type: #{ type_string_array.join(" | ") }, Default: **#{ item["default"] }**_
+> _Type: #{ type_string_array.join(" | ") }, Default: **#{ default_string }**_
 > #{ item["description"] }
 ".strip
     }.join("\n\n")
@@ -44,7 +50,7 @@ task :upgrade_wiki_articles => :environment do
     return_string = current["return"].blank? ? "_<span style=\"color: #c678dd\">Void</span>_" : return_array.map { |item|
       return_value_is_string = item.is_a?(String)
       return_value_article = Wiki::Article.where(title: item).last if item.present? && return_string
-      return_value_slug = return_value_article.present? ? return_value_article.slug : nil
+      return_value_slug = return_value_article.present? && return_value_article.category.title === "Values"  ? return_value_article.slug : nil
 
       if item.is_a?(String)
         "_<span style=\"color: #c678dd\">#{ return_value_slug.present? ? "[#{ item }](/wiki/articles/#{ return_value_slug })" : (item || "Void") }</span>_"
