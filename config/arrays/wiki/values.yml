@@ -802,7 +802,7 @@
   - name: Hero
     description: A hero constant.
     type: Hero
-    default: ANA
+    default: Ana
   return: Hero
   en-US: Hero
 -
