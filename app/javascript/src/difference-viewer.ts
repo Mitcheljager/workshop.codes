@@ -43,7 +43,7 @@ function createRules(): void {
   array.forEach(rule => {
     const item = document.createElement("option")
 
-    item.innerHTML = rule[0].toString()
+    item.innerText = rule[0].toString()
     item.value = rule[1].toString()
 
     selectElement!.append(item)
