@@ -19,6 +19,7 @@ class Wiki::EditsController < Wiki::BaseController
 
     if @edit.content_type == "edited"
       @title_difference = Diffy::SplitDiff.new(@previous_article.title, @edit.article.title, format: :html, allow_empty_diff: false)
+      @slug_difference = Diffy::SplitDiff.new(@previous_article.slug, @edit.article.slug, format: :html, allow_empty_diff: false)
       @content_difference = Diffy::SplitDiff.new(@previous_article.content, @edit.article.content, format: :html, allow_empty_diff: false)
       @category_difference = Diffy::SplitDiff.new(@previous_article.category.title, @edit.article.category.title, format: :html, allow_empty_diff: false)
       @tags_difference = Diffy::SplitDiff.new(@previous_article.tags || "", @edit.article.tags || "", format: :html, allow_empty_diff: false)
