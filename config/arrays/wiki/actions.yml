@@ -280,7 +280,7 @@
   - name: Color
     description: The color of the beam to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer. Does not apply to sound effects. Only the "good" and "bad" beam effects can have color applied.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
     type: Effect Reevaluation
@@ -330,7 +330,7 @@
   - name: Color
     description: The color of the effect to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer. Does not apply to sound effects.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Position
     description: The effect's position. If this value is a player, then the effect will move along with the player. Otherwise, the value is interpreted as a position in the world.
     type: Position
@@ -380,15 +380,15 @@
   - name: Header Color
     description: The color of the header.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Subheader Color
     description: The color of the subheader.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Text Color
     description: The color of the text.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated.
     type: HUD Reevaluation
@@ -425,7 +425,7 @@
   - name: Icon Color
     description: The color of the icon to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Show When Offscreen
     description: Should this icon appear even when it is behind you?
     type: Boolean
@@ -467,7 +467,7 @@
   - name: Text Color
     description: Specifies the color of the in-world text to use.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Spectators
     description: Whether spectators can see the text or not.
     type: Spectator Visibility
@@ -1059,7 +1059,7 @@
   - name: Color
     description: The color of the effect to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Position
     description: The effect's position. If this value is a player, then the effect will play at the player's position. Otherwise, the value is interpreted as a position in the world.
     type: Position
@@ -2672,7 +2672,7 @@
   - name: Color
     description: The color of the specified Player Outlines if they are visible. If a particular team is chosen, the color will either be Red or Blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Type
     description: The type of the specified Player Outlines if they are visible
     type: Outline
@@ -3005,11 +3005,11 @@
   - name: Progress Bar Color
     description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Text Color
     description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
     type: HUD Reevaluation
@@ -3062,11 +3062,11 @@
   - name: Progress Bar Color
     description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Text Color
     description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
     type: HUD Reevaluation
