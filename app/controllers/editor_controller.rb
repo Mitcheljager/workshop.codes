@@ -12,6 +12,7 @@ class EditorController < ApplicationController
           values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
           defaults = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "defaults.yml")))
           constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
+          settings = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "settings.yml")))
 
           response = {
             events: events,
@@ -21,6 +22,7 @@ class EditorController < ApplicationController
             constants: constants,
             maps: maps,
             heroes: heroes,
+            settings: settings,
           }
         end
 

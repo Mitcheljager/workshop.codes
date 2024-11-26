@@ -1,0 +1,1726 @@
+---
+extensions:
+  values:
+    beamEffects:
+      points: 2
+      description: Adds effects to the Type menu of the Create Beam Effect action. The Color parameter picks a Team Color if given a non-Team Color.
+      en-US: Beam Effects
+    beamSounds:
+      points: 1
+      description: Adds sounds to the Type menu of the Create Effect action.
+      en-US: Beam Sounds
+    buffAndDebuffSounds:
+      points: 2
+      description: Adds sounds to the Type menu of the Create Effect and Play Effect actions.
+      en-US: Buff and Debuff Sounds
+    buffStatusEffects:
+      points: 2
+      description: Adds effects to the Type menus of the Create Effect and Play Effect actions. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color. For first-person effects Position expects a player.
+      en-US: Buff Status Effects
+    debuffStatusEffects:
+      points: 2
+      description: Adds effects to the Type menus of the Create Effect and Play Effect actions. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color. For first-person effects Position expects a player.
+      en-US: Debuff Status Effects
+    energyExplosionEffects:
+      points: 4
+      description: Adds effects to the Type menu of the Play Effect action. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color.
+      en-US: Energy Explosion Effects
+    explosionSounds:
+      points: 2
+      description: Adds sounds to the Type menu of the Play Effect action.
+      en-US: Explosion Sounds
+    kineticExplosionEffects:
+      points: 4
+      description: Adds effects to the Type menu of the Play Effect action. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color.
+      en-US: Kinetic Explosion Effects
+    playMoreEffects:
+      points: 1
+      description: Doubles the number of effects allowed to be played at a time.
+      en-US: Play More Effects
+    projectiles:
+      points: 4
+      description: Adds projectiles to the Projectile Type menu of the Create Projectile actions.
+      en-US: Projectiles
+    spawnMoreDummyBots:
+      points: 2
+      description: Increases the maximum number of allowed dummy bots by 12.
+      en-US: Spawn More Dummy Bots
+  en-US: extensions
+gamemodes:
+  values:
+    general:
+      values:
+        enableEnemyHealthBars:
+          values: boolean
+          default: true
+          en-US: Enemy Health Bars
+        gamemodeStartTrigger:
+          values:
+            allSlotsFilled:
+              default: true
+              en-US: All Slots Filled
+            immediately:
+              en-US: Immediately
+            manual:
+              en-US: Manual
+          en-US: Game Mode Start
+        healthPackRespawnTime%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Health Pack Respawn Time Scalar
+        enableKillCam:
+          values: boolean
+          default: true
+          en-US: Kill Cam
+        enableKillFeed:
+          values: boolean
+          default: true
+          en-US: Kill Feed
+        enableSkins:
+          values: boolean
+          default: true
+          en-US: Skins
+        spawnHealthPacks:
+          values:
+            - default: true
+              en-US: Determined By Mode
+            - en-US: Enabled
+            - en-US: Disabled
+          en-US: Spawn Health Packs
+        enableHeroSwitching:
+          values: boolean
+          default: true
+          en-US: Allow Hero Switching
+        heroLimit:
+          values:
+            'off':
+              en-US: 'Off'
+            1PerTeam:
+              default: true
+              en-US: 1 Per Team
+            2PerTeam:
+              en-US: 2 Per Team
+            1PerGame:
+              en-US: 1 Per Game
+            2PerGame:
+              en-US: 2 Per Game
+          en-US: Hero Limit
+        roleLimit:
+          values:
+            'off':
+              default: true
+              en-US: 'Off'
+            2OfEachRolePerTeam:
+              en-US: 2 Of Each Role Per Team
+            1Tank2Offense2Support:
+              en-US: 1 Tank 2 Offense 2 Support
+          en-US: Limit Roles
+        enableRandomHeroes:
+          values: boolean
+          default: false
+          en-US: Respawn As Random Hero
+        randomHeroRoleLimitPerTeam:
+          values: __int__
+          default: 6
+          min: 1
+          max: 6
+          en-US: Random Hero Role Limit Per Team
+        respawnTime%:
+          values: range
+          min: 0
+          max: 100
+          default: 100
+          en-US: Respawn Time Scalar
+        tankPassiveHealthBonus:
+          values:
+            1Tank2Offense2Support:
+              default: true
+              en-US: 1 Tank 2 Offense 2 Support
+            alwaysEnabled:
+              en-US: Always Enabled
+            disabled:
+              en-US: Disabled
+          en-US: Tank Role Passive Health Bonus
+        disabledMaps:
+          en-US: disabled maps
+        enabledMaps:
+          en-US: enabled maps
+      en-US: General
+    assault:
+      values:
+        captureSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Capture Speed Modifier
+        enableCompetitiveRules:
+          values: boolean
+          default: false
+          en-US: Competitive Rules
+    control:
+      values:
+        captureSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Capture Speed Modifier
+        enableCompetitiveRules:
+          values: boolean
+          default: false
+          en-US: Competitive Rules
+        setValidControlPoints:
+          values:
+            all:
+              default: true
+              en-US: All
+            first:
+              en-US: First
+            second:
+              en-US: Second
+            third:
+              en-US: Third
+          en-US: Limit Valid Control Points
+        scoreToWin:
+          values: __int__
+          min: 1
+          max: 3
+          default: 2
+          en-US: Score To Win
+        scoringSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Scoring Speed Modifier
+    escort:
+      values:
+        enableCompetitiveRules:
+          values: boolean
+          default: false
+          en-US: Competitive Rules
+        payloadSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Payload Speed Modifier
+    hybrid:
+      values:
+        captureSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Capture Speed Modifier
+        enableCompetitiveRules:
+          values: boolean
+          default: false
+          en-US: Competitive Rules
+        payloadSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Payload Speed Modifier
+    bountyHunter:
+      values:
+        baseScoreForKillingBountyTarget:
+          values: __int__
+          min: 0
+          max: 1000
+          default: 300
+          en-US: Base Score for Killing a Bounty Target
+        bountyIncreasePerKillAsBountyTarget:
+          values: __int__
+          min: 0
+          max: 1000
+          default: 0
+          en-US: Bounty Increase per Kill as Bounty Target
+        nbBountyTargets:
+          values: __int__
+          min: 1
+          max: 1
+          default: 1
+          en-US: Bounty Target Count
+        scorePerKill:
+          values: __int__
+          min: 0
+          max: 1000
+          default: 100
+          en-US: Score per Kill
+        scorePerKillAsBountyTarget:
+          values: __int__
+          min: 0
+          max: 1000
+          default: 300
+          en-US: Score per Kill as Bounty Target
+        gameLengthInMn:
+          values: __int__
+          min: 5
+          max: 15
+          default: 10
+          en-US: Game Length In Minutes
+        scoreToWin:
+          values: __int__
+          min: 1
+          max: 5000
+          default: 20
+          en-US: Score To Win
+        enableSelfInitiatedRespawn:
+          values: boolean
+          default: true
+          en-US: Self Initiated Respawn
+    ctf:
+      values:
+        enableBlitzFlagLocations:
+          values: boolean
+          default: false
+          en-US: Blitz Flag Locations
+        enableDropFlagOnDmg:
+          values: boolean
+          default: false
+          en-US: Damage Interrupts Flag Interaction
+        flagCarrierAbilities:
+          values:
+            all:
+              en-US: All
+            none:
+              en-US: None
+            restricted:
+              default: true
+              en-US: Restricted
+          en-US: Flag Carrier Abilities
+        flagDroppedLockTime:
+          values: __float__
+          min: 0
+          max: 10
+          default: 5
+          en-US: Flag Dropped Lock Time
+        flagPickupTime:
+          values: __float__
+          min: 0
+          max: 5
+          default: 0
+          en-US: Flag Pickup Time
+        flagReturnTime:
+          values: __float__
+          min: 0
+          max: 5
+          default: 4
+          en-US: Flag Return Time
+        flagScoreRespawnTime:
+          values: __float__
+          min: 0
+          max: 20
+          default: 15
+          en-US: Flag Score Respawn Time
+        gameLengthInMn:
+          values: __int__
+          min: 5
+          max: 15
+          default: 8
+          en-US: Game Length Minutes
+        respawnSpeedBuffDuration:
+          values: __float__
+          min: 0
+          max: 60
+          default: 0
+          en-US: Respawn Speed Buff Duration
+        scoreToWin:
+          values: __int__
+          min: 1
+          max: 9
+          default: 3
+          en-US: Score To Win
+        teamNeedsFlagAtBaseToScore:
+          values: boolean
+          default: false
+          en-US: Team Needs Flag At Base To Score
+    elimination:
+      values:
+        heroSelectionTime:
+          values: __int__
+          min: 20
+          max: 60
+          default: 20
+          en-US: Hero Selection Time
+        scoreToWin:
+          values: __int__
+          min: 1
+          max: 9
+          default: 3
+          en-US: Score To Win
+        restrictPreviouslyPlayedHeroes:
+          values:
+            'off':
+              default: true
+              en-US: 'Off'
+            afterRoundWon:
+              en-US: After Round Won
+            afterRoundPlayed:
+              en-US: After Round Played
+          en-US: Restrict Previously Used Heroes
+        heroesAvailable:
+          values:
+            any:
+              default: true
+              en-US: Any
+            limited:
+              en-US: Limited
+            random:
+              en-US: Random
+            mirroredRandom:
+              en-US: Random Mirrored
+          en-US: Hero Selection
+        heroPoolSize:
+          values:
+            teamSize:
+              en-US: Team Size
+            teamSize+1:
+              en-US: Team Size +1
+            teamSize+2:
+              default: true
+              en-US: Team Size +2
+            teamSize+3:
+              en-US: Team Size +3
+          en-US: Limited Choice Pool
+        enableTiebreaker:
+          values: boolean
+          default: true
+          en-US: Capture Objective Tiebreaker
+        tiebreakerTime:
+          values: __int__
+          min: 30
+          max: 300
+          default: 105
+          en-US: Tiebreaker After Match Time Elapsed
+        tiebreakerCaptureTime:
+          values: __int__
+          min: 1
+          max: 7
+          default: 3
+          en-US: Time To Capture
+        drawTime:
+          values: __int__
+          min: 60
+          max: 300
+          default: 135
+          en-US: Draw After Match Time Elapsed With No Tiebreaker
+        enableWallhack:
+          values: boolean
+          default: false
+          en-US: Reveal Heroes
+        wallhackEnabledTime:
+          values: __int__
+          min: 0
+          max: 180
+          default: 75
+          en-US: Reveal Heroes After Match Time Elapsed
+    tdm:
+      values:
+        gameLengthInMn:
+          values: __int__
+          min: 5
+          max: 15
+          default: 10
+          en-US: Game Length In Minutes
+        enableMercyRezKillCancel:
+          values: boolean
+          default: true
+          en-US: Mercy Resurrect Counteracts Kills
+        scoreToWin:
+          values: __int__
+          min: 1
+          max: 200
+          default: 30
+          en-US: Score To Win
+        enableSelfInitiatedRespawn:
+          values: boolean
+          default: true
+          en-US: Self Initiated Respawn
+        needsImbalancedTeamScoreToWin:
+          values: boolean
+          default: false
+          en-US: Imbalanced Team Score To Win
+        team1ScoreToWin:
+          values: __int__
+          min: 1
+          max: 200
+          default: 30
+          en-US: Team 1 Score To Win
+        team2ScoreToWin:
+          values: __int__
+          min: 1
+          max: 200
+          default: 30
+          en-US: Team 2 Score To Win
+    skirmish:
+      values:
+        setValidControlPoints:
+          values:
+            all:
+              default: true
+              en-US: All
+            first:
+              en-US: First
+            second:
+              en-US: Second
+            third:
+              en-US: Third
+            fourth:
+              en-US: Fourth
+            fifth:
+              en-US: Fifth
+          en-US: Limit Valid Control Points
+    practiceRange:
+      values:
+        spawnTrainingBots:
+          values: boolean
+          default: true
+          en-US: Spawn Training Bots
+        trainingBotsRespawnTime%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Training Bot Respawn Time Scalar
+        enableTrainingPartner:
+          values: boolean
+          default: true
+          en-US: Training Partner
+    junkenstein:
+      values:
+        difficulty:
+          values:
+            normal:
+              default: true
+              en-US: NORMAL
+            hard:
+              en-US: HARD
+            expert:
+              en-US: EXPERT
+            legendary:
+              en-US: LEGENDARY
+          en-US: Difficulty
+        doorHealth%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Door Health Scalar
+        enableEndless:
+          values: boolean
+          default: false
+          en-US: Endless Mode
+    flashpoint:
+      values:
+        captureSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Capture Speed Modifier
+        controlPointA:
+          values: boolean
+          default: true
+          en-US: Control Point A
+        controlPointB:
+          values: boolean
+          default: true
+          en-US: Control Point B
+        controlPointC:
+          values: boolean
+          default: true
+          en-US: Control Point C
+        controlPointD:
+          values: boolean
+          default: true
+          en-US: Control Point D
+        controlPointE:
+          values: boolean
+          default: true
+          en-US: Control Point E
+        enableCompetitiveRules:
+          values: boolean
+          default: false
+          en-US: Competitive Rules
+        firstActiveControlPoint:
+          values:
+            a:
+              default: true
+              en-US: A
+            b:
+              default: false
+              en-US: B
+            c:
+              default: false
+              en-US: C
+            d:
+              default: false
+              en-US: D
+            e:
+              default: false
+              en-US: E
+            random:
+              default: false
+              en-US: Random
+          en-US: First Active Control Point
+        scoreToWin:
+          values: __int__
+          min: 1
+          max: 10
+          default: 3
+          en-US: Score To Win
+        scoringSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Scoring Speed Modifier
+    ffa:
+      values:
+        gameLengthInMn:
+          values: __int__
+          min: 5
+          max: 15
+          default: 10
+          en-US: Game Length In Minutes
+        scoreToWin:
+          values: __int__
+          min: 1
+          max: 5000
+          default: 20
+          en-US: Score To Win
+        enableSelfInitiatedRespawn:
+          values: boolean
+          default: true
+          en-US: Self Initiated Respawn
+    push:
+      values:
+        ts1WalkSpeedModifier%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: TS-1 Walk Speed Modifier
+        ts1PushSpeedModifier%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: TS-1 Push Speed Modifier
+        enableCompetitiveRules:
+          values: boolean
+          default: false
+          en-US: Competitive Rules
+    clash:
+      values:
+        captureSpeed%:
+          values: range
+          min: 10
+          max: 500
+          default: 45
+          en-US: Capture Speed Modifier
+        enableCompetitiveRules:
+          values: boolean
+          default: false
+          en-US: Competitive Rules
+  en-US: modes
+heroes:
+  teams:
+    allTeams:
+      en-US: General
+    team1:
+      en-US: Team 1
+    team2:
+      en-US: Team 2
+    ffa:
+      en-US: Team FFA
+  values:
+    __generalButNotEachHero__:
+      abilityCooldown%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        en-US: Ability Cooldown Time
+      ultGen%:
+        values: range
+        min: 10
+        max: 500
+        default: 100
+        en-US: Ultimate Generation
+      combatUltGen%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        en-US: Ultimate Generation - Combat
+      passiveUltGen%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        en-US: Ultimate Generation - Passive
+      enableUlt:
+        values: boolean
+        default: true
+        en-US: Ultimate Ability
+    __generalAndEachHero__:
+      enableMelee:
+        values: boolean
+        default: true
+        en-US: Quick Melee
+      enableSpawningWithUlt:
+        values: boolean
+        default: false
+        en-US: Spawn With Ultimate Ready
+      ultDuration%:
+        values: range
+        min: 25
+        max: 500
+        default: 100
+        include:
+        - ashe
+        - baptiste
+        - bastion
+        - doomfist
+        - genji
+        - junkrat
+        - mauga
+        - moira
+        - soldier
+        - torbjorn
+        - widowmaker
+        - winston
+        - hammond
+        - ramattra
+        - venture
+        en-US: Ultimate Duration
+      enableInfiniteUlt:
+        values: boolean
+        default: false
+        include:
+        - ashe
+        - baptiste
+        - bastion
+        - doomfist
+        - genji
+        - junkrat
+        - moira
+        - soldier
+        - torbjorn
+        - widowmaker
+        - winston
+        - hammond
+        - ramattra
+        - venture
+        en-US: Infinite Ultimate Duration
+      damageDealt%:
+        values: range
+        min: 10
+        max: 500
+        default: 100
+        en-US: Damage Dealt
+      damageReceived%:
+        values: range
+        min: 10
+        max: 500
+        default: 100
+        en-US: Damage Received
+      healingDealt%:
+        values: range
+        min: 10
+        max: 500
+        default: 100
+        en-US: Healing Dealt
+      healingReceived%:
+        values: range
+        min: 10
+        max: 500
+        default: 100
+        en-US: Healing Received
+      health%:
+        values: range
+        min: 10
+        max: 500
+        default: 100
+        en-US: Health
+      jumpVerticalSpeed%:
+        values: range
+        min: 25
+        max: 800
+        default: 100
+        en-US: Jump Vertical Speed
+      movementGravity%:
+        values: range
+        min: 25
+        max: 400
+        default: 100
+        en-US: Movement Gravity
+      movementSpeed%:
+        values: range
+        min: 50
+        max: 300
+        default: 100
+        en-US: Movement Speed
+      projectileGravity%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        exclude:
+        - ana
+        - bastion
+        - brigitte
+        - dva
+        - doomfist
+        - echo
+        - genji
+        - kiriko
+        - lucio
+        - cassidy
+        - mercy
+        - moira
+        - pharah
+        - reaper
+        - reinhardt
+        - roadhog
+        - sojourn
+        - soldier
+        - symmetra
+        - venture
+        - winston
+        - zenyatta
+        - juno
+        en-US: Projectile Gravity
+      projectileSpeed%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        exclude:
+        - brigitte
+        - reaper
+        - winston
+        en-US: Projectile Speed
+      enableHeadshotsOnly:
+        values: boolean
+        default: false
+        en-US: Receive Headshots Only
+      enablePrimaryFire:
+        values: boolean
+        default: true
+        en-US: Primary Fire
+      ammoClipSize%:
+        values: range
+        min: 25
+        max: 500
+        default: 100
+        exclude:
+        - brigitte
+        - dva
+        - hanzo
+        - kiriko
+        - moira
+        - reinhardt
+        - sojourn
+        - sigma
+        en-US: Ammunition Clip Size Scalar
+      enableInfiniteAmmo:
+        values: boolean
+        default: false
+        exclude:
+        - brigitte
+        - dva
+        - hanzo
+        - kiriko
+        - moira
+        - reinhardt
+        - sojourn
+        - sigma
+        en-US: No Ammunition Requirement
+    __eachHero__:
+      enableAbility1:
+        values: boolean
+        default: true
+        en-US: "%1$s"
+      ability1Cooldown%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        exclude:
+        - lucio
+        - soldier
+        - hammond
+        - zenyatta
+        en-US: "%1$s Cooldown Time"
+      enableAbility2:
+        values: boolean
+        default: true
+        exclude:
+        - bastion
+        - venture
+        en-US: "%1$s"
+      ability2Cooldown%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        exclude:
+        - bastion
+        - venture
+        - zenyatta
+        en-US: "%1$s Cooldown Time"
+      enableAbility3:
+        values: boolean
+        default: true
+        include:
+        - brigitte
+        - hanzo
+        - hammond
+        en-US: "%1$s"
+      ability3Cooldown%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        include:
+        - hammond
+        en-US: "%1$s Cooldown Time"
+      ultGen%:
+        values: range
+        min: 10
+        max: 500
+        default: 100
+        en-US: Ultimate Generation %1$s
+      combatUltGen%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        en-US: Ultimate Generation - Combat %1$s
+      passiveUltGen%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        en-US: Ultimate Generation - Passive %1$s
+      enableUlt:
+        values: boolean
+        default: true
+        en-US: Ultimate Ability %1$s
+      enablePassive:
+        values: boolean
+        default: true
+        include:
+        - mercy
+        - echo
+        - pharah
+        - juno
+        en-US: "%1$s"
+      enableSecondaryFire:
+        values: boolean
+        default: true
+        include:
+        - bastion
+        - brigitte
+        - dva
+        - doomfist
+        - echo
+        - junkerQueen
+        - lucio
+        - mauga
+        - orisa
+        - pharah
+        - reinhardt
+        - roadhog
+        - sigma
+        - sojourn
+        - soldier
+        - sombra
+        - hammond
+        - ramattra
+        - lifeweaver
+        - venture
+        - juno
+        en-US: "%1$s"
+      secondaryFireCooldown%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        include:
+        - bastion
+        - brigitte
+        - doomfist
+        - echo
+        - junkerQueen
+        - lucio
+        - orisa
+        - pharah
+        - reinhardt
+        - roadhog
+        - sigma
+        - soldier
+        - sombra
+        - hammond
+        - ramattra
+        - lifeweaver
+        - venture
+        - juno
+        en-US: "%1$s Cooldown Time"
+      secondaryFireMaximumTime%:
+        values: range
+        min: 20
+        max: 500
+        default: 100
+        include:
+        - dva
+        - roadhog
+        en-US: "%1$s Maximum Time"
+      secondaryFireRechargeRate%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        include:
+        - brigitte
+        - dva
+        - roadhog
+        - reinhardt
+        - sigma
+        en-US: "%1$s Recharge Rate"
+      enableGenericSecondaryFire:
+        values: boolean
+        default: true
+        include:
+        - baptiste
+        - genji
+        - illari
+        - kiriko
+        - cassidy
+        - mei
+        - mercy
+        - moira
+        - sojourn
+        - symmetra
+        - torbjorn
+        - winston
+        - zarya
+        - zenyatta
+        en-US: Secondary Fire
+      enableAutomaticFire:
+        values: __boolReverseOnOff__
+        default: false
+        include:
+        - ana
+        - ashe
+        - widowmaker
+        en-US: No Automatic Fire
+      enableScoping:
+        values: __boolReverseOnOff__
+        default: false
+        include:
+        - ana
+        - ashe
+        - widowmaker
+        en-US: No Scope
+      secondaryFireEnergyChargeRate%:
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        include:
+        - sojourn
+        en-US: "%1$s Energy Charge Rate"
+    disabledHeroes:
+      en-US: disabled heroes
+    enabledHeroes:
+      en-US: enabled heroes
+    ashe:
+      values:
+        ability1EnemyKb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Coach Gun Knockback Scalar Enemy
+        ability1SelfKb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Coach Gun Knockback Scalar Self
+        ability2FuseTime%:
+          values: range
+          min: 1
+          max: 500
+          default: 100
+          en-US: Dynamite Fuse Time Scalar
+    bastion:
+      values:
+        secondaryFireKb%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: A-36 Tactical Grenade Knockback Scalar
+    brigitte:
+      values:
+        shieldBashCooldown%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Shield Bash Cooldown Time
+        shieldBashKb%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: Shield Bash Knockback Scalar
+        ability1Kb%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: Whip Shot Knockback Scalar
+    dva:
+      values:
+        ability1Kb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Boosters Knockback Scalar
+        callMechKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Call Mech Knockback Scalar
+        selfDestructKb%:
+          values: range
+          min: 0
+          max: 200
+          default: 100
+          en-US: Self Destruct Knockback Scalar
+        spawnWithoutMech:
+          values: boolean
+          default: false
+          en-US: Spawn Without Mech
+    doomfist:
+      values:
+        ability1ChargeRate%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Power Block Charge Rate
+        secondaryFireKb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Rocket Punch Knockback Scalar
+        ultKb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Meteor Strike Knockback Scalar
+        ammoRegenerationTime%:
+          values: range
+          min: 33
+          max: 500
+          default: 100
+          en-US: Ammunition Regeneration Time Scalar
+    hanzo:
+      values:
+        ability3Cooldown%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Lunge Cooldown Time
+        ability3Distance%:
+          values: range
+          min: 20
+          max: 300
+          default: 100
+          en-US: Lunge Distance Scalar
+        ability2Quantity%:
+          values: __int__
+          min: 3
+          max: 12
+          default: 5
+          en-US: Storm Arrows Quantity
+    illari:
+      values:
+        solarEnergyMax%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Solar Energy Maximum
+        solarEnergyRecharge%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Solar Energy Recharge Rate
+    junkerQueen:
+      values:
+        secondaryFireKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Jagged Blade Knockback Scalar
+        secondaryFireRecallDelay%:
+          values: range
+          min: 40
+          max: 400
+          default: 100
+          en-US: Jagged Blade Delay Before Automatic Recall
+    junkrat:
+      values:
+        ability1Kb%:
+          values: range
+          min: 0
+          max: 200
+          default: 100
+          en-US: Concussion Mine Knockback Scalar
+        primaryFireKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Frag Launcher Knockback Scalar
+    kiriko:
+      values:
+        ability1Distance%:
+          values: range
+          min: 20
+          max: 300
+          default: 100
+          en-US: Swift Step Distance Scalar
+    lucio:
+      values:
+        secondaryFireKb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Soundwave Knockback Scalar
+    mauga:
+      values:
+        enablePrimaryFire:
+          values: boolean
+          default: true
+          en-US: Incendiary Chaingun
+        primaryFireIgniteDamage:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Incendiary Chaingun Ignite Damage
+        primaryFireIgniteDuration:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Incendiary Chaingun Ignite Duration
+        primaryFireIgniteRate:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Incendiary Chaingun Ignite Rate
+        ability1Kb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Overrun Knockback
+        ability2Healing%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Cardiac Overdrive Healing
+    mei:
+      values:
+        ultFreezeMinimum%:
+          values: range
+          min: 0
+          max: 100
+          default: 50
+          en-US: Blizzard Freeze Minimum
+        ultFreezeRate%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Blizzard Freeze Rate Scalar
+        enablePrimaryFireFreezeStack:
+          values: boolean
+          default: false
+          en-US: Freeze Stacking
+        primaryFireFreezeDuration%:
+          values: range
+          min: 20
+          max: 500
+          default: 100
+          en-US: Weapon Freeze Duration Scalar
+        primaryFireFreezeMinimum%:
+          values: range
+          min: 0
+          max: 100
+          default: 30
+          en-US: Weapon Freeze Minimum
+        primaryFireFreezeRate%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Weapon Freeze Rate Scalar
+    mercy:
+      values:
+        weaponsEnabled:
+          values:
+            all:
+              default: true
+              en-US: All
+            staff:
+              en-US: Caduceus Staff Only
+            blaster:
+              en-US: Caduceus Blaster Only
+          en-US: Weapons Enabled
+    moira:
+      values:
+        ability2MaxDamage%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Biotic Orb Max Damage Scalar
+        ability2MaxHealing%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Biotic Orb Max Healing Scalar
+        primaryFireMaximumTime%:
+          values: range
+          min: 20
+          max: 500
+          default: 100
+          en-US: Biotic Energy Maximum
+        primaryFireRechargeRate%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Biotic Energy Recharge Rate
+    pharah:
+      values:
+        ability2Kb%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: Concussive Blast Knockback Scalar
+        enablePassiveUnlimitedFuel:
+          values: boolean
+          default: false
+          en-US: Hover Jets Unlimited Fuel
+        passiveVerticalSpeed%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: Hover Jets Vertical Speed Scalar
+        passiveMaximumTime%:
+          values: range
+          min: 20
+          max: 500
+          default: 100
+          en-US: Jump Jet Acceleration Scalar
+        passiveExtraFuel%:
+          values: range
+          min: 0
+          max: 200
+          default: 100
+          en-US: Hover Jets Extra Fuel Scalar
+        passiveRechargeRate%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Hover Jets Recharge Rate
+        passiveMaxTime%:
+          values: range
+          min: 20
+          max: 500
+          default: 100
+          en-US: Hover Jets Maximum Time
+        ability1Acceleration%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: Jump Jet Acceleration Scalar
+        ability1RefuelScalar:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Jump Jet Refuel Scalar
+        primaryFireKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Rocket Launcher Knockback Scalar
+    ramattra:
+      values:
+        secondaryFireAlternateForm:
+          values: boolean
+          default: true
+          en-US: Block Nemesis Form
+    reinhardt:
+      values:
+        ability1Kb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Charge Knockback Scalar
+        primaryFireKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Rocket Hammer Knockback Scalar
+    roadhog:
+      values:
+        ultKb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Whole Hog Knockback Scalar
+    sigma:
+      values:
+        ability2Kb%:
+          values: range
+          min: 0
+          max: 300
+          default: 100
+          en-US: Accretion Knockback Scalar
+    soldier:
+      values:
+        secondaryFireKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Helix Rockets Knockback Scalar
+    torbjorn:
+      values:
+        ability2Duration%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Overload Duration Scalar
+        weaponsEnabled:
+          values:
+            all:
+              default: true
+              en-US: All
+            rivetGun:
+              en-US: Rivet Gun Only
+            hammer:
+              en-US: Forge Hammer Only
+          en-US: Weapons Enabled
+    winston:
+      values:
+        ability1Acceleration%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: Jump Pack Acceleration Scalar
+        ability1Kb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Jump Pack Knockback Scalar
+        ultKb%:
+          values: range
+          min: 25
+          max: 300
+          default: 100
+          en-US: Primal Rage Melee Knockback Scalar
+    hammond:
+      values:
+        enableRollOnly:
+          values: boolean
+          default: false
+          en-US: Roll Always Active
+        ability1Kb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Grappling Claw Knockback Scalar
+        ultKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Minefield Knockback Scalar
+    zarya:
+      values:
+        secondaryFireKb%:
+          values: range
+          min: 0
+          max: 400
+          default: 100
+          en-US: Particle Cannon Secondary Knockback Scalar
+    lifeweaver:
+      values:
+        ultHealth%:
+          values: range
+          min: 50
+          max: 300
+          default: 100
+          en-US: Tree of Life Health
+        ability1Health%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Rejuvenating Dash Healing
+        secondaryFireHealth%:
+          values: range
+          min: 25
+          max: 500
+          default: 100
+          en-US: Petal Platform Health
+        primaryFireRange%:
+          values: range
+          min: 20
+          max: 200
+          default: 100
+          en-US: Life Grip and Healing Blossom Range
+        weaponsEnabled:
+          values:
+            all:
+              default: true
+              en-US: All
+            healingBlossom:
+              en-US: Healing Blossom Only
+            thornVolley:
+              en-US: Thorn Volley Only
+          en-US: Weapons Enabled
+    venture:
+      values:
+        ability1Duration%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Burrow Duration Scalar
+    juno:
+      values:
+        ability1Duration%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Glide Boost Duration Scalar
+  en-US: heroes
+lobby:
+  values:
+    mapRotation:
+      values:
+        afterMirrorMatch:
+          default: true
+          en-US: After A Mirror Match
+        afterGame:
+          en-US: After A Game
+        paused:
+          en-US: Paused
+      en-US: Map Rotation
+    returnToLobby:
+      values:
+        never:
+          en-US: Never
+        afterGame:
+          en-US: After A Game
+        afterMirrorMatch:
+          default: true
+          en-US: After A Mirror Match
+      en-US: Return To Lobby
+    teamBalancing:
+      values:
+        'off':
+          default: true
+          en-US: 'Off'
+        afterMirrorMatch:
+          en-US: After A Mirror Match
+        afterGame:
+          en-US: After A Game
+      en-US: Team Balancing
+    swapTeamsAfterMatch:
+      values: __boolYesNo__
+      default: 'yes'
+      en-US: Swap Teams After Match
+    team1Slots:
+      values: __int__
+      min: 0
+      max: 12
+      default: 5
+      en-US: Max %1$s Players
+    team2Slots:
+      values: __int__
+      min: 0
+      max: 12
+      default: 5
+      en-US: Max %1$s Players
+    ffaSlots:
+      values: __int__
+      min: 0
+      max: 12
+      default: 12
+      en-US: Max FFA Players
+    spectatorSlots:
+      values: __int__
+      min: 0
+      max: 12
+      default: 2
+      en-US: Max Spectators
+    allowPlayersInQueue:
+      values: __boolYesNo__
+      default: 'no'
+      description: Whether to allow players in 'While you wait'.
+      description: Whether to allow players in 'While you wait'.
+      en-US: Allow Players Who Are In Queue
+    useExperimentalUpdate:
+      values: __boolYesNo__
+      default: 'no'
+      en-US: Use Experimental Update If Available
+    enableMatchVoiceChat:
+      values: __boolEnabled__
+      default: disabled
+      en-US: Match Voice Chat
+    pauseGameOnDisconnect:
+      values: __boolYesNo__
+      default: 'no'
+      en-US: Pause Game On Player Disconnect
+    dataCenterPreference:
+      values:
+        bestAvailable:
+          default: true
+          en-US: Best Available
+        argentina:
+          en-US: Argentina
+        australia:
+          en-US: Australia
+        australia2:
+          en-US: Australia 2
+        australia3:
+          en-US: Australia 3
+        bahrain:
+          en-US: Bahrain
+        brazil:
+          en-US: Brazil
+        brazil2:
+          en-US: Brazil 2
+        chile:
+          en-US: Chile
+        chinaBeijing:
+          en-US: China - Beijing
+        chinaHangzhou:
+          en-US: China - Hangzhou
+        chinaHangzhou2:
+          en-US: China - Hangzhou 2
+        finland2:
+          en-US: Finland 2
+        france:
+          en-US: France
+        germany:
+          en-US: Germany
+        germany2:
+          en-US: Germany 2
+        ireland:
+          en-US: Ireland
+        japan:
+          en-US: Japan
+        japan2:
+          en-US: Japan 2
+        netherlands:
+          en-US: Netherlands
+        peru:
+          en-US: Peru
+        singapore:
+          en-US: Singapore
+        singapore2:
+          en-US: Singapore 2
+        southKorea:
+          en-US: South Korea
+        southKorea2:
+          en-US: South Korea 2
+        southKorea3:
+          en-US: South Korea 3
+        taiwan:
+          en-US: Taiwan
+        taiwan2:
+          en-US: Taiwan 2
+        usCentral:
+          en-US: USA - Central
+        usEast:
+          en-US: USA - East
+        usEast2:
+          en-US: USA - East 2
+        usNorthwest:
+          en-US: USA - Northwest
+        usSouthwest:
+          en-US: USA - Southwest
+        usWest:
+          en-US: USA - West
+        usWest2:
+          en-US: USA - West 2
+      en-US: Data Center Preference
+    minimumLatencyInNs:
+      values: __int__
+      min: 0
+      max: 150000000
+      default: 0
+      en-US: Minimum Latency milliseconds
+  en-US: lobby
+main:
+  values:
+    description:
+      values: __string__
+      default: ''
+      maxChars: 512
+      en-US: Description
+    modeName:
+      values: __string__
+      default: ''
+      maxBytes: 129
+      en-US: Mode Name
+  en-US: main
+workshop:
+  en-US: workshop

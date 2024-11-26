@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick } from "svelte"
   import { fly } from "svelte/transition"
-  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings } from "@stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings, customGameSettings } from "@stores/editor"
   import { toCapitalize } from "@utils/text"
   import FetchRails from "@src/fetch-rails"
   import EditorActions from "@components/editor/EditorActions.svelte"
@@ -20,6 +20,7 @@
   import Bugsnag from "@components/Bugsnag.svelte"
   import EyeIcon from "@components/icon/Eye.svelte"
   import Logs from "@components/editor/Logs.svelte"
+  import CustomGameSettings from "@components/editor/CustomGameSettings/CustomGameSettings.svelte"
 
   export let bugsnagApiKey = ""
   export let _isSignedIn = false
@@ -52,6 +53,7 @@
     if (!data) return
 
     $workshopConstants = data.constants
+    $customGameSettings = data.settings
     $projects = userProjects || []
     defaults = data.defaults || {}
 
@@ -247,6 +249,8 @@
     </div>
 
     <div class="editor__content">
+      <div style="height: 80vh; overflow: auto"><CustomGameSettings /></div>
+
       {#if $currentItem?.id}
         <!-- This key makes it so CodeMirror has to re-render when the "word-wrap" setting is changed.
         There could be more elegant solutions that use the CodeMirror API to update extensions,

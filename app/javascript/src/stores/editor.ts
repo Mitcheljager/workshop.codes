@@ -88,6 +88,8 @@ export const mixinsMap = derived(flatItems, debounced(($flatItems: string) => {
 /* Example: { "Color": { "AQUA": { "en-US": "Aqua" }, { "BLUE": { "en-US": "Blue" } } } */
 export const workshopConstants = writable<Record<string, WorkshopConstant>>({})
 
+export const customGameSettings = writable({})
+
 export const settings = writable({
   "editor-font": "Consolas",
   "editor-font-size": "14",
