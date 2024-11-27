@@ -85,11 +85,11 @@ async function setBlur(element: HTMLElement): Promise<void> {
   const image = element.querySelector("img")
   const blurElements = Array.from(document.querySelectorAll("[data-role='carousel-blur']")) as HTMLImageElement[]
   const blurElement = blurElements[blurElements.length - 1]
-  const whitePixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NobW39DwAFsQKP8FV1WwAAAABJRU5ErkJggg=="
 
   const newElement = new Image()
   if (blurElement.classList.contains("background-blur--visible")) {
-    newElement.src = image?.currentSrc || whitePixel
+    copyImageSources(newElement, image)
+
     newElement.dataset.role = "carousel-blur"
     newElement.classList.add("background-blur")
 
@@ -103,7 +103,8 @@ async function setBlur(element: HTMLElement): Promise<void> {
     await new Promise(res => setTimeout(res, 1200)) // Await transition
     blurElement.remove()
   } else {
-    blurElement.src = image?.currentSrc || whitePixel
+    copyImageSources(blurElement, image)
+
     await new Promise(res => setTimeout(res, 1)) // Await one tick before fading
     blurElement.classList.add("background-blur--visible")
   }
@@ -120,4 +121,15 @@ function setResizeHandler(): void {
 
 function resizeHandler(event: Event): void {
   if (!document.fullscreenElement) carousel.resizeHandler(event)
+}
+
+function copyImageSources(newElement: HTMLImageElement, originalElement: HTMLImageElement | null): void {
+  const fallbackPixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NobW39DwAFsQKP8FV1WwAAAABJRU5ErkJggg=="
+
+  if (originalElement) {
+    newElement.srcset = originalElement.srcset || fallbackPixel
+    newElement.sizes = originalElement.sizes
+  }
+
+  newElement.src = originalElement?.src || fallbackPixel
 }
