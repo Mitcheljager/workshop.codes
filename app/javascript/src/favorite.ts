@@ -5,8 +5,8 @@ export function bind(): void {
   document.body.removeAndAddEventListener("click", favorite)
 }
 
-async function favorite(event: MouseEvent): Promise<void> {
-  let eventTarget = event.currentTarget as HTMLElement
+function favorite(event: MouseEvent): void {
+  let eventTarget = event.target as HTMLElement
   if (eventTarget.dataset.action != "favorite") eventTarget = eventTarget.closest("[data-action~='favorite']") as HTMLElement
 
   if (eventTarget) toggleFavorite(eventTarget)
