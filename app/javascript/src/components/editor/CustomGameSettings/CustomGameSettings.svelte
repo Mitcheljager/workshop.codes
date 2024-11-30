@@ -27,15 +27,23 @@
 <div class="p-1/4 bg-darker">
   <input type="text" placeholder="Search" bind:value={query} />
 
-  <h2 class="mt-0">Code</h2>
-  <SettingsTree tree={$customGameSettings.main.values} />
+  <div data-searchable-attributes="main">
+    <h2 class="mt-0">Code</h2>
+    <SettingsTree tree={$customGameSettings.main.values} />
+  </div>
 
-  <h2>Gamemodes</h2>
-  <SettingsTree tree={$customGameSettings.gamemodes.values} />
+  <div data-searchable-attributes="gamemodes">
+    <h2>Gamemodes</h2>
+    <SettingsTree tree={$customGameSettings.gamemodes.values} />
+  </div>
 
-  <h2>Lobby</h2>
-  <SettingsTree tree={$customGameSettings.lobby.values} />
+  <div data-searchable-attributes="lobby">
+    <h2>Lobby</h2>
+    <SettingsTree tree={$customGameSettings.lobby.values} />
+  </div>
 
-  <h2>Heroes</h2>
-  <SettingsTree tree={$customGameSettings.heroes.values} />
+  <div data-searchable-attributes="heroes">
+    <h2>Heroes</h2>
+    <SettingsTree tree={$customGameSettings.heroes.values} />
+  </div>
 </div>

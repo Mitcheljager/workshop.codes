@@ -1146,7 +1146,7 @@ heroes:
           max: 500
           default: 100
           en-US: Solar Energy Recharge Rate
-    junkerQueen:
+    "Junker Queen":
       values:
         secondaryFireKb%:
           values: range

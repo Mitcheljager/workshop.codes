@@ -19,7 +19,7 @@
   <div class="mt-1/8" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
     {#if typeof item === "object" && item.values}
       {#if typeof item.values === "object" && !Array.isArray(item.values)}
-        <h3>{label}</h3>
+        <h3 class="mt-1/2 mb-1/4">{label}</h3>
         <svelte:self tree={item.values} />
       {:else if Array.isArray(item.values)}
         <SettingsRadio {item} {key} {label} />
@@ -29,4 +29,3 @@
     {/if}
   </div>
 {/each}
----
