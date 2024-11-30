@@ -1535,13 +1535,10 @@ lobby:
       en-US: Map Rotation
     returnToLobby:
       values:
-        never:
-          en-US: Never
-        afterGame:
-          en-US: After A Game
-        afterMirrorMatch:
+        - en-US: Never
+        - en-US: After A Game
+        - en-US: After A Mirror Match
           default: true
-          en-US: After A Mirror Match
       en-US: Return To Lobby
     teamBalancing:
       values:
@@ -1649,7 +1646,8 @@ main:
   values:
     description:
       values: string
-      default: ''
+      default: Made with the Workshop.codes Script Editor
+      large: true
       maxChars: 512
       en-US: Description
     modeName:

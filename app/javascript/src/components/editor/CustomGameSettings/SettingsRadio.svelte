@@ -4,7 +4,7 @@
   export let label
 </script>
 
-<label class="form-label" for="">{label}</label>
+<label class="form-label mt-1/4 mb-1/8" for="">{label}</label>
 
 {#each item.values as value}
   <div class="checkbox ml-1/4">

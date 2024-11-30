@@ -10,5 +10,5 @@
 
 <div class="switch-checkbox">
   <input class="switch-checkbox__input" type="checkbox" {id} bind:checked />
-  <label class="switch-checkbox__label" for={id}>{label}</label>
+  <label class="switch-checkbox__label form-label" for={id}>{label}</label>
 </div>

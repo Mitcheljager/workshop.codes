@@ -25,25 +25,25 @@
 </script>
 
 <div class="p-1/4 bg-darker">
-  <input type="text" placeholder="Search" bind:value={query} />
+  <input class="form-input mb-1/1" type="text" placeholder="Search" bind:value={query} />
 
   <div data-searchable-attributes="main">
-    <h2 class="mt-0">Code</h2>
+    <h2 class="mt-0 mb-1/8"><strong>Code</strong></h2>
     <SettingsTree tree={$customGameSettings.main.values} />
   </div>
 
   <div data-searchable-attributes="gamemodes">
-    <h2>Gamemodes</h2>
+    <h2 class="mt-1/1 mb-1/8"><strong>Gamemodes</strong></h2>
     <SettingsTree tree={$customGameSettings.gamemodes.values} />
   </div>
 
   <div data-searchable-attributes="lobby">
-    <h2>Lobby</h2>
+    <h2 class="mt-1/1 mb-1/8"><strong>Lobby</strong></h2>
     <SettingsTree tree={$customGameSettings.lobby.values} />
   </div>
 
   <div data-searchable-attributes="heroes">
-    <h2>Heroes</h2>
+    <h2 class="mt-1/1 mb-1/8"><strong>Heroes</strong></h2>
     <SettingsTree tree={$customGameSettings.heroes.values} />
   </div>
 </div>

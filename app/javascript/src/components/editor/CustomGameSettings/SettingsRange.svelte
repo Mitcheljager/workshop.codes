@@ -6,6 +6,6 @@
 </script>
 
 <div class="form-group mt-0">
-  <label for="">{label}</label>
+  <label class="form-label" for="">{label}</label>
   <input class="range" type="range" min={item.values.min} max={item.values.max} bind:value />
 </div>
