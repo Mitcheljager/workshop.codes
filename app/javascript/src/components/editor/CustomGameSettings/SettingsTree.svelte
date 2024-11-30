@@ -3,7 +3,7 @@
 </script>
 
 {#each Object.entries(tree) as [key, item]}
-  <div class="mt-1/8">
+  <div class="mt-1/8" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
     {item["en-US"] || key}:
 
     {#if typeof item === "object"}
