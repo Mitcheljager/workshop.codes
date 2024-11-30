@@ -24,7 +24,7 @@
   }
 </script>
 
-<div class="p-1/4">
+<div class="p-1/4 bg-darker">
   <input type="text" placeholder="Search" bind:value={query} />
 
   <h2 class="mt-0">Code</h2>

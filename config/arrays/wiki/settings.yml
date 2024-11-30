@@ -92,27 +92,19 @@ gamemodes:
           en-US: Allow Hero Switching
         heroLimit:
           values:
-            'off':
-              en-US: 'Off'
-            1PerTeam:
+            - en-US: 'Off'
+            - en-US: 1 Per Team
               default: true
-              en-US: 1 Per Team
-            2PerTeam:
-              en-US: 2 Per Team
-            1PerGame:
-              en-US: 1 Per Game
-            2PerGame:
-              en-US: 2 Per Game
+            - en-US: 2 Per Team
+            - en-US: 1 Per Game
+            - en-US: 2 Per Game
           en-US: Hero Limit
         roleLimit:
           values:
-            'off':
+            - en-US: 'Off'
               default: true
-              en-US: 'Off'
-            2OfEachRolePerTeam:
-              en-US: 2 Of Each Role Per Team
-            1Tank2Offense2Support:
-              en-US: 1 Tank 2 Offense 2 Support
+            - en-US: 2 Of Each Role Per Team
+            - en-US: 1 Tank 2 Offense 2 Support
           en-US: Limit Roles
         enableRandomHeroes:
           values: boolean
@@ -132,13 +124,10 @@ gamemodes:
           en-US: Respawn Time Scalar
         tankPassiveHealthBonus:
           values:
-            1Tank2Offense2Support:
+            - en-US: 1 Tank 2 Offense 2 Support
               default: true
-              en-US: 1 Tank 2 Offense 2 Support
-            alwaysEnabled:
-              en-US: Always Enabled
-            disabled:
-              en-US: Disabled
+            - en-US: Always Enabled
+            - en-US: Disabled
           en-US: Tank Role Passive Health Bonus
         disabledMaps:
           en-US: disabled maps
@@ -171,15 +160,11 @@ gamemodes:
           en-US: Competitive Rules
         setValidControlPoints:
           values:
-            all:
+            - en-US: All
               default: true
-              en-US: All
-            first:
-              en-US: First
-            second:
-              en-US: Second
-            third:
-              en-US: Third
+            - en-US: First
+            - en-US: Second
+            - en-US: Third
           en-US: Limit Valid Control Points
         scoreToWin:
           values: __int__
@@ -547,24 +532,13 @@ gamemodes:
           en-US: Competitive Rules
         firstActiveControlPoint:
           values:
-            a:
+            - en-US: A
               default: true
-              en-US: A
-            b:
-              default: false
-              en-US: B
-            c:
-              default: false
-              en-US: C
-            d:
-              default: false
-              en-US: D
-            e:
-              default: false
-              en-US: E
-            random:
-              default: false
-              en-US: Random
+            - en-US: B
+            - en-US: C
+            - en-US: D
+            - en-US: E
+            - en-US: Random
           en-US: First Active Control Point
         scoreToWin:
           values: __int__
