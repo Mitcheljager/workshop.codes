@@ -56,13 +56,10 @@ gamemodes:
           en-US: Enemy Health Bars
         gamemodeStartTrigger:
           values:
-            allSlotsFilled:
+            - en-US: All Slots Filled
               default: true
-              en-US: All Slots Filled
-            immediately:
-              en-US: Immediately
-            manual:
-              en-US: Manual
+            - en-US: Immediately
+            - en-US: Manual
           en-US: Game Mode Start
         healthPackRespawnTime%:
           values: range
