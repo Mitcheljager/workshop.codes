@@ -1,35 +1,18 @@
 <script>
   import { customGameSettings } from "@src/stores/editor"
-
-  export let tree = $customGameSettings
+  import SettingsTree from "./SettingsTree.svelte"
 </script>
 
-{#each Object.entries(tree) as [key, value]}
-  <div class="mt-1/8">
-    {value["en-US"] || key}:
+<div class="p-1/4">
+  <h2 class="mt-0">Code</h2>
+  <SettingsTree tree={$customGameSettings.main.values} />
 
-    {#if typeof value === "object"}
-      {#if value.values && typeof value.values === "object" && !Array.isArray(value.values)}
-        <svelte:self tree={value.values} />
-      {:else if value.values && Array.isArray(value.values)}
-        {#each value.values as value}
-          <div>
-            {value["en-US"]}
-            <input type="radio" name={key} value={value["en-US"]} />
-          </div>
-        {/each}
-      {:else if value.values && typeof value.values === "string"}
-        {value.default}
+  <h2>Gamemodes</h2>
+  <SettingsTree tree={$customGameSettings.gamemodes.values} />
 
-        {#if value.values === "boolean"}
-          <input type="checkbox" checked={value.default} />
-        {/if}
+  <h2>Lobby</h2>
+  <SettingsTree tree={$customGameSettings.lobby.values} />
 
-        {#if value.values === "range"}
-          <input type="range" min={value.values.min} max={value.values.max} value={value.values.default} />
-        {/if}
-      {/if}
-    {/if}
-  </div>
-{/each}
----
+  <h2>Heroes</h2>
+  <SettingsTree tree={$customGameSettings.heroes.values} />
+</div>

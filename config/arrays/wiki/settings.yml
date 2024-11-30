@@ -1630,77 +1630,42 @@ lobby:
       en-US: Pause Game On Player Disconnect
     dataCenterPreference:
       values:
-        bestAvailable:
+        - en-US: Best Available
           default: true
-          en-US: Best Available
-        argentina:
-          en-US: Argentina
-        australia:
-          en-US: Australia
-        australia2:
-          en-US: Australia 2
-        australia3:
-          en-US: Australia 3
-        bahrain:
-          en-US: Bahrain
-        brazil:
-          en-US: Brazil
-        brazil2:
-          en-US: Brazil 2
-        chile:
-          en-US: Chile
-        chinaBeijing:
-          en-US: China - Beijing
-        chinaHangzhou:
-          en-US: China - Hangzhou
-        chinaHangzhou2:
-          en-US: China - Hangzhou 2
-        finland2:
-          en-US: Finland 2
-        france:
-          en-US: France
-        germany:
-          en-US: Germany
-        germany2:
-          en-US: Germany 2
-        ireland:
-          en-US: Ireland
-        japan:
-          en-US: Japan
-        japan2:
-          en-US: Japan 2
-        netherlands:
-          en-US: Netherlands
-        peru:
-          en-US: Peru
-        singapore:
-          en-US: Singapore
-        singapore2:
-          en-US: Singapore 2
-        southKorea:
-          en-US: South Korea
-        southKorea2:
-          en-US: South Korea 2
-        southKorea3:
-          en-US: South Korea 3
-        taiwan:
-          en-US: Taiwan
-        taiwan2:
-          en-US: Taiwan 2
-        usCentral:
-          en-US: USA - Central
-        usEast:
-          en-US: USA - East
-        usEast2:
-          en-US: USA - East 2
-        usNorthwest:
-          en-US: USA - Northwest
-        usSouthwest:
-          en-US: USA - Southwest
-        usWest:
-          en-US: USA - West
-        usWest2:
-          en-US: USA - West 2
+        - en-US: Argentina
+        - en-US: Australia
+        - en-US: Australia 2
+        - en-US: Australia 3
+        - en-US: Bahrain
+        - en-US: Brazil
+        - en-US: Brazil 2
+        - en-US: Chile
+        - en-US: China - Beijing
+        - en-US: China - Hangzhou
+        - en-US: China - Hangzhou 2
+        - en-US: Finland 2
+        - en-US: France
+        - en-US: Germany
+        - en-US: Germany 2
+        - en-US: Ireland
+        - en-US: Japan
+        - en-US: Japan 2
+        - en-US: Netherlands
+        - en-US: Peru
+        - en-US: Singapore
+        - en-US: Singapore 2
+        - en-US: South Korea
+        - en-US: South Korea 2
+        - en-US: South Korea 3
+        - en-US: Taiwan
+        - en-US: Taiwan 2
+        - en-US: USA - Central
+        - en-US: USA - East
+        - en-US: USA - East 2
+        - en-US: USA - Northwest
+        - en-US: USA - Southwest
+        - en-US: USA - West
+        - en-US: USA - West 2
       en-US: Data Center Preference
     minimumLatencyInNs:
       values: __int__
@@ -1712,12 +1677,12 @@ lobby:
 main:
   values:
     description:
-      values: __string__
+      values: string
       default: ''
       maxChars: 512
       en-US: Description
     modeName:
-      values: __string__
+      values: string
       default: ''
       maxBytes: 129
       en-US: Mode Name
