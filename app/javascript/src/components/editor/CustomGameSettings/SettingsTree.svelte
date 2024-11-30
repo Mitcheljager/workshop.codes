@@ -13,7 +13,7 @@
         {#each item.values as value}
           <div class="pl-1/4">
             <label for={key + value["en-US"]}>{value["en-US"]}</label>
-            <input type="radio" name={key} value={key + value["en-US"]} id={key + value["en-US"]} />
+            <input type="radio" name={key} value={value["en-US"]} checked={value.default} id={key + value["en-US"]} />
           </div>
         {/each}
       {:else if item.values && typeof item.values === "string"}

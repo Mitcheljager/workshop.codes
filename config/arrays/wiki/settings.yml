@@ -81,8 +81,8 @@ gamemodes:
           en-US: Skins
         spawnHealthPacks:
           values:
-            - default: true
-              en-US: Determined By Mode
+            - en-US: Determined By Mode
+              default: true
             - en-US: Enabled
             - en-US: Disabled
           en-US: Spawn Health Packs
