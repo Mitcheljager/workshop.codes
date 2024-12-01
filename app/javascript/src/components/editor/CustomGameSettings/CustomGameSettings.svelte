@@ -66,24 +66,11 @@
   </div>
 
   <div class="custom-game-settings__content" bind:this={contentElement} on:scroll={scrollSpy}>
-    <div data-searchable-attributes="main">
-      <h2 class="mt-0 mb-1/8" data-key="Main"><strong>Main</strong></h2>
-      <SettingsTree on:change={() => console.log(settings)} tree={settings.main.values}  />
-    </div>
-
-    <div data-searchable-attributes="lobby">
-      <h2 class="mt-1/1 mb-1/8" data-key="Lobby"><strong>Lobby</strong></h2>
-      <SettingsTree on:change={() => console.log(settings)} tree={settings.lobby.values} />
-    </div>
-
-    <div data-searchable-attributes="gamemodes">
-      <h2 class="mt-1/1 mb-1/8" data-key="Gamemodes"><strong>Gamemodes</strong></h2>
-      <SettingsTree on:change={() => console.log(settings)} tree={settings.gamemodes.values} />
-    </div>
-
-    <div data-searchable-attributes="heroes">
-      <h2 class="mt-1/1 mb-1/8" data-key="Heroes"><strong>Heroes</strong></h2>
-      <SettingsTree on:change={() => console.log(settings)} tree={settings.heroes.values} />
-    </div>
+    {#each Object.entries({ main: "Main", lobby: "Lobby", gamemodes: "Gamemodes", heroes: "Heroes" }) as [key, label]}
+      <div data-searchable-attributes={key}>
+        <h2 class="mt-1/1 mb-1/8" data-key={label}><strong>{label}</strong></h2>
+        <SettingsTree on:change={() => console.log(settings)} tree={settings[key].values} />
+      </div>
+    {/each}
   </div>
 </div>
