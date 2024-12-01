@@ -1,0 +1,19 @@
+.custom-game-settings {
+  display: grid;
+  grid-template-columns: 15rem auto;
+  height: 100%;
+  background: darken($bg-dark, 5%);
+}
+
+.custom-game-settings__sidebar {
+  height: 100%;
+  padding: $margin * 0.25;
+  overflow: auto;
+  background: $bg-darker;
+}
+
+.custom-game-settings__content {
+  height: 100%;
+  padding: $margin * 0.25;
+  overflow: auto;
+}

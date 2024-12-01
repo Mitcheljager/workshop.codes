@@ -38,7 +38,7 @@
     - If It's a string is given type that matches one of the input components defined in the `components` object.
   -->
 
-  <div class="mt-1/8 pl-1/4" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
+  <div class="mt-1/8 pl-1/4" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}" data-key={key}>
     {#if typeof item === "object" && item.values}
       {#if typeof item.values === "object" && !Array.isArray(item.values)}
         <h3 class="mt-1/2 mb-1/4">{label}</h3>
