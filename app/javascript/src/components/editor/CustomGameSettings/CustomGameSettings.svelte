@@ -66,10 +66,10 @@
   </div>
 
   <div class="custom-game-settings__content" bind:this={contentElement} on:scroll={scrollSpy}>
-    {#each Object.entries({ main: "Main", lobby: "Lobby", gamemodes: "Gamemodes", heroes: "Heroes" }) as [key, label]}
-      <div data-searchable-attributes={key}>
-        <h2 class="mt-1/1 mb-1/8" data-key={label}><strong>{label}</strong></h2>
-        <SettingsTree on:change={() => console.log(settings)} tree={settings[key].values} />
+    {#each ["Main", "Lobby", "Gamemodes", "Heroes"] as item}
+      <div data-searchable-attributes={item}>
+        <h2 class="mt-1/1 mb-1/8" data-key={item}><strong>{item}</strong></h2>
+        <SettingsTree on:change={() => console.log(settings)} tree={settings[item.toLowerCase()].values} />
       </div>
     {/each}
   </div>
