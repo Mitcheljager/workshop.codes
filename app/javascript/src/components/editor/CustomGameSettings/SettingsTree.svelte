@@ -3,6 +3,9 @@
   import SettingsRange from "./SettingsRange.svelte"
   import SettingsText from "./SettingsText.svelte"
   import SettingsToggle from "./SettingsToggle.svelte"
+  import { createEventDispatcher } from "svelte"
+
+  const dispatch = createEventDispatcher()
 
   export let tree = {}
 
@@ -10,6 +13,16 @@
     boolean: SettingsToggle,
     range: SettingsRange,
     string: SettingsText
+  }
+
+  function change(key, value) {
+    const isDefault = value === tree[key].default
+    const isDefaultInOptions = Array.isArray(tree[key].values) && Object.values(tree[key].values).find(v => v.default)["en-US"] === value
+
+    if (isDefault || isDefaultInOptions) delete tree[key].current
+    else tree[key].current = value
+
+    dispatch("change")
   }
 </script>
 
@@ -20,11 +33,11 @@
     {#if typeof item === "object" && item.values}
       {#if typeof item.values === "object" && !Array.isArray(item.values)}
         <h3 class="mt-1/2 mb-1/4">{label}</h3>
-        <svelte:self tree={item.values} />
+        <svelte:self tree={item.values} on:change />
       {:else if Array.isArray(item.values)}
-        <SettingsRadio {item} {key} {label} />
+        <SettingsRadio {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
       {:else if typeof item.values === "string"}
-        <svelte:component this={components[item.values]} {item} {key} {label} />
+        <svelte:component this={components[item.values]} {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
       {/if}
     {/if}
   </div>

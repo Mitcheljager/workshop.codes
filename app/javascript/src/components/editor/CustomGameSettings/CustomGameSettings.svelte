@@ -1,6 +1,10 @@
 <script>
   import { customGameSettings } from "@src/stores/editor"
   import SettingsTree from "./SettingsTree.svelte"
+  import { setContext } from "svelte"
+  import { writable } from "svelte/store"
+
+  const settings = { ...$customGameSettings }
 
   let query = ""
 
@@ -29,21 +33,21 @@
 
   <div data-searchable-attributes="main">
     <h2 class="mt-0 mb-1/8"><strong>Code</strong></h2>
-    <SettingsTree tree={$customGameSettings.main.values} />
+    <SettingsTree on:change={() => console.log(settings)} tree={settings.main.values} />
   </div>
 
   <div data-searchable-attributes="gamemodes">
     <h2 class="mt-1/1 mb-1/8"><strong>Gamemodes</strong></h2>
-    <SettingsTree tree={$customGameSettings.gamemodes.values} />
+    <SettingsTree on:change={() => console.log(settings)} tree={settings.gamemodes.values} />
   </div>
 
   <div data-searchable-attributes="lobby">
     <h2 class="mt-1/1 mb-1/8"><strong>Lobby</strong></h2>
-    <SettingsTree tree={$customGameSettings.lobby.values} />
+    <SettingsTree on:change={() => console.log(settings)} tree={settings.lobby.values} />
   </div>
 
   <div data-searchable-attributes="heroes">
     <h2 class="mt-1/1 mb-1/8"><strong>Heroes</strong></h2>
-    <SettingsTree tree={$customGameSettings.heroes.values} />
+    <SettingsTree on:change={() => console.log(settings)} tree={settings.heroes.values} />
   </div>
 </div>
