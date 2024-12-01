@@ -108,7 +108,7 @@ export default class InscrybeInsertImage {
 
     uploader.upload().then(() => {
       const interval = setInterval(() => {
-        if (uploader.blob == "") return
+        if (uploader.blob == null) return
 
         clearInterval(interval)
 
