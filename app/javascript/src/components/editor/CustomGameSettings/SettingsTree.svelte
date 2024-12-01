@@ -38,10 +38,10 @@
     - If It's a string is given type that matches one of the input components defined in the `components` object.
   -->
 
-  <div class="mt-1/8 pl-1/4" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}" data-key={key}>
+  <div class="mt-1/8 pl-1/4" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
     {#if typeof item === "object" && item.values}
       {#if typeof item.values === "object" && !Array.isArray(item.values)}
-        <h3 class="mt-1/2 mb-1/4">{label}</h3>
+        <h3 class="mt-1/2 mb-1/4" data-key={key}>{label}</h3>
         <svelte:self tree={item.values} on:change />
       {:else if Array.isArray(item.values)}
         <SettingsOptions {item} {key} {label} on:change={({ detail }) => change(key, detail)} />

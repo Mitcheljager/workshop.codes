@@ -6,13 +6,15 @@
   import SettingsNavigation from "./SettingsNavigation.svelte"
 
   const settings = { ...$customGameSettings }
+  const scrollOffset = 20
 
   let contentElement
+  let lastScrolledPastKey = null
   let query = ""
 
   $: search(query)
 
-  const navigation = { settings: { values: { Code: settings.main, Gamemodes: settings.gamemodes, Heroes: settings.heroes } } }
+  const navigation = { settings: { values: { Main: settings.main, Lobby: settings.lobby, Gamemodes: settings.gamemodes, Heroes: settings.heroes } } }
 
   // Search through elements in tree, deliberately not very Svelte-y to not have to worry about state.
   function search(query) {
@@ -34,9 +36,25 @@
   function scrollToItem({ target }) {
     const key = target.dataset.key
     const targetElement = contentElement.querySelector(`[data-key="${key}"]`)
-    const top = targetElement.offsetTop - 20
+    const top = targetElement.offsetTop - scrollOffset
 
     contentElement.scrollTo({ top })
+  }
+
+  function scrollSpy() {
+    const elements = contentElement.querySelectorAll("[data-key]")
+
+    lastScrolledPastKey = null
+
+    elements.forEach(element => {
+      const bottomDistance = element.getBoundingClientRect().bottom
+      const elementHeight = element.clientHeight
+      const topOffset = contentElement.getBoundingClientRect().top
+
+      if (bottomDistance - elementHeight > topOffset + scrollOffset + 1) return
+
+      lastScrolledPastKey = element.dataset.key
+    })
   }
 </script>
 
@@ -44,27 +62,27 @@
   <div class="custom-game-settings__sidebar">
     <input class="form-input mb-1/4" type="text" placeholder="Search" bind:value={query} />
 
-    <SettingsNavigation tree={navigation} on:click={scrollToItem} />
+    <SettingsNavigation tree={navigation} {lastScrolledPastKey} on:click={scrollToItem} />
   </div>
 
-  <div class="custom-game-settings__content" bind:this={contentElement}>
+  <div class="custom-game-settings__content" bind:this={contentElement} on:scroll={scrollSpy}>
     <div data-searchable-attributes="main">
-      <h2 class="mt-0 mb-1/8"><strong>Main</strong></h2>
-      <SettingsTree on:change={() => console.log(settings)} tree={settings.main.values} />
-    </div>
-
-    <div data-searchable-attributes="gamemodes">
-      <h2 class="mt-1/1 mb-1/8"><strong>Gamemodes</strong></h2>
-      <SettingsTree on:change={() => console.log(settings)} tree={settings.gamemodes.values} />
+      <h2 class="mt-0 mb-1/8" data-key="Main"><strong>Main</strong></h2>
+      <SettingsTree on:change={() => console.log(settings)} tree={settings.main.values}  />
     </div>
 
     <div data-searchable-attributes="lobby">
-      <h2 class="mt-1/1 mb-1/8"><strong>Lobby</strong></h2>
+      <h2 class="mt-1/1 mb-1/8" data-key="Lobby"><strong>Lobby</strong></h2>
       <SettingsTree on:change={() => console.log(settings)} tree={settings.lobby.values} />
     </div>
 
+    <div data-searchable-attributes="gamemodes">
+      <h2 class="mt-1/1 mb-1/8" data-key="Gamemodes"><strong>Gamemodes</strong></h2>
+      <SettingsTree on:change={() => console.log(settings)} tree={settings.gamemodes.values} />
+    </div>
+
     <div data-searchable-attributes="heroes">
-      <h2 class="mt-1/1 mb-1/8"><strong>Heroes</strong></h2>
+      <h2 class="mt-1/1 mb-1/8" data-key="Heroes"><strong>Heroes</strong></h2>
       <SettingsTree on:change={() => console.log(settings)} tree={settings.heroes.values} />
     </div>
   </div>
