@@ -29,6 +29,13 @@
 {#each Object.entries(tree) as [key, item]}
   {@const label = item["en-US"] || key}
 
+  <!--
+    Each item is of a certain predefined type:
+    - If it's an object it is always a deeper tree and will be iterated over again.
+    - If It's an array it's a list of single select options.
+    - If It's a string is given type that matches one of the input components defined in the `components` object.
+  -->
+
   <div class="mt-1/8 pl-1/4" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
     {#if typeof item === "object" && item.values}
       {#if typeof item.values === "object" && !Array.isArray(item.values)}
