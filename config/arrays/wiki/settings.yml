@@ -487,12 +487,16 @@ heroes:
   values:
     General:
       values: heroes
+      default: null
     Team 1:
       values: heroes
+      default: null
     Team 2:
       values: heroes
+      default: null
     Team FFA:
       values: heroes
+      default: null
     __generalButNotEachHero__:
       abilityCooldown%:
         values: range

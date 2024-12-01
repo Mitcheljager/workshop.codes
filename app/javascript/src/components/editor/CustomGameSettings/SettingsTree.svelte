@@ -1,4 +1,5 @@
 <script>
+  import SettingsHeroes from "./SettingsHeroes.svelte"
   import SettingsOptions from "./SettingsOptions.svelte"
   import SettingsRange from "./SettingsRange.svelte"
   import SettingsText from "./SettingsText.svelte"
@@ -12,7 +13,8 @@
   const components = {
     boolean: SettingsToggle,
     range: SettingsRange,
-    string: SettingsText
+    string: SettingsText,
+    heroes: SettingsHeroes
   }
 
   function change(key, value) {

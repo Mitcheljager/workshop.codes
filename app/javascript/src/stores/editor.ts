@@ -90,6 +90,8 @@ export const workshopConstants = writable<Record<string, WorkshopConstant>>({})
 
 export const customGameSettings = writable({})
 
+export const heroes = writable([])
+
 export const settings = writable({
   "editor-font": "Consolas",
   "editor-font-size": "14",
