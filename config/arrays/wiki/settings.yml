@@ -1,617 +1,498 @@
 ---
 extensions:
   values:
-    beamEffects:
+    Beam Effects:
       points: 2
       description: Adds effects to the Type menu of the Create Beam Effect action. The Color parameter picks a Team Color if given a non-Team Color.
-      en-US: Beam Effects
-    beamSounds:
+    Beam Sounds:
       points: 1
       description: Adds sounds to the Type menu of the Create Effect action.
-      en-US: Beam Sounds
-    buffAndDebuffSounds:
+    Buff and Debuff Sounds:
       points: 2
       description: Adds sounds to the Type menu of the Create Effect and Play Effect actions.
-      en-US: Buff and Debuff Sounds
-    buffStatusEffects:
+    Buff Status Effects:
       points: 2
       description: Adds effects to the Type menus of the Create Effect and Play Effect actions. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color. For first-person effects Position expects a player.
-      en-US: Buff Status Effects
-    debuffStatusEffects:
+    Debuff Status Effects:
       points: 2
       description: Adds effects to the Type menus of the Create Effect and Play Effect actions. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color. For first-person effects Position expects a player.
-      en-US: Debuff Status Effects
-    energyExplosionEffects:
+    Energy Explosion Effects:
       points: 4
       description: Adds effects to the Type menu of the Play Effect action. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color.
-      en-US: Energy Explosion Effects
-    explosionSounds:
+    Explosion Sounds:
       points: 2
       description: Adds sounds to the Type menu of the Play Effect action.
-      en-US: Explosion Sounds
-    kineticExplosionEffects:
+    Kinetic Explosion Effects:
       points: 4
       description: Adds effects to the Type menu of the Play Effect action. The Radius parameter is ignored. The Color parameter picks a Team Color if given a non-Team Color.
-      en-US: Kinetic Explosion Effects
-    playMoreEffects:
+    Play More Effects:
       points: 1
       description: Doubles the number of effects allowed to be played at a time.
-      en-US: Play More Effects
-    projectiles:
+    Projectiles:
       points: 4
       description: Adds projectiles to the Projectile Type menu of the Create Projectile actions.
-      en-US: Projectiles
-    spawnMoreDummyBots:
+    Spawn More Dummy Bots:
       points: 2
       description: Increases the maximum number of allowed dummy bots by 12.
-      en-US: Spawn More Dummy Bots
-  en-US: extensions
+
 gamemodes:
   values:
-    general:
+    General:
       values:
-        enableEnemyHealthBars:
+        Enemy Health Bars:
           values: boolean
           default: true
-          en-US: Enemy Health Bars
-        gamemodeStartTrigger:
+        Game Mode Start:
+          default: All Slots Filled
           values:
-            - en-US: All Slots Filled
-              default: true
-            - en-US: Immediately
-            - en-US: Manual
-          en-US: Game Mode Start
-        healthPackRespawnTime%:
+            - All Slots Filled
+            - Immediately
+            - Manual
+        Health Pack Respawn Time Scalar:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Health Pack Respawn Time Scalar
-        enableKillCam:
+        Kill Cam:
           values: boolean
           default: true
-          en-US: Kill Cam
-        enableKillFeed:
+        Kill Feed:
           values: boolean
           default: true
-          en-US: Kill Feed
-        enableSkins:
+        Skins:
           values: boolean
           default: true
-          en-US: Skins
-        spawnHealthPacks:
+        Spawn Health Packs:
+          default: Determined By Mode
           values:
-            - en-US: Determined By Mode
-              default: true
-            - en-US: Enabled
-            - en-US: Disabled
-          en-US: Spawn Health Packs
-        enableHeroSwitching:
+            - Determined By Mode
+            - Enabled
+            - Disabled
+        Allow Hero Switching:
           values: boolean
           default: true
-          en-US: Allow Hero Switching
-        heroLimit:
+        Hero Limit:
+          default: 1 Per Team
           values:
-            - en-US: 'Off'
-            - en-US: 1 Per Team
-              default: true
-            - en-US: 2 Per Team
-            - en-US: 1 Per Game
-            - en-US: 2 Per Game
-          en-US: Hero Limit
-        roleLimit:
+            - "Off"
+            - 1 Per Team
+            - 2 Per Team
+            - 1 Per Game
+            - 2 Per Game
+        Limit Roles:
+          default: "Off"
           values:
-            - en-US: 'Off'
-              default: true
-            - en-US: 2 Of Each Role Per Team
-            - en-US: 1 Tank 2 Offense 2 Support
-          en-US: Limit Roles
-        enableRandomHeroes:
+            - "Off"
+            - 2 Of Each Role Per Team
+            - 1 Tank 2 Offense 2 Support
+        Respawn As Random Hero:
           values: boolean
           default: false
-          en-US: Respawn As Random Hero
-        randomHeroRoleLimitPerTeam:
-          values: __int__
+        Random Hero Role Limit Per Team:
+          values: range
           default: 6
           min: 1
           max: 6
-          en-US: Random Hero Role Limit Per Team
-        respawnTime%:
+        Respawn Time Scalar:
           values: range
           min: 0
           max: 100
           default: 100
-          en-US: Respawn Time Scalar
-        tankPassiveHealthBonus:
+        Tank Role Passive Health Bonus:
+          default: 1 Tank 2 Offense 2 Support
           values:
-            - en-US: 1 Tank 2 Offense 2 Support
-              default: true
-            - en-US: Always Enabled
-            - en-US: Disabled
-          en-US: Tank Role Passive Health Bonus
+            - 1 Tank 2 Offense 2 Support
+            - Always Enabled
+            - Disabled
         disabledMaps:
           en-US: disabled maps
         enabledMaps:
           en-US: enabled maps
-      en-US: General
-    assault:
+    Assault:
       values:
-        captureSpeed%:
+        Capture Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Capture Speed Modifier
-        enableCompetitiveRules:
+        Competitive Rules:
           values: boolean
           default: false
-          en-US: Competitive Rules
-    control:
+    Control:
       values:
-        captureSpeed%:
+        Capture Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Capture Speed Modifier
-        enableCompetitiveRules:
+        Competitive Rules:
           values: boolean
           default: false
-          en-US: Competitive Rules
-        setValidControlPoints:
+        Limit Valid Control Points:
+          default: All
           values:
-            - en-US: All
-              default: true
-            - en-US: First
-            - en-US: Second
-            - en-US: Third
-          en-US: Limit Valid Control Points
-        scoreToWin:
-          values: __int__
+            - All
+            - First
+            - Second
+            - Third
+        Score To Win:
+          values: range
           min: 1
           max: 3
           default: 2
-          en-US: Score To Win
-        scoringSpeed%:
+        Scoring Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Scoring Speed Modifier
-    escort:
+    Escort:
       values:
-        enableCompetitiveRules:
+        Competitive Rules:
           values: boolean
           default: false
-          en-US: Competitive Rules
-        payloadSpeed%:
+        Payload Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Payload Speed Modifier
-    hybrid:
+    Hybrid:
       values:
-        captureSpeed%:
+        Capture Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Capture Speed Modifier
-        enableCompetitiveRules:
+        Competitive Rules:
           values: boolean
           default: false
-          en-US: Competitive Rules
-        payloadSpeed%:
+        Payload Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Payload Speed Modifier
-    bountyHunter:
+    Bounty Hunter:
       values:
-        baseScoreForKillingBountyTarget:
-          values: __int__
+        Base Score for Killing a Bounty Target:
+          values: range
           min: 0
           max: 1000
           default: 300
-          en-US: Base Score for Killing a Bounty Target
-        bountyIncreasePerKillAsBountyTarget:
-          values: __int__
+        Bounty Increase per Kill as Bounty Target:
+          values: range
           min: 0
           max: 1000
           default: 0
-          en-US: Bounty Increase per Kill as Bounty Target
-        nbBountyTargets:
-          values: __int__
+        Bounty Target Count:
+          values: range
           min: 1
           max: 1
           default: 1
-          en-US: Bounty Target Count
-        scorePerKill:
-          values: __int__
+        Score per Kill:
+          values: range
           min: 0
           max: 1000
           default: 100
-          en-US: Score per Kill
-        scorePerKillAsBountyTarget:
-          values: __int__
+        Score per Kill as Bounty Target:
+          values: range
           min: 0
           max: 1000
           default: 300
-          en-US: Score per Kill as Bounty Target
-        gameLengthInMn:
-          values: __int__
+        Game Length In Minutes:
+          values: range
           min: 5
           max: 15
           default: 10
-          en-US: Game Length In Minutes
-        scoreToWin:
-          values: __int__
+        Score To Win:
+          values: range
           min: 1
           max: 5000
           default: 20
-          en-US: Score To Win
-        enableSelfInitiatedRespawn:
+        Self Initiated Respawn:
           values: boolean
           default: true
-          en-US: Self Initiated Respawn
-    ctf:
+    Capture The Flag:
       values:
-        enableBlitzFlagLocations:
+        Blitz Flag Locations:
           values: boolean
           default: false
-          en-US: Blitz Flag Locations
-        enableDropFlagOnDmg:
+        Damage Interrupts Flag Interaction:
           values: boolean
           default: false
-          en-US: Damage Interrupts Flag Interaction
-        flagCarrierAbilities:
+        Flag Carrier Abilities:
+          default: Restricted
           values:
-            all:
-              en-US: All
-            none:
-              en-US: None
-            restricted:
-              default: true
-              en-US: Restricted
-          en-US: Flag Carrier Abilities
-        flagDroppedLockTime:
-          values: __float__
+            - All
+            - None
+            - Restricted
+        Flag Dropped Lock Time:
+          values: range
+          precise: true
           min: 0
           max: 10
           default: 5
-          en-US: Flag Dropped Lock Time
-        flagPickupTime:
-          values: __float__
+        Flag Pickup Time:
+          values: range
+          precise: true
           min: 0
           max: 5
           default: 0
-          en-US: Flag Pickup Time
-        flagReturnTime:
-          values: __float__
+        Flag Return Time:
+          values: range
+          precise: true
           min: 0
           max: 5
           default: 4
-          en-US: Flag Return Time
-        flagScoreRespawnTime:
-          values: __float__
+        Flag Score Respawn Time:
+          values: range
+          precise: true
           min: 0
           max: 20
           default: 15
-          en-US: Flag Score Respawn Time
-        gameLengthInMn:
+        Game Length Minutes:
           values: __int__
           min: 5
           max: 15
           default: 8
-          en-US: Game Length Minutes
-        respawnSpeedBuffDuration:
-          values: __float__
+        Respawn Speed Buff Duration:
+          values: range
+          precise: true
           min: 0
           max: 60
           default: 0
-          en-US: Respawn Speed Buff Duration
         scoreToWin:
-          values: __int__
+          values: range
           min: 1
           max: 9
           default: 3
-          en-US: Score To Win
-        teamNeedsFlagAtBaseToScore:
+        Team Needs Flag At Base To Score:
           values: boolean
           default: false
-          en-US: Team Needs Flag At Base To Score
-    elimination:
+    Elimination:
       values:
-        heroSelectionTime:
-          values: __int__
+        Hero Selection Time:
+          values: range
           min: 20
           max: 60
           default: 20
-          en-US: Hero Selection Time
-        scoreToWin:
-          values: __int__
+        Score To Win:
+          values: range
           min: 1
           max: 9
           default: 3
-          en-US: Score To Win
-        restrictPreviouslyPlayedHeroes:
+        Restrict Previously Used Heroes:
+          default: "Off"
           values:
-            'off':
-              default: true
-              en-US: 'Off'
-            afterRoundWon:
-              en-US: After Round Won
-            afterRoundPlayed:
-              en-US: After Round Played
-          en-US: Restrict Previously Used Heroes
-        heroesAvailable:
+            - "Off"
+            - After Round Won
+            - After Round Played
+        Hero Selection:
+          default: Any
           values:
-            any:
-              default: true
-              en-US: Any
-            limited:
-              en-US: Limited
-            random:
-              en-US: Random
-            mirroredRandom:
-              en-US: Random Mirrored
-          en-US: Hero Selection
-        heroPoolSize:
+            - Any
+            - Limited
+            - Random
+            - Random Mirrored
+        Limited Choice Pool:
+          default: Team Size +2
           values:
-            teamSize:
-              en-US: Team Size
-            teamSize+1:
-              en-US: Team Size +1
-            teamSize+2:
-              default: true
-              en-US: Team Size +2
-            teamSize+3:
-              en-US: Team Size +3
-          en-US: Limited Choice Pool
-        enableTiebreaker:
+            - Team Size
+            - Team Size +1
+            - Team Size +2
+            - Team Size +3
+        Capture Objective Tiebreaker:
           values: boolean
           default: true
-          en-US: Capture Objective Tiebreaker
-        tiebreakerTime:
-          values: __int__
+        Tiebreaker After Match Time Elapsed:
+          values: range
           min: 30
           max: 300
           default: 105
-          en-US: Tiebreaker After Match Time Elapsed
-        tiebreakerCaptureTime:
-          values: __int__
+        Time To Capture:
+          values: range
           min: 1
           max: 7
           default: 3
-          en-US: Time To Capture
-        drawTime:
-          values: __int__
+        Draw After Match Time Elapsed With No Tiebreaker:
+          values: range
           min: 60
           max: 300
           default: 135
-          en-US: Draw After Match Time Elapsed With No Tiebreaker
-        enableWallhack:
+        Reveal Heroes:
           values: boolean
           default: false
-          en-US: Reveal Heroes
-        wallhackEnabledTime:
-          values: __int__
+        Reveal Heroes After Match Time Elapsed:
+          values: range
           min: 0
           max: 180
           default: 75
-          en-US: Reveal Heroes After Match Time Elapsed
-    tdm:
+    Team Deathmatch:
       values:
-        gameLengthInMn:
-          values: __int__
+        Game Length In Minutes:
+          values: range
           min: 5
           max: 15
           default: 10
-          en-US: Game Length In Minutes
-        enableMercyRezKillCancel:
+        Mercy Resurrect Counteracts Kills:
           values: boolean
           default: true
-          en-US: Mercy Resurrect Counteracts Kills
-        scoreToWin:
-          values: __int__
+        Score To Win:
+          values: range
           min: 1
           max: 200
           default: 30
-          en-US: Score To Win
-        enableSelfInitiatedRespawn:
+        Self Initiated Respawn:
           values: boolean
           default: true
-          en-US: Self Initiated Respawn
-        needsImbalancedTeamScoreToWin:
+        Imbalanced Team Score To Win:
           values: boolean
           default: false
-          en-US: Imbalanced Team Score To Win
-        team1ScoreToWin:
-          values: __int__
+        Team 1 Score To Win:
+          values: range
           min: 1
           max: 200
           default: 30
-          en-US: Team 1 Score To Win
-        team2ScoreToWin:
-          values: __int__
+        Team 2 Score To Win:
+          values: range
           min: 1
           max: 200
           default: 30
-          en-US: Team 2 Score To Win
-    skirmish:
+    Skirmish:
       values:
-        setValidControlPoints:
+        Limit Valid Control Points:
+          default: All
           values:
-            all:
-              default: true
-              en-US: All
-            first:
-              en-US: First
-            second:
-              en-US: Second
-            third:
-              en-US: Third
-            fourth:
-              en-US: Fourth
-            fifth:
-              en-US: Fifth
-          en-US: Limit Valid Control Points
-    practiceRange:
+            - All
+            - First
+            - Second
+            - Third
+            - Fourth
+            - Fifth
+    Practice Range:
       values:
-        spawnTrainingBots:
+        Spawn Training Bots:
           values: boolean
           default: true
-          en-US: Spawn Training Bots
-        trainingBotsRespawnTime%:
+        Training Bot Respawn Time Scalar:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Training Bot Respawn Time Scalar
-        enableTrainingPartner:
+        Training Partner:
           values: boolean
           default: true
-          en-US: Training Partner
     junkenstein:
       values:
-        difficulty:
+        Difficulty:
+          default: NORMAL
           values:
-            normal:
-              default: true
-              en-US: NORMAL
-            hard:
-              en-US: HARD
-            expert:
-              en-US: EXPERT
-            legendary:
-              en-US: LEGENDARY
+            - NORMAL
+            - HARD
+            - EXPERT
+            - LEGENDARY
           en-US: Difficulty
-        doorHealth%:
+        Door Health Scalar:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Door Health Scalar
-        enableEndless:
+        Endless Mode:
           values: boolean
           default: false
-          en-US: Endless Mode
     flashpoint:
       values:
-        captureSpeed%:
+        Capture Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Capture Speed Modifier
-        controlPointA:
+        Control Point A:
           values: boolean
           default: true
-          en-US: Control Point A
-        controlPointB:
+        Control Point B:
           values: boolean
           default: true
-          en-US: Control Point B
-        controlPointC:
+        Control Point C:
           values: boolean
           default: true
-          en-US: Control Point C
-        controlPointD:
+        Control Point D:
           values: boolean
           default: true
-          en-US: Control Point D
-        controlPointE:
+        Control Point E:
           values: boolean
           default: true
-          en-US: Control Point E
-        enableCompetitiveRules:
+        Competitive Rules:
           values: boolean
           default: false
-          en-US: Competitive Rules
-        firstActiveControlPoint:
+        First Active Control Point:
+          default: A
           values:
-            - en-US: A
-              default: true
-            - en-US: B
-            - en-US: C
-            - en-US: D
-            - en-US: E
-            - en-US: Random
-          en-US: First Active Control Point
-        scoreToWin:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - Random
+        Score To Win:
           values: __int__
           min: 1
           max: 10
           default: 3
-          en-US: Score To Win
-        scoringSpeed%:
+        Scoring Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: Scoring Speed Modifier
     ffa:
       values:
-        gameLengthInMn:
+        Game Length In Minutes:
           values: __int__
           min: 5
           max: 15
           default: 10
-          en-US: Game Length In Minutes
-        scoreToWin:
+        Score To Win:
           values: __int__
           min: 1
           max: 5000
           default: 20
-          en-US: Score To Win
-        enableSelfInitiatedRespawn:
+        Self Initiated Respawn:
           values: boolean
           default: true
-          en-US: Self Initiated Respawn
     push:
       values:
-        ts1WalkSpeedModifier%:
+        TS-1 Walk Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: TS-1 Walk Speed Modifier
-        ts1PushSpeedModifier%:
+        TS-1 Push Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 100
-          en-US: TS-1 Push Speed Modifier
-        enableCompetitiveRules:
+        Competitive Rules:
           values: boolean
           default: false
-          en-US: Competitive Rules
     clash:
       values:
-        captureSpeed%:
+        Capture Speed Modifier:
           values: range
           min: 10
           max: 500
           default: 45
-          en-US: Capture Speed Modifier
-        enableCompetitiveRules:
+        Competitive Rules:
           values: boolean
           default: false
-          en-US: Competitive Rules
-  en-US: modes
+
 heroes:
-  teams:
-    allTeams:
-      en-US: General
-    team1:
-      en-US: Team 1
-    team2:
-      en-US: Team 2
-    ffa:
-      en-US: Team FFA
   values:
+    General:
+      values: heroes
+    Team 1:
+      values: heroes
+    Team 2:
+      values: heroes
+    Team FFA:
+      values: heroes
     __generalButNotEachHero__:
       abilityCooldown%:
         values: range
@@ -1520,40 +1401,30 @@ heroes:
           max: 500
           default: 100
           en-US: Glide Boost Duration Scalar
-  en-US: heroes
+
 lobby:
   values:
-    mapRotation:
+    Map Rotation:
+      default: After A Mirror Match
       values:
-        afterMirrorMatch:
-          default: true
-          en-US: After A Mirror Match
-        afterGame:
-          en-US: After A Game
-        paused:
-          en-US: Paused
-      en-US: Map Rotation
-    returnToLobby:
+        - After A Mirror Match
+        - After A Game
+        - Paused
+    Return To Lobby:
+      default: After A Mirror Match
       values:
-        - en-US: Never
-        - en-US: After A Game
-        - en-US: After A Mirror Match
-          default: true
-      en-US: Return To Lobby
-    teamBalancing:
+        - Never
+        - After A Game
+        - After A Mirror Match
+    Team Balancing:
+      default: "Off"
       values:
-        'off':
-          default: true
-          en-US: 'Off'
-        afterMirrorMatch:
-          en-US: After A Mirror Match
-        afterGame:
-          en-US: After A Game
-      en-US: Team Balancing
-    swapTeamsAfterMatch:
+        - "Off"
+        - After A Mirror Match
+        - After A Game
+    Swap Teams After Match:
       values: __boolYesNo__
       default: 'yes'
-      en-US: Swap Teams After Match
     team1Slots:
       values: __int__
       min: 0
@@ -1566,95 +1437,84 @@ lobby:
       max: 12
       default: 5
       en-US: Max %1$s Players
-    ffaSlots:
-      values: __int__
+    Max FFA Players:
+      values: range
       min: 0
       max: 12
       default: 12
-      en-US: Max FFA Players
-    spectatorSlots:
-      values: __int__
+    Max Spectators:
+      values: range
       min: 0
       max: 12
       default: 2
-      en-US: Max Spectators
-    allowPlayersInQueue:
+    Allow Players Who Are In Queue:
       values: __boolYesNo__
       default: 'no'
       description: Whether to allow players in 'While you wait'.
-      description: Whether to allow players in 'While you wait'.
-      en-US: Allow Players Who Are In Queue
-    useExperimentalUpdate:
+    Use Experimental Update If Available:
       values: __boolYesNo__
       default: 'no'
-      en-US: Use Experimental Update If Available
-    enableMatchVoiceChat:
+    Match Voice Chat:
       values: __boolEnabled__
       default: disabled
-      en-US: Match Voice Chat
-    pauseGameOnDisconnect:
+    Pause Game On Player Disconnect:
       values: __boolYesNo__
       default: 'no'
-      en-US: Pause Game On Player Disconnect
-    dataCenterPreference:
+    Data Center Preference:
+      default: Best Available
       values:
-        - en-US: Best Available
-          default: true
-        - en-US: Argentina
-        - en-US: Australia
-        - en-US: Australia 2
-        - en-US: Australia 3
-        - en-US: Bahrain
-        - en-US: Brazil
-        - en-US: Brazil 2
-        - en-US: Chile
-        - en-US: China - Beijing
-        - en-US: China - Hangzhou
-        - en-US: China - Hangzhou 2
-        - en-US: Finland 2
-        - en-US: France
-        - en-US: Germany
-        - en-US: Germany 2
-        - en-US: Ireland
-        - en-US: Japan
-        - en-US: Japan 2
-        - en-US: Netherlands
-        - en-US: Peru
-        - en-US: Singapore
-        - en-US: Singapore 2
-        - en-US: South Korea
-        - en-US: South Korea 2
-        - en-US: South Korea 3
-        - en-US: Taiwan
-        - en-US: Taiwan 2
-        - en-US: USA - Central
-        - en-US: USA - East
-        - en-US: USA - East 2
-        - en-US: USA - Northwest
-        - en-US: USA - Southwest
-        - en-US: USA - West
-        - en-US: USA - West 2
-      en-US: Data Center Preference
-    minimumLatencyInNs:
-      values: __int__
+        - Best Available
+        - Argentina
+        - Australia
+        - Australia 2
+        - Australia 3
+        - Bahrain
+        - Brazil
+        - Brazil 2
+        - Chile
+        - China - Beijing
+        - China - Hangzhou
+        - China - Hangzhou 2
+        - Finland 2
+        - France
+        - Germany
+        - Germany 2
+        - Ireland
+        - Japan
+        - Japan 2
+        - Netherlands
+        - Peru
+        - Singapore
+        - Singapore 2
+        - South Korea
+        - South Korea 2
+        - South Korea 3
+        - Taiwan
+        - Taiwan 2
+        - USA - Central
+        - USA - East
+        - USA - East 2
+        - USA - Northwest
+        - USA - Southwest
+        - USA - West
+        - USA - West 2
+    Minimum Latency milliseconds: # "millisecond" starts lowercase on purpose
+      values: range
       min: 0
-      max: 150000000
+      max: 150
+      multiplier: 1000000
       default: 0
-      en-US: Minimum Latency milliseconds
-  en-US: lobby
+
 main:
   values:
-    description:
+    Description:
       values: string
       default: Made with the Workshop.codes Script Editor
       large: true
       maxChars: 512
-      en-US: Description
-    modeName:
+    Mode Name:
       values: string
-      default: ''
+      default: ""
       maxBytes: 129
-      en-US: Mode Name
-  en-US: main
+
 workshop:
-  en-US: workshop
