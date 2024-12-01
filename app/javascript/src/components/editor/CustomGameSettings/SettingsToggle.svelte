@@ -7,11 +7,16 @@
 
   const dispatch = createEventDispatcher()
   const id = key + item
+  const isNonBoolean = typeof item.enabled === "string"
 
-  let checked = item.default
+  let checked = (isNonBoolean && item.default === item.enabled) || (!isNonBoolean && item.default)
 
   function change() {
-    dispatch("change", checked)
+    const enabled = item.enabled || true
+    const disabled = item.disabled || false
+    const value = checked ? enabled : disabled
+
+    dispatch("change", value)
   }
 </script>
 

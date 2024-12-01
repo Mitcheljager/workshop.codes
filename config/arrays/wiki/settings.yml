@@ -249,7 +249,7 @@ gamemodes:
           max: 20
           default: 15
         Game Length Minutes:
-          values: __int__
+          values: range
           min: 5
           max: 15
           default: 8
@@ -433,7 +433,7 @@ gamemodes:
             - E
             - Random
         Score To Win:
-          values: __int__
+          values: range
           min: 1
           max: 10
           default: 3
@@ -445,12 +445,12 @@ gamemodes:
     ffa:
       values:
         Game Length In Minutes:
-          values: __int__
+          values: range
           min: 5
           max: 15
           default: 10
         Score To Win:
-          values: __int__
+          values: range
           min: 1
           max: 5000
           default: 20
@@ -1423,16 +1423,18 @@ lobby:
         - After A Mirror Match
         - After A Game
     Swap Teams After Match:
-      values: __boolYesNo__
-      default: 'yes'
+      values: boolean
+      enabled: "yes"
+      disabled: "no"
+      default: "yes"
     team1Slots:
-      values: __int__
+      values: range
       min: 0
       max: 12
       default: 5
       en-US: Max %1$s Players
     team2Slots:
-      values: __int__
+      values: range
       min: 0
       max: 12
       default: 5
@@ -1448,18 +1450,26 @@ lobby:
       max: 12
       default: 2
     Allow Players Who Are In Queue:
-      values: __boolYesNo__
-      default: 'no'
       description: Whether to allow players in 'While you wait'.
+      values: boolean
+      enabled: "yes"
+      disabled: "no"
+      default: "no"
     Use Experimental Update If Available:
-      values: __boolYesNo__
-      default: 'no'
+      values: boolean
+      enabled: "yes"
+      disabled: "no"
+      default: "no"
     Match Voice Chat:
-      values: __boolEnabled__
+      values: boolean
+      enabled: enabled
+      disabled: disabled
       default: disabled
     Pause Game On Player Disconnect:
-      values: __boolYesNo__
-      default: 'no'
+      values: boolean
+      enabled: "yes"
+      disabled: "no"
+      default: "no"
     Data Center Preference:
       default: Best Available
       values:
