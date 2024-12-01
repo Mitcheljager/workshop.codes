@@ -1,5 +1,5 @@
 <script>
-  import SettingsRadio from "./SettingsRadio.svelte"
+  import SettingsOptions from "./SettingsOptions.svelte"
   import SettingsRange from "./SettingsRange.svelte"
   import SettingsText from "./SettingsText.svelte"
   import SettingsToggle from "./SettingsToggle.svelte"
@@ -35,7 +35,7 @@
         <h3 class="mt-1/2 mb-1/4">{label}</h3>
         <svelte:self tree={item.values} on:change />
       {:else if Array.isArray(item.values)}
-        <SettingsRadio {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
+        <SettingsOptions {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
       {:else if typeof item.values === "string"}
         <svelte:component this={components[item.values]} {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
       {/if}
