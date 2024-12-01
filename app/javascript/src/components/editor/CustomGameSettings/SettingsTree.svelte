@@ -17,7 +17,7 @@
 
   function change(key, value) {
     const isDefault = value === tree[key].default
-    const isDefaultInOptions = Array.isArray(tree[key].values) && Object.values(tree[key].values).find(v => v.default)["en-US"] === value
+    const isDefaultInOptions = Array.isArray(tree[key].values) && tree[key].current === value
 
     if (isDefault || isDefaultInOptions) delete tree[key].current
     else tree[key].current = value
