@@ -43,8 +43,10 @@
         <svelte:self tree={item.values} on:change />
       {:else if Array.isArray(item.values)}
         <SettingsOptions {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
-      {:else if typeof item.values === "string"}
+      {:else if typeof item.values === "string" && components[item.values]}
         <svelte:component this={components[item.values]} {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
+      {:else }
+        No valid type was given for "{key}"
       {/if}
     {/if}
   </div>
