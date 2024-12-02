@@ -1,6 +1,6 @@
 <script>
   import { customGameSettings } from "@src/stores/editor"
-  import { setContext } from "svelte"
+  import { onMount, setContext } from "svelte"
   import { writable } from "svelte/store"
   import SettingsTree from "./SettingsTree.svelte"
   import SettingsNavigation from "./SettingsNavigation.svelte"
@@ -15,6 +15,8 @@
   $: search(query)
 
   const navigation = { "": { values: { Main: settings.main, Lobby: settings.lobby, Gamemodes: settings.gamemodes, Heroes: settings.heroes } } }
+
+  onMount(scrollSpy)
 
   // Search through elements in tree, deliberately not very Svelte-y to not have to worry about state.
   function search(query) {
@@ -66,9 +68,9 @@
   </div>
 
   <div class="custom-game-settings__content" bind:this={contentElement} on:scroll={scrollSpy}>
-    {#each ["Main", "Lobby", "Gamemodes", "Heroes"] as item}
+    {#each ["Main", "Lobby", "Gamemodes", "Heroes"] as item, i}
       <div data-searchable-attributes={item}>
-        <h2 class="mt-1/1 mb-1/8" data-scroll-spy={item}><strong>{item}</strong></h2>
+        <h2 class="mb-1/8 mt-0 pt-1/1" data-scroll-spy={item}><strong>{item}</strong></h2>
         <SettingsTree on:change={() => console.log(settings)} tree={settings[item.toLowerCase()].values} parentKey={item} />
       </div>
     {/each}
