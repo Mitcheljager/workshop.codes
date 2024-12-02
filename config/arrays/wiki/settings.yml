@@ -392,7 +392,7 @@ gamemodes:
         Training Partner:
           values: boolean
           default: true
-    junkenstein:
+    Junkenstein:
       values:
         Difficulty:
           default: NORMAL
@@ -410,7 +410,7 @@ gamemodes:
         Endless Mode:
           values: boolean
           default: false
-    flashpoint:
+    Flashpoint:
       values:
         Capture Speed Modifier:
           values: range
@@ -454,7 +454,7 @@ gamemodes:
           min: 10
           max: 500
           default: 100
-    ffa:
+    Deathmatch:
       values:
         Game Length In Minutes:
           values: range
@@ -469,7 +469,7 @@ gamemodes:
         Self Initiated Respawn:
           values: boolean
           default: true
-    push:
+    Push:
       values:
         TS-1 Walk Speed Modifier:
           values: range
@@ -484,7 +484,7 @@ gamemodes:
         Competitive Rules:
           values: boolean
           default: false
-    clash:
+    Clash:
       values:
         Capture Speed Modifier:
           values: range
@@ -678,7 +678,6 @@ heroes:
             - Wrecking Ball
             - Zarya
             - Zenyatta
-          exclude:
         Receive Headshots Only:
           values: boolean
           default: false
