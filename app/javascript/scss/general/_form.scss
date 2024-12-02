@@ -360,10 +360,14 @@ input[type="file"] {
   }
 
   &::-moz-range-track {
+    height: 0.5rem;
+    border-radius: 0.5rem;
     background: $bg-darker;
   }
 
   &::-moz-range-progress {
+    height: 0.5rem;
+    border-radius: 0.5rem 0 0 0.5rem;
     background: var(--primary, $primary);
   }
 }
