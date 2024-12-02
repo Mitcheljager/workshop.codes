@@ -185,6 +185,11 @@
     box-shadow: $shadow;
     animation: fly-in 200ms;
 
+    @include safari() {
+      backdrop-filter: none;
+      background: rgba(darken($bg-dark, 10%), 0.75);
+    }
+
     input {
       width: auto;
       padding: .25em .5em;
