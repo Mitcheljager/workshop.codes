@@ -12,6 +12,14 @@
   background: $bg-darker;
 }
 
+.custom-game-settings__sidebar-item {
+  color: $text-color;
+
+  &--is-active {
+    color: var(--primary, $primary);
+  }
+}
+
 .custom-game-settings__content {
   height: 100%;
   padding: $margin * 0.25;

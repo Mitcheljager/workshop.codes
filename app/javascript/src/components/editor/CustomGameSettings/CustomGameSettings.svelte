@@ -1,11 +1,17 @@
 <script>
-  import { customGameSettings } from "@src/stores/editor"
+  import { customGameSettings, heroes } from "@src/stores/editor"
   import { onMount, setContext } from "svelte"
   import { writable } from "svelte/store"
   import SettingsTree from "./SettingsTree.svelte"
   import SettingsNavigation from "./SettingsNavigation.svelte"
 
-  const settings = { ...$customGameSettings }
+  const settings = constructSettings()
+  const navigation = { "": { values: {
+    Main: settings.main,
+    Lobby: settings.lobby,
+    Gamemodes: settings.gamemodes,
+    Heroes: settings.heroes
+  }}}
   const scrollOffset = 20
 
   let contentElement
@@ -14,9 +20,27 @@
 
   $: search(query)
 
-  const navigation = { "": { values: { Main: settings.main, Lobby: settings.lobby, Gamemodes: settings.gamemodes, Heroes: settings.heroes } } }
-
   onMount(scrollSpy)
+
+  function constructSettings() {
+    const settings = { ...$customGameSettings }
+    const settingsHeroes = settings.heroes.values
+
+    $heroes.forEach(({ name }) => {
+      if (!(name in settingsHeroes)) return
+
+      Object.entries(settingsHeroes.General.values).forEach(([key, item]) => {
+        if (item.include?.includes(name) || !item.include) settingsHeroes[name].values[key] = item
+      })
+
+      settingsHeroes.each.forEach(item => {
+        const key = item.keys?.[name]
+        if (key) settingsHeroes[name].values[key] = item
+      })
+    })
+
+    return settings
+  }
 
   // Search through elements in tree, deliberately not very Svelte-y to not have to worry about state.
   function search(query) {

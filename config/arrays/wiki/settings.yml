@@ -1,4 +1,16 @@
 ---
+main:
+  values:
+    Mode Name:
+      values: string
+      default: ""
+      maxBytes: 129
+    Description:
+      values: string
+      default: Made with the Workshop.codes Script Editor
+      large: true
+      maxChars: 512
+
 extensions:
   values:
     Beam Effects:
@@ -497,429 +509,707 @@ heroes:
     Team FFA:
       values: heroes
       default: null
-    __generalButNotEachHero__:
-      abilityCooldown%:
+    General:
+      values:
+        Ability Cooldown Time:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+        Ultimate Generation:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+        Ultimate Generation - Combat:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+        Ultimate Generation - Passive:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+        Ultimate Ability:
+          values: boolean
+          default: true
+        Quick Melee:
+          values: boolean
+          default: true
+        Spawn With Ultimate Ready:
+          values: boolean
+          default: false
+        Ultimate Duration:
+          values: range
+          min: 25
+          max: 500
+          default: 100
+          include:
+            - Ashe
+            - Baptiste
+            - Bastion
+            - Doomfist
+            - Genji
+            - Junkrat
+            - Mauga
+            - Moira
+            - "Soldier: 76"
+            - Torbjörn
+            - Widowmaker
+            - Winston
+            - Wrecking Ball
+            - Ramattra
+            - Venture
+        Infinite Ultimate Duration:
+          values: boolean
+          default: false
+          include:
+            - Ashe
+            - Baptiste
+            - Bastion
+            - Doomfist
+            - Genji
+            - Junkrat
+            - Moira
+            - "Soldier: 76"
+            - Torbjörn
+            - Widowmaker
+            - Winston
+            - Wrecking Ball
+            - Ramattra
+            - Venture
+        Damage Dealt:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+        Damage Received:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+        Healing Dealt:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+        Healing Received:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+        Health:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+        Jump Vertical Speed:
+          values: range
+          min: 25
+          max: 800
+          default: 100
+        Movement Gravity:
+          values: range
+          min: 25
+          max: 400
+          default: 100
+        Movement Speed:
+          values: range
+          min: 50
+          max: 300
+          default: 100
+        Projectile Gravity:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          include:
+            - Ashe
+            - Baptiste
+            - Hanzo
+            - Junkrat
+            - Lifeweaver
+            - Orisa
+            - Sigma
+            - Sombra
+            - Wrecking Ball
+            - Zarya
+        Projectile Speed:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          include:
+            - Ana
+            - Ashe
+            - Baptiste
+            - Bastion
+            - Cassidy
+            - Doomfist
+            - D.Va
+            - Echo
+            - Genji
+            - Hanzo
+            - Junker Queen
+            - Junkrat
+            - Juno
+            - Kiriko
+            - Lifeweaver
+            - Lucio
+            - Mauga
+            - Mei
+            - Mercy
+            - Moira
+            - Orisa
+            - Pharah
+            - Ramattra
+            - Reinhardt
+            - Roadhog
+            - Sigma
+            - Sojourn
+            - "Soldier: 76"
+            - Sombra
+            - Symmetra
+            - Torbjörn
+            - Tracer
+            - Widowmaker
+            - Winston
+            - Wrecking Ball
+            - Zarya
+            - Zenyatta
+          exclude:
+        Receive Headshots Only:
+          values: boolean
+          default: false
+        Primary Fire:
+          values: boolean
+          default: true
+        Ammunition Clip Size Scalar:
+          values: range
+          min: 25
+          max: 500
+          default: 100
+          exclude:
+          - brigitte
+          - dva
+          - hanzo
+          - kiriko
+          - moira
+          - reinhardt
+          - sojourn
+          - sigma
+        No Ammunition Requirement:
+          values: boolean
+          default: false
+          exclude:
+          - brigitte
+          - dva
+          - hanzo
+          - kiriko
+          - moira
+          - reinhardt
+          - sojourn
+          - sigma
+    each: # These settings are added to each individual hero
+      -
+        description: Ability 1
+        values: boolean
+        default: true
+        keys:
+          Ana: Sleep Dart
+          Ashe: Coach Gun
+          Baptiste: Regenerative Burst
+          Bastion: "Configuration: Assault"
+          Brigitte: Whip Shot
+          Cassidy: Combat Roll
+          Doomfist: Seismic Slam
+          D.Va: Boosters
+          Echo: Flight
+          Genji: Swift Strike
+          Hanzo: Lunge
+          Junker Queen: Commanding Shout
+          Junkrat: Concussion Mine
+          Juno: Glide Boost
+          Kiriko: Swift Step
+          Lifeweaver: Rejuvenating Dash
+          Lucio: Crossfade
+          Mauga: Overrun
+          Mei: Cryo-Freeze
+          Mercy: Guardian Angel
+          Moira: Fade
+          Orisa: Fortify
+          Pharah: Jump Jet
+          Ramattra: Nemesis Form
+          Reaper: Wraith Form
+          Reinhardt: Charge
+          Roadhog: Take a Breather
+          Sigma: Kinetic Grasp
+          Sojourn: Power Slide
+          "Soldier: 76": Sprint
+          Sombra: Stealth
+          Symmetra: Teleporter
+          Torbjörn: Overload
+          Tracer: Blink
+          Widowmaker: Grappling Hook
+          Winston: Jump Pack
+          Wrecking Ball: Roll
+          Zarya: Particle Barrier
+          Zenyatta: Orb of Harmony
+      -
         values: range
         min: 0
         max: 500
         default: 100
-        en-US: Ability Cooldown Time
-      ultGen%:
+        keys:
+          Ana: Sleep Dart Cooldown Time
+          Ashe: Coach Gun Cooldown Time
+          Baptiste: Regenerative Burst Cooldown Time
+          Bastion: "Configuration: Assault Cooldown Time"
+          Cassidy: Combat Roll Cooldown Time
+          Doomfist: Seismic Slam Cooldown Time
+          D.Va: Boosters Cooldown Time
+          Echo: Flight Cooldown Time
+          Genji: Swift Strike Cooldown Time
+          Hanzo: Lunge Cooldown Time
+          Junker Queen: Commanding Shout Cooldown Time
+          Junkrat: Concussion Mine Cooldown Time
+          Juno: Glide Boost Cooldown Time
+          Kiriko: Swift Step Cooldown Time
+          Lifeweaver: Rejuvenating Dash Cooldown Time
+          Mauga: Overrun Cooldown Time
+          Mei: Cryo-Freeze Cooldown Time
+          Mercy: Guardian Angel Cooldown Time
+          Moira: Fade Cooldown Time
+          Orisa: Fortify Cooldown Time
+          Pharah: Jump Jet Cooldown Time
+          Ramattra: Nemesis Form Cooldown Time
+          Reaper: Wraith Form Cooldown Time
+          Reinhardt: Charge Cooldown Time
+          Roadhog: Take a Breather Cooldown Time
+          Sigma: Kinetic Grasp Cooldown Time
+          Sojourn: Power Slide Cooldown Time
+          Sombra: Stealth Cooldown Time
+          Symmetra: Teleporter Cooldown Time
+          Torbjörn: Overload Cooldown Time
+          Tracer: Blink Cooldown Time
+          Widowmaker: Grappling Hook Cooldown Time
+          Winston: Jump Pack Cooldown Time
+          Zarya: Particle Barrier Cooldown Time
+      -
+        description: Ability 2
+        values: boolean
+        default: true
+        keys:
+          Ana: Biotic Grenade
+          Ashe: Dynamite
+          Baptiste: Immortality Field
+          Cassidy: Magnetic Grenade
+          Doomfist: Power Block
+          D.Va: Micro Missiles
+          Echo: Focusing Beam
+          Genji: Deflect
+          Hanzo: Sonic Arrow
+          Junker Queen: Carnage
+          Junkrat: Steel Trap
+          Juno: Hyper Ring
+          Kiriko: Protection Suzu
+          Lifeweaver: Life Grip
+          Lucio: Amp It Up
+          Mauga: Cardiac Overdrive
+          Mei: Ice Wall
+          Mercy: Resurrect
+          Moira: Biotic Orb
+          Orisa: Javelin Spin
+          Pharah: Concussive Blast
+          Ramattra: Vortex of Gluttony
+          Reaper: Shadow Step
+          Reinhardt: Fire Strike
+          Roadhog: Chain Hook
+          Sigma: Accretion
+          Sojourn: Disruptor Shot
+          "Soldier: 76": Biotic Field
+          Sombra: Translocator
+          Symmetra: Sentry Turret
+          Torbjörn: Deploy Turret
+          Tracer: Recall
+          Venture: Burrow
+          Widowmaker: Venom Mine
+          Winston: Barrier Projector
+          Wrecking Ball: Grappling Claw
+          Zarya: Projected Barrier
+          Zenyatta: Orb of Discord
+      -
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        keys:
+          Ana: Biotic Grenade Cooldown Time
+          Ashe: Dynamite Cooldown Time
+          Baptiste: Immortality Field Cooldown Time
+          Bastion: A-36 Tactical Grenade Cooldown Time
+          Cassidy: Magnetic Grenade Cooldown Time
+          Doomfist: Power Block Cooldown Time
+          D.Va: Micro Missiles Cooldown Time
+          Echo: Focusing Beam Cooldown Time
+          Genji: Deflect Cooldown Time
+          Hanzo: Sonic Arrow Cooldown Time
+          Junker Queen: Carnage Cooldown Time
+          Junkrat: Steel Trap Cooldown Time
+          Juno: Hyper Ring Cooldown Time
+          Kiriko: Protection Suzu Cooldown Time
+          Lifeweaver: Life Grip Cooldown Time
+          Lucio: Amp It Up Cooldown Time
+          Mauga: Cardiac Overdrive Cooldown Time
+          Mei: Ice Wall Cooldown Time
+          Mercy: Resurrect Cooldown Time
+          Moira: Biotic Orb Cooldown Time
+          Orisa: Energy Javelin Cooldown Time
+          Pharah: Concussive Blast Cooldown Time
+          Ramattra: Vortex of Gluttony Cooldown Time
+          Reaper: Shadow Step Cooldown Time
+          Reinhardt: Fire Strike Cooldown Time
+          Roadhog: Chain Hook Cooldown Time
+          Sigma: Accretion Cooldown Time
+          Sojourn: Disruptor Shot Cooldown Time
+          "Soldier: 76": Biotic Field Cooldown Time
+          Sombra: Translocator Cooldown Time
+          Symmetra: Sentry Turret Cooldown Time
+          Torbjörn: Deploy Turret Cooldown Time
+          Tracer: Recall Cooldown Time
+          Venture: Burrow Cooldown Time
+          Widowmaker: Venom Mine Cooldown Time
+          Winston: Barrier Projector Cooldown Time
+          Wrecking Ball: Grappling Claw Cooldown Time
+          Zarya: Projected Barrier Cooldown Time
+      -
+        values: boolean
+        default: true
+        keys:
+          Brigitte: Barrier Shield
+          Hanzo: Lunge
+          Wrecking Ball: Piledriver
+      -
+        values: range
+        min: 0
+        max: 500
+        default: 100
+        keys:
+          Wrecking Ball: Piledriver Cooldown Time
+      -
+        description: Ultimate
+        values: boolean
+        default: true
+        keys:
+          Ana: Nano Boost
+          Ashe: B.O.B.
+          Baptiste: Amplification Matrix
+          Bastion: Artillery Strike
+          Cassidy: Deadeye
+          Doomfist: Meteor Strike
+          D.Va: Self-Destruct
+          Echo: Duplicate
+          Genji: Dragonblade
+          Hanzo: Dragonstrike
+          Junker Queen: Rampage
+          Junkrat: RIP-Tire
+          Juno: Orbital Ray
+          Kiriko: Kitsune Rush
+          Lifeweaver: Tree of Life
+          Lucio: Sound Barrier
+          Mauga: Cage Fight
+          Mei: Blizzard
+          Mercy: Valkyrie
+          Moira: Coalescence
+          Orisa: Terra Surge
+          Pharah: Barrage
+          Ramattra: Annihilation
+          Reaper: Death Blossom
+          Reinhardt: Earthshatter
+          Roadhog: Whole Hog
+          Sigma: Gravitic Flux
+          Sojourn: Overclock
+          "Soldier: 76": Tactical Visor
+          Sombra: EMP
+          Symmetra: Photon Barrier
+          Torbjörn: Molten Core
+          Tracer: Pulse Bomb
+          Venture: Tectonic Shock
+          Widowmaker: Infra-Sight
+          Winston: Primal Rage
+          Wrecking Ball: Minefield
+          Zarya: Graviton Surge
+          Zenyatta: Transcendence
+      -
         values: range
         min: 10
         max: 500
         default: 100
-        en-US: Ultimate Generation
-      combatUltGen%:
+        keys:
+          Ana: Ultimate Generation Nano Boost
+          Ashe: Ultimate Generation B.O.B.
+          Baptiste: Ultimate Generation Amplification Matrix
+          Bastion: Ultimate Generation Artillery Strike
+          Cassidy: Ultimate Generation Deadeye
+          Doomfist: Ultimate Generation Meteor Strike
+          D.Va: Ultimate Generation Self-Destruct
+          Echo: Ultimate Generation Duplicate
+          Genji: Ultimate Generation Dragonblade
+          Hanzo: Ultimate Generation Dragonstrike
+          Junker Queen: Ultimate Generation Rampage
+          Junkrat: Ultimate Generation RIP-Tire
+          Juno: Ultimate Generation Orbital Ray
+          Kiriko: Ultimate Generation Kitsune Rush
+          Lifeweaver: Ultimate Generation Tree of Life
+          Lucio: Ultimate Generation Sound Barrier
+          Mauga: Ultimate Generation Cage Fight
+          Mei: Ultimate Generation Blizzard
+          Mercy: Ultimate Generation Valkyrie
+          Moira: Ultimate Generation Coalescence
+          Orisa: Ultimate Generation Terra Surge
+          Pharah: Ultimate Generation Barrage
+          Ramattra: Ultimate Generation Annihilation
+          Reaper: Ultimate Generation Death Blossom
+          Reinhardt: Ultimate Generation Earthshatter
+          Roadhog: Ultimate Generation Whole Hog
+          Sigma: Ultimate Generation Gravitic Flux
+          Sojourn: Ultimate Generation Overclock
+          "Soldier: 76": Ultimate Generation Tactical Visor
+          Sombra: Ultimate Generation EMP
+          Symmetra: Ultimate Generation Photon Barrier
+          Torbjörn: Ultimate Generation Molten Core
+          Tracer: Ultimate Generation Pulse Bomb
+          Venture: Ultimate Generation Tectonic Shock
+          Widowmaker: Ultimate Generation Infra-Sight
+          Winston: Ultimate Generation Primal Rage
+          Wrecking Ball: Ultimate Generation Minefield
+          Zarya: Ultimate Generation Graviton Surge
+          Zenyatta: Ultimate Generation Transcendence
+      -
         values: range
         min: 0
         max: 500
         default: 100
-        en-US: Ultimate Generation - Combat
-      passiveUltGen%:
+        keys:
+          Ana: Ultimate Generation - Combat Nano Boost
+          Ashe: Ultimate Generation - Combat B.O.B.
+          Baptiste: Ultimate Generation - Combat Amplification Matrix
+          Bastion: Ultimate Generation - Combat Artillery Strike
+          Cassidy: Ultimate Generation - Combat Deadeye
+          Doomfist: Ultimate Generation - Combat Meteor Strike
+          D.Va: Ultimate Generation - Combat Self-Destruct
+          Echo: Ultimate Generation - Combat Duplicate
+          Genji: Ultimate Generation - Combat Dragonblade
+          Hanzo: Ultimate Generation - Combat Dragonstrike
+          Junker Queen: Ultimate Generation - Combat Rampage
+          Junkrat: Ultimate Generation - Combat RIP-Tire
+          Juno: Ultimate Generation - Combat Orbital Ray
+          Kiriko: Ultimate Generation - Combat Kitsune Rush
+          Lifeweaver: Ultimate Generation - Combat Tree of Life
+          Lucio: Ultimate Generation - Combat Sound Barrier
+          Mauga: Ultimate Generation - Combat Cage Fight
+          Mei: Ultimate Generation - Combat Blizzard
+          Mercy: Ultimate Generation - Combat Valkyrie
+          Moira: Ultimate Generation - Combat Coalescence
+          Orisa: Ultimate Generation - Combat Terra Surge
+          Pharah: Ultimate Generation - Combat Barrage
+          Ramattra: Ultimate Generation - Combat Annihilation
+          Reaper: Ultimate Generation - Combat Death Blossom
+          Reinhardt: Ultimate Generation - Combat Earthshatter
+          Roadhog: Ultimate Generation - Combat Whole Hog
+          Sigma: Ultimate Generation - Combat Gravitic Flux
+          Sojourn: Ultimate Generation - Combat Overclock
+          "Soldier: 76": Ultimate Generation - Combat Tactical Visor
+          Sombra: Ultimate Generation - Combat EMP
+          Symmetra: Ultimate Generation - Combat Photon Barrier
+          Torbjörn: Ultimate Generation - Combat Molten Core
+          Tracer: Ultimate Generation - Combat Pulse Bomb
+          Venture: Ultimate Generation - Combat Tectonic Shock
+          Widowmaker: Ultimate Generation - Combat Infra-Sight
+          Winston: Ultimate Generation - Combat Primal Rage
+          Wrecking Ball: Ultimate Generation - Combat Minefield
+          Zarya: Ultimate Generation - Combat Graviton Surge
+          Zenyatta: Ultimate Generation - Combat Transcendence
+      -
         values: range
         min: 0
         max: 500
         default: 100
-        en-US: Ultimate Generation - Passive
-      enableUlt:
+        keys:
+          Ana: Ultimate Generation - Passive Nano Boost
+          Ashe: Ultimate Generation - Passive B.O.B.
+          Baptiste: Ultimate Generation - Passive Amplification Matrix
+          Bastion: Ultimate Generation - Passive Artillery Strike
+          Cassidy: Ultimate Generation - Passive Deadeye
+          Doomfist: Ultimate Generation - Passive Meteor Strike
+          D.Va: Ultimate Generation - Passive Self-Destruct
+          Echo: Ultimate Generation - Passive Duplicate
+          Genji: Ultimate Generation - Passive Dragonblade
+          Hanzo: Ultimate Generation - Passive Dragonstrike
+          Junker Queen: Ultimate Generation - Passive Rampage
+          Junkrat: Ultimate Generation - Passive RIP-Tire
+          Juno: Ultimate Generation - Passive Orbital Ray
+          Kiriko: Ultimate Generation - Passive Kitsune Rush
+          Lifeweaver: Ultimate Generation - Passive Tree of Life
+          Lucio: Ultimate Generation - Passive Sound Barrier
+          Mauga: Ultimate Generation - Passive Cage Fight
+          Mei: Ultimate Generation - Passive Blizzard
+          Mercy: Ultimate Generation - Passive Valkyrie
+          Moira: Ultimate Generation - Passive Coalescence
+          Orisa: Ultimate Generation - Passive Terra Surge
+          Pharah: Ultimate Generation - Passive Barrage
+          Ramattra: Ultimate Generation - Passive Annihilation
+          Reaper: Ultimate Generation - Passive Death Blossom
+          Reinhardt: Ultimate Generation - Passive Earthshatter
+          Roadhog: Ultimate Generation - Passive Whole Hog
+          Sigma: Ultimate Generation - Passive Gravitic Flux
+          Sojourn: Ultimate Generation - Passive Overclock
+          "Soldier: 76": Ultimate Generation - Passive Tactical Visor
+          Sombra: Ultimate Generation - Passive EMP
+          Symmetra: Ultimate Generation - Passive Photon Barrier
+          Torbjörn: Ultimate Generation - Passive Molten Core
+          Tracer: Ultimate Generation - Passive Pulse Bomb
+          Venture: Ultimate Generation - Passive Tectonic Shock
+          Widowmaker: Ultimate Generation - Passive Infra-Sight
+          Winston: Ultimate Generation - Passive Primal Rage
+          Wrecking Ball: Ultimate Generation - Passive Minefield
+          Zarya: Ultimate Generation - Passive Graviton Surge
+          Zenyatta: Ultimate Generation - Passive Transcendence
+      -
+        description: Passive
         values: boolean
         default: true
-        en-US: Ultimate Ability
-    __generalAndEachHero__:
-      enableMelee:
+        keys:
+          Mercy: Angelic Descent
+          Echo: Flight
+          Pharah: Hover Jets
+          Juno: Martian Overboots
+      -
+        description: Secondary Fire
         values: boolean
         default: true
-        en-US: Quick Melee
-      enableSpawningWithUlt:
-        values: boolean
-        default: false
-        en-US: Spawn With Ultimate Ready
-      ultDuration%:
-        values: range
-        min: 25
-        max: 500
-        default: 100
-        include:
-        - ashe
-        - baptiste
-        - bastion
-        - doomfist
-        - genji
-        - junkrat
-        - mauga
-        - moira
-        - soldier
-        - torbjorn
-        - widowmaker
-        - winston
-        - hammond
-        - ramattra
-        - venture
-        en-US: Ultimate Duration
-      enableInfiniteUlt:
-        values: boolean
-        default: false
-        include:
-        - ashe
-        - baptiste
-        - bastion
-        - doomfist
-        - genji
-        - junkrat
-        - moira
-        - soldier
-        - torbjorn
-        - widowmaker
-        - winston
-        - hammond
-        - ramattra
-        - venture
-        en-US: Infinite Ultimate Duration
-      damageDealt%:
-        values: range
-        min: 10
-        max: 500
-        default: 100
-        en-US: Damage Dealt
-      damageReceived%:
-        values: range
-        min: 10
-        max: 500
-        default: 100
-        en-US: Damage Received
-      healingDealt%:
-        values: range
-        min: 10
-        max: 500
-        default: 100
-        en-US: Healing Dealt
-      healingReceived%:
-        values: range
-        min: 10
-        max: 500
-        default: 100
-        en-US: Healing Received
-      health%:
-        values: range
-        min: 10
-        max: 500
-        default: 100
-        en-US: Health
-      jumpVerticalSpeed%:
-        values: range
-        min: 25
-        max: 800
-        default: 100
-        en-US: Jump Vertical Speed
-      movementGravity%:
-        values: range
-        min: 25
-        max: 400
-        default: 100
-        en-US: Movement Gravity
-      movementSpeed%:
-        values: range
-        min: 50
-        max: 300
-        default: 100
-        en-US: Movement Speed
-      projectileGravity%:
+        keys:
+          Bastion: A-36 Tactical Grenade
+          Brigitte: Barrier Shield
+          D.va: Defense Matrix
+          Doomfist: Rocket Punch
+          Echo: Sticky Bombs
+          Junker Queen: Jagged Blade
+          Lúcio: Soundwave
+          Mauga: Volatile Chaingun
+          Orisa: Energy Javelin
+          Reinhardt: Barrier Field
+          Roadhog: Take a Breather
+          Sigma: Experimental Barrier
+          Sojourn: Railgun Alt Fire
+          "Soldier: 76": Helix Rockets
+          Sombra: Hack
+          Wrecking Ball: Grappling Claw
+          Ramattra: Void Barrier
+          Lifeweaver: Thorn Volley
+          Venture: Drill Dash
+          Juno: Pulsar Torpedoes
+      -
         values: range
         min: 0
         max: 500
         default: 100
-        exclude:
-        - ana
-        - bastion
-        - brigitte
-        - dva
-        - doomfist
-        - echo
-        - genji
-        - kiriko
-        - lucio
-        - cassidy
-        - mercy
-        - moira
-        - pharah
-        - reaper
-        - reinhardt
-        - roadhog
-        - sojourn
-        - soldier
-        - symmetra
-        - venture
-        - winston
-        - zenyatta
-        - juno
-        en-US: Projectile Gravity
-      projectileSpeed%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        exclude:
-        - brigitte
-        - reaper
-        - winston
-        en-US: Projectile Speed
-      enableHeadshotsOnly:
-        values: boolean
-        default: false
-        en-US: Receive Headshots Only
-      enablePrimaryFire:
-        values: boolean
-        default: true
-        en-US: Primary Fire
-      ammoClipSize%:
-        values: range
-        min: 25
-        max: 500
-        default: 100
-        exclude:
-        - brigitte
-        - dva
-        - hanzo
-        - kiriko
-        - moira
-        - reinhardt
-        - sojourn
-        - sigma
-        en-US: Ammunition Clip Size Scalar
-      enableInfiniteAmmo:
-        values: boolean
-        default: false
-        exclude:
-        - brigitte
-        - dva
-        - hanzo
-        - kiriko
-        - moira
-        - reinhardt
-        - sojourn
-        - sigma
-        en-US: No Ammunition Requirement
-    __eachHero__:
-      enableAbility1:
-        values: boolean
-        default: true
-        en-US: "%1$s"
-      ability1Cooldown%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        exclude:
-        - lucio
-        - soldier
-        - hammond
-        - zenyatta
-        en-US: "%1$s Cooldown Time"
-      enableAbility2:
-        values: boolean
-        default: true
-        exclude:
-        - bastion
-        - venture
-        en-US: "%1$s"
-      ability2Cooldown%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        exclude:
-        - bastion
-        - venture
-        - zenyatta
-        en-US: "%1$s Cooldown Time"
-      enableAbility3:
-        values: boolean
-        default: true
-        include:
-        - brigitte
-        - hanzo
-        - hammond
-        en-US: "%1$s"
-      ability3Cooldown%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        include:
-        - hammond
-        en-US: "%1$s Cooldown Time"
-      ultGen%:
-        values: range
-        min: 10
-        max: 500
-        default: 100
-        en-US: Ultimate Generation %1$s
-      combatUltGen%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        en-US: Ultimate Generation - Combat %1$s
-      passiveUltGen%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        en-US: Ultimate Generation - Passive %1$s
-      enableUlt:
-        values: boolean
-        default: true
-        en-US: Ultimate Ability %1$s
-      enablePassive:
-        values: boolean
-        default: true
-        include:
-        - mercy
-        - echo
-        - pharah
-        - juno
-        en-US: "%1$s"
-      enableSecondaryFire:
-        values: boolean
-        default: true
-        include:
-        - bastion
-        - brigitte
-        - dva
-        - doomfist
-        - echo
-        - junkerQueen
-        - lucio
-        - mauga
-        - orisa
-        - pharah
-        - reinhardt
-        - roadhog
-        - sigma
-        - sojourn
-        - soldier
-        - sombra
-        - hammond
-        - ramattra
-        - lifeweaver
-        - venture
-        - juno
-        en-US: "%1$s"
-      secondaryFireCooldown%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        include:
-        - bastion
-        - brigitte
-        - doomfist
-        - echo
-        - junkerQueen
-        - lucio
-        - orisa
-        - pharah
-        - reinhardt
-        - roadhog
-        - sigma
-        - soldier
-        - sombra
-        - hammond
-        - ramattra
-        - lifeweaver
-        - venture
-        - juno
-        en-US: "%1$s Cooldown Time"
-      secondaryFireMaximumTime%:
+        keys:
+          Bastion: A-36 Tactical Grenade Cooldown Time
+          Brigitte: Barrier Shield Cooldown Time
+          Doomfist: Rocket Punch Cooldown Time
+          Echo: Sticky Bombs Cooldown Time
+          Junker Queen: Jagged Blade Cooldown Time
+          Lúcio: Soundwave Cooldown Time
+          Orisa: Energy Javelin Cooldown Time
+          Reinhardt: Barrier Field Cooldown Time
+          Roadhog: Take a Breather Cooldown Time
+          Sigma: Experimental Barrier Cooldown Time
+          "Soldier: 76": Helix Rockets Cooldown Time
+          Sombra: Hack Cooldown Time
+          Wrecking Ball: Grappling Claw Cooldown Time
+          Ramattra: Void Barrier Cooldown Time
+          Venture: Drill Dash Cooldown Time
+          Juno: Pulsar Torpedoes Cooldown Time
+      -
         values: range
         min: 20
         max: 500
         default: 100
-        include:
-        - dva
-        - roadhog
-        en-US: "%1$s Maximum Time"
-      secondaryFireRechargeRate%:
+        keys:
+          D.va: Defense Matrix Maximum Time
+          Roadhog: Take a Breather Maximum Time
+      -
         values: range
         min: 0
         max: 500
         default: 100
-        include:
-        - brigitte
-        - dva
-        - roadhog
-        - reinhardt
-        - sigma
-        en-US: "%1$s Recharge Rate"
-      enableGenericSecondaryFire:
+        keys:
+          Brigitte: Barrier Shield Recharge Rate
+          D.va: Defense Matrix Recharge Rate
+          Reinhardt: Barrier Field Recharge Rate
+          Roadhog: Take a Breather Recharge Rate
+          Sigma: Experimental Barrier Recharge Rate
+      -
+        description: Secondary Fire
         values: boolean
         default: true
+        keys:
+          Baptiste: Secondary Fire
+          Genji: Secondary Fire
+          Illari: Secondary Fire
+          Kiriko: Secondary Fire
+          Cassidy: Secondary Fire
+          Mei: Secondary Fire
+          Mercy: Secondary Fire
+          Moira: Secondary Fire
+          Sojourn: Secondary Fire
+          Symmetra: Secondary Fire
+          Torbjorn: Secondary Fire
+          Winston: Secondary Fire
+          Zarya: Secondary Fire
+          Zenyatta: Secondary Fire
+      -
+        values: boolean
+        enabled: "On"
+        disabled: "Off"
+        default: "Off"
+        keys:
+          Ana: No Automatic Fire
+          Ashe: No Automatic Fire
+          Widowmaker: No Automatic Fire
+      -
+        values: boolean
+        enabled: "On"
+        disabled: "Off"
+        default: "Off"
         include:
-        - baptiste
-        - genji
-        - illari
-        - kiriko
-        - cassidy
-        - mei
-        - mercy
-        - moira
-        - sojourn
-        - symmetra
-        - torbjorn
-        - winston
-        - zarya
-        - zenyatta
-        en-US: Secondary Fire
-      enableAutomaticFire:
-        values: __boolReverseOnOff__
-        default: false
-        include:
-        - ana
-        - ashe
-        - widowmaker
-        en-US: No Automatic Fire
-      enableScoping:
-        values: __boolReverseOnOff__
-        default: false
-        include:
-        - ana
-        - ashe
-        - widowmaker
-        en-US: No Scope
-      secondaryFireEnergyChargeRate%:
-        values: range
-        min: 0
-        max: 500
-        default: 100
-        include:
-        - sojourn
-        en-US: "%1$s Energy Charge Rate"
+          Ana: No Scope
+          Ashe: No Scope
+          Widowmaker: No Scope
     disabledHeroes:
       en-US: disabled heroes
     enabledHeroes:
       en-US: enabled heroes
-    ashe:
+    Ashe:
       values:
-        ability1EnemyKb%:
+        Coach Gun Knockback Scalar Enemy:
           values: range
           min: 0
           max: 300
           default: 100
-          en-US: Coach Gun Knockback Scalar Enemy
-        ability1SelfKb%:
+        Coach Gun Knockback Scalar Self:
           values: range
           min: 0
           max: 300
           default: 100
-          en-US: Coach Gun Knockback Scalar Self
-        ability2FuseTime%:
+        Dynamite Fuse Time Scalar:
           values: range
           min: 1
           max: 500
           default: 100
-          en-US: Dynamite Fuse Time Scalar
-    bastion:
+    Bastion:
       values:
         secondaryFireKb%:
           values: range
@@ -927,7 +1217,7 @@ heroes:
           max: 300
           default: 100
           en-US: A-36 Tactical Grenade Knockback Scalar
-    brigitte:
+    Brigitte:
       values:
         shieldBashCooldown%:
           values: range
@@ -947,7 +1237,7 @@ heroes:
           max: 300
           default: 100
           en-US: Whip Shot Knockback Scalar
-    dva:
+    D.va:
       values:
         ability1Kb%:
           values: range
@@ -971,7 +1261,7 @@ heroes:
           values: boolean
           default: false
           en-US: Spawn Without Mech
-    doomfist:
+    Doomfist:
       values:
         ability1ChargeRate%:
           values: range
@@ -997,7 +1287,7 @@ heroes:
           max: 500
           default: 100
           en-US: Ammunition Regeneration Time Scalar
-    hanzo:
+    Hanzo:
       values:
         ability3Cooldown%:
           values: range
@@ -1017,7 +1307,7 @@ heroes:
           max: 12
           default: 5
           en-US: Storm Arrows Quantity
-    illari:
+    Illari:
       values:
         solarEnergyMax%:
           values: range
@@ -1031,7 +1321,7 @@ heroes:
           max: 500
           default: 100
           en-US: Solar Energy Recharge Rate
-    "Junker Queen":
+    Junker Queen:
       values:
         secondaryFireKb%:
           values: range
@@ -1045,7 +1335,7 @@ heroes:
           max: 400
           default: 100
           en-US: Jagged Blade Delay Before Automatic Recall
-    junkrat:
+    Junkrat:
       values:
         ability1Kb%:
           values: range
@@ -1059,7 +1349,7 @@ heroes:
           max: 400
           default: 100
           en-US: Frag Launcher Knockback Scalar
-    kiriko:
+    Kiriko:
       values:
         ability1Distance%:
           values: range
@@ -1067,7 +1357,7 @@ heroes:
           max: 300
           default: 100
           en-US: Swift Step Distance Scalar
-    lucio:
+    Lúcio:
       values:
         secondaryFireKb%:
           values: range
@@ -1075,7 +1365,7 @@ heroes:
           max: 300
           default: 100
           en-US: Soundwave Knockback Scalar
-    mauga:
+    Mauga:
       values:
         enablePrimaryFire:
           values: boolean
@@ -1111,7 +1401,7 @@ heroes:
           max: 400
           default: 100
           en-US: Cardiac Overdrive Healing
-    mei:
+    Mei:
       values:
         ultFreezeMinimum%:
           values: range
@@ -1147,19 +1437,15 @@ heroes:
           max: 500
           default: 100
           en-US: Weapon Freeze Rate Scalar
-    mercy:
+    Mercy:
       values:
-        weaponsEnabled:
+        Weapons Enabled:
+          default: All
           values:
-            all:
-              default: true
-              en-US: All
-            staff:
-              en-US: Caduceus Staff Only
-            blaster:
-              en-US: Caduceus Blaster Only
-          en-US: Weapons Enabled
-    moira:
+            - All
+            - Caduceus Staff Only
+            - Caduceus Blaster Only
+    Moira:
       values:
         ability2MaxDamage%:
           values: range
@@ -1185,7 +1471,7 @@ heroes:
           max: 500
           default: 100
           en-US: Biotic Energy Recharge Rate
-    pharah:
+    Pharah:
       values:
         ability2Kb%:
           values: range
@@ -1245,13 +1531,15 @@ heroes:
           max: 400
           default: 100
           en-US: Rocket Launcher Knockback Scalar
-    ramattra:
+    Ramattra:
       values:
         secondaryFireAlternateForm:
           values: boolean
           default: true
           en-US: Block Nemesis Form
-    reinhardt:
+    Reaper:
+      values: {}
+    Reinhardt:
       values:
         ability1Kb%:
           values: range
@@ -1265,7 +1553,7 @@ heroes:
           max: 400
           default: 100
           en-US: Rocket Hammer Knockback Scalar
-    roadhog:
+    Roadhog:
       values:
         ultKb%:
           values: range
@@ -1273,7 +1561,7 @@ heroes:
           max: 300
           default: 100
           en-US: Whole Hog Knockback Scalar
-    sigma:
+    Sigma:
       values:
         ability2Kb%:
           values: range
@@ -1281,7 +1569,14 @@ heroes:
           max: 300
           default: 100
           en-US: Accretion Knockback Scalar
-    soldier:
+    Sojourn:
+      values:
+        Railgun Alt Fire Energy Charge Rate:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+    "Soldier: 76":
       values:
         secondaryFireKb%:
           values: range
@@ -1289,7 +1584,7 @@ heroes:
           max: 400
           default: 100
           en-US: Helix Rockets Knockback Scalar
-    torbjorn:
+    Torbjörn:
       values:
         ability2Duration%:
           values: range
@@ -1297,17 +1592,13 @@ heroes:
           max: 500
           default: 100
           en-US: Overload Duration Scalar
-        weaponsEnabled:
+        Weapons Enabled:
+          default: All
           values:
-            all:
-              default: true
-              en-US: All
-            rivetGun:
-              en-US: Rivet Gun Only
-            hammer:
-              en-US: Forge Hammer Only
-          en-US: Weapons Enabled
-    winston:
+            - All
+            - Rivet Gun Only
+            - Forge Hammer Only
+    Winston:
       values:
         ability1Acceleration%:
           values: range
@@ -1327,7 +1618,7 @@ heroes:
           max: 300
           default: 100
           en-US: Primal Rage Melee Knockback Scalar
-    hammond:
+    Wrecking Ball:
       values:
         enableRollOnly:
           values: boolean
@@ -1345,7 +1636,7 @@ heroes:
           max: 400
           default: 100
           en-US: Minefield Knockback Scalar
-    zarya:
+    Zarya:
       values:
         secondaryFireKb%:
           values: range
@@ -1353,7 +1644,7 @@ heroes:
           max: 400
           default: 100
           en-US: Particle Cannon Secondary Knockback Scalar
-    lifeweaver:
+    Lifeweaver:
       values:
         ultHealth%:
           values: range
@@ -1379,17 +1670,13 @@ heroes:
           max: 200
           default: 100
           en-US: Life Grip and Healing Blossom Range
-        weaponsEnabled:
+        Weapons Enabled:
+          default: All
           values:
-            all:
-              default: true
-              en-US: All
-            healingBlossom:
-              en-US: Healing Blossom Only
-            thornVolley:
-              en-US: Thorn Volley Only
-          en-US: Weapons Enabled
-    venture:
+            - All
+            - Healing Blossom Only
+            - Thorn Volley Only
+    Venture:
       values:
         ability1Duration%:
           values: range
@@ -1397,7 +1684,7 @@ heroes:
           max: 500
           default: 100
           en-US: Burrow Duration Scalar
-    juno:
+    Juno:
       values:
         ability1Duration%:
           values: range
@@ -1518,17 +1805,5 @@ lobby:
       max: 150
       multiplier: 1000000
       default: 0
-
-main:
-  values:
-    Description:
-      values: string
-      default: Made with the Workshop.codes Script Editor
-      large: true
-      maxChars: 512
-    Mode Name:
-      values: string
-      default: ""
-      maxBytes: 129
 
 workshop:
