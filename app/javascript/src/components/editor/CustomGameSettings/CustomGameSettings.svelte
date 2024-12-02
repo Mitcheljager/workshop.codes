@@ -14,7 +14,7 @@
 
   $: search(query)
 
-  const navigation = { settings: { values: { Main: settings.main, Lobby: settings.lobby, Gamemodes: settings.gamemodes, Heroes: settings.heroes } } }
+  const navigation = { "": { values: { Main: settings.main, Lobby: settings.lobby, Gamemodes: settings.gamemodes, Heroes: settings.heroes } } }
 
   // Search through elements in tree, deliberately not very Svelte-y to not have to worry about state.
   function search(query) {
@@ -34,15 +34,15 @@
   }
 
   function scrollToItem({ target }) {
-    const key = target.dataset.key
-    const targetElement = contentElement.querySelector(`[data-key="${key}"]`)
+    const key = target.dataset.scrollSpy
+    const targetElement = contentElement.querySelector(`[data-scroll-spy="${key}"]`)
     const top = targetElement.offsetTop - scrollOffset
 
     contentElement.scrollTo({ top })
   }
 
   function scrollSpy() {
-    const elements = contentElement.querySelectorAll("[data-key]")
+    const elements = contentElement.querySelectorAll("[data-scroll-spy]")
 
     lastScrolledPastKey = null
 
@@ -53,7 +53,7 @@
 
       if (bottomDistance - elementHeight > topOffset + scrollOffset + 1) return
 
-      lastScrolledPastKey = element.dataset.key
+      lastScrolledPastKey = element.dataset.scrollSpy
     })
   }
 </script>
@@ -68,8 +68,8 @@
   <div class="custom-game-settings__content" bind:this={contentElement} on:scroll={scrollSpy}>
     {#each ["Main", "Lobby", "Gamemodes", "Heroes"] as item}
       <div data-searchable-attributes={item}>
-        <h2 class="mt-1/1 mb-1/8" data-key={item}><strong>{item}</strong></h2>
-        <SettingsTree on:change={() => console.log(settings)} tree={settings[item.toLowerCase()].values} />
+        <h2 class="mt-1/1 mb-1/8" data-scroll-spy={item}><strong>{item}</strong></h2>
+        <SettingsTree on:change={() => console.log(settings)} tree={settings[item.toLowerCase()].values} parentKey={item} />
       </div>
     {/each}
   </div>

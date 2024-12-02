@@ -9,6 +9,7 @@
   const dispatch = createEventDispatcher()
 
   export let tree = {}
+  export let parentKey = ""
 
   const components = {
     boolean: SettingsToggle,
@@ -41,8 +42,8 @@
   <div class="mt-1/8 pl-1/4" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
     {#if typeof item === "object" && item.values}
       {#if typeof item.values === "object" && !Array.isArray(item.values)}
-        <h3 class="mt-1/2 mb-1/4" data-key={key}>{label}</h3>
-        <svelte:self tree={item.values} on:change />
+        <h3 class="mt-1/2 mb-1/4" data-scroll-spy={parentKey + key}>{label}</h3>
+        <svelte:self tree={item.values} parentKey={key} on:change />
       {:else if Array.isArray(item.values)}
         <SettingsOptions {item} {key} {label} on:change={({ detail }) => change(key, detail)} />
       {:else if typeof item.values === "string" && components[item.values]}
