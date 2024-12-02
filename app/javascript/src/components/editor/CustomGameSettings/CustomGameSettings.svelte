@@ -88,7 +88,9 @@
   <div class="custom-game-settings__sidebar">
     <input class="form-input mb-1/4" type="text" placeholder="Search" bind:value={query} />
 
-    <SettingsNavigation tree={navigation} {lastScrolledPastKey} on:click={scrollToItem} />
+    <div class="custom-game-settings__list">
+      <SettingsNavigation tree={navigation} {lastScrolledPastKey} on:click={scrollToItem} />
+    </div>
   </div>
 
   <div class="custom-game-settings__content" bind:this={contentElement} on:scroll={scrollSpy}>

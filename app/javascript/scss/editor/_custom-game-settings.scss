@@ -12,11 +12,40 @@
   background: $bg-darker;
 }
 
+.custom-game-settings__list {
+  margin-top: $margin * -0.25;
+}
+
 .custom-game-settings__sidebar-item {
+  display: block;
+  width: 100%;
+  margin: 0.25em 0;
   color: $text-color;
+
+  &:hover {
+    color: $white;
+  }
 
   &--is-active {
     color: var(--primary, $primary);
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: $margin * -0.25;
+      height: 100%;
+      width: 0.25rem;
+      background: var(--primary, $primary);
+    }
+  }
+
+  &--top-level {
+    font-weight: bold;
+    font-size: 1.15rem;
+    margin-top: $margin * 0.25;
   }
 }
 

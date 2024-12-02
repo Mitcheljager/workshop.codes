@@ -10,12 +10,13 @@
 </script>
 
 {#each Object.entries(tree) as [key, item]}
-  <div class="{depth > 1 ? "pl-1/8" : ""}" data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
+  <div data-searchable-attributes="{key.toLowerCase()} {item["en-US"]?.toLowerCase() || ""}">
     {#if typeof item.values === "object" && !Array.isArray(item.values)}
       {#if depth}
         <button
           class="custom-game-settings__sidebar-item"
           class:custom-game-settings__sidebar-item--is-active={lastScrolledPastKey === parentKey + key}
+          class:custom-game-settings__sidebar-item--top-level={depth < 2}
           data-scroll-spy={parentKey + key} on:click>
           {key}
         </button>
