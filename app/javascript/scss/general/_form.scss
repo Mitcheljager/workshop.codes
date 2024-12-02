@@ -203,7 +203,7 @@
     }
 
     &:checked {
-      background: $primary;
+      background: var(--primary, $primary);
       border: 0;
     }
 
@@ -364,7 +364,7 @@ input[type="file"] {
   }
 
   &::-moz-range-progress {
-    background: $primary;
+    background: var(--primary, $primary);
   }
 }
 
