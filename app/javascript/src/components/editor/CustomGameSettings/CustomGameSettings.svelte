@@ -1,12 +1,12 @@
 <script>
   import SettingsTree from "./SettingsTree.svelte"
   import SettingsNavigation from "./SettingsNavigation.svelte"
-  import { customGameSettings, heroes } from "@src/stores/editor"
-  import { constructCustomGameSettings } from "@src/lib/customGameSettings"
+  import { customGameSettings, heroes } from "@stores/editor"
+  import { constructCustomGameSettings } from "@utils/customGameSettings"
   import { onMount, setContext } from "svelte"
   import { writable } from "svelte/store"
 
-  const settings = constructCustomGameSettings($customGameSettings, $heroes)
+  const settings = constructCustomGameSettings()
   const navigation = { "": { values: {
     Main: settings.main,
     Lobby: settings.lobby,
