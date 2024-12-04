@@ -498,19 +498,10 @@ gamemodes:
 heroes:
   values:
     General:
-      values: heroes
-      default: null
-    Team 1:
-      values: heroes
-      default: null
-    Team 2:
-      values: heroes
-      default: null
-    Team FFA:
-      values: heroes
-      default: null
-    General:
       values:
+        enabled heroes:
+          values: heroes
+          default: null
         Ability Cooldown Time:
           values: range
           min: 0
