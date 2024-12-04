@@ -1,6 +1,6 @@
 import { parseCustomGameSettingsStringToObject, settingsObjectToCustomGameSettingsFormat } from "@utils/customGameSettings"
 import { customGameSettings } from "@stores/editor"
-import { describe, it, expect, beforeEach } from "vitest"
+import { describe, it, expect } from "vitest"
 
 describe("customGameSettings.js", () => {
   describe("parseCustomGameSettingsStringToObject", () => {
@@ -77,7 +77,7 @@ describe("customGameSettings.js", () => {
   })
 
   describe("settingsObjectToCustomGameSettingsFormat", () => {
-    beforeEach(() => {
+    it("Should add values given in object to return value", () => {
       customGameSettings.set({
         lobby: {
           values: {
@@ -113,9 +113,7 @@ describe("customGameSettings.js", () => {
           }
         }
       })
-    })
 
-    it("Should add values given in object to return value", () => {
       const input = {
         settings: {
           lobby: {
@@ -168,6 +166,91 @@ describe("customGameSettings.js", () => {
                 "Some String": {
                   default: "Some default value",
                   current: "Some Value"
+                }
+              }
+            }
+          }
+        }
+      })
+    })
+
+    it("Should not set current value for values that match the default", () => {
+      customGameSettings.set({
+        lobby: {
+          values: {
+            General: {
+              values: {
+                "Some Range": {
+                  values: "range",
+                  min: 0,
+                  max: 10,
+                  default: 5
+                },
+                "Some Other Range": {
+                  values: "range",
+                  min: 0,
+                  max: 10,
+                  default: 5
+                }
+              }
+            },
+            "Not General": {
+              values: {
+                "Some String": {
+                  default: "Some default value"
+                },
+                "Some Other String": {
+                  default: "Some default value"
+                }
+              }
+            }
+          }
+        }
+      })
+
+      const input = {
+        settings: {
+          lobby: {
+            General: {
+              "Some Range": 5,
+              "Some Other Range": 10
+            },
+            "Not General": {
+              "Some String": "Some Value",
+              "Some Other String": "Some default value"
+            }
+          }
+        }
+      }
+
+      expect(settingsObjectToCustomGameSettingsFormat(input)).toEqual({
+        lobby: {
+          values: {
+            General: {
+              values: {
+                "Some Range": {
+                  values: "range",
+                  min: 0,
+                  max: 10,
+                  default: 5
+                },
+                "Some Other Range": {
+                  values: "range",
+                  min: 0,
+                  max: 10,
+                  default: 5,
+                  current: 10
+                }
+              }
+            },
+            "Not General": {
+              values: {
+                "Some String": {
+                  default: "Some default value",
+                  current: "Some Value"
+                },
+                "Some Other String": {
+                  default: "Some default value"
                 }
               }
             }

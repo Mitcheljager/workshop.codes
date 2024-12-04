@@ -79,11 +79,15 @@ export function settingsObjectToCustomGameSettingsFormat(input: any): object {
     // This value is inserted as the `current` value, which is used by various inputs.
     if (typeof item.values !== "object" || Array.isArray(item.values)) {
       let valueInInput = keyChain.reduce((current, key) => current && current[key], input)
-      if (Array.isArray(item.values)) valueInInput =  Object.keys(valueInInput)
 
       // If a value is in the settings object but not in the input it is returned as `undefined`
       // This means no value is given and it can be ignored.
-      if (typeof valueInInput != "undefined") currentObject.current = valueInInput
+      const isValid = typeof valueInInput != "undefined"
+
+      const isEqualToDefault = JSON.stringify(currentObject.default) === JSON.stringify(valueInInput)
+
+      if (isValid && Array.isArray(item.values)) valueInInput = Object.keys(valueInInput)
+      if (isValid && !isEqualToDefault) currentObject.current = valueInInput
 
       keyChain.pop()
       return
