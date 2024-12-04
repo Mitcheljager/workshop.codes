@@ -347,10 +347,16 @@ input[type="file"] {
 }
 
 .range {
+  padding: 0;
+  margin: 0;
+  height: 1rem;
   background: transparent;
 
   &::-moz-range-thumb {
     background: $text-color;
+    height: 1rem;
+    width: 0.5rem;
+    border-radius: $border-radius * 0.25;
     border: 0;
     cursor: pointer;
 
