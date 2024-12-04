@@ -1,12 +1,16 @@
 <script>
   import SettingsTree from "./SettingsTree.svelte"
   import SettingsNavigation from "./SettingsNavigation.svelte"
-  import { customGameSettings, heroes } from "@stores/editor"
-  import { constructCustomGameSettings } from "@utils/customGameSettings"
+  import { customGameSettings, heroes, flatItems } from "@stores/editor"
+  import { settingsObjectToCustomGameSettingsFormat, parseCustomGameSettingsStringToObject } from "@utils/customGameSettings"
   import { onMount, setContext } from "svelte"
   import { writable } from "svelte/store"
+  import { getSettings } from "@utils/parse"
 
-  const settings = constructCustomGameSettings()
+  const [settingsStart, settingsEnd] = getSettings($flatItems)
+  const settingsString = $flatItems.slice(settingsStart, settingsEnd)
+  const settings = settingsObjectToCustomGameSettingsFormat(parseCustomGameSettingsStringToObject(settingsString))
+
   const navigation = { "": { values: {
     Main: settings.main,
     Lobby: settings.lobby,

@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick } from "svelte"
   import { fly } from "svelte/transition"
-  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings, customGameSettings, heroes } from "@stores/editor"
+  import { currentItem, currentProject, currentProjectUUID, recoveredProject, items, sortedItems, projects, isSignedIn, completionsMap, workshopConstants, isMobile, screenWidth, settings, customGameSettings, heroes, flatItems } from "@stores/editor"
   import { toCapitalize } from "@utils/text"
   import FetchRails from "@src/fetch-rails"
   import EditorActions from "@components/editor/EditorActions.svelte"
@@ -250,7 +250,9 @@
     </div>
 
     <div class="editor__content">
-      <div style="height: 80vh; overflow: auto"><CustomGameSettings /></div>
+      {#if $flatItems}
+        <div style="height: 80vh; overflow: auto"><CustomGameSettings /></div>
+      {/if}
 
       {#if $currentItem?.id}
         <!-- This key makes it so CodeMirror has to re-render when the "word-wrap" setting is changed.

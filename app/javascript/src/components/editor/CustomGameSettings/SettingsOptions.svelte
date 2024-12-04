@@ -7,7 +7,7 @@
 
   const dispatch = createEventDispatcher()
 
-  let group = item.default
+  let group = item.current || item.default
 
   function change() {
     dispatch("change", group)

@@ -9,7 +9,7 @@
   const { min, max, multiplier, precise } = item
   const step = precise ? 0.1 : max > 50 ? 5 : 1
 
-  let value = item.default
+  let value = item.current || item.default
 
   function change() {
     const parsed = precise ? parseFloat(value) : parseInt(value) * (multiplier || 1)

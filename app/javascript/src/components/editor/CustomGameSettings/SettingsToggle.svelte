@@ -8,8 +8,9 @@
   const dispatch = createEventDispatcher()
   const id = key + item
   const isNonBoolean = typeof item.enabled === "string"
+  const initial = item.current || item.default
 
-  let checked = (isNonBoolean && item.default === item.enabled) || (!isNonBoolean && item.default)
+  let checked = (isNonBoolean && initial === item.enabled) || (!isNonBoolean && initial)
 
   function change() {
     const enabled = item.enabled || true

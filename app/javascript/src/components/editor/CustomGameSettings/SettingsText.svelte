@@ -6,7 +6,7 @@
 
   const dispatch = createEventDispatcher()
 
-  let value = item.values.default || item.default
+  let value = item.current || item.default
 
   function change() {
     dispatch("change", value)
