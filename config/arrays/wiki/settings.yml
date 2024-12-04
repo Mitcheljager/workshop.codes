@@ -499,9 +499,6 @@ heroes:
   values:
     General:
       values:
-        enabled heroes:
-          values: heroes
-          default: null
         Ability Cooldown Time:
           values: range
           min: 0
