@@ -7,6 +7,9 @@ export function constructCustomGameSettings(): object {
   const settings: any = { ...get(customGameSettings) }
   const settingsHeroes = settings.heroes?.values || []
 
+  // This only happens during HMR
+  if (!("each" in settingsHeroes)) return settings
+
   get(heroes).forEach(({ name }: { name: string }) => {
     if (!(name in settingsHeroes)) return
 
@@ -19,6 +22,8 @@ export function constructCustomGameSettings(): object {
       if (key) settingsHeroes[name].values[key] = item
     })
   })
+
+  if ("each" in settingsHeroes) delete settingsHeroes.each
 
   return settings
 }
