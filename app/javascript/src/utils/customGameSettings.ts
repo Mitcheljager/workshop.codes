@@ -25,6 +25,8 @@ export function constructCustomGameSettings(): object {
 
 /** Parse a Workshop settings string to a javascript object.*/
 export function parseCustomGameSettingsStringToObject(input: string): object {
+  if (!input) return {}
+
   input = input.replaceAll(/\s*{/g, " {") // Move opening { to the same line if it's on the next line
 
   const lines = input.split("\n").map(line => line.trim())
@@ -67,8 +69,6 @@ export function settingsObjectToCustomGameSettingsFormat(input: any): object {
   const settings = { values: constructCustomGameSettings() }
   const keyChain: string[] = ["settings"]
 
-  let currentObject: any = {}
-
   // Iterate over all keys in settings, ignore "values", and match keys in input.
   // All keys are iterated over even if they are not present in the input.
   // This is a but wasteful, but doing it the other way around broke my brain.
@@ -84,10 +84,10 @@ export function settingsObjectToCustomGameSettingsFormat(input: any): object {
       // This means no value is given and it can be ignored.
       const isValid = typeof valueInInput != "undefined"
 
-      const isEqualToDefault = JSON.stringify(currentObject.default) === JSON.stringify(valueInInput)
+      const isEqualToDefault = JSON.stringify(item.default) === JSON.stringify(valueInInput)
 
       if (isValid && Array.isArray(item.values)) valueInInput = Object.keys(valueInInput)
-      if (isValid && !isEqualToDefault) currentObject.current = valueInInput
+      if (isValid && !isEqualToDefault) item.current = valueInInput
 
       keyChain.pop()
       return
@@ -96,10 +96,8 @@ export function settingsObjectToCustomGameSettingsFormat(input: any): object {
     Object.entries(item.values).forEach(([key, value]) => {
       if (!key || !value) return
       if (key !== "values" && typeof value === "object" && !Array.isArray(value)) {
-        // A given value is an object and not a direct setting.
-        // We go 1 level deeper into the object and save the current value to be used when setting the value.
+        // A given value is an object and not a direct setting, we go 1 level deeper into the object
         keyChain.push(key)
-        currentObject = value
       }
 
       iterate(value)
