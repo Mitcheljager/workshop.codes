@@ -1179,6 +1179,8 @@ heroes:
       en-US: disabled heroes
     enabledHeroes:
       en-US: enabled heroes
+    Ana:
+      values: {}
     Ashe:
       values:
         Coach Gun Knockback Scalar Enemy:
@@ -1196,6 +1198,8 @@ heroes:
           min: 1
           max: 500
           default: 100
+    Baptiste:
+      values: {}
     Bastion:
       values:
         secondaryFireKb%:
@@ -1224,6 +1228,8 @@ heroes:
           max: 300
           default: 100
           en-US: Whip Shot Knockback Scalar
+    Cassidy:
+      values: {}
     D.va:
       values:
         ability1Kb%:
@@ -1274,6 +1280,10 @@ heroes:
           max: 500
           default: 100
           en-US: Ammunition Regeneration Time Scalar
+    Echo:
+      values: {}
+    Genji:
+      values: {}
     Hanzo:
       values:
         ability3Cooldown%:
@@ -1322,6 +1332,14 @@ heroes:
           max: 400
           default: 100
           en-US: Jagged Blade Delay Before Automatic Recall
+    Juno:
+      values:
+        ability1Duration%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Glide Boost Duration Scalar
     Junkrat:
       values:
         ability1Kb%:
@@ -1344,6 +1362,38 @@ heroes:
           max: 300
           default: 100
           en-US: Swift Step Distance Scalar
+    Lifeweaver:
+      values:
+        ultHealth%:
+          values: range
+          min: 50
+          max: 300
+          default: 100
+          en-US: Tree of Life Health
+        ability1Health%:
+          values: range
+          min: 0
+          max: 500
+          default: 100
+          en-US: Rejuvenating Dash Healing
+        secondaryFireHealth%:
+          values: range
+          min: 25
+          max: 500
+          default: 100
+          en-US: Petal Platform Health
+        primaryFireRange%:
+          values: range
+          min: 20
+          max: 200
+          default: 100
+          en-US: Life Grip and Healing Blossom Range
+        Weapons Enabled:
+          default: All
+          values:
+            - All
+            - Healing Blossom Only
+            - Thorn Volley Only
     Lúcio:
       values:
         secondaryFireKb%:
@@ -1458,6 +1508,8 @@ heroes:
           max: 500
           default: 100
           en-US: Biotic Energy Recharge Rate
+    Orisa:
+      values: {}
     Pharah:
       values:
         ability2Kb%:
@@ -1585,6 +1637,18 @@ heroes:
             - All
             - Rivet Gun Only
             - Forge Hammer Only
+    Tracer:
+      values: {}
+    Venture:
+      values:
+        ability1Duration%:
+          values: range
+          min: 10
+          max: 500
+          default: 100
+          en-US: Burrow Duration Scalar
+    Windowmaker:
+      values: {}
     Winston:
       values:
         ability1Acceleration%:
@@ -1631,54 +1695,8 @@ heroes:
           max: 400
           default: 100
           en-US: Particle Cannon Secondary Knockback Scalar
-    Lifeweaver:
-      values:
-        ultHealth%:
-          values: range
-          min: 50
-          max: 300
-          default: 100
-          en-US: Tree of Life Health
-        ability1Health%:
-          values: range
-          min: 0
-          max: 500
-          default: 100
-          en-US: Rejuvenating Dash Healing
-        secondaryFireHealth%:
-          values: range
-          min: 25
-          max: 500
-          default: 100
-          en-US: Petal Platform Health
-        primaryFireRange%:
-          values: range
-          min: 20
-          max: 200
-          default: 100
-          en-US: Life Grip and Healing Blossom Range
-        Weapons Enabled:
-          default: All
-          values:
-            - All
-            - Healing Blossom Only
-            - Thorn Volley Only
-    Venture:
-      values:
-        ability1Duration%:
-          values: range
-          min: 10
-          max: 500
-          default: 100
-          en-US: Burrow Duration Scalar
-    Juno:
-      values:
-        ability1Duration%:
-          values: range
-          min: 10
-          max: 500
-          default: 100
-          en-US: Glide Boost Duration Scalar
+    Zenyatta:
+      values: {}
 
 lobby:
   values:
