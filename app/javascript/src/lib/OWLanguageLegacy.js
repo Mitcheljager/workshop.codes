@@ -12,7 +12,7 @@ export const highlightStyle = HighlightStyle.define([
   { tag: tags.labelName, color: "var(--color-action)" },
   { tag: tags.punctuation, color: "var(--color-punctuation)" },
   { tag: tags.invalid, color: "var(--color-invalid)" },
-  { tag: tags.comment, color: "var(--color-comment)" },
+  { tag: tags.comment, color: "var(--color-comment)", fontStyle: "italic" },
   { tag: tags.atom, color: "var(--color-custom-keyword)" }
 ])
 
