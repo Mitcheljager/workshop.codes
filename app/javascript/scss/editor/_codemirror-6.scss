@@ -80,9 +80,10 @@
   }
 
   .cm-tooltip {
-    background: darken($bg-dark, 5%);
+    overflow: hidden;
+    border-radius: $border-radius * 0.5;
     border: 0;
-    box-shadow: $shadow;
+    background: darken($bg-dark, 5%);
 
     &.cm-tooltip-hover {
       max-width: 25em;
@@ -91,7 +92,6 @@
       border-radius: $border-radius * 0.5;
       border: 1px solid $bg-darker;
       padding: $margin * 0.125;
-      box-shadow: none;
       color: $text-color;
       font-size: 0.75rem;
 
@@ -99,6 +99,8 @@
     }
 
     > ul {
+      padding: $margin * 0.125;
+
       @include styled-scrollbar;
     }
 
@@ -111,6 +113,10 @@
 
     .cm-diagnostic {
       background: $bg-darker;
+      border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
+      color: $text-color-lightest;
+      font-weight: bold;
+      font-size: 12px;
     }
 
     hr {
@@ -137,6 +143,15 @@
   .cm-completionDetail {
     color: $text-color;
     font-size: 0.85em;
+  }
+
+  .cm-tooltip-autocomplete {
+    border-radius: 0;
+    border: 1px solid $bg-darker;
+  }
+
+  .cm-tooltip-autocomplete ul li {
+    padding: 0.25rem !important;
   }
 
   .cm-tooltip-autocomplete ul li[aria-selected] {
