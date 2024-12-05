@@ -251,7 +251,7 @@
         <!-- This key makes it so CodeMirror has to re-render when the "word-wrap" setting is changed.
         There could be more elegant solutions that use the CodeMirror API to update extensions,
         but this is the far more simple and readable solution. -->
-        {#key $settings["word-wrap"] + $settings["highlight-trailing-whitespace"] + $settings["tooltip-hover-delay"]}
+        {#key $settings["word-wrap"] + $settings["highlight-trailing-whitespace"] + $settings["tooltip-hover-delay"] + $settings["rainbow-brackets"]}
           <CodeMirror on:search={async({ detail }) => {
             currentSidebarTab = "wiki"
             await tick()

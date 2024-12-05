@@ -54,6 +54,7 @@
     "lint-staged": "^15.2.2",
     "patch-package": "^6.4.7",
     "postcss-import": "^16.1.0",
+    "rainbowbrackets": "^2.0.2",
     "sass": "^1.69.5",
     "string.prototype.replaceall": "^1.0.7",
     "svelte-check": "^3.6.8",

@@ -8,6 +8,7 @@
   import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
+  import rainbowBrackets from "rainbowbrackets"
   import { OWLanguage, highlightStyle } from "@lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "@lib/OWLanguageLinter"
   import { parameterTooltip } from "@lib/parameterTooltip"
@@ -92,7 +93,8 @@
         ]),
         foldBrackets(),
         ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : []),
-        ...($settings["highlight-trailing-whitespace"] ? [highlightTrailingWhitespace()] : [])
+        ...($settings["highlight-trailing-whitespace"] ? [highlightTrailingWhitespace()] : []),
+        ...($settings["rainbow-brackets"] ? [rainbowBrackets()] : [])
       ]
     })
   }

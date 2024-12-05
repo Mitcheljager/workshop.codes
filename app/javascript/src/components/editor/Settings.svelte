@@ -177,9 +177,22 @@
         </div>
       {/if}
 
-      <hr class="large">
+      <hr>
 
-      <div class="form-group">
+      <div class="checkbox mt-1/8">
+        <input id="rainbow-brackets" type="checkbox" bind:checked={$settings["rainbow-brackets"]} />
+        <label for="rainbow-brackets">
+          Rainbow brackets
+        </label>
+      </div>
+
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Brackets, braces, and parenthesis change their matching color with depth.
+      </div>
+
+      <hr>
+
+      <div class="form-group mt-1/4">
         <label for="">Tooltip hover delay in milliseconds</label>
 
         <div class="text-small mt-1/16 text-base">
@@ -222,7 +235,7 @@
 
       <hr class="large">
 
-      <h5 class="mt-0 mb-1/4 text-bold"><strong>Syntax Highlighting</strong></h5>
+      <h5 class="mt-0 mb-1/4 text-bold"><strong>Syntax highlighting</strong></h5>
 
       {#each syntaxHighlight as color}
         <div class="form-group-inline mt-1/8">

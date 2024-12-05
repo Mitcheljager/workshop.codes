@@ -363,6 +363,15 @@
     opacity: 0;
   }
 
+  // From import rainbowBrackets from 'rainbowbrackets'
+  // Skipping red, despite the classname, red is too error-like.
+  .rainbow-bracket-red span { color: forestgreen }
+  .rainbow-bracket-orange span { color: orange }
+  .rainbow-bracket-yellow span { color: yellow }
+  .rainbow-bracket-green span { color: turquoise }
+  .rainbow-bracket-blue span { color: dodgerblue }
+  .rainbow-bracket-indigo span { color: hotpink }
+  .rainbow-bracket-violet span { color: plum }
 }
 
 .indented-wrapped-line {

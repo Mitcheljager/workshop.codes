@@ -114,5 +114,6 @@ export const settings = writable({
   "hide-wiki-sidebar": false,
   "highlight-trailing-whitespace": true,
   "remove-trailing-whitespace-on-save": true,
-  "tooltip-hover-delay": 50
+  "tooltip-hover-delay": 50,
+  "rainbow-brackets": false
 })
