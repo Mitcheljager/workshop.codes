@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import { items, openFolders } from "@stores/editor"
+  import { items, currentItem, openFolders } from "@stores/editor"
   import { isAnyParentHidden, toggleFolderState } from "@utils/editor"
   import EditorItemDestroy from "@components/editor/EditorItemDestroy.svelte"
   import EditorItemHide from "@components/editor/EditorItemHide.svelte"
@@ -14,6 +14,7 @@
 
   $: expanded = $openFolders.includes(item.id)
   $: hasContents = $items.some(i => i.parent === item.id)
+  $: isActiveItemInside = $currentItem.parent === item.id
 
   onMount(setInitialState)
 
@@ -28,6 +29,7 @@
 <div
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
+  class:editor-folder--active={isActiveItemInside}
   class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
   data-item-id={item.id}>
   <button class="editor-folder__icon" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
@@ -35,7 +37,7 @@
   </button>
 
   <span class="editor-folder__name">
-    <Folder fill={hasContents} />
+    <Folder fill={hasContents} color={isActiveItemInside ? "white" : "currentColor"} />
     <EditorItemName {item} />
   </span>
 

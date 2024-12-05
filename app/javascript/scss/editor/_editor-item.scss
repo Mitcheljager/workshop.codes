@@ -51,7 +51,7 @@
 
   &--active {
     &:not(.editor-folder)::before {
-      color: $text-color-light;
+      color: var(--primary, $primary);
     }
 
     > span {

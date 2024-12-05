@@ -3,6 +3,12 @@
 .editor-folder.editor-folder {
   position: relative;
 
+  &.editor-folder--active {
+    > span > input {
+      color: $text-color-lightest;
+    }
+  }
+
   > span > input {
     color: $text-color-dark;
     pointer-events: all;
