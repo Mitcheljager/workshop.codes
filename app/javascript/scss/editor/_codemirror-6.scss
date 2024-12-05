@@ -24,7 +24,7 @@
 
   .cm-gutters {
     border-right: 0;
-    background: var(--editor-background, #{$bg-dark});
+    background: transparent;
     color: $text-color-dark;
 
     .cm-activeLineGutter {

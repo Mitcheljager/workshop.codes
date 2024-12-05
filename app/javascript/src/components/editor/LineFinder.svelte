@@ -13,7 +13,7 @@
 <svelte:window on:keydown={keydown} />
 
 <button
-  class="form-input bg-darker text-dark cursor-pointer text-left"
+  class="form-input text-dark cursor-pointer text-left"
   on:click={() => modal.show(Modal.LineFinder)}>
 
   <em>Find line... (Ctrl+B)</em>

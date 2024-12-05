@@ -20,9 +20,11 @@
     <EditorItemName {item} />
   </span>
 
-  <button class="editor-item__actions" on:click|stopPropagation>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div class="editor-item__actions" on:click|stopPropagation>
     <EditorItemDuplicate {item} />
     <EditorItemHide {item} />
     <EditorItemDestroy {item} />
-  </button>
+  </div>
 </button>

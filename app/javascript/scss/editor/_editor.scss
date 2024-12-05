@@ -1,6 +1,7 @@
 $sidebar-width: clamp(var(--clamp-min), var(--sidebar-width, 300px), 80vmax); // width = height on mobile
 $popout-width: clamp(var(--popout-clamp-min, var(--clamp-min)), var(--popout-width, 300px), 80vmax); // width = height on mobile
 $top-height: 4rem;
+$separator-color: darken($bg-darker, 5%);
 
 .editor {
   --clamp-min: 10vmax;
@@ -12,7 +13,7 @@ $top-height: 4rem;
   left: 0;
   height: 100%;
   width: 100%;
-  background: var(--editor-background, #{$bg-dark});
+  background: var(--editor-background, #{darken($bg-dark, 2.5%)});
   z-index: 500;
 
   @include media-min(mbl) {
@@ -46,8 +47,8 @@ $top-height: 4rem;
   padding: 1.5rem 0.5rem 0.5rem;
   z-index: 5;
   background: linear-gradient(180deg,
-    rgba(darken($bg-dark, 5%), 0) 0,
-    darken($bg-dark, 5%) 1.5rem);
+    transparent 0,
+    darken($bg-dark, 10%) 1.5rem);
 }
 
 .editor__top {
@@ -56,8 +57,8 @@ $top-height: 4rem;
   display: flex;
   align-items: center;
   padding: $margin * 0.25;
-  background: lighten($bg-dark, 5%);
   box-shadow: $shadow;
+  background: lighten($bg-dark, 5%);
   z-index: 10;
 
   &::after {
@@ -103,11 +104,19 @@ $top-height: 4rem;
 .editor__aside {
   grid-area: aside;
   position: relative;
-  background: darken($bg-dark, 5%);
+  background: darken($bg-dark, 10%);
   overflow: hidden;
 
   @include media-min(mbl) {
-    border-right: 1px solid $bg-darker;
+    border-right: 1px solid $separator-color;
+  }
+
+  .form-input {
+    background: darken($bg-dark, 15%);
+  }
+
+  hr {
+    background: $separator-color;
   }
 }
 
@@ -115,12 +124,12 @@ $top-height: 4rem;
   grid-area: popout;
   position: relative;
   padding: $margin * 0.25;
-  border-top: 1px solid $bg-darker;
-  background: $bg-dark;
+  border-top: 1px solid $separator-color;
+  background: darken($bg-dark, 2.5%);
 
   @include media-min(mbl) {
     border-top: 0;
-    border-left: 1px solid $bg-darker;
+    border-left: 1px solid $separator-color;
   }
 }
 

@@ -154,17 +154,17 @@
 <svelte:window on:keydown={keydown} />
 
 {#if !active}
-  <button class="form-input bg-darker text-dark cursor-pointer text-left" on:click={() => active = true}>
+  <button class="form-input text-dark cursor-pointer text-left" on:click={() => active = true}>
     <em>Find/Replace in all... (Ctrl+Shift+F)</em>
   </button>
 {/if}
 
 {#if active}
   <div in:fly={{ duration: 150, y: -30 }} use:escapeable on:escape={() => active = false}>
-    <input type="text" class="form-input bg-darker mt-1/4" placeholder="Find in all..." bind:value bind:this={input} />
+    <input type="text" class="form-input mt-1/4" placeholder="Find in all..." bind:value bind:this={input} />
 
     <div class="flex mt-1/16">
-      <input type="text" class="form-input bg-darker" placeholder="Replace found with..." bind:value={replace} bind:this={replaceInput} />
+      <input type="text" class="form-input" placeholder="Replace found with..." bind:value={replace} bind:this={replaceInput} />
       <button class="button button--secondary button--square button--small ml-1/16" on:click={replaceInAll}>Replace</button>
     </div>
 
