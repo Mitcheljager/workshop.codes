@@ -7,6 +7,7 @@
   import EditorItemDuplicate from "@components/editor/EditorItemDuplicate.svelte"
   import EditorItemName from "@components/editor/EditorItemName.svelte"
   import EditorList from "@components/editor/EditorList.svelte"
+  import Chevron from "@components/icon/Chevron.svelte"
 
   export let item = {}
 
@@ -28,7 +29,7 @@
   class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
   data-item-id={item.id}>
   <button class="editor-folder__icon" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
-    &gt;
+    <Chevron />
   </button>
 
   <span>
