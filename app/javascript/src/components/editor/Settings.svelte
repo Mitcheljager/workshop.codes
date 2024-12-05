@@ -179,6 +179,21 @@
 
       <hr class="large">
 
+      <div class="form-group">
+        <label for="">Tooltip hover delay in milliseconds</label>
+
+        <div class="text-small mt-1/16 text-base">
+          The time required to hover before a tooltip for actions and values will appear.
+        </div>
+
+        <div class="flex align-center mt-1/8">
+          <input type="range" min=25 max=500 step=5 class="range" bind:value={$settings["tooltip-hover-delay"]} />
+          <span class="text-small text-base ml-1/8">{$settings["tooltip-hover-delay"]}ms</span>
+        </div>
+      </div>
+
+      <hr class="large">
+
       <h5 class="mt-0 mb-1/4 text-bold"><strong>Font</strong></h5>
 
       <div class="form-group-inline">

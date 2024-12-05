@@ -1,6 +1,6 @@
 import type { Extension } from "@codemirror/state"
 import { hoverTooltip } from "@codemirror/view"
-import { completionsMap } from "@stores/editor"
+import { completionsMap, settings } from "@stores/editor"
 import { getPhraseFromPosition } from "@utils/parse"
 import { get } from "svelte/store"
 
@@ -27,5 +27,5 @@ export function parameterTooltip(): Extension {
         return { dom }
       }
     }
-  }, { hoverTime: 50 })
+  }, { hoverTime: get(settings)["tooltip-hover-delay"] })
 }

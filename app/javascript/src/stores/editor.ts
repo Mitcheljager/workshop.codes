@@ -113,5 +113,6 @@ export const settings = writable({
   "autocomplete-min-parameter-newlines": 2,
   "hide-wiki-sidebar": false,
   "highlight-trailing-whitespace": true,
-  "remove-trailing-whitespace-on-save": true
+  "remove-trailing-whitespace-on-save": true,
+  "tooltip-hover-delay": 50
 })
