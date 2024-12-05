@@ -203,7 +203,7 @@
     }
 
     &:checked {
-      background: $primary;
+      background: var(--primary, $primary);
       border: 0;
     }
 
@@ -347,9 +347,15 @@ input[type="file"] {
 }
 
 .range {
+  padding: 0;
+  margin: 0;
+  height: 1rem;
   background: transparent;
 
   &::-moz-range-thumb {
+    height: 1rem;
+    width: 0.5rem;
+    border-radius: $border-radius * 0.25;
     background: $text-color;
     border: 0;
     cursor: pointer;
@@ -360,11 +366,15 @@ input[type="file"] {
   }
 
   &::-moz-range-track {
+    height: 0.5rem;
+    border-radius: 0.5rem;
     background: $bg-darker;
   }
 
   &::-moz-range-progress {
-    background: $primary;
+    height: 0.5rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+    background: var(--primary, $primary);
   }
 }
 
