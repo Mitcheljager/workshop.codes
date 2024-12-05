@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import { openFolders } from "@stores/editor"
+  import { items, openFolders } from "@stores/editor"
   import { isAnyParentHidden, toggleFolderState } from "@utils/editor"
   import EditorItemDestroy from "@components/editor/EditorItemDestroy.svelte"
   import EditorItemHide from "@components/editor/EditorItemHide.svelte"
@@ -8,10 +8,12 @@
   import EditorItemName from "@components/editor/EditorItemName.svelte"
   import EditorList from "@components/editor/EditorList.svelte"
   import Chevron from "@components/icon/Chevron.svelte"
+  import Folder from "@components/icon/Folder.svelte"
 
   export let item = {}
 
   $: expanded = $openFolders.includes(item.id)
+  $: hasContents = $items.some(i => i.parent === item.id)
 
   onMount(setInitialState)
 
@@ -32,7 +34,8 @@
     <Chevron />
   </button>
 
-  <span>
+  <span class="editor-folder__name">
+    <Folder fill={hasContents} />
     <EditorItemName {item} />
   </span>
 
