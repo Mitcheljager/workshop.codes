@@ -14,7 +14,7 @@
 
   $: expanded = $openFolders.includes(item.id)
   $: hasContents = $items.some(i => i.parent === item.id)
-  $: isActiveItemInside = $currentItem.parent === item.id
+  $: isActiveItemInside = $currentItem && $currentItem.parent === item.id
 
   onMount(setInitialState)
 
