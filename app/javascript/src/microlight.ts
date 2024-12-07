@@ -90,7 +90,7 @@ export async function reset(className = ""): Promise<void> {
         if (!chr || // end of content
           // types 9-10 (single-line comments) end with a
           // newline
-          (tokenType > 8 && chr == '\n') ||
+          (tokenType > 5 && chr == '\n') ||
           [ // finalize conditions for other token types
             // 0: whitespaces
             /\S/[test](chr),  // merged together
@@ -165,6 +165,7 @@ export async function reset(className = ""): Promise<void> {
             chr === '@' || /[$\w]/[test](chr),//  3: (key)word
             /^\d+$/[test](chr),  //  4: number
             chr == '"',          //  5: string with "
+            (chr == '/' && next1 == '/') // 6: multilnes comment
           ][--tokenType]);
         }
 
