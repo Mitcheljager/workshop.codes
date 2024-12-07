@@ -131,6 +131,10 @@ $separator-color: darken($bg-darker, 5%);
     border-top: 0;
     border-left: 1px solid $separator-color;
   }
+
+  .header-anchor {
+    visibility: hidden;
+  }
 }
 
 .editor__content {
