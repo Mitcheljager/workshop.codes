@@ -5,7 +5,7 @@
 </div>
 
 <h2><strong>Actions</strong></h2>
-<%= render collection: @actions.sort_by { |key, content| content["en-US"] }.to_h, partial: "item" %>
+<%= render collection: @actions.sort_by { |action| action["en-US"] }.compact, partial: "item" %>
 
 <h2><strong>Values</strong></h2>
-<%= render collection: @values.sort_by { |key, content| content["en-US"] }.to_h, partial: "item" %>
+<%= render collection: @values.sort_by { |value| value["en-US"] }.compact, partial: "item" %>
