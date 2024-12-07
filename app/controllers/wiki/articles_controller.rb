@@ -23,7 +23,7 @@ class Wiki::ArticlesController < Wiki::BaseController
     @article = Wiki::Article.where(slug: params[:slug]).last
 
     not_found and return unless @article
-    redirect_to_latest_article
+    redirect_to_latest_article and return
 
     @initial_article = Wiki::Article.where(group_id: @article.group_id).first
 
@@ -136,7 +136,7 @@ class Wiki::ArticlesController < Wiki::BaseController
     @latest_article = Wiki::Article.where(group_id: @article.group_id).last
 
     if @latest_article != @article
-      redirect_to wiki_article_path(@latest_article.slug)
+      redirect_to wiki_article_path(@latest_article.slug) and return
     end
   end
 
