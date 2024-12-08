@@ -245,7 +245,7 @@ module ContentHelper
   # This uses a string instead of Rails tags because those tags are not available when parsed as JSON
   def youtube_preview_tag(video_id, lazy = false)
     "<div class='video'>
-      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' aria-role='button' tabindex='0'>
+      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' role='button' tabindex='0'>
         <div class='video__play-icon'></div>
         <img
           #{ lazy ? "loading='lazy'" : "" }
