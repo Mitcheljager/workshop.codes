@@ -38,6 +38,7 @@ import * as sticky from "@src/sticky"
 import * as tabs from "@src/tabs"
 import * as timeago from "@src/timeago"
 import * as toggleContent from "@src/toggle-content"
+import * as youtubePreview from "@src/youtube-preview"
 import * as wikiSearch from "@src/wiki/search"
 
 document.addEventListener("turbolinks:load", () => {
@@ -63,6 +64,7 @@ document.addEventListener("turbolinks:load", () => {
   sticky.bind()
   tabs.bind()
   toggleContent.bind()
+  youtubePreview.bind()
   wikiSearch.bind()
 
   microlight.reset()

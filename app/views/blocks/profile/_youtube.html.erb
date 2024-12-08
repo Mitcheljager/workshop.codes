@@ -2,7 +2,4 @@
   <h2><%= block_property(block, "title") %></h2>
 <% end %>
 
-
-<div class="video">
-  <iframe class="video__iframe" width="560" height="315" src="https://www.youtube-nocookie.com/embed/<%= block_property(block, "video_id") %>" frameborder="0"></iframe>
-</div>
+<%= raw youtube_preview_tag(block_property(block, "video_id")) %>

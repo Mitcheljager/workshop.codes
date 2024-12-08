@@ -87,10 +87,7 @@ module ContentHelper
 
   def markdown_youtube(text)
     text.gsub /\[youtube\s+(.*?)\]/ do
-      video_id = $1
-      "<div class='video'>
-        <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{ youtube_to_video_id(video_id) }' frameborder='0' allowfullscreen></iframe>
-      </div>"
+      youtube_preview_tag($1)
     end
   end
 
@@ -201,8 +198,8 @@ module ContentHelper
   def sanitized_markdown(text, rendererOptions: {})
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
-      tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big),
-      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls playsinline loop muted aria-level)
+      tags: %w(div span hr style mark dl dd dt img details summary a button b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big),
+      attributes: %w(style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level tabindex)
     )
   end
 
@@ -243,5 +240,18 @@ module ContentHelper
 
   def hero_names
     heroes.map { |hero| hero["name"] }.sort
+  end
+
+  # This uses a string instead of Rails tags because those tags are not available when parsed as JSON
+  def youtube_preview_tag(video_id)
+    "<div class='video'>
+      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' aria-role='button' tabindex='0'>
+        <div class='video__play-icon'></div>
+        <img
+          src='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp'
+          srcset='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp 640w, https://i.ytimg.com/vi_webp/#{ video_id }/maxresdefault.webp 1280w'
+          class='video__thumbnail' />
+      </div>
+    </div>".gsub("\n","") # For some reason Markdown after this element is ignored when newlines are present
   end
 end
