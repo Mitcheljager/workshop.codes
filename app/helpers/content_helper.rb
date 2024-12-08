@@ -87,7 +87,7 @@ module ContentHelper
 
   def markdown_youtube(text)
     text.gsub /\[youtube\s+(.*?)\]/ do
-      youtube_preview_tag($1)
+      youtube_preview_tag($1, true)
     end
   end
 
@@ -243,11 +243,12 @@ module ContentHelper
   end
 
   # This uses a string instead of Rails tags because those tags are not available when parsed as JSON
-  def youtube_preview_tag(video_id)
+  def youtube_preview_tag(video_id, lazy = false)
     "<div class='video'>
       <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' aria-role='button' tabindex='0'>
         <div class='video__play-icon'></div>
         <img
+          #{ lazy ? "loading='lazy'" : "" }
           src='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp'
           srcset='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp 640w, https://i.ytimg.com/vi_webp/#{ video_id }/maxresdefault.webp 1280w'
           class='video__thumbnail' />
