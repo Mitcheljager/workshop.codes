@@ -245,13 +245,14 @@ module ContentHelper
   # This uses a string instead of Rails tags because those tags are not available when parsed as JSON
   def youtube_preview_tag(video_id, lazy = false)
     "<div class='video'>
-      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' role='button' tabindex='0'>
+      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' role='button' aria-label='Play YouTube Video' tabindex='0'>
         <div class='video__play-icon'></div>
         <img
           #{ lazy ? "loading='lazy'" : "" }
           src='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp'
           srcset='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp 640w, https://i.ytimg.com/vi_webp/#{ video_id }/maxresdefault.webp 1280w'
-          class='video__thumbnail' />
+          class='video__thumbnail'
+          alt='' />
       </div>
     </div>".gsub("\n","") # For some reason Markdown after this element is ignored when newlines are present
   end
