@@ -1,9 +1,12 @@
 export function bind(): void {
   const youtubePreviewButtons = document.querySelectorAll("[data-action~='youtube-preview']")
-  youtubePreviewButtons.forEach(element => element.removeAndAddEventListener("click", load))
+  youtubePreviewButtons.forEach(element => {
+    element.removeAndAddEventListener("click", load)
+    element.removeAndAddEventListener("keydown", keydown)
+  })
 }
 
-function load(event: MouseEvent): void {
+function load(event: MouseEvent | KeyboardEvent): void {
   event.preventDefault()
 
   const currentTarget = event.currentTarget as HTMLAnchorElement
@@ -33,4 +36,10 @@ function createIframe(youtubeId: string): HTMLIFrameElement {
   element.classList.add("video__iframe")
 
   return element
+}
+
+function keydown(event: KeyboardEvent): void {
+  if (event.key !== "Enter" && event.key !== " ") return
+
+  load(event)
 }
