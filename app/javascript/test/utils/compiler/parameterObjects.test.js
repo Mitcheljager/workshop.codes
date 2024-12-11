@@ -1,4 +1,4 @@
-import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects, parseParameterObjectContent } from "@utils/compiler/parameterObjects"
+import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects, parseParameterObjectContent, directlyInsideParameterObject } from "@utils/compiler/parameterObjects"
 import { completionsMap } from "@stores/editor"
 import { describe, it, expect, beforeEach } from "vitest"
 
@@ -210,6 +210,55 @@ describe("parameterObjects.js", () => {
       `
 
       expect(evaluateParameterObjects(input)).toBe(expected)
+    })
+  })
+
+  describe("directlyInsideParameterObject", () => {
+    it("Should return parameter object only when cursor is inside", () => {
+      const input = "Some Action({ Key: Value })"
+
+      expect(directlyInsideParameterObject(input, 13)).toBeTruthy()
+      expect(directlyInsideParameterObject(input, 17)).toBeTruthy()
+      expect(directlyInsideParameterObject(input, 5)).toBe(null)
+      expect(directlyInsideParameterObject(input, input.length)).toBe(null)
+    })
+
+    it("Should not return parameter object when cursor is in value", () => {
+      const input = "Some Action({ Key: Value })"
+
+      expect(directlyInsideParameterObject(input, 20)).toBe(null)
+      expect(directlyInsideParameterObject(input, 25)).toBe(null)
+    })
+
+    it("Should return correct parameter object when nested", () => {
+      const input = `Some Action({
+        One: Some Second Action({ First: Some Value }),
+      })`
+
+      expect(directlyInsideParameterObject(input, 14).phraseDefaults).toEqual([0, 0, 0])
+      expect(directlyInsideParameterObject(input, 48).phraseDefaults).toEqual(["A", "B", "C", "D"])
+      expect(directlyInsideParameterObject(input, 70).phraseDefaults).toEqual([0, 0, 0])
+    })
+
+    it("Should return null when no parameter object was given", () => {
+      const input = "Some Action()"
+
+      for(let i = 0; i < input.length; i++) {
+        expect(directlyInsideParameterObject(input, i)).toBe(null)
+      }
+    })
+
+    it("Should return null when no content was given", () => {
+      const input = ""
+
+      expect(directlyInsideParameterObject(input, 0)).toBe(null)
+    })
+
+    it("Should return null when index was out of range of string was given", () => {
+      const input = "Some Action({})"
+
+      expect(directlyInsideParameterObject(input, 30)).toBe(null)
+      expect(directlyInsideParameterObject(input, -1)).toBe(null)
     })
   })
 })

@@ -1,6 +1,6 @@
 import type { ParameterObject } from "@src/types/editor"
 import { completionsMap } from "@stores/editor"
-import { getClosingBracket, getPhraseFromIndex, replaceBetween, splitArgumentsString } from "@utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromIndex, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
 
 export function evaluateParameterObjects(joinedItems: string): string {
@@ -100,4 +100,36 @@ export function replaceParameterObject(content: string, parameterObject: Paramet
   content = replaceBetween(content, parameters.join(", "), start, end + 1)
 
   return content
+}
+
+/**
+ * Returns the parameter object that the cursor is directly inside of, if any.
+ */
+export function directlyInsideParameterObject(content: string, startIndex = 0): ParameterObject | null {
+  if (startIndex > content.length) return null
+  if (startIndex < 0) return null
+
+  let bracketCount = 0
+  let index = 0
+  let hasMetComma = false
+  let isInValue = false
+  for (index = startIndex - 1; index > 0; index--) {
+    if (content[index] === "{") bracketCount--
+    if (content[index] === "}") bracketCount++
+    if (content[index] === ",") hasMetComma = true
+    if (content[index] === ":" && !hasMetComma) {
+      isInValue = true
+      break
+    }
+
+    if (bracketCount < 0) break
+  }
+
+  if (isInValue) return null
+
+  const phraseStart = getPhraseEnd(content, index - 1, -1)
+
+  if (phraseStart < 0) return null
+
+  return getFirstParameterObject(content.slice(phraseStart)) || null
 }

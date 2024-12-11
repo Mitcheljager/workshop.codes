@@ -24,6 +24,7 @@
   import { indentedLineWrap } from "@utils/codemirror/indentedLineWrap"
   import { removeTrailingWhitespace } from "@utils/codemirror/removeTrailingWhitespace"
   import debounce from "@src/debounce"
+  import { directlyInsideParameterObject } from "@src/utils/compiler/parameterObjects"
 
   const dispatch = createEventDispatcher()
   const updateItem = debounce(() => {
@@ -194,6 +195,12 @@
       specialOverwrite = $mixinsMap
     } else if (word.text.includes("@t")) {
       specialOverwrite = $translationsMap
+    } if ($settings["autocomplete-parameter-objects"]) {
+      const insideParameterObject = directlyInsideParameterObject(context.state.doc.toString(), context.pos)
+
+      if (insideParameterObject) {
+        specialOverwrite = insideParameterObject.phraseParameters.map(label => ({ label, type: "keyword" }))
+      }
     }
 
     return {
