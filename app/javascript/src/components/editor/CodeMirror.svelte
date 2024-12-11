@@ -198,7 +198,7 @@
     } if ($settings["autocomplete-parameter-objects"]) {
       const insideParameterObject = directlyInsideParameterObject(context.state.doc.toString(), context.pos)
 
-      if (insideParameterObject) {
+      if (insideParameterObject?.phraseParameters.length) {
         specialOverwrite = insideParameterObject.phraseParameters.map(label => ({ label, type: "keyword" }))
       }
     }
