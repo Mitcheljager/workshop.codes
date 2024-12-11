@@ -117,20 +117,20 @@ export function directlyInsideParameterObject(content: string, startIndex = 0): 
   let bracketCount = 0
   let index = 0
   let hasMetComma = false
-  let isInValue = false
+  let isNotKey = false
   for (index = startIndex - 1; index > 0; index--) {
     if (content[index] === "{") bracketCount--
     if (content[index] === "}") bracketCount++
     if (content[index] === ",") hasMetComma = true
-    if (content[index] === ":" && !hasMetComma) {
-      isInValue = true
+    if ((content[index] === ":" && !hasMetComma) || content[index] === ";") {
+      isNotKey = true
       break
     }
 
     if (bracketCount < 0) break
   }
 
-  if (isInValue) return null
+  if (isNotKey) return null
 
   const phraseStart = getPhraseEnd(content, index - 1, -1)
 

@@ -279,5 +279,11 @@ describe("parameterObjects.js", () => {
       expect(directlyInsideParameterObject(input, 30)).toBe(null)
       expect(directlyInsideParameterObject(input, -1)).toBe(null)
     })
+
+    it("Should return null parameter key was not finished properly and cursor is after object", () => {
+      const input = "Some Action({ One }); Two"
+
+      expect(directlyInsideParameterObject(input, 20)).toBe(null)
+    })
   })
 })
