@@ -79,6 +79,6 @@
   {/each}
 
   {#if $items.length && !itemsInParent.length}
-    <em class="pl-1/8 text-dark">Empty folder</em>
+    <em class="pl-1/4 ml-1/8 text-dark">Empty folder</em>
   {/if}
 </div>
