@@ -169,7 +169,7 @@
     background: transparent;
   }
 
-  .cm-lint-marker-error {
+  .cm-lint-marker-warning {
     content: "";
 
     &::before {
@@ -178,12 +178,23 @@
       width: 1em;
       height: 1em;
       padding: 0.1em;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      background: $orange;
+      text-align: center;
+      color: black;
+      font-weight: bold;
+      line-height: 1.25;
+    }
+  }
+
+  .cm-lint-marker-error {
+    @extend .cm-lint-marker-warning;
+
+    &::before {
       border-radius: 50%;
       background: $red;
-      text-align: center;
-      color: white;
-      font-weight: bold;
-      line-height: 1em;
+      line-height: 1;
+      clip-path: none;
     }
   }
 
