@@ -68,6 +68,7 @@ export type ParameterObject = {
   start: number,
   end: number,
   given: Record<string, string>,
+  givenKeys: string[],
   phraseParameters: string[],
   phraseDefaults: string[],
   phraseTypes: string[]

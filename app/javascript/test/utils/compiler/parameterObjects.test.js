@@ -29,6 +29,7 @@ describe("parameterObjects.js", () => {
         start: 12,
         end: 33,
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -42,6 +43,7 @@ describe("parameterObjects.js", () => {
         start: 18,
         end: 39,
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
         phraseParameters: [],
         phraseDefaults: [],
         phraseTypes: []
@@ -53,6 +55,7 @@ describe("parameterObjects.js", () => {
     it("Should handle white space as expected", () => {
       const expected = {
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -74,6 +77,7 @@ describe("parameterObjects.js", () => {
         start: 49,
         end: 58,
         given: { Two: "2" },
+        givenKeys: ["Two"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -87,6 +91,21 @@ describe("parameterObjects.js", () => {
         start: 45,
         end: 168,
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
+        phraseParameters: ["One", "Two", "Three"],
+        phraseDefaults: [0, 0, 0]
+      }
+
+      expect(getFirstParameterObject(content)).toEqual(expected)
+    })
+
+    it("Should keep duplicated keys in givenKeys array and keep the last given value", () => {
+      const content = "Some Action({ One: 10, Three: 20, Three: 30 })"
+      const expected = {
+        start: 12,
+        end: 44,
+        given: { One: "10", Three: "30" },
+        givenKeys: ["One", "Three", "Three"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -103,7 +122,7 @@ describe("parameterObjects.js", () => {
         Three: "20"
       }
 
-      expect(parseParameterObjectContent(content)).toEqual(expected)
+      expect(parseParameterObjectContent(content).result).toEqual(expected)
     })
 
     it("Should ignore [linemarker]s", () => {
@@ -113,7 +132,7 @@ describe("parameterObjects.js", () => {
         Three: "20"
       }
 
-      expect(parseParameterObjectContent(content)).toEqual(expected)
+      expect(parseParameterObjectContent(content).result).toEqual(expected)
     })
   })
 

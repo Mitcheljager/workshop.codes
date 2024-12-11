@@ -29,19 +29,24 @@ export function evaluateParameterObjects(joinedItems: string): string {
 }
 
 /** Obtain an object out of the string contents of a parameter object */
-export function parseParameterObjectContent(innerContent: string): Record<string, string> {
+export function parseParameterObjectContent(innerContent: string): { result: Record<string, string>, keys: string[] } {
   const splitParameters = splitArgumentsString(innerContent)
   const result: Record<string, string> = {}
+  const keys: string[] = []
 
   splitParameters.forEach(item => {
     let [key, value] = item.split(/:(.*)/s)
+
     key = key.replace(/\[linemarker\].*?\[\/linemarker\]/, "").trim()
     value = (value || "").trim()
+
     if (!key) return
+
+    keys.push(key)
     result[key] = value
   })
 
-  return result
+  return { result, keys }
 }
 
 /**
@@ -65,9 +70,9 @@ export function getFirstParameterObject(content: string, startFromIndex = 0): Pa
   const phrase = getPhraseFromIndex(content, match.index)
   const completion = get(completionsMap).find(item => item.args_length && item.label.replace(" ", "") === phrase.replace(" ", ""))
   const innerContent = content.slice(match.index + match[0].length, end).trim()
-  const given = parseParameterObjectContent(innerContent)
+  const { result: given, keys: givenKeys } = parseParameterObjectContent(innerContent)
 
-  const result = { start: start + startFromIndex, end: end + startFromIndex, given }
+  const result = { start: start + startFromIndex, end: end + startFromIndex, given, givenKeys }
 
   // Return a false object to replace contents of unfound phrase
   if (!completion) return {

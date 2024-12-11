@@ -54,7 +54,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
       position: fileWideActionNameStart,
       run() {
         const parameterObject = state.doc.sliceString(fileWideParameterObjectFrom + 1, fileWideParameterObjectTo - 1)
-        const parameters = parseParameterObjectContent(parameterObject)
+        const parameters = parseParameterObjectContent(parameterObject).result
 
         const argumentList = completion.parameter_keys
           .map((key, index) => parameters[key] ?? completion.parameter_defaults[index])

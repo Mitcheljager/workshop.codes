@@ -140,9 +140,14 @@ function findIncorrectArgsLength(content: string): void {
 
           if (!parameterObject) break
 
-          const invalidArgument = Object.keys(parameterObject.given).filter(i => i && !parameterObject.phraseParameters.includes(i) && !i.startsWith("//"))
+          const invalidArgument = parameterObject.givenKeys.filter(i => i && !parameterObject.phraseParameters.includes(i) && !i.startsWith("//"))
+          const duplicateArgument = parameterObject.givenKeys.find((key, index) => parameterObject.givenKeys.indexOf(key) !== index)
+
           if (invalidArgument?.length) {
             message = `Argument(s) "${invalidArgument.join(", ")}" are not valid for "${name}"`
+            severity = "warning"
+          } else if (duplicateArgument) {
+            message = `Argument "${duplicateArgument}" is duplicated`
             severity = "warning"
           } else {
             break
