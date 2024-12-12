@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString, getCommasIndexesOutsideQuotes } from "@utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString, getCommasIndexesOutsideQuotes, inConfigType } from "@utils/parse"
 import { describe, it, expect } from "vitest"
 
 describe("parse.js", () => {
@@ -158,6 +158,41 @@ describe("parse.js", () => {
 
     it("Should return an empty array no input was given", () => {
       expect(getCommasIndexesOutsideQuotes("")).toEqual([])
+    })
+  })
+
+  describe("inConfigType", () => {
+    it("Should return relevant config type when position is inside", () => {
+      const input = "event { some event } actions { some action } conditions { some condition }"
+      expect(inConfigType(input, 10)).toBe("event")
+      expect(inConfigType(input, 30)).toBe("actions")
+      expect(inConfigType(input, 60)).toBe("conditions")
+    })
+
+    it("Should return relevant config type regardless of white space", () => {
+      const input = `event
+      {
+        some event }
+
+      actions { some action }
+
+      conditions
+        { some condition }`
+      expect(inConfigType(input, 25)).toBe("event")
+      expect(inConfigType(input, 55)).toBe("actions")
+      expect(inConfigType(input, 95)).toBe("conditions")
+    })
+
+    it("Should return null when no relevant phrases are given", () => {
+      expect(inConfigType("Some phrase", 5)).toBe(null)
+      expect(inConfigType("Hey", 2)).toBe(null)
+      expect(inConfigType("actions", 3)).toBe(null)
+    })
+
+    it("Should return null when start index is out of range", () => {
+      expect(inConfigType("actions { }", 50)).toBe(null)
+      expect(inConfigType("actions { }", -1)).toBe(null)
+      expect(inConfigType("actions { }", 0)).toBe(null)
     })
   })
 })

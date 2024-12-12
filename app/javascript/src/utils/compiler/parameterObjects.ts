@@ -129,8 +129,8 @@ export function directlyInsideParameterObject(content: string, startIndex = 0): 
 
     if (bracketCount < 0) {
       // Only count as parameter object when ( proceeds {, while allowing white space. To prevent things like `actions {` matching as objects.
-      if (/[\s]/.test(content[index])) continue
-      if (content[index] == "(") break
+      if (/\s/.test(content[index])) continue
+      if (content[index] === "(") break
     }
   }
 

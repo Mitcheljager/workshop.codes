@@ -75,36 +75,23 @@
     padding-right: 2.15rem;
     font-size: 0.75em;
 
-    &-value::after {
-      content: "Value";
-    }
+    $types: (
+      value: "Value",
+      action: "Action",
+      event: "Event",
+      constant: "Const",
+      hero: "Hero",
+      map: "Map",
+      variable: "Other",
+      keyword: "Key",
+      rule: "Rule",
+      snippet: "Snippet"
+    );
 
-    &-action::after {
-      content: "Action";
-    }
-
-    &-event::after {
-      content: "Event";
-    }
-
-    &-constant::after {
-      content: "Const";
-    }
-
-    &-hero::after {
-      content: "Hero";
-    }
-
-    &-map::after {
-      content: "Map";
-    }
-
-    &-variable::after {
-      content: "Other";
-    }
-
-    &-keyword::after {
-      content: "Key";
+    @each $name, $type in $types {
+      &-#{$name}::after {
+        content: "#{$type}";
+      }
     }
   }
 

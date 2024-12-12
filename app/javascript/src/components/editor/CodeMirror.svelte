@@ -18,7 +18,7 @@
   import { foldBrackets } from "@lib/foldBrackets"
   import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "@stores/editor"
   import { translationsMap } from "@stores/translationKeys"
-  import { getPhraseFromPosition } from "@utils/parse"
+  import { getPhraseFromPosition, inConfigType } from "@utils/parse"
   import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"
   import { get } from "svelte/store"
   import { indentedLineWrap } from "@utils/codemirror/indentedLineWrap"
@@ -196,6 +196,7 @@
     } else if (word.text.includes("@t")) {
       specialOverwrite = $translationsMap
     } else if ($settings["autocomplete-parameter-objects"]) {
+      // Limit completions if the cursor is position for a parameter object key, if the parameter object is valid.
       const insideParameterObject = directlyInsideParameterObject(context.state.doc.toString(), context.pos)
 
       if (insideParameterObject?.phraseParameters.length) {
@@ -203,10 +204,28 @@
       }
     }
 
+    const totalCompletions = [...$completionsMap, ...$variablesMap, ...$subroutinesMap, ...extraCompletions]
+
+    // Limit completions by where in the rule the cursor is. Some types are not allowed certain parts.
+    // For example, actions don't make sense within the event or conditions.
+    if (!specialOverwrite) {
+      const configType = inConfigType(context.state.doc.toString(), context.pos)
+
+      if (configType) {
+        const excludeTypes = {
+          event: ["variable", "map", "action", "value", "snippet", "rule"],
+          conditions: ["action", "event", "snippet", "rule"],
+          actions: ["event", "rule"]
+        }
+
+        specialOverwrite = totalCompletions.filter((c) => !excludeTypes[configType].includes(c.type))
+      }
+    }
+
     return {
       from: word.from + add,
       to: word.to,
-      options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...$subroutinesMap, ...extraCompletions],
+      options: specialOverwrite || totalCompletions,
       validFor: /^(?:[a-zA-Z0-9]+)$/i
     }
   }

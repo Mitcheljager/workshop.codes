@@ -1,5 +1,5 @@
 import type { Line } from "@codemirror/state"
-import type { Range } from "@src/types/editor"
+import type { ConfigType, Range } from "@src/types/editor"
 
 export function getClosingBracket(content: string, characterOpen = "{", characterClose = "}", start = 0): number {
   let closePos = start
@@ -151,4 +151,36 @@ export function getCommasIndexesOutsideQuotes(string: string): number[] {
   }
 
   return commaIndexes
+}
+
+/**
+ * Returns whether the position is inside event, conditions, actions, or none
+ */
+export function inConfigType(content: string, startIndex = 0): ConfigType | null {
+  if (startIndex > content.length) return null
+  if (startIndex < 0) return null
+
+  let bracketCount = 0
+  let index = 0
+  for (index = startIndex - 1; index > 0; index--) {
+    if (content[index] === "{") bracketCount--
+    if (content[index] === "}") bracketCount++
+
+    if (bracketCount < 0) {
+      if (/\s/.test(content[index]) || content[index] === "{") continue
+
+      if (content[index] === "(") bracketCount++
+      else break
+    }
+  }
+
+  if (index <= 0) return null
+
+  const phraseStart = getPhraseEnd(content, index, -1)
+  const phraseEnd = getPhraseEnd(content, index, 1)
+  const phrase = content.slice(phraseStart, phraseEnd + 1).trim()
+
+  if (["event", "conditions", "actions"].includes(phrase)) return phrase as ConfigType
+
+  return null
 }
