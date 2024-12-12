@@ -115,5 +115,6 @@ export const settings = writable({
   "highlight-trailing-whitespace": true,
   "remove-trailing-whitespace-on-save": true,
   "tooltip-hover-delay": 50,
-  "rainbow-brackets": false
+  "rainbow-brackets": false,
+  "context-based-completions": true
 })

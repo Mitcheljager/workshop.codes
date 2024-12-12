@@ -21,7 +21,7 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
     specialOverwrite = get(mixinsMap)
   } else if (word.text.includes("@t")) {
     specialOverwrite = get(translationsMap)
-  } else if (get(settings)["autocomplete-parameter-objects"]) {
+  } else if (get(settings)["context-based-completions"]) {
     // Limit completions if the cursor is position for a parameter object key, if the parameter object is valid.
     const insideParameterObject = directlyInsideParameterObject(context.state.doc.toString(), context.pos)
 
@@ -39,7 +39,7 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
 
   // Limit completions by where in the rule the cursor is. Some types are not allowed certain parts.
   // For example, actions don't make sense within the event or conditions.
-  if (!specialOverwrite) {
+  if (!specialOverwrite && get(settings)["context-based-completions"]) {
     const configType = inConfigType(context.state.doc.toString(), context.pos)
 
     if (configType) {

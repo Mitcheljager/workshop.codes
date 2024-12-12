@@ -192,6 +192,19 @@
 
       <hr>
 
+      <div class="checkbox mt-1/8">
+        <input id="context-based-completions" type="checkbox" bind:checked={$settings["context-based-completions"]} />
+        <label for="context-based-completions">
+          Context based completions
+        </label>
+      </div>
+
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        The autocomplete window will only show completions that make sense for the location. For example; If you are writing in the conditions block, no actions will show.
+      </div>
+
+      <hr>
+
       <div class="form-group mt-1/4">
         <label for="">Tooltip hover delay in milliseconds</label>
 
