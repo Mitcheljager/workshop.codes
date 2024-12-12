@@ -153,16 +153,14 @@ export function getCommasIndexesOutsideQuotes(string: string): number[] {
   return commaIndexes
 }
 
-/**
- * Returns whether the position is inside event, conditions, actions, or none
- */
+/** Returns whether the position is inside event, conditions, actions, or none */
 export function inConfigType(content: string, startIndex = 0): ConfigType | null {
   if (startIndex > content.length) return null
   if (startIndex < 0) return null
 
   let bracketCount = 0
   let index = 0
-  for (index = startIndex - 1; index > 0; index--) {
+  for (index = startIndex - 1; index >= 0; index--) {
     if (content[index] === "{") bracketCount--
     if (content[index] === "}") bracketCount++
 
@@ -183,4 +181,17 @@ export function inConfigType(content: string, startIndex = 0): ConfigType | null
   if (["event", "conditions", "actions"].includes(phrase)) return phrase as ConfigType
 
   return null
+}
+
+/** Whether or not a position is inside a value, determine by being inside of parenthesis `()` */
+export function isInValue(content: string, startIndex = 0): boolean {
+  let parenthesisCount = 0
+  let index = 0
+  for (index = startIndex - 1; index >= 0; index--) {
+    if (content[index] === "(") parenthesisCount--
+    if (content[index] === ")") parenthesisCount++
+    if (content[index] === ";") break
+  }
+
+  return parenthesisCount < 0
 }

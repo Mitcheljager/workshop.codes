@@ -108,4 +108,4 @@ export type Variables = {
 
 export type Severity = "hint" | "info" | "warning" | "error"
 
-export type ConfigType = "event" | "conditions" | "actions"
+export type ConfigType = "event" | "conditions" | "actions" | "value"

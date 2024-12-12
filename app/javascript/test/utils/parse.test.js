@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString, getCommasIndexesOutsideQuotes, inConfigType } from "@utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString, getCommasIndexesOutsideQuotes, inConfigType, isInValue } from "@utils/parse"
 import { describe, it, expect } from "vitest"
 
 describe("parse.js", () => {
@@ -164,6 +164,7 @@ describe("parse.js", () => {
   describe("inConfigType", () => {
     it("Should return relevant config type when position is inside", () => {
       const input = "event { some event } actions { some action } conditions { some condition }"
+
       expect(inConfigType(input, 10)).toBe("event")
       expect(inConfigType(input, 30)).toBe("actions")
       expect(inConfigType(input, 60)).toBe("conditions")
@@ -178,6 +179,7 @@ describe("parse.js", () => {
 
       conditions
         { some condition }`
+
       expect(inConfigType(input, 25)).toBe("event")
       expect(inConfigType(input, 55)).toBe("actions")
       expect(inConfigType(input, 95)).toBe("conditions")
@@ -193,6 +195,49 @@ describe("parse.js", () => {
       expect(inConfigType("actions { }", 50)).toBe(null)
       expect(inConfigType("actions { }", -1)).toBe(null)
       expect(inConfigType("actions { }", 0)).toBe(null)
+    })
+  })
+
+  describe("isInValue", () => {
+    it("Should return true if position is inside of parenthesis", () => {
+      const input = "Some Action(Some Value) Some Second Action(Some Value)"
+
+      expect(isInValue(input, 15)).toBe(true)
+      expect(isInValue(input, 45)).toBe(true)
+    })
+
+    it("Should return false if position is not inside of parenthesis", () => {
+      const input = "Some Action(Some Value) Some Second Action(Some Value)"
+
+      expect(isInValue(input, 5)).toBe(false)
+      expect(isInValue(input, 35)).toBe(false)
+    })
+
+    it("Should return false if position is outside of range", () => {
+      const input = "Some Action(Some Value) Some Second Action(Some Value)"
+
+      expect(isInValue(input, -5)).toBe(false)
+      expect(isInValue(input, 100)).toBe(false)
+    })
+
+    it("Should return true if inside of theoretical value, even if it's not closed", () => {
+      const input = "Some Action(Some Value"
+
+      expect(isInValue(input, 15)).toBe(true)
+    })
+
+    it("Should return true if entire input is in parenthesis", () => {
+      const input = "(Some Value)"
+
+      expect(isInValue(input, 5)).toBe(true)
+    })
+
+    it("Should handle nested values at any position", () => {
+      const input = "Some Action(Some Action(Some Action(Some Value)))"
+
+      for (let i = 12; i < input.length; i++) {
+        expect(isInValue(input, i)).toBe(true)
+      }
     })
   })
 })

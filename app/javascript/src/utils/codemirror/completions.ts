@@ -3,7 +3,7 @@ import { translationsMap } from "@src/stores/translationKeys"
 import type { ExtendedCompletion } from "@src/types/editor"
 import { directlyInsideParameterObject } from "@utils/compiler/parameterObjects"
 import { extraCompletions } from "@src/lib/extraCompletions"
-import { inConfigType } from "@utils/parse"
+import { inConfigType, isInValue } from "@utils/parse"
 import type { CompletionContext, CompletionResult } from "@codemirror/autocomplete"
 import { get } from "svelte/store"
 
@@ -38,15 +38,18 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
   ]
 
   // Limit completions by where in the rule the cursor is. Some types are not allowed certain parts.
-  // For example, actions don't make sense within the event or conditions.
+  // For example, actions don't make sense within event or conditions blocks.
   if (!specialOverwrite && get(settings)["context-based-completions"]) {
-    const configType = inConfigType(context.state.doc.toString(), context.pos)
+    const text = context.state.doc.toString()
+    const isValue = isInValue(text, context.pos)
+    const configType = isValue ? "value" : inConfigType(text, context.pos)
 
     if (configType) {
       const excludeTypes = {
         event: ["variable", "map", "action", "value", "snippet", "rule"],
         conditions: ["action", "event", "snippet", "rule"],
-        actions: ["event", "rule"]
+        actions: ["event", "rule"],
+        value: ["action", "event", "snippet", "rule"]
       }
 
       specialOverwrite = totalCompletions.filter((c) => !excludeTypes[configType].includes(c.type || ""))
