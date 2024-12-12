@@ -285,5 +285,11 @@ describe("parameterObjects.js", () => {
 
       expect(directlyInsideParameterObject(input, 20)).toBe(null)
     })
+
+    it("Should ignore objects that use curly brackets but are not parameter objects", () => {
+      const input = "conditions { test; Some Action({ One }); }"
+
+      expect(directlyInsideParameterObject(input, 15)).toBe(null)
+    })
   })
 })

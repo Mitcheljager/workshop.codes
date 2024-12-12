@@ -127,7 +127,11 @@ export function directlyInsideParameterObject(content: string, startIndex = 0): 
       break
     }
 
-    if (bracketCount < 0) break
+    if (bracketCount < 0) {
+      // Only count as parameter object when ( proceeds {, while allowing white space. To prevent things like `actions {` matching as objects.
+      if (/[\s]/.test(content[index])) continue
+      if (content[index] == "(") break
+    }
   }
 
   if (isNotKey) return null
@@ -136,5 +140,5 @@ export function directlyInsideParameterObject(content: string, startIndex = 0): 
 
   if (phraseStart < 0) return null
 
-  return getFirstParameterObject(content.slice(phraseStart)) || null
+  return getFirstParameterObject(content.slice(phraseStart, content.length)) || null
 }
