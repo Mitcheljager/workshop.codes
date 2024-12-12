@@ -33,7 +33,7 @@
       content: view.state.doc.toString()
     }
 
-    const index = $items.findIndex(i => i.id == $currentItem.id)
+    const index = $items.findIndex(i => i.id == $currentItem?.id)
     if (index !== -1) $items[index] = $currentItem
   }, 250)
 
@@ -43,8 +43,8 @@
   let updatingState = false
 
   $: if ($currentProjectUUID) $editorStates = {}
-  $: if ($currentItem.id != currentId && view) updateEditorState()
-  $: if ($currentItem.forceUpdate) updateEditorState()
+  $: if ($currentItem?.id != currentId && view) updateEditorState()
+  $: if ($currentItem?.forceUpdate) updateEditorState()
 
   onMount(() => {
     view = new EditorView({
