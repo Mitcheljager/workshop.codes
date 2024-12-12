@@ -102,6 +102,10 @@
     &-variable::after {
       content: "Other";
     }
+
+    &-keyword::after {
+      content: "Key";
+    }
   }
 
   .cm-tooltip {
