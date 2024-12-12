@@ -116,7 +116,7 @@
       `
 
       params.detail_full = detailFull
-      params.detail = `(${detail.join(", ").slice(0, 30)}${detail.join(", ").length > 30 ? "..." : ""})`
+      params.detail = detail.length ? `(${detail.join(", ").slice(0, 30)}${detail.join(", ").length > 30 ? "..." : ""})` : ""
 
       if (!params.args_length) return params
 
