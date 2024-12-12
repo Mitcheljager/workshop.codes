@@ -140,5 +140,10 @@ export function directlyInsideParameterObject(content: string, startIndex = 0): 
 
   if (phraseStart < 0) return null
 
-  return getFirstParameterObject(content.slice(phraseStart, content.length)) || null
+  const parameterObject = getFirstParameterObject(content.slice(phraseStart, content.length))
+
+  if (!parameterObject) return null
+  if (parameterObject.start > startIndex) return null
+
+  return  parameterObject
 }
