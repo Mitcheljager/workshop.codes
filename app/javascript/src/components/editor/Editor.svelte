@@ -64,11 +64,11 @@
     const { events, values, actions, constants, heroes, maps } = data
 
     const mappedEvents = objectToKeyword(events, "event")
-    const mappedValues = objectToKeyword(values, "text")
-    const mappedActions = objectToKeyword(actions, "function")
+    const mappedValues = objectToKeyword(values, "value")
+    const mappedActions = objectToKeyword(actions, "action")
     const mappedConstants = objectToKeyword(Object.values(constants).map(c => Object.values(c)).flat(1), "constant")
-    const mappedHeroes = objectToKeyword(heroes, "text")
-    const mappedMaps = objectToKeyword(maps, "text")
+    const mappedHeroes = objectToKeyword(heroes, "hero")
+    const mappedMaps = objectToKeyword(maps, "map")
 
     return [...mappedEvents, ...mappedValues, ...mappedActions, ...mappedConstants, ...mappedHeroes, ...mappedMaps]
   }

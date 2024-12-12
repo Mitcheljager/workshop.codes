@@ -72,11 +72,36 @@
   }
 
   .cm-completionIcon {
-    padding-right: 1rem;
-  }
+    padding-right: 2.15rem;
+    font-size: 0.75em;
 
-  .cm-completionIcon-event::after {
-    content: "∈";
+    &-value::after {
+      content: "Value";
+    }
+
+    &-action::after {
+      content: "Action";
+    }
+
+    &-event::after {
+      content: "Event";
+    }
+
+    &-constant::after {
+      content: "Const";
+    }
+
+    &-hero::after {
+      content: "Hero";
+    }
+
+    &-map::after {
+      content: "Map";
+    }
+
+    &-variable::after {
+      content: "Other";
+    }
   }
 
   .cm-tooltip {
