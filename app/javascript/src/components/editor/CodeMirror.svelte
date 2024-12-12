@@ -25,6 +25,7 @@
   import { removeTrailingWhitespace } from "@utils/codemirror/removeTrailingWhitespace"
   import debounce from "@src/debounce"
   import { directlyInsideParameterObject } from "@src/utils/compiler/parameterObjects"
+  import { getCompletions } from "@src/utils/codemirror/completions"
 
   const dispatch = createEventDispatcher()
   const updateItem = debounce(() => {
@@ -50,6 +51,10 @@
     view = new EditorView({
       parent: element
     })
+
+    // This is here purely to initiliaze these derived stores, which might not happen in time for CodeMirror completions
+    // I don't fully understand how this works, but it does.
+    ;[$variablesMap, $subroutinesMap, $mixinsMap, $translationsMap]
   })
 
   onDestroy(() => $editorStates = {})
@@ -62,7 +67,7 @@
         StreamLanguage.define(OWLanguage),
         autocompletion({
           activateOnTyping: true,
-          override: [completions],
+          override: [getCompletions],
           closeOnBlur: false,
           hintOptions: /[()\[\]{};:>,+-=]/
         }),
@@ -183,53 +188,6 @@
     })
   }
 
-  function completions(context) {
-    const word = context.matchBefore(/[@a-zA-Z0-9_ ]*/)
-
-    const add = word.text.search(/\S|$/)
-    if (word.from + add == word.to && !context.explicit) return null
-
-    // There's probably a better way of doing this
-    let specialOverwrite = null
-    if (word.text.includes("@i")) {
-      specialOverwrite = $mixinsMap
-    } else if (word.text.includes("@t")) {
-      specialOverwrite = $translationsMap
-    } else if ($settings["autocomplete-parameter-objects"]) {
-      // Limit completions if the cursor is position for a parameter object key, if the parameter object is valid.
-      const insideParameterObject = directlyInsideParameterObject(context.state.doc.toString(), context.pos)
-
-      if (insideParameterObject?.phraseParameters.length) {
-        specialOverwrite = insideParameterObject.phraseParameters.map(label => ({ label, type: "keyword" }))
-      }
-    }
-
-    const totalCompletions = [...$completionsMap, ...$variablesMap, ...$subroutinesMap, ...extraCompletions]
-
-    // Limit completions by where in the rule the cursor is. Some types are not allowed certain parts.
-    // For example, actions don't make sense within the event or conditions.
-    if (!specialOverwrite) {
-      const configType = inConfigType(context.state.doc.toString(), context.pos)
-
-      if (configType) {
-        const excludeTypes = {
-          event: ["variable", "map", "action", "value", "snippet", "rule"],
-          conditions: ["action", "event", "snippet", "rule"],
-          actions: ["event", "rule"]
-        }
-
-        specialOverwrite = totalCompletions.filter((c) => !excludeTypes[configType].includes(c.type))
-      }
-    }
-
-    return {
-      from: word.from + add,
-      to: word.to,
-      options: specialOverwrite || totalCompletions,
-      validFor: /^(?:[a-zA-Z0-9]+)$/i
-    }
-  }
-
   function autocompleteFormatting(view, transaction) {
     indentMultilineInserts(view, transaction)
     if ($settings["autocomplete-semicolon"])
@@ -239,7 +197,7 @@
   function insertSemicolon(view, transaction) {
     const line = view.state.doc.lineAt(transaction.changedRanges[0].fromB)
     const phrase = getPhraseFromPosition(line, transaction.changedRanges[0].fromB)
-    const possibleValues = get(completionsMap).filter(v => v.type === "function")
+    const possibleValues = $completionsMap.filter(v => v.type === "function")
     const validValue = possibleValues.find(v => v.label == phrase.text)
 
     if (!validValue?.type) return
