@@ -195,7 +195,7 @@
       specialOverwrite = $mixinsMap
     } else if (word.text.includes("@t")) {
       specialOverwrite = $translationsMap
-    } if ($settings["autocomplete-parameter-objects"]) {
+    } else if ($settings["autocomplete-parameter-objects"]) {
       const insideParameterObject = directlyInsideParameterObject(context.state.doc.toString(), context.pos)
 
       if (insideParameterObject?.phraseParameters.length) {
