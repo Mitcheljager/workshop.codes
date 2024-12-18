@@ -1,5 +1,6 @@
 import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
 import { evaluateParameterObjects } from "@utils/compiler/parameterObjects"
+import { extractAndInsertMixins } from "@utils/compiler/mixins"
 import type { Range, Variables } from "@src/types/editor"
 
 // NOTE: The fact variable names can start with a decimal is intentional.
@@ -137,7 +138,9 @@ function getLiteralPlayerVariables(source: string, stringRanges: Range[]): strin
 }
 
 export function getVariables(joinedItems: string): Variables {
+  joinedItems = extractAndInsertMixins(joinedItems)
   joinedItems = evaluateParameterObjects(joinedItems)
+
   const stringRanges = findRangesOfStrings(joinedItems)
 
   const playerVariablesFromActions = []
