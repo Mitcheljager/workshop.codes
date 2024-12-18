@@ -15,6 +15,8 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
   let add = word.text.search(/\S|$/)
   if (word.from + add == word.to && !context.explicit) return null
 
+  const wordFromPeriod = word.text.trim().slice(0, word.text.trim().indexOf(".") + 1)
+
   // There's probably a better way of doing this
   let specialOverwrite = null
   if (word.text.includes("@i")) {
@@ -22,10 +24,10 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
   } else if (word.text.includes("@t")) {
     specialOverwrite = get(translationsMap)
   } else if (word.text.includes("Global.")) {
-    add += word.text.trim().slice(0, word.text.trim().indexOf(".") + 1).length // Start from `Global.`
+    add += wordFromPeriod.length // Start from `Global.`
     specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Global Variable")
-  } else if (["Local Player.", "Event Player.", "Healee.", "Healer.", "Attacker.", "Victim."].includes(word.text.slice(0, word.text.indexOf(".") + 1))) {
-    add += word.text.trim().slice(0, word.text.trim().indexOf(".") + 1).length // Start from `Match.`
+  } else if (["Local Player.", "Event Player.", "Healee.", "Healer.", "Attacker.", "Victim."].includes(wordFromPeriod)) {
+    add += wordFromPeriod.length // Start from `Match.`
     specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Player Variable")
   } else if (get(settings)["context-based-completions"]) {
     // Limit completions if the cursor is position for a parameter object key, if the parameter object is valid.
