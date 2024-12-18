@@ -22,10 +22,10 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
   } else if (word.text.includes("@t")) {
     specialOverwrite = get(translationsMap)
   } else if (word.text.includes("Global.")) {
-    add += word.text.length // Start from the .
+    add += word.text.trim().length // Start from the .
     specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Global Variable")
-  } else if (["Player.", "Healee.", "Healer.", "Attacker.", "Victim."].includes(word.text)) {
-    add += word.text.length // Start from the .
+  } else if (["Local Player.", "Event Player.", "Healee.", "Healer.", "Attacker.", "Victim."].includes(word.text)) {
+    add += word.text.trim().length // Start from the .
     specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Player Variable")
   } else if (get(settings)["context-based-completions"]) {
     // Limit completions if the cursor is position for a parameter object key, if the parameter object is valid.
