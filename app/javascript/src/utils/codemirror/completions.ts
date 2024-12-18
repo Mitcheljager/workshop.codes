@@ -4,15 +4,15 @@ import type { ExtendedCompletion } from "@src/types/editor"
 import { directlyInsideParameterObject } from "@utils/compiler/parameterObjects"
 import { extraCompletions } from "@src/lib/extraCompletions"
 import { inConfigType, isInValue } from "@utils/parse"
-import type { CompletionContext, CompletionResult } from "@codemirror/autocomplete"
+import type { Completion, CompletionContext, CompletionResult } from "@codemirror/autocomplete"
 import { get } from "svelte/store"
 
 export function getCompletions(context: CompletionContext): CompletionResult | null {
-  const word = context.matchBefore(/[@a-zA-Z0-9_ ]*/)
+  const word = context.matchBefore(/[@a-zA-Z0-9_ .]*/)
 
   if (!word) return null
 
-  const add = word.text.search(/\S|$/)
+  let add = word.text.search(/\S|$/)
   if (word.from + add == word.to && !context.explicit) return null
 
   // There's probably a better way of doing this
@@ -21,6 +21,12 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
     specialOverwrite = get(mixinsMap)
   } else if (word.text.includes("@t")) {
     specialOverwrite = get(translationsMap)
+  } else if (word.text.includes("Global.")) {
+    add += word.text.length // Start from the .
+    specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Global Variable")
+  } else if (["Player.", "Healee.", "Healer.", "Attacker.", "Victim."].includes(word.text)) {
+    add += word.text.length // Start from the .
+    specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Player Variable")
   } else if (get(settings)["context-based-completions"]) {
     // Limit completions if the cursor is position for a parameter object key, if the parameter object is valid.
     const insideParameterObject = directlyInsideParameterObject(context.state.doc.toString(), context.pos)
