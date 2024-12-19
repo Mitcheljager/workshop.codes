@@ -869,7 +869,7 @@
     - Player
     - Array: Player
     default: Event Player
-  - name: KILLER
+  - name: Killer
     description: The player who will receive credit for the kill. A killer of null indicates no player will receive credit.
     type: Player
     default: 'Null'
