@@ -96,7 +96,6 @@
   }
 
   .cm-tooltip {
-    overflow: hidden;
     border-radius: $border-radius * 0.5;
     border: 0;
     background: darken($bg-dark, 5%);
@@ -112,6 +111,14 @@
       font-size: 0.75rem;
 
       @include styled-scrollbar;
+    }
+
+    &.cm-completionInfo {
+      margin: -2px 0 0 0.5em;
+      border-radius: $border-radius * 0.5;
+      border: 1px solid $bg-darker;
+      box-shadow: $shadow;
+      background: $bg-dark !important;
     }
 
     > ul {

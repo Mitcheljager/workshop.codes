@@ -159,7 +159,8 @@
 
       // Add arguments to info box
       params.info += "\n\nProperties: "
-      params.info += detail
+      params.info += params.parameter_keys.join(", ")
+      params.info += `\n\nReturn: ${returnValue.replaceAll("<em>", "").replaceAll("</em>", "")}`
 
       return params
     })
