@@ -146,10 +146,6 @@ class Wiki::ArticlesController < Wiki::BaseController
     end
   end
 
-  def redirect_to_latest_article
-
-  end
-
   def create_wiki_edit(content_type, article_id, notes = "")
     Wiki::Edit.create(
       user_id: current_user.id,
