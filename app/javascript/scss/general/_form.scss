@@ -330,7 +330,9 @@ input[type="file"] {
 
 .url-input {
   display: flex;
+  align-items: center;
   color: $text-color;
+  white-space: nowrap;
 }
 
 .inline-input {

@@ -29,11 +29,11 @@ class CollectionsController < ApplicationController
 
   def new
     @collection = Collection.new
+    @collection.nice_url = SecureRandom.alphanumeric(6).downcase
   end
 
   def create
     @collection = Collection.new(collection_params)
-    @collection.nice_url = SecureRandom.alphanumeric(6).downcase
     @collection.user_id = current_user.id
 
     if @collection.save
@@ -99,7 +99,7 @@ class CollectionsController < ApplicationController
   private
 
   def collection_params
-    params.require(:collection).permit(:title, :cover_image, :description, :display_type, { collection_posts: [] })
+    params.require(:collection).permit(:title, :nice_url, :cover_image, :description, :display_type, { collection_posts: [] })
   end
 
   def set_collection_id_for_posts(current_ids = [], initial_ids = [])

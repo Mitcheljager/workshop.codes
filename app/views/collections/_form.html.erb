@@ -12,6 +12,25 @@
     </nav>
 
     <div class="tabs-content tabs-content--active" data-tab="display">
+
+      <div class="form-group mt-1/2">
+        <%= form.label :nice_url, "Collection URL", class: "form-label" %>
+
+        <label class="form-input url-input">
+          <%= request.base_url %><%= collections_path %>/
+          <%= form.text_field :nice_url, class: "inline-input" %>
+        </label>
+      </div>
+
+      <ul class="form-hint mt-1/4 mb-0">
+        <li><strong>Keep the URL relevant to your collection.</strong></li>
+        <li>Misused URLs will be removed. "parkour-collection" is fine, "privacy-policy" is not.</li>
+        <li>You can use letters, numbers, and dashes "-".</li>
+        <li>All letter must be lowercase. <small>(The URL itself is not case sensitive.)</small></li>
+        <li>Minimum of 5 characters, maximum of 20.</li>
+        <li>Only 1 URL can be active, changing the URL will mean the previous URL will lead to a 404 page.</li>
+      </ul>
+
       <div class="form-group mt-1/2">
         <%= form.label :description, "Description", class: "form-label" %>
 
@@ -54,7 +73,7 @@
 
         <%= hidden_field_tag :remove_cover_image, "", data: { clear_image_flag: "cover" } %>
         <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
-                            data: { action: "clear-image", target: "cover" }  %>
+                            data: { action: "clear-image", target: "cover" } %>
 
         <p class="form-hint mt-1/4 mb-0">
           Image will be processed to a 900x500 format. Max 2MB.
