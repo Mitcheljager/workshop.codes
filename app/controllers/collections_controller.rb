@@ -41,18 +41,18 @@ class CollectionsController < ApplicationController
       set_collection_id_for_posts(collection_params[:collection_posts])
 
       flash[:notice] = "Collection created"
-      redirect_to edit_collection_path(@collection.nice_url)
+      redirect_to edit_collection_path(@collection.id)
     else
       render :new
     end
   end
 
   def edit
-    @collection = current_user.collections.find_by_nice_url!(params[:nice_url].downcase)
+    @collection = current_user.collections.find(params[:id])
   end
 
   def update
-    @collection = current_user.collections.find_by_nice_url!(params[:nice_url].downcase)
+    @collection = current_user.collections.find(params[:id])
 
     initial_ids = @collection.posts.pluck(:id)
     param_ids = (collection_params[:collection_posts] || []).map { |id| id.to_i }
@@ -67,17 +67,17 @@ class CollectionsController < ApplicationController
       end
 
       flash[:alert] = "Successfully saved"
-      redirect_to edit_collection_path(@collection.nice_url)
+      redirect_to edit_collection_path(@collection.id)
     else
       render :edit
     end
   end
 
   def destroy
-    @collection = Collection.where(user_id: current_user.id).find_by_nice_url!(params[:nice_url].downcase)
+    @collection = Collection.where(user_id: current_user.id).find(params[:id])
 
     if @collection.posts.none? && @collection.destroy
-      redirect_to collections_path
+      redirect_to account_collections_path
     else
       render "application/error"
     end

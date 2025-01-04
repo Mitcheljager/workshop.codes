@@ -1,11 +1,11 @@
 <%= render "layouts/account", title: "Edit collection" do %>
-  <%= link_to "View collection", collection_path(@collection.nice_url), class: "button button--secondary mb-1/4" %>
+  <%= link_to "View collection", collection_nice_url_path(@collection.nice_url), class: "button button--secondary mb-1/4" %>
 
-  <%= render "form", url: collection_path(@collection.nice_url) %>
+  <%= render "form", url: collection_path(@collection.id) %>
 
   <% if @collection.posts.length == 0 %>
     <div class="mt-1/2">
-      <%= link_to "Destroy", collection_path(@collection.nice_url),
+      <%= link_to "Destroy", collection_path(@collection.id),
                   class: "text-red",
                   method: :delete,
                   remote: true,
