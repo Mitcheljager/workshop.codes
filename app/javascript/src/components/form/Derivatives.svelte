@@ -20,12 +20,10 @@
         headers: { "Accept": "application/json" }
       }
     }).then(async response => {
-      if (response.ok) {
-        const json = await response.json()
-        return json.map(post => postToResult(post))
-      } else {
-        throw new Error(`${response.status} ${response.statusText}`)
-      }
+      if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
+
+      const json = await response.json()
+      return json.map(post => postToResult(post))
     })
   }
 
