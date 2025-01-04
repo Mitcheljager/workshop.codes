@@ -14,7 +14,7 @@
   async function handleAutoCompleteRequest(value) {
     if (!value) return []
 
-    return new FetchRails(`/code/${value}`).get({
+    return new FetchRails(`search?code=${value}`).get({
       returnResponse: true,
       parameters: {
         headers: { "Accept": "application/json" }
