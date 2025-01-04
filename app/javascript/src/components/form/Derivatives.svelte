@@ -30,7 +30,7 @@
   function postToResult(post) {
     return {
       label: post.code,
-      html: `<strong>${post.code.toUpperCase()}</strong> - ${post.title} by ${post.user.username}`
+      html: `<strong>${post.code.toUpperCase()}</strong> - "${post.title}" by ${post.user.username}`
     }
   }
 </script>
