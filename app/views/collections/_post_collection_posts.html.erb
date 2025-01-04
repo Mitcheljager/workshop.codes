@@ -22,6 +22,6 @@
   <% end %>
 
   <center>
-    <%= link_to "View full collection", collection_path(@collection.nice_url), class: "button button--ghost #{@collection.posts.size > 6 ? "mt-1/4" : "mt-1/2" }" %>
+    <%= link_to "View full collection", collection_nice_url_path(@collection.nice_url), class: "button button--ghost #{@collection.posts.size > 6 ? "mt-1/4" : "mt-1/2" }" %>
   </center>
 </section>
