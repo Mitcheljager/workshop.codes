@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
   after_action :track_action, only: [:show]
 
   def index
-    @collections = Collection.includes(:posts).where("posts_count > ?", 0).order(created_at: :desc).limit(20)
+    @collections = Collection.includes(:posts).where("posts_count > ?", 0).order(created_at: :desc).page(params[:page])
   end
 
   def show

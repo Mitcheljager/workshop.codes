@@ -7,3 +7,5 @@
 <div class="items">
   <%= render collection: @collections, partial: "collections/collection_card", as: :collection %>
 </div>
+
+<%= paginate @collections %>
