@@ -139,7 +139,7 @@ export default class InscrybeInsertImage {
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)
-    this.editor.replaceSelection(`![](${url})`)
+    this.editor.replaceSelection(`![Text description](${url})`)
 
     this.editor.setSelection(cursorPosition, cursorPosition)
 

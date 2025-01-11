@@ -7,6 +7,7 @@ module ContentHelper
     end
 
     def image(link, title, alt_text)
+      alt_text = "" if alt_text == "Text description"
       image_tag(link, title: title, alt: alt_text || "", loading: "lazy")
     end
 

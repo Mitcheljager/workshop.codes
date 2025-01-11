@@ -144,6 +144,7 @@ class InitialiseInscrybeMDE {
       spellChecker: false,
       promptURLs: true,
       insertTexts: {
+        image: ["![Text description](http://", ")"],
         table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n"]
       },
       previewRender: (plainText, preview) => {
