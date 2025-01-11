@@ -126,7 +126,8 @@
   }
 
   function removeImage(id) {
-    if (confirm("Are you sure?")) images = images.filter(i => i.id != id)
+    if (!confirm("Are you sure you wish to remove this image? This can not be undone after saving, but you can always re-upload the image.")) return
+    images = images.filter(i => i.id != id)
   }
 
   async function isAcceptableSize(file) {
