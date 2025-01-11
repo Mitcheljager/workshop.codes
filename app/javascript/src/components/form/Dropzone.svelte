@@ -19,11 +19,12 @@
   export let maxDimensions = 3500
   export let maxSizeMB = 2
 
+  const imagePreviewWidth = 200
+
   let listElement
   let active = false
   let previewImageUrl = ""
 
-  const imagePreviewWidth = 200
   $: updateOrder(images)
 
   onMount(() => {
