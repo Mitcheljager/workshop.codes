@@ -17,6 +17,10 @@
   @include media-min(xl) {
     padding: 0 math.div($margin, 3) 0 0;
   }
+
+  @include high-contrast() {
+    --cog-color: white;
+  }
 }
 
 @keyframes fade-in-header-content {
