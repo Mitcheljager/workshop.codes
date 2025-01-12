@@ -20,8 +20,8 @@ body {
   color: $text-color;
   overflow-x: hidden;
 
-  &.high-contrast {
-    background: darken($body-bg, 5%);
+  @include high-contrast() {
+    background: $black;
   }
 }
 
