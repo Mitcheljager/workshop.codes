@@ -8,6 +8,10 @@
   border-radius: $border-radius;
   box-shadow: $shadow;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &::before {
     content: "";
     display: block;

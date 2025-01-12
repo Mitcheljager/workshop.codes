@@ -99,6 +99,10 @@
   overflow: hidden;
   box-shadow: $shadow;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &[href]:hover,
   &[type]:hover {
     background: darken($bg-dark, 2%);
@@ -149,6 +153,10 @@
 
     @include hover-stack {
       color: $text-color-lightest;
+
+      @include high-contrast() {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -202,6 +210,10 @@
   }
 
   @media (prefers-reduced-motion) {
+    display: none;
+  }
+
+  @include high-contrast() {
     display: none;
   }
 }

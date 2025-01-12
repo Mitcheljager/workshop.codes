@@ -33,6 +33,10 @@ a {
 
   @include hover-stack {
     color: $text-color-lightest;
+
+    @include high-contrast() {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -66,6 +70,10 @@ pre {
   padding: .5rem;
   border-radius: $border-radius * 0.5;
   line-height: 2rem;
+
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
 
   code {
     padding: 0;

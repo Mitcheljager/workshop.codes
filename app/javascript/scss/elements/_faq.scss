@@ -3,6 +3,10 @@
   border-radius: $border-radius;
   background: $bg-darker;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   *:last-child {
     margin-bottom: 0;
   }

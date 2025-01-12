@@ -14,6 +14,10 @@
   text-decoration: none !important;
   overflow: hidden;
 
+  @include high-contrast() {
+    padding: 0;
+  }
+
   &[href]:hover,
   &[type]:hover {
     filter: brightness(1.15);

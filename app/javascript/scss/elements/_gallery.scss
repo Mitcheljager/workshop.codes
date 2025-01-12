@@ -21,6 +21,10 @@
   overflow: hidden;
   cursor: pointer;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &:hover {
     &::before {
       content: "Enlarge";

@@ -200,6 +200,10 @@
 
     @include hover-stack {
       color: $white;
+
+      @include high-contrast() {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -266,6 +270,10 @@
 
     @include hover-stack {
       color: $text-color-lightest;
+
+      @include high-contrast() {
+        text-decoration: underline;
+      }
     }
   }
 

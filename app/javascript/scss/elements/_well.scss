@@ -13,6 +13,10 @@
     align-items: center;
   }
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &--simple {
     box-shadow: none;
     background: transparent
@@ -56,6 +60,12 @@
 
   a {
     text-decoration: none;
+
+    @include hover-stack {
+      @include high-contrast() {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
