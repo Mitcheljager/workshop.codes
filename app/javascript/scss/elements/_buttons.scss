@@ -47,6 +47,10 @@ button {
   cursor: pointer;
   transition: box-shadow 100ms;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &:hover:not([disabled]),
   &:active:not([disabled]),
   &:focus-visible:not([disabled]) {
