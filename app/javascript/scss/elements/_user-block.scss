@@ -26,6 +26,10 @@
   text-decoration: none;
   transition: box-shadow 100ms;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &:hover,
   &:active,
   &:focus {
