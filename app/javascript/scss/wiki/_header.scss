@@ -23,6 +23,10 @@
     @supports (background: -webkit-canvas(squares)) {
       background-image: url("/images/wiki/bg.jpg");
     }
+
+    @include high-contrast() {
+      background-image: none;
+    }
   }
 
   &--small {
