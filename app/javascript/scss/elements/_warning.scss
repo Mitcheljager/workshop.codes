@@ -4,6 +4,10 @@
   text-align: center;
   color: white;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &--alert {
     background: $green;
   }
