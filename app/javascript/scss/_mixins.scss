@@ -107,3 +107,9 @@
     @content;
   }
 }
+
+@mixin high-contrast() {
+  @media (prefers-contrast: more) {
+    @content;
+  }
+}

@@ -15,6 +15,10 @@
     clip-path: polygon(0 0, 100% 0, 100% 120px, 0% 100%);
   }
 
+  @include high-contrast() {
+    display: none;
+  }
+
   &--medium {
     height: 380px;
     clip-path: polygon(0 0, 100% 0, 100% 230px, 0% 100%);
@@ -54,6 +58,8 @@
 
 .logo-background {
   position: relative;
+
+
 
   &::before {
     content: "";
