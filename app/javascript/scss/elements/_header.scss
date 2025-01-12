@@ -19,7 +19,11 @@
   }
 
   @include high-contrast() {
-    --cog-color: white;
+    --cog-color: $white;
+
+    @include light() {
+      --cog-color: $black;
+    }
   }
 }
 

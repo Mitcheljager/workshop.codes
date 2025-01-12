@@ -59,8 +59,6 @@
 .logo-background {
   position: relative;
 
-
-
   &::before {
     content: "";
     display: block;
@@ -95,6 +93,10 @@
 
     @media (min-width: 800px) {
       background-size: contain;
+    }
+
+    @include high-contrast() {
+      display: none;
     }
   }
 }

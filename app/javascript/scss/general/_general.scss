@@ -22,6 +22,10 @@ body {
 
   @include high-contrast() {
     background: $black;
+
+    @include light() {
+      background: $white;
+    }
   }
 }
 
@@ -43,6 +47,16 @@ a {
 mark {
   background: transparent;
   color: var(--primary, $primary);
+
+  @include high-contrast() {
+    color: $black;
+    background: $white;
+
+    @include light() {
+      color: $white;
+      background: $black;
+    }
+  }
 }
 
 hr {
