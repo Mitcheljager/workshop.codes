@@ -70,6 +70,10 @@ $ollie-login-size: 100px;
   border-radius: 50%;
   background: lighten($bg-dark, 5%);
   overflow: hidden;
+
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
 }
 
 .ollie-login__images {
