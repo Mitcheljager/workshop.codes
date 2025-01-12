@@ -15,6 +15,10 @@
     background: lighten($border-color, 10%);
     z-index: 0;
     pointer-events: none;
+
+    @include high-contrast() {
+      background: currentColor;
+    }
   }
 
   &::after {
@@ -35,6 +39,10 @@
     &::before {
       left: calc(2rem + 6px);
       background: $text-color-lightest;
+
+      @include high-contrast() {
+        background: currentColor;
+      }
     }
 
     &::after {
@@ -89,6 +97,10 @@
   @include hover-stack {
     &::before {
       background: $text-color;
+
+      @include high-contrast() {
+        background: currentColor;
+      }
     }
 
     &::after {
@@ -107,6 +119,10 @@
     .switch-checkbox--active & {
       left: calc(1rem + 6px);
       background: $text-color-lightest;
+
+      @include high-contrast() {
+        background: currentColor;
+      }
     }
   }
 

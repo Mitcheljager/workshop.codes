@@ -11,6 +11,10 @@
   font-size: $font-size-base;
   color: $text-color-lightest;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &:focus,
   &:focus-within {
     outline: none;
@@ -148,6 +152,10 @@
     border-color: $text-color;
   }
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &:focus {
     outline: none;
     background-color: lighten($bg-dark, 5%);
@@ -205,6 +213,11 @@
     &:checked {
       background: var(--primary, $primary);
       border: 0;
+
+      @include high-contrast() {
+        background: currentColor;
+        border: 2px solid currentColor;
+      }
     }
 
     &:focus {

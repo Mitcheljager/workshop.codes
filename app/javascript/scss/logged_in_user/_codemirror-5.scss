@@ -5,6 +5,10 @@
   color: $text-color-lightest;
   min-height: 600px;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   .CodeMirror-selectedtext,
   .CodeMirror-selected {
     background: lighten($bg-dark, 20%);
