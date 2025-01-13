@@ -73,7 +73,7 @@
 
   {#if loading}
     <div class="flex justify-center w-100 mt-1/2">
-      <div class="spinner" />
+      <div class="spinner" aria-live="polite" role="status" />
     </div>
   {:else if !hasError}
     {#if backups?.length}

@@ -292,7 +292,7 @@
     </div>
   {:else if loading}
     <div class="fullscreen-overlay">
-      <div class="spinner"/>
+      <div class="spinner" aria-live="polite" role="status" />
     </div>
   {:else}
     <Empty />
