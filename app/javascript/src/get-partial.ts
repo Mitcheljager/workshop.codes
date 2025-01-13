@@ -38,9 +38,11 @@ function getPartial(event: Event | null, element: HTMLElement): void {
   if (targetElement.dataset.loaded == "true") return
   if (!url) return
 
+  targetElement.ariaBusy = "true"
+
   new FetchRails(url).get()
     .then(data => {
-      targetElement.innerHTML = data
+      targetElement.innerHTML = data.toString()
     })
     .then(() => {
       lazyVideo.bind(targetElement)
@@ -65,5 +67,6 @@ function getPartial(event: Event | null, element: HTMLElement): void {
     })
     .finally(() => {
       targetElement.dataset.loaded = "true"
+      targetElement.ariaBusy = "false"
     })
 }

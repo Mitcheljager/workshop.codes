@@ -1,5 +1,5 @@
 <%= form_for @user, url: update_profile_path, remote: true do |form| %>
-  <div class="tabs-content <%= "tabs-content--active" unless params[:tab].present? && params[:tab] != "about-you" %>" data-tab="about-you">
+  <div class="tabs-content <%= "tabs-content--active" unless params[:tab].present? && params[:tab] != "about-you" %>" data-tab="about-you" aria-hidden="<%= params[:tab].present? || (params[:tab].present? && params[:tab] != "about-you") %>">
     <h2 class="mt-1/1 mb-0">About you</h2>
 
     <% if @user.verified? %>
@@ -48,7 +48,7 @@
     <%= button_tag "Cancel", type: "button", class: "button button--secondary pr-1/1 pl-1/1", onclick: "location.search = '?tab=about-you'" %>
   </div>
 
-  <div class="tabs-content <%= "tabs-content--active" if params[:tab].present? && params[:tab] == "images" %>" data-tab="images">
+  <div class="tabs-content <%= "tabs-content--active" if params[:tab].present? && params[:tab] == "images" %>" data-tab="images" aria-hidden="<%= params[:tab] != "images" %>">
     <h2 class="mt-1/1 mb-0">Images</h2>
 
     <div class="well well--dark block mt-1/2">
@@ -105,7 +105,7 @@
     <%= button_tag "Cancel", type: "button", class: "button button--secondary pr-1/1 pl-1/1", onclick: "location.search = '?tab=images'" %>
   </div>
 
-  <div class="tabs-content <%= "tabs-content--active" if params[:tab].present? && params[:tab] == "badges" %>" data-tab="badges">
+  <div class="tabs-content <%= "tabs-content--active" if params[:tab].present? && params[:tab] == "badges" %>" data-tab="badges" aria-hidden="<%= params[:tab] != "badges" %>">
     <div class="well block mb-1/2 mt-1/2">
       <h4 class="mt-0">Badges you've earned</h4>
 

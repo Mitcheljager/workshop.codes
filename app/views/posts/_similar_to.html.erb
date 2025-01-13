@@ -6,7 +6,8 @@
   data-action="get-partial"
   data-lazy="true"
   data-target="similar-posts"
-  data-url="<%= similar_posts_url(@post.id) %>"></div>
+  data-url="<%= similar_posts_url(@post.id) %>"
+  aria-busy="true"></div>
 
 <div class="cards" data-partial="similar-posts">
   <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>

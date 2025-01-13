@@ -82,7 +82,7 @@
     <% end %>
   </div>
 
-  <div class="tabs-content" data-tab="notifications">
+  <div class="tabs-content" data-tab="notifications" aria-hidden="true">
     <div class="well well--dark block">
       <h4 class="mt-0">Send this user a notifcation</h4>
 
@@ -107,7 +107,7 @@
     <% end %>
   </div>
 
-  <div class="tabs-content" data-tab="badges">
+  <div class="tabs-content" data-tab="badges" aria-hidden="true">
     <div class="well well--dark block">
       <h4 class="mt-0">Badges</h4>
 
@@ -136,7 +136,7 @@
     </div>
   </div>
 
-  <div class="tabs-content" data-tab="posts">
+  <div class="tabs-content" data-tab="posts" aria-hidden="true">
     <h3 class="mt-0">Posts by <%= @user.username %></h3>
 
     <table class="w-auto">
@@ -152,7 +152,7 @@
     </table>
   </div>
 
-  <div class="tabs-content" data-tab="comments">
+  <div class="tabs-content" data-tab="comments" aria-hidden="true">
     <h3 class="mt-0">Latest 20 comments</h3>
 
     <% @user.comments.order(created_at: :desc).limit(20).each do |comment| %>
@@ -168,7 +168,7 @@
     <% end %>
   </div>
 
-  <div class="tabs-content" data-tab="activity">
+  <div class="tabs-content" data-tab="activity" aria-hidden="true">
     <h3 class="mt-0">Latest 20 activity</h3>
 
     <% @user.activities.order(created_at: :desc).limit(20).each do |activity| %>
