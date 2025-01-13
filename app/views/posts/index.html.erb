@@ -1,8 +1,8 @@
 <% content_for :bg_size, "large" %>
 
 <main class="top-offset">
-  <h2 class="mt-1/2 text-black">
-    <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon", width: 21, height: 21 %>
+  <h2 aria-level="1" class="mt-1/2 text-black">
+    <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon", width: 21, height: 21, aria: { hidden: true } %>
     <strong>On Fire</strong> Workshop Codes
   </h2>
 
@@ -25,7 +25,7 @@
   <%= render "user_recommendations" if current_user && current_user.recommended_posts.any? %>
 
   <div class="action-header">
-    <h2 class="mt-1/1"><strong>Latest</strong> Codes</h2>
+    <h2 class="mt-1/1" aria-level="1"><strong>Latest</strong> Codes</h2>
   </div>
 
   <%= render "posts" %>
