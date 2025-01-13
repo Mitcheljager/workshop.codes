@@ -14,9 +14,12 @@
 
 .faq__question {
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
+  border-radius: $border-radius;
+  color: $text-color;
   cursor: pointer;
 
   @include hover-stack {

@@ -5,10 +5,10 @@
     <% next unless question.present? %>
 
     <div class="faq__item" data-toggle-content>
-      <div class="faq__question" data-action="toggle-content">
+      <button class="faq__question" data-action="toggle-content">
         <%= tag.div sanitize(question) %>
         <div class="faq__icon">▼</div>
-      </div>
+      </button>
 
       <div data-role="content-to-toggle snippet-container" style="display: none">
         <div class="p-1/4 pt-0">
