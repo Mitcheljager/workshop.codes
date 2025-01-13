@@ -59,6 +59,8 @@ function getInfiniteScrollContent(element: HTMLElement): void {
   const container = document.querySelector(".items") || document.querySelector(".cards")
   const spinner = container?.querySelector(".spinner")
 
+  container!.ariaBusy = "true"
+
   Rails.ajax({
     type: "get",
     url: requestUrlString,
@@ -95,7 +97,9 @@ function getInfiniteScrollContent(element: HTMLElement): void {
         button = document.querySelector("[data-role='load-more-posts']") as HTMLElement
         button.removeAndAddEventListener("click", loadMorePosts)
       }
-
+    },
+    complete: () => {
+      container!.ariaBusy = null
     }
   })
 }
