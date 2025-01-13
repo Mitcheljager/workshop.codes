@@ -7,7 +7,7 @@
     <meta itemprop="target" content="https://workshop.codes/search?search={query}"/>
 
     <%= text_field_tag :query, params[:search] ? CGI.unescape(params[:search]) : "", class: "form-input", placeholder: " ", itemprop: "query-input", required: "true", autocomplete: "off", id: id %>
-    <%= label_tag :query do %>
+    <%= label_tag :query, for: id do %>
       Search
     <% end %>
 
