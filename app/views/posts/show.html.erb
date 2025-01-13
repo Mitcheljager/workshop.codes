@@ -56,7 +56,7 @@
           <%= render "archive", post: @post if @archive_authorization.present? %>
         </div>
 
-        <div class="item__tray">
+        <div class="item__tray" role="complementary">
           <%= render "details" %>
         </div>
       <% end %>
@@ -99,6 +99,8 @@
     <% end %>
   </article>
 
-  <%= render "post_recommendations" if @post.recommended_posts.any? %>
-  <%= render "similar_to" %>
+  <div role="complementary">
+    <%= render "post_recommendations" if @post.recommended_posts.any? %>
+    <%= render "similar_to" %>
+  </div>
 </div>
