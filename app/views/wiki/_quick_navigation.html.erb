@@ -9,13 +9,13 @@
   <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target data-scroll-container data-sticky-absolute>
     <% { "Actions": actions, "Values": values, "Events": events }.each do |category, props| %>
       <div data-toggle-content>
-        <button class="quick-navigation__toggle <%= "active" if @article.category.title == category.to_s %>" data-action="toggle-content">
+        <button class="quick-navigation__toggle <%= "active" if @article.category.title == category.to_s %>" data-action="toggle-content" aria-expanded="<%= @article.category.title == category.to_s %>" aria-controls="<%= category.to_s %>">
           <%= category %>
 
           <div class="quick-navigation__icon">&#8250;</div>
         </button>
 
-        <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != category.to_s %>">
+        <div id="<%= category.to_s %>" data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != category.to_s %>">
           <% props.each do |content| %>
             <%= link_to content["en-US"],
               CGI.escape(content["en-US"].gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase,
@@ -27,13 +27,13 @@
     <% end %>
 
     <div data-toggle-content>
-      <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Constants" %>" data-action="toggle-content">
+      <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Constants" %>" data-action="toggle-content" aria-expanded="<%= @article.category.title == "Constants" %>" aria-controls="constants">
         Constants
 
         <div class="quick-navigation__icon">&#8250;</div>
       </button>
 
-      <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != "Constants" %>">
+      <div id="constants" data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != "Constants" %>">
         <% constants.each do |name| %>
           <%= link_to name,
             CGI.escape(name.gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase,

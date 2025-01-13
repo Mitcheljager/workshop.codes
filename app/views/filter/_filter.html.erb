@@ -1,6 +1,6 @@
 <div data-toggle-content data-close-on-outside-click>
   <nav class="filter">
-    <div class="filter__content dropdown__content--left" data-role="content-to-toggle" data-partial style="display: none">
+    <div class="filter__content dropdown__content--left" id="filter" data-role="content-to-toggle" data-partial style="display: none">
       <div class="spinner spinner--small ml-1/4 mb-1/4" aria-live="polite" role="status"></div>
     </div>
   </nav>
@@ -13,7 +13,7 @@
                       url: filter_partial_path(params.permit!),
                       animation_timing: 150
                     },
-                     aria: { label: "Filter is active" } %>
+                     aria: { label: "Filter is active", expanded: "false", controls: "filter" } %>
     <% end %>
 
     <%= button_tag inline_svg_tag("icons/icon-filter.svg", height: 21, width: 21), name: "Toggle filter", class: "filter__link",
@@ -23,7 +23,9 @@
                       animation_timing: 150,
                     },
                     aria: {
-                      label: "Toggle filter"
+                      label: "Toggle filter",
+                      expanded: "false",
+                      controls: "filter"
                     } %>
   </div>
 </div>

@@ -23,10 +23,12 @@ function toggleContent(event: MouseEvent): void {
   if (!state) {
     target.classList.remove("active")
     parent.classList.add("fading-out")
+    target.ariaExpanded = "false"
 
     if (target.dataset.hideWith) target.textContent = target.dataset.hideWith
   } else {
     target.classList.add("active")
+    target.ariaExpanded = "true"
 
     if (animationTiming > 0) element.style.display = "initial"
 

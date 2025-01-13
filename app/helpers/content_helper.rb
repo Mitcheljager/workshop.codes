@@ -200,7 +200,7 @@ module ContentHelper
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
       tags: %w(div span hr style mark dl dd dt img details summary a button b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big),
-      attributes: %w(style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-labelledby aria-hidden tabindex role)
+      attributes: %w(style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-labelledby aria-hidden aria-expanded tabindex role)
     )
   end
 

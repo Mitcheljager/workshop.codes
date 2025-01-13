@@ -8,7 +8,7 @@
     <% controls_id = "faq-#{ block.id }-#{ index }" %>
 
     <div class="faq__item" data-toggle-content>
-      <button class="faq__question" data-action="toggle-content" aria-controls="<%= controls_id %>">
+      <button class="faq__question" data-action="toggle-content" aria-controls="<%= controls_id %>" aria-expanded="false">
         <%= tag.div sanitize(question), id: label_id %>
         <div class="faq__icon" aria-hidden="true">▼</div>
       </button>

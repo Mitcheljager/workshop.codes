@@ -5,7 +5,8 @@
     <div>
       <%= link_to "Edit", "#",
           class: "text-lightest",
-          data: { action: "toggle-content", show_with: "Hide", hide_with: "Edit" } %>
+          data: { action: "toggle-content", show_with: "Hide", hide_with: "Edit" },
+          aria: { expanded: "false", controls: block.id } %>
 
      <%= link_to "Destroy", block_path(block.id),
          method: :delete,
@@ -15,7 +16,7 @@
     </div>
   </div>
 
-  <div data-role="content-to-toggle" style="display: none">
+  <div data-role="content-to-toggle" style="display: none" id="<%= block.id %>">
     <%= form_for :block, url: block_path(block.id), method: :patch, remote: true do |form| %>
         <%= render "blocks/profile/settings/#{ block.name }", block: block, form: form %>
 
