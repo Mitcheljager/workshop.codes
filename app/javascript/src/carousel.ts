@@ -43,8 +43,15 @@ async function setActiveItem(this: SiemaExtended & SiemaOptions): Promise<void> 
   const navigationElements = document.querySelectorAll("[data-action='carousel-go-to']")
   const activeElement = document.querySelector(".carousel__navigation-item--is-active")
 
-  if (activeElement) activeElement.classList.remove("carousel__navigation-item--is-active")
-  if (navigationElements.length) navigationElements[this.currentSlide].classList.add("carousel__navigation-item--is-active")
+  if (activeElement) {
+    activeElement.classList.remove("carousel__navigation-item--is-active")
+    activeElement.ariaSelected = null
+  }
+
+  if (navigationElements.length) {
+    navigationElements[this.currentSlide].classList.add("carousel__navigation-item--is-active")
+    navigationElements[this.currentSlide].ariaSelected = "true"
+  }
 
   setLazyImage(this)
 
