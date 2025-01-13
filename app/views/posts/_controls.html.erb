@@ -15,7 +15,7 @@
 
   <% tabs.each do |tab| %>
     <% active = tab == "workshop" %>
-    <div class="tabs-content <%= "tabs-content--active" if active %>" data-tab="<%= tab %>" aria-hidden="<%= !active %>">
+    <div class="tabs-content <%= "tabs-content--active" if active %>" data-tab="<%= tab %>">
       <div class="controls">
         <% @post.parsed_controls.each do |item| %>
           <% next unless item["description"].present? %>

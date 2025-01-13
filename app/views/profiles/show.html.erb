@@ -25,7 +25,7 @@
   </div>
 
   <% if @blocks.any? %>
-    <div class="tabs-content <%= "tabs-content--active" unless params[:tab].present? && params[:tab] != "highlights" %>" data-tab="highlights" aria-hidden="<%= params[:tab] != "highlights" %>">
+    <div class="tabs-content <%= "tabs-content--active" unless params[:tab].present? && params[:tab] != "highlights" %>" data-tab="highlights">
       <% @blocks.each do |block| %>
         <div class="mt-1/1 mb-1/1" data-block-id="<%= block.id %>">
           <%= render "blocks/profile/#{ block.name }", block: block %>
@@ -34,11 +34,11 @@
     </div>
   <% end %>
 
-  <div class="tabs-content <%= "tabs-content--active" unless (params[:tab].blank? && @blocks.any?) || (params[:tab].present? && params[:tab] != "codes") %>" data-tab="codes" aria-hidden="<%= params[:tab] != "images" %>">
+  <div class="tabs-content <%= "tabs-content--active" unless (params[:tab].blank? && @blocks.any?) || (params[:tab].present? && params[:tab] != "codes") %>" data-tab="codes">
     <%= render "blocks/profile/list" %>
   </div>
 
-  <div class="tabs-content <%= "tabs-content--active" if params[:tab] == "collections" %>" data-tab="collections" aria-hidden="<%= params[:tab] != "collections" %>">
+  <div class="tabs-content <%= "tabs-content--active" if params[:tab] == "collections" %>" data-tab="collections">
     <%= render "blocks/profile/user_collections" %>
   </div>
 </div>

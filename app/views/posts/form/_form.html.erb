@@ -39,7 +39,7 @@
   <% tabs << "revision" if @post.persisted? %>
 
   <% tabs.each_with_index do |tab, index| %>
-    <div class="tabs-content <%= "tabs-content--active" if index == 0 %>" data-tab="<%= tab %>" aria-hidden="<%= index > 0 %>">
+    <div class="tabs-content <%= "tabs-content--active" if index == 0 %>" data-tab="<%= tab %>">
       <%= render "posts/form/tabs/#{ tab }", form: form %>
 
       <hr class="mt-1/2 mb-1/2" />

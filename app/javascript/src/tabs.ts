@@ -45,14 +45,12 @@ function revealTab(target: string, parentElement: Element): void {
     if (activeElement) {
       activeElement.classList.remove("tabs-content--active")
       activeElement.classList.remove("tabs-content--transitioning-out")
-      activeElement.ariaHidden = "true"
     }
 
     if (!targetElement) return
 
     targetElement.classList.add("tabs-content--active")
     targetElement.classList.add("tabs-content--transitioning-in")
-    targetElement.ariaHidden = "false"
 
     resetCarouselInTab(targetElement)
   }, 150)
