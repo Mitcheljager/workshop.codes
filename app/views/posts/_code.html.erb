@@ -4,7 +4,7 @@
   <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", width: 18, height: 18 %>
 
   <span class="copy">
-    <span data-copy="<%= post.code %>" data-track-copy><%= post.code %></span>
+    <span data-copy="<%= post.code %>" data-track-copy aria-label="<%= post.code.chars.join(" ") %>"><%= post.code %></span>
   </span>
 
   <% if post.ptr? %>
