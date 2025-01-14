@@ -17,6 +17,7 @@
   class="modal modal--{align}"
   transition:fade={{ duration: 150 }}
   use:escapeable on:escape={() => modal.close()}
+  role="dialog"
   data-ignore>
 
   <div

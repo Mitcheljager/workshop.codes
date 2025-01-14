@@ -206,8 +206,8 @@
 
 {#if previewImageUrl}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close>
+  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+  <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close role="dialog" aria-label="Image preview">
 
     <div class="modal__content p-0">
       <img class="img-fluid" src={previewImageUrl} alt="" />

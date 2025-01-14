@@ -10,12 +10,4 @@
   <%= form.text_area :description, class: "form-input form-textarea", data: { role: "simple-mde markdown-textarea", enable_blocks: true, max_length: POST_DESCRIPTION_LIMIT, abilities: ability_icons, heroes: hero_names } %>
 </div>
 
-<div class="modal modal--content-width" data-modal="markdown-preview" data-hide-on-close style="display: none">
-  <div class="modal__backdrop" data-role="modal-backdrop"></div>
-
-  <div class="modal__content">
-    <div class="item__description" data-role="markdown-preview"></div>
-  </div>
-</div>
-
 <%= render "posts/form/controls", form: form %>

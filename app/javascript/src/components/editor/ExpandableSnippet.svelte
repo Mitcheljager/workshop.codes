@@ -65,12 +65,13 @@
 </div>
 
 {#if expanded}
-<div class="modal modal--top" data-ignore>
+<div class="modal modal--top" data-ignore role="dialog" aria-label="Snippet">
   <div class="modal__content expandable-snippet-modal" style="min-width: 600px; max-width: initial;">
     <div class="expandable-snippet relative">
       <button class="expandable-snippet__expand-button" on:click={() => expanded = false}>
         <Expand contract />
       </button>
+
       <div class="expandable-snippet__code overflow-auto">
         <code class="block" bind:this={expandedCodeElement}>
           {#each fullContentLines as line, index}
