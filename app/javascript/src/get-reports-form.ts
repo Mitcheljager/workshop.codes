@@ -1,5 +1,5 @@
 import FetchRails from "@src/fetch-rails"
-import { closeModal } from "@src/modal"
+import { closeModal, focusModal } from "@src/modal"
 import * as revealBySelect from "@src/reveal-by-select"
 import * as disableFormBySelect from "@src/disable-form-by-select"
 
@@ -21,7 +21,7 @@ function getReportsForm(event: Event): void {
   new FetchRails(eventTarget.href).get()
     .then(data => {
       eventTarget.innerText = originalText
-      document.body.insertAdjacentHTML("beforeend", data)
+      document.body.insertAdjacentHTML("beforeend", data as string)
 
       const modal = document.querySelector("[data-modal='report']") as HTMLElement
       const backdrop = modal.querySelector(".modal__backdrop") as HTMLElement
@@ -29,5 +29,7 @@ function getReportsForm(event: Event): void {
       backdrop.removeAndAddEventListener("click", closeModal)
       revealBySelect.bind()
       disableFormBySelect.bind()
+
+      focusModal(modal)
     })
 }

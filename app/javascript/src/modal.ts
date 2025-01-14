@@ -20,6 +20,8 @@ function showModal({ currentTarget }: { currentTarget: HTMLElement }): void {
 
   document.body.style.borderRight = `${getScrollbarWidth()}px solid transparent`
   document.body.style.overflowY = "hidden"
+
+  focusModal(modal)
 }
 
 export function closeModal(): void {
@@ -44,4 +46,9 @@ function closeModalOnKeyDown(event: KeyboardEvent): void {
 
 function getScrollbarWidth(): number {
   return window.innerWidth - document.body.offsetWidth
+}
+
+export function focusModal(modal: HTMLElement): void {
+  const firstFocusableElement = modal.querySelector("button:not(disabled), input:not([type='hidden']), select, [tabindex='0'], img") as HTMLFormElement
+  if (firstFocusableElement) firstFocusableElement.focus()
 }
