@@ -17,6 +17,7 @@ import * as dismissParent from "@src/dismiss-parent"
 import * as dropdown from "@src/dropdown"
 import * as dynamicMaxHeight from "@src/dynamic-max-height"
 import * as filter from "@src/filter"
+import * as focusOnLoad from "@src/focus-on-load"
 import * as gallery from "@src/gallery"
 import * as getKoFiValue from "@src/get-ko-fi-value"
 import * as getMoreComments from "@src/comments"
@@ -77,6 +78,7 @@ document.addEventListener("turbolinks:load", () => {
 
   timeago.initialize()
   scrollIntoViewOnLoad.initialize()
+  focusOnLoad.initialize()
 })
 
 document.addEventListener("turbolinks:before-cache", () => {
