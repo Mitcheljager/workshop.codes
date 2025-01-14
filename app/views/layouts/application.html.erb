@@ -50,16 +50,16 @@
 
   <body class="<%= "wiki" if is_wiki? %>">
     <%= render "flash" %>
-    <%= render "header" %>
+    <%= render "header" unless is_editor? %>
     <%= render "wiki/header" if is_wiki? %>
 
     <div class="wrapper <%= "wrapper--large" if is_admin_controller? %>">
       <%= yield %>
 
-      <%= render "footer" %>
+      <%= render "footer" unless is_editor? %>
     </div>
 
-    <%= render "body_bg" unless is_wiki? %>
+    <%= render "body_bg" unless is_wiki? || is_editor? %>
 
     <%= svelte_component "Ollie", { imageFlyBy: image_path("ollie/ollie-float.png"), imageHeart: image_path("ollie/ollie-heart.png") } if current_user.present? %>
   </body>
