@@ -8,7 +8,7 @@ export function render(): void {
 
 function getKoFiValue(element: HTMLElement): void {
   new FetchRails("/webhooks/get_ko_fi_value").get().then(data => {
-    const parsedData = parseInt(data)
+    const parsedData = parseInt(data as string)
     const max = parseInt(element.dataset.max || "0")
     const labelElement = document.querySelector("[data-ko-fi-progress-label]") as HTMLFormElement
     const value = Math.floor(100 / max * parsedData)
