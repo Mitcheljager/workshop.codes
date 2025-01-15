@@ -7,11 +7,11 @@
     <%= render collection: @hot_posts, partial: "card", as: :post %>
   </div>
 
-  <button class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" disabled="disabled" data-action="carousel-previous">
+  <button class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" disabled="disabled" data-action="carousel-previous" aria-label="Previous">
     <%= inline_svg_tag "layout/carousel-left.svg", width: 30, height: 30 %>
   </button>
 
-  <button class="card-carousel__control card-carousel__control--next" data-action="carousel-next">
+  <button class="card-carousel__control card-carousel__control--next" data-action="carousel-next" aria-label="Next">
     <%= inline_svg_tag "layout/carousel-right.svg", width: 30, height: 30 %>
   </button>
 </div>
