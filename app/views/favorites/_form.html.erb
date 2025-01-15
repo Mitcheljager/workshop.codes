@@ -16,6 +16,6 @@
   </div>
 <% else %>
   <%= link_to login_path, class: "favorite", aria: { label: "Favorite code '#{ post.code }'" } do %>
-    <%= image_tag "icons/icon-heart-border.svg", width: 24, height: 24, aria: { label: "Favorite" }, alt: "" %>
+    <%= image_tag "icons/icon-heart-border.svg", width: 24, height: 24, alt: "" %>
   <% end %>
 <% end %>
