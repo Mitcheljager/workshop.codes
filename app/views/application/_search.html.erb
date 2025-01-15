@@ -3,7 +3,7 @@
 <div itemscope itemtype="https://schema.org/WebSite">
   <meta itemprop="url" content="https://workshop.codes/"/>
 
-  <%= form_tag search_post_path(request.path_parameters), remote: true, class: "search", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction" do %>
+  <%= form_tag search_post_path(request.path_parameters), remote: true, class: "search", itemprop: "potentialAction", itemscope: "", itemtype: "https://schema.org/SearchAction", role: "search" do %>
     <meta itemprop="target" content="https://workshop.codes/search?search={query}"/>
 
     <%= text_field_tag :query, params[:search] ? CGI.unescape(params[:search]) : "", class: "form-input", placeholder: " ", itemprop: "query-input", required: "true", autocomplete: "off", id: id %>
