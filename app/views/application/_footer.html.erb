@@ -2,7 +2,7 @@
   <%= inline_svg_tag("logo-small.svg", height: 80, class: "cog-color") %>
 
   <div>
-    <%= link_to "https://discord.gg/DdxsQRD", class: "button button--link", target: "_blank", rel: "noreferrer noopener" do %>
+    <%= link_to "https://discord.gg/DdxsQRD", class: "button button--link", target: "_blank", rel: "noreferrer noopener", aria: { label: "Join the Workshop.codes Discord (opens in new tab)" } do %>
       Join the <mark>Workshop.codes</mark> Discord
     <% end %>
   </div>
@@ -22,6 +22,6 @@
     Contact me on Discord: @mitsiee
     <br>
     Contribute on
-    <%= link_to "GitHub", "https://github.com/Mitcheljager/workshop.codes", target: "_blank", rel: "noreferrer noopener" %>
+    <%= link_to "GitHub", "https://github.com/Mitcheljager/workshop.codes", target: "_blank", rel: "noreferrer noopener", aria: { label: "GitHub (opens in new tab)" } %>
   </p>
 </footer>
