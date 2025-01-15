@@ -18,8 +18,11 @@
   <div class="collection__content">
     <div class="collection__info">
       <%= link_to collection.title, collection_nice_url_path(collection.nice_url), class: "collection__title" %>
-      <%= link_to collection.user.clean_username, user_profile_path(collection.user), class: "collection__author" %> -
-      <small class="collection__count"><%= collection.posts.size %> codes</small>
+
+      <div>
+        <%= link_to collection.user.clean_username, user_profile_path(collection.user), class: "collection__author" %> -
+        <small class="collection__count"><%= collection.posts.size %> codes</small>
+      </div>
     </div>
 
     <div class="collection__posts">
