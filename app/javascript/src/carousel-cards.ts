@@ -40,11 +40,16 @@ export function render(): void {
 function carouselCardsChanged(this: Siema & SiemaOptions): void {
   const selector = this.selector as HTMLElement
   const parent = selector.closest(".card-carousel")
-  const nextElement = parent!.querySelector("[data-action='carousel-next']")
-  const previousElement = parent!.querySelector("[data-action='carousel-previous']")
+  const nextElement = parent!.querySelector("[data-action='carousel-next']") as HTMLButtonElement
+  const previousElement = parent!.querySelector("[data-action='carousel-previous']") as HTMLButtonElement
 
-  previousElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide == 0)
-  nextElement!.classList.toggle("card-carousel__control--disabled", this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || ""))
+  const atStart = this.currentSlide == 0
+  previousElement!.classList.toggle("card-carousel__control--disabled", atStart)
+  previousElement!.disabled = atStart
+
+  const atEnd = this.currentSlide + this.perPage >= parseInt(selector?.dataset?.max || "")
+  nextElement!.classList.toggle("card-carousel__control--disabled", atEnd)
+  nextElement!.disabled = atEnd
 }
 
 function carouselNext({ currentTarget }: { currentTarget: HTMLElement }): void {
