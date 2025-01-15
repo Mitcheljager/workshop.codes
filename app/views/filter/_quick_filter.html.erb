@@ -1,21 +1,21 @@
 <div class="quick-filter mt-1/2">
   <%= link_to on_fire_path, class: "quick-filter__item", aria: { label: "View On Fire Codes" } do %>
-    <%= inline_svg_tag "icons/icon-onfire.svg", class: "quick-filter__icon", height: 24, width: 24 %>
+    <%= inline_svg_tag "icons/icon-onfire.svg", class: "quick-filter__icon", height: 24, width: 24, alt: "" %>
     On Fire
   <% end %>
 
   <%= link_to filter_path(sort: :favorites), class: "quick-filter__item", aria: { label: "View Codes with most Favorites" } do %>
-    <%= inline_svg_tag "icons/icon-heart.svg", class: "quick-filter__icon", height: 24, width: 24 %>
+    <%= inline_svg_tag "icons/icon-heart.svg", class: "quick-filter__icon", height: 24, width: 24, alt: "" %>
     Most Favorites
   <% end %>
 
   <%= link_to filter_path(sort: :views), class: "quick-filter__item", aria: { label: "View Codes with most Views" } do %>
-    <%= inline_svg_tag "icons/icon-views.svg", class: "quick-filter__icon", height: 24, width: 24 %>
+    <%= inline_svg_tag "icons/icon-views.svg", class: "quick-filter__icon", height: 24, width: 24, alt: "" %>
     Most Views
   <% end %>
 
   <%= link_to filter_path(sort: :updated), class: "quick-filter__item", aria: { label: "View Codes ordered by Last Updated" } do %>
-    <%= inline_svg_tag "icons/icon-clock.svg", class: "quick-filter__icon", height: 24, width: 24 %>
+    <%= inline_svg_tag "icons/icon-clock.svg", class: "quick-filter__icon", height: 24, width: 24, alt: "" %>
     Last Updated
   <% end %>
 </div>
