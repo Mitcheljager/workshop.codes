@@ -42,7 +42,7 @@ function getPartial(event: Event | null, element: HTMLElement): void {
 
   new FetchRails(url).get()
     .then(data => {
-      targetElement.innerHTML = data.toString()
+      targetElement.innerHTML = data as string
     })
     .then(() => {
       lazyVideo.bind(targetElement)
