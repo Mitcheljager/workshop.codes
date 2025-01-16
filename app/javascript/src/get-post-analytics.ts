@@ -14,11 +14,6 @@ function getPostAnalytics(event: Event): void {
 
   const currentTarget = event.currentTarget as HTMLFormElement
 
-  // @ts-ignore
-  const progressBar = new Turbolinks.ProgressBar()
-  progressBar.setValue(0)
-  progressBar.show()
-
   const parent = currentTarget.closest("[data-post-analytics]")
   const target = parent?.querySelector("[data-role~='chart']") as HTMLElement
 
@@ -28,13 +23,10 @@ function getPostAnalytics(event: Event): void {
 
   new FetchRails("/analytics/post", { type: currentTarget.value, id: currentTarget.dataset.postId })
     .post().then(data => {
-      const parsedData = JSON.parse(data)
+      const parsedData = JSON.parse(data as string)
       target.querySelector(".chart__placeholder")?.remove()
 
       createChart(target, parsedData, "%Y-%m-%d %H:00")
-    }).finally(() => {
-      progressBar.setValue(1)
-      progressBar.hide()
     })
 }
 

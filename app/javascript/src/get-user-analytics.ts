@@ -14,11 +14,6 @@ export function bind(): void {
 function getUserAnalytics(event: Event | null, element: HTMLFormElement): void {
   if (event) event.preventDefault()
 
-  // @ts-ignore
-  const progressBar = new Turbolinks.ProgressBar()
-  progressBar.setValue(0)
-  progressBar.show()
-
   const target = document.querySelector("[data-role~='chart']") as HTMLElement
   if (target) target.insertAdjacentHTML("afterbegin", "<div class='chart__placeholder'><div class='spinner'></div></div>")
 
@@ -26,10 +21,7 @@ function getUserAnalytics(event: Event | null, element: HTMLFormElement): void {
     .post().then(data => {
       if (target) target.querySelector(".chart__placeholder")?.remove()
 
-      const parsedData = JSON.parse(data)
+      const parsedData = JSON.parse(data as string)
       createChart(target, parsedData)
-    }).finally(() => {
-      progressBar.setValue(1)
-      progressBar.hide()
     })
 }
