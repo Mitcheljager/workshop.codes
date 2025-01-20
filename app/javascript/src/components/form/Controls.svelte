@@ -120,6 +120,7 @@
             name="controls-item-description"
             class="form-input pt-1/4 pb-1/4 md:ml-1/4"
             placeholder="Description"
+            aria-label="Control description"
             maxlength=500 />
 
           <button href="#" data-role="controls-item-move-handle" on:click|preventDefault>⇅</button>
