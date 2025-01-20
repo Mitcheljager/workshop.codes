@@ -13,6 +13,7 @@ export function render() {
 
   elements.forEach((element) => {
     new InitialiseInscrybeMDE(element).initialise()
+
   })
 }
 
@@ -162,6 +163,7 @@ class InitialiseInscrybeMDE {
     this.codemirror = this.mde.codemirror
     this.bindPaste()
     this.parseBlocks()
+    this.addAriaLabels()
 
     editors.push(this.mde)
 
@@ -174,6 +176,15 @@ class InitialiseInscrybeMDE {
     this.codemirror.on("paste", (editor, event) => {
       new InscrybeInsertImage(event, editor).paste()
     })
+  }
+
+  addAriaLabels() {
+    const codemirrorTextarea = this.codemirror.getInputField()
+
+    for (const attribute of this.element.attributes) {
+      if (!attribute.name.startsWith("aria-")) continue
+      codemirrorTextarea.setAttribute(attribute.name, attribute.value)
+    }
   }
 
   insertHighlight() {
