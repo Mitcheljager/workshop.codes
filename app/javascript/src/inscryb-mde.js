@@ -164,6 +164,7 @@ class InitialiseInscrybeMDE {
     this.bindPaste()
     this.parseBlocks()
     this.addAriaLabels()
+    this.addSepartorRoles()
 
     editors.push(this.mde)
 
@@ -185,6 +186,14 @@ class InitialiseInscrybeMDE {
       if (!attribute.name.startsWith("aria-")) continue
       codemirrorTextarea.setAttribute(attribute.name, attribute.value)
     }
+  }
+
+  addSepartorRoles() {
+    const separators = this.mde.gui.toolbar.querySelectorAll(".separator")
+
+    separators.forEach(element => {
+      element.role = "separator"
+    })
   }
 
   insertHighlight() {
