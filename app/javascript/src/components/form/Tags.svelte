@@ -17,6 +17,8 @@
   export let useAutoComplete = false
   export let minCharsAutoComplete = 2
   export let fillValues = []
+  export let ariaLabel = null
+  export let ariaControls = null
   export let fetchAutoCompleteValues = () => {
     return new Promise(resolve => resolve([]))
   }
@@ -182,6 +184,8 @@
     on:keydown={keydown}
     {readOnly}
     {placeholder}
+    aria-label={ariaLabel}
+    aria-controls={ariaControls}
     class="form-tags__input helper-input" />
 
   <input

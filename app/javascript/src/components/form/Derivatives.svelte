@@ -42,6 +42,7 @@
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
+      aria-label="Toggle derivatives"
       bind:checked={showDerivative}/>
 
     <label
@@ -53,7 +54,7 @@
 
   {#if showDerivative}
     <div class="form-group mt-1/4">
-      <div class="form-hint mt-1/4 mb-1/4 text-left">
+      <div class="form-hint mt-1/4 mb-1/4 text-left" id="derivative-codes">
         Enter the import code(s) which your mode uses. You can enter up to {maxCodes} codes.
 
         <br />
@@ -64,6 +65,8 @@
         prefix="post"
         name="derivations"
         placeholder="CODE1, CODE2, etc."
+        ariaLabel="Derivative codes (Comma separated)"
+        ariaControls="derivative-codes"
         fillValues={currentSources}
         hidden={!showDerivative}
         allowSpace={false}

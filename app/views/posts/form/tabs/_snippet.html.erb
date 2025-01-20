@@ -1,12 +1,12 @@
 <h2 class="mt-1/1">Code Snippet</h2>
 
 <div class="form-group">
-  <span class="form-hint">
+  <span class="form-hint" id="snippet-hint">
     <p><strong>Workshop Codes expire after 6 months.</strong> If at this point you no longer have the original code, your Workshop item is lost forever. Saving the code snippet allows you to copy paste it at any point.</p>
     <p>To get the code snippet open the lobby settings and press the "Copy settings" next to Import, Share, and Report buttons. Simply paste this here and you're good to go!</p>
   </span>
 
-  <%= svelte_component("SnippetForm", { name: "post[snippet]", value: @post.snippet }) %>
+  <%= svelte_component("SnippetForm", { name: "post[snippet]", value: @post.snippet, ariaDescribedby: "snippet-hint" }) %>
 </div>
 
 <h3 class="mt-1/1">Expiry Notifications</h3>
@@ -19,10 +19,10 @@
 
   <div class="checkbox">
     <%= form.check_box :email_notification, checked: @post.email_notification.present? || (@post.persisted? && @post.email_notifications.any?), data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
-    <%= form.label :email_notification, "Also notify me by email" %>
+    <%= form.label :email_notification, "Also notify me by email", aria: { describedby: "expiry-notification-hint" } %>
   </div>
 
-  <span class="form-hint">
+  <span class="form-hint" id="expiry-notification-hint">
     Check this if you would like to receive a notification by email when your code has not been updated for 5 months. <strong>Your email address is encrypted on our server</strong> and will be removed right after the notification has been send. We will not use it for any other purposes.
   </span>
 
@@ -31,9 +31,11 @@
       <div class="well well--dark block">
         <div class="form-group mt-0">
           <%= form.label :email, "Email address", class: "form-label" %>
-          <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input" %>
+          <%= form.email_field :email, value: (@post.email_notifications.last.email if @post.email_notifications.any?) || @post.email, class: "form-input", aria: { describedby: "expiry-notification-email-hint" } %>
 
-          <p class="form-hint mb-0">To make sure we don't end up in your spam folder, add <strong>notifications@workshop.codes</strong> to your approved senders list.</p>
+          <p class="form-hint mb-0" id="expiry-notification-email-hint">
+            To make sure we don't end up in your spam folder, add <strong>notifications@workshop.codes</strong> to your approved senders list.
+          </p>
         </div>
       </div>
     </div>
