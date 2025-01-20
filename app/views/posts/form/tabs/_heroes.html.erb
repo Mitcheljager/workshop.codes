@@ -1,9 +1,11 @@
-<h2 class="mt-1/1">
-  Heroes
-  <span class="form-required">(Required)</span>
-</h2>
+<fieldset data-checkbox-group>
+  <legend>
+    <h2 class="mt-1/1">
+      Heroes
+      <span class="form-required">(Required)</span>
+    </h2>
+  </legend>
 
-<div data-checkbox-group>
   <div class="form-group checkbox">
     <%= form.check_box :checkbox_group_heroes, data: { action: "checkbox-select-all" } %>
     <%= form.label :checkbox_group_heroes, "Check all heroes" %>
@@ -35,4 +37,4 @@
       </div>
     <% end %>
   </div>
-</div>
+</fieldset>

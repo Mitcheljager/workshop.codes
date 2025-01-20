@@ -2,7 +2,9 @@
 
 <div data-reveal-by-select-parent data-reveal-by-checkbox>
   <div class="form-group-uneven mt-1/2">
-    <div class="well well--dark block pb-0">
+    <fieldset class="well well--dark block pb-0">
+      <legend class="form-label sr-only">Visibility</legend>
+
       <div class="checkbox">
         <%= form.radio_button :status, "public", checked: !@post.unlisted && !@post.private, aria: { describedby: "status-public-hint" } %>
         <%= form.label :status, "Public", value: "public" %>
@@ -40,7 +42,7 @@
           Your post will not be visible to others. When you switch this to a different visibility your post will be published as if it was new. An already published code can not be set back to this option.
         </div>
       <% end %>
-    </div>
+    </fieldset>
 
     <div class="form-group mt-1/2 sm:mt-0" data-reveal-by-checkbox>
       <!--
@@ -126,7 +128,7 @@
 
 <div class="form-group-uneven mt-1/1 mb-1/1">
   <div>
-    <%= form.label :number_of_supported_players, class: "form-label mb-1/4" do %>
+    <%= tag.span class: "form-label mb-1/4" do %>
       Number of supported players
       <span class="form-required">(Required)</span>
     <% end %>
@@ -144,21 +146,23 @@
 
 <div class="form-group-columns mt-1/1">
   <div class="form-group">
-    <%= form.label :categories, class: "form-label" do %>
+    <%= tag.span :categories, class: "form-label" do %>
       Categories
       <span class="form-required">(Required)</span>
     <% end %>
 
-    <div class="form-hint" id="categories-hint">
-      Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
-    </div>
+    <fieldset>
+      <legend class="form-hint mt-0" id="categories-hint">
+        Select categories that fit your item. You can select up to 3 categories that you feel are relevant. Selecting a large amount of categories might result in your item being more difficult to find.
+      </legend>
 
-    <%= svelte_component "LimitedCheckboxes", {
-                         name: "post[categories][]",
-                         options: categories.map { |category| [category, category] },
-                         selected: @post.categories || [] } do %>
-      <%= form.check_box :categories, { multiple: true, checked: false, include_hidden: false }, "Team Deathmatch", aria: { describedby: "categories-hint" } %>
-    <% end %>
+      <%= svelte_component "LimitedCheckboxes", {
+                          name: "post[categories][]",
+                          options: categories.map { |category| [category, category] },
+                          selected: @post.categories || [] } do %>
+        <%= form.check_box :categories, { multiple: true, checked: false, include_hidden: false }, "Team Deathmatch", aria: { describedby: "categories-hint" } %>
+      <% end %>
+    </fieldset>
   </div>
 
   <div class="form-group">

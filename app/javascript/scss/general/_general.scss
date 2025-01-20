@@ -135,6 +135,16 @@ kbd {
   letter-spacing: -1px;
 }
 
+fieldset {
+  border: 0;
+  padding: 0;
+}
+
+legend {
+  margin: 0;
+  padding: 0;
+}
+
 .wrapper {
   position: relative;
   width: 100%;
