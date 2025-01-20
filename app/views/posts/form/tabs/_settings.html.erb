@@ -182,14 +182,14 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :collection, "Collection", class: "form-label" %>
+    <%= form.label :collection, "Collection", class: "form-label", for: :post_collection_id %>
 
     <div class="form-hint" id="collection-hint">
       Collections allow you to group multiple Codes together to help users more quickly find the others. This can for example be used when you have a gamemode with different codes for different maps.
     </div>
 
     <%= form.select :collection_id, options_from_collection_for_select(current_user.collections, "id", "title", @post.collection_id), { include_blank: current_user.collections.any? ? "None" : "You have not yet created a collection" }, { class: "form-select form-select--small" } %>
-    <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-1/4", placeholder: "Create new collection", aria: { describedby: "collection-hint" } %>
+    <%= form.text_field :new_collection, value: @post.new_collection.present? ? @post.new_collection : "", class: "form-input mt-1/4", placeholder: "Create new collection", aria: { describedby: "collection-hint", label: "New collection" } %>
 
     <div class="form-hint mt-1/8 mb-0">
       <small>Min 3, max 50 characters.</small>

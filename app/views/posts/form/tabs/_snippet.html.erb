@@ -1,4 +1,4 @@
-<h2 class="mt-1/1">Code Snippet</h2>
+<h2 class="mt-1/1" id="snippet-title">Code Snippet</h2>
 
 <div class="form-group">
   <span class="form-hint" id="snippet-hint">
@@ -6,7 +6,7 @@
     <p>To get the code snippet open the lobby settings and press the "Copy settings" next to Import, Share, and Report buttons. Simply paste this here and you're good to go!</p>
   </span>
 
-  <%= svelte_component("SnippetForm", { name: "post[snippet]", value: @post.snippet, ariaDescribedby: "snippet-hint" }) %>
+  <%= svelte_component("SnippetForm", { name: "post[snippet]", value: @post.snippet, ariaDescribedby: "snippet-hint", ariaLabelledby: "snippet-title" }) %>
 </div>
 
 <h3 class="mt-1/1">Expiry Notifications</h3>
