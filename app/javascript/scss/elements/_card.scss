@@ -145,10 +145,10 @@
 .card__author {
   display: inline-block;
   margin-top: $margin * 0.125;
-  color: var(--text-color-dark);
+  color: $text-color-dark;
 
   a {
-    color: var(--text-color-dark);
+    color: $text-color;
     text-decoration: none;
 
     @include hover-stack {
