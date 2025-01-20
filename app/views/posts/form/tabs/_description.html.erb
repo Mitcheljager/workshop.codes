@@ -6,7 +6,7 @@
     <strong>This description is full Markdown enabled.</strong> **bold**, _italic_, <%= link_to("and everything else", "https://workshop.codes/wiki/articles/markdown+on+workshop-codes", target: "_blank") %>. Add YouTube videos using <code>[youtube VIDEO_ID]</code>. (Video ID is in bold: youtube.com/watch?v=<strong>FqnKB22pOC0</strong>)
   </div>
 
-  <%= form.file_field :videos, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-videos" } %>
+  <%= form.file_field :videos, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-videos" }, aria: { hidden: "true", label: "Videos" } %>
   <%= form.text_area :description,
     class: "form-input form-textarea",
     data: {
