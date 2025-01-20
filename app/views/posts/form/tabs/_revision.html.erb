@@ -15,7 +15,7 @@
 
   <div class="form-group mt-1/2" data-role="hidden-by-checkbox" style="<%= "display: none" %>" id="revision">
     <div class="form-group form-group-max-width mb-1/2">
-      <%= form.label :version, "Version", class: "form-label" %>
+      <%= form.label :version, "Version", class: "form-label", for: "revision-version" %>
 
       <div class="form-hint" id="version-hint">
         Update the version number if you are creating a revision. If you already changed it in the Settings tab you don't need to do it here again.
@@ -24,6 +24,7 @@
       <%= form.text_field :version,
         class: "form-input",
         placeholder: "E.g. 1.0.5",
+        id: "revision-version",
         data: { role: "linked-input", key: "version" },
         aria: { describedby: "version-hint" } %>
     </div>
