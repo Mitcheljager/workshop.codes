@@ -1,7 +1,7 @@
 <script>
   import { modal } from "@stores/editor"
   import { escapeable } from "@components/actions/escapeable"
-  import { fade } from "svelte/transition"
+  import { fade, scale } from "svelte/transition"
 
   export let align = "top"
   export let flush = false
@@ -15,11 +15,17 @@
 
 <div
   class="modal modal--{align}"
-  transition:fade={{ duration: 100 }}
+  transition:fade={{ duration: 150 }}
   use:escapeable on:escape={() => modal.close()}
+  role="dialog"
   data-ignore>
 
-  <div class="modal__content" class:bg-transparent={transparent} class:p-0={flush} style:max-width={maxWidth}>
+  <div
+    class="modal__content modal__content--no-shadow"
+    class:bg-transparent={transparent}
+    class:p-0={flush}
+    style:max-width={maxWidth}
+    transition:scale={{ duration: 150, start: 0.75 }}>
     <slot {close} />
   </div>
 

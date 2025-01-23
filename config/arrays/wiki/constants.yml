@@ -391,7 +391,7 @@ HUD Reevaluation:
     en-US: Visible To Sort Order and String
     it-IT: Sort Order and String
     ko-KR: Visible To Sort Order String
-In-World Text Reevaulation:
+In-World Text Reevaluation:
   NONE:
     en-US: None
   STRING:
@@ -428,7 +428,7 @@ Healing Reevaluation:
     en-US: Receivers and Healers
   RECEIVERS_HEALERS_AND_HEALPERCENT:
     en-US: Receivers Healers and Healing Percent
-FacingReeval:
+Facing Reevaluation:
   DIRECTION_AND_TURN_RATE:
     en-US: Direction and Turn Rate
   NONE:
@@ -438,23 +438,14 @@ Wait:
     description: The execution of the action list is aborted if any condition on this
       rule becomes false.
     en-US: Abort When False
-    es-ES: Abortar cuando sea falso
-    it-IT: Annulla quando è False
-    pl-PL: Przerwij kiedy to fałsz
   IGNORE_CONDITION:
     description: The execution of the action list is never interrupted.
     en-US: Ignore Condition
-    es-ES: Ignorar condición
-    it-IT: Ignora condizione
-    pl-PL: Zignoruj warunek
   RESTART_WHEN_TRUE:
     description: The execution of the action list restarts from the first action if
       the condition list transitions from false to true or if the rule's event occurs
       again with true conditions.
     en-US: Restart When True
-    es-ES: Reiniciar cuando sea verdadero
-    it-IT: Riparti quando è True
-    pl-PL: Zrestartuj kiedy to prawda
 Barrier Line of Sight:
   BLOCKED_BY_ENEMY_BARRIERS:
     description: Line of sight is blocked by barriers created by the enemy team.
@@ -615,20 +606,20 @@ Projectile Effect:
     en-US: Zarya Particle Cannon
 
 Projectile Effect Reevaluation:
-  Visible To, Position, Direction and Size:
-    en-US: Visible To, Position, Direction and Size
+  Visible To Position, Direction and Size:
+    en-US: Visible To Position Direction and Size
   Position, Direction And Size:
     en-US: Position, Direction And Size
   Visible To:
     en-US: Visible To
   None:
     en-US: None
-  Visible To, Friendly To, Position, Direction And Size:
-    en-US: Visible To, Friendly To, Position, Direction And Size
-  Friendly To, Position, Direction And Size:
-    en-US: Friendly To, Position, Direction And Size
-  Visible To, Friendly To:
-    en-US: Visible To, Friendly To
+  Visible To Friendly To Position Direction And Size:
+    en-US: Visible To Friendly To Position, Direction And Size
+  Friendly To Position Direction And Size:
+    en-US: Friendly To Position Direction And Size
+  Visible To Friendly To:
+    en-US: Visible To Friendly To
   Friendly To:
     en-US: Friendly To
 
@@ -965,3 +956,11 @@ Buff and Debuff Sound:
     en-US: Wrecking Ball Piledriver Fire Sound
   Zenyatta Orb of Discord Target Sound :
     en-US: Zenyatta Orb of Discord Target Sound
+
+Outline:
+  Default:
+    en-US: Default
+  Occluded:
+    en-US: Occluded
+  Always:
+    en-US: Always

@@ -12,7 +12,7 @@ export const highlightStyle = HighlightStyle.define([
   { tag: tags.labelName, color: "var(--color-action)" },
   { tag: tags.punctuation, color: "var(--color-punctuation)" },
   { tag: tags.invalid, color: "var(--color-invalid)" },
-  { tag: tags.comment, color: "var(--color-comment)" },
+  { tag: tags.comment, color: "var(--color-comment)", fontStyle: "italic" },
   { tag: tags.atom, color: "var(--color-custom-keyword)" }
 ])
 
@@ -22,7 +22,7 @@ function wordSet(words) {
   return set
 }
 
-const keywords = wordSet(["variables", "subroutines", "disabled", "event", "rule", "actions", "conditions", "settings"])
+const keywords = wordSet(["variables", "subroutines", "event", "rule", "actions", "conditions", "settings"])
 const actions = wordSet(
   /*
    * Regenerate this with (requires [yq](https://github.com/kislyuk/yq)):
@@ -51,7 +51,10 @@ const customKeywords = /(?<!\w)@(?:else if|\w+)/
 
 function tokenBase(stream, state) {
   if (stream.sol()) state.indented = stream.indentation()
-  if (stream.eatSpace()) return null
+  if (stream.eatSpace()) {
+    state.inObjectValue = false
+    return null
+  }
 
   const ch = stream.peek()
   if (ch == "/") {
@@ -80,6 +83,9 @@ function tokenBase(stream, state) {
   if (punc.indexOf(ch) > -1) {
     stream.next()
     stream.match("..")
+
+    state.inObjectValue = ch == ":"
+
     return "punctuation"
   }
 
@@ -88,6 +94,11 @@ function tokenBase(stream, state) {
     const tokenize = tokenString.bind(null, stringMatch[0])
     state.tokenize.push(tokenize)
     return tokenize(stream, state)
+  }
+
+  if (!state.inObjectValue && stream.match(/^\s*[\w$ ]+\w*(?=\w:)/)) {
+    stream.next()
+    return "keyword"
   }
 
   if (stream.match(actionsValuesIdentifier)) {
@@ -177,6 +188,7 @@ function Context(prev, align, indented) {
   this.prev = prev
   this.align = align
   this.indented = indented
+  this.inObjectValue = false
 }
 
 function pushContext(state, stream) {

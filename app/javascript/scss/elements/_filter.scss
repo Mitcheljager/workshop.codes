@@ -38,6 +38,10 @@
   transition: box-shadow var(--animation-duration);
   animation: fade-in-filter-content var(--animation-duration, 0ms) forwards;
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &::after {
     content: "";
     display: block;

@@ -13,7 +13,7 @@
 <svelte:window on:keydown={keydown} />
 
 <button
-  class="form-input bg-darker text-dark cursor-pointer text-left"
+  class="form-input text-dark cursor-pointer text-left"
   on:click={() => modal.show(Modal.ItemFinder)}>
 
   <em>Find by name... (Ctrl+Q)</em>

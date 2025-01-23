@@ -1,5 +1,5 @@
 <% begin %>
-  <div class="carousel">
+  <div class="carousel" aria-live="polite">
     <% if @ordered_images.present? && @ordered_images.one? && !@post.carousel_video.present? %>
       <div class="shadow-block bg-darker overflow-hidden" data-use-blur="true">
         <%= render "carousel_item", image: @ordered_images.first, index: 0 %>
@@ -13,22 +13,24 @@
         <% end %>
 
         <% @ordered_images.each_with_index do |image, index| %>
-          <%= render "carousel_item", image: image, index: index %>
+          <%= render "carousel_item", image: image, index: index, preload: !@post.carousel_video.present? %>
         <% end %>
       </div>
 
       <div class="carousel__navigation">
         <% if @post.carousel_video.present? %>
-          <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="0">
+          <div class="carousel__navigation-item carousel__navigation-item--is-active" data-action="carousel-go-to" data-target="0" aria-selected="true">
             <div class="carousel__navigation-item-video-overlay"></div>
-            <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg" %>
+            <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg", alt: "" %>
           </div>
         <% end %>
 
         <% @ordered_images.each_with_index do |image, index| %>
-          <div class="carousel__navigation-item" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>">
-            <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [120, 120], format: :webp).processed), aria: { label: "Thumbnail image for '#{ @post.title }'" }, height: 120, width: 120 %>
-          </div>
+          <% active = index == 0 && !@post.carousel_video.present? %>
+
+          <button role="option" aria-label="Go to carousel item <%= index + 1 %>" class="carousel__navigation-item <%= "carousel__navigation-item--is-active" if active %>" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>" <%= "aria-selected=true" if active %>">
+            <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [120, 120], format: :webp).processed), height: 120, width: 120, alt: "" %>
+          </button>
         <% end %>
       </div>
     <% elsif !@ordered_images.present? && @post.carousel_video.present? %>
@@ -43,9 +45,9 @@
   <p><small><em>Images are temporarily unavailable.</em></small></p>
 <% end %>
 
-<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="carousel-modal">
+<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="carousel-modal" role="dialog" aria-label="Image slider">
   <div class="modal__content p-0">
-    <%= image_tag "//:0", data: { gallery: "carousel-modal" }, class: "img-fluid" %>
+    <%= image_tag "//:0", data: { gallery: "carousel-modal" }, class: "img-fluid", alt: "" %>
   </div>
 
   <div class="modal__backdrop" data-role="modal-backdrop"></div>

@@ -30,3 +30,7 @@ $highlight-types: (
     color: var(--color-#{ $type });
   }
 }
+
+.comment {
+  font-style: italic;
+}

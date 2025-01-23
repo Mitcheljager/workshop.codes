@@ -32,8 +32,9 @@ h1 {
 }
 
 h2 {
-  @include responsive-font-width(28px, map-get($media-min-widths, lg), 24px);
   margin-bottom: math.div($margin, 3);
+
+  @include responsive-font-width(28px, map-get($media-min-widths, lg), 24px);
 }
 
 h3 {
@@ -57,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
     left: -20px;
     width: 20px;
     height: 1em;
-    background: transparent url("/images/icons/icon-link.svg") no-repeat;
+    background: transparent url("@images/icons/icon-link.svg") no-repeat;
     background-position: left center;
     opacity: 0;
     transition: opacity 150ms linear;

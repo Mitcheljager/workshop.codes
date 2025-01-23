@@ -23,7 +23,21 @@ class Wiki::ArticlesController < Wiki::BaseController
     @article = Wiki::Article.where(slug: params[:slug]).last
 
     not_found and return unless @article
-    redirect_to_latest_article
+
+    latest_article = Wiki::Article.where(group_id: @article.group_id).last
+
+    # Redirect to the latest article within the same group if it's a HTML request
+    # Render the JSON for the latest article if it's a JSON request
+    if latest_article != @article
+      respond_to do |format|
+        format.html { redirect_to wiki_article_path(latest_article.slug) and return }
+        format.json {
+          latest_article.readonly!
+          latest_article.content = sanitized_markdown(latest_article.content) if params[:parse_markdown]
+          render json: latest_article.to_json(include: :category) and return
+        }
+      end
+    end
 
     @initial_article = Wiki::Article.where(group_id: @article.group_id).first
 
@@ -129,14 +143,6 @@ class Wiki::ArticlesController < Wiki::BaseController
       return "#{ slug }-#{ random_string }"
     else
       return slug
-    end
-  end
-
-  def redirect_to_latest_article
-    @latest_article = Wiki::Article.where(group_id: @article.group_id).last
-
-    if @latest_article != @article
-      redirect_to wiki_article_path(@latest_article.slug)
     end
   end
 

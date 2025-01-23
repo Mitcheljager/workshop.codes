@@ -116,26 +116,12 @@
   background: $bg-dark;
   box-shadow: $shadow;
 
-  @include media-min(sm) {
-    display: block;
-  }
-
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("/images/snowball-face.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 40%;
-  }
-
   @include hover-stack {
     filter: brightness(1.15);
+  }
+
+  @include media-min(sm) {
+    display: block;
   }
 
   .item--large & {
@@ -214,6 +200,10 @@
 
     @include hover-stack {
       color: $white;
+
+      @include high-contrast() {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -275,11 +265,15 @@
   }
 
   a {
-    color: $text-color;
+    color: $text-color-light;
     text-decoration: none;
 
     @include hover-stack {
       color: $text-color-lightest;
+
+      @include high-contrast() {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -442,17 +436,26 @@
     }
   }
 
+  a {
+    color: currentColor;
+    text-decoration: underline;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
   img {
     max-width: 100%;
     height: auto;
   }
 
-  h1,
-  h2 {
+  h1 {
     margin: $margin 0 $margin * 0.5;
     line-height: 1.1em;
   }
 
+  h2,
   h3,
   h4,
   h5,
@@ -542,10 +545,11 @@
   }
 
   pre {
-    @include styled-scrollbar;
     width: 100%;
     overflow-x: auto;
     tab-size: 2;
+
+    @include styled-scrollbar;
 
     code {
       white-space: pre;

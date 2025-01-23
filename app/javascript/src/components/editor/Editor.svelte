@@ -31,18 +31,14 @@
   let loading = true
   let currentSidebarTab = "wiki"
 
-  $: if ($currentProject && $sortedItems?.length && $currentItem && !Object.keys($currentItem).length)
-    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || {}
-
   let isCurrentItemInherentlyHidden = false
   $: isCurrentItemInherentlyHidden = $currentItem && isInherentlyHidden($currentItem)
 
   $: if (data) $completionsMap = parseKeywords($settings)
+  $: if ($currentProject && !$currentItem) openFirstItem()
 
   // Updates the tab title
   $: document.title = $currentProject?.title !== undefined ? `${$currentProject.title} | Workshop.codes Script Editor` : "Workshop.codes Script Editor | Workshop.codes"
-
-  $: document.body.classList.toggle("is-firefox", navigator.userAgent.includes("Firefox"))
 
   onMount(async() => {
     loading = true
@@ -59,7 +55,7 @@
     $projects = userProjects || []
     defaults = data.defaults || {}
 
-    $currentItem = $items?.[0] || {}
+    $currentItem = $items?.[0] || null
 
     loading = false
   })
@@ -68,11 +64,11 @@
     const { events, values, actions, constants, heroes, maps } = data
 
     const mappedEvents = objectToKeyword(events, "event")
-    const mappedValues = objectToKeyword(values, "text")
-    const mappedActions = objectToKeyword(actions, "function")
+    const mappedValues = objectToKeyword(values, "value")
+    const mappedActions = objectToKeyword(actions, "action")
     const mappedConstants = objectToKeyword(Object.values(constants).map(c => Object.values(c)).flat(1), "constant")
-    const mappedHeroes = objectToKeyword(heroes, "text")
-    const mappedMaps = objectToKeyword(maps, "text")
+    const mappedHeroes = objectToKeyword(heroes, "hero")
+    const mappedMaps = objectToKeyword(maps, "map")
 
     return [...mappedEvents, ...mappedValues, ...mappedActions, ...mappedConstants, ...mappedHeroes, ...mappedMaps]
   }
@@ -101,14 +97,28 @@
         if (nullCount) params.args_min_length = v.args.length - nullCount
       }
 
+      // Add detail arguments to autocomplete results
+      const detail = v.args?.map(a => `${toCapitalize(a.name)}`) || []
+
+      let returnValue = v.return || "Void"
+
+      if (Array.isArray(returnValue)) returnValue = returnValue.map(i => `<em>${i}</em>`).join(" | ")
+      else if (typeof returnValue === "string") returnValue = `<em>${returnValue}</em>`
+      else if (typeof returnValue === "object") returnValue = Object.entries(returnValue).map(([key, value]) => `<em>${key}</em> (<em>${value}</em>)`).join(" | ")
+
+      const detailFull = `
+        ${detail.length ? `Properties: ${detail.map(d => `<mark>${d}</mark>`).join(", ")}` : ""}
+        ${detail.length ? "<hr>" : ""}
+        Returns: ${returnValue}
+        <hr>
+        <strong class="text-light">${params.label}</strong><br>
+        ${params.info}
+      `
+
+      params.detail_full = detailFull
+      params.detail = detail.length ? `(${detail.join(", ").slice(0, 30)}${detail.join(", ").length > 30 ? "..." : ""})` : ""
+
       if (!params.args_length) return params
-
-      // Add detail arguments in autocomplete results
-      const detail = v.args.map(a => `${toCapitalize(a.name)}`)
-      const joinedDetail = detail.join(", ")
-
-      params.detail_full = joinedDetail
-      params.detail = `(${joinedDetail.slice(0, 30)}${joinedDetail.length > 30 ? "..." : ""})`
 
       // Add apply values when selecting autocomplete, filling in default args
       const lowercaseDefaults = Object.keys(defaults).map(k => k.toLowerCase())
@@ -116,7 +126,7 @@
       const useNewlines = params.args_length >= $settings["autocomplete-min-parameter-newlines"]
 
       // Generate Apply map to be used for autocomplete and other bits
-      const apply = v.args.map(a => {
+      const apply = v.args?.map(a => {
         const name = toCapitalize(a.name?.toString().toLowerCase())
         let defaultValue = a.default?.toString().toLowerCase().replaceAll(",", "")
 
@@ -129,6 +139,7 @@
       // Set completion map keys and default
       params.parameter_keys = detail
       params.parameter_defaults = apply.map(([_, defaultValue]) => defaultValue)
+      params.parameter_types = v.args.map(a => a.type)
 
       const applyValues = apply.map(([name, defaultValue]) => {
         // If useParameterObject is enabled add the parameter name to the apply.
@@ -147,8 +158,9 @@
         `${v["en-US"]}(${applyValues.join(", ")})`
 
       // Add arguments to info box
-      params.info += "\n\nArguments: "
-      params.info += detail
+      params.info += "\n\nProperties: "
+      params.info += params.parameter_keys.join(", ")
+      params.info += `\n\nReturn: ${returnValue.replaceAll("<em>", "").replaceAll("</em>", "")}`
 
       return params
     })
@@ -188,6 +200,10 @@
       .catch(error => {
         alert(`Something went wrong while loading, please try again. ${error}`)
       })
+  }
+
+  function openFirstItem() {
+    $currentItem = $sortedItems.filter(i => i.type == "item")?.[0] || null
   }
 </script>
 
@@ -236,7 +252,7 @@
         <!-- This key makes it so CodeMirror has to re-render when the "word-wrap" setting is changed.
         There could be more elegant solutions that use the CodeMirror API to update extensions,
         but this is the far more simple and readable solution. -->
-        {#key $settings["word-wrap"]}
+        {#key $settings["word-wrap"] + $settings["highlight-trailing-whitespace"] + $settings["tooltip-hover-delay"] + $settings["rainbow-brackets"]}
           <CodeMirror on:search={async({ detail }) => {
             currentSidebarTab = "wiki"
             await tick()
@@ -276,7 +292,7 @@
     </div>
   {:else if loading}
     <div class="fullscreen-overlay">
-      <div class="spinner"/>
+      <div class="spinner" aria-live="polite" role="status" />
     </div>
   {:else}
     <Empty />

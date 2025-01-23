@@ -11,11 +11,11 @@
           inactive_icon: image_path("icons/icon-heart-border.svg")
         },
         class: "favorite #{ "favorite--is-active" if has_been_favorited }" do %>
-      <%= image_tag "icons/icon-heart#{ "-border" unless has_been_favorited }.svg", width: 24, height: 24, aria: { label: "Favorite" } %>
+      <%= image_tag "icons/icon-heart#{ "-border" unless has_been_favorited }.svg", width: 24, height: 24, alt: "" %>
     <% end %>
   </div>
 <% else %>
   <%= link_to login_path, class: "favorite", aria: { label: "Favorite code '#{ post.code }'" } do %>
-    <%= image_tag "icons/icon-heart-border.svg", width: 24, height: 24, aria: { label: "Favorite" } %>
+    <%= image_tag "icons/icon-heart-border.svg", width: 24, height: 24, alt: "" %>
   <% end %>
 <% end %>

@@ -1,10 +1,7 @@
----
-return:
-  description: Stops execution of the action list.
-  args:
+-
   return: Void
   en-US: Abort
-__abortIf__:
+-
   description: Stops execution of the action list if this action's condition evaluates to true. If it does not, execution continues with the next action.
   args:
   - name: Condition
@@ -13,17 +10,15 @@ __abortIf__:
     default: Compare
   return: Void
   en-US: Abort If
-__abortIfConditionIsFalse__:
+-
   description: Stops execution of the action list if at least one condition in the condition list is false. If all conditions are true, execution continues with the next action.
-  args: []
   return: Void
   en-US: Abort If Condition Is False
-__abortIfConditionIsTrue__:
+-
   description: Stops execution of the action list if all conditions in the condition list are true. If any are false, execution continues with the next action.
-  args: []
   return: Void
   en-US: Abort If Condition Is True
-_&allowButton:
+-
   description: Undoes the effect of the disallow button action for one or more players.
   args:
   - name: Player
@@ -34,11 +29,11 @@ _&allowButton:
     default: Event Player
   - name: Button
     description: The logical button that is being reenabled.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Allow Button
-_&applyImpulse:
+-
   description: Applies an instantaneous change in velocity to the movement of one or more players.
   args:
   - name: Player
@@ -53,36 +48,36 @@ _&applyImpulse:
     default: Vector
   - name: Speed
     description: The magnitude of the change to the velocities of the player or players.
-    type: float
+    type: Float
     default: Number
   - name: Relative
     description: Specifies whether direction is relative to world coordinates or the local coordinates of the player or players.
     type: Relativity
     default: To World
-  - name: MOTION
+  - name: Motion
     description: Specifies whether existing velocity that is counter to direction should first be cancelled out before applying the impulse.
     type: Impulse
     default: Cancel Contrary Motion
   return: Void
   en-US: Apply Impulse
-_&attachTo:
+-
   description: Attaches the player (the 'child') to another player (the 'parent'). Once attached, the child will be unable to move freely until detached or teleported away. Multiple children may be attached to the same parent, but not vice versa.
   args:
-  - name: CHILD
+  - name: Child
     description: The player that will attach to the parent. This player will be unable to move freely until detached or teleported away.
     type: Player
     default: Event Player
-  - name: PARENT
+  - name: Parent
     description: The player to whom the child will attach. This player's movement will be unaffected and will determine the child's position.
     type: Player
     default: Last Created Entity Entity
-  - name: OFFSET
+  - name: Offset
     description: The coordinates of the child relative to the parent. For example, `vect(1,2,0)` would be above and to the left of the parent's head.
     type: Position
     default: Vector
   return: Void
   en-US: Attach Players
-bigMessage:
+-
   description: Displays a large message above the reticle that is visible to specific players.
   args:
   - name: Visible To
@@ -97,12 +92,12 @@ bigMessage:
     default: String
   return: Void
   en-US: Big Message
-break:
+-
   description: Goes to the end of the innermost `switch` statement, or `do/while`, `while` or `for` loop.
   args:
   return: Void
   en-US: Break
-__callSubroutine__:
+-
   description: Pauses execution of the current rule and begins executing a subroutine rule (which is a rule with a subroutine event type). When the subroutine rule finishes, the original rule resumes execution. The subroutine will have access to the same contextual values (such as Event Player) as the original rule.
   args:
   - name: Subroutine
@@ -111,7 +106,7 @@ __callSubroutine__:
     default: Sub0
   return: Void
   en-US: Call Subroutine
-_&cancelPrimaryAction:
+-
   description: Cancels the active abilities for one or more players. Equivalent to a short stun.
   args:
   - name: Player
@@ -122,53 +117,53 @@ _&cancelPrimaryAction:
     default: Event Player
   return: Void
   en-US: Cancel Primary Action
-__chaseGlobalVariableAtRate__:
+-
   description: Gradually modifies the value of a global variable at a specific rate. (A global variable is a variable that belongs to the game itself.)
   args:
   - name: Variable
     description: Specifies which global variable to modify gradually.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Destination
     description: The value that the global variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Rate
     description: The amount of change that will happen to the variable's value each second.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseRateReeval__
+    type: Chase Reevaluation
     default: Destination And Rate
   return: Void
   en-US: Chase Global Variable At Rate
-__chaseGlobalVariableOverTime__:
+-
   description: Gradually modifies the value of a global variable over time. (A global variable is a variable that belongs to the game itself.)
   args:
   - name: Variable
     description: Specifies which global variable to modify gradually.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Destination
     description: The value that the global variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Duration
     description: The amount of time, in seconds, over which the variable's value will approach the destination.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseTimeReeval__
+    type: Chase Time Reevaluation
     default: Destination And Duration
   return: Void
   en-US: Chase Global Variable Over Time
-__chasePlayerVariableAtRate__:
+-
   description: Gradually modifies the value of a player variable at a specific rate. (A player variable is a variable that belongs to a specific player.)
   args:
   - name: Player
@@ -179,25 +174,25 @@ __chasePlayerVariableAtRate__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify gradually.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Destination
     description: The value that the player variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Rate
     description: The amount of change that will happen to the variable's value each second.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseRateReeval__
+    type: Chase Reevaluation
     default: Destination And Rate
   return: Void
   en-US: Chase Player Variable At Rate
-__chasePlayerVariableOverTime__:
+-
   description: Gradually modifies the value of a player variable over time. (A player variable is a variable that belongs to a specific player.)
   args:
   - name: Player
@@ -208,25 +203,25 @@ __chasePlayerVariableOverTime__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify gradually.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Destination
     description: The value that the player variable will eventually reach. The type of this value may be either a number or a vector, though the variable's existing value must be of the same type before the chase begins.
     type:
-    - float
+    - Float
     - Vector
     default: Number
   - name: Duration
     description: The amount of time, in seconds, over which the variable's value will approach the destination.
-    type: float
+    type: Float
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: __ChaseTimeReeval__
+    type: Chase Time Reevaluation
     default: Destination And Duration
   return: Void
   en-US: Chase Player Variable Over Time
-_&clearStatusEffect:
+-
   description: Clears a status that was applied from a set status action from one or more players.
   args:
   - name: Player
@@ -241,7 +236,7 @@ _&clearStatusEffect:
     default: Hacked
   return: Void
   en-US: Clear Status
-_&communicate:
+-
   description: Causes one or more players to use an emote, voice line, or other equipped communication.
   args:
   - name: Player
@@ -256,12 +251,12 @@ _&communicate:
     default: Voice Line Up
   return: Void
   en-US: Communicate
-continue:
+-
   description: Goes back to the start of the innermost loop.
   args:
   return: Void
   en-US: Continue
-createBeam:
+-
   description: Creates an in-world beam effect entity. This effect entity will persist until destroyed. To obtain a reference to this entity, use the last created entity value. This action will fail if too many entities have been created.
   args:
   - name: Visible To
@@ -285,14 +280,14 @@ createBeam:
   - name: Color
     description: The color of the beam to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer. Does not apply to sound effects. Only the "good" and "bad" beam effects can have color applied.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
-    type: EffectReeval
-    default: Visible To, Position, And Radius
+    type: Effect Reevaluation
+    default: Visible To Position And Radius
   return: Void
   en-US: Create Beam Effect
-createDummy:
+-
   description: Adds a new bot to the specified slot on the specified team so long as the slot is available. This bot will only move, fire, or use abilities if executing workshop actions.
   args:
   - name: Hero
@@ -311,13 +306,13 @@ createDummy:
     description: The initial position where the bot will appear.
     type: Position
     default: Vector
-  - name: FACING
+  - name: Facing
     description: The initial direction that the bot will face.
     type: Direction
     default: Vector
   return: Void
   en-US: Create Dummy Bot
-createEffect:
+-
   description: Creates an in-world effect entity. This effect entity will persist
     until destroyed. To obtain a reference to this entity, use the last created entity
     value. This action will fail if too many entities have been created.
@@ -335,7 +330,7 @@ createEffect:
   - name: Color
     description: The color of the effect to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer. Does not apply to sound effects.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Position
     description: The effect's position. If this value is a player, then the effect will move along with the player. Otherwise, the value is interpreted as a position in the world.
     type: Position
@@ -346,11 +341,11 @@ createEffect:
     default: Number (1)
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated.
-    type: EffectReeval
-    default: Visible To, Position, And Radius
+    type: Effect Reevaluation
+    default: Visible To Position And Radius
   return: Void
   en-US: Create Effect
-__hudText__:
+-
   description: Creates hud text visible to specific players at a specific location
     on the screen. This text will persist until destroyed. To obtain a reference to
     this text, use the last text id value. This action will fail if too many text
@@ -376,35 +371,35 @@ __hudText__:
     default: 'Null'
   - name: Location
     description: The location on the screen where the text will appear.
-    type: HudPosition
+    type: HUD Position
     default: Left
   - name: SORT ORDER
     description: The sort order of the text relative to other text in the same location. A higher sort order will come after a lower sort order.
-    type: float
+    type: Float
     default: Number
   - name: Header Color
     description: The color of the header.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Subheader Color
     description: The color of the subheader.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Text Color
     description: The color of the text.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated.
-    type: HudReeval
+    type: HUD Reevaluation
     default: Visible To And String
   - name: Spectators
     description: Whether spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   return: Void
   en-US: Create HUD Text
-createIcon:
+-
   description: Creates an in-world icon entity. This icon entity will persist until
     destroyed. To obtain a reference to this entity, use the last created entity value.
     This action will fail if too many entities have been created.
@@ -425,19 +420,19 @@ createIcon:
     default: 'Arrow: Down'
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The icon will keep asking for and using new values from reevaluated inputs.
-    type: IconReeval
+    type: Icon Reevaluation
     default: Visible To And Position
   - name: Icon Color
     description: The color of the icon to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Show When Offscreen
     description: Should this icon appear even when it is behind you?
     type: Boolean
     default: 'True'
   return: Void
   en-US: Create Icon
-createInWorldText:
+-
   description: Creates in-world text visible to specific players at a specific position
     in the world. This text will persist until destroyed. To obtain a reference to
     this text, use the last text id value. This action will fail if too many text
@@ -459,7 +454,7 @@ createInWorldText:
     default: Vector
   - name: Scale
     description: The text's scale.
-    type: float
+    type: Float
     default: Number (1)
   - name: Clipping
     description: Specifies whether the text can be seen through walls or is instead clipped.
@@ -467,19 +462,19 @@ createInWorldText:
     default: Clip Against Surfaces
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The text will keep asking for and using new values from reevaluated inputs.
-    type: WorldTextReeval
-    default: Visible To, Position, And String
+    type: In-World Text Reevaluation
+    default: Visible To Position And String
   - name: Text Color
     description: Specifies the color of the in-world text to use.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Spectators
     description: Whether spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   return: Void
   en-US: Create In-World Text
-damage:
+-
   description: Applies instantaneous damage to one or more players, possibly killing
     the players.
   args:
@@ -495,17 +490,16 @@ damage:
     default: 'Null'
   - name: Amount
     description: The amount of damage to apply. This amount may be modified by buffs, debuffs, or armor.
-    type: float
+    type: Float
     default: Number
   return: Void
   en-US: Damage
-declareDraw:
+-
   description: Instantly ends the match in a draw. This action has no effect in free-for-all
     modes.
-  args: []
   return: Void
   en-US: Declare Match Draw
-declarePlayerVictory:
+-
   description: Instantly ends the match with the specific player as the winner. This
     action only has an effect in free-for-all modes.
   args:
@@ -515,13 +509,12 @@ declarePlayerVictory:
     default: Event Player
   return: Void
   en-US: Declare Player Victory
-declareRoundDraw:
+-
   description: Declare a draw for the current round. This only works in the elimination
     game mode.
-  args: []
   return: Void
   en-US: Declare Round Draw
-declareRoundVictory:
+-
   description: Declare a team as the current round winner. This only works in the
     control and elimination game modes.
   args:
@@ -531,7 +524,7 @@ declareRoundVictory:
     default: Team
   return: Void
   en-US: Declare Round Victory
-declareTeamVictory:
+-
   description: Instantly ends the match with the specified team as the winner. This
     action has no effect in free-for-all modes.
   args:
@@ -541,32 +534,27 @@ declareTeamVictory:
     default: Team
   return: Void
   en-US: Declare Team Victory
-destroyAllDummies:
+-
   description: Removes all dummy bots from the match.
-  args: []
   return: Void
   en-US: Destroy All Dummy Bots
-destroyAllEffects:
+-
   description: Destroys all effect entities created by create effect.
-  args: []
   return: Void
   en-US: Destroy All Effects
-destroyAllHudTexts:
+-
   description: Destroys all hud text that was created by the create hud text action.
-  args: []
   return: Void
   en-US: Destroy All HUD Text
-destroyAllIcons:
+-
   description: Destroys all icon entities created by create icon.
-  args: []
   return: Void
   en-US: Destroy All Icons
-destroyAllInWorldText:
+-
   description: Destroys all in-world text created by create in-world text.
-  args: []
   return: Void
   en-US: Destroy All In-World Text
-destroyDummy:
+-
   description: Removes the specified dummy bot from the match.
   args:
   - name: Team
@@ -579,43 +567,43 @@ destroyDummy:
     default: Number
   return: Void
   en-US: Destroy Dummy Bot
-destroyEffect:
+-
   description: Destroys an effect entity that was created by create effect.
   args:
   - name: Entity
     description: Specifies which effect entity to destroy. This entity may be last created entity or a variable into which last created entity was earlier stored.
-    type: EntityId
+    type: Entity ID
     default: Last Created Entity Entity
   return: Void
   en-US: Destroy Effect
-destroyHudText:
+-
   description: Destroys hud text that was created by create hud text.
   args:
   - name: Text ID
     description: Specifies which hud text to destroy. This id may be last text id or a variable into which last text id was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   return: Void
   en-US: Destroy HUD Text
-destroyIcon:
+-
   description: Destroys an icon entity that was created by create icon.
   args:
   - name: Entity
     description: Specifies which icon entity to destroy. This entity may be last created entity or a variable into which last created entity was earlier stored.
-    type: EntityId
+    type: Entity ID
     default: Last Created Entity Entity
   return: Void
   en-US: Destroy Icon
-destroyInWorldText:
+-
   description: Destroys in-world text that was created by create in-world text.
   args:
   - name: Text ID
     description: Specifies which in-world text to destroy. This id may be last text id or a variable into which last text id was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   return: Void
   en-US: Destroy In-World Text
-_&detach:
+-
   description: Undoes the attachment caused by the 'attachTo' action for one or more
     players. These players will resume normal movement from their current position.
   args:
@@ -627,24 +615,21 @@ _&detach:
     default: Event Player
   return: Void
   en-US: Detach Players
-disableAnnouncer:
+-
   description: Disables game mode announcements from the announcer until reenabled
     or the match ends.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Announcer
-disableGamemodeCompletion:
+-
   description: Disables completion of the match from the game mode itself, only allowing
     the match to be completed by scripting commands.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Completion
-disableMusic:
+-
   description: Disables all game mode music until reenabled or the match ends.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Music
-_&disableRespawn:
+-
   description: Disables automatic respawning for one or more players, only allowing
     respawning by scripting commands.
   args:
@@ -656,13 +641,12 @@ _&disableRespawn:
     default: Event Player
   return: Void
   en-US: Disable Built-In Game Mode Respawning
-disableScoring:
+-
   description: Disables changes to player and team scores from the game mode itself,
     only allowing scores to be changed by scripting commands.
-  args: []
   return: Void
   en-US: Disable Built-In Game Mode Scoring
-_&disableDeathSpectateAllPlayers:
+-
   description: Undoes the effect of the enable death spectate all players action for
     or more players.
   args:
@@ -674,7 +658,7 @@ _&disableDeathSpectateAllPlayers:
     default: Event Player
   return: Void
   en-US: Disable Death Spectate All Players
-_&disableDeathSpectateTargetHud:
+-
   description: Undoes the effect of the enable death spectate target hud action for
     or more players.
   args:
@@ -686,14 +670,13 @@ _&disableDeathSpectateTargetHud:
     default: Event Player
   return: Void
   en-US: Disable Death Spectate Target HUD
-disableInspector:
+-
   description: Causes the workshop inspector to stop recording new entries. This has
     the benefit of reducing your script's server load, particularly when modifying
     arrays.
-  args: []
   return: Void
   en-US: Disable Inspector Recording
-_&disallowButton:
+-
   description: Disables a logical button for one or more players such that pressing
     it has no effect.
   args:
@@ -705,17 +688,16 @@ _&disallowButton:
     default: Event Player
   - name: Button
     description: The logical button that is being disabled.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Disallow Button
-__else__:
+-
   description: Denotes the beginning of a series of actions that will only execute
     if the previous If or Else If action's condition was false.
-  args: []
   return: Void
   en-US: Else
-__elif__:
+-
   description: Denotes the beginning of a series of actions that will only execute
     if the specified condition is true and the previous If or Else If action's condition
     was false.
@@ -726,22 +708,19 @@ __elif__:
     default: Compare
   return: Void
   en-US: Else If
-enableAnnouncer:
+-
   description: Undoes the effect of the disable built-in game mode announcer action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Announcer
-enableGamemodeCompletion:
+-
   description: Undoes the effect of the disable built-in game mode completion action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Completion
-enableMusic:
+-
   description: Undoes the effect of the disable built-in game mode music action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Music
-_&enableRespawn:
+-
   description: Undoes the effect of the disable built-in game mode respawning action
     for one or more players.
   args:
@@ -753,12 +732,11 @@ _&enableRespawn:
     default: Event Player
   return: Void
   en-US: Enable Built-In Game Mode Respawning
-enableScoring:
+-
   description: Undoes the effect of the disable built-in game mode scoring action.
-  args: []
   return: Void
   en-US: Enable Built-In Game Mode Scoring
-_&enableDeathSpectateAllPlayers:
+-
   description: Allows one or more players to spectate all players when dead, as opposed
     to only allies.
   args:
@@ -770,7 +748,7 @@ _&enableDeathSpectateAllPlayers:
     default: Event Player
   return: Void
   en-US: Enable Death Spectate All Players
-_&enableDeathSpectateTargetHud:
+-
   description: Causes one or more players to see their spectate target's hud instead
     of their own while death spectating.
   args:
@@ -782,20 +760,18 @@ _&enableDeathSpectateTargetHud:
     default: Event Player
   return: Void
   en-US: Enable Death Spectate Target HUD
-enableInspector:
+-
   description: Causes the workshop inspector to resume recording new entries (in case
     it had been disabled earlier). Enabling recording at specific times may make it
     easier to debug problematic areas in your logic.
-  args: []
   return: Void
   en-US: Enable Inspector Recording
-__end__:
+-
   description: Denotes the end of a series of actions started by an if, else if, else,
     while, or for action.
-  args: []
   return: Void
   en-US: End
-__forGlobalVariable__:
+-
   description: Denotes the beginning of a series of actions that will execute in a
     loop, modifying the control variable on each loop. The corresponding end action
     denotes the end of the loop. If the control variable reaches or passes the range
@@ -804,23 +780,23 @@ __forGlobalVariable__:
   args:
   - name: Control Variable
     description: The variable being modified in this loop. It is set to the range start value when the loop begins, and the loop continues until the control variable reaches or passes the range stop value.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Range Start
     description: The control variable is set to this value when the loop begins.
-    type: float
+    type: Float
     default: Number
   - name: Range Stop
     description: If the control variable reaches or passes this value, then the loop will exit, and execution jumps to the next action after the end action. Whether this value is considered passed or not is based on whether the step value is negative or positive. If the control variable has already reached or passed this value when the loop begins, then the loop exits.
-    type: float
+    type: Float
     default: Count OF
   - name: Step
     description: This value is added to the control variable when the end action is reached. If this modification causes the control variable to reach or pass the range stop value, then the loop exits, and execution jumps to the next action after the end action. Otherwise, the loop continues, and execution jumps to the next action after the for action.
-    type: float
+    type: Float
     default: Number (1)
   return: Void
   en-US: For Global Variable
-__forPlayerVariable__:
+-
   description: Denotes the beginning of a series of actions that will execute in a
     loop, modifying the control variable on each loop. The corresponding end action
     denotes the end of the loop. If the control variable reaches or passes the range
@@ -833,29 +809,28 @@ __forPlayerVariable__:
     default: Event Player
   - name: Control Variable
     description: The variable being modified in this loop. It is set to the range start value when the loop begins, and the loop continues until the control variable reaches or passes the range stop value.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Range Start
     description: The control variable is set to this value when the loop begins.
-    type: float
+    type: Float
     default: Number
   - name: Range Stop
     description: If the control variable reaches or passes this value, then the loop will exit, and execution jumps to the next action after the end action. Whether this value is considered passed or not is based on whether the step value is negative or positive. If the control variable has already reached or passed this value when the loop begins, then the loop exits.
-    type: float
+    type: Float
     default: Count OF
   - name: Step
     description: This value is added to the control variable when the end action is reached. If this modification causes the control variable to reach or pass the range stop value, then the loop exits, and execution jumps to the next action after the end action. Otherwise, the loop continues, and execution jumps to the next action after the for action.
-    type: float
+    type: Float
     default: Number (1)
   return: Void
   en-US: For Player Variable
-goToAssembleHeroes:
+-
   description: Returns the match to the assemble heroes phase of the game mode. Only
     works if the game is in progress.
-  args: []
   return: Void
   en-US: Go To Assemble Heroes
-heal:
+-
   description: Provides an instantaneous heal to one or more players. This heal will
     not resurrect dead players.
   args:
@@ -871,11 +846,11 @@ heal:
     default: 'Null'
   - name: Amount
     description: The amount of healing to apply. This amount may be modified by buff or debuffs. Healing is capped by each player's max health.
-    type: float
+    type: Float
     default: Number
   return: Void
   en-US: Heal
-__if__:
+-
   description: Denotes the beginning of a series of actions that will only execute
     if the specified condition is true.
   args:
@@ -885,7 +860,7 @@ __if__:
     default: Compare
   return: Void
   en-US: If
-kill:
+-
   description: Instantly kills one or more players.
   args:
   - name: Player
@@ -894,20 +869,19 @@ kill:
     - Player
     - Array: Player
     default: Event Player
-  - name: KILLER
+  - name: Killer
     description: The player who will receive credit for the kill. A killer of null indicates no player will receive credit.
     type: Player
     default: 'Null'
   return: Void
   en-US: Kill
-__loop__:
+-
   description: Restarts the action list from the beginning. To prevent an infinite
     loop, a wait action must execute between the start of the action list and this
     action.
-  args: []
   return: Void
   en-US: Loop
-__loopIf__:
+-
   description: Restarts the action list from the beginning if this action's condition
     evaluates to true. If it does not, execution continues with the next action. To
     prevent an infinite loop, a wait action must execute between the start of the
@@ -919,33 +893,31 @@ __loopIf__:
     default: Compare
   return: Void
   en-US: Loop If
-__loopIfConditionIsFalse__:
+-
   description: Restarts the action list from the beginning if at least one condition
     in the condition list is false. If all conditions are true, execution continues
     with the next action. To prevent an infinite loop, a wait action must execute
     between the start of the action list and this action.
-  args: []
   return: Void
   en-US: Loop If Condition Is False
-__loopIfConditionIsTrue__:
+-
   description: Restarts the action list from the beginning if every condition in the
     condition list is true. If any are false, execution continues with the next action.
     To prevent an infinite loop, a wait action must execute between the start of the
     action list and this action.
-  args: []
   return: Void
   en-US: Loop If Condition Is True
-__modifyGlobalVariable__:
+-
   description: Modifies the value of a global variable, which is a variable that belongs
     to the game itself.
   args:
   - name: Variable
     description: The global variable to modify.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -955,13 +927,13 @@ __modifyGlobalVariable__:
     default: Number
   return: Void
   en-US: Modify Global Variable
-__modifyGlobalVariableAtIndex__:
+-
   description: Modifies the value of a global variable at an index, which is a variable
     that belongs to the game itself.
   args:
   - name: Variable
     description: The global variable to modify.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -969,7 +941,7 @@ __modifyGlobalVariableAtIndex__:
     default: Number
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -979,7 +951,7 @@ __modifyGlobalVariableAtIndex__:
     default: Number
   return: Void
   en-US: Modify Global Variable At Index
-_&addToScore:
+-
   description: Modifies the score (kill count) of one or more players. This action
     only has an effect in free-for-all modes.
   args:
@@ -995,7 +967,7 @@ _&addToScore:
     default: Number
   return: Void
   en-US: Modify Player Score
-__modifyPlayerVariable__:
+-
   description: Modifies the value of a player variable, which is a variable that belongs
     to a specific player.
   args:
@@ -1007,11 +979,11 @@ __modifyPlayerVariable__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -1021,7 +993,7 @@ __modifyPlayerVariable__:
     default: Number
   return: Void
   en-US: Modify Player Variable
-__modifyPlayerVariableAtIndex__:
+-
   description: Modifies the value of a player variable at an index, which is a variable
     that belongs to a specific player.
   args:
@@ -1033,7 +1005,7 @@ __modifyPlayerVariableAtIndex__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to modify.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -1041,7 +1013,7 @@ __modifyPlayerVariableAtIndex__:
     default: Number
   - name: Operation
     description: The way in which the variable's value will be changed. Options include standard arithmetic operations as well as array operations for appending and removing values.
-    type: __Operation__
+    type: Operation
     default: Add
   - name: Value
     description: The value used for the modification. For arithmetic operations, this is the second of the two operands, with the other being the variable's existing value. For array operations, this is the value to append or remove.
@@ -1051,7 +1023,7 @@ __modifyPlayerVariableAtIndex__:
     default: Number
   return: Void
   en-US: Modify Player Variable At Index
-addToTeamScore:
+-
   description: Modifies the score of one or both teams. This action has no effect
     in free-for-all modes or modes without a team score.
   args:
@@ -1065,13 +1037,12 @@ addToTeamScore:
     default: Number
   return: Void
   en-US: Modify Team Score
-pauseMatchTime:
+-
   description: Pauses the match time. Players, objective logic, and game mode advancement
     criteria are unaffected by the pause.
-  args: []
   return: Void
   en-US: Pause Match Time
-playEffect:
+-
   description: Plays an effect at a position in the world. The lifetime of this effect
     is short, so it does not need to be updated or destroyed.
   args:
@@ -1088,7 +1059,7 @@ playEffect:
   - name: Color
     description: The color of the effect to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Position
     description: The effect's position. If this value is a player, then the effect will play at the player's position. Otherwise, the value is interpreted as a position in the world.
     type: Position
@@ -1099,7 +1070,7 @@ playEffect:
     default: Number (1)
   return: Void
   en-US: Play Effect
-_&preloadHero:
+-
   description: Preemptively loads the specified hero or heroes into memory using the
     skins of the specified player or players, available memory permitting. Useful
     whenever rapid hero changing is possible and the next hero is known.
@@ -1118,7 +1089,7 @@ _&preloadHero:
     default: Hero
   return: Void
   en-US: Preload Hero
-_&forceButtonPress:
+-
   description: Forces one or more players to press a button virtually for a single
     frame.
   args:
@@ -1130,11 +1101,11 @@ _&forceButtonPress:
     default: Event Player
   - name: Button
     description: The button to be pressed.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Press Button
-_&resetHeroAvailability:
+-
   description: Restores the list of heroes available to one or more players to the
     list specified by the game settings. If a player's current hero becomes unavailable,
     the player is forced to choose a different hero and respawn at an appropriate
@@ -1148,7 +1119,7 @@ _&resetHeroAvailability:
     default: Event Player
   return: Void
   en-US: Reset Player Hero Availability
-_&respawn:
+-
   description: Respawns one or more players at an appropriate spawn location with
     full health, even if they were already alive.
   args:
@@ -1160,7 +1131,7 @@ _&respawn:
     default: Event Player
   return: Void
   en-US: Respawn
-_&resurrect:
+-
   description: Instantly resurrects one or more players at the location they died
     with no transition.
   args:
@@ -1172,7 +1143,7 @@ _&resurrect:
     default: Event Player
   return: Void
   en-US: Resurrect
-_&setAbility1Enabled:
+-
   description: Enables or disables ability 1 for one or more players.
   args:
   - name: Player
@@ -1187,7 +1158,7 @@ _&setAbility1Enabled:
     default: 'True'
   return: Void
   en-US: Set Ability 1 Enabled
-_&setAbility2Enabled:
+-
   description: Enables or disables ability 2 for one or more players.
   args:
   - name: Player
@@ -1202,7 +1173,7 @@ _&setAbility2Enabled:
     default: 'True'
   return: Void
   en-US: Set Ability 2 Enabled
-_&setAbilityCooldown:
+-
   description: Set the ability cooldown time for one or more players.
   args:
   - name: Player
@@ -1221,7 +1192,7 @@ _&setAbilityCooldown:
     default: Number
   return: Void
   en-US: Set Ability Cooldown
-_&setAimSpeed:
+-
   description: Sets the aim speed of one or more players to a percentage of their
     normal aim speed.
   args:
@@ -1237,7 +1208,7 @@ _&setAimSpeed:
     default: Number
   return: Void
   en-US: Set Aim Speed
-_&setCrouchEnabled:
+-
   description: Enables or disables crouch for one or more players.
   args:
   - name: Player
@@ -1252,7 +1223,7 @@ _&setCrouchEnabled:
     default: 'True'
   return: Void
   en-US: Set Crouch Enabled
-_&setDamageDealt:
+-
   description: Sets the damage dealt of one or more players to a percentage of their
     raw damage dealt.
   args:
@@ -1268,7 +1239,7 @@ _&setDamageDealt:
     default: Number
   return: Void
   en-US: Set Damage Dealt
-_&setDamageReceived:
+-
   description: Sets the damage received of one or more players to a percentage of
     their raw damage received.
   args:
@@ -1284,7 +1255,7 @@ _&setDamageReceived:
     default: Number
   return: Void
   en-US: Set Damage Received
-_&setFacing:
+-
   description: Sets the facing of one or more players to the specified direction.
   args:
   - name: Player
@@ -1303,13 +1274,13 @@ _&setFacing:
     default: To World
   return: Void
   en-US: Set Facing
-__setGlobalVariable__:
+-
   description: Stores a value into a global variable, which is a variable that belongs
     to the game itself.
   args:
   - name: Variable
     description: Specifies which global variable to store the value into.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Value
     description: The value that will be stored.
@@ -1319,14 +1290,14 @@ __setGlobalVariable__:
     default: Number
   return: Void
   en-US: Set Global Variable
-__setGlobalVariableAtIndex__:
+-
   description: Finds or creates an array on a global variable, which is a variable
     that belongs to the game itself, then stores a value in the array at the specified
     index.
   args:
   - name: Variable
     description: Specifies which global variable's value is the array to modify. If the variable's value is not an array, then its value becomes an empty array.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -1340,7 +1311,7 @@ __setGlobalVariableAtIndex__:
     default: Number
   return: Void
   en-US: Set Global Variable At Index
-_&setGravity:
+-
   description: Sets the movement gravity for one or more players to a percentage regular
     movement gravity.
   args:
@@ -1356,7 +1327,7 @@ _&setGravity:
     default: Number
   return: Void
   en-US: Set Gravity
-_&setHealingDealt:
+-
   description: Sets the healing dealt of one or more players to a percentage of their
     raw healing dealt.
   args:
@@ -1372,7 +1343,7 @@ _&setHealingDealt:
     default: Number
   return: Void
   en-US: Set Healing Dealt
-_&setHealingReceived:
+-
   description: Sets the healing received of one or more players to a percentage of
     their raw healing received.
   args:
@@ -1388,7 +1359,7 @@ _&setHealingReceived:
     default: Number
   return: Void
   en-US: Set Healing Received
-_&setInvisibility:
+-
   description: Causes one or more players to become invisible to either all other
     players or just enemies.
   args:
@@ -1404,7 +1375,7 @@ _&setInvisibility:
     default: ALL
   return: Void
   en-US: Set Invisible
-_&setJumpEnabled:
+-
   description: Enables or disables jump for one or more players.
   args:
   - name: Player
@@ -1419,7 +1390,7 @@ _&setJumpEnabled:
     default: 'True'
   return: Void
   en-US: Set Jump Enabled
-setMatchTime:
+-
   description: Sets the current match time (which is visible at the top of the screen).
     This can be used to shorten or extend the duration of a match or to change the
     duration of assemble heroes or setup.
@@ -1430,7 +1401,7 @@ setMatchTime:
     default: Number
   return: Void
   en-US: Set Match Time
-_&setMaxHealth:
+-
   description: Sets the max health of one or more players as a percentage of their
     max health. This action will ensure that a player's current health will not exceed
     the new max health.
@@ -1447,7 +1418,7 @@ _&setMaxHealth:
     default: Number
   return: Void
   en-US: Set Max Health
-_&setMeleeEnabled:
+-
   description: Enables or disables melee for one or more players.
   args:
   - name: Player
@@ -1462,7 +1433,7 @@ _&setMeleeEnabled:
     default: 'True'
   return: Void
   en-US: Set Melee Enabled
-_&setMoveSpeed:
+-
   description: Sets the move speed of one or more players to a percentage of their
     raw move speed.
   args:
@@ -1478,7 +1449,7 @@ _&setMoveSpeed:
     default: Number
   return: Void
   en-US: Set Move Speed
-setObjectiveDescription:
+-
   description: Sets the text at the top center of the screen that normally describes
     the objective to a message visible to specific players.
   args:
@@ -1494,11 +1465,11 @@ setObjectiveDescription:
     default: String
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The message will keep asking for and using new values from reevaluated inputs.
-    type: HudReeval
+    type: HUD Reevaluation
     default: Visible To And String
   return: Void
   en-US: Set Objective Description
-_&setAllowedHeroes:
+-
   description: Sets the list of heroes available to one or more players. If a player's
     current hero becomes unavailable, the player is forced to choose a different hero
     and respawn at an appropriate spawn location.
@@ -1517,7 +1488,7 @@ _&setAllowedHeroes:
     default: Hero
   return: Void
   en-US: Set Player Allowed Heroes
-_&setScore:
+-
   description: Sets the score (kill count) of one or more players. This action only
     has an effect in free-for-all modes.
   args:
@@ -1533,7 +1504,7 @@ _&setScore:
     default: Number
   return: Void
   en-US: Set Player Score
-__setPlayerVariable__:
+-
   description: Stores a value into a player variable, which is a variable that belongs
     to a specific player.
   args:
@@ -1545,7 +1516,7 @@ __setPlayerVariable__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to store the value into.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Value
     description: The value that will be stored.
@@ -1555,7 +1526,7 @@ __setPlayerVariable__:
     default: Number
   return: Void
   en-US: Set Player Variable
-__setPlayerVariableAtIndex__:
+-
   description: Finds or creates an array on a player variable, which is a variable
     that belongs to a specific player, then stores a value in the array at the specified
     index.
@@ -1568,7 +1539,7 @@ __setPlayerVariableAtIndex__:
     default: Event Player
   - name: Variable
     description: Specifies which player variable's value is the array to modify. If the variable's value is not an array, then its value becomes an empty array.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   - name: Index
     description: The index of the array to modify. If the index is beyond the end of the array, the array is extended with new elements given a value of zero.
@@ -1582,7 +1553,7 @@ __setPlayerVariableAtIndex__:
     default: Number
   return: Void
   en-US: Set Player Variable At Index
-_&setPrimaryFireEnabled:
+-
   description: Enables or disables primary fire for one or more players.
   args:
   - name: Player
@@ -1597,7 +1568,7 @@ _&setPrimaryFireEnabled:
     default: 'True'
   return: Void
   en-US: Set Primary Fire Enabled
-_&setProjectileGravity:
+-
   description: Sets the projectile gravity for one or more players to a percentage
     of regular projectile gravity.
   args:
@@ -1613,7 +1584,7 @@ _&setProjectileGravity:
     default: Number
   return: Void
   en-US: Set Projectile Gravity
-_&setProjectileSpeed:
+-
   description: Sets the projectile speed for one or more players to a percentage of
     projectile speed.
   args:
@@ -1629,7 +1600,7 @@ _&setProjectileSpeed:
     default: Number
   return: Void
   en-US: Set Projectile Speed
-_&setRespawnTime:
+-
   description: Sets the duration between death and respawn for one or more players.
     For players that are already dead when this action is executed, the change takes
     effect on their next death.
@@ -1646,7 +1617,7 @@ _&setRespawnTime:
     default: Number
   return: Void
   en-US: Set Respawn Max Time
-_&setSecondaryFireEnabled:
+-
   description: Enables or disables secondary fire for one or more players.
   args:
   - name: Player
@@ -1661,7 +1632,7 @@ _&setSecondaryFireEnabled:
     default: 'True'
   return: Void
   en-US: Set Secondary Fire Enabled
-setSlowMotion:
+-
   description: Sets the simulation rate for the entire game, including all players,
     projectiles, effects, and game mode logic.
   args:
@@ -1671,7 +1642,7 @@ setSlowMotion:
     default: Number
   return: Void
   en-US: Set Slow Motion
-_&setStatusEffect:
+-
   description: Applies a status to one or more players. This status will remain in
     effect for the specified duration or until it is cleared by the clear status action.
   args:
@@ -1695,7 +1666,7 @@ _&setStatusEffect:
     default: Number
   return: Void
   en-US: Set Status
-setTeamScore:
+-
   description: Sets the score for one or both teams. This action has no effect in
     free-for-all modes or modes without a team score.
   args:
@@ -1709,7 +1680,7 @@ setTeamScore:
     default: Number
   return: Void
   en-US: Set Team Score
-_&setUltEnabled:
+-
   description: Enables or disables the ultimate ability of one or more players.
   args:
   - name: Player
@@ -1724,7 +1695,7 @@ _&setUltEnabled:
     default: 'True'
   return: Void
   en-US: Set Ultimate Ability Enabled
-_&setUltCharge:
+-
   description: Sets the ultimate charge for one or more players as a percentage of
     maximum charge.
   args:
@@ -1740,7 +1711,7 @@ _&setUltCharge:
     default: Number
   return: Void
   en-US: Set Ultimate Charge
-__skip__:
+-
   description: Skips execution of a certain number of actions in the action list.
   args:
   - name: Number OF Actions
@@ -1749,7 +1720,7 @@ __skip__:
     default: Number
   return: Void
   en-US: Skip
-__skipIf__:
+-
   description: Skips execution of a certain number of actions in the action list if
     this action's condition evaluates to true. If it does not, execution continues
     with the next action.
@@ -1764,7 +1735,7 @@ __skipIf__:
     default: Number
   return: Void
   en-US: Skip If
-smallMessage:
+-
   description: Displays a small message beneath the reticle that is visible to specific
     players.
   args:
@@ -1780,7 +1751,7 @@ smallMessage:
     default: String
   return: Void
   en-US: Small Message
-_&startAcceleration:
+-
   description: Starts accelerating one or more players in a specified direction.
   args:
   - name: Player
@@ -1807,11 +1778,11 @@ _&startAcceleration:
     default: To World
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: AccelReeval
+    type: Acceleration Reevaluation
     default: Direction, Rate, And Max Speed
   return: Void
   en-US: Start Accelerating
-_&setCamera:
+-
   description: Places your camera at a location, facing a direction.
   args:
   - name: Player
@@ -1834,7 +1805,7 @@ _&setCamera:
     default: Number
   return: Void
   en-US: Start Camera
-startDamageModification:
+-
   description: Starts modifying how much damage one or more receivers will receive
     from one or more damagers. A reference to this damage modification can be obtained
     from the last damage modification id value. This action will fail if too many
@@ -1862,7 +1833,7 @@ startDamageModification:
     default: Receivers, Damagers, And Damage Percent
   return: Void
   en-US: Start Damage Modification
-_&startDoT:
+-
   description: Starts an instance of damage over time. This dot will persist for the
     specified duration or until stopped by script. To obtain a reference to this dot,
     use the last damage over time id value.
@@ -1887,7 +1858,7 @@ _&startDoT:
     default: Number
   return: Void
   en-US: Start Damage Over Time
-_&startFacing:
+-
   description: Starts turning one or more players to face the specified direction.
   args:
   - name: Player
@@ -1910,11 +1881,11 @@ _&startFacing:
     default: To World
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. This action will keep asking for and using new values from reevaluated inputs.
-    type: FacingReeval
+    type: Facing Reevaluation
     default: Direction And Turn Rate
   return: Void
   en-US: Start Facing
-_&startForcingHero:
+-
   description: Starts forcing one or more players to be a specific hero and, if necessary,
     respawns them immediately in their current location. This will be the only hero
     available to the player or players until the stop forcing player to be hero action
@@ -1932,7 +1903,7 @@ _&startForcingHero:
     default: Hero
   return: Void
   en-US: Start Forcing Player To Be Hero
-_&startForcingPosition:
+-
   description: Starts forcing a player to be in a given position. If reevaluation
     is enabled, then the position is evaluated every frame, allowing the player to
     be moved around over time.
@@ -1951,7 +1922,7 @@ _&startForcingPosition:
     default: 'True'
   return: Void
   en-US: Start Forcing Player Position
-startForcingSpawn:
+-
   description: Forces a team to spawn in a particular spawn room, regardless of the
     spawn room normally used by the game mode. This action only has an effect in assault,
     hybrid, and payload maps.
@@ -1966,7 +1937,7 @@ startForcingSpawn:
     default: Number
   return: Void
   en-US: Start Forcing Spawn Room
-_&startForcingThrottle:
+-
   description: Defines minimum and maximum movement input values for one or more players,
     possibly forcing or preventing movement.
   args:
@@ -2002,7 +1973,7 @@ _&startForcingThrottle:
     default: Number
   return: Void
   en-US: Start Forcing Throttle
-_&startHoT:
+-
   description: Starts an instance of heal over time. This hot will persist for the
     specified duration or until stopped by script. To obtain a reference to this hot,
     use the last heal over time id value.
@@ -2027,7 +1998,7 @@ _&startHoT:
     default: Number
   return: Void
   en-US: Start Heal Over Time
-startHealingModification:
+-
   description: Starts modifying how much healing one or more receivers will receive
     from one or more healers. A reference to this healing modification can be obtained
     from the last healing modification id value. This action will fail if too many
@@ -2055,7 +2026,7 @@ startHealingModification:
     default: Receivers, Healers, And Healing Percent
   return: Void
   en-US: Start Healing Modification
-_&startForcingButton:
+-
   description: Forces one or more players to hold a button virtually until stopped
     by the stop holding button action.
   args:
@@ -2067,11 +2038,11 @@ _&startForcingButton:
     default: Event Player
   - name: Button
     description: The logical button that is being held virtually.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Start Holding Button
-__startRule__:
+-
   description: Begins simultaneous execution of a subroutine rule (which is a rule
     with a Subroutine event type). Execution of the original rule continues uninterrupted.
     The subroutine will have access to the same contextual values (such as Event Player)
@@ -2087,7 +2058,7 @@ __startRule__:
     default: RESTART RULE
   return: Void
   en-US: Start Rule
-_&startThrottleInDirection:
+-
   description: Sets or adds to the throttle (directional input control) of a player
     or players such that they begin moving in a particular direction. Any previous
     throttle in direction is cancelled.
@@ -2120,7 +2091,7 @@ _&startThrottleInDirection:
     default: Direction And Magnitude
   return: Void
   en-US: Start Throttle In Direction
-_&startTransformingThrottle:
+-
   description: Starts transforming (scaling and rotating) the throttle (directional
     input control) of a player or players. Cancels any existing start transforming
     throttle behavior.
@@ -2145,7 +2116,7 @@ _&startTransformingThrottle:
     default: Vector
   return: Void
   en-US: Start Transforming Throttle
-_&stopAcceleration:
+-
   description: Stops the acceleration started by the start accelerating action for
     one or more players.
   args:
@@ -2157,19 +2128,17 @@ _&stopAcceleration:
     default: Event Player
   return: Void
   en-US: Stop Accelerating
-stopAllDamageModifications:
+-
   description: Stops all damage modifications that were started using the start damage
     modification action.
-  args: []
   return: Void
   en-US: Stop All Damage Modifications
-stopAllHealingModifications:
+-
   description: Stops all healing modifications that were started using the start healing
     modification action.
-  args: []
   return: Void
   en-US: Stop All Healing Modifications
-_&stopAllDoT:
+-
   description: Stops all damage over time started by start damage over time for one
     or more players.
   args:
@@ -2181,7 +2150,7 @@ _&stopAllDoT:
     default: Event Player
   return: Void
   en-US: Stop All Damage Over Time
-_&stopAllHoT:
+-
   description: Stops all heal over time started by start heal over time for one or
     more players.
   args:
@@ -2193,7 +2162,7 @@ _&stopAllHoT:
     default: Event Player
   return: Void
   en-US: Stop All Heal Over Time
-_&stopCamera:
+-
   description: Restores the camera to the default view.
   args:
   - name: Player
@@ -2204,17 +2173,17 @@ _&stopCamera:
     default: Event Player
   return: Void
   en-US: Stop Camera
-__stopChasingGlobalVariable__:
+-
   description: Stops an in-progress chase of a global variable, leaving it at its
     current value.
   args:
   - name: Variable
     description: Specifies which global variable to stop modifying.
-    type: GlobalVariable
+    type: Global Variable
     default: A
   return: Void
   en-US: Stop Chasing Global Variable
-__stopChasingPlayerVariable__:
+-
   description: Stops an in-progress chase of a player variable, leaving it at its
     current value.
   args:
@@ -2226,11 +2195,11 @@ __stopChasingPlayerVariable__:
     default: Event Player
   - name: Variable
     description: Specifies which of the player's variables to stop modifying.
-    type: PlayerVariable
+    type: Player Variable
     default: A
   return: Void
   en-US: Stop Chasing Player Variable
-stopDamageModification:
+-
   description: Stops a damage modification that was started by the start damage modification
     action.
   args:
@@ -2240,17 +2209,17 @@ stopDamageModification:
     default: Last Damage Modification ID
   return: Void
   en-US: Stop Damage Modification
-stopDoT:
+-
   description: Stops an instance of damage over time started by the start damage over
     time action.
   args:
   - name: Damage Over Time ID
     description: Specifies which damage over time instance to stop. This id may be last damage over time id or a variable into which last damage over time id was earlier stored.
-    type: DotId
+    type: Damage Over Time ID
     default: Last Damage Over Time ID
   return: Void
   en-US: Stop Damage Over Time
-_&stopFacing:
+-
   description: Stops the turning started by the start facing action for one or more
     players.
   args:
@@ -2262,7 +2231,7 @@ _&stopFacing:
     default: Event Player
   return: Void
   en-US: Stop Facing
-_&stopForcingCurrentHero:
+-
   description: Stops forcing one or more players to be a specific hero. This will
     not respawn the player or players, but it will restore their hero availability
     the next time they go to select a hero.
@@ -2275,7 +2244,7 @@ _&stopForcingCurrentHero:
     default: Event Player
   return: Void
   en-US: Stop Forcing Player To Be Hero
-_&stopForcingPosition:
+-
   description: Cancels the behavior of `startForcingPosition()` for the specified
     player or players. Regular movement will resume from the last forced position(s).
   args:
@@ -2287,7 +2256,7 @@ _&stopForcingPosition:
     default: Event Player
   return: Void
   en-US: Stop Forcing Player Position
-stopForcingSpawn:
+-
   description: Undoes the effect of the start forcing spawn room action for the specified
     team.
   args:
@@ -2297,7 +2266,7 @@ stopForcingSpawn:
     default: Team
   return: Void
   en-US: Stop Forcing Spawn Room
-_&stopForcingThrottle:
+-
   description: Undoes the effect of the start forcing throttle action for one or more
     players.
   args:
@@ -2309,7 +2278,7 @@ _&stopForcingThrottle:
     default: Event Player
   return: Void
   en-US: Stop Forcing Throttle
-stopHoT:
+-
   description: Stops an instance of heal over time started by the start heal over
     time action.
   args:
@@ -2319,7 +2288,7 @@ stopHoT:
     default: Player Variable
   return: Void
   en-US: Stop Heal Over Time
-stopHealingModification:
+-
   description: Stops a healing modification that was started by the start healing
     modification action.
   args:
@@ -2329,7 +2298,7 @@ stopHealingModification:
     default: Last Healing Modification ID
   return: Void
   en-US: Stop Healing Modification
-_&stopForcingButton:
+-
   description: Undoes the effect of the start holding button action for one or more
     players.
   args:
@@ -2341,11 +2310,11 @@ _&stopForcingButton:
     default: Event Player
   - name: Button
     description: The logical button that is no longer being held virtually.
-    type: ButtonLiteral
+    type: Button
     default: Primary Fire
   return: Void
   en-US: Stop Holding Button
-_&stopThrottleInDirection:
+-
   description: Cancels the behavior caused by start throttle in direction.
   args:
   - name: Player
@@ -2356,7 +2325,7 @@ _&stopThrottleInDirection:
     default: Event Player
   return: Void
   en-US: Stop Throttle In Direction
-_&stopTransformingThrottle:
+-
   description: Stops the throttle transform started by start transforming throttle
     for one or more players.
   args:
@@ -2368,7 +2337,7 @@ _&stopTransformingThrottle:
     default: Event Player
   return: Void
   en-US: Stop Transforming Throttle
-_&teleport:
+-
   description: Teleports one or more players to the specified position.
   args:
   - name: Player
@@ -2383,12 +2352,11 @@ _&teleport:
     default: Vector
   return: Void
   en-US: Teleport
-unpauseMatchTime:
+-
   description: Unpauses the match time.
-  args: []
   return: Void
   en-US: Unpause Match Time
-__wait__:
+-
   description: Pauses the execution of the action list. Unless the wait is interrupted,
     the remainder of the actions will execute after the pause.
   args:
@@ -2402,7 +2370,7 @@ __wait__:
     default: Ignore Condition
   return: Void
   en-US: Wait
-__while__:
+-
   description: Denotes the beginning of a series of actions that will execute in a
     loop as long as the specified condition is true. The next end action at the current
     level denotes the end of the loop. If the condition evaluates to false when execution
@@ -2415,7 +2383,7 @@ __while__:
     default: Compare
   return: Void
   en-US: While
-setAmmo:
+-
   description: Set the ammo of one or more Players.
   args:
   - name: Player
@@ -2432,8 +2400,9 @@ setAmmo:
     description: The ammo that will be set.
     type: Integer
     default: 0
+  return: Void
   en-US: Set Ammo
-setMaxAmmo:
+-
   description: Set the max ammo of one or more Players.
   args:
   - name: Player
@@ -2448,10 +2417,10 @@ setMaxAmmo:
     default: 0
   - name: Ammo
     description: The max ammo that will be set.
-    type: Unsigned integer
+    type: Integer
     default: 0
   en-US: Set Max Ammo
-setWeapon:
+-
   description: Sets the weapon of one or more Players.
   args:
   - name: Player
@@ -2462,10 +2431,10 @@ setWeapon:
     default: Event Player
   - name: Weapon
     description: The number of the weapon to be equipped. 1 Is the first weapon, and 2 is the second. If the specified weapon does not exist, players will use the default weapon.
-    type: Unsigned integer
+    type: Integer
     default: 0
   en-US: Set Weapon
-setReloadEnabled:
+-
   description: Enables or disables Reload for one or more Players.
   args:
   - name: Player
@@ -2479,7 +2448,7 @@ setReloadEnabled:
     type: Boolean
     default: True
   en-US: Set Reload Enabled
-disableGameModeHUD:
+-
   description: Disables the Game Mode HUD for one or more Players until reenabled.
   args:
   - name: Player
@@ -2489,7 +2458,7 @@ disableGameModeHUD:
     - Array: Player
     default: Event Player
   en-US: Disable Game Mode HUD
-enableGameModeHUD:
+-
   description: Undoes the effect of the Disable Game Mode HUD Action for one or more Players.
   args:
   - name: Player
@@ -2499,7 +2468,7 @@ enableGameModeHUD:
     - Array: Player
     default: Event Player
   en-US: Enable Game Mode HUD
-disableGameModeInWorldUI:
+-
   description: Disables the Game Mode In-World UI for one or more Players until reenabled.
   args:
   - name: Player
@@ -2509,7 +2478,7 @@ disableGameModeInWorldUI:
     - Array: Player
     default: Event Player
   en-US: Disable Game Mode In-World UI
-enableGameModeInWorldUI:
+-
   description: Undoes the effect of the Disable Game Mode In-World UI Action for one or more Players.
   args:
   - name: Player
@@ -2519,7 +2488,7 @@ enableGameModeInWorldUI:
     - Array: Player
     default: Event Player
   en-US: Enable Game Mode In-World UI
-disableHeroHUD:
+-
   description: Disables the Hero HUD for one or more Players until reenabled.
   args:
   - name: Player
@@ -2529,7 +2498,7 @@ disableHeroHUD:
     - Array: Player
     default: Event Player
   en-US: Disable Hero HUD
-enableHeroHUD:
+-
   description: Undoes the effect of the Disable Hero HUD Action for one or more Players.
   args:
   - name: Player
@@ -2539,7 +2508,7 @@ enableHeroHUD:
     - Array: Player
     default: Event Player
   en-US: Enable Hero HUD
-disableKillFeed:
+-
   description: Disables the Kill Feed for one or more Players until reenabled.
   args:
   - name: Player
@@ -2549,7 +2518,7 @@ disableKillFeed:
     - Array: Player
     default: Event Player
   en-US: Disable Kill Feed
-enableKillFeed:
+-
   description: Undoes the effect of the Disable Kill Feed Action for one or more Players.
   args:
   - name: Player
@@ -2559,7 +2528,7 @@ enableKillFeed:
     - Array: Player
     default: Event Player
   en-US: Enable Kill Feed
-disableMessages:
+-
   description: Disables Messages for one or more Players until reenabled.
   args:
   - name: Player
@@ -2569,7 +2538,7 @@ disableMessages:
     - Array: Player
     default: Event Player
   en-US: Disable Messages
-enableMessages:
+-
   description: Undoes the effect of the Disable Messages Action for one or more Players.
   args:
   - name: Player
@@ -2579,7 +2548,7 @@ enableMessages:
     - Array: Player
     default: Event Player
   en-US: Enable Messages
-disableScoreboard:
+-
   description: Disables the Scoreboard for one or more Players until reenabled.
   args:
   - name: Player
@@ -2589,7 +2558,7 @@ disableScoreboard:
     - Array: Player
     default: Event Player
   en-US: Disable Scoreboard
-enableScoreboard:
+-
   description: Undoes the effect of the Disable Scoreboard Action for one or more Players.
   args:
   - name: Player
@@ -2599,7 +2568,7 @@ enableScoreboard:
     - Array: Player
     default: Event Player
   en-US: Enable Scoreboard
-setAbilityCharge:
+-
   description: Set the Ability Charge Count for one or more Players if supported.
   args:
   - name: Player
@@ -2617,7 +2586,7 @@ setAbilityCharge:
     type: Integer
     default: 0
   en-US: Set Ability Charge
-setAbilityResource:
+-
   description: Set the Ability Resource Percentage for one or more Players if supported.
   args:
   - name: Player
@@ -2632,10 +2601,10 @@ setAbilityResource:
     default: Primary Fire
   - name: Resource Percent
     description: The Percentage of Resource that will be set with respect to each Player's Ability Resource capacity.
-    type: Unsigned Float
+    type: Float
     default: 0
   en-US: Set Ability Resource
-setJumpVerticalSpeed:
+-
   description: Sets the jump vertical speed of one or more Players to a percentage of their raw jump vertical speed.
   args:
   - name: Player
@@ -2646,10 +2615,10 @@ setJumpVerticalSpeed:
     default: Event Player
   - name: Jump Vertical Speed Percent
     description: The Percentage of Resource that will be set with respect to each Player's Ability Resource capacity.
-    type: Unsigned Float
+    type: Float
     default: 100
   en-US: Set Jump Vertical Speed
-disableNameplates:
+-
   description: Disables the nameplate on one or more Viewed Players from the perspective of one or more Viewing Players.
   args:
   - name: Viewed Players
@@ -2665,7 +2634,7 @@ disableNameplates:
     - Array: Player
     default: All Players
   en-US: Disable Nameplates
-enableNameplates:
+-
   description: Undoes the effect of Disable Nameplates for one or more Viewed Players from the perspective of one or more Viewing Players.
   args:
   - name: Viewed Players
@@ -2681,7 +2650,7 @@ enableNameplates:
     - Array: Player
     default: All Players
   en-US: Enable Nameplates
-startForcingPlayerOutlines:
+-
   description: Starts forcing the visibility and color of Player Outlines for the specified Viewed Player or Players from the perspective of one or more Viewing Players.
   args:
   - name: Viewed Players
@@ -2703,13 +2672,13 @@ startForcingPlayerOutlines:
   - name: Color
     description: The color of the specified Player Outlines if they are visible. If a particular team is chosen, the color will either be Red or Blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Type
     description: The type of the specified Player Outlines if they are visible
     type: Outline
     default: Default
   en-US: Start Forcing Player Outlines
-stopForcingPlayerOutlines:
+-
   description: Cancels the behavior of Start Forcing Player Outlines for the spciefied Viewed Player or Players from the perspective of one or more Viewing Players.
   args:
   - name: Viewed Players
@@ -2725,7 +2694,7 @@ stopForcingPlayerOutlines:
     - Array: Player
     default: All Players
   en-US: Stop Forcing Player Outlines
-startScalingPlayer:
+-
   description: Start modifying the size of a Player or Players (including mode, movement collision, hit detection, and certain abilities). Note that large players placed into complex environments will severely impact server load, so consider also applying the Disable Movement Collision With Environment action.
   args:
   - name: Player
@@ -2736,14 +2705,14 @@ startScalingPlayer:
     default: Event Player
   - name: Scale
     description: The multiplier applied to the size of the player or players (So 0.5 halves the size, 2.0 doubles the size, etc.).
-    type: Unsigned Float
+    type: Float
     default: 1
   - name: Reevaluation
     description: If this value is True, then scale will be Reevaluated and applied to the Player or Players every frame. If this value is False, then the scale is only avaluated once when the action begins.
     type: Boolean
     default: True
   en-US: Start Scaling Player
-stopScalingPlayer:
+-
   description: Stops overring the size of a Player or Players.
   args:
   - name: Player
@@ -2753,7 +2722,7 @@ stopScalingPlayer:
     - Array: Player
     default: Event Player
   en-US: Stop Scaling Player
-startScalingBarriers:
+-
   description: Start modifying the size of barriers for a Player or Players.
   args:
   - name: Player
@@ -2764,14 +2733,14 @@ startScalingBarriers:
     default: Event Player
   - name: Scale
     description: The multiplier applied to the size of the barriers (So 0.5 halves the size, 2.0 doubles the size, etc.).
-    type: Unsigned Float
+    type: Float
     default: 1
   - name: Reevaluation
     description: If this value is True, then scale will be Reevaluated and applied to the Player or Players every frame. If this value is False, then the scale is only avaluated once when the action begins.
     type: Boolean
     default: True
   en-US: Start Scaling Barriers
-stopScalingBarriers:
+-
   description: Stops overring the size of barriers of a Player or Players.
   args:
   - name: Player
@@ -2781,7 +2750,7 @@ stopScalingBarriers:
     - Array: Player
     default: Event Player
   en-US: Stop Scaling Barriers
-disableMovementCollisionWithEnvironment:
+-
   description: Causes a Player or Players to stop colliding with the environment (walls, ceilings, certain objects, etc.)
   args:
   - name: Player
@@ -2795,7 +2764,7 @@ disableMovementCollisionWithEnvironment:
     type: Boolean
     default: False
   en-US: Disable Movement Collision With Environment
-enableMovementCollisionWithEnvironment:
+-
   description: Undoes the effect of the Disable Movement Collision With Environment action for one or more Players.
   args:
   - name: Player
@@ -2805,7 +2774,7 @@ enableMovementCollisionWithEnvironment:
     - Array: Player
     default: Event Player
   en-US: Enable Movement Collision With Environment
-disableMovementCollisionWithPlayers:
+-
   description: Causes a Player or Players to stop colliding with other Players.
   args:
   - name: Player
@@ -2815,7 +2784,7 @@ disableMovementCollisionWithPlayers:
     - Array: Player
     default: Event Player
   en-US: Disable Movement Collision With Players
-enableMovementCollisionWithPlayers:
+-
   description: Undoes the effect of the Disable Movement Collision With Players action for one or more Players.
   args:
   - name: Player
@@ -2825,7 +2794,7 @@ enableMovementCollisionWithPlayers:
     - Array: Player
     default: Event Player
   en-US: Enable Movement Collision With Players
-startModifyingHeroVoiceLines:
+-
   description: Modifies the way hero voice lines sound for a Player or Players.
   args:
   - name: Player
@@ -2836,14 +2805,14 @@ startModifyingHeroVoiceLines:
     default: Event Player
   - name: Pitch Scalar
     description: The amount that the pitch of the voice will be raised. (Up to 1.5) or lowered (Down to 0.5).
-    type: Unsigned float
+    type: Float
     default: 0
   - name: Reevaluation
     description: If True, Pitch Scalar is evaluated and updated every frame. If False, Pitch Scalar is evaluated once when the actions executes.
     type: Boolean
     default: True
   en-US: Start Modifying Hero Voice Lines
-stopModifyingHeroVoiceLines:
+-
   description: Undoes the effect of the Starting Modifying Hero Voice Lines action for one or more Players.
   args:
   - name: Player
@@ -2853,7 +2822,7 @@ stopModifyingHeroVoiceLines:
     - Array: Player
     default: Event Player
   en-US: Stop Modifying Hero Voice Lines
-addHealthPoolToPlayer:
+-
   description: Adds a temporary health pool to a Player or Players. This health pool can be referenced using the Last Created Health Pool value. Up to 16 health pools of a given health type (Health, Armor, or Shields) may exist on a player (including base pools and pools generated by abilities).
   args:
   - name: Player
@@ -2870,7 +2839,7 @@ addHealthPoolToPlayer:
     default: Armor
   - name: Max Health
     description: The size of the Health Pool
-    type: Unsigned Float
+    type: Float
     default: 100
   - name: Recoverable
     description: Whether health in this pool can be healed once it is lost. If this is value is False, then the Health Pool will shrink and disappear as it is damaged.
@@ -2881,7 +2850,7 @@ addHealthPoolToPlayer:
     type: Boolean
     default: True
   en-US: Add Health Pool To Player
-removeHealthPoolFromPlayer:
+-
   description: Removes a health pool that was added via the Add Health Pool action.
   args:
   - name: Health Pool ID
@@ -2889,7 +2858,7 @@ removeHealthPoolFromPlayer:
     type: Integer
     default: Last Created Health Pool
   en-US: Remove Health Pool From Player
-removeAllHealthPoolsFromPlayer:
+-
   description: Removes all health pools that were added to a Player or Players via the Add Health Pool action.
   args:
   - name: Player
@@ -2899,8 +2868,7 @@ removeAllHealthPoolsFromPlayer:
     - Array: Player
     default: Event Player
   en-US: Remove All Health Pools From Player
-
-setPlayerHealth:
+-
   description: Sets the health of a Player or Players without affecting stats or granting damage/healing credit. This action only has an effect on living players. (For dead players, use the Resurrect Player action instead.)
   args:
   - name: Player
@@ -2911,11 +2879,10 @@ setPlayerHealth:
     default: Event Player
   - name: Amount
     description: How much health the Player or Players will have.
-    type: Unsigned float
+    type: Float
     default: 1
   en-US: Set Player Health
-
-LogToInspector:
+-
   description: Causes the Workshop Inspector to record a log entry.
   args:
   - name: Text
@@ -2923,8 +2890,7 @@ LogToInspector:
     type: Object
     default: 'Null'
   en-US: Log To Inspector
-
-WaitUntil:
+-
   description: Waits until the Continue Condition is true or Timeout seconds elapse. (The Rule's Condition is ignored during this wait.)
   args:
   - name: Continue Condition
@@ -2936,8 +2902,7 @@ WaitUntil:
     type: Integer
     default: 0
   en-US: Wait Until
-
-SetKnockbackDealt:
+-
   description: Sets the knockback dealt of one or more Players to a percentage of their raw knockback dealt.
   args:
   - name: Player
@@ -2951,8 +2916,7 @@ SetKnockbackDealt:
     type: Integer
     default: 100
   en-US: Set Knockback Dealt
-
-SetKnockbackReceived:
+-
   description: Sets the knockback received of one or more Players to a percentage of their raw knockback received.
   args:
   - name: Player
@@ -2966,8 +2930,7 @@ SetKnockbackReceived:
     type: Integer
     default: 100
   en-US: Set Knockback Received
-
-SetEnvironmentCreditPlayer:
+-
   description: Sets the Player who will received credit if the specified target Player or Players die to the environment before landing on the ground.
   args:
   - name: Target
@@ -2983,8 +2946,7 @@ SetEnvironmentCreditPlayer:
     - Array: Player
     default: 'Null'
   en-US: Set Environment Credit Player
-
-StartAssist:
+-
   description: Starts granting assist credit toward to one or more Assisters when one or more Targets are eliminated. A reference to this damage modification can be obtained from the Last Assist ID Value. This Action will fail if too many assists have been started.
   args:
   - name: Assisters
@@ -3001,11 +2963,10 @@ StartAssist:
     default: All Players
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continously reevaluated. This Action will keep asking for and using new Values from reevaluated Inputs.
-    type: __ChaseRateReeval__
+    type: Chase Reevaluation
     default: Assisters and Targets
   en-US: Start Assist
-
-StopAssist:
+-
   description: Stops an assist that was started by the Start Assist Action.
   args:
   - name: Assist ID
@@ -3013,12 +2974,10 @@ StopAssist:
     type: AssistId
     default: Last Assist ID
   en-US: Stop Assist
-
-StopAllAssists:
+-
   description: Stops all assists that were started using the Start Assist Action.
   en-US: Stop All Assists
-
-CreateProgressBarHUDText:
+-
   description: Creates Progress Bar HUD text visible to specified Players at a specific location on the screen. This text will persist until destroyed. To obtain a reference to this text, use the Last Text ID Value. This action will fail if too many text elements have been created.
   args:
   - name: Visible To
@@ -3029,7 +2988,7 @@ CreateProgressBarHUDText:
     default: All Players
   - name: Value
     description: The value of the progress bar to be displayed as a percentage from 0 to 100.
-    type: Unsigned float
+    type: Float
     default: 0
   - name: Text
     description: The text to be displayed (can be blank)
@@ -3037,44 +2996,41 @@ CreateProgressBarHUDText:
     default: Custom String("")
   - name: Location
     description: The location on the screen where the text will appear.
-    type: HudPosition
+    type: HUD Position
     default: Left
   - name: Sort Order
     description: The sort order of the text relative to other text in the same location. Text with a higher sort order will come after the text with a lower sort order.
-    type: float
+    type: Float
     default: 0
   - name: Progress Bar Color
     description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Text Color
     description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
-    type: HudReeval
-    default: Visible To, Values, and Color
+    type: HUD Reevaluation
+    default: Visible To Values and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   en-US: Create Progress Bar HUD Text
-
-DestroyProgressBarHUDText:
+-
   description: Destroys Progress Bar HUD text that was created by Create Progress Bar HUD Text.
   args:
   - name: Text ID
     description: Specifies which Progress Bar HUD text to destroy. This ID may be Last Text ID or a Variable into which Last Text ID was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   en-US: Destroy Progress Bar HUD Text
-
-DestroyAllProgressBarHUDText:
+-
   description: Destroys all Progress Bar HUD text that were created by the Create Progress Bar HUD Text Action.
   en-US: Destroy All Progress Bar HUD Text
-
-CreateProgressBarIn-WorldText:
+-
   description: Creates Progress Bar HUD text visible to the specific Players at a specific position in the world. This text will persist until destroyed. To obtain a reference to this text, use the Last Text ID Value. This Action will fail if too many text elements have been created.
   args:
   - name: Visible To
@@ -3085,7 +3041,7 @@ CreateProgressBarIn-WorldText:
     default: All Players
   - name: Value
     description: The value of the progress bar to be displayed as a percentage from 0 to 100.
-    type: Unsigned float
+    type: Float
     default: 0
   - name: Text
     description: The text to be displayed (can be blank)
@@ -3097,7 +3053,7 @@ CreateProgressBarIn-WorldText:
     default: Event Player
   - name: Scale
     description: The text's scale.
-    type: float
+    type: Float
     default: Number
   - name: Clipping
     description: Specifies whether the text can be seen through walls or is instead clipped.
@@ -3106,35 +3062,32 @@ CreateProgressBarIn-WorldText:
   - name: Progress Bar Color
     description: The color of the Progress Bar text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Text Color
     description: The color of the text to be created. If a particular team is chosen, the effect will either be red or blue, depending on whether the team is hostile to the viewer.
     type: Color
-    default: Color(White)
+    default: Color
   - name: Reevaluation
     description: Specifies which of this Action's Inputs will be continuously reevaluated. The text will keep asking for and using new Values from reevaluated Inputs.
-    type: HudReeval
-    default: Visible To, Values, and Color
+    type: HUD Reevaluation
+    default: Visible To Values and Color
   - name: Non-Team Spectators
     description: Whether non-team spectators can see the text or not.
-    type: SpecVisibility
+    type: Spectator Visibility
     default: Default Visibility
   en-US: Create Progress Bar In-World Text
-
-DestroyProgressBarIn-WorldText:
+-
   description: Destroys Progress Bar In-World text that was created by Create Progress Bar In-World Text.
   args:
   - name: Text ID
     description: Specifies which Progress Bar In-World text to destroy. This ID may be Last Text ID or a Variable into which Last Text ID was earlier stored.
-    type: TextId
+    type: Text ID
     default: Last Text ID
   en-US: Destroy Progress Bar In-World Text
-
-DestroyAllProgressBarIn-WorldText:
+-
   description: Destroys all Progress Bar In-World text that were created by the Create Progress Bar In-World Text Action.
   en-US: Destroy All Progress Bar In-World Text
-
-EnableTextChat:
+-
   description: Undoes the effect of the Disable Text Chat Action for one or more Players.
   args:
   - name: Player
@@ -3142,8 +3095,7 @@ EnableTextChat:
     type: Player
     default: Event Player
   en-US: Enable Text Chat
-
-DisableTextChat:
+-
   description: Disables Text Chat for one or more Players until reenabled.
   args:
   - name: Player
@@ -3151,8 +3103,7 @@ DisableTextChat:
     type: Player
     default: Event Player
   en-US: Disable Text Chat
-
-EnableVoiceChat:
+-
   description: Undoes the effect of the Disable Voice Chat Action for one or more Players.
   args:
   - name: Player
@@ -3160,8 +3111,7 @@ EnableVoiceChat:
     type: Player
     default: Event Player
   en-US: Enable Voice Chat
-
-DisableVoiceChat:
+-
   description: Disables Voice Chat for one or more Players until reenabled.
   args:
   - name: Player
@@ -3181,20 +3131,16 @@ DisableVoiceChat:
     type: Boolean
     default: True
   en-US: Disable Voice Chat
-
-StartGameMode:
+-
   description: Starts the Game Mode. This action doesn't have an effect if the game is already in progress.
   en-US: Start Game Mode
-
-ReturntoLobby:
+-
   description: Returns the Game Mode back to the Custom Game Lobby.
   en-US: Return To Lobby
-
-RestartMatch:
+-
   description: Restarts the Match. This action only has an effect after the match has existed for 30 seconds.
   en-US: Restart Match
-
-MovePlayertoTeam:
+-
   description: Move one or more Players to the specified Team and Slot. This action can fail if the specified slot is not available. This action doesn't work on Dummy Bots.
   args:
   - name: Player
@@ -3210,8 +3156,7 @@ MovePlayertoTeam:
     type: Integer
     default: -1
   en-US: Move Player To Team
-
-RemovePlayer:
+-
   description: Removes one or more Players from the Custom Game. This action doesn't work on Dummy Bots.
   args:
   - name: Player
@@ -3219,8 +3164,7 @@ RemovePlayer:
     type: Player
     default: Event Player
   en-US: Remove Player
-
-StartForcingDummyBotName:
+-
   description: Starts forcing the name for the specified Player or Players.
   args:
   - name: Player
@@ -3232,8 +3176,7 @@ StartForcingDummyBotName:
     type: String
     default: Custom String("")
   en-US: Start Forcing Dummy Bot Name
-
-StopForcingDummyBotName:
+-
   description:
   args:
   - name: Player
@@ -3241,8 +3184,7 @@ StopForcingDummyBotName:
     type: Player
     default: Event Player
   en-US: Stop Forcing Dummy Bot Name
-
-CreateProjectile:
+-
   description: Create a projectile entity that either heals or damages players and player owned entities. This action will fail if too many entities have been created.
   en-US: Create Projectile
   args:
@@ -3318,8 +3260,7 @@ CreateProjectile:
     description: The amount of gravity affecting the projectile, creating an arc. If negative, the projectile will arc upwards.
     type: Float
     default: Number
-
-CreateHomingProjectile:
+-
   description: Create a projectile entity that either heals or damages players or player owned entities. The projectile follows the provided target with variable strength. This action will fail if too many entities have been created.
   en-US: Create Homing Projectile
   args:
@@ -3395,8 +3336,7 @@ CreateHomingProjectile:
     type: Float
     description: A 0 to 1 value representing how strongly the projectile will follow its target and how easily it will lose its target. At 0, the projectile won't follow its target at all, at 1, it will follow its target aggressively and never lose it.
     default: Number (1)
-
-Create Projectile Effect:
+-
   description: Creates an in-world projectile effect entity. This effect entity will persist until destroyed. To obtain a reference to this entity, use the Last Created Entity value. This action will fail if too many entities have been created.
   en-US: Create Projectile Effect
   args:
@@ -3415,11 +3355,12 @@ Create Projectile Effect:
     type: Player
     default: "Null"
   - name: Position
-    description: The position in of the effect.
+    description: The position of the effect.
     type: Position
     default: Event Player
   - name: Direction
     description: The facing direction of the effect.
+    type: Direction
     default: Vector
   - name: Oversize
     description: A 0 to 1 range for how oversized the projectile should be, 0 being the default size, 1 being the maximum allowed size. The maximum allowed size is different for each projectile type.
@@ -3428,4 +3369,4 @@ Create Projectile Effect:
   - name: Reevaluation
     description: Specifies which of this action's inputs will be continuously reevaluated. The effect will keep asking for and using new values from reevaluated inputs.
     type: Projectile Effect Reevaluation
-    default: Visible To, Position, Direction and Size
+    default: Visible To Position Direction and Size

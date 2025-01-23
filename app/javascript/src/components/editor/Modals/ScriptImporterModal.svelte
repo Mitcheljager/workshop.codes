@@ -1,12 +1,18 @@
 <script>
   import Modal from "@components/editor/Modals/Modal.svelte"
   import { items, modal } from "@stores/editor"
-  import { createNewItem } from "@utils/editor"
-  import { getClosingBracket, getSettings } from "@utils/parse"
+  import { createNewItem, updateItem } from "@utils/editor"
+  import { getClosingBracket, getSettings, replaceBetween } from "@utils/parse"
   import { submittable } from "@components/actions/submittable"
   import { onMount } from "svelte"
 
-  let replaceScript = false
+  const modes = {
+    append: "append",
+    replaceAll: "replace-all",
+    replaceSettings: "replace-settings"
+  }
+
+  let mode = modes.append
   let value = ""
   let disallowSubmit
 
@@ -21,7 +27,7 @@
 
     if (!(start || end)) return
 
-    return createNewItem("Settings", value.slice(start, end), $items.length)
+    return createNewItem("Settings", value.slice(start, end), -1)
   }
 
   function findAllRules() {
@@ -50,14 +56,35 @@
   function submit() {
     if (disallowSubmit) return
 
-    if (replaceScript) $items = []
-
     const settings = findSettings()
-    const rules = findAllRules()
 
-    const newItems = [settings, ...rules].filter(i => i)
+    if (mode === modes.replaceSettings) {
+      if (!settings) {
+        alert("No settings found in snippet")
+        return
+      }
 
-    $items = [...$items, ...newItems]
+      let hasReplacedSettings = false
+
+      $items.forEach(item => {
+        const [start, end] = getSettings(item.content)
+
+        if (!(start || end)) return
+
+        hasReplacedSettings = true
+        updateItem({ ...item, content: replaceBetween(item.content, settings.content, start, end) })
+      })
+
+      if (!hasReplacedSettings) $items = [settings, ...$items]
+    } else {
+      if (mode === modes.replaceAll) $items = []
+
+      const rules = findAllRules()
+      const newItems = [(settings || {}), ...rules].filter(i => i)
+
+      $items = [...$items, ...newItems]
+    }
+
     modal.close()
   }
 </script>
@@ -71,19 +98,19 @@
     use:submittable
     on:submit={submit} />
 
-  <div class="switch-checkbox mt-1/4">
-    <input
-      id="replace-script"
-      class="switch-checkbox__input"
-      autocomplete="off"
-      type="checkbox"
-      bind:checked={replaceScript}/>
+  <div class="checkbox mt-1/4">
+    <input type="radio" name="mode" value={modes.append} bind:group={mode} id={modes.append} />
+    <label for={modes.append}>Add to end of script</label>
+  </div>
 
-    <label
-      class="switch-checkbox__label"
-      for="replace-script">
-      Replace entire script
-    </label>
+  <div class="checkbox">
+    <input type="radio" name="mode" value={modes.replaceAll} bind:group={mode} id={modes.replaceAll} />
+    <label for={modes.replaceAll}>Replace entire script</label>
+  </div>
+
+  <div class="checkbox">
+    <input type="radio" name="mode" value={modes.replaceSettings} bind:group={mode} id={modes.replaceSettings} />
+    <label for={modes.replaceSettings}>Replace settings only</label>
   </div>
 
   <button class="button w-100 mt-1/4" on:click={submit} disabled={disallowSubmit}>Import</button>

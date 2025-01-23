@@ -39,7 +39,7 @@
 
   {#if active}
     <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content block p-1/4" style="width: 400px">
-      <h5 class="mt-0 mb-1/8">Keyboard shortcuts</h5>
+      <h5 class="mt-0 mb-1/4 text-bold"><strong>Keyboard shortcuts</strong></h5>
 
       {#each shortcuts as { keys, text }}
         <div class="shortcut">

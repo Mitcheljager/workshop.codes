@@ -11,8 +11,8 @@ table {
 td {
   padding: .5rem;
 
-  tr:nth-child(odd) & {
-    background: rgba($white, .05);
+  tr:nth-child(even) & {
+    background: rgba($black, .1);
   }
 
   a {
@@ -27,7 +27,7 @@ td {
 
 th {
   padding: .5rem;
-  background: rgba($black, .15);
+  background: rgba($black, .25);
   text-align: left;
   font-weight: bolder;
   color: $text-color-lightest;
@@ -36,7 +36,7 @@ th {
 tr {
   @include hover-stack {
     td {
-      background: rgba($white, .1);
+      background: rgba($white, .05);
     }
   }
 }

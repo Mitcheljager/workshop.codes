@@ -1,6 +1,6 @@
 <div class="heading">
-  <div class="hidden-sm mb-1/1">
-    <select onchange="location = this.value" class="form-select">
+  <div class="sm:hidden mb-1/1">
+    <select class="form-select" data-action="navigate-on-change">
       <% user_menu_items.each do |menu_item| %>
         <option value=<%= menu_item[:url] %> <%= "selected" if current_page?(menu_item[:url]) %>><%= menu_item[:title] %></option>
       <% end %>
@@ -11,7 +11,7 @@
 </div>
 
 <div class="profile">
-  <aside class="hidden visible-sm">
+  <aside class="hidden sm:visible">
     <% user_menu_items.each do |menu_item| %>
       <%= link_to menu_item[:title],
           menu_item[:url],

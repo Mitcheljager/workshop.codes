@@ -8,9 +8,16 @@
   aspect-ratio: 16/9;
   filter: blur(50px);
   transform: scale(1.1);
-  transition: opacity 1000ms;
   opacity: 0;
   z-index: -1;
+
+  @include media-min(sm) {
+    transition: opacity 1000ms;
+  }
+
+  @include safari() {
+    transform: scale(1.1) translate3d(0, 0, 0);
+  }
 
   &--visible {
     opacity: .25;

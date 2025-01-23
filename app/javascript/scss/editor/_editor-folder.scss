@@ -3,6 +3,12 @@
 .editor-folder.editor-folder {
   position: relative;
 
+  &.editor-folder--active {
+    > span > input {
+      color: $text-color-lightest;
+    }
+  }
+
   > span > input {
     color: $text-color-dark;
     pointer-events: all;
@@ -14,7 +20,7 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0.1rem;
+  top: 0.25rem;
   left: 0;
   height: 1.5rem;
   width: 1.5rem;
@@ -30,6 +36,17 @@
 
   .editor-folder--expanded > & {
     transform: rotate(90deg);
+  }
+}
+
+.editor-folder__name {
+  display: flex !important;
+  align-items: center;
+
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0 0.125rem;
   }
 }
 

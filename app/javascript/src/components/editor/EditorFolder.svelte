@@ -1,16 +1,20 @@
 <script>
   import { onMount } from "svelte"
-  import { openFolders } from "@stores/editor"
+  import { items, currentItem, openFolders } from "@stores/editor"
   import { isAnyParentHidden, toggleFolderState } from "@utils/editor"
   import EditorItemDestroy from "@components/editor/EditorItemDestroy.svelte"
   import EditorItemHide from "@components/editor/EditorItemHide.svelte"
   import EditorItemDuplicate from "@components/editor/EditorItemDuplicate.svelte"
   import EditorItemName from "@components/editor/EditorItemName.svelte"
   import EditorList from "@components/editor/EditorList.svelte"
+  import Chevron from "@components/icon/Chevron.svelte"
+  import Folder from "@components/icon/Folder.svelte"
 
   export let item = {}
 
   $: expanded = $openFolders.includes(item.id)
+  $: hasContents = $items.some(i => i.parent === item.id)
+  $: isActiveItemInside = $currentItem && $currentItem.parent === item.id
 
   onMount(setInitialState)
 
@@ -25,13 +29,15 @@
 <div
   class="editor-item editor-folder"
   class:editor-folder--expanded={expanded}
+  class:editor-folder--active={isActiveItemInside}
   class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
   data-item-id={item.id}>
   <button class="editor-folder__icon" on:click|stopPropagation={() => toggleFolderState(item, !expanded)}>
-    &gt;
+    <Chevron />
   </button>
 
-  <span>
+  <span class="editor-folder__name">
+    <Folder fill={hasContents} color={isActiveItemInside ? "white" : "currentColor"} />
     <EditorItemName {item} />
   </span>
 

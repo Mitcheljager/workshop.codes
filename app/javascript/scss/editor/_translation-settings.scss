@@ -1,13 +1,24 @@
 .translation-settings {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  gap: $margin * 0.5;
 }
 
 .translation-settings__aside {
   display: flex;
   flex-direction: column;
   gap: $margin * 0.125;
+  padding: $margin * 0.25;
+  border-top: 2px solid darken($bg-dark, 5%);
+  border-bottom-left-radius: $border-radius;
+  background: $bg-darker;
+}
+
+.translation-settings__content {
+  padding: $margin * 0.25;
+
+  .form-textarea {
+    width: calc(100% - $margin * 0.25);
+  }
 }
 
 .translation-settings__item {
@@ -31,6 +42,12 @@
   &:hover {
     color: $text-color-lightest;
   }
+}
+
+.translation-settings__create {
+  padding: $margin * 0.25;
+  margin: $margin * 0.125 $margin * -0.25 $margin * -0.25;
+  border-top: 2px solid darken($bg-dark, 5%);
 }
 
 .translation-settings__copy {

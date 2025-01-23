@@ -11,7 +11,7 @@ $media-min-widths: (
 
 $white: #fff;
 $black: #000;
-$gray: #90989c;
+$gray: #939b9f;
 $gray-dark: #6a7277;
 $red: #b33834;
 $orange: #e89930;
@@ -25,15 +25,15 @@ $border-color: #353b3f;
 $primary: #f06414;
 $secondary: lighten($body-bg, 5%);
 $discord: #5865f2;
-$bnet: #148eff;
+$bnet: #0074e0;
 $overwatch-2: #ed6516;
 $wiki: #00abff;
 $logo-cog: #565a5d;
 
-$text-color: $gray;
-$text-color-light: lighten($gray, 10%);
-$text-color-lightest: #dfdfdf;
-$text-color-dark: $gray-dark;
+$text-color: lighten($gray, 5%);
+$text-color-light: lighten($text-color, 10%);
+$text-color-lightest: lighten($text-color, 25%);
+$text-color-dark: darken($text-color, 11%);
 
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $font-stack-alt: "Barlow Condensed", "Impact", monospace;
@@ -67,9 +67,9 @@ $shadow: 0 2px 1px rgba(0, 0, 0, .1),
   --red: #{ $red };
   --overwatch-2: #{ $overwatch-2 };
   --wiki: #{ $wiki };
-  --text-color: #{ $gray };
+  --text-color: #{ $text-color };
   --text-color-light: #{ $text-color-light };
-  --text-color-dark: #{ $gray-dark };
+  --text-color-dark: #{ $text-color-dark };
   --bg-body: #{ $body-bg };
   --bg-dark: #{ $bg-dark };
   --bg-darker: #{ $bg-darker };

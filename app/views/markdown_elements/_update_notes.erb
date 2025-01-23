@@ -5,11 +5,11 @@
     <div class="update-notes__header <%= "update-notes__header--no-image" if !hero_image.present? %>">
       <% if hero_image.present? %>
         <div class="update-notes__icon">
-          <%= image_tag hero_image, loading: "lazy" %>
+          <%= image_tag hero_image, loading: "lazy", alt: "" %>
         </div>
       <% end %>
 
-      <h5 class="update-notes__title"><%= title.present? ? title : hero %></h5>
+      <p class="update-notes__title"><%= title.present? ? title : hero %></p>
     </div>
   <% end %>
 
@@ -25,8 +25,8 @@
         <% abilities.each do |key, strings| %>
           <div class="update-notes__item">
             <% begin %>
-              <% ability_image = ability_name_to_icon_url(key, 50) %>
-              <%= image_tag ability_image, loading: "lazy", class: "update-notes__ability" if ability_image.present? %>
+              <% ability_image = icons[key].present? && icons[key].start_with?('http') ? icons[key] : ability_name_to_icon_url(icons[key] || key, 50) %>
+              <%= image_tag ability_image, loading: "lazy", class: "update-notes__ability", alt: "" if ability_image.present? %>
             <% rescue; end %>
 
             <div>

@@ -108,7 +108,7 @@ export default class InscrybeInsertImage {
 
     uploader.upload().then(() => {
       const interval = setInterval(() => {
-        if (uploader.blob == "") return
+        if (uploader.blob == null) return
 
         clearInterval(interval)
 
@@ -139,7 +139,7 @@ export default class InscrybeInsertImage {
     const cursorPosition = this.editor.getCursor()
     const position = marker.find()
     this.editor.setSelection(position, position)
-    this.editor.replaceSelection(`![](${url})`)
+    this.editor.replaceSelection(`![Text description](${url})`)
 
     this.editor.setSelection(cursorPosition, cursorPosition)
 

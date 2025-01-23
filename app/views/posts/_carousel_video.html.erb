@@ -1,3 +1,1 @@
-<div class="video">
-  <iframe class="video__iframe" width="560" height="315" src="https://www.youtube-nocookie.com/embed/<%= @post.carousel_video %>?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-</div>
+<%= raw youtube_preview_tag(@post.carousel_video) %>

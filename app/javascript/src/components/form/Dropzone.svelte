@@ -19,11 +19,12 @@
   export let maxDimensions = 3500
   export let maxSizeMB = 2
 
+  const imagePreviewWidth = 200
+
   let listElement
   let active = false
   let previewImageUrl = ""
 
-  const imagePreviewWidth = 200
   $: updateOrder(images)
 
   onMount(() => {
@@ -125,7 +126,8 @@
   }
 
   function removeImage(id) {
-    if (confirm("Are you sure?")) images = images.filter(i => i.id != id)
+    if (!confirm("Are you sure you wish to remove this image? This can not be undone after saving, but you can always re-upload the image.")) return
+    images = images.filter(i => i.id != id)
   }
 
   async function isAcceptableSize(file) {
@@ -173,7 +175,7 @@
 {/if}
 
 <div class="images-preview" bind:this={listElement}>
-  {#each images as image (image.id)}
+  {#each images as image, i (image.id)}
     <div
       class="images-preview__item"
       data-id={image.id}
@@ -195,15 +197,17 @@
           alt="" />
       {/if}
 
-      <button class="images-preview__action" on:click|stopPropagation|preventDefault={() => removeImage(image.id)}>X</button>
+      <button class="images-preview__action images-preview__action--close" on:click|stopPropagation|preventDefault={() => removeImage(image.id)} aria-label="Upload image {i + 1}">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+      </button>
     </div>
   {/each}
 </div>
 
 {#if previewImageUrl}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close>
+  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+  <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close role="dialog" aria-label="Image preview">
 
     <div class="modal__content p-0">
       <img class="img-fluid" src={previewImageUrl} alt="" />

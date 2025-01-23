@@ -2,20 +2,20 @@
 
 <div class="gallery">
   <% images.each do |title, image| %>
-    <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= image %>">
-      <%= image_tag image, alt: title, loading: "lazy" %>
+    <button class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= image %>">
+      <%= image_tag image, alt: title || "", loading: "lazy" %>
 
       <% if title.present? %>
-        <span class="gallery__title"><%= title %></span>
+        <span class="gallery__title" aria-hidden="true"><%= title %></span>
       <% end %>
-    </div>
+    </button>
   <% end %>
 </div>
 
-<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="gallery-<%= random_id %>">
+<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="gallery-<%= random_id %>" role="dialog" aria-label="Image gallery">
   <div class="modal__backdrop" data-role="modal-backdrop"></div>
 
   <div class="modal__content p-0">
-    <%= image_tag "//:0", data: { gallery: "gallery-#{ random_id }" }, class: "img-fluid" %>
+    <%= image_tag "//:0", data: { gallery: "gallery-#{ random_id }" }, class: "img-fluid", alt: "" %>
   </div>
 </div>

@@ -1,9 +1,9 @@
 desc "Generate wiki articles. This file is ugly. Please don't judge."
 task :generate_wiki_articles => :environment do
-  actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
-  events = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
-  values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
-  constants = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
+  actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
+  events = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
+  values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
+  constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
 
   @user = User.find_by_username("mitsiee")
   @user = User.find_by_username("admin") unless @user.present?
@@ -13,7 +13,7 @@ task :generate_wiki_articles => :environment do
   @category = Wiki::Category.find_by_title("Actions")
   @category = Wiki::Category.create(title: "Actions", slug: "actions") unless @category.present?
 
-  actions.each do |name, content|
+  actions.each do |content|
     @article = Wiki::Article.find_by_title(content["en-US"])
     next if @article.present?
 
@@ -75,7 +75,7 @@ task :generate_wiki_articles => :environment do
   @category = Wiki::Category.find_by_title("Values")
   @category = Wiki::Category.create(title: "Values", slug: "values") unless @category.present?
 
-  values.each do |name, content|
+  values.each do |content|
     @article = Wiki::Article.find_by_title(content["en-US"])
     next if @article.present?
 

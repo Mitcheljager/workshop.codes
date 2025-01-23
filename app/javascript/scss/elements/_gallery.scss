@@ -13,6 +13,7 @@
 }
 
 .gallery__item {
+  appearance: none;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -20,6 +21,11 @@
   border-radius: $border-radius;
   overflow: hidden;
   cursor: pointer;
+  text-align: center;
+
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
 
   &:hover {
     &::before {

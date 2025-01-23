@@ -33,6 +33,6 @@
 
 <% if @collection.user == current_user %>
   <div class="fixed-box">
-    <%= link_to "← Customise collection", edit_collection_path(@collection.nice_url), class: "button button--secondary w-100" %>
+    <%= link_to "← Customise collection", edit_collection_path(@collection.id), class: "button button--secondary w-100" %>
   </div>
 <% end %>

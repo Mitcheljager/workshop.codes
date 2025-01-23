@@ -5,6 +5,10 @@
   name: Doomfist
   category: Tank
 -
+  name: Hazard
+  category: Tank
+  overwatch_2: true
+-
   name: Junker Queen
   category: Tank
   overwatch_2: true
@@ -104,6 +108,10 @@
   category: Support
 -
   name: Illari
+  category: Support
+  overwatch_2: true
+-
+  name: Juno
   category: Support
   overwatch_2: true
 -

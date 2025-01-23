@@ -42,6 +42,10 @@
 
   @include styled-scrollbar();
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   &--left {
     left: 0;
     right: auto;

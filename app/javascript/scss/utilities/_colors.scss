@@ -26,6 +26,12 @@ $text-colors: (
   }
 }
 
+.sm\:text-black {
+  @include media-min(sm) {
+    color: $black;
+  }
+}
+
 $bg-colors: (
   primary: var(--primary, $primary),
   dark: $bg-dark,

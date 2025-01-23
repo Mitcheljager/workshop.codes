@@ -25,12 +25,12 @@
   -moz-tab-size: 2;
   -webkit-text-size-adjust: 100%;
 
+  @include styled-scrollbar;
+
   @include media-min("lg") {
     font-size: $font-size-small;
     line-height: 2em;
   }
-
-  @include styled-scrollbar();
 
   .ide--fullscreen & {
     max-height: 100%;

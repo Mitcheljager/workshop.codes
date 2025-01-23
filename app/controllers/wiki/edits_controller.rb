@@ -15,8 +15,11 @@ class Wiki::EditsController < Wiki::BaseController
     @edit = Wiki::Edit.find(params[:id])
     @previous_article = Wiki::Article.where(group_id: @edit.article.group_id).where("id < ?", @edit.article.id).last
 
+    not_found if @previous_article.nil?
+
     if @edit.content_type == "edited"
       @title_difference = Diffy::SplitDiff.new(@previous_article.title, @edit.article.title, format: :html, allow_empty_diff: false)
+      @slug_difference = Diffy::SplitDiff.new(@previous_article.slug, @edit.article.slug, format: :html, allow_empty_diff: false)
       @content_difference = Diffy::SplitDiff.new(@previous_article.content, @edit.article.content, format: :html, allow_empty_diff: false)
       @category_difference = Diffy::SplitDiff.new(@previous_article.category.title, @edit.article.category.title, format: :html, allow_empty_diff: false)
       @tags_difference = Diffy::SplitDiff.new(@previous_article.tags || "", @edit.article.tags || "", format: :html, allow_empty_diff: false)
@@ -24,5 +27,11 @@ class Wiki::EditsController < Wiki::BaseController
 
     add_breadcrumb @edit.article.group_id, Proc.new { wiki_article_edits_path(@edit.article.group_id) }
     add_breadcrumb @edit.id, Proc.new { wiki_edit_path(@edit) }
+  end
+
+  private
+
+  def not_found
+    raise ActionController::RoutingError.new("Not Found")
   end
 end

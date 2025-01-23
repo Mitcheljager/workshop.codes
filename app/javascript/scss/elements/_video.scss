@@ -1,6 +1,8 @@
+@use "sass:math";
+
 .video {
 	position: relative;
-	padding-bottom: 56.25%;
+	padding-bottom: math.div(100%, 900) * 500;
 	height: 0;
 	background: $bg-darker;
 }
@@ -11,6 +13,40 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
+}
+
+.video__preview {
+	@extend .video__iframe;
+	cursor: pointer;
+
+	&:focus-visible {
+		@include focus-visible-outline;
+	}
+}
+
+.video__thumbnail {
+	width: 100%;
+	height: 100% !important;
+	object-fit: cover;
+}
+
+.video__play-icon {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	width: 6rem;
+	height: 6rem;
+	background: url("/images/icons/icon-youtube.svg") no-repeat center;
+	background-size: contain;
+	z-index: 2;
+	filter: saturate(0);
+	transition: filter 100ms;
+
+	.video__preview:hover &,
+	.video__preview:focus-visible & {
+		filter: none;
+	}
 }
 
 video {

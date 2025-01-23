@@ -24,7 +24,7 @@
 
   .cm-gutters {
     border-right: 0;
-    background: var(--editor-background, #{$bg-dark});
+    background: transparent;
     color: $text-color-dark;
 
     .cm-activeLineGutter {
@@ -42,7 +42,7 @@
   }
 
   .cm-selectionBackground {
-    background: lighten($bg-dark, 10%);
+    background: lighten($bg-dark, 10%) !important;
   }
 
   .cm-selectionMatch {
@@ -72,26 +72,58 @@
   }
 
   .cm-completionIcon {
-    padding-right: 1rem;
+    padding-right: 2.15rem;
+    font-size: 0.75em;
+
+    $types: (
+      value: "Value",
+      action: "Action",
+      event: "Event",
+      constant: "Const",
+      hero: "Hero",
+      map: "Map",
+      variable: "Other",
+      keyword: "Key",
+      rule: "Rule",
+      snippet: "Snippet"
+    );
+
+    @each $name, $type in $types {
+      &-#{$name}::after {
+        content: "#{$type}";
+      }
+    }
   }
-  .cm-completionIcon-event::after {
-    content: "∈";
-  }
+
   .cm-tooltip {
-    background: darken($bg-dark, 5%);
+    border-radius: $border-radius * 0.5;
     border: 0;
-    box-shadow: $shadow;
+    background: darken($bg-dark, 5%);
 
     &.cm-tooltip-hover {
-      border-radius: $border-radius;
-      padding: math.div($margin, 16) $margin * 0.125;
-      box-shadow: none;
+      max-width: 25em;
+      max-height: 15em;
+      overflow-y: auto;
+      border-radius: $border-radius * 0.5;
+      border: 1px solid $bg-darker;
+      padding: $margin * 0.125;
       color: $text-color;
       font-size: 0.75rem;
-      pointer-events: none;
+
+      @include styled-scrollbar;
+    }
+
+    &.cm-completionInfo {
+      margin: -2px 0 0 0.5em;
+      border-radius: $border-radius * 0.5;
+      border: 1px solid $bg-darker;
+      box-shadow: $shadow;
+      background: $bg-dark !important;
     }
 
     > ul {
+      padding: $margin * 0.125;
+
       @include styled-scrollbar;
     }
 
@@ -101,6 +133,30 @@
       color: $text-color-light;
       white-space: pre-wrap;
     }
+
+    .cm-diagnostic {
+      background: $bg-darker;
+      border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
+      color: $text-color-lightest;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    hr {
+      margin: $margin * 0.125 0;
+      background-color: $bg-darker
+    }
+
+    em {
+      color: var(--color-custom-keyword);
+      font-weight: bold;
+      font-style: normal;
+    }
+  }
+
+  .cm-tooltip-section:not(:first-child) {
+    border: 0;
+    margin-top: $margin * 0.125;
   }
 
   .cm-tooltip-arrow {
@@ -110,6 +166,16 @@
   .cm-completionDetail {
     color: $text-color;
     font-size: 0.85em;
+  }
+
+  .cm-tooltip-autocomplete {
+    border-radius: 0;
+    border: 1px solid $bg-darker;
+    box-shadow: $shadow;
+  }
+
+  .cm-tooltip-autocomplete ul li {
+    padding: 0.25rem !important;
   }
 
   .cm-tooltip-autocomplete ul li[aria-selected] {
@@ -126,18 +192,33 @@
     background: transparent;
   }
 
-  .cm-lint-marker-error::before {
-    content: "!";
-    display: block;
-    width: 1em;
-    height: 1em;
-    padding: 0.1em;
-    border-radius: 50%;
-    background: $red;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    line-height: 1em;
+  .cm-lint-marker-warning {
+    content: "";
+
+    &::before {
+      content: "!";
+      display: block;
+      width: 1em;
+      height: 1em;
+      padding: 0.1em;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      background: $orange;
+      text-align: center;
+      color: black;
+      font-weight: bold;
+      line-height: 1.25;
+    }
+  }
+
+  .cm-lint-marker-error {
+    @extend .cm-lint-marker-warning;
+
+    &::before {
+      border-radius: 50%;
+      background: $red;
+      line-height: 1;
+      clip-path: none;
+    }
   }
 
   .cm-panel.cm-search {
@@ -153,6 +234,11 @@
     backdrop-filter: blur(10px);
     box-shadow: $shadow;
     animation: fly-in 200ms;
+
+    @include safari() {
+      backdrop-filter: none;
+      background: rgba(darken($bg-dark, 10%), 0.75);
+    }
 
     input {
       width: auto;
@@ -247,6 +333,47 @@
     }
   }
 
+  .cm-trailingSpace {
+    position: relative;
+    background: transparent;
+
+    &:hover {
+      &::after {
+        display: block;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      height: 1px;
+      width: calc(100% - 4px);
+      background: repeating-linear-gradient(90deg, var(--color-comment), var(--color-comment) 0.25rem, transparent 0.25rem,transparent 0.5rem);
+      opacity: 0.5;
+    }
+
+    &::after {
+      display: none;
+      content: "Trailing whitespace";
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(-100%);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
+      border-left: 3px solid $text-color;
+      background: darken($bg-dark, 5%);
+      white-space: nowrap;
+      line-height: 1;
+      text-indent: 0;
+      font-family: $font-stack;
+      color: $text-color;
+    }
+  }
+
   .code-actions-lightbulb {
     position: absolute;
     aspect-ratio: 1;
@@ -270,29 +397,36 @@
     opacity: 0;
   }
 
+  // From import rainbowBrackets from 'rainbowbrackets'
+  // Skipping red, despite the classname, red is too error-like.
+  .rainbow-bracket-red span { color: forestgreen }
+  .rainbow-bracket-orange span { color: orange }
+  .rainbow-bracket-yellow span { color: yellow }
+  .rainbow-bracket-green span { color: turquoise }
+  .rainbow-bracket-blue span { color: dodgerblue }
+  .rainbow-bracket-indigo span { color: hotpink }
+  .rainbow-bracket-violet span { color: plum }
 }
 
 .indented-wrapped-line {
-  --text-indent-multiplier: -1.5;
-  margin-left: calc(var(--indented));
-  text-indent: calc(var(--text-indent-multiplier) * var(--indented));
-
-  .is-firefox & {
+  @supports (-moz-appearance: none) {
     --text-indent-multiplier: -1;
-  }
+    margin-left: var(--indented);
+    text-indent: calc(var(--text-indent-multiplier) * var(--indented));
 
-  &.cm-activeLine {
-    box-shadow: calc((-1 * var(--indented)) + 4px) 0 0 rgba($white, 0.025)
-  }
-
-  &.cm-indent-markers {
-    &::before {
-      left: calc(var(--indented) * -1);
+    &.cm-activeLine {
+      box-shadow: calc((-1 * var(--indented)) + 4px) 0 0 rgba($white, 0.025)
     }
-  }
 
-  button,
-  .button {
-    text-indent: 0;
+    &.cm-indent-markers {
+      &::before {
+        left: calc(var(--indented) * -1 + 2px);
+      }
+    }
+
+    button,
+    .button {
+      text-indent: 0;
+    }
   }
 }

@@ -51,6 +51,7 @@
   width: 90%;
   max-width: map-get($media-min-widths, xs);
   padding: $margin * 0.5;
+  border-radius: $border-radius;
   background: $body-bg;
 
   &::before {
@@ -70,6 +71,13 @@
     @include media-min(sm) {
       left: 4rem;
       width: calc(100% - 8rem);
+    }
+  }
+
+  &--no-shadow {
+    &::before {
+      display: none;
+      box-shadow: none;
     }
   }
 

@@ -2,7 +2,7 @@
   import { Sortable, MultiDrag } from "sortablejs"
   import EditorItem from "@components/editor/EditorItem.svelte"
   import EditorFolder from "@components/editor/EditorFolder.svelte"
-  import { items, sortedItems } from "@stores/editor.js"
+  import { items, sortedItems } from "@stores/editor"
   import { onMount } from "svelte"
   import { flip } from "svelte/animate"
 
@@ -79,6 +79,6 @@
   {/each}
 
   {#if $items.length && !itemsInParent.length}
-    <em class="pl-1/8 text-dark">Empty folder</em>
+    <em class="pl-1/4 ml-1/8 text-dark">Empty folder</em>
   {/if}
 </div>

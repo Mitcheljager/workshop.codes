@@ -4,13 +4,16 @@
   <% block_property(block, "questions").each_with_index do |question, index| %>
     <% next unless question.present? %>
 
-    <div class="faq__item" data-toggle-content>
-      <div class="faq__question" data-action="toggle-content">
-        <%= tag.div sanitize(question) %>
-        <div class="faq__icon">▼</div>
-      </div>
+    <% label_id = "label-#{ block.id }-#{ index }" %>
+    <% controls_id = "faq-#{ block.id }-#{ index }" %>
 
-      <div data-role="content-to-toggle snippet-container" style="display: none">
+    <div class="faq__item" data-toggle-content>
+      <button class="faq__question" data-action="toggle-content" aria-controls="<%= controls_id %>" aria-expanded="false">
+        <%= tag.div sanitize(question), id: label_id %>
+        <div class="faq__icon" aria-hidden="true">▼</div>
+      </button>
+
+      <div data-role="content-to-toggle" style="display: none" id="<%= controls_id %>" aria-labelledby="<%= label_id %>">
         <div class="p-1/4 pt-0">
           <hr class="mt-0 mb-1/4" />
           <%= sanitize(markdown(block_property(block, "answers")[index])) %>

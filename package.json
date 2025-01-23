@@ -2,59 +2,71 @@
   "name": "overwatch-workshop",
   "private": true,
   "engines": {
-    "node": ">=18"
+    "node": ">=18 <=22.4.1"
   },
   "dependencies": {
-    "@agilie/canvas-image-cover-position": "^1.1.1",
     "@bugsnag/js": "^7.21.0",
     "@codemirror/autocomplete": "^6.3.0",
     "@codemirror/lang-javascript": "^6.1.0",
     "@codemirror/search": "^6.2.2",
     "@codemirror/state": "^6.1.2",
     "@codemirror/view": "^6.3.0",
-    "@lezer/generator": "^1.1.1",
     "@lezer/highlight": "^1.1.1",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@replit/codemirror-indentation-markers": "^6.4.0",
-    "acorn": "^8.1.0",
     "codemirror": "^6.0.1",
-    "inscrybmde": "^1.11.6",
-    "lz-string": "^1.4.4",
+    "inscrybmde": "https://github.com/Mitcheljager/inscryb-markdown-editor.git",
     "metrics-graphics": "^2.15.6",
     "microlight": "^0.0.7",
     "nouislider": "^14.7.0",
-    "patch-package": "^6.4.7",
-    "postcss-import": "^16.1.0",
+    "rainbowbrackets": "^2.0.2",
     "siema": "^1.5.1",
     "sortablejs": "^1.15.0",
-    "svelte": "^4.2.12",
+    "svelte": "^4.2.19",
     "svelte-confetti": "^1.2.2",
-    "svelte-loader": "^3.0.0",
-    "svelte-preprocess": "^5.1.3",
-    "svelte-preprocess-sass": "^1.0.0",
     "svelte-tiny-linked-charts": "^1.3.0",
     "timeago.js": "^4.0.2",
-    "turbolinks": "^5.2.0",
-    "webp-loader": "^0.6.0"
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.15.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "@testing-library/dom": "^10.4.0",
     "@tsconfig/svelte": "^5.0.4",
-    "eslint": "^7.25.0",
+    "@types/codemirror": "^5.60.15",
+    "@types/d3": "^7.4.3",
+    "@types/eslint__js": "^8.42.3",
+    "@types/nouislider": "^9.0.10",
+    "@types/rails__activestorage": "^7.1.1",
+    "@types/rails__ujs": "^6.0.4",
+    "@types/siema": "^1.4.11",
+    "@types/sortablejs": "^1.15.8",
+    "@types/turbolinks": "^5.2.2",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
+    "@typescript-eslint/parser": "^8.14.0",
+    "acorn": "^8.1.0",
+    "eslint": "9.14.0",
     "eslint-plugin-svelte": "^2.35.1",
+    "globals": "^15.12.0",
     "husky": "^9.0.11",
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.2",
+    "patch-package": "^6.4.7",
+    "postcss-import": "^16.1.0",
     "sass": "^1.69.5",
     "string.prototype.replaceall": "^1.0.7",
     "svelte-check": "^3.6.8",
-    "vite": "5.0.13",
+    "svelte-preprocess": "^5.1.3",
+    "svelte-preprocess-sass": "^1.0.0",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.14.0",
+    "vite": "5.4.8",
     "vite-plugin-full-reload": "^1.1.0",
     "vite-plugin-rails": "0.5.0",
     "vite-plugin-sass-glob-import": "^3.0.2",
-    "vitest": "^1.4.0",
-    "yarn-audit-fix": "^9.3.0"
+    "vitest": "^1.4.0"
   },
   "resolutions": {
     "acorn": "^8.1.0"
@@ -62,13 +74,14 @@
   "scripts": {
     "test": "vitest",
     "postinstall": "patch-package",
-    "heroku-postbuild": "patch-package",
-    "generate-ow-language": "yarn lezer-generator app/javascript/src/lib/ows.grammar -o app/javascript/src/lib/lang.js",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,.ts,.svelte}": [
+    "*.{js,ts,svelte}": [
       "eslint --cache --fix"
     ]
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.18.1"
   }
 }

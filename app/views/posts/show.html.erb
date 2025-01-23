@@ -1,5 +1,5 @@
-<% content_for :page_title, "#{ @post.title }" %>
-<% begin %><% content_for :og_image, "#{ rails_public_blob_url(@ordered_images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed) if @ordered_images.present? && @ordered_images.any? }" %><% rescue %><% end %>
+<% content_for :page_title, @post.title %>
+<% begin %><% content_for :og_image, rails_public_blob_url(@ordered_images.first.variant(quality: 95, resize_to_fill: [900, 500]).processed) if @ordered_images.present? && @ordered_images.any? %><% rescue %><% end %>
 <% content_for :og_description, strip_tags(markdown(@post.description || "")).truncate(200).gsub("\n"," ") %>
 <% content_for :bg_size, "medium" %>
 
@@ -41,7 +41,6 @@
     <%= render "current_user_blocks" if current_user == @post.user %>
     <%= render "expired" if @post.expired? %>
 
-
     <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs] do %>
       <%= tabs_content_tag("description", "", "mt-1/4") do %>
         <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
@@ -57,7 +56,7 @@
           <%= render "archive", post: @post if @archive_authorization.present? %>
         </div>
 
-        <div class="item__tray">
+        <div class="item__tray" role="complementary">
           <%= render "details" %>
         </div>
       <% end %>
@@ -79,27 +78,29 @@
 
     <% if @post.collection && @post.collection.posts.visible?.many? %>
       <%= tabs_content_tag("collection", nil, "mt-1/2") do %>
-        <div class="infinite-scroll"><div class="spinner"></div></div>
+        <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
       <% end %>
     <% end %>
 
     <%= tabs_content_tag("comments", nil, "mt-1/2") do %>
-      <div class="infinite-scroll"><div class="spinner"></div></div>
+      <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
     <% end %>
 
     <% if @revisions_count > 1 %>
       <%= tabs_content_tag("update-log", nil, "mt-1/2") do %>
-        <div class="infinite-scroll"><div class="spinner"></div></div>
+        <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
       <% end %>
     <% end %>
 
     <% if @derivations_count > 0 %>
       <%= tabs_content_tag("derivations", nil, "mt-1/2") do %>
-        <div class="infinite-scroll"><div class="spinner"></div></div>
+        <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
       <% end %>
     <% end %>
   </article>
 
-  <%= render "post_recommendations" if @post.recommended_posts.any? %>
-  <%= render "similar_to" %>
+  <div role="complementary">
+    <%= render "post_recommendations" if @post.recommended_posts.any? %>
+    <%= render "similar_to" %>
+  </div>
 </div>

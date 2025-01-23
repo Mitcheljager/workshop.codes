@@ -4,7 +4,7 @@
   max-width: 900px;
 
   [data-role="carousel"]:not([style]) {
-    height: 500px;
+    aspect-ratio: 900/500;
     overflow: hidden;
   }
 }
@@ -20,7 +20,7 @@
     height: 100%;
     background: $bg-darker;
     text-indent: 1000 * 1000px;
-    aspect-ratio: 16/9;
+    aspect-ratio: 900/500;
   }
 }
 
@@ -60,6 +60,7 @@
   border-radius: $border-radius;
   background: $bg-darker;
   box-shadow: $shadow;
+  aspect-ratio: 1/1;
 
   @include hover-stack {
     opacity: 0.75;
@@ -81,29 +82,20 @@
 
   img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
 .carousel__navigation-item-video-overlay {
-  background: rgba($black, .5);
-
-  &::after {
-    content: "▶";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    color: $text-color-lightest;
-    font-size: 24px;
-    background: rgba($black, .5);
-  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($black, .5) url("/images/icons/icon-youtube.svg") no-repeat center;
+  background-size: 2.5rem;
+  filter: saturate(0);
 }
 
 .card-carousel {

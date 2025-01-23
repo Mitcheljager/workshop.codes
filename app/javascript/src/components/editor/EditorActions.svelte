@@ -29,21 +29,23 @@
   <Settings />
 
   {#if !$isMobile}
-    <button class="button button--secondary button--square" on:click={() => modal.show(Modal.Enhance)}>
-      Enhance
-    </button>
-
-    <button class="button button--secondary button--square" on:click={() => modal.show(Modal.TranslationKeys)}>
-      Translations
-    </button>
-
-    {#if $currentProject?.is_owner}
-      <button class="button button--secondary button--square" on:click={() => modal.show(Modal.ScriptImporter)}>
-        Import Script
+    <div class="button-group">
+      <button class="button button--secondary button--square" on:click={() => modal.show(Modal.Enhance)}>
+        Enhance
       </button>
-    {/if}
 
-    <Compiler />
+      <button class="button button--secondary button--square" on:click={() => modal.show(Modal.TranslationKeys)}>
+        Translations
+      </button>
+
+      {#if $currentProject?.is_owner}
+        <button class="button button--secondary button--square" on:click={() => modal.show(Modal.ScriptImporter)}>
+          Import Script
+        </button>
+      {/if}
+
+      <Compiler />
+    </div>
   {:else}
     <div class="dropdown settings" bind:this={mobileDropdown} use:outsideClick on:outsideClick={() => showMobileDropdown = false}>
       <button

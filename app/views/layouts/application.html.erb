@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= yield(:page_title) != "" ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes Resource" %></title>
+    <title><%= yield(:page_title).present? ? yield(:page_title) + " | Workshop.codes" : "Workshop.codes | Overwatch Workshop Codes Resource" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,10 +11,12 @@
     <meta name="ir-site-verification-token" value="2456162" />
     <meta http-equiv=”content-language” content="en" />
 
-    <% unless yield(:og_description) != "" %>
+    <% unless yield(:og_description).present? %>
       <meta name="description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
       <meta property="og:description" content="Find Overwatch Workshop Codes to play with friends, randoms, or solo! Use in-depth search to find exactly what you are looking for. Or submit your own Workshop Codes for other to enjoy.">
     <% end %>
+
+    <%= yield(:preload) if yield(:preload).present? %>
 
     <%= render "application/og_tags" %>
     <%= render "favicons" %>
@@ -27,29 +29,37 @@
       onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
     <noscript><%= vite_stylesheet_tag "fonts.scss" %></noscript>
 
+    <!-- Prevent flashbangs -->
+    <style>
+      body {
+        background: #1f2326;
+        color: #90989c;
+      }
+    </style>
+
     <%= vite_stylesheet_tag "application.scss" %>
 
     <%= vite_client_tag %>
-    <%= vite_javascript_tag "application", "data-turbolinks-track": "reload", defer: true %>
+    <%= vite_typescript_tag "application", "data-turbolinks-track": "reload", defer: true %>
 
     <% if current_user %>
       <%= vite_stylesheet_tag "logged-in-user.scss" %>
-      <%= vite_javascript_tag "logged-in-user.js", "data-turbolinks-track": "reload", defer: true %>
+      <%= vite_typescript_tag "logged-in-user.ts", "data-turbolinks-track": "reload", defer: true %>
     <% end %>
   </head>
 
   <body class="<%= "wiki" if is_wiki? %>">
     <%= render "flash" %>
-    <%= render "header" %>
+    <%= render "header" unless is_editor? %>
     <%= render "wiki/header" if is_wiki? %>
 
     <div class="wrapper <%= "wrapper--large" if is_admin_controller? %>">
       <%= yield %>
 
-      <%= render "footer" %>
+      <%= render "footer" unless is_editor? %>
     </div>
 
-    <%= render "body_bg" unless is_wiki? %>
+    <%= render "body_bg" unless is_wiki? || is_editor? %>
 
     <%= svelte_component "Ollie", { imageFlyBy: image_path("ollie/ollie-float.png"), imageHeart: image_path("ollie/ollie-heart.png") } if current_user.present? %>
   </body>

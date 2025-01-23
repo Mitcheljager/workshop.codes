@@ -4,7 +4,7 @@
   </div>
 
   <div>
-    <%= link_to "View", collection_path(collection.nice_url), class: "button button--link mr-1/4", data: { prefetch: false } %>
-    <%= link_to "Edit", edit_collection_path(collection.nice_url), class: "button button--secondary", data: { prefetch: false } %>
+    <%= link_to "View", collection_nice_url_path(collection.nice_url), class: "button button--link mr-1/4", data: { prefetch: false } %>
+    <%= link_to "Edit", edit_collection_path(collection.id), class: "button button--secondary", data: { prefetch: false } %>
   </div>
 </div>

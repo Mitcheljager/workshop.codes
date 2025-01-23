@@ -1,9 +1,9 @@
 <% cache_unless current_user, [post] do %>
-  <article class="item" data-code="<%= post.code %>">
+  <article class="item" data-code="<%= post.code %>" aria-labelledby="post-title-<%= post.code %>">
     <% cache [post, "title_thumbnail"] do %>
       <%= render "posts/thumbnail", post: post %>
 
-      <div class="item__title">
+      <div class="item__title" id="post-title-<%= post.code %>">
         <%= link_to post.title, post_path(post.code) %>
       </div>
     <% end %>
@@ -30,12 +30,11 @@
         </div>
 
         <div class="item__details-item" title="Last updated: <%= post.last_revision_created_at %>">
-          Last updated:
-
           <% if post.last_revision_created_at.blank? %>
             Draft
           <% else %>
-            <time data-role="timeago timeago-static" datetime="<%= post.last_revision_created_at %>"></time>
+            Updated
+            <time datetime="<%= post.last_revision_created_at %>"><%= time_ago_in_words(post.last_revision_created_at).gsub("about ", "").gsub("over ", "") %> ago</time>
           <% end %>
         </div>
       </div>

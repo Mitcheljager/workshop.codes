@@ -28,32 +28,35 @@
   }
 </script>
 
-<Modal maxWidth="80vw">
-  <h2 class="mt-0">Translation settings</h2>
+<Modal maxWidth="clamp(300px, 90vw, 900px)" flush>
+  <div class="bg-darker br-top p-1/4">
+    <h2 class="mt-0 mb-1/4">Translation settings</h2>
+    <p class="mb-0">Translation keys allow you to insert a Key in place of a Custom String. You can set up translations and the key will automatically be translated based on the player's game language.</p>
+  </div>
 
-  <p>Translation keys allow you to insert a Key in place of a Custom String. You can set up translations and the key will automatically be translated based on the player's game language.</p>
-
-  <div class="translation-settings mt-1/2">
+  <div class="translation-settings">
     <div class="translation-settings__aside">
       <button on:click={() => { showLanguageSettings = true; selectedKey = null }} class="button button--secondary button--square button--small text-base w-100">
         Select languages ({$selectedLanguages.length})
       </button>
 
-      <h4 class="mb-1/8">Keys</h4>
+      {#if Object.keys($orderedTranslationKeys).length}
+        <h4 class="mb-1/8"><strong>Keys</strong></h4>
 
-      <div>
-        {#each Object.keys($orderedTranslationKeys) as key}
-          <button
-            class="translation-settings__item"
-            class:translation-settings__item--active={selectedKey == key}
-            on:click={() => { selectedKey = key; showLanguageSettings = false }}>
-            {key}
-            <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
-          </button>
-        {/each}
-      </div>
+        <div>
+          {#each Object.keys($orderedTranslationKeys) as key}
+            <button
+              class="translation-settings__item"
+              class:translation-settings__item--active={selectedKey == key}
+              on:click={() => { selectedKey = key; showLanguageSettings = false }}>
+              {key}
+              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
+            </button>
+          {/each}
+        </div>
+      {/if}
 
-      <div class="well well--dark block p-1/4 mt-1/4">
+      <div class="translation-settings__create">
         <label class="form-label text-small" for="">Create new key</label>
         <input
           bind:this={newKeyInput}
@@ -68,7 +71,7 @@
           <div class="text-red mt-1/8 text-small">{error}</div>
         {/if}
 
-        <button on:click={addKey} class="button button--secondary button--small button--square w-100 mt-1/8">Create</button>
+        <button on:click={addKey} class="button button--small button--square w-100 mt-1/8">Create</button>
       </div>
     </div>
 

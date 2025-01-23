@@ -7,7 +7,7 @@
     left: 0;
     width: 100%;
     height: 200px;
-    background: lighten($body-bg, 5%) url("/images/wiki/bg.webp");
+    background: lighten($body-bg, 25%) url("/images/wiki/bg.webp");
     background-size: cover;
     z-index: -1;
     box-shadow: 5px 0 25px rgba($black, .25);
@@ -22,6 +22,10 @@
 
     @supports (background: -webkit-canvas(squares)) {
       background-image: url("/images/wiki/bg.jpg");
+    }
+
+    @include high-contrast() {
+      background-image: none;
     }
   }
 

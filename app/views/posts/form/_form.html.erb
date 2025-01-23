@@ -5,11 +5,11 @@
     <div class="p-1/4">
       <div class="form-group-uneven">
         <div class="form-group mt-0">
-          <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title" %>
+          <%= form.text_field :title, class: "form-input form-input--large", placeholder: "Title", aria: { label: "Title" } %>
         </div>
 
         <div class="form-group relative show-on-focus-within sm:mt-0">
-          <%= form.text_field :code, class: "form-input form-input--large", placeholder: "Code", data: { action: "reveal-on-difference", original: @post.code }, autocomplete: "off" %>
+          <%= form.text_field :code, class: "form-input form-input--large", placeholder: "Code", data: { action: "reveal-on-difference", original: @post.code }, aria: { label: "Code" }, autocomplete: "off" %>
 
           <% if current_user.posts.none? %>
             <div class="bubble bubble--warning show-on-focus-within__content">

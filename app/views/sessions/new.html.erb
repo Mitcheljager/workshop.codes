@@ -3,7 +3,7 @@
 
 <div class="form-group-columns mt-1/1">
   <div>
-    <h2 class="mt-0 text-black"><center>Login</center></h2>
+    <h2 class="mt-0 text-black" aria-level="1"><center>Login</center></h2>
 
     <% if flash[:alert] %>
       <div class="warning warning--red br-1 mt-0 mb-1/4"><%= flash[:alert] %></div>
@@ -16,7 +16,7 @@
 
           <div class="form-group mt-1/8">
             <%= form.label :username, "Username", class: "form-label" %>
-            <%= form.text_field :username, placeholder: "Username", class: "form-input" %>
+            <%= form.text_field :username, placeholder: "Username", class: "form-input", data: { role: "focus-on-load" } %>
           </div>
 
           <div class="form-group mt-1/4">
@@ -52,7 +52,7 @@
   </div>
 
   <div>
-    <h2 class="mt-1/2 sm:mt-0 text-black"><center>Create an account</center></h2>
+    <h2 class="mt-1/2 sm:mt-0 sm:text-black" aria-level="1"><center>Create an account</center></h2>
 
     <div class="well well--dark">
       <div class="w-100">

@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :collection, :revisions, :blocks, :derivations).find_by_code(params[:code])
+    @post = Post.includes(:user).find_by_code(params[:code])
 
     not_found and return if @post && (@post.private? || @post.draft?) && @post.user != current_user
 
@@ -455,7 +455,7 @@ class PostsController < ApplicationController
     path = post_url(post.code.upcase)
     user_path = user_url(post.user.username)
     image = @ordered_images.present? && @ordered_images.first.present? ? url_for(@ordered_images.first.variant(quality: 95).processed.url) : ""
-    avatar = @post.user.profile_image.present? ? url_for(@post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed.url) : ""
+    avatar = post.user.profile_image.present? ? url_for(post.user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed.url) : ""
     content = ActionController::Base.helpers.strip_tags(post.description).truncate(type == "New" ? 500 : 250)
 
     embed = Discord::Embed.new do
@@ -467,7 +467,7 @@ class PostsController < ApplicationController
       description content
       add_field name: "Update notes", value: revision.description.truncate(400) if revision && revision.description.present?
       add_field name: "Code", value: post.code.upcase
-      footer text: "Workshop.codes"
+      footer text: "Workshop.codes", icon_url: "https://workshop.codes/apple-touch-icon.png"
     end
 
     Discord::Notifier.message(embed)

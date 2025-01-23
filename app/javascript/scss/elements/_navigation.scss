@@ -65,6 +65,10 @@
     &:hover::before {
       background: var(--primary, $primary);
     }
+
+    @include high-contrast() {
+      border-bottom: 2px solid currentColor;
+    }
   }
 
   .wiki & {

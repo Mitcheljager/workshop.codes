@@ -40,7 +40,7 @@
 </script>
 
 <div class="notifications dropdown lg-down:dropup mb-1/8 mbl:mb-0 mbl:mr-1/8" data-dropdown>
-  <button data-action="toggle-dropdown" on:click={getNotifications}>
+  <button data-action="toggle-dropdown" aria-label="Notifications" on:click={getNotifications}>
     <div class="notifications__label">
       <Bell animating={active} />
     </div>
@@ -58,7 +58,7 @@
     </div>
 
     {#if loading}
-      <span class="dropdown__item"><div class="spinner spinner--small mb-1/8"/></span>
+      <span class="dropdown__item"><div class="spinner spinner--small mb-1/8" aria-live="polite" role="status" /></span>
     {/if}
 
     {#each $notifications as notification}

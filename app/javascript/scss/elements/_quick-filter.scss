@@ -24,6 +24,10 @@
   @include hover-stack {
     filter: brightness(1.15);
   }
+
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
 }
 
 .quick-filter__icon {

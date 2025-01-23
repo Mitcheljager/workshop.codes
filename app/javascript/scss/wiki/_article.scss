@@ -65,11 +65,16 @@
     margin-top: 0;
   }
 
+  @include high-contrast() {
+    border: 2px solid currentColor;
+  }
+
   a {
     color: $text-color-lightest;
     text-decoration: none;
 
     @include hover-stack {
+      text-decoration: underline;
       color: $white;
     }
   }

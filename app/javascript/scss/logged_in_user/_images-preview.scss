@@ -14,6 +14,8 @@
   background: $body-bg;
   cursor: grab;
   color: $body-bg;
+  border-radius: $border-radius * 0.5;
+  overflow: hidden;
 
   @include hover-stack {
     filter: brightness(1.1);
@@ -24,7 +26,6 @@
     cursor: grabbing;
   }
 
-
   img,
   svg {
     display: block;
@@ -33,22 +34,24 @@
   }
 }
 
-.images-preview__action,
-.images-preview__label {
+.images-preview__action {
   position: absolute;
   top: 0;
   right: 0;
   bottom: auto;
-  border-radius: 0 0 0 $border-radius * 0.25;
-  padding: .25em .5em;
-  background: $red;
-  font-size: 12px;
+  padding: .25em;
+  background: $bg-dark;
   color: $white;
   cursor: pointer;
 
-  &:hover,
-  &:active {
-    filter: brightness(1.2);
+  &--close {
+    background: $red;
+    border-radius: 0 0 0 $border-radius * 0.5;
+
+    &:hover,
+    &:active {
+      background: saturate(lighten($red, 20%), 50%);
+    }
   }
 
   .sortable-ghost & {

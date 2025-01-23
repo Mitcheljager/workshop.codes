@@ -1,4 +1,4 @@
-import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects, parseParameterObjectContent } from "@utils/compiler/parameterObjects"
+import { getFirstParameterObject, replaceParameterObject, evaluateParameterObjects, parseParameterObjectContent, directlyInsideParameterObject } from "@utils/compiler/parameterObjects"
 import { completionsMap } from "@stores/editor"
 import { describe, it, expect, beforeEach } from "vitest"
 
@@ -29,6 +29,7 @@ describe("parameterObjects.js", () => {
         start: 12,
         end: 33,
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -42,8 +43,10 @@ describe("parameterObjects.js", () => {
         start: 18,
         end: 39,
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
         phraseParameters: [],
-        phraseDefaults: []
+        phraseDefaults: [],
+        phraseTypes: []
       }
 
       expect(getFirstParameterObject(content)).toEqual(expected)
@@ -52,6 +55,7 @@ describe("parameterObjects.js", () => {
     it("Should handle white space as expected", () => {
       const expected = {
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -73,6 +77,7 @@ describe("parameterObjects.js", () => {
         start: 49,
         end: 58,
         given: { Two: "2" },
+        givenKeys: ["Two"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -86,6 +91,21 @@ describe("parameterObjects.js", () => {
         start: 45,
         end: 168,
         given: { One: "10", Three: "20" },
+        givenKeys: ["One", "Three"],
+        phraseParameters: ["One", "Two", "Three"],
+        phraseDefaults: [0, 0, 0]
+      }
+
+      expect(getFirstParameterObject(content)).toEqual(expected)
+    })
+
+    it("Should keep duplicated keys in givenKeys array and keep the last given value", () => {
+      const content = "Some Action({ One: 10, Three: 20, Three: 30 })"
+      const expected = {
+        start: 12,
+        end: 44,
+        given: { One: "10", Three: "30" },
+        givenKeys: ["One", "Three", "Three"],
         phraseParameters: ["One", "Two", "Three"],
         phraseDefaults: [0, 0, 0]
       }
@@ -102,7 +122,7 @@ describe("parameterObjects.js", () => {
         Three: "20"
       }
 
-      expect(parseParameterObjectContent(content)).toEqual(expected)
+      expect(parseParameterObjectContent(content).result).toEqual(expected)
     })
 
     it("Should ignore [linemarker]s", () => {
@@ -112,7 +132,7 @@ describe("parameterObjects.js", () => {
         Three: "20"
       }
 
-      expect(parseParameterObjectContent(content)).toEqual(expected)
+      expect(parseParameterObjectContent(content).result).toEqual(expected)
     })
   })
 
@@ -209,6 +229,67 @@ describe("parameterObjects.js", () => {
       `
 
       expect(evaluateParameterObjects(input)).toBe(expected)
+    })
+  })
+
+  describe("directlyInsideParameterObject", () => {
+    it("Should return parameter object only when cursor is inside", () => {
+      const input = "Some Action({ Key: Value })"
+
+      expect(directlyInsideParameterObject(input, 13)).toBeTruthy()
+      expect(directlyInsideParameterObject(input, 17)).toBeTruthy()
+      expect(directlyInsideParameterObject(input, 5)).toBe(null)
+      expect(directlyInsideParameterObject(input, input.length)).toBe(null)
+    })
+
+    it("Should not return parameter object when cursor is in value", () => {
+      const input = "Some Action({ Key: Value })"
+
+      expect(directlyInsideParameterObject(input, 20)).toBe(null)
+      expect(directlyInsideParameterObject(input, 25)).toBe(null)
+    })
+
+    it("Should return correct parameter object when nested", () => {
+      const input = `Some Action({
+        One: Some Second Action({ First: Some Value }),
+      })`
+
+      expect(directlyInsideParameterObject(input, 14).phraseDefaults).toEqual([0, 0, 0])
+      expect(directlyInsideParameterObject(input, 48).phraseDefaults).toEqual(["A", "B", "C", "D"])
+      expect(directlyInsideParameterObject(input, 70).phraseDefaults).toEqual([0, 0, 0])
+    })
+
+    it("Should return null when no parameter object was given", () => {
+      const input = "Some Action()"
+
+      for(let i = 0; i < input.length; i++) {
+        expect(directlyInsideParameterObject(input, i)).toBe(null)
+      }
+    })
+
+    it("Should return null when no content was given", () => {
+      const input = ""
+
+      expect(directlyInsideParameterObject(input, 0)).toBe(null)
+    })
+
+    it("Should return null when index was out of range of string was given", () => {
+      const input = "Some Action({})"
+
+      expect(directlyInsideParameterObject(input, 30)).toBe(null)
+      expect(directlyInsideParameterObject(input, -1)).toBe(null)
+    })
+
+    it("Should return null parameter key was not finished properly and cursor is after object", () => {
+      const input = "Some Action({ One }); Two"
+
+      expect(directlyInsideParameterObject(input, 20)).toBe(null)
+    })
+
+    it("Should ignore objects that use curly brackets but are not parameter objects", () => {
+      const input = "conditions { test; Some Action({ One }); }"
+
+      expect(directlyInsideParameterObject(input, 15)).toBe(null)
     })
   })
 })

@@ -1,24 +1,24 @@
 <%
-  actions = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml"))).map { |_, c| c }.sort_by { |c| c["en-US"] }
-  values = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "values.yml"))).map { |_, c| c }.sort_by { |c| c["en-US"] }
-  events = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "events.yml"))).map { |_, c| c }.sort_by { |c| c["en-US"] }
-  constants = YAML.load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml"))).map { |n, c| n }.sort_by { |n| n }
+  actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml"))).sort_by { |c| c["en-US"] }
+  values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml"))).sort_by { |c| c["en-US"] }
+  events = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "events.yml"))).map { |_, c| c }.sort_by { |c| c["en-US"] }
+  constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml"))).map { |n, c| n }.sort_by { |n| n }
 %>
 
 <div class="quick-navigation" data-role="dynamic-max-height">
   <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target data-scroll-container data-sticky-absolute>
     <% { "Actions": actions, "Values": values, "Events": events }.each do |category, props| %>
       <div data-toggle-content>
-        <button class="quick-navigation__toggle <%= "active" if @article.category.title == category.to_s %>" data-action="toggle-content">
+        <button class="quick-navigation__toggle <%= "active" if @article.category.title == category.to_s %>" data-action="toggle-content" aria-expanded="<%= @article.category.title == category.to_s %>" aria-controls="<%= category.to_s %>">
           <%= category %>
 
           <div class="quick-navigation__icon">&#8250;</div>
         </button>
 
-        <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != category.to_s %>">
+        <div id="<%= category.to_s %>" data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != category.to_s %>">
           <% props.each do |content| %>
             <%= link_to content["en-US"],
-              CGI.escape(content["en-US"]).downcase,
+              CGI.escape(content["en-US"].gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase,
               class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == content["en-US"] }",
               data: { prefetch: false, role: ( 'scroll-into-view-on-load' if @article.title == content["en-US"]) } %>
           <% end %>
@@ -27,16 +27,16 @@
     <% end %>
 
     <div data-toggle-content>
-      <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Constants" %>" data-action="toggle-content">
+      <button class="quick-navigation__toggle <%= "active" if @article.category.title == "Constants" %>" data-action="toggle-content" aria-expanded="<%= @article.category.title == "Constants" %>" aria-controls="constants">
         Constants
 
         <div class="quick-navigation__icon">&#8250;</div>
       </button>
 
-      <div data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != "Constants" %>">
+      <div id="constants" data-role="content-to-toggle" style="<%= "display: none" if @article.category.title != "Constants" %>">
         <% constants.each do |name| %>
           <%= link_to name,
-            CGI.escape(name).downcase,
+            CGI.escape(name.gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase,
             class: "quick-navigation__item #{ "quick-navigation__item--active" if @article.title == name }",
             data: { prefetch: false } %>
         <% end %>

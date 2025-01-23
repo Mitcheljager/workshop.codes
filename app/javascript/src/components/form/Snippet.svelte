@@ -3,6 +3,8 @@
 
   export let name
   export let value = ""
+  export let ariaDescribedby = null
+  export let ariaLabelledby = null
 
   let foundTerms = []
   let processing
@@ -78,7 +80,7 @@
   }
 </script>
 
-<textarea {name} bind:value class="form-input form-textarea form-textarea--small" />
+<textarea {name} bind:value class="form-input form-textarea form-textarea--small" aria-describedby={ariaDescribedby} aria-labelledby={ariaLabelledby} />
 
 {#if value}
   <button

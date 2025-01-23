@@ -7,7 +7,8 @@ module ContentHelper
     end
 
     def image(link, title, alt_text)
-      image_tag(link, title: title, alt: alt_text, loading: "lazy")
+      alt_text = "" if alt_text == "Text description"
+      image_tag(link, title: title, alt: alt_text || "", loading: "lazy")
     end
 
     # loosely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
@@ -45,12 +46,12 @@ module ContentHelper
       hash = header_anchor_hash(title)
 
       if @options[:header_anchors]
-        "<#{ tag } id='#{ hash }'>
+        "<#{ tag } id='#{ hash }' aria-level='2'>
           <a class='header-anchor' href='\##{ hash }' aria-hidden='true'></a>
           #{ title }
         </#{ tag }>"
       else
-        "<#{ tag }>#{ title }</#{ tag }>"
+        "<#{ tag } aria-level='2'>#{ title }</#{ tag }>"
       end
     end
   end
@@ -87,10 +88,7 @@ module ContentHelper
 
   def markdown_youtube(text)
     text.gsub /\[youtube\s+(.*?)\]/ do
-      video_id = $1
-      "<div class='video'>
-        <iframe class='video__iframe' loading='lazy' width='560' height='315' src='https://www.youtube-nocookie.com/embed/#{ youtube_to_video_id(video_id) }' frameborder='0' allowfullscreen></iframe>
-      </div>"
+      youtube_preview_tag($1, true)
     end
   end
 
@@ -111,9 +109,9 @@ module ContentHelper
   end
 
   def markdown_gallery(text)
-    text.gsub /\[gallery\s+(.*?)\]/m do
+    text.gsub /\[gallery\s+([^\]]+)\]/m do
       begin
-        images = JSON.parse($1)
+        images = JSON.parse($1.strip)
 
         if action_name == "parse_markdown"
           render_to_string partial: "markdown_elements/gallery", locals: { images: images }
@@ -127,17 +125,19 @@ module ContentHelper
   end
 
   def markdown_hero_icon(text)
-    text.gsub /\[hero\s+(.*?)\]/ do
+    text.gsub /\[hero\s+([\p{L}\p{N}_:.\-\s]+)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url($1), width: 50, height: 50, loading: "lazy")
+        hero_name = ERB::Util.html_escape($1.strip)
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name), width: 50, height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
 
   def markdown_ability_icon(text)
-    text.gsub /\[ability\s+(.*?)\]/ do
+    text.gsub /\[ability\s+([\p{L}\p{N}_:.\(\)\-\s]+)\]/ do
       begin
-        ActionController::Base.helpers.image_tag(ability_name_to_icon_url($1), height: 50, loading: "lazy")
+        ability_name = ERB::Util.html_escape($1.strip)
+        ActionController::Base.helpers.image_tag(ability_name_to_icon_url(ability_name), height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
@@ -173,11 +173,12 @@ module ContentHelper
         title = data["title"]
         description = data["description"]
         abilities = data["abilities"]
+        icons = data["icons"] || {}
 
         if action_name == "parse_markdown"
-          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities, icons: icons }
         else
-          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities }
+          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities, icons: icons }
         end
       rescue => error
         "<em>An error was found in the Hero Update markdown</em>"
@@ -198,8 +199,8 @@ module ContentHelper
   def sanitized_markdown(text, rendererOptions: {})
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
-      tags: %w(div span hr style mark dl dd dt img details summary a b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong),
-      attributes: %w(style href id class src title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery controls playsinline loop muted)
+      tags: %w(div span hr style mark dl dd dt img details summary a button b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big),
+      attributes: %w(style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-labelledby aria-hidden aria-expanded tabindex role)
     )
   end
 
@@ -240,5 +241,20 @@ module ContentHelper
 
   def hero_names
     heroes.map { |hero| hero["name"] }.sort
+  end
+
+  # This uses a string instead of Rails tags because those tags are not available when parsed as JSON
+  def youtube_preview_tag(video_id, lazy = false)
+    "<div class='video'>
+      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' role='button' aria-label='Play YouTube Video' tabindex='0'>
+        <div class='video__play-icon'></div>
+        <img
+          #{ lazy ? "loading='lazy'" : "" }
+          src='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp'
+          srcset='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp 640w, https://i.ytimg.com/vi_webp/#{ video_id }/maxresdefault.webp 1280w'
+          class='video__thumbnail'
+          alt='' />
+      </div>
+    </div>".gsub("\n","") # For some reason Markdown after this element is ignored when newlines are present
   end
 end

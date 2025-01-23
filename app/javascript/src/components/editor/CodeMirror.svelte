@@ -1,13 +1,14 @@
 <script>
   import { onDestroy, onMount, createEventDispatcher } from "svelte"
   import { basicSetup } from "codemirror"
-  import { EditorView, keymap } from "@codemirror/view"
+  import { EditorView, highlightTrailingWhitespace, keymap } from "@codemirror/view"
   import { EditorState, EditorSelection, Transaction } from "@codemirror/state"
   import { indentUnit, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
   import { autocompletion } from "@codemirror/autocomplete"
   import { redo } from "@codemirror/commands"
   import { linter, lintGutter } from "@codemirror/lint"
   import { indentationMarkers } from "@replit/codemirror-indentation-markers"
+  import rainbowBrackets from "rainbowbrackets"
   import { OWLanguage, highlightStyle } from "@lib/OWLanguageLegacy"
   import { OWLanguageLinter } from "@lib/OWLanguageLinter"
   import { parameterTooltip } from "@lib/parameterTooltip"
@@ -17,11 +18,14 @@
   import { foldBrackets } from "@lib/foldBrackets"
   import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "@stores/editor"
   import { translationsMap } from "@stores/translationKeys"
-  import { getPhraseFromPosition } from "@utils/parse"
+  import { getPhraseFromPosition, inConfigType } from "@utils/parse"
   import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"
   import { get } from "svelte/store"
   import { indentedLineWrap } from "@utils/codemirror/indentedLineWrap"
+  import { removeTrailingWhitespace } from "@utils/codemirror/removeTrailingWhitespace"
   import debounce from "@src/debounce"
+  import { directlyInsideParameterObject } from "@src/utils/compiler/parameterObjects"
+  import { getCompletions } from "@src/utils/codemirror/completions"
 
   const dispatch = createEventDispatcher()
   const updateItem = debounce(() => {
@@ -30,7 +34,7 @@
       content: view.state.doc.toString()
     }
 
-    const index = $items.findIndex(i => i.id == $currentItem.id)
+    const index = $items.findIndex(i => i.id == $currentItem?.id)
     if (index !== -1) $items[index] = $currentItem
   }, 250)
 
@@ -40,13 +44,17 @@
   let updatingState = false
 
   $: if ($currentProjectUUID) $editorStates = {}
-  $: if ($currentItem.id != currentId && view) updateEditorState()
-  $: if ($currentItem.forceUpdate) updateEditorState()
+  $: if ($currentItem?.id != currentId && view) updateEditorState()
+  $: if ($currentItem?.forceUpdate) updateEditorState()
 
   onMount(() => {
     view = new EditorView({
       parent: element
     })
+
+    // This is here purely to initiliaze these derived stores, which might not happen in time for CodeMirror completions
+    // I don't fully understand how this works, but it does.
+    ;[$variablesMap, $subroutinesMap, $mixinsMap, $translationsMap]
   })
 
   onDestroy(() => $editorStates = {})
@@ -59,7 +67,7 @@
         StreamLanguage.define(OWLanguage),
         autocompletion({
           activateOnTyping: true,
-          override: [completions],
+          override: [getCompletions],
           closeOnBlur: false,
           hintOptions: /[()\[\]{};:>,+-=]/
         }),
@@ -67,11 +75,12 @@
         linter(OWLanguageLinter),
         indentUnit.of("    "),
         keymap.of([
-          { key: "Tab", run: tabIndent },
-          { key: "Shift-Tab", run: tabIndent },
+          { key: "Tab", run: (view) => tabIndent(view, event) },
+          { key: "Shift-Tab", run: (view) => tabIndent(view, event)  },
           { key: "Enter", run: autoIndentOnEnter },
           { key: "Shift-Enter", run: autoIndentOnEnter },
-          { key: "Ctrl-Shift-z", run: redoAction }
+          { key: "Ctrl-Shift-z", run: redoAction },
+          { key: "Ctrl-s", run: removeTrailingWhitespace }
         ]),
         EditorView.updateListener.of((transaction) => {
           handleTransactionDocChanged(view, transaction)
@@ -89,7 +98,9 @@
           transformParameterObjectsIntoPositionalParameters
         ]),
         foldBrackets(),
-        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : [])
+        ...($settings["word-wrap"] ? [EditorView.lineWrapping, indentedLineWrap] : []),
+        ...($settings["highlight-trailing-whitespace"] ? [highlightTrailingWhitespace()] : []),
+        ...($settings["rainbow-brackets"] ? [rainbowBrackets()] : [])
       ]
     })
   }
@@ -177,28 +188,6 @@
     })
   }
 
-  function completions(context) {
-    const word = context.matchBefore(/[@a-zA-Z0-9_ ]*/)
-
-    const add = word.text.search(/\S|$/)
-    if (word.from + add == word.to && !context.explicit) return null
-
-    // There's probably a better way of doing this
-    let specialOverwrite = null
-    if (word.text.includes("@i")) {
-      specialOverwrite = $mixinsMap
-    } else if (word.text.includes("@t")) {
-      specialOverwrite = $translationsMap
-    }
-
-    return {
-      from: word.from + add,
-      to: word.to,
-      options: specialOverwrite || [...$completionsMap, ...$variablesMap, ...$subroutinesMap, ...extraCompletions],
-      validFor: /^(?:[a-zA-Z0-9]+)$/i
-    }
-  }
-
   function autocompleteFormatting(view, transaction) {
     indentMultilineInserts(view, transaction)
     if ($settings["autocomplete-semicolon"])
@@ -208,7 +197,7 @@
   function insertSemicolon(view, transaction) {
     const line = view.state.doc.lineAt(transaction.changedRanges[0].fromB)
     const phrase = getPhraseFromPosition(line, transaction.changedRanges[0].fromB)
-    const possibleValues = get(completionsMap).filter(v => v.type === "function")
+    const possibleValues = $completionsMap.filter(v => v.type === "function")
     const validValue = possibleValues.find(v => v.label == phrase.text)
 
     if (!validValue?.type) return

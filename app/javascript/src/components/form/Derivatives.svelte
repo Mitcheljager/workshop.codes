@@ -14,25 +14,23 @@
   async function handleAutoCompleteRequest(value) {
     if (!value) return []
 
-    return new FetchRails(`/code/${value}`).get({
+    return new FetchRails(`search?code=${value}`).get({
       returnResponse: true,
       parameters: {
         headers: { "Accept": "application/json" }
       }
     }).then(async response => {
-      if (response.ok) {
-        const json = await response.json()
-        return json.map(post => postToResult(post))
-      } else {
-        throw new Error(`${response.status} ${response.statusText}`)
-      }
+      if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
+
+      const json = await response.json()
+      return json.map(post => postToResult(post))
     })
   }
 
   function postToResult(post) {
     return {
       label: post.code,
-      html: `<strong>${post.code.toUpperCase()}</strong> - ${post.title} by ${post.user.username}`
+      html: `<strong>${post.code.toUpperCase()}</strong> - "${post.title}" by ${post.user.username}`
     }
   }
 </script>
@@ -44,6 +42,7 @@
       class="switch-checkbox__input"
       autocomplete="off"
       type="checkbox"
+      aria-label="Toggle derivatives"
       bind:checked={showDerivative}/>
 
     <label
@@ -55,7 +54,7 @@
 
   {#if showDerivative}
     <div class="form-group mt-1/4">
-      <div class="form-hint mt-1/4 mb-1/4 text-left">
+      <div class="form-hint mt-1/4 mb-1/4 text-left" id="derivative-codes">
         Enter the import code(s) which your mode uses. You can enter up to {maxCodes} codes.
 
         <br />
@@ -65,7 +64,9 @@
       <Tags
         prefix="post"
         name="derivations"
-        placeholder="CODE1,CODE2,etc."
+        placeholder="CODE1, CODE2, etc."
+        ariaLabel="Derivative codes (Comma separated)"
+        ariaControls="derivative-codes"
         fillValues={currentSources}
         hidden={!showDerivative}
         allowSpace={false}

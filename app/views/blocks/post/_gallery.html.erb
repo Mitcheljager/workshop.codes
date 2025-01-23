@@ -13,7 +13,7 @@
     <% url = rails_public_blob_url(image.variant(quality: 95).processed) %>
 
     <div class="gallery__item" data-action="show-modal set-gallery" data-target="gallery-<%= random_id %>" data-url="<%= url %>">
-      <%= image_tag url, alt: "abc", loading: "lazy" %>
+      <%= image_tag url, alt: "", loading: "lazy" %>
 
       <% if block_property(block, "image_label_#{ image.blob_id }").present? %>
         <span class="gallery__title"><%= block_property(block, "image_label_#{ image.blob_id }") %></span>
@@ -22,10 +22,10 @@
   <% end %>
 </div>
 
-<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="gallery-<%= random_id %>">
+<div class="modal modal--auto" data-hide-on-close style="display: none" data-modal="gallery-<%= random_id %>" role="dialog" aria-label="Image gallery">
   <div class="modal__backdrop" data-role="modal-backdrop"></div>
 
   <div class="modal__content p-0">
-    <%= image_tag "//:0", data: { gallery: "gallery-#{ random_id }" }, class: "img-fluid" %>
+    <%= image_tag "//:0", data: { gallery: "gallery-#{ random_id }" }, class: "img-fluid", alt: "" %>
   </div>
 </div>

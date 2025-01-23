@@ -28,5 +28,8 @@ export default defineConfig({
       "@utils": resolve(__dirname, "app/javascript/src/utils"),
       "@stores": resolve(__dirname, "app/javascript/src/stores")
     }
+  },
+  build: {
+    assetsInlineLimit: 1024
   }
 })

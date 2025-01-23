@@ -1,31 +1,31 @@
 <% content_for :bg_size, "large" %>
 
 <main class="top-offset">
-  <h2 class="mt-1/2 text-black">
-    <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon" %>
+  <h2 aria-level="1" class="mt-1/2 text-black">
+    <%= inline_svg_tag "icons/icon-onfire.svg", class: "title-icon", width: 21, height: 21, aria: { hidden: true } %>
     <strong>On Fire</strong> Workshop Codes
   </h2>
 
   <%= render "on_fire_carousel" %>
 
-  <div class="logo-background logo-background--overwatch">
+  <div class="logo-background">
     <%= render "filter/quick_filter" %>
+
+    <% if true || ENV["BANNER_ROOT"] == "Workshop_Crap" %>
+      <%= render "application/banners/workshop_crap" %>
+    <% end %>
 
     <%= render "application/banners/editor" %>
 
     <% if ENV["BANNER_ROOT"] == "Workshop_Disabled" %>
       <%= render "application/banners/workshop_disabled" %>
     <% end %>
-
-    <% if ENV["BANNER_ROOT"] == "Venture" %>
-      <%= render "application/banners/venture" %>
-    <% end %>
   </div>
 
   <%= render "user_recommendations" if current_user && current_user.recommended_posts.any? %>
 
   <div class="action-header">
-    <h2 class="mt-1/1"><strong>Latest</strong> Codes</h2>
+    <h2 class="mt-1/1" aria-level="1"><strong>Latest</strong> Codes</h2>
   </div>
 
   <%= render "posts" %>
