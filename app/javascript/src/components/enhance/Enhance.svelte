@@ -1,6 +1,6 @@
 <script>
   import { onDestroy } from "svelte"
-  import EnhanceAudio from "@components/Enhance/EnhanceAudio.svelte"
+  import EnhanceAudio from "@components/enhance/EnhanceAudio.svelte"
   import { slide } from "svelte/transition"
   import { getMostRecentFileFromDirectory } from "@utils/files"
 
