@@ -50,13 +50,13 @@
 
   <body class="<%= "wiki" if is_wiki? %>">
     <%= render "flash" %>
-    <%= render "header" unless is_editor? %>
+    <%= render "header" unless is_editor? || is_enhance? %>
     <%= render "wiki/header" if is_wiki? %>
 
     <div class="wrapper <%= "wrapper--large" if is_admin_controller? %>">
       <%= yield %>
 
-      <%= render "footer" unless is_editor? %>
+      <%= render "footer" unless is_editor? || is_enhance? %>
     </div>
 
     <%= render "body_bg" unless is_wiki? || is_editor? %>

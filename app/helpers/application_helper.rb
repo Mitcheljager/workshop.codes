@@ -26,15 +26,19 @@ module ApplicationHelper
   end
 
   def is_wiki?
-    controller_path.split('/').first == "wiki" ? true : false
+    controller_path.split('/').first == "wiki"
   end
 
   def is_editor?
-    controller_path.split('/').first == "editor" ? true : false
+    controller_path.split('/').first == "editor"
+  end
+
+  def is_enhance?
+    controller_path.split('/').first == "enhance"
   end
 
   def is_admin_controller?
-    controller_path.split('/').first == "admin" ? true : false
+    controller_path.split('/').first == "admin"
   end
 
   def to_slug(string)
