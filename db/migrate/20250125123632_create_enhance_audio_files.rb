@@ -1,4 +1,4 @@
-class CreateEnhanceAudioFiles < ActiveRecord::Migration[6.1]
+class CreateEnhanceAudioFiles < ActiveRecord::Migration[7.0]
   def change
     create_table :enhance_audio_files do |t|
       t.integer :user_id

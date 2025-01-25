@@ -1,4 +1,4 @@
-class EnhanceAudioFile < ApplicationRecord
+class Enhance::AudioFile < ApplicationRecord
   belongs_to :user
 
   has_many_attached :file, dependent: :destroy
