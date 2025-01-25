@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   get "editor/data", "editor#data"
   get "editor/user_projects", "editor#user_projects"
   get "workshop-ui", to: "editor#zez_ui", as: "zez_ui"
-  get "enhance", to: "enhance#index", as: "enhance"
 
   get "active_storage_blob_variant_url/:key", to: "application#active_storage_blob_variant_url"
 
@@ -174,6 +173,10 @@ Rails.application.routes.draw do
     post "search", to: "search#query", as: "search"
     get "search/:query", to: "search#index", as: "search_results"
     get "dictionary", to: "dictionary#index"
+  end
+
+  namespace :enhance do
+    root to: "base#index"
   end
 
   post "/new", to: "posts#create", as: "create_post"
