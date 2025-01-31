@@ -19,7 +19,7 @@
 
       <div class="carousel__navigation">
         <% if @post.carousel_video.present? %>
-          <button class="carousel__navigation-item carousel__navigation-item--is-active" data-action="carousel-go-to" data-target="0" aria-pressed="true">
+          <button aria-label="Go to carousel video" class="carousel__navigation-item carousel__navigation-item--is-active" data-action="carousel-go-to" data-target="0" aria-pressed="true">
             <div class="carousel__navigation-item-video-overlay"></div>
             <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg", alt: "" %>
           </button>
