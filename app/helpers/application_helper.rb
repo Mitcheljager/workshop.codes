@@ -29,6 +29,10 @@ module ApplicationHelper
     controller_path.split('/').first == "wiki" ? true : false
   end
 
+  def is_blog?
+    controller_path.split('/').first == "articles" ? true : false
+  end
+
   def is_editor?
     controller_path.split('/').first == "editor" ? true : false
   end
