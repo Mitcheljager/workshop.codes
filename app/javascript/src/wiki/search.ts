@@ -23,7 +23,7 @@ const searchWiki = debounce(() => {
 
   new FetchRails(url).get()
     .then(data => {
-      setWikiSearchResults(JSON.parse(data))
+      setWikiSearchResults(JSON.parse(data as string))
     })
 }, 250)
 
