@@ -38,6 +38,7 @@
     </style>
 
     <%= vite_stylesheet_tag "application.scss" %>
+    <%= vite_stylesheet_tag "wiki.scss" if is_wiki? %>
 
     <%= vite_client_tag %>
     <%= vite_typescript_tag "application", "data-turbolinks-track": "reload", defer: true %>
