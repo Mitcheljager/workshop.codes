@@ -10,7 +10,7 @@ class Wiki::DictionaryController < Wiki::BaseController
     dictionary = merged_array.map { |a| a["en-US"] }.compact
 
     respond_to do |format|
-      format.html # Automatic path doesn't work, possibly because of no plurals
+      format.html
       format.json {
         set_request_headers
         render json: dictionary.to_json, layout: false
