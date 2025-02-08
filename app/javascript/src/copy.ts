@@ -31,7 +31,9 @@ export default function copyToClipboard(event: MouseEvent, optionalContent = "")
 
   setTimeout((): void | undefined => copyParent.querySelector(".copy__notification")?.remove(), 1000)
 
-  if (targetElement.dataset.trackCopy != undefined) trackCopy(textContent)
+  if (eventTarget.dataset.trackCopy !== "false" && eventTarget.dataset.trackCopy !== undefined) trackCopy(textContent)
+
+  eventTarget.dataset.trackCopy = "false" // Don't track repeat clicks
 }
 
 export function copyValueToClipboard(value: string): void {
