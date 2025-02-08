@@ -13,7 +13,7 @@ namespace :hotness do
         days_old = (post.last_revision_created_at.to_datetime...Time.now).count
         days_old = [[days_old, 3].max, 45].min
 
-        impressions_and_copy_score = impressions_count + (copy_count * 2)
+        impressions_and_copy_score = impressions_count + (copy_count * 5)
         favorites_score = favorites_count * 20
         total_score = [[impressions_and_copy_score + favorites_score, 1].max / (days_old / 3), 1].max.round
 
