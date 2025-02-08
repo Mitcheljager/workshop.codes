@@ -15,12 +15,17 @@ export function bind(): void {
 function createBlock({ currentTarget }: { currentTarget: HTMLElement }): void {
   if (currentTarget.dataset.disabled == "true") return
 
+  const loadingElement = document.querySelector("[data-role~='blocks-loading-indicator']") as HTMLElement
+
   currentTarget.dataset.disabled = "true"
+  loadingElement!.style.display = "block"
 
   new FetchRails("/blocks", { block: { content_type: currentTarget.dataset.contentType, name: currentTarget.dataset.name } })
     .post().then(data => {
       new Promise((resolve) => new Function("resolve", data.toString())(resolve)) // Execute the result of blocks/create.js.erb
       renderSvelteComponents()
+
+      loadingElement!.style.display = "none"
     }).finally(() => {
       currentTarget.dataset.disabled = "false"
     })
