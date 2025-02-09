@@ -1,3 +1,6 @@
+<% eager_load_first_index ||= false %>
+<% loading = eager_load_first_index && post_counter == 0 ? "eager" : "lazy" %>
+
 <% cache_unless current_user, [post, "card"] do %>
   <% image_url = url_for_post_thumbnail(post, 300, 171, "medium") %>
 
@@ -10,7 +13,7 @@
         alt: post.title,
         width: 300,
         height: 171,
-        loading: "lazy",
+        loading: loading,
         class: "card__image" %>
     <% end %>
 
@@ -29,7 +32,13 @@
       </div>
     </div>
 
-    <%= image_tag image_url, width: 300, height: 171, loading: "lazy", class: "card__blurred-background", alt: "", role: "presentation" %>
+    <%= image_tag image_url,
+      width: 300,
+      height: 171,
+      loading: loading,
+      class: "card__blurred-background",
+      alt: "",
+      role: "presentation" %>
 
     <%= render "posts/code", post: post, item_class: "code mt-1/4" %>
   </div>

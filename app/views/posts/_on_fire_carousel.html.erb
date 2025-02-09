@@ -4,7 +4,7 @@
   </div>
 
   <div data-role="carousel-cards" data-max="10" data-url="" class="cards cards--on-fire">
-    <%= render collection: @hot_posts, partial: "card", as: :post %>
+    <%= render collection: @hot_posts, partial: "card", as: :post, locals: { eager_load_first_index: true } %>
   </div>
 
   <button class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" disabled="disabled" data-action="carousel-previous" aria-label="Previous">
