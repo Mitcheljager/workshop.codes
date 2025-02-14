@@ -3,11 +3,10 @@ require "uri"
 require "json"
 
 class CloudflareCachePurgeService
-  return unless ENV["CLOUDFLARE_API_TOKEN"]
-
   CLOUDFLARE_API_URL = "https://api.cloudflare.com/client/v4/zones/#{ENV["CLOUDFLARE_ZONE_ID"]}/purge_cache"
 
   def self.purge_urls(urls)
+    return unless ENV["CLOUDFLARE_API_TOKEN"]
     return if urls.empty?
 
     uri = URI.parse(CLOUDFLARE_API_URL)
