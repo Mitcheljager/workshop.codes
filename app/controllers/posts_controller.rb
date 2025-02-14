@@ -24,6 +24,7 @@ class PostsController < ApplicationController
   end
 
   after_action :track_action, only: [:show]
+  after_action :purge_cloudflare_cache, only: [:update]
 
   def index
     @hot_posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(10) unless params[:page].present?
@@ -472,5 +473,9 @@ class PostsController < ApplicationController
     end
 
     Discord::Notifier.message(embed)
+  end
+
+  def purge_cloudflare_cache
+    CloudflareCachePurgeService.purge_urls([post_url(@post.code)])
   end
 end
