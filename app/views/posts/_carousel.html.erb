@@ -19,16 +19,16 @@
 
       <div class="carousel__navigation">
         <% if @post.carousel_video.present? %>
-          <div class="carousel__navigation-item carousel__navigation-item--is-active" data-action="carousel-go-to" data-target="0" aria-selected="true">
+          <button aria-label="Go to carousel video" class="carousel__navigation-item carousel__navigation-item--is-active" data-action="carousel-go-to" data-target="0" aria-pressed="true">
             <div class="carousel__navigation-item-video-overlay"></div>
             <%= image_tag "https://i.ytimg.com/vi/#{ @post.carousel_video }/default.jpg", alt: "" %>
-          </div>
+          </button>
         <% end %>
 
         <% @ordered_images.each_with_index do |image, index| %>
           <% active = index == 0 && !@post.carousel_video.present? %>
 
-          <button role="option" aria-label="Go to carousel item <%= index + 1 %>" class="carousel__navigation-item <%= "carousel__navigation-item--is-active" if active %>" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>" <%= "aria-selected=true" if active %>">
+          <button aria-label="Go to carousel item <%= index + 1 %>" class="carousel__navigation-item <%= "carousel__navigation-item--is-active" if active %>" data-action="carousel-go-to" data-target="<%= @post.carousel_video.present? ? index + 1 : index %>" <%= "aria-pressed=true" if active %>>
             <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [120, 120], format: :webp).processed), height: 120, width: 120, alt: "" %>
           </button>
         <% end %>

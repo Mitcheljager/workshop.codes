@@ -28,7 +28,7 @@
   <div class="header__mobile-sticky" data-role="sticky" data-sticky-offset="20" data-sticky-mobile-only="true">
     <div class="header__search header__search--mobile" data-role="search search-popout">
       <%= render "search", id: "query_mobile" %>
-      <%= render "filter/filter" %>
+      <%= render "filter/filter", id: "filter-mobile" %>
     </div>
 
     <%= tag.button inline_svg_tag("icons/icon-search.svg", height: 24), class: "header__search-trigger", data: { action: "toggle-search" }, aria: { label: "Search" } %>

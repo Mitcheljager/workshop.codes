@@ -208,7 +208,8 @@ class PostsController < ApplicationController
 
   def copy_code
     @post = Post.find_by_code(params[:code])
-    unless @post.present?
+
+    if @post.blank?
       @revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
       @post = @revision.post if @revision.present?
     end

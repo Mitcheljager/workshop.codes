@@ -35,7 +35,6 @@
 }
 
 .article__content {
-  @extend .item__description;
   margin: 0;
 
   @include media-min(lg) {

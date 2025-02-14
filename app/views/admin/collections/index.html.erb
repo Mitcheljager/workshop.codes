@@ -1,0 +1,34 @@
+<%= render "admin/navigation" %>
+
+<p>Total collections: <strong><%= Collection.all.size %></strong></p>
+<p>Last collection: <strong><%= time_ago_in_words(@collections.first.created_at).humanize %></strong></p>
+<p>Collections in last 7 days: <strong><%= Collection.where("created_at > ?", 1.week.ago).size %></strong></p>
+
+<%= form_tag admin_find_collection_path do %>
+  <div class="flex mb-1/4">
+    <%= label_tag :title, "", class: "form-label" %>
+    <%= text_field_tag :title, "", class: "form-input w-auto mr-1/4", placeholder: "Find by exact title" %>
+
+    <%= submit_tag "Search", class: "button button--small button--secondary" %>
+  </div>
+<% end %>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>User</th>
+    <th>Title</th>
+    <th>Posts</th>
+  </tr>
+
+  <% @collections.each do |collection| %>
+    <tr>
+      <td><small><%= link_to collection.id, admin_collection_path(collection.id) %></small></td>
+      <td><small><%= link_to collection.user.username, user_path(collection.user.username) %></small></td>
+      <td><small><%= truncate(collection.title, length: 50) %></small></td>
+      <td><small><%= collection.posts.size %></small></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate @collections %>

@@ -35,8 +35,6 @@ class SearchController < ApplicationController
       return
     end
 
-    track_action
-
     begin
       @posts = get_filtered_posts(params)
       @users = get_search_users(params)
@@ -64,13 +62,6 @@ class SearchController < ApplicationController
   end
 
   private
-
-  def track_action
-    parameters = request.path_parameters
-    parameters[:search] = params[:search]
-
-    TrackingJob.perform_async(ahoy, "Search", parameters)
-  end
 
   # @raise [Elasticsearch::Transport::Transport::ServerError] if backend
   #   ElasticSearch cluster has an issue

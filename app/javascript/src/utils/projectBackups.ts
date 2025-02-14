@@ -18,7 +18,7 @@ export async function createProjectBackup(uuid: string): Promise<void> {
 export async function fetchBackupsForProject(uuid: string): Promise<ProjectBackup[]> {
   return await new FetchRails(`/project_backups?uuid=${uuid}`).get()
     .then(data => {
-      return JSON.parse(data) as ProjectBackup[]
+      return JSON.parse(data as string) as ProjectBackup[]
     })
     .catch(error => {
       console.error(error)
@@ -45,7 +45,7 @@ export async function fetchBackupContent(uuid: string): Promise<ProjectBackup> {
     .then(data => {
       if (!data) throw new Error("Fetch contained no data")
 
-      return JSON.parse(data) as ProjectBackup
+      return JSON.parse(data as string) as ProjectBackup
     })
     .catch(error => {
       console.error(error)

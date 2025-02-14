@@ -1,8 +1,6 @@
 <% content_for :page_title, "Dictionary" %>
 
-<div class="action-header top-offset">
-  <h1 class="mt-0"><strong>Dictionary</strong></h1>
-</div>
+<h1 class="mt-1/1"><strong>Dictionary</strong></h1>
 
 <h2><strong>Actions</strong></h2>
 <%= render collection: @actions.sort_by { |action| action["en-US"] }.compact, partial: "item" %>

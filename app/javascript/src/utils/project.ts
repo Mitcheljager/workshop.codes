@@ -13,7 +13,7 @@ export async function createProject(title: string, content = null): Promise<Proj
     .then(data => {
       if (!data) throw Error("Create failed")
 
-      const parsedData = JSON.parse(data)
+      const parsedData = JSON.parse(data as string)
 
       projects.set([parsedData, ...get(projects)])
       currentProjectUUID.set(parsedData.uuid)
@@ -55,7 +55,7 @@ export async function fetchProject(uuid: string): Promise<Project> {
     .then(data => {
       if (!data) throw Error("No results")
 
-      const parsedData = JSON.parse(data)
+      const parsedData = JSON.parse(data as string)
 
       // If the project in localStorage is newer than the project from the API
       // something may have gone wrong when saving to the API, but the localStorage
@@ -128,7 +128,7 @@ export async function renameCurrentProject(title: string): Promise<string | void
 
       addAlert(`Project renamed to "${get(currentProject)!.title}"`)
 
-      return data
+      return data as string
     })
     .catch(error => {
       console.error(error)
@@ -145,7 +145,7 @@ export async function destroyCurrentProject(): Promise<string | void> {
       currentProjectUUID.set(null)
       currentItem.set(null)
 
-      return data
+      return data as string
     })
     .catch(error => {
       console.error(error)

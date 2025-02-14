@@ -24,9 +24,7 @@
 
   <%= render "user_recommendations" if current_user && current_user.recommended_posts.any? %>
 
-  <div class="action-header">
-    <h2 class="mt-1/1" aria-level="1"><strong>Latest</strong> Codes</h2>
-  </div>
+  <h2 class="mt-1/1" aria-level="1"><strong>Latest</strong> Codes</h2>
 
   <%= render "posts" %>
 </main>

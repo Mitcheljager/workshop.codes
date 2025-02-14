@@ -5,8 +5,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find_by_slug!(params[:slug])
-
-    track_action
   end
 
   def new
@@ -44,11 +42,5 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :content, :cover_image, images: [])
-  end
-
-  def track_action(event = "Article Visit", parameters = request.path_parameters)
-    parameters["id"] = @article.id if @article.present?
-
-    TrackingJob.perform_async(ahoy, event, parameters)
   end
 end

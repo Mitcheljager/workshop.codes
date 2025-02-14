@@ -3,8 +3,6 @@ class CollectionsController < ApplicationController
     redirect_to login_path unless current_user
   end
 
-  after_action :track_action, only: [:show]
-
   def index
     @collections = Collection.includes(:posts).where("posts_count > ?", 0).order(created_at: :desc).page(params[:page])
   end
@@ -117,12 +115,5 @@ class CollectionsController < ApplicationController
       post.update_column(:collection_id, nil)
       Collection.decrement_counter(:posts_count, @collection.id)
     end
-  end
-
-  def track_action
-    parameters = request.path_parameters
-    parameters["id"] = @collection.id
-
-    TrackingJob.perform_async(ahoy, "Collection Visit", parameters)
   end
 end

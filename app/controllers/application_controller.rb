@@ -24,9 +24,13 @@ class ApplicationController < ActionController::Base
     if token && token.user
       return_path = session[:return_to]
       reset_session
+
       session[:user_id] = token.user.id
       session[:user_uuid] = token.user.uuid
       session[:return_to] = return_path
+
+      refresh_remember_token
+
       create_activity(:login_from_cookie)
     else
       cookies.delete :remember_token
@@ -92,6 +96,10 @@ class ApplicationController < ActionController::Base
     end
   rescue ActionController::UnknownFormat
     head 404
+  end
+
+  def refresh_remember_token
+    cookies.encrypted[:remember_token] = { value: cookies.encrypted[:remember_token], expires: 1.year }
   end
 
   private

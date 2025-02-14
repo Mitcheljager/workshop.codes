@@ -1,0 +1,28 @@
+<%= render "admin/navigation" %>
+
+<h3 class="mt-0">Collection: <strong><%= @collection.title %></strong></h3>
+<p>Created by: <strong><%= link_to @collection.user.username, admin_user_path(@collection.user.id) %></strong>
+<p>Created at: <strong><%= @collection.created_at %></strong>
+<p>Updated at: <strong><%= @collection.created_at %></strong>
+
+<hr>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Code</th>
+    <th>Created</th>
+    <th>Updated</th>
+  </tr>
+
+  <% @collection.posts.each do |post| %>
+    <tr>
+      <td><small><%= link_to post.id, admin_post_path(post.id) %></small></td>
+      <td><small><%= truncate(post.title, length: 50) %></small></td>
+      <td><small><%= link_to post.code, post_path(post.code) %></small></td>
+      <td><small><%= time_ago_in_words(post.created_at).humanize %></small></td>
+      <td><small><%= time_ago_in_words(post.updated_at).humanize %></small></td>
+    </tr>
+  <% end %>
+</table>

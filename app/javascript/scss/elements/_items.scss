@@ -405,7 +405,8 @@
 }
 
 .item__description,
-.editor-preview {
+.editor-preview,
+.article__content {
   line-height: 1.5em;
   overflow-wrap: break-word;
   color: $text-color;

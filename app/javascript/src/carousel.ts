@@ -45,12 +45,12 @@ async function setActiveItem(this: SiemaExtended & SiemaOptions): Promise<void> 
 
   if (activeElement) {
     activeElement.classList.remove("carousel__navigation-item--is-active")
-    activeElement.ariaSelected = null
+    activeElement.ariaPressed = null
   }
 
   if (navigationElements.length) {
     navigationElements[this.currentSlide].classList.add("carousel__navigation-item--is-active")
-    navigationElements[this.currentSlide].ariaSelected = "true"
+    navigationElements[this.currentSlide].ariaPressed = "true"
   }
 
   setLazyImage(this)

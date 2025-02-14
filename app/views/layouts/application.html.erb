@@ -29,6 +29,12 @@
       onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
     <noscript><%= vite_stylesheet_tag "fonts.scss" %></noscript>
 
+    <link rel="preload"
+      href="<%= vite_asset_url "deferred.scss" %>"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
+    <noscript><%= vite_stylesheet_tag "deferred.scss" %></noscript>
+
     <!-- Prevent flashbangs -->
     <style>
       body {
@@ -38,6 +44,8 @@
     </style>
 
     <%= vite_stylesheet_tag "application.scss" %>
+    <%= vite_stylesheet_tag "wiki.scss" if is_wiki? %>
+    <%= vite_stylesheet_tag "blog.scss" if is_blog? %>
 
     <%= vite_client_tag %>
     <%= vite_typescript_tag "application", "data-turbolinks-track": "reload", defer: true %>
@@ -49,6 +57,7 @@
   </head>
 
   <body class="<%= "wiki" if is_wiki? %>">
+
     <%= render "flash" %>
     <%= render "header" unless is_editor? || is_enhance? %>
     <%= render "wiki/header" if is_wiki? %>
