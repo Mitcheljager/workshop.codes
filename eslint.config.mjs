@@ -1,6 +1,7 @@
 import globals from "globals"
 import typescriptEslint from "@typescript-eslint/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
+import eslintPluginSvelte from "eslint-plugin-svelte"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import js from "@eslint/js"
@@ -16,7 +17,7 @@ const compat = new FlatCompat({
 
 export default [{
   ignores: ["public", "**/zez-ui"]
-}, ...compat.extends("plugin:svelte/recommended"), {
+}, ...compat.extends("plugin:svelte/recommended"), ...eslintPluginSvelte.configs["flat/recommended"], {
   languageOptions: {
     globals: {
       ...globals.browser
@@ -26,7 +27,12 @@ export default [{
     sourceType: "module",
 
     parserOptions: {
-      allowImportExportEverywhere: true
+      allowImportExportEverywhere: true,
+      parser: {
+        ts: "@typescript-eslint/parser",
+        js: "espree",
+        typescript: "@typescript-eslint/parser"
+      }
     }
   },
 
@@ -43,7 +49,13 @@ export default [{
     "no-trailing-spaces": ["error"],
     "space-before-function-paren": ["error", "never"],
     "no-var": ["error"],
-    "prefer-const": ["error"],
+
+    "prefer-const": [
+      "error",
+      {
+        destructuring: "all"
+      }
+    ],
 
     "arrow-spacing": ["error", {
       before: true,
@@ -66,10 +78,8 @@ export default [{
 
     "no-multiple-empty-lines": ["warn", {
       max: 1
-    }]
-  }
-}, {
-  rules: {
+    }],
+
     "svelte/no-at-html-tags": "off"
   }
 }, ...compat.extends("plugin:@typescript-eslint/recommended").map(config => ({
