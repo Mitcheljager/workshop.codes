@@ -45,15 +45,15 @@
 
         <div>
           {#each Object.keys($orderedTranslationKeys) as key}
-            <button
+            <div
               class="translation-settings__item"
-              class:translation-settings__item--active={selectedKey == key}
-              on:click={() => { selectedKey = key; showLanguageSettings = false }}>
-              {key}
-              <!-- svelte-ignore a11y_click_events_have_key_events -->
-              <!-- svelte-ignore a11y_no_static_element_interactions -->
-              <div class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</div>
-            </button>
+              class:translation-settings__item--active={selectedKey == key}>
+              <button on:click={() => { selectedKey = key; showLanguageSettings = false }}>
+                {key}
+              </button>
+
+              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
+            </div>
           {/each}
         </div>
       {/if}
