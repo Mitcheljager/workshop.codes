@@ -80,7 +80,7 @@
   }
 </script>
 
-<textarea {name} bind:value class="form-input form-textarea form-textarea--small" aria-describedby={ariaDescribedby} aria-labelledby={ariaLabelledby} />
+<textarea {name} bind:value class="form-input form-textarea form-textarea--small" aria-describedby={ariaDescribedby} aria-labelledby={ariaLabelledby}></textarea>
 
 {#if value}
   <button

@@ -58,7 +58,7 @@
     </div>
 
     {#if loading}
-      <span class="dropdown__item"><div class="spinner spinner--small mb-1/8" aria-live="polite" role="status" /></span>
+      <span class="dropdown__item"><div class="spinner spinner--small mb-1/8" aria-live="polite" role="status"></div></span>
     {/if}
 
     {#each $notifications as notification}

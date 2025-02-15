@@ -76,7 +76,7 @@
 
       {#if loading}
         <div class="flex justify-center">
-          <div class="spinner spinner--small mt-1/4 mb-1/4" aria-live="polite" role="status" />
+          <div class="spinner spinner--small mt-1/4 mb-1/4" aria-live="polite" role="status"></div>
         </div>
       {/if}
     </div>

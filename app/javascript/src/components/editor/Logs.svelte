@@ -121,5 +121,5 @@
     {/each}
   </div>
 
-  <div class="logs__anchor" />
+  <div class="logs__anchor"></div>
 </div>
