@@ -23,24 +23,27 @@
 
 .translation-settings__item {
   appearance: none;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 3rem;
   width: 100%;
   padding: $margin * 0.125 0;
   border: 0;
   border-bottom: 1px solid $border-color;
   background: transparent;
   font-family: $font-stack;
-  color: $text-color;
   text-align: left;
-  cursor: pointer;
 
   &:first-of-type {
     border-top: 1px solid $border-color;
   }
 
-  &--active,
-  &:hover {
-    color: $text-color-lightest;
+  button {
+    color: $text-color;
+
+    &--active,
+    &:hover {
+      color: $text-color-lightest;
+    }
   }
 }
 

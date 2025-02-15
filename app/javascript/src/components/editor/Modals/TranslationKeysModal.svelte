@@ -50,7 +50,9 @@
               class:translation-settings__item--active={selectedKey == key}
               on:click={() => { selectedKey = key; showLanguageSettings = false }}>
               {key}
-              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
+              <!-- svelte-ignore a11y_no_static_element_interactions -->
+              <div class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</div>
             </button>
           {/each}
         </div>
