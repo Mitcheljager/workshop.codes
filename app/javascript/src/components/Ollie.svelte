@@ -1,11 +1,7 @@
 <script lang="ts">
   import { Confetti } from "svelte-confetti"
 
-  interface Props {
-    chance?: number,
-    imageFlyBy: string,
-    imageHeart: string
-  }
+  interface Props { chance?: number, imageFlyBy: string, imageHeart: string }
 
   const { chance = 5, imageFlyBy = "", imageHeart = "" }: Props = $props()
 
