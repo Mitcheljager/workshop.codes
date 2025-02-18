@@ -45,13 +45,15 @@
 
         <div>
           {#each Object.keys($orderedTranslationKeys) as key}
-            <button
+            <div
               class="translation-settings__item"
-              class:translation-settings__item--active={selectedKey == key}
-              on:click={() => { selectedKey = key; showLanguageSettings = false }}>
-              {key}
+              class:translation-settings__item--active={selectedKey == key}>
+              <button on:click={() => { selectedKey = key; showLanguageSettings = false }}>
+                {key}
+              </button>
+
               <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
-            </button>
+            </div>
           {/each}
         </div>
       {/if}

@@ -83,7 +83,6 @@ export function extractAndInsertMixins(joinedItems: string): string {
     // This allows us to either insert a single parameter object to be used for the mixin or insert multiple to be used for the params.
     if (splitArguments.length === 1 && parameterObjectGiven) splitArguments = []
 
-    // eslint-disable-next-line prefer-const
     let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, closing, mixin.content)
 
     mixin.params

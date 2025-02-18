@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
   import Bugsnag from "@bugsnag/js"
   import { onMount } from "svelte"
 
-  export let apiKey = ""
+  interface Props { apiKey: string }
+
+  const { apiKey = "" }: Props = $props()
 
   onMount(() => {
     Bugsnag.start({

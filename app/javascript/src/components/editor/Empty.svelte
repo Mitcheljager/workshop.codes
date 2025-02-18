@@ -8,7 +8,7 @@
   }
 </script>
 
-<div />
+<div></div>
 <div class="p-1/2 editor__scrollable w-100">
   <div style="max-width: 40rem; margin: 0 auto">
     <h1 class="mb-0">Welcome to the Workshop.codes <mark>Overwatch Workshop Script Editor</mark></h1>
@@ -17,20 +17,19 @@
     <div class="line-height-3/2">
       <p>With this editor, you can create and edit your Workshop modes using a text based editor. If you have not used the Workshop before, using this editor as a starting point might be difficult. If you have never used a text based editor before but you have used the Workshop, consider this the second step to becoming a programmer!</p>
 
-      <p>
-        <strong class="text-lightest">Features:</strong>
-        <ul>
-          <li><mark class="text-lightest">Autocomplete</mark> any Workshop actions and values.</li>
-          <li><mark class="text-lightest">Automatic variable detecting</mark>, no need to declare your variables anywhere.</li>
-          <li>Relevant <mark class="text-lightest">syntax highlighting.</mark></li>
-          <li><mark class="text-lightest">Folders</mark>, wow!</li>
-          <li>Integrated <mark class="text-lightest">Wiki</mark> search.</li>
-          <li>Automatic <mark class="text-lightest">error detection</mark> (it's a bit limited, but still).</li>
-          <li>Reduce code repetition using <mark class="text-lightest">Mixins</mark>, <mark class="text-lightest">Loops</mark>, and <mark class="text-lightest">Conditionals</mark>.</li>
-          <li>Easily manage <mark class="text-lightest">translations</mark> for all supported languages.</li>
-          <li><mark class="text-lightest">Share</mark> your projects with others (Maybe even collaborate together in the future!).</li>
-        </ul>
-      <p>
+      <p><strong class="text-lightest">Features:</strong></p>
+
+      <ul>
+        <li><mark class="text-lightest">Autocomplete</mark> any Workshop actions and values.</li>
+        <li><mark class="text-lightest">Automatic variable detecting</mark>, no need to declare your variables anywhere.</li>
+        <li>Relevant <mark class="text-lightest">syntax highlighting.</mark></li>
+        <li><mark class="text-lightest">Folders</mark>, wow!</li>
+        <li>Integrated <mark class="text-lightest">Wiki</mark> search.</li>
+        <li>Automatic <mark class="text-lightest">error detection</mark> (it's a bit limited, but still).</li>
+        <li>Reduce code repetition using <mark class="text-lightest">Mixins</mark>, <mark class="text-lightest">Loops</mark>, and <mark class="text-lightest">Conditionals</mark>.</li>
+        <li>Easily manage <mark class="text-lightest">translations</mark> for all supported languages.</li>
+        <li><mark class="text-lightest">Share</mark> your projects with others (Maybe even collaborate together in the future!).</li>
+      </ul>
 
       {#if $projects?.length}
         <div class="flex align-center justify-between mt-1/1">

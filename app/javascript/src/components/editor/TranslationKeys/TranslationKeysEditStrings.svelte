@@ -86,7 +86,7 @@
     <div class="form-group-inline mt-1/8">
       <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
 
-      <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]} />
+      <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]}></textarea>
     </div>
   {/each}
 {/if}
