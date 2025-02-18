@@ -1,23 +1,32 @@
-<script>
+<script lang="ts">
   import { fade } from "svelte/transition"
 
-  export let name
-  export let value = ""
-  export let ariaDescribedby = null
-  export let ariaLabelledby = null
+  interface Props {
+    name: any,
+    value?: string,
+    ariaDescribedby?: any,
+    ariaLabelledby?: any
+  }
 
-  let foundTerms = []
-  let processing
-  let snippetFixer = false
-  let replacedMcCree = false
+  let {
+    name,
+    value = $bindable(""),
+    ariaDescribedby = null,
+    ariaLabelledby = null
+  }: Props = $props()
 
-  function autofillForm() {
+  let foundTerms: string[] = $state([]) // This variable is used to let the user know what happened in simple terms. It isn't used for any actual processing.
+  let processing = $state(false)
+
+  function autofillForm(event: Event): void {
+    event.preventDefault()
+
     if (processing) return
 
-    processing = true
     foundTerms = []
+    processing = true
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       setName("maps")
       setName("heroes")
       setNumberOfPlayers()
@@ -26,57 +35,62 @@
     })
   }
 
-  function setName(name) {
-    findValue(`enabled ${name}`, name, true)
+  function setName(name: string): void {
+    let result = findAndCheckValue(`enabled ${name}`, name)
 
-    if (!foundTerms.includes(`enabled ${name}`)) findValue(`disabled ${name}`, name, false)
-    if (!foundTerms.includes(`enabled ${name}`) && !foundTerms.includes(`disabled ${name}`)) {
-      foundTerms = [...foundTerms, `all ${name}`]
-      setCheckboxes(name, [], false)
+    if (!result.length) {
+      result = findAndCheckValue(`disabled ${name}`, name, true)
+
+      if (!result.length) {
+        foundTerms = [...foundTerms, `all ${name}`]
+        setCheckboxes(name, [], true)
+      }
     }
   }
 
-  function findValue(term, name, initial) {
+  function findAndCheckValue(term: string, name: string, invert = false): string[] {
     const regex = new RegExp(`(${term}\\s+).*?(?=\\s+})`, "gs")
 
-    let result = value.match(regex)
-    if (result) {
-      foundTerms = [...foundTerms, term]
-      result = result.join("")
-      result = result.replaceAll(`enabled ${name} {`, "").replace(/\t/g, "").replace(/\r/g, "")
-      result = result.split("\n").filter(r => r)
-    }
+    const match = value.match(regex)
+    if (!match) return []
 
-    setCheckboxes(name, result, initial)
+    const lines = match.join("")
+      .replaceAll(`enabled ${name} {`, "")
+      .replace(/[\t\r]/g, "")
+      .split("\n").filter(r => r)
+
+    setCheckboxes(name, lines, invert)
+
+    foundTerms = [...foundTerms, term]
+
+    return lines
   }
 
-  function setCheckboxes(name, result, initial) {
-    const elements = document.querySelectorAll(`[type="checkbox"][name*="${name}"]`)
+  /** @param invert This is used to invert the checkbox value of a found line. "enabled heroes" would not be inverted, "disabled heroes" would be. */
+  function setCheckboxes(name: string, lines: string[], invert = false): void {
+    const elements = Array.from(document.querySelectorAll(`[type="checkbox"][name*="${name}"]`)) as HTMLFormElement[]
+
     elements.forEach(element => {
-      if (initial) element.checked = (!result || result.includes(element.value))
-      if (!initial) element.checked = !(!result || result.includes(element.value))
+      let value = !lines || lines.includes(element.value)
+      if (invert) value = !value
+
+      element.checked = value
     })
   }
 
-  function setNumberOfPlayers() {
-    let maxPlayersTeamOne = value.match(/(Max Team 1 Players:\s+).*?(?=\n)/gs)
-    if (maxPlayersTeamOne) maxPlayersTeamOne = maxPlayersTeamOne[0].replace("Max Team 1 Players: ", "")
+  function setNumberOfPlayers(): void {
+    const maxPlayersTeamOne = value.match(/(Max Team 1 Players:\s+).*?(?=\n)/gs)?.[0].replace("Max Team 1 Players: ", "") || "6"
+    const maxPlayersTeamTwo = value.match(/(Max Team 2 Players:\s+).*?(?=\n)/gs)?.[0].replace("Max Team 2 Players: ", "") || "6"
+    const maxPlayers = parseInt(maxPlayersTeamOne) + parseInt(maxPlayersTeamTwo)
 
-    let maxPlayersTeamTwo = value.match(/(Max Team 2 Players:\s+).*?(?=\n)/gs)
-    if (maxPlayersTeamTwo) maxPlayersTeamTwo = maxPlayersTeamTwo[0].replace("Max Team 2 Players: ", "")
+    const sliderElement = document.querySelector("[name*='number_of_supported_players']")
 
-    const maxPlayers = parseInt(maxPlayersTeamOne) + parseInt(maxPlayersTeamTwo) || 12
+    if (!(sliderElement && "noUiSlider" in sliderElement)) return
 
-    const slider = document.querySelector("[name*='number_of_supported_players']")
-    if (slider) slider.noUiSlider.set([1, maxPlayers])
+    // @ts-ignore
+    sliderElement.noUiSlider.set([1, maxPlayers])
 
     foundTerms = [...foundTerms, "max players"]
-  }
-
-  function replaceMcCree() {
-    if (value = value.replaceAll("McCree", "Cassidy")) {
-      replacedMcCree = true
-    }
   }
 </script>
 
@@ -85,45 +99,18 @@
 {#if value}
   <button
     transition:fade={{ duration: 150 }}
-    on:click|preventDefault={autofillForm}
+    onclick={autofillForm}
     class="button button--secondary mt-1/4"
     disabled={processing}>
 
-    {processing ? "Processing..." : "Auto fill settings from snippet"}
+    {processing ? "Processing..." : "Autofill settings from snippet"}
   </button>
 {/if}
 
 {#if foundTerms.length}
   <div class="well well--dark block mt-1/4">
     {#each foundTerms as term, i}
-      <div in:fade={{ duration: 150, delay: i * 150 }}>Set "{term}"</div>
+      <div in:fade|global={{ duration: 150, delay: i * 150 }}>Set "{term}"</div>
     {/each}
-  </div>
-{/if}
-
-{#if value}
-  <div class="switch-checkbox mt-1/4">
-    <input
-      id="snippet-fixer"
-      class="switch-checkbox__input"
-      autocomplete="off"
-      type="checkbox"
-      bind:checked={snippetFixer}/>
-
-    <label
-      class="switch-checkbox__label"
-      for="snippet-fixer">
-      Show Snippet Fixer Options
-    </label>
-  </div>
-{/if}
-
-{#if snippetFixer}
-  <div class="well well--dark mt-1/4">
-    <button
-      on:click|preventDefault={replaceMcCree}
-      class="button {replacedMcCree ? "button--primary" : "button--secondary"}">
-      {replacedMcCree ? "Successfully replaced McCree with Cassidy" : "Replace McCree with Cassidy"}
-    </button>
   </div>
 {/if}
