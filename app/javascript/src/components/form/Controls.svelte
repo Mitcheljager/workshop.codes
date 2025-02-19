@@ -4,9 +4,10 @@
   import { fade } from "svelte/transition"
   import Sortable from "sortablejs"
 
-  export let controls = []
+  export let _controls = []
   export let name
 
+  let controls = _controls
   let listElement
 
   const values = [

@@ -5,5 +5,5 @@
     If your gamemode has special controls you can list them here. For example if your gamemode has a certain button combination to change heroes, or activate some sort of action. Please list them here rather than in the description above.
   </div>
 
-  <%= svelte_component "ControlsForm", { controls: @post.parsed_controls, name: "post[controls]" } %>
+  <%= svelte_component "ControlsForm", { _controls: @post.parsed_controls, name: "post[controls]" } %>
 </div>
