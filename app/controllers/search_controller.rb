@@ -35,6 +35,8 @@ class SearchController < ApplicationController
       return
     end
 
+    abort "test".inspect
+
     begin
       @posts = get_filtered_posts(params)
       @users = get_search_users(params)
