@@ -7,7 +7,7 @@
   export let _controls = []
   export let name
 
-  let controls = _controls
+  let controls = _controls?.length ? _controls : [{ buttons: [] }]
   let listElement
 
   const values = [
@@ -25,7 +25,6 @@
     ["Ultimate", "Ultimate"]
   ]
 
-  $: if (!controls.length) setTimeout(() => { controls = [{ buttons: [] }] })
   $: value = filterEmpty(controls)
 
   onMount(createSortable)
