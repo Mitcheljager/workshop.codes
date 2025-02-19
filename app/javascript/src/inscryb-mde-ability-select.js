@@ -40,17 +40,19 @@ export function insertAbilityIconSelect(element, mde, codemirror) {
 }
 
 function buildItems(abilitiesElement, codemirror, abilities) {
-  if (!Object.keys(abilities).length) {
+  if (!abilities.length) {
     abilitiesElement.innerHTML = "<div class=\"p-1/8 pt-0\">No results found</div>"
     return
   }
 
   abilitiesElement.innerHTML = ""
 
-  Object.entries(abilities).forEach(([key, url]) => {
+  abilities.forEach(({ name, url, terms }) => {
     const abilityElement = document.createElement("div")
     abilityElement.classList.add("editor-dropdown__item", "editor-dropdown__item--icon")
-    abilityElement.innerText = key
+    abilityElement.innerHTML = `
+      <div>${name} <div class="text-small text-dark">${terms.join(", ")}</div></div>
+    `
 
     const iconElement = document.createElement("img")
     iconElement.loading = "lazy"
@@ -59,7 +61,7 @@ function buildItems(abilitiesElement, codemirror, abilities) {
     abilityElement.prepend(iconElement)
 
     abilityElement.addEventListener("click", () => {
-      codemirror.replaceSelection(`[ability ${key}]`)
+      codemirror.replaceSelection(`[ability ${name}]`)
     })
 
     abilitiesElement.append(abilityElement)
@@ -67,12 +69,19 @@ function buildItems(abilitiesElement, codemirror, abilities) {
 }
 
 function onInput(event, abilitiesElement, codemirror, abilities) {
-  let filteredAbilities = {}
+  const query = event.target.value.toLowerCase()
+
+  let filteredAbilities = []
+
   if (!event.target.value) {
     filteredAbilities = abilities
   } else {
-    for (const key in abilities) {
-      if (key.toLowerCase().includes(event.target.value.toLowerCase())) filteredAbilities[key] = abilities[key]
+    for (let i = 0; i < abilities.length; i++) {
+      const { name, terms } = abilities[i]
+
+      if (name.toLowerCase().includes(query) || terms.some(term => term.toLowerCase().includes(query))) {
+        filteredAbilities.push(abilities[i])
+      }
     }
   }
 

@@ -237,7 +237,15 @@ module ContentHelper
   end
 
   def ability_icons
-    abilities.map { |ability| [ability.to_sym, image_url(ability_name_to_icon_url(ability))] }.to_h
+    abilities.map do |ability_hash|
+      ability_hash.map do |key, value|
+        {
+          name: key,
+          url: image_url(ability_name_to_icon_url(key)),
+          terms: value
+        }
+      end
+    end.flatten
   end
 
   def hero_names

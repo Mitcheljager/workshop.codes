@@ -1,444 +1,444 @@
 # Abilities and passives
-- A-36 Tactical Grenade
-- Accretion
-- Adaptive Shield
-- Adrenaline Rush
-- Amp It Up
-- Amplification Matrix
-- Anchor
-- Angelic Descent
-- Annihilation
-- Armor Pack
-- Attack Speed
-- Attack
-- Augmented Fusion Driver
-- Axe Recall
-- Barbed Axe
-- Barrage
-- Barrier Field
-- Barrier Projector
-- Barrier Shield
-- Berserker
-- Biotic Field
-- Biotic Grasp Alt Fire
-- Biotic Grasp
-- Biotic Grenade
-- Biotic Launcher Alt Fire
-- Biotic Launcher
-- Biotic Orb
-- Biotic Rifle
-- Blink
-- Blizzard
-- Block (Nemesis Form)
-- Bob
-- Bonespur
-- Boosters
-- Build Turret
-- Burrow
-- Caduceus Blaster
-- Caduceus Staff
-- Cage Fight
-- Call Mech
-- Captive Sun
-- Cardiac Overdrive
-- Carnage
-- Catch
-- Chain Hook
-- Charge
-- Clobber
-- Coach Gun
-- Coalescence
-- Combat Roll
-- Commanding Shout
-- Concussion Mine
-- Concussive Blast
-- "Configuration: Artillery"
-- "Configuration: Assault"
-- "Configuration: Recon"
-- "Configuration: Tank"
-- Crossfade
-- Cryo Freeze
-- Cyber Agility
-- Deadeye
-- Death Blossom
-- Defense Matrix
-- Deflect
-- Deploy Turret
-- Dire Grenade
-- Disruptor Shot
-- Divine Assault
-- Divine Power
-- Downpour
-- Dragonblade
-- Dragonstrike
-- Drill Dash
-- Duplicate
-- Dynamite
-- Earthshatter
-- Eject
-- Emp
-- Endothermic Blaster
-- Energy Javelin
-- Energy
-- Exo Boots
-- Experimental Barrier
-- Explorers Resolve
-- Fade
-- Fan of Blades
-- Fire Strike
-- Flashbang
-- Flight
-- Flurry
-- Focusing Beam
-- Forge Hammer
-- Fortify
-- Frag Launcher
-- Fusion Cannons
-- Fusion Driver
-- Glide
-- Glide Boost
-- Grappling Claw
-- Grappling Hook
-- Gravitic Flux
-- Graviton Surge
-- Guardian Angel
-- Hack
-- Halt
-- Hand Cannon
-- Healing Blossom
-- Healing Boost
-- Healing Ofuda
-- Healing Pylon
-- Health
-- Heavy Pulse Rifle
-- Helix Rockets
-- Hellfire Desire
-- Hellfire Shotguns
-- Hover Jets
-- Hyper Ring
-- Hyperspheres
-- Ice Wall
-- Icicle
-- Immortality Field
-- Incendiary Chaingun
-- Infra Sight
-- Inspire
-- Ironclad
-- Jagged Blade
-- Jagged Wall
-- Javelin Spin
-- Jet Dash
-- Jump Jet
-- Jump Pack
-- Kinetic Grasp
-- Kitsune Rush
-- Kunai
-- Life Grip
-- Light Gun
-- Lunge
-- Machine Pistol
-- Magnetic Grenade
-- Martian Overboots
-- Mediblaster
-- Melee Bump
-- Meteor Strike
-- Micro Missiles
-- Minefield
-- "Modifier: Death From Above"
-- Molten Core
-- Movement Speed
-- Nano Boost
-- Nemesis Form
-- Nimble Feet
-- Opportunist
-- Orb of Destruction
-- Orb of Discord
-- Orb of Harmony
-- Orbital Ray
-- Outburst
-- Overclock
-- Overload
-- Overrun
-- Particle Barrier
-- Particle Cannon
-- Passive
-- Peacekeeper
-- Petal Platform
-- Photon Barrier
-- Photon Barrier (Original)
-- Photon Projector
-- Photon Shield
-- Pig Pen
-- Piledriver
-- Power Block
-- Power Slide
-- Primal Rage
-- Projected Barrier
-- Protection Suzu
-- Pulsar Torpedoes
-- Pulse Bomb
-- Pulse Pistols
-- Pummel (Nemesis Form)
-- Punch
-- Quad Cannons
-- Quick Melee
-- Railgun Alt Fire
-- Railgun
-- Rally
-- Rampage
-- Ravenous Vortex
-- Recall
-- Reconfigure
-- Regenerative Burst
-- Rejuvenating Dash
-- Repair Pack
-- Resurrect
-- Rip Tire
-- Rising Uppercut
-- Rivet Gun Alt Fire
-- Rivet Gun
-- Rocket Flail
-- Rocket Hammer
-- Rocket Launcher
-- Rocket Punch
-- Role Damage
-- Role Support
-- Role Tank
-- Roll
-- Rune of Disguise
-- Scampy Stun
-- Scatter Arrow
-- Scattergun
-- Scrap Gun
-- Seismic Slam
-- Self Destruct
-- Self Repair
-- Sentry Turret
-- Shadow Step
-- Shield Bash
-- Shield Generator
-- Shockwave
-- Shuriken
-- Sleep Dart
-- Smart Excavator
-- Snap Kick
-- Snowball Blaster
-- Solar Rifle
-- Solar Rifle Alt
-- Sonic Amplifier
-- Sonic Arrow
-- Soulbind
-- Sound Barrier
-- Soundwave
-- Spike Guard
-- Sprint
-- Stealth
-- Steel Trap
-- Sticky Bombs
-- Storm Arrows
-- Storm Bow
-- Strike
-- Supercharger
-- Swift Step
-- Swift Strike
-- Sympathetic Recovery
-- Tactical Visor
-- Take a Breather
-- Tectonic Shock
-- Teleporter
-- Terra Surge
-- Tesla Cannon
-- Thaw
-- The Best Defense
-- The Reaping
-- The Viper
-- Thorn Volley
-- Total Mayhem
-- Transcendence
-- Translocator
-- Tree of Life
-- Tri Shot
-- Turbo Boost
-- Ultimate Play
-- Valkyrie
-- Vault
-- Venom Mine
-- Violent Leap
-- Virus
-- Volatile Chaingun
-- Void Accelerator (Omnic Form)
-- Void Barrier (Omnic Form)
-- Wall Climb
-- Wall Ride
-- Wall Slam
-- Whip Shot
-- Whole Hog
-- Widows Kiss
-- Wraith Form
-- Yeti Trap
+- A-36 Tactical Grenade: [Ability, Bastion]
+- Accretion: [Ability, Sigma]
+- Adaptive Shield: [Ability, Wrecking Ball]
+- Adrenaline Rush: [Ability, Junker Queen]
+- Amp It Up: [Ability, Lúcio]
+- Amplification Matrix: [Ability, Baptiste]
+- Anchor: [Ability, Kiriko, Mischief and Magic]
+- Angelic Descent: [Ability, Mercy]
+- Annihilation: [Ability, Ramattra]
+- Armor Pack: [Ability, Torbjörn]
+- Attack Speed: [General]
+- Attack: [General]
+- Augmented Fusion Driver: [Ability, Orisa]
+- Axe Recall: [Ability, Junker Queen]
+- Barbed Axe: [Ability, Junker Queen]
+- Barrage: [Ability, Pharah]
+- Barrier Field: [Ability, Reinhardt]
+- Barrier Projector: [Ability, Symmetra]
+- Barrier Shield: [Ability, Brigitte]
+- Berserker: [Ability]
+- Biotic Field: [Ability, "Soldier: 76"]
+- Biotic Grasp Alt Fire: [Ability, Moira]
+- Biotic Grasp: [Ability, Moira]
+- Biotic Grenade: [Ability, Ana]
+- Biotic Launcher Alt Fire: [Ability, Baptiste]
+- Biotic Launcher: [Ability, Baptiste]
+- Biotic Orb: [Ability, Moira]
+- Biotic Rifle: [Ability, Ana]
+- Blink: [Ability, Tracer]
+- Blizzard: [Ability, Mei]
+- Block (Nemesis Form): [Ability, Ramattra]
+- Bob: [Ability, Ashe]
+- Bonespur: [Ability, Hazard]
+- Boosters: [Ability, D.Va]
+- Build Turret: [Ability, Torbjörn]
+- Burrow: [Ability, Venture]
+- Caduceus Blaster: [Ability, Mercy]
+- Caduceus Staff: [Ability, Mercy]
+- Cage Fight: [Ability, Mauga]
+- Call Mech: [Ability, D.Va]
+- Captive Sun: [Ability, Sigma]
+- Cardiac Overdrive: [Ability, Lifeweaver]
+- Carnage: [Ability, Junker Queen]
+- Catch: [Ability, Mei, Snowball Deathmatch]
+- Chain Hook: [Ability, Roadhog]
+- Charge: [Ability, Reinhardt]
+- Clobber: [Ability, Venture]
+- Coach Gun: [Ability, Ashe]
+- Coalescence: [Ability, Moira]
+- Combat Roll: [Ability, Cassidy]
+- Commanding Shout: [Ability, Junker Queen]
+- Concussion Mine: [Ability, Junkrat]
+- Concussive Blast: [Ability, Pharah]
+- "Configuration: Artillery": [Ability, Bastion]
+- "Configuration: Assault": [Ability, Bastion]
+- "Configuration: Recon": [Ability, Bastion]
+- "Configuration: Tank": [Ability, Bastion]
+- Crossfade: [Ability, Lúcio]
+- Cryo Freeze: [Ability, Mei]
+- Cyber Agility: [Ability, Genji]
+- Deadeye: [Ability, Cassidy]
+- Death Blossom: [Ability, Reaper]
+- Defense Matrix: [Ability, D.Va]
+- Deflect: [Ability, Genji]
+- Deploy Turret: [Ability, Torbjörn]
+- Dire Grenade: [Ability]
+- Disruptor Shot: [Ability, Sojourn]
+- Divine Assault: [Ability, Doomfist, Trials of Sanctuary]
+- Divine Power: [Ability]
+- Downpour: [Ability, Hazard]
+- Dragonblade: [Ability, Genji]
+- Dragonstrike: [Ability, Hanzo]
+- Drill Dash: [Ability, Venture]
+- Duplicate: [Ability, Echo]
+- Dynamite: [Ability, Ashe]
+- Earthshatter: [Ability, Reinhardt]
+- Eject: [Ability, D.Va]
+- Emp: [Ability, Sombra]
+- Endothermic Blaster: [Ability, Mei]
+- Energy Javelin: [Ability, Ramattra]
+- Energy: [Ability, Unknown]
+- Exo Boots: [Ability, Baptiste]
+- Experimental Barrier: [Ability, Sigma]
+- Explorers Resolve: [Ability, Venture]
+- Fade: [Ability, Moira]
+- Fan of Blades: [Ability, Genji]
+- Fire Strike: [Ability, Reinhardt]
+- Flashbang: [Ability, Cassidy]
+- Flight: [Ability, Echo]
+- Flurry: [Ability, Mei, Snowball's Offensive]
+- Focusing Beam: [Ability, Echo]
+- Forge Hammer: [Ability, Torbjörn]
+- Fortify: [Ability, Orisa]
+- Frag Launcher: [Ability, Junkrat]
+- Fusion Cannons: [Ability, D.Va]
+- Fusion Driver: [Ability, Orisa]
+- Glide: [Ability, Echo]
+- Glide Boost: [Ability, Echo]
+- Grappling Claw: [Ability, Wrecking Ball]
+- Grappling Hook: [Ability, Widowmaker]
+- Gravitic Flux: [Ability, Sigma]
+- Graviton Surge: [Ability, Zarya]
+- Guardian Angel: [Ability, Mercy]
+- Hack: [Ability, Sombra]
+- Halt: [Ability, Orisa]
+- Hand Cannon: [Ability, Doomfist]
+- Healing Blossom: [Ability, Lifeweaver]
+- Healing Boost: [Ability, Lúcio]
+- Healing Ofuda: [Ability, Kiriko]
+- Healing Pylon: [Ability, Illari]
+- Health: [General]
+- Heavy Pulse Rifle: [Ability, "Soldier: 76"]
+- Helix Rockets: [Ability, "Soldier: 76"]
+- Hellfire Desire: [Ability]
+- Hellfire Shotguns: [Ability, Reaper]
+- Hover Jets: [Ability, Pharah]
+- Hyper Ring: [Ability, Juno]
+- Hyperspheres: [Ability, Sigma]
+- Ice Wall: [Ability, Mei]
+- Icicle: [Ability, Mei]
+- Immortality Field: [Ability, Baptiste]
+- Incendiary Chaingun: [Ability, Mauga]
+- Infra Sight: [Ability, Widowmaker]
+- Inspire: [Ability, Brigitte]
+- Ironclad: [Ability, Bastion]
+- Jagged Blade: [Ability, Junker Queen]
+- Jagged Wall: [Ability, Hazard]
+- Javelin Spin: [Ability, Orisa]
+- Jet Dash: [Ability, Kiriko]
+- Jump Jet: [Ability, Pharah]
+- Jump Pack: [Ability, Winston]
+- Kinetic Grasp: [Ability, Sigma]
+- Kitsune Rush: [Ability, Kiriko]
+- Kunai: [Ability, Kiriko]
+- Life Grip: [Ability, Lifeweaver]
+- Light Gun: [Ability, D.Va]
+- Lunge: [Ability, Hanzo]
+- Machine Pistol: [Ability, Sombra]
+- Magnetic Grenade: [Ability, Cassidy]
+- Martian Overboots: [Ability, Juno]
+- Mediblaster: [Ability, Juno]
+- Melee Bump: [General]
+- Meteor Strike: [Ability, Doomfist]
+- Micro Missiles: [Ability, D.Va]
+- Minefield: [Ability, Wrecking Ball]
+- "Modifier: Death From Above": [Ability, Doomfist]
+- Molten Core: [Ability, Torbjörn]
+- Movement Speed: [General]
+- Nano Boost: [Ability, Ana]
+- Nemesis Form: [Ability, Ramattra]
+- Nimble Feet: [Ability, Kiriko]
+- Opportunist: [Ability, Sombra]
+- Orb of Destruction: [Ability, Zenyatta]
+- Orb of Discord: [Ability, Zenyatta]
+- Orb of Harmony: [Ability, Zenyatta]
+- Orbital Ray: [Ability, Juno]
+- Outburst: [Ability, Illari]
+- Overclock: [Ability, Sojourn]
+- Overload: [Ability, Torbjörn]
+- Overrun: [Ability, Mauga]
+- Particle Barrier: [Ability, Zarya]
+- Particle Cannon: [Ability, Zarya]
+- Passive: [General]
+- Peacekeeper: [Ability, Cassidy]
+- Petal Platform: [Ability, Lifeweaver]
+- Photon Barrier: [Ability, Symmetra]
+- Photon Barrier (Original): [Ability, Symmetra]
+- Photon Projector: [Ability, Symmetra]
+- Photon Shield: [Ability, Symmetra]
+- Pig Pen: [Ability, Roadhog]
+- Piledriver: [Ability, Wrecking Ball]
+- Power Block: [Ability, Doomfist]
+- Power Slide: [Ability, Sojourn]
+- Primal Rage: [Ability, Winston]
+- Projected Barrier: [Ability, Zarya]
+- Protection Suzu: [Ability, Kiriko]
+- Pulsar Torpedoes: [Ability, Juno]
+- Pulse Bomb: [Ability, Tracer]
+- Pulse Pistols: [Ability, Tracer]
+- Pummel (Nemesis Form): [Ability, Ramattra]
+- Punch: [General]
+- Quad Cannons: [Ability, Ramattra]
+- Quick Melee: [Ability, General]
+- Railgun Alt Fire: [Ability, Sojourn]
+- Railgun: [Ability, Sojourn]
+- Rally: [Ability, Brigitte]
+- Rampage: [Ability, Junker Queen]
+- Ravenous Vortex: [Ability, Ramattra]
+- Recall: [Ability, Tracer]
+- Reconfigure: [Ability, Bastion]
+- Regenerative Burst: [Ability, Junker Queen]
+- Rejuvenating Dash: [Ability, Lifeweaver]
+- Repair Pack: [Ability, Brigitte]
+- Resurrect: [Ability, Mercy]
+- Rip Tire: [Ability, Junkrat]
+- Rising Uppercut: [Ability, Doomfist]
+- Rivet Gun Alt Fire: [Ability, Torbjörn]
+- Rivet Gun: [Ability, Torbjörn]
+- Rocket Flail: [Ability, Brigitte]
+- Rocket Hammer: [Ability, Reinhardt]
+- Rocket Launcher: [Ability, Pharah]
+- Rocket Punch: [Ability, Doomfist]
+- Role Damage: [Ability, General]
+- Role Support: [Ability, General]
+- Role Tank: [Ability, General]
+- Roll: [Ability, Wrecking Ball]
+- Rune of Disguise: [Ability, Kiriko, Mischief and Magic]
+- Scampy Stun: [Ability, Kiriko, Mischief and Magic]
+- Scatter Arrow: [Ability, Hanzo]
+- Scattergun: [Ability, Ashe]
+- Scrap Gun: [Ability, Roadhog]
+- Seismic Slam: [Ability, Doomfist]
+- Self Destruct: [Ability, D.Va]
+- Self Repair: [Ability, Bastion]
+- Sentry Turret: [Ability, Symmetra]
+- Shadow Step: [Ability, Reaper]
+- Shield Bash: [Ability, Brigitte]
+- Shield Generator: [Ability, Symmetra]
+- Shockwave: [General]
+- Shuriken: [Ability, Genji]
+- Sleep Dart: [Ability, Ana]
+- Smart Excavator: [Ability, Venture]
+- Snap Kick: [Ability, Zenyatta]
+- Snowball Blaster: [Ability, Mei]
+- Solar Rifle: [Ability, Illari]
+- Solar Rifle Alt: [Ability, Illari]
+- Sonic Amplifier: [Ability, Lúcio]
+- Sonic Arrow: [Ability, Hanzo]
+- Soulbind: [Ability]
+- Sound Barrier: [Ability, Lúcio]
+- Soundwave: [Ability, Lúcio]
+- Spike Guard: [Ability, Hazard]
+- Sprint: [Ability, "Soldier: 76"]
+- Stealth: [Ability, Sombra]
+- Steel Trap: [Ability, Junkrat]
+- Sticky Bombs: [Ability, Echo]
+- Storm Arrows: [Ability, Hanzo]
+- Storm Bow: [Ability, Hanzo]
+- Strike: [Ability, Unknown]
+- Supercharger: [Ability, Orisa]
+- Swift Step: [Ability, Kiriko]
+- Swift Strike: [Ability, Genji]
+- Sympathetic Recovery: [Ability, Unknown]
+- Tactical Visor: [Ability, "Soldier: 76"]
+- Take a Breather: [Ability, Roadhog]
+- Tectonic Shock: [Ability, Unknown]
+- Teleporter: [Ability, Symmetra]
+- Terra Surge: [Ability, Orisa]
+- Tesla Cannon: [Ability, Winston]
+- Thaw: [Ability, Unknown]
+- The Best Defense: [Ability, Doomfist]
+- The Reaping: [Ability, Reaper]
+- The Viper: [Ability, Ashe]
+- Thorn Volley: [Ability, Lifeweaver]
+- Total Mayhem: [Ability, Junkrat]
+- Transcendence: [Ability, Zenyatta]
+- Translocator: [Ability, Sombra]
+- Tree of Life: [Ability, Lifeweaver]
+- Tri Shot: [Ability, Echo]
+- Turbo Boost: [Ability, Lúcio]
+- Ultimate Play: [General]
+- Valkyrie: [Ability, Mercy]
+- Vault: [Ability]
+- Venom Mine: [Ability, Widowmaker]
+- Violent Leap: [Ability, Hazard]
+- Virus: [Ability, Sombra]
+- Volatile Chaingun: [Ability, Mauga]
+- Void Accelerator (Omnic Form): [Ability, Ramattra]
+- Void Barrier (Omnic Form): [Ability, Ramattra]
+- Wall Climb: [Ability, Genji, Hanzo]
+- Wall Ride: [Ability, Lúcio]
+- Wall Slam: [Ability]
+- Whip Shot: [Ability, Brigitte]
+- Whole Hog: [Ability, Roadhog]
+- Widows Kiss: [Ability, Widowmaker]
+- Wraith Form: [Ability, Reaper]
+- Yeti Trap: [Ability, Mei, Yeti Hunter]
 
 # Perks
-- Accelerando
-- Acrobatics
-- Adhesive Siphon
-- Advanced Teleportation
-- Agility Training
-- Airburst
-- Aluminium Frame
-- Anarchic Zeal
-- Anchor Bolts
-- Angelic Recovery
-- Armored Artillery
-- Ascendance
-- Assault Burst
-- Automated Healing
-- Bang Bang
-- Barrier Restoration
-- Bass Blowout
-- Battle Shout
-- Biotic Bounce
-- Biting Cold
-- Blade Twisting
-- Blast from the Past
-- Blink Packs
-- Bunny Stomp
-- Chain Boost
-- Chain Lightning
-- Charged Javelin
-- Chilling Reach
-- Cleansing Grasp
-- Combat Fuel
-- Concussive Implosion
-- Contamination
-- Covered In Dirt
-- Craftsman
-- Crusader's Resolve
-- Crushing Victory
-- Cryo-Storm
-- CTRL ALT ESC
-- Deadly Deux
-- Death's Shadow
-- Deep Leap
-- Deep Wounds
-- Dire Triggers
-- Dragon Fury
-- Dragon's Thirst
-- Drift Thrusters
-- Dual Thrusters
-- Duality
-- Ejection Suit
-- Energy Lance
-- Enhanced Duplication
-- Escape Plan
-- Ethical Nourishment
-- Excavation Exhilaration
-- Extended Mag
-- Familiar Vitals
-- Field Emergency
-- Field Medicine
-- Fiery Uptake
-- Firewalker
-- Flash Heal
-- Flashback
-- Fleeting Bulwark
-- Focused Aim
-- Focused Destruction
-- Fortune Teller
-- Foxtrot
-- Frag Cannon
-- Friendly Imaging
-- Fuel Stores
-- Full Salvo
-- Fully Loaded
-- Graviton Crush
-- Groggy
-- Groovin'
-- Gun Slingin'
-- Hang Time
-- Headhunter
-- Heat Dissipator
-- Heavy Landing
-- Heavy Rockets
-- Helix Shields
-- High Beams
-- Hog Toss
-- Hogdrogen Exposure
-- Hyper Boost
-- Hyper Strike
-- Invigorate
-- Jump-Ups
-- Kinetic Bandolier
-- Kinetic Cycle
-- Levitation
-- Life Cycle
-- Lifeweaving
-- Lindholm Explosives
-- Massive Impact
-- Master Blaster
-- Meditation
-- Morale Boost
-- Nitro Boost
-- Noise Violation
-- Off the Top
-- One-Two
-- Overcharged
-- Overloaded Turret
-- Pack Rat
-- Past Noon
-- Perfect Alignment
-- Permafrost
-- Power Matrix
-- Protective Barrier
-- Quantum Entanglement
-- Quick Draw
-- Quick Fix
-- Rapid Construction
-- Rapid Fire
-- Ravenous Wraith
-- Reconstitution
-- Recycled Pulse Munitions
-- Rending Recall
-- Revitalizing Barrier
-- Re-Boots
-- Rocket Boots
-- Savage Satiation
-- Scatter Arrows
-- Scoped Efficiency
-- Scrap Hook
-- Seismic Empowerment
-- Seismic Sense
-- Self-Repair
-- Sentry Capacity
-- Shield Battery
-- Shield Slam
-- Shield System
-- Short Circuit
-- Shrike
-- Shuffling
-- Sidewinder
-- Smart Bomb
-- SMART-R Excavator
-- Solar Power
-- Sonic Disruption
-- Soul Reaving
-- Spotter
-- Stack Overflow
-- Steamroller
-- Stim Pack
-- Summer Solstice
-- Sunburn
-- Superbloom
-- Survival of the Fittest
-- Tick Tock
-- Transfer Efficiency
-- Two Hearts
-- Uprush
-- Urgent Care
-- Vanish
-- Viper's Sting
-- Viral Efficacy
-- Whiplash
-- White Hat
-- Winged Reach
-- Yamagami Technique
-- Zenith Kick
+- Accelerando: [Perk, Lúcio]
+- Acrobatics: [Perk, Genji]
+- Adhesive Siphon: [Perk, Sojourn]
+- Advanced Teleportation: [Perk, Symmetra]
+- Agility Training: [Perk, 'Soldier: 76']
+- Airburst: [Perk, Ashe]
+- Aluminium Frame: [Perk, Junkrat]
+- Anarchic Zeal: [Perk, Hazard]
+- Anchor Bolts: [Perk, Torbjörn]
+- Angelic Recovery: [Perk, Mercy]
+- Armored Artillery: [Perk, Bastion]
+- Ascendance: [Perk, Zenyatta]
+- Assault Burst: [Perk, Baptiste]
+- Automated Healing: [Perk, Baptiste]
+- Bang Bang: [Perk, Cassidy]
+- Barrier Restoration: [Perk, Brigitte]
+- Bass Blowout: [Perk, Lúcio]
+- Battle Shout: [Perk, Junker Queen]
+- Biotic Bounce: [Perk, Ana]
+- Biting Cold: [Perk, Mei]
+- Blade Twisting: [Perk, Genji]
+- Blast from the Past: [Perk, Tracer]
+- Blink Packs: [Perk, Tracer]
+- Bunny Stomp: [Perk, D.Va]
+- CTRL ALT ESC: [Perk, Sombra]
+- Chain Boost: [Perk, Mercy]
+- Chain Lightning: [Perk, Winston]
+- Charged Javelin: [Perk, Orisa]
+- Chilling Reach: [Perk, Mei]
+- Cleansing Grasp: [Perk, Lifeweaver]
+- Combat Fuel: [Perk, Mauga]
+- Concussive Implosion: [Perk, Pharah]
+- Contamination: [Perk, Moira]
+- Covered In Dirt: [Perk, Venture]
+- Craftsman: [Perk, Torbjörn]
+- Crusader's Resolve: [Perk, Reinhardt]
+- Crushing Victory: [Perk, Reinhardt]
+- Cryo-Storm: [Perk, Mei]
+- Deadly Deux: [Perk, Widowmaker]
+- Death's Shadow: [Perk, Ramattra]
+- Deep Leap: [Perk, Hazard]
+- Deep Wounds: [Perk, Junker Queen]
+- Dire Triggers: [Perk, Ramattra]
+- Dragon Fury: [Perk, Hanzo]
+- Dragon's Thirst: [Perk, Genji]
+- Drift Thrusters: [Perk, Pharah]
+- Dual Thrusters: [Perk, Sojourn]
+- Duality: [Perk, Zenyatta]
+- Ejection Suit: [Perk, D.Va]
+- Energy Lance: [Perk, Zarya]
+- Enhanced Duplication: [Perk, Echo]
+- Escape Plan: [Perk, Widowmaker]
+- Ethical Nourishment: [Perk, Moira]
+- Excavation Exhilaration: [Perk, Venture]
+- Extended Mag: [Perk, Sojourn]
+- Familiar Vitals: [Perk, Juno]
+- Field Emergency: [Perk, 'Soldier: 76']
+- Field Medicine: [Perk, Baptiste]
+- Fiery Uptake: [Perk, Reinhardt]
+- Firewalker: [Perk, Mauga]
+- Flash Heal: [Perk, Mercy]
+- Flashback: [Perk, Tracer]
+- Fleeting Bulwark: [Perk, Orisa]
+- Focused Aim: [Perk, Widowmaker]
+- Focused Destruction: [Perk, Zenyatta]
+- Fortune Teller: [Perk, Kiriko]
+- Foxtrot: [Perk, Kiriko]
+- Frag Cannon: [Perk, Junkrat]
+- Friendly Imaging: [Perk, Echo]
+- Fuel Stores: [Perk, Pharah]
+- Full Salvo: [Perk, Echo]
+- Fully Loaded: [Perk, Torbjörn]
+- Graviton Crush: [Perk, Zarya]
+- Groggy: [Perk, Ana]
+- Groovin': [Perk, Lúcio]
+- Gun Slingin': [Perk, Cassidy]
+- Hang Time: [Perk, Wrecking Ball]
+- Headhunter: [Perk, Ana]
+- Heat Dissipator: [Perk, Orisa]
+- Heavy Landing: [Perk, Winston]
+- Heavy Rockets: [Perk, D.Va]
+- Helix Shields: [Perk, Pharah]
+- High Beams: [Perk, Echo]
+- Hog Toss: [Perk, Roadhog]
+- Hogdrogen Exposure: [Perk, Roadhog]
+- Hyper Boost: [Perk, Juno]
+- Hyper Strike: [Perk, Sigma]
+- Invigorate: [Perk, Roadhog]
+- Jump-Ups: [Perk, Zarya]
+- Kinetic Bandolier: [Perk, Mauga]
+- Kinetic Cycle: [Perk, Sigma]
+- Levitation: [Perk, Sigma]
+- Life Cycle: [Perk, Lifeweaver]
+- Lifeweaving: [Perk, Lifeweaver]
+- Lindholm Explosives: [Perk, Bastion]
+- Massive Impact: [Perk, Sigma]
+- Master Blaster: [Perk, Juno]
+- Meditation: [Perk, Genji]
+- Morale Boost: [Perk, Brigitte]
+- Nitro Boost: [Perk, Junkrat]
+- Noise Violation: [Perk, Lúcio]
+- Off the Top: [Perk, Hazard]
+- One-Two: [Perk, Doomfist]
+- Overcharged: [Perk, Sojourn]
+- Overloaded Turret: [Perk, Torbjörn]
+- Pack Rat: [Perk, Wrecking Ball]
+- Past Noon: [Perk, Cassidy]
+- Perfect Alignment: [Perk, Symmetra]
+- Permafrost: [Perk, Mei]
+- Power Matrix: [Perk, Doomfist]
+- Protective Barrier: [Perk, Orisa]
+- Quantum Entanglement: [Perk, Tracer]
+- Quick Draw: [Perk, Cassidy]
+- Quick Fix: [Perk, Brigitte]
+- Rapid Construction: [Perk, Illari]
+- Rapid Fire: [Perk, Ashe]
+- Ravenous Wraith: [Perk, Ramattra]
+- Re-Boots: [Perk, Juno]
+- Reconstitution: [Perk, Hazard]
+- Recycled Pulse Munitions: [Perk, 'Soldier: 76']
+- Rending Recall: [Perk, Junker Queen]
+- Revitalizing Barrier: [Perk, Winston]
+- Rocket Boots: [Perk, Baptiste]
+- SMART-R Excavator: [Perk, Venture]
+- Savage Satiation: [Perk, Junker Queen]
+- Scatter Arrows: [Perk, Hanzo]
+- Scoped Efficiency: [Perk, Widowmaker]
+- Scrap Hook: [Perk, Roadhog]
+- Seismic Empowerment: [Perk, Doomfist]
+- Seismic Sense: [Perk, Venture]
+- Self-Repair: [Perk, Bastion]
+- Sentry Capacity: [Perk, Symmetra]
+- Shield Battery: [Perk, Symmetra]
+- Shield Slam: [Perk, Reinhardt]
+- Shield System: [Perk, D.Va]
+- Short Circuit: [Perk, Winston]
+- Shrike: [Perk, Ana]
+- Shuffling: [Perk, Kiriko]
+- Sidewinder: [Perk, Ashe]
+- Smart Bomb: [Perk, Bastion]
+- Solar Power: [Perk, Illari]
+- Sonic Disruption: [Perk, Hanzo]
+- Soul Reaving: [Perk, Ramattra]
+- Spotter: [Perk, Zarya]
+- Stack Overflow: [Perk, Sombra]
+- Steamroller: [Perk, Wrecking Ball]
+- Stim Pack: [Perk, 'Soldier: 76']
+- Summer Solstice: [Perk, Illari]
+- Sunburn: [Perk, Illari]
+- Superbloom: [Perk, Lifeweaver]
+- Survival of the Fittest: [Perk, Doomfist]
+- Tick Tock: [Perk, Junkrat]
+- Transfer Efficiency: [Perk, Wrecking Ball]
+- Two Hearts: [Perk, Mauga]
+- Uprush: [Perk, Moira]
+- Urgent Care: [Perk, Kiriko]
+- Vanish: [Perk, Moira]
+- Viper's Sting: [Perk, Ashe]
+- Viral Efficacy: [Perk, Sombra]
+- Whiplash: [Perk, Brigitte]
+- White Hat: [Perk, Sombra]
+- Winged Reach: [Perk, Mercy]
+- Yamagami Technique: [Perk, Hanzo]
+- Zenith Kick: [Perk, Zenyatta]
