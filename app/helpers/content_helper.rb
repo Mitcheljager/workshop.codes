@@ -193,7 +193,6 @@ module ContentHelper
 
   def ability_name_to_icon_url(ability, size = 50)
     string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "") }.png"
-    abort ability.inspect unless asset_exists?(string)
     asset_exists?(string) ? string : nil
   end
 
