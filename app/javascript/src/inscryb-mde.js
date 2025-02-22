@@ -170,6 +170,7 @@ class InitialiseInscrybeMDE {
 
     document.removeAndAddEventListener("click", event => {
       if (event.target?.href?.includes("#")) event.preventDefault()
+      this.possiblyCloseDropdown(event.target)
     })
   }
 
@@ -512,5 +513,17 @@ class InitialiseInscrybeMDE {
     const offset = 20
 
     if (left - 10 < 0) element.style.right = `${left - offset}px`
+  }
+
+  possiblyCloseDropdown(element) {
+    const openDropdownButtons = document.querySelectorAll(".dropdown-open")
+
+    openDropdownButtons.forEach(button => {
+      if (element === button) return
+      if (button.contains(element)) return
+
+      button.classList.remove("dropdown-open")
+      button.querySelector(".editor-dropdown")?.remove()
+    })
   }
 }
