@@ -36,6 +36,8 @@ export function insertAbilityIconSelect(element, mde, codemirror) {
 
   button.append(dropdownElement)
 
+  positionDropdown(dropdownElement)
+
   input.focus()
 }
 
@@ -86,4 +88,11 @@ function onInput(event, abilitiesElement, codemirror, abilities) {
   }
 
   buildItems(abilitiesElement, codemirror, filteredAbilities)
+}
+
+function positionDropdown(element) {
+  const { left } = element.getBoundingClientRect()
+  const offset = 20
+
+  if (left - 10 < 0) element.style.right = `${left - offset}px`
 }

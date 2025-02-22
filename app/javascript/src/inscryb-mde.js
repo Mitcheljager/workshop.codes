@@ -256,6 +256,8 @@ class InitialiseInscrybeMDE {
       })
 
       button.append(dropdownElement)
+
+      this.positionDropdown(dropdownElement)
     } else {
       button.querySelector(".editor-dropdown").remove()
     }
@@ -360,6 +362,8 @@ class InitialiseInscrybeMDE {
     textElement.append(labelElement)
     dropdownElement.append(textElement)
     button.append(dropdownElement)
+
+    this.positionDropdown(dropdownElement)
   }
 
   toggleVideoUploader() {
@@ -426,6 +430,8 @@ class InitialiseInscrybeMDE {
     textElement.append(labelElement)
     dropdownElement.append(textElement)
     button.append(dropdownElement)
+
+    this.positionDropdown(dropdownElement)
   }
 
   toggleWikiSearch() {
@@ -499,5 +505,12 @@ class InitialiseInscrybeMDE {
     const output = `[${text}](${link})`
 
     this.codemirror.replaceSelection(output)
+  }
+
+  positionDropdown(element) {
+    const { left } = element.getBoundingClientRect()
+    const offset = 20
+
+    if (left - 10 < 0) element.style.right = `${left - offset}px`
   }
 }
