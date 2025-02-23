@@ -83,7 +83,6 @@
     <p>View inspector logs right from your browser, allowing you to more easily copy over values from the Workshop.</p>
     <p>Use "Log To Inspector" to have the log appear here.</p>
     <p>Make sure you have enabled "Enable Workshop Inspector Log File" in your Overwatch settings under "Settings &gt; Gameplay &gt; General &gt; Custom Games - Workshop".</p>
-    <p>Unfortunately with Season 11 this setting has disappeared.</p>
   {/if}
 
   {#if supported}
