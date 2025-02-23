@@ -1,6 +1,6 @@
 <script lang="ts">
   interface Props {
-    animating?: boolean;
+    animating?: boolean
   }
 
   const { animating = false }: Props = $props()

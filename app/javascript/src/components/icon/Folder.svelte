@@ -1,6 +1,6 @@
 <script lang="ts">
   interface Props {
-    fill?: boolean
+    fill?: boolean,
     color?: string
   }
 

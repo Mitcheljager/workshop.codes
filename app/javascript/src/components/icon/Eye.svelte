@@ -1,6 +1,6 @@
 <script lang="ts">
   interface Props {
-    crossed?: boolean
+    crossed?: boolean,
     [key: string]: any
   }
 
