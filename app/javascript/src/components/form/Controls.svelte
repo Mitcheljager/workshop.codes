@@ -1,14 +1,23 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte"
   import { flip } from "svelte/animate"
   import { fade } from "svelte/transition"
   import Sortable from "sortablejs"
 
-  export let _controls = []
-  export let name
+  interface Control {
+    buttons: Array<string | { "Custom": string }>,
+    description: string
+  }
 
-  let controls = _controls?.length ? _controls : [{ buttons: [] }]
-  let listElement
+  interface Props {
+    _controls: Control[],
+    name: string
+  }
+
+  const { _controls = [], name }: Props = $props()
+
+  let controls: Control[] = $state(_controls?.length ? _controls : [{ buttons: [], description: "" }])
+  let listElement: HTMLElement | null = $state(null)
 
   const values = [
     ["None", ""],
@@ -25,49 +34,51 @@
     ["Ultimate", "Ultimate"]
   ]
 
-  $: value = filterEmpty(controls)
+  const value: string = $derived(filterEmpty())
 
   onMount(createSortable)
 
-  function createSortable() {
-    Sortable.create(listElement, {
+  function createSortable(): void {
+    Sortable.create(listElement!, {
       handle: "[data-role='controls-item-move-handle']",
       animation: 100,
       store: {
+        get: () => [],
         set: updateOrder
       }
     })
   }
 
-  function filterEmpty() {
-    if (!controls.length) return
+  function filterEmpty(): string {
+    if (!controls.length) return ""
 
-    const filtered = JSON.parse(JSON.stringify(controls)).filter(item => {
-      if (!item.description) return false
+    const filtered = JSON.parse(JSON.stringify(controls)).filter((control: Control) => {
+      if (!control.description) return false
 
-      item.buttons = item.buttons.filter(button => button != "")
+      control.buttons = control.buttons.filter(button => button != "")
       return true
     })
 
     return JSON.stringify(filtered)
   }
 
-  function updateOrder() {
-    const listItems = listElement.querySelectorAll("[data-id]")
-    const order = Array.from(listItems).map(item => parseInt(item.dataset.id))
+  function updateOrder(): void {
+    const listItems = Array.from(listElement!.querySelectorAll("[data-id]")) as HTMLElement[]
+    const order = listItems.map(item => parseInt(item.dataset.id!))
 
     controls = order.map(index => controls[index])
   }
 
-  function setCustom(controlsIndex, buttonIndex) {
-    controls[controlsIndex].buttons[buttonIndex] = { "Custom": event.target.value }
+  function setCustom(event: Event & { currentTarget: HTMLInputElement }, controlsIndex: number, buttonIndex: number): void {
+    const value = event.currentTarget.value
+    controls[controlsIndex].buttons[buttonIndex] = { "Custom": value }
   }
 
-  function add() {
-    controls = [...controls, { buttons: [] }]
+  function add(): void {
+    controls = [...controls, { buttons: [], description: "" }]
   }
 
-  function remove(index) {
+  function remove(index: number): void {
     controls = controls.filter((c, i) => i != index)
   }
 </script>
@@ -98,8 +109,8 @@
 
               {#if control?.buttons?.[i] == "Custom" || typeof control?.buttons?.[i] === "object"}
                 <input
-                  value={control.buttons[i]["Custom"] || ""}
-                  on:change={() => setCustom(index, i)}
+                  value={(control.buttons[i] as { Custom?: string })?.Custom || ""}
+                  oninput={(event) => setCustom(event, index, i)}
                   type="text"
                   name="controls-item-button-{i}"
                   class="form-input controls-form-item__custom"
@@ -123,12 +134,12 @@
             aria-label="Control description"
             maxlength=500 />
 
-          <button href="#" data-role="controls-item-move-handle" on:click|preventDefault>⇅</button>
-          <button on:click|preventDefault={() => remove(index)}>🗑️</button>
+          <button type="button" data-role="controls-item-move-handle">⇅</button>
+          <button type="button" onclick={() => remove(index)}>🗑️</button>
         </div>
       </div>
     {/each}
   </div>
 
-  <button class="button button--secondary" on:click|preventDefault={add}>+ Add line</button>
+  <button type="button" class="button button--secondary" onclick={add}>+ Add line</button>
 </div>
