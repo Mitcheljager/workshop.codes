@@ -1,18 +1,21 @@
-<script>
-  export let contract = false
+<script lang="ts">
+  interface Props {
+    contract?: boolean,
+    [key: string]: any
+  }
+
+  const { contract = false, ...rest }: Props = $props()
 
   const ARROW_STYLE = "fill: currentColor; transform-origin: center; transform-box: fill-box;"
 
-  $: cssRotation = contract ? "rotate(180deg)" : ""
-
+  const cssRotation = $derived(contract ? "rotate(180deg)" : "")
 </script>
 
 <svg
-  {...$$restProps}
+  {...rest}
   width="24"
   height="24"
-  viewBox="0 0 24 24"
->
+  viewBox="0 0 24 24">
   <path
     d="M 2,3.41421 V 7 C 2,7.55228 1.55228,8 1,8 0.447715,8 0,7.55228 0,7 V 1 C 0,0.447715 0.447715,0 1,0 H 7 C 7.55228,0 8,0.447715 8,1 8,1.55228 7.55228,2 7,2 H 3.41421 l 5.2929,5.29289 c 0.39052,0.39053 0.39052,1.02369 0,1.41422 -0.39053,0.39052 -1.02369,0.39052 -1.41422,0 z"
     style={ARROW_STYLE}
