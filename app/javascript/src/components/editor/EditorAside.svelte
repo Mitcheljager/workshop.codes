@@ -21,7 +21,9 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div bind:this={element} tabindex="0">
-  <EditorList />
+  {#key $items.length}
+    <EditorList />
+  {/key}
 
   {#if !$items?.length}
     <p class="mt-0 mb-0 pl-1/4 pr-1/4 small text-dark"><em>Start by creating a new item using the button below.</em></p>

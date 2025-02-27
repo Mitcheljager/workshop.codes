@@ -8,10 +8,17 @@
 
   export let parent = null
 
+  // https://github.com/sveltejs/svelte/issues/11826
+  // With Svelte 5 the state of the dom is tightly linked to their state. When sorting items with Sortable that dom state
+  // isn't matched correctly. Instead of making the list in the dom reactive to `$items`, we write it to a const.
+  // The order of the list is updated by Sortable only. The store is still updated under the hood.
+  // However, this prevents the list from updating correctly when adding/removing items from the list. To fix this,
+  // The upper most EditorList component (in EditorAside) is wrapped in a key equal to $items.length, re-rendering the
+  // entire list when anything is added or removed. Is this good enough? Let's find out!
+  const itemsInParent = getItemsInParent()
+
   let element
   let isHoldingCtrl
-
-  $: itemsInParent = getItemsInParent($items)
 
   onMount(() => {
     try {
@@ -56,7 +63,7 @@
     $items = [...$items]
   }
 
-  function getItemsInParent() {
+  function getItemsInParent(_items) {
     return $sortedItems.filter(i => parent ? i.parent == parent.id : !i.parent )
   }
 
@@ -78,7 +85,7 @@
     </div>
   {/each}
 
-  {#if $items.length && !itemsInParent.length}
+  {#if $items.length && !getItemsInParent($items).length}
     <em class="pl-1/4 ml-1/8 text-dark">Empty folder</em>
   {/if}
 </div>
