@@ -1,7 +1,7 @@
 <script>
   import EditorItemCreate from "@components/editor/EditorItemCreate.svelte"
   import EditorList from "@components/editor/EditorList.svelte"
-  import { items } from "@stores/editor"
+  import { currentProjectUUID, items } from "@stores/editor"
 
   let element
 
@@ -21,7 +21,7 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div bind:this={element} tabindex="0">
-  {#key $items.length}
+  {#key $currentProjectUUID + $items.length + $items.filter(i => i.hidden).length}
     <EditorList />
   {/key}
 
