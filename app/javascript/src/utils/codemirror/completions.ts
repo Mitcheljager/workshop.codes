@@ -15,7 +15,13 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
   let add = word.text.search(/\S|$/)
   if (word.from + add == word.to && !context.explicit) return null
 
-  const wordFromPeriod = word.text.trim().slice(0, word.text.trim().indexOf(".") + 1)
+  const periodSeparatedWords = word.text.trim().split(".").map(w => w + ".")
+  const phraseBeforePeriod = word.text.trim().slice(0, word.text.trim().lastIndexOf(".") + 1) // Matches full phrase before last period
+  const wordBeforeLastPeriod = periodSeparatedWords[periodSeparatedWords.length - 2] || "" // Matches last word between last and second to last period
+
+  // Start matching completions from the last period.
+  // For instance; Global.somePlayer.playerVar will match everything after Global.somePlayer.
+  if (periodSeparatedWords.length) add += phraseBeforePeriod.length
 
   // There's probably a better way of doing this
   let specialOverwrite = null
@@ -23,11 +29,9 @@ export function getCompletions(context: CompletionContext): CompletionResult | n
     specialOverwrite = get(mixinsMap)
   } else if (word.text.includes("@t")) {
     specialOverwrite = get(translationsMap)
-  } else if (word.text.includes("Global.")) {
-    add += wordFromPeriod.length // Start from `Global.`
+  } else if (wordBeforeLastPeriod.includes("Global.")) {
     specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Global Variable")
-  } else if (["Local Player.", "Event Player.", "Healee.", "Healer.", "Attacker.", "Victim."].includes(wordFromPeriod)) {
-    add += wordFromPeriod.length // Start from `Match.`
+  } else if (["Local Player.", "Event Player.", "Healee.", "Healer.", "Attacker.", "Victim."].includes(wordBeforeLastPeriod)) {
     specialOverwrite = get(variablesMap).filter((v: Completion) => v.detail === "Player Variable")
   } else if (get(settings)["context-based-completions"]) {
     // Limit completions if the cursor is position for a parameter object key, if the parameter object is valid.
