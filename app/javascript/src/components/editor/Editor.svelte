@@ -324,7 +324,7 @@
   <div class="alerts">
     <div class="alert alert--warning">
       You are not signed in and nothing you do will be saved!
-      <a href="/login">Please sign in</a>
+      <a class="nowrap" href="/login">Please sign in</a>
     </div>
   </div>
 {/if}
