@@ -9,8 +9,8 @@
 </script>
 
 <div></div>
-<div class="p-1/2 editor__scrollable w-100">
-  <div style="max-width: 40rem; margin: 0 auto">
+<div class="editor__scrollable w-100">
+  <div class="pl-1/4 pr-1/4" style="max-width: 40rem; margin: 0 auto">
     <h1 class="mb-0">Welcome to the Workshop.codes <mark>Overwatch Workshop Script Editor</mark></h1>
     <small class="text-dark">Catchy name, right?</small>
 
