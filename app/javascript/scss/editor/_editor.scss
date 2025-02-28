@@ -212,6 +212,7 @@ $separator-color: darken($bg-darker, 5%);
   bottom: 0;
   right: 0;
   opacity: 0;
+  z-index: 5;
   cursor: ns-resize;
 
   @include media-min(mbl) {
