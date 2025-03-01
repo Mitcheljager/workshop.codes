@@ -46,11 +46,11 @@
       {:else}
         <p>Create a new project to get started. Import your existing script or start from zero.</p>
 
-        <button class="button mt-1/8" on:click={() => ($isSignedIn ? createProject : createDemoProject)("My First Project")}>
+        <button class="button mb-1/8" on:click={() => ($isSignedIn ? createProject : createDemoProject)("My First Project")}>
           Create your first project
         </button>
 
-        <a class="button button--ghost mt-1/8" href="https://workshop.codes/editor?uuid=abb302fc-46ef-4b4c-b7db-e09488463477" target="_blank">Check out a sample project</a>
+        <a class="button button--ghost mb-1/8" href="https://workshop.codes/editor?uuid=abb302fc-46ef-4b4c-b7db-e09488463477" target="_blank">Check out a sample project</a>
       {/if}
     </div>
   </div>
