@@ -47,17 +47,13 @@
 
   function updateOrder() {
     const elements = document.querySelectorAll("[data-item-id]")
-    elements.forEach((e, i) => {
-      const id = e.dataset.itemId
-      if (!id) return
+    elements.forEach((element, i) => {
+      const item = $items.find(item => item.id === element.dataset.itemId)
 
-      const item = $items.filter(item => item.id === id)[0]
       if (!item) return
 
       item.position = i
-
-      const parent = e.parentNode.closest("[data-item-id]")
-      item.parent = parent ? parent.dataset.itemId : null
+      item.parent = element.parentNode.closest("[data-item-id]")?.dataset.itemId || null
     })
 
     $items = [...$items]
