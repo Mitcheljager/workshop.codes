@@ -24,7 +24,7 @@
 
     new FetchRails(`/projects/${$currentProject.uuid}`, { project: { content } }).post({ method: "put" })
       .then(data => {
-        if (!data) throw Error("Create failed")
+        if (!data) throw Error("Save failed, no data was returned")
 
         lastSaveContent = content
 
@@ -37,7 +37,7 @@
       })
       .catch(error => {
         Bugsnag.notify(error)
-        alert("Something went wrong while saving, please try again")
+        alert("Something went wrong while saving, please try again. If the error persists, please contact the developers on Discord with the following error:\n\n" + error)
       })
       .finally(() => {
         loading = false
