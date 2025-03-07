@@ -13,6 +13,11 @@
     transition-delay: 180ms;
     background: $bg-darker;
 
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+
     &:focus {
       box-shadow: 0 0 0 2px $white;
       background: lighten($bg-dark, 5%);
