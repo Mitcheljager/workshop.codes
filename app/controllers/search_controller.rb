@@ -99,6 +99,7 @@ class SearchController < ApplicationController
     posts = posts.select { |post| helpers.has_player_range?(post) && to_range(params[:players]).overlaps?((post.min_players)..(post.max_players)) } if params[:players]
     posts = posts.select { |post| post.code.upcase.start_with?(params[:code].upcase) } if params[:code]
 
+    posts = posts.first(200)
     posts = Kaminari.paginate_array(posts).page(params[:page])
   end
 
