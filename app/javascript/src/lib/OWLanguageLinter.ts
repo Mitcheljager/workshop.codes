@@ -254,7 +254,7 @@ function checkTranslations(content: string): void {
         const char = content[walk]
         if (char == "\"") inString = !inString
         if (!inString) {
-          if ([";", "{", "}"].includes(char)) break
+          if ([";"].includes(char)) break
           if (char == "@" && content.slice(walk, walk + 6) == "@mixin") break
           if (char == "(") lastParenAtIndex = walk
         }
