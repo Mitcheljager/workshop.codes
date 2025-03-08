@@ -15,6 +15,7 @@
 
   function doCompile(singleLanguageOverride = null) {
     compiling = true
+    dropdownActive = false
 
     try {
       const compiled = compile(null, singleLanguageOverride)
