@@ -12,8 +12,8 @@ import { convertTranslations } from "@utils/compiler/translations"
 import { compileVariables } from "@utils/compiler/variables"
 import { get } from "svelte/store"
 
-export function compile(overwriteContent = ""): string {
-  let joinedItems = overwriteContent || get(flatItems)
+export function compile(overrideContent = "", singleLanguageOverride = null): string {
+  let joinedItems = overrideContent || get(flatItems)
 
   joinedItems = removeComments(joinedItems)
 
@@ -28,7 +28,7 @@ export function compile(overwriteContent = ""): string {
   joinedItems = evaluateForLoops(joinedItems)
   joinedItems = evaluateEachLoops(joinedItems)
   joinedItems = evaluateConditionals(joinedItems)
-  joinedItems = convertTranslations(joinedItems)
+  joinedItems = convertTranslations(joinedItems, singleLanguageOverride)
 
   const variables = compileVariables(joinedItems)
   const subroutines = compileSubroutines(joinedItems)

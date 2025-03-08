@@ -84,5 +84,15 @@ describe("translations.js", () => {
       }`
       expect(disregardWhitespace(convertTranslations(input))).toBe(disregardWhitespace(expectedOutput))
     })
+
+    it("Should replace with given language override when given and not include dynamic language strings", () => {
+      selectedLanguages.set(["en-US"])
+      translationKeys.set({ "Some Key": { "en-US": "Some Value" } })
+
+      const input = "test @translate(\"Some Key\")"
+      const expectedOutput = "test Custom String(\"Some Value\")"
+
+      expect(convertTranslations(input, "en-US")).toBe(expectedOutput)
+    })
   })
 })

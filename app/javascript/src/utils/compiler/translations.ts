@@ -1,9 +1,10 @@
 import { languageOptions } from "@lib/languageOptions"
+import type { Language } from "@src/types/editor"
 import { defaultLanguage, selectedLanguages, translationKeys } from "@stores/translationKeys"
 import { getClosingBracket, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
 
-export function convertTranslations(joinedItems: string): string {
+export function convertTranslations(joinedItems: string, singleLanguageOverride: Language | null = null): string {
   if (!get(selectedLanguages)?.length) return joinedItems
   if (!Object.keys(get(translationKeys) || {})?.length) return joinedItems
 
@@ -25,17 +26,21 @@ export function convertTranslations(joinedItems: string): string {
 
     const eachLanguageStrings: string[] = []
     get(selectedLanguages).forEach((language) => {
-      const translation = get(translationKeys)[key]?.[language] || get(translationKeys)[key]?.[get(defaultLanguage)] || key
+      const translation = getValueForLanguage(key, language)
       eachLanguageStrings.push(`Custom String("${translation}"${splitArguments.length > 1 ? ", " : ""}${splitArguments.slice(1).join(", ")})`)
     })
 
-    const replaceWith = `Value In Array(
+    const replaceWith = singleLanguageOverride ?
+      `Custom String("${getValueForLanguage(key, singleLanguageOverride)}")` :
+      `Value In Array(
       Array(${eachLanguageStrings.join(", ")}),
       Max(False, Index Of Array Value(Global.WCDynamicLanguages, Custom String("{0}", Map(Practice Range), Null, Null)))
     )`
 
     joinedItems = replaceBetween(joinedItems, replaceWith, match.index, match.index + full.length)
   }
+
+  if (singleLanguageOverride) return joinedItems
 
   // Array with custom string for Practice Range in each selected language
   const customStringArrayForEachLanguage = get(selectedLanguages).map(language => `Custom String("${languageOptions[language].detect}")`)
@@ -46,4 +51,8 @@ export function convertTranslations(joinedItems: string): string {
   }`
 
   return joinedItems + rule
+}
+
+function getValueForLanguage(key: string, language: Language): string {
+  return get(translationKeys)[key]?.[language] || get(translationKeys)[key]?.[get(defaultLanguage)] || key
 }
