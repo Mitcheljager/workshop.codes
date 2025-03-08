@@ -35,19 +35,28 @@ class SearchController < ApplicationController
       return
     end
 
+    if (params[:page].present? && Integer(params[:page]) > 10)
+      @posts = []
+      return
+    end
+
     begin
       @posts = get_filtered_posts(params)
       @users = get_search_users(params)
     rescue Elasticsearch::Transport::Transport::ServerError => e
       Bugsnag.notify(e) if Rails.env.production?
+
       @posts = Kaminari.paginate_array([]).page(params[:page])
       @error = "Something went wrong. Please try again later."
+
       flash[:error] = @error
+
       respond_to do |format|
         format.html { render "filter/index", status: 500 }
         format.js { render "posts/infinite_scroll_posts", status: 500 }
         format.json { render json: { message: @message }, status: 500 }
       end
+
       return
     end
 
@@ -68,6 +77,7 @@ class SearchController < ApplicationController
   def get_filtered_posts(params)
     if params[:search].present? && ENV["BONSAI_URL"]
       ids = Post.search(params[:search])
+
       posts = Post.includes(:user)
                    .where(id: ids)
                    .order_by_ids(ids)
