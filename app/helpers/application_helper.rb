@@ -51,7 +51,7 @@ module ApplicationHelper
       "LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(#{column}, ' ', '-'), ':', ''), '.', ''), '''', ''), '/', '')) LIKE ?"
     else
       # PostgreSQL
-      "LOWER(REGEXP_REPLACE(#{column}, '[ :.'\\'/]', '', 'g')) LIKE ?"
+      "LOWER(REGEXP_REPLACE(REGEXP_REPLACE(#{column}, ' ', '-'), '[ :.''/]', '', 'g')) LIKE ?"
     end
   end
 
