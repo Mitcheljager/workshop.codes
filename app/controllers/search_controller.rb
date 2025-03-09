@@ -35,11 +35,6 @@ class SearchController < ApplicationController
       return
     end
 
-    if (params[:page].present? && Integer(params[:page]) > 10)
-      @posts = []
-      return
-    end
-
     begin
       @posts = get_filtered_posts(params)
       @users = get_search_users(params)
@@ -96,7 +91,7 @@ class SearchController < ApplicationController
 
     posts = posts.where("UPPER(code) LIKE ?", "#{params[:code].upcase}%") if params[:code].present?
     posts = posts.order("#{sort_switch} DESC") if params[:sort].present?
-    posts = posts.limit(200).page(params[:page])
+    posts = posts.page(params[:page])
   end
 
   def get_search_users(params)
