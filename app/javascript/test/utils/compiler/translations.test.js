@@ -36,6 +36,20 @@ describe("translations.js", () => {
       expect(disregardWhitespace(convertTranslations(input))).toBe(disregardWhitespace(expectedOutput))
     })
 
+    it("Should include custom string parameters when given", () => {
+      const input = "test @translate(\"Some Key\", \"a\", \"b\", \"c\")"
+      const expectedOutput = `
+      test Value In Array(
+        Array(Custom String("Some Value", "a", "b", "c")),
+        Max(False, Index Of Array Value(Global.WCDynamicLanguages, Custom String("{0}", Map(Practice Range), Null, Null)))
+      )
+      rule("Workshop.codes Editor Dynamic Language - Set Languages") {
+        event { Ongoing - Global; }
+        actions { Global.WCDynamicLanguages = Array(Custom String("Practice Range")); }
+      }`
+      expect(disregardWhitespace(convertTranslations(input))).toBe(disregardWhitespace(expectedOutput))
+    })
+
     it("Should use the key if no translation is found for given language", () => {
       translationKeys.set({ "Some Key": { } })
 
@@ -91,6 +105,16 @@ describe("translations.js", () => {
 
       const input = "test @translate(\"Some Key\")"
       const expectedOutput = "test Custom String(\"Some Value\")"
+
+      expect(convertTranslations(input, "en-US")).toBe(expectedOutput)
+    })
+
+    it("Should keep custom string parameters when compiling to a single language", () => {
+      selectedLanguages.set(["en-US"])
+      translationKeys.set({ "Some Key": { "en-US": "Some Value" } })
+
+      const input = "test @translate(\"Some Key\", \"a\", \"b\", \"c\")"
+      const expectedOutput = "test Custom String(\"Some Value\", \"a\", \"b\", \"c\")"
 
       expect(convertTranslations(input, "en-US")).toBe(expectedOutput)
     })
