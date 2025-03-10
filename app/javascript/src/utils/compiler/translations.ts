@@ -24,16 +24,15 @@ export function convertTranslations(joinedItems: string, singleLanguageOverride:
     const splitArguments = splitArgumentsString(argumentsString) || []
     const key = splitArguments[0].replaceAll("\"", "")
 
-    const eachLanguageStrings: string[] = []
-    get(selectedLanguages).forEach((language) => {
+    const generateLanguageString = (language: Language): string => {
       const translation = getValueForLanguage(key, language)
-      eachLanguageStrings.push(`Custom String("${translation}"${splitArguments.length > 1 ? ", " : ""}${splitArguments.slice(1).join(", ")})`)
-    })
+      return `Custom String("${translation}"${splitArguments.length > 1 ? ", " : ""}${splitArguments.slice(1).join(", ")})`
+    }
 
     const replaceWith = singleLanguageOverride ?
-      `Custom String("${getValueForLanguage(key, singleLanguageOverride)}")` :
+      generateLanguageString(singleLanguageOverride) :
       `Value In Array(
-      Array(${eachLanguageStrings.join(", ")}),
+      Array(${get(selectedLanguages).map((language) => generateLanguageString(language)).join(", ")}),
       Max(False, Index Of Array Value(Global.WCDynamicLanguages, Custom String("{0}", Map(Practice Range), Null, Null)))
     )`
 
