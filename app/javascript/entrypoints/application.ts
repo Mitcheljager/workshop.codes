@@ -87,4 +87,5 @@ document.addEventListener("turbolinks:before-cache", () => {
   numPlayersSlider.destroy()
   sticky.destroy()
   dynamicMaxHeight.destroy()
+  dropdown.closeDropdown(null, true)
 })

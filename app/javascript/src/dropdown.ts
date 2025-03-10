@@ -19,11 +19,11 @@ export function toggleDropdown(event: Event): void {
   target.classList.toggle("active", JSON.parse(target.dataset.active))
 }
 
-export function closeDropdown(event: Event, closeActive = false): void {
+export function closeDropdown(event: Event | null, closeActive = false): void {
   const activeDropdown = document.querySelector("[data-dropdown-content].active") as HTMLElement
   if (!activeDropdown) return
 
-  const eventTarget = (event.target as HTMLElement).closest("[data-dropdown]")
+  const eventTarget = (event?.target as HTMLElement)?.closest("[data-dropdown]")
   if (!closeActive && eventTarget && eventTarget.querySelector("[data-dropdown-content]") == activeDropdown) return
 
   activeDropdown.classList.remove("active")
