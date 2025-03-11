@@ -315,8 +315,10 @@ function checkTranslations(content: string): void {
     }
 
     if (translateArguments.length > 1 && isStatic) {
+      const secondArgumentStart = translateArgumentsString.indexOf(translateArguments[1])
+
       diagnostics.push({
-        from: match.index + match[0].length + translateArguments[0].length,
+        from: translateStartParenthesisIndex + secondArgumentStart + 1,
         to: translateEndParenthesisIndex,
         severity: "warning",
         message: "Additional arguments in static translations will have no effect."
