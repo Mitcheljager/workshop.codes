@@ -4,9 +4,9 @@ import { get } from "svelte/store"
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 import type { EditorView } from "codemirror"
 import { type Diagnostic } from "@codemirror/lint"
-import type { Severity } from "@src/types/editor"
+import type { Severity, TranslationKey } from "@src/types/editor"
 import type { Line } from "@codemirror/state"
-import { translationKeys } from "@src/stores/translationKeys"
+import { defaultLanguage, translationKeys } from "@src/stores/translationKeys"
 import { Modal } from "@src/constants/Modal"
 
 let diagnostics: Diagnostic[] = []
@@ -317,9 +317,16 @@ function checkTranslations(content: string): void {
         actions: [{
           name: "Create translation key",
           apply() {
+            const newTranslation: TranslationKey = {}
+            const currentDefaultLanguage = get(defaultLanguage)
+
+            if (currentDefaultLanguage) {
+              newTranslation[currentDefaultLanguage] = translateKey
+            }
+
             translationKeys.update((keys) => ({
               ... keys,
-              [translateKey]: {}
+              [translateKey]: newTranslation
             }))
 
             modal.show(Modal.TranslationKeys, {
