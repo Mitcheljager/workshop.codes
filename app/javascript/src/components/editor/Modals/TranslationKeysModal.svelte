@@ -6,7 +6,9 @@
   import { copyValueToClipboard } from "@src/copy"
   import { submittable } from "@components/actions/submittable"
 
-  let selectedKey = null
+  export let initialSelectedKey
+
+  let selectedKey = initialSelectedKey
   let showLanguageSettings = false
   let error = ""
   let newKeyInput
