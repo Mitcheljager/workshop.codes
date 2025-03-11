@@ -21,5 +21,5 @@
 </script>
 
 {#if component}
-  <svelte:component this={component} />
+  <svelte:component this={component} {... $modal.parameters ?? {}} />
 {/if}
