@@ -79,6 +79,13 @@
   Some translation &#123;0&#125; with an icon in the middle
 </code>
 
+<p class="text-small mb-0">
+  Include this key as a static string replacement using
+  <code style="color: var(--color-punctuation)">
+    <span style="color: var(--color-custom-keyword)">@translate</span><span style="color: var(--color-variable)">.static</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>)
+  </code>
+</p>
+
 <hr class="mt-1/4 mb-1/4">
 
 {#if $translationKeys[selectedKey]}

@@ -244,47 +244,55 @@ function checkMixins(content: string): void {
 }
 
 function checkTranslations(content: string): void {
-  const regex = /(@translate)[\s\n]*\(/g
+  const regex = /(@translate(?<isStatic>\.static)?)\s*\(/g
+
   let match
   while ((match = regex.exec(content)) != null) {
-    let walk = match.index
-    let parenthesisBeforeAtIndex = -1
-    let inString = false
-    while(walk) {
-      const char = content[walk]
-      if (char == "\"") inString = !inString
-      if (!inString) {
-        if ([";"].includes(char)) break
-        if (char == "@" && content.slice(walk, walk + 6) == "@mixin") break
-        if (char == "(") parenthesisBeforeAtIndex = walk
+    const isStatic = !!match.groups?.isStatic // If `.static` is given
+
+    if (!isStatic) {
+      let walk = match.index
+      let parenthesisBeforeAtIndex = -1
+      let inString = false
+
+      while(walk) {
+        const char = content[walk]
+        if (char == "\"") inString = !inString
+        if (!inString) {
+          if ([";"].includes(char)) break
+          if (char == "@" && content.slice(walk, walk + 6) == "@mixin") break
+          if (char == "(") parenthesisBeforeAtIndex = walk
+        }
+        walk--
       }
-      walk--
-    }
 
-    if (parenthesisBeforeAtIndex === -1) {
-      diagnostics.push({
-        from: match.index,
-        to: match.index + match[1].length,
-        severity: "warning",
-        message: "Using @translate outside of an action has no effect"
-      })
-      continue
-    }
+      if (parenthesisBeforeAtIndex === -1) {
+        diagnostics.push({
+          from: match.index,
+          to: match.index + match[1].length,
+          severity: "warning",
+          message: "Using @translate outside of an action has no effect"
+        })
+        continue
+      }
 
-    const line: Line = { text: content, from: 0, to: 0, number: 0, length: 0 }
+      const line: Line = { text: content, from: 0, to: 0, number: 0, length: 0 }
 
-    // Find translations that are not in client side actions
-    const phrase = getPhraseFromPosition(line, parenthesisBeforeAtIndex - 1)
-    const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
-    if (phrase?.text.includes("include")) continue
-    if (phrase?.text && !acceptedPhrases.includes(phrase.text)) {
-      diagnostics.push({
-        from: match.index,
-        to: match.index + match[1].length,
-        severity: "warning",
-        message: `Using @translate inside of "${phrase.text}" has no effect.`
-      })
-      continue
+      // Find translations that are not in client side actions
+      const phrase = getPhraseFromPosition(line, parenthesisBeforeAtIndex - 1)
+      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
+
+      if (phrase?.text.includes("include")) continue
+
+      if (phrase?.text && !acceptedPhrases.includes(phrase.text)) {
+        diagnostics.push({
+          from: match.index,
+          to: match.index + match[1].length,
+          severity: "warning",
+          message: `Using @translate inside of "${phrase.text}" has no effect.`
+        })
+        continue
+      }
     }
 
     // Check translate parameters
@@ -292,7 +300,8 @@ function checkTranslations(content: string): void {
     const translateEndParenthesisIndex = getClosingBracket(content, "(", ")", translateStartParenthesisIndex - 1)
     if (translateEndParenthesisIndex === -1) continue
 
-    const translateArguments = splitArgumentsString(content.substring(translateStartParenthesisIndex + 1, translateEndParenthesisIndex))
+    const translateArgumentsString = content.substring(translateStartParenthesisIndex + 1, translateEndParenthesisIndex)
+    const translateArguments = splitArgumentsString(translateArgumentsString)
     if (translateArguments.length === 0) continue
 
     if (!translateArguments[0].startsWith("\"") || !translateArguments[0].endsWith("\"")) {
@@ -301,6 +310,18 @@ function checkTranslations(content: string): void {
         to: match.index + match[0].length + translateArguments[0].length,
         severity: "error",
         message: "Key argument of @translate must be a string."
+      })
+      continue
+    }
+
+    if (translateArguments.length > 1 && isStatic) {
+      const secondArgumentStart = translateArgumentsString.indexOf(translateArguments[1], translateArguments[0].length)
+
+      diagnostics.push({
+        from: translateStartParenthesisIndex + secondArgumentStart + 1,
+        to: translateEndParenthesisIndex,
+        severity: "warning",
+        message: "Additional arguments in static translations will have no effect."
       })
       continue
     }
