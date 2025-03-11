@@ -244,9 +244,11 @@ function checkMixins(content: string): void {
 }
 
 function checkTranslations(content: string): void {
-  const regex = /(@translate)[\s\n]*\(/g
+  const regex = /(@translate)(\.static)?\s*\(/g
   let match
   while ((match = regex.exec(content)) != null) {
+    const isStatic = !!match[2] // If `.static` is given
+
     let walk = match.index
     let parenthesisBeforeAtIndex = -1
     let inString = false
@@ -261,7 +263,7 @@ function checkTranslations(content: string): void {
       walk--
     }
 
-    if (parenthesisBeforeAtIndex === -1) {
+    if (!isStatic && parenthesisBeforeAtIndex === -1) {
       diagnostics.push({
         from: match.index,
         to: match.index + match[1].length,
@@ -277,7 +279,7 @@ function checkTranslations(content: string): void {
     const phrase = getPhraseFromPosition(line, parenthesisBeforeAtIndex - 1)
     const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
     if (phrase?.text.includes("include")) continue
-    if (phrase?.text && !acceptedPhrases.includes(phrase.text)) {
+    if (!isStatic && phrase?.text && !acceptedPhrases.includes(phrase.text)) {
       diagnostics.push({
         from: match.index,
         to: match.index + match[1].length,
@@ -294,6 +296,16 @@ function checkTranslations(content: string): void {
 
     const translateArguments = splitArgumentsString(content.substring(translateStartParenthesisIndex + 1, translateEndParenthesisIndex - 1))
     if (translateArguments.length === 0) continue
+
+    if (translateArguments.length > 1 && isStatic) {
+      diagnostics.push({
+        from: match.index + match[0].length + translateArguments[0].length,
+        to: translateEndParenthesisIndex,
+        severity: "warning",
+        message: "Additional arguments in static translations will have no effect."
+      })
+      continue
+    }
 
     if (!translateArguments[0].startsWith("\"") || !translateArguments[0].endsWith("\"")) {
       diagnostics.push({
