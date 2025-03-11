@@ -386,6 +386,7 @@
     transform: translateX(-100%) translateY(-50%);
     opacity: 0.5;
     display: inline-block;
+    z-index: 201; // 1 more than .cm-gutter
   }
 
   .code-actions-lightbulb__dropdown {
