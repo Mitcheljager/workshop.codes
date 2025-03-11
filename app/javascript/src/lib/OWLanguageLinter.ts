@@ -330,7 +330,7 @@ function checkTranslations(content: string): void {
             }))
 
             modal.show(Modal.TranslationKeys, {
-              parameters: {
+              props: {
                 initialSelectedKey: translateKey
               }
             })
