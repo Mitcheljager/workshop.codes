@@ -118,5 +118,15 @@ describe("translations.js", () => {
 
       expect(convertTranslations(input, "en-US")).toBe(expectedOutput)
     })
+
+    it("Should convert static marked translations to regular strings", () => {
+      selectedLanguages.set(["en-US"])
+      translationKeys.set({ "Some Key": { "en-US": "Some Value" } })
+
+      const input = "test @translate.static(\"Some Key\")"
+      const expectedOutput = "test \"Some Value\""
+
+      expect(convertTranslations(input, "en-US")).toBe(expectedOutput)
+    })
   })
 })
