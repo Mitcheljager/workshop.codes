@@ -3,7 +3,7 @@ import { completionsMap, currentItem, modal, subroutinesMap, workshopConstants }
 import { get } from "svelte/store"
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 import type { EditorView } from "codemirror"
-import { type Diagnostic } from "@codemirror/lint"
+import type { Diagnostic } from "@codemirror/lint"
 import type { Severity, TranslationKey } from "@src/types/editor"
 import type { Line } from "@codemirror/state"
 import { defaultLanguage, translationKeys } from "@src/stores/translationKeys"
