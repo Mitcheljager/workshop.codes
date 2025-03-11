@@ -315,7 +315,7 @@ function checkTranslations(content: string): void {
     }
 
     if (translateArguments.length > 1 && isStatic) {
-      const secondArgumentStart = translateArgumentsString.indexOf(translateArguments[1])
+      const secondArgumentStart = translateArgumentsString.indexOf(translateArguments[1], translateArguments[0].length)
 
       diagnostics.push({
         from: translateStartParenthesisIndex + secondArgumentStart + 1,
