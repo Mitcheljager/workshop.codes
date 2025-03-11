@@ -317,6 +317,15 @@ function checkTranslations(content: string): void {
       })
       continue
     }
+    if (translateArguments.length > 1 && isStatic) {
+      diagnostics.push({
+        from: match.index + match[0].length + translateArguments[0].length,
+        to: translateEndParenthesisIndex,
+        severity: "warning",
+        message: "Additional arguments in static translations will have no effect."
+      })
+      continue
+    }
 
     // Provide option to create translation key via linter
     const translateKey = translateArguments[0].substring(1, translateArguments[0].length - 1)
