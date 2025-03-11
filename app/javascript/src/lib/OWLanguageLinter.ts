@@ -1,11 +1,13 @@
 import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
-import { completionsMap, subroutinesMap, workshopConstants } from "@stores/editor"
+import { completionsMap, currentItem, modal, subroutinesMap, workshopConstants } from "@stores/editor"
 import { get } from "svelte/store"
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 import type { EditorView } from "codemirror"
 import type { Diagnostic } from "@codemirror/lint"
-import type { Severity } from "@src/types/editor"
+import type { Severity, TranslationKey } from "@src/types/editor"
 import type { Line } from "@codemirror/state"
+import { defaultLanguage, translationKeys } from "@src/stores/translationKeys"
+import { Modal } from "@src/constants/Modal"
 
 let diagnostics: Diagnostic[] = []
 
@@ -242,40 +244,106 @@ function checkMixins(content: string): void {
 }
 
 function checkTranslations(content: string): void {
-  // Find translations that are not in client side actions
-  const regex = /@translate/g
+  const regex = /(@translate)[\s\n]*\(/g
   let match
   while ((match = regex.exec(content)) != null) {
-    try {
-      let walk = match.index
-      let lastParenAtIndex = -1
-      let inString = false
-      while(walk) {
-        const char = content[walk]
-        if (char == "\"") inString = !inString
-        if (!inString) {
-          if ([";"].includes(char)) break
-          if (char == "@" && content.slice(walk, walk + 6) == "@mixin") break
-          if (char == "(") lastParenAtIndex = walk
-        }
-        walk--
+    let walk = match.index
+    let parenthesisBeforeAtIndex = -1
+    let inString = false
+    while(walk) {
+      const char = content[walk]
+      if (char == "\"") inString = !inString
+      if (!inString) {
+        if ([";"].includes(char)) break
+        if (char == "@" && content.slice(walk, walk + 6) == "@mixin") break
+        if (char == "(") parenthesisBeforeAtIndex = walk
       }
+      walk--
+    }
 
-      if (lastParenAtIndex == -1) throw new Error("Using @translate outside of an action has no effect")
-
-      const line: Line = { text: content, from: 0, to: 0, number: 0, length: 0 }
-
-      const phrase = getPhraseFromPosition(line, lastParenAtIndex - 1)
-      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
-      if (phrase?.text.includes("include")) return
-      if (phrase?.text && !acceptedPhrases.includes(phrase.text)) throw new Error(`Using @translate inside of "${phrase.text}" has no effect.`)
-    } catch (error: any) {
+    if (parenthesisBeforeAtIndex === -1) {
       diagnostics.push({
         from: match.index,
-        to: match.index + match[0].length,
+        to: match.index + match[1].length,
         severity: "warning",
-        message: error.message
+        message: "Using @translate outside of an action has no effect"
       })
+      continue
+    }
+
+    const line: Line = { text: content, from: 0, to: 0, number: 0, length: 0 }
+
+    // Find translations that are not in client side actions
+    const phrase = getPhraseFromPosition(line, parenthesisBeforeAtIndex - 1)
+    const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
+    if (phrase?.text.includes("include")) continue
+    if (phrase?.text && !acceptedPhrases.includes(phrase.text)) {
+      diagnostics.push({
+        from: match.index,
+        to: match.index + match[1].length,
+        severity: "warning",
+        message: `Using @translate inside of "${phrase.text}" has no effect.`
+      })
+      continue
+    }
+
+    // Check translate parameters
+    const translateStartParenthesisIndex = match.index + match[0].length - 1
+    const translateEndParenthesisIndex = getClosingBracket(content, "(", ")", translateStartParenthesisIndex - 1)
+    if (translateEndParenthesisIndex === -1) continue
+
+    const translateArguments = splitArgumentsString(content.substring(translateStartParenthesisIndex + 1, translateEndParenthesisIndex - 1))
+    if (translateArguments.length === 0) continue
+
+    if (!translateArguments[0].startsWith("\"") || !translateArguments[0].endsWith("\"")) {
+      diagnostics.push({
+        from: match.index + match[0].length,
+        to: match.index + match[0].length + translateArguments[0].length,
+        severity: "error",
+        message: "Key argument of @translate must be a string."
+      })
+      continue
+    }
+
+    // Provide option to create translation key via linter
+    const translateKey = translateArguments[0].substring(1, translateArguments[0].length - 1)
+    const hasTranslateKey = translateKey in get(translationKeys)
+    if (!hasTranslateKey) {
+      diagnostics.push({
+        from: match.index,
+        to: match.index + match[1].length,
+        severity: "warning",
+        message: "Unknown translate key.",
+        actions: [{
+          name: "Create translation key",
+          apply() {
+            const newTranslation: TranslationKey = {}
+            const currentDefaultLanguage = get(defaultLanguage)
+
+            if (currentDefaultLanguage) {
+              newTranslation[currentDefaultLanguage] = translateKey
+            }
+
+            translationKeys.update((keys) => ({
+              ... keys,
+              [translateKey]: newTranslation
+            }))
+
+            modal.show(Modal.TranslationKeys, {
+              props: {
+                initialSelectedKey: translateKey
+              }
+            })
+
+            // Run linter again
+            currentItem.update((currentItem) => currentItem && ({
+              ... currentItem,
+              forceUpdate: true
+            }))
+          }
+        }]
+      })
+      continue
     }
   }
 }
