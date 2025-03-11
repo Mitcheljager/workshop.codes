@@ -294,7 +294,7 @@ function checkTranslations(content: string): void {
     const translateEndParenthesisIndex = getClosingBracket(content, "(", ")", translateStartParenthesisIndex - 1)
     if (translateEndParenthesisIndex === -1) continue
 
-    const translateArguments = splitArgumentsString(content.substring(translateStartParenthesisIndex + 1, translateEndParenthesisIndex - 1))
+    const translateArguments = splitArgumentsString(content.substring(translateStartParenthesisIndex + 1, translateEndParenthesisIndex))
     if (translateArguments.length === 0) continue
 
     if (translateArguments.length > 1 && isStatic) {
