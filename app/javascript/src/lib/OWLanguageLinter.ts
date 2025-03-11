@@ -244,10 +244,11 @@ function checkMixins(content: string): void {
 }
 
 function checkTranslations(content: string): void {
-  const regex = /(@translate)(\.static)?\s*\(/g
+  const regex = /(@translate(?<isStatic>\.static)?)\s*\(/g
+
   let match
   while ((match = regex.exec(content)) != null) {
-    const isStatic = !!match[2] // If `.static` is given
+    const isStatic = !!match.groups?.isStatic // If `.static` is given
 
     let walk = match.index
     let parenthesisBeforeAtIndex = -1
