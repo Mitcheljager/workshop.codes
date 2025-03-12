@@ -1,7 +1,7 @@
 <script lang="ts">
   import { addAlert } from "@src/lib/alerts"
-  import papaparse from "papaparse"
   import { languageOptions } from "@src/lib/languageOptions"
+  import type papaparse from "papaparse"
   import type { Language, TranslationKey } from "@src/types/editor"
   import { selectedLanguages, translationKeys } from "@src/stores/translationKeys"
 
@@ -12,6 +12,8 @@
   ])
 
   async function importKeysFromClipboard() {
+    const papaparse = await import("papaparse")
+
     const clipboardText = await navigator.clipboard.readText()
 
     if (!clipboardText?.trim()) {
@@ -93,6 +95,8 @@
   }
 
   async function exportKeys() {
+    const papaparse = await import("papaparse")
+
     const jsonToExport = Object.entries($translationKeys).map(([key, translations]) => ({
       key,
       ... translations
