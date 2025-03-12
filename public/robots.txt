@@ -52,3 +52,5 @@ Disallow: /wiki/edits
 Disallow: /revisions/*
 Disallow: /revisions/*/*
 Disallow: /raw-snippet/*
+Disallow: /reports/*
+Disallow: /raw-snippet/*
