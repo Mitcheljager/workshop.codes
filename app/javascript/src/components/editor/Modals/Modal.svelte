@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
   import { modal } from "@stores/editor"
   import { escapeable } from "@src/components/actions/escapeable"
   import { fade, scale } from "svelte/transition"
 
-  export let align = "top"
+  export let align: "top" = "top"
   export let flush = false
   export let transparent = false
-  export let maxWidth = null
+  export let maxWidth: string | number | null = null
 
   function close() {
     modal.close()
@@ -16,7 +16,7 @@
 <div
   class="modal modal--{align}"
   transition:fade={{ duration: 150 }}
-  use:escapeable on:escape={() => modal.close()}
+  use:escapeable={{ onescape: () => modal.close() }}
   role="dialog"
   data-ignore>
 
