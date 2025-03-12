@@ -28,10 +28,9 @@ export function compile(overrideContent = "", singleLanguageOverride = null): st
   joinedItems = evaluateForLoops(joinedItems)
   joinedItems = evaluateEachLoops(joinedItems)
   joinedItems = evaluateConditionals(joinedItems)
-  joinedItems = convertTranslations(joinedItems, singleLanguageOverride)
 
   const variables = compileVariables(joinedItems)
   const subroutines = compileSubroutines(joinedItems)
 
-  return settings + variables + subroutines + joinedItems
+  return convertTranslations(settings + variables + subroutines + joinedItems, singleLanguageOverride)
 }
