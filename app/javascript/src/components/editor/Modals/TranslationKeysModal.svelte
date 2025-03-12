@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Modal from "@components/editor/Modals/Modal.svelte"
   import TranslationKeysEditStrings from "@components/editor/TranslationKeys/TranslationKeysEditStrings.svelte"
   import TranslationKeysSelectLanguages from "@components/editor/TranslationKeys/TranslationKeysSelectLanguages.svelte"
@@ -11,7 +11,7 @@
   let selectedKey = initialSelectedKey
   let showLanguageSettings = false
   let error = ""
-  let newKeyInput
+  let newKeyInput: HTMLInputElement
 
   function addKey() {
     error = ""
