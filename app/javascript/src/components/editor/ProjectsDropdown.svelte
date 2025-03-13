@@ -8,6 +8,7 @@
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
+  import { trimmed } from "@src/utils/text"
 
   let loading = false
   let active = false
@@ -71,7 +72,7 @@
     {#if loading}
       Loading...
     {:else}
-      {$currentProject?.title.substring(0, limit).trim() || "Select a project..."}{#if $currentProject?.title.length > limit}...{/if}
+      {trimmed($currentProject?.title, limit) || "Select a project..."}
     {/if}
   </button>
 
