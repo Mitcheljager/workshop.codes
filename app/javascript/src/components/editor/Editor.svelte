@@ -61,7 +61,7 @@
     loading = false
   })
 
-  $: if ($currentProjectUUID && $projects.some(({ uuid }) => uuid !== $currentProjectUUID)) {
+  $: if ($currentProjectUUID && !$projects.some(({ uuid }) => uuid === $currentProjectUUID)) {
     fetchProject($currentProjectUUID).then((currentProject) => {
       $projects.push(currentProject)
     })
