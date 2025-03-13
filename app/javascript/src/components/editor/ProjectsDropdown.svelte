@@ -1,6 +1,6 @@
 <script>
   import SearchObjects from "@components/editor/SearchObjects.svelte"
-  import { projects, currentProject, isSignedIn, isMobile, modal } from "@stores/editor"
+  import { projects, currentProject, isSignedIn, isMobile, modal, currentProjectUUID } from "@stores/editor"
   import { getSaveContent } from "@utils/editor"
   import { createProject, destroyCurrentProject, fetchProject, setUrl } from "@utils/project"
   import { escapeable } from "@components/actions/escapeable"
@@ -46,13 +46,16 @@
     loading = false
   }
 
-  async function duplicateProject() {
+  async function duplicateProject(useForkLabel) {
     if (!confirm("This will create a copy of the current project. Do you want to continue?")) return
 
     loading = true
 
     const content = getSaveContent()
-    const data = await createProject($currentProject.title + " (Copy)", content)
+
+    const thisProject = $currentProject ?? await fetchProject($currentProjectUUID)
+
+    const data = await createProject(thisProject.title + ` (${useForkLabel ? "Fork" : "Copy"})`, content)
     if (data) {
       setUrl(data.uuid)
       await fetchProject(data.uuid)
@@ -109,26 +112,32 @@
   {/if}
 </div>
 
-{#if $isSignedIn && $currentProject?.is_owner && !loading}
-  <div class="dropdown" use:outsideClick on:outsideClick={() => showProjectSettings = false}>
-    <button class="w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
-      Edit
+{#if $isSignedIn && !loading}
+  {#if $currentProject?.is_owner}
+    <div class="dropdown" use:outsideClick on:outsideClick={() => showProjectSettings = false}>
+      <button class="w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
+        Edit
+      </button>
+
+      {#if showProjectSettings}
+        <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
+          <button class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
+            Rename
+          </button>
+
+          <button class="dropdown__item" on:click={() => duplicateProject(false)}>
+            Duplicate
+          </button>
+
+          <button class="dropdown__item text-red" on:click={destroyProject}>
+            Destroy
+          </button>
+        </div>
+      {/if}
+    </div>
+  {:else if $currentProjectUUID}
+    <button class="w-auto text-base ml-1/8" on:click={() => duplicateProject(true)}>
+      Fork
     </button>
-
-    {#if showProjectSettings}
-      <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
-        <button class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
-          Rename
-        </button>
-
-        <button class="dropdown__item" on:click={duplicateProject}>
-          Duplicate
-        </button>
-
-        <button class="dropdown__item text-red" on:click={destroyProject}>
-          Destroy
-        </button>
-      </div>
-    {/if}
-  </div>
+  {/if}
 {/if}
