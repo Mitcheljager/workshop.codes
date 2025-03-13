@@ -51,6 +51,11 @@
     right: auto;
   }
 
+  &--center {
+    right: 50%;
+    translate: 50% 0;
+  }
+
   &--large {
     width: 80vw;
     max-width: 300px;
