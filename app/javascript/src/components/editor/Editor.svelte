@@ -20,6 +20,7 @@
   import Bugsnag from "@components/Bugsnag.svelte"
   import EyeIcon from "@components/icon/Eye.svelte"
   import Logs from "@components/editor/Logs.svelte"
+  import { fetchProject } from "@src/utils/project"
 
   export let bugsnagApiKey = ""
   export let _isSignedIn = false
@@ -59,6 +60,12 @@
 
     loading = false
   })
+
+  $: if ($currentProjectUUID && $projects.some(({ uuid }) => uuid !== $currentProjectUUID)) {
+    fetchProject($currentProjectUUID).then((currentProject) => {
+      $projects.push(currentProject)
+    })
+  }
 
   function parseKeywords() {
     const { events, values, actions, constants, heroes, maps } = data
