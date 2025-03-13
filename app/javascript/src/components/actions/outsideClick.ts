@@ -1,6 +1,10 @@
-export function outsideClick(node) {
-  function click(event) {
-    if (node.contains(event.target)) return
+import type { Action } from "svelte/action"
+
+export const outsideClick: Action<Node, { onOutsideClick?: () => void }> = (node, { onOutsideClick = () => null } = {}) => {
+  function click(event: MouseEvent): void {
+    if (event.target instanceof Node && node.contains(event.target)) return
+
+    onOutsideClick()
 
     node.dispatchEvent(new CustomEvent("outsideClick"))
   }
