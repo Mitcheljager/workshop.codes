@@ -51,6 +51,11 @@
     right: auto;
   }
 
+  &--center {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
   &--large {
     width: 80vw;
     max-width: 300px;

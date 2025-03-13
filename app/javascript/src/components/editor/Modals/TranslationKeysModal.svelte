@@ -1,17 +1,18 @@
-<script>
+<script lang="ts">
   import Modal from "@components/editor/Modals/Modal.svelte"
   import TranslationKeysEditStrings from "@components/editor/TranslationKeys/TranslationKeysEditStrings.svelte"
   import TranslationKeysSelectLanguages from "@components/editor/TranslationKeys/TranslationKeysSelectLanguages.svelte"
   import { translationKeys, orderedTranslationKeys, selectedLanguages } from "@stores/translationKeys"
   import { copyValueToClipboard } from "@src/copy"
   import { submittable } from "@components/actions/submittable"
+  import TranslationKeysImportExportButtons from "../TranslationKeys/TranslationKeysImportExportButtons.svelte"
 
   export let initialSelectedKey
 
   let selectedKey = initialSelectedKey
   let showLanguageSettings = false
   let error = ""
-  let newKeyInput
+  let newKeyInput: HTMLInputElement
 
   function addKey() {
     error = ""
@@ -76,6 +77,8 @@
         {/if}
 
         <button on:click={addKey} class="button button--small button--square w-100 mt-1/8">Create</button>
+
+        <TranslationKeysImportExportButtons class="mt-1/4" />
       </div>
     </div>
 
