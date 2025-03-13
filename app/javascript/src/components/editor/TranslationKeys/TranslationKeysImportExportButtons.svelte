@@ -11,7 +11,7 @@
     [null, "TSV/CSV"]
   ])
 
-  async function importKeysFromClipboard() {
+  async function importKeysFromClipboard(): Promise<void> {
     const papaparse = await import("papaparse")
 
     const clipboardText = await navigator.clipboard.readText()
@@ -94,7 +94,7 @@
     addAlert("Translation keys successfully imported from clipboard!")
   }
 
-  async function exportKeys() {
+  async function exportKeys(): Promise<void> {
     const papaparse = await import("papaparse")
 
     const jsonToExport = Object.entries($translationKeys).map(([key, translations]) => ({
