@@ -13,8 +13,10 @@
   let loading = false
   let active = false
   let showProjectSettings = false
-  let filteredProjects = $projects
+  let ownProjects = []
+  let filteredProjects = []
 
+  $: ownProjects = $projects.filter(({ is_owner }) => is_owner)
   $: limit = $isMobile ? 5 : 25
 
   onMount(() => {
@@ -22,7 +24,7 @@
     const uuid = urlParams.get("uuid")
 
     if (uuid) getProject(uuid)
-    else if ($projects.length) getProject($projects[0].uuid)
+    else if (ownProjects.length) getProject(ownProjects[0].uuid)
   })
 
   async function getProject(uuid) {
@@ -73,13 +75,16 @@
       Loading...
     {:else}
       {trimmed($currentProject?.title, limit) || "Select a project..."}
+      {#if $currentProject && !$currentProject.is_owner}
+        <small>(read-only)</small>
+      {/if}
     {/if}
   </button>
 
   {#if active}
     <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content dropdown__content--left block w-100" style:min-width="200px">
       <div class="pl-1/8 pr-1/8">
-        <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
+        <SearchObjects objects={ownProjects} bind:filteredObjects={filteredProjects} />
       </div>
 
       <hr />
@@ -90,16 +95,16 @@
         </button>
       {/each}
 
-      {#if $projects?.length && !filteredProjects.length}
+      {#if ownProjects?.length && !filteredProjects.length}
         <em class="block text-dark text-small pl-1/8 pr-1/8">No projects match your search.</em>
       {/if}
 
-      {#if $projects?.length}
+      {#if ownProjects?.length}
         <hr />
       {/if}
 
       <div class="p-1/4">
-        {#if !$projects?.length}
+        {#if !ownProjects?.length}
           <em class="text-small block mb-1/4">Create a new project to get started.</em>
         {/if}
         <button class="button button--small w-100" on:click={() => {
