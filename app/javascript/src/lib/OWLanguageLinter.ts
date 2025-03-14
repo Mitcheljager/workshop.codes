@@ -1,9 +1,9 @@
 import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
-import { completionsMap, currentItem, modal, subroutinesMap, workshopConstants } from "@stores/editor"
+import { completionsMap, modal, subroutinesMap, workshopConstants } from "@stores/editor"
 import { get } from "svelte/store"
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 import type { EditorView } from "codemirror"
-import type { Diagnostic } from "@codemirror/lint"
+import { forceLinting, type Diagnostic } from "@codemirror/lint"
 import type { Severity, TranslationKey } from "@src/types/editor"
 import type { Line } from "@codemirror/state"
 import { defaultLanguage, translationKeys } from "@src/stores/translationKeys"
@@ -337,7 +337,7 @@ function checkTranslations(content: string): void {
         message: "Unknown translate key.",
         actions: [{
           name: "Create translation key",
-          apply() {
+          apply(view) {
             const newTranslation: TranslationKey = {}
             const currentDefaultLanguage = get(defaultLanguage)
 
@@ -356,11 +356,7 @@ function checkTranslations(content: string): void {
               }
             })
 
-            // Run linter again
-            currentItem.update((currentItem) => currentItem && ({
-              ... currentItem,
-              forceUpdate: true
-            }))
+            forceLinting(view)
           }
         }]
       })
