@@ -17,21 +17,25 @@
   background: $bg-darker;
 }
 
-.translation-settings__content {
-  padding: $margin * 0.25;
-  overflow-y: auto;
-
-  .form-textarea {
-    width: 100%;
-    max-width: calc(100% - $margin * 0.25);
-  }
-}
-
 .translation-settings__keys-container {
   height: 100%;
   overflow-y: auto;
   margin-inline: -1rem;
   padding-inline: 1rem;
+
+  @include styled-scrollbar;
+}
+
+.translation-settings__content {
+  padding: $margin * 0.25;
+  overflow-y: auto;
+
+  @include styled-scrollbar;
+
+  .form-textarea {
+    width: 100%;
+    max-width: calc(100% - $margin * 0.25);
+  }
 }
 
 .translation-settings__item {
