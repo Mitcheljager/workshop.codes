@@ -50,8 +50,8 @@
           {#each Object.keys($orderedTranslationKeys) as key}
             <div
               class="translation-settings__item"
-              class:translation-settings__item--active={selectedKey == key}>
-              <button on:click={() => { selectedKey = key; showLanguageSettings = false }}>
+              class:translation-settings__item--active={selectedKey === key}>
+              <button class="translation-settings__item-label" on:click={() => { selectedKey = key; showLanguageSettings = false }}>
                 {key}
               </button>
 

@@ -53,10 +53,13 @@
   button {
     color: $text-color;
 
-    &--active,
-    &:hover {
+    button:hover {
       color: $text-color-lightest;
     }
+  }
+
+  &--active .translation-settings__item-label {
+    color: $text-color-lightest;
   }
 }
 
