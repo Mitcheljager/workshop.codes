@@ -1,0 +1,37 @@
+# Make forceLinting() actually force linting, even if within the period of
+# delay after linting (determined by `LintPlugin#set`)
+
+diff --git a/node_modules/@codemirror/lint/dist/index.cjs b/node_modules/@codemirror/lint/dist/index.cjs
+index 5af7008..d3dc0bc 100644
+--- a/node_modules/@codemirror/lint/dist/index.cjs
++++ b/node_modules/@codemirror/lint/dist/index.cjs
+@@ -255,10 +255,8 @@ const lintPlugin = view.ViewPlugin.fromClass(class {
+         }
+     }
+     force() {
+-        if (this.set) {
+-            this.lintTime = Date.now();
+-            this.run();
+-        }
++        this.lintTime = Date.now();
++        this.run();
+     }
+     destroy() {
+         clearTimeout(this.timeout);
+diff --git a/node_modules/@codemirror/lint/dist/index.js b/node_modules/@codemirror/lint/dist/index.js
+index 0321ca4..34992a5 100644
+--- a/node_modules/@codemirror/lint/dist/index.js
++++ b/node_modules/@codemirror/lint/dist/index.js
+@@ -253,10 +253,8 @@ const lintPlugin = /*@__PURE__*/ViewPlugin.fromClass(class {
+         }
+     }
+     force() {
+-        if (this.set) {
+-            this.lintTime = Date.now();
+-            this.run();
+-        }
++        this.lintTime = Date.now();
++        this.run();
+     }
+     destroy() {
+         clearTimeout(this.timeout);
