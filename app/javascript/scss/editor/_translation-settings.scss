@@ -57,16 +57,14 @@
       color: $text-color-lightest;
     }
   }
-
-  &--active .translation-settings__item-label {
-    color: $text-color-lightest;
-  }
 }
 
-.translation-settings__create {
-  padding: $margin * 0.25;
-  margin: $margin * 0.125 $margin * -0.25 $margin * -0.25;
-  border-top: 2px solid darken($bg-dark, 5%);
+.translation-settings__item-label {
+  word-break: break-word;
+
+  .translation-settings__item--active & {
+    color: $text-color-lightest;
+  }
 }
 
 .translation-settings__copy {
