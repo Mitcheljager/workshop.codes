@@ -27,7 +27,7 @@
 
       <h4 class="flex align-center justify-between mb-1/8">
         <strong>Keys</strong>
-        <button class="button button--primary button--small button--square" on:click={() => selectedKey = createNewTranslationKey}>Add</button>
+        <button class="button button--primary button--small button--square" on:click={() => { selectedKey = createNewTranslationKey; showLanguageSettings = false }}>Add</button>
       </h4>
 
       {#if Object.keys($orderedTranslationKeys).length}
