@@ -39,7 +39,7 @@
 
   <div class="translation-settings">
     <div class="translation-settings__aside">
-      <button on:click={() => { showLanguageSettings = true; selectedKey = null }} class="button button--secondary button--square button--small text-base w-100">
+      <button on:click={() => showLanguageSettings = !showLanguageSettings} class="button button--secondary button--square button--small text-base w-100">
         Select languages ({$selectedLanguages.length})
       </button>
 
