@@ -7,6 +7,7 @@
   export let flush = false
   export let transparent = false
   export let maxWidth: string | number | null = null
+  export let internalScrolling = false
 
   function close() {
     modal.close()
@@ -22,6 +23,7 @@
 
   <div
     class="modal__content modal__content--no-shadow"
+    class:modal__content--internal-scrolling={internalScrolling}
     class:bg-transparent={transparent}
     class:p-0={flush}
     style:max-width={maxWidth}
