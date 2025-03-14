@@ -4,20 +4,32 @@
   import { submittable } from "@components/actions/submittable"
   import { createEventDispatcher } from "svelte"
   import debounce from "@src/debounce"
+  import { createNewTranslationKey } from "@src/lib/translations"
 
   export let selectedKey
 
   const dispatch = createEventDispatcher()
 
-  let renameInput
+  let createNewKeyMode
+  let createOrRenameInput
   let error = ""
+  let selectedKeyNameInExamples
 
-  const renameKey = debounce(() => {
+  $: {
+    createNewKeyMode = selectedKey === createNewTranslationKey
+
+    selectedKeyNameInExamples = createNewKeyMode ? "…" : selectedKey
+
+    if (createNewKeyMode && createOrRenameInput)
+      createOrRenameInput.focus()
+  }
+
+  const createOrRenameKey = () => {
     error = ""
 
-    const value = renameInput.value.trim()
+    const value = createOrRenameInput.value.trim()
 
-    if (value == selectedKey) return
+    if (value === selectedKey) return
 
     if (!value) {
       error = "Key can't be empty"
@@ -29,11 +41,19 @@
       return
     }
 
-    delete Object.assign($translationKeys, { [value]: $translationKeys[selectedKey] })[selectedKey]
-    $translationKeys = { ...$translationKeys }
+    translationKeys.update((translationKeys) => {
+      const previousKeys = createNewKeyMode ? {} : translationKeys[selectedKey]
+
+      if (!createNewKeyMode)
+        delete translationKeys[selectedKey]
+
+      translationKeys[value] = previousKeys
+
+      return translationKeys
+    })
 
     dispatch("updateKey", value)
-  }, 300)
+  }
 
   const removeKey = () => {
     if (!confirm("Are you sure?")) return
@@ -47,11 +67,18 @@
 
 <div class="sticky top-0 well well--dark block p-1/4 mb-1/4">
   <div class="flex gap-1/4 align-center">
-    <input class="form-input" value={selectedKey} bind:this={renameInput} on:input={renameKey} />
+    <input
+      class="form-input"
+      value={createNewKeyMode ? "" : selectedKey}
+      bind:this={createOrRenameInput}
+      on:input={!createNewKeyMode && debounce(createOrRenameKey, 300)}
+      on:change={createNewKeyMode && createOrRenameKey}/>
     <button class="button button--danger button--small button--square" on:click={removeKey}>Remove</button>
   </div>
 
-  {#if error}
+  {#if createNewKeyMode}
+    <div class="text-orange mt-1/8">Give your translation a key</div>
+  {:else if error}
     <div class="text-red mt-1/8">{error}</div>
   {/if}
 </div>
@@ -59,7 +86,7 @@
 <p class="text-small mb-0">
   Include this key in your project using
   <code style="color: var(--color-punctuation)">
-    <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>)
+    <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
   </code>
 </p>
 
@@ -68,7 +95,7 @@
 </p>
 
 <code class="inline-block mt-1/8 text-small" style="color: var(--color-punctuation)">
-  <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>,
+  <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>,
   <span style="color: var(--color-value)">Icon String</span>(<span style="color: var(--color-variable)">Bolt</span>))
 </code>
 
@@ -79,13 +106,13 @@
 <p class="text-small mb-0">
   Include this key as a static string replacement using
   <code style="color: var(--color-punctuation)">
-    <span style="color: var(--color-custom-keyword)">@translate</span><span style="color: var(--color-variable)">.static</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>)
+    <span style="color: var(--color-custom-keyword)">@translate</span><span style="color: var(--color-variable)">.static</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
   </code>
 </p>
 
 <hr class="mt-1/4 mb-1/4">
 
-{#if $translationKeys[selectedKey]}
+{#if !createNewKeyMode && $translationKeys[selectedKey]}
   {#each $selectedLanguages as language}
     <div class="form-group-inline mt-1/8">
       <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
