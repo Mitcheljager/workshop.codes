@@ -19,6 +19,7 @@
 
 .translation-settings__content {
   padding: $margin * 0.25;
+  overflow-y: auto;
 
   .form-textarea {
     width: calc(100% - $margin * 0.25);
