@@ -46,12 +46,9 @@
 </script>
 
 <div class="sticky top-0 well well--dark block p-1/4 mb-1/4">
-  <div class="form-group-uneven">
+  <div class="flex gap-1/4 align-center">
     <input class="form-input" value={selectedKey} bind:this={renameInput} on:input={renameKey} />
-
-    <div class="flex justify-end">
-      <button class="button button--danger button--small button--square" on:click={removeKey}>Remove</button>
-    </div>
+    <button class="button button--danger button--small button--square" on:click={removeKey}>Remove</button>
   </div>
 
   {#if error}
