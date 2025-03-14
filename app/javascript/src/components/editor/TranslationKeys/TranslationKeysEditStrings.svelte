@@ -44,7 +44,7 @@
   }
 </script>
 
-<div class="well well--dark block p-1/4 mb-1/4">
+<div class="sticky top-0 well well--dark block p-1/4 mb-1/4">
   <div class="form-group-uneven">
     <input class="form-input" value={selectedKey} bind:this={renameInput} use:submittable on:submit={renameKey} />
 
