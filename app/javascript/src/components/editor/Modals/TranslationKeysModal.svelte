@@ -31,7 +31,7 @@
   }
 </script>
 
-<Modal maxWidth="clamp(300px, 90vw, 900px)" flush>
+<Modal maxWidth="clamp(300px, 90vw, 900px)" internalScrolling flush>
   <div class="bg-darker br-top p-1/4">
     <h2 class="mt-0 mb-1/4">Translation settings</h2>
     <p class="mb-0">Translation keys allow you to insert a Key in place of a Custom String. You can set up translations and the key will automatically be translated based on the player's game language.</p>
@@ -46,7 +46,7 @@
       {#if Object.keys($orderedTranslationKeys).length}
         <h4 class="mb-1/8"><strong>Keys</strong></h4>
 
-        <div>
+        <div class="translation-settings__keys-container">
           {#each Object.keys($orderedTranslationKeys) as key}
             <div
               class="translation-settings__item"

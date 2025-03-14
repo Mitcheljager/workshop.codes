@@ -1,10 +1,14 @@
 .translation-settings {
   display: grid;
   grid-template-columns: 1fr 3fr;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .translation-settings__aside {
   display: flex;
+  height: 100%;
+  overflow-y: auto;
   flex-direction: column;
   gap: $margin * 0.125;
   padding: $margin * 0.25;
@@ -19,6 +23,13 @@
   .form-textarea {
     width: calc(100% - $margin * 0.25);
   }
+}
+
+.translation-settings__keys-container {
+  height: 100%;
+  overflow-y: auto;
+  margin-inline: -1rem;
+  padding-inline: 1rem;
 }
 
 .translation-settings__item {
