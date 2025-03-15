@@ -4,7 +4,7 @@
   import TranslationKeysSelectLanguages from "@components/editor/TranslationKeys/TranslationKeysSelectLanguages.svelte"
   import { orderedTranslationKeys, selectedLanguages } from "@stores/translationKeys"
   import { copyValueToClipboard } from "@src/copy"
-  import { createNewTranslationKey } from "@src/lib/translations"
+  import { newTranslationKey } from "@src/lib/translations"
   import Copy from "@src/components/icon/Copy.svelte"
   import TranslationKeysImportExportButtons from "@src/components/editor/TranslationKeys/TranslationKeysImportExportButtons.svelte"
 
@@ -28,7 +28,7 @@
 
       <h4 class="flex align-center justify-between mb-1/8">
         <strong>Keys</strong>
-        <button class="button button--primary button--small button--square" on:click={() => { selectedKey = createNewTranslationKey; showLanguageSettings = false }}>Add</button>
+        <button class="button button--primary button--small button--square" on:click={() => { selectedKey = newTranslationKey; showLanguageSettings = false }}>Add</button>
       </h4>
 
       {#if Object.keys($orderedTranslationKeys).length}

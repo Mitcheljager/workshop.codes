@@ -1,1 +1,1 @@
-export const createNewTranslationKey = Symbol("create new translations key")
+export const newTranslationKey = Symbol("create new translations key")
