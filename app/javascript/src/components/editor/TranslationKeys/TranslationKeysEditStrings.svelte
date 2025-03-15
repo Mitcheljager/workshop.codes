@@ -3,6 +3,7 @@
   import { languageOptions } from "@lib/languageOptions"
   import { submittable } from "@components/actions/submittable"
   import { createEventDispatcher } from "svelte"
+  import debounce from "@src/debounce"
 
   export let selectedKey
 
@@ -11,7 +12,7 @@
   let renameInput
   let error = ""
 
-  function renameKey() {
+  const renameKey = debounce(() => {
     error = ""
 
     const value = renameInput.value.trim()
@@ -32,9 +33,9 @@
     $translationKeys = { ...$translationKeys }
 
     dispatch("updateKey", value)
-  }
+  }, 300)
 
-  function removeKey() {
+  const removeKey = () => {
     if (!confirm("Are you sure?")) return
 
     delete $translationKeys[selectedKey]
@@ -44,14 +45,10 @@
   }
 </script>
 
-<div class="well well--dark block p-1/4 mb-1/4">
-  <div class="form-group-uneven">
-    <input class="form-input" value={selectedKey} bind:this={renameInput} use:submittable on:submit={renameKey} />
-
-    <div class="flex justify-end">
-      <button class="button button--secondary button--small button--square" on:click={renameKey}>Rename</button>
-      <button class="button button--danger button--small button--square ml-1/8" on:click={removeKey}>Remove</button>
-    </div>
+<div class="sticky top-0 well well--dark block p-1/4 mb-1/4">
+  <div class="flex gap-1/4 align-center">
+    <input class="form-input" value={selectedKey} bind:this={renameInput} on:input={renameKey} />
+    <button class="button button--danger button--small button--square" on:click={removeKey}>Remove</button>
   </div>
 
   {#if error}

@@ -183,13 +183,13 @@
 </script>
 
 <div {...$$props} class={["button-group", $$props.class]}>
-  <div class="dropdown w-100" use:outsideClick={{ onOutsideClick: closeDropdown }}>
+  <div class="dropdown dropup w-100" use:outsideClick={{ onOutsideClick: closeDropdown }}>
     <button aria-label="Import translation keys" class="button button--small button--secondary button--square w-100" on:click={() => openDropdown = DropdownType.IMPORT}>
       Import...
     </button>
 
     {#if openDropdown === DropdownType.IMPORT}
-      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content dropdown__content--center block w-100" style="width: 200px">
+      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content dropdown__content--left block w-100" style="width: 200%">
         <button class="dropdown__item" on:click={() => importKeysFromFile()}>
           from a {FILE_TYPES.map((fileType) => `.${FILE_TYPE_DATA[fileType].extension}`).join("/")} file
         </button>
@@ -201,13 +201,13 @@
     {/if}
   </div>
 
-  <div class="dropdown w-100" use:outsideClick={{ onOutsideClick: closeDropdown }}>
+  <div class="dropdown dropup w-100" use:outsideClick={{ onOutsideClick: closeDropdown }}>
     <button aria-label="Import translation keys" class="button button--small button--secondary button--square w-100" on:click={() => openDropdown = DropdownType.EXPORT}>
       Export...
     </button>
 
     {#if openDropdown === DropdownType.EXPORT}
-      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content dropdown__content--center block w-100" style="width: 200px">
+      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content block w-100" style="width: 200%">
         {#each FILE_TYPES as fileType}
           <button class="dropdown__item" on:click={() => exportKeysToFile(fileType)}>
             to a .{FILE_TYPE_DATA[fileType].extension} file

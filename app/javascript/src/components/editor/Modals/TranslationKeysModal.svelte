@@ -5,7 +5,8 @@
   import { translationKeys, orderedTranslationKeys, selectedLanguages } from "@stores/translationKeys"
   import { copyValueToClipboard } from "@src/copy"
   import { submittable } from "@components/actions/submittable"
-  import TranslationKeysImportExportButtons from "../TranslationKeys/TranslationKeysImportExportButtons.svelte"
+  import Copy from "@src/components/icon/Copy.svelte"
+  import TranslationKeysImportExportButtons from "@src/components/editor/TranslationKeys/TranslationKeysImportExportButtons.svelte"
 
   export let initialSelectedKey
 
@@ -31,7 +32,7 @@
   }
 </script>
 
-<Modal maxWidth="clamp(300px, 90vw, 900px)" flush>
+<Modal maxWidth="clamp(300px, 90vw, 900px)" internalScrolling flush>
   <div class="bg-darker br-top p-1/4">
     <h2 class="mt-0 mb-1/4">Translation settings</h2>
     <p class="mb-0">Translation keys allow you to insert a Key in place of a Custom String. You can set up translations and the key will automatically be translated based on the player's game language.</p>
@@ -39,23 +40,23 @@
 
   <div class="translation-settings">
     <div class="translation-settings__aside">
-      <button on:click={() => { showLanguageSettings = true; selectedKey = null }} class="button button--secondary button--square button--small text-base w-100">
+      <button on:click={() => showLanguageSettings = !showLanguageSettings} class="button button--secondary button--square button--small text-base w-100">
         Select languages ({$selectedLanguages.length})
       </button>
 
       {#if Object.keys($orderedTranslationKeys).length}
         <h4 class="mb-1/8"><strong>Keys</strong></h4>
 
-        <div>
+        <div class="translation-settings__keys-container">
           {#each Object.keys($orderedTranslationKeys) as key}
             <div
               class="translation-settings__item"
-              class:translation-settings__item--active={selectedKey == key}>
-              <button on:click={() => { selectedKey = key; showLanguageSettings = false }}>
+              class:translation-settings__item--active={selectedKey === key}>
+              <button class="translation-settings__item-label" on:click={() => { selectedKey = key; showLanguageSettings = false }}>
                 {key}
               </button>
 
-              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
+              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}><Copy width="16" /></button>
             </div>
           {/each}
         </div>
