@@ -73,12 +73,7 @@
     {#if loading}
       Loading...
     {:else if $currentProject}
-      <div class="flex align-center nowrap">
-        <span class="w-100 text-truncate">{$currentProject.title}</span>
-        {#if !$currentProject.is_owner}
-          <small>(read-only)</small>
-        {/if}
-      </div>
+      <span class="w-100 text-truncate nowrap">{$currentProject.title}</span>
     {:else}
       Select a project...
     {/if}
