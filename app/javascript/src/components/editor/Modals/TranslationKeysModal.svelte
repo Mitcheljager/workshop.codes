@@ -4,8 +4,10 @@
   import TranslationKeysSelectLanguages from "@components/editor/TranslationKeys/TranslationKeysSelectLanguages.svelte"
   import { orderedTranslationKeys, selectedLanguages } from "@stores/translationKeys"
   import { copyValueToClipboard } from "@src/copy"
-  import TranslationKeysImportExportButtons from "../TranslationKeys/TranslationKeysImportExportButtons.svelte"
+  import { submittable } from "@components/actions/submittable"
   import { createNewTranslationKey } from "@src/lib/translations"
+  import Copy from "@src/components/icon/Copy.svelte"
+  import TranslationKeysImportExportButtons from "@src/components/editor/TranslationKeys/TranslationKeysImportExportButtons.svelte"
 
   export let initialSelectedKey
 
@@ -40,7 +42,7 @@
                 {key}
               </button>
 
-              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}>Copy</button>
+              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}><Copy width="16" /></button>
             </div>
           {/each}
         </div>

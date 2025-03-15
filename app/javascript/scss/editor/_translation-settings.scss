@@ -20,8 +20,12 @@
 .translation-settings__keys-container {
   height: 100%;
   overflow-y: auto;
-  margin-inline: -1rem;
-  padding-inline: 1rem;
+
+  // Counteract padding from .translation-settings__aside to move the scrollbar
+  // to the edge of it, then reapply the padding so keys are not touching the
+  // edge of the .translation-settings__aside also.
+  margin: 0 ($margin * -0.25);
+  padding: 0 ($margin * 0.25);
 
   @include styled-scrollbar;
 }
