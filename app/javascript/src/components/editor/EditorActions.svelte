@@ -18,7 +18,7 @@
 <div class="editor__actions" transition:fly={{ y: -10, duration: 200 }}>
   {#if $currentProjectUUID && !$currentProject?.is_owner && !$isMobile}
     <div class="warning text-small ml-1/8 br-1 align-self-center">
-      You do not own this project and can not save
+      You do not own this project
     </div>
   {/if}
 
@@ -68,7 +68,7 @@
     </div>
   {/if}
 
-  {#if $isSignedIn && $currentProject?.is_owner}
+  {#if $isSignedIn}
     <Save />
   {/if}
 </div>

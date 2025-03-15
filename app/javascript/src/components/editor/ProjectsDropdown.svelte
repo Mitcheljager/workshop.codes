@@ -48,16 +48,14 @@
     loading = false
   }
 
-  async function duplicateProject(useForkLabel) {
+  async function duplicateProject() {
     if (!confirm("This will create a copy of the current project. Do you want to continue?")) return
 
     loading = true
 
     const content = getSaveContent()
 
-    const thisProject = $currentProject ?? await fetchProject($currentProjectUUID)
-
-    const data = await createProject(thisProject.title + ` (${useForkLabel ? "Fork" : "Copy"})`, content)
+    const data = await createProject(`${$currentProject.title} (Copy)`, content)
     if (data) {
       setUrl(data.uuid)
       await fetchProject(data.uuid)
@@ -129,7 +127,7 @@
             Rename
           </button>
 
-          <button class="dropdown__item" on:click={() => duplicateProject(false)}>
+          <button class="dropdown__item" on:click={() => duplicateProject()}>
             Duplicate
           </button>
 
@@ -139,9 +137,5 @@
         </div>
       {/if}
     </div>
-  {:else if $currentProjectUUID}
-    <button class="w-auto text-base ml-1/8" on:click={() => duplicateProject(true)}>
-      Fork
-    </button>
   {/if}
 {/if}
