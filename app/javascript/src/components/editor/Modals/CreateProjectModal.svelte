@@ -47,7 +47,7 @@
 
 <Modal flush>
   {#if !$isSignedIn}
-    <div class="warning warning--orange">
+    <div class="warning warning--orange text-small">
       You are not signed in and this is for demonstration purposes only. Any changes you make will not be saved.
     </div>
   {/if}

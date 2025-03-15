@@ -19,7 +19,7 @@
   </nav>
 
   <% if @user.linked_id %>
-    <div class="warning warning--orange mb-1/2">
+    <div class="warning warning--orange text-small mb-1/2">
       This is a linked account. <%= link_to "View main account", admin_user_path(@user.linked_id), class: "text-lightest" %>
     </div>
   <% end %>
