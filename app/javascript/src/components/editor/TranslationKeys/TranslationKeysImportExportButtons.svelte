@@ -189,7 +189,7 @@
     </button>
 
     {#if openDropdown === DropdownType.IMPORT}
-      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
+      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content dropdown__content--left block w-100" style="width: 200%">
         <button class="dropdown__item" on:click={() => importKeysFromFile()}>
           from a {FILE_TYPES.map((fileType) => `.${FILE_TYPE_DATA[fileType].extension}`).join("/")} file
         </button>
@@ -207,7 +207,7 @@
     </button>
 
     {#if openDropdown === DropdownType.EXPORT}
-      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content block w-100" style="width: 200px">
+      <div use:escapeable={{ onescape: closeDropdown }} class="dropdown__content block w-100" style="width: 200%">
         {#each FILE_TYPES as fileType}
           <button class="dropdown__item" on:click={() => exportKeysToFile(fileType)}>
             to a .{FILE_TYPE_DATA[fileType].extension} file
