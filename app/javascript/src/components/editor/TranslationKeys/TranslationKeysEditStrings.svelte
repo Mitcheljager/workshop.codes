@@ -14,7 +14,6 @@
   let createNewKeyMode
   let createOrRenameInput
   let error = ""
-  let selectedKeyNameInExamples
 
   $: createNewKeyMode = selectedKey === newTranslationKey
 
@@ -78,19 +77,18 @@
     <button class="button button--danger button--small button--square" on:click={removeKey}>Remove</button>
   </div>
 
-  {#if createNewKeyMode}
-    <div transition:slide={{ duration: 100 }} class="text-orange mt-1/8">Give your translation a key</div>
-  {:else if error}
+  {#if error}
     <div transition:slide={{ duration: 100 }} class="text-red mt-1/8">{error}</div>
   {/if}
 </div>
 
-{#if selectedKey}
-  {@const selectedKeyNameInExamples = createNewKeyMode ? "…" : selectedKey}
+{#if createNewKeyMode}
+  <p class="text-orange">Type in the name of your key and hit <key>Enter</key> to proceed.</p>
+{:else}
   <p class="text-small mb-0">
     Include this key in your project using
     <code style="color: var(--color-punctuation)">
-      <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
+      <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>)
     </code>
   </p>
 
@@ -99,7 +97,7 @@
   </p>
 
   <code class="inline-block mt-1/8 text-small" style="color: var(--color-punctuation)">
-    <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>,
+    <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>,
     <span style="color: var(--color-value)">Icon String</span>(<span style="color: var(--color-variable)">Bolt</span>))
   </code>
 
@@ -110,19 +108,20 @@
   <p class="text-small mb-0">
     Include this key as a static string replacement using
     <code style="color: var(--color-punctuation)">
-      <span style="color: var(--color-custom-keyword)">@translate</span><span style="color: var(--color-variable)">.static</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
+      <span style="color: var(--color-custom-keyword)">@translate</span><span style="color: var(--color-variable)">.static</span>(<span style="color: var(--color-string)">"{selectedKey}"</span>)
     </code>
   </p>
+
+  <hr class="mt-1/4 mb-1/4">
+
+  {#if $translationKeys[selectedKey]}
+    {#each $selectedLanguages as language}
+      <div class="form-group-inline mt-1/8">
+        <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
+
+        <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]}></textarea>
+      </div>
+    {/each}
+  {/if}
 {/if}
 
-<hr class="mt-1/4 mb-1/4">
-
-{#if !createNewKeyMode && $translationKeys[selectedKey]}
-  {#each $selectedLanguages as language}
-    <div class="form-group-inline mt-1/8">
-      <label style="display: block !important" for="">{languageOptions[language] && languageOptions[language].name}</label> <!-- For some reason optional chaining doesn't work -->
-
-      <textarea class="form-input form-textarea form-textarea--extra-small" bind:value={$translationKeys[selectedKey][language]}></textarea>
-    </div>
-  {/each}
-{/if}
