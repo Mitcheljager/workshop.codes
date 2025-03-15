@@ -24,8 +24,8 @@
   // Counteract padding from .translation-settings__aside to move the scrollbar
   // to the edge of it, then reapply the padding so keys are not touching the
   // edge of the .translation-settings__aside also.
-  margin-inline: -($margin * 0.25);
-  padding-inline: ($margin * 0.25);
+  margin: 0 ($margin * -0.25);
+  padding: 0 ($margin * 0.25);
 
   @include styled-scrollbar;
 }
