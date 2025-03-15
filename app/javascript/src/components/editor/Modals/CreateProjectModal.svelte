@@ -13,9 +13,9 @@
     loading = true
 
     const data = await createProject(value)
-    if (data != "error") {
+    if (data) {
       modal.close()
-      if (data) setUrl(data.uuid)
+      setUrl(data.uuid)
     }
 
     loading = false

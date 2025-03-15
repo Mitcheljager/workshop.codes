@@ -25,8 +25,6 @@ export async function createProject(title: string, content = null): Promise<Proj
     .catch(error => {
       console.error(error)
       alert("Something went wrong while creating your project, please try again")
-
-      return "error"
     })
 }
 
