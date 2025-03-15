@@ -22,22 +22,13 @@
     const content = getSaveContent()
     saveToLocalStorage(content, Date.now())
 
-    new FetchRails(`/projects/${$currentProject.uuid}`, { project: { content } }).post({ method: "put" })
-      .then(data => {
-        if (!data) throw Error("Save failed, no data was returned")
-
+    saveProject($currentProject.uuid, content)
+      .then((project) => {
         lastSaveContent = content
 
-        const updated_at = JSON.parse(data).updated_at
-
-        updateProject($currentProject.uuid, { updated_at })
-        saveToLocalStorage(content, updated_at) // Save again to localStorage to update the updated_at date
+        saveToLocalStorage(content, project.updated_at) // Save again to localStorage to update the updated_at date
 
         showConfetti()
-      })
-      .catch(error => {
-        Bugsnag.notify(error)
-        alert("Something went wrong while saving, please try again. If the error persists, please contact the developers on Discord with the following error:\n\n" + error)
       })
       .finally(() => {
         loading = false
