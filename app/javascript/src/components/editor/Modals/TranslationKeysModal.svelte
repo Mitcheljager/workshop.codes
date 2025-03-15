@@ -43,7 +43,7 @@
             <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}><Copy width="16" /></button>
           </div>
         {:else}
-          <p class="m-0">No keys</p>
+          <p class="m-0">You have not yet created any keys.</p>
         {/each}
       </div>
 
