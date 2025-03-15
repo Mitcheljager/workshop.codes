@@ -15,14 +15,9 @@
   let error = ""
   let selectedKeyNameInExamples
 
-  $: {
-    createNewKeyMode = selectedKey === newTranslationKey
+  $: createNewKeyMode = selectedKey === newTranslationKey
 
-    selectedKeyNameInExamples = createNewKeyMode ? "…" : selectedKey
-
-    if (createNewKeyMode && createOrRenameInput)
-      createOrRenameInput.focus()
-  }
+  $: if (createNewKeyMode && createOrRenameInput) createOrRenameInput.focus()
 
   const createOrRenameKey = () => {
     error = ""
@@ -89,32 +84,35 @@
   {/if}
 </div>
 
-<p class="text-small mb-0">
-  Include this key in your project using
-  <code style="color: var(--color-punctuation)">
-    <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
+{#if selectedKey}
+  {@const selectedKeyNameInExamples = createNewKeyMode ? "…" : selectedKey}
+  <p class="text-small mb-0">
+    Include this key in your project using
+    <code style="color: var(--color-punctuation)">
+      <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
+    </code>
+  </p>
+
+  <p class="text-small mt-1/8 mb-0">
+    Include optional parameters just like you would when using <code>Custom String</code>
+  </p>
+
+  <code class="inline-block mt-1/8 text-small" style="color: var(--color-punctuation)">
+    <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>,
+    <span style="color: var(--color-value)">Icon String</span>(<span style="color: var(--color-variable)">Bolt</span>))
   </code>
-</p>
 
-<p class="text-small mt-1/8 mb-0">
-  Include optional parameters just like you would when using <code>Custom String</code>
-</p>
-
-<code class="inline-block mt-1/8 text-small" style="color: var(--color-punctuation)">
-  <span style="color: var(--color-custom-keyword)">@translate</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>,
-  <span style="color: var(--color-value)">Icon String</span>(<span style="color: var(--color-variable)">Bolt</span>))
-</code>
-
-<code class="inline-block mt-1/8 text-small">
-  Some translation &#123;0&#125; with an icon in the middle
-</code>
-
-<p class="text-small mb-0">
-  Include this key as a static string replacement using
-  <code style="color: var(--color-punctuation)">
-    <span style="color: var(--color-custom-keyword)">@translate</span><span style="color: var(--color-variable)">.static</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
+  <code class="inline-block mt-1/8 text-small">
+    Some translation &#123;0&#125; with an icon in the middle
   </code>
-</p>
+
+  <p class="text-small mb-0">
+    Include this key as a static string replacement using
+    <code style="color: var(--color-punctuation)">
+      <span style="color: var(--color-custom-keyword)">@translate</span><span style="color: var(--color-variable)">.static</span>(<span style="color: var(--color-string)">"{selectedKeyNameInExamples}"</span>)
+    </code>
+  </p>
+{/if}
 
 <hr class="mt-1/4 mb-1/4">
 
