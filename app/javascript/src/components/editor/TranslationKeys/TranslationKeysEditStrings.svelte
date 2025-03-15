@@ -4,7 +4,7 @@
   import { submittable } from "@components/actions/submittable"
   import { createEventDispatcher } from "svelte"
   import debounce from "@src/debounce"
-  import { createNewTranslationKey } from "@src/lib/translations"
+  import { newTranslationKey } from "@src/lib/translations"
 
   export let selectedKey
 
@@ -16,7 +16,7 @@
   let selectedKeyNameInExamples
 
   $: {
-    createNewKeyMode = selectedKey === createNewTranslationKey
+    createNewKeyMode = selectedKey === newTranslationKey
 
     selectedKeyNameInExamples = createNewKeyMode ? "…" : selectedKey
 
@@ -71,8 +71,8 @@
       class="form-input"
       value={createNewKeyMode ? "" : selectedKey}
       bind:this={createOrRenameInput}
-      on:input={!createNewKeyMode && debounce(createOrRenameKey, 300)}
-      on:change={createNewKeyMode && createOrRenameKey}/>
+      on:input={!createNewKeyMode ? debounce(createOrRenameKey, 300) : null}
+      on:change={createNewKeyMode ? createOrRenameKey : null}/>
     <button class="button button--danger button--small button--square" on:click={removeKey}>Remove</button>
   </div>
 
