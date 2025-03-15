@@ -2,9 +2,9 @@
   import Modal from "@components/editor/Modals/Modal.svelte"
   import TranslationKeysEditStrings from "@components/editor/TranslationKeys/TranslationKeysEditStrings.svelte"
   import TranslationKeysSelectLanguages from "@components/editor/TranslationKeys/TranslationKeysSelectLanguages.svelte"
-  import { translationKeys, orderedTranslationKeys, selectedLanguages } from "@stores/translationKeys"
+  import { orderedTranslationKeys, selectedLanguages } from "@stores/translationKeys"
   import { copyValueToClipboard } from "@src/copy"
-  import { submittable } from "@components/actions/submittable"
+  import { newTranslationKey } from "@src/lib/translations"
   import Copy from "@src/components/icon/Copy.svelte"
   import TranslationKeysImportExportButtons from "@src/components/editor/TranslationKeys/TranslationKeysImportExportButtons.svelte"
 
@@ -12,24 +12,6 @@
 
   let selectedKey = initialSelectedKey
   let showLanguageSettings = false
-  let error = ""
-  let newKeyInput: HTMLInputElement
-
-  function addKey() {
-    error = ""
-
-    const value = newKeyInput?.value.trim()
-    if (!value) return
-
-    if ($translationKeys[value]) {
-      error = "Key already taken"
-      return
-    }
-
-    $translationKeys[value] = {}
-    selectedKey = value
-    newKeyInput.value = ""
-  }
 </script>
 
 <Modal maxWidth="clamp(300px, 90vw, 900px)" internalScrolling flush>
@@ -44,43 +26,28 @@
         Select languages ({$selectedLanguages.length})
       </button>
 
-      {#if Object.keys($orderedTranslationKeys).length}
-        <h4 class="mb-1/8"><strong>Keys</strong></h4>
+      <h4 class="flex align-center justify-between mb-1/8">
+        <strong>Keys</strong>
+        <button class="button button--primary button--small button--square" on:click={() => { selectedKey = newTranslationKey; showLanguageSettings = false }}>Add</button>
+      </h4>
 
-        <div class="translation-settings__keys-container">
-          {#each Object.keys($orderedTranslationKeys) as key}
-            <div
-              class="translation-settings__item"
-              class:translation-settings__item--active={selectedKey === key}>
-              <button class="translation-settings__item-label" on:click={() => { selectedKey = key; showLanguageSettings = false }}>
-                {key}
-              </button>
+      <div class="translation-settings__keys-container">
+        {#each Object.keys($orderedTranslationKeys) as key}
+          <div
+            class="translation-settings__item"
+            class:translation-settings__item--active={selectedKey === key}>
+            <button class="translation-settings__item-label" on:click={() => { selectedKey = key; showLanguageSettings = false }}>
+              {key}
+            </button>
 
-              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}><Copy width="16" /></button>
-            </div>
-          {/each}
-        </div>
-      {/if}
-
-      <div class="translation-settings__create">
-        <label class="form-label text-small" for="">Create new key</label>
-        <input
-          bind:this={newKeyInput}
-          class="form-input"
-          type="text"
-          placeholder="Some Translation Key..."
-          use:submittable
-          on:submit={addKey}
-        />
-
-        {#if error}
-          <div class="text-red mt-1/8 text-small">{error}</div>
-        {/if}
-
-        <button on:click={addKey} class="button button--small button--square w-100 mt-1/8">Create</button>
-
-        <TranslationKeysImportExportButtons class="mt-1/4" />
+            <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}><Copy width="16" /></button>
+          </div>
+        {:else}
+          <p class="m-0">You have not yet created any keys.</p>
+        {/each}
       </div>
+
+      <TranslationKeysImportExportButtons class="mt-1/4" />
     </div>
 
     <div class="translation-settings__content">
