@@ -8,7 +8,7 @@
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
-  import { trimmed } from "@src/utils/text"
+  import { truncate } from "@src/utils/text"
 
   let loading = false
   let active = false
@@ -74,7 +74,7 @@
     {#if loading}
       Loading...
     {:else}
-      {trimmed($currentProject?.title, limit) || "Select a project..."}
+      {truncate($currentProject?.title, limit) || "Select a project..."}
       {#if $currentProject && !$currentProject.is_owner}
         <small>(read-only)</small>
       {/if}
