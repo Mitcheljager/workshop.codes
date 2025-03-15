@@ -203,6 +203,7 @@
         if (!data) throw Error("No projects data was returned.")
 
         return JSON.parse(data)
+          .map((project) => ({ ... project, is_owner: true }))
       })
       .catch(error => {
         alert(`Something went wrong while loading, please try again. ${error}`)
