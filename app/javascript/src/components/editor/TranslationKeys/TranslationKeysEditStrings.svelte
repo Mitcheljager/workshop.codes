@@ -5,6 +5,7 @@
   import { createEventDispatcher } from "svelte"
   import debounce from "@src/debounce"
   import { newTranslationKey } from "@src/lib/translations"
+  import { slide } from "svelte/transition"
 
   export let selectedKey
 
@@ -78,9 +79,9 @@
   </div>
 
   {#if createNewKeyMode}
-    <div class="text-orange mt-1/8">Give your translation a key</div>
+    <div transition:slide={{ duration: 100 }} class="text-orange mt-1/8">Give your translation a key</div>
   {:else if error}
-    <div class="text-red mt-1/8">{error}</div>
+    <div transition:slide={{ duration: 100 }} class="text-red mt-1/8">{error}</div>
   {/if}
 </div>
 
