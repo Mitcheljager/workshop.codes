@@ -8,7 +8,6 @@
   import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import { flip } from "svelte/animate"
-  import { truncate } from "@src/utils/text"
 
   let loading = false
   let active = false
@@ -69,15 +68,19 @@
   }
 </script>
 
-<div class="dropdown" use:outsideClick on:outsideClick={() => active = false}>
+<div class="dropdown" style:max-width="200px" use:outsideClick on:outsideClick={() => active = false}>
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
     {#if loading}
       Loading...
+    {:else if $currentProject}
+      <div class="flex align-center nowrap">
+        <span class="w-100 text-truncate">{$currentProject.title}</span>
+        {#if !$currentProject.is_owner}
+          <small>(read-only)</small>
+        {/if}
+      </div>
     {:else}
-      {truncate($currentProject?.title, limit) || "Select a project..."}
-      {#if $currentProject && !$currentProject.is_owner}
-        <small>(read-only)</small>
-      {/if}
+      Select a project...
     {/if}
   </button>
 
