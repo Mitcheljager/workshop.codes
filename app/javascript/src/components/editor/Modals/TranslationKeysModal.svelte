@@ -31,23 +31,21 @@
         <button class="button button--primary button--small button--square" on:click={() => { selectedKey = newTranslationKey; showLanguageSettings = false }}>Add</button>
       </h4>
 
-      {#if Object.keys($orderedTranslationKeys).length}
-        <div class="translation-settings__keys-container">
-          {#each Object.keys($orderedTranslationKeys) as key}
-            <div
-              class="translation-settings__item"
-              class:translation-settings__item--active={selectedKey === key}>
-              <button class="translation-settings__item-label" on:click={() => { selectedKey = key; showLanguageSettings = false }}>
-                {key}
-              </button>
+      <div class="translation-settings__keys-container">
+        {#each Object.keys($orderedTranslationKeys) as key}
+          <div
+            class="translation-settings__item"
+            class:translation-settings__item--active={selectedKey === key}>
+            <button class="translation-settings__item-label" on:click={() => { selectedKey = key; showLanguageSettings = false }}>
+              {key}
+            </button>
 
-              <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}><Copy width="16" /></button>
-            </div>
-          {/each}
-        </div>
-      {:else}
-        <p class="m-0">No keys</p>
-      {/if}
+            <button class="translation-settings__copy" on:click={() => copyValueToClipboard(key)}><Copy width="16" /></button>
+          </div>
+        {:else}
+          <p class="m-0">No keys</p>
+        {/each}
+      </div>
 
       <TranslationKeysImportExportButtons class="mt-1/4" />
     </div>
