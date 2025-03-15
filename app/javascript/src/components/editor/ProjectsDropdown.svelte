@@ -93,7 +93,7 @@
       <hr />
 
       {#each filteredProjects as project (project.uuid)}
-        <button class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
+        <button class="dropdown__item text-truncate" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
           {project.title}
         </button>
       {/each}
