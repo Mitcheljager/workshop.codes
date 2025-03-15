@@ -67,12 +67,18 @@
 
 <div class="sticky top-0 well well--dark block p-1/4 mb-1/4">
   <div class="flex gap-1/4 align-center">
+    <!--
+    NOTE: either on:input or on:change are registered here for better user experience:
+    - When creating a new key, the key won't be created until the user has pressed the Enter key (or moved focus away from the input)
+    - But when editing an already existing key, the explicit submission shouldn't be required (like with the translation <textarea>s below)
+      - The event handler is still debounced to prevent too many changes to the UI
+    -->
     <input
       class="form-input"
       value={createNewKeyMode ? "" : selectedKey}
       bind:this={createOrRenameInput}
       on:input={!createNewKeyMode ? debounce(createOrRenameKey, 300) : null}
-      on:change={createNewKeyMode ? createOrRenameKey : null}/>
+      on:change={createNewKeyMode ? createOrRenameKey : null} />
     <button class="button button--danger button--small button--square" on:click={removeKey}>Remove</button>
   </div>
 
