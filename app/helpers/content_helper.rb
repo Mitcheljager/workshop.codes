@@ -125,13 +125,23 @@ module ContentHelper
   end
 
   def markdown_hero_icon(text)
-    text.gsub /\[hero\s+([\p{L}\p{N}_:.\-\s]+)\]/ do
+    text.gsub(/\[hero\s+([\p{L}\p{N}_:.\-\s]+)\s*(?:\{([^}]*)\})?\s*\]/) do
       begin
         hero_name = ERB::Util.html_escape($1.strip)
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name), width: 50, height: 50, loading: "lazy", alt: $1)
-      rescue; end
+
+        config = YAML.load("{#{$2}}".strip)
+
+        size = 50
+        size = 100 if config["size"] == "medium"
+        size = 256 if config["size"] == "large"
+
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name, size), width: size, height: size, loading: "lazy", alt: hero_name)
+      rescue
+        nil
+      end
     end
   end
+
 
   def markdown_ability_icon(text)
     text.gsub /\[ability\s+([\p{L}\p{N}_:.\(\)\-\s]+)\]/ do

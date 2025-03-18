@@ -243,6 +243,45 @@ class InitialiseInscrybeMDE {
       const dropdownElement = document.createElement("div")
       dropdownElement.classList.add("editor-dropdown")
 
+      const sizesElement = document.createElement("div")
+      sizesElement.classList.add("p-1/8")
+
+      ;["Small", "Medium", "Large"].forEach((size, i) => {
+        const id = `hero_select_size_${size}`
+
+        const sizeItemElement = document.createElement("div")
+        sizeItemElement.classList.add("checkbox")
+
+        const checkboxElement = document.createElement("input")
+        checkboxElement.type = "radio"
+        checkboxElement.value = size.toLowerCase()
+        checkboxElement.checked = i === 0
+        checkboxElement.name = "hero_select_size"
+        checkboxElement.id = id
+
+        const labelElement = document.createElement("label")
+        labelElement.for = name
+        labelElement.innerText = size
+
+        sizeItemElement.addEventListener("click", event => {
+          event.preventDefault()
+          event.stopPropagation()
+
+          checkboxElement.checked = true
+        })
+
+        sizeItemElement.append(checkboxElement)
+        sizeItemElement.append(labelElement)
+        sizesElement.append(sizeItemElement)
+      })
+
+      dropdownElement.append(sizesElement)
+
+      const separatorElement = document.createElement("hr")
+      separatorElement.classList.add("mt-1/8")
+      separatorElement.classList.add("mb-1/8")
+      dropdownElement.append(separatorElement)
+
       const heroes = JSON.parse(this.element.dataset.heroes)
       heroes.forEach(hero => {
         const heroElement = document.createElement("div")
@@ -250,7 +289,10 @@ class InitialiseInscrybeMDE {
         heroElement.innerText = hero
 
         heroElement.addEventListener("click", () => {
-          this.codemirror.replaceSelection(`[hero ${hero}]`)
+          const size = document.querySelector("[name='hero_select_size']:checked").value
+          const sizeString = size === "small" ? "" : ` { size: "${size}" }`
+
+          this.codemirror.replaceSelection(`[hero ${hero}${sizeString}]`)
         })
 
         dropdownElement.append(heroElement)
