@@ -133,7 +133,7 @@ class Post < ApplicationRecord
   validates :maps, presence: true, array_name_part_of: { array: maps }
   validates :version, length: { maximum: 20 }
   validates :image_order, array_length: { maximum: 30 }
-  validates :images, content_type: ["image/png", "image/jpg", "image/jpeg", "image/webp"],
+  validates :images, content_type: ["image/png", "image/jpeg", "image/webp"],
                      size: { less_than: 2.megabytes },
                      dimension: { max: 3500..3500 }
   validates :videos, content_type: ["video/mp4"], size: { less_than: 50.megabytes }
