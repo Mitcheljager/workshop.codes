@@ -280,7 +280,7 @@ function checkTranslations(content: string): void {
 
       // Find translations that are not in client side actions
       const phrase = getPhraseFromPosition(line, parenthesisBeforeAtIndex - 1)
-      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message"]
+      const acceptedPhrases = ["Create HUD Text", "Create In-World Text", "Create Progress Bar HUD Text", "Create Progress Bar In-World Text", "Set Objective Description", "Big Message", "Small Message", "Array"]
 
       if (phrase?.text.includes("include")) continue
 
