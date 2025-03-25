@@ -109,7 +109,7 @@
   }
 
   async function processFile(file: File): Promise<void> {
-    if (file.type != "image/png" && file.type != "image/jpg" && file.type != "image/jpeg") {
+    if (file.type != "image/png" && file.type != "image/jpeg") {
       addAlertError("Wrong file type. Only png and jpeg are accepted.")
       return
     }
@@ -208,7 +208,7 @@
   <label class="dropzone__button button button--secondary mt-1/4">
     {buttonLabel}
 
-    <input type="file" multiple={true} accept="image/png, image/jpeg, image/jpg" onchange={changeInput} tabindex="-1" />
+    <input type="file" multiple={true} accept="image/png, image/jpeg" onchange={changeInput} tabindex="-1" />
   </label>
 </div>
 

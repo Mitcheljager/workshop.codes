@@ -29,7 +29,7 @@ export default class InscrybeInsertImage {
   }
 
   isFileImage() {
-    if (this.file.type != "image/png" && this.file.type != "image/jpg" && this.file.type != "image/jpeg") {
+    if (this.file.type != "image/png" && this.file.type != "image/jpeg") {
       addAlertError("Unsupported filetype. Only png and jpg are supported.")
       return
     }

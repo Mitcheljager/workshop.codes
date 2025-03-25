@@ -62,7 +62,7 @@
 
 
         <%= form.file_field :profile_image,
-                            accept: "image/png, image/jpeg, image/jpg",
+                            accept: "image/png, image/jpeg",
                             data: { action: "image-preview", target: "profile-image" } %>
 
         <p class="form-hint mt-1/4 mb-0">
@@ -88,7 +88,7 @@
                     alt: "Banner image" %>
 
       <%= form.file_field :banner_image,
-                          accept: "image/png, image/jpeg, image/jpg",
+                          accept: "image/png, image/jpeg",
                           data: { action: "image-preview", target: "banner" } %>
 
       <p class="form-hint mt-1/4 mb-0">
