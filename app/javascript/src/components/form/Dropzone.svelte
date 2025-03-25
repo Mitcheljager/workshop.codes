@@ -97,10 +97,10 @@
   function readFiles(files: FileList | DataTransferItemList): void {
     if (files instanceof FileList) {
       // File input
-      Array.from(files).forEach(file => processFile(file))
+      Array.from(files).filter(Boolean).forEach(file => processFile(file))
     } else {
       // Drag and drop
-      Array.from(files).forEach(item => {
+      Array.from(files).filter(Boolean).forEach(item => {
         if (item.kind !== "file") return
 
         const file = item.getAsFile()
