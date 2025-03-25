@@ -47,6 +47,7 @@
   let listElement: HTMLElement | null = $state(null)
   let active = $state(false)
   let previewImageUrl = $state("")
+  let sortable: Sortable | null = null
 
   $effect(() => { if (images) updateOrder() })
 
@@ -68,7 +69,7 @@
   function createSortable(): void {
     if (!listElement) return
 
-    new Sortable(listElement, {
+    sortable = new Sortable(listElement, {
       animation: 100,
       store: {
         get: () => [],
@@ -125,6 +126,8 @@
   function uploadImage(file: File): void {
     const uploader = new Uploader(file, input!)
 
+    sortable?.option("disabled", true)
+
     uploader.upload().then(() => {
       const randomId = Math.random().toString(36).substr(2, 9)
       images = [...images, { id: randomId, type: "preview" }]
@@ -149,7 +152,11 @@
           addAlertError("Something went wrong when retrieving your image")
         }
       }, 100)
-    }).catch(error => addAlertError(error))
+    })
+      .catch(error => addAlertError(error))
+      .finally(() => {
+        sortable?.option("disabled", false)
+      })
   }
 
   function setProgress(id: string, progress: number) {
