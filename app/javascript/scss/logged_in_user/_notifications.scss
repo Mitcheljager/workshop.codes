@@ -1,5 +1,10 @@
 .notifications {
   position: relative;
+  margin: 0 0 $margin * 0.125;
+
+  @include media-min(mbl) {
+    margin: 0 $margin * 0.125 0;
+  }
 }
 
 .notifications__bubble {
