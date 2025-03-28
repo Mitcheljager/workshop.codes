@@ -74,6 +74,19 @@
 .notifications__label {
   margin-top: .25rem;
   cursor: pointer;
+  color: $text-color-lightest;
+
+  @include media-min(mbl) {
+    color: $bg-dark;
+  }
+
+  @include hover-stack {
+    color: $white;
+
+    @include media-min(mbl) {
+      color: $bg-darker;
+    }
+  }
 
   svg {
     height: 1.5rem;
@@ -87,24 +100,6 @@
           animation: move-knocker 500ms 200ms;
         }
       }
-    }
-  }
-
-  @include hover-stack {
-    path {
-      fill: $white;
-
-      @include media-min(mbl) {
-        fill: $bg-darker;
-      }
-    }
-  }
-
-  path {
-    fill: $text-color-lightest;
-
-    @include media-min(mbl) {
-      fill: $bg-dark;
     }
   }
 }
