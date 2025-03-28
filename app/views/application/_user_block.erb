@@ -3,7 +3,7 @@
     <%= svelte_component "Notifications", { viewAllPath: notifications_path } %>
 
     <div class="dropdown lg-down:dropup" data-dropdown>
-      <%= link_to current_user.clean_username, account_path, class: "user-block__action mr-1/16 hidden sm:visible", data: { action: "toggle-dropdown" } %>
+      <%= link_to current_user.clean_username, account_path, class: "user-block__action mr-1/16 hidden mbl:visible", data: { action: "toggle-dropdown" } %>
       <%= link_to current_user.clean_username, account_path, class: "user-block__action mb-1/4 mbl:hidden" %>
 
       <div class="dropdown__content" data-dropdown-content>
