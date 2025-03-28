@@ -27,7 +27,7 @@
   text-decoration: none;
   font-family: $font-stack-alt;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 24px;
 
   @include media-min(mbl) {
     --color: #{$body-bg};
@@ -88,7 +88,10 @@
   &--discord {
     display: flex;
     color: var(--discord-color);
-    filter: var(--discord-drop-shadow);
+
+    @include media-min(mbl) {
+      filter: var(--discord-drop-shadow);
+    }
   }
 }
 

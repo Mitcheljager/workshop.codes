@@ -23,6 +23,12 @@
   }
 }
 
+.mbl\:hidden {
+  @include media-min(mbl) {
+    display: none;
+  }
+}
+
 .sm\:inline-block {
   @include media-min(sm) {
     display: inline;

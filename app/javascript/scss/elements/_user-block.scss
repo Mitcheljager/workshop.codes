@@ -4,23 +4,23 @@
   justify-content: center;
   align-items: center;
   margin-top: $margin;
-  font-size: $font-size-small;
-  color: rgba(white, .75);
+  color: rgba($white, .75);
 
   @include media-min(mbl) {
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 0;
     margin-left: auto;
+    font-size: $font-size-small;
   }
 }
 
 .user-block__action {
   display: inline-block;
-  padding: .425em .75em;
+  padding: .5em .75em;
   border-radius: $border-radius;
   background: $bg-dark;
-  line-height: 1em;
+  line-height: 1;
   font-weight: bold;
   color: $text-color-lightest;
   text-decoration: none;
@@ -30,13 +30,17 @@
     border: 2px solid currentColor;
   }
 
+  @include media-min(mbl) {
+    padding: .425em .75em;
+  }
+
   &:hover,
   &:active,
   &:focus {
     background: $bg-darker;
-    box-shadow: 0 0 0 2px white;
+    box-shadow: 0 0 0 2px $white;
     text-decoration: none;
-    color: white;
+    color: $white;
   }
 }
 

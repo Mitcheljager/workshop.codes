@@ -7,6 +7,7 @@
   import { notifications, notificationsCount } from "@stores/notifications"
 
   import Bell from "@components/icon/Bell.svelte"
+  import { outsideClick } from "@components/actions/outsideClick"
 
   interface Props { viewAllPath: string }
 
@@ -21,12 +22,19 @@
     getUnreadCount()
   })
 
-  async function getNotifications(): Promise<void> {
+  function toggle(): void {
+    if (window.innerWidth < 768) {
+      window.location.href = viewAllPath
+      return
+    }
+
     active = !active
     if (active) animate()
 
-    if (!loading) return
+    if (loading) getNotifications()
+  }
 
+  async function getNotifications(): Promise<void> {
     $notificationsCount = 0
 
     try {
@@ -51,9 +59,13 @@
 </script>
 
 <div class="notifications dropdown lg-down:dropup mb-1/8 mbl:mb-0 mbl:mr-1/8">
-  <button data-action="toggle-dropdown" aria-label="Notifications" onclick={() => getNotifications()}>
-    <div class="notifications__label">
+  <button data-action="toggle-dropdown" aria-label="Notifications" onclick={() => toggle()}>
+    <div class="notifications__bell">
       <Bell {animating} />
+
+      <span class="notifications__label">
+        Notifications
+      </span>
     </div>
 
     {#if $notificationsCount}
@@ -62,7 +74,11 @@
   </button>
 
   {#if active}
-    <div class="dropdown__content dropdown__content--large active pt-0" transition:fly={{ y: 10, duration: 100 }}>
+    <div
+      class="dropdown__content dropdown__content--large active pt-0"
+      transition:fly={{ y: 10, duration: 100 }}
+      use:outsideClick={{ onOutsideClick: () => active = false }}>
+
       <div class="dropdown__header">
         <h4 class="mt-0 mb-0">Notifications</h4>
 
