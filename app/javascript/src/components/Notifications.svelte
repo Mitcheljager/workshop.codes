@@ -58,7 +58,7 @@
   }
 </script>
 
-<div class="notifications dropdown lg-down:dropup mb-1/8 mbl:mb-0 mbl:mr-1/8">
+<div class="notifications dropdown lg-down:dropup mb-1/8 mbl:mb-0 mbl:mr-1/8" use:outsideClick={{ onOutsideClick: () => active = false }}>
   <button data-action="toggle-dropdown" aria-label="Notifications" onclick={() => toggle()}>
     <div class="notifications__bell">
       <Bell {animating} />
@@ -74,10 +74,7 @@
   </button>
 
   {#if active}
-    <div
-      class="dropdown__content dropdown__content--large active pt-0"
-      transition:fly={{ y: 10, duration: 100 }}
-      use:outsideClick={{ onOutsideClick: () => active = false }}>
+    <div class="dropdown__content dropdown__content--large active pt-0" transition:fly={{ y: 10, duration: 100 }}>
 
       <div class="dropdown__header">
         <h4 class="mt-0 mb-0">Notifications</h4>
