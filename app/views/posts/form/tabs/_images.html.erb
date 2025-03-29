@@ -1,13 +1,15 @@
 <h2 class="mt-1/1" id="images-title">Images</h2>
 
 <div class="form-group">
-  <p class="form-hint" id="image-upload-hint">
-    <strong>Include an image (or video) at the top of your post.</strong> If you add more than 1 image it turns in to an image slider. All images are displayed in a 900x500 format.<br>
-    Images created with generative AI are not permitted.<br>
-    <strong>The first image will be your Thumbnail.</strong>
-  </p>
+  <div class="well well--dark block">
+    <%= form.label :images, "Carousel", class: "form-label" %>
 
-  <div class="well well--dark block mt-1/4">
+    <p class="form-hint mt-0" id="image-upload-hint">
+      <strong>Include an image (or video) at the top of your post.</strong> If you add more than 1 image it turns in to an image slider. All images are displayed in a 900x500 format.<br>
+      Images created with generative AI are not permitted.<br>
+      <strong>The first image will be your thumbnail.</strong>
+    </p>
+
     <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden-field", data: { action: "form-images" }, aria: { describedby: "image-upload-hint", labelledby: "images-title" } %>
     <%= form.hidden_field :image_order %>
 
@@ -37,5 +39,36 @@
         <p class="error-help-text mb-0" aria-live="polite">Please provide a valid YouTube video link or video ID</p>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="well well--dark block mt-1/2">
+    <%= form.label :banner_image, "Banner image", class: "form-label" %>
+    <p class="form-hint mt-1/4 mb-0">
+      This image is displayed at the top of your post, replacing the regular header.<br>
+      Images created with generative AI are not permitted.
+    </p>
+
+    <% begin %>
+      <%= image_tag (@post.banner_image.attached? ? rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) : "//:0"),
+                    class: "mt-1/4 img-fluid",
+                    data: { image_preview: "banner" },
+                    alt: "Banner image" %>
+    <% rescue %>
+      <p><em>Something went wrong when retrieving your image. This is likely our fault. Please try re-uploading your image, or try again later.</em></p>
+    <% end %>
+
+    <%= form.file_field :banner_image,
+                        accept: "image/png, image/jpeg",
+                        data: { action: "image-preview", target: "banner" } %>
+
+    <p class="form-hint mt-1/4 mb-0">
+      This image will be processed to a 1920x400 format. Max 2MB.
+    </p>
+
+    <%= hidden_field_tag :remove_banner_image, "", data: { clear_image_flag: "banner" } %>
+    <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
+                        data: { action: "clear-image", target: "banner" }  %>
   </div>
 </div>

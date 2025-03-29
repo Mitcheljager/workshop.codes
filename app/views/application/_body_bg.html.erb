@@ -1,15 +1,13 @@
 <div class="body-bg body-bg--<%= yield(:bg_size) %>">
   <picture>
-    <% if yield(:replace_body_bg) == "" %>
+    <% if yield(:replace_body_bg).blank? %>
       <source
         srcset="
           <%= image_path "layout/header-bg_sm.webp" %> 640w,
           <%= image_path "layout/header-bg_md.webp" %> 960w,
           <%= image_path "layout/header-bg_lg.webp" %> 1920w"
         type="image/webp">
-    <% end %>
 
-    <% if yield(:replace_body_bg) == "" %>
       <source
         srcset="
           <%= image_path "layout/header-bg_sm.jpg" %> 640w,
@@ -18,19 +16,24 @@
         type="image/jpeg">
 
       <%= image_tag "layout/header-bg_lg.jpg", alt: "", height: 400, width: 1920, fetchpriority: "high" %>
+    <% elsif yield(:replace_body_bg) == "user" %>
+      <source
+        srcset="
+          <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [640, 400]).processed) %> 640w,
+          <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [960, 400]).processed) %> 960w,
+          <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) %> 1920w"
+        type="image/jpeg">
+
+      <%= image_tag rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
+    <% elsif yield(:replace_body_bg) == "post" %>
+      <source
+        srcset="
+          <%= rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [640, 400]).processed) %> 640w,
+          <%= rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [960, 400]).processed) %> 960w,
+          <%= rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) %> 1920w"
+        type="image/jpeg">
+
+      <%= image_tag rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
     <% end %>
-
-    <% begin %>
-      <% if yield(:replace_body_bg) == "user" %>
-        <source
-          srcset="
-            <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [640, 400]).processed) %> 640w,
-            <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [960, 400]).processed) %> 960w,
-            <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) %> 1920w"
-          type="image/jpeg">
-
-        <%= image_tag rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
-      <% end %>
-    <% rescue; end %>
   </picture>
 </div>

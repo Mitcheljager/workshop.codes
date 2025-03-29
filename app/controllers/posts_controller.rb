@@ -7,10 +7,10 @@ class PostsController < ApplicationController
 
   before_action only: [:edit, :update, :destroy, :immortalise] do
     if @post.present?
-      unless current_user
-        redirect_to login_path
-      else
+      if current_user
         redirect_to post_path(@post.code), flash: { error: "You are not authorized to perform that action" } unless current_user == @post.user
+      else
+        redirect_to login_path
       end
     else
       redirect_to root_path
@@ -149,9 +149,14 @@ class PostsController < ApplicationController
     begin
       Post.transaction do
         set_post_status
-        unless parse_carousel_video
+
+        if !parse_carousel_video
           @post.errors.add :carousel_video, :invalid, message: "must be a YouTube link or video ID"
           raise ActiveRecord::RecordInvalid.new @post
+        end
+
+        if (params[:remove_banner_image].present?)
+          @post.banner_image.purge
         end
 
         @post.update!(post_params)
@@ -393,7 +398,7 @@ class PostsController < ApplicationController
       :revision, :revision_description,
       :min_players, :max_players,
       :email_notification, :email,
-      :carousel_video, :image_order, images: [], videos: [])
+      :carousel_video, :banner_image, :image_order, images: [], videos: [])
   end
 
   def email_notification_enabled
