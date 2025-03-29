@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_07_201634) do
-
+ActiveRecord::Schema[7.0].define(version: 2025_03_29_202839) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -177,6 +176,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_201634) do
     t.index ["post_id"], name: "index_email_notifications_on_post_id"
   end
 
+  create_table "enhance_audio_files", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
@@ -242,7 +248,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_201634) do
     t.integer "comments_count", default: 0
     t.boolean "overwatch_2_compatible", default: false
     t.integer "top_hotness", default: 1
-    t.datetime "top_hotness_at"
+    t.datetime "top_hotness_at", precision: nil
+    t.boolean "light_header", default: false
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"

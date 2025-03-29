@@ -26,8 +26,10 @@
           orderInputName: "post[image_order]"
         }) %>
 
-    <div class="form-group-uneven mt-1/4">
-      <div class="form-group">
+    <hr class="mt-1/2 mb-1/2">
+
+    <div class="form-group-uneven">
+      <div class="form-group mt-0">
         <%= form.label :carousel_video, "YouTube video", class: "form-label" %>
 
         <div class="form-hint" id="video-hint">
@@ -70,5 +72,21 @@
     <%= hidden_field_tag :remove_banner_image, "", data: { clear_image_flag: "banner" } %>
     <%= button_tag "Remove", type: "button", class: "mt-1/8 button button--small button--link text-red",
                         data: { action: "clear-image", target: "banner" }  %>
+
+    <hr class="mt-1/2 mb-1/2">
+
+    <div class="switch-checkbox">
+      <%= form.check_box :light_header,
+          checked: @post.light_header?,
+          class: "switch-checkbox__input",
+          aria: { describedby: "light-header" },
+          autocomplete: "off" %>
+
+      <%= form.label :light_header, "Light header", class: "switch-checkbox__label" %>
+    </div>
+
+    <p class="form-hint mb-0 mt-1/8" id="light-header">
+      Dark banner images can make the main header difficult to read. Use this to switch to lighter colors, possibly improving readability. The main navigation is important to be legible for everyone. Make sure to check which one fits best. If in doubt, you may want to use a different image altogether.
+    </p>
   </div>
 </div>
