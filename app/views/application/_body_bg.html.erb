@@ -19,21 +19,21 @@
     <% elsif yield(:replace_body_bg) == "user" %>
       <source
         srcset="
-          <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [640, 400]).processed) %> 640w,
-          <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [960, 400]).processed) %> 960w,
-          <%= rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) %> 1920w"
+          <%= rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [640, 400]).processed) %> 640w,
+          <%= rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [960, 400]).processed) %> 960w,
+          <%= rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed) %> 1920w"
         type="image/jpeg">
 
-      <%= image_tag rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
+      <%= image_tag rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
     <% elsif yield(:replace_body_bg) == "post" %>
       <source
         srcset="
-          <%= rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [640, 400]).processed) %> 640w,
-          <%= rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [960, 400]).processed) %> 960w,
-          <%= rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) %> 1920w"
+          <%= rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [640, 400]).processed) %> 640w,
+          <%= rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [960, 400]).processed) %> 960w,
+          <%= rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed) %> 1920w"
         type="image/jpeg">
 
-      <%= image_tag rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
+      <%= image_tag rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
     <% end %>
   </picture>
 </div>
