@@ -23,3 +23,8 @@ function toggleSearch(event: Event): void {
   const inputElement = searchElement?.querySelector("input[name='query']") as HTMLFormElement
   if (inputElement) inputElement.focus()
 }
+
+export function closeNavigation(): void {
+  const navigationElement = document.querySelector("[data-role='navigation']")
+  navigationElement?.classList.remove("header__content--is-active")
+}

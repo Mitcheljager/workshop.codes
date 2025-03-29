@@ -88,4 +88,5 @@ document.addEventListener("turbolinks:before-cache", () => {
   sticky.destroy()
   dynamicMaxHeight.destroy()
   dropdown.closeDropdown(null, true)
+  navigation.closeNavigation()
 })
