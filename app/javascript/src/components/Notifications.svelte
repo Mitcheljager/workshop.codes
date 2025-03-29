@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte"
-  import { fly, scale } from "svelte/transition"
+  import { fly } from "svelte/transition"
   import * as timeago from "timeago.js"
+  import Turbolinks from "turbolinks"
 
   import FetchRails from "@src/fetch-rails"
   import { notifications, notificationsCount } from "@stores/notifications"
@@ -24,7 +25,7 @@
 
   function toggle(): void {
     if (window.innerWidth < 768) {
-      window.location.href = viewAllPath
+      navigateToAll()
       return
     }
 
@@ -56,6 +57,11 @@
     animating = true
     setTimeout(() => { animating = false }, 1000)
   }
+
+  function navigateToAll() {
+    active = false
+    Turbolinks.visit(viewAllPath)
+  }
 </script>
 
 <div class="notifications dropdown lg-down:dropup" use:outsideClick={{ onOutsideClick: () => active = false }}>
@@ -74,12 +80,12 @@
   </button>
 
   {#if active}
-    <div class="dropdown__content dropdown__content--large active pt-0" transition:fly={{ y: 10, duration: 100 }}>
+    <div class="dropdown__content dropdown__content--large active pt-0" in:fly={{ y: 10, duration: 100 }}>
 
       <div class="dropdown__header">
         <h4 class="mt-0 mb-0">Notifications</h4>
 
-        <a href={viewAllPath} class="button button--link button--small" aria-label="View all notifications">View all</a>
+        <button class="button button--link button--small" aria-label="View all notifications" onclick={() => navigateToAll()}>View all</button>
       </div>
 
       {#if loading}
