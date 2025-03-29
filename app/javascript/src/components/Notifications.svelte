@@ -24,7 +24,7 @@
   })
 
   function toggle(): void {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1000) {
       navigateToAll()
       return
     }
