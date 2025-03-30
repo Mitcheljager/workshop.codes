@@ -27,6 +27,7 @@ import * as inscrybMde from "@src/inscryb-mde"
 import * as linkedInput from "@src/linked-input"
 import * as navigateOnChange from "@src/navigate-on-change"
 import * as setCssVariable from "@src/set-css-variable"
+import * as toggleLightnesOnChange from "@src/toggle-lightness-on-change"
 import * as revealByCheckbox from "@src/reveal-by-checkbox"
 import * as revealOnDifference from "@src/reveal-on-difference"
 
@@ -58,6 +59,7 @@ document.addEventListener("turbolinks:load", () => {
   linkedInput.bind()
   imagePreview.bind()
   navigateOnChange.bind()
+  toggleLightnesOnChange.bind()
   revealByCheckbox.bind()
   revealOnDifference.bind()
 

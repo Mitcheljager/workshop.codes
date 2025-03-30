@@ -65,7 +65,7 @@
 
     <%= form.file_field :banner_image,
                         accept: "image/png, image/jpeg",
-                        data: { action: "image-preview", target: "banner" } %>
+                        data: { action: "image-preview toggle-lightness-on-change", target: "banner" } %>
 
     <p class="form-hint mt-1/4 mb-0">
       This image will be processed to a 1920x400 format. Max 2MB.
@@ -82,13 +82,15 @@
           checked: @post.light_header?,
           class: "switch-checkbox__input",
           aria: { describedby: "light-header" },
+          data: { lightness_toggle: "banner" },
           autocomplete: "off" %>
 
       <%= form.label :light_header, "Light header", class: "switch-checkbox__label" %>
     </div>
 
     <p class="form-hint mb-0 mt-1/8" id="light-header">
-      Dark banner images can make the main header difficult to read. Use this to switch to lighter colors, possibly improving readability. The main navigation is important to be legible for everyone. Make sure to check which one fits best. If in doubt, you may want to use a different image altogether.
+      Dark banner images can make the main header difficult to read. The main navigation is important to be legible for everyone. Use this to switch to lighter colors, possibly improving readability. <br>
+      This value is automatically determined when you upload your image, but you may change it if you believe otherwise. Make sure to check which one fits best. If in doubt, you may want to use a different image altogether.
     </p>
   </div>
 </div>
