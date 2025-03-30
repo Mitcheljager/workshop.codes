@@ -268,6 +268,8 @@ module ContentHelper
         <div class='video__play-icon'></div>
         <img
           #{ lazy ? "loading='lazy'" : "" }
+          width='836'
+          height='464'
           src='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp'
           srcset='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp 640w, https://i.ytimg.com/vi_webp/#{ video_id }/maxresdefault.webp 1280w'
           class='video__thumbnail'
