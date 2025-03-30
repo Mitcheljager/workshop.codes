@@ -95,10 +95,13 @@
         animate:flip={{ duration: 200 }}>
 
         {#each Array(3) as _, i}
+          {@const isCustom = control?.buttons?.[i] === "Custom" || typeof control?.buttons?.[i] === "object"}
+
           <span class="controls-form-item__button">
             <div>
               <select
-                bind:value={control.buttons[i]}
+                value={isCustom ? "Custom" : control.buttons[i]}
+                onchange={(event) => control.buttons[i] = (event.target as HTMLSelectElement).value}
                 name="controls-items-button-{i}"
                 class="form-select">
 
@@ -107,14 +110,14 @@
                 {/each}
               </select>
 
-              {#if control?.buttons?.[i] == "Custom" || typeof control?.buttons?.[i] === "object"}
+              {#if isCustom}
                 <input
                   value={(control.buttons[i] as { Custom?: string })?.Custom || ""}
                   oninput={(event) => setCustom(event, index, i)}
                   type="text"
                   name="controls-item-button-{i}"
                   class="form-input controls-form-item__custom"
-                  maxlength=15 />
+                  maxlength={15} />
               {/if}
             </div>
 
