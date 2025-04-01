@@ -27,6 +27,7 @@ import * as getSnippet from "@src/get-snippet"
 import * as getVerifiedUsers from "@src/get-verified-users"
 import * as infiniteScroll from "@src/infinite-scroll"
 import * as lazyVideo from "@src/lazy-video"
+import * as lootbox from "@src/lootbox"
 import * as microlight from "@src/microlight"
 import * as modal from "@src/modal"
 import * as navigation from "@src/navigation"
@@ -75,6 +76,7 @@ document.addEventListener("turbolinks:load", () => {
   differenceViewer.render()
   getKoFiValue.render()
   numPlayersSlider.render()
+  lootbox.render()
 
   timeago.initialize()
   scrollIntoViewOnLoad.initialize()
