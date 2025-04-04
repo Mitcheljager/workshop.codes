@@ -326,6 +326,20 @@ describe("variables.js", () => {
 
       expect(getVariables(input)).toEqual(expectedOutput)
     })
+
+    it("Should ignore variables in comments", () => {
+      const input = `
+        // Global.someVariable
+        // somePlayer.somePlayerVariable
+        /* Event Player.someOtherPlayerVariable */
+      `
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: []
+      }
+
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
   })
 
   describe("compileVariables", () => {
