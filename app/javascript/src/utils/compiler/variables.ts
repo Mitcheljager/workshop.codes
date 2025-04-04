@@ -1,6 +1,7 @@
 import { findRangesOfStrings, getClosingBracket, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
 import { evaluateParameterObjects } from "@utils/compiler/parameterObjects"
 import type { Range, Variables } from "@src/types/editor"
+import { removeComments } from "./comments"
 
 // NOTE: The fact variable names can start with a decimal is intentional.
 // We leave it to Overwatch to warn the user that this is not allowed.
@@ -137,7 +138,9 @@ function getLiteralPlayerVariables(source: string, stringRanges: Range[]): strin
 }
 
 export function getVariables(joinedItems: string): Variables {
+  joinedItems = removeComments(joinedItems)
   joinedItems = evaluateParameterObjects(joinedItems)
+
   const stringRanges = findRangesOfStrings(joinedItems)
 
   const playerVariablesFromActions = []
