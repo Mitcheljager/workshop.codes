@@ -14,4 +14,8 @@ module UsersHelper
   def is_banned?(user)
     return true if user && user.level == "banned"
   end
+
+  def to_clean_username(username)
+    username.split("#")[0]
+  end
 end

@@ -63,6 +63,10 @@ module ApplicationHelper
     Range.new(*string.split("-").map(&:to_i))
   end
 
+  def slug_to_word(string)
+    string.gsub("-", " ").split.map(&:capitalize).join(" ")
+  end
+
   def maps
     YAML.safe_load(File.read(Rails.root.join("config/arrays", "maps.yml")))
   end

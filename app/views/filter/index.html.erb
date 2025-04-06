@@ -1,11 +1,11 @@
 <% if params[:search] %>
   <% content_for :page_title, "#{ params[:search] }" %>
 <% elsif params[:category] %>
-  <% content_for :page_title, "#{ params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
+  <% content_for :page_title, "#{ slug_to_word(params[:category]) }" %>
 <% elsif params[:hero] %>
-  <% content_for :page_title, "#{ params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
+  <% content_for :page_title, "#{ slug_to_word(params[:hero]) }" %>
 <% elsif params[:map] %>
-  <% content_for :page_title, "#{ params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") }" %>
+  <% content_for :page_title, "#{ slug_to_word(params[:map]) }" %>
 <% end %>
 
 <div class="heading"></div>
@@ -30,11 +30,11 @@
   <% else %>
     Workshop Codes
     <% if params[:search] %> for <strong><%= CGI.unescape(params[:search]) %></strong> <% end %>
-    <% if params[:category] %> in <strong><%= params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-    <% if params[:hero] %> with <strong><%= params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
-    <% if params[:map] %> on <strong><%= params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") %></strong> <% end %>
+    <% if params[:category] %> in <strong><%= slug_to_word(params[:category]) %></strong> <% end %>
+    <% if params[:hero] %> with <strong><%= slug_to_word(params[:hero]) %></strong> <% end %>
+    <% if params[:map] %> on <strong><%= slug_to_word(params[:map]) %></strong> <% end %>
     <% if params[:sort] %> sorted by <strong><%= params[:sort].gsub("-", " ") %></strong> <% end %>
-    <% if params[:author] %> by <strong><%= params[:author].split("#")[0] %></strong> <% end %>
+    <% if params[:author] %> by <strong><%= to_clean_username(params[:author]) %></strong> <% end %>
     <%= tag.small "- Page #{ params[:page] }" if params[:page] %>
   <% end %>
 </h2>
