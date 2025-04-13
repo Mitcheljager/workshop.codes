@@ -1,27 +1,25 @@
-<script>
-  import { onMount, onDestroy, createEventDispatcher } from "svelte"
+<script lang="ts">
+  import { onMount } from "svelte"
 
-  export let text = ""
-  export let type = ""
-  export let key = ""
+  interface Props { text: string, type: string, onclose: () => void }
+
+  const { text = "", type = "", onclose = () => null }: Props = $props()
 
   const timer = 5000
-  const dispatch = createEventDispatcher()
 
   let timeout
 
-  onMount(() => setTimeout(close, timer))
-  onDestroy(() => { if (timeout) clearTimeout(timeout) })
+  onMount(() => {
+    setTimeout(onclose, timer)
 
-  function close() {
-    dispatch("close", key)
-  }
+    return () => { if (timeout) clearTimeout(timeout) }
+  })
 </script>
 
-<div class="alert {type} static">
+<div class="alert {type} static" aria-atomic="true" aria-live={type === "error" ? "assertive" : "polite"}>
   <p class="m-0">{text}</p>
 
-  <button class="button p-0 pl-1/16 pr-1/16 text-white" on:click={close}>✕</button>
+  <button class="button p-0 pl-1/16 pr-1/16 text-white" onclick={() => onclose()} aria-label="Close alert">✕</button>
 
-  <div class="alert__timer" style="--timer: {timer}ms" />
+  <div class="alert__timer" style="--timer: {timer}ms"></div>
 </div>

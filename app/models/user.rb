@@ -72,12 +72,12 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 255 }
   validates :nice_url, uniqueness: true, allow_blank: true
   validates :featured_posts, allow_blank: true, serialized_array_length: { maximum: 3 }
-  validates :profile_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
+  validates :profile_image, content_type: ["image/jpeg", "image/png"],
                             size: { less_than: 2.megabytes },
                             dimension: { max: 3500..3500 }
-  validates :banner_image, content_type: ["image/jpeg", "image/jpg", "image/png"],
-                            size: { less_than: 2.megabytes },
-                            dimension: { max: 3500..3500 }
+  validates :banner_image, content_type: ["image/jpeg", "image/png"],
+                           size: { less_than: 2.megabytes },
+                           dimension: { max: 3500..3500 }
   validates :uuid, presence: true, uniqueness: true, length: { is: 36 }, format: { with: /\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i }
 
   after_find do

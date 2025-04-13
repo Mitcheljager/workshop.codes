@@ -25,6 +25,29 @@
       --cog-color: #{ $black };
     }
   }
+
+  // Pretty hacky solution to make header more accessible when header image is too dark.
+  // This beats having 4 different selectors in 4 different places.
+  .wiki &,
+  &.header--light {
+    @include media-min(mbl) {
+      .navigation__item {
+        --color: #{$white};
+        --discord-color: #{$white};
+        --discord-drop-shadow: none;
+      }
+
+      .user-block__action,
+      .search input:not([type="submit"]) {
+        box-shadow: 0 0 0 2px rgba($white, 0.15);
+      }
+
+      .notifications svg {
+        stroke: rgba($white, 0.15);
+        stroke-width: 40px;
+      }
+    }
+  }
 }
 
 @keyframes fade-in-header-content {

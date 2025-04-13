@@ -13,6 +13,7 @@ gem "breadcrumbs_on_rails"
 gem 'bonsai-elasticsearch-rails', github: 'omc/bonsai-elasticsearch-rails', branch: 'master'
 gem "bootsnap", require: false
 gem "chart-js-rails"
+gem "concurrent-ruby", "= 1.3.4"
 gem "diffy"
 gem "disco"
 gem "discord-notifier"

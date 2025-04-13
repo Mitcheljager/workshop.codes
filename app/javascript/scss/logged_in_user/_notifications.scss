@@ -1,5 +1,10 @@
 .notifications {
   position: relative;
+  margin: 0 0 $margin * 0.125;
+
+  @include media-min(mbl) {
+    margin: 0 $margin * 0.125 0;
+  }
 }
 
 .notifications__bubble {
@@ -71,13 +76,42 @@
   100% { transform: translateX(0); }
 }
 
-.notifications__label {
+.notifications__bell {
+  display: flex;
+  align-items: center;
+  gap: $margin * 0.125;
+  padding: .5em .75em;
   margin-top: .25rem;
+  background: $bg-dark;
+  border-radius: $border-radius;
   cursor: pointer;
+  color: $text-color-lightest;
+
+  @include media-min(mbl) {
+    background: transparent;
+    padding: 0;
+    color: $bg-dark;
+  }
+
+  @include hover-stack {
+    background: $bg-darker;
+    box-shadow: 0 0 0 2px $white;
+    color: $white;
+
+    @include media-min(mbl) {
+      color: $bg-darker;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
 
   svg {
-    height: 1.5rem;
+    height: 1rem;
     transform-origin: top center;
+
+    @include media-min(mbl) {
+      height: 1.5rem;
+    }
 
     &.animating {
       animation: rotate-bell 600ms;
@@ -89,22 +123,13 @@
       }
     }
   }
+}
 
-  @include hover-stack {
-    path {
-      fill: $white;
+.notifications__label {
+  line-height: 1;
+  font-weight: bold;
 
-      @include media-min(mbl) {
-        fill: $bg-darker;
-      }
-    }
-  }
-
-  path {
-    fill: $text-color-lightest;
-
-    @include media-min(mbl) {
-      fill: $bg-dark;
-    }
+  @include media-min(mbl) {
+    display: none;
   }
 }

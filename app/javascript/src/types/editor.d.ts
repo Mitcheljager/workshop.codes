@@ -50,7 +50,7 @@ export type EditorStates = {
 export type Language = keyof typeof languageOptions
 
 export type TranslationKey = {
-  [locale in Language]: string
+  [locale in Language]?: string
 }
 
 export type TranslateKeys = {

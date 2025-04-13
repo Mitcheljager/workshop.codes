@@ -1,9 +1,14 @@
 import { DirectUpload } from "@rails/activestorage"
 
+interface ExtendedBlob extends ActiveStorage.Blob {
+  key: string,
+  id: string
+}
+
 export default class Uploader {
   file: File
   input: HTMLInputElement
-  blob: ActiveStorage.Blob | null
+  blob: ExtendedBlob | null
   progress: number
 
   constructor(file: File, input: HTMLInputElement) {
@@ -21,7 +26,7 @@ export default class Uploader {
     upload.create((error, blob) => {
       if (error) throw new Error("Something went wrong when uploading the image.")
 
-      this.blob = blob as ActiveStorage.Blob
+      this.blob = blob as ExtendedBlob
 
       const hiddenField = document.createElement("input")
       hiddenField.setAttribute("type", "hidden")

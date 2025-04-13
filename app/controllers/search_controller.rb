@@ -40,14 +40,18 @@ class SearchController < ApplicationController
       @users = get_search_users(params)
     rescue Elasticsearch::Transport::Transport::ServerError => e
       Bugsnag.notify(e) if Rails.env.production?
+
       @posts = Kaminari.paginate_array([]).page(params[:page])
       @error = "Something went wrong. Please try again later."
+
       flash[:error] = @error
+
       respond_to do |format|
         format.html { render "filter/index", status: 500 }
         format.js { render "posts/infinite_scroll_posts", status: 500 }
         format.json { render json: { message: @message }, status: 500 }
       end
+
       return
     end
 
@@ -66,30 +70,28 @@ class SearchController < ApplicationController
   # @raise [Elasticsearch::Transport::Transport::ServerError] if backend
   #   ElasticSearch cluster has an issue
   def get_filtered_posts(params)
+    posts = Post.includes(:user)
+                .select_overview_columns
+                .public?
+
     if params[:search].present? && ENV["BONSAI_URL"]
       ids = Post.search(params[:search])
-      posts = Post.includes(:user)
-                   .where(id: ids)
-                   .order_by_ids(ids)
-                   .select_overview_columns.public?
-    else
-      posts = Post.select_overview_columns.public?
+      posts = posts.where(id: ids).order_by_ids(ids)
     end
 
-    if params[:author]
-      user = User.find_by_username(params[:author])
-      posts = posts.where(user_id: user.present? ? user.id : -1)
+    posts = posts.joins(:user).where(users: { username: params[:author] }) if params[:author].present?
+    posts = posts.where([to_slug_query("categories"), "%#{to_slug(params[:category])}%"]) if params[:category].present?
+    posts = posts.where([to_slug_query("maps"), "%#{to_slug(params[:map])}%"]) if params[:map].present?
+    posts = posts.where([to_slug_query("heroes"), "%#{to_slug(params[:hero])}%"]) if params[:hero].present?
+
+    if params[:players].present?
+      range = to_range(params[:players])
+      posts = posts.where("min_players <= ? AND max_players >= ?", range.end, range.begin)
     end
 
-    posts = posts.order("#{ sort_switch } DESC") if params[:sort]
-
-    posts = posts.select { |post| to_slug(post.categories).include?(to_slug(params[:category])) } if params[:category]
-    posts = posts.select { |post| to_slug(post.maps).include?(to_slug(params[:map])) } if params[:map]
-    posts = posts.select { |post| to_slug(post.heroes).include?(to_slug(params[:hero])) } if params[:hero]
-    posts = posts.select { |post| helpers.has_player_range?(post) && to_range(params[:players]).overlaps?((post.min_players)..(post.max_players)) } if params[:players]
-    posts = posts.select { |post| post.code.upcase.start_with?(params[:code].upcase) } if params[:code]
-
-    posts = Kaminari.paginate_array(posts).page(params[:page])
+    posts = posts.where("UPPER(code) LIKE ?", "#{params[:code].upcase}%") if params[:code].present?
+    posts = posts.order("#{sort_switch} DESC") if params[:sort].present?
+    posts = posts.page(params[:page])
   end
 
   def get_search_users(params)

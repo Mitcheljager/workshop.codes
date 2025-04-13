@@ -1,7 +1,11 @@
-<script>
+<script lang="ts">
   import { isMobile } from "@stores/editor"
 
-  export let height = 50
+  interface Props {
+    height?: number
+  }
+
+  const { height = 50 }: Props = $props()
 </script>
 
 <svg viewBox="0 0 {$isMobile ? 567.969 : 1700.689} 567.969" {height} style="display: block">

@@ -96,7 +96,7 @@
     class="form-input form-textarea form-textarea--extra-small mt-1/4"
     bind:value
     use:submittable
-    on:submit={submit} />
+    on:submit={submit}></textarea>
 
   <div class="checkbox mt-1/4">
     <input type="radio" name="mode" value={modes.append} bind:group={mode} id={modes.append} />

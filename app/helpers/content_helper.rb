@@ -125,13 +125,23 @@ module ContentHelper
   end
 
   def markdown_hero_icon(text)
-    text.gsub /\[hero\s+([\p{L}\p{N}_:.\-\s]+)\]/ do
+    text.gsub(/\[hero\s+([\p{L}\p{N}_:.\-\s]+)\s*(?:\{([^}]*)\})?\s*\]/) do
       begin
         hero_name = ERB::Util.html_escape($1.strip)
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name), width: 50, height: 50, loading: "lazy", alt: $1)
-      rescue; end
+
+        config = YAML.load("{#{$2}}".strip)
+
+        size = 50
+        size = 100 if config["size"] == "medium"
+        size = 256 if config["size"] == "large"
+
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name, size), width: size, height: size, loading: "lazy", alt: hero_name)
+      rescue
+        nil
+      end
     end
   end
+
 
   def markdown_ability_icon(text)
     text.gsub /\[ability\s+([\p{L}\p{N}_:.\(\)\-\s]+)\]/ do
@@ -192,7 +202,7 @@ module ContentHelper
   end
 
   def ability_name_to_icon_url(ability, size = 50)
-    string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "") }.png"
+    string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "") }.png"
     asset_exists?(string) ? string : nil
   end
 
@@ -200,7 +210,7 @@ module ContentHelper
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
       tags: %w(div span hr style mark dl dd dt img details summary a button b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big),
-      attributes: %w(style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-labelledby aria-hidden aria-expanded tabindex role)
+      attributes: %w(style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-label aria-labelledby aria-hidden aria-expanded tabindex role)
     )
   end
 
@@ -236,7 +246,15 @@ module ContentHelper
   end
 
   def ability_icons
-    abilities.map { |ability| [ability.to_sym, image_url(ability_name_to_icon_url(ability))] }.to_h
+    abilities.map do |ability_hash|
+      ability_hash.map do |key, value|
+        {
+          name: key,
+          url: image_url(ability_name_to_icon_url(key)),
+          terms: value
+        }
+      end
+    end.flatten
   end
 
   def hero_names
@@ -246,10 +264,12 @@ module ContentHelper
   # This uses a string instead of Rails tags because those tags are not available when parsed as JSON
   def youtube_preview_tag(video_id, lazy = false)
     "<div class='video'>
-      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' role='button' aria-label='Play YouTube Video' tabindex='0'>
+      <div class='video__preview' data-action='youtube-preview' data-id='#{ video_id }' role='button' aria-label='Play YouTube video' tabindex='0'>
         <div class='video__play-icon'></div>
         <img
           #{ lazy ? "loading='lazy'" : "" }
+          width='836'
+          height='464'
           src='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp'
           srcset='https://i.ytimg.com/vi_webp/#{ video_id }/sddefault.webp 640w, https://i.ytimg.com/vi_webp/#{ video_id }/maxresdefault.webp 1280w'
           class='video__thumbnail'

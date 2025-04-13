@@ -1,87 +1,132 @@
-<script>
+<script lang="ts">
   import { fade } from "svelte/transition"
   import { flip } from "svelte/animate"
   import { onMount } from "svelte"
   import Sortable from "sortablejs"
 
-  import { escapeable } from "@components/actions/escapeable"
+  import { escapeable } from "@src/components/actions/escapeable"
   import { addAlertError } from "@lib/alerts"
   import Uploader from "@src/uploader"
   import FetchRails from "@src/fetch-rails"
   import debounce from "@src/debounce"
 
-  export let images
-  export let label
-  export let help
-  export let button
-  export let input
-  export let orderInput
-  export let maxDimensions = 3500
-  export let maxSizeMB = 2
+  type Props = {
+    images: DropzoneImage[],
+    label: string,
+    help: string,
+    buttonLabel: string,
+    inputName: string,
+    orderInputName: string,
+    maxDimensions?: number,
+    maxSizeMB?: number
+  }
+
+  type DropzoneImage = {
+    id: string,
+    url?: string,
+    preview_url?: string,
+    type?: "preview" | null,
+    progress?: number
+  }
+
+  let {
+    images,
+    label,
+    help,
+    buttonLabel,
+    inputName,
+    orderInputName,
+    maxDimensions = 3500,
+    maxSizeMB = 2
+  }: Props = $props()
 
   const imagePreviewWidth = 200
 
-  let listElement
-  let active = false
-  let previewImageUrl = ""
+  let input: HTMLInputElement | null = $state(null)
+  let orderInput: HTMLInputElement | null = $state(null)
+  let listElement: HTMLElement | null = $state(null)
+  let active = $state(false)
+  let previewImageUrl = $state("")
+  let sortable: Sortable | null = null
 
-  $: updateOrder(images)
+  $effect(() => { if (images) updateOrder() })
 
   onMount(() => {
-    input = document.querySelector(`[type="file"][name="${input}"]`)
-    orderInput = document.querySelector(`[name="${orderInput}"]`)
+    input = document.querySelector(`[type="file"][name="${inputName}"]`)
+    orderInput = document.querySelector(`[name="${orderInputName}"]`)
     createSortable()
   })
 
   const updateOrder = debounce(() => {
-    const listItems = listElement.querySelectorAll("[data-id]")
-    let order = Array.from(listItems).map(item => { if (item.isConnected) return parseInt(item.dataset.id) })
-    order = order.filter(i => i)
+    const listItems = Array.from(listElement!.querySelectorAll("[data-id]")) as HTMLElement[]
 
-    orderInput.value = JSON.stringify(order)
+    let order = listItems.map(item => { if (item.isConnected) return parseInt(item.dataset.id || "") })
+
+    order = order.filter(i => i)
+    orderInput!.value = JSON.stringify(order)
   }, 500)
 
-  function createSortable() {
-    new Sortable(listElement, {
+  function createSortable(): void {
+    if (!listElement) return
+
+    sortable = new Sortable(listElement, {
       animation: 100,
       store: {
+        get: () => [],
         set: updateOrder
       }
     })
   }
 
-  function drop(event) {
+  function drop(event: DragEvent): void {
+    event.preventDefault()
+
     active = false
 
-    const files = event.dataTransfer.items
+    const files = event.dataTransfer?.items
     if (files) readFiles(files)
   }
 
-  function changeInput(event) {
-    const files = event.target.files
+  function changeInput(event: Event): void {
+    const target = event.target as HTMLInputElement
+    const files = target.files
+
     if (files) readFiles(files)
   }
 
-  function readFiles(files) {
-    Array.from(files).forEach(async file => {
-      if (file.kind == "file") file = file.getAsFile()
+  function readFiles(files: FileList | DataTransferItemList): void {
+    if (files instanceof FileList) {
+      // File input
+      Array.from(files).filter(Boolean).forEach(file => processFile(file))
+    } else {
+      // Drag and drop
+      Array.from(files).filter(Boolean).forEach(item => {
+        if (item.kind !== "file") return
 
-      if (file.type != "image/png" && file.type != "image/jpg" && file.type != "image/jpeg") {
-        addAlertError("Wrong file type. Only png and jpeg are accepted.")
-        return
-      }
-
-      if (!await isAcceptableSize(file)) {
-        addAlertError(`Image "${file.name}" is too large. Image exceeds ${maxDimensions}x${maxDimensions} or ${maxSizeMB}MB`)
-        return
-      }
-
-      uploadImage(file)
-    })
+        const file = item.getAsFile()
+        if (file) processFile(file)
+      })
+    }
   }
 
-  function uploadImage(image) {
-    const uploader = new Uploader(image, input)
+  async function processFile(file: File): Promise<void> {
+    if (file.type != "image/png" && file.type != "image/jpeg") {
+      addAlertError("Wrong file type. Only png and jpeg are accepted.")
+      return
+    }
+
+    if (!await isAcceptableSize(file)) {
+      addAlertError(`Image "${file.name}" is too large. Image exceeds ${maxDimensions}x${maxDimensions} or ${maxSizeMB}MB`)
+      return
+    }
+
+    uploadImage(file)
+  }
+
+  function uploadImage(file: File): void {
+    const uploader = new Uploader(file, input!)
+
+    sortable?.option("disabled", true)
 
     uploader.upload().then(() => {
       const randomId = Math.random().toString(36).substr(2, 9)
@@ -101,15 +146,20 @@
             new FetchRails(`/active_storage_blob_variant_url/${uploader.blob.key}?type=full`).get()
           ])
 
+          // @ts-ignore
           setImage(randomId, uploader.blob.id, thumbnail, preview)
         } catch (error) {
           addAlertError("Something went wrong when retrieving your image")
         }
       }, 100)
-    }).catch(error => addAlertError(error))
+    })
+      .catch(error => addAlertError(error))
+      .finally(() => {
+        sortable?.option("disabled", false)
+      })
   }
 
-  function setProgress(id, progress) {
+  function setProgress(id: string, progress: number) {
     images = images.map(i => {
       if (i.id != id) return i
 
@@ -117,7 +167,7 @@
     })
   }
 
-  function setImage(id, blobId, thumbnail, preview) {
+  function setImage(id: string, blobId: string, thumbnail: string, preview: string): void {
     images = images.map(i => {
       if (i.id != id) return i
 
@@ -125,12 +175,12 @@
     })
   }
 
-  function removeImage(id) {
+  function removeImage(id: string): void {
     if (!confirm("Are you sure you wish to remove this image? This can not be undone after saving, but you can always re-upload the image.")) return
     images = images.filter(i => i.id != id)
   }
 
-  async function isAcceptableSize(file) {
+  async function isAcceptableSize(file: File): Promise<boolean> {
     return new Promise(resolve => {
       const image = new Image()
       image.src = URL.createObjectURL(file)
@@ -149,24 +199,23 @@
   }
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="dropzone"
   class:dropzone--is-active={active}
-  use:escapeable
-  on:escape={() => previewImageUrl = ""}
-  on:dragover|preventDefault={() => active = true}
-  on:dragleave={() => active = false}
-  on:drop|preventDefault={drop}>
+  use:escapeable={{ onescape: () => { previewImageUrl = "" } }}
+  ondragover={(event) => { event.preventDefault(); active = true }}
+  ondragleave={() => active = false}
+  ondrop={drop}>
 
   <span>{label}</span>
 
   <small>{help}</small>
 
   <label class="dropzone__button button button--secondary mt-1/4">
-    {button}
+    {buttonLabel}
 
-    <input type="file" multiple="true" accept="image/png, image/jpeg, image/jpg" on:change={changeInput} tabindex="-1" />
+    <input type="file" multiple={true} accept="image/png, image/jpeg" onchange={changeInput} tabindex="-1" />
   </label>
 </div>
 
@@ -184,20 +233,20 @@
 
       {#if image.type == "preview"}
         <div class="images-preview__progress">
-          <div class="images-preview__progress-bar" style="width: {image.progress}%" />
+          <div class="images-preview__progress-bar" style="width: {image.progress}%"></div>
         </div>
       {:else}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
         <img
-          on:click={() => previewImageUrl = image.preview_url}
+          onclick={() => previewImageUrl = image.preview_url || ""}
           src={image.url}
           height={imagePreviewWidth / 9 * 5}
           width={imagePreviewWidth}
           alt="" />
       {/if}
 
-      <button class="images-preview__action images-preview__action--close" on:click|stopPropagation|preventDefault={() => removeImage(image.id)} aria-label="Upload image {i + 1}">
+      <button type="button" class="images-preview__action images-preview__action--close" onclick={() => removeImage(image.id)} aria-label="Upload image {i + 1}">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
       </button>
     </div>
@@ -205,14 +254,14 @@
 </div>
 
 {#if previewImageUrl}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-  <div class="modal modal--auto" transition:fade={{ duration: 100 }} on:click={() => previewImageUrl = ""} data-hide-on-close role="dialog" aria-label="Image preview">
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+  <div class="modal modal--auto" transition:fade={{ duration: 100 }} onclick={() => previewImageUrl = ""} data-hide-on-close role="dialog" aria-label="Image preview">
 
     <div class="modal__content p-0">
       <img class="img-fluid" src={previewImageUrl} alt="" />
     </div>
 
-    <div class="modal__backdrop" />
+    <div class="modal__backdrop"></div>
   </div>
 {/if}

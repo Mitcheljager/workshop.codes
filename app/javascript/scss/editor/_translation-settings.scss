@@ -1,10 +1,14 @@
 .translation-settings {
   display: grid;
   grid-template-columns: 1fr 3fr;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .translation-settings__aside {
   display: flex;
+  height: 100%;
+  overflow-y: auto;
   flex-direction: column;
   gap: $margin * 0.125;
   padding: $margin * 0.25;
@@ -13,41 +17,62 @@
   background: $bg-darker;
 }
 
+.translation-settings__keys-container {
+  height: 100%;
+  overflow-y: auto;
+
+  // Counteract padding from .translation-settings__aside to move the scrollbar
+  // to the edge of it, then reapply the padding so keys are not touching the
+  // edge of the .translation-settings__aside also.
+  margin: 0 ($margin * -0.25);
+  padding: 0 ($margin * 0.25);
+
+  @include styled-scrollbar;
+}
+
 .translation-settings__content {
   padding: $margin * 0.25;
+  overflow-y: auto;
+
+  @include styled-scrollbar;
 
   .form-textarea {
-    width: calc(100% - $margin * 0.25);
+    width: 100%;
+    max-width: calc(100% - $margin * 0.25);
   }
 }
 
 .translation-settings__item {
   appearance: none;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 3rem;
   width: 100%;
   padding: $margin * 0.125 0;
   border: 0;
   border-bottom: 1px solid $border-color;
   background: transparent;
   font-family: $font-stack;
-  color: $text-color;
   text-align: left;
-  cursor: pointer;
 
   &:first-of-type {
     border-top: 1px solid $border-color;
   }
 
-  &--active,
-  &:hover {
-    color: $text-color-lightest;
+  button {
+    color: $text-color;
+
+    button:hover {
+      color: $text-color-lightest;
+    }
   }
 }
 
-.translation-settings__create {
-  padding: $margin * 0.25;
-  margin: $margin * 0.125 $margin * -0.25 $margin * -0.25;
-  border-top: 2px solid darken($bg-dark, 5%);
+.translation-settings__item-label {
+  word-break: break-word;
+
+  .translation-settings__item--active & {
+    color: $text-color-lightest;
+  }
 }
 
 .translation-settings__copy {

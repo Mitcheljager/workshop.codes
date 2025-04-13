@@ -5,7 +5,7 @@
     <div class="update-notes__header <%= "update-notes__header--no-image" if !hero_image.present? %>">
       <% if hero_image.present? %>
         <div class="update-notes__icon">
-          <%= image_tag hero_image, loading: "lazy", alt: "" %>
+          <%= image_tag hero_image, loading: "lazy", alt: "", width: 100, height: 100 %>
         </div>
       <% end %>
 
@@ -26,7 +26,7 @@
           <div class="update-notes__item">
             <% begin %>
               <% ability_image = icons[key].present? && icons[key].start_with?('http') ? icons[key] : ability_name_to_icon_url(icons[key] || key, 50) %>
-              <%= image_tag ability_image, loading: "lazy", class: "update-notes__ability", alt: "" if ability_image.present? %>
+              <%= image_tag ability_image, loading: "lazy", class: "update-notes__ability", width: 50, height: 50, alt: "" if ability_image.present? %>
             <% rescue; end %>
 
             <div>

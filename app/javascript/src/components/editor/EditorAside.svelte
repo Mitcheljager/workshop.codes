@@ -1,7 +1,7 @@
 <script>
   import EditorItemCreate from "@components/editor/EditorItemCreate.svelte"
   import EditorList from "@components/editor/EditorList.svelte"
-  import { items } from "@stores/editor"
+  import { currentProjectUUID, items } from "@stores/editor"
 
   let element
 
@@ -21,7 +21,9 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div bind:this={element} tabindex="0">
-  <EditorList />
+  {#key $currentProjectUUID + $items.length + $items.filter(i => i.hidden).length}
+    <EditorList />
+  {/key}
 
   {#if !$items?.length}
     <p class="mt-0 mb-0 pl-1/4 pr-1/4 small text-dark"><em>Start by creating a new item using the button below.</em></p>

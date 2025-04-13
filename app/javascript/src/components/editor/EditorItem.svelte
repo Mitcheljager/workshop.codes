@@ -9,7 +9,9 @@
   export let item
 </script>
 
-<button
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
   class="editor-item"
   class:editor-item--active={$currentItem && $currentItem.id == item.id}
   class:editor-item--hidden={item.hidden || isAnyParentHidden(item)}
@@ -27,4 +29,4 @@
     <EditorItemHide {item} />
     <EditorItemDestroy {item} />
   </div>
-</button>
+</div>

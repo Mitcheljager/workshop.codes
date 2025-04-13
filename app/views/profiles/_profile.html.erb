@@ -8,7 +8,7 @@
 
   <div class="profile-banner__content">
     <%= link_to user_profile_path(user), class: "profile-banner__title", rel: "author" do %>
-      <%= user.clean_username %>
+      <span <%= "aria-role=heading aria-level=1" if !small %>><%= user.clean_username %></span>
 
       <% if user.verified? %>
         <div class="profile-banner__verified">

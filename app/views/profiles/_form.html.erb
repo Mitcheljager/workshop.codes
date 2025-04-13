@@ -16,7 +16,7 @@
           <%= tag.strong "You are not verified (?)", class: "cursor-pointer inline-block mt-1/2", data: { action: "toggle-content" }, aria: { expanded: "false", controls: "verified" } %>
           <div id="verified" data-role="content-to-toggle" style="display: none">
             <p>User names are not unique. A battletag can be the same for multiple users. Being verified helps users identify that you are indeed you. Furthermore if you are logged in with battle.net you will claim the url without the id. For example path/username#12345 will become path/username. The old url will also remain functional.</p>
-            <p>If you wish to be verified, please contact Mitsiee#9370 on Discord or @ me wherever you want on the Elo Hell Workshop Discord.</p>
+            <p>If you wish to be verified, please contact @mitsiee on Discord or @ me wherever you want on the Workshop.codes Discord.</p>
             <p>Please note: To be eligible for verification you need to have made a good number of contributions to the Workshop community. When contacting me please note why you wish to be verified.</p>
           </div>
         </small>
@@ -55,14 +55,17 @@
       <div class="form-group-max-width">
         <%= form.label :profile_image, "Profile image", class: "form-label" %>
 
-        <div class="profile-image">
-          <%= image_tag (@user.profile_image.attached? ? rails_public_blob_url(@user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed) : "//:0"),
-                        data: { image_preview: "profile-image" } %>
-        </div>
-
+        <% begin %>
+          <div class="profile-image">
+            <%= image_tag (@user.profile_image.attached? ? rails_public_blob_url(@user.profile_image.variant(quality: 95, resize_to_fill: [140, 140]).processed) : "//:0"),
+                          data: { image_preview: "profile-image" } %>
+          </div>
+        <% rescue %>
+          <p><em>Something went wrong when retrieving your image. This is likely our fault. Please try re-uploading your image, or try again later.</em></p>
+        <% end %>
 
         <%= form.file_field :profile_image,
-                            accept: "image/png, image/jpeg, image/jpg",
+                            accept: "image/png, image/jpeg",
                             data: { action: "image-preview", target: "profile-image" } %>
 
         <p class="form-hint mt-1/4 mb-0">
@@ -82,13 +85,17 @@
         This image is displayed at the top of your profile.
       </p>
 
-      <%= image_tag (@user.banner_image.attached? ? rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) : "//:0"),
-                    class: "mt-1/4 img-fluid",
-                    data: { image_preview: "banner" },
-                    alt: "Banner image" %>
+      <% begin %>
+        <%= image_tag (@user.banner_image.attached? ? rails_public_blob_url(@user.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) : "//:0"),
+                      class: "mt-1/4 img-fluid",
+                      data: { image_preview: "banner" },
+                      alt: "Banner image" %>
+      <% rescue %>
+        <p><em>Something went wrong when retrieving your image. This is likely our fault. Please try re-uploading your image, or try again later.</em></p>
+      <% end %>
 
       <%= form.file_field :banner_image,
-                          accept: "image/png, image/jpeg, image/jpg",
+                          accept: "image/png, image/jpeg",
                           data: { action: "image-preview", target: "banner" } %>
 
       <p class="form-hint mt-1/4 mb-0">

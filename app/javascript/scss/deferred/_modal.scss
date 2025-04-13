@@ -81,6 +81,13 @@
     }
   }
 
+  &--internal-scrolling {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
   .modal--auto & {
     width: auto;
     max-width: 90%;
@@ -105,7 +112,7 @@
     overflow: auto;
 
     &::before {
-      display: none;;
+      display: none;
     }
   }
 }

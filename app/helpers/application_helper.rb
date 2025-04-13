@@ -49,12 +49,26 @@ module ApplicationHelper
     string.to_s.downcase.gsub(" ", "-").gsub(":", "").gsub(".", "").gsub("'", "").gsub("/", "")
   end
 
+  def to_slug_query(column)
+    if ActiveRecord::Base.connection.adapter_name.downcase.include?("sqlite")
+      # SQLite
+      "LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(#{column}, ' ', '-'), ':', ''), '.', ''), '''', ''), '/', '')) LIKE ?"
+    else
+      # PostgreSQL
+      "LOWER(REGEXP_REPLACE(REGEXP_REPLACE(#{column}, ' ', '-', 'g'), '[ :.''/]', '', 'g')) LIKE ?"
+    end
+  end
+
   def to_search_query(string)
     CGI.escape(string.to_s.downcase).gsub(".", "%2E")
   end
 
   def to_range(string)
     Range.new(*string.split("-").map(&:to_i))
+  end
+
+  def slug_to_word(string)
+    string.gsub("-", " ").split.map(&:capitalize).join(" ")
   end
 
   def maps

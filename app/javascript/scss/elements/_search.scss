@@ -13,17 +13,24 @@
     transition-delay: 180ms;
     background: $bg-darker;
 
-    &:focus {
-      box-shadow: 0 0 0 2px $white;
-      background: lighten($bg-dark, 5%);
-    }
-
     @include media-min(sm) {
       padding-right: 6rem;
       width: 22.5vw;
       min-width: 280px;
       box-shadow: none;
       background: $bg-dark;
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px $white;
+      background: lighten($bg-dark, 5%);
     }
 
     &:placeholder-shown {

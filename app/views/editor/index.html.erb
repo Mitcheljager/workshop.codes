@@ -5,8 +5,16 @@
 <%= vite_stylesheet_tag "editor.scss", defer: true %>
 <%= vite_javascript_tag "editor.ts", "data-turbolinks-track": "reload", defer: true %>
 
-<div class="fullscreen-overlay">
+<% loading_tips = [
+  "The only limit is your imagination... and element limits.",
+  "Not working as expect? Just add a Wait!",
+  "Error: Success."
+].freeze %>
+
+<div class="fullscreen-overlay text-center pl-1/4 pr-1/4">
+  <h1>Workshop.codes Script Editor</h1>
   <div class="spinner" aria-live="polite" role="status"></div>
+  <p data-role="loading-screen-tip" class="mt-1/2"><%= loading_tips.sample %></p>
 </div>
 
 <div class="wiki">

@@ -12,7 +12,7 @@ class Collection < ApplicationRecord
   validates :title, presence: true, length: { minimum: 3, maximum: 50 }
   validates :nice_url, presence: true, uniqueness: true, length: { minimum: 5, maximum: 20 }, format: { with: /\A[a-z0-9-]+\z/, message: "is invalid. Only lowercase letters, numbers, and dashes are allowed." }
   validates :description, length: { maximum: 1000 }
-  validates :cover_image, content_type: ["image/png", "image/jpg", "image/jpeg"],
+  validates :cover_image, content_type: ["image/png", "image/jpeg"],
                           size: { less_than: 2.megabytes },
                           dimension: { max: 3500..3500 }
 end

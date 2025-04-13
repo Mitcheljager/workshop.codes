@@ -17,7 +17,7 @@ export function transformParameterObjectsIntoPositionalParameters({ view, state 
   if (!line.text) return
 
   const phrase = getPhraseFromPosition(line, cursorFrom)
-  const completion = get(completionsMap).find(({ type, label }) => type === "function" && label === phrase.text)
+  const completion = get(completionsMap).find(({ type, label }) => type === "action" && label === phrase.text)
   if (!completion) return
 
   const fileWideActionNameStart = line.from + phrase.start

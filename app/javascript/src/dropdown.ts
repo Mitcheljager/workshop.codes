@@ -13,17 +13,19 @@ export function toggleDropdown(event: Event): void {
   event.preventDefault()
 
   const parent = eventTarget.closest("[data-dropdown]")
-  const target = parent?.querySelector("[data-dropdown-content]") as HTMLElement
+  const target = parent?.querySelector("[data-dropdown-content]") as HTMLElement | null
+
+  if (!target) return
 
   target.dataset.active = (!JSON.parse(target.dataset.active || "false")).toString()
   target.classList.toggle("active", JSON.parse(target.dataset.active))
 }
 
-export function closeDropdown(event: Event, closeActive = false): void {
+export function closeDropdown(event: Event | null, closeActive = false): void {
   const activeDropdown = document.querySelector("[data-dropdown-content].active") as HTMLElement
   if (!activeDropdown) return
 
-  const eventTarget = (event.target as HTMLElement).closest("[data-dropdown]")
+  const eventTarget = (event?.target as HTMLElement)?.closest("[data-dropdown]")
   if (!closeActive && eventTarget && eventTarget.querySelector("[data-dropdown-content]") == activeDropdown) return
 
   activeDropdown.classList.remove("active")

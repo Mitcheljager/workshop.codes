@@ -35,12 +35,16 @@ export default class FetchRails {
       ...parameters,
       signal: timeoutController.signal
     }
+
     const response = await fetch(this.url, finalParams)
+
     clearTimeout(timeoutID)
-    if (returnResponse) return await response
-    if (!response.ok) throw new Error(`${response.status}: ${response.statusText}.`)
+
+    if (returnResponse) return response
 
     const data = await response.text()
+    if (!response.ok) throw new Error(`${response.status}: ${response.statusText}. ${data}`)
+
     return data.toString()
   }
 

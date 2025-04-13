@@ -1,6 +1,10 @@
-<script>
-  export let fill = false
-  export let color = "currentColor"
+<script lang="ts">
+  interface Props {
+    fill?: boolean,
+    color?: string
+  }
+
+  const { fill = false, color = "currentColor" }: Props = $props()
 </script>
 
 <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none">
