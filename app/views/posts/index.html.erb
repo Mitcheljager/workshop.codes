@@ -11,15 +11,12 @@
   <div class="logo-background">
     <%= render "filter/quick_filter" %>
 
-    <% if true || ENV["BANNER_ROOT"] == "Workshop_Crap" %>
-      <%= render "application/banners/workshop_crap" %>
-    <% end %>
+    <%= render "application/banners/workshop_crap" if ENV["BANNER_ROOT"] == "Workshop_Crap" %>
+    <%= render "application/banners/stadium_unavailable" if ENV["BANNER_ROOT"] == "Stadium_Unavailable" %>
 
     <%= render "application/banners/editor" %>
 
-    <% if ENV["BANNER_ROOT"] == "Workshop_Disabled" %>
-      <%= render "application/banners/workshop_disabled" %>
-    <% end %>
+    <%= render "application/banners/workshop_disabled" if ENV["BANNER_ROOT"] == "Workshop_Disabled" %>
   </div>
 
   <%= render "user_recommendations" if current_user && current_user.recommended_posts.any? %>
