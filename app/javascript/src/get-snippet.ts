@@ -20,16 +20,16 @@ function loadSnippet(event: Event | null, element: HTMLElement): void {
 
   targetElement.dataset.retrieved = "true"
 
-  const id = targetElement.dataset.id
+  const code = targetElement.dataset.code
 
   const ideElement = document.querySelector("[data-role~='ide-content']") as HTMLElement
   const copyElement = document.querySelector("[data-copy~='snippet']") as HTMLElement
 
-  new FetchRails("/get-snippet", { id: id })
-    .post()
+  new FetchRails(`/get-snippet/${code}`)
+    .get()
     .then(data => {
-      ideElement.innerHTML = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;")
-      copyElement.innerHTML = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;")
+      ideElement.innerHTML = (data as string).replaceAll(">", "&gt;").replaceAll("<", "&lt;")
+      copyElement.innerHTML = (data as string).replaceAll(">", "&gt;").replaceAll("<", "&lt;")
 
       initiateIde(ideElement)
     })
@@ -38,7 +38,6 @@ function loadSnippet(event: Event | null, element: HTMLElement): void {
       ideElement.innerHTML = ""
 
       const errorElement = document.createElement("div")
-      errorElement.innerText = error
 
       ideElement.innerText = "Failed to load Snippet"
       ideElement.insertAdjacentElement("beforeend", errorElement)

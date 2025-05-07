@@ -89,8 +89,8 @@ class PostsController < ApplicationController
   end
 
   def get_snippet
-    @post = Post.select(:snippet, :private, :user_id).find(params[:id])
-    @post = nil if @post.private? && current_user.id != @post.user_id
+    @post = Post.select(:snippet, :private, :user_id).find_by_code!(params[:code])
+    return if @post.private? && current_user.id != @post.user_id
 
     render plain: @post.snippet
   end

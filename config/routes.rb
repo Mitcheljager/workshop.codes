@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   post "copy-code", to: "posts#copy_code", as: "copy_code"
 
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
-  post "get-snippet", to: "posts#get_snippet", as: "get_snippet"
+  get "get-snippet/:code", to: "posts#get_snippet", as: "get_snippet"
   get "similar_to/:id", to: "posts#similar_to", as: "similar_posts"
 
   post "ai", to: "open_ai#show", as: "ai"
