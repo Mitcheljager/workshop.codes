@@ -37,4 +37,13 @@
   svg {
     flex: 0 0 auto;
   }
+
+  a:not(.button) {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+    }
+  }
 }
