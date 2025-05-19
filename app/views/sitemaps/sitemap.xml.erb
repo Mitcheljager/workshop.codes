@@ -57,7 +57,7 @@
   <% categories.each do |category| %>
     <url>
       <loc><%= filter_url(category: to_slug(category)) %></loc>
-      <lastmod><%= @post.created_at.iso8601 %></lastmod
+      <lastmod><%= @post.created_at.iso8601 %></lastmod>
       <priority>0.80</priority>
     </url>
   <% end %>
