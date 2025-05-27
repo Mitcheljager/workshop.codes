@@ -8,11 +8,12 @@ class PostSerializer < ActiveModel::Serializer
     :created_at, :updated_at, :last_revision_created_at
 
   attribute :snippet_url, if: -> { single? }
+  attribute :description, if: -> { single? }
 
   belongs_to :user
 
   def single?
-    instance_options[:is_single]
+    instance_options[:is_show]
   end
 
   def thumbnail
