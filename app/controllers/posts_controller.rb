@@ -61,7 +61,7 @@ class PostsController < ApplicationController
       }
       format.json {
         set_request_headers
-        render json: @post
+        render json: @post, serializer: PostSerializer, is_single: true
       }
     end
   end
