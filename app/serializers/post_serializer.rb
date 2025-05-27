@@ -7,7 +7,6 @@ class PostSerializer < ActiveModel::Serializer
     :categories, :maps, :heroes, :tags,
     :created_at, :updated_at, :last_revision_created_at
 
-  attribute :has_snippet, if: -> { single? }
   attribute :snippet_url, if: -> { single? }
 
   belongs_to :user
@@ -81,10 +80,6 @@ class PostSerializer < ActiveModel::Serializer
     return nil if object.carousel_video.blank?
 
     "https://www.youtube-nocookie.com/embed/" + object.carousel_video
-  end
-
-  def has_snippet
-    object.snippet.present?
   end
 
   def snippet_url
