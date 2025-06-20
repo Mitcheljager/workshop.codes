@@ -148,6 +148,11 @@
   slug: suravasa
   overwatch_2: true
 -
+  name: Aatlis
+  type: Flashpoint
+  slug: aatlis
+  overwatch_2: true
+-
   name: Hanaoka
   type: Clash
   slug: hanaoka
