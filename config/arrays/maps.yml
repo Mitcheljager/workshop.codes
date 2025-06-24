@@ -228,6 +228,61 @@
   type: Practice
   slug: practice-range
 -
+  name: Arena Victoriae (Stadium)
+  type: Stadium
+  slug: stadium-arena-victoriae
+  overwatch_2: true
+-
+  name: Colosseo (Stadium)
+  type: Stadium
+  slug: stadium-colosseo
+  overwatch_2: true
+-
+  name: Esperança (Stadium)
+  type: Stadium
+  slug: stadium-esperanca
+  overwatch_2: true
+-
+  name: Gogadoro (Stadium)
+  type: Stadium
+  slug: stadium-gogadoro
+  overwatch_2: true
+-
+  name: Hanaoka (Stadium)
+  type: Stadium
+  slug: stadium-hanaoka
+  overwatch_2: true
+-
+  name: Ilios Ruins (Stadium)
+  type: Stadium
+  slug: stadium-ilios-ruins
+  overwatch_2: true
+-
+  name: Nepal Shrine (Stadium)
+  type: Stadium
+  slug: stadium-nepal-shrine
+  overwatch_2: true
+-
+  name: Place Lacroix (Stadium)
+  type: Stadium
+  slug: stadium-place-lacroix
+  overwatch_2: true
+-
+  name: Redwood Dam (Stadium)
+  type: Stadium
+  slug: stadium-redwood-dam
+  overwatch_2: true
+-
+  name: Samoa Volcano (Stadium)
+  type: Stadium
+  slug: stadium-samoa-volcano
+  overwatch_2: true
+-
+  name: Throne of Anubis (Stadium)
+  type: Stadium
+  slug: stadium-throne-of-anubis
+  overwatch_2: true
+-
   name: Workshop Chamber
   type: Workshop
   slug: workshop-chamber

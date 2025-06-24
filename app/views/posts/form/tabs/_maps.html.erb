@@ -29,7 +29,7 @@
           <% maps.each do |map| %>
             <div class="checkbox">
               <%= form.check_box :maps, { multiple: true, checked: (@post.maps.include?(map["name"]) if @post.maps) }, map["name"], false %>
-              <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "") }" do %>
+              <%= form.label "maps_#{ map["name"].downcase.gsub(" ", "_").gsub(":", "").gsub("'", "").gsub("(", "").gsub(")", "") }" do %>
                 <%= map["name"] %>
                 <%= tag.small "OW2", class: "text-overwatch-2" if map["overwatch_2"].present? %>
               <% end %>
