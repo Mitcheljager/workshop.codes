@@ -26,6 +26,16 @@ class ForgotPasswordsController < ApplicationController
     @user = User.find_by_email(forgot_password_params[:email])
 
     if @user.present?
+      recent_tokens = ForgotPasswordToken.where(user_id: @user.id).where("created_at > ?", 1.day.ago)
+
+      # User requested too many tokens recently
+      if (recent_tokens.size > 10)
+        Bugsnag.notify('User requested too many forgot password tokens recently') if Rails.env.production?
+
+        redirect_to forgot_passwords_path
+        return
+      end
+
       @forgot_password_token = ForgotPasswordToken.new(user_id: @user.id, token: SecureRandom.uuid)
 
       if @forgot_password_token.save
@@ -70,6 +80,6 @@ class ForgotPasswordsController < ApplicationController
     return if forgot_password_params[:email_confirmation].blank?
 
     Bugsnag.notify('User was blocked from requesting password reset via honeypot') if Rails.env.production?
-    redirect_to root_path
+    redirect_to forgot_passwords_path
   end
 end
