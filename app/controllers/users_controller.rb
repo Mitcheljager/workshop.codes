@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :honeypot, only: [:create]
+
   before_action except: [:new, :create] do
     redirect_to login_path unless current_user
   end
@@ -83,7 +85,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :email)
+    params.require(:user).permit(:username, :password, :password_confirmation, :email, :email_confirmation)
   end
 
   def generate_remember_token
@@ -95,5 +97,12 @@ class UsersController < ApplicationController
 
   def allowed_sort_params
     %w[updated_at created_at hotness favorites_count]
+  end
+
+  def honeypot
+    return if user_params[:email_confirmation].blank?
+
+    Bugsnag.notify('User was blocked from creating an account via honeypot') if Rails.env.production?
+    redirect_to root_path
   end
 end

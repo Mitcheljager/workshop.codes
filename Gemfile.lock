@@ -299,6 +299,8 @@ GEM
     inline_svg (1.10.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
+    invisible_captcha (2.3.0)
+      rails (>= 5.2)
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -605,6 +607,7 @@ DEPENDENCIES
   honeypot-captcha
   image_processing (~> 1.12)
   inline_svg
+  invisible_captcha
   jbuilder (~> 2.5)
   kaminari
   lockbox

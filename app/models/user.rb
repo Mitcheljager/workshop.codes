@@ -62,6 +62,9 @@ class User < ApplicationRecord
   has_encrypted :email
   blind_index :email
 
+  # This is used purely as a honeypot
+  attr_accessor :email_confirmation
+
   has_recommended :posts
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }, uniqueness_against_nice_url: true, format: { with: /\A[\d\p{L}_-]*[#\d]*\z/i }, length: { maximum: 32 }
