@@ -1,5 +1,5 @@
 <div class="form-group-max-width">
-  <%= form_for @user, url: url do |f| %>
+  <%= form_for @user, url: url, html: { honeypot: true } do |f| %>
     <% if user.errors.any? %>
       <div class="error-block">
         <h2 class="error-block__title"><strong><%= pluralize(user.errors.count, "error") %></strong> prohibited this user from being saved:</h2>

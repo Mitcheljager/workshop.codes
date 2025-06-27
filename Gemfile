@@ -23,6 +23,7 @@ gem "elasticsearch-rails", "7.1.1"
 gem "elasticsearch", "<= 7.10.2" # Limited by Bonsai support
 gem "elasticsearch-api", "<= 7.10.2" # Limited by Bonsai support
 gem "geocoder"
+gem "honeypot-captcha"
 gem "image_processing", "~> 1.12"
 gem "inline_svg"
 gem "jbuilder", "~> 2.5"
