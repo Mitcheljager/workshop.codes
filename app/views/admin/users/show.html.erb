@@ -25,7 +25,7 @@
   <% end %>
 
   <div class="tabs-content tabs-content--active" data-tab="status">
-    <div class="well well--dark">
+    <div class="well well--dark block">
       <%= form_for @user, url: admin_user_path, method: :patch do |form| %>
         <%= form.label :level, class: "form-label" %>
         <%= form.select :level, User.levels.keys.to_a, {}, class: "form-select w-auto" %>
@@ -45,6 +45,10 @@
           <%= form.submit class: "button button--small button--secondary" %>
         </div>
       <% end %>
+
+      <hr class="mt-1/4 mb-1/4" />
+
+      <%= button_to "Delete user", admin_user_path(@user), method: :delete, class: "button button--small button--danger", data: { confirm: "Are you sure? The user and all of its associations will be removed. This can not be undone. Only use this in case of spam." } %>
     </div>
 
     <table class="w-auto mt-1/2">

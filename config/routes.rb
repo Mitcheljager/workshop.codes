@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :update, :destroy]
     post "posts/find", to: "posts#find", as: "find_post"
 
-    resources :users, only: [:index, :show, :update]
+    resources :users, only: [:index, :show, :update, :destroy]
     post "users/find", to: "users#find", as: "find_user"
     post "users/send_notification", to: "users#send_notification"
 

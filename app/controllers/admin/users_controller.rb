@@ -23,6 +23,15 @@ class Admin::UsersController < Admin::BaseController
     redirect_to admin_user_path(@user.id)
   end
 
+  def destroy
+    @user = User.find(params[:id])
+
+    if @user.destroy
+      create_activity(:admin_destroy_post, { user_id: @user.id, user_username: @user.username })
+      redirect_to admin_users_path
+    end
+  end
+
   def find
     @user = User.find_by_username!(params[:username])
     redirect_to admin_user_path(@user.id)
