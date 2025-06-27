@@ -290,7 +290,6 @@ GEM
     hashie (5.0.0)
     heapy (0.2.0)
       thor
-    honeypot-captcha (1.0.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -299,8 +298,6 @@ GEM
     inline_svg (1.10.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    invisible_captcha (2.3.0)
-      rails (>= 5.2)
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -604,10 +601,8 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   faker
   geocoder
-  honeypot-captcha
   image_processing (~> 1.12)
   inline_svg
-  invisible_captcha
   jbuilder (~> 2.5)
   kaminari
   lockbox
