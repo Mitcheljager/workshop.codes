@@ -1,4 +1,6 @@
 class ForgotPasswordsController < ApplicationController
+  before_action :honeypot, only: [:create]
+
   before_action do
     redirect_to root_path if current_user
   end
@@ -57,10 +59,17 @@ class ForgotPasswordsController < ApplicationController
   private
 
   def forgot_password_params
-    params.require(:forgot_password).permit(:email, :password, :password_confirmation, :token)
+    params.require(:forgot_password).permit(:email, :email_confirmation, :password, :password_confirmation, :token)
   end
 
   def not_found
     raise ActionController::RoutingError.new("Not Found")
+  end
+
+  def honeypot
+    return if forgot_password_params[:email_confirmation].blank?
+
+    Bugsnag.notify('User was blocked from requesting password reset via honeypot') if Rails.env.production?
+    redirect_to root_path
   end
 end
