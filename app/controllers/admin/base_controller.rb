@@ -14,7 +14,7 @@ class Admin::BaseController < ApplicationController
       { date: on_date.strftime("%Y-%m-%d"), value: value }
     end
 
-    @admin_activity = Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment])
+    @admin_activity = Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment, :admin_destroy_user, :admin_destroy_post_image])
                               .order(created_at: :desc)
                               .limit(20)
   end
