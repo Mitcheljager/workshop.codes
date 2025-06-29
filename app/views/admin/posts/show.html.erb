@@ -40,12 +40,13 @@
   <div class="tabs-content" data-tab="images">
     <h4>Images</h4>
 
-    <% used_image_ids = JSON.parse(@post.image_order.present? ? @post.image_order : "[]") %>
+    <% used_image_ids = JSON.parse(@post.image_order.presence || "[]") %>
+    <% sorted_images = @post.images.sort_by { |image| used_image_ids.include?(image.blob_id) ? 0 : 1 } %>
 
     <div>image_order: <%= used_image_ids %></div>
 
     <div class="gallery" style="--grid-size: 400px">
-      <% @post.images.each do |image| %>
+      <% sorted_images.each do |image| %>
         <div class="gallery__item gallery__item--static">
           <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed), loading: "lazy", width: 450, height: 250 %>
 
@@ -61,6 +62,7 @@
       <% end %>
     </div>
   </div>
+
 
   <div class="tabs-content" data-tab="analytics">
     <h3 class="mt-1/1">Total views per day</h3>
