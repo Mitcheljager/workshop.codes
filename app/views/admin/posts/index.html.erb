@@ -51,7 +51,7 @@
       <td><%= post.top_hotness %></td>
       <td><%= post.comments.size %></td>
       <td><%= post.revisions.size %></td>
-      <td><%= "✔" if post.images.any? %></td>
+      <td><%= post.images.size %></td>
       <td><%= "✔" if post.email_notifications.any? %></td>
       <td><%= "✔" if post.snippet.present? %></td>
       <td><small><%= time_ago_in_words(post.created_at).humanize %></small></td>

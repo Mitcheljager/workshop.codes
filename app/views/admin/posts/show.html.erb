@@ -1,35 +1,66 @@
 <%= render "admin/navigation" %>
 
-<h3 class="mt-0">Post: <strong><%= @post.title %></strong></h3>
-<p>Code: <strong><%= link_to @post.code, post_path(@post.code) %></strong>
-<p>Created at: <strong><%= @post.created_at %></strong>
-<p>Updated at: <strong><%= @post.created_at %></strong>
+<div class="wrapper" data-role="tabs">
+  <h2 class="mt-0 mb-0"><strong><%= @post.title %></strong> <small><%= link_to @post.code, post_path(@post.code) %></small></h2>
 
-<br><br>
-<p>Total revisions: <strong><%= @post.revisions.size %></strong></p>
-<p>Total comments: <strong><%= @post.comments.size %></strong></p>
-<p>Total views: <strong><%= @post.impressions_count %></strong></p>
-<p>Hotness: <strong><%= @post.hotness %></strong></p>
-<p>Top hotness: <strong><%= @post.top_hotness %></strong></p>
-<p>Top hotness at: <strong><%= @post.top_hotness_at %></strong></p>
+  <nav class="tabs mt-1/2 mb-1/2">
+    <%= link_to "Status", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
+    <%= link_to "Images <small>#{ @post.images.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
+    <%= link_to "Analytics".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "analytics" } %>
+  </nav>
 
-<hr>
+  <div class="tabs-content tabs-content--active" data-tab="status">
+    <p>Created at: <strong><%= @post.created_at %></strong>
+    <p>Updated at: <strong><%= @post.created_at %></strong>
 
-<h4>Destroy post</h4>
+    <br><br>
+    <p>Total revisions: <strong><%= @post.revisions.size %></strong></p>
+    <p>Total comments: <strong><%= @post.comments.size %></strong></p>
+    <p>Total views: <strong><%= @post.impressions_count %></strong></p>
+    <p>Hotness: <strong><%= @post.hotness %></strong></p>
+    <p>Top hotness: <strong><%= @post.top_hotness %></strong></p>
+    <p>Top hotness at: <strong><%= @post.top_hotness_at %></strong></p>
 
-<%= form_tag :admin_post, url: admin_post_path(@post.id), method: :delete do %>
-  <div class="form-group mb-1/4">
-    <%= label_tag "Notify user of why their post will been deleted (supports markdown)" %>
-    <%= text_area_tag :notification_content, "", class: "form-input mt-1/8", placeholder: "Leave empty to not send a notification" %>
+    <hr>
+
+    <h4>Destroy post</h4>
+
+    <%= form_tag :admin_post, url: admin_post_path(@post.id), method: :delete do %>
+      <div class="form-group mb-1/4">
+        <%= label_tag "Notify user of why their post will been deleted (supports markdown)" %>
+        <%= text_area_tag :notification_content, "", class: "form-input mt-1/8", placeholder: "Leave empty to not send a notification" %>
+      </div>
+
+      <%= submit_tag "Destroy post", class: "button button--danger", data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
+    <% end %>
   </div>
 
-  <%= submit_tag "Destroy post", class: "button button--danger", data: { confirm: "Are you sure you want to delete this item? This cannot be undone." } %>
-<% end %>
+  <div class="tabs-content" data-tab="images">
+    <h4>Images</h4>
 
-<hr>
+    <% used_image_ids = JSON.parse(@post.image_order.present? ? @post.image_order : "[]") %>
 
-<h3 class="mt-1/1">Total views per day</h3>
-<div class="chart" data-role="chart" data-data="<%= @views.to_json %>"></div>
+    <div>image_order: <%= used_image_ids %></div>
 
-<h3 class="mt-1/1">Total copies per day</h3>
-<div class="chart" data-role="chart" data-data="<%= @copies.to_json %>"></div>
+    <div class="gallery" style="--grid-size: 400px">
+      <% @post.images.each do |image| %>
+        <div class="gallery__item gallery__item--static">
+          <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed), loading: "lazy", width: 450, height: 250 %>
+
+          <div class="p-1/8">
+            <%= image.id %>
+            <%= tag.em "Unused", class: "text-dark" unless used_image_ids.include?(image.blob_id) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tabs-content" data-tab="analytics">
+    <h3 class="mt-1/1">Total views per day</h3>
+    <div class="chart" data-role="chart" data-data="<%= @views.to_json %>"></div>
+
+    <h3 class="mt-1/1">Total copies per day</h3>
+    <div class="chart" data-role="chart" data-data="<%= @copies.to_json %>"></div>
+  </div>
+</div>

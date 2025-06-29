@@ -1,5 +1,5 @@
 .gallery {
-  --grid-min-width: 230px;
+  --grid-min-width: var(--grid-size, 230px);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--grid-min-width), 1fr));
   grid-gap: 1rem;
@@ -49,6 +49,14 @@
       &::before {
         display: none;
       }
+    }
+  }
+
+  &--static {
+    cursor: default;
+
+    &:hover::before {
+      display: none;
     }
   }
 
