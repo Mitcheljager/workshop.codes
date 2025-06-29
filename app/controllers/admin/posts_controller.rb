@@ -28,4 +28,30 @@ class Admin::PostsController < Admin::BaseController
       redirect_to admin_posts_path
     end
   end
+
+  def destroy_image
+    begin
+      @post = Post.find(params[:post_id])
+      @image = @post.images.find(params[:image_id])
+      blob_id = @image.blob_id
+
+      @image.purge
+
+      # Remove the blob_id from image_order if it was present in the array
+      image_order = JSON.parse(@post.image_order || "[]")
+      updated_order = image_order.reject { |id| id == blob_id }
+
+      if image_order != updated_order
+        @post.update(image_order: updated_order.to_json)
+      end
+
+      create_activity(:admin_destroy_post_image, { post_id: @post.id, code: @post.code, post_user_id: @post.user_id })
+      flash[:notice] = "Image was removed"
+
+      redirect_to admin_post_path(@post.id)
+    rescue => e
+      flash[:error] = "Image could not be removed: #{e.message}"
+      redirect_to admin_post_path(@post.id)
+    end
+  end
 end

@@ -49,9 +49,13 @@
         <div class="gallery__item gallery__item--static">
           <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed), loading: "lazy", width: 450, height: 250 %>
 
-          <div class="p-1/8">
-            <%= image.id %>
-            <%= tag.em "Unused", class: "text-dark" unless used_image_ids.include?(image.blob_id) %>
+          <div class="p-1/8 pl-1/4 flex justify-between align-center">
+            <div>
+              ID: <%= image.id %>, Blob: <%= image.blob_id %>
+              <%= tag.em "Unused", class: "text-dark text-small" unless used_image_ids.include?(image.blob_id) %>
+            </div>
+
+            <%= button_to "Remove", admin_destroy_post_image_path(post_id: @post.id, image_id: image.id), method: :delete, class: "button button--danger button--small" %>
           </div>
         </div>
       <% end %>

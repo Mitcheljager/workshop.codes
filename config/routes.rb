@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "base#index"
 
+    delete "posts/destroy_image", to: "posts#destroy_image", as: "destroy_post_image"
     resources :posts, only: [:index, :show, :update, :destroy]
     post "posts/find", to: "posts#find", as: "find_post"
 

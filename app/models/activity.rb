@@ -11,7 +11,7 @@ class Activity < ApplicationRecord
     update_revision: 10,
     forgot_password: 12, password_reset: 13,
     create_wiki_article: 14, update_wiki_article: 15,
-    admin_destroy_post: 16, admin_update_user: 17, admin_create_badge: 18, admin_send_notification: 19, admin_destroy_comment: 20, admin_destroy_user: 23,
+    admin_destroy_post: 16, admin_update_user: 17, admin_create_badge: 18, admin_send_notification: 19, admin_destroy_comment: 20, admin_destroy_user: 23, admin_destroy_post_image: 24,
     transfer_archive_post: 21, delete_archive_post: 22
   }
 end
