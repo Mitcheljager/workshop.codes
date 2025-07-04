@@ -48,7 +48,7 @@
     <div class="gallery" style="--grid-size: 400px">
       <% sorted_images.each do |image| %>
         <div class="gallery__item gallery__item--static">
-          <%= image_tag rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [450, 250], format: :webp).processed), loading: "lazy", width: 450, height: 250 %>
+          <%= image_tag landscape_tiny_variant_public_url(image), loading: "lazy", width: 450, height: 250 %>
 
           <div class="p-1/8 pl-1/4 flex justify-between align-center">
             <div>

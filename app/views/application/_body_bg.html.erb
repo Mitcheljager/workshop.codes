@@ -19,21 +19,21 @@
     <% elsif yield(:replace_body_bg) == "user" %>
       <source
         srcset="
-          <%= rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [640, 400]).processed) %> 640w,
-          <%= rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [960, 400]).processed) %> 960w,
-          <%= rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed) %> 1920w"
+          <%= banner_small_variant_public_url(@user.banner_image) %> 640w,
+          <%= banner_medium_variant_public_url(@user.banner_image) %> 960w,
+          <%= banner_large_variant_public_url(@user.banner_image) %> 1920w"
         type="image/jpeg">
 
-      <%= image_tag rails_public_blob_url(@user.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
+      <%= image_tag banner_large_variant_public_url(@user.banner_image), fetchpriority: "high" %>
     <% elsif yield(:replace_body_bg) == "post" %>
       <source
         srcset="
-          <%= rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [640, 400]).processed) %> 640w,
-          <%= rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [960, 400]).processed) %> 960w,
-          <%= rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed) %> 1920w"
+          <%= banner_small_variant_public_url(@post.banner_image) %> 640w,
+          <%= banner_medium_variant_public_url(@post.banner_image) %> 960w,
+          <%= banner_large_variant_public_url(@post.banner_image) %> 1920w"
         type="image/jpeg">
 
-      <%= image_tag rails_public_blob_url(@post.banner_image.variant(quality: 75, resize_to_fill: [1920, 400]).processed), fetchpriority: "high" %>
+      <%= image_tag banner_large_variant_public_url(@post.banner_image), fetchpriority: "high" %>
     <% end %>
   </picture>
 </div>

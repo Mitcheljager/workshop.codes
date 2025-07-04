@@ -17,7 +17,7 @@
           images: (@ordered_images || {}).map { |i| {
             id: i.blob_id,
             url: rails_public_blob_url(i.variant(quality: 95, resize_to_fill: [200, 200 / 9 * 5]).processed),
-            preview_url: rails_public_blob_url(i.variant(quality: 95).processed)
+            preview_url: original_variant_public_url(i)
           } },
           label: "Drop images here to add them to your post",
           help: "Images will be displayed in a 900x500 format (max 2MB per image, jpeg/png only)",
@@ -55,7 +55,7 @@
     </p>
 
     <% begin %>
-      <%= image_tag (@post.banner_image.attached? ? rails_public_blob_url(@post.banner_image.variant(quality: 90, resize_to_fill: [1920, 400]).processed) : "//:0"),
+      <%= image_tag (@post.banner_image.attached? ? banner_large_variant_public_url(@post.banner_image) : "//:0"),
                     class: "mt-1/4 img-fluid",
                     data: { image_preview: "banner" },
                     alt: "Banner image" %>
