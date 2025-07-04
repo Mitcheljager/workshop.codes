@@ -23,7 +23,7 @@ class PostSerializer < ActiveModel::Serializer
       image = object.images.find_by_blob_id(JSON.parse(object.image_order).first)
 
       if image
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [600, 342]).processed)
+        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [600, 342]))
       end
     end
 
@@ -50,7 +50,7 @@ class PostSerializer < ActiveModel::Serializer
       image = object.images.find_by_blob_id(image_id)
 
       if image
-        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 560]).processed)
+        url = rails_public_blob_url(image.variant(quality: 95, resize_to_fill: [900, 560]))
         puts url
         urls.push(url)
       end
