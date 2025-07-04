@@ -4,12 +4,13 @@ class PostSerializer < ActiveModel::Serializer
 
   attributes :code,
     :nice_url, :title,
-    :thumbnail, :images, :carousel_video_youtube_id, :carousel_video_youtube_embed_url,
+    :thumbnail, :carousel_video_youtube_id, :carousel_video_youtube_embed_url,
     :categories, :maps, :heroes, :tags,
     :created_at, :updated_at, :last_revision_created_at
 
   attribute :snippet_url, if: -> { single? }
   attribute :description, if: -> { single? }
+  attribute :images, if: -> { single? }
 
   belongs_to :user
 
