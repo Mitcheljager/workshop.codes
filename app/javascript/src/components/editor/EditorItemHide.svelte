@@ -4,11 +4,13 @@
 
   export let item
 
+  $: hidden = item?.hidden
+
   function hide() {
     toggleHideItem(item.id)
   }
 </script>
 
-<button class:inactive={item.hidden} on:click={hide} data-tooltip="Exclude from compiler">
-  <EyeIcon crossed={item.hidden} />
+<button class:inactive={hidden} on:click={hide} data-tooltip="Exclude from compiler">
+  <EyeIcon crossed={hidden} />
 </button>
