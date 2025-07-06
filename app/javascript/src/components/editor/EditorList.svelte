@@ -59,7 +59,7 @@
     $items = [...$items]
   }
 
-  function getItemsInParent(_items) {
+  function getItemsInParent() {
     return $sortedItems.filter(i => parent ? i.parent == parent.id : !i.parent )
   }
 
