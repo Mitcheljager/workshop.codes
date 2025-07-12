@@ -180,9 +180,9 @@
   flex-direction: column;
   gap: $margin * 0.25;
 
-  @include media-min(md) {
+  @include media-min(lg) {
     display: grid;
-    grid-template-columns: 2;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
