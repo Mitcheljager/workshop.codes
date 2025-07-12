@@ -143,7 +143,7 @@
   }
 
   @include hover-stack {
-    color: white;
+    color: $white;
 
     .profile-banner__verified path {
       fill: $text-color-dark;

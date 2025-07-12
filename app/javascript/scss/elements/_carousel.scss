@@ -136,7 +136,7 @@
   &:not(.card-carousel__control--disabled):hover,
   &:not(.card-carousel__control--disabled):active {
     svg path {
-      fill: white;
+      fill: $white;
     }
   }
 

@@ -96,7 +96,7 @@
   height: 2.375rem;
   width: 2.375rem;
   padding: 0 .5rem;
-  color: white;
+  color: $white;
   font-size: 32px;
   line-height: 1.2em;
   font-weight: bolder;
@@ -111,7 +111,7 @@
   }
 
   &:focus {
-    color: white;
+    color: $white;
   }
 
   svg {

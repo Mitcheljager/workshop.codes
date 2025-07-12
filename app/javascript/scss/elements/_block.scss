@@ -37,7 +37,7 @@
     text-decoration: none;
 
     @include hover-stack {
-      color: white;
+      color: $white;
       text-decoration: underline;
     }
   }
