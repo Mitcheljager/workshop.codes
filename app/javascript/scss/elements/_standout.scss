@@ -86,14 +86,10 @@
   &--editor {
     display: block;
     gap: 0;
-    padding: math.div($margin, 6);
+    padding: $margin * 0.25;
     overflow: hidden;
     box-shadow: $shadow;
     text-decoration: none;
-
-    @include media-min(md) {
-      padding: $margin * 0.25;
-    }
 
     @include hover-stack {
       background: lighten($bg-dark, 2.5%);
@@ -153,6 +149,10 @@
       }
     }
   }
+
+  &--wide {
+    grid-column: span 2;
+  }
 }
 
 .standout__subtitle {
@@ -176,21 +176,13 @@
 }
 
 .standout-grid {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: $margin * 0.25;
 
   @include media-min(md) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    .standout {
-      width: calc(50% - #{$margin * 0.125});
-    }
-
-    .standout--small {
-      width: calc(33% - #{$margin * 0.125} - 1px);
-    }
+    display: grid;
+    grid-template-columns: 2;
   }
 }
 
