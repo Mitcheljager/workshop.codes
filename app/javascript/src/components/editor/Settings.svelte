@@ -144,7 +144,7 @@
       </div>
 
       <div class="text-small mt-1/16 pl-1/2 text-base">
-        Parameter objects change the format of parameters in actions and values to be more readable and less cumbersome to write. You can exclude any parameters you don't change the default off.
+        Parameter objects change the format of parameters in actions and values to be more readable and less cumbersome to write. You can exclude any parameters you don't change the default of.
       </div>
 
       {#if $settings["autocomplete-parameter-objects"]}
