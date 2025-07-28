@@ -112,7 +112,7 @@ export function evaluateExpressionTree(node: ExpressionTree): boolean | string |
 }
 
 export function getExpressionTree(expression: string): ExpressionTree {
-  expression = removeSurroundingParenthesis(expression)
+  expression = removeSurroundingParenthesis(expression).trim()
 
   const result: ExpressionTree = {
     value: null,
@@ -122,6 +122,12 @@ export function getExpressionTree(expression: string): ExpressionTree {
   }
 
   if (expression.length === 0) return result
+
+  if (expression.at(0) === "/" && expression.at(-1) === "/") {
+    // Regular Expression
+    result.value = expression
+    return result
+  }
 
   for (let currentIndex = 0; currentIndex < expression.length; currentIndex++) {
     const char = expression[currentIndex]
