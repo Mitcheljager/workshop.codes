@@ -15,7 +15,7 @@ body {
 
 body {
   position: relative;
-  padding: math.div($margin, 3) math.div($margin, 3) 0;
+  padding: 1.25rem 1.25rem 0;
   background: $body-bg url("/images/layout/pattern-bg.webp");
   color: $text-color;
   overflow-x: hidden;
@@ -150,7 +150,10 @@ legend {
   width: 100%;
   max-width: calc(#{ map-get($media-min-widths, lg) } - #{ $margin } + 20vw);
   margin: 0 auto;
-  padding: 0 calc(10vw - #{ $margin * 0.5 });
+
+  @include media-min(xs) {
+    padding: 0 calc(10vw - #{ $margin * 0.5 });
+  }
 
   &--small {
     max-width: map-get($media-min-widths, xs);
