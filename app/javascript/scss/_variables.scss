@@ -57,31 +57,3 @@ $shadow: 0 2px 1px rgba(0, 0, 0, .1),
          0 8px 4px rgba(0, 0, 0, 0.1),
          0 16px 8px rgba(0, 0, 0, 0.1),
          0 32px 16px rgba(0, 0, 0, 0.1);
-
-:root {
-  color-scheme: dark;
-  --primary: #{ $primary };
-  --secondary: #{ $secondary };
-  --white: #{ $text-color-lightest };
-  --orange: #{ $orange };
-  --red: #{ $red };
-  --overwatch-2: #{ $overwatch-2 };
-  --wiki: #{ $wiki };
-  --text-color: #{ $text-color };
-  --text-color-light: #{ $text-color-light };
-  --text-color-dark: #{ $text-color-dark };
-  --bg-body: #{ $body-bg };
-  --bg-dark: #{ $bg-dark };
-  --bg-darker: #{ $bg-darker };
-  --border-color: #{ $border-color };
-  --border-radius: #{ $border-radius };
-  --shadow: #{ $shadow };
-  --font-size-base: #{ $font-size-base };
-  --font-size-small: #{ $font-size-small };
-  --font-stack: #{ $font-stack };
-  --font-stack-alt: #{ $font-stack-alt };
-}
-
-.wiki {
-  --primary: #{ $wiki };
-}
