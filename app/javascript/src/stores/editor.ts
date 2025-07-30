@@ -1,7 +1,7 @@
 import { writable, derived } from "svelte/store"
 import { getVariables } from "@utils/compiler/variables"
 import { isAnyParentHidden } from "@utils/editor"
-import { getMixins } from "@utils/compiler/mixins"
+import { getMixinNames } from "@utils/compiler/mixins"
 import { getSubroutines } from "@utils/compiler/subroutines"
 import { debounced } from "@utils/debounceStore"
 import type { EditorStates, ExtendedCompletion, Item, Project, RecoveredProject, WorkshopConstant } from "@src/types/editor"
@@ -80,7 +80,7 @@ export const subroutinesMap = derived(flatItems, debounced(($flatItems: string) 
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))
 
 export const mixinsMap = derived(flatItems, debounced(($flatItems: string) => {
-  const mixins = getMixins($flatItems)
+  const mixins = getMixinNames($flatItems)
 
   return mixins.map((v: string) => ({ detail: "Mixin", label: `@include ${v}()`, type: "variable" }))
 }, VARIABLE_EXTRACTION_DEBOUNCE_MS))

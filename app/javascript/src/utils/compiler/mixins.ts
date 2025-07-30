@@ -2,16 +2,18 @@ import { getClosingBracket, replaceBetween, splitArgumentsString } from "@utils/
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 import type { Mixin } from "@src/types/editor"
 
-export function getMixins(joinedItems: string): string[] {
+export function getMixinNames(joinedItems: string): string[] {
   let mixins = joinedItems.match(/(?<=@mixin\s)[^\s\(]+/g) as string[]
   mixins = [...new Set(mixins)]
 
   return mixins
 }
 
-/** Replace and remove all occurances of `@include` and `@mixin`. `@include` is replaced with the declarations of their
- * corresponding `@mixin`. */
-export function extractAndInsertMixins(joinedItems: string): string {
+/**
+ * Find all mixins in the entire document stated by `@mixin` and return an object with
+ * properties for each mixin.
+ */
+export function getMixins(joinedItems: string): Record<string, Mixin> {
   const mixins: Record<string, Mixin> = {}
 
   // Find stated mixins and save their names and params to an object
@@ -45,57 +47,31 @@ export function extractAndInsertMixins(joinedItems: string): string {
 
     if (mixin.includes(`@include ${name}`)) throw new Error("Can not include a mixin in itself")
 
+    const hasContents = mixin.includes("@contents")
+
     mixins[name] = {
       content: mixin,
       full: joinedItems.slice(match.index, closing + 1),
       params: paramsDefaults,
-      hasContents: mixin.includes("@contents")
+      hasContents
     }
   }
 
+  return mixins
+}
+
+/** Replace and remove all occurances of `@include` and `@mixin`. `@include` is replaced with the declarations of their
+ * corresponding `@mixin`. */
+export function extractAndInsertMixins(joinedItems: string): string {
+  const mixins: Record<string, Mixin> = getMixins(joinedItems)
+
   // Remove mixins from content
-  Object.values(mixins).forEach(({ full }) => joinedItems = joinedItems.replace(full, ""))
+  Object.values(mixins).forEach(({ full }) => {
+    joinedItems = joinedItems.replace(full, "")
+  })
 
-  // Find stated includes for mixins and replace them with mixins
-  while (joinedItems.indexOf("@include") != -1) {
-    // Get arguments
-    const index = joinedItems.indexOf("@include")
-    const closing = getClosingBracket(joinedItems, "(", ")", index + 1)
-
-    if (closing < 0) throw new Error("Mixin @include was not closed properly")
-
-    const full = joinedItems.slice(index, closing + 1)
-    const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
-    const mixin = mixins[name!]
-    const parameterObjectGiven = getFirstParameterObject(full)?.given
-
-    if (!mixin) throw new Error(`Included a mixin that was not specified: "${name}"`)
-
-    const argumentsOpeningParen = full.indexOf("(")
-    const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
-
-    if (argumentsClosingParen < 0) continue
-
-    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
-    let splitArguments = splitArgumentsString(argumentsString) || []
-
-    // If there is only one argument and that argument is a parameter object we assume the given argument is not for a param.
-    // This allows us to either insert a single parameter object to be used for the mixin or insert multiple to be used for the params.
-    if (splitArguments.length === 1 && parameterObjectGiven) splitArguments = []
-
-    let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, closing, mixin.content)
-
-    mixin.params
-      .map((param, index) => ({ ...param, index }))
-      .sort((p1, p2) => p2.key.length - p1.key.length)
-      .forEach(param => {
-        replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[param.index]?.trim() || parameterObjectGiven?.[param.key] || param.default)
-      })
-
-    const closingSemicolon = (!mixin.hasContents || !contents) && joinedItems[closing + 1] == ";"
-
-    joinedItems = replaceBetween(joinedItems, replaceWith, index, index + ((contents && fullMixin) || full).length + (closingSemicolon ? 1 : 0))
-  }
+  // Find stated `@include`s for mixins and replace them with their mixin content
+  joinedItems = replaceIncludes(joinedItems, mixins)
 
   return joinedItems
 }
@@ -173,4 +149,51 @@ export function getOpeningBracketAt(content: string): number {
   }
 
   return -1
+}
+
+/**
+ * Replace all `@includes` with their actual given mixin content.
+ */
+export function replaceIncludes(joinedItems: string, mixins: Record<string, Mixin>): string {
+  while (joinedItems.indexOf("@include") != -1) {
+    // Get arguments
+    const index = joinedItems.indexOf("@include")
+    const closing = getClosingBracket(joinedItems, "(", ")", index + 1)
+
+    if (closing < 0) throw new Error("Mixin @include was not closed properly")
+
+    const full = joinedItems.slice(index, closing + 1)
+    const name = full.match(/(?<=@include\s)(\w+)/)?.[0]
+    const mixin = mixins[name!]
+    const parameterObjectGiven = getFirstParameterObject(full)?.given
+
+    if (!mixin) throw new Error(`Included a mixin that was not specified: "${name}"`)
+
+    const argumentsOpeningParen = full.indexOf("(")
+    const argumentsClosingParen = getClosingBracket(full, "(", ")", argumentsOpeningParen - 1)
+
+    if (argumentsClosingParen < 0) return joinedItems
+
+    const argumentsString = full.slice(argumentsOpeningParen + 1, argumentsClosingParen)
+    let splitArguments = splitArgumentsString(argumentsString) || []
+
+    // If there is only one argument and that argument is a parameter object we assume the given argument is not for a param.
+    // This allows us to either insert a single parameter object to be used for the mixin or insert multiple to be used for the params.
+    if (splitArguments.length === 1 && parameterObjectGiven) splitArguments = []
+
+    let { replaceWith, fullMixin, contents } = replaceContents(joinedItems, index, closing, mixin.content)
+
+    mixin.params
+      .map((param, index) => ({ ...param, index }))
+      .sort((p1, p2) => p2.key.length - p1.key.length)
+      .forEach(param => {
+        replaceWith = replaceWith.replaceAll("Mixin." + param.key, splitArguments[param.index]?.trim() || parameterObjectGiven?.[param.key] || param.default)
+      })
+
+    const closingSemicolon = (!mixin.hasContents || !contents) && joinedItems[closing + 1] == ";"
+
+    joinedItems = replaceBetween(joinedItems, replaceWith, index, index + ((contents && fullMixin) || full).length + (closingSemicolon ? 1 : 0))
+  }
+
+  return joinedItems
 }
