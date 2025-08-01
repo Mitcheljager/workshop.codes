@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include RememberTokenHandler
   include ApplicationHelper
   include ActivitiesHelper
   include UsersHelper
@@ -7,7 +8,6 @@ class ApplicationController < ActionController::Base
   content_security_policy Rails.env.production?
 
   protect_from_forgery with: :exception
-  before_action :login_from_cookie
   before_action :reject_if_banned
   before_action :expire_oauth_session
 
@@ -15,27 +15,6 @@ class ApplicationController < ActionController::Base
   rescue_from AbstractController::ActionNotFound, with: :render_404
   rescue_from ActionController::RoutingError,  with: :render_404
   rescue_from ActionController::UnknownFormat,  with: :render_404
-
-  def login_from_cookie
-    return unless cookies[:remember_token] && !current_user
-
-    token = RememberToken.find_by_token(cookies.encrypted[:remember_token])
-
-    if token && token.user
-      return_path = session[:return_to]
-      reset_session
-
-      session[:user_id] = token.user.id
-      session[:user_uuid] = token.user.uuid
-      session[:return_to] = return_path
-
-      refresh_remember_token
-
-      create_activity(:login_from_cookie)
-    else
-      cookies.delete :remember_token
-    end
-  end
 
   def reject_if_banned
     reset_session if current_user.present? && current_user.level == "banned"
@@ -96,10 +75,6 @@ class ApplicationController < ActionController::Base
     end
   rescue ActionController::UnknownFormat
     head 404
-  end
-
-  def refresh_remember_token
-    cookies.encrypted[:remember_token] = { value: cookies.encrypted[:remember_token], expires: 1.year }
   end
 
   private

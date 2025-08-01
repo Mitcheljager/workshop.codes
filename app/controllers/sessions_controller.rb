@@ -44,11 +44,14 @@ class SessionsController < ApplicationController
       reject_banned_user and return if is_banned?(@user)
 
       return_path = session[:return_to]
+
       reset_session
-      generate_remember_token if (params[:remember_me].present? && params[:remember_me] != "0") || (@user.provider.present?)
+
       session[:user_id] = @user.id
       session[:user_uuid] = @user.uuid
       session[:return_to] = return_path
+
+      refresh_remember_token_cookie if params[:remember_me].present? && params[:remember_me] != "0" || @user.provider.present?
 
       create_activity(:login, @user.id)
       ahoy.authenticate(@user)
@@ -72,21 +75,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user.remember_tokens.destroy_all if current_user && current_user.remember_tokens.any?
-    cookies.delete :remember_token
+    current_user.remember_tokens.destroy_all if current_user&.remember_tokens&.any?
 
+    destroy_remember_token_cookie
     reset_session
+
     redirect_to login_path
   end
 
   private
-
-  def generate_remember_token
-    token = SecureRandom.base64
-    RememberToken.create(user_id: @user.id, token: token)
-
-    cookies.encrypted[:remember_token] = { value: token, expires: 1.year }
-  end
 
   def reject_banned_user
     flash[:alert] = "Your account has been banned"

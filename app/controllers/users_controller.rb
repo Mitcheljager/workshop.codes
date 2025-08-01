@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      generate_remember_token if params[:remember_me]
+      refresh_remember_token_cookie if params[:remember_me]
 
       create_activity(:create_user, @user.id)
 
@@ -86,13 +86,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation, :email, :email_confirmation)
-  end
-
-  def generate_remember_token
-    token = SecureRandom.base64
-    RememberToken.create(user_id: @user.id, token: token)
-
-    cookies.encrypted[:remember_token] = { value: token, expires: 30.days }
   end
 
   def allowed_sort_params
