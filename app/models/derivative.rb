@@ -5,15 +5,15 @@ class Derivative < ApplicationRecord
   validates :source_code, presence: true
   validates :derivation_id, presence: true
   validate :no_self_derive
-  validates :source, uniqueness: { scope: :derivation, message: 'already derived from for this post.' }, if: -> { source.present? }
-  validates :source_code, uniqueness: { scope: :derivation, message: 'already derived from for this post.', case_sensitive: false }
+  validates :source, uniqueness: { scope: :derivation, message: "already derived from for this post." }, if: -> { source.present? }
+  validates :source_code, uniqueness: { scope: :derivation, message: "already derived from for this post.", case_sensitive: false }
 
   before_save { source_code&.upcase! }
 
   private
 
   def no_self_derive
-    errors.add(:base, 'Post cannot derive from itself') if source == derivation
-    errors.add(:base, 'Cannot derive from the same import code') if source_code == derivation&.code
+    errors.add(:base, "Post cannot derive from itself") if source == derivation
+    errors.add(:base, "Cannot derive from the same import code") if source_code == derivation&.code
   end
 end

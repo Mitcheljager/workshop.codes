@@ -1,5 +1,5 @@
 desc "Generate wiki articles. This file is ugly. Please don't judge."
-task :generate_wiki_articles => :environment do
+task generate_wiki_articles: :environment do
   actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
   events = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "events.yml")))
   values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
@@ -22,7 +22,7 @@ task :generate_wiki_articles => :environment do
 
       content_args = "
 ### Arguments
-#{ content["args"].to_yaml(options = {line_width: -1}).gsub("---", "").gsub("- name:", "\n> name:").gsub("name:", "**Name**:").gsub("description:", "**Description**:").gsub("type:", "**Type**:").gsub("default:", "**Default**:") }"
+#{ content["args"].to_yaml(options = { line_width: -1 }).gsub("---", "").gsub("- name:", "\n> name:").gsub("name:", "**Name**:").gsub("description:", "**Description**:").gsub("type:", "**Type**:").gsub("default:", "**Default**:") }"
     end
 
     @article = Wiki::Article.create(
@@ -84,13 +84,13 @@ task :generate_wiki_articles => :environment do
 
       content_args = "
 ### Arguments
-#{ content["args"].to_yaml(options = {line_width: -1}).gsub("---", "").gsub("- name:", "\n> name:").gsub("name:", "**Name**:").gsub("description:", "**Description**:").gsub("type:", "**Type**:").gsub("default:", "**Default**:") }"
+#{ content["args"].to_yaml(options = { line_width: -1 }).gsub("---", "").gsub("- name:", "\n> name:").gsub("name:", "**Name**:").gsub("description:", "**Description**:").gsub("type:", "**Type**:").gsub("default:", "**Default**:") }"
     end
 
     if content["return"]
       content_return = "
 ### Return
-> #{ content["return"].to_yaml(options = {line_width: -1}).gsub("---", "").gsub("...", "").humanize }"
+> #{ content["return"].to_yaml(options = { line_width: -1 }).gsub("---", "").gsub("...", "").humanize }"
     end
 
     @article = Wiki::Article.create(

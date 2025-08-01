@@ -155,7 +155,7 @@ class PostsController < ApplicationController
           raise ActiveRecord::RecordInvalid.new @post
         end
 
-        if (params[:remove_banner_image].present?)
+        if params[:remove_banner_image].present?
           @post.banner_image.purge
         end
 
@@ -316,7 +316,7 @@ class PostsController < ApplicationController
       return true
     end
 
-    return false
+    false
   end
 
   def parse_derivatives
@@ -371,7 +371,8 @@ class PostsController < ApplicationController
     if codes.count > Post::MAX_SOURCES
       flash[:warning] = "More sources were provided than allowed, so only the first #{ Post::MAX_SOURCES } sources were saved."
     end
-    return true
+
+    true
   end
 
   def not_found
@@ -438,7 +439,7 @@ class PostsController < ApplicationController
   end
 
   def published_from_draft
-    return @was_draft && !@post.draft?
+    @was_draft && !@post.draft?
   end
 
   def update_draft

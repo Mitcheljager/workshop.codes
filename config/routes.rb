@@ -6,7 +6,7 @@ end
 
 class KoConstraint
   def matches?(request)
-    request.path.starts_with?('/ko')
+    request.path.starts_with?("/ko")
   end
 end
 

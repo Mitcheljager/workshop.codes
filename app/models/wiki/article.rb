@@ -24,7 +24,7 @@ class Wiki::Article < ApplicationRecord
   validates :images, content_type: ["image/png", "image/jpeg", "image/webp"],
                      size: { less_than: 2.megabytes }
 
-  def self.search(query, size=100)
+  def self.search(query, size = 100)
     __elasticsearch__.search({
       from: 0,
       size: size,
@@ -61,7 +61,7 @@ class Wiki::Article < ApplicationRecord
     order(condition)
   end
 
-  def as_indexed_json(options={})
-    self.as_json(only: [:title, :tags], include: { category: { only: :title } } )
+  def as_indexed_json(options = {})
+    self.as_json(only: [:title, :tags], include: { category: { only: :title } })
   end
 end

@@ -48,8 +48,8 @@ class Wiki::ArticlesController < Wiki::BaseController
     @article.content = sanitized_markdown(@article.content) if params[:parse_markdown]
 
     add_breadcrumb "Categories", :wiki_categories_path
-    add_breadcrumb @article.category.title, Proc.new{ wiki_category_path(@article.category.slug) }
-    add_breadcrumb @article.title.truncate(20), Proc.new{ wiki_article_path(@article.slug) }
+    add_breadcrumb @article.category.title, Proc.new { wiki_category_path(@article.category.slug) }
+    add_breadcrumb @article.title.truncate(20), Proc.new { wiki_article_path(@article.slug) }
 
     respond_to do |format|
       format.html
@@ -89,9 +89,9 @@ class Wiki::ArticlesController < Wiki::BaseController
     @article = Wiki::Article.where(slug: params[:slug]).last
 
     add_breadcrumb "Categories", :wiki_categories_path
-    add_breadcrumb @article.category.title, Proc.new{ wiki_category_path(@article.category.slug) }
-    add_breadcrumb @article.title.truncate(20), Proc.new{ wiki_article_path(@article.slug) }
-    add_breadcrumb "Edit", Proc.new{ edit_wiki_article_path(@article.slug) }
+    add_breadcrumb @article.category.title, Proc.new { wiki_category_path(@article.category.slug) }
+    add_breadcrumb @article.title.truncate(20), Proc.new { wiki_article_path(@article.slug) }
+    add_breadcrumb "Edit", Proc.new { edit_wiki_article_path(@article.slug) }
   end
 
   def update
@@ -140,9 +140,9 @@ class Wiki::ArticlesController < Wiki::BaseController
   def title_to_slug
     slug = CGI.escape(@article.title.gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase
     if Wiki::Article.where.not(group_id: @article.group_id).where(slug: slug).any?
-      return "#{ slug }-#{ random_string }"
+      "#{ slug }-#{ random_string }"
     else
-      return slug
+      slug
     end
   end
 

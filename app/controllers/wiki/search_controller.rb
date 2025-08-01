@@ -29,7 +29,7 @@ class Wiki::SearchController < Wiki::BaseController
           if params[:parse_markdown]
             article.content = sanitized_markdown(article.content, rendererOptions: { header_anchors: true })
           else
-            article.content = ReverseMarkdown.convert(ActionController::Base.helpers.sanitize(markdown(article.content || ""), tags: %w(style p br strong em b blockquote h1 h2 h3 h4 h5 h6 code pre)).gsub(/h\d/, "strong"))
+            article.content = ReverseMarkdown.convert(ActionController::Base.helpers.sanitize(markdown(article.content || ""), tags: %w[style p br strong em b blockquote h1 h2 h3 h4 h5 h6 code pre]).gsub(/h\d/, "strong"))
           end
         end
 

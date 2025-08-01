@@ -56,11 +56,11 @@ class CollectionsController < ApplicationController
     param_ids = (collection_params[:collection_posts] || []).map { |id| id.to_i }
 
     if @collection.update(collection_params)
-      if (params[:remove_cover_image].present?)
+      if params[:remove_cover_image].present?
         @collection.cover_image.purge
       end
 
-      if (initial_ids != param_ids)
+      if initial_ids != param_ids
         set_collection_id_for_posts(param_ids, initial_ids)
       end
 

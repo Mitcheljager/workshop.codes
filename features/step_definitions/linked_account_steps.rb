@@ -5,7 +5,6 @@ When /I (?:try to )?link my (\S+) account/ do |type|
   stub_oauth_flow(service_to_provider(type), to_link_account[:username]) do
     click_on "Link #{type} account"
   end
-
 end
 
 When /I (?:try to )?unlink my (\S+) account/ do |type|
@@ -33,6 +32,6 @@ Then "I should not see {string} in my linked accounts" do |username|
 end
 
 def link_account_type(type, central_account_id)
-  user = create(:user, @oauth_accounts[service_to_provider(type)].merge({linked_id: central_account_id}))
+  user = create(:user, @oauth_accounts[service_to_provider(type)].merge({ linked_id: central_account_id }))
   @oauth_accounts[service_to_provider(type)][:id] = user.id
 end

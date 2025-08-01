@@ -7,7 +7,7 @@ RSpec.describe Derivative, type: :model do
 
     it { should validate_presence_of(:source_code) }
     it { should validate_presence_of(:derivation_id) }
-    
+
     context "validation of derivation" do
       it "doesn't allow a post to derive from itself" do
         attrs = attributes_for(:derivative)

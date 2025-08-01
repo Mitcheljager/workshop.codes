@@ -2,8 +2,8 @@ include ApplicationHelper
 
 class ArrayLengthValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    return if (value.is_a?(String) && value.empty?)
-    value = JSON.parse(value) if (value.is_a?(String))
+    return if value.is_a?(String) && value.empty?
+    value = JSON.parse(value) if value.is_a?(String)
 
     return unless options.key?(:maximum)
     return unless value.present?
@@ -145,7 +145,7 @@ class Post < ApplicationRecord
   validates_with SupportedPlayersValidator
 
   # Ensure unresolved reports about this post are archived
-  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", 'post', post.id, 0).update_all(status: "archived") }
+  before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", "post", post.id, 0).update_all(status: "archived") }
 
   def self.search(query, size: 50, bypass_cache: true)
     __elasticsearch__.search({
@@ -186,9 +186,9 @@ class Post < ApplicationRecord
     }).records.ids
   end
 
-  def as_indexed_json(options={})
+  def as_indexed_json(options = {})
     self.as_json(only: [:code, :title, :tags, :categories, :maps, :heroes, :hotness],
-                 include: { user: { only: :username } } )
+                 include: { user: { only: :username } })
   end
 
   def self.select_overview_columns

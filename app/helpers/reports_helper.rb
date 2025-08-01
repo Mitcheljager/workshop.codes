@@ -22,9 +22,9 @@ module ReportsHelper
 
   def report_model_property(report, model, property)
     if report_has_model_property?(report, model, property)
-      return report.properties[model][property]
+      report.properties[model][property]
     else
-      return ""
+      ""
     end
   end
 

@@ -1,18 +1,18 @@
 module UsersHelper
   def is_arbiter?(user)
     if user && (user.level == "admin" || user.level == "arbiter")
-      return true
+      true
     else
-      return false
+      false
     end
   end
 
   def is_admin?(user)
-    return true if user && user.level == "admin"
+    true if user && user.level == "admin"
   end
 
   def is_banned?(user)
-    return true if user && user.level == "banned"
+    true if user && user.level == "banned"
   end
 
   def to_clean_username(username)

@@ -20,7 +20,7 @@ class EditorController < ApplicationController
             defaults: defaults,
             constants: constants,
             maps: maps,
-            heroes: heroes,
+            heroes: heroes
           }
         end
 

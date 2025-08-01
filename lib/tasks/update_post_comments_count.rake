@@ -1,5 +1,5 @@
 desc "Update post comments count"
-task :update_post_comments_count => :environment do
+task update_post_comments_count: :environment do
   Comment.where.not(parent_id: nil).each do |comment|
     next if Comment.where(id: comment.parent_id).any?
 

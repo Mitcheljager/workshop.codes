@@ -64,7 +64,7 @@ class AnalyticsController < ApplicationController
       date_counts << { date: date.strftime("%Y-%m-%d %H:00"), value: 0 }
     end
 
-    return date_counts
+    date_counts
   end
 
   def create_daily_counts(type)
@@ -75,6 +75,6 @@ class AnalyticsController < ApplicationController
       this[:value] = values.map { |h| h[:value] }.sum if this.present?
     end
 
-    return counts
+    counts
   end
 end

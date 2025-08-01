@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 ruby "~> 3.2.2"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -10,7 +10,7 @@ gem "aws-sdk-s3", require: false
 gem "bcrypt", require: "bcrypt"
 gem "blind_index"
 gem "breadcrumbs_on_rails"
-gem 'bonsai-elasticsearch-rails', github: 'omc/bonsai-elasticsearch-rails', branch: 'master'
+gem "bonsai-elasticsearch-rails", github: "omc/bonsai-elasticsearch-rails", branch: "master"
 gem "bootsnap", require: false
 gem "chart-js-rails"
 gem "concurrent-ruby", "= 1.3.4"
@@ -61,6 +61,7 @@ group :development, :test do
   gem "faker"
   gem "pry-byebug", "~> 3.10.1"
   gem "rspec-rails", "~> 4.0.2"
+  gem "rubocop-rails-omakase", require: false
   gem "selenium-webdriver", "~> 4.7.1"
   gem "shoulda-matchers", "~> 4.5"
   gem "sqlite3", "1.4.2"

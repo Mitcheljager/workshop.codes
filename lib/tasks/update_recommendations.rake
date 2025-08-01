@@ -1,5 +1,5 @@
 desc "Update post recommendations for users"
-task :update_recommendations => :environment do
+task update_recommendations: :environment do
   data = Favorite.all.map do |favorite|
     { user_id: favorite.user_id, item_id: favorite.post_id }
   end

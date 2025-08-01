@@ -1,7 +1,7 @@
 namespace :hotness do
   desc "Set hotness for each post"
 
-  task :set_hotness_for_posts => :environment do
+  task set_hotness_for_posts: :environment do
     include BadgesHelper
 
     ActiveRecord::Base.connection_pool.with_connection do
@@ -23,7 +23,7 @@ namespace :hotness do
 
         post.update_column(:hotness, total_score)
 
-        if (total_score > post.top_hotness)
+        if total_score > post.top_hotness
           post.update_columns(top_hotness: total_score, top_hotness_at: DateTime.now)
         end
       end

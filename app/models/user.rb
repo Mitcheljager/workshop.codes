@@ -70,7 +70,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }, uniqueness_against_nice_url: true, format: { with: /\A[\d\p{L}_-]*[#\d]*\z/i }, length: { maximum: 32 }
   validates :password, presence: true, length: { minimum: 8 }, if: :password
   validates :email, uniqueness: true, allow_blank: true, length: { maximum: 100 }
-  validates :link, allow_blank: true, format: URI::regexp(%w[http https])
+  validates :link, allow_blank: true, format: URI.regexp(%w[http https])
   validates :description, length: { maximum: 255 }
   validates :nice_url, uniqueness: true, allow_blank: true
   validates :featured_posts, allow_blank: true, serialized_array_length: { maximum: 3 }
@@ -88,7 +88,7 @@ class User < ApplicationRecord
 
   before_validation :generate_and_set_uuid, on: :create
 
-  def self.search(query, size=100)
+  def self.search(query, size = 100)
     __elasticsearch__.search({
       from: 0,
       size: size,
@@ -119,7 +119,7 @@ class User < ApplicationRecord
     # a username validation error occurs. This could be another Discord
     # user or a Workshop.codes account colliding with the desired username.
     user.valid? # Trigger validations; we don't care about the result
-    if (user.errors[:username].any? && auth_hash["provider"] == "discord")
+    if user.errors[:username].any? && auth_hash["provider"] == "discord"
       discriminator = auth_hash["extra"]["raw_info"]["discriminator"]
       user.username = username + "#" + discriminator
     end
@@ -140,7 +140,7 @@ class User < ApplicationRecord
     self.username.split("#")[0]
   end
 
-  def as_indexed_json(options={})
+  def as_indexed_json(options = {})
     self.as_json(only: [:username])
   end
 

@@ -35,7 +35,7 @@ class ArchivesController < ApplicationController
 
       create_activity(:transfer_archive_post, {
         id: @post.id,
-        authorizing_bnet_uid: session[:oauth_uid]})
+        authorizing_bnet_uid: session[:oauth_uid] })
 
       flash[:notice] = "Post successfully transferred"
       redirect_to post_path(@post.code)
@@ -55,7 +55,7 @@ class ArchivesController < ApplicationController
       create_activity(:delete_archive_post,
         {
           id: @post.id,
-          authorizing_bnet_uid: session[:oauth_uid]},
+          authorizing_bnet_uid: session[:oauth_uid] },
         User.find_by!(username: "elo-hell-archive").id)
 
       flash[:notice] = "Post successfully deleted"

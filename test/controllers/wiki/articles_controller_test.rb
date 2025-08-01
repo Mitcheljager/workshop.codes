@@ -1,6 +1,6 @@
-require 'test_helper'
-require 'capybara/rails'
-require 'capybara/minitest'
+require "test_helper"
+require "capybara/rails"
+require "capybara/minitest"
 
 class Wiki::ArticleControllerTest < ActionDispatch::IntegrationTest
   include Capybara::DSL

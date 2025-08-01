@@ -11,9 +11,9 @@ class OpenAiController < ApplicationController
     description = ""
     found_match = false
     merged_array.each do |item|
-      if item.is_a?(Array) && item[1].is_a?(Hash) && item[1]['en-US'] == @article.title
+      if item.is_a?(Array) && item[1].is_a?(Hash) && item[1]["en-US"] == @article.title
         found_match = true
-        description = item[1]['description']
+        description = item[1]["description"]
         break
       end
     end
@@ -38,7 +38,7 @@ class OpenAiController < ApplicationController
           role: "user",
           content: prompt
         }],
-        temperature: 0.7,
+        temperature: 0.7
       })
 
       @message = markdown(response["choices"][0]["message"]["content"])

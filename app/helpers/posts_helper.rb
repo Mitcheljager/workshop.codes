@@ -20,7 +20,7 @@ module PostsHelper
       url = image_path "maps/#{ size }/webp/#{ map["slug"] }.webp"
     end
 
-    return url
+    url
   end
 
   def has_player_range?(post)
@@ -49,7 +49,7 @@ module PostsHelper
 
   def is_active_tab?(tab)
     return true if tab == "" && params[:tab].nil? || params[:tab] == tab
-    return false
+    false
   end
 
   def tabs_content_tag(name, alt_url = nil, extra_class = "item__content shadow-block")

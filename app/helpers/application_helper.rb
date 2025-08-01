@@ -14,9 +14,9 @@ module ApplicationHelper
     parameters[key] = value
 
     if parameters.values.all? { |v| v.nil? }
-      return filter_path(sort: :latest)
+      filter_path(sort: :latest)
     else
-      return filter_path(parameters)
+      filter_path(parameters)
     end
   end
 
@@ -26,19 +26,19 @@ module ApplicationHelper
   end
 
   def is_wiki?
-    controller_path.split('/').first == "wiki" ? true : false
+    controller_path.split("/").first == "wiki" ? true : false
   end
 
   def is_blog?
-    controller_path.split('/').first == "articles" ? true : false
+    controller_path.split("/").first == "articles" ? true : false
   end
 
   def is_editor?
-    controller_path.split('/').first == "editor" ? true : false
+    controller_path.split("/").first == "editor" ? true : false
   end
 
   def is_admin_controller?
-    controller_path.split('/').first == "admin" ? true : false
+    controller_path.split("/").first == "admin" ? true : false
   end
 
   def to_slug(string)
@@ -95,13 +95,13 @@ module ApplicationHelper
     [
       { title: "Overview", url: account_path, data: { prefetch: false } },
       { title: "Update Feed", url: feed_index_path, data: { prefetch: false } },
-      { title: "Notifications", url: notifications_path, },
-      { title: "Favorites", url: account_favorites_path, },
-      { title: "Codes", url: account_posts_path, },
-      { title: "Collections", url: account_collections_path, },
-      { title: "Profile", url: edit_profile_path, },
-      { title: "Account", url: edit_user_path, },
-      { title: "Linked Accounts", url: linked_users_path, },
+      { title: "Notifications", url: notifications_path },
+      { title: "Favorites", url: account_favorites_path },
+      { title: "Codes", url: account_posts_path },
+      { title: "Collections", url: account_collections_path },
+      { title: "Profile", url: edit_profile_path },
+      { title: "Account", url: edit_user_path },
+      { title: "Linked Accounts", url: linked_users_path },
       { title: "Logout", url: logout_path, data: { prefetch: false } }
     ]
   end

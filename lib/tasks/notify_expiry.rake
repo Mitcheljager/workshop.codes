@@ -1,15 +1,15 @@
 include Rails.application.routes.url_helpers
 
 desc "Notify posts that are about to expire or have already expired"
-task :notify_expiry => :environment do
+task notify_expiry: :environment do
   ActiveRecord::Base.connection_pool.with_connection do
     posts = Post.where("last_revision_created_at > ?", 7.months.ago)
 
     posts.each do |post|
       next if post.immortal?
 
-      if (post.revisions.any? && post.revisions.last.created_at < 5.months.ago)
-        if(post.revisions.any? && post.revisions.last.created_at < 6.months.ago)
+      if post.revisions.any? && post.revisions.last.created_at < 5.months.ago
+        if post.revisions.any? && post.revisions.last.created_at < 6.months.ago
           has_notification_been_send = Notification.find_by_content_type_and_concerns_model_and_concerns_id(:has_expired, "post", post.id).present?
 
           unless has_notification_been_send

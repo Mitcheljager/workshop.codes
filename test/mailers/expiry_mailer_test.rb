@@ -1,5 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ExpiryMailerTest < ActionMailer::TestCase
-  
 end

@@ -1,5 +1,5 @@
 desc "Add last_revision_created_at to posts"
-task :add_last_revision_created_at_to_posts => :environment do
+task add_last_revision_created_at_to_posts: :environment do
   @posts = Post.all
 
   @posts.each do |post|

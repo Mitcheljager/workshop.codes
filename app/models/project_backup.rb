@@ -1,5 +1,5 @@
 class ProjectBackup < ApplicationRecord
-  self.primary_key = 'uuid'
+  self.primary_key = "uuid"
 
   before_validation :generate_and_set_uuid, on: :create
 

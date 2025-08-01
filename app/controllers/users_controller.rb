@@ -102,7 +102,7 @@ class UsersController < ApplicationController
   def honeypot
     return if user_params[:email_confirmation].blank?
 
-    Bugsnag.notify('User was blocked from creating an account via honeypot') if Rails.env.production?
+    Bugsnag.notify("User was blocked from creating an account via honeypot") if Rails.env.production?
     redirect_to root_path
   end
 end

@@ -46,11 +46,11 @@ class ProfilesController < ApplicationController
           @user.featured_posts = ""
         end
 
-        if (params[:remove_profile_image].present?)
+        if params[:remove_profile_image].present?
           @user.profile_image.purge
         end
 
-        if (params[:remove_banner_image].present?)
+        if params[:remove_banner_image].present?
           @user.banner_image.purge
         end
 

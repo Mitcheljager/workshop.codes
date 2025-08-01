@@ -1,5 +1,5 @@
 desc "Upgrade wiki articles from old formatting to somewhat fancier formatting"
-task :upgrade_wiki_articles => :environment do
+task upgrade_wiki_articles: :environment do
   actions = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "actions.yml")))
   values = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "values.yml")))
   defaults = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "defaults.yml")))

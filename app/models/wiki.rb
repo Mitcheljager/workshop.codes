@@ -1,5 +1,5 @@
 module Wiki
   def self.table_name_prefix
-    'wiki_'
+    "wiki_"
   end
 end

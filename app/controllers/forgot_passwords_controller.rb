@@ -30,8 +30,8 @@ class ForgotPasswordsController < ApplicationController
       total_tokens_count = ForgotPasswordToken.where(user_id: @user.id).size
 
       # User requested too many tokens either recently or in total
-      if (recent_tokens_count > 10 || total_tokens_count > 200)
-        Bugsnag.notify('User requested too many forgot password tokens recently') if Rails.env.production?
+      if recent_tokens_count > 10 || total_tokens_count > 200
+        Bugsnag.notify("User requested too many forgot password tokens recently") if Rails.env.production?
         redirect_to forgot_passwords_path
         return
       end
@@ -79,7 +79,7 @@ class ForgotPasswordsController < ApplicationController
   def honeypot
     return if forgot_password_params[:email_confirmation].blank?
 
-    Bugsnag.notify('User was blocked from requesting password reset via honeypot') if Rails.env.production?
+    Bugsnag.notify("User was blocked from requesting password reset via honeypot") if Rails.env.production?
     redirect_to forgot_passwords_path
   end
 end

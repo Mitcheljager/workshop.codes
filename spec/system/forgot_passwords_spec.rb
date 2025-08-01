@@ -18,7 +18,6 @@ RSpec.describe "ForgotPasswords", type: :system do
   end
 
   describe "happy path: proper reset procedure" do
-
     context "allows reset of password" do
       it "for default user" do
         attempt_reset_password

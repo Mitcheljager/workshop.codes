@@ -1,6 +1,6 @@
 module Helpers
   module Users
-    def sign_in_as(user, password="password")
+    def sign_in_as(user, password = "password")
       visit logout_path
       visit login_path
 

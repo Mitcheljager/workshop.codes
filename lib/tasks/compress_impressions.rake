@@ -1,5 +1,5 @@
 desc "Compress 1 day old impressions in to Statistic"
-task :compress_impressions => :environment do
+task compress_impressions: :environment do
   ActiveRecord::Base.connection_pool.with_connection do
     compress_events("Posts Visit", :visit)
     compress_events("Copy Code", :copy)

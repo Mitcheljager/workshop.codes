@@ -38,7 +38,7 @@ class PostSerializer < ActiveModel::Serializer
       url = root_url + ActionController::Base.helpers.image_url("maps/large/#{ map["slug"] }.jpg")
     end
 
-    return url
+    url
   end
 
   def images
@@ -58,7 +58,7 @@ class PostSerializer < ActiveModel::Serializer
       end
     end
 
-    return urls
+    urls
   end
 
   def maps
@@ -88,6 +88,6 @@ class PostSerializer < ActiveModel::Serializer
   def snippet_url
     return nil if object.snippet.blank?
 
-    return root_url + 'get-snippet/' + object.code
+    root_url + "get-snippet/" + object.code
   end
 end

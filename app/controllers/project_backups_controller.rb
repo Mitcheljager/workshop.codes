@@ -11,7 +11,7 @@ class ProjectBackupsController < ApplicationController
   def show
     @project_backup = ProjectBackup.find_by_uuid!(params[:uuid])
 
-    if (!is_project_owner(@project_backup.project))
+    if !is_project_owner(@project_backup.project)
       render json: "No permission", status: 403, layout: false
     else
       render json: @project_backup, layout: false
@@ -32,7 +32,7 @@ class ProjectBackupsController < ApplicationController
   def destroy
     @project_backup = ProjectBackup.find_by_uuid!(params[:uuid])
 
-    if (!is_project_owner(@project_backup.project))
+    if !is_project_owner(@project_backup.project)
       render json: "No permission", status: 403, layout: false
     elsif @project_backup.destroy
       render json: "Success", layout: false

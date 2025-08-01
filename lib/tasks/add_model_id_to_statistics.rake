@@ -1,5 +1,5 @@
 desc "Add model_id to statistics that need an ID"
-task :add_model_id_to_statistics => :environment do
+task add_model_id_to_statistics: :environment do
   @statistics = Statistic.all
 
   @statistics.each do |statistic|

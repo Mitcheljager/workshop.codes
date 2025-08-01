@@ -209,8 +209,8 @@ module ContentHelper
   def sanitized_markdown(text, rendererOptions: {})
     ActionController::Base.helpers.sanitize(
       markdown(text, rendererOptions: rendererOptions),
-      tags: %w(div span hr style mark dl dd dt img details summary a button b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big sub sup),
-      attributes: %w(style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-label aria-labelledby aria-hidden aria-expanded tabindex role)
+      tags: %w[div span hr style mark dl dd dt img details summary a button b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big sub sup],
+      attributes: %w[style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-label aria-labelledby aria-hidden aria-expanded tabindex role]
     )
   end
 
@@ -218,11 +218,11 @@ module ContentHelper
     return unless url.present?
 
     url_formats = [
-      %r((?:https?://)?youtu\.be/(.+)),
-      %r((?:https?://)?(?:www\.)?youtube\.com/watch\?v=(.*?)(&|#|$)),
-      %r((?:https?://)?(?:www\.)?youtube\.com/embed/(.*?)(\?|$)),
-      %r((?:https?://)?(?:www\.)?youtube\.com/v/(.*?)(#|\?|$)),
-      %r((?:https?://)?(?:www\.)?youtube\.com/user/.*?#\w/\w/\w/\w/(.+)\b)
+      %r{(?:https?://)?youtu\.be/(.+)},
+      %r{(?:https?://)?(?:www\.)?youtube\.com/watch\?v=(.*?)(&|#|$)},
+      %r{(?:https?://)?(?:www\.)?youtube\.com/embed/(.*?)(\?|$)},
+      %r{(?:https?://)?(?:www\.)?youtube\.com/v/(.*?)(#|\?|$)},
+      %r{(?:https?://)?(?:www\.)?youtube\.com/user/.*?#\w/\w/\w/\w/(.+)\b}
     ]
 
     url.strip!
@@ -275,6 +275,6 @@ module ContentHelper
           class='video__thumbnail'
           alt='' />
       </div>
-    </div>".gsub("\n","") # For some reason Markdown after this element is ignored when newlines are present
+    </div>".gsub("\n", "") # For some reason Markdown after this element is ignored when newlines are present
   end
 end

@@ -40,7 +40,7 @@ RSpec.describe "AdminReports", type: :feature do
           concerns_model: :post,
           concerns_id: post.id,
           properties: {
-            "post" => {"title" => post.title, "code" => post.code}
+            "post" => { "title" => post.title, "code" => post.code }
           }
         )
         post.destroy
@@ -57,7 +57,7 @@ RSpec.describe "AdminReports", type: :feature do
           concerns_model: :comment,
           concerns_id: comment.id,
           properties: {
-            "comment" => {"content" => comment.content}
+            "comment" => { "content" => comment.content }
           }
         )
         comment.destroy
@@ -72,7 +72,7 @@ RSpec.describe "AdminReports", type: :feature do
           concerns_model: :comment,
           concerns_id: comment.id,
           properties: {
-            "comment" => {"content" => comment.content}
+            "comment" => { "content" => comment.content }
           }
         )
         post.destroy
