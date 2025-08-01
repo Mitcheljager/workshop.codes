@@ -21,7 +21,6 @@ module RememberTokenHandler
 
       session[:user_id] = token.user.id
       session[:user_uuid] = token.user.uuid
-      session[:return_to] = return_path
 
       refresh_remember_token_cookie
 
