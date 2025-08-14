@@ -136,5 +136,9 @@
   name: Moira
   category: Support
 -
+  name: Wuyang
+  category: Support
+  overwatch_2: true
+-
   name: Zenyatta
   category: Support
