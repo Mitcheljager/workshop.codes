@@ -1,7 +1,6 @@
 class SitemapsController < ApplicationController
   def sitemap
-    @post = Post.select_overview_columns.public?.order("created_at DESC")[0] unless params[:page].present?
-    @collections = Collection.all
+    @post = Post.select_overview_columns.public?.order(created_at: :desc).first
     @wiki_categories = Wiki::Category.all
     @articles = Article.all
 
