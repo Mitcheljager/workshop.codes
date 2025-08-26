@@ -72,6 +72,9 @@
 
   &--workshop-disabled {
     gap: $margin * 0.25;
+    justify-content: flex-start;
+    background: $red;
+    color: $white;
 
     svg {
       display: none;

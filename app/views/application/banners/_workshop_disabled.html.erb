@@ -1,5 +1,5 @@
 <div class="standout standout--compact standout--workshop-disabled mt-1/2 md:mt-1/1">
-  <%= inline_svg_tag "warning_sign.svg", alt: "Overwatch 2 Logo", height: 60 %>
+  <%= inline_svg_tag "warning_sign.svg", alt: "", height: 60 %>
 
   <div>
     <h3 class="mt-0 mb-1/8">
@@ -7,14 +7,7 @@
     </h3>
 
     <span>
-      The Workshop is not yet enabled in Overwatch 2. <strong class="text-lightest">Previously created codes can still be imported</strong>. Custom games without the Workshop are still available. You can still edit scripts outside of the game.
+      <%= ENV["BANNER_ROOT_COPY"] %>
     </span>
-
-    <% if ENV["BANNER_ROOT_URL"] %>
-      <div>
-        <%= link_to "Read more", ENV["BANNER_ROOT_URL"], class: "button button--link pb-0" %>
-        <%= link_to "Check out our editor", editor_path(), class: "button button--link pb-0 sm:ml-1/2 block sm:inline-block text-primary text-center" %>
-      </div>
-    <% end %>
   </div>
 </div>
