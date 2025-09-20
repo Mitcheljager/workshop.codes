@@ -6,13 +6,15 @@ class Admin::BaseController < ApplicationController
   end
 
   def index
-    @unique_visits = Statistic.where(content_type: :unique_visit).where("on_date > ?", 12.months.ago).pluck(:on_date, :value).map do |on_date, value|
-      { date: on_date.strftime("%Y-%m-%d"), value: value }
-    end
+    @unique_visits = Statistic.where(content_type: :unique_visit)
+                            .pluck(:on_date, :value)
+                            .group_by { |on_date, _| on_date.beginning_of_week }
+                            .map do |week_start, rows| { date: week_start.strftime("%Y-%m-%d"), value: rows.sum { |_, v| v } } end
 
-    @unique_copies = Statistic.where(content_type: :unique_copies).where("on_date > ?", 12.months.ago).pluck(:on_date, :value).map do |on_date, value|
-      { date: on_date.strftime("%Y-%m-%d"), value: value }
-    end
+    @unique_copies = Statistic.where(content_type: :unique_copies)
+                              .pluck(:on_date, :value)
+                              .group_by { |on_date, _| on_date.beginning_of_week }
+                              .map do |week_start, rows| { date: week_start.strftime("%Y-%m-%d"), value: rows.sum { |_, v| v } } end
 
     @admin_activity = Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment, :admin_destroy_user, :admin_destroy_post_image])
                               .order(created_at: :desc)
