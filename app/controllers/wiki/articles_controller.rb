@@ -20,11 +20,9 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def show
-    @article = Wiki::Article.where(slug: params[:slug]).last
+    @article = Wiki::Article.where(slug: params[:slug]).last!
 
-    not_found and return unless @article
-
-    latest_article = Wiki::Article.where(group_id: @article.group_id).last
+    latest_article = Wiki::Article.where(group_id: @article.group_id).last!
 
     # Redirect to the latest article within the same group if it's a HTML request
     # Render the JSON for the latest article if it's a JSON request
