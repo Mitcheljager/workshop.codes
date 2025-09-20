@@ -9,6 +9,10 @@ class Wiki::Article < ApplicationRecord
     }
   end
 
+  scope :latest_per_group, -> {
+    where(id: select("MAX(id)").group(:group_id))
+  }
+
   belongs_to :category
 
   has_one :edit, dependent: :destroy

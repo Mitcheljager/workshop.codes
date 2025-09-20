@@ -7,5 +7,5 @@ task create_search_indexes: :environment do
   User.import(force: true)
 
   Wiki::Article.__elasticsearch__.create_index! force: true
-  Wiki::Article.import(force: true)
+  Wiki::Article.latest_per_group.import.import(force: true)
 end
