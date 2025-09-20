@@ -7,9 +7,9 @@ class Admin::BaseController < ApplicationController
 
   def index
     @unique_visits = Statistic.where(content_type: :unique_visit)
-                            .pluck(:on_date, :value)
-                            .group_by { |on_date, _| on_date.beginning_of_week }
-                            .map do |week_start, rows| { date: week_start.strftime("%Y-%m-%d"), value: rows.sum { |_, v| v } } end
+                              .pluck(:on_date, :value)
+                              .group_by { |on_date, _| on_date.beginning_of_week }
+                              .map do |week_start, rows| { date: week_start.strftime("%Y-%m-%d"), value: rows.sum { |_, v| v } } end
 
     @unique_copies = Statistic.where(content_type: :unique_copies)
                               .pluck(:on_date, :value)
