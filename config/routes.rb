@@ -81,8 +81,6 @@ Rails.application.routes.draw do
   get "get-snippet/:code", to: "posts#get_snippet", as: "get_snippet"
   get "similar_to/:id", to: "posts#similar_to", as: "similar_posts"
 
-  post "ai", to: "open_ai#show", as: "ai"
-
   resources :articles, param: :slug, except: [:index, :destroy]
 
   resources :users, param: :username, except: [:new, :index, :edit, :update, :show]
