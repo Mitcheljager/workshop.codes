@@ -68,7 +68,7 @@
     border: 2px solid currentColor;
   }
 
-  a {
+  a:not(.button) {
     color: $text-color-lightest;
     text-decoration: none;
 
