@@ -13,6 +13,10 @@
     font-size: 21px;
   }
 
+  &:first-child {
+    border-top: 1px solid $border-color;
+  }
+
   &[href],
   a {
     color: $text-color-lightest;
@@ -20,6 +24,7 @@
 
     @include hover-stack {
       color: $white;
+      background: linear-gradient(to right, transparent, rgba($black, 0.15) 20%, rgba($black, 0.15) 80%, transparent);
     }
   }
 
