@@ -54,20 +54,10 @@ gem "vite_rails"
 group :development, :test do
   gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "capybara", "3.38.0"
-  gem "cucumber-rails", require: false
   gem "database_cleaner"
-  gem "factory_bot_rails", "~> 6.2"
-  gem "faker"
   gem "pry-byebug", "~> 3.10.1"
-  gem "rspec-rails", "~> 4.0.2"
   gem "rubocop-rails-omakase", require: false
-  gem "selenium-webdriver", "~> 4.7.1"
-  gem "shoulda-matchers", "~> 4.5"
   gem "sqlite3", "1.4.2"
-  # To freeze time and allow time travel for time-sensitive tests
-  gem "timecop"
-  gem "webdrivers", "~> 5.0"
 end
 
 group :development do
@@ -76,6 +66,18 @@ group :development do
   gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]
   gem "derailed_benchmarks", group: :development
   gem "sys-proctable"
+end
+
+group :test do
+  gem "capybara", "3.38.0"
+  gem "cucumber-rails", require: false
+  gem "factory_bot_rails", "~> 6.2"
+  gem "faker"
+  gem "timecop"
+  gem "rspec-rails", "~> 4.0.2"
+  gem "selenium-webdriver", "~> 4.7.1"
+  gem "shoulda-matchers", "~> 4.5"
+  gem "webdrivers", "~> 5.0"
 end
 
 group :production do
