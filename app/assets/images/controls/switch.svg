@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<svg viewBox="0 0 512 512">
 <path style="fill:currentColor;" d="M397,0H281v512h116c63.411,0,115-51.589,115-115V115C512,51.589,460.411,0,397,0z M396.5,332
 	c-33.359,0-60.5-27.141-60.5-60.5s27.141-60.5,60.5-60.5s60.5,27.141,60.5,60.5S429.859,332,396.5,332z"/>
 <g>
