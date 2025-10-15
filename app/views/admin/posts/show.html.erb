@@ -5,7 +5,7 @@
 <div class="wrapper" data-role="tabs">
   <h2 class="mt-0 mb-0"><strong><%= @post.title %></strong> <small><%= link_to @post.code, post_path(@post.code) %></small></h2>
 
-  <nav class="tabs mt-1/2 mb-1/2">
+  <nav class="tabs mt-1/2 mb-1/2" aria-label="Post controls">
     <%= link_to "Status", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
     <%= link_to "Images <small>#{ @post.images.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
     <%= link_to "Analytics".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "analytics" } %>

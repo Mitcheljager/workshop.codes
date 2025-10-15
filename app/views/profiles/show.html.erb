@@ -16,7 +16,7 @@
         <%= render "profile", user: @user %>
       </div>
 
-      <nav class="tabs">
+      <nav class="tabs" aria-label="User sections">
         <%= link_to "Highlights", "#", class: "tabs__item #{"tabs__item--active" unless params[:tab].present? && params[:tab] != "highlights"}", data: { action: "set-tab", target: "highlights" } if @blocks.any? %>
         <%= link_to "Codes", "#", class: "tabs__item #{ "tabs__item--active" unless (params[:tab].blank? && @blocks.any?) || (params[:tab].present? && params[:tab] != "codes") }", data: { action: "set-tab", target: "codes" } %>
         <%= link_to "Collections", "#", class: "tabs__item #{"tabs__item--active" if params[:tab] == "collections"}", data: { action: "set-tab", target: "collections" } %>

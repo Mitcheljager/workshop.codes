@@ -7,7 +7,7 @@
     <%= inline_svg_tag "layout/carousel-right.svg", width: 16, height: 16 %>
   </div>
 
-  <nav class="tabs" data-role="scroll-indicator" data-scroll-indicator="tabs">
+  <nav class="tabs" data-role="scroll-indicator" data-scroll-indicator="tabs" aria-label="Post sections">
     <%= link_to "Description", post_path(@post.code),
                 class: "tabs__item #{ "tabs__item--active" if is_active_tab?("") }",
                 data: { action: "set-tab scroll", target: "description" } %>

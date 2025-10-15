@@ -4,8 +4,8 @@
     <%= inline_svg_tag "logo-small.svg", class: "logo-mobile", alt: "Workshop.codes Logo", width: 53, height: 53 %>
   <% end %>
 
-  <div class="header__content" data-role="navigation">
-    <nav class="navigation">
+  <div class="header__content">
+    <nav class="navigation" aria-label="Main navigation">
       <%= link_to "Latest", latest_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "posts" && action_name == "latest" }" %>
       <%= link_to "On Fire", on_fire_path, class: "navigation__item #{ "navigation__item--active" if controller_name == "on_fire" }" %>
       <%= link_to "Wiki", wiki_root_path, class: "navigation__item #{ "navigation__item--active" if is_wiki? }" %>
