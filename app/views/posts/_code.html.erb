@@ -1,10 +1,11 @@
 <% item_class ||= "code" %>
 
-<button class="<%= item_class %>" data-action="copy-to-clipboard" data-target="<%= post.code %>" data-track-copy>
+<button class="<%= item_class %>" data-action="copy-to-clipboard" data-target="<%= post.code %>" data-track-copy aria-labelledby="<%= post.code %>-sr">
   <%= inline_svg_tag "icons/icon-copy.svg", class: "copy-trigger", width: 18, height: 18 %>
 
   <span class="copy">
-    <span data-copy="<%= post.code %>" aria-label="<%= post.code.chars.join(" ") %>"><%= post.code %></span>
+    <span data-copy="<%= post.code %>"><%= post.code %></span>
+    <div class="sr-only" id="<%= post.code %>-sr"><%= post.code.chars.join(" ") %></div>
   </span>
 
   <% if post.ptr? %>
