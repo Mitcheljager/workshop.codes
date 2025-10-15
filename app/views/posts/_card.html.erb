@@ -5,7 +5,7 @@
   <% image_url = url_for_post_thumbnail(post, 300, 171, "medium") %>
 
   <div class="card" data-code="<%= post.code %>">
-    <%= link_to post_path(post.code), title: post.title, tabindex: -1 do %>
+    <%= link_to post_path(post.code), title: post.title, tabindex: -1, class: "card__image" do %>
       <%= image_tag image_url,
         srcset: "
           #{ image_url } 1x,
@@ -14,8 +14,7 @@
         width: 300,
         height: 171,
         loading: loading,
-        fetchpriority: loading == "eager" ? "high" : nil,
-        class: "card__image" %>
+        fetchpriority: loading == "eager" ? "high" : nil %>
     <% end %>
 
     <div class="relative z-1 flex mb-auto">

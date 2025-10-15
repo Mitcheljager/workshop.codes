@@ -133,13 +133,17 @@
 
 .card__image {
   position: relative;
-  display: block;
-  width: calc(100% + #{ $margin * 0.5 });
-  height: auto;
   margin: -#{ $margin * 0.25 } -#{ $margin * 0.25 } $margin * 0.25;
-  background: $body-bg;
-  font-size: 12px;
-  z-index: 1;
+  width: calc(100% + #{ $margin * 0.5 });
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: $body-bg;
+    font-size: 12px;
+    z-index: 1;
+  }
 }
 
 .card__author {
