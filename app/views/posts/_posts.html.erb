@@ -1,8 +1,9 @@
 <% display_type ||= "list" %>
 <% disable_cache ||= false %>
+<% labelledby ||= nil %>
 
 <% cache_if !current_user && !disable_cache, [@posts] do %>
-  <main class="<%= display_type == "list" ? "items" : "cards" %>">
+  <main class="<%= display_type == "list" ? "items" : "cards" %>" <%= "aria-labelledby=#{labelledby}" if labelledby %>>
     <% if @posts.any? %>
       <% if display_type == "list" %>
         <%= render @posts %>

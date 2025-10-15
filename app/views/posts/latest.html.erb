@@ -1,7 +1,7 @@
 <% content_for :page_title, "#{ "Latest" }" %>
 
-<div class="heading">
-  <h1>
+<div class="heading" role="region" aria-labelledby="latest">
+  <h1 id="latest">
     <% if params[:page] %>
       <strong>Latest</strong> Codes
       <%= tag.small "- Page #{ params[:page] }" if params[:page].to_i > 1 %>
@@ -11,4 +11,4 @@
   </h1>
 </div>
 
-<%= render "posts" %>
+<%= render "posts", labelledby: "latest" %>
