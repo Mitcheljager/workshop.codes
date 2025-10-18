@@ -19,7 +19,6 @@ import * as dynamicMaxHeight from "@src/dynamic-max-height"
 import * as filter from "@src/filter"
 import * as focusOnLoad from "@src/focus-on-load"
 import * as gallery from "@src/gallery"
-import * as getKoFiValue from "@src/get-ko-fi-value"
 import * as getMoreComments from "@src/comments"
 import * as getPartial from "@src/get-partial"
 import * as getReportsForm from "@src/get-reports-form"
@@ -73,7 +72,6 @@ document.addEventListener("turbolinks:load", () => {
   carousel.render()
   carouselCards.render()
   differenceViewer.render()
-  getKoFiValue.render()
   numPlayersSlider.render()
 
   timeago.initialize()
