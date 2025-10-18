@@ -15,7 +15,7 @@ function setTab(event: Event): void {
   if (currentTarget.classList.contains("tabs__item--active")) return
 
   const target = currentTarget.dataset.target
-  const parentElement = currentTarget.closest("[data-role~='tabs']") as HTMLElement
+  const parentElement = currentTarget.closest<HTMLElement>("[data-role~='tabs']")
 
   if (!target) return
   if (!parentElement) return
@@ -72,7 +72,8 @@ function setActiveTab(targetElement: HTMLAnchorElement, parentElement: HTMLEleme
 }
 
 function resetCarouselInTab(targetElement: Element): void {
-  const carouselElement = targetElement.querySelector("[data-role='carousel']") as HTMLElement
+  const carouselElement = targetElement.querySelector<HTMLElement>("[data-role='carousel']")
+
   if (!carouselElement || !carousel) return
 
   carousel.destroy(true)

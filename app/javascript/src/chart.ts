@@ -1,5 +1,5 @@
 export function render(): void {
-  const charts = Array.from(document.querySelectorAll("[data-role='chart']")) as HTMLElement[]
+  const charts = Array.from(document.querySelectorAll<HTMLElement>("[data-role='chart']"))
 
   charts.forEach(element => {
     if (element.dataset.data != null) createChart(element, JSON.parse(element.dataset.data))

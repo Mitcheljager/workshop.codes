@@ -17,8 +17,9 @@ function toggleLightness(event: Event): void {
     image.onload = () => {
       const lightness = getImageLightness(image)
 
-      const targetInput = document.querySelector(`[data-lightness-toggle~="${input.dataset.target}"]`) as HTMLInputElement
-      targetInput.checked = lightness < 0.5
+      const targetInput = document.querySelector<HTMLInputElement>(`[data-lightness-toggle~="${input.dataset.target}"]`)
+
+      if (targetInput) targetInput.checked = lightness < 0.5
     }
   }
 

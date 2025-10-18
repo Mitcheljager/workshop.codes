@@ -8,7 +8,7 @@ export function destroy(): void {
 }
 
 function stickyScroll(): void {
-  const elements = Array.from(document.querySelectorAll("[data-role~='sticky']")) as HTMLElement[]
+  const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-role~='sticky']"))
 
   elements.forEach(element => {
     if ((element.dataset.stickyDesktopOnly == "true" && window.innerWidth < 640) ||
@@ -17,7 +17,7 @@ function stickyScroll(): void {
       return
     }
 
-    const scrollElement = element.dataset.sticky == "true" ? (document.querySelector("[data-role='sticky-placeholder']") as HTMLElement) : element
+    const scrollElement = element.dataset.sticky == "true" ? (document.querySelector<HTMLElement>("[data-role='sticky-placeholder']")!) : element
     const topOffset = scrollElement.getBoundingClientRect().top
     const scrollPosition = window.scrollY
     const documentOffset = topOffset + scrollPosition

@@ -20,8 +20,9 @@ function toggleSearch(event: Event): void {
   const searchElement = document.querySelector("[data-role~='search-popout']")
   searchElement?.classList.toggle("header__search--is-active")
 
-  const inputElement = searchElement?.querySelector("input[name='query']") as HTMLFormElement
-  if (inputElement) inputElement.focus()
+  const inputElement = searchElement?.querySelector<HTMLFormElement>("input[name='query']")
+
+  inputElement?.focus()
 }
 
 export function closeNavigation(): void {

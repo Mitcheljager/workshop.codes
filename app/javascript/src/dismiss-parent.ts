@@ -1,5 +1,5 @@
 export function destroy(): void {
-  const elements = Array.from(document.querySelectorAll("[data-role~='dismiss-parent']")) as HTMLElement[]
+  const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-role~='dismiss-parent']"))
 
   elements.forEach((element) => element.parentNode?.removeChild(element))
 }

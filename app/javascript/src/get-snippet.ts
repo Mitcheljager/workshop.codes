@@ -22,8 +22,8 @@ function loadSnippet(event: Event | null, element: HTMLElement): void {
 
   const code = targetElement.dataset.code
 
-  const ideElement = document.querySelector("[data-role~='ide-content']") as HTMLElement
-  const copyElement = document.querySelector("[data-copy~='snippet']") as HTMLElement
+  const ideElement = document.querySelector<HTMLElement>("[data-role~='ide-content']")!
+  const copyElement = document.querySelector<HTMLElement>("[data-copy~='snippet']")!
 
   new FetchRails(`/get-snippet/${code}`)
     .get()

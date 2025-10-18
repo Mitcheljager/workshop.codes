@@ -52,7 +52,7 @@ function createRules(): void {
 
 function goToRule({ target }: { target: HTMLFormElement }): void {
   const destination = document.querySelector(`.diff li:nth-child(${target.value})`)
-  const differenceHeaderElement = document.querySelector("[data-role='difference-header']") as HTMLElement
+  const differenceHeaderElement = document.querySelector<HTMLElement>("[data-role='difference-header']")
 
   if (!destination || !differenceHeaderElement) return
 
@@ -61,10 +61,10 @@ function goToRule({ target }: { target: HTMLFormElement }): void {
 }
 
 function scrollAlong(): void {
-  const element = document.querySelector("[data-role='difference-header']") as HTMLElement
-  const headerElement = element?.querySelector(".difference-header") as HTMLElement
+  const element = document.querySelector<HTMLElement>("[data-role='difference-header']")
+  const headerElement = element?.querySelector<HTMLElement>(".difference-header")
   const elementOffset = element?.getBoundingClientRect().top || 0
 
-  element.style.height = headerElement.offsetHeight + "px"
-  headerElement.classList.toggle("difference-header--fixed", elementOffset < 1)
+  element!.style.height = headerElement!.offsetHeight + "px"
+  headerElement!.classList.toggle("difference-header--fixed", elementOffset < 1)
 }

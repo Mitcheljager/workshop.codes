@@ -30,13 +30,13 @@ function getPartial(event: Event | null, element: HTMLElement): void {
   const target = event?.target as HTMLElement
 
   let eventElement = element || target
-  if (!eventElement.dataset.url) eventElement = target.closest("[data-action~='get-partial']") as HTMLElement
+  if (!eventElement.dataset.url) eventElement = target.closest<HTMLElement>("[data-action~='get-partial']")!
 
-  const targetElement = document.querySelector(`[data-partial="${eventElement.dataset.target}"]`) as HTMLElement
+  const targetElement = document.querySelector<HTMLElement>(`[data-partial="${eventElement.dataset.target}"]`)
   const url = eventElement.dataset.url
 
+  if (!targetElement || !url) return
   if (targetElement.dataset.loaded == "true") return
-  if (!url) return
 
   targetElement.ariaBusy = "true"
 

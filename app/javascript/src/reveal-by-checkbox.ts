@@ -6,11 +6,11 @@ export function bind(): void {
 
 function toggleRevealByCheckbox({ currentTarget }: { currentTarget: HTMLFormElement }): void {
   const state = currentTarget.checked
-  const parent = currentTarget.closest("[data-reveal-by-checkbox]") as HTMLElement
+  const parent = currentTarget.closest<HTMLElement>("[data-reveal-by-checkbox]")
   const target = parent?.dataset.revealByCheckbox
 
   const selector = target == "" ? "[data-role='hidden-by-checkbox']" : `[data-role="hidden-by-checkbox"][data-target="${target}"]`
-  const elements = Array.from(parent.querySelectorAll(selector)) as HTMLElement[]
+  const elements = Array.from(parent?.querySelectorAll<HTMLElement>(selector) || [])
 
   elements.forEach((element: HTMLElement) => element.style.display = state ? (element.dataset.initialDisplay || "initial") : "none")
 }

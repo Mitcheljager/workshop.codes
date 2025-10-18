@@ -19,7 +19,7 @@ export default class Uploader {
   }
 
   async upload(): Promise<void> {
-    const element = document.querySelector("[data-direct-upload-url]") as HTMLElement
+    const element = document.querySelector<HTMLElement>("[data-direct-upload-url]")!
     const directUploadUrl = element.dataset.directUploadUrl || ""
     const upload = new DirectUpload(this.file, directUploadUrl, this)
 

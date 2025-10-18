@@ -35,7 +35,7 @@ function resetPupilPosition(element: HTMLElement): void {
 }
 
 function getOlliePart(element: HTMLElement, part: string): HTMLElement {
-  return element.querySelector(`[data-ollie="${part}"]`) as HTMLElement
+  return element.querySelector<HTMLElement>(`[data-ollie="${part}"]`)!
 }
 
 function setOllieBody(element: HTMLElement, variant = "base"): void {
@@ -48,7 +48,7 @@ function setOllieBody(element: HTMLElement, variant = "base"): void {
   const armLeft = getOlliePart(element, "arm-left")
   const armRight = getOlliePart(element, "arm-right")
 
-  const rememberMeinput = element.querySelector("input[type='checkbox'][name='remember_me']") as HTMLFormElement
+  const rememberMeinput = element.querySelector<HTMLFormElement>("input[type='checkbox'][name='remember_me']")!
   const rememberMe = rememberMeinput.checked
 
   base?.classList.toggle("hidden", !(variant === "base" && !rememberMe))
@@ -62,7 +62,7 @@ function setOllieBody(element: HTMLElement, variant = "base"): void {
 }
 
 function loadImagesSimultaniously(): void {
-  const element = document.querySelector("[data-role='ollie-image-holder']") as HTMLElement
+  const element = document.querySelector<HTMLElement>("[data-role='ollie-image-holder']")!
   const images = element.querySelectorAll("img")
 
   let imagesLoaded = 0

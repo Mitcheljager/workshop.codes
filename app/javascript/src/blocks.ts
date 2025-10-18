@@ -4,7 +4,7 @@ import LimitedCheckboxes from "@components/form/LimitedCheckboxes.svelte"
 import FetchRails from "@src/fetch-rails"
 
 export function bind(): void {
-  const element = document.querySelector("[data-role~='block-sortable']") as HTMLElement
+  const element = document.querySelector<HTMLElement>("[data-role~='block-sortable']")
 
   if (element) buildBlockSortable(element)
 
@@ -15,7 +15,7 @@ export function bind(): void {
 function createBlock({ currentTarget }: { currentTarget: HTMLElement }): void {
   if (currentTarget.dataset.disabled == "true") return
 
-  const loadingElement = document.querySelector("[data-role~='blocks-loading-indicator']") as HTMLElement
+  const loadingElement = document.querySelector<HTMLElement>("[data-role~='blocks-loading-indicator']")
 
   currentTarget.dataset.disabled = "true"
   loadingElement!.style.display = "block"
@@ -40,7 +40,7 @@ function buildBlockSortable(element: HTMLElement): void {
 }
 
 function updateBlockSortable(): void {
-  const blocks = Array.from(document.querySelectorAll(".content-block")) as HTMLElement[]
+  const blocks = Array.from(document.querySelectorAll<HTMLElement>(".content-block"))
 
   const positions: { id: any[]; position: number }[] = []
   blocks.forEach((block, i) => positions.push({ id: [block.dataset.id], position: i }))

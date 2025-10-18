@@ -1,7 +1,7 @@
 import * as timeago from "timeago.js"
 
 export function initialize(): void {
-  const elements = Array.from(document.querySelectorAll("[data-role~='timeago']")) as HTMLElement[]
+  const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-role~='timeago']"))
 
   if (elements.length) timeago.render(elements)
 

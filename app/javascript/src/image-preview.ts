@@ -7,8 +7,8 @@ export function bind(): void {
 }
 
 function setImagePreview({ target }: { target: HTMLFormElement }): void {
-  const removeFileFlag = document.querySelector(`[data-clear-image-flag="${target.dataset.target}"]`) as HTMLFormElement
-  const targetImage = document.querySelector(`[data-image-preview="${target.dataset.target}"]`) as HTMLImageElement
+  const removeFileFlag = document.querySelector<HTMLFormElement>(`[data-clear-image-flag="${target.dataset.target}"]`)!
+  const targetImage = document.querySelector<HTMLImageElement>(`[data-image-preview="${target.dataset.target}"]`)!
 
   if (!target.files && !target.files[0]) return
 
@@ -23,9 +23,9 @@ function setImagePreview({ target }: { target: HTMLFormElement }): void {
 }
 
 function clearImage({ currentTarget }: { currentTarget: HTMLElement }): void {
-  const preview = document.querySelector(`[data-image-preview="${currentTarget.dataset.target}"]`) as HTMLImageElement
-  const field = document.querySelector(`[data-action~="image-preview"][data-target="${currentTarget.dataset.target}"]`) as HTMLInputElement
-  const removeFileFlag = document.querySelector(`[data-clear-image-flag="${currentTarget.dataset.target}"]`) as HTMLInputElement
+  const preview = document.querySelector<HTMLImageElement>(`[data-image-preview="${currentTarget.dataset.target}"]`)!
+  const field = document.querySelector<HTMLInputElement>(`[data-action~="image-preview"][data-target="${currentTarget.dataset.target}"]`)!
+  const removeFileFlag = document.querySelector<HTMLInputElement>(`[data-clear-image-flag="${currentTarget.dataset.target}"]`)!
 
   preview.src = ""
   field.value = ""

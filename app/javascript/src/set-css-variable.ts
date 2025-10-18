@@ -10,7 +10,7 @@ export default function setCssVariable(event: InputEvent): void {
   event.preventDefault()
 
   const currentTarget = event.currentTarget as HTMLFormElement
-  const targetElement = document.querySelector(`[data-css-variable="${currentTarget.dataset.target}"]`) as HTMLElement
+  const targetElement = document.querySelector<HTMLElement>(`[data-css-variable="${currentTarget.dataset.target}"]`)
 
-  if (targetElement) targetElement.style.setProperty(`--${currentTarget.dataset.variable}`, currentTarget.value + "px")
+  targetElement?.style.setProperty(`--${currentTarget.dataset.variable}`, currentTarget.value + "px")
 }

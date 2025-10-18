@@ -24,7 +24,7 @@ function getMoreComments(event: Event): void {
   button.disabled = true
 
   new FetchRails(`/comments/${id}/${page + 1}`).get().then(data => {
-    if (data) buttonParent!.insertAdjacentHTML("beforebegin", data)
+    if (data) buttonParent!.insertAdjacentHTML("beforebegin", data as string)
 
     if (parent.querySelectorAll("[data-comment]").length >= commentsCount) buttonParent!.remove()
   }).finally(() => {

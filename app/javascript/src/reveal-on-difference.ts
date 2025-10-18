@@ -9,7 +9,7 @@ function toggleRevealOnDifference({ currentTarget }: { currentTarget: HTMLFormEl
   const original = currentTarget.dataset.original
   const different = value !== original && original !== undefined
 
-  const elements = Array.from(document.querySelectorAll("[data-role='reveal-on-difference']")) as HTMLElement[]
+  const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-role='reveal-on-difference']"))
 
   elements.forEach(element => element.style.display = different ? "block" : "none")
 }

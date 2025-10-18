@@ -13,7 +13,7 @@ export function toggleDropdown(event: Event): void {
   event.preventDefault()
 
   const parent = eventTarget.closest("[data-dropdown]")
-  const target = parent?.querySelector("[data-dropdown-content]") as HTMLElement | null
+  const target = parent?.querySelector<HTMLElement>("[data-dropdown-content]")
 
   if (!target) return
 
@@ -22,7 +22,7 @@ export function toggleDropdown(event: Event): void {
 }
 
 export function closeDropdown(event: Event | null, closeActive = false): void {
-  const activeDropdown = document.querySelector("[data-dropdown-content].active") as HTMLElement
+  const activeDropdown = document.querySelector<HTMLElement>("[data-dropdown-content].active")
   if (!activeDropdown) return
 
   const eventTarget = (event?.target as HTMLElement)?.closest("[data-dropdown]")

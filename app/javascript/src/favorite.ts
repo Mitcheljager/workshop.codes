@@ -7,7 +7,7 @@ export function bind(): void {
 
 function favorite(event: MouseEvent): void {
   let eventTarget = event.target as HTMLElement
-  if (eventTarget.dataset.action != "favorite") eventTarget = eventTarget.closest("[data-action~='favorite']") as HTMLElement
+  if (eventTarget.dataset.action != "favorite") eventTarget = eventTarget.closest<HTMLElement>("[data-action~='favorite']")!
 
   if (eventTarget) toggleFavorite(eventTarget)
 }

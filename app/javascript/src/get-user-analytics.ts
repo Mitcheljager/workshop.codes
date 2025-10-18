@@ -14,7 +14,7 @@ export function bind(): void {
 function getUserAnalytics(event: Event | null, element: HTMLFormElement): void {
   if (event) event.preventDefault()
 
-  const target = document.querySelector("[data-role~='chart']") as HTMLElement
+  const target = document.querySelector<HTMLElement>("[data-role~='chart']")!
   if (target) target.insertAdjacentHTML("afterbegin", "<div class='chart__placeholder'><div class='spinner'></div></div>")
 
   new FetchRails("/analytics/user", { type: element.value })

@@ -12,7 +12,7 @@ export function bind(): void {
 }
 
 function showModal({ currentTarget }: { currentTarget: HTMLElement }): void {
-  const modal = document.querySelector(`[data-modal="${currentTarget.dataset.target}"]`) as HTMLElement
+  const modal = document.querySelector<HTMLElement>(`[data-modal="${currentTarget.dataset.target}"]`)
 
   if (!modal) return
 
@@ -25,7 +25,7 @@ function showModal({ currentTarget }: { currentTarget: HTMLElement }): void {
 }
 
 export function closeModal(): void {
-  const activeModal = document.querySelector(".modal:not([style*='none'])") as HTMLElement
+  const activeModal = document.querySelector<HTMLElement>(".modal:not([style*='none'])")
 
   if (!activeModal) return
   if (activeModal.dataset.ignore != undefined) return

@@ -1,7 +1,7 @@
 import { mount } from "svelte"
 
 export function initializeSvelteComponent(name: string, Component: any): void {
-  const elements = Array.from(document.querySelectorAll(`[data-svelte-component="${name}"]`)) as HTMLElement[]
+  const elements = Array.from(document.querySelectorAll<HTMLElement>(`[data-svelte-component="${name}"]`))
 
   elements.forEach(element => {
     element.innerHTML = ""

@@ -14,8 +14,8 @@ function toggleContent(event: MouseEvent): void {
 
   event.preventDefault()
 
-  const parent = target.closest("[data-toggle-content]") as HTMLElement
-  const element = parent.querySelector("[data-role~='content-to-toggle']") as HTMLElement
+  const parent = target.closest<HTMLElement>("[data-toggle-content]")!
+  const element = parent.querySelector<HTMLElement>("[data-role~='content-to-toggle']")!
   const state = window.getComputedStyle(element).display === "none"
   const datasetTiming = parseInt(target.dataset.animationTiming || "0")
   const animationTiming = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : datasetTiming > 0 ? datasetTiming : 0

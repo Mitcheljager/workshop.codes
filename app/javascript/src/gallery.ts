@@ -4,7 +4,7 @@ export function bind(): void {
 }
 
 function setGallery({ currentTarget }: { currentTarget: HTMLElement }): void {
-  const target = document.querySelector(`[data-gallery="${currentTarget.dataset.target}"]`) as HTMLImageElement
+  const target = document.querySelector<HTMLImageElement>(`[data-gallery="${currentTarget.dataset.target}"]`)
 
   if (!target) return
 

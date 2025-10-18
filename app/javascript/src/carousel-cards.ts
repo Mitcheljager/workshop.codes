@@ -14,7 +14,7 @@ export function destroy(): void {
 }
 
 export function render(): void {
-  const elements = Array.from(document.querySelectorAll("[data-role='carousel-cards']")) as HTMLElement[]
+  const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-role='carousel-cards']"))
 
   if (elements.length == 0) return
 
@@ -40,8 +40,8 @@ export function render(): void {
 function carouselCardsChanged(this: Siema & SiemaOptions): void {
   const selector = this.selector as HTMLElement
   const parent = selector.closest(".card-carousel")
-  const nextElement = parent!.querySelector("[data-action='carousel-next']") as HTMLButtonElement
-  const previousElement = parent!.querySelector("[data-action='carousel-previous']") as HTMLButtonElement
+  const nextElement = parent!.querySelector<HTMLButtonElement>("[data-action='carousel-next']")
+  const previousElement = parent!.querySelector<HTMLButtonElement>("[data-action='carousel-previous']")
 
   const atStart = this.currentSlide == 0
   previousElement!.classList.toggle("card-carousel__control--disabled", atStart)
@@ -63,6 +63,6 @@ function carouselPrevious({ currentTarget }: { currentTarget: HTMLElement }): vo
 }
 
 function getCarouselId(element: HTMLElement): number {
-  const carouselElement = element.closest(".card-carousel")?.querySelector("[data-role='carousel-cards']") as HTMLElement
-  return parseInt(carouselElement.dataset.carouselId || "0")
+  const carouselElement = element.closest(".card-carousel")?.querySelector<HTMLElement>("[data-role='carousel-cards']")
+  return parseInt(carouselElement?.dataset.carouselId || "0")
 }

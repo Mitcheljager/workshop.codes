@@ -13,11 +13,11 @@ export function initiateIde(element: HTMLElement): void {
 }
 
 function createLineCount(element: HTMLElement): void {
-  const pre = element.closest("pre") as HTMLElement
+  const pre = element.closest<HTMLElement>("pre")!
 
   const lineCount = element.textContent?.split("\n").length || 0
 
-  const lineCountElement = pre.querySelector(".ide__line-counter") as HTMLElement
+  const lineCountElement = pre.querySelector<HTMLElement>(".ide__line-counter")!
   lineCountElement.innerHTML = ""
 
   for (let i = 0; i < lineCount; i++) {
@@ -29,7 +29,7 @@ function createLineCount(element: HTMLElement): void {
 }
 
 function toggleIdeFullscreen({ target }: { target: HTMLElement }): void {
-  const element = target.closest(".ide") as HTMLElement
+  const element = target.closest<HTMLElement>(".ide")
 
-  element.classList.toggle("ide--fullscreen")
+  element?.classList.toggle("ide--fullscreen")
 }

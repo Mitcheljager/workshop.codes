@@ -12,7 +12,7 @@ function updateLinkedInputs(event: Event): void {
   const currentTarget = event.currentTarget as HTMLInputElement
   const key = currentTarget.dataset.key
 
-  const elements = Array.from(document.querySelectorAll(`[data-key="${key}"]`)) as HTMLInputElement[]
+  const elements = Array.from(document.querySelectorAll<HTMLInputElement>(`[data-key="${key}"]`))
 
   elements.forEach(element => {
     element.value = currentTarget.value

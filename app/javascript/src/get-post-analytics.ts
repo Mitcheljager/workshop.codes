@@ -15,7 +15,7 @@ function getPostAnalytics(event: Event): void {
   const currentTarget = event.currentTarget as HTMLFormElement
 
   const parent = currentTarget.closest("[data-post-analytics]")
-  const target = parent?.querySelector("[data-role~='chart']") as HTMLElement
+  const target = parent?.querySelector<HTMLElement>("[data-role~='chart']")
 
   if (!target) throw new Error("target was not found in getPostAnalytics")
 

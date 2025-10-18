@@ -9,10 +9,10 @@ export function bind(): void {
 }
 
 function getPartial({ target }: { target: HTMLElement }): void {
-  const targetElement = target.dataset.url ? target : target.closest("[data-url]") as HTMLElement
-  const url = targetElement.dataset.url
+  const targetElement = target.dataset.url ? target : target.closest<HTMLElement>("[data-url]")
+  const url = targetElement?.dataset.url
 
-  if (!url) return
+  if (!targetElement || !url) return
   if (targetElement.dataset.loaded == "true") return
 
   targetElement.dataset.loaded = "true"
@@ -20,7 +20,7 @@ function getPartial({ target }: { target: HTMLElement }): void {
   new FetchRails(url).get().then(data => {
     const element = target.closest("[data-toggle-content")?.querySelector("[data-partial]")
 
-    if (element) element.innerHTML = data
+    if (element) element.innerHTML = data as string
   }).then(() => bindFilterContent())
 }
 
@@ -39,8 +39,8 @@ function addFilter(event: Event): void {
   event.preventDefault()
 
   const target = event.target as HTMLElement
-  const filterToggle = target.closest("[data-filter]") as HTMLElement
-  const filterElement = filterToggle.querySelector("[data-filter-type]") as HTMLElement
+  const filterToggle = target.closest<HTMLElement>("[data-filter]")!
+  const filterElement = filterToggle.querySelector<HTMLElement>("[data-filter-type]")!
   const defaultValue = filterToggle.dataset.default || ""
 
   filterToggle.classList.toggle("filter__item--active", target.dataset.value != "")
@@ -51,7 +51,10 @@ function addFilter(event: Event): void {
 }
 
 function buildFilterPath({ target }: { target: HTMLElement }): void {
-  const parent = target.closest("[data-role~='search']") as HTMLElement
+  const parent = target.closest<HTMLElement>("[data-role~='search']")
+
+  if (!parent) return
+
   target.innerHTML = "<div class='spinner spinner--small'></div>"
 
   const buildPath = {
@@ -61,7 +64,7 @@ function buildFilterPath({ target }: { target: HTMLElement }): void {
     "author": filterValue("author", parent),
     "players": filterValue("players", parent),
     "sort": filterValue("sort", parent),
-    "search": encodeURIComponent((parent?.querySelector("input[name='query']") as HTMLFormElement).value)
+    "search": encodeURIComponent(parent?.querySelector<HTMLFormElement>("input[name='query']")?.value)
   }
 
   const filteredBuildPath = Object.fromEntries(Object.entries(buildPath).filter(([_, v]) => v != ""))

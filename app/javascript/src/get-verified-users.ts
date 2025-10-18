@@ -18,8 +18,8 @@ function getVerifiedUsers(event: Event): void {
   target.dataset.authorsLoaded = "true"
 
   new FetchRails("/get-verified-users").get().then(data => {
-    const element = document.querySelector("[data-role='filter-authors']") as HTMLElement
+    const element = document.querySelector<HTMLElement>("[data-role='filter-authors']")
 
-    element.innerHTML = data
+    if (element) element.innerHTML = data as string
   })
 }

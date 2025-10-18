@@ -23,8 +23,8 @@ function getReportsForm(event: Event): void {
       eventTarget.innerText = originalText
       document.body.insertAdjacentHTML("beforeend", data as string)
 
-      const modal = document.querySelector("[data-modal='report']") as HTMLElement
-      const backdrop = modal.querySelector(".modal__backdrop") as HTMLElement
+      const modal = document.querySelector<HTMLElement>("[data-modal='report']")!
+      const backdrop = modal.querySelector<HTMLElement>(".modal__backdrop")!
 
       backdrop.removeAndAddEventListener("click", closeModal)
       revealBySelect.bind()

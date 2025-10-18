@@ -8,10 +8,11 @@ interface SiemaExtended extends Siema {
 export let carousel: SiemaExtended
 
 export function render(): void {
-  const blurElement = document.querySelector("[data-use-blur='true']") as HTMLElement
+  const blurElement = document.querySelector<HTMLElement>("[data-use-blur='true']")
+
   if (blurElement && blurElement.dataset.role != "carousel") setBlur(blurElement)
 
-  const element = document.querySelector("[data-role='carousel']") as HTMLElement
+  const element = document.querySelector<HTMLElement>("[data-role='carousel']")
 
   if (!element) return
 
@@ -90,7 +91,7 @@ function stopVideo(): void {
 
 async function setBlur(element: HTMLElement): Promise<void> {
   const image = element.querySelector("img")
-  const blurElements = Array.from(document.querySelectorAll("[data-role='carousel-blur']")) as HTMLImageElement[]
+  const blurElements = Array.from(document.querySelectorAll<HTMLImageElement>("[data-role='carousel-blur']"))
   const blurElement = blurElements[blurElements.length - 1]
 
   const newElement = new Image()

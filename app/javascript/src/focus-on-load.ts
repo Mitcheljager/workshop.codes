@@ -1,5 +1,5 @@
 export function initialize(): void {
-  const element = document.querySelector("[data-role~='focus-on-load']") as HTMLElement
+  const element = document.querySelector<HTMLElement>("[data-role~='focus-on-load']")
 
-  if (element) element.focus()
+  element?.focus()
 }
