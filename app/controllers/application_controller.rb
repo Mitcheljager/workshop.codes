@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
       format.html { render "errors/not_found", status: 404 }
       format.xml { head 404 }
       format.js { head 404 }
-      format.json { head 404 }
+      format.json { render json: { error: "Not found" }, status: 404 }
     end
   rescue ActionController::UnknownFormat
     head 404
