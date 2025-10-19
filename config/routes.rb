@@ -157,7 +157,7 @@ Rails.application.routes.draw do
   constraints code: /.{5,6}/ do
     resources :posts, param: :code, path: "", concerns: :paginatable, except: [:index, :show, :create]
     get ":code", to: "posts#show"
-    get ":code/:tab", to: "posts#show", as: "post_tab"
+    get ":code/:tab", to: "posts#show", as: "post_tab", constraints: { tab: /description|controls|snippet|collection|comments|update-log|derivations/ }
     post "immortalise", to: "posts#immortalise", as: "immortalise_post"
     resources :archives, param: :code, path: "archive", only: [:show, :update, :destroy]
   end
