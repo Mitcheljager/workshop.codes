@@ -97,7 +97,7 @@ Rails.application.routes.draw do
   get "u/:username(/page/:page)", to: "profiles#show", as: "profile"
   patch "profile/edit", to: "profiles#update", as: "update_profile"
   get "profile/edit", to: "profiles#edit", as: "edit_profile"
-  get "users/:username", to: redirect { |params| "u/#{ params[:username].gsub("#", "%23") }" }
+  get "users/:username", to: redirect { |params| "u/#{ URI.encode_www_form_component(params[:username]) }" }
 
   resources :blocks, only: [:create, :update, :destroy]
   post "blocks/set_positions", to: "blocks#set_positions"
