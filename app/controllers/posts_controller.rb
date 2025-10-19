@@ -60,6 +60,8 @@ class PostsController < ApplicationController
         @archive_authorization = ArchiveAuthorization.find_by(code: @post.code)
       }
       format.json {
+        not_found and return unless @post.present?
+
         set_request_headers
         render json: @post, serializer: PostSerializer, is_show: true
       }
