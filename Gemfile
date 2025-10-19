@@ -60,6 +60,7 @@ group :development do
   gem "win32-security", platforms: [:mingw, :x64_mingw, :mswin]
   gem "derailed_benchmarks", group: :development
   gem "sys-proctable"
+  gem "query_count"
 end
 
 group :test do
