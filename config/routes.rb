@@ -178,8 +178,6 @@ Rails.application.routes.draw do
 
   post "/new", to: "posts#create", as: "create_post"
 
-  get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
-
   scope "/webhooks", controller: :webhooks do
     post :bugsnag_error_reporting
     post :ko_fi
@@ -193,4 +191,6 @@ Rails.application.routes.draw do
       url_for(blob)
     end
   end
+
+  get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
 end
