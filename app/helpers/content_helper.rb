@@ -83,17 +83,17 @@ module ContentHelper
     text = markdown_update_notes(text)
     text = markdown.render(text)
 
-    content = markdown_post_block(text).html_safe
+    markdown_post_block(text).html_safe
   end
 
   def markdown_youtube(text)
-    text.gsub /\[youtube\s+(.*?)\]/ do
+    text.gsub(/\[youtube\s+(.*?)\]/) do
       youtube_preview_tag($1, true)
     end
   end
 
   def markdown_video(text)
-    text.gsub /\[video\s(https?:\/\/\S+)(?:\s(autoplay))?\]/ do
+    text.gsub(/\[video\s(https?:\/\/\S+)(?:\s(autoplay))?\]/) do
       video_url = $1
       autoplay = $2.blank? ? nil : true
 
@@ -109,7 +109,7 @@ module ContentHelper
   end
 
   def markdown_gallery(text)
-    text.gsub /\[gallery\s+([^\]]+)\]/m do
+    text.gsub(/\[gallery\s+([^\]]+)\]/m) do
       begin
         images = JSON.parse($1.strip)
 
@@ -144,7 +144,7 @@ module ContentHelper
 
 
   def markdown_ability_icon(text)
-    text.gsub /\[ability\s+([\p{L}\p{N}_:.\(\)\-\s]+)\]/ do
+    text.gsub(/\[ability\s+([\p{L}\p{N}_:.\(\)\-\s]+)\]/) do
       begin
         ability_name = ERB::Util.html_escape($1.strip)
         ActionController::Base.helpers.image_tag(ability_name_to_icon_url(ability_name), height: 50, loading: "lazy", alt: $1)
@@ -154,7 +154,7 @@ module ContentHelper
 
   def markdown_post_block(text)
     if @post.present? || action_name == "parse_markdown"
-      text.gsub /\[block\s+(.*?)\]/ do
+      text.gsub(/\[block\s+(.*?)\]/) do
         if action_name == "parse_markdown"
           block = Block.find_by(id: $1)
         else
@@ -175,7 +175,7 @@ module ContentHelper
   end
 
   def markdown_update_notes(text)
-    text.gsub /\[update\s+{(.*?)}\]/m do
+    text.gsub(/\[update\s+{(.*?)}\]/m) do
       begin
         data = YAML.load("{#{$1}}")
 
@@ -190,7 +190,7 @@ module ContentHelper
         else
           render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities, icons: icons }
         end
-      rescue => error
+      rescue
         "<em>An error was found in the Hero Update markdown</em>"
       end
     end
