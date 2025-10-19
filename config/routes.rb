@@ -178,11 +178,7 @@ Rails.application.routes.draw do
 
   post "/new", to: "posts#create", as: "create_post"
 
-  constraints nice_url: /[a-zA-Z0-9-]+/ do
-    get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: lambda { |request|
-      request.params[:nice_url].present? && Post.find_by_nice_url(request.params[:nice_url].downcase).present?
-    }
-  end
+  get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
 
   scope "/webhooks", controller: :webhooks do
     post :bugsnag_error_reporting
