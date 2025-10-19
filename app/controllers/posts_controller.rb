@@ -290,7 +290,7 @@ class PostsController < ApplicationController
 
     begin
       uri = URI.parse(carousel_video_str)
-    rescue URI::InvalidURIError => exception
+    rescue URI::InvalidURIError
       return false
     end
 
@@ -299,7 +299,7 @@ class PostsController < ApplicationController
     return false unless uri.host.ends_with?("youtube-nocookie.com") || uri.host.ends_with?("youtube.com") || uri.host == "youtu.be"
 
     if uri.host == "youtu.be"
-      return false unless uri.path.match? /^\/(.+)$/
+      return false unless uri.path.match?(/^\/(.+)$/)
       @post.carousel_video = $1
       return true
     end
@@ -311,7 +311,7 @@ class PostsController < ApplicationController
       return true
     end
 
-    if uri.path.match? /^\/(?:v|e|embed)\/(.+)$/
+    if uri.path.match?(/^\/(?:v|e|embed)\/(.+)$/)
       @post.carousel_video = $1
       return true
     end
