@@ -32,6 +32,10 @@ class User < ApplicationRecord
     }
   end
 
+  scope :with_at_least_one_post, -> {
+    where("EXISTS (SELECT 1 FROM posts WHERE posts.user_id = users.id)")
+  }
+
   has_secure_password
 
   has_many :posts, dependent: :destroy

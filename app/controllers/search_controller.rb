@@ -109,9 +109,9 @@ class SearchController < ApplicationController
     end
 
     users = users.includes(:badges)
+                 .with_at_least_one_post
                  .where(linked_id: nil) # Is not a linked account
                  .where.not(level: :banned) # Not banned
-                 .where("EXISTS (SELECT 1 FROM posts WHERE posts.user_id = users.id)") # Has any posts
                  .limit(3)
   end
 
