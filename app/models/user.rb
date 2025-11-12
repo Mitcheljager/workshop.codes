@@ -30,6 +30,16 @@ class User < ApplicationRecord
       number_of_shards: 1,
       number_of_replicas: 1
     }
+
+    # Only index user if it has posts, we already only show them if they have posts so might
+    # as well only index them in that case as well
+    after_commit on: [:create, :update] do
+      if posts.exists?
+        __elasticsearch__.index_document
+      else
+        __elasticsearch__.delete_document ignore: 404
+      end
+    end
   end
 
   scope :with_at_least_one_post, -> {
