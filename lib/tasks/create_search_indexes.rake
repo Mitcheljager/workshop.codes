@@ -4,7 +4,7 @@ task create_search_indexes: :environment do
   Post.import(force: true)
 
   User.__elasticsearch__.create_index! force: true
-  User.import(force: true)
+  User.where("EXISTS (SELECT 1 FROM posts WHERE posts.user_id = users.id)").import(force: true)
 
   Wiki::Article.__elasticsearch__.create_index! force: true
   Wiki::Article.latest_per_group.import(force: true)
