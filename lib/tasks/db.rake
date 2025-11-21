@@ -1,5 +1,3 @@
-require 'faker'
-
 namespace :db do
   desc "Fakes 200 posts from the first created user"
   task fakeit: :environment do
