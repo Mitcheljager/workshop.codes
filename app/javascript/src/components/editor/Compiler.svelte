@@ -6,20 +6,42 @@
   import { outsideClick } from "@components/actions/outsideClick"
   import { escapeable } from "@components/actions/escapeable"
   import { languageOptions } from "@src/lib/languageOptions"
+  import { settings } from "@stores/editor"
+  import { onMount } from "svelte"
+  import { setCssVariable } from "@utils/setCssVariable"
 
   export let inline = false
 
   let compiling = false
   let copied = false
   let dropdownActive = false
-  let compileWithSettings = true
+  let compileWithoutSettings = false
+
+  let mounted = false
+
+  onMount(() => {
+    $settings["exclude-lobby-settings"] = localStorage.getItem("exclude-lobby-settings") === "true"
+    compileWithoutSettings = $settings["exclude-lobby-settings"]
+    setCssVariable("exclude-lobby-settings", compileWithoutSettings)
+
+    setTimeout(() => mounted = true, 100)
+  })
+
+  $: updateCompileWithoutSettings(compileWithoutSettings)
+
+  function updateCompileWithoutSettings(value) {
+    if (!mounted) return
+
+    setCssVariable("exclude-lobby-settings", value)
+    localStorage.setItem("exclude-lobby-settings", value)
+  }
 
   function doCompile(singleLanguageOverride = null) {
     compiling = true
     dropdownActive = false
 
     try {
-      const compiled = compile(null, singleLanguageOverride, compileWithSettings)
+      const compiled = compile(null, singleLanguageOverride, !compileWithoutSettings)
 
       setTimeout(() => {
         compiling = false
@@ -81,8 +103,8 @@
   {#if dropdownActive || inline}
     <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => dropdownActive = false} class:dropdown__content={!inline} class="block w-100" style="width: 200px">
       <div class="checkbox ml-1/4 pt-1/8 pb-1/8">
-        <input id="compile-with-settings" type="checkbox" bind:checked={compileWithSettings} />
-        <label for="compile-with-settings" class="text-small">Include Settings</label>
+        <input id="compile-without-settings" type="checkbox" bind:checked={compileWithoutSettings} />
+        <label for="compile-without-settings" class="text-small">Exclude settings</label>
       </div>
       <hr />
       {#if $selectedLanguages.length && Object.keys($translationKeys).length}
