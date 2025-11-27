@@ -95,6 +95,10 @@
   name: Tracer
   category: Damage
 -
+  name: Vendetta
+  category: Damage
+  overwatch_2: true
+-
   name: Venture
   category: Damage
   overwatch_2: true
