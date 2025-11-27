@@ -26,6 +26,7 @@ gem "jbuilder", "~> 2.5"
 gem "kaminari"
 gem "lockbox"
 gem "mini_magick", ">= 4.9.5"
+gem "numo-narray", :git => "https://github.com/ruby-numo/numo-narray.git"
 gem "omniauth-bnet"
 gem "omniauth-discord"
 # Mitigate CVE-2015-9284
@@ -51,7 +52,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "pry-byebug", "~> 3.10.1"
   gem "rubocop-rails-omakase", require: false
-  gem "sqlite3", "1.4.2"
+  gem "sqlite3", "~> 1.5.0"
 end
 
 group :development do

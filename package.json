@@ -2,7 +2,7 @@
   "name": "overwatch-workshop",
   "private": true,
   "engines": {
-    "node": ">=18"
+    "node": ">=18 <25.0.0"
   },
   "dependencies": {
     "@bugsnag/js": "^7.21.0",
