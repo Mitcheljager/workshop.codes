@@ -56,6 +56,21 @@
   }
 }
 
+.string-lights {
+  pointer-events: none;
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .logo-background {
   position: relative;
 
