@@ -5,14 +5,19 @@ export function bind(): void {
 
   window.removeEventListener("resize", () => positionStringLights(element))
   window.addEventListener("resize", () => positionStringLights(element))
+
+  // This is weirdly hacky, but turbolinks doesn't seem to like it when going from the main application to the wiki,
+  // the height of the pseudo element is `auto` at first. So... we just fire it again after 100 milliseconds.
+  // Doesn't do anything visually on other pages, but takes care of the positioning on wiki pages.
   positionStringLights(element)
+  setTimeout(() => positionStringLights(element), 100)
 }
 
 // This is all a bit janky. The main application and the wiki have separate headers, the main application is angled the wiki is not.
 // I wanted to keep them all in one function for the sake of keeping it simple.
 // The string lights only show after javascript activates to prevent it from snapping to an angle before it loads.
 function positionStringLights(element: HTMLElement): void {
-  const background = document.querySelector(".body-bg, .wiki-header")
+  const background = document.querySelector<HTMLElement>(".body-bg, .wiki-header")
 
   if (!background) return
 
