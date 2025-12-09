@@ -69,6 +69,12 @@
 
     <%= render "body_bg" unless is_wiki? || is_editor? %>
 
+    <picture class="string-lights">
+      <source srcset=" <%= image_path "layout/string-lights_md.png" %> 900w, <%= image_path "layout/string-lights_lg.png" %> 1920w" type="image/png">
+
+      <%= image_tag "layout/string-lights_lg.png", alt: "" %>
+    </picture>
+
     <%= svelte_component "Ollie", { imageFlyBy: image_path("ollie/ollie-float.png"), imageHeart: image_path("ollie/ollie-heart.png") } if current_user.present? %>
   </body>
 </html>
