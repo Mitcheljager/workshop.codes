@@ -58,12 +58,14 @@
 
 .string-lights {
   pointer-events: none;
-  z-index: 20;
+  z-index: -1;
   position: absolute;
-  top: 0;
+  top: var(--top, 400px);
   left: 0;
   width: 100%;
   height: auto;
+  transform: rotate(var(--angle, 0deg)) scale(1.03) translateY(calc(-50% + 2px)); // The +2 pixels are for any rounding errors, plus the line isn't perfectly straight
+  transform-origin: top left;
 
   img {
     width: 100%;
