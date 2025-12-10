@@ -293,6 +293,11 @@
   slug: stadium-throne-of-anubis
   overwatch_2: true
 -
+  name: Wuxing University Water College (Stadium)
+  type: Stadium
+  slug: stadium-wuxing-university-water-college
+  overwatch_2: true
+-
   name: Workshop Chamber
   type: Workshop
   slug: workshop-chamber
