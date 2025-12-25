@@ -71,3 +71,11 @@ $ollie-login-size: 100px;
     transform: rotate(-30deg) translateY(110%);
   }
 }
+
+.ollie-login__hat {
+  position: absolute;
+  bottom: $ollie-login-size * 0.17;
+  left: $ollie-login-size * 0.15;
+  width: $ollie-login-size * 0.95;
+  z-index: 2;
+}
