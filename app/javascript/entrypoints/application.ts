@@ -35,7 +35,6 @@ import * as revealBySelect from "@src/reveal-by-select"
 import * as scrollIndicator from "@src/scroll-indicator"
 import * as scrollIntoViewOnLoad from "@src/scroll-into-view-on-load"
 import * as sticky from "@src/sticky"
-import * as stringLights from "@src/string-lights"
 import * as tabs from "@src/tabs"
 import * as timeago from "@src/timeago"
 import * as toggleContent from "@src/toggle-content"
@@ -63,7 +62,6 @@ document.addEventListener("turbolinks:load", () => {
   revealBySelect.bind()
   scrollIndicator.bind()
   sticky.bind()
-  stringLights.bind()
   tabs.bind()
   toggleContent.bind()
   youtubePreview.bind()
