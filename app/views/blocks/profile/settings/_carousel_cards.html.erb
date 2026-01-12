@@ -9,6 +9,7 @@
   <% if @user.posts.any? %>
     <%= svelte_component "LimitedCheckboxes", {
                          name: "block[properties[posts]][]",
+                         limit: 6,
                          options: @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] },
                          selected: block_property(block, "posts") || [] } %>
   <% else %>
