@@ -18,7 +18,11 @@ function getReportsForm(event: Event): void {
   const originalText = eventTarget.innerText
   eventTarget.innerText = "Loading..."
 
-  new FetchRails(eventTarget.href).get()
+  const url = eventTarget.dataset.url
+
+  if (!url) return
+
+  new FetchRails(url).get()
     .then(data => {
       eventTarget.innerText = originalText
       document.body.insertAdjacentHTML("beforeend", data as string)

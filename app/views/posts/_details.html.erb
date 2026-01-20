@@ -89,5 +89,5 @@
 <% end %>
 
 <div class="item__tray-item">
-  <%= link_to "Report code", new_report_path(id: @post.id, concerns_model: "post"), class: "text-red", data: { action: "get-reports-form" } %>
+  <%= button_tag "Report code", class: "text-red text-small", data: { action: "get-reports-form", url: new_report_path(id: @post.id, concerns_model: "post") } %>
 </div>
