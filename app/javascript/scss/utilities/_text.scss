@@ -28,6 +28,12 @@
   }
 }
 
+.text-truncate {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
 .text-small {
   font-size: $font-size-small;
   line-height: 1.35em;
