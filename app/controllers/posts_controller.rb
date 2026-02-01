@@ -245,7 +245,7 @@ class PostsController < ApplicationController
   end
 
   def latest_posts
-    @posts = Post.includes(:user).select_overview_columns.public?.order(created_at: :desc).page params[:page]
+    @posts = Post.includes(:user).select_overview_columns.public?.order(created_at: :desc).page(params[:page])
 
     respond_to do |format|
       format.html

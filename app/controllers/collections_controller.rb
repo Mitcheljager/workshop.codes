@@ -9,7 +9,7 @@ class CollectionsController < ApplicationController
 
   def show
     @collection = Collection.find_by_nice_url!(params[:nice_url].downcase)
-    @posts = @collection.posts.visible?.order(created_at: :desc).page params[:page]
+    @posts = @collection.posts.visible?.order(created_at: :desc).page(params[:page])
     @display_type = @collection.display_type
 
     respond_to do |format|

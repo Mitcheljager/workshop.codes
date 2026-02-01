@@ -1,6 +1,6 @@
 class OnFireController < ApplicationController
   def index
-    @posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").page params[:page]
+    @posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").page(params[:page])
 
     respond_to do |format|
       format.html
