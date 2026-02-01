@@ -23,5 +23,5 @@
 
   <h2 class="mt-1/1" aria-level="1" id="latest"><strong>Latest</strong> Codes</h2>
 
-  <%= render "posts", labelledby: "latest" %>
+  <%= render "posts", labelledby: "latest", pagination_params: { controller: "posts", action: "latest" } %>
 </main>
