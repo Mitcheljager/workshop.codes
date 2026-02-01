@@ -16,7 +16,7 @@
         <div class="infinite-scroll grid-full-width" data-role="infinite-scroll-marker" data-load-method="infinite-scroll" data-url="<%= request.original_url %>"></div>
 
         <div class="flex justify-center grid-full-width" data-role="infinite-scroll-backup-pagination">
-          <%= paginate @posts, params: pagination_params %>
+          <%= paginate @posts, params: pagination_params, theme: :simple, window: 2 %>
         </div>
       <% end %>
     <% else %>

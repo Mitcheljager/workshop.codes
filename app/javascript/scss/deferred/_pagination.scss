@@ -8,6 +8,7 @@
     display: block;
     padding: .4em .6em;
     margin: 0 .25em;
+    border-radius: $border-radius * 0.25;
     border: 0;
     color: $white;
     font-size: 16px;
@@ -26,13 +27,15 @@
   }
 }
 
-.page a {
-  display: none;
+.page a,
+.pagination .pagination__item,
+.pagination .pagination__control {
   background: $bg-dark;
   color: $text-color;
 
-  @include media-min(lg) {
-    display: block;
+  &--current {
+    color: $white;
+    background: transparent;
   }
 }
 
@@ -55,11 +58,8 @@
   }
 }
 
-.prev a,
-.next a {
-  background: $primary;
-
-  @include media-min(lg) {
-    background: transparent;
-  }
+.next a,
+.pagination .pagination__control--next {
+  background: var(--primary, $primary);
+  color: $white;
 }

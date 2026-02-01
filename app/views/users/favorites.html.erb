@@ -7,5 +7,5 @@
 
   <%= tag.em "You've not yet liked any Codes" if @favorites.blank? %>
 
-  <%= paginate @favorites %>
+  <%= paginate @favorites, window: 2 %>
 <% end %>

@@ -8,4 +8,4 @@
   <%= render collection: @collections, partial: "collections/collection_card", as: :collection %>
 </div>
 
-<%= paginate @collections %>
+<%= paginate @collections, theme: :simple, window: 2 %>
