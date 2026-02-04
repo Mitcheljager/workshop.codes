@@ -90,7 +90,7 @@ button {
 
   &--secondary {
     color: $text-color-lightest;
-    background: $secondary;
+    background: theme(body, 5%);
   }
 
   &--dark {

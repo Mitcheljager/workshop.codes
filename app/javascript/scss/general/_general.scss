@@ -3,7 +3,7 @@
 :root {
   color-scheme: dark;
   --primary: #{ $primary };
-  --secondary: #{ $secondary };
+  --secondary: #{ theme(body, 5%) };
   --white: #{ $text-color-lightest };
   --orange: #{ $orange };
   --red: #{ $red };
