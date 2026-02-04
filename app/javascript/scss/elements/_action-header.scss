@@ -28,7 +28,7 @@
 
 .action-header__actions {
   display: flex;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 
   @include media-min(md) {
     text-align: right;
@@ -51,11 +51,11 @@
   text-decoration: none;
 
   @include hover-stack {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 
   &--active {
     box-shadow: inset 0 -3px 0 $primary;
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }

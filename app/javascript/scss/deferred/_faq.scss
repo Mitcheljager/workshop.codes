@@ -19,11 +19,11 @@
   justify-content: space-between;
   padding: 1rem;
   border-radius: $border-radius;
-  color: $text-color;
+  color: theme(text-color);
   cursor: pointer;
 
   @include hover-stack {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 

@@ -33,7 +33,7 @@
 
   strong {
     margin: 0 .25rem;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
   }
 }
 
@@ -108,7 +108,7 @@
     margin-left: $margin * 0.125;
     background: transparent;
     text-decoration: none;
-    color: $text-color;
+    color: theme(text-color);
     cursor: pointer;
   }
 }

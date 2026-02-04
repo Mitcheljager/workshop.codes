@@ -9,7 +9,7 @@
   border-radius: $border-radius * 0.5;
   font-family: $font-stack;
   font-size: $font-size-base;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 
   @include high-contrast() {
     border: 2px solid currentColor;
@@ -24,7 +24,7 @@
 
   &::placeholder {
     font-style: italic;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
   }
 
   &--large {
@@ -145,11 +145,11 @@
   border-radius: $border-radius * 0.5;
   background: theme(dark);
   font-size: $font-size-base;
-  color: $text-color;
+  color: theme(text-color);
   cursor: pointer;
 
   @include hover-stack {
-    border-color: $text-color;
+    border-color: theme(text-color);
   }
 
   @include high-contrast() {
@@ -171,7 +171,7 @@
   }
 
   option {
-    color: $text-color;
+    color: theme(text-color);
     background: theme(dark);
 
     &[disabled] {
@@ -179,7 +179,7 @@
     }
 
     &:checked {
-      background: linear-gradient($text-color, $text-color);
+      background: linear-gradient(theme(text-color), theme(text-color));
       color: $black;
     }
   }
@@ -197,7 +197,7 @@
     height: 1rem;
     margin: 1px 0 0;
     border-radius: 2px;
-    border: 2px solid $text-color;
+    border: 2px solid theme(text-color);
     cursor: pointer;
 
     @include focus-visible-outline;
@@ -248,15 +248,15 @@
 
 input[type="checkbox"] {
   &:checked + label {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 
   &[disabled],
   &[disabled] + label {
     cursor: not-allowed;
     opacity: .25;
-    color: $text-color;
-    border-color: $text-color;
+    color: theme(text-color);
+    border-color: theme(text-color);
   }
 }
 
@@ -274,7 +274,7 @@ input[type="file"] {
   font-size: $font-size-small;
   line-height: 1.25em;
   font-style: italic;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 
   label + & {
     margin-top: math.div($margin, 3) - math.div($margin, 6);
@@ -327,7 +327,7 @@ input[type="file"] {
   font-size: $font-size-small;
 
   a {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 
@@ -345,7 +345,7 @@ input[type="file"] {
 .url-input {
   display: flex;
   align-items: center;
-  color: $text-color;
+  color: theme(text-color);
   white-space: nowrap;
 }
 
@@ -359,7 +359,7 @@ input[type="file"] {
 
 .form-required {
   font-size: $font-size-small;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 }
 
 .range {
@@ -372,7 +372,7 @@ input[type="file"] {
     height: 1rem;
     width: 0.5rem;
     border-radius: $border-radius * 0.25;
-    background: $text-color;
+    background: theme(text-color);
     border: 0;
     cursor: pointer;
 

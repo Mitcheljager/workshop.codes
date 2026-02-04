@@ -59,10 +59,10 @@
   }
 
   button {
-    color: $text-color;
+    color: theme(text-color);
 
     button:hover {
-      color: $text-color-lightest;
+      color: theme(text-color-lightest);
     }
   }
 }
@@ -71,17 +71,17 @@
   word-break: break-word;
 
   .translation-settings__item--active & {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 
 .translation-settings__copy {
   margin-left: auto;
   text-transform: lowercase;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 
   &:hover {
-    color: $text-color;
+    color: theme(text-color);
   }
 
   &:active {

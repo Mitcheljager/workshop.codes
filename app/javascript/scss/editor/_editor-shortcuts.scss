@@ -4,12 +4,12 @@
   align-items: center;
   padding: 0.5rem 0;
   border-top: 1px solid theme(border, 5%);
-  color: $text-color;
+  color: theme(text-color);
   font-size: $font-size-small;
 
   &:hover {
     background: theme(dark, 5%);
     box-shadow: -0.5rem 0 0 theme(dark, 5%), 0.5rem 0 0 theme(dark, 5%);
-    color: $text-color-light;
+    color: theme(text-color-light);
   }
 }

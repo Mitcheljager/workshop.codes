@@ -10,7 +10,7 @@
 .cm-editor {
   --indent-marker-bg-color: #{ theme(dark, 5%) };
   --indent-marker-active-bg-color: #{ theme(dark, 15%) };
-  color: $text-color-light;
+  color: theme(text-color-light);
 
   body[style*="--show-indent-markers: false"] & { // Hacky solution for css var based if statement
     --indent-marker-bg-color: transparent;
@@ -25,11 +25,11 @@
   .cm-gutters {
     border-right: 0;
     background: transparent;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
 
     .cm-activeLineGutter {
       background: transparent;
-      color: $text-color-light;
+      color: theme(text-color-light);
     }
   }
 
@@ -107,7 +107,7 @@
       border-radius: $border-radius * 0.5;
       border: 1px solid theme(darker);
       padding: $margin * 0.125;
-      color: $text-color;
+      color: theme(text-color);
       font-size: 0.75rem;
 
       @include styled-scrollbar;
@@ -130,14 +130,14 @@
     > .cm-tooltip {
       padding: 0.35rem 0.5rem;
       background: theme(dark, 5%);
-      color: $text-color-light;
+      color: theme(text-color-light);
       white-space: pre-wrap;
     }
 
     .cm-diagnostic {
       background: theme(darker);
       border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
-      color: $text-color-lightest;
+      color: theme(text-color-lightest);
       font-weight: bold;
       font-size: 12px;
     }
@@ -164,7 +164,7 @@
   }
 
   .cm-completionDetail {
-    color: $text-color;
+    color: theme(text-color);
     font-size: 0.85em;
   }
 
@@ -247,7 +247,7 @@
       border-radius: $border-radius * 0.25;
       font-size: $font-size-small;
       background: theme(dark, 10%);
-      color: $text-color-lightest;
+      color: theme(text-color-lightest);
 
       &:focus {
         background: theme(dark, 12.5%);
@@ -257,12 +257,12 @@
 
       &::placeholder {
         font-style: italic;
-        color: $text-color;
+        color: theme(text-color);
       }
     }
 
     label {
-      color: $text-color;
+      color: theme(text-color);
       font-size: $font-size-small;
       font-family: $font-stack;
     }
@@ -275,14 +275,14 @@
       border-radius: $border-radius * 0.25;
       background: theme(dark, 5%);
       font-size: $font-size-small;
-      color: $text-color-light;
+      color: theme(text-color-light);
       text-transform: none;
       cursor: pointer;
 
       @include hover-stack {
         outline: 0;
         background: theme(dark, 15%);
-        color: $text-color-lightest;
+        color: theme(text-color-lightest);
       }
     }
 
@@ -291,7 +291,7 @@
       padding: 0 0.25rem;
       background: transparent;
       font-size: 1.25rem;
-      color: $text-color-light;
+      color: theme(text-color-light);
       cursor: pointer;
 
       &:hover {
@@ -326,10 +326,10 @@
   .cm-foldPlaceholder {
     background: transparent;
     border: 0;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
 
     &:hover {
-      color: $text-color-light;
+      color: theme(text-color-light);
     }
   }
 
@@ -364,13 +364,13 @@
       transform: translateY(-100%);
       padding: 0.25rem 0.5rem;
       border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
-      border-left: 3px solid $text-color;
+      border-left: 3px solid theme(text-color);
       background: theme(dark, -5%);
       white-space: nowrap;
       line-height: 1;
       text-indent: 0;
       font-family: $font-stack;
-      color: $text-color;
+      color: theme(text-color);
     }
   }
 

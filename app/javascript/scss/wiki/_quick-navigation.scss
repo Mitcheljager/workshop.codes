@@ -32,12 +32,12 @@ $width: clamp(10rem, 12.5vw, 15rem);
   display: block;
   padding: 0.35rem 0;
   text-decoration: none;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
   font-size: $font-size-small;
   line-height: 1.2em;
 
   &--active {
-    color: $text-color-light;
+    color: theme(text-color-light);
     font-weight: bold;
   }
 }
@@ -52,13 +52,13 @@ $width: clamp(10rem, 12.5vw, 15rem);
   margin: 0;
   border: 0;
   background: transparent;
-  color: $text-color-light;
+  color: theme(text-color-light);
   font-family: $font-stack;
   font-size: 1rem;
   cursor: pointer;
 
   &:hover {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 

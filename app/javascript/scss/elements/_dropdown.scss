@@ -3,16 +3,16 @@
 .dropdown {
   display: inline-block;
   position: relative;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 }
 
 .dropdown__toggle {
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   text-decoration: none;
   white-space: nowrap;
 
   @supports not (clip-path: polygon(0 0)) {
-    color: $text-color-dark;
+    color: theme(text-color-dark);
   }
 
   @include hover-stack {
@@ -103,7 +103,7 @@
   width: 100%;
   border: 0;
   background: transparent;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   text-decoration: none;
   text-align: left;
   font-family: $font-stack;
@@ -149,7 +149,7 @@
 
 .dropdown__label {
   display: block;
-  color: $text-color;
+  color: theme(text-color);
   padding: 1rem 1rem .5rem;
 
   &:first-child {

@@ -17,7 +17,7 @@
 }
 
 .navigation__item {
-  --color: #{$text-color-lightest};
+  --color: #{theme(text-color-lightest)};
   --discord-color: #{$discord};
   --discord-drop-shadow: drop-shadow(0 0 4px #{rgba($white, 0.2)});
   display: block;

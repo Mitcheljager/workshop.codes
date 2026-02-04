@@ -20,7 +20,7 @@
 .activities__timestamp {
   font-size: 12px;
   line-height: inherit;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
   text-align: right;
 
   @include media-min(xs) {

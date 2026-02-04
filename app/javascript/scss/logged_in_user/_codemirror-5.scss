@@ -2,7 +2,7 @@
   padding: 0;
   border: 0;
   background: theme(dark);
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   min-height: 600px;
 
   @include high-contrast() {
@@ -16,7 +16,7 @@
 
   .CodeMirror-code {
     .cm-url {
-      color: $text-color;
+      color: theme(text-color);
     }
 
     .cm-attribute {
@@ -48,7 +48,7 @@
 }
 
 .CodeMirror-cursor {
-  border-color: $text-color-lightest;
+  border-color: theme(text-color-lightest);
 }
 
 .CodeMirror-lines {

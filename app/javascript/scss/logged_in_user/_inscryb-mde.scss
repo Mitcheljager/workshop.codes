@@ -40,12 +40,12 @@
     margin-top: .25rem;
     margin-right: .25rem;
     background-color: theme(dark);
-    color: $text-color !important;
+    color: theme(text-color) !important;
     font-size: 1rem;
 
     @include hover-stack {
       background-color: theme(dark, 10%);
-      color: $text-color-light !important;
+      color: theme(text-color-light) !important;
       border: 0;
     }
 
@@ -107,7 +107,7 @@
 
   input:focus {
     background: theme(darker);
-    box-shadow: inset 0 0 0 2px $text-color-dark;
+    box-shadow: inset 0 0 0 2px theme(text-color-dark);
   }
 
   .checkbox label {
@@ -118,7 +118,7 @@
 .editor-statusbar {
   font-family: 'Consolas', monospace;
   padding: .5rem 0;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 
   .error {
     color: $red;
@@ -136,7 +136,7 @@
   &:hover,
   &:active {
     background: theme(darker);
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 
   &--icon {

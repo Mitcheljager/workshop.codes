@@ -5,7 +5,7 @@ $highlight-types: (
   punctuation: #6a9955,
   keyword: #E06C75,
   number: #D19A66,
-  comment: $text-color-dark,
+  comment: theme(text-color-dark),
   variable: #9cdcfe,
   action: #e5c069,
   value: #6796e6,
@@ -16,7 +16,7 @@ $highlight-types: (
 );
 
 .syntax-highlight {
-  color: $text-color-light;
+  color: theme(text-color-light);
 }
 
 :root {

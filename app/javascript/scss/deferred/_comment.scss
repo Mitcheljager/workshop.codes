@@ -134,10 +134,10 @@
   font-size: $font-size-small;
   text-transform: lowercase;
   text-decoration: none;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 
   @include hover-stack() {
-    color: $text-color-light;
+    color: theme(text-color-light);
   }
 
   &:last-child {
@@ -147,7 +147,7 @@
 
 .post-comment__author {
   text-decoration: none;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-weight: bold;
   margin-right: 2rem;
 
@@ -157,7 +157,7 @@
 
   small {
     display: inline-block;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
     font-size: $font-size-small;
     font-weight: normal;
     margin-left: .25em;
@@ -169,7 +169,7 @@
   font-size: .75rem;
   font-style: italic;
   text-transform: lowercase;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 
   @include media-min(sm) {
     margin-top: 0;

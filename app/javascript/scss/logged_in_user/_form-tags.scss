@@ -27,7 +27,7 @@
   border-radius: $border-radius * 0.25;
   background: theme(dark, 5%);
   line-height: 1em;
-  color: $text-color-light;
+  color: theme(text-color-light);
   font-weight: bold;
 }
 
@@ -35,7 +35,7 @@
   padding: .1rem .2rem .2rem;
   background: transparent;
   border: none;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   cursor: pointer;
   line-height: 1em;
 
@@ -75,7 +75,7 @@
       &:focus {
         background: theme(dark, 10%);
         outline: none;
-        color: $text-color-lightest;
+        color: theme(text-color-lightest);
       }
     }
   }

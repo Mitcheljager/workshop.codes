@@ -36,6 +36,6 @@
   margin-bottom: $margin * 0.125;
 
   path {
-    fill: $text-color-lightest;
+    fill: theme(text-color-lightest);
   }
 }

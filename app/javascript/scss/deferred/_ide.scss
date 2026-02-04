@@ -93,7 +93,7 @@
   background: theme(body);
   font-size: 10px;
   line-height: 1em;
-  color: $text-color;
+  color: theme(text-color);
   cursor: pointer;
 
   @include media-min("sm") {
@@ -101,7 +101,7 @@
   }
 
   @include hover-stack {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 
   .copy__notification {
@@ -119,7 +119,7 @@
   background: theme(dark);
   text-align: center;
   text-decoration: none;
-  color: $text-color;
+  color: theme(text-color);
   font-size: $font-size-small;
   cursor: pointer;
 }

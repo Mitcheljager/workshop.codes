@@ -2,7 +2,7 @@ $text-colors: (
   base: $text-color,
   lightest: $text-color-lightest,
   light: $text-color-light,
-  dark: $text-color-dark,
+  dark: theme(text-color-dark),
   primary: theme(primary),
   discord: $discord,
   bnet: $bnet,

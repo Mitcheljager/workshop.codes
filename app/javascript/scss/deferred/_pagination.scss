@@ -31,7 +31,7 @@
 .pagination .pagination__item,
 .pagination .pagination__control {
   background: theme(dark);
-  color: $text-color;
+  color: theme(text-color);
 
   &--current {
     color: $white;

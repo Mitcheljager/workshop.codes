@@ -67,7 +67,7 @@
   background: transparent;
   font-family: $font-stack;
   font-size: $font-size-base;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 }
 
 @mixin motion() {

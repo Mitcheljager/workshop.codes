@@ -27,7 +27,7 @@
   &--active {
     background: theme(darker);
     box-shadow: $margin 0 0 theme(darker), $margin * -1 0 0 theme(darker);
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 

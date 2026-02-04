@@ -10,6 +10,14 @@
     $color: $bg-body;
   } @else if ($key == border) {
     $color: $border-color;
+  } @else if ($key == text-color) {
+    $color: $text-color;
+  } @else if ($key == text-color-light) {
+    $color: $text-color-light;
+  } @else if ($key == text-color-lightest) {
+    $color: $text-color-lightest;
+  } @else if ($key == text-color-dark) {
+    $color: $text-color-dark;
   } @else if ($key != primary) {
     @error "Key is not supported"
   }

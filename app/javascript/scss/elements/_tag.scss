@@ -4,7 +4,7 @@
   margin: 0 .1em;
   border-radius: 5px;
   background: theme(darker);
-  color: $text-color;
+  color: theme(text-color);
   line-height: 1.25em;
   text-decoration: none;
 }

@@ -35,7 +35,7 @@
   display: block;
   padding: 1rem 0;
   border-bottom: 1px solid theme(border);
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-size: $font-size-small;
   line-height: 1.35em;
 
@@ -85,7 +85,7 @@
   background: theme(dark);
   border-radius: $border-radius;
   cursor: pointer;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 
   @include media-min(mbl) {
     background: transparent;

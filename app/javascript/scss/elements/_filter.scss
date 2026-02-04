@@ -88,7 +88,7 @@
     background: theme(body);
 
     a {
-      color: $text-color-lightest;
+      color: theme(text-color-lightest);
     }
   }
 
@@ -106,7 +106,7 @@
 }
 
 .filter__label {
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 }
 
 .filter__button {
@@ -136,7 +136,7 @@
   background: transparent;
   border: 0;
   padding: .65rem .5rem;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-family: $font-stack;
   font-size: $font-size-base;
   text-decoration: none;
@@ -146,7 +146,7 @@
     color: $white;
 
     path {
-      fill: $text-color-lightest;
+      fill: theme(text-color-lightest);
     }
   }
 

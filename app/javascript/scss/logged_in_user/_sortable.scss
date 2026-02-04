@@ -13,6 +13,6 @@
 }
 
 .sortable__multi-selected {
-  outline: inset 2px $text-color;
+  outline: inset 2px theme(text-color);
   outline-offset: -2px;
 }

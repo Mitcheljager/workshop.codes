@@ -5,12 +5,12 @@
 
   &.editor-folder--active {
     > span > input {
-      color: $text-color-lightest;
+      color: theme(text-color-lightest);
     }
   }
 
   > span > input {
-    color: $text-color-dark;
+    color: theme(text-color-dark);
     pointer-events: all;
   }
 }
@@ -27,11 +27,11 @@
   cursor: pointer;
   transition: transform 150ms;
   user-select: none;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
   z-index: 1;
 
   &:hover {
-    color: $text-color-light;
+    color: theme(text-color-light);
   }
 
   .editor-folder--expanded > & {

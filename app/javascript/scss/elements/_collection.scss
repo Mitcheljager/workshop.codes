@@ -62,7 +62,7 @@
 .collection__title {
   display: inline-block;
   margin-bottom: math.div($margin, 16);
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-size: 18px;
   line-height: 1.2em;
   font-weight: bold;
@@ -74,7 +74,7 @@
 }
 
 .collection__author {
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-size: $font-size-small;
   font-weight: bold;
   text-decoration: none;
@@ -85,7 +85,7 @@
 }
 
 .collection__count {
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-style: italic;
   font-size: $font-size-small;
 }

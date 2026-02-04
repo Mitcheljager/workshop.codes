@@ -14,7 +14,7 @@
 
   &--mild {
     background: theme(darker);
-    color: $text-color;
+    color: theme(text-color);
   }
 
   &--red,

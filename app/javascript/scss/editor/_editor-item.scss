@@ -13,7 +13,7 @@
   text-align: left;
 
   &:focus-visible {
-    outline: 2px inset $text-color-lightest;
+    outline: 2px inset theme(text-color-lightest);
     outline-offset: -2px;
     box-shadow: none;
   }
@@ -39,12 +39,12 @@
       box-shadow: -100px 0 0 theme(dark, -5%);
 
       input {
-        color: $text-color-lightest;
+        color: theme(text-color-lightest);
       }
     }
 
     input {
-      color: $text-color;
+      color: theme(text-color);
       pointer-events: none;
     }
   }
@@ -59,7 +59,7 @@
       box-shadow: -100px 0 0 theme(dark, -5%);
 
       input {
-        color: $text-color-lightest;
+        color: theme(text-color-lightest);
         pointer-events: all;
       }
     }
@@ -99,7 +99,7 @@
       filter: brightness(1.25);
 
       svg {
-        fill: $text-color-light;
+        fill: theme(text-color-light);
       }
     }
 
@@ -111,7 +111,7 @@
       display: block;
       height: 1rem;
       width: 1rem;
-      fill: $text-color;
+      fill: theme(text-color);
     }
   }
 }

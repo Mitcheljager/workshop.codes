@@ -37,9 +37,9 @@
 
 .log__timestamp {
   font-size: $font-size-small;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 }
 
 .log__content {
-  color: $text-color-light;
+  color: theme(text-color-light);
 }

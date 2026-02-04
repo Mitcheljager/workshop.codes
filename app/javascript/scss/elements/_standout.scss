@@ -96,7 +96,7 @@
 
     @include hover-stack {
       background: theme(dark, 2.5%);
-      color: $text-color-light;
+      color: theme(text-color-light);
     }
 
     &::before {
@@ -159,7 +159,7 @@
 }
 
 .standout__subtitle {
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 }
 
 .standout__heading {

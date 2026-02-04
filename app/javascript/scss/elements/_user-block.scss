@@ -22,7 +22,7 @@
   background: theme(dark);
   line-height: 1;
   font-weight: bold;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   text-decoration: none;
   transition: box-shadow 100ms;
 

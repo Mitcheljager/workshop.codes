@@ -146,7 +146,7 @@
     filter: drop-shadow(0 3px 2px rgba($black, .25));
 
     path {
-      fill: $text-color-lightest;
+      fill: theme(text-color-lightest);
     }
   }
 

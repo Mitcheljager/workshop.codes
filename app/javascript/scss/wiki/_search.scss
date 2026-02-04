@@ -43,7 +43,7 @@
 
   label {
     left: calc(#{ math.div($wiki-search-height, 2.5) });
-    color: $text-color;
+    color: theme(text-color);
     font-size: 0;
 
     @include media-min(sm) {
@@ -52,7 +52,7 @@
     }
 
     strong {
-      color: $text-color-lightest;
+      color: theme(text-color-lightest);
       font-size: 20px;
       font-weight: lighter;
 
