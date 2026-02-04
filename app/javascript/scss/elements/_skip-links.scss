@@ -11,7 +11,7 @@
     height: auto;
     width: fit-content;
     padding: $margin * 0.25;
-    background: $bg-dark;
+    background: theme(dark);
     border-radius: $border-radius;
     opacity: 1;
     z-index: 5;

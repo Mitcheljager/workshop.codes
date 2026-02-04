@@ -11,9 +11,9 @@
 
 .images-preview__item {
   position: relative;
-  background: $body-bg;
+  background: theme(body);
   cursor: grab;
-  color: $body-bg;
+  color: theme(body);
   border-radius: $border-radius * 0.5;
   overflow: hidden;
 
@@ -40,7 +40,7 @@
   right: 0;
   bottom: auto;
   padding: .25em;
-  background: $bg-dark;
+  background: theme(dark);
   color: $white;
   cursor: pointer;
 

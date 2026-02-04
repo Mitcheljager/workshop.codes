@@ -5,7 +5,7 @@ $ollie-login-size: 100px;
   height: $ollie-login-size;
   margin: 0 auto;
   border-radius: 50%;
-  background: lighten($bg-dark, 5%);
+  background: theme(dark, 5%);
   overflow: hidden;
 
   @include high-contrast() {

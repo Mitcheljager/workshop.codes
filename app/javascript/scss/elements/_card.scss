@@ -92,7 +92,7 @@
   padding: $margin * 0.25;
   border: 0;
   border-radius: $border-radius;
-  background: darken($bg-dark, 3.5%);
+  background: theme(dark, 3.5%);
   text-align: left;
   color: $text-color-lightest;
   text-decoration: none;
@@ -105,7 +105,7 @@
 
   &[href]:hover,
   &[type]:hover {
-    background: darken($bg-dark, 2%);
+    background: theme(dark, -2%);
     cursor: pointer;
 
     &::before {
@@ -140,7 +140,7 @@
     display: block;
     width: 100%;
     height: auto;
-    background: $body-bg;
+    background: theme(body);
     font-size: 12px;
     z-index: 1;
   }

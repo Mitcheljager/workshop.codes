@@ -1,7 +1,7 @@
 .CodeMirror {
   padding: 0;
   border: 0;
-  background: $bg-dark;
+  background: theme(dark);
   color: $text-color-lightest;
   min-height: 600px;
 
@@ -11,7 +11,7 @@
 
   .CodeMirror-selectedtext,
   .CodeMirror-selected {
-    background: lighten($bg-dark, 20%);
+    background: theme(dark, 20%);
   }
 
   .CodeMirror-code {

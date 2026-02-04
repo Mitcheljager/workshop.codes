@@ -90,7 +90,7 @@
   margin-left: .5rem;
   border: 0;
   border-radius: $border-radius * 0.5;
-  background: $body-bg;
+  background: theme(body);
   font-size: 10px;
   line-height: 1em;
   color: $text-color;
@@ -116,7 +116,7 @@
   width: 100%;
   padding: .35rem;
   margin-bottom: 2rem;
-  background: $bg-dark;
+  background: theme(dark);
   text-align: center;
   text-decoration: none;
   color: $text-color;

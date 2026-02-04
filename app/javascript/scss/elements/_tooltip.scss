@@ -17,7 +17,7 @@
   width: 200px;
   border-radius: $border-radius;
   transform: translateY(100%) translateX(-50%);
-  background: $bg-dark;
+  background: theme(dark);
   font-size: 12px;
   font-weight: normal;
   color: $text-color;

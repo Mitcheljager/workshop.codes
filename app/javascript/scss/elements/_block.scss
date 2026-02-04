@@ -1,7 +1,7 @@
 .content-block {
   display: block;
   padding: $margin * 0.5;
-  background: $bg-darker;
+  background: theme(darker);
   border-radius: $border-radius;
   text-align: left;
   color: $text-color;

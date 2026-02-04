@@ -113,7 +113,7 @@
   height: math.div(120px, 16) * 9;
   border-radius: $border-radius * 0.5;
   overflow: hidden;
-  background: $bg-dark;
+  background: theme(dark);
   box-shadow: $shadow;
 
   @include hover-stack {
@@ -145,7 +145,7 @@
     width: 100%;
     height: auto;
     font-size: 12px;
-    background: $bg-darker;
+    background: theme(darker);
   }
 }
 
@@ -366,7 +366,7 @@
   width: 100%;
   height: auto;
   aspect-ratio: 16/9;
-  background: $bg-darker;
+  background: theme(darker);
 }
 
 .item__author {
@@ -386,7 +386,7 @@
   height: 2rem;
   margin-right: math.div($margin, 6);
   border-radius: 50%;
-  background-color: $bg-darker;
+  background-color: theme(darker);
   background-size: 1rem;
   overflow: hidden;
 
@@ -482,7 +482,7 @@
         left: 0;
         top: 0;
         content: "•";
-        color: theme(primary, $primary);
+        color: theme(primary);
         padding-right: .5rem;
         transform: translateX(-100%);
       }
@@ -516,7 +516,7 @@
         left: 0;
         top: 0;
         content: counter(ordered-list) ".";
-        color: theme(primary, $primary);
+        color: theme(primary);
         padding-right: .5rem;
         transform: translateX(-100%);
       }
@@ -525,7 +525,7 @@
 
   iframe {
     max-width: 100%;
-    background: $bg-darker;
+    background: theme(darker);
 
     &[src*="gfycat"] {
       height: clamp(0px, calc((80vw - #{ $margin }) / 16 * 9), map-get($media-min-widths, lg) / 16 * 9);
@@ -558,7 +558,7 @@
   }
 
   hr {
-    background: lighten($bg-dark, 10%);
+    background: theme(dark, 10%);
   }
 }
 
@@ -569,6 +569,6 @@
   transform: translateX(-50%);
   height: 100%;
   width: 100vw;
-  background: $bg-darker;
+  background: theme(darker);
   z-index: -5;
 }

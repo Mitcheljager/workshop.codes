@@ -82,7 +82,7 @@
   gap: $margin * 0.125;
   padding: .5em .75em;
   margin-top: .25rem;
-  background: $bg-dark;
+  background: theme(dark);
   border-radius: $border-radius;
   cursor: pointer;
   color: $text-color-lightest;
@@ -90,16 +90,16 @@
   @include media-min(mbl) {
     background: transparent;
     padding: 0;
-    color: $bg-dark;
+    color: theme(dark);
   }
 
   @include hover-stack {
-    background: $bg-darker;
+    background: theme(darker);
     box-shadow: 0 0 0 2px $white;
     color: $white;
 
     @include media-min(mbl) {
-      color: $bg-darker;
+      color: theme(darker);
       background: transparent;
       box-shadow: none;
     }

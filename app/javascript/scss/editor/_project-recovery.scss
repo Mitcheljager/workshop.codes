@@ -6,6 +6,6 @@
   padding: $margin * 0.25;
   border: 2px solid $orange;
   border-radius: $border-radius;
-  background: darken($bg-dark, 10%);
+  background: theme(dark, -10%);
   box-shadow: $shadow;
 }

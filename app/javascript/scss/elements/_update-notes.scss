@@ -3,7 +3,7 @@
 .update-notes {
   margin: math.div($margin, 1.15) 0 $margin * 0.25;
   border: 2px solid lighten($border-color, 10%);
-  background: $body-bg;
+  background: theme(body);
 }
 
 .update-notes__header {
@@ -39,7 +39,7 @@
   width: 90px;
   height: 90px;
   left: $margin * 0.125;
-  background: $bg-darker;
+  background: theme(darker);
   border: 2px solid $text-color;
 
   img {

@@ -8,8 +8,8 @@
 }
 
 .cm-editor {
-  --indent-marker-bg-color: #{ lighten($bg-dark, 5%) };
-  --indent-marker-active-bg-color: #{ lighten($bg-dark, 15%) };
+  --indent-marker-bg-color: #{ theme(dark, 5%) };
+  --indent-marker-active-bg-color: #{ theme(dark, 15%) };
   color: $text-color-light;
 
   body[style*="--show-indent-markers: false"] & { // Hacky solution for css var based if statement
@@ -42,28 +42,28 @@
   }
 
   .cm-selectionBackground {
-    background: lighten($bg-dark, 10%) !important;
+    background: theme(dark, 10%) !important;
   }
 
   .cm-selectionMatch {
-    background: lighten($bg-dark, 10%);
+    background: theme(dark, 10%);
   }
 
   &.cm-focused .cm-selectionBackground {
-    background: lighten($bg-dark, 15%);
+    background: theme(dark, 15%);
   }
 
   .cm-searchMatch {
-    background: lighten($bg-dark, 10%);
+    background: theme(dark, 10%);
     box-shadow: 0 0 0 1px $primary;
   }
 
   .cm-searchMatch-selected {
-    background: darken($bg-dark, 10%);
+    background: theme(dark, -10%);
   }
 
   .cm-matchingBracket {
-    background: lighten($bg-dark, 20%) !important;
+    background: theme(dark, 20%) !important;
   }
 
   .cm-cursor {
@@ -98,14 +98,14 @@
   .cm-tooltip {
     border-radius: $border-radius * 0.5;
     border: 0;
-    background: darken($bg-dark, 5%);
+    background: theme(dark, -5%);
 
     &.cm-tooltip-hover {
       max-width: 25em;
       max-height: 15em;
       overflow-y: auto;
       border-radius: $border-radius * 0.5;
-      border: 1px solid $bg-darker;
+      border: 1px solid theme(darker);
       padding: $margin * 0.125;
       color: $text-color;
       font-size: 0.75rem;
@@ -116,7 +116,7 @@
     &.cm-completionInfo {
       margin: -2px 0 0 0.5em;
       border-radius: $border-radius * 0.5;
-      border: 1px solid $bg-darker;
+      border: 1px solid theme(darker);
       box-shadow: $shadow;
       background: $bg-dark !important;
     }
@@ -129,13 +129,13 @@
 
     > .cm-tooltip {
       padding: 0.35rem 0.5rem;
-      background: lighten($bg-dark, 5%);
+      background: theme(dark, 5%);
       color: $text-color-light;
       white-space: pre-wrap;
     }
 
     .cm-diagnostic {
-      background: $bg-darker;
+      background: theme(darker);
       border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
       color: $text-color-lightest;
       font-weight: bold;
@@ -144,7 +144,7 @@
 
     hr {
       margin: $margin * 0.125 0;
-      background-color: $bg-darker
+      background-color: theme(darker)
     }
 
     em {
@@ -170,7 +170,7 @@
 
   .cm-tooltip-autocomplete {
     border-radius: 0;
-    border: 1px solid $bg-darker;
+    border: 1px solid theme(darker);
     box-shadow: $shadow;
   }
 
@@ -179,7 +179,7 @@
   }
 
   .cm-tooltip-autocomplete ul li[aria-selected] {
-    background: lighten($bg-dark, 5%);
+    background: theme(dark, 5%);
   }
 
   .cm-lintRange-error {
@@ -246,11 +246,11 @@
       border: 0;
       border-radius: $border-radius * 0.25;
       font-size: $font-size-small;
-      background: lighten($bg-dark, 10%);
+      background: theme(dark, 10%);
       color: $text-color-lightest;
 
       &:focus {
-        background: lighten($bg-dark, 12.5%);
+        background: theme(dark, 12.5%);
         box-shadow: 0 0 0 2px rgba($white, 0.5);
         outline: 0;
       }
@@ -273,7 +273,7 @@
       margin-right: 0.25em;
       border: 0;
       border-radius: $border-radius * 0.25;
-      background: lighten($bg-dark, 5%);
+      background: theme(dark, 5%);
       font-size: $font-size-small;
       color: $text-color-light;
       text-transform: none;
@@ -281,7 +281,7 @@
 
       @include hover-stack {
         outline: 0;
-        background: lighten($bg-dark, 15%);
+        background: theme(dark, 15%);
         color: $text-color-lightest;
       }
     }
@@ -365,7 +365,7 @@
       padding: 0.25rem 0.5rem;
       border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
       border-left: 3px solid $text-color;
-      background: darken($bg-dark, 5%);
+      background: theme(dark, -5%);
       white-space: nowrap;
       line-height: 1;
       text-indent: 0;
@@ -379,7 +379,7 @@
     aspect-ratio: 1;
     line-height: 1;
     font-size: 0.75rem;
-    background-color: $bg-darker;
+    background-color: theme(darker);
     padding: 0.25rem;
     border-radius: 2px;
     cursor: pointer;

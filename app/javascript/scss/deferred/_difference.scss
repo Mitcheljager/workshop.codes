@@ -3,7 +3,7 @@
   justify-content: flex-end;
   min-height: 1rem;
   width: 100%;
-  background: $bg-dark;
+  background: theme(dark);
   font-size: $font-size-small;
 
   &--fixed {
@@ -29,7 +29,7 @@
   padding: 1rem;
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
-  background: $bg-darker;
+  background: theme(darker);
 }
 
 .diff{overflow:auto; counter-reset: diff; color: $text-color-light}

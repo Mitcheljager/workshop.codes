@@ -2,7 +2,7 @@
   position: relative;
   padding: $margin * 0.125;
   border-radius: $border-radius;
-  background: darken($bg-dark, 5%);
+  background: theme(dark, -5%);
   box-shadow: $shadow;
 
   &::before {

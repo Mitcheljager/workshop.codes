@@ -16,7 +16,7 @@ button {
     &::after {
       content: attr(data-tooltip);
       display: block;
-      background: $bg-dark;
+      background: theme(dark);
       position: absolute;
       right: 0;
       bottom: -0.25em;
@@ -36,7 +36,7 @@ button {
   padding: .5em 1.25em;
   border: 0;
   border-radius: 99px;
-  background: theme(primary, $primary);
+  background: theme(primary);
   color: $white;
   font-size: 19px;
   font-weight: bold;
@@ -95,18 +95,18 @@ button {
 
   &--dark {
     color: $text-color-lightest;
-    background: $bg-darker;
+    background: theme(darker);
   }
 
   &--light {
     background: $white;
-    color: $bg-dark;
+    color: theme(dark);
 
     &:hover:not([disabled]),
     &:active:not([disabled]),
     &:focus:not([disabled]) {
       box-shadow: 0 0 0 2px $white;
-      color: $bg-dark;
+      color: theme(dark);
     }
   }
 

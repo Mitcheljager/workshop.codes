@@ -2,7 +2,7 @@
 
 .form-input {
   display: inline-block;
-  background: $bg-dark;
+  background: theme(dark);
   width: 100%;
   padding: .5em 1em;
   border: 0;
@@ -18,7 +18,7 @@
   &:focus,
   &:focus-within {
     outline: none;
-    background: lighten($bg-dark, 5%);
+    background: theme(dark, 5%);
     box-shadow: 0 0 0 2px rgba($white, 0.25);
   }
 
@@ -49,10 +49,10 @@
   }
 
   .standout & {
-    background: darken($bg-dark, 5%);
+    background: theme(dark, -5%);
 
     &:focus {
-      background: darken($bg-dark, 2.5%);
+      background: theme(dark, 2.5%);
     }
   }
 }
@@ -143,7 +143,7 @@
   padding: math.div($margin, 3) 2.5em math.div($margin, 3) math.div($margin, 3);
   border: 0;
   border-radius: $border-radius * 0.5;
-  background: $bg-dark;
+  background: theme(dark);
   font-size: $font-size-base;
   color: $text-color;
   cursor: pointer;
@@ -158,7 +158,7 @@
 
   &:focus {
     outline: none;
-    background-color: lighten($bg-dark, 5%);
+    background-color: theme(dark, 5%);
     box-shadow: 0 0 0 2px rgba($white, 0.25);
   }
 
@@ -172,7 +172,7 @@
 
   option {
     color: $text-color;
-    background: $bg-dark;
+    background: theme(dark);
 
     &[disabled] {
       color: darken($gray, 20%);
@@ -211,7 +211,7 @@
     }
 
     &:checked {
-      background: theme(primary, $primary);
+      background: theme(primary);
       border: 0;
 
       @include high-contrast() {
@@ -237,7 +237,7 @@
       height: 1rem;
       width: 1rem;
       margin-right: .25rem;
-      background: $bg-darker;
+      background: theme(darker);
     }
 
     small {
@@ -384,13 +384,13 @@ input[type="file"] {
   &::-moz-range-track {
     height: 0.5rem;
     border-radius: 0.5rem;
-    background: $bg-darker;
+    background: theme(darker);
   }
 
   &::-moz-range-progress {
     height: 0.5rem;
     border-radius: 0.5rem 0 0 0.5rem;
-    background: theme(primary, $primary);
+    background: theme(primary);
   }
 }
 

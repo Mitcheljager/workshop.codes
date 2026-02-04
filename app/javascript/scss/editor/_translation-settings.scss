@@ -12,9 +12,9 @@
   flex-direction: column;
   gap: $margin * 0.125;
   padding: $margin * 0.25;
-  border-top: 2px solid darken($bg-dark, 5%);
+  border-top: 2px solid theme(dark, -5%);
   border-bottom-left-radius: $border-radius;
-  background: $bg-darker;
+  background: theme(darker);
 }
 
 .translation-settings__keys-container {

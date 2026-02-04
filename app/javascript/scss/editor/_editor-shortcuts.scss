@@ -8,8 +8,8 @@
   font-size: $font-size-small;
 
   &:hover {
-    background: lighten($bg-dark, 5%);
-    box-shadow: -0.5rem 0 0 lighten($bg-dark, 5%), 0.5rem 0 0 lighten($bg-dark, 5%);
+    background: theme(dark, 5%);
+    box-shadow: -0.5rem 0 0 theme(dark, 5%), 0.5rem 0 0 theme(dark, 5%);
     color: $text-color-light;
   }
 }

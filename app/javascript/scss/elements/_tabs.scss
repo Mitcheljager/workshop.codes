@@ -1,6 +1,6 @@
 .tabs {
   display: flex;
-  background: $bg-darker;
+  background: theme(darker);
   padding: 0 $margin * 0.25;
   margin: 0;
   overflow-x: auto;
@@ -21,7 +21,7 @@
   }
 
   &--light {
-    background: darken($bg-dark, 5%);
+    background: theme(dark, -5%);
   }
 
   &--buttons {
@@ -76,7 +76,7 @@
     color: $text-color-lightest;
 
     &::after {
-      background: theme(primary, $primary);
+      background: theme(primary);
       width: 100%;
       transition: width 50ms, background-color 50ms;
     }
@@ -98,7 +98,7 @@
     &:active,
     &:focus,
     &--active {
-      background: $bg-darker;
+      background: theme(darker);
       box-shadow: inset 0 0 0 2px $border-color;
 
       &::after {
@@ -157,6 +157,6 @@
 
 .tabs__floating {
   border-radius: 0;
-  box-shadow: 0 0 2.5rem 2.5rem $bg-darker;
+  box-shadow: 0 0 2.5rem 2.5rem theme(darker);
   z-index: 2;
 }

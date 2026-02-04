@@ -18,7 +18,7 @@
 
 .search-term {
   display: block;
-  background: lighten($bg-dark, 5%);
+  background: theme(dark, 5%);
   margin: .1em;
   padding: .5em .75em;
   font-size: $font-size-small;
@@ -29,7 +29,7 @@
 
   &:hover {
     color: $text-color-lightest;
-    background: lighten($bg-dark, 10%);
+    background: theme(dark, 10%);
   }
 
   &:nth-child(n+16) {

@@ -33,7 +33,7 @@
   padding-bottom: 1rem;
   border-bottom-left-radius: $search-height * 0.5;
   border-bottom-right-radius: $search-height * 0.5;
-  background: $bg-dark;
+  background: theme(dark);
   box-shadow: $shadow;
   transition: box-shadow var(--animation-duration);
   animation: fade-in-filter-content var(--animation-duration, 0ms) forwards;
@@ -81,11 +81,11 @@
   margin: .1rem 0;
   padding: .5rem .75rem;
   border-radius: $border-radius;
-  background: $bg-darker;
+  background: theme(darker);
   font-size: $font-size-small;
 
   &--active {
-    background: $body-bg;
+    background: theme(body);
 
     a {
       color: $text-color-lightest;
@@ -93,10 +93,10 @@
   }
 
   .filter__group--light & {
-    background: darken($bg-dark, 3%);
+    background: theme(dark, -3%);
 
     &--active {
-      background: $bg-dark;
+      background: theme(dark);
     }
   }
 
@@ -112,7 +112,7 @@
 .filter__button {
   padding: .5em .75em;
   border-radius: $border-radius;
-  background: $bg-dark;
+  background: theme(dark);
 }
 
 .filter__tray {
@@ -125,7 +125,7 @@
   margin-top: 1.5rem;
   border-bottom-left-radius: $search-height * 0.5;
   border-bottom-right-radius: $search-height * 0.5;
-  background: $bg-darker;
+  background: theme(darker);
 }
 
 .filter__link {

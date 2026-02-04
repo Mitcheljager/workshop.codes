@@ -11,7 +11,7 @@
   padding: math.div($margin, 6) 0;
   margin-bottom: auto;
   border: 0;
-  background: $bg-dark;
+  background: theme(dark);
   border-radius: $border-radius;
   font-family: $font-stack-alt;
   font-weight: bold;
@@ -36,7 +36,7 @@
   }
 
   .item--show & {
-    background: darken($bg-dark, 5%);
+    background: theme(dark, -5%);
   }
 
   .item--extra-small & {

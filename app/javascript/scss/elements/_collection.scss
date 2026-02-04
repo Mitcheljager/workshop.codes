@@ -5,7 +5,7 @@
   padding: $margin * 0.25;
   margin-bottom: $margin * 0.25;
   border-radius: $border-radius;
-  background: darken($bg-dark, 3.5%);
+  background: theme(dark, 3.5%);
   overflow: hidden;
   box-shadow: $shadow;
 }
@@ -20,7 +20,7 @@
   height: 100%;
   width: 100%;
   opacity: 0.35;
-  background: lighten($bg-dark, 10%);
+  background: theme(dark, 10%);
   mask-image: linear-gradient(to bottom, rgba($black, 1), rgba($black, 0));
 
   @include media-min(md) {

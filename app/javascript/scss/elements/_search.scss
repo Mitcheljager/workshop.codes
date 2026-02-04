@@ -11,14 +11,14 @@
     border-radius: $search-height * 0.5;
     transition: border-radius 100ms;
     transition-delay: 180ms;
-    background: $bg-darker;
+    background: theme(darker);
 
     @include media-min(sm) {
       padding-right: 6rem;
       width: 22.5vw;
       min-width: 280px;
       box-shadow: none;
-      background: $bg-dark;
+      background: theme(dark);
     }
 
     &::-webkit-search-decoration,
@@ -30,7 +30,7 @@
 
     &:focus {
       box-shadow: 0 0 0 2px $white;
-      background: lighten($bg-dark, 5%);
+      background: theme(dark, 5%);
     }
 
     &:placeholder-shown {
@@ -94,7 +94,7 @@
   transform: translateY(100%);
   border-bottom-left-radius: $search-height * 0.5;
   border-bottom-right-radius: $search-height * 0.5;
-  background: darken($bg-dark, 5%);
+  background: theme(dark, -5%);
   z-index: 1;
   overflow: hidden;
   transition: max-height 200ms, box-shadow 50ms;
@@ -145,7 +145,7 @@
   &:hover,
   &:active {
     color: $white;
-    background: $bg-dark;
+    background: theme(dark);
   }
 
   &:first-child {

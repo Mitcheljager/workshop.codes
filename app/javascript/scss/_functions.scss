@@ -1,3 +1,20 @@
-@function theme($key, $default) {
-  @return var(--#{$key}, $default);
+@function theme($key, $lightness: 0%) {
+  $default: $primary;
+
+  // Yeah... at least the function is nice and easy to use
+  @if ($key == dark) {
+    $default: $bg-dark;
+  } @else if ($key == darker) {
+    $default: $bg-darker;
+  } @else if ($key == body) {
+    $default: $bg-body;
+  } @else if ($key != primary) {
+    @error "Key is not supported"
+  }
+
+  $h: hue($default);
+  $s: saturation($default);
+  $l: lightness($default);
+
+  @return hsl(var(--#{$key}-h, $h), var(--#{$key}-s, $s), calc(var(--#{$key}-l, #{$l}) + #{$lightness}));
 }

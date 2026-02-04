@@ -20,7 +20,7 @@
   display: inline-block;
   margin: 0 0 $margin * 0.25;
   font-size: 18px;
-  color: theme(primary, $primary);
+  color: theme(primary);
   text-decoration: none;
 }
 
@@ -54,7 +54,7 @@
 
 .article__aside-content {
   margin-top: $margin;
-  background: $bg-darker;
+  background: theme(darker);
   padding: $margin * 0.25;
   border-radius: $border-radius;
   font-size: $font-size-small;

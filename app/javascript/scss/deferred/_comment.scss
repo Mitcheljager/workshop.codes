@@ -10,7 +10,7 @@
 
 @keyframes post-comment-has-been-added {
   from {
-    background: lighten($bg-dark, 10%);
+    background: theme(dark, 10%);
   }
 }
 
@@ -18,7 +18,7 @@
   margin-bottom: $margin * 0.25;
   padding: math.div($margin, 6);
   border-radius: $border-radius * 0.5;
-  background: $bg-dark;
+  background: theme(dark);
 
   @include media-min(sm) {
     padding: $margin * 0.25;
@@ -30,7 +30,7 @@
 
   .post-comment {
     margin-top: $margin * 0.25;
-    background: darken($bg-dark, 3.5%);
+    background: theme(dark, 3.5%);
 
     &:last-child {
       border-bottom: 0;

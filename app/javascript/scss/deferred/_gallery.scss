@@ -17,7 +17,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: $bg-darker;
+  background: theme(darker);
   border-radius: $border-radius;
   overflow: hidden;
   cursor: pointer;

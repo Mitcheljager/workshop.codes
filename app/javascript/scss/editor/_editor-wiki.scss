@@ -15,7 +15,7 @@
   padding: $margin * 0.25;
   border-radius: $border-radius;
   transform: translateY(100%);
-  background: $bg-darker;
+  background: theme(darker);
   box-shadow: $shadow;
   z-index: 10;
 }
