@@ -28,7 +28,8 @@
 
   // Pretty hacky solution to make header more accessible when header image is too dark.
   // This beats having 4 different selectors in 4 different places.
-  .wiki &,
+  .theme-wiki &,
+  .theme-talon &,
   &.header--light {
     @include media-min(mbl) {
       .navigation__item {

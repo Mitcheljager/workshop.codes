@@ -41,12 +41,14 @@
 
   --cog-color: #{rgba($white, 0.15)};
 
-  .navigation__item {
-    --color: #{$white};
-    --discord-drop-shadow: none;
-  }
-
   .body-bg {
     background: theme(body, -2%);
   }
+}
+
+.theme-wiki {
+  --primary: #{$wiki};
+  --primary-h: #{hue($wiki)};
+  --primary-s: #{saturation($wiki)};
+  --primary-l: #{lightness($wiki)};
 }
