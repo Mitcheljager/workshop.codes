@@ -263,7 +263,7 @@ input[type="checkbox"] {
 input[type="file"] {
   width: 100%;
   padding: .5rem;
-  border: 1px solid $border-color;
+  border: 1px solid theme(border);
   margin-top: $margin * 0.25;
 }
 
@@ -396,7 +396,7 @@ input[type="file"] {
 
 .color-input {
   padding: 0;
-  border: 1px solid $border-color;
+  border: 1px solid theme(border);
 }
 
 input[type="submit"] {

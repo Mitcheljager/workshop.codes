@@ -2,7 +2,7 @@
 
 .update-notes {
   margin: math.div($margin, 1.15) 0 $margin * 0.25;
-  border: 2px solid lighten($border-color, 10%);
+  border: 2px solid theme(border, 10%);
   background: theme(body);
 }
 

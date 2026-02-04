@@ -4,7 +4,7 @@
   font-size: 12px;
   margin-top: $margin * 0.5;
   padding: math.div($margin, 6) 0;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid theme(border);
 
   @include media-min(md) {
     display: flex;

@@ -8,6 +8,8 @@
     $color: $bg-darker;
   } @else if ($key == body) {
     $color: $bg-body;
+  } @else if ($key == border) {
+    $color: $border-color;
   } @else if ($key != primary) {
     @error "Key is not supported"
   }

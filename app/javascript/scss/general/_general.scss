@@ -15,7 +15,7 @@
   --bg-body: #{ theme(body) };
   --bg-dark: #{ $bg-dark };
   --bg-darker: #{ theme(darker) };
-  --border-color: #{ $border-color };
+  --border-color: #{ theme(border) };
   --border-radius: #{ $border-radius };
   --shadow: #{ $shadow };
   --font-size-base: #{ $font-size-base };
@@ -91,7 +91,7 @@ hr {
   height: 1px;
   margin: $margin 0;
   border: 0;
-  background: $border-color;
+  background: theme(border);
 
   &.small {
     margin: $margin * 0.5 0;

@@ -4,7 +4,7 @@
   display: block;
   padding: $margin * 0.25 0;
   margin: 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid theme(border);
   font-size: 18px;
   font-weight: lighter;
   color: $text-color;
@@ -14,7 +14,7 @@
   }
 
   &:first-child {
-    border-top: 1px solid $border-color;
+    border-top: 1px solid theme(border);
   }
 
   &[href],

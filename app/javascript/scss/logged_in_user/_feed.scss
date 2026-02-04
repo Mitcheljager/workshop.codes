@@ -1,6 +1,6 @@
 .feed__item {
   padding: $margin * 0.5 0;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid theme(border);
 
   @include media-min(md) {
     display: grid;

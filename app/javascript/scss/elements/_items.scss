@@ -4,7 +4,7 @@
   position: relative;
 
   .item:last-of-type {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid theme(border);
   }
 }
 
@@ -42,7 +42,7 @@
     "title title favorite"
     "details details details";
   grid-template-columns: 50% calc(50% - #{ $favorite-width }) $favorite-width;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid theme(border);
   margin-bottom: math.div($margin, 3);
   padding-top: math.div($margin, 3);
 
@@ -425,11 +425,11 @@
 
   summary {
     padding: math.div($margin, 6);
-    border: 1px solid $border-color;
+    border: 1px solid theme(border);
     cursor: pointer;
 
     @include hover-stack {
-      border-color: lighten($border-color, 10%);
+      border-color: theme(border, 10%);
     }
 
     &:focus {

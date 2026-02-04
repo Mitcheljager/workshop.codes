@@ -49,13 +49,13 @@
   width: 100%;
   padding: $margin * 0.125 0;
   border: 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid theme(border);
   background: transparent;
   font-family: $font-stack;
   text-align: left;
 
   &:first-of-type {
-    border-top: 1px solid $border-color;
+    border-top: 1px solid theme(border);
   }
 
   button {

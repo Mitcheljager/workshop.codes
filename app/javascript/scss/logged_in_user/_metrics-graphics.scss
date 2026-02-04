@@ -43,7 +43,7 @@ text.mg-barplot-group-label {
 .mg-baselines line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 
@@ -59,7 +59,7 @@ text.mg-barplot-group-label {
 }
 
 .mg-category-guides line {
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
 }
 
 .mg-header {
@@ -69,13 +69,13 @@ text.mg-barplot-group-label {
 }
 
 .mg-header .mg-chart-description {
-  fill: $border-color;
+  fill: theme(border);
   font-family: FontAwesome;
   font-size: 1.2rem;
 }
 
 .mg-header .mg-warning {
-  fill: $border-color;
+  fill: theme(border);
   font-family: FontAwesome;
   font-size: 1.2rem;
 }
@@ -107,7 +107,7 @@ text.mg-barplot-group-label {
 }
 
 .mg-data-table thead tr th .fa {
-  color: $border-color;
+  color: theme(border);
   padding-left: 4px;
 }
 
@@ -144,7 +144,7 @@ text.mg-barplot-group-label {
   fill: none;
   opacity: 0.7;
   shape-rendering: auto;
-  stroke: $border-color;
+  stroke: theme(border);
 }
 
 tspan.hist-symbol {
@@ -336,7 +336,7 @@ tspan.hist-symbol {
 .mg-markers line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 
@@ -372,7 +372,7 @@ path.mg-main-area {
 }
 
 path.mg-confidence-band {
-  fill: $border-color;
+  fill: theme(border);
   opacity: 0.8;
   stroke: none;
 }
@@ -426,7 +426,7 @@ tspan.mg-points-mono {
 .mg-y-axis line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 
@@ -469,7 +469,7 @@ tspan.mg-points-mono {
 .mg-year-marker line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 

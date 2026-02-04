@@ -21,7 +21,7 @@
 
 .difference-header__item {
   padding: .5rem .75rem;
-  border-left: 1px solid lighten($border-color, 10%);
+  border-left: 1px solid theme(border, 10%);
   text-decoration: none;
 }
 

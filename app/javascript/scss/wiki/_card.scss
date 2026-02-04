@@ -19,7 +19,7 @@
 .wiki-card__item {
   display: block;
   padding: $margin * 0.25 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid theme(border);
   font-size: $font-size-small;
   color: $text-color;
 
