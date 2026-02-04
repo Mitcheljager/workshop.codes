@@ -39,7 +39,7 @@
 
   --text-theme-header: #{$white};
 
-  --cog-color: #{$white};
+  --cog-color: #{rgba($white, 0.15)};
 
   .navigation__item {
     --color: #{$white};
