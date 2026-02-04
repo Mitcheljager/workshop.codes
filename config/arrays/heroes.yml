@@ -2,6 +2,10 @@
   name: D.va
   category: Tank
 -
+  name: Domina
+  category: Tank
+  overwatch_2: true
+-
   name: Doomfist
   category: Tank
 -
@@ -42,6 +46,10 @@
   name: Zarya
   category: Tank
 -
+  name: Anran
+  category: Damage
+  overwatch_2: true
+-
   name: Ashe
   category: Damage
 -
@@ -53,6 +61,10 @@
 -
   name: Echo
   category: Damage
+-
+  name: Emre
+  category: Damage
+  overwatch_2: true
 -
   name: Freja
   category: Damage
@@ -119,6 +131,10 @@
   category: Support
   overwatch_2: true
 -
+  name: Jetpack Cat
+  category: Support
+  overwatch_2: true
+-
   name: Juno
   category: Support
   overwatch_2: true
@@ -136,6 +152,10 @@
 -
   name: Mercy
   category: Support
+-
+  name: Mizuki
+  category: Support
+  overwatch_2: true
 -
   name: Moira
   category: Support
