@@ -74,7 +74,7 @@ a {
 
 mark {
   background: transparent;
-  color: var(--primary, $primary);
+  color: theme(primary, $primary);
 
   @include high-contrast() {
     color: $black;

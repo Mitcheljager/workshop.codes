@@ -1,0 +1,3 @@
+@function theme($key, $default) {
+  @return var(--#{$key}, $default);
+}

@@ -209,7 +209,7 @@
 
 .fa-highlight::before {
   content: "h";
-  color: var(--primary, $primary);
+  color: theme(primary, $primary);
 }
 
 .fa-code::before {
@@ -279,7 +279,7 @@
 }
 
 .editor-toolbar button[title*="Toggle Preview"] {
-  background: var(--primary, $primary);
+  background: theme(primary, $primary);
 
   &.active {
     filter: brightness(1.15);

@@ -20,7 +20,7 @@
   display: inline-block;
   margin: 0 0 $margin * 0.25;
   font-size: 18px;
-  color: var(--primary, $primary);
+  color: theme(primary, $primary);
   text-decoration: none;
 }
 

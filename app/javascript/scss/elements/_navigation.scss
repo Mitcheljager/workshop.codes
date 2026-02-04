@@ -63,7 +63,7 @@
   &--active {
     &::before,
     &:hover::before {
-      background: var(--primary, $primary);
+      background: theme(primary, $primary);
     }
 
     @include high-contrast() {

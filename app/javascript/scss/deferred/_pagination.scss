@@ -60,6 +60,6 @@
 
 .next a,
 .pagination .pagination__control--next {
-  background: var(--primary, $primary);
+  background: theme(primary, $primary);
   color: $white;
 }

@@ -211,7 +211,7 @@
     }
 
     &:checked {
-      background: var(--primary, $primary);
+      background: theme(primary, $primary);
       border: 0;
 
       @include high-contrast() {
@@ -390,7 +390,7 @@ input[type="file"] {
   &::-moz-range-progress {
     height: 0.5rem;
     border-radius: 0.5rem 0 0 0.5rem;
-    background: var(--primary, $primary);
+    background: theme(primary, $primary);
   }
 }
 

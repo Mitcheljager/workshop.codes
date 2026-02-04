@@ -482,7 +482,7 @@
         left: 0;
         top: 0;
         content: "•";
-        color: var(--primary, $primary);
+        color: theme(primary, $primary);
         padding-right: .5rem;
         transform: translateX(-100%);
       }
@@ -516,7 +516,7 @@
         left: 0;
         top: 0;
         content: counter(ordered-list) ".";
-        color: var(--primary, $primary);
+        color: theme(primary, $primary);
         padding-right: .5rem;
         transform: translateX(-100%);
       }

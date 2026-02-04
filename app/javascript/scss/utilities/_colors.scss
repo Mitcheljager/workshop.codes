@@ -3,7 +3,7 @@ $text-colors: (
   lightest: $text-color-lightest,
   light: $text-color-light,
   dark: $text-color-dark,
-  primary: var(--primary, $primary),
+  primary: theme(primary, $primary),
   discord: $discord,
   bnet: $bnet,
   wiki: $wiki,
@@ -33,7 +33,7 @@ $text-colors: (
 }
 
 $bg-colors: (
-  primary: var(--primary, $primary),
+  primary: theme(primary, $primary),
   dark: $bg-dark,
   darker: $bg-darker,
   overwatch-2: $overwatch-2,
