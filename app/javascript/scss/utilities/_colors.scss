@@ -26,6 +26,16 @@ $text-colors: (
   }
 }
 
+.text-theme-header {
+  color: var(--text-theme-header, $black);
+}
+
+.sm\:text-theme-header {
+  @include media-min(sm) {
+    color: var(--text-theme-header, $black);
+  }
+}
+
 .sm\:text-black {
   @include media-min(sm) {
     color: $black;

@@ -36,4 +36,17 @@
   --text-color-dark-h: 10;
   --text-color-dark-s: 3%;
   --text-color-dark-l: 45%;
+
+  --text-theme-header: #{$white};
+
+  --cog-color: #{$white};
+
+  .navigation__item {
+    --color: #{$white};
+    --discord-drop-shadow: none;
+  }
+
+  .body-bg {
+    background: theme(body, -2%);
+  }
 }

@@ -1,21 +1,39 @@
 <div class="body-bg body-bg--<%= yield(:bg_size) %>">
   <picture>
     <% if yield(:replace_body_bg).blank? %>
-      <source
-        srcset="
-          <%= image_path "layout/header-bg_sm.webp" %> 640w,
-          <%= image_path "layout/header-bg_md.webp" %> 960w,
-          <%= image_path "layout/header-bg_lg.webp" %> 1920w"
-        type="image/webp">
+      <% if theme == "talon" %>
+        <source
+          srcset="
+            <%= image_path "layout/header-bg-talon_sm.webp" %> 640w,
+            <%= image_path "layout/header-bg-talon_md.webp" %> 960w,
+            <%= image_path "layout/header-bg-talon_lg.webp" %> 1920w"
+          type="image/webp">
 
-      <source
-        srcset="
-          <%= image_path "layout/header-bg_sm.jpg" %> 640w,
-          <%= image_path "layout/header-bg_md.jpg" %> 960w,
-          <%= image_path "layout/header-bg_lg.jpg" %> 1920w"
-        type="image/jpeg">
+        <source
+          srcset="
+            <%= image_path "layout/header-bg-talon_sm.jpg" %> 640w,
+            <%= image_path "layout/header-bg-talon_md.jpg" %> 960w,
+            <%= image_path "layout/header-bg-talon_lg.jpg" %> 1920w"
+          type="image/jpeg">
 
-      <%= image_tag "layout/header-bg_lg.jpg", alt: "", height: 400, width: 1920, fetchpriority: "high" %>
+        <%= image_tag "layout/header-bg-talon_lg.jpg", alt: "", height: 400, width: 1920, fetchpriority: "high" %>
+      <% else %>
+        <source
+          srcset="
+            <%= image_path "layout/header-bg_sm.webp" %> 640w,
+            <%= image_path "layout/header-bg_md.webp" %> 960w,
+            <%= image_path "layout/header-bg_lg.webp" %> 1920w"
+          type="image/webp">
+
+        <source
+          srcset="
+            <%= image_path "layout/header-bg_sm.jpg" %> 640w,
+            <%= image_path "layout/header-bg_md.jpg" %> 960w,
+            <%= image_path "layout/header-bg_lg.jpg" %> 1920w"
+          type="image/jpeg">
+
+        <%= image_tag "layout/header-bg_lg.jpg", alt: "", height: 400, width: 1920, fetchpriority: "high" %>
+      <% end %>
     <% elsif yield(:replace_body_bg) == "user" %>
       <source
         srcset="
