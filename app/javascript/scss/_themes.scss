@@ -1,0 +1,20 @@
+.theme-talon {
+  background: theme(body) url("/images/layout/pattern-bg-talon.webp");
+
+  --primary: #{$talon};
+  --primary-h: #{hue($talon)};
+  --primary-s: #{saturation($talon)};
+  --primary-l: #{lightness($talon)};
+
+  --body-h: 0;
+  --body-s: 3%;
+  --body-l: 8%;
+
+  --dark-h: 10;
+  --dark-s: 3%;
+  --dark-l: 11%;
+
+  --darker-h: 10;
+  --darker-s: 3%;
+  --darker-l: 6%;
+}

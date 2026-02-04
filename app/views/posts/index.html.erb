@@ -8,7 +8,7 @@
 
   <%= render "on_fire_carousel" %>
 
-  <div class="logo-background" style="--image-data-uri: url(<%= svg_data_uri("layout/overwatch-logo.svg") %>)">
+  <div class="logo-background" style="--image-data-uri: url(<%= theme == "talon" ? svg_data_uri("layout/talon-logo.svg") : svg_data_uri("layout/overwatch-logo.svg") %>)">
     <%= render "filter/quick_filter" %>
 
     <%= render "application/banners/workshop_crap" if ENV["BANNER_ROOT"] == "Workshop_Crap" %>

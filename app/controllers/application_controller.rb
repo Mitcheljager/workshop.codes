@@ -36,6 +36,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method :theme
+
+  def theme
+    cookies[:theme] || "overwatch"
+  end
+
   helper_method :set_request_headers
 
   def set_request_headers

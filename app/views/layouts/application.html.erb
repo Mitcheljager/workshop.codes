@@ -56,10 +56,13 @@
     <% end %>
   </head>
 
-  <body class="<%= "wiki" if is_wiki? %>">
+  <body class="theme-<%= theme %> <%= "wiki" if is_wiki? %>">
     <%= render "flash" %>
     <%= render "header" unless is_editor? %>
     <%= render "wiki/header" if is_wiki? %>
+
+    <%= button_to "Overwatch", theme_switch_path("overwatch"), method: :post %>
+    <%= button_to "Talon", theme_switch_path("talon"), method: :post %>
 
     <div class="wrapper <%= "wrapper--large" if is_admin_controller? %>">
       <%= yield %>

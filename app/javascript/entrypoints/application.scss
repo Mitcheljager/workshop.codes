@@ -2,6 +2,8 @@
         "@scss/functions",
         "@scss/mixins";
 
+@import "@scss/themes";
+
 // Aliases don't work for glob imports
 @import "../scss/general/*";
 @import "../scss/elements/*";
