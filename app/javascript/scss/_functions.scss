@@ -1,25 +1,24 @@
+@use "sass:map";
+
 @function theme($key, $lightness: 0%) {
   $color: $primary;
 
-  // Yeah... at least the function is nice and easy to use
-  @if ($key == dark) {
-    $color: $bg-dark;
-  } @else if ($key == darker) {
-    $color: $bg-darker;
-  } @else if ($key == body) {
-    $color: $bg-body;
-  } @else if ($key == border) {
-    $color: $border-color;
-  } @else if ($key == text-color) {
-    $color: $text-color;
-  } @else if ($key == text-color-light) {
-    $color: $text-color-light;
-  } @else if ($key == text-color-lightest) {
-    $color: $text-color-lightest;
-  } @else if ($key == text-color-dark) {
-    $color: $text-color-dark;
-  } @else if ($key != primary) {
-    @error "Key is not supported"
+  $colors: (
+    primary: $primary,
+    dark: $bg-dark,
+    darker: $bg-darker,
+    body: $bg-body,
+    border: $border-color,
+    'text-color': $text-color,
+    'text-color-light': $text-color-light,
+    'text-color-lightest': $text-color-lightest,
+    'text-color-dark': $text-color-dark
+  );
+
+  @if map.has-key($colors, $key) {
+    $color: map.get($colors, $key);
+  } @else {
+    @error "Key '#{$key}' is not supported";
   }
 
   $h: hue($color);
