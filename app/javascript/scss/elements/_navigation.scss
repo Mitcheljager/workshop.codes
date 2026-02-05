@@ -28,6 +28,7 @@
   font-family: $font-stack-alt;
   text-transform: uppercase;
   font-size: 24px;
+  white-space: nowrap;
 
   @include media-min(mbl) {
     --color: #{theme(body)};
