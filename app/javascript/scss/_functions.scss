@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 
 @function theme($key, $lightness: 0%) {
   $color: $primary;
@@ -21,9 +22,9 @@
     @error "Key '#{$key}' is not supported";
   }
 
-  $h: hue($color);
-  $s: saturation($color);
-  $l: lightness($color);
+  $h: math.round(hue($color));
+  $s: math.round(saturation($color));
+  $l: math.round(lightness($color));
 
   @return hsl(var(--#{$key}-h, $h), var(--#{$key}-s, $s), calc(var(--#{$key}-l, #{$l}) + #{$lightness}));
 }
