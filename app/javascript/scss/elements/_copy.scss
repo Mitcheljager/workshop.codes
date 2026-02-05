@@ -5,7 +5,7 @@
   cursor: pointer;
 
   path {
-    fill: $text-color-dark;
+    fill: theme(text-color-dark);
   }
 
   @include hover-stack {
@@ -35,7 +35,7 @@
   width: 100%;
   padding: 0 .5em;
   border-radius: $border-radius * 0.5;
-  background: $primary;
+  background: theme(primary);
   font-weight: normal;
   font-size: 16px;
   line-height: 1em;

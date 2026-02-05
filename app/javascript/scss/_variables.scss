@@ -17,16 +17,16 @@ $red: #b33834;
 $orange: #e89930;
 $green: #3fbf74;
 
-$body-bg: #1f2326;
+$bg-body: #1f2326;
 $bg-dark: #2e3337;
-$bg-darker: darken($body-bg, 5%);
+$bg-darker: darken($bg-body, 5%);
 $border-color: #353b3f;
 
 $primary: #f06414;
-$secondary: lighten($body-bg, 5%);
 $discord: #5865f2;
 $bnet: #0074e0;
 $overwatch-2: #ed6516;
+$talon: #e30303;
 $wiki: #00abff;
 $logo-cog: #565a5d;
 

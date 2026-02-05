@@ -56,7 +56,7 @@
     <% end %>
   </head>
 
-  <body class="<%= "wiki" if is_wiki? %>">
+  <body class="<%= "theme-#{ theme }" unless is_wiki? || is_editor? %> <%= "theme-wiki" if is_wiki? %>">
     <%= render "flash" %>
     <%= render "header" unless is_editor? %>
     <%= render "wiki/header" if is_wiki? %>

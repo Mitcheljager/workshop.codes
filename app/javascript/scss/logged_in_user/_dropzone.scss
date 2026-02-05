@@ -5,7 +5,7 @@
   justify-content: center;
   width: 100%;
   min-height: 200px;
-  border: 2px dashed $border-color;
+  border: 2px dashed theme(border);
   padding: clamp($margin / 2, 10vw, $margin);
   text-align: center;
   font-size: 18px;
@@ -13,8 +13,8 @@
   transition: box-shadow 100ms, background-color 100ms;
 
   &--is-active {
-    background: $body-bg;
-    border: 2px solid $border-color;
+    background: theme(body);
+    border: 2px solid theme(border);
     box-shadow: 0 10px 30px 0 rgba($black, .25), 0 3px 6px 0 rgba($black, .25);
   }
 
@@ -23,7 +23,7 @@
   }
 
   span {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 
@@ -57,7 +57,7 @@
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
-    border: 2px dashed $text-color;
+    border: 2px dashed theme(text-color);
     z-index: 2;
     box-sizing: border-box;
     pointer-events: none;

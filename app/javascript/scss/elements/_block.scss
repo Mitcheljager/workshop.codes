@@ -1,10 +1,10 @@
 .content-block {
   display: block;
   padding: $margin * 0.5;
-  background: $bg-darker;
+  background: theme(darker);
   border-radius: $border-radius;
   text-align: left;
-  color: $text-color;
+  color: theme(text-color);
 }
 
 .content-block__title {
@@ -33,7 +33,7 @@
   }
 
   &[href] {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     @include hover-stack {

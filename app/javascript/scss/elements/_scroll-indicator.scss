@@ -16,8 +16,8 @@
   left: auto;
   width: 1.5rem;
   height: 100%;
-  background: rgba(darken($body-bg, 5%), .85);
-  box-shadow: 0 0 1.5rem 1.5rem rgba(darken($body-bg, 5%), .85);
+  background: rgba(darken($bg-body, 5%), .85);
+  box-shadow: 0 0 1.5rem 1.5rem rgba(darken($bg-body, 5%), .85);
   z-index: 2;
   pointer-events: none;
   opacity: 0;
@@ -36,7 +36,7 @@
     height: 1rem;
 
     path {
-      fill: $text-color;
+      fill: theme(text-color);
     }
   }
 }

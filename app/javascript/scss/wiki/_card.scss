@@ -19,16 +19,16 @@
 .wiki-card__item {
   display: block;
   padding: $margin * 0.25 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid theme(border);
   font-size: $font-size-small;
-  color: $text-color;
+  color: theme(text-color);
 
   &:last-of-type {
     margin-bottom: math.div($margin, 3);
   }
 
   a {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     @include hover-stack {

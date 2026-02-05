@@ -13,8 +13,8 @@
   }
 
   &--mild {
-    background: $bg-darker;
-    color: $text-color;
+    background: theme(darker);
+    color: theme(text-color);
   }
 
   &--red,

@@ -18,7 +18,7 @@
   display: block;
   margin: .25rem 0;
   font-weight: bold;
-  color: $text-color;
+  color: theme(text-color);
   font-family: $font-stack-alt;
   text-decoration: none;
   text-transform: uppercase;
@@ -37,7 +37,7 @@
   }
 
   &--active {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 
@@ -49,7 +49,7 @@
   width: 140px;
   margin: 0 auto;
   border-radius: 50%;
-  background: darken($bg-dark, 5%);
+  background: theme(dark, -5%);
   overflow: hidden;
   z-index: 1;
 
@@ -99,7 +99,7 @@
     padding: $margin * 0.25;
     border-radius: $border-radius;
     margin: 0 0 $margin * 0.25;
-    background: $bg-dark;
+    background: theme(dark);
     text-align: left;
   }
 
@@ -127,7 +127,7 @@
 .profile-banner__title {
   display: block;
   margin: $margin * 0.25 0 .1em;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-weight: bold;
   font-size: 32px;
   text-decoration: none;
@@ -146,7 +146,7 @@
     color: $white;
 
     .profile-banner__verified path {
-      fill: $text-color-dark;
+      fill: theme(text-color-dark);
     }
   }
 }
@@ -157,7 +157,7 @@
   width: .7em;
 
   path {
-    fill: lighten($bg-dark, 15%);
+    fill: theme(dark, 15%);
   }
 }
 
@@ -197,7 +197,7 @@
   top: 0;
   width: 280px;
   height: min(280px, 100%);
-  background: lighten($bg-dark, 10%);
+  background: theme(dark, -10%);
   filter: blur(50px);
   opacity: 0.2;
   z-index: 0;

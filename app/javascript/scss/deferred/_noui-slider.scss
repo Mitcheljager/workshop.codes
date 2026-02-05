@@ -122,9 +122,9 @@
   * Giving the connect element a border radius causes issues with using transform: scale
   */
 .noUi-target {
-  background: $body-bg;
+  background: theme(body);
   border-radius: 4px;
-  border: 1px solid $border-color;
+  border: 1px solid theme(border);
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -148,9 +148,9 @@
 }
 
 .noUi-handle {
-  border: 1px solid $text-color-lightest;
+  border: 1px solid theme(text-color-lightest);
   border-radius: 50%;
-  background: $text-color-lightest;
+  background: theme(text-color-lightest);
   cursor: pointer;
 
   @include focus-visible-outline;
@@ -213,7 +213,7 @@
 
 .noUi-pips {
   position: absolute;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 }
 
 /* Values;

@@ -1,5 +1,5 @@
 .mg-active-datapoint {
-  fill: $text-color-lightest;
+  fill: theme(text-color-lightest);
   font-size: $font-size-small;
   font-weight: 400;
 }
@@ -43,12 +43,12 @@ text.mg-barplot-group-label {
 .mg-baselines line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 
 .mg-baselines text {
-  fill: $text-color;
+  fill: theme(text-color);
   font-size: 0.9rem;
   opacity: 0.6;
   stroke: none;
@@ -59,23 +59,23 @@ text.mg-barplot-group-label {
 }
 
 .mg-category-guides line {
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
 }
 
 .mg-header {
   cursor: default;
   font-size: 1rem;
-  fill: $text-color-lightest;
+  fill: theme(text-color-lightest);
 }
 
 .mg-header .mg-chart-description {
-  fill: $border-color;
+  fill: theme(border);
   font-family: FontAwesome;
   font-size: 1.2rem;
 }
 
 .mg-header .mg-warning {
-  fill: $border-color;
+  fill: theme(border);
   font-family: FontAwesome;
   font-size: 1.2rem;
 }
@@ -107,7 +107,7 @@ text.mg-barplot-group-label {
 }
 
 .mg-data-table thead tr th .fa {
-  color: $border-color;
+  color: theme(border);
   padding-left: 4px;
 }
 
@@ -144,7 +144,7 @@ text.mg-barplot-group-label {
   fill: none;
   opacity: 0.7;
   shape-rendering: auto;
-  stroke: $border-color;
+  stroke: theme(border);
 }
 
 tspan.hist-symbol {
@@ -336,12 +336,12 @@ tspan.hist-symbol {
 .mg-markers line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 
 .mg-markers text {
-  fill: $text-color;
+  fill: theme(text-color);
   font-size: 0.8rem;
   opacity: 0.6;
 }
@@ -372,7 +372,7 @@ path.mg-main-area {
 }
 
 path.mg-confidence-band {
-  fill: $border-color;
+  fill: theme(border);
   opacity: 0.8;
   stroke: none;
 }
@@ -419,21 +419,21 @@ tspan.mg-points-mono {
 
 .mg-x-rug-mono,
 .mg-y-rug-mono {
-  stroke: $text-color;
+  stroke: theme(text-color);
 }
 
 .mg-x-axis line,
 .mg-y-axis line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 
 .mg-x-axis text,
 .mg-y-axis text,
 .mg-histogram .axis text {
-  fill: $text-color;
+  fill: theme(text-color);
   font-size: 12px;
   opacity: 0.6;
 }
@@ -461,7 +461,7 @@ tspan.mg-points-mono {
 }
 
 .mg-year-marker text {
-  fill: $text-color;
+  fill: theme(text-color);
   font-size: 0.7rem;
   opacity: 0.6;
 }
@@ -469,7 +469,7 @@ tspan.mg-points-mono {
 .mg-year-marker line {
   opacity: 1;
   shape-rendering: auto;
-  stroke: lighten($border-color, 10%);
+  stroke: theme(border, 10%);
   stroke-width: 1px;
 }
 

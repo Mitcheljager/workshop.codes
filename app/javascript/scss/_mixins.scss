@@ -27,7 +27,7 @@
   }
 }
 
-@mixin styled-scrollbar($background: $bg-dark, $thumb-color: $text-color) {
+@mixin styled-scrollbar($background: theme(dark), $thumb-color: $text-color) {
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -46,7 +46,7 @@
   }
 
   &::-webkit-scrollbar-corner {
-    background: $bg-dark;
+    background: theme(dark);
   }
 }
 
@@ -67,7 +67,7 @@
   background: transparent;
   font-family: $font-stack;
   font-size: $font-size-base;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 }
 
 @mixin motion() {

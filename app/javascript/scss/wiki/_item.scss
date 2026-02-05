@@ -4,22 +4,22 @@
   display: block;
   padding: $margin * 0.25 0;
   margin: 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid theme(border);
   font-size: 18px;
   font-weight: lighter;
-  color: $text-color;
+  color: theme(text-color);
 
   @include media-min(md) {
     font-size: 21px;
   }
 
   &:first-child {
-    border-top: 1px solid $border-color;
+    border-top: 1px solid theme(border);
   }
 
   &[href],
   a {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     @include hover-stack {
@@ -34,7 +34,7 @@
 
   small {
     margin-left: .5em;
-    color: $text-color;
+    color: theme(text-color);
     font-size: $font-size-base;
   }
 }
@@ -42,6 +42,6 @@
 .wiki-item__tray {
   margin-top: $margin * 0.125;
   font-size: 14px;
-  color: $text-color;
+  color: theme(text-color);
   font-weight: normal;
 }

@@ -2,8 +2,8 @@ $text-colors: (
   base: $text-color,
   lightest: $text-color-lightest,
   light: $text-color-light,
-  dark: $text-color-dark,
-  primary: var(--primary, $primary),
+  dark: theme(text-color-dark),
+  primary: theme(primary),
   discord: $discord,
   bnet: $bnet,
   wiki: $wiki,
@@ -26,6 +26,16 @@ $text-colors: (
   }
 }
 
+.text-theme-header {
+  color: var(--text-theme-header, $black);
+}
+
+.sm\:text-theme-header {
+  @include media-min(sm) {
+    color: var(--text-theme-header, $black);
+  }
+}
+
 .sm\:text-black {
   @include media-min(sm) {
     color: $black;
@@ -33,9 +43,9 @@ $text-colors: (
 }
 
 $bg-colors: (
-  primary: var(--primary, $primary),
-  dark: $bg-dark,
-  darker: $bg-darker,
+  primary: theme(primary),
+  dark: theme(dark),
+  darker: theme(darker),
   overwatch-2: $overwatch-2,
   wiki: $wiki,
   'orange': $orange,

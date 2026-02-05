@@ -25,9 +25,9 @@
   margin-top: .25rem;
   padding: .15rem .2rem;
   border-radius: $border-radius * 0.25;
-  background: lighten($bg-dark, 5%);
+  background: theme(dark, 5%);
   line-height: 1em;
-  color: $text-color-light;
+  color: theme(text-color-light);
   font-weight: bold;
 }
 
@@ -35,7 +35,7 @@
   padding: .1rem .2rem .2rem;
   background: transparent;
   border: none;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   cursor: pointer;
   line-height: 1em;
 
@@ -56,7 +56,7 @@
   right: 0;
   margin: .2rem 0;
   padding: .25rem;
-  background: lighten($bg-dark, 5%);
+  background: theme(dark, 5%);
   border-radius: $border-radius * 0.5;
   max-height: 20rem;
   overflow-y: auto;
@@ -73,9 +73,9 @@
 
       &:hover,
       &:focus {
-        background: lighten($bg-dark, 10%);
+        background: theme(dark, 10%);
         outline: none;
-        color: $text-color-lightest;
+        color: theme(text-color-lightest);
       }
     }
   }

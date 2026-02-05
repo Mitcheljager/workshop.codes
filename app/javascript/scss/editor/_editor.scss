@@ -1,7 +1,7 @@
 $sidebar-width: clamp(var(--clamp-min), var(--sidebar-width, 300px), 80vmax); // width = height on mobile
 $popout-width: clamp(var(--popout-clamp-min, var(--clamp-min)), var(--popout-width, 300px), 80vmax); // width = height on mobile
 $top-height: 4rem;
-$separator-color: darken($bg-darker, 5%);
+$separator-color: theme(darker, -5%);
 
 .editor {
   --clamp-min: 10vmax;
@@ -48,7 +48,7 @@ $separator-color: darken($bg-darker, 5%);
   z-index: 5;
   background: linear-gradient(180deg,
     transparent 0,
-    darken($bg-dark, 10%) 1.5rem);
+    theme(dark, -10%) 1.5rem);
 }
 
 .editor__top {
@@ -58,7 +58,7 @@ $separator-color: darken($bg-darker, 5%);
   align-items: center;
   padding: $margin * 0.25;
   box-shadow: $shadow;
-  background: lighten($bg-dark, 5%);
+  background: theme(dark, 5%);
   z-index: 10;
 
   &::after {
@@ -69,7 +69,7 @@ $separator-color: darken($bg-darker, 5%);
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(130deg, lighten($bg-dark, 35%), transparent 20rem, transparent calc(100% - 20rem), var(--primary));
+    background-image: linear-gradient(130deg, theme(dark, 35%), transparent 20rem, transparent calc(100% - 20rem), var(--primary));
     opacity: 0.1;
     pointer-events: none;
     z-index: -1
@@ -89,7 +89,7 @@ $separator-color: darken($bg-darker, 5%);
   max-height: auto;
   overflow: visible;
   padding: $margin * 0.25;
-  background: $bg-darker;
+  background: theme(darker);
 
   .button {
     width: 100%;
@@ -104,7 +104,7 @@ $separator-color: darken($bg-darker, 5%);
 .editor__aside {
   grid-area: aside;
   position: relative;
-  background: darken($bg-dark, 10%);
+  background: theme(dark, -10%);
   overflow: hidden;
 
   @include media-min(mbl) {
@@ -112,7 +112,7 @@ $separator-color: darken($bg-darker, 5%);
   }
 
   .form-input {
-    background: darken($bg-dark, 15%);
+    background: theme(dark, -15%);
   }
 
   hr {
@@ -125,7 +125,7 @@ $separator-color: darken($bg-darker, 5%);
   position: relative;
   padding: $margin * 0.25;
   border-top: 1px solid $separator-color;
-  background: darken($bg-dark, 2.5%);
+  background: theme(dark, -2.5%);
 
   @include media-min(mbl) {
     border-top: 0;
@@ -180,7 +180,7 @@ $separator-color: darken($bg-darker, 5%);
 }
 
 .editor-hidden-item-indicator__tooltip {
-  $tooltip-bg-color: $bg-darker;
+  $tooltip-bg-color: theme(darker);
   $tooltip-arrow-size: 0.5rem;
   position: absolute;
   top: calc(100% + #{$tooltip-arrow-size});

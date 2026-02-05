@@ -1,6 +1,6 @@
 .feed__item {
   padding: $margin * 0.5 0;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid theme(border);
 
   @include media-min(md) {
     display: grid;
@@ -39,7 +39,7 @@
   margin: 0.35rem 0;
 
   a {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     &:hover {
@@ -58,7 +58,7 @@
   font-size: var(--font-size-small);
 
   a {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     @include hover-stack {
@@ -69,7 +69,7 @@
 
 .feed__date {
   margin: $margin * 0.25 0 0;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
   font-size: 0.75rem;
   font-style: italic;
 

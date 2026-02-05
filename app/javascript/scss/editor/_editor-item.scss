@@ -13,7 +13,7 @@
   text-align: left;
 
   &:focus-visible {
-    outline: 2px inset $text-color-lightest;
+    outline: 2px inset theme(text-color-lightest);
     outline-offset: -2px;
     box-shadow: none;
   }
@@ -35,31 +35,31 @@
     white-space: nowrap;
 
     &:hover {
-      background: darken($bg-dark, 5%);
-      box-shadow: -100px 0 0 darken($bg-dark, 5%);
+      background: theme(dark, -5%);
+      box-shadow: -100px 0 0 theme(dark, -5%);
 
       input {
-        color: $text-color-lightest;
+        color: theme(text-color-lightest);
       }
     }
 
     input {
-      color: $text-color;
+      color: theme(text-color);
       pointer-events: none;
     }
   }
 
   &--active {
     &:not(.editor-folder)::before {
-      color: var(--primary, $primary);
+      color: theme(primary);
     }
 
     > span {
-      background: darken($bg-dark, 5%);
-      box-shadow: -100px 0 0 darken($bg-dark, 5%);
+      background: theme(dark, -5%);
+      box-shadow: -100px 0 0 theme(dark, -5%);
 
       input {
-        color: $text-color-lightest;
+        color: theme(text-color-lightest);
         pointer-events: all;
       }
     }
@@ -85,7 +85,7 @@
   top: 0;
   padding: 0.375rem;
   border-radius: $border-radius * 0.5 0 0 $border-radius * 0.5;
-  background: darken($bg-darker, 2.5%);
+  background: theme(darker, 2.5%);
   z-index: 1;
 
   .editor-item:hover > & {
@@ -99,7 +99,7 @@
       filter: brightness(1.25);
 
       svg {
-        fill: $text-color-light;
+        fill: theme(text-color-light);
       }
     }
 
@@ -111,7 +111,7 @@
       display: block;
       height: 1rem;
       width: 1rem;
-      fill: $text-color;
+      fill: theme(text-color);
     }
   }
 }

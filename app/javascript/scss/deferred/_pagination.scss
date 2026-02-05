@@ -30,8 +30,8 @@
 .page a,
 .pagination .pagination__item,
 .pagination .pagination__control {
-  background: $bg-dark;
-  color: $text-color;
+  background: theme(dark);
+  color: theme(text-color);
 
   &--current {
     color: $white;
@@ -60,6 +60,6 @@
 
 .next a,
 .pagination .pagination__control--next {
-  background: var(--primary, $primary);
+  background: theme(primary);
   color: $white;
 }

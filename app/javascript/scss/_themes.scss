@@ -1,0 +1,71 @@
+.theme-talon {
+  background: theme(body) url("/images/layout/pattern-bg-talon.webp");
+
+  --primary: #{$talon};
+  --primary-h: #{hue($talon)};
+  --primary-s: #{saturation($talon)};
+  --primary-l: #{lightness($talon)};
+
+  --body-h: 0;
+  --body-s: 3%;
+  --body-l: 8%;
+
+  --dark-h: 10;
+  --dark-s: 2%;
+  --dark-l: 10%;
+
+  --darker-h: 10;
+  --darker-s: 2%;
+  --darker-l: 5%;
+
+  --border-h: 10;
+  --border-s: 3%;
+  --border-l: 15%;
+
+  --text-color-h: 10;
+  --text-color-s: 3%;
+  --text-color-l: 55%;
+
+  --text-color-light-h: 10;
+  --text-color-light-s: 3%;
+  --text-color-light-l: 65%;
+
+  --text-color-lightest-h: 10;
+  --text-color-lightest-s: 3%;
+
+  --text-color-dark-h: 10;
+  --text-color-dark-s: 3%;
+  --text-color-dark-l: 45%;
+
+  --text-theme-header: #{$white};
+
+  --cog-color: #{rgba($white, 0.15)};
+
+  .body-bg {
+    background: theme(body, -2%);
+  }
+}
+
+.theme-high-contrast {
+  background: theme(body);
+
+  --body-l: 4%;
+  --dark-l: 10%;
+  --darker-l: 2%;
+  --border-l: 30%;
+  --text-color-l: 80%;
+  --text-color-light-l: 90%;
+  --text-color-lightest-l: 100%;
+  --text-color-dark-l: 60%;
+
+  .body-bg {
+    background: theme(body, -2%);
+  }
+}
+
+.theme-wiki {
+  --primary: #{$wiki};
+  --primary-h: #{hue($wiki)};
+  --primary-s: #{saturation($wiki)};
+  --primary-l: #{lightness($wiki)};
+}

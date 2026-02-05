@@ -19,10 +19,10 @@
   display: inline-block;
   padding: .5em .75em;
   border-radius: $border-radius;
-  background: $bg-dark;
+  background: theme(dark);
   line-height: 1;
   font-weight: bold;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   text-decoration: none;
   transition: box-shadow 100ms;
 
@@ -37,7 +37,7 @@
   &:hover,
   &:active,
   &:focus {
-    background: $bg-darker;
+    background: theme(darker);
     box-shadow: 0 0 0 2px $white;
     text-decoration: none;
     color: $white;

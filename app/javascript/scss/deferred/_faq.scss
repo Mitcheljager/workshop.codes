@@ -1,7 +1,7 @@
 .faq__item {
   margin-bottom: $margin * 0.125;
   border-radius: $border-radius;
-  background: $bg-darker;
+  background: theme(darker);
 
   @include high-contrast() {
     border: 2px solid currentColor;
@@ -19,11 +19,11 @@
   justify-content: space-between;
   padding: 1rem;
   border-radius: $border-radius;
-  color: $text-color;
+  color: theme(text-color);
   cursor: pointer;
 
   @include hover-stack {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 }
 

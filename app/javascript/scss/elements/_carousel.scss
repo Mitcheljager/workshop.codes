@@ -11,14 +11,14 @@
 
 .carousel__item {
   position: relative;
-  background: $body-bg;
+  background: theme(body);
   overflow: hidden;
 
   img {
     display: block;
     width: 100%;
     height: 100%;
-    background: $bg-darker;
+    background: theme(darker);
     text-indent: 1000 * 1000px;
     aspect-ratio: 900/500;
   }
@@ -58,7 +58,7 @@
   overflow: hidden;
   cursor: pointer;
   border-radius: $border-radius;
-  background: $bg-darker;
+  background: theme(darker);
   box-shadow: $shadow;
   aspect-ratio: 1/1;
 
@@ -76,7 +76,7 @@
       width: 100%;
       height: 100%;
       border-radius: $border-radius;
-      box-shadow: inset 0 0 0 2px $primary, inset 0 0 0 4px $bg-darker;
+      box-shadow: inset 0 0 0 2px $primary, inset 0 0 0 4px theme(darker);
     }
   }
 
@@ -146,7 +146,7 @@
     filter: drop-shadow(0 3px 2px rgba($black, .25));
 
     path {
-      fill: $text-color-lightest;
+      fill: theme(text-color-lightest);
     }
   }
 

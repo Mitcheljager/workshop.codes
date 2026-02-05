@@ -28,7 +28,8 @@
 
   // Pretty hacky solution to make header more accessible when header image is too dark.
   // This beats having 4 different selectors in 4 different places.
-  .wiki &,
+  .theme-wiki &,
+  .theme-talon &,
   &.header--light {
     @include media-min(mbl) {
       .navigation__item {
@@ -42,9 +43,9 @@
         box-shadow: 0 0 0 2px rgba($white, 0.15);
       }
 
-      .notifications svg {
-        stroke: rgba($white, 0.15);
-        stroke-width: 40px;
+      .notifications svg,
+      .theme-switch svg {
+        color: $white;
       }
     }
   }
@@ -79,7 +80,7 @@
       padding: $margin calc(10vw - #{ $margin * 0.5 });
       width: 100%;
       height: 100vh;
-      background: $bg-darker;
+      background: theme(darker);
       z-index: 110;
 
       @include motion {

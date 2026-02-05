@@ -3,7 +3,7 @@
   justify-content: flex-end;
   min-height: 1rem;
   width: 100%;
-  background: $bg-dark;
+  background: theme(dark);
   font-size: $font-size-small;
 
   &--fixed {
@@ -21,7 +21,7 @@
 
 .difference-header__item {
   padding: .5rem .75rem;
-  border-left: 1px solid lighten($border-color, 10%);
+  border-left: 1px solid theme(border, 10%);
   text-decoration: none;
 }
 
@@ -29,16 +29,16 @@
   padding: 1rem;
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
-  background: $bg-darker;
+  background: theme(darker);
 }
 
-.diff{overflow:auto; counter-reset: diff; color: $text-color-light}
+.diff{overflow:auto; counter-reset: diff; color: theme(text-color-light)}
 .diff ul{overflow:auto;font-size:$font-size-small;list-style:none;margin:0;padding:0;display:table;width:100%;}
 .diff del, .diff ins{display:block;text-decoration:none;}
 .diff li{padding: .1em; display:block;margin: 0; position: relative; min-height: 1.4em; line-height: 1.2em}
 .diff li.ins{background:#dfd; color:#080}
 .diff li.del{background:lighten($red, 45%); color:$red}
-.diff li.unchanged:hover{background: $bg-dark}
+.diff li.unchanged:hover{background: theme(dark)}
 .diff del, .diff ins, .diff span{white-space:pre-wrap;font-family:courier;}
 .diff del strong{font-weight:normal;background:#fcc;}
 .diff ins strong{font-weight:normal;background:#9f9;}
@@ -58,6 +58,6 @@
     top: 0;
     padding-right: 1em;
     padding-top: .1em;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
   }
 }

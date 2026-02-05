@@ -1,8 +1,8 @@
 .CodeMirror {
   padding: 0;
   border: 0;
-  background: $bg-dark;
-  color: $text-color-lightest;
+  background: theme(dark);
+  color: theme(text-color-lightest);
   min-height: 600px;
 
   @include high-contrast() {
@@ -11,12 +11,12 @@
 
   .CodeMirror-selectedtext,
   .CodeMirror-selected {
-    background: lighten($bg-dark, 20%);
+    background: theme(dark, -20%);
   }
 
   .CodeMirror-code {
     .cm-url {
-      color: $text-color;
+      color: theme(text-color);
     }
 
     .cm-attribute {
@@ -48,7 +48,7 @@
 }
 
 .CodeMirror-cursor {
-  border-color: $text-color-lightest;
+  border-color: theme(text-color-lightest);
 }
 
 .CodeMirror-lines {

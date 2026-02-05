@@ -8,9 +8,9 @@
 }
 
 .cm-editor {
-  --indent-marker-bg-color: #{ lighten($bg-dark, 5%) };
-  --indent-marker-active-bg-color: #{ lighten($bg-dark, 15%) };
-  color: $text-color-light;
+  --indent-marker-bg-color: #{ theme(dark, 5%) };
+  --indent-marker-active-bg-color: #{ theme(dark, 15%) };
+  color: theme(text-color-light);
 
   body[style*="--show-indent-markers: false"] & { // Hacky solution for css var based if statement
     --indent-marker-bg-color: transparent;
@@ -25,11 +25,11 @@
   .cm-gutters {
     border-right: 0;
     background: transparent;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
 
     .cm-activeLineGutter {
       background: transparent;
-      color: $text-color-light;
+      color: theme(text-color-light);
     }
   }
 
@@ -42,28 +42,28 @@
   }
 
   .cm-selectionBackground {
-    background: lighten($bg-dark, 10%) !important;
+    background: theme(dark, 10%) !important;
   }
 
   .cm-selectionMatch {
-    background: lighten($bg-dark, 10%);
+    background: theme(dark, 10%);
   }
 
   &.cm-focused .cm-selectionBackground {
-    background: lighten($bg-dark, 15%);
+    background: theme(dark, 15%);
   }
 
   .cm-searchMatch {
-    background: lighten($bg-dark, 10%);
+    background: theme(dark, 10%);
     box-shadow: 0 0 0 1px $primary;
   }
 
   .cm-searchMatch-selected {
-    background: darken($bg-dark, 10%);
+    background: theme(dark, -10%);
   }
 
   .cm-matchingBracket {
-    background: lighten($bg-dark, 20%) !important;
+    background: theme(dark, 20%) !important;
   }
 
   .cm-cursor {
@@ -98,16 +98,16 @@
   .cm-tooltip {
     border-radius: $border-radius * 0.5;
     border: 0;
-    background: darken($bg-dark, 5%);
+    background: theme(dark, -5%);
 
     &.cm-tooltip-hover {
       max-width: 25em;
       max-height: 15em;
       overflow-y: auto;
       border-radius: $border-radius * 0.5;
-      border: 1px solid $bg-darker;
+      border: 1px solid theme(darker);
       padding: $margin * 0.125;
-      color: $text-color;
+      color: theme(text-color);
       font-size: 0.75rem;
 
       @include styled-scrollbar;
@@ -116,7 +116,7 @@
     &.cm-completionInfo {
       margin: -2px 0 0 0.5em;
       border-radius: $border-radius * 0.5;
-      border: 1px solid $bg-darker;
+      border: 1px solid theme(darker);
       box-shadow: $shadow;
       background: $bg-dark !important;
     }
@@ -129,22 +129,22 @@
 
     > .cm-tooltip {
       padding: 0.35rem 0.5rem;
-      background: lighten($bg-dark, 5%);
-      color: $text-color-light;
+      background: theme(dark, 5%);
+      color: theme(text-color-light);
       white-space: pre-wrap;
     }
 
     .cm-diagnostic {
-      background: $bg-darker;
+      background: theme(darker);
       border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
-      color: $text-color-lightest;
+      color: theme(text-color-lightest);
       font-weight: bold;
       font-size: 12px;
     }
 
     hr {
       margin: $margin * 0.125 0;
-      background-color: $bg-darker
+      background-color: theme(darker)
     }
 
     em {
@@ -164,13 +164,13 @@
   }
 
   .cm-completionDetail {
-    color: $text-color;
+    color: theme(text-color);
     font-size: 0.85em;
   }
 
   .cm-tooltip-autocomplete {
     border-radius: 0;
-    border: 1px solid $bg-darker;
+    border: 1px solid theme(darker);
     box-shadow: $shadow;
   }
 
@@ -179,7 +179,7 @@
   }
 
   .cm-tooltip-autocomplete ul li[aria-selected] {
-    background: lighten($bg-dark, 5%);
+    background: theme(dark, 5%);
   }
 
   .cm-lintRange-error {
@@ -246,23 +246,23 @@
       border: 0;
       border-radius: $border-radius * 0.25;
       font-size: $font-size-small;
-      background: lighten($bg-dark, 10%);
-      color: $text-color-lightest;
+      background: theme(dark, 10%);
+      color: theme(text-color-lightest);
 
       &:focus {
-        background: lighten($bg-dark, 12.5%);
+        background: theme(dark, 12.5%);
         box-shadow: 0 0 0 2px rgba($white, 0.5);
         outline: 0;
       }
 
       &::placeholder {
         font-style: italic;
-        color: $text-color;
+        color: theme(text-color);
       }
     }
 
     label {
-      color: $text-color;
+      color: theme(text-color);
       font-size: $font-size-small;
       font-family: $font-stack;
     }
@@ -273,16 +273,16 @@
       margin-right: 0.25em;
       border: 0;
       border-radius: $border-radius * 0.25;
-      background: lighten($bg-dark, 5%);
+      background: theme(dark, 5%);
       font-size: $font-size-small;
-      color: $text-color-light;
+      color: theme(text-color-light);
       text-transform: none;
       cursor: pointer;
 
       @include hover-stack {
         outline: 0;
-        background: lighten($bg-dark, 15%);
-        color: $text-color-lightest;
+        background: theme(dark, 15%);
+        color: theme(text-color-lightest);
       }
     }
 
@@ -291,7 +291,7 @@
       padding: 0 0.25rem;
       background: transparent;
       font-size: 1.25rem;
-      color: $text-color-light;
+      color: theme(text-color-light);
       cursor: pointer;
 
       &:hover {
@@ -326,10 +326,10 @@
   .cm-foldPlaceholder {
     background: transparent;
     border: 0;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
 
     &:hover {
-      color: $text-color-light;
+      color: theme(text-color-light);
     }
   }
 
@@ -364,13 +364,13 @@
       transform: translateY(-100%);
       padding: 0.25rem 0.5rem;
       border-radius: 0 $border-radius * 0.5 $border-radius * 0.5 0;
-      border-left: 3px solid $text-color;
-      background: darken($bg-dark, 5%);
+      border-left: 3px solid theme(text-color);
+      background: theme(dark, -5%);
       white-space: nowrap;
       line-height: 1;
       text-indent: 0;
       font-family: $font-stack;
-      color: $text-color;
+      color: theme(text-color);
     }
   }
 
@@ -379,7 +379,7 @@
     aspect-ratio: 1;
     line-height: 1;
     font-size: 0.75rem;
-    background-color: $bg-darker;
+    background-color: theme(darker);
     padding: 0.25rem;
     border-radius: 2px;
     cursor: pointer;

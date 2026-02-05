@@ -13,7 +13,7 @@
   width: 100%;
   padding: $margin * 0.25;
   border-radius: $border-radius * 0.5;
-  background: lighten($bg-dark, 5%);
+  background: theme(dark, 5%);
   box-shadow: $shadow;
   z-index: 10;
   text-align: left;
@@ -30,7 +30,7 @@
     transform: rotate(45deg);
     height: $size;
     width: $size;
-    background: lighten($bg-dark, 5%);
+    background: theme(dark, 5%);
     border-top-left-radius: $border-radius * 0.25;
   }
 

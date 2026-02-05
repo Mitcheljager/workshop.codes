@@ -1,6 +1,10 @@
 <div class="user-block">
+  <%= render "theme_switch" %>
+
   <% if current_user %>
-    <%= svelte_component "Notifications", { viewAllPath: notifications_path } %>
+    <div class="mb-1/8 mbl:mb-0 mbl:mr-1/8">
+      <%= svelte_component "Notifications", { viewAllPath: notifications_path } %>
+    </div>
 
     <div class="dropdown lg-down:dropup" data-dropdown>
       <%= link_to current_user.clean_username, account_path, class: "user-block__action mr-1/16 hidden mbl:visible", data: { action: "toggle-dropdown" } %>

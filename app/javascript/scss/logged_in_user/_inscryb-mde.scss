@@ -2,8 +2,8 @@
 
 .editor-preview {
   margin-top: 0;
-  background: $body-bg;
-  border: 1px solid $border-color;
+  background: theme(body);
+  border: 1px solid theme(border);
 }
 
 .editor-toolbar {
@@ -15,7 +15,7 @@
   border: 0;
   border-radius: 0;
   padding: 0 .25rem .25rem;
-  background: $bg-darker;
+  background: theme(darker);
   opacity: 1;
   z-index: 50;
 
@@ -24,7 +24,7 @@
   }
 
   &.fullscreen {
-    background: $bg-darker;
+    background: theme(darker);
     z-index: 1000;
 
     &::before,
@@ -39,13 +39,13 @@
     border: 0;
     margin-top: .25rem;
     margin-right: .25rem;
-    background-color: $bg-dark;
-    color: $text-color !important;
+    background-color: theme(dark);
+    color: theme(text-color) !important;
     font-size: 1rem;
 
     @include hover-stack {
-      background-color: lighten($bg-dark, 10%);
-      color: $text-color-light !important;
+      background-color: theme(dark, 10%);
+      color: theme(text-color-light) !important;
       border: 0;
     }
 
@@ -59,11 +59,11 @@
 
     &.dropdown-open {
       position: relative;
-      background: lighten($bg-dark, 10%);
+      background: theme(dark, 10%);
     }
 
     &.active {
-      background: lighten($bg-dark, 10%);
+      background: theme(dark, 10%);
     }
   }
 
@@ -86,8 +86,8 @@
   top: 2rem;
   max-height: 300px;
   width: 220px;
-  background: darken($bg-dark, 5%);
-  border: 1px solid $bg-darker;
+  background: theme(dark, -5%);
+  border: 1px solid theme(darker);
   border-radius: $border-radius;
   box-shadow: $shadow;
   overflow-y: auto;
@@ -106,8 +106,8 @@
   }
 
   input:focus {
-    background: $bg-darker;
-    box-shadow: inset 0 0 0 2px $text-color-dark;
+    background: theme(darker);
+    box-shadow: inset 0 0 0 2px theme(text-color-dark);
   }
 
   .checkbox label {
@@ -118,7 +118,7 @@
 .editor-statusbar {
   font-family: 'Consolas', monospace;
   padding: .5rem 0;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 
   .error {
     color: $red;
@@ -135,8 +135,8 @@
 
   &:hover,
   &:active {
-    background: $bg-darker;
-    color: $text-color-lightest;
+    background: theme(darker);
+    color: theme(text-color-lightest);
   }
 
   &--icon {
@@ -209,7 +209,7 @@
 
 .fa-highlight::before {
   content: "h";
-  color: var(--primary, $primary);
+  color: theme(primary);
 }
 
 .fa-code::before {
@@ -279,7 +279,7 @@
 }
 
 .editor-toolbar button[title*="Toggle Preview"] {
-  background: var(--primary, $primary);
+  background: theme(primary);
 
   &.active {
     filter: brightness(1.15);

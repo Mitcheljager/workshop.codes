@@ -6,7 +6,7 @@
   width: 90vw;
   max-width: 300px;
   max-height: 90vh;
-  background: $bg-darker;
+  background: theme(darker);
   border-radius: $border-radius;
   z-index: 10;
   overflow-y: auto;

@@ -13,13 +13,13 @@
     margin-right: 0;
 
     path {
-      fill: $text-color-lightest;
+      fill: theme(text-color-lightest);
     }
   }
 
   hr {
     margin: $margin * 0.125 $margin * -0.25;
-    background: $bg-darker;
+    background: theme(darker);
 
     &.large {
       margin: $margin * 0.25 $margin * -0.25;

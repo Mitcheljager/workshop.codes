@@ -17,7 +17,7 @@
 }
 
 .navigation__item {
-  --color: #{$text-color-lightest};
+  --color: #{theme(text-color-lightest)};
   --discord-color: #{$discord};
   --discord-drop-shadow: drop-shadow(0 0 4px #{rgba($white, 0.2)});
   display: block;
@@ -28,9 +28,10 @@
   font-family: $font-stack-alt;
   text-transform: uppercase;
   font-size: 24px;
+  white-space: nowrap;
 
   @include media-min(mbl) {
-    --color: #{$body-bg};
+    --color: #{theme(body)};
     font-size: clamp(19px, 2vw, 24px);
     margin-right: clamp(#{ $margin * 0.125 }, 1.25vw, #{ $margin * 0.5 });
     margin-bottom: 0;
@@ -63,7 +64,7 @@
   &--active {
     &::before,
     &:hover::before {
-      background: var(--primary, $primary);
+      background: theme(primary);
     }
 
     @include high-contrast() {

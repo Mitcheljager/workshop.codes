@@ -1,5 +1,5 @@
 .logs {
-  background: lighten($bg-darker, 5%);
+  background: theme(darker, 5%);
   height: calc(100% - var(--offset) - 4.5rem);
   margin-top: $margin * 0.25;
   border-radius: $border-radius;
@@ -24,7 +24,7 @@
 
 .log {
   flex: 0 0 auto;
-  background: $bg-darker;
+  background: theme(darker);
   border-radius: $border-radius;
   padding: $margin * 0.125;
   word-break: break-all;
@@ -37,9 +37,9 @@
 
 .log__timestamp {
   font-size: $font-size-small;
-  color: $text-color-dark;
+  color: theme(text-color-dark);
 }
 
 .log__content {
-  color: $text-color-light;
+  color: theme(text-color-light);
 }

@@ -16,7 +16,7 @@ td {
   }
 
   a {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     @include hover-stack {
@@ -30,7 +30,7 @@ th {
   background: rgba($black, .25);
   text-align: left;
   font-weight: bolder;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 }
 
 tr {

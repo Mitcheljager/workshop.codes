@@ -1,0 +1,30 @@
+@use "sass:map";
+@use "sass:math";
+
+@function theme($key, $lightness: 0%) {
+  $color: $primary;
+
+  $colors: (
+    primary: $primary,
+    dark: $bg-dark,
+    darker: $bg-darker,
+    body: $bg-body,
+    border: $border-color,
+    'text-color': $text-color,
+    'text-color-light': $text-color-light,
+    'text-color-lightest': $text-color-lightest,
+    'text-color-dark': $text-color-dark
+  );
+
+  @if map.has-key($colors, $key) {
+    $color: map.get($colors, $key);
+  } @else {
+    @error "Key '#{$key}' is not supported";
+  }
+
+  $h: math.round(hue($color));
+  $s: math.round(saturation($color));
+  $l: math.round(lightness($color));
+
+  @return hsl(var(--#{$key}-h, $h), var(--#{$key}-s, $s), calc(var(--#{$key}-l, #{$l}) + #{$lightness}));
+}

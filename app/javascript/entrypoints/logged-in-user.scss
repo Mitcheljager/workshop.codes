@@ -1,6 +1,7 @@
 @import "inscrybmde/dist/inscrybmde.min.css";
 
 @import "@scss/variables",
+        "@scss/functions",
         "@scss/mixins";
 
 // Aliases don't work for glob imports

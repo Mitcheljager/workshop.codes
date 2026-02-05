@@ -69,8 +69,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid lighten($border-color, 5%);
-  color: lighten($border-color, 10%);
+  border-right: 1px solid theme(border, 5%);
+  color: theme(border, 10%);
   z-index: 1;
   font-size: $font-size-small;
   line-height: 1.5em;
@@ -90,10 +90,10 @@
   margin-left: .5rem;
   border: 0;
   border-radius: $border-radius * 0.5;
-  background: $body-bg;
+  background: theme(body);
   font-size: 10px;
   line-height: 1em;
-  color: $text-color;
+  color: theme(text-color);
   cursor: pointer;
 
   @include media-min("sm") {
@@ -101,7 +101,7 @@
   }
 
   @include hover-stack {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
   }
 
   .copy__notification {
@@ -116,10 +116,10 @@
   width: 100%;
   padding: .35rem;
   margin-bottom: 2rem;
-  background: $bg-dark;
+  background: theme(dark);
   text-align: center;
   text-decoration: none;
-  color: $text-color;
+  color: theme(text-color);
   font-size: $font-size-small;
   cursor: pointer;
 }

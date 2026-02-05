@@ -5,7 +5,7 @@
   padding: $margin * 0.25;
   margin-bottom: $margin * 0.25;
   border-radius: $border-radius;
-  background: darken($bg-dark, 3.5%);
+  background: theme(dark, -3.5%);
   overflow: hidden;
   box-shadow: $shadow;
 }
@@ -20,7 +20,7 @@
   height: 100%;
   width: 100%;
   opacity: 0.35;
-  background: lighten($bg-dark, 10%);
+  background: theme(dark, 10%);
   mask-image: linear-gradient(to bottom, rgba($black, 1), rgba($black, 0));
 
   @include media-min(md) {
@@ -62,7 +62,7 @@
 .collection__title {
   display: inline-block;
   margin-bottom: math.div($margin, 16);
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-size: 18px;
   line-height: 1.2em;
   font-weight: bold;
@@ -74,7 +74,7 @@
 }
 
 .collection__author {
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-size: $font-size-small;
   font-weight: bold;
   text-decoration: none;
@@ -85,7 +85,7 @@
 }
 
 .collection__count {
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   font-style: italic;
   font-size: $font-size-small;
 }

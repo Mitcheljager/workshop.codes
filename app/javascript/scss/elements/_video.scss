@@ -4,7 +4,7 @@
 	position: relative;
 	padding-bottom: math.div(100%, 900) * 500;
 	height: 0;
-	background: $bg-darker;
+	background: theme(darker);
 }
 
 .video__iframe {

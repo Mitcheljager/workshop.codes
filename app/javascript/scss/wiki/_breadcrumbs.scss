@@ -19,7 +19,7 @@
   }
 
   a {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     @include hover-stack {

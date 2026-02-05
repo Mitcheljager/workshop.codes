@@ -10,7 +10,7 @@
 }
 
 .revision__description {
-  border-top: 1px solid lighten($border-color, 5%);
+  border-top: 1px solid theme(border, 5%);
   padding-top: $margin * 0.25;
   margin-top: $margin * 0.25;
 }

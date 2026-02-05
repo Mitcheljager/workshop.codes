@@ -110,5 +110,5 @@
   display: block;
   margin: 0 math.div($margin, 3) 0 math.div($margin, 6);
   font-weight: bold;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 }

@@ -2,14 +2,14 @@
 
 .update-notes {
   margin: math.div($margin, 1.15) 0 $margin * 0.25;
-  border: 2px solid lighten($border-color, 10%);
-  background: $body-bg;
+  border: 2px solid theme(border, 10%);
+  background: theme(body);
 }
 
 .update-notes__header {
   position: relative;
   padding: $margin * 0.25 $margin * 0.25 $margin * 0.25 calc(1.5rem + 90px);
-  background: #292e31;
+  background: theme(body, 5%);
 
   &--no-image {
     padding: $margin * 0.25;
@@ -20,7 +20,7 @@
   margin: 0 !important;
   font-size: 1.5rem;
   font-weight: bold;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 }
 
 .update-notes__body {
@@ -28,7 +28,7 @@
 }
 
 .update-notes__description {
-  border-left: 4px solid $primary;
+  border-left: 4px solid theme(primary);
   padding-left: $margin * 0.25;
   margin-bottom: $margin * 0.25;
 }
@@ -39,8 +39,8 @@
   width: 90px;
   height: 90px;
   left: $margin * 0.125;
-  background: $bg-darker;
-  border: 2px solid $text-color;
+  background: theme(darker);
+  border: 2px solid theme(text-color);
 
   img {
     display: block;
@@ -66,13 +66,13 @@
   width: 40px;
   padding: math.div($margin, 16);
   margin-right: $margin * 0.125;
-  border: 2px solid $text-color-dark;
+  border: 2px solid theme(text-color-dark);
 }
 
 .update-notes__name {
   line-height: 1.5rem;
   font-weight: bold;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
 }
 
 .update-notes__changes {

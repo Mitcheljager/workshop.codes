@@ -4,7 +4,7 @@
   grid-template-columns: repeat(auto-fill, minmax(var(--grid-min-width), 1fr));
   grid-gap: 1rem;
   margin: 2rem 0;
-  color: $text-color-lightest;
+  color: theme(text-color-lightest);
   text-align: center;
 
   &--input {
@@ -17,7 +17,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: $bg-darker;
+  background: theme(darker);
   border-radius: $border-radius;
   overflow: hidden;
   cursor: pointer;
@@ -65,7 +65,7 @@
 	  margin: 0 auto;
     width: 100%;
     height: auto;
-    color: $text-color-dark;
+    color: theme(text-color-dark);
     font-size: 14px;
   }
 }

@@ -20,13 +20,13 @@
   display: inline-block;
   margin: 0 0 $margin * 0.25;
   font-size: 18px;
-  color: var(--primary, $primary);
+  color: theme(primary);
   text-decoration: none;
 }
 
 .article__subtitle {
   display: block;
-  color: $text-color;
+  color: theme(text-color);
   font-size: $font-size-small;
 }
 
@@ -54,7 +54,7 @@
 
 .article__aside-content {
   margin-top: $margin;
-  background: $bg-darker;
+  background: theme(darker);
   padding: $margin * 0.25;
   border-radius: $border-radius;
   font-size: $font-size-small;
@@ -69,7 +69,7 @@
   }
 
   a:not(.button) {
-    color: $text-color-lightest;
+    color: theme(text-color-lightest);
     text-decoration: none;
 
     @include hover-stack {

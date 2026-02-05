@@ -17,7 +17,7 @@
 .blog__subtitle {
   display: block;
   margin: 1rem 0 0;
-  color: $text-color;
+  color: theme(text-color);
   font-size: $font-size-small;
   line-height: 1.15em;
 }

@@ -17,7 +17,7 @@
   <p data-role="loading-screen-tip" class="mt-1/2"><%= loading_tips.sample %></p>
 </div>
 
-<div class="wiki">
+<div class="theme-wiki">
   <%= svelte_component "Editor", {
     bugsnagApiKey: ENV["BUGSNAG_API_KEY"],
     _isSignedIn: current_user.present?

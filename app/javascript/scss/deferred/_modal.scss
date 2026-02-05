@@ -41,7 +41,7 @@
   top: 0;
   height: 100%;
   width: 100%;
-  background: $bg-dark;
+  background: theme(dark);
   opacity: .75;
   z-index: -10;
 }
@@ -52,7 +52,7 @@
   max-width: map-get($media-min-widths, xs);
   padding: $margin * 0.5;
   border-radius: $border-radius;
-  background: $body-bg;
+  background: theme(body);
 
   &::before {
     content: "";
@@ -101,7 +101,7 @@
 
     img {
       display: block;
-      background: $bg-darker;
+      background: theme(darker);
     }
   }
 
