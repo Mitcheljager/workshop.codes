@@ -158,7 +158,7 @@
 
   &:focus {
     outline: none;
-    background-color: theme(dark, 5%);
+    background-color: theme(dark, -5%);
     box-shadow: 0 0 0 2px rgba($white, 0.25);
   }
 
