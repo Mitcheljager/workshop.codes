@@ -2,7 +2,7 @@ class ThemesController < ApplicationController
   def switch
     theme = params[:theme]
 
-    if ["overwatch", "talon", "high-contrast"].include?(theme)
+    if ["default", "talon", "high-contrast"].include?(theme)
       cookies[:theme] = {
         value: params[:theme],
         expires: 1.year.from_now
