@@ -46,6 +46,23 @@
   }
 }
 
+.theme-high-contrast {
+  background: theme(body);
+
+  --body-l: 6%;
+  --dark-l: 10%;
+  --darker-l: 2%;
+  --border-l: 30%;
+  --text-color-l: 80%;
+  --text-color-light-l: 90%;
+  --text-color-lightest-l: 100%;
+  --text-color-dark-l: 60%;
+
+  .body-bg {
+    background: theme(body, -2%);
+  }
+}
+
 .theme-wiki {
   --primary: #{$wiki};
   --primary-h: #{hue($wiki)};
