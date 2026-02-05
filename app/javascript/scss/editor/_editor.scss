@@ -13,7 +13,7 @@ $separator-color: theme(darker, -5%);
   left: 0;
   height: 100%;
   width: 100%;
-  background: var(--editor-background, #{theme(dark, 2.5%)});
+  background: var(--editor-background, #{darken($bg-dark, 2.5%)});
   z-index: 500;
 
   @include media-min(mbl) {
@@ -125,7 +125,7 @@ $separator-color: theme(darker, -5%);
   position: relative;
   padding: $margin * 0.25;
   border-top: 1px solid $separator-color;
-  background: theme(dark, 2.5%);
+  background: theme(dark, -2.5%);
 
   @include media-min(mbl) {
     border-top: 0;
