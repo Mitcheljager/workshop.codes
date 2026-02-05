@@ -30,7 +30,7 @@
   font-size: 24px;
 
   @include media-min(mbl) {
-    --color: #{$bg-body};
+    --color: #{theme(body)};
     font-size: clamp(19px, 2vw, 24px);
     margin-right: clamp(#{ $margin * 0.125 }, 1.25vw, #{ $margin * 0.5 });
     margin-bottom: 0;

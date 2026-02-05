@@ -1,0 +1,44 @@
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: $margin * 0.125;
+  padding: .5em .75em;
+  background: theme(dark);
+  border-radius: $border-radius;
+  color: $white;
+  cursor: pointer;
+
+  @include media-min(mbl) {
+    color: theme(body);
+    background: transparent;
+    padding: 0;
+  }
+
+  @include hover-stack {
+    background: theme(darker);
+    box-shadow: 0 0 0 2px $white;
+
+    @include media-min(mbl) {
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+
+  svg {
+    height: 1rem;
+
+    @include media-min(mbl) {
+      height: 1.25rem;
+    }
+  }
+}
+
+.theme-switch__label {
+  color: $white;
+  line-height: 1;
+  font-weight: bold;
+
+  @include media-min(mbl) {
+    display: none;
+  }
+}

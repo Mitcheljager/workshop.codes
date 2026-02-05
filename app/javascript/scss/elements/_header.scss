@@ -43,9 +43,9 @@
         box-shadow: 0 0 0 2px rgba($white, 0.15);
       }
 
-      .notifications svg {
-        stroke: rgba($white, 0.15);
-        stroke-width: 40px;
+      .notifications svg,
+      .theme-switch svg {
+        color: $white;
       }
     }
   }
