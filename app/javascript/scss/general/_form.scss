@@ -163,7 +163,7 @@
   }
 
   &:not(multiple) {
-    background: $bg-dark url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23#{str-slice(inspect($gray), 2, 7)}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px;
+    background: theme(dark) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23#{str-slice(inspect($gray), 2, 7)}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px;
   }
 
   &--small {
@@ -180,7 +180,7 @@
 
     &:checked {
       background: linear-gradient(theme(text-color), theme(text-color));
-      color: $black;
+      color: $white;
     }
   }
 }
@@ -305,7 +305,7 @@ input[type="file"] {
 }
 
 .error-block {
-  background: rgba($bg-dark, .5);
+  background: theme(darker);
   border: 3px solid $red;
   padding: math.div($margin, 3);
   margin-bottom: $margin * 0.5;

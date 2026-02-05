@@ -38,7 +38,7 @@
 .diff li{padding: .1em; display:block;margin: 0; position: relative; min-height: 1.4em; line-height: 1.2em}
 .diff li.ins{background:#dfd; color:#080}
 .diff li.del{background:lighten($red, 45%); color:$red}
-.diff li.unchanged:hover{background: $bg-dark}
+.diff li.unchanged:hover{background: theme(dark)}
 .diff del, .diff ins, .diff span{white-space:pre-wrap;font-family:courier;}
 .diff del strong{font-weight:normal;background:#fcc;}
 .diff ins strong{font-weight:normal;background:#9f9;}

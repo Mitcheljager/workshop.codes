@@ -9,7 +9,7 @@
 .update-notes__header {
   position: relative;
   padding: $margin * 0.25 $margin * 0.25 $margin * 0.25 calc(1.5rem + 90px);
-  background: #292e31;
+  background: theme(body, 5%);
 
   &--no-image {
     padding: $margin * 0.25;
