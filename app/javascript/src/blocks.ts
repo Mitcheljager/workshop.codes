@@ -75,10 +75,10 @@ export function insertBlockTemplate(event: MouseEvent): void {
 export function removeBlockTemplate(event: MouseEvent): void {
   event.preventDefault()
 
-  const currentTarget = event.currentTarget as HTMLElement
-  const target = currentTarget.closest("[data-remove-target]")
+  const target = event.target as HTMLElement
+  const targetElement = target.closest("[data-remove-target]")
 
-  target!.remove()
+  targetElement!.remove()
 }
 
 export function buildInputSortable(element: HTMLElement): void {
