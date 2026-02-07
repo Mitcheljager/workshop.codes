@@ -7,17 +7,19 @@
   .current {
     display: block;
     padding: .4em .6em;
-    margin: 0 .25em;
+    margin: 0 .15em;
     border-radius: $border-radius * 0.25;
     border: 0;
     color: $white;
-    font-size: 16px;
-    font-family: "bignoodletitlingregular", $font-stack;
+    font-size: $font-size-base;
+    font-family: $font-stack-alt;
+    text-transform: uppercase;
     text-decoration: none;
     text-align: center;
   }
 
   a {
+    font-weight: bold;
     cursor: pointer;
 
     @include hover-stack {
