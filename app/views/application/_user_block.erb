@@ -1,5 +1,5 @@
 <div class="user-block">
-  <%= render "theme_switch" %>
+  <%= render "theme_switch" unless is_wiki? %>
 
   <% if current_user %>
     <div class="mb-1/8 mbl:mb-0 mbl:mr-1/8">
