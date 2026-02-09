@@ -6,16 +6,19 @@ class Admin::BaseController < ApplicationController
   end
 
   def index
+    from = params[:from] || 100.years.ago
+    short_period = params[:period] === "short"
+
     @unique_visits = Statistic.where(content_type: :unique_visit)
-                              .where("on_date > ?", params[:from] || 100.years.ago)
+                              .where("on_date > ?", from)
                               .pluck(:on_date, :value)
-                              .group_by { |on_date, _| on_date.beginning_of_week }
+                              .group_by { |on_date, _| short_period ? on_date.to_date : on_date.beginning_of_week }
                               .map do |week_start, rows| { date: week_start.strftime("%Y-%m-%d"), value: rows.sum { |_, v| v } } end
 
     @unique_copies = Statistic.where(content_type: :unique_copies)
-                              .where("on_date > ?", params[:from] || 100.years.ago)
+                              .where("on_date > ?", from)
                               .pluck(:on_date, :value)
-                              .group_by { |on_date, _| on_date.beginning_of_week }
+                              .group_by { |on_date, _| short_period ? on_date.to_date : on_date.beginning_of_week }
                               .map do |week_start, rows| { date: week_start.strftime("%Y-%m-%d"), value: rows.sum { |_, v| v } } end
 
     @admin_activity = Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment, :admin_destroy_user, :admin_destroy_post_image])

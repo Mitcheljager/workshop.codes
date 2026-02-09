@@ -6,8 +6,8 @@
   <strong>Analytics since:</strong>
 
   <span class="button-group inline-flex ml-1/4">
-    <%= link_to "1 week ago", admin_root_path(from: 1.week.ago), class: "button button--secondary button--small" %>
-    <%= link_to "1 month ago", admin_root_path(from: 1.month.ago), class: "button button--secondary button--small" %>
+    <%= link_to "1 week ago", admin_root_path(from: 1.week.ago, period: "short"), class: "button button--secondary button--small" %>
+    <%= link_to "1 month ago", admin_root_path(from: 1.month.ago, period: "short"), class: "button button--secondary button--small" %>
     <%= link_to "1 year ago", admin_root_path(from: 1.year.ago), class: "button button--secondary button--small" %>
     <%= link_to "2 years ago", admin_root_path(from: 2.years.ago), class: "button button--secondary button--small" %>
     <%= link_to "Forever", admin_root_path, class: "button button--secondary button--small" %>
