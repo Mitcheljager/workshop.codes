@@ -768,12 +768,20 @@ function findHeroEnabledOrOn(content: string): void {
 
   for (const match of heroSettings.matchAll(/\w:\s*(Enabled|Disabled)/g)) {
     const from = heroSettingsMatch.index! + match.index + 3
+    const to = from + match[0].length - 3
 
     diagnostics.push({
       from,
-      to: from + match[0].length - 3,
+      to,
       severity: "warning",
-      message: "You probably meant to use On/Off rather than Enabled/Disabled. The game's export is wrong for Hero settings."
+      message: "You probably meant to use On/Off rather than Enabled/Disabled. The game's export is wrong for Hero settings.",
+      actions: [{
+        name: "Swap for On/Off",
+        apply(view, from, to) {
+          const isEnabled = match.includes("Enabled")
+          view.dispatch({ changes: { from, to, insert: isEnabled ? "On" : "Off" } })
+        }
+      }]
     })
   }
 }
