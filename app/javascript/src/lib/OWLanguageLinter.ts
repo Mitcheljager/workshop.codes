@@ -28,6 +28,7 @@ export function OWLanguageLinter(view: EditorView): Diagnostic[] {
   findEventBlocksWithMissingArguments(content)
   findUndefinedSubroutines(content)
   findTripleEquals(content)
+  findHeroEnabledOrOn(content)
   checkMixins(content)
   checkTranslations(content)
   checkForLoops(content)
@@ -748,6 +749,27 @@ function findTripleEquals(content: string): void {
       to: from + match[0].length,
       severity: "error",
       message: "Use single equals for assignments, or double equals to comparisons. Triple equals doesn't exist here (this isn't JavaScript!)."
+    })
+  }
+}
+
+function findHeroEnabledOrOn(content: string): void {
+  const heroSettingsMatch = content.match(/heroes\s*\{/)
+
+  if (!heroSettingsMatch) return
+
+  const closingBracketIndex = getClosingBracket(content, "{", "}", heroSettingsMatch.index)
+
+  const heroSettings = content.slice(heroSettingsMatch.index, closingBracketIndex + 1)
+
+  for (const match of heroSettings.matchAll(/\w:\s*(Enabled|Disabled)/g)) {
+    const from = heroSettingsMatch.index! + match.index + 3
+
+    diagnostics.push({
+      from,
+      to: from + match[0].length - 3,
+      severity: "warning",
+      message: "You probably meant to use On/Off rather than Enabled/Disabled. The game's export is wrong for Hero settings."
     })
   }
 }
