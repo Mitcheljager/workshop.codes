@@ -68,7 +68,7 @@ export const templates = Object.freeze({
 		{
 			enabled maps
 			{
-				Workshop Island 0
+				Workshop Island
 			}
 		}
 
