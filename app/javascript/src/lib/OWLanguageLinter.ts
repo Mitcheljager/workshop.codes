@@ -498,11 +498,9 @@ function findMissingSemicolons(content: string): void {
         severity: "error",
         message: "Missing semicolon",
         actions: [{
-          name: "Insert Semicolon",
+          name: "Insert semicolon",
           apply(view, from, to) {
-            view.dispatch({
-              changes: { from, to, insert: `${content[i - 1]};` }
-            })
+            view.dispatch({ changes: { from, to, insert: `${content[i - 1]};` } })
           }
         }]
       })
@@ -517,7 +515,13 @@ function findExtraSemicolons(content: string): void {
         from: i,
         to: i + 2,
         severity: "error",
-        message: "Unexpected semicolon"
+        message: "Unexpected semicolon",
+        actions: [{
+          name: "Remove semicolon",
+          apply(view, from, to) {
+            view.dispatch({ changes: { from, to, insert: `${content[i]}` } })
+          }
+        }]
       })
     }
   }
