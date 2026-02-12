@@ -110,6 +110,10 @@
       color: theme(text-color);
       font-size: 0.75rem;
 
+      &:has(.cm-diagnostic) {
+        padding: 0;
+      }
+
       @include styled-scrollbar;
     }
 
@@ -123,6 +127,10 @@
 
     > ul {
       padding: $margin * 0.125;
+
+      &:has(.cm-diagnostic) {
+        padding: 0;
+      }
 
       @include styled-scrollbar;
     }
