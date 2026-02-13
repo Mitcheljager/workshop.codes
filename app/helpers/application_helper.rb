@@ -90,4 +90,8 @@ module ApplicationHelper
     session.delete "oauth_uid"
     session.delete "oauth_expires_at"
   end
+
+  def string_params(params)
+    params.select { |_, value| value.is_a?(String) }
+  end
 end

@@ -16,7 +16,7 @@ module FilterHelper
     if parameters.values.all? { |v| v.nil? }
       filter_path(sort: :latest)
     else
-      filter_path(parameters)
+      filter_path(string_params(parameters))
     end
   end
 

@@ -1,6 +1,8 @@
 class SearchController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  before_action :redirect_invalid_params
+
   def index
     # Handle old uses of search instead of query as the name
     if params[:search].present?
@@ -130,5 +132,10 @@ class SearchController < ApplicationController
     else
       "created_at"
     end
+  end
+
+  def redirect_invalid_params
+    valid_params = params.permit(:category, :code, :hero, :map, :sort, :expired, :author, :players, :search, :page)
+    redirect_to filter_path(valid_params) if string_params(params) != params
   end
 end
