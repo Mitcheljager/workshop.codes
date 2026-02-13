@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
   rescue_from AbstractController::ActionNotFound, with: :render_404
-  rescue_from ActionController::RoutingError,  with: :render_404
-  rescue_from ActionController::UnknownFormat,  with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
+  rescue_from ActionController::UnknownFormat, with: :render_404
+  rescue_from ActionController::BadRequest, with: -> { head :bad_requests }
 
   def active_storage_blob_variant_url
     blob = ActiveStorage::Blob.find_by_key(params[:key])
