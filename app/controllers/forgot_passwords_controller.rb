@@ -29,7 +29,6 @@ class ForgotPasswordsController < ApplicationController
       recent_tokens_count = ForgotPasswordToken.where(user_id: @user.id).where("created_at > ?", 1.day.ago).size
       total_tokens_count = ForgotPasswordToken.where(user_id: @user.id).size
 
-      # User requested too many tokens either recently or in total
       if recent_tokens_count > 10 || total_tokens_count > 200
         Bugsnag.notify("User requested too many forgot password tokens recently") if Rails.env.production?
         redirect_to forgot_passwords_path
