@@ -7,6 +7,6 @@ class NotificationMailer < ApplicationMailer
     @go_to = params[:go_to]
     @content = params[:content].gsub("**", "").gsub("==", "")
 
-    mail(to: @user.email, subject: @content)
+    mail(to: @user.email, subject: @content, go_to: @go_to)
   end
 end

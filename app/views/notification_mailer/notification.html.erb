@@ -7,10 +7,19 @@
   You received a new notification on <a style="color: #f06414;" href="https://workshop.codes">Workshop.codes</a>.
 </p>
 
-<p>
-  <blockquote style="padding: 8px 16px 8px 16px; margin: 8px 0 0; background: #2e3337; border-left: 4px solid #939b9f">
-    <%= @content %>
-  </blockquote>
+<blockquote style="padding: 8px 16px 8px 16px; margin: 8px 0 0; background: #2e3337; border-left: 4px solid #939b9f">
+  <%= @content %>
+
+  <% if @go_to.present? %>
+    <br>
+    <a href="https://workshop.codes<%= @go_to %>" style="display: inline-block; color: white; background-color: #1f2326; padding: 0.25em 0.75em; margin: 4px 0 0; text-decoration: none;">
+      View
+    </a>
+  <% end %>
+</blockquote>
+
+<p style="margin: 16px 0; font-size: 12px;">
+  <a style="color: #f06414;" href="https://workshop.codes/notifications">View all notifications</a>
 </p>
 
 <hr style="border: 0; height: 1px; background: #2e3337">
