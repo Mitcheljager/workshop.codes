@@ -25,6 +25,8 @@ class ForgotPasswordsController < ApplicationController
   def create
     @user = User.find_by_email(forgot_password_params[:email])
 
+    return if @user.provider.present?
+
     if @user.present?
       recent_tokens_count = ForgotPasswordToken.where(user_id: @user.id).where("created_at > ?", 1.day.ago).size
       total_tokens_count = ForgotPasswordToken.where(user_id: @user.id).size

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_29_202839) do
+ActiveRecord::Schema[7.0].define(version: 2026_02_14_112330) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -353,6 +353,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_29_202839) do
     t.integer "linked_id"
     t.datetime "feed_last_visited_at", precision: nil
     t.string "uuid", limit: 36
+    t.boolean "send_email_on_notification", default: false
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

@@ -57,15 +57,19 @@ class ProfilesController < ApplicationController
         @user.update!(profile_params)
       end
 
-      flash[:alert] = "Successfully saved"
       respond_to do |format|
-        format.html { redirect_to edit_profile_path }
+        format.html {
+          flash[:alert] = "Successfully saved"
+          redirect_to edit_profile_path
+        }
         format.js { render "application/success" }
       end
     rescue ActiveRecord::ActiveRecordError => exception
-      flash[:error] = "Something went wrong, and your changes weren't saved"
       respond_to do |format|
-        format.html { redirect_to edit_profile_path }
+        format.html {
+          flash[:error] = "Something went wrong and your changes were not saved"
+          redirect_to edit_profile_path
+        }
         format.js { render "application/error" }
       end
     end
@@ -74,7 +78,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:user).permit(:profile_image, :banner_image, :link, :description, :custom_css, { featured_posts: [] })
+    params.require(:user).permit(:profile_image, :banner_image, :link, :description, :custom_css, { featured_posts: [] }, :send_email_on_notification, :email)
   end
 
   def not_found
