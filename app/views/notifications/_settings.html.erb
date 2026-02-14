@@ -1,0 +1,28 @@
+<div class="well well--dark" data-reveal-by-checkbox>
+  <%= form_for current_user, url: update_profile_path, remote: true do |form| %>
+    <div class="form-group checkbox mt-0">
+      <%= form.check_box :send_email_on_notification, data: { action: "reveal-by-checkbox" } %>
+      <%= form.label :send_email_on_notification, "Email me when I receive a notification", aria: { describedby: "notification-hint" } %>
+    </div>
+
+    <p class="form-hint" id="notification-hint">
+      We'll send you an email for any notification you receive. This will be send to the email attached to your account.
+      <br>
+      Email notifications for expired codes are configured per code.
+    </p>
+
+    <div class="form-field" data-role="hidden-by-checkbox" data-target="email" style="<%= "display: none" unless current_user.send_email_on_notification %>">
+      <%= form.email_field :email, placeholder: "Email address", class: "form-input", aria: { describedby: "email-hint" } %>
+
+      <p class="form-hint mt-1/8" id="email-hint">
+        This is the email address we will notify you on.
+
+        <% if current_user.provider.blank? %>
+          This is the same as the email address attached to your account used to recover your account when you forget your password.
+        <% end %>
+      </p>
+    </div>
+
+    <%= submit_tag "Save", class: "button" %>
+  <% end %>
+</div>
