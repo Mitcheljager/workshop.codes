@@ -343,7 +343,7 @@ class PostsController < ApplicationController
           @post.errors.add :derivations, :invalid, message: "error while sourcing from #{ code }: #{ errors_to_show.map { |error| error.full_message }.join(", ") }" if errors_to_show.any?
         elsif can_create_notification
           create_notification(
-            "**#{ @post.user.username }** has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
+            "Someone has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
             post_path(@post.code),
             source_post.user.id,
             :post_derived_from,
@@ -356,7 +356,7 @@ class PostsController < ApplicationController
       # Special case: We want to send a notification if the post was a draft
       if @was_draft && can_create_notification
         create_notification(
-          "**#{ @post.user.username }** has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
+          "Someone has **made a derivative** of your mode **\"==#{ source_post.title }==\"** titled **\"==#{ @post.title }==\"**",
           post_path(@post.code),
           source_post.user.id,
           :post_derived_from,

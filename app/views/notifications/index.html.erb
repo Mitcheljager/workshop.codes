@@ -1,8 +1,10 @@
 <% content_for :page_title, "Notifications" %>
 
 <%= render "layouts/account", title: "Notifications" do %>
+  <%= render "settings" %>
+
   <% unless params[:page].present? %>
-    <h3 class="mt-0">Unread Notifications <small>(<%= @notifications.where(has_been_read: 0).size %>)</small></h3>
+    <h3 class="mt-1/2">Unread Notifications <small>(<%= @notifications.where(has_been_read: 0).size %>)</small></h3>
 
     <div class="notifications">
       <% if @notifications.where(has_been_read: 0).any? %>
