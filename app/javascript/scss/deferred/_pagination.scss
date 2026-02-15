@@ -6,16 +6,20 @@
   a,
   .current {
     display: block;
-    padding: .4em .6em;
+    padding: .3em .5em;
     margin: 0 .15em;
     border-radius: $border-radius * 0.25;
     border: 0;
     color: $white;
-    font-size: $font-size-base;
+    font-size: $font-size-large;
     font-family: $font-stack-alt;
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
+
+    @include media-min(mbl) {
+      font-size: $font-size-large;
+    }
   }
 
   a {
@@ -38,6 +42,27 @@
   &--current {
     color: $white;
     background: transparent;
+  }
+
+  &--inactive {
+    opacity: 0.5;
+    pointer-events: none;
+
+    @include media-min(xs) {
+      display: none;
+    }
+  }
+}
+
+.pagination .pagination__item {
+  display: none;
+
+  &--current {
+    display: block;
+  }
+
+  @include media-min(xs) {
+    display: block;
   }
 }
 
