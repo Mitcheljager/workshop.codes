@@ -12,8 +12,7 @@ describe("subroutines.js", () => {
         Subroutine;
         someSubroutine2;
       `
-      const expectedOutput = ["someSubroutine1", "someSubroutine2"]
-      expect(getSubroutines(input)).toEqual(expectedOutput)
+      expect(getSubroutines(input)).toEqual(["someSubroutine1", "someSubroutine2"])
     })
 
     it("Should extract subroutines used in actions", () => {
@@ -22,8 +21,7 @@ describe("subroutines.js", () => {
 
         Start Rule(someSubroutine2, OtherParamIdk);
       `
-      const expectedOutput = ["someSubroutine1", "someSubroutine2"]
-      expect(getSubroutines(input)).toEqual(expectedOutput)
+      expect(getSubroutines(input)).toEqual(["someSubroutine1", "someSubroutine2"])
     })
 
     it("Should handle duplicate subroutines", () => {
@@ -38,8 +36,15 @@ describe("subroutines.js", () => {
 
         Start Rule(someSubroutine, OtherParamIdk);
       `
-      const expectedOutput = ["someSubroutine"]
-      expect(getSubroutines(input)).toEqual(expectedOutput)
+      expect(getSubroutines(input)).toEqual(["someSubroutine"])
+    })
+
+    it("Should exclude linemarkers from subroutine name", () => {
+      const input = `
+        [linemarker][/linemarker]Subroutine;
+        [linemarker][/linemarker]someSubroutine;
+      `
+      expect(getSubroutines(input)).toEqual(["someSubroutine"])
     })
   })
 
