@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::UnknownFormat, with: :render_404
   rescue_from ActionController::BadRequest, with: -> { head :bad_request }
 
+  after_action except: [:create, :update, :destroy], if: -> { request.format.html? } do
+    TrackingJob.perform_async(ahoy, "Page View", { request: request.path_parameters, url: request.base_url + request.original_fullpath })
+  end
+
   def active_storage_blob_variant_url
     blob = ActiveStorage::Blob.find_by_key(params[:key])
 

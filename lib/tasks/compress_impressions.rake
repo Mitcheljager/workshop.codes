@@ -1,9 +1,10 @@
-desc "Compress 1 day old impressions in to Statistic"
+desc "Compress impressions of the last 24 hours in to Statistic"
 task compress_impressions: :environment do
   ActiveRecord::Base.connection_pool.with_connection do
     compress_events("Posts Visit", :visit)
     compress_events("Copy Code", :copy)
     compress_visits
+    compress_page_views
 
     Ahoy::Visit.where("started_at < ?", 1.month.ago).find_in_batches do |visits|
       visit_ids = visits.map(&:id)
@@ -17,7 +18,7 @@ def compress_events(event_name, content_type)
   events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: event_name).distinct.pluck(:visit_id, :properties).group_by { |v| v[1]["id"] }
 
   events.each do |event|
-    @statistic = Statistic.new(timeframe: :daily, content_type: content_type, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
+    @statistic = Statistic.new(timeframe: :daily, content_type:, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
 
     if event[1].first[1]["id"]
       @statistic.model_id = event[1].first[1]["id"]
@@ -42,4 +43,21 @@ def compress_visits
   post_visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Posts Visit").distinct.pluck(:visit_id, :properties).count
   @statistic = Statistic.new(timeframe: :daily, content_type: :unique_post_visit, on_date: Date.today, value: post_visit_count)
   @statistic.save
+end
+
+def compress_page_views
+  page_views = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Page View").count
+  @statistic = Statistic.new(timeframe: :daily, content_type: :page_view, on_date: Date.today, value: page_views)
+  @statistic.save
+
+  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Page View").pluck(:properties)
+  groups = events.group_by do |properties|
+    request = properties["request"] || {}
+    [request["controller"], request["action"]]
+  end
+
+  groups.each do |(controller, action), items|
+    @controller_action = Statistic.new(timeframe: :daily, content_type: :page_view_controller_action, on_date: Date.today, value: items.size, properties: { controller:, action: })
+    @controller_action.save
+  end
 end
