@@ -71,13 +71,13 @@
 <svelte:window on:keydown={keypress} on:keyup={keypress} />
 
 <div class="sortable" bind:this={element}>
-  {#each itemsInParent || [] as { id, type } (id)}
+  {#each (itemsInParent || []) as { id, type } (id)}
     <!--
       TODO: Fix me, this isn't great.
       This is written to a separate const so that the state of the item remains bound to the item in the list.
       This isn't the case by default because of the explanation on line 11 of this file.
     -->
-    {@const item = $items.find(item => item.id === id)}
+    {@const item = (itemsInParent || []).find(item => item.id === id)}
 
     <div animate:flip={{ duration: 200 }}>
       {#if type === "item"}
