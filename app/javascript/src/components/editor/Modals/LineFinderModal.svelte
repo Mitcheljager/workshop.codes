@@ -11,7 +11,6 @@
   let error = ""
   let foundCompiled = {}
   let foundItem = {}
-  let lineNumber = 0
   let input
 
   onMount(() => {
@@ -60,19 +59,25 @@
       // Attempt to find line marker starting at current line moving up
       let linemarkerStart = -1
       let i = intValue
+      let currentLinemarker = splitCompiled[i]
       while (i) {
-        linemarkerStart = splitCompiled[i].indexOf("[linemarker]")
+        currentLinemarker = splitCompiled[i]
+        if (!currentLinemarker) break
+
+        linemarkerStart = currentLinemarker.indexOf("[linemarker]")
         if (linemarkerStart != -1) break
         i--
       }
 
+      if (!currentLinemarker) throw new Error("Line was not found, are you sure you entered it correctly?")
+
       // Get end of linemarker and split data for item id and line number
-      const linemarkerEnd = splitCompiled[i].indexOf("[/linemarker]")
-      const linemarkerData = splitCompiled[i].substring(linemarkerStart + "[linemarker]".length, linemarkerEnd)
+      const linemarkerEnd = currentLinemarker.indexOf("[/linemarker]")
+      const linemarkerData = currentLinemarker.substring(linemarkerStart + "[linemarker]".length, linemarkerEnd)
       const splitLineData = linemarkerData.split("|")
       const itemId = splitLineData[0]
       const item = getItemById(itemId)
-      lineNumber = parseInt(splitLineData[1])
+      const lineNumber = parseInt(splitLineData[1])
 
       if (!item) throw new Error("Couldn't find a corresponding file.")
 
@@ -99,7 +104,7 @@
     }
   }
 
-  async function goToItemAndSelect() {
+  async function goToItemAndSelect(lineNumber = 0) {
     setCurrentItemById(foundItem.item.id)
 
     await tick()
@@ -108,7 +113,7 @@
     if (!state) return
 
     // Fire event to set selection, captured in CodeMirror.svelte
-    const { from, to } = state.doc.line(lineNumber + 1)
+    const { from, to } = state.doc.line(Math.min(lineNumber + 1, state.doc.lines))
     const createSelection = new CustomEvent("create-selection", {
       bubbles: true,
       detail: { from, to }
@@ -162,6 +167,6 @@
       fullContentLines={foundItem.multiline}
       snippetHighlightedLineIndex={foundItem.lineNumber} />
 
-    <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there</button>
+    <button class="button mt-1/4" on:click={() => goToItemAndSelect(foundItem.lineNumber)}>Take me there</button>
   {/if}
 </Modal>
