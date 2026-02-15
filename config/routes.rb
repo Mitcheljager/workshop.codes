@@ -136,7 +136,7 @@ Rails.application.routes.draw do
   resources :projects, param: :uuid, format: :json, only: [:show, :create, :update, :destroy]
   resources :project_backups, param: :uuid, format: :json
 
-  get "latest", to: "posts#latest", as: "latest"
+  get "latest(/page/:page)", to: "posts#latest", as: "latest"
   get "page/1", to: redirect("/latest", status: 301)
 
   get "search", to: "search#show", as: "filter"
