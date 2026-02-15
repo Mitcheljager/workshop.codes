@@ -21,6 +21,7 @@
     <th>Level</th>
     <th>Prov</th>
     <th>Email</th>
+    <th>Send?</th>
     <th>Img?</th>
     <th>Link?</th>
     <th>Desc?</th>
@@ -41,6 +42,7 @@
       <td><%= user.level %></td>
       <td><small><%= user.provider %></small></td>
       <td><%= "✔" if user.email.present? %></td>
+      <td><%= "✔" if user.send_email_on_notification? %></td>
       <td><%= "✔" if user.profile_image.attached? %></td>
       <td><%= "✔" if user.link.present? %></td>
       <td><%= "✔" if user.description.present? %></td>
