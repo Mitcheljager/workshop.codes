@@ -266,7 +266,7 @@ class PostsController < ApplicationController
 
   def create_collection
     nice_url = SecureRandom.alphanumeric(6).downcase
-    @collection = Collection.create(user_id: current_user.id, title: post_params[:new_collection], nice_url: nice_url)
+    @collection = Collection.create(user_id: current_user.id, title: post_params[:new_collection], nice_url:)
 
     @post.update(collection_id: @collection.id)
   end
@@ -431,7 +431,7 @@ class PostsController < ApplicationController
           @block.images.attach(properties[:images])
         end
 
-        @block.update(content_id: @post.id, properties: properties)
+        @block.update(content_id: @post.id, properties:)
       end
     end
 

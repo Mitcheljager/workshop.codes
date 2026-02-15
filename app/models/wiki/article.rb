@@ -31,12 +31,12 @@ class Wiki::Article < ApplicationRecord
   def self.search(query, size = 100)
     __elasticsearch__.search({
       from: 0,
-      size: size,
+      size:,
       query: {
         bool: {
           should: [{
             multi_match: {
-              query: query,
+              query:,
               fields: ["title"],
               type: "cross_fields",
               operator: "and",
@@ -46,7 +46,7 @@ class Wiki::Article < ApplicationRecord
             }
           }, {
             multi_match: {
-              query: query,
+              query:,
               fields: ["title^2", "tags^1.5", "category.title"],
               fuzziness: "AUTO"
             }

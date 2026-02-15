@@ -8,7 +8,7 @@ module ContentHelper
 
     def image(link, title, alt_text)
       alt_text = "" if alt_text == "Text description"
-      image_tag(link, title: title, alt: alt_text || "", loading: "lazy")
+      image_tag(link, title:, alt: alt_text || "", loading: "lazy")
     end
 
     # loosely based on https://github.com/vmg/redcarpet/blob/3e3f0b522fbe9283ba450334b5cec7a439dc0955/ext/redcarpet/html.c#L297
@@ -98,7 +98,7 @@ module ContentHelper
       autoplay = $2.blank? ? nil : true
 
       video_element = ActionController::Base.helpers.video_tag("",
-        data: { role: "lazy-video", src: video_url, autoplay: autoplay },
+        data: { role: "lazy-video", src: video_url, autoplay: },
         playsinline: true,
         controls: !autoplay,
         muted: autoplay,
@@ -114,9 +114,9 @@ module ContentHelper
         images = JSON.parse($1.strip)
 
         if action_name == "parse_markdown"
-          render_to_string partial: "markdown_elements/gallery", locals: { images: images }
+          render_to_string partial: "markdown_elements/gallery", locals: { images: }
         else
-          render partial: "markdown_elements/gallery", locals: { images: images }
+          render partial: "markdown_elements/gallery", locals: { images: }
         end
       rescue
         "<em>An error was found in the gallery</em>"
@@ -163,9 +163,9 @@ module ContentHelper
 
         if block.present?
           if action_name == "parse_markdown"
-            render_to_string partial: "blocks/post/#{ block.name }", locals: { block: block }
+            render_to_string partial: "blocks/post/#{ block.name }", locals: { block: }
           else
-            render "blocks/post/#{ block.name }", block: block
+            render "blocks/post/#{ block.name }", block:
           end
         end
       end
@@ -186,9 +186,9 @@ module ContentHelper
         icons = data["icons"] || {}
 
         if action_name == "parse_markdown"
-          render_to_string partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities, icons: icons }
+          render_to_string partial: "markdown_elements/update_notes", locals: { hero:, title:, description:, abilities:, icons: }
         else
-          render partial: "markdown_elements/update_notes", locals: { hero: hero, title: title, description: description, abilities: abilities, icons: icons }
+          render partial: "markdown_elements/update_notes", locals: { hero:, title:, description:, abilities:, icons: }
         end
       rescue
         "<em>An error was found in the Hero Update markdown</em>"
@@ -208,7 +208,7 @@ module ContentHelper
 
   def sanitized_markdown(text, rendererOptions: {})
     ActionController::Base.helpers.sanitize(
-      markdown(text, rendererOptions: rendererOptions),
+      markdown(text, rendererOptions:),
       tags: %w[div span hr style mark dl dd dt img details summary a button b iframe audio video source blockquote pre code br p table td tr th thead tbody ul ol li h1 h2 h3 h4 h5 h6 em i strong big sub sup],
       attributes: %w[style href id class src srcset title width height frameborder allow allowfullscreen alt loading data-autoplay data-src data-action data-target data-tab data-hide-on-close data-toggle-content data-modal data-role data-url data-gallery data-id controls playsinline loop muted aria-level aria-label aria-labelledby aria-hidden aria-expanded tabindex role]
     )

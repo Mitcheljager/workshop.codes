@@ -6,7 +6,7 @@ RSpec.describe "Profiles", type: :request do
   let!(:posts) { create_list(:post, 30, user_id: user.id) }
 
   before :each do
-    create(:block, user: user, name: "highlight", properties: "{post: #{posts.first.id}}")
+    create(:block, user:, name: "highlight", properties: "{post: #{posts.first.id}}")
   end
 
   describe "GET /u/:username" do

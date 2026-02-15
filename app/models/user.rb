@@ -105,11 +105,11 @@ class User < ApplicationRecord
   def self.search(query, size = 100)
     __elasticsearch__.search({
       from: 0,
-      size: size,
+      size:,
       query: {
         match: {
           username: {
-            query: query,
+            query:,
             fuzziness: "AUTO"
           }
         }
@@ -122,7 +122,7 @@ class User < ApplicationRecord
     provider = auth_hash["provider"]
     username = auth_hash["info"]["name"] || auth_hash["info"]["battletag"]
 
-    user = find_or_create_by(uid: uid, provider: provider)
+    user = find_or_create_by(uid:, provider:)
 
     user.username = username
     user.username.gsub!(" ", "-")

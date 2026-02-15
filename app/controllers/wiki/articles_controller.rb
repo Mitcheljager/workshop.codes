@@ -137,7 +137,7 @@ class Wiki::ArticlesController < Wiki::BaseController
 
   def title_to_slug
     slug = CGI.escape(@article.title.gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase
-    if Wiki::Article.where.not(group_id: @article.group_id).where(slug: slug).any?
+    if Wiki::Article.where.not(group_id: @article.group_id).where(slug:).any?
       "#{ slug }-#{ random_string }"
     else
       slug
@@ -147,9 +147,9 @@ class Wiki::ArticlesController < Wiki::BaseController
   def create_wiki_edit(content_type, article_id, notes = "")
     Wiki::Edit.create(
       user_id: current_user.id,
-      content_type: content_type,
-      article_id: article_id,
-      notes: notes,
+      content_type:,
+      article_id:,
+      notes:,
       approved: true
     )
   end

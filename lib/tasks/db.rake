@@ -13,7 +13,7 @@ namespace :db do
         heroes: ["Mei"],
         maps: ["Havana"],
         tags: Faker::Lorem.word,
-        min_players: min_players,
+        min_players:,
         max_players: Faker::Number.within(range: min_players..12)
       )
     end

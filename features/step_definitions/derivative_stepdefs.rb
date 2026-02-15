@@ -4,7 +4,7 @@ Given "{string} has a source {string}" do |post_title, source_title|
   expect(post).to be_present
   expect(source).to be_present
 
-  derivative = Derivative.create(derivation: post, source: source, source_code: source.code)
+  derivative = Derivative.create(derivation: post, source:, source_code: source.code)
   expect(derivative).to be_persisted
 end
 

@@ -88,7 +88,7 @@ task upgrade_wiki_articles: :environment do
       subtitle: article.subtitle,
       slug: CGI.escape(article.title.gsub(/[^0-9a-z ]/i, "").parameterize).gsub("+", "-").downcase,
       group_id: article.group_id,
-      content: content,
+      content:,
       category_id: article.category.id,
       tags: article.tags,
     )

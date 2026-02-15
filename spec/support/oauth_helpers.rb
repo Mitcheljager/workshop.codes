@@ -7,7 +7,7 @@ module Helpers
     def stub_oauth_flow(provider, username, &block)
       base_mock = {
         uid: oauth_username_to_mock_uid(provider, username),
-        provider: provider,
+        provider:,
         info: {
           provider == "bnet" ? :battletag : :name => username,
           image: "https://ehe.gg/media/img/logos/Elo-Hell-Logo_I-C-Dark.png"

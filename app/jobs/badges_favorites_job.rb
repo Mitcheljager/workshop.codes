@@ -15,7 +15,7 @@ class BadgesFavoritesJob
         create_badge(badge_id: 0, user: post_user) if favorites_count >= 100
         create_badge(badge_id: 1, user: post_user) if favorites_count >= 500
 
-        create_badge(badge_id: 5, user: user) if user.favorites.count >= 50
+        create_badge(badge_id: 5, user:) if user.favorites.count >= 50
       end
     rescue
     end

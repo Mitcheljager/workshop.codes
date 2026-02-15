@@ -5,17 +5,17 @@ module NotificationsHelper
     return unless user.present?
 
     Notification.create(
-      content: content,
-      go_to: go_to,
+      content:,
+      go_to:,
       user_id: user.id,
       has_been_read: 0,
-      content_type: content_type,
-      concerns_model: concerns_model,
-      concerns_id: concerns_id
+      content_type:,
+      concerns_model:,
+      concerns_id:
     )
 
     if user.send_email_on_notification? && user.email.present?
-      NotificationMailer.with(content: content, go_to: go_to, user_id: user.id).notification.deliver_later
+      NotificationMailer.with(content:, go_to:, user_id: user.id).notification.deliver_later
     end
   end
 end

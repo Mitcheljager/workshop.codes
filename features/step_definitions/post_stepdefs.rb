@@ -2,7 +2,7 @@ Given /an? ?([a-z]+)? post by ([\d\p{L}_-]*[#\d]*) titled "([^"]+)"/ do |visibil
   visibility ||= "public"
   user = User.find_by_username(username)
   expect(user).to be_present
-  post = create(:post, user: user, title: title)
+  post = create(:post, user:, title:)
   update_post_visibility(post, visibility)
 end
 
@@ -10,14 +10,14 @@ Given "the following posts exist" do |table|
   table.hashes.each do |hash|
     user = User.find_by_username(hash[:user])
     expect(user).to be_present
-    post = create(:post, user: user, title: hash[:title])
+    post = create(:post, user:, title: hash[:title])
 
     update_post_visibility(post, hash[:visibility])
   end
 end
 
 Given "the post titled {string} is (a ){word}" do |title, visibility|
-  post = Post.find_by(title: title)
+  post = Post.find_by(title:)
   expect(post).to be_present
   unless visibility.downcase == "draft"
     visit edit_post_path(code: post.code)

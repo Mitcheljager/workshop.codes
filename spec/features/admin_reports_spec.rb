@@ -12,7 +12,7 @@ RSpec.describe "AdminReports", type: :feature do
   let!(:comment_author) { create(:user) }
   let!(:admin) { create(:user, password: "password", level: :admin) }
   let!(:post) { create(:post, user_id: post_author.id) }
-  let!(:comment) { create(:comment, user_id: comment_author.id, post: post) }
+  let!(:comment) { create(:comment, user_id: comment_author.id, post:) }
 
   before(:each) do
     sign_in_as(admin, "password")
@@ -87,7 +87,7 @@ RSpec.describe "AdminReports", type: :feature do
       it "still shows the report page" do
         concerns_model = "comment; --"
         report = create(:report,
-          concerns_model: concerns_model
+          concerns_model:
         )
 
         visit admin_report_path(id: report.id)

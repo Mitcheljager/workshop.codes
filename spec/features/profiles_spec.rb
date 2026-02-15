@@ -59,7 +59,7 @@ RSpec.describe "Profiles", type: :feature do
 
   describe "page responds to tab query param" do
     it "selects the codes tab even if the user has a block" do
-      create(:block, user: user, name: "highlight", properties: "{post: #{posts.first.id}, description: }")
+      create(:block, user:, name: "highlight", properties: "{post: #{posts.first.id}, description: }")
 
       visit profile_path(username: user.username, params: { tab: "codes" })
       expect(page).to have_link("Codes", class: "tabs__item--active")

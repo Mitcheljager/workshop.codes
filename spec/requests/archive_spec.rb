@@ -162,11 +162,11 @@ RSpec.describe "Archived posts controller", type: :request do
         auth.save!(validate: false) # Because technically the bnet_id is not valid
 
         username = Faker::Name.unique.first_name
-        user = create(:user, username: username, password: "password")
+        user = create(:user, username:, password: "password")
         bnet_username = "#{username}##{Faker::Number.number(digits: 5)}"
 
         # Login and link
-        post "/sessions", params: { username: username, password: "password" }
+        post "/sessions", params: { username:, password: "password" }
         expect(flash[:alert]).not_to be_present
         stub_oauth_flow("bnet", bnet_username) do
           post "/auth/bnet"

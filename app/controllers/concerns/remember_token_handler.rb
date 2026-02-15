@@ -35,7 +35,7 @@ module RememberTokenHandler
     value = cookies.encrypted[COOKIE_NAME] || generate_remember_token
 
     cookies.encrypted[COOKIE_NAME] = {
-      value: value,
+      value:,
       expires: 1.year.from_now
     }
   end
@@ -48,7 +48,7 @@ module RememberTokenHandler
 
   def generate_remember_token
     token = SecureRandom.base64
-    RememberToken.create(user_id: current_user.id, token: token)
+    RememberToken.create(user_id: current_user.id, token:)
 
     token
   end

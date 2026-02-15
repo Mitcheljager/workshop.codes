@@ -6,10 +6,10 @@ class Admin::PostsController < Admin::BaseController
   def show
     @post = Post.find(params[:id])
     @views = Statistic.where(model_id: @post.id).where(content_type: :visit).pluck(:on_date, :value).map do |on_date, value|
-      { date: on_date.strftime("%Y-%m-%d"), value: value }
+      { date: on_date.strftime("%Y-%m-%d"), value: }
     end
     @copies = Statistic.where(model_id: @post.id).where(content_type: :copy).pluck(:on_date, :value).map do |on_date, value|
-      { date: on_date.strftime("%Y-%m-%d"), value: value }
+      { date: on_date.strftime("%Y-%m-%d"), value: }
     end
   end
 

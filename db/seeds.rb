@@ -28,7 +28,7 @@ Post.destroy_all
     maps: ApplicationHelper.maps.collect { |a| a["name"] }.sample(3),
     version: Faker::App.semantic_version,
     hotness: Faker::Number.between(from: 1, to: 200),
-    min_players: min_players,
+    min_players:,
     max_players: Faker::Number.within(range: min_players..12)
   )
 end

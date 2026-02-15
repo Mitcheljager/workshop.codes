@@ -17,7 +17,7 @@ Given /a( linked)? (\S+) account "(\S+)"(?: with ID (\d+))?/ do |is_linked, type
   # ? Handle potential need to include more than one instance of account from specific provider?
   @oauth_accounts ||= {}
   @oauth_accounts[service_to_provider(type)] = {
-    username: username,
+    username:,
     uid: uid.present? ? uid.to_s : oauth_username_to_mock_uid(service_to_provider(type), username),
     provider: service_to_provider(type),
     password: "no_password"
@@ -45,7 +45,7 @@ end
 def stub_oauth_flow(provider, username, &block)
   base_mock = {
     uid: oauth_username_to_mock_uid(provider, username),
-    provider: provider,
+    provider:,
     info: {
       provider == "bnet" ? :battletag : :name => username,
       image: "https://ehe.gg/media/img/logos/Elo-Hell-Logo_I-C-Dark.png"

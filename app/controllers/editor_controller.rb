@@ -14,13 +14,13 @@ class EditorController < ApplicationController
           constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml")))
 
           response = {
-            events: events,
-            actions: actions,
-            values: values,
-            defaults: defaults,
-            constants: constants,
-            maps: maps,
-            heroes: heroes
+            events:,
+            actions:,
+            values:,
+            defaults:,
+            constants:,
+            maps:,
+            heroes:
           }
         end
 
@@ -52,6 +52,6 @@ class EditorController < ApplicationController
   private
 
   def current_user_projects(content_type)
-    @projects = current_user.present? ? current_user.projects.where(content_type: content_type).order(updated_at: :desc).select("uuid", "title", "content_type", "updated_at") : []
+    @projects = current_user.present? ? current_user.projects.where(content_type:).order(updated_at: :desc).select("uuid", "title", "content_type", "updated_at") : []
   end
 end

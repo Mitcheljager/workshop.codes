@@ -150,12 +150,12 @@ class Post < ApplicationRecord
   def self.search(query, size: 50, bypass_cache: true)
     __elasticsearch__.search({
       from: 0,
-      size: size,
+      size:,
       query: {
         bool: {
           should: [{
             multi_match: {
-              query: query,
+              query:,
               fields: ["code^5", "title^4", "tags^2", "categories", "maps", "heroes", "user.username^1.5"],
               type: "cross_fields",
               operator: "and",
@@ -167,7 +167,7 @@ class Post < ApplicationRecord
             function_score: {
               query: {
                 multi_match: {
-                  query: query,
+                  query:,
                   fields: ["code^4", "title^3", "tags^2.5", "categories", "maps", "heroes", "user.username^1.5"],
                   fuzziness: "AUTO"
                 }
