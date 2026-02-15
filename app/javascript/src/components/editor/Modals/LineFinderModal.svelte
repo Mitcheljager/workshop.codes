@@ -162,6 +162,6 @@
       fullContentLines={foundItem.multiline}
       snippetHighlightedLineIndex={foundItem.lineNumber} />
 
-    <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there!</button>
+    <button class="button mt-1/4" on:click={goToItemAndSelect}>Take me there</button>
   {/if}
 </Modal>
