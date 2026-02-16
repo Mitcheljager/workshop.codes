@@ -63,7 +63,6 @@ class ReportsController < ApplicationController
     report = @report
     path = admin_report_url(@report)
     content = report.content
-    visit_token = report.visit_token
     accept_url = report_submit_url(report.id, :accepted)
     reject_url = report_submit_url(report.id, :rejected)
 
@@ -102,6 +101,8 @@ class ReportsController < ApplicationController
     end
 
     Discord::Notifier.message(embed, url: ENV["DISCORD_REPORTS_WEBHOOK_URL"])
+  rescue => error
+    Bugsnag.notify(error) if Rails.env.production?
   end
 
   def notify_discord_comment
@@ -110,7 +111,6 @@ class ReportsController < ApplicationController
     report = @report
     path = admin_report_url(@report)
     content = report.content
-    visit_token = report.visit_token
     accept_url = report_submit_url(report.id, :accepted)
     reject_url = report_submit_url(report.id, :rejected)
 
@@ -134,5 +134,7 @@ class ReportsController < ApplicationController
     end
 
     Discord::Notifier.message(embed, url: ENV["DISCORD_REPORTS_WEBHOOK_URL"])
+  rescue => error
+    Bugsnag.notify(error) if Rails.env.production?
   end
 end

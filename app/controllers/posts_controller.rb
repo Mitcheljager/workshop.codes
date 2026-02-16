@@ -481,6 +481,8 @@ class PostsController < ApplicationController
     end
 
     Discord::Notifier.message(embed)
+  rescue => error
+    Bugsnag.notify(error) if Rails.env.production?
   end
 
   def purge_cloudflare_cache
