@@ -36,6 +36,8 @@ class CommentsController < ApplicationController
       end
 
       respond_to :js
+
+      notify_discord
     else
       respond_to do |format|
         format.js { render "application/error" }
@@ -118,5 +120,25 @@ class CommentsController < ApplicationController
   def paginated_comments
     @post = Post.find_by_id!(params[:id])
     @comments = @post.comments.includes(:user).where(parent_id: nil).order(created_at: :desc).page(params[:page])
+  end
+
+  def notify_discord
+    return unless ENV["DISCORD_COMMENTS_WEBHOOK_URL"].present?
+
+    comment = @comment
+    post = comment.post
+    user = comment.user
+    path = post_url(post.code.upcase, { tab: "comments" })
+    user_path = user_url(user.username)
+    content = comment.content
+
+    embed = Discord::Embed.new do
+      author name: user.username, url: user_path
+      title "#{user.username} posted a comment on \"#{ post.title }\""
+      url path
+      description content
+    end
+
+    Discord::Notifier.message(embed)
   end
 end
