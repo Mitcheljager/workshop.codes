@@ -1,0 +1,49 @@
+<div class="flex gap-1/4">
+  <div style="width: 50%">
+    <h3 class="mt-0">Most popular pages in the last <strong>24 hours</strong></h3>
+
+    <table>
+      <thead>
+        <th>#</th>
+        <th>URL</th>
+        <th>Count</th>
+      </thead>
+
+      <% @top_pages_by_views.each_with_index do |properties, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= properties[:url] %></td>
+          <td><%= properties[:count] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div style="width: 50%">
+    <h3 class="mt-0">Most copied posts in the last <strong>24 hours</strong></h3>
+
+    <table>
+      <thead>
+        <th>#</th>
+        <th>ID</th>
+        <th>Count</th>
+        <th>Code</th>
+        <th>Title</th>
+      </thead>
+
+      <% @top_posts_by_views.each_with_index do |properties, index| %>
+        <% post = Post.find_by_id(properties[:id]) %>
+
+        <% if post.present? %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= properties[:id] %></td>
+            <td><%= post.code %></td>
+            <td><%= post.title %></td>
+            <td><%= properties[:count] %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

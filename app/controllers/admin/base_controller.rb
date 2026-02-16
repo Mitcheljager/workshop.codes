@@ -20,14 +20,11 @@ class Admin::BaseController < ApplicationController
     @unique_copies = Rails.cache.fetch("admin_statistics/unique_copies/#{from}-#{short_period}", expires_in: 12.hours) do
       get_statistics(:unique_copies, from, short_period)
     end
+  end
 
-    top_pages_events = Rails.cache.fetch("admin_events/top_pages", expires_in: 1.hour) do
-      get_events("Page View")
-    end
-
-    top_posts_events = Rails.cache.fetch("admin_events/top_posts", expires_in: 1.hour) do
-      get_events("Copy Code")
-    end
+  def analytics_partial
+    top_pages_events = get_events("Page View")
+    top_posts_events = get_events("Copy Code")
 
     # This is ugly as hell
     @top_posts_by_views = top_posts_events.group_by do |props|
@@ -43,6 +40,8 @@ class Admin::BaseController < ApplicationController
       url:,
       count: items.size
     } end.sort_by { |item| -item[:count] }.first(10)
+
+    render partial: "analytics"
   end
 
   private
