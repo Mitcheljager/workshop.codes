@@ -141,8 +141,6 @@ class CommentsController < ApplicationController
 
     Discord::Notifier.message(embed, url: ENV["DISCORD_COMMENTS_WEBHOOK_URL"])
   rescue => error
-    puts "=========="
-    puts error
     Bugsnag.notify(error) if Rails.env.production?
   end
 end
