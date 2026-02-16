@@ -132,8 +132,6 @@ class CommentsController < ApplicationController
     user_path = user_url(user.username)
     content = comment.content
 
-    avatar
-
     embed = Discord::Embed.new do
       author name: user.username, url: user_path
       title "#{user.username} posted a comment on \"#{ post.title }\""
@@ -141,7 +139,7 @@ class CommentsController < ApplicationController
       description content
     end
 
-    Discord::Notifier.message(embed)
+    Discord::Notifier.message(embed, url: ENV["DISCORD_COMMENTS_WEBHOOK_URL"])
   rescue => error
     Bugsnag.notify(error) if Rails.env.production?
   end
