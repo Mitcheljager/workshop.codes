@@ -24,5 +24,22 @@ class Admin::BaseController < ApplicationController
     @admin_activity = Activity.where(content_type: [:admin_destroy_post, :admin_update_user, :admin_create_badge, :admin_send_notification, :admin_destroy_comment, :admin_destroy_user, :admin_destroy_post_image])
                               .order(created_at: :desc)
                               .limit(20)
+
+    # This is ugly as hell
+    top_pages_events = Ahoy::Event.where(name: "Page View").where("time > ?", 24.hours.ago).pluck(:properties)
+    @top_pages_by_views = top_pages_events.group_by do |props|
+      props["url"]
+    end.map do |url, items| {
+      url:,
+      count: items.size
+    } end.sort_by { |item| -item[:count] }.first(10)
+
+    top_posts_events = Ahoy::Event.where(name: "Copy Code").where("time > ?", 24.hours.ago).pluck(:properties)
+    @top_posts_by_views = top_posts_events.group_by do |props|
+      props["id"]
+    end.map do |id, items| {
+      id:,
+      count: items.size
+    } end.sort_by { |item| -item[:count] }.first(10)
   end
 end
