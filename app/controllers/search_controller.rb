@@ -69,12 +69,9 @@ class SearchController < ApplicationController
 
   private
 
-  # @raise [Elasticsearch::Transport::Transport::ServerError] if backend
-  #   ElasticSearch cluster has an issue
+  # @raise [Elasticsearch::Transport::Transport::ServerError] if backend ElasticSearch cluster has an issue
   def get_filtered_posts(params)
-    posts = Post.includes(:user)
-                .select_overview_columns
-                .public?
+    posts = Post.includes(:user).select_overview_columns.public?
 
     if params[:search].present? && ENV["BONSAI_URL"]
       ids = Post.search(params[:search])
