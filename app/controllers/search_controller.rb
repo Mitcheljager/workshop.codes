@@ -74,7 +74,8 @@ class SearchController < ApplicationController
     posts = Post.includes(:user).select_overview_columns.public?
 
     if params[:search].present? && ENV["BONSAI_URL"]
-      ids = Post.search(params[:search])
+      query = params[:search]
+      ids = Rails.cache.fetch("search_ids/#{query}", expires_in: 12.hours) { Post.search(query) }
       posts = posts.where(id: ids).order_by_ids(ids)
     end
 
