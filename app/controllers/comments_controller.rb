@@ -128,19 +128,21 @@ class CommentsController < ApplicationController
     comment = @comment
     post = comment.post
     user = comment.user
-    path = post_url(post.code.upcase, { tab: "comments" })
-    user_path = user_url(user.username)
+    url = post_tab_url(post.code.upcase, "comments")
+    user_url = user_url(user.username)
     content = comment.content
 
     embed = Discord::Embed.new do
-      author name: user.username, url: user_path
+      author name: user.username, url: user_url
       title "#{user.username} posted a comment on \"#{ post.title }\""
-      url path
+      url url
       description content
     end
 
     Discord::Notifier.message(embed, url: ENV["DISCORD_COMMENTS_WEBHOOK_URL"])
   rescue => error
+    puts "=========="
+    puts error
     Bugsnag.notify(error) if Rails.env.production?
   end
 end
