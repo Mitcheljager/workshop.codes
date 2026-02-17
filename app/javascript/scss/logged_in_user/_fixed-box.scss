@@ -10,6 +10,8 @@
   border-radius: $border-radius;
   z-index: 10;
   overflow-y: auto;
+  border: theme(dark);
+  box-shadow: $shadow; 
 
   @include styled-scrollbar;
 
