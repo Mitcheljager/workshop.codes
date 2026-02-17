@@ -7,11 +7,11 @@
   max-width: 300px;
   max-height: 90vh;
   background: theme(darker);
+  border: 1px solid theme(dark);
   border-radius: $border-radius;
+  box-shadow: $shadow;
   z-index: 10;
   overflow-y: auto;
-  border: theme(dark);
-  box-shadow: $shadow; 
 
   @include styled-scrollbar;
 
