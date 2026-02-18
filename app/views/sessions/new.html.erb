@@ -9,6 +9,10 @@
       <div class="warning warning--red br-1 mt-0 mb-1/4"><%= flash[:alert] %></div>
     <% end %>
 
+    <% if flash[:notice] %>
+      <div class="warning warning--mild bg-green text-white br-1 mt-0 mb-1/4"><%= flash[:notice] %></div>
+    <% end %>
+
     <div class="well well--dark">
       <div class="w-100">
         <%= form_with url: sessions_path, data: { role: "ollie-form" } do |form| %>
