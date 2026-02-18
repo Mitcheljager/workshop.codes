@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       refresh_remember_token_cookie if params[:remember_me]
 
-      create_activity(:create_user, @user.id)
+      create_activity(:create_user, {}, @user.id)
 
       redirect_to account_path
     else
