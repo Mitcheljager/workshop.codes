@@ -60,10 +60,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    begin
-      current_user.destroy
-    rescue Elasticsearch::Transport::Transport::Errors::NotFound
-    end
+    current_user.destroy
 
     session[:user_id] = nil
     redirect_to login_path

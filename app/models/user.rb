@@ -24,7 +24,6 @@ end
 class User < ApplicationRecord
   if ENV["BONSAI_URL"]
     include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
 
     settings index: {
       number_of_shards: 1,
@@ -33,7 +32,7 @@ class User < ApplicationRecord
 
     # Only index user if it has posts, we already only show them if they have posts so might
     # as well only index them in that case as well
-    after_commit on: [:create, :update] do
+    after_commit on: [:create, :update, :destroy] do
       if posts.exists?
         __elasticsearch__.index_document
       else
