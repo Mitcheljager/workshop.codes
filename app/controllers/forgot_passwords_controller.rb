@@ -52,11 +52,11 @@ class ForgotPasswordsController < ApplicationController
     @forgot_password_token = ForgotPasswordToken.where(token: forgot_password_params[:token]).where("created_at > ?", 1.hour.ago).last
 
     if @forgot_password_token.present?
-      @user = User.find_by_email(@forgot_password_token.user.email)
+      @user = @forgot_password_token.user
 
-      if @user.update(forgot_password_params.except(:token, :email))
+      if @user.update(password: forgot_password_params[:password], password_confirmation: forgot_password_params[:password_confirmation])
         create_activity(:password_reset, {}, @user.id)
-        flash[:notice] = "Password successfully reset"
+        flash[:notice] = "Password successfully reset. You can now log in with your new password."
         redirect_to login_path
       else
         render :show
