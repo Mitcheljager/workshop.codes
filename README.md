@@ -8,6 +8,8 @@ The HTML and SCSS are structured according to [BEM](http://getbem.com/naming/).
 JS does not follow any direct guidelines. Functions should be concise and limited. Files should be separated by their intent. No frameworks or libraries are used.
 Images should be losslessly compressed. SVG and WebP should be used wherever possible.
 
+**AI generated contributions are heavily discouraged.**
+
 ## Setup
 
 Follow [this Wiki page](https://github.com/Mitcheljager/workshop.codes/wiki/Local-Development:-Setup) to get started.
