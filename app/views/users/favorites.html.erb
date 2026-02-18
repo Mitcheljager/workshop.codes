@@ -5,7 +5,7 @@
     <%= render "posts/post", post: favorite.post %>
   <% end %>
 
-  <%= tag.em "You've not yet liked any Codes" if @favorites.blank? %>
+  <%= tag.em "You've not yet favorited any codes" if @favorites.blank? %>
 
   <%= paginate @favorites, window: 2 %>
 <% end %>

@@ -75,7 +75,7 @@
     </div>
   <% end %>
 
-  <%= tag.em "You've not yet posted any Items" if @posts.blank? %>
+  <%= tag.em "You've not yet posted anything" if @posts.blank? %>
 
   <%= paginate @posts, window: 2 %>
 <% end %>
