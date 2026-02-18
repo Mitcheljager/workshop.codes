@@ -29,13 +29,19 @@
     <h2>Currently linked accounts</h2>
 
     <table>
+      <tr>
+        <th>Provider</th>
+        <th>Username</th>
+        <th></th>
+      </tr>
+
       <% current_user.linked_users.each do |linked_user| %>
         <tr>
           <td><strong><%= linked_user.provider %></strong></td>
           <td><%= linked_user.username %></td>
           <td><%= link_to "Remove",
                     destroy_linked_user_path(linked_user.id),
-                    class: "text-red",
+                    class: "button button--small button--danger",
                     method: :delete,
                     data: { confirm: "Are you sure? This will unlink the account, but you can link the account again if you wish." } %>
           </td>
