@@ -3,7 +3,9 @@
 
   export let item
 
-  let value = item.name
+  function update({ target }) {
+    updateItemName(item.id, target.value)
+  }
 </script>
 
-<input type="text" class="inline-input" bind:value on:input={() => updateItemName(item.id, value)} />
+<input type="text" class="inline-input" value={item.name} on:input={update} on:blur={update} />
