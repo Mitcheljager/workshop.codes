@@ -37,6 +37,7 @@
       onRemove: updateOrder,
       onUpdate: updateOrder,
       filter: "input:focus",
+      preventOnFilter: false,
       onSelect: event => {
         if (isHoldingCtrl) event.items.forEach(item => item.classList.add("sortable__multi-selected"))
       },
