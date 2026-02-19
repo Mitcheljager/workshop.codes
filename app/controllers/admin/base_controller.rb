@@ -20,6 +20,10 @@ class Admin::BaseController < ApplicationController
     @unique_copies = Rails.cache.fetch("admin_statistics/unique_copies/#{from}-#{short_period}", expires_in: 12.hours) do
       get_statistics(:unique_copies, from, short_period)
     end
+
+    @page_views = Rails.cache.fetch("admin_statistics/page_views/#{from}-#{short_period}", expires_in: 12.hours) do
+      get_statistics(:page_view, from, short_period)
+    end
   end
 
   def analytics_partial
