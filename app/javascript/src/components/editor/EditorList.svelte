@@ -36,6 +36,7 @@
       delay: 100,
       onRemove: updateOrder,
       onUpdate: updateOrder,
+      filter: "input:focus",
       onSelect: event => {
         if (isHoldingCtrl) event.items.forEach(item => item.classList.add("sortable__multi-selected"))
       },

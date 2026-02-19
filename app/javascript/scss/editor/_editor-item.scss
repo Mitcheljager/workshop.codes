@@ -46,6 +46,11 @@
     input {
       color: theme(text-color);
       pointer-events: none;
+
+      &:focus {
+        background: theme(darker);
+        outline: 1px solid theme(text-color-dark);
+      }
     }
   }
 
