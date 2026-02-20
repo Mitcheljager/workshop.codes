@@ -22,10 +22,10 @@
   import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"
   import { get } from "svelte/store"
   import { indentedLineWrap } from "@utils/codemirror/indentedLineWrap"
-  import { removeTrailingWhitespace } from "@utils/codemirror/removeTrailingWhitespace"
   import debounce from "@src/debounce"
   import { directlyInsideParameterObject } from "@src/utils/compiler/parameterObjects"
   import { getCompletions } from "@src/utils/codemirror/completions"
+  import { fixLintWarnings } from "@src/utils/codemirror/linter/fixLinterWarnings"
 
   const dispatch = createEventDispatcher()
   const updateItem = debounce(() => {
@@ -80,7 +80,7 @@
           { key: "Enter", run: autoIndentOnEnter },
           { key: "Shift-Enter", run: autoIndentOnEnter },
           { key: "Ctrl-Shift-z", run: redoAction },
-          { key: "Ctrl-s", run: removeTrailingWhitespace }
+          { key: "Ctrl-s", run: fixLintWarnings }
         ]),
         EditorView.updateListener.of((transaction) => {
           handleTransactionDocChanged(view, transaction)

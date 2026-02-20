@@ -1,10 +1,6 @@
 import type { ChangeSpec, EditorState } from "@codemirror/state"
-import { settings } from "@stores/editor"
-import { get } from "svelte/store"
 
-export function removeTrailingWhitespace({ state, dispatch }: { state: EditorState, dispatch: Function }): boolean {
-  if (!get(settings)["remove-trailing-whitespace-on-save"]) return true
-
+export function removeTrailingWhitespace({ state }: { state: EditorState }): ChangeSpec[] {
   const changes: ChangeSpec[] = []
 
   for (let i = 1; i <= state.doc.lines; i++) {
@@ -19,9 +15,5 @@ export function removeTrailingWhitespace({ state, dispatch }: { state: EditorSta
     changes.push({ from: start, to: end })
   }
 
-  if (changes.length > 0) {
-    dispatch(state.update({ changes }, { userEvent: "input" }))
-  }
-
-  return true
+  return changes
 }

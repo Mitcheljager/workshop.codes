@@ -113,9 +113,11 @@ export const settings = writable({
   "autocomplete-min-parameter-newlines": 2,
   "hide-wiki-sidebar": false,
   "highlight-trailing-whitespace": true,
-  "remove-trailing-whitespace-on-save": true,
+  "fix-lint-on-save": true,
   "tooltip-hover-delay": 50,
   "rainbow-brackets": false,
   "context-based-completions": true,
-  "exclude-lobby-settings": false
+  "exclude-lobby-settings": false,
+  /** @type {"any" | "always" | "never"} */
+  "curly-brackets-newline-style": "any"
 })

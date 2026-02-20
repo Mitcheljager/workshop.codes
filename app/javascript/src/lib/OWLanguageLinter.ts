@@ -1,5 +1,5 @@
 import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
-import { completionsMap, modal, subroutinesMap, workshopConstants } from "@stores/editor"
+import { completionsMap, modal, settings, subroutinesMap, workshopConstants } from "@stores/editor"
 import { get } from "svelte/store"
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 import type { EditorView } from "codemirror"
@@ -29,6 +29,7 @@ export function OWLanguageLinter(view: EditorView): Diagnostic[] {
   findUndefinedSubroutines(content)
   findTripleEquals(content)
   findHeroEnabledOrOn(content)
+  checkCurlyBracketNewlineStyle(content)
   checkMixins(content)
   checkTranslations(content)
   checkForLoops(content)
@@ -782,6 +783,28 @@ function findHeroEnabledOrOn(content: string): void {
           view.dispatch({ changes: { from, to, insert: isEnabled ? "On" : "Off" } })
         }
       }]
+    })
+  }
+}
+
+function checkCurlyBracketNewlineStyle(content: string): void {
+  const style = get(settings)["curly-brackets-newline-style"]
+  if (style === "any") return
+
+  const stringRanges = findRangesOfStrings(content)
+
+  // Brackets proceeded by any character except for ( or {
+  // `conditions {` and `conditions \n{` but not `Action({` or `{{`
+  const regex = style === "always" ? /[^\s{(][^\S\r\n]*{/g : /[^\s{(][^\S\r\n]*\r?\n[^\S\r\n]*{/g
+
+  for (const match of matchAllOutsideRanges(stringRanges, content, regex)) {
+    const from = match.index + match[0].length - 1
+
+    diagnostics.push({
+      from: from,
+      to: from + 1,
+      severity: "warning",
+      message: style === "always" ? "New line expected" : "No new line expected"
     })
   }
 }

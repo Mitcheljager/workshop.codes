@@ -102,28 +102,6 @@
       <hr>
 
       <div class="checkbox mt-1/8">
-        <input id="highlight-trailing-whitespace" type="checkbox" bind:checked={$settings["highlight-trailing-whitespace"]} />
-        <label for="highlight-trailing-whitespace">Highlight trailing whitespace</label>
-      </div>
-
-      <div class="text-small mt-1/16 pl-1/2 text-base">
-        Mark whitespace at the end of a line.
-      </div>
-
-      <hr>
-
-      <div class="checkbox mt-1/8">
-        <input id="remove-trailing-whitespace-on-save" type="checkbox" bind:checked={$settings["remove-trailing-whitespace-on-save"]} />
-        <label for="remove-trailing-whitespace-on-save">Remove trailing whitespace on save</label>
-      </div>
-
-      <div class="text-small mt-1/16 pl-1/2 text-base">
-        Remove whitespace at the end of a line every time you save.
-      </div>
-
-      <hr>
-
-      <div class="checkbox mt-1/8">
         <input id="hide-wiki-sidebar" type="checkbox" bind:checked={$settings["hide-wiki-sidebar"]} />
         <label for="hide-wiki-sidebar">
           Hide wiki sidebar
@@ -216,6 +194,36 @@
           <input type="range" min=25 max=500 step=5 class="range" bind:value={$settings["tooltip-hover-delay"]} />
           <span class="text-small text-base ml-1/8">{$settings["tooltip-hover-delay"]}ms</span>
         </div>
+      </div>
+
+      <hr class="large">
+
+      <h5 class="mt-0 mb-1/4 text-bold"><strong>Linter</strong></h5>
+
+      <div class="checkbox mt-1/8 mb-1/4">
+        <input id="fix-lint-on-save" type="checkbox" bind:checked={$settings["fix-lint-on-save"]} />
+        <label for="fix-lint-on-save">Fix linter warnings on save</label>
+      </div>
+
+      <label for="">Curly brackets newline style</label>
+
+      <div class="text-small text-base mt-1/16">
+        Highlight when curly brackets appear with or without new lines when opening new blocks.
+      </div>
+
+      <div class="button-group mt-1/8 mb-1/4">
+        {#each ["any", "always", "never"] as value}
+          <button class="button button--dark button--small" class:bg-primary={$settings["curly-brackets-newline-style"] === value} on:click={() => $settings["curly-brackets-newline-style"] = value}>{value}</button>
+        {/each}
+      </div>
+
+      <div class="checkbox mt-1/8">
+        <input id="highlight-trailing-whitespace" type="checkbox" bind:checked={$settings["highlight-trailing-whitespace"]} />
+        <label for="highlight-trailing-whitespace">Highlight trailing whitespace</label>
+      </div>
+
+      <div class="text-small mt-1/16 pl-1/2 text-base">
+        Mark whitespace at the end of a line.
       </div>
 
       <hr class="large">
