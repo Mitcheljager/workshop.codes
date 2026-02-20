@@ -50,6 +50,7 @@ group :development, :test do
   gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "database_cleaner"
+  gem "faker"
   gem "pry-byebug", "~> 3.10.1"
   gem "rubocop-rails-omakase", require: false
   gem "sqlite3", "~> 1.5.0"
@@ -68,7 +69,6 @@ group :test do
   gem "capybara", "3.38.0"
   gem "cucumber-rails", require: false
   gem "factory_bot_rails", "~> 6.2"
-  gem "faker"
   gem "timecop"
   gem "rspec-rails", "~> 4.0.2"
   gem "selenium-webdriver", "~> 4.7.1"
