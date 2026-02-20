@@ -55,7 +55,11 @@ class Admin::BaseController < ApplicationController
              .where("on_date > ?", from)
              .pluck(:on_date, :value)
              .group_by { |on_date, _| short_period ? on_date.to_date : on_date.beginning_of_week }
-             .map do |week_start, rows| { date: week_start.strftime("%Y-%m-%d"), value: rows.sum { |_, v| v } } end
+             .map do |period_start, rows| {
+                date: period_start.strftime("%Y-%m-%d"),
+                label: short_period ? period_start.strftime("%b %-d, %Y") : "#{period_start.strftime("%b %-d, %Y")} to #{period_start.end_of_week.strftime("%b %-d, %Y")}",
+                value: rows.sum { |_, v| v }
+             } end
   end
 
   def get_events(name)

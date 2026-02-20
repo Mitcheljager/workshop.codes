@@ -32,6 +32,8 @@ export default async function createChart(element: HTMLElement, data: any, datef
     area: true,
     x_accessor: "date",
     y_accessor: "value",
+    //@ts-ignore
+    x_rollover_format: ({ label }) => label + " - ",
     brush: "x",
     top: 15,
     right: 0,
