@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
   after_action :track_action, only: [:show]
   after_action :purge_cloudflare_cache, only: [:update]
+  after_action :index_now, only: [:create]
 
   def index
     @hot_posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(10) unless params[:page].present?
@@ -487,5 +488,10 @@ class PostsController < ApplicationController
 
   def purge_cloudflare_cache
     CloudflareCachePurgeService.purge_urls([post_url(@post.code)])
+  end
+
+  def index_now
+    return unless @post.public?
+    IndexNowService.submit_urls([post_url(@post.code)])
   end
 end
