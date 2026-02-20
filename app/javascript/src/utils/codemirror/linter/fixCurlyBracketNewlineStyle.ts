@@ -31,17 +31,17 @@ export function fixCurlyBracketNewlineStyle({ state }: { state: EditorState }): 
       if (!match) continue
       if (i === 1) continue
 
-      const prevLine = state.doc.line(i - 1)
-      const prevText = prevLine.text
+      const previousLine = state.doc.line(i - 1)
+      const previousText = previousLine.text
 
-      if (!/[^\s{(][^\S\r\n]*$/.test(prevText)) continue
+      if (!/[^\s{(][^\S\r\n]*$/.test(previousText)) continue
 
-      const cleanedPrev = prevText.replace(/[^\S\r\n]+$/, "")
+      const formatted = previousText.replace(/[^\S\r\n]+$/, "")
 
       changes.push({
-        from: prevLine.from,
+        from: previousLine.from,
         to: line.to,
-        insert: `${cleanedPrev} {`
+        insert: `${formatted} {`
       })
     }
   }
