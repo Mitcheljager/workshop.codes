@@ -14,6 +14,7 @@ export function fixCurlyBracketNewlineStyle({ state }: { state: EditorState }): 
 
     if (style === "always") {
       const match = text.match(/^(\s*)(.*?)([^\s{(])[^\S\r\n]*\{$/)
+
       if (!match) continue
 
       const indent = match[1]
@@ -28,15 +29,15 @@ export function fixCurlyBracketNewlineStyle({ state }: { state: EditorState }): 
 
     if (style === "never") {
       const match = text.match(/^(\s*)\{$/)
+
       if (!match) continue
       if (i === 1) continue
 
       const previousLine = state.doc.line(i - 1)
-      const previousText = previousLine.text
 
-      if (!/[^\s{(][^\S\r\n]*$/.test(previousText)) continue
+      if (!/[^\s{(][^\S\r\n]*$/.test(previousLine.text)) continue
 
-      const formatted = previousText.replace(/[^\S\r\n]+$/, "")
+      const formatted = previousLine.text.replace(/[^\S\r\n]+$/, "")
 
       changes.push({
         from: previousLine.from,
