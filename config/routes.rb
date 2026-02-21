@@ -81,7 +81,7 @@ Rails.application.routes.draw do
 
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   get "get-snippet/:code", to: "posts#get_snippet", as: "get_snippet"
-  get "similar_to/:id", to: "posts#similar_to", as: "similar_posts"
+  get "similar_to/:id", to: "similar_to#show", as: "similar_posts"
 
   resources :articles, param: :slug, except: [:index, :destroy]
 
