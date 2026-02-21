@@ -194,5 +194,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]+/ }
+  get ":nice_url", to: "posts#redirect_nice_url", as: "nice_url", format: false, constraints: { nice_url: /[a-zA-Z0-9-]{7,20}/ }
 end
