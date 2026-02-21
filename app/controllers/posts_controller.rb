@@ -24,8 +24,6 @@ class PostsController < ApplicationController
   end
 
   after_action :track_action, only: [:show]
-  after_action :purge_cloudflare_cache, only: [:update]
-  after_action :index_now, only: [:create]
 
   def index
     @hot_posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(10) unless params[:page].present?
@@ -121,6 +119,7 @@ class PostsController < ApplicationController
         create_email_notification(:will_expire, @post.id, post_params[:email]) if email_notification_enabled
         create_collection if post_params[:new_collection] != ""
         update_blocks
+        index_now if @post.public?
       end
     rescue ActiveRecord::ActiveRecordError
       respond_to do |format|
@@ -169,7 +168,9 @@ class PostsController < ApplicationController
         create_collection if post_params[:new_collection] != ""
         update_email_notifications
         update_blocks
+        purge_cloudflare_cache
         update_draft if @was_draft
+        index_now if @was_draft
 
         if (post_params[:revision].present? && post_params[:revision] != "0") || current_code != post_params[:code] || current_version != post_params[:version]
           invisible = (post_params[:revision].present? && post_params[:revision] == "0") ? 0 : 1
@@ -491,7 +492,6 @@ class PostsController < ApplicationController
   end
 
   def index_now
-    return unless @post.public?
     IndexNowService.submit_urls([post_url(@post.code)])
   end
 end
