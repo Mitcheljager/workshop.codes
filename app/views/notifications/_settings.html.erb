@@ -1,7 +1,7 @@
 <div class="well well--dark" data-reveal-by-checkbox>
   <%= form_for current_user, url: update_profile_path, remote: true do |form| %>
     <div class="form-group checkbox mt-0">
-      <%= form.check_box :send_email_on_notification, data: { action: "reveal-by-checkbox" } %>
+      <%= form.check_box :send_email_on_notification, data: { action: "reveal-by-checkbox" }, autocomplete: "off" %>
       <%= form.label :send_email_on_notification, "Email me when I receive a notification", aria: { describedby: "notification-hint" } %>
     </div>
 
@@ -12,7 +12,7 @@
     </p>
 
     <div class="form-field" data-role="hidden-by-checkbox" data-target="email" style="<%= "display: none" unless current_user.send_email_on_notification %>">
-      <%= form.email_field :email, placeholder: "Email address", class: "form-input", aria: { describedby: "email-hint" } %>
+      <%= form.email_field :email, placeholder: "Email address", class: "form-input form-input--blur", aria: { describedby: "email-hint" } %>
 
       <p class="form-hint mt-1/8" id="email-hint">
         This is the email address we will notify you on.

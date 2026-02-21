@@ -48,6 +48,11 @@
     }
   }
 
+  &--blur:not(:focus) {
+    color: transparent;
+    text-shadow: 0 0 1rem theme(text-color-lightest), 0 0 0.75rem theme(text-color-lightest);
+  }
+
   .standout & {
     background: theme(dark, -5%);
 
