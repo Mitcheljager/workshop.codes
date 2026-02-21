@@ -32,14 +32,17 @@ export default async function createChart(element: HTMLElement, data: any, datef
     area: true,
     x_accessor: "date",
     y_accessor: "value",
-    //@ts-ignore
-    x_rollover_format: ({ label }) => label + " - ",
     brush: "x",
     top: 15,
     right: 0,
     bottom: 40,
     left: 40,
     interpolate: curveStep,
-    linked: true
+    linked: true,
+    //@ts-ignore
+    x_rollover_format: ({ label, date }) => {
+      const dateFormat = new Intl.DateTimeFormat("en-US", { day: "numeric", month: "short", year: "numeric" })
+      return (label || dateFormat.format(date)) + " - "
+    }
   })
 }
