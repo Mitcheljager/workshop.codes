@@ -126,7 +126,7 @@ class User < ApplicationRecord
     user.username = username
     user.username.gsub!(" ", "-")
     user.username.gsub!(".", "-")
-    user.password = "no_password"
+    user.password = SecureRandom.hex(32)
 
     # If a user logs in with Discord their discrimimator only gets added if
     # a username validation error occurs. This could be another Discord
