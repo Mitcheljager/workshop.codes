@@ -1,4 +1,5 @@
 import { carousel, setCarousel } from "@src/carousel"
+import { carouselCards, destroy as destroyCarouselCards, render as renderCarouselCards } from "@src/carousel-cards"
 
 export function bind(): void {
   const elements = document.querySelectorAll("[data-action~='set-tab']")
@@ -73,11 +74,17 @@ function setActiveTab(targetElement: HTMLAnchorElement, parentElement: HTMLEleme
 
 function resetCarouselInTab(targetElement: Element): void {
   const carouselElement = targetElement.querySelector<HTMLElement>("[data-role='carousel']")
+  const carouselCardsElement = targetElement.querySelector<HTMLElement>("[data-role='carousel-cards']")
 
-  if (!carouselElement || !carousel) return
+  if (carouselElement && carousel) {
+    carousel.destroy(true)
+    setCarousel(carouselElement)
+  }
 
-  carousel.destroy(true)
-  setCarousel(carouselElement)
+  if (carouselCardsElement && carouselCards.length) {
+    destroyCarouselCards()
+    renderCarouselCards()
+  }
 }
 
 function scrollToElement(element: Element): void {

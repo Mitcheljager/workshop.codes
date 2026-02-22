@@ -1,6 +1,6 @@
 import Siema, { type SiemaOptions } from "siema"
 
-let carouselCards: Siema[] = []
+export let carouselCards: Siema[] = []
 
 export function destroy(): void {
   if (carouselCards.length == 0) return
