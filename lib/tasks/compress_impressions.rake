@@ -32,25 +32,25 @@ def compress_events(event_name, content_type)
 end
 
 def compress_visits
-  visits = Ahoy::Visit.where("started_at > ?", 1.day.ago).count
-  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_visit, on_date: Date.today, value: visits)
+  visits = Ahoy::Visit.where("started_at > ?", 1.day.ago)
+  @statistic = Statistic.new(timeframe: :daily, content_type: :unique_visit, on_date: Date.today, value: visits.size)
   @statistic.save
 
-  post_copy_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Copy Code").distinct.pluck(:visit_id, :properties).count
+  post_copy_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Copy Code").distinct.pluck(:visit_id, :properties).size
   @statistic = Statistic.new(timeframe: :daily, content_type: :unique_copies, on_date: Date.today, value: post_copy_count)
   @statistic.save
 
-  post_visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Posts Visit").distinct.pluck(:visit_id, :properties).count
+  post_visit_count = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Posts Visit").distinct.pluck(:visit_id, :properties).size
   @statistic = Statistic.new(timeframe: :daily, content_type: :unique_post_visit, on_date: Date.today, value: post_visit_count)
   @statistic.save
 end
 
 def compress_page_views
-  page_views = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Page View").count
-  @statistic = Statistic.new(timeframe: :daily, content_type: :page_view, on_date: Date.today, value: page_views)
+  page_views = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Page View")
+  @statistic = Statistic.new(timeframe: :daily, content_type: :page_view, on_date: Date.today, value: page_views.size)
   @statistic.save
 
-  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Page View").pluck(:properties)
+  events = page_views.pluck(:properties)
   groups = events.group_by do |properties|
     request = properties["request"] || {}
     [request["controller"], request["action"]]
