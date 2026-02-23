@@ -54,6 +54,9 @@
     </div>
 
     <table class="w-auto mt-1/2">
+      <tr><td>Provider</td> <td><%= @user.provider || "None" %></td></tr>
+      <tr><td>Has email</td> <td><%= @user.email.present? %></td></tr>
+      <tr><td>Send email on notification</td> <td><%= @user.send_email_on_notification %></td></tr>
       <tr><td>Posts</td> <td><%= @user.posts.size %></td></tr>
       <tr><td>Favorites</td> <td><%= @user.favorites.size %></td></tr>
       <tr><td>Comments</td> <td><%= @user.comments.size %></td></tr>
