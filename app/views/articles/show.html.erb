@@ -1,5 +1,5 @@
 <% content_for :page_title, @article.title %>
-<% content_for :og_description, strip_tags(markdown(@article.content || "")).truncate(200).gsub("\n"," ") %>
+<% content_for :og_description, strip_tags(markdown(@article.content || "")).truncate(150).gsub("\n"," ") %>
 <% content_for :og_summary_small, "true" %>
 <% begin %><% content_for :og_image, "#{ landscape_large_variant_public_url(@article.cover_image) if @article.cover_image.present? }" %><% rescue %><% end %>
 
