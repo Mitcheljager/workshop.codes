@@ -200,6 +200,10 @@
     background: transparent;
   }
 
+  .cm-tooltip-lint + .cm-tooltip-section {
+    padding: 0.5rem;
+  }
+
   .cm-lint-marker-warning {
     content: "";
 
