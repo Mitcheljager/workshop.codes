@@ -29,6 +29,7 @@ export function OWLanguageLinter(view: EditorView): Diagnostic[] {
   findUndefinedSubroutines(content)
   findTripleEquals(content)
   findHeroEnabledOrOn(content)
+  findEventPlayerInGlobalRules(content)
   checkCurlyBracketNewlineStyle(content)
   checkMixins(content)
   checkTranslations(content)
@@ -806,5 +807,33 @@ function checkCurlyBracketNewlineStyle(content: string): void {
       severity: "warning",
       message: style === "always" ? "New line expected" : "No new line expected"
     })
+  }
+}
+
+function findEventPlayerInGlobalRules(content: string): void {
+  const matches = content.matchAll(/(?:disabled\s+)?rule\s*\("(.*)"\)\s*{/g)
+
+  for (const match of matches) {
+    const openBracket = match.index + match[0].length - 1
+    const closeBracket = getClosingBracket(content, "{", "}", openBracket - 1)
+
+    if (closeBracket === -1) continue
+
+    const ruleContent = content.slice(openBracket, closeBracket)
+
+    if (!ruleContent.includes("Ongoing - Global")) continue
+
+    const stringRanges = findRangesOfStrings(ruleContent)
+
+    for (const eventPlayerMatch of matchAllOutsideRanges(stringRanges, ruleContent, /Event Player/g)) {
+      const from = match.index + match[0].length + eventPlayerMatch.index - 1
+
+      diagnostics.push({
+        from,
+        to: from + eventPlayerMatch[0].length,
+        severity: "error",
+        message: "Using Event Player in global rules is not allowed. Consider using Local Player instead."
+      })
+    }
   }
 }
