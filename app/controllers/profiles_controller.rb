@@ -19,6 +19,7 @@ class ProfilesController < ApplicationController
     @posts = @user.posts.select_overview_columns.public?.order("#{ allowed_sort_params.include?(params[:sort_posts]) ? params[:sort_posts] : "created_at" } DESC").page(params[:page])
     @blocks = Block.where(user_id: @user.id, content_type: :profile).order(position: :asc, created_at: :asc)
     @collections = @user.collections.includes(:posts).where("posts_count > ?", 0)
+    @updates = Revision.where(post_id: @user.posts.pluck(:id)).order(created_at: :desc).limit(50)
 
     respond_to do |format|
       format.html
