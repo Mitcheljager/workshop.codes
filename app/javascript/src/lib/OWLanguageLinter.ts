@@ -29,6 +29,7 @@ export function OWLanguageLinter(view: EditorView): Diagnostic[] {
   findUndefinedSubroutines(content)
   findTripleEquals(content)
   findHeroEnabledOrOn(content)
+  findMapIdZero(content)
   findEventPlayerInGlobalRules(content)
   checkCurlyBracketNewlineStyle(content)
   checkMixins(content)
@@ -765,7 +766,6 @@ function findHeroEnabledOrOn(content: string): void {
   if (!heroSettingsMatch) return
 
   const closingBracketIndex = getClosingBracket(content, "{", "}", heroSettingsMatch.index)
-
   const heroSettings = content.slice(heroSettingsMatch.index, closingBracketIndex + 1)
 
   for (const match of heroSettings.matchAll(/\w:\s*(Enabled|Disabled)/g)) {
@@ -782,6 +782,33 @@ function findHeroEnabledOrOn(content: string): void {
         apply(view, from, to) {
           const isEnabled = match.includes("Enabled")
           view.dispatch({ changes: { from, to, insert: isEnabled ? "On" : "Off" } })
+        }
+      }]
+    })
+  }
+}
+
+function findMapIdZero(content: string): void {
+  const mapSettingsMatch = content.match(/maps\s*\{/)
+
+  if (!mapSettingsMatch) return
+
+  const closingBracketIndex = getClosingBracket(content, "{", "}", mapSettingsMatch.index)
+  const mapSettings = content.slice(mapSettingsMatch.index, closingBracketIndex + 1)
+
+  for (const match of mapSettings.matchAll(/\n*\s0\n/g)) {
+    const from = mapSettingsMatch.index! + match.index! + 1
+    const to = from + 1
+
+    diagnostics.push({
+      from,
+      to,
+      severity: "error",
+      message: "Using a map id of 0 will cause an error when importing the code.",
+      actions: [{
+        name: "Remove 0",
+        apply(view, from, to) {
+          view.dispatch({ changes: { from: from - 1, to, insert: "" } })
         }
       }]
     })
