@@ -64,7 +64,7 @@ class AnalyticsController < ApplicationController
   end
 
   def create_daily_counts(type)
-    latest_date = [@post.created_at.strftime("%Y-%m-%d"), 6.months.ago.strftime("%Y-%m-%d")].max
+    latest_date = [@post.created_at.strftime("%Y-%m-%d"), 1.year.ago.strftime("%Y-%m-%d")].max
     counts = create_date_count(latest_date)
 
     daily = Statistic.where(model_id: @post.id).where(content_type: type).where("created_at > ?", latest_date).order(created_at: :asc)
