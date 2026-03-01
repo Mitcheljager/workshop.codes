@@ -1,0 +1,16 @@
+<%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
+
+<div class="item__content item__description shadow-block">
+  <% if @post.description.present? %>
+    <%= sanitized_markdown(@post.description) %>
+  <% else %>
+    <em>No description was given.</em>
+  <% end %>
+
+  <%= render "derivatives/derivatives" if @post.source_derivs.any? %>
+  <%= render "archive", post: @post if @archive_authorization.present? %>
+</div>
+
+<div class="item__tray" role="complementary">
+  <%= render "details" %>
+</div>
