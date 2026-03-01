@@ -32,12 +32,14 @@ class AnalyticsController < ApplicationController
       date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 }
     end
 
+    post_ids = current_user.posts.select(:id).pluck(:id)
+
     if params[:type] == "copies"
-      items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :copy).order(created_at: :asc)
+      items = Statistic.where(model_id: post_ids).where(content_type: :copy).where("created_at > ?", latest_date).order(created_at: :asc)
     elsif params[:type] == "views"
-      items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :visit).order(created_at: :asc)
+      items = Statistic.where(model_id: post_ids).where(content_type: :visit).where("created_at > ?", latest_date).order(created_at: :asc)
     elsif params[:type] == "favorites"
-      items = Favorite.where(post_id: current_user.posts.select(:id).pluck(:id)).order(created_at: :asc)
+      items = Favorite.where(post_id: post_ids).where("created_at > ?", latest_date).order(created_at: :asc)
     end
 
     if params[:type] == "favorites"
