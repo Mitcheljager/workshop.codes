@@ -19,31 +19,34 @@ class AnalyticsController < ApplicationController
 
   def user
     date_counts = []
-    if current_user.posts.any?
-      latest_date = [current_user.posts.first.created_at.strftime("%Y-%m-%d"), 6.months.ago.strftime("%Y-%m-%d")].max
 
-      (Date.parse(latest_date)...DateTime.now).each do |date|
-        date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 }
-      end
-    else
+    if current_user.posts.none?
       date_counts << { date: DateTime.now.strftime("%Y-%m-%d"), value: 0 }
+
+      render json: date_counts, layout: false and return
+    end
+
+    latest_date = [current_user.posts.first.created_at.strftime("%Y-%m-%d"), 6.months.ago.strftime("%Y-%m-%d")].max
+
+    (Date.parse(latest_date)...DateTime.now).each do |date|
+      date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 }
     end
 
     if params[:type] == "copies"
-      @items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :copy).order(created_at: :asc)
+      items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :copy).order(created_at: :asc)
     elsif params[:type] == "views"
-      @items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :visit).order(created_at: :asc)
+      items = Statistic.where(model_id: current_user.posts.select(:id).pluck(:id)).where(content_type: :visit).order(created_at: :asc)
     elsif params[:type] == "favorites"
-      @items = Favorite.where(post_id: current_user.posts.select(:id).pluck(:id)).order(created_at: :asc)
+      items = Favorite.where(post_id: current_user.posts.select(:id).pluck(:id)).order(created_at: :asc)
     end
 
     if params[:type] == "favorites"
-      @items.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values|
+      items.group_by { |x| x.created_at.strftime("%Y-%m-%d") }.each do |date, values|
         this = date_counts.detect { |d| d[:date] == date }
         this[:value] = values.count if this.present?
       end
     else
-      @items.group_by { |x| (x.on_date).strftime("%Y-%m-%d") }.each do |date, values|
+      items.group_by { |x| (x.on_date).strftime("%Y-%m-%d") }.each do |date, values|
         this = date_counts.detect { |d| d[:date] == date }
         this[:value] = values.map { |h| h[:value] }.sum if this.present?
       end
