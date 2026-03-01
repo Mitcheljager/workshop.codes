@@ -85,7 +85,11 @@
     <% end %>
 
     <%= tabs_content_tag("comments", nil, "mt-1/2") do %>
-      <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
+      <% if is_active_tab?("comments") %>
+        <%= render "comments/comments" %>
+      <% else %>
+        <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
+      <% end %>
     <% end %>
 
     <% if @revisions_count > 1 %>

@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
   def show
     paginated_comments
 
-    render layout: false
+    render "comments/_comments", layout: false
   end
 
   def more

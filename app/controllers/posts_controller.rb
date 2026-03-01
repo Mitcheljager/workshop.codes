@@ -57,6 +57,10 @@ class PostsController < ApplicationController
 
         set_post_images
         @archive_authorization = ArchiveAuthorization.find_by(code: @post.code)
+
+        if params[:tab] === "comments"
+          @comments = @post.comments.includes(:user).where(parent_id: nil).order(created_at: :desc).page(params[:page])
+        end
       }
       format.json {
         not_found and return unless @post.present?
