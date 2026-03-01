@@ -24,7 +24,7 @@ class AnalyticsController < ApplicationController
       render json: date_counts, layout: false and return
     end
 
-    from = Date.parse(params[:from]).strftime("%Y-%m-%d")
+    from = [Date.parse(params[:from]).strftime("%Y-%m-%d"), 5.years.ago.strftime("%Y-%m-%d")].max
     date_counts = create_date_count(from)
     post_ids = current_user.posts.select(:id).pluck(:id)
 
