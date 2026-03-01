@@ -26,7 +26,7 @@ function getPostAnalytics(event: Event): void {
       const parsedData = JSON.parse(data as string)
       target.querySelector(".chart__placeholder")?.remove()
 
-      createChart(target, parsedData, "%Y-%m-%d %H:00")
+      createChart(target, parsedData)
     })
 }
 

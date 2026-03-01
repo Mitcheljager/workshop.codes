@@ -18,20 +18,14 @@ class AnalyticsController < ApplicationController
   end
 
   def user
-    date_counts = []
-
     if current_user.posts.none?
-      date_counts << { date: DateTime.now.strftime("%Y-%m-%d"), value: 0 }
+      date_counts = [{ date: DateTime.now.strftime("%Y-%m-%d"), value: 0 }]
 
       render json: date_counts, layout: false and return
     end
 
     latest_date = [current_user.posts.first.created_at.strftime("%Y-%m-%d"), 6.months.ago.strftime("%Y-%m-%d")].max
-
-    (Date.parse(latest_date)...DateTime.now).each do |date|
-      date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 }
-    end
-
+    date_counts = create_date_count(latest_date)
     post_ids = current_user.posts.select(:id).pluck(:id)
 
     if params[:type] == "copies"
@@ -59,23 +53,25 @@ class AnalyticsController < ApplicationController
 
   private
 
-  def create_date_count
-    latest_date = [@post.created_at.strftime("%Y-%m-%d"), 6.months.ago.strftime("%Y-%m-%d")].max
-
+  def create_date_count(latest_date)
     date_counts = []
+
     (Date.parse(latest_date)...DateTime.now).each do |date|
-      date_counts << { date: date.strftime("%Y-%m-%d %H:00"), value: 0 }
+      date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 }
     end
 
     date_counts
   end
 
   def create_daily_counts(type)
-    counts = create_date_count
-    daily = Statistic.where(model_id: @post.id).where(content_type: type).order(created_at: :asc)
-    daily.group_by { |x| (x.on_date).to_date.strftime("%Y-%m-%d %H:00") }.each do |date, values|
-      this = counts.detect { |d| d[:date] == date }
-      this[:value] = values.map { |h| h[:value] }.sum if this.present?
+    latest_date = [@post.created_at.strftime("%Y-%m-%d"), 6.months.ago.strftime("%Y-%m-%d")].max
+    counts = create_date_count(latest_date)
+
+    daily = Statistic.where(model_id: @post.id).where(content_type: type).where("created_at > ?", latest_date).order(created_at: :asc)
+
+    daily.group_by { |x| (x.on_date).to_date.strftime("%Y-%m-%d") }.each do |date, values|
+      date_value = counts.detect { |d| d[:date] == date }
+      date_value[:value] = values.map { |h| h[:value] }.sum if date_value.present?
     end
 
     counts
