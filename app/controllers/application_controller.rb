@@ -62,6 +62,7 @@ class ApplicationController < ActionController::Base
       format.xml { head 404 }
       format.js { head 404 }
       format.json { render json: { error: "Not found" }, status: 404 }
+      format.markdown { render plain: "Would you kindly leave." }
     end
   rescue ActionController::UnknownFormat
     head 404
