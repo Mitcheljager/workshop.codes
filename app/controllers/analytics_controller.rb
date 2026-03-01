@@ -24,16 +24,16 @@ class AnalyticsController < ApplicationController
       render json: date_counts, layout: false and return
     end
 
-    latest_date = [current_user.posts.first.created_at.strftime("%Y-%m-%d"), 6.months.ago.strftime("%Y-%m-%d")].max
-    date_counts = create_date_count(latest_date)
+    from = Date.parse(params[:from]).strftime("%Y-%m-%d")
+    date_counts = create_date_count(from)
     post_ids = current_user.posts.select(:id).pluck(:id)
 
     if params[:type] == "copies"
-      items = Statistic.where(model_id: post_ids).where(content_type: :copy).where("created_at > ?", latest_date).order(created_at: :asc)
+      items = Statistic.where(model_id: post_ids).where(content_type: :copy).where("created_at > ?", from).order(created_at: :asc)
     elsif params[:type] == "views"
-      items = Statistic.where(model_id: post_ids).where(content_type: :visit).where("created_at > ?", latest_date).order(created_at: :asc)
+      items = Statistic.where(model_id: post_ids).where(content_type: :visit).where("created_at > ?", from).order(created_at: :asc)
     elsif params[:type] == "favorites"
-      items = Favorite.where(post_id: post_ids).where("created_at > ?", latest_date).order(created_at: :asc)
+      items = Favorite.where(post_id: post_ids).where("created_at > ?", from).order(created_at: :asc)
     end
 
     if params[:type] == "favorites"
@@ -53,10 +53,10 @@ class AnalyticsController < ApplicationController
 
   private
 
-  def create_date_count(latest_date)
+  def create_date_count(from)
     date_counts = []
 
-    (Date.parse(latest_date)...DateTime.now).each do |date|
+    (Date.parse(from)...DateTime.now).each do |date|
       date_counts << { date: date.strftime("%Y-%m-%d"), value: 0 }
     end
 

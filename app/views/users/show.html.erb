@@ -27,11 +27,20 @@
   <div data-user-analytics data-reveal-by-select-parent>
     <label class="form-label mt-1/1">Analytics type</label>
 
-    <select class="form-select" data-action="get-user-analytics reveal-by-select" autocomplete="off">
-      <option value="copies" selected>Copies received per day</option>
-      <option value="views">Views received per day</option>
-      <option value="favorites">Favorites per day</option>
-    </select>
+    <div class="flex gap-1/4">
+      <select class="form-select" data-action="set-user-analytics-type reveal-by-select" aria-label="Analytics type" autocomplete="off">
+        <option value="copies" selected>Copies received per day</option>
+        <option value="views">Views received per day</option>
+        <option value="favorites">Favorites per day</option>
+      </select>
+
+      <select class="form-select" data-action="set-user-analytics-timeframe" aria-label="Analytics timeframe" autocomplete="off">
+        <option value="<%= 1.month.ago %>" selected>Past month</option>
+        <option value="<%= 6.months.ago %>">Past 6 months</option>
+        <option value="<%= 1.year.ago %>">Past year</option>
+        <option value="<%= 5.years.ago %>">Past 5 years</option>
+      </select>
+    </div>
 
     <div data-reveal-by-select-target="copies">
       <p class="form-hint mt-1/4">
@@ -50,7 +59,7 @@
     </div>
 
     <p class="form-hint">
-      Updates daily. Shows up to 6 months.
+      Updates daily.
     </p>
 
     <div class="chart-wrapper pb-0">
