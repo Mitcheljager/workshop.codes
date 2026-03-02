@@ -53,6 +53,11 @@
       <%= button_to "Delete user", admin_user_path(@user), method: :delete, class: "button button--small button--danger", data: { confirm: "Are you sure? The user and all of its associations will be removed. This can not be undone. Only use this in case of spam." } %>
     </div>
 
+    <div class="mt-1/2">
+      <p>Created at: <strong><%= @user.created_at %></strong>
+      <p>Updated at: <strong><%= @user.updated_at %></strong>
+    </div>
+
     <table class="w-auto mt-1/2">
       <tr><td>Provider</td> <td><%= @user.provider || "None" %></td></tr>
       <tr><td>Has email</td> <td><%= @user.email.present? %></td></tr>

@@ -13,7 +13,8 @@
 
   <div class="tabs-content tabs-content--active" data-tab="status">
     <p>Created at: <strong><%= @post.created_at %></strong>
-    <p>Updated at: <strong><%= @post.created_at %></strong>
+    <p>Updated at: <strong><%= @post.updated_at %></strong>
+    <p>Last revision at: <strong><%= @post.last_revision_created_at %></strong>
 
     <br><br>
     <p>Total revisions: <strong><%= @post.revisions.size %></strong></p>
