@@ -154,11 +154,19 @@
     <h3 class="mt-0">Posts by <%= @user.username %></h3>
 
     <table class="w-auto">
+      <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Title<th>
+        <th>Created at<th>
+      </tr>
+
       <% @user.posts.each do |post| %>
         <tr>
           <td><%= link_to post.id, admin_post_path(post.id) %></td>
           <td><strong><%= link_to post.code, post_path(post.code) %></strong></td>
           <td><%= post.title %><td>
+          <td><%= post.created_at %><td>
         </tr>
       <% end %>
 
