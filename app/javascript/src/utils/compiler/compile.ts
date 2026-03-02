@@ -16,18 +16,17 @@ export function compile(overrideContent = "", singleLanguageOverride = null, com
   let joinedItems = overrideContent || get(flatItems)
 
   joinedItems = removeComments(joinedItems)
-
-  const [settingsStart, settingsEnd] = getSettings(joinedItems)
-  let settings = joinedItems.slice(settingsStart, settingsEnd)
-
-  if (!settings || !settingsEnd) settings = templates.Settings
-
-  joinedItems = joinedItems.replace(settings, "")
   joinedItems = extractAndInsertMixins(joinedItems)
   joinedItems = evaluateParameterObjects(joinedItems)
   joinedItems = evaluateForLoops(joinedItems)
   joinedItems = evaluateEachLoops(joinedItems)
   joinedItems = evaluateConditionals(joinedItems)
+
+  const [settingsStart, settingsEnd] = getSettings(joinedItems)
+  let settings = joinedItems.slice(settingsStart, settingsEnd)
+
+  if (!settings || !settingsEnd) settings = templates.Settings
+  joinedItems = joinedItems.replace(settings, "")
 
   const variables = compileVariables(joinedItems)
   const subroutines = compileSubroutines(joinedItems)
