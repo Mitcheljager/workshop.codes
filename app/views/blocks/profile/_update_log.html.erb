@@ -1,0 +1,88 @@
+<%# app/views/blocks/profile/_update_log.html.erb %>
+<div class="mt-1/1">
+  <% if @updates&.any? %>
+    <%# Removed the 'standout' and 'p-0' classes to remove the box/border %>
+    <div class="feed"> 
+      <% @updates.each_with_index do |revision, index| %>
+        <%# Use 'feed__item' to ensure the site's global CSS handles the horizontal layout %>
+        <div class="feed__item <%= "border-top" unless index == 0 %> py-1/2">
+          
+          <%# Left Column: Thumbnail and Code %>
+          <div class="feed__info">
+            <%= render "posts/thumbnail", post: revision.post %>
+            <%= render "posts/code", post: revision.post, item_class: "code feed__code" %>
+
+            <p class="feed__author">
+              by <%= link_to revision.post.user.clean_username, user_profile_path(revision.post.user) %>
+            </p>
+
+            <p class="feed__date">
+              <%= time_ago_in_words(revision.created_at) %> ago
+            </p>
+          </div>
+
+          <%# Right Column: Text Content (Left-Aligned by default in 'feed__item') %>
+          <div class="feed__content">
+            <h3 class="feed__title">
+              <%= link_to revision.post.title, post_path(revision.post.code) %>
+            </h3>
+
+            <% if revision.version.present? %>
+              <p class="feed__version">v<%= revision.version %></p>
+            <% end %>
+
+            <% if revision.description.blank? %>
+              <p class="mb-0 text-muted italic">
+                No update notes provided.
+              </p>
+            <% else %>
+              <h5 class="feed__update-notes mt-1/2 mb-1/8">Update notes</h5>
+              <div class="revision-description" data-role="expandable-content">
+                <%# 'item__description' ensures the markdown text aligns left %>
+                <div class="item__description mt-1/8 line-clamp-3" data-target="expandable-text">
+                  <%= sanitized_markdown(revision.description) %>
+                </div>
+                
+                <% if revision.description.length > 200 %>
+                  <button class="text-primary text-xs font-bold mt-1/4 p-0 bg-transparent border-0 cursor-pointer hover-underline" 
+                            data-action="toggle-expand">
+                    Read more
+                  </button>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <%# Simple centered message if empty, but without the 'standout' box %>
+    <div class="py-2 text-center">
+      <p class="m-0 text-muted">No updates found for this user's gamemodes.</p>
+    </div>
+  <% end %>
+</div>
+
+<%# Keep your Styles and Scripts at the bottom as before %>
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
+  .expanded .line-clamp-3 {
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-action="toggle-expand"]').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const container = button.closest('[data-role="expandable-content"]');
+      container.classList.toggle('expanded');
+      button.textContent = container.classList.contains('expanded') ? 'Read less' : 'Read more';
+    });
+  });
+</script>
