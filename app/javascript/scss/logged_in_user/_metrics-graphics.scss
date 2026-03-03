@@ -333,6 +333,11 @@ tspan.hist-symbol {
   opacity: 1;
 }
 
+.mg-markers {
+  position: relative;
+  z-index: 10;
+}
+
 .mg-markers line {
   opacity: 1;
   shape-rendering: auto;
@@ -344,6 +349,22 @@ tspan.hist-symbol {
   fill: theme(text-color);
   font-size: 0.8rem;
   opacity: 0.6;
+}
+
+.mg-marker-text[y="-1"] {
+  transform: translateY(2rem);
+
+  @for $i from 1 through 10 {
+    $selector: "";
+
+    @for $j from 1 through $i {
+      $selector: $selector + " + .mg-marker-text[y='-1']";
+    }
+
+    #{$selector} {
+      transform: translateY(1rem + (1rem * ($i + 1)));
+    }
+  }
 }
 
 .mg-missing-text {
