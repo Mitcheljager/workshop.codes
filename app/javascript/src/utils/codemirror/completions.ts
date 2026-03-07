@@ -8,7 +8,7 @@ import type { Completion, CompletionContext, CompletionResult } from "@codemirro
 import { get } from "svelte/store"
 
 export function getCompletions(context: CompletionContext): CompletionResult | null {
-  const word = context.matchBefore(/[@a-zA-Z0-9_ .]*/)
+  const word = context.matchBefore(/[@a-zA-Z0-9À-ÖØ-öø-ÿ_ .]*/i)
 
   if (!word) return null
 
