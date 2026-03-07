@@ -190,8 +190,8 @@
 
   function autocompleteFormatting(view, transaction) {
     indentMultilineInserts(view, transaction)
-    if ($settings["autocomplete-semicolon"])
-      insertSemicolon(view, transaction)
+
+    if ($settings["autocomplete-semicolon"]) insertSemicolon(view, transaction)
   }
 
   function insertSemicolon(view, transaction) {
