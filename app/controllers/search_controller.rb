@@ -5,14 +5,14 @@ class SearchController < ApplicationController
 
   def index
     # Handle old uses of search instead of query as the name
-    if params[:search].present?
-       params[:query] = params.delete(:search) unless params[:query].present?
+    if search_params[:search].present?
+      search_params[:query] = search_params.delete(:search) unless search_params[:query].present?
     end
 
-    unless params[:query].blank?
+    unless search_params[:query].blank?
       respond_to do |format|
-        format.js { redirect_to build_filter_path(:search, params[:query]) }
-        format.html { redirect_to build_filter_path(:search, params[:query]) }
+        format.js { redirect_to build_filter_path(:search, search_params[:query]) }
+        format.html { redirect_to build_filter_path(:search, search_params[:query]) }
       end
     else
       redirect_back fallback_location: latest_path
@@ -20,14 +20,14 @@ class SearchController < ApplicationController
   end
 
   def redirect_to_query_params
-    if params[:query].blank?
+    if search_params[:query].blank?
       redirect_back fallback_location: latest_path
       return
     end
 
     respond_to do |format|
-      format.js { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
-      format.html { redirect_to build_filter_path(:search, params[:query]), status: :moved_permanently }
+      format.js { redirect_to build_filter_path(:search, search_params[:query]), status: :moved_permanently }
+      format.html { redirect_to build_filter_path(:search, search_params[:query]), status: :moved_permanently }
     end
   end
 
@@ -38,12 +38,12 @@ class SearchController < ApplicationController
     end
 
     begin
-      @posts = get_filtered_posts(params)
-      @users = get_search_users(params)
+      @posts = get_filtered_posts
+      @users = get_search_users
     rescue Elasticsearch::Transport::Transport::ServerError => e
       Bugsnag.notify(e) if Rails.env.production?
 
-      @posts = Kaminari.paginate_array([]).page(params[:page])
+      @posts = Kaminari.paginate_array([]).page(search_params[:page])
       @error = "Something went wrong. Please try again later."
 
       flash[:error] = @error
@@ -70,37 +70,37 @@ class SearchController < ApplicationController
   private
 
   # @raise [Elasticsearch::Transport::Transport::ServerError] if backend ElasticSearch cluster has an issue
-  def get_filtered_posts(params)
+  def get_filtered_posts
     posts = Post.includes(:user).select_overview_columns.public?
 
-    if params[:search].present? && ENV["BONSAI_URL"]
-      query = params[:search]
+    if search_params[:search].present? && ENV["BONSAI_URL"]
+      query = search_params[:search]
       ids = Rails.cache.fetch("search_ids/#{query}", expires_in: 12.hours) { Post.search(query) }
       posts = posts.where(id: ids).order_by_ids(ids)
     end
 
-    posts = posts.joins(:user).where(users: { username: params[:author] }) if params[:author].present?
-    posts = posts.where([to_slug_query("categories"), "%#{to_slug(params[:category])}%"]) if params[:category].present?
-    posts = posts.where([to_slug_query("maps"), "%#{to_slug(params[:map])}%"]) if params[:map].present?
-    posts = posts.where([to_slug_query("heroes"), "%#{to_slug(params[:hero])}%"]) if params[:hero].present?
+    posts = posts.joins(:user).where(users: { username: search_params[:author] }) if search_params[:author].present?
+    posts = posts.where([to_slug_query("categories"), "%#{to_slug(search_params[:category])}%"]) if search_params[:category].present?
+    posts = posts.where([to_slug_query("maps"), "%#{to_slug(search_params[:map])}%"]) if search_params[:map].present?
+    posts = posts.where([to_slug_query("heroes"), "%#{to_slug(search_params[:hero])}%"]) if search_params[:hero].present?
 
-    if params[:players].present?
-      range = to_range(params[:players])
+    if search_params[:players].present?
+      range = to_range(search_params[:players])
       posts = posts.where("min_players <= ? AND max_players >= ?", range.end, range.begin)
     end
 
-    posts = posts.where("UPPER(code) LIKE ?", "#{params[:code].upcase}%") if params[:code].present?
-    posts = posts.order("#{sort_switch} DESC") if params[:sort].present?
-    posts = posts.page(params[:page])
+    posts = posts.where("UPPER(code) LIKE ?", "#{search_params[:code].upcase}%") if search_params[:code].present?
+    posts = posts.order("#{sort_switch} DESC") if search_params[:sort].present?
+    posts = posts.page(search_params[:page])
   end
 
-  def get_search_users(params)
-    return if params[:search].blank?
-    return if params[:category] || params[:map] || params[:hero] || params[:players] || params[:code]
+  def get_search_users
+    return if search_params[:search].blank?
+    return if search_params[:category] || search_params[:map] || search_params[:hero] || search_params[:players] || search_params[:code]
 
     if ENV["BONSAI_URL"]
-      ids = Rails.cache.fetch("user_search_#{params[:search]}", expires_in: 1.day) do
-        User.search(params[:search])
+      ids = Rails.cache.fetch("user_search_#{search_params[:search]}", expires_in: 1.day) do
+        User.search(search_params[:search])
       end
 
       users = User.where(id: ids).order_by_ids(ids)
@@ -116,7 +116,7 @@ class SearchController < ApplicationController
   end
 
   def sort_switch
-    case params[:sort]
+    case search_params[:sort]
     when "views"
       "impressions_count"
     when "favorites"
@@ -132,8 +132,11 @@ class SearchController < ApplicationController
     end
   end
 
+  def search_params
+    params.permit(:category, :code, :hero, :map, :sort, :expired, :author, :players, :search, :query, :page)
+  end
+
   def redirect_invalid_params
-    valid_params = params.permit(:category, :code, :hero, :map, :sort, :expired, :author, :players, :search, :page)
-    redirect_to filter_path(valid_params) if string_params(params) != params
+    redirect_to filter_path(search_params) if string_params(params) != params
   end
 end
