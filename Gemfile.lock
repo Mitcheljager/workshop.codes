@@ -407,7 +407,7 @@ GEM
       activerecord (>= 4.2)
       railties (>= 4.2)
     racc (1.8.1)
-    rack (2.2.20)
+    rack (2.2.22)
     rack-proxy (0.7.7)
       rack
     rack-test (2.2.0)
@@ -601,7 +601,7 @@ GEM
 
 PLATFORMS
   ruby
-  x64-mingw32
+  x64-mingw-ucrt
   x86_64-linux
 
 DEPENDENCIES
