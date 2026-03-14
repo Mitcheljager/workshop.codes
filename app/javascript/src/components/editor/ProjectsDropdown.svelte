@@ -1,6 +1,6 @@
 <script>
   import SearchObjects from "@components/editor/SearchObjects.svelte"
-  import { projects, currentProject, isSignedIn, isMobile, modal } from "@stores/editor"
+  import { projects, currentProject, isSignedIn, isMobile, modal, currentProjectUUID } from "@stores/editor"
   import { getSaveContent } from "@utils/editor"
   import { createProject, destroyCurrentProject, fetchProject, setUrl } from "@utils/project"
   import { escapeable } from "@components/actions/escapeable"
@@ -12,8 +12,10 @@
   let loading = false
   let active = false
   let showProjectSettings = false
-  let filteredProjects = $projects
+  let ownProjects = []
+  let filteredProjects = []
 
+  $: ownProjects = $projects.filter(({ is_owner }) => is_owner)
   $: limit = $isMobile ? 5 : 25
 
   onMount(() => {
@@ -21,7 +23,7 @@
     const uuid = urlParams.get("uuid")
 
     if (uuid) getProject(uuid)
-    else if ($projects.length) getProject($projects[0].uuid)
+    else if (ownProjects.length) getProject(ownProjects[0].uuid)
   })
 
   async function getProject(uuid) {
@@ -52,7 +54,8 @@
     loading = true
 
     const content = getSaveContent()
-    const data = await createProject($currentProject.title + " (Copy)", content)
+
+    const data = await createProject(`${$currentProject.title} (Copy)`, content)
     if (data) {
       setUrl(data.uuid)
       await fetchProject(data.uuid)
@@ -63,39 +66,41 @@
   }
 </script>
 
-<div class="dropdown" use:outsideClick on:outsideClick={() => active = false}>
+<div class="dropdown" style:max-width="200px" use:outsideClick on:outsideClick={() => active = false}>
   <button class="form-select pt-1/8 pb-1/8 pl-1/4 text-left" on:click|stopPropagation={() => active = !active} style:min-width="{$isMobile ? 75 : 200}px" disabled={loading}>
     {#if loading}
       Loading...
+    {:else if $currentProject}
+      <span class="w-100 text-truncate nowrap">{$currentProject.title}</span>
     {:else}
-      {$currentProject?.title.substring(0, limit).trim() || "Select a project..."}{#if $currentProject?.title.length > limit}...{/if}
+      Select a project...
     {/if}
   </button>
 
   {#if active}
     <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => active = false} class="dropdown__content dropdown__content--left block w-100" style:min-width="200px">
       <div class="pl-1/8 pr-1/8">
-        <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
+        <SearchObjects objects={ownProjects} bind:filteredObjects={filteredProjects} />
       </div>
 
       <hr />
 
       {#each filteredProjects as project (project.uuid)}
-        <button class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
+        <button class="dropdown__item text-truncate" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
           {project.title}
         </button>
       {/each}
 
-      {#if $projects?.length && !filteredProjects.length}
+      {#if ownProjects?.length && !filteredProjects.length}
         <em class="block text-dark text-small pl-1/8 pr-1/8">No projects match your search.</em>
       {/if}
 
-      {#if $projects?.length}
+      {#if ownProjects?.length}
         <hr />
       {/if}
 
       <div class="p-1/4">
-        {#if !$projects?.length}
+        {#if !ownProjects?.length}
           <em class="text-small block mb-1/4">Create a new project to get started.</em>
         {/if}
         <button class="button button--small w-100" on:click={() => {
@@ -109,26 +114,28 @@
   {/if}
 </div>
 
-{#if $isSignedIn && $currentProject?.is_owner && !loading}
-  <div class="dropdown" use:outsideClick on:outsideClick={() => showProjectSettings = false}>
-    <button class="w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
-      Edit
-    </button>
+{#if $isSignedIn && !loading}
+  {#if $currentProject?.is_owner}
+    <div class="dropdown" use:outsideClick on:outsideClick={() => showProjectSettings = false}>
+      <button class="w-auto text-base ml-1/8" on:click|stopPropagation={() => showProjectSettings = !showProjectSettings}>
+        Edit
+      </button>
 
-    {#if showProjectSettings}
-      <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
-        <button class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
-          Rename
-        </button>
+      {#if showProjectSettings}
+        <div transition:fly={{ duration: 150, y: 20 }} class="dropdown__content dropdown__content--left block w-100" style="width: 200px">
+          <button class="dropdown__item" on:click={() => modal.show("create-project", { type: "rename" })}>
+            Rename
+          </button>
 
-        <button class="dropdown__item" on:click={duplicateProject}>
-          Duplicate
-        </button>
+          <button class="dropdown__item" on:click={() => duplicateProject()}>
+            Duplicate
+          </button>
 
-        <button class="dropdown__item text-red" on:click={destroyProject}>
-          Destroy
-        </button>
-      </div>
-    {/if}
-  </div>
+          <button class="dropdown__item text-red" on:click={destroyProject}>
+            Destroy
+          </button>
+        </div>
+      {/if}
+    </div>
+  {/if}
 {/if}
