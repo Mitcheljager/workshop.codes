@@ -13,7 +13,7 @@
 
     <div class="dropdown__content" data-dropdown-content>
       <% @post.revisions.order(created_at: :desc).each do |revision| %>
-        <%= link_to difference_path(revision.id, @compare_revision.present? ? @compare_revision.id : ""), class: "dropdown__item" do %>
+        <%= button_to difference_path(revision.id, @compare_revision.present? ? @compare_revision.id : ""), method: "get", class: "dropdown__item" do %>
           <strong><%= revision.code %></strong>
           <em>- <%= revision.version %></em>
         <% end %>
@@ -28,7 +28,7 @@
 
       <div class="dropdown__content" data-dropdown-content>
         <% @post.revisions.order(created_at: :desc).each do |revision| %>
-          <%= link_to difference_path(@revision.id, revision.id), class: "dropdown__item" do %>
+          <%= button_to difference_path(@revision.id, revision.id), method: "get", class: "dropdown__item" do %>
             <strong><%= revision.code %></strong>
             <em>- <%= revision.version %></em>
           <% end %>
