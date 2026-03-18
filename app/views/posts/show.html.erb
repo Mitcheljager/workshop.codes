@@ -39,7 +39,7 @@
       <% end %>
     <% end %>
 
-    <%= tabs_content_tag("comments", nil, "mt-1/2") do %>
+    <%= tabs_content_tag("comments", nil, "mt-1/2", is_active_tab?("comments")) do %>
       <% if is_active_tab?("comments") %>
         <%= render "comments/comments" %>
       <% else %>

@@ -52,9 +52,9 @@ module PostsHelper
     false
   end
 
-  def tabs_content_tag(name, alt_url = nil, extra_class = "item__content shadow-block")
+  def tabs_content_tag(name, alt_url = nil, extra_class = "item__content shadow-block", loaded = false)
     tag.div class: "#{ extra_class } tabs-content #{ "tabs-content--active" if is_active_tab?(alt_url || name) }",
-            data: { tab: name, partial: name, loaded: ("true" if is_active_tab?(alt_url || name)) },
+            data: { tab: name, partial: name, loaded: loaded ? "true" : "false" },
             aria: { hidden: !is_active_tab?(alt_url || name) } do
       yield
     end
