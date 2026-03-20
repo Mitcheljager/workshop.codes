@@ -10,12 +10,17 @@ class Wiki::ArticlesController < Wiki::BaseController
   end
 
   def index
-    @articles = Wiki::Article.group(:group_id).maximum(:id).values
-    @articles = Wiki::Article.where(id: @articles).order(created_at: :desc).page(params[:page])
+    article_ids = Wiki::Article.group(:group_id).maximum(:id).values
+    @articles = Wiki::Article.where(id: article_ids).order(created_at: :desc).page(params[:page])
 
     respond_to do |format|
       format.html
       format.js { render "wiki/articles/infinite_scroll_articles" }
+      format.json {
+        render json: @articles.map { |article|
+          article.as_json(include: :category).merge(url: wiki_article_url(article))
+        }
+      }
     end
   end
 

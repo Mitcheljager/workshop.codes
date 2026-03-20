@@ -8,19 +8,29 @@ class Wiki::CategoriesController < Wiki::BaseController
 
   def index
     @categories = Wiki::Category.order(title: :asc)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @categories }
+    end
   end
 
   def show
     @category = Wiki::Category.find_by_slug!(params[:slug])
 
-    @articles = Wiki::Article.where(category: @category).group(:group_id).maximum(:id).values
-    @articles = Wiki::Article.where(id: @articles).order(title: :asc).page(params[:page])
+    article_ids = Wiki::Article.where(category: @category).group(:group_id).maximum(:id).values
+    @articles = Wiki::Article.where(id: article_ids).order(title: :asc).page(params[:page])
 
     add_breadcrumb @category.title, Proc.new { wiki_category_path(@category.slug) }
 
     respond_to do |format|
       format.html
       format.js { render "wiki/articles/infinite_scroll_articles" }
+      format.json {
+        render json: @articles.map { |article|
+          article.as_json(include: :category).merge(url: wiki_article_url(article))
+        }
+      }
     end
   end
 
