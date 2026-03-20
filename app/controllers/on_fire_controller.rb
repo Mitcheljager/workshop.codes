@@ -5,10 +5,7 @@ class OnFireController < ApplicationController
     respond_to do |format|
       format.html
       format.js { render "posts/infinite_scroll_posts" }
-      format.json {
-        set_request_headers
-        render json: @posts
-      }
+      format.json { render json: @posts }
     end
   end
 end

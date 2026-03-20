@@ -64,8 +64,6 @@ class PostsController < ApplicationController
       }
       format.json {
         not_found and return unless @post.present?
-
-        set_request_headers
         render json: @post, serializer: PostSerializer, is_show: true
       }
     end
@@ -256,10 +254,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html
       format.js { render "posts/infinite_scroll_posts" }
-      format.json {
-        set_request_headers
-        render json: @posts
-      }
+      format.json { render json: @posts }
     end
   end
 

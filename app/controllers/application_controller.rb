@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::UnknownFormat, with: :render_404
   rescue_from ActionController::BadRequest, with: -> { head :bad_request }
 
+  before_action :set_request_headers, if: -> { request.format.json? }
+
   after_action except: [:create, :update, :destroy], if: -> { request.format.html? } do
     TrackingJob.perform_async(ahoy, "Page View", { request: request.path_parameters, url: request.base_url + request.original_fullpath })
   end
@@ -47,15 +49,6 @@ class ApplicationController < ActionController::Base
     cookies[:theme] || "overwatch"
   end
 
-  helper_method :set_request_headers
-
-  def set_request_headers
-    headers["Access-Control-Allow-Origin"] = "*"
-    headers["Access-Control-Allow-Methods"] = "GET"
-    headers["Access-Control-Allow-Headers"] = "*"
-    headers["Content-Security-Policy"] = "default-src 'none'"
-  end
-
   def render_404
     respond_to do |format|
       format.html { render "errors/not_found", status: 404 }
@@ -71,5 +64,13 @@ class ApplicationController < ActionController::Base
   def handle_failed_authenticity_token
     @message = "Authentication failed. Please refresh the page and try again."
     render "application/error"
+  end
+
+  private
+
+  def set_request_headers
+    headers["Access-Control-Allow-Origin"] = "*"
+    headers["Access-Control-Allow-Methods"] = "GET"
+    headers["Access-Control-Allow-Headers"] = "*"
   end
 end

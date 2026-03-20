@@ -11,10 +11,7 @@ class Wiki::DictionaryController < Wiki::BaseController
 
     respond_to do |format|
       format.html
-      format.json {
-        set_request_headers
-        render json: dictionary.to_json, layout: false
-      }
+      format.json { render json: dictionary.to_json, layout: false }
     end
   end
 
