@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     get "*path", to: redirect { |params, request| request.path.sub("/ko", "") }, format: false
   end
 
+  mount PgHero::Engine, at: "pghero"
+
   root "posts#index"
 
   get "/404", to: "errors#not_found"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_02_14_112330) do
+ActiveRecord::Schema[7.0].define(version: 2026_03_21_111143) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -212,6 +212,17 @@ ActiveRecord::Schema[7.0].define(version: 2026_02_14_112330) do
     t.integer "concerns_id", default: 0
     t.index ["concerns_id"], name: "index_notifications_on_concerns_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.text "query"
+    t.integer "query_hash", limit: 8
+    t.float "total_time"
+    t.integer "calls", limit: 8
+    t.datetime "captured_at"
+    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
   create_table "posts", force: :cascade do |t|
