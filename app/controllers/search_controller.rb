@@ -110,8 +110,8 @@ class SearchController < ApplicationController
 
     users = users.includes(:badges)
                  .with_at_least_one_post
-                 .where(linked_id: nil) # Is not a linked account
-                 .where.not(level: :banned) # Not banned
+                 .where(linked_id: nil)
+                 .where.not(level: :banned)
                  .limit(3)
   end
 
