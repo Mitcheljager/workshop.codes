@@ -71,6 +71,8 @@ class SearchController < ApplicationController
 
   # @raise [Elasticsearch::Transport::Transport::ServerError] if backend ElasticSearch cluster has an issue
   def get_filtered_posts
+    return [] if search_params[:page]&.to_i > FILTER_MAX_PAGES
+
     posts = Post.includes(:user).select_overview_columns.public?
 
     if search_params[:search].present? && ENV["BONSAI_URL"]

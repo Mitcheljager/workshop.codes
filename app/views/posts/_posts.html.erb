@@ -2,6 +2,7 @@
 <% disable_cache ||= false %>
 <% pagination_params ||= {} %>
 <% labelledby ||= nil %>
+<% max_pages ||= 10_000 %>
 
 <% cache_if !current_user && !disable_cache, [@posts] do %>
   <main class="<%= display_type == "list" ? "items" : "cards" %>" <%= "aria-labelledby=#{labelledby}" if labelledby %>>
@@ -14,7 +15,7 @@
 
       <% if @posts.size == PAGE_SIZE || params[:page] %>
         <div class="flex justify-center grid-full-width">
-          <%= paginate @posts, params: pagination_params, theme: :simple, window: 2 %>
+          <%= paginate @posts, params: pagination_params, theme: :simple, window: 2, total_pages: [@posts.total_pages, max_pages].min %>
         </div>
       <% end %>
     <% else %>
