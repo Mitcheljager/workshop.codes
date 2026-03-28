@@ -36,7 +36,7 @@
 </script>
 
 <div class="form-group mt-1/4">
-  <div class="switch-checkbox">
+  <div class="switch-checkbox inline-block">
     <input
       id="show_derivative"
       class="switch-checkbox__input"
