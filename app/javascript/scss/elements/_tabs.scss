@@ -156,7 +156,7 @@
 }
 
 .tabs__floating {
-  border-radius: 0;
+  border-radius: 0 0 $border-radius;
   box-shadow: 0 0 2.5rem 2.5rem theme(darker);
   z-index: 2;
 }
