@@ -14,7 +14,7 @@
     <%= render "expired" if @post.expired? %>
 
     <% cache_unless params[:tab].present?, [@post, "description", @post.source_derivs] do %>
-      <%= tabs_content_tag("description", "", "mt-1/4") do %>
+      <%= tabs_content_tag("description", alt_url: "", extra_class: "mt-1/4") do %>
         <%= render "description" %>
       <% end %>
     <% end %>
@@ -28,18 +28,18 @@
     <% end %>
 
     <% if @post.snippet.present? || @post.project.present? %>
-      <%= tabs_content_tag("snippet", nil, "mt-1/2") do %>
+      <%= tabs_content_tag("snippet") do %>
         <%= render "snippet" %>
       <% end %>
     <% end %>
 
     <% if @post.collection && @post.collection.posts.visible?.many? %>
-      <%= tabs_content_tag("collection", nil, "mt-1/2") do %>
+      <%= tabs_content_tag("collection") do %>
         <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
       <% end %>
     <% end %>
 
-    <%= tabs_content_tag("comments", nil, "mt-1/2", is_active_tab?("comments")) do %>
+    <%= tabs_content_tag("comments", loaded: is_active_tab?("comments")) do %>
       <% if is_active_tab?("comments") %>
         <%= render "comments/comments" %>
       <% else %>
@@ -48,13 +48,13 @@
     <% end %>
 
     <% if @revisions_count > 1 %>
-      <%= tabs_content_tag("update-log", nil, "mt-1/2") do %>
+      <%= tabs_content_tag("update-log") do %>
         <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
       <% end %>
     <% end %>
 
     <% if @derivations_count > 0 %>
-      <%= tabs_content_tag("derivations", nil, "mt-1/2") do %>
+      <%= tabs_content_tag("derivations") do %>
         <div class="infinite-scroll"><div class="spinner" aria-live="polite" role="status"></div></div>
       <% end %>
     <% end %>
