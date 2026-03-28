@@ -72,6 +72,16 @@ class SupportedPlayersValidator < ActiveModel::Validator
   end
 end
 
+class ProjectValidator < ActiveModel::Validator
+  def validate(record)
+    return unless record.project_uuid.present?
+
+    unless record.user.projects.find_by(uuid: record.project_uuid).present?
+      record.errors.add :project_uuid, "is not of a project you own. How did that happen?"
+    end
+  end
+end
+
 class Post < ApplicationRecord
   if ENV["BONSAI_URL"]
     include Elasticsearch::Model
@@ -87,6 +97,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
   belongs_to :collection, optional: true, counter_cache: true
+  belongs_to :project, optional: true, foreign_key: :project_uuid
 
   has_many :favorites, dependent: :destroy
   has_many :revisions, -> { select("created_at", "updated_at", "post_id", "id", "version", "code", "description") }, dependent: :destroy
@@ -143,6 +154,7 @@ class Post < ApplicationRecord
                            dimension: { max: 3500..3500 }
   validates :videos, content_type: ["video/mp4"], size: { less_than: 50.megabytes }
   validates_with SupportedPlayersValidator
+  validates_with ProjectValidator
 
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", "post", post.id, 0).update_all(status: "archived") }

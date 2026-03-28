@@ -6,6 +6,10 @@
   max-width: 100%;
 }
 
+.mw-sm {
+  max-width: map-get($media-min-widths, sm);
+}
+
 .h-100 {
   height: 100%;
 }

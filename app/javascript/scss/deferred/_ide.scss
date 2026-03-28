@@ -1,6 +1,5 @@
 .ide {
   position: relative;
-  margin-top: $margin * 0.5;
 
   &--fullscreen {
     position: fixed;
@@ -79,8 +78,8 @@
 .ide__actions {
   display: flex;
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .ide__actions-item {
@@ -90,7 +89,7 @@
   margin-left: .5rem;
   border: 0;
   border-radius: $border-radius * 0.5;
-  background: theme(body);
+  background: theme(darker);
   font-size: 10px;
   line-height: 1em;
   color: theme(text-color);

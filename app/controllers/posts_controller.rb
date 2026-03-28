@@ -399,6 +399,7 @@ class PostsController < ApplicationController
       :locale, :controls,
       { categories: [] }, { heroes: [] }, { maps: [] }, :tags,
       :collection_id, :new_collection,
+      :project_uuid,
       :revision, :revision_description,
       :min_players, :max_players,
       :email_notification, :email,

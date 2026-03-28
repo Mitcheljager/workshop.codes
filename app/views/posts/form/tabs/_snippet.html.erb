@@ -9,6 +9,21 @@
   <%= svelte_component("SnippetForm", { name: "post[snippet]", value: @post.snippet, ariaDescribedby: "snippet-hint", ariaLabelledby: "snippet-title" }) %>
 </div>
 
+<% if current_user.projects.any? %>
+  <h3 class="mt-1/1">Workshop.codes Script Editor</h3>
+
+  <div class="form-group">
+    <div class="form-hint" id="project-hint">
+      If your code was made with the Workshop.codes Script Editor you can attach it here and it will show up as a link directly to your project source code.
+    </div>
+
+    <%= form.select :project_uuid,
+      options_from_collection_for_select(current_user.projects.order(created_at: :desc), "id", "title", @post.project_uuid),
+      { include_blank: "None" },
+      { class: "form-select mw-sm", aria: { describedby: "project-hint" } } %>
+  </div>
+<% end %>
+
 <h3 class="mt-1/1">Expiry Notifications</h3>
 
 <div data-reveal-by-checkbox>

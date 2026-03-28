@@ -5,6 +5,7 @@ class Project < ApplicationRecord
 
   belongs_to :user
 
+  has_many :posts, foreign_key: :project_uuid
   has_many :project_backups, -> { select(:uuid, :project_uuid, :created_at) }, class_name: "ProjectBackup", foreign_key: :project_uuid, dependent: :destroy
 
   validates :user_id, presence: true

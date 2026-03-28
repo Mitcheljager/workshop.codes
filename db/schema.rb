@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_03_21_111143) do
+ActiveRecord::Schema[7.0].define(version: 2026_03_28_114513) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -261,12 +261,14 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_21_111143) do
     t.integer "top_hotness", default: 1
     t.datetime "top_hotness_at", precision: nil
     t.boolean "light_header", default: false
+    t.string "project_uuid"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"
     t.index ["heroes"], name: "index_posts_on_heroes"
     t.index ["hotness"], name: "index_posts_on_hotness"
     t.index ["maps"], name: "index_posts_on_maps"
+    t.index ["project_uuid"], name: "index_posts_on_project_uuid"
     t.index ["tags"], name: "index_posts_on_tags"
     t.index ["title"], name: "index_posts_on_title"
     t.index ["user_id"], name: "index_posts_on_user_id"

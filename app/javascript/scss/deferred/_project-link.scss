@@ -1,0 +1,26 @@
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: $margin / 4;
+  padding: $margin / 4;
+  border-radius: $border-radius;
+  background: theme(darker);
+  box-shadow: $shadow;
+  text-decoration: none;
+  color: $text-color-light;
+
+  &:hover {
+    color: $white;
+    box-shadow: $shadow, inset 0 0 0 2px $bg-dark;
+  }
+
+  svg {
+    flex: 0 0 auto;
+    --cog-color: #{$gray};
+  }
+}
+
+.project-link__arrow {
+  margin-left: auto;
+  fill: currentColor;
+}
