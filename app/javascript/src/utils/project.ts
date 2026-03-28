@@ -25,8 +25,6 @@ export async function createProject(title: string, content = null): Promise<Proj
     .catch(error => {
       console.error(error)
       alert("Something went wrong while creating your project, please try again")
-
-      return "error"
     })
 }
 
@@ -115,6 +113,23 @@ export function updateProject(uuid: string, params: object): void {
   })
 
   projects.set([...get(projects)])
+}
+
+export async function saveProject(uuid: string, content: string): Promise<void> {
+  try {
+    const data = await new FetchRails(`/projects/${uuid}`, { project: { content } }).post({ method: "put", returnResponse: false })
+    if (!data) throw Error("Save failed, no data was returned")
+
+    const project = JSON.parse(data as string)
+
+    const updated_at = project.updated_at
+    updateProject(uuid, { updated_at })
+
+    return project
+  } catch (error: any) {
+    console.error(error)
+    alert("Something went wrong while saving, please try again. If the error persists, please contact the developers on Discord with the following error:\n\n" + error)
+  }
 }
 
 export async function renameCurrentProject(title: string): Promise<string | void> {

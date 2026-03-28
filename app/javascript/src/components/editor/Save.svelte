@@ -1,9 +1,9 @@
 <script>
   import Bugsnag from "@bugsnag/js"
   import FetchRails from "@src/fetch-rails"
-  import { currentProject, modal } from "@stores/editor"
+  import { currentProject, modal, projects } from "@stores/editor"
   import { getSaveContent } from "@utils/editor"
-  import { updateProject } from "@utils/project"
+  import { createProject, fetchProject, saveProject, setUrl, updateProject } from "@utils/project"
   import { createProjectBackup } from "@utils/projectBackups"
   import { Modal } from "@constants/Modal"
   import { escapeable } from "@src/components/actions/escapeable"
@@ -22,26 +22,31 @@
     const content = getSaveContent()
     saveToLocalStorage(content, Date.now())
 
-    new FetchRails(`/projects/${$currentProject.uuid}`, { project: { content } }).post({ method: "put" })
-      .then(data => {
-        if (!data) throw Error("Save failed, no data was returned")
-
+    saveProject($currentProject.uuid, content)
+      .then((project) => {
         lastSaveContent = content
 
-        const updated_at = JSON.parse(data).updated_at
-
-        updateProject($currentProject.uuid, { updated_at })
-        saveToLocalStorage(content, updated_at) // Save again to localStorage to update the updated_at date
+        saveToLocalStorage(content, project.updated_at) // Save again to localStorage to update the updated_at date
 
         showConfetti()
-      })
-      .catch(error => {
-        Bugsnag.notify(error)
-        alert("Something went wrong while saving, please try again. If the error persists, please contact the developers on Discord with the following error:\n\n" + error)
       })
       .finally(() => {
         loading = false
       })
+  }
+
+  async function clone() {
+    loading = true
+
+    const content = getSaveContent()
+
+    const data = await createProject(`${$currentProject.title} (Clone)`, content)
+    if (data) {
+      setUrl(data.uuid)
+      await fetchProject(data.uuid)
+    }
+
+    loading = false
   }
 
   function saveToLocalStorage(content, date) {
@@ -67,9 +72,15 @@
   }
 
   function keydown(event) {
+    if (!$currentProject) return
+
     if (event.ctrlKey && !event.shiftKey && event.code === "KeyS") {
       event.preventDefault()
-      save()
+
+      if ($currentProject.is_owner)
+        save()
+      else
+        clone()
     }
   }
 
@@ -83,49 +94,61 @@
 
 <svelte:window on:keydown={keydown} on:beforeunload={beforeUnload} />
 
-<div class="relative">
-  <div class="button-group">
-    <button class="button button--square" on:click={save} disabled={loading}>
-      {#if loading}
-        Saving...
-      {:else}
-        Save
-      {/if}
-    </button>
+{#if $currentProject}
+  <div class="relative">
+    {#if $currentProject.is_owner}
+      <div class="button-group">
+        <button class="button button--square" on:click={save} disabled={loading}>
+          {#if loading}
+            Saving...
+          {:else}
+            Save
+          {/if}
+        </button>
 
-    <div class="dropdown" use:outsideClick on:outsideClick={() => dropdownActive = false}>
-      <button aria-label="Backups" class="button button--square pr-0 pl-0 h-100 flex align-center" on:click={() => dropdownActive = !dropdownActive}>
-        <svg width="18px" height="18px" viewBox="0 0 24 24" class="m-0">
-          <path d="M7.00003 8.5C6.59557 8.5 6.23093 8.74364 6.07615 9.11732C5.92137 9.49099 6.00692 9.92111 6.29292 10.2071L11.2929 15.2071C11.6834 15.5976 12.3166 15.5976 12.7071 15.2071L17.7071 10.2071C17.9931 9.92111 18.0787 9.49099 17.9239 9.11732C17.7691 8.74364 17.4045 8.5 17 8.5H7.00003Z" fill="white" />
-        </svg>
-      </button>
-
-      {#if dropdownActive}
-        <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => dropdownActive = false} class="dropdown__content block w-100 p-1/4" style="width: 200px">
-          <p class="mt-0 text-italic text-small text-base">
-            Last saved:<br />
-            {new Date($currentProject.updated_at).toLocaleString()}
-          </p>
-
-          <button class="button button--square button--small w-100" on:click={createBackup} disabled={loading}>
-            {#if loading}
-              Creating backup...
-            {:else}
-              Create backup
-            {/if}
+        <div class="dropdown" use:outsideClick on:outsideClick={() => dropdownActive = false}>
+          <button aria-label="Backups" class="button button--square pr-0 pl-0 h-100 flex align-center" on:click={() => dropdownActive = !dropdownActive}>
+            <svg width="18px" height="18px" viewBox="0 0 24 24" class="m-0">
+              <path d="M7.00003 8.5C6.59557 8.5 6.23093 8.74364 6.07615 9.11732C5.92137 9.49099 6.00692 9.92111 6.29292 10.2071L11.2929 15.2071C11.6834 15.5976 12.3166 15.5976 12.7071 15.2071L17.7071 10.2071C17.9931 9.92111 18.0787 9.49099 17.9239 9.11732C17.7691 8.74364 17.4045 8.5 17 8.5H7.00003Z" fill="white" />
+            </svg>
           </button>
 
-          <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show(Modal.Backups)}>
-            View backups
-          </button>
+          {#if dropdownActive}
+            <div transition:fly={{ duration: 150, y: 20 }} use:escapeable on:escape={() => dropdownActive = false} class="dropdown__content block w-100 p-1/4" style="width: 200px">
+              <p class="mt-0 text-italic text-small text-base">
+                Last saved:<br />
+                {new Date($currentProject.updated_at).toLocaleString()}
+              </p>
+
+              <button class="button button--square button--small w-100" on:click={createBackup} disabled={loading}>
+                {#if loading}
+                  Creating backup...
+                {:else}
+                  Create backup
+                {/if}
+              </button>
+
+              <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show(Modal.Backups)}>
+                View backups
+              </button>
+            </div>
+          {/if}
         </div>
-      {/if}
-    </div>
-  </div>
+      </div>
+    {:else}
+      <button class="button button--square button--secondary" on:click={clone} disabled={loading}>
+        {#if loading}
+          Cloning and Saving...
+        {:else}
+          Clone and Save
+        {/if}
+      </button>
+    {/if}
 
-  {#if confettiActive}
-    <div class="confetti-holder">
-      <Confetti colorArray={["var(--primary)"]} x={[-0.5, 0.5]} y={[-0.15, 0.25]} fallDistance="10px" amount="20" size="7" duration=1000 />
-    </div>
-  {/if}
-</div>
+    {#if confettiActive}
+      <div class="confetti-holder">
+        <Confetti colorArray={["var(--primary)"]} x={[-0.5, 0.5]} y={[-0.15, 0.25]} fallDistance="10px" amount="20" size="7" duration=1000 />
+      </div>
+    {/if}
+  </div>
+{/if}
