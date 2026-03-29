@@ -1,4 +1,4 @@
-import * as microlight from "@src/microlight"
+// import * as microlight from "@src/microlight"
 
 export function bind(): void {
   const fullscreenElements = document.querySelectorAll("[data-action='toggle-ide-fullscreen']")
@@ -9,7 +9,7 @@ export function bind(): void {
 export function initiateIde(element: HTMLElement): void {
   createLineCount(element)
 
-  microlight.reset()
+  // microlight.reset()
 }
 
 function createLineCount(element: HTMLElement): void {
