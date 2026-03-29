@@ -3,7 +3,7 @@
 </div>
 
 <% if @post.project.present? %>
-  <%= link_to editor_path(uuid: @post.project), class: "project-link", target: "_blank" do %>
+  <%= link_to editor_path(uuid: @post.project), class: "project-link #{ "mb-1/4" if @post.snippet.present? }", target: "_blank" do %>
     <%= inline_svg_tag "logo-small.svg", width: 24, height: 24 %>
 
     <span>View this project in the <strong>Workshop.codes Script Editor</strong></span>
@@ -13,7 +13,7 @@
 <% end %>
 
 <% if @post.snippet.present? %>
-  <div class="ide shadow-block <%= "mt-1/4" if @post.project.present? %>">
+  <div class="ide shadow-block">
     <pre class="ide__content"><div class="ide__code-wrapper"><div class="ide__line-counter"></div>
       <div class="hidden" data-copy="snippet"></div>
       <code class="ide__code microlight" data-role="ide-content">Loading...</code>
