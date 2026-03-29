@@ -21,7 +21,6 @@ import * as checkboxSelectAll from "@src/checkbox-select-all"
 import * as favorite from "@src/favorite"
 import * as getPostAnalytics from "@src/get-post-analytics"
 import * as getUserAnalytics from "@src/get-user-analytics"
-import * as ide from "@src/ide"
 import * as imagePreview from "@src/image-preview"
 import * as inscrybMde from "@src/inscryb-mde"
 import * as linkedInput from "@src/linked-input"
@@ -48,7 +47,6 @@ document.addEventListener("turbolinks:load", () => {
 
   Object.entries(svelteComponents).forEach(([name, component]) => initializeSvelteComponent(name, component))
 
-  ide.bind()
   applyCustomCss.bind()
   blocks.bind()
   checkboxSelectAll.bind()

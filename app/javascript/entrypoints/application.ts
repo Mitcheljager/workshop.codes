@@ -24,6 +24,7 @@ import * as getPartial from "@src/get-partial"
 import * as getReportsForm from "@src/get-reports-form"
 import * as getSnippet from "@src/get-snippet"
 import * as getVerifiedUsers from "@src/get-verified-users"
+import * as ide from "@src/ide"
 import * as infiniteScroll from "@src/infinite-scroll"
 import * as lazyVideo from "@src/lazy-video"
 import * as microlight from "@src/microlight"
@@ -54,6 +55,7 @@ document.addEventListener("turbolinks:load", () => {
   getReportsForm.bind()
   getSnippet.bind()
   getVerifiedUsers.bind()
+  ide.bind()
   infiniteScroll.bind()
   lazyVideo.bind()
   modal.bind()
