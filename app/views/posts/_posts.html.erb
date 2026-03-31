@@ -8,6 +8,7 @@
   <main class="<%= display_type == "list" ? "items" : "cards" %>" <%= "aria-labelledby=#{labelledby}" if labelledby %>>
     <% if @posts.any? %>
       <% if display_type == "list" %>
+        <%= render "posts/post_april_fools" if controller_path.split("/").first == "posts" %>
         <%= render @posts %>
       <% else %>
         <%= render collection: @posts, partial: "posts/card", as: :post  %>
