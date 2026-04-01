@@ -30,7 +30,7 @@
     overflow-x: hidden;
     padding-bottom: math.div($margin, 1.5);
 
-    @include media-min(xs) {
+    @include media-min(450px) {
       grid-template-columns: repeat(30, 50%);
     }
 
