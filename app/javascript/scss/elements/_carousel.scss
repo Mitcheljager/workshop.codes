@@ -151,7 +151,11 @@
   }
 
   &--next {
-    right: -6vw;
+    right: $margin * -0.25;
+
+    @include media-min(xs) {
+      right: -6vw;
+    }
 
     @include media-min(md) {
       right: -45px;
@@ -159,7 +163,11 @@
   }
 
   &--previous {
-    left: -6vw;
+    left: $margin * -0.25;
+
+    @include media-min(xs) {
+      left: -6vw;
+    }
 
     @include media-min(md) {
       left: -45px;
