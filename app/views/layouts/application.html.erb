@@ -69,6 +69,14 @@
 
     <%= render "body_bg" unless is_wiki? || is_editor? %>
 
+    <div class="hammond" data-role="hammond" style="display: none">
+      <div class="hammond__track">
+        <div class="hammond__mover">
+          <%= image_tag "hammond.png", alt: "", width: 100, height: 100 %>
+        </div>
+      </div>
+    </div>
+
     <%= svelte_component "Ollie", { imageFlyBy: image_path("ollie/ollie-float.png"), imageHeart: image_path("ollie/ollie-heart.png") } if current_user.present? %>
   </body>
 </html>

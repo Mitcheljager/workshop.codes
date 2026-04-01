@@ -41,6 +41,7 @@ import * as timeago from "@src/timeago"
 import * as toggleContent from "@src/toggle-content"
 import * as youtubePreview from "@src/youtube-preview"
 import * as wikiSearch from "@src/wiki/search"
+import * as hammond from "@src/hammond"
 
 document.addEventListener("turbolinks:load", () => {
   copy.bind()
@@ -68,6 +69,7 @@ document.addEventListener("turbolinks:load", () => {
   toggleContent.bind()
   youtubePreview.bind()
   wikiSearch.bind()
+  hammond.bind()
 
   microlight.reset()
 
