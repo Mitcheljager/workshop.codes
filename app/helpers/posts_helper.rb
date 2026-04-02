@@ -1,22 +1,5 @@
 module PostsHelper
   def url_for_post_thumbnail(post, width = 120, height = 68, size = "small")
-    winstons = [
-      "winston/winston-1.jpg",
-      "winston/winston-2.jpg",
-      "winston/winston-3.jpg",
-      "winston/winston-4.jpg",
-      "winston/winston-5.jpg",
-      "winston/winston-6.jpg",
-      "winston/winston-7.jpg",
-      "winston/winston-8.jpg",
-      "winston/winston-9.jpg",
-      "winston/winston-10.jpg"
-    ]
-
-    random_with_seed = Random.new(post.id).rand(winstons.length)
-
-    return image_path winstons[random_with_seed - 1]
-
     url = ""
 
     if post.image_order.present? && JSON.parse(post.image_order).length
