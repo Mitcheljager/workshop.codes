@@ -1,8 +1,8 @@
 .project-link {
   display: flex;
   align-items: center;
-  gap: $margin / 4;
-  padding: $margin / 4;
+  gap: $margin * 0.25;
+  padding: $margin * 0.25;
   border-radius: $border-radius;
   background: theme(darker);
   box-shadow: $shadow;
