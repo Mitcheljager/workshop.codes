@@ -12,6 +12,6 @@
 
 <div class="form-group mt-1/2">
   <%= form.label "Description (max 500 characters)", class: "form-label" %>
-  <p class="form-hint">Write a short description to describe what this mode is about.</p>
-  <%= form.text_area "properties[description]", value: block_property(block, "description"), class: "form-input form-textarea form-textarea--extra-small", autocomplete: "off", maxlength: 500 %>
+  <p class="form-hint">Write a short description to describe what this mode is about. Basic Markdown enabled.</p>
+  <%= form.text_area "properties[description]", value: block_property(block, "description"), class: "form-input form-textarea form-textarea--extra-small", autocomplete: "off", maxlength: 500, rows: 10 %>
 </div>

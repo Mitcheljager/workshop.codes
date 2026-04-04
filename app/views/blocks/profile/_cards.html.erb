@@ -2,6 +2,8 @@
   <h2><%= block_property(block, "title") %></h2>
 <% end %>
 
+<% return unless block_property(block, "posts").present? %>
+
 <div class="cards">
   <% posts = @posts.except(:limit, :offset).where(id: block_property(block, "posts")).limit(6) %>
   <%= render collection: posts, partial: "posts/card", as: :post %>
