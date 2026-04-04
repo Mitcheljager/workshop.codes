@@ -12,7 +12,7 @@
       <%= form.text_area :content,
         class: "form-input form-textarea form-textarea--extra-small bg-darker mw-100",
         placeholder: "Leave a comment... Please remember to be kind and respectful, these are real people, just like you!",
-        data: { role: "comment-input" },
+        data: { role: "comment-input character-count", max: 2000 },
         required: true %>
     </div>
 

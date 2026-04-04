@@ -1,11 +1,11 @@
 <% return if @comment.content.empty? %>
 
 (() => {
-  const totalElements = document.querySelectorAll("[data-role='comment-total']")
+  const totalElements = document.querySelectorAll("[data-role~='comment-total']")
 
   <% if @comment.parent_id.nil? %>
-    const parentElement = document.querySelector("[data-role='comments']")
-    const inputElement = document.querySelector("[data-role='comment-input']")
+    const parentElement = document.querySelector("[data-role~='comments']")
+    const inputElement = document.querySelector("[data-role~='comment-input']")
 
     parentElement.insertAdjacentHTML("afterBegin", `<%= j render "comment", comment: @comment %>`)
     inputElement.value = ""

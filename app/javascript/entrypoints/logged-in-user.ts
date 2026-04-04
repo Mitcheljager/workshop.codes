@@ -17,6 +17,7 @@ import { LinkedChart, LinkedLabel } from "svelte-tiny-linked-charts"
 import * as applyCustomCss from "@src/apply-custom-css"
 import * as blocks from "@src/blocks"
 import * as chart from "@src/chart"
+import * as characterCount from "@src/character-count"
 import * as checkboxSelectAll from "@src/checkbox-select-all"
 import * as favorite from "@src/favorite"
 import * as getPostAnalytics from "@src/get-post-analytics"
@@ -60,6 +61,7 @@ document.addEventListener("turbolinks:load", () => {
   toggleLightnesOnChange.bind()
   revealByCheckbox.bind()
   revealOnDifference.bind()
+  characterCount.bind()
 
   chart.render()
   inscrybMde.render()

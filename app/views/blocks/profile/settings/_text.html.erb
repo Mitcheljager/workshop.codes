@@ -1,5 +1,11 @@
 <div class="form-group mt-1/2">
   <%= form.label "Description (max 1000 characters)", class: "form-label" %>
   <p class="form-hint">Write anything you want! Basic Markdown supported</p>
-  <%= form.text_area "properties[description]", value: block_property(block, "description"), class: "form-input form-textarea form-textarea--extra-small", autocomplete: "off", maxlength: 1000, rows: 10 %>
+  <%= form.text_area "properties[description]",
+                      value: block_property(block, "description"),
+                      class: "form-input form-textarea form-textarea--extra-small",
+                      data: { role: "character-count" },
+                      autocomplete: "off",
+                      maxlength: 1000,
+                      rows: 10 %>
 </div>

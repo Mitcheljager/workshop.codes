@@ -1,0 +1,11 @@
+.character-count {
+  margin: $margin * 0.125 0 0;
+  font-size: 0.75rem;
+  font-family: monospace;
+  transition: border 100ms, padding 100ms;
+
+  &--error {
+    border-left: 4px solid $red;
+    padding-left: $margin * 0.125;
+  }
+}
