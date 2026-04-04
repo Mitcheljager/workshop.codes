@@ -34,6 +34,8 @@ function createBlock({ currentTarget }: { currentTarget: HTMLElement }): void {
 function buildBlockSortable(element: HTMLElement): void {
   Sortable.create(element, {
     draggable: "[data-sortable-block]",
+    filter: "input, textarea",
+    preventOnFilter: false,
     animation: 50,
     onUpdate: () => { updateBlockSortable() }
   })
