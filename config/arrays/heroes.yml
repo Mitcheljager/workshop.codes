@@ -7,6 +7,13 @@
   full_name: Hana Song
   nationality: South Korea
   birth_date: "2054-06-22"
+  locations:
+    - MEKA Base, Busan, South Korea (formerly),
+    - "Watchpoint: Gibraltar"
+  description: |
+    D.Va is a former professional gamer who now uses her skills to pilot a state-of-the-art mech in defense of her homeland.
+  story: |
+    Hana Song—better known by her screen name “D.Va”–is the best of the best. A former professional gamer, D.Va now puts her skills to use as a mech pilot in defense of South Korea. She and the other pilots, known as the MEKA Squad, stand between their country and the invading Gwishin: a mechanical threat from deep beneath the sea.
 -
   name: Domina
   role: Tank
@@ -16,6 +23,13 @@
   full_name: Vaira Singhania
   nationality: India
   birth_date: "2043-08-28"
+  locations:
+    - London, England (Formerly)
+    - Utopea, India
+  description: |
+    As Vishkar Corporation’s most prized negotiator, Domina uses her masterful command of hard-light to take control of every situation.
+  story: |
+    As heiress to The Vishkar Corporation, Vaira Singhania has spent her entire life perfecting her image. With countless successes claimed as her own, Vaira has become a formidable opponent in the corporate sphere. Leveraging her skill as a negotiator and her custom hard-light technology, Vaira will make allies with even the most corrupt forces on her quest to gain power.
 -
   name: Doomfist
   role: Tank
@@ -25,6 +39,13 @@
   full_name: Akande Ogundimu
   nationality: Nigeria
   birth_date: "2028-05-25"
+  locations:
+    - Oyo, Nigeria (formerly)
+    - Rome, Italy
+  description: |
+    Doomfist was the calculating leader of Talon, a terrorist organization and paramilitary force that works in direct opposition to Overwatch.
+  story: |
+    A highly trained fighter and born leader, Akande Ogundimu lost his right arm in the Omnic Crisis, then joined Talon. Rising through the ranks, he killed his boss – the previous Doomfist – taking his eponymous weapon and title. Now, he is determined to plunge the world into a new conflict for his own mysterious purposes.
 -
   name: Hazard
   role: Tank
@@ -34,6 +55,13 @@
   full_name: Findlay Docherty
   nationality: Scotland
   birth_date: "2051-11-11"
+  locations:
+    - Glasgow, Scotland (Formerly)
+    - Unknown
+  description: |
+    A radical disruptor and an unstoppable weapon, Hazard has rocketed to fame in the criminal underworld as he fights to tear the system down.
+  story: |
+    After pulling himself from the wreckage of a troubled past, Hazard has pushed his body beyond its limits with advanced augmentations that enhance his strength and agility. As a member of the Phreaks, he fights to protect those he feels the system has left behind. Passionate and radical, Hazard is proud to stand with his found family of body modders against Overwatch, Talon, and any organization that enforces the status quo.
 -
   name: Junker Queen
   role: Tank
@@ -43,6 +71,12 @@
   full_name: Odessa Stone
   nationality: Australia
   birth_date: "2044-06-14"
+  locations:
+    - Junkertown, Australia
+  description: |
+    Armed with her axe, Carnage, and her electromagnetic gauntlet, the cutthroat leader of the Junkers is on a mission to rule the world.
+  story: |
+    A former wastelander, Odessa "Dez" Stone has ruled the squabbling Junker factions for over a decade. Everywhere she goes is her battlefield of choice, every seat is her throne, and everyone on the planet is her subject, whether they know it or not. Her tale of conquest is just beginning...
 -
   name: Mauga
   role: Tank
@@ -52,6 +86,12 @@
   full_name: Maugaloa Malosi
   nationality: Samoa
   birth_date: "2038-08-19"
+  locations:
+    - Apia, Samoa
+  description: |
+    A charismatic and cunning Samoan warrior, Mauga thrives in the chaos of the battlefield and lives every day like it’s his last.
+  story: |
+    Mauga Malosi was born to challenge the system. Previously the member of the eco-rebel group, the Deepsea Raiders, he is now a Talon mercenary, wreaking havoc all around the world. Wherever he goes, he knows how to have a good time.
 -
   name: Orisa
   role: Tank
@@ -61,6 +101,12 @@
   full_name: Orisa
   nationality: Numbani
   birth_date: "2075-05-09"
+  locations:
+    - Numbani, Africa
+  description: |
+    Built from parts of one of Numbani's short-lived OR15 defense robots, Orisa is the city's newest protector, though she still has much to learn.
+  story: |
+    Built by eleven-year-old genius Efi Oladele, Orisa was created to defend the city of Numbani from all threats. When the duo successfully repelled an attack from Talon’s Doomfist, they became known as national heroes. Now, Orisa stands ready to protect those in need, using her power for good.
 -
   name: Ramattra
   role: Tank
@@ -70,6 +116,12 @@
   full_name: Ramattra
   nationality: Nepal
   birth_date: "2048-03-29"
+  locations:
+    - Shambali Monastery, Nepal (formerly)
+  description: |
+    The brutal leader of Null Sector will stop at nothing to see his vision for the world realized.
+  story: |
+    Ramattra was never designed to co-exist with humanity. The Ravager omnic series was created early in the Omnic Crisis, part of a commander class of omnics whose role was to guide units into combat and adapt various strategic protocols to battlefield condition changes in real time.
 -
   name: Reinhardt
   role: Tank
@@ -79,6 +131,13 @@
   full_name: Reinhardt Wilhelm
   nationality: Germany
   birth_date: "2012-06-26"
+  locations:
+    - Stuttgart, Germany (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    Reinhardt Wilhelm styles himself as a champion of a bygone age, who lives by the knightly codes of valor, justice, and courage.
+  story: |
+    Reinhardt Wilhelm lives by the knightly codes of valor, justice, and courage. One of the founders of Overwatch, for decades he was a force for good the world over. After the organization’s fall, he travelled Europe like a knight of old, defending the innocent alongside his squire, Brigitte, until Winston’s call brought them back into the arms of Overwatch.
 -
   name: Roadhog
   role: Tank
@@ -88,6 +147,12 @@
   full_name: Mako Rutledge
   nationality: Australia
   birth_date: "2025-09-12"
+  locations:
+    - Junkertown, Australia (formerly)
+  description: |
+     Roadhog is a powerful enforcer with a well-earned reputation for random and wanton destruction.
+  story: |
+    Roadhog is a ruthless masked killer with a reputation for destruction. Roaming the irradiated, wreckage-littered Australian outback, his only known associate (and many wonder why) is the manic young Junker criminal known as Junkrat.
 -
   name: Sigma
   role: Tank
@@ -97,6 +162,13 @@
   full_name: Siebren de Kuiper
   nationality: Netherlands
   birth_date: "2012-03-15"
+  locations:
+    - The Hague, Netherlands (formerly)
+    - International Space Station (formerly)
+  description: |
+    Brilliant astrophysicist Dr. Siebren de Kuiper's life changed forever when an experiment gone wrong gave him the ability to control gravity; now, Talon manipulates him to their own ends.
+  story: |
+    The celebrated astrophysicist Siebren de Kuiper's life changed forever when a failed experiment gave him the ability to control gravity but splintered his mind. Now, he struggles to maintain his connection to reality, unaware that Talon is manipulating him to their own ends.
 -
   name: Winston
   role: Tank
@@ -106,6 +178,13 @@
   full_name: Winston
   nationality: The Moon
   birth_date: "2044-06-06"
+  locations:
+    - Horizon Lunar Colony (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    A super-intelligent, genetically engineered gorilla, Winston is a brilliant scientist and a champion for humanity’s potential.
+  story: |
+    A super-intelligent, genetically engineered gorilla, mild-mannered Winston is a brilliant scientist and mighty champion. Fleeing the Horizon Lunar Colony, Winston found a home with Overwatch and became the hero he’d always dreamed of being... until Overwatch fell. Now, with the world facing a rising threat from Null Sector, Winston has recalled some of his friends and former allies. A new Overwatch has been born.
 -
   name: Wrecking Ball
   role: Tank
@@ -115,6 +194,13 @@
   full_name: Hammond
   nationality: The Moon
   birth_date: "2059-10-15"
+  locations:
+    - Horizon Lunar Colony (formerly)
+    - Junkertown (formerly)
+  description: |
+    A resourceful and highly intelligent mechanic and fighter, Wrecking Ball rose from the laboratories of Horizon Lunar Colony to become the Junker Queen’s champion.
+  story: |
+    This hamster’s genetic therapy on the Horizon Lunar Colony resulted in his greatly increased size and intellect. Hammond taught himself engineering and mechanics, and escaped to earth, landing amidst the Junkers of the Australian Outback. There, he modified his escape pod into a battle mech called Wrecking Ball and became a champion gladiator and the bodyguard of the notorious Junker Queen.
 -
   name: Zarya
   role: Tank
@@ -124,6 +210,14 @@
   full_name: Aleksandra Zaryanova
   nationality: Russia
   birth_date: "2045-12-04"
+  locations:
+    - Krasnoyarsk Front (formerly)
+    - Novoanskoye Forward Base, Siberia, Russia (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    Aleksandra Zaryanova is one of the world's strongest women, a celebrated athlete who sacrificed personal glory to protect her family, friends, and country in a time of war.
+  story: |
+    Growing up surrounded by the post-war destruction of the Omnic Crisis, Zarya became a champion weightlifter and used her strength and fame to help her nation rebuild. Now, she has sacrificed personal glory to protect her people on the front lines of a war against a deadly new mechanical threat.
 -
   name: Anran
   role: Damage
@@ -133,6 +227,13 @@
   full_name: Anran Ye
   nationality: China
   birth_date: "2053-08-08"
+  locations:
+    - Wuxing University, Chengdu (formerly)
+    - Watchpoint: Gibraltar
+  description: |
+    The star graduate of Wuxing University’s Fire College, Anran is always burning to push her limits.
+  story: |
+    Following in her parents’ footsteps, Anran Ye graduated from the Wuxing University’s Fire College at the top of her class. After being recruited to Overwatch, she is thrown headfirst into a global conflict, where she must prove her skill as a fighter extends beyond her school teachings.
 -
   name: Ashe
   role: Damage
@@ -142,6 +243,12 @@
   full_name: Elizabeth Ashe
   nationality: United States
   birth_date: "2034-10-01"
+  locations:
+    - Deadlock Gorge, Arizona, USA
+  description: |
+    Ashe is the ambitious and calculating leader of the Deadlock Rebels Gang and a respected figure in the criminal underworld.
+  story: |
+    Ashe was born into a wealthy family to parents who cared more for their fortune than their daughter. Ambitious and calculating, Ashe rebelled and formed the Deadlock Gang, which quickly gained infamy in the criminal underworld. Convincing the gangs of the Southwest to work together, Ashe has branded herself a legend, restoring the notoriety of the once-wild West.
 -
   name: Bastion
   role: Damage
@@ -151,6 +258,12 @@
   full_name: Bastion
   nationality: Unknown
   birth_date: "2044-01-01"
+  locations:
+    - Gothenburg, Sweden
+  description: |
+    Once a frontline combatant in the devastating Omnic Crisis, this curious Bastion unit now explores the world, fascinated by nature but wary of a fearful humanity.
+  story: |
+    Left abandoned and dormant after the devastating Omnic Crisis, this curious Bastion unit has reawakened in a changed world. The once-hostile machine now possesses curiosity and a fascination for nature. Along with his bird companion, Ganymede, Bastion has found his way into the care of Torbjorn Lindholm, where he now works to help the humans he once fought against.
 -
   name: Cassidy
   role: Damage
@@ -160,6 +273,13 @@
   full_name: Cole Cassidy
   nationality: United States
   birth_date: "2036-07-31"
+  locations:
+    - Santa Fe, New Mexico, USA (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    Armed with his Peacekeeper revolver, the outlaw Cole Cassidy doles out justice on his own terms.
+  story: |
+    A founding member of the notorious Deadlock Gang, Cassidy was eventually coerced into joining Blackwatch, Overwatch’s covert-ops division. He came to believe he could make amends for his past by righting the world’s injustices. But when Overwatch fell, Cassidy went underground, resurfacing later as a gunslinger for hire, fighting only for causes he believes are just.
 -
   name: Echo
   role: Damage
@@ -169,6 +289,14 @@
   full_name: Echo
   nationality: Singapore
   birth_date: "2062-02-05"
+  locations:
+    - Switzerland (formerly)
+    - United States (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    Echo is a multirole, adaptive robot with the most sophisticated artificial intelligence in the world, originally designed by Dr. Mina Liao for use during combat missions with Overwatch.
+  story: |
+    Developed by Overwatch roboticist Mina Liao, the highly adaptable, advanced AI-driven robot Echo derives her personality from her creator. But after Liao was killed, her project was shut down and Echo placed in military quarantine. Years later, she was freed by Cole Cassidy and joined the new Overwatch in the fight to save the world.
 -
   name: Emre
   role: Damage
@@ -178,6 +306,13 @@
   full_name: Emre Sarıoğlu
   nationality: Turkey
   birth_date: "2031-11-08"
+  locations:
+    - Istanbul, Turkey (formerly)
+    - Rome, Italy
+  description: |
+    Emre disappeared after a lauded tenure on the Overwatch strike team. He has resurfaced years later, his body and mind manipulated by something unknown.
+  story: |
+    After deciding to seek his own way to help the world, ex-Overwatch operative Emre Sarioglu disappeared one day. He has since mysteriously resurfaced as a ruthless killing cyborg thanks to the malignant force that has corrupted his mind. With what little free will remains, Emre turns to Freja, his most trusted ally, to help him keep his humanity – even at the cost of allying with Talon.
 -
   name: Freja
   role: Damage
@@ -187,6 +322,13 @@
   full_name: Freja Skov
   nationality: Denmark
   birth_date: "2041-09-26"
+  locations:
+    - Copenhagen, Denmark (formerly)
+    - Unknown
+  description: |
+    A search and rescue operative turned bounty hunter, Freja can find anyone for the right price.
+  story: |
+    Freja is a bounty hunter notorious in the criminal underworld for her unwavering persistence. Rumor goes that she once used her tracking skills to rescue the innocent, but her kind heart has since hardened. Now, she "finds people" for discerning clientele—and always delivers.
 -
   name: Genji
   role: Damage
@@ -196,6 +338,14 @@
   full_name: Genji Shimada
   nationality: Japan
   birth_date: "2038-10-28"
+  locations:
+    - Hanamura, Japan (formerly)
+    - Shambali Monastery, Nepal (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    The cyborg ninja Genji Shimada has made peace with the augmented body he once rejected, and in doing so, he has discovered a higher humanity.
+  story: |
+    Near death at the hands of his own brother, ninja Genji Shimada was rescued by Overwatch. To save his life, they made him a living weapon with cybernetic upgrades. Struggling with his nature and purpose after Overwatch’s fall, Genji sought peace through study with the omnic monk Zenyatta before answering Winston’s call.
 -
   name: Hanzo
   role: Damage
@@ -205,6 +355,12 @@
   full_name: Hanzo Shimada
   nationality: Japan
   birth_date: "2035-11-03"
+  locations:
+    - Hanamura, Japan (formerly)
+  description: |
+    Mastering his skills as a bowman and an assassin, Hanzo Shimada strives to prove himself as a warrior without peer.
+  story: |
+    When his father passed, Hanzo was left to lead the Shimada ninja clan. The clan’s elders pushed him to bring his carefree brother, Genji, into line—leading to a confrontation where Hanzo struck Genji down. Horrified, Hanzo abandoned the clan, roaming the world in solitude as punishment. But now, finding out that his brother still lives, Hanzo must decide where this new path will take him.
 -
   name: Junkrat
   role: Damage
@@ -214,6 +370,12 @@
   full_name: Jamison Fawkes
   nationality: Australia
   birth_date: "2048-02-29"
+  locations:
+    - Junkertown, Australia (formerly)
+  description: |
+    Junkrat is an explosives-obsessed demolitionist who lives to cause chaos and destruction.
+  story: |
+    Growing up in the irradiated wasteland surrounding Junkertown, Junkrat is an unhinged, explosives-obsessed oddity. One of the lawless “Junkers” of the Outback, he and his partner/bodyguard Roadhog live for crime sprees and mayhem.
 -
   name: Mei
   role: Damage
@@ -223,6 +385,12 @@
   full_name: Mei-Ling Zhou
   nationality: China
   birth_date: "2042-09-05"
+  locations:
+    - Xi’an, China (formerly)
+  description: |
+    Mei is a scientist who has taken the fight to preserve the environment into her own hands.
+  story: |
+    As a peerless climatologist stationed in Ecopoint: Antarctica, Mei-Ling Zhou’s team was forced into cryostasis during a turbulent storm. Sadly, the cryostasis lasted far longer than intended, and Mei awoke nine years later as the only survivor in a damaged station. With the help of her robot companion, Snowball, Mei invented new technology to escape Antarctica and join up with the new Overwatch.
 -
   name: Pharah
   role: Damage
@@ -232,6 +400,13 @@
   full_name: Fareeha Amari
   nationality: Egypt
   birth_date: "2042-04-15"
+  locations:
+    - Giza, Egypt (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    Fareeha Amari's commitment to duty runs in her blood. She comes from a long line of highly decorated soldiers and burns with the desire to serve with honor.
+  story: |
+    Fareeha Amari dreamed of being part of Overwatch with her mother Ana, only to see it disbanded before she had the chance. She found success as “Pharah”, head of an elite security squad guarding the rogue AI that started the Omnic Crisis. But now that a new Overwatch has returned, Pharah's dreams are finally becoming a reality.
 -
   name: Reaper
   role: Damage
@@ -241,6 +416,12 @@
   full_name: Gabriel Reyes
   nationality: United States
   birth_date: "2015-12-14"
+  locations:
+    - Rome, Italy
+  description: |
+    Some speak of a black-robed terrorist known only as the Reaper. His identity and motives are a mystery. What is known is that where he appears, death follows.
+  story: |
+    Gabriel Reyes was once an esteemed member of Overwatch, first as its Strike Commander and then as the leader of Blackwatch, Overwatch’s branch for covert operations. He was believed dead following an explosion at Overwatch’s headquarters. But rumors say he escaped his fate, and now works as the volatile killer known only as Reaper, one of Talon’s deadliest enforcers.
 -
   name: Sojourn
   role: Damage
@@ -250,6 +431,12 @@
   full_name: Vivian Chase
   nationality: Canada
   birth_date: "2025-01-12"
+  locations:
+    - Toronto, Canada
+  description: |
+    As a leader in the bygone days of Overwatch, Vivian Chase, callsign Sojourn, is determined to ensure its new heroes don’t repeat the mistakes of the past.
+  story: |
+    From soldier to Overwatch Captain to veteran, Sojourn has devoted her life to helping those who would be made victims by the evils of the world. Her extensive cybernetic augmentations enhanced her innate strategic skills and prowess on the battlefield made her Overwatch’s most skilled tactician. Now on her own, she faces new challenges... and new dangers.
 -
   name: "Soldier: 76"
   role: Damage
@@ -259,6 +446,12 @@
   full_name: Jack Morrison
   nationality: United States
   birth_date: "2018-01-27"
+  locations:
+    - Unknown
+  description: |
+    The target of an international manhunt, the vigilante known as Soldier: 76 wages a personal war to expose the truth behind Overwatch's collapse.
+  story: |
+    The former commander of Overwatch turned physically-enhanced vigilante, Jack Morrison travels the world hunting those responsible for the downfall of Overwatch. It is unknown whether he seeks justice... or revenge.
 -
   name: Sombra
   role: Damage
@@ -268,6 +461,12 @@
   full_name: Olivia Colomar
   nationality: Mexico
   birth_date: "2043-12-31"
+  locations:
+    - Dorado, Mexico
+  description: |
+    One of the world's most notorious hackers, Sombra uses information to manipulate those in power.
+  story: |
+    One of the world's most notorious hackers, Sombra uses information to manipulate those in power. As she works to uncover the truth behind a shadowy global conspiracy, Sombra has joined the ranks of Talon, exploiting their resources for her own ends.
 -
   name: Symmetra
   role: Damage
@@ -277,6 +476,12 @@
   full_name: Satya Vaswani
   nationality: India
   birth_date: "2045-10-02"
+  locations:
+    - Utopaea, India
+  description: |
+    Symmetra literally bends reality. By manipulating hard-light constructs, she crafts the world as she wishes it to be, in hopes of engineering a perfect society.
+  story: |
+    As an “architech” for the Vishkar Corporation, Symmetra weaves hard-light architectural constructs, creating buildings and infrastructure from thin air. Vishkar also sends her on clandestine missions around the world to uphold their corporate interests, leading her to wonder whether the control and order she desires--and Vishkar represents--are truly best for humanity.
 -
   name: Torbjörn
   role: Damage
@@ -286,6 +491,12 @@
   full_name: Torbjörn Lindholm
   nationality: Sweden
   birth_date: "2016-09-21"
+  locations:
+    - Gothenburg, Sweden
+  description: |
+    At its height, Overwatch possessed one of the most advanced armaments on the planet, which could be traced to the workshop of an ingenious engineer named Torbjörn Lindholm.
+  story: |
+    As one of the world’s top engineers, Torbjörn Lindholm’s inventions were crucial to ending the Omnic Crisis, and kept Overwatch at the cutting edge of weapons technology for decades. In recent years, his “adoption” of a curious Bastion unit has led him to question his antipathy to robots and omnics, even as he works to stop his creations from falling into the wrong hands.
 -
   name: Tracer
   role: Damage
@@ -295,6 +506,13 @@
   full_name: Lena Oxton
   nationality: England
   birth_date: "2048-02-17"
+  locations:
+    - London, England
+    - "Watchpoint: Gibraltar"
+  description: |
+    The former Overwatch agent known as Tracer is a time-jumping adventurer and an irrepressible force for good.
+  story: |
+    Tracer is a time-jumping adventurer and an irrepressible force for good. With a chronal harness that lets her control her flow of time, she was one of Overwatch’s top agents, and she continues to try to make the world a better place wherever – and whenever – she can. Tracer brings her skill and optimism to help the new Overwatch keep the world safe.
 -
   name: Vendetta
   role: Damage
@@ -304,6 +522,12 @@
   full_name: Marzia Bartalotti
   nationality: Italy
   birth_date: "2047-02-15"
+  locations:
+    - Rome, Italy
+  description: |
+    As champion of the Colosseo and a member of Italy’s elite, Vendetta will stop at nothing to reclaim the throne of her family’s criminal empire. Known for her explosive rage and ruthlessness in battle, the only thing that exceeds her skill in physical combat is her boundless ambition.
+  story: |
+    As the daughter of Talon boss Antonio Bartalotti, Marzia was born to power. But when Blackwatch killed her father, she was forced out of the empire he had built and lost claim to her inheritance. Driven by spite, she trained to become “Vendetta”: a famous champion and ‘heel’ in Rome's gladiator games. Merciless, cunning, and willing to do whatever it takes to succeed, Vendetta cultivated her fame to forge a network of powerful allies in and out of the Colosseo. Having finally caught the attention of Talon, she now seeks to reclaim the throne of the empire that is rightfully hers and build it back stronger.
 -
   name: Venture
   role: Damage
@@ -313,6 +537,13 @@
   full_name: Sloan Cameron
   nationality: Canada
   birth_date: "2049-08-06"
+  locations:
+    - Nova Scotia, Canada (formerly)
+    - Roaming
+  description: |
+    A globe-trotting archaeologist and explorer, Venture has a passion for solving history’s mysteries.
+  story: |
+    When adventure calls, Sloan Cameron always answers. As a member of the Wayfinder Society, Sloan travels the world, using their excavating tools to uncover artifacts and protect archaeological sites from looters, thieves, and more dangerous criminal organizations.
 -
   name: Widowmaker
   role: Damage
@@ -322,6 +553,12 @@
   full_name: Amélie Lacroix
   nationality: France
   birth_date: "2040-11-19"
+  locations:
+    - Annecy, France
+  description: |
+    Widowmaker is the perfect assassin: a patient, ruthlessly efficient killer who shows neither emotion nor remorse.
+  story: |
+    A lifetime ago, Amélie Lacroix, wife of an Overwatch agent, was kidnapped by Talon. Shortly after returning home, she killed her husband and vanished. Now, “Widowmaker” is Talon's most effective weapon, a patient, ruthlessly efficient operative who rarely shows emotion and remorse, and revels only in the moment of the kill.
 -
   name: Ana
   role: Support
@@ -331,6 +568,12 @@
   full_name: Ana Amari
   nationality: Egypt
   birth_date: "2014-01-01"
+  locations:
+    - Cairo, Egypt
+  description: |
+    One of the founding members of Overwatch, Ana uses her skills and expertise to defend her home and the people she cares for.
+  story: |
+    A founding member of Overwatch and once renowned as the greatest sniper in the world, Ana Amari comes from a long line of decorated military veterans. Though she was thought to have perished in a firefight with Talon, Ana has rejoined the fray to protect her country, family, and closest allies.
 -
   name: Baptiste
   role: Support
@@ -340,6 +583,13 @@
   full_name: Jean-Baptiste Augustin
   nationality: Haiti
   birth_date: "2038-03-12"
+  locations:
+    - Tortuga, Haiti (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    An elite combat medic and ex-Talon operative, Baptiste now uses his skills to help those whose lives have been impacted by war.
+  story: |
+    An elite combat medic, Baptiste was lured into Talon by the promise of easy riches. Later, disgusted with what he had done, he deserted Talon to forge a new path for himself. Now he works toward a better world, healing where he can and fighting when he must.
 -
   name: Brigitte
   role: Support
@@ -349,6 +599,13 @@
   full_name: Brigitte Lindholm
   nationality: Sweden
   birth_date: "2050-09-22"
+  locations:
+    - Gothenburg, Sweden (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    No longer sitting on the sidelines, Brigitte Lindholm has taken up arms to defend those in need of protection.
+  story: |
+    A Lindholm through and through, Brigitte’s aptitude for engineering is matched by her sense of honor. From her youth, Brigitte was inspired by the tales of valor she heard from her godfather, Reinhardt. When she came of age, she became the squire to his knight. The two have joined the new Overwatch, hoping to right the wrongs of the world.
 -
   name: Illari
   role: Support
@@ -358,6 +615,12 @@
   full_name: Illari Quispe Ruiz
   nationality: Peru
   birth_date: "2057-12-21"
+  locations:
+    - Runasapi, Peru
+  description: |
+    As the last of the Inti Warriors, Illari is a vessel for the power of the sun. She’ll do anything to make up for her past.
+  story: |
+    Growing up, Illari Quispe Ruiz trained every day to become part of the Inti Warriors – an augmented group of noble protectors and masters of harnessing solar energy. After a horrific accident killed all the other Warriors, the guilt-stricken Illari vows to make up for her part in the tragedy.
 -
   name: Jetpack Cat
   role: Support
@@ -367,6 +630,12 @@
   full_name: Fika
   nationality: Unknown
   birth_date: null
+  locations:
+    - "Watchpoint: Gibraltar"
+  description: |
+    A fearless feline pilot equipped with Brigitte’s latest jet-propulsion invention, Jetpack Cat brings adorable aerial support to the battlefield.
+  story: |
+    A stray cat mysteriously turned up at Watchpoint: Gibraltar, and resident feline fanatic Brigitte was eager to adopt her. Since her early days, Brigitte has been using her cats as workshop assistants, imagining them in outlandish situations. But when Talon attacked Gibraltar, those farfetched dreams became a possible saving grace. Brigitte constructed a jetpack that would allow the cat to fly into battle and lend a helping paw to any teammates in need.
 -
   name: Juno
   role: Support
@@ -376,6 +645,13 @@
   full_name: Juno Teo Minh
   nationality: Mars
   birth_date: "2057-03-22"
+  locations:
+    - Red Promise Colony, Mars (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    The first human born on Mars, Juno uses her space-age technology to solve any problem that enters her orbit. She is determined to one day save her home planet.
+  story: |
+    Juno Teo Minh was born on Mars during Project Red Promise – Lucheng Interstellar’s secret multi-stage initiative to terraform the planet. When dust storms began to ravage the planet, the Red Promise Colony lost contact with Lucheng, throwing the project’s future into jeopardy. To protect Juno, the Red Promise Team sent her to planet Earth, where she could live her life in safety. Now, Juno is determined to find a way to save her home and family – before time runs out.
 -
   name: Kiriko
   role: Support
@@ -385,6 +661,12 @@
   full_name: Kiriko Kamori
   nationality: Japan
   birth_date: "2054-07-07"
+  locations:
+    - Kanezaka, Japan
+  description: |
+    As Miko of the Kanezaka shrine and daughter of the Shimada's former swordmaster, Kiriko Kamori channels both her spiritual and ninja skills to heal her fractured city.
+  story: |
+    Kiriko learned the deadly art of ninjutsu from her mother, Asa. When the Shimada clan fell, the rival Hashimoto took Kiriko’s father hostage. For her safety, Kiriko moved in with her grandmother, who taught her the art of healing. Years later, Kiriko has returned home to free her community from the cruel grip of the Hashimoto.
 -
   name: Lifeweaver
   role: Support
@@ -394,6 +676,10 @@
   full_name: Niran Pruksamanee
   nationality: Thailand
   birth_date: "2044-04-28"
+  locations:
+    -
+  description:
+  story:
 -
   name: Lúcio
   role: Support
@@ -403,6 +689,12 @@
   full_name: Lúcio Correia dos Santos
   nationality: Brazil
   birth_date: "2048-03-20"
+  locations:
+    - Atlantic Arcology
+  description: |
+    The brilliant creator of biolight, a technology that merges plant matter and hard light. He dreams of healing the world.
+  story: |
+    An artist, activist, and inventor, Lifeweaver has created a new form of life that heals wounds, cures illnesses, and may one day save everyone on the planet... providing the Vishkar Corporation doesn’t catch up with him first.
 -
   name: Mercy
   role: Support
@@ -412,6 +704,13 @@
   full_name: Angela Ziegler
   nationality: Switzerland
   birth_date: "2036-05-13"
+  locations:
+    - Zürich, Switzerland (formerly)
+    - "Watchpoint: Gibraltar"
+  description: |
+    A guardian angel to those who come under her care, Dr. Angela Ziegler is a peerless healer, a brilliant scientist, and a staunch advocate for peace.
+  story: |
+    Orphaned in the Omnic Crisis, child prodigy and nanotechnology pioneer Angela Ziegler became Overwatch’s most prominent combat medic and vocal proponent of global peace. After the organization’s fall, and with the coming of a new war, she wonders if she will ever know peace in her lifetime.
 -
   name: Mizuki
   role: Support
@@ -421,6 +720,13 @@
   full_name: Mizuki Kawano
   nationality: Japan
   birth_date: "2054-04-09"
+  locations:
+    - Tokyo, Japan (formerly)
+    - Kanezaka, Japan
+  description: |
+    Born under a shadow of misfortune, Mizuki will do anything it takes to break free of his curse and decide his own fate.
+  story: |
+    Surrounded by unfortunate circumstances, Mizuki Kawano grew up believing he was cursed. After being taken in by the Hashimoto clan from a young age, he found solace in Toshiro Yamagami—a captive weaponsmith who became his mentor. Armed with an anima kusarigama and sent to infiltrate the Yokai of Kanezaka, Mizuki is determined to decide his own fate.
 -
   name: Moira
   role: Support
@@ -430,6 +736,12 @@
   full_name: Moira O'Deorain
   nationality: Ireland
   birth_date: "2026-04-04"
+  locations:
+    - Oasis, Iraq
+  description: |
+    Equal parts brilliant and controversial, scientist Moira O'Deorain is on the cutting edge of genetic engineering, searching for a way to rewrite the fundamental building blocks of life.
+  story: |
+    Controversial geneticist Moira O’Deorain cared only about the evolutionary advancement of humanity. Though her work has earned her many enemies, her alliances with the scientific collective of Oasis and the ruthless organization Talon have freed her from moral and monetary constraints, allowing her to pursue her breakthroughs with great efficiency... and ruthlessness.
 -
   name: Wuyang
   role: Support
@@ -439,6 +751,12 @@
   full_name: Wuyang Ye
   nationality: China
   birth_date: "2057-05-01"
+  locations:
+    - Wuxing University, Chengdu
+  description: |
+    Wielder of healing technology from Wuxing University’s Water College, Wuyang is always ready to turn the tide of battle.
+  story: |
+    Wuyang Ye has always dreamed of carrying on his family's legacy at the Wuxing University Fire College. But when he’s accepted into the Water College instead, he faces an uphill battle to discover his personal strengths and prove them – to his family, and to himself.
 -
   name: Zenyatta
   role: Support
@@ -448,3 +766,9 @@
   full_name: Tekhartha Zenyatta
   nationality: Nepal
   birth_date: "2042-07-14"
+  locations:
+    - Shambali Monastery, Nepal (formerly)
+  description: |
+    Zenyatta is an omnic monk who wanders the world in search of spiritual enlightenment. It is said that those who cross his path are never the same again.
+  story: |
+    Zenyatta is an omnic monk who wanders the world in search of spiritual enlightenment, helping those he meets to overcome their personal struggles and find inner peace. When necessary, however, he will fight to protect the innocent, be they omnic or human. It is said that those who cross his path are never the same again.
