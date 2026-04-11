@@ -677,9 +677,10 @@
   nationality: Thailand
   birth_date: "2044-04-28"
   locations:
-    -
-  description:
-  story:
+    - Atlantic Arcology
+  description: |
+    The brilliant creator of biolight, a technology that merges plant matter and hard light. He dreams of healing the world.
+  story: An artist, activist, and inventor, Lifeweaver has created a new form of life that heals wounds, cures illnesses, and may one day save everyone on the planet... providing the Vishkar Corporation doesn’t catch up with him first.
 -
   name: Lúcio
   role: Support
@@ -690,11 +691,11 @@
   nationality: Brazil
   birth_date: "2048-03-20"
   locations:
-    - Atlantic Arcology
+    - Rio de Janeiro, Brazil
   description: |
-    The brilliant creator of biolight, a technology that merges plant matter and hard light. He dreams of healing the world.
+    Lúcio is an international celebrity who inspires social change through his music and activism.
   story: |
-    An artist, activist, and inventor, Lifeweaver has created a new form of life that heals wounds, cures illnesses, and may one day save everyone on the planet... providing the Vishkar Corporation doesn’t catch up with him first.
+    Lúcio grew up poor in the Rio favelas, before eventually becoming a popular underground DJ. But when the Vishkar Corporation redeveloped the city and cracked down on the community, Lúcio reclaimed his father’s sonic technology from the corporation and used it to rally his people to action. Now an international celebrity, he inspires social change through his music and actions.
 -
   name: Mercy
   role: Support
