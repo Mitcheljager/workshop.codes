@@ -12,13 +12,13 @@
   </div>
 
   <div class="form-group-triple">
-    <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
+    <% heroes.group_by { |item| item["role"] }.each do |hero_role, heroes| %>
       <div class="form-group" data-checkbox-group>
-        <h3><%= hero_category %></h3>
+        <h3><%= hero_role %></h3>
 
         <div class="checkbox">
-          <%= form.check_box "checkbox_group_#{ hero_category }", data: { action: "checkbox-select-all" } %>
-          <%= form.label "checkbox_group_#{ hero_category }", "Check all #{ hero_category } heroes" %>
+          <%= form.check_box "checkbox_group_#{ hero_role }", data: { action: "checkbox-select-all" } %>
+          <%= form.label "checkbox_group_#{ hero_role }", "Check all #{ hero_role } heroes" %>
         </div>
 
         <br>

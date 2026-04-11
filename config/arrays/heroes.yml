@@ -1,250 +1,250 @@
 -
   name: D.va
-  category: Tank
-  subcategory: Initiator
+  role: Tank
+  subrole: Initiator
   stadium: true
 -
   name: Domina
-  category: Tank
-  subcategory: Stalwart
+  role: Tank
+  subrole: Stalwart
   stadium: false
 -
   name: Doomfist
-  category: Tank
-  subcategory: Initiator
+  role: Tank
+  subrole: Initiator
   stadium: true
 -
   name: Hazard
-  category: Tank
-  subcategory: Initiator
+  role: Tank
+  subrole: Initiator
   stadium: true
 -
   name: Junker Queen
-  category: Tank
-  subcategory: Stalwart
+  role: Tank
+  subrole: Stalwart
   stadium: true
 -
   name: Mauga
-  category: Tank
-  subcategory: Bruiser
+  role: Tank
+  subrole: Bruiser
   stadium: false
 -
   name: Orisa
-  category: Tank
-  subcategory: Bruiser
+  role: Tank
+  subrole: Bruiser
   stadium: true
 -
   name: Ramattra
-  category: Tank
-  subcategory: Stalwart
+  role: Tank
+  subrole: Stalwart
   stadium: false
 -
   name: Reinhardt
-  category: Tank
-  subcategory: Stalwart
+  role: Tank
+  subrole: Stalwart
   stadium: true
 -
   name: Roadhog
-  category: Tank
-  subcategory: Bruiser
+  role: Tank
+  subrole: Bruiser
   stadium: false
 -
   name: Sigma
-  category: Tank
-  subcategory: Stalwart
+  role: Tank
+  subrole: Stalwart
   stadium: true
 -
   name: Winston
-  category: Tank
-  subcategory: Initiator
+  role: Tank
+  subrole: Initiator
   stadium: true
 -
   name: Wrecking Ball
-  category: Tank
-  subcategory: Initiator
+  role: Tank
+  subrole: Initiator
   stadium: false
 -
   name: Zarya
-  category: Tank
-  subcategory: Bruiser
+  role: Tank
+  subrole: Bruiser
   stadium: true
 -
   name: Anran
-  category: Damage
-  subcategory: Flanker
+  role: Damage
+  subrole: Flanker
   stadium: false
 -
   name: Ashe
-  category: Damage
-  subcategory: Sharpshooter
+  role: Damage
+  subrole: Sharpshooter
   stadium: true
 -
   name: Bastion
-  category: Damage
-  subcategory: Specialist
+  role: Damage
+  subrole: Specialist
   stadium: false
 -
   name: Cassidy
-  category: Damage
-  subcategory: Sharpshooter
+  role: Damage
+  subrole: Sharpshooter
   stadium: true
 -
   name: Echo
-  category: Damage
-  subcategory: Recon
+  role: Damage
+  subrole: Recon
   stadium: false
 -
   name: Emre
-  category: Damage
-  subcategory: Specialist
+  role: Damage
+  subrole: Specialist
   stadium: false
 -
   name: Freja
-  category: Damage
-  subcategory: Recon
+  role: Damage
+  subrole: Recon
   stadium: true
 -
   name: Genji
-  category: Damage
-  subcategory: Flanker
+  role: Damage
+  subrole: Flanker
   stadium: true
 -
   name: Hanzo
-  category: Damage
-  subcategory: Sharpshooter
+  role: Damage
+  subrole: Sharpshooter
   stadium: false
 -
   name: Junkrat
-  category: Damage
-  subcategory: Specialist
+  role: Damage
+  subrole: Specialist
   stadium: true
 -
   name: Mei
-  category: Damage
-  subcategory: Specialist
+  role: Damage
+  subrole: Specialist
   stadium: true
 -
   name: Pharah
-  category: Damage
-  subcategory: Recon
+  role: Damage
+  subrole: Recon
   stadium: true
 -
   name: Reaper
-  category: Damage
-  subcategory: Flanker
+  role: Damage
+  subrole: Flanker
   stadium: true
 -
   name: Sojourn
-  category: Damage
-  subcategory: Sharpshooter
+  role: Damage
+  subrole: Sharpshooter
   stadium: true
 -
   name: "Soldier: 76"
-  category: Damage
-  subcategory: Specialist
+  role: Damage
+  subrole: Specialist
   stadium: true
 -
   name: Sombra
-  category: Damage
-  subcategory: Recon
+  role: Damage
+  subrole: Recon
   stadium: false
 -
   name: Symmetra
-  category: Damage
-  subcategory: Specialist
+  role: Damage
+  subrole: Specialist
   stadium: false
 -
   name: Torbjörn
-  category: Damage
-  subcategory: Specialist
+  role: Damage
+  subrole: Specialist
   stadium: true
 -
   name: Tracer
-  category: Damage
-  subcategory: Flanker
+  role: Damage
+  subrole: Flanker
   stadium: true
 -
   name: Vendetta
-  category: Damage
-  subcategory: Flanker
+  role: Damage
+  subrole: Flanker
   stadium: true
 -
   name: Venture
-  category: Damage
-  subcategory: Flanker
+  role: Damage
+  subrole: Flanker
   stadium: false
 -
   name: Widowmaker
-  category: Damage
-  subcategory: Sharpshooter
+  role: Damage
+  subrole: Sharpshooter
   stadium: false
 -
   name: Ana
-  category: Support
-  subcategory: Tactician
+  role: Support
+  subrole: Tactician
   stadium: true
 -
   name: Baptiste
-  category: Support
-  subcategory: Tactician
+  role: Support
+  subrole: Tactician
   stadium: false
 -
   name: Brigitte
-  category: Support
-  subcategory: Survivor
+  role: Support
+  subrole: Survivor
   stadium: true
 -
   name: Illari
-  category: Support
-  subcategory: Survivor
+  role: Support
+  subrole: Survivor
   stadium: false
 -
   name: Jetpack Cat
-  category: Support
-  subcategory: Tactician
+  role: Support
+  subrole: Tactician
   stadium: false
 -
   name: Juno
-  category: Support
-  subcategory: Survivor
+  role: Support
+  subrole: Survivor
   stadium: true
 -
   name: Kiriko
-  category: Support
-  subcategory: Medic
+  role: Support
+  subrole: Medic
   stadium: true
 -
   name: Lifeweaver
-  category: Support
-  subcategory: Medic
+  role: Support
+  subrole: Medic
   stadium: false
 -
   name: Lúcio
-  category: Support
-  subcategory: Tactician
+  role: Support
+  subrole: Tactician
   stadium: true
 -
   name: Mercy
-  category: Support
-  subcategory: Medic
+  role: Support
+  subrole: Medic
   stadium: true
 -
   name: Mizuki
-  category: Support
-  subcategory: Survivor
+  role: Support
+  subrole: Survivor
   stadium: false
 -
   name: Moira
-  category: Support
-  subcategory: Medic
+  role: Support
+  subrole: Medic
   stadium: true
 -
   name: Wuyang
-  category: Support
-  subcategory: Survivor
+  role: Support
+  subrole: Survivor
   stadium: true
 -
   name: Zenyatta
-  category: Support
-  subcategory: Tactician
+  role: Support
+  subrole: Tactician
   stadium: true

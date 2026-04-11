@@ -24,8 +24,8 @@
     <%= link_to "X", build_filter_path(:hero, nil), class: "filter__remove", data: { action: direct ? nil : "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
-      <% heroes.group_by { |item| item["category"] }.each do |hero_category, heroes| %>
-        <span class="dropdown__label"><%= hero_category %></span>
+      <% heroes.group_by { |item| item["role"] }.each do |hero_role, heroes| %>
+        <span class="dropdown__label"><%= hero_role %></span>
 
         <% heroes.each do |hero| %>
           <%= link_to build_filter_path(:hero, to_slug(hero["name"])), class: "dropdown__item dropdown__item--thin", data: { action: direct ? nil : "add-filter", value: to_slug(hero["name"]) } do %>
