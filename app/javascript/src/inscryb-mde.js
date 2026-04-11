@@ -243,8 +243,40 @@ class InitialiseInscrybeMDE {
       const dropdownElement = document.createElement("div")
       dropdownElement.classList.add("editor-dropdown")
 
-      const sizesElement = document.createElement("div")
-      sizesElement.classList.add("p-1/8")
+      const optionsElement = document.createElement("div")
+      optionsElement.classList.add("p-1/8")
+
+      ;["2D", "3D"].forEach((size, i) => {
+        const id = `hero_select_size_${size}`
+
+        const typeItemElement = document.createElement("div")
+        typeItemElement.classList.add("checkbox")
+
+        const checkboxElement = document.createElement("input")
+        checkboxElement.type = "radio"
+        checkboxElement.value = size.toLowerCase()
+        checkboxElement.checked = i === 0
+        checkboxElement.name = "hero_select_type"
+        checkboxElement.id = id
+
+        const labelElement = document.createElement("label")
+        labelElement.for = name
+        labelElement.innerText = size
+
+        typeItemElement.addEventListener("click", event => {
+          event.preventDefault()
+          event.stopPropagation()
+
+          checkboxElement.checked = true
+        })
+
+        typeItemElement.append(checkboxElement)
+        typeItemElement.append(labelElement)
+        optionsElement.append(typeItemElement)
+      })
+
+      const breakElement = document.createElement("br")
+      optionsElement.append(breakElement)
 
       ;["Small", "Medium", "Large"].forEach((size, i) => {
         const id = `hero_select_size_${size}`
@@ -272,10 +304,10 @@ class InitialiseInscrybeMDE {
 
         sizeItemElement.append(checkboxElement)
         sizeItemElement.append(labelElement)
-        sizesElement.append(sizeItemElement)
+        optionsElement.append(sizeItemElement)
       })
 
-      dropdownElement.append(sizesElement)
+      dropdownElement.append(optionsElement)
 
       const separatorElement = document.createElement("hr")
       separatorElement.classList.add("mt-1/8")
@@ -290,9 +322,18 @@ class InitialiseInscrybeMDE {
 
         heroElement.addEventListener("click", () => {
           const size = document.querySelector("[name='hero_select_size']:checked").value
-          const sizeString = size === "small" ? "" : ` { size: "${size}" }`
+          const type = document.querySelector("[name='hero_select_type']:checked").value
 
-          this.codemirror.replaceSelection(`[hero ${hero}${sizeString}]`)
+          let optionsString = ""
+
+          if (type !== "2d" || size !== "small") {
+            const sizeString = size !== "small" ? `size: "${size}"` : ""
+            const typeString = type !== "2d" ? `type: "${type}"` : ""
+
+            optionsString = ` { ${sizeString}${sizeString && typeString ? ", " : ""}${typeString} }`
+          }
+
+          this.codemirror.replaceSelection(`[hero ${hero}${optionsString}]`)
         })
 
         dropdownElement.append(heroElement)

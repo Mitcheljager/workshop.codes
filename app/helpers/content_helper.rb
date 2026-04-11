@@ -135,7 +135,9 @@ module ContentHelper
         size = 100 if config["size"] == "medium"
         size = 256 if config["size"] == "large"
 
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name, size), width: size, height: size, loading: "lazy", alt: hero_name)
+        type = config["type"]&.downcase == "3d" ? "3d" : "2d"
+
+        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name, size, type), width: size, height: size, loading: "lazy", alt: hero_name)
       rescue
         nil
       end
