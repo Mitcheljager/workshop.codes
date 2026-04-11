@@ -1,150 +1,200 @@
 -
   name: D.va
   category: Tank
+  subcategory: Initiator
 -
   name: Domina
   category: Tank
+  subcategory: Stalwart
 -
   name: Doomfist
   category: Tank
+  subcategory: Initiator
 -
   name: Hazard
   category: Tank
+  subcategory: Initiator
 -
   name: Junker Queen
   category: Tank
+  subcategory: Stalwart
 -
   name: Mauga
   category: Tank
+  subcategory: Bruiser
 -
   name: Orisa
   category: Tank
+  subcategory: Bruiser
 -
   name: Ramattra
   category: Tank
+  subcategory: Stalwart
 -
   name: Reinhardt
   category: Tank
+  subcategory: Stalwart
 -
   name: Roadhog
   category: Tank
+  subcategory: Bruiser
 -
   name: Sigma
   category: Tank
+  subcategory: Stalwart
 -
   name: Winston
   category: Tank
+  subcategory: Initiator
 -
   name: Wrecking Ball
   category: Tank
+  subcategory: Initiator
 -
   name: Zarya
   category: Tank
+  subcategory: Bruiser
 -
   name: Anran
   category: Damage
+  subcategory: Flanker
 -
   name: Ashe
   category: Damage
+  subcategory: Sharpshooter
 -
   name: Bastion
   category: Damage
+  subcategory: Specialist
 -
   name: Cassidy
   category: Damage
+  subcategory: Sharpshooter
 -
   name: Echo
   category: Damage
+  subcategory: Recon
 -
   name: Emre
   category: Damage
+  subcategory: Specialist
 -
   name: Freja
   category: Damage
+  subcategory: Recon
 -
   name: Genji
   category: Damage
+  subcategory: Flanker
 -
   name: Hanzo
   category: Damage
+  subcategory: Sharpshooter
 -
   name: Junkrat
   category: Damage
+  subcategory: Specialist
 -
   name: Mei
   category: Damage
+  subcategory: Specialist
 -
   name: Pharah
   category: Damage
+  subcategory: Recon
 -
   name: Reaper
   category: Damage
+  subcategory: Flanker
 -
   name: "Soldier: 76"
   category: Damage
+  subcategory: Specialist
 -
   name: Sojourn
   category: Damage
+  subcategory: Sharpshooter
 -
   name: Sombra
   category: Damage
+  subcategory: Recon
 -
   name: Symmetra
   category: Damage
+  subcategory: Specialist
 -
   name: Torbjörn
   category: Damage
+  subcategory: Specialist
 -
   name: Tracer
   category: Damage
+  subcategory: Flanker
 -
   name: Vendetta
   category: Damage
+  subcategory: Flanker
 -
   name: Venture
   category: Damage
+  subcategory: Flanker
 -
   name: Widowmaker
   category: Damage
+  subcategory: Sharpshooter
 -
   name: Ana
   category: Support
+  subcategory: Tactician
 -
   name: Baptiste
   category: Support
+  subcategory: Tactician
 -
   name: Brigitte
   category: Support
+  subcategory: Survivor
 -
   name: Illari
   category: Support
+  subcategory: Survivor
 -
   name: Jetpack Cat
   category: Support
+  subcategory: Tactician
 -
   name: Juno
   category: Support
+  subcategory: Survivor
 -
   name: Kiriko
   category: Support
+  subcategory: Medic
 -
   name: Lifeweaver
   category: Support
+  subcategory: Medic
 -
   name: Lúcio
   category: Support
+  subcategory: Tactician
 -
   name: Mercy
   category: Support
+  subcategory: Medic
 -
   name: Mizuki
   category: Support
+  subcategory: Survivor
 -
   name: Moira
   category: Support
+  subcategory: Medic
 -
   name: Wuyang
   category: Support
+  subcategory: Survivor
 -
   name: Zenyatta
   category: Support
+  subcategory: Tactician
