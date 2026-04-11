@@ -4,29 +4,24 @@
 -
   name: Domina
   category: Tank
-  overwatch_2: true
 -
   name: Doomfist
   category: Tank
 -
   name: Hazard
   category: Tank
-  overwatch_2: true
 -
   name: Junker Queen
   category: Tank
-  overwatch_2: true
 -
   name: Mauga
   category: Tank
-  overwatch_2: true
 -
   name: Orisa
   category: Tank
 -
   name: Ramattra
   category: Tank
-  overwatch_2: true
 -
   name: Reinhardt
   category: Tank
@@ -48,7 +43,6 @@
 -
   name: Anran
   category: Damage
-  overwatch_2: true
 -
   name: Ashe
   category: Damage
@@ -64,11 +58,9 @@
 -
   name: Emre
   category: Damage
-  overwatch_2: true
 -
   name: Freja
   category: Damage
-  overwatch_2: true
 -
   name: Genji
   category: Damage
@@ -93,7 +85,6 @@
 -
   name: Sojourn
   category: Damage
-  overwatch_2: true
 -
   name: Sombra
   category: Damage
@@ -109,11 +100,9 @@
 -
   name: Vendetta
   category: Damage
-  overwatch_2: true
 -
   name: Venture
   category: Damage
-  overwatch_2: true
 -
   name: Widowmaker
   category: Damage
@@ -129,23 +118,18 @@
 -
   name: Illari
   category: Support
-  overwatch_2: true
 -
   name: Jetpack Cat
   category: Support
-  overwatch_2: true
 -
   name: Juno
   category: Support
-  overwatch_2: true
 -
   name: Kiriko
   category: Support
-  overwatch_2: true
 -
   name: Lifeweaver
   category: Support
-  overwatch_2: true
 -
   name: Lúcio
   category: Support
@@ -155,14 +139,12 @@
 -
   name: Mizuki
   category: Support
-  overwatch_2: true
 -
   name: Moira
   category: Support
 -
   name: Wuyang
   category: Support
-  overwatch_2: true
 -
   name: Zenyatta
   category: Support
