@@ -20,9 +20,9 @@ class Api::HeroesController < Api::BaseController
 
     heroes.map do |hero|
       hero[:portrait] = {
-        small: image_url(hero_name_to_icon_url(hero["name"])),
-        medium: image_url(hero_name_to_icon_url(hero["name"], 100)),
-        large: image_url(hero_name_to_icon_url(hero["name"], 256))
+        small: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"])),
+        medium: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 100)),
+        large: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 256))
       }
     end
 
