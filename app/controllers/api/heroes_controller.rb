@@ -20,10 +20,15 @@ class Api::HeroesController < Api::BaseController
 
     heroes.map do |hero|
       hero[:portrait] = {
-        "3d": {
-          small: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"])),
+        "2d": {
+          small: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 50)),
           medium: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 100)),
           large: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 256))
+        },
+        "3d": {
+          small: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 50, "3d")),
+          medium: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 100, "3d")),
+          large: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 256, "3d"))
         }
       }
     end

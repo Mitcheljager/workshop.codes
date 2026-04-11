@@ -200,7 +200,7 @@ module ContentHelper
     hero.downcase.gsub(":", "").gsub(" ", "").gsub(".", "").gsub("ú", "u").gsub("ö", "o")
   end
 
-  def hero_name_to_icon_url(hero, size = 50, type = "3d")
+  def hero_name_to_icon_url(hero, size = 50, type = "2d")
     string = "heroes/#{ type }/#{ size }/#{ hero_name_to_slug(hero) }.png"
     asset_exists?(string) ? string : nil
   end
