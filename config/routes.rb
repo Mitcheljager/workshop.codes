@@ -171,6 +171,7 @@ Rails.application.routes.draw do
 
   namespace :wiki do
     root to: "base#index"
+
     resources :categories, param: :slug, concerns: :paginatable, except: [:show]
     get "categories/:slug(/page/:page)", to: "categories#show"
 
@@ -181,6 +182,12 @@ Rails.application.routes.draw do
     post "search", to: "search#query", as: "search"
     get "search/:query", to: "search#index", as: "search_results"
     get "dictionary", to: "dictionary#index"
+  end
+
+  namespace :api do
+    root to: "base#index"
+
+    resources :heroes, param: :name, constraints: { name: /[^\/]+(?<!\.json)/ }, only: [:index, :show]
   end
 
   post "/new", to: "posts#create", as: "create_post"
