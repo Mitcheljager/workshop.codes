@@ -6,6 +6,7 @@
   release_date: "2016-05-24"
   full_name: Hana Song
   nationality: South Korea
+  birth_date: "2054-06-22"
 -
   name: Domina
   role: Tank
@@ -14,6 +15,7 @@
   release_date: "2026-02-10"
   full_name: Vaira Singhania
   nationality: India
+  birth_date: "2043-08-28"
 -
   name: Doomfist
   role: Tank
@@ -22,6 +24,7 @@
   release_date: "2017-07-27"
   full_name: Akande Ogundimu
   nationality: Nigeria
+  birth_date: "2028-05-25"
 -
   name: Hazard
   role: Tank
@@ -30,6 +33,7 @@
   release_date: "2024-12-10"
   full_name: Findlay Docherty
   nationality: Scotland
+  birth_date: "2051-11-11"
 -
   name: Junker Queen
   role: Tank
@@ -38,6 +42,7 @@
   release_date: "2022-06-28"
   full_name: Odessa Stone
   nationality: Australia
+  birth_date: "2044-06-14"
 -
   name: Mauga
   role: Tank
@@ -46,6 +51,7 @@
   release_date: "2023-12-05"
   full_name: Maugaloa Malosi
   nationality: Samoa
+  birth_date: "2038-08-19"
 -
   name: Orisa
   role: Tank
@@ -54,6 +60,7 @@
   release_date: "2017-03-21"
   full_name: Orisa
   nationality: Numbani
+  birth_date: "2075-05-09"
 -
   name: Ramattra
   role: Tank
@@ -62,6 +69,7 @@
   release_date: "2022-12-06"
   full_name: Ramattra
   nationality: Nepal
+  birth_date: "2048-03-29"
 -
   name: Reinhardt
   role: Tank
@@ -70,6 +78,7 @@
   release_date: "2016-05-24"
   full_name: Reinhardt Wilhelm
   nationality: Germany
+  birth_date: "2012-06-26"
 -
   name: Roadhog
   role: Tank
@@ -78,6 +87,7 @@
   release_date: "2016-05-24"
   full_name: Mako Rutledge
   nationality: Australia
+  birth_date: "2025-09-12"
 -
   name: Sigma
   role: Tank
@@ -86,6 +96,7 @@
   release_date: "2019-08-13"
   full_name: Siebren de Kuiper
   nationality: Netherlands
+  birth_date: "2012-03-15"
 -
   name: Winston
   role: Tank
@@ -94,6 +105,7 @@
   release_date: "2016-05-24"
   full_name: Winston
   nationality: The Moon
+  birth_date: "2044-06-06"
 -
   name: Wrecking Ball
   role: Tank
@@ -102,6 +114,7 @@
   release_date: "2018-07-24"
   full_name: Hammond
   nationality: The Moon
+  birth_date: "2059-10-15"
 -
   name: Zarya
   role: Tank
@@ -110,6 +123,7 @@
   release_date: "2016-05-24"
   full_name: Aleksandra Zaryanova
   nationality: Russia
+  birth_date: "2045-12-04"
 -
   name: Anran
   role: Damage
@@ -118,6 +132,7 @@
   release_date: "2026-02-05"
   full_name: Anran Ye
   nationality: China
+  birth_date: "2053-08-08"
 -
   name: Ashe
   role: Damage
@@ -126,6 +141,7 @@
   release_date: "2018-11-13"
   full_name: Elizabeth Ashe
   nationality: United States
+  birth_date: "2034-10-01"
 -
   name: Bastion
   role: Damage
@@ -134,6 +150,7 @@
   release_date: "2016-05-24"
   full_name: Bastion
   nationality: Unknown
+  birth_date: "2044-01-01"
 -
   name: Cassidy
   role: Damage
@@ -142,6 +159,7 @@
   release_date: "2016-05-24"
   full_name: Cole Cassidy
   nationality: United States
+  birth_date: "2036-07-31"
 -
   name: Echo
   role: Damage
@@ -150,6 +168,7 @@
   release_date: "2020-04-14"
   full_name: Echo
   nationality: Singapore
+  birth_date: "2062-02-05"
 -
   name: Emre
   role: Damage
@@ -158,6 +177,7 @@
   release_date: "2026-02-10"
   full_name: Emre Sarıoğlu
   nationality: Turkey
+  birth_date: "2031-11-08"
 -
   name: Freja
   role: Damage
@@ -166,6 +186,7 @@
   release_date: "2025-04-22"
   full_name: Freja Skov
   nationality: Denmark
+  birth_date: "2041-09-26"
 -
   name: Genji
   role: Damage
@@ -174,6 +195,7 @@
   release_date: "2016-05-24"
   full_name: Genji Shimada
   nationality: Japan
+  birth_date: "2038-10-28"
 -
   name: Hanzo
   role: Damage
@@ -182,6 +204,7 @@
   release_date: "2016-05-24"
   full_name: Hanzo Shimada
   nationality: Japan
+  birth_date: "2035-11-03"
 -
   name: Junkrat
   role: Damage
@@ -190,6 +213,7 @@
   release_date: "2016-05-24"
   full_name: Jamison Fawkes
   nationality: Australia
+  birth_date: "2048-02-29"
 -
   name: Mei
   role: Damage
@@ -198,6 +222,7 @@
   release_date: "2016-05-24"
   full_name: Mei-Ling Zhou
   nationality: China
+  birth_date: "2042-09-05"
 -
   name: Pharah
   role: Damage
@@ -206,6 +231,7 @@
   release_date: "2016-05-24"
   full_name: Fareeha Amari
   nationality: Egypt
+  birth_date: "2042-04-15"
 -
   name: Reaper
   role: Damage
@@ -214,6 +240,7 @@
   release_date: "2016-05-24"
   full_name: Gabriel Reyes
   nationality: United States
+  birth_date: "2015-12-14"
 -
   name: Sojourn
   role: Damage
@@ -222,6 +249,7 @@
   release_date: "2022-04-26"
   full_name: Vivian Chase
   nationality: Canada
+  birth_date: "2025-01-12"
 -
   name: "Soldier: 76"
   role: Damage
@@ -230,6 +258,7 @@
   release_date: "2016-05-24"
   full_name: Jack Morrison
   nationality: United States
+  birth_date: "2018-01-27"
 -
   name: Sombra
   role: Damage
@@ -238,6 +267,7 @@
   release_date: "2016-11-15"
   full_name: Olivia Colomar
   nationality: Mexico
+  birth_date: "2043-12-31"
 -
   name: Symmetra
   role: Damage
@@ -246,6 +276,7 @@
   release_date: "2016-05-24"
   full_name: Satya Vaswani
   nationality: India
+  birth_date: "2045-10-02"
 -
   name: Torbjörn
   role: Damage
@@ -254,6 +285,7 @@
   release_date: "2016-05-24"
   full_name: Torbjörn Lindholm
   nationality: Sweden
+  birth_date: "2016-09-21"
 -
   name: Tracer
   role: Damage
@@ -262,6 +294,7 @@
   release_date: "2016-05-24"
   full_name: Lena Oxton
   nationality: England
+  birth_date: "2048-02-17"
 -
   name: Vendetta
   role: Damage
@@ -270,6 +303,7 @@
   release_date: "2025-12-09"
   full_name: Marzia Bartalotti
   nationality: Italy
+  birth_date: "2047-02-15"
 -
   name: Venture
   role: Damage
@@ -278,6 +312,7 @@
   release_date: "2024-04-16"
   full_name: Sloan Cameron
   nationality: Canada
+  birth_date: "2049-08-06"
 -
   name: Widowmaker
   role: Damage
@@ -286,6 +321,7 @@
   release_date: "2016-05-24"
   full_name: Amélie Lacroix
   nationality: France
+  birth_date: "2040-11-19"
 -
   name: Ana
   role: Support
@@ -294,6 +330,7 @@
   release_date: "2016-07-19"
   full_name: Ana Amari
   nationality: Egypt
+  birth_date: "2014-01-01"
 -
   name: Baptiste
   role: Support
@@ -302,6 +339,7 @@
   release_date: "2019-03-19"
   full_name: Jean-Baptiste Augustin
   nationality: Haiti
+  birth_date: "2038-03-12"
 -
   name: Brigitte
   role: Support
@@ -310,6 +348,7 @@
   release_date: "2018-03-20"
   full_name: Brigitte Lindholm
   nationality: Sweden
+  birth_date: "2050-09-22"
 -
   name: Illari
   role: Support
@@ -318,6 +357,7 @@
   release_date: "2023-08-10"
   full_name: Illari Quispe Ruiz
   nationality: Peru
+  birth_date: "2057-12-21"
 -
   name: Jetpack Cat
   role: Support
@@ -326,6 +366,7 @@
   release_date: "2026-02-10"
   full_name: Fika
   nationality: Unknown
+  birth_date: null
 -
   name: Juno
   role: Support
@@ -334,6 +375,7 @@
   release_date: "2024-08-20"
   full_name: Juno Teo Minh
   nationality: Mars
+  birth_date: "2057-03-22"
 -
   name: Kiriko
   role: Support
@@ -342,6 +384,7 @@
   release_date: "2022-10-04"
   full_name: Kiriko Kamori
   nationality: Japan
+  birth_date: "2054-07-07"
 -
   name: Lifeweaver
   role: Support
@@ -350,6 +393,7 @@
   release_date: "2023-04-11"
   full_name: Niran Pruksamanee
   nationality: Thailand
+  birth_date: "2044-04-28"
 -
   name: Lúcio
   role: Support
@@ -358,6 +402,7 @@
   release_date: "2016-05-24"
   full_name: Lúcio Correia dos Santos
   nationality: Brazil
+  birth_date: "2048-03-20"
 -
   name: Mercy
   role: Support
@@ -366,6 +411,7 @@
   release_date: "2016-05-24"
   full_name: Angela Ziegler
   nationality: Switzerland
+  birth_date: "2036-05-13"
 -
   name: Mizuki
   role: Support
@@ -374,6 +420,7 @@
   release_date: "2026-02-10"
   full_name: Mizuki Kawano
   nationality: Japan
+  birth_date: "2054-04-09"
 -
   name: Moira
   role: Support
@@ -382,6 +429,7 @@
   release_date: "2017-11-16"
   full_name: Moira O'Deorain
   nationality: Ireland
+  birth_date: "2026-04-04"
 -
   name: Wuyang
   role: Support
@@ -390,6 +438,7 @@
   release_date: "2025-08-26"
   full_name: Wuyang Ye
   nationality: China
+  birth_date: "2057-05-01"
 -
   name: Zenyatta
   role: Support
@@ -398,3 +447,4 @@
   release_date: "2016-05-24"
   full_name: Tekhartha Zenyatta
   nationality: Nepal
+  birth_date: "2042-07-14"
