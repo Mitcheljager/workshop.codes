@@ -1,7 +1,18 @@
 class Api::BaseController < ApplicationController
-  before_action { request.format = :json }
+  before_action :set_request_format
+  before_action :set_request_headers
 
   def index
     render json: { message: "Hey!" }
+  end
+
+  private
+
+  def set_request_format
+    request.format = :json
+  end
+
+  def set_request_headers
+    headers["Cache-Control"] = "public, max-age=#{10.minutes}"
   end
 end
