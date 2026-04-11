@@ -3,248 +3,398 @@
   role: Tank
   subrole: Initiator
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Hana Song
+  nationality: South Korea
 -
   name: Domina
   role: Tank
   subrole: Stalwart
   stadium: false
+  release_date: "2026-02-10"
+  full_name: Vaira Singhania
+  nationality: India
 -
   name: Doomfist
   role: Tank
   subrole: Initiator
   stadium: true
+  release_date: "2017-07-27"
+  full_name: Akande Ogundimu
+  nationality: Nigeria
 -
   name: Hazard
   role: Tank
   subrole: Initiator
   stadium: true
+  release_date: "2024-12-10"
+  full_name: Findlay Docherty
+  nationality: Scotland
 -
   name: Junker Queen
   role: Tank
   subrole: Stalwart
   stadium: true
+  release_date: "2022-06-28"
+  full_name: Odessa Stone
+  nationality: Australia
 -
   name: Mauga
   role: Tank
   subrole: Bruiser
   stadium: false
+  release_date: "2023-12-05"
+  full_name: Maugaloa Malosi
+  nationality: Samoa
 -
   name: Orisa
   role: Tank
   subrole: Bruiser
   stadium: true
+  release_date: "2017-03-21"
+  full_name: Orisa
+  nationality: Numbani
 -
   name: Ramattra
   role: Tank
   subrole: Stalwart
   stadium: false
+  release_date: "2022-12-06"
+  full_name: Ramattra
+  nationality: Nepal
 -
   name: Reinhardt
   role: Tank
   subrole: Stalwart
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Reinhardt Wilhelm
+  nationality: Germany
 -
   name: Roadhog
   role: Tank
   subrole: Bruiser
   stadium: false
+  release_date: "2016-05-24"
+  full_name: Mako Rutledge
+  nationality: Australia
 -
   name: Sigma
   role: Tank
   subrole: Stalwart
   stadium: true
+  release_date: "2019-08-13"
+  full_name: Siebren de Kuiper
+  nationality: Netherlands
 -
   name: Winston
   role: Tank
   subrole: Initiator
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Winston
+  nationality: The Moon
 -
   name: Wrecking Ball
   role: Tank
   subrole: Initiator
   stadium: false
+  release_date: "2018-07-24"
+  full_name: Hammond
+  nationality: The Moon
 -
   name: Zarya
   role: Tank
   subrole: Bruiser
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Aleksandra Zaryanova
+  nationality: Russia
 -
   name: Anran
   role: Damage
   subrole: Flanker
   stadium: false
+  release_date: "2026-02-05"
+  full_name: Anran Ye
+  nationality: China
 -
   name: Ashe
   role: Damage
   subrole: Sharpshooter
   stadium: true
+  release_date: "2018-11-13"
+  full_name: Elizabeth Ashe
+  nationality: United States
 -
   name: Bastion
   role: Damage
   subrole: Specialist
   stadium: false
+  release_date: "2016-05-24"
+  full_name: Bastion
+  nationality: Unknown
 -
   name: Cassidy
   role: Damage
   subrole: Sharpshooter
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Cole Cassidy
+  nationality: United States
 -
   name: Echo
   role: Damage
   subrole: Recon
   stadium: false
+  release_date: "2020-04-14"
+  full_name: Echo
+  nationality: Singapore
 -
   name: Emre
   role: Damage
   subrole: Specialist
   stadium: false
+  release_date: "2026-02-10"
+  full_name: Emre Sarıoğlu
+  nationality: Turkey
 -
   name: Freja
   role: Damage
   subrole: Recon
   stadium: true
+  release_date: "2025-04-22"
+  full_name: Freja Skov
+  nationality: Denmark
 -
   name: Genji
   role: Damage
   subrole: Flanker
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Genji Shimada
+  nationality: Japan
 -
   name: Hanzo
   role: Damage
   subrole: Sharpshooter
   stadium: false
+  release_date: "2016-05-24"
+  full_name: Hanzo Shimada
+  nationality: Japan
 -
   name: Junkrat
   role: Damage
   subrole: Specialist
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Jamison Fawkes
+  nationality: Australia
 -
   name: Mei
   role: Damage
   subrole: Specialist
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Mei-Ling Zhou
+  nationality: China
 -
   name: Pharah
   role: Damage
   subrole: Recon
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Fareeha Amari
+  nationality: Egypt
 -
   name: Reaper
   role: Damage
   subrole: Flanker
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Gabriel Reyes
+  nationality: United States
 -
   name: Sojourn
   role: Damage
   subrole: Sharpshooter
   stadium: true
+  release_date: "2022-04-26"
+  full_name: Vivian Chase
+  nationality: Canada
 -
   name: "Soldier: 76"
   role: Damage
   subrole: Specialist
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Jack Morrison
+  nationality: United States
 -
   name: Sombra
   role: Damage
   subrole: Recon
   stadium: false
+  release_date: "2016-11-15"
+  full_name: Olivia Colomar
+  nationality: Mexico
 -
   name: Symmetra
   role: Damage
   subrole: Specialist
   stadium: false
+  release_date: "2016-05-24"
+  full_name: Satya Vaswani
+  nationality: India
 -
   name: Torbjörn
   role: Damage
   subrole: Specialist
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Torbjörn Lindholm
+  nationality: Sweden
 -
   name: Tracer
   role: Damage
   subrole: Flanker
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Lena Oxton
+  nationality: England
 -
   name: Vendetta
   role: Damage
   subrole: Flanker
   stadium: true
+  release_date: "2025-12-09"
+  full_name: Marzia Bartalotti
+  nationality: Italy
 -
   name: Venture
   role: Damage
   subrole: Flanker
   stadium: false
+  release_date: "2024-04-16"
+  full_name: Sloan Cameron
+  nationality: Canada
 -
   name: Widowmaker
   role: Damage
   subrole: Sharpshooter
   stadium: false
+  release_date: "2016-05-24"
+  full_name: Amélie Lacroix
+  nationality: France
 -
   name: Ana
   role: Support
   subrole: Tactician
   stadium: true
+  release_date: "2016-07-19"
+  full_name: Ana Amari
+  nationality: Egypt
 -
   name: Baptiste
   role: Support
   subrole: Tactician
   stadium: false
+  release_date: "2019-03-19"
+  full_name: Jean-Baptiste Augustin
+  nationality: Haiti
 -
   name: Brigitte
   role: Support
   subrole: Survivor
   stadium: true
+  release_date: "2018-03-20"
+  full_name: Brigitte Lindholm
+  nationality: Sweden
 -
   name: Illari
   role: Support
   subrole: Survivor
   stadium: false
+  release_date: "2023-08-10"
+  full_name: Illari Quispe Ruiz
+  nationality: Peru
 -
   name: Jetpack Cat
   role: Support
   subrole: Tactician
   stadium: false
+  release_date: "2026-02-10"
+  full_name: Fika
+  nationality: Unknown
 -
   name: Juno
   role: Support
   subrole: Survivor
   stadium: true
+  release_date: "2024-08-20"
+  full_name: Juno Teo Minh
+  nationality: Mars
 -
   name: Kiriko
   role: Support
   subrole: Medic
   stadium: true
+  release_date: "2022-10-04"
+  full_name: Kiriko Kamori
+  nationality: Japan
 -
   name: Lifeweaver
   role: Support
   subrole: Medic
   stadium: false
+  release_date: "2023-04-11"
+  full_name: Niran Pruksamanee
+  nationality: Thailand
 -
   name: Lúcio
   role: Support
   subrole: Tactician
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Lúcio Correia dos Santos
+  nationality: Brazil
 -
   name: Mercy
   role: Support
   subrole: Medic
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Angela Ziegler
+  nationality: Switzerland
 -
   name: Mizuki
   role: Support
   subrole: Survivor
   stadium: false
+  release_date: "2026-02-10"
+  full_name: Mizuki Kawano
+  nationality: Japan
 -
   name: Moira
   role: Support
   subrole: Medic
   stadium: true
+  release_date: "2017-11-16"
+  full_name: Moira O'Deorain
+  nationality: Ireland
 -
   name: Wuyang
   role: Support
   subrole: Survivor
   stadium: true
+  release_date: "2025-08-26"
+  full_name: Wuyang Ye
+  nationality: China
 -
   name: Zenyatta
   role: Support
   subrole: Tactician
   stadium: true
+  release_date: "2016-05-24"
+  full_name: Tekhartha Zenyatta
+  nationality: Nepal
