@@ -184,10 +184,11 @@ Rails.application.routes.draw do
     get "dictionary", to: "dictionary#index"
   end
 
-  namespace :api do
+  namespace :api, constraints: { name: /[^\/]+(?<!\.json)/ } do
     root to: "base#index"
 
-    resources :heroes, param: :name, constraints: { name: /[^\/]+(?<!\.json)/ }, only: [:index, :show]
+    resources :heroes, param: :name, only: [:index, :show]
+    resources :maps, param: :name, only: [:index, :show]
   end
 
   post "/new", to: "posts#create", as: "create_post"
