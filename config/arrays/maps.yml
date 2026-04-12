@@ -22,7 +22,6 @@
   name: Circuit Royal
   type: Escort
   slug: circuit-royal
-  overwatch_2: true
 -
   name: Dorado
   type: Escort
@@ -47,7 +46,6 @@
   name: Shambali Monastery
   type: Escort
   slug: shambali-monastery
-  overwatch_2: true
 -
   name: "Watchpoint: Gibraltar"
   type: Escort
@@ -76,17 +74,14 @@
   name: Midtown
   type: Hybrid
   slug: midtown
-  overwatch_2: true
 -
   name: Paraíso
   type: Hybrid
   slug: paraiso
-  overwatch_2: true
 -
   name: Antarctic Peninsula
   type: Control
   slug: antarctic-peninsula
-  overwatch_2: true
 -
   name: Busan
   type: Control
@@ -111,57 +106,46 @@
   name: Samoa
   type: Control
   slug: samoa
-  overwatch_2: true
 -
   name: Talantis
   type: Control
   slug: talantis
-  overwatch_2: true
 -
   name: Colosseo
   type: Push
   slug: rome
-  overwatch_2: true
 -
   name: New Queen Street
   type: Push
   slug: toronto
-  overwatch_2: true
 -
   name: Esperança
   type: Push
   slug: esperanca
-  overwatch_2: true
 -
   name: Runasapi
   type: Push
   slug: runasapi
-  overwatch_2: true
 -
   name: New Junk City
   type: Flashpoint
   slug: new-junk-city
-  overwatch_2: true
 -
   name: Suravasa
   type: Flashpoint
   slug: suravasa
-  overwatch_2: true
 -
   name: Aatlis
   type: Flashpoint
   slug: aatlis
-  overwatch_2: true
 -
   name: Hanaoka
   type: Clash
   slug: hanaoka
-  overwatch_2: true
 -
   name: Throne of Anubis
   type: Clash
   slug: throne-of-anubis
-  overwatch_2: true
 -
   name: Black Forest
   type: Arcade
@@ -202,7 +186,6 @@
   name: Estádio Dos Gorilas
   type: Winston's Beach Volleyball
   slug: estadio-dos-gorilas
-  overwatch_2: true
 -
   name: Château Guillard
   type: Deathmatch
@@ -231,72 +214,58 @@
   name: Arena Victoriae (Stadium)
   type: Stadium
   slug: stadium-arena-victoriae
-  overwatch_2: true
 -
   name: Colosseo (Stadium)
   type: Stadium
   slug: stadium-colosseo
-  overwatch_2: true
 -
   name: Esperança (Stadium)
   type: Stadium
   slug: stadium-esperanca
-  overwatch_2: true
 -
   name: Gogadoro (Stadium)
   type: Stadium
   slug: stadium-gogadoro
-  overwatch_2: true
 -
   name: Hanaoka (Stadium)
   type: Stadium
   slug: stadium-hanaoka
-  overwatch_2: true
 -
   name: Ilios Ruins (Stadium)
   type: Stadium
   slug: stadium-ilios-ruins
-  overwatch_2: true
 -
   name: Nepal Shrine (Stadium)
   type: Stadium
   slug: stadium-nepal-shrine
-  overwatch_2: true
 -
   name: Place Lacroix (Stadium)
   type: Stadium
   slug: stadium-place-lacroix
-  overwatch_2: true
 -
   name: Powder Keg Mine (Stadium)
   type: Stadium
   slug: stadium-powder-keg-mine
-  overwatch_2: true
 -
   name: Redwood Dam (Stadium)
   type: Stadium
   slug: stadium-redwood-dam
-  overwatch_2: true
 -
   name: Samoa Volcano (Stadium)
   type: Stadium
   slug: stadium-samoa-volcano
-  overwatch_2: true
 -
   name: Thames District (Stadium)
   type: Stadium
   slug: stadium-thames-district
-  overwatch_2: true
 -
   name: Throne of Anubis (Stadium)
   type: Stadium
   slug: stadium-throne-of-anubis
-  overwatch_2: true
 -
   name: Wuxing University Water College (Stadium)
   type: Stadium
   slug: stadium-wuxing-university-water-college
-  overwatch_2: true
 -
   name: Workshop Chamber
   type: Workshop
