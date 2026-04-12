@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  wrap_parameters format: [:html, :js]
+
   skip_before_action :verify_authenticity_token
 
   before_action :redirect_invalid_params
