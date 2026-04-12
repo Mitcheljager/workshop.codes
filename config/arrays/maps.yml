@@ -2,283 +2,354 @@
   name: Hanamura
   type: Assault
   slug: hanamura
+  location: Tokyo, Japan
 -
   name: Horizon Lunar Colony
   type: Assault
   slug: horizon-lunar-colony
+  location: The Moon
 -
   name: Paris
   type: Assault
   slug: paris
+  location: Paris, France
 -
   name: Temple of Anubis
   type: Assault
   slug: temple-of-anubis
+  location: Giza Plateau, Egypt
 -
   name: Volskaya Industries
   type: Assault
   slug: volskaya-industries
+  location: St. Petersburg, Russia
 -
   name: Circuit Royal
   type: Escort
   slug: circuit-royal
+  location: Monte Carlo, Monaco
 -
   name: Dorado
   type: Escort
   slug: dorado
+  location: Veracruz, Mexico
 -
   name: Havana
   type: Escort
   slug: havana
+  location: Havana, Cuba
 -
   name: Junkertown
   type: Escort
   slug: junkertown
+  location: Central Australia
 -
   name: Rialto
   type: Escort
   slug: rialto
+  location: Venice, Italy
 -
   name: Route 66
   type: Escort
   slug: route-66
+  location: Arizona, United States
 -
   name: Shambali Monastery
   type: Escort
   slug: shambali-monastery
+  location: Nepal
 -
   name: "Watchpoint: Gibraltar"
   type: Escort
   slug: watchpoint-gibraltar
+  location: Gibraltar
 -
   name: Blizzard World
   type: Hybrid
   slug: blizzard-world
+  location: Irvine, United States
 -
   name: Eichenwalde
   type: Hybrid
   slug: eichenwalde
+  location: Stuttgart, Germany
 -
   name: Hollywood
   type: Hybrid
   slug: hollywood
+  location: Los Angeles, United States
 -
   name: King's Row
   type: Hybrid
   slug: kings-row
+  location: London, United Kingdom
 -
   name: Numbani
   type: Hybrid
   slug: numbani
+  location: Nigeria
 -
   name: Midtown
   type: Hybrid
   slug: midtown
+  location: New York, United States
 -
   name: Paraíso
   type: Hybrid
   slug: paraiso
+  location: Rio de Janeiro, Brazil
 -
   name: Antarctic Peninsula
   type: Control
   slug: antarctic-peninsula
+  location: Antarctica
 -
   name: Busan
   type: Control
   slug: busan
+  location: Busan, South Korea
 -
   name: Ilios
   type: Control
   slug: ilios
+  location: Santorini, Greece
 -
   name: Lijiang Tower
   type: Control
   slug: lijiang-tower
+  location: Lijiang, China
 -
   name: Nepal
   type: Control
   slug: nepal
+  location: Nepal
 -
   name: Oasis
   type: Control
   slug: oasis
+  location: Iraq
 -
   name: Samoa
   type: Control
   slug: samoa
+  location: Samoa
 -
   name: Talantis
   type: Control
   slug: talantis
+  location: Unknown
 -
   name: Colosseo
   type: Push
   slug: rome
+  location: Rome, Italy
 -
   name: New Queen Street
   type: Push
   slug: toronto
+  location: Toronto, Canada
 -
   name: Esperança
   type: Push
   slug: esperanca
+  location: Portugal
 -
   name: Runasapi
   type: Push
   slug: runasapi
+  location: Peru
 -
   name: New Junk City
   type: Flashpoint
   slug: new-junk-city
+  location: Australia
 -
   name: Suravasa
   type: Flashpoint
   slug: suravasa
+  location: India
 -
   name: Aatlis
   type: Flashpoint
   slug: aatlis
+  location: Morocco
 -
   name: Hanaoka
   type: Clash
   slug: hanaoka
+  location: Tokyo, Japan
 -
   name: Throne of Anubis
   type: Clash
   slug: throne-of-anubis
+  location: Giza Plateau, Egypt
 -
   name: Black Forest
   type: Arcade
   slug: black-forest
+  location: Black Forest, Germany
 -
   name: Castillo
   type: Arcade
   slug: castillo
+  location: Veracruz, Mexico
 -
   name: "Ecopoint: Antarctica"
   type: Arcade
   slug: ecopoint-antarctica
+  location: Antarctica
 -
   name: Necropolis
   type: Arcade
   slug: necropolis
+  location: Egypt
 -
   name: Estádio das Rãs
   type: Lúcioball
   slug: estadio-das-ras
+  location: Rio de Janeiro, Brazil
 -
   name: Sydney Harbour Arena
   type: Lúcioball
   slug: sydney-harbour-arena
+  location:
 -
   name: Sydney Harbour Arena Classic
   type: Lúcioball
   slug: sydney-harbour-arena-classic
+  location: Sydney, Australia
 -
   name: Busan Stadium
   type: Lúcioball
   slug: busan-stadium
+  location: Busan, South Korea
 -
   name: Busan Stadium Classic
   type: Lúcioball
   slug: busan-stadium-classic
+  location: Busan, South Korea
 -
   name: Estádio Dos Gorilas
   type: Winston's Beach Volleyball
   slug: estadio-dos-gorilas
+  location: Rio de Janeiro, Brazil
 -
   name: Château Guillard
   type: Deathmatch
   slug: chateau-guillard
+  location: Annecy, France
 -
   name: Kanezaka
   type: Deathmatch
   slug: kanezaka
+  location: Tokyo, Japan
 -
   name: Malevento
   type: Deathmatch
   slug: malevento
+  location: Italy
 -
   name: Petra
   type: Deathmatch
   slug: petra
+  location: Ma'an, Jordan
 -
   name: Ayutthaya
   type: Capture the Flag
   slug: ayutthaya
+  location: Ayutthaya, Thailand
 -
   name: Practice Range
   type: Practice
   slug: practice-range
+  location: Unknown
 -
   name: Arena Victoriae (Stadium)
   type: Stadium
   slug: stadium-arena-victoriae
+  location: Rome, Italy
 -
   name: Colosseo (Stadium)
   type: Stadium
   slug: stadium-colosseo
+  location: Rome, Italy
 -
   name: Esperança (Stadium)
   type: Stadium
   slug: stadium-esperanca
+  location: Portugal
 -
   name: Gogadoro (Stadium)
   type: Stadium
   slug: stadium-gogadoro
+  location: Busan, South Korea
 -
   name: Hanaoka (Stadium)
   type: Stadium
   slug: stadium-hanaoka
+  location: Tokyo, Japan
 -
   name: Ilios Ruins (Stadium)
   type: Stadium
   slug: stadium-ilios-ruins
+  location: Santorini, Greece
 -
   name: Nepal Shrine (Stadium)
   type: Stadium
   slug: stadium-nepal-shrine
+  location: Nepal
 -
   name: Place Lacroix (Stadium)
   type: Stadium
   slug: stadium-place-lacroix
+  location: Paris, France
 -
   name: Powder Keg Mine (Stadium)
   type: Stadium
   slug: stadium-powder-keg-mine
+  location: Arizona, United States
 -
   name: Redwood Dam (Stadium)
   type: Stadium
   slug: stadium-redwood-dam
+  location: Unknown
 -
   name: Samoa Volcano (Stadium)
   type: Stadium
   slug: stadium-samoa-volcano
+  location: Samoa
 -
   name: Thames District (Stadium)
   type: Stadium
   slug: stadium-thames-district
+  location: London, United Kingdom
 -
   name: Throne of Anubis (Stadium)
   type: Stadium
   slug: stadium-throne-of-anubis
+  location: Giza Plateau, Egypt
 -
   name: Wuxing University Water College (Stadium)
   type: Stadium
   slug: stadium-wuxing-university-water-college
+  location: Chengdu, China
 -
   name: Workshop Chamber
   type: Workshop
   slug: workshop-chamber
+  location: Unknown
 -
   name: Workshop Island
   type: Workshop
   slug: workshop-island
+  location: Unknown
 -
   name: Workshop Expanse
   type: Workshop
   slug: workshop-expanse
+  location: Unknown
 -
   name: Workshop Green Screen
   type: Workshop
   slug: workshop-green-screen
+  location: Unknown
