@@ -6,7 +6,7 @@ class Api::HeroesController < Api::BaseController
   end
 
   def show
-    hero = heroes.find { |hero| hero_name_to_slug(hero["name"]) === hero_name_to_slug(params[:name]) }
+    hero = heroes.find { |hero| hero_name_to_slug(hero["name"]) == hero_name_to_slug(params[:name]) }
 
     render_404 and return if hero.blank?
 
