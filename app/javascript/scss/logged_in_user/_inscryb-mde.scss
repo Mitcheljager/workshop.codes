@@ -84,8 +84,8 @@
   position: absolute;
   right: 0;
   top: 2rem;
-  max-height: 300px;
-  width: 220px;
+  max-height: min(70vh, 400px);
+  width: 240px;
   background: theme(dark, -5%);
   border: 1px solid theme(darker);
   border-radius: $border-radius;
