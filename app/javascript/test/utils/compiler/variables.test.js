@@ -340,6 +340,20 @@ describe("variables.js", () => {
 
       expect(getVariables(input)).toEqual(expectedOutput)
     })
+
+    it("Should ignore translation strings", () => {
+      const input = `
+        Event Player.someVariable = @translation("Test");
+        Event Player.someOtherVariable = @translation.static("Test 2");
+      `
+
+      const expectedOutput = {
+        globalVariables: [],
+        playerVariables: ["someVariable", "someOtherVariable"]
+      }
+
+      expect(getVariables(input)).toEqual(expectedOutput)
+    })
   })
 
   describe("compileVariables", () => {

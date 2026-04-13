@@ -17,7 +17,7 @@ const globalVariablesRegex = /(?<=Global\.)[A-Za-z0-9_]+/g
  *   "Global.Global.Global.myPlayerVar.otherPlayerVar" => "Global" (the second one), ".myPlayerVar", ".otherPlayerVar"
  *
  */
-const possiblePlayerVariablesRegex = /(?<![^\w.]Global)\.(?<variableName>[A-Za-z0-9_]+)/g
+const possiblePlayerVariablesRegex = /(?<![^\w.]Global)(?<!@\w+)\.(?<variableName>[A-Za-z0-9_]+)/g
 
 const invalidVariablePrefixRegex = /(?:^|(?:^|[^\w.])(?:\d+|D)|[^A-Za-z0-9_)\]])$/
 
