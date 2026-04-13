@@ -163,6 +163,10 @@
   margin-top: 1rem;
 }
 
+.editor-preview pre {
+  background: theme(dark, -10%);
+}
+
 .fa-bold::before {
   content: "B";
   font-weight: bold;
