@@ -30,6 +30,13 @@ export default defineConfig({
     }
   },
   build: {
-    assetsInlineLimit: 512
+    assetsInlineLimit: 512,
+    rollupOptions: {
+      output: {
+        assetFileNames: "assets/[name]-[hash:6][extname]",
+        chunkFileNames: "assets/[name]-[hash:6].js",
+        entryFileNames: "assets/[name]-[hash:6].js"
+      }
+    }
   }
 })
