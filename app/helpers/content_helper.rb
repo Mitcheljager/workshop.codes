@@ -207,8 +207,12 @@ module ContentHelper
     asset_exists?(string) ? string : nil
   end
 
+  def ability_name_to_slug(ability)
+    ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "")
+  end
+
   def ability_name_to_icon_url(ability, size = 50)
-    string = "abilities/#{ size }/#{ ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "") }.png"
+    string = "abilities/#{ size }/#{ ability_name_to_slug(ability) }.png"
     asset_exists?(string) ? string : nil
   end
 

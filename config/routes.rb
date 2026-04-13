@@ -189,6 +189,7 @@ Rails.application.routes.draw do
 
     resources :heroes, param: :name, only: [:index, :show]
     resources :maps, param: :name, only: [:index, :show]
+    resources :abilities, only: [:index]
   end
 
   post "/new", to: "posts#create", as: "create_post"
