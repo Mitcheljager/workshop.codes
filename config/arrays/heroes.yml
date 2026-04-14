@@ -111,7 +111,7 @@
   name: Ramattra
   role: Tank
   subrole: Stalwart
-  stadium: false
+  stadium: true
   release_date: "2022-12-06"
   full_name: Ramattra
   nationality: Nepal
