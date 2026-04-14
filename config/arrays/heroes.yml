@@ -434,8 +434,10 @@
   locations:
     - "Watchpoint: Grand Mesa"
     - Colorado, United States
-  description:
-  story:
+  description: |-
+    A dedicated teammate with enhanced abilities, Sierra has climbed the ranks of Helix Security. With her positive attitude, there's no challenge she can't face.
+  story: |-
+    Growing up with unique talents and more new addresses than friends, Sierra Turner Woods could always count on her mother Kendra for support. When her mother disappeared, Sierra’s hunt for the truth led her to work for Helix Security International. As head of security at Watchpoint: Grand Mesa, she uncovered records revealing her mother’s mysterious past as Soldier: 00. Sierra hopes that working with Overwatch will give her the answers she needs to continue her search.
 -
   name: Sojourn
   role: Damage
