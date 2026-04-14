@@ -423,6 +423,20 @@
   story: |-
     Gabriel Reyes was once an esteemed member of Overwatch, first as its Strike Commander and then as the leader of Blackwatch, Overwatch’s branch for covert operations. He was believed dead following an explosion at Overwatch’s headquarters. But rumors say he escaped his fate, and now works as the volatile killer known only as Reaper, one of Talon’s deadliest enforcers.
 -
+  name: Sierra
+  role: Damage
+  subrole: Recon
+  stadium: false
+  release_date: "2026-04-14"
+  full_name: Sierra Turner Woods
+  nationality: United States
+  birth_date: Unknown
+  locations:
+    - "Watchpoint: Grand Mesa"
+    - Colorado, United States
+  description:
+  story:
+-
   name: Sojourn
   role: Damage
   subrole: Sharpshooter
