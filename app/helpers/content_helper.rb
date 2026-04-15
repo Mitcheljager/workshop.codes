@@ -208,7 +208,7 @@ module ContentHelper
   end
 
   def ability_name_to_slug(ability)
-    ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "")
+    ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "").gsub(".", "")
   end
 
   def ability_name_to_icon_url(ability, size = 50)
