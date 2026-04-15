@@ -6,7 +6,7 @@
   release_date: "2016-05-24"
   full_name: Hana Song
   nationality: South Korea
-  birth_date: "2054-06-22"
+  birth_date: "06-22"
   locations:
     - MEKA Base, Busan, South Korea (formerly),
     - "Watchpoint: Gibraltar"
@@ -22,7 +22,7 @@
   release_date: "2026-02-10"
   full_name: Vaira Singhania
   nationality: India
-  birth_date: "2043-08-28"
+  birth_date: "08-28"
   locations:
     - London, England (formerly)
     - Utopea, India
@@ -38,7 +38,7 @@
   release_date: "2017-07-27"
   full_name: Akande Ogundimu
   nationality: Nigeria
-  birth_date: "2028-05-25"
+  birth_date: "05-25"
   locations:
     - Oyo, Nigeria (formerly)
     - Rome, Italy
@@ -54,7 +54,7 @@
   release_date: "2024-12-10"
   full_name: Findlay Docherty
   nationality: Scotland
-  birth_date: "2051-11-11"
+  birth_date: "11-11"
   locations:
     - Glasgow, Scotland (formerly)
     - Unknown
@@ -70,7 +70,7 @@
   release_date: "2022-06-28"
   full_name: Odessa Stone
   nationality: Australia
-  birth_date: "2044-06-14"
+  birth_date: "06-14"
   locations:
     - Junkertown, Australia
   description: |-
@@ -85,7 +85,7 @@
   release_date: "2023-12-05"
   full_name: Maugaloa Malosi
   nationality: Samoa
-  birth_date: "2038-08-19"
+  birth_date: "08-19"
   locations:
     - Apia, Samoa
   description: |-
@@ -100,7 +100,7 @@
   release_date: "2017-03-21"
   full_name: Orisa
   nationality: Numbani
-  birth_date: "2075-05-09"
+  birth_date: "05-09"
   locations:
     - Numbani, Africa
   description: |-
@@ -115,7 +115,7 @@
   release_date: "2022-12-06"
   full_name: Ramattra
   nationality: Nepal
-  birth_date: "2048-03-29"
+  birth_date: "03-29"
   locations:
     - Shambali Monastery, Nepal (formerly)
   description: |-
@@ -130,7 +130,7 @@
   release_date: "2016-05-24"
   full_name: Reinhardt Wilhelm
   nationality: Germany
-  birth_date: "2012-06-26"
+  birth_date: "06-26"
   locations:
     - Stuttgart, Germany (formerly)
     - "Watchpoint: Gibraltar"
@@ -146,7 +146,7 @@
   release_date: "2016-05-24"
   full_name: Mako Rutledge
   nationality: Australia
-  birth_date: "2025-09-12"
+  birth_date: "09-12"
   locations:
     - Junkertown, Australia (formerly)
   description: |-
@@ -161,7 +161,7 @@
   release_date: "2019-08-13"
   full_name: Siebren de Kuiper
   nationality: Netherlands
-  birth_date: "2012-03-15"
+  birth_date: "03-15"
   locations:
     - The Hague, Netherlands (formerly)
     - International Space Station (formerly)
@@ -177,7 +177,7 @@
   release_date: "2016-05-24"
   full_name: Winston
   nationality: The Moon
-  birth_date: "2044-06-06"
+  birth_date: "06-06"
   locations:
     - Horizon Lunar Colony (formerly)
     - "Watchpoint: Gibraltar"
@@ -193,7 +193,7 @@
   release_date: "2018-07-24"
   full_name: Hammond
   nationality: The Moon
-  birth_date: "2059-10-15"
+  birth_date: "10-15"
   locations:
     - Horizon Lunar Colony (formerly)
     - Junkertown (formerly)
@@ -209,7 +209,7 @@
   release_date: "2016-05-24"
   full_name: Aleksandra Zaryanova
   nationality: Russia
-  birth_date: "2045-12-04"
+  birth_date: "12-04"
   locations:
     - Krasnoyarsk Front (formerly)
     - Novoanskoye Forward Base, Siberia, Russia (formerly)
@@ -226,7 +226,7 @@
   release_date: "2026-02-05"
   full_name: Anran Ye
   nationality: China
-  birth_date: "2053-08-08"
+  birth_date: "08-08"
   locations:
     - Wuxing University, Chengdu (formerly)
     - Watchpoint: Gibraltar
@@ -242,7 +242,7 @@
   release_date: "2018-11-13"
   full_name: Elizabeth Ashe
   nationality: United States
-  birth_date: "2034-10-01"
+  birth_date: "10-01"
   locations:
     - Deadlock Gorge, Arizona, USA
   description: |-
@@ -257,7 +257,7 @@
   release_date: "2016-05-24"
   full_name: Bastion
   nationality: Unknown
-  birth_date: "2044-01-01"
+  birth_date: Unknown
   locations:
     - Gothenburg, Sweden
   description: |-
@@ -272,7 +272,7 @@
   release_date: "2016-05-24"
   full_name: Cole Cassidy
   nationality: United States
-  birth_date: "2036-07-31"
+  birth_date: "07-31"
   locations:
     - Santa Fe, New Mexico, USA (formerly)
     - "Watchpoint: Gibraltar"
@@ -288,7 +288,7 @@
   release_date: "2020-04-14"
   full_name: Echo
   nationality: Singapore
-  birth_date: "2062-02-05"
+  birth_date: "02-05"
   locations:
     - Switzerland (formerly)
     - United States (formerly)
@@ -305,7 +305,7 @@
   release_date: "2026-02-10"
   full_name: Emre Sarıoğlu
   nationality: Turkey
-  birth_date: "2031-11-08"
+  birth_date: "11-08"
   locations:
     - Istanbul, Turkey (formerly)
     - Rome, Italy
@@ -321,7 +321,7 @@
   release_date: "2025-04-22"
   full_name: Freja Skov
   nationality: Denmark
-  birth_date: "2041-09-26"
+  birth_date: "09-26"
   locations:
     - Copenhagen, Denmark (formerly)
     - Unknown
@@ -337,7 +337,7 @@
   release_date: "2016-05-24"
   full_name: Genji Shimada
   nationality: Japan
-  birth_date: "2038-10-28"
+  birth_date: "10-28"
   locations:
     - Hanamura, Japan (formerly)
     - Shambali Monastery, Nepal (formerly)
@@ -354,7 +354,7 @@
   release_date: "2016-05-24"
   full_name: Hanzo Shimada
   nationality: Japan
-  birth_date: "2035-11-03"
+  birth_date: "11-03"
   locations:
     - Hanamura, Japan (formerly)
   description: |-
@@ -369,7 +369,7 @@
   release_date: "2016-05-24"
   full_name: Jamison Fawkes
   nationality: Australia
-  birth_date: "2048-02-29"
+  birth_date: "02-29"
   locations:
     - Junkertown, Australia (formerly)
   description: |-
@@ -384,7 +384,7 @@
   release_date: "2016-05-24"
   full_name: Mei-Ling Zhou
   nationality: China
-  birth_date: "2042-09-05"
+  birth_date: "09-05"
   locations:
     - Xi’an, China (formerly)
   description: |-
@@ -399,7 +399,7 @@
   release_date: "2016-05-24"
   full_name: Fareeha Amari
   nationality: Egypt
-  birth_date: "2042-04-15"
+  birth_date: "04-15"
   locations:
     - Giza, Egypt (formerly)
     - "Watchpoint: Gibraltar"
@@ -415,7 +415,7 @@
   release_date: "2016-05-24"
   full_name: Gabriel Reyes
   nationality: United States
-  birth_date: "2015-12-14"
+  birth_date: "12-14"
   locations:
     - Rome, Italy
   description: |-
@@ -430,7 +430,7 @@
   release_date: "2026-04-14"
   full_name: Sierra Turner Woods
   nationality: United States
-  birth_date: "2050-04-17"
+  birth_date: "04-17"
   locations:
     - "Watchpoint: Grand Mesa"
     - Colorado, United States
@@ -446,7 +446,7 @@
   release_date: "2022-04-26"
   full_name: Vivian Chase
   nationality: Canada
-  birth_date: "2025-01-12"
+  birth_date: "01-12"
   locations:
     - Toronto, Canada
   description: |-
@@ -461,7 +461,7 @@
   release_date: "2016-05-24"
   full_name: Jack Morrison
   nationality: United States
-  birth_date: "2018-01-27"
+  birth_date: "01-27"
   locations:
     - Unknown
   description: |-
@@ -476,7 +476,7 @@
   release_date: "2016-11-15"
   full_name: Olivia Colomar
   nationality: Mexico
-  birth_date: "2043-12-31"
+  birth_date: "12-31"
   locations:
     - Dorado, Mexico
   description: |-
@@ -491,7 +491,7 @@
   release_date: "2016-05-24"
   full_name: Satya Vaswani
   nationality: India
-  birth_date: "2045-10-02"
+  birth_date: "10-02"
   locations:
     - Utopaea, India
   description: |-
@@ -506,7 +506,7 @@
   release_date: "2016-05-24"
   full_name: Torbjörn Lindholm
   nationality: Sweden
-  birth_date: "2016-09-21"
+  birth_date: "09-21"
   locations:
     - Gothenburg, Sweden
   description: |-
@@ -521,7 +521,7 @@
   release_date: "2016-05-24"
   full_name: Lena Oxton
   nationality: England
-  birth_date: "2048-02-17"
+  birth_date: "02-17"
   locations:
     - London, England
     - "Watchpoint: Gibraltar"
@@ -537,7 +537,7 @@
   release_date: "2025-12-09"
   full_name: Marzia Bartalotti
   nationality: Italy
-  birth_date: "2047-02-15"
+  birth_date: "02-15"
   locations:
     - Rome, Italy
   description: |-
@@ -552,7 +552,7 @@
   release_date: "2024-04-16"
   full_name: Sloan Cameron
   nationality: Canada
-  birth_date: "2049-08-06"
+  birth_date: "08-06"
   locations:
     - Nova Scotia, Canada (formerly)
     - Roaming
@@ -568,7 +568,7 @@
   release_date: "2016-05-24"
   full_name: Amélie Lacroix
   nationality: France
-  birth_date: "2040-11-19"
+  birth_date: "11-19"
   locations:
     - Annecy, France
   description: |-
@@ -583,7 +583,7 @@
   release_date: "2016-07-19"
   full_name: Ana Amari
   nationality: Egypt
-  birth_date: "2014-01-01"
+  birth_date: "01-01"
   locations:
     - Cairo, Egypt
   description: |-
@@ -598,7 +598,7 @@
   release_date: "2019-03-19"
   full_name: Jean-Baptiste Augustin
   nationality: Haiti
-  birth_date: "2038-03-12"
+  birth_date: "03-12"
   locations:
     - Tortuga, Haiti (formerly)
     - "Watchpoint: Gibraltar"
@@ -614,7 +614,7 @@
   release_date: "2018-03-20"
   full_name: Brigitte Lindholm
   nationality: Sweden
-  birth_date: "2050-09-22"
+  birth_date: "09-22"
   locations:
     - Gothenburg, Sweden (formerly)
     - "Watchpoint: Gibraltar"
@@ -630,7 +630,7 @@
   release_date: "2023-08-10"
   full_name: Illari Quispe Ruiz
   nationality: Peru
-  birth_date: "2057-12-21"
+  birth_date: "12-21"
   locations:
     - Runasapi, Peru
   description: |-
@@ -660,7 +660,7 @@
   release_date: "2024-08-20"
   full_name: Juno Teo Minh
   nationality: Mars
-  birth_date: "2057-03-22"
+  birth_date: "03-22"
   locations:
     - Red Promise Colony, Mars (formerly)
     - "Watchpoint: Gibraltar"
@@ -676,7 +676,7 @@
   release_date: "2022-10-04"
   full_name: Kiriko Kamori
   nationality: Japan
-  birth_date: "2054-07-07"
+  birth_date: "07-07"
   locations:
     - Kanezaka, Japan
   description: |-
@@ -691,7 +691,7 @@
   release_date: "2023-04-11"
   full_name: Niran Pruksamanee
   nationality: Thailand
-  birth_date: "2044-04-28"
+  birth_date: "04-28"
   locations:
     - Atlantic Arcology
   description: |-
@@ -706,7 +706,7 @@
   release_date: "2016-05-24"
   full_name: Lúcio Correia dos Santos
   nationality: Brazil
-  birth_date: "2048-03-20"
+  birth_date: "03-20"
   locations:
     - Rio de Janeiro, Brazil
   description: |-
@@ -721,7 +721,7 @@
   release_date: "2016-05-24"
   full_name: Angela Ziegler
   nationality: Switzerland
-  birth_date: "2036-05-13"
+  birth_date: "05-13"
   locations:
     - Zürich, Switzerland (formerly)
     - "Watchpoint: Gibraltar"
@@ -737,7 +737,7 @@
   release_date: "2026-02-10"
   full_name: Mizuki Kawano
   nationality: Japan
-  birth_date: "2054-04-09"
+  birth_date: "04-09"
   locations:
     - Tokyo, Japan (formerly)
     - Kanezaka, Japan
@@ -753,7 +753,7 @@
   release_date: "2017-11-16"
   full_name: Moira O'Deorain
   nationality: Ireland
-  birth_date: "2026-04-04"
+  birth_date: "04-04"
   locations:
     - Oasis, Iraq
   description: |-
@@ -768,7 +768,7 @@
   release_date: "2025-08-26"
   full_name: Wuyang Ye
   nationality: China
-  birth_date: "2057-05-01"
+  birth_date: "05-01"
   locations:
     - Wuxing University, Chengdu
   description: |-
@@ -783,7 +783,7 @@
   release_date: "2016-05-24"
   full_name: Tekhartha Zenyatta
   nationality: Nepal
-  birth_date: "2042-07-14"
+  birth_date: "07-14"
   locations:
     - Shambali Monastery, Nepal (formerly)
   description: |-
