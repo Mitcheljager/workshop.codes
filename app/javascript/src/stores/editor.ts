@@ -94,6 +94,8 @@ export const settings = writable({
   "editor-font": "Consolas",
   "editor-font-size": "14",
   "editor-cursor-color": "#ff00ff",
+  "editor-selection-color": "#330033",
+  "editor-selection-outline-color": "#aa00aa",
   "editor-cursor-width": "3",
   "color-string": "#98C379",
   "color-punctuation": "#6a9955",

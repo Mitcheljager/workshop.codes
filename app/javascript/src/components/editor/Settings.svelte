@@ -244,14 +244,28 @@
 
       <h5 class="mt-0 mb-1/4 text-bold"><strong>Cursor</strong></h5>
 
+      <div class="form-group-inline mt-1/8">
+        <label for="" class="text-base font-size nowrap">Size</label>
+        <input type="range" min=1 max=10 step=1 class="range" bind:value={$settings["editor-cursor-width"]} />
+      </div>
+
       <div class="form-group-inline">
         <label for="" class="text-base font-size nowrap">Color</label>
         <input type="color" class="color-input" bind:value={$settings["editor-cursor-color"]} />
       </div>
 
-      <div class="form-group-inline mt-1/8">
-        <label for="" class="text-base font-size nowrap">Size</label>
-        <input type="range" min=1 max=10 step=1 class="range" bind:value={$settings["editor-cursor-width"]} />
+      <hr class="large">
+
+      <h5 class="mt-0 mb-1/4 text-bold"><strong>Selection</strong></h5>
+
+      <div class="form-group-inline">
+        <label for="" class="text-base font-size nowrap">Background</label>
+        <input type="color" class="color-input" bind:value={$settings["editor-selection-color"]} />
+      </div>
+
+      <div class="form-group-inline">
+        <label for="" class="text-base font-size nowrap">Outline</label>
+        <input type="color" class="color-input" bind:value={$settings["editor-selection-outline-color"]} />
       </div>
 
       <hr class="large">

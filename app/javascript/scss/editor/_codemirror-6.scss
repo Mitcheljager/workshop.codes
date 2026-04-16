@@ -42,8 +42,8 @@
   }
 
   .cm-selectionBackground {
-    background: var(--editor-cursor-color, #ff00ff) !important;
-    opacity: 0.35;
+    background: var(--editor-selection-color, #330033) !important;
+    outline: 1px solid var(--editor-selection-outline-color, #aa00aa);
   }
 
   .cm-selectionMatch {
