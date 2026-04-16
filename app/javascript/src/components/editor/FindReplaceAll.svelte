@@ -1,10 +1,11 @@
 <script>
-  import { items, currentItem, editorStates } from "@stores/editor"
+  import { items, currentItem, editorStates, currentEditorView } from "@stores/editor"
   import { getItemById, setCurrentItemById, updateItem } from "@utils/editor"
   import { replaceBetween } from "@utils/parse"
   import { escapeable } from "@components/actions/escapeable"
   import { fade, fly } from "svelte/transition"
   import { tick } from "svelte"
+  import { EditorView } from "codemirror"
 
   let active = false
   let value = ""
@@ -104,14 +105,29 @@
     return itemNames.reverse().join(" > ")
   }
 
-  function selectItem(id) {
+  function selectItem(id, index) {
     setCurrentItemById(id)
+
+    if (!$currentEditorView) return
+
+    requestAnimationFrame(() => {
+      $currentEditorView.dispatch({
+        selection: { anchor: index, head: index + value.length },
+        effects: EditorView.scrollIntoView($currentEditorView.state.selection.main.head, { y: "center" })
+      })
+
+      $currentEditorView.focus()
+    })
   }
 
   function setSelected(add) {
     selected = selected + add
-    if (selected > itemMatches.length - 1 || selected > itemMatches.length - 1) selected = 0
-    else if (selected < 0) selected = itemMatches.length - 1
+
+    if (selected > itemMatches.length - 1 || selected > itemMatches.length - 1) {
+      selected = 0
+    } else if (selected < 0) {
+      selected = itemMatches.length - 1
+    }
   }
 
   function keydown(event) {
@@ -184,7 +200,7 @@
       {/if}
 
       {#each (itemMatches || []) as item, i}
-        <button class="matches__item" class:matches__item--active={selected == i} on:click={() => selectItem(item.id)}>
+        <div class="matches__item" class:matches__item--active={selected == i}>
           <div class="{item.hidden ? "matches__hidden" : ""}">{item.name}</div>
 
           {#if item.parent}
@@ -195,12 +211,12 @@
             <span class="text-lightest">Matches: {item.contentMatches?.length}</span>
 
             {#each (item.contentMatches || []) as match}
-              <div>
+              <button class="matches__line" class:matches__item--active={selected == i} on:click={() => selectItem(item.id, match.index)}>
                 - {match.truncateStart ? "..." : ""}{@html highlightString(match.string)}{match.truncateEnd ? "..." : ""}
-              </div>
+              </button>
             {/each}
           </div>
-        </button>
+        </div>
       {/each}
     </div>
   {/if}

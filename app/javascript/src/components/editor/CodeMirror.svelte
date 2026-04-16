@@ -16,7 +16,7 @@
   import { codeActions } from "@lib/codeActions"
   import { transformParameterObjectsIntoPositionalParameters } from "@lib/codeActionProviders/transformParameterObjectsIntoPositionalParameters"
   import { foldBrackets } from "@lib/foldBrackets"
-  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings } from "@stores/editor"
+  import { currentItem, editorStates, editorScrollPositions, items, currentProjectUUID, completionsMap, variablesMap, subroutinesMap, mixinsMap, settings, currentEditorView } from "@stores/editor"
   import { translationsMap } from "@stores/translationKeys"
   import { getPhraseFromPosition, inConfigType } from "@utils/parse"
   import { tabIndent, autoIndentOnEnter, indentMultilineInserts, pasteIndentAdjustments } from "@utils/codemirror/indent"
@@ -52,7 +52,9 @@
       parent: element
     })
 
-    // This is here purely to initiliaze these derived stores, which might not happen in time for CodeMirror completions
+    $currentEditorView = view
+
+    // This is here purely to initialize these derived stores, which might not happen in time for CodeMirror completions
     // I don't fully understand how this works, but it does.
     ;[$variablesMap, $subroutinesMap, $mixinsMap, $translationsMap]
   })
@@ -181,7 +183,7 @@
     if (transaction.transactions[0].annotations[0].value !== "select.search") return
 
     view.dispatch ({
-      effects: EditorView.scrollIntoView (
+      effects: EditorView.scrollIntoView(
         view.state.selection.main.head,
         { yMargin: 110 }
       )

@@ -5,6 +5,7 @@ import { getMixinNames } from "@utils/compiler/mixins"
 import { getSubroutines } from "@utils/compiler/subroutines"
 import { debounced } from "@utils/debounceStore"
 import type { EditorStates, ExtendedCompletion, Item, Project, RecoveredProject, WorkshopConstant } from "@src/types/editor"
+import { EditorView } from "codemirror"
 
 // Preferably keep below the debounce time for the linter, so it
 // has access to the most up-to-date information from the store.
@@ -29,6 +30,7 @@ export const modal = (() => {
 
 export const editorStates = writable<EditorStates>({})
 export const editorScrollPositions = writable({})
+export const currentEditorView = writable<EditorView | null>(null)
 
 export const projects = writable<Project[]>([])
 export const currentProjectUUID = writable<string | null>(null)

@@ -13,21 +13,27 @@
 .matches__item {
   width: 100%;
   padding: $margin * 0.125 0;
-  cursor: pointer;
+  color: theme(text-color-lightest);
 
   .matches--dropdown & {
     padding: $margin * 0.125 $margin * 0.25;
   }
 
-  &:hover {
-    background: theme(dark, 7.5%);
-    box-shadow: $margin 0 0 theme(dark, 7.5%), $margin * -1 0 0 theme(dark, 7.5%);
-  }
-
   &--active {
     background: theme(darker);
     box-shadow: $margin 0 0 theme(darker), $margin * -1 0 0 theme(darker);
-    color: theme(text-color-lightest);
+  }
+}
+
+.matches__line {
+  display: block;
+  cursor: pointer;
+  color: theme(text-color);
+  font-size: inherit;
+
+  &:hover {
+    background: theme(dark, 7.5%);
+    box-shadow: $margin 0 0 theme(dark, 7.5%), $margin * -1 0 0 theme(dark, 7.5%);
   }
 }
 

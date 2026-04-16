@@ -42,7 +42,8 @@
   }
 
   .cm-selectionBackground {
-    background: theme(dark, 10%) !important;
+    background: var(--editor-cursor-color, #ff00ff) !important;
+    opacity: 0.35;
   }
 
   .cm-selectionMatch {
