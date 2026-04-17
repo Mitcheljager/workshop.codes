@@ -6,6 +6,7 @@
   import { updateProject } from "@utils/project"
   import { createProjectBackup } from "@utils/projectBackups"
   import { Modal } from "@constants/Modal"
+  import JsonExport from "@components/editor/JsonExport.svelte"
   import { escapeable } from "@src/components/actions/escapeable"
   import { outsideClick } from "@components/actions/outsideClick"
   import { Confetti } from "svelte-confetti"
@@ -118,6 +119,8 @@
           <button class="button button--ghost button--square button--small w-100 mt-1/8" on:click={() => modal.show(Modal.Backups)}>
             View backups
           </button>
+
+          <JsonExport />
         </div>
       {/if}
     </div>
