@@ -65,12 +65,10 @@ export function getMixins(joinedItems: string): Record<string, Mixin> {
 export function extractAndInsertMixins(joinedItems: string): string {
   const mixins: Record<string, Mixin> = getMixins(joinedItems)
 
-  // Remove mixins from content
   Object.values(mixins).forEach(({ full }) => {
     joinedItems = joinedItems.replace(full, "")
   })
 
-  // Find stated `@include`s for mixins and replace them with their mixin content
   joinedItems = replaceIncludes(joinedItems, mixins)
 
   return joinedItems
@@ -156,7 +154,6 @@ export function getOpeningBracketAt(content: string): number {
  */
 export function replaceIncludes(joinedItems: string, mixins: Record<string, Mixin>): string {
   while (joinedItems.indexOf("@include") != -1) {
-    // Get arguments
     const index = joinedItems.indexOf("@include")
     const closing = getClosingBracket(joinedItems, "(", ")", index + 1)
 
