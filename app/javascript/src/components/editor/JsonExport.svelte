@@ -19,7 +19,7 @@
     const linkElement = document.createElement("a")
 
     linkElement.href = url
-    linkElement.download = $currentProject!.title + " " + new Date().toISOString()
+    linkElement.download = $currentProject!.title + " " + new Date().toISOString() + ".json"
     linkElement.click()
 
     URL.revokeObjectURL(url)
