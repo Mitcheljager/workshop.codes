@@ -125,7 +125,6 @@ export function getSlotContents(contents: string): Record<string, string> {
   let match
 
   while ((match = slotsRegex.exec(contents)) !== null) {
-    console.log(match)
     const name = match[1] || ""
     const slotClosing = getClosingBracket(contents, "{", "}", match.index)
 
