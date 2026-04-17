@@ -183,17 +183,21 @@ describe("mixins.js", () => {
       expect(result.replaceWith).toEqual("Global.value = 1;")
     })
 
-    it("Should replace @contents with corresponding slot content", () => {
+    it("Should replace @contents with corresponding slot content regardless of white space before bracket", () => {
       const joinedItems = `@include testMixin() {
-        @slot("Slot 1") { Global.slot = 1; } @slot("Slot 2") { Global.slot = 2; }
+        @slot("Slot 1") { Global.slot = 1; }
+        @slot("Slot 2")
+        { Global.slot = 2; }
+        @slot("Slot 3")\n\t{ Global.slot = 3; }
+        @slot("Slot 4"){ Global.slot = 4; }
       }`
-      const replaceWith = "@contents(\"Slot 1\"); Action(@contents(\"Slot 2\")); @contents(\"Slot 2\");"
+      const replaceWith = "@contents(\"Slot 1\"); Action(@contents(\"Slot 2\")); @contents(\"Slot 2\"); @contents(\"Slot 3\"); @contents(\"Slot 4\");"
 
       const result = replaceContents(joinedItems, 0, 20, replaceWith)
 
-      expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("@slot(\"Slot 1\") { Global.slot = 1; } @slot(\"Slot 2\") { Global.slot = 2; }"))
+      expect(disregardWhitespace(result.contents)).toEqual(disregardWhitespace("@slot(\"Slot1\"){Global.slot=1;}@slot(\"Slot2\"){Global.slot=2;}@slot(\"Slot3\"){Global.slot=3;}@slot(\"Slot4\"){Global.slot=4;}"))
       expect(result.fullMixin).toEqual(joinedItems)
-      expect(result.replaceWith).toEqual("Global.slot = 1; Action(Global.slot = 2;); Global.slot = 2;")
+      expect(result.replaceWith).toEqual("Global.slot = 1; Action(Global.slot = 2;); Global.slot = 2; Global.slot = 3; Global.slot = 4;")
     })
 
     it("Should replace both @contents with corresponding slot content and default content", () => {

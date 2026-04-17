@@ -120,11 +120,12 @@ export function getSlotContents(contents: string): Record<string, string> {
   const slotContents: Record<string, string> = {}
   const defaultSlotContent = []
 
-  const slotsRegex = /@slot\("([^"]+)"\) {/g
+  const slotsRegex = /@slot\("([^"]+)"\)[\s\n]*{/g
   let lastIndex = 0
   let match
 
   while ((match = slotsRegex.exec(contents)) !== null) {
+    console.log(match)
     const name = match[1] || ""
     const slotClosing = getClosingBracket(contents, "{", "}", match.index)
 
