@@ -2,7 +2,7 @@
   import Modal from "@components/editor/Modals/Modal.svelte"
   import { currentProject, items, currentItem, editorStates, modal } from "@stores/editor"
   import { translationKeys, defaultLanguage, selectedLanguages } from "@stores/translationKeys"
-  import { updateProject } from "@utils/project"
+  import { updateProject, updateProjectContent } from "@utils/project"
   import { fetchBackupsForProject, destroyBackup, fetchBackupContent } from "@utils/projectBackups"
   import { flip } from "svelte/animate"
   import { onMount } from "svelte"
@@ -51,17 +51,10 @@
     if (!data) return
 
     updateProject($currentProject.uuid, { title: data.title })
+    updateProjectContent(data.content)
 
-    const parsedContent = JSON.parse(data.content)
-
-    // Update items content and force codemirror to update
-    $items = parsedContent.items || parsedContent || []
     $editorStates = {}
     $currentItem = { forceUpdate: true }
-
-    $translationKeys = parsedContent.translations?.keys || {}
-    $selectedLanguages = parsedContent.translations?.selectedLanguages || ["en-US"]
-    $defaultLanguage = parsedContent.translations?.defaultLanguage || "en-US"
 
     showActionsFor = ""
     modal.close()
