@@ -1,11 +1,10 @@
 <script lang="ts">
   import { addAlert } from "@src/lib/alerts"
-  import { currentItem, editorStates, items } from "@src/stores/editor"
+  import { currentItem, currentProject, editorStates, items } from "@src/stores/editor"
   import { defaultLanguage, selectedLanguages, translationKeys } from "@src/stores/translationKeys"
   import { updateProjectContent } from "@src/utils/project"
 
   function exportAsJson(): void {
-
     const json = JSON.stringify({
       items: $items,
       translations: {
@@ -20,7 +19,7 @@
     const linkElement = document.createElement("a")
 
     linkElement.href = url
-    linkElement.download = "data.json"
+    linkElement.download = $currentProject!.title + " " + new Date().toISOString()
     linkElement.click()
 
     URL.revokeObjectURL(url)
