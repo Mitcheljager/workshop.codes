@@ -48,7 +48,7 @@
 
           updateProjectContent(target.result)
 
-          $currentItem = { ...($items[0] || {}), forceUpdate: true }
+          if ($currentItem) $currentItem = { ...($items[0] || {}), forceUpdate: true }
         } catch (error: any) {
           console.error(error.message)
           addAlert(error, ["alert--error"])
