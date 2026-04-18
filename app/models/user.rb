@@ -67,7 +67,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image, dependent: :destroy
   has_one_attached :banner_image, dependent: :destroy
 
-  serialize :featured_posts
+  serialize :featured_posts, coder: YAML
 
   enum level: { regular: 0, admin: 1, banned: 2, arbiter: 3 }
   enum pagination_type: { infinite_scroll: 0, load_more: 1, pagination: 2 }

@@ -18,5 +18,5 @@ class Statistic < ApplicationRecord
     page_view_controller_action: 10
   }
 
-  serialize :properties
+  serialize :properties, coder: YAML
 end

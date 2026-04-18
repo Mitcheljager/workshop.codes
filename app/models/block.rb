@@ -5,7 +5,7 @@ class Block < ApplicationRecord
 
   enum content_type: { profile: 0, post: 1 }
 
-  serialize :properties
+  serialize :properties, coder: YAML
 
   validates :name, presence: true
   validates :content_type, presence: true
