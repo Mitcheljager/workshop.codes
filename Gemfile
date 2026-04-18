@@ -3,7 +3,7 @@ ruby "~> 3.2.2"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "active_model_serializers"
-gem "active_storage_validations"
+gem "active_storage_validations", "~> 3.0.4"
 gem "ahoy_matey"
 gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: true
 gem "aws-sdk-s3", require: false
@@ -34,7 +34,7 @@ gem "omniauth-rails_csrf_protection"
 gem "pghero"
 gem "pg_query", ">= 2"
 gem "puma", "~> 5.6"
-gem "rails", "~> 7.0.8.7"
+gem "rails", "~> 7.1.6"
 gem "rails_same_site_cookie"
 gem "redcarpet"
 gem "reverse_markdown"
@@ -70,9 +70,9 @@ end
 group :test do
   gem "capybara", "3.38.0"
   gem "cucumber-rails", require: false
-  gem "factory_bot_rails", "~> 6.2"
+  gem "factory_bot_rails", "~> 6.5.1"
   gem "timecop"
-  gem "rspec-rails", "~> 4.0.2"
+  gem "rspec-rails", "~> 7.0.0"
   gem "selenium-webdriver", "~> 4.7.1"
   gem "shoulda-matchers", "~> 4.5"
   gem "webdrivers", "~> 5.0"

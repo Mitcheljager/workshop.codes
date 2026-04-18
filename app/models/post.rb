@@ -129,9 +129,9 @@ class Post < ApplicationRecord
 
   serialize :image_order
   serialize :controls
-  serialize :categories, JSON
-  serialize :heroes, JSON
-  serialize :maps, JSON
+  serialize :categories, coder: JSON
+  serialize :heroes, coder: JSON
+  serialize :maps, coder: JSON
 
   validates :user_id, presence: true
   validates :locale, presence: true

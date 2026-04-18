@@ -33,6 +33,9 @@ module OverwatchWorkshop
     config.active_support.cache_format_version = 7.0
     config.active_support.disable_to_s_conversion = true
 
+    config.autoload_lib(ignore: %w(assets tasks))
+    config.add_autoload_paths_to_load_path = false
+
     config.before_configuration do
       env_file = File.join(Rails.root, "config", "local_env.yml")
 
