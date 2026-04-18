@@ -34,7 +34,7 @@ gem "omniauth-rails_csrf_protection"
 gem "pghero"
 gem "pg_query", ">= 2"
 gem "puma", "~> 5.6"
-gem "rails", "~> 7.0.5"
+gem "rails", "~> 7.0.8.7"
 gem "rails_same_site_cookie"
 gem "redcarpet"
 gem "reverse_markdown"
@@ -55,7 +55,7 @@ group :development, :test do
   gem "faker"
   gem "pry-byebug", "~> 3.10.1"
   gem "rubocop-rails-omakase", require: false
-  gem "sqlite3", "~> 1.5.0"
+  gem "sqlite3", "~> 1.4.2"
 end
 
 group :development do
