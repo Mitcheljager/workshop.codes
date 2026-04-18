@@ -5,6 +5,8 @@ Rails.application.configure do
 
   Elasticsearch::Model.client = Elasticsearch::Client.new url: ENV["BONSAI_URL"]
 
+  config.enable_reloading = false
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
