@@ -272,8 +272,8 @@
   stadium: false
   release_date: "2016-05-24"
   full_name: Bastion
-  nationality: Unknown
-  birth_date: Unknown
+  nationality: null
+  birth_date: null
   age: 32
   locations:
     - Gothenburg, Sweden
@@ -685,7 +685,7 @@
   stadium: false
   release_date: "2026-02-10"
   full_name: Fika
-  nationality: Unknown
+  nationality: null
   birth_date: null
   age: null
   locations:
