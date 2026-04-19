@@ -7,6 +7,7 @@
   full_name: Hana Song
   nationality: South Korea
   birth_date: "06-22"
+  age:
   locations:
     - MEKA Base, Busan, South Korea (formerly),
     - "Watchpoint: Gibraltar"
@@ -23,6 +24,7 @@
   full_name: Vaira Singhania
   nationality: India
   birth_date: "08-28"
+  age: 32
   locations:
     - London, England (formerly)
     - Utopea, India
@@ -39,6 +41,7 @@
   full_name: Akande Ogundimu
   nationality: Nigeria
   birth_date: "05-25"
+  age: 47
   locations:
     - Oyo, Nigeria (formerly)
     - Rome, Italy
@@ -55,6 +58,7 @@
   full_name: Findlay Docherty
   nationality: Scotland
   birth_date: "11-11"
+  age: 24
   locations:
     - Glasgow, Scotland (formerly)
     - Unknown
@@ -71,6 +75,7 @@
   full_name: Odessa Stone
   nationality: Australia
   birth_date: "06-14"
+  age: 31
   locations:
     - Junkertown, Australia
   description: |-
@@ -86,6 +91,7 @@
   full_name: Maugaloa Malosi
   nationality: Samoa
   birth_date: "08-19"
+  age: 37
   locations:
     - Apia, Samoa
   description: |-
@@ -101,6 +107,7 @@
   full_name: Orisa
   nationality: Numbani
   birth_date: "05-09"
+  age: 1
   locations:
     - Numbani, Africa
   description: |-
@@ -116,6 +123,7 @@
   full_name: Ramattra
   nationality: Nepal
   birth_date: "03-29"
+  age: 28
   locations:
     - Shambali Monastery, Nepal (formerly)
   description: |-
@@ -131,6 +139,7 @@
   full_name: Reinhardt Wilhelm
   nationality: Germany
   birth_date: "06-26"
+  age: 63
   locations:
     - Stuttgart, Germany (formerly)
     - "Watchpoint: Gibraltar"
@@ -147,6 +156,7 @@
   full_name: Mako Rutledge
   nationality: Australia
   birth_date: "09-12"
+  age: 50
   locations:
     - Junkertown, Australia (formerly)
   description: |-
@@ -162,6 +172,7 @@
   full_name: Siebren de Kuiper
   nationality: Netherlands
   birth_date: "03-15"
+  age: 64
   locations:
     - The Hague, Netherlands (formerly)
     - International Space Station (formerly)
@@ -178,6 +189,7 @@
   full_name: Winston
   nationality: The Moon
   birth_date: "06-06"
+  age: 31
   locations:
     - Horizon Lunar Colony (formerly)
     - "Watchpoint: Gibraltar"
@@ -194,6 +206,7 @@
   full_name: Hammond
   nationality: The Moon
   birth_date: "10-15"
+  age: 16
   locations:
     - Horizon Lunar Colony (formerly)
     - Junkertown (formerly)
@@ -210,6 +223,7 @@
   full_name: Aleksandra Zaryanova
   nationality: Russia
   birth_date: "12-04"
+  age: 30
   locations:
     - Krasnoyarsk Front (formerly)
     - Novoanskoye Forward Base, Siberia, Russia (formerly)
@@ -227,6 +241,7 @@
   full_name: Anran Ye
   nationality: China
   birth_date: "08-08"
+  age: 22
   locations:
     - Wuxing University, Chengdu (formerly)
     - Watchpoint: Gibraltar
@@ -243,6 +258,7 @@
   full_name: Elizabeth Ashe
   nationality: United States
   birth_date: "10-01"
+  age: 41
   locations:
     - Deadlock Gorge, Arizona, USA
   description: |-
@@ -258,6 +274,7 @@
   full_name: Bastion
   nationality: Unknown
   birth_date: Unknown
+  age: 32
   locations:
     - Gothenburg, Sweden
   description: |-
@@ -273,6 +290,7 @@
   full_name: Cole Cassidy
   nationality: United States
   birth_date: "07-31"
+  age: 39
   locations:
     - Santa Fe, New Mexico, USA (formerly)
     - "Watchpoint: Gibraltar"
@@ -289,6 +307,7 @@
   full_name: Echo
   nationality: Singapore
   birth_date: "02-05"
+  age: 14
   locations:
     - Switzerland (formerly)
     - United States (formerly)
@@ -306,6 +325,7 @@
   full_name: Emre Sarıoğlu
   nationality: Turkey
   birth_date: "11-08"
+  age: 44
   locations:
     - Istanbul, Turkey (formerly)
     - Rome, Italy
@@ -322,6 +342,7 @@
   full_name: Freja Skov
   nationality: Denmark
   birth_date: "09-26"
+  age: 34
   locations:
     - Copenhagen, Denmark (formerly)
     - Unknown
@@ -338,6 +359,7 @@
   full_name: Genji Shimada
   nationality: Japan
   birth_date: "10-28"
+  age: 37
   locations:
     - Hanamura, Japan (formerly)
     - Shambali Monastery, Nepal (formerly)
@@ -355,6 +377,7 @@
   full_name: Hanzo Shimada
   nationality: Japan
   birth_date: "11-03"
+  age: 40
   locations:
     - Hanamura, Japan (formerly)
   description: |-
@@ -370,6 +393,7 @@
   full_name: Jamison Fawkes
   nationality: Australia
   birth_date: "02-29"
+  age: 27
   locations:
     - Junkertown, Australia (formerly)
   description: |-
@@ -385,6 +409,7 @@
   full_name: Mei-Ling Zhou
   nationality: China
   birth_date: "09-05"
+  age: 33
   locations:
     - Xi’an, China (formerly)
   description: |-
@@ -400,6 +425,7 @@
   full_name: Fareeha Amari
   nationality: Egypt
   birth_date: "04-15"
+  age: 34
   locations:
     - Giza, Egypt (formerly)
     - "Watchpoint: Gibraltar"
@@ -416,6 +442,7 @@
   full_name: Gabriel Reyes
   nationality: United States
   birth_date: "12-14"
+  age: 60
   locations:
     - Rome, Italy
   description: |-
@@ -431,6 +458,7 @@
   full_name: Sierra Turner Woods
   nationality: United States
   birth_date: "04-17"
+  age: 25
   locations:
     - "Watchpoint: Grand Mesa"
     - Colorado, United States
@@ -447,6 +475,7 @@
   full_name: Vivian Chase
   nationality: Canada
   birth_date: "01-12"
+  age: 51
   locations:
     - Toronto, Canada
   description: |-
@@ -462,6 +491,7 @@
   full_name: Jack Morrison
   nationality: United States
   birth_date: "01-27"
+  age: 58
   locations:
     - Unknown
   description: |-
@@ -477,6 +507,7 @@
   full_name: Olivia Colomar
   nationality: Mexico
   birth_date: "12-31"
+  age: 32
   locations:
     - Dorado, Mexico
   description: |-
@@ -492,6 +523,7 @@
   full_name: Satya Vaswani
   nationality: India
   birth_date: "10-02"
+  age: 30
   locations:
     - Utopaea, India
   description: |-
@@ -507,6 +539,7 @@
   full_name: Torbjörn Lindholm
   nationality: Sweden
   birth_date: "09-21"
+  age: 59
   locations:
     - Gothenburg, Sweden
   description: |-
@@ -522,6 +555,7 @@
   full_name: Lena Oxton
   nationality: England
   birth_date: "02-17"
+  age: 28
   locations:
     - London, England
     - "Watchpoint: Gibraltar"
@@ -538,6 +572,7 @@
   full_name: Marzia Bartalotti
   nationality: Italy
   birth_date: "02-15"
+  age: 29
   locations:
     - Rome, Italy
   description: |-
@@ -553,6 +588,7 @@
   full_name: Sloan Cameron
   nationality: Canada
   birth_date: "08-06"
+  age: 26
   locations:
     - Nova Scotia, Canada (formerly)
     - Roaming
@@ -569,6 +605,7 @@
   full_name: Amélie Lacroix
   nationality: France
   birth_date: "11-19"
+  age: 35
   locations:
     - Annecy, France
   description: |-
@@ -584,6 +621,7 @@
   full_name: Ana Amari
   nationality: Egypt
   birth_date: "01-01"
+  age: 62
   locations:
     - Cairo, Egypt
   description: |-
@@ -599,6 +637,7 @@
   full_name: Jean-Baptiste Augustin
   nationality: Haiti
   birth_date: "03-12"
+  age: 38
   locations:
     - Tortuga, Haiti (formerly)
     - "Watchpoint: Gibraltar"
@@ -615,6 +654,7 @@
   full_name: Brigitte Lindholm
   nationality: Sweden
   birth_date: "09-22"
+  age: 25
   locations:
     - Gothenburg, Sweden (formerly)
     - "Watchpoint: Gibraltar"
@@ -631,6 +671,7 @@
   full_name: Illari Quispe Ruiz
   nationality: Peru
   birth_date: "12-21"
+  age: 18
   locations:
     - Runasapi, Peru
   description: |-
@@ -646,6 +687,7 @@
   full_name: Fika
   nationality: Unknown
   birth_date: null
+  age: null
   locations:
     - "Watchpoint: Gibraltar"
   description: |-
@@ -661,6 +703,7 @@
   full_name: Juno Teo Minh
   nationality: Mars
   birth_date: "03-22"
+  age: 19
   locations:
     - Red Promise Colony, Mars (formerly)
     - "Watchpoint: Gibraltar"
@@ -677,6 +720,7 @@
   full_name: Kiriko Kamori
   nationality: Japan
   birth_date: "07-07"
+  age: 21
   locations:
     - Kanezaka, Japan
   description: |-
@@ -692,6 +736,7 @@
   full_name: Niran Pruksamanee
   nationality: Thailand
   birth_date: "04-28"
+  age: 31
   locations:
     - Atlantic Arcology
   description: |-
@@ -707,6 +752,7 @@
   full_name: Lúcio Correia dos Santos
   nationality: Brazil
   birth_date: "03-20"
+  age: 28
   locations:
     - Rio de Janeiro, Brazil
   description: |-
@@ -722,6 +768,7 @@
   full_name: Angela Ziegler
   nationality: Switzerland
   birth_date: "05-13"
+  age: 39
   locations:
     - Zürich, Switzerland (formerly)
     - "Watchpoint: Gibraltar"
@@ -738,6 +785,7 @@
   full_name: Mizuki Kawano
   nationality: Japan
   birth_date: "04-09"
+  age: 22
   locations:
     - Tokyo, Japan (formerly)
     - Kanezaka, Japan
@@ -754,6 +802,7 @@
   full_name: Moira O'Deorain
   nationality: Ireland
   birth_date: "04-04"
+  age: 50
   locations:
     - Oasis, Iraq
   description: |-
@@ -769,6 +818,7 @@
   full_name: Wuyang Ye
   nationality: China
   birth_date: "05-01"
+  age: 19
   locations:
     - Wuxing University, Chengdu
   description: |-
@@ -784,6 +834,7 @@
   full_name: Tekhartha Zenyatta
   nationality: Nepal
   birth_date: "07-14"
+  age: 33
   locations:
     - Shambali Monastery, Nepal (formerly)
   description: |-
