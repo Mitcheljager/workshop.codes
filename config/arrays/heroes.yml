@@ -4,6 +4,7 @@
   subrole: Initiator
   stadium: true
   release_date: "2016-05-24"
+  color: "#fc79bd"
   full_name: Hana Song
   nationality: South Korea
   birth_date: "06-22"
@@ -21,6 +22,7 @@
   subrole: Stalwart
   stadium: false
   release_date: "2026-02-10"
+  color: "#69deef"
   full_name: Vaira Singhania
   nationality: India
   birth_date: "08-28"
@@ -38,6 +40,7 @@
   subrole: Initiator
   stadium: true
   release_date: "2017-07-27"
+  color: "#661e0f"
   full_name: Akande Ogundimu
   nationality: Nigeria
   birth_date: "05-25"
@@ -55,6 +58,7 @@
   subrole: Initiator
   stadium: true
   release_date: "2024-12-10"
+  color: "#985ec0"
   full_name: Findlay Docherty
   nationality: Scotland
   birth_date: "11-11"
@@ -72,6 +76,7 @@
   subrole: Stalwart
   stadium: true
   release_date: "2022-06-28"
+  color: "#579fcf"
   full_name: Odessa Stone
   nationality: Australia
   birth_date: "06-14"
@@ -88,6 +93,7 @@
   subrole: Bruiser
   stadium: false
   release_date: "2023-12-05"
+  color: "#db4216"
   full_name: Maugaloa Malosi
   nationality: Samoa
   birth_date: "08-19"
@@ -104,6 +110,7 @@
   subrole: Bruiser
   stadium: true
   release_date: "2017-03-21"
+  color: "#106f04"
   full_name: Orisa
   nationality: Numbani
   birth_date: "05-09"
@@ -120,6 +127,7 @@
   subrole: Stalwart
   stadium: true
   release_date: "2022-12-06"
+  color: "#7d55c7"
   full_name: Ramattra
   nationality: Nepal
   birth_date: "03-29"
@@ -136,6 +144,7 @@
   subrole: Stalwart
   stadium: true
   release_date: "2016-05-24"
+  color: "#7c8b8c"
   full_name: Reinhardt Wilhelm
   nationality: Germany
   birth_date: "06-26"
@@ -153,6 +162,7 @@
   subrole: Bruiser
   stadium: false
   release_date: "2016-05-24"
+  color: "#ae6f1c"
   full_name: Mako Rutledge
   nationality: Australia
   birth_date: "09-12"
@@ -169,6 +179,7 @@
   subrole: Stalwart
   stadium: true
   release_date: "2019-08-13"
+  color: "#7c8b8c"
   full_name: Siebren de Kuiper
   nationality: Netherlands
   birth_date: "03-15"
@@ -186,6 +197,7 @@
   subrole: Initiator
   stadium: true
   release_date: "2016-05-24"
+  color: "#8f92ae"
   full_name: Winston
   nationality: The Moon
   birth_date: "06-06"
@@ -203,6 +215,7 @@
   subrole: Initiator
   stadium: false
   release_date: "2018-07-24"
+  color: "#e2790a"
   full_name: Hammond
   nationality: The Moon
   birth_date: "10-15"
@@ -220,6 +233,7 @@
   subrole: Bruiser
   stadium: true
   release_date: "2016-05-24"
+  color: "#f65ea6"
   full_name: Aleksandra Zaryanova
   nationality: Russia
   birth_date: "12-04"
@@ -238,6 +252,7 @@
   subrole: Flanker
   stadium: false
   release_date: "2026-02-05"
+  color: "#e81a05"
   full_name: Anran Ye
   nationality: China
   birth_date: "08-08"
@@ -255,6 +270,7 @@
   subrole: Sharpshooter
   stadium: true
   release_date: "2018-11-13"
+  color: "#3e3c3a"
   full_name: Elizabeth Ashe
   nationality: United States
   birth_date: "10-01"
@@ -271,6 +287,7 @@
   subrole: Specialist
   stadium: false
   release_date: "2016-05-24"
+  color: "#5b7351"
   full_name: Bastion
   nationality: null
   birth_date: null
@@ -287,6 +304,7 @@
   subrole: Sharpshooter
   stadium: true
   release_date: "2016-05-24"
+  color: "#a62927"
   full_name: Cole Cassidy
   nationality: United States
   birth_date: "07-31"
@@ -304,6 +322,7 @@
   subrole: Recon
   stadium: false
   release_date: "2020-04-14"
+  color: "#89c8ff"
   full_name: Echo
   nationality: Singapore
   birth_date: "02-05"
@@ -322,6 +341,7 @@
   subrole: Specialist
   stadium: false
   release_date: "2026-02-10"
+  color: "#c70c0c"
   full_name: Emre Sarıoğlu
   nationality: Turkey
   birth_date: "11-08"
@@ -339,6 +359,7 @@
   subrole: Recon
   stadium: true
   release_date: "2025-04-22"
+  color: "#3f93ff"
   full_name: Freja Skov
   nationality: Denmark
   birth_date: "09-26"
@@ -356,6 +377,7 @@
   subrole: Flanker
   stadium: true
   release_date: "2016-05-24"
+  color: "#80fb00"
   full_name: Genji Shimada
   nationality: Japan
   birth_date: "10-28"
@@ -374,6 +396,7 @@
   subrole: Sharpshooter
   stadium: false
   release_date: "2016-05-24"
+  color: "#b2a865"
   full_name: Hanzo Shimada
   nationality: Japan
   birth_date: "11-03"
@@ -390,6 +413,7 @@
   subrole: Specialist
   stadium: true
   release_date: "2016-05-24"
+  color: "#f7b217"
   full_name: Jamison Fawkes
   nationality: Australia
   birth_date: "02-29"
@@ -406,6 +430,7 @@
   subrole: Specialist
   stadium: true
   release_date: "2016-05-24"
+  color: "#469af0"
   full_name: Mei-Ling Zhou
   nationality: China
   birth_date: "09-05"
@@ -422,6 +447,7 @@
   subrole: Recon
   stadium: true
   release_date: "2016-05-24"
+  color: "#58bc"
   full_name: Fareeha Amari
   nationality: Egypt
   birth_date: "04-15"
@@ -439,6 +465,7 @@
   subrole: Flanker
   stadium: true
   release_date: "2016-05-24"
+  color: "#5e001a"
   full_name: Gabriel Reyes
   nationality: United States
   birth_date: "12-14"
@@ -455,6 +482,7 @@
   subrole: Recon
   stadium: false
   release_date: "2026-04-14"
+  color: "#fe8da8"
   full_name: Sierra Turner Woods
   nationality: United States
   birth_date: "04-17"
@@ -472,6 +500,7 @@
   subrole: Sharpshooter
   stadium: true
   release_date: "2022-04-26"
+  color: "#d73e2c"
   full_name: Vivian Chase
   nationality: Canada
   birth_date: "01-12"
@@ -488,6 +517,7 @@
   subrole: Specialist
   stadium: true
   release_date: "2016-05-24"
+  color: "#445275"
   full_name: Jack Morrison
   nationality: United States
   birth_date: "01-27"
@@ -504,6 +534,7 @@
   subrole: Recon
   stadium: false
   release_date: "2016-11-15"
+  color: "#5128a9"
   full_name: Olivia Colomar
   nationality: Mexico
   birth_date: "12-31"
@@ -520,6 +551,7 @@
   subrole: Specialist
   stadium: false
   release_date: "2016-05-24"
+  color: "#76b4c9"
   full_name: Satya Vaswani
   nationality: India
   birth_date: "10-02"
@@ -536,6 +568,7 @@
   subrole: Specialist
   stadium: true
   release_date: "2016-05-24"
+  color: "#ba4c3f"
   full_name: Torbjörn Lindholm
   nationality: Sweden
   birth_date: "09-21"
@@ -552,6 +585,7 @@
   subrole: Flanker
   stadium: true
   release_date: "2016-05-24"
+  color: "#de7a00"
   full_name: Lena Oxton
   nationality: England
   birth_date: "02-17"
@@ -569,6 +603,7 @@
   subrole: Flanker
   stadium: true
   release_date: "2025-12-09"
+  color: "#961a1c"
   full_name: Marzia Bartalotti
   nationality: Italy
   birth_date: "02-15"
@@ -585,6 +620,7 @@
   subrole: Flanker
   stadium: false
   release_date: "2024-04-16"
+  color: "#79614e"
   full_name: Sloan Cameron
   nationality: Canada
   birth_date: "08-06"
@@ -602,6 +638,7 @@
   subrole: Sharpshooter
   stadium: false
   release_date: "2016-05-24"
+  color: "#8b3f8f"
   full_name: Amélie Lacroix
   nationality: France
   birth_date: "11-19"
@@ -618,6 +655,7 @@
   subrole: Tactician
   stadium: true
   release_date: "2016-07-19"
+  color: "#48699e"
   full_name: Ana Amari
   nationality: Egypt
   birth_date: "01-01"
@@ -634,6 +672,7 @@
   subrole: Tactician
   stadium: false
   release_date: "2019-03-19"
+  color: "#28a5c3"
   full_name: Jean-Baptiste Augustin
   nationality: Haiti
   birth_date: "03-12"
@@ -651,6 +690,7 @@
   subrole: Survivor
   stadium: true
   release_date: "2018-03-20"
+  color: "#72332a"
   full_name: Brigitte Lindholm
   nationality: Sweden
   birth_date: "09-22"
@@ -668,6 +708,7 @@
   subrole: Survivor
   stadium: false
   release_date: "2023-08-10"
+  color: "#a58c54"
   full_name: Illari Quispe Ruiz
   nationality: Peru
   birth_date: "12-21"
@@ -684,6 +725,7 @@
   subrole: Tactician
   stadium: false
   release_date: "2026-02-10"
+  color: "#c9cdd1"
   full_name: Fika
   nationality: null
   birth_date: null
@@ -700,6 +742,7 @@
   subrole: Survivor
   stadium: true
   release_date: "2024-08-20"
+  color: "#721fa3"
   full_name: Juno Teo Minh
   nationality: Mars
   birth_date: "03-22"
@@ -717,6 +760,7 @@
   subrole: Medic
   stadium: true
   release_date: "2022-10-04"
+  color: "#d04656"
   full_name: Kiriko Kamori
   nationality: Japan
   birth_date: "07-07"
@@ -733,6 +777,7 @@
   subrole: Medic
   stadium: false
   release_date: "2023-04-11"
+  color: "#e1a5ba"
   full_name: Niran Pruksamanee
   nationality: Thailand
   birth_date: "04-28"
@@ -749,6 +794,7 @@
   subrole: Tactician
   stadium: true
   release_date: "2016-05-24"
+  color: "#67c519"
   full_name: Lúcio Correia dos Santos
   nationality: Brazil
   birth_date: "03-20"
@@ -765,6 +811,7 @@
   subrole: Medic
   stadium: true
   release_date: "2016-05-24"
+  color: "#faf2ad"
   full_name: Angela Ziegler
   nationality: Switzerland
   birth_date: "05-13"
@@ -782,6 +829,7 @@
   subrole: Survivor
   stadium: false
   release_date: "2026-02-10"
+  color: "#9affc7"
   full_name: Mizuki Kawano
   nationality: Japan
   birth_date: "04-09"
@@ -799,6 +847,7 @@
   subrole: Medic
   stadium: true
   release_date: "2017-11-16"
+  color: "#804be5"
   full_name: Moira O'Deorain
   nationality: Ireland
   birth_date: "04-04"
@@ -815,6 +864,7 @@
   subrole: Survivor
   stadium: true
   release_date: "2025-08-26"
+  color: "#4c7fef"
   full_name: Wuyang Ye
   nationality: China
   birth_date: "05-01"
@@ -831,6 +881,7 @@
   subrole: Tactician
   stadium: true
   release_date: "2016-05-24"
+  color: "#fcee5a"
   full_name: Tekhartha Zenyatta
   nationality: Nepal
   birth_date: "07-14"
