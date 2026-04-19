@@ -50,6 +50,26 @@
 
 <hr />
 
+<h3>Response time</h3>
+
+<div class="status">
+  <%= svelte_component("StatusChart", { linked: "status", data: [], fill: "var(--primary)", showValue: true, valueAppend: "seconds", scaleMax: 3, barMinWidth: 1, gap: 0, grow: true, height: 200, width: 2000 }) %>
+  <%= svelte_component("LinkedLabel", { linked: "status", empty: "..." }) %>
+  <style>
+    .status {
+      background: var(--bg-darker);
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+
+    [data-svelte-component="StatusChart"] svg {
+      width: 100%;
+    }
+  </style>
+</div>
+
+<hr />
+
 <h3 class="mt-1/1">Admin activity log</h3>
 
 <% @admin_activity.each do |activity| %>
