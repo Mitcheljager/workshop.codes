@@ -1,7 +1,7 @@
 class Activity < ApplicationRecord
   belongs_to :user
 
-  serialize :properties, coder: YAML
+  serialize :properties
 
   enum content_type: {
     login: 0, login_from_cookie: 1, login_failed: 2,

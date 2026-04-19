@@ -196,7 +196,7 @@ Rails.application.config.active_record.before_committed_on_all_records = true
 # recommended to explicitly define the serialization method for each column
 # rather than to rely on a global default.
 #++
-Rails.application.config.active_record.default_column_serializer = nil
+Rails.application.config.active_record.default_column_serializer = YAML
 
 ###
 # Enable a performance optimization that serializes Active Record models
@@ -207,7 +207,7 @@ Rails.application.config.active_record.default_column_serializer = nil
 # leave this optimization off on the first deploy, then enable it on a
 # subsequent deploy.
 #++
-Rails.application.config.active_record.marshalling_format_version = 7.1
+# Rails.application.config.active_record.marshalling_format_version = 7.1
 
 ###
 # Run `after_commit` and `after_*_commit` callbacks in the order they are defined in a model.

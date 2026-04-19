@@ -127,11 +127,11 @@ class Post < ApplicationRecord
   attr_accessor :email
   attr_accessor :new_collection
 
-  serialize :image_order, coder: YAML
-  serialize :controls, coder: YAML
-  serialize :categories, coder: JSON
-  serialize :heroes, coder: JSON
-  serialize :maps, coder: JSON
+  serialize :image_order
+  serialize :controls
+  serialize :categories
+  serialize :heroes
+  serialize :maps
 
   validates :user_id, presence: true
   validates :locale, presence: true

@@ -33,8 +33,6 @@ module OverwatchWorkshop
     config.active_support.cache_format_version = 7.0
     config.active_support.disable_to_s_conversion = true
 
-    config.active_record.default_column_serializer = YAML
-
     config.autoload_lib(ignore: %w(assets tasks))
     config.add_autoload_paths_to_load_path = false
 

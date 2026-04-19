@@ -2,7 +2,7 @@ class Report < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :reported_user, optional: true, class_name: "User"
 
-  serialize :properties, coder: YAML
+  serialize :properties
 
   validates :category, presence: true
   validates :content, presence: true
