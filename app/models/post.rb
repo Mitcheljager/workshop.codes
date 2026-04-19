@@ -234,7 +234,11 @@ class Post < ApplicationRecord
 
   def parsed_controls
     begin
-      JSON.parse(self.controls).presence || []
+      if controls.is_a?(String)
+        JSON.parse(controls).presence || []
+      else
+        self.controls.presence || []
+      end
     rescue JSON::ParserError
       self.controls = "[]"
       self.save touch: false
