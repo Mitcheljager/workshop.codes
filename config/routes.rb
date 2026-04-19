@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   mount PgHero::Engine, at: "pghero"
 
+  get "up", to: "rails/health#show", as: :rails_health_check
+
   root "posts#index"
 
   get "/404", to: "errors#not_found"
