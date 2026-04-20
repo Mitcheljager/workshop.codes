@@ -163,6 +163,11 @@ class PostsController < ApplicationController
           @post.banner_image.purge
         end
 
+        if params[:post][:images].present?
+          @post.images.attach(params[:post][:images])
+          params[:post].delete(:images)
+        end
+
         @post.update!(post_params)
         raise ActiveRecord::ActiveRecordError.new "Post updating unsuccessful" unless parse_derivatives
 
