@@ -28,7 +28,7 @@ $directions: (
     @each $name, $value in $offset-values {
       @if not ($property == padding and $value == auto) {
         .#{ $property-abr }#{ $direction-abr }-#{ $name } {
-          #{ $property }#{ $direction }: $value;
+          #{ $property }#{ $direction }: $value !important;
         }
       }
     }
@@ -42,7 +42,7 @@ $directions: (
         @each $name, $value in $offset-values {
           @if not ($property == padding and $value == auto) {
             .#{ $breakpoint }\:#{ $property-abr }#{ $direction-abr }-#{ $name } {
-              #{ $property }#{ $direction }: $value;
+              #{ $property }#{ $direction }: $value !important;
             }
           }
         }
