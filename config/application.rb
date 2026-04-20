@@ -28,12 +28,12 @@ module OverwatchWorkshop
 
     config.active_storage.track_variants = true
     config.active_storage.variant_processor = :mini_magick
-    config.active_storage.replace_on_assign_to_many = false
+    # config.active_storage.replace_on_assign_to_many = false | Removed in Rails 7.1, replaced by app/controllers/concerns/append_to_has_many_attached.rb
 
     config.active_support.cache_format_version = 7.0
     config.active_support.disable_to_s_conversion = true
 
-    config.autoload_lib(ignore: %w(assets tasks))
+    config.autoload_lib(ignore: %w[assets tasks])
     config.add_autoload_paths_to_load_path = false
 
     config.before_configuration do
