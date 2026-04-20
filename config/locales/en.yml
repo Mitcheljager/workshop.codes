@@ -17,3 +17,10 @@ en:
           attributes:
             featured_posts:
               too_long_array: can be maximum of %{count} codes
+  views:
+    pagination:
+      first: "First"
+      last: "Last"
+      previous: "Previous"
+      next: "Next"
+      truncate: "&hellip;"
