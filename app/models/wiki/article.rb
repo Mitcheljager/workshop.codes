@@ -1,4 +1,6 @@
 class Wiki::Article < ApplicationRecord
+  include AppendToHasManyAttached[["images", "videos"]]
+
   if ENV["BONSAI_URL"]
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks

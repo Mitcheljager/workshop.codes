@@ -1,4 +1,6 @@
 class Block < ApplicationRecord
+  include AppendToHasManyAttached["images"]
+
   belongs_to :user
 
   has_many_attached :images, dependent: :destroy

@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  include AppendToHasManyAttached["images"]
+
   has_one_attached :cover_image, dependent: :destroy
   has_many_attached :images, dependent: :destroy
 
