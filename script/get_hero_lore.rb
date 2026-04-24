@@ -53,7 +53,7 @@ links.each_with_index do |link, index|
     end
   end
 
-  File.write("config/arrays/hero_lore.yml", output)
-
   sleep(2)
 end
+
+File.write("config/arrays/hero_lore.yml", output)
