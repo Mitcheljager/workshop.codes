@@ -29,6 +29,12 @@ def get_document(url)
   end
 end
 
+def title_case(text)
+  small_words = %w[a an and as at but by for if in of on or the to vs]
+
+  text.split.map { |word| small_words.include?(word) ? word : word.capitalize }.join(" ")
+end
+
 base_url = "https://overwatch.blizzard.com/en-us"
 base_document = get_document(base_url + "/heroes")
 
@@ -46,7 +52,7 @@ links.each_with_index do |link, index|
   output += "-\n  hero: \"#{hero_name}\"\n  entries:\n"
 
   lore_headings.each_with_index do |heading, heading_index|
-    output += "    - heading: \"#{heading.text}\"\n      paragraphs:\n"
+    output += "    - heading: \"#{title_case(heading.text)}\"\n      paragraphs:\n"
 
     lore_entries[heading_index].css("p").each do |paragraph|
       output += "        - \"#{paragraph.text.chomp.gsub('"', '\\"')}\"\n"
