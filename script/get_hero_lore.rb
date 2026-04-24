@@ -34,7 +34,7 @@ base_document = get_document(base_url + "/heroes")
 
 links = base_document.css(".hero-card")
 hero_names = base_document.css("blz-content-block h2").map { |heading| heading.text }
-output = ""
+output = "# This file is generated via script/get_hero_lore.rb\n\n"
 
 links.each_with_index do |link, index|
   hero_name = hero_names[index]
@@ -43,13 +43,13 @@ links.each_with_index do |link, index|
   lore_headings = document.css("blz-accordion[analytics-label='hero-lore'] > [slot*=label]")
   lore_entries = document.css("blz-accordion[analytics-label='hero-lore'] > [slot*='content']")
 
-  output += "#{hero_name}:\n"
+  output += "-\n  hero: \"#{hero_name}\"\n  entries:\n"
 
   lore_headings.each_with_index do |heading, heading_index|
-    output += "  - heading: \"#{heading.text}\"\n    paragraphs:\n"
+    output += "    - heading: \"#{heading.text}\"\n      paragraphs:\n"
 
     lore_entries[heading_index].css("p").each do |paragraph|
-      output += "      - \"#{paragraph.text.chomp.gsub('"', '\\"')}\"\n"
+      output += "        - \"#{paragraph.text.chomp.gsub('"', '\\"')}\"\n"
     end
   end
 
