@@ -17,8 +17,14 @@ class Api::HeroesController < Api::BaseController
 
   def heroes
     heroes = YAML.safe_load(File.read(Rails.root.join("config/arrays", "heroes.yml")))
+    lore_entries = YAML.safe_load(File.read(Rails.root.join("config/arrays", "hero_lore.yml"))) if params[:include_lore_entries]
 
     heroes.map do |hero|
+      if params[:include_lore_entries] == "true"
+        entry = lore_entries.find { |entry| entry["hero"].downcase == hero["name"].downcase }
+        hero[:lore_entries] = entry["entries"]
+      end
+
       hero[:portrait] = {
         "2d": {
           small: ActionController::Base.helpers.asset_url(hero_name_to_icon_url(hero["name"], 50)),
