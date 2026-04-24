@@ -54,8 +54,9 @@ links.each_with_index do |link, index|
   lore_headings.each_with_index do |heading, heading_index|
     output += "    - heading: \"#{title_case(heading.text)}\"\n      paragraphs:\n"
 
-    lore_entries[heading_index].css("p").each do |paragraph|
-      output += "        - \"#{paragraph.text.chomp.gsub('"', '\\"')}\"\n"
+    lore_entries[heading_index].css("p").map { |p| p.text }.each do |paragraph|
+      text = paragraph.squeeze(" ").gsub('"', '\\"').gsub("\n", "").chomp.strip
+      output += "        - \"#{text}\"\n" unless text.empty?
     end
   end
 
