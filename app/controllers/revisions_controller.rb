@@ -28,6 +28,7 @@ class RevisionsController < ApplicationController
 
   def partial
     @post = Post.select(:id, :user_id, :code).includes(:revisions).find(params[:id])
+    @revisions = @post.revisions.where(visible: true).order(created_at: :desc)
 
     render partial: "revisions"
   end
