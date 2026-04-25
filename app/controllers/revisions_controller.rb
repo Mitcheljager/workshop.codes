@@ -27,8 +27,9 @@ class RevisionsController < ApplicationController
   end
 
   def partial
-    @post = Post.select(:id, :user_id, :code).includes(:revisions).find(params[:id])
-    @revisions = @post.revisions.where(visible: true).order(created_at: :desc)
+    @post = Post.select(:id, :user_id, :code).find(params[:id])
+    @revisions = @post.revisions.where(visible: true).order(created_at: :desc).limit(50)
+    @revisions_count = @post.revisions.where(visible: true).size
 
     render partial: "revisions"
   end
