@@ -1,10 +1,14 @@
 .difference-header {
-  display: flex;
-  justify-content: flex-end;
+  display: block;
   min-height: 1rem;
   width: 100%;
   background: theme(dark);
   font-size: $font-size-small;
+
+  @include media-min(sm) {
+    display: flex;
+    justify-content: flex-end;
+  }
 
   &--fixed {
     position: fixed;
@@ -20,9 +24,30 @@
 }
 
 .difference-header__item {
+  display: block;
+  width: 100%;
   padding: .5rem .75rem;
-  border-left: 1px solid theme(border, 10%);
+  border-bottom: 1px solid theme(border, 10%);
   text-decoration: none;
+
+  .form-select {
+    width: 100%;
+    max-width: unset;
+
+    @include media-min(sm) {
+      max-width: 10rem;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  @include media-min(sm) {
+    width: auto;
+    border-bottom: 0;
+    border-left: 1px solid theme(border, 10%);
+  }
 }
 
 .difference-content {

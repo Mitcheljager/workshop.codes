@@ -1,5 +1,6 @@
 export function render(): void {
   document.removeEventListener("scroll", scrollAlong)
+  window.removeEventListener("resize", scrollAlong)
 
   const toggleUnchangedFilesElement = document.querySelector("[data-action='toggle-unchanged-difference']")
 
@@ -13,6 +14,7 @@ export function render(): void {
   })
 
   document.addEventListener("scroll", scrollAlong)
+  window.addEventListener("resize", scrollAlong)
 
   createRules()
   scrollAlong()
@@ -66,5 +68,6 @@ function scrollAlong(): void {
   const elementOffset = element?.getBoundingClientRect().top || 0
 
   element!.style.height = headerElement!.offsetHeight + "px"
+  headerElement!.style.width = element!.clientWidth + "px"
   headerElement!.classList.toggle("difference-header--fixed", elementOffset < 1)
 }
