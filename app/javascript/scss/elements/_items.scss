@@ -156,7 +156,7 @@
   padding: math.div($margin, 3) 0;
   margin-top: auto;
   font-size: 131%;
-  font-weight: lighter;
+  font-weight: theme(font-weight-light);
   color: theme(text-color-lightest);
 
   @include media-min(sm) {

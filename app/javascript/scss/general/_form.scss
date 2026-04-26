@@ -32,7 +32,7 @@
     height: calc(80px * 0.8);
     padding: calc(80px - (1.5em * 2)) math.div($margin, 3);
     font-size: 21px;
-    font-weight: lighter;
+    font-weight: theme(font-weight-light);
     line-height: 1.5em;
     transition: box-shadow 200ms;
 

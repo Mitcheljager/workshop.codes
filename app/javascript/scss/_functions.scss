@@ -16,15 +16,25 @@
     'text-color-dark': $text-color-dark
   );
 
+  $static: (
+    font-weight-light: lighter
+  );
+
   @if map.has-key($colors, $key) {
     $color: map.get($colors, $key);
+
+    $h: math.round(hue($color));
+    $s: math.round(saturation($color));
+    $l: math.round(lightness($color));
+
+    @return hsl(var(--#{$key}-h, $h), var(--#{$key}-s, $s), calc(var(--#{$key}-l, #{$l}) + #{$lightness}));
+  } @else if map.has-key($static, $key) {
+    @if $lightness != 0% {
+      @error "Using lightness with static theme values is not supported";
+    }
+
+    @return var(--#{$key}, map.get($static, $key));
   } @else {
     @error "Key '#{$key}' is not supported";
   }
-
-  $h: math.round(hue($color));
-  $s: math.round(saturation($color));
-  $l: math.round(lightness($color));
-
-  @return hsl(var(--#{$key}-h, $h), var(--#{$key}-s, $s), calc(var(--#{$key}-l, #{$l}) + #{$lightness}));
 }

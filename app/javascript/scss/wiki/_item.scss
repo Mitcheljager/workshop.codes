@@ -6,7 +6,7 @@
   margin: 0;
   border-bottom: 1px solid theme(border);
   font-size: 18px;
-  font-weight: lighter;
+  font-weight: theme(font-weight-light);
   color: theme(text-color);
 
   @include media-min(md) {

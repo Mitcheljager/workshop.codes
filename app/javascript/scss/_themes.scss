@@ -41,6 +41,8 @@
 
   --cog-color: #{rgba($white, 0.15)};
 
+  --font-weight-light: lighter;
+
   .body-bg {
     background: theme(body, -2%);
   }
@@ -57,6 +59,7 @@
   --text-color-light-l: 90%;
   --text-color-lightest-l: 100%;
   --text-color-dark-l: 60%;
+  --font-weight-light: normal;
 
   .body-bg {
     background: theme(body, -2%);

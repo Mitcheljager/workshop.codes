@@ -54,7 +54,7 @@
     strong {
       color: theme(text-color-lightest);
       font-size: 20px;
-      font-weight: lighter;
+      font-weight: theme(font-weight-light);
 
       @include media-min(md) {
         font-size: 22px;
