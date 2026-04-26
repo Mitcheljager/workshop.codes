@@ -5,7 +5,7 @@
 <% content_for :light_header, true if @post.light_header? && @post.banner_image.attached? %>
 <% content_for :replace_body_bg, "post" if @post.banner_image.attached? %>
 
-<div data-role="tabs" data-tabs-set-url="true">
+<main data-role="tabs" data-tabs-set-url="true">
   <article class="item item--show">
     <%= render "post_header" %>
 
@@ -64,4 +64,4 @@
     <%= render "post_recommendations" if @post.recommended_posts.any? %>
     <%= render "similar_to" %>
   </div>
-</div>
+</main>
