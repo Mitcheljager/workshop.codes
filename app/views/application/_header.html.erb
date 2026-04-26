@@ -1,6 +1,10 @@
 <header class="header <%= yield(:light_header).present? ? "header--light" : "" %>">
   <%= link_to root_path, aria: { label: "Return to Workshop.codes homepage" }, class: "logo-link" do %>
-    <%= inline_svg_tag "logo.svg", class: "logo", alt: "Workshop.codes", width: 240, height: 80 %>
+    <div class="logo">
+      <%= inline_svg_tag "logo-small.svg", class: "absolute", alt: "Workshop.codes", width: 80, height: 80 %>
+      <%= inline_svg_tag "logo-type.svg", class: "relative", alt: "", width: 240, height: 80 %>
+    </div>
+
     <%= inline_svg_tag "logo-small.svg", class: "logo-mobile", alt: "Workshop.codes", width: 53, height: 53 %>
   <% end %>
 
