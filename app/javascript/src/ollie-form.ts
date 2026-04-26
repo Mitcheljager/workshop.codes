@@ -8,7 +8,6 @@ export function bind(): void {
   const usernameInput = element.querySelector("input[name='username']")
   usernameInput?.removeAndAddEventListener("input", (event: Event) => setPupilPosition(event, element))
   usernameInput?.removeAndAddEventListener("focus", (event: Event) => setPupilPosition(event, element))
-  usernameInput?.removeAndAddEventListener("focus", () => setOllieBody(element, "base"))
   usernameInput?.removeAndAddEventListener("blur", () => resetPupilPosition(element))
 
   const passwordInput = element.querySelector("input[type='password']")
