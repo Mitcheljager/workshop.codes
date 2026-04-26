@@ -1,1 +1,0 @@
-This folder contains files used in Zezombyes UI recreation. This is in a public folder rather than done through Rails so Zez can work on this without having to deal with the Rails server. Janky, but that's ok.

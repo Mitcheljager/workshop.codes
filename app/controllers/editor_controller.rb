@@ -39,16 +39,6 @@ class EditorController < ApplicationController
     end
   end
 
-  def zez_ui
-    respond_to do |format|
-      format.html { render layout: "csrf_only" }
-      format.json {
-        current_user_projects(:zez_ui)
-        render json: @projects, layout: false
-      }
-    end
-  end
-
   private
 
   def current_user_projects(content_type)

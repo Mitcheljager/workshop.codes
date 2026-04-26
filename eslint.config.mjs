@@ -16,7 +16,7 @@ const compat = new FlatCompat({
 })
 
 export default [{
-  ignores: ["public", "**/zez-ui"]
+  ignores: ["public"]
 }, ...compat.extends("plugin:svelte/recommended"), ...eslintPluginSvelte.configs["flat/recommended"], {
   languageOptions: {
     globals: {
