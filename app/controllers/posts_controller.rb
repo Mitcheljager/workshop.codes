@@ -238,7 +238,7 @@ class PostsController < ApplicationController
     if @posts.any?
       render collection: @posts, partial: "card", as: :post
     else
-      render plain: "No similar posts were found"
+      render plain: "No similar codes were found"
     end
   end
 
