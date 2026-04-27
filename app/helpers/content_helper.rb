@@ -252,7 +252,7 @@ module ContentHelper
     else
       ViteRuby.instance.manifest.path_for(path).present?
     end
-  rescue ViteRuby::Manifest::MissingEntryError
+  rescue ViteRuby::MissingEntrypointError
     false
   end
 
