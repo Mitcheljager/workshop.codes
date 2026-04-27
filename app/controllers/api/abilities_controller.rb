@@ -36,8 +36,8 @@ class Api::AbilitiesController < Api::BaseController
       ability[:name] = name
       ability[:tags] = tags
       ability[:icon] = {
-        small: ActionController::Base.helpers.asset_url(ability_name_to_icon_url(name)),
-        large: ActionController::Base.helpers.asset_url(ability_name_to_icon_url(name, 128))
+        small: ActionController::Base.helpers.vite_asset_url(ability_name_to_icon_url(name)),
+        large: ActionController::Base.helpers.vite_asset_url(ability_name_to_icon_url(name, 128))
       }
 
       ability

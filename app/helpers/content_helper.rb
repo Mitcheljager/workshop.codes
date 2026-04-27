@@ -137,19 +137,18 @@ module ContentHelper
 
         type = config["type"]&.downcase == "3d" ? "3d" : "2d"
 
-        ActionController::Base.helpers.image_tag(hero_name_to_icon_url(hero_name, size, type), width: size, height: size, loading: "lazy", alt: hero_name)
+        ActionController::Base.helpers.vite_image_tag(hero_name_to_icon_url(hero_name, size, type), width: size, height: size, loading: "lazy", alt: hero_name)
       rescue
         nil
       end
     end
   end
 
-
   def markdown_ability_icon(text)
     text.gsub(/\[ability\s+([\p{L}\p{N}_:.\(\)\-\s]+)\]/) do
       begin
         ability_name = ERB::Util.html_escape($1.strip)
-        ActionController::Base.helpers.image_tag(ability_name_to_icon_url(ability_name), height: 50, loading: "lazy", alt: $1)
+        ActionController::Base.helpers.vite_image_tag(ability_name_to_icon_url(ability_name), height: 50, loading: "lazy", alt: $1)
       rescue; end
     end
   end
@@ -203,7 +202,7 @@ module ContentHelper
   end
 
   def hero_name_to_icon_url(hero, size = 50, type = "2d")
-    string = "heroes/#{ type }/#{ size }/#{ hero_name_to_slug(hero) }.png"
+    string = "images/heroes/#{ type }/#{ size }/#{ hero_name_to_slug(hero) }.png"
     asset_exists?(string) ? string : nil
   end
 
@@ -212,7 +211,7 @@ module ContentHelper
   end
 
   def ability_name_to_icon_url(ability, size = 50)
-    string = "abilities/#{ size }/#{ ability_name_to_slug(ability) }.png"
+    string = "images/abilities/#{ size }/#{ ability_name_to_slug(ability) }.png"
     asset_exists?(string) ? string : nil
   end
 
@@ -248,11 +247,13 @@ module ContentHelper
   def asset_exists?(path)
     return false unless path.present?
 
-    if Rails.configuration.assets.compile
-      Rails.application.precompiled_assets.include? path
+    if ViteRuby.instance.dev_server_running?
+      true
     else
-      Rails.application.assets_manifest.assets[path].present?
+      ViteRuby.instance.manifest.path_for(path).present?
     end
+  rescue ViteRuby::Manifest::MissingEntryError
+    false
   end
 
   def ability_icons
@@ -260,7 +261,7 @@ module ContentHelper
       ability_hash.map do |key, value|
         {
           name: key,
-          url: image_url(ability_name_to_icon_url(key)),
+          url: vite_asset_url(ability_name_to_icon_url(key)),
           terms: value
         }
       end

@@ -20,9 +20,9 @@ class Api::MapsController < Api::BaseController
 
     maps.map do |map|
       map[:thumbnail] = {
-        small: ActionController::Base.helpers.asset_url("maps/small/#{ map["slug"] }.jpg"),
-        medium: ActionController::Base.helpers.asset_url("maps/medium/#{ map["slug"] }.jpg"),
-        large: ActionController::Base.helpers.asset_url("maps/large/#{ map["slug"] }.jpg")
+        small: ActionController::Base.helpers.vite_asset_url("images/maps/small/#{ map["slug"] }.jpg"),
+        medium: ActionController::Base.helpers.vite_asset_url("images/maps/medium/#{ map["slug"] }.jpg"),
+        large: ActionController::Base.helpers.vite_asset_url("images/maps/large/#{ map["slug"] }.jpg")
       }
     end
 
