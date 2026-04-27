@@ -83,5 +83,4 @@ group :production do
   gem "bugsnag"
   # gem "heroku-deflater"
   gem "pg"
-  gem "scout_apm"
 end
