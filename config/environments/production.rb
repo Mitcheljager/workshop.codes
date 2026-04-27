@@ -44,8 +44,8 @@ Rails.application.configure do
   if ENV["ASSETS_HOST"].present?
     config.asset_host = ENV["ASSETS_HOST"]
 
-    ViteRuby.configure do |config|
-      config.asset_host = ENV["ASSETS_HOST"] if ENV["ASSETS_HOST"].present?
+    ViteRuby.configure do |vite_config|
+      vite_config.asset_host = ENV["ASSETS_HOST"] if ENV["ASSETS_HOST"].present?
     end
   end
 
