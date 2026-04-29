@@ -22,6 +22,7 @@
     <%= render "favicons" %>
 
     <link rel="manifest" href="/manifest.json">
+    <link rel="preconnect" href="<%= ENV["CDN"] %>">
     <link rel="preload" href="<%= vite_asset_url "fonts/barlow-condensed-cleaned.woff2" %>" as="font" type="font/woff2" crossorigin>
 
     <style>
