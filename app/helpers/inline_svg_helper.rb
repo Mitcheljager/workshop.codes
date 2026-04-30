@@ -1,7 +1,7 @@
 # Modified version of https://github.com/jamesmartin/inline_svg/pull/128/changes
 module InlineSvgHelper
   def vite_inline_svg_tag(filename, transform_params = {})
-    with_asset_finder(InlineSvgHelper::ViteAssetFinder) do
+    with_asset_finder(ViteAssetFinder) do
       render_inline_svg(filename, transform_params)
     end
   end
