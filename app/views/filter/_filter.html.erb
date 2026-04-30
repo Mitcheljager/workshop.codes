@@ -18,7 +18,7 @@
                      aria: { label: "Filter is active", expanded: "false", controls: id } %>
     <% end %>
 
-    <%= button_tag inline_svg_tag("icons/icon-filter.svg", height: 21, width: 21), name: "Toggle filter", class: "filter__link",
+    <%= button_tag vite_inline_svg_tag("images/icons/icon-filter.svg", height: 21, width: 21), name: "Toggle filter", class: "filter__link",
                     data: {
                       action: "toggle-content get-filter-content",
                       url: filter_partial_path(params.permit!),

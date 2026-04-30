@@ -15,8 +15,13 @@
     <%= render collection: posts, partial: "posts/card", as: :post %>
   </div>
 
-  <div class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" data-action="carousel-previous"><%= inline_svg_tag "layout/carousel-left.svg" %></div>
-  <div class="card-carousel__control card-carousel__control--next" data-action="carousel-next"><%= inline_svg_tag "layout/carousel-right.svg" %></div>
+  <div class="card-carousel__control card-carousel__control--previous card-carousel__control--disabled" data-action="carousel-previous">
+    <%= vite_inline_svg_tag "images/icons/icon-carousel-left.svg" %>
+  </div>
+
+  <div class="card-carousel__control card-carousel__control--next" data-action="carousel-next">
+    <%= vite_inline_svg_tag "images/icons/icon-carousel-right.svg" %>
+  </div>
 </div>
 
 <div id="past-carousel-<%= block.id %>"></div>
