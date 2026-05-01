@@ -4,7 +4,7 @@
 
 <% if @post.project.present? %>
   <%= link_to editor_path(uuid: @post.project), class: "project-link #{ "mb-1/4" if @post.snippet.present? }", target: "_blank" do %>
-    <%= inline_svg_tag "logo-small.svg", width: 24, height: 24 %>
+    <%= vite_inline_svg_tag "images/logo-small.svg", width: 24, height: 24 %>
 
     <span>View this project in the <strong>Workshop.codes Script Editor</strong></span>
 
