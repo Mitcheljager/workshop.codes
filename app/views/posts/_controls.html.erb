@@ -8,7 +8,7 @@
   <div class="controls-header">
     <div class="tabs tabs--buttons">
       <% tabs.each do |tab| %>
-        <%= link_to inline_svg_tag("controls/#{ tab }.svg"), "#", class: "tabs__item #{ "tabs__item--active" if tab == "workshop" }", data: { action: "set-tab", target: tab } %>
+        <%= link_to vite_inline_svg_tag("images/controls/#{ tab }.svg"), "#", class: "tabs__item #{ "tabs__item--active" if tab == "workshop" }", data: { action: "set-tab", target: tab } %>
       <% end %>
     </div>
   </div>
@@ -27,7 +27,7 @@
               <% if tab == "workshop" || button["Custom"] %>
                 <kbd><%= button["Custom"] || button %></kbd>
               <% else %>
-                <%= image_tag "controls/#{ tab }/#{ button.downcase.gsub(" ", "-") }.png", loading: "lazy" %></kbd>
+                <%= vite_image_tag "images/controls/#{ tab }/#{ button.downcase.gsub(" ", "-") }.png", loading: "lazy" %></kbd>
               <% end %>
 
               <%= tag.strong "+" unless index + 1 == without_empty.length %>
