@@ -11,9 +11,6 @@
   <div class="logo-background" style="--image-data-uri: url(<%= theme == "talon" ? svg_data_uri("layout/talon-logo.svg") : svg_data_uri("layout/overwatch-logo.svg") %>)">
     <%= render "filter/quick_filter" %>
 
-    <%= render "application/banners/workshop_crap" if ENV["BANNER_ROOT"] == "Workshop_Crap" %>
-    <%= render "application/banners/stadium_unavailable" if ENV["BANNER_ROOT"] == "Stadium_Unavailable" %>
-    <%= render "application/banners/ow_armory" if ENV["BANNER_ROOT"] == "OW_Armory" %>
     <%= render "application/banners/workshop_disabled" if ENV["BANNER_ROOT"] == "Workshop_Disabled" %>
 
     <%= render "application/banners/editor" %>
