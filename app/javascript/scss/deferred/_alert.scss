@@ -83,4 +83,8 @@
   width: 100%;
   background: rgba($white, 0.75);
   animation: deplete-timer var(--timer) forwards linear;
+
+  .alert--paused & {
+    animation-play-state: paused;
+  }
 }
