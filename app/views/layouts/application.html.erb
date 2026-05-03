@@ -9,10 +9,10 @@
     <meta name="theme-color" content="#1f2326">
     <meta http-equiv=”content-language” content="en" />
 
-    <%= yield(:preload) if yield(:preload).present? %>
-
     <%= render "og_tags" %>
     <%= render "favicons" %>
+
+    <%= yield(:preload) if yield(:preload).present? %>
 
     <link rel="manifest" href="/manifest.json">
     <link rel="preconnect" href="<%= ENV["CDN"] %>">
