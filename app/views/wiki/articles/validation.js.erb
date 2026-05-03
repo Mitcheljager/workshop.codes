@@ -1,7 +1,6 @@
 (() => {
   <% if @article.errors.any? %>
-    const errorBlock = document.querySelector(".error-block")
-    if (errorBlock) errorBlock.remove()
+    document.querySelector(".error-block")?.remove()
     document.querySelectorAll(".field_with_errors").forEach(element => element.classList.remove("field_with_errors"))
 
     const formElement = document.querySelector("[data-role~='article-form']")
