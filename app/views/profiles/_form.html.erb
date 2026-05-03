@@ -4,7 +4,7 @@
 
     <% if @user.verified? %>
       <div class="well align-start justify-start flex-nowrap mt-1/2">
-        <%= inline_svg_tag "icons/verified.svg", height: 30, width: 30, class: "fill-current-color" %>
+        <%= vite_inline_svg_tag "images/icons/icon-verified.svg", height: 30, width: 30, class: "fill-current-color" %>
         <div class="pl-1/4">
           You're verified!
           <div class="mt-1/8">As a gift for your efforts, you are now able to customize the CSS of your profile page. (<%= link_to "Click here", user_profile_path(current_user), class: "button--link" %> to edit)</li></div>

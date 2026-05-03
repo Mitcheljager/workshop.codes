@@ -2,7 +2,7 @@ require "base64"
 
 module ImagesHelper
   def svg_data_uri(file)
-    path = Rails.root.join("app", "assets", "images", file)
+    path = Rails.root.join("app", "javascript", "images", file)
 
     raise "SVG not found: #{path}" unless File.exist?(path)
 
