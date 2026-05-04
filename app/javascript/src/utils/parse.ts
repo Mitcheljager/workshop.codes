@@ -195,3 +195,15 @@ export function isInValue(content: string, startIndex = 0): boolean {
 
   return parenthesisCount < 0
 }
+
+export function isInAnyStringRange(content: string, startIndex: number, endIndex: number): boolean {
+  const stringRanges = findRangesOfStrings(content)
+
+  for(const [rangeFrom, rangeTo] of stringRanges) {
+    if (rangeFrom > startIndex || rangeTo < endIndex) continue
+
+    return true
+  }
+
+  return false
+}

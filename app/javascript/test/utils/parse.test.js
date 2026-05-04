@@ -1,4 +1,4 @@
-import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString, getCommasIndexesOutsideQuotes, inConfigType, isInValue } from "@utils/parse"
+import { getClosingBracket, getPhraseEnd, getPhraseFromPosition, getSettings, removeSurroundingParenthesis, replaceBetween, splitArgumentsString, getCommasIndexesOutsideQuotes, inConfigType, isInValue, isInAnyStringRange } from "@utils/parse"
 import { describe, it, expect } from "vitest"
 
 describe("parse.js", () => {
@@ -238,6 +238,32 @@ describe("parse.js", () => {
       for (let i = 12; i < input.length; i++) {
         expect(isInValue(input, i)).toBe(true)
       }
+    })
+  })
+
+  describe("isInAnyStringRange", () => {
+    it("Should return true if given start and end index is in string", () => {
+      expect(isInAnyStringRange("Description: \"Some description\";", 15, 20)).toBe(true)
+      expect(isInAnyStringRange("\"Some text\"", 1, 5)).toBe(true)
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", 1, 5)).toBe(true)
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", 22, 26)).toBe(true)
+    })
+
+    it("Should return false if given start and end index is not in string", () => {
+      expect(isInAnyStringRange("Description: \"Some description\";", 5, 10)).toBe(false)
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", 10, 15)).toBe(false)
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", 30, 32)).toBe(false)
+    })
+
+    it("Should return false if given start and end index is out side of string ranges", () => {
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", -1, 20)).toBe(false)
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", 5, 32)).toBe(false)
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", 50, 55)).toBe(false)
+      expect(isInAnyStringRange("\"Some text\" and more \"text\" in strings", -1, -1)).toBe(false)
+    })
+
+    it("Should return false if given content contains no strings", () => {
+      expect(isInAnyStringRange("Some random text", 5, 10)).toBe(false)
     })
   })
 })

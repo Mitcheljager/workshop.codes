@@ -1,7 +1,7 @@
 import { languageOptions } from "@lib/languageOptions"
 import type { Language } from "@src/types/editor"
 import { defaultLanguage, selectedLanguages, translationKeys } from "@stores/translationKeys"
-import { getClosingBracket, replaceBetween, splitArgumentsString } from "@utils/parse"
+import { getClosingBracket, isInAnyStringRange, replaceBetween, splitArgumentsString } from "@utils/parse"
 import { get } from "svelte/store"
 
 export function convertTranslations(joinedItems: string, singleLanguageOverride: Language | null = null): string {
@@ -39,7 +39,20 @@ function replaceStaticTranslationKeys(joinedItems: string, singleLanguageOverrid
     const key = full.slice(full.indexOf("(") + 1, full.lastIndexOf(")")).replaceAll("\"", "")
     const translation = getValueForLanguage(key, singleLanguageOverride || get(selectedLanguages)[0])
 
-    joinedItems = replaceBetween(joinedItems, `"${translation}"`, match.index, match.index + full.length)
+    const start = match.index
+    const end = start + full.length
+
+    // This is a bit stupid, but when a translation key is used in a string you end up with a string in a string:
+    // Description: "Translate me: @translate("Some Key")"
+    // "Some key" is a double quoted string inside another double quoted string. The Workshop only supports double
+    // quoted strings and it's nice to keep that consistent. So instead of supporting single quoted strings as an
+    // alternative, we do it quitely for this check alone. It replaces @translate("Some Key") with @translate('Some Key').
+    // This is necessary when actually checking for string ranges since these will be checked against.
+    // These don't need to be actual quotes ', it's not a real string, just any character at all would do.
+    // If it turns out ' is somehow problematic we can replace it with whatever.
+    const isInString = isInAnyStringRange(replaceBetween(joinedItems, full.replaceAll("\"", "'"), start, end), start, end)
+
+    joinedItems = replaceBetween(joinedItems, isInString ? translation : `"${translation}"`, start, end)
   }
 
   return joinedItems

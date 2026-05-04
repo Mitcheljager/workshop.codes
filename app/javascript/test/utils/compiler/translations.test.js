@@ -128,5 +128,39 @@ describe("translations.js", () => {
 
       expect(convertTranslations(input, "en-US")).toBe(expectedOutput)
     })
+
+    it("Should convert static marked translations without quotes if the given inside string", () => {
+      selectedLanguages.set(["en-US"])
+      translationKeys.set({ "Some Key": { "en-US": "Some Value" } })
+
+      const input = `
+        settings {
+          main {
+            description: "Some description with @translate.static("Some Key") a translation in it";
+          }
+        }
+
+        rule(@translate.static("Some Key")) {
+          actions {
+            Custom String("@translate.static("Some Key")");
+          }
+        }
+      `
+      const expectedOutput = `
+        settings {
+          main {
+            description: "Some description with Some Value a translation in it";
+          }
+        }
+
+        rule("Some Value") {
+          actions {
+            Custom String("Some Value");
+          }
+        }
+      `
+
+      expect(convertTranslations(input, "en-US")).toBe(expectedOutput)
+    })
   })
 })
