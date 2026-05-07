@@ -19,8 +19,10 @@ class CollectionsController < ApplicationController
   end
 
   def partial
-    @post = Post.select(:id, :collection_id).includes(:collection).find(params[:id])
+    @post = Post.select(:id, :collection_id).includes(:collection).find_by_id!(params[:id])
     @collection = @post.collection
+
+    render_404 and return unless @collection.present?
 
     render partial: "post_collection_posts"
   end
