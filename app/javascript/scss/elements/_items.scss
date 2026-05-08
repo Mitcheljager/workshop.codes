@@ -112,7 +112,7 @@
   flex-shrink: 0;
   position: relative;
   width: 120px;
-  height: math.div(120px, 16) * 9;
+  height: 68px;
   border-radius: $border-radius * 0.5;
   overflow: hidden;
   background: theme(dark);
@@ -145,7 +145,7 @@
     display: block;
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
     font-size: 12px;
     background: theme(darker);
   }
