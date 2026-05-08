@@ -2,10 +2,6 @@
 
 .items {
   position: relative;
-
-  .item:last-of-type {
-    border-bottom: 1px solid theme(border);
-  }
 }
 
 .items-heading {
@@ -55,6 +51,12 @@
 
   @supports (-ms-ime-align:auto) {
     display: block;
+  }
+
+  &:last-of-type {
+    .items & {
+      border-bottom: 1px solid theme(border);
+    }
   }
 
   &--show {
