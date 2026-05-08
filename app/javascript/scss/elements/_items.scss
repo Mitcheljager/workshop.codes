@@ -42,17 +42,15 @@
     "title title favorite"
     "details details details";
   grid-template-columns: 50% calc(50% - #{ $favorite-width }) $favorite-width;
+  padding: math.div($margin, 3) 0;
+  margin: 0;
   border-top: 1px solid theme(border);
-  margin-bottom: math.div($margin, 3);
-  padding-top: math.div($margin, 3);
 
   @include media-min(sm) {
     grid-template:
       "thumbnail title favorite code"
       "thumbnail details favorite code";
     grid-template-columns: $thumbnail-width calc(100% - #{ $thumbnail-width } - #{ $favorite-width  } - #{ $code-width }) $favorite-width $code-width;
-    padding: math.div($margin, 3) 0;
-    margin: 0;
   }
 
   @supports (-ms-ime-align:auto) {
