@@ -2,7 +2,7 @@
 
 .well {
   position: relative;
-  padding: math.div($margin, 3);
+  padding: calc($margin / 3);
   border-radius: $border-radius;
   background: theme(dark);
 
@@ -85,7 +85,7 @@
 
 .well__marker {
   position: absolute;
-  right: math.div($margin, 3);
+  right: calc($margin / 3);
   top: 0;
   padding: 0 $margin * 0.125;
   transform: translateY(-50%);

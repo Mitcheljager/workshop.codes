@@ -61,7 +61,7 @@
 
 .collection__title {
   display: inline-block;
-  margin-bottom: math.div($margin, 16);
+  margin-bottom: calc($margin / 16);
   color: theme(text-color-lightest);
   font-size: 18px;
   line-height: 1.2em;

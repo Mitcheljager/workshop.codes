@@ -121,10 +121,10 @@
   @include styled-scrollbar;
 
   &--empty {
-    padding: math.div($margin, 4) 2rem;
+    padding: calc($margin / 4) 2rem;
 
     @include media-min(sm) {
-      padding: math.div($margin, 4) 3rem;
+      padding: calc($margin / 4) 3rem;
     }
   }
 }

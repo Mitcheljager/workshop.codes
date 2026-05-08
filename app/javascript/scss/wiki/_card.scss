@@ -24,7 +24,7 @@
   color: theme(text-color);
 
   &:last-of-type {
-    margin-bottom: math.div($margin, 3);
+    margin-bottom: calc($margin / 3);
   }
 
   a {

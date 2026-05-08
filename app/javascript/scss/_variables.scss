@@ -51,7 +51,7 @@ $wiki-search-height: 80px;
 $header-height: $margin;
 $code-width: 150px;
 $thumbnail-width: 120px;
-$thumbnail-height: math.div($thumbnail-width, 16) * 9;
+$thumbnail-height: calc($thumbnail-width / 16) * 9;
 $favorite-width: 3.5rem;
 
 $shadow: 0 2px 1px rgba(0, 0, 0, .1),

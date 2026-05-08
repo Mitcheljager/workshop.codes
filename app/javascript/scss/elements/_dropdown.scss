@@ -84,7 +84,7 @@
   }
 
   hr {
-    margin: math.div($margin, 6) 0;
+    margin: calc($margin / 6) 0;
     background: theme(dark, 10%);
   }
 

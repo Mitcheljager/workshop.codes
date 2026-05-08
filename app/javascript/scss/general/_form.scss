@@ -30,7 +30,7 @@
   &--large {
     width: 100%;
     height: calc(80px * 0.8);
-    padding: calc(80px - (1.5em * 2)) math.div($margin, 3);
+    padding: calc(80px - (1.5em * 2)) calc($margin / 3);
     font-size: $font-size-huge;
     font-weight: theme(font-weight-light);
     line-height: 1.5em;
@@ -81,15 +81,15 @@
 
 .form-label {
   display: block;
-  margin-bottom: math.div($margin, 6);
+  margin-bottom: calc($margin / 6);
   font-size: 112.5%;
 }
 
 .form-group {
-  margin-top: math.div($margin, 3);
+  margin-top: calc($margin / 3);
 
   @include media-min(sm) {
-    margin-top: math.div($margin, 6);
+    margin-top: calc($margin / 6);
   }
 }
 
@@ -145,7 +145,7 @@
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  padding: math.div($margin, 3) 2.5em math.div($margin, 3) math.div($margin, 3);
+  padding: calc($margin / 3) 2.5em calc($margin / 3) calc($margin / 3);
   border: 0;
   border-radius: $border-radius * 0.5;
   background: theme(dark);
@@ -275,14 +275,14 @@ input[type="file"] {
 .form-hint {
   display: block;
   max-width: map-get($media-min-widths, sm);
-  margin: math.div($margin, 3) 0;
+  margin: calc($margin / 3) 0;
   font-size: $font-size-small;
   line-height: 1.25em;
   font-style: italic;
   color: theme(text-color-dark);
 
   label + & {
-    margin-top: math.div($margin, 3) - math.div($margin, 6);
+    margin-top: calc($margin / 3) - calc($margin / 6);
   }
 }
 
@@ -312,7 +312,7 @@ input[type="file"] {
 .error-block {
   background: theme(darker);
   border: 3px solid $red;
-  padding: math.div($margin, 3);
+  padding: calc($margin / 3);
   margin-bottom: $margin * 0.5;
 
   ul {
@@ -321,7 +321,7 @@ input[type="file"] {
 }
 
 .error-block__title {
-  margin: 0 0 math.div($margin, 3);
+  margin: 0 0 calc($margin / 3);
   font-size: $font-size-huge;
 }
 

@@ -31,7 +31,7 @@
 
   > span {
     display: block;
-    padding: 0.25rem 0.25rem 0.25rem math.div($margin, 3);
+    padding: 0.25rem 0.25rem 0.25rem calc($margin / 3);
     white-space: nowrap;
 
     &:hover {

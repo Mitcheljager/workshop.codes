@@ -108,7 +108,7 @@
 
 .favorite__label {
   display: block;
-  margin: 0 math.div($margin, 3) 0 math.div($margin, 6);
+  margin: 0 calc($margin / 3) 0 calc($margin / 6);
   font-weight: bold;
   color: theme(text-color-lightest);
 }

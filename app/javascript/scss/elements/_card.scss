@@ -26,9 +26,9 @@
     display: grid;
     grid-template-columns: repeat(30, 100%);
     grid-gap: 0;
-    margin: 0 math.div($margin, -8);
+    margin: 0 calc($margin / -8);
     overflow-x: hidden;
-    padding-bottom: math.div($margin, 1.5);
+    padding-bottom: calc($margin / 1.5);
 
     @include media-min(450px) {
       grid-template-columns: repeat(30, 50%);
@@ -36,7 +36,7 @@
 
     @include media-min(md) {
       grid-template-columns: repeat(30, 33.33%);
-      margin: 0 math.div($margin, -4);
+      margin: 0 calc($margin / -4);
     }
 
     > div > div {

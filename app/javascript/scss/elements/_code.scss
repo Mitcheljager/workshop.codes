@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   height: $thumbnail-height;
-  padding: math.div($margin, 6) 0;
+  padding: calc($margin / 6) 0;
   margin-bottom: auto;
   border: 0;
   background: theme(dark);

@@ -12,8 +12,8 @@
 
 .alerts {
   position: fixed;
-  right: math.div($margin, 3);
-  bottom: math.div($margin, 3);
+  right: calc($margin / 3);
+  bottom: calc($margin / 3);
   display: flex;
   flex-direction: column;
   align-items: end;

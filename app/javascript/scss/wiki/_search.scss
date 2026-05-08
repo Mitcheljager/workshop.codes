@@ -28,10 +28,10 @@
     width: 100%;
     height: $wiki-search-height;
     border-radius: $wiki-search-height * 0.5;
-    padding: calc(#{ math.div($wiki-search-height, 1.25) } - (1.5em * 2)) calc(#{ math.div($wiki-search-height, 2.5)});
+    padding: calc($wiki-search-height / 1.25 - 3rem) calc($wiki-search-height / 2.5);
 
     @include media-min(sm) {
-      padding: calc(#{ $wiki-search-height } - (1.5em * 2)) calc(#{ $wiki-search-height * 0.5} + .5em);
+      padding: calc($wiki-search-height - 3rem) calc($wiki-search-height * 0.5 + .5em);
     }
 
     &:focus {
@@ -42,13 +42,13 @@
   }
 
   label {
-    left: calc(#{ math.div($wiki-search-height, 2.5) });
+    left: calc($wiki-search-height / 2.5);
     color: theme(text-color);
     font-size: 0;
 
     @include media-min(sm) {
       font-size: $font-size-base;
-      left: calc(#{ $wiki-search-height * 0.5} + .75em);
+      left: calc($wiki-search-height * 0.5 + .75em);
     }
 
     strong {

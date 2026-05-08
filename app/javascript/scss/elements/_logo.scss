@@ -5,7 +5,7 @@
 
   @include media-min(xl) {
     display: block;
-    height: math.div($logo-height, 1.25);
+    height: calc($logo-height / 1.25);
     margin: 0;
   }
 
@@ -16,7 +16,7 @@
 
 .logo-mobile {
   display: block;
-  height: math.div($logo-height, 1.5);
+  height: calc($logo-height / 1.5);
   margin: 0;
 
   @include media-min(xl) {

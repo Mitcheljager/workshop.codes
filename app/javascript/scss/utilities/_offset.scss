@@ -7,7 +7,7 @@ $offset-values: (
   1\/2: $margin * 0.5,
   1\/4: $margin * 0.25,
   1\/8: $margin * 0.125,
-  1\/16: math.div($margin, 16)
+  1\/16: calc($margin / 16)
 );
 
 $properties: (

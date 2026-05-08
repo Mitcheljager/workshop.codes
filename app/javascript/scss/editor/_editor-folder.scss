@@ -52,7 +52,7 @@
 
 .editor-folder__content {
   display: none;
-  padding-left: math.div($margin, 3);
+  padding-left: calc($margin / 3);
 
   &.editor-folder__content--expanded {
     display: block;

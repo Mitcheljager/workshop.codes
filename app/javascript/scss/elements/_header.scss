@@ -15,7 +15,7 @@
   }
 
   @include media-min(xl) {
-    padding: 0 math.div($margin, 3) 0 0;
+    padding: 0 calc($margin / 3) 0 0;
   }
 
   @include high-contrast() {
@@ -191,7 +191,7 @@
 .header__mobile-sticky {
   display: flex;
   flex-wrap: nowrap;
-  right: math.div($margin, 3);
+  right: calc($margin / 3);
   border-radius: $border-radius * 0.5;
   transition: background-color 200ms, box-shadow 200ms;
   z-index: 100;
