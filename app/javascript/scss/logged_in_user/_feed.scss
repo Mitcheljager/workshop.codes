@@ -90,7 +90,7 @@
   @include media-min(md) {
     height: auto;
     margin: $margin * 0.125 0;
-    font-size: 21px;
+    font-size: $font-size-huge;
   }
 
   svg {

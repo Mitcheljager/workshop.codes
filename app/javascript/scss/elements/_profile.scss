@@ -139,7 +139,7 @@
 
   .profile-banner--small & {
     margin-top: 0;
-    font-size: 21px;
+    font-size: $font-size-huge;
   }
 
   @include hover-stack {

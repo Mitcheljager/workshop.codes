@@ -155,7 +155,7 @@
   grid-area: title;
   padding: math.div($margin, 3) 0;
   margin-top: auto;
-  font-size: 21px;
+  font-size: $font-size-huge;
   font-weight: theme(font-weight-light);
   color: theme(text-color-lightest);
 
@@ -169,7 +169,6 @@
 
   .item--extra-small & {
     padding: math.div($margin, 6) 0;
-    font-size: 21px;
   }
 
   .item--large & {

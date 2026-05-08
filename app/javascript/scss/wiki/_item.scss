@@ -10,7 +10,7 @@
   color: theme(text-color);
 
   @include media-min(md) {
-    font-size: 21px;
+    font-size: $font-size-huge;
   }
 
   &:first-child {
