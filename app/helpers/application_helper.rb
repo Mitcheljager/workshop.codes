@@ -4,20 +4,24 @@ module ApplicationHelper
     url.gsub("www.", "")
   end
 
+  def is_controller?(name)
+    controller_path.split("/").first == name
+  end
+
   def is_wiki?
-    controller_path.split("/").first == "wiki" ? true : false
+    is_controller?("wiki")
   end
 
   def is_blog?
-    controller_path.split("/").first == "articles" ? true : false
+    is_controller?("articles")
   end
 
   def is_editor?
-    controller_path.split("/").first == "editor" ? true : false
+    is_controller?("editor")
   end
 
   def is_admin_controller?
-    controller_path.split("/").first == "admin" ? true : false
+    is_controller?("admin")
   end
 
   def to_slug(string)
