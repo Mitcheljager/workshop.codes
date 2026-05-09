@@ -1,9 +1,4 @@
 module ApplicationHelper
-  def non_www_url
-    url = request.original_url
-    url.gsub("www.", "")
-  end
-
   def is_controller?(name)
     controller_path.split("/").first == name
   end
