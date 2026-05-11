@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include ContentHelper
   include MarkdownHelper
   include FilterHelper
+  include AssetsHelper
 
   content_security_policy Rails.env.production?
 
