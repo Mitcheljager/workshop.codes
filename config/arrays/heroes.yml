@@ -723,7 +723,7 @@
   name: Jetpack Cat
   role: Support
   subrole: Tactician
-  stadium: false
+  stadium: true
   release_date: "2026-02-10"
   color: "#c9cdd1"
   full_name: Fika
