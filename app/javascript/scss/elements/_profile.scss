@@ -21,7 +21,6 @@
   color: theme(text-color);
   font-family: $font-stack-alt;
   text-decoration: none;
-  text-transform: uppercase;
 
   @include hover-stack {
     text-decoration: underline;
