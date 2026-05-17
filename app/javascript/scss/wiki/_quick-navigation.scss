@@ -36,6 +36,8 @@ $width: clamp(10rem, 12.5vw, 15rem);
   font-size: $font-size-small;
   line-height: 1.2em;
 
+  @include focus-visible-outline(inset);
+
   &--active {
     color: theme(text-color-light);
     font-weight: bold;
@@ -56,6 +58,8 @@ $width: clamp(10rem, 12.5vw, 15rem);
   font-family: $font-stack;
   font-size: 1rem;
   cursor: pointer;
+
+  @include focus-visible-outline(inset);
 
   &:hover {
     color: theme(text-color-lightest);
