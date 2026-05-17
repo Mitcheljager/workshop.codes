@@ -37,7 +37,8 @@
     "thumbnail code code"
     "title title favorite"
     "details details details";
-  grid-template-columns: 50% calc(50% - #{ $favorite-width }) $favorite-width;
+  grid-template-columns: 50% auto $favorite-width;
+  gap: 0 $margin * 0.25;
   padding: calc($margin / 3) 0;
   margin: 0;
   border-top: 1px solid theme(border);
@@ -46,7 +47,7 @@
     grid-template:
       "thumbnail title favorite code"
       "thumbnail details favorite code";
-    grid-template-columns: $thumbnail-width calc(100% - #{ $thumbnail-width } - #{ $favorite-width  } - #{ $code-width }) $favorite-width $code-width;
+    grid-template-columns: $thumbnail-width auto $favorite-width $code-width;
   }
 
   @supports (-ms-ime-align:auto) {
@@ -100,11 +101,7 @@
 
 .item__favorite {
   grid-area: favorite;
-  margin: calc($margin / 3) 0 0 auto;
-
-  @include media-min(sm) {
-    margin: 23px $margin * 0.25 auto;
-  }
+  align-self: center;
 }
 
 .item__thumbnail {
@@ -153,18 +150,18 @@
 
 .item__title {
   grid-area: title;
-  padding: calc($margin / 3) 0;
+  padding: calc($margin / 3) 0 calc($margin / 4);
   margin-top: auto;
   font-size: $font-size-huge;
   font-weight: theme(font-weight-light);
   color: theme(text-color-lightest);
 
   @include media-min(sm) {
-    padding: calc($margin / 12) 0 calc($margin / 6) calc($margin / 3);
+    padding: 0 0 calc($margin / 6);
   }
 
   .item--small & {
-    padding: 0 0 calc($margin / 6) calc($margin / 3)
+    padding: 0 0 calc($margin / 6);
   }
 
   .item--large & {
@@ -183,6 +180,7 @@
 
   &--small {
     font-size: 18px;
+    padding: 0;
   }
 
   &--large {
@@ -234,12 +232,14 @@
 
 .item__details {
   grid-area: details;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: calc($margin / 12) calc($margin / 3);
   color: theme(text-color-dark);
   font-size: $font-size-small;
 
   @include media-min(sm) {
-    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: auto;
@@ -253,19 +253,6 @@
 
 .item__details-item {
   display: block;
-  margin: calc($margin / 12) 0;
-
-  @include media-min(sm) {
-    margin: calc($margin / 12) calc($margin / 3);
-  }
-
-  &:last-child {
-    margin-right: calc($margin / 3);
-
-    @media (max-width: #{map-get($media-min-widths, sm) - 1px}) {
-      margin-bottom: 0;
-    }
-  }
 
   a {
     color: theme(text-color-light);
@@ -294,7 +281,6 @@
   flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
-  padding-left: calc($margin / 3);
 
   @include media-min(md) {
     flex-direction: row;
