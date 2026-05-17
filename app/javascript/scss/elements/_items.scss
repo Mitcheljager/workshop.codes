@@ -317,7 +317,6 @@
   display: grid;
   grid-template: "title favorite" "code code";
   grid-template-columns: auto $favorite-width;
-  align-items: center;
   gap: $margin * 0.25;
   padding: $margin * 0.25;
   background-image: linear-gradient(130deg, transparent calc(100% - 20rem), rgba($primary, 0.1));
@@ -325,12 +324,12 @@
   @include media-min(lg) {
     grid-template: "title favorite code";
     grid-template-columns: auto $favorite-width $code-width;
+    align-items: center;
     padding: $margin * 0.5;
-    grid-gap: 0;
   }
 
   .favorite {
-    margin-left: .5rem;
+    margin: 0;
   }
 
   .code {
