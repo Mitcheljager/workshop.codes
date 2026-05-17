@@ -7,6 +7,10 @@
 
 <nav class="quick-navigation" data-role="dynamic-max-height">
   <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target data-scroll-container data-sticky-absolute>
+    <div class="skip-links">
+      <a href="#article" data-turbolinks="false">Skip to article</a>
+    </div>
+
     <%= link_to "All articles", wiki_poison_path, class: "hidden" %>
 
     <% { "Actions": actions, "Values": values, "Events": events }.each do |category, props| %>
