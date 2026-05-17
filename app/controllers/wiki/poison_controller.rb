@@ -5,7 +5,7 @@ class Wiki::PoisonController < Wiki::BaseController
     paginated_articles = Kaminari.paginate_array(articles, total_count: articles.size).page(1).per(200)
     @articles = paginated_articles.map do |article|
       article = Wiki::Article.new(article)
-      article.category = article.category_id == 0 ? Wiki::Category.first : Wiki::Category.second
+      article.category = article.category_id == 0 ? Wiki::Category.first : Wiki::Category.third
       article
     end
 
@@ -17,7 +17,7 @@ class Wiki::PoisonController < Wiki::BaseController
   def show
     article = articles.find { |article| article["slug"] == params[:slug] || article["slug"] == params[:slug] }
     @article = Wiki::Article.new(article)
-    @article.category = Wiki::Category.first
+    @article.category = @article.category_id == 0 ? Wiki::Category.first : Wiki::Category.third
     @initial_article = @article
     @edit_count = 1
 
