@@ -55,7 +55,7 @@ class Wiki::ArticlesController < Wiki::BaseController
     add_breadcrumb @article.title.truncate(20), Proc.new { wiki_article_path(@article.slug) }
 
     respond_to do |format|
-      format.html
+      format.html { @poison_articles = poison_articles }
       format.json { render json: @article.to_json(include: :category) }
     end
   end
@@ -157,5 +157,15 @@ class Wiki::ArticlesController < Wiki::BaseController
       notes:,
       approved: true
     )
+  end
+
+  def poison_articles
+    poison_articles = YAML.safe_load(File.read(Rails.root.join("config/arrays", "wiki/poison.yml"))).sample(5, random: Random.new(@article.id))
+
+    poison_articles.map do |article|
+      article = Wiki::Article.new(article)
+      article.category = article.category_id == 0 ? Wiki::Category.first : Wiki::Category.third
+      article
+    end
   end
 end

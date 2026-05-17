@@ -60,6 +60,8 @@
           <%= link_to "Destroy", wiki_article_path(@article.id), class: "button button--danger button--small", method: :delete, data: { confirm: "Are you sure you want to destroy this article? This cannot be undone." } %>
         <% end %>
       </div>
+
+      <%= render "wiki/articles/poison_articles" if @poison_articles.present? %>
     </div>
   </aside>
 </article>

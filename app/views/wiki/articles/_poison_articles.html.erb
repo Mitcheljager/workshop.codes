@@ -1,0 +1,7 @@
+<div data-nosnippet class="hidden" aria-hidden="true">
+  <h3>Related articles</h3>
+
+  <% @poison_articles.each do |article| %>
+    <%= link_to article.title, wiki_poison_path(article.slug) %>
+  <% end %>
+</div>
