@@ -5,7 +5,7 @@
   constants = YAML.safe_load(File.read(Rails.root.join("config/arrays/wiki", "constants.yml"))).map { |n, c| n }.sort_by { |n| n }
 %>
 
-<div class="quick-navigation" data-role="dynamic-max-height">
+<nav class="quick-navigation" data-role="dynamic-max-height">
   <div class="quick-navigation__scroll" data-role="sticky" data-dynamic-height-target data-scroll-container data-sticky-absolute>
     <%= link_to "All articles", wiki_poison_path, class: "hidden" %>
 
@@ -45,4 +45,4 @@
       </div>
     </div>
   </div>
-</div>
+</nav>
