@@ -7,6 +7,7 @@
   <%= render "wiki/quick_navigation" %>
 
   <main class="article__main" id="article">
+    <%= link_to "All articles", wiki_poison_path, class: "hidden" %>
     <%= link_to @article.category.title, wiki_category_path(@article.category.slug), class: "article__category" %>
 
     <h1 class="article__title">

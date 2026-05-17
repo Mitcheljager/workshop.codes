@@ -11,8 +11,6 @@
       <a href="#article" data-turbolinks="false">Skip to article</a>
     </div>
 
-    <%= link_to "All articles", wiki_poison_path, class: "hidden" %>
-
     <% { "Actions": actions, "Values": values, "Events": events }.each do |category, props| %>
       <div data-toggle-content>
         <button class="quick-navigation__toggle <%= "active" if @article.category.title == category.to_s %>" data-action="toggle-content" aria-expanded="<%= @article.category.title == category.to_s %>" aria-controls="<%= category.to_s %>">
