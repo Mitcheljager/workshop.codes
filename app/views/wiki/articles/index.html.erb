@@ -1,4 +1,5 @@
 <% content_for :page_title, "Wiki Articles" %>
+<% content_for :noindex, "true" if controller_path.include?("poison") %>
 
 <div class="action-header top-offset">
   <h1 class="mt-0"><strong>Wiki</strong> Articles</h1>
@@ -8,4 +9,4 @@
   </div>
 </div>
 
-<%= render "articles" %>
+<%= render "wiki/articles/articles" %>

@@ -174,6 +174,8 @@ Rails.application.routes.draw do
   namespace :wiki do
     root to: "base#index"
 
+    resources :poison, path: "articles/p", param: :slug, concerns: :paginatable, only: [:index, :show]
+
     resources :categories, param: :slug, concerns: :paginatable, except: [:show]
     get "categories/:slug(/page/:page)", to: "categories#show"
 

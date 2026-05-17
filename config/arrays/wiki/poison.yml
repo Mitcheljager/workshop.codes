@@ -1,0 +1,1091 @@
+-
+  id: 1482937
+  category_id: 0
+  title: Apply Gravity Field To Players
+  content: "## Description\n\n<big>Creates a sustained gravitational singularity at a world position that continuously pulls or repels players toward or away from its center over a set duration. Unlike instant impulse actions, this field persists and supports reevaluation, allowing it to track a moving position in real time. Optionally affects projectiles in flight. Only players matching the specified team filter are affected.</big>\n\n## Snippet\n\n```\nApply Gravity Field To Players(All Teams, Position Of(Event Player), 8, 40, 3, True, Destination and Radius);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Team_==, ==_Center_==, ==_Radius_==, ==_Pull Strength_==, ==_Duration_==, ==_Affect Projectiles_==, ==_Reevaluation_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team or teams whose players will be affected by the gravity field.\n\n> ==**Center**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position at which the gravitational singularity is created. Supports reevaluation.\n\n> ==**Radius**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **8**_\n> The radius in meters within which players are affected.\n\n> ==**Pull Strength**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **40**_\n> The force applied toward the center per second, in physics units. Negative values repel players away from the center instead.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **3**_\n> How long the gravity field persists, in seconds. Use 0 for an indefinite field that must be stopped manually.\n\n> ==**Affect Projectiles**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **False**_\n> If True, projectiles passing through the field radius are also deflected toward the center.\n\n> ==**Reevaluation**==\n> _Type: **[Gravity Field Reevaluation](/wiki/articles/gravity-field-reevaluation)**, Default: **None**_\n> Specifies which parameters are continuously reevaluated. Options are None, Destination and Radius, or Destination, Radius, and Pull Strength."
+  slug: apply-gravity-field-to-players
+  tags: Apply Gravity Field To Players
+  group_id: Xq7mKsLp3wnA08c-FGvtYe
+  created_at: "2026-04-14T09:22:47.511Z"
+  updated_at: "2026-04-02T16:05:33.874Z"
+-
+  id: 1847291
+  category_id: 0
+  title: Freeze Player In Place
+  content: "## Description\n\n<big>Completely halts a player's position in world space for a set duration, preventing all movement including knockback, gravity, and self-initiated motion. The player retains full ability to aim and use abilities unless separately restricted. Differs from Root in that it also negates external forces.</big>\n\n## Snippet\n\n```\nFreeze Player In Place(Event Player, 2, True);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Duration_==, ==_Ignore External Forces_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player to freeze in place.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> How long the freeze lasts, in seconds. Use 0 for an indefinite freeze.\n\n> ==**Ignore External Forces**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If True, knockback and gravity are suppressed during the freeze. If False, forces accumulate and are applied when the freeze ends."
+  slug: freeze-player-in-place
+  tags: Freeze Player In Place
+  group_id: Ks9pLmWq1bnC34r-HTdxNa
+  created_at: "2026-04-03T11:14:52.001Z"
+  updated_at: "2026-04-03T11:14:52.001Z"
+-
+  id: 1563047
+  category_id: 0
+  title: Redirect Projectile
+  content: "## Description\n\n<big>Instantly changes the direction of a projectile in flight, reassigning its velocity vector to a new facing direction while preserving its speed. Can optionally reassign the projectile's owner, causing it to deal damage on behalf of a different player.</big>\n\n## Snippet\n\n```\nRedirect Projectile(Last Created Projectile, Direction Towards(Position Of(Event Player), Position Of(Closest Player To(Position Of(Event Player), Opposing Team(Team Of(Event Player))))), Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Projectile_==, ==_Direction_==, ==_New Owner_==\n\n> ==**Projectile**==\n> _Type: **[Projectile](/wiki/articles/projectile)**, Default: **Last Created Projectile**_\n> The projectile to redirect.\n\n> ==**Direction**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 1)**_\n> The new normalized direction vector for the projectile.\n\n> ==**New Owner**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Null**_\n> If specified, damage dealt by the projectile will be attributed to this player. Leave as Null to keep the original owner."
+  slug: redirect-projectile
+  tags: Redirect Projectile
+  group_id: Wd4tNkRz6uvP02s-CLamFh
+  created_at: "2026-04-11T17:45:09.332Z"
+  updated_at: "2026-04-28T10:03:55.618Z"
+-
+  id: 1729384
+  category_id: 0
+  title: Set Ability Charge Count
+  content: "## Description\n\n<big>Directly sets the current number of charges available for a specified ability on a player. This action works with any ability that uses a charge system and supports reevaluation. Charges are clamped to the ability's defined minimum and maximum.</big>\n\n## Snippet\n\n```\nSet Ability Charge Count(Event Player, Button(Ability 1), 2);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button_==, ==_Charges_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability charge count will be set.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability button whose charge count will be modified.\n\n> ==**Charges**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The number of charges to assign. Values are clamped to the valid range for the ability."
+  slug: set-ability-charge-count
+  tags: Set Ability Charge Count
+  group_id: Yz8hJmSe5fwQ37n-BKprVc
+  created_at: "2026-04-14T06:58:23.115Z"
+  updated_at: "2026-04-14T06:58:23.115Z"
+-
+  id: 1904712
+  category_id: 0
+  title: Attach Player To Player
+  content: "## Description\n\n<big>Locks a player's position and rotation relative to another player, causing them to move as a single unit. The attached player cannot move independently while the attachment is active. Useful for creating carry mechanics, mounts, or tethered movement modes.</big>\n\n## Snippet\n\n```\nAttach Player To Player(Event Player, Attacker, Vector(0, 1, 0), True);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Anchor_==, ==_Offset_==, ==_Inherit Rotation_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player to attach.\n\n> ==**Anchor**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player to attach to. The attached player will move with this player.\n\n> ==**Offset**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> A positional offset relative to the anchor player's local space.\n\n> ==**Inherit Rotation**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If True, the attached player's facing direction also follows the anchor's rotation."
+  slug: attach-player-to-player
+  tags: Attach Player To Player
+  group_id: Gh6uPqAt9xdL15m-WNesKo
+  created_at: "2026-04-30T20:11:44.887Z"
+  updated_at: "2026-04-17T09:44:21.553Z"
+-
+  id: 1388265
+  category_id: 0
+  title: Override Respawn Location
+  content: "## Description\n\n<big>Sets a custom world position at which a player will respawn on their next death, bypassing the map's default spawn room logic entirely. The override applies once and clears after use unless set to persist. Cannot be used to respawn players inside geometry.</big>\n\n## Snippet\n\n```\nOverride Respawn Location(Event Player, Vector(0, 5, 0), False);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Position_==, ==_Persist_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose respawn location will be overridden.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position at which the player will respawn.\n\n> ==**Persist**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **False**_\n> If True, the override applies to every subsequent respawn until cleared. If False, it applies only to the next respawn."
+  slug: override-respawn-location
+  tags: Override Respawn Location
+  group_id: Lf3cOhDw8stB46p-MXrkIq
+  created_at: "2026-04-22T13:07:30.229Z"
+  updated_at: "2026-04-04T18:55:02.774Z"
+-
+  id: 2198403
+  category_id: 0
+  title: Set Environmental Damage Multiplier
+  content: "## Description\n\n<big>Scales the damage dealt to a specific player by environmental sources such as fall damage, lava zones, crush volumes, and out-of-bounds areas. A value of 0 makes the player immune to all environmental damage. A value above 1 amplifies it.</big>\n\n## Snippet\n\n```\nSet Environmental Damage Multiplier(Event Player, 0);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Multiplier_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose environmental damage multiplier will be set.\n\n> ==**Multiplier**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to all environmental damage received. 0 grants full immunity, 1 is normal, and values above 1 increase damage taken."
+  slug: set-environmental-damage-multiplier
+  tags: Set Environmental Damage Multiplier
+  group_id: Tp5yGnVx2aeH78w-DRjbMs
+  created_at: "2026-04-18T15:33:57.002Z"
+  updated_at: "2026-04-18T15:33:57.002Z"
+-
+  id: 1672948
+  category_id: 0
+  title: Broadcast Sound
+  content: "## Description\n\n<big>Plays a sound effect at a specified world position audible to a defined audience, with controllable volume and falloff radius. Unlike Play Effect, this action supports distance-based attenuation and an optional looping mode, making it suitable for ambient or persistent audio cues.</big>\n\n## Snippet\n\n```\nBroadcast Sound(All Players, Vector(0, 0, 0), Sound(Payload Moving), 100, 20, False);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Position_==, ==_Sound_==, ==_Volume_==, ==_Falloff Radius_==, ==_Loop_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players who will hear the sound.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position from which the sound originates.\n\n> ==**Sound**==\n> _Type: **[Sound](/wiki/articles/sound)**, Default: **None**_\n> The sound asset to play.\n\n> ==**Volume**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **100**_\n> The volume of the sound, from 0 to 100.\n\n> ==**Falloff Radius**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **15**_\n> The distance in meters at which the sound reaches zero volume.\n\n> ==**Loop**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **False**_\n> If True, the sound loops until stopped with Stop Sound."
+  slug: broadcast-sound
+  tags: Broadcast Sound
+  group_id: Aj1vFwCk4rzN60q-SEtgBu
+  created_at: "2026-04-27T09:19:41.663Z"
+  updated_at: "2026-04-11T07:28:14.990Z"
+-
+  id: 1115837
+  category_id: 0
+  title: Transfer Ultimate Charge
+  content: "## Description\n\n<big>Moves a percentage of ultimate charge from one player to another. The source player loses the transferred amount and the receiving player gains it, both clamped to their respective 0–100 range. Useful for support mechanics, penalty systems, or cooperative ultimate-building modes.</big>\n\n## Snippet\n\n```\nTransfer Ultimate Charge(Event Player, Attacker, 25);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Source_==, ==_Receiver_==, ==_Amount_==\n\n> ==**Source**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player from whom ultimate charge is taken.\n\n> ==**Receiver**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who receives the ultimate charge.\n\n> ==**Amount**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The percentage of ultimate charge to transfer, from 0 to 100."
+  slug: transferultimate-charge
+  tags: Transfer Ultimate Charge
+  group_id: Bm7oEyHu3qlK29j-VCfwPd
+  created_at: "2026-04-03T22:41:08.557Z"
+  updated_at: "2026-04-03T22:41:08.557Z"
+-
+  id: 1793620
+  category_id: 0
+  title: Set Hitbox Scale
+  content: "## Description\n\n<big>Uniformly scales the collision and damage hitbox of a player by a given multiplier, affecting both incoming hitscan and projectile hit detection. Does not visually scale the player model. Values below 1 shrink the hitbox, making the player harder to hit; values above 1 enlarge it.</big>\n\n## Snippet\n\n```\nSet Hitbox Scale(Event Player, 0.5);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Scale_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose hitbox will be scaled.\n\n> ==**Scale**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to the player's hitbox size. 1 is the default size. Values are clamped between 0.1 and 3."
+  slug: set-hitbox-scale
+  tags: Set Hitbox Scale
+  group_id: Nc0sBjIy7okG83e-ZWuvRl
+  created_at: "2026-04-15T04:52:36.118Z"
+  updated_at: "2026-04-21T12:17:49.341Z"
+-
+  id: 1534872
+  category_id: 0
+  title: Clone Player Ability
+  content: "## Description\n\n<big>Copies a specific ability from one player and grants it to another player as a temporary replacement for one of their own ability slots. The receiving player uses the cloned ability with their own stats unless overridden. The original player retains their ability unaffected.</big>\n\n## Snippet\n\n```\nClone Player Ability(Event Player, Attacker, Button(Ability 1), Button(Ability 2), 10);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Receiver_==, ==_Source_==, ==_Source Button_==, ==_Target Button_==, ==_Duration_==\n\n> ==**Receiver**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will temporarily receive the cloned ability.\n\n> ==**Source**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability will be cloned.\n\n> ==**Source Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot on the source player to clone from.\n\n> ==**Target Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot on the receiver that the cloned ability will occupy.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **5**_\n> How long the cloned ability remains available, in seconds. Use 0 for an indefinite duration."
+  slug: clone-player-ability
+  tags: Clone Player Ability
+  group_id: Hq3nWbTs8uxE21c-JKpvOy
+  created_at: "2026-04-05T10:22:14.445Z"
+  updated_at: "2026-04-05T10:22:14.445Z"
+-
+  id: 1867503
+  category_id: 0
+  title: Set Vision Cone
+  content: "## Description\n\n<big>Restricts a player's field of view to a cone of a given angle, causing anything outside the cone to be obscured by a customizable fog color. Useful for stealth game modes, horror maps, or penalty mechanics. The cone is always centered on the player's current facing direction.</big>\n\n## Snippet\n\n```\nSet Vision Cone(Event Player, 60, Color(Black), True);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Angle_==, ==_Obscure Color_==, ==_Affect Minimap_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose vision will be restricted.\n\n> ==**Angle**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **90**_\n> The total angular width of the visible cone in degrees. 360 disables the restriction entirely.\n\n> ==**Obscure Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **Black**_\n> The color used to fill the obscured area outside the cone.\n\n> ==**Affect Minimap**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **False**_\n> If True, the minimap is also restricted to the visible cone angle."
+  slug: set-vision-cone
+  tags: Set Vision Cone
+  group_id: Xp7cAjRn2wdL04m-BVqsEt
+  created_at: "2026-04-19T14:08:33.771Z"
+  updated_at: "2026-04-04T09:51:20.114Z"
+-
+  id: 1241986
+  category_id: 0
+  title: Sever Player Connection
+  content: "## Description\n\n<big>Simulates a network disruption for a specific player, introducing artificial input lag, packet loss, and positional desync for a set duration. Intended for game modes that incorporate a latency-based penalty system. Does not affect other players' clients.</big>\n\n## Snippet\n\n```\nSever Player Connection(Event Player, 200, 30, 5);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Latency_==, ==_Packet Loss_==, ==_Duration_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose connection will be simulated as degraded.\n\n> ==**Latency**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **100**_\n> The artificial input delay added to the player's inputs, in milliseconds.\n\n> ==**Packet Loss**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The percentage of simulated packet loss, from 0 to 100.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **3**_\n> How long the simulated degradation lasts, in seconds."
+  slug: sever-player-connection
+  tags: Sever Player Connection
+  group_id: Mv5kDpWc6beN38r-OLhxZj
+  created_at: "2026-04-01T07:34:58.229Z"
+  updated_at: "2026-04-22T16:40:07.883Z"
+-
+  id: 2074319
+  category_id: 0
+  title: Swap Player Heroes
+  content: "## Description\n\n<big>Instantly exchanges the heroes of two players, preserving each player's current health percentage, ultimate charge percentage, and position. Abilities reset to their default cooldown state. Intended for game modes that involve hero trading or randomized role assignment.</big>\n\n## Snippet\n\n```\nSwap Player Heroes(Event Player, Random Player(All Players));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player A_==, ==_Player B_==\n\n> ==**Player A**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The first player in the swap.\n\n> ==**Player B**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The second player in the swap. Must be a different player than Player A."
+  slug: swap-player-heroes
+  tags: Swap Player Heroes
+  group_id: Rj9wFkLu4ztM17o-CNbpAh
+  created_at: "2026-04-28T11:55:42.006Z"
+  updated_at: "2026-04-28T11:55:42.006Z"
+-
+  id: 1659047
+  category_id: 0
+  title: Create Damage Zone
+  content: "## Description\n\n<big>Spawns a persistent spherical zone at a world position that deals damage per second to all players inside it matching the team filter. Supports reevaluation of position and radius, allowing the zone to follow a moving target. The zone persists until destroyed with Destroy Damage Zone.</big>\n\n## Snippet\n\n```\nCreate Damage Zone(All Teams, Position Of(Event Player), 5, 20, Color(Red), True);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Team_==, ==_Position_==, ==_Radius_==, ==_Damage Per Second_==, ==_Color_==, ==_Reevaluation_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team filter determining which players take damage inside the zone.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The center of the damage zone in world space.\n\n> ==**Radius**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **5**_\n> The radius of the zone in meters.\n\n> ==**Damage Per Second**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The amount of damage dealt each second to players inside the zone.\n\n> ==**Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **Red**_\n> The visual color of the zone indicator shown to players.\n\n> ==**Reevaluation**==\n> _Type: **[Damage Zone Reevaluation](/wiki/articles/damage-zone-reevaluation)**, Default: **None**_\n> Specifies which parameters are continuously reevaluated. Options are None, Position, or Position and Radius."
+  slug: create-damage-zone
+  tags: Create Damage Zone
+  group_id: Ub2sYnEo5qfK90d-PWitLm
+  created_at: "2026-04-10T18:27:05.338Z"
+  updated_at: "2026-04-14T13:09:44.662Z"
+-
+  id: 1923784
+  category_id: 0
+  title: Set Player Faction
+  content: "## Description\n\n<big>Assigns a player to a named custom faction independent of their matchmaking team. Players in the same faction are treated as allies for the purposes of healing, line-of-sight checks, and HUD indicators, regardless of their original team assignment. Useful for free-for-all modes with shifting alliances.</big>\n\n## Snippet\n\n```\nSet Player Faction(Event Player, Custom String(\"Alpha\"));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Faction Name_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player to assign to the faction.\n\n> ==**Faction Name**==\n> _Type: **[String](/wiki/articles/string)**, Default: **Null**_\n> The name of the faction to assign the player to. Players sharing this string value are treated as allies. Pass Null to clear the player's faction and revert to their original team alignment."
+  slug: set-player-faction
+  tags: Set Player Faction
+  group_id: Ck4mZrWb1pyH56f-NQouDx
+  created_at: "2026-04-11T21:03:29.115Z"
+  updated_at: "2026-04-11T21:03:29.115Z"
+-
+  id: 1348562
+  category_id: 0
+  title: Record Player Path
+  content: "## Description\n\n<big>Begins recording a player's positional and rotational data at a fixed sample rate into a named buffer. The recording can be played back using Replay Player Path to create a ghost duplicate of the player's movement. Only one recording per player may be active at a time.</big>\n\n## Snippet\n\n```\nRecord Player Path(Event Player, Custom String(\"GhostRun\"), 20);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Buffer Name_==, ==_Sample Rate_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose movement will be recorded.\n\n> ==**Buffer Name**==\n> _Type: **[String](/wiki/articles/string)**, Default: **None**_\n> The identifier used to reference this recording in Replay Player Path and Discard Player Path.\n\n> ==**Sample Rate**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The number of positional samples captured per second. Higher values increase accuracy but consume more memory. Accepted range is 1 to 60."
+  slug: record-player-path
+  tags: Record Player Path
+  group_id: Sq6hOcIn3kdB72a-GEwvRp
+  created_at: "2026-04-16T05:48:17.990Z"
+  updated_at: "2026-04-30T08:22:53.441Z"
+-
+  id: 2156093
+  category_id: 0
+  title: Set Ability Damage Override
+  content: "## Description\n\n<big>Replaces the base damage value of a specific ability on a player with a custom amount for a set duration. Does not affect damage scaling from other Workshop modifiers. Reverts to the hero's default damage value when the duration expires or the override is cleared.</big>\n\n## Snippet\n\n```\nSet Ability Damage Override(Event Player, Button(Primary Fire), 500, 5);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button_==, ==_Damage_==, ==_Duration_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability damage will be overridden.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Primary Fire**_\n> The ability slot whose damage output will be overridden.\n\n> ==**Damage**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **100**_\n> The flat damage value to assign to the ability.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **5**_\n> How long the override lasts, in seconds. Use 0 for an indefinite override."
+  slug: set-ability-damage-override
+  tags: Set Ability Damage Override
+  group_id: Fw8lPqAm9vtC03b-HRjnKe
+  created_at: "2026-04-05T16:19:38.774Z"
+  updated_at: "2026-04-05T16:19:38.774Z"
+-
+  id: 1782341
+  category_id: 0
+  title: Link Player Health Pools
+  content: "## Description\n\n<big>Synchronizes the health of two or more players so that damage or healing applied to any one of them is proportionally mirrored across all linked players. The link persists until broken with Unlink Player Health Pools or until any linked player is eliminated.</big>\n\n## Snippet\n\n```\nLink Player Health Pools(Players On Hero(Hero(Mercy), All Teams), True);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Players_==, ==_Proportional_==\n\n> ==**Players**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The group of players whose health pools will be linked. Must contain at least two players.\n\n> ==**Proportional**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If True, damage and healing are distributed proportionally based on each player's maximum health. If False, the flat amount is applied equally to all linked players."
+  slug: link-player-health-pools
+  tags: Link Player Health Pools
+  group_id: Dn1oGvBj7stL45w-EAmxCf
+  created_at: "2026-04-03T12:44:09.557Z"
+  updated_at: "2026-04-18T20:31:55.228Z"
+-
+  id: 1495728
+  category_id: 0
+  title: Emit Shockwave
+  content: "## Description\n\n<big>Releases a spherical shockwave from a world position that applies an outward impulse to all players within the blast radius. Impulse strength falls off linearly with distance from the origin. Can optionally deal damage scaled to the impulse applied to each player.</big>\n\n## Snippet\n\n```\nEmit Shockwave(Position Of(Event Player), 8, 60, True, 40);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Position_==, ==_Radius_==, ==_Max Impulse_==, ==_Deal Damage_==, ==_Max Damage_==\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position from which the shockwave originates.\n\n> ==**Radius**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **6**_\n> The maximum distance in meters at which players are affected.\n\n> ==**Max Impulse**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **50**_\n> The impulse force applied to a player at the epicenter. Falls off linearly to zero at the edge of the radius.\n\n> ==**Deal Damage**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **False**_\n> If True, each affected player also receives damage proportional to the impulse they were dealt.\n\n> ==**Max Damage**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **50**_\n> The maximum damage dealt to a player at the epicenter. Only used when Deal Damage is True."
+  slug: emit-shockwave
+  tags: Emit Shockwave
+  group_id: Zt0eRwCh5bnJ19k-FUdlVo
+  created_at: "2026-04-25T03:57:21.663Z"
+  updated_at: "2026-04-12T11:48:36.009Z"
+-
+  id: 1638472
+  category_id: 0
+  title: Pause Ability Cooldowns
+  content: "## Description\n\n<big>Freezes all ability cooldown timers for a player, preventing them from counting down until the pause is lifted with Resume Ability Cooldowns. Abilities already available remain available. Useful for creating time-stop mechanics or cooldown-based penalty systems.</big>\n\n## Snippet\n\n```\nPause Ability Cooldowns(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability cooldown timers will be paused."
+  slug: pause-ability-cooldowns
+  tags: Pause Ability Cooldowns
+  group_id: Af3nBqWx9ycL02m-KRjvOs
+  created_at: "2026-04-28T09:11:04.772Z"
+  updated_at: "2026-04-28T09:11:04.772Z"
+-
+  id: 1903571
+  category_id: 0
+  title: Set Team Score Multiplier
+  content: "## Description\n\n<big>Applies a multiplier to all points earned by a team for the remainder of the round or until changed. Affects objective captures, kill scores, and any custom score increments. Values below 1 reduce scoring; values above 1 amplify it.</big>\n\n## Snippet\n\n```\nSet Team Score Multiplier(Team(Team 1), 2);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Team_==, ==_Multiplier_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **Team 1**_\n> The team whose score multiplier will be set.\n\n> ==**Multiplier**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to all points earned by the team. Clamped between 0 and 10."
+  slug: set-team-score-multiplier
+  tags: Set Team Score Multiplier
+  group_id: Pv7mChDk2stN48r-WBouEj
+  created_at: "2026-04-02T17:44:28.119Z"
+  updated_at: "2026-04-02T17:44:28.119Z"
+-
+  id: 1274859
+  category_id: 0
+  title: Detach All Players
+  content: "## Description\n\n<big>Releases all players currently attached to a specified anchor player via Attach Player To Player, restoring independent movement to each. Has no effect on players not attached to the anchor.</big>\n\n## Snippet\n\n```\nDetach All Players(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Anchor_==\n\n> ==**Anchor**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player from whom all attached players will be released."
+  slug: detach-all-players
+  tags: Detach All Players
+  group_id: Lw0sFnVt6uxB13p-HYdkRq
+  created_at: "2026-04-22T06:30:55.441Z"
+  updated_at: "2026-04-22T06:30:55.441Z"
+-
+  id: 2209134
+  category_id: 0
+  title: Mirror Player Input
+  content: "## Description\n\n<big>Causes one player's movement and aim inputs to be mirrored exactly onto another player, overriding the receiver's own inputs for the duration. The source player is unaware of and unaffected by the mirroring.</big>\n\n## Snippet\n\n```\nMirror Player Input(Event Player, Attacker, 6);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Receiver_==, ==_Source_==, ==_Duration_==\n\n> ==**Receiver**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose inputs will be overridden.\n\n> ==**Source**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose inputs will be mirrored onto the receiver.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **3**_\n> How long the mirroring lasts, in seconds."
+  slug: mirror-player-input
+  tags: Mirror Player Input
+  group_id: Ej5tKpAo8wdM26n-SCivBl
+  created_at: "2026-04-14T13:02:17.883Z"
+  updated_at: "2026-04-14T13:02:17.883Z"
+-
+  id: 1456203
+  category_id: 0
+  title: Lock Camera To Position
+  content: "## Description\n\n<big>Overrides a player's camera to a fixed world position, decoupling it from the player's own perspective. The player retains full control of their hero but views the game from the specified point. Reverts when cleared with Clear Camera Lock.</big>\n\n## Snippet\n\n```\nLock Camera To Position(Event Player, Vector(0, 20, 0));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Position_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose camera will be locked.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position the camera will be fixed at."
+  slug: lock-camera-to-position
+  tags: Lock Camera To Position
+  group_id: Th8uOcRm4bnJ70w-FAelNp
+  created_at: "2026-04-04T20:15:39.006Z"
+  updated_at: "2026-04-27T08:57:12.334Z"
+-
+  id: 1817640
+  category_id: 0
+  title: Set Passive Health Regen
+  content: "## Description\n\n<big>Assigns a continuous health regeneration rate to a player, restoring a flat amount of health per second outside of combat. The regeneration pauses for a configurable delay after the player takes damage, matching the behavior of natural out-of-combat healing.</big>\n\n## Snippet\n\n```\nSet Passive Health Regen(Event Player, 25, 2);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Health Per Second_==, ==_Damage Delay_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will receive passive health regeneration.\n\n> ==**Health Per Second**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The amount of health restored each second. Set to 0 to disable regeneration.\n\n> ==**Damage Delay**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **3**_\n> The number of seconds after taking damage before regeneration resumes."
+  slug: set-passive-health-regen
+  tags: Set Passive Health Regen
+  group_id: Gn2vJwBp5rkC39s-DQhtMa
+  created_at: "2026-04-05T15:38:44.227Z"
+  updated_at: "2026-04-01T11:24:06.558Z"
+-
+  id: 1592387
+  category_id: 0
+  title: Eject Player From Hero
+  content: "## Description\n\n<big>Instantly removes a player from their current hero, spawning them in a default unarmed state at their current position with a configurable amount of health. The player remains in this state until a hero is reassigned via Allow Hero or a respawn occurs.</big>\n\n## Snippet\n\n```\nEject Player From Hero(Event Player, 50);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Health_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player to eject from their hero.\n\n> ==**Health**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **100**_\n> The amount of health the player has in their ejected state."
+  slug: eject-player-from-hero
+  tags: Eject Player From Hero
+  group_id: Wr6oNkTs1aeH84cUPjbFv
+  created_at: "2026-04-23T04:52:11.009Z"
+  updated_at: "2026-04-23T04:52:11.009Z"
+-
+  id: 2043916
+  category_id: 0
+  title: Set Kill Feed Visibility
+  content: "## Description\n\n<big>Controls whether a specific player's deaths and eliminations appear in the kill feed for all players. When hidden, the player's combat activity is invisible in the feed but still affects game state normally.</big>\n\n## Snippet\n\n```\nSet Kill Feed Visibility(Event Player, False);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Visible_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose kill feed entries will be shown or hidden.\n\n> ==**Visible**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If False, this player's eliminations and deaths will not appear in the kill feed."
+  slug: set-kill-feed-visibility
+  tags: Set Kill Feed Visibility
+  group_id: Bc9pEmWu3qlK57d-ZNoxCh
+  created_at: "2026-04-14T08:19:27.664Z"
+  updated_at: "2026-04-30T14:03:49.881Z"
+-
+  id: 1738524
+  category_id: 0
+  title: Suppress Death
+  content: "## Description\n\n<big>Prevents a player from dying on their next lethal hit, instead leaving them at 1 health. Triggers once and clears automatically after use. Does not prevent damage; only the killing blow is negated. Has no effect on instant-elimination sources such as falling out of bounds.</big>\n\n## Snippet\n\n```\nSuppress Death(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will survive their next lethal hit."
+  slug: suppress-death
+  tags: Suppress Death
+  group_id: Ns4hFvCj7wtB20r-EKdmOu
+  created_at: "2026-04-16T19:27:53.442Z"
+  updated_at: "2026-04-16T19:27:53.442Z"
+-
+  id: 1164793
+  category_id: 0
+  title: Set Projectile Gravity
+  content: "## Description\n\n<big>Overrides the gravitational drop applied to all projectiles fired by a player. A value of 0 makes projectiles travel in a perfectly flat trajectory. A value of 1 restores default gravity. Values above 1 cause exaggerated arcing.</big>\n\n## Snippet\n\n```\nSet Projectile Gravity(Event Player, 0);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Gravity Scale_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose projectile gravity will be overridden.\n\n> ==**Gravity Scale**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to gravity on all projectiles fired by the player. Clamped between 0 and 5."
+  slug: set-projectile-gravity
+  tags: Set Projectile Gravity
+  group_id: Yo1cIqDn6xeM93k-LHfwBt
+  created_at: "2026-04-18T22:06:31.118Z"
+  updated_at: "2026-04-25T17:44:19.003Z"
+-
+  id: 1583921
+  category_id: 1
+  title: Destroy All Deployables Of Player
+  content: "## Description\n\n<big>Instantly destroys all active deployables belonging to a specified player. Does not trigger on-destruction events or deal damage. Useful for cleanup on death, penalty mechanics, or resetting a player's placed objects at the start of a new round.</big>\n\n## Snippet\n\n```\nDestroy All Deployables Of Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose deployables will all be destroyed."
+  slug: destroy-all-deployables-of-player
+  tags: Destroy All Deployables Of Player
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2026-04-22T10:14:37.441Z"
+  updated_at: "2026-04-22T10:14:37.441Z"
+-
+  id: 1839582
+  category_id: 1
+  title: Set Deployable Health
+  content: "## Description\n\n<big>Directly sets the current health of a specified deployable to a given value, clamped between 1 and the deployable's maximum health. Cannot be used to destroy a deployable; use Destroy Deployable for that purpose. Useful for repair mechanics, deployable damage scaling, or resetting deployable condition.</big>\n\n## Snippet\n\n```\nSet Deployable Health(Last Created Deployable, 100);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==, ==_Health_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose health will be set.\n\n> ==**Health**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **100**_\n> The health value to assign. Clamped between 1 and the deployable's maximum health."
+  slug: set-deployable-health
+  tags: Set Deployable Health
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2026-04-11T15:27:04.882Z"
+  updated_at: "2026-04-28T09:44:51.117Z"
+-
+  id: 1274920
+  category_id: 1
+  title: Teleport Deployable
+  content: "## Description\n\n<big>Instantly moves a deployable to a specified world position without destroying and replacing it. The deployable retains its current health, state, and remaining lifetime. Useful for repositioning mechanics, deployable-tethering systems, or teleportation-based game modes.</big>\n\n## Snippet\n\n```\nTeleport Deployable(Last Created Deployable, Vector(0, 0, 0));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==, ==_Position_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable to move.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position to move the deployable to."
+  slug: teleport-deployable
+  tags: Teleport Deployable
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2026-04-03T08:19:22.006Z"
+  updated_at: "2026-04-03T08:19:22.006Z"
+-
+  id: 1920384
+  category_id: 1
+  title: Set Deployable Damage Multiplier
+  content: "## Description\n\n<big>Applies a damage output multiplier to a specified deployable, scaling all damage it deals by the given factor. A value of 0 silences the deployable's damage entirely. A value above 1 amplifies it. Does not affect the deployable's health or durability.</big>\n\n## Snippet\n\n```\nSet Deployable Damage Multiplier(Last Created Deployable, 2);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==, ==_Multiplier_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose damage output will be scaled.\n\n> ==**Multiplier**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to all damage dealt by the deployable. Clamped between 0 and 10."
+  slug: set-deployable-damage-multiplier
+  tags: Set Deployable Damage Multiplier
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2026-04-17T14:52:39.774Z"
+  updated_at: "2026-04-04T11:03:17.882Z"
+-
+  id: 1638492
+  category_id: 1
+  title: Reassign Deployable Owner
+  content: "## Description\n\n<big>Transfers ownership of a deployable from its current owner to a specified player. The new owner receives credit for any damage, healing, or interactions the deployable produces after the transfer. The deployable's position, health, and state are unaffected.</big>\n\n## Snippet\n\n```\nReassign Deployable Owner(Last Created Deployable, Attacker);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==, ==_New Owner_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose ownership will be transferred.\n\n> ==**New Owner**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will become the new owner of the deployable."
+  slug: reassign-deployable-owner
+  tags: Reassign Deployable Owner
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-04-04T19:37:44.117Z"
+  updated_at: "2026-04-04T19:37:44.117Z"
+-
+  id: 1503921
+  category_id: 1
+  title: Disable Deployable
+  content: "## Description\n\n<big>Deactivates a deployable, preventing it from performing any actions such as firing, detecting enemies, or applying effects, without destroying it. The deployable remains in the world at its current health and can be reactivated with Enable Deployable. Useful for temporary suppression mechanics or mode-phase transitions.</big>\n\n## Snippet\n\n```\nDisable Deployable(Last Created Deployable);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable to deactivate."
+  slug: disable-deployable
+  tags: Disable Deployable
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2026-04-01T07:44:09.006Z"
+  updated_at: "2026-04-01T07:44:09.006Z"
+-
+  id: 1748921
+  category_id: 1
+  title: Enable Deployable
+  content: "## Description\n\n<big>Reactivates a deployable that was previously deactivated with Disable Deployable, restoring its normal behavior. Has no effect on deployables that are already active. Does not restore health lost while disabled.</big>\n\n## Snippet\n\n```\nEnable Deployable(Last Created Deployable);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable to reactivate."
+  slug: enable-deployable
+  tags: Enable Deployable
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2026-04-01T07:45:22.441Z"
+  updated_at: "2026-04-01T07:45:22.441Z"
+-
+  id: 1374921
+  category_id: 1
+  title: Set Deployable Team
+  content: "## Description\n\n<big>Changes the team affiliation of a deployable, causing it to treat players accordingly for targeting, damage, and healing. A deployable reassigned to the opposing team will begin targeting its former allies if applicable. Ownership attribution remains with the original player unless also changed via Reassign Deployable Owner.</big>\n\n## Snippet\n\n```\nSet Deployable Team(Last Created Deployable, Team(Team 2));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==, ==_Team_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose team affiliation will be changed.\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **Team 1**_\n> The team to assign to the deployable."
+  slug: set-deployable-team
+  tags: Set Deployable Team
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2026-04-16T13:08:55.882Z"
+  updated_at: "2026-04-16T13:08:55.882Z"
+-
+  id: 1920193
+  category_id: 1
+  title: Destroy Deployables Within Radius
+  content: "## Description\n\n<big>Instantly destroys all active deployables within a specified radius of a world position belonging to a given team. Does not trigger on-destruction events or deal damage. Useful for area-clearing mechanics, EMP-style effects, or zone-reset logic.</big>\n\n## Snippet\n\n```\nDestroy Deployables Within Radius(Position Of(Event Player), 10, Team(All Teams));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Position_==, ==_Radius_==, ==_Team_==\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The center of the destruction area.\n\n> ==**Radius**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The radius in meters within which deployables will be destroyed.\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team filter determining which deployables are affected."
+  slug: destroy-deployables-within-radius
+  tags: Destroy Deployables Within Radius
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2026-04-25T18:22:14.117Z"
+  updated_at: "2026-04-31T10:49:37.006Z"
+-
+  id: 1583492
+  category_id: 1
+  title: Set Deployable Visibility
+  content: "## Description\n\n<big>Controls whether a deployable is visible to players on a specified team. When hidden, the deployable still functions normally and can deal damage or apply effects, but renders as invisible to the specified audience. Useful for stealth trap mechanics or asymmetric information game modes.</big>\n\n## Snippet\n\n```\nSet Deployable Visibility(Last Created Deployable, Team(Team 2), False);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Deployable_==, ==_Team_==, ==_Visible_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose visibility will be set.\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team for whom visibility will be changed.\n\n> ==**Visible**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If False, the deployable will not render for the specified team."
+  slug: set-deployable-visibility
+  tags: Set Deployable Visibility
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2026-04-18T21:33:07.774Z"
+  updated_at: "2026-04-18T21:33:07.774Z"
+-
+  id: 1583920
+  category_id: 1
+  category_id: 1
+  title: Closest Wall Position
+  content: "## Description\n\n<big>Returns the position of the nearest solid surface to a given world position, calculated by raycasting outward in all directions and returning the closest hit point. Useful for wall-detection logic, surface-snapping effects, and proximity-based mechanics.</big>\n\n## Snippet\n\n```\nClosest Wall Position(Position Of(Event Player), 10);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Vector</span>_\n**Parameters**: ==_Position_==, ==_Max Range_==\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position from which wall detection is performed.\n\n> ==**Max Range**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The maximum distance in meters to search for a wall. Returns Null if no surface is found within range."
+  slug: closest-wall-position
+  tags: Closest Wall Position
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2026-04-11T10:44:17.339Z"
+  updated_at: "2026-04-11T10:44:17.339Z"
+-
+  id: 1847562
+  category_id: 1
+  title: Time Since Hero Swapped
+  content: "## Description\n\n<big>Returns the number of seconds elapsed since a player last changed their hero. Resets to 0 each time a new hero is selected. Useful for mechanics that reward or penalize hero loyalty, or for triggering events after a player has played a hero for a minimum duration.</big>\n\n## Snippet\n\n```\nTime Since Hero Swapped(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose time since last hero swap will be returned."
+  slug: time-since-hero-swapped
+  tags: Time Since Hero Swapped
+  group_id: Af7nBqWx2ycL04m-KRjvOs
+  created_at: "2026-04-14T08:22:11.774Z"
+  updated_at: "2026-04-14T08:22:11.774Z"
+-
+  id: 1293847
+  category_id: 1
+  title: Projectiles Fired By Player
+  content: "## Description\n\n<big>Returns the total number of projectiles fired by a player since the match began or since the last reset via Reset Stat. Counts all primary fire, secondary fire, and ability projectiles. Useful for accuracy tracking, ammo-economy scoring, and shot-based game modes.</big>\n\n## Snippet\n\n```\nProjectiles Fired By Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose total projectiles fired will be returned."
+  slug: projectiles-fired-by-player
+  tags: Projectiles Fired By Player
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2026-04-30T14:55:39.002Z"
+  updated_at: "2026-04-18T09:41:22.119Z"
+-
+  id: 2018374
+  category_id: 1
+  title: Angle Between Players
+  content: "## Description\n\n<big>Returns the angle in degrees between the facing direction of one player and the direction toward a second player. A value of 0 means the first player is looking directly at the second. A value of 180 means the second player is directly behind the first.</big>\n\n## Snippet\n\n```\nAngle Between Players(Event Player, Attacker);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==, ==_Other Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose facing direction is used as the reference.\n\n> ==**Other Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player toward whom the angle is measured."
+  slug: angle-between-players
+  tags: Angle Between Players
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2026-04-20T17:03:58.441Z"
+  updated_at: "2026-04-20T17:03:58.441Z"
+-
+  id: 1654029
+  category_id: 1
+  title: Current Objective Position
+  content: "## Description\n\n<big>Returns the world position of the active objective, such as the payload, the capture point centroid, or the flag carrier's position depending on the current game mode. Returns Null if no objective is currently active.</big>\n\n## Snippet\n\n```\nCurrent Objective Position;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Vector</span>_\n**Parameters**: _None_"
+  slug: current-objective-position
+  tags: Current Objective Position
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2026-04-04T11:28:47.006Z"
+  updated_at: "2026-04-04T06:14:33.882Z"
+-
+  id: 1923016
+  category_id: 1
+  title: Health Percent Missing
+  content: "## Description\n\n<big>Returns the percentage of a player's health that is currently missing, as a value from 0 to 100. A full-health player returns 0. A player at half health returns 50. Equivalent to 100 minus the result of Health Percent, but provided as a convenience value for threshold-based conditions.</big>\n\n## Snippet\n\n```\nHealth Percent Missing(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose missing health percentage will be returned."
+  slug: health-percent-missing
+  tags: Health Percent Missing
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-04-17T20:37:04.558Z"
+  updated_at: "2026-04-17T20:37:04.558Z"
+-
+  id: 1372841
+  category_id: 1
+  title: Players In Faction
+  content: "## Description\n\n<big>Returns an array of all players currently assigned to a named faction via Set Player Faction. The array is empty if no players belong to the specified faction. Useful for iterating over faction members or evaluating faction size.</big>\n\n## Snippet\n\n```\nPlayers In Faction(Custom String(\"Alpha\"));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Faction Name_==\n\n> ==**Faction Name**==\n> _Type: **[String](/wiki/articles/string)**, Default: **None**_\n> The faction identifier whose members will be returned."
+  slug: players-in-faction
+  tags: Players In Faction
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2026-04-29T09:51:22.334Z"
+  updated_at: "2026-04-29T09:51:22.334Z"
+-
+  id: 1789403
+  category_id: 1
+  title: Surface Normal At Position
+  content: "## Description\n\n<big>Returns the surface normal vector of the geometry directly below a given world position, determined by a downward raycast. Useful for aligning effects to slopes, determining if a surface is walkable, or calculating ricochet directions.</big>\n\n## Snippet\n\n```\nSurface Normal At Position(Position Of(Event Player));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Vector</span>_\n**Parameters**: ==_Position_==\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position from which the downward raycast is performed. Returns Null if no geometry is found below."
+  slug: surface-normal-at-position
+  tags: Surface Normal At Position
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2026-04-11T16:09:33.117Z"
+  updated_at: "2026-04-03T12:28:49.006Z"
+-
+  id: 2134507
+  category_id: 1
+  title: Time Since Last Damage Dealt
+  content: "## Description\n\n<big>Returns the number of seconds since a player last dealt damage to any target. Resets to 0 each time damage is dealt. Returns a large value if the player has not dealt damage since the match began. Useful for detecting idle players or rewarding sustained aggression.</big>\n\n## Snippet\n\n```\nTime Since Last Damage Dealt(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose time since last damage dealt will be returned."
+  slug: time-since-last-damage-dealt
+  tags: Time Since Last Damage Dealt
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2026-04-25T07:18:56.229Z"
+  updated_at: "2026-04-16T15:52:41.773Z"
+-
+  id: 1516382
+  category_id: 1
+  title: Is Player Airborne
+  content: "## Description\n\n<big>Returns True if a player is currently not in contact with any ground surface, including during jumps, falls, knockbacks, or ability-based flight. Returns False if the player is standing on geometry. Distinct from Is In Air in that it also returns True during wall-climbing and ledge-hanging states.</big>\n\n## Snippet\n\n```\nIs Player Airborne(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose airborne state will be evaluated."
+  slug: is-player-airborne
+  tags: Is Player Airborne
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2026-04-05T22:44:09.881Z"
+  updated_at: "2026-04-05T22:44:09.881Z"
+-
+  id: 1861749
+  category_id: 1
+  title: Furthest Player From Position
+  content: "## Description\n\n<big>Returns the player from a specified team or array who is currently the greatest distance from a given world position. Useful for identifying stragglers, locating the most isolated target, or anchoring game logic to outlier positions.</big>\n\n## Snippet\n\n```\nFurthest Player From Position(Vector(0, 0, 0), Team(Team 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Player</span>_\n**Parameters**: ==_Position_==, ==_Team_==\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The reference world position from which player distances are measured.\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team from which the furthest player will be selected."
+  slug: furthest-player-from-position
+  tags: Furthest Player From Position
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2026-04-08T03:29:17.004Z"
+  updated_at: "2026-04-31T18:07:55.338Z"
+-
+  id: 1583920
+  category_id: 1
+  title: Average Team Health Percent
+  content: "## Description\n\n<big>Returns the mean health percentage across all living players on a specified team, as a value from 0 to 100. Eliminated players are excluded from the calculation. Useful for team-wide healing triggers, difficulty scaling, or HUD indicators.</big>\n\n## Snippet\n\n```\nAverage Team Health Percent(Team(Team 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **Team 1**_\n> The team whose average health percentage will be returned."
+  slug: average-team-health-percent
+  tags: Average Team Health Percent
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2026-04-03T08:11:44.229Z"
+  updated_at: "2026-04-03T08:11:44.229Z"
+-
+  id: 1739201
+  category_id: 1
+  title: Player With Most Eliminations
+  content: "## Description\n\n<big>Returns the player on a specified team with the highest elimination count at the time of evaluation. If multiple players are tied, the first qualifying player in slot order is returned.</big>\n\n## Snippet\n\n```\nPlayer With Most Eliminations(Team(All Teams));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Player</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team from which the leading player will be selected."
+  slug: player-with-most-eliminations
+  tags: Player With Most Eliminations
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2026-04-19T12:33:57.441Z"
+  updated_at: "2026-04-19T12:33:57.441Z"
+-
+  id: 1902847
+  category_id: 1
+  title: Is Ability On Cooldown
+  content: "## Description\n\n<big>Returns True if the specified ability on a player is currently on cooldown and unavailable for use. Returns False if the ability is ready or if the player has no ability assigned to that slot.</big>\n\n## Snippet\n\n```\nIs Ability On Cooldown(Event Player, Button(Ability 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==, ==_Button_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability state will be checked.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot to evaluate."
+  slug: is-ability-on-cooldown
+  tags: Is Ability On Cooldown
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2026-04-22T16:47:03.882Z"
+  updated_at: "2026-04-11T10:22:39.117Z"
+-
+  id: 1465830
+  category_id: 1
+  title: Match Time Elapsed
+  content: "## Description\n\n<big>Returns the number of seconds that have elapsed since the current match phase began. Resets when a new phase starts, such as at the beginning of overtime or a new round. Complements the existing Match Time value which counts down.</big>\n\n## Snippet\n\n```\nMatch Time Elapsed;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: _None_"
+  slug: match-time-elapsed
+  tags: Match Time Elapsed
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2026-04-14T09:05:28.774Z"
+  updated_at: "2026-04-30T14:44:52.003Z"
+-
+  id: 1827364
+  category_id: 1
+  title: Players Currently Healing
+  content: "## Description\n\n<big>Returns an array of all players who are actively receiving healing from any source at the moment of evaluation. Includes healing over time, beam healing, and passive regeneration. Useful for visualizing heal chains or triggering events on heal activity.</big>\n\n## Snippet\n\n```\nPlayers Currently Healing(All Teams);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team filter applied to the result."
+  slug: players-currently-healing
+  tags: Players Currently Healing
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-04-27T07:38:14.006Z"
+  updated_at: "2026-04-27T07:38:14.006Z"
+-
+  id: 1583021
+  category_id: 1
+  title: Last Ability Used
+  content: "## Description\n\n<big>Returns the button corresponding to the last ability activated by a player. Includes primary fire, secondary fire, ability slots, and ultimate. Returns Null if the player has not used any ability since the match began.</big>\n\n## Snippet\n\n```\nLast Ability Used(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Button</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose last used ability will be returned."
+  slug: last-abilityused
+  tags: Last Ability Used
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2026-04-03T18:52:41.339Z"
+  updated_at: "2026-04-14T11:09:27.882Z"
+-
+  id: 2047193
+  category_id: 1
+  title: Distance Traveled This Life
+  content: "## Description\n\n<big>Returns the total distance in meters a player has moved since their last spawn. Resets to 0 on each respawn. Tracks all movement including walking, flying, teleporting, and being knocked back.</big>\n\n## Snippet\n\n```\nDistance Traveled This Life(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose distance traveled will be returned."
+  slug: distance-traveled-this-life
+  tags: Distance Traveled This Life
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2026-04-06T21:14:09.117Z"
+  updated_at: "2026-04-06T21:14:09.117Z"
+-
+  id: 1364820
+  category_id: 1
+  title: Is Player Crouching
+  content: "## Description\n\n<big>Returns True if a player is currently in a crouched state, whether initiated by player input or enforced by a Workshop action. Returns False if the player is standing, airborne, or incapacitated.</big>\n\n## Snippet\n\n```\nIs Player Crouching(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose crouch state will be evaluated."
+  slug: is-player-crouching
+  tags: Is Player Crouching
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2026-04-31T13:27:55.006Z"
+  updated_at: "2026-04-31T13:27:55.006Z"
+-
+  id: 1928374
+  category_id: 1
+  title: Healing Dealt This Life
+  content: "## Description\n\n<big>Returns the total amount of healing a player has applied to any target since their last spawn. Resets to 0 on each respawn. Includes all healing sources such as abilities, ultimates, and passive effects originating from the player.</big>\n\n## Snippet\n\n```\nHealing Dealt This Life(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose healing dealt this life will be returned."
+  slug: healing-dealt-this-life
+  tags: Healing Dealt This Life
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2026-04-19T05:44:38.229Z"
+  updated_at: "2026-04-08T17:31:14.774Z"
+-
+  id: 1673820
+  category_id: 1
+  title: Player Look Direction Horizontal
+  content: "## Description\n\n<big>Returns the horizontal component of a player's current facing direction as a signed angle in degrees relative to world north. Positive values indicate rightward facing; negative values indicate leftward. Useful for directional triggers and compass-style HUD elements.</big>\n\n## Snippet\n\n```\nPlayer Look Direction Horizontal(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose horizontal look angle will be returned."
+  slug: player-look-direction-horizontal
+  tags: Player Look Direction Horizontal
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2026-04-12T10:03:22.441Z"
+  updated_at: "2026-04-27T08:55:49.006Z"
+-
+  id: 1492031
+  category_id: 1
+  title: Players With Full Ultimate
+  content: "## Description\n\n<big>Returns an array of all players on a specified team whose ultimate charge is currently at 100. Useful for triggering alerts, applying pressure mechanics, or building team-coordination logic around ultimate readiness.</big>\n\n## Snippet\n\n```\nPlayers With Full Ultimate(Team(All Teams));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team to check for fully charged ultimates."
+  slug: players-with-fullultimate
+  tags: Players With Full Ultimate
+  group_id: Sq6hOcIn3kdB72a-GEwvRp
+  created_at: "2026-04-22T19:11:05.882Z"
+  updated_at: "2026-04-22T19:11:05.882Z"
+-
+  id: 1839047
+  category_id: 1
+  title: Is Line Of Sight Clear
+  content: "## Description\n\n<big>Returns True if an unobstructed line of sight exists between two world positions, with no geometry intersecting the ray between them. Optionally ignores player collision. Equivalent to the existing Is In Line Of Sight value but accepts raw vectors instead of players.</big>\n\n## Snippet\n\n```\nIs Line Of Sight Clear(Position Of(Event Player), Position Of(Attacker), False);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Start_==, ==_End_==, ==_Ignore Players_==\n\n> ==**Start**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The origin of the line of sight check.\n\n> ==**End**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The target of the line of sight check.\n\n> ==**Ignore Players**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **False**_\n> If True, player collision volumes are excluded from the check."
+  slug: is-line-of-sight-clear
+  tags: Is Line Of Sight Clear
+  group_id: Fw8lPqAm9vtC03b-HRjnKe
+  created_at: "2026-04-05T14:29:33.006Z"
+  updated_at: "2026-04-04T20:17:48.441Z"
+-
+  id: 1102938
+  category_id: 1
+  title: Deaths This Round
+  content: "## Description\n\n<big>Returns the number of times a player has been eliminated during the current round. Resets at the start of each new round. Useful for per-round death limits, respawn gating, or tracking round-level performance independently of match totals.</big>\n\n## Snippet\n\n```\nDeaths This Round(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose death count for the current round will be returned."
+  slug: deaths-this-round
+  tags: Deaths This Round
+  group_id: Zt0eRwCh5bnJ19k-FUdlVo
+  created_at: "2026-04-29T06:58:17.774Z"
+  updated_at: "2026-04-29T06:58:17.774Z"
+-
+  id: 1758302
+  category_id: 1
+  title: Velocity Magnitude Of Player
+  content: "## Description\n\n<big>Returns the scalar speed of a player in meters per second, regardless of direction. Equivalent to the length of the player's velocity vector. Useful for speed-threshold triggers, momentum displays, and physics-based scoring.</big>\n\n## Snippet\n\n```\nVelocity Magnitude Of Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose speed will be returned."
+  slug: velocity-magnitude-of-player
+  tags: Velocity Magnitude Of Player
+  group_id: Yo1cIqDn6xeM93k-LHfwBt
+  created_at: "2026-04-14T11:42:09.003Z"
+  updated_at: "2026-04-14T11:42:09.003Z"
+-
+  id: 1983740
+  category_id: 1
+  title: Is Player Using Ability
+  content: "## Description\n\n<big>Returns True if a player is currently in the active animation or duration window of a specified ability. Returns False if the ability is idle, on cooldown, or between casts. Useful for detecting mid-ability states and creating reactive interruption logic.</big>\n\n## Snippet\n\n```\nIs Player Using Ability(Event Player, Button(Ability 2));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==, ==_Button_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability state will be evaluated.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot to check for active use."
+  slug: is-playerusing-ability
+  tags: Is Player Using Ability
+  group_id: Af7nBqWx2ycL04m-KRjvOs
+  created_at: "2026-04-25T09:17:52.882Z"
+  updated_at: "2026-04-01T15:03:27.006Z"
+-
+  id: 1647193
+  category_id: 1
+  title: Centroid Of Players
+  content: "## Description\n\n<big>Returns the average world position of all players in a given array or team, calculated as the arithmetic mean of their individual positions. Useful for centering camera rigs, spawning group effects, or evaluating team clustering.</big>\n\n## Snippet\n\n```\nCentroid Of Players(All Players(All Teams));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Vector</span>_\n**Parameters**: ==_Players_==\n\n> ==**Players**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The array of players whose positions will be averaged."
+  slug: centroid-of-players
+  tags: Centroid Of Players
+  group_id: Pv7mChDk2stN48r-WBouEj
+  created_at: "2026-04-31T16:28:04.117Z"
+  updated_at: "2026-04-03T08:49:31.882Z"
+-
+  id: 1374920
+  category_id: 1
+  title: Has Status Been Applied This Life
+  content: "## Description\n\n<big>Returns True if a player has received a specific status effect at any point since their last spawn, even if the effect has since expired. Useful for tracking whether a debuff was ever applied during a life without needing to monitor it in real time.</big>\n\n## Snippet\n\n```\nHas Status Been Applied This Life(Event Player, Hacked);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==, ==_Status_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player to check.\n\n> ==**Status**==\n> _Type: **[Status](/wiki/articles/status)**, Default: **Hacked**_\n> The status effect to check for."
+  slug: has-status-been-applied-this-life
+  tags: Has Status Been Applied This Life
+  group_id: Lw0sFnVt6uxB13p-HYdkRq
+  created_at: "2026-04-18T22:04:17.339Z"
+  updated_at: "2026-04-18T22:04:17.339Z"
+-
+  id: 1820461
+  category_id: 1
+  title: Players Not On Objective
+  content: "## Description\n\n<big>Returns an array of players on a specified team who are currently outside the active objective zone. Complements the existing Players On Objective value and is useful for detecting off-objective players, issuing warnings, or applying pressure mechanics.</big>\n\n## Snippet\n\n```\nPlayers Not On Objective(Team(Team 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team to filter results by."
+  slug: players-not-on-objective
+  tags: Players Not On Objective
+  group_id: Ej5tKpAo8wdM26n-SCivBl
+  created_at: "2026-04-16T10:52:39.006Z"
+  updated_at: "2026-04-04T13:28:44.882Z"
+-
+  id: 1593820
+  category_id: 1
+  title: Damage Blocked This Life
+  content: "## Description\n\n<big>Returns the total amount of damage a player has blocked or mitigated via barriers, shields, or damage reduction effects since their last spawn. Does not include damage simply not received due to missing. Resets on each respawn.</big>\n\n## Snippet\n\n```\nDamage Blocked This Life(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose blocked damage total will be returned."
+  slug: damage-blocked-this-life
+  tags: Damage Blocked This Life
+  group_id: Th8uOcRm4bnJ70w-FAelNp
+  created_at: "2026-04-28T08:37:11.441Z"
+  updated_at: "2026-04-28T08:37:11.441Z"
+-
+  id: 1748302
+  category_id: 1
+  title: Player Input Magnitude
+  content: "## Description\n\n<big>Returns a value from 0 to 1 representing the magnitude of a player's current movement input. A value of 0 indicates no movement input; 1 indicates full input in any direction. Useful for detecting idle players or distinguishing walking from full-speed movement.</big>\n\n## Snippet\n\n```\nPlayer Input Magnitude(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose movement input magnitude will be returned."
+  slug: player-input-magnitude
+  tags: Player Input Magnitude
+  group_id: Gn2vJwBp5rkC39s-DQhtMa
+  created_at: "2026-04-04T14:19:22.774Z"
+  updated_at: "2026-04-04T14:19:22.774Z"
+-
+  id: 1294830
+  category_id: 1
+  title: Is Match In Overtime
+  content: "## Description\n\n<big>Returns True if the match is currently in an overtime state. Equivalent to checking if Match Time is 0 and the match has not yet ended, but provided as a direct boolean for convenience in conditions and HUD logic.</big>\n\n## Snippet\n\n```\nIs Match In Overtime;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: _None_"
+  slug: is-match-in-overtime
+  tags: Is Match In Overtime
+  group_id: Wr6oNkTs1aeH84cUPjbFv
+  created_at: "2026-04-04T07:44:31.117Z"
+  updated_at: "2026-04-22T16:58:07.339Z"
+-
+  id: 1839201
+  category_id: 1
+  title: Total Damage Dealt This Match
+  content: "## Description\n\n<big>Returns the cumulative damage a player has dealt to all targets across the entire match, including all lives. Unlike Damage Dealt This Life, this value persists through deaths and respawns and only resets when a new match begins.</big>\n\n## Snippet\n\n```\nTotal Damage Dealt This Match(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose match-total damage dealt will be returned."
+  slug: total-damage-dealt-this-match
+  tags: Total Damage Dealt This Match
+  group_id: Bc9pEmWu3qlK57d-ZNoxCh
+  created_at: "2026-04-02T20:03:49.882Z"
+  updated_at: "2026-04-13T09:14:22.006Z"
+-
+  id: 1473820
+  category_id: 1
+  title: Players Alive On Team
+  content: "## Description\n\n<big>Returns an array of all players on a specified team who are currently alive. Excludes players who are dead and awaiting respawn. A convenience value equivalent to filtering All Players by team and alive state simultaneously.</big>\n\n## Snippet\n\n```\nPlayers Alive On Team(Team(Team 2));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team whose living players will be returned."
+  slug: players-alive-on-team
+  tags: Players Alive On Team
+  group_id: Ns4hFvCj7wtB20r-EKdmOu
+  created_at: "2026-04-06T11:27:14.441Z"
+  updated_at: "2026-04-06T11:27:14.441Z"
+-
+  id: 1928473
+  category_id: 1
+  title: Current Hero Role
+  content: "## Description\n\n<big>Returns the role of the hero currently played by a specified player as a string value. Possible return values are Tank, Damage, and Support. Useful for role-based rule filtering without enumerating individual heroes.</big>\n\n## Snippet\n\n```\nCurrent Hero Role(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">String</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose hero role will be returned."
+  slug: current-hero-role
+  tags: Current Hero Role
+  group_id: Yo1cIqDn6xeM93k-LHfwBt
+  created_at: "2026-04-24T15:58:03.006Z"
+  updated_at: "2026-04-05T12:33:41.774Z"
+-
+  id: 1638291
+  category_id: 1
+  title: Is Button Held
+  content: "## Description\n\n<big>Returns True if a player is currently holding a specified input button at the moment of evaluation. Differs from Is Button Pressed in that it reflects a sustained hold state rather than the initial press frame. Useful for charge mechanics or hold-to-activate triggers.</big>\n\n## Snippet\n\n```\nIs Button Held(Event Player, Button(Crouch));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==, ==_Button_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose input state will be evaluated.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Primary Fire**_\n> The button to check for a sustained hold."
+  slug: is-button-held
+  tags: Is Button Held
+  group_id: Af7nBqWx2ycL04m-KRjvOs
+  created_at: "2026-04-17T07:09:55.339Z"
+  updated_at: "2026-04-14T18:42:07.117Z"
+-
+  id: 1503847
+  category_id: 1
+  title: Spawn Time Remaining
+  content: "## Description\n\n<big>Returns the number of seconds until a dead player respawns. Returns 0 if the player is alive or in a mode with instant respawning. Useful for displaying respawn countdowns, gating events on imminent respawns, or calculating team availability windows.</big>\n\n## Snippet\n\n```\nSpawn Time Remaining(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose remaining respawn time will be returned."
+  slug: spawn-time-remaining
+  tags: Spawn Time Remaining
+  group_id: Pv7mChDk2stN48r-WBouEj
+  created_at: "2026-04-19T20:41:03.882Z"
+  updated_at: "2026-04-19T20:41:03.882Z"
+-
+  id: 1748920
+  category_id: 1
+  title: Players Targeting Player
+  content: "## Description\n\n<big>Returns an array of all players who are currently aiming at a specified player, determined by crosshair proximity within a configurable tolerance angle. Useful for focus-fire detection, aggro tracking, or threat-assessment systems.</big>\n\n## Snippet\n\n```\nPlayers Targeting Player(Event Player, 15);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Player_==, ==_Tolerance Angle_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player being targeted.\n\n> ==**Tolerance Angle**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The maximum angle in degrees between a potential targeter's aim direction and the player for the targeter to be included in the result."
+  slug: players-targeting-player
+  tags: Players Targeting Player
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2026-04-08T06:22:17.006Z"
+  updated_at: "2026-04-30T14:11:38.441Z"
+-
+  id: 1293047
+  category_id: 1
+  title: Is Player Looking At Position
+  content: "## Description\n\n<big>Returns True if a player's current aim direction falls within a specified angular tolerance of a given world position. A convenience wrapper around crosshair and direction math, useful for gaze-detection triggers and interactive world elements.</big>\n\n## Snippet\n\n```\nIs Player Looking At Position(Event Player, Vector(0, 5, 0), 10);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==, ==_Position_==, ==_Tolerance Angle_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose aim direction will be evaluated.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position to check against the player's aim.\n\n> ==**Tolerance Angle**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The maximum angle in degrees between the player's aim and the position for the value to return True."
+  slug: is-player-looking-at-position
+  tags: Is Player Looking At Position
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2026-04-02T17:34:09.774Z"
+  updated_at: "2026-04-21T10:58:22.003Z"
+-
+  id: 1839740
+  category_id: 1
+  title: Objective Capture Percent
+  content: "## Description\n\n<big>Returns the current capture progress of the active objective as a value from 0 to 100. Works on assault, hybrid, and control map objectives. Returns 0 if no capturable objective is currently active. Useful for progress bars and threshold-based rule triggers.</big>\n\n## Snippet\n\n```\nObjective Capture Percent;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: _None_"
+  slug: objective-capture-percent
+  tags: Objective Capture Percent
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-04-27T09:03:44.117Z"
+  updated_at: "2026-04-27T09:03:44.117Z"
+-
+  id: 1504829
+  category_id: 1
+  title: Knockback Received This Life
+  content: "## Description\n\n<big>Returns the cumulative magnitude of all knockback impulses a player has received since their last spawn. Each knockback event contributes its velocity magnitude to the total. Resets on respawn. Useful for tracking disruption, stagger scoring, or environmental hazard interaction.</big>\n\n## Snippet\n\n```\nKnockback Received This Life(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose accumulated knockback magnitude will be returned."
+  slug: knockback-received-this-life
+  tags: Knockback Received This Life
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2026-04-21T12:47:39.339Z"
+  updated_at: "2026-04-29T07:16:51.882Z"
+-
+  id: 1738492
+  category_id: 1
+  title: Team Alive Count
+  content: "## Description\n\n<big>Returns the number of currently living players on a specified team. A convenience value equivalent to counting the result of Players Alive On Team, provided for use in compact expressions and condition comparisons.</big>\n\n## Snippet\n\n```\nTeam Alive Count(Team(Team 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team whose living player count will be returned."
+  slug: team-alive-count
+  tags: Team Alive Count
+  group_id: Sq6hOcIn3kdB72a-GEwvRp
+  created_at: "2026-04-18T08:14:27.006Z"
+  updated_at: "2026-04-18T08:14:27.006Z"
+-
+  id: 1920384
+  category_id: 1
+  title: Is Player Sprinting
+  content: "## Description\n\n<big>Returns True if a player is currently moving at their maximum base movement speed with no speed-reducing effects active. Does not distinguish between heroes with passive sprint and those without. Returns False during crouching, airborne states, or ability animations that suppress movement.</big>\n\n## Snippet\n\n```\nIs Player Sprinting(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose sprint state will be evaluated."
+  slug: is-player-sprinting
+  tags: Is Player Sprinting
+  group_id: Fw8lPqAm9vtC03b-HRjnKe
+  created_at: "2026-04-03T21:57:44.774Z"
+  updated_at: "2026-04-03T21:57:44.774Z"
+-
+  id: 1648203
+  category_id: 1
+  title: Time Player Has Been Dead
+  content: "## Description\n\n<big>Returns the number of seconds a player has been in a dead state since their most recent elimination. Returns 0 if the player is currently alive. Useful for respawn sequencing, ghost-mode timing, or dead-player event triggers.</big>\n\n## Snippet\n\n```\nTime Player Has Been Dead(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose time spent dead will be returned."
+  slug: time-player-has-been-dead
+  tags: Time Player Has Been Dead
+  group_id: Zt0eRwCh5bnJ19k-FUdlVo
+  created_at: "2026-04-14T16:03:52.117Z"
+  updated_at: "2026-04-17T11:29:38.006Z"
+-
+  id: 1503920
+  category_id: 1
+  title: Players Within Angle Of Player
+  content: "## Description\n\n<big>Returns an array of players who fall within a specified angular cone in front of a reference player. Only players within the cone and optionally within a maximum range are included. Useful for frontal AOE targeting, vision-cone detection, and aimed ability previews.</big>\n\n## Snippet\n\n```\nPlayers Within Angle Of Player(Event Player, All Teams, 45, 15);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Player_==, ==_Team_==, ==_Angle_==, ==_Max Range_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The reference player whose facing direction defines the cone.\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team filter applied to detected players.\n\n> ==**Angle**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **45**_\n> The half-angle of the detection cone in degrees.\n\n> ==**Max Range**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The maximum distance in meters a player can be from the reference player to be included."
+  slug: players-within-angle-of-player
+  tags: Players Within Angle Of Player
+  group_id: Yo1cIqDn6xeM93k-LHfwBt
+  created_at: "2026-04-11T04:48:29.441Z"
+  updated_at: "2026-04-06T09:37:14.882Z"
+-
+  id: 1839582
+  category_id: 1
+  title: Last Player Healed By
+  content: "## Description\n\n<big>Returns the player who most recently applied healing to a specified player. Returns Null if the player has not received healing since the match began. Useful for tracking heal sources, attribution chains, or assist-style scoring systems.</big>\n\n## Snippet\n\n```\nLast Player Healed By(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Player</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose most recent healer will be returned."
+  slug: last-player-healed-by
+  tags: Last Player Healed By
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2026-04-05T13:22:41.006Z"
+  updated_at: "2026-04-05T13:22:41.006Z"
+-
+  id: 1274038
+  category_id: 1
+  title: Ground Position Of Player
+  content: "## Description\n\n<big>Returns the world position directly below a player on the nearest ground surface, calculated by a downward raycast from the player's feet. Useful for spawning ground-level effects, snapping decals to terrain, or evaluating floor height beneath an airborne player.</big>\n\n## Snippet\n\n```\nGround Position Of Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Vector</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player beneath whom the ground position will be calculated."
+  slug: ground-position-of-player
+  tags: Ground Position Of Player
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2026-04-28T10:11:55.774Z"
+  updated_at: "2026-04-02T17:44:08.003Z"
+-
+  id: 1920473
+  category_id: 1
+  title: Is Payload Moving
+  content: "## Description\n\n<big>Returns True if the payload is currently advancing, including during contested movement. Returns False if the payload is stopped, blocking, or rolling back. Only meaningful on payload and hybrid maps; returns False on all other map types.</big>\n\n## Snippet\n\n```\nIs Payload Moving;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: _None_"
+  slug: is-payload-moving
+  tags: Is Payload Moving
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2026-04-01T19:37:22.882Z"
+  updated_at: "2026-04-18T08:03:49.117Z"
+-
+  id: 1583291
+  category_id: 1
+  title: Closest Enemy To Player
+  content: "## Description\n\n<big>Returns the living enemy player nearest to a specified player at the time of evaluation. Equivalent to Closest Player To with an opposing team filter, provided as a convenience value for common targeting expressions.</big>\n\n## Snippet\n\n```\nClosest Enemy To Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Player</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The reference player from whose position the nearest enemy is calculated."
+  slug: closest-enemy-to-player
+  tags: Closest Enemy To Player
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-04-10T07:58:33.441Z"
+  updated_at: "2026-04-10T07:58:33.441Z"
+-
+  id: 1748193
+  category_id: 1
+  title: Shield Health Of Player
+  content: "## Description\n\n<big>Returns the current shield health of a player as a flat value. Shield health is the regenerating blue portion of the health bar present on certain heroes. Returns 0 for heroes with no shield health component.</big>\n\n## Snippet\n\n```\nShield Health Of Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose current shield health will be returned."
+  slug: shield-health-of-player
+  tags: Shield Health Of Player
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2026-04-12T15:14:07.006Z"
+  updated_at: "2026-04-22T10:07:33.774Z"
+-
+  id: 1374820
+  category_id: 1
+  title: Eliminations This Life
+  content: "## Description\n\n<big>Returns the number of eliminations a player has secured since their last spawn. Resets to 0 on each respawn. Useful for per-life killstreak tracking, bonus triggers, or life-based scoring multipliers.</big>\n\n## Snippet\n\n```\nEliminations This Life(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose elimination count for the current life will be returned."
+  slug: eliminations-this-life
+  tags: Eliminations This Life
+  group_id: Lw0sFnVt6uxB13p-HYdkRq
+  created_at: "2026-04-19T11:32:44.117Z"
+  updated_at: "2026-04-19T11:32:44.117Z"
+-
+  id: 1920582
+  category_id: 1
+  title: Player Armor Health
+  content: "## Description\n\n<big>Returns the current armor health of a player as a flat value. Armor health is the yellow portion of the health bar that reduces incoming damage per hit. Returns 0 for heroes with no armor health component.</big>\n\n## Snippet\n\n```\nPlayer Armor Health(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose current armor health will be returned."
+  slug: player-armor-health
+  tags: Player Armor Health
+  group_id: Sq6hOcIn3kdB72a-GEwvRp
+  created_at: "2026-04-04T18:27:51.882Z"
+  updated_at: "2026-04-04T18:27:51.882Z"
+-
+  id: 1293582
+  category_id: 1
+  title: Hero Pick Rate
+  content: "## Description\n\n<big>Returns the percentage of players currently playing a specified hero across all or a specified team, as a value from 0 to 100. Useful for dynamic game mode balancing, hero-diversity bonuses, or live pick tracking displays.</big>\n\n## Snippet\n\n```\nHero Pick Rate(Hero(Tracer), All Teams);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Hero_==, ==_Team_==\n\n> ==**Hero**==\n> _Type: **[Hero](/wiki/articles/hero)**, Default: **Hero(Reaper)**_\n> The hero whose pick rate will be evaluated.\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team scope within which the pick rate is calculated."
+  slug: hero-pick-rate
+  tags: Hero Pick Rate
+  group_id: Fw8lPqAm9vtC03b-HRjnKe
+  created_at: "2026-04-15T06:03:17.339Z"
+  updated_at: "2026-04-04T14:52:29.006Z"
+-
+  id: 1839193
+  category_id: 1
+  title: Is Player Behind Player
+  content: "## Description\n\n<big>Returns True if a second player is currently located within the rear hemisphere of a reference player's facing direction. Equivalent to checking if the angle between the reference player's forward vector and the direction to the second player exceeds 90 degrees.</big>\n\n## Snippet\n\n```\nIs Player Behind Player(Event Player, Attacker);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Player_==, ==_Other Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The reference player whose facing direction is used.\n\n> ==**Other Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose position is evaluated relative to the reference."
+  slug: is-player-behind-player
+  tags: Is Player Behind Player
+  group_id: Zt0eRwCh5bnJ19k-FUdlVo
+  created_at: "2026-04-23T13:41:07.117Z"
+  updated_at: "2026-04-23T13:41:07.117Z"
+-
+  id: 1638920
+  category_id: 1
+  title: Payload Progress Percent
+  content: "## Description\n\n<big>Returns the overall progress of the payload along its track as a value from 0 to 100. Accounts for checkpoints and multi-phase routes by returning progress within the current segment. Returns 0 on non-payload maps.</big>\n\n## Snippet\n\n```\nPayload Progress Percent;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: _None_"
+  slug: payload-progress-percent
+  tags: Payload Progress Percent
+  group_id: Yo1cIqDn6xeM93k-LHfwBt
+  created_at: "2026-04-30T10:22:19.882Z"
+  updated_at: "2026-04-11T07:38:44.441Z"
+-
+  id: 1748582
+  category_id: 1
+  title: Random Living Player
+  content: "## Description\n\n<big>Returns a single randomly selected living player from the specified team at the moment of evaluation. Re-evaluates to a new random player each time the value is computed unless stored in a variable. Returns Null if no living players exist on the team.</big>\n\n## Snippet\n\n```\nRandom Living Player(All Teams);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Player</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team from which a random living player will be selected."
+  slug: random-living-player
+  tags: Random Living Player
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2026-04-24T09:17:33.006Z"
+  updated_at: "2026-04-18T15:03:57.774Z"
+-
+  id: 1503291
+  category_id: 1
+  title: Time Since Last Death
+  content: "## Description\n\n<big>Returns the number of seconds since a player was last eliminated. If the player has not died since the match began, returns a large value. Resets when the player is next eliminated. Useful for time-alive bonuses, comeback mechanics, and streak tracking.</big>\n\n## Snippet\n\n```\nTime Since Last Death(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose time since last death will be returned."
+  slug: time-since-last-death
+  tags: Time Since Last Death
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2026-04-08T14:52:07.003Z"
+  updated_at: "2026-04-08T14:52:07.003Z"
+-
+  id: 1839471
+  category_id: 1
+  title: Active Status Effects Of Player
+  content: "## Description\n\n<big>Returns an array of all status effects currently applied to a player, such as Hacked, Frozen, Asleep, or Stunned. The array is empty if no status effects are active. Useful for status-display HUDs, stacking-debuff logic, or cleanse mechanics.</big>\n\n## Snippet\n\n```\nActive Status Effects Of Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose active status effects will be returned."
+  slug: active-status-effects-of-player
+  tags: Active Status Effects Of Player
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2026-04-05T08:29:41.117Z"
+  updated_at: "2026-04-16T12:14:22.882Z"
+-
+  id: 1274920
+  category_id: 1
+  title: Projectile Travel Time
+  content: "## Description\n\n<big>Returns the estimated time in seconds for a projectile fired by a player to travel to a specified world position, based on the hero's current projectile speed. Useful for predictive aim assistance tools, lead-calculation displays, or delay-triggered effects.</big>\n\n## Snippet\n\n```\nProjectile Travel Time(Event Player, Position Of(Attacker));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==, ==_Target Position_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose projectile speed is used for the calculation.\n\n> ==**Target Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position to calculate travel time toward."
+  slug: projectile-travel-time
+  tags: Projectile Travel Time
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-04-22T17:03:55.006Z"
+  updated_at: "2026-04-22T17:03:55.006Z"
+-
+  id: 1938472
+  category_id: 1
+  title: Deployables Owned By Player
+  content: "## Description\n\n<big>Returns an array of all active deployables currently belonging to a specified player, including turrets, traps, barriers, and any other persistent hero-placed objects. The array is empty if the player has no active deployables. Useful for iterating over a player's placed objects or evaluating deployable counts.</big>\n\n## Snippet\n\n```\nDeployables Owned By Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose active deployables will be returned."
+  slug: deployables-owned-by-player
+  tags: Deployables Owned By Player
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2026-04-11T09:14:27.441Z"
+  updated_at: "2026-04-11T09:14:27.441Z"
+-
+  id: 1748291
+  category_id: 1
+  title: Deployable Count Of Player
+  content: "## Description\n\n<big>Returns the number of deployables a specified player currently has active in the world. A convenience value equivalent to counting the result of Deployables Owned By Player, provided for compact condition expressions and HUD displays.</big>\n\n## Snippet\n\n```\nDeployable Count Of Player(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose deployable count will be returned."
+  slug: deployable-count-of-player
+  tags: Deployable Count Of Player
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2026-04-04T14:38:52.006Z"
+  updated_at: "2026-04-19T10:22:37.441Z"
+-
+  id: 1503849
+  category_id: 1
+  title: Position Of Deployable
+  content: "## Description\n\n<big>Returns the current world position of a specified deployable object. Supports reevaluation for deployables that can move or be repositioned during their lifetime. Returns Null if the deployable no longer exists.</big>\n\n## Snippet\n\n```\nPosition Of Deployable(First Of(Deployables Owned By Player(Event Player)));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Vector</span>_\n**Parameters**: ==_Deployable_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose world position will be returned."
+  slug: position-of-deployable
+  tags: Position Of Deployable
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2026-04-28T07:52:14.882Z"
+  updated_at: "2026-04-13T16:04:39.117Z"
+-
+  id: 1839203
+  category_id: 1
+  title: Deployable Health Percent
+  content: "## Description\n\n<big>Returns the current health of a deployable as a percentage of its maximum health, from 0 to 100. Useful for triggering repair events, displaying deployable condition on a HUD, or evaluating when a deployable is near destruction.</big>\n\n## Snippet\n\n```\nDeployable Health Percent(First Of(Deployables Owned By Player(Event Player)));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Deployable_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose health percentage will be returned."
+  slug: deployable-health-percent
+  tags: Deployable Health Percent
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2026-04-14T11:33:07.006Z"
+  updated_at: "2026-04-14T11:33:07.006Z"
+-
+  id: 1274193
+  category_id: 1
+  title: Owner Of Deployable
+  content: "## Description\n\n<big>Returns the player who placed a specified deployable. Useful for attributing deployable interactions, damage dealt by turrets, or trap activations back to the owning player for scoring and rule-triggering purposes.</big>\n\n## Snippet\n\n```\nOwner Of Deployable(Last Created Deployable);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Player</span>_\n**Parameters**: ==_Deployable_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose owning player will be returned."
+  slug: owner-of-deployable
+  tags: Owner Of Deployable
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-04-05T16:49:22.339Z"
+  updated_at: "2026-04-25T09:38:14.882Z"
+-
+  id: 1920193
+  category_id: 1
+  title: Is Deployable Active
+  content: "## Description\n\n<big>Returns True if a specified deployable currently exists in the world and has not been destroyed or expired. Returns False if the deployable has been eliminated, timed out, or was never placed. Useful for guarding subsequent deployable value calls against Null references.</big>\n\n## Snippet\n\n```\nIs Deployable Active(Last Created Deployable);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Deployable_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose active state will be evaluated."
+  slug: is-deployable-active
+  tags: Is Deployable Active
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2026-04-19T08:21:33.117Z"
+  updated_at: "2026-04-01T14:57:48.006Z"
+-
+  id: 1638193
+  category_id: 1
+  title: Closest Deployable To Position
+  content: "## Description\n\n<big>Returns the deployable from a specified player's active deployables that is nearest to a given world position. Returns Null if the player has no active deployables. Useful for proximity-based deployable interaction, targeting, or effect anchoring.</big>\n\n## Snippet\n\n```\nClosest Deployable To Position(Event Player, Position Of(Event Player));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Deployable</span>_\n**Parameters**: ==_Player_==, ==_Position_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose deployables will be searched.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position from which proximity is measured."
+  slug: closest-deployable-to-position
+  tags: Closest Deployable To Position
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2026-04-05T17:03:11.774Z"
+  updated_at: "2026-04-05T17:03:11.774Z"
+-
+  id: 1374193
+  category_id: 1
+  title: Time Since Deployable Placed
+  content: "## Description\n\n<big>Returns the number of seconds since a specified deployable was placed in the world. Resets if the deployable is destroyed and replaced. Useful for time-based deployable mechanics, decay systems, or age-dependent behavior triggers.</big>\n\n## Snippet\n\n```\nTime Since Deployable Placed(Last Created Deployable);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Deployable_==\n\n> ==**Deployable**==\n> _Type: **[Deployable](/wiki/articles/deployable)**, Default: **Null**_\n> The deployable whose age in seconds will be returned."
+  slug: time-since-deployable-placed
+  tags: Time Since Deployable Placed
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2026-04-23T12:44:58.882Z"
+  updated_at: "2026-04-17T08:29:33.441Z"
+-
+  id: 1583193
+  category_id: 1
+  title: Deployables Within Radius
+  content: "## Description\n\n<big>Returns an array of all active deployables from any player belonging to a specified team within a given radius of a world position. Useful for area-denial detection, zone-control evaluation, or proximity-triggered deployable interactions.</big>\n\n## Snippet\n\n```\nDeployables Within Radius(Vector(0, 0, 0), 10, All Teams);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Position_==, ==_Radius_==, ==_Team_==\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The center of the search area.\n\n> ==**Radius**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The radius in meters within which deployables will be detected.\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **All Teams**_\n> The team filter applied to the search."
+  slug: deployables-within-radius
+  tags: Deployables Within Radius
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2026-04-29T20:17:44.117Z"
+  updated_at: "2026-04-06T11:52:19.882Z"
+-
+  id: 1748193
+  category_id: 1
+  title: Last Destroyed Deployable Owner
+  content: "## Description\n\n<big>Returns the player who owned the most recently destroyed deployable in the match. Updates each time any deployable is eliminated. Useful for triggering events on deployable destruction, attributing destruction credit, or building deployable-loss reaction rules.</big>\n\n## Snippet\n\n```\nLast Destroyed Deployable Owner;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Player</span>_\n**Parameters**: _None_"
+  slug: last-destroyed-deployable-owner
+  tags: Last Destroyed Deployable Owner
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2026-04-14T06:38:29.003Z"
+  updated_at: "2026-04-14T06:38:29.003Z"

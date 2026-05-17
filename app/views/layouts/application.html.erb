@@ -9,6 +9,8 @@
     <meta name="theme-color" content="#1f2326">
     <meta http-equiv=”content-language” content="en" />
 
+    <%= tag.meta name: "robots", content: "noindex" if yield(:noindex) == "true" %>
+
     <%= yield(:preload) if yield(:preload).present? %>
 
     <link rel="manifest" href="/manifest.json">

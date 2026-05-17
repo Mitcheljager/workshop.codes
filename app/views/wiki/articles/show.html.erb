@@ -1,6 +1,7 @@
 <% content_for :page_title, @article.title + " | Wiki" %>
 <% content_for :og_description, strip_tags(markdown(@article.content || "")).truncate(150).gsub("\n"," ") %>
 <% content_for :og_summary_small, "true" %>
+<% content_for :noindex, "true" if controller_path.include?("poison") %>
 
 <article class="article top-offset">
   <%= render "wiki/quick_navigation" %>

@@ -54,3 +54,4 @@ Disallow: /revisions/*/*
 Disallow: /raw-snippet/*
 Disallow: /reports/*
 Disallow: /raw-snippet/*
+Disallow: /p/*

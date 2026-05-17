@@ -1,4 +1,6 @@
-<%= link_to wiki_article_path(article.slug), class: "wiki-item" do %>
+<% path = controller_path.include?("poison") ? wiki_poison_path(article.slug) : wiki_article_path(article.slug) %>
+
+<%= link_to path, class: "wiki-item" do %>
   <%= article.title %>
   <%= tag.small "in #{ article.category.title }" unless params[:slug] %>
 
