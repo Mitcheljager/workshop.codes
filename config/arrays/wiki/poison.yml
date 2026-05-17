@@ -1089,3 +1089,521 @@
   group_id: Nc7sBjIy4okG61e-ZWuvRl
   created_at: "2026-04-14T06:38:29.003Z"
   updated_at: "2026-04-14T06:38:29.003Z"
+-
+  id: 1938573
+  category_id: 2
+  category_id: 0
+  title: Grant Hero Ability
+  content: "## Description\n\n<big>Assigns a specified hero's ability to a player's chosen ability slot, regardless of the player's current hero. The granted ability behaves as it would on its native hero, using that hero's default values unless overridden by other Workshop actions. Reverts when cleared with Remove Hero Ability.</big>\n\n## Snippet\n\n```\nGrant Hero Ability(Event Player, Hero(Tracer), Button(Ability 1), Button(Ability 2));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Hero_==, ==_Source Button_==, ==_Target Button_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will receive the granted ability.\n\n> ==**Hero**==\n> _Type: **[Hero](/wiki/articles/hero)**, Default: **Hero(Reaper)**_\n> The hero from whose kit the ability will be taken.\n\n> ==**Source Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot on the source hero to copy from.\n\n> ==**Target Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot on the player that will be replaced with the granted ability."
+  slug: grant-hero-ability
+  tags: Grant Hero Ability
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2024-05-07T09:14:27.441Z"
+  updated_at: "2025-03-11T11:22:14.882Z"
+-
+  id: 1748573
+  category_id: 2
+  category_id: 0
+  title: Remove Hero Ability
+  content: "## Description\n\n<big>Removes a previously granted ability from a player's ability slot, restoring the slot to the player's native hero ability. Has no effect if the slot has not been overridden by Grant Hero Ability. The player's hero and all other slots are unaffected.</big>\n\n## Snippet\n\n```\nRemove Hero Ability(Event Player, Button(Ability 2));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose granted ability will be removed.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot from which the granted ability will be cleared."
+  slug: remove-hero-ability
+  tags: Remove Hero Ability
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2024-05-07T09:15:44.006Z"
+  updated_at: "2024-05-07T09:15:44.006Z"
+-
+  id: 1503573
+  category_id: 2
+  category_id: 0
+  title: Swap Ability Slots
+  content: "## Description\n\n<big>Exchanges the abilities assigned to two specified button slots on a player, swapping their functions, cooldowns, and charge counts simultaneously. Both slots must belong to the same player. Useful for randomization mechanics, ability shuffle modes, or mirror-control effects.</big>\n\n## Snippet\n\n```\nSwap Ability Slots(Event Player, Button(Ability 1), Button(Ability 2));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button A_==, ==_Button B_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability slots will be swapped.\n\n> ==**Button A**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The first ability slot to swap.\n\n> ==**Button B**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 2**_\n> The second ability slot to swap."
+  slug: swap-ability-slots
+  tags: Swap Ability Slots
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2024-08-19T14:52:14.882Z"
+  updated_at: "2025-04-03T10:27:39.117Z"
+-
+  id: 1839573
+  category_id: 2
+  category_id: 0
+  title: Set Ability Cooldown Rate
+  content: "## Description\n\n<big>Applies a multiplier to the cooldown recovery rate of a specified ability on a player. A value of 2 causes the cooldown to deplete twice as fast, effectively halving the cooldown duration. A value of 0 freezes the cooldown entirely. Does not affect abilities currently charging or in use.</big>\n\n## Snippet\n\n```\nSet Ability Cooldown Rate(Event Player, Button(Ability 1), 2);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button_==, ==_Rate Multiplier_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability cooldown rate will be modified.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot whose cooldown rate will be scaled.\n\n> ==**Rate Multiplier**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to the cooldown recovery rate. Values above 1 speed up recovery; values below 1 slow it down."
+  slug: set-ability-cooldown-rate
+  tags: Set Ability Cooldown Rate
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2025-01-22T11:33:07.006Z"
+  updated_at: "2025-01-22T11:33:07.006Z"
+-
+  id: 1274573
+  category_id: 2
+  category_id: 0
+  title: Mirror Ability To All Slots
+  content: "## Description\n\n<big>Copies a specified ability from one of a player's slots and assigns it to all remaining ability slots simultaneously, replacing their existing abilities. The cooldown and charge count of the source ability are not duplicated; each slot receives a fresh independent instance. Useful for single-ability challenge modes or ability spam game modes.</big>\n\n## Snippet\n\n```\nMirror Ability To All Slots(Event Player, Button(Ability 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Source Button_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability will be mirrored across all slots.\n\n> ==**Source Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot to copy from. This slot itself is not overwritten."
+  slug: mirror-ability-to-all-slots
+  tags: Mirror Ability To All Slots
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2024-11-03T08:49:22.339Z"
+  updated_at: "2025-08-17T10:38:14.882Z"
+-
+  id: 1920573
+  category_id: 2
+  category_id: 0
+  title: Set Ability Cast Time
+  content: "## Description\n\n<big>Overrides the cast or activation time of a specified ability on a player, scaling how long the player must commit to the activation animation before the ability takes effect. A value of 0 makes the ability instant. Does not affect channel duration or cooldown.</big>\n\n## Snippet\n\n```\nSet Ability Cast Time(Event Player, Button(Secondary Fire), 0);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button_==, ==_Cast Time_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability cast time will be overridden.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot whose cast time will be modified.\n\n> ==**Cast Time**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The cast duration in seconds. Set to 0 for an instant activation."
+  slug: set-ability-cast-time
+  tags: Set Ability Cast Time
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2025-06-14T13:21:33.117Z"
+  updated_at: "2025-06-14T13:21:33.117Z"
+-
+  id: 1638573
+  category_id: 2
+  category_id: 0
+  title: Randomize Ability Slots
+  content: "## Description\n\n<big>Shuffles the abilities assigned to a player's ability slots into a random order, reassigning each slot a different ability from the same player's current kit. Cooldowns and charge counts are reset on reassignment. Useful for chaos modes, random loadout mechanics, or periodic ability rotation systems.</big>\n\n## Snippet\n\n```\nRandomize Ability Slots(Event Player);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability slots will be randomly shuffled."
+  slug: randomize-ability-slots
+  tags: Randomize Ability Slots
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2024-09-28T17:03:11.774Z"
+  updated_at: "2025-07-02T09:52:37.006Z"
+-
+  id: 1374573
+  category_id: 2
+  category_id: 0
+  title: Set Ability Range
+  content: "## Description\n\n<big>Overrides the effective range of a specified ability on a player by a multiplier, scaling how far the ability reaches, projects, or targets. A value of 2 doubles the range; a value of 0.5 halves it. Only affects abilities with a discrete range parameter such as targeted dashes, projectile abilities, and beam attacks.</big>\n\n## Snippet\n\n```\nSet Ability Range(Event Player, Button(Ability 1), 2);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button_==, ==_Range Multiplier_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability range will be overridden.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ability 1**_\n> The ability slot whose range will be scaled.\n\n> ==**Range Multiplier**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to the ability's base range. Clamped between 0.1 and 5."
+  slug: set-ability-range
+  tags: Set Ability Range
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2024-02-14T08:44:58.882Z"
+  updated_at: "2025-05-28T15:03:33.117Z"
+-
+  id: 1920673
+  category_id: 2
+  category_id: 0
+  title: Grant Ultimate From Hero
+  content: "## Description\n\n<big>Replaces a player's current ultimate ability with the ultimate of a specified hero for a set duration. The player's existing ultimate charge is preserved as a percentage and applied to the new ultimate. Reverts to the player's native ultimate when the duration expires or the player respawns.</big>\n\n## Snippet\n\n```\nGrant Ultimate From Hero(Event Player, Hero(Genji), 15);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Hero_==, ==_Duration_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will receive the temporary ultimate.\n\n> ==**Hero**==\n> _Type: **[Hero](/wiki/articles/hero)**, Default: **Hero(Reaper)**_\n> The hero whose ultimate ability will be granted.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> How long the replacement ultimate is available, in seconds. Use 0 for an indefinite replacement."
+  slug: grant-ultimate-from-hero
+  tags: Grant Ultimate From Hero
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2025-09-04T21:17:44.117Z"
+  updated_at: "2025-09-04T21:17:44.117Z"
+-
+  id: 1583673
+  category_id: 2
+  category_id: 0
+  title: Set Ability Area Of Effect
+  content: "## Description\n\n<big>Scales the area of effect radius of a specified ability on a player by a given multiplier. Affects splash damage zones, healing auras, crowd control radii, and any other ability with a circular or spherical area of effect. Does not affect single-target or linear abilities with no AOE component.</big>\n\n## Snippet\n\n```\nSet Ability Area Of Effect(Event Player, Button(Ultimate), 1.5);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Button_==, ==_AOE Multiplier_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose ability AOE will be scaled.\n\n> ==**Button**==\n> _Type: **[Button](/wiki/articles/button)**, Default: **Ultimate**_\n> The ability slot whose area of effect will be modified.\n\n> ==**AOE Multiplier**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The multiplier applied to the ability's base area of effect radius. Clamped between 0.1 and 5."
+  slug: set-ability-area-of-effect
+  tags: Set Ability Area Of Effect
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2024-12-30T06:38:29.003Z"
+  updated_at: "2025-10-21T12:14:22.882Z"
+-
+  id: 1748392
+  category_id: 2
+  category_id: 0
+  title: Create Minimap Icon
+  content: "## Description\n\n<big>Places a persistent icon on the minimap at a specified world position, visible to a defined audience. Supports reevaluation of position, allowing the icon to track a moving target in real time. Destroyed with Destroy Minimap Icon.</big>\n\n## Snippet\n\n```\nCreate Minimap Icon(All Players, Position Of(Event Player), Color(Yellow), Icon(Skull));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Position_==, ==_Color_==, ==_Icon_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players who will see the minimap icon.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position at which the icon will appear on the minimap. Supports reevaluation.\n\n> ==**Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **White**_\n> The color of the minimap icon.\n\n> ==**Icon**==\n> _Type: **[Icon](/wiki/articles/icon)**, Default: **Icon(Dot)**_\n> The icon shape to display on the minimap."
+  slug: create-minimap-icon
+  tags: Create Minimap Icon
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2024-09-03T14:38:52.006Z"
+  updated_at: "2025-05-11T08:27:19.117Z"
+-
+  id: 1503293
+  category_id: 2
+  category_id: 0
+  title: Create Tooltip
+  content: "## Description\n\n<big>Attaches a persistent floating tooltip to a world position or player that displays a custom string when a specified audience looks at it within a maximum range. The tooltip fades when the viewer looks away. Destroyed with Destroy Tooltip.</big>\n\n## Snippet\n\n```\nCreate Tooltip(All Players, Position Of(Event Player), Custom String(\"Press Interact to activate\"), 10);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Position_==, ==_Text_==, ==_Max Range_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players who can see the tooltip.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position the tooltip is anchored to. Supports reevaluation.\n\n> ==**Text**==\n> _Type: **[String](/wiki/articles/string)**, Default: **Custom String(\"\")**_\n> The text content displayed in the tooltip.\n\n> ==**Max Range**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The maximum distance in meters at which the tooltip becomes visible to a player looking at it."
+  slug: create-tooltip
+  tags: Create Tooltip
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2025-01-17T07:52:14.882Z"
+  updated_at: "2025-01-17T07:52:14.882Z"
+-
+  id: 1839293
+  category_id: 2
+  category_id: 0
+  title: Set HUD Element Color
+  content: "## Description\n\n<big>Changes the color of an existing HUD text or icon element created by a Workshop action, identified by its last created reference. Supports reevaluation. Useful for dynamically reflecting game state through color shifts without recreating the element.</big>\n\n## Snippet\n\n```\nSet HUD Element Color(Last Text ID, Color(Red));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_HUD Element_==, ==_Color_==\n\n> ==**HUD Element**==\n> _Type: **[HUD Element](/wiki/articles/hud-element)**, Default: **Last Text ID**_\n> The HUD element whose color will be changed.\n\n> ==**Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **White**_\n> The new color to apply to the element. Supports reevaluation."
+  slug: set-hud-element-color
+  tags: Set HUD Element Color
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2024-06-25T11:33:07.006Z"
+  updated_at: "2025-03-09T14:57:48.441Z"
+-
+  id: 1274293
+  category_id: 2
+  category_id: 0
+  title: Create Compass Marker
+  content: "## Description\n\n<big>Places a persistent directional marker on a player's compass or heading indicator pointing toward a specified world position. The marker updates in real time as the player moves. Useful for objective waypoints, teammate indicators, or custom navigation systems.</big>\n\n## Snippet\n\n```\nCreate Compass Marker(Event Player, Current Objective Position, Color(Yellow), Icon(Arrow: Up));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Position_==, ==_Color_==, ==_Icon_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The players who will see the compass marker.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position the marker points toward. Supports reevaluation.\n\n> ==**Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **White**_\n> The color of the compass marker.\n\n> ==**Icon**==\n> _Type: **[Icon](/wiki/articles/icon)**, Default: **Icon(Dot)**_\n> The icon displayed on the compass for this marker."
+  slug: create-compass-marker
+  tags: Create Compass Marker
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2024-11-14T08:49:22.339Z"
+  updated_at: "2025-07-30T10:38:14.882Z"
+-
+  id: 1920293
+  category_id: 2
+  category_id: 0
+  title: Flash HUD Element
+  content: "## Description\n\n<big>Causes an existing HUD text or icon element to flash at a specified rate for a set duration, alternating between visible and invisible states. Reverts to a steady visible state when the duration expires. Useful for drawing player attention to critical HUD information.</big>\n\n## Snippet\n\n```\nFlash HUD Element(Last Text ID, 2, 3);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_HUD Element_==, ==_Rate_==, ==_Duration_==\n\n> ==**HUD Element**==\n> _Type: **[HUD Element](/wiki/articles/hud-element)**, Default: **Last Text ID**_\n> The HUD element to flash.\n\n> ==**Rate**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The number of times per second the element toggles between visible and invisible.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **3**_\n> How long the flashing effect lasts, in seconds. Use 0 for indefinite flashing."
+  slug: flash-hud-element
+  tags: Flash HUD Element
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2025-04-02T13:21:33.117Z"
+  updated_at: "2025-04-02T13:21:33.117Z"
+-
+  id: 1638493
+  category_id: 2
+  category_id: 0
+  title: Create Damage Number
+  content: "## Description\n\n<big>Spawns a floating damage number at a world position that animates upward and fades out, mimicking the in-game damage number display. The value, color, and size are configurable. Useful for custom game modes that display modified or fictional damage values independently of actual damage events.</big>\n\n## Snippet\n\n```\nCreate Damage Number(All Players, Position Of(Event Player), 250, Color(Red), 1.5);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Position_==, ==_Value_==, ==_Color_==, ==_Scale_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players who will see the damage number.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position at which the number spawns.\n\n> ==**Value**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The numeric value displayed.\n\n> ==**Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **White**_\n> The color of the damage number text.\n\n> ==**Scale**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The size multiplier applied to the number. 1 is the default in-game size."
+  slug: create-damage-number
+  tags: Create Damage Number
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2024-07-18T16:03:11.774Z"
+  updated_at: "2025-06-24T09:52:37.006Z"
+-
+  id: 1374293
+  category_id: 2
+  category_id: 0
+  title: Set HUD Element Visibility
+  content: "## Description\n\n<big>Shows or hides an existing HUD element for all players currently able to see it, without destroying it. Hidden elements retain their sort order and configuration and can be reshown at any time. Useful for toggling context-sensitive UI panels during different game phase states.</big>\n\n## Snippet\n\n```\nSet HUD Element Visibility(Last Text ID, False);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_HUD Element_==, ==_Visible_==\n\n> ==**HUD Element**==\n> _Type: **[HUD Element](/wiki/articles/hud-element)**, Default: **Last Text ID**_\n> The HUD element to show or hide.\n\n> ==**Visible**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If False, the element is hidden from all viewers without being destroyed."
+  slug: set-hud-element-visibility
+  tags: Set HUD Element Visibility
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2024-03-29T08:44:58.882Z"
+  updated_at: "2025-10-07T15:03:33.117Z"
+-
+  id: 1920493
+  category_id: 2
+  category_id: 0
+  title: Create Crosshair Overlay
+  content: "## Description\n\n<big>Renders a custom crosshair shape over a player's default crosshair, drawn in a specified color and scale. The overlay persists until destroyed with Destroy Crosshair Overlay. Useful for game modes that assign roles or states communicated through crosshair appearance.</big>\n\n## Snippet\n\n```\nCreate Crosshair Overlay(Event Player, Icon(Circle), Color(Red), 1.5);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Shape_==, ==_Color_==, ==_Scale_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose crosshair will have the overlay applied.\n\n> ==**Shape**==\n> _Type: **[Icon](/wiki/articles/icon)**, Default: **Icon(Circle)**_\n> The icon shape to render as the crosshair overlay.\n\n> ==**Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **White**_\n> The color of the crosshair overlay.\n\n> ==**Scale**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The size multiplier applied to the overlay shape relative to the default crosshair size."
+  slug: create-crosshair-overlay
+  tags: Create Crosshair Overlay
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2025-08-14T21:17:44.117Z"
+  updated_at: "2025-08-14T21:17:44.117Z"
+-
+  id: 1583493
+  category_id: 2
+  category_id: 0
+  title: Set Scoreboard Row
+  content: "## Description\n\n<big>Writes a custom label and value pair into a specified row of the Workshop scoreboard panel, overriding the default stat displayed in that position. Supports reevaluation of the value field. Useful for replacing default scoreboard columns with game-mode-specific metrics.</big>\n\n## Snippet\n\n```\nSet Scoreboard Row(Event Player, 0, Custom String(\"Score\"), Global.PlayerScore[Index Of Array Value(All Players, Event Player)]);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Row Index_==, ==_Label_==, ==_Value_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose scoreboard row will be customized.\n\n> ==**Row Index**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The zero-based index of the scoreboard column to override.\n\n> ==**Label**==\n> _Type: **[String](/wiki/articles/string)**, Default: **Custom String(\"\")**_\n> The column header label displayed for this row entry.\n\n> ==**Value**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The numeric value displayed in the cell. Supports reevaluation."
+  slug: set-scoreboard-row
+  tags: Set Scoreboard Row
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2024-12-22T06:38:29.003Z"
+  updated_at: "2025-09-19T12:14:22.882Z"
+-
+  id: 1938674
+  category_id: 2
+  category_id: 2
+  title: Array Sum
+  content: "## Description\n\n<big>Returns the sum of all numeric values in a specified array. Non-numeric elements are ignored. Returns 0 for an empty array. Useful for totaling scores, accumulated stats, or any array of numeric Workshop values without requiring a manual loop.</big>\n\n## Snippet\n\n```\nArray Sum(Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array of numeric values to sum."
+  slug: array-sum
+  tags: Array Sum
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2024-03-18T09:14:27.441Z"
+  updated_at: "2024-03-18T09:14:27.441Z"
+-
+  id: 1748674
+  category_id: 2
+  category_id: 2
+  title: Array Average
+  content: "## Description\n\n<big>Returns the arithmetic mean of all numeric values in a specified array. Non-numeric elements are ignored in both the sum and the count. Returns 0 for an empty array. Useful for evaluating team averages, balancing scores, or smoothing sampled data over time.</big>\n\n## Snippet\n\n```\nArray Average(Global.HealthSamples);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array of numeric values to average."
+  slug: array-average
+  tags: Array Average
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2024-07-22T14:38:52.006Z"
+  updated_at: "2025-02-14T10:22:37.441Z"
+-
+  id: 1503674
+  category_id: 2
+  category_id: 2
+  title: Array Max
+  content: "## Description\n\n<big>Returns the largest numeric value in a specified array. Non-numeric elements are ignored. Returns 0 for an empty array. Useful for leaderboard logic, identifying peak values, or selecting the highest stat among a group of players.</big>\n\n## Snippet\n\n```\nArray Max(Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array from which the maximum value will be returned."
+  slug: array-max
+  tags: Array Max
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2024-09-11T07:52:14.882Z"
+  updated_at: "2024-09-11T07:52:14.882Z"
+-
+  id: 1839674
+  category_id: 2
+  category_id: 2
+  title: Array Min
+  content: "## Description\n\n<big>Returns the smallest numeric value in a specified array. Non-numeric elements are ignored. Returns 0 for an empty array. Useful for identifying the lowest score, the least healthy player in a sampled set, or the minimum value in a dynamically populated dataset.</big>\n\n## Snippet\n\n```\nArray Min(Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array from which the minimum value will be returned."
+  slug: array-min
+  tags: Array Min
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2024-09-11T07:53:29.006Z"
+  updated_at: "2024-09-11T07:53:29.006Z"
+-
+  id: 1274674
+  category_id: 2
+  category_id: 2
+  title: Array Contains Duplicates
+  content: "## Description\n\n<big>Returns True if a specified array contains any two elements that are equal in value. Returns False if all elements are unique or the array has fewer than two elements. Useful for validating uniqueness in player assignment arrays, random draws, or configuration sets.</big>\n\n## Snippet\n\n```\nArray Contains Duplicates(Global.AssignedRoles);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Boolean</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array to check for duplicate values."
+  slug: array-contains-duplicates
+  tags: Array Contains Duplicates
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2025-01-09T08:49:22.339Z"
+  updated_at: "2025-01-09T08:49:22.339Z"
+-
+  id: 1920674
+  category_id: 2
+  category_id: 2
+  title: Array Reversed
+  content: "## Description\n\n<big>Returns a copy of a specified array with its elements in reverse order. The original array is not modified. Useful for reversing sorted leaderboards, processing queue structures as stacks, or iterating over a sequence in the opposite direction.</big>\n\n## Snippet\n\n```\nArray Reversed(Global.LeaderboardArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array to reverse."
+  slug: array-reversed
+  tags: Array Reversed
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2024-11-27T13:21:33.117Z"
+  updated_at: "2024-11-27T13:21:33.117Z"
+-
+  id: 1638674
+  category_id: 2
+  category_id: 2
+  title: Array Unique
+  content: "## Description\n\n<big>Returns a copy of a specified array with all duplicate values removed, preserving only the first occurrence of each unique element. The relative order of remaining elements is maintained. Useful for deduplicating player lists, tag sets, or any array that may accumulate repeated entries over time.</big>\n\n## Snippet\n\n```\nArray Unique(Global.TaggedPlayers);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array from which duplicate values will be removed."
+  slug: array-unique
+  tags: Array Unique
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2025-04-03T16:03:11.774Z"
+  updated_at: "2025-04-03T16:03:11.774Z"
+-
+  id: 1374674
+  category_id: 2
+  category_id: 2
+  title: Array Intersection
+  content: "## Description\n\n<big>Returns an array containing only the elements that appear in both of two specified arrays. Duplicate values are not included more than once in the result. Useful for finding shared members between two player groups, matching tag sets, or evaluating overlap between two datasets.</big>\n\n## Snippet\n\n```\nArray Intersection(Global.TeamAPlayers, Global.OnObjectivePlayers);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array A_==, ==_Array B_==\n\n> ==**Array A**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The first array to compare.\n\n> ==**Array B**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The second array to compare. Only elements also present in Array A are returned."
+  slug: array-intersection
+  tags: Array Intersection
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2024-06-14T08:44:58.882Z"
+  updated_at: "2025-09-01T15:03:33.117Z"
+-
+  id: 1920774
+  category_id: 2
+  category_id: 2
+  title: Array Difference
+  content: "## Description\n\n<big>Returns an array containing all elements from the first array that do not appear in the second array. The order of remaining elements is preserved. Useful for computing exclusion sets, identifying players not in a group, or subtracting one filtered list from another.</big>\n\n## Snippet\n\n```\nArray Difference(All Players(All Teams), Global.EliminatedPlayers);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array A_==, ==_Array B_==\n\n> ==**Array A**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The source array whose elements will be filtered.\n\n> ==**Array B**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array of values to exclude from Array A."
+  slug: array-difference
+  tags: Array Difference
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2024-08-29T21:17:44.117Z"
+  updated_at: "2025-06-18T12:14:22.882Z"
+-
+  id: 1583774
+  category_id: 2
+  category_id: 2
+  title: Array Index Of Max
+  content: "## Description\n\n<big>Returns the zero-based index of the element with the largest numeric value in a specified array. If multiple elements share the maximum value, the index of the first occurrence is returned. Useful for identifying which player, slot, or entry holds the leading value without a separate lookup step.</big>\n\n## Snippet\n\n```\nArray Index Of Max(Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array in which the index of the maximum value will be located."
+  slug: array-index-of-max
+  tags: Array Index Of Max
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2025-07-11T06:38:29.003Z"
+  updated_at: "2025-07-11T06:38:29.003Z"
+-
+  id: 1938775
+  title: Array Sorted Ascending
+  content: "## Description\n\n<big>Returns a copy of a specified array with all numeric elements sorted from smallest to largest. Non-numeric elements are appended to the end of the result in their original order. The original array is not modified. Useful for leaderboard ordering, priority queues, or rank assignment systems.</big>\n\n## Snippet\n\n```\nArray Sorted Ascending(Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array to sort in ascending order."
+  slug: array-sorted-ascending
+  tags: Array Sorted Ascending
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2024-04-02T09:14:27.441Z"
+  updated_at: "2024-04-02T09:14:27.441Z"
+-
+  id: 1748775
+  category_id: 2
+  title: Array Sorted Descending
+  content: "## Description\n\n<big>Returns a copy of a specified array with all numeric elements sorted from largest to smallest. Non-numeric elements are appended to the end of the result in their original order. The original array is not modified. Useful for displaying leaderboards in conventional top-down order or prioritizing highest-value targets.</big>\n\n## Snippet\n\n```\nArray Sorted Descending(Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array to sort in descending order."
+  slug: array-sorted-descending
+  tags: Array Sorted Descending
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2024-04-02T09:15:44.006Z"
+  updated_at: "2024-04-02T09:15:44.006Z"
+-
+  id: 1503775
+  category_id: 2
+  title: Array Flattened
+  content: "## Description\n\n<big>Returns a single-dimensional array produced by recursively merging all nested arrays within a specified array into one flat sequence. Non-array elements are included as-is. Useful for collapsing multi-dimensional data structures, merging grouped player lists, or simplifying nested Workshop array logic.</big>\n\n## Snippet\n\n```\nArray Flattened(Global.NestedTeamArrays);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The potentially nested array to flatten into a single dimension."
+  slug: array-flattened
+  tags: Array Flattened
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2025-02-17T07:52:14.882Z"
+  updated_at: "2025-02-17T07:52:14.882Z"
+-
+  id: 1839775
+  category_id: 2
+  title: Array Shuffled
+  content: "## Description\n\n<big>Returns a copy of a specified array with its elements rearranged in a random order. The original array is not modified. Each evaluation produces a independently randomized result. Useful for randomizing turn order, shuffling ability pools, or distributing roles unpredictably at the start of a match.</big>\n\n## Snippet\n\n```\nArray Shuffled(All Players(All Teams));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array whose elements will be randomly reordered."
+  slug: array-shuffled
+  tags: Array Shuffled
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2024-10-14T11:33:07.006Z"
+  updated_at: "2024-10-14T11:33:07.006Z"
+-
+  id: 1274775
+  category_id: 2
+  title: Array Without Index
+  content: "## Description\n\n<big>Returns a copy of a specified array with the element at a given zero-based index removed. All subsequent elements shift down by one position. The original array is not modified. Useful for removing a specific entry from a list without searching for its value, particularly when the index is already known.</big>\n\n## Snippet\n\n```\nArray Without Index(Global.PlayerQueue, 0);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==, ==_Index_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The source array from which an element will be removed.\n\n> ==**Index**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The zero-based index of the element to remove. Out-of-range indices return the original array unchanged."
+  slug: array-without-index
+  tags: Array Without Index
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2024-07-31T08:49:22.339Z"
+  updated_at: "2025-04-20T10:38:14.882Z"
+-
+  id: 1920875
+  category_id: 2
+  title: Array Index Of Min
+  content: "## Description\n\n<big>Returns the zero-based index of the element with the smallest numeric value in a specified array. If multiple elements share the minimum value, the index of the first occurrence is returned. Useful for identifying the lowest-scoring player, the least charged ability slot, or the earliest expiring timer in a set.</big>\n\n## Snippet\n\n```\nArray Index Of Min(Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Array_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array in which the index of the minimum value will be located."
+  slug: array-index-of-min
+  tags: Array Index Of Min
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2025-05-09T13:21:33.117Z"
+  updated_at: "2025-05-09T13:21:33.117Z"
+-
+  id: 1638775
+  category_id: 2
+  title: Array Chunk
+  content: "## Description\n\n<big>Returns a two-dimensional array produced by dividing a specified array into consecutive sub-arrays of a given size. The final chunk may be smaller than the specified size if the array length is not evenly divisible. Useful for paginating player lists, distributing players into balanced groups, or processing large arrays in batches.</big>\n\n## Snippet\n\n```\nArray Chunk(All Players(All Teams), 3);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==, ==_Chunk Size_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array to divide into chunks.\n\n> ==**Chunk Size**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **2**_\n> The maximum number of elements in each chunk. Must be at least 1."
+  slug: array-chunk
+  tags: Array Chunk
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2024-11-05T16:03:11.774Z"
+  updated_at: "2025-08-29T09:52:37.006Z"
+-
+  id: 1374775
+  category_id: 2
+  title: Array Zip
+  content: "## Description\n\n<big>Returns an array of two-element sub-arrays, each pairing the element at the same index from two source arrays. If the arrays are of unequal length, pairing stops at the end of the shorter array. Useful for associating parallel data sets such as player arrays with score arrays, or key-value pair structures.</big>\n\n## Snippet\n\n```\nArray Zip(All Players(All Teams), Global.ScoreArray);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array A_==, ==_Array B_==\n\n> ==**Array A**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The first array to pair from.\n\n> ==**Array B**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The second array to pair from. Each element is matched with the element at the same index in Array A."
+  slug: array-zip
+  tags: Array Zip
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2025-03-21T08:44:58.882Z"
+  updated_at: "2025-03-21T08:44:58.882Z"
+-
+  id: 1920975
+  category_id: 2
+  title: Array Count Where
+  content: "## Description\n\n<big>Returns the number of elements in a specified array that satisfy a given condition, evaluated using the current array element value. Mirrors the filtering logic of Filtered Array but returns a count rather than the matching elements themselves. Useful for compact condition checks, threshold triggers, and summary statistics.</big>\n\n## Snippet\n\n```\nArray Count Where(All Players(All Teams), Health Of(Current Array Element) < 50);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Number</span>_\n**Parameters**: ==_Array_==, ==_Condition_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array whose elements will be evaluated.\n\n> ==**Condition**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> The condition evaluated for each element using Current Array Element. Elements for which this evaluates to True are counted."
+  slug: array-count-where
+  tags: Array Count Where
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2024-06-18T21:17:44.117Z"
+  updated_at: "2025-07-24T12:14:22.882Z"
+-
+  id: 1583875
+  category_id: 2
+  title: Array Sorted By
+  content: "## Description\n\n<big>Returns a copy of a specified array sorted according to a custom key expression evaluated for each element using Current Array Element. Elements are ordered from the smallest to the largest key value. Useful for sorting players by health, score, distance, or any other dynamically computed property without requiring a manual sort implementation.</big>\n\n## Snippet\n\n```\nArray Sorted By(All Players(All Teams), Health Of(Current Array Element));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Array</span>_\n**Parameters**: ==_Array_==, ==_Key_==\n\n> ==**Array**==\n> _Type: **[Array](/wiki/articles/array)**, Default: **Empty Array**_\n> The array to sort.\n\n> ==**Key**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **Current Array Element**_\n> The expression evaluated for each element using Current Array Element. Elements are sorted in ascending order of this value."
+  slug: array-sorted-by
+  tags: Array Sorted By
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2024-09-27T06:38:29.003Z"
+  updated_at: "2025-10-15T12:14:22.882Z"
+-
+  id: 1938876
+  category_id: 0
+  title: Spawn Static Object
+  content: "## Description\n\n<big>Places a persistent static mesh object at a specified world position and rotation. The object has no collision or interaction by default and is purely visual unless configured otherwise. Destroyed with Destroy Static Object. Useful for constructing custom map geometry, decorations, or level design elements at runtime.</big>\n\n## Snippet\n\n```\nSpawn Static Object(Mesh(Crate), Vector(0, 0, 0), Vector(0, 0, 0), Vector(1, 1, 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Mesh_==, ==_Position_==, ==_Rotation_==, ==_Scale_==\n\n> ==**Mesh**==\n> _Type: **[Mesh](/wiki/articles/mesh)**, Default: **Mesh(Crate)**_\n> The static mesh asset to place in the world.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The world position at which the object will be placed.\n\n> ==**Rotation**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The Euler rotation of the object in degrees on each axis.\n\n> ==**Scale**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(1, 1, 1)**_\n> The scale of the object on each axis. A value of Vector(1, 1, 1) represents the mesh's default size."
+  slug: spawn-static-object
+  tags: Spawn Static Object
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2024-05-19T09:14:27.441Z"
+  updated_at: "2025-03-07T11:22:14.882Z"
+-
+  id: 1748876
+  category_id: 0
+  title: Set Object Position
+  content: "## Description\n\n<big>Moves a previously spawned static object to a new world position without destroying and replacing it. The object retains its current rotation and scale. Supports reevaluation, allowing the object to track a dynamic position in real time. Useful for animated props, moving platforms, or editor-style drag-and-drop placement.</big>\n\n## Snippet\n\n```\nSet Object Position(Last Created Object, Vector(0, 5, 0));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Position_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object to reposition.\n\n> ==**Position**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The new world position for the object. Supports reevaluation."
+  slug: set-object-position
+  tags: Set Object Position
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2024-08-11T14:38:52.006Z"
+  updated_at: "2025-05-29T10:22:37.441Z"
+-
+  id: 1503876
+  category_id: 0
+  title: Set Object Rotation
+  content: "## Description\n\n<big>Applies a new Euler rotation to a previously spawned static object, overriding its current orientation. Does not affect the object's position or scale. Supports reevaluation for continuously rotating objects. Useful for spinning props, directional indicators, or editor rotation handles.</big>\n\n## Snippet\n\n```\nSet Object Rotation(Last Created Object, Vector(0, Total Time Elapsed * 90, 0));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Rotation_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object whose rotation will be set.\n\n> ==**Rotation**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> The new Euler rotation in degrees on each axis. Supports reevaluation."
+  slug: set-object-rotation
+  tags: Set Object Rotation
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2025-01-03T07:52:14.882Z"
+  updated_at: "2025-01-03T07:52:14.882Z"
+-
+  id: 1839876
+  category_id: 0
+  title: Set Object Scale
+  content: "## Description\n\n<big>Resizes a previously spawned static object by applying a new scale vector, overriding its current size. Each axis is scaled independently, allowing non-uniform stretching. Supports reevaluation. Useful for growing or shrinking props dynamically, simulating construction, or building resize handles in a map editor context.</big>\n\n## Snippet\n\n```\nSet Object Scale(Last Created Object, Vector(2, 1, 2));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Scale_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object whose scale will be set.\n\n> ==**Scale**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(1, 1, 1)**_\n> The new scale of the object on each axis. Supports reevaluation."
+  slug: set-object-scale
+  tags: Set Object Scale
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2024-07-07T11:33:07.006Z"
+  updated_at: "2025-04-14T14:57:48.441Z"
+-
+  id: 1274876
+  category_id: 0
+  title: Set Object Color
+  content: "## Description\n\n<big>Applies a color tint to a previously spawned static object, overriding its default material color. The tint is multiplicative, meaning a value of White preserves the original colors while other values shift the appearance accordingly. Useful for team-colored props, state-indicating objects, or stylized map decoration.</big>\n\n## Snippet\n\n```\nSet Object Color(Last Created Object, Color(Red));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Color_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object whose color tint will be set.\n\n> ==**Color**==\n> _Type: **[Color](/wiki/articles/color)**, Default: **White**_\n> The color tint to apply to the object. White preserves the original material color."
+  slug: set-object-color
+  tags: Set Object Color
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2024-11-22T08:49:22.339Z"
+  updated_at: "2025-08-05T10:38:14.882Z"
+-
+  id: 1920876
+  category_id: 0
+  title: Set Object Collision
+  content: "## Description\n\n<big>Enables or disables physical collision on a previously spawned static object. When collision is enabled, players and projectiles are blocked by the object's geometry. When disabled, the object acts as a purely visual element that players and projectiles pass through freely.</big>\n\n## Snippet\n\n```\nSet Object Collision(Last Created Object, True);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Enabled_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object whose collision state will be changed.\n\n> ==**Enabled**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If True, the object blocks players and projectiles. If False, the object is passable."
+  slug: set-object-collision
+  tags: Set Object Collision
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2025-06-26T13:21:33.117Z"
+  updated_at: "2025-06-26T13:21:33.117Z"
+-
+  id: 1638876
+  category_id: 0
+  title: Set Object Visibility
+  content: "## Description\n\n<big>Shows or hides a previously spawned static object for a specified audience without destroying it. Hidden objects retain their position, rotation, scale, and collision state. Useful for revealing map elements at specific moments, creating team-asymmetric environments, or toggling props during different game phases.</big>\n\n## Snippet\n\n```\nSet Object Visibility(Last Created Object, All Players, False);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Visible To_==, ==_Visible_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object whose visibility will be changed.\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players for whom visibility will be changed.\n\n> ==**Visible**==\n> _Type: **[Boolean](/wiki/articles/boolean)**, Default: **True**_\n> If False, the object will not render for the specified audience."
+  slug: set-object-visibility
+  tags: Set Object Visibility
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2024-09-14T16:03:11.774Z"
+  updated_at: "2025-07-12T09:52:37.006Z"
+-
+  id: 1374876
+  category_id: 0
+  title: Destroy All Objects
+  content: "## Description\n\n<big>Instantly destroys all static objects currently present in the world that were spawned via Spawn Static Object, regardless of when or by whom they were created. Useful for resetting a map editor session, clearing a round's custom geometry, or wiping all props at the start of a new phase.</big>\n\n## Snippet\n\n```\nDestroy All Objects;\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: _None_"
+  slug: destroy-all-objects
+  tags: Destroy All Objects
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2024-03-01T08:44:58.882Z"
+  updated_at: "2024-03-01T08:44:58.882Z"
+-
+  id: 1920976
+  category_id: 0
+  title: Duplicate Object
+  content: "## Description\n\n<big>Creates an exact copy of a previously spawned static object, including its current position, rotation, scale, color, and collision state. The duplicate is registered as a new independent object and can be manipulated separately. Useful for stamping repeated elements, mirroring geometry, or building symmetrical map layouts efficiently.</big>\n\n## Snippet\n\n```\nDuplicate Object(Last Created Object, Vector(10, 0, 0));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Position Offset_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object to duplicate.\n\n> ==**Position Offset**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, 0, 0)**_\n> A positional offset applied to the duplicate relative to the original object's position. Use Vector(0, 0, 0) to place the copy at the same location."
+  slug: duplicate-object
+  tags: Duplicate Object
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2025-09-17T21:17:44.117Z"
+  updated_at: "2025-09-17T21:17:44.117Z"
+-
+  id: 1583976
+  category_id: 0
+  title: Snap Object To Grid
+  content: "## Description\n\n<big>Moves a previously spawned static object to the nearest position on a uniform world grid of a specified cell size, rounding each axis independently. Useful for enforcing aligned placement in map editor modes, ensuring objects sit flush against each other, or implementing a snap-to-grid toggle for player-placed objects.</big>\n\n## Snippet\n\n```\nSnap Object To Grid(Last Created Object, 1);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Object_==, ==_Grid Size_==\n\n> ==**Object**==\n> _Type: **[Object](/wiki/articles/object)**, Default: **Last Created Object**_\n> The static object to snap to the grid.\n\n> ==**Grid Size**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The size of each grid cell in meters. The object's position is rounded to the nearest multiple of this value on all axes."
+  slug: snap-object-to-grid
+  tags: Snap Object To Grid
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2024-12-08T06:38:29.003Z"
+  updated_at: "2025-10-29T12:14:22.882Z"
