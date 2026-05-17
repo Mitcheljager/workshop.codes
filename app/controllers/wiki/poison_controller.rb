@@ -16,6 +16,9 @@ class Wiki::PoisonController < Wiki::BaseController
 
   def show
     article = articles.find { |article| article["slug"] == params[:slug] || article["slug"] == params[:slug] }
+
+    render_404 and return if article.nil?
+
     @article = Wiki::Article.new(article)
     @article.category = @article.category_id == 0 ? Wiki::Category.first : Wiki::Category.third
     @initial_article = @article
