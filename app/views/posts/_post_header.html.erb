@@ -11,13 +11,13 @@
 
       <h1 class="item__title item__title--large">
         <%= @post.title %>
-
-        <% if @post.source_derivs.any? %>
-          <a href="#sources" class="item__sub-title" data-turbolinks="false">
-            + <%= @post.source_derivs.count %> sources
-          </a>
-        <% end %>
       </h1>
+
+      <% if @post.source_derivs.any? %>
+        <a href="#sources" class="item__sub-title" data-turbolinks="false">
+          + <%= @post.source_derivs.count %> sources
+        </a>
+      <% end %>
     </div>
 
     <%= render "favorites/form", post: @post %>

@@ -224,6 +224,16 @@
   font-family: $font-stack;
   font-size: 1rem;
   line-height: 1rem;
+  color: theme(text-color);
+  text-decoration: none;
+
+  @include hover-stack {
+    color: $white;
+
+    @include high-contrast() {
+      text-decoration: underline;
+    }
+  }
 }
 
 .item__details {
