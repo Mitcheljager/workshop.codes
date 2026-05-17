@@ -11,6 +11,7 @@
   import { outsideClick } from "@components/actions/outsideClick"
   import { Confetti } from "svelte-confetti"
   import { fly } from "svelte/transition"
+  import { addAlertWarning } from "@src/lib/alerts"
 
   let loading = false
   let confettiActive = false
@@ -46,14 +47,18 @@
   }
 
   function saveToLocalStorage(content, date) {
-    const currentSaved = JSON.parse(localStorage.getItem("saved-projects") || "{}")
-    localStorage.setItem("saved-projects", JSON.stringify({
-      ...currentSaved,
-      [$currentProject.uuid]: {
-        updated_at: date,
-        content
-      }
-    }))
+    try {
+      const currentSaved = JSON.parse(localStorage.getItem("saved-projects") || "{}")
+      localStorage.setItem("saved-projects", JSON.stringify({
+        ...currentSaved,
+        [$currentProject.uuid]: {
+          updated_at: date,
+          content
+        }
+      }))
+    } catch {
+      addAlertWarning("Could not save to local storage, we will still attempt to save to our database.")
+    }
   }
 
   async function createBackup() {
