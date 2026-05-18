@@ -60,7 +60,7 @@
     <% end %>
   </article>
 
-  <div role="complementary">
+  <div role="complementary" class="hide-when-noscript">
     <%= render "post_recommendations" if @post.recommended_posts.any? %>
     <%= render "similar_to" %>
   </div>

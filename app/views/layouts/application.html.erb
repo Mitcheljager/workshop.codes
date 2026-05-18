@@ -38,6 +38,8 @@
       <%= vite_stylesheet_tag "logged-in-user.scss" %>
       <%= vite_typescript_tag "logged-in-user.ts", "data-turbolinks-track": "reload", defer: true %>
     <% end %>
+
+    <noscript><style>.hide-when-noscript { display: none; }</style></noscript>
   </head>
 
   <body class="<%= "theme-#{ theme }" unless is_wiki? || is_editor? %> <%= "theme-wiki" if is_wiki? %>">
