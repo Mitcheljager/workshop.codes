@@ -17,7 +17,8 @@
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: $margin * 0.25 !important;
+  border: 0 !important;
   border-radius: $border-radius;
   color: theme(text-color);
   cursor: pointer;
@@ -27,11 +28,15 @@
   }
 }
 
+.faq__answer {
+  padding: 0 $margin * 0.25 $margin * 0.25;
+}
+
 .faq__icon {
   padding-left: 1rem;
   font-size: .75rem;
 
-  .faq__question.active & {
+  .faq__item[open] & {
     transform: scaleY(-1);
   }
 }

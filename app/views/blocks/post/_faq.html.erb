@@ -7,18 +7,16 @@
     <% label_id = "label-#{ block.id }-#{ index }" %>
     <% controls_id = "faq-#{ block.id }-#{ index }" %>
 
-    <div class="faq__item" data-toggle-content>
-      <button class="faq__question" data-action="toggle-content" aria-controls="<%= controls_id %>" aria-expanded="false">
+    <details class="faq__item">
+      <summary class="faq__question">
         <%= tag.div sanitize(question), id: label_id %>
         <div class="faq__icon" aria-hidden="true">▼</div>
-      </button>
+      </summary>
 
-      <div data-role="content-to-toggle" style="display: none" id="<%= controls_id %>" aria-labelledby="<%= label_id %>">
-        <div class="p-1/4 pt-0">
-          <hr class="mt-0 mb-1/4" />
-          <%= sanitize(markdown(block_property(block, "answers")[index])) %>
-        </div>
+      <div class="faq__answer">
+        <hr class="mt-0 mb-1/4" />
+        <%= sanitize(markdown(block_property(block, "answers")[index])) %>
       </div>
-    </div>
+    </details>
   <% end %>
 </div>
