@@ -1607,3 +1607,203 @@
   group_id: Nc7sBjIy4okG61e-ZWuvRl
   created_at: "2024-12-08T06:38:29.003Z"
   updated_at: "2025-10-29T12:14:22.882Z"
+-
+  id: 1938977
+  category_id: 0
+  title: Set Match Phase
+  content: "## Description\n\n<big>Forces the match into a specified phase, such as setup, active play, or sudden death, bypassing normal phase transition conditions. Useful for custom game modes that manage their own round structure independently of the map's default flow.</big>\n\n## Snippet\n\n```\nSet Match Phase(Phase(Sudden Death));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Phase_==\n\n> ==**Phase**==\n> _Type: **[Phase](/wiki/articles/phase)**, Default: **Phase(Active)**_\n> The match phase to force. Options are Setup, Active, and Sudden Death."
+  slug: set-match-phase
+  tags: Set Match Phase
+  group_id: Kp4nBqWx7ycL19m-HRjvTs
+  created_at: "2026-02-14T09:14:27.441Z"
+  updated_at: "2026-02-14T09:14:27.441Z"
+-
+  id: 1748977
+  category_id: 0
+  title: Set Ambient Sound
+  content: "## Description\n\n<big>Replaces the map's default ambient audio with a specified sound asset for a defined audience. The ambient sound loops continuously until changed or cleared with Clear Ambient Sound. Useful for custom atmosphere, horror modes, or phase-specific audio environments.</big>\n\n## Snippet\n\n```\nSet Ambient Sound(All Players, Sound(Suspense Loop), 80);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Sound_==, ==_Volume_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players who will hear the ambient sound.\n\n> ==**Sound**==\n> _Type: **[Sound](/wiki/articles/sound)**, Default: **None**_\n> The sound asset to loop as the ambient audio.\n\n> ==**Volume**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **100**_\n> The volume of the ambient sound, from 0 to 100."
+  slug: set-ambient-sound
+  tags: Set Ambient Sound
+  group_id: Rn5wXvBp3ycM88k-QZolUj
+  created_at: "2026-03-05T14:38:52.006Z"
+  updated_at: "2026-03-05T14:38:52.006Z"
+-
+  id: 1503977
+  category_id: 0
+  title: Apply Burn Effect To Player
+  content: "## Description\n\n<big>Applies a persistent burning visual and damage-over-time effect to a player for a specified duration. The player takes a flat amount of damage per second for the duration regardless of other damage modifiers. The visual flame effect is visible to all players unless separately hidden.</big>\n\n## Snippet\n\n```\nApply Burn Effect To Player(Event Player, 15, 4);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Damage Per Second_==, ==_Duration_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will be set on fire.\n\n> ==**Damage Per Second**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> The amount of damage dealt to the player each second for the duration.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **3**_\n> How long the burn effect lasts, in seconds."
+  slug: apply-burn-effect-to-player
+  tags: Apply Burn Effect To Player
+  group_id: Wd8tNkRz1uvP09s-CLamFh
+  created_at: "2026-01-17T07:52:14.882Z"
+  updated_at: "2026-01-17T07:52:14.882Z"
+-
+  id: 1839977
+  category_id: 0
+  title: Set Sky
+  content: "## Description\n\n<big>Replaces the current map's skybox with a specified sky asset for all players. The change is purely visual and does not affect lighting, fog, or gameplay. Useful for establishing a custom atmosphere, simulating time-of-day transitions, or applying a distinct visual identity to a custom game mode.</big>\n\n## Snippet\n\n```\nSet Sky(Sky(Night));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Sky_==\n\n> ==**Sky**==\n> _Type: **[Sky](/wiki/articles/sky)**, Default: **Sky(Default)**_\n> The sky asset to apply to the current map. Use Sky(Default) to revert to the map's original skybox."
+  slug: set-sky
+  tags: Set Sky
+  group_id: Yz6hJmSe2fwQ14n-BKprVc
+  created_at: "2026-04-22T11:33:07.006Z"
+  updated_at: "2026-04-22T11:33:07.006Z"
+-
+  id: 1274977
+  category_id: 0
+  title: Force Player To Emote
+  content: "## Description\n\n<big>Triggers a specified emote on a player immediately, interrupting any current action if the player is in a state that permits emoting. The player cannot move or act for the duration of the emote animation. Has no effect if the player is dead, airborne, or in a forced state that prevents emoting.</big>\n\n## Snippet\n\n```\nForce Player To Emote(Event Player, Emote(Dance));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Emote_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will perform the emote.\n\n> ==**Emote**==\n> _Type: **[Emote](/wiki/articles/emote)**, Default: **Emote(Default)**_\n> The emote to trigger on the player."
+  slug: force-player-to-emote
+  tags: Force Player To Emote
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-02-28T08:49:22.339Z"
+  updated_at: "2026-02-28T08:49:22.339Z"
+-
+  id: 1920977
+  category_id: 0
+  title: Set Fog Density
+  content: "## Description\n\n<big>Adjusts the density of the map's environmental fog for a specified audience, from 0 (no fog) to 100 (maximum visibility reduction). Does not affect gameplay or collision. Useful for creating horror atmospheres, simulating weather conditions, or reducing effective sightlines for asymmetric game modes.</big>\n\n## Snippet\n\n```\nSet Fog Density(All Players, 60);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Density_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players for whom the fog density will be changed.\n\n> ==**Density**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The fog density value from 0 to 100. 0 disables fog entirely."
+  slug: set-fog-density
+  tags: Set Fog Density
+  group_id: Lf0cOhDw5stB73p-MXrkIq
+  created_at: "2026-05-01T13:21:33.117Z"
+  updated_at: "2026-05-01T13:21:33.117Z"
+-
+  id: 1638977
+  category_id: 0
+  title: Add To Player Inventory
+  content: "## Description\n\n<big>Adds a specified item to a player's custom inventory slot, storing it as a retrievable value for use in item-based game modes. Each player supports a configurable number of inventory slots. Has no inherent gameplay effect; item behavior must be implemented separately via Workshop rules.</big>\n\n## Snippet\n\n```\nAdd To Player Inventory(Event Player, Custom String(\"Health Potion\"), 1);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Item_==, ==_Quantity_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will receive the item.\n\n> ==**Item**==\n> _Type: **[String](/wiki/articles/string)**, Default: **Custom String(\"\")**_\n> The identifier of the item to add to the player's inventory.\n\n> ==**Quantity**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The number of the specified item to add. Stacks with existing quantities of the same item."
+  slug: add-to-player-inventory
+  tags: Add To Player Inventory
+  group_id: Tp2yGnVx8aeH51w-DRjbMs
+  created_at: "2026-01-30T16:03:11.774Z"
+  updated_at: "2026-01-30T16:03:11.774Z"
+-
+  id: 1374977
+  category_id: 0
+  title: Remove From Player Inventory
+  content: "## Description\n\n<big>Removes a specified quantity of an item from a player's custom inventory. If the quantity to remove exceeds the amount held, the item is removed entirely with no error. Has no effect if the item is not present in the player's inventory.</big>\n\n## Snippet\n\n```\nRemove From Player Inventory(Event Player, Custom String(\"Health Potion\"), 1);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Item_==, ==_Quantity_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose inventory will be modified.\n\n> ==**Item**==\n> _Type: **[String](/wiki/articles/string)**, Default: **Custom String(\"\")**_\n> The identifier of the item to remove.\n\n> ==**Quantity**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The number of the specified item to remove."
+  slug: remove-from-player-inventory
+  tags: Remove From Player Inventory
+  group_id: Aj4vFwCk1rzN87q-SEtgBu
+  created_at: "2026-01-30T16:04:29.882Z"
+  updated_at: "2026-01-30T16:04:29.882Z"
+-
+  id: 1921077
+  category_id: 0
+  title: Set Player Experience Points
+  content: "## Description\n\n<big>Sets a player's custom experience point total to a specified value, for use in Workshop-driven progression systems. Has no connection to Overwatch's account-level XP. Can be used alongside Set Player Level to build fully custom RPG-style progression within a game mode.</big>\n\n## Snippet\n\n```\nSet Player Experience Points(Event Player, 500);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Amount_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose experience point total will be set.\n\n> ==**Amount**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The experience point value to assign."
+  slug: set-player-experience-points
+  tags: Set Player Experience Points
+  group_id: Bm9oEyHu6qlK03j-VCfwPd
+  created_at: "2026-03-19T21:17:44.117Z"
+  updated_at: "2026-03-19T21:17:44.117Z"
+-
+  id: 1584077
+  category_id: 0
+  title: Set Player Level
+  content: "## Description\n\n<big>Assigns a custom level value to a player for use in Workshop-driven progression systems. Has no connection to Overwatch's account level. Intended to be used alongside Set Player Experience Points to implement level thresholds, stat scaling, or rank-based ability unlocks within a game mode.</big>\n\n## Snippet\n\n```\nSet Player Level(Event Player, 5);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Level_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose level will be set.\n\n> ==**Level**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The level value to assign. Must be a positive integer."
+  slug: set-player-level
+  tags: Set Player Level
+  group_id: Nc7sBjIy4okG61e-ZWuvRl
+  created_at: "2026-03-19T21:18:52.006Z"
+  updated_at: "2026-03-19T21:18:52.006Z"
+-
+  id: 1749077
+  category_id: 0
+  title: Set Round Time Limit
+  content: "## Description\n\n<big>Sets the time limit for the current or next round to a specified number of seconds, overriding the map's default round duration. Takes effect immediately if a round is in progress. Useful for custom timed modes, speedrun challenges, or dynamically adjusting round length based on game state.</big>\n\n## Snippet\n\n```\nSet Round Time Limit(120);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Duration_==\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **60**_\n> The round time limit in seconds. Use 0 for an unlimited round duration."
+  slug: set-round-time-limit
+  tags: Set Round Time Limit
+  group_id: Yo1cIqDn6xeM93k-LHfwBt
+  created_at: "2026-04-08T10:14:27.441Z"
+  updated_at: "2026-04-08T10:14:27.441Z"
+-
+  id: 1504077
+  category_id: 0
+  title: Trigger Cutscene
+  content: "## Description\n\n<big>Plays a predefined cutscene sequence for a specified audience, temporarily removing player control for the duration. Players are restored to their previous state when the cutscene ends. Input from players is ignored during playback. Useful for intro sequences, victory celebrations, or narrative moments in story-driven game modes.</big>\n\n## Snippet\n\n```\nTrigger Cutscene(All Players, Cutscene(Victory));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Cutscene_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players who will view the cutscene.\n\n> ==**Cutscene**==\n> _Type: **[Cutscene](/wiki/articles/cutscene)**, Default: **None**_\n> The cutscene asset to play."
+  slug: trigger-cutscene
+  tags: Trigger Cutscene
+  group_id: Sq6hOcIn3kdB72a-GEwvRp
+  created_at: "2026-05-12T07:52:14.882Z"
+  updated_at: "2026-05-12T07:52:14.882Z"
+-
+  id: 1840077
+  category_id: 0
+  title: Set Player Currency
+  content: "## Description\n\n<big>Sets a player's custom in-mode currency balance to a specified value, for use in Workshop-driven economy systems such as shops, betting mechanics, or reward structures. Has no connection to any Overwatch account currency. Currency behavior must be implemented entirely through Workshop rules.</big>\n\n## Snippet\n\n```\nSet Player Currency(Event Player, 100);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Amount_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose currency balance will be set.\n\n> ==**Amount**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **0**_\n> The currency value to assign. Negative values are clamped to 0."
+  slug: set-player-currency
+  tags: Set Player Currency
+  group_id: Fw8lPqAm9vtC03b-HRjnKe
+  created_at: "2026-02-07T11:33:07.006Z"
+  updated_at: "2026-02-07T11:33:07.006Z"
+-
+  id: 1275077
+  category_id: 0
+  title: Set Gravity Direction
+  content: "## Description\n\n<big>Overrides the direction of gravity for a specified player, redefining which direction is treated as down for the purposes of falling, jumping, and movement. A value of Vector(0, -1, 0) is the default downward direction. Useful for anti-gravity modes, wall-walking mechanics, or disorientation effects.</big>\n\n## Snippet\n\n```\nSet Gravity Direction(Event Player, Vector(0, 1, 0));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Direction_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose gravity direction will be overridden.\n\n> ==**Direction**==\n> _Type: **[Vector](/wiki/articles/vector)**, Default: **Vector(0, -1, 0)**_\n> The normalized direction vector that will be treated as down for this player."
+  slug: set-gravity-direction
+  tags: Set Gravity Direction
+  group_id: Zt0eRwCh5bnJ19k-FUdlVo
+  created_at: "2026-01-11T08:49:22.339Z"
+  updated_at: "2026-01-11T08:49:22.339Z"
+-
+  id: 1921177
+  category_id: 0
+  title: Set Player Armor Type
+  content: "## Description\n\n<big>Overrides the armor type of a player's health pool for a specified duration, changing how incoming damage is mitigated. Options include None, Light, and Heavy, each applying different damage reduction profiles per hit. Reverts to the hero's default armor type when the duration expires.</big>\n\n## Snippet\n\n```\nSet Player Armor Type(Event Player, Armor Type(Heavy), 8);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Armor Type_==, ==_Duration_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose armor type will be overridden.\n\n> ==**Armor Type**==\n> _Type: **[Armor Type](/wiki/articles/armor-type)**, Default: **Armor Type(None)**_\n> The armor type to apply. Options are None, Light, and Heavy.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **5**_\n> How long the armor type override lasts, in seconds. Use 0 for an indefinite override."
+  slug: set-player-armor-type
+  tags: Set Player Armor Type
+  group_id: Af7nBqWx2ycL04m-KRjvOs
+  created_at: "2026-04-30T13:21:33.117Z"
+  updated_at: "2026-04-30T13:21:33.117Z"
+-
+  id: 1639077
+  category_id: 0
+  title: Trigger Weather Effect
+  content: "## Description\n\n<big>Activates a visual weather effect across the map for a specified audience and duration. Effects are purely visual and do not affect gameplay, movement, or visibility checks. Available effects vary by map. Use Clear Weather Effect to remove an active weather effect before its duration expires.</big>\n\n## Snippet\n\n```\nTrigger Weather Effect(All Players, Weather(Rain), 30);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Visible To_==, ==_Weather_==, ==_Duration_==\n\n> ==**Visible To**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **All Players**_\n> The players who will see the weather effect.\n\n> ==**Weather**==\n> _Type: **[Weather](/wiki/articles/weather)**, Default: **Weather(Rain)**_\n> The weather effect to trigger. Options vary by map.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **10**_\n> How long the weather effect lasts, in seconds. Use 0 for an indefinite effect."
+  slug: trigger-weather-effect
+  tags: Trigger Weather Effect
+  group_id: Pv7mChDk2stN48r-WBouEj
+  created_at: "2026-03-14T16:03:11.774Z"
+  updated_at: "2026-03-14T16:03:11.774Z"
+-
+  id: 1375077
+  category_id: 0
+  title: Set Player Jump Count
+  content: "## Description\n\n<big>Sets the maximum number of jumps a player can perform before landing, overriding the hero's default jump count. A value of 1 is the standard single jump. Values above 1 grant additional midair jumps. A value of 0 prevents the player from jumping entirely.</big>\n\n## Snippet\n\n```\nSet Player Jump Count(Event Player, 3);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Jump Count_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player whose maximum jump count will be set.\n\n> ==**Jump Count**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **1**_\n> The maximum number of jumps the player may perform before landing. Clamped between 0 and 10."
+  slug: set-player-jump-count
+  tags: Set Player Jump Count
+  group_id: Lw0sFnVt6uxB13p-HYdkRq
+  created_at: "2026-02-21T08:44:58.882Z"
+  updated_at: "2026-02-21T08:44:58.882Z"
+-
+  id: 1921277
+  category_id: 0
+  title: Set Team Name
+  content: "## Description\n\n<big>Assigns a custom display name to a specified team, replacing the default team label in HUD elements, scoreboards, and kill feed entries that reference the team name. Useful for tournament modes, role-playing game modes, or any context where the default team names are not meaningful.</big>\n\n## Snippet\n\n```\nSet Team Name(Team(Team 1), Custom String(\"Red Dragons\"));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Team_==, ==_Name_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **Team 1**_\n> The team whose display name will be changed.\n\n> ==**Name**==\n> _Type: **[String](/wiki/articles/string)**, Default: **Custom String(\"\")**_\n> The custom name to assign to the team."
+  slug: set-team-name
+  tags: Set Team Name
+  group_id: Gh3uPqAt6xdL22m-WNesKo
+  created_at: "2026-05-09T06:38:29.003Z"
+  updated_at: "2026-05-09T06:38:29.003Z"
+-
+  id: 1584177
+  category_id: 0
+  title: Apply Slow Effect To Player
+  content: "## Description\n\n<big>Reduces a player's movement speed by a specified percentage for a set duration. Stacks additively with other slow effects up to a maximum reduction of 100 percent. Does not affect ability activation speed or projectile velocity. Reverts when the duration expires or the effect is cleared.</big>\n\n## Snippet\n\n```\nApply Slow Effect To Player(Event Player, 50, 3);\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Player_==, ==_Slow Percent_==, ==_Duration_==\n\n> ==**Player**==\n> _Type: **[Player](/wiki/articles/player)**, Default: **Event Player**_\n> The player who will be slowed.\n\n> ==**Slow Percent**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **50**_\n> The percentage reduction applied to the player's movement speed, from 0 to 100.\n\n> ==**Duration**==\n> _Type: **[Number](/wiki/articles/number)**, Default: **3**_\n> How long the slow effect lasts, in seconds."
+  slug: apply-slow-effect-to-player
+  tags: Apply Slow Effect To Player
+  group_id: Ej5tKpAo8wdM26n-SCivBl
+  created_at: "2026-01-25T21:17:44.117Z"
+  updated_at: "2026-01-25T21:17:44.117Z"
+-
+  id: 1749177
+  category_id: 0
+  title: Set Match Winner
+  content: "## Description\n\n<big>Immediately ends the match and declares a specified team or player the winner, bypassing all remaining win conditions. Triggers the normal end-of-match sequence including victory screens and stat displays. Useful for custom win condition implementations, sudden death resolutions, or timed match conclusions.</big>\n\n## Snippet\n\n```\nSet Match Winner(Team(Team 1));\n```\n\n## Properties\n\n**Returns**: _<span style=\"color: #c678dd\">Void</span>_\n**Parameters**: ==_Team_==\n\n> ==**Team**==\n> _Type: **[Team](/wiki/articles/team)**, Default: **Team 1**_\n> The team to declare as the match winner."
+  slug: set-match-winner
+  tags: Set Match Winner
+  group_id: Bc9pEmWu3qlK57d-ZNoxCh
+  created_at: "2026-04-17T10:22:14.441Z"
+  updated_at: "2026-04-17T10:22:14.441Z"
