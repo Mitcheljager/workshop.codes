@@ -140,8 +140,7 @@ function findIncorrectArgsLength(content: string): void {
 
         const splitContent = splitArgumentsString(argumentsString)
 
-        // Arguments string is a parameter object
-        if (argumentsString.trim()[0] === "{") {
+        if (argumentsString.trim()[0] === "{") { // Arguments string is a parameter object
           const parameterObject = getFirstParameterObject(content.slice(match.index, closing + 1))
 
           if (!parameterObject) break
@@ -158,8 +157,9 @@ function findIncorrectArgsLength(content: string): void {
           } else {
             break
           }
-        } else {
-          // Argument string is a regular list of arguments
+        } else { // Argument string is a regular list of arguments
+          if (argumentsString.includes("@include")) break
+
           if (item.args_min_length && splitContent.length >= item.args_min_length && splitContent.length <= item.args_length) break
           if (!item.args_min_length && splitContent.length == item.args_length) break
 
