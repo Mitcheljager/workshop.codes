@@ -48,6 +48,7 @@ export function isAnyParentHidden(item: Item): boolean {
 
 export function duplicateItem(item: Item, newParent: string = ""): void {
   const itemCount = get(items).filter(i => {
+    if (!i.name) return
     if (i.parent != item.parent) return false
     return i.name.match(/\(Copy(?: \d+)?\)/g)
   })?.length
