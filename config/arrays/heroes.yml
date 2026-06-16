@@ -477,6 +477,21 @@
   story: |-
     Gabriel Reyes was once an esteemed member of Overwatch, first as its Strike Commander and then as the leader of Blackwatch, Overwatch’s branch for covert operations. He was believed dead following an explosion at Overwatch’s headquarters. But rumors say he escaped his fate, and now works as the volatile killer known only as Reaper, one of Talon’s deadliest enforcers.
 -
+  name: Shion
+  role: Damage
+  subrole: Flanker
+  stadium: false
+  release_date: "2026-06-16"
+  color: ""
+  full_name: null
+  nationality: Japanese
+  birth_date: null
+  age: null
+  locations:
+    - Neon Junction, Tokyo, Japan
+  description:
+  story:
+-
   name: Sierra
   role: Damage
   subrole: Recon
