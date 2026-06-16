@@ -304,6 +304,11 @@
   slug: stadium-nepal-shrine
   location: Nepal
 -
+  name: Oasis University (Stadium)
+  type: Stadium
+  slug: stadium-oasis-university
+  location: Iraq
+-
   name: Place Lacroix (Stadium)
   type: Stadium
   slug: stadium-place-lacroix
