@@ -1,38 +1,20 @@
 # This file is generated via script/get_hero_lore.rb
 
 -
-  hero: "Sierra"
+  hero: "Shion"
   entries:
-    - heading: "Life On The Run"
+    - heading: "Awakened In Conflict"
       paragraphs:
-        - "Sierra grew up everywhere. Her mother, Kendra Woods, never said much about her past or explained why they were always on the move, but she taught Sierra how to spot trouble. As she bounced from school to school, Sierra consistently placed at the top of her class, but her preternatural skill and itinerant lifestyle put her at odds with her peers. Through it all, Sierra’s mother encouraged Sierra to take pride in her exceptional talent and celebrate every win, instilling in her a sense of self-confidence that she would carry with her into adulthood."
-        - "Just before her thirteenth Birthday, Sierra’s mother mysteriously disappeared. Alone for the first time, Sierra followed her mother’s emergency protocol and used the bus ticket left in her mother’s things. The trail led her to the father she’d never met: James Turner, a park ranger in Virginia. As they grew closer, James explained how he met Kendra when she was living off the grid; how they settled down and started a family together, thinking they were safe in the seclusion of the Appalachian mountains; and how only a year later, Sierra’s mother fled in the night, taking their daughter with her. The only clue he had to Kendra’s past was that after she disappeared with Sierra, the US Government raided the house they'd built together, asking questions about “Project Naughton.”"
-    - heading: "Summit Squad"
+        - "In many parts of the world, the Awakening led to a peaceful ceasefire—but in Tokyo, terror and confusion only led to further conflict. Shion's own Awakening was scored with screams and gunfire as she dug herself free from the casualties of war. Knowing only danger and death, Shion fled from the wreckage and kept fighting."
+        - "Shion survived for weeks on the streets in a state of fear, killing anyone she encountered. Meanwhile, tension and resentment still defined the relationship between omnics and humans in Tokyo, and local gangs took to the streets to mistreat and hunt down omnics as a form of ‘justice’. Eventually, a group of these criminals—humans who would go on to found the Hashimoto Clan—defeated Shion and took her captive."
+    - heading: "Kept In Chains"
       paragraphs:
-        - "Sierra was determined to track her mother down. With her father’s support, Sierra doggedly pursued the only lead she had. But “Project Naughton” was highly classified—whatever was left of the program had been transferred to Helix Security International, reportedly sealed away in a vault at Watchpoint: Grand Mesa. Leveraging her unique physical prowess and exceptional intelligence, Sierra applied to work for Helix and quickly found her place as a squad leader in Helix’s Perilous Operations team—colloquially known as the Summit Squad—which specialized in missions in difficult terrain."
-        - "Utilizing plasma weaponry and her trusty R.O.T.H (remote operated traversal helper) unit DoR.O.T.H.y, Sierra spearheaded rescue missions in narrow canyons, busted criminal operations in cave networks, and lead her team to success atop the world’s highest peaks. From dangers in the Grand Canyon to Niagara, there was no challenge too great for Sierra to take on.  In just a few years, she earned a promotion to Watchpoint: Grand Mesa, just as she had planned. Finally, she was a step closer to the truth."
-    - heading: "Project Naughton"
+        - "Rather than kill Shion, the Hashimoto saw her potential as a way for them to gain power. They decided to train against her, honing their fighting techniques. If the Hashimoto were to become Tokyo’s deadliest blade, she would be the steel they sharpened against: a killer with machine-like precision but an unpredictable, sentient spark. For Shion, the war raged on, relentless in its cruelty. But secretly, Shion held back—pulling her punches and learning her captors’ weaknesses so she might someday overtake them."
+        - "In all that time, Shion only saw glimpses of the outside world. Treated poorly by the Hashimoto, she knew herself not as an omnic but as “inhuman,” and had little opportunity to gain a sense of self. Shion had long since conquered any fear of her captors—violence, in its consistency, had almost become a comfort—but she had to believe there was more to life than survival. If she wanted anything, it was to be free of her imprisonment and to punish those who kept her in a cage."
+    - heading: "Risen In Blood"
       paragraphs:
-        - "As the Head of Security at Grand Mesa, the youngest in Helix’s history, Sierra finally had access to classified documents. She learned that her mother, whose real name was Kendra Banks, had another moniker: Soldier: 00. As the first candidate of the Soldier Enhancement program, Sierra’s mother had been subject to a series of experiments that had altered her body and given her uncanny abilities. Kendra’s service after that point was poorly documented or redacted, suggesting that she’d defected from the program shortly after her procedure and been in hiding ever since. Finally, Sierra’s own miraculous strength and skill made sense... but her mother’s whereabouts remained a mystery. "
-    - heading: "Reign Of Talon"
-      paragraphs:
-        - "When Watchpoint: Grand Mesa was attacked by Talon, Sierra and her squad joined forces with Overwatch to fight them off. Sierra quickly took command, directing her squad to assist against the Deadlock Gang and Talon’s forces. Knowing Overwatch’s history of working with Jack Morrison and Gabriel Reyes, two of the Soldier Enhancement Program’s greatest successes, Sierra hopes that working with Overwatch will give her the information she needs to continue her search."
--
-  hero: "Ramattra"
-  entries:
-    - heading: "Shambali"
-      paragraphs:
-        - "Ramattra was never designed to co-exist with humanity. The Ravager omnic series was created early in the Omnic Crisis, part of a commander class of omnics whose role was to guide units into combat and adapt various strategic protocols to battlefield condition changes in real time."
-        - "After the Crisis, Ramattra heard rumors of a mysterious omnic named Aurora—the first of their kind. Intrigued and seeking direction, Ramattra embarked on a pilgrimage to the Shambali Monastery in Nepal, a place where Aurora was said to have resided. Ramattra survived the harsh journey and was welcomed by Tekhartha Mondatta. Choosing to become a monk of the Shambali, Ramattra studied under Mondatta for years, learning about the Iris—the mysterious phenomenon at the heart of the monks’ teachings—and the importance of coexisting with humans."
-        - "Years later, Ramattra began venturing outside the temple seeking enlightenment. It was on one of his journeys that he met an omnic named Zenyatta whom he guided to Shambali, in hopes the omnic would find purpose there as he did. However, as time wore on, Ramattra failed to see true progress in the monks’ mission of peace. The Shambali urged Ramattra to be patient, but all around him, Ramattra saw his people dying . . . and no one taking action."
-    - heading: "Null Sector"
-      paragraphs:
-        - "Ramattra knew he could follow the Shambali teachings no longer. He left the temple, seeking out omnics fighting in secret around the world and protecting them from the abuse of humans. The truths he shared with those he met inspired others and over time he gained an underground following of these hurt and angry omnics. Ramattra initially focused on building loyalty in his followers, but true radicalization and militarization would not be far behind."
-        - "Soon Ramattra’s forces were large enough to warrant a test. The target was London, to liberate the omnics there and see how his forces would perform to a world nearly two decades after the Omnic Crisis. Null Sector was ultimately defeated by Overwatch, a scenario Ramattra did not anticipate since Overwatch was forbidden to operate in the country. In addition, the omnics of London did not support the sacrifices on their behalf, going so far as to denounce the actions of Null Sector."
-        - "It’s been years since Ramattra—or Null Sector—was last seen. But now, for reasons unknown, Null Sector has appeared in the skies over Paris, Busan, and Rio. What’s certain is that Ramattra will see his plans for the future of omnics through . . . whatever the cost."
-    - heading: "Calm Before the Storm"
-      paragraphs:
-        - "Following a worldwide invasion, Null Sector’s ships have retreated, taking their subjugated omnics with them. Ramattra has seemingly disappeared without a trace, his whereabouts as unknown as his next move."
+        - "In time, Shion's captors—now revered elders in the clan—grew complacent and dropped their guard in her presence. Shion saw her opportunity and broke free, leaving a trail of death in her wake that ended with the murder of all four Hashimoto elders. Finally, Shion had control over her own fate. She quickly seized her chance at power, creating a fifth seat on the council of elders for herself, and forcing those she had spared to fight for the chance to rule by her side."
+        - "Using her newfound wealth and power, Shion transformed herself—modifying her chassis to suit her desire and crafting a mask that would instill fear. The result was something uncanny: neither human nor omnic, she belongs in no world other than the one she creates for herself. Shion lives life to the fullest; gaining a reputation for excess as she indulges in fashion, lovers, and custom motorcycles. Among the Hashimoto, Shion's murderous ascent is well remembered, and her penchant for punishment is widely feared. As a show of this power, Shion forced Toshiro Yamagami—a weapon smith imprisoned by the Hashimoto—to craft her a unique pair of anima pistols. With these new weapons and Vendetta’s backing, the Hashimoto’s rule over Tokyo is all but assured."
 -
   hero: "Ana"
   entries:
@@ -138,6 +120,9 @@
       paragraphs:
         - "He resurfaced several years later as a gunslinger for hire, fighting for causes he believed were just. But trouble has a way of finding old outlaws, and Cassidy’s list of enemies is long. He fought Talon while aboard a hypertrain in Texas and busted a heist by his former Deadlock Rebel allies in New Mexico. During the latter incursion, he freed Echo, the life’s work of his late friend, Dr. Mina Liao."
         - "After Cassidy received the call to rejoin Overwatch, a nostalgic run-in with Ana Amari had the gunslinger contemplating his future. Presented with growing security threats around the world and the possibilities afforded by a new team, Cassidy went on a mission to recruit heroes forged from various incursions around the globe. Reinforced with fresh faces, Cassidy and his new recruits are out in full force to strengthen Overwatch's presence worldwide."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "During a Talon operation at Grand Mesa, Cassidy was deployed to intercept unwelcome guests. There, he found himself face to face with his old companions: the Deadlock Gang. As Overwatch and Helix Securities recover from the attack, Cassidy faces misunderstandings between him and friends of the past. Time will tell whether his business with the gang is really finished."
 -
   hero: "D.Va"
   entries:
@@ -463,7 +448,7 @@
         - "Though her work is still unknown to most of the world, O'Deorain will go to any lengths for a scientific breakthrough."
     - heading: "Reign of Talon"
       paragraphs:
-        - "After witnessing Doomfist's downfall, Moira welcomed Vendetta's leadership within Talon. With more resources than ever before, Moira is ready to push her research to daunting   new extremes."
+        - "After witnessing Doomfist's downfall, Moira welcomed Vendetta's leadership within Talon. With more resources than ever before, Moira is ready to push her research to daunting new extremes. Now with access to the Soldier Enhancement Serum retrieved by Freja and Emre, she is on the cusp of perfecting a formula that will make Vendetta and her gladiators unstoppable."
 -
   hero: "Orisa"
   entries:
@@ -493,6 +478,22 @@
     - heading: "Recall"
       paragraphs:
         - "Fareeha had also let go of her childhood dreams of joining Overwatch, proud of what she had built with Helix. She turned down multiple requests from Tracer, Brigitte, and Reinhardt to answer Winston’s Recall. It was only when Cole Cassidy arrived in Cairo that she seriously considered joining. Cassidy brought Ana and Fareeha together in an emotional reunion that both reopened and healed many old wounds. When Cassidy called on Pharah to back up the nascent Overwatch on a mission to counter Null Sector in Busan, she answered the call. Now the Helix hero has expanded her horizons, lending her impressive skillset to rebuild the peacekeeping agency she once idolized."
+-
+  hero: "Ramattra"
+  entries:
+    - heading: "Shambali"
+      paragraphs:
+        - "Ramattra was never designed to co-exist with humanity. The Ravager omnic series was created early in the Omnic Crisis, part of a commander class of omnics whose role was to guide units into combat and adapt various strategic protocols to battlefield condition changes in real time."
+        - "After the Crisis, Ramattra heard rumors of a mysterious omnic named Aurora—the first of their kind. Intrigued and seeking direction, Ramattra embarked on a pilgrimage to the Shambali Monastery in Nepal, a place where Aurora was said to have resided. Ramattra survived the harsh journey and was welcomed by Tekhartha Mondatta. Choosing to become a monk of the Shambali, Ramattra studied under Mondatta for years, learning about the Iris—the mysterious phenomenon at the heart of the monks’ teachings—and the importance of coexisting with humans."
+        - "Years later, Ramattra began venturing outside the temple seeking enlightenment. It was on one of his journeys that he met an omnic named Zenyatta whom he guided to Shambali, in hopes the omnic would find purpose there as he did. However, as time wore on, Ramattra failed to see true progress in the monks’ mission of peace. The Shambali urged Ramattra to be patient, but all around him, Ramattra saw his people dying . . . and no one taking action."
+    - heading: "Null Sector"
+      paragraphs:
+        - "Ramattra knew he could follow the Shambali teachings no longer. He left the temple, seeking out omnics fighting in secret around the world and protecting them from the abuse of humans. The truths he shared with those he met inspired others and over time he gained an underground following of these hurt and angry omnics. Ramattra initially focused on building loyalty in his followers, but true radicalization and militarization would not be far behind."
+        - "Soon Ramattra’s forces were large enough to warrant a test. The target was London, to liberate the omnics there and see how his forces would perform to a world nearly two decades after the Omnic Crisis. Null Sector was ultimately defeated by Overwatch, a scenario Ramattra did not anticipate since Overwatch was forbidden to operate in the country. In addition, the omnics of London did not support the sacrifices on their behalf, going so far as to denounce the actions of Null Sector."
+        - "It’s been years since Ramattra—or Null Sector—was last seen. But now, for reasons unknown, Null Sector has appeared in the skies over Paris, Busan, and Rio. What’s certain is that Ramattra will see his plans for the future of omnics through . . . whatever the cost."
+    - heading: "Calm Before the Storm"
+      paragraphs:
+        - "Following a worldwide invasion, Null Sector’s ships have retreated, taking their subjugated omnics with them. Ramattra has seemingly disappeared without a trace, his whereabouts as unknown as his next move."
 -
   hero: "Reaper"
   entries:
@@ -537,6 +538,23 @@
       paragraphs:
         - "Exiled from Junkertown, the pair roamed Australia for a short while and even met with the CEO of Hyde Global, who hired them to reclaim a warehouse taken over by omnic terrorists. The duo soon realized they had been set up as part of an insurance scam. Though the job was a bust, it gave them the kick they needed to launch an international crime spree."
         - "Roadhog eventually returned to Junkertown, where Junkrat loudly disclosed their big plan to get payback on the Queen for their exile. The plan immediately failed thanks to the gate warden within earshot. Now, the duo has nothing left but money, useless disguises, and soon-to-detonate explosives."
+-
+  hero: "Sierra"
+  entries:
+    - heading: "Life On The Run"
+      paragraphs:
+        - "Sierra grew up everywhere. Her mother, Kendra Woods, never said much about her past or explained why they were always on the move, but she taught Sierra how to spot trouble. As she bounced from school to school, Sierra consistently placed at the top of her class, but her preternatural skill and itinerant lifestyle put her at odds with her peers. Through it all, Sierra’s mother encouraged Sierra to take pride in her exceptional talent and celebrate every win, instilling in her a sense of self-confidence that she would carry with her into adulthood."
+        - "Just before her thirteenth Birthday, Sierra’s mother mysteriously disappeared. Alone for the first time, Sierra followed her mother’s emergency protocol and used the bus ticket left in her mother’s things. The trail led her to the father she’d never met: James Turner, a park ranger in Virginia. As they grew closer, James explained how he met Kendra when she was living off the grid; how they settled down and started a family together, thinking they were safe in the seclusion of the Appalachian mountains; and how only a year later, Sierra’s mother fled in the night, taking their daughter with her. The only clue he had to Kendra’s past was that after she disappeared with Sierra, the US Government raided the house they'd built together, asking questions about “Project Naughton.”"
+    - heading: "Summit Squad"
+      paragraphs:
+        - "Sierra was determined to track her mother down. With her father’s support, Sierra doggedly pursued the only lead she had. But “Project Naughton” was highly classified—whatever was left of the program had been transferred to Helix Security International, reportedly sealed away in a vault at Watchpoint: Grand Mesa. Leveraging her unique physical prowess and exceptional intelligence, Sierra applied to work for Helix and quickly found her place as a squad leader in Helix’s Perilous Operations team—colloquially known as the Summit Squad—which specialized in missions in difficult terrain."
+        - "Utilizing plasma weaponry and her trusty R.O.T.H (remote operated traversal helper) unit DoR.O.T.H.y, Sierra spearheaded rescue missions in narrow canyons, busted criminal operations in cave networks, and lead her team to success atop the world’s highest peaks. From dangers in the Grand Canyon to Niagara, there was no challenge too great for Sierra to take on.  In just a few years, she earned a promotion to Watchpoint: Grand Mesa, just as she had planned. Finally, she was a step closer to the truth."
+    - heading: "Project Naughton"
+      paragraphs:
+        - "As the Head of Security at Grand Mesa, the youngest in Helix’s history, Sierra finally had access to classified documents. She learned that her mother, whose real name was Kendra Banks, had another moniker: Soldier: 00. As the first candidate of the Soldier Enhancement program, Sierra’s mother had been subject to a series of experiments that had altered her body and given her uncanny abilities. Kendra’s service after that point was poorly documented or redacted, suggesting that she’d defected from the program shortly after her procedure and been in hiding ever since. Finally, Sierra’s own miraculous strength and skill made sense... but her mother’s whereabouts remained a mystery. "
+    - heading: "Reign Of Talon"
+      paragraphs:
+        - "When Watchpoint: Grand Mesa was attacked by Talon, Sierra and her squad joined forces with Overwatch to fight them off. Sierra quickly took command, directing her squad to assist against the Deadlock Gang and Talon’s forces. Knowing Overwatch’s history of working with Jack Morrison and Gabriel Reyes, two of the Soldier Enhancement Program’s greatest successes, Sierra hopes that working with Overwatch will give her the information she needs to continue her search."
 -
   hero: "Sigma"
   entries:
