@@ -84,6 +84,11 @@
   slug: kings-row
   location: London, United Kingdom
 -
+  name: Neon Junction
+  type: Hybrid
+  slug: neon-junction
+  location: Japan
+-
   name: Numbani
   type: Hybrid
   slug: numbani
