@@ -91,11 +91,11 @@
 - "Configuration: Tank": [Bastion, Ability, Removed]
 - Reconfigure: [Bastion, Ability]
 - Self Repair: [Bastion, Ability, Ability 1, Removed]
-- Armored Artillery: [Bastion, Perk]
+- Armored Artillery: [Bastion, Perk, Removed]
 - Configuration Reload: [Bastion, Perk]
 - Lindholm Explosives: [Bastion, Perk]
 - Self-Repair: [Bastion, Perk]
-- Smart Bomb: [Bastion, Perk, Removed]
+- Smart Bomb: [Bastion, Perk]
 
 # Brigitte
 - Inspire: [Brigitte, Ability, Passive]
