@@ -482,15 +482,17 @@
   subrole: Flanker
   stadium: false
   release_date: "2026-06-16"
-  color: ""
-  full_name: null
+  color: "#f6f6f6"
+  full_name: Shion
   nationality: Japanese
-  birth_date: null
-  age: null
+  birth_date: "09-09"
+  age: 28
   locations:
     - Neon Junction, Tokyo, Japan
-  description:
-  story:
+  description: |-
+    Once an omnic held captive by the Hashimoto Clan, now its most notorious Elder, Shion has transformed herself into a fearsome icon of hatred.
+  story: |-
+    An omnic Awakened in a world of pain, Shion gained her sentience in the middle of a warzone. Though the Crisis had ended, Shion's suffering endured when she was captured by the Hashimoto and made into a glorified combat training machine. After years of imprisonment spent learning her captors’ weaknesses, she broke free and slayed them all, seizing their power for herself. Living her new life to the fullest, Shion has transformed herself into something uncanny and dangerous. Now, she exists in the space between human and machine... and she will do anything to maintain control.
 -
   name: Sierra
   role: Damage
