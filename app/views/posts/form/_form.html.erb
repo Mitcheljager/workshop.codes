@@ -45,8 +45,8 @@
       <hr class="mt-1/2 mb-1/2" />
 
       <div class="flex">
-        <%= link_to "🠨 #{ tabs[index - 1] }", "#", class: "button button--secondary", data: { action: "set-tab", target: tabs[index - 1] } if index > 0 %>
-        <%= link_to "#{ tabs[index + 1] } 🠦", "#", class: "button button--secondary ml-auto", data: { action: "set-tab", target: tabs[index + 1] } if index + 1 < tabs.size %>
+        <%= link_to "🠨 #{ tabs[index - 1].capitalize }", "#", class: "button button--secondary", data: { action: "set-tab", target: tabs[index - 1] } if index > 0 %>
+        <%= link_to "#{ tabs[index + 1].capitalize } 🠦", "#", class: "button button--secondary ml-auto", data: { action: "set-tab", target: tabs[index + 1] } if index + 1 < tabs.size %>
 
         <%= form.submit class: "button ml-auto", data: { disable_with: "..." } if index + 1 == tabs.size  %>
       </div>
