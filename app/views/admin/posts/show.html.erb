@@ -7,7 +7,7 @@
 
   <nav class="tabs mt-1/2 mb-1/2" aria-label="Post controls">
     <%= link_to "Status", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
-    <%= link_to "Images <small>#{ @post.images.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
+    <%= link_to "Images <small>#{ @post.images.size + (@post.banner_image.attached? ? 1 : 0) }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "images" } %>
     <%= link_to "Analytics".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "analytics" } %>
   </nav>
 
@@ -65,6 +65,22 @@
         </div>
       <% end %>
     </div>
+
+    <h4>Banner image</h4>
+
+    <% if @post.banner_image.attached? %>
+      <div class="gallery">
+        <div class="gallery__item gallery__item--static">
+          <%= image_tag banner_small_variant_public_url(@post.banner_image), loading: "lazy" %>
+
+          <div class="p-1/8 pl-1/4 flex justify-end align-center">
+            <%= button_to "Remove", admin_destroy_post_banner_image_path(post_id: @post.id), method: :delete, class: "button button--danger button--small" %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <em>No banner image is attached</em>
+    <% end %>
   </div>
 
 

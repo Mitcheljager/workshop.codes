@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     root to: "base#index"
 
     delete "posts/destroy_image", to: "posts#destroy_image", as: "destroy_post_image"
+    delete "posts/destroy_banner_image", to: "posts#destroy_banner_image", as: "destroy_post_banner_image"
     resources :posts, only: [:index, :show, :update, :destroy]
     post "posts/find", to: "posts#find", as: "find_post"
 

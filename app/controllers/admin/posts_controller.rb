@@ -54,4 +54,16 @@ class Admin::PostsController < Admin::BaseController
       redirect_to admin_post_path(@post.id)
     end
   end
+
+  def destroy_banner_image
+    begin
+      @post = Post.find(params[:post_id])
+      @post.banner_image.purge
+
+      redirect_to admin_post_path(@post.id)
+    rescue => e
+      flash[:error] = "Image could not be removed: #{e.message}"
+      redirect_to admin_post_path(@post.id)
+    end
+  end
 end
