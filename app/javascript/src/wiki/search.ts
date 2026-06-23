@@ -25,6 +25,9 @@ const searchWiki = debounce(() => {
     .then(data => {
       setWikiSearchResults(JSON.parse(data as string))
     })
+    .catch(() => {
+      resultsElement.innerHTML = "Sorry, something went wrong"
+    })
 }, 250)
 
 function setWikiSearchResults(data: WikiArticle[]): void {
