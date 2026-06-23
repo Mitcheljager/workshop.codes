@@ -35,7 +35,7 @@ class PostSerializer < ActiveModel::Serializer
 
       map = maps_array.find { |m| m["name"] == object.maps[random_with_seed - 1] }
 
-      url = root_url + ActionController::Base.helpers.image_url("maps/large/#{ map["slug"] }.jpg")
+      url = root_url + ActionController::Base.helpers.vite_asset_url("images/maps/large/#{ map["slug"] }.jpg")
     end
 
     url
