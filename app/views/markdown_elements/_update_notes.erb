@@ -25,8 +25,16 @@
         <% abilities.each do |key, strings| %>
           <div class="update-notes__item">
             <% begin %>
-              <% ability_image = icons[key].present? && icons[key].start_with?('http') ? icons[key] : ability_name_to_icon_url(icons[key] || key, 50) %>
-              <%= vite_image_tag ability_image, loading: "lazy", class: "update-notes__ability", width: 50, height: 50, alt: "" if ability_image.present? %>
+              <% external = icons[key]&.start_with?('http') %>
+              <% ability_image = external ? icons[key] : ability_name_to_icon_url(icons[key] || key, 50) %>
+
+              <% if ability_image.present? %>
+                <% if external %>
+                  <%= image_tag ability_image, loading: "lazy", class: "update-notes__ability", width: 50, height: 50, alt: ""%>
+                <% else %>
+                  <%= vite_image_tag ability_image, loading: "lazy", class: "update-notes__ability", width: 50, height: 50, alt: "" %>
+                <% end %>
+              <% end %>
             <% rescue; end %>
 
             <div>
