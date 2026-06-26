@@ -55,3 +55,4 @@ Disallow: /raw-snippet/*
 Disallow: /reports/*
 Disallow: /raw-snippet/*
 Disallow: /p/*
+Disallow: /wiki/articles/p/*
