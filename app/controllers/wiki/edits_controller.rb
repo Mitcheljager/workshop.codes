@@ -6,7 +6,7 @@ class Wiki::EditsController < Wiki::BaseController
   end
 
   def article
-    @edits = Wiki::Edit.joins(:article).where("wiki_articles.group_id": params[:group_id]).order(created_at: :desc).page(params[:page])
+    @edits = Wiki::Edit.joins(:article).where("wiki_articles.group_id": params[:group_id]).order(created_at: :desc)
 
     add_breadcrumb params[:group_id], Proc.new { wiki_article_edits_path(params[:group_id]) }
   end
