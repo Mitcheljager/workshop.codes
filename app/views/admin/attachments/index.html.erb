@@ -11,7 +11,11 @@
 <div class="gallery">
   <% @attachments.each do |attachment| %>
     <div class="gallery__item gallery__item--static">
-      <%= image_tag landscape_tiny_variant_public_url(attachment), height: 80, loading: "lazy" %>
+      <% if attachment.content_type.include?("image/") %>
+        <%= image_tag landscape_tiny_variant_public_url(attachment), height: 80, loading: "lazy" %>
+      <% else %>
+        <%= attachment.content_type %>
+      <% end %>
 
       <div class="p-1/8 pl-1/4">
         <strong><%= attachment.record_type %></strong>
