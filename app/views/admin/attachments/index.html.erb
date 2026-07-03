@@ -1,0 +1,33 @@
+<% content_for :page_title, "Admin | Projects" %>
+
+<%= render "admin/navigation"  %>
+
+<p>Total attachments: <strong><%= ActiveStorage::Attachment.where.not(record_type: "ActiveStorage::VariantRecord").all.size %></strong></p>
+<p>Total variants: <strong><%= ActiveStorage::Attachment.all.size %></strong></p>
+<p>Attachments in last 7 days: <strong><%= ActiveStorage::Attachment.where.not(record_type: "ActiveStorage::VariantRecord").where("created_at > ?", 1.week.ago).size %></strong></p>
+
+<hr>
+
+<div class="gallery">
+  <% @attachments.each do |attachment| %>
+    <div class="gallery__item gallery__item--static">
+      <%= image_tag landscape_tiny_variant_public_url(attachment), height: 80, loading: "lazy" %>
+
+      <div class="p-1/8 pl-1/4">
+        <strong><%= attachment.record_type %></strong>
+
+        <% if attachment.record_type == "Post" %>
+          <%= link_to attachment.record_id, admin_post_path(attachment.record_id) %> <br>
+        <% elsif attachment.record_type == "User" %>
+          <%= link_to attachment.record_id, admin_user_path(attachment.record_id) %> <br>
+        <% else %>
+          <%= attachment.record_id %> <br>
+        <% end %>
+
+        <small><%= attachment.created_at %></small>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @attachments %>

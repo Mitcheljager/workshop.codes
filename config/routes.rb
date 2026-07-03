@@ -63,7 +63,8 @@ Rails.application.routes.draw do
     resources :email_notifications, only: [:index]
     resources :activities, only: [:index]
     resources :reports, only: [:index, :show]
-    resources :projects, only: [:index, :show]
+    resources :projects, only: [:index]
+    resources :attachments, only: [:index]
 
     get "admin/analytics_partial", to: "base#analytics_partial", as: "analytics_partial"
   end
