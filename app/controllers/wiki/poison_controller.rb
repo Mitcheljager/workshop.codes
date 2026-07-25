@@ -24,7 +24,10 @@ class Wiki::PoisonController < Wiki::BaseController
     @initial_article = @article
     @edit_count = 1
 
-    render "wiki/articles/show"
+    respond_to do |format|
+      format.html { render "wiki/articles/show" }
+      format.json { render json: @article.to_json(include: :category) }
+    end
   end
 
   private
