@@ -7,8 +7,8 @@
 
   <div data-role="tabs" class="mb-1/2">
     <nav class="tabs mt-1/2">
-      <%= link_to "Display", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "display" } %>
-      <%= link_to "Codes", "#", class: "tabs__item", data: { action: "set-tab", target: "codes" } %>
+      <%= tag.button "Display", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "display" } %>
+      <%= tag.button "Codes", class: "tabs__item", data: { action: "set-tab", target: "codes" } %>
     </nav>
 
     <div class="tabs-content tabs-content--active" data-tab="display">
@@ -105,7 +105,7 @@
     </div>
   </div>
 
-  <hr class="mt-1/2 mb-1/2" />
+  <hr class="mt-1/2 mb-1/2">
 
   <%= submit_tag "Save", class: "button mt-1/4", data: { disable_with: "Saving..." } %>
 <% end %>

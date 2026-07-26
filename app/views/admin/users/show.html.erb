@@ -12,12 +12,12 @@
   <% end %>
 
   <nav class="tabs mb-1/2">
-    <%= button_tag "Status", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
-    <%= button_tag "Notifications <small>#{ @user.notifications.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "notifications" } %>
-    <%= button_tag "Badges <small>#{ @user.badges.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
-    <%= button_tag "Posts <small>#{ @user.posts.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "posts" } %>
-    <%= button_tag "Comments <small>#{ @user.comments.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "comments" } %>
-    <%= button_tag "Activity <small>#{ @user.activities.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "activity" } %>
+    <%= tag.button "Status", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
+    <%= tag.button "Notifications <small>#{ @user.notifications.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "notifications" } %>
+    <%= tag.button "Badges <small>#{ @user.badges.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
+    <%= tag.button "Posts <small>#{ @user.posts.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "posts" } %>
+    <%= tag.button "Comments <small>#{ @user.comments.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "comments" } %>
+    <%= tag.button "Activity <small>#{ @user.activities.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "activity" } %>
   </nav>
 
   <% if @user.linked_id %>

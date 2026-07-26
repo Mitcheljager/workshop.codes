@@ -6,7 +6,7 @@
       <span>Sorted by</span>
 
       <div class="dropdown" data-dropdown>
-        <%= link_to params[:sort_posts] ? params[:sort_posts].humanize : "Created at", "#", class: "dropdown__toggle ml-1/8", data: { action: "toggle-dropdown" } %>
+        <%= tag.button params[:sort_posts] ? params[:sort_posts].humanize : "Created at", "#", class: "dropdown__toggle ml-1/8", data: { action: "toggle-dropdown" } %>
 
         <div class="dropdown__content" data-dropdown-content>
           <%= link_to "Created at", account_posts_path, class: "dropdown__item #{ "text-lightest" unless params[:sort_posts].present? }" %>

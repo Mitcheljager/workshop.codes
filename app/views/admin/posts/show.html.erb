@@ -6,9 +6,9 @@
   <h2 class="mt-0 mb-0"><strong><%= @post.title %></strong> <small><%= link_to @post.code, post_path(@post.code) %></small></h2>
 
   <nav class="tabs mt-1/2 mb-1/2" aria-label="Post controls">
-    <%= button_tag "Status", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
-    <%= button_tag "Images <small>#{ @post.images.size + (@post.banner_image.attached? ? 1 : 0) }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "images" } %>
-    <%= button_tag "Analytics".html_safe, class: "tabs__item", data: { action: "set-tab", target: "analytics" } %>
+    <%= tag.button "Status", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
+    <%= tag.button "Images <small>#{ @post.images.size + (@post.banner_image.attached? ? 1 : 0) }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "images" } %>
+    <%= tag.button "Analytics".html_safe, class: "tabs__item", data: { action: "set-tab", target: "analytics" } %>
   </nav>
 
   <div class="tabs-content tabs-content--active" data-tab="status">

@@ -10,7 +10,7 @@
       <% if display_type == "list" %>
         <%= render @posts %>
       <% else %>
-        <%= render collection: @posts, partial: "posts/card", as: :post  %>
+        <%= render collection: @posts, partial: "posts/card", as: :post %>
       <% end %>
 
       <% if @posts.size == PAGE_SIZE || params[:page] %>

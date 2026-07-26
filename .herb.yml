@@ -5,3 +5,9 @@ linter:
 
     erb-no-unsafe-raw:
       enabled: false
+
+    erb-no-output-in-attribute-name:
+      enabled: false
+
+    erb-no-output-in-attribute-position:
+      enabled: false

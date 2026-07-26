@@ -7,7 +7,7 @@
         <%= vite_inline_svg_tag "images/icons/icon-verified.svg", height: 30, width: 30, class: "fill-current-color" %>
         <div class="pl-1/4">
           You're verified!
-          <div class="mt-1/8">As a gift for your efforts, you are now able to customize the CSS of your profile page. (<%= link_to "Click here", user_profile_path(current_user), class: "button--link" %> to edit)</li></div>
+          <div class="mt-1/8">As a gift for your efforts, you are now able to customize the CSS of your profile page. (<%= link_to "Click here", user_profile_path(current_user), class: "button--link" %> to edit)</div>
         </div>
       </div>
     <% else %>
@@ -58,7 +58,8 @@
         <% begin %>
           <div class="profile-image">
             <%= image_tag (@user.profile_image.attached? ? rails_public_blob_url(@user.profile_image.variant(quality: 95, resize_to_fill: [120, 120]).processed) : "//:0"),
-                          data: { image_preview: "profile-image" } %>
+                          data: { image_preview: "profile-image" },
+                          alt: "" %>
           </div>
         <% rescue %>
           <p><em>Something went wrong when retrieving your image. This is likely our fault. Please try re-uploading your image, or try again later.</em></p>
