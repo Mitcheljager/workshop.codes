@@ -31,15 +31,15 @@ class Admin::BaseController < ApplicationController
     top_posts_events = get_events("Copy Code")
 
     # This is ugly as hell
-    @top_posts_by_views = top_posts_events.group_by do |props|
-      props["id"]
+    @top_posts_by_views = top_posts_events.group_by do |properties|
+      properties[:id]
     end.map do |id, items| {
       id:,
       count: items.size
     } end.sort_by { |item| -item[:count] }.first(10)
 
-    @top_pages_by_views = top_pages_events.group_by do |props|
-      props["url"]
+    @top_pages_by_views = top_pages_events.group_by do |properties|
+      properties[:url]
     end.map do |url, items| {
       url:,
       count: items.size
