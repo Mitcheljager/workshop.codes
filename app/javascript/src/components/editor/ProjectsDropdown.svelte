@@ -78,7 +78,7 @@
         <SearchObjects objects={$projects} bind:filteredObjects={filteredProjects} />
       </div>
 
-      <hr />
+      <hr>
 
       {#each filteredProjects as project (project.uuid)}
         <button class="dropdown__item" animate:flip={{ duration: 100 }} on:click={() => getProject(project.uuid)}>
@@ -91,7 +91,7 @@
       {/if}
 
       {#if $projects?.length}
-        <hr />
+        <hr>
       {/if}
 
       <div class="p-1/4">

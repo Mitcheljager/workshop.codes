@@ -106,7 +106,7 @@
         <input id="compile-without-settings" type="checkbox" bind:checked={compileWithoutSettings} />
         <label for="compile-without-settings" class="text-small">Exclude settings</label>
       </div>
-      <hr />
+      <hr>
       {#if $selectedLanguages.length && Object.keys($translationKeys).length}
         <p class="pl-1/4 pr-1/4 mt-1/8 mb-1/8" class:text-small={inline}>Compile for a single language only</p>
         <p class="pl-1/4 pr-1/4 mt-0 text-small text-dark">Compile translations as standard Custom Strings for the given language.</p>

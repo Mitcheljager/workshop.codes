@@ -214,7 +214,7 @@
           </button>
         {/each}
 
-        <hr />
+        <hr>
 
         {#each FILE_TYPES as fileType}
           <button class="dropdown__item" on:click={() => exportKeysToClipboard(fileType)}>
