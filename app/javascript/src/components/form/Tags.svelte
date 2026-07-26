@@ -222,7 +222,7 @@
             Something went wrong. Try again later.
           </strong>
 
-          <br />
+          <br>
 
           <span class="m-0"><small>{error}</small></span>
         </li>

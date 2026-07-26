@@ -274,7 +274,7 @@
             <div class="editor-hidden-item-indicator__tooltip">
               This item or one of its containing folders has been hidden,
               meaning this file won't be included in the compiled output.
-              <br /><br />
+              <br><br>
               To unhide it, hover over the item on the sidebar and press the
               <EyeIcon
                 class="vertical-align-middle"

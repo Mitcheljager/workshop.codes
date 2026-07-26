@@ -12,12 +12,12 @@
   <% end %>
 
   <nav class="tabs mb-1/2">
-    <%= link_to "Status", "#", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
-    <%= link_to "Notifications <small>#{ @user.notifications.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "notifications" } %>
-    <%= link_to "Badges <small>#{ @user.badges.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
-    <%= link_to "Posts <small>#{ @user.posts.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "posts" } %>
-    <%= link_to "Comments <small>#{ @user.comments.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "comments" } %>
-    <%= link_to "Activity <small>#{ @user.activities.size }</small>".html_safe, "#", class: "tabs__item", data: { action: "set-tab", target: "activity" } %>
+    <%= button_tag "Status", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
+    <%= button_tag "Notifications <small>#{ @user.notifications.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "notifications" } %>
+    <%= button_tag "Badges <small>#{ @user.badges.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
+    <%= button_tag "Posts <small>#{ @user.posts.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "posts" } %>
+    <%= button_tag "Comments <small>#{ @user.comments.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "comments" } %>
+    <%= button_tag "Activity <small>#{ @user.activities.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "activity" } %>
   </nav>
 
   <% if @user.linked_id %>
@@ -48,14 +48,14 @@
         </div>
       <% end %>
 
-      <hr class="mt-1/4 mb-1/4" />
+      <hr class="mt-1/4 mb-1/4">
 
       <%= button_to "Delete user", admin_user_path(@user), method: :delete, class: "button button--small button--danger", data: { confirm: "Are you sure? The user and all of its associations will be removed. This can not be undone. Only use this in case of spam." } %>
     </div>
 
     <div class="mt-1/2">
-      <p>Created at: <strong><%= @user.created_at %></strong>
-      <p>Updated at: <strong><%= @user.updated_at %></strong>
+      <p>Created at: <strong><%= @user.created_at %></strong></p>
+      <p>Updated at: <strong><%= @user.updated_at %></strong></p>
     </div>
 
     <table class="w-auto mt-1/2">
@@ -78,7 +78,7 @@
         <tr>
           <td><strong><%= linked_user.provider %></strong></td>
           <td><%= linked_user.username %></td>
-        </td>
+        </tr>
       <% end %>
 
       <%= "None" unless @linked_users.any? %>
@@ -143,7 +143,7 @@
         <%= form.label :badge_id, class: "form-label" %>
         <%= form.select :badge_id, badges.map { |b| ["#{ b["label"] } - #{ b["description"] }", b["id"]] }, {}, class: "form-select w-auto" %>
 
-        <br />
+        <br>
 
         <%= submit_tag "Give badge", class: "button button--secondary mt-1/8" %>
       <% end %>
@@ -157,16 +157,16 @@
       <tr>
         <th>ID</th>
         <th>Code</th>
-        <th>Title<th>
-        <th>Created at<th>
+        <th>Title</th>
+        <th>Created at</th>
       </tr>
 
       <% @user.posts.order(created_at: :desc).each do |post| %>
         <tr>
           <td><%= link_to post.id, admin_post_path(post.id) %></td>
           <td><strong><%= link_to post.code, post_path(post.code) %></strong></td>
-          <td><%= post.title %><td>
-          <td><%= post.created_at %><td>
+          <td><%= post.title %></td>
+          <td><%= post.created_at %></td>
         </tr>
       <% end %>
 

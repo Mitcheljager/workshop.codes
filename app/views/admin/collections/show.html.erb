@@ -3,9 +3,9 @@
 <%= render "admin/navigation" %>
 
 <h3 class="mt-0">Collection: <strong><%= @collection.title %></strong></h3>
-<p>Created by: <strong><%= link_to @collection.user.username, admin_user_path(@collection.user.id) %></strong>
-<p>Created at: <strong><%= @collection.created_at %></strong>
-<p>Updated at: <strong><%= @collection.created_at %></strong>
+<p>Created by: <strong><%= link_to @collection.user.username, admin_user_path(@collection.user.id) %></strong></p>
+<p>Created at: <strong><%= @collection.created_at %></strong></p>
+<p>Updated at: <strong><%= @collection.created_at %></strong></p>
 
 <hr>
 

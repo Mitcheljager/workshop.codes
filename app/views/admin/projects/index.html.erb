@@ -1,6 +1,6 @@
 <% content_for :page_title, "Admin | Projects" %>
 
-<%= render "admin/navigation"  %>
+<%= render "admin/navigation" %>
 
 <p>Total projects: <strong><%= Project.all.size %></strong></p>
 <p>Last project: <strong><%= time_ago_in_words(@projects.first.created_at).humanize %></strong></p>

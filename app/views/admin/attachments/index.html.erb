@@ -1,6 +1,6 @@
 <% content_for :page_title, "Admin | Attachments" %>
 
-<%= render "admin/navigation"  %>
+<%= render "admin/navigation" %>
 
 <p>Total attachments: <strong><%= ActiveStorage::Attachment.where.not(record_type: "ActiveStorage::VariantRecord").all.size %></strong></p>
 <p>Total variants: <strong><%= ActiveStorage::Attachment.all.size %></strong></p>
@@ -12,7 +12,7 @@
   <% @attachments.each do |attachment| %>
     <div class="gallery__item gallery__item--static">
       <% if attachment.content_type.include?("image/") %>
-        <%= image_tag landscape_tiny_variant_public_url(attachment), height: 80, loading: "lazy" %>
+        <%= image_tag landscape_tiny_variant_public_url(attachment), height: 80, loading: "lazy", alt: "" %>
       <% else %>
         <%= attachment.content_type %>
       <% end %>
@@ -21,12 +21,14 @@
         <strong><%= attachment.record_type %></strong>
 
         <% if attachment.record_type == "Post" %>
-          <%= link_to attachment.record_id, admin_post_path(attachment.record_id) %> <br>
+          <%= link_to attachment.record_id, admin_post_path(attachment.record_id) %>
         <% elsif attachment.record_type == "User" %>
-          <%= link_to attachment.record_id, admin_user_path(attachment.record_id) %> <br>
+          <%= link_to attachment.record_id, admin_user_path(attachment.record_id) %>
         <% else %>
-          <%= attachment.record_id %> <br>
+          <%= attachment.record_id %>
         <% end %>
+
+         <br>
 
         <small><%= attachment.created_at %></small>
       </div>

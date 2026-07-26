@@ -1,6 +1,6 @@
 <% content_for :page_title, "Admin | Activities" %>
 
-<%= render "admin/navigation"  %>
+<%= render "admin/navigation" %>
 
 <p>Total activities: <strong><%= Activity.all.size %></strong></p>
 <p>Last activities: <strong><%= time_ago_in_words(@activities.first.created_at).humanize %></strong></p>

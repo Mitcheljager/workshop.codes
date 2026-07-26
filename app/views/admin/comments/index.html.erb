@@ -1,6 +1,6 @@
 <% content_for :page_title, "Admin | Comments" %>
 
-<%= render "admin/navigation"  %>
+<%= render "admin/navigation" %>
 
 <p>Total comments: <strong><%= Comment.all.size %></strong></p>
 <p>Last comment: <strong><%= time_ago_in_words(@comments.first.created_at).humanize %></strong></p>
