@@ -31,7 +31,7 @@
         <th>Count</th>
       </thead>
 
-      <% @top_posts_by_views.each_with_index do |properties, index| %>
+      <% @top_posts_by_copies.each_with_index do |properties, index| %>
         <% post = Post.find_by_id(properties[:id]) %>
 
         <% if post.present? %>
