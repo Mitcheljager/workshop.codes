@@ -56,7 +56,7 @@ class RevisionsController < ApplicationController
   private
 
   def set_revision
-    @revision = Revision.includes(:post).find(params[:id])
+    @revision = Revision.includes(:post).find_by_id!(params[:id])
   end
 
   def revision_activity_params
