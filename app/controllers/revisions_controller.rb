@@ -1,5 +1,6 @@
 class RevisionsController < ApplicationController
   layout false, only: [:raw_snippet]
+
   before_action :set_revision, except: [:index, :partial]
 
   before_action except: [:show, :raw_snippet, :index, :partial] do
@@ -36,7 +37,7 @@ class RevisionsController < ApplicationController
 
   def raw_snippet
     respond_to do |format|
-      format.json
+      format.text { render body: @revision.snippet }
     end
   end
 

@@ -140,7 +140,7 @@ Rails.application.routes.draw do
   get ":code/revisions", to: "revisions#index", as: "revisions"
   get "revisions/partial/:id", to: "revisions#partial", as: "revisions_partial"
   get "revisions/:id(/:compare_id)", to: "revisions#show", as: "difference"
-  get "raw-snippet/:id(.:format)", to: "revisions#raw_snippet", as: "raw_snippet", format: :json
+  get "raw-snippet/:id", to: "revisions#raw_snippet", as: "raw_snippet", defaults: { format: :text }
 
   resources :projects, param: :uuid, format: :json, only: [:show, :create, :update, :destroy]
   resources :project_backups, param: :uuid, format: :json
