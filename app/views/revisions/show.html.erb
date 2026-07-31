@@ -9,7 +9,7 @@
     Viewing snippet of
   <% end %>
   <div class="dropdown" data-dropdown>
-    <strong><%= link_to @revision.code, "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %></strong>
+    <strong><%= tag.button @revision.code, class: "dropdown__toggle", data: { action: "toggle-dropdown" } %></strong>
 
     <div class="dropdown__content" data-dropdown-content>
       <% @post.revisions.order(created_at: :desc).each do |revision| %>
@@ -24,7 +24,7 @@
   <% if @compare_revision.present? %>
     and
     <div class="dropdown" data-dropdown>
-      <strong><%= link_to @compare_revision.code, "#", class: "dropdown__toggle", data: { action: "toggle-dropdown" } %></strong>
+      <strong><%= tag.button @compare_revision.code, class: "dropdown__toggle", data: { action: "toggle-dropdown" } %></strong>
 
       <div class="dropdown__content" data-dropdown-content>
         <% @post.revisions.order(created_at: :desc).each do |revision| %>
