@@ -1,13 +1,14 @@
 import { findRangesOfStrings, getClosingBracket, getPhraseFromPosition, matchAllOutsideRanges, splitArgumentsString } from "@utils/parse"
-import { completionsMap, modal, settings, subroutinesMap, workshopConstants } from "@stores/editor"
+import { completionsMap, flatItems, modal, settings, subroutinesMap, workshopConstants } from "@stores/editor"
 import { get } from "svelte/store"
 import { getFirstParameterObject } from "@utils/compiler/parameterObjects"
 import type { EditorView } from "codemirror"
 import { forceLinting, type Diagnostic } from "@codemirror/lint"
-import type { Severity, TranslationKey } from "@src/types/editor"
+import type { Severity, TranslationKey, Variables } from "@src/types/editor"
 import type { Line } from "@codemirror/state"
 import { defaultLanguage, translationKeys } from "@src/stores/translationKeys"
 import { Modal } from "@src/constants/Modal"
+import { getVariables } from "@src/utils/compiler/variables"
 
 let diagnostics: Diagnostic[] = []
 
@@ -31,6 +32,7 @@ export function OWLanguageLinter(view: EditorView): Diagnostic[] {
   findHeroEnabledOrOn(content)
   findMapIdZero(content)
   findEventPlayerInGlobalRules(content)
+  findMixedCasingVariables(content)
   checkCurlyBracketNewlineStyle(content)
   checkMixins(content)
   checkTranslations(content)
@@ -813,6 +815,41 @@ function findMapIdZero(content: string): void {
       }]
     })
   }
+}
+
+function findMixedCasingVariables(content: string): void {
+  const stringRanges = findRangesOfStrings(content)
+  const contentVariables = getVariables(content)
+  const fullVariables = getVariables(get(flatItems))
+  const variableTypes = ["globalVariables", "playerVariables"] as (keyof Variables)[]
+
+  for (const variableType of variableTypes) {
+    const variables = contentVariables[variableType]
+
+    if (!variables.length) continue
+
+    const mixedCasingVariables = []
+
+    for (const variable of variables) {
+      if (fullVariables[variableType].filter(compare => variable.toLowerCase() === compare.toLowerCase()).length >= 2) {
+        mixedCasingVariables.push(variable)
+      }
+    }
+
+    for (const variable of mixedCasingVariables) {
+      const key = variableType === "globalVariables" ? "Global" : "Player"
+      const match = matchAllOutsideRanges(stringRanges, content, new RegExp(`${key}.${variable}`, "g"))[0]
+      const from = match.index
+
+      diagnostics.push({
+        from: key.length + from + 1,
+        to: from + match[0].length,
+        severity: "warning",
+        message: `A ${key} variable exists that is only different in casing.`
+      })
+    }
+  }
+
 }
 
 function checkCurlyBracketNewlineStyle(content: string): void {
