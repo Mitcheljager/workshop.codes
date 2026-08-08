@@ -1,4 +1,19 @@
 -
+  name: D.mon
+  role: Tank
+  subrole: Stalwart
+  stadium: false
+  release_date: "2026-08-18"
+  color: "#000000"
+  full_name: Yuna Lee
+  nationality: South Korea
+  birth_date: null
+  age: null
+  locations:
+    - MEKA Base, Busan, South Korea
+  description:
+  story:
+-
   name: D.va
   role: Tank
   subrole: Initiator
@@ -10,7 +25,7 @@
   birth_date: "06-22"
   age: 21
   locations:
-    - MEKA Base, Busan, South Korea (formerly),
+    - MEKA Base, Busan, South Korea (formerly)
     - "Watchpoint: Gibraltar"
   description: |-
     D.Va is a former professional gamer who now uses her skills to pilot a state-of-the-art mech in defense of her homeland.
