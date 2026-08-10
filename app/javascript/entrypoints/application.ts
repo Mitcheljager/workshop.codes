@@ -35,6 +35,7 @@ import * as ollieForm from "@src/ollie-form"
 import * as revealBySelect from "@src/reveal-by-select"
 import * as scrollIndicator from "@src/scroll-indicator"
 import * as scrollIntoViewOnLoad from "@src/scroll-into-view-on-load"
+import * as searchTable from "@src/search-table"
 import * as sticky from "@src/sticky"
 import * as tabs from "@src/tabs"
 import * as timeago from "@src/timeago"
@@ -64,6 +65,7 @@ document.addEventListener("turbolinks:load", () => {
   revealBySelect.bind()
   scrollIndicator.bind()
   sticky.bind()
+  searchTable.bind()
   tabs.bind()
   toggleContent.bind()
   youtubePreview.bind()
