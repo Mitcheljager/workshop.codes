@@ -7,8 +7,8 @@
   color: "#c5382b"
   full_name: Yuna Lee
   nationality: South Korea
-  birth_date: null
-  age: null
+  birth_date: "04-21"
+  age: 28
   locations:
     - MEKA Base, Busan, South Korea
   description:
