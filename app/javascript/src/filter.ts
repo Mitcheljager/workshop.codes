@@ -2,6 +2,7 @@ import FetchRails from "@src/fetch-rails"
 import { render as renderNumPlayersSlider } from "@src/num-players-slider"
 import { bind as bindGetVerifiedUsers } from "@src/get-verified-users"
 import { closeDropdown } from "@src/dropdown"
+import Turbolinks from "turbolinks"
 
 export function bind(): void {
   const elements = document.querySelectorAll("[data-action~='get-filter-content']")
@@ -70,7 +71,7 @@ function buildFilterPath({ target }: { target: HTMLElement }): void {
   const filteredBuildPath = Object.fromEntries(Object.entries(buildPath).filter(([_, v]) => v != ""))
   const buildPathString = Object.entries(filteredBuildPath).map(([k, v]) => `${k}=${v}`).join("&")
 
-  window.location.href = `/search?${buildPathString}`
+  Turbolinks.visit(`/search?${buildPathString}`)
 }
 
 function filterValue(type: string, parent: HTMLElement): string {
