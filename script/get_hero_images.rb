@@ -30,7 +30,7 @@ def get_document(url)
 end
 
 def download_image(url, filename)
-  existing_file = File.join(__dir__, "..", "app/assets/images/abilities/128", filename + File.extname(url))
+  existing_file = File.expand_path(File.join(__dir__, "..", "app/javascript/images/abilities/128", filename + File.extname(url)))
   return if File.exist?(existing_file)
 
   response = HTTParty.get(url)
@@ -63,7 +63,12 @@ output = ""
 
 links.each_with_index do |link, index|
   hero_name = hero_names[index]
-  document = get_document(base_url + link.get_attribute("href"))
+
+  begin
+    document = get_document(base_url + link.get_attribute("href"))
+  rescue
+    next
+  end
 
   abilities = document.css(".abilities blz-tab-control")
 
