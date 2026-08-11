@@ -1,20 +1,18 @@
 # This file is generated via script/get_hero_lore.rb
 
 -
-  hero: "Shion"
+  hero: "D.Mon"
   entries:
-    - heading: "Awakened In Conflict"
+    - heading: "Esports Champion"
       paragraphs:
-        - "In many parts of the world, the Awakening led to a peaceful ceasefire—but in Tokyo, terror and confusion only led to further conflict. Shion's own Awakening was scored with screams and gunfire as she dug herself free from the casualties of war. Knowing only danger and death, Shion fled from the wreckage and kept fighting."
-        - "Shion survived for weeks on the streets in a state of fear, killing anyone she encountered. Meanwhile, tension and resentment still defined the relationship between omnics and humans in Tokyo, and local gangs took to the streets to mistreat and hunt down omnics as a form of ‘justice’. Eventually, a group of these criminals—humans who would go on to found the Hashimoto Clan—defeated Shion and took her captive."
-    - heading: "Kept In Chains"
+        - "Yuna Lee, otherwise known as “D.Mon”, was a dominant player in the esports scene during her college years who quickly earned a reputation for her tactical precision and composure under pressure. After years of professional play, Yuna found even more success when a new member joined her team: Hana Song, known better as D.Va. While D.Va carried games with her aggressive playstyle, D.Mon anchored the team, bringing the calm, control, and strategy that secured their victories. The two formed quite the dynamic duo and consistently pushed one another to improve, building an unbreakable friendship."
+    - heading: "Meka Squad"
       paragraphs:
-        - "Rather than kill Shion, the Hashimoto saw her potential as a way for them to gain power. They decided to train against her, honing their fighting techniques. If the Hashimoto were to become Tokyo’s deadliest blade, she would be the steel they sharpened against: a killer with machine-like precision but an unpredictable, sentient spark. For Shion, the war raged on, relentless in its cruelty. But secretly, Shion held back—pulling her punches and learning her captors’ weaknesses so she might someday overtake them."
-        - "In all that time, Shion only saw glimpses of the outside world. Treated poorly by the Hashimoto, she knew herself not as an omnic but as “inhuman,” and had little opportunity to gain a sense of self. Shion had long since conquered any fear of her captors—violence, in its consistency, had almost become a comfort—but she had to believe there was more to life than survival. If she wanted anything, it was to be free of her imprisonment and to punish those who kept her in a cage."
-    - heading: "Risen In Blood"
+        - "Even after the Omnic Crisis, Korea still faced the threat of the mysterious Gwishin omnics who attacked from a mobile omnium in the East China Sea. Yuna was recruited alongside Hana into the Mobile Exo-Force of the Korean Army, bringing their established synergy into the field. The MEKA squad stood strong for years, but after D.Va joined Overwatch to support the fight against Null sector, there was suddenly a gap left in MEKA’s roster. Without its central striker, the squad struggled to maintain balance."
+        - "Captain Myung appointed D.Mon as the new MEKA squad leader, confident she would find a way to balance the team and keep them strong against the increasing Gwishin attacks. Unaccustomed to the pressure of being in the spotlight, Yuna initially struggled with this added responsibility. Ultimately, she found her footing not by replacing D.Va, but by redefining the team—building a more coordinated, resilient unit that fought together, rather than relying on any single pilot."
+    - heading: "Reign Of Talon"
       paragraphs:
-        - "In time, Shion's captors—now revered elders in the clan—grew complacent and dropped their guard in her presence. Shion saw her opportunity and broke free, leaving a trail of death in her wake that ended with the murder of all four Hashimoto elders. Finally, Shion had control over her own fate. She quickly seized her chance at power, creating a fifth seat on the council of elders for herself, and forcing those she had spared to fight for the chance to rule by her side."
-        - "Using her newfound wealth and power, Shion transformed herself—modifying her chassis to suit her desire and crafting a mask that would instill fear. The result was something uncanny: neither human nor omnic, she belongs in no world other than the one she creates for herself. Shion lives life to the fullest; gaining a reputation for excess as she indulges in fashion, lovers, and custom motorcycles. Among the Hashimoto, Shion's murderous ascent is well remembered, and her penchant for punishment is widely feared. As a show of this power, Shion forced Toshiro Yamagami—a weapon smith imprisoned by the Hashimoto—to craft her a unique pair of anima pistols. With these new weapons and Vendetta’s backing, the Hashimoto’s rule over Tokyo is all but assured."
+        - "As D.Mon rebuilt the MEKA squad’s morale and structure, the danger of Talon’s global conquest lingered in the shadows—a threat made real when Vendetta directed the Junkers to attack Busan. Yuna was forced to put everything she had built to the test in real time, defending her home in the wake of Vendetta’s theft of the MEKA base's EMP bomb prototype. Under D.Mon’s leadership, MEKA fought to secure the city from the Junker threat—no longer defined by a single star, but as a unified force."
 -
   hero: "Ana"
   entries:
@@ -229,6 +227,9 @@
       paragraphs:
         - "Genji wasn’t sidelined for long, however. Overwatch leadership encouraged Genji to continue with agent training for the larger Overwatch strike team, and he graduated alongside Tracer and Winston. His efforts in both Havana and Singapore led Genji and his squad mates to successfully apprehend Doomfist, then the highest name on Overwatch’s most wanted list. But when Overwatch fell from grace, Genji felt increasingly at war with himself—all that had transpired between that fateful night in Hanamura and his life as an Overwatch agent. For the second time, he abandoned his former life and wandered the world in search of meaning. He drifted for many years before crossing paths with the omnic monk Zenyatta. In time, Zenyatta became his mentor, and under the monk's tutelage, Genji came to see both his experiences and his cybernetic form as a gift and a unique strength."
         - "The Shimada brothers would cross paths once again, on the anniversary of Genji’s death. In their former home of Shimada Castle, which had since been taken over by the Hashimoto clan, Genji revealed that he had survived their fateful encounter. Genji let his older brother know that he had forgiven him, but that Hanzo must walk the path of forgiving himself. Now the master of his own fate, Genji chooses to lend his skills to Overwatch once more, returning to aid a world in crisis alongside his former comrades and any who join their cause."
+    - heading: "Reign Of Talon"
+      paragraphs:
+        - "Seeing his home and his family in danger, Genji deployed to Tokyo to confront the growing Hashimoto threat. Discovering that their strength was bolstered by Talon, he allowed himself to be captured, a sacrifice that let Hanzo and Kiriko escape and ultimately drew Overwatch into the country to aid in his rescue. Freed at last, Genji realized his journey had carried him far from home. With a renewed sense of dedication to his family, he chose to part with Overwatch for now, staying in Tokyo to rebuild and defend against the Hashimoto at Hanzo and Kiriko’s side."
 -
   hero: "Hanzo"
   entries:
@@ -239,6 +240,9 @@
     - heading: "Lone Warrior"
       paragraphs:
         - "For years, Hanzo traveled the world, perfecting his skills as a warrior, attempting to restore his honor and put the ghosts of his past to rest. His quest at last bore fruit many years after Genji’s death, when the two crossed paths—and fought—in their childhood home of Shimada Castle, which had long since been seized by the Hashimoto clan. Genji told Hanzo he had forgiven him and urged Hanzo to forgive himself. Amid new turmoil in their native Hanamura and around the world, the time may soon come when Hanzo must choose a side, but where he’ll land remains to be seen."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "As Talon’s alliance with the Hashimoto plunged Tokyo into deeper chaos, Hanzo, Genji and Kiriko defended their city to confront the rising threat. After Genji was taken captive, he, Kiriko, and the Yōkai aided in Genji’s escape, additionally rescuing Kiriko’s father, Toshiro, from the heart of the Hashimoto stronghold. Now committed to protecting the people and home he once turned away from, Hanzo begins to reclaim his sense of purpose and honor, ultimately choosing to fight the Hashimoto at his family’s side."
 -
   hero: "Hazard"
   entries:
@@ -324,17 +328,20 @@
   entries:
     - heading: "Shimada Clan"
       paragraphs:
-        - "Kiriko’s childhood was shaped by the many powerful figures in her life. She swept the floors of the Kanezaka shrine for her grandmother, and learned about her connection to the fox spirit. Her father was a famous bladesmith for the Shimada, and her mother, Asa, was their swordmaster. As such, Kiriko trained alongside Hanzo and Genji Shimada, whom her mother also instructed. Kiriko was treated like family, with Genji being especially fond of the young girl. They shared a love of mischief, filching sweets from the kitchen and pulling pranks on anyone too stuffy to appreciate their humor. Genji taught her the ins and outs of the Shimada Castle and even introduced her to the local arcade."
+        - "Kiriko’s childhood was shaped by the many powerful figures in her life. She swept the floors of the Kanezaka shrine for her grandmother, and learned about her connection to the fox spirit. Her father was a famous bladesmith for the Shimada, and her mother, Asa, was their swordmaster. As such, little Kiriko trained alongside Hanzo and Genji Shimada, whom her mother instructed. Kiriko was treated like family, with Genji being especially fond of the young girl. They shared a love of mischief, filching sweets from the kitchen and pulling pranks on anyone too stuffy to appreciate their humor. Genji taught her the ins and outs of the Shimada Castle and even introduced her to the local arcade."
         - "But Kiriko’s peaceful world would soon be shattered."
     - heading: "Kanezaka Shrine"
       paragraphs:
-        - "When she was twelve years old, the head of the clan, Sojiro Shimada, was assassinated by the rival Hashimoto clan. As rumors raged in Hanamura and Kanezaka regarding the supposed demise of Genji and flight of Hanzo, the Hashimoto took over."
+        - "When she was a child, the head of the clan, Sojiro Shimada, was assassinated by the rival Hashimoto clan. As rumors raged in Hanamura and Kanezaka regarding the supposed demise of Genji and flight of Hanzo, the Hashimoto took over."
         - "The Hashimoto recognized the potential threat posed by Kiriko’s family and acted quickly, kidnapping Kiriko’s father and forcing him to supply weapons for their clan. Alone and with her hands tied, Asa was unable to fight back. To protect her daughter, she sent Kiriko to her grandmother and changed her family name to Kamori—Asa’s given name."
         - "Under her grandmother’s care, Kiriko forged a close and lasting connection to the fox spirit, serving as a shrine maiden. But by the time beloved grandmother passed away, Kiriko had caught on to her parents’ predicament, and to the spreading pain the Hashimoto were inflicting on Kanezaka. From Tokyo, Toshiro supported Kiriko’s feelings and fed intel to Asa through handwritten letters. Witnessing years of the Hashimotos’ injustice, Kiriko vowed to restore peace to her town."
     - heading: "Yōkai"
       paragraphs:
         - "Kiriko wasn’t the only one seeking an end to the Hashimoto. A group of young troublemakers calling themselves the Yōkai of Hanamura were doing what they could to hinder the clan, mostly through minor vandalism. With Kiriko’s intelligence and natural leadership newly added in, the Yōkai became more and more a thorn in the Hashimoto’s side. They ambushed Hashimoto businesses, disrupted supply lines, and constantly undermined them through strategic attacks. But no matter how hard the Hashimoto press, the Yōkai seem to slip through their fingers. Perhaps this is the citizens of Kanezaka protecting their own, or perhaps the small gang really are as powerful as the spirits from whom they take their name."
         - "Wherever the truth lies, Kiriko continues to fight, both for the peace the Hashimoto stole from her long ago, and for a future free of fear for the people of Kanezaka."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "Fearing for her father's life, Kiriko traveled to Tokyo to attempt to rescue him from the Hashimoto's grip. When Genji was taken prisoner in the process, she worked with Overwatch to orchestrate his rescue, only to uncover a painful betrayal—Mizuki, once her close friend and confidant, revealed himself as a Hashimoto double agent. Now, though she seeks to forgive Mizuki someday after he departs, Kiriko refocuses on the fight ahead.  She stands strong with Genji, Hanzo, and the remaining Yōkai to protect her home from the remnants of the Hashimoto’s grip."
 -
   hero: "Lifeweaver"
   entries:
@@ -430,6 +437,9 @@
       paragraphs:
         - "When the clan tasked Mizuki with infiltrating the rebellious Yokai of Kanezaka, he sought Toshiro’s advice one last time. He was reluctant to embark on a mission where he might have to hurt innocents—yet his fear of both the Elders and his curse made it difficult for him to even think of abandoning his responsibilities. Recognizing Mizuki’s inner struggle, Toshiro gave him one final gift: his very own anima kusarigama—a symbol of his faith in Mizuki’s power to take control of his own fate. Toshiro urged him to find his own path on the journey ahead, encouraging Mizuki to seek his own place in the world."
         - "Now in Kanezaka, Mizuki has successfully joined the Yokai, finding himself caught between his clan duties and the desire to protect his newfound friends. Only time will tell if he can maintain his cover—and decide where his true loyalties lie."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "When the Yōkai traveled to Tokyo to help Kiriko rescue her father, Mizuki had a choice to make. Faced with the consequences of his past loyalties, Mizuki turned against the Hashimoto—and Shion—in favor of helping those who taught him true kindness. Though he supported in Genji and Toshiro’s rescue, after his original allegiance was revealed, he agreed to part ways with the Yōkai. Seeking redemption and a chance to become someone better, Mizuki left his old life behind to join Overwatch, where he vows to maintain control over his fate."
 -
   hero: "Moira"
   entries:
@@ -538,6 +548,24 @@
       paragraphs:
         - "Exiled from Junkertown, the pair roamed Australia for a short while and even met with the CEO of Hyde Global, who hired them to reclaim a warehouse taken over by omnic terrorists. The duo soon realized they had been set up as part of an insurance scam. Though the job was a bust, it gave them the kick they needed to launch an international crime spree."
         - "Roadhog eventually returned to Junkertown, where Junkrat loudly disclosed their big plan to get payback on the Queen for their exile. The plan immediately failed thanks to the gate warden within earshot. Now, the duo has nothing left but money, useless disguises, and soon-to-detonate explosives."
+-
+  hero: "Shion"
+  entries:
+    - heading: "Awakened In Conflict"
+      paragraphs:
+        - "In many parts of the world, the Awakening led to a peaceful ceasefire—but in Tokyo, terror and confusion only led to further conflict. Shion's own Awakening was scored with screams and gunfire as she dug herself free from the casualties of war. Knowing only danger and death, Shion fled from the wreckage and kept fighting."
+        - "Shion survived for weeks on the streets in a state of fear, killing anyone she encountered. Meanwhile, tension and resentment still defined the relationship between omnics and humans in Tokyo, and local gangs took to the streets to mistreat and hunt down omnics as a form of ‘justice’. Eventually, a group of these criminals—humans who would go on to found the Hashimoto Clan—defeated Shion and took her captive."
+    - heading: "Kept In Chains"
+      paragraphs:
+        - "Rather than kill Shion, the Hashimoto saw her potential as a way for them to gain power. They decided to train against her, honing their fighting techniques. If the Hashimoto were to become Tokyo’s deadliest blade, she would be the steel they sharpened against: a killer with machine-like precision but an unpredictable, sentient spark. For Shion, the war raged on, relentless in its cruelty. But secretly, Shion held back—pulling her punches and learning her captors’ weaknesses so she might someday overtake them."
+        - "In all that time, Shion only saw glimpses of the outside world. Treated poorly by the Hashimoto, she knew herself not as an omnic but as “inhuman,” and had little opportunity to gain a sense of self. Shion had long since conquered any fear of her captors—violence, in its consistency, had almost become a comfort—but she had to believe there was more to life than survival. If she wanted anything, it was to be free of her imprisonment and to punish those who kept her in a cage."
+    - heading: "Risen In Blood"
+      paragraphs:
+        - "In time, Shion's captors—now revered elders in the clan—grew complacent and dropped their guard in her presence. Shion saw her opportunity and broke free, leaving a trail of death in her wake that ended with the murder of all four Hashimoto elders. Finally, Shion had control over her own fate. She quickly seized her chance at power, creating a fifth seat on the council of elders for herself, and forcing those she had spared to fight for the chance to rule by her side."
+        - "Using her newfound wealth and power, Shion transformed herself—modifying her chassis to suit her desire and crafting a mask that would instill fear. The result was something uncanny: neither human nor omnic, she belongs in no world other than the one she creates for herself. Shion lives life to the fullest; gaining a reputation for excess as she indulges in fashion, lovers, and custom motorcycles. Among the Hashimoto, Shion's murderous ascent is well remembered, and her penchant for punishment is widely feared. As a show of this power, Shion forced Toshiro Yamagami—a weapon smith imprisoned by the Hashimoto—to craft her a unique pair of anima pistols. With these new weapons and Vendetta’s backing, the Hashimoto’s rule over Tokyo is all but assured."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "After sending her long-suffering apprentice, Mizuki, on a mission to infiltrate the Yōkai, Shion increased the pressure on Toshiro, forcing him to make more weapons for Talon. But her plans fell to ruin when Overwatch—aided by Mizuki—intercepted the shipment and staged an assault on the Hashimoto keep. While Mizuki confronted Shion, Overwatch and the Yōkai successfully rescued the captive Toshiro and destroyed the stronghold's anima forge. Having lost Mizuki’s loyalty, Vendetta’s favor, and the main supplier for her armory, Shion is desperate to hold onto what power she has left. But she’s always been a survivor... and this blow to the Hashimoto won't be enough to keep her down."
 -
   hero: "Sierra"
   entries:
