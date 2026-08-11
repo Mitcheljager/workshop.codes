@@ -125,6 +125,22 @@
 - Quick Draw: [Cassidy, Perk, Removed]
 - Gun Slingin': [Cassidy, Perk, Removed]
 - Even The Odds: [Cassidy, Perk, Removed]
+- Giddy Up: [Cassidy, Perk]
+
+# D.Mom
+- Eject (D.Mon): [D.Mon, Ability, Passive]
+- Plasma Saber : [D.Mon, Ability, Primary Fire]
+- Portable Fusion Repeater: [D.Mon, Ability, Primary Fire]
+- Power Barrier: [D.Mon, Ability, Secondary Fire]
+- Surging Strike: [D.Mon, Ability, Primary Fire]
+- Propulsors: [D.Mon, Ability, Ability 1]
+- Fusion Repeater: [D.Mon, Ability, Ability 2]
+- Limit Break : [D.Mon, Ability, Ultimate]
+- Call Mech (D.Mon): [D.Mon, Ability, Ultimate]
+- Beast Within: [D.Mon, Perk]
+- MEKA Mobilitiy: [D.Mon, Perk]
+- Overstrike: [D.Mon, Perk]
+- Focused Fusion: [D.Mon, Perk]
 
 # D.Va
 - Eject: [D.Va, Ability, Passive]
@@ -179,10 +195,12 @@
 - Duplicate: [Echo, Ability, Ultimate]
 - Focused Rush: [Echo, Perk]
 - Full Salvo: [Echo, Perk]
-- High Beams: [Echo, Perk]
+- High Beams: [Echo, Perk, Removed]
 - Partial Scan: [Echo, Perk]
 - Friendly Imaging: [Echo, Perk, Removed]
 - Enhanced Duplication: [Echo, Perk, Removed]
+- Focused Rush: [Echo, Perk]
+- Aerial Munitions: [Echo, Perk]
 
 # Emre
 - Altered Vitals: [Emre, Ability, Passive]
@@ -268,9 +286,10 @@
 - Purr: [Jetpack Cat, Ability, Ability 2]
 - Catnapper: [Jetpack Cat, Ability, Ultimate]
 - Claws Out: [Jetpack Cat, Perk]
-- Headbutt: [Jetpack Cat, Perk]
+- Headbutt: [Jetpack Cat, Perk, Removed]
 - Transport Shielding: [Jetpack Cat, Perk]
 - Ulterior Motive: [Jetpack Cat, Perk]
+- Purrfect Form: [Jetpack Cat, Perk]
 
 # Junker Queen
 - Adrenaline Rush: [Junker Queen, Ability, Passive]
@@ -437,12 +456,13 @@
 - Terra Surge: [Orisa, Ability, Ultimate]
 - Halt: [Orisa, Ability, Ability 2, Removed]
 - Supercharger: [Orisa, Ability, Ultimate, Removed]
-- Charged Javelin: [Orisa, Perk]
+- Charged Javelin: [Orisa, Perk, Removed]
 - Defense Protocol: [Orisa, Perk]
 - Mobile Fortification: [Orisa, Perk]
 - Protective Barrier: [Orisa, Perk]
 - Fleeting Bulwark: [Orisa, Perk, Removed]
 - Heat Dissipator: [Orisa, Perk, Removed]
+- Heavy Javelin: [Orisa, Perk]
 
 # Pharah
 - Hover Jets: [Pharah, Ability, Passive]
