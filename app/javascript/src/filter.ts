@@ -71,7 +71,7 @@ function buildFilterPath({ target }: { target: HTMLElement }): void {
   const filteredBuildPath = Object.fromEntries(Object.entries(buildPath).filter(([_, v]) => v != ""))
   const buildPathString = Object.entries(filteredBuildPath).map(([k, v]) => `${k}=${v}`).join("&")
 
-  Turbolinks.visit(`/search?${buildPathString}`)
+  Turbolinks.visit(`/search?${buildPathString}`, { action: "advance" })
 }
 
 function filterValue(type: string, parent: HTMLElement): string {
