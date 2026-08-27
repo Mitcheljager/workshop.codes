@@ -26,8 +26,7 @@ function getPartial({ target }: { target: HTMLElement }): void {
 }
 
 function bindFilterContent(): void {
-  const elements = document.querySelectorAll("[data-action='add-filter']")
-  elements.forEach((element) => element.removeAndAddEventListener("click", addFilter))
+  document.body.removeAndAddEventListener("click", addFilter)
 
   const linkElements = document.querySelectorAll("[data-role='filter-link']")
   linkElements.forEach((element) => element.removeAndAddEventListener("click", buildFilterPath))
@@ -37,16 +36,20 @@ function bindFilterContent(): void {
 }
 
 function addFilter(event: Event): void {
+  let eventTarget = event.target as HTMLElement | undefined | null
+  if (eventTarget?.dataset?.action != "copy") eventTarget = eventTarget?.closest("[data-action~='add-filter']")
+
+  if (!eventTarget) return
+
   event.preventDefault()
 
-  const target = event.target as HTMLElement
-  const filterToggle = target.closest<HTMLElement>("[data-filter]")!
+  const filterToggle = eventTarget.closest<HTMLElement>("[data-filter]")!
   const filterElement = filterToggle.querySelector<HTMLElement>("[data-filter-type]")!
   const defaultValue = filterToggle.dataset.default || ""
 
-  filterToggle.classList.toggle("filter__item--active", target.dataset.value != "")
-  filterElement.dataset.value = target.dataset.value
-  filterElement.innerText = target.dataset.value == "" ? defaultValue : target.innerText
+  filterToggle.classList.toggle("filter__item--active", eventTarget.dataset.value != "")
+  filterElement.dataset.value = eventTarget.dataset.value
+  filterElement.innerText = eventTarget.dataset.value == "" ? defaultValue : eventTarget.innerText
 
   closeDropdown(event, true)
 }
@@ -80,6 +83,8 @@ function buildFilterPath(event: MouseEvent): void {
 function filterValue(type: string, parent: HTMLElement): string {
   const element = parent.querySelector(`[data-filter-type='${type}']`) as HTMLElement
   const value = element ? (element.dataset.value || "") : ""
+
+  console.log(element, value)
 
   return value
 }
