@@ -51,7 +51,10 @@ function addFilter(event: Event): void {
   closeDropdown(event, true)
 }
 
-function buildFilterPath({ target }: { target: HTMLElement }): void {
+function buildFilterPath(event: MouseEvent): void {
+  event?.preventDefault()
+
+  const target = event.target as HTMLElement
   const parent = target.closest<HTMLElement>("[data-role~='search']")
 
   if (!parent) return
