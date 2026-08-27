@@ -104,7 +104,7 @@
         type: "filter",
         min_players: (to_range(CGI.escape(params[:players])).first if params[:players].present?),
         max_players: (to_range(CGI.escape(params[:players])).last if params[:players].present?) } %>
-      <%= tag.div data: { filter_type: "players", value: (CGI.escape(params[:players]) if params[:players].present?) }%>
+      <%= tag.div data: { filter_type: "players", value: (CGI.escape(params[:players]) if params[:players].present?) } %>
     </div>
   </div>
 <% end %>
