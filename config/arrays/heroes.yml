@@ -11,8 +11,10 @@
   age: 28
   locations:
     - MEKA Base, Busan, South Korea
-  description:
+  description: |-
+    As MEKA’s new leader, D.Mon uses unmatched game sense to call the shots and keep her team united through any fight.
   story:
+    Yuna Lee, known as “D.Mon,” is a former professional gamer recognized for her sharp tactical play and no-nonsense attitude. She joined the MEKA squad to defend South Korea, fighting alongside D.Va and other pilots while using her skills to guide her team against the relentless Gwishin threat.
 -
   name: D.va
   role: Tank
