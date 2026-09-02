@@ -3,5 +3,5 @@ class EmailNotification < ApplicationRecord
 
   has_encrypted :email
 
-  enum content_type: { will_expire: 0 }
+  enum :content_type, { will_expire: 0 }
 end

@@ -5,7 +5,7 @@ class Block < ApplicationRecord
 
   has_many_attached :images, dependent: :destroy
 
-  enum content_type: { profile: 0, post: 1 }
+  enum :content_type, { profile: 0, post: 1 }
 
   serialize :properties
 

@@ -5,7 +5,7 @@ class Collection < ApplicationRecord
 
   has_one_attached :cover_image, dependent: :destroy
 
-  enum display_type: { list: 0, cards: 1 }
+  enum :display_type, { list: 0, cards: 1 }
 
   attr_accessor :collection_posts
 

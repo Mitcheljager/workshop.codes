@@ -69,8 +69,8 @@ class User < ApplicationRecord
 
   serialize :featured_posts
 
-  enum level: { regular: 0, admin: 1, banned: 2, arbiter: 3 }
-  enum pagination_type: { infinite_scroll: 0, load_more: 1, pagination: 2 }
+  enum :level, { regular: 0, admin: 1, banned: 2, arbiter: 3 }
+  enum :pagination_type, { infinite_scroll: 0, load_more: 1, pagination: 2 }
 
   has_encrypted :email
   blind_index :email
