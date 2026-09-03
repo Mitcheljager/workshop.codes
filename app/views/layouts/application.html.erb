@@ -7,9 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Overwatch, Workshop, Codes, Workshop Codes, Overwatch Workshop Codes, Overwatch Custom Games, Overwatch Gamnes, Workshop Games">
     <meta name="theme-color" content="#1f2326">
-    <meta http-equiv=”content-language” content="en" />
+    <meta http-equiv=”content-language” content="en">
 
-    <%= tag.meta name: "robots", content: "noindex" if yield(:noindex) == "true" %>
+    <% if yield(:noindex) == "true" %>
+      <meta name="robots" content="noindex">
+    <% else %>
+      <meta name="robots" content="noai, noimageai">
+    <% end %>
 
     <%= yield(:preload) if yield(:preload).present? %>
 
@@ -24,7 +28,7 @@
     <link rel="preload"
       href="<%= vite_asset_url "deferred.scss" %>"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet'" /> <!-- https://web.dev/defer-non-critical-css/#optimize -->
+      onload="this.onload=null;this.rel='stylesheet'"> <!-- https://web.dev/defer-non-critical-css/#optimize -->
     <noscript><%= vite_stylesheet_tag "deferred.scss" %></noscript>
 
     <%= vite_stylesheet_tag "application.scss" %>
