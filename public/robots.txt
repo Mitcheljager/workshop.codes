@@ -39,6 +39,81 @@ Disallow: /
 User-agent: PetalBot
 Disallow: /
 
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: xAI-Bot
+Disallow: /
+
+User-agent: DeepSeekBot
+Disallow: /
+
+User-agent: MistralBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: Ai2Bot-Dolma
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: DuckAssistBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: webzio-extended
+Disallow: /
+
+User-agent: gemini-deep-research
+Disallow: /
+
 User-agent:*
 Allow: /rails/active_storage/*
 
