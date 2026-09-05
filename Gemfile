@@ -1,9 +1,9 @@
 source "https://rubygems.org"
-ruby "~> 3.2.2"
+ruby "~> 3.4.10"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "active_model_serializers"
-gem "active_storage_validations", "~> 3.0.4"
+gem "active_storage_validations", "~> 4.1.0"
 gem "ahoy_matey"
 gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: true
 gem "aws-sdk-s3", require: false
@@ -20,7 +20,7 @@ gem "elasticsearch-model", "7.1.1"
 gem "elasticsearch-rails", "7.1.1"
 gem "elasticsearch", "<= 7.10.2" # Limited by Bonsai support
 gem "elasticsearch-api", "<= 7.10.2" # Limited by Bonsai support
-gem "image_processing", "~> 1.12"
+gem "image_processing", "~> 2.0"
 gem "inline_svg"
 gem "jbuilder", "~> 2.5"
 gem "kaminari"
@@ -33,7 +33,7 @@ gem "omniauth-rails_csrf_protection" # Mitigate CVE-2015-9284
 gem "pghero"
 gem "pg_query", ">= 2"
 gem "puma", "~> 5.6"
-gem "rails", "~> 7.2.0"
+gem "rails", "~> 8.0.0"
 gem "rails_same_site_cookie"
 gem "redcarpet"
 gem "reverse_markdown"
@@ -50,11 +50,10 @@ gem "vite_rails"
 group :development, :test do
   gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "database_cleaner"
   gem "faker"
   gem "pry-byebug", "~> 3.10.1"
   gem "rubocop-rails-omakase", require: false
-  gem "sqlite3", "~> 1.4.2"
+  gem "sqlite3", "~> 2.9.6"
 end
 
 group :development do
