@@ -38,6 +38,7 @@ class RevisionsController < ApplicationController
   def raw_snippet
     respond_to do |format|
       format.text { render body: @revision.snippet }
+      format.json { redirect_to raw_snippet_path(@revision.id), status: :moved_permanently }
     end
   end
 
