@@ -3,7 +3,11 @@
     <%= prev_page_tag %>
 
     <% paginator.each_page do |page| %>
-      <%= page_tag page if page.inside_window? %>
+      <% if page.display_tag? %>
+        <%= page_tag page %>
+      <% elsif !page.was_truncated? && !page.first? && !page.last? %>
+        <div class="gap">...</div>
+      <% end %>
     <% end %>
 
     <%= next_page_tag %>

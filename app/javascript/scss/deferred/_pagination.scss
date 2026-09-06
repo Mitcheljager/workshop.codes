@@ -67,8 +67,7 @@
 
 .gap {
   display: none;
-  padding: .25em .5em;
-  margin: 0 .25em;
+  padding: .25em;
 
   @include media-min(lg) {
     display: block;
