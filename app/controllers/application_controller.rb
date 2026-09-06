@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_failed_authenticity_token
-  # rescue_from AbstractController::ActionNotFound, with: :render_404
-  # rescue_from ActionController::RoutingError, with: :render_404
-  # rescue_from ActionController::UnknownFormat, with: :render_404
+  rescue_from AbstractController::ActionNotFound, with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
+  rescue_from ActionController::UnknownFormat, with: :render_404
   rescue_from ActionController::BadRequest, with: -> { head :bad_request }
 
   before_action :set_request_headers, if: -> { request.format.json? }
