@@ -1,4 +1,4 @@
-<div class="body-bg body-bg--<%= yield(:bg_size) %>">
+<div class="body-bg <%= "body-bg--#{yield(:bg_size)}" %>">
   <picture>
     <% if yield(:replace_body_bg).blank? %>
       <% if theme == "talon" %>
@@ -42,7 +42,7 @@
           <%= banner_large_variant_public_url(@user.banner_image) %> 1920w"
         type="image/jpeg">
 
-      <%= image_tag banner_large_variant_public_url(@user.banner_image), fetchpriority: "high" %>
+      <%= image_tag banner_large_variant_public_url(@user.banner_image), fetchpriority: "high", alt: "" %>
     <% elsif yield(:replace_body_bg) == "post" %>
       <source
         srcset="
@@ -51,7 +51,7 @@
           <%= banner_large_variant_public_url(@post.banner_image) %> 1920w"
         type="image/jpeg">
 
-      <%= image_tag banner_large_variant_public_url(@post.banner_image), fetchpriority: "high" %>
+      <%= image_tag banner_large_variant_public_url(@post.banner_image), fetchpriority: "high", alt: "" %>
     <% end %>
   </picture>
 </div>
