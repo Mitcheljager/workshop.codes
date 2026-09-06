@@ -123,11 +123,12 @@ class PostsController < ApplicationController
         update_blocks
         index_now if @post.public?
       end
-    rescue ActiveRecord::ActiveRecordError
+    rescue ActiveRecord::ActiveRecordError => error
       respond_to do |format|
         format.html { render :new }
         format.js { render "validation" }
       end
+
       return
     end
 

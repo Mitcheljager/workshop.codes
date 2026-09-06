@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_18_235425) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", id: :integer, default: nil, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -113,7 +113,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "blocks", force: :cascade do |t|
+  create_table "blocks", id: :integer, default: nil, force: :cascade do |t|
     t.integer "content_type", default: 0
     t.integer "content_id"
     t.integer "user_id"
@@ -176,13 +176,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
     t.index ["post_id"], name: "index_email_notifications_on_post_id"
   end
 
-  create_table "enhance_audio_files", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
@@ -225,7 +218,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
     t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", id: :integer, default: nil, force: :cascade do |t|
     t.integer "user_id"
     t.string "code"
     t.string "title"
@@ -329,7 +322,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
     t.index ["post_id"], name: "index_revisions_on_post_id"
   end
 
-  create_table "statistics", force: :cascade do |t|
+  create_table "statistics", id: :integer, default: nil, force: :cascade do |t|
     t.integer "timeframe"
     t.integer "value"
     t.datetime "on_date", precision: nil
@@ -343,7 +336,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
     t.index ["on_date"], name: "index_statistics_on_on_date"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :integer, default: nil, force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.datetime "created_at", precision: nil, null: false
@@ -399,7 +392,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_18_235425) do
     t.boolean "is_documentation", default: false
   end
 
-  create_table "wiki_edits", force: :cascade do |t|
+  create_table "wiki_edits", id: :integer, default: nil, force: :cascade do |t|
     t.integer "user_id"
     t.integer "article_id"
     t.integer "content_type"

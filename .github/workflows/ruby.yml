@@ -23,7 +23,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.4.10
           bundler-cache: true
       - uses: actions/setup-node@v3
         with:
@@ -45,7 +45,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.4.10
           bundler-cache: true
       - uses: actions/setup-node@v3
         with:
@@ -80,7 +80,7 @@ jobs:
   #     - name: Setup Ruby
   #       uses: ruby/setup-ruby@v1
   #       with:
-  #         ruby-version: 3.2.2
+  #         ruby-version: 3.4.10
   #         bundler-cache: true
   #     - name: Setup Node
   #       uses: actions/setup-node@v3

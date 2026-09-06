@@ -15,7 +15,7 @@ class Project < ApplicationRecord
 
   attr_accessor :is_owner
 
-  enum content_type: {
+  enum :content_type, {
     workshop_codes: 0,
     zez_ui: 1
   }
