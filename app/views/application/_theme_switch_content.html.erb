@@ -1,0 +1,10 @@
+<div class="pl-1/4 pr-1/4 mt-1/8 mb-1/8">
+  <h5 class="mt-0 mb-0"><strong>Set a theme</strong></h5>
+  <div class="text-small text-dark"><em>Uses cookies</em></div>
+</div>
+
+<hr>
+
+<%= button_to "Overwatch", theme_switch_path("default"), method: :post, class: "dropdown__item text-small" %>
+<%= button_to "Talon", theme_switch_path("talon"), method: :post, class: "dropdown__item text-small" %>
+<%= button_to "High contrast", theme_switch_path("high-contrast"), method: :post, class: "dropdown__item text-small" %>

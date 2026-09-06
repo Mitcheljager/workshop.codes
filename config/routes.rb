@@ -156,7 +156,8 @@ Rails.application.routes.draw do
   get "get-verified-users", to: "filter#get_verified_users"
   get "overwatch-2", to: redirect("/", status: 301)
 
-  post "theme/:theme", to: "themes#switch", as: :theme_switch
+  post "theme/:theme", to: "themes#switch", as: "theme_switch"
+  get "theme_switch/partial", to: "themes#partial", as: "theme_switch_partial"
 
   resources :collections, param: :id, concerns: :paginatable, except: [:show]
   get "c/:nice_url(/page/:page)", to: "collections#show", as: "collection_nice_url"

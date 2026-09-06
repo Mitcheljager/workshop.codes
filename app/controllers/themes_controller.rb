@@ -11,4 +11,8 @@ class ThemesController < ApplicationController
 
     redirect_back(fallback_location: root_path)
   end
+
+  def partial
+    render partial: "theme_switch_content"
+  end
 end
