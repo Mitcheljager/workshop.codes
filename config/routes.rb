@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   get "privacy-policy", to: "pages#privacy_policy"
   get "tos", to: "pages#tos", as: "tos"
   get "brand", to: "pages#brand", as: "brand"
-  get "explanation", to: "pages#explanation"
+  get "scrap-all-robots", to: "pages#ai_notice", as: "ai_notice"
 
   get "editor", to: "editor#index", as: "editor"
   get "editor/data", "editor#data"

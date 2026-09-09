@@ -5,11 +5,5 @@ class PagesController < ApplicationController
 
   def brand; end
 
-  def explanation
-    if ENV["APRIL_FOOLS_CHANCE"].present?
-      redirect_to "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    else
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
+  def ai_notice; end
 end
