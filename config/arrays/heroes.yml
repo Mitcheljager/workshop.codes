@@ -737,6 +737,21 @@
   story: |-
     A Lindholm through and through, Brigitte’s aptitude for engineering is matched by her sense of honor. From her youth, Brigitte was inspired by the tales of valor she heard from her godfather, Reinhardt. When she came of age, she became the squire to his knight. The two have joined the new Overwatch, hoping to right the wrongs of the world.
 -
+  name: Doctrine
+  role: Support
+  subrole: Survivor
+  stadium: false
+  release_date: "2026-10-06"
+  color: "#000000"
+  full_name: Unknown
+  nationality: Unknown
+  birth_date: Unknown
+  age: null
+  locations:
+    - "Watchpoint: Grimsvötn"
+  description:
+  story:
+-
   name: Illari
   role: Support
   subrole: Survivor
