@@ -72,6 +72,23 @@
 
 <hr>
 
+<h3>Inspect path</h3>
+
+<p>Enter a path to view some quick and dirty page view stats of that path.</p>
+
+<%= form_with method: :get do |form| %>
+  <%= form.text_field :inspect_path, value: params[:inspect_path], class: "form-input", style: "max-width: 200px;" %>
+<% end %>
+
+<% if params[:inspect_path].present? %>
+  <p>
+    Views in the last <em>24 hours</em>: <strong><%= Ahoy::Event.where("time > ?", 1.day.ago).where(name: "Page View").map { |event| event.properties[:url].include?(params[:inspect_path]) }.size %></strong><br>
+    Views in the last <em>7 days</em>: <strong><%= Ahoy::Event.where("time > ?", 7.days.ago).where(name: "Page View").map { |event| event.properties[:url].include?(params[:inspect_path]) }.size %></strong>
+  </p>
+<% end %>
+
+<hr>
+
 <h3 class="mt-1/1">Admin activity log</h3>
 
 <% @admin_activity.each do |activity| %>
