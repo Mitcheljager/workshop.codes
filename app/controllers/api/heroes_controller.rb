@@ -22,7 +22,7 @@ class Api::HeroesController < Api::BaseController
     heroes.map do |hero|
       if params[:include_lore_entries] == "true"
         entry = lore_entries.find { |entry| entry["hero"].downcase == hero["name"].downcase }
-        hero[:lore_entries] = entry["entries"]
+        hero[:lore_entries] = entry["entries"] if entry.present?
       end
 
       hero[:portrait] = {
