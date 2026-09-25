@@ -12,4 +12,16 @@ linter:
     erb-no-output-in-attribute-position:
       enabled: false
 
+    ujs-no-remote-attribute:
+      enabled: false
+
+    ujs-prefer-turbo-confirm:
+      enabled: false
+
+    ujs-prefer-turbo-method:
+      enabled: false
+
+    ujs-prefer-turbo-submits-with:
+      enabled: false
+
 framework: actionview
