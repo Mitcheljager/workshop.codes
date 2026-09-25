@@ -24,4 +24,7 @@ linter:
     ujs-prefer-turbo-submits-with:
       enabled: false
 
+    actionview-prefer-qualified-partial-path:
+      enabled: false
+
 framework: actionview
