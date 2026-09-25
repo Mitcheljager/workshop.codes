@@ -14,7 +14,7 @@
 
     <%= link_to "Add question", "#",
                 class: "button button--secondary w-100",
-                data: { action: "insert-block-template", template: "#{ @block.id }-faq-create-question", target: @block.id }%>
+                data: { action: "insert-block-template", template: "#{ @block.id }-faq-create-question", target: @block.id } %>
   </div>
 
   <template id="<%= @block.id %>-faq-create-question">

@@ -11,3 +11,5 @@ linter:
 
     erb-no-output-in-attribute-position:
       enabled: false
+
+framework: actionview
