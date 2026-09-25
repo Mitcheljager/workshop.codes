@@ -33,4 +33,7 @@ linter:
     html-head-only-elements:
       enabled: false
 
+    html-no-obsolete-tags:
+      enabled: false
+
 framework: actionview
