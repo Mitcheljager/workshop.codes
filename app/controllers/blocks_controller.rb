@@ -20,7 +20,8 @@ class BlocksController < ApplicationController
 
     respond_to do |format|
       format.js {
-        if @block.update_attribute(:properties, params[:block][:properties])
+        if params[:block][:properties].present? && @block.update_attribute(:properties, params[:block][:properties])
+          current_user.blocks.find(params[:id]).inspect
           render "application/success"
         else
           render "application/error"

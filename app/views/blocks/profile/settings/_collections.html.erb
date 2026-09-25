@@ -7,7 +7,7 @@
   <%= form.label "Collections (max 6)", class: "form-label" %>
   <% if @user.collections.any? %>
     <%= svelte_component "LimitedCheckboxes", {
-                         name: "block[properties[collections]][]",
+                         name: form.field_name(:properties, :collections, multiple: true),
                          options: @user.collections.select(:id, :title, :created_at).order(created_at: :desc).collect {|p| [ p.title, p.id ] },
                          selected: block_property(block, "collections") || [],
                          limit: 6 } %>

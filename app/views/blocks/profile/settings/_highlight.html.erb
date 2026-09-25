@@ -1,10 +1,10 @@
 <div class="form-group mt-1/2">
   <%= form.label "Code", class: "form-label" %>
   <% if @user.posts.any? %>
-    <%= form.select "properties[post]",
-          @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] },
-          { include_blank: "Select...", selected: block_property(block, "post") },
-          { class: "form-select", autocomplete: "off" } %>
+    <%= form.select :post,
+                    @user.posts.select(:id, :title, :created_at).public?.order(created_at: :desc).collect {|p| [ p.title, p.id ] },
+                    { include_blank: "Select...", selected: block_property(block, "post") },
+                    { class: "form-select", autocomplete: "off", name: form.field_name(:properties, :post) } %>
   <% else %>
     <p>You've not yet posted anything.</p>
   <% end %>
@@ -13,7 +13,8 @@
 <div class="form-group mt-1/2">
   <%= form.label "Description (max 500 characters)", class: "form-label" %>
   <p class="form-hint">Write a short description to describe what this mode is about. Basic Markdown enabled.</p>
-  <%= form.text_area "properties[description]",
+  <%= form.text_area  :description,
+                      name: form.field_name(:properties, :description),
                       value: block_property(block, "description"),
                       class: "form-input form-textarea form-textarea--extra-small",
                       data: { role: "character-count" },
