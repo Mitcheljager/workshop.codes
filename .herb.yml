@@ -12,6 +12,9 @@ linter:
     erb-no-output-in-attribute-position:
       enabled: false
 
+    erb-no-interpolated-class-names:
+      enabled: false
+
     ujs-no-remote-attribute:
       enabled: false
 
@@ -25,6 +28,9 @@ linter:
       enabled: false
 
     actionview-prefer-qualified-partial-path:
+      enabled: false
+
+    html-head-only-elements:
       enabled: false
 
 framework: actionview

@@ -8,9 +8,7 @@
     <em class="empty-blocks-marker mt-1/2">You have not yet created any blocks</em>
 
     <% if @blocks.present? %>
-      <% @blocks.each do |block| %>
-        <%= render "blocks/profile/block_settings", block: block %>
-      <% end %>
+      <%= render partial: "blocks/profile/block_settings", collection: @blocks, as: :block %>
     <% end %>
   </div>
 

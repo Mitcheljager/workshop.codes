@@ -5,7 +5,6 @@
     <% next unless question.present? %>
 
     <% label_id = "label-#{ block.id }-#{ index }" %>
-    <% controls_id = "faq-#{ block.id }-#{ index }" %>
 
     <details class="faq__item">
       <summary class="faq__question">
@@ -14,7 +13,7 @@
       </summary>
 
       <div class="faq__answer">
-        <hr class="mt-0 mb-1/4" />
+        <hr class="mt-0 mb-1/4">
         <%= sanitize(markdown(block_property(block, "answers")[index])) %>
       </div>
     </details>

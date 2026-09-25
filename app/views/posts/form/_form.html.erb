@@ -15,7 +15,7 @@
             <div class="bubble bubble--warning show-on-focus-within__content">
               Not sure where to get a code? <br>
               <%= link_to "Get started here", "https://workshop.codes/wiki/articles/uploading+new+content+to+existing+import+code", class: "button button--small button--light text-orange mt-1/8", target: "_blank" %>
-              <hr class="bubble__separator" />
+              <hr class="bubble__separator">
               Looking to get started with the Workshop? <br>
               <%= link_to "Check out our Editor", editor_path, class: "button button--small button--light text-orange mt-1/8", target: "_blank" %>
             </div>
@@ -42,7 +42,7 @@
     <div class="tabs-content <%= "tabs-content--active" if index == 0 %>" data-tab="<%= tab %>">
       <%= render "posts/form/tabs/#{ tab }", form: form %>
 
-      <hr class="mt-1/2 mb-1/2" />
+      <hr class="mt-1/2 mb-1/2">
 
       <div class="flex">
         <%= link_to "🠨 #{ tabs[index - 1].capitalize }", "#", class: "button button--secondary", data: { action: "set-tab", target: tabs[index - 1] } if index > 0 %>
