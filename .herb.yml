@@ -15,6 +15,9 @@ linter:
     erb-no-interpolated-class-names:
       enabled: false
 
+    erb-no-multiple-statements:
+      enabled: false
+
     ujs-no-remote-attribute:
       enabled: false
 
