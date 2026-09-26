@@ -7,8 +7,7 @@
 <div class="filter__group <%= classes %>" data-prefetch="false">
   <div class="filter__item <%= "filter__item--active" if params[:category] %> dropdown" data-dropdown data-filter data-default="Categories...">
     <% current_category = params[:category].gsub("-", " ").split.map(&:capitalize).join(" ") if params[:category] %>
-    <%= link_to current_category.present? ? current_category : "Categories...", "#",
-                data: { action: "toggle-dropdown", filter_type: "categories", value: params[:category] } %>
+    <%= tag.button current_category.present? ? current_category : "Categories...", data: { action: "toggle-dropdown", filter_type: "categories", value: params[:category] } %>
     <%= link_to "X", build_filter_path(:category, nil), class: "filter__remove", data: { action: direct ? nil : "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
@@ -19,8 +18,8 @@
   </div>
 
   <div class="filter__item <%= "filter__item--active" if params[:hero] %> dropdown" data-dropdown data-filter data-default="Heroes...">
-    <%= link_to params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : "Heroes...", "#",
-                data: { action: "toggle-dropdown", filter_type: "heroes", value: params[:hero] } %>
+    <%= tag.button params[:hero] ? params[:hero].gsub("-", " ").split.map(&:capitalize).join(" ") : "Heroes...",
+                   data: { action: "toggle-dropdown", filter_type: "heroes", value: params[:hero] } %>
     <%= link_to "X", build_filter_path(:hero, nil), class: "filter__remove", data: { action: direct ? nil : "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
@@ -38,8 +37,8 @@
   </div>
 
   <div class="filter__item <%= "filter__item--active" if params[:map] %> dropdown" data-dropdown data-filter data-default="Maps...">
-    <%= link_to params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : "Maps...", "#",
-                data: { action: "toggle-dropdown", filter_type: "maps", value: params[:map] } %>
+    <%= tag.button params[:map] ? params[:map].gsub("-", " ").split.map(&:capitalize).join(" ") : "Maps...",
+                   data: { action: "toggle-dropdown", filter_type: "maps", value: params[:map] } %>
     <%= link_to "X", build_filter_path(:map, nil), class: "filter__remove", data: { action: direct ? nil : "add-filter", value: "" } %>
 
     <div class="dropdown__content dropdown__content--left" data-dropdown-content>
@@ -57,8 +56,8 @@
 
   <% if show_authors %>
     <div class="filter__item <%= "filter__item--active" if params[:author] %> dropdown" data-dropdown data-filter data-default="Author...">
-      <%= link_to params[:author] ? params[:author].split("#")[0] : "Author...", "#",
-                  data: { action: "toggle-dropdown get-verified-users", filter_type: "author", value: (CGI.escape(params[:author]) if params[:author].present?) } %>
+      <%= tag.button params[:author] ? params[:author].split("#")[0] : "Author...",
+                     data: { action: "toggle-dropdown get-verified-users", filter_type: "author", value: (CGI.escape(params[:author]) if params[:author].present?) } %>
       <%= link_to "X", build_filter_path(:author, nil), class: "filter__remove", data: { action: direct ? nil : "add-filter", value: "" } %>
 
       <div class="dropdown__content dropdown__content--left" data-dropdown-content>
@@ -73,11 +72,9 @@
 
   <div class="filter__item <%= "filter__item--active" if params[:sort] %> dropdown" data-dropdown data-filter data-default="Sort by...">
     <% if params[:search] && !params[:sort] %>
-      <%= link_to "Relevancy", "#",
-                  data: { action: "toggle-dropdown", filter_type: "sort", value: "" } %>
+      <%= tag.button "Relevancy", data: { action: "toggle-dropdown", filter_type: "sort", value: "" } %>
     <% else %>
-      <%= link_to params[:sort] ? params[:sort].gsub("-", " ").humanize : "Sort by...", "#",
-                  data: { action: "toggle-dropdown", filter_type: "sort", value: params[:sort] } %>
+      <%= tag.button params[:sort] ? params[:sort].gsub("-", " ").humanize : "Sort by...", data: { action: "toggle-dropdown", filter_type: "sort", value: params[:sort] } %>
     <% end %>
 
     <%= link_to "X", build_filter_path(:sort, nil), class: "filter__remove", data: { action: direct ? nil : "add-filter", value: "" } %>

@@ -82,12 +82,23 @@
   padding: .5rem .75rem;
   border-radius: $border-radius;
   background: theme(darker);
+  color: $text-color-dark;
   font-size: $font-size-small;
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    font-size: $font-size-small;
+    color: theme(text-color);
+  }
 
   &--active {
     background: theme(body);
 
-    a {
+    a,
+    button {
       color: theme(text-color-lightest);
     }
   }
@@ -98,10 +109,6 @@
     &--active {
       background: theme(dark);
     }
-  }
-
-  a {
-    text-decoration: none;
   }
 }
 
