@@ -4,11 +4,9 @@
   <% block_property(block, "questions").each_with_index do |question, index| %>
     <% next unless question.present? %>
 
-    <% label_id = "label-#{ block.id }-#{ index }" %>
-
     <details class="faq__item">
       <summary class="faq__question">
-        <%= tag.div sanitize(question), id: label_id %>
+        <%= tag.div sanitize(question), id: "label-#{ block.id }-#{ index }" %>
         <div class="faq__icon" aria-hidden="true">▼</div>
       </summary>
 
