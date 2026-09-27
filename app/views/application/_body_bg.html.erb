@@ -26,7 +26,7 @@
           <%= banner_small_variant_public_url(@user.banner_image) %> 640w,
           <%= banner_medium_variant_public_url(@user.banner_image) %> 960w,
           <%= banner_large_variant_public_url(@user.banner_image) %> 1920w"
-        type="image/jpeg">
+        type="image/webp">
 
       <%= image_tag banner_large_variant_public_url(@user.banner_image), fetchpriority: "high", alt: "" %>
     <% elsif yield(:replace_body_bg) == "post" %>
@@ -35,7 +35,7 @@
           <%= banner_small_variant_public_url(@post.banner_image) %> 640w,
           <%= banner_medium_variant_public_url(@post.banner_image) %> 960w,
           <%= banner_large_variant_public_url(@post.banner_image) %> 1920w"
-        type="image/jpeg">
+        type="image/webp">
 
       <%= image_tag banner_large_variant_public_url(@post.banner_image), fetchpriority: "high", alt: "" %>
     <% end %>

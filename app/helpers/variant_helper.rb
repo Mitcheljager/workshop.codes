@@ -20,14 +20,14 @@ module VariantHelper
   end
 
   def banner_small_variant_public_url(image)
-    rails_public_blob_url(image.variant(quality: 75, resize_to_fill: [640, 400]).processed)
+    rails_public_blob_url(image.variant(quality: 75, resize_to_fill: [640, 400], format: :webp).processed)
   end
 
   def banner_medium_variant_public_url(image)
-    rails_public_blob_url(image.variant(quality: 75, resize_to_fill: [960, 400]).processed)
+    rails_public_blob_url(image.variant(quality: 75, resize_to_fill: [960, 400], format: :webp).processed)
   end
 
   def banner_large_variant_public_url(image)
-    rails_public_blob_url(image.variant(quality: 75, resize_to_fill: [1920, 400]).processed)
+    rails_public_blob_url(image.variant(quality: 75, resize_to_fill: [1920, 400], format: :webp).processed)
   end
 end
