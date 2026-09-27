@@ -1,9 +1,9 @@
 <% if current_user %>
-  <%= form_for :comment,
+  <%= form_with model: defined?(comment) ? comment : Comment.new,
     url: defined?(comment) ? comment_path(comment.id) : comments_path,
     method: defined?(comment) ? :patch : :post,
-    remote: true,
-    html: { class: "comment-form #{ defined?(parent_id) ? "mt-1/4" : "shadow-block p-1/4" }" } do |form| %>
+    data: { remote: true },
+    class: "comment-form #{ defined?(parent_id) ? "mt-1/4" : "shadow-block p-1/4" }" do |form| %>
 
     <%= form.hidden_field :post_id, value: post.id %>
     <%= form.hidden_field :parent_id, value: parent_id if defined?(parent_id) %>
@@ -16,7 +16,7 @@
         required: true %>
     </div>
 
-    <%= button_tag defined?(comment) ? "Edit" : "Comment", class: "button mt-1/4" %>
+    <%= button_tag defined?(comment) ? "Edit" : "Comment", class: "button mt-1/4", data: { disable_with: "Posting..." } %>
 
     <small class="button-label">&nbsp; Max 2000 characters</small>
   <% end %>
