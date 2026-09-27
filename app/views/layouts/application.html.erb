@@ -46,7 +46,6 @@
   </head>
 
   <body class="<%= "theme-#{ theme }" unless is_wiki? || is_editor? %> <%= "theme-wiki" if is_wiki? %>">
-    <%= render "flash" %>
     <%= render "header" unless is_editor? %>
     <%= render "wiki/header" if is_wiki? %>
 
@@ -58,6 +57,9 @@
 
     <%= render "body_bg" unless is_wiki? || is_editor? %>
 
-    <%= svelte_component "Ollie", { imageFlyBy: vite_asset_url("images/ollie/ollie-float.png"), imageHeart: vite_asset_url("images/ollie/ollie-heart.png") } if current_user.present? %>
+    <% if current_user.present? %>
+      <%= svelte_component "Alerts", { initialAlerts: flash.to_json } %>
+      <%= svelte_component "Ollie", { imageFlyBy: vite_asset_url("images/ollie/ollie-float.png"), imageHeart: vite_asset_url("images/ollie/ollie-heart.png") } %>
+    <% end %>
   </body>
 </html>
