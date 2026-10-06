@@ -51,7 +51,7 @@ rescue => error
 end
 
 def to_slug(string)
-  string.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "").gsub(".", "")
+  string.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "").gsub(".", "").gsub(",", "")
 end
 
 base_url = "https://overwatch.blizzard.com/en-us"

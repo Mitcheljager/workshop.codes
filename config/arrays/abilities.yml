@@ -40,10 +40,11 @@
 - Biotic Grenade: [Ana, Ability, Ability 2]
 - Nano Boost: [Ana, Ability, Ultimate]
 - Biotic Bounce: [Ana, Perk]
-- Groggy: [Ana, Perk]
+- Groggy: [Ana, Perk, Removed]
 - Headhunter: [Ana, Perk]
 - Speed Serum: [Ana, Perk]
 - Shrike: [Ana, Perk, Removed]
+- Local Anesthetic: [Ana, Perk]
 
 # Anran
 - Ignition: [Anran, Ability, Passive]
@@ -127,9 +128,9 @@
 - Even The Odds: [Cassidy, Perk, Removed]
 - Giddy Up: [Cassidy, Perk]
 
-# D.Mom
+# D.Mon
 - Eject (D.Mon): [D.Mon, Ability, Passive]
-- Plasma Saber : [D.Mon, Ability, Primary Fire]
+- Plasma Saber: [D.Mon, Ability, Primary Fire]
 - Portable Fusion Repeater: [D.Mon, Ability, Primary Fire]
 - Power Barrier: [D.Mon, Ability, Secondary Fire]
 - Surging Strike: [D.Mon, Ability, Primary Fire]
@@ -138,7 +139,7 @@
 - Limit Break: [D.Mon, Ability, Ultimate]
 - Call Mech (D.Mon): [D.Mon, Ability, Ultimate]
 - Beast Within: [D.Mon, Perk]
-- MEKA Mobilitiy: [D.Mon, Perk]
+- MEKA Mobility: [D.Mon, Perk]
 - Overstrike: [D.Mon, Perk]
 - Focused Fusion: [D.Mon, Perk]
 
@@ -158,6 +159,17 @@
 - Ejection Suit: [D.Va, Perk, Removed]
 - Heavy Rockets: [D.Va, Perk, Removed]
 - Bunny Stomp: [D.Va, Perk, Removed]
+
+# Doctrine
+- Eternal Scepter: [Doctrine, Ability, Primary Fire]
+- Infuse: [Doctrine, Ability, Secondary Fire]
+- Invigorating Drones: [Doctrine, Ability, Ability 1]
+- Shrouded Momentum: [Doctrine, Ability, Ability 2]
+- Deliverance: [Doctrine, Ability, Ultimate]
+- Saving Grace: [Doctrine, Perk]
+- Sanguine Siphon: [Doctrine, Perk]
+- Transfusion: [Doctrine, Perk]
+- Cost of Life: [Doctrine, Perk]
 
 # Domina
 - Reconstruction: [Domina, Ability, Passive]
@@ -518,16 +530,19 @@
 
 # Roadhog
 - Scrap Gun: [Roadhog, Ability, Primary Fire]
+- Trash Compactor: [Roadhog, Ability, Secondary Fire]
 - Chain Hook: [Roadhog, Ability, Ability 1]
 - Take a Breather: [Roadhog, Ability, Ability 2]
 - Whole Hog: [Roadhog, Ability, Ultimate]
 - Pig Pen: [Roadhog, Ability, Ability 2, Removed]
 - Hogdrogen Exposure: [Roadhog, Perk]
-- Pulled Pork: [Roadhog, Perk]
+- Pulled Pork: [Roadhog, Perk, Removed]
 - Scrap Hook: [Roadhog, Perk]
-- Shrapnel Launcher: [Roadhog, Perk]
+- Shrapnel Launcher: [Roadhog, Perk, Removed]
 - Hog Toss: [Roadhog, Perk, Removed]
 - Invigorate: [Roadhog, Perk, Removed]
+- Here, Piggy Piggy: [Roadhog, Perk]
+- Toxic Exhaust: [Roadhog, Perk]
 
 # Shion
 - Kira Pistols: [Shion, Ability]
@@ -535,10 +550,11 @@
 - Joyride: [Shion, Ability]
 - Evade: [Shion, Ability]
 - Satsuriku Spree: [Shion, Ability]
-- Rapid Reload: [Shion, Perk]
+- Rapid Reload: [Shion, Perk, Removed]
 - X Machina: [Shion, Perk]
 - Refuel: [Shion, Perk]
 - Faces of Death: [Shion, Perk]
+- Survival Instinct: [Shion, Perk]
 
 # Sierra
 - Helix Rifle: [Sierra, Ability, Primary Fire]
@@ -591,20 +607,26 @@
 - Agility Training: ["Soldier: 76", Perk, Removed]
 
 # Sombra
-- Opportunist: [Sombra, Ability, Passive]
+- Conspirator: [Sombra, Ability, Passive]
+- Opportunist: [Sombra, Ability, Passive, Removed]
 - Machine Pistol: [Sombra, Ability, Primary Fire]
-- Hack: [Sombra, Ability, Secondary Fire]
-- Virus: [Sombra, Ability, Ability 1]
+- Hotfix: [Sombra, Ability, Secondary Fire]
+- Hack: [Sombra, Ability, Secondary Fire, Removed]
+- Cyberspace: [Sombra, Ability, Ability 1]
+- Virus: [Sombra, Ability, Ability 1, Removed]
 - Stealth: [Sombra, Ability, Ability 1, Removed]
 - Emp: [Sombra, Ability, Ultimate]
 - Translocator: [Sombra, Ability, Ability 2]
 - CTRL ALT ESC: [Sombra, Perk]
-- Encrypted Upload: [Sombra, Perk]
-- High-Speed Bandwidth: [Sombra, Perk]
-- Viral Replication: [Sombra, Perk]
+- Encrypted Upload: [Sombra, Perk, Removed]
+- High-Speed Bandwidth: [Sombra, Perk, Removed]
+- Viral Replication: [Sombra, Perk, Removed]
 - Stack Overflow: [Sombra, Perk, Removed]
 - Viral Efficacy: [Sombra, Perk, Removed]
 - White Hat: [Sombra, Perk, Removed]
+- Life Hack: [Sombra, Perk]
+- Data Packet: [Sombra, Perk]
+- Cybersecurity: [Sombra, Perk]
 
 # Symmetra
 - Photon Projector: [Symmetra, Ability, Primary Fire]
@@ -642,11 +664,12 @@
 - Recall: [Tracer, Ability, Ability 2]
 - Pulse Bomb: [Tracer, Ability, Ultimate]
 - Blink Packs: [Tracer, Perk]
-- Chronal Dash: [Tracer, Perk]
+- Chronal Dash: [Tracer, Perk, Removed]
 - Kinetic Reload: [Tracer, Perk]
 - Quantum Entanglement: [Tracer, Perk]
 - Flashback: [Tracer, Perk, Removed]
 - Blast from the Past: [Tracer, Perk, Removed]
+- Temporal Regen: [Tracer, Perk]
 
 # Vendetta
 - Onslaught: [Vendetta, Ability, Passive]
