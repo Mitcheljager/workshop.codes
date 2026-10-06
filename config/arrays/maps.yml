@@ -34,6 +34,11 @@
   slug: dorado
   location: Veracruz, Mexico
 -
+  name: Grímsvötn
+  type: Escort
+  slug: grimsvotn
+  location: Vatnajökull National Park, Iceland
+-
   name: Havana
   type: Escort
   slug: havana
