@@ -9,7 +9,7 @@ module ContentHelper
   end
 
   def ability_name_to_slug(ability)
-    ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "").gsub(".", "")
+    ability.downcase.gsub(":", "").gsub(" ", "-").gsub("!", "").gsub("(", "").gsub(")", "").gsub("'", "").gsub(".", "").gsub(",", "")
   end
 
   def ability_name_to_icon_url(ability, size = 50)
@@ -41,17 +41,11 @@ module ContentHelper
   def ability_icons
     abilities.map do |ability_hash|
       ability_hash.map do |key, value|
-        begin
-          {
-            name: key,
-            url: vite_asset_url(ability_name_to_icon_url(key)),
-            terms: value
-          }
-        rescue
-          puts "=================="
-          puts ability_hash
-          puts value
-        end
+        {
+          name: key,
+          url: vite_asset_url(ability_name_to_icon_url(key)),
+          terms: value
+        }
       end
     end.flatten
   end
