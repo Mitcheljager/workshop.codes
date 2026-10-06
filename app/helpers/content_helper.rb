@@ -41,11 +41,17 @@ module ContentHelper
   def ability_icons
     abilities.map do |ability_hash|
       ability_hash.map do |key, value|
-        {
-          name: key,
-          url: vite_asset_url(ability_name_to_icon_url(key)),
-          terms: value
-        }
+        begin
+          {
+            name: key,
+            url: vite_asset_url(ability_name_to_icon_url(key)),
+            terms: value
+          }
+        rescue
+          puts "=================="
+          puts ability_hash
+          puts value
+        end
       end
     end.flatten
   end
