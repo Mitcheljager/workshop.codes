@@ -20,6 +20,7 @@ gem "elasticsearch-model", "7.1.1"
 gem "elasticsearch-rails", "7.1.1"
 gem "elasticsearch", "<= 7.10.2" # Limited by Bonsai support
 gem "elasticsearch-api", "<= 7.10.2" # Limited by Bonsai support
+gem "httparty"
 gem "image_processing", "~> 2.0"
 gem "inline_svg"
 gem "jbuilder", "~> 2.5"
