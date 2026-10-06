@@ -14,6 +14,19 @@
       paragraphs:
         - "As D.Mon rebuilt the MEKA squad’s morale and structure, the danger of Talon’s global conquest lingered in the shadows—a threat made real when Vendetta directed the Junkers to attack Busan. Yuna was forced to put everything she had built to the test in real time, defending her home in the wake of Vendetta’s theft of the MEKA base's EMP bomb prototype. Under D.Mon’s leadership, MEKA fought to secure the city from the Junker threat—no longer defined by a single star, but as a unified force."
 -
+  hero: "Doctrine"
+  entries:
+    - heading: "Ogundimu Synergies"
+      paragraphs:
+        - "From the very beginning, Tamuka’s life was defined by loss. Orphaned at a young age, his only family left was his younger brother, Tatenda, who suffered from a rare degenerative disease. Fearful of losing the one person he still had, Tamuka devoted himself to finding a way to spare his brother from pain and untimely demise. Hearing of Elaine Esat's achievements in the field of cybernetic engineering, he studied her methods in pursuit of a solution to his woes. As he became a gifted engineer himself, he was hired by Ogundimu Synergies, where his development was supported by Yejide Ogundimu. With each breakthrough in his research, he quietly obsessed over a single question: Could cybernetic evolution be used to reject the inevitability of death?"
+    - heading: "Grave Devotion"
+      paragraphs:
+        - "During the Omnic Crisis, Tamuka designed a replacement limb for Yejide's teenage son, Akande, who'd lost his as a casualty of the conflict. But this would be his final contribution as Chief Engineer of Ogundimu Synergies, for he would leave the company behind when an explosion from the escalating conflict put his brother's life in danger. Though his brother had long since accepted death as a natural part of life, Tamuka refused to lose him. He channeled his efforts into increasingly radical cybernetic experiments, developing a technology capable of siphoning life from external sources to transfer to a host. His initial experiments were successful, but they came at a cost: it was evident that to make any true progress, he would need more sources to (siphon) from. Out of desperation and love, he unleashed his invention in swarms upon a nearby Crisis refugee camp, taking the lives of all its inhabitants to grant Tatenda the vitality required for a life unhindered by illness."
+    - heading: "Watchpoint: Grimsvötn"
+      paragraphs:
+        - "Ecstatic to be his brother's savior, Tamuka reveled in overcoming death itself. But Tatenda was anything but thankful. Horrified by the atrocities his brother committed, he denounced him and turned him in to Overwatch. Tamuka was sentenced to spend the rest of his days in Watchpoint: Grímsvötn, where he would he would be forced to suffer the passage of time and all its ill effects."
+        - "Decades later, his salvation came in the form of Akande Ogundimu, who'd long since taken on the role of Doomfist. Doomfist and his allies staged a jailbreak, reuniting Tamuka with his drone technology, allowing him to restore his youth and rewrite the doctrine of his destiny."
+-
   hero: "Ana"
   entries:
     - heading: "Overwatch"
@@ -132,6 +145,9 @@
       paragraphs:
         - "As the threat continued to adapt, it eventually disrupted MEKA's drone-control networks, forcing the military to place pilots in the mechs. Scrambling to find suitable candidates, the government turned to the country's professional gamers, who possessed the necessary reflexes and instincts to operate the mechs' advanced weapons systems. Top stars willingly joined the effort via the nation's compulsory military service, including reigning world champion Hana Song, also known as \"D.Va.\" Famous for her elite skills, D.Va was a fierce competitor who played to win at all costs, and she had a well-earned reputation for showing no mercy to her opponents."
         - "D.Va quickly grew in skill to become MEKA’s top pilot, even streaming combat operations to her adoring fans, but the Gwishin threats’ increasing attacks on South Korea began to take a heavy toll on the MEKA squad. Where MEKA could once count on months of training and downtime between robotic assaults, a sudden attack between predicted intervals forced Hana to repel the Gwishin alone. The media praised D.Va's singlehanded defense of South Korea, though in truth, the superstar was seconds from a real game over. As the Null Sector threat emerged in Korea, D.Va obtained a special dispensation from her commander to join up as one of Overwatch's new guard, assessing the Null Sector threat alongside Cole Cassidy and his latest recruits."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "When Vendetta dispatched Talon and the Junkers to strike Busan, Overwatch stepped in to help, giving D.Va the opportunity to fight alongside her old squad again. Faced with the theft of MEKA's EMP bomb prototype and a city under siege, D.Va fell in line to support her best friend and new leader of the MEKA Squad, D.Mon, against the Junker assault. With the MEKA Squad thriving on their own, D.Va returned to her post with Overwatch, knowing Busan was in capable hands."
 -
   hero: "Domina"
   entries:
@@ -299,6 +315,9 @@
     - heading: "Junker Queen"
       paragraphs:
         - "After defeating King Howl, Dez took over Junkertown and set to work uniting the factions, one diplomatic beatdown at a time. In time, the Reckoning even produced a champion of her own: Wrecking Ball. Now, as the Junker Queen, Dez uses her wastelander knowledge to control the Junkers and impose order when necessary, training them to fight the omnic menace. That might mean rewarding a faction leader or taking them down. All in a day’s work."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "When Vendetta sent Mauga to strike a deal with the Junkers, the Junker Queen found a new opportunity. In exchange for joining Vendetta's growing campaign, she would receive advanced thrusters for the Junkers’ Crisis-era warship on the condition they would aid in an attack on Busan. With her trusted crew, Wrecking Ball, and the ever-regrettable company of Junkrat and Roadhog, they unleashed carnage across the city. Together, they created the perfect distraction for Vendetta to seize MEKA’s EMP bomb prototype, a weapon whose destructive potential might tip the scales of her unfolding conquest."
 -
   hero: "Junkrat"
   entries:
@@ -309,6 +328,9 @@
     - heading: "Wanted Criminal"
       paragraphs:
         - "He came to notoriety when he discovered an extremely valuable secret in the bones of the omnium. Though few knew the nature of what he found, he was nonetheless pursued by bounty hunters, gangs, and opportunists wherever he went, until he made a deal with the Junker enforcer Roadhog, who grudgingly agreed to be his personal bodyguard in exchange for a fifty-fifty share of the spoils. After a string of offenses against the Junker Queen, Junkrat and Roadhog were officially exiled from Junkertown. They turned their sights beyond the Outback to embark upon an international crime spree, leaving nothing but havoc and bedlam in their wake. \"No job too big, no score too small.\" Though they racked up a considerable bounty on their heads, they’ve been able to evade capture through the very same methods they’ve used to acquire such a bounty: mainly those involving loads and loads of bombs."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "Sent by Vendetta to secure powerful new allies, Mauga traveled to Junkertown to strike a bargain with the Junker Queen. In exchange for joining Vendetta's growing campaign, he offered her advanced thrusters for the Junkers’ Crisis-era warship on the condition they would aid in an attack on Busan. Before long, Junkrat found himself aboard the newly restored vessel alongside Roadhog, Wrecking Ball, and the Junker Queen. In a whirlwind of explosions, destruction, and citywide panic, the Junkers rampaged through the streets, creating the perfect diversion for Vendetta to make off with MEKA's EMP bomb prototype."
 -
   hero: "Juno"
   entries:
@@ -548,6 +570,9 @@
       paragraphs:
         - "Exiled from Junkertown, the pair roamed Australia for a short while and even met with the CEO of Hyde Global, who hired them to reclaim a warehouse taken over by omnic terrorists. The duo soon realized they had been set up as part of an insurance scam. Though the job was a bust, it gave them the kick they needed to launch an international crime spree."
         - "Roadhog eventually returned to Junkertown, where Junkrat loudly disclosed their big plan to get payback on the Queen for their exile. The plan immediately failed thanks to the gate warden within earshot. Now, the duo has nothing left but money, useless disguises, and soon-to-detonate explosives."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "Sent by Vendetta to secure powerful new allies, Mauga traveled to Junkertown to strike a bargain with the Junker Queen. In exchange for joining Vendetta's growing campaign, he offered her advanced thrusters for the Junkers’ Crisis-era warship on the condition they would aid in an attack on Busan. Before long, Roadhog found himself aboard the newly restored vessel alongside Junkrat, Wrecking Ball, and the Junker Queen. In a whirlwind of explosions, destruction, and citywide panic, the Junkers rampaged through the streets, creating the perfect diversion for Vendetta to make off with MEKA's EMP bomb prototype."
 -
   hero: "Shion"
   entries:
@@ -774,6 +799,9 @@
       paragraphs:
         - "Hammond modified his escape pod to enter the lucrative mech battle arena of the Scrapyard. Working his way up the ranks, \"Wrecking Ball\" went from contender to champion, though the pilot's identity remained a mystery to all except one."
         - "While Hammond journeys into the wider world from time to time, he’s found a happy—if somewhat chaotic—home at the Junker Queen’s side. After all, as reigning champion of the Scrapyard, he has a title to defend."
+    - heading: "Reign of Talon"
+      paragraphs:
+        - "During the Junkers' assault on Busan, Wrecking Ball was captured by the MEKA squad after a fierce battle through the city. Despite repeated attempts to interrogate him, Hammond refused to reveal anything about the Vendetta's larger scheme. In response, Overwatch called in Winston, who was shocked to find his old friend in the captured mech. As Winston and Hammond reflected on their past on Horizon Lunar Colony, two began making amends. But when Overwatch and MEKA relaxed their guard, Hammond escaped the facility, heading back to his new home with the Junkers."
 -
   hero: "Wuyang"
   entries:
