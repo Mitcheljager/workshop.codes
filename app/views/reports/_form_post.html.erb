@@ -1,12 +1,12 @@
-<%= form_for @report, remote: true do |form| %>
+<%= form_with model: @report, data: { remote: true } do |form| %>
   <div class="form-hint mb-1/2 text-red">
     <strong>Please note:</strong> Reports are sent to the Workshop.codes admins. <u>Reports are not sent to post authors. Do not use this form to report bugs or request changes.</u>
   </div>
 
   <%= form.hidden_field :concerns_id, value: @post.id %>
   <%= form.hidden_field :concerns_model, value: "post" %>
-  <%= form.hidden_field "properties[post][title]", value: @post.title %>
-  <%= form.hidden_field "properties[post][code]", value: @post.code %>
+  <%= form.hidden_field :title, name: form.field_name(:properties, :post, :title), value: @post.title %>
+  <%= form.hidden_field :code, name: form.field_name(:properties, :post, :code), value: @post.code %>
   <%= form.hidden_field :reported_user_id, value: @post.user_id %>
 
   <div class="form-group" data-reveal-by-select-parent>

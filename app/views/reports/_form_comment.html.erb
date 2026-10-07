@@ -1,7 +1,7 @@
-<%= form_for @report, remote: true do |form| %>
+<%= form_with model: @report, data: { remote: true } do |form| %>
   <%= form.hidden_field :concerns_id, value: @comment.id %>
   <%= form.hidden_field :concerns_model, value: "comment" %>
-  <%= form.hidden_field "properties[comment][content]", value: @comment.content %>
+  <%= form.hidden_field :comment_content, name: form.field_name(:properties, :comment, :content), value: @comment.content %>
   <%= form.hidden_field :reported_user_id, value: @comment.user_id %>
 
   <div class="form-group" data-reveal-by-select-parent>
