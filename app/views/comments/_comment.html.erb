@@ -34,7 +34,7 @@
             <%= link_to "Delete", comment_path(comment.id), class: "post-comment__action", remote: true, method: :delete, data: { confirm: "Are you sure?", disable_with: "Deleting..." } %>
           <% end %>
 
-          <%= link_to "Report", new_report_path(id: comment.id, concerns_model: "comment"), class: "post-comment__action", data: { action: "get-reports-form" } %>
+          <%= tag.button "Report", class: "post-comment__action", data: { action: "get-reports-form", url: new_report_path(id: comment.id, concerns_model: "comment") } %>
         </div>
       <% end %>
     </div>
