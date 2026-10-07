@@ -70,15 +70,9 @@ class ReportsController < ApplicationController
     post_url = post_url(post.code)
     admin_post_url = admin_post_url(post.id)
 
-    image = ""
-    if post.images.any? && post.image_order.present? && JSON.parse(post.image_order).length
-      image = url_for_post_thumbnail(post, 240, 128, "medium")
-    end
-
     embed = Discord::Embed.new do
       title "A post has been reported. (Go to admin)"
       url path
-      thumbnail url: image
       add_field name: "Report data", value: "
         #{ report.visit_token }
         #{ report.concerns_model }: #{ report.concerns_id }
