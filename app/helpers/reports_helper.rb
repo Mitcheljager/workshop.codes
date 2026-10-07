@@ -29,7 +29,9 @@ module ReportsHelper
   end
 
   private
+
   def report_has_model_property?(report, model, property)
+    return false if report.properties.class == Array
     return false unless report.properties[model]
     return false unless report.properties[model].respond_to?(:[])
     report.properties[model][property]
