@@ -29,11 +29,13 @@ class Api::AbilitiesController < Api::BaseController
 
   def abilities
     abilities_array = YAML.safe_load(File.read(Rails.root.join("config/arrays", "abilities.yml"))).inject(:merge)
+    ability_descriptions_array = YAML.safe_load(File.read(Rails.root.join("config/arrays", "ability_descriptions.yml"))).inject(:merge)
 
     abilities = abilities_array.map do |name, tags|
       ability = {}
 
       ability[:name] = name
+      ability[:description] = ability_descriptions_array[name]
       ability[:tags] = tags
       ability[:icon] = {
         small: ActionController::Base.helpers.vite_asset_url(ability_name_to_icon_url(name)),
