@@ -563,23 +563,6 @@
   story: |-
     The former commander of Overwatch turned physically-enhanced vigilante, Jack Morrison travels the world hunting those responsible for the downfall of Overwatch. It is unknown whether he seeks justice... or revenge.
 -
-  name: Sombra
-  role: Damage
-  subrole: Recon
-  stadium: false
-  release_date: "2016-11-15"
-  color: "#5128a9"
-  full_name: Olivia Colomar
-  nationality: Mexico
-  birth_date: "12-31"
-  age: 32
-  locations:
-    - Dorado, Mexico
-  description: |-
-    One of the world's most notorious hackers, Sombra uses information to manipulate those in power.
-  story: |-
-    One of the world's most notorious hackers, Sombra uses information to manipulate those in power. As she works to uncover the truth behind a shadowy global conspiracy, Sombra has joined the ranks of Talon, exploiting their resources for her own ends.
--
   name: Symmetra
   role: Damage
   subrole: Specialist
@@ -685,7 +668,7 @@
     A lifetime ago, Amélie Lacroix, wife of an Overwatch agent, was kidnapped by Talon. Shortly after returning home, she killed her husband and vanished. Now, “Widowmaker” is Talon's most effective weapon, a patient, ruthlessly efficient operative who rarely shows emotion and remorse, and revels only in the moment of the kill.
 -
   name: Ana
-  role: Support
+  role: 1rt
   subrole: Tactician
   stadium: true
   release_date: "2016-07-19"
@@ -907,6 +890,23 @@
     Equal parts brilliant and controversial, scientist Moira O'Deorain is on the cutting edge of genetic engineering, searching for a way to rewrite the fundamental building blocks of life.
   story: |-
     Controversial geneticist Moira O’Deorain cared only about the evolutionary advancement of humanity. Though her work has earned her many enemies, her alliances with the scientific collective of Oasis and the ruthless organization Talon have freed her from moral and monetary constraints, allowing her to pursue her breakthroughs with great efficiency... and ruthlessness.
+-
+  name: Sombra
+  role: Support
+  subrole: Tactician
+  stadium: false
+  release_date: "2016-11-15"
+  color: "#5128a9"
+  full_name: Olivia Colomar
+  nationality: Mexico
+  birth_date: "12-31"
+  age: 32
+  locations:
+    - Dorado, Mexico
+  description: |-
+    One of the world's most notorious hackers, Sombra uses information to manipulate those in power.
+  story: |-
+    One of the world's most notorious hackers, Sombra uses information to manipulate those in power. As she works to uncover the truth behind a shadowy global conspiracy, Sombra has joined the ranks of Talon, exploiting their resources for her own ends.
 -
   name: Wuyang
   role: Support
