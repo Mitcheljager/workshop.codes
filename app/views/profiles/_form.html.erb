@@ -30,16 +30,26 @@
         Write a little bit about yourself. Share your Battle tag, platform, or other places people can find you. Basic Markdown enabled. Limited to 255 characters.
       </div>
 
-      <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small", maxlength: 255 %>
+      <% if current_user.posts.any? || current_user.verified? %>
+        <%= form.text_area :description, class: "form-input form-textarea form-textarea--extra-small", maxlength: 255 %>
+      <% else %>
+        <p class="text-italic well">Adding a description requires you to have created at least one code or be verified.</p>
+      <% end %>
+
     </div>
 
     <div class="form-group-max-width mt-1/2">
       <%= form.label :link, "Link", class: "form-label" %>
+
       <p class="form-hint">
         Link to your website/discord/whatever you might want people to visit. Links should start with <code>http://</code> or <code>https://</code>.
       </p>
 
-      <%= form.text_field :link, placeholder: "Link", class: "form-input" %>
+      <% if current_user.posts.any? || current_user.verified? %>
+        <%= form.text_field :link, placeholder: "Link", class: "form-input" %>
+      <% else %>
+        <p class="text-italic well">Adding a link requires you to have created at least one code or be verified.</p>
+      <% end %>
     </div>
 
     <hr class="small mt-1/1">
