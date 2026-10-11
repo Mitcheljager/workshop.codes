@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :honeypot, only: [:create]
+  before_action :reject_possible_bot, only: [:create]
 
   before_action except: [:new, :create] do
     redirect_to login_path unless current_user
@@ -97,5 +98,18 @@ class UsersController < ApplicationController
 
     Bugsnag.notify("User was blocked from creating an account via honeypot") if Rails.env.production?
     redirect_to root_path
+  end
+
+  # This combats a very specific bot that creates account with an 8 character username and a email that
+  # also has 8 characters before the @. Quite specific, but not so specific that no users might accidentally
+  # trigger this. So this is meant to be temporary until that one bot has fucked off.
+  def reject_possible_bot
+    return if user_params[:email].blank?
+
+    has_matching_email_length = user_params[:email].match(/(.+)@(.+)\.(.+)/)[1].length == 8
+    has_matching_username_lengh = user_params[:username].length == 8
+
+    Bugsnag.notify("User was blocked from creating an account via temporary bot protection") if Rails.env.production?
+    redirect_to root_path if has_matching_email_length && has_matching_username_lengh
   end
 end
