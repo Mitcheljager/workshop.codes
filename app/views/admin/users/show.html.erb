@@ -17,7 +17,8 @@
     <%= tag.button "Badges <small>#{ @user.badges.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "badges" } %>
     <%= tag.button "Posts <small>#{ @user.posts.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "posts" } %>
     <%= tag.button "Comments <small>#{ @user.comments.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "comments" } %>
-    <%= tag.button "Activity <small>#{ @user.activities.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "activity" } %>
+    <%= tag.button "Activities <small>#{ @user.activities.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "activities" } %>
+    <%= tag.button "Favorites <small>#{ @user.favorites.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "favorites" } %>
   </nav>
 
   <% if @user.linked_id %>
@@ -190,8 +191,8 @@
     <% end %>
   </div>
 
-  <div class="tabs-content" data-tab="activity">
-    <h3 class="mt-0">Latest 20 activity</h3>
+  <div class="tabs-content" data-tab="activities">
+    <h3 class="mt-0">Latest 20 activities</h3>
 
     <% @user.activities.order(created_at: :desc).limit(20).each do |activity| %>
       <div class="well well--dark block mb-1/8 p-1/4">
@@ -199,5 +200,27 @@
         <span class="text-lightest"><%= activity.content_type %></span>
       </div>
     <% end %>
+  </div>
+
+  <div class="tabs-content" data-tab="favorites">
+    <table class="w-auto">
+      <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Favorited at</th>
+      </tr>
+
+      <% @user.favorites.order(created_at: :desc).each do |favorite| %>
+        <tr>
+          <td><%= link_to favorite.post.id, admin_post_path(favorite.post.id) %></td>
+          <td><strong><%= link_to favorite.post.code, post_path(favorite.post.code) %></strong></td>
+          <td><%= favorite.post.title %></td>
+          <td><%= favorite.created_at %></td>
+        </tr>
+      <% end %>
+
+      <tr><td><%= "No favorites" if @user.favorites.none? %></td></tr>
+    </table>
   </div>
 </div>
