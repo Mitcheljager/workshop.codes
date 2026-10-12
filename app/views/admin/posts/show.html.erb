@@ -8,6 +8,7 @@
   <nav class="tabs mt-1/2 mb-1/2" aria-label="Post controls">
     <%= tag.button "Status", class: "tabs__item tabs__item--active", data: { action: "set-tab", target: "status" } %>
     <%= tag.button "Images <small>#{ @post.images.size + (@post.banner_image.attached? ? 1 : 0) }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "images" } %>
+    <%= tag.button "Favorites <small>#{ @post.favorites.size }</small>".html_safe, class: "tabs__item", data: { action: "set-tab", target: "favorites" } %>
     <%= tag.button "Analytics".html_safe, class: "tabs__item", data: { action: "set-tab", target: "analytics" } %>
   </nav>
 
@@ -85,6 +86,17 @@
     <% end %>
   </div>
 
+  <div class="tabs-content" data-tab="favorites">
+    <% @post.favorites.order(created_at: :desc).each do |favorite| %>
+      <div class="well well--dark p-1/4 mb-1/8">
+        <%= link_to favorite.user.username, admin_user_path(favorite.user), class: "text-white" %> <%= favorite.created_at %>
+      </div>
+    <% end %>
+
+    <% if @post.favorites.none? %>
+      <em>There are no favorites for this post.</em>
+    <% end %>
+  </div>
 
   <div class="tabs-content" data-tab="analytics">
     <h3 class="mt-1/1">Total views per day</h3>
