@@ -31,7 +31,6 @@ gem "numo-narray", git: "https://github.com/ruby-numo/numo-narray.git"
 gem "omniauth-bnet"
 gem "omniauth-discord"
 gem "omniauth-rails_csrf_protection" # Mitigate CVE-2015-9284
-gem "pghero"
 gem "pg_query", ">= 2"
 gem "puma", "~> 5.6"
 gem "rails", "~> 8.0.0"

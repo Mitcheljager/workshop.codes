@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_18_235425) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_13_184720) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -176,6 +176,13 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_18_235425) do
     t.index ["post_id"], name: "index_email_notifications_on_post_id"
   end
 
+  create_table "enhance_audio_files", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
@@ -205,17 +212,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_18_235425) do
     t.integer "concerns_id", default: 0
     t.index ["concerns_id"], name: "index_notifications_on_concerns_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
-  end
-
-  create_table "pghero_query_stats", force: :cascade do |t|
-    t.text "database"
-    t.text "user"
-    t.text "query"
-    t.integer "query_hash", limit: 8
-    t.float "total_time"
-    t.integer "calls", limit: 8
-    t.datetime "captured_at"
-    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
   create_table "posts", id: :integer, default: nil, force: :cascade do |t|
@@ -278,7 +274,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_18_235425) do
     t.index ["uuid"], name: "index_project_backups_on_uuid"
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "projects", id: :integer, default: nil, force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
     t.text "content"
