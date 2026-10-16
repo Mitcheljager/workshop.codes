@@ -13,13 +13,10 @@
 
         <div data-toggle-content>
           <small>
-            <a href="#"
-              class="text-lightest"
-              data-action="toggle-content"
-              data-show-with="Hide CSS editor"
-              data-hide-with="Show CSS editor"
-              aria-expanded="false"
-              aria-controls="custom-css">Show CSS editor</a>
+            <%= tag.button "Show CSS editor",
+                           class: "text-lightest",
+                           data: { action: "toggle-content", showWith: "Hide CSS editor", hideWith: "Show CSS editor" },
+                           aria: { expanded: "false", controls: "custom-css" } %>
           </small>
 
           <div data-role="content-to-toggle" id="custom-css" style="display: none">
