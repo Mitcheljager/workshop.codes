@@ -24,6 +24,7 @@ class PostsController < ApplicationController
   end
 
   after_action :track_action, only: [:show]
+  after_action :set_hotness, only: [:show]
 
   def index
     @hot_posts = Post.includes(:user).select_overview_columns.public?.where("hotness > 1").order("hotness DESC").limit(10) unless params[:page].present?
@@ -374,6 +375,10 @@ class PostsController < ApplicationController
     parameters["id"] = @post.id if @post.present?
 
     TrackingJob.perform_async(ahoy, event, parameters)
+  end
+
+  def set_hotness
+    HotnessJob.perform_async(@post)
   end
 
   def post_activity_params

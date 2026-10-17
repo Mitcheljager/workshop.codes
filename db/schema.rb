@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_13_184720) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_17_224524) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -251,6 +251,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_13_184720) do
     t.datetime "top_hotness_at", precision: nil
     t.boolean "light_header", default: false
     t.string "project_uuid"
+    t.datetime "hotness_last_updated_at"
     t.index ["categories"], name: "index_posts_on_categories"
     t.index ["code"], name: "index_posts_on_code"
     t.index ["favorites_count"], name: "index_posts_on_favorites_count"
@@ -398,7 +399,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_13_184720) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "posts", "users"
 end

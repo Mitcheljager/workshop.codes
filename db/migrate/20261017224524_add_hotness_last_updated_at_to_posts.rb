@@ -1,0 +1,5 @@
+class AddHotnessLastUpdatedAtToPosts < ActiveRecord::Migration[8.0]
+  def change
+    add_column :posts, :hotness_last_updated_at, :datetime
+  end
+end
