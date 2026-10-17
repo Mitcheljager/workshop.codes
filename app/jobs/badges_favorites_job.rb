@@ -1,5 +1,4 @@
-class BadgesFavoritesJob
-  include SuckerPunch::Job
+class BadgesFavoritesJob < ApplicationJob
   include BadgesHelper
 
   def perform(post, user)

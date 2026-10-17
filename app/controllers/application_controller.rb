@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   before_action :set_request_headers, if: -> { request.format.json? }
 
   after_action except: [:create, :update, :destroy], if: -> { request.format.html? } do
-    TrackingJob.perform_async(ahoy, "Page View", { request: request.path_parameters, url: request.base_url + request.original_fullpath })
+    TrackingJob.perform_later(ahoy, "Page View", { request: request.path_parameters, url: request.base_url + request.original_fullpath })
   end
 
   def active_storage_blob_variant_url

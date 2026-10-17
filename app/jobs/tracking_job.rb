@@ -1,6 +1,4 @@
-class TrackingJob
-  include SuckerPunch::Job
-
+class TrackingJob < ApplicationJob
   def perform(ahoy, event, parameters)
     begin
       return unless ahoy.present?

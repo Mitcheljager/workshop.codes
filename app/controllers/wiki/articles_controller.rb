@@ -74,7 +74,7 @@ class Wiki::ArticlesController < Wiki::BaseController
       create_activity(:create_wiki_article, { id: @article.id })
 
       if @article
-        BadgesWikiJob.perform_async(current_user)
+        BadgesWikiJob.perform_later(current_user)
         flash[:notice] = "Article successfully created"
         redirect_to wiki_article_path(@article.slug)
       else
@@ -104,7 +104,7 @@ class Wiki::ArticlesController < Wiki::BaseController
     create_activity(:update_wiki_article, { id: @article.id })
 
     if @article.save
-      BadgesWikiJob.perform_async(current_user)
+      BadgesWikiJob.perform_later(current_user)
       create_wiki_edit(:edited, @article.id, article_params[:edit_notes])
       redirect_to wiki_article_path(@article.slug)
     else

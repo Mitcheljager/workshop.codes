@@ -248,6 +248,8 @@ GEM
       multi_json
     erb (6.0.7)
     erubi (1.13.1)
+    et-orbi (1.4.2)
+      tzinfo
     execjs (2.10.0)
     factory_bot (6.5.6)
       activesupport (>= 6.1.0)
@@ -286,6 +288,9 @@ GEM
       ffi (>= 1.15.5)
       rake
     fiddle (1.1.6)
+    fugit (1.14.0)
+      et-orbi (~> 1.4)
+      raabro (~> 1.4)
     get_process_mem (1.0.0)
       bigdecimal (>= 2.0)
       ffi (~> 1.0)
@@ -310,6 +315,10 @@ GEM
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     image_processing (2.1.0)
+    importmap-rails (2.2.3)
+      actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
     inline_svg (1.10.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
@@ -366,6 +375,16 @@ GEM
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
+    mission_control-jobs (1.3.1)
+      actioncable (>= 7.1)
+      actionpack (>= 7.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      importmap-rails (>= 1.2.1)
+      irb (~> 1.13)
+      railties (>= 7.1)
+      stimulus-rails
+      turbo-rails
     msgpack (1.8.0)
     multi_json (1.15.0)
     multi_test (1.1.0)
@@ -436,6 +455,7 @@ GEM
     query_count (1.1.1)
       activerecord (>= 4.2)
       railties (>= 4.2)
+    raabro (1.5.0)
     racc (1.8.1)
     rack (2.2.24)
     rack-proxy (0.7.7)
@@ -578,6 +598,13 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
+    solid_queue (1.7.0)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      concurrent-ruby (>= 1.3.1)
+      fugit (~> 1.11)
+      railties (>= 7.1)
+      thor (>= 1.3.1)
     sprockets (3.7.5)
       base64
       concurrent-ruby (~> 1.0)
@@ -590,8 +617,8 @@ GEM
       mini_portile2 (~> 2.8.0)
     sqlite3 (2.9.6-x64-mingw-ucrt)
     sqlite3 (2.9.6-x86_64-linux-gnu)
-    sucker_punch (3.2.0)
-      concurrent-ruby (~> 1.0)
+    stimulus-rails (1.3.4)
+      railties (>= 6.0.0)
     sys-proctable (1.3.0)
       ffi (~> 1.1)
     sys-uname (1.3.1)
@@ -601,6 +628,9 @@ GEM
     timecop (0.9.10)
     timeout (0.6.1)
     tsort (0.2.0)
+    turbo-rails (2.0.23)
+      actionpack (>= 7.1.0)
+      railties (>= 7.1.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -687,6 +717,7 @@ DEPENDENCIES
   kaminari
   lockbox
   mini_magick (>= 4.9.5)
+  mission_control-jobs
   numo-narray!
   omniauth-bnet
   omniauth-discord
@@ -707,9 +738,9 @@ DEPENDENCIES
   selenium-webdriver (~> 4.7.1)
   sendgrid-ruby
   shoulda-matchers (~> 4.5)
+  solid_queue
   sprockets-rails
   sqlite3 (~> 2.9.6)
-  sucker_punch
   sys-proctable
   timecop
   turbolinks (~> 5)

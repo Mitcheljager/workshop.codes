@@ -1,5 +1,4 @@
-class BadgesWikiJob
-  include SuckerPunch::Job
+class BadgesWikiJob < ApplicationJob
   include BadgesHelper
 
   def perform(user)

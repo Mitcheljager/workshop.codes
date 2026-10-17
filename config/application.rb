@@ -23,8 +23,10 @@ module OverwatchWorkshop
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.exceptions_app = self.routes
-    config.active_job.queue_adapter = :sucker_punch
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+
+    config.active_job.queue_adapter = :solid_queue
+    config.solid_queue.connects_to = { database: { writing: :queue } }
 
     config.active_storage.track_variants = true
     config.active_storage.variant_processor = :mini_magick

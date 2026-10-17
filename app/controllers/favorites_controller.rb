@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
 
     respond_to do |format|
       if @post.present? && @favorite.save
-        BadgesFavoritesJob.perform_async(@post, current_user)
+        BadgesFavoritesJob.perform_later(@post, current_user)
 
         format.json { render json: { status: 200 }, status: 200 }
         format.html { redirect_to root_path }

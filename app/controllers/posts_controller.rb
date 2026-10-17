@@ -373,7 +373,7 @@ class PostsController < ApplicationController
   def track_action(event = "Posts Visit", parameters = request.path_parameters)
     parameters["id"] = @post.id if @post.present?
 
-    TrackingJob.perform_async(ahoy, event, parameters)
+    TrackingJob.perform_later(ahoy, event, parameters)
   end
 
   def post_activity_params

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     get "*path", to: redirect { |params, request| request.path.sub("/ko", "") }, format: false
   end
 
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   get "up", to: "rails/health#show", as: :rails_health_check
 
   root "posts#index"
