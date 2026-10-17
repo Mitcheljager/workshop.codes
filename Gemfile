@@ -15,7 +15,6 @@ gem "bootsnap", require: false
 gem "diffy"
 gem "disco"
 gem "discord-notifier"
-gem "dynoscale_ruby"
 gem "elasticsearch-model", "7.1.1"
 gem "elasticsearch-rails", "7.1.1"
 gem "elasticsearch", "<= 7.10.2" # Limited by Bonsai support
