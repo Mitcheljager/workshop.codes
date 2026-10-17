@@ -232,7 +232,6 @@ GEM
     discord-notifier (1.0.3)
     drb (2.2.3)
     dry-cli (1.2.0)
-    dynoscale_ruby (1.0.4)
     elasticsearch (7.10.1)
       elasticsearch-api (= 7.10.1)
       elasticsearch-transport (= 7.10.1)
@@ -673,7 +672,6 @@ DEPENDENCIES
   diffy
   disco
   discord-notifier
-  dynoscale_ruby
   elasticsearch (<= 7.10.2)
   elasticsearch-api (<= 7.10.2)
   elasticsearch-model (= 7.1.1)
