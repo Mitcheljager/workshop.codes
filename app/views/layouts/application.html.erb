@@ -46,6 +46,8 @@
   </head>
 
   <body class="<%= "theme-#{ theme }" unless is_wiki? || is_editor? %> <%= "theme-wiki" if is_wiki? %>">
+    <%= render "application/banners/global" if ENV["BANNER_GLOBAL"].present? %>
+
     <%= render "header" unless is_editor? %>
     <%= render "wiki/header" if is_wiki? %>
 
