@@ -1,1 +1,0 @@
-Rails.cache.clear
