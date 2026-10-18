@@ -9,7 +9,7 @@ class SearchController < ApplicationController
       search_params[:query] = search_params.delete(:search) unless search_params[:query].present?
     end
 
-    unless search_params[:query].blank?
+    if search_params[:query].present?
       respond_to do |format|
         format.js { redirect_to build_filter_path(:search, search_params[:query]) }
         format.html { redirect_to build_filter_path(:search, search_params[:query]) }
