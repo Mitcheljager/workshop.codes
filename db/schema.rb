@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_17_224524) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_18_084126) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_17_224524) do
     t.string "name"
     t.text "properties"
     t.datetime "time", precision: nil
+    t.integer "model_id"
+    t.index ["model_id"], name: "index_ahoy_events_on_model_id"
     t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
     t.index ["user_id"], name: "index_ahoy_events_on_user_id"
     t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"

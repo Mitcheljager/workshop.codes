@@ -12,8 +12,8 @@ class HotnessJob
         # If things work out, this job will replace that task.
 
         favorites_count = Favorite.where(post_id: post.id).where("created_at > ?", 1.week.ago).count
-        impressions_count = Ahoy::Event.where(name: "Posts Visit").where("time > ?", 1.day.ago).distinct.pluck(:visit_id, :properties).select { |s| s[1]["controller"] == "posts" && s[1]["action"] == "show" && s[1]["id"] == post.id }.count
-        copy_count = Ahoy::Event.where(name: "Copy Code").where("time > ?", 1.day.ago).distinct.pluck(:visit_id, :properties).select { |s| s[1]["id"] == post.id }.count
+        impressions_count = Ahoy::Event.where(model_id: post.id, name: "Posts Visit").where("time > ?", 1.day.ago).distinct.count(:visit_id)
+        copy_count = Ahoy::Event.where(model_id: post.id, name: "Copy Code").where("time > ?", 1.day.ago).distinct.count(:visit_id)
 
         days_old = (post.last_revision_created_at.to_datetime...Time.now).count
         days_old = [[days_old, 3].max, 45].min
@@ -34,7 +34,8 @@ class HotnessJob
 
         post.update_column(:hotness_last_updated_at, DateTime.now)
       end
-    rescue
+    rescue => error
+      Rails.logger.error(error)
     end
   end
 end

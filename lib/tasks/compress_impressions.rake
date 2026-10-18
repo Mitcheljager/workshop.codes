@@ -15,15 +15,17 @@ task compress_impressions: :environment do
 end
 
 def compress_events(event_name, content_type)
-  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: event_name).distinct.pluck(:visit_id, :properties).group_by { |v| v[1]["id"] }
+  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: event_name).distinct.pluck(:visit_id, :properties).group_by { |v| v[1]["id"] || v[1][:id] }
 
   events.each do |event|
     @statistic = Statistic.new(timeframe: :daily, content_type:, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
 
-    if event[1].first[1]["id"]
-      @statistic.model_id = event[1].first[1]["id"]
+    id = event[1].first[1]["id"] || event[1].first[1][:id]
 
-      post = Post.find_by_id(event[1].first[1]["id"])
+    if id
+      @statistic.model_id = id
+
+      post = Post.find_by_id(id)
       post.increment!(:impressions_count, event[1].size) if post.present? && content_type == :visit
     end
 
