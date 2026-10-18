@@ -43,11 +43,11 @@ RSpec.describe "ForgotPasswords", type: :system do
 
     context "which has expired" do
       before(:each) do
-        Timecop.freeze(Time.now)
+        Timecop.freeze(Time.current)
 
         acquire_reset_url
 
-        Timecop.travel(Time.now + 2.hours)
+        Timecop.travel(Time.current + 2.hours)
       end
 
       after(:each) do

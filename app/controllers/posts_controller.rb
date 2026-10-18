@@ -104,7 +104,7 @@ class PostsController < ApplicationController
       Post.transaction do
         @post = Post.new(post_params)
         @post.user_id = current_user.id
-        @post.last_revision_created_at = Time.now
+        @post.last_revision_created_at = Time.current
 
         set_post_status
         unless parse_carousel_video
@@ -435,7 +435,7 @@ class PostsController < ApplicationController
 
     # Update the updated_at time manually in case the base post was not changed.
     # This is needed to make sure the cache updates as expected.
-    @post.update_column(:updated_at, Time.now)
+    @post.update_column(:updated_at, Time.current)
   end
 
   def published_from_draft
@@ -445,9 +445,9 @@ class PostsController < ApplicationController
   def update_draft
     return if @post.draft?
 
-    @post.created_at = Time.now
-    @post.updated_at = Time.now
-    @post.last_revision_created_at = Time.now
+    @post.created_at = Time.current
+    @post.updated_at = Time.current
+    @post.last_revision_created_at = Time.current
 
     @post.save
   end

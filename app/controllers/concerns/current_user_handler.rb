@@ -34,7 +34,7 @@ module CurrentUserHandler
       flash[:error] = "Invalid temporary OAuth session."
       return
     end
-    if session[:oauth_expires_at].present? && Time.now > session[:oauth_expires_at]
+    if session[:oauth_expires_at].present? && Time.current > session[:oauth_expires_at]
       clean_up_session_auth
       flash[:warning] = "Temporary session expired."
     end

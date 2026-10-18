@@ -8,7 +8,7 @@ FactoryBot.define do
     heroes { ApplicationHelper.heroes.collect { |a| a["name"] }.sample(3) }
     maps { ApplicationHelper.maps.collect { |a| a["name"] }.sample(3) }
     version { Faker::App.semantic_version }
-    last_revision_created_at { Time.now }
+    last_revision_created_at { Time.current }
     hotness { Faker::Number.between(from: 1, to: 200) }
     min_players { Faker::Number.between(from: 1, to: 12) }
     max_players { Faker::Number.between(from: min_players, to: 12) }

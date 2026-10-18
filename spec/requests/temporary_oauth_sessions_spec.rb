@@ -25,7 +25,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
 
           expect(session[:oauth_provider]).to eq("bnet")
           expect(session[:oauth_uid]).to eq(oauth_username_to_mock_uid("bnet", battletag))
-          expect(session[:oauth_expires_at]).to eq(Time.now + 30.minutes)
+          expect(session[:oauth_expires_at]).to eq(Time.current + 30.minutes)
           expect(flash[:notice]).to include(battletag)
         end
       end
@@ -42,7 +42,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
 
           expect(session[:oauth_provider]).to eq("discord")
           expect(session[:oauth_uid]).to eq(oauth_username_to_mock_uid("discord", full_username))
-          expect(session[:oauth_expires_at]).to eq(Time.now + 30.minutes)
+          expect(session[:oauth_expires_at]).to eq(Time.current + 30.minutes)
           expect(flash[:notice]).to include(username)
         end
       end
@@ -63,7 +63,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
       Timecop.freeze do
         obtain_temporary_oauth_session
 
-        Timecop.travel(Time.now + 1.minute) do
+        Timecop.travel(Time.current + 1.minute) do
           get root_path
           expect(session[:oauth_provider]).to be_present
           expect(session[:oauth_uid]).to be_present
@@ -77,7 +77,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
     it "expires the session on the next request" do
       obtain_temporary_oauth_session
 
-      Timecop.travel(Time.now + 30.minutes) do
+      Timecop.travel(Time.current + 30.minutes) do
         get root_path
         expect(session[:oauth_provider]).not_to be_present
         expect(session[:oauth_uid]).not_to be_present
@@ -102,7 +102,7 @@ RSpec.describe "Temporary OAuth requests", type: :request do
       # Simulate copying the cookie down.
       session_cookie = cookies[session_cookie_key]
 
-      Timecop.travel(Time.now + 30.minutes) do
+      Timecop.travel(Time.current + 30.minutes) do
         # We now simulate copying the session cookie back
         cookies[session_cookie_key] = session_cookie
         get root_path

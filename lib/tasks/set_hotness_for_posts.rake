@@ -10,7 +10,7 @@ namespace :hotness do
         impressions_count = Ahoy::Event.where(name: "Posts Visit").where("time > ?", 1.day.ago).distinct.pluck(:visit_id, :properties).select { |s| s[1]["controller"] == "posts" && s[1]["action"] == "show" && s[1]["id"] == post.id }.count
         copy_count = Ahoy::Event.where(name: "Copy Code").where("time > ?", 1.day.ago).distinct.pluck(:visit_id, :properties).select { |s| s[1]["id"] == post.id }.count
 
-        days_old = (post.last_revision_created_at.to_datetime...Time.now).count
+        days_old = (post.last_revision_created_at.to_datetime...Time.current).count
         days_old = [[days_old, 3].max, 45].min
 
         impressions_and_copy_score = impressions_count + (copy_count * 5)

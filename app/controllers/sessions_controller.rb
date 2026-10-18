@@ -170,6 +170,6 @@ class SessionsController < ApplicationController
   def set_session_auth
     session["oauth_provider"] = auth_hash["provider"]
     session["oauth_uid"] = auth_hash["uid"]
-    session["oauth_expires_at"] = Time.now + 30.minutes
+    session["oauth_expires_at"] = Time.current + 30.minutes
   end
 end
