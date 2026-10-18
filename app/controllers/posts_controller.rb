@@ -73,8 +73,6 @@ class PostsController < ApplicationController
   def redirect_nice_url
     @post = Post.visible?.find_by_nice_url!(params[:nice_url].downcase)
 
-    track_action("Redirect Post Nice URL")
-
     redirect_to post_path(@post.code)
   end
 
