@@ -10,11 +10,13 @@ class HotnessJob
         # Copied from rake task hotness:set_hotness_for_posts.
         # If things work out, this job will replace that task.
 
+        now = Time.current
+
         favorites_count = Favorite.where(post_id: post.id).where("created_at > ?", 1.week.ago).count
         impressions_count = Ahoy::Event.where(model_id: post.id, name: "Posts Visit").where("time > ?", 1.day.ago).distinct.count(:visit_id)
         copy_count = Ahoy::Event.where(model_id: post.id, name: "Copy Code").where("time > ?", 1.day.ago).distinct.count(:visit_id)
 
-        days_old = (post.last_revision_created_at.to_datetime...Time.now).count
+        days_old = (post.last_revision_created_at.to_datetime...now).count
         days_old = [[days_old, 3].max, 45].min
 
         impressions_and_copy_score = impressions_count + (copy_count * 5)
@@ -28,10 +30,10 @@ class HotnessJob
         post.update_column(:hotness, total_score)
 
         if total_score > post.top_hotness
-          post.update_columns(top_hotness: total_score, top_hotness_at: DateTime.now)
+          post.update_columns(top_hotness: total_score, top_hotness_at: now)
         end
 
-        post.update_column(:hotness_last_updated_at, DateTime.now)
+        post.update_column(:hotness_last_updated_at, now)
       end
     rescue => error
       Rails.logger.error(error)
