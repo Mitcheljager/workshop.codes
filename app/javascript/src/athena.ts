@@ -7,18 +7,24 @@ export default class Athena {
       if (!url) throw new Error("No Athena url was found")
       if (this.isPreviouslyTracked(eventName, properties)) return
 
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          event_name: eventName,
-          properties
-        })
-      })
+      window.requestIdleCallback ||= function(callback) {
+        return setTimeout(callback)
+      }
 
-      this.addPreviouslyTracked(eventName, properties)
+      requestIdleCallback(async() => {
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            event_name: eventName,
+            properties
+          })
+        })
+
+        this.addPreviouslyTracked(eventName, properties)
+      })
     } catch (error: any) {
       console.error("Athena failed: " + error)
     }
