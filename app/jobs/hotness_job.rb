@@ -4,8 +4,7 @@ class HotnessJob
 
   def perform(post)
     begin
-      return if post.blank?
-      return if post.hotness_last_updated_at.present? && post.hotness_last_updated_at > 1.hour.ago
+      return if post.nil?
 
       ActiveRecord::Base.connection_pool.with_connection do
         # Copied from rake task hotness:set_hotness_for_posts.
