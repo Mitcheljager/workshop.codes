@@ -82,8 +82,6 @@ Rails.application.routes.draw do
   get "create_reply_form/:comment_id", to: "comments#create_reply_form", as: "create_reply_form"
   get "comments/:id/:page", to: "comments#more", as: "more_comments"
 
-  post "copy-code", to: "posts#copy_code", as: "copy_code"
-
   post "parse-markdown", to: "posts#parse_markdown", as: "parse_markdown"
   get "get-snippet/:code", to: "posts#get_snippet", as: "get_snippet"
   get "similar_to/:id", to: "similar_to#show", as: "similar_posts"

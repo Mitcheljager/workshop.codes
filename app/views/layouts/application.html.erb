@@ -63,5 +63,7 @@
       <%= svelte_component "Alerts", { initialAlerts: flash.to_json } %>
       <%= svelte_component "Ollie", { imageFlyBy: vite_asset_url("images/ollie/ollie-float.png"), imageHeart: vite_asset_url("images/ollie/ollie-heart.png") } %>
     <% end %>
+
+    <div data-track-on-load="Page View" data-properties='{ "url": "<%= request.url %>" }'></div>
   </body>
 </html>

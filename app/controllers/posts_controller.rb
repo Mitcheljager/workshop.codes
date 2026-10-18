@@ -23,7 +23,6 @@ class PostsController < ApplicationController
     redirect_to login_path unless current_user
   end
 
-  after_action :track_action, only: [:show]
   after_action :set_hotness, only: [:show]
 
   def index
@@ -218,17 +217,6 @@ class PostsController < ApplicationController
     redirect_to posts_url
   end
 
-  def copy_code
-    @post = Post.find_by_code(params[:code])
-
-    if @post.blank?
-      @revision = Revision.find_by("upper(code) = ?", params[:code].upcase)
-      @post = @revision.post if @revision.present?
-    end
-
-    track_action("Copy Code") if @post.present?
-  end
-
   private
 
   def set_post
@@ -367,12 +355,6 @@ class PostsController < ApplicationController
 
   def not_found
     raise ActionController::RoutingError.new("Not Found")
-  end
-
-  def track_action(event = "Posts Visit", parameters = request.path_parameters)
-    parameters[:id] = @post.id if @post.present?
-
-    TrackingJob.perform_async(ahoy, event, parameters)
   end
 
   def set_hotness

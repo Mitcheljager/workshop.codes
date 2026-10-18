@@ -39,6 +39,7 @@ import * as searchTable from "@src/search-table"
 import * as sticky from "@src/sticky"
 import * as tabs from "@src/tabs"
 import * as timeago from "@src/timeago"
+import * as trackOnLoad from "@src/track-on-load"
 import * as toggleContent from "@src/toggle-content"
 import * as youtubePreview from "@src/youtube-preview"
 import * as wikiSearch from "@src/wiki/search"
@@ -81,6 +82,7 @@ document.addEventListener("turbolinks:load", () => {
   timeago.initialize()
   scrollIntoViewOnLoad.initialize()
   focusOnLoad.initialize()
+  trackOnLoad.initialize()
 })
 
 document.addEventListener("turbolinks:before-cache", () => {
