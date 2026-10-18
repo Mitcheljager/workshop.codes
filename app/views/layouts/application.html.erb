@@ -45,7 +45,7 @@
     <noscript><style>.hide-when-noscript { display: none; }</style></noscript>
   </head>
 
-  <body class="<%= "theme-#{ theme }" unless is_wiki? || is_editor? %> <%= "theme-wiki" if is_wiki? %>">
+  <body class="<%= "theme-#{ theme }" unless is_wiki? || is_editor? %> <%= "theme-wiki" if is_wiki? %>" data-athena-url="<%= ENV["ATHENA_URL"] %>">
     <%= render "application/banners/global" if ENV["BANNER_GLOBAL"].present? %>
 
     <%= render "header" unless is_editor? %>

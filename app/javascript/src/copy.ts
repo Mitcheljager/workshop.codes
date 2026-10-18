@@ -1,4 +1,4 @@
-import FetchRails from "@src/fetch-rails"
+import Athena from "./athena"
 
 export function bind(): void {
   document.body.removeAndAddEventListener("click", copyToClipboard)
@@ -31,10 +31,7 @@ export default function copyToClipboard(event: MouseEvent, optionalContent = "")
 
   setTimeout((): void | undefined => copyParent.querySelector(".copy__notification")?.remove(), 1000)
 
-  if (eventTarget.dataset.trackCopy === undefined) return
-
-  if (eventTarget.dataset.trackCopy !== "false" && eventTarget.dataset.trackCopy !== undefined) trackCopy(textContent)
-  eventTarget.dataset.trackCopy = "false" // Don't track repeat clicks
+  if (eventTarget.dataset.trackCopy !== undefined) new Athena().track("copy-code", { code: textContent })
 }
 
 export function copyValueToClipboard(value: string): void {
@@ -45,8 +42,4 @@ export function copyValueToClipboard(value: string): void {
   input.select()
   document.execCommand("copy")
   document.body.removeChild(input)
-}
-
-function trackCopy(label: string): void {
-  new FetchRails("/copy-code", { code: label }).post()
 }
