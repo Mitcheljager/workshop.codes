@@ -21,7 +21,6 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
-    @report.visit_token = ahoy.visit_token
     @report.user_id = current_user.id if current_user.present?
 
     respond_to do |format|

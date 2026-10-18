@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "active_model_serializers"
 gem "active_storage_validations", "~> 4.1.0"
-gem "ahoy_matey"
 gem "argon2", git: "https://github.com/technion/ruby-argon2.git", submodules: true
 gem "aws-sdk-s3", require: false
 gem "bcrypt", require: "bcrypt"

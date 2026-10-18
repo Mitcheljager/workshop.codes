@@ -54,7 +54,6 @@ class SessionsController < ApplicationController
       refresh_remember_token_cookie if params[:remember_me].present? && params[:remember_me] != "0" || @user.provider.present?
 
       create_activity(:login, @user.id)
-      ahoy.authenticate(@user)
 
       if omniauth_params.respond_to?(:[]) && omniauth_params["redirect_path"].present?
         path = omniauth_params["redirect_path"].presence || ""
