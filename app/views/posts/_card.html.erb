@@ -2,47 +2,55 @@
 <% loading = eager_load_first_index && post_counter == 0 ? "eager" : "lazy" %>
 
 <% cache_unless current_user, [post, "card"] do %>
-  <% image_url = url_for_post_thumbnail(post, 300, 171, "medium") %>
-
   <div class="card" data-code="<%= post.code %>">
-    <%= link_to post_path(post.code), title: post.title, tabindex: -1, class: "card__image" do %>
-      <picture>
-        <source media="(max-width: 449px)" srcset="<%= url_for_post_thumbnail(post, 600, 342, "large") %>">
+    <% cache [post, "card", "thumbnail"] do %>
+      <% image_url_small = url_for_post_thumbnail(post, 300, 171, "medium") %>
+      <% image_url_large = url_for_post_thumbnail(post, 600, 342, "large") %>
 
-        <%= image_tag image_url,
-                      srcset: "
-                        #{ image_url } 1x,
-                        #{ url_for_post_thumbnail(post, 600, 342, "large") } 2x",
-                      alt: post.title,
-                      width: 300,
-                      height: 171,
-                      loading: loading,
-                      fetchpriority: loading == "eager" ? "high" : nil %>
-      </picture>
+      <%= link_to post_path(post.code), title: post.title, tabindex: -1, class: "card__thumbnail" do %>
+        <picture>
+          <source media="(max-width: 449px)" srcset="<%= image_url_large %>">
+
+          <%= image_tag image_url_small,
+                        srcset: "
+                          #{ image_url_small } 1x,
+                          #{ image_url_large } 2x",
+                        alt: post.title,
+                        width: 300,
+                        height: 171,
+                        loading: loading,
+                        fetchpriority: loading == "eager" ? "high" : nil,
+                        class: "card__image" %>
+        </picture>
+
+        <% cache [post, "card", "blur"] do %>
+          <%= image_tag image_url_small,
+            width: 300,
+            height: 171,
+            loading: loading,
+            fetchpriority: loading == "eager" ? "high" : nil,
+            class: "card__blurred-background",
+            alt: "" %>
+        <% end %>
+      <% end %>
     <% end %>
 
     <div class="relative z-1 flex mb-auto">
-      <div class="mr-1/8">
-        <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title) %>
+      <% cache [post, "card", "information"] do %>
+        <div class="mr-1/8">
+          <%= link_to truncate(post.title, length: 40), post_path(post.code), class: "card__title pb-0", title: (post.title) %>
 
-        <small class="card__author">
-          by
-          <%= link_to post.user.clean_username, user_profile_path(post.user), rel: "author" %>
-        </small>
-      </div>
+          <small class="card__author">
+            by
+            <%= link_to post.user.clean_username, user_profile_path(post.user), rel: "author" %>
+          </small>
+        </div>
+      <% end %>
 
       <div class="ml-auto">
         <%= render "favorites/form", post: post %>
       </div>
     </div>
-
-    <%= image_tag image_url,
-      width: 300,
-      height: 171,
-      loading: loading,
-      fetchpriority: loading == "eager" ? "high" : nil,
-      class: "card__blurred-background",
-      alt: "" %>
 
     <%= render "posts/code", post: post, item_class: "code mt-1/4" %>
   </div>
