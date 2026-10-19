@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::BadRequest, with: -> { head :bad_request }
 
   before_action :set_request_headers, if: -> { request.format.json? }
-  before_action :block_direct_ip_access, if: -> { Rails.env.production? }
 
   after_action except: [:create, :update, :destroy], if: -> { request.format.html? } do
     TrackingJob.perform_async(ahoy, "Page View", { request: request.path_parameters, url: request.base_url + request.original_fullpath })
@@ -76,9 +75,5 @@ class ApplicationController < ActionController::Base
     headers["Access-Control-Allow-Origin"] = "*"
     headers["Access-Control-Allow-Methods"] = "GET"
     headers["Access-Control-Allow-Headers"] = "*"
-  end
-
-  def block_direct_ip_access
-    head 403 unless ENV["ASSETS_HOST"].include?(request.host)
   end
 end
