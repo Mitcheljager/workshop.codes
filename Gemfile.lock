@@ -577,6 +577,10 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
+    solid_cache (1.0.10)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
     sprockets (3.7.5)
       base64
       concurrent-ruby (~> 1.0)
@@ -705,6 +709,7 @@ DEPENDENCIES
   selenium-webdriver (~> 4.7.1)
   sendgrid-ruby
   shoulda-matchers (~> 4.5)
+  solid_cache (~> 1.0)
   sprockets-rails
   sqlite3 (~> 2.9.6)
   sucker_punch

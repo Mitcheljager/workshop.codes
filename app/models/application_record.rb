@@ -3,6 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   connects_to database: {
     writing: :writer,
-    reading: :reader
+    reading: :reader,
+    cache: :cache
   }
 end

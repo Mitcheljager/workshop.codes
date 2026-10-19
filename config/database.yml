@@ -18,6 +18,10 @@ development:
     <<: *default
     database: db/development.sqlite3
     pool: 1
+  cache:
+    <<: *default
+    database: db/development_cache.sqlite3
+    migrations_paths: db/cache_migrate
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -35,3 +39,7 @@ production:
     <<: *default
     database: db/production.sqlite3
     pool: 1
+  cache:
+    <<: *default
+    database: db/production_cache.sqlite3
+    migrations_paths: db/cache_migrate
