@@ -61,7 +61,9 @@
   </article>
 
   <div role="complementary" class="hide-when-noscript">
-    <%= render "post_recommendations" if @post.recommended_posts.any? %>
-    <%= render "similar_to" %>
+    <% cache [@post, "post_recommendations"], expires_in: 24.hours do %>
+      <%= render "post_recommendations" if @post.recommended_posts.any? %>
+      <%= render "similar_to" %>
+    <% end %>
   </div>
 </main>
