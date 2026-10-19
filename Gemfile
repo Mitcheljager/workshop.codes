@@ -30,7 +30,6 @@ gem "numo-narray", git: "https://github.com/ruby-numo/numo-narray.git"
 gem "omniauth-bnet"
 gem "omniauth-discord"
 gem "omniauth-rails_csrf_protection" # Mitigate CVE-2015-9284
-gem "pg_query", ">= 2"
 gem "puma", "~> 5.6"
 gem "rails", "~> 8.0.0"
 gem "rails_same_site_cookie"
@@ -42,6 +41,7 @@ gem "sendgrid-ruby"
 gem "solid_cache", "~> 1.0"
 gem "sprockets-rails"
 gem "sucker_punch"
+gem "sqlite3", "~> 2.9.6"
 gem "turbolinks", "~> 5"
 gem "tzinfo-data"
 gem "uglifier", ">= 1.3.0"
@@ -53,7 +53,6 @@ group :development, :test do
   gem "faker"
   gem "pry-byebug", "~> 3.10.1"
   gem "rubocop-rails-omakase", require: false
-  gem "sqlite3", "~> 2.9.6"
 end
 
 group :development do
@@ -79,6 +78,6 @@ end
 group :production do
   gem "autoprefixer-rails"
   gem "bugsnag"
-  # gem "heroku-deflater"
+  gem "foreman"
   gem "pg"
 end

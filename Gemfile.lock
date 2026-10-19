@@ -285,20 +285,13 @@ GEM
       ffi (>= 1.15.5)
       rake
     fiddle (1.1.6)
+    foreman (0.90.0)
+      thor (~> 1.4)
     get_process_mem (1.0.0)
       bigdecimal (>= 2.0)
       ffi (~> 1.0)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    google-protobuf (4.33.6)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.33.6-x64-mingw-ucrt)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.33.6-x86_64-linux-gnu)
-      bigdecimal
-      rake (>= 13)
     hashie (5.0.0)
     heapy (0.2.0)
       thor
@@ -417,8 +410,6 @@ GEM
       racc
     pg (1.5.9)
     pg (1.5.9-x64-mingw-ucrt)
-    pg_query (6.2.2)
-      google-protobuf (>= 3.25.3)
     pp (0.6.4)
       prettyprint
     prettyprint (0.2.0)
@@ -682,6 +673,7 @@ DEPENDENCIES
   elasticsearch-rails (= 7.1.1)
   factory_bot_rails (~> 6.5.1)
   faker
+  foreman
   httparty
   image_processing (~> 2.0)
   inline_svg
@@ -694,7 +686,6 @@ DEPENDENCIES
   omniauth-discord
   omniauth-rails_csrf_protection
   pg
-  pg_query (>= 2)
   pry-byebug (~> 3.10.1)
   puma (~> 5.6)
   query_count
