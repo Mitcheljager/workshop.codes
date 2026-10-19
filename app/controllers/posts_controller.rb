@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   before_action :set_post_images, only: [:edit]
   before_action :reject_unauthorized_user, only: [:edit, :update, :destroy, :immortalise]
   before_action :set_order, only: [:category, :hero, :map]
-
   before_action only: [:create, :new] do
     redirect_to login_path unless current_user
   end
