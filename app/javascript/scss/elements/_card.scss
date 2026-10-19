@@ -116,7 +116,7 @@
   a[href]:hover,
   a[href]:active,
   a[href]:focus {
-    img {
+    .card__image {
       filter: brightness(1.15);
     }
   }
