@@ -4,19 +4,7 @@ class PostsController < ApplicationController
 
   before_action :set_post, only: [:edit, :update, :destroy, :immortalise]
   before_action :set_post_images, only: [:edit]
-
-  before_action only: [:edit, :update, :destroy, :immortalise] do
-    if @post.present?
-      if current_user
-        redirect_to post_path(@post.code), flash: { error: "You are not authorized to perform that action" } unless current_user == @post.user
-      else
-        redirect_to login_path
-      end
-    else
-      redirect_to root_path
-    end
-  end
-
+  before_action :reject_unauthorized_user, only: [:edit, :update, :destroy, :immortalise]
   before_action :set_order, only: [:category, :hero, :map]
 
   before_action only: [:create, :new] do
@@ -245,6 +233,12 @@ class PostsController < ApplicationController
       format.js { render "posts/infinite_scroll_posts" }
       format.json { render json: @posts }
     end
+  end
+
+  def reject_unauthorized_user
+    redirect_to login_path if current_user.nil?
+    redirect_to root_path if @post.nil?
+    redirect_to post_path(@post.code), flash: { error: "You are not authorized to perform that action" } if current_user != @post.user
   end
 
   def set_post_images
