@@ -380,6 +380,7 @@ class PostsController < ApplicationController
   def set_hotness
     return if @post.nil?
     return if @post.hotness_last_updated_at.present? && @post.hotness_last_updated_at > 1.hour.ago
+    return if @post.last_revision_created_at < 2.months.ago && @post.hotness < 50
 
     HotnessJob.perform_async(@post)
   end
