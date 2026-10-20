@@ -24,7 +24,7 @@
           buttonLabel: "Browse files on device",
           inputName: "post[images][]",
           orderInputName: "post[image_order]"
-        }) %>
+        }) unless ENV["UPLOADS_DISABLED"] %>
 
     <hr class="mt-1/2 mb-1/2">
 
@@ -65,7 +65,7 @@
 
     <%= form.file_field :banner_image,
                         accept: "image/png, image/jpeg",
-                        data: { action: "image-preview toggle-lightness-on-change", target: "banner" } %>
+                        data: { action: "image-preview toggle-lightness-on-change", target: "banner" } unless ENV["UPLOADS_DISABLED"] %>
 
     <p class="form-hint mt-1/4 mb-0">
       This image will be processed to a 1920x400 format. Max 2MB.

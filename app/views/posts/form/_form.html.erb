@@ -1,5 +1,6 @@
 <%= form_with url: path, model: post, data: { role: "post-form tabs", remote: true }, html: { autocomplete: "off" } do |form| %>
   <%= render "form_errors", errors: post.errors if post.errors.any? %>
+  <%= render "uploads_disabled" if ENV["UPLOADS_DISABLED"] %>
 
   <div class="standout p-0 text-left">
     <div class="p-1/4">

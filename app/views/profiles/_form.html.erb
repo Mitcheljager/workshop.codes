@@ -59,6 +59,8 @@
   </div>
 
   <div class="tabs-content <%= "tabs-content--active" if params[:tab].present? && params[:tab] == "images" %>" data-tab="images">
+    <%= render "uploads_disabled" if ENV["UPLOADS_DISABLED"] %>
+
     <h2 class="mt-1/1 mb-0">Images</h2>
 
     <div class="well well--dark block mt-1/2">
@@ -77,7 +79,7 @@
 
         <%= form.file_field :profile_image,
                             accept: "image/png, image/jpeg",
-                            data: { action: "image-preview", target: "profile-image" } %>
+                            data: { action: "image-preview", target: "profile-image" } unless ENV["UPLOADS_DISABLED"] %>
 
         <p class="form-hint mt-1/4 mb-0">
           The image will be processed to a 140x140 format. Max 2MB.
@@ -107,7 +109,7 @@
 
       <%= form.file_field :banner_image,
                           accept: "image/png, image/jpeg",
-                          data: { action: "image-preview", target: "banner" } %>
+                          data: { action: "image-preview", target: "banner" } unless ENV["UPLOADS_DISABLED"] %>
 
       <p class="form-hint mt-1/4 mb-0">
         This image will be processed to a 1920x400 format. Max 2MB.
