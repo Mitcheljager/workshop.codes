@@ -3,7 +3,7 @@
 <p class="text-small"><em>Recommendations based on your favorited codes. Favorite more codes to get better recommendations!</em></p>
 
 <section>
-  <% cache [current_user.id], expires_in: 12.hours do %>
+  <% cache [current_user.id, "user_recommendations"], expires_in: 12.hours do %>
     <%= render collection: current_user.recommended_posts.includes(:user), partial: "post", as: :post %>
   <% end %>
 </section>
