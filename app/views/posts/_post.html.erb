@@ -34,7 +34,7 @@
             Draft
           <% else %>
             Updated
-            <time datetime="<%= post.last_revision_created_at %>"><%= time_ago_in_words(post.last_revision_created_at).gsub("about ", "").gsub("over ", "") %> ago</time>
+            <time datetime="<%= post.last_revision_created_at %>"><%= post.last_revision_created_at.to_formatted_s(:simple) %></time>
           <% end %>
         </div>
       </div>

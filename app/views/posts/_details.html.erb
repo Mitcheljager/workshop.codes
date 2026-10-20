@@ -58,7 +58,7 @@
   <% if @post.draft? %>
     Draft
   <% else %>
-    <span data-role="timeago" datetime="<%= @post.created_at %>"></span>
+    <span datetime="<%= @post.created_at %>"><%= @post.created_at.to_formatted_s(:simple) %></span>
   <% end %>
 </div>
 
@@ -68,7 +68,7 @@
   <% if @post.draft? %>
     Draft
   <% else %>
-    <time data-role="timeago" datetime="<%= @post.updated_at %>"></time>
+    <time datetime="<%= @post.updated_at %>"><%= @post.updated_at.to_formatted_s(:simple) %></time>
   <% end %>
 </div>
 
