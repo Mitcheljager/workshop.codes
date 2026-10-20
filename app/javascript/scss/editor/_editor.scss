@@ -211,14 +211,19 @@ $separator-color: theme(darker, -5%);
   padding: 0;
   bottom: 0;
   right: 0;
-  opacity: 0;
   z-index: 5;
   cursor: ns-resize;
+  border-color: rgba($wiki, 0);
+  transition: border-color 250ms 20ms;
 
   @include media-min(mbl) {
     cursor: ew-resize;
     height: 100%;
     width: 0.25rem;
+
+    &:hover {
+      border-right: 1px solid $wiki;
+    }
   }
 
   &--left {
@@ -230,6 +235,11 @@ $separator-color: theme(darker, -5%);
       right: auto;
       bottom: 0;
       left: 0;
+
+      &:hover {
+        border-left: 1px solid $wiki;
+        border-right: 0;
+      }
     }
   }
 }
