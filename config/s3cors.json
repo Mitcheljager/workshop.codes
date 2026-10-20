@@ -1,0 +1,20 @@
+{
+  "CORSRules": [
+    {
+      "AllowedOrigins": ["*"],
+      "AllowedMethods": ["GET", "PUT"],
+      "AllowedHeaders": [
+        "Access-Control-Allow-Origin",
+        "Authorization",
+        "Cache-Control",
+        "Content-Disposition",
+        "Content-Length",
+        "Content-Md5",
+        "Content-Type",
+        "Expires",
+        "Origin",
+        "x-amz-acl"
+      ]
+    }
+  ]
+}
