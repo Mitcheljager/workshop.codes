@@ -1,4 +1,5 @@
 import { DirectUpload } from "@rails/activestorage"
+import { addAlertError } from "@src/lib/alerts"
 
 interface ExtendedBlob extends ActiveStorage.Blob {
   key: string,
@@ -24,7 +25,10 @@ export default class Uploader {
     const upload = new DirectUpload(this.file, directUploadUrl, this)
 
     upload.create((error, blob) => {
-      if (error) throw new Error("Something went wrong when uploading the image.")
+      if (error) {
+        addAlertError("Something went wrong while uploading.")
+        throw new Error("Something went wrong while uploading.")
+      }
 
       this.blob = blob as ExtendedBlob
 
