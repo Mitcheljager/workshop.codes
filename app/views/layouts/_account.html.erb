@@ -11,7 +11,7 @@
 </div>
 
 <div class="profile">
-  <aside class="hidden sm:visible">
+  <aside class="hidden sm:visible" data-prefetch="false">
     <% user_menu_items.each do |menu_item| %>
       <%= link_to menu_item[:title],
           menu_item[:url],
