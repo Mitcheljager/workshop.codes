@@ -84,7 +84,5 @@ function filterValue(type: string, parent: HTMLElement): string {
   const element = parent.querySelector(`[data-filter-type='${type}']`) as HTMLElement
   const value = element ? (element.dataset.value || "") : ""
 
-  console.log(element, value)
-
   return value
 }
