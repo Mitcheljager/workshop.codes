@@ -124,13 +124,13 @@ class SearchController < ApplicationController
     when "favorites"
       "favorites_count"
     when "created"
-      "created_at"
+      "posts.created_at"
     when "updated"
       "last_revision_created_at"
     when "on-fire"
       "hotness"
     else
-      "created_at"
+      "posts.created_at"
     end
   end
 
