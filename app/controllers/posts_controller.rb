@@ -235,8 +235,8 @@ class PostsController < ApplicationController
   end
 
   def reject_unauthorized_user
-    redirect_to login_path if current_user.nil?
-    redirect_to root_path if @post.nil?
+    redirect_to login_path and return if current_user.nil?
+    redirect_to root_path and return if @post.nil?
     redirect_to post_path(@post.code), flash: { error: "You are not authorized to perform that action" } if current_user != @post.user
   end
 
