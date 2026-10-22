@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_18_084126) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_22_101806) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -270,7 +270,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_18_084126) do
     t.index ["uuid"], name: "index_project_backups_on_uuid"
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "projects", id: :integer, default: nil, force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
     t.text "content"
@@ -352,6 +352,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_18_084126) do
     t.datetime "feed_last_visited_at", precision: nil
     t.string "uuid", limit: 36
     t.boolean "send_email_on_notification", default: false
+    t.integer "favorites_count", default: 0
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -394,7 +395,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_18_084126) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "posts", "users"
 end
