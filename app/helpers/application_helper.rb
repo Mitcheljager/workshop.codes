@@ -38,7 +38,11 @@ module ApplicationHelper
   end
 
   def to_range(string)
-    Range.new(*string.split("-").map(&:to_i))
+    split = string.split("-")
+    range_start = split[0]&.to_i || 0
+    range_end = split[1]&.to_i || 0
+
+    Range.new(range_start, range_end)
   end
 
   def slug_to_word(string)
