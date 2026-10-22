@@ -12,12 +12,12 @@ class HotnessJob
 
         now = Time.current
 
-        favorites_count = Favorite.where(post_id: post.id).where("created_at > ?", 1.week.ago).count
+        favorites_count = Favorite.where(post_id: post.id).where("created_at > ?", 2.weeks.ago).count
         impressions_count = Ahoy::Event.where(model_id: post.id, name: "Posts Visit").where("time > ?", 1.day.ago).distinct.count(:visit_id)
         copy_count = Ahoy::Event.where(model_id: post.id, name: "Copy Code").where("time > ?", 1.day.ago).distinct.count(:visit_id)
 
         days_old = (post.last_revision_created_at.to_datetime...now).count
-        days_old = [[days_old, 3].max, 45].min
+        days_old = [[days_old, 5].max, 60].min
 
         impressions_and_copy_score = impressions_count + (copy_count * 5)
         favorites_score = favorites_count * 20
