@@ -15,12 +15,12 @@ task compress_impressions: :environment do
 end
 
 def compress_events(event_name, content_type)
-  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: event_name).distinct.pluck(:visit_id, :properties).group_by { |v| v[1]["id"] || v[1][:id] }
+  events = Ahoy::Event.where("time > ?", 1.day.ago).where(name: event_name).distinct.pluck(:visit_id, :properties).group_by { |v| v[1]["id"] || v[1][:id] || v[1].dig(:request, "id") || v[1].dig(:request, :id) }
 
   events.each do |event|
     @statistic = Statistic.new(timeframe: :daily, content_type:, on_date: Date.today, value: event[1].size, properties: event[1].first[1])
 
-    id = event[1].first[1]["id"] || event[1].first[1][:id]
+    id = event[1].first[1]["id"] || event[1].first[1][:id] || event[1].first[1].dig(:request, "id") || event[1].first[1].dig(:request, :id)
 
     if id
       @statistic.model_id = id

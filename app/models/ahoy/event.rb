@@ -9,6 +9,6 @@ class Ahoy::Event < ApplicationRecord
   serialize :properties
 
   before_validation do
-    self.model_id = self.properties.dig(:request, :id)
+    self.model_id = self.properties.dig(:request, :id) || self.properties[:id]
   end
 end
