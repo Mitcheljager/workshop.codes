@@ -191,6 +191,16 @@ class Post < ApplicationRecord
                 modifier: "log1p",
                 factor: 0.1
               },
+              field_value_factor: {
+                field: "impressions_count",
+                modifier: "log1p",
+                factor: 0.01
+              },
+              field_value_factor: {
+                field: "favorites_count",
+                modifier: "log1p",
+                factor: 0.1
+              },
               boost_mode: "sum",
               max_boost: 2
             }
@@ -201,7 +211,7 @@ class Post < ApplicationRecord
   end
 
   def as_indexed_json(options = {})
-    self.as_json(only: [:code, :title, :tags, :categories, :maps, :heroes, :hotness],
+    self.as_json(only: [:code, :title, :tags, :categories, :maps, :heroes, :hotness, :impressions_count, :favorites_count],
                  include: { user: { only: :username } })
   end
 
