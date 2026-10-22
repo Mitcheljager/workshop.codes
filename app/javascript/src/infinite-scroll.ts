@@ -1,5 +1,4 @@
 import Rails from "@rails/ujs"
-import * as timeago from "@src/timeago.js"
 import isCrawler from "@utils/is-crawler.js"
 
 export function bind(): void {
@@ -70,8 +69,6 @@ function getInfiniteScrollContent(element: HTMLElement): void {
         element.innerHTML = "Load more"
         element.setAttribute("data-url", requestUrlString)
       }
-
-      timeago.initialize()
     },
     error: () => {
       if (spinner) spinner.remove()

@@ -38,7 +38,6 @@ import * as scrollIntoViewOnLoad from "@src/scroll-into-view-on-load"
 import * as searchTable from "@src/search-table"
 import * as sticky from "@src/sticky"
 import * as tabs from "@src/tabs"
-import * as timeago from "@src/timeago"
 import * as toggleContent from "@src/toggle-content"
 import * as youtubePreview from "@src/youtube-preview"
 import * as wikiSearch from "@src/wiki/search"
@@ -78,7 +77,6 @@ document.addEventListener("turbolinks:load", () => {
   differenceViewer.render()
   numPlayersSlider.render()
 
-  timeago.initialize()
   scrollIntoViewOnLoad.initialize()
   focusOnLoad.initialize()
 })
