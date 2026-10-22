@@ -7,4 +7,8 @@ class Ahoy::Event < ApplicationRecord
   belongs_to :user, optional: true
 
   serialize :properties
+
+  before_validation do
+    self.model_id = self.properties[:request][:id]
+  end
 end
