@@ -4,7 +4,8 @@ class Ahoy::Store < Ahoy::DatabaseStore
   end
 end
 
-# set to true for JavaScript tracking
 Ahoy.api = false
 Ahoy.mask_ips = true
 Ahoy.cookies = :none
+Ahoy.visit_duration = 4.hours
+Ahoy.visitor_duration = 4.hours
