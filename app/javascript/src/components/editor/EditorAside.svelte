@@ -21,7 +21,7 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div bind:this={element} tabindex="0">
-  {#key $currentProjectUUID + $items.length + $items.filter(i => i.hidden).length}
+  {#key [$currentProjectUUID, $items.map(i => i.id)]}
     <EditorList />
   {/key}
 

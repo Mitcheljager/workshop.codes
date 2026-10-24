@@ -25,7 +25,7 @@
       Sortable.mount(new MultiDrag())
     } catch {}
 
-    new Sortable(element, {
+    const sortable = new Sortable(element, {
       group: "items",
       animation: 100,
       swapTreshhold: 0.25,
@@ -45,6 +45,8 @@
         event.item.classList.remove("sortable__multi-selected")
       }
     })
+
+    return () => sortable.destroy()
   })
 
   function updateOrder() {
