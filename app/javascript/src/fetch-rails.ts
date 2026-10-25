@@ -48,11 +48,11 @@ export default class FetchRails {
     return data.toString()
   }
 
-  async get({timeout = 10000, returnResponse = false, parameters = {}} = {}): Promise<string | Response> {
+  async get({ timeout = 10000, returnResponse = false, parameters = {} } = {}): Promise<string | Response> {
     return this.request("get", { timeout, returnResponse, parameters })
   }
 
-  async post({timeout = 10000, returnResponse = false, parameters = {}, method = "post"} = {}): Promise<string | Response> {
+  async post({ timeout = 10000, returnResponse = false, parameters = {}, method = "post" } = {}): Promise<string | Response> {
     parameters = {...parameters, body: JSON.stringify(this.body)}
     return this.request(method, { timeout, returnResponse, parameters })
   }
