@@ -15,11 +15,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = current_user.posts.select(:id)
+    @posts = current_user.posts.select(:favorites_count, :impressions_count, :copies_count)
+
     @favorites_count = @posts.pluck(:favorites_count).sum
-    @statistics_for_user = Statistic.where(content_type: [:copy, :visit]).where(model_id: @posts.pluck(:id)).select(:content_type, :value)
-    @copies_count = @statistics_for_user.where(content_type: :copy).pluck(:value).sum
-    @views_count = @statistics_for_user.where(content_type: :visit).pluck(:value).sum
+    @views_count = @posts.pluck(:impressions_count).sum
+    @copies_count = @posts.pluck(:copies_count).sum
   end
 
   def new

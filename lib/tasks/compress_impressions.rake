@@ -27,6 +27,7 @@ def compress_events(event_name, content_type)
 
       post = Post.find_by_id(id)
       post.increment!(:impressions_count, event[1].size) if post.present? && content_type == :visit
+      post.increment!(:copies_count, event[1].size) if post.present? && content_type == :copy
     end
 
     @statistic.save
