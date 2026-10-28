@@ -120,15 +120,15 @@ class SearchController < ApplicationController
   def sort_switch
     case search_params[:sort]
     when "views"
-      "impressions_count"
+      "posts.impressions_count"
     when "favorites"
-      "favorites_count"
+      "posts.favorites_count"
     when "created"
       "posts.created_at"
     when "updated"
-      "last_revision_created_at"
+      "posts.last_revision_created_at"
     when "on-fire"
-      "hotness"
+      "posts.hotness"
     else
       "posts.created_at"
     end
