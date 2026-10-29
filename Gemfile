@@ -79,5 +79,4 @@ group :production do
   gem "autoprefixer-rails"
   gem "bugsnag"
   gem "foreman"
-  gem "pg"
 end
