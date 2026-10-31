@@ -1,7 +1,7 @@
 <% eager_load_first_index ||= false %>
 <% loading = eager_load_first_index && post_counter == 0 ? "eager" : "lazy" %>
 
-<% cache_unless current_user, [post, "card"] do %>
+<% cache_unless current_user, [post, "card", loading] do %>
   <div class="card" data-code="<%= post.code %>">
     <% cache [post, "card", "thumbnail"] do %>
       <% image_url_small = url_for_post_thumbnail(post, 300, 171, "medium") %>
