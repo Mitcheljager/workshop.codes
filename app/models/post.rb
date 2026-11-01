@@ -186,13 +186,20 @@ class Post < ApplicationRecord
                   fuzziness: "AUTO"
                 }
               },
-              field_value_factor: {
-                field: "hotness",
-                modifier: "log1p",
-                factor: 0.15
-              },
-              boost_mode: "multiply",
-              max_boost: 2
+              functions: [
+                {
+                  weight: 1
+                },
+                {
+                  field_value_factor: {
+                    field: "hotness",
+                    modifier: "log1p",
+                    factor: 1
+                  }
+                }
+              ],
+              score_mode: "sum",
+              boost_mode: "multiply"
             }
           }]
         }
