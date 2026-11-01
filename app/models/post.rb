@@ -161,7 +161,7 @@ class Post < ApplicationRecord
   # Ensure unresolved reports about this post are archived
   before_destroy { |post| Report.where("concerns_model = ? AND concerns_id = ? AND status = ?", "post", post.id, 0).update_all(status: "archived") }
 
-  def self.search(query, size: 50)
+  def Post.search(query, size: 50)
     __elasticsearch__.search({
       from: 0,
       size:,
@@ -186,20 +186,12 @@ class Post < ApplicationRecord
                   fuzziness: "AUTO"
                 }
               },
-              functions: [
-                {
-                  weight: 1
-                },
-                {
-                  field_value_factor: {
-                    field: "hotness",
-                    modifier: "log",
-                    factor: 1
-                  }
+              functions: [{
+                field_value_factor: {
+                  field: "hotness",
+                  factor: 0.1
                 }
-              ],
-              score_mode: "sum",
-              boost_mode: "multiply"
+              }]
             }
           }]
         }
