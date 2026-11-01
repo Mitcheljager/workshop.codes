@@ -194,8 +194,7 @@ class Post < ApplicationRecord
                   field_value_factor: {
                     field: "hotness",
                     modifier: "log",
-                    factor: 1,
-                    weight: 2
+                    factor: 1
                   }
                 }
               ],
