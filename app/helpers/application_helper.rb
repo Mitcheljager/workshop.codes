@@ -11,6 +11,10 @@ module ApplicationHelper
     is_controller?("articles")
   end
 
+  def is_page?
+    is_controller?("pages")
+  end
+
   def is_editor?
     is_controller?("editor")
   end
