@@ -78,7 +78,8 @@ class SearchController < ApplicationController
     if search_params[:search].present? && ENV["BONSAI_URL"]
       query = search_params[:search]
       ids = Rails.cache.fetch("search_ids/#{query}", expires_in: 12.hours) { Post.search(query) }
-      posts = posts.where(id: ids).order_by_ids(ids)
+      posts = posts.where(id: ids)
+      posts = posts.order_by_ids(ids) unless search_params[:sort].present?
     end
 
     posts = posts.joins(:user).where(users: { username: search_params[:author] }) if search_params[:author].present?
@@ -93,7 +94,8 @@ class SearchController < ApplicationController
 
     posts = posts.where("UPPER(code) LIKE ?", "#{search_params[:code].upcase}%") if search_params[:code].present?
     posts = posts.order("#{sort_switch} DESC") if search_params[:sort].present?
-    posts = posts.page(search_params[:page])
+
+    posts.page(search_params[:page])
   end
 
   def get_search_users
