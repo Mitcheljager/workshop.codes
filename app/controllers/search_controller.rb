@@ -51,7 +51,7 @@ class SearchController < ApplicationController
       flash[:error] = @error
 
       respond_to do |format|
-        format.html { render "filter/index", status: 500 }
+        format.html { render status: 500 }
         format.js { render "posts/infinite_scroll_posts", status: 500 }
         format.json { render json: { message: @message }, status: 500 }
       end
@@ -60,7 +60,7 @@ class SearchController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render "filter/index" }
+      format.html
       format.js { render "posts/infinite_scroll_posts" }
       format.json {
         set_request_headers
