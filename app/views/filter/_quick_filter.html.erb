@@ -4,17 +4,17 @@
     On Fire
   <% end %>
 
-  <%= link_to filter_path(sort: :favorites), class: "quick-filter__item", aria: { label: "View Codes with most Favorites" } do %>
+  <%= link_to search_path(sort: :favorites), class: "quick-filter__item", aria: { label: "View Codes with most Favorites" } do %>
     <%= vite_inline_svg_tag "images/icons/icon-heart.svg", class: "quick-filter__icon", height: 24, width: 24 %>
     Most Favorites
   <% end %>
 
-  <%= link_to filter_path(sort: :views), class: "quick-filter__item", aria: { label: "View Codes with most Views" } do %>
+  <%= link_to search_path(sort: :views), class: "quick-filter__item", aria: { label: "View Codes with most Views" } do %>
     <%= vite_inline_svg_tag "images/icons/icon-views.svg", class: "quick-filter__icon", height: 24, width: 24 %>
     Most Views
   <% end %>
 
-  <%= link_to filter_path(sort: :updated), class: "quick-filter__item", aria: { label: "View Codes ordered by Last Updated" } do %>
+  <%= link_to search_path(sort: :updated), class: "quick-filter__item", aria: { label: "View Codes ordered by Last Updated" } do %>
     <%= vite_inline_svg_tag "images/icons/icon-clock.svg", class: "quick-filter__icon", height: 24, width: 24 %>
     Last Updated
   <% end %>

@@ -6,14 +6,14 @@ RSpec.describe "SearchUrls", type: :request do
       get "/heroes/reinhardt"
 
       expect(response).to have_http_status(:moved_permanently)
-      expect(response).to redirect_to(filter_path(params: { hero: "reinhardt" }))
+      expect(response).to redirect_to(search_path(params: { hero: "reinhardt" }))
     end
 
     it "redirects a more complex old URL" do
       get "/categories/1vs1/maps/hanamura"
 
       expect(response).to have_http_status(:moved_permanently)
-      expect(response).to redirect_to(filter_path(params: {
+      expect(response).to redirect_to(search_path(params: {
         category: "1vs1",
         map: "hanamura"
       }))
@@ -24,7 +24,7 @@ RSpec.describe "SearchUrls", type: :request do
 
       expect(response.content_type).to start_with("application/json")
       expect(response).to have_http_status(:moved_permanently)
-      expect(response).to redirect_to(filter_path(params: { hero: "reinhardt" }, format: :json))
+      expect(response).to redirect_to(search_path(params: { hero: "reinhardt" }, format: :json))
 
       follow_redirect!
 
@@ -45,7 +45,7 @@ RSpec.describe "SearchUrls", type: :request do
       search_params = {
         search: "charles the 9th"
       }
-      get filter_path(params: search_params)
+      get search_path(params: search_params)
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("charles the 9th")
@@ -56,7 +56,7 @@ RSpec.describe "SearchUrls", type: :request do
         search_params = {
           map: "dorado"
         }
-        get filter_path(params: search_params)
+        get search_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
       expect(response.body).to include("Dorado")
@@ -68,7 +68,7 @@ RSpec.describe "SearchUrls", type: :request do
           category: "scrims",
           hero: "wrecking-ball"
         }
-        get filter_path(params: search_params)
+        get search_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("Hanamura")
@@ -83,7 +83,7 @@ RSpec.describe "SearchUrls", type: :request do
           expired: true,
           search: "charles the 9th"
         }
-        get filter_path(params: search_params)
+        get search_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("expired")
@@ -98,7 +98,7 @@ RSpec.describe "SearchUrls", type: :request do
           sort: "views",
           search: "charles the 9th"
         }
-        get filter_path(params: search_params)
+        get search_path(params: search_params)
 
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("Temple Of Anubis")
@@ -124,7 +124,7 @@ RSpec.describe "SearchUrls", type: :request do
           map: "havana"
         })
         expect(response).to have_http_status(:moved_permanently)
-        expect(response).to redirect_to(filter_path(params: search_params))
+        expect(response).to redirect_to(search_path(params: search_params))
       end
 
       it "redirects an old search with many filters" do
@@ -140,7 +140,7 @@ RSpec.describe "SearchUrls", type: :request do
           map: "paris"
         })
         expect(response).to have_http_status(:moved_permanently)
-        expect(response).to redirect_to(filter_path(params: search_params))
+        expect(response).to redirect_to(search_path(params: search_params))
       end
     end
 
@@ -158,7 +158,7 @@ RSpec.describe "SearchUrls", type: :request do
       search_params[:search] = search_params.delete(:query)
 
       expect(response).to have_http_status(:found)
-      expect(response).to redirect_to(filter_path(params: search_params))
+      expect(response).to redirect_to(search_path(params: search_params))
     end
 
     it "redirects a search with filters" do
@@ -172,7 +172,7 @@ RSpec.describe "SearchUrls", type: :request do
       search_params[:search] = search_params.delete(:query)
 
       expect(response).to have_http_status(:found)
-      expect(response).to redirect_to(filter_path(params: search_params))
+      expect(response).to redirect_to(search_path(params: search_params))
     end
   end
 end

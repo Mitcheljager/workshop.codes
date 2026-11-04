@@ -11,8 +11,8 @@ class SearchController < ApplicationController
 
     if search_params[:query].present?
       respond_to do |format|
-        format.js { redirect_to build_filter_path(:search, search_params[:query]) }
-        format.html { redirect_to build_filter_path(:search, search_params[:query]) }
+        format.js { redirect_to build_search_path(:search, search_params[:query]) }
+        format.html { redirect_to build_search_path(:search, search_params[:query]) }
       end
     else
       redirect_back fallback_location: latest_path
@@ -26,8 +26,8 @@ class SearchController < ApplicationController
     end
 
     respond_to do |format|
-      format.js { redirect_to build_filter_path(:search, search_params[:query]), status: :moved_permanently }
-      format.html { redirect_to build_filter_path(:search, search_params[:query]), status: :moved_permanently }
+      format.js { redirect_to build_search_path(:search, search_params[:query]), status: :moved_permanently }
+      format.html { redirect_to build_search_path(:search, search_params[:query]), status: :moved_permanently }
     end
   end
 
@@ -141,6 +141,6 @@ class SearchController < ApplicationController
   end
 
   def redirect_invalid_params
-    redirect_to filter_path(search_params) if string_params(params) != params
+    redirect_to search_path(search_params) if string_params(params) != params
   end
 end

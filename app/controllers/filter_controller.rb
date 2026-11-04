@@ -3,9 +3,9 @@ class FilterController < ApplicationController
     # REFACTOR: Make this set of attributes have a single source of accessible truth
     filtered_params = params.permit([:category, :code, :hero, :map, :sort, :expired, :author, :players, :search, :page])
     respond_to do |format|
-      format.html   { redirect_to filter_path(filtered_params), status: :moved_permanently, allow_other_host: true }
-      format.js     { head :moved_permanently, location: filter_path(params: filtered_params, format: :js) }
-      format.json   { head :moved_permanently, location: filter_path(params: filtered_params, format: :json) }
+      format.html   { redirect_to search_path(filtered_params), status: :moved_permanently, allow_other_host: true }
+      format.js     { head :moved_permanently, location: search_path(params: filtered_params, format: :js) }
+      format.json   { head :moved_permanently, location: search_path(params: filtered_params, format: :json) }
     end
   end
 

@@ -1,5 +1,5 @@
-module FilterHelper
-  def build_filter_path(key, value)
+module SearchHelper
+  def build_search_path(key, value)
     parameters = {
       category: params[:category],
       hero: params[:hero],
@@ -14,9 +14,9 @@ module FilterHelper
     parameters[key] = value
 
     if parameters.values.all? { |v| v.nil? }
-      filter_path(sort: :latest)
+      search_path(sort: :latest)
     else
-      filter_path(string_params(parameters))
+      search_path(string_params(parameters))
     end
   end
 

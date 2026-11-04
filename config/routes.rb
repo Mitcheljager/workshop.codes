@@ -146,7 +146,7 @@ Rails.application.routes.draw do
   get "latest(/page/:page)", to: "posts#latest", as: "latest"
   get "page/1", to: redirect("/latest", status: 301)
 
-  get "search", to: "search#show", as: "filter"
+  get "search", to: "search#show", as: "search"
   get "filter/partial", to: "filter#partial", as: "filter_partial"
   post "search", to: "search#index", as: "search_post"
   get "(categories/:category)/(heroes/:hero)/(maps/:map)/(exclude-expired/:expired)/(author/:author)/(players/:players)/(code/:code)/(search/:search)/(sort/:sort)/(page/:page)", to: "filter#index", constraints: FilterContraints
