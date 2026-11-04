@@ -31,9 +31,10 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  height: 100%;
-  width: 100%;
   top: 0;
+  right: 0;
+  bottom: $margin * 0.125;
   left: 0;
   background: rgba($black, .25);
+  border-radius: $border-radius;
 }
