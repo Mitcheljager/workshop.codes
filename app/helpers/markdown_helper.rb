@@ -74,7 +74,7 @@ module MarkdownHelper
       fenced_code_blocks: true
     )
 
-    text = text.gsub(/<script.*?>[\s\S]*<\/script>/i, "")
+    text = text.gsub(/<script.*?>[\s\S]*<\/script.*?>/i, "")
     text = markdown_youtube(text)
     text = markdown_video(text)
     text = markdown_gallery(text)
