@@ -146,6 +146,7 @@
   color: theme(text-color-lightest);
   font-family: $font-stack;
   font-size: $font-size-base;
+  font-weight: bold;
   text-decoration: none;
   cursor: pointer;
 
@@ -163,6 +164,7 @@
   }
 
   &--active {
+    height: 2.65rem;
     background: $primary;
     color: $white;
     font-size: 12px;
