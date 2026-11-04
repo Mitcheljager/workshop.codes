@@ -1,6 +1,8 @@
 class Wiki::SearchController < Wiki::BaseController
   add_breadcrumb "Search", :wiki_articles_path
 
+  skip_before_action :verify_authenticity_token, only: [:query]
+
   def query
     if params[:query].present?
       respond_to do |format|
