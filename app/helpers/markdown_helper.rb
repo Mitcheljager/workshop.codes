@@ -57,6 +57,8 @@ module MarkdownHelper
   end
 
   def markdown(text, rendererOptions: {})
+    return text if text.length > POST_DESCRIPTION_LIMIT
+
     finalRendererOptions = {
       space_after_headers: true,
       header_anchors: false,
@@ -95,16 +97,12 @@ module MarkdownHelper
   end
 
   def markdown_youtube(text)
-    return text if text.length > POST_DESCRIPTION_LIMIT
-
     text.gsub(/\[youtube\s+(.*?)\]/) do
       youtube_preview_tag($1, true)
     end
   end
 
   def markdown_video(text)
-    return text if text.length > POST_DESCRIPTION_LIMIT
-
     text.gsub(/\[video\s(https?:\/\/\S+)(?:\s(autoplay))?\]/) do
       video_url = $1
       autoplay = $2.blank? ? nil : true
@@ -121,8 +119,6 @@ module MarkdownHelper
   end
 
   def markdown_gallery(text)
-    return text if text.length > POST_DESCRIPTION_LIMIT
-
     text.gsub(/\[gallery\s+([^\]]+)\]/m) do
       begin
         images = JSON.parse($1.strip)
@@ -139,8 +135,6 @@ module MarkdownHelper
   end
 
   def markdown_hero_icon(text)
-    return text if text.length > POST_DESCRIPTION_LIMIT
-
     text.gsub(/\[hero\s+([\p{L}\p{N}_:.\-\s]+)\s*(?:\{([^}]*)\})?\s*\]/) do
       begin
         hero_name = ERB::Util.html_escape($1.strip)
@@ -161,8 +155,6 @@ module MarkdownHelper
   end
 
   def markdown_ability_icon(text)
-    return text if text.length > POST_DESCRIPTION_LIMIT
-
     text.gsub(/\[ability\s+([\p{L}\p{N}_:.,\(\)\-\s]+)\]/) do
       begin
         ability_name = ERB::Util.html_escape($1.strip)
@@ -172,8 +164,6 @@ module MarkdownHelper
   end
 
   def markdown_post_block(text)
-    return text if text.length > POST_DESCRIPTION_LIMIT
-
     if @post.present? || action_name == "parse_markdown"
       text.gsub(/\[block\s+(.*?)\]/) do
         if action_name == "parse_markdown"
@@ -196,8 +186,6 @@ module MarkdownHelper
   end
 
   def markdown_update_notes(text)
-    return text if text.length > POST_DESCRIPTION_LIMIT
-
     text.gsub(/\[update\s+{(.*?)}\]/m) do
       begin
         data = YAML.load("{#{$1}}")
