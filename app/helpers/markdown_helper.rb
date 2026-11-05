@@ -121,7 +121,7 @@ module MarkdownHelper
   end
 
   def markdown_gallery(text)
-    return text if text.length > 1000
+    return text if text.length > 10000
 
     text.gsub(/\[gallery\s+([^\]]+)\]/m) do
       begin
@@ -196,7 +196,7 @@ module MarkdownHelper
   end
 
   def markdown_update_notes(text)
-    return text if text.length > 1000
+    return text if text.length > 10000
 
     text.gsub(/\[update\s+{(.*?)}\]/m) do
       begin
