@@ -34,11 +34,7 @@ module MarkdownHelper
         i += 1
       end
 
-      result
-        .downcase
-        .gsub(/[^a-z0-9\- ]/i, "")
-        .strip
-        .gsub(/ +/, "-")
+      result.downcase.gsub(/[^a-z0-9\- ]/i, "").strip.gsub(/ +/, "-")
     end
 
     def header(title, level)
