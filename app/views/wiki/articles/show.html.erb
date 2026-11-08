@@ -9,7 +9,7 @@
   <main class="article__main" id="article">
     <%= link_to "All articles", wiki_poison_path, class: "hidden" %>
     <%= link_to @article.category.title, wiki_category_path(@article.category.slug), class: "article__category" %>
-m
+
     <h1 class="article__title">
       <strong><%= @article.title %></strong>
 
