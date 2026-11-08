@@ -4,7 +4,7 @@
   </div>
 
   <% if @collection.description %>
-    <div class="item__description text-big mt-1/4 mb-1/2">
+    <div class="markdown text-big mt-1/4 mb-1/2">
       <%= sanitize(markdown(@collection.description)) %>
     </div>
   <% end %>

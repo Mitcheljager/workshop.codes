@@ -47,7 +47,7 @@
   </div>
 
   <% unless revision.description.blank? %>
-    <div class="item__description revision__description">
+    <div class="markdown revision__description">
       <%= sanitized_markdown(revision.description) %>
     </div>
   <% end %>

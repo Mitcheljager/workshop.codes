@@ -68,7 +68,7 @@
       <h5 class="mt-0">{article.subtitle}</h5>
     {/if}
 
-    <div class="item__description" bind:this={contentElement}>
+    <div class="markdown" bind:this={contentElement}>
       {@html article.content}
     </div>
   </div>

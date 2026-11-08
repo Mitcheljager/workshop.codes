@@ -1,6 +1,6 @@
 <%= render "carousel" if @ordered_images.present? || @post.carousel_video.present? %>
 
-<div class="item__content item__description shadow-block">
+<div class="item__content markdown shadow-block">
   <% if @post.description.present? %>
     <%= sanitized_markdown(@post.description) %>
   <% else %>

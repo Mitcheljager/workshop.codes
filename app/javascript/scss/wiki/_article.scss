@@ -35,8 +35,6 @@
 }
 
 .article__content {
-  margin: 0;
-
   @include media-min(lg) {
     iframe {
       &[src*="gfycat"] {
