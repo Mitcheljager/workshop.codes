@@ -24,7 +24,7 @@ class AnalyticsController < ApplicationController
       render json: date_counts, layout: false and return
     end
 
-    from = [Date.parse(params[:from] || 1.month.ago.to_s).strftime("%Y-%m-%d"), 5.years.ago.strftime("%Y-%m-%d")].max
+    from = get_valid_date(params[:from])
     date_counts = create_date_count(from)
     post_ids = current_user.posts.select(:id).pluck(:id)
 
@@ -75,5 +75,11 @@ class AnalyticsController < ApplicationController
     end
 
     counts
+  end
+
+  def get_valid_date(from)
+    [Date.parse(from).strftime("%Y-%m-%d"), 5.years.ago.strftime("%Y-%m-%d")].max
+  rescue
+    1.month.ago
   end
 end
