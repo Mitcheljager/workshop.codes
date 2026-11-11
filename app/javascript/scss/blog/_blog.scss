@@ -35,8 +35,6 @@
 .blog__content {
   max-width: map-get($media-min-widths, sm);
   margin: 0 auto;
-  font-size: clamp($font-size-base, 3vw, $font-size-large);
-  line-height: 1.75;
 
   img:not([width]) {
     width: 100%;
