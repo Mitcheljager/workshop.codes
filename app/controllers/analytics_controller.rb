@@ -61,6 +61,8 @@ class AnalyticsController < ApplicationController
     end
 
     date_counts
+  rescue
+    []
   end
 
   def create_daily_counts(type)
