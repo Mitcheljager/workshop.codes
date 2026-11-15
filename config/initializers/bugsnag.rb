@@ -6,4 +6,5 @@ Bugsnag.configure do |config|
   config.meta_data_filters += ["ip", "ip_address", "clientIp", "client_ip", "remote_ip", "id", "X-Forwarded-For", /^email$/]
 
   config.ignore_classes << ActiveRecord::RecordNotFound
+  config.ignore_classes << ActionController::UnknownHttpMethod
 end
