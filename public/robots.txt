@@ -12,6 +12,9 @@ Disallow:
 User-agent: Googlebot-Image
 Disallow:
 
+User-Agent: __usage_ai-training
+Disallow: /
+
 User-agent: SemrushBot
 Disallow: /
 
