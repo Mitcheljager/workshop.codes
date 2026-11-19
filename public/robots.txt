@@ -3,6 +3,20 @@ Sitemap: https://workshop.codes/sitemap.xml
 User-agent: *
 Crawl-delay: 3
 
+User-agent: *
+Disallow: /*/controls
+Disallow: /*/snippet
+Disallow: /*?*?*
+Disallow: /wiki/search/*
+Disallow: /wiki/edits
+Disallow: /revisions/*
+Disallow: /revisions/*/*
+Disallow: /raw-snippet/*
+Disallow: /reports/*
+Disallow: /raw-snippet/*
+Disallow: /p/*
+Disallow: /wiki/articles/p/*
+
 User-agent: Googlebot
 Disallow:
 
@@ -119,18 +133,3 @@ Disallow: /
 
 User-agent:*
 Allow: /rails/active_storage/*
-
-User-agent: *
-Disallow: /*/controls
-Disallow: /*/snippet
-Disallow: /*?*?*
-Disallow: /*search=*
-Disallow: /wiki/search/*
-Disallow: /wiki/edits
-Disallow: /revisions/*
-Disallow: /revisions/*/*
-Disallow: /raw-snippet/*
-Disallow: /reports/*
-Disallow: /raw-snippet/*
-Disallow: /p/*
-Disallow: /wiki/articles/p/*
